@@ -109,16 +109,33 @@ NEW DOCUMENT ABSENCE ≠ INTENTIONAL DELETION
 HANDOFF SUMMARY ABSENCE ≠ PRIOR RULE ABSENCE
 
 ## 12. Handoff
-HANDOFF = STATE RECOVERY MAP / RECOVERY EVIDENCE.
+HANDOFF ≠ SUMMARY.
+HANDOFF = LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP / RECOVERY EVIDENCE.
 HANDOFF ≠ SOURCE OF TRUTH.
+HANDOFF COMPLETE ≠ RESUME VERIFIED.
 
-Handoff should contain canonical reference, confirmed decisions, user corrections, current position, implemented state, candidates, HOLD, CONFLICT, MISSING, UNVERIFIED, source/evidence location, rollback reference, validation state and next action.
+Handoff shall preserve enough state plus recoverable source pointers to reconstruct the last valid working state without silently losing confirmed decisions, user corrections, unresolved state, superseded candidates, evidence, validation state or protected constraints.
+
+Handoff should contain canonical reference, current goal/scope, confirmed/protected decisions, detailed active decisions, user corrections, implemented/last-valid state, candidates, HOLD, CONFLICT, MISSING, UNKNOWN, UNVERIFIED, superseded/rejected state, source/evidence location, rollback reference, validation state, open errors/omissions and exact next action.
+
+Coverage Gate:
+SOURCE ITEM → CLASSIFICATION → HANDOFF LOCATION OR SOURCE POINTER → RECOVERY CHECK → RESULT.
+
+Every relevant prior item shall be classified as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED. A materially relevant source item with neither Handoff representation nor a recoverable pointer = HANDOFF FAIL.
+
+Resume Verification:
+FRESH SESSION ASSUMPTION → HANDOFF → LATEST CANONICAL → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → RECONSTRUCT → SOURCE COMPARE → OMISSION / CONFLICT / AUTHORITY / REGRESSION CHECK → RESUME PASS / FAIL / UNKNOWN.
 
 Recovery:
-LATEST CANONICAL → HANDOFF → ACTUAL EVIDENCE → COMPARE → CLASSIFY → RESUME
+LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → COMPARE → CLASSIFY → RESUME.
 
-HANDOFF STATUS ≠ CURRENT STATE UNTIL CANONICAL-COMPARED
-FILENAME ≠ FILE CONTENT EVIDENCE
+HANDOFF STATUS ≠ CURRENT STATE UNTIL CANONICAL-COMPARED.
+FILENAME ≠ FILE CONTENT EVIDENCE.
+POINTER EXISTS ≠ POINTER RECOVERABLE.
+COMPACT ≠ HANDOFF.
+SUMMARY ≠ LOSSLESS HANDOFF.
+
+Operational details and validation schema are governed by `MASTER/HANDOFF_PROTOCOL.md`.
 
 ## 13. Memory
 L0 TURN
@@ -181,8 +198,8 @@ External systems are capabilities, not authority.
 /반영 = SOURCE RECOVERY → COMPARE → IMPACT ANALYSIS → IMPROVEMENT PROPOSAL → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → REGRESSION → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → MIRROR WRITE WHEN REQUIRED → POST-WRITE VERIFICATION → HISTORY.
 
 /최종 = actual result validation.
-/재개 = canonical recovery + Handoff recovery + evidence recovery.
-/인수인계 = independent recovery document.
+/재개 = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
+/인수인계 = lossless resume package + coverage gate + resume simulation; independent recovery document, not canonical authority.
 /compact ≠ /인수인계.
 
 TAKY aliases inherit these semantics and SHALL NOT weaken command gates.
