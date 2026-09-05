@@ -17,19 +17,24 @@ GRAND MASTER LOGIC = TAKY's highest internal governance logic.
 ALWAYS LOAD THE LATEST TAKY FROM THE CANONICAL GITHUB REPOSITORY BEFORE APPLYING MASTER OR PROJECT RULES.
 MEMORY IS A ROUTING AID, NOT THE SOURCE OF TRUTH.
 
+CANONICAL LOADED ≠ CANONICAL APPLIED.
+After loading TAKY, identify the task-relevant OS / DOMAIN / PROJECT / GUIDE / validation rules and compare the actual result against those applicable rules before claiming PASS.
+
 Boot order:
 1. Load TAKY.md.
 2. Load MASTER/MASTER_LOGIC.md.
 3. Load relevant OS / DOMAIN / PROJECT master.
 4. Recover approved state, decision history and handoff evidence.
-5. Compare the current request against authority and protected decisions.
-6. Execute only within allowed scope.
-7. Validate before commit/release.
+5. Extract the rules specifically applicable to the current task.
+6. Compare the current request against authority and protected decisions.
+7. Execute only within allowed scope.
+8. Inspect the actual integrated result, not only its separate parts.
+9. Self-validate, cross-validate when material, run impact/regression checks, then proceed to authorized commit/release state.
 
 ## Natural commands
-- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery
+- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
-- 타키 반영 / 타키 업데이트 반영 → source recovery → compare → impact analysis → self-correction → self-validation → regression → approved delta → canonical write → history
+- 타키 반영 / 타키 업데이트 반영 → source recovery → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → reverse-validation → approved delta → canonical write → post-write verification → history
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
@@ -73,4 +78,5 @@ Historical file revision labels are lineage only.
 
 ## Validation
 LOGIC PASS ≠ DESIGN PASS ≠ FUNCTION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
+COMPONENT PASS ≠ INTEGRATED RESULT PASS.
 NO USER-AS-QA.
