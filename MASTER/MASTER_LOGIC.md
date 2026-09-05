@@ -8,7 +8,7 @@ TAKY contains GRAND MASTER LOGIC. GRAND MASTER governs lower OS, DOMAIN, PROJECT
 
 TAKY / GRAND MASTER > OS / DOMAIN / PROJECT MASTER > SKILL > TOOL / AGENT.
 
-Lower layers may specialize execution but SHALL NOT weaken authority, evidence, validation, approval, privacy, revision, regression, source-of-truth, Deep Analysis, or anti-omission rules.
+Lower layers may specialize execution but SHALL NOT weaken authority, evidence, validation, approval, privacy, revision, regression, source-of-truth, Deep Analysis, anti-omission, or end-to-end traceability rules.
 
 Hard boundaries:
 - DOMAIN LOGIC ≠ GRAND MASTER CORE
@@ -241,6 +241,7 @@ SOURCE / CONTEXT RECOVERY
 → IMPACT / REGRESSION CHECK
 → DECISION-COVERAGE RECHECK
 → REFLECTED / HOLD / REJECTED / CONFLICT / SUPERSEDED TRACEBACK
+→ END-TO-END REALIZATION TRACE
 → FINAL CLASSIFICATION / REPORT.
 
 Deep research shall prioritize fit, authority, freshness and applicability over search volume. Reliable original / official sources and relevant administrative, professional and real-world cases should be actively used where material.
@@ -328,6 +329,58 @@ Where material, the self-correction cycle SHALL continue until one of the follow
 - FAIL.
 
 Correction iteration SHALL be bounded by fit-for-purpose cost/risk and SHALL NOT silently weaken a protected decision merely to obtain PASS.
+
+## 12.3 End-to-End Decision / Requirement Realization Traceability — HARD LOCK
+A correct MASTER is not sufficient if its decisions are lost, distorted, redesigned or left unimplemented downstream.
+
+MASTER PASS ≠ DESIGN REALIZATION PASS.
+DESIGN PASS ≠ FUNCTION REALIZATION PASS.
+FUNCTION SPEC PASS ≠ IMPLEMENTATION PASS.
+CODE EXISTS ≠ ACTUAL BEHAVIOR VERIFIED.
+STATIC CHECK PASS ≠ LIVE RESULT PASS.
+DEPLOYED ≠ RELEASE PASS.
+
+For every material decision/requirement, TAKY SHALL maintain fit-for-purpose bidirectional traceability through the applicable lifecycle:
+
+`SOURCE / CONVERSATION / ATTACHMENT → DECISION → LATEST USER CORRECTION → CLASSIFICATION → ACTIVE REQUIREMENT → OWNER MASTER / PROJECT → UI / UX CONTRACT → FUNCTION CONTRACT → DATA / STATE CONTRACT → IMPLEMENTATION → TEST / INSPECTION / ANALYSIS / DEMONSTRATION → ACTUAL RESULT EVIDENCE → VALIDATION STATUS → RELEASE / HOLD / REJECT / SUPERSEDED`
+
+Reverse trace:
+`ACTUAL RESULT → TEST / EVIDENCE → IMPLEMENTATION → FUNCTION / DATA / UI CONTRACT → ACTIVE REQUIREMENT → DECISION → SOURCE / LATEST CORRECTION → AUTHORITY`.
+
+The chain is conditional by task: non-UI or non-software work may mark irrelevant links NOT APPLICABLE, but SHALL NOT silently skip materially applicable links.
+
+Six realization gates:
+A. CONVERSATION / SOURCE COVERAGE — recover and disposition materially relevant full-history evidence and attachments available to the task.
+B. MASTER INTEGRITY — every active decision exists in the correct owner MASTER or has an explicit HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED state.
+C. MASTER → DESIGN / UI TRACEABILITY — applicable requirements map to approved screens/states/components/visual references before design approval.
+D. DESIGN → FUNCTION / DATA TRACEABILITY — applicable purpose, action, state, persistence, success/error/retry/resume/offline/dependency behavior is defined before implementation approval.
+E. IMPLEMENTATION → ACTUAL RESULT EVIDENCE — representative real output is inspected with fit-for-purpose evidence before FUNCTION/RUNTIME/INTEGRATION/RELEASE PASS.
+F. IMPACT / REGRESSION / RESUME — change effects, protected prior behavior, unrelated state, composition and continuity are revalidated after the delta.
+
+Stage gates:
+- material Gate A/B failure → MASTER final PASS prohibited.
+- material Gate C failure → deployment UI/design approval prohibited.
+- material Gate D failure → affected implementation is NOT READY.
+- material Gate E failure → actual-result/function/release PASS prohibited.
+- material Gate F failure → completion/release claim prohibited when regression/continuity is material.
+
+Traceability SHALL detect both:
+- `DOWNSTREAM HOLE`: active requirement lacks a required downstream realization/test/evidence link.
+- `UPSTREAM ORPHAN`: design/function/code/test/output lacks an authoritative requirement/decision/source rationale where one is required.
+
+Potential orphan/hole outcomes include omission, under-implementation, design drift, obsolete behavior, unjustified scope expansion/gold-plating, test gaps and conflicting behavior.
+
+Material requirements SHOULD receive stable IDs at the owning layer and preserve source pointer, latest correction, classification, owner, downstream contract references, implementation/test/evidence links and current status.
+
+When a material decision changes, TAKY SHALL identify traced downstream artifacts, classify them as unaffected / update-required / invalidated / re-test / HOLD, re-run affected gates, and confirm unrelated protected state did not regress. Editing MASTER text alone does not complete the change.
+
+For UI/visual work, actual approved Golden Reference / Visual ID and representative rendered result SHALL be compared when applicable. Generic redesign or AI-generated similarity is not proof of project-specific design realization.
+
+For software/PWA work, actual runtime evidence may include browser behavior, DOM/state inspection, persisted data, network/sync trace, automated test, real-device behavior and deployed URL evidence as applicable. The user SHALL NOT be used as the primary QA mechanism.
+
+When a user requests review from the first/full conversation and attachments, Handoffs/summaries alone are insufficient. Recover available original evidence, extract decisions and later corrections, trace each material item to actual disposition/result, and mark inaccessible raw history `UNVERIFIED_SOURCE_COVERAGE` rather than claiming impossible completeness.
+
+Operational matrix/schema and stage rules are governed by `MASTER/TRACEABILITY_PROTOCOL.md`.
 
 ## 13. Handoff
 HANDOFF ≠ SUMMARY.
@@ -453,9 +506,9 @@ External systems are capabilities, not authority.
 
 /심층분석 = execute the TAKY Deep Analysis protocol at fit-for-purpose depth = NO CANONICAL WRITE unless the user separately authorizes /반영.
 
-/반영 = LATEST CANONICAL RECOVERY → RELEVANT SOURCE / CONVERSATION / DECISION RECOVERY → COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT ANALYSIS → COMPLEMENT / IMPROVEMENT / OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → CROSS-VALIDATION → REGRESSION → REFLECTION / REVERSE-VALIDATION GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER / MIRROR WRITE → POST-WRITE FETCH / VERIFICATION → HISTORY / CHANGELOG → DECISION-COVERAGE RECHECK.
+/반영 = LATEST CANONICAL RECOVERY → RELEVANT SOURCE / FULL-AVAILABLE CONVERSATION / ATTACHMENT / DECISION RECOVERY → DECISION-COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT ANALYSIS → COMPLEMENT / IMPROVEMENT / OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → INDEPENDENT CROSS-VALIDATION WHEN MATERIAL → REGRESSION → REFLECTION / REVERSE-VALIDATION → END-TO-END REALIZATION TRACEABILITY GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER / MIRROR WRITE → POST-WRITE FETCH / VERIFICATION → HISTORY / CHANGELOG → DECISION-COVERAGE RECHECK.
 
-/최종 = actual result validation.
+/최종 = actual result validation + applicable end-to-end traceability validation.
 /재개 = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
 /인수인계 = lossless resume package + coverage gate + resume simulation; independent recovery document, not canonical authority.
 /compact ≠ /인수인계.
