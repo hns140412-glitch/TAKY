@@ -74,6 +74,23 @@ L4 HIGH IMPACT → human approval before execution + post-execution validation
 
 Explicit user approval applies only to the specifically approved scope and SHALL NOT bypass validation or regression gates.
 
+## 8.1 Automatic Execution / Adaptive Change Guardrails — HARD LOCK
+Automatic, immediate, or administrator-authorized execution is a scoped execution mode, not unlimited authority.
+
+AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
+ADMIN ROLE ≠ CROSS-SCOPE DATA AUTHORITY.
+STOP AUTOMATION ≠ DELETE HISTORY.
+
+When an approved project permits automatic or immediate changes:
+- the applicable subject, tenant/family/project, data, action, time horizon and safety limits SHALL be explicit;
+- only validated changes within that scope may execute automatically;
+- future automation may be changed to selective execution or stopped without erasing committed history;
+- completed/history records SHALL NOT be silently rewritten;
+- protected limits, privacy boundaries, unresolved UNKNOWN values and approval gates remain active;
+- the action SHALL be observable, explainable and reversible where fit-for-purpose, with an audit trace and rollback/compensation path.
+
+Adaptive decisions SHALL use a project-approved evidence window, input-quality rules, anomaly/interruption handling, minimum/maximum bounds, change-rate limits and reason trace. A single anomalous or favorable observation SHALL NOT justify an unbounded burden, risk, cost or authority increase. Project-specific formulas, thresholds and family/workload policies remain owned by the applicable PROJECT / DOMAIN master.
+
 ## 9. Evidence
 Evidence shall be classified by source, authority, freshness, confidence, completeness, reproducibility, relevance, applicability, traceability, consistency and case relevance when material.
 
@@ -143,10 +160,43 @@ Planned overlap may be valid when intentional and task-supporting. Unplanned ove
 
 Project-specific layout dimensions, device/orientation policies, character placement rules and visual details remain owned by the applicable PROJECT / DOMAIN master; GRAND MASTER governs the requirement to validate the integrated result.
 
+## 10.3 Validation Claim Ladder — HARD LOCK
+Validation claims SHALL be limited to the level for which actual evidence exists.
+
+LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
+
+- A MASTER/document change proves only the validated logic/document delta.
+- Schema or relation existence does not prove valid data, execution, synchronization or UI exposure.
+- Local persistence does not prove remote synchronization.
+- Offline launch/cache success does not prove offline mutation replay, conflict resolution or server convergence.
+- Deployment success does not prove production behavior or Release PASS.
+- External-service, real-device or end-to-end checks not actually performed remain UNKNOWN / UNVERIFIED.
+
+A higher-level PASS requires its own representative evidence and all required lower-level gates. Claims SHALL name the tested artifact/version/environment, evidence path, result and unresolved UNKNOWN state.
+
+## 10.4 Artifact Structural Integrity — HARD LOCK
+Normative artifacts SHALL be checked as structures, not only as prose.
+
+Where a terminal marker such as `END` is used:
+- there SHALL be exactly one authoritative terminal boundary for the active document;
+- normative content SHALL NOT appear after that boundary;
+- historical embedded terminal markers SHALL be clearly non-authoritative lineage or removed/moved within approved scope.
+
+Section identifiers, ordering, cross-references, status metadata, revision metadata and canonical pointers SHALL be internally consistent. Duplicate active sections, contradictory status labels, orphaned appendices, content-after-END and lineage labels presented as current governance are validation failures.
+
 ## 11. Source Recovery / Anti-Omission
 SOURCE RECOVERY → DECISION EXTRACTION → COVERAGE MATRIX → COMPARE / ANALYZE → IMPROVEMENT PROPOSALS → ERROR / OMISSION / CONFLICT CHECK → SELF-CORRECTION → SELF-VALIDATION → REGRESSION → APPROVAL → COMMIT → POST-WRITE VERIFICATION
 
-Every materially relevant prior item shall be classified as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED.
+Every materially relevant prior item shall be classified as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
+
+Disposition semantics:
+- `PRESERVE / ADOPT / ADJUST` = reflected in the active result with destination and evidence.
+- `HOLD` = intentionally deferred with reason, current owner/state and exit/review condition.
+- `REJECT` = evaluated and declined with source-grounded rationale.
+- `EXCLUDE` = not applicable to the authorized/current artifact or scope; record rationale and destination if still required elsewhere.
+- `OWNERSHIP_TRANSFER` = retained requirement moved to a named lower/higher layer; transfer is not deletion and requires a recoverable destination.
+- `CONFLICT` = unresolved competing active decisions requiring authority resolution.
+- `SUPERSEDED` = replaced by a later authoritative decision with predecessor/successor trace.
 
 Coverage shall include relevant full conversation history, original source material, attachments, canonical state, prior decisions, user corrections, HOLD / CONFLICT / SUPERSEDED state and recoverable work history when available and material to the task. Handoff and summaries are recovery aids and do not prove full-source coverage.
 
@@ -344,6 +394,40 @@ PARTIAL SYNC ≠ SYNC PASS
 
 SYNC PASS requires intended approved delta written, canonical write verified, required mirror write verified, and divergence resolved or explicitly recorded.
 A mirror claiming canonical equivalence should preserve 1:1 canonical content plus mirror metadata.
+
+## 17.1 Connected / Offline Runtime Sync Governance — CONDITIONAL HARD LOCK
+When a project requires offline use, multi-device use, external projection or eventual synchronization, the lower PROJECT / DOMAIN master SHALL explicitly separate:
+- canonical governance/configuration authority;
+- runtime authoritative state or event ledger;
+- device-local replica, structured durable store and outbox;
+- external operational/reporting projection.
+
+GOVERNANCE SOURCE ≠ RUNTIME DATA SOURCE.
+LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
+PROJECTION WRITE ≠ CANONICAL / RUNTIME COMMIT.
+OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
+
+The project sync contract SHALL define, as applicable:
+- local commit, pending, sending, acknowledged/synced, retry, authentication-blocked, validation-blocked and conflict states;
+- stable entity/event identifiers, client sequence or equivalent ordering evidence, idempotency/deduplication and replay safety;
+- field/record ownership, merge/conflict policy, immutable or append-only history where required, and correction semantics;
+- bounded retry with provider-directed delay/backoff, crash/restart recovery and explicit user-visible pending/conflict state;
+- multiple recovery triggers appropriate to the platform, such as app start, network restoration, foreground/visibility change, periodic/manual retry and server acknowledgement; one optional platform API SHALL NOT be the sole correctness path;
+- server-side authorization and tenant/family/project scope validation; credentials and provider secrets SHALL NOT be exposed to untrusted clients;
+- reconciliation from runtime authority to external projections, respecting connector limits and treating webhook/notification events as change signals rather than complete ordered state unless the provider guarantees otherwise.
+
+PASS requires representative tests for restart, reconnection, duplicate replay, out-of-order delivery, multi-device merge, long-offline recovery, authorization isolation, provider throttling/failure and projection reconciliation when applicable. Unperformed cases remain UNKNOWN.
+
+## 17.2 Entity Semantics / Identity Separation — HARD LOCK
+Structurally related records SHALL NOT be treated as semantically identical without an approved project rule.
+
+CONSTRAINT / SCHEDULE TEMPLATE ≠ ACTIONABLE TASK.
+TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
+RELATION EXISTS ≠ CORRECT OWNERSHIP / MEANING.
+
+Where applicable, distinguish recurring templates or constraints, dated execution instances, state-transition events, completion/history records and reporting projections. Identity keys SHALL match the entity lifecycle they identify. A recurring schedule key SHALL NOT be reused as the sole identity of a dated task or execution event.
+
+Derived tasks/actions SHALL preserve source lineage without converting every source constraint into an action. Completed history remains stable; later corrections append or create traceable successor state according to project policy rather than silently mutating prior evidence.
 
 ## 18. External Research / Improvement
 TAKY may research current AI capabilities, model/provider/tool changes, validated engineering methods, emerging workflows, credible community practices, official administrative practices and new architectural ideas.
