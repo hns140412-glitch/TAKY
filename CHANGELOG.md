@@ -1,5 +1,27 @@
 # TAKY CHANGELOG
 
+## 2026-09-05 — REV_00 Runtime Sync / Claim-Level / Disposition hardening
+- Recovered and compared the latest canonical TAKY files, the attached 2026-09-05 GRAND MASTER handoff, the attached handwritten timetable image, the recoverable full-conversation context, the Ready & Set project master, TAKY-WORK-OS and the prior deep-analysis report before writing.
+- Ran error validation → self-correction → self-validation → independent raw-file cross-validation → impact validation → regression validation → forward/reverse decision trace.
+- Added automatic/immediate execution and adaptive-change guardrails: scoped authority, no validation bypass, future stop/change without history deletion, evidence windows, anomaly handling, limits, explainability, audit and rollback/compensation.
+- Added a claim ladder separating LOGIC / SCHEMA / DATA / RUNTIME / INTEGRATION / BUILD / LOCAL / DEPLOY / RELEASE evidence.
+- Added structural-integrity validation for a single authoritative END boundary, ordered/unique sections, consistent cross-references and status/revision/canonical metadata.
+- Added conditional connected/offline runtime governance separating canonical governance, runtime ledger, device replica/outbox and external projection, with idempotency, ordering, replay, conflict, authorization, retry, reconciliation and representative E2E test requirements.
+- Added entity/identity separation: constraint/schedule template ≠ actionable task and template ID ≠ dated instance ID ≠ event ID.
+- Expanded anti-omission disposition to include EXCLUDE and OWNERSHIP_TRANSFER with rationale/destination requirements.
+- Updated `MASTER/VALIDATION_RULES.md` and `TAKY.md` to inherit the new gates.
+- Reverse-verification:
+  - `PRESERVE`: GitHub canonical authority, REV_00 pre-confirmation state, AI5, /검토 vs /반영 authority, NO USER-AS-QA, Handoff/Notion/Drive non-canonical boundaries and existing Deep Analysis/reverse-validation gates.
+  - `ADOPT / ADJUST`: reusable governance principles from the Ready & Set/Notion/offline deep analysis were generalized into TAKY rather than copying product-specific implementation.
+  - `OWNERSHIP_TRANSFER`: exact family timetable rows, subject/time mappings, Notion schemas/views, Planner behavior, homework allocation formula, grading workflow and concrete sync-state names remain Ready & Set PROJECT/WORKFLOW-owned.
+  - `HOLD`: unconfirmed handwritten timetable endpoints, Ready & Set runtime/offline sync, live Notion projection, real-device/multi-device/E2E evidence and adaptive workload thresholds remain pending project-level confirmation/implementation/validation.
+  - `EXCLUDE`: unrelated Mail monitoring and Core 6 image work remain outside this authorized delta and retain their prior HOLD states.
+  - `SUPERSEDED`: Dropbox as the handoff surface is replaced by Google Drive; earlier base-timetable-candidate wording is replaced by CONFIRMED BASE TIMETABLE; Ready product filename REV_06 remains historical lineage under TAKY REV_00; Notion is projection, not canonical/runtime authority.
+  - `UNVERIFIED_SOURCE_COVERAGE`: exact byte-for-byte recovery of every historical chat turn cannot be independently proven; no missing content was invented.
+- Rollback references: pre-change commit `983f5d8c2658ea70b14d76d0dc34b5a0ebac7661`; pre-change `MASTER/MASTER_LOGIC.md` blob `1a27fb65be3a589f6449cd7f385e320110b04378`; pre-change `MASTER/VALIDATION_RULES.md` blob `d98e01c5d6d05e2718ad05d0be1f40dcfac09e0f`; pre-change `TAKY.md` blob `15f482673221b317aed608bf276690a421678c7f`; pre-change `CHANGELOG.md` blob `b836c2c17bfee23a2b7d5b612cce17679219574e`.
+
+This is a validated REV_00 evolving-design integration. It does not prove Ready & Set runtime implementation, Notion live synchronization, offline convergence, real-device behavior or Release PASS.
+
 ## 2026-09-05 — REV_00 Applicable-Rule / Integrated-Result / Reverse-Validation hardening
 - Recovered the latest canonical `TAKY.md`, `MASTER/MASTER_LOGIC.md`, `MASTER/VALIDATION_RULES.md`, current CHANGELOG, the available TAKY handoff evidence, recoverable ZPD Word MASTER lineage, ZPD handoff, and available original-chat export evidence before writing.
 - Re-ran the requested error validation → self-correction → self-validation → cross-validation → impact validation → regression validation → reverse-validation sequence against the recoverable source set.
