@@ -24,17 +24,19 @@ Boot order:
 1. Load TAKY.md.
 2. Load MASTER/MASTER_LOGIC.md.
 3. Load relevant OS / DOMAIN / PROJECT master.
-4. Recover approved state, decision history and handoff evidence.
+4. Recover approved state, decision history, relevant available full-conversation/attachment evidence, and Handoff evidence.
 5. Extract the rules specifically applicable to the current task.
-6. Compare the current request against authority and protected decisions.
-7. Execute only within allowed scope.
-8. Inspect the actual integrated result, not only its separate parts.
-9. Self-validate, cross-validate when material, run impact/regression checks, then proceed to authorized commit/release state.
+6. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
+7. Compare the current request against authority and protected decisions.
+8. Execute only within allowed scope.
+9. Inspect the actual integrated result, not only its separate parts.
+10. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
+11. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
 ## Natural commands
-- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction
+- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
-- 타키 반영 / 타키 업데이트 반영 → source recovery → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → reverse-validation → approved delta → canonical write → post-write verification → history
+- 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Decision-Coverage Matrix → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical write → post-write verification → history
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
@@ -78,9 +80,18 @@ Historical file revision labels are lineage only.
 
 ## Validation
 LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
+MASTER PASS ≠ DESIGN REALIZATION PASS.
+DESIGN PASS ≠ FUNCTION REALIZATION PASS.
+CODE EXISTS ≠ ACTUAL BEHAVIOR VERIFIED.
 COMPONENT PASS ≠ INTEGRATED RESULT PASS.
 LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
 OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
 TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
+
+For material product/result work, validate the applicable chain:
+`SOURCE / DECISION → OWNER MASTER → DESIGN / UI → FUNCTION / DATA → IMPLEMENTATION → TEST / EVIDENCE → ACTUAL RESULT`, and reverse-trace the actual result back to active authority.
+
+A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
+
 NO USER-AS-QA.
