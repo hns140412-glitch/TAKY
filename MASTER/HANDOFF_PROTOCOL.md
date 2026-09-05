@@ -148,11 +148,33 @@ TAKY SHOULD retain representative real failure cases as Handoff regression fixtu
 
 Initial fixture: Schedule / Homework Allocation state-transfer failure.
 
+### 8.1 Corrected Current Fixture State
+
+The earlier fixture wording incorrectly preserved an older project stage as if it were current. The latest user correction is authoritative for the fixture state:
+
+- The current Base Timetable is CONFIRMED as the operating baseline.
+- Homework allocation SHALL use that confirmed timetable as its baseline capacity map.
+- The baseline is maintained, not treated as permanently immutable.
+- One-off events create temporary schedule overrides.
+- Quarterly changes, academy day/time changes, school schedule changes, or other recurring schedule changes may revise the baseline.
+- After a relevant change, affected capacity SHALL be recalculated and homework SHALL be reallocated as needed.
+- If no schedule delta exists, the confirmed Base Timetable remains in force; do not unnecessarily reopen full timetable confirmation.
+
+Operational state model:
+
+BASE_TIMETABLE_CONFIRMED
+→ TEMP_EVENT_OVERRIDE when a one-off event occurs
+→ SCHEDULE_REVISION when recurring/quarterly/academy schedule changes
+→ CAPACITY_RECALCULATION
+→ HOMEWORK_REALLOCATION
+
 A compliant Handoff for this fixture must preserve at minimum:
-- Base Timetable is confirmed before workload allocation.
-- The timetable itself may remain unconfirmed even when prior concrete timetable candidates exist.
-- Prior candidate timetable ≠ current confirmed timetable.
+- current Base Timetable = confirmed operating baseline.
+- SCHEDULE FIRST, ASSIGNMENT SECOND means allocation uses the current effective timetable: confirmed baseline plus active overrides/revisions.
+- prior pre-confirmation timetable state is historical / SUPERSEDED and must not be restored as current.
+- obsolete candidate timetable ≠ current confirmed baseline.
 - fixed academy/school/life schedule and travel/buffer affect capacity.
+- event-based and recurring schedule changes may alter capacity and trigger reallocation.
 - Subject interprets; MAIN allocates.
 - FREE TIME EXISTS ≠ MUST STUDY.
 - CAPACITY ≠ REQUIRED STUDY AMOUNT.
@@ -160,6 +182,13 @@ A compliant Handoff for this fixture must preserve at minimum:
 - incomplete work becomes Carry-over rather than silent deletion/failure.
 - planned-vs-actual duration/history may inform later allocation.
 - parent checking / correction flow and other resource dependencies must not disappear if active in the source state.
+
+Regression failure examples:
+- asking to reconfirm the whole timetable solely because an older Handoff said it was unconfirmed.
+- allocating homework against an obsolete timetable while a newer confirmed baseline exists.
+- ignoring a supplied event/quarterly/academy schedule delta.
+- treating a temporary event override as a permanent baseline revision without evidence.
+- treating baseline confirmation as meaning the timetable can never change.
 
 This fixture validates state-transfer behavior; it does not itself promote project-specific schedule details into GRAND MASTER CORE.
 
