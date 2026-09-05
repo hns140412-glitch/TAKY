@@ -2,9 +2,9 @@
 
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 
-**TAKY — Think Ahead, Keep Your Key.**
+**TAKY — Think Again, Keep Your Key.**
 
-> 한발 앞서 생각하고, 중요한 기준과 해결의 열쇠를 놓치지 않는다.
+> 한 번 더 생각하고, 핵심은 놓치지 마.
 
 ## System definition
 TAKY is the central master system. It contains and executes the GRAND MASTER logic and routes to OS, domain, project, skill, tool, agent, validation, history, deployment, and shared capability policies.
@@ -47,6 +47,24 @@ TAKY / GRAND MASTER governance
 > OS / DOMAIN / PROJECT MASTER
 > SKILL
 > TOOL / AGENT
+
+## Work OS storage boundary
+TAKY-WORK-OS GitHub stores workflow definitions, automation logic, validation rules, schemas, scripts, integrations, and operating policies.
+Actual business/project source files and generated deliverables belong in the governed Google Drive workspace, not in the canonical TAKY repository.
+
+The user-facing Work OS shall prefer conversational simplicity over exposing internal lifecycle complexity. Internal validation/state gates remain mandatory even when the visible Drive structure is simplified.
+
+Default Drive work-item pattern:
+PROJECT / YYYY-MM-DD_WORK-TITLE /
+- 요청자료/ : immutable copies of files supplied for the request
+- 요청사항.md : project, date, title, request summary, source list, review status
+- generated review/working/final artifacts at the work-item root with clear filenames
+
+Do not require the user to manually manage separate INPUT/WORKING/REVIEW/OUTPUT folders for ordinary work. TAKY may maintain those states logically and in trace/history instead.
+
+When project identity is clear from conversation/materials, classify automatically. Ask only when ambiguity materially affects filing or execution.
+
+Original supplied files shall not be silently overwritten. Modified/reviewed artifacts are separate outputs unless the user explicitly requests an authorized replacement.
 
 ## Revision governance
 Before explicit user finalization, all MASTER / GUIDE / DOMAIN / APP remain REV_00.
