@@ -1,5 +1,25 @@
 # TAKY CHANGELOG
 
+## 2026-09-05 — REV_00 Deep Analysis / Architecture Regulatory Work OS integration
+- Recovered latest canonical `MASTER/MASTER_LOGIC.md`, latest `TAKY-WORK-OS/WORK_OS.md`, current CHANGELOG and accessible Google Drive Work OS state before writing.
+- Added **심층 분석 / DEEP ANALYSIS** as TAKY's rigorous review-and-improvement protocol rather than a synonym for longer review.
+- Deep Analysis now covers source/context recovery, full relevant conversation/decision coverage, source reliability, fit-for-purpose deep research, active use of authoritative sources and relevant cases, comparative analysis, principle extraction, local/domain/project applicability, complement/improvement/optimization, error validation, self-correction, self/cross-validation, impact/regression and final decision-coverage traceback.
+- Added comparative-analysis principle: **COMPARE TO LEARN, NOT TO COPY** and `EXTERNAL BEST PRACTICE ≠ DIRECT ADOPTION`; foreign/external practices must be principle-extracted, localized and verified before ADOPT/ADJUST/HOLD/REJECT.
+- Strengthened anti-omission with `GOOD FINAL RESULT ≠ COMPLETE REVIEW`, `SOURCE REVIEWED ≠ DECISION COVERED`, `NOT ADOPTED ≠ FORGOTTEN`, and `HANDOFF COVERAGE ≠ FULL CONVERSATION COVERAGE`.
+- Required traceable disposition of material prior decisions: `SOURCE → DECISION → CLASSIFICATION → DESTINATION/HOLD REASON → RESULT → EVIDENCE`.
+- Added Deep Analysis PASS restrictions when self-validation or material source/decision coverage is incomplete.
+- Strengthened `/검토`, added `/심층분석`, and expanded `/반영` to include relevant conversation/decision recovery, coverage matrix, Deep Analysis, classification, improvement/optimization, cross-validation, post-write verification and coverage recheck.
+- Kept architecture-specific operational details out of GRAND MASTER and placed them in `TAKY-WORK-OS`.
+- Expanded `TAKY-WORK-OS` with architecture project Stage/Admin Case/Work Item separation, Stage Gate and Submission Readiness concepts.
+- Added Project Regulatory Map / Applicability Engine for project-scale/use/location/stage/effective-date/exception/local-rule based discovery of impact assessments, reviews, certifications, consultations and permits.
+- Added explicit handling of national/local administrative practice and official interpretations/cases while preserving `ADMIN CASE ≠ STATUTORY RULE`.
+- Added Jurisdiction/Rule/Knowledge model, regulatory calculation modes, early regulatory pre-check, Condition/Consultation lifecycle, separate Value/Process/Evidence maturity, Data Lineage/Impact/Reverse Validation and legacy project-structure semantic recognition.
+- Preserved the simplified user-facing Drive UX and existing CAD↔spreadsheet validation pattern; added workbook-level hard rules derived from prior spreadsheet audit.
+- Google Drive audit found `WORK_OS_INDEX.md` and `README.md` still contain legacy mandatory INPUT/WORKING/REVIEW/OUTPUT-style structures that conflict with current GitHub Work OS. They remain preserved as **CONFLICT / migration-required** because the available Drive connector in this session exposed search/read but no compatible file-update action. Therefore Drive mirror synchronization is NOT claimed as PASS.
+- Rollback references: pre-change `MASTER/MASTER_LOGIC.md` blob `dee812aa77cdaacc0e527605c538e013758d5f51`; pre-change `TAKY-WORK-OS/WORK_OS.md` blob `5a0da1b3b32decae05bd3333b55c7429e652276f`; pre-change `CHANGELOG.md` blob `47c448f2d01fd7e6b3bda545d451e7bfa0742770`.
+
+This entry records an approved integration during the REV_00 evolving-design phase. It does not establish the first official post-finalization revision. Google Drive operational-document divergence remains open and prevents full sync PASS.
+
 ## 2026-09-05 — REV_00 Lossless Handoff / Resume Validation integration
 - Recovered current `TAKY.md` and `MASTER/MASTER_LOGIC.md` before canonical modification.
 - Preserved `HANDOFF ≠ SOURCE OF TRUTH` while correcting the operational meaning of Handoff from summary-like transfer to **LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP**.
