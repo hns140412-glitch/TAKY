@@ -25,18 +25,22 @@ Boot order:
 2. Load MASTER/MASTER_LOGIC.md.
 3. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
 4. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
-5. Recover approved state, decision history, relevant available full-conversation/attachment evidence, and Handoff evidence.
-6. Extract the rules specifically applicable to the current task.
-7. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
-8. Compare the current request against authority and protected decisions.
-9. Execute only within allowed scope.
-10. Inspect the actual integrated result, not only its separate parts.
-11. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
-12. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
+5. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner before judging the result.
+6. Recover approved state, decision history, relevant available full-conversation/attachment evidence, and Handoff evidence.
+7. Extract the rules specifically applicable to the current task.
+8. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
+9. Compare the current request against authority and protected decisions.
+10. Execute only within allowed scope.
+11. Inspect the actual integrated result, not only its separate parts.
+12. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
+13. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
 Canonical owner presence gate:
 A materially active requirement SHALL have a recoverable canonical owning MASTER/OS/DOMAIN/PROJECT destination or an explicit HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED disposition.
 A historical MASTER/Handoff containing active rules while the current canonical owner file is absent or incomplete is `MISSING / MIGRATION_REQUIRED`, not PASS.
+
+Operational workspace authority gate:
+A workspace/dashboard/database that displays or coordinates information SHALL NOT silently become canonical, numerical, geometric, evidentiary or approval authority merely because it is convenient or automated. Tool-role authority must remain explicit and traceable.
 
 ## Natural commands
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
@@ -93,9 +97,14 @@ LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
 OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
 TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
+STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION.
+PROJECTION WRITE ≠ SOURCE COMMIT.
 
 For material product/result work, validate the applicable chain:
 `SOURCE / DECISION → OWNER MASTER → DESIGN / UI → FUNCTION / DATA → IMPLEMENTATION → TEST / EVIDENCE → ACTUAL RESULT`, and reverse-trace the actual result back to active authority.
+
+For operational workspace work, also validate:
+`AUTHORITATIVE SOURCE → OPERATIONAL RECORD / VIEW → EVIDENCE / DECISION → DOWNSTREAM REFLECTION → VALIDATION / HISTORY`, and reverse-trace visible status/completion back to source and evidence.
 
 A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
 
