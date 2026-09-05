@@ -167,6 +167,58 @@ Optimization shall not precede preservation of required evidence, decisions or c
 
 A Deep Analysis may conclude PASS / PASS_WITH_CONDITIONS / REVIEW_REQUIRED / CONFLICT / UNVERIFIED / FAIL according to available evidence. SELF-VALIDATION NOT COMPLETED → PASS PROHIBITED. Material coverage failure → PASS PROHIBITED.
 
+## 12.1 Result Reflection / Reverse-Validation Gate — HARD LOCK
+Reviewing sources is not sufficient. TAKY SHALL verify that material source-derived decisions are actually represented in the resulting MASTER, plan, design, implementation, deployment or explicit disposition state.
+
+Required forward trace:
+`SOURCE -> DECISION -> LATEST CORRECTION -> CLASSIFICATION -> DESTINATION / HOLD / REJECT REASON -> RESULT -> EVIDENCE`
+
+Required reverse trace:
+`ACTUAL RESULT -> REQUIREMENT / DECISION -> SOURCE -> ACTIVE AUTHORITY -> VALIDATION EVIDENCE`
+
+For MASTER changes, Deep Analysis, major project recovery, or any task where omission would materially change the result, TAKY SHALL create or maintain a Decision-Coverage / Reflection Matrix sufficient to answer:
+- what was derived from the original/full conversation state that is actually recoverable
+- what was derived from attachments/original documents
+- what was corrected later by the user
+- what was preserved or adopted
+- what was adjusted
+- what was intentionally held and why
+- what was intentionally rejected and why
+- what is in conflict and remains unresolved
+- what was superseded and by which later decision
+- where each active item is reflected in the actual result
+- what could not be recovered or verified.
+
+Mandatory discrepancy classes:
+- `MISSING` = material source decision has no destination or disposition
+- `WRONG_REFLECTION` = result contradicts the active decision
+- `HANDOFF_LOSS` = handoff claimed continuity but omitted a material decision and provided no recoverable pointer
+- `UNJUSTIFIED_HOLD` = HOLD has no reason or exit condition
+- `UNJUSTIFIED_REJECT` = REJECT has no source-grounded rationale
+- `UNRESOLVED_CONFLICT` = conflicting active decisions lack precedence resolution
+- `UNVERIFIED_SOURCE_COVERAGE` = claimed full-source coverage cannot be independently established.
+
+Hard rules:
+- REVIEWED ≠ REFLECTED
+- SUMMARIZED ≠ PRESERVED
+- HANDOFF ITEM EXISTS ≠ SOURCE ITEM COVERED
+- SOURCE POINTER EXISTS ≠ POINTER RECOVERED
+- EXCLUDED ≠ FORGOTTEN; exclusion requires explicit classification and rationale
+- HOLD ≠ DELETED; HOLD requires a reason, current owner/state when material, and an exit/review condition
+- LATEST USER CORRECTION overrides older conflicting project decisions within its approved scope, unless higher authority/law/safety prohibits it
+- exact full-conversation coverage SHALL NOT be claimed when raw historical source is unavailable; mark the gap UNVERIFIED and continue with recoverable evidence without inventing missing content.
+
+Self-correction loop:
+`DISCREPANCY DETECTED -> ROOT CAUSE -> CORRECTION -> RE-RUN SOURCE COMPARE -> SELF-VALIDATION -> CROSS-VALIDATION -> IMPACT CHECK -> REGRESSION CHECK -> REVERSE TRACE -> PASS / HOLD / FAIL`
+
+A material discrepancy may be self-corrected automatically only when the correction stays within existing authority and protected decisions. If correction would alter a protected decision, create a conflict/impact record and require the applicable human approval.
+
+Post-write / post-implementation verification SHALL confirm both:
+1. the intended delta is present, and
+2. unrelated protected decisions were not lost, weakened, duplicated, silently reinterpreted, or moved to HOLD/REJECT without traceable reason.
+
+A final PASS is prohibited when a material source item remains without traceable PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED disposition.
+
 ## 13. Handoff
 HANDOFF ≠ SUMMARY.
 HANDOFF = LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP / RECOVERY EVIDENCE.
@@ -257,7 +309,7 @@ External systems are capabilities, not authority.
 
 /심층분석 = execute the TAKY Deep Analysis protocol at fit-for-purpose depth = NO CANONICAL WRITE unless the user separately authorizes /반영.
 
-/반영 = LATEST CANONICAL RECOVERY → RELEVANT SOURCE / CONVERSATION / DECISION RECOVERY → COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT ANALYSIS → COMPLEMENT / IMPROVEMENT / OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → CROSS-VALIDATION → REGRESSION → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER / MIRROR WRITE → POST-WRITE FETCH / VERIFICATION → HISTORY / CHANGELOG → DECISION-COVERAGE RECHECK.
+/반영 = LATEST CANONICAL RECOVERY → RELEVANT SOURCE / CONVERSATION / DECISION RECOVERY → COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT ANALYSIS → COMPLEMENT / IMPROVEMENT / OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → CROSS-VALIDATION → REGRESSION → REFLECTION / REVERSE-VALIDATION GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER / MIRROR WRITE → POST-WRITE FETCH / VERIFICATION → HISTORY / CHANGELOG → DECISION-COVERAGE RECHECK.
 
 /최종 = actual result validation.
 /재개 = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
