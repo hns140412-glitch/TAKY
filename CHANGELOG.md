@@ -1,5 +1,31 @@
 # TAKY CHANGELOG
 
+## 2026-09-05 — REV_00 Full-source reverse-audit / End-to-end realization traceability hardening
+- Recovered and compared the latest canonical `TAKY.md`, `MASTER/MASTER_LOGIC.md`, `MASTER/VALIDATION_RULES.md`, `MASTER/HANDOFF_PROTOCOL.md`, current CHANGELOG, recoverable TAKY GRAND MASTER handoffs, Ready & Set REV_06 master, Ready & Set deep-comparison report, GUIDE/GRAND MASTER remaster handoff, schedule/homework source material, corrected lossless timetable Handoff, and representative Snap & Pop traceability material before writing.
+- Re-ran the requested sequence as distinct gates: error validation → self-correction → self-validation → cross-validation using independent source paths → impact validation → regression validation → forward/reverse decision trace.
+- Confirmed that the current GRAND MASTER already contained strong anti-omission, Deep Analysis, disposition, reverse-validation, validation-independence, applicable-rule, integrated-result and claim-level gates. The material remaining governance gap was explicit lifecycle traceability from source decision through MASTER/design/function/data/implementation/test to actual result evidence.
+- Added **End-to-End Decision / Requirement Realization Traceability — HARD LOCK** to `MASTER/MASTER_LOGIC.md`.
+- Added six realization gates: A Conversation/Source Coverage, B MASTER Integrity, C MASTER→Design/UI Traceability, D Design→Function/Data Traceability, E Implementation→Actual Result Evidence, F Impact/Regression/Resume.
+- Added `DOWNSTREAM HOLE` and `UPSTREAM ORPHAN` detection so missing implementation links and unjustified design/code/test/output elements are both detectable.
+- Added material requirement stable-ID/lineage guidance and change-impact dependency revalidation.
+- Added actual-result evidence rules for visual/UI and software/PWA work and reinforced `NO USER-AS-QA`.
+- Added `MASTER/TRACEABILITY_PROTOCOL.md` as the detailed operational matrix/stage-gate protocol.
+- Updated `MASTER/VALIDATION_RULES.md` and `TAKY.md` so canonical boot, validation and `/반영` semantics inherit full-available-conversation/attachment recovery and end-to-end realization/reverse traceability.
+- External engineering cross-check used NASA requirements-management/software-engineering guidance only as validation-pattern evidence: bidirectional traceability, requirement-to-design/test linkage, change-impact tracing, and objective verification evidence. External guidance did not become TAKY authority or project-specific requirements.
+- Reverse-validation classification:
+  - `PRESERVE`: GitHub canonical authority; REV_00 state; AI5; Deep Analysis; applicable-rule activation; integrated-result validation; validation claim ladder; Handoff ≠ Source of Truth; `HANDOFF ≠ SUMMARY`; NO USER-AS-QA; existing error/self/cross/impact/regression distinction; anti-omission classifications; offline/sync/entity governance.
+  - `ADOPT`: generalized bidirectional lifecycle traceability and six stage gates, derived from repeated real failures where MASTER rules existed but UI/function/implementation/result drifted.
+  - `ADJUST`: lower-project `FUNCTION TRACEABILITY MATRIX` patterns were generalized into GRAND MASTER governance rather than copying Snap & Pop/Ready & Set project-specific fields.
+  - `OWNERSHIP_TRANSFER / LOWER-LAYER OWNERSHIP`: exact Ready & Set UI copy, visual states, homework planner formula, family timetable rows, Jaeneung/English assignment details, Notion schemas, PWA timer/recording behaviors and product-specific test cases remain in their PROJECT/DOMAIN/WORKFLOW owners; omission from GRAND MASTER is intentional scope separation, not deletion.
+  - `HOLD / UNVERIFIED`: Ready & Set live runtime/offline convergence, automatic workload adjustment, real-device/multi-device/E2E behavior and deployed Release PASS remain unverified at product level; existing documents must not be used to upgrade those statuses.
+  - `SUPERSEDED`: earlier project-stage interpretation that the timetable itself remained unconfirmed is superseded by the latest user correction: current Base Timetable is the confirmed operating baseline, with temporary event overrides and quarterly/academy recurring schedule revisions triggering capacity recalculation/homework reallocation.
+  - `UNVERIFIED_SOURCE_COVERAGE`: exact byte-for-byte recovery of every historical chat turn from the first conversation cannot be independently established with the available source interfaces. This remains explicitly UNVERIFIED; recoverable original files/conversation artifacts were used and no missing content was invented.
+- Regression result: prior GRAND MASTER authority/validation/deep-analysis/handoff/sync/privacy rules remain present; project-specific lower-layer ownership was not promoted into GRAND MASTER.
+- Impact result: the new traceability gate raises stage-entry evidence requirements but does not change user-approved product behavior by itself; affected projects must satisfy the gate during their next design/function/implementation validation cycle.
+- Rollback references: pre-change `MASTER/MASTER_LOGIC.md` blob `48e18b2bfbdb8c518be7f91977054d1bd62e8c2d`; pre-change `MASTER/VALIDATION_RULES.md` blob `b84995d911e3d548785cc088154f6a2d0bc8e1d0`; pre-change `TAKY.md` blob `72237232787cda2a72f55a5fac6a2404b242dd53`; pre-change `CHANGELOG.md` blob `00af84559fb5e7f0ff6afb88d7696b39b2f0ef4a`; `MASTER/TRACEABILITY_PROTOCOL.md` did not previously exist.
+
+This is a validated REV_00 evolving-design integration. It strengthens proof that decisions survive into actual results; it does not itself prove any project UI/function/PWA implementation or Release PASS.
+
 ## 2026-09-05 — REV_00 Runtime Sync / Claim-Level / Disposition hardening
 - Recovered and compared the latest canonical TAKY files, the attached 2026-09-05 GRAND MASTER handoff, the attached handwritten timetable image, the recoverable full-conversation context, the Ready & Set project master, TAKY-WORK-OS and the prior deep-analysis report before writing.
 - Ran error validation → self-correction → self-validation → independent raw-file cross-validation → impact validation → regression validation → forward/reverse decision trace.
@@ -88,7 +114,7 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - Adopted simplified user-facing Drive work-item structure: `[PROJECT]/[YYYY-MM-DD]_[WORK-TITLE]/요청자료 + 요청사항.md + generated artifacts`.
 - Superseded the earlier default requirement for user-facing `INPUT/WORKING/REVIEW/OUTPUT` folder separation. Lifecycle states remain internally governed and validated.
 - Added automatic project classification when context is sufficiently clear; ambiguity that materially affects execution or filing requires clarification.
-- Preserved originals: supplied source files are not silently overwritten; reviewed/modified outputs are separate unless explicit replacement is authorized.
+- Preserved originals: supplied source files are not silently overwritten; reviewed/modified outputs are separate unless the user explicitly requests an authorized replacement.
 - Registered CAD ↔ spreadsheet review as a reusable Work OS pattern, with structured CAD evidence preferred for authoritative geometric/numeric validation.
 - Added initial `WORK_OS.md` to the `TAKY-WORK-OS` repository.
 
