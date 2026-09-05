@@ -10,7 +10,7 @@ HANDOFF = LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP.
 HANDOFF ≠ SOURCE OF TRUTH.
 HANDOFF COMPLETE ≠ RESUME VERIFIED.
 
-The purpose of Handoff is not maximum compression. Its purpose is to allow a new conversation, agent, session, or runtime to reconstruct the last valid working state without silently losing confirmed decisions, unresolved states, corrections, evidence, or protected constraints.
+The purpose of Handoff is not maximum compression. Its purpose is to allow a new conversation, agent, session, or runtime to reconstruct the last valid working state without silently losing confirmed decisions, unresolved states, corrections, evidence, protected constraints, or material realization traceability.
 
 Lossless does not require duplicating every source verbatim. It requires sufficient preserved state plus exact recoverable source pointers so that the intended working state can be reconstructed and compared.
 
@@ -48,8 +48,10 @@ A valid Handoff SHALL contain or explicitly mark UNKNOWN / NOT APPLICABLE for:
    - UNVERIFIED
    - pending approval
 
-7. SUPERSEDED / REJECTED STATE
+7. SUPERSEDED / REJECTED / EXCLUDED / TRANSFERRED STATE
    - prior candidates that must not be mistaken for current decisions
+   - rejected/excluded rationale when material
+   - ownership-transfer destination when retained elsewhere
    - reason / replacement pointer when known
 
 8. ACTUAL INPUT / EVIDENCE POINTERS
@@ -63,14 +65,21 @@ A valid Handoff SHALL contain or explicitly mark UNKNOWN / NOT APPLICABLE for:
    - PASS / FAIL / UNKNOWN separated by validation layer
    - LOGIC / DESIGN / FUNCTION / BUILD / LOCAL / DEPLOY / RELEASE shall not be collapsed
 
-11. OPEN ERRORS / OMISSIONS / CONFLICTS
+11. REALIZATION TRACEABILITY STATE
+   - material requirement/decision IDs when they exist
+   - current owner MASTER / PROJECT
+   - applicable UI / function / data / implementation / test / evidence links
+   - known downstream holes / upstream orphans
+   - stage currently reached and next blocked gate
 
-12. NEXT ACTION / RESUME POINT
+12. OPEN ERRORS / OMISSIONS / CONFLICTS
+
+13. NEXT ACTION / RESUME POINT
    - exact next checkpoint
    - prerequisites
    - actions that SHALL NOT be started yet
 
-13. ROLLBACK / RECOVERY POINTER
+14. ROLLBACK / RECOVERY POINTER
    - when modification or migration occurred
 
 ## 3. Source Pointer Contract
@@ -93,15 +102,17 @@ Before Handoff PASS, construct a coverage relationship:
 SOURCE ITEM → CLASSIFICATION → HANDOFF LOCATION OR SOURCE POINTER → RECOVERY CHECK → RESULT
 
 Every relevant prior item SHALL be classified:
-PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED.
+PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
 
 Failure conditions:
 - relevant source item has neither Handoff representation nor recoverable pointer
 - confirmed state is silently omitted
 - unresolved state is converted into confirmed state
 - superseded candidate is presented as current
+- EXCLUDE / OWNERSHIP_TRANSFER is used without rationale/destination where material
 - current state is replaced by filename/revision inference
 - validation status is upgraded without evidence
+- material realization traceability or blocked stage is silently lost
 
 Any such condition = HANDOFF FAIL.
 
@@ -114,19 +125,20 @@ Simulation:
 2. Load Handoff.
 3. Recover latest canonical source.
 4. Follow relevant Source Pointers.
-5. Reconstruct confirmed, unresolved, superseded, implementation and validation state.
+5. Reconstruct confirmed, unresolved, superseded, transferred, implementation, traceability and validation state.
 6. Compare reconstructed state against the source state used to generate the Handoff.
-7. Run omission / conflict / authority / regression checks.
-8. PASS only if material state can be resumed without silent behavioral drift.
+7. Rebuild applicable forward/reverse realization links sufficiently to identify current stage, holes/orphans and blocked next gate.
+8. Run omission / conflict / authority / impact / regression checks.
+9. PASS only if material state can be resumed without silent behavioral drift.
 
 If canonical or evidence cannot be accessed, mark RESUME VERIFICATION = UNKNOWN / BLOCKED rather than PASS.
 
 ## 6. Resume Boot Contract
 
 /재개 SHALL use:
-LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → COMPARE → CLASSIFY → RESUME
+LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → TRACEABILITY RECOVERY → COMPARE → CLASSIFY → RESUME
 
-Do not execute implementation merely because a Handoff contains a next-action sentence. First verify authority and current state against canonical/evidence when available.
+Do not execute implementation merely because a Handoff contains a next-action sentence. First verify authority, current state, applicable realization gate and evidence against canonical/source material when available.
 
 ## 7. Compression Rule
 
@@ -138,7 +150,8 @@ Compression is allowed only when recoverability is preserved.
 Prefer:
 - detailed state for behavior-changing decisions
 - concise pointers for stable canonical material
-- explicit state labels for unresolved/superseded items
+- explicit state labels for unresolved/superseded/transferred items
+- stable IDs/pointers for material requirement-to-result lineage
 
 Do not optimize Handoff for shortness at the expense of recoverability.
 
@@ -200,9 +213,10 @@ HANDOFF VALIDATION
 - Protected decisions: PASS / FAIL / UNKNOWN
 - User corrections: PASS / FAIL / UNKNOWN
 - HOLD/CONFLICT preservation: PASS / FAIL / UNKNOWN
-- Superseded-state separation: PASS / FAIL / UNKNOWN
+- Superseded/rejected/excluded/transferred-state separation: PASS / FAIL / UNKNOWN
 - Source pointer recoverability: PASS / FAIL / UNKNOWN
 - Last-valid-state recovery: PASS / FAIL / UNKNOWN
+- Realization traceability recovery: PASS / FAIL / UNKNOWN
 - Validation-state accuracy: PASS / FAIL / UNKNOWN
 - Next-action accuracy: PASS / FAIL / UNKNOWN
 - Resume simulation: PASS / FAIL / UNKNOWN
@@ -215,3 +229,5 @@ OVERALL HANDOFF PASS requires all materially applicable gates to PASS.
 This protocol governs state transfer and recovery quality. It does not make Handoff canonical authority and does not absorb project/domain rules into GRAND MASTER.
 
 Project-specific detailed schedules, app behavior, business data and artifacts remain owned by their proper lower master/source. The Handoff preserves or points to them; it does not redefine their authority.
+
+End-to-end realization semantics are governed by `MASTER/TRACEABILITY_PROTOCOL.md`; Handoff preserves enough of that state to resume correctly.
