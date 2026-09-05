@@ -3,40 +3,102 @@
 Status: ACTIVE PROJECT WORKFLOW CANDIDATE
 Date: 2026-09-05
 Authority: latest user direction + TAKY governance
+Coverage companion: `PROJECTS/SNAP_POP_DECISION_COVERAGE_AUDIT_REV_00.md`
 
 ## 1. Latest User Decision — HARD PROCESS ORDER
 
 Snap & Pop shall proceed in this order:
 
 `SOURCE / DECISION COVERAGE AUDIT`
-→ `UI CONCEPT REDESIGN`
-→ `INTERACTIVE PREVIEW`
+→ `DESIGN MOCKUP IMAGE`
+→ `MOCKUP REVIEW / CORRECTION`
+→ `UI IMPLEMENTATION FROM APPROVED MOCKUP`
+→ `UI PREVIEW SCREENSHOT + LIVE URL`
 → `PREVIEW REVIEW / CORRECTION`
 → `HUMAN UI APPROVAL`
 → `UI FREEZE`
 → `FUNCTION IMPLEMENTATION REVIEW`
 → `FUNCTION TRACEABILITY / VALIDATION`
+→ `FUNCTION PREVIEW SCREENSHOT + LIVE URL`
 → `HUMAN FUNCTION APPROVAL`
 → `PWA BUILD`
-→ `LOCAL BROWSER / DATA / OFFLINE / CACHE TEST`
+→ `LOCAL BROWSER / AUTOMATED / DATA / OFFLINE / CACHE TEST`
 → `RELEASE CANDIDATE`
 → `GITHUB COMMIT / PUSH`
 → `NETLIFY AUTO-DEPLOY`
-→ `DEPLOYED URL SMOKE / INSTALL / OFFLINE TEST`
+→ `DEPLOYED URL SMOKE / INSTALL / OFFLINE / UPDATE TEST`
 → `RELEASE PASS`
 
 No later stage may be used to bypass an earlier approval gate.
 
-## 2. UI / Preview Stage
+## 2. Source / Decision Coverage Gate
 
-The UI is being re-reviewed and may be rewritten. Historical UI boards are reference material, not mandatory Golden References.
+Before new design work:
+- recover relevant full conversation state when accessible
+- inspect original attachments/source documents at content level
+- treat HANDOFF as recovery aid, not proof of coverage
+- extract material decisions and later corrections
+- classify every material item as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED
+- record destination or explicit HOLD/REJECT reason
+- reverse-check that recovered items are actually represented in the current result/workflow
 
-Before UI design:
-- complete source/decision coverage audit
-- classify prior requirements as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED
-- verify no material product/function requirement is dropped merely because UI is redesigned
+`SOURCE REVIEWED != DECISION COVERED`
+`HANDOFF COVERAGE != FULL CONVERSATION COVERAGE`
+`NOT ADOPTED != FORGOTTEN`
 
-The preview must be an applied, realistic mobile preview rather than a text-only spec board.
+A material source item with no disposition is MISSING and blocks a full-coverage PASS.
+
+Detailed current recovery state is tracked in `PROJECTS/SNAP_POP_DECISION_COVERAGE_AUDIT_REV_00.md`.
+
+## 3. Design Mockup Stage
+
+`DESIGN_MOCKUP` is a static image used to decide visual direction.
+
+When the user says `시안 만들어줘` or equivalent:
+- check current MASTER + coverage audit
+- produce one design mockup image at a time unless another scope is explicitly requested
+- self-validate the actual image before presenting it
+- do not call a mockup an executable UI preview
+
+When the user says `시안 수정해줘` or equivalent:
+- revise the current design direction rather than inventing an unrelated replacement
+- self-validate the revised result
+- provide the revised image
+
+Historical V12/V13 visual boards remain REFERENCE ONLY unless an element is explicitly re-approved.
+
+## 4. Illustration Asset / DOM Separation — HARD LOCK
+
+The approved mockup is a design reference, not a production asset sheet.
+
+Production/UI implementation rules:
+- DO NOT crop/slice the approved mockup and use those slices as final PWA assets
+- create separate fit-for-purpose high-density illustration assets for background/environment/landmarks/Character/Guide/Gem/Growth Tree/decorative elements that are actually required
+- keep runtime text, buttons, navigation, progress, counts, inputs, status, errors and dynamic data as live HTML/CSS/DOM components
+- generated Korean text/numbers/buttons/data baked into runtime artwork = DESIGN FAIL
+- illustration handles world/character/environment; live web UI handles language, controls and dynamic state
+
+`MOCKUP != PRODUCTION ASSET`
+`IMAGE LAYER != LIVE UI COMPONENT`
+
+## 5. UI Implementation / Preview Stage
+
+The UI may be redesigned, but material product/function decisions must not be dropped because the visuals change.
+
+When the user says `UI 구현해줘`, `UI 만들어줘`, or equivalent:
+- implement from the approved mockup using separate high-density assets + live DOM
+- verify mobile layout and interaction feasibility
+- deploy an executable preview
+- provide BOTH:
+  1. current rendered screenshot image
+  2. mobile-openable live UI Preview URL
+
+When the user says `UI 수정해줘` or equivalent:
+- modify the implementation
+- run visual/layout/copy regression
+- provide the updated screenshot image + updated Preview URL
+
+A static image, code file, ZIP or HTML file that is not reachable as a usable mobile preview is not `UI_PREVIEW_DELIVERED`.
 
 Preview review checks include:
 - product hierarchy
@@ -58,7 +120,7 @@ Preview review checks include:
 
 Only the user-approved preview becomes the new `UI_FREEZE_REFERENCE`.
 
-## 3. UI Approval Gate
+## 6. UI Approval Gate
 
 `PREVIEW VALIDATED != UI APPROVED`
 
@@ -75,7 +137,7 @@ After approval:
 
 Function implementation may not silently alter the approved UI.
 
-## 4. Function Implementation Review
+## 7. Function Implementation Review
 
 Function implementation begins only after UI approval.
 
@@ -98,18 +160,54 @@ At minimum validate:
 - Google Calendar optional integration isolation
 - IndexedDB persistence / migration safety
 - ORIGINAL/FAMILY feature flags
+- FAMILY per-child data isolation and migration when enabled
 - error taxonomy
 
 Function QA must not be delegated to the user.
 
-## 5. Function Approval Gate
+When the user says `기능 구현해줘` or `기능 수정해줘`:
+- implement only against the approved UI and current MASTER
+- run function + UI regression before delivery
+- deploy an executable Function Preview
+- provide BOTH:
+  1. current rendered screenshot image
+  2. actual mobile-openable Function Preview URL
+
+## 8. Function Approval Gate / Automatic Production Trigger
 
 `FUNCTION VALIDATED != FUNCTION APPROVED`
 
-After technical validation, present concise functional verification evidence to the user.
-Explicit user approval freezes the function specification for the PWA build.
+Explicit user phrase `기능 승인` or an unambiguous equivalent does two things:
+1. freezes the approved function scope for the release candidate
+2. authorizes the routine PWA validation + GitHub + Netlify production pipeline without repeated approval prompts for mechanical steps
 
-## 6. PWA Build Gate
+`기능 승인` does NOT waive validation.
+
+After `기능 승인`:
+`PWA BUILD`
+→ `SYNTAX / BUILD`
+→ `LOCAL BROWSER TEST`
+→ `AUTOMATED TEST`
+→ `FUNCTION REGRESSION`
+→ `UI LAYOUT / OVERLAP / TRUNCATION`
+→ `TYPO / COPY CHECK`
+→ `TOUCH / INTERACTION`
+→ `INDEXEDDB / DATA`
+→ `OFFLINE / ONLINE RECOVERY`
+→ `SERVICE WORKER / CACHE`
+→ `MANIFEST / INSTALLABILITY`
+→ `MIGRATION / USER-DATA PRESERVATION`
+→ `SEVERITY GATE`
+→ `GITHUB PRODUCTION UPDATE`
+→ `NETLIFY GIT AUTO-DEPLOY`
+→ `EXISTING PRODUCTION URL VERIFICATION`
+→ `INSTALLED PWA UPDATE / CACHE / DATA VERIFICATION`
+→ `RELEASE PASS`
+
+If BLOCKER / CRITICAL / MAJOR defects remain, production publication stops.
+TAKY may self-correct and rerun validation when the correction does not alter protected product decisions. If a product decision must change, the target is ambiguous, a destructive action is required, credentials are missing, or a major defect cannot be safely self-corrected, stop as HOLD and request human decision.
+
+## 9. PWA Build Gate
 
 PWA is built only after both:
 - `UI_APPROVED = true`
@@ -129,39 +227,59 @@ Required local verification:
 11. cache/version migration
 12. responsive target viewports
 13. accessibility checks
+14. UI placement / overlap / clipping
+15. Korean/English typo and copy check
+16. protected ORIGINAL/FAMILY behavior regression
+17. existing user-data preservation
 
 BLOCKER / CRITICAL / MAJOR defects must be zero before deployment.
 
-## 7. GitHub Automatic Publication
+## 10. GitHub Automatic Publication
 
 After PWA local validation passes and release candidate is frozen:
 - create/update the project branch/repository files automatically through the connected GitHub integration
+- use GitHub as the deployment Source of Truth
+- preserve protected deployment/configuration files
+- update only intended managed files
 - run post-write verification
 - preserve commit SHA as release evidence
 - do not call GitHub commit success a deployment success
 
 If the production repository is not yet unambiguously identified, repository resolution remains HOLD and deployment must not guess.
 
-## 8. Netlify Automatic Deployment
+## 11. Netlify Automatic Deployment
 
 Target behavior after release-candidate validation:
 
 `GitHub approved production commit -> Netlify build/deploy automatically -> deployed URL verification`
 
 Preferred setup:
-- Netlify connected to the production GitHub repository/branch
+- Netlify connected to the existing production GitHub repository/branch
 - every approved production commit triggers Netlify build/deploy automatically
-- preview/candidate branches should not replace production unless intentionally configured
+- preview/candidate branches do not replace production unless intentionally configured
+- do not mix routine manual ZIP deploy with Git-based production deploy
 
-Netlify is now connected for this workflow. At the deployment stage, use the connected Netlify capability for site/deploy setup or verification when exposed in the active toolset.
+Netlify is user-confirmed connected for this workflow. At deployment stage, use connected Netlify capability when exposed in the active toolset.
 If the deployment target/site is ambiguous, remain `HOLD_TARGET_RESOLUTION` rather than guessing.
 
-## 9. Deployment Verification
+## 12. Production URL / Installed PWA Preservation — HARD LOCK
 
-After Netlify reports success, independently verify the real deployed URL:
+The user already uses the existing production URL through Safari and has added it to the iPhone Home Screen.
+
+Therefore routine updates SHALL preserve:
+- existing production URL
+- existing GitHub -> Netlify production relationship
+- installed Home Screen PWA continuity
+- user records/data through application updates
+
+A release must verify stale-cache/update behavior so that the Home Screen PWA does not remain on an old UI/logic build after successful Netlify deployment.
+
+## 13. Deployment Verification
+
+After Netlify reports success, independently verify the real existing production URL:
 - HTTP/HTTPS load
 - expected build/version marker
-- correct UI
+- correct approved UI
 - main interactions
 - responsive mobile render
 - PWA manifest
@@ -170,12 +288,13 @@ After Netlify reports success, independently verify the real deployed URL:
 - offline reload
 - IndexedDB persistence
 - stale cache/update behavior
+- existing data preserved
 
 `NETLIFY DEPLOY SUCCESS != RELEASE PASS`
 
 Release Pass requires deployed-result verification.
 
-## 10. Automatic Operation Boundary
+## 14. Automatic Operation Boundary
 
 Once the user approves UI and then function specification, the remaining routine build/publish workflow should proceed without requiring repeated manual approval for each mechanical step, unless:
 - a protected product decision changes
@@ -186,7 +305,7 @@ Once the user approves UI and then function specification, the remaining routine
 
 The system must stop and report HOLD rather than guess in those cases.
 
-## 11. Latest UI Redesign Override
+## 15. Latest UI Redesign Override
 
 The previous `Golden Reference inheritance` behavior is superseded for visual design only.
 
@@ -198,6 +317,8 @@ PRESERVE:
 - accessibility/voice principles
 - PWA/data safety
 - release governance
+- premium/high-density illustration quality floor
+- live DOM vs illustration separation
 
 REDESIGN / RE-REVIEW:
 - overall UI concept
@@ -213,8 +334,11 @@ REDESIGN / RE-REVIEW:
 
 Historical UI remains REFERENCE ONLY unless the user explicitly re-approves an element.
 
-## 12. State Definitions
+## 16. State Definitions
 
+- `SOURCE_AUDIT_IN_PROGRESS`
+- `DESIGN_MOCKUP_DRAFT`
+- `DESIGN_MOCKUP_REVIEWED`
 - `UI_DRAFT`
 - `UI_PREVIEW_VALIDATED`
 - `UI_APPROVED`
@@ -230,19 +354,21 @@ Historical UI remains REFERENCE ONLY unless the user explicitly re-approves an e
 
 These states are not interchangeable.
 
-## 13. Current State
+## 17. Current State
 
 Current:
-- source/decision coverage audit: IN PROGRESS
-- UI: REDESIGN / RE-REVIEW
+- source/decision coverage audit: RECOVERED MATERIAL MAPPED / FULL RAW HISTORICAL CHAT EXACT COVERAGE = UNVERIFIED
+- design mockup: REDESIGN / RE-REVIEW NOT YET STARTED
+- UI implementation: BLOCKED BY MOCKUP REVIEW/APPROVAL
 - UI approval: NOT YET
 - function implementation review: BLOCKED BY UI APPROVAL
 - PWA build: BLOCKED BY UI + FUNCTION APPROVAL
 - GitHub production publication: BLOCKED BY LOCAL PASS
-- Netlify deployment: CONNECTED, BLOCKED BY RELEASE CANDIDATE
+- Netlify deployment: CONNECTED BY USER CONFIRMATION, BLOCKED BY RELEASE CANDIDATE
 
 Next:
-1. complete full conversation/source coverage audit
-2. produce one applied mobile UI preview candidate
-3. validate internally
-4. show for user review/approval
+1. use coverage audit as anti-omission source map
+2. produce one design mockup image when requested
+3. self-validate actual image
+4. after mockup direction is accepted, implement live UI with separate high-density assets + DOM
+5. show screenshot image + live UI Preview URL for UI approval
