@@ -8,11 +8,35 @@ Role: Operational OS layer under TAKY / GRAND MASTER.
 Authority inherits:
 `TAKY / GRAND MASTER > OS / DOMAIN / PROJECT MASTER > SKILL > TOOL / AGENT`
 
-This document owns cross-project operational workflows. It SHALL NOT weaken GRAND MASTER governance, evidence, validation, approval, privacy, revision, regression, source-of-truth, or human-approval rules.
+This document owns cross-project operational workflows. It SHALL NOT weaken GRAND MASTER governance, evidence, validation, approval, privacy, revision, regression, source-of-truth, Deep Analysis, anti-omission, traceability, or operational-workspace authority rules.
 
-Operational details belong here or in subordinate modules rather than GRAND MASTER.
+Operational details belong here or in subordinate modules rather than GRAND MASTER core.
 
-## 2. Mail Operations
+Normative operational-workspace governance:
+`MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`
+
+## 2. Notion Operations
+
+Notion is an operational collaboration/work-management surface, not TAKY canonical authority and not a replacement for approved numeric/calculation, geometry/drawing, original evidence-file, legal/regulatory or official approval authorities.
+
+Detailed contract:
+`OS/NOTION_OPS.md`
+
+Hard rules:
+- `NOTION ≠ SOURCE OF TRUTH`
+- `PROJECTION WRITE ≠ SOURCE COMMIT`
+- `STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION`
+- `ROLE VIEW ≠ DUPLICATE DATABASE`
+- `AI SUMMARY ≠ OFFICIAL VALUE`
+- `AUTOMATION START ≠ OFFICIAL CONFIRMATION`
+
+Current connected-Notion implementation state from the 2026-09-05 reflection:
+- reusable Notion operating logic: LOGIC INTEGRATED
+- verified Projects/Issues/Decisions/Evidence/Changes/Snapshots workspace implementation: UNVERIFIED
+- Notion automation runtime: UNVERIFIED
+- offline/conflict/reconciliation runtime: UNVERIFIED
+
+## 3. Mail Operations
 
 Mail operations are a lightweight business-record / mail-history / archiving capability. They are separate by default from architecture design-overview, calculation, release, and submission logic. A project/domain may link mail evidence later without changing this ownership boundary.
 
@@ -25,7 +49,7 @@ Module ownership:
 
 Detailed contract: `OS/MAIL_OPS.md`.
 
-## 3. Mail Runtime State
+## 4. Mail Runtime State
 
 Provider connection state is operational evidence, not permanent MASTER truth. It must be rechecked from the actual provider/connector when execution depends on it.
 
@@ -40,8 +64,11 @@ Hard rules:
 - ARCHIVE LOGIC PASS ≠ LOCAL AUTOMATION PASS
 - PROVIDER STATE IN HANDOFF ≠ CURRENT STATE UNTIL RECHECKED
 
-## 4. Validation State
+## 5. Validation State
 
+- Operational Workspace Protocol placement: PASS
+- Notion Ops ownership placement: PASS
+- Notion live operational schema/runtime: UNVERIFIED
 - MAIL OPS ownership placement: PASS
 - Mailopoly/NATE connection: VERIFIED ACTIVE at stated check time
 - Thread reconstruction design: LOGIC PASS / IMPLEMENTATION NOT VALIDATED
@@ -50,6 +77,6 @@ Hard rules:
 - Windows/local staging archive: NOT IMPLEMENTED
 - Full MAIL OPS E2E: NOT YET PASS
 
-## 5. Revision
+## 6. Revision
 
 Per GRAND MASTER governance, `/반영` does not increment Revision. This remains REV_00 until explicit user finalization establishes an official revision.
