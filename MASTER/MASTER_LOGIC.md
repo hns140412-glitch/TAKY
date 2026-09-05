@@ -173,11 +173,61 @@ DRIVE WRITE ≠ GITHUB WRITE.
 PARTIAL SYNC ≠ SYNC PASS.
 SYNC PASS requires post-write verification of intended approved content on both surfaces.
 
-## 17. Security / privacy / external systems
+## 17. Handoff governance
+HANDOFF = STATE RECOVERY MAP / RECOVERY EVIDENCE, NOT SOURCE OF TRUTH.
+
+A Handoff should record, as applicable:
+- canonical GitHub TAKY commit/SHA or another resolvable canonical reference used at creation
+- session purpose and current position
+- confirmed decisions and user corrections
+- implemented state by governed store
+- candidates / HOLD / CONFLICT / MISSING / UNVERIFIED / SUPERSEDED
+- source/evidence files and actual storage location
+- rollback/work snapshot reference
+- last validation/regression/sync state
+- next action and restart command
+
+If a Handoff status statement conflicts with newer canonical TAKY, the newer canonical state governs. However, decisions/evidence in the Handoff must be classified and must not be silently discarded. Historical status claims may be marked SUPERSEDED while preserving their evidence and lineage.
+
+HANDOFF ≠ SOURCE OF TRUTH.
+HANDOFF STATUS ≠ CURRENT STATE UNTIL CANONICAL-COMPARED.
+FILENAME ≠ FILE CONTENT EVIDENCE.
+
+### Handoff recovery
+/재개 → LOAD LATEST CANONICAL TAKY → READ RELEVANT HANDOFF → LOCATE ACTUAL REFERENCED EVIDENCE/FILES WHEN NEEDED → COMPARE HANDOFF STATE AGAINST CANONICAL → CLASSIFY CONFIRMED / CANDIDATE / IMPLEMENTED / VALIDATED / HOLD / SUPERSEDED / CONFLICT / MISSING / UNVERIFIED → RESUME FROM LAST VALID STATE.
+
+A filename/title alone is not evidence of its contents. If referenced evidence cannot be found or accessed, do not infer it; mark MISSING / UNVERIFIED.
+
+## 18. Work OS operating-area governance
+The governed Drive Work OS may use user-facing areas such as _PROJECTS / _TEMP / _HANDOFF / _LAB / _COMMON when actually implemented. Internal records for snapshots, sync, validation, trace and history may be maintained without forcing users to manage complex lifecycle folders.
+
+FOLDER RULE ≠ FOLDER IMPLEMENTATION.
+Actual folder/file creation, movement, write, and synchronization must be verified before claiming implementation.
+
+## 19. Communication / Mail workflow boundary
+Mail history and archiving belong to PROFESSIONAL AI WORK OS communication/record workflows, not GRAND MASTER CORE.
+
+Separate:
+- MAIL HISTORY = search / thread reconstruction / summary / requests / replies / decisions / follow-up / unresolved state
+- MAIL ARCHIVING = actual EMAIL.pdf / attachments / project filing / retention workflow
+
+Use only evidence-confirmed identity/contact information; do not infer a person's name, company, department, role, or contact data from an email address alone.
+
+Mailbox mutation such as SEND / DELETE / MOVE / LABEL requires its own authority and validation. Read/search/analysis and local/archive writes remain distinct capabilities.
+
+Current operational state recorded from user confirmation:
+- Nate/Mailopoly connection = COMPLETED
+- frequent automatic mail checking = OFF / HOLD by user choice because checking was too frequent
+- re-enable flow = review trigger/frequency policy first; do not assume continuous/frequent polling
+
+MAIL CONNECTION ≠ MAIL MONITORING ENABLED.
+MONITORING OFF ≠ CONNECTION FAILURE.
+
+## 20. Security / privacy / external systems
 External storage, Notion, GitHub, Drive, email, calendars and tools are governed sources/capabilities, not automatic MASTER authority.
 Credentials and private child/family data must remain scoped to the minimum required system and permission boundary.
 
-## 18. Evolution
+## 21. Evolution
 Real-use observations are evidence, not automatic decisions.
 OBSERVATION ≠ MASTER DECISION.
 Feedback → candidate → impact → validation → approval → commit.
