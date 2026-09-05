@@ -10,6 +10,7 @@
 - Added entity/identity separation: constraint/schedule template ≠ actionable task and template ID ≠ dated instance ID ≠ event ID.
 - Expanded anti-omission disposition to include EXCLUDE and OWNERSHIP_TRANSFER with rationale/destination requirements.
 - Updated `MASTER/VALIDATION_RULES.md` and `TAKY.md` to inherit the new gates.
+- Replaced the existing Google Drive `TAKY_MASTER_MIRROR_REV_00` content with the current canonical `MASTER/MASTER_LOGIC.md` plus mirror metadata, then verified target identity, required sections and canonical content after write.
 - Reverse-verification:
   - `PRESERVE`: GitHub canonical authority, REV_00 pre-confirmation state, AI5, /검토 vs /반영 authority, NO USER-AS-QA, Handoff/Notion/Drive non-canonical boundaries and existing Deep Analysis/reverse-validation gates.
   - `ADOPT / ADJUST`: reusable governance principles from the Ready & Set/Notion/offline deep analysis were generalized into TAKY rather than copying product-specific implementation.
