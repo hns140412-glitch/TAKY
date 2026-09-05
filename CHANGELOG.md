@@ -1,5 +1,25 @@
 # TAKY CHANGELOG
 
+## 2026-09-05 — REV_00 Applicable-Rule / Integrated-Result / Reverse-Validation hardening
+- Recovered the latest canonical `TAKY.md`, `MASTER/MASTER_LOGIC.md`, `MASTER/VALIDATION_RULES.md`, current CHANGELOG, the available TAKY handoff evidence, recoverable ZPD Word MASTER lineage, ZPD handoff, and available original-chat export evidence before writing.
+- Re-ran the requested error validation → self-correction → self-validation → cross-validation → impact validation → regression validation → reverse-validation sequence against the recoverable source set.
+- Added **Applicable-Rule Activation Gate** to GRAND MASTER: `CANONICAL LOADED ≠ CANONICAL APPLIED`, `RULE EXISTS ≠ RULE APPLIED`, and `RULE MENTIONED ≠ RESULT VALIDATED`. TAKY must identify the task-relevant MASTER / GUIDE / DOMAIN / PROJECT rules and compare the actual output against those rules 1:1 before PASS.
+- Added **Integrated-Result / Composition Validation** to GRAND MASTER: `COMPONENT PASS ≠ INTEGRATED RESULT PASS`, `LAYER SEPARATION ≠ COMPOSITION PASS`, `NO COLLISION ≠ GOOD RELATIONSHIP`, and `INTENDED OVERLAP ≠ ACCIDENTAL COLLISION`. Final assembled outputs must be checked for alignment, spacing, anchoring, hierarchy, overlap/collision, clipping, z-order, safe areas/boundaries, state transitions, and representative target conditions when applicable.
+- Added **Validation Independence / Self-Correction Stability**: SELF-VALIDATION, CROSS-VALIDATION, IMPACT VALIDATION and REGRESSION VALIDATION are separate gates. Repeating the same assertion is not cross-validation; a working delta is not impact PASS; presence of a new rule is not regression PASS.
+- Strengthened `MASTER/VALIDATION_RULES.md` to match the GRAND MASTER gates and added applicability, integrated-result and impact dimensions.
+- Updated `TAKY.md` boot semantics so loading canonical source is followed by applicable-rule extraction and actual integrated-result validation rather than generic TAKY invocation.
+- Reverse-validation classification of this integration:
+  - `PRESERVE`: GitHub TAKY canonical authority, REV_00 pre-confirmation governance, AI5, NO USER-AS-QA, Deep Analysis, Handoff≠Source of Truth, protected-state/regression gates, existing Result Reflection / Reverse-Validation rules.
+  - `ADOPT`: explicit applicable-rule activation and integrated-result validation learned from recent GUIDE/UI/layer-composition failures.
+  - `ADJUST`: project-specific examples were generalized into reusable governance rules rather than copied literally into GRAND MASTER.
+  - `HOLD / LOWER-LAYER OWNERSHIP`: ZPD-specific phone portrait-only policy, tablet height-based UI ceiling, background/UI/text separation details, GUIDE dialogue copy, rapid-capture/OCR flow, CODE RED behavior, and device/layout values remain PROJECT/DOMAIN-owned and were intentionally not promoted into GRAND MASTER. Their omission from GRAND MASTER is ownership correction, not deletion.
+  - `SUPERSEDED`: any operational assumption that merely loading/citing TAKY proves compliance is superseded by the Applicable-Rule Activation Gate.
+  - `UNVERIFIED_SOURCE_COVERAGE`: exact byte-for-byte coverage of every historical chat turn cannot be independently proven from the currently recoverable source set. TAKY therefore does not claim complete raw-history coverage; recoverable conversation state, attached/historical documents and canonical evidence were used without inventing missing source content.
+- Post-write verification is required to confirm that the intended new sections exist and that prior protected GRAND MASTER rules were not lost or weakened.
+- Rollback references: pre-change `MASTER/MASTER_LOGIC.md` blob `66d3a1182983f41b1fbf1c95835ec68c977b2e59`; pre-change `MASTER/VALIDATION_RULES.md` blob `166c5c639f909db490957eb315129c9114771b8d`; pre-change `TAKY.md` blob `9443b8178c0682fb2c3321f57fd13475b8ed5a96`; pre-change `CHANGELOG.md` blob `c2a6f71681cb16bb645ff171732555d156a2b8cb`.
+
+This entry records an approved integration during the REV_00 evolving-design phase. It does not establish the first official post-finalization revision. Full raw historical-chat coverage remains explicitly UNVERIFIED rather than being falsely claimed as PASS.
+
 ## 2026-09-05 — REV_00 Deep Analysis / Architecture Regulatory Work OS integration
 - Recovered latest canonical `MASTER/MASTER_LOGIC.md`, latest `TAKY-WORK-OS/WORK_OS.md`, current CHANGELOG and accessible Google Drive Work OS state before writing.
 - Added **심층 분석 / DEEP ANALYSIS** as TAKY's rigorous review-and-improvement protocol rather than a synonym for longer review.
