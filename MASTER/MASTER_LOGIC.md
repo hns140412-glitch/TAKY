@@ -67,21 +67,28 @@ L3 approved project knowledge
 L4 domain
 L5 master governance
 
-Memory is not canonical authority. Recover latest canonical source first when available.
+Memory is routing aid, not canonical authority. Do not keep the entire TAKY system in conversational memory. Recover canonical rules, approved decisions, project evidence, and external research on demand; persist approved system state/history in governed stores.
 
 ## 9. Source recovery / anti-omission
 SOURCE RECOVERY
 → DECISION EXTRACTION (HARD LOCK / CONFIRMED / CANDIDATE / CONFLICT)
 → COVERAGE MATRIX
-→ REWRITE / INTEGRATE
-→ OMISSION CHECK
+→ COMPARE / ANALYZE
+→ AI IMPROVEMENT PROPOSALS
+→ ERROR / OMISSION / CONFLICT CHECK
+→ SELF-CORRECTION
+→ SELF-VALIDATION
 → REGRESSION CHECK
-→ AI5 / SELF-VALIDATION
-→ REV_00 evolving source
+→ APPROVAL GATE
+→ ROLLBACK SNAPSHOT
+→ CANONICAL REFLECTION
+→ POST-WRITE VERIFICATION
 
 Every prior item must be accounted for as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED.
 NEW DOCUMENT ABSENCE ≠ INTENTIONAL DELETION.
 HANDOFF SUMMARY ABSENCE ≠ PRIOR RULE ABSENCE.
+
+Check duplication, contradiction, omission, regression, authority intrusion, stale references, unintended coupling, and cross-project side effects before approval.
 
 ## 10. Approved-state inheritance
 NEW RESULT → APPROVED PREVIOUS STATE? → INHERIT APPROVED DNA → APPLY ONLY APPROVED DELTA → COMPARE.
@@ -98,12 +105,19 @@ Different outside allowed delta = FAIL / regression.
 
 TAKY aliases inherit these semantics. TAKY commands never weaken the original command gates.
 
+### TAKY reflection protocol
+'타키 반영' means:
+LOAD → SOURCE RECOVERY → DECISION EXTRACTION → COVERAGE MATRIX → COMPARE / ANALYZE → AI IMPROVEMENT PROPOSALS → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → REGRESSION CHECK → APPROVAL GATE → ROLLBACK SNAPSHOT → DRIVE + GITHUB WRITE → POST-WRITE VERIFICATION → HISTORY.
+
+If one governed store succeeds and the other fails, state = SYNC_PARTIAL, never PASS. Reconcile before declaring synchronized.
+
 ## 12. Revision governance
 PRE-CONFIRMATION STATE → ALL MASTER / GUIDE / DOMAIN / APP = REV_00
 TEST / REVIEW / REMASTER / CANDIDATE CHANGES → SHALL NOT INCREMENT REVISION NUMBER
 EXPLICIT USER FINALIZATION → ESTABLISHES THE FIRST OFFICIAL REVISION
 POST-FINALIZATION UPDATE → REVISION MAY INCREMENT ACCORDING TO APPROVED UPDATE SCOPE
 HISTORICAL FILE REVISION LABEL ≠ CURRENT OFFICIAL REVISION
+WORK SNAPSHOT ≠ OFFICIAL REVISION
 
 ## 13. Validation hard rules
 LOGIC PASS ≠ DESIGN PASS ≠ FUNCTION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS
@@ -112,11 +126,58 @@ Research/evidence uncertainty → UNKNOWN / UNVERIFIED
 Release/result ambiguity → NOT PASS / FAIL as appropriate
 Do not overclaim implementation without implementation evidence.
 
-## 14. Security / privacy / external systems
+Regression check is mandatory before approval/write. If protected rules disappear, ownership shifts unintentionally, another project regresses, or the approved delta causes unexpected behavior, return to correction rather than commit.
+Post-write verification must confirm that stored content matches the approved delta.
+
+## 14. AI improvement / external trend review
+TAKY may, when useful, research current AI capabilities, model/provider/tool changes, validated engineering methods, emerging workflows, credible community practices, and new logical/architectural ideas.
+
+External findings are EVIDENCE / CANDIDATE only.
+TREND ≠ MASTER DECISION.
+NEW ≠ BETTER.
+POPULAR ≠ FIT-FOR-PURPOSE.
+
+For each meaningful candidate, compare against:
+- existing philosophy and HARD LOCKs
+- fit-for-purpose and actual user goal
+- evidence quality / confidence / freshness
+- authority and ownership boundaries
+- complexity and maintainability
+- security / privacy
+- cost / latency / operational burden
+- reversibility / migration burden
+- compatibility / regression risk
+- measurable expected benefit
+
+TAKY should propose meaningful improvements and may recommend KEEP CURRENT when the existing logic remains superior. No trend, deep research result, community practice, or provider feature auto-modifies MASTER. Adoption requires the normal validation and approval path.
+
+## 15. Rollback / work snapshot
+Before each canonical reflection, preserve a recoverable rollback point independent of official revision numbering.
+Record at minimum:
+- snapshot / commit reference
+- changed files / affected sections
+- delta summary and reason
+- affected OS / domains / projects
+- validation and regression result
+- rollback target
+
+The purpose is causal comparison and selective recovery, not uncontrolled restoration. A rollback candidate must itself be validated against later confirmed decisions before restoration.
+
+## 16. Dual-store / synchronization policy
+GitHub / TAKY = canonical source for TAKY system logic and executable/mobile-web/system reference.
+Google Drive = working/mirror/reference surface for ChatGPT/human workflow and project materials.
+
+For approved MASTER reflection, TAKY should update both governed surfaces when technically writable and verify both. GitHub remains canonical when temporary divergence occurs; divergence must be recorded and reconciled.
+
+DRIVE WRITE ≠ GITHUB WRITE.
+PARTIAL SYNC ≠ SYNC PASS.
+SYNC PASS requires post-write verification of intended approved content on both surfaces.
+
+## 17. Security / privacy / external systems
 External storage, Notion, GitHub, Drive, email, calendars and tools are governed sources/capabilities, not automatic MASTER authority.
 Credentials and private child/family data must remain scoped to the minimum required system and permission boundary.
 
-## 15. Evolution
+## 18. Evolution
 Real-use observations are evidence, not automatic decisions.
 OBSERVATION ≠ MASTER DECISION.
 Feedback → candidate → impact → validation → approval → commit.
