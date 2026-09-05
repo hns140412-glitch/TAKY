@@ -59,6 +59,27 @@ NEW RULE PRESENT ≠ REGRESSION PASS.
 - Implementation evidence
 - Release evidence
 
+## Claim-level gate
+LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
+
+A document delta, schema, local save, offline launch/cache, deploy response or relation field proves only its own level. Each higher PASS needs representative evidence at that level. Untested real-device, external-service, synchronization and end-to-end behavior remains UNKNOWN / UNVERIFIED.
+
+## Structural-integrity gate
+When an active normative document uses an END/terminal marker, exactly one authoritative terminal boundary is allowed and normative content after it = FAIL. Validate unique/ordered sections, cross-references, canonical/status/revision metadata, and distinguish historical lineage labels from current governance.
+
+## Connected/offline sync gate — conditional
+For projects requiring offline, multi-device, external projection or eventual sync, validate distinct governance authority, runtime authority/event ledger, device replica/outbox and reporting projection.
+
+LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
+OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
+TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
+RELATION EXISTS ≠ CORRECT OWNERSHIP / MEANING.
+
+Validate identifiers/idempotency, replay/order, ownership/conflict policy, retry/recovery triggers, visible pending/conflict state, server-side scope authorization, secret non-exposure, connector throttling/failure, reconciliation and representative restart/reconnect/duplicate/out-of-order/multi-device/long-offline tests. Unperformed cases remain UNKNOWN.
+
+## Decision-disposition gate
+Every material source-derived item requires a traceable PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED disposition. HOLD needs reason/owner/exit condition; EXCLUDE needs scope rationale; OWNERSHIP_TRANSFER needs a named recoverable destination.
+
 ## Status vocabulary
 PASS / FAIL / NOT PASS / UNKNOWN / UNVERIFIED / NOT PERFORMED.
 Do not collapse design validation into implementation validation.
