@@ -1,0 +1,188 @@
+# TAKY LOSSLESS HANDOFF / RESUME PROTOCOL
+
+Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
+Role: Operational protocol under TAKY GRAND MASTER for loss-resistant state transfer and verified resume.
+
+## 1. Core Contract
+
+HANDOFF ≠ SUMMARY.
+HANDOFF = LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP.
+HANDOFF ≠ SOURCE OF TRUTH.
+HANDOFF COMPLETE ≠ RESUME VERIFIED.
+
+The purpose of Handoff is not maximum compression. Its purpose is to allow a new conversation, agent, session, or runtime to reconstruct the last valid working state without silently losing confirmed decisions, unresolved states, corrections, evidence, or protected constraints.
+
+Lossless does not require duplicating every source verbatim. It requires sufficient preserved state plus exact recoverable source pointers so that the intended working state can be reconstructed and compared.
+
+## 2. Mandatory Handoff Blocks
+
+A valid Handoff SHALL contain or explicitly mark UNKNOWN / NOT APPLICABLE for:
+
+1. CANONICAL STATE
+   - canonical repository / source
+   - relevant MASTER / PROJECT / OS paths
+   - revision/status
+   - commit/snapshot when available
+
+2. CURRENT GOAL / SCOPE
+   - what is being done
+   - what is explicitly outside the current scope
+
+3. CONFIRMED / PROTECTED STATE
+   - user-confirmed decisions
+   - HARD LOCKs
+   - approved terminology / architecture / behavior
+
+4. DETAILED ACTIVE DECISIONS
+   - implementation-relevant detail needed to resume correctly
+   - do not compress details that change behavior
+
+5. USER CORRECTIONS
+   - later corrections override earlier assumptions only when evidence supports that relationship
+
+6. UNRESOLVED STATE
+   - HOLD
+   - CONFLICT
+   - MISSING
+   - UNKNOWN
+   - UNVERIFIED
+   - pending approval
+
+7. SUPERSEDED / REJECTED STATE
+   - prior candidates that must not be mistaken for current decisions
+   - reason / replacement pointer when known
+
+8. ACTUAL INPUT / EVIDENCE POINTERS
+   - source file / path / section / artifact / commit / conversation evidence sufficient for recovery
+
+9. LAST VALID WORKING STATE
+   - last known valid implementation/design/data state
+   - known regressions after that state
+
+10. VALIDATION STATE
+   - PASS / FAIL / UNKNOWN separated by validation layer
+   - LOGIC / DESIGN / FUNCTION / BUILD / LOCAL / DEPLOY / RELEASE shall not be collapsed
+
+11. OPEN ERRORS / OMISSIONS / CONFLICTS
+
+12. NEXT ACTION / RESUME POINT
+   - exact next checkpoint
+   - prerequisites
+   - actions that SHALL NOT be started yet
+
+13. ROLLBACK / RECOVERY POINTER
+   - when modification or migration occurred
+
+## 3. Source Pointer Contract
+
+A Source Pointer SHOULD include, when available:
+
+sourceType + repository/workspace + file/path + section/range + revision/commit/version + recoveryPurpose
+
+If a decision exists only in transient conversation evidence and has not yet been canonicalized, the Handoff SHALL preserve enough of the decision itself to avoid loss and SHALL mark its authority/state accurately.
+
+A pointer that cannot reasonably be recovered is not sufficient evidence of preservation.
+
+FILENAME ≠ FILE CONTENT EVIDENCE.
+POINTER EXISTS ≠ POINTER RECOVERABLE.
+
+## 4. Coverage Matrix — HARD GATE
+
+Before Handoff PASS, construct a coverage relationship:
+
+SOURCE ITEM → CLASSIFICATION → HANDOFF LOCATION OR SOURCE POINTER → RECOVERY CHECK → RESULT
+
+Every relevant prior item SHALL be classified:
+PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED.
+
+Failure conditions:
+- relevant source item has neither Handoff representation nor recoverable pointer
+- confirmed state is silently omitted
+- unresolved state is converted into confirmed state
+- superseded candidate is presented as current
+- current state is replaced by filename/revision inference
+- validation status is upgraded without evidence
+
+Any such condition = HANDOFF FAIL.
+
+## 5. Resume Simulation — HARD GATE
+
+A Handoff is not VERIFIED until a resume simulation succeeds.
+
+Simulation:
+1. Assume a fresh conversation/session with no reliable conversational memory.
+2. Load Handoff.
+3. Recover latest canonical source.
+4. Follow relevant Source Pointers.
+5. Reconstruct confirmed, unresolved, superseded, implementation and validation state.
+6. Compare reconstructed state against the source state used to generate the Handoff.
+7. Run omission / conflict / authority / regression checks.
+8. PASS only if material state can be resumed without silent behavioral drift.
+
+If canonical or evidence cannot be accessed, mark RESUME VERIFICATION = UNKNOWN / BLOCKED rather than PASS.
+
+## 6. Resume Boot Contract
+
+/재개 SHALL use:
+LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → COMPARE → CLASSIFY → RESUME
+
+Do not execute implementation merely because a Handoff contains a next-action sentence. First verify authority and current state against canonical/evidence when available.
+
+## 7. Compression Rule
+
+COMPACT ≠ HANDOFF.
+SUMMARY ≠ LOSSLESS HANDOFF.
+
+Compression is allowed only when recoverability is preserved.
+
+Prefer:
+- detailed state for behavior-changing decisions
+- concise pointers for stable canonical material
+- explicit state labels for unresolved/superseded items
+
+Do not optimize Handoff for shortness at the expense of recoverability.
+
+## 8. Regression Fixture Requirement
+
+TAKY SHOULD retain representative real failure cases as Handoff regression fixtures.
+
+Initial fixture: Schedule / Homework Allocation state-transfer failure.
+
+A compliant Handoff for this fixture must preserve at minimum:
+- Base Timetable is confirmed before workload allocation.
+- The timetable itself may remain unconfirmed even when prior concrete timetable candidates exist.
+- Prior candidate timetable ≠ current confirmed timetable.
+- fixed academy/school/life schedule and travel/buffer affect capacity.
+- Subject interprets; MAIN allocates.
+- FREE TIME EXISTS ≠ MUST STUDY.
+- CAPACITY ≠ REQUIRED STUDY AMOUNT.
+- PLANNED STUDY END ≤ 22:00 is a planning boundary, not proof of forced termination.
+- incomplete work becomes Carry-over rather than silent deletion/failure.
+- planned-vs-actual duration/history may inform later allocation.
+- parent checking / correction flow and other resource dependencies must not disappear if active in the source state.
+
+This fixture validates state-transfer behavior; it does not itself promote project-specific schedule details into GRAND MASTER CORE.
+
+## 9. Handoff Validation Result Schema
+
+HANDOFF VALIDATION
+- Canonical reference: PASS / FAIL / UNKNOWN
+- Source coverage: PASS / FAIL / UNKNOWN
+- Protected decisions: PASS / FAIL / UNKNOWN
+- User corrections: PASS / FAIL / UNKNOWN
+- HOLD/CONFLICT preservation: PASS / FAIL / UNKNOWN
+- Superseded-state separation: PASS / FAIL / UNKNOWN
+- Source pointer recoverability: PASS / FAIL / UNKNOWN
+- Last-valid-state recovery: PASS / FAIL / UNKNOWN
+- Validation-state accuracy: PASS / FAIL / UNKNOWN
+- Next-action accuracy: PASS / FAIL / UNKNOWN
+- Resume simulation: PASS / FAIL / UNKNOWN
+- Regression fixture: PASS / FAIL / UNKNOWN
+
+OVERALL HANDOFF PASS requires all materially applicable gates to PASS.
+
+## 10. Boundary
+
+This protocol governs state transfer and recovery quality. It does not make Handoff canonical authority and does not absorb project/domain rules into GRAND MASTER.
+
+Project-specific detailed schedules, app behavior, business data and artifacts remain owned by their proper lower master/source. The Handoff preserves or points to them; it does not redefine their authority.
