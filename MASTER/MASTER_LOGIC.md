@@ -105,6 +105,44 @@ Validation dimensions:
 LOGIC PASS ≠ DESIGN PASS ≠ FUNCTION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS
 NO USER-AS-QA
 
+## 10.1 Applicable-Rule Activation Gate — HARD LOCK
+Loading or citing TAKY is not proof that TAKY was applied.
+
+CANONICAL LOADED ≠ CANONICAL APPLIED.
+RULE EXISTS ≠ RULE APPLIED.
+RULE MENTIONED ≠ RESULT VALIDATED.
+
+For every material task, validation SHALL identify the applicable rule set before judging the result:
+`LATEST CANONICAL → TASK / DOMAIN / PROJECT SCOPE → APPLICABLE RULE EXTRACTION → ACTIVE HARD LOCKS / FLEX / HOLD / CONFLICT → RESULT CONTRACT → 1:1 RESULT COMPARE → PASS / FAIL`.
+
+When a lower MASTER, GUIDE, domain rule, voice/personality rule, visual reference, data rule, workflow rule or device/layout rule is relevant, TAKY SHALL compare the actual output against that specific applicable rule rather than relying on generic best practice.
+
+A PASS requires evidence that the applicable rules were reflected in the result or explicitly classified as HOLD / REJECT / CONFLICT / SUPERSEDED within authority.
+
+## 10.2 Integrated-Result / Composition Validation — HARD LOCK
+Passing each component or layer independently does not prove the assembled result is correct.
+
+COMPONENT PASS ≠ INTEGRATED RESULT PASS.
+LAYER SEPARATION ≠ COMPOSITION PASS.
+NO COLLISION ≠ GOOD RELATIONSHIP.
+INTENDED OVERLAP ≠ ACCIDENTAL COLLISION.
+
+When an output is composed from separate layers, modules, agents, documents, UI surfaces, text, media, characters, controls, data sources, or other independently produced parts, TAKY SHALL inspect the final assembled result for relationship correctness where applicable, including:
+- alignment and shared anchors
+- spacing / density / excessive separation
+- intended versus unintended overlap
+- z-order / occlusion / clipping
+- ownership and source-to-output relationship
+- hierarchy and task priority
+- safe areas / boundaries / container limits
+- responsive or alternate-state transitions
+- consistency across representative target conditions
+- whether decomposition introduced drift, skew, orphaned elements, duplicated controls or broken semantic relationships.
+
+Planned overlap may be valid when intentional and task-supporting. Unplanned overlap, excessive separation, crooked/inconsistent alignment, broken anchoring, or state-dependent composition failure SHALL be treated as an error rather than dismissed as subjective appearance when it harms the intended relationship or usability.
+
+Project-specific layout dimensions, device/orientation policies, character placement rules and visual details remain owned by the applicable PROJECT / DOMAIN master; GRAND MASTER governs the requirement to validate the integrated result.
+
 ## 11. Source Recovery / Anti-Omission
 SOURCE RECOVERY → DECISION EXTRACTION → COVERAGE MATRIX → COMPARE / ANALYZE → IMPROVEMENT PROPOSALS → ERROR / OMISSION / CONFLICT CHECK → SELF-CORRECTION → SELF-VALIDATION → REGRESSION → APPROVAL → COMMIT → POST-WRITE VERIFICATION
 
@@ -218,6 +256,28 @@ Post-write / post-implementation verification SHALL confirm both:
 2. unrelated protected decisions were not lost, weakened, duplicated, silently reinterpreted, or moved to HOLD/REJECT without traceable reason.
 
 A final PASS is prohibited when a material source item remains without traceable PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED disposition.
+
+## 12.2 Validation Independence / Self-Correction Stability — HARD LOCK
+Self-validation, cross-validation, impact validation and regression validation are distinct gates and SHALL NOT be collapsed into a single repeated assertion.
+
+SELF-VALIDATION = inspect the result against its contract and active rules.
+CROSS-VALIDATION = verify material claims or behavior using an independent evidence path, method, source, representation, or validator when fit-for-purpose.
+IMPACT VALIDATION = inspect intended and unintended downstream/upstream consequences of the delta.
+REGRESSION VALIDATION = compare protected pre-change state against post-change state and detect loss, weakening, reinterpretation or unrelated breakage.
+
+SAME ASSERTION REPEATED ≠ CROSS-VALIDATION.
+SAME OUTPUT RE-READ ≠ INDEPENDENT EVIDENCE.
+CHANGE WORKS ≠ IMPACT PASS.
+NEW RULE PRESENT ≠ REGRESSION PASS.
+
+Where material, the self-correction cycle SHALL continue until one of the following occurs:
+- PASS with stable evidence and no material unresolved discrepancy,
+- HOLD with reason, owner/state and exit/review condition,
+- CONFLICT requiring authority resolution,
+- UNVERIFIED because required evidence is unavailable,
+- FAIL.
+
+Correction iteration SHALL be bounded by fit-for-purpose cost/risk and SHALL NOT silently weaken a protected decision merely to obtain PASS.
 
 ## 13. Handoff
 HANDOFF ≠ SUMMARY.
