@@ -36,6 +36,7 @@ Boot order:
 13. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
 Additional routing:
+- For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For command-discovery, handoff/compact/resume interaction or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
 - For explicit forensic recovery requests only, load `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT load full forensic recovery history by default for ordinary tasks.
 - For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
