@@ -35,6 +35,12 @@ Boot order:
 12. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
 13. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
+Additional routing:
+- For command-discovery, handoff/compact/resume interaction or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
+- For explicit forensic recovery requests only, load `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT load full forensic recovery history by default for ordinary tasks.
+- For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
+- For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
+
 Canonical owner presence gate:
 A materially active requirement SHALL have a recoverable canonical owning MASTER/OS/DOMAIN/PROJECT destination or an explicit HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED disposition.
 A historical MASTER/Handoff containing active rules while the current canonical owner file is absent or incomplete is `MISSING / MIGRATION_REQUIRED`, not PASS.
@@ -46,6 +52,14 @@ A workspace/dashboard/database that displays or coordinates information SHALL NO
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
 - 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Decision-Coverage Matrix → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical owner/lower-layer write → post-write verification → history
+- `/` → context-aware command discovery; does not bypass validation or approval
+- `/compact` → compress current context for continuation; not a full handoff
+- `/인수인계` → build a full material handoff from accessible conversation/source state
+- `/재개` → recover Handoff plus actual referenced/relevant sources and resume
+- `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only forensic recovery mode
+
+FORENSIC RECOVERY IS CONDITIONAL.
+TAKY SHALL NOT perform full historical source recovery, full conversation reconstruction or exhaustive reverse tracing for ordinary tasks unless the task materially requires it or the user explicitly invokes forensic recovery.
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
