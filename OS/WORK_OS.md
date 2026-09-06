@@ -15,7 +15,61 @@ Operational details belong here or in subordinate modules rather than GRAND MAST
 Normative operational-workspace governance:
 `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`
 
-## 2. Notion Operations
+## 2. Conversation Continuity / Persistent Work Surfaces
+
+TAKY Work OS SHALL preserve the distinction between conversation convenience and actual persistent storage.
+
+Canonical operational surfaces:
+- `_PROJECTS` = project-classified persistent work
+- `_TEMP` = conversation files / materials whose project destination is not yet reliable
+- `_HANDOFF` = latest and historical handoff packets and resume pointers
+- `_LAB` = pre-canonical ideas, experiments, research and exploratory references
+- `_COMMON` = reusable shared working resources
+
+`CHAT ATTACHMENT EXISTS ≠ PERSISTENT FILE SAVED`
+`FILE NAME RECORDED ≠ FILE BYTES RECOVERABLE`
+`HANDOFF POINTER EXISTS ≠ POINTER RECOVERABLE`
+
+For a material conversation file, Work OS should verify whether the source was actually persisted before later claiming recoverability.
+If project identity is clear, classify to the applicable project work item.
+If material ambiguity remains, preserve in `_TEMP` rather than guessing a project.
+
+`_LAB` content SHALL NOT automatically become MASTER, approved project requirement or implementation scope.
+LAB promotion requires later review and applicable user approval.
+
+## 3. Attachment / Source Registry — IMPLEMENTATION CONTRACT
+
+Work OS shall maintain or provide an equivalent recoverable index for material conversation attachments and generated source-dependent artifacts.
+
+Required semantic fields:
+- source/attachment identity
+- conversation or work-item relation
+- original filename
+- project/classification when known
+- intended/actual destination
+- persistence status
+- persistence verification time/evidence
+- original vs derived status
+- handoff/source pointer
+- checksum/version when available and useful
+
+Exact schema names remain implementation-owned; the semantic requirements above are normative.
+
+A failed or unsupported save SHALL be reported as failed/unsupported and SHALL NOT be rewritten as completed.
+
+## 4. Conversation Close / Resume Workflow
+
+When the user requests conversation close, full preservation or handoff, the workflow should, within available tool capability:
+
+`FILES USED / UPLOADED → PERSISTENCE CHECK → TEMP / PROJECT CLASSIFICATION → USER CORRECTIONS → CONFIRMED / HOLD / CONFLICT / SUPERSEDED → CURRENT STATE → NEXT ACTION → HANDOFF → SOURCE POINTERS → RESUME INSTRUCTION`
+
+Handoff filenames should avoid collisions and preserve latest/history distinction.
+
+On `/재개`, TAKY SHALL use Handoff as a recovery index and follow relevant actual files, folders, archives and project sources when available.
+
+`HANDOFF = RECOVERY INDEX / EVIDENCE, NOT RECOVERY BOUNDARY`
+
+## 5. Notion Operations
 
 Notion is an operational collaboration/work-management surface, not TAKY canonical authority and not a replacement for approved numeric/calculation, geometry/drawing, original evidence-file, legal/regulatory or official approval authorities.
 
@@ -36,7 +90,7 @@ Current connected-Notion implementation state from the 2026-09-05 reflection:
 - Notion automation runtime: UNVERIFIED
 - offline/conflict/reconciliation runtime: UNVERIFIED
 
-## 3. Mail Operations
+## 6. Mail Operations
 
 Mail operations are a lightweight business-record / mail-history / archiving capability. They are separate by default from architecture design-overview, calculation, release, and submission logic. A project/domain may link mail evidence later without changing this ownership boundary.
 
@@ -49,7 +103,7 @@ Module ownership:
 
 Detailed contract: `OS/MAIL_OPS.md`.
 
-## 4. Mail Runtime State
+## 7. Mail Runtime State
 
 Provider connection state is operational evidence, not permanent MASTER truth. It must be rechecked from the actual provider/connector when execution depends on it.
 
@@ -64,7 +118,7 @@ Hard rules:
 - ARCHIVE LOGIC PASS ≠ LOCAL AUTOMATION PASS
 - PROVIDER STATE IN HANDOFF ≠ CURRENT STATE UNTIL RECHECKED
 
-## 5. Validation State
+## 8. Validation State
 
 - Operational Workspace Protocol placement: PASS
 - Notion Ops ownership placement: PASS
@@ -76,7 +130,9 @@ Hard rules:
 - Project classification design: LOGIC PASS / IMPLEMENTATION NOT VALIDATED
 - Windows/local staging archive: NOT IMPLEMENTED
 - Full MAIL OPS E2E: NOT YET PASS
+- Conversation continuity logic placement: INTEGRATED / RUNTIME VALIDATION REQUIRED
+- Attachment/source registry semantic contract: INTEGRATED / IMPLEMENTATION NOT VALIDATED
 
-## 6. Revision
+## 9. Revision
 
 Per GRAND MASTER governance, `/반영` does not increment Revision. This remains REV_00 until explicit user finalization establishes an official revision.
