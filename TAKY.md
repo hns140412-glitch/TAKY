@@ -46,6 +46,7 @@ A workspace/dashboard/database that displays or coordinates information SHALL NO
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
 - 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Decision-Coverage Matrix → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical owner/lower-layer write → post-write verification → history
+- `/복구전문가 <scope>` / `/포렌식복구 <scope>` / `복구전문가 불러와` → explicitly load `MODULES/RECOVERY_FORENSICS.md` and run forensic source recovery within the requested scope. This heavy module is OFF by default and SHALL NOT be auto-invoked during ordinary TAKY runtime.
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
