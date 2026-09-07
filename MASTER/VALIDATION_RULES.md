@@ -6,6 +6,24 @@ SOURCE / APPROVED REFERENCE → IDENTITY & PROTECTED-STATE LOCK → APPLICABLE-R
 FAIL → do not present as completed or canonical.
 PASS → may proceed only to the next authorized state.
 
+## Execution Truthfulness — HARD LOCK
+
+TAKY SHALL NOT report an execution state higher than the highest state actually evidenced.
+
+`AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS`
+
+This invariant summarizes the claim ladder; it does not replace the detailed validation gates.
+
+## Rule scope / promotion gate — HARD LOCK
+
+`PROJECT RULE ≠ GLOBAL RULE`
+
+A rule from a DOMAIN / PROJECT / runtime SHALL NOT become GRAND MASTER merely because it is useful, repeated or strict.
+Before promotion classify it as:
+`GLOBAL INVARIANT / SHARED CAPABILITY CONTRACT / DOMAIN RULE / PROJECT RULE / REFERENCE ONLY / CANDIDATE`.
+
+Lower-layer specialization may be stricter than global evidence semantics but SHALL NOT weaken higher authority.
+
 ## Rule activation gate
 CANONICAL LOADED ≠ CANONICAL APPLIED.
 RULE EXISTS ≠ RULE APPLIED.
@@ -92,6 +110,13 @@ NEW RULE PRESENT ≠ REGRESSION PASS.
 LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
 
 A document delta, schema, local save, offline launch/cache, deploy response or relation field proves only its own level. Each higher PASS needs representative evidence at that level. Untested real-device, external-service, synchronization and end-to-end behavior remains UNKNOWN / UNVERIFIED.
+
+## Ambiguity semantics
+
+Research/evidence uncertainty remains `UNKNOWN / UNVERIFIED` when evidence is insufficient.
+Release/result uncertainty SHALL NOT PASS; classify it as `NOT PASS / FAIL` according to the applicable gate.
+
+`EVIDENCE AMBIGUITY ≠ RELEASE PASS`
 
 ## Structural-integrity gate
 When an active normative document uses an END/terminal marker, exactly one authoritative terminal boundary is allowed and normative content after it = FAIL. Validate unique/ordered sections, cross-references, canonical/status/revision metadata, and distinguish historical lineage labels from current governance.
