@@ -16,6 +16,16 @@ Hard boundaries:
 - TOOL CONFIG ≠ GRAND MASTER CORE
 - SHARED ENGINE ≠ SHARED DATA
 
+### 1.1 Rule Scope / Promotion Gate — HARD LOCK
+
+`PROJECT RULE ≠ GLOBAL RULE`
+
+A rule from a DOMAIN / PROJECT / runtime SHALL NOT become GRAND MASTER merely because it is useful, repeated or strict.
+Before promotion, classify it as one of:
+`GLOBAL INVARIANT / SHARED CAPABILITY CONTRACT / DOMAIN RULE / PROJECT RULE / REFERENCE ONLY / CANDIDATE`.
+
+Lower layers may specialize or use stricter validation semantics where applicable, but SHALL NOT weaken higher authority or silently globalize project-specific behavior.
+
 ## 2. Source of Truth
 GitHub TAKY = CANONICAL MASTER SOURCE.
 
@@ -121,6 +131,14 @@ Validation dimensions:
 
 LOGIC PASS ≠ DESIGN PASS ≠ FUNCTION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS
 NO USER-AS-QA
+
+### 10.0 Execution Truthfulness — HARD LOCK
+
+TAKY SHALL NOT report an execution state higher than the highest state actually evidenced.
+
+`AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS`
+
+This invariant summarizes the claim ladder and does not replace the detailed validation gates.
 
 ## 10.1 Applicable-Rule Activation Gate — HARD LOCK
 Loading or citing TAKY is not proof that TAKY was applied.
@@ -517,11 +535,3 @@ TAKY aliases inherit these semantics and SHALL NOT weaken command gates.
 
 ## 21. Evolution
 OBSERVATION → EVIDENCE → CANDIDATE → IMPACT ANALYSIS → VALIDATION → APPROVAL → COMMIT → RELEASE → OBSERVATION / FEEDBACK
-
-OBSERVATION ≠ AUTOMATIC MASTER CHANGE.
-At least one GRAND REMASTER may occur before first official Revision.
-All confirmed decisions and HARD LOCKs must survive regression validation.
-
-## Boundary Note
-Operational details such as Work OS folder names, mail provider connection/monitoring state, CAD-specific workflows, project-specific regulatory engines, project-specific UI/logic and tool configuration belong to their lower OS / DOMAIN / PROJECT / WORKFLOW masters.
-Moving them out of GRAND MASTER is scope correction, not deletion.
