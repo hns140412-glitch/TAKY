@@ -224,13 +224,65 @@ Piano/practice requires actual performance evidence where applicable.
 
 ## 12. ASSIGNMENT INTAKE / OCR / ANSWER KEY
 
-Parent homework intake should support fast continuous capture rather than repeated classification during shooting.
+Parent homework intake SHALL prioritize uninterrupted capture. The parent does not classify each photo while shooting, and the capture surface does not emphasize a running photo count.
 
-`continuous capture → temporary thumbnails → add / delete / retake → finish capture → batch analysis → grouping → Review-before-Commit → CONFIRMED ASSIGNMENT`
+Canonical flow:
+`ASSIGNMENT INTAKE → CONTINUOUS CAPTURE → AUTO LOCAL TEMP SAVE → IMMEDIATE NEXT CAPTURE → ANALYSIS HANDOFF → BATCH OCR → GROUP / CLASSIFY → QUALITY GATE → TARGETED RETAKE WHEN NEEDED → TARGETED RE-ANALYSIS → REVIEW-BEFORE-COMMIT → CONFIRMED ASSIGNMENT → GOOGLE DRIVE SAVE / SYNC → RETURN TO CAPTURE`
+
+The analysis handoff is a batch boundary, not the end of capture.
+`ANALYZE NOW ≠ CAPTURE COMPLETE`
+After analysis, the parent may immediately continue capturing another batch.
+
+Capture interaction contract:
+- The normal camera surface prioritizes the live view and bottom shutter.
+- Each shutter action immediately creates a durable local temporary original and returns to the next shot without a blocking modal, classification step or verbose toast.
+- Add / delete / retake remain available outside the rapid shutter path.
+- Photo count may exist as internal state or recovery evidence, but SHALL NOT compete with the shutter during normal capture.
+- Each original keeps an immutable `captureId`, `batchId` and stable `displayOrder`. The visible sequence number is derived from that order.
+- A quality failure SHALL identify the exact photo by thumbnail + sequence and request only that photo again.
+- Retake replaces the targeted original, preserves valid photos/results, prevents duplicate membership and re-runs only the affected analysis where safe.
+- One bad photo SHALL NOT force a full-batch restart.
 
 Grouping evidence may include cover, subject/unit/title, problem content, page number, capture order, layout similarity and answer-key pattern. Capture order is evidence, not an absolute rule.
 
 `CAMERA ORIGINAL ≠ OCR DRAFT ≠ CONFIRMED ASSIGNMENT`
+`LOCAL TEMP SAVE ≠ GOOGLE DRIVE SAVE ACK`
+`BATCH ANALYSIS PASS ≠ HUMAN REVIEW / COMMIT`
+
+System/action copy is concise and literal:
+- primary analysis action: `분석 맡기기`
+- OCR: `사진 분석 중`
+- classification: `자료 분류 중`
+- review pass: `결과 확인 중`
+- batch result: `분석 완료`
+- repair action: `N번째 장 다시 찍기`
+- external save acknowledgement: `Google Drive 저장 완료`
+- next action: `이어서 촬영하기`
+
+Guide copy carries warmth and wit without obscuring the action:
+- analysis handoff: `좋아, 이제 내 차례네.`
+- OCR: `사진 속 단서부터 꺼내는 중.`
+- classification: `비슷한 건 모으고, 수상한 건 따로.`
+- review pass: `놓친 게 있나 한 바퀴만 더.`
+- success / return: `정리 끝. 다음 사진도 가져와.`
+- glare retake: `N번째 장은 빛이 먼저 나섰네. 이 장만 다시 부탁해.`
+- blur retake: `N번째 장은 초점이 살짝 길을 잃었네. 이 장만 다시 부탁해.`
+- crop retake: `N번째 장은 아래쪽이 숨었네. 이 장만 다시 부탁해.`
+- duplicate check: `N번째 장은 앞 사진과 너무 닮았는데? 한 번만 확인해줘.`
+- Drive acknowledgement: `제자리까지 잘 데려다 놨어.`
+
+Copy hard locks:
+- `시스템은 정확하게, Guide는 따뜻하고 위트 있게.`
+- Guide does not joke about the child, the parent's mistake or learning weakness. Wit may target light, focus, the page, the camera/system or Guide itself.
+- Keep lines short, calm and non-babyish. No inflated praise, diagnosis, blame or technical explanation.
+- Per-shot Guide speech SHALL NOT interrupt rapid capture.
+- `촬영 완료`, persistent count emphasis, per-shot forced classification, generic sound-effect copy without state meaning and full-batch restart for one bad image are SUPERSEDED / REJECTED.
+
+Ownership boundary:
+- GUIDE / MAIN owns assignment-intake interpretation, grouping, review and confirmation.
+- Assignment Camera/OCR intake is a shared GUIDE capability. A functional app may render or call it but SHALL NOT redefine its meaning or absorb MAIN authority.
+- Provider choice, exact OCR confidence thresholds, retry limits and live background analysis scheduling remain HOLD until project/runtime validation.
+- PWA implementation, deployment and real-device evidence are outside this logic/copy delta and remain UNVERIFIED.
 
 Answer-key source is separate from assignment source.
 `ANSWER KEY EXISTS ≠ CHILD CAN ACCESS ANSWER`
