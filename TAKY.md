@@ -37,7 +37,8 @@ Boot order:
 
 Additional routing:
 - For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
-- For command-discovery, handoff/compact/resume interaction or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
+- For learning-session wrap-up or reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character/personality request.
+- For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
 - For explicit forensic recovery requests only, load `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT load full forensic recovery history by default for ordinary tasks.
 - For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
 - For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
@@ -57,10 +58,14 @@ A workspace/dashboard/database that displays or coordinates information SHALL NO
 - `/compact` → compress current context for continuation; not a full handoff
 - `/인수인계` → build a full material handoff from accessible conversation/source state
 - `/재개` → recover Handoff plus actual referenced/relevant sources and resume
+- `/대화전체보존` → preserve the materially accessible USER↔Assistant conversation in original order as evidence; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
+- `대화 종료` → persistence check → TEMP/project classification → Handoff → source pointers → resume instruction
 - `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only forensic recovery mode
 
 FORENSIC RECOVERY IS CONDITIONAL.
-TAKY SHALL NOT perform full historical source recovery, full conversation reconstruction or exhaustive reverse tracing for ordinary tasks unless the task materially requires it or the user explicitly invokes forensic recovery.
+Ordinary tasks may recover the sources needed for the active task and load applicable rules.
+Full historical forensic recovery, full conversation reconstruction and exhaustive reverse tracing run only on explicit user invocation.
+A material historical omission/conflict discovered during ordinary work may be marked `RECOVERY_REQUIRED` without auto-starting full forensics.
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
@@ -114,6 +119,9 @@ TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
 STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION.
 PROJECTION WRITE ≠ SOURCE COMMIT.
+
+`EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed the highest execution state actually evidenced.
+`PROJECT RULE ≠ GLOBAL RULE`: lower-layer rules require explicit scope/promotion classification before becoming GRAND MASTER invariants.
 
 For material product/result work, validate the applicable chain:
 `SOURCE / DECISION → OWNER MASTER → DESIGN / UI → FUNCTION / DATA → IMPLEMENTATION → TEST / EVIDENCE → ACTUAL RESULT`, and reverse-trace the actual result back to active authority.
