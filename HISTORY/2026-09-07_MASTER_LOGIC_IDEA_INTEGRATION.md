@@ -59,7 +59,10 @@ Integrate the source-recovered idea/decision compendium into the correct canonic
 - `MASTER/MASTER_LOGIC.md`
   - Rule Scope / Promotion Gate
   - Execution Truthfulness hard lock
-  - commit: `31a339f96dce1c08bc775e2bdd65977615a36623`
+  - initial integration commit: `31a339f96dce1c08bc775e2bdd65977615a36623`
+  - post-write self-validation detected accidental loss of the pre-existing Evolution/Boundary tail caused by a partial-file replacement source
+  - self-correction restored `OBSERVATION ≠ AUTOMATIC MASTER CHANGE`, GRAND REMASTER note, regression-survival rule and Boundary Note
+  - corrective commit: `a17ee78f26f3db9cc64b9fd1c717ca316dc8e87b`
 
 ### Hide & Seek project (`ZPD-Word` repository)
 - `Hide_Seek_UI_MASTER_LOGIC_REV_03.md`
@@ -97,13 +100,32 @@ Integrate the source-recovered idea/decision compendium into the correct canonic
 - Diagram First/Table First/Exact Text as hard locks
 - destructive Notion empty-data-source deletion
 
-## Validation requirement
-Post-write verification must confirm:
-1. intended deltas are present;
-2. stale contradictory wording is removed where in scope;
-3. existing protected rules were not silently lost;
-4. no HOLD/CONFLICT/RECOVERY_REQUIRED item was promoted;
-5. project-specific rules remain in correct owners;
-6. logic write is not reported as runtime/deploy/release completion.
+## Post-write verification result
+
+### Intended-delta presence
+- Recovery activation / chronology / source priority / contamination guard / output contract: VERIFIED
+- Execution Truthfulness / Project Rule ≠ Global Rule: VERIFIED
+- Work OS continuity / LAB schema-light / Backup≠Handoff: VERIFIED
+- `/대화전체보존` / `대화 종료` / `/검토≠/재개`: VERIFIED
+- One Good Reflection routing hook: VERIFIED
+- parent GUIDE Hide & Seek normalization: VERIFIED
+- Hide Rapid Capture inheritance / OCR provenance / device contract: VERIFIED
+- Ready Planner entity separation: VERIFIED
+
+### Regression / structural check
+- accidental MASTER_LOGIC tail loss: DETECTED AND SELF-CORRECTED before final status
+- protected Evolution/Boundary rules: RESTORED / VERIFIED
+- Hide master: one active terminal `END — HIDE & SEEK UI MASTER LOGIC REV_03`
+- Ready master: one active terminal `END — READY & SET UI MASTER LOGIC REV_07`
+- unresolved HOLD / CONFLICT / RECOVERY_REQUIRED items: NOT SILENTLY PROMOTED
+- project-specific logic remained in project owners rather than being copied wholesale into GRAND MASTER
+
+### Layer status
+- CANONICAL / PROJECT MASTER LOGIC WRITE: PASS
+- POST-WRITE FETCH / SELF-VALIDATION: PASS after self-correction
+- RUNTIME IMPLEMENTATION: NOT PERFORMED as part of this integration
+- DEPLOYMENT: NOT PERFORMED
+- RELEASE PASS: NOT PERFORMED
+- inaccessible historical source coverage: `UNVERIFIED_SOURCE_COVERAGE` remains where already identified
 
 `CANONICAL LOGIC WRITE ≠ IMPLEMENTATION PASS ≠ DEPLOY PASS ≠ RELEASE PASS`
