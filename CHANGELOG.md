@@ -12,6 +12,7 @@
 - `HOLD / UNVERIFIED`: OCR provider and confidence thresholds, retry limits, live background-analysis scheduling, PWA implementation/deployment, real-device behavior and Release PASS.
 - Scope evidence: user explicitly authorized capture-analysis flow and Guide copy work while reserving actual implementation and deployment for separate work.
 - Post-write verification is required against GitHub canonical content. This document change alone proves logic/copy reflection only, not runtime or deployment behavior.
+- Canonical write evidence: GUIDE commit `fcd55300176d0caed032b6b2cdb002397344928e`; Ready & Set commit `367c998ce3b93d25abb20cfaf02b6da5a6da6b29`.
 - Rollback references: pre-change GUIDE blob `9aef57d085eed71c7c02aa6acc0e071e7714d3f6`; pre-change Ready & Set REV_07 blob `175117a6f6d1d8ae76629a6854a9d0fd52002fe4`.
 
 
