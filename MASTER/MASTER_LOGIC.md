@@ -535,3 +535,11 @@ TAKY aliases inherit these semantics and SHALL NOT weaken command gates.
 
 ## 21. Evolution
 OBSERVATION → EVIDENCE → CANDIDATE → IMPACT ANALYSIS → VALIDATION → APPROVAL → COMMIT → RELEASE → OBSERVATION / FEEDBACK
+
+OBSERVATION ≠ AUTOMATIC MASTER CHANGE.
+At least one GRAND REMASTER may occur before first official Revision.
+All confirmed decisions and HARD LOCKs must survive regression validation.
+
+## Boundary Note
+Operational details such as Work OS folder names, mail provider connection/monitoring state, CAD-specific workflows, project-specific regulatory engines, project-specific UI/logic and tool configuration belong to their lower OS / DOMAIN / PROJECT / WORKFLOW masters.
+Moving them out of GRAND MASTER is scope correction, not deletion.
