@@ -15,7 +15,16 @@ Operational details belong here or in subordinate modules rather than GRAND MAST
 Normative operational-workspace governance:
 `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`
 
+Central `TAKY/OS/WORK_OS.md` is the normative cross-project Work OS semantic contract.
+The `TAKY-WORK-OS` repository is a subordinate implementation / operating repository for reusable workflows, automation, schemas, scripts and integrations.
+When an external Work OS rule conflicts with this central contract, central TAKY authority governs unless an approved ownership change explicitly says otherwise.
+The implementation repository SHOULD record the inherited central Work OS contract/version where useful for drift control.
+
 ## 2. Conversation Continuity / Persistent Work Surfaces
+
+`CONTINUITY IS THE PURPOSE; FOLDERS ARE IMPLEMENTATION SURFACES`
+
+The purpose of Work OS continuity is to preserve recoverable sources, decisions, user corrections, HOLD / CONFLICT / SUPERSEDED state, work state and next action across conversations and work sessions.
 
 TAKY Work OS SHALL preserve the distinction between conversation convenience and actual persistent storage.
 
@@ -36,6 +45,15 @@ If material ambiguity remains, preserve in `_TEMP` rather than guessing a projec
 
 `_LAB` content SHALL NOT automatically become MASTER, approved project requirement or implementation scope.
 LAB promotion requires later review and applicable user approval.
+
+`_LAB` is schema-light by default.
+The user SHALL NOT be required to classify an idea into a rigid taxonomy before saving it.
+TAKY may maintain internal semantic tags, relations, project affinity and resurfacing metadata.
+When new work materially relates to a LAB item, TAKY may surface the matching candidate for `ADOPT / HOLD / REJECT` review.
+
+`LAB RELEVANCE ≠ AUTO-PROMOTION`
+
+Historical rigid user-facing trees such as `Inbox / Ideas / Research / AI / YouTube / Incubator / Adopted` are not mandatory Work OS structure.
 
 ## 3. Attachment / Source Registry — IMPLEMENTATION CONTRACT
 
@@ -68,6 +86,14 @@ Handoff filenames should avoid collisions and preserve latest/history distinctio
 On `/재개`, TAKY SHALL use Handoff as a recovery index and follow relevant actual files, folders, archives and project sources when available.
 
 `HANDOFF = RECOVERY INDEX / EVIDENCE, NOT RECOVERY BOUNDARY`
+
+Role separation:
+- `RAW BACKUP = EVIDENCE ARCHIVE`
+- `HANDOFF = RESUME / RECOVERY INDEX`
+- `RECOVERY LEDGER = DECISION RECONSTRUCTION`
+- `CANONICAL = ACTIVE GOVERNED RULE`
+
+`BACKUP ≠ HANDOFF`
 
 ## 5. Notion Operations
 
