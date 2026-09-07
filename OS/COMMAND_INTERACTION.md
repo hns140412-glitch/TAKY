@@ -19,6 +19,7 @@ Natural-language requests and slash commands SHALL route to the same underlying 
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
+`/검토 ≠ /재개`
 `/compact ≠ /인수인계`
 
 `/compact`
@@ -29,6 +30,20 @@ Natural-language requests and slash commands SHALL route to the same underlying 
 
 `/재개`
 = recover the applicable state from Handoff plus actual recoverable sources, then resume from the last validated position.
+
+`/대화전체보존`
+= preserve the materially accessible USER↔Assistant conversation in original order as evidence.
+
+Rules:
+- do not replace accessible raw turns with summary;
+- inaccessible historical source = `UNVERIFIED_SOURCE_COVERAGE`;
+- system/developer instructions, private reasoning and internal tool logs are excluded;
+- persistent-save claims require actual save/pointer verification.
+
+`TRANSCRIPT ARCHIVE ≠ HANDOFF`
+
+`대화 종료`
+= persistence check → TEMP/project classification → user corrections/dispositions → current state → next action → Handoff → source pointers → resume instruction.
 
 Domain commands should compose Core workflows instead of cloning governance with conflicting logic.
 
