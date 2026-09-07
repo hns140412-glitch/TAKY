@@ -1,5 +1,20 @@
 # TAKY CHANGELOG
 
+## 2026-09-07 — GUIDE continuous capture / batch analysis / targeted-retake copy contract
+
+- Updated `OS/GUIDE_FAMILY_LEARNING_OS.md` and the Ready & Set project baseline to make assignment analysis a batch boundary rather than the end of capture.
+- Canonical flow now preserves uninterrupted shutter use, durable local temporary originals, immediate next capture, batch OCR/grouping, quality gate, targeted retake/re-analysis, Review-before-Commit, confirmed assignment, Google Drive acknowledgement and return to capture.
+- Adopted `분석 맡기기` as the literal primary action; Guide warmth/wit is separated into short lines such as `좋아, 이제 내 차례네.`
+- Normal capture no longer emphasizes photo count. Stable `captureId / batchId / displayOrder` remains required so a failed result can identify `N번째 장` with thumbnail and replace only that original while preserving valid results.
+- Added short analysis-state copy and reason-specific repair lines for glare, blur, crop and possible duplicate. Humor targets light/focus/page/system, never the child, parent or learning weakness.
+- `SUPERSEDED / REJECTED`: `촬영 완료`, persistent count emphasis, per-shot forced classification, generic state-ambiguous sound-effect copy and full-batch restart for one failed image.
+- `OWNERSHIP_TRANSFER / PRESERVE`: GUIDE / MAIN owns assignment-intake interpretation, grouping, review and confirmation; functional apps may render/call the shared intake but do not redefine it or absorb MAIN authority.
+- `HOLD / UNVERIFIED`: OCR provider and confidence thresholds, retry limits, live background-analysis scheduling, PWA implementation/deployment, real-device behavior and Release PASS.
+- Scope evidence: user explicitly authorized capture-analysis flow and Guide copy work while reserving actual implementation and deployment for separate work.
+- Post-write verification is required against GitHub canonical content. This document change alone proves logic/copy reflection only, not runtime or deployment behavior.
+- Rollback references: pre-change GUIDE blob `9aef57d085eed71c7c02aa6acc0e071e7714d3f6`; pre-change Ready & Set REV_07 blob `175117a6f6d1d8ae76629a6854a9d0fd52002fe4`.
+
+
 ## 2026-09-05 — REV_00 Full-source reverse-audit / End-to-end realization traceability hardening
 - Recovered and compared the latest canonical `TAKY.md`, `MASTER/MASTER_LOGIC.md`, `MASTER/VALIDATION_RULES.md`, `MASTER/HANDOFF_PROTOCOL.md`, current CHANGELOG, recoverable TAKY GRAND MASTER handoffs, Ready & Set REV_06 master, Ready & Set deep-comparison report, GUIDE/GRAND MASTER remaster handoff, schedule/homework source material, corrected lossless timetable Handoff, and representative Snap & Pop traceability material before writing.
 - Re-ran the requested sequence as distinct gates: error validation → self-correction → self-validation → cross-validation using independent source paths → impact validation → regression validation → forward/reverse decision trace.
