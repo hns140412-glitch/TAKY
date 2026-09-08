@@ -36,6 +36,7 @@ Boot order:
 13. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
 Additional routing:
+- For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then the project master and inherited detailed baseline. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md` sections 3–5 provide recoverable external project-source pointers for Ready-Set, ZPD-Word (current Hide & Seek), and Snap-Pop. Recheck those pointers before execution; the Handoff is not authority or proof of current implementation.
 - For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For learning-session wrap-up or reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character/personality request.
 - For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
