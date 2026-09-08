@@ -1,5 +1,17 @@
 # TAKY CHANGELOG
 
+## 2026-09-08 — Scoped audit metadata and owner-routing reconciliation
+
+User approved only REV/status, boot/source pointers, mobile documentation and resume-record corrections. No runtime code, deployment configuration, unresolved project behavior or automation changes.
+- A01 ADJUST: official shared-family status REV_00; historical filename retained; approved substantive sections 1–12 preserved.
+- A02 ADJUST: GUIDE OS precedes shared capability/project rules in entrypoint and comparison Handoff.
+- A03 ADJUST: entrypoint links existing external project-owner source pointers; full project/runtime comparison remains UNVERIFIED.
+- A04 ADJUST: architecture domain links retained detailed TAKY-WORK-OS/WORK_OS.md; no rule migration or legal-validation claim.
+- A05/A06: scoped TAKY-MOBILE documentation reconciliation is tracked in its README/MVP contract; code and Release PASS are not implied.
+- PRESERVE: GRAND MASTER, validation/approval gates, historical decisions, Special Friend/Core6 HOLD, project identity and implementation boundaries. No official revision increment.
+- Rollback baseline: TAKY `e1800f095ec21f1a03042044fbf695834c3cb219`; TAKY-MOBILE `7ad757ef3caeb93f103c97b5fc6b6ab5efff39e9`. Restore only scoped deltas after checking later decisions.
+- Validation: exact scoped replacement/addition checks before write; post-write full-content fetch comparison required. No full-history, real-device or Release PASS; Drive mirror/PC synchronization remain UNVERIFIED.
+
 ## 2026-09-07 — GUIDE continuous capture / batch analysis / targeted-retake copy contract
 
 - Updated `OS/GUIDE_FAMILY_LEARNING_OS.md` and the Ready & Set project baseline to make assignment analysis a batch boundary rather than the end of capture.
