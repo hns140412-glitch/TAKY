@@ -37,3 +37,7 @@ This process model is CONTEXT_SUPPORTED_INFERENCE from recovered work practice a
 ## 4. AUTHORITY
 Legal/regulatory, geometric, numerical and official approval authority remain source-specific.
 Notion, AI summary, report layout or prior project spreadsheet SHALL NOT silently replace those authorities.
+
+## 5. DETAILED OPERATING SOURCE POINTER
+
+Detailed retained architecture/regulatory operating rules are in `hns140412-glitch/TAKY-WORK-OS`, `WORK_OS.md` (https://github.com/hns140412-glitch/TAKY-WORK-OS/blob/main/WORK_OS.md). Recover its architecture process, applicability, calculation, condition and evidence sections when relevant. Central TAKY governance and this domain boundary remain applicable. This pointer preserves discoverability; it neither migrates/deletes those rules nor promotes candidates or verifies current legal applicability. Recheck the source version before execution.
