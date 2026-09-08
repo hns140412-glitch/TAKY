@@ -19,13 +19,13 @@ The goal is a detailed rule/function inventory and cross-owner reconciliation.
 
 Repository: `hns140412-glitch/TAKY`
 
-Load in this order:
+Load in this order (routing corrected 2026-09-08 to inherit TAKY.md; historical decisions remain preserved):
 1. `TAKY.md`
 2. `MASTER/MASTER_LOGIC.md`
 3. `MASTER/REVISION_GOVERNANCE.md`
-4. `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md`
-5. `OS/GUIDE_FAMILY_LEARNING_OS.md`
-6. `OS/GUIDE_CHARACTER_RELATIONSHIP.md`
+4. `OS/GUIDE_FAMILY_LEARNING_OS.md`
+5. `OS/GUIDE_CHARACTER_RELATIONSHIP.md`
+6. `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official status REV_00)
 7. `MASTER/TRACEABILITY_PROTOCOL.md`
 8. `MASTER/VALIDATION_RULES.md`
 9. `HISTORY/2026-09-07_GLOBAL_FORENSIC_RECOVERY_INTEGRATION.md`
