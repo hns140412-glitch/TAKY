@@ -1,9 +1,11 @@
-# Learning App Family Master — REV_01
+# Learning App Family Master — REV_00
 
-> Status: APPROVED SHARED MASTER
+> Status: REV_00 / PRE-CONFIRMATION; previously approved shared content preserved
+> Historical filename REV_01 is a lineage identifier, not official finalization.
 > Date: 2026-09-06
 > Scope: Ready & Set / Hide & Seek / Snap & Pop shared world, session, app-routing, Guide and PWA update contracts
-> Authority: TAKY governance > this shared master > project masters > implementation
+> Authority: TAKY / GRAND MASTER > applicable GUIDE / Family Learning OS rules > this shared capability contract > project masters > implementation
+> Load OS/GUIDE_FAMILY_LEARNING_OS.md first, and OS/GUIDE_CHARACTER_RELATIONSHIP.md when applicable. No existing Guide authority or project behavior is redefined by this metadata correction.
 
 ## 1. PRODUCT FAMILY PRINCIPLE — HARD LOCK
 
@@ -169,4 +171,4 @@ A release fails if any of the following occur:
 - Imagination Cloud becomes decorative or answer-generating,
 - child-defined island/base-camp names are lost after update.
 
-END — LEARNING APP FAMILY MASTER REV_01
+END — LEARNING APP FAMILY MASTER REV_00
