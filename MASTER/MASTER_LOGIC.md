@@ -1,10 +1,10 @@
-# TAKY GRAND MASTER — REV_00 FULL REWRITE CANDIDATE
+# TAKY GRAND MASTER LOGIC — REV_00 REMASTERED
 
-Status: CANDIDATE / NOT CANONICAL / PRE-CONFIRMATION
-Role: Lossless full rewrite candidate for TAKY highest internal governance logic.
-Canonical until approved replacement: `MASTER/MASTER_LOGIC.md`
+Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE / CANONICAL
+Role: Highest internal governance logic of TAKY.
+Canonical path: `MASTER/MASTER_LOGIC.md`
 
-This document reorganizes the current GRAND MASTER without granting itself authority to delete or weaken active decisions. Existing active meaning is PRESERVE unless explicitly ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED through an authorized decision.
+This document is the lossless structural rewrite of the protected pre-remaster GRAND MASTER. It reorganizes active governance without granting authority to delete or weaken active decisions. Existing active meaning is PRESERVE unless explicitly ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED through an authorized decision.
 
 ## 0. Protected Invariants — HARD LOCK
 - GitHub TAKY = CANONICAL MASTER SOURCE.
@@ -398,7 +398,9 @@ Document PASS ≠ Runtime/Implementation PASS. Known Baseline 01 source gaps rem
 OBSERVATION ≠ AUTOMATIC MASTER CHANGE.
 At least one GRAND REMASTER may occur before first official Revision. All confirmed decisions and HARD LOCKs must survive regression validation.
 
-## 23. Candidate Replacement Gate
-This file is a FULL REWRITE CANDIDATE, not canonical. It SHALL NOT replace `MASTER/MASTER_LOGIC.md` until full migration/reverse validation establishes that every material active rule from the protected canonical has a correct destination or explicit authorized disposition and no protected rule is weakened.
+## 23. Canonical Remaster Status
+This `MASTER/MASTER_LOGIC.md` file is the active REV_00 canonical GRAND MASTER after the approved structural rewrite. The protected pre-remaster state remains recoverable through repository history and `MASTER/SNAPSHOT_PRE_REMASTER_REV00.md`. The candidate and migration files remain validation/history evidence and do not supersede this canonical path.
+
+Known Baseline 01 source gaps remain `UNVERIFIED_SOURCE_COVERAGE`; canonical remaster completion SHALL NOT be misreported as full historical source recovery or runtime/implementation PASS.
 
 END
