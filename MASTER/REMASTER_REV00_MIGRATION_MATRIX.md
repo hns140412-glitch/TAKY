@@ -1,8 +1,11 @@
 # TAKY REV_00 FULL REWRITE — MIGRATION / VALIDATION MATRIX
 
-Status: FULL REWRITE VALIDATION EVIDENCE / NOT CANONICAL
-Canonical protected source: `MASTER/MASTER_LOGIC.md` blob `663b5f621500f8cbc4f64ea833c76930b2adc648`
-Candidate: `MASTER/REMASTER_REV00_DRAFT.md` blob `509ec30c89c3272d753eda08de90e6cc55a5911c`
+Status: POST-WRITE VALIDATION EVIDENCE / CANONICAL REPLACEMENT COMPLETE
+Protected pre-remaster canonical: `MASTER/MASTER_LOGIC.md` blob `663b5f621500f8cbc4f64ea833c76930b2adc648`
+Rewrite candidate evidence: `MASTER/REMASTER_REV00_DRAFT.md` blob `509ec30c89c3272d753eda08de90e6cc55a5911c`
+Active remastered canonical: `MASTER/MASTER_LOGIC.md` blob `0fce3b5af1b493f0d623468f42c60bb054933cd6`
+Canonical commit: `6408eaba739029749393b3375b2cbbe6c20ff4e8`
+Drive mirror: `TAKY_MASTER_MIRROR_REV_00` — CONTENT SYNCED / POST-WRITE VERIFIED
 
 ## 1. Canonical section → Rewrite destination
 | Old canonical | Active meaning | Rewrite destination | Disposition |
@@ -90,30 +93,26 @@ Candidate: `MASTER/REMASTER_REV00_DRAFT.md` blob `509ec30c89c3272d753eda08de90e6
 - Security/credential boundary: PASS.
 - Lower-layer ownership boundary: PASS.
 
-## 4. Structural validation
-- Candidate status explicitly NOT CANONICAL: PASS.
-- Single authoritative END at document end: PASS by readback inspection.
-- No normative text after END: PASS by readback inspection.
-- Duplicate active section identifiers: none detected in candidate.
-- Canonical pointer explicit: PASS.
-- Baseline source gaps not converted to PASS: PASS.
+## 4. Post-write validation
+- Latest canonical re-read before write matched protected SHA: PASS.
+- Canonical write executed: PASS.
+- First post-write check detected candidate-status metadata inconsistency: DETECTED.
+- Self-correction changed canonical header/status and replacement gate to canonical status: PASS.
+- Canonical post-write head readback: PASS.
+- Canonical post-write terminal END readback: PASS.
+- Canonical active blob SHA recorded: PASS.
+- Drive mirror rewritten to active canonical content + canonical metadata: PASS.
+- Drive mirror readback confirmed canonical commit/SHA and terminal END: PASS.
+- Drive mirror verification state changed to CONTENT SYNCED / POST-WRITE VERIFIED: PASS.
 
-## 5. Known compression / semantic-risk review
-The rewrite intentionally compresses examples and repeated prose while preserving governing semantics. Areas requiring special caution during canonical replacement:
-- detailed Integrated Result examples;
-- Handoff package fields and recovery sequence;
-- offline/sync provider behavior examples;
-- Deep Analysis trigger examples;
-- E2E evidence examples.
-These remain represented as governing categories; if a downstream protocol relies on exact wording, protocol files remain authoritative for operational detail as referenced.
-
-## 6. Validation claims
-DOCUMENT/LOGIC MIGRATION: PASS_WITH_CONDITIONS.
+## 5. Validation claims
+CANONICAL DOCUMENT WRITE: PASS.
+POST-WRITE READBACK: PASS.
 PROTECTED-INVARIANT REGRESSION: PASS.
 STRUCTURAL INTEGRITY: PASS.
+GITHUB ↔ DRIVE MIRROR SYNC: PASS.
 BASELINE 01 ADDITION OWNERSHIP: PASS.
 RUNTIME/IMPLEMENTATION REGRESSION: NOT TESTED / NOT IMPLIED.
 FULL HISTORICAL SOURCE COVERAGE: UNVERIFIED_SOURCE_COVERAGE.
-CANONICAL REPLACEMENT: NOT PERFORMED.
 
-Condition before canonical replacement: applicable user approval plus final pre-write compare against the then-latest canonical SHA. If canonical changed after protected source SHA, refresh migration before replacement.
+Final canonical status: `REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE / CANONICAL`.
