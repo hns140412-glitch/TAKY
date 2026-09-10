@@ -2,6 +2,7 @@
 
 Status: READY FOR NEW CHAT / READ-COMPARE FIRST / NO AUTO-WRITE
 Date: 2026-09-07
+Current pointer correction: 2026-09-10 downstream reflection
 Primary command: `최신 타키 기준으로 재개. 3개 모바일 웹앱의 상세 기능·기준·규칙을 MASTER와 실제 구현까지 대조해줘.`
 
 ## 1. OBJECTIVE
@@ -63,17 +64,21 @@ Actual implementation/evidence to inspect as applicable:
 
 Repository: `hns140412-glitch/ZPD-Word`
 Current product/master:
-- `Hide_Seek_UI_MASTER_LOGIC_REV_03.md`
+- `Hide_Seek_UI_MASTER_LOGIC_REV_04.md`
+
+Historical note:
+- `Hide_Seek_UI_MASTER_LOGIC_REV_03.md` is SUPERSEDED and retained only for traceability. Do not use it as the active product baseline.
 
 Actual implementation/evidence:
 - `index.html` when present
 - `app.js`
+- `manifest.json`
 - manifest/service-worker files
 - `README.md`
 - `SELF_VERIFICATION.md`
 - current asset map / current assets when UI/world behavior is material
 
-Historical detailed learning-core source is not fully represented by the short current REV_03 file.
+Historical detailed learning-core source is not fully represented by the short current Hide master.
 Use the recoverable Library source when detail is required:
 - `## ZPD Word Ui Master Logic REV_07##.md`
 
@@ -84,17 +89,23 @@ Migration rule:
 
 Treat historical ZPD detailed rules as `LINEAGE EVIDENCE`, not automatic current authority.
 
+Current device validation warning:
+- Project master requires Phone Portrait Only and Tablet Portrait + Landscape.
+- A generic PWA manifest orientation value alone does not prove that device contract is realized.
+- Runtime/CSS/JS plus representative real-device behavior must be validated before DEVICE/RELEASE PASS.
+
 ## 5. SNAP & POP SOURCES
 
 Repository: `hns140412-glitch/Snap-Pop`
 
 Current master delta:
-- `Snap_Pop_UI_MASTER_LOGIC_REV_11.md`
+- `Snap_Pop_UI_MASTER_LOGIC_REV_12.md`
 
-Inherited detailed baseline:
+Inherited baselines:
+- `Snap_Pop_UI_MASTER_LOGIC_REV_11.md`
 - `Snap_Pop_UI_MASTER_LOGIC_REV_10.md`
 
-REV_11 explicitly inherits REV_10 unless overridden; detailed comparison must read both.
+REV_12 explicitly inherits REV_11 and inherited REV_10 detail unless overridden; detailed comparison must preserve that inheritance chain.
 
 Actual implementation/evidence:
 - `index.html`
@@ -104,8 +115,10 @@ Actual implementation/evidence:
 - `README_DEPLOY.txt`
 - current asset manifest and relevant current assets
 
-Important stale-document check:
-old deploy/readme language must not override current master where old map/tool unlock behavior conflicts with free access to the five ORIGINAL places.
+Important unresolved-source checks:
+- old deploy/readme language must not override current master where old map/tool unlock behavior conflicts with free access to the five ORIGINAL places.
+- Family Expansion recovered details remain provenance-sensitive and must not be auto-revived solely from summary/handoff evidence.
+- gem-piece gifting remains a real source conflict until later direct authority resolves it.
 
 ## 6. COMPARISON AXES — REQUIRED
 
@@ -227,9 +240,9 @@ Do not write yet. Produce patch candidates only unless the user explicitly says 
 
 ## 9. IMPORTANT CURRENT CORRECTIONS
 
-- Current vocabulary app name = `Hide & Seek`; ZPD user-facing name/world is superseded.
+- Current vocabulary app name = `Hide & Seek`; active master = `Hide_Seek_UI_MASTER_LOGIC_REV_04.md`; ZPD user-facing name/world is superseded.
 - Ready & Set = Base Camp / session orchestrator, not only Time Attack.
-- Snap & Pop = thought-to-expression specialist, not only Korean writing.
+- Snap & Pop = thought-to-expression specialist, active master = `Snap_Pop_UI_MASTER_LOGIC_REV_12.md`, not only Korean writing.
 - Five Snap ORIGINAL help places remain freely available; old unlock logic is superseded.
 - Guide Character/Relationship shared rules are in `OS/GUIDE_CHARACTER_RELATIONSHIP.md`.
 - Special Friend existence is user-confirmed but detailed rules remain `RECOVERY_REQUIRED`.
@@ -251,6 +264,6 @@ Only after the user reviews the comparison and explicitly requests `/반영` may
 
 Use this exact prompt if useful:
 
-> 최신 TAKY canonical을 먼저 불러와. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md`를 기준으로 Ready & Set, Hide & Seek, Snap & Pop 3개 모바일 PWA의 최신 MASTER와 상속된 상세 MASTER, 실제 HTML/JS/PWA 구현을 모두 대조해. 요약하지 말고 기능·기준·규칙 단위로 4-way matrix와 앱별 상세 기능 inventory를 만들어. 현재 MASTER에 없는 과거 상세 규칙은 자동 부활시키지 말고 lineage evidence로 비교하고, `MASTER_CONFIRMED / IMPLEMENTED / MISSING / EXTRA / STALE / SUPERSEDED / HOLD / RECOVERY_REQUIRED / UNVERIFIED`를 구분해. 먼저 읽기·비교만 하고 canonical은 수정하지 마.
+> 최신 TAKY canonical을 먼저 불러와. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md`를 기준으로 Ready & Set, Hide & Seek, Snap & Pop 3개 모바일 PWA의 최신 MASTER와 상속된 상세 MASTER, 실제 HTML/JS/PWA 구현을 모두 대조해. Hide current = REV_04, Snap current = REV_12로 읽어. 요약하지 말고 기능·기준·규칙 단위로 4-way matrix와 앱별 상세 기능 inventory를 만들어. 현재 MASTER에 없는 과거 상세 규칙은 자동 부활시키지 말고 lineage evidence로 비교하고, `MASTER_CONFIRMED / IMPLEMENTED / MISSING / EXTRA / STALE / SUPERSEDED / HOLD / RECOVERY_REQUIRED / UNVERIFIED`를 구분해. 먼저 읽기·비교만 하고 canonical은 수정하지 마.
 
 END — APP FAMILY COMPARISON HANDOFF
