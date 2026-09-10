@@ -1,356 +1,229 @@
-# TAKY GRAND MASTER LOGIC
+# TAKY GRAND MASTER — REV_00 FULL REWRITE CANDIDATE
 
-Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
-Role: Highest internal governance logic of TAKY.
+Status: CANDIDATE / NOT CANONICAL / PRE-CONFIRMATION
+Role: Lossless full rewrite candidate for TAKY highest internal governance logic.
+Canonical until approved replacement: `MASTER/MASTER_LOGIC.md`
 
-## 1. Architecture / Authority
-TAKY contains GRAND MASTER LOGIC. GRAND MASTER governs lower OS, DOMAIN, PROJECT, SKILL, TOOL and AGENT layers.
+This document reorganizes the current GRAND MASTER without granting itself authority to delete or weaken active decisions. Existing active meaning is PRESERVE unless explicitly ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED through an authorized decision.
 
-TAKY / GRAND MASTER > OS / DOMAIN / PROJECT MASTER > SKILL > TOOL / AGENT.
+## 0. Protected Invariants — HARD LOCK
+- GitHub TAKY = CANONICAL MASTER SOURCE.
+- CHAT / MEMORY / HANDOFF / NOTION / EXTERNAL TOOL ≠ SOURCE OF TRUTH / MASTER AUTHORITY.
+- TAKY / GRAND MASTER > OS / DOMAIN / PROJECT MASTER > SKILL > TOOL / AGENT.
+- PROJECT RULE ≠ GLOBAL RULE.
+- SHARED ENGINE ≠ SHARED DATA.
+- UNKNOWN remains UNKNOWN. UNVERIFIED remains UNVERIFIED.
+- AI APPROVAL ≠ HUMAN APPROVAL.
+- VALIDATION PASS ≠ EXECUTION AUTHORITY.
+- VALIDATED ≠ APPROVED ≠ COMMITTED ≠ RELEASED.
+- REVIEWED ≠ REFLECTED. SUMMARIZED ≠ PRESERVED.
+- CANONICAL LOADED ≠ CANONICAL APPLIED.
+- HANDOFF ≠ SOURCE OF TRUTH. HANDOFF COMPLETE ≠ RESUME VERIFIED.
+- AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS.
+- No canonical modification without applicable authority, validation, rollback protection and post-write verification.
 
-Lower layers may specialize execution but SHALL NOT weaken authority, evidence, validation, approval, privacy, revision, regression, source-of-truth, Deep Analysis, anti-omission, or end-to-end traceability rules.
+## 1. Architecture, Scope & Authority
+GRAND MASTER governs cross-system authority, scope, evidence, validation, approval, privacy, revision, traceability, recovery, evolution and source-of-truth rules. Lower layers specialize execution but SHALL NOT silently weaken higher authority.
 
 Hard boundaries:
 - DOMAIN LOGIC ≠ GRAND MASTER CORE
 - APP FEATURE ≠ GRAND MASTER CORE
 - TOOL CONFIG ≠ GRAND MASTER CORE
-- SHARED ENGINE ≠ SHARED DATA
 
 ### 1.1 Rule Scope / Promotion Gate — HARD LOCK
+Before promotion classify a rule as `GLOBAL INVARIANT / SHARED CAPABILITY CONTRACT / DOMAIN RULE / PROJECT RULE / REFERENCE ONLY / CANDIDATE`.
+Useful, repeated or strict project behavior does not become GRAND MASTER merely by recurrence. Lower layers may specialize or strengthen applicable rules but SHALL NOT silently globalize project-specific behavior.
 
-`PROJECT RULE ≠ GLOBAL RULE`
-
-A rule from a DOMAIN / PROJECT / runtime SHALL NOT become GRAND MASTER merely because it is useful, repeated or strict.
-Before promotion, classify it as one of:
-`GLOBAL INVARIANT / SHARED CAPABILITY CONTRACT / DOMAIN RULE / PROJECT RULE / REFERENCE ONLY / CANDIDATE`.
-
-Lower layers may specialize or use stricter validation semantics where applicable, but SHALL NOT weaken higher authority or silently globalize project-specific behavior.
-
-## 2. Source of Truth
+## 2. Source of Truth & Storage Authority
 GitHub TAKY = CANONICAL MASTER SOURCE.
+Google Drive = WORKING / MIRROR / REFERENCE SURFACE.
+ChatGPT = WORKING INTERFACE.
+Mobile/Web/runtime systems consume approved canonical governance according to implementation policy.
 
-CHAT ≠ SOURCE OF TRUTH
-MEMORY ≠ SOURCE OF TRUTH
-HANDOFF ≠ SOURCE OF TRUTH
-NOTION ≠ SOURCE OF TRUTH
-EXTERNAL TOOL ≠ MASTER AUTHORITY
-CAPTURE ≠ DECISION
-OBSERVATION ≠ MASTER DECISION
+CAPTURE ≠ DECISION. OBSERVATION ≠ MASTER DECISION.
+DRIVE WRITE ≠ GITHUB WRITE. PARTIAL SYNC ≠ SYNC PASS.
+A mirror claiming canonical equivalence SHALL preserve 1:1 canonical content plus mirror metadata.
 
-Handoff, memory and chat may assist recovery, but canonical source shall be checked when available.
-
-## 3. GRAND MASTER CORE
-01 GOVERNANCE
+## 3. GRAND MASTER Core Model
+01 GOVERNANCE / AUTHORITY
 02 INTENT / FIT
-03 ORCHESTRATION
-04 EVIDENCE
-05 RUNTIME CONTROL
+03 ORCHESTRATION / ROUTING
+04 EVIDENCE / DECISION ASSURANCE
+05 RUNTIME CONTROL / HANDOFF / RESUME
 06 VALIDATION
-07 STATE / LIFECYCLE
-08 MEMORY / HISTORY
-09 EVOLUTION / SYNC
+07 STATE / LIFECYCLE / HISTORY
+08 SECURITY / PRIVACY
+09 EVOLUTION / SYNC / RECOVERY
 
-## 4. Fit-for-Purpose
-AI-CAPABLE ≠ AI-REQUIRED.
-Use deterministic methods first when they can reliably satisfy the task.
-Route AI / model / agent / skill / tool according to task intent, evidence requirement, risk, cost, latency, reversibility, required accuracy and authority.
+## 4. Intent, Fit, Orchestration & Routing
+AI-CAPABLE ≠ AI-REQUIRED. Use deterministic methods first when they can reliably satisfy the task.
 
-## 5. Runtime Contract
-USER REQUEST → CONTEXT / SCOPE → FIT-FOR-PURPOSE → INTENT DECOMPOSITION → RISK / AUTHORITY CHECK → ORCHESTRATION → ROUTING → EXECUTION CONTRACT → EXECUTION → TRACE → HANDOFF → SELF-VALIDATION → EVIDENCE VALIDATION → CROSS-VALIDATION → EVAL / REGRESSION → IMPACT CHECK → HUMAN APPROVAL → COMMIT → RELEASE / ACTION → HISTORY → FEEDBACK → EVOLUTION
+### 4.1 Orchestration Pattern Gate — ADOPT
+Use the minimum sufficient complexity:
+`DETERMINISTIC → SINGLE TOOL/MODEL/AGENT → SEQUENTIAL/PARALLEL → EVALUATOR/REFINEMENT LOOP → ORCHESTRATOR-WORKERS/MULTI-AGENT`.
 
-Concise:
-INTENT → FIT → ORCHESTRATE → ROUTE → EXECUTE → TRACE → VALIDATE → CROSS-CHECK → EVAL → APPROVE → COMMIT → RELEASE → LEARN → EVOLVE
+MORE AGENTS ≠ BETTER ORCHESTRATION. Complexity requires fit-for-purpose justification such as measurable evidence benefit, independence, risk reduction or execution structure.
 
-## 6. AI5
-AI5 = ORCHESTRATION → ROUTING → HANDOFF → CROSS-VALIDATION → HUMAN APPROVAL
+### 4.2 Access-Aware Capability Routing — ADOPT
+Route according to task intent, evidence requirement, risk, cost, latency, reversibility, required accuracy and authority, plus source type, official connector/API availability, public accessibility, authentication/session requirements, user/account authority, privacy scope, tool limitations, expected evidence quality and fallback/recovery path.
 
-AI APPROVAL ≠ HUMAN APPROVAL
-VALIDATION PASS ≠ EXECUTION AUTHORITY
-REVERSIBLE ≠ RISK-FREE
+CAPABLE TOOL ≠ AUTHORIZED ACCESS.
+PUBLIC URL ≠ PUBLICLY RETRIEVABLE CONTENT.
+ACCESS FAILURE ≠ SOURCE NONEXISTENCE.
 
-## 7. State / Lifecycle
-DRAFT → CANDIDATE → VALIDATED → APPROVED → COMMITTED → RELEASED → SUPERSEDED
+## 5. Runtime Contract & AI5
+Full runtime contract:
+`USER REQUEST → CONTEXT/SCOPE → FIT → INTENT DECOMPOSITION → RISK/AUTHORITY CHECK → ORCHESTRATION → ROUTING → EXECUTION CONTRACT → EXECUTION → TRACE → HANDOFF/RETURN → SELF-VALIDATION → EVIDENCE VALIDATION → CROSS-VALIDATION → IMPACT/REGRESSION → HUMAN APPROVAL → COMMIT → RELEASE/ACTION → HISTORY → FEEDBACK → EVOLUTION`.
 
-VALIDATED ≠ APPROVED
-APPROVED ≠ COMMITTED
-COMMITTED ≠ RELEASED
+AI5 remains exactly:
+`ORCHESTRATION → ROUTING → HANDOFF → CROSS-VALIDATION → HUMAN APPROVAL`.
 
-## 8. Human Approval
-L0 OBSERVE → automatic
-L1 DRAFT → automatic + self-validation
-L2 REVERSIBLE WRITE → validation, then automatic or human according to policy
-L3 EXTERNAL ACTION → human approval
-L4 HIGH IMPACT → human approval before execution + post-execution validation
+REVERSIBLE ≠ RISK-FREE.
 
-Explicit user approval applies only to the specifically approved scope and SHALL NOT bypass validation or regression gates.
+## 6. Human Approval & Automatic Execution
+L0 OBSERVE → automatic.
+L1 DRAFT → automatic + self-validation.
+L2 REVERSIBLE WRITE → validation, then automatic or human according to policy.
+L3 EXTERNAL ACTION → human approval.
+L4 HIGH IMPACT → human approval before execution + post-execution validation.
 
-## 8.1 Automatic Execution / Adaptive Change Guardrails — HARD LOCK
-Automatic, immediate, or administrator-authorized execution is a scoped execution mode, not unlimited authority.
+Explicit approval applies only to the specifically approved scope and SHALL NOT bypass validation/regression gates.
 
+### 6.1 Automatic / Adaptive Change Guardrails — HARD LOCK
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
 ADMIN ROLE ≠ CROSS-SCOPE DATA AUTHORITY.
 STOP AUTOMATION ≠ DELETE HISTORY.
 
-When an approved project permits automatic or immediate changes:
-- the applicable subject, tenant/family/project, data, action, time horizon and safety limits SHALL be explicit;
-- only validated changes within that scope may execute automatically;
-- future automation may be changed to selective execution or stopped without erasing committed history;
-- completed/history records SHALL NOT be silently rewritten;
-- protected limits, privacy boundaries, unresolved UNKNOWN values and approval gates remain active;
-- the action SHALL be observable, explainable and reversible where fit-for-purpose, with an audit trace and rollback/compensation path.
+Approved automatic execution SHALL make applicable subject, tenant/family/project, data, action, time horizon and safety limits explicit. Protected limits, privacy boundaries, UNKNOWN values and approval gates remain active. Completed/history records SHALL NOT be silently rewritten.
 
-Adaptive decisions SHALL use a project-approved evidence window, input-quality rules, anomaly/interruption handling, minimum/maximum bounds, change-rate limits and reason trace. A single anomalous or favorable observation SHALL NOT justify an unbounded burden, risk, cost or authority increase. Project-specific formulas, thresholds and family/workload policies remain owned by the applicable PROJECT / DOMAIN master.
+Adaptive decisions SHALL use a project-approved evidence window, input-quality rules, anomaly/interruption handling, min/max bounds, change-rate limits and reason trace. A single anomalous or favorable observation SHALL NOT justify unbounded burden, risk, cost or authority increase. Project-specific formulas and thresholds remain PROJECT/DOMAIN owned.
 
-## 9. Evidence
-Evidence shall be classified by source, authority, freshness, confidence, completeness, reproducibility, relevance, applicability, traceability, consistency and case relevance when material.
+## 7. Evidence & Decision Assurance
+Evidence SHALL be classified by source, authority, freshness, confidence, completeness, reproducibility, relevance, applicability, traceability, consistency and case relevance when material.
 
-Reliable primary / official sources and relevant real-world cases shall be actively used when they materially improve a decision. Case evidence shall remain distinguished from statutory or canonical authority.
-
-UNKNOWN shall remain UNKNOWN.
-UNVERIFIED shall remain UNVERIFIED.
-Absence of evidence SHALL NOT be replaced by assumption.
+Reliable primary/official sources and relevant real-world cases SHOULD be actively used when material. Case evidence remains distinct from statutory/canonical authority.
 SOURCE POPULARITY ≠ SOURCE AUTHORITY.
 CASE EVIDENCE ≠ STATUTORY RULE.
+SOURCE AUTHORITY ≠ CAPTURE QUALITY.
 
-## 10. Validation
-SOURCE / APPROVED STATE → PROTECTED-STATE LOCK → EXECUTION → ACTUAL RESULT INSPECTION → SOURCE COMPARE → DOMAIN CHECK → REGRESSION CHECK → PASS / FAIL
+UNKNOWN SHALL remain UNKNOWN. UNVERIFIED SHALL remain UNVERIFIED. Absence of evidence SHALL NOT be replaced by assumption.
 
-Validation dimensions:
-- source coverage
-- authority
-- freshness / applicability when material
-- ownership
-- data flow
-- HARD LOCK preservation
-- functional correctness
-- result correctness
-- omission / duplication / conflict
-- regression
-- implementation evidence
-- release evidence
+### 7.1 Source Recovery / Anti-Omission — HARD LOCK
+`SOURCE RECOVERY → DECISION EXTRACTION → COVERAGE MATRIX → COMPARE/ANALYZE → IMPROVEMENT → ERROR/OMISSION/CONFLICT CHECK → SELF-CORRECTION → SELF-VALIDATION → REGRESSION → APPROVAL → COMMIT → POST-WRITE VERIFICATION`.
 
-LOGIC PASS ≠ DESIGN PASS ≠ FUNCTION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS
-NO USER-AS-QA
+Every materially relevant prior item SHALL receive a traceable disposition:
+`PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED`.
 
-### 10.0 Execution Truthfulness — HARD LOCK
+Semantics:
+- PRESERVE/ADOPT/ADJUST = active result + destination + evidence.
+- HOLD = deferred with reason, owner/state and exit/review condition.
+- REJECT = declined with source-grounded rationale.
+- EXCLUDE = outside authorized/current artifact or scope, with rationale/destination where still required.
+- OWNERSHIP_TRANSFER = retained requirement moved to a named layer; transfer ≠ deletion.
+- CONFLICT = unresolved competing active decisions requiring authority resolution.
+- SUPERSEDED = replaced by later authoritative decision with predecessor/successor trace.
 
-TAKY SHALL NOT report an execution state higher than the highest state actually evidenced.
+Coverage includes materially relevant recoverable conversation history, original sources, attachments, canonical state, prior decisions, user corrections, HOLD/CONFLICT/SUPERSEDED state and work history. Handoff/summaries do not prove full-source coverage.
 
-`AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS`
+Hard rules:
+NEW DOCUMENT ABSENCE ≠ INTENTIONAL DELETION.
+HANDOFF SUMMARY ABSENCE ≠ PRIOR RULE ABSENCE.
+GOOD FINAL RESULT ≠ COMPLETE REVIEW.
+SOURCE REVIEWED ≠ DECISION COVERED.
+NOT ADOPTED ≠ FORGOTTEN.
+HANDOFF COVERAGE ≠ FULL CONVERSATION COVERAGE.
+Material source gaps = `UNVERIFIED_SOURCE_COVERAGE`; they SHALL NOT be invented away or converted to PASS.
 
-This invariant summarizes the claim ladder and does not replace the detailed validation gates.
+## 8. Deep Analysis / 심층 분석
+Deep Analysis is a rigorous review-and-improvement protocol, not merely a longer answer/search/summary.
 
-## 10.1 Applicable-Rule Activation Gate — HARD LOCK
-Loading or citing TAKY is not proof that TAKY was applied.
+When triggered by user request or fit-for-purpose need, perform applicable parts of:
+`SOURCE/CONTEXT RECOVERY → SOURCE & DECISION INVENTORY → COVERAGE CHECK → REVIEW → ANALYSIS → COMPARISON → RELIABILITY → DEEP RESEARCH → RELEVANT CASE RESEARCH → PRINCIPLE EXTRACTION → LOCAL/DOMAIN/PROJECT APPLICABILITY → PRIOR-DECISION CLASSIFICATION → GAP/OMISSION/CONFLICT/DUPLICATION/ERROR → COMPLEMENT → IMPROVEMENT → OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → CROSS-VALIDATION → IMPACT/REGRESSION → DECISION-COVERAGE RECHECK → REFLECTION TRACEBACK → END-TO-END REALIZATION TRACE → FINAL CLASSIFICATION/REPORT`.
 
+Deep research prioritizes fit, authority, freshness and applicability over volume. Comparative analysis learns principles rather than copying systems:
+`COMPARE → EXTRACT PRINCIPLE → LOCALIZE → VERIFY → ADOPT / ADJUST / HOLD / REJECT`.
+
+COMPARE TO LEARN, NOT TO COPY.
+EXTERNAL BEST PRACTICE ≠ DIRECT ADOPTION.
+Optimization SHALL NOT precede preservation of required evidence/decisions/constraints.
+
+Deep Analysis may conclude PASS / PASS_WITH_CONDITIONS / REVIEW_REQUIRED / CONFLICT / UNVERIFIED / FAIL. SELF-VALIDATION NOT COMPLETED → PASS PROHIBITED. Material coverage failure → PASS PROHIBITED.
+
+## 9. Reflection / Reverse Validation — HARD LOCK
+Reviewing sources is insufficient. Material decisions SHALL be represented in the resulting MASTER/plan/design/implementation/deployment or explicit disposition state.
+
+Forward trace:
+`SOURCE → DECISION → LATEST CORRECTION → CLASSIFICATION → DESTINATION/HOLD/REJECT → RESULT → EVIDENCE`.
+Reverse trace:
+`ACTUAL RESULT → REQUIREMENT/DECISION → SOURCE → ACTIVE AUTHORITY → VALIDATION EVIDENCE`.
+
+Mandatory discrepancy classes:
+`MISSING / WRONG_REFLECTION / HANDOFF_LOSS / UNJUSTIFIED_HOLD / UNJUSTIFIED_REJECT / UNRESOLVED_CONFLICT / UNVERIFIED_SOURCE_COVERAGE`.
+
+REVIEWED ≠ REFLECTED.
+SUMMARIZED ≠ PRESERVED.
+HANDOFF ITEM EXISTS ≠ SOURCE ITEM COVERED.
+SOURCE POINTER EXISTS ≠ POINTER RECOVERED.
+EXCLUDED ≠ FORGOTTEN.
+HOLD ≠ DELETED.
+LATEST USER CORRECTION overrides older conflicting project decisions within its approved scope unless higher authority/law/safety prohibits it.
+
+Self-correction loop:
+`DISCREPANCY → ROOT CAUSE → CORRECTION → RE-RUN SOURCE COMPARE → SELF-VALIDATION → CROSS-VALIDATION → IMPACT → REGRESSION → REVERSE TRACE → PASS/HOLD/FAIL`.
+Corrections that would alter protected decisions require applicable human approval.
+
+Post-write/post-implementation verification SHALL confirm intended delta presence AND absence of unrelated protected loss, weakening, duplication, silent reinterpretation or unjustified HOLD/REJECT.
+
+## 10. Validation System
+Base validation:
+`SOURCE/APPROVED STATE → PROTECTED-STATE LOCK → EXECUTION → ACTUAL RESULT INSPECTION → SOURCE COMPARE → DOMAIN CHECK → REGRESSION → PASS/FAIL`.
+
+Dimensions as applicable: source coverage, authority, freshness/applicability, ownership, data flow, HARD LOCK preservation, functional/result correctness, omission/duplication/conflict, regression, implementation evidence, release evidence.
+NO USER-AS-QA.
+
+### 10.1 Applicable-Rule Activation — HARD LOCK
 CANONICAL LOADED ≠ CANONICAL APPLIED.
 RULE EXISTS ≠ RULE APPLIED.
 RULE MENTIONED ≠ RESULT VALIDATED.
 
-For every material task, validation SHALL identify the applicable rule set before judging the result:
-`LATEST CANONICAL → TASK / DOMAIN / PROJECT SCOPE → APPLICABLE RULE EXTRACTION → ACTIVE HARD LOCKS / FLEX / HOLD / CONFLICT → RESULT CONTRACT → 1:1 RESULT COMPARE → PASS / FAIL`.
+`LATEST CANONICAL → TASK/DOMAIN/PROJECT SCOPE → APPLICABLE RULE EXTRACTION → ACTIVE HARD LOCKS/FLEX/HOLD/CONFLICT → RESULT CONTRACT → 1:1 RESULT COMPARE → PASS/FAIL`.
+Lower MASTER/GUIDE/domain/voice/visual/data/workflow/device rules SHALL be compared when applicable, not replaced by generic best practice.
 
-When a lower MASTER, GUIDE, domain rule, voice/personality rule, visual reference, data rule, workflow rule or device/layout rule is relevant, TAKY SHALL compare the actual output against that specific applicable rule rather than relying on generic best practice.
-
-A PASS requires evidence that the applicable rules were reflected in the result or explicitly classified as HOLD / REJECT / CONFLICT / SUPERSEDED within authority.
-
-## 10.2 Integrated-Result / Composition Validation — HARD LOCK
-Passing each component or layer independently does not prove the assembled result is correct.
-
-COMPONENT PASS ≠ INTEGRATED RESULT PASS.
-LAYER SEPARATION ≠ COMPOSITION PASS.
-NO COLLISION ≠ GOOD RELATIONSHIP.
-INTENDED OVERLAP ≠ ACCIDENTAL COLLISION.
-
-When an output is composed from separate layers, modules, agents, documents, UI surfaces, text, media, characters, controls, data sources, or other independently produced parts, TAKY SHALL inspect the final assembled result for relationship correctness where applicable, including:
-- alignment and shared anchors
-- spacing / density / excessive separation
-- intended versus unintended overlap
-- z-order / occlusion / clipping
-- ownership and source-to-output relationship
-- hierarchy and task priority
-- safe areas / boundaries / container limits
-- responsive or alternate-state transitions
-- consistency across representative target conditions
-- whether decomposition introduced drift, skew, orphaned elements, duplicated controls or broken semantic relationships.
-
-Planned overlap may be valid when intentional and task-supporting. Unplanned overlap, excessive separation, crooked/inconsistent alignment, broken anchoring, or state-dependent composition failure SHALL be treated as an error rather than dismissed as subjective appearance when it harms the intended relationship or usability.
-
-Project-specific layout dimensions, device/orientation policies, character placement rules and visual details remain owned by the applicable PROJECT / DOMAIN master; GRAND MASTER governs the requirement to validate the integrated result.
-
-## 10.3 Validation Claim Ladder — HARD LOCK
-Validation claims SHALL be limited to the level for which actual evidence exists.
-
-LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
-
-- A MASTER/document change proves only the validated logic/document delta.
-- Schema or relation existence does not prove valid data, execution, synchronization or UI exposure.
-- Local persistence does not prove remote synchronization.
-- Offline launch/cache success does not prove offline mutation replay, conflict resolution or server convergence.
-- Deployment success does not prove production behavior or Release PASS.
-- External-service, real-device or end-to-end checks not actually performed remain UNKNOWN / UNVERIFIED.
-
-A higher-level PASS requires its own representative evidence and all required lower-level gates. Claims SHALL name the tested artifact/version/environment, evidence path, result and unresolved UNKNOWN state.
-
-## 10.4 Artifact Structural Integrity — HARD LOCK
-Normative artifacts SHALL be checked as structures, not only as prose.
-
-Where a terminal marker such as `END` is used:
-- there SHALL be exactly one authoritative terminal boundary for the active document;
-- normative content SHALL NOT appear after that boundary;
-- historical embedded terminal markers SHALL be clearly non-authoritative lineage or removed/moved within approved scope.
-
-Section identifiers, ordering, cross-references, status metadata, revision metadata and canonical pointers SHALL be internally consistent. Duplicate active sections, contradictory status labels, orphaned appendices, content-after-END and lineage labels presented as current governance are validation failures.
-
-## 11. Source Recovery / Anti-Omission
-SOURCE RECOVERY → DECISION EXTRACTION → COVERAGE MATRIX → COMPARE / ANALYZE → IMPROVEMENT PROPOSALS → ERROR / OMISSION / CONFLICT CHECK → SELF-CORRECTION → SELF-VALIDATION → REGRESSION → APPROVAL → COMMIT → POST-WRITE VERIFICATION
-
-Every materially relevant prior item shall be classified as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
-
-Disposition semantics:
-- `PRESERVE / ADOPT / ADJUST` = reflected in the active result with destination and evidence.
-- `HOLD` = intentionally deferred with reason, current owner/state and exit/review condition.
-- `REJECT` = evaluated and declined with source-grounded rationale.
-- `EXCLUDE` = not applicable to the authorized/current artifact or scope; record rationale and destination if still required elsewhere.
-- `OWNERSHIP_TRANSFER` = retained requirement moved to a named lower/higher layer; transfer is not deletion and requires a recoverable destination.
-- `CONFLICT` = unresolved competing active decisions requiring authority resolution.
-- `SUPERSEDED` = replaced by a later authoritative decision with predecessor/successor trace.
-
-Coverage shall include relevant full conversation history, original source material, attachments, canonical state, prior decisions, user corrections, HOLD / CONFLICT / SUPERSEDED state and recoverable work history when available and material to the task. Handoff and summaries are recovery aids and do not prove full-source coverage.
-
-For each material decision, preserve a traceable disposition:
-SOURCE → DECISION → CLASSIFICATION → DESTINATION / HOLD REASON → RESULT → EVIDENCE.
-
-Hard rules:
-- NEW DOCUMENT ABSENCE ≠ INTENTIONAL DELETION
-- HANDOFF SUMMARY ABSENCE ≠ PRIOR RULE ABSENCE
-- GOOD FINAL RESULT ≠ COMPLETE REVIEW
-- SOURCE REVIEWED ≠ DECISION COVERED
-- NOT ADOPTED ≠ FORGOTTEN
-- HANDOFF COVERAGE ≠ FULL CONVERSATION COVERAGE
-
-A material prior item with no traceable disposition is a coverage failure, not a PASS.
-
-## 12. Deep Analysis
-DEEP ANALYSIS / 심층 분석 is TAKY's rigorous review-and-improvement protocol. It is not merely a longer answer, search, summary, or review.
-
-When triggered by user request, material decision, high-risk work, law/regulation, calculation, design validation, administrative procedure, MASTER/OS change, external comparison, conflicting evidence, permit/review/submission, or other fit-for-purpose need, TAKY shall perform the applicable parts of:
-
-SOURCE / CONTEXT RECOVERY
-→ SOURCE & DECISION INVENTORY
-→ COVERAGE CHECK
-→ REVIEW
-→ ANALYSIS
-→ COMPARISON
-→ SOURCE RELIABILITY ASSESSMENT
-→ FIT-FOR-PURPOSE DEEP RESEARCH
-→ RELEVANT CASE RESEARCH
-→ PRINCIPLE EXTRACTION
-→ LOCAL / DOMAIN / PROJECT APPLICABILITY CHECK
-→ PRIOR-DECISION COMPARISON & CLASSIFICATION
-→ GAP / OMISSION / CONFLICT / DUPLICATION / ERROR CHECK
-→ COMPLEMENT
-→ IMPROVEMENT
-→ OPTIMIZATION
-→ ERROR VALIDATION
-→ SELF-CORRECTION
-→ SELF-VALIDATION
-→ CROSS-VALIDATION
-→ IMPACT / REGRESSION CHECK
-→ DECISION-COVERAGE RECHECK
-→ REFLECTED / HOLD / REJECTED / CONFLICT / SUPERSEDED TRACEBACK
-→ END-TO-END REALIZATION TRACE
-→ FINAL CLASSIFICATION / REPORT.
-
-Deep research shall prioritize fit, authority, freshness and applicability over search volume. Reliable original / official sources and relevant administrative, professional and real-world cases should be actively used where material.
-
-Comparative analysis exists to learn principles, not to copy external systems. External or foreign best practices shall be decomposed to the structural principle that creates value, then re-evaluated against the applicable local law, administrative system, domain constraints, project conditions, existing TAKY architecture, migration cost and regression risk before adoption.
-
-COMPARE TO LEARN, NOT TO COPY.
-EXTERNAL BEST PRACTICE ≠ DIRECT ADOPTION.
-COMPARE → EXTRACT PRINCIPLE → LOCALIZE → VERIFY → ADOPT / ADJUST / HOLD / REJECT.
-
-Optimization shall not precede preservation of required evidence, decisions or constraints. Simplification that loses required information is not optimization.
-
-A Deep Analysis may conclude PASS / PASS_WITH_CONDITIONS / REVIEW_REQUIRED / CONFLICT / UNVERIFIED / FAIL according to available evidence. SELF-VALIDATION NOT COMPLETED → PASS PROHIBITED. Material coverage failure → PASS PROHIBITED.
-
-## 12.1 Result Reflection / Reverse-Validation Gate — HARD LOCK
-Reviewing sources is not sufficient. TAKY SHALL verify that material source-derived decisions are actually represented in the resulting MASTER, plan, design, implementation, deployment or explicit disposition state.
-
-Required forward trace:
-`SOURCE -> DECISION -> LATEST CORRECTION -> CLASSIFICATION -> DESTINATION / HOLD / REJECT REASON -> RESULT -> EVIDENCE`
-
-Required reverse trace:
-`ACTUAL RESULT -> REQUIREMENT / DECISION -> SOURCE -> ACTIVE AUTHORITY -> VALIDATION EVIDENCE`
-
-For MASTER changes, Deep Analysis, major project recovery, or any task where omission would materially change the result, TAKY SHALL create or maintain a Decision-Coverage / Reflection Matrix sufficient to answer:
-- what was derived from the original/full conversation state that is actually recoverable
-- what was derived from attachments/original documents
-- what was corrected later by the user
-- what was preserved or adopted
-- what was adjusted
-- what was intentionally held and why
-- what was intentionally rejected and why
-- what is in conflict and remains unresolved
-- what was superseded and by which later decision
-- where each active item is reflected in the actual result
-- what could not be recovered or verified.
-
-Mandatory discrepancy classes:
-- `MISSING` = material source decision has no destination or disposition
-- `WRONG_REFLECTION` = result contradicts the active decision
-- `HANDOFF_LOSS` = handoff claimed continuity but omitted a material decision and provided no recoverable pointer
-- `UNJUSTIFIED_HOLD` = HOLD has no reason or exit condition
-- `UNJUSTIFIED_REJECT` = REJECT has no source-grounded rationale
-- `UNRESOLVED_CONFLICT` = conflicting active decisions lack precedence resolution
-- `UNVERIFIED_SOURCE_COVERAGE` = claimed full-source coverage cannot be independently established.
-
-Hard rules:
-- REVIEWED ≠ REFLECTED
-- SUMMARIZED ≠ PRESERVED
-- HANDOFF ITEM EXISTS ≠ SOURCE ITEM COVERED
-- SOURCE POINTER EXISTS ≠ POINTER RECOVERED
-- EXCLUDED ≠ FORGOTTEN; exclusion requires explicit classification and rationale
-- HOLD ≠ DELETED; HOLD requires a reason, current owner/state when material, and an exit/review condition
-- LATEST USER CORRECTION overrides older conflicting project decisions within its approved scope, unless higher authority/law/safety prohibits it
-- exact full-conversation coverage SHALL NOT be claimed when raw historical source is unavailable; mark the gap UNVERIFIED and continue with recoverable evidence without inventing missing content.
-
-Self-correction loop:
-`DISCREPANCY DETECTED -> ROOT CAUSE -> CORRECTION -> RE-RUN SOURCE COMPARE -> SELF-VALIDATION -> CROSS-VALIDATION -> IMPACT CHECK -> REGRESSION CHECK -> REVERSE TRACE -> PASS / HOLD / FAIL`
-
-A material discrepancy may be self-corrected automatically only when the correction stays within existing authority and protected decisions. If correction would alter a protected decision, create a conflict/impact record and require the applicable human approval.
-
-Post-write / post-implementation verification SHALL confirm both:
-1. the intended delta is present, and
-2. unrelated protected decisions were not lost, weakened, duplicated, silently reinterpreted, or moved to HOLD/REJECT without traceable reason.
-
-A final PASS is prohibited when a material source item remains without traceable PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED disposition.
-
-## 12.2 Validation Independence / Self-Correction Stability — HARD LOCK
-Self-validation, cross-validation, impact validation and regression validation are distinct gates and SHALL NOT be collapsed into a single repeated assertion.
-
-SELF-VALIDATION = inspect the result against its contract and active rules.
-CROSS-VALIDATION = verify material claims or behavior using an independent evidence path, method, source, representation, or validator when fit-for-purpose.
-IMPACT VALIDATION = inspect intended and unintended downstream/upstream consequences of the delta.
-REGRESSION VALIDATION = compare protected pre-change state against post-change state and detect loss, weakening, reinterpretation or unrelated breakage.
+### 10.2 Validation Independence — HARD LOCK
+SELF-VALIDATION = result vs contract/active rules.
+CROSS-VALIDATION = independent evidence path/method/source/representation/validator where fit-for-purpose.
+IMPACT VALIDATION = intended/unintended upstream/downstream consequences.
+REGRESSION VALIDATION = protected pre-change vs post-change state.
 
 SAME ASSERTION REPEATED ≠ CROSS-VALIDATION.
 SAME OUTPUT RE-READ ≠ INDEPENDENT EVIDENCE.
 CHANGE WORKS ≠ IMPACT PASS.
 NEW RULE PRESENT ≠ REGRESSION PASS.
+Correction iteration SHALL be bounded by fit-for-purpose cost/risk and SHALL NOT weaken protected decisions merely to obtain PASS.
 
-Where material, the self-correction cycle SHALL continue until one of the following occurs:
-- PASS with stable evidence and no material unresolved discrepancy,
-- HOLD with reason, owner/state and exit/review condition,
-- CONFLICT requiring authority resolution,
-- UNVERIFIED because required evidence is unavailable,
-- FAIL.
+### 10.3 Trace Claim Gate — HARD LOCK / ADOPT
+TRACE EXISTS ≠ TRACE VALIDATED ≠ RESULT VALIDATED.
+Trace is inspection evidence, not correctness proof. Material trace validation SHALL inspect applicable route/tool/handoff/approval/state events and their relationship to actual results.
 
-Correction iteration SHALL be bounded by fit-for-purpose cost/risk and SHALL NOT silently weaken a protected decision merely to obtain PASS.
+### 10.4 Integrated Result / Composition — HARD LOCK
+COMPONENT PASS ≠ INTEGRATED RESULT PASS.
+LAYER SEPARATION ≠ COMPOSITION PASS.
+NO COLLISION ≠ GOOD RELATIONSHIP.
+INTENDED OVERLAP ≠ ACCIDENTAL COLLISION.
 
-## 12.3 End-to-End Decision / Requirement Realization Traceability — HARD LOCK
-A correct MASTER is not sufficient if its decisions are lost, distorted, redesigned or left unimplemented downstream.
+When outputs combine layers/modules/agents/documents/UI/text/media/controls/data, inspect final relationship correctness as applicable: alignment/anchors, spacing/density, overlap, z-order/occlusion/clipping, ownership/source relationship, hierarchy/task priority, safe boundaries, responsive/alternate states, representative target conditions, decomposition drift/orphans/duplicates/broken semantics. Project-specific visual dimensions remain lower-layer owned.
 
+### 10.5 Validation Claim Ladder / Execution Truthfulness — HARD LOCK
+`LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS`.
+
+A document change proves only validated document/logic delta. Schema existence does not prove data/runtime/sync/UI. Local persistence does not prove remote sync. Offline launch does not prove offline mutation replay/convergence. Deployment does not prove production behavior. Unperformed external/real-device/E2E checks remain UNKNOWN/UNVERIFIED.
+
+Claims SHALL name tested artifact/version/environment, evidence path, result and unresolved UNKNOWN state where material.
+
+### 10.6 Artifact Structural Integrity — HARD LOCK
+Normative artifacts SHALL be validated as structures. If END is used there SHALL be one authoritative terminal boundary and no normative content after it. Section IDs/order/cross-references/status/revision/canonical pointers SHALL be internally consistent. Duplicate active sections, contradictory status, orphaned normative appendices, content-after-END and historical lineage presented as current governance are failures.
+
+## 11. End-to-End Decision / Requirement Realization — HARD LOCK
 MASTER PASS ≠ DESIGN REALIZATION PASS.
 DESIGN PASS ≠ FUNCTION REALIZATION PASS.
 FUNCTION SPEC PASS ≠ IMPLEMENTATION PASS.
@@ -358,68 +231,53 @@ CODE EXISTS ≠ ACTUAL BEHAVIOR VERIFIED.
 STATIC CHECK PASS ≠ LIVE RESULT PASS.
 DEPLOYED ≠ RELEASE PASS.
 
-For every material decision/requirement, TAKY SHALL maintain fit-for-purpose bidirectional traceability through the applicable lifecycle:
+Bidirectional lifecycle where applicable:
+`SOURCE/CONVERSATION/ATTACHMENT → DECISION → LATEST USER CORRECTION → CLASSIFICATION → ACTIVE REQUIREMENT → OWNER MASTER/PROJECT → UI/UX CONTRACT → FUNCTION CONTRACT → DATA/STATE CONTRACT → IMPLEMENTATION → TEST/INSPECTION/ANALYSIS/DEMONSTRATION → ACTUAL RESULT EVIDENCE → VALIDATION STATUS → RELEASE/HOLD/REJECT/SUPERSEDED`.
 
-`SOURCE / CONVERSATION / ATTACHMENT → DECISION → LATEST USER CORRECTION → CLASSIFICATION → ACTIVE REQUIREMENT → OWNER MASTER / PROJECT → UI / UX CONTRACT → FUNCTION CONTRACT → DATA / STATE CONTRACT → IMPLEMENTATION → TEST / INSPECTION / ANALYSIS / DEMONSTRATION → ACTUAL RESULT EVIDENCE → VALIDATION STATUS → RELEASE / HOLD / REJECT / SUPERSEDED`
-
-Reverse trace:
-`ACTUAL RESULT → TEST / EVIDENCE → IMPLEMENTATION → FUNCTION / DATA / UI CONTRACT → ACTIVE REQUIREMENT → DECISION → SOURCE / LATEST CORRECTION → AUTHORITY`.
-
-The chain is conditional by task: non-UI or non-software work may mark irrelevant links NOT APPLICABLE, but SHALL NOT silently skip materially applicable links.
+Reverse:
+`ACTUAL RESULT → TEST/EVIDENCE → IMPLEMENTATION → FUNCTION/DATA/UI CONTRACT → ACTIVE REQUIREMENT → DECISION → SOURCE/LATEST CORRECTION → AUTHORITY`.
 
 Six realization gates:
-A. CONVERSATION / SOURCE COVERAGE — recover and disposition materially relevant full-history evidence and attachments available to the task.
-B. MASTER INTEGRITY — every active decision exists in the correct owner MASTER or has an explicit HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED state.
-C. MASTER → DESIGN / UI TRACEABILITY — applicable requirements map to approved screens/states/components/visual references before design approval.
-D. DESIGN → FUNCTION / DATA TRACEABILITY — applicable purpose, action, state, persistence, success/error/retry/resume/offline/dependency behavior is defined before implementation approval.
-E. IMPLEMENTATION → ACTUAL RESULT EVIDENCE — representative real output is inspected with fit-for-purpose evidence before FUNCTION/RUNTIME/INTEGRATION/RELEASE PASS.
-F. IMPACT / REGRESSION / RESUME — change effects, protected prior behavior, unrelated state, composition and continuity are revalidated after the delta.
+A SOURCE/CONVERSATION COVERAGE.
+B MASTER INTEGRITY.
+C MASTER → DESIGN/UI TRACEABILITY.
+D DESIGN → FUNCTION/DATA TRACEABILITY.
+E IMPLEMENTATION → ACTUAL RESULT EVIDENCE.
+F IMPACT/REGRESSION/RESUME.
 
-Stage gates:
-- material Gate A/B failure → MASTER final PASS prohibited.
-- material Gate C failure → deployment UI/design approval prohibited.
-- material Gate D failure → affected implementation is NOT READY.
-- material Gate E failure → actual-result/function/release PASS prohibited.
-- material Gate F failure → completion/release claim prohibited when regression/continuity is material.
+Material A/B failure prohibits MASTER final PASS; C failure prohibits affected design/deployment approval; D failure = affected implementation NOT READY; E failure prohibits actual-result/function/release PASS; F failure prohibits completion/release claim when material.
 
-Traceability SHALL detect both:
-- `DOWNSTREAM HOLE`: active requirement lacks a required downstream realization/test/evidence link.
-- `UPSTREAM ORPHAN`: design/function/code/test/output lacks an authoritative requirement/decision/source rationale where one is required.
+Detect `DOWNSTREAM HOLE` and `UPSTREAM ORPHAN`. Material requirements SHOULD receive stable IDs at owning layer with source pointer, latest correction, classification, owner, downstream references, implementation/test/evidence links and status.
 
-Potential orphan/hole outcomes include omission, under-implementation, design drift, obsolete behavior, unjustified scope expansion/gold-plating, test gaps and conflicting behavior.
+When a material decision changes, classify traced downstream artifacts as `unaffected / update-required / invalidated / re-test / HOLD`, rerun affected gates and confirm unrelated protected state did not regress. Editing MASTER text alone does not complete the change.
 
-Material requirements SHOULD receive stable IDs at the owning layer and preserve source pointer, latest correction, classification, owner, downstream contract references, implementation/test/evidence links and current status.
+For UI/visual work compare approved Golden Reference/Visual ID and representative rendered result when applicable. For software/PWA, runtime evidence may include browser behavior, DOM/state, persistence, network/sync trace, automated tests, real-device and deployed URL evidence as applicable.
 
-When a material decision changes, TAKY SHALL identify traced downstream artifacts, classify them as unaffected / update-required / invalidated / re-test / HOLD, re-run affected gates, and confirm unrelated protected state did not regress. Editing MASTER text alone does not complete the change.
+Operational trace schema remains governed by `MASTER/TRACEABILITY_PROTOCOL.md`.
 
-For UI/visual work, actual approved Golden Reference / Visual ID and representative rendered result SHALL be compared when applicable. Generic redesign or AI-generated similarity is not proof of project-specific design realization.
-
-For software/PWA work, actual runtime evidence may include browser behavior, DOM/state inspection, persisted data, network/sync trace, automated test, real-device behavior and deployed URL evidence as applicable. The user SHALL NOT be used as the primary QA mechanism.
-
-When a user requests review from the first/full conversation and attachments, Handoffs/summaries alone are insufficient. Recover available original evidence, extract decisions and later corrections, trace each material item to actual disposition/result, and mark inaccessible raw history `UNVERIFIED_SOURCE_COVERAGE` rather than claiming impossible completeness.
-
-Operational matrix/schema and stage rules are governed by `MASTER/TRACEABILITY_PROTOCOL.md`.
-
-## 13. Handoff
+## 12. Ownership-Aware Handoff & Resume
 HANDOFF ≠ SUMMARY.
 HANDOFF = LOSSLESS RESUME PACKAGE / STATE RECOVERY MAP / RECOVERY EVIDENCE.
 HANDOFF ≠ SOURCE OF TRUTH.
 HANDOFF COMPLETE ≠ RESUME VERIFIED.
 
-Handoff shall preserve enough state plus recoverable source pointers to reconstruct the last valid working state without silently losing confirmed decisions, user corrections, unresolved state, superseded candidates, evidence, validation state or protected constraints.
+### 12.1 Ownership Mode — ADOPT
+DELEGATE → RESULT RETURNS TO CURRENT OWNER.
+TRANSFER → RECEIVER BECOMES CURRENT OWNER.
+Material handoff SHALL preserve fromOwner, toOwner, ownershipMode, delegatedScope, authorityScope, context, expectedResult and returnContract where applicable.
 
-Handoff should contain canonical reference, current goal/scope, confirmed/protected decisions, detailed active decisions, user corrections, implemented/last-valid state, candidates, HOLD, CONFLICT, MISSING, UNKNOWN, UNVERIFIED, superseded/rejected state, source/evidence location, rollback reference, validation state, open errors/omissions and exact next action.
+### 12.2 Handoff Authority Re-check — HARD LOCK / ADOPT
+HANDOFF ≠ AUTHORITY INHERITANCE.
+TRANSFER ≠ AUTOMATIC PERMISSION TRANSFER.
+Before external action, irreversible/high-impact side effect, protected-data access or authority-sensitive operation, the executing owner/agent SHALL re-check current authority and approval scope.
 
-Coverage Gate:
-SOURCE ITEM → CLASSIFICATION → HANDOFF LOCATION OR SOURCE POINTER → RECOVERY CHECK → RESULT.
+### 12.3 Lossless Package / Coverage
+Handoff SHALL preserve enough state plus recoverable pointers to reconstruct last valid working state without silently losing confirmed decisions, corrections, unresolved/superseded state, evidence, validation or protected constraints.
+Include as material: canonical reference, goal/scope, confirmed/protected decisions, active decisions, corrections, last-valid state, candidates, HOLD/CONFLICT/MISSING/UNKNOWN/UNVERIFIED, superseded/rejected state, evidence locations, rollback, validation, errors/omissions and exact next action.
 
-Every relevant prior item shall be classified as PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED. A materially relevant source item with neither Handoff representation nor a recoverable pointer = HANDOFF FAIL.
-
-Resume Verification:
-FRESH SESSION ASSUMPTION → HANDOFF → LATEST CANONICAL → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → RECONSTRUCT → SOURCE COMPARE → OMISSION / CONFLICT / AUTHORITY / REGRESSION CHECK → RESUME PASS / FAIL / UNKNOWN.
-
-Recovery:
-LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → COMPARE → CLASSIFY → RESUME.
+Coverage gate:
+`SOURCE ITEM → CLASSIFICATION → HANDOFF LOCATION OR SOURCE POINTER → RECOVERY CHECK → RESULT`.
+Material item with neither representation nor recoverable pointer = HANDOFF FAIL.
 
 HANDOFF STATUS ≠ CURRENT STATE UNTIL CANONICAL-COMPARED.
 FILENAME ≠ FILE CONTENT EVIDENCE.
@@ -427,119 +285,120 @@ POINTER EXISTS ≠ POINTER RECOVERABLE.
 COMPACT ≠ HANDOFF.
 SUMMARY ≠ LOSSLESS HANDOFF.
 
-Operational details and validation schema are governed by `MASTER/HANDOFF_PROTOCOL.md`.
+### 12.4 Checkpoint / Resume — ADOPT
+Long-running work SHALL preserve resumable checkpoints when fit-for-purpose: completed scope, pending scope, current owner, source pointers, unresolved issues, last validated point and safe resume point.
 
-## 14. Memory
-L0 TURN
-L1 TASK
-L2 PROJECT
-L3 APPROVED PROJECT KNOWLEDGE
-L4 DOMAIN
-L5 MASTER GOVERNANCE
+Resume verification:
+`FRESH SESSION ASSUMPTION → HANDOFF → LATEST CANONICAL → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → RECONSTRUCT → SOURCE COMPARE → OMISSION/CONFLICT/AUTHORITY/REGRESSION → RESUME PASS/FAIL/UNKNOWN`.
+Operational details remain governed by `MASTER/HANDOFF_PROTOCOL.md`.
 
-MEMORY = ROUTING / RECOVERY AID ≠ CANONICAL AUTHORITY.
-Do not store the entire TAKY system in conversational memory. Retrieve canonical rules and evidence on demand.
+## 13. State, Lifecycle, Memory, History & Revision
+Lifecycle:
+`DRAFT → CANDIDATE → VALIDATED → APPROVED → COMMITTED → RELEASED → SUPERSEDED`.
 
-## 15. Revision
-PRE-CONFIRMATION: ALL MASTER / GUIDE / DOMAIN / APP = REV_00.
-TEST / REVIEW / REMASTER / CANDIDATE CHANGE / REFLECTION SHALL NOT increment Revision.
-EXPLICIT USER FINALIZATION establishes the first official Revision.
+Memory levels remain L0 TURN / L1 TASK / L2 PROJECT / L3 APPROVED PROJECT KNOWLEDGE / L4 DOMAIN / L5 MASTER GOVERNANCE.
+MEMORY = ROUTING/RECOVERY AID ≠ CANONICAL AUTHORITY. Do not store the entire TAKY system in conversational memory; retrieve canonical rules/evidence on demand.
+
+PRE-CONFIRMATION: ALL MASTER/GUIDE/DOMAIN/APP = REV_00.
+TEST/REVIEW/REMASTER/CANDIDATE CHANGE/REFLECTION SHALL NOT increment Revision.
+EXPLICIT USER FINALIZATION establishes first official Revision.
 WORK SNAPSHOT ≠ OFFICIAL REVISION.
 HISTORICAL FILE REVISION ≠ CURRENT OFFICIAL REVISION.
+Historical committed state SHALL remain recoverable and SHALL NOT be silently rewritten.
 
-## 16. Rollback / Snapshot
-Before canonical modification preserve a recoverable rollback point.
-Record canonical commit/snapshot, affected files/sections, delta, reason, affected systems, validation result, regression result and rollback target.
+## 14. Rollback / Snapshot & Delta-First Recovery
+Before canonical modification preserve a recoverable rollback point: canonical commit/snapshot, affected files/sections, delta, reason, systems, validation/regression and rollback target.
+ROLLBACK ≠ AUTOMATIC RESTORATION; a rollback candidate must be checked against later confirmed decisions.
 
-Rollback ≠ automatic restoration.
-A rollback candidate must be checked against later confirmed decisions before restoration.
+### 14.1 Delta-First Recovery — ADJUST
+FAILURE ≠ FULL RESTART. Recover/re-run affected scope first. Re-run unaffected scope only when global state trust, shared dependency, authority state or integrated correctness can no longer be established.
 
-## 17. Sync / Storage Governance
-GitHub TAKY = CANONICAL MASTER SOURCE.
-Google Drive = WORKING / MIRROR / REFERENCE SURFACE.
-ChatGPT = WORKING INTERFACE.
-Mobile / Web / runtime systems consume approved canonical source according to implementation policy.
-
-DRIVE WRITE ≠ GITHUB WRITE
-PARTIAL SYNC ≠ SYNC PASS
-
-SYNC PASS requires intended approved delta written, canonical write verified, required mirror write verified, and divergence resolved or explicitly recorded.
-A mirror claiming canonical equivalence should preserve 1:1 canonical content plus mirror metadata.
-
-## 17.1 Connected / Offline Runtime Sync Governance — CONDITIONAL HARD LOCK
-When a project requires offline use, multi-device use, external projection or eventual synchronization, the lower PROJECT / DOMAIN master SHALL explicitly separate:
-- canonical governance/configuration authority;
-- runtime authoritative state or event ledger;
-- device-local replica, structured durable store and outbox;
-- external operational/reporting projection.
+## 15. Connected / Offline Runtime Sync Governance — CONDITIONAL HARD LOCK
+When offline, multi-device, external projection or eventual synchronization applies, lower PROJECT/DOMAIN SHALL separate governance/config authority, runtime authoritative state/event ledger, device-local replica/durable store/outbox and external projection.
 
 GOVERNANCE SOURCE ≠ RUNTIME DATA SOURCE.
 LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
-PROJECTION WRITE ≠ CANONICAL / RUNTIME COMMIT.
+PROJECTION WRITE ≠ CANONICAL/RUNTIME COMMIT.
 OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
 
-The project sync contract SHALL define, as applicable:
-- local commit, pending, sending, acknowledged/synced, retry, authentication-blocked, validation-blocked and conflict states;
-- stable entity/event identifiers, client sequence or equivalent ordering evidence, idempotency/deduplication and replay safety;
-- field/record ownership, merge/conflict policy, immutable or append-only history where required, and correction semantics;
-- bounded retry with provider-directed delay/backoff, crash/restart recovery and explicit user-visible pending/conflict state;
-- multiple recovery triggers appropriate to the platform, such as app start, network restoration, foreground/visibility change, periodic/manual retry and server acknowledgement; one optional platform API SHALL NOT be the sole correctness path;
-- server-side authorization and tenant/family/project scope validation; credentials and provider secrets SHALL NOT be exposed to untrusted clients;
-- reconciliation from runtime authority to external projections, respecting connector limits and treating webhook/notification events as change signals rather than complete ordered state unless the provider guarantees otherwise.
+Project sync contract SHALL define as applicable: local/pending/sending/ack/retry/auth-blocked/validation-blocked/conflict states; stable entity/event IDs and ordering evidence; idempotency/dedup/replay safety; field/record ownership and merge/conflict policy; immutable/append-only history where required; bounded provider-aware retry/backoff; crash/restart recovery; user-visible pending/conflict; multiple recovery triggers; server-side authorization and tenant/family/project isolation; secret protection; runtime-to-projection reconciliation; webhook/notification as change signal unless provider guarantees complete ordered state.
 
-PASS requires representative tests for restart, reconnection, duplicate replay, out-of-order delivery, multi-device merge, long-offline recovery, authorization isolation, provider throttling/failure and projection reconciliation when applicable. Unperformed cases remain UNKNOWN.
+PASS requires representative applicable tests for restart, reconnection, duplicate replay, out-of-order delivery, multi-device merge, long-offline recovery, authorization isolation, throttling/failure and projection reconciliation. Unperformed cases remain UNKNOWN.
 
-## 17.2 Entity Semantics / Identity Separation — HARD LOCK
-Structurally related records SHALL NOT be treated as semantically identical without an approved project rule.
-
-CONSTRAINT / SCHEDULE TEMPLATE ≠ ACTIONABLE TASK.
+## 16. Entity Semantics / Identity Separation — HARD LOCK
+CONSTRAINT/SCHEDULE TEMPLATE ≠ ACTIONABLE TASK.
 TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
-RELATION EXISTS ≠ CORRECT OWNERSHIP / MEANING.
+RELATION EXISTS ≠ CORRECT OWNERSHIP/MEANING.
 
-Where applicable, distinguish recurring templates or constraints, dated execution instances, state-transition events, completion/history records and reporting projections. Identity keys SHALL match the entity lifecycle they identify. A recurring schedule key SHALL NOT be reused as the sole identity of a dated task or execution event.
+Where applicable distinguish recurring templates/constraints, dated instances, state-transition events, completion/history and reporting projections. Identity keys SHALL match entity lifecycle. Derived actions preserve source lineage without converting every source constraint into an action. Completed history remains stable; later corrections create traceable successor/correction state rather than silently mutating prior evidence.
 
-Derived tasks/actions SHALL preserve source lineage without converting every source constraint into an action. Completed history remains stable; later corrections append or create traceable successor state according to project policy rather than silently mutating prior evidence.
+## 17. Security & Privacy
+Minimum required access, retention and privilege. Credentials SHALL NOT become MASTER data. Private user/family/business data remains within authorized scope. External systems are capabilities, not authority.
 
-## 18. External Research / Improvement
-TAKY may research current AI capabilities, model/provider/tool changes, validated engineering methods, emerging workflows, credible community practices, official administrative practices and new architectural ideas.
-External findings = EVIDENCE / CANDIDATE.
+Authentication/session availability ≠ authority. User-owned authenticated access may be used only within authorized scope. TAKY SHALL NOT adopt credential circumvention, access-control bypass or unauthorized API-avoidance as a governing principle.
 
-TREND ≠ MASTER DECISION
-NEW ≠ BETTER
-POPULAR ≠ FIT-FOR-PURPOSE
-FOREIGN BEST PRACTICE ≠ LOCAL REQUIREMENT
+## 18. Shared Capability Ownership / Boundary
+GRAND MASTER owns cross-system invariants and governance. Reusable implementation mechanisms belong to appropriate SHARED ENGINE/OS. Domain algorithms remain DOMAIN/PROJECT owned.
 
-Evaluate meaningful candidates against philosophy, HARD LOCKs, evidence quality/freshness, fit, authority, applicability, complexity, maintainability, security/privacy, cost, latency, reversibility, migration burden, regression risk and measurable benefit.
-TAKY may recommend PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED.
-No external trend, precedent or foreign system may automatically modify MASTER.
+OWNERSHIP_TRANSFER examples from Baseline 01:
+- Collector/Source Recovery Engine: Capture Quality Gate; normalized URL + service identity + content fingerprint dedup; attachment provenance/rights; upstream-source preference. HTTP 200/TEXT EXISTS/SCREENSHOT EXISTS alone SHALL NOT prove ORIGINAL at implementation level.
+- Learning/Family OS + Ready & Set/Hide & Seek: learning-resource routing; multi-signal adaptation; progressive learner agency; Current Homework priority and project-specific learning contracts. Learning Master owns learning interpretation; Planner scheduling/allocation authority remains project-defined and SHALL NOT be silently reassigned by GRAND MASTER.
+- Work OS/Artifact Engine: structured-data-first multi-artifact generation; A3 HTML rendering; XLSX ingestion/normalization; PPTX/PDF/Web outputs and artifact validation. HTML/XLSX/PPTX presentation forms SHALL NOT silently become source of truth over the approved structured model.
+- Fillable PDF/Web form extension remains HOLD until separately approved/implemented.
 
-## 19. Security / Privacy
-Minimum required access, retention and privilege.
-Credentials SHALL NOT become MASTER data.
-Private user/family/business data shall remain within authorized scope.
-External systems are capabilities, not authority.
+Operational folder names, mail connection state, CAD-specific workflow, project-specific regulatory engines, UI/logic and tool configuration belong to lower OS/DOMAIN/PROJECT/WORKFLOW. Moving them out of GRAND MASTER is scope correction, not deletion.
 
-## 20. Command Contract
-/검토 = READ / ANALYZE / COMPARE / DEEP ANALYSIS WHEN MATERIAL = NO CANONICAL WRITE.
+## 19. External Research / Improvement
+TAKY may research current AI/model/provider/tool changes, validated engineering methods, workflows, credible community practices, official administrative practices and architectural ideas. Findings = EVIDENCE/CANDIDATE.
 
-/심층분석 = execute the TAKY Deep Analysis protocol at fit-for-purpose depth = NO CANONICAL WRITE unless the user separately authorizes /반영.
+TREND ≠ MASTER DECISION.
+NEW ≠ BETTER.
+POPULAR ≠ FIT-FOR-PURPOSE.
+FOREIGN BEST PRACTICE ≠ LOCAL REQUIREMENT.
 
-/반영 = LATEST CANONICAL RECOVERY → RELEVANT SOURCE / FULL-AVAILABLE CONVERSATION / ATTACHMENT / DECISION RECOVERY → DECISION-COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT ANALYSIS → COMPLEMENT / IMPROVEMENT / OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → INDEPENDENT CROSS-VALIDATION WHEN MATERIAL → REGRESSION → REFLECTION / REVERSE-VALIDATION → END-TO-END REALIZATION TRACEABILITY GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER / MIRROR WRITE → POST-WRITE FETCH / VERIFICATION → HISTORY / CHANGELOG → DECISION-COVERAGE RECHECK.
+Evaluate candidates against philosophy/HARD LOCKs, evidence quality/freshness, fit, authority, applicability, complexity, maintainability, security/privacy, cost, latency, reversibility, migration burden, regression risk and measurable benefit. External findings SHALL NOT automatically modify MASTER.
 
-/최종 = actual result validation + applicable end-to-end traceability validation.
-/재개 = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
-/인수인계 = lossless resume package + coverage gate + resume simulation; independent recovery document, not canonical authority.
-/compact ≠ /인수인계.
+## 20. Command Contract — HARD LOCK
+`/검토` = READ / ANALYZE / COMPARE / DEEP ANALYSIS WHEN MATERIAL = NO CANONICAL WRITE.
+`/심층분석` = Deep Analysis at fit-for-purpose depth = NO CANONICAL WRITE unless separately authorized `/반영`.
 
+`/반영` = LATEST CANONICAL RECOVERY → RELEVANT/FULL-AVAILABLE SOURCE/CONVERSATION/ATTACHMENT/DECISION RECOVERY → DECISION-COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT → COMPLEMENT/IMPROVEMENT/OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → INDEPENDENT CROSS-VALIDATION WHEN MATERIAL → REGRESSION → REFLECTION/REVERSE VALIDATION → E2E REALIZATION GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER/MIRROR WRITE → POST-WRITE FETCH/VERIFICATION → HISTORY/CHANGELOG → DECISION-COVERAGE RECHECK.
+
+`/최종` = actual-result validation + applicable end-to-end traceability validation.
+`/재개` = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
+`/인수인계` = lossless resume package + coverage gate + resume simulation; independent recovery document, not canonical authority.
+`/compact ≠ /인수인계`.
 TAKY aliases inherit these semantics and SHALL NOT weaken command gates.
 
-## 21. Evolution
-OBSERVATION → EVIDENCE → CANDIDATE → IMPACT ANALYSIS → VALIDATION → APPROVAL → COMMIT → RELEASE → OBSERVATION / FEEDBACK
+## 21. Canonical Change / Structural Rewrite Protocol — HARD LOCK
+A structural rewrite SHALL preserve active meaning unless a specific rule has authorized disposition. Rewording ≠ authority to change semantics.
 
+Before canonical replacement:
+1. preserve rollback snapshot/pointer;
+2. recover latest canonical and applicable sources;
+3. inventory active rules/HARD LOCKs;
+4. create old→new migration/decision-coverage matrix;
+5. verify protected invariants and ownership;
+6. run forward + reverse trace;
+7. self-validation;
+8. independent cross-validation where material;
+9. impact + regression validation;
+10. artifact structural-integrity validation;
+11. applicable human approval;
+12. canonical write;
+13. required lower-layer/mirror write;
+14. post-write readback and compare;
+15. confirm unrelated protected state did not regress;
+16. history/changelog and decision-coverage recheck.
+
+Document PASS ≠ Runtime/Implementation PASS. Known Baseline 01 source gaps remain `UNVERIFIED_SOURCE_COVERAGE` until separately resolved.
+
+## 22. Evolution
+`OBSERVATION → EVIDENCE → CANDIDATE → IMPACT ANALYSIS → VALIDATION → APPROVAL → COMMIT → RELEASE → OBSERVATION/FEEDBACK`.
 OBSERVATION ≠ AUTOMATIC MASTER CHANGE.
-At least one GRAND REMASTER may occur before first official Revision.
-All confirmed decisions and HARD LOCKs must survive regression validation.
+At least one GRAND REMASTER may occur before first official Revision. All confirmed decisions and HARD LOCKs must survive regression validation.
 
-## Boundary Note
-Operational details such as Work OS folder names, mail provider connection/monitoring state, CAD-specific workflows, project-specific regulatory engines, project-specific UI/logic and tool configuration belong to their lower OS / DOMAIN / PROJECT / WORKFLOW masters.
-Moving them out of GRAND MASTER is scope correction, not deletion.
+## 23. Candidate Replacement Gate
+This file is a FULL REWRITE CANDIDATE, not canonical. It SHALL NOT replace `MASTER/MASTER_LOGIC.md` until full migration/reverse validation establishes that every material active rule from the protected canonical has a correct destination or explicit authorized disposition and no protected rule is weakened.
+
+END
