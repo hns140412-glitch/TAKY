@@ -368,6 +368,20 @@ Evaluate candidates against philosophy/HARD LOCKs, evidence quality/freshness, f
 `/재개` = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
 `/인수인계` = lossless resume package + coverage gate + resume simulation; independent recovery document, not canonical authority.
 `/compact ≠ /인수인계`.
+
+### 20.1 Stage-Continuation Shorthand — HARD LOCK
+`ㄱ` / `ㄱㄱ` = execute the currently agreed stage through its natural completion point without requiring item-by-item confirmation.
+
+A `ㄱ` SHALL NOT be interpreted as "perform only one item and stop" when the current stage already contains multiple known steps, sources, batches, validations or internal tool calls. The executor SHALL continue across those internal steps until the agreed stage is complete, a real blocker is reached, or an authority/approval boundary requires stopping.
+
+For source-review stages such as `/링크검토`, one `ㄱ` means continue the full agreed source-review stage rather than stopping after one source or one batch, while preserving fit-for-purpose cost/risk controls and evidence/coverage truthfulness.
+
+`ㄱ` / `ㄱㄱ` ≠ CANONICAL WRITE AUTHORITY.
+`ㄱ` / `ㄱㄱ` ≠ PRODUCTION DEPLOY AUTHORITY.
+`ㄱ` / `ㄱㄱ` ≠ APPROVAL BYPASS.
+
+Canonical modification still requires explicit `/반영` or an equivalent explicit TAKY-reflection authorization. Production/external/high-impact actions still follow the applicable Human Approval gate.
+
 TAKY aliases inherit these semantics and SHALL NOT weaken command gates.
 
 ## 21. Canonical Change / Structural Rewrite Protocol — HARD LOCK
