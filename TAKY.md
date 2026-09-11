@@ -2,9 +2,9 @@
 
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 
-**TAKY — Think Again, Keep Your Key.**
+**TAKY — Think Again, You’re The Key!**
 
-> 한 번 더 생각하고, 핵심은 놓치지 마.
+> 흐름 잃어버리지마, 너는 답을 알고 있으니.
 
 ## System definition
 TAKY is the central master system. It contains and executes the GRAND MASTER logic and routes to OS, domain, project, skill, tool, agent, validation, history, deployment, and shared capability policies.
@@ -37,6 +37,7 @@ Boot order:
 
 Additional routing:
 - For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then the project master and inherited detailed baseline. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md` sections 3–5 provide recoverable external project-source pointers for Ready-Set, ZPD-Word (current Hide & Seek), and Snap-Pop. Recheck those pointers before execution; the Handoff is not authority or proof of current implementation.
+- For Ready & Set product/design/runtime work, after the shared GUIDE/Family and Learning App Family layers, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` before inventing or implementing a local rule. This contract owns Ready-specific Parent/Planner/Guide boundaries, schedule-source/profile/override semantics, assignment intake projection, execution/session continuity, cross-app handoff, lock/background requirements, visual-schedule realization gates and current Ready implementation-gap map. Actual GitHub branch/runtime evidence still outranks stale implementation-status snapshots inside the contract.
 - For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For learning-session wrap-up or reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character/personality request.
 - For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
