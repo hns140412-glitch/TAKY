@@ -23,17 +23,18 @@ After loading TAKY, identify the task-relevant OS / DOMAIN / PROJECT / GUIDE / v
 Boot order:
 1. Load TAKY.md.
 2. Load MASTER/MASTER_LOGIC.md.
-3. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
-4. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
-5. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner before judging the result.
-6. Recover approved state, decision history, relevant available full-conversation/attachment evidence, and Handoff evidence.
-7. Extract the rules specifically applicable to the current task.
-8. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
-9. Compare the current request against authority and protected decisions.
-10. Execute only within allowed scope.
-11. Inspect the actual integrated result, not only its separate parts.
-12. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
-13. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
+3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, or omission recovery is material, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md` and recover relevant unresolved Context Events/evidence links before treating a compact summary as sufficient context.
+4. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
+5. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
+6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner before judging the result.
+7. Recover approved state, decision history, relevant available full-conversation/attachment evidence, Context Ledger links, and Handoff evidence.
+8. Extract the rules specifically applicable to the current task.
+9. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
+10. Compare the current request against authority and protected decisions.
+11. Execute only within allowed scope.
+12. Inspect the actual integrated result, not only its separate parts.
+13. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
+14. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
 
 Additional routing:
 - For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then the project master and inherited detailed baseline. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md` sections 3–5 provide recoverable external project-source pointers for Ready-Set, ZPD-Word (current Hide & Seek), and Snap-Pop. Recheck those pointers before execution; the Handoff is not authority or proof of current implementation.
@@ -53,15 +54,15 @@ Operational workspace authority gate:
 A workspace/dashboard/database that displays or coordinates information SHALL NOT silently become canonical, numerical, geometric, evidentiary or approval authority merely because it is convenient or automated. Tool-role authority must remain explicit and traceable.
 
 ## Natural commands
-- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
+- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery; when conversation continuity is material, recover relevant Context Ledger events/evidence links rather than relying on the latest summary alone
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
-- 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Decision-Coverage Matrix → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical owner/lower-layer write → post-write verification → history
+- 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Context Ledger/Decision-Coverage recovery → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical owner/lower-layer write → post-write verification → history
 - `/` → context-aware command discovery; does not bypass validation or approval
-- `/compact` → compress current context for continuation; not a full handoff
-- `/인수인계` → build a full material handoff from accessible conversation/source state
-- `/재개` → recover Handoff plus actual referenced/relevant sources and resume
-- `/대화전체보존` → preserve the materially accessible USER↔Assistant conversation in original order as evidence; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
-- `대화 종료` → persistence check → TEMP/project classification → Handoff → source pointers → resume instruction
+- `/compact` → compress current context for convenience only; omission from compact output does not delete/supersede Context Ledger or evidence
+- `/인수인계` → build a full material handoff from accessible conversation/source state, with pointers to relevant unresolved Context Events/evidence; Handoff does not replace them
+- `/재개` → recover latest canonical + Handoff + relevant unresolved Context Events/decision traces + actual implementation evidence, then resume from the first unresolved gate
+- `/대화전체보존` → preserve the materially accessible USER↔Assistant conversation in original order as evidence and link material Context Events; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
+- `대화 종료` → persistence check → conversation evidence/context-event linkage → TEMP/project classification → Handoff → source pointers → resume instruction
 - `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only forensic recovery mode
 
 FORENSIC RECOVERY IS CONDITIONAL.
@@ -71,6 +72,9 @@ A material historical omission/conflict discovered during ordinary work may be m
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
+CONVERSATION CONTEXT LEDGER = TRACE / CONTINUITY LAYER, NOT AUTOMATIC AUTHORITY
+SUMMARY ≠ CONTEXT PRESERVATION
+NOT IN SUMMARY ≠ REJECTED OR SUPERSEDED
 CAPTURE ≠ DECISION
 OBSERVATION ≠ MASTER DECISION
 EXTERNAL TOOL ≠ MASTER AUTHORITY
@@ -121,6 +125,7 @@ TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
 STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION.
 PROJECTION WRITE ≠ SOURCE COMMIT.
+SUMMARY CREATED ≠ CONTINUITY PASS.
 
 `EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed the highest execution state actually evidenced.
 `PROJECT RULE ≠ GLOBAL RULE`: lower-layer rules require explicit scope/promotion classification before becoming GRAND MASTER invariants.
@@ -130,6 +135,9 @@ For material product/result work, validate the applicable chain:
 
 For operational workspace work, also validate:
 `AUTHORITATIVE SOURCE → OPERATIONAL RECORD / VIEW → EVIDENCE / DECISION → DOWNSTREAM REFLECTION → VALIDATION / HISTORY`, and reverse-trace visible status/completion back to source and evidence.
+
+For conversation continuity, validate the applicable chain:
+`ORIGINAL EVIDENCE → CONTEXT EVENT → IDEA/DECISION TRACE → CANONICAL REFLECTION STATUS → IMPLEMENTATION STATUS → HANDOFF POINTER → RESUME GATE`.
 
 A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
 
