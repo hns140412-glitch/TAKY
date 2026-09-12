@@ -284,6 +284,36 @@ Ownership boundary:
 - Provider choice, exact OCR confidence thresholds, retry limits and live background analysis scheduling remain HOLD until project/runtime validation.
 - PWA implementation, deployment and real-device evidence are outside this logic/copy delta and remain UNVERIFIED.
 
+### 12.1 ASSIGNMENT CYCLE / SOURCE REGISTRY — RECOVERED HARD CONTINUITY CONTRACT
+
+A recoverable assignment cycle SHALL relate the source handed out, answer/SOL material when legitimately available, completed work, and capture/analysis evidence without relying on folder-name guesswork.
+
+Recovered logical registry:
+`CHILD PROFILE → assignmentRoot → ASSIGNMENT CYCLE`
+
+An Assignment Cycle may track:
+- `cycleId`
+- `childId / memberId`
+- `assignmentRoot`
+- `distributedSourceRefs[]` — 숙제배포 / original distributed-source references
+- `solRefs[]` — SOL / answer-solution references with access boundary preserved
+- `completedRefs[]` — 숙제완료 / completed-work references
+- `captureSessionIds[]`
+- `assignmentStatus`
+- `reviewStatus`
+- `retentionState`
+
+Hard distinctions:
+- `FOLDER NAME ≠ RELATIONSHIP PROOF`
+- `DISTRIBUTED SOURCE ≠ SOL ≠ COMPLETED WORK`
+- `ASSIGNMENT CYCLE ≠ CAPTURE BATCH`
+- `ANALYSIS BATCH ≠ ASSIGNMENT CYCLE END`
+- `SOL EXISTS ≠ CHILD MAY ACCESS SOL`
+
+The logical relationship is required before automating cross-file recovery, comparison, grading/check or cleanup. Exact Drive folder naming/storage adapter remains implementation-owned and must preserve the logical cycle contract.
+
+Deletion / weekly cleanup is NOT automatically authorized by this registry. Retention period, immutable originals, long-term learning-history separation and rollback/recovery remain explicit policy gates. Until those are confirmed, destructive cleanup stays `HOLD`.
+
 Answer-key source is separate from assignment source.
 `ANSWER KEY EXISTS ≠ CHILD CAN ACCESS ANSWER`
 
@@ -518,6 +548,7 @@ Preferred security shape where applicable:
 - Voice/Timer/BGM separation
 - Three-Dimension Growth separation
 - Assignment continuous multi-photo intake + Review-before-Commit
+- Assignment Cycle / distributed-source / SOL / completed-work relationship registry
 - Answer-key timing/access separation
 - Learning Unit Sizing
 - Learning Method Router
@@ -546,6 +577,7 @@ Retain intentionally without silent adoption:
 - exact native lock-screen / Live Activity implementation approach
 - third-party Claude/Skill/plugin installation bundle
 - exact adaptive workload thresholds/formulas until project-approved evidence and validation exist
+- assignment-cycle destructive cleanup / retention timing until immutable-original and history boundaries are approved
 - unverified runtime/offline/multi-device convergence and Release PASS.
 
 HOLD exit condition: explicit design/implementation need + fit-for-purpose evidence + authority/impact/security/regression validation.
