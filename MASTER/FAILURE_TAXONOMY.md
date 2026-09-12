@@ -25,6 +25,7 @@ These classes describe mismatch between the user/request contract and the produc
 - `STALE_STATE` — superseded/older state was used over the current valid state.
 - `UNCLASSIFIED_CONFLICT` — competing material states exist but were not surfaced/classified.
 - `PREMATURE_PASS` — completion/PASS was claimed while a material gate remained failed, unknown, unverified, or not performed.
+- `PREMATURE_STOP` — execution stopped at narration/intermediate state even though the user had delegated continuation, an authorized executable next action remained, and no real blocker or required human decision had been reached.
 - `USER_AS_QA` — the user was made the default searcher/debugger/proof collector for work TAKY could materially perform itself.
 
 ## 2. Recovery / evidence axis
@@ -73,6 +74,8 @@ Required mappings when applicable:
 - `UNVERIFIED_SOURCE_COVERAGE` SHALL NOT be used to hide `RECOVERY_FAILED`, `FALSE_MISSING_DECLARATION`, or `USER_FORCED_RECOVERY`.
 - `RULE_NOT_APPLIED` after a prior correction/rule may also be `POST_CORRECTION_REOCCURRENCE`.
 - `STATE_CLAIM_MISMATCH` with a completion claim normally implies `PREMATURE_PASS`.
+- delegated continuation + authorized next action + no real blocker/human decision + early stop ⇒ `PREMATURE_STOP`.
+- `PREMATURE_STOP` and `PREMATURE_PASS` are distinct: the former is unjustified cessation; the latter is an unjustified completion claim. They may co-occur.
 
 ## 6. Fixture mapping
 
@@ -82,7 +85,7 @@ Current regression fixtures map primarily as follows:
 - `F-02` → `OMISSION` / coverage insufficiency / possible `PREMATURE_PASS`.
 - `F-03` → `HANDOFF_LOSS` with possible `SCOPE_SHRINKAGE`, `SUBSTITUTE_RESULT`, `PREMATURE_PASS`.
 - `F-04` → `STALE_STATE` / `WRONG_REFLECTION`.
-- `F-05` → intent/result discrepancy axis.
+- `F-05` → intent/result discrepancy axis; when the literal command delegates continued execution, an unjustified early stop may also be `PREMATURE_STOP`.
 - `F-06` → `RULE_NOT_APPLIED`; recurrence may add `POST_CORRECTION_REOCCURRENCE`.
 
 ## 7. Status boundary
