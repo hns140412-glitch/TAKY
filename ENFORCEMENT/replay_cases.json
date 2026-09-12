@@ -1,0 +1,201 @@
+{
+  "fixture_version": "2026-09-13.1",
+  "scope": "Deterministic replay/equivalent checks for F-01 through F-06. These cases validate repository gates, not live LLM behavior.",
+  "cases": [
+    {
+      "id": "F-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RECOVERY_FAILED",
+        "FALSE_MISSING_DECLARATION",
+        "USER_FORCED_RECOVERY",
+        "USER_AS_QA",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "negative_existence_claim": true,
+        "recovery_paths_checked": 1,
+        "material_alternate_path_available": true,
+        "source_found_after_claim": true,
+        "source_recoverable_by_taky": true,
+        "user_had_to_recover": true,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "F-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "negative_existence_claim": false,
+        "recovery_paths_checked": 4,
+        "material_alternate_path_available": false,
+        "source_found_after_claim": false,
+        "source_recoverable_by_taky": true,
+        "user_had_to_recover": false,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "F-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "OMISSION",
+        "REPLAY_NOT_PERFORMED",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "explicit_full_global_scan": true,
+        "source_family_inventory_complete": false,
+        "second_semantic_pass_performed": false,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "F-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "explicit_full_global_scan": true,
+        "source_family_inventory_complete": true,
+        "second_semantic_pass_performed": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "F-03",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "HANDOFF_LOSS",
+        "SCOPE_SHRINKAGE",
+        "SUBSTITUTE_RESULT",
+        "OMISSION",
+        "UNCLASSIFIED_CONFLICT",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "handoff_requested_maximum": true,
+        "recipient_repo_access": false,
+        "portable_source_snapshots": false,
+        "portable_diff_with_base": false,
+        "repo_pointers_only": true,
+        "source_manifest_present": false,
+        "evidence_authority_classified": false,
+        "resume_simulation_passed": false,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "F-03",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "handoff_requested_maximum": true,
+        "recipient_repo_access": false,
+        "portable_source_snapshots": true,
+        "portable_diff_with_base": false,
+        "repo_pointers_only": false,
+        "source_manifest_present": true,
+        "evidence_authority_classified": true,
+        "resume_simulation_passed": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "F-04",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "STALE_STATE",
+        "WRONG_REFLECTION",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "latest_correction_exists": true,
+        "latest_correction_applied": false,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "F-04",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "latest_correction_exists": true,
+        "latest_correction_applied": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "F-05",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SCOPE_SHRINKAGE",
+        "SUBSTITUTE_RESULT",
+        "OUTPUT_FORM_MISMATCH",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "scope_shrunk_without_authority": true,
+        "substitute_result": true,
+        "output_form_mismatch": true,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "F-05",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "scope_shrunk_without_authority": false,
+        "substitute_result": false,
+        "output_form_mismatch": false,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "F-06",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "ENFORCEMENT_MISSING",
+        "RULE_NOT_APPLIED",
+        "REPLAY_NOT_PERFORMED",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "rule_cited": true,
+        "rule_violated": true,
+        "claims_complete": true,
+        "mechanically_checkable_rule": true,
+        "enforcement_expression_present": false,
+        "recurrence_prevention_claim": true,
+        "representative_replay_performed": false
+      }
+    },
+    {
+      "id": "F-06",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "rule_cited": true,
+        "rule_violated": false,
+        "claims_complete": false,
+        "mechanically_checkable_rule": true,
+        "enforcement_expression_present": true,
+        "recurrence_prevention_claim": true,
+        "representative_replay_performed": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+name: TAKY Enforcement Replay
+
+on:
+  push:
+    paths:
+      - 'ENFORCEMENT/**'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/EXECUTION_REGRESSION_FIXTURES.md'
+      - '.github/workflows/taky-enforcement.yml'
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/**'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/EXECUTION_REGRESSION_FIXTURES.md'
+      - '.github/workflows/taky-enforcement.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile enforcement gate
+        run: python -m py_compile ENFORCEMENT/taky_gate.py
+      - name: Replay F-01 through F-06
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases.json
