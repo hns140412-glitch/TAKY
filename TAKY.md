@@ -2,9 +2,9 @@
 
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 
-**TAKY — Think Again, You’re The Key!**
+**TAKY — Think Again, Keep Your Key.**
 
-> 흐름 잃어버리지마, 너는 답을 알고 있으니.
+> 한 번 더 생각하고, 핵심은 놓치지 마.
 
 ## System definition
 TAKY is the central master system. It contains and executes the GRAND MASTER logic and routes to OS, domain, project, skill, tool, agent, validation, history, deployment, and shared capability policies.
@@ -44,6 +44,7 @@ Additional routing:
 - For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
 - For explicit full historical/global forensic recovery requests, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT run exhaustive historical reconstruction by default for ordinary tasks.
 - For a material negative-existence claim during ordinary work, use the targeted negative-claim/recovery gates from `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` without automatically expanding into full account-history forensics.
+- For a correction involving false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, or non-recoverable handoff, load `MASTER/EXECUTION_REGRESSION_FIXTURES.md` and replay the applicable fixture before claiming recurrence-prevention PASS.
 - For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
 - For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
 
