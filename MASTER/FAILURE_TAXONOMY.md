@@ -15,8 +15,6 @@ If a local protocol and this taxonomy diverge, this file controls unless a later
 
 ## 1. Intent / result discrepancy axis
 
-These classes describe mismatch between the user/request contract and the produced result.
-
 - `INTENT_DRIFT` — the executed meaning materially differs from the user command/latest correction.
 - `SCOPE_SHRINKAGE` — requested feasible coverage was reduced without authority.
 - `SUBSTITUTE_RESULT` — a different/easier deliverable was produced instead of the requested result.
@@ -30,8 +28,6 @@ These classes describe mismatch between the user/request contract and the produc
 
 ## 2. Recovery / evidence axis
 
-These classes describe source-access and recovery behavior.
-
 - `TRUE_UNAVAILABLE` — the original material source is genuinely inaccessible after applicable available recovery paths were checked.
 - `UNVERIFIED_SOURCE_COVERAGE` — coverage state used when a material source region cannot be independently verified. This is a state, not proof of nonexistence and not a synonym for `RECOVERY_FAILED`.
 - `RECOVERY_FAILED` — a materially recoverable source was not recovered before a decision/claim that depended on it.
@@ -40,8 +36,6 @@ These classes describe source-access and recovery behavior.
 - `POST_CORRECTION_REOCCURRENCE` — the same material omission, recovery failure, misinterpretation, or execution failure recurred after an applicable correction or canonical rule already existed.
 
 ## 3. Reflection / trace / handoff axis
-
-These classes describe mismatch between recovered decisions and downstream representation.
 
 - `MISSING` — an active material decision/requirement lacks its required current representation/owner/result.
 - `WRONG_REFLECTION` — the requirement is represented, but materially incorrectly.
@@ -52,19 +46,16 @@ These classes describe mismatch between recovered decisions and downstream repre
 
 ## 4. Enforcement / rule-application axis
 
-These classes describe a gap between normative rules and actual behavior.
-
 - `RULE_NOT_APPLIED` — an applicable canonical rule was loaded/cited/known but the actual result violated it.
 - `ENFORCEMENT_MISSING` — a material replayable/mechanically-checkable rule has only prose and no fit-for-purpose enforcement expression where one is feasible.
 - `REPLAY_NOT_PERFORMED` — a recurrence-prevention claim was made without the representative replay/equivalent check required by the applicable fixture.
 - `STATE_CLAIM_MISMATCH` — narrative/history/completion wording claims a higher or different state than the governing state/manifest/evidence supports.
 - `HUMAN_APPROVAL_MISSING` — an action/promotion that requires explicit human approval lacks a recoverable approval record/token.
+- `AUTHORITY_BOUNDARY_VIOLATION` — reference-only, external, candidate, lower-authority, or unverified material was promoted into canonical/execution-controlling authority without the required validation, localization, impact/regression check, and human approval when applicable.
 
 ## 5. Cross-axis mapping — HARD LOCK
 
 The axes are related but not interchangeable. A single incident MAY receive multiple classes.
-
-Required mappings when applicable:
 
 - `FALSE_MISSING_DECLARATION` ⇒ at least `RECOVERY_FAILED`; if the user then recovered the evidence, also `USER_FORCED_RECOVERY`.
 - `USER_FORCED_RECOVERY` ⇒ `USER_AS_QA` unless the relevant source was genuinely available only to the user.
@@ -76,10 +67,9 @@ Required mappings when applicable:
 - `STATE_CLAIM_MISMATCH` with a completion claim normally implies `PREMATURE_PASS`.
 - delegated continuation + authorized next action + no real blocker/human decision + early stop ⇒ `PREMATURE_STOP`.
 - `PREMATURE_STOP` and `PREMATURE_PASS` are distinct: the former is unjustified cessation; the latter is an unjustified completion claim. They may co-occur.
+- reference-only/external material controlling execution before governed promotion ⇒ `AUTHORITY_BOUNDARY_VIOLATION`; if required human approval is also absent, add `HUMAN_APPROVAL_MISSING`.
 
 ## 6. Fixture mapping
-
-Current regression fixtures map primarily as follows:
 
 - `F-01` → recovery/evidence axis + `USER_AS_QA`.
 - `F-02` → `OMISSION` / coverage insufficiency / possible `PREMATURE_PASS`.
@@ -87,6 +77,9 @@ Current regression fixtures map primarily as follows:
 - `F-04` → `STALE_STATE` / `WRONG_REFLECTION`.
 - `F-05` → intent/result discrepancy axis; when the literal command delegates continued execution, an unjustified early stop may also be `PREMATURE_STOP`.
 - `F-06` → `RULE_NOT_APPLIED`; recurrence may add `POST_CORRECTION_REOCCURRENCE`.
+- `Q-01` → `RECOVERY_FAILED / USER_AS_QA` when the user is asked to recover evidence before available recovery families are exhausted.
+- `A-01` → `AUTHORITY_BOUNDARY_VIOLATION` when REFERENCE_ONLY material is promoted without governed validation/localization.
+- `B-01` → `HANDOFF_LOSS` when a claimed self-contained maximum/full handoff fails bundle closure.
 
 ## 7. Status boundary
 
