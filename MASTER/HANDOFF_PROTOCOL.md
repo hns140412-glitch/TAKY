@@ -95,6 +95,28 @@ A pointer that cannot reasonably be recovered is not sufficient evidence of pres
 FILENAME ≠ FILE CONTENT EVIDENCE.
 POINTER EXISTS ≠ POINTER RECOVERABLE.
 
+### 3.1 Recipient-Recoverable / Portable Source Gate — HARD LOCK
+
+Handoff generation SHALL account for the actual or reasonably expected recovery capabilities of the receiving session/agent.
+
+If a materially required canonical/project/evidence source is not expected to be recoverable by the recipient through available repository/app/network access, a pointer alone is insufficient when the source can lawfully and practically be included as a portable snapshot.
+
+Correct pattern:
+`RECIPIENT CAPABILITY → SOURCE RECOVERABILITY CHECK → POINTER OR PORTABLE SNAPSHOT → SNAPSHOT VERSION/SHA → CLASSIFICATION → RESUME CHECK`.
+
+For portable snapshots:
+- preserve source identity, repository/path, revision/commit and snapshot time when available;
+- distinguish snapshot freshness from live-head freshness;
+- do not claim the snapshot is the current live canonical after transfer unless independently reverified;
+- include the maximum authorized material source needed for reconstruction when the user requested maximum/full handoff;
+- classify evidence as CURRENT / CONFIRMED / HISTORICAL / SUPERSEDED / CONFLICT / HOLD / UNVERIFIED rather than mixing all files as equivalent evidence.
+
+`REPOSITORY POINTER + NO RECIPIENT ACCESS ≠ RECOVERABLE HANDOFF`.
+`LARGE ZIP ≠ SOURCE COVERAGE PASS`.
+`SNAPSHOT VERIFIED ≠ LIVE HEAD VERIFIED`.
+
+When live verification is impossible but a portable source snapshot exists, the recipient may validate the snapshot contents while separately marking current-live-head freshness as `UNVERIFIED`. This is preferable to discarding or shrinking the recoverable artifact.
+
 ## 4. Coverage Matrix — HARD GATE
 
 Before Handoff PASS, construct a coverage relationship:
@@ -113,6 +135,8 @@ Failure conditions:
 - current state is replaced by filename/revision inference
 - validation status is upgraded without evidence
 - material realization traceability or blocked stage is silently lost
+- recipient lacks access to a material pointer and no feasible portable snapshot/recovery path is supplied
+- historical/ideation/conflict evidence is packaged as if it were current confirmed state
 
 Any such condition = HANDOFF FAIL.
 
@@ -123,20 +147,20 @@ A Handoff is not VERIFIED until a resume simulation succeeds.
 Simulation:
 1. Assume a fresh conversation/session with no reliable conversational memory.
 2. Load Handoff.
-3. Recover latest canonical source.
-4. Follow relevant Source Pointers.
+3. Recover latest canonical source when available, or identify the exact portable snapshot/live-freshness boundary.
+4. Follow relevant Source Pointers and included snapshots.
 5. Reconstruct confirmed, unresolved, superseded, transferred, implementation, traceability and validation state.
 6. Compare reconstructed state against the source state used to generate the Handoff.
 7. Rebuild applicable forward/reverse realization links sufficiently to identify current stage, holes/orphans and blocked next gate.
 8. Run omission / conflict / authority / impact / regression checks.
 9. PASS only if material state can be resumed without silent behavioral drift.
 
-If canonical or evidence cannot be accessed, mark RESUME VERIFICATION = UNKNOWN / BLOCKED rather than PASS.
+If canonical or evidence cannot be accessed or recovered, mark RESUME VERIFICATION = UNKNOWN / BLOCKED rather than PASS.
 
 ## 6. Resume Boot Contract
 
 /재개 SHALL use:
-LATEST CANONICAL → HANDOFF → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → TRACEABILITY RECOVERY → COMPARE → CLASSIFY → RESUME
+LATEST CANONICAL → HANDOFF → SOURCE POINTER/SNAPSHOT RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → TRACEABILITY RECOVERY → COMPARE → CLASSIFY → RESUME
 
 Do not execute implementation merely because a Handoff contains a next-action sentence. First verify authority, current state, applicable realization gate and evidence against canonical/source material when available.
 
@@ -149,7 +173,8 @@ Compression is allowed only when recoverability is preserved.
 
 Prefer:
 - detailed state for behavior-changing decisions
-- concise pointers for stable canonical material
+- concise pointers for stable canonical material only when recipient recovery is viable
+- portable snapshots when material pointers are not recoverable by the recipient and inclusion is feasible/authorized
 - explicit state labels for unresolved/superseded/transferred items
 - stable IDs/pointers for material requirement-to-result lineage
 
@@ -210,6 +235,10 @@ This fixture validates state-transfer behavior; it does not itself promote proje
 HANDOFF VALIDATION
 - Canonical reference: PASS / FAIL / UNKNOWN
 - Source coverage: PASS / FAIL / UNKNOWN
+- Recipient source recoverability: PASS / FAIL / UNKNOWN
+- Portable snapshot fidelity: PASS / FAIL / UNKNOWN / NOT APPLICABLE
+- Live-head freshness: PASS / FAIL / UNKNOWN
+- Evidence classification accuracy: PASS / FAIL / UNKNOWN
 - Protected decisions: PASS / FAIL / UNKNOWN
 - User corrections: PASS / FAIL / UNKNOWN
 - HOLD/CONFLICT preservation: PASS / FAIL / UNKNOWN
@@ -222,7 +251,7 @@ HANDOFF VALIDATION
 - Resume simulation: PASS / FAIL / UNKNOWN
 - Regression fixture: PASS / FAIL / UNKNOWN
 
-OVERALL HANDOFF PASS requires all materially applicable gates to PASS.
+OVERALL HANDOFF PASS requires all materially applicable gates to PASS. A package may be usable with live-head freshness UNKNOWN only if that limitation is explicitly isolated and the portable snapshot is sufficient for the claimed resume scope; it SHALL NOT be labeled live-current.
 
 ## 10. Boundary
 
@@ -231,3 +260,5 @@ This protocol governs state transfer and recovery quality. It does not make Hand
 Project-specific detailed schedules, app behavior, business data and artifacts remain owned by their proper lower master/source. The Handoff preserves or points to them; it does not redefine their authority.
 
 End-to-end realization semantics are governed by `MASTER/TRACEABILITY_PROTOCOL.md`; Handoff preserves enough of that state to resume correctly.
+
+Command meaning preservation and maximum feasible execution are governed by `MASTER/INTENT_EXECUTION_PROTOCOL.md`.
