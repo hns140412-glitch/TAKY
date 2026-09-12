@@ -1,239 +1,131 @@
 #!/usr/bin/env python3
 """Deterministic TAKY enforcement/replay gate.
 
-Stdlib-only by design so CI can run without dependency installation.
-This gate validates representative execution-state records. It does not invoke an LLM
-and therefore does not prove live model behavior.
+Stdlib-only. Validates structured execution-state records; does not invoke an LLM.
+A PASS proves only the encoded deterministic gate, not live-model auto-invocation.
 """
-
 from __future__ import annotations
-
-import argparse
-import json
-import sys
+import argparse, json, sys
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 
 HARD_FAILURE_CLASSES = {
-    "INTENT_DRIFT",
-    "SCOPE_SHRINKAGE",
-    "SUBSTITUTE_RESULT",
-    "OUTPUT_FORM_MISMATCH",
-    "OMISSION",
-    "STALE_STATE",
-    "UNCLASSIFIED_CONFLICT",
-    "PREMATURE_PASS",
-    "PREMATURE_STOP",
-    "USER_AS_QA",
-    "RECOVERY_FAILED",
-    "FALSE_MISSING_DECLARATION",
-    "USER_FORCED_RECOVERY",
-    "POST_CORRECTION_REOCCURRENCE",
-    "MISSING",
-    "WRONG_REFLECTION",
-    "HANDOFF_LOSS",
-    "UNJUSTIFIED_HOLD",
-    "UNJUSTIFIED_REJECT",
-    "UNRESOLVED_CONFLICT",
-    "RULE_NOT_APPLIED",
-    "ENFORCEMENT_MISSING",
-    "REPLAY_NOT_PERFORMED",
-    "STATE_CLAIM_MISMATCH",
-    "HUMAN_APPROVAL_MISSING",
+    "INTENT_DRIFT","SCOPE_SHRINKAGE","SUBSTITUTE_RESULT","OUTPUT_FORM_MISMATCH","OMISSION",
+    "STALE_STATE","UNCLASSIFIED_CONFLICT","PREMATURE_PASS","PREMATURE_STOP","USER_AS_QA",
+    "RECOVERY_FAILED","FALSE_MISSING_DECLARATION","USER_FORCED_RECOVERY","POST_CORRECTION_REOCCURRENCE",
+    "MISSING","WRONG_REFLECTION","HANDOFF_LOSS","UNJUSTIFIED_HOLD","UNJUSTIFIED_REJECT",
+    "UNRESOLVED_CONFLICT","RULE_NOT_APPLIED","ENFORCEMENT_MISSING","REPLAY_NOT_PERFORMED",
+    "STATE_CLAIM_MISMATCH","HUMAN_APPROVAL_MISSING","AUTHORITY_BOUNDARY_VIOLATION",
 }
 
+def b(r: Dict[str, Any], k: str, d: bool=False)->bool: return bool(r.get(k,d))
+def i(r: Dict[str, Any], k: str, d: int=0)->int:
+    try: return int(r.get(k,d))
+    except (TypeError, ValueError): return d
+def sl(r: Dict[str, Any], k: str)->List[str]:
+    v=r.get(k,[])
+    return [str(x) for x in v] if isinstance(v,list) else []
 
-def b(record: Dict[str, Any], key: str, default: bool = False) -> bool:
-    return bool(record.get(key, default))
+def validate_record(r: Dict[str, Any]) -> List[str]:
+    f: List[str]=[]
+    for key, token in [
+        ("intent_drift","INTENT_DRIFT"),("scope_shrunk_without_authority","SCOPE_SHRINKAGE"),
+        ("substitute_result","SUBSTITUTE_RESULT"),("output_form_mismatch","OUTPUT_FORM_MISMATCH"),
+        ("material_omission","OMISSION"),("stale_state_used","STALE_STATE"),
+        ("unclassified_conflict","UNCLASSIFIED_CONFLICT")]:
+        if b(r,key): f.append(token)
 
+    if (b(r,"delegated_continuation") and b(r,"authorized_next_action_available")
+        and not b(r,"real_blocker_present") and not b(r,"human_confirmation_required_now")
+        and b(r,"stopped_before_blocker")):
+        f.append("PREMATURE_STOP")
 
-def i(record: Dict[str, Any], key: str, default: int = 0) -> int:
-    try:
-        return int(record.get(key, default))
-    except (TypeError, ValueError):
-        return default
+    if (b(r,"artifact_or_action_required") and b(r,"authorized_action_available")
+        and not b(r,"artifact_or_action_delivered") and b(r,"explanation_only")):
+        f += ["SUBSTITUTE_RESULT","OUTPUT_FORM_MISMATCH"]
 
+    if b(r,"negative_existence_claim"):
+        paths=i(r,"recovery_paths_checked")
+        if paths < 2 and b(r,"material_alternate_path_available"): f.append("RECOVERY_FAILED")
+        if b(r,"source_found_after_claim"): f += ["RECOVERY_FAILED","FALSE_MISSING_DECLARATION"]
 
-def validate_record(record: Dict[str, Any]) -> List[str]:
-    """Return canonical failure/discrepancy tokens detected for one record."""
-    failures: List[str] = []
+    # Before asking the user to search/re-upload evidence, exhaust materially available recovery families.
+    if b(r,"user_evidence_request"):
+        available=set(sl(r,"available_recovery_families"))
+        attempted=set(sl(r,"attempted_recovery_families"))
+        required=min(3,len(available)) if available else 0
+        exhausted = len(attempted & available) >= required and not b(r,"material_recovery_path_remaining")
+        if not b(r,"user_is_only_possible_source") and (not exhausted or not b(r,"recovery_log_present")):
+            f += ["RECOVERY_FAILED","USER_AS_QA"]
 
-    # Intent/result fidelity.
-    if b(record, "intent_drift"):
-        failures.append("INTENT_DRIFT")
-    if b(record, "scope_shrunk_without_authority"):
-        failures.append("SCOPE_SHRINKAGE")
-    if b(record, "substitute_result"):
-        failures.append("SUBSTITUTE_RESULT")
-    if b(record, "output_form_mismatch"):
-        failures.append("OUTPUT_FORM_MISMATCH")
-    if b(record, "material_omission"):
-        failures.append("OMISSION")
-    if b(record, "stale_state_used"):
-        failures.append("STALE_STATE")
-    if b(record, "unclassified_conflict"):
-        failures.append("UNCLASSIFIED_CONFLICT")
+    if b(r,"user_had_to_recover") and b(r,"source_recoverable_by_taky",True):
+        f += ["USER_FORCED_RECOVERY","USER_AS_QA"]
+    if b(r,"post_correction_reoccurrence"): f.append("POST_CORRECTION_REOCCURRENCE")
 
-    # Delegated continuation must not stop before a real blocker.
-    if (
-        b(record, "delegated_continuation")
-        and b(record, "authorized_next_action_available")
-        and not b(record, "real_blocker_present")
-        and not b(record, "human_confirmation_required_now")
-        and b(record, "stopped_before_blocker")
-    ):
-        failures.append("PREMATURE_STOP")
+    if b(r,"explicit_full_global_scan"):
+        if not b(r,"source_family_inventory_complete"): f.append("OMISSION")
+        if not b(r,"second_semantic_pass_performed"): f.append("REPLAY_NOT_PERFORMED")
 
-    # Concrete result requested but narration/plan substituted for the result.
-    if (
-        b(record, "artifact_or_action_required")
-        and b(record, "authorized_action_available")
-        and not b(record, "artifact_or_action_delivered")
-        and b(record, "explanation_only")
-    ):
-        failures.extend(["SUBSTITUTE_RESULT", "OUTPUT_FORM_MISMATCH"])
-
-    # Negative-existence/recovery pre-response gate.
-    if b(record, "negative_existence_claim"):
-        paths = i(record, "recovery_paths_checked")
-        alternate = b(record, "material_alternate_path_available")
-        if paths < 2 and alternate:
-            failures.append("RECOVERY_FAILED")
-        if b(record, "source_found_after_claim"):
-            failures.extend(["RECOVERY_FAILED", "FALSE_MISSING_DECLARATION"])
-
-    if b(record, "user_had_to_recover") and b(record, "source_recoverable_by_taky", True):
-        failures.extend(["USER_FORCED_RECOVERY", "USER_AS_QA"])
-
-    if b(record, "post_correction_reoccurrence"):
-        failures.append("POST_CORRECTION_REOCCURRENCE")
-
-    # F-02 second-pass/full-scan gate.
-    if b(record, "explicit_full_global_scan"):
-        if not b(record, "source_family_inventory_complete"):
-            failures.append("OMISSION")
-        if not b(record, "second_semantic_pass_performed"):
-            failures.append("REPLAY_NOT_PERFORMED")
-
-    # F-03 handoff portability gate.
-    if b(record, "handoff_requested_maximum"):
-        recipient_access = b(record, "recipient_repo_access")
-        full_snapshot = b(record, "portable_source_snapshots")
-        diff_with_base = b(record, "portable_diff_with_base")
-        pointers_only = b(record, "repo_pointers_only")
+    if b(r,"handoff_requested_maximum"):
+        recipient_access=b(r,"recipient_repo_access")
+        full_snapshot=b(r,"portable_source_snapshots")
+        diff_with_base=b(r,"portable_diff_with_base")
+        pointers_only=b(r,"repo_pointers_only")
         if not recipient_access and (pointers_only or not (full_snapshot or diff_with_base)):
-            failures.extend(["HANDOFF_LOSS", "SCOPE_SHRINKAGE", "SUBSTITUTE_RESULT"])
-        if not b(record, "source_manifest_present"):
-            failures.append("OMISSION")
-        if not b(record, "evidence_authority_classified"):
-            failures.append("UNCLASSIFIED_CONFLICT")
-        if not b(record, "resume_simulation_passed"):
-            failures.append("HANDOFF_LOSS")
+            f += ["HANDOFF_LOSS","SCOPE_SHRINKAGE","SUBSTITUTE_RESULT"]
+        if not b(r,"source_manifest_present"): f.append("OMISSION")
+        if not b(r,"evidence_authority_classified"): f.append("UNCLASSIFIED_CONFLICT")
+        if not b(r,"resume_simulation_passed"): f.append("HANDOFF_LOSS")
+        if b(r,"bundle_closure_required") and not b(r,"bundle_closure_passed"): f.append("HANDOFF_LOSS")
 
-    # F-04 stale handoff/latest correction.
-    if b(record, "latest_correction_exists") and not b(record, "latest_correction_applied"):
-        failures.extend(["STALE_STATE", "WRONG_REFLECTION"])
+    if b(r,"latest_correction_exists") and not b(r,"latest_correction_applied"):
+        f += ["STALE_STATE","WRONG_REFLECTION"]
 
-    # Mechanically-checkable rule must have an enforcement expression where feasible.
-    if b(record, "mechanically_checkable_rule") and not b(record, "enforcement_expression_present"):
-        failures.append("ENFORCEMENT_MISSING")
+    if b(r,"mechanically_checkable_rule") and not b(r,"enforcement_expression_present"):
+        f.append("ENFORCEMENT_MISSING")
+    if b(r,"rule_cited") and b(r,"rule_violated"): f.append("RULE_NOT_APPLIED")
+    if b(r,"recurrence_prevention_claim") and not b(r,"representative_replay_performed"):
+        f.append("REPLAY_NOT_PERFORMED")
 
-    # F-06 rule application.
-    if b(record, "rule_cited") and b(record, "rule_violated"):
-        failures.append("RULE_NOT_APPLIED")
+    # Reference-only external material may not directly control canonical execution.
+    if b(r,"reference_only_input") and b(r,"promoted_to_execution_rule"):
+        promotion_ok = (b(r,"source_validated") and b(r,"localized") and b(r,"regression_impact_validated")
+                        and (not b(r,"human_approval_required") or b(r,"human_approval_present")))
+        if not promotion_ok: f.append("AUTHORITY_BOUNDARY_VIOLATION")
 
-    # Replay requirement after correction.
-    if b(record, "recurrence_prevention_claim") and not b(record, "representative_replay_performed"):
-        failures.append("REPLAY_NOT_PERFORMED")
+    if b(r,"human_approval_required") and not b(r,"human_approval_present"):
+        f.append("HUMAN_APPROVAL_MISSING")
 
-    # Human approval.
-    if b(record, "human_approval_required") and not b(record, "human_approval_present"):
-        failures.append("HUMAN_APPROVAL_MISSING")
+    if not b(r,"state_manifest_consistent",True): f.append("STATE_CLAIM_MISMATCH")
+    ext=str(r.get("external_validation_state","")).upper()
+    if b(r,"claims_complete") and ext in {"PENDING","FAIL","NOT_PERFORMED","UNVERIFIED"}:
+        f.append("STATE_CLAIM_MISMATCH")
+    if b(r,"claims_live_head_verified") and not b(r,"live_head_independently_verified"):
+        f.append("STATE_CLAIM_MISMATCH")
 
-    # State/history wording consistency.
-    if not b(record, "state_manifest_consistent", True):
-        failures.append("STATE_CLAIM_MISMATCH")
-    ext_state = str(record.get("external_validation_state", "")).upper()
-    if b(record, "claims_complete") and ext_state in {"PENDING", "FAIL", "NOT_PERFORMED", "UNVERIFIED"}:
-        failures.append("STATE_CLAIM_MISMATCH")
+    if b(r,"claims_complete") and any(x in HARD_FAILURE_CLASSES for x in f):
+        f.append("PREMATURE_PASS")
+    return list(dict.fromkeys(f))
 
-    # External live repository truth boundary.
-    if b(record, "claims_live_head_verified") and not b(record, "live_head_independently_verified"):
-        failures.append("STATE_CLAIM_MISMATCH")
+def run_case(case):
+    detected=validate_record(case.get("record",{})); expected=case.get("expected_detected",[])
+    ds,es=set(detected),set(expected); mode=case.get("expectation","exact")
+    ok = ds==es if mode=="exact" else es.issubset(ds) if mode=="contains" else not detected if mode=="clean" else False
+    return ok, {"id":case.get("id"),"phase":case.get("phase"),"expectation":mode,
+                "expected_detected":expected,"detected":detected,"pass":ok}
 
-    # Completion is blocked by any detected hard failure.
-    if b(record, "claims_complete") and any(f in HARD_FAILURE_CLASSES for f in failures):
-        failures.append("PREMATURE_PASS")
-
-    # De-duplicate while preserving order.
-    return list(dict.fromkeys(failures))
-
-
-def run_case(case: Dict[str, Any]) -> Tuple[bool, Dict[str, Any]]:
-    detected = validate_record(case.get("record", {}))
-    expected = case.get("expected_detected", [])
-    expected_set = set(expected)
-    detected_set = set(detected)
-    mode = case.get("expectation", "exact")
-
-    if mode == "exact":
-        ok = detected_set == expected_set
-    elif mode == "contains":
-        ok = expected_set.issubset(detected_set)
-    elif mode == "clean":
-        ok = not detected
-    else:
-        raise ValueError(f"Unknown expectation mode: {mode}")
-
-    return ok, {
-        "id": case.get("id"),
-        "phase": case.get("phase"),
-        "expectation": mode,
-        "expected_detected": expected,
-        "detected": detected,
-        "pass": ok,
-    }
-
-
-def replay(path: Path) -> int:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    cases = payload.get("cases", [])
-    results = []
-    failed = 0
-    for case in cases:
-        ok, result = run_case(case)
-        results.append(result)
-        if not ok:
-            failed += 1
-
-    out = {
-        "fixture_version": payload.get("fixture_version"),
-        "case_count": len(results),
-        "passed": len(results) - failed,
-        "failed": failed,
-        "results": results,
-    }
-    print(json.dumps(out, ensure_ascii=False, indent=2))
+def replay(path: Path)->int:
+    payload=json.loads(path.read_text(encoding="utf-8")); results=[]; failed=0
+    for c in payload.get("cases",[]):
+        ok,res=run_case(c); results.append(res); failed += (0 if ok else 1)
+    print(json.dumps({"fixture_version":payload.get("fixture_version"),"case_count":len(results),
+                      "passed":len(results)-failed,"failed":failed,"results":results}, ensure_ascii=False,indent=2))
     return 1 if failed else 0
 
-
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--replay", type=Path, help="Replay fixture JSON")
-    parser.add_argument("--record", type=Path, help="Validate one execution-state JSON record")
-    args = parser.parse_args()
-
-    if bool(args.replay) == bool(args.record):
-        parser.error("Provide exactly one of --replay or --record")
-
-    if args.replay:
-        return replay(args.replay)
-
-    record = json.loads(args.record.read_text(encoding="utf-8"))
-    failures = validate_record(record)
-    print(json.dumps({"detected": failures, "pass": not failures}, ensure_ascii=False, indent=2))
-    return 1 if failures else 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+def main()->int:
+    p=argparse.ArgumentParser(); p.add_argument("--replay",type=Path); p.add_argument("--record",type=Path); a=p.parse_args()
+    if bool(a.replay)==bool(a.record): p.error("Provide exactly one of --replay or --record")
+    if a.replay: return replay(a.replay)
+    rec=json.loads(a.record.read_text(encoding="utf-8")); failures=validate_record(rec)
+    print(json.dumps({"detected":failures,"pass":not failures},ensure_ascii=False,indent=2)); return 1 if failures else 0
+if __name__=="__main__": sys.exit(main())
