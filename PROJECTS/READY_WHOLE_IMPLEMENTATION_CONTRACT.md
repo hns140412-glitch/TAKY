@@ -503,21 +503,52 @@ departure / transition / blocked-help / return-completion.
 
 During Focus, presence is reduced unless needed.
 
+### 18.1 MAIN GUIDE + RANDOM GUEST — READY PROJECT CONTRACT
+
+Ready REV_07 inherits the confirmed REV_06 Main Guide + Random Guest lineage unless explicitly overridden.
+
+Project semantics:
+- Main Guide remains the child's continuing Ready companion.
+- An applicable Duo Coaching / English sentence recording event may bring exactly one Random Guest alongside the Main Guide.
+- Guest selection is Smart Random rather than unrestricted repetition; exact weights remain controlled-flex/project detail.
+- Guest presence does not create a second Guide authority or replace the Main Guide relationship.
+- `SPECIAL FRIEND ≠ RANDOM GUEST` unless separately recovered direct evidence establishes equivalence.
+
+Duo tone hard lock:
+- the child, the child's weakness, pronunciation gap or mistake is never the comedy target;
+- light comedy may target the situation, the Guides, timing or a harmless event;
+- confidence and successful communication take priority over pronunciation-score pressure.
+
+Share-card relationship:
+- ordinary applicable task/share representation defaults to child + Main Guide;
+- when an actual Duo Coaching event occurred and the Guest materially participated, the corresponding Duo result/share representation may include child + Main Guide + that Guest;
+- a Guest SHALL NOT be inserted into a share/result merely because a Guest exists in the roster.
+
 ## 19. First Journey
 
 Whole first-run flow:
 
-`REGISTER → PHOTO → CHARACTER CONSULTATION → DISTINCT CANDIDATE DIRECTIONS → SELECT → RESEMBLANCE REFINEMENT → CHARACTER MASTER → GUIDE/COMPANION SELECT → NAME → CLOUD DROP or VOYAGE INTRO → ISLAND REVEAL/NAME → BASE CAMP REVEAL/NAME → CREW NAME → FIRST REAL SCHEDULE/GOAL AWARENESS`
+`REGISTER → PHOTO → 1ST 3-CARD CONSULTATION → 1ST CONFIRM → 2ND 3-CARD CONSULTATION → 2ND CONFIRM → SYSTEM AUTO CONTRAST DIRECTION → KEYWORD COMBINATION → A/B/C CANDIDATE DIRECTIONS → COMPARE/SELECT → RESEMBLANCE REFINEMENT → FINAL CONFIRM → CHARACTER MASTER → GUIDE/COMPANION SELECT → NAME → CLOUD DROP or VOYAGE INTRO → ISLAND REVEAL/NAME → BASE CAMP REVEAL/NAME → CREW NAME → FIRST REAL SCHEDULE/GOAL AWARENESS`
 
 Hard:
 - PHOTO = top identity authority
 - mood/direction ≠ personality diagnosis
-- current consultation direction = 3 choices × 3 rounds, deliberately distinct directions
+- the child makes exactly **2 direct consultation selections**
+- each child selection is **1 of 3 cards**
+- after each selection, show an explicit confirmation step before advancing
+- the **third contrast direction is derived automatically by the system** from the first two selections; the child does not perform a third consultation round
+- combine first choice + second choice + auto contrast into three distinct A/B/C candidate directions
 - candidate choice ≠ final confirmation
 - original PHOTO remains refinement authority
 - companion uses existing Guide authority
 - first Journey must connect into real schedule/task awareness
 - paid generation remains approval-gated
+
+Regression fail:
+- old 6-mood choose-3 UI revived
+- 3 child consultation rounds
+- direct jump from photo to three generated candidates without the two consultation confirmations
+- auto contrast presented as a third child choice
 
 ## 20. Focus UI confirmed direction
 
@@ -559,13 +590,13 @@ Fail:
 - card-UI escape
 - functional PASS claimed as visual-fidelity PASS
 
-## 22. Implementation truth snapshot — 2026-09-11
+## 22. Implementation truth snapshot — reverified 2026-09-12
 
 This snapshot is evidence only and becomes stale as code changes.
 
 Known:
 - Ready isolated branch: `runtime-session-bridge-2026-09-10`
-- live-checked HEAD at reflection: `5bc45db480fc8ebcf1c91476e95e210c0ad21bb9`
+- branch HEAD reverified at reflection: `0dabe55bff83262d53c084c87faa11d2f2e56f52`
 - Parent/Child semantic code = partial
 - Parent capture-first UI = partial/gap
 - learning-load runtime interpretation = gap/partial
@@ -632,6 +663,8 @@ FAIL if:
 - Parent controls leak into child execution
 - Guide becomes parent proxy
 - schedule sync rewrites history
+- Ready First Journey regresses to three child consultation rounds or old 6-mood selection
+- Random Guest is conflated with Special Friend or used as a second authority
 
 ## 24. Resume contract
 
@@ -675,7 +708,8 @@ Material recovery evidence includes:
 - `TAKY_INDEPENDENT_FULL_CONVERSATION_REAUDIT_2026-09-07.md`
 - `TAKY_CURRENT_CHAT_ACCESSIBLE_PRESERVATION_2026-09-10_MOBILE_GATEWAY.md`
 - Notion `Ready & Set 시간표`
-- current accessible 2026-09-11 conversation/user corrections
+- recovered direct conversation evidence for Main Guide + Random Guest / Duo Coaching / share-card conditions
+- current accessible 2026-09-11~12 conversation/user corrections
 - live GitHub branch/runtime evidence
 
 Inaccessible raw prior turns remain `UNVERIFIED_SOURCE_COVERAGE`.
