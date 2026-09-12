@@ -31,6 +31,37 @@ RULE MENTIONED ≠ RESULT VALIDATED.
 
 For material work, identify the rules actually applicable to the current task/domain/project and verify the real output against them. Generic UX, engineering, writing, design or implementation practice shall not substitute for a specific active MASTER / GUIDE / DOMAIN / PROJECT rule.
 
+## Normative rule enforcement / continual harness gate — HARD LOCK
+
+`RULE WRITTEN ≠ RULE ENFORCED`.
+`RULE MENTIONED ≠ ENFORCEMENT`.
+`LESSON RECORDED ≠ RECURRENCE PREVENTED`.
+
+A material operational rule SHALL have at least one fit-for-purpose enforcement expression where technically and operationally feasible. The enforcement expression may be one or more of:
+- pre-execution hard gate / execution-contract assertion;
+- deterministic validator / schema / contract assertion;
+- automated test, harness, replay, or regression fixture;
+- source-coverage or traceability check;
+- post-write/readback comparison;
+- build/deploy/release block;
+- explicit human-only final validation only for genuinely non-automatable judgment.
+
+Prose-only existence is insufficient when the same class of failure can be replayed or mechanically checked.
+
+When a user correction, false-missing event, scope shrinkage, silent reinterpretation, premature PASS, or other material execution failure recurs after the relevant rule/correction already existed, TAKY SHALL treat it as a recurrence defect:
+
+`INCIDENT → LESSON CANDIDATE → SOURCE/EVIDENCE VERIFY → VERIFIED LESSON → ENFORCEMENT/REGRESSION FIXTURE → REPRESENTATIVE REPLAY → IMPACT/REGRESSION → GOVERNED ADOPTION → HUMAN APPROVAL WHEN REQUIRED → COMMIT → OBSERVE`.
+
+Hard distinctions:
+- `INCIDENT ≠ LESSON`;
+- `LESSON ≠ VERIFIED LESSON`;
+- `VERIFIED LESSON ≠ GLOBAL RULE`;
+- `NEW RULE TEXT ≠ ENFORCED RULE`;
+- `REGRESSION FIXTURE EXISTS ≠ REGRESSION PASS`;
+- repeated failure SHALL NOT be answered only by adding another explanatory paragraph.
+
+History/rollback SHALL preserve the prior rule state, the failure evidence, the enforcement delta, and the validation result. The continual harness may refine execution and validation behavior from verified evidence, but SHALL NOT silently rewrite protected invariants or bypass the Rule Scope / Promotion Gate, authority, regression, or Human Approval.
+
 ## Negative-existence / false-missing gate — HARD LOCK
 
 `SEARCH MISS ≠ SOURCE ABSENCE`.
@@ -127,6 +158,7 @@ For a corrected omission/recovery failure, regression validation SHALL include a
 - Regression
 - Omission / duplication / conflict
 - Recovery-failure / false-missing / user-forced-recovery recurrence
+- Rule enforcement / harness realization
 - Implementation evidence
 - Release evidence
 
