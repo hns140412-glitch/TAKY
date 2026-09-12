@@ -158,6 +158,27 @@ Snap & Pop owns thought/expression experience/results and its original gem/wish/
 Guide owns detailed guidance/persona logic.
 Learning Domain owns long-term learning interpretation/history.
 
+### 11.1 PROJECT OWNER POINTER REGISTRY — HARD RECOVERY ROUTE
+
+Shared-family compaction SHALL NOT be used as a substitute for the current detailed project owner.
+Before declaring a project detail missing, recover the applicable active/inherited project MASTER and reverify its repository/branch HEAD.
+
+Current recoverable owner routes:
+- Ready & Set → `hns140412-glitch/Ready-Set` → `Ready_Set_Ui_Master_Logic_REV_07.md`, which inherits `Ready_Set_Ui_Master_Logic_REV_06.md` unless explicitly overridden.
+- Hide & Seek → `hns140412-glitch/Hide-Seek` → `Hide_Seek_UI_MASTER_LOGIC_REV_04.md`.
+- Snap & Pop → `hns140412-glitch/Snap-Pop` → `Snap_Pop_UI_MASTER_LOGIC_REV_12.md`, which preserves/inherits applicable REV_11/REV_10 detail unless explicitly superseded.
+
+Rules:
+- Reverify the actual active branch/HEAD before current implementation or release claims; a historical Handoff SHA is not sufficient.
+- `CENTRAL SUMMARY OMISSION ≠ PROJECT RULE ABSENCE`.
+- `HANDOFF POINTER ≠ PROJECT AUTHORITY`.
+- A project rule confirmed in an inherited active MASTER SHALL NOT be downgraded to `RECOVERY_REQUIRED` merely because it is absent from this shared file.
+- Conversely, historical detail outside the active/inherited project owner SHALL NOT be promoted merely because it appears in a recovery summary.
+
+Snap & Pop Family Expansion remains project-owned. Recover its active inherited project lineage before judging details such as Original/Core separation, family letters/notes, multiple child profiles, child-specific isolation, family special exploration, diary/illustration/share or related optional surfaces. Shared-family governance preserves the boundary; it does not automatically activate every expansion feature.
+
+Ready project-specific Main Guide + Random Guest behavior remains Ready-owned. `SPECIAL FRIEND` remains a separate GUIDE recovery concept unless direct source evidence establishes equivalence.
+
 ## 12. REGRESSION GATE
 
 A release fails if any of the following occur:
