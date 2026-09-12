@@ -23,6 +23,7 @@ After loading TAKY, identify the task-relevant OS / DOMAIN / PROJECT / GUIDE / v
 Boot order:
 1. Load TAKY.md.
 2. Load MASTER/MASTER_LOGIC.md.
+2A. For material validation, completion/PASS claims, recurrence correction, negative-existence claims, or maximum/full handoff portability, load `MASTER/FAILURE_TAXONOMY.md` and `MASTER/ENFORCEMENT_PROTOCOL.md`. `MASTER/FAILURE_TAXONOMY.md` is the normative semantic owner for failure/discrepancy tokens; lists elsewhere are activation/context subsets, not independent definitions. When an applicable F-01~F-06 or mechanically-checkable recurrence gate exists, run the deterministic enforcement/replay harness before claiming recurrence-prevention PASS.
 3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, omission recovery, or a material claim that a prior source/decision “does not exist” is involved, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md`; for source-absence/recovery questions also apply the targeted gates in `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` before making a negative-existence claim.
 4. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
 5. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
@@ -44,7 +45,7 @@ Additional routing:
 - For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
 - For explicit full historical/global forensic recovery requests, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT run exhaustive historical reconstruction by default for ordinary tasks.
 - For a material negative-existence claim during ordinary work, use the targeted negative-claim/recovery gates from `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` without automatically expanding into full account-history forensics.
-- For a correction involving false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, or non-recoverable handoff, load `MASTER/EXECUTION_REGRESSION_FIXTURES.md` and replay the applicable fixture before claiming recurrence-prevention PASS.
+- For a correction involving false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, or non-recoverable handoff, load `MASTER/EXECUTION_REGRESSION_FIXTURES.md`, `MASTER/FAILURE_TAXONOMY.md`, and `MASTER/ENFORCEMENT_PROTOCOL.md`; run the applicable deterministic replay/equivalent check before claiming recurrence-prevention PASS.
 - For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
 - For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
 
@@ -136,6 +137,12 @@ SUMMARY CREATED ≠ CONTINUITY PASS.
 FALSE_MISSING_DECLARATION = SOURCE-RECOVERY FAIL.
 USER_FORCED_RECOVERY = NO-USER-AS-QA FAIL unless the user was the only possible source holder.
 POST_CORRECTION_REOCCURRENCE = REGRESSION FAIL.
+RULE WRITTEN ≠ RULE ENFORCED.
+FIXTURE DESCRIBED ≠ FIXTURE REPLAYED.
+CHECKSUM MATCH ≠ EXTERNAL SOURCE VERIFIED.
+DETERMINISTIC GATE PASS ≠ LIVE LLM RUNTIME PASS.
+
+All failure/discrepancy token semantics are governed by `MASTER/FAILURE_TAXONOMY.md`; executable/auditable enforcement requirements are governed by `MASTER/ENFORCEMENT_PROTOCOL.md`.
 
 `EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed the highest execution state actually evidenced.
 `PROJECT RULE ≠ GLOBAL RULE`: lower-layer rules require explicit scope/promotion classification before becoming GRAND MASTER invariants.
