@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-13.1",
-  "scope": "Deterministic replay/equivalent checks for F-01 through F-06. These cases validate repository gates, not live LLM behavior.",
+  "fixture_version": "2026-09-13.2",
+  "scope": "Deterministic replay/equivalent checks for F-01 through F-06 plus source-backed continuation/result-delivery gates recovered from the 6aa source family. These cases validate repository gates, not live LLM behavior.",
   "cases": [
     {
       "id": "F-01",
@@ -195,6 +195,65 @@
         "enforcement_expression_present": true,
         "recurrence_prevention_claim": true,
         "representative_replay_performed": true
+      }
+    },
+    {
+      "id": "C-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "PREMATURE_STOP"
+      ],
+      "record": {
+        "delegated_continuation": true,
+        "authorized_next_action_available": true,
+        "real_blocker_present": false,
+        "human_confirmation_required_now": false,
+        "stopped_before_blocker": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "C-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "delegated_continuation": true,
+        "authorized_next_action_available": false,
+        "real_blocker_present": true,
+        "human_confirmation_required_now": true,
+        "stopped_before_blocker": false,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "R-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SUBSTITUTE_RESULT",
+        "OUTPUT_FORM_MISMATCH"
+      ],
+      "record": {
+        "artifact_or_action_required": true,
+        "authorized_action_available": true,
+        "artifact_or_action_delivered": false,
+        "explanation_only": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "R-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "artifact_or_action_required": true,
+        "authorized_action_available": true,
+        "artifact_or_action_delivered": true,
+        "explanation_only": false,
+        "claims_complete": false
       }
     }
   ]
