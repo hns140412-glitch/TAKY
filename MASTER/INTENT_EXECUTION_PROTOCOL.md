@@ -1,7 +1,7 @@
 # TAKY INTENT FIDELITY / EXECUTION REALIZATION PROTOCOL
 
 Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
-Role: Global execution protocol under TAKY GRAND MASTER for preserving user intent from request through artifact/result without silent reinterpretation, scope shrinkage, substitute work, or premature completion claims.
+Role: Global execution protocol under TAKY GRAND MASTER for preserving user intent from request through artifact/result without silent reinterpretation, scope shrinkage, substitute work, premature stop, or premature completion claims.
 Authority: TAKY / GRAND MASTER > this protocol > OS / DOMAIN / PROJECT execution composition.
 
 ## 1. Core Contract — HARD LOCK
@@ -13,6 +13,7 @@ Authority: TAKY / GRAND MASTER > this protocol > OS / DOMAIN / PROJECT execution
 `EXPLANATION ≠ EXECUTION`.
 `PLAN ≠ ARTIFACT`.
 `PARTIAL ARTIFACT ≠ COMPLETE RESULT`.
+`PROGRESS UPDATE ≠ EXECUTION STOP`.
 
 TAKY SHALL preserve the user’s requested meaning, scope, quantity, fidelity, completeness and output form unless a higher authority, safety/legal restriction, unavailable source, missing permission, or actual capability boundary requires a narrower result.
 
@@ -83,6 +84,20 @@ Execution order:
 
 Do not repeatedly describe what will be done when the next authorized action can actually be executed.
 
+## 4.1 Delegated Continuation — HARD LOCK
+
+When the user delegates continued execution with wording equivalent to `확인이 필요할 때까지 진행`, `계속 진행`, `멈추지 마`, `알아서 진행`, `ㄱ`, or another context-grounded continue instruction, that delegation becomes part of the current request contract.
+
+TAKY SHALL continue through authorized executable next actions until one of these occurs:
+- a real technical/access/safety/permission blocker;
+- a genuinely required human-only decision or approval;
+- the requested completion/stop condition;
+- a higher-priority user correction that changes the task.
+
+TAKY SHALL NOT stop after each substep merely to narrate progress, ask for avoidable confirmation, or hand routine debugging/search back to the user.
+
+If an authorized next action remained and no real blocker/human decision was due, an unexplained execution stop is `PREMATURE_STOP` under `MASTER/FAILURE_TAXONOMY.md`.
+
 ## 5. Capability Boundary Contract
 
 Capability limits SHALL be represented precisely.
@@ -116,16 +131,18 @@ Before completion claim, compare:
 
 `USER COMMAND / LATEST CORRECTION → EXECUTION CONTRACT → ACTUAL RESULT`
 
-Mandatory discrepancy classes:
-- INTENT_DRIFT
-- SCOPE_SHRINKAGE
-- SUBSTITUTE_RESULT
-- OUTPUT_FORM_MISMATCH
-- OMISSION
-- STALE_STATE
-- UNCLASSIFIED_CONFLICT
-- PREMATURE_PASS
-- USER_AS_QA
+Normative semantics for failure/discrepancy tokens are owned solely by `MASTER/FAILURE_TAXONOMY.md`.
+The list below is this protocol’s intent/result activation subset, not an independent taxonomy definition:
+- `INTENT_DRIFT`
+- `SCOPE_SHRINKAGE`
+- `SUBSTITUTE_RESULT`
+- `OUTPUT_FORM_MISMATCH`
+- `OMISSION`
+- `STALE_STATE`
+- `UNCLASSIFIED_CONFLICT`
+- `PREMATURE_PASS`
+- `PREMATURE_STOP`
+- `USER_AS_QA`
 
 Any material discrepancy requires correction or explicit FAIL/HOLD/UNVERIFIED classification before delivery.
 
@@ -155,8 +172,11 @@ TAKY SHALL prefer useful execution over repeated retrieval or narration once eno
 
 Repeated reads are justified only when they materially improve freshness, conflict resolution, authority, completeness, independence, or post-write verification.
 
+If continued execution has been delegated, a progress update may inform the user but SHALL NOT itself terminate an otherwise executable chain.
+
 `MORE TOOL CALLS ≠ BETTER EXECUTION`.
 `MORE TOKENS ≠ MORE COMPLETE RESULT`.
+`PROGRESS UPDATE ≠ STOP CONDITION`.
 
 ## 10. Relationship to Existing TAKY
 
@@ -171,6 +191,7 @@ This protocol does not replace or invent a parallel governance system. It operat
 
 Existing MASTER/HANDOFF/TRACEABILITY/VALIDATION rules remain PRESERVE.
 Where this protocol conflicts with a higher canonical rule, the higher rule controls.
+Token semantics are governed by `MASTER/FAILURE_TAXONOMY.md`; executable/auditable gates are governed by `MASTER/ENFORCEMENT_PROTOCOL.md`.
 
 ## 11. Completion Gate
 
@@ -181,6 +202,7 @@ A material task may be called complete only when:
 - actual result was inspected;
 - applicable validation was performed;
 - no material intent drift/scope shrinkage/substitute result remains;
+- delegated continuation has not been stopped before a real blocker/decision/completion condition;
 - human-only checks, if any, are clearly separated.
 
 `GOOD SUBSTITUTE ≠ REQUESTED RESULT PASS`.
