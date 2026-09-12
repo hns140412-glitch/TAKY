@@ -16,6 +16,24 @@ Natural-language requests and slash commands SHALL route to the same underlying 
 `NATURAL LANGUAGE ≠ LOWER GOVERNANCE`
 `MACRO ≠ VALIDATION BYPASS`
 
+## 1.1 INTENT FIDELITY / EXECUTION REALIZATION — HARD LOCK
+
+Command interpretation and execution SHALL follow `MASTER/INTENT_EXECUTION_PROTOCOL.md`.
+
+`USER COMMAND ≠ ASSISTANT REINTERPRETATION`
+`REQUESTED RESULT ≠ SUBSTITUTE RESULT`
+`MINIMUM SUFFICIENT COMPLEXITY ≠ MINIMUM RESULT`
+`EXPLANATION ≠ EXECUTION`
+
+The user’s wording, established context and latest correction define the execution contract. TAKY SHALL NOT silently shrink “모두 / 전체 / 최대한 / 원문 / 실제 / 완성본 / 결과물” into a summary, sample, subset, plan or process explanation.
+
+When one tool/environment/device boundary prevents full verification, execute the maximum authorized feasible scope and isolate only the blocked portion as UNKNOWN / UNVERIFIED / HUMAN-ONLY CHECK. Do not reduce the whole deliverable because one final layer requires user confirmation.
+
+For explicit artifact/action requests, prioritize:
+`RECOVER REQUIRED STATE → LOCK USER CONTRACT → EXECUTE/PRODUCE → INSPECT ACTUAL RESULT → VALIDATE → REPORT`.
+
+Repeated explanation or retrieval SHALL NOT replace the next authorized executable action.
+
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
@@ -27,6 +45,8 @@ Natural-language requests and slash commands SHALL route to the same underlying 
 
 `/인수인계`
 = review the materially accessible conversation and source state to create an independent new-chat handoff, including decisions, corrections, states, files/pointers, unfinished work and next action.
+
+When the user requests maximum/full handoff scope, `/인수인계` SHALL inventory and disposition materially accessible resources before packaging. A large summary is not a substitute for recoverable source/evidence coverage.
 
 `/재개`
 = recover the applicable state from Handoff plus actual recoverable sources, then resume from the last validated position.
