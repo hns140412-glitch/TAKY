@@ -37,15 +37,21 @@ Search semantically and by distinctive entities/relations, not by exact keyword 
 
 If coverage is still incomplete, state the boundary precisely: `NOT FOUND IN CHECKED SOURCES / RECOVERY_REQUIRED / UNVERIFIED_SOURCE_COVERAGE`; do not convert it to `NEVER EXISTED`.
 
-## 1.2 Recovery-Failure Taxonomy — HARD LOCK
+## 1.2 Recovery-Failure Activation Subset — HARD LOCK
 
-For material cross-conversation recovery, distinguish:
+Normative semantics for all failure/discrepancy tokens are owned solely by `MASTER/FAILURE_TAXONOMY.md`.
+This section is only the recovery-specific activation subset for this protocol and SHALL NOT redefine those token meanings.
+If wording anywhere in this protocol diverges from the normative taxonomy, `MASTER/FAILURE_TAXONOMY.md` controls.
 
-- `TRUE_UNAVAILABLE` — original source is genuinely inaccessible after available recovery paths are checked; preserve pointer/gap as `UNVERIFIED_SOURCE_COVERAGE`.
-- `RECOVERY_FAILED` — source was materially recoverable but the recovery/search process failed to retrieve it before a decision or claim was made.
-- `FALSE_MISSING_DECLARATION` — TAKY/Assistant declared an item absent/not found without sufficient recovery, and later evidence proves the item existed.
-- `USER_FORCED_RECOVERY` — the user had to search old chats, locate a file, capture a screenshot, re-upload evidence, or otherwise perform recovery work that TAKY should reasonably have attempted itself.
-- `POST_CORRECTION_REOCCURRENCE` — the same material omission/misinterpretation/recovery failure recurs after the user correction or canonical rule already existed.
+Recovery-specific tokens:
+- `TRUE_UNAVAILABLE`
+- `UNVERIFIED_SOURCE_COVERAGE`
+- `RECOVERY_FAILED`
+- `FALSE_MISSING_DECLARATION`
+- `USER_FORCED_RECOVERY`
+- `POST_CORRECTION_REOCCURRENCE`
+
+Apply the definitions and cross-axis mappings in `MASTER/FAILURE_TAXONOMY.md`.
 
 `TRUE_UNAVAILABLE ≠ RECOVERY_FAILED`.
 `UNVERIFIED_SOURCE_COVERAGE` SHALL NOT be used to conceal a known recovery failure.
@@ -90,7 +96,8 @@ Maintain a recurrence ledger sufficient to answer:
 - what downstream artifact/implementation was affected;
 - which canonical gate should prevent recurrence.
 
-At minimum classify applicable events with the recovery-failure taxonomy in §1.2 plus command/result discrepancy classes from `MASTER/INTENT_EXECUTION_PROTOCOL.md`.
+At minimum classify applicable events with the recovery activation subset in §1.2 plus applicable intent/result, reflection/handoff, and enforcement classes from `MASTER/FAILURE_TAXONOMY.md`.
+`MASTER/INTENT_EXECUTION_PROTOCOL.md` owns the execution flow that activates intent/result checks; it does not independently own token semantics.
 
 ## 4. RECOVERY SOURCE PRIORITY
 
