@@ -23,11 +23,11 @@ After loading TAKY, identify the task-relevant OS / DOMAIN / PROJECT / GUIDE / v
 Boot order:
 1. Load TAKY.md.
 2. Load MASTER/MASTER_LOGIC.md.
-3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, or omission recovery is material, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md` and recover relevant unresolved Context Events/evidence links before treating a compact summary as sufficient context.
+3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, omission recovery, or a material claim that a prior source/decision “does not exist” is involved, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md`; for source-absence/recovery questions also apply the targeted gates in `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` before making a negative-existence claim.
 4. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
 5. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
 6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner before judging the result.
-7. Recover approved state, decision history, relevant available full-conversation/attachment evidence, Context Ledger links, and Handoff evidence.
+7. Recover approved state, decision history, relevant available full-conversation/attachment evidence, Context Ledger links, Recovery Witness/Pattern Events when applicable, and Handoff evidence.
 8. Extract the rules specifically applicable to the current task.
 9. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
 10. Compare the current request against authority and protected decisions.
@@ -42,7 +42,8 @@ Additional routing:
 - For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For learning-session wrap-up or reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character/personality request.
 - For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
-- For explicit forensic recovery requests only, load `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT load full forensic recovery history by default for ordinary tasks.
+- For explicit full historical/global forensic recovery requests, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT run exhaustive historical reconstruction by default for ordinary tasks.
+- For a material negative-existence claim during ordinary work, use the targeted negative-claim/recovery gates from `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` without automatically expanding into full account-history forensics.
 - For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
 - For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
 
@@ -63,18 +64,23 @@ A workspace/dashboard/database that displays or coordinates information SHALL NO
 - `/재개` → recover latest canonical + Handoff + relevant unresolved Context Events/decision traces + actual implementation evidence, then resume from the first unresolved gate
 - `/대화전체보존` → preserve the materially accessible USER↔Assistant conversation in original order as evidence and link material Context Events; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
 - `대화 종료` → persistence check → conversation evidence/context-event linkage → TEMP/project classification → Handoff → source pointers → resume instruction
-- `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only forensic recovery mode
+- `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only full forensic recovery mode
+- natural-language requests such as “모든 대화창 전체 스캔”, “최초 원대화부터 다시”, or equivalent explicit all-history reconstruction → full forensic mode; the wording defines scope and SHALL NOT be silently reduced to current-chat/Handoff review
 
 FORENSIC RECOVERY IS CONDITIONAL.
 Ordinary tasks may recover the sources needed for the active task and load applicable rules.
 Full historical forensic recovery, full conversation reconstruction and exhaustive reverse tracing run only on explicit user invocation.
 A material historical omission/conflict discovered during ordinary work may be marked `RECOVERY_REQUIRED` without auto-starting full forensics.
+A material negative-existence claim is not permission to declare absence after one failed search; targeted multi-path recovery is required first.
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
 CONVERSATION CONTEXT LEDGER = TRACE / CONTINUITY LAYER, NOT AUTOMATIC AUTHORITY
 SUMMARY ≠ CONTEXT PRESERVATION
 NOT IN SUMMARY ≠ REJECTED OR SUPERSEDED
+SEARCH MISS ≠ SOURCE ABSENCE
+RECOVERY FAILURE ≠ USER NEVER SAID
+USER-RECOVERED PRIOR CHAT / SCREENSHOT = RECOVERY WITNESS, NOT AUTOMATIC NEW REQUIREMENT
 CAPTURE ≠ DECISION
 OBSERVATION ≠ MASTER DECISION
 EXTERNAL TOOL ≠ MASTER AUTHORITY
@@ -126,6 +132,9 @@ AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
 STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION.
 PROJECTION WRITE ≠ SOURCE COMMIT.
 SUMMARY CREATED ≠ CONTINUITY PASS.
+FALSE_MISSING_DECLARATION = SOURCE-RECOVERY FAIL.
+USER_FORCED_RECOVERY = NO-USER-AS-QA FAIL unless the user was the only possible source holder.
+POST_CORRECTION_REOCCURRENCE = REGRESSION FAIL.
 
 `EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed the highest execution state actually evidenced.
 `PROJECT RULE ≠ GLOBAL RULE`: lower-layer rules require explicit scope/promotion classification before becoming GRAND MASTER invariants.
@@ -137,7 +146,7 @@ For operational workspace work, also validate:
 `AUTHORITATIVE SOURCE → OPERATIONAL RECORD / VIEW → EVIDENCE / DECISION → DOWNSTREAM REFLECTION → VALIDATION / HISTORY`, and reverse-trace visible status/completion back to source and evidence.
 
 For conversation continuity, validate the applicable chain:
-`ORIGINAL EVIDENCE → CONTEXT EVENT → IDEA/DECISION TRACE → CANONICAL REFLECTION STATUS → IMPLEMENTATION STATUS → HANDOFF POINTER → RESUME GATE`.
+`ORIGINAL EVIDENCE → CONTEXT EVENT / RECOVERY WITNESS → IDEA/DECISION TRACE → CANONICAL REFLECTION STATUS → IMPLEMENTATION STATUS → HANDOFF POINTER → RESUME GATE`.
 
 A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
 
