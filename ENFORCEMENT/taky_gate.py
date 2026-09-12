@@ -23,6 +23,7 @@ HARD_FAILURE_CLASSES = {
     "STALE_STATE",
     "UNCLASSIFIED_CONFLICT",
     "PREMATURE_PASS",
+    "PREMATURE_STOP",
     "USER_AS_QA",
     "RECOVERY_FAILED",
     "FALSE_MISSING_DECLARATION",
@@ -72,6 +73,25 @@ def validate_record(record: Dict[str, Any]) -> List[str]:
         failures.append("STALE_STATE")
     if b(record, "unclassified_conflict"):
         failures.append("UNCLASSIFIED_CONFLICT")
+
+    # Delegated continuation must not stop before a real blocker.
+    if (
+        b(record, "delegated_continuation")
+        and b(record, "authorized_next_action_available")
+        and not b(record, "real_blocker_present")
+        and not b(record, "human_confirmation_required_now")
+        and b(record, "stopped_before_blocker")
+    ):
+        failures.append("PREMATURE_STOP")
+
+    # Concrete result requested but narration/plan substituted for the result.
+    if (
+        b(record, "artifact_or_action_required")
+        and b(record, "authorized_action_available")
+        and not b(record, "artifact_or_action_delivered")
+        and b(record, "explanation_only")
+    ):
+        failures.extend(["SUBSTITUTE_RESULT", "OUTPUT_FORM_MISMATCH"])
 
     # Negative-existence/recovery pre-response gate.
     if b(record, "negative_existence_claim"):
