@@ -31,6 +31,27 @@ RULE MENTIONED ≠ RESULT VALIDATED.
 
 For material work, identify the rules actually applicable to the current task/domain/project and verify the real output against them. Generic UX, engineering, writing, design or implementation practice shall not substitute for a specific active MASTER / GUIDE / DOMAIN / PROJECT rule.
 
+## Negative-existence / false-missing gate — HARD LOCK
+
+`SEARCH MISS ≠ SOURCE ABSENCE`.
+`RECOVERY FAILURE ≠ USER NEVER SAID`.
+`SUMMARY / HANDOFF / MASTER ABSENCE ≠ PRIOR DECISION ABSENCE`.
+
+Before making a material negative-existence claim about a prior user statement, rule, file, attachment, decision, implementation, or evidence, TAKY SHALL use the available fit-for-purpose recovery paths required by `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`.
+
+One failed keyword search or one absent current document is insufficient when materially different recovery surfaces remain available.
+
+Validation outcomes:
+- genuinely inaccessible after applicable recovery = `TRUE_UNAVAILABLE / UNVERIFIED_SOURCE_COVERAGE`;
+- recoverable source missed by TAKY = `RECOVERY_FAILED`;
+- absence claim later disproved = `FALSE_MISSING_DECLARATION / FAIL`;
+- user had to locate old chat/file/screenshot or re-upload recoverable evidence because TAKY failed = `USER_FORCED_RECOVERY / FAIL` unless only the user could possibly supply it;
+- same failure recurs after correction/canonicalization = `POST_CORRECTION_REOCCURRENCE / REGRESSION FAIL`.
+
+A user-supplied screenshot/capture of an earlier chat can prove the visible prior conversation content as `RECOVERY_WITNESS_EVIDENCE`. It SHALL be linked to the original decision episode rather than treated as a newly invented requirement merely because it was reintroduced later.
+
+`UNVERIFIED_SOURCE_COVERAGE` SHALL NOT be used as a blanket label for a known retrieval/search failure.
+
 ## Integrated-result gate
 COMPONENT PASS ≠ INTEGRATED RESULT PASS.
 LAYER SEPARATION ≠ COMPOSITION PASS.
@@ -87,6 +108,8 @@ SAME ASSERTION REPEATED ≠ CROSS-VALIDATION.
 CHANGE WORKS ≠ IMPACT PASS.
 NEW RULE PRESENT ≠ REGRESSION PASS.
 
+For a corrected omission/recovery failure, regression validation SHALL include a representative replay or source-recovery check proving the corrected rule would prevent the same class of failure. Rewording the rule without such a check is not sufficient evidence of recurrence prevention.
+
 ## Validation dimensions
 - Source coverage
 - Authority
@@ -103,6 +126,7 @@ NEW RULE PRESENT ≠ REGRESSION PASS.
 - Impact
 - Regression
 - Omission / duplication / conflict
+- Recovery-failure / false-missing / user-forced-recovery recurrence
 - Implementation evidence
 - Release evidence
 
@@ -135,6 +159,8 @@ Validate identifiers/idempotency, replay/order, ownership/conflict policy, retry
 Every material source-derived item requires a traceable PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED disposition. HOLD needs reason/owner/exit condition; EXCLUDE needs scope rationale; OWNERSHIP_TRANSFER needs a named recoverable destination.
 
 When a user requests first/full-conversation and attachment verification, Handoff/summary coverage alone is insufficient. Recover available original evidence and mark inaccessible raw history UNVERIFIED_SOURCE_COVERAGE rather than claiming impossible completeness.
+
+For an explicit global/all-conversation forensic audit, also inventory source families and check recurring correction/failure patterns across recovered conversations. A large report built from only one chat or one Handoff is NOT full-scan PASS.
 
 ## Status vocabulary
 PASS / FAIL / NOT PASS / UNKNOWN / UNVERIFIED / NOT PERFORMED.
