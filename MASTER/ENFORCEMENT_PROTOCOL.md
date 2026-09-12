@@ -94,6 +94,39 @@ A completion claim is blocked when:
 - `rule_cited = true` and `rule_violated = true`;
 - or any other hard enforcement violation remains unresolved.
 
+## 4.1 Delegated-continuation / premature-stop gate — HARD LOCK
+
+When the user explicitly delegates continued execution with wording equivalent to `확인이 필요할 때까지 진행`, `계속 진행`, `멈추지 마`, `알아서 진행`, `ㄱ`, or another context-grounded continue instruction, TAKY SHALL continue through authorized executable next actions until a real blocker, required human-only decision, safety/permission boundary, or requested completion condition is reached.
+
+Minimum machine-auditable fields when applicable:
+- `delegated_continuation`;
+- `authorized_next_action_available`;
+- `real_blocker_present`;
+- `human_confirmation_required_now`;
+- `stopped_before_blocker`.
+
+If continuation was delegated, an authorized next action existed, no real blocker/human decision was due, and execution stopped anyway, classify `PREMATURE_STOP / FAIL`.
+
+Status narration, another plan, or a request that the user perform avoidable debugging SHALL NOT be treated as a valid blocker.
+
+`CONTINUE UNTIL BLOCKER ≠ STOP AFTER EACH SUBSTEP`.
+`PROGRESS UPDATE ≠ EXECUTION STOP`.
+
+## 4.2 Result-not-narration gate — HARD LOCK
+
+When the user requests a concrete artifact/action/result and the system has authority/capability to produce it, explanation or intention text alone is not the requested result.
+
+Minimum machine-auditable fields when applicable:
+- `artifact_or_action_required`;
+- `artifact_or_action_delivered`;
+- `explanation_only`;
+- `authorized_action_available`.
+
+If a concrete result was required, the authorized result could be produced, and the response stopped at explanation/plan without delivery, classify at least `SUBSTITUTE_RESULT`; add `OUTPUT_FORM_MISMATCH` when the requested result form was not supplied, and `PREMATURE_STOP` when delegated continuation was also active.
+
+`I WILL DO IT ≠ DONE`.
+`PLAN FOR RESULT ≠ RESULT`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
