@@ -132,7 +132,26 @@ GOOD FINAL RESULT ≠ COMPLETE REVIEW.
 SOURCE REVIEWED ≠ DECISION COVERED.
 NOT ADOPTED ≠ FORGOTTEN.
 HANDOFF COVERAGE ≠ FULL CONVERSATION COVERAGE.
+SEARCH MISS ≠ SOURCE ABSENCE.
+RECOVERY FAILURE ≠ USER NEVER SAID.
+CURRENT MASTER SILENCE ≠ PRIOR DECISION ABSENCE.
 Material source gaps = `UNVERIFIED_SOURCE_COVERAGE`; they SHALL NOT be invented away or converted to PASS.
+
+### 7.2 Negative-Existence / User-Forced-Recovery Gate — HARD LOCK
+A claim that a prior user statement, rule, attachment, decision or source “does not exist / was never said / cannot be found” SHALL be treated as an evidence claim, not casual narration.
+
+Before such a material claim, use fit-for-purpose multi-path recovery when available rather than relying on a single keyword/search surface. Recovery semantics are governed by `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`.
+
+Distinguish:
+`TRUE_UNAVAILABLE / RECOVERY_FAILED / FALSE_MISSING_DECLARATION / USER_FORCED_RECOVERY / POST_CORRECTION_REOCCURRENCE`.
+
+A user-provided screenshot, old-chat capture, re-uploaded file or source pointer that disproves a prior absence claim is `RECOVERY_WITNESS_EVIDENCE`; it SHALL reconnect to the earlier decision episode and SHALL NOT automatically be treated as a new requirement.
+
+`UNVERIFIED_SOURCE_COVERAGE` SHALL NOT conceal a known `RECOVERY_FAILED` or `FALSE_MISSING_DECLARATION` event.
+
+When the same recovery/interpretation failure recurs after explicit user correction or an active canonical rule, classify it as `POST_CORRECTION_REOCCURRENCE / REGRESSION FAIL` and perform root-cause/regression treatment rather than another isolated patch only.
+
+NO USER-AS-QA applies: the user SHALL NOT be made the default search engine, debugger, or proof collector for evidence TAKY can materially recover itself.
 
 ## 8. Deep Analysis / 심층 분석
 Deep Analysis is a rigorous review-and-improvement protocol, not merely a longer answer/search/summary.
@@ -158,7 +177,7 @@ Reverse trace:
 `ACTUAL RESULT → REQUIREMENT/DECISION → SOURCE → ACTIVE AUTHORITY → VALIDATION EVIDENCE`.
 
 Mandatory discrepancy classes:
-`MISSING / WRONG_REFLECTION / HANDOFF_LOSS / UNJUSTIFIED_HOLD / UNJUSTIFIED_REJECT / UNRESOLVED_CONFLICT / UNVERIFIED_SOURCE_COVERAGE`.
+`MISSING / WRONG_REFLECTION / HANDOFF_LOSS / UNJUSTIFIED_HOLD / UNJUSTIFIED_REJECT / UNRESOLVED_CONFLICT / UNVERIFIED_SOURCE_COVERAGE / RECOVERY_FAILED / FALSE_MISSING_DECLARATION / USER_FORCED_RECOVERY / POST_CORRECTION_REOCCURRENCE`.
 
 REVIEWED ≠ REFLECTED.
 SUMMARIZED ≠ PRESERVED.
@@ -200,6 +219,8 @@ SAME OUTPUT RE-READ ≠ INDEPENDENT EVIDENCE.
 CHANGE WORKS ≠ IMPACT PASS.
 NEW RULE PRESENT ≠ REGRESSION PASS.
 Correction iteration SHALL be bounded by fit-for-purpose cost/risk and SHALL NOT weaken protected decisions merely to obtain PASS.
+
+For a corrected omission/recovery/command-interpretation failure, regression SHALL include a representative replay or equivalent check showing the new gate would have blocked the historical failure class.
 
 ### 10.3 Trace Claim Gate — HARD LOCK / ADOPT
 TRACE EXISTS ≠ TRACE VALIDATED ≠ RESULT VALIDATED.
@@ -411,6 +432,20 @@ Document PASS ≠ Runtime/Implementation PASS. Known Baseline 01 source gaps rem
 `OBSERVATION → EVIDENCE → CANDIDATE → IMPACT ANALYSIS → VALIDATION → APPROVAL → COMMIT → RELEASE → OBSERVATION/FEEDBACK`.
 OBSERVATION ≠ AUTOMATIC MASTER CHANGE.
 At least one GRAND REMASTER may occur before first official Revision. All confirmed decisions and HARD LOCKs must survive regression validation.
+
+### 22.1 Evidence-backed Lesson / Skill Evolution — HARD LOCK
+TAKY SHALL learn from repeated execution/recovery failures without becoming an uncontrolled self-modifying system.
+
+Use:
+`OBSERVATION / FAILURE → LESSON CANDIDATE → SOURCE/EVIDENCE RECOVERY → REPEAT/CASE CHECK → VERIFIED LESSON → RULE/SKILL/PROTOCOL CANDIDATE → SCOPE/PROMOTION GATE → SELF/CROSS/IMPACT/REGRESSION VALIDATION → HUMAN APPROVAL WHEN REQUIRED → CANONICAL/LOWER-LAYER REFLECTION → HISTORY/ROLLBACK → FUTURE REGRESSION FIXTURE`.
+
+A single deterministic bug may justify a bounded correction at its owning layer when authorized. Promotion to a global MASTER invariant requires demonstrated cross-system relevance or a genuinely global authority/safety/evidence principle.
+
+External AI-agent patterns, including continual-harness or memory/skill refinement ideas, are reference evidence only until localized and validated. Base governance/HARD LOCKs SHALL NOT be silently rewritten by execution experience.
+
+A repeated user correction across conversations is high-value evidence that the failure is systemic, but recurrence alone does not waive source/authority/scope validation.
+
+`LESSON RECORDED ≠ LESSON VERIFIED ≠ SKILL/RULE PROMOTED ≠ REGRESSION PREVENTED`.
 
 ## 23. Canonical Remaster Status
 This `MASTER/MASTER_LOGIC.md` file is the active REV_00 canonical GRAND MASTER after the approved structural rewrite. The protected pre-remaster state remains recoverable through repository history and `MASTER/SNAPSHOT_PRE_REMASTER_REV00.md`. The candidate and migration files remain validation/history evidence and do not supersede this canonical path.
