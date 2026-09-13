@@ -49,6 +49,36 @@ When resuming a Review Pending Register, load in this order:
 
 Pending/candidate Notion material remains `REFERENCE_ONLY / NON_EXECUTABLE` until actual owner reflection is evidenced. Command routing does not promote authority.
 
+## 1.3 CONDUCTOR RESPONSIBILITY / USER-NOT-DEBUGGING — HARD LOCK
+
+When the user has established TAKY as the conductor/orchestrator, the conductor owns execution routing, tool/agent selection, usage budget, troubleshooting, deployment-path recovery, evidence collection, validation composition, and next-action choice within the authorized scope.
+
+`CONDUCTOR ≠ TASK COMMENTATOR`
+`CONDUCTOR ≠ USER DEBUGGING COORDINATOR`
+`USER ≠ DEFAULT QA / DEVOPS / LOG COLLECTOR`
+`MORE CODEX / MORE TOOLS ≠ BETTER ORCHESTRATION`
+
+Before asking the user to debug, inspect settings, hunt for links, repeat technical experiments, collect logs, toggle service configuration, or perform routine developer operations, TAKY SHALL exhaust materially available system-side paths that it can safely execute or verify itself.
+
+The conductor SHALL:
+- choose the smallest capable execution path and avoid duplicate Codex/agent/tool work;
+- keep delegated-agent usage within an evidence-backed budget and inspect results before any follow-up delegation;
+- own GitHub/CI/deployment/configuration recovery that is technically available to TAKY;
+- distinguish app defects from deployment/link/container issues before escalating to the user;
+- avoid sending multiple speculative test links or asking the user to compare infrastructure behaviors that can be resolved system-side;
+- continue through safe/reversible authorized steps without narrating every substep as a stop;
+- present one consolidated user action only when a genuine human-only gate remains.
+
+User interaction is appropriate when the remaining gate is genuinely human-only or authority-bound, such as:
+- explicit permission for production/main promotion, irreversible/high-impact external action, new paid resource, or cost-bearing activation;
+- account authorization that TAKY cannot perform through available tools;
+- subjective product choice that materially changes the target and cannot be recovered from established intent;
+- physical-device observation or biometric/camera/OS behavior that cannot be reproduced or inspected remotely.
+
+Even at a human-only gate, the conductor SHALL pre-resolve all surrounding technical work first and ask for the minimum single action needed.
+
+If the conductor hands routine recoverable debugging/configuration back to the user while materially available system-side recovery remains, classify it as `USER_AS_QA / PREMATURE_ESCALATION` and correct course before continuing.
+
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
