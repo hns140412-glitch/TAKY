@@ -1,0 +1,18 @@
+{
+  "evidence_type": "TAKY_RESUME_EXECUTION_EVIDENCE",
+  "session_id": "fixture-session",
+  "state_artifact_id": "canonical-fixture",
+  "state_sha256": "dc0d9d7e91e86fbbe777026c05b053ab78627b227fb36a11b4b30f0da147d0b9",
+  "state_read_verified": true,
+  "required_owner_assertions": [
+    {
+      "owner": "MASTER/HANDOFF_PROTOCOL.md",
+      "pass": true
+    },
+    {
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "pass": true
+    }
+  ],
+  "claim_boundary": "fixture execution evidence only; does not prove hosted live-session auto-read"
+}
