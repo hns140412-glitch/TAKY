@@ -22,18 +22,25 @@
       "freshness": "SNAPSHOT_VERIFIED",
       "owner": "MASTER/MASTER_LOGIC.md",
       "required_for_resume": true
+    },
+    {
+      "artifact_id": "resume-evidence",
+      "original_source": "fixture execution record",
+      "bundle_path": "RESUME_EVIDENCE.json",
+      "sha256": "01e70ee229ee8cccb5b98fc33ffa890ce2f0b04b63095db854d4f66c2cf04e5a",
+      "authority_class": "PROCESS",
+      "freshness": "SNAPSHOT_VERIFIED",
+      "owner": "MASTER/HANDOFF_PROTOCOL.md",
+      "required_for_resume": true
     }
   ],
-  "pointer_artifact_ids": ["handoff", "canonical-fixture"],
+  "pointer_artifact_ids": ["handoff", "canonical-fixture", "resume-evidence"],
   "resume_simulation": {
-    "passed": true,
-    "assertions": [
-      {"owner": "MASTER/HANDOFF_PROTOCOL.md", "pass": true},
-      {"owner": "MASTER/MASTER_LOGIC.md", "pass": true}
-    ]
+    "state_artifact_id": "canonical-fixture",
+    "evidence_artifact_id": "resume-evidence"
   },
   "coverage_boundary": {
-    "proves": "fixture offline reconstruction closure",
-    "does_not_prove": "live external repository freshness"
+    "proves": "fixture offline reconstruction closure plus machine-checked resume evidence binding",
+    "does_not_prove": "hosted live-session automatic state read or live external repository freshness"
   }
 }
