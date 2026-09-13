@@ -48,6 +48,9 @@ jobs:
           python -m py_compile ENFORCEMENT/taky_gate.py
           python -m py_compile ENFORCEMENT/rule_registry_lint.py
           python -m py_compile ENFORCEMENT/handoff_bundle_validator.py
+          python -m py_compile ENFORCEMENT/evidence_ref_validator.py
+          python -m py_compile ENFORCEMENT/preflight_bridge.py
+          python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -58,5 +61,9 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
       - name: Replay evidence-backed orchestration fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
+      - name: Validate structured preflight evidence
+        run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
+      - name: Replay evidence integrity failures
+        run: python ENFORCEMENT/evidence_bridge_regression.py
       - name: Validate self-contained handoff fixture
         run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
