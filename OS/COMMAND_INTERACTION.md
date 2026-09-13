@@ -34,6 +34,21 @@ For explicit artifact/action requests, prioritize:
 
 Repeated explanation or retrieval SHALL NOT replace the next authorized executable action.
 
+## 1.2 NOTION REVIEW ROUTING — HARD LOCK
+
+Notion review commands SHALL resolve scope from the literal command, current context and unresolved review state before defaulting to a generic Notion-schema audit.
+
+- `/노션링크검토` or equivalent explicit request = review the governed Notion link/reference queue such as `📚 나의 링크`, using `OS/NOTION_OPS.md` Review Pending Register semantics.
+- `/노션구조검토` or equivalent explicit request = review Notion database/schema/view/automation structure and implementation evidence.
+- `/노션검토` without further qualifier = if the active conversation/project has a clearly linked unresolved Notion Review Pending Register, resume the highest-priority unresolved review item from that register; otherwise infer the narrowest materially supported Notion-review intent from current context. If ambiguity would materially change the result and cannot be recovered, ask only then.
+
+A prior `/노션검토` meaning in one conversation SHALL NOT become an unconditional global alias that overrides a later explicit structure/schema request.
+
+When resuming a Review Pending Register, load in this order:
+`LATEST CANONICAL TAKY / APPLICABLE OWNER → RELEVANT UNRESOLVED REVIEW REGISTER → REFERENCED SOURCE / IMPLEMENTATION EVIDENCE`.
+
+Pending/candidate Notion material remains `REFERENCE_ONLY / NON_EXECUTABLE` until actual owner reflection is evidenced. Command routing does not promote authority.
+
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
