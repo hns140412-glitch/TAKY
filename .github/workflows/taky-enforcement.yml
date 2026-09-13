@@ -3,6 +3,7 @@ name: TAKY Enforcement Replay
 on:
   push:
     paths:
+      - 'TAKY.md'
       - 'ENFORCEMENT/**'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
       - 'MASTER/FAILURE_TAXONOMY.md'
@@ -10,10 +11,12 @@ on:
       - 'MASTER/HANDOFF_PROTOCOL.md'
       - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
       - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
       - '.github/workflows/taky-enforcement.yml'
   pull_request:
     paths:
+      - 'TAKY.md'
       - 'ENFORCEMENT/**'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
       - 'MASTER/FAILURE_TAXONOMY.md'
@@ -21,6 +24,7 @@ on:
       - 'MASTER/HANDOFF_PROTOCOL.md'
       - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
       - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
       - '.github/workflows/taky-enforcement.yml'
 
