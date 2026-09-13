@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Validate TAKY preflight evidence references.
 
-Repository evidence is verified against actual bytes in the checked-out repository.
-External/session evidence cannot be independently re-fetched here; it must carry a stable
-source identifier plus digest/immutable revision metadata and remains EXTERNAL_EVIDENCE,
-not LIVE_RUNTIME_VERIFIED.
+Repository-file evidence is verified against actual bytes in the checked-out repository.
+Repository-commit evidence is verified against actual git history and, by default, must be
+an ancestor of HEAD. External/session evidence cannot be independently re-fetched here; it
+must carry a stable source identifier plus digest/immutable revision metadata and remains
+EXTERNAL_EVIDENCE, not LIVE_RUNTIME_VERIFIED.
 """
 from __future__ import annotations
-import hashlib, json, re, sys
+import hashlib, json, re, subprocess, sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
@@ -18,6 +19,17 @@ ALLOWED_KINDS = {"repo_file","repo_commit","conversation","handoff","drive","not
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def git_ok(repo_root: Path, *args: str) -> bool:
+    try:
+        p = subprocess.run(
+            ["git", *args], cwd=repo_root, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL, check=False
+        )
+        return p.returncode == 0
+    except (OSError, subprocess.SubprocessError):
+        return False
 
 
 def validate_ref(ref: Dict[str, Any], repo_root: Path) -> Tuple[bool, str]:
@@ -39,9 +51,15 @@ def validate_ref(ref: Dict[str, Any], repo_root: Path) -> Tuple[bool, str]:
         return True, "VERIFIED_REPO_FILE"
 
     if kind == "repo_commit":
-        commit = str(ref.get("commit_sha", "")).strip()
+        commit = str(ref.get("commit_sha", "")).strip().lower()
         if not HEX40.match(commit): return False, "REPO_COMMIT_SHA_INVALID"
-        return True, "STRUCTURED_REPO_COMMIT"
+        if not (repo_root / ".git").exists(): return False, "REPO_GIT_METADATA_MISSING"
+        if not git_ok(repo_root, "cat-file", "-e", f"{commit}^{{commit}}"):
+            return False, "REPO_COMMIT_NOT_FOUND"
+        require_ancestor = ref.get("require_ancestor_of_head", True)
+        if bool(require_ancestor) and not git_ok(repo_root, "merge-base", "--is-ancestor", commit, "HEAD"):
+            return False, "REPO_COMMIT_NOT_HEAD_ANCESTOR"
+        return True, "VERIFIED_REPO_COMMIT"
 
     digest = str(ref.get("content_sha256", "")).strip().lower()
     immutable_revision = str(ref.get("immutable_revision", "")).strip()
