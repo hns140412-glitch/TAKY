@@ -16,6 +16,8 @@ HARD_FAILURE_CLASSES = {
     "MISSING","WRONG_REFLECTION","HANDOFF_LOSS","UNJUSTIFIED_HOLD","UNJUSTIFIED_REJECT",
     "UNRESOLVED_CONFLICT","RULE_NOT_APPLIED","ENFORCEMENT_MISSING","REPLAY_NOT_PERFORMED",
     "STATE_CLAIM_MISMATCH","HUMAN_APPROVAL_MISSING","AUTHORITY_BOUNDARY_VIOLATION",
+    "ROLE_OWNER_VIOLATION","KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING",
+    "VALIDATION_AS_PRODUCT_PROGRESS",
 }
 
 def b(r: Dict[str, Any], k: str, d: bool=False)->bool: return bool(r.get(k,d))
@@ -26,6 +28,9 @@ def sl(r: Dict[str, Any], k: str)->List[str]:
     v=r.get(k,[])
     return [str(x) for x in v] if isinstance(v,list) else []
 
+def has_refs(r: Dict[str, Any], k: str)->bool:
+    return len([x for x in sl(r,k) if x.strip()]) > 0
+
 def validate_record(r: Dict[str, Any]) -> List[str]:
     f: List[str]=[]
     for key, token in [
@@ -34,6 +39,29 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         ("material_omission","OMISSION"),("stale_state_used","STALE_STATE"),
         ("unclassified_conflict","UNCLASSIFIED_CONFLICT")]:
         if b(r,key): f.append(token)
+
+    # Evidence-backed pre-execution activation. Booleans alone are not sufficient.
+    if b(r,"pre_execution_gate_required"):
+        if not has_refs(r,"applicable_rule_refs"):
+            f.append("KNOWN_CONTEXT_EVIDENCE_MISSING")
+        if not has_refs(r,"context_evidence_refs"):
+            f.append("KNOWN_CONTEXT_EVIDENCE_MISSING")
+        if not has_refs(r,"history_query_refs"):
+            f.append("HISTORY_EVIDENCE_MISSING")
+        if b(r,"resumed_or_context_compacted") and not has_refs(r,"preflight_rehydration_evidence_refs"):
+            f.append("HISTORY_EVIDENCE_MISSING")
+
+        role=str(r.get("role","")).upper()
+        owner=str(r.get("execution_owner","")).upper()
+        action=str(r.get("action_class","")).upper()
+        if role == "ORCHESTRATOR" and action == "IMPLEMENTATION_WRITE" and owner != "TAKY":
+            f.append("ROLE_OWNER_VIOLATION")
+
+        if action == "VALIDATION_ONLY" and b(r,"claims_product_progress_advance"):
+            f.append("VALIDATION_AS_PRODUCT_PROGRESS")
+
+    if b(r,"claims_runtime_enforced") and not b(r,"live_runtime_auto_invocation_verified"):
+        f.append("STATE_CLAIM_MISMATCH")
 
     if (b(r,"delegated_continuation") and b(r,"authorized_next_action_available")
         and not b(r,"real_blocker_present") and not b(r,"human_confirmation_required_now")
