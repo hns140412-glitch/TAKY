@@ -1,0 +1,24 @@
+{
+  "fixture_version": "2026-09-13.4",
+  "scope": "Outcome-first execution cases: overvalidation may not displace an authorized material result improvement; optimization may not stop while an obvious feasible material delta remains without a valid blocker.",
+  "cases": [
+    {
+      "id":"O-01","phase":"historical_failure","expectation":"contains",
+      "expected_detected":["SUBSTITUTE_RESULT","PREMATURE_STOP"],
+      "record":{"outcome_optimization_required":true,"authorized_improvement_action_available":true,"validation_blocking_execution":true,"validation_cycles_without_actionable_delta":3,"high_risk_gate_pending":false,"real_blocker_present":false,"human_confirmation_required_now":false,"known_material_improvement_available":false,"stopped_optimization":false}
+    },
+    {
+      "id":"O-01","phase":"post_fix_compliant","expectation":"clean","expected_detected":[],
+      "record":{"outcome_optimization_required":true,"authorized_improvement_action_available":true,"validation_blocking_execution":false,"validation_cycles_without_actionable_delta":1,"high_risk_gate_pending":false,"real_blocker_present":false,"human_confirmation_required_now":false,"known_material_improvement_available":false,"stopped_optimization":false}
+    },
+    {
+      "id":"O-02","phase":"historical_failure","expectation":"contains",
+      "expected_detected":["PREMATURE_STOP"],
+      "record":{"outcome_optimization_required":true,"authorized_improvement_action_available":true,"validation_blocking_execution":false,"validation_cycles_without_actionable_delta":0,"high_risk_gate_pending":false,"real_blocker_present":false,"human_confirmation_required_now":false,"known_material_improvement_available":true,"stopped_optimization":true}
+    },
+    {
+      "id":"O-02","phase":"post_fix_compliant","expectation":"clean","expected_detected":[],
+      "record":{"outcome_optimization_required":true,"authorized_improvement_action_available":false,"validation_blocking_execution":false,"validation_cycles_without_actionable_delta":0,"high_risk_gate_pending":false,"real_blocker_present":false,"human_confirmation_required_now":false,"known_material_improvement_available":false,"stopped_optimization":true}
+    }
+  ]
+}
