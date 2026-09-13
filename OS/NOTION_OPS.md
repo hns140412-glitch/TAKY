@@ -31,6 +31,74 @@ Promotion requires the path owned by `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`:
 
 Direct promotion or use before those applicable gates = `AUTHORITY_BOUNDARY_VIOLATION`.
 
+## 1.2 Notion Review Pending Register — HARD LOCK
+
+When Notion links/pages are being reviewed for possible TAKY / Work OS / Skill / Protocol / Project adoption, preserve the review as a distinct append-only review record before canonical reflection.
+
+`SOURCE CAPTURED ≠ ANALYZED`
+`ANALYZED ≠ ADOPTED`
+`ADOPTED ≠ CANONICAL REFLECTED`
+`CANONICAL REFLECTED ≠ RUNTIME VERIFIED`
+`REVIEW PENDING ≠ EXECUTION ELIGIBLE`
+
+A review register exists to preserve the decision process and evidence before reflection; it does not become canonical authority by existence.
+
+The register SHALL NOT collapse materially different dimensions into one linear status field. Preserve separate axes when applicable:
+
+- `SOURCE_STATE`: `INBOX / CAPTURED / VERIFIED / PARTIAL / UNAVAILABLE`
+- `ANALYSIS_STATE`: `NOT_ANALYZED / ANALYZED / RECHECK_REQUIRED`
+- `DISPOSITION`: use the canonical disposition semantics owned elsewhere, including `PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED` as applicable
+- `REFLECTION_STATE`: `NOT_REFLECTED / OWNER_REFLECTED / REFLECTION_FAILED`
+- `VERIFICATION_STATE`: `NOT_APPLICABLE / PENDING / VERIFIED / REGRESSION_FAIL`
+
+`OWNER_REFLECTED` means actual evidence exists that the decision was written to the correct canonical owner. It SHALL NOT be inferred merely because review finished, a summary exists, or a candidate was approved in prose.
+
+Use owner-oriented terminology rather than assuming every accepted item belongs in GRAND MASTER. The reflection target may be MASTER core, OS, DOMAIN, PROJECT, Skill, Protocol, or another governed owner.
+
+## 1.3 Review Register Provenance / Immutable Snapshot Contract
+
+A material Notion review record SHOULD preserve, when available:
+- `review_item_id`
+- immutable `review_snapshot_id`
+- `record_type`
+- Notion page/database/data-source ID
+- raw URL
+- normalized URL
+- source snapshot timestamp
+- source version/hash/content fingerprint where available
+- Drive or other governed preservation path
+- source/recovery state
+- original-content coverage
+- missing/constraint notes
+- extracted insight linked to the source
+- disposition and reason
+- target owner
+- reflection path/commit/evidence
+- verification/regression evidence
+- `supersedes / superseded_by`
+- next action / priority
+
+A compact field such as `핵심 3줄` may be used as a retrieval projection, but it is not authority and does not replace the preserved source or review evidence.
+
+Review snapshots are append-only in meaning. A later decision SHALL NOT erase an earlier review basis. When a newer decision replaces an older one, preserve the older record as `SUPERSEDED` and link the replacement.
+
+Where the review materially affects conversation continuity, corrections, or decision lineage, link to `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md` rather than redefining its semantics here.
+
+## 1.4 Active Rule Loading Boundary — HARD LOCK
+
+Notion review candidates SHALL NOT be injected into an active execution-rule profile merely because they are high-value, analyzed, or marked ADOPT/ADJUST candidate.
+
+Only a rule/decision with actual `OWNER_REFLECTED` evidence may become eligible for automatic active-rule loading, and it remains subject to the canonical owner, scope, supersession and current-version checks.
+
+`REVIEW_PENDING / CANDIDATE / HOLD / REJECT / CONFLICT ≠ ACTIVE RULE`
+
+A pending register may be loaded as review context when the task is to continue that review, but pending material remains `REFERENCE_ONLY / NON_EXECUTABLE` until governed reflection is complete.
+
+Canonical load order remains:
+`LATEST TAKY + APPLICABLE CANONICAL OWNERS → RELEVANT UNRESOLVED REVIEW REGISTER → ACTUAL SOURCE / IMPLEMENTATION EVIDENCE`.
+
+A review register SHALL NOT outrank current canonical TAKY or a later valid user correction.
+
 ## 2. Recommended Minimal Data Model
 Project-specific implementation may specialize this model, but a robust baseline is:
 
@@ -111,6 +179,11 @@ A status change to complete is not sufficient where the work requires a delivera
 
 If required evidence is absent, keep the record in REVIEW_REQUIRED / EVIDENCE_MISSING / equivalent lower-layer state rather than silently closing it.
 
+For review-register promotion, the existence of a checklist does not require every review item to receive the same validation cost. Source authority, coverage, conflict, disposition, target owner, duplicate semantics and reflection evidence must be resolved as applicable; Human Approval, impact/regression depth and runtime verification are proportional to authority, scope, reversibility, risk and whether runtime behavior exists.
+
+`REVIEW GATE COVERAGE ≠ MAXIMUM VALIDATION VOLUME`.
+`LOW-RISK REFERENCE LOCALIZATION ≠ HIGH-IMPACT CANONICAL CHANGE`.
+
 ## 5. Automation
 Suitable automation candidates:
 - due-date delay flagging and PM surfacing;
@@ -124,6 +197,20 @@ Suitable automation candidates:
 Human approval remains required for official completion/release, authoritative numeric/regulatory promotion, irreversible external actions and exceptions when the owning policy requires it.
 
 `AUTOMATION START ≠ OFFICIAL CONFIRMATION`
+
+## 5.1 Link Review Normalization / Duplicate Safety
+
+For URL-oriented review databases:
+- preserve `raw_url` before normalization;
+- normalize obvious tracking/query variants only as a candidate comparison aid;
+- do not classify `DUPLICATE` from URL normalization alone when materially different content may exist;
+- compare source identity/content fingerprint/version or equivalent evidence before destructive deduplication;
+- retain the representative source and preservation links before deleting/merging records.
+
+Rows without an external URL SHALL NOT be automatically classified as broken. Use `record_type` (for example `EXTERNAL_URL`, `NOTION_CONTAINER`, `ATTACHMENT_SOURCE`, `NOTE`, or project-specific equivalent) before declaring `URL_MISSING`.
+
+`NO URL ≠ BROKEN RECORD`.
+`NORMALIZED URL MATCH ≠ CONTENT IDENTITY PROVEN`.
 
 ## 6. AI Use
 Allowed candidates:
@@ -161,8 +248,10 @@ This module defines logic only.
 The connected Notion workspace implementation status must be established from actual schema/runtime evidence; do not upgrade it from document existence alone.
 
 - Notion operational schema implementation: UNVERIFIED unless actual schema evidence exists
+- Notion review-register structured fields/runtime: UNVERIFIED unless actual schema evidence exists
 - Notion automation runtime: UNVERIFIED unless runtime evidence exists
 - offline synchronization / conflict handling: UNVERIFIED unless tested
 - project-specific implementation: lower-layer owned
 
 `REFERENCE-ONLY RULE PRESENT ≠ NOTION RUNTIME ENFORCEMENT VERIFIED`.
+`REVIEW REGISTER RULE PRESENT ≠ REVIEW REGISTER RUNTIME VERIFIED`.
