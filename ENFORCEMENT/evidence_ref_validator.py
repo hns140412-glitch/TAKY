@@ -3,9 +3,10 @@
 
 Repository-file evidence is verified against actual bytes in the checked-out repository.
 Repository-commit evidence is verified against actual git history and, by default, must be
-an ancestor of HEAD. External/session evidence cannot be independently re-fetched here; it
-must carry a stable source identifier plus digest/immutable revision metadata and remains
-EXTERNAL_EVIDENCE, not LIVE_RUNTIME_VERIFIED.
+an ancestor of HEAD. History-query evidence must additionally prove relevance to canonical
+HISTORY content. External/session evidence cannot be independently re-fetched here; it must
+carry stable provenance metadata and remains STRUCTURED_EXTERNAL_EVIDENCE, not
+LIVE_RUNTIME_VERIFIED.
 """
 from __future__ import annotations
 import hashlib, json, re, subprocess, sys
@@ -70,6 +71,31 @@ def validate_ref(ref: Dict[str, Any], repo_root: Path) -> Tuple[bool, str]:
     return True, "STRUCTURED_EXTERNAL_EVIDENCE"
 
 
+def validate_history_relevance(ref: Dict[str, Any], repo_root: Path) -> Tuple[bool, str]:
+    """History evidence must point to canonical HISTORY content, not merely a valid SHA."""
+    kind = str(ref.get("source_kind", ""))
+    if kind == "repo_file":
+        rel = str(ref.get("path", "")).strip()
+        if not rel.startswith("HISTORY/"):
+            return False, "HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY"
+        return True, "VERIFIED_HISTORY_FILE"
+
+    if kind == "repo_commit":
+        commit = str(ref.get("commit_sha", "")).strip().lower()
+        paths = ref.get("evidence_paths", [])
+        if not isinstance(paths, list) or not paths:
+            return False, "HISTORY_EVIDENCE_PATHS_MISSING"
+        for raw in paths:
+            rel = str(raw).strip()
+            if not rel.startswith("HISTORY/"):
+                return False, "HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY"
+            if not git_ok(repo_root, "cat-file", "-e", f"{commit}:{rel}"):
+                return False, "HISTORY_EVIDENCE_PATH_NOT_IN_COMMIT"
+        return True, "VERIFIED_HISTORY_COMMIT_PATHS"
+
+    return False, "HISTORY_EVIDENCE_NOT_CANONICAL"
+
+
 def validate_manifest(manifest: Dict[str, Any], repo_root: Path) -> List[str]:
     failures: List[str] = []
     for bucket in ("applicable_rule_refs","context_evidence_refs","history_query_refs","preflight_rehydration_evidence_refs"):
@@ -79,7 +105,13 @@ def validate_manifest(manifest: Dict[str, Any], repo_root: Path) -> List[str]:
             failures.append(f"{bucket}:NOT_LIST"); continue
         for idx, ref in enumerate(refs):
             ok, reason = validate_ref(ref, repo_root)
-            if not ok: failures.append(f"{bucket}[{idx}]:{reason}")
+            if not ok:
+                failures.append(f"{bucket}[{idx}]:{reason}")
+                continue
+            if bucket == "history_query_refs":
+                relevant, history_reason = validate_history_relevance(ref, repo_root)
+                if not relevant:
+                    failures.append(f"{bucket}[{idx}]:{history_reason}")
     return failures
 
 
