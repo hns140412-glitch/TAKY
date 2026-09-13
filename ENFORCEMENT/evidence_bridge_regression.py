@@ -18,6 +18,11 @@ bad_hash['applicable_rule_refs'][0]['sha256'] = '0' * 64
 r = run(bad_hash, ROOT)
 assert r['pass'] is False and any('REPO_FILE_HASH_MISMATCH' in x for x in r['detected']), r
 
+fake_commit = deepcopy(base)
+fake_commit['history_query_refs'][0]['commit_sha'] = 'f' * 40
+r = run(fake_commit, ROOT)
+assert r['pass'] is False and any('REPO_COMMIT_NOT_FOUND' in x for x in r['detected']), r
+
 missing_history = deepcopy(base)
 missing_history['history_query_refs'] = []
 r = run(missing_history, ROOT)
