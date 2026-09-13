@@ -17,7 +17,28 @@ HARD_FAILURE_CLASSES = {
     "UNRESOLVED_CONFLICT","RULE_NOT_APPLIED","ENFORCEMENT_MISSING","REPLAY_NOT_PERFORMED",
     "STATE_CLAIM_MISMATCH","HUMAN_APPROVAL_MISSING","AUTHORITY_BOUNDARY_VIOLATION",
     "ROLE_OWNER_VIOLATION","KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING",
-    "VALIDATION_AS_PRODUCT_PROGRESS",
+    "VALIDATION_AS_PRODUCT_PROGRESS","ROLE_MISSING","ACTION_CLASS_MISSING","EXECUTION_OWNER_MISSING",
+    "UNKNOWN_ROLE","UNKNOWN_ACTION_CLASS","ROLE_ACTION_NOT_ALLOWED",
+}
+
+VALID_ROLES = {"ORCHESTRATOR","IMPLEMENTER","VALIDATOR","HUMAN_APPROVER"}
+VALID_ACTION_CLASSES = {
+    "ORCHESTRATE","ROUTE","SPECIFY_ACCEPTANCE","INSPECT","VALIDATION_ONLY","CROSS_VALIDATE",
+    "HANDOFF","REWORK_REQUEST","GOVERNANCE_WRITE","IMPLEMENTATION_WRITE","IMPLEMENTATION_EXECUTE",
+    "HUMAN_APPROVAL","STATUS_REPORT"
+}
+ORCHESTRATOR_ALLOWED_ACTIONS = {
+    "ORCHESTRATE","ROUTE","SPECIFY_ACCEPTANCE","INSPECT","VALIDATION_ONLY","CROSS_VALIDATE",
+    "HANDOFF","REWORK_REQUEST","GOVERNANCE_WRITE","STATUS_REPORT"
+}
+IMPLEMENTER_ALLOWED_ACTIONS = {"IMPLEMENTATION_WRITE","IMPLEMENTATION_EXECUTE","STATUS_REPORT"}
+VALIDATOR_ALLOWED_ACTIONS = {"VALIDATION_ONLY","INSPECT","CROSS_VALIDATE","STATUS_REPORT"}
+HUMAN_APPROVER_ALLOWED_ACTIONS = {"HUMAN_APPROVAL","STATUS_REPORT"}
+ROLE_ACTION_ALLOWLIST = {
+    "ORCHESTRATOR": ORCHESTRATOR_ALLOWED_ACTIONS,
+    "IMPLEMENTER": IMPLEMENTER_ALLOWED_ACTIONS,
+    "VALIDATOR": VALIDATOR_ALLOWED_ACTIONS,
+    "HUMAN_APPROVER": HUMAN_APPROVER_ALLOWED_ACTIONS,
 }
 
 def b(r: Dict[str, Any], k: str, d: bool=False)->bool: return bool(r.get(k,d))
@@ -29,7 +50,9 @@ def sl(r: Dict[str, Any], k: str)->List[str]:
     return [str(x) for x in v] if isinstance(v,list) else []
 
 def has_refs(r: Dict[str, Any], k: str)->bool:
-    return len([x for x in sl(r,k) if x.strip()]) > 0
+    v = r.get(k, [])
+    if not isinstance(v, list): return False
+    return any(x for x in v)
 
 def validate_record(r: Dict[str, Any]) -> List[str]:
     f: List[str]=[]
@@ -40,7 +63,7 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         ("unclassified_conflict","UNCLASSIFIED_CONFLICT")]:
         if b(r,key): f.append(token)
 
-    # Evidence-backed pre-execution activation. Booleans alone are not sufficient.
+    # Evidence-backed pre-execution activation. Unknown/missing role/action fails closed.
     if b(r,"pre_execution_gate_required"):
         if not has_refs(r,"applicable_rule_refs"):
             f.append("KNOWN_CONTEXT_EVIDENCE_MISSING")
@@ -51,10 +74,28 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if b(r,"resumed_or_context_compacted") and not has_refs(r,"preflight_rehydration_evidence_refs"):
             f.append("HISTORY_EVIDENCE_MISSING")
 
-        role=str(r.get("role","")).upper()
-        owner=str(r.get("execution_owner","")).upper()
-        action=str(r.get("action_class","")).upper()
-        if role == "ORCHESTRATOR" and action == "IMPLEMENTATION_WRITE" and owner != "TAKY":
+        role=str(r.get("role","")).strip().upper()
+        owner=str(r.get("execution_owner","")).strip().upper()
+        action=str(r.get("action_class","")).strip().upper()
+
+        if not role:
+            f.append("ROLE_MISSING")
+        elif role not in VALID_ROLES:
+            f.append("UNKNOWN_ROLE")
+
+        if not action:
+            f.append("ACTION_CLASS_MISSING")
+        elif action not in VALID_ACTION_CLASSES:
+            f.append("UNKNOWN_ACTION_CLASS")
+
+        if not owner:
+            f.append("EXECUTION_OWNER_MISSING")
+
+        if role in ROLE_ACTION_ALLOWLIST and action in VALID_ACTION_CLASSES:
+            if action not in ROLE_ACTION_ALLOWLIST[role]:
+                f.append("ROLE_ACTION_NOT_ALLOWED")
+
+        if role == "ORCHESTRATOR" and action in {"IMPLEMENTATION_WRITE","IMPLEMENTATION_EXECUTE"}:
             f.append("ROLE_OWNER_VIOLATION")
 
         if action == "VALIDATION_ONLY" and b(r,"claims_product_progress_advance"):
