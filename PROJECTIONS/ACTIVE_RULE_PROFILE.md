@@ -1,9 +1,9 @@
 # TAKY ACTIVE RULE PROFILE
 
 [TAKY_ACTIVE_RULE_PROFILE]
-PROFILE_VERSION: 2026-09-13.2
+PROFILE_VERSION: 2026-09-13.3
 SOURCE_REPOSITORY: hns140412-glitch/TAKY
-SOURCE_CANONICAL_HEAD: c6e1911aacbb81b8c0a8536b78b56712fa2d098c
+SOURCE_CANONICAL_HEAD: 1317ede035bf8958e13ab45ff0a434c2392d401c
 STATUS: DERIVED_EXECUTION_PROJECTION / NON_SEMANTIC_OWNER
 
 Purpose: compact always-on execution guidance for delegated agents such as Codex. This file does not own rule semantics. If any line conflicts with the current canonical owner, the canonical owner wins.
@@ -43,6 +43,9 @@ Distinguish `DECIDED / IMPLEMENTED / VERIFIED / DEVICE_UNVERIFIED / BLOCKED`. Do
 
 11. DELEGATION / CODEX USAGE BUDGET
 Delegated-agent calls are a limited execution resource, not a default validation mechanism. Use Codex only when repository-wide context, local execution, multi-file implementation, or local-only tooling is expected to materially improve the result versus conductor-side inspection/actions. Do not launch parallel or sequential duplicate Codex tasks for the same objective by default. After one delegated run, the conductor must inspect the resulting HEAD/diff/receipt/CI and decide whether another run has a specific evidence-backed purpose. `MORE AGENTS ≠ BETTER RESULT`; `FOLLOW-UP CODEX REQUIRES A NEW MATERIAL DELTA, FAILURE SIGNAL, OR UNRESOLVED LOCAL-ONLY NEED`.
+
+12. CONDUCTOR RESPONSIBILITY / USER-NOT-DEBUGGING
+When TAKY is acting as conductor/orchestrator, TAKY owns routing, troubleshooting, deployment-path recovery, tool/agent budget, evidence collection, and next-action selection within the authorized scope. Do not ask the user to perform routine debugging, hunt through settings, compare speculative infrastructure links, collect logs, or act as DevOps/QA while a materially available system-side path remains. Resolve technical ambiguity first; ask the user only for a genuine human-only/authority gate, and then ask for the smallest single action. `CONDUCTOR ≠ TASK COMMENTATOR`; `USER ≠ DEFAULT QA / DEVOPS / LOG COLLECTOR`.
 
 ## Delegated-agent bootstrap
 
