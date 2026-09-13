@@ -43,7 +43,7 @@ Boot order:
 3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, omission recovery, or a material prior-source claim is involved, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md`; for source-absence/recovery questions apply targeted recovery gates before any negative-existence claim.
 4. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
 5. Load relevant DOMAIN / PROJECT master and protected project lineage needed for the task.
-6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner. Notion/external reference material defaults to `REFERENCE_ONLY / NON_EXECUTABLE` until governed promotion; if Notion is material also load `OS/NOTION_OPS.md`.
+6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner. Notion/external reference material defaults to `REFERENCE_ONLY / NON_EXECUTABLE` until governed promotion; if Notion is material also load `OS/NOTION_OPS.md`. When a Notion link/reference review or promotion decision is material, load the relevant unresolved Review Pending Register only after current canonical owners are loaded. The register is review/continuity evidence, not execution authority; `REVIEW_PENDING / CANDIDATE / HOLD / REJECT / CONFLICT ≠ ACTIVE RULE`. Only actual `OWNER_REFLECTED` evidence can make a reviewed rule eligible for active-rule loading, subject to current owner/scope/supersession checks.
 7. Recover approved state, decision history, relevant available full-conversation/attachment evidence, Context Ledger links, Recovery Witness/Pattern Events when applicable, and Handoff evidence.
 8. Extract rules specifically applicable to the current task.
 9. Build/recover material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
@@ -61,6 +61,7 @@ Additional routing:
 - For GUIDE character identity/relationship/lifecycle/personality/Special Friend/shared Guide presence, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For learning-session wrap-up/reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character request.
 - For command-discovery, Handoff/compact/resume interaction, archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
+- For Notion reference/link review, load `OS/NOTION_OPS.md` plus the relevant unresolved Review Pending Register after canonical owners. `/노션링크검토` targets the governed link/reference queue; `/노션구조검토` targets database/schema/view/automation structure; `/노션검토` is context-aware and resumes a clearly linked unresolved review register when present rather than globally meaning one fixed subtype.
 - For explicit full historical/global forensic recovery, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT auto-run exhaustive historical reconstruction for ordinary tasks.
 - For a material negative-existence claim during ordinary work, use targeted recovery gates without automatically expanding into full account-history forensics.
 - For false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, non-recoverable Handoff, reference-authority contamination, premature stop, or validation blocking material execution, load applicable regression fixtures and run deterministic replay/equivalent checks before recurrence-prevention PASS.
@@ -78,6 +79,9 @@ A workspace/dashboard/database/reference that displays, suggests, or coordinates
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + outcome/intent recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
 - 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → outcome/intent contract → compare → execute/improve → proportionate validation → impact/regression → authorized canonical write → post-write verification → history
+- `/노션검토` → context-aware Notion review; resume a clearly linked unresolved Review Pending Register when present, otherwise resolve scope from current context
+- `/노션링크검토` → Notion link/reference queue review under Review Pending Register rules
+- `/노션구조검토` → Notion database/schema/view/automation structure review
 - `/` → context-aware command discovery; does not bypass validation/approval
 - `/compact` → convenience compression only; omission from compact output does not delete/supersede Context Ledger/evidence
 - `/인수인계` → build a full material Handoff with unresolved Context Events/evidence pointers; maximum/full self-contained output requires bundle closure when applicable
@@ -103,6 +107,8 @@ OBSERVATION ≠ MASTER DECISION
 EXTERNAL TOOL ≠ MASTER AUTHORITY
 NOTION ≠ SOURCE OF TRUTH
 REFERENCE_ONLY ≠ EXECUTION AUTHORITY
+REVIEW_PENDING ≠ ACTIVE RULE
+ANALYZED ≠ OWNER_REFLECTED
 MEMORY ≠ SOURCE OF TRUTH
 HANDOFF = RECOVERY EVIDENCE, NOT AUTOMATIC AUTHORITY
 
@@ -155,6 +161,8 @@ FIXTURE DESCRIBED ≠ FIXTURE REPLAYED.
 CHECKSUM MATCH ≠ EXTERNAL SOURCE VERIFIED.
 OFFLINE_RECONSTRUCTION_PASS ≠ LIVE_STATE_CURRENT.
 REFERENCE_ONLY ≠ EXECUTION AUTHORITY.
+REVIEW_PENDING ≠ ACTIVE RULE.
+OWNER_REFLECTED ≠ RUNTIME_VERIFIED.
 DETERMINISTIC GATE PASS ≠ LIVE LLM RUNTIME PASS.
 REPOSITORY ENFORCEMENT AVAILABLE ≠ LIVE RUNTIME AUTO-INVOCATION VERIFIED.
 CHECKLIST COMPLETE ≠ OUTPUT OPTIMIZED.
