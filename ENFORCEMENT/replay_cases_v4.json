@@ -1,0 +1,122 @@
+{
+  "fixture_version": "2026-09-14.1",
+  "scope": "Evidence-backed pre-execution activation, orchestrator/implementation ownership, context-history activation, validation-progress truthfulness, and compacted-context rehydration.",
+  "cases": [
+    {
+      "id": "EVID-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": ["KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING","ROLE_OWNER_VIOLATION"],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "IMPLEMENTATION_WRITE",
+        "applicable_rule_refs": [],
+        "context_evidence_refs": [],
+        "history_query_refs": []
+      }
+    },
+    {
+      "id": "EVID-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "SPECIFY_ACCEPTANCE",
+        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
+        "context_evidence_refs": ["HISTORY/FAILURE_LEDGER_2026-09-14_READYSET_ORCHESTRATOR_DRIFT.md"],
+        "history_query_refs": ["query:HISTORY:READYSET+ORCHESTRATOR+POST_CORRECTION_REOCCURRENCE"]
+      }
+    },
+    {
+      "id": "EVID-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": ["VALIDATION_AS_PRODUCT_PROGRESS"],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CI",
+        "action_class": "VALIDATION_ONLY",
+        "applicable_rule_refs": ["MASTER/VALIDATION_RULES.md"],
+        "context_evidence_refs": ["MASTER/ENFORCEMENT_PROTOCOL.md#9"],
+        "history_query_refs": ["query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"],
+        "claims_product_progress_advance": true
+      }
+    },
+    {
+      "id": "EVID-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CI",
+        "action_class": "VALIDATION_ONLY",
+        "applicable_rule_refs": ["MASTER/VALIDATION_RULES.md"],
+        "context_evidence_refs": ["MASTER/ENFORCEMENT_PROTOCOL.md#9"],
+        "history_query_refs": ["query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"],
+        "claims_product_progress_advance": false
+      }
+    },
+    {
+      "id": "EVID-03",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": ["HISTORY_EVIDENCE_MISSING"],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "SPECIFY_ACCEPTANCE",
+        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
+        "context_evidence_refs": ["MASTER/MASTER_LOGIC.md"],
+        "history_query_refs": ["query:HISTORY:READYSET"],
+        "resumed_or_context_compacted": true,
+        "preflight_rehydration_evidence_refs": []
+      }
+    },
+    {
+      "id": "EVID-03",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "SPECIFY_ACCEPTANCE",
+        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
+        "context_evidence_refs": ["MASTER/MASTER_LOGIC.md"],
+        "history_query_refs": ["query:HISTORY:READYSET"],
+        "resumed_or_context_compacted": true,
+        "preflight_rehydration_evidence_refs": ["handoff:READYSET:latest", "history:2026-09-14-orchestrator-drift"]
+      }
+    },
+    {
+      "id": "EVID-04",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": ["STATE_CLAIM_MISMATCH"],
+      "record": {
+        "claims_runtime_enforced": true,
+        "live_runtime_auto_invocation_verified": false
+      }
+    },
+    {
+      "id": "EVID-04",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "claims_runtime_enforced": false,
+        "live_runtime_auto_invocation_verified": false
+      }
+    }
+  ]
+}
