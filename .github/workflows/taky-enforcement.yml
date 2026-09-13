@@ -56,5 +56,7 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v2.json
       - name: Replay outcome optimization fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
+      - name: Replay evidence-backed orchestration fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
       - name: Validate self-contained handoff fixture
         run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
