@@ -1,6 +1,6 @@
 # FAILURE LEDGER — 2026-09-14 — READY & SET ORCHESTRATOR DRIFT
 
-Status: OPEN_FOR_EXTERNAL_CROSS_VALIDATION
+Status: CORRECTION_APPLIED / REPOSITORY_ENFORCEMENT_VALIDATED / LIVE_RUNTIME_ENFORCEMENT_UNVERIFIED
 Severity: MAJOR GOVERNANCE REGRESSION
 Classes: REPEAT_FAILURE / ENFORCEMENT_GAP / KNOWN_CONTEXT_OMISSION / POST_CORRECTION_REOCCURRENCE / REGRESSION_FAIL
 
@@ -15,22 +15,46 @@ During Ready & Set work, TAKY had active orchestration/routing/authority rules a
 - NO USER-AS-QA.
 
 ## Root cause
-The rules existed primarily as normative prose. No fail-closed PRE-EXECUTION record was required before implementation tool use. Historical failure knowledge was not a mandatory input to routing. Therefore context drift could silently skip role/owner activation while still appearing compliant in narration.
+The governance rules existed but were not reliably activated as fail-closed execution inputs. Historical failure context was not guaranteed to be relevant, evidence-backed input to routing, and role/action classification could drift without deterministic rejection. A second-order failure also occurred when an external-review bundle was packaged with a non-canonical fixture copy, proving that package creation itself must be replay-validated before handoff.
 
 ## Impact
 - orchestrator/implementer boundary blurred;
 - tests became the center of work instead of user-visible product closure;
 - CI GREEN was over-weighted as product progress;
 - progress reporting became unreliable;
-- user had to re-identify a previously known governance defect.
+- user had to re-identify a previously known governance defect;
+- external review package integrity briefly diverged from canonical source.
 
-## Corrective controls
-1. `MASTER/EXECUTION_ENFORCEMENT_PROTOCOL.md`
-2. `ENFORCEMENT/execution_policy.json`
-3. `ENFORCEMENT/preflight_gate.py`
-4. regression replay for this exact historical class
-5. product progress cannot advance from validation-only evidence
-6. known-context/history checks are mandatory and fail closed
+## Current canonical corrective controls
+1. `MASTER/ENFORCEMENT_PROTOCOL.md` — semantic owner for mechanical/auditable enforcement and replay.
+2. `MASTER/RULE_REGISTRY.json` — machine-readable single-owner mapping (`TKY-ENFORCEMENT-001`).
+3. `ENFORCEMENT/taky_gate.py` — deterministic role/action/evidence gate; missing or unknown role/action/owner fails closed for required pre-execution records.
+4. `ENFORCEMENT/evidence_ref_validator.py` — verifies repository-file SHA-256, real git commit existence/HEAD ancestry, and canonical HISTORY relevance for history-query evidence.
+5. `ENFORCEMENT/preflight_bridge.py` — combines evidence-integrity validation with the deterministic TAKY gate at repository level.
+6. `ENFORCEMENT/replay_cases_v4.json` — historical orchestration/context/progress/runtime-overclaim replay cases.
+7. `ENFORCEMENT/evidence_bridge_regression.py` — negative regression for bad hashes, fake/unbound/unrelated history evidence, role drift, unknown action, missing role/owner, progress drift and runtime-overclaim.
+8. `.github/workflows/taky-enforcement.yml` — canonical CI replay with full git history (`fetch-depth: 0`) so commit/ancestor checks are real.
+9. External cross-validation history under `HISTORY/2026-09-14_*_ENFORCEMENT_REVIEW_INTEGRATION.md`.
+
+## Rejected shortcut
+Automatic hash auto-sync is NOT a default corrective control. Blindly rewriting expected hashes to match changed content would convert tamper/change detection into self-approval. Hash regeneration must be an intentional canonical update with source review and subsequent replay/CI validation.
+
+## Current evidence ceiling
+Repository-level controls are machine-readable, executable and CI-enforced for the encoded cases.
+
+However:
+`REPOSITORY_ENFORCEMENT_AVAILABLE != LIVE_CHATGPT_RUNTIME_AUTO_INVOCATION_VERIFIED`.
+
+The hosted ChatGPT/native tool router is not proven to invoke repository Python gates before every tool call. Role/action/owner values also still require a trustworthy upstream classification source to prevent semantic misclassification that is syntactically valid.
+
+Therefore the highest truthful state remains:
+`REPOSITORY_EXECUTABLE + CI_ENFORCED / LIVE_RUNTIME_AUTO_INVOCATION_UNVERIFIED`.
 
 ## Closure condition
-Do NOT close merely because files exist. Closure requires external cross-validation (Claude + Gemini requested by user), correction of material findings, deterministic regression evidence, and a final reverse trace from failure -> rule -> executable gate -> replay result.
+Do NOT close solely because repository tests are green.
+Closure requires:
+1. current canonical enforcement CI/replay PASS;
+2. external findings reconciled and history updated;
+3. no stale/deleted corrective-control pointers;
+4. representative replay proving historical role/context/progress failures are blocked;
+5. any claim of `LIVE_RUNTIME_ENFORCED` requires separate evidence that the actual execution environment automatically invokes/intercepts the gate before native tool/action execution.
