@@ -1,8 +1,9 @@
 # TAKY RECOVERY FORENSICS PROTOCOL
 
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
-Activation: EXPLICIT USER INVOCATION ONLY
-Default runtime state: OFF
+Activation: EXPLICIT USER INVOCATION ONLY for full historical forensics
+Default full-forensic runtime state: OFF
+Normative failure-token semantics: `MASTER/FAILURE_TAXONOMY.md`
 
 ## 1. CORE RULE
 
@@ -16,8 +17,7 @@ Default runtime state: OFF
 `SUMMARY ABSENCE ≠ PRIOR RULE ABSENCE`
 `CURRENT CHAT MISS ≠ ACCOUNT-HISTORY ABSENCE`
 
-Ordinary source recovery and applicable-rule loading may occur in normal TAKY work.
-Full historical forensic reconstruction SHALL NOT auto-start.
+Ordinary targeted source recovery and applicable-rule loading may occur in normal TAKY work. Full historical forensic reconstruction SHALL NOT auto-start.
 
 If an ordinary task reveals a material historical omission or conflict, mark `RECOVERY_REQUIRED` when material and wait for explicit user invocation before full forensic reconstruction.
 
@@ -37,11 +37,36 @@ Search semantically and by distinctive entities/relations, not by exact keyword 
 
 If coverage is still incomplete, state the boundary precisely: `NOT FOUND IN CHECKED SOURCES / RECOVERY_REQUIRED / UNVERIFIED_SOURCE_COVERAGE`; do not convert it to `NEVER EXISTED`.
 
+## 1.1A Recovery-Family Exhaustion Before User Request — HARD LOCK
+
+Before asking the user to find an old chat, re-upload a recoverable file, provide a screenshot as proof, or perform debugging/evidence gathering that TAKY can materially attempt itself, inventory distinct recovery families.
+
+Distinct families include, when available:
+- current conversation;
+- conversation/library raw evidence;
+- Context Ledger / Handoff / source pointers;
+- canonical/history/repository;
+- connected workspace such as Drive/Notion;
+- actual implementation/runtime/evidence.
+
+Repeated keyword variations inside one source are one family, not multiple recovery attempts.
+
+Execution rule:
+- 3 or more materially available families → attempt at least 3 materially distinct families;
+- fewer than 3 materially available families → attempt all materially available families;
+- a material unattempted recovery family remains → user recovery/debug request is blocked;
+- the user is genuinely the only possible source holder → a bounded request is allowed and the boundary must be stated.
+
+The recovery attempt record SHALL identify available families, attempted families, blocked/unavailable families, whether a material path remains, and whether the user is the only possible source holder.
+
+Violation is classified using the normative taxonomy as `RECOVERY_FAILED / USER_AS_QA`; later proof by the user may additionally become `USER_FORCED_RECOVERY`.
+
+`THREE KEYWORDS ≠ THREE RECOVERY FAMILIES`.
+`NO USER-AS-QA ≠ NEVER ASK THE USER`; it means do not ask before available system-side recovery is exhausted or when the user is not uniquely required.
+
 ## 1.2 Recovery-Failure Activation Subset — HARD LOCK
 
-Normative semantics for all failure/discrepancy tokens are owned solely by `MASTER/FAILURE_TAXONOMY.md`.
-This section is only the recovery-specific activation subset for this protocol and SHALL NOT redefine those token meanings.
-If wording anywhere in this protocol diverges from the normative taxonomy, `MASTER/FAILURE_TAXONOMY.md` controls.
+Normative semantics for all failure/discrepancy tokens are owned solely by `MASTER/FAILURE_TAXONOMY.md`. This section is only the recovery-specific activation subset and SHALL NOT redefine those meanings.
 
 Recovery-specific tokens:
 - `TRUE_UNAVAILABLE`
@@ -51,33 +76,24 @@ Recovery-specific tokens:
 - `USER_FORCED_RECOVERY`
 - `POST_CORRECTION_REOCCURRENCE`
 
-Apply the definitions and cross-axis mappings in `MASTER/FAILURE_TAXONOMY.md`.
+Apply definitions and cross-axis mappings in `MASTER/FAILURE_TAXONOMY.md`.
 
 `TRUE_UNAVAILABLE ≠ RECOVERY_FAILED`.
 `UNVERIFIED_SOURCE_COVERAGE` SHALL NOT be used to conceal a known recovery failure.
-
 A `USER_FORCED_RECOVERY` event is also a `NO USER-AS-QA` failure unless the required source was genuinely inaccessible to available tools and the user was the only possible source holder.
-
 A `POST_CORRECTION_REOCCURRENCE` event is a regression failure and SHALL trigger root-cause review rather than another isolated patch only.
 
 ## 2. CHRONOLOGY BEFORE CONSOLIDATION — HARD LOCK IN FORENSIC MODE
 
 Before consolidating a recovered rule, trace the recoverable decision episode:
-
 `EARLIEST RECOVERABLE PROPOSAL → USER RESPONSE → MODIFICATION → CONFIRM / HOLD / REJECT → LATER USER CORRECTION → CURRENT DISPOSITION`.
 
 A later summary SHALL NOT erase the decision's prior lifecycle.
-
-When a user supplies a screenshot/capture of an earlier conversation after TAKY failed to recover it, preserve both events:
-
-`ORIGINAL PRIOR TURN / CAPTURED CONTENT → ASSISTANT FALSE-MISSING OR RECOVERY GAP → USER RECOVERY ACTION → RECOVERED DECISION → CURRENT REFLECTION`.
-
-Do not misclassify the recovered screenshot as a newly invented requirement merely because it entered the current chat later.
+When a user supplies a screenshot/capture of an earlier conversation after TAKY failed to recover it, preserve both the original prior content and the recovery event. Do not misclassify the recovered screenshot as a newly invented requirement merely because it entered the current chat later.
 
 ## 3. RECOVERY FLOW
 
 After chronology recovery, expand the material decision graph:
-
 `SEED → SUBJECT / INTENT / ENTITY → DECISION EPISODE → SEMANTIC DECISION GRAPH → ORIGINAL SOURCE → HISTORICAL REV / HANDOFF / MASTER → CURRENT OWNER / RESULT → IMPLEMENTATION / RESULT EVIDENCE → FORWARD TRACE → REVERSE TRACE → COVERAGE MATRIX → SECOND-PASS OMISSION CHECK → RECURRENCE CHECK`.
 
 Recovery shall expand only as far as materially necessary to resolve the active decision graph, except when the user explicitly requests a full/global/all-conversation scan; then scope is every materially accessible relevant conversation/source surface, with unresolved coverage recorded rather than silently omitted.
@@ -86,34 +102,23 @@ Recovery shall expand only as far as materially necessary to resolve the active 
 
 A full/global conversation audit SHALL not stop at recovering isolated decisions. It SHALL identify repeated failure patterns across conversations/projects where materially relevant.
 
-Maintain a recurrence ledger sufficient to answer:
-- what the user originally asked;
-- how TAKY/Assistant interpreted it;
-- what was omitted, substituted, or falsely declared missing;
-- whether the user had to recover/prove it;
-- whether an applicable TAKY rule already existed;
-- whether the same pattern recurred later;
-- what downstream artifact/implementation was affected;
-- which canonical gate should prevent recurrence.
+Maintain a recurrence ledger sufficient to answer what the user asked, how TAKY/Assistant interpreted it, what was omitted/substituted/falsely declared missing, whether the user had to recover it, whether an applicable rule already existed, whether the same pattern recurred, what downstream artifact was affected, and which gate should prevent recurrence.
 
 At minimum classify applicable events with the recovery activation subset in §1.2 plus applicable intent/result, reflection/handoff, and enforcement classes from `MASTER/FAILURE_TAXONOMY.md`.
-`MASTER/INTENT_EXECUTION_PROTOCOL.md` owns the execution flow that activates intent/result checks; it does not independently own token semantics.
+`MASTER/INTENT_EXECUTION_PROTOCOL.md` owns execution flow that activates intent/result checks; it does not independently own token semantics.
 
 ## 4. RECOVERY SOURCE PRIORITY
 
-When available and materially relevant, use:
-
+When available and materially relevant, prefer:
 `ORIGINAL / RAW CONVERSATION → ORIGINAL ATTACHMENT / USER-PROVIDED RECOVERY WITNESS → ORIGINAL EXTERNAL SOURCE → HISTORICAL MASTER / REV → HANDOFF / CHECKPOINT → SUMMARY / SYNTHESIS`.
 
-This is a recovery-evidence preference, not an authority override.
-Latest valid user correction and applicable higher authority still govern final disposition.
+This is a recovery-evidence preference, not an authority override. Latest valid user correction and applicable higher authority still govern final disposition.
 
 A screenshot of a prior chat is `RECOVERY_WITNESS_EVIDENCE`: it can directly prove visible conversation content and that the user recovered it, but it does not automatically become canonical authority over later valid corrections or current source-of-truth state.
 
 ## 5. PROJECT CONTAMINATION GUARD
 
 Semantic similarity, shared keywords or co-retrieval SHALL NOT establish project ownership.
-
 `RELATED IDEA ≠ SAME PROJECT RULE`
 
 Classify recovered cross-project material as:
@@ -153,18 +158,13 @@ For explicit full/global scans, a result is not “full” merely because the re
 
 ## 8. STOP RULE
 
-Stop when every material node has either:
-- a recoverable source and disposition, or
-- an explicit unresolved status such as HOLD / CONFLICT / RECOVERY_REQUIRED / UNVERIFIED_SOURCE_COVERAGE,
-
-and additional expansion is unlikely to change the material decision.
+Stop when every material node has either a recoverable source and disposition, or an explicit unresolved status such as HOLD / CONFLICT / RECOVERY_REQUIRED / UNVERIFIED_SOURCE_COVERAGE, and additional expansion is unlikely to change the material decision.
 
 For a full/global scan, also require that the source-family inventory has no silently unvisited material recovery surface and that recurrence patterns have been checked across recovered conversations, not only within the latest chat.
 
 ## 9. EXIT RULE
 
 After forensic recovery, release unnecessary historical context and return to normal TAKY selective-context operation.
-
 `RECOVERY MODE ≠ PERMANENT RUNTIME MODE`
 
 Preserve the resulting recovery ledger, Context Events, canonical deltas, unresolved coverage, and regression fixtures so ordinary future work can use targeted recovery instead of repeatedly rescanning the entire history.
