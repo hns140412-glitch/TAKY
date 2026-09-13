@@ -1,8 +1,9 @@
 {
-  "registry_version": "2026-09-13.1",
+  "registry_version": "2026-09-13.2",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {"rule_id":"TKY-INTENT-001","owner":"MASTER/INTENT_EXECUTION_PROTOCOL.md","scope":"intent/result fidelity and delegated execution"},
+    {"rule_id":"TKY-OUTCOME-001","owner":"MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md","scope":"outcome-first execution, result-quality optimization, best-next-action and bounded validation"},
     {"rule_id":"TKY-RECOVERY-001","owner":"MASTER/RECOVERY_FORENSICS_PROTOCOL.md","scope":"recovery/negative-existence and recovery exhaustion"},
     {"rule_id":"TKY-HANDOFF-001","owner":"MASTER/HANDOFF_PROTOCOL.md","scope":"handoff portability, bundle closure and resume"},
     {"rule_id":"TKY-TAXONOMY-001","owner":"MASTER/FAILURE_TAXONOMY.md","scope":"failure/discrepancy token semantics"},
