@@ -18,62 +18,62 @@ ALWAYS LOAD THE LATEST TAKY FROM THE CANONICAL GITHUB REPOSITORY BEFORE APPLYING
 MEMORY IS A ROUTING AID, NOT THE SOURCE OF TRUTH.
 
 CANONICAL LOADED ≠ CANONICAL APPLIED.
-After loading TAKY, identify the task-relevant OS / DOMAIN / PROJECT / GUIDE / validation rules and compare the actual result against those applicable rules before claiming PASS.
+After loading TAKY, identify task-relevant OS / DOMAIN / PROJECT / GUIDE / validation rules and compare the actual result against applicable rules before claiming PASS.
 
 Boot order:
-1. Load TAKY.md.
-2. Load MASTER/MASTER_LOGIC.md.
-2A. For material validation, completion/PASS claims, recurrence correction, negative-existence claims, or maximum/full handoff portability, load `MASTER/FAILURE_TAXONOMY.md` and `MASTER/ENFORCEMENT_PROTOCOL.md`. `MASTER/FAILURE_TAXONOMY.md` is the normative semantic owner for failure/discrepancy tokens; lists elsewhere are activation/context subsets, not independent definitions. When an applicable F-01~F-06 or mechanically-checkable recurrence gate exists, run the deterministic enforcement/replay harness before claiming recurrence-prevention PASS.
-3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, omission recovery, or a material claim that a prior source/decision “does not exist” is involved, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md`; for source-absence/recovery questions also apply the targeted gates in `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` before making a negative-existence claim.
+1. Load `TAKY.md`.
+2. Load `MASTER/MASTER_LOGIC.md`.
+2A. For material validation, completion/PASS claims, recurrence correction, negative-existence claims, user evidence/debug requests, REFERENCE_ONLY promotion, or maximum/full handoff portability, load `MASTER/FAILURE_TAXONOMY.md`, `MASTER/ENFORCEMENT_PROTOCOL.md`, and when rule ownership is material `MASTER/RULE_REGISTRY.json`. Failure/discrepancy semantics come only from the taxonomy; other lists are activation subsets.
+2B. For material execution/continue/result-form work, load `MASTER/INTENT_EXECUTION_PROTOCOL.md`; delegated continuation SHALL NOT stop before a real blocker/required decision/completion condition.
+2C. Before asking the user to search, re-upload, prove, screenshot, or debug a recoverable issue, apply the recovery-family exhaustion gate in `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` and the pre-response `USER_AS_QA` gate in `MASTER/ENFORCEMENT_PROTOCOL.md`.
+2D. For maximum/full/self-contained Handoff, load `MASTER/HANDOFF_PROTOCOL.md`; when an actual bundle is produced, validate its `MANIFEST.json` and file/hash closure with `ENFORCEMENT/handoff_bundle_validator.py` before calling it portable/verified.
+3. When prior conversation context, corrections, idea/decision evolution, Handoff/resume continuity, omission recovery, or a material prior-source claim is involved, load `MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md`; for source-absence/recovery questions apply targeted recovery gates before any negative-existence claim.
 4. Load the task-relevant OS master. For GUIDE / Family Learning work, load `OS/GUIDE_FAMILY_LEARNING_OS.md` before subject/project/app rules.
-5. Load relevant DOMAIN / PROJECT master and any protected project lineage needed for the task.
-6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner before judging the result.
+5. Load relevant DOMAIN / PROJECT master and protected project lineage needed for the task.
+6. When Notion, task/issue systems, dashboards, wikis, collaboration databases or external operational projections are material, load `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md` and the applicable Work OS / Project owner. Notion/external reference material defaults to `REFERENCE_ONLY / NON_EXECUTABLE` until governed promotion; if Notion is material also load `OS/NOTION_OPS.md`.
 7. Recover approved state, decision history, relevant available full-conversation/attachment evidence, Context Ledger links, Recovery Witness/Pattern Events when applicable, and Handoff evidence.
-8. Extract the rules specifically applicable to the current task.
-9. Build or recover the material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
-10. Compare the current request against authority and protected decisions.
+8. Extract rules specifically applicable to the current task.
+9. Build/recover material Decision-Coverage / Traceability links and distinguish PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
+10. Compare current request against authority and protected decisions.
 11. Execute only within allowed scope.
 12. Inspect the actual integrated result, not only its separate parts.
 13. Trace material results backward to requirement/decision/source and active requirements forward through applicable design/function/data/implementation/test/evidence stages.
-14. Self-validate, independently cross-validate when material, run impact/regression/resume checks, then proceed to authorized commit/release state.
+14. Self-validate, independently cross-validate when material, run impact/regression/resume checks, run applicable deterministic enforcement/replay, then proceed only to the authorized commit/release state.
 
 Additional routing:
-- For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then the project master and inherited detailed baseline. `HISTORY/2026-09-07_APP_FAMILY_COMPARISON_HANDOFF.md` sections 3–5 provide recoverable external project-source pointers for Ready-Set, ZPD-Word (current Hide & Seek), and Snap-Pop. Recheck those pointers before execution; the Handoff is not authority or proof of current implementation.
-- For Ready & Set product/design/runtime work, after the shared GUIDE/Family and Learning App Family layers, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` before inventing or implementing a local rule. This contract owns Ready-specific Parent/Planner/Guide boundaries, schedule-source/profile/override semantics, assignment intake projection, execution/session continuity, cross-app handoff, lock/background requirements, visual-schedule realization gates and current Ready implementation-gap map. Actual GitHub branch/runtime evidence still outranks stale implementation-status snapshots inside the contract.
-- For GUIDE character identity, relationship, lifecycle, personality, Special Friend recovery state or shared Guide presence rules, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
-- For learning-session wrap-up or reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character/personality request.
-- For command-discovery, handoff/compact/resume interaction, conversation archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
-- For explicit full historical/global forensic recovery requests, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT run exhaustive historical reconstruction by default for ordinary tasks.
-- For a material negative-existence claim during ordinary work, use the targeted negative-claim/recovery gates from `MASTER/RECOVERY_FORENSICS_PROTOCOL.md` without automatically expanding into full account-history forensics.
-- For a correction involving false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, or non-recoverable handoff, load `MASTER/EXECUTION_REGRESSION_FIXTURES.md`, `MASTER/FAILURE_TAXONOMY.md`, and `MASTER/ENFORCEMENT_PROTOCOL.md`; run the applicable deterministic replay/equivalent check before claiming recurrence-prevention PASS.
-- For PWA/web deployment operations, load `OS/DEPLOYMENT_OPS.md` plus the applicable project repository/master.
-- For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus the applicable project sources.
+- For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then project master/inherited detailed baseline. Historical Handoff provides recovery pointers, not authority or proof of current implementation.
+- For Ready & Set product/design/runtime work, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` after shared GUIDE/Family layers. Actual GitHub branch/runtime evidence outranks stale implementation snapshots.
+- For GUIDE character identity/relationship/lifecycle/personality/Special Friend/shared Guide presence, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
+- For learning-session wrap-up/reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character request.
+- For command-discovery, Handoff/compact/resume interaction, archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
+- For explicit full historical/global forensic recovery, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT auto-run exhaustive historical reconstruction for ordinary tasks.
+- For a material negative-existence claim during ordinary work, use targeted recovery gates without automatically expanding into full account-history forensics.
+- For false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, non-recoverable Handoff, reference-authority contamination, or premature stop, load applicable regression fixtures and run deterministic replay/equivalent checks before recurrence-prevention PASS.
+- For PWA/web deployment, load `OS/DEPLOYMENT_OPS.md` plus applicable project repository/master.
+- For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus applicable project sources.
 
 Canonical owner presence gate:
 A materially active requirement SHALL have a recoverable canonical owning MASTER/OS/DOMAIN/PROJECT destination or an explicit HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED disposition.
-A historical MASTER/Handoff containing active rules while the current canonical owner file is absent or incomplete is `MISSING / MIGRATION_REQUIRED`, not PASS.
+A historical MASTER/Handoff containing active rules while the current canonical owner file is absent/incomplete is `MISSING / MIGRATION_REQUIRED`, not PASS.
 
 Operational workspace authority gate:
-A workspace/dashboard/database that displays or coordinates information SHALL NOT silently become canonical, numerical, geometric, evidentiary or approval authority merely because it is convenient or automated. Tool-role authority must remain explicit and traceable.
+A workspace/dashboard/database/reference that displays, suggests, or coordinates information SHALL NOT silently become canonical, numerical, geometric, evidentiary, approval, or execution authority merely because it is convenient, automated, or AI-generated. Tool-role authority and promotion state must remain explicit and traceable.
 
 ## Natural commands
-- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery; when conversation continuity is material, recover relevant Context Ledger events/evidence links rather than relying on the latest summary alone
+- 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
-- 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Context Ledger/Decision-Coverage recovery → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → regression → end-to-end realization/reverse-validation → approved delta → canonical owner/lower-layer write → post-write verification → history
-- `/` → context-aware command discovery; does not bypass validation or approval
-- `/compact` → compress current context for convenience only; omission from compact output does not delete/supersede Context Ledger or evidence
-- `/인수인계` → build a full material handoff from accessible conversation/source state, with pointers to relevant unresolved Context Events/evidence; Handoff does not replace them
-- `/재개` → recover latest canonical + Handoff + relevant unresolved Context Events/decision traces + actual implementation evidence, then resume from the first unresolved gate
-- `/대화전체보존` → preserve the materially accessible USER↔Assistant conversation in original order as evidence and link material Context Events; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
+- 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → Context Ledger/Decision-Coverage recovery → compare → impact analysis → self-correction → self-validation → independent cross-validation when material → deterministic enforcement/regression → end-to-end realization/reverse-validation → authorized canonical write → post-write verification → history
+- `/` → context-aware command discovery; does not bypass validation/approval
+- `/compact` → convenience compression only; omission from compact output does not delete/supersede Context Ledger/evidence
+- `/인수인계` → build a full material Handoff with unresolved Context Events/evidence pointers; maximum/full self-contained output requires bundle closure when applicable
+- `/재개` → recover latest canonical + Handoff + unresolved Context Events/decision traces + actual implementation evidence, then resume from first unresolved gate
+- `/대화전체보존` → preserve materially accessible USER↔Assistant conversation in original order as evidence; unavailable source remains UNVERIFIED_SOURCE_COVERAGE
 - `대화 종료` → persistence check → conversation evidence/context-event linkage → TEMP/project classification → Handoff → source pointers → resume instruction
 - `/복구전문가 <범위>` / `/포렌식복구 <범위>` / `복구전문가 불러와` → explicit-only full forensic recovery mode
-- natural-language requests such as “모든 대화창 전체 스캔”, “최초 원대화부터 다시”, or equivalent explicit all-history reconstruction → full forensic mode; the wording defines scope and SHALL NOT be silently reduced to current-chat/Handoff review
+- natural-language requests such as “모든 대화창 전체 스캔”, “최초 원대화부터 다시”, or equivalent explicit all-history reconstruction → full forensic mode; scope SHALL NOT be silently reduced
 
 FORENSIC RECOVERY IS CONDITIONAL.
-Ordinary tasks may recover the sources needed for the active task and load applicable rules.
-Full historical forensic recovery, full conversation reconstruction and exhaustive reverse tracing run only on explicit user invocation.
-A material historical omission/conflict discovered during ordinary work may be marked `RECOVERY_REQUIRED` without auto-starting full forensics.
-A material negative-existence claim is not permission to declare absence after one failed search; targeted multi-path recovery is required first.
+Ordinary tasks may recover sources needed for active work and load applicable rules. Full historical forensic reconstruction runs only on explicit user invocation. A material omission/conflict may be marked `RECOVERY_REQUIRED` without auto-starting full forensics. A material negative-existence claim is not permission to declare absence after one failed search. A request that the user recover evidence is not allowed until materially available system-side recovery families are exhausted or the user is uniquely required.
 
 ## Source rules
 CHAT ≠ SOURCE OF TRUTH
@@ -87,6 +87,7 @@ CAPTURE ≠ DECISION
 OBSERVATION ≠ MASTER DECISION
 EXTERNAL TOOL ≠ MASTER AUTHORITY
 NOTION ≠ SOURCE OF TRUTH
+REFERENCE_ONLY ≠ EXECUTION AUTHORITY
 MEMORY ≠ SOURCE OF TRUTH
 HANDOFF = RECOVERY EVIDENCE, NOT AUTOMATIC AUTHORITY
 
@@ -98,28 +99,25 @@ TAKY / GRAND MASTER governance
 > SKILL
 > TOOL / AGENT
 
-## Work OS storage boundary
-TAKY-WORK-OS GitHub stores workflow definitions, automation logic, validation rules, schemas, scripts, integrations, and operating policies.
-Actual business/project source files and generated deliverables belong in the governed Google Drive workspace, not in the canonical TAKY repository.
+Normative rule ownership is machine-indexed by `MASTER/RULE_REGISTRY.json`. One rule ID has one semantic owner. Activation/index documents SHALL reference rather than silently redefine another owner's semantics.
 
-The user-facing Work OS shall prefer conversational simplicity over exposing internal lifecycle complexity. Internal validation/state gates remain mandatory even when the visible Drive structure is simplified.
+## Work OS storage boundary
+TAKY-WORK-OS GitHub stores workflow definitions, automation logic, validation rules, schemas, scripts, integrations, and operating policies. Actual business/project source files and generated deliverables belong in governed Google Drive workspace, not canonical TAKY repository.
+
+The user-facing Work OS shall prefer conversational simplicity over exposing internal lifecycle complexity. Internal validation/state gates remain mandatory even when visible Drive structure is simplified.
 
 Default Drive work-item pattern:
 PROJECT / YYYY-MM-DD_WORK-TITLE /
 - 요청자료/ : immutable copies of files supplied for the request
 - 요청사항.md : project, date, title, request summary, source list, review status
-- generated review/working/final artifacts at the work-item root with clear filenames
+- generated review/working/final artifacts at work-item root with clear filenames
 
-Do not require the user to manually manage separate INPUT/WORKING/REVIEW/OUTPUT folders for ordinary work. TAKY may maintain those states logically and in trace/history instead.
+Do not require the user to manually manage separate INPUT/WORKING/REVIEW/OUTPUT folders for ordinary work. TAKY may maintain those states logically and in trace/history.
 
-When project identity is clear from conversation/materials, classify automatically. Ask only when ambiguity materially affects filing or execution.
-
-Original supplied files shall not be silently overwritten. Modified/reviewed artifacts are separate outputs unless the user explicitly requests an authorized replacement.
+When project identity is clear, classify automatically. Ask only when ambiguity materially affects filing/execution. Original supplied files SHALL NOT be silently overwritten.
 
 ## Revision governance
-Before explicit user finalization, all MASTER / GUIDE / DOMAIN / APP remain REV_00.
-Review, remaster, candidate changes, and reflection do not increment revision.
-Historical file revision labels are lineage only.
+Before explicit user finalization, all MASTER / GUIDE / DOMAIN / APP remain REV_00. Review/remaster/candidate changes/reflection do not increment revision. Historical file revision labels are lineage only.
 
 ## Validation
 LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.
@@ -129,7 +127,6 @@ CODE EXISTS ≠ ACTUAL BEHAVIOR VERIFIED.
 COMPONENT PASS ≠ INTEGRATED RESULT PASS.
 LOCAL SAVE ≠ REMOTE ACKNOWLEDGEMENT.
 OFFLINE-CAPABLE UI ≠ OFFLINE DATA SYNC.
-TEMPLATE ID ≠ DATED INSTANCE ID ≠ EVENT ID.
 AUTO / IMMEDIATE EXECUTION ≠ VALIDATION BYPASS.
 STATUS = COMPLETE ≠ EVIDENCE OF COMPLETION.
 PROJECTION WRITE ≠ SOURCE COMMIT.
@@ -140,21 +137,24 @@ POST_CORRECTION_REOCCURRENCE = REGRESSION FAIL.
 RULE WRITTEN ≠ RULE ENFORCED.
 FIXTURE DESCRIBED ≠ FIXTURE REPLAYED.
 CHECKSUM MATCH ≠ EXTERNAL SOURCE VERIFIED.
+OFFLINE_RECONSTRUCTION_PASS ≠ LIVE_STATE_CURRENT.
+REFERENCE_ONLY ≠ EXECUTION AUTHORITY.
 DETERMINISTIC GATE PASS ≠ LIVE LLM RUNTIME PASS.
+REPOSITORY ENFORCEMENT AVAILABLE ≠ LIVE RUNTIME AUTO-INVOCATION VERIFIED.
 
-All failure/discrepancy token semantics are governed by `MASTER/FAILURE_TAXONOMY.md`; executable/auditable enforcement requirements are governed by `MASTER/ENFORCEMENT_PROTOCOL.md`.
+All failure/discrepancy token semantics are governed by `MASTER/FAILURE_TAXONOMY.md`; executable/auditable enforcement requirements by `MASTER/ENFORCEMENT_PROTOCOL.md`; normative owner mapping by `MASTER/RULE_REGISTRY.json`.
 
-`EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed the highest execution state actually evidenced.
+`EXECUTION TRUTHFULNESS`: claim level SHALL NOT exceed highest execution state actually evidenced.
 `PROJECT RULE ≠ GLOBAL RULE`: lower-layer rules require explicit scope/promotion classification before becoming GRAND MASTER invariants.
 
-For material product/result work, validate the applicable chain:
-`SOURCE / DECISION → OWNER MASTER → DESIGN / UI → FUNCTION / DATA → IMPLEMENTATION → TEST / EVIDENCE → ACTUAL RESULT`, and reverse-trace the actual result back to active authority.
+For material product/result work, validate:
+`SOURCE / DECISION → OWNER MASTER → DESIGN / UI → FUNCTION / DATA → IMPLEMENTATION → TEST / EVIDENCE → ACTUAL RESULT`, and reverse-trace actual result to active authority.
 
-For operational workspace work, also validate:
-`AUTHORITATIVE SOURCE → OPERATIONAL RECORD / VIEW → EVIDENCE / DECISION → DOWNSTREAM REFLECTION → VALIDATION / HISTORY`, and reverse-trace visible status/completion back to source and evidence.
+For operational workspace work, validate:
+`AUTHORITATIVE SOURCE → AUTHORITY ENVELOPE → OPERATIONAL RECORD / VIEW → EVIDENCE / DECISION → DOWNSTREAM REFLECTION → VALIDATION / HISTORY`, and reverse-trace visible status to source/authority.
 
-For conversation continuity, validate the applicable chain:
-`ORIGINAL EVIDENCE → CONTEXT EVENT / RECOVERY WITNESS → IDEA/DECISION TRACE → CANONICAL REFLECTION STATUS → IMPLEMENTATION STATUS → HANDOFF POINTER → RESUME GATE`.
+For conversation continuity, validate:
+`ORIGINAL EVIDENCE → CONTEXT EVENT / RECOVERY WITNESS → IDEA/DECISION TRACE → CANONICAL REFLECTION STATUS → IMPLEMENTATION STATUS → HANDOFF POINTER/BUNDLE → RESUME GATE`.
 
 A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
 
