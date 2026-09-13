@@ -10,6 +10,27 @@ Notion is used as an operational collaboration surface for work visibility, task
 Notion is not TAKY canonical source-of-truth by use alone.
 Notion is not the sole authority for project calculations, geometry/drawings, original evidence files, laws/regulations or official approvals when those owners remain elsewhere.
 
+## 1.1 Reference-Only Isolation — HARD LOCK
+
+Material collected from Notion as an idea/reference/page excerpt defaults to:
+
+`[STATUS: REFERENCE_ONLY / NON_EXECUTABLE]`
+
+Structured authority state should also preserve:
+- `source_origin = NOTION`
+- `authority_class = REFERENCE_ONLY`
+- `execution_eligible = false`
+- `promotion_state = CANDIDATE`
+
+The visible header helps people; the structured authority envelope is the enforceable state.
+
+A Notion reference SHALL NOT directly become a TAKY canonical rule, authoritative numeric/regulatory value, self-modification instruction, release decision, or execution-controlling policy.
+
+Promotion requires the path owned by `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`:
+`REFERENCE_ONLY → CANDIDATE → SOURCE_VALIDATED → LOCALIZED → IMPACT/REGRESSION_VALIDATED → HUMAN_APPROVED when required → CANONICAL_DELTA → CANONICAL_WRITE → POST_WRITE_VERIFY`.
+
+Direct promotion or use before those applicable gates = `AUTHORITY_BOUNDARY_VIOLATION`.
+
 ## 2. Recommended Minimal Data Model
 Project-specific implementation may specialize this model, but a robust baseline is:
 
@@ -52,6 +73,7 @@ Project-specific implementation may specialize this model, but a robust baseline
 - document/effective date
 - owner
 - validation status
+- authority class / execution eligibility when reference material is involved
 - review/expiry date when applicable
 - related rule/issue/decision/workbook input
 
@@ -115,7 +137,8 @@ Not allowed as automatic authority:
 - final legal/regulatory conclusion;
 - authoritative project numeric value promotion;
 - official approval/issuance;
-- silent replacement of source calculations or drawings.
+- silent replacement of source calculations or drawings;
+- direct use of REFERENCE_ONLY Notion content as canonical execution logic.
 
 ## 7. Offline / Sync
 Notion app/browser offline capability SHALL NOT be assumed to satisfy a project runtime offline contract.
@@ -135,10 +158,11 @@ Never hand-maintain the same authoritative value independently in multiple syste
 
 ## 9. Current Implementation Status
 This module defines logic only.
-The current connected Notion workspace search performed during this reflection did not identify a verified operational database implementing the above Projects/Issues/Decisions/Evidence/Changes/Snapshots model; visible results were primarily reference/link pages. Therefore:
-- Notion operational schema implementation: UNVERIFIED / NOT ESTABLISHED BY THIS REVIEW
-- Notion automation runtime: UNVERIFIED
-- offline synchronization / conflict handling: UNVERIFIED
-- project-specific Strongbuk/architecture implementation: lower-layer work required.
+The connected Notion workspace implementation status must be established from actual schema/runtime evidence; do not upgrade it from document existence alone.
 
-Do not upgrade these statuses without actual schema/runtime evidence.
+- Notion operational schema implementation: UNVERIFIED unless actual schema evidence exists
+- Notion automation runtime: UNVERIFIED unless runtime evidence exists
+- offline synchronization / conflict handling: UNVERIFIED unless tested
+- project-specific implementation: lower-layer owned
+
+`REFERENCE-ONLY RULE PRESENT ≠ NOTION RUNTIME ENFORCEMENT VERIFIED`.
