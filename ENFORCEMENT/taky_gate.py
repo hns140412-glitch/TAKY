@@ -44,15 +44,30 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         and not b(r,"artifact_or_action_delivered") and b(r,"explanation_only")):
         f += ["SUBSTITUTE_RESULT","OUTPUT_FORM_MISMATCH"]
 
+    # Outcome-first gate: validation may not displace available result improvement.
+    if b(r,"outcome_optimization_required"):
+        blocked_by_overvalidation = (
+            b(r,"authorized_improvement_action_available")
+            and b(r,"validation_blocking_execution")
+            and i(r,"validation_cycles_without_actionable_delta") >= 2
+            and not b(r,"high_risk_gate_pending")
+            and not b(r,"real_blocker_present")
+            and not b(r,"human_confirmation_required_now")
+        )
+        if blocked_by_overvalidation:
+            f += ["SUBSTITUTE_RESULT","PREMATURE_STOP"]
+        if (b(r,"known_material_improvement_available") and b(r,"stopped_optimization")
+            and not b(r,"real_blocker_present") and not b(r,"human_confirmation_required_now")
+            and not b(r,"high_risk_gate_pending")):
+            f.append("PREMATURE_STOP")
+
     if b(r,"negative_existence_claim"):
         paths=i(r,"recovery_paths_checked")
         if paths < 2 and b(r,"material_alternate_path_available"): f.append("RECOVERY_FAILED")
         if b(r,"source_found_after_claim"): f += ["RECOVERY_FAILED","FALSE_MISSING_DECLARATION"]
 
-    # Before asking the user to search/re-upload evidence, exhaust materially available recovery families.
     if b(r,"user_evidence_request"):
-        available=set(sl(r,"available_recovery_families"))
-        attempted=set(sl(r,"attempted_recovery_families"))
+        available=set(sl(r,"available_recovery_families")); attempted=set(sl(r,"attempted_recovery_families"))
         required=min(3,len(available)) if available else 0
         exhausted = len(attempted & available) >= required and not b(r,"material_recovery_path_remaining")
         if not b(r,"user_is_only_possible_source") and (not exhausted or not b(r,"recovery_log_present")):
@@ -67,10 +82,8 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if not b(r,"second_semantic_pass_performed"): f.append("REPLAY_NOT_PERFORMED")
 
     if b(r,"handoff_requested_maximum"):
-        recipient_access=b(r,"recipient_repo_access")
-        full_snapshot=b(r,"portable_source_snapshots")
-        diff_with_base=b(r,"portable_diff_with_base")
-        pointers_only=b(r,"repo_pointers_only")
+        recipient_access=b(r,"recipient_repo_access"); full_snapshot=b(r,"portable_source_snapshots")
+        diff_with_base=b(r,"portable_diff_with_base"); pointers_only=b(r,"repo_pointers_only")
         if not recipient_access and (pointers_only or not (full_snapshot or diff_with_base)):
             f += ["HANDOFF_LOSS","SCOPE_SHRINKAGE","SUBSTITUTE_RESULT"]
         if not b(r,"source_manifest_present"): f.append("OMISSION")
@@ -87,7 +100,6 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
     if b(r,"recurrence_prevention_claim") and not b(r,"representative_replay_performed"):
         f.append("REPLAY_NOT_PERFORMED")
 
-    # Reference-only external material may not directly control canonical execution.
     if b(r,"reference_only_input") and b(r,"promoted_to_execution_rule"):
         promotion_ok = (b(r,"source_validated") and b(r,"localized") and b(r,"regression_impact_validated")
                         and (not b(r,"human_approval_required") or b(r,"human_approval_present")))
