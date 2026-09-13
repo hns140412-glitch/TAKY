@@ -23,7 +23,8 @@
   "history_query_refs":[{
     "source_kind":"repo_commit",
     "source_id":"failure-history-commit",
-    "commit_sha":"172cbf66a0b4560ef0374010adf83e295b07d7f5"
+    "commit_sha":"172cbf66a0b4560ef0374010adf83e295b07d7f5",
+    "evidence_paths":["HISTORY/2026-09-14_GEMINI_ENFORCEMENT_REVIEW_INTEGRATION.md"]
   }],
   "preflight_rehydration_evidence_refs":[{
     "source_kind":"handoff",
