@@ -1,0 +1,39 @@
+{
+  "bundle_type": "TAKY_HANDOFF",
+  "claimed_scope": "maximum",
+  "recipient_repo_access": false,
+  "artifacts": [
+    {
+      "artifact_id": "handoff",
+      "original_source": "fixture",
+      "bundle_path": "HANDOFF.md",
+      "sha256": "f21bd9d393af445d421a36e5f5f9c957da927c70ce7bc569a7faabc22934febe",
+      "authority_class": "PROCESS",
+      "freshness": "SNAPSHOT_VERIFIED",
+      "owner": "MASTER/HANDOFF_PROTOCOL.md",
+      "required_for_resume": true
+    },
+    {
+      "artifact_id": "canonical-fixture",
+      "original_source": "fixture",
+      "bundle_path": "canonical/FIXTURE_CANONICAL.md",
+      "sha256": "dc0d9d7e91e86fbbe777026c05b053ab78627b227fb36a11b4b30f0da147d0b9",
+      "authority_class": "CURRENT",
+      "freshness": "SNAPSHOT_VERIFIED",
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "required_for_resume": true
+    }
+  ],
+  "pointer_artifact_ids": ["handoff", "canonical-fixture"],
+  "resume_simulation": {
+    "passed": true,
+    "assertions": [
+      {"owner": "MASTER/HANDOFF_PROTOCOL.md", "pass": true},
+      {"owner": "MASTER/MASTER_LOGIC.md", "pass": true}
+    ]
+  },
+  "coverage_boundary": {
+    "proves": "fixture offline reconstruction closure",
+    "does_not_prove": "live external repository freshness"
+  }
+}
