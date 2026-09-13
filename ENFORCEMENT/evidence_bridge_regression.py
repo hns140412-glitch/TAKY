@@ -23,6 +23,16 @@ fake_commit['history_query_refs'][0]['commit_sha'] = 'f' * 40
 r = run(fake_commit, ROOT)
 assert r['pass'] is False and any('REPO_COMMIT_NOT_FOUND' in x for x in r['detected']), r
 
+unbound_history_commit = deepcopy(base)
+unbound_history_commit['history_query_refs'][0].pop('evidence_paths', None)
+r = run(unbound_history_commit, ROOT)
+assert r['pass'] is False and any('HISTORY_EVIDENCE_PATHS_MISSING' in x for x in r['detected']), r
+
+unrelated_history_path = deepcopy(base)
+unrelated_history_path['history_query_refs'][0]['evidence_paths'] = ['TAKY.md']
+r = run(unrelated_history_path, ROOT)
+assert r['pass'] is False and any('HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY' in x for x in r['detected']), r
+
 missing_history = deepcopy(base)
 missing_history['history_query_refs'] = []
 r = run(missing_history, ROOT)
@@ -32,6 +42,21 @@ role_drift = deepcopy(base)
 role_drift['action_class'] = 'IMPLEMENTATION_WRITE'
 r = run(role_drift, ROOT)
 assert r['pass'] is False and 'ROLE_OWNER_VIOLATION' in r['detected'], r
+
+unknown_action = deepcopy(base)
+unknown_action['action_class'] = 'UNKNOWN_NEW_ACTION'
+r = run(unknown_action, ROOT)
+assert r['pass'] is False and 'UNKNOWN_ACTION_CLASS' in r['detected'], r
+
+missing_role = deepcopy(base)
+missing_role['role'] = ''
+r = run(missing_role, ROOT)
+assert r['pass'] is False and 'ROLE_MISSING' in r['detected'], r
+
+missing_owner = deepcopy(base)
+missing_owner['execution_owner'] = ''
+r = run(missing_owner, ROOT)
+assert r['pass'] is False and 'EXECUTION_OWNER_MISSING' in r['detected'], r
 
 progress_drift = deepcopy(base)
 progress_drift['action_class'] = 'VALIDATION_ONLY'
