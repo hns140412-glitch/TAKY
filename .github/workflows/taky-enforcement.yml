@@ -5,6 +5,8 @@ on:
     paths:
       - 'TAKY.md'
       - 'ENFORCEMENT/**'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
       - 'MASTER/FAILURE_TAXONOMY.md'
       - 'MASTER/RULE_REGISTRY.json'
@@ -18,6 +20,8 @@ on:
     paths:
       - 'TAKY.md'
       - 'ENFORCEMENT/**'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
       - 'MASTER/FAILURE_TAXONOMY.md'
       - 'MASTER/RULE_REGISTRY.json'
@@ -50,5 +54,7 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases.json
       - name: Replay enforcement v2 fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v2.json
+      - name: Replay outcome optimization fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
       - name: Validate self-contained handoff fixture
         run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
