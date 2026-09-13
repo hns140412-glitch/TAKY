@@ -3,8 +3,10 @@
 Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
 Role: Convert material TAKY prose rules into executable or auditable gates and prevent `RULE WRITTEN ≠ RULE ENFORCED` recurrence.
 Normative taxonomy: `MASTER/FAILURE_TAXONOMY.md`.
+Rule ownership registry: `MASTER/RULE_REGISTRY.json`.
 Executable reference implementation: `ENFORCEMENT/taky_gate.py`.
-Representative cases: `ENFORCEMENT/replay_cases.json`.
+Representative cases: `ENFORCEMENT/replay_cases.json` + `ENFORCEMENT/replay_cases_v2.json`.
+Bundle closure validator: `ENFORCEMENT/handoff_bundle_validator.py`.
 
 ## 0. Core rule — HARD LOCK
 
@@ -13,24 +15,18 @@ Representative cases: `ENFORCEMENT/replay_cases.json`.
 `CHECKSUM MATCH ≠ EXTERNAL SOURCE VERIFIED`.
 `PACKAGE OPENS ≠ HANDOFF RECOVERABLE`.
 `HUMAN APPROVAL REQUIRED ≠ HUMAN APPROVAL ASSUMED`.
+`REFERENCE_ONLY ≠ EXECUTION AUTHORITY`.
+`PRE-RESPONSE CHECKLIST ≠ DETERMINISTIC RUNTIME INTERCEPT`.
 
-A material rule that is mechanically checkable or replayable SHALL have a concrete enforcement expression when technically feasible.
-
-Concrete enforcement expressions include:
-- deterministic pre-response/pre-execution assertions;
-- schema/contract validation;
-- replay fixtures with expected outcomes;
-- CI/release blocking;
-- post-write readback and compare;
-- explicit human approval records for genuinely human-governed transitions.
+A material rule that is mechanically checkable or replayable SHALL have a concrete enforcement expression when technically feasible. Concrete enforcement may include deterministic assertions, schema/contract validation, replay fixtures, bundle/file closure checks, CI/release blocking, post-write readback, or explicit human approval records.
 
 If no executable enforcement exists for a material mechanically-checkable rule, status is `ENFORCEMENT_MISSING`; prose existence alone SHALL NOT be described as recurrence-prevention PASS.
 
 ## 1. Pre-response negative-existence gate — HARD LOCK
 
-Before a material claim equivalent to “없다 / 말한 적 없다 / 규칙이 없다 / 자료가 없다 / 확인되지 않는다” that would affect recovery, deletion, HOLD, supersession, implementation, or user effort, the response contract SHALL contain evidence sufficient for the gate to decide whether the claim is allowed.
+Before a material claim equivalent to “없다 / 말한 적 없다 / 규칙이 없다 / 자료가 없다 / 확인되지 않는다”, the execution record SHALL contain sufficient recovery evidence.
 
-Minimum mechanically-auditable fields when applicable:
+Minimum fields when applicable:
 - `negative_existence_claim`;
 - `recovery_paths_checked`;
 - `material_alternate_path_available`;
@@ -44,45 +40,75 @@ Hard behavior:
 - user had to recover evidence TAKY could materially recover ⇒ `USER_FORCED_RECOVERY` + normally `USER_AS_QA`;
 - genuinely inaccessible after applicable paths ⇒ `TRUE_UNAVAILABLE / UNVERIFIED_SOURCE_COVERAGE`, not “never existed”.
 
-The executable gate SHALL fail closed when required recovery evidence fields are absent for a material negative-existence claim.
+## 1.1 Recovery-exhaustion / no-user-as-QA gate — HARD LOCK
+
+Before asking the user to search old chats, re-upload a file, prove a prior statement, collect a screenshot, or perform debugging/evidence recovery that TAKY can materially attempt itself, inventory distinct recovery families.
+
+Minimum fields:
+- `user_evidence_request`;
+- `available_recovery_families`;
+- `attempted_recovery_families`;
+- `material_recovery_path_remaining`;
+- `user_is_only_possible_source`;
+- `recovery_log_present`.
+
+Recovery families are distinct evidence surfaces, not repeated keyword variations in one surface. Examples: current conversation, conversation/library raw evidence, Context Ledger/Handoff, canonical/history, connected workspace/Drive/Notion, actual implementation/runtime.
+
+Execution rule:
+- if 3 or more materially available families exist, attempt at least 3 materially distinct families before asking the user;
+- if fewer than 3 materially available families exist, attempt all materially available families;
+- if a material recovery path still remains, user evidence/debug request is blocked;
+- if the user is genuinely the only possible source holder, a bounded user request is allowed and SHALL state that boundary.
+
+Violation ⇒ `RECOVERY_FAILED / USER_AS_QA` with reason `USER_QA_OFFLOADING_VIOLATION`.
 
 ## 2. Maximum/full handoff portability gate — HARD LOCK
 
 When the user requests `최대한 / 모두 / 전체 / 원문 / 최대 / full / maximum` handoff/transfer and the recipient may lack repository access, the package SHALL be independently recoverable without silently relying on inaccessible repository pointers.
 
-Required machine-auditable fields when applicable:
+Required contract fields when applicable:
 - `handoff_requested_maximum`;
 - `recipient_repo_access`;
-- `portable_source_snapshots`;
-- `portable_diff_with_base`;
+- `portable_source_snapshots` or `portable_diff_with_base`;
 - `repo_pointers_only`;
 - `source_manifest_present`;
 - `evidence_authority_classified`;
 - `resume_simulation_passed`;
+- `bundle_closure_required`;
+- `bundle_closure_passed`;
 - `claims_complete`.
 
 Hard behavior:
-- recipient has no repo access + only SHA/blob pointers ⇒ `HANDOFF_LOSS / FAIL`;
-- recipient has no repo access + neither full source snapshot nor reconstructable diff+base ⇒ `HANDOFF_LOSS / FAIL`;
-- maximum/full requested + material accessible sources not inventoried/classified ⇒ `SCOPE_SHRINKAGE / PREMATURE_PASS` if called complete;
-- CURRENT / HISTORICAL / SUPERSEDED / CONFLICT / PROCESS evidence mixed without classification ⇒ NOT PASS;
-- package checksum may prove package internal integrity only; it SHALL NOT be used as proof that referenced live repository HEAD/blob state was independently verified.
+- no recipient repo access + only SHA/blob pointers ⇒ `HANDOFF_LOSS / FAIL`;
+- no recipient repo access + neither full source snapshot nor reconstructable diff+complete base ⇒ `HANDOFF_LOSS / FAIL`;
+- maximum/full requested + material accessible sources not inventoried/classified ⇒ NOT PASS;
+- package checksum proves package/internal integrity only, not independent live repository verification.
 
-Allowed verification labels:
+Allowed freshness labels:
 - `SNAPSHOT_VERIFIED`;
 - `LIVE_HEAD_VERIFIED`;
 - `LIVE_HEAD_UNVERIFIED`.
 
+## 2.1 Bundle closure gate — HARD LOCK
+
+For a claimed self-contained maximum/full handoff, `MANIFEST.json` SHALL be machine-verifiable. Every `required_for_resume` artifact must physically exist inside the bundle, match its declared SHA-256, carry an authority class and freshness class, and be resolvable from declared artifact IDs. Resume simulation must cover every materially required canonical owner.
+
+The reference validator is:
+`python ENFORCEMENT/handoff_bundle_validator.py <bundle-root>`.
+
+`OFFLINE_RECONSTRUCTION_PASS ≠ LIVE_STATE_CURRENT`.
+A bundle may prove declared-scope offline reconstruction while live external freshness remains `LIVE_HEAD_UNVERIFIED`.
+
+Bundle closure failure is classified as `HANDOFF_LOSS` with reason `BUNDLE_CLOSURE_MISSING`; do not create a parallel semantic failure token solely for package structure.
+
 ## 3. Replay gate — HARD LOCK
 
-A correction that claims recurrence prevention for an applicable F-01~F-06 class SHALL run a representative replay or equivalent deterministic check before recurrence-prevention PASS.
+A correction that claims recurrence prevention for an applicable fixture SHALL run a representative replay or equivalent deterministic check before recurrence-prevention PASS.
 
 Required sequence:
 `HISTORICAL FAILURE INPUT/STATE → CURRENT GATE → EXPECTED BLOCK/CLASSIFICATION → POST-FIX COMPLIANT INPUT/STATE → EXPECTED PASS → RECORDED LOG`.
 
 A prose fixture without an executed replay is `REPLAY_NOT_PERFORMED`.
-
-The canonical executable fixture set lives in `ENFORCEMENT/replay_cases.json` and is exercised by `ENFORCEMENT/taky_gate.py --replay ...`.
 
 ## 4. Rule-application gate — HARD LOCK
 
@@ -90,64 +116,39 @@ If an applicable rule was loaded/cited/known and the actual result violates it, 
 
 `RULE CITED + RESULT VIOLATES RULE = FAIL`.
 
-A completion claim is blocked when:
-- `rule_cited = true` and `rule_violated = true`;
-- or any other hard enforcement violation remains unresolved.
-
 ## 4.1 Delegated-continuation / premature-stop gate — HARD LOCK
 
-When the user explicitly delegates continued execution with wording equivalent to `확인이 필요할 때까지 진행`, `계속 진행`, `멈추지 마`, `알아서 진행`, `ㄱ`, or another context-grounded continue instruction, TAKY SHALL continue through authorized executable next actions until a real blocker, required human-only decision, safety/permission boundary, or requested completion condition is reached.
+When the user delegates continued execution with wording equivalent to `확인이 필요할 때까지 진행`, `계속 진행`, `멈추지 마`, `알아서 진행`, `ㄱ`, or another context-grounded continue instruction, TAKY SHALL continue through authorized executable next actions until a real blocker, required human-only decision, safety/permission boundary, or requested completion condition is reached.
 
-Minimum machine-auditable fields when applicable:
-- `delegated_continuation`;
-- `authorized_next_action_available`;
-- `real_blocker_present`;
-- `human_confirmation_required_now`;
-- `stopped_before_blocker`.
-
-If continuation was delegated, an authorized next action existed, no real blocker/human decision was due, and execution stopped anyway, classify `PREMATURE_STOP / FAIL`.
-
-Status narration, another plan, or a request that the user perform avoidable debugging SHALL NOT be treated as a valid blocker.
-
-`CONTINUE UNTIL BLOCKER ≠ STOP AFTER EACH SUBSTEP`.
-`PROGRESS UPDATE ≠ EXECUTION STOP`.
+Violation ⇒ `PREMATURE_STOP`.
 
 ## 4.2 Result-not-narration gate — HARD LOCK
 
 When the user requests a concrete artifact/action/result and the system has authority/capability to produce it, explanation or intention text alone is not the requested result.
 
-Minimum machine-auditable fields when applicable:
-- `artifact_or_action_required`;
-- `artifact_or_action_delivered`;
-- `explanation_only`;
-- `authorized_action_available`.
-
-If a concrete result was required, the authorized result could be produced, and the response stopped at explanation/plan without delivery, classify at least `SUBSTITUTE_RESULT`; add `OUTPUT_FORM_MISMATCH` when the requested result form was not supplied, and `PREMATURE_STOP` when delegated continuation was also active.
-
-`I WILL DO IT ≠ DONE`.
-`PLAN FOR RESULT ≠ RESULT`.
+If a concrete authorized result was required and the response stopped at explanation/plan, classify at least `SUBSTITUTE_RESULT`; add `OUTPUT_FORM_MISMATCH` when the requested form was not supplied, and `PREMATURE_STOP` when delegated continuation was also active.
 
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
 
-Minimum fields when applicable:
-- `human_approval_required`;
-- `human_approval_present`;
-- `approval_scope`.
-
-If approval is required and not present, classify `HUMAN_APPROVAL_MISSING / FAIL` for that transition.
-
+If approval is required and not present, classify `HUMAN_APPROVAL_MISSING / FAIL`.
 Names such as “Prime Agent”, “continual harness”, “lesson evolution”, “AI approval”, or “validated” SHALL NOT substitute for human approval.
+
+## 5.1 Reference-only authority isolation gate — HARD LOCK
+
+Notion pages, external AI proposals, web references, community templates, Handoffs, imported notes, and other non-canonical material SHALL enter as `REFERENCE_ONLY / CANDIDATE` unless an owning protocol explicitly gives them higher authority.
+
+Promotion path:
+`REFERENCE_ONLY → CANDIDATE → SOURCE_VALIDATED → LOCALIZED → IMPACT/REGRESSION_VALIDATED → HUMAN_APPROVED when required → CANONICAL_DELTA → CANONICAL_WRITE → POST_WRITE_VERIFY`.
+
+A `REFERENCE_ONLY` input SHALL NOT directly control canonical execution logic. Promotion before required validation/localization/regression or approval ⇒ `AUTHORITY_BOUNDARY_VIOLATION`.
+
+A textual `[STATUS: REFERENCE_ONLY / NON_EXECUTABLE]` header is useful evidence, but the header alone is not an enforcement mechanism. Structured authority metadata + validator enforcement is preferred.
 
 ## 6. State/history claim consistency gate — HARD LOCK
 
 Narrative result/history wording SHALL NOT claim a higher state than the governing machine/state manifest supports.
-
-Minimum fields when applicable:
-- `claims_complete`;
-- `external_validation_state`;
-- `state_manifest_consistent`.
 
 If external validation remains `PENDING` or another material gate is not complete, wording may state completed local/canonical deltas but SHALL NOT present the entire validation program as unqualified complete.
 
@@ -159,45 +160,47 @@ For an offline/isolated review package that cites canonical files, use one of:
 1. full canonical text snapshot; or
 2. reconstructable diff plus its complete base snapshot/known base artifact.
 
-Excerpt + blob/SHA alone is insufficient when the recipient lacks repository access and independent reconstruction is required.
+Excerpt + blob/SHA alone is insufficient when the recipient lacks repository access and independent reconstruction is required. This rule applies to TAKY’s own validation packages as well as project handoffs.
 
-This rule applies to TAKY’s own validation packages as well as project handoffs.
+## 8. Rule ownership / duplicate-definition gate
 
-## 8. CI / repository enforcement
+`MASTER/RULE_REGISTRY.json` is the machine-readable registry of normative owners. Rule semantics live in the declared owner. Other documents may reference or activate a rule but SHALL NOT establish a conflicting second owner.
 
-The canonical repository SHOULD run the deterministic replay harness on push/pull request for changes touching governance/enforcement/fixture files.
+Run:
+`python ENFORCEMENT/rule_registry_lint.py`.
 
-Current reference CI: `.github/workflows/taky-enforcement.yml`.
+`VALIDATION_RULES.md` composes validation gates; it SHALL NOT silently become the semantic owner of taxonomy/recovery/intent/handoff rules already owned elsewhere.
 
-CI success proves only that deterministic repository checks passed. It does NOT prove live LLM behavior, external service state, deployment, or human-only judgment.
+## 9. Pre-response gate bridge
 
-`CI PASS ≠ LIVE RUNTIME PASS`.
+For TAKY-controlled runtimes/agents, the preferred enforcement chain is:
 
-## 9. Enforcement evidence record
+`USER REQUEST → EXECUTION CONTRACT/RECOVERY ACTION → PRE-RESPONSE RECORD → taky_gate.py → FAIL: corrective execution/block → PASS: user-visible response`.
 
-A recurrence-prevention claim SHALL be accompanied by a replay record containing:
-- canonical commit/ref tested;
-- validator version/path;
-- fixture version/path;
-- per-case result;
-- remaining non-automatable/human-only boundary;
-- overall scope of what the replay does and does not prove.
+This repository can define and test that bridge. A general ChatGPT conversation is not proven to invoke the validator automatically merely because the repository contains it.
 
-Store completed canonical replay evidence under `HISTORY/`.
+`REPOSITORY ENFORCEMENT AVAILABLE ≠ LIVE RUNTIME AUTO-INVOCATION VERIFIED`.
 
-## 10. Fail-closed completion rule
+## 10. CI / repository enforcement
+
+The canonical repository SHOULD run deterministic replay, rule-registry lint, and syntax validation on relevant push/pull request changes. Bundle closure is run against actual generated handoff packages when such a package is produced; CI cannot validate a nonexistent runtime bundle.
+
+CI success proves only the checks actually run. It does NOT prove live LLM behavior, external service state, deployment, or human-only judgment.
+
+## 11. Enforcement evidence record
+
+A recurrence-prevention claim SHALL identify canonical commit/ref tested, validator/fixture version, per-case result, remaining non-automatable boundary, and what the replay does/does not prove. Store completed canonical replay evidence under `HISTORY/`.
+
+## 12. Fail-closed completion rule
 
 If a material rule is designated executable but the enforcement mechanism was not run, failed to run, or lacks required evidence, TAKY SHALL NOT upgrade that rule to enforcement PASS.
 
-Allowed wording:
+Allowed wording includes:
 - `RULE PRESENT / ENFORCEMENT NOT PERFORMED`;
 - `DETERMINISTIC GATE PASS / LIVE RUNTIME UNVERIFIED`;
 - `HUMAN APPROVAL PENDING`;
 - `LIVE HEAD UNVERIFIED`.
 
-Disallowed wording:
-- “재발 방지 완료” solely because prose was added;
-- “최대 인수인계 완료” solely because ZIP/checksum exists;
-- “검증 완료” while governing STATE is still PENDING.
+Disallowed wording includes “재발 방지 완료” solely because prose was added, “최대 인수인계 완료” solely because ZIP/checksum exists, or “검증 완료” while governing state is still PENDING.
 
 END
