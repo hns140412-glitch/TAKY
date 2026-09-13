@@ -7,9 +7,10 @@ Rule ownership registry: `MASTER/RULE_REGISTRY.json`.
 
 `VALIDATION COMPOSITION ≠ SECOND SEMANTIC OWNER`.
 
-This file defines when/how validation gates are composed. It SHALL NOT redefine failure taxonomy, recovery semantics, intent/result semantics, Handoff portability semantics, or external-reference authority semantics already owned elsewhere.
+This file defines when/how validation gates are composed. It SHALL NOT redefine failure taxonomy, outcome-optimization semantics, recovery semantics, intent/result semantics, Handoff portability semantics, or external-reference authority semantics already owned elsewhere.
 
 Normative owners:
+- outcome-first execution / result-quality optimization / bounded validation → `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md`
 - failure/discrepancy token semantics → `MASTER/FAILURE_TAXONOMY.md`
 - intent/result execution fidelity → `MASTER/INTENT_EXECUTION_PROTOCOL.md`
 - recovery/negative-existence/user-QA exhaustion → `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`
@@ -22,10 +23,31 @@ If explanatory wording here conflicts with a declared semantic owner, the owner 
 
 ## Global gate
 
+Default result-producing composition:
+`USER OUTCOME / RESULT CONTRACT → EXECUTION / IMPROVEMENT → ACTUAL RESULT INSPECTION → PROPORTIONATE VALIDATION → NEXT BEST IMPROVEMENT OR PASS / FAIL`.
+
+For governance/authority-sensitive work, compose the applicable controls around that result loop:
 `SOURCE / APPROVED REFERENCE → IDENTITY & PROTECTED-STATE LOCK → APPLICABLE-RULE EXTRACTION → DECISION-COVERAGE / TRACEABILITY → EXECUTION → ACTUAL RESULT INSPECTION → 1:1 COMPARE → INTEGRATED-RESULT CHECK → DOMAIN CHECK → IMPACT CHECK → REGRESSION CHECK → ENFORCEMENT GATE → PASS / FAIL`.
 
 FAIL → do not present as completed or canonical.
 PASS → may proceed only to the next authorized state.
+
+## Outcome-first / proportional-validation composition — HARD LOCK
+
+Validation SHALL protect, enable or improve the requested result; it SHALL NOT become the default work product when the user requested an artifact, action, implementation, design, optimization, deployment, analysis result, or other concrete outcome.
+
+Apply `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md` before expanding validation work for material result-producing tasks.
+
+Default rhythm:
+`EXECUTE → LIGHTWEIGHT MATERIAL CHECK → IMPROVE → TARGETED CHECK → FINAL RESULT`.
+
+Additional or repeated validation is justified only when it has a material reason such as changed state, unresolved uncertainty, independent evidence likely to change the result, high-impact/irreversible/safety/legal requirements, representative runtime evidence required for the requested result level, or regression risk created by the latest change.
+
+If repeated equivalent validation produces no actionable delta while an authorized material result-improving action remains, validation SHALL stop and execution/improvement SHALL resume.
+
+`VALIDATION WITHOUT ACTIONABLE DELTA + IMPROVEMENT AVAILABLE → RETURN TO EXECUTION`.
+`CHECKLIST COMPLETE ≠ OUTPUT OPTIMIZED`.
+`RESULT OPTIMIZATION > PROCESS COMPLETENESS` except where a mandatory safety/legal/authority/high-impact gate requires otherwise.
 
 ## Execution Truthfulness — HARD LOCK
 
@@ -142,6 +164,9 @@ For corrected omission/recovery/enforcement failures, regression validation SHAL
 
 ## Validation dimensions
 
+Use only dimensions materially relevant to the requested result and risk profile.
+
+- Result quality / outcome-contract fit
 - Source coverage
 - Authority / reference isolation
 - Applicability / active-rule coverage
@@ -162,6 +187,8 @@ For corrected omission/recovery/enforcement failures, regression validation SHAL
 - Rule enforcement / harness realization
 - Implementation evidence
 - Release evidence
+
+`ALL POSSIBLE DIMENSIONS ≠ REQUIRED DIMENSIONS`.
 
 ## Claim-level gate
 
