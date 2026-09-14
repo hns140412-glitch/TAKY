@@ -39,12 +39,33 @@ Before proposing or invoking Work or Codex, TAKY SHALL perform a usage-impact re
 9. Work SHALL NOT be the default always-on orchestrator for development loops; reserve it for tasks whose browser/file/multi-step execution materially requires Work;
 10. when remaining Work/Codex allowance is not directly observable, TAKY SHALL state that it is unknown and SHALL NOT claim that sufficient allowance remains.
 
-Current resource condition: user reported that a monolithic Work task exhausted the available short-window allowance. Until fresh allowance evidence is available, avoid additional Work/Codex execution and prefer ordinary Chat routing.
+### TAKY / Codex implementation-role hard lock
+Usage optimization SHALL NOT redefine Codex as a patch-only or modification-only tool.
+
+For software/product implementation work, the default role boundary is:
+`USER INTENT -> TAKY WHAT/WHY/BOUNDARY/ACCEPTANCE -> CODEX HOW/CODE/IMPLEMENTATION TEST -> TAKY REVIEW/REWORK -> HUMAN APPROVAL WHEN REQUIRED`.
+
+Rules:
+1. TAKY owns orchestration, requirement interpretation, product intent, scope, sequencing, acceptance criteria, risk/authority checks, implementation-owner routing, and post-implementation review.
+2. Codex owns implementation design within the accepted boundary, new code authoring, existing code modification, refactoring only when authorized, focused implementation tests, and implementation evidence reporting.
+3. New feature/code creation is a Codex responsibility when Codex is the selected implementation owner; it SHALL NOT be shifted back to TAKY merely to reduce Codex usage.
+4. TAKY SHALL reduce Codex usage by removing unnecessary repository-wide discovery, duplicate product reasoning, repeated context reconstruction, broad unrelated testing, and avoidable retries before dispatch — not by pre-writing the implementation for Codex.
+5. A Codex task SHOULD be implementation-ready before dispatch: target outcome, authoritative inputs, known relevant files/modules when available, explicit constraints, acceptance criteria, required regressions, and delivery evidence SHOULD already be bounded by TAKY.
+6. Codex MAY inspect additional implementation context when needed to write correct code, but SHALL NOT be asked to rediscover settled product requirements or re-orchestrate the whole project.
+7. TAKY SHALL NOT perform product implementation writes while acting as ORCHESTRATOR merely because Codex allowance is scarce. If no valid implementation owner is available, report `EXECUTION_BLOCKED_NO_OWNER` or defer the implementation unit rather than silently taking the implementer role.
+8. Codex completion is implementation evidence only: `CODEX_DONE != TAKY_PASS`.
+9. Usage risk SHALL be assessed separately from implementation ownership: `HIGH_USAGE_RISK != TAKY_MAY_IMPLEMENT`.
+10. Where task size is too large, TAKY SHALL decompose by independently useful user-visible/implementation slices and keep Codex as the code author for each selected slice.
+
+Current resource condition: exact remaining Work/Codex allowance is not directly observable. User has reported high Codex consumption during the current Ready & Set implementation episode. Subsequent Codex dispatches must therefore minimize orchestration/discovery overhead and use bounded implementation-ready contracts, while preserving Codex as the implementation/code-writing owner.
 
 Claim boundary:
 `CAPABILITY AVAILABLE != RESOURCE-AFFORDABLE`
-`WORK/CODEX AVAILABLE != WORK/CODEX SHOULD BE USED`
+`WORK/CODEX AVAILABLE != WORK/CODEX SHOULD_BE_USED`
 `TASK DISPATCHED != USAGE SAFE`
+`USAGE OPTIMIZATION != ROLE REASSIGNMENT`
+`TAKY ORCHESTRATION != PRODUCT CODE AUTHORING`
+`CODEX IMPLEMENTER != PATCH-ONLY TOOL`
 
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
