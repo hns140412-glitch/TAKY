@@ -69,3 +69,14 @@ No resume evidence -> no verified resume.
 `STATE READ != REQUIRED SOURCES VERIFIED`
 `MANIFEST says PASS != RESUME VERIFIED`
 `HANDOFF SUMMARY != CURRENT STATE`
+
+## Historical recovery checkpoint — 2026-09-14
+- state_revision: 2026-09-14-source-backfill-01
+- recovery_status: PARTIAL_BACKFILL / FULL_REVIEW_PENDING
+- recovery evidence owner: HISTORY/2026-09-14_SOURCE_BACKFILL_CHECKPOINT_01.md
+- conversation inventory: HISTORY/2026-09-14_SOURCE_INVENTORY_01.json
+- 24 original share exports extracted; full semantic reading and attachment recovery are incomplete. Extraction is not full review.
+- source TAKY main inspected at 995805ec2d38fcac7911f9b2316554d0d2b58868; this is a pre-backfill snapshot, not an evergreen latest SHA.
+- Ready work branch runtime-session-bridge-2026-09-10 observed at a098ffac8b5d6f0aeb22b5e61250f70330d555c7. Current P0 contract remains READY_FOR_CODEX / NOT_DISPATCHED.
+- Repository handoff resume evidence binding is implemented at aee98e436c815f638f7b9bb2a98a200c2282f9ae; hosted automatic state read, semantic rehydration, and trusted routing remain UNVERIFIED.
+- Full-review completion gate: NOT_PASSED. No product-progress advancement or deployment is implied.

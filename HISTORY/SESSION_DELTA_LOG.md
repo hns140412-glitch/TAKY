@@ -91,3 +91,24 @@ Execution state:
 - No claim that Codex is running.
 - No merge to main and no production deploy.
 - Next resume point: when fresh Codex allowance/evidence is available, dispatch only `RNS-P0-DAILY-LOOP-001`, require reproduction-before-fix, then return implementation evidence to `TAKY_REVIEW`.
+
+---
+
+## 2026-09-14 — source-first historical backfill checkpoint 01
+
+User request: full conversation/Drive/TAKY/related-project/external-review recovery in explicit source-coverage order. Later status question: “다 검토 된거야?”
+Answer/status: no; PARTIAL_BACKFILL / FULL_REVIEW_PENDING.
+
+Material delta:
+- Preserved 24 extracted original share-export sources and active-branch ordering provenance; distinguished fetch/extraction from full semantic review.
+- Added HISTORY/2026-09-14_SOURCE_BACKFILL_CHECKPOINT_01.md and HISTORY/2026-09-14_SOURCE_INVENTORY_01.json.
+- Added current recovery status and source pointers to STATE.md; retained existing governance and resource-routing policy.
+- Corrected the first enforcement-architecture entry's “validator hardening required” implementation status: aee98e4 implements repository handoff evidence binding. Hosted auto-read and semantic truth remain unverified.
+- Re-fetched TAKY main@995805ec2d38fcac7911f9b2316554d0d2b58868 and Ready work branch@a098ffac8b5d6f0aeb22b5e61250f70330d555c7; preserved newer resource policy and P0 NOT_DISPATCHED status.
+- Recorded historical Ready bounded browser evidence at dc25b25/run34785601428 without treating it as physical-device verification or full daily-loop completion.
+- Identified state/history workflow path-trigger coverage gap; no enforcement implementation change in this checkpoint.
+
+Unresolved: long-transcript full read, attachment bodies, remaining Drive traversal, original external review answers, older history, full second semantic/recurrence pass.
+Next resume: read this checkpoint + inventory + live STATE/HEAD, then continue bounded original-source reading. User authorization persists; no automatic background execution is claimed.
+Source conversation identifier: NOT_EXPOSED.
+Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
