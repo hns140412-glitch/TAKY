@@ -31,7 +31,7 @@ Before proposing or invoking Work or Codex, TAKY SHALL perform a usage-impact re
 1. determine whether the task can be completed in ordinary Chat with already-available connectors/tools;
 2. if yes, prefer ordinary Chat and do not consume Work/Codex allowance;
 3. if Work/Codex is necessary, choose the smallest execution surface and smallest independently useful work unit;
-4. assess expected context size, file/source count, reasoning depth, tool calls, test/runtime loops, and likely retries;
+4. assess expected context size, file/source count, reasoning depth, tool calls, test/runtime loops, browser/E2E loops, and likely retries;
 5. classify usage risk at least as `LOW / MEDIUM / HIGH / VERY_HIGH`;
 6. `HIGH` or `VERY_HIGH` work SHALL NOT be launched as a monolithic task without explicit usage-risk disclosure and a cheaper/smaller routing attempt first;
 7. whole-history recovery, broad multi-repository analysis, or large Drive/chat/GitHub sweeps default to `VERY_HIGH` until demonstrated otherwise;
@@ -57,7 +57,36 @@ Rules:
 9. Usage risk SHALL be assessed separately from implementation ownership: `HIGH_USAGE_RISK != TAKY_MAY_IMPLEMENT`.
 10. Where task size is too large, TAKY SHALL decompose by independently useful user-visible/implementation slices and keep Codex as the code author for each selected slice.
 
-Current resource condition: exact remaining Work/Codex allowance is not directly observable. User has reported high Codex consumption during the current Ready & Set implementation episode. Subsequent Codex dispatches must therefore minimize orchestration/discovery overhead and use bounded implementation-ready contracts, while preserving Codex as the implementation/code-writing owner.
+### Codex validation-budget policy
+Codex SHALL NOT perform every available validation layer on every implementation turn by default.
+
+Default execution ladder:
+`IMPLEMENT -> SMALLEST RELEVANT STATIC/CONTRACT TESTS -> REPORT EVIDENCE -> TAKY REVIEW`.
+
+Escalate to browser/mobile/E2E only when at least one of the following applies:
+- the changed behavior cannot be established by focused automated evidence;
+- the task is at an integration/acceptance checkpoint;
+- TAKY explicitly marks runtime/mobile evidence as required for that slice;
+- prior evidence indicates a browser/runtime-specific regression risk.
+
+Rules:
+1. Previously obtained valid runtime evidence SHALL be reused when the subsequent change cannot affect that path; do not rerun expensive browser flows mechanically.
+2. Browser/mobile/E2E verification SHOULD be batched at meaningful integration checkpoints rather than repeated after every small implementation edit.
+3. Baseline failures SHALL be compared against the recorded start HEAD with the smallest possible command/test set; do not rerun the full suite merely to classify a known failure.
+4. A usage-limit interruption SHALL preserve work state. Resume from existing changes/results and run only unfinished checks; never restart the whole contract by default.
+5. Codex task reports SHALL separate `IMPLEMENTATION COMPLETE`, `FOCUSED TEST PASS`, `RUNTIME VERIFIED`, `RUNTIME UNVERIFIED`, and `BLOCKED_BY_USAGE_LIMIT` rather than converting missing expensive validation into failure or fabricated PASS.
+6. Expensive validation is evidence work, not code-authoring authority. Deferring it does not transfer implementation ownership from Codex to TAKY.
+
+### Codex workspace bootstrap policy
+A Codex implementation contract SHOULD identify repository, canonical work branch, and task-contract path before dispatch. Codex SHALL bootstrap/fetch the named repository/branch when it has repository access instead of asking the user to manually discover task-file paths. User intervention is reserved for genuine authentication, permission, network, or filesystem boundaries that Codex cannot resolve itself.
+
+Current resource condition — 2026-09-14:
+- user-visible Codex 5-hour allowance reached 0% during `RNS-P0-DAILY-LOOP-001` after approximately 16m30s of implementation/Chrome/runtime/test activity;
+- user reported approximately three hours until Codex can be used again;
+- visible weekly allowance remained available, but exact future consumption is not predictable from TAKY;
+- observed interrupted evidence: 17 related checks, 12 passing and 5 failing; Codex was attempting start-HEAD baseline comparison when usage stopped; Chrome/mobile-width PARTIAL and parent/replanning behavior had already been exercised;
+- authoritative lifecycle remains `CODEX_INTERRUPTED_BY_USAGE_LIMIT / WORK_PRESERVED / TAKY_REVIEW_NOT_READY` until repository evidence is inspected and the unfinished implementation/validation is resumed;
+- during the cooldown, TAKY SHALL continue orchestration, GitHub inspection, acceptance refinement, evidence classification, contract decomposition, and non-product-code governance work using ordinary Chat/connectors. TAKY SHALL NOT take over product implementation code.
 
 Claim boundary:
 `CAPABILITY AVAILABLE != RESOURCE-AFFORDABLE`
@@ -66,6 +95,8 @@ Claim boundary:
 `USAGE OPTIMIZATION != ROLE REASSIGNMENT`
 `TAKY ORCHESTRATION != PRODUCT CODE AUTHORING`
 `CODEX IMPLEMENTER != PATCH-ONLY TOOL`
+`BROWSER E2E AVAILABLE != BROWSER E2E REQUIRED EVERY TURN`
+`USAGE LIMIT INTERRUPTION != RESTART FROM ZERO`
 
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
@@ -98,6 +129,6 @@ No resume evidence -> no verified resume.
 - conversation inventory: HISTORY/2026-09-14_SOURCE_INVENTORY_01.json
 - 24 original share exports extracted; full semantic reading and attachment recovery are incomplete. Extraction is not full review.
 - source TAKY main inspected at 995805ec2d38fcac7911f9b2316554d0d2b58868; this is a pre-backfill snapshot, not an evergreen latest SHA.
-- Ready work branch runtime-session-bridge-2026-09-10 observed at a098ffac8b5d6f0aeb22b5e61250f70330d555c7. Current P0 contract remains READY_FOR_CODEX / NOT_DISPATCHED.
+- Ready work branch runtime-session-bridge-2026-09-10 observed at a098ffac8b5d6f0aeb22b5e61250f70330d555c7. Historical checkpoint said READY_FOR_CODEX / NOT_DISPATCHED; this is superseded for current execution by the interrupted Codex state above.
 - Repository handoff resume evidence binding is implemented at aee98e436c815f638f7b9bb2a98a200c2282f9ae; hosted automatic state read, semantic rehydration, and trusted routing remain UNVERIFIED.
 - Full-review completion gate: NOT_PASSED. No product-progress advancement or deployment is implied.
