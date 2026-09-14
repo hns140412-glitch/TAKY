@@ -24,6 +24,28 @@ If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do n
 3. Validation-only evidence must not be allowed to advance authoritative product-progress state without functional acceptance evidence.
 4. Resume/context-compression must use verified canonical/history rehydration evidence rather than self-reported booleans.
 
+## Work / Codex resource-routing policy
+Work and Codex SHALL be treated as scarce execution resources. TAKY SHALL NOT route work to either merely because the capability exists.
+
+Before proposing or invoking Work or Codex, TAKY SHALL perform a usage-impact review:
+1. determine whether the task can be completed in ordinary Chat with already-available connectors/tools;
+2. if yes, prefer ordinary Chat and do not consume Work/Codex allowance;
+3. if Work/Codex is necessary, choose the smallest execution surface and smallest independently useful work unit;
+4. assess expected context size, file/source count, reasoning depth, tool calls, test/runtime loops, and likely retries;
+5. classify usage risk at least as `LOW / MEDIUM / HIGH / VERY_HIGH`;
+6. `HIGH` or `VERY_HIGH` work SHALL NOT be launched as a monolithic task without explicit usage-risk disclosure and a cheaper/smaller routing attempt first;
+7. whole-history recovery, broad multi-repository analysis, or large Drive/chat/GitHub sweeps default to `VERY_HIGH` until demonstrated otherwise;
+8. implementation work sent to Codex SHOULD arrive as a narrow TASK CONTRACT after TAKY has already done orchestration, scope selection, and acceptance definition outside Codex where practical;
+9. Work SHALL NOT be the default always-on orchestrator for development loops; reserve it for tasks whose browser/file/multi-step execution materially requires Work;
+10. when remaining Work/Codex allowance is not directly observable, TAKY SHALL state that it is unknown and SHALL NOT claim that sufficient allowance remains.
+
+Current resource condition: user reported that a monolithic Work task exhausted the available short-window allowance. Until fresh allowance evidence is available, avoid additional Work/Codex execution and prefer ordinary Chat routing.
+
+Claim boundary:
+`CAPABILITY AVAILABLE != RESOURCE-AFFORDABLE`
+`WORK/CODEX AVAILABLE != WORK/CODEX SHOULD BE USED`
+`TASK DISPATCHED != USAGE SAFE`
+
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
 Conversation text alone is not durable state.
