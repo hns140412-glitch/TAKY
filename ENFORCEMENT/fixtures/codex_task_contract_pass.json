@@ -1,0 +1,49 @@
+{
+  "task_id": "RNS-ORCH-001",
+  "project": "Ready & Set",
+  "repository": "owner/repository",
+  "base_branch": "verified-branch",
+  "verified_base_head": "0123456789abcdef",
+  "role": {
+    "orchestrator": "TAKY",
+    "executor": "CODEX"
+  },
+  "objective": "Implement one bounded mobile web app change and return it for TAKY review.",
+  "source_of_truth": [
+    "current_user_instruction",
+    "taky_canonical_rules",
+    "verified_live_repository_state"
+  ],
+  "change_scope": {
+    "allowed": ["approved_component"],
+    "forbidden": [
+      "unrelated_refactor",
+      "silent_requirement_change",
+      "direct_production_deploy"
+    ]
+  },
+  "acceptance_tests": [
+    "requested behavior is observable",
+    "existing unrelated behavior remains unchanged"
+  ],
+  "validation": {
+    "required": ["diff_scope", "build", "relevant_tests", "regression"],
+    "mobile_runtime_required": true
+  },
+  "human_approval": {
+    "merge_required": true,
+    "production_deploy_required": true
+  },
+  "deliverables": [
+    "root_cause_or_rationale",
+    "changed_files",
+    "validation_commands",
+    "validation_results",
+    "unresolved_risks",
+    "commit_ref"
+  ],
+  "current_state": "IN_PROGRESS",
+  "next_state": "CODEX_DONE",
+  "requested_transition": "CODEX_DONE",
+  "claims_taky_pass": false
+}
