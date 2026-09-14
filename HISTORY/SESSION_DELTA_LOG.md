@@ -57,3 +57,37 @@ Evidence:
 Claim boundary:
 - `CAPABILITY AVAILABLE != RESOURCE-AFFORDABLE`
 - `WORK/CODEX AVAILABLE != WORK/CODEX SHOULD BE USED`
+
+---
+
+## 2026-09-14 — Ready & Set P0 pre-dispatch inspection under usage constraint
+
+Trigger:
+- User directed Ready & Set implementation to continue while Work/Codex short-window allowance was reported exhausted.
+
+Routing decision:
+- Kept TAKY in ORCHESTRATOR/REVIEWER role and did not consume Work/Codex allowance.
+- Re-checked live Ready-Set work branch instead of trusting prior handoff SHA.
+- Converted the broad P0 issue into bounded implementation contract `.taky/tasks/RNS-P0-DAILY-LOOP-001.md` for later Codex execution.
+
+Observed Ready-Set branch state:
+- Work branch: `runtime-session-bridge-2026-09-10`.
+- Branch had advanced beyond older remembered `dc25...` state; task preparation began from live branch state and subsequent governance/task-contract commits advanced it further.
+
+Confirmed pre-dispatch product-path findings recorded in the task contract:
+1. non-completed tasks carrying `learningReports` can be protected as actual evidence while legitimate future projection of the remaining unit is suppressed by `ready-foundation-control-v1.js::prepare(...)`;
+2. Rev07 wrap-up publishes the explicit task result, then generic base session completion can publish `COMPLETED` for the same Planner task, risking overwrite of `PARTIAL/DEFERRED/BLOCKED/WAITING_FOR_PARENT`;
+3. parent report rendering assumes every learning report has `completedQuantity` and treats every non-child source as parent input, while Ready/session/specialist reports carry `resultState` + provenance and may have no quantity, risking `undefined%`, false provenance labels, and loss of unresolved-remainder semantics.
+
+Ready-Set evidence / contracts:
+- bounded task created: `b4bb4755b0a570cc9e98cc14ee888360c686b12d`;
+- finding 1 added: `8b24421720f55b651a023575972d003a473d48bb`;
+- finding 2 added: `60a4e3c9afab16a8fcd17a4c284c8f5195ed322b`;
+- finding 3 added / latest task-contract commit in this inspection pass: `a098ffac8b5d6f0aeb22b5e61250f70330d555c7`;
+- Ready-Set Issue #3 updated with TAKY pre-dispatch findings; comment id `5658836346`.
+
+Execution state:
+- Product implementation itself remains `READY_FOR_CODEX / NOT_DISPATCHED`.
+- No claim that Codex is running.
+- No merge to main and no production deploy.
+- Next resume point: when fresh Codex allowance/evidence is available, dispatch only `RNS-P0-DAILY-LOOP-001`, require reproduction-before-fix, then return implementation evidence to `TAKY_REVIEW`.
