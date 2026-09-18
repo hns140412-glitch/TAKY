@@ -1,0 +1,36 @@
+name: TAKY Project Context Gate
+
+on:
+  push:
+    branches:
+      - main
+      - 'taky/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ready-set-context-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Ready manifest structure
+        run: |
+          python ENFORCEMENT/project_context_validator.py PROJECTS/READY_SET_CONTEXT_MANIFEST.json
+
+      - name: Validate resolved Ready context PASS fixture
+        run: |
+          python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_pass.json
+
+      - name: Verify missing Ready context fails closed
+        shell: bash
+        run: |
+          set +e
+          python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_fail.json
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ]; then
+            echo "Expected context gate failure, got PASS"
+            exit 1
+          fi
+          echo "Fail-closed fixture rejected as expected"
