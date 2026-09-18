@@ -1,0 +1,355 @@
+{
+  "ledger_id": "RNS-C2S-20260919-001",
+  "source_scope": {
+    "description": "2026-09-19 Ready & Set resume scope: current user resume/C2S instruction, latest 2026-09-19 Ready & Set handoff recovered from Library, live TAKY main/C2S rules, live Ready-Set PR/branch/runtime/tests, and live Netlify staging metadata inspected during this turn.",
+    "coverage_status": "RECOVERED_SCOPE_COMPLETE",
+    "unavailable_ranges": []
+  },
+  "atoms": [
+    {
+      "atom_id": "RNS-C2S-001",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:resume-c2s-readyset",
+      "actor": "USER",
+      "content": "Resume Ready & Set under the latest TAKY governance, execute C2S, and continue implementation from the actual current state rather than reconstructing from memory.",
+      "scope": "PROJECT",
+      "why": "The user explicitly requested governed continuation and durable conversation-to-system compilation before further implementation.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "implementation_status": "REFLECTED",
+      "verification_status": "VERIFIED_CURRENT_TURN"
+    },
+    {
+      "atom_id": "RNS-C2S-002",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "github:TAKY:main@a101953d94715c800a122c147e87caf7836210b5",
+      "actor": "SYSTEM",
+      "content": "The live TAKY main inspected for this resume includes canonical TKY-C2S-001 and the C2S runtime activation specialization.",
+      "scope": "GLOBAL",
+      "why": "Establishes the governing canonical baseline actually used for this resumed work.",
+      "disposition": "PRESERVE",
+      "destination": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "evidence": [
+        "OS/C2S_RUNTIME_ACTIVATION.md",
+        "MASTER/RULE_REGISTRY.json"
+      ],
+      "implementation_status": "CANONICAL_EXISTING",
+      "verification_status": "LIVE_REPO_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-003",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "github:Ready-Set:PR#4@58233891cb0411eacd3e24dc76b47ecc8f10378e",
+      "actor": "SYSTEM",
+      "content": "Before this turn's governance-only task-file commit, the verified Ready & Set implementation baseline was PR #4 on taky/exploration-journey-2026-09-18 at 58233891..., with all five inspected workflow runs successful.",
+      "scope": "PROJECT",
+      "why": "Separates verified source/CI implementation state from later staging/device verification.",
+      "disposition": "PRESERVE",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "evidence": [
+        "Ready First Run Parent Activation Contract: SUCCESS",
+        "Ready Parent Capture Contract: SUCCESS",
+        "Ready Homework Analysis Contract: SUCCESS",
+        "Ready Foundation Assignment Bridge Contract: SUCCESS",
+        "Ready Exploration Journey Contract: SUCCESS"
+      ],
+      "implementation_status": "SOURCE_IMPLEMENTED",
+      "verification_status": "CI_VERIFIED_DEVICE_UNVERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-004",
+      "type": "CONSTRAINT",
+      "material": true,
+      "source_pointer": "library:Ready_Set_HANDOFF_2026-09-19(1).md + current task authority",
+      "actor": "USER+SYSTEM",
+      "content": "Ready & Set main merge and production deployment remain blocked until explicit human approval.",
+      "scope": "PROJECT",
+      "why": "Prevents staging/device validation work from silently becoming a production release.",
+      "disposition": "PRESERVE",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "implementation_status": "ACTIVE_GATE",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-005",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "recovered-ready-handoff:confirmed-timer-ui",
+      "actor": "USER",
+      "content": "Preserve the confirmed Ready & Set timer UI: yellow focus field, '그냥! 지금 하면 돼!', full analog clock, mission label, remaining/target time, pause, '완료했어요', BGM, and conditional REC.",
+      "scope": "PROJECT",
+      "why": "Functional/runtime hardening must not destabilize already confirmed visual authority.",
+      "disposition": "PRESERVE",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "affects": [
+        "Ready-Set/ready-stage-d-base-v1.js",
+        "Ready-Set/ready-base-runtime-v1.js",
+        "Ready-Set/ready-recording-v1.js"
+      ],
+      "implementation_status": "SOURCE_PRESENT",
+      "verification_status": "SOURCE_AND_CONTRACT_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-006",
+      "type": "REJECTION",
+      "material": true,
+      "source_pointer": "recovered-ready-handoff:rejected-ui-authority",
+      "actor": "USER",
+      "content": "Focus Mode, Time Attack, old Golden assets/contracts, and rejected ready-focus-tools-v1.js are not current Ready & Set UI authority and must not be revived.",
+      "scope": "PROJECT",
+      "why": "Prevents historical/rejected UI from being reintroduced during repair or staging work.",
+      "disposition": "PRESERVE",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "supersedes": [
+        "Ready-Set/.taky/tasks/RNS-P0-FOCUS-TIMER-GOLDEN-001.md"
+      ],
+      "implementation_status": "ACTIVE_GUARD",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-007",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "conversation-history:2026-09-18:weekly-daily-ui-review",
+      "actor": "USER",
+      "content": "Weekly schedule should be concise, daily should be vertical, and both should use the explorer concept; however the final weekly/daily visual design is not yet locked because the preferred concept still felt visually tiring and weekly review remained unfinished.",
+      "scope": "PROJECT",
+      "why": "Prevents implementation from falsely treating an exploratory mockup direction as approved final UI.",
+      "disposition": "HOLD",
+      "destination": "Ready & Set weekly/daily UI design backlog",
+      "affects": [
+        "Ready & Set schedule/planner presentation"
+      ],
+      "implementation_status": "NOT_FINALIZED",
+      "verification_status": "OPEN_USER_DESIGN_LOCK"
+    },
+    {
+      "atom_id": "RNS-C2S-008",
+      "type": "EVIDENCE",
+      "material": true,
+      "source_pointer": "netlify:ready-set-staging-taky:deploy:6aa698853e51c883dd6a69c2",
+      "actor": "SYSTEM",
+      "content": "The current Netlify staging alias points to an upload-style deploy created on 2026-09-13; commit_ref and branch are null, so it is not evidence that the current Ready & Set safe-branch implementation is deployed.",
+      "scope": "TOOL",
+      "why": "Actual iPhone validation would otherwise test stale or untraceable runtime code and produce invalid release evidence.",
+      "disposition": "PRESERVE",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "evidence": [
+        "site_id=63bd9a17-909b-4bac-8cb3-06437a628896",
+        "deploy_id=6aa698853e51c883dd6a69c2",
+        "created_at=2026-09-13T12:35:17.556Z",
+        "title=Deploy triggered by upload",
+        "commit_ref=null",
+        "branch=null"
+      ],
+      "implementation_status": "STAGING_STALE_OR_UNTRACEABLE",
+      "verification_status": "LIVE_NETLIFY_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-009",
+      "type": "STRATEGY",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:derived-next-execution-gate",
+      "actor": "USER+SYSTEM",
+      "content": "The next implementation sequence is exact safe-branch staging parity, then actual iPhone/PWA validation, then only observed-gap fixes, regression validation, and finally human approval before production promotion.",
+      "scope": "PROJECT",
+      "why": "This is the smallest high-value missing dimension between current source/CI implementation and trustworthy release readiness.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md",
+      "depends_on": [
+        "RNS-C2S-008"
+      ],
+      "implementation_status": "TASK_CONTRACT_CREATED",
+      "verification_status": "VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-010",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "github-actions:Ready-Set:run:35398513917",
+      "actor": "SYSTEM",
+      "content": "A deterministic exact-head staging source package path is now established for the Ready & Set safe branch. The current package was produced from head 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca and includes STAGING_SOURCE_MANIFEST.json plus a verified SHA-256 for the deployable site ZIP.",
+      "scope": "TOOL",
+      "why": "This closes the earlier source-traceability gap and prevents stale/manual staging uploads from being mistaken for the current safe-branch tree.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.github/workflows/ready-staging-source-package.yml",
+      "evidence": [
+        "workflow_run=35398513917",
+        "artifact_id=10569796467",
+        "sourceCommit=3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+        "appVersion=0.9.4-rc25",
+        "cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "siteZipSha256=48b9961961b839202ca910e68310c8c06b54cf32e01b6fd45bc81313abe8544a"
+      ],
+      "implementation_status": "SOURCE_PACKAGE_READY",
+      "verification_status": "ARTIFACT_MANIFEST_AND_HASH_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-011",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "github-actions:Ready-Set:run:35398395537 + netlify:ready-set-staging-taky",
+      "actor": "SYSTEM",
+      "content": "Publishing the exact safe-branch package to the existing dedicated Netlify staging site is blocked because NETLIFY_AUTH_TOKEN is not configured in the Ready-Set repository. The guarded deploy workflow fails closed, and the Netlify site remains on deploy 6aa698853e51c883dd6a69c2.",
+      "scope": "TOOL",
+      "why": "Device validation must not begin against a stale/untraceable staging deployment, and credentials must not be exposed or persisted in source/history.",
+      "disposition": "SUPERSEDED",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md#gate-1",
+      "evidence": [
+        "deploy_workflow=.github/workflows/ready-staging-deploy.yml",
+        "auth_check_run=35398395537",
+        "auth_check_conclusion=FAILURE",
+        "reason=STAGING_DEPLOY_AUTH_UNAVAILABLE",
+        "netlify_current_deploy=6aa698853e51c883dd6a69c2"
+      ],
+      "implementation_status": "DEDICATED_SITE_AUTH_BLOCKED_BUT_NOT_DEVICE_GATE",
+      "verification_status": "SUPERSEDED_BY_GIT_BACKED_DEPLOY_PREVIEW"
+    },
+    {
+      "atom_id": "RNS-C2S-012",
+      "type": "LESSON",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:staging-deploy-false-pass-correction",
+      "actor": "SYSTEM",
+      "content": "A staging deploy workflow must not report overall success when authorization is missing and the deploy step was skipped. Missing deploy authorization is now fail-closed so 'deploy not attempted' cannot be misread as a green deployment.",
+      "scope": "TOOL",
+      "why": "Preserves TAKY claim boundaries: workflow green must not imply staging parity when no deployment occurred.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.github/workflows/ready-staging-deploy.yml",
+      "affects": [
+        "Ready-Set staging evidence classification"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "verification_status": "FAIL_CLOSED_RUN_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-013",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "netlify:profound-ganache-902032:deploy-preview-5:6aadb57c9d58a60008f93fae",
+      "actor": "SYSTEM",
+      "content": "The earlier dedicated-staging authorization block is no longer the active device-validation blocker. A Git-backed Netlify Deploy Preview was created from draft PR #5 and is source-traceable to Ready-Set commit 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca.",
+      "scope": "TOOL",
+      "why": "PR #4 targets a non-main base and therefore did not receive Netlify preview status; a staging-only draft PR to main safely triggered the existing Git-backed Netlify Deploy Preview without merging or changing production.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set staging/device-validation runtime state",
+      "evidence": [
+        "preview_pr=5",
+        "preview_deploy_id=6aadb57c9d58a60008f93fae",
+        "netlify_state=ready",
+        "commit_ref=3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+        "branch=taky-staging-device-2026-09-19",
+        "context=deploy-preview",
+        "review_id=5",
+        "deploy_alias=https://deploy-preview-5--profound-ganache-902032.netlify.app",
+        "netlify.toml publish='.' with no build command",
+        "VERSION appVersion=0.9.4-rc25",
+        "VERSION cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "sw.js cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "rejected ready-focus-tools-v1.js absent from index and sw precache",
+        "Netlify deployed 3 functions: character-candidates, homework-analysis, time"
+      ],
+      "supersedes": [
+        "RNS-C2S-011 as active device gate"
+      ],
+      "implementation_status": "GIT_BACKED_DEPLOY_PREVIEW_READY",
+      "verification_status": "NETLIFY_PROVENANCE_AND_SOURCE_PARITY_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-014",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "device-gate:iphone-pwa",
+      "actor": "USER+SYSTEM",
+      "content": "Actual iPhone/PWA behavior remains unverified and is now the next active gate. Device-only behavior includes screen lock/background restoration, native share sheet, iOS recording container/MIME and acoustics, and actual BGM playback.",
+      "scope": "PROJECT",
+      "why": "Source/CI and Git-backed preview evidence cannot substitute for real iOS runtime behavior.",
+      "disposition": "OPEN",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md#gate-3",
+      "depends_on": [
+        "RNS-C2S-013"
+      ],
+      "implementation_status": "READY_FOR_DEVICE_VALIDATION",
+      "verification_status": "DEVICE_UNVERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-015",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "device-gate:home-screen-install-observation",
+      "actor": "SYSTEM",
+      "content": "The earlier claim that Home Screen installation had passed was false. The screenshot showed an existing production/main Ready & Set PWA icon, not a newly distinguishable staging install.",
+      "scope": "PROJECT",
+      "why": "Staging and main used the same app name, icon and Apple web app title, so visual confirmation alone could not establish staging provenance.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set device-validation evidence",
+      "implementation_status": "FALSE_PASS_REVOKED",
+      "verification_status": "CORRECTED",
+      "evidence": [
+        "user reported the launched PWA was connected to the main address",
+        "manifest at product commit used id=ready-set, name=Ready & Set, short_name=Ready & Set",
+        "apple-mobile-web-app-title was Ready & Set"
+      ]
+    },
+    {
+      "atom_id": "RNS-C2S-016",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "netlify:profound-ganache-902032:deploy-preview-5:6aadb800fee3ea0008aee104",
+      "actor": "SYSTEM",
+      "content": "A staging-only PWA identity overlay was deployed on Draft PR #5 so the device-validation PWA is distinguishable from production/main without changing the product runtime branch.",
+      "scope": "TOOL",
+      "why": "Prevent staging/main PWA identity ambiguity and avoid using the user as a debugger.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set staging device-validation path",
+      "implementation_status": "STAGING_PWA_IDENTITY_READY",
+      "verification_status": "NETLIFY_READY_AND_GIT_TRACEABLE",
+      "evidence": [
+        "staging branch head=f1d057ee493d95f12e25ed74ad0ee7e2727ac4c0",
+        "manifest id=ready-set-staging-preview-5",
+        "name=Ready & Set STAGING",
+        "short_name=R&S STAGING",
+        "start_url=./?staging=preview-5",
+        "apple-mobile-web-app-title=R&S STAGING",
+        "deploy id=6aadb800fee3ea0008aee104",
+        "deploy context=deploy-preview",
+        "Netlify state=ready",
+        "GitHub Netlify status=success",
+        "Draft PR #5 remains open, draft, unmerged",
+        "main/production unchanged"
+      ]
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 16,
+    "mapped_material": 16,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0,
+    "unresolved_open_or_hold": 2
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true,
+    "notes": "Reconstructs Ready & Set resume, confirmed timer/rejection locks, exact-head packaging, dedicated-site auth block, Git-backed Deploy Preview workaround, revoked false Home Screen PASS, staging-specific PWA identity overlay, weekly/daily visual HOLD, and the actual iPhone/PWA device gate."
+  },
+  "skeleton_growth": {
+    "requires_growth_map": true,
+    "gaps_identified": [
+      "Actual iPhone/PWA verification of recording, background/lock restoration, sharing, cache updates and BGM remains pending.",
+      "Automated live HTTP spot-fetch of the Netlify preview is unavailable from the current tool runtime, although Netlify provenance and static publish parity are verified.",
+      "Weekly/daily schedule visual direction is structurally defined but final visual lock remains pending."
+    ],
+    "next_fill_targets": [
+      "Run the narrow real-device validation against Netlify Deploy Preview #5.",
+      "Record PASS/FAIL for iPhone-only behaviors without asking the user to perform developer debugging.",
+      "Fix only reproduced runtime gaps and rerun affected regressions.",
+      "Resume weekly/daily UI design lock separately without disturbing confirmed timer UI."
+    ]
+  }
+}
