@@ -20,13 +20,28 @@ jobs:
 
       - name: Validate resolved Ready context PASS fixture
         run: |
-          python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_pass.json
+          python ENFORCEMENT/project_context_validator.py \
+            PROJECTS/READY_SET_CONTEXT_MANIFEST.json \
+            --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_pass.json
+
+      - name: Validate actual Ready context resolution
+        run: |
+          python ENFORCEMENT/project_context_validator.py \
+            PROJECTS/READY_SET_CONTEXT_MANIFEST.json \
+            --resolved PROJECTS/READY_SET_CONTEXT_RESOLUTION_2026-09-19.json
+
+      - name: Validate Ready PILOT_02 C2S coverage ledger
+        run: |
+          python ENFORCEMENT/conversation_coverage_validator.py \
+            HISTORY/2026-09-19_READY_SET_PILOT02_RECOVERY_LEDGER.json
 
       - name: Verify missing Ready context fails closed
         shell: bash
         run: |
           set +e
-          python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_fail.json
+          python ENFORCEMENT/project_context_validator.py \
+            PROJECTS/READY_SET_CONTEXT_MANIFEST.json \
+            --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_fail.json
           code=$?
           set -e
           if [ "$code" -eq 0 ]; then
