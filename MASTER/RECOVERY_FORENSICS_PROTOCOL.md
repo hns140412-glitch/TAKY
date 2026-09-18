@@ -168,3 +168,16 @@ After forensic recovery, release unnecessary historical context and return to no
 `RECOVERY MODE ≠ PERMANENT RUNTIME MODE`
 
 Preserve the resulting recovery ledger, Context Events, canonical deltas, unresolved coverage, and regression fixtures so ordinary future work can use targeted recovery instead of repeatedly rescanning the entire history.
+
+## 10. NotebookLM-assisted recovery specialization
+
+When NotebookLM is used to help inspect large conversation/source sets, activate `MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md` (TKY-NBLM-001).
+
+NotebookLM may accelerate chronology, correction, recurrence and omission-candidate discovery, but it SHALL remain a recovery assistant:
+- raw/original source remains preferred evidence;
+- NotebookLM output remains `REFERENCE_ONLY / EVIDENCE_ASSIST`;
+- derived summaries/Handoffs shall not replace available raw conversation;
+- source-security screening is required before notebook ingestion;
+- notebook-derived claims used for canonical change require raw-source recheck plus TKY-C2S disposition.
+
+`NOTEBOOKLM ASSISTED != FORENSIC SOURCE AUTHORITY OVERRIDE`
