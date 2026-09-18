@@ -1,3 +1,8 @@
+## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 04b
+- Added verified sanitized TAKY Core source `타키 기준 불러오기`.
+- Switched recovery discovery to one-file queue processing with canonical-registry duplicate checks.
+- Deferred Work OS/Notion-specific candidates instead of loading them into TAKY Core.
+
 ## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 04
 - Added post-write-verified sanitized sources for Notion connection/role separation and mobile TAKY/Work OS continuity.
 - Registered original-to-derivative lineage and explicit non-text coverage.
