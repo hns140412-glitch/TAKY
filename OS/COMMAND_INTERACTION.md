@@ -142,6 +142,23 @@ A user request to "NotebookLM으로 분석" does not authorize unsafe page captu
 
 When no direct NotebookLM connector exists in the active runtime, use the governed Drive interchange surface and reduce the remaining human step to notebook/source selection only after TAKY has prepared and screened the source set.
 
+## 2.3 CONTINUITY / CONTEXT ECONOMY ROUTING — HARD LOCK
+
+Cross-chat continuity SHALL follow TKY-CONTINUITY-001.
+
+Default behavior:
+- same-chat `ㄱ / 계속 / 진행` -> L0 active working set;
+- new-chat `최신 타키 기준으로 재개` -> L1 STATE + applicable owner + active/open deltas;
+- prior-detail recall unresolved at L1 -> targeted L2 NotebookLM/index;
+- exact correction/canonical dispute -> targeted L3 raw verification;
+- explicit `전체/최초대화부터/전역 역검증` -> L4 forensic scope.
+
+Before asking the user to repeat settled historical context, exhaust the lowest-cost reasonable system-side recovery path.
+
+`ASK LAST`
+`FULL SCAN LAST`
+`TOTALITY STORED, CONTEXT SELECTIVE`
+
 ## 3. VOICE → TEXT HANDOFF
 
 For short and conversational answers, Voice may continue normally.
