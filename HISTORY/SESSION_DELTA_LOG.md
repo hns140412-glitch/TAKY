@@ -178,3 +178,9 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Explicit UNAVAILABLE descendants may close the graph when honestly dispositioned; unavailable content is never fabricated as verified.
 - TAKY is internal governance; the user need only invoke `노션검토` for this workflow. Canonical promotion remains separately governed.
 
+## 2026-09-19 — Notion review post-merge failure audit / hardening
+- Post-implementation attack review found two fixable residual gaps: stale `TAKY.md` routing still described `/노션검토` as context-aware, and the actual Notion DB lacked structured source-graph closure evidence.
+- Corrected the bootstrap wording on a follow-up branch and added current runtime fields for root state, graph state, material discovered/dispositioned counts and compact graph evidence.
+- Existing high-priority recent records were honestly initialized under the new contract: older analyses without full E2E traversal remain NOT_STARTED/OPEN rather than being grandfathered as complete; explicitly unrecoverable roots may be CLOSED only when disposition evidence is preserved.
+- Remaining boundary: repository/runtime evidence cannot by itself prove that every brand-new hosted ChatGPT conversation will automatically invoke the repository gate.
+

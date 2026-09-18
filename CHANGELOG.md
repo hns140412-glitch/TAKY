@@ -215,3 +215,11 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - Preserved `/노션검토 ≠ /반영`; external/Notion material remains REFERENCE_ONLY until governed promotion.
 - Repository-level enforcement is implemented; hosted ChatGPT cross-chat automatic invocation remains a separate runtime claim and is not upgraded by this change.
 
+## 2026-09-19 — Notion review runtime-gap hardening
+- Corrected stale `TAKY.md` command text that still described generic `/노션검토` as context-aware, eliminating a conflicting bootstrap route against TKY-COMMAND-001.
+- Added structured `📚 나의 링크` runtime evidence properties: `ROOT_SOURCE_STATE`, `SOURCE_GRAPH_STATE`, `MATERIAL_NODES_DISCOVERED`, `MATERIAL_NODES_DISPOSITIONED`, and `SOURCE_GRAPH_EVIDENCE`.
+- Bound the E2E Notion review contract to those properties and required structured source evidence for deterministic Phase A PASS.
+- Added separate replay failures for root-only/unclosed descendant review and source-collection-without-analysis.
+- Updated priority/recovery views to expose source-graph state and counts.
+- Hosted cross-chat auto-invocation remains platform-level UNVERIFIED; this change closes repository/bootstrap and Notion runtime-evidence gaps, not that platform boundary.
+

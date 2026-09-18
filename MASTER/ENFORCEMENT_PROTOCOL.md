@@ -137,6 +137,7 @@ When an execution record sets `notion_link_review_required=true`, the determinis
 - material descendants were inventoried;
 - material source-node discovered and dispositioned counts close;
 - source graph is closed for the attempted/recovered scope;
+- structured source-graph evidence is present in the governed runtime projection;
 - analysis is complete;
 - comparison is complete;
 - complement/improvement is complete when material;

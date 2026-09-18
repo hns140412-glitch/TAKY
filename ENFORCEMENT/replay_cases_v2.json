@@ -1,5 +1,5 @@
 {
-  "fixture_version": "2026-09-19.1",
+  "fixture_version": "2026-09-19.2",
   "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement.",
   "cases": [
     {
@@ -143,7 +143,8 @@
         "notion_improvement_assessment_completed": false,
         "notion_review_record_updated": true,
         "notion_database_housekeeping_only": true,
-        "claims_complete": true
+        "claims_complete": true,
+        "notion_structured_source_evidence_present": false
       }
     },
     {
@@ -164,7 +165,8 @@
         "notion_improvement_assessment_completed": true,
         "notion_review_record_updated": true,
         "notion_database_housekeeping_only": false,
-        "claims_complete": true
+        "claims_complete": true,
+        "notion_structured_source_evidence_present": true
       }
     },
     {
@@ -186,7 +188,58 @@
         "notion_review_record_updated": true,
         "notion_database_housekeeping_only": false,
         "claims_complete": true,
-        "note": "One material child may be UNAVAILABLE; closure means dispositioned, not fabricated verification."
+        "note": "One material child may be UNAVAILABLE; closure means dispositioned, not fabricated verification.",
+        "notion_structured_source_evidence_present": true
+      }
+    },
+    {
+      "id": "N-03",
+      "phase": "root_only_descendants_unclosed",
+      "expectation": "contains",
+      "expected_detected": [
+        "OMISSION",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_material_descendants_inventoried": true,
+        "notion_material_source_nodes_discovered": 3,
+        "notion_material_source_nodes_dispositioned": 1,
+        "notion_source_graph_closed": false,
+        "notion_structured_source_evidence_present": true,
+        "notion_analysis_completed": true,
+        "notion_compare_completed": true,
+        "notion_improvement_assessment_completed": true,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "N-04",
+      "phase": "collection_without_analysis",
+      "expectation": "contains",
+      "expected_detected": [
+        "SUBSTITUTE_RESULT",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_material_descendants_inventoried": true,
+        "notion_material_source_nodes_discovered": 3,
+        "notion_material_source_nodes_dispositioned": 3,
+        "notion_source_graph_closed": true,
+        "notion_structured_source_evidence_present": true,
+        "notion_analysis_completed": false,
+        "notion_compare_completed": false,
+        "notion_improvement_assessment_completed": false,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true
       }
     }
   ]

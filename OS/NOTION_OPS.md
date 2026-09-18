@@ -149,6 +149,26 @@ Required behaviors:
 - record `PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED` and target owner/next action as applicable;
 - retain `REFERENCE_ONLY / NON_EXECUTABLE` until governed reflection is complete.
 
+### Current `📚 나의 링크` structured runtime evidence
+
+The current governed `📚 나의 링크` implementation persists Phase A closure evidence in dedicated properties:
+
+- `ROOT_SOURCE_STATE`: `NOT_APPLICABLE / NOT_ATTEMPTED / ATTEMPTED / RECOVERED / UNAVAILABLE`
+- `SOURCE_GRAPH_STATE`: `NOT_STARTED / OPEN / CLOSED / BLOCKED`
+- `MATERIAL_NODES_DISCOVERED`
+- `MATERIAL_NODES_DISPOSITIONED`
+- `SOURCE_GRAPH_EVIDENCE`
+
+For a completed available-scope link review:
+- an applicable root source SHALL NOT remain `NOT_ATTEMPTED`;
+- `SOURCE_GRAPH_STATE` SHALL be `CLOSED`;
+- discovered and dispositioned material-node counts SHALL match;
+- `SOURCE_GRAPH_EVIDENCE` SHALL preserve a recoverable compact inventory/trace of material root/attachment/child/reference nodes and their dispositions.
+
+An inaccessible node may be explicitly `UNAVAILABLE` and still participate in a `CLOSED` graph once it has been honestly dispositioned. `BLOCKED` means closure itself is not established and completion SHALL NOT be claimed.
+
+These properties are an operational evidence projection, not a second authority layer. The underlying source and review evidence remain controlling.
+
 ### Completion Gate
 
 A link-review item SHALL NOT be reported as complete merely because:

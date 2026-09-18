@@ -127,6 +127,7 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
             or not descendants_inventoried
             or discovered != dispositioned
             or not graph_closed
+            or not b(r,"notion_structured_source_evidence_present")
         )
         phase_b_missing = (
             not b(r,"notion_analysis_completed")
