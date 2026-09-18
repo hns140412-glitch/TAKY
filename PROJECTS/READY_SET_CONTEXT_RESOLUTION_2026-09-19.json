@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "project_id": "READY_SET",
+  "resolved_at": "2026-09-19",
+  "scope": {
+    "declared": "Targeted Ready & Set project recovery for current implementation/resume context",
+    "includes": [
+      "Ready REV_07 formal baseline",
+      "GUIDE Family Learning OS authority",
+      "Ready current-truth and whole-implementation contract snapshots",
+      "recoverable Ready/Notion preserved conversations from 2026-09-06",
+      "sanitized recent TAKY resume/recovery conversation evidence through available indexed sources",
+      "current conversation correction delta 2026-09-19",
+      "live Ready repository PR #4 / runtime source at 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+      "staging-only PR #5 identity overlay state",
+      "current Ready CI/check-run evidence",
+      "TAKY project-context/NotebookLM Pilot 02 implementation"
+    ],
+    "excludes_or_unverified": [
+      "inaccessible account-wide historical chat ranges not present in the prepared source pack/index",
+      "consumer NotebookLM analysis execution itself because no NotebookLM connector is available in current ChatGPT tools",
+      "actual iPhone behavioral validation after exploration-flow corrections"
+    ],
+    "inaccessible_status": "UNVERIFIED_SOURCE_COVERAGE"
+  },
+  "resolved_contracts": [
+    "READY_UI_MASTER_REV_07",
+    "READY_EXPLORATION_CONTRACT",
+    "FAMILY_LEARNING_AUTHORITY"
+  ],
+  "latest_corrections_loaded": true,
+  "current_implementation_loaded": true,
+  "reverse_reconstruction_pass": true,
+  "source_authority_order": [
+    "latest explicit user correction",
+    "raw/preserved conversation evidence",
+    "TAKY canonical owner",
+    "Ready formal project baseline",
+    "live Ready repository source/runtime state",
+    "current-truth/handoff/derived analysis"
+  ],
+  "reconstructed_truth": {
+    "product_role": "Ready & Set is the child's BASE CAMP / Goal & Session Orchestrator.",
+    "exploration_flow": [
+      "confirmed assignment/schedule fact",
+      "subject interpretation when needed",
+      "Planner allocation",
+      "dated today TODO",
+      "Today's Island exploration pin",
+      "child selects one or more today TODOs",
+      "one exploration session",
+      "one active task/lap at a time",
+      "specialist route/return when needed",
+      "wrap-up",
+      "truthful exploration record/share"
+    ],
+    "planner_authority": {
+      "parent": "CAPTURE / INPUT / CONFIRM / SUPPORT",
+      "subject_learning_master": "INTERPRET / LOAD ANALYSIS",
+      "planner_main": "ALLOCATE",
+      "child": "VIEW / FACT INPUT WHEN APPLICABLE / SELECT TODAY / EXECUTE",
+      "ready": "PRESENTATION + EXECUTION/SESSION ORCHESTRATION; MUST NOT ABSORB PLANNER OR SUBJECT AUTHORITY"
+    },
+    "session_invariants": [
+      "ONE SESSION",
+      "ONE TARGET TIME (formal REV_07 wording; required-vs-optional runtime semantics remains OPEN_CONFLICT)",
+      "MULTIPLE TASKS",
+      "ONE ACTIVE TASK",
+      "ONE ACTIVE LAP",
+      "TASK_CHANGE = LAP_END + NEXT_LAP_START",
+      "APP_SWITCH != PAUSE",
+      "APP_SWITCH != LAP_END",
+      "APP_SWITCH != SESSION_END",
+      "SCREEN_LOCK != PAUSE",
+      "NETWORK_FAILURE != SESSION_END",
+      "SESSION_END != TASK_COMPLETE"
+    ],
+    "outcome_states": [
+      "COMPLETED",
+      "PARTIAL",
+      "DEFERRED",
+      "BLOCKED",
+      "WAITING_FOR_PARENT"
+    ],
+    "carry_over": "DEFERRED -> CARRY_OVER -> RESCHEDULED",
+    "recording": [
+      "conditional only for actual speaking/recording task",
+      "same active session continues",
+      "timer continues",
+      "BGM stops while recording and resumes appropriately",
+      "preserve original + transfer/clean derivative",
+      "truthful MIME/container/extension",
+      "native share/device behavior still requires iPhone validation"
+    ],
+    "timer_visual_lock": [
+      "yellow focus field",
+      "그냥! 지금 하면 돼!",
+      "full analog clock",
+      "current task/exploration label",
+      "remaining/target time",
+      "pause",
+      "완료했어요",
+      "BGM",
+      "conditional REC"
+    ],
+    "rejected_or_superseded": [
+      "Focus Mode as product authority",
+      "Time Attack as whole-product definition",
+      "old Golden assets/contracts",
+      "ready-focus-tools-v1.js",
+      "fake/fixed subject card or fabricated staging TODO replacing missing Planner data",
+      "parent as homework allocation/difficulty/time authority"
+    ]
+  },
+  "current_live_implementation": {
+    "repo": "hns140412-glitch/Ready-Set",
+    "branch": "taky/exploration-journey-2026-09-18",
+    "pr": 4,
+    "head": "3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+    "pr_state": "OPEN_DRAFT_UNMERGED",
+    "regression_contract_checks": "5 SUCCESS",
+    "source_package_check": "SUCCESS",
+    "staging_identity_branch": "taky-staging-device-2026-09-19",
+    "staging_pr": 5,
+    "staging_head": "f1d057ee493d95f12e25ed74ad0ee7e2727ac4c0",
+    "main_production_changed": false
+  },
+  "implementation_findings": [
+    {
+      "id": "RNS-GAP-MULTI-SELECT",
+      "severity": "P0",
+      "status": "FAIL",
+      "evidence": [
+        "ready-base-native-v2.js chooseTask rewrites all other tasks selected:false",
+        "ready-planner-selection-bridge-v1.js bindPlannerTask rewrites all other tasks selected:false",
+        "ready-base-runtime-v1.js resolves one selected planner task and starts tasks:[label]",
+        "ready-runtime-v07.js downstream supports multiple tasks"
+      ],
+      "meaning": "Upstream exploration selection collapses the REV_07 multi-task contract to one task."
+    },
+    {
+      "id": "RNS-GAP-TODAYS-ISLAND",
+      "severity": "P0",
+      "status": "FAIL",
+      "evidence": [
+        "child home copy uses 오늘 탐험 정하기 and Planner today tasks",
+        "no first-class Today's Island / exploration-pin state/contract in current runtime"
+      ],
+      "meaning": "Exploration entry semantics are present as copy/projection but not protected as a first-class runtime contract."
+    },
+    {
+      "id": "RNS-GAP-CONTEXT-LOAD",
+      "severity": "P0",
+      "status": "FIXED_IN_TAKY_PR22",
+      "evidence": [
+        "TKY-CONTEXT-001 added",
+        "PROJECTS/READY_SET_CONTEXT_MANIFEST.json added",
+        "fail-closed validator + CI added",
+        "PILOT_02_READY_SET Drive pack created"
+      ],
+      "meaning": "Project-required context is now explicitly routable/testable before execution."
+    }
+  ],
+  "open_conflicts": [
+    {
+      "id": "TARGET_TIME_REQUIRED_VS_OPTIONAL",
+      "status": "OPEN_CONFLICT",
+      "evidence": [
+        "REV_07 says SET ONE TARGET TIME / ONE TARGET TIME",
+        "current runtime allows targetMin null and labels target 선택 안 함"
+      ],
+      "rule": "Do not silently resolve or invent a target."
+    }
+  ],
+  "holds": [
+    "weekly/daily schedule visual final lock",
+    "production/main promotion pending HUMAN APPROVAL",
+    "actual iPhone device validation until exploration entry/selection gap is corrected"
+  ],
+  "notebooklm": {
+    "direct_connector_available": false,
+    "operational_mode": "Drive source pack -> consumer NotebookLM source selection/analysis -> Drive output -> TAKY raw recheck/C2S review",
+    "pack": "PILOT_02_READY_SET",
+    "output_authority": "REFERENCE_ONLY_EVIDENCE_ASSIST",
+    "source_map_drive_id": "1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
+    "query_pack_drive_id": "15epLtehjeHUiPpyQ8EU5aPj_bnzH72Szdi8c1h0Kvuc",
+    "c2s_review_drive_id": "1p3i_BGSEcUm4zYSBnfrHKp-cgp3s8hx0U-jguNjP72w"
+  },
+  "next_executable": [
+    "Correct Ready upstream Planner TODO selection to preserve one-or-more selected tasks.",
+    "Implement Today's Island / exploration-pin entry as first-class Ready runtime state/projection while preserving Planner identities.",
+    "Add regression tests that fail on single-task collapse and fake-task substitution.",
+    "Rebuild staging preview from corrected runtime.",
+    "Only then resume narrow iPhone device validation."
+  ]
+}
