@@ -113,6 +113,33 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         and not b(r,"artifact_or_action_delivered") and b(r,"explanation_only")):
         f += ["SUBSTITUTE_RESULT","OUTPUT_FORM_MISMATCH"]
 
+    # Notion link-intelligence review: source acquisition must precede analysis/compare/improve.
+    if b(r,"notion_link_review_required"):
+        root_required=b(r,"notion_root_source_applicable",True)
+        root_attempted=b(r,"notion_root_source_attempted")
+        descendants_inventoried=b(r,"notion_material_descendants_inventoried")
+        discovered=i(r,"notion_material_source_nodes_discovered")
+        dispositioned=i(r,"notion_material_source_nodes_dispositioned")
+        graph_closed=b(r,"notion_source_graph_closed")
+
+        phase_a_missing = (
+            (root_required and not root_attempted)
+            or not descendants_inventoried
+            or discovered != dispositioned
+            or not graph_closed
+        )
+        phase_b_missing = (
+            not b(r,"notion_analysis_completed")
+            or not b(r,"notion_compare_completed")
+            or not b(r,"notion_improvement_assessment_completed")
+            or not b(r,"notion_review_record_updated")
+        )
+
+        if phase_a_missing:
+            f.append("OMISSION")
+        if phase_b_missing or b(r,"notion_database_housekeeping_only"):
+            f.append("SUBSTITUTE_RESULT")
+
     # Outcome-first gate: validation may not displace available result improvement.
     if b(r,"outcome_optimization_required"):
         blocked_by_overvalidation = (
