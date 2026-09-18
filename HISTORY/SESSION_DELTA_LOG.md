@@ -168,3 +168,13 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage in Drive Source Registry and GitHub Pilot registry.
 - Global Conversation Topic Map now routes TAKY Core L2 recovery to the three safe sanitized 6aa transcripts; original HTML remains SECURITY_HOLD / SANITIZE_REQUIRED.
 - Non-text markers remain explicit L3 escalation points if their content becomes material.
+
+## 2026-09-19 — Notion review E2E realization
+- User clarified two required outcomes for `노션검토`: (1) follow `나의 링크` root URLs into original content and material attachments/child/reference sites, and (2) analyze, compare, complement and improve using the collected evidence.
+- Root cause observed in the current session: review-register/database housekeeping could displace the requested source-intelligence result.
+- Implemented command routing + Notion E2E contract + deterministic replay gate on PR #13.
+- Historical failure fixture blocks DB-housekeeping-only / source-unopened / analysis-missing completion as `OMISSION + SUBSTITUTE_RESULT + PREMATURE_PASS`.
+- Compliant fixture requires root attempt, descendant inventory, discovered=dispositioned source nodes, source-graph closure, analysis, comparison, improvement assessment and review-record update.
+- Explicit UNAVAILABLE descendants may close the graph when honestly dispositioned; unavailable content is never fabricated as verified.
+- TAKY is internal governance; the user need only invoke `노션검토` for this workflow. Canonical promotion remains separately governed.
+

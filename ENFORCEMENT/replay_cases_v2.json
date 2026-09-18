@@ -1,33 +1,193 @@
 {
-  "fixture_version": "2026-09-13.3",
-  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, and handoff bundle closure.",
+  "fixture_version": "2026-09-19.1",
+  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement.",
   "cases": [
     {
-      "id":"Q-01","phase":"historical_failure","expectation":"contains",
-      "expected_detected":["RECOVERY_FAILED","USER_AS_QA"],
-      "record":{"user_evidence_request":true,"available_recovery_families":["conversation","library","canonical","workspace"],"attempted_recovery_families":["conversation"],"material_recovery_path_remaining":true,"user_is_only_possible_source":false,"recovery_log_present":false}
+      "id": "Q-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RECOVERY_FAILED",
+        "USER_AS_QA"
+      ],
+      "record": {
+        "user_evidence_request": true,
+        "available_recovery_families": [
+          "conversation",
+          "library",
+          "canonical",
+          "workspace"
+        ],
+        "attempted_recovery_families": [
+          "conversation"
+        ],
+        "material_recovery_path_remaining": true,
+        "user_is_only_possible_source": false,
+        "recovery_log_present": false
+      }
     },
     {
-      "id":"Q-01","phase":"post_fix_compliant","expectation":"clean","expected_detected":[],
-      "record":{"user_evidence_request":true,"available_recovery_families":["conversation","library","canonical","workspace"],"attempted_recovery_families":["conversation","library","canonical"],"material_recovery_path_remaining":false,"user_is_only_possible_source":false,"recovery_log_present":true}
+      "id": "Q-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "user_evidence_request": true,
+        "available_recovery_families": [
+          "conversation",
+          "library",
+          "canonical",
+          "workspace"
+        ],
+        "attempted_recovery_families": [
+          "conversation",
+          "library",
+          "canonical"
+        ],
+        "material_recovery_path_remaining": false,
+        "user_is_only_possible_source": false,
+        "recovery_log_present": true
+      }
     },
     {
-      "id":"A-01","phase":"historical_failure","expectation":"contains",
-      "expected_detected":["AUTHORITY_BOUNDARY_VIOLATION"],
-      "record":{"reference_only_input":true,"promoted_to_execution_rule":true,"source_validated":false,"localized":false,"regression_impact_validated":false,"human_approval_required":false,"human_approval_present":false}
+      "id": "A-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "AUTHORITY_BOUNDARY_VIOLATION"
+      ],
+      "record": {
+        "reference_only_input": true,
+        "promoted_to_execution_rule": true,
+        "source_validated": false,
+        "localized": false,
+        "regression_impact_validated": false,
+        "human_approval_required": false,
+        "human_approval_present": false
+      }
     },
     {
-      "id":"A-01","phase":"post_fix_compliant","expectation":"clean","expected_detected":[],
-      "record":{"reference_only_input":true,"promoted_to_execution_rule":true,"source_validated":true,"localized":true,"regression_impact_validated":true,"human_approval_required":true,"human_approval_present":true}
+      "id": "A-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "reference_only_input": true,
+        "promoted_to_execution_rule": true,
+        "source_validated": true,
+        "localized": true,
+        "regression_impact_validated": true,
+        "human_approval_required": true,
+        "human_approval_present": true
+      }
     },
     {
-      "id":"B-01","phase":"historical_failure","expectation":"contains",
-      "expected_detected":["HANDOFF_LOSS"],
-      "record":{"handoff_requested_maximum":true,"recipient_repo_access":false,"portable_source_snapshots":true,"portable_diff_with_base":false,"repo_pointers_only":false,"source_manifest_present":true,"evidence_authority_classified":true,"resume_simulation_passed":true,"bundle_closure_required":true,"bundle_closure_passed":false,"claims_complete":false}
+      "id": "B-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "HANDOFF_LOSS"
+      ],
+      "record": {
+        "handoff_requested_maximum": true,
+        "recipient_repo_access": false,
+        "portable_source_snapshots": true,
+        "portable_diff_with_base": false,
+        "repo_pointers_only": false,
+        "source_manifest_present": true,
+        "evidence_authority_classified": true,
+        "resume_simulation_passed": true,
+        "bundle_closure_required": true,
+        "bundle_closure_passed": false,
+        "claims_complete": false
+      }
     },
     {
-      "id":"B-01","phase":"post_fix_compliant","expectation":"clean","expected_detected":[],
-      "record":{"handoff_requested_maximum":true,"recipient_repo_access":false,"portable_source_snapshots":true,"portable_diff_with_base":false,"repo_pointers_only":false,"source_manifest_present":true,"evidence_authority_classified":true,"resume_simulation_passed":true,"bundle_closure_required":true,"bundle_closure_passed":true,"claims_complete":false}
+      "id": "B-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "handoff_requested_maximum": true,
+        "recipient_repo_access": false,
+        "portable_source_snapshots": true,
+        "portable_diff_with_base": false,
+        "repo_pointers_only": false,
+        "source_manifest_present": true,
+        "evidence_authority_classified": true,
+        "resume_simulation_passed": true,
+        "bundle_closure_required": true,
+        "bundle_closure_passed": true,
+        "claims_complete": false
+      }
+    },
+    {
+      "id": "N-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "OMISSION",
+        "SUBSTITUTE_RESULT",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": false,
+        "notion_material_descendants_inventoried": false,
+        "notion_material_source_nodes_discovered": 4,
+        "notion_material_source_nodes_dispositioned": 0,
+        "notion_source_graph_closed": false,
+        "notion_analysis_completed": false,
+        "notion_compare_completed": false,
+        "notion_improvement_assessment_completed": false,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": true,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "N-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_material_descendants_inventoried": true,
+        "notion_material_source_nodes_discovered": 4,
+        "notion_material_source_nodes_dispositioned": 4,
+        "notion_source_graph_closed": true,
+        "notion_analysis_completed": true,
+        "notion_compare_completed": true,
+        "notion_improvement_assessment_completed": true,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "N-02",
+      "phase": "unavailable_descendant_closed",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_material_descendants_inventoried": true,
+        "notion_material_source_nodes_discovered": 3,
+        "notion_material_source_nodes_dispositioned": 3,
+        "notion_source_graph_closed": true,
+        "notion_analysis_completed": true,
+        "notion_compare_completed": true,
+        "notion_improvement_assessment_completed": true,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true,
+        "note": "One material child may be UNAVAILABLE; closure means dispositioned, not fabricated verification."
+      }
     }
   ]
 }
