@@ -28,6 +28,20 @@ Do **not** require C2S merely because:
 
 A prose-only "반영했습니다" without the durable write/evidence required by the request is not enough.
 
+
+### 타키 기준 / 최신 타키 기준 / 프로젝트 기준 재개
+Before implementation or validation, identify the active project and load its project context manifest when one exists.
+
+Required chain:
+`PROJECT IDENTIFY -> PROJECT CONTEXT MANIFEST -> REQUIRED OWNERS/CORRECTIONS/OPEN-CONFLICT -> TARGETED L2/L3 RECOVERY IF NEEDED -> ENFORCEMENT/project_context_validator.py -> EXECUTE`.
+
+For manifest-controlled project work:
+`REQUIRED_CONTEXT_MISSING > 0 = CONTEXT_GATE FAIL`.
+
+A context-gate FAIL allows only recovery/repair work; it does not allow implementation claims that depend on the missing context.
+
+NotebookLM remains L2 `REFERENCE_ONLY / EVIDENCE_ASSIST`; any historical claim used to change canonical state requires raw-source recheck under TKY-NBLM-001/TKY-C2S-001.
+
 ### ㄱ / 계속 / 진행
 Delegated continuation inherits the active execution contract.
 If C2S was already required by the active contract, it remains required until the relevant compile/write/coverage stop condition.
