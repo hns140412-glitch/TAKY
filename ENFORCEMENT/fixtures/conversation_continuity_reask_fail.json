@@ -1,0 +1,18 @@
+{
+  "record_id": "CONTINUITY-FAIL-REASK",
+  "intent": "RECALL",
+  "selected_level": "L1",
+  "levels_attempted": [
+    "L0",
+    "L1"
+  ],
+  "material_context_gap": true,
+  "escalation_reason": null,
+  "asked_user_to_repeat": true,
+  "recoverable_path_remaining": true,
+  "user_is_only_source": false,
+  "full_scan_explicit": false,
+  "notebooklm_used": false,
+  "l0_l1_sufficient": false,
+  "stop_reason": "MATERIAL_AMBIGUITY"
+}
