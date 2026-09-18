@@ -9,6 +9,8 @@ on:
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md'
+      - 'PROJECTS/READY_SET_CONTEXT_MANIFEST.json'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
       - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
       - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
@@ -36,6 +38,8 @@ on:
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md'
+      - 'PROJECTS/READY_SET_CONTEXT_MANIFEST.json'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
       - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
       - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
@@ -81,6 +85,7 @@ jobs:
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
+          python -m py_compile ENFORCEMENT/project_context_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -146,3 +151,18 @@ jobs:
           echo "Expected NotebookLM source-security failure observed"
       - name: Validate NotebookLM Pilot 01 source registry
         run: python ENFORCEMENT/notebooklm_source_validator.py HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json
+
+      - name: Validate Ready project context manifest
+        run: |
+          python ENFORCEMENT/project_context_validator.py \
+            PROJECTS/READY_SET_CONTEXT_MANIFEST.json \
+            --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_pass.json
+      - name: Reject incomplete Ready project context
+        run: |
+          if python ENFORCEMENT/project_context_validator.py \
+            PROJECTS/READY_SET_CONTEXT_MANIFEST.json \
+            --resolved ENFORCEMENT/fixtures/ready_set_context_resolved_fail.json; then
+            echo "Expected incomplete Ready context to be rejected"
+            exit 1
+          fi
+          echo "Expected Ready context failure observed"
