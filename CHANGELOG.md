@@ -1,3 +1,10 @@
+## 2026-09-19 — Conversation-to-System growth hardening
+- Added canonical TKY-C2S-001 conversation-to-system protocol.
+- Added atomic coverage JSON schema and deterministic coverage validator with PASS/FAIL fixtures.
+- Added CI replay for C2S coverage and expected-failure rejection.
+- Added goal-driven exploration / Truth Guard behavior to outcome optimization.
+- Added architecture-domain lawful possibility search, CURRENT_BEST/FRONTIER growth model and conversation-driven skeleton-to-flesh growth.
+
 # TAKY CHANGELOG
 
 ## 2026-09-08 — Scoped audit metadata and owner-routing reconciliation
