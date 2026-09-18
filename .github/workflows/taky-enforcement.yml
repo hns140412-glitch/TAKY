@@ -9,6 +9,9 @@ on:
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
+      - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
+      - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
       - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
@@ -33,6 +36,9 @@ on:
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
+      - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
+      - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
       - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
@@ -74,6 +80,7 @@ jobs:
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
+          python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -128,3 +135,14 @@ jobs:
           echo "Expected lossy-coverage failure observed"
       - name: Validate architecture conversation C2S ledger
         run: python ENFORCEMENT/conversation_coverage_validator.py HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json
+      - name: Validate NotebookLM source registry fixture
+        run: python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_pass.json
+      - name: Reject unsafe NotebookLM source fixture
+        run: |
+          if python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_fail.json; then
+            echo "Expected unsafe NotebookLM source fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected NotebookLM source-security failure observed"
+      - name: Validate NotebookLM Pilot 01 source registry
+        run: python ENFORCEMENT/notebooklm_source_validator.py HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json
