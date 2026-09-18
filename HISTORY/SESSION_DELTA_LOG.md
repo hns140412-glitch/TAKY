@@ -150,3 +150,13 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Conversation end persists material deltas incrementally rather than rescanning all history.
 - Added deterministic continuity validator and expected-failure fixtures for re-asking recoverable context and unnecessary full-history loading.
 - Added Drive `TAKY_GLOBAL_CONVERSATION_TOPIC_MAP` as a REFERENCE_ONLY routing index for minimal notebook/source-pack selection.
+
+## 2026-09-19 — Saved share-page transcript sanitization
+- Identified the 6aa saved ChatGPT share-page format as React Router flattened loader data containing both shared conversation content and unrelated session/bootstrap/auth/application state.
+- Added a deterministic decoder that reconstructs the declared `linear_conversation` and emits USER/ASSISTANT-only transcript Markdown.
+- Added explicit markers for non-text parts instead of silently dropping them.
+- Added post-output forbidden-pattern scanning and a separate transcript validator.
+- First real Drive pilot passed on `6aa5daf5-3e74-83ee-9904-8e1fd63a3bc6`: 162 linear nodes, 51 USER/ASSISTANT messages, 110 excluded non-user/assistant messages, 1 node without message, 0 non-text markers, and no blocked session/auth patterns in the derivative.
+- Created Drive sanitized derivative `P01_SANITIZED_6aa5daf5_AI_WORK_OS_변화감시` and registered original→derivative lineage.
+- Original 6aa HTML remains `PAGE_CAPTURE / SANITIZE_REQUIRED / notebooklm_eligible=false`; the derivative is `PRESERVED_TRANSCRIPT / RECOVERY_WITNESS_EVIDENCE / SAFE_FOR_NOTEBOOKLM`.
+- CI fixture reproduces the React Router share format and checks sanitizer output byte-for-byte plus unsafe-output rejection.
