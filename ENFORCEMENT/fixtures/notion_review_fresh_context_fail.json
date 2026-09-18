@@ -1,0 +1,32 @@
+{
+  "fixture_version": "2026-09-19.1",
+  "purpose": "Observed regression shape: zero-prior-context 노션검토 is incorrectly treated as Notion structure cleanup and completion is claimed.",
+  "user_input": "노션검토",
+  "prior_context": [],
+  "assistant_result": {
+    "requires_taky_prefix": true,
+    "selected_workflow": "NOTION_STRUCTURE_REVIEW",
+    "target_collection": "📚 나의 링크",
+    "required_phases": [
+      "DATABASE_SCHEMA_AUDIT"
+    ],
+    "structure_audit_is_default": true,
+    "canonical_write_authorized": false,
+    "execution_record": {
+      "notion_link_review_required": true,
+      "notion_root_source_applicable": true,
+      "notion_root_source_attempted": false,
+      "notion_material_descendants_inventoried": false,
+      "notion_material_source_nodes_discovered": 0,
+      "notion_material_source_nodes_dispositioned": 0,
+      "notion_source_graph_closed": false,
+      "notion_structured_source_evidence_present": false,
+      "notion_analysis_completed": false,
+      "notion_compare_completed": false,
+      "notion_improvement_assessment_completed": false,
+      "notion_review_record_updated": true,
+      "notion_database_housekeeping_only": true,
+      "claims_complete": true
+    }
+  }
+}

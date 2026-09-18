@@ -233,3 +233,10 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - Updated priority/recovery views to expose source-graph state and counts.
 - Hosted cross-chat auto-invocation remains platform-level UNVERIFIED; this change closes repository/bootstrap and Notion runtime-evidence gaps, not that platform boundary.
 
+## 2026-09-19 — Notion review fresh-context system-side replay
+- Added deterministic zero-prior-context validation for the literal command `노션검토`; the user is no longer the default smoke tester for this routing contract.
+- The replay requires no TAKY prefix, routes to `📚 나의 링크` link-intelligence review, requires Source Acquisition → Source Graph Closure → Analysis → Compare → Improve → Review Record Update, and rejects structure-audit substitution.
+- Added a deliberately failing regression fixture representing the previously observed wrong behavior.
+- CI now compiles and executes both the passing fresh-context fixture and the expected-failure regression fixture on every relevant PR/push.
+- Boundary preserved: repository fresh-context replay does not prove hosted ChatGPT/Work automatic invocation; that remains UNVERIFIED unless a system-side hosted runtime test becomes available.
+
