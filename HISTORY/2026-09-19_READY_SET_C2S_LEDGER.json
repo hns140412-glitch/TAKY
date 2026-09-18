@@ -196,7 +196,7 @@
       "content": "Publishing the exact safe-branch package to the existing dedicated Netlify staging site is blocked because NETLIFY_AUTH_TOKEN is not configured in the Ready-Set repository. The guarded deploy workflow fails closed, and the Netlify site remains on deploy 6aa698853e51c883dd6a69c2.",
       "scope": "TOOL",
       "why": "Device validation must not begin against a stale/untraceable staging deployment, and credentials must not be exposed or persisted in source/history.",
-      "disposition": "OPEN",
+      "disposition": "SUPERSEDED",
       "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md#gate-1",
       "evidence": [
         "deploy_workflow=.github/workflows/ready-staging-deploy.yml",
@@ -205,8 +205,8 @@
         "reason=STAGING_DEPLOY_AUTH_UNAVAILABLE",
         "netlify_current_deploy=6aa698853e51c883dd6a69c2"
       ],
-      "implementation_status": "STAGING_DEPLOY_AUTH_BLOCKED",
-      "verification_status": "LIVE_GITHUB_AND_NETLIFY_VERIFIED"
+      "implementation_status": "DEDICATED_SITE_AUTH_BLOCKED_BUT_NOT_DEVICE_GATE",
+      "verification_status": "SUPERSEDED_BY_GIT_BACKED_DEPLOY_PREVIEW"
     },
     {
       "atom_id": "RNS-C2S-012",
@@ -224,11 +224,61 @@
       ],
       "implementation_status": "IMPLEMENTED",
       "verification_status": "FAIL_CLOSED_RUN_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-013",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "netlify:profound-ganache-902032:deploy-preview-5:6aadb57c9d58a60008f93fae",
+      "actor": "SYSTEM",
+      "content": "The earlier dedicated-staging authorization block is no longer the active device-validation blocker. A Git-backed Netlify Deploy Preview was created from draft PR #5 and is source-traceable to Ready-Set commit 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca.",
+      "scope": "TOOL",
+      "why": "PR #4 targets a non-main base and therefore did not receive Netlify preview status; a staging-only draft PR to main safely triggered the existing Git-backed Netlify Deploy Preview without merging or changing production.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set staging/device-validation runtime state",
+      "evidence": [
+        "preview_pr=5",
+        "preview_deploy_id=6aadb57c9d58a60008f93fae",
+        "netlify_state=ready",
+        "commit_ref=3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+        "branch=taky-staging-device-2026-09-19",
+        "context=deploy-preview",
+        "review_id=5",
+        "deploy_alias=https://deploy-preview-5--profound-ganache-902032.netlify.app",
+        "netlify.toml publish='.' with no build command",
+        "VERSION appVersion=0.9.4-rc25",
+        "VERSION cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "sw.js cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "rejected ready-focus-tools-v1.js absent from index and sw precache",
+        "Netlify deployed 3 functions: character-candidates, homework-analysis, time"
+      ],
+      "supersedes": [
+        "RNS-C2S-011 as active device gate"
+      ],
+      "implementation_status": "GIT_BACKED_DEPLOY_PREVIEW_READY",
+      "verification_status": "NETLIFY_PROVENANCE_AND_SOURCE_PARITY_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-014",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "device-gate:iphone-pwa",
+      "actor": "USER+SYSTEM",
+      "content": "Actual iPhone/PWA behavior remains unverified and is now the next active gate. Device-only behavior includes screen lock/background restoration, native share sheet, iOS recording container/MIME and acoustics, and actual BGM playback.",
+      "scope": "PROJECT",
+      "why": "Source/CI and Git-backed preview evidence cannot substitute for real iOS runtime behavior.",
+      "disposition": "OPEN",
+      "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md#gate-3",
+      "depends_on": [
+        "RNS-C2S-013"
+      ],
+      "implementation_status": "READY_FOR_DEVICE_VALIDATION",
+      "verification_status": "DEVICE_UNVERIFIED"
     }
   ],
   "coverage_summary": {
-    "material_atoms": 12,
-    "mapped_material": 12,
+    "material_atoms": 14,
+    "mapped_material": 14,
     "unmapped_material": 0,
     "silent_loss_count": 0,
     "false_convergence_count": 0,
@@ -239,19 +289,18 @@
     "latest_corrections_reconstructable": true,
     "open_items_reconstructable": true,
     "why_preserved": true,
-    "notes": "Reconstructs the Ready & Set resume, confirmed timer/rejection locks, source/CI baseline, exact-head source packaging PASS, staging publication AUTH BLOCK, fail-closed deploy evidence, weekly/daily visual HOLD, and the required sequence before device validation."
+    "notes": "Reconstructs the Ready & Set resume, confirmed timer/rejection locks, exact-head packaging, dedicated-site auth block, its Git-backed Deploy Preview workaround, current source/deploy provenance, weekly/daily visual HOLD, and the actual iPhone/PWA device gate."
   },
   "skeleton_growth": {
     "requires_growth_map": true,
     "gaps_identified": [
-      "Secure authorization for exact safe-branch publication to the dedicated Netlify staging site is not configured in the Ready-Set repository.",
       "Actual iPhone/PWA verification of recording, background/lock restoration, sharing, cache updates and BGM remains pending.",
+      "Automated live HTTP spot-fetch of the Netlify preview is unavailable from the current tool runtime, although Netlify provenance and static publish parity are verified.",
       "Weekly/daily schedule visual direction is structurally defined but final visual lock remains pending."
     ],
     "next_fill_targets": [
-      "Provide a secure staging deployment authorization path without exposing credentials.",
-      "Publish the exact current safe-branch package and verify STAGING_SOURCE_MANIFEST.json on the live staging site.",
-      "Run representative iPhone/PWA device validation on that exact deployment.",
+      "Run the narrow real-device validation against Netlify Deploy Preview #5.",
+      "Record PASS/FAIL for iPhone-only behaviors without asking the user to perform developer debugging.",
       "Fix only reproduced runtime gaps and rerun affected regressions.",
       "Resume weekly/daily UI design lock separately without disturbing confirmed timer UI."
     ]
