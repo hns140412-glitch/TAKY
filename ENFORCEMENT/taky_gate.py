@@ -132,6 +132,15 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
             if b(r,"notion_source_declared_unreadable"):
                 f.append("FALSE_MISSING_DECLARATION")
 
+        if b(r,"notion_browser_runtime_stall"):
+            attempts=i(r,"notion_browser_retry_attempts")
+            if attempts > i(r,"notion_browser_retry_budget",2):
+                f += ["RECOVERY_FAILED","PREMATURE_STOP"]
+            if not b(r,"notion_browser_fallback_selected"):
+                f += ["RECOVERY_FAILED","OMISSION"]
+            if b(r,"notion_unrelated_sibling_nodes_stalled"):
+                f.append("SCOPE_SHRINKAGE")
+
         phase_a_missing = (
             (root_required and not root_attempted)
             or not descendants_inventoried

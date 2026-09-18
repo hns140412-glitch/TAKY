@@ -121,6 +121,28 @@ Rules:
 - An inaccessible material node SHALL remain explicit; do not infer its unseen contents. Source graph closure means every material node is dispositioned, not that every node was successfully retrieved.
 - Preserve the raw URL before normalization. URL normalization is comparison aid only and does not prove content identity.
 
+#### Browser/runtime timeout fallback — HARD LOCK
+
+A browser/client-script/JavaScript initialization stall SHALL NOT consume unbounded review time or block the remaining source graph.
+
+For each material URL:
+- allow only bounded live-browser retry attempts;
+- after the bounded retry budget is exhausted or a browser initialization/runtime stall is detected, stop retrying that path;
+- continue immediately with governed fallback evidence: review-row preserved body/snapshot → Drive preservation → other available recovery family;
+- if fallback yields only partial content, preserve `PARTIAL` with the exact missing elements;
+- if no governed fallback exists, preserve `UNAVAILABLE` for that node and continue other independent material nodes;
+- one blocked node SHALL NOT stall unrelated sibling nodes.
+
+`BROWSER STALL ≠ KEEP RETRYING`.
+`ONE NODE BLOCKED ≠ WHOLE SOURCE GRAPH BLOCKED`.
+`PARTIAL FALLBACK ≠ VERIFIED LIVE SOURCE`.
+
+The execution record SHOULD preserve at least:
+- browser attempt count;
+- browser timeout/JS-init/runtime-failure flag;
+- fallback path selected;
+- per-node final source disposition.
+
 #### Recovered-source fallback — HARD LOCK
 
 A failed direct fetch of an external/root URL SHALL NOT by itself make the record unreadable or `UNAVAILABLE`.
