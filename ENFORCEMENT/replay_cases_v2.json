@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-19.2",
-  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement.",
+  "fixture_version": "2026-09-19.3",
+  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement. Includes recovered-source fallback regression where direct external fetch fails but governed Notion/Drive snapshot evidence exists.",
   "cases": [
     {
       "id": "Q-01",
@@ -240,6 +240,65 @@
         "notion_review_record_updated": true,
         "notion_database_housekeeping_only": false,
         "claims_complete": true
+      }
+    },
+    {
+      "id": "N-05",
+      "phase": "historical_failure_recoverable_snapshot_ignored",
+      "expectation": "contains",
+      "expected_detected": [
+        "RECOVERY_FAILED",
+        "FALSE_MISSING_DECLARATION",
+        "OMISSION",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_root_direct_fetch_failed": true,
+        "notion_recoverable_snapshot_available": true,
+        "notion_recoverable_snapshot_used": false,
+        "notion_source_declared_unreadable": true,
+        "notion_material_descendants_inventoried": false,
+        "notion_material_source_nodes_discovered": 49,
+        "notion_material_source_nodes_dispositioned": 0,
+        "notion_source_graph_closed": false,
+        "notion_structured_source_evidence_present": true,
+        "notion_analysis_completed": false,
+        "notion_compare_completed": false,
+        "notion_improvement_assessment_completed": false,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true,
+        "note": "Representative of a recovered Notion root whose direct external fetch fails even though a governed row snapshot/Drive preservation path exists."
+      }
+    },
+    {
+      "id": "N-05",
+      "phase": "post_fix_recovered_snapshot_used",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "notion_link_review_required": true,
+        "notion_root_source_applicable": true,
+        "notion_root_source_attempted": true,
+        "notion_root_direct_fetch_failed": true,
+        "notion_recoverable_snapshot_available": true,
+        "notion_recoverable_snapshot_used": true,
+        "notion_source_declared_unreadable": false,
+        "notion_material_descendants_inventoried": true,
+        "notion_material_source_nodes_discovered": 4,
+        "notion_material_source_nodes_dispositioned": 4,
+        "notion_source_graph_closed": true,
+        "notion_structured_source_evidence_present": true,
+        "notion_analysis_completed": true,
+        "notion_compare_completed": true,
+        "notion_improvement_assessment_completed": true,
+        "notion_review_record_updated": true,
+        "notion_database_housekeeping_only": false,
+        "claims_complete": true,
+        "note": "Direct live fetch can fail while recovered governed evidence is used honestly; freshness remains separately bounded."
       }
     }
   ]
