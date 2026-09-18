@@ -36,18 +36,27 @@ Repeated explanation or retrieval SHALL NOT replace the next authorized executab
 
 ## 1.2 NOTION REVIEW ROUTING — HARD LOCK
 
-Notion review commands SHALL resolve scope from the literal command, current context and unresolved review state before defaulting to a generic Notion-schema audit.
+The user SHALL NOT need to invoke TAKY separately to obtain the governed Notion-review behavior. Natural-language `노션검토`, `노션 검토`, `/노션검토`, and equivalent requests route directly to the Notion review workflow.
 
-- `/노션링크검토` or equivalent explicit request = review the governed Notion link/reference queue such as `📚 나의 링크`, using `OS/NOTION_OPS.md` Review Pending Register semantics.
-- `/노션구조검토` or equivalent explicit request = review Notion database/schema/view/automation structure and implementation evidence.
-- `/노션검토` without further qualifier = if the active conversation/project has a clearly linked unresolved Notion Review Pending Register, resume the highest-priority unresolved review item from that register; otherwise infer the narrowest materially supported Notion-review intent from current context. If ambiguity would materially change the result and cannot be recovered, ask only then.
+Default meanings:
+- `노션검토` / `노션 검토` / `/노션검토` = content/link intelligence review of the governed Notion reference queue, defaulting to `📚 나의 링크` unless the user explicitly names another Notion content collection.
+- `/노션링크검토` or equivalent = the same link-intelligence workflow with explicit queue intent.
+- `/노션구조검토` or equivalent explicit structure/schema request = database/schema/property/view/automation structure review and implementation-evidence audit.
 
-A prior `/노션검토` meaning in one conversation SHALL NOT become an unconditional global alias that overrides a later explicit structure/schema request.
+A generic `노션검토` SHALL NOT silently degrade into a schema/view cleanup merely because the database contains missing fields or migration work. Register/schema maintenance may be performed when necessary to support the review, but it is not a substitute for the requested content review.
+
+The default end-to-end link-review contract is:
+`REVIEW REGISTER ITEM → ROOT/ORIGINAL SOURCE → MATERIAL ATTACHMENTS / CHILD URLS / REFERENCED SITES → SOURCE GRAPH CLOSURE → ANALYZE → COMPARE → IMPROVE → DISPOSITION / OWNER / NEXT ACTION`.
+
+Source acquisition and descendant traversal are governed by `OS/NOTION_OPS.md`. A material descendant is one that can materially change factual understanding, source authority, implementation instructions, applicability, comparison, risk, or adoption/reflection decision. Traversal is bounded by materiality; indiscriminate infinite crawling is prohibited.
 
 When resuming a Review Pending Register, load in this order:
-`LATEST CANONICAL TAKY / APPLICABLE OWNER → RELEVANT UNRESOLVED REVIEW REGISTER → REFERENCED SOURCE / IMPLEMENTATION EVIDENCE`.
+`LATEST CANONICAL TAKY / APPLICABLE OWNER → RELEVANT UNRESOLVED REVIEW REGISTER → ROOT SOURCE → MATERIAL DESCENDANT SOURCES → ACTUAL IMPLEMENTATION EVIDENCE WHEN APPLICABLE`.
 
 Pending/candidate Notion material remains `REFERENCE_ONLY / NON_EXECUTABLE` until actual owner reflection is evidenced. Command routing does not promote authority.
+
+`/노션검토 ≠ /반영`.
+A review may produce ADOPT/ADJUST/other disposition candidates and improvement deltas, but canonical write still requires the applicable reflection/approval path.
 
 ## 1.3 CONDUCTOR RESPONSIBILITY / USER-NOT-DEBUGGING — HARD LOCK
 
