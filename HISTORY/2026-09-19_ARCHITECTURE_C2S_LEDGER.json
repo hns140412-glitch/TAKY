@@ -1,0 +1,295 @@
+{
+  "ledger_id": "ARCH-C2S-20260919-001",
+  "source_scope": {
+    "description": "Current 2026-09-19 architecture-design-OS conversation from public-data/API exploration through TAKY C2S/runtime hardening.",
+    "coverage_status": "RECOVERED_SCOPE_COMPLETE",
+    "unavailable_ranges": []
+  },
+  "atoms": [
+    {
+      "atom_id": "ARCH-C2S-001",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:public-data-api",
+      "actor": "USER",
+      "content": "Use public data and APIs to materially improve architectural design work.",
+      "scope": "DOMAIN",
+      "why": "Establish external data as an input to design intelligence rather than manual lookup only.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_WORK_OS.md"
+    },
+    {
+      "atom_id": "ARCH-C2S-002",
+      "type": "IDEA",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:vworld-cg",
+      "actor": "USER",
+      "content": "Exploit VWorld and similar data/services for visual, image, modeling and CG-oriented architectural outputs.",
+      "scope": "DOMAIN",
+      "why": "Connect public geospatial context to persuasive visual deliverables.",
+      "disposition": "FRONTIER",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#visual-context"
+    },
+    {
+      "atom_id": "ARCH-C2S-003",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:deep-search-design-sales",
+      "actor": "USER",
+      "content": "Build the direction around both architectural design productivity and winning commissions, informed by deep research and real cases.",
+      "scope": "DOMAIN",
+      "why": "Avoid a narrow automation tool that does not improve business acquisition.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#north-star"
+    },
+    {
+      "atom_id": "ARCH-C2S-004",
+      "type": "FRONTIER",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:cost-detail-public-data",
+      "actor": "USER",
+      "content": "Investigate public-data-driven construction-cost estimation and detail-drawing generation.",
+      "scope": "DOMAIN",
+      "why": "Extend value from pursuit into production, VE and technical delivery.",
+      "disposition": "FRONTIER",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#production-intelligence"
+    },
+    {
+      "atom_id": "ARCH-C2S-005",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:pursuit-priority",
+      "actor": "USER",
+      "content": "For design pursuit, prioritize regulatory review followed by site-layout alternatives, plan configuration, modeling, strong visual material, and shorter response time.",
+      "scope": "DOMAIN",
+      "why": "This sequence most directly improves first-response competitiveness and client persuasion.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#pursuit-loop"
+    },
+    {
+      "atom_id": "ARCH-C2S-006",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:overseas-small-firm-cases",
+      "actor": "USER",
+      "content": "Benchmark overseas cases and actual use by small/midsize and solo architectural practices.",
+      "scope": "DOMAIN",
+      "why": "Ground adoption strategy in realistic office scale, not only large-firm R&D examples.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#evidence-and-benchmarking"
+    },
+    {
+      "atom_id": "ARCH-C2S-007",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:midsize-both",
+      "actor": "USER",
+      "content": "For midsize offices, both pursuit/front-end and post-award production intelligence must be supported; they are not alternatives.",
+      "scope": "DOMAIN",
+      "why": "A midsize office must win work and then deliver it efficiently with the same data continuity.",
+      "disposition": "ADJUST",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#dual-loop",
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md",
+        "DOMAIN/ARCHITECTURE_GROWTH_MAP.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-008",
+      "type": "CONSTRAINT",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:20-40-office",
+      "actor": "USER",
+      "content": "Target the architecture system for an approximately 20-40 person design office.",
+      "scope": "DOMAIN",
+      "why": "Sets realistic staffing, governance, tooling, data and rollout assumptions.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#operating-context"
+    },
+    {
+      "atom_id": "ARCH-C2S-009",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:taky-company-standards-cases",
+      "actor": "USER",
+      "content": "Combine TAKY with all-weather architecture support and validate/implement through company standards and project cases.",
+      "scope": "DOMAIN",
+      "why": "The system must convert company experience into reusable and improving design intelligence.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+      "affects": [
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-010",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:growing-standard-not-validator",
+      "actor": "USER",
+      "content": "TAKY must build a growing standard; validation is important but TAKY is not a validation tool.",
+      "scope": "GLOBAL",
+      "why": "Prevents governance and checking from displacing exploration, learning and capability growth.",
+      "disposition": "ADJUST",
+      "destination": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md",
+        "MASTER/MASTER_LOGIC.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-011",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:tool-for-multiple-paths",
+      "actor": "USER",
+      "content": "The tool should not primarily show why something cannot be done; it should explore many angles and ways to make the goal work.",
+      "scope": "GLOBAL",
+      "why": "Defines TAKY as a goal-driven exploration system rather than a refusal/explanation engine.",
+      "disposition": "ADJUST",
+      "destination": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-012",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:positive-law-implementation",
+      "actor": "USER",
+      "content": "Implement positive problem-solving through regulatory review: use law to find lawful routes that enable the design goal.",
+      "scope": "DOMAIN",
+      "why": "Turns legal review into a design-search-space and opportunity tool.",
+      "disposition": "ADOPT",
+      "destination": "DOMAIN/ARCHITECTURE_WORK_OS.md#goal-driven-possibility-search"
+    },
+    {
+      "atom_id": "ARCH-C2S-013",
+      "type": "CONSTRAINT",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:truth-safety-guard",
+      "actor": "USER",
+      "content": "Positive exploration must not become lying or one-sided optimistic interpretation; safety controls should protect truth while allowing many implementation attempts.",
+      "scope": "GLOBAL",
+      "why": "Separates constructive exploration from fabricated feasibility or cherry-picked evidence.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md#goal-driven-exploration-truth-guard",
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-014",
+      "type": "STRATEGY",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:derived:reality-locked-possibility-open",
+      "actor": "USER+ASSISTANT",
+      "content": "Use the operating principle Reality Locked, Possibility Open: facts and source authority stay fixed while alternative solution paths stay open.",
+      "scope": "GLOBAL",
+      "why": "Provides a concise execution model for truthful exploration.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "evidence": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-015",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:skeleton-flesh-loss",
+      "actor": "USER",
+      "content": "Conversation is the core way to build the skeleton and add flesh; rough results have come from losing detailed parts during synthesis.",
+      "scope": "GLOBAL",
+      "why": "Identifies lossy conversation-to-system conversion as a root cause, not merely a documentation issue.",
+      "disposition": "ADJUST",
+      "destination": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "affects": [
+        "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md",
+        "MASTER/MASTER_LOGIC.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-016",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:user:reflect-improve-taky",
+      "actor": "USER",
+      "content": "Establish countermeasures and standards, reflect them into canonical TAKY, and improve the system so detailed conversational knowledge is not lost.",
+      "scope": "GLOBAL",
+      "why": "Authorizes durable governance changes rather than a one-off conversational reminder.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "evidence": [
+        "MASTER/CONVERSATION_ATOM_SCHEMA.json",
+        "ENFORCEMENT/conversation_coverage_validator.py"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-017",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:system:c2s-runtime-implementation",
+      "actor": "SYSTEM",
+      "content": "C2S repository enforcement now conditionally activates for material conversation-derived durable TAKY/domain/system updates, with runtime preflight coverage gating and CI rejection of missing/lossy coverage.",
+      "scope": "GLOBAL",
+      "why": "Moves the anti-loss rule from prose toward executable repository-controlled enforcement.",
+      "disposition": "PRESERVE",
+      "destination": "OS/C2S_RUNTIME_ACTIVATION.md",
+      "evidence": [
+        "ENFORCEMENT/c2s_preflight_bridge.py",
+        "STATE.md"
+      ]
+    },
+    {
+      "atom_id": "ARCH-C2S-018",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:derived:architecture-flesh-gap",
+      "actor": "SYSTEM",
+      "content": "The architecture OS skeleton is defined, but concrete data adapters, company Golden Project ingestion, legal opportunity graph, layout/plan algorithms, geometry validation, pursuit UI/output, production/detail/cost pipelines and feedback-learning runtime remain to be implemented.",
+      "scope": "DOMAIN",
+      "why": "Prevents the conceptual skeleton from being misrepresented as an implemented architecture platform.",
+      "disposition": "OPEN",
+      "destination": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md#next-build-priorities",
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md"
+      ]
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 18,
+    "mapped_material": 18,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true,
+    "notes": "Reconstructs the progression from public-data architecture support to dual pursuit/production intelligence, exploration-first TAKY, truthful regulatory possibility search, and conversation-to-system anti-loss governance."
+  },
+  "skeleton_growth": {
+    "requires_growth_map": true,
+    "gaps_identified": [
+      "Official/public architecture data adapters are not implemented.",
+      "Company Golden Project ingestion and evidence grading are not implemented.",
+      "Regulatory opportunity graph and applicability resolver are not implemented.",
+      "Layout/plan generative search and deterministic geometry validation are not implemented.",
+      "Pursuit 3D/visual/report runtime is not implemented.",
+      "Production CAD/BIM/detail/cost continuity is not implemented.",
+      "Project outcome feedback and strategy-promotion loop are not implemented.",
+      "Hosted ChatGPT automatic C2S invocation remains unverified."
+    ],
+    "next_fill_targets": [
+      "Company evidence model + Golden Project intake",
+      "SITE/LAW source adapters + Regulatory Opportunity Graph",
+      "Layout/Plan object schema + geometry validator",
+      "Pursuit output pipeline",
+      "Outcome feedback + Strategy Library promotion"
+    ]
+  }
+}
