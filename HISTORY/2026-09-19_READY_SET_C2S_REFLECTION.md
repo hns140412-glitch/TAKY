@@ -101,3 +101,46 @@ To remove ambiguity without modifying the product runtime branch, Draft PR #5's 
 - main and production remain unchanged
 
 Device validation should use the immutable deploy permalink for this deploy rather than the production PWA or an ambiguous Home Screen icon.
+
+
+## NotebookLM / project-context recovery implementation
+
+The user corrected a structural failure: invoking TAKY criteria must recover previously established project-specific criteria, not merely global governance.
+
+Implemented:
+- `TKY-CONTEXT-001`
+- `PROJECTS/READY_SET_CONTEXT_MANIFEST.json`
+- `ENFORCEMENT/project_context_validator.py`
+- CI pass fixture + reject-incomplete fixture
+- Ready-specific NotebookLM/Drive Pilot 02 source map, current delta, query pack and C2S review pack
+- `HISTORY/2026-09-19_READY_SET_CONTEXT_RESOLUTION.json`
+- `PROJECTS/READY_SET_RECOVERED_CURRENT_TRUTH_2026-09-19.md`
+
+NotebookLM boundary remains:
+`Drive long memory → NotebookLM evidence/context assist → TAKY C2S authority/coverage → project manifest execution gate`.
+
+Consumer NotebookLM has no directly available ChatGPT plugin/API in the current environment, so direct notebook execution remains semi-automatic through Drive. This limitation is explicit and does not invalidate the C2S/context gate.
+
+## Recovered Ready implementation delta
+
+Live Ready source at `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca` reveals a contract gap not caught by existing green CI:
+
+- `ready-base-native-v2.js` collapses Planner selection to one task.
+- `ready-planner-selection-bridge-v1.js` collapses selection to one task.
+- `ready-base-runtime-v1.js` starts a session with only `tasks:[label]`.
+- Downstream REV_07 supports multiple tasks, but upstream does not supply them.
+- Today's Island / exploration pin is not yet a first-class runtime contract.
+
+Therefore:
+`CURRENT READY CI GREEN != RECOVERED EXPLORATION CONTRACT PASS`.
+
+Do not use a fake staging TODO to bypass this gap.
+
+## Newly explicit unresolved conflict
+
+Target time remains `OPEN_CONFLICT`:
+- REV_07: one target time / set one target time.
+- current runtime: target may be unset; `timeOptional:true`.
+
+No false convergence is allowed.
+
