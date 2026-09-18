@@ -60,6 +60,36 @@
       "source_pointer": "Google Drive 6aa* HTML source family",
       "actor_boundaries_preserved": false,
       "coverage_status": "ORIGINAL_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-RAWHTML-001",
+      "title": "6aa5daf5-3e74-83ee-9904-8e1fd63a3bc6",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 1_gxOTO50v0r9erXOw3HRh20Oyi5ZzoUF",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-001",
+      "title": "P01_SANITIZED_6aa5daf5_AI_WORK_OS_변화감시",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-001",
+      "source_pointer": "Google Drive id: 1arTPColgYjNlO0Upr5zbIVvyPVmRKF7tuZ9gjSYOpDA",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_51_MESSAGES"
     }
   ]
 }
