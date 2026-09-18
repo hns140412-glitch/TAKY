@@ -1,3 +1,8 @@
+## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 02
+- Added two more post-write-verified TAKY Core sanitized share transcripts.
+- Registered original-to-derivative lineage and message/non-text coverage counts.
+- Updated lightweight Topic Map routing; raw 6aa HTML remains NotebookLM-ineligible.
+
 ## 2026-09-19 — Saved share-page transcript sanitization
 - Added deterministic React Router share-payload decoder for saved ChatGPT 6aa HTML.
 - Extracts declared linear_conversation and emits USER/ASSISTANT-only NotebookLM candidate transcripts.
