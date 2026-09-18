@@ -125,3 +125,9 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Added repository-executable C2S-aware preflight bridge composing preflight + execution gate + conversation coverage gate.
 - Added expected-failure CI cases for missing and lossy coverage.
 - Hosted ChatGPT native automatic interception remains UNVERIFIED.
+
+## 2026-09-19 — Architecture C2S ledger / growth map
+- Compiled the current architecture-system conversation into 18 material C2S atoms with zero unmapped material items in the recovered scope.
+- Added `DOMAIN/ARCHITECTURE_GROWTH_MAP.md` to expose current maturity and missing flesh rather than treating the conceptual architecture OS skeleton as complete.
+- Added CI validation of the real architecture conversation ledger.
+- Next build priority is no longer conceptual restatement: company evidence/Golden Projects + SITE/LAW data/opportunity foundation, then Layout/Plan MVP.
