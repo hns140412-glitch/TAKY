@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "project_id": "READY_SET",
+  "project_name": "Ready & Set",
+  "aliases": [
+    "Ready & Set",
+    "Ready Set",
+    "래디앤셋",
+    "래디엔셋",
+    "R&S"
+  ],
+  "context_gate_required": true,
+  "recovery_policy": {
+    "order": [
+      "L0_HOT",
+      "L1_WARM",
+      "L2_NOTEBOOKLM_INDEXED",
+      "L3_RAW",
+      "L4_FULL_FORENSIC"
+    ],
+    "ask_last": true,
+    "full_scan_last": true,
+    "no_guess_on_missing_history": true
+  },
+  "required_taky_rules": [
+    "TKY-C2S-001",
+    "TKY-CONTINUITY-001",
+    "TKY-CONTEXT-001",
+    "TKY-VALIDATION-001",
+    "TKY-ENFORCEMENT-001"
+  ],
+  "required_project_contracts": [
+    {
+      "id": "READY_UI_MASTER_REV_07",
+      "source": "Ready-Set/Ready_Set_Ui_Master_Logic_REV_07.md",
+      "required": true
+    },
+    {
+      "id": "READY_EXPLORATION_CONTRACT",
+      "source": "TAKY/MASTER/READY_SET_EXPLORATION_CONTRACT.md",
+      "required": true
+    },
+    {
+      "id": "FAMILY_LEARNING_AUTHORITY",
+      "source": "TAKY/OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "required": true
+    }
+  ],
+  "required_current_state": [
+    "Ready repo branch/head and PR state",
+    "current CI regression state",
+    "staging/device-validation state",
+    "latest C2S Ready ledger/reflection",
+    "latest user correction lineage"
+  ],
+  "hard_locks": [
+    "Ready is BASE CAMP / Goal & Session Orchestrator, not only timer",
+    "Planner actual dated TODOs are exploration source; no fake task substitution",
+    "Today's Island / exploration-pin child entry",
+    "one exploration session may contain one or more Planner TODOs",
+    "ONE SESSION / ONE TARGET TIME / MULTIPLE TASKS / ONE ACTIVE TASK / ONE ACTIVE LAP",
+    "TASK_CHANGE = LAP_END + NEXT_LAP_START",
+    "APP_SWITCH != PAUSE",
+    "APP_SWITCH != LAP_END",
+    "APP_SWITCH != SESSION_END",
+    "SCREEN_LOCK != PAUSE",
+    "NETWORK_FAILURE != SESSION_END",
+    "SESSION_END != TASK_COMPLETE",
+    "truthful outcomes: COMPLETED/PARTIAL/DEFERRED/BLOCKED/WAITING_FOR_PARENT",
+    "recording is conditional; timer continues; BGM stops during recording",
+    "confirmed timer visual authority must not be redesigned",
+    "child-facing exploration vocabulary; do not revive Time Attack/Focus Mode/작전 as canonical UX",
+    "production/main promotion requires HUMAN APPROVAL"
+  ],
+  "known_conflicts_or_open": [
+    {
+      "id": "TARGET_TIME_REQUIRED_VS_OPTIONAL",
+      "status": "OPEN_CONFLICT",
+      "rule": "Do not silently resolve; target must never fabricate quantity/completion."
+    },
+    {
+      "id": "WEEKLY_DAILY_VISUAL_LOCK",
+      "status": "HOLD"
+    },
+    {
+      "id": "IPHONE_DEVICE_VALIDATION",
+      "status": "OPEN"
+    }
+  ],
+  "known_implementation_gaps": [
+    "upstream selection currently collapses Planner selection to a single task despite multi-task REV_07 contract",
+    "Today's Island exploration-pin entry is not yet first-class in runtime",
+    "project context auto-load was previously incomplete"
+  ],
+  "superseded_or_rejected": [
+    "Focus Mode as product authority",
+    "Time Attack as whole-product definition",
+    "old Golden assets/contracts",
+    "ready-focus-tools-v1.js",
+    "fake/fixed subject card as substitute for missing Planner TODO"
+  ],
+  "drive_long_memory": {
+    "ready_root_folder_id": "1-sTbdO_1J8T48E9yHOtYzoQwOfKXTLjl",
+    "sections": {
+      "01_MASTER_CURRENT": "1RBZ4lB1m2el47Txl1pyt28-1Ki4rPlrR",
+      "02_NOTION_PLANNER": "17TvoR6DbJ_hYB5RXMkBa5cdmqYszOmh1",
+      "03_UI_ASSETS": "1g5-zLROl9HKg9OxPcRBfVELjnh_uWXXU",
+      "04_PWA_RUNTIME": "1Z4R59ZmfkC9fakwFmgd5jLT726nRPQp7",
+      "05_TEST_EVIDENCE": "1-cqgnZNco45su5XZGXGQYoZvV6AJoRZA"
+    },
+    "current_truth_drive_id": "1zy1BDHat6JRhAIPVVN_p6nbGQA1H_E8x",
+    "whole_implementation_contract_drive_id": "1nv9blXYipUOYAf9uVOli_yU4Cb02u-hF"
+  },
+  "notebooklm_recovery": {
+    "control_drive_id": "1dgqKi8RgfNqw6N1rrUb2AdXnxgdbWuIrkUpHbjB1JTc",
+    "source_registry_drive_id": "1evykXjXeDKyr9RLMU9jhPpH9DdpkhIGDMwVi36S_afU",
+    "working_root_folder_id": "1oPL5KFjcrqr8yNmlVLr6adM1Wbo3V0Hk",
+    "c2s_review_root_folder_id": "1S04v5mn7R4oJ_EHnyerJQeKoJlQu3zd9",
+    "pack": "PILOT_02_READY_SET",
+    "authority": "REFERENCE_ONLY_EVIDENCE_ASSIST",
+    "pilot02": {
+      "raw_source_pack_folder_id": "1g1iUgymUq9_bhMnYpCHvOWECq-JfB_d2",
+      "working_folder_id": "1QxHAglij2bh9jqPiAodTH-7Jf7TpxMCw",
+      "output_folder_id": "1Zp--lnVnfWQjR3sTtWzPdXDo70mW8ac4",
+      "c2s_review_folder_id": "16CeRZlXDMU1qyGmruOfB16ZFvLLfZndi",
+      "accepted_backfill_folder_id": "1m8w7IYtqUR61Svl5jV5pEFfW01KkdpBH",
+      "current_delta_drive_id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+      "source_map_drive_id": "1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
+      "query_pack_drive_id": "15epLtehjeHUiPpyQ8EU5aPj_bnzH72Szdi8c1h0Kvuc",
+      "c2s_review_checklist_drive_id": "1p3i_BGSEcUm4zYSBnfrHKp-cgp3s8hx0U-jguNjP72w",
+      "raw_pack_sources": [
+        {
+          "id": "1Z18Jg4GCWaUIJYiQjzkFVAbpfMdBGM1C",
+          "class": "CURRENT_TRUTH_REFERENCE"
+        },
+        {
+          "id": "1qCcivWgMjr6yC6Hl_MwDt_4qnpEiQcZL",
+          "class": "PROJECT_CONTRACT_REFERENCE"
+        },
+        {
+          "id": "1R3Ha1sd1uOmIB2wEdh0udSD6PGRsTeU4sILglnOhPzA",
+          "class": "RAW_PRESERVED"
+        },
+        {
+          "id": "1zmPpOnj3ymdkS5_d9QTwWkIJx-i26KdayxDRVFQpztY",
+          "class": "RAW_PRESERVED"
+        },
+        {
+          "id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+          "class": "CURRENT_CONVERSATION_CAPTURE"
+        }
+      ]
+    }
+  },
+  "context_pass_conditions": [
+    "all required project contracts resolved",
+    "latest correction lineage loaded",
+    "current implementation authority loaded when implementation work is requested",
+    "OPEN/CONFLICT/HOLD preserved",
+    "no silent substitution from summary when raw recovery is needed",
+    "reverse reconstruction PASS"
+  ]
+}

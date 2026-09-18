@@ -237,4 +237,21 @@ A successful derivative is `RECOVERY_WITNESS_EVIDENCE`, not the original HTML an
 `SAFE DERIVATIVE != ORIGINAL SOURCE REPLACED`
 `LINEAR CONVERSATION RECOVERED != ALL ACCOUNT HISTORY RECOVERED`
 
+## 14. Project context recovery packs
+
+When a durable project has a Project Context Manifest, NotebookLM recovery SHOULD be partitioned by that project rather than relying on a global notebook.
+
+A project recovery pack SHOULD contain:
+- project current-truth/source-of-truth pointers;
+- relevant preserved conversation/source families;
+- latest correction candidates;
+- project-specific prompt set for chronology, correction lineage, decisions vs proposals, omissions, conflicts and reverse reconstruction;
+- output destination under `03_NOTEBOOKLM_OUTPUT`;
+- TAKY review destination under `04_TAKY_C2S_REVIEW`.
+
+For Ready & Set the registered pack name is `PILOT_02_READY_SET` and its routing authority is `PROJECTS/READY_SET_CONTEXT_MANIFEST.json`.
+
+Project pack output is still `REFERENCE_ONLY / EVIDENCE_ASSIST` until raw recheck and C2S coverage closure.
+
+
 END

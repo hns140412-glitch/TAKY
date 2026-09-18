@@ -125,15 +125,20 @@ Routine gaps use targeted L2/L3 retrieval.
 ## 5. New-chat resume rule
 
 For a new conversation using TAKY:
-1. load L1 state/canonical owners first;
-2. recover the active task/project and unresolved material deltas;
-3. continue without re-asking settled details;
-4. use L2/L3 only if the resumed task exposes a material gap or conflict.
+1. identify the active project/domain;
+2. if a project context manifest exists, load it before project implementation/validation;
+3. load L1 state/canonical owners required by that manifest;
+4. recover the active task/project and unresolved material deltas;
+5. validate required-context coverage; if required context is missing, recover it before executing dependent work;
+6. continue without re-asking settled details;
+7. use L2 NotebookLM/Drive and L3 raw verification only for material gaps/conflicts identified by the manifest or current task.
 
 A Handoff summary alone is insufficient when canonical/state pointers are available, but a full historical audit is also unnecessary.
 
 Default:
-`STATE -> APPLICABLE OWNER -> ACTIVE/OPEN DELTAS -> CONTINUE`.
+`PROJECT -> CONTEXT MANIFEST -> STATE/APPLICABLE OWNERS -> ACTIVE/OPEN DELTAS -> CONTEXT GATE -> CONTINUE`.
+
+`RECOVERABLE REQUIRED PROJECT CONTEXT MISSING + EXECUTION CONTINUES = FAIL`.
 
 ## 6. Same-chat continuation rule
 
