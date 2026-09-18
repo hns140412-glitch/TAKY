@@ -1,0 +1,20 @@
+{
+  "record_id": "CONTINUITY-PASS-002",
+  "intent": "RECALL",
+  "selected_level": "L3",
+  "levels_attempted": [
+    "L0",
+    "L1",
+    "L2",
+    "L3"
+  ],
+  "material_context_gap": true,
+  "escalation_reason": "NotebookLM identified a correction candidate that changes canonical interpretation; raw source verification required.",
+  "asked_user_to_repeat": false,
+  "recoverable_path_remaining": false,
+  "user_is_only_source": false,
+  "full_scan_explicit": false,
+  "notebooklm_used": true,
+  "l0_l1_sufficient": false,
+  "stop_reason": "SUFFICIENT_CONTEXT"
+}
