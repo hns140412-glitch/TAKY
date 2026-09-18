@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-19.4",
-  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement. Includes recovered-source fallback regression where direct external fetch fails but governed Notion/Drive snapshot evidence exists.",
+  "fixture_version": "2026-09-19.5",
+  "scope": "Additional deterministic cases for recovery-exhaustion/user-QA blocking, reference-only authority isolation, handoff bundle closure, and Notion link-review end-to-end source/analysis enforcement. Includes recovered-source fallback regression where direct external fetch fails but governed Notion/Drive snapshot evidence exists. Includes system-side Notion Work launch inventory-stability preflight and user-not-tester enforcement.",
   "cases": [
     {
       "id": "Q-01",
@@ -364,6 +364,44 @@
         "notion_browser_fallback_selected": true,
         "notion_unrelated_sibling_nodes_stalled": false,
         "claims_complete": true
+      }
+    },
+    {
+      "id": "N-07",
+      "phase": "unstable_inventory_user_smoke_test",
+      "expectation": "contains",
+      "expected_detected": [
+        "STALE_STATE",
+        "OMISSION",
+        "USER_AS_QA",
+        "USER_FORCED_RECOVERY",
+        "PREMATURE_PASS"
+      ],
+      "record": {
+        "notion_work_launch_preflight_required": true,
+        "notion_inventory_stability_reads": 1,
+        "notion_inventory_stable": false,
+        "notion_preflight_structured_state_complete": false,
+        "notion_preflight_fallback_archives_verified": false,
+        "notion_preflight_priority_state_consistent": false,
+        "notion_user_used_as_smoke_tester": true,
+        "claims_complete": true
+      }
+    },
+    {
+      "id": "N-07",
+      "phase": "stable_system_side_preflight",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "notion_work_launch_preflight_required": true,
+        "notion_inventory_stability_reads": 2,
+        "notion_inventory_stable": true,
+        "notion_preflight_structured_state_complete": true,
+        "notion_preflight_fallback_archives_verified": true,
+        "notion_preflight_priority_state_consistent": true,
+        "notion_user_used_as_smoke_tester": false,
+        "claims_complete": false
       }
     }
   ]
