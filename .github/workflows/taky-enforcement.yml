@@ -12,6 +12,8 @@ on:
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
       - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
       - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
       - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
@@ -39,6 +41,8 @@ on:
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
       - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
       - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
       - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
       - 'MASTER/ENFORCEMENT_PROTOCOL.md'
@@ -81,6 +85,7 @@ jobs:
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
+          python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -146,3 +151,21 @@ jobs:
           echo "Expected NotebookLM source-security failure observed"
       - name: Validate NotebookLM Pilot 01 source registry
         run: python ENFORCEMENT/notebooklm_source_validator.py HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json
+      - name: Validate lightweight conversation continuity
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_pass.json
+      - name: Validate targeted historical recovery
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_targeted_pass.json
+      - name: Reject recoverable-context re-ask
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_reask_fail.json; then
+            echo "Expected ASK LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected recoverable-context re-ask failure observed"
+      - name: Reject unnecessary full-history load
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_heavy_fail.json; then
+            echo "Expected FULL SCAN LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected unnecessary full-scan failure observed"
