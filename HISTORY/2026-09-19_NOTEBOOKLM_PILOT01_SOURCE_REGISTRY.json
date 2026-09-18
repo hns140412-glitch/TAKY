@@ -150,6 +150,66 @@
       "source_pointer": "Google Drive id: 1xQ_ArTKEskEb6csg0MA5cg7tVWk5givko5_GOmiFfNU",
       "actor_boundaries_preserved": true,
       "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_931_MESSAGES_NON_TEXT_MARKERS_1"
+    },
+    {
+      "source_id": "P01-RAWHTML-004",
+      "title": "6aa5db28-4fb8-83ee-9fa8-d900c73ec144 — 대화 복구 진행",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 1t58_qRnR265U6O5Wa-3k7_doB2nVINAa",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-004",
+      "title": "P01_SANITIZED_6aa5db28_대화 복구 진행",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-004",
+      "source_pointer": "Google Drive id: 1XTNvfcBTVHI1pj_aJxiXhhovxpL-z8iAAXudB_aylXI",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_2026_MESSAGES_NON_TEXT_MARKERS_100"
+    },
+    {
+      "source_id": "P01-RAWHTML-005",
+      "title": "6aa5db60-7a18-83ee-9e30-6b9f1c2b810f — 노션 구조 수정 재개",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 1h2cqFfCQlBk_JRP3QZJcPaaAXfzLxGD4",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-005",
+      "title": "P01_SANITIZED_6aa5db60_노션 구조 수정 재개",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-005",
+      "source_pointer": "Google Drive id: 1P4eI9nBPd-L7dMtO_h3hdI6LEr8P6D507Trv1nulqlk",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_211_MESSAGES_NON_TEXT_MARKERS_0"
     }
   ]
 }

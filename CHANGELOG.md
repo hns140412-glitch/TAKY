@@ -1,3 +1,8 @@
+## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 03
+- Added post-write-verified sanitized sources for conversation recovery continuity and Notion/Work OS history.
+- Registered original-to-derivative lineage with explicit non-text coverage.
+- Updated targeted L2 routing; non-text material remains L3 original/attachment verification only.
+
 ## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 02
 - Added two more post-write-verified TAKY Core sanitized share transcripts.
 - Registered original-to-derivative lineage and message/non-text coverage counts.
