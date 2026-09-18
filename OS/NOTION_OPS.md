@@ -99,6 +99,80 @@ Canonical load order remains:
 
 A review register SHALL NOT outrank current canonical TAKY or a later valid user correction.
 
+## 1.5 Notion Link Intelligence Review — END-TO-END HARD LOCK
+
+This section defines the execution contract for `노션검토` / `/노션링크검토` when reviewing `📚 나의 링크` or another explicitly named Notion content/reference queue.
+
+The requested result has two mandatory phases:
+
+### Phase A — Source Acquisition / Source Graph Closure
+
+For each in-scope review record:
+
+`NOTION RECORD → RAW/ROOT URL → ORIGINAL MATERIAL → MATERIAL ATTACHMENTS / EMBEDS → MATERIAL CHILD URLS / REFERENCED SITES → SOURCE GRAPH CLOSURE`.
+
+Rules:
+- A Notion-saved excerpt/body is useful captured evidence but SHALL NOT substitute for attempting the original/root URL when one exists and is materially accessible.
+- Inspect the original material at sufficient depth to understand the material claims/instructions, not merely its title, social preview, logo, or metadata.
+- Inventory attachments, downloadable files, embedded documents/media, child URLs and referenced sites discovered in the material.
+- Follow descendants only when material to factual understanding, source authority, implementation instructions, applicability, comparison, risk, or adoption/reflection. Incidental navigation, ads, unrelated social links and decorative assets may be `NOT_MATERIAL`.
+- Descendants may reveal further material descendants; continue until no undispositioned material node remains or a bounded real access/capability blocker is recorded.
+- Every discovered material node SHALL end with an explicit source disposition such as `VERIFIED / CAPTURED / PARTIAL / UNAVAILABLE / NOT_MATERIAL`, plus a recoverable pointer/evidence note when available.
+- An inaccessible material node SHALL remain explicit; do not infer its unseen contents. Source graph closure means every material node is dispositioned, not that every node was successfully retrieved.
+- Preserve the raw URL before normalization. URL normalization is comparison aid only and does not prove content identity.
+
+A source-acquisition execution record SHOULD preserve, as applicable:
+- root source attempted / recovered state;
+- source graph or equivalent root→descendant relation;
+- material node discovered/dispositioned counts;
+- attachment/child/reference URL inventory;
+- per-node recovery path and evidence;
+- unavailable/partial limitations;
+- source/content fingerprint or version where available.
+
+`NOTION BODY READ ≠ ORIGINAL SOURCE REVIEWED`.
+`ROOT URL OPENED ≠ DESCENDANT SOURCE GRAPH CLOSED`.
+`SOURCE GRAPH CLOSED ≠ ALL SOURCES VERIFIED`.
+
+### Phase B — Analysis / Compare / Improve
+
+Only after Phase A is sufficiently closed for the available scope, analyze the acquired evidence:
+
+`ACQUIRED SOURCE GRAPH → EXTRACT MATERIAL CLAIMS / METHODS / IDEAS → COMPARE WITH APPLICABLE TAKY / DOMAIN / PROJECT / PRIOR REVIEW EVIDENCE → DUPLICATION / CONFLICT / GAP / NOVEL VALUE / APPLICABILITY → COMPLEMENT / IMPROVEMENT → DISPOSITION / OWNER / NEXT ACTION`.
+
+Required behaviors:
+- distinguish source claims from verified facts and from TAKY conclusions;
+- compare against the actually applicable current owner rather than generic best practice;
+- identify what is already present, what is materially new, what conflicts, what is weaker/obsolete, and what should be improved;
+- localize reusable principles instead of copying an external system wholesale;
+- produce concrete complement/improvement deltas where material;
+- record `PRESERVE / ADOPT / ADJUST / HOLD / REJECT / CONFLICT / SUPERSEDED` and target owner/next action as applicable;
+- retain `REFERENCE_ONLY / NON_EXECUTABLE` until governed reflection is complete.
+
+### Completion Gate
+
+A link-review item SHALL NOT be reported as complete merely because:
+- database properties/views were cleaned up;
+- the Notion-saved text was summarized;
+- only the root URL was opened;
+- attachments/reference URLs were discovered but left undispositioned;
+- information was collected but not analyzed/compared;
+- analysis was produced without concrete improvement/disposition when material.
+
+A completed available-scope review requires:
+1. root/original source attempted when applicable;
+2. material descendants inventoried;
+3. every discovered material source node explicitly dispositioned;
+4. source graph closed for the recovered/attempted scope;
+5. analysis completed;
+6. comparison against applicable current owners/evidence completed;
+7. complement/improvement completed when material;
+8. review-register state/evidence updated.
+
+If a material source remains inaccessible, the review may close only with the limitation explicitly preserved and claims bounded accordingly; it SHALL NOT become source-verified merely to obtain completion.
+
+The deterministic execution expression is owned by `MASTER/ENFORCEMENT_PROTOCOL.md` / `ENFORCEMENT/taky_gate.py`.
+
 ## 2. Recommended Minimal Data Model
 Project-specific implementation may specialize this model, but a robust baseline is:
 
