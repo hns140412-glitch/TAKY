@@ -126,7 +126,27 @@
     "query_pack_drive_id": "1Pt4LyVe9iPp006OrgAQ8CsEkVt0-4pPPHtgdGP4HI8M",
     "c2s_review_checklist_drive_id": "1iZakdXiw46RS4u_h9YlL1ULE7K3_X7jsontC9PtsNhU",
     "source_pack_index_drive_id": "1O9Q66kWExUcsIJnQapUiSQ1rtSm5_2kJ3iq4NoLSZZ0",
-    "freshness_boundary": "Ready & Set material sources through 2026-09-19 must be represented or explicitly UNVERIFIED_SOURCE_COVERAGE before completeness claims."
+    "freshness_boundary": "Ready & Set material sources through 2026-09-19 must be represented or explicitly UNVERIFIED_SOURCE_COVERAGE before completeness claims.",
+    "canonical_pack": {
+      "raw_pack_folder_id": "1g1iUgymUq9_bhMnYpCHvOWECq-JfB_d2",
+      "working_folder_id": "1QxHAglij2bh9jqPiAodTH-7Jf7TpxMCw",
+      "output_folder_id": "1Zp--lnVnfWQjR3sTtWzPdXDo70mW8ac4",
+      "c2s_review_folder_id": "16CeRZlXDMU1qyGmruOfB16ZFvLLfZndi",
+      "accepted_backfill_folder_id": "1m8w7IYtqUR61Svl5jV5pEFfW01KkdpBH",
+      "source_map_drive_id": "1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
+      "query_pack_drive_id": "15epLtehjeHUiPpyQ8EU5aPj_bnzH72Szdi8c1h0Kvuc",
+      "c2s_review_checklist_drive_id": "1p3i_BGSEcUm4zYSBnfrHKp-cgp3s8hx0U-jguNjP72w",
+      "current_delta_drive_id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4"
+    },
+    "duplicate_pack_created_during_recovery": {
+      "status": "DUPLICATE_SUPERSEDED",
+      "raw_pack_folder_id": "1lU_A3SgEeC8otNawH_hKIu3mY7LVR9My",
+      "working_folder_id": "1h65ESNj86w-QjOCpt1M5g2HPWTgCCcMK",
+      "output_folder_id": "1P2rsBAVyJFSJ4vfEnI38VoHBFElwOTlW",
+      "c2s_review_folder_id": "1gFSg91qFPy4rvZbN2f2VMXxbmcHln0_X",
+      "accepted_backfill_folder_id": "1wq0qXyZM16LTpGXJY6Hzp37RFxosH4cc",
+      "reason": "Existing source-registry-backed PILOT_02_READY_SET pack already contained fresher current-delta/source-map material and is canonical."
+    }
   },
   "context_pass_conditions": [
     "all required project contracts resolved",
