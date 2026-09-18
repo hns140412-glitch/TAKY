@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.2",
+  "registry_version": "2026-09-19.4",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -61,6 +61,11 @@
       "rule_id": "TKY-NBLM-001",
       "owner": "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md",
       "scope": "NotebookLM-assisted conversation recovery, source-security intake, authority isolation and C2S backfill"
+    },
+    {
+      "rule_id": "TKY-CONTEXT-001",
+      "owner": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
+      "scope": "project context manifest loading, layered NotebookLM/Drive recovery, required-context coverage and execution blocking"
     }
   ]
 }
