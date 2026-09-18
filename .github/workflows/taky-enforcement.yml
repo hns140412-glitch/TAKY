@@ -86,6 +86,8 @@ jobs:
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -169,3 +171,15 @@ jobs:
             exit 1
           fi
           echo "Expected unnecessary full-scan failure observed"
+      - name: Validate saved-share transcript sanitization
+        run: |
+          python ENFORCEMENT/chatgpt_share_transcript_sanitizer.py ENFORCEMENT/fixtures/chatgpt_share_fixture.html -o /tmp/share.md
+          python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/share.md
+          diff -u ENFORCEMENT/fixtures/chatgpt_share_expected.md /tmp/share.md
+      - name: Reject unsafe sanitized transcript
+        run: |
+          if python ENFORCEMENT/chatgpt_share_transcript_validator.py ENFORCEMENT/fixtures/chatgpt_share_unsafe.md; then
+            echo "Expected unsafe transcript to be rejected"
+            exit 1
+          fi
+          echo "Expected unsafe transcript failure observed"
