@@ -270,6 +270,36 @@
       "source_pointer": "Google Drive id: 1jpI0JN_XO2CYjxhrFwqDFs93i-YPja3Dj5TvNEuxwM8",
       "actor_boundaries_preserved": true,
       "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_217_MESSAGES_NON_TEXT_MARKERS_4"
+    },
+    {
+      "source_id": "P01-RAWHTML-008",
+      "title": "6aa5dadd-ee10-83ee-82f6-a09eca4d4ef2 — 타키 기준 불러오기",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 14x4WbSvba2fHoxn3YqZ-MoA6bNSjfLE1",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-008",
+      "title": "P01_SANITIZED_6aa5dadd_타키 기준 불러오기",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-008",
+      "source_pointer": "Google Drive id: 1YuMFJ9kePRLS-5Jza7Mb8Yw7ElE3bLZPYAHVxQ37HWs",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_85_MESSAGES_NON_TEXT_MARKERS_6"
     }
   ]
 }
