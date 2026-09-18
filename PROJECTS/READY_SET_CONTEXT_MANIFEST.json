@@ -155,5 +155,7 @@
     "OPEN/CONFLICT/HOLD preserved",
     "no silent substitution from summary when raw recovery is needed",
     "reverse reconstruction PASS"
-  ]
+  ],
+  "current_resolution": "HISTORY/2026-09-19_READY_SET_CONTEXT_RESOLUTION.json",
+  "recovered_current_truth": "PROJECTS/READY_SET_RECOVERED_CURRENT_TRUTH_2026-09-19.md"
 }
