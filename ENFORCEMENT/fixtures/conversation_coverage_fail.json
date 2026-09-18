@@ -1,0 +1,40 @@
+{
+  "ledger_id": "FIXTURE-C2S-FAIL-001",
+  "source_scope": {
+    "description": "representative incomplete conversation scope",
+    "coverage_status": "RECOVERED_SCOPE_COMPLETE"
+  },
+  "atoms": [
+    {
+      "atom_id": "A-001",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:1",
+      "content": "Preserve details.",
+      "disposition": "ADOPT",
+      "destination": "MASTER"
+    },
+    {
+      "atom_id": "A-002",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2",
+      "content": "Do not flatten corrections.",
+      "disposition": "ADJUST",
+      "destination": "MASTER"
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 2,
+    "mapped_material": 2,
+    "unmapped_material": 0,
+    "silent_loss_count": 1,
+    "false_convergence_count": 0
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": false,
+    "open_items_reconstructable": true,
+    "why_preserved": true
+  }
+}
