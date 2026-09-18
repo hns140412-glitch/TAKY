@@ -116,3 +116,16 @@ Project outcomes, client feedback, approvals, review comments, cost/constructabi
 Architecture conversations that define or refine company methods SHALL compile through TKY-C2S-001. A high-level architecture skeleton is not complete merely because its headings exist. Track missing flesh such as law/data sources, exceptions, algorithms, unit/core/detail libraries, implementation, runtime linkage, test cases and outcome feedback.
 
 The next domain improvement SHOULD target the highest-value missing flesh or frontier hypothesis rather than only rephrasing current principles.
+
+## 8. ACTIVE GROWTH MAP / C2S SOURCE
+
+The current architecture skeleton-to-flesh status, maturity gaps and build priorities are tracked in:
+- `DOMAIN/ARCHITECTURE_GROWTH_MAP.md`.
+
+The conversation-derived source ledger for the 2026-09-19 architecture-system design episode is:
+- `HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json`.
+
+These files do not override this domain owner. The Growth Map directs unfinished capability development; the C2S ledger preserves requirement/correction/frontier lineage and coverage evidence.
+
+`GROWTH MAP != CANONICAL SEMANTIC OWNER`
+`C2S LEDGER != AUTOMATIC AUTHORITY PROMOTION`
