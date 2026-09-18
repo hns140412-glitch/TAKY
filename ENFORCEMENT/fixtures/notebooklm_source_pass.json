@@ -1,0 +1,38 @@
+{
+  "registry_id": "NBLM-FIXTURE-PASS-001",
+  "sources": [
+    {
+      "source_id": "RAW-001",
+      "title": "Preserved transcript",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false,
+      "actor_boundaries_preserved": true
+    },
+    {
+      "source_id": "HTML-001",
+      "title": "Saved shared page",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "actor_boundaries_preserved": false
+    },
+    {
+      "source_id": "NBLM-OUT-001",
+      "title": "Notebook analysis",
+      "source_class": "NOTEBOOKLM_OUTPUT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": false,
+      "authority_status": "EVIDENCE_ASSIST",
+      "contains_session_or_auth_data": false,
+      "actor_boundaries_preserved": true
+    }
+  ]
+}
