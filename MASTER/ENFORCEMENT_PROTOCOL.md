@@ -128,6 +128,31 @@ When the user requests a concrete artifact/action/result and the system has auth
 
 If a concrete authorized result was required and the response stopped at explanation/plan, classify at least `SUBSTITUTE_RESULT`; add `OUTPUT_FORM_MISMATCH` when the requested form was not supplied, and `PREMATURE_STOP` when delegated continuation was also active.
 
+## 4.3 Notion link-review execution gate — HARD LOCK
+
+Semantic workflow ownership remains `OS/NOTION_OPS.md` (TKY-NOTION-001). This section only defines the auditable execution expression.
+
+When an execution record sets `notion_link_review_required=true`, the deterministic gate SHALL verify at least:
+- root/original source was attempted when applicable;
+- material descendants were inventoried;
+- material source-node discovered and dispositioned counts close;
+- source graph is closed for the attempted/recovered scope;
+- analysis is complete;
+- comparison is complete;
+- complement/improvement is complete when material;
+- the review record/evidence state was updated;
+- database housekeeping was not substituted for the requested link/content review.
+
+Missing Phase A source acquisition/closure ⇒ at least `OMISSION`.
+Missing Phase B analysis/compare/improvement, or database-housekeeping-only substitution ⇒ at least `SUBSTITUTE_RESULT`.
+If completion is claimed while either failure is present ⇒ `PREMATURE_PASS` through the existing completion gate.
+
+Representative historical-failure and post-fix cases SHALL live in the replay fixtures.
+
+`DATABASE CLEANUP ≠ NOTION LINK REVIEW`.
+`NOTION SUMMARY ≠ SOURCE GRAPH CLOSURE`.
+`SOURCE COLLECTION ≠ ANALYSIS / COMPARE / IMPROVE`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
