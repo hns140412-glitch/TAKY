@@ -1,3 +1,9 @@
+## 2026-09-19 — C2S runtime activation bridge
+- Added conditional runtime routing for conversation-derived canonical/system updates.
+- Added C2S-aware repository preflight composition and CI pass/fail coverage cases.
+- Bound `타키 반영 / ㄱ / 대화 종료 / /대화전체보존 / /재개` to explicit C2S semantics without making ordinary chat heavyweight.
+- Preserved hosted-runtime auto-invocation as UNVERIFIED rather than overclaiming enforcement.
+
 ## 2026-09-19 — Conversation-to-System growth hardening
 - Added canonical TKY-C2S-001 conversation-to-system protocol.
 - Added atomic coverage JSON schema and deterministic coverage validator with PASS/FAIL fixtures.
