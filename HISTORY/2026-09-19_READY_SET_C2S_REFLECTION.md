@@ -72,3 +72,32 @@ Weekly/daily schedule structure direction remains known but final visual design 
 Reverse reconstruction: PASS for this declared resume scope.
 
 END
+
+
+## Correction — false Home Screen PASS revoked
+An earlier assistant judgment incorrectly treated a Home Screen screenshot as proof that the staging PWA had been installed. The user correctly identified that the icon launched the existing main/production PWA.
+
+Root cause:
+- production/main and preview used the same visible app identity: `Ready & Set`
+- same icon
+- same Apple web app title
+- therefore screenshot-only visual confirmation could not prove staging provenance
+
+The PASS was revoked.
+
+## Staging-only PWA identity overlay
+To remove ambiguity without modifying the product runtime branch, Draft PR #5's staging branch now carries a staging-only identity overlay:
+
+- branch HEAD: `f1d057ee493d95f12e25ed74ad0ee7e2727ac4c0`
+- manifest id: `ready-set-staging-preview-5`
+- name: `Ready & Set STAGING`
+- short name: `R&S STAGING`
+- start URL: `./?staging=preview-5`
+- Apple web app title: `R&S STAGING`
+- deploy id: `6aadb800fee3ea0008aee104`
+- Netlify state: `ready`
+- GitHub Netlify status: `success`
+- PR #5 remains Draft / OPEN / UNMERGED
+- main and production remain unchanged
+
+Device validation should use the immutable deploy permalink for this deploy rather than the production PWA or an ambiguous Home Screen icon.
