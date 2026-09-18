@@ -117,7 +117,16 @@
     "working_root_folder_id": "1oPL5KFjcrqr8yNmlVLr6adM1Wbo3V0Hk",
     "c2s_review_root_folder_id": "1S04v5mn7R4oJ_EHnyerJQeKoJlQu3zd9",
     "pack": "PILOT_02_READY_SET",
-    "authority": "REFERENCE_ONLY_EVIDENCE_ASSIST"
+    "authority": "REFERENCE_ONLY_EVIDENCE_ASSIST",
+    "raw_pack_folder_id": "1lU_A3SgEeC8otNawH_hKIu3mY7LVR9My",
+    "working_folder_id": "1h65ESNj86w-QjOCpt1M5g2HPWTgCCcMK",
+    "output_folder_id": "1P2rsBAVyJFSJ4vfEnI38VoHBFElwOTlW",
+    "c2s_review_folder_id": "1gFSg91qFPy4rvZbN2f2VMXxbmcHln0_X",
+    "accepted_backfill_folder_id": "1wq0qXyZM16LTpGXJY6Hzp37RFxosH4cc",
+    "query_pack_drive_id": "1Pt4LyVe9iPp006OrgAQ8CsEkVt0-4pPPHtgdGP4HI8M",
+    "c2s_review_checklist_drive_id": "1iZakdXiw46RS4u_h9YlL1ULE7K3_X7jsontC9PtsNhU",
+    "source_pack_index_drive_id": "1O9Q66kWExUcsIJnQapUiSQ1rtSm5_2kJ3iq4NoLSZZ0",
+    "freshness_boundary": "Ready & Set material sources through 2026-09-19 must be represented or explicitly UNVERIFIED_SOURCE_COVERAGE before completeness claims."
   },
   "context_pass_conditions": [
     "all required project contracts resolved",
