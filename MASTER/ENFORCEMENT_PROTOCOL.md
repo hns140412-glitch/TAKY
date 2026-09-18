@@ -267,4 +267,24 @@ Representative actual pilot registry:
 
 This gate validates declared metadata consistency. It does not prove semantic completeness of the underlying file, inaccessible-history recovery or consumer NotebookLM UI execution.
 
+
+## 16. Saved-share transcript sanitization gate — HARD LOCK
+
+Saved ChatGPT share-page HTML SHALL NOT be passed directly to NotebookLM when session/bootstrap/auth material is present.
+
+Repository reference path:
+```bash
+python ENFORCEMENT/chatgpt_share_transcript_sanitizer.py ENFORCEMENT/fixtures/chatgpt_share_fixture.html -o /tmp/share.md
+python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/share.md
+diff -u ENFORCEMENT/fixtures/chatgpt_share_expected.md /tmp/share.md
+```
+
+Expected-failure safety case:
+```bash
+python ENFORCEMENT/chatgpt_share_transcript_validator.py ENFORCEMENT/fixtures/chatgpt_share_unsafe.md
+```
+MUST fail.
+
+The sanitizer/validator proves transcript extraction and declared security-pattern exclusion for the processed file. It does not prove semantic completeness outside that saved page's `linear_conversation`.
+
 END
