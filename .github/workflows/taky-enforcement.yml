@@ -19,6 +19,8 @@ on:
       - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
       - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/COMMAND_INTERACTION.md'
       - '.github/workflows/taky-enforcement.yml'
   pull_request:
     paths:
@@ -38,6 +40,8 @@ on:
       - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
       - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/COMMAND_INTERACTION.md'
       - '.github/workflows/taky-enforcement.yml'
 
 permissions:
@@ -63,6 +67,7 @@ jobs:
           python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
+          python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -90,3 +95,28 @@ jobs:
             exit 1
           fi
           echo "Expected failure observed"
+      - name: Validate C2S runtime bridge
+        run: |
+          python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_pass.json \
+            --repo-root .
+      - name: Reject C2S runtime bridge without coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject missing coverage"
+            exit 1
+          fi
+          echo "Expected missing-coverage failure observed"
+      - name: Reject C2S runtime bridge with lossy coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_fail.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject lossy coverage"
+            exit 1
+          fi
+          echo "Expected lossy-coverage failure observed"
