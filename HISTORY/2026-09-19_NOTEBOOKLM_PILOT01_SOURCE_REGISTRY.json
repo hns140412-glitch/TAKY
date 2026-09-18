@@ -1,0 +1,65 @@
+{
+  "registry_id": "NBLM-PILOT01-TAKY-CORE-20260919",
+  "sources": [
+    {
+      "source_id": "P01-RAW-001",
+      "title": "TAKY_GUIDE_대화전체보존_RAW_2026-09-07_0035KST.md",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive title: TAKY_GUIDE_대화전체보존_RAW_2026-09-07_0035KST.md",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "PARTIAL_WITH_EXPLICIT_UNVERIFIED_SOURCE_COVERAGE"
+    },
+    {
+      "source_id": "P01-RAW-002",
+      "title": "TAKY_대화전체보존_2026-09-07.txt",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive title: TAKY_대화전체보존_2026-09-07.txt",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "PARTIAL_WITH_EXPLICIT_UNVERIFIED_SOURCE_COVERAGE"
+    },
+    {
+      "source_id": "P01-REF-001",
+      "title": "TAKY_WORK_OS_대화전체기록_복구본_2026-09-06.txt",
+      "source_class": "DERIVED_ANALYSIS",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "REFERENCE_ONLY",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "mixed accessible raw turns + prior summary/handoff material",
+      "source_pointer": "Google Drive title: TAKY_WORK_OS_대화전체기록_복구본_2026-09-06.txt",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "MIXED_RECOVERY_SUMMARY_AND_TRANSCRIPT"
+    },
+    {
+      "source_id": "P01-HOLD-6AA",
+      "title": "Representative 6aa* saved ChatGPT share-page HTML",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive 6aa* HTML source family",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_PAGE_EVIDENCE_SECURITY_HOLD"
+    }
+  ]
+}
