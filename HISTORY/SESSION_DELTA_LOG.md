@@ -232,3 +232,9 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - RVR-136/137 were conservatively initialized as ATTEMPTED + OPEN because their Notion bodies contained captured source text/normalized URLs but current root closure was not established.
 - New rule: require at least two stable inventory reads separated by other validation work before declaring Work launch ready; user-run Work is not the test harness.
 
+## 2026-09-19 — Work preflight inventory mutation discovered during validation
+- During system-side validation, `📚 나의 링크` changed from 126 to 128 rows when RVR-136 and RVR-137 were created by another active process.
+- This proved that a single clean inventory read is insufficient before Work launch.
+- RVR-136 and RVR-137 were initialized conservatively as `ATTEMPTED / OPEN` because their Notion bodies contain captured material but their external root URL field was blank and current source-graph closure was not established.
+- New rule: Work launch readiness requires two stable independent inventory reads plus structured-state completeness, fallback archive verification, and P0/P1 state consistency; if the inventory mutates, readiness fails closed and validation repeats without using the user as tester.
+
