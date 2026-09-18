@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.3",
+  "registry_version": "2026-09-19.4",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -66,6 +66,11 @@
       "rule_id": "TKY-CONTINUITY-001",
       "owner": "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md",
       "scope": "cross-chat continuity, progressive context recovery, no-reask recovery, context economy and full-scan restraint"
+    },
+    {
+      "rule_id": "TKY-CONTEXT-001",
+      "owner": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
+      "scope": "project context manifest, required-context loading, NotebookLM/Drive escalation and fail-closed execution gate"
     }
   ]
 }
