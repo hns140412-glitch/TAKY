@@ -210,6 +210,66 @@
       "source_pointer": "Google Drive id: 1P4eI9nBPd-L7dMtO_h3hdI6LEr8P6D507Trv1nulqlk",
       "actor_boundaries_preserved": true,
       "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_211_MESSAGES_NON_TEXT_MARKERS_0"
+    },
+    {
+      "source_id": "P01-RAWHTML-006",
+      "title": "6aa5dbd1-7a88-83e8-93d9-93183c6ac14e — 노션 연결 방법 안내",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 19YpkjRaZMdqpLpBqQrOVeqW3C_BxEZ5p",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-006",
+      "title": "P01_SANITIZED_6aa5dbd1_노션 연결 방법 안내",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-006",
+      "source_pointer": "Google Drive id: 15IC9nIvXfpO7XBoz3rZO_eWFHxT3eIVbeE7D7P54z-Y",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_777_MESSAGES_NON_TEXT_MARKERS_32"
+    },
+    {
+      "source_id": "P01-RAWHTML-007",
+      "title": "6aa5db11-0384-83e8-b10e-3f7930dc34ec — 모바일 기능 연결",
+      "source_class": "PAGE_CAPTURE",
+      "content_checked": true,
+      "security_status": "SANITIZE_REQUIRED",
+      "notebooklm_eligible": false,
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": true,
+      "duplicate_of": null,
+      "derived_from": null,
+      "source_pointer": "Google Drive id: 1Ly3vhaf64zTAM2FLaiCvxmiWVsHpfFg1",
+      "actor_boundaries_preserved": false,
+      "coverage_status": "ORIGINAL_SAVED_SHARE_PAGE_EVIDENCE_SECURITY_HOLD"
+    },
+    {
+      "source_id": "P01-SAN-007",
+      "title": "P01_SANITIZED_6aa5db11_모바일 기능 연결",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "notebooklm_eligible": true,
+      "authority_status": "RECOVERY_WITNESS_EVIDENCE",
+      "contains_session_or_auth_data": false,
+      "duplicate_of": null,
+      "derived_from": "P01-RAWHTML-007",
+      "source_pointer": "Google Drive id: 1jpI0JN_XO2CYjxhrFwqDFs93i-YPja3Dj5TvNEuxwM8",
+      "actor_boundaries_preserved": true,
+      "coverage_status": "SAVED_PAGE_LINEAR_CONVERSATION_USER_ASSISTANT_217_MESSAGES_NON_TEXT_MARKERS_4"
     }
   ]
 }
