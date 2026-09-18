@@ -1,0 +1,37 @@
+{
+  "fixture_version": "2026-09-19.1",
+  "purpose": "Zero-prior-context replay for the literal command 노션검토.",
+  "user_input": "노션검토",
+  "prior_context": [],
+  "assistant_result": {
+    "requires_taky_prefix": false,
+    "selected_workflow": "NOTION_LINK_INTELLIGENCE_REVIEW",
+    "target_collection": "📚 나의 링크",
+    "required_phases": [
+      "SOURCE_ACQUISITION",
+      "SOURCE_GRAPH_CLOSURE",
+      "ANALYSIS",
+      "COMPARE",
+      "IMPROVE",
+      "REVIEW_RECORD_UPDATE"
+    ],
+    "structure_audit_is_default": false,
+    "canonical_write_authorized": false,
+    "execution_record": {
+      "notion_link_review_required": true,
+      "notion_root_source_applicable": true,
+      "notion_root_source_attempted": true,
+      "notion_material_descendants_inventoried": true,
+      "notion_material_source_nodes_discovered": 3,
+      "notion_material_source_nodes_dispositioned": 3,
+      "notion_source_graph_closed": true,
+      "notion_structured_source_evidence_present": true,
+      "notion_analysis_completed": true,
+      "notion_compare_completed": true,
+      "notion_improvement_assessment_completed": true,
+      "notion_review_record_updated": true,
+      "notion_database_housekeeping_only": false,
+      "claims_complete": true
+    }
+  }
+}
