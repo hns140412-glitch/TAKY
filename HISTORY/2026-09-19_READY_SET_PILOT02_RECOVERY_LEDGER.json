@@ -34,7 +34,8 @@
       "disposition": "ADOPT",
       "destination": "TKY-CONTEXT-001 / READY_SET_CONTEXT_MANIFEST",
       "implementation_status": "IMPLEMENTED_IN_PR22",
-      "verification_status": "CI_VERIFIED"
+      "verification_status": "CI_VERIFIED",
+      "source_pointer": "current_chat:2026-09-19:user:타키기준기억질문 + PROJECTS/READY_SET_CONTEXT_MANIFEST.json"
     },
     {
       "atom_id": "RNS-P02-002",
@@ -45,7 +46,8 @@
       "disposition": "ADOPT",
       "destination": "TKY-NBLM-001 / PILOT_02_READY_SET",
       "implementation_status": "DRIVE_PACK_IMPLEMENTED_DIRECT_NOTEBOOKLM_CONNECTOR_UNAVAILABLE",
-      "verification_status": "STRUCTURE_VERIFIED"
+      "verification_status": "STRUCTURE_VERIFIED",
+      "source_pointer": "current_chat:2026-09-19:user:NotebookLM_C2S_완결성_구현요청 + Drive:PILOT_02_READY_SET"
     },
     {
       "atom_id": "RNS-P02-003",
@@ -56,7 +58,8 @@
       "disposition": "ADOPT",
       "destination": "MASTER/READY_SET_EXPLORATION_CONTRACT.md",
       "implementation_status": "PARTIAL_RUNTIME",
-      "verification_status": "SOURCE_AND_CODE_REVIEWED"
+      "verification_status": "SOURCE_AND_CODE_REVIEWED",
+      "source_pointer": "Drive:P02_CUR_01_READY_CURRENT_TRUTH_LATEST.md#ReadyProductCurrentTruth + MASTER/READY_SET_EXPLORATION_CONTRACT.md"
     },
     {
       "atom_id": "RNS-P02-004",
@@ -67,7 +70,8 @@
       "disposition": "ADOPT",
       "destination": "MASTER/READY_SET_EXPLORATION_CONTRACT.md",
       "implementation_status": "NOT_FIRST_CLASS_RUNTIME",
-      "verification_status": "GAP_CONFIRMED"
+      "verification_status": "GAP_CONFIRMED",
+      "source_pointer": "Drive:P02_CUR_01_READY_CURRENT_TRUTH_LATEST.md#CurrentChildParentHomeModel + current_chat:탐험기준누락정정"
     },
     {
       "atom_id": "RNS-P02-005",
@@ -78,7 +82,8 @@
       "disposition": "PRESERVE",
       "destination": "Ready REV_07 + exploration contract",
       "implementation_status": "DOWNSTREAM_SUPPORTED_UPSTREAM_BROKEN",
-      "verification_status": "LIVE_CODE_FAIL"
+      "verification_status": "LIVE_CODE_FAIL",
+      "source_pointer": "Ready_Set_Ui_Master_Logic_REV_07.md#MULTI-TASK/LAP + Ready:ready-runtime-v07.js"
     },
     {
       "atom_id": "RNS-P02-006",
@@ -89,7 +94,12 @@
       "disposition": "ADOPT",
       "destination": "Ready device-validation sequencing",
       "implementation_status": "BYPASS_STOPPED",
-      "verification_status": "CURRENT_CONVERSATION_CONFIRMED"
+      "verification_status": "CURRENT_CONVERSATION_CONFIRMED",
+      "source_pointer": "current_chat:2026-09-19:user:Planner없으면시작못함 + 탐험기준누락정정",
+      "affects": [
+        "Ready device-validation sequencing",
+        "staging fixture policy"
+      ]
     },
     {
       "atom_id": "RNS-P02-007",
@@ -100,7 +110,15 @@
       "disposition": "ADOPT",
       "destination": "Ready device evidence",
       "implementation_status": "FALSE_PASS_REVOKED_STAGING_IDENTITY_SEPARATED",
-      "verification_status": "CORRECTED"
+      "verification_status": "CORRECTED",
+      "source_pointer": "current_chat:2026-09-19:user:메인주소연결지적 + Ready staging PR5",
+      "supersedes": [
+        "earlier assistant claim: HOME_SCREEN_INSTALL_PASS"
+      ],
+      "affects": [
+        "Ready device-validation evidence",
+        "PWA staging identity verification"
+      ]
     },
     {
       "atom_id": "RNS-P02-008",
@@ -111,18 +129,20 @@
       "disposition": "CONFLICT",
       "destination": "Ready target-time semantics",
       "implementation_status": "UNRESOLVED",
-      "verification_status": "OPEN_CONFLICT"
+      "verification_status": "OPEN_CONFLICT",
+      "source_pointer": "Ready_Set_Ui_Master_Logic_REV_07.md#ONE_TARGET_TIME + Ready:ready-base-runtime-v1.js#targetMin"
     },
     {
       "atom_id": "RNS-P02-009",
-      "type": "HOLD",
+      "type": "OPEN",
       "material": true,
       "actor": "USER+SYSTEM",
       "content": "Weekly/daily schedule visual direction is not finally locked.",
       "disposition": "HOLD",
       "destination": "Ready schedule UI",
       "implementation_status": "NOT_FINAL",
-      "verification_status": "HOLD"
+      "verification_status": "HOLD",
+      "source_pointer": "current_ready_context:weekly_daily_visual_hold"
     },
     {
       "atom_id": "RNS-P02-010",
@@ -133,7 +153,8 @@
       "disposition": "ADOPT",
       "destination": "TAKY project continuity",
       "implementation_status": "IMPLEMENTED",
-      "verification_status": "CI_SUCCESS"
+      "verification_status": "CI_SUCCESS",
+      "source_pointer": "TAKY:PR22 + Drive:PILOT_02_READY_SET + GitHubActions:35407291469"
     },
     {
       "atom_id": "RNS-P02-011",
@@ -144,7 +165,8 @@
       "disposition": "OPEN",
       "destination": "PILOT_02_READY_SET/03_NOTEBOOKLM_OUTPUT",
       "implementation_status": "SOURCE_PACK_READY",
-      "verification_status": "EXTERNAL_MANUAL_STEP_REQUIRED"
+      "verification_status": "EXTERNAL_MANUAL_STEP_REQUIRED",
+      "source_pointer": "PluginManagement:NotebookLM_search_2026-09-19 + Drive:PILOT_02_READY_SET/03_NOTEBOOKLM_OUTPUT"
     },
     {
       "atom_id": "RNS-P02-012",
@@ -155,7 +177,8 @@
       "disposition": "OPEN",
       "destination": "Ready device gate",
       "implementation_status": "BLOCKED_BY_P0_EXPLORATION_GAPS",
-      "verification_status": "DEVICE_UNVERIFIED"
+      "verification_status": "DEVICE_UNVERIFIED",
+      "source_pointer": "Ready:PR4/PR5 + current_chat:device_validation_sequence"
     }
   ],
   "coverage_summary": {
@@ -167,18 +190,25 @@
     "unresolved_open_conflict_hold": 4
   },
   "reverse_reconstruction": {
-    "status": "PASS_WITHIN_DECLARED_SCOPE",
-    "reconstructs": [
-      "product role",
-      "exploration source/entry",
-      "Planner authority",
-      "multi-task session/lap invariants",
-      "recording/BGM/timer locks",
-      "rejected directions",
-      "implementation gaps",
-      "open conflict/hold/device gate",
-      "NotebookLM/Drive/C2S operating boundary"
-    ],
-    "limitation": "Does not claim inaccessible account-wide history was recovered."
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true,
+    "notes": [
+      "Ready product role, Planner authority, exploration source/entry, multi-task session invariants and rejected directions reconstructable.",
+      "Latest current-chat corrections include false PWA PASS revocation and prohibition on fake Planner task bypass.",
+      "OPEN/CONFLICT/HOLD includes target-time semantics, weekly/daily visual lock, NotebookLM output import and device validation.",
+      "Inaccessible historical ranges remain explicit rather than invented."
+    ]
+  },
+  "ledger_id": "READY_SET_PILOT02_RECOVERY_2026-09-19",
+  "source_scope": {
+    "description": "Targeted Ready & Set recovery using prepared Drive raw/current source pack, indexed recent sanitized transcripts, current conversation correction delta, current TAKY canonical owners, Ready REV_07, and live Ready GitHub implementation/CI/staging evidence.",
+    "coverage_status": "PARTIAL_HISTORICAL_COVERAGE_WITH_UNVERIFIED_SOURCE_RANGES",
+    "inaccessible_or_unverified": [
+      "account-wide Ready conversation ranges not present in the current Drive/index surfaces",
+      "consumer NotebookLM generated output not yet produced/imported because no direct NotebookLM connector is available",
+      "post-fix iPhone device behavior"
+    ]
   }
 }
