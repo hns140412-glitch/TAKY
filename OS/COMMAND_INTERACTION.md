@@ -112,6 +112,21 @@ Rules:
 
 Domain commands should compose Core workflows instead of cloning governance with conflicting logic.
 
+## 2.1 C2S RUNTIME ROUTING — HARD LOCK
+
+Conversation-derived system/canonical updates SHALL activate `OS/C2S_RUNTIME_ACTIVATION.md` and TKY-C2S-001 when applicable.
+
+Routing:
+- `타키 반영 / 타키 업데이트 / 기준 반영 / 회사 기준 반영` + material durable rule/standard change -> C2S required.
+- `ㄱ / 계속 / 진행` -> inherit current execution contract. If C2S is already active, continue through its coverage/reflect/history stop condition; otherwise do not activate C2S merely because of the shorthand.
+- `/대화전체보존` -> RAW evidence preservation only; no automatic canonical promotion.
+- `대화 종료` -> detect and ledger material uncompiled system-building deltas before Handoff when present; preserve OPEN/FRONTIER/CONFLICT without auto-promoting them.
+- `/재개` -> recover unresolved atoms, correction lineage, destinations and growth gaps when relevant.
+
+`CONTINUE COMMAND != NEW SEMANTIC SCOPE`
+`RAW ARCHIVE != CANONICAL ADOPTION`
+`CONVERSATION END != FORCE ALL IDEAS INTO MASTER`
+
 ## 3. VOICE → TEXT HANDOFF
 
 For short and conversational answers, Voice may continue normally.

@@ -247,4 +247,23 @@ Ask the user only when a real semantic ambiguity materially changes the system a
 `RAW PRESERVED != SYSTEM REFLECTED`
 `SYSTEM REFLECTED != GROWTH MAP COMPLETE`
 
+
+## 15. Runtime activation — CONDITIONAL HARD GATE
+
+Runtime/command activation is specialized by `OS/C2S_RUNTIME_ACTIVATION.md`.
+
+C2S is required for material conversation-derived durable system/canonical changes, not for every ordinary conversation.
+
+A continuation command inherits the active contract:
+- if a C2S compile/write is in progress, continuation keeps C2S active;
+- if no C2S-triggering scope exists, continuation does not create one.
+
+RAW transcript preservation does not canonicalize every utterance. Conversation-end handling may preserve unresolved atoms without promoting them.
+
+For TAKY-controlled repository runtimes, the executable composition bridge is:
+`ENFORCEMENT/c2s_preflight_bridge.py`.
+
+`C2S REQUIRED + COVERAGE RECORD MISSING/FAIL = BRIDGE NOT PASS`.
+`REPOSITORY BRIDGE PASS != HOSTED CHATGPT AUTO-INVOCATION VERIFIED`.
+
 END
