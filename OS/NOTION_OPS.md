@@ -121,6 +121,29 @@ Rules:
 - An inaccessible material node SHALL remain explicit; do not infer its unseen contents. Source graph closure means every material node is dispositioned, not that every node was successfully retrieved.
 - Preserve the raw URL before normalization. URL normalization is comparison aid only and does not prove content identity.
 
+#### Recovered-source fallback — HARD LOCK
+
+A failed direct fetch of an external/root URL SHALL NOT by itself make the record unreadable or `UNAVAILABLE`.
+
+When direct connector/browser/web retrieval fails, exhaust governed recovery evidence already attached to the review record before declaring source absence:
+
+`DIRECT ROOT ATTEMPT → CURRENT NOTION REVIEW-ROW BODY / PRESERVED SNAPSHOT → GOVERNED 보존본 / DRIVE PRESERVATION PATH → OTHER AVAILABLE RECOVERY FAMILY → UNAVAILABLE ONLY AFTER RECOVERY EXHAUSTION`.
+
+For legacy records created before the Source Graph fields existed, the following are valid recovery pointers and MUST be inspected when present:
+- review-row body/content containing recovered source text or links;
+- `복구 판정` such as `ORIGINAL / RECOVERED / TEXT_ONLY`;
+- `원본 확보 상태`;
+- `복구 경로` including prior browser/HTTP recovery evidence and discovered-link counts;
+- `Drive 보존 경로` / `보존본`;
+- source snapshot timestamp, coverage, version/hash/fingerprint.
+
+Rules:
+- `DIRECT FETCH FAIL ≠ SOURCE UNREADABLE`.
+- `NEW SOURCE_GRAPH FIELD IS NULL ≠ LEGACY SOURCE MISSING`.
+- If a governed recovered snapshot/body exists, use it to recover descendant URLs and continue materiality/source-graph work; preserve its freshness timestamp and do not mislabel it as live-current content.
+- A direct-fetch failure plus an available but unused governed recovery snapshot is `RECOVERY_FAILED`; declaring the source missing/unreadable in that state is `FALSE_MISSING_DECLARATION`.
+- Legacy evidence SHALL be projected forward into the current structured Source Graph fields when the record is next processed; it SHALL NOT be discarded merely because the newer properties were added later.
+
 A source-acquisition execution record SHOULD preserve, as applicable:
 - root source attempted / recovered state;
 - source graph or equivalent root→descendant relation;
