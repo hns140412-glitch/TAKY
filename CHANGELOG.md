@@ -1,3 +1,9 @@
+## 2026-09-19 — Architecture C2S ledger and growth map
+- Compiled the current architecture-system conversation into a 18-atom C2S ledger.
+- Added active Architecture Growth Map with Pursuit + Production dual loop, maturity states and prioritized missing flesh.
+- Linked Architecture Work OS to the growth map/ledger.
+- CI now validates the actual architecture conversation ledger.
+
 ## 2026-09-19 — C2S runtime activation bridge
 - Added conditional runtime routing for conversation-derived canonical/system updates.
 - Added C2S-aware repository preflight composition and CI pass/fail coverage cases.
