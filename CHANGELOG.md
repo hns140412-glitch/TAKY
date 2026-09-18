@@ -1,3 +1,10 @@
+## 2026-09-19 — Saved share-page transcript sanitization
+- Added deterministic React Router share-payload decoder for saved ChatGPT 6aa HTML.
+- Extracts declared linear_conversation and emits USER/ASSISTANT-only NotebookLM candidate transcripts.
+- Added explicit non-text markers, session/auth forbidden-pattern scan and transcript validator.
+- First real Drive 6aa pilot passed and original→sanitized lineage is registered.
+- CI now performs fixture extraction, byte comparison and expected unsafe-transcript rejection.
+
 ## 2026-09-19 — Conversation continuity / context economy
 - Added TKY-CONTINUITY-001: TOTALITY STORED, CONTEXT SELECTIVE.
 - Added progressive L0-L4 retrieval ladder, ASK LAST and FULL SCAN LAST.
