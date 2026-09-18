@@ -203,4 +203,26 @@ Allowed wording includes:
 
 Disallowed wording includes “재발 방지 완료” solely because prose was added, “최대 인수인계 완료” solely because ZIP/checksum exists, or “검증 완료” while governing state is still PENDING.
 
+
+## 13. Conversation-to-System coverage gate — HARD LOCK
+
+Conversation-derived canonical growth that claims coverage/compile completion SHALL satisfy TKY-C2S-001.
+
+Machine-checkable baseline:
+`python ENFORCEMENT/conversation_coverage_validator.py <coverage-ledger.json>`.
+
+The validator checks, within the declared recovered scope:
+- unique material atom IDs;
+- required source pointer/content/type/disposition/destination;
+- correction lineage via supersedes or affected targets;
+- declared material/mapped counts;
+- `UNMAPPED_MATERIAL = 0`;
+- `SILENT_LOSS = 0`;
+- `FALSE_CONVERGENCE = 0`;
+- reverse-reconstruction booleans.
+
+The validator does not prove semantic correctness of every atom, inaccessible source recovery, live LLM automatic invocation, or human approval. Those remain separately governed.
+
+A prose statement such as "전체 반영" without a scoped coverage ledger/equivalent evidence SHALL NOT be treated as mechanically proven C2S coverage.
+
 END
