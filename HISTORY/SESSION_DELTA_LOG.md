@@ -118,3 +118,10 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Canonical response: added TKY-C2S-001, atom schema, deterministic coverage validator/fixtures, CI activation, architecture domain possibility-search/growth specialization.
 - Preserved correction: validation is a safety rail; TAKY's core is truthful goal-driven exploration, learning and growth.
 - Claim boundary: repository-level rules/checks added on branch `taky-c2s-growth-20260919`; live hosted auto-invocation remains UNVERIFIED until separately evidenced.
+
+## 2026-09-19 — C2S runtime activation
+- Added conditional runtime activation for conversation-derived durable TAKY/domain/system updates.
+- `ㄱ / 계속 / 진행` now explicitly inherits the active execution contract; it neither drops an active C2S compile nor activates C2S in unrelated work.
+- Added repository-executable C2S-aware preflight bridge composing preflight + execution gate + conversation coverage gate.
+- Added expected-failure CI cases for missing and lossy coverage.
+- Hosted ChatGPT native automatic interception remains UNVERIFIED.
