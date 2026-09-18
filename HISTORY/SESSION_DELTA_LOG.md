@@ -199,3 +199,10 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage in Drive and GitHub Pilot registries.
 - Updated Topic Map and Pilot prompt so these sources are loaded only when Notion connection/role-separation or mobile TAKY/Work OS continuity is material.
 - Non-text markers remain L3 escalation pointers rather than recovered attachment content.
+
+## 2026-09-19 — User-not-tester correction for Notion review validation
+- User explicitly rejected being used as the tester for fresh Work/new-chat behavior.
+- Validation method corrected: fresh-context command behavior is now replayed system-side with `prior_context=[]` and literal input `노션검토`.
+- PASS requires the exact content-review route and both user-required phases; the historical structure-cleanup substitution is encoded as an expected-failure fixture.
+- Hosted platform auto-invocation is not pushed back to the user; it remains separately UNVERIFIED when no system-side hosted runtime harness is available.
+
