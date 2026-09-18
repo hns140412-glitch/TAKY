@@ -321,35 +321,116 @@
         "Draft PR #5 remains open, draft, unmerged",
         "main/production unchanged"
       ]
+    },
+    {
+      "atom_id": "RNS-C2S-017",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "current-chat:2026-09-19:user-correction-taky-context",
+      "actor": "USER",
+      "content": "When the user invokes TAKY criteria, previously established project-specific criteria must be recovered without making the user repeat them. Global TAKY governance alone is insufficient.",
+      "scope": "GLOBAL+PROJECT",
+      "why": "Ready exploration criteria were omitted even though TAKY/C2S existed, exposing a project-context retrieval gap.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md + PROJECTS/READY_SET_CONTEXT_MANIFEST.json",
+      "implementation_status": "IMPLEMENTED",
+      "verification_status": "CI_ENFORCED",
+      "evidence": [
+        "TKY-CONTEXT-001 registered in MASTER/RULE_REGISTRY.json",
+        "PROJECTS/READY_SET_CONTEXT_MANIFEST.json",
+        "ENFORCEMENT/project_context_validator.py",
+        "TAKY Enforcement Replay run 35407430709 SUCCESS with pass + reject-incomplete steps"
+      ]
+    },
+    {
+      "atom_id": "RNS-C2S-018",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "drive:NOTEBOOKLM_RECOVERY:PILOT_02_READY_SET",
+      "actor": "SYSTEM",
+      "content": "Ready & Set now has a project-specific Drive/NotebookLM recovery pack with source map, current conversation delta, query pack and C2S review contract. NotebookLM remains REFERENCE_ONLY/EVIDENCE_ASSIST; TAKY C2S owns authority and completeness.",
+      "scope": "PROJECT",
+      "why": "Use Drive as long-memory evidence store and NotebookLM as context reconstruction/search support while preventing NotebookLM summaries from becoming canonical by themselves.",
+      "disposition": "ADOPT",
+      "destination": "PROJECTS/READY_SET_CONTEXT_MANIFEST.json#notebooklm_recovery",
+      "implementation_status": "DRIVE_NOTEBOOKLM_PACK_READY",
+      "verification_status": "DRIVE_SOURCE_MAP_AND_DOCS_VERIFIED",
+      "evidence": [
+        "canonical raw pack folder 1g1iUgymUq9_bhMnYpCHvOWECq-JfB_d2",
+        "working folder 1QxHAglij2bh9jqPiAodTH-7Jf7TpxMCw",
+        "source map 1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
+        "current delta 19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+        "consumer NotebookLM direct ChatGPT plugin/API not available; Drive semi-automatic boundary preserved"
+      ]
+    },
+    {
+      "atom_id": "RNS-C2S-019",
+      "type": "EVIDENCE",
+      "material": true,
+      "source_pointer": "github:Ready-Set@3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+      "actor": "SYSTEM",
+      "content": "Live Ready source contradicts the recovered multi-task exploration contract: upstream task selection collapses to one selected Planner TODO and session start supplies only tasks:[label]. Today's Island/exploration-pin entry is also not first-class in runtime.",
+      "scope": "PROJECT",
+      "why": "Green CI was insufficient because current tests did not encode the recovered exploration semantics strongly enough.",
+      "disposition": "OPEN",
+      "destination": "Ready-Set exploration entry/selection implementation + regression suite",
+      "implementation_status": "KNOWN_CONTRACT_VIOLATION",
+      "verification_status": "LIVE_SOURCE_VERIFIED",
+      "evidence": [
+        "ready-base-native-v2.js selected:String(x.id)===String(id)",
+        "ready-planner-selection-bridge-v1.js selected:String(t.id)===String(id)",
+        "ready-base-runtime-v1.js activeSession tasks:[label]",
+        "five current Ready workflow runs at head are SUCCESS but do not reject this collapse"
+      ]
+    },
+    {
+      "atom_id": "RNS-C2S-020",
+      "type": "CONFLICT",
+      "material": true,
+      "source_pointer": "Ready REV_07 vs live Ready runtime",
+      "actor": "SYSTEM",
+      "content": "Target-time semantics remain unresolved: REV_07 states ONE TARGET TIME / SET ONE TARGET TIME while current runtime explicitly supports targetMin/targetMs unset and declares timeOptional. Do not silently converge.",
+      "scope": "PROJECT",
+      "why": "Choosing required or optional without recovered explicit authority would invent a product decision.",
+      "disposition": "CONFLICT",
+      "destination": "READY_SET_EXPLORATION_CONTRACT#target-time-relationship",
+      "implementation_status": "OPEN_CONFLICT",
+      "verification_status": "SOURCE_CONFLICT_VERIFIED"
     }
   ],
   "coverage_summary": {
-    "material_atoms": 16,
-    "mapped_material": 16,
+    "material_atoms": 20,
+    "mapped_material": 20,
     "unmapped_material": 0,
     "silent_loss_count": 0,
     "false_convergence_count": 0,
-    "unresolved_open_or_hold": 2
+    "unresolved_open_or_hold": 4
   },
   "reverse_reconstruction": {
     "intent_reconstructable": true,
     "latest_corrections_reconstructable": true,
     "open_items_reconstructable": true,
     "why_preserved": true,
-    "notes": "Reconstructs Ready & Set resume, confirmed timer/rejection locks, exact-head packaging, dedicated-site auth block, Git-backed Deploy Preview workaround, revoked false Home Screen PASS, staging-specific PWA identity overlay, weekly/daily visual HOLD, and the actual iPhone/PWA device gate."
+    "notes": "Reconstructs Ready role, Planner authority, exploration semantics, context-recovery mechanism, exact runtime state, revoked false PASS, multi-task/Today's-Island implementation gap, target-time conflict, device gate and weekly/daily HOLD without invention."
   },
   "skeleton_growth": {
     "requires_growth_map": true,
     "gaps_identified": [
-      "Actual iPhone/PWA verification of recording, background/lock restoration, sharing, cache updates and BGM remains pending.",
-      "Automated live HTTP spot-fetch of the Netlify preview is unavailable from the current tool runtime, although Netlify provenance and static publish parity are verified.",
-      "Weekly/daily schedule visual direction is structurally defined but final visual lock remains pending."
+      "Ready exploration multi-select and Today's Island exploration-pin runtime do not yet match recovered contract.",
+      "Target-time required-vs-optional semantics remain OPEN_CONFLICT.",
+      "Parent UI field-level authority audit remains required.",
+      "Legacy Stage E migration/history markers must be separated from active Planner authority and regression-tested.",
+      "Actual iPhone/PWA verification remains pending after source corrections.",
+      "Weekly/daily final visual lock remains HOLD.",
+      "Historical Ready conversations outside PILOT_02 remain UNVERIFIED_SOURCE_COVERAGE."
     ],
     "next_fill_targets": [
-      "Run the narrow real-device validation against Netlify Deploy Preview #5.",
-      "Record PASS/FAIL for iPhone-only behaviors without asking the user to perform developer debugging.",
-      "Fix only reproduced runtime gaps and rerun affected regressions.",
-      "Resume weekly/daily UI design lock separately without disturbing confirmed timer UI."
+      "Strengthen automated exploration contract tests before changing runtime.",
+      "Implement multi-select stable Planner TODO binding into one session with one active task/lap.",
+      "Implement Today's Island exploration pins as first-class projection.",
+      "Audit Parent fields and Stage E authority boundaries.",
+      "Rebuild staging then resume narrow device validation.",
+      "Resolve target-time semantics only from verified user authority/source chronology."
     ]
   }
 }
