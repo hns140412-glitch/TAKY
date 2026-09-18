@@ -15,6 +15,7 @@ If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do n
 - repository enforcement: `REPOSITORY_EXECUTABLE + CI_ENFORCED`
 - role/action/owner classification trust source: `UNVERIFIED`
 - repository C2S preflight composition: `REPOSITORY_EXECUTABLE + CI_ENFORCED`
+- NotebookLM recovery pipeline: `DRIVE_WORKSPACE_IMPLEMENTED + CANONICAL_PROTOCOL_IMPLEMENTED + CI_ENFORCED`
 - hosted ChatGPT native tool-call automatic preflight: `UNVERIFIED`
 - live hosted runtime fail-closed claim: `PROHIBITED`
 - P0 open architecture issue: `#2 Trusted routing authority + runtime preflight interception`
@@ -25,6 +26,7 @@ If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do n
 3. Validation-only evidence must not be allowed to advance authoritative product-progress state without functional acceptance evidence.
 4. Resume/context-compression must use verified canonical/history rehydration evidence rather than self-reported booleans.
 5. Hosted conversation runtime still lacks repository-proven automatic C2S invocation/interception even though a repository-executable C2S bridge exists.
+6. Consumer NotebookLM direct connector is not available in the current runtime; Drive interchange is active and notebook/source selection remains a human UI step.
 
 ## Work / Codex resource-routing policy
 Work and Codex SHALL be treated as scarce execution resources. TAKY SHALL NOT route work to either merely because the capability exists.

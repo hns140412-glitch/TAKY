@@ -131,3 +131,11 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Added `DOMAIN/ARCHITECTURE_GROWTH_MAP.md` to expose current maturity and missing flesh rather than treating the conceptual architecture OS skeleton as complete.
 - Added CI validation of the real architecture conversation ledger.
 - Next build priority is no longer conceptual restatement: company evidence/Golden Projects + SITE/LAW data/opportunity foundation, then Layout/Plan MVP.
+
+## 2026-09-19 — NotebookLM recovery pipeline
+- Created Drive-based `SOURCE_ARCHIVE/NOTEBOOKLM_RECOVERY` operating surface with registry, source-pack, working, output, C2S review, accepted-backfill and unverified layers.
+- Created recovery control/source-registry/Pilot 01 prompt documents.
+- Inspected representative 6aa* saved HTML and found non-conversation session/bootstrap/auth-related page data; classified the family `SECURITY_HOLD / SANITIZE_REQUIRED` for NotebookLM intake.
+- Directly inspected Pilot 01 transcript candidates: two preserved transcript sources are safe/direct; `TAKY_WORK_OS_대화전체기록_복구본_2026-09-06.txt` is mixed summary+transcript and therefore REFERENCE_ONLY rather than Primary RAW.
+- Added TKY-NBLM-001 protocol, source schema/validator, actual Pilot 01 registry and CI safety/authority checks.
+- Current NotebookLM execution path is Drive interchange + human notebook/source selection; no direct consumer NotebookLM connector was found in the current plugin directory.

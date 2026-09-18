@@ -1,3 +1,11 @@
+## 2026-09-19 — NotebookLM conversation recovery pipeline
+- Added TKY-NBLM-001 for NotebookLM-assisted conversation recovery.
+- Added source-security / authority metadata schema and deterministic validator.
+- Blocked unsanitized page captures/session-auth-bearing files from NotebookLM intake.
+- Locked NotebookLM results to REFERENCE_ONLY / EVIDENCE_ASSIST until raw-source recheck + C2S.
+- Added actual Pilot 01 source registry and CI validation.
+- Activated Drive-based SOURCE_ARCHIVE/NOTEBOOKLM_RECOVERY workflow.
+
 ## 2026-09-19 — Architecture C2S ledger and growth map
 - Compiled the current architecture-system conversation into a 18-atom C2S ledger.
 - Added active Architecture Growth Map with Pursuit + Production dual loop, maturity states and prioritized missing flesh.

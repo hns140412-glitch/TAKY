@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.1",
+  "registry_version": "2026-09-19.2",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -56,6 +56,11 @@
       "rule_id": "TKY-C2S-001",
       "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
       "scope": "conversation-to-system compilation, atomic extraction, coverage closure, reverse reconstruction and skeleton-to-flesh growth"
+    },
+    {
+      "rule_id": "TKY-NBLM-001",
+      "owner": "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md",
+      "scope": "NotebookLM-assisted conversation recovery, source-security intake, authority isolation and C2S backfill"
     }
   ]
 }

@@ -127,6 +127,21 @@ Routing:
 `RAW ARCHIVE != CANONICAL ADOPTION`
 `CONVERSATION END != FORCE ALL IDEAS INTO MASTER`
 
+## 2.2 NOTEBOOKLM / HISTORICAL RECOVERY ROUTING — HARD LOCK
+
+Requests equivalent to `기존 대화 분석 / 원문 맥락 복원 / NotebookLM 연계 복원 / 전체대화 역검증` SHALL distinguish:
+- raw evidence preservation;
+- NotebookLM-assisted recovery;
+- TAKY C2S canonical backfill.
+
+Routing:
+`SOURCE INVENTORY -> SECURITY/PROVENANCE -> NOTEBOOKLM ANALYSIS (optional) -> RAW RECHECK -> C2S -> BACKFILL`.
+
+NotebookLM is optional acceleration, never authority replacement.
+A user request to "NotebookLM으로 분석" does not authorize unsafe page captures, hidden/session data ingestion or direct canonical promotion.
+
+When no direct NotebookLM connector exists in the active runtime, use the governed Drive interchange surface and reduce the remaining human step to notebook/source selection only after TAKY has prepared and screened the source set.
+
 ## 3. VOICE → TEXT HANDOFF
 
 For short and conversational answers, Voice may continue normally.
