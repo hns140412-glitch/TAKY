@@ -143,6 +143,7 @@ When an execution record sets `notion_link_review_required=true`, the determinis
 - complement/improvement is complete when material;
 - the review record/evidence state was updated;
 - database housekeeping was not substituted for the requested link/content review.
+- a failed direct root fetch did not bypass an available governed recovered snapshot/body/Drive preservation path.
 
 Missing Phase A source acquisition/closure ⇒ at least `OMISSION`.
 Missing Phase B analysis/compare/improvement, or database-housekeeping-only substitution ⇒ at least `SUBSTITUTE_RESULT`.

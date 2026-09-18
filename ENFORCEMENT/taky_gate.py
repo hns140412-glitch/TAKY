@@ -121,6 +121,16 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         discovered=i(r,"notion_material_source_nodes_discovered")
         dispositioned=i(r,"notion_material_source_nodes_dispositioned")
         graph_closed=b(r,"notion_source_graph_closed")
+        fallback_required = (
+            b(r,"notion_root_direct_fetch_failed")
+            and b(r,"notion_recoverable_snapshot_available")
+        )
+        fallback_used = b(r,"notion_recoverable_snapshot_used")
+
+        if fallback_required and not fallback_used:
+            f += ["RECOVERY_FAILED","OMISSION"]
+            if b(r,"notion_source_declared_unreadable"):
+                f.append("FALSE_MISSING_DECLARATION")
 
         phase_a_missing = (
             (root_required and not root_attempted)

@@ -206,3 +206,9 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - PASS requires the exact content-review route and both user-required phases; the historical structure-cleanup substitution is encoded as an expected-failure fixture.
 - Hosted platform auto-invocation is not pushed back to the user; it remains separately UNVERIFIED when no system-side hosted runtime harness is available.
 
+## 2026-09-19 — External Notion direct-fetch failure / recovered-source fallback correction
+- User reported that a Notion page such as `연기우 특별선물함` contains roughly 50 URLs but Work could not read them.
+- System-side inspection found the root record is present in `📚 나의 링크`, its external Notion URL currently returns object-not-found through the connector and is inaccessible through the generic web fetch path, but the governed review row already contains the recovered original content and prior browser recovery evidence `HTTP=200 / LINKS=49` plus a Drive preservation path.
+- Root cause: E2E review correctly required original-source attempts but lacked an explicit fallback bridge from direct-fetch failure to already-governed recovered snapshots/legacy evidence.
+- Correction: direct fetch failure no longer permits an unreadable/missing conclusion while governed recovery evidence remains. Legacy recovered evidence must be used and projected into current Source Graph state.
+

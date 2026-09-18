@@ -240,3 +240,10 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - CI now compiles and executes both the passing fresh-context fixture and the expected-failure regression fixture on every relevant PR/push.
 - Boundary preserved: repository fresh-context replay does not prove hosted ChatGPT/Work automatic invocation; that remains UNVERIFIED unless a system-side hosted runtime test becomes available.
 
+## 2026-09-19 — Notion recovered-source fallback hardening
+- Fixed a Notion-review recovery gap where a failed direct fetch of an external Notion/public URL could be misclassified as unreadable even when the governed review row already contained a recovered original snapshot, descendant links, or a Drive preservation path.
+- Added the hard rule `DIRECT FETCH FAIL ≠ SOURCE UNREADABLE` and legacy-evidence migration semantics: prior `복구 판정 / 원본 확보 상태 / 복구 경로 / Drive 보존 경로 / review-row body` must be exhausted before UNAVAILABLE.
+- Added deterministic gate fields for direct-fetch failure + recoverable-snapshot availability/use, with `RECOVERY_FAILED / FALSE_MISSING_DECLARATION / OMISSION` on ignored fallback evidence.
+- Added N-05 historical-failure and post-fix replay fixtures.
+- Reclassified RVR-7 `연기우 특별선물함` to `ROOT_SOURCE_STATE=RECOVERED / SOURCE_GRAPH_STATE=OPEN`; prior recovery evidence records HTTP 200 and 49 discovered links. Descendant materiality/traversal remains open rather than being mislabeled unreadable.
+
