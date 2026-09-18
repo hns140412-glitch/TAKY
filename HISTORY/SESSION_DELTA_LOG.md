@@ -191,3 +191,11 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage in Drive and GitHub Pilot registries.
 - Updated the Global Topic Map so recovery/continuity queries route to `대화 복구 진행`, while Notion/Work OS operating-history queries route to `노션 구조 수정 재개`.
 - Non-text markers remain L3 escalation pointers and are not treated as recovered attachment content.
+
+## 2026-09-19 — NotebookLM Pilot 01 sanitized batch 04
+- Continued selective Work OS/mobile historical recovery without a full saved-share corpus scan.
+- Sanitized and post-write verified `노션 연결 방법 안내`: 1925 linear nodes, 777 USER/ASSISTANT messages, 32 non-text markers, blocked session/auth patterns 0.
+- Sanitized and post-write verified `모바일 기능 연결`: 313 linear nodes, 217 USER/ASSISTANT messages, 4 non-text markers, blocked session/auth patterns 0.
+- Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage in Drive and GitHub Pilot registries.
+- Updated Topic Map and Pilot prompt so these sources are loaded only when Notion connection/role-separation or mobile TAKY/Work OS continuity is material.
+- Non-text markers remain L3 escalation pointers rather than recovered attachment content.
