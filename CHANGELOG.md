@@ -252,3 +252,9 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - Added N-05 historical-failure and post-fix replay fixtures.
 - Reclassified RVR-7 `연기우 특별선물함` to `ROOT_SOURCE_STATE=RECOVERED / SOURCE_GRAPH_STATE=OPEN`; prior recovery evidence records HTTP 200 and 49 discovered links. Descendant materiality/traversal remains open rather than being mislabeled unreadable.
 
+## 2026-09-19 — Notion browser stall fallback hardening
+- Added bounded retry semantics for Work/cloud-browser client-script/JavaScript initialization stalls during Notion review.
+- After the retry budget is exhausted, execution must continue via governed fallback evidence instead of looping on the same URL.
+- One blocked material node may be PARTIAL/UNAVAILABLE while sibling nodes continue; it must not stall the entire source graph.
+- Added N-06 replay for the observed browser-delay/JS-init regression and compliant bounded-fallback behavior.
+
