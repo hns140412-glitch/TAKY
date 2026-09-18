@@ -249,4 +249,22 @@ python ENFORCEMENT/c2s_preflight_bridge.py \
 
 This is repository-controlled enforcement. Hosted native automatic interception remains separately unverified.
 
+
+## 15. NotebookLM source-security / authority gate — HARD LOCK
+
+NotebookLM recovery sources may be machine-checked with:
+`python ENFORCEMENT/notebooklm_source_validator.py <source-registry.json>`.
+
+The gate blocks at least:
+- NotebookLM-eligible sources that were not content-checked;
+- sources marked eligible without `SAFE_FOR_NOTEBOOKLM`;
+- sources containing session/auth material from direct NotebookLM ingestion;
+- NotebookLM output promoted above `REFERENCE_ONLY / EVIDENCE_ASSIST`;
+- HANDOFF / DERIVED_ANALYSIS mislabeled as direct original source.
+
+Representative actual pilot registry:
+`HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json`.
+
+This gate validates declared metadata consistency. It does not prove semantic completeness of the underlying file, inaccessible-history recovery or consumer NotebookLM UI execution.
+
 END
