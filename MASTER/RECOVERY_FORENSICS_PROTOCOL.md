@@ -181,3 +181,11 @@ NotebookLM may accelerate chronology, correction, recurrence and omission-candid
 - notebook-derived claims used for canonical change require raw-source recheck plus TKY-C2S disposition.
 
 `NOTEBOOKLM ASSISTED != FORENSIC SOURCE AUTHORITY OVERRIDE`
+
+## 11. Context-economy boundary
+
+Ordinary continuity recovery is governed by TKY-CONTINUITY-001.
+
+Full forensic mode remains OFF unless explicitly invoked for full/global reconstruction. A routine missing historical detail should first use the progressive L0→L1→L2→L3 ladder rather than activating this full protocol.
+
+`TARGETED CONTINUITY RECOVERY != FULL FORENSIC MODE`
