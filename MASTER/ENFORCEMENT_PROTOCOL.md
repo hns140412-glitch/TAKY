@@ -154,6 +154,19 @@ Representative historical-failure and post-fix cases SHALL live in the replay fi
 `NOTION SUMMARY ≠ SOURCE GRAPH CLOSURE`.
 `SOURCE COLLECTION ≠ ANALYSIS / COMPARE / IMPROVE`.
 
+Fresh-context recurrence validation for this command SHALL be system-side:
+- zero prior conversation context;
+- literal user input `노션검토`;
+- no TAKY prefix required;
+- expected route = Notion link-intelligence review of `📚 나의 링크`;
+- Phase A + Phase B + review-record update required;
+- structure-audit substitution rejected.
+
+The user SHALL NOT be used as the default fresh-chat/Work tester when a repository replay can validate the contract. Hosted ChatGPT/Work automatic invocation remains a separate platform/runtime claim and SHALL stay `UNVERIFIED` unless directly evidenced by an available system-side runtime test.
+
+`USER MANUAL SMOKE TEST ≠ REQUIRED REPOSITORY VALIDATION`.
+`FRESH-CONTEXT REPLAY PASS ≠ HOSTED AUTO-INVOCATION VERIFIED`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
