@@ -212,3 +212,11 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Root cause: E2E review correctly required original-source attempts but lacked an explicit fallback bridge from direct-fetch failure to already-governed recovered snapshots/legacy evidence.
 - Correction: direct fetch failure no longer permits an unreadable/missing conclusion while governed recovery evidence remains. Legacy recovered evidence must be used and projected into current Source Graph state.
 
+## 2026-09-19 — NotebookLM Pilot 01 sanitized batch 04b
+- Continued queue-based targeted recovery using one-file-at-a-time reads after intermittent large-batch Drive timeouts.
+- Classified recent candidates before sanitization to avoid unnecessary TAKY Core load.
+- `사업계획 일정 플로우 작성`, `노션 연결 방법 안내`, `노션 구조 수정 재개` route to Work OS/Notion/Ready & Set rather than TAKY Core by default.
+- `Plus 기능 활용법` and `탐험 도우미 이름 추천` are not TAKY Core recovery priorities.
+- Sanitized and post-write verified `타키 기준 불러오기`: 149 linear nodes, 85 USER/ASSISTANT messages, 6 non-text markers, blocked session/auth patterns 0.
+- Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage as P01-RAWHTML-008 / P01-SAN-008.
+- Existing canonical source registry was checked before writes to avoid duplicate sanitized artifacts; duplicate temporary output for `대화 복구 진행` was deleted after canonical equivalence verification.
