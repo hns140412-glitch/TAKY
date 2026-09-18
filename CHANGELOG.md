@@ -1,3 +1,8 @@
+## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 04
+- Added post-write-verified sanitized sources for Notion connection/role separation and mobile TAKY/Work OS continuity.
+- Registered original-to-derivative lineage and explicit non-text coverage.
+- Preserved selective L2 loading with L3 original/attachment escalation.
+
 ## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 03
 - Added post-write-verified sanitized sources for conversation recovery continuity and Notion/Work OS history.
 - Registered original-to-derivative lineage with explicit non-text coverage.
