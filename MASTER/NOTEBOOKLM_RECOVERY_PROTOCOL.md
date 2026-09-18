@@ -214,4 +214,27 @@ Use it only when L0 current context + L1 canonical continuity are insufficient f
 `GLOBAL NOTEBOOK != DEFAULT RESUME PATH`
 `TARGETED RECOVERY > FULL HISTORY RELOAD`
 
+
+## 13. Saved ChatGPT share-page transcript sanitization
+
+When a saved ChatGPT share-page HTML contains usable shared-conversation data but also session/bootstrap/auth/application state, the original remains `PAGE_CAPTURE / SANITIZE_REQUIRED / notebooklm_eligible=false`.
+
+A derived NotebookLM input may be created only through a transcript-only extraction that:
+- decodes the share page's declared `linear_conversation`;
+- emits only USER and ASSISTANT messages;
+- excludes SYSTEM / DEVELOPER / TOOL / application/bootstrap/session/auth data;
+- preserves source node IDs and timestamps when available;
+- marks non-text parts explicitly rather than silently dropping them;
+- retains `derived_from` lineage to the original page capture;
+- passes a post-output forbidden-pattern/security scan.
+
+Reference implementation:
+- `ENFORCEMENT/chatgpt_share_transcript_sanitizer.py`
+- `ENFORCEMENT/chatgpt_share_transcript_validator.py`.
+
+A successful derivative is `RECOVERY_WITNESS_EVIDENCE`, not the original HTML and not proof of complete account-history coverage.
+
+`SAFE DERIVATIVE != ORIGINAL SOURCE REPLACED`
+`LINEAR CONVERSATION RECOVERED != ALL ACCOUNT HISTORY RECOVERED`
+
 END
