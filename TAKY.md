@@ -185,3 +185,12 @@ For conversation continuity, validate:
 A materially required missing link = NOT PASS / UNVERIFIED, not implicit completion.
 
 NO USER-AS-QA.
+
+## Conversation-to-System growth activation
+
+For material TAKY-building conversations, activate `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md` (TKY-C2S-001) in addition to the Context Ledger.
+
+Operational shorthand:
+`RAW EVIDENCE -> ATOMS -> RELATIONSHIPS/CORRECTIONS -> OWNER/FRONTIER/OPEN -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> GROWTH MAP`.
+
+Do not claim "전부 반영" merely because a compact summary or MASTER rewrite exists. Within recovered scope, material items must be dispositioned/mapped and silent loss must be zero.

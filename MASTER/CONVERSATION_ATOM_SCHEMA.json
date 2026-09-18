@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY Conversation Atom / Coverage Ledger",
+  "type": "object",
+  "required": [
+    "ledger_id",
+    "source_scope",
+    "atoms",
+    "coverage_summary",
+    "reverse_reconstruction"
+  ],
+  "properties": {
+    "ledger_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_scope": {
+      "type": "object",
+      "required": [
+        "description",
+        "coverage_status"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coverage_status": {
+          "enum": [
+            "RECOVERED_SCOPE_COMPLETE",
+            "PARTIAL_RECOVERY",
+            "UNVERIFIED_SOURCE_COVERAGE"
+          ]
+        },
+        "unavailable_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "atoms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "atom_id",
+          "type",
+          "material",
+          "source_pointer",
+          "content",
+          "disposition",
+          "destination"
+        ],
+        "properties": {
+          "atom_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "REQUIREMENT",
+              "DECISION",
+              "CORRECTION",
+              "IDEA",
+              "FRONTIER",
+              "STRATEGY",
+              "CONFLICT",
+              "OPEN",
+              "EVIDENCE",
+              "ASSUMPTION",
+              "REJECTION",
+              "CONSTRAINT",
+              "OUTCOME",
+              "LESSON"
+            ]
+          },
+          "material": {
+            "type": "boolean"
+          },
+          "source_pointer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "actor": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "enum": [
+              "GLOBAL",
+              "DOMAIN",
+              "PROJECT",
+              "TOOL",
+              "REFERENCE",
+              "UNKNOWN"
+            ]
+          },
+          "why": {
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "PRESERVE",
+              "ADOPT",
+              "ADJUST",
+              "HOLD",
+              "REJECT",
+              "EXCLUDE",
+              "OWNERSHIP_TRANSFER",
+              "CONFLICT",
+              "SUPERSEDED",
+              "OPEN",
+              "FRONTIER"
+            ]
+          },
+          "destination": {
+            "type": "string",
+            "minLength": 1
+          },
+          "supersedes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "superseded_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "affects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "implementation_status": {
+            "type": "string"
+          },
+          "verification_status": {
+            "type": "string"
+          },
+          "coverage_status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "required": [
+        "material_atoms",
+        "mapped_material",
+        "unmapped_material",
+        "silent_loss_count",
+        "false_convergence_count"
+      ],
+      "properties": {
+        "material_atoms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mapped_material": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unmapped_material": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "silent_loss_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "false_convergence_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "reverse_reconstruction": {
+      "type": "object",
+      "required": [
+        "intent_reconstructable",
+        "latest_corrections_reconstructable",
+        "open_items_reconstructable",
+        "why_preserved"
+      ],
+      "properties": {
+        "intent_reconstructable": {
+          "type": "boolean"
+        },
+        "latest_corrections_reconstructable": {
+          "type": "boolean"
+        },
+        "open_items_reconstructable": {
+          "type": "boolean"
+        },
+        "why_preserved": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "skeleton_growth": {
+      "type": "object",
+      "properties": {
+        "requires_growth_map": {
+          "type": "boolean"
+        },
+        "gaps_identified": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_fill_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

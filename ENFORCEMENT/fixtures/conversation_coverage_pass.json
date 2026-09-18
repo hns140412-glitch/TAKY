@@ -1,0 +1,76 @@
+{
+  "ledger_id": "FIXTURE-C2S-PASS-001",
+  "source_scope": {
+    "description": "representative recovered conversation scope",
+    "coverage_status": "RECOVERED_SCOPE_COMPLETE",
+    "unavailable_ranges": []
+  },
+  "atoms": [
+    {
+      "atom_id": "A-001",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:1",
+      "actor": "USER",
+      "content": "Build a system that preserves detailed reasoning and decisions.",
+      "scope": "GLOBAL",
+      "why": "Prevent lossy reconstruction.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+    },
+    {
+      "atom_id": "A-002",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "conversation:2",
+      "actor": "USER",
+      "content": "Validation is a safety rail, not the primary product.",
+      "scope": "GLOBAL",
+      "why": "Keep TAKY outcome/growth oriented.",
+      "disposition": "ADJUST",
+      "destination": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "supersedes": [
+        "A-OLD"
+      ],
+      "affects": [
+        "DOMAIN/ARCHITECTURE_WORK_OS.md"
+      ]
+    },
+    {
+      "atom_id": "A-003",
+      "type": "FRONTIER",
+      "material": true,
+      "source_pointer": "conversation:3",
+      "actor": "USER",
+      "content": "Use conversation to grow the skeleton into an increasingly complete system.",
+      "scope": "GLOBAL",
+      "why": "Expose missing flesh rather than declare premature completeness.",
+      "disposition": "FRONTIER",
+      "destination": "skeleton-growth-map"
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 3,
+    "mapped_material": 3,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true,
+    "notes": "Representative PASS fixture."
+  },
+  "skeleton_growth": {
+    "requires_growth_map": true,
+    "gaps_identified": [
+      "runtime compiler not yet implemented"
+    ],
+    "next_fill_targets": [
+      "runtime atom extraction",
+      "coverage ledger generation"
+    ]
+  }
+}

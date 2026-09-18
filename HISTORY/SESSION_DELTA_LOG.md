@@ -112,3 +112,9 @@ Unresolved: long-transcript full read, attachment bodies, remaining Drive traver
 Next resume: read this checkpoint + inventory + live STATE/HEAD, then continue bounded original-source reading. User authorization persists; no automatic background execution is claimed.
 Source conversation identifier: NOT_EXPOSED.
 Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
+  
+## 2026-09-19 — C2S / growth correction
+- User identified lossy conversational synthesis as a root cause of historically difficult/rough TAKY work.
+- Canonical response: added TKY-C2S-001, atom schema, deterministic coverage validator/fixtures, CI activation, architecture domain possibility-search/growth specialization.
+- Preserved correction: validation is a safety rail; TAKY's core is truthful goal-driven exploration, learning and growth.
+- Claim boundary: repository-level rules/checks added on branch `taky-c2s-growth-20260919`; live hosted auto-invocation remains UNVERIFIED until separately evidenced.

@@ -77,3 +77,42 @@ Notion, AI summary, report layout or prior project spreadsheet SHALL NOT silentl
 ## 5. DETAILED OPERATING SOURCE POINTER
 
 Detailed retained architecture/regulatory operating rules are in `hns140412-glitch/TAKY-WORK-OS`, `WORK_OS.md` (https://github.com/hns140412-glitch/TAKY-WORK-OS/blob/main/WORK_OS.md). Recover its architecture process, applicability, calculation, condition and evidence sections when relevant. Central TAKY governance and this domain boundary remain applicable. This pointer preserves discoverability; it neither migrates/deletes those rules nor promotes candidates or verifies current legal applicability. Recheck the source version before execution.
+
+## 6. GOAL-DRIVEN POSSIBILITY SEARCH — DOMAIN RULE
+
+Architecture work SHALL treat regulatory and technical review as a means to discover lawful, buildable paths toward the user's design/business goal, not merely as a failure detector.
+
+Default domain flow:
+`GOAL -> SITE/PROGRAM FACTS -> APPLICABLE LAW/PLAN -> CONFLICT/OPPORTUNITY MAP -> DESIGN VARIABLES -> MULTI-PATH SEARCH -> OPTION SET -> EMBEDDED VALIDATION -> COMPARISON -> USER DECISION`.
+
+### 6.1 Reality Locked / Possibility Open
+- Official/current law, site facts, geometry, calculations and approval conditions remain source-locked.
+- Unsupported favorable interpretation is prohibited.
+- A failed layout, mass or interpretation does not by itself prove the goal impossible.
+- When material, search design-variable changes, lawful exceptions/relaxations/incentives, alternative program mixes, geometry changes, phasing, structural/MEP alternatives and relevant verified cases.
+- Clearly distinguish `UNKNOWN / UNVERIFIED / CONDITIONAL / PROMISING / FEASIBLE / CURRENTLY_INFEASIBLE / EXHAUSTED_WITHIN_DEFINED_SEARCH_SPACE`.
+
+### 6.2 Regulatory opportunity model
+Where applicable, classify provisions as:
+- `ABSOLUTE_CONSTRAINT`;
+- `CONDITIONAL_CONSTRAINT`;
+- `OPPORTUNITY_RULE` (lawful relaxation, exception, incentive, alternative compliance path, special provision or approval route).
+
+Opportunity status requires actual source evidence and applicability; it SHALL NOT be invented from optimistic interpretation.
+
+## 7. GROWING COMPANY DESIGN INTELLIGENCE — DOMAIN RULE
+
+Company standards are not frozen truth. Distinguish:
+- `PRINCIPLE` — stable high-level values/safety/authority;
+- `CURRENT_BEST` — presently approved company standard;
+- `FRONTIER` — evidence-backed improvement candidate;
+- `CASE` — observed project evidence, not automatically a standard;
+- `STRATEGY` — reusable problem-solving method including when/why/trade-offs;
+- `FAILURE/LESSON` — evidence that should expand future search strategies.
+
+Project outcomes, client feedback, approvals, review comments, cost/constructability and field changes SHOULD feed future strategy/search improvement when materially available.
+
+### 7.1 Conversation-driven domain growth
+Architecture conversations that define or refine company methods SHALL compile through TKY-C2S-001. A high-level architecture skeleton is not complete merely because its headings exist. Track missing flesh such as law/data sources, exceptions, algorithms, unit/core/detail libraries, implementation, runtime linkage, test cases and outcome feedback.
+
+The next domain improvement SHOULD target the highest-value missing flesh or frontier hypothesis rather than only rephrasing current principles.

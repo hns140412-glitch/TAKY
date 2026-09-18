@@ -1,16 +1,61 @@
 {
-  "registry_version": "2026-09-13.3",
+  "registry_version": "2026-09-19.1",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
-    {"rule_id":"TKY-INTENT-001","owner":"MASTER/INTENT_EXECUTION_PROTOCOL.md","scope":"intent/result fidelity and delegated execution"},
-    {"rule_id":"TKY-OUTCOME-001","owner":"MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md","scope":"outcome-first execution, result-quality optimization, best-next-action and bounded validation"},
-    {"rule_id":"TKY-RECOVERY-001","owner":"MASTER/RECOVERY_FORENSICS_PROTOCOL.md","scope":"recovery/negative-existence and recovery exhaustion"},
-    {"rule_id":"TKY-HANDOFF-001","owner":"MASTER/HANDOFF_PROTOCOL.md","scope":"handoff portability, bundle closure and resume"},
-    {"rule_id":"TKY-TAXONOMY-001","owner":"MASTER/FAILURE_TAXONOMY.md","scope":"failure/discrepancy token semantics"},
-    {"rule_id":"TKY-ENFORCEMENT-001","owner":"MASTER/ENFORCEMENT_PROTOCOL.md","scope":"mechanical/auditable gates and replay"},
-    {"rule_id":"TKY-WORKSPACE-001","owner":"MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md","scope":"external workspace authority/projection boundary"},
-    {"rule_id":"TKY-NOTION-001","owner":"OS/NOTION_OPS.md","scope":"Notion-specific operational specialization, review pending register, provenance and active-rule loading boundary"},
-    {"rule_id":"TKY-COMMAND-001","owner":"OS/COMMAND_INTERACTION.md","scope":"command discovery, interaction semantics and context-aware Notion review routing"},
-    {"rule_id":"TKY-VALIDATION-001","owner":"MASTER/VALIDATION_RULES.md","scope":"validation composition and claim-level gating"}
+    {
+      "rule_id": "TKY-INTENT-001",
+      "owner": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+      "scope": "intent/result fidelity and delegated execution"
+    },
+    {
+      "rule_id": "TKY-OUTCOME-001",
+      "owner": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "scope": "outcome-first execution, goal-driven exploration, result-quality optimization, best-next-action and bounded validation"
+    },
+    {
+      "rule_id": "TKY-RECOVERY-001",
+      "owner": "MASTER/RECOVERY_FORENSICS_PROTOCOL.md",
+      "scope": "recovery/negative-existence and recovery exhaustion"
+    },
+    {
+      "rule_id": "TKY-HANDOFF-001",
+      "owner": "MASTER/HANDOFF_PROTOCOL.md",
+      "scope": "handoff portability, bundle closure and resume"
+    },
+    {
+      "rule_id": "TKY-TAXONOMY-001",
+      "owner": "MASTER/FAILURE_TAXONOMY.md",
+      "scope": "failure/discrepancy token semantics"
+    },
+    {
+      "rule_id": "TKY-ENFORCEMENT-001",
+      "owner": "MASTER/ENFORCEMENT_PROTOCOL.md",
+      "scope": "mechanical/auditable gates and replay"
+    },
+    {
+      "rule_id": "TKY-WORKSPACE-001",
+      "owner": "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
+      "scope": "external workspace authority/projection boundary"
+    },
+    {
+      "rule_id": "TKY-NOTION-001",
+      "owner": "OS/NOTION_OPS.md",
+      "scope": "Notion-specific operational specialization, review pending register, provenance and active-rule loading boundary"
+    },
+    {
+      "rule_id": "TKY-COMMAND-001",
+      "owner": "OS/COMMAND_INTERACTION.md",
+      "scope": "command discovery, interaction semantics and context-aware Notion review routing"
+    },
+    {
+      "rule_id": "TKY-VALIDATION-001",
+      "owner": "MASTER/VALIDATION_RULES.md",
+      "scope": "validation composition and claim-level gating"
+    },
+    {
+      "rule_id": "TKY-C2S-001",
+      "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "scope": "conversation-to-system compilation, atomic extraction, coverage closure, reverse reconstruction and skeleton-to-flesh growth"
+    }
   ]
 }
