@@ -258,3 +258,16 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - One blocked material node may be PARTIAL/UNAVAILABLE while sibling nodes continue; it must not stall the entire source graph.
 - Added N-06 replay for the observed browser-delay/JS-init regression and compliant bounded-fallback behavior.
 
+## 2026-09-19 — Notion Work launch stability preflight
+- Added a system-side Work launch gate for `노션검토`; the user is not the smoke tester.
+- Launch readiness now requires explicit structured source state/evidence, high-link fallback archive reachability, P0/P1 state consistency, completion-evidence consistency, and at least two stable inventory reads.
+- If rows/material states change during validation, readiness fails closed as stale/concurrently-mutating state and preflight must be rerun.
+- Added N-07 replay fixtures for unstable-inventory/user-smoke-test failure and stable system-side preflight PASS.
+
+## 2026-09-19 — Notion Work launch preflight stability hardening
+- Added a fail-closed preflight requirement before declaring `노션검토` ready for Work.
+- The register inventory must be stable across at least two independent reads; new rows or material state changes during validation invalidate readiness and require reconciliation.
+- High-link/container records must have reachable governed fallback archives with actual recovery artifacts, not only path strings.
+- The user is explicitly excluded as the default Work smoke tester; user-run discovery now fails the preflight contract.
+- Added N-07 replay for concurrent inventory mutation + user-as-tester regression and the compliant stable system-side preflight.
+

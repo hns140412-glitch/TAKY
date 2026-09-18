@@ -144,6 +144,8 @@ When an execution record sets `notion_link_review_required=true`, the determinis
 - the review record/evidence state was updated;
 - database housekeeping was not substituted for the requested link/content review.
 - a failed direct root fetch did not bypass an available governed recovered snapshot/body/Drive preservation path.
+- Work launch readiness was based on a stable system-side inventory preflight (at least two reads), not on asking the user to run Work and report failures.
+- high-link preserved records used for fallback have reachable archive contents, not merely a stored path string.
 
 Missing Phase A source acquisition/closure ⇒ at least `OMISSION`.
 Missing Phase B analysis/compare/improvement, or database-housekeeping-only substitution ⇒ at least `SUBSTITUTE_RESULT`.

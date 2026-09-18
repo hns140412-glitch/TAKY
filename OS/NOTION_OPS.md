@@ -214,6 +214,25 @@ An inaccessible node may be explicitly `UNAVAILABLE` and still participate in a 
 
 These properties are an operational evidence projection, not a second authority layer. The underlying source and review evidence remain controlling.
 
+### Work launch preflight stability — HARD LOCK
+
+Before declaring `노션검토` ready to launch or resume in Work, the governed review register SHALL pass a system-side preflight. The user SHALL NOT be the smoke tester.
+
+Minimum preflight for the active collection:
+- every in-scope row has explicit current `ROOT_SOURCE_STATE`, `SOURCE_GRAPH_STATE`, and `SOURCE_GRAPH_EVIDENCE` or an explicit non-applicable disposition;
+- legacy recovery evidence is projected forward rather than treated as missing;
+- known high-link/container records have an actually reachable governed fallback archive, not only a path string;
+- representative fallback files are readable, and for high-link preserved archives the expected recovery artifacts (`source.txt/html`, `links.json`, `page.pdf` or equivalent) are present when that archive format was used;
+- P0/P1 records contain no state contradiction that would cause `VERIFIED` evidence to be routed as `NOT_ATTEMPTED`;
+- completion/closed claims satisfy material-node disposition evidence;
+- the register inventory is stable across at least two independent reads separated by other validation work.
+
+If the row inventory or material state changes during preflight, Work launch readiness SHALL fail closed as stale/concurrently-mutating state. Reconcile the new rows and repeat the stability check. Do not ask the user to discover the mutation by running Work.
+
+`ONE CLEAN READ ≠ STABLE INVENTORY`.
+`PATH STRING EXISTS ≠ FALLBACK CONTENT READABLE`.
+`USER WORK RUN ≠ PREFLIGHT TEST HARNESS`.
+
 ### Completion Gate
 
 A link-review item SHALL NOT be reported as complete merely because:

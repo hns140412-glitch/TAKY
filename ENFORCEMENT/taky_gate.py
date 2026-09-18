@@ -160,6 +160,20 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if phase_b_missing or b(r,"notion_database_housekeeping_only"):
             f.append("SUBSTITUTE_RESULT")
 
+    # Notion Work launch preflight: do not use the user as the runtime tester.
+    if b(r,"notion_work_launch_preflight_required"):
+        stable_reads = i(r,"notion_inventory_stability_reads")
+        inventory_stable = b(r,"notion_inventory_stable")
+        structured_complete = b(r,"notion_preflight_structured_state_complete")
+        fallback_verified = b(r,"notion_preflight_fallback_archives_verified")
+        priority_consistent = b(r,"notion_preflight_priority_state_consistent")
+        if stable_reads < 2 or not inventory_stable:
+            f += ["STALE_STATE","OMISSION"]
+        if not structured_complete or not fallback_verified or not priority_consistent:
+            f.append("OMISSION")
+        if b(r,"notion_user_used_as_smoke_tester"):
+            f += ["USER_AS_QA","USER_FORCED_RECOVERY"]
+
     # Outcome-first gate: validation may not displace available result improvement.
     if b(r,"outcome_optimization_required"):
         blocked_by_overvalidation = (
