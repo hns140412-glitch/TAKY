@@ -264,3 +264,10 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - If rows/material states change during validation, readiness fails closed as stale/concurrently-mutating state and preflight must be rerun.
 - Added N-07 replay fixtures for unstable-inventory/user-smoke-test failure and stable system-side preflight PASS.
 
+## 2026-09-19 — Notion Work launch preflight stability hardening
+- Added a fail-closed preflight requirement before declaring `노션검토` ready for Work.
+- The register inventory must be stable across at least two independent reads; new rows or material state changes during validation invalidate readiness and require reconciliation.
+- High-link/container records must have reachable governed fallback archives with actual recovery artifacts, not only path strings.
+- The user is explicitly excluded as the default Work smoke tester; user-run discovery now fails the preflight contract.
+- Added N-07 replay for concurrent inventory mutation + user-as-tester regression and the compliant stable system-side preflight.
+
