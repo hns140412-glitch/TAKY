@@ -88,6 +88,7 @@ jobs:
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
+          python -m py_compile ENFORCEMENT/notion_review_fresh_context_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Replay baseline fixtures
@@ -98,6 +99,15 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
       - name: Replay evidence-backed orchestration fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
+      - name: Validate fresh-context Notion review routing
+        run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
+      - name: Reject fresh-context Notion structure-substitution regression
+        run: |
+          if python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_fail.json --repo-root .; then
+            echo "Expected fresh-context Notion regression fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected fresh-context Notion routing failure observed"
       - name: Validate structured preflight evidence
         run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
       - name: Replay evidence integrity failures
