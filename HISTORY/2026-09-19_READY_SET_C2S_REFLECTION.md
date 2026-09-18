@@ -4,44 +4,72 @@ Status: C2S COMPILE / RECOVERED RESUME SCOPE CLOSED
 Ledger: `HISTORY/2026-09-19_READY_SET_C2S_LEDGER.json`
 
 ## Recovered scope
-This reflection covers only the current Ready & Set resume scope:
+This reflection covers the current Ready & Set resume scope:
 - the user's explicit request to resume under latest TAKY and run C2S;
 - the latest Ready & Set handoff recovered from the Library;
 - live TAKY canonical C2S/runtime rules;
 - live Ready-Set PR/branch/runtime/tests;
-- live Netlify staging metadata inspected in this turn.
+- live GitHub Actions packaging/deploy evidence;
+- live Netlify staging metadata inspected during this turn.
 
 It does **not** claim that every historical Ready & Set raw conversation was re-read in this compile.
 
 ## Current truth
 - TAKY governing baseline inspected: `main@a101953d94715c800a122c147e87caf7836210b5`.
-- Ready & Set implementation baseline before this turn's governance-only task-file commit: PR #4, branch `taky/exploration-journey-2026-09-18`, `58233891cb0411eacd3e24dc76b47ecc8f10378e`.
-- Five inspected PR workflows were SUCCESS.
+- Ready & Set active safe branch: `taky/exploration-journey-2026-09-18`.
+- Current Ready & Set HEAD: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`.
+- Current-head five product regression workflows: SUCCESS.
 - Confirmed timer UI remains locked; rejected Focus/Time Attack/old Golden authority remains rejected.
 - Main merge and production deploy remain HUMAN APPROVAL gates.
 
-## Critical recovered gap
-Current Netlify staging is deploy `6aa698853e51c883dd6a69c2`, created 2026-09-13 as an upload-style deployment with `commit_ref=null` and `branch=null`.
+## Staging source trace — PASS
+A deterministic exact-head package path now exists:
+- workflow: `.github/workflows/ready-staging-source-package.yml`
+- workflow run: `35398513917` — SUCCESS
+- artifact: `ready-set-staging-site` / `10569796467`
+- source commit in manifest: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`
+- app version: `0.9.4-rc25`
+- cache version: `ready-set-v094-rev07-staging28-runtime-hardening-v1`
+- deployable site ZIP SHA-256: `48b9961961b839202ca910e68310c8c06b54cf32e01b6fd45bc81313abe8544a`
+- downloaded artifact hash matched the workflow-produced hash.
+
+Therefore the earlier `STAGING_SOURCE_PATH_REQUIRED` condition is superseded.
+
+## Staging publication — BLOCKED
+The dedicated deploy workflow exists:
+- `.github/workflows/ready-staging-deploy.yml`
+
+The repository does not have `NETLIFY_AUTH_TOKEN` configured.
+Verification run `35398395537` therefore failed closed with `STAGING_DEPLOY_AUTH_UNAVAILABLE`; the build/deploy steps were skipped.
+
+Live Netlify still reports current deploy:
+- `6aa698853e51c883dd6a69c2`
+- previous upload-style staging deployment
 
 Therefore:
-`CURRENT STAGING != VERIFIED CURRENT SAFE-BRANCH DEPLOYMENT EVIDENCE`
+`SOURCE PACKAGE PASS != STAGING PARITY`
 
-Actual iPhone/PWA validation against that alias cannot be classified as validation of the current safe-branch implementation until staging source parity is established.
+Current state:
+`SOURCE PACKAGE READY / STAGING DEPLOY AUTH BLOCKED / DEVICE VALIDATION NOT STARTED`
 
-## Next executable item
-The Ready & Set repository now contains:
-`.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md`
+## False-pass correction
+The initial guarded workflow version could finish green while the deploy itself was skipped because auth was absent. That was corrected immediately.
 
-Execution order:
-`EXACT SAFE BRANCH -> STAGING PARITY -> IPHONE/PWA VALIDATION -> FIX OBSERVED GAPS ONLY -> REGRESSION -> HUMAN APPROVAL`
+Current rule:
+`DEPLOY NOT ATTEMPTED != DEPLOY SUCCESS`
+
+Missing staging authorization now fails the workflow closed.
 
 ## Preserved OPEN/HOLD
-1. Traceable exact safe-branch publication path to the existing Netlify staging site remains OPEN (`STAGING_SOURCE_PATH_REQUIRED`).
+1. Secure publication authorization for the exact safe-branch package remains OPEN.
 2. Weekly/daily schedule structure direction is known, but final visual design remains HOLD; it must not be silently treated as a locked design.
 
+## Next executable sequence
+`SECURE STAGING AUTH -> EXACT PACKAGE PUBLISH -> LIVE MANIFEST/PARITY VERIFY -> IPHONE/PWA VALIDATION -> FIX OBSERVED GAPS ONLY -> REGRESSION -> HUMAN APPROVAL`
+
 ## Coverage closure
-- material atoms: 10
-- mapped material: 10
+- material atoms: 12
+- mapped material: 12
 - unmapped material: 0
 - silent loss: 0
 - false convergence: 0
