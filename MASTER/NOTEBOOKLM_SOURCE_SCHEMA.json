@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY NotebookLM Source Registry",
+  "type": "object",
+  "required": [
+    "registry_id",
+    "sources"
+  ],
+  "properties": {
+    "registry_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "title",
+          "source_class",
+          "content_checked",
+          "security_status",
+          "notebooklm_eligible",
+          "authority_status"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_class": {
+            "enum": [
+              "RAW_CONVERSATION",
+              "PRESERVED_TRANSCRIPT",
+              "RECOVERY_WITNESS",
+              "ORIGINAL_ATTACHMENT",
+              "PAGE_CAPTURE",
+              "HANDOFF",
+              "DERIVED_ANALYSIS",
+              "NOTEBOOKLM_OUTPUT",
+              "CANONICAL_REFERENCE"
+            ]
+          },
+          "content_checked": {
+            "type": "boolean"
+          },
+          "security_status": {
+            "enum": [
+              "SAFE_FOR_NOTEBOOKLM",
+              "SECURITY_HOLD",
+              "SANITIZE_REQUIRED",
+              "UNVERIFIED"
+            ]
+          },
+          "notebooklm_eligible": {
+            "type": "boolean"
+          },
+          "authority_status": {
+            "enum": [
+              "DIRECT_SOURCE",
+              "RECOVERY_WITNESS_EVIDENCE",
+              "REFERENCE_ONLY",
+              "EVIDENCE_ASSIST",
+              "CANONICAL_REFERENCE"
+            ]
+          },
+          "contains_session_or_auth_data": {
+            "type": "boolean"
+          },
+          "duplicate_of": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "derived_from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_pointer": {
+            "type": "string"
+          },
+          "actor_boundaries_preserved": {
+            "type": "boolean"
+          },
+          "coverage_status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
