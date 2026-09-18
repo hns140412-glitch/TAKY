@@ -117,7 +117,40 @@
     "working_root_folder_id": "1oPL5KFjcrqr8yNmlVLr6adM1Wbo3V0Hk",
     "c2s_review_root_folder_id": "1S04v5mn7R4oJ_EHnyerJQeKoJlQu3zd9",
     "pack": "PILOT_02_READY_SET",
-    "authority": "REFERENCE_ONLY_EVIDENCE_ASSIST"
+    "authority": "REFERENCE_ONLY_EVIDENCE_ASSIST",
+    "pilot02": {
+      "raw_source_pack_folder_id": "1g1iUgymUq9_bhMnYpCHvOWECq-JfB_d2",
+      "working_folder_id": "1QxHAglij2bh9jqPiAodTH-7Jf7TpxMCw",
+      "output_folder_id": "1Zp--lnVnfWQjR3sTtWzPdXDo70mW8ac4",
+      "c2s_review_folder_id": "16CeRZlXDMU1qyGmruOfB16ZFvLLfZndi",
+      "accepted_backfill_folder_id": "1m8w7IYtqUR61Svl5jV5pEFfW01KkdpBH",
+      "current_delta_drive_id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+      "source_map_drive_id": "1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
+      "query_pack_drive_id": "15epLtehjeHUiPpyQ8EU5aPj_bnzH72Szdi8c1h0Kvuc",
+      "c2s_review_checklist_drive_id": "1p3i_BGSEcUm4zYSBnfrHKp-cgp3s8hx0U-jguNjP72w",
+      "raw_pack_sources": [
+        {
+          "id": "1Z18Jg4GCWaUIJYiQjzkFVAbpfMdBGM1C",
+          "class": "CURRENT_TRUTH_REFERENCE"
+        },
+        {
+          "id": "1qCcivWgMjr6yC6Hl_MwDt_4qnpEiQcZL",
+          "class": "PROJECT_CONTRACT_REFERENCE"
+        },
+        {
+          "id": "1R3Ha1sd1uOmIB2wEdh0udSD6PGRsTeU4sILglnOhPzA",
+          "class": "RAW_PRESERVED"
+        },
+        {
+          "id": "1zmPpOnj3ymdkS5_d9QTwWkIJx-i26KdayxDRVFQpztY",
+          "class": "RAW_PRESERVED"
+        },
+        {
+          "id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+          "class": "CURRENT_CONVERSATION_CAPTURE"
+        }
+      ]
+    }
   },
   "context_pass_conditions": [
     "all required project contracts resolved",
