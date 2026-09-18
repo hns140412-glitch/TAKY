@@ -266,4 +266,21 @@ For TAKY-controlled repository runtimes, the executable composition bridge is:
 `C2S REQUIRED + COVERAGE RECORD MISSING/FAIL = BRIDGE NOT PASS`.
 `REPOSITORY BRIDGE PASS != HOSTED CHATGPT AUTO-INVOCATION VERIFIED`.
 
+
+## 16. NotebookLM / external synthesis intake
+
+Conversation/system backfill assisted by NotebookLM SHALL follow TKY-NBLM-001.
+
+NotebookLM output enters C2S as `REFERENCE_ONLY / EVIDENCE_ASSIST`, not as a user-confirmed atom source by itself.
+
+Before a NotebookLM-derived candidate can change canonical TAKY:
+1. identify the raw/original source pointer;
+2. verify actor and decision context;
+3. check later user correction/supersession;
+4. classify the candidate atom/disposition;
+5. include it in the declared C2S coverage scope;
+6. pass impact/coverage/reconstruction checks.
+
+If the raw source cannot be confirmed, keep the item `OPEN / HOLD / UNVERIFIED` rather than converting NotebookLM confidence into authority.
+
 END
