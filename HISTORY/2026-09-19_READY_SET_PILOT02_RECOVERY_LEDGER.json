@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "project_id": "READY_SET",
+  "recovery_pack": "PILOT_02_READY_SET",
+  "date": "2026-09-19",
+  "declared_scope": {
+    "declared": "Targeted Ready & Set project recovery for current implementation/resume context",
+    "includes": [
+      "Ready REV_07 formal baseline",
+      "GUIDE Family Learning OS authority",
+      "Ready current-truth and whole-implementation contract snapshots",
+      "recoverable Ready/Notion preserved conversations from 2026-09-06",
+      "sanitized recent TAKY resume/recovery conversation evidence through available indexed sources",
+      "current conversation correction delta 2026-09-19",
+      "live Ready repository PR #4 / runtime source at 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+      "staging-only PR #5 identity overlay state",
+      "current Ready CI/check-run evidence",
+      "TAKY project-context/NotebookLM Pilot 02 implementation"
+    ],
+    "excludes_or_unverified": [
+      "inaccessible account-wide historical chat ranges not present in the prepared source pack/index",
+      "consumer NotebookLM analysis execution itself because no NotebookLM connector is available in current ChatGPT tools",
+      "actual iPhone behavioral validation after exploration-flow corrections"
+    ],
+    "inaccessible_status": "UNVERIFIED_SOURCE_COVERAGE"
+  },
+  "atoms": [
+    {
+      "atom_id": "RNS-P02-001",
+      "type": "REQUIREMENT",
+      "material": true,
+      "actor": "USER",
+      "content": "Invoking TAKY for Ready must recover settled project decisions without requiring the user to repeat them.",
+      "disposition": "ADOPT",
+      "destination": "TKY-CONTEXT-001 / READY_SET_CONTEXT_MANIFEST",
+      "implementation_status": "IMPLEMENTED_IN_PR22",
+      "verification_status": "CI_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-P02-002",
+      "type": "REQUIREMENT",
+      "material": true,
+      "actor": "USER",
+      "content": "NotebookLM and Drive must assist C2S completeness for Ready recovery, while TAKY remains the canonical disposition/verification authority.",
+      "disposition": "ADOPT",
+      "destination": "TKY-NBLM-001 / PILOT_02_READY_SET",
+      "implementation_status": "DRIVE_PACK_IMPLEMENTED_DIRECT_NOTEBOOKLM_CONNECTOR_UNAVAILABLE",
+      "verification_status": "STRUCTURE_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-P02-003",
+      "type": "DECISION",
+      "material": true,
+      "actor": "USER+CANONICAL",
+      "content": "Ready exploration is sourced from actual Planner dated TODAY TODOs, not fixed subject cards or fabricated tasks.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/READY_SET_EXPLORATION_CONTRACT.md",
+      "implementation_status": "PARTIAL_RUNTIME",
+      "verification_status": "SOURCE_AND_CODE_REVIEWED"
+    },
+    {
+      "atom_id": "RNS-P02-004",
+      "type": "DECISION",
+      "material": true,
+      "actor": "USER+CANONICAL",
+      "content": "Child exploration entry is Today's Island / exploration pins from Planner-created today TODOs.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/READY_SET_EXPLORATION_CONTRACT.md",
+      "implementation_status": "NOT_FIRST_CLASS_RUNTIME",
+      "verification_status": "GAP_CONFIRMED"
+    },
+    {
+      "atom_id": "RNS-P02-005",
+      "type": "DECISION",
+      "material": true,
+      "actor": "CANONICAL",
+      "content": "One exploration session may bind multiple tasks while only one task/lap is active at a time.",
+      "disposition": "PRESERVE",
+      "destination": "Ready REV_07 + exploration contract",
+      "implementation_status": "DOWNSTREAM_SUPPORTED_UPSTREAM_BROKEN",
+      "verification_status": "LIVE_CODE_FAIL"
+    },
+    {
+      "atom_id": "RNS-P02-006",
+      "type": "CORRECTION",
+      "material": true,
+      "actor": "USER",
+      "content": "Do not use a fabricated staging TODO merely to bypass an empty Planner and test the timer.",
+      "disposition": "ADOPT",
+      "destination": "Ready device-validation sequencing",
+      "implementation_status": "BYPASS_STOPPED",
+      "verification_status": "CURRENT_CONVERSATION_CONFIRMED"
+    },
+    {
+      "atom_id": "RNS-P02-007",
+      "type": "CORRECTION",
+      "material": true,
+      "actor": "USER",
+      "content": "The earlier staging Home Screen PASS was invalid because the existing main PWA was mistaken for staging.",
+      "disposition": "ADOPT",
+      "destination": "Ready device evidence",
+      "implementation_status": "FALSE_PASS_REVOKED_STAGING_IDENTITY_SEPARATED",
+      "verification_status": "CORRECTED"
+    },
+    {
+      "atom_id": "RNS-P02-008",
+      "type": "CONFLICT",
+      "material": true,
+      "actor": "SYSTEM",
+      "content": "Formal REV_07 requires one target time, while current runtime allows no target.",
+      "disposition": "CONFLICT",
+      "destination": "Ready target-time semantics",
+      "implementation_status": "UNRESOLVED",
+      "verification_status": "OPEN_CONFLICT"
+    },
+    {
+      "atom_id": "RNS-P02-009",
+      "type": "HOLD",
+      "material": true,
+      "actor": "USER+SYSTEM",
+      "content": "Weekly/daily schedule visual direction is not finally locked.",
+      "disposition": "HOLD",
+      "destination": "Ready schedule UI",
+      "implementation_status": "NOT_FINAL",
+      "verification_status": "HOLD"
+    },
+    {
+      "atom_id": "RNS-P02-010",
+      "type": "OUTCOME",
+      "material": true,
+      "actor": "SYSTEM",
+      "content": "Project Context Manifest gate, validator, CI and Ready NotebookLM Pilot 02 source/review structure were implemented on fresh TAKY main-based Draft PR #22.",
+      "disposition": "ADOPT",
+      "destination": "TAKY project continuity",
+      "implementation_status": "IMPLEMENTED",
+      "verification_status": "CI_SUCCESS"
+    },
+    {
+      "atom_id": "RNS-P02-011",
+      "type": "OPEN",
+      "material": true,
+      "actor": "SYSTEM",
+      "content": "Consumer NotebookLM analysis output has not yet been executed/imported because current ChatGPT tools expose Google Drive but no NotebookLM connector.",
+      "disposition": "OPEN",
+      "destination": "PILOT_02_READY_SET/03_NOTEBOOKLM_OUTPUT",
+      "implementation_status": "SOURCE_PACK_READY",
+      "verification_status": "EXTERNAL_MANUAL_STEP_REQUIRED"
+    },
+    {
+      "atom_id": "RNS-P02-012",
+      "type": "OPEN",
+      "material": true,
+      "actor": "SYSTEM",
+      "content": "Actual iPhone runtime validation remains pending until exploration selection/entry contract gaps are corrected.",
+      "disposition": "OPEN",
+      "destination": "Ready device gate",
+      "implementation_status": "BLOCKED_BY_P0_EXPLORATION_GAPS",
+      "verification_status": "DEVICE_UNVERIFIED"
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 12,
+    "mapped_material": 12,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0,
+    "unresolved_open_conflict_hold": 4
+  },
+  "reverse_reconstruction": {
+    "status": "PASS_WITHIN_DECLARED_SCOPE",
+    "reconstructs": [
+      "product role",
+      "exploration source/entry",
+      "Planner authority",
+      "multi-task session/lap invariants",
+      "recording/BGM/timer locks",
+      "rejected directions",
+      "implementation gaps",
+      "open conflict/hold/device gate",
+      "NotebookLM/Drive/C2S operating boundary"
+    ],
+    "limitation": "Does not claim inaccessible account-wide history was recovered."
+  }
+}
