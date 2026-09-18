@@ -1,75 +1,69 @@
 # Ready & Set C2S Resume Reflection — 2026-09-19
 
-Status: C2S COMPILE / RECOVERED RESUME SCOPE CLOSED  
+Status: C2S COMPILE / DEVICE GATE READY  
 Ledger: `HISTORY/2026-09-19_READY_SET_C2S_LEDGER.json`
 
-## Recovered scope
-This reflection covers the current Ready & Set resume scope:
-- the user's explicit request to resume under latest TAKY and run C2S;
-- the latest Ready & Set handoff recovered from the Library;
-- live TAKY canonical C2S/runtime rules;
-- live Ready-Set PR/branch/runtime/tests;
-- live GitHub Actions packaging/deploy evidence;
-- live Netlify staging metadata inspected during this turn.
+## Current product truth
+- Ready & Set safe/runtime commit held fixed for device validation: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`.
+- Five current product regression workflows: SUCCESS.
+- Exact-head package workflow: SUCCESS.
+- Confirmed timer UI remains locked.
+- Main merge / production deploy remain HUMAN APPROVAL gates.
 
-It does **not** claim that every historical Ready & Set raw conversation was re-read in this compile.
+## Dedicated staging auth issue — superseded as device blocker
+The dedicated project `ready-set-staging-taky` still cannot be updated from GitHub Actions because `NETLIFY_AUTH_TOKEN` is absent. Its fail-closed workflow remains valid evidence that no stale or unauthorized deploy occurred.
 
-## Current truth
-- TAKY governing baseline inspected: `main@a101953d94715c800a122c147e87caf7836210b5`.
-- Ready & Set active safe branch: `taky/exploration-journey-2026-09-18`.
-- Current Ready & Set HEAD: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`.
-- Current-head five product regression workflows: SUCCESS.
-- Confirmed timer UI remains locked; rejected Focus/Time Attack/old Golden authority remains rejected.
-- Main merge and production deploy remain HUMAN APPROVAL gates.
+However this no longer blocks device validation.
 
-## Staging source trace — PASS
-A deterministic exact-head package path now exists:
-- workflow: `.github/workflows/ready-staging-source-package.yml`
-- workflow run: `35398513917` — SUCCESS
-- artifact: `ready-set-staging-site` / `10569796467`
-- source commit in manifest: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`
+## Git-backed Deploy Preview workaround — READY
+Existing Git-backed Netlify project:
+`profound-ganache-902032`
+
+A staging-only branch and Draft PR were created without changing main:
+- branch: `taky-staging-device-2026-09-19`
+- Draft PR: #5 — STAGING ONLY / DO NOT MERGE
+- source commit: `3d96878ada0458196ff8bfc68fdcf7087ea4d1ca`
+- Netlify deploy id: `6aadb57c9d58a60008f93fae`
+- context: `deploy-preview`
+- review_id: `5`
+- state: `ready`
+- alias: `https://deploy-preview-5--profound-ganache-902032.netlify.app`
+
+Netlify reports the exact commit_ref and branch. The deployed source uses `netlify.toml` with `publish="."` and no build command, so static runtime files are published from that exact Git tree.
+
+Expected source parity at that commit:
 - app version: `0.9.4-rc25`
-- cache version: `ready-set-v094-rev07-staging28-runtime-hardening-v1`
-- deployable site ZIP SHA-256: `48b9961961b839202ca910e68310c8c06b54cf32e01b6fd45bc81313abe8544a`
-- downloaded artifact hash matched the workflow-produced hash.
+- cache: `ready-set-v094-rev07-staging28-runtime-hardening-v1`
+- rejected `ready-focus-tools-v1.js`: absent from index and service-worker precache
+- current runtime and recording modules: present in service-worker precache
+- Netlify functions deployed: character-candidates / homework-analysis / time
 
-Therefore the earlier `STAGING_SOURCE_PATH_REQUIRED` condition is superseded.
+Automated direct HTTP spot-fetch of the preview URL is unavailable from the current tool runtime. This limitation is recorded and is not misrepresented as a live browser fetch.
 
-## Staging publication — BLOCKED
-The dedicated deploy workflow exists:
-- `.github/workflows/ready-staging-deploy.yml`
+## Active gate
+`SOURCE/CI PASS -> GIT-BACKED DEPLOY PREVIEW READY -> IPHONE/PWA DEVICE VALIDATION`
 
-The repository does not have `NETLIFY_AUTH_TOKEN` configured.
-Verification run `35398395537` therefore failed closed with `STAGING_DEPLOY_AUTH_UNAVAILABLE`; the build/deploy steps were skipped.
+Actual iPhone/PWA behavior is the next active gate.
 
-Live Netlify still reports current deploy:
-- `6aa698853e51c883dd6a69c2`
-- previous upload-style staging deployment
+Device-only checks:
+- background / foreground continuity
+- screen lock / restore
+- reload with active session
+- native share sheet / Kakao handoff where available
+- iOS recording MIME/container and filename truth
+- original + transfer recording behavior
+- microphone acoustics / local DSP observation
+- actual BGM playback
+- PWA cache/update behavior
 
-Therefore:
-`SOURCE PACKAGE PASS != STAGING PARITY`
+The user is not to be used as a developer/debugger. Only narrow product-use confirmations should be requested.
 
-Current state:
-`SOURCE PACKAGE READY / STAGING DEPLOY AUTH BLOCKED / DEVICE VALIDATION NOT STARTED`
-
-## False-pass correction
-The initial guarded workflow version could finish green while the deploy itself was skipped because auth was absent. That was corrected immediately.
-
-Current rule:
-`DEPLOY NOT ATTEMPTED != DEPLOY SUCCESS`
-
-Missing staging authorization now fails the workflow closed.
-
-## Preserved OPEN/HOLD
-1. Secure publication authorization for the exact safe-branch package remains OPEN.
-2. Weekly/daily schedule structure direction is known, but final visual design remains HOLD; it must not be silently treated as a locked design.
-
-## Next executable sequence
-`SECURE STAGING AUTH -> EXACT PACKAGE PUBLISH -> LIVE MANIFEST/PARITY VERIFY -> IPHONE/PWA VALIDATION -> FIX OBSERVED GAPS ONLY -> REGRESSION -> HUMAN APPROVAL`
+## Preserved HOLD
+Weekly/daily schedule structure direction remains known but final visual design is still HOLD and must not be silently promoted.
 
 ## Coverage closure
-- material atoms: 12
-- mapped material: 12
+- material atoms: 14
+- mapped material: 14
 - unmapped material: 0
 - silent loss: 0
 - false convergence: 0
