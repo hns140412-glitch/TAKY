@@ -167,22 +167,68 @@
     },
     {
       "atom_id": "RNS-C2S-010",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "github-actions:Ready-Set:run:35398513917",
+      "actor": "SYSTEM",
+      "content": "A deterministic exact-head staging source package path is now established for the Ready & Set safe branch. The current package was produced from head 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca and includes STAGING_SOURCE_MANIFEST.json plus a verified SHA-256 for the deployable site ZIP.",
+      "scope": "TOOL",
+      "why": "This closes the earlier source-traceability gap and prevents stale/manual staging uploads from being mistaken for the current safe-branch tree.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.github/workflows/ready-staging-source-package.yml",
+      "evidence": [
+        "workflow_run=35398513917",
+        "artifact_id=10569796467",
+        "sourceCommit=3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+        "appVersion=0.9.4-rc25",
+        "cacheVersion=ready-set-v094-rev07-staging28-runtime-hardening-v1",
+        "siteZipSha256=48b9961961b839202ca910e68310c8c06b54cf32e01b6fd45bc81313abe8544a"
+      ],
+      "implementation_status": "SOURCE_PACKAGE_READY",
+      "verification_status": "ARTIFACT_MANIFEST_AND_HASH_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-011",
       "type": "OPEN",
       "material": true,
-      "source_pointer": "toolchain:netlify-current-connector-capability",
+      "source_pointer": "github-actions:Ready-Set:run:35398395537 + netlify:ready-set-staging-taky",
       "actor": "SYSTEM",
-      "content": "A traceable path that publishes the exact current Ready & Set safe-branch tree to the existing upload-style Netlify staging site has not yet been established in the connected toolchain.",
+      "content": "Publishing the exact safe-branch package to the existing dedicated Netlify staging site is blocked because NETLIFY_AUTH_TOKEN is not configured in the Ready-Set repository. The guarded deploy workflow fails closed, and the Netlify site remains on deploy 6aa698853e51c883dd6a69c2.",
       "scope": "TOOL",
-      "why": "Blindly triggering the existing site deploy could redeploy stale content and would not prove source parity.",
+      "why": "Device validation must not begin against a stale/untraceable staging deployment, and credentials must not be exposed or persisted in source/history.",
       "disposition": "OPEN",
       "destination": "Ready-Set/.taky/tasks/RNS-P0-STAGING-DEVICE-VALIDATION-001.md#gate-1",
-      "implementation_status": "STAGING_SOURCE_PATH_REQUIRED",
-      "verification_status": "OPEN"
+      "evidence": [
+        "deploy_workflow=.github/workflows/ready-staging-deploy.yml",
+        "auth_check_run=35398395537",
+        "auth_check_conclusion=FAILURE",
+        "reason=STAGING_DEPLOY_AUTH_UNAVAILABLE",
+        "netlify_current_deploy=6aa698853e51c883dd6a69c2"
+      ],
+      "implementation_status": "STAGING_DEPLOY_AUTH_BLOCKED",
+      "verification_status": "LIVE_GITHUB_AND_NETLIFY_VERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-012",
+      "type": "LESSON",
+      "material": true,
+      "source_pointer": "conversation:2026-09-19:staging-deploy-false-pass-correction",
+      "actor": "SYSTEM",
+      "content": "A staging deploy workflow must not report overall success when authorization is missing and the deploy step was skipped. Missing deploy authorization is now fail-closed so 'deploy not attempted' cannot be misread as a green deployment.",
+      "scope": "TOOL",
+      "why": "Preserves TAKY claim boundaries: workflow green must not imply staging parity when no deployment occurred.",
+      "disposition": "ADOPT",
+      "destination": "Ready-Set/.github/workflows/ready-staging-deploy.yml",
+      "affects": [
+        "Ready-Set staging evidence classification"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "verification_status": "FAIL_CLOSED_RUN_VERIFIED"
     }
   ],
   "coverage_summary": {
-    "material_atoms": 10,
-    "mapped_material": 10,
+    "material_atoms": 12,
+    "mapped_material": 12,
     "unmapped_material": 0,
     "silent_loss_count": 0,
     "false_convergence_count": 0,
@@ -193,18 +239,19 @@
     "latest_corrections_reconstructable": true,
     "open_items_reconstructable": true,
     "why_preserved": true,
-    "notes": "Reconstructs why Ready & Set resumes from the verified PR/runtime state, why confirmed timer UI must remain fixed, why weekly/daily visual work remains HOLD, and why exact staging parity is the immediate executable gate before device validation."
+    "notes": "Reconstructs the Ready & Set resume, confirmed timer/rejection locks, source/CI baseline, exact-head source packaging PASS, staging publication AUTH BLOCK, fail-closed deploy evidence, weekly/daily visual HOLD, and the required sequence before device validation."
   },
   "skeleton_growth": {
     "requires_growth_map": true,
     "gaps_identified": [
-      "Traceable exact safe-branch -> Netlify staging publication path is not established.",
+      "Secure authorization for exact safe-branch publication to the dedicated Netlify staging site is not configured in the Ready-Set repository.",
       "Actual iPhone/PWA verification of recording, background/lock restoration, sharing, cache updates and BGM remains pending.",
       "Weekly/daily schedule visual direction is structurally defined but final visual lock remains pending."
     ],
     "next_fill_targets": [
-      "Establish exact safe-branch staging parity with source trace.",
-      "Run representative iPhone/PWA device validation on that exact build.",
+      "Provide a secure staging deployment authorization path without exposing credentials.",
+      "Publish the exact current safe-branch package and verify STAGING_SOURCE_MANIFEST.json on the live staging site.",
+      "Run representative iPhone/PWA device validation on that exact deployment.",
       "Fix only reproduced runtime gaps and rerun affected regressions.",
       "Resume weekly/daily UI design lock separately without disturbing confirmed timer UI."
     ]
