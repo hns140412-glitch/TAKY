@@ -452,4 +452,22 @@ This `MASTER/MASTER_LOGIC.md` file is the active REV_00 canonical GRAND MASTER a
 
 Known Baseline 01 source gaps remain `UNVERIFIED_SOURCE_COVERAGE`; canonical remaster completion SHALL NOT be misreported as full historical source recovery or runtime/implementation PASS.
 
+
+## C2S. Conversation-to-System Compilation & Growth — HARD LOCK
+
+Conversation-derived system construction is governed by `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md` (TKY-C2S-001).
+
+Activation principles:
+- `SUMMARY != PRESERVATION`.
+- `SKELETON PRESENT != SYSTEM COMPLETE`.
+- `CORRECTION CAPTURED != CORRECTION PROPAGATED`.
+- `GOOD FINAL PROSE != MATERIAL ITEM COVERAGE`.
+- recovered material conversation items require explicit disposition/destination;
+- within recovered scope, compile completion requires `UNMAPPED_MATERIAL = 0` and `SILENT_LOSS = 0`;
+- distinct alternatives SHALL NOT be flattened merely to simplify the canonical narrative;
+- material system-building work SHALL preserve WHY, correction lineage, OPEN/CONFLICT/FRONTIER state and ownership;
+- current TAKY should expose high-value missing flesh and preferentially grow those gaps rather than repeatedly restating the skeleton.
+
+This rule owns compilation/coverage semantics only; source authority, intent, outcome, recovery, traceability and domain-specific semantics remain with their declared owners.
+
 END
