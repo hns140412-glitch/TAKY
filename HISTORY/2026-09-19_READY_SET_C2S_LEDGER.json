@@ -274,11 +274,58 @@
       ],
       "implementation_status": "READY_FOR_DEVICE_VALIDATION",
       "verification_status": "DEVICE_UNVERIFIED"
+    },
+    {
+      "atom_id": "RNS-C2S-015",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "device-gate:home-screen-install-observation",
+      "actor": "SYSTEM",
+      "content": "The earlier claim that Home Screen installation had passed was false. The screenshot showed an existing production/main Ready & Set PWA icon, not a newly distinguishable staging install.",
+      "scope": "PROJECT",
+      "why": "Staging and main used the same app name, icon and Apple web app title, so visual confirmation alone could not establish staging provenance.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set device-validation evidence",
+      "implementation_status": "FALSE_PASS_REVOKED",
+      "verification_status": "CORRECTED",
+      "evidence": [
+        "user reported the launched PWA was connected to the main address",
+        "manifest at product commit used id=ready-set, name=Ready & Set, short_name=Ready & Set",
+        "apple-mobile-web-app-title was Ready & Set"
+      ]
+    },
+    {
+      "atom_id": "RNS-C2S-016",
+      "type": "OUTCOME",
+      "material": true,
+      "source_pointer": "netlify:profound-ganache-902032:deploy-preview-5:6aadb800fee3ea0008aee104",
+      "actor": "SYSTEM",
+      "content": "A staging-only PWA identity overlay was deployed on Draft PR #5 so the device-validation PWA is distinguishable from production/main without changing the product runtime branch.",
+      "scope": "TOOL",
+      "why": "Prevent staging/main PWA identity ambiguity and avoid using the user as a debugger.",
+      "disposition": "ADOPT",
+      "destination": "Ready & Set staging device-validation path",
+      "implementation_status": "STAGING_PWA_IDENTITY_READY",
+      "verification_status": "NETLIFY_READY_AND_GIT_TRACEABLE",
+      "evidence": [
+        "staging branch head=f1d057ee493d95f12e25ed74ad0ee7e2727ac4c0",
+        "manifest id=ready-set-staging-preview-5",
+        "name=Ready & Set STAGING",
+        "short_name=R&S STAGING",
+        "start_url=./?staging=preview-5",
+        "apple-mobile-web-app-title=R&S STAGING",
+        "deploy id=6aadb800fee3ea0008aee104",
+        "deploy context=deploy-preview",
+        "Netlify state=ready",
+        "GitHub Netlify status=success",
+        "Draft PR #5 remains open, draft, unmerged",
+        "main/production unchanged"
+      ]
     }
   ],
   "coverage_summary": {
-    "material_atoms": 14,
-    "mapped_material": 14,
+    "material_atoms": 16,
+    "mapped_material": 16,
     "unmapped_material": 0,
     "silent_loss_count": 0,
     "false_convergence_count": 0,
@@ -289,7 +336,7 @@
     "latest_corrections_reconstructable": true,
     "open_items_reconstructable": true,
     "why_preserved": true,
-    "notes": "Reconstructs the Ready & Set resume, confirmed timer/rejection locks, exact-head packaging, dedicated-site auth block, its Git-backed Deploy Preview workaround, current source/deploy provenance, weekly/daily visual HOLD, and the actual iPhone/PWA device gate."
+    "notes": "Reconstructs Ready & Set resume, confirmed timer/rejection locks, exact-head packaging, dedicated-site auth block, Git-backed Deploy Preview workaround, revoked false Home Screen PASS, staging-specific PWA identity overlay, weekly/daily visual HOLD, and the actual iPhone/PWA device gate."
   },
   "skeleton_growth": {
     "requires_growth_map": true,
