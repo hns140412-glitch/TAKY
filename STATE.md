@@ -15,7 +15,7 @@ If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do n
 - repository enforcement: `REPOSITORY_EXECUTABLE + CI_ENFORCED`
 - role/action/owner classification trust source: `UNVERIFIED`
 - repository C2S preflight composition: `REPOSITORY_EXECUTABLE + CI_ENFORCED`
-- NotebookLM recovery pipeline: `DRIVE_WORKSPACE_IMPLEMENTED + CANONICAL_PROTOCOL_IN_PROGRESS`
+- NotebookLM recovery pipeline: `DRIVE_WORKSPACE_IMPLEMENTED + CANONICAL_PROTOCOL_IMPLEMENTED + CI_ENFORCED`
 - hosted ChatGPT native tool-call automatic preflight: `UNVERIFIED`
 - live hosted runtime fail-closed claim: `PROHIBITED`
 - P0 open architecture issue: `#2 Trusted routing authority + runtime preflight interception`
