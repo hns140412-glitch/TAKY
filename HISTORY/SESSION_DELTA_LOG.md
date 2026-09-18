@@ -220,3 +220,9 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Sanitized and post-write verified `타키 기준 불러오기`: 149 linear nodes, 85 USER/ASSISTANT messages, 6 non-text markers, blocked session/auth patterns 0.
 - Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage as P01-RAWHTML-008 / P01-SAN-008.
 - Existing canonical source registry was checked before writes to avoid duplicate sanitized artifacts; duplicate temporary output for `대화 복구 진행` was deleted after canonical equivalence verification.
+
+## 2026-09-19 — Work browser runtime stall observed during 연기우 11–20
+- Work showed delayed browser response and JavaScript environment initialization failure while attempting URLs 11–20 from the recovered 연기우 source graph.
+- Corrective rule: browser/runtime stall is a bounded recovery event, not a reason for unbounded retries or whole-graph blocking.
+- After bounded retries, use preserved Notion body/snapshot, Drive archive, or another available recovery family; preserve PARTIAL/UNAVAILABLE per node and continue independent siblings.
+
