@@ -20,6 +20,9 @@ on:
       - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
       - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'OS/COMMAND_INTERACTION.md'
       - '.github/workflows/taky-enforcement.yml'
   pull_request:
@@ -41,6 +44,9 @@ on:
       - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
       - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'OS/COMMAND_INTERACTION.md'
       - '.github/workflows/taky-enforcement.yml'
 
@@ -120,3 +126,5 @@ jobs:
             exit 1
           fi
           echo "Expected lossy-coverage failure observed"
+      - name: Validate architecture conversation C2S ledger
+        run: python ENFORCEMENT/conversation_coverage_validator.py HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json
