@@ -205,3 +205,13 @@ This entry records an approved integration during the REV_00 evolving-design pha
 - Historical revision labels remain lineage only.
 
 This entry records an approved integration during the REV_00 evolving-design phase. It does not establish the first official post-finalization revision.
+
+## 2026-09-19 — Notion Link Intelligence Review E2E enforcement
+- Reframed generic `노션검토` as a content/link-intelligence workflow rather than a schema-cleanup fallback.
+- Added mandatory two-phase execution under `OS/NOTION_OPS.md`: Phase A original-source acquisition with material attachment/child/reference traversal to source-graph closure; Phase B analysis, current-owner comparison, complement/improvement and disposition.
+- Added completion rules that reject Notion-summary-only, root-URL-only, undispositioned descendant, collection-without-analysis, and database-housekeeping-only substitutes.
+- Added deterministic `notion_link_review_required` checks to `ENFORCEMENT/taky_gate.py` using existing failure semantics `OMISSION / SUBSTITUTE_RESULT / PREMATURE_PASS`.
+- Added replay fixtures covering the observed historical failure, compliant post-fix behavior, and explicit closure with an unavailable descendant.
+- Preserved `/노션검토 ≠ /반영`; external/Notion material remains REFERENCE_ONLY until governed promotion.
+- Repository-level enforcement is implemented; hosted ChatGPT cross-chat automatic invocation remains a separate runtime claim and is not upgraded by this change.
+
