@@ -1,0 +1,9 @@
+{
+  "resolved_contracts": [
+    "READY_UI_MASTER_REV_07",
+    "FAMILY_LEARNING_AUTHORITY"
+  ],
+  "latest_corrections_loaded": true,
+  "current_implementation_loaded": true,
+  "reverse_reconstruction_pass": true
+}
