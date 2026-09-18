@@ -1,0 +1,19 @@
+{
+  "record_id": "CONTINUITY-PASS-001",
+  "intent": "RESUME",
+  "selected_level": "L1",
+  "levels_attempted": [
+    "L0",
+    "L1"
+  ],
+  "material_context_gap": false,
+  "escalation_reason": null,
+  "asked_user_to_repeat": false,
+  "recoverable_path_remaining": false,
+  "user_is_only_source": false,
+  "full_scan_explicit": false,
+  "notebooklm_used": false,
+  "l0_l1_sufficient": true,
+  "stop_reason": "SUFFICIENT_CONTEXT",
+  "notes": "New chat resumes from canonical state and active deltas without full-history reload."
+}

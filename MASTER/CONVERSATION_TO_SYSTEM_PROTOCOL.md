@@ -283,4 +283,18 @@ Before a NotebookLM-derived candidate can change canonical TAKY:
 
 If the raw source cannot be confirmed, keep the item `OPEN / HOLD / UNVERIFIED` rather than converting NotebookLM confidence into authority.
 
+
+## 17. Incremental continuity / context economy
+
+C2S preserves material conversational totality but SHALL NOT require all historical atoms to be loaded into every active turn.
+
+Runtime selection/recovery is governed by TKY-CONTINUITY-001:
+- ordinary continuation stays in the smallest sufficient working set;
+- new-chat resume loads canonical state/owners/open deltas before historical recovery;
+- NotebookLM/raw-source escalation is targeted;
+- conversation end persists material deltas and then releases unnecessary history;
+- full global reconstruction is not the default prerequisite for ordinary canonical work.
+
+`LOSSLESS PERSISTENCE != MAXIMUM ACTIVE CONTEXT`
+
 END

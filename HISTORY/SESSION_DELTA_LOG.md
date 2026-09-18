@@ -139,3 +139,14 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Directly inspected Pilot 01 transcript candidates: two preserved transcript sources are safe/direct; `TAKY_WORK_OS_대화전체기록_복구본_2026-09-06.txt` is mixed summary+transcript and therefore REFERENCE_ONLY rather than Primary RAW.
 - Added TKY-NBLM-001 protocol, source schema/validator, actual Pilot 01 registry and CI safety/authority checks.
 - Current NotebookLM execution path is Drive interchange + human notebook/source selection; no direct consumer NotebookLM connector was found in the current plugin directory.
+
+## 2026-09-19 — Conversation continuity / context economy
+- User requested a cross-chat memory/recovery standard that preserves the total meaning of conversations through NotebookLM without omission or repeated questioning, but does not become heavyweight.
+- Added TKY-CONTINUITY-001 with the principle `TOTALITY STORED, CONTEXT SELECTIVE`.
+- Defined L0 HOT, L1 WARM canonical, L2 targeted NotebookLM/index, L3 raw verification, L4 explicit full forensic.
+- Added `ASK LAST`: do not ask the user to repeat recoverable settled context.
+- Added `FULL SCAN LAST`: full/global reconstruction is not a default resume or continuation behavior.
+- New-chat resume defaults to STATE + applicable owner + active/open deltas; NotebookLM/raw escalation is targeted only when material gaps remain.
+- Conversation end persists material deltas incrementally rather than rescanning all history.
+- Added deterministic continuity validator and expected-failure fixtures for re-asking recoverable context and unnecessary full-history loading.
+- Added Drive `TAKY_GLOBAL_CONVERSATION_TOPIC_MAP` as a REFERENCE_ONLY routing index for minimal notebook/source-pack selection.

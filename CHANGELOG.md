@@ -1,3 +1,10 @@
+## 2026-09-19 — Conversation continuity / context economy
+- Added TKY-CONTINUITY-001: TOTALITY STORED, CONTEXT SELECTIVE.
+- Added progressive L0-L4 retrieval ladder, ASK LAST and FULL SCAN LAST.
+- New-chat resume now targets canonical state/open deltas before NotebookLM/raw escalation.
+- Added deterministic continuity validator with pass/fail fixtures.
+- Added lightweight Drive Global Conversation Topic Map for notebook/source routing.
+
 ## 2026-09-19 — NotebookLM conversation recovery pipeline
 - Added TKY-NBLM-001 for NotebookLM-assisted conversation recovery.
 - Added source-security / authority metadata schema and deterministic validator.

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY Conversation Continuity Retrieval Record",
+  "type": "object",
+  "required": [
+    "record_id",
+    "intent",
+    "selected_level",
+    "levels_attempted",
+    "asked_user_to_repeat",
+    "recoverable_path_remaining",
+    "full_scan_explicit",
+    "stop_reason"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent": {
+      "enum": [
+        "CONTINUE",
+        "RESUME",
+        "RECALL",
+        "CANONICAL_WRITE",
+        "TARGETED_AUDIT",
+        "FULL_AUDIT"
+      ]
+    },
+    "selected_level": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "levels_attempted": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "L0",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "material_context_gap": {
+      "type": "boolean"
+    },
+    "escalation_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asked_user_to_repeat": {
+      "type": "boolean"
+    },
+    "recoverable_path_remaining": {
+      "type": "boolean"
+    },
+    "user_is_only_source": {
+      "type": "boolean"
+    },
+    "full_scan_explicit": {
+      "type": "boolean"
+    },
+    "notebooklm_used": {
+      "type": "boolean"
+    },
+    "l0_l1_sufficient": {
+      "type": "boolean"
+    },
+    "stop_reason": {
+      "enum": [
+        "SUFFICIENT_CONTEXT",
+        "TRUE_UNAVAILABLE",
+        "MATERIAL_AMBIGUITY",
+        "HUMAN_AUTHORITY_REQUIRED",
+        "FULL_AUDIT_COMPLETE",
+        "OPEN_UNVERIFIED_NONBLOCKING"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

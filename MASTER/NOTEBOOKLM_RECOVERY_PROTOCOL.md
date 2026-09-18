@@ -201,4 +201,17 @@ Disallowed:
 - “안전한 원문” before source security inspection;
 - “독립 검증” when several files are duplicates/derivatives of one source.
 
+
+## 12. Context economy / selective activation
+
+NotebookLM use for conversational continuity SHALL follow `MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md` (TKY-CONTINUITY-001).
+
+NotebookLM is an L2 targeted recovery layer, not a permanent always-on context layer.
+
+Use it only when L0 current context + L1 canonical continuity are insufficient for a material historical/context question.
+
+`NOTEBOOKLM AVAILABLE != NOTEBOOKLM REQUIRED`
+`GLOBAL NOTEBOOK != DEFAULT RESUME PATH`
+`TARGETED RECOVERY > FULL HISTORY RELOAD`
+
 END
