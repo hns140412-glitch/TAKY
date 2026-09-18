@@ -160,3 +160,11 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - Created Drive sanitized derivative `P01_SANITIZED_6aa5daf5_AI_WORK_OS_변화감시` and registered original→derivative lineage.
 - Original 6aa HTML remains `PAGE_CAPTURE / SANITIZE_REQUIRED / notebooklm_eligible=false`; the derivative is `PRESERVED_TRANSCRIPT / RECOVERY_WITNESS_EVIDENCE / SAFE_FOR_NOTEBOOKLM`.
 - CI fixture reproduces the React Router share format and checks sanitizer output byte-for-byte plus unsafe-output rejection.
+
+## 2026-09-19 — NotebookLM Pilot 01 sanitized batch 02
+- Expanded TAKY Core historical recovery selectively rather than running a full 6aa corpus scan.
+- Sanitized and post-write verified `최신 타키 기준 재개`: 2902 linear nodes, 1024 USER/ASSISTANT messages, 19 non-text markers, blocked session/auth patterns 0.
+- Sanitized and post-write verified `"TAKI" SETTING`: 1407 linear nodes, 931 USER/ASSISTANT messages, 1 non-text marker, blocked session/auth patterns 0.
+- Registered original PAGE_CAPTURE → sanitized PRESERVED_TRANSCRIPT lineage in Drive Source Registry and GitHub Pilot registry.
+- Global Conversation Topic Map now routes TAKY Core L2 recovery to the three safe sanitized 6aa transcripts; original HTML remains SECURITY_HOLD / SANITIZE_REQUIRED.
+- Non-text markers remain explicit L3 escalation points if their content becomes material.
