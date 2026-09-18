@@ -225,4 +225,28 @@ The validator does not prove semantic correctness of every atom, inaccessible so
 
 A prose statement such as "전체 반영" without a scoped coverage ledger/equivalent evidence SHALL NOT be treated as mechanically proven C2S coverage.
 
+
+## 14. C2S runtime composition bridge — HARD LOCK
+
+For TAKY-controlled runtimes that perform conversation-derived governance/system writes, use:
+`ENFORCEMENT/c2s_preflight_bridge.py`.
+
+When the execution record sets `conversation_system_compile_required=true`, the bridge composes:
+1. canonical preflight/evidence validation;
+2. TKY deterministic execution gate;
+3. TKY-C2S coverage validation.
+
+Missing coverage record -> bridge FAIL.
+Lossy/false-converged/unreconstructable coverage -> bridge FAIL.
+
+Reference:
+```bash
+python ENFORCEMENT/c2s_preflight_bridge.py \
+  --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+  --coverage-record ENFORCEMENT/fixtures/conversation_coverage_pass.json \
+  --repo-root .
+```
+
+This is repository-controlled enforcement. Hosted native automatic interception remains separately unverified.
+
 END
