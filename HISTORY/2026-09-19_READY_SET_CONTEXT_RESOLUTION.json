@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "project_id": "READY_SET",
+  "resolved_contracts": [
+    "READY_UI_MASTER_REV_07",
+    "READY_EXPLORATION_CONTRACT",
+    "FAMILY_LEARNING_AUTHORITY"
+  ],
+  "latest_corrections_loaded": true,
+  "current_implementation_loaded": true,
+  "reverse_reconstruction_pass": true,
+  "recovered_scope": {
+    "drive": [
+      "READY_CURRENT_TRUTH_LATEST.md",
+      "READY_WHOLE_IMPLEMENTATION_CONTRACT_DRAFT_2026-09-11.md",
+      "P02_RAW_01_TAKY_ReadySet_노션시간표_URL심층분석_대화전체원문_2026-09-06",
+      "P02_RAW_02_GUIDE_Ready_Set_현재대화_원문전체보존_2026-09-06",
+      "P02_RAW_03_CURRENT_DELTA_READY_CONTEXT_2026-09-19",
+      "PILOT_02_READY_SET_SOURCE_MAP"
+    ],
+    "github": [
+      "TAKY/MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "TAKY/MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
+      "TAKY/PROJECTS/READY_SET_CONTEXT_MANIFEST.json",
+      "TAKY/MASTER/READY_SET_EXPLORATION_CONTRACT.md",
+      "Ready-Set/Ready_Set_Ui_Master_Logic_REV_07.md",
+      "Ready-Set live source at 3d96878ada0458196ff8bfc68fdcf7087ea4d1ca"
+    ],
+    "boundary": "Targeted Ready & Set recovery pack. Historical Ready conversations not present in indexed/raw pack remain UNVERIFIED_SOURCE_COVERAGE."
+  },
+  "current_authority": {
+    "ready_repo": "hns140412-glitch/Ready-Set",
+    "safe_branch": "taky/exploration-journey-2026-09-18",
+    "safe_head": "3d96878ada0458196ff8bfc68fdcf7087ea4d1ca",
+    "pr4": {
+      "state": "OPEN",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "base": "runtime-session-bridge-2026-09-10"
+    },
+    "product_version": "0.9.4-rc25",
+    "cache_version": "ready-set-v094-rev07-staging28-runtime-hardening-v1",
+    "release_status": "STAGING_RUNTIME_HARDENING_DEVICE_VALIDATION_PENDING",
+    "production_main_changed": false
+  },
+  "ci": {
+    "ready_exploration_journey_contract": {
+      "run_id": 35398517334,
+      "status": "SUCCESS"
+    },
+    "ready_foundation_assignment_bridge_contract": {
+      "run_id": 35398517374,
+      "status": "SUCCESS"
+    },
+    "ready_parent_capture_contract": {
+      "run_id": 35398517320,
+      "status": "SUCCESS"
+    },
+    "ready_homework_analysis_contract": {
+      "run_id": 35398517341,
+      "status": "SUCCESS"
+    },
+    "ready_first_run_parent_activation_contract": {
+      "run_id": 35398517340,
+      "status": "SUCCESS"
+    },
+    "claim_boundary": "CI success does not prove recovered Exploration Contract compliance because current tests do not reject single-task collapse."
+  },
+  "recovered_current_truth": {
+    "product_role": "BASE CAMP / Goal & Session Orchestrator",
+    "exploration_source": "Actual Planner-authoritative dated TODAY TODO instances; no fake/fixed task substitution.",
+    "child_entry": "Today's Island / 오늘의 섬 → exploration pins → select one or more Planner TODAY TODOs → one exploration session.",
+    "session_invariants": [
+      "ONE SESSION / ONE TARGET TIME / MULTIPLE TASKS / ONE ACTIVE TASK / ONE ACTIVE LAP",
+      "TASK_CHANGE = LAP_END + NEXT_LAP_START",
+      "APP_SWITCH != PAUSE",
+      "APP_SWITCH != LAP_END",
+      "APP_SWITCH != SESSION_END",
+      "SCREEN_LOCK != PAUSE",
+      "NETWORK_FAILURE != SESSION_END",
+      "SESSION_END != TASK_COMPLETE"
+    ],
+    "outcomes": [
+      "COMPLETED",
+      "PARTIAL",
+      "DEFERRED",
+      "BLOCKED",
+      "WAITING_FOR_PARENT"
+    ],
+    "authority_split": {
+      "parent": "CAPTURE / INPUT / CONFIRM / SUPPORT",
+      "learning_master_subject": "INTERPRET / LOAD ANALYSIS",
+      "planner_main": "ALLOCATE",
+      "child": "VIEW / FACT INPUT WHEN APPLICABLE / SELECT TODAY / EXECUTE",
+      "ready": "PRESENTATION / EXECUTION / SESSION ORCHESTRATION"
+    },
+    "planner_rules": [
+      "SCHEDULE COMMITMENT != HOMEWORK TEMPLATE != DATED TODO INSTANCE != PROGRESS EVENT",
+      "FREE TIME EXISTS != MUST STUDY",
+      "CAPACITY != REQUIRED STUDY AMOUNT",
+      "PHYSICAL PAGE != LEARNING UNIT",
+      "MINUTES != PRIMARY SPLIT UNIT",
+      "PLANNED STUDY END <= 22:00",
+      "DEFERRED -> CARRY_OVER -> RESCHEDULED"
+    ],
+    "timer_ui": [
+      "yellow focus field",
+      "그냥! 지금 하면 돼!",
+      "full analog clock",
+      "task/exploration context",
+      "remaining / target time",
+      "pause / 완료했어요",
+      "BGM",
+      "conditional REC"
+    ],
+    "recording": [
+      "REC only when task requires recording/speaking",
+      "timer continues during recording",
+      "BGM stops during recording",
+      "browser/device DSP local-first",
+      "M4A/AAC preferred when actually supported",
+      "original + transfer preserved separately",
+      "submitted filename has no clean/original suffix",
+      "actual iPhone MIME/acoustics/native share remain device-unverified"
+    ]
+  },
+  "implementation_findings": [
+    {
+      "id": "READY-GAP-MULTI-SELECT",
+      "status": "FAIL",
+      "evidence": [
+        "ready-base-native-v2.js rewrites all other tasks selected:false",
+        "ready-planner-selection-bridge-v1.js rewrites all other tasks selected:false",
+        "ready-base-runtime-v1.js starts activeSession with tasks:[label]"
+      ],
+      "impact": "Upstream collapses recovered MULTIPLE TASKS contract to one task even though ready-runtime-v07.js supports multiple session tasks."
+    },
+    {
+      "id": "READY-GAP-TODAY-ISLAND",
+      "status": "FAIL",
+      "evidence": "Child home uses exploration copy and Planner list, but Today's Island / exploration-pin entry is not implemented as a first-class runtime contract.",
+      "impact": "Exploration semantics can drift back to generic task/mission entry."
+    },
+    {
+      "id": "READY-STAGE-E-LEGACY",
+      "status": "PARTIAL_CONFLICT",
+      "evidence": [
+        "ready-stage-e.js retains legacy NEXT_TUE detection and provisional fields",
+        "current allocation path also includes later corrections: estimatedMin:null, minuteCapacityAuthority:false, nextTuesdayNormalSlot:false"
+      ],
+      "impact": "File contains migration/legacy compatibility plus newer semantics; tests must distinguish preserved-history detection from active authority."
+    },
+    {
+      "id": "READY-PARENT-AUTHORITY",
+      "status": "PARTIAL",
+      "evidence": [
+        "ready-stage-f.js role split and FACT capture semantics exist",
+        "Parent UI/code still contains difficulty/estimated-time related fields or legacy display paths requiring authority audit"
+      ]
+    },
+    {
+      "id": "READY-TIMER-CONTINUITY",
+      "status": "SOURCE_IMPLEMENTED_CI_VERIFIED_DEVICE_PENDING",
+      "evidence": [
+        "timestamp-derived activeSession startAt path",
+        "duplicate start lock",
+        "foreground/pageshow restore",
+        "five current regression workflows SUCCESS"
+      ]
+    },
+    {
+      "id": "READY-RECORDING",
+      "status": "SOURCE_IMPLEMENTED_CI_VERIFIED_DEVICE_PENDING",
+      "evidence": [
+        "conditional taskNeedsRecording",
+        "timer context continues",
+        "BGM stop/resume path",
+        "local DSP and original/transfer storage",
+        "actual iPhone behavior still pending"
+      ]
+    }
+  ],
+  "open_hold_conflict": [
+    {
+      "id": "TARGET_TIME_REQUIRED_VS_OPTIONAL",
+      "status": "OPEN_CONFLICT",
+      "note": "REV_07 says one target time; current runtime explicitly supports targetMs=null/timeOptional. Do not silently resolve."
+    },
+    {
+      "id": "WEEKLY_DAILY_VISUAL_LOCK",
+      "status": "HOLD",
+      "note": "Daily vertical/explorer direction exists; user liked one composition but found it visually tiring; weekly still needs final review."
+    },
+    {
+      "id": "IPHONE_DEVICE_VALIDATION",
+      "status": "OPEN",
+      "note": "Do not resume device validation until exploration entry/selection gaps are corrected and rebuilt."
+    },
+    {
+      "id": "HISTORICAL_SOURCE_COVERAGE",
+      "status": "UNVERIFIED_SOURCE_COVERAGE",
+      "note": "PILOT_02 is targeted, not proof of all historical Ready conversations."
+    }
+  ],
+  "false_pass_corrections": [
+    "Existing main PWA home-screen icon was incorrectly treated as staging install evidence; PASS revoked.",
+    "Do not seed a fake staging TODO merely to bypass missing Planner/Exploration semantics."
+  ],
+  "next_execution_order": [
+    "Make READY_SET_CONTEXT_RESOLUTION mechanically validated.",
+    "Strengthen Ready exploration contract tests so single-task collapse fails CI.",
+    "Implement multi-select Planner TODAY TODO set while preserving stable Planner IDs.",
+    "Implement Today's Island exploration-pin entry as first-class projection.",
+    "Audit Parent UI fields against CAPTURE/CONFIRM-only authority.",
+    "Separate legacy Stage E migration/history fields from active Planner authority and add regression.",
+    "Rebuild staging preview from corrected source.",
+    "Only then resume iPhone/PWA timer/lock/recording/share validation.",
+    "Keep weekly/daily visual lock as separate HOLD."
+  ]
+}
