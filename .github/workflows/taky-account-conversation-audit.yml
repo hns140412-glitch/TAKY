@@ -1,0 +1,73 @@
+name: TAKY Account Conversation Audit
+
+on:
+  push:
+    branches:
+      - main
+      - 'taky/**'
+    paths:
+      - 'AUDIT/**'
+      - 'ENFORCEMENT/account_conversation_census_validator.py'
+      - 'ENFORCEMENT/chatgpt_share_transcript_sanitizer.py'
+      - 'ENFORCEMENT/chatgpt_share_transcript_validator.py'
+      - 'ENFORCEMENT/chatgpt_share_sanitizer_visibility_selftest.py'
+      - '.github/workflows/taky-account-conversation-audit.yml'
+  pull_request:
+    paths:
+      - 'AUDIT/**'
+      - 'ENFORCEMENT/account_conversation_census_validator.py'
+      - 'ENFORCEMENT/chatgpt_share_transcript_sanitizer.py'
+      - 'ENFORCEMENT/chatgpt_share_transcript_validator.py'
+      - 'ENFORCEMENT/chatgpt_share_sanitizer_visibility_selftest.py'
+      - '.github/workflows/taky-account-conversation-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  source-census-and-sanitizer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile audit tools
+        run: |
+          python -m py_compile ENFORCEMENT/account_conversation_census_validator.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_sanitizer_visibility_selftest.py
+
+      - name: Validate account conversation source census
+        run: |
+          python ENFORCEMENT/account_conversation_census_validator.py             AUDIT/ACCOUNT_CONVERSATION_SOURCE_CENSUS_2026-09-19.json
+
+      - name: Validate saved-share sanitizer baseline
+        run: |
+          python ENFORCEMENT/chatgpt_share_transcript_sanitizer.py             ENFORCEMENT/fixtures/chatgpt_share_fixture.html -o /tmp/share.md
+          python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/share.md
+          diff -u ENFORCEMENT/fixtures/chatgpt_share_expected.md /tmp/share.md
+
+      - name: Verify internal assistant nodes are excluded
+        run: |
+          PYTHONPATH=ENFORCEMENT python ENFORCEMENT/chatgpt_share_sanitizer_visibility_selftest.py
+
+      - name: Reject internal-content transcript
+        shell: bash
+        run: |
+          cat >/tmp/internal.md <<'EOF'
+          # SANITIZED CHATGPT TRANSCRIPT — Unsafe
+          STATUS: TRANSCRIPT_ONLY / NOTEBOOKLM_INPUT_CANDIDATE
+          SCOPE: SAVED PAGE linear_conversation; USER↔ASSISTANT only
+          EXCLUDED: SYSTEM / DEVELOPER / TOOL / bootstrap / session / authentication / application state
+          CLAIM_BOUNDARY: This transcript does not prove complete account-history coverage.
+          ## [0001] ASSISTANT — 2026-09-19T00:00:00+00:00
+          SOURCE_NODE_ID: hidden
+          CONTENT_TYPE: thoughts
+          private
+          EOF
+          set +e
+          python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/internal.md
+          code=$?
+          set -e
+          test "$code" -ne 0
