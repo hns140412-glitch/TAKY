@@ -50,6 +50,11 @@ def build_envelope(task_contract: dict, transport: str = "FILE_QUEUE", provider:
         "dispatch_status": "DISPATCH_READY",
         "task_contract_sha256": digest,
         "task_contract": task_contract,
+        "dispatch_target_repository": (
+            task_contract.get("repository")
+            if (task_contract.get("executor_automation") or {}).get("target_repository_local") is True
+            else None
+        ),
         "dispatch_receipt": None,
         "external_executor_invocation_verified": False,
     }
