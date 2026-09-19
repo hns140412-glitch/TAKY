@@ -88,6 +88,21 @@ Even at a human-only gate, the conductor SHALL pre-resolve all surrounding techn
 
 If the conductor hands routine recoverable debugging/configuration back to the user while materially available system-side recovery remains, classify it as `USER_AS_QA / PREMATURE_ESCALATION` and correct course before continuing.
 
+## 1.4 CONTROLLED RUNTIME ENTRYPOINT — HARD LOCK
+
+In a TAKY-controlled repository/runtime, material execution SHOULD enter through:
+`ENFORCEMENT/runtime_orchestrator.py`.
+
+The entrypoint composes:
+`RULE/CONTEXT EVIDENCE -> OPERATIONAL WORKING MODEL -> PREFLIGHT -> OPTIONAL C2S COVERAGE -> AUTHORIZED ROUTE/NEXT ACTION`.
+
+A controlled runtime SHALL NOT treat successful canonical reads as execution readiness. If the operational working model is missing or the composed preflight fails, the next route is blocked.
+
+The runtime output authorizes a route; it does not execute arbitrary shell commands and it does not prove hosted ChatGPT automatic interception.
+
+`CONTROLLED RUNTIME PASS != HOSTED CHATGPT AUTO-INVOCATION`.
+`ROUTE AUTHORIZED != TASK COMPLETED`.
+
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
