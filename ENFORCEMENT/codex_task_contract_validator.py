@@ -51,11 +51,44 @@ def validate(record):
     if not acceptance:
         fail(errors, "TASK_CONTRACT_INCOMPLETE:acceptance_tests")
 
+    checks = record.get("acceptance_checks", [])
+    if checks:
+        seen = set()
+        for item in checks:
+            if not isinstance(item, dict):
+                fail(errors, "ACCEPTANCE_CHECK_INVALID")
+                continue
+            criterion = str(item.get("criterion", "")).strip()
+            mode = str(item.get("mode", "")).strip().upper()
+            if criterion not in acceptance:
+                fail(errors, f"ACCEPTANCE_CHECK_UNKNOWN_CRITERION:{criterion or 'MISSING'}")
+            if mode not in {"EVIDENCE_ONLY", "MANUAL", "PROFILE_CHECK"}:
+                fail(errors, f"ACCEPTANCE_CHECK_INVALID_MODE:{mode or 'MISSING'}")
+            if "command" in item:
+                fail(errors, "UNTRUSTED_TASK_COMMAND:acceptance_checks.command")
+            if criterion:
+                seen.add(criterion)
+        for criterion in acceptance:
+            if criterion not in seen:
+                fail(errors, f"ACCEPTANCE_CHECK_MISSING:{criterion}")
+
     validation = record.get("validation", {})
     required_validation = set(validation.get("required", []))
     for gate in {"diff_scope", "build", "relevant_tests", "regression"}:
         if gate not in required_validation:
             fail(errors, f"VALIDATION_GATE_MISSING:{gate}")
+    profile = str(validation.get("profile", "")).strip()
+    if not profile:
+        fail(errors, "TASK_CONTRACT_INCOMPLETE:validation.profile")
+    if "commands" in validation or "command" in validation:
+        fail(errors, "UNTRUSTED_TASK_COMMAND:validation")
+
+    automation = record.get("executor_automation", {})
+    if automation:
+        if not str(automation.get("profile", "")).strip():
+            fail(errors, "TASK_CONTRACT_INCOMPLETE:executor_automation.profile")
+        if "target_repository_local" not in automation:
+            fail(errors, "TASK_CONTRACT_INCOMPLETE:executor_automation.target_repository_local")
 
     requested = record.get("requested_transition")
     if requested not in {"CODEX_DONE", "REWORK", "TAKY_REVIEW", "HUMAN_APPROVAL", "MERGED", "DEPLOYED"}:

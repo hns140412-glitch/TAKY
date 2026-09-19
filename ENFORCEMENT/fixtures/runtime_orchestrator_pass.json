@@ -77,5 +77,18 @@
     "relevant_tests",
     "regression"
   ],
-  "mobile_runtime_required": true
+  "mobile_runtime_required": true,
+  "acceptance_checks": [
+    {
+      "criterion": "requested behavior is observable in the target component",
+      "mode": "PROFILE_CHECK"
+    },
+    {
+      "criterion": "unrelated behavior remains unchanged",
+      "mode": "EVIDENCE_ONLY"
+    }
+  ],
+  "validation_profile": "READY_SET_STATIC_V1",
+  "executor_profile": "READY_SET_CODEX_V1",
+  "target_repository_local": true
 }
