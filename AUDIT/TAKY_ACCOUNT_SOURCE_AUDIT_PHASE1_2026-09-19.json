@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "TAKY_ACCOUNT_SOURCE_AUDIT_PHASE1_2026-09-19",
+  "status": "IN_PROGRESS",
+  "declared_scope": "Drive-observed saved conversation corpus; Phase 1 TAKY Core/Continuity independent re-extraction and canonical comparison.",
+  "coverage": {
+    "raw_html_observed": 25,
+    "visible_only_regenerated": 9,
+    "visible_only_remaining": 16,
+    "full_account_history": false,
+    "inaccessible_or_unrepresented": "UNVERIFIED_SOURCE_COVERAGE"
+  },
+  "confirmed_input_layer_defects": [
+    {
+      "id": "AUDIT-DEFECT-001",
+      "type": "SILENT_SOURCE_LOSS_CANDIDATE",
+      "evidence": "Drive raw HTML 6a98c3ae-526c-83ee-9593-c735df1d2153 (Snap & Pop 로직) existed but was absent from prior source registry.",
+      "disposition": "PATCH_REQUIRED_CONFIRMED",
+      "current_fix": "Source census + Drive registry entry added on audit path.",
+      "rebuild_significance": "Registry completeness cannot be assumed from prior inventory."
+    },
+    {
+      "id": "AUDIT-DEFECT-002",
+      "type": "TRANSCRIPT_CONTAMINATION",
+      "evidence": "Prior sanitizer admitted assistant nodes by role alone, allowing thoughts/reasoning_recap/model_editable_context/code content types into derivatives.",
+      "disposition": "PATCH_REQUIRED_CONFIRMED",
+      "current_fix": "Visible-only sanitizer + validator + selftest added; CI passed.",
+      "rebuild_significance": "Existing sanitized derivatives are not forensic-grade until regenerated/revalidated."
+    }
+  ],
+  "source_to_canonical_comparison": [
+    {
+      "id": "AUDIT-COMP-001",
+      "source_evidence": "P03 6aa5dc7a USER[0001]: Handoff SHA must not be trusted blindly; verify GitHub branch HEAD and reconcile raw/latest corrections/implementation state.",
+      "current_owner": "MASTER/HANDOFF_PROTOCOL.md + MASTER/CODEX_TASK_CONTRACT.md",
+      "state": "PRESERVE_IMPLEMENTED",
+      "enforcement": "Live-head/snapshot freshness distinctions and verified_base_head semantics present."
+    },
+    {
+      "id": "AUDIT-COMP-002",
+      "source_evidence": "P03 6aa5dc7a USER[0001] and 6aa5db28 USER[0001/0016]: lossless continuation, source reconciliation, inaccessible raw as UNVERIFIED_SOURCE_COVERAGE.",
+      "current_owner": "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md + MASTER/HANDOFF_PROTOCOL.md",
+      "state": "PRESERVE_IMPLEMENTED",
+      "enforcement": "ASK LAST / handoff recovery / coverage validation present."
+    },
+    {
+      "id": "AUDIT-COMP-003",
+      "source_evidence": "Repeated user corrections against being used as debugger/tester; conductor should resolve system-side paths first.",
+      "current_owner": "OS/COMMAND_INTERACTION.md + MASTER/ENFORCEMENT_PROTOCOL.md",
+      "state": "PRESERVE_IMPLEMENTED",
+      "enforcement": "USER_AS_QA / PREMATURE_ESCALATION hard lock and replay fixtures present."
+    },
+    {
+      "id": "AUDIT-COMP-004",
+      "source_evidence": "P03 6aa5d985 USER[0689/0954] and related source: TAKY/ChatGPT acts as conductor; Codex executes bounded implementation work.",
+      "current_owner": "MASTER/CODEX_TASK_CONTRACT.md",
+      "state": "PRESERVE_IMPLEMENTED",
+      "enforcement": "ORCHESTRATOR/EXECUTOR fields and replay evidence present."
+    },
+    {
+      "id": "AUDIT-COMP-005",
+      "source_evidence": "User instructions equivalent to continue until confirmation / ㄱ / keep progressing.",
+      "current_owner": "MASTER/ENFORCEMENT_PROTOCOL.md",
+      "state": "PRESERVE_IMPLEMENTED",
+      "enforcement": "Continue-until-real-blocker rule present."
+    },
+    {
+      "id": "AUDIT-COMP-006",
+      "source_evidence": "Current correction: invoking TAKY must recover project-set decisions, not only global governance.",
+      "current_owner": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
+      "state": "RECENT_PATCH_IMPLEMENTED",
+      "enforcement": "Project context manifest + validator + CI on PR #22 lineage."
+    }
+  ],
+  "preliminary_assessment": {
+    "patch_evidence_count": 2,
+    "preserve_implemented_count": 5,
+    "recent_patch_count": 1,
+    "rebuild_or_rewrite_decision": "DEFER_UNTIL_FULL_DECLARED_SOURCE_AUDIT",
+    "reason": "Phase 1 reveals both strong preserved canonical structure and material input-layer drift. Broader Work OS/project source audit is required before structural verdict."
+  },
+  "next_phase": [
+    "Regenerate Work OS / Notion conversation sources with visible-only sanitizer.",
+    "Independently extract user decisions/corrections.",
+    "Compare against current TAKY owners and enforcement.",
+    "Continue Ready/Snap/ZPD/Architecture batches.",
+    "Only after declared source closure classify PATCH vs REBUILD vs REWRITE."
+  ]
+}
