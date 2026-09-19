@@ -15,7 +15,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "최신 타키 기준 재개",
       "topic_class": "TAKY_CORE",
-      "sanitized_derivative_status": "EXISTS_NEEDS_REVALIDATION_AFTER_SANITIZER_FIX"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1ZjaAOkApeYLQuh1zKzk8I3cHq4CtXgY-u7JQsAu_AHg",
+        "visible_messages": 717,
+        "non_text": 19,
+        "excluded": 2184,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5dc43-3040-83e8-af76-68050ef2fa84",
@@ -75,7 +82,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "\"TAKI\" SETTING",
       "topic_class": "TAKY_CORE",
-      "sanitized_derivative_status": "EXISTS_NEEDS_REVALIDATION_AFTER_SANITIZER_FIX"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1BBzXVMN_gqzwphOUCy7fBAwCmejxReXmRYGDn17CVpM",
+        "visible_messages": 500,
+        "non_text": 1,
+        "excluded": 906,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5db60-7a18-83ee-9e30-6b9f1c2b810f",
@@ -99,7 +113,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "대화 복구 진행",
       "topic_class": "TAKY_CORE_CONTINUITY",
-      "sanitized_derivative_status": "EXISTS_NEEDS_REVALIDATION_AFTER_SANITIZER_FIX"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1xwNOtdRJhguZ0yYuF7mF25SM0m4vaqLYUDslo6A1Wxc",
+        "visible_messages": 1224,
+        "non_text": 100,
+        "excluded": 2378,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5db11-0384-83e8-b10e-3f7930dc34ec",
@@ -135,7 +156,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "타키 기준 불러오기",
       "topic_class": "TAKY_CORE",
-      "sanitized_derivative_status": "EXISTS_NEEDS_REVALIDATION_AFTER_SANITIZER_FIX"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1sj0paO1JCLBRkwWbx4oxQqnKyG5Rjxg6eOJoSQboBSU",
+        "visible_messages": 34,
+        "non_text": 6,
+        "excluded": 114,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5dacb-dd40-83ee-a890-8ad43db2bee6",
@@ -171,7 +199,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "마스터 로직 OLD",
       "topic_class": "TAKY_LEGACY",
-      "sanitized_derivative_status": "MISSING"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1F_NoFrtJhWl1M0lOP9PDBKqMWY7-nj46BmFPHxgkcWI",
+        "visible_messages": 370,
+        "non_text": 127,
+        "excluded": 711,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5da47-c8b0-83e8-a603-f4e55d86e169",
@@ -183,7 +218,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "재개 상태 요약",
       "topic_class": "TAKY_CONTINUITY",
-      "sanitized_derivative_status": "MISSING"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1cdQwe8jn1nnQFD-pLO_VWG9e3Hv673W24_bT3jPlLX4",
+        "visible_messages": 102,
+        "non_text": 3,
+        "excluded": 551,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5da23-78d0-83ee-ba9b-95e42aa7ee55",
@@ -231,7 +273,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "TAKY 반영 준비 알림",
       "topic_class": "TAKY_CORE",
-      "sanitized_derivative_status": "MISSING"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1zYLXjC1Y96MfzsinNti7dPkWweTM4utWFjgcbywumcs",
+        "visible_messages": 1284,
+        "non_text": 90,
+        "excluded": 2391,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5d955-1510-83ee-9b36-f6b00f50101e",
@@ -243,7 +292,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "최신 타키 기준 재개",
       "topic_class": "TAKY_CORE",
-      "sanitized_derivative_status": "MISSING"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1r-jIG7ZjCEcjVDJYYtNpUgGWuIs9m0TA9u1MVxb46Zg",
+        "visible_messages": 304,
+        "non_text": 46,
+        "excluded": 376,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5d901-2c80-83e8-aaa2-3f6a57902a8a",
@@ -255,7 +311,14 @@
       "registry_status": "REGISTERED_OR_KNOWN",
       "title": "연결 대화 재개",
       "topic_class": "TAKY_CONTINUITY",
-      "sanitized_derivative_status": "MISSING"
+      "sanitized_derivative_status": "REGENERATED_VISIBLE_ONLY",
+      "audit_derivative": {
+        "doc_id": "1GTnatAVOLpbac_qWakAhMdnIu1zkw1lthp2MY04RACY",
+        "visible_messages": 1041,
+        "non_text": 113,
+        "excluded": 1666,
+        "folder_id": "1MQlGNjKMEEpV-i6qNPFyERB8zNpENEb1"
+      }
     },
     {
       "chat_id": "6aa5d8ba-3ef8-83ee-be49-a29662c8e4d8",
@@ -351,7 +414,9 @@
     "inaccessible_or_unrepresented_account_history": "UNVERIFIED_SOURCE_COVERAGE",
     "raw_html_with_titles": 25,
     "sanitized_derivatives_known": 8,
-    "sanitized_derivatives_missing": 17
+    "sanitized_derivatives_missing": 17,
+    "visible_only_regenerated": 9,
+    "visible_only_remaining": 16
   },
   "audit_priority": [
     "TAKY_CORE / TAKY_CONTINUITY / TAKY_LEGACY",
@@ -364,5 +429,6 @@
   "notes": [
     "All 25 Drive-observed raw HTML conversation pages now have source titles captured from original HTML <title> metadata.",
     "Existing sanitized derivatives were produced before visible-content-only sanitizer hardening and therefore must be revalidated/regenerated before forensic use."
-  ]
+  ],
+  "audit_stage": "PHASE_1_TAKY_CORE_INDEPENDENT_REEXTRACTION"
 }
