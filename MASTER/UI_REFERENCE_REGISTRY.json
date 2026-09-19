@@ -1,60 +1,231 @@
 {
-  "registry_version": "2026-09-19.1",
+  "registry_version": "2026-09-19.2",
   "rule_id": "TKY-UIREF-001",
-  "purpose": "Evidence index for external UI/UX references. Entries are reference material, not canonical project design authority.",
+  "purpose": "Evidence index for external UI/UX references recovered from the supplied Notion screen recording. Entries are reference material, not canonical project design authority.",
   "declared_source_set": {
     "claimed_site_count": 9,
+    "recovered_reference_entry_count": 10,
+    "unique_site_domain_count": 9,
     "claimed_ui_term_count": 110,
-    "verified_site_count": 4,
-    "unverified_site_count": 5,
-    "ui_term_list_status": "UNVERIFIED_SOURCE_COVERAGE",
-    "note": "The supplied message shows four named sites and states 9 sites + 110 UI terms. Missing items are not inferred."
+    "ui_term_count_status": "AUTHOR_DECLARED_NOT_MECHANICALLY_ENUMERATED",
+    "vocabulary_group_count": 11,
+    "note": "Apple HIG and Apple Design Tips are separate reference entries on the same Apple site/domain, yielding 10 entries across 9 sites."
   },
   "sources": [
     {
-      "source_id": "UIREF-M3",
-      "name": "Material Design 3 Components",
-      "url": "https://m3.material.io/components",
-      "class": "DESIGN_SYSTEM_REFERENCE",
-      "publisher": "Google / Material Design",
-      "verification": "VERIFIED_URL",
-      "use": ["component taxonomy", "interaction/state reference", "accessibility/design-system comparison"],
-      "authority": "REFERENCE_ONLY"
-    },
-    {
       "source_id": "UIREF-APPLE-HIG",
-      "name": "Apple Human Interface Guidelines / UI Design Tips",
-      "url": "https://developer.apple.com/design/tips/",
+      "name": "Apple Human Interface Guidelines",
       "class": "PLATFORM_GUIDANCE",
       "publisher": "Apple",
-      "verification": "VERIFIED_URL",
-      "use": ["iPhone/PWA platform validation", "touch target", "legibility", "layout", "feedback", "accessibility"],
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
       "authority": "REFERENCE_ONLY_WITH_PLATFORM_VALIDATION_ROLE"
     },
     {
+      "source_id": "UIREF-APPLE-TIPS",
+      "name": "Apple Design Tips",
+      "class": "PLATFORM_GUIDANCE",
+      "publisher": "Apple",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
+      "authority": "REFERENCE_ONLY_WITH_PLATFORM_VALIDATION_ROLE"
+    },
+    {
+      "source_id": "UIREF-M3",
+      "name": "Material Design 3",
+      "class": "DESIGN_SYSTEM_REFERENCE",
+      "publisher": "Google / Material Design",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-FLUTTER",
+      "name": "Flutter Widget Catalog",
+      "class": "COMPONENT_LIBRARY_REFERENCE",
+      "publisher": "Flutter",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-IONIC",
+      "name": "Ionic Components",
+      "class": "COMPONENT_LIBRARY_REFERENCE",
+      "publisher": "Ionic",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
       "source_id": "UIREF-DAISYUI",
-      "name": "daisyUI Components",
-      "url": "https://daisyui.com/components/",
+      "name": "daisyUI",
       "class": "COMPONENT_LIBRARY_REFERENCE",
       "publisher": "daisyUI",
-      "verification": "VERIFIED_URL",
-      "use": ["component vocabulary", "state naming", "implementation convenience"],
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-UIVERSE",
+      "name": "Uiverse",
+      "class": "COMPONENT_LIBRARY_REFERENCE",
+      "publisher": "Uiverse",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO + OFFICIAL_WEB_CONFIRMED",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-PENPOT",
+      "name": "Penpot",
+      "class": "DESIGN_TOOL_REFERENCE",
+      "publisher": "Penpot",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO",
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-CARBON",
+      "name": "IBM Carbon Design System",
+      "class": "DESIGN_SYSTEM_REFERENCE",
+      "publisher": "IBM",
+      "verification": "RECOVERED_FROM_NOTION_VIDEO",
       "authority": "REFERENCE_ONLY"
     },
     {
       "source_id": "UIREF-MOBBIN",
       "name": "Mobbin",
-      "url": "https://mobbin.com/",
       "class": "REAL_WORLD_PATTERN_LIBRARY",
       "publisher": "Mobbin",
-      "verification": "VERIFIED_URL",
-      "use": ["real-world flows", "UI pattern comparison", "screen/flow research"],
+      "verification": "RECOVERED_FROM_NOTION_VIDEO",
       "authority": "REFERENCE_ONLY"
     }
   ],
+  "vocabulary_groups": [
+    {
+      "order": 1,
+      "label_ko": "화면 뼈대",
+      "role": "screen scaffolding/layout shell"
+    },
+    {
+      "order": 2,
+      "label_ko": "화면 이동",
+      "role": "navigation"
+    },
+    {
+      "order": 3,
+      "label_ko": "목록",
+      "role": "lists/data presentation"
+    },
+    {
+      "order": 4,
+      "label_ko": "입력",
+      "role": "text/data input"
+    },
+    {
+      "order": 5,
+      "label_ko": "고르기",
+      "role": "selection/pickers"
+    },
+    {
+      "order": 6,
+      "label_ko": "누르는 것",
+      "role": "buttons/actions"
+    },
+    {
+      "order": 7,
+      "label_ko": "띄우는 것",
+      "role": "overlays/modal surfaces"
+    },
+    {
+      "order": 8,
+      "label_ko": "상태·표시",
+      "role": "feedback/status/display"
+    },
+    {
+      "order": 9,
+      "label_ko": "움직이고 바뀌는 것",
+      "role": "motion/dynamic effects"
+    },
+    {
+      "order": 10,
+      "label_ko": "묶고 겹치는 것",
+      "role": "grouping/stacking/overlap"
+    },
+    {
+      "order": 11,
+      "label_ko": "보여주는 틀",
+      "role": "presentation/mockup frames"
+    }
+  ],
+  "observed_terms_sample": [
+    "Splash",
+    "Onboarding",
+    "Navigation Bar",
+    "Bottom Nav",
+    "Scroll View",
+    "Segmented Button",
+    "Drawer",
+    "Breadcrumb",
+    "Input/TextField",
+    "Placeholder",
+    "Textarea",
+    "Input OTP",
+    "Password Toggle",
+    "Searchbar",
+    "Select",
+    "Checkbox",
+    "Radio",
+    "Toggle/Switch",
+    "Validation",
+    "Field Error",
+    "Range/Slider",
+    "DatePicker",
+    "TimePicker",
+    "Picker",
+    "Chip/Tag",
+    "Tag Input",
+    "Rating",
+    "Number Stepper",
+    "File Upload",
+    "Floating Action Button",
+    "Speed Dial",
+    "Spinner",
+    "Progress Bar",
+    "Skeleton",
+    "Badge",
+    "Empty State",
+    "Offline State",
+    "Avatar",
+    "Thumbnail",
+    "Chat Bubble",
+    "Keyboard",
+    "Dock",
+    "Calendar",
+    "Diff",
+    "Mockup Browser",
+    "Mockup Window",
+    "Mockup Phone",
+    "Mockup Code"
+  ],
+  "source_quality": {
+    "type": "EDUCATIONAL_GLOSSARY_CURATION",
+    "rule": "Explanations and warnings are orientation aids. Numeric/platform constraints require verification against current official sources before promotion.",
+    "examples_of_non_auto_promotable_heuristics": [
+      "bottom navigation item-count shorthand",
+      "44pt touch target note",
+      "FAB count guidance",
+      "simplified component descriptions"
+    ]
+  },
   "project_activation": {
     "Ready-Set": {
       "mode": "VALIDATION_FIRST",
+      "adopt": [
+        "shared UI vocabulary",
+        "state completeness checklist",
+        "platform-fit validation dimensions",
+        "reference discovery workflow"
+      ],
+      "hold_for_project_specific_review": [
+        "component choice",
+        "navigation pattern",
+        "motion pattern",
+        "overlay pattern",
+        "numeric heuristics"
+      ],
       "protected": [
         "adventure/exploration identity",
         "confirmed Focus UI direction",
