@@ -1,5 +1,5 @@
 {
-  "schema_version": "2026-09-19.2",
+  "schema_version": "2026-09-19.3",
   "purpose": "Provider-neutral executor dispatch envelope and result binding for controlled TAKY runtime.",
   "dispatch_required": [
     "task_id",
@@ -7,6 +7,7 @@
     "transport",
     "dispatch_status",
     "task_contract_sha256",
+    "dispatch_target_repository",
     "task_contract"
   ],
   "dispatch_status_enum": [
@@ -36,7 +37,8 @@
     "external invocation is verified only by a matching receipt",
     "executor result must match task_id + provider + task contract hash",
     "tampered or mismatched result is rejected before TAKY review",
-    "transport availability must not be fabricated"
+    "transport availability must not be fabricated",
+    "target-repository-local tasks dispatch only to the registered target repository"
   ],
   "supported_transports": [
     "FILE_QUEUE",
@@ -52,5 +54,6 @@
       "issue_url"
     ],
     "claim_ceiling": "QUEUE_PUBLISHED_UNTIL_VALID_RECEIPT"
-  }
+  },
+  "executor_adapter_registry": "MASTER/EXECUTOR_ADAPTER_REGISTRY.json"
 }
