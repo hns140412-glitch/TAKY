@@ -18,7 +18,26 @@
         "action_class": "IMPLEMENTATION_WRITE",
         "applicable_rule_refs": [],
         "context_evidence_refs": [],
-        "history_query_refs": []
+        "history_query_refs": [],
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
@@ -39,7 +58,32 @@
         ],
         "history_query_refs": [
           "query:HISTORY:READYSET+ORCHESTRATOR+POST_CORRECTION_REOCCURRENCE"
-        ]
+        ],
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001",
+              "effect": "CONSTRAINT",
+              "implication": "Apply this rule to the fixture execution path."
+            }
+          ],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
@@ -63,7 +107,32 @@
         "history_query_refs": [
           "query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"
         ],
-        "claims_product_progress_advance": true
+        "claims_product_progress_advance": true,
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/VALIDATION_RULES.md",
+              "effect": "CONSTRAINT",
+              "implication": "Apply this rule to the fixture execution path."
+            }
+          ],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
@@ -85,7 +154,32 @@
         "history_query_refs": [
           "query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"
         ],
-        "claims_product_progress_advance": false
+        "claims_product_progress_advance": false,
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/VALIDATION_RULES.md",
+              "effect": "CONSTRAINT",
+              "implication": "Apply this rule to the fixture execution path."
+            }
+          ],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
@@ -110,7 +204,32 @@
           "query:HISTORY:READYSET"
         ],
         "resumed_or_context_compacted": true,
-        "preflight_rehydration_evidence_refs": []
+        "preflight_rehydration_evidence_refs": [],
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001",
+              "effect": "CONSTRAINT",
+              "implication": "Apply this rule to the fixture execution path."
+            }
+          ],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
@@ -136,7 +255,32 @@
         "preflight_rehydration_evidence_refs": [
           "handoff:READYSET:latest",
           "history:2026-09-14-orchestrator-drift"
-        ]
+        ],
+        "working_model": {
+          "primary_outcome": "Execute the fixture's intended preflight behavior without read-only rule loading.",
+          "priority_order": [
+            "preserve fixture intent",
+            "apply role/action ownership",
+            "execute next authorized action"
+          ],
+          "protected_state": [
+            "fixture-specific expected behavior"
+          ],
+          "execution_implications": [
+            "Translate each loaded applicable rule into a concrete action or constraint before execution."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001",
+              "effect": "CONSTRAINT",
+              "implication": "Apply this rule to the fixture execution path."
+            }
+          ],
+          "next_action": "Continue the fixture-specific authorized action.",
+          "stop_conditions": [
+            "fixture completion or real blocker"
+          ]
+        }
       }
     },
     {
