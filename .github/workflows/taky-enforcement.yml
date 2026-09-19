@@ -93,6 +93,8 @@ jobs:
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
+          python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
+          python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -121,6 +123,27 @@ jobs:
         run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
       - name: Validate controlled runtime orchestrator
         run: python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+      - name: Validate generated Codex task contract
+        run: |
+          python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          contract=data.get('task_contract')
+          assert contract, 'task_contract missing'
+          Path('/tmp/generated_contract.json').write_text(json.dumps(contract, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/codex_task_contract_validator.py /tmp/generated_contract.json
+      - name: Validate REWORK state transition
+        run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
+      - name: Reject forbidden state shortcut
+        run: |
+          if python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_shortcut_fail.json; then
+            echo "Expected forbidden state shortcut to be rejected"
+            exit 1
+          fi
+          echo "Expected forbidden transition failure observed"
       - name: Reject runtime without operational assimilation
         run: |
           if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
