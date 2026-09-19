@@ -1,0 +1,77 @@
+{
+  "registry_version": "2026-09-20.1",
+  "purpose": "Evidence-backed reusable Work OS/TAKY-ASSETS recipes. A recipe exists only when a real recurring workflow has source evidence; registry presence does not make the recipe canonical authority.",
+  "hard_locks": [
+    "RECIPE_REQUIRES_REAL_RECURRING_EVIDENCE",
+    "RECIPE_REGISTRY_ENTRY != CANONICAL_AUTHORITY",
+    "PRESERVE_AND_ALLOWED_CHANGE_MUST_BE_EXPLICIT",
+    "RIGHTS_OR_CONSENT_RISK_MUST_NOT_BE_SILENT",
+    "DEPRECATION_MUST_PRESERVE_LINEAGE"
+  ],
+  "required_fields": [
+    "recipe_id",
+    "name",
+    "owner",
+    "version",
+    "status",
+    "evidence_count",
+    "source_pointers",
+    "preserve",
+    "allowed_change",
+    "rights_or_consent",
+    "verification",
+    "utilization",
+    "deprecation"
+  ],
+  "recipes": [
+    {
+      "recipe_id": "DRV-C2S-REVIEW-INGEST-V1",
+      "name": "Drive direct review-result C2S ingest",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "evidence_count": 3,
+      "source_pointers": [
+        "OS/DRIVE_C2S_DIRECT.md",
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+        "HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json"
+      ],
+      "preserve": [
+        "source authority class",
+        "owner/disposition/utilization",
+        "UNMAPPED_MATERIAL and SILENT_LOSS closure",
+        "unverified-source boundaries"
+      ],
+      "allowed_change": [
+        "artifact title",
+        "project owner",
+        "atom count",
+        "targeted verification scope"
+      ],
+      "rights_or_consent": {
+        "required": false,
+        "note": "This recipe governs internal review-result handling; source-specific privacy/permission rules still apply."
+      },
+      "verification": {
+        "required": [
+          "source pointer exists or is explicitly UNVERIFIED_SOURCE_COVERAGE",
+          "every material item has owner/action/utilization",
+          "record-only result is rejected"
+        ],
+        "evidence": "ENFORCEMENT/review_result_c2s_validator.py + TAKY enforcement CI"
+      },
+      "utilization": {
+        "state": "APPLIED",
+        "used_for": [
+          "Notion-wide review V2 C2S closure",
+          "review-result freshness patching"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    }
+  ]
+}
