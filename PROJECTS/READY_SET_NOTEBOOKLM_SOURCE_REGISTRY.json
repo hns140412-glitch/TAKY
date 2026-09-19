@@ -1,0 +1,57 @@
+{
+  "registry_id": "PILOT_02_READY_SET_SOURCE_REGISTRY_2026-09-19",
+  "project_id": "READY_SET",
+  "pack": "PILOT_02_READY_SET",
+  "sources": [
+    {
+      "source_id": "P02_CUR_01",
+      "drive_id": "1Z18Jg4GCWaUIJYiQjzkFVAbpfMdBGM1C",
+      "source_class": "CANONICAL_REFERENCE",
+      "notebooklm_eligible": true,
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "authority_status": "REFERENCE_ONLY",
+      "contains_session_or_auth_data": false
+    },
+    {
+      "source_id": "P02_CUR_02",
+      "drive_id": "1qCcivWgMjr6yC6Hl_MwDt_4qnpEiQcZL",
+      "source_class": "DERIVED_ANALYSIS",
+      "notebooklm_eligible": true,
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "authority_status": "REFERENCE_ONLY",
+      "contains_session_or_auth_data": false
+    },
+    {
+      "source_id": "P02_RAW_01",
+      "drive_id": "1R3Ha1sd1uOmIB2wEdh0udSD6PGRsTeU4sILglnOhPzA",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "notebooklm_eligible": true,
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false
+    },
+    {
+      "source_id": "P02_RAW_02",
+      "drive_id": "1zmPpOnj3ymdkS5_d9QTwWkIJx-i26KdayxDRVFQpztY",
+      "source_class": "PRESERVED_TRANSCRIPT",
+      "notebooklm_eligible": true,
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false
+    },
+    {
+      "source_id": "P02_RAW_03",
+      "drive_id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
+      "source_class": "RECOVERY_WITNESS",
+      "notebooklm_eligible": true,
+      "content_checked": true,
+      "security_status": "SAFE_FOR_NOTEBOOKLM",
+      "authority_status": "DIRECT_SOURCE",
+      "contains_session_or_auth_data": false
+    }
+  ]
+}
