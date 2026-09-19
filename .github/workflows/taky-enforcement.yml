@@ -7,6 +7,10 @@ on:
       - 'TAKY.md'
       - 'ENFORCEMENT/**'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
@@ -23,10 +27,6 @@ on:
       - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
       - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
       - 'MASTER/VALIDATION_RULES.md'
-      - 'MASTER/UI_REFERENCE_PROTOCOL.md'
-      - 'MASTER/UI_REFERENCE_REGISTRY.json'
-      - 'MASTER/UI_REFERENCE_COMPARISON_MATRIX.json'
-      - 'PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md'
       - 'MASTER/UI_REFERENCE_PROTOCOL.md'
       - 'MASTER/UI_REFERENCE_REGISTRY.json'
       - 'MASTER/UI_REFERENCE_COMPARISON_MATRIX.json'
@@ -99,6 +99,7 @@ jobs:
           python -m py_compile ENFORCEMENT/executor_transport.py
           python -m py_compile ENFORCEMENT/executor_result_ingest.py
           python -m py_compile ENFORCEMENT/executor_cycle.py
+          python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -143,6 +144,37 @@ jobs:
         run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
       - name: Validate successful executor review
         run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Validate GitHub Issue queue formatter/parser
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --transport GITHUB_ISSUE_QUEUE --output /tmp/github-envelope.json
+          python ENFORCEMENT/github_issue_executor_queue.py issue --envelope /tmp/github-envelope.json --output /tmp/github-issue.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          assert issue['title'].startswith('[TAKY EXECUTOR QUEUE]')
+          assert 'TAKY_EXECUTOR_DISPATCH_JSON_BEGIN' in issue['body']
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->\n'
+          Path('/tmp/github-comment.txt').write_text(comment)
+          PY
+          python ENFORCEMENT/github_issue_executor_queue.py parse-comment --comment /tmp/github-comment.txt > /tmp/parsed-comment.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          parsed=json.loads(Path('/tmp/parsed-comment.json').read_text())
+          assert parsed['receipt']['task_id']==env['task_id']
+          Path('/tmp/receipt.json').write_text(json.dumps(parsed['receipt'], indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_transport.py verify-receipt --envelope /tmp/github-envelope.json --receipt /tmp/receipt.json
       - name: Validate executor transport and closed review cycle
         run: |
           python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json

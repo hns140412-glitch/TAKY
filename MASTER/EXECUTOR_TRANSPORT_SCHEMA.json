@@ -1,5 +1,5 @@
 {
-  "schema_version": "2026-09-19.1",
+  "schema_version": "2026-09-19.2",
   "purpose": "Provider-neutral executor dispatch envelope and result binding for controlled TAKY runtime.",
   "dispatch_required": [
     "task_id",
@@ -16,7 +16,6 @@
     "STARTED",
     "COMPLETED"
   ],
-  "supported_builtin_transport": "FILE_QUEUE",
   "external_adapter_contract": {
     "receipt_required": [
       "task_id",
@@ -38,5 +37,20 @@
     "executor result must match task_id + provider + task contract hash",
     "tampered or mismatched result is rejected before TAKY review",
     "transport availability must not be fabricated"
-  ]
+  ],
+  "supported_transports": [
+    "FILE_QUEUE",
+    "GITHUB_ISSUE_QUEUE",
+    "EXTERNAL_ADAPTER"
+  ],
+  "github_issue_queue": {
+    "protocol": "OS/GITHUB_EXECUTOR_QUEUE.md",
+    "formatter": "ENFORCEMENT/github_issue_executor_queue.py",
+    "publication_evidence_required": [
+      "repository",
+      "issue_number",
+      "issue_url"
+    ],
+    "claim_ceiling": "QUEUE_PUBLISHED_UNTIL_VALID_RECEIPT"
+  }
 }
