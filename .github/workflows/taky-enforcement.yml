@@ -96,6 +96,9 @@ jobs:
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
+          python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_result_ingest.py
+          python -m py_compile ENFORCEMENT/executor_cycle.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -140,6 +143,57 @@ jobs:
         run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
       - name: Validate successful executor review
         run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Validate executor transport and closed review cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          bad=dict(result)
+          bad["task_contract_sha256"]="0"*64
+          Path('/tmp/executor_result_bad.json').write_text(json.dumps(bad, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          if python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result_bad.json; then
+            echo "Expected mismatched executor result hash to be rejected"
+            exit 1
+          fi
+          echo "Expected executor-result integrity failure observed"
+      - name: Validate failed executor result returns to REWORK through cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope-fail.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_fail.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result_fail.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope-fail.json --result /tmp/executor_result_fail.json > /tmp/cycle-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/cycle-fail.json').read_text())
+          assert data["review"]["review_decision"] == "REWORK"
+          assert data["transition"]["current_state"] == "REWORK"
+          assert data["next_action"] == "RETURN_REWORK_TO_EXECUTOR"
+          PY
       - name: Route failed executor review to REWORK
         run: |
           if python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json; then

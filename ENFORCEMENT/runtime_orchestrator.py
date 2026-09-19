@@ -14,6 +14,7 @@ from pathlib import Path
 
 from c2s_preflight_bridge import run as run_c2s_preflight
 from codex_task_contract_builder import build as build_codex_task_contract
+from executor_transport import build_envelope as build_executor_envelope
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -87,6 +88,15 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         task_contract_result = build_codex_task_contract(record)
         detected.extend(task_contract_result.get("detected", []))
 
+    dispatch_result = None
+    if not detected and isinstance(task_contract_result, dict) and task_contract_result.get("task_contract"):
+        dispatch_result = build_executor_envelope(
+            task_contract_result["task_contract"],
+            transport=record.get("executor_transport", "FILE_QUEUE"),
+            provider=record.get("executor_provider", "CODEX"),
+        )
+        detected.extend(dispatch_result.get("detected", []))
+
     detected = list(dict.fromkeys(detected))
     authorized = not detected
     return {
@@ -105,8 +115,14 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             if authorized and isinstance(task_contract_result, dict)
             else None
         ),
+        "dispatch_envelope": (
+            dispatch_result.get("dispatch_envelope")
+            if authorized and isinstance(dispatch_result, dict)
+            else None
+        ),
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "hosted_chatgpt_auto_invocation_verified": False,
+        "external_executor_invocation_verified": False,
     }
 
 def main() -> int:
