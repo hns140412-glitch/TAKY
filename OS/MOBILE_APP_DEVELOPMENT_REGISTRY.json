@@ -1,0 +1,245 @@
+{
+  "registry_version": "2026-09-20.1",
+  "purpose": "Single registry for TAKY mobile web app development surfaces across GitHub, Google Drive and Netlify. Prevent source, validation, deploy and legacy artifacts from being mistaken for each other.",
+  "state_model": [
+    "SOURCE_CURRENT",
+    "ACTIVE_WORK",
+    "VALIDATION_ONLY",
+    "DEPLOYED_CURRENT",
+    "DEPLOYED_STALE",
+    "PROVENANCE_UNKNOWN",
+    "LEGACY_REFERENCE",
+    "CATALOG_OR_SHARED_INFRA"
+  ],
+  "invariants": [
+    "GITHUB_MAIN != DEPLOYED unless exact deploy provenance proves the same commit.",
+    "OPEN_PR != ACTIVE_WORK unless explicitly classified.",
+    "VALIDATION_ONLY_PR != MERGE_CANDIDATE.",
+    "DRIVE_BUILD_OR_HANDOFF != SOURCE_OF_TRUTH.",
+    "NETLIFY_PROJECT_NAME != PRODUCT_IDENTITY.",
+    "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED.",
+    "ZPD_WORD_LINEAGE is historical lineage under current HIDE_SEEK product identity; do not create a second active product unless explicitly re-authorized."
+  ],
+  "apps": {
+    "READY_SET": {
+      "product_name": "Ready & Set",
+      "role": "BASE_CAMP / Goal & Session Orchestrator",
+      "github": {
+        "repo": "hns140412-glitch/Ready-Set",
+        "default_branch": "main",
+        "main_head": "c596bf7c846f0f3fe6e3cbadf1d3d204b2d23952",
+        "state": "SOURCE_CURRENT"
+      },
+      "drive": {
+        "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
+        "name": "READY_SET",
+        "parent_role": "10_PROJECTS"
+      },
+      "open_prs": [
+        {
+          "number": 1,
+          "classification": "VALIDATION_ONLY",
+          "note": "old staging preview; non-current base"
+        },
+        {
+          "number": 2,
+          "classification": "VALIDATION_ONLY",
+          "note": "old runtime session bridge preview; non-current base"
+        },
+        {
+          "number": 4,
+          "classification": "VALIDATION_ONLY",
+          "note": "exploration journey draft on non-main base; HOLD / no merge authority"
+        },
+        {
+          "number": 5,
+          "classification": "VALIDATION_ONLY",
+          "note": "device validation preview only; DO NOT MERGE"
+        },
+        {
+          "number": 30,
+          "classification": "ACTIVE_WORK_REBASE_REQUIRED",
+          "note": "Adaptive Planner confirmation loop; old base"
+        },
+        {
+          "number": 32,
+          "classification": "ACTIVE_WORK_REBASE_REQUIRED",
+          "note": "persistent remote sync backend; old base"
+        }
+      ],
+      "netlify": [
+        {
+          "site_id": "9c03f42a-d6e1-4351-9d86-574bf8592f2c",
+          "site_name": "profound-ganache-902032",
+          "role": "GIT_CONNECTED_PRODUCTION_LINEAGE",
+          "deployed_commit": "6f4fb70dc924c682ef83435a9ddeed3991c2224d",
+          "deployed_branch": "main",
+          "provenance": "GIT_COMMIT_PROVEN",
+          "relation_to_current_main": "DEPLOYED_STALE"
+        },
+        {
+          "site_id": "63bd9a17-909b-4bac-8cb3-06437a628896",
+          "site_name": "ready-set-staging-taky",
+          "role": "LEGACY_UPLOAD_STAGING_LINEAGE",
+          "deployed_commit": null,
+          "deployed_branch": null,
+          "provenance": "PROVENANCE_UNKNOWN_UPLOAD",
+          "relation_to_current_main": "NOT_VERIFIED"
+        }
+      ]
+    },
+    "SNAP_POP": {
+      "product_name": "Snap & Pop",
+      "role": "Thought / Expression / Writing / Speaking Specialist",
+      "github": {
+        "repo": "hns140412-glitch/Snap-Pop",
+        "default_branch": "main",
+        "main_head": "0e2b5bee094045dc03656ab22b4bed630d4d670f",
+        "state": "SOURCE_CURRENT"
+      },
+      "drive": {
+        "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
+        "name": "SNAP_POP",
+        "parent_role": "10_PROJECTS"
+      },
+      "open_prs": [
+        {
+          "number": 1,
+          "classification": "VALIDATION_ONLY",
+          "note": "runtime session bridge preview; no merge/release authority"
+        }
+      ],
+      "netlify": [
+        {
+          "site_id": "253087d8-3525-4320-8b51-089a3525e1ef",
+          "site_name": "cheerful-pothos-d1c3ee",
+          "role": "PRODUCTION",
+          "deployed_commit": "0e2b5bee094045dc03656ab22b4bed630d4d670f",
+          "deployed_branch": "main",
+          "provenance": "GIT_COMMIT_PROVEN",
+          "relation_to_current_main": "EXACT_SHA_MATCH"
+        }
+      ],
+      "legacy_drive_refs": [
+        {
+          "id": "1ZFEr4qolfKQqKxkbxSJAXra5K-zjbVoc",
+          "name": "Snap_Pop_PWA_REV10_DEPLOYMENT_UI_CANDIDATE",
+          "classification": "LEGACY_REFERENCE"
+        },
+        {
+          "id": "18QevVv1edcWPUycQ2XeIymtpF2FiWJ3r",
+          "name": "Snap_Pop",
+          "classification": "SHARED_LEGACY_OR_REFERENCE_UNVERIFIED"
+        }
+      ]
+    },
+    "HIDE_SEEK": {
+      "product_name": "Hide & Seek",
+      "historical_lineage": [
+        "ZPD Word",
+        "ZPD_WORD"
+      ],
+      "role": "Vocabulary Discovery / Retrieval Specialist",
+      "github": {
+        "repo": "hns140412-glitch/Hide-Seek",
+        "default_branch": "main",
+        "main_head": "49fa106ff20f7c497d7f18bd903be34479ec28c3",
+        "state": "SOURCE_CURRENT"
+      },
+      "drive": {
+        "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
+        "name": "HIDE_SEEK",
+        "parent_role": "10_PROJECTS"
+      },
+      "open_prs": [
+        {
+          "number": 1,
+          "classification": "ACTIVE_WORK_UNVERIFIED",
+          "note": "rapid capture + OCR review provenance migration; runtime/device/deploy still unverified"
+        },
+        {
+          "number": 2,
+          "classification": "VALIDATION_ONLY",
+          "note": "runtime session bridge preview"
+        }
+      ],
+      "netlify": [
+        {
+          "site_id": "55aa69e3-1da8-4e4f-9b83-23de14b8fc87",
+          "site_name": "dainty-froyo-a6e427",
+          "role": "PRODUCTION",
+          "deployed_commit": "49fa106ff20f7c497d7f18bd903be34479ec28c3",
+          "deployed_branch": "main",
+          "provenance": "GIT_COMMIT_PROVEN",
+          "relation_to_current_main": "EXACT_SHA_MATCH",
+          "residue": "Netlify deploy commit_url still records historical repository lineage hns140412-glitch/ZPD-Word; current GitHub repository resolves to Hide-Seek."
+        }
+      ],
+      "legacy_drive_refs": [
+        {
+          "id": "1emF7nw1AL3SxWKYWV9WJYYWzvc0BYrBf",
+          "name": "ZPD_WORD_PWA_REV_07_VALIDATED_BUILD",
+          "classification": "LEGACY_REFERENCE"
+        },
+        {
+          "id": "13WluU_hk0bSLg4VV7AybdoikHUAvsBvE",
+          "name": "ZPD_WORD_PWA_REV_07_VALIDATED_BUILD",
+          "classification": "LEGACY_REFERENCE_PARENT"
+        },
+        {
+          "id": "14usviaoV1ollc_Sdld1MYmDRXBuAcWnU",
+          "name": "2026-09-07_Hide_Seek_아이디어_추적",
+          "classification": "LAB_REFERENCE"
+        }
+      ]
+    },
+    "SHARED_ASSETS": {
+      "product_name": "TAKY-ASSETS",
+      "role": "Shared assets / design integration repository; not an app runtime source",
+      "github": {
+        "repo": "hns140412-glitch/TAKY-ASSETS",
+        "default_branch": "main",
+        "main_head": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
+        "state": "CATALOG_OR_SHARED_INFRA"
+      },
+      "drive": {
+        "id": "1AybZa2Q3ISkIxMzfA9koMzfaVOwRqSBd",
+        "name": "SHARED_ASSETS",
+        "parent_role": "10_PROJECTS"
+      }
+    },
+    "MOBILE_CATALOG": {
+      "product_name": "TAKY-MOBILE",
+      "role": "Mobile app catalog / launcher / routing surface; not a specialist product app",
+      "github": {
+        "repo": "hns140412-glitch/TAKY-MOBILE",
+        "default_branch": "main",
+        "main_head": "588bfcdeb90b33b38e9dc53592a97228d6586274",
+        "state": "CATALOG_OR_SHARED_INFRA"
+      },
+      "drive": {
+        "id": "1ZrA0uOOvtA6rohLDiFK4WZEycHbeto0m",
+        "name": "MOBILE_CATALOG",
+        "parent_role": "10_PROJECTS"
+      },
+      "netlify": [
+        {
+          "site_id": "8d30705d-766c-4953-83a9-fed5ede1881e",
+          "site_name": "taky-mobile",
+          "deployed_commit": "7ad757ef3caeb93f103c97b5fc6b6ab5efff39e9",
+          "deployed_branch": "main",
+          "provenance": "GIT_COMMIT_PROVEN",
+          "relation_to_current_main": "DEPLOYED_STALE"
+        }
+      ]
+    }
+  },
+  "routing": {
+    "new_app_source": "Create/use one GitHub product repository; register here before production deployment.",
+    "app_documents": "Use TAKY/10_PROJECTS/<APP> Drive root; do not create a second app root elsewhere.",
+    "shared_assets": "Use TAKY-ASSETS + TAKY/10_PROJECTS/SHARED_ASSETS.",
+    "app_catalog": "Use TAKY-MOBILE + TAKY/10_PROJECTS/MOBILE_CATALOG.",
+    "validation_pr": "Label/classify as VALIDATION_ONLY; never infer merge intent from open state.",
+    "release_claim": "Require exact Git commit ↔ deploy ID provenance and separate device evidence."
+  }
+}
