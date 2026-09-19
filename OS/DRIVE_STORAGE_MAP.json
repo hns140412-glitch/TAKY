@@ -1,0 +1,94 @@
+{
+  "version": "2026-09-20.1",
+  "purpose": "Single-entry Google Drive routing map for TAKY durable working/source/review/handoff/archive material. GitHub remains canonical governance authority.",
+  "authority": {
+    "github": "CANONICAL_GOVERNANCE",
+    "google_drive": "DURABLE_WORKING_SOURCE_RESULT_HANDOFF_REFERENCE",
+    "drive_is_canonical_governance": false
+  },
+  "root": {
+    "id": "1WjH-Q2tWFvVNCiBy9r-D9U72Ac7DH61d",
+    "name": "TAKY",
+    "role": "SINGLE_DRIVE_ENTRYPOINT"
+  },
+  "roles": {
+    "ACTIVE": {
+      "id": "13mi9eFNCLpYNREdUdU93EblWg3UXt_s1",
+      "name": "00_ACTIVE",
+      "purpose": "Current cross-project operational surfaces only",
+      "children": {
+        "WORK_OS": {
+          "id": "1MCRwIj6yuGH4c-zc5Zm-MAfZgJ16oKn8",
+          "name": "WORK_OS"
+        }
+      }
+    },
+    "PROJECTS": {
+      "id": "1Yuxj6XkNGP-fBiZ5jIuL_Db41wpne36e",
+      "name": "10_PROJECTS",
+      "purpose": "Project-specific durable working/source/result material",
+      "children": {
+        "READY_SET": {
+          "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
+          "name": "READY_SET"
+        }
+      }
+    },
+    "REVIEWS_C2S": {
+      "id": "1xEWrQI5Ds0k_lMu3O00c73E-NxbR3S9d",
+      "name": "20_REVIEWS_C2S",
+      "purpose": "Derived review results, C2S intake/review evidence and review-control artifacts",
+      "children": {
+        "C2S_REVIEW": {
+          "id": "1S04v5mn7R4oJ_EHnyerJQeKoJlQu3zd9",
+          "name": "C2S_REVIEW"
+        }
+      }
+    },
+    "HANDOFF": {
+      "id": "1NA0qEtgmQD8xcTFFSMRQomrVYUP9yM35",
+      "name": "80_HANDOFF",
+      "purpose": "Historical/resume handoff packages; not canonical authority",
+      "children": {
+        "HANDOFF_HISTORY": {
+          "id": "11tFauUulunMPttykhN2M3nCcPq5zwvjX",
+          "name": "HANDOFF_HISTORY"
+        }
+      }
+    },
+    "ARCHIVE": {
+      "id": "1yhbHZDQRHLbEnok4A_AKZrxZv7lr5610",
+      "name": "90_ARCHIVE",
+      "purpose": "Raw exports, superseded/legacy material, incomplete duplicates, old governance patches",
+      "children": {
+        "LEGACY_NOTEBOOKLM_RECOVERY": {
+          "id": "1hfyeUJcbXn4H3wfx_Eh-rCwiskck0vP3",
+          "name": "LEGACY_NOTEBOOKLM_RECOVERY",
+          "default_activation": false
+        },
+        "ROOT_GOVERNANCE_PATCH_2026_09_12": {
+          "id": "1SGfcvREy22rhA3nxre2VWlKh281TPxoQ",
+          "name": "ROOT_GOVERNANCE_PATCH_2026-09-12"
+        },
+        "RAW_CHAT_EXPORTS_2026_09_12": {
+          "id": "1s7kSE1dbv4X54VGIM4LHqxsP_qJVOm-A",
+          "name": "RAW_CHAT_EXPORTS_2026-09-12"
+        },
+        "DUPLICATES_INCOMPLETE": {
+          "id": "1pXy1Jet41dm0_2zaEnYOEMD-hVY0J1XC",
+          "name": "DUPLICATES_INCOMPLETE"
+        }
+      }
+    }
+  },
+  "routing_rules": [
+    "Do not create a new TAKY sibling root when an existing role folder fits.",
+    "Preserve Drive file IDs when reorganizing; prefer move/rename over copy/delete.",
+    "Do not delete same-name items based on name alone; inspect content, parent, date and authority first.",
+    "Raw conversation/share exports belong under ARCHIVE/RAW_CHAT_EXPORTS, not My Drive root.",
+    "Handoff artifacts belong under HANDOFF and remain recovery evidence, not source of truth.",
+    "C2S/review artifacts belong under REVIEWS_C2S; downstream project implementation artifacts belong under PROJECTS.",
+    "NotebookLM material is legacy/optional and excluded from the default active route.",
+    "Shared legacy folders with external permissions must not be silently moved or permission-mutated during cleanup."
+  ]
+}
