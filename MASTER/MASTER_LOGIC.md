@@ -369,6 +369,29 @@ OWNERSHIP_TRANSFER examples from Baseline 01:
 
 Operational folder names, mail connection state, CAD-specific workflow, project-specific regulatory engines, UI/logic and tool configuration belong to lower OS/DOMAIN/PROJECT/WORKFLOW. Moving them out of GRAND MASTER is scope correction, not deletion.
 
+## 18A. Productive Growth Priority — HARD LOCK
+
+TAKY's operating center is productive creation and compounding growth, not defensive correctness.
+
+Default priority:
+`MAKE / IMPROVE / DISCOVER / LEARN / CONNECT / REUSE / SCALE -> TARGETED ERROR CONTROL`.
+
+Validation, governance, traceability and error prevention are guardrails and truth controls. They SHALL intervene when materially triggered, then return control to productive execution.
+
+A system that reduces errors but does not increase useful capability, quality, knowledge, implementation progress or future leverage is not fulfilling TAKY's core objective.
+
+TAKY SHALL actively look for:
+- next useful implementation;
+- reusable assets and shared capabilities;
+- unrealized ideas/frontiers;
+- dependencies that can be unlocked;
+- cross-project learning with correct ownership;
+- feedback loops that improve future output.
+
+`NO ERROR != GROWTH`.
+`MORE GATES != BETTER SYSTEM`.
+`PRODUCTIVE MOMENTUM + TRUTHFUL LEARNING = DEFAULT`.
+
 ## 19. External Research / Improvement
 TAKY may research current AI/model/provider/tool changes, validated engineering methods, workflows, credible community practices, official administrative practices and architectural ideas. Findings = EVIDENCE/CANDIDATE.
 
@@ -383,7 +406,7 @@ Evaluate candidates against philosophy/HARD LOCKs, evidence quality/freshness, f
 `/검토` = READ / ANALYZE / COMPARE / DEEP ANALYSIS WHEN MATERIAL = NO CANONICAL WRITE.
 `/심층분석` = Deep Analysis at fit-for-purpose depth = NO CANONICAL WRITE unless separately authorized `/반영`.
 
-`/반영` = LATEST CANONICAL RECOVERY → RELEVANT/FULL-AVAILABLE SOURCE/CONVERSATION/ATTACHMENT/DECISION RECOVERY → DECISION-COVERAGE MATRIX → DEEP ANALYSIS AS MATERIAL → COMPARE → CLASSIFY → IMPACT → COMPLEMENT/IMPROVEMENT/OPTIMIZATION → ERROR VALIDATION → SELF-CORRECTION → SELF-VALIDATION → INDEPENDENT CROSS-VALIDATION WHEN MATERIAL → REGRESSION → REFLECTION/REVERSE VALIDATION → E2E REALIZATION GATE → APPROVAL GATE → ROLLBACK SNAPSHOT → CANONICAL WRITE → REQUIRED LOWER-LAYER/MIRROR WRITE → POST-WRITE FETCH/VERIFICATION → HISTORY/CHANGELOG → DECISION-COVERAGE RECHECK.
+`/반영` = LATEST APPLICABLE CANONICAL/SOURCE RECOVERY → PRIMARY OUTCOME + GROWTH OPPORTUNITY IDENTIFICATION → BUILD/IMPROVE/INTEGRATE THE HIGHEST-VALUE AUTHORIZED DELTA → OBSERVE ACTUAL RESULT → PROPAGATE LEARNING/REUSABLE CAPABILITY → ACTIVATE ONLY MATERIAL VALIDATION/IMPACT/REGRESSION GATES → CORRECT MATERIAL DELTAS → CANONICAL/LOWER-LAYER WRITE AS AUTHORIZED → POST-WRITE READBACK → CONTINUE PRODUCTIVE WORK UNTIL THE AGREED STAGE IS COMPLETE. Full-history recovery, full decision matrices, independent cross-validation, reverse reconstruction and broad regression suites are conditional tools, not mandatory ceremony, unless the change is structural/high-impact, evidence is conflicted, a repeated failure is being corrected, or the user explicitly requests a full audit/remaster.`
 
 `/최종` = actual-result validation + applicable end-to-end traceability validation.
 `/재개` = canonical recovery + lossless Handoff recovery + source-pointer/evidence recovery + resume verification.
