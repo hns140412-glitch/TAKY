@@ -90,5 +90,7 @@
   ],
   "validation_profile": "READY_SET_STATIC_V1",
   "executor_profile": "READY_SET_CODEX_V1",
-  "target_repository_local": true
+  "target_repository_local": true,
+  "executor_transport": "GITHUB_ISSUE_QUEUE",
+  "executor_provider": "CODEX"
 }
