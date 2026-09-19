@@ -23,6 +23,7 @@ from typing import Any
 
 ENQUEUE_MARKER = 'window.__reactRouterContext.streamController.enqueue("'
 ROLE_ALLOW = {"user", "assistant"}
+VISIBLE_CONTENT_TYPES = {"text", "multimodal_text"}
 SECRET_PATTERNS = {
     "access_token": re.compile(r"accessToken", re.I),
     "authorization_header": re.compile(r"Authorization\s*[:=]", re.I),
@@ -239,6 +240,9 @@ def extract_messages(data: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[s
         content_type = None
         if isinstance(content, dict):
             content_type = content.get("content_type")
+            if content_type not in VISIBLE_CONTENT_TYPES:
+                counters["excluded_non_user_assistant"] += 1
+                continue
             p = content.get("parts")
             if isinstance(p, list):
                 parts = p
