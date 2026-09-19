@@ -151,20 +151,21 @@ Routing:
 `RAW ARCHIVE != CANONICAL ADOPTION`
 `CONVERSATION END != FORCE ALL IDEAS INTO MASTER`
 
-## 2.2 NOTEBOOKLM / HISTORICAL RECOVERY ROUTING — HARD LOCK
+## 2.2 DRIVE-DIRECT HISTORICAL RECOVERY / SAVE-REFLECT ROUTING — HARD LOCK
 
-Requests equivalent to `기존 대화 분석 / 원문 맥락 복원 / NotebookLM 연계 복원 / 전체대화 역검증` SHALL distinguish:
-- raw evidence preservation;
-- NotebookLM-assisted recovery;
-- TAKY C2S canonical backfill.
+Current operating path for historical recovery and durable reflection is direct Drive + TAKY C2S.
 
 Routing:
-`SOURCE INVENTORY -> SECURITY/PROVENANCE -> NOTEBOOKLM ANALYSIS (optional) -> RAW RECHECK -> C2S -> BACKFILL`.
+`SOURCE INVENTORY -> GOOGLE DRIVE DURABLE SOURCE -> TAKY DIRECT READ -> RAW/CURRENT EVIDENCE CHECK -> C2S -> OWNER/BACKFILL`.
 
-NotebookLM is optional acceleration, never authority replacement.
-A user request to "NotebookLM으로 분석" does not authorize unsafe page captures, hidden/session data ingestion or direct canonical promotion.
+NotebookLM is excluded from the default operating path and SHALL NOT be a prerequisite or blocker.
 
-When no direct NotebookLM connector exists in the active runtime, use the governed Drive interchange surface and reduce the remaining human step to notebook/source selection only after TAKY has prepared and screened the source set.
+`/저장반영` and natural equivalents activate `OS/DRIVE_C2S_DIRECT.md`:
+`CURRENT RESULT -> DRIVE SAVE -> POINTER VERIFY -> DIRECT READ -> C2S WHEN MATERIAL -> OWNER/CANONICAL REFLECTION -> POST-WRITE VERIFY`.
+
+If no durable system/canonical delta exists, the command may stop after verified Drive save.
+
+Historical NotebookLM-related artifacts remain preserved as legacy/reference evidence only unless the user explicitly re-enables NotebookLM in a future decision.
 
 ## 2.3 CONTINUITY / CONTEXT ECONOMY ROUTING — HARD LOCK
 
