@@ -267,22 +267,23 @@ For TAKY-controlled repository runtimes, the executable composition bridge is:
 `REPOSITORY BRIDGE PASS != HOSTED CHATGPT AUTO-INVOCATION VERIFIED`.
 
 
-## 16. NotebookLM / external synthesis intake
+## 16. Direct Drive intake / external synthesis boundary
 
-Conversation/system backfill assisted by NotebookLM SHALL follow TKY-NBLM-001.
+Current default durable intake is governed by `OS/DRIVE_C2S_DIRECT.md`.
 
-NotebookLM output enters C2S as `REFERENCE_ONLY / EVIDENCE_ASSIST`, not as a user-confirmed atom source by itself.
+`CHAT/WORK RESULT -> DRIVE DURABLE SOURCE -> DIRECT READ -> C2S`.
 
-Before a NotebookLM-derived candidate can change canonical TAKY:
-1. identify the raw/original source pointer;
+NotebookLM is not required and is excluded from the active default path.
+
+External/derived synthesis of any kind enters C2S as `REFERENCE_ONLY / EVIDENCE_ASSIST` unless independently backed by primary/current user evidence. Before a derived candidate changes canonical TAKY:
+1. identify its original/current source pointer;
 2. verify actor and decision context;
 3. check later user correction/supersession;
-4. classify the candidate atom/disposition;
-5. include it in the declared C2S coverage scope;
-6. pass impact/coverage/reconstruction checks.
+4. classify atom/disposition;
+5. include it in declared coverage;
+6. pass applicable impact/coverage/reconstruction gates.
 
-If the raw source cannot be confirmed, keep the item `OPEN / HOLD / UNVERIFIED` rather than converting NotebookLM confidence into authority.
-
+If original/current evidence cannot be confirmed, keep the candidate `OPEN / HOLD / UNVERIFIED`.
 
 ## 17. Incremental continuity / context economy
 
@@ -291,7 +292,7 @@ C2S preserves material conversational totality but SHALL NOT require all histori
 Runtime selection/recovery is governed by TKY-CONTINUITY-001:
 - ordinary continuation stays in the smallest sufficient working set;
 - new-chat resume loads canonical state/owners/open deltas before historical recovery;
-- NotebookLM/raw-source escalation is targeted;
+- Drive/raw-source escalation is targeted;
 - conversation end persists material deltas and then releases unnecessary history;
 - full global reconstruction is not the default prerequisite for ordinary canonical work.
 

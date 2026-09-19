@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.6",
+  "registry_version": "2026-09-19.7",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -60,7 +60,7 @@
     {
       "rule_id": "TKY-NBLM-001",
       "owner": "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md",
-      "scope": "NotebookLM-assisted conversation recovery, source-security intake, authority isolation and C2S backfill"
+      "scope": "legacy optional NotebookLM recovery rules; default route disabled"
     },
     {
       "rule_id": "TKY-CONTINUITY-001",
@@ -76,6 +76,11 @@
       "rule_id": "TKY-CODEX-001",
       "owner": "MASTER/CODEX_TASK_CONTRACT.md",
       "scope": "Codex/executor task materialization, completion evidence, review, rework and lifecycle transitions"
+    },
+    {
+      "rule_id": "TKY-DRIVEC2S-001",
+      "owner": "OS/DRIVE_C2S_DIRECT.md",
+      "scope": "direct Google Drive durable intake, /저장반영 routing, direct C2S activation and NotebookLM-free persistence"
     }
   ]
 }

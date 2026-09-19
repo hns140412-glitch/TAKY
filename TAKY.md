@@ -61,7 +61,7 @@ Additional routing:
 - For Ready & Set product/design/runtime work, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` after shared GUIDE/Family layers. Actual GitHub branch/runtime evidence outranks stale implementation snapshots.
 - For GUIDE character identity/relationship/lifecycle/personality/Special Friend/shared Guide presence, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
 - For learning-session wrap-up/reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character request.
-- For command-discovery, Handoff/compact/resume interaction, archive/close commands or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`.
+- For command-discovery, Handoff/compact/resume interaction, archive/close commands, `/저장반영`, or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`. For `/저장반영` also load `OS/DRIVE_C2S_DIRECT.md`.
 - For Notion reference/link review, load `OS/COMMAND_INTERACTION.md` and `OS/NOTION_OPS.md` plus the relevant unresolved Review Pending Register after canonical owners. `노션검토` / `노션 검토` / `/노션검토` defaults to the governed `📚 나의 링크` content/link-intelligence review unless the user explicitly names another Notion content collection; `/노션링크검토` is the explicit alias for the same workflow; `/노션구조검토` alone targets database/schema/view/automation structure. Generic `노션검토` SHALL NOT be reinterpreted as schema cleanup.
 - For explicit full historical/global forensic recovery, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT auto-run exhaustive historical reconstruction for ordinary tasks.
 - For a material negative-existence claim during ordinary work, use targeted recovery gates without automatically expanding into full account-history forensics.
@@ -80,6 +80,7 @@ A workspace/dashboard/database/reference that displays, suggests, or coordinates
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + outcome/intent recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
 - 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → outcome/intent contract → compare → execute/improve → proportionate validation → impact/regression → authorized canonical write → post-write verification → history
+- `/저장반영` → current material result/source → Google Drive durable save → Drive pointer verification → direct read → C2S when durable system/canonical delta exists → owner/canonical reflection → post-write verification; NotebookLM is not part of this default path
 - `/노션검토` → default `📚 나의 링크` content/link-intelligence review: original/root source → material attachments/child URLs/referenced sites → source-graph closure → analysis/compare/improve → disposition/owner/next action; canonical write remains separate
 - `/노션링크검토` → Notion link/reference queue review under Review Pending Register rules
 - `/노션구조검토` → Notion database/schema/view/automation structure review

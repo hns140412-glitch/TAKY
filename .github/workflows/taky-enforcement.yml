@@ -34,6 +34,7 @@ on:
       - 'PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md'
       - 'OS/NOTION_OPS.md'
       - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
       - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
       - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
@@ -68,6 +69,7 @@ on:
       - 'MASTER/VALIDATION_RULES.md'
       - 'OS/NOTION_OPS.md'
       - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
       - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
       - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
@@ -114,8 +116,18 @@ jobs:
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
           python -m py_compile ENFORCEMENT/notion_review_fresh_context_validator.py
+          python -m py_compile ENFORCEMENT/drive_c2s_intake_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
+      - name: Validate direct Drive C2S intake
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Reject NotebookLM-dependent direct C2S intake
+        run: |
+          if python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_fail.json; then
+            echo "Expected NotebookLM-dependent intake to be rejected"
+            exit 1
+          fi
+          echo "Expected direct Drive C2S dependency failure observed"
       - name: Replay baseline fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases.json
       - name: Replay enforcement v2 fixtures

@@ -1,10 +1,17 @@
 # TAKY × NOTEBOOKLM CONVERSATION RECOVERY PROTOCOL
 
-Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
+Status: REV_00 / LEGACY OPTIONAL PROTOCOL / DEFAULT ROUTE DISABLED
 Rule ID: TKY-NBLM-001
-Role: Use NotebookLM as a source-grounded recovery/research assistant without allowing summary loss, unsafe source ingestion, authority inflation, or direct canonical promotion.
+Role: Preserve historical/optional NotebookLM recovery rules if explicitly re-enabled. NotebookLM is not part of the current default TAKY continuity/C2S path.
 Authority: TAKY / GRAND MASTER > this protocol > notebook/pilot-specific prompts.
 Related: `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`, `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/ENFORCEMENT_PROTOCOL.md`.
+
+
+## -1. Current operating policy — HARD LOCK
+
+`NOTEBOOKLM DEFAULT ROUTE = OFF`.
+
+NotebookLM SHALL NOT be a prerequisite, blocker, or automatic L2 recovery dependency while this policy is active. Direct Google Drive retrieval + TAKY C2S is the current default. This file remains for historical compatibility and future explicit opt-in only.
 
 ## 0. Core model — HARD LOCK
 
