@@ -1,83 +1,117 @@
-# TAKY NOTEBOOKLM ↔ C2S ROUNDTRIP PROTOCOL
+# TAKY DRIVE-FIRST C2S + OPTIONAL NOTEBOOKLM PROTOCOL
 
-Status: REV_00 / OPERATIONAL
+Status: REV_01 / OPERATIONAL
 Rule ID: TKY-C2S-ROUNDTRIP-001
 
-## 0. Purpose
+## 0. Core architecture — HARD LOCK
 
-Close the recovery loop:
+Canonical recovery path:
 
-`RAW / DRIVE → NOTEBOOKLM → CANDIDATE OUTPUT → RAW RECHECK → C2S ATOMS → CANONICAL OWNER → CONTEXT MANIFEST → REVERSE RECONSTRUCTION`
+`RAW / GOOGLE DRIVE → SOURCE REGISTRY → RAW RECHECK → C2S ATOMS → CANONICAL OWNER → PROJECT CONTEXT MANIFEST → COVERAGE / SEMANTIC INTEGRITY → REVERSE RECONSTRUCTION`
 
-NotebookLM is a recovery/indexing assistant. It is never canonical authority.
+This path MUST work without NotebookLM.
 
-## 1. Input gate
+NotebookLM is OPTIONAL evidence assistance only:
 
-Before adding a source to a NotebookLM pack:
-- unique source_id
-- source_class
-- content_checked=true
-- security_status=SAFE_FOR_NOTEBOOKLM
-- notebooklm_eligible=true
-- authority_status correctly classified
-- no session/auth secret material
+`DRIVE RAW → NOTEBOOKLM → CANDIDATE OUTPUT → RAW RECHECK → C2S`
 
-Derived/Handoff sources may assist discovery but may not masquerade as DIRECT_SOURCE.
+`NOTEBOOKLM AVAILABLE != REQUIRED`
+`NOTEBOOKLM UNAVAILABLE != C2S BLOCKED`
 
-## 2. NotebookLM output contract
+## 1. Drive-first source gate
 
-NotebookLM output MUST enter C2S as:
-- authority = REFERENCE_ONLY or EVIDENCE_ASSIST
-- canonical_status = NOT_CANONICAL or PENDING_RAW_RECHECK
-- explicit source_refs
-- actor classification
-- semantic candidate
-- candidate disposition
-- needs_raw_recheck = true
+Every material recovery source should have:
+- unique source pointer / id;
+- source class;
+- actor/chronology recoverability where applicable;
+- authority classification;
+- content/security check before external analysis use;
+- explicit inaccessible/unverified status when source cannot be opened.
+
+Derived summaries/Handoffs may assist discovery but may not override recoverable raw/user evidence.
+
+## 2. Required C2S path
+
+For canonical-impact material:
+1. open/read raw or preserved source;
+2. determine actor;
+3. determine chronology;
+4. check later user corrections;
+5. atomize material content;
+6. preserve WHY / relation / supersession;
+7. assign disposition and owner/destination;
+8. run coverage + semantic-integrity validation;
+9. update project context manifest/current truth as appropriate;
+10. run reverse reconstruction.
+
+If raw source is unavailable:
+- do not invent;
+- retain `UNVERIFIED_SOURCE_COVERAGE`, `OPEN`, `HOLD`, or `CONFLICT` as appropriate.
+
+## 3. Required completion gate
+
+A project recovery cycle can PASS without NotebookLM when all required Drive/C2S gates pass:
+
+- required source registry / source pointers available for declared scope;
+- raw-source recheck complete for canonical-impact material;
+- conversation coverage validator PASS;
+- semantic integrity validator PASS;
+- project context gate PASS;
+- reverse reconstruction PASS;
+- `UNMAPPED_MATERIAL = 0`;
+- `SILENT_LOSS = 0`;
+- `FALSE_CONVERGENCE = 0`.
+
+Historical ranges outside the declared/recoverable scope remain `UNVERIFIED_SOURCE_COVERAGE`.
+
+## 4. Optional NotebookLM assist
+
+NotebookLM may be used for:
+- chronology candidates;
+- omission/silent-loss candidates;
+- correction-lineage candidates;
+- contradiction candidates;
+- cross-source topic clustering;
+- reverse-reconstruction drafts.
+
+NotebookLM output remains:
+- `REFERENCE_ONLY` or `EVIDENCE_ASSIST`;
+- `NOT_CANONICAL` / `PENDING_RAW_RECHECK`;
+- never authoritative without raw recheck.
 
 NotebookLM confidence is not TAKY confidence.
 
-## 3. Raw recheck gate
+## 5. NotebookLM input/output validation
 
-Any NotebookLM candidate that can alter canonical state MUST be checked against:
-1. raw/original source;
-2. actor identity;
-3. chronology;
-4. later user correction;
-5. duplicate/derived-source lineage.
+If NotebookLM is used:
+- input source registry must pass NotebookLM source safety/authority validation;
+- output must pass NotebookLM output-intake validation;
+- all canonical-impact candidates require raw recheck;
+- NotebookLM output may never be recursively promoted as RAW/DIRECT_SOURCE.
 
-If raw source is unavailable:
-- do not canonicalize;
-- retain as UNVERIFIED_SOURCE_COVERAGE / HOLD / OPEN as appropriate.
+Failure of this optional assist path blocks only NotebookLM-derived claims, not the core Drive→C2S pipeline.
 
-## 4. C2S semantic integrity
+## 6. C2S semantic integrity
 
 C2S compile cannot PASS when:
 - a correction lacks supersedes/affects linkage;
 - OPEN/CONFLICT is silently resolved;
 - multiple atoms are merged without equivalence evidence;
 - inaccessible source ranges coexist with FULL coverage claims;
-- NotebookLM output is treated as canonical without raw recheck;
+- derived/NotebookLM output is treated as raw authority;
 - reverse reconstruction cannot recover latest corrections, open items, WHY or intent.
 
-## 5. Roundtrip completion
-
-A project recovery cycle is complete only when:
-- NotebookLM input registry PASS;
-- NotebookLM output intake PASS;
-- raw recheck done for canonical-impact candidates;
-- conversation coverage validator PASS;
-- semantic integrity validator PASS;
-- project context gate PASS;
-- reverse reconstruction PASS.
-
-## 6. Automation boundary
+## 7. Automation boundary
 
 Current ChatGPT environment has Google Drive access but no direct NotebookLM connector.
 
-Therefore current operational bridge is:
-`Drive source pack → NotebookLM consumer UI → export/save structured output to Drive output folder → TAKY reads output → validators/raw recheck/C2S`.
+Therefore:
+- Drive-first C2S is the required automated/recoverable path;
+- NotebookLM is an optional external assist path only;
+- no user action in NotebookLM is required for C2S completion.
 
-This is an explicit product boundary, not a hidden automation claim.
+## 8. Next-phase gate
+
+Only after the Drive-first C2S path passes structural, adversarial, real-project and reverse-reconstruction tests may account-wide source audit begin.
 
 END
