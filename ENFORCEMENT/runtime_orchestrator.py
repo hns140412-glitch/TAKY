@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 
 from c2s_preflight_bridge import run as run_c2s_preflight
+from codex_task_contract_builder import build as build_codex_task_contract
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -81,6 +82,12 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     state, runtime_failures = derive_runtime_state(record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
 
+    task_contract_result = None
+    if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
+        task_contract_result = build_codex_task_contract(record)
+        detected.extend(task_contract_result.get("detected", []))
+
+    detected = list(dict.fromkeys(detected))
     authorized = not detected
     return {
         "pass": authorized,
@@ -93,6 +100,11 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             "action_class": state.get("action_class"),
             "next_action": state.get("next_action"),
         },
+        "task_contract": (
+            task_contract_result.get("task_contract")
+            if authorized and isinstance(task_contract_result, dict)
+            else None
+        ),
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "hosted_chatgpt_auto_invocation_verified": False,
     }

@@ -67,6 +67,17 @@ deliverables:
 requested_transition: CODEX_DONE
 ```
 
+## Controlled-runtime materialization
+
+In TAKY-controlled repository runtime, an authorized `SPECIFY_ACCEPTANCE -> CODEX` route SHOULD materialize this contract through `ENFORCEMENT/codex_task_contract_builder.py`.
+
+Required sequence:
+`RUNTIME WORKING MODEL -> AUTHORIZED ROUTE -> TASK CONTRACT BUILD -> CONTRACT VALIDATION -> CODEX EXECUTION`.
+
+The builder SHALL NOT invent missing product scope, acceptance tests, repository target or authority. Missing material context blocks contract generation instead of silently filling placeholders.
+
+Task lifecycle transitions are owned by `ENFORCEMENT/execution_state_engine.py`. Review failure transitions to `REWORK` only with concrete defect evidence; merge/deploy approval boundaries remain explicit.
+
 ## Hard locks
 
 1. Missing material required fields => `TASK_CONTRACT_INCOMPLETE`.

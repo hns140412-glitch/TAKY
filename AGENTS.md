@@ -53,6 +53,8 @@ Run every applicable gate available in the target project:
 A Codex self-report is evidence only. `CODEX_DONE` is not `TAKY_PASS`.
 
 ## State machine
+In a TAKY-controlled repository runtime, lifecycle transitions SHOULD be executed/checked through `ENFORCEMENT/execution_state_engine.py` rather than inferred from narration.
+
 Allowed lifecycle:
 `READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`
 

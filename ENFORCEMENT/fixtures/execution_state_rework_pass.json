@@ -1,0 +1,12 @@
+{
+  "current_state": "TAKY_REVIEW",
+  "requested_state": "REWORK",
+  "defects": [
+    "acceptance test failed: expected control state not preserved"
+  ],
+  "acceptance_delta": [
+    "preserve confirmed control state before resubmission"
+  ],
+  "merge_approval_required": true,
+  "production_approval_required": true
+}
