@@ -9,8 +9,10 @@ on:
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
@@ -100,6 +102,7 @@ jobs:
           python -m py_compile ENFORCEMENT/executor_result_ingest.py
           python -m py_compile ENFORCEMENT/executor_cycle.py
           python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
+          python -m py_compile ENFORCEMENT/github_queue_consumer.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -175,6 +178,46 @@ jobs:
           Path('/tmp/receipt.json').write_text(json.dumps(parsed['receipt'], indent=2)+'\n')
           PY
           python ENFORCEMENT/executor_transport.py verify-receipt --envelope /tmp/github-envelope.json --receipt /tmp/receipt.json
+      - name: Validate GitHub queue consumer lifecycle
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          open_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}}
+          Path('/tmp/queue-open-event.json').write_text(json.dumps(open_event))
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          receipt_comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->'
+          receipt_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}, 'comment': {'body': receipt_comment}}
+          Path('/tmp/queue-receipt-event.json').write_text(json.dumps(receipt_event))
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'completion_report':report
+          }
+          result_comment='<!-- TAKY_EXECUTOR_RESULT_JSON_BEGIN -->\n'+json.dumps(result)+'\n<!-- TAKY_EXECUTOR_RESULT_JSON_END -->'
+          result_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}, 'comment': {'body': result_comment}}
+          Path('/tmp/queue-result-event.json').write_text(json.dumps(result_event))
+          PY
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-open-event.json --event-name issues --output /tmp/queue-open-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-receipt-event.json --event-name issue_comment --output /tmp/queue-receipt-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-result-event.json --event-name issue_comment --output /tmp/queue-result-plan.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
+          assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
+          assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          PY
       - name: Validate executor transport and closed review cycle
         run: |
           python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json

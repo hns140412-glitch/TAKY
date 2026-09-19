@@ -1,0 +1,55 @@
+name: TAKY Executor Queue Consumer
+
+on:
+  issues:
+    types: [opened, reopened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  consume:
+    if: startsWith(github.event.issue.title, '[TAKY EXECUTOR QUEUE]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile queue consumer
+        run: |
+          python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
+          python -m py_compile ENFORCEMENT/github_queue_consumer.py
+          python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_result_ingest.py
+          python -m py_compile ENFORCEMENT/executor_review_loop.py
+          python -m py_compile ENFORCEMENT/executor_cycle.py
+          python -m py_compile ENFORCEMENT/execution_state_engine.py
+      - name: Consume queue event
+        run: |
+          python ENFORCEMENT/github_queue_consumer.py \
+            --event "$GITHUB_EVENT_PATH" \
+            --event-name "$GITHUB_EVENT_NAME" \
+            --output /tmp/taky-queue-plan.json
+      - name: Materialize TAKY response comment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/taky-queue-plan.json').read_text())
+          comment=plan.get('comment')
+          Path('/tmp/taky-queue-comment.md').write_text(comment or '', encoding='utf-8')
+          Path('/tmp/taky-queue-action.txt').write_text(str(plan.get('action') or ''), encoding='utf-8')
+          PY
+      - name: Publish TAKY queue response
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          if [ -s /tmp/taky-queue-comment.md ]; then
+            BODY="$(cat /tmp/taky-queue-comment.md)"
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments" -f body="$BODY" >/dev/null
+          fi

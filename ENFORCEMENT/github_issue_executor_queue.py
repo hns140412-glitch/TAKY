@@ -59,6 +59,12 @@ def _extract(text:str, begin:str, end:str):
     except json.JSONDecodeError:
         return None
 
+def parse_issue(text:str) -> dict:
+    envelope=_extract(text,BEGIN_DISPATCH,END_DISPATCH)
+    if envelope is None:
+        return {"pass":False,"detected":["GITHUB_QUEUE_DISPATCH_BLOCK_MISSING"],"envelope":None}
+    return {"pass":True,"detected":[],"envelope":envelope}
+
 def parse_comment(text:str) -> dict:
     receipt=_extract(text,BEGIN_RECEIPT,END_RECEIPT)
     result=_extract(text,BEGIN_RESULT,END_RESULT)
@@ -74,6 +80,8 @@ def main()->int:
     p.add_argument("--output",type=Path)
     q=sub.add_parser("parse-comment")
     q.add_argument("--comment",type=Path,required=True)
+    i=sub.add_parser("parse-issue")
+    i.add_argument("--issue-body",type=Path,required=True)
     args=ap.parse_args()
 
     if args.cmd=="issue":
@@ -81,8 +89,10 @@ def main()->int:
         out=issue_payload(env)
         if out["pass"] and args.output:
             args.output.write_text(json.dumps(out["issue"],ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    else:
+    elif args.cmd=="parse-comment":
         out=parse_comment(args.comment.read_text(encoding="utf-8"))
+    else:
+        out=parse_issue(args.issue_body.read_text(encoding="utf-8"))
     print(json.dumps(out,ensure_ascii=False,indent=2))
     return 0 if out["pass"] else 1
 
