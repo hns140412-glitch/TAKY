@@ -194,4 +194,133 @@ Examples visible in the source include shorthand such as bottom-navigation item-
 
 Machine-readable evidence index: `MASTER/UI_REFERENCE_REGISTRY.json`.
 
+## 13. Broad comparison stack — HARD LOCK
+
+TAKY SHALL NOT treat one UI guide, library or gallery as a complete design authority.
+
+For material UI/UX review, select the smallest useful stack from distinct evidence layers:
+
+1. `PROJECT AUTHORITY` — approved project contract, Golden UI, Visual ID, user-confirmed flow.
+2. `PLATFORM GUIDANCE` — Apple HIG / Material or equivalent platform guidance.
+3. `ACCESSIBILITY / SEMANTIC STANDARD` — WCAG / WAI-ARIA Authoring Practices or equivalent standards.
+4. `MATURE DESIGN SYSTEM` — Carbon / Fluent / GOV.UK or equivalent systems that document usage, errors, states and accessibility.
+5. `ACCESSIBLE PRIMITIVES` — Radix / React Aria / equivalent implementation primitives for focus, keyboard and ARIA behavior.
+6. `IMPLEMENTATION LIBRARY` — shadcn/ui / daisyUI / Ionic / Flutter widget references or equivalent.
+7. `DESIGN-SYSTEM OPERATIONS` — Penpot/design-token/component-instance patterns.
+8. `REAL-WORLD FLOW EVIDENCE` — Mobbin or other production-flow references.
+9. `INSPIRATION` — Uiverse and effect galleries.
+
+Higher list position does not mean higher visual authority. Project authority remains first; external layers are evidence/validation sources.
+
+`ONE SOURCE AGREES != CROSS-VALIDATED`
+`MULTIPLE POPULAR SOURCES AGREE != PROJECT FIT`
+
+## 14. Cross-source comparison axes
+
+When comparing references, evaluate at least the materially relevant axes rather than asking which source is "best":
+
+- purpose / user outcome;
+- information hierarchy;
+- navigation model;
+- interaction semantics;
+- component appropriateness;
+- state completeness;
+- error prevention and recovery;
+- keyboard/focus behavior;
+- accessible name/role/state;
+- screen-reader implications;
+- target size / touch ergonomics where officially supported;
+- content clarity;
+- responsive/reflow behavior;
+- safe-area/device constraints;
+- motion/reduced-motion behavior;
+- implementation feasibility;
+- token/component reuse;
+- project identity fit;
+- child/adult cognitive fit where applicable;
+- evidence status and source authority.
+
+A source may be strong on one axis and weak or irrelevant on another. Do not average them into a synthetic "universal UI".
+
+## 15. Accessibility and semantics layer — HARD LOCK
+
+For web/PWA implementation, visual similarity is insufficient.
+
+Material interactive components SHALL be checked, where applicable, for:
+- semantic element/role;
+- accessible name/description;
+- keyboard reachability and expected keys;
+- visible focus;
+- focus entry/return for overlays;
+- modal containment when modal;
+- error association and recovery;
+- selected/expanded/disabled/invalid state exposure;
+- sufficient contrast and reflow;
+- motion preference handling.
+
+Use WCAG as conformance guidance and WAI-ARIA Authoring Practices as interaction-pattern evidence. A third-party primitive/library may help satisfy these behaviors but does not prove the integrated application is accessible.
+
+`LIBRARY ACCESSIBLE != APPLICATION ACCESSIBLE`
+`ARIA PRESENT != CORRECT INTERACTION`
+
+## 16. State-completeness model
+
+For each material interactive component/flow, consider only applicable states but do not omit them silently:
+
+`DEFAULT / HOVER / PRESSED / FOCUS / SELECTED / DISABLED / LOADING / EMPTY / ERROR / OFFLINE / SUCCESS / PARTIAL / RETRY / RECOVERY`
+
+Mobile-only experiences may not require hover. Domain-specific states may extend this set.
+
+State review SHALL include:
+- what the user sees;
+- what action remains possible;
+- what data/state is preserved;
+- whether recovery is possible;
+- whether assistive technology receives equivalent meaning.
+
+## 17. Design-token and component-source discipline
+
+Reusable visual decisions SHOULD be represented as tokens/components rather than copied screen-by-screen when the implementation scale justifies it.
+
+Candidate token families:
+- color;
+- typography;
+- spacing;
+- radius;
+- elevation/shadow;
+- motion/duration/easing;
+- icon size;
+- control sizing.
+
+Preferred relationship:
+`TOKEN -> MAIN COMPONENT -> INSTANCE/VARIANT -> PROJECT SCREEN`
+
+Local overrides are allowed when intentional and traceable. Repeated arbitrary overrides indicate design-system drift.
+
+## 18. Content design and recovery
+
+UI copy is part of interaction design.
+
+For material controls/errors:
+- use short, literal, context-appropriate labels;
+- distinguish user-correctable validation errors from service/system failures;
+- state what happened and what the user can do next;
+- avoid relying only on color or spatial terms;
+- preserve cancel/back/retry/undo/resume paths where the flow requires them.
+
+For child-facing Ready surfaces, plain language and immediate action clarity take precedence over design-system terminology.
+
+## 19. Target-specific reference profile
+
+Do not load every source for every screen.
+
+Default selection examples:
+- iPhone/PWA child execution screen -> Project contract + Apple/platform + WCAG/WAI-ARIA + one mature design system + accessible primitive evidence + actual device QA.
+- Parent data-entry/form flow -> Project contract + WCAG/WAI-ARIA + GOV.UK/Fluent/Carbon form/error evidence + primitive/library implementation check.
+- visual exploration -> Project contract + Mobbin/Penpot/Uiverse as candidates, then return to platform/accessibility/project gates before adoption.
+- component implementation -> Project contract + chosen framework/library + primitive accessibility behavior + regression evidence.
+
+Machine-readable comparison profile: `MASTER/UI_REFERENCE_COMPARISON_MATRIX.json`.
+
+
 END

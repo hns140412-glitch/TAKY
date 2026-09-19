@@ -1,0 +1,190 @@
+{
+  "matrix_version": "2026-09-19.1",
+  "rule_id": "TKY-UIREF-001",
+  "purpose": "Cross-source UI/UX comparison profile. Sources provide evidence by axis; none override project authority.",
+  "authority_order": [
+    {
+      "layer": "PROJECT_AUTHORITY",
+      "examples": [
+        "approved project contract",
+        "Golden UI",
+        "Visual ID",
+        "user-confirmed flow"
+      ],
+      "default_role": "DECISION_AUTHORITY"
+    },
+    {
+      "layer": "PLATFORM_GUIDANCE",
+      "examples": [
+        "Apple HIG",
+        "Material Design"
+      ],
+      "default_role": "PLATFORM_VALIDATION"
+    },
+    {
+      "layer": "ACCESSIBILITY_STANDARD",
+      "examples": [
+        "WCAG",
+        "WAI-ARIA Authoring Practices"
+      ],
+      "default_role": "SEMANTICS_INTERACTION_VALIDATION"
+    },
+    {
+      "layer": "MATURE_DESIGN_SYSTEM",
+      "examples": [
+        "IBM Carbon",
+        "Microsoft Fluent",
+        "GOV.UK Design System"
+      ],
+      "default_role": "USAGE_STATE_ERROR_ACCESSIBILITY_COMPARISON"
+    },
+    {
+      "layer": "ACCESSIBLE_PRIMITIVES",
+      "examples": [
+        "Radix Primitives",
+        "React Aria"
+      ],
+      "default_role": "FOCUS_KEYBOARD_ARIA_IMPLEMENTATION_REFERENCE"
+    },
+    {
+      "layer": "IMPLEMENTATION_LIBRARY",
+      "examples": [
+        "shadcn/ui",
+        "daisyUI",
+        "Ionic",
+        "Flutter Widget Catalog"
+      ],
+      "default_role": "COMPONENT_IMPLEMENTATION_REFERENCE"
+    },
+    {
+      "layer": "DESIGN_SYSTEM_OPERATIONS",
+      "examples": [
+        "Penpot components",
+        "Penpot design tokens"
+      ],
+      "default_role": "TOKEN_COMPONENT_INSTANCE_GOVERNANCE"
+    },
+    {
+      "layer": "REAL_WORLD_FLOW",
+      "examples": [
+        "Mobbin"
+      ],
+      "default_role": "PRODUCTION_FLOW_COMPARISON"
+    },
+    {
+      "layer": "INSPIRATION",
+      "examples": [
+        "Uiverse"
+      ],
+      "default_role": "MOTION_EFFECT_IDEA_ONLY"
+    }
+  ],
+  "review_axes": [
+    "purpose_and_user_outcome",
+    "information_hierarchy",
+    "navigation_model",
+    "interaction_semantics",
+    "component_appropriateness",
+    "state_completeness",
+    "error_prevention_and_recovery",
+    "keyboard_and_focus",
+    "accessible_name_role_state",
+    "screen_reader_implications",
+    "touch_ergonomics_when_officially_supported",
+    "content_clarity",
+    "responsive_reflow",
+    "safe_area_device_constraints",
+    "motion_and_reduced_motion",
+    "implementation_feasibility",
+    "token_component_reuse",
+    "project_identity_fit",
+    "cognitive_fit",
+    "source_authority"
+  ],
+  "state_model": [
+    "DEFAULT",
+    "HOVER",
+    "PRESSED",
+    "FOCUS",
+    "SELECTED",
+    "DISABLED",
+    "LOADING",
+    "EMPTY",
+    "ERROR",
+    "OFFLINE",
+    "SUCCESS",
+    "PARTIAL",
+    "RETRY",
+    "RECOVERY"
+  ],
+  "official_reference_evidence": [
+    {
+      "name": "WCAG / WAI",
+      "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+      "role": "accessibility conformance guidance"
+    },
+    {
+      "name": "WAI-ARIA Authoring Practices",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "role": "interaction and keyboard pattern evidence"
+    },
+    {
+      "name": "IBM Carbon",
+      "url": "https://carbondesignsystem.com/components/overview/components/",
+      "role": "component usage and accessibility-status comparison"
+    },
+    {
+      "name": "Microsoft Fluent 2 Accessibility",
+      "url": "https://fluent2.microsoft.design/accessibility",
+      "role": "focus, contrast, structure, responsive and content-accessibility comparison"
+    },
+    {
+      "name": "GOV.UK Design System",
+      "url": "https://design-system.service.gov.uk/components/",
+      "role": "forms, validation, error recovery and plain-language comparison"
+    },
+    {
+      "name": "Radix Primitives Accessibility",
+      "url": "https://www.radix-ui.com/primitives/docs/overview/accessibility",
+      "role": "ARIA, focus management and keyboard implementation reference"
+    },
+    {
+      "name": "Penpot Design Tokens",
+      "url": "https://help.penpot.app/user-guide/design-systems/design-tokens/",
+      "role": "token single-source-of-truth and design/code synchronization"
+    },
+    {
+      "name": "Penpot Components",
+      "url": "https://help.penpot.app/user-guide/design-systems/components/",
+      "role": "main component, instance and override governance"
+    },
+    {
+      "name": "shadcn/ui Components",
+      "url": "https://ui.shadcn.com/docs/components",
+      "role": "implementation component coverage reference"
+    }
+  ],
+  "ready_set_profile": {
+    "required_first": [
+      "PROJECT_AUTHORITY",
+      "PLATFORM_GUIDANCE",
+      "ACCESSIBILITY_STANDARD"
+    ],
+    "default_supporting": [
+      "MATURE_DESIGN_SYSTEM",
+      "ACCESSIBLE_PRIMITIVES"
+    ],
+    "optional_by_task": [
+      "IMPLEMENTATION_LIBRARY",
+      "DESIGN_SYSTEM_OPERATIONS",
+      "REAL_WORLD_FLOW",
+      "INSPIRATION"
+    ],
+    "hard_constraints": [
+      "external references cannot replace Ready Golden UI or confirmed exploration identity",
+      "child action clarity outranks design-system jargon",
+      "numeric heuristics require current official-source verification before promotion",
+      "library accessibility claims require integrated-app verification"
+    ]
+  }
+}

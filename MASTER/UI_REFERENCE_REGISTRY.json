@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.2",
+  "registry_version": "2026-09-19.3",
   "rule_id": "TKY-UIREF-001",
   "purpose": "Evidence index for external UI/UX references recovered from the supplied Notion screen recording. Entries are reference material, not canonical project design authority.",
   "declared_source_set": {
@@ -217,14 +217,22 @@
         "shared UI vocabulary",
         "state completeness checklist",
         "platform-fit validation dimensions",
-        "reference discovery workflow"
+        "reference discovery workflow",
+        "accessibility semantics layer",
+        "cross-source comparison axes",
+        "state model including recovery states",
+        "design-token/component-instance discipline",
+        "content/error/recovery review"
       ],
       "hold_for_project_specific_review": [
         "component choice",
         "navigation pattern",
         "motion pattern",
         "overlay pattern",
-        "numeric heuristics"
+        "numeric heuristics",
+        "choice of accessible primitive library",
+        "choice of implementation component library",
+        "token architecture migration scope"
       ],
       "protected": [
         "adventure/exploration identity",
@@ -238,5 +246,59 @@
         "change confirmed interaction without approval"
       ]
     }
+  },
+  "extended_reference_ecosystem": {
+    "purpose": "Broader comparison sources added after cross-source review. These do not replace the recovered Notion source set.",
+    "sources": [
+      {
+        "source_id": "UIREF-WCAG",
+        "name": "WCAG / WAI",
+        "class": "ACCESSIBILITY_STANDARD",
+        "publisher": "W3C",
+        "authority": "REFERENCE_ONLY_WITH_CONFORMANCE_ROLE",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+      },
+      {
+        "source_id": "UIREF-ARIA-APG",
+        "name": "WAI-ARIA Authoring Practices",
+        "class": "ACCESSIBILITY_PATTERN_STANDARD",
+        "publisher": "W3C",
+        "authority": "REFERENCE_ONLY_WITH_INTERACTION_VALIDATION_ROLE",
+        "url": "https://www.w3.org/WAI/ARIA/apg/"
+      },
+      {
+        "source_id": "UIREF-FLUENT",
+        "name": "Microsoft Fluent 2",
+        "class": "MATURE_DESIGN_SYSTEM",
+        "publisher": "Microsoft",
+        "authority": "REFERENCE_ONLY",
+        "url": "https://fluent2.microsoft.design/accessibility"
+      },
+      {
+        "source_id": "UIREF-GOVUK",
+        "name": "GOV.UK Design System",
+        "class": "MATURE_DESIGN_SYSTEM",
+        "publisher": "UK Government",
+        "authority": "REFERENCE_ONLY",
+        "url": "https://design-system.service.gov.uk/components/"
+      },
+      {
+        "source_id": "UIREF-RADIX",
+        "name": "Radix Primitives",
+        "class": "ACCESSIBLE_PRIMITIVE_REFERENCE",
+        "publisher": "Radix",
+        "authority": "REFERENCE_ONLY",
+        "url": "https://www.radix-ui.com/primitives/docs/overview/accessibility"
+      },
+      {
+        "source_id": "UIREF-SHADCN",
+        "name": "shadcn/ui",
+        "class": "IMPLEMENTATION_LIBRARY_REFERENCE",
+        "publisher": "shadcn",
+        "authority": "REFERENCE_ONLY",
+        "url": "https://ui.shadcn.com/docs/components"
+      }
+    ],
+    "comparison_matrix": "MASTER/UI_REFERENCE_COMPARISON_MATRIX.json"
   }
 }

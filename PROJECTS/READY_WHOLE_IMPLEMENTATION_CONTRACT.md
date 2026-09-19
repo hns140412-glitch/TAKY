@@ -607,6 +607,34 @@ Hard:
 - Generic SaaS/dashboard convergence caused by external libraries/references = FAIL.
 - The supplied Notion screen recording recovers the 9-site reference set as 10 entries across 9 sites/domains and 11 vocabulary groups. The page-author claim of 110 UI terms is accepted as source metadata but not mechanically re-counted from a stable export. Numeric/usage heuristics from the glossary require official-source verification before becoming Ready rules.
 
+### 21A.1 Ready broad comparison profile — 2026-09-19
+
+Ready UI review SHALL use a targeted multi-layer comparison rather than one design system as a universal answer.
+
+Default Ready stack for material child-facing PWA screens:
+`READY PROJECT AUTHORITY -> APPLE/PLATFORM GUIDANCE -> WCAG/WAI-ARIA -> ONE MATURE DESIGN-SYSTEM COMPARISON -> ACCESSIBLE PRIMITIVE/IMPLEMENTATION CHECK -> ACTUAL IPHONE RESULT`.
+
+Additional sources are selected by task:
+- Carbon / Fluent / GOV.UK: state, form, validation, error/recovery and accessibility comparison.
+- Radix / equivalent accessible primitives: Dialog/Select/Tabs/Menu focus, keyboard and ARIA implementation reference.
+- Penpot/token model: reusable component/instance/token governance and design-to-code consistency.
+- shadcn/ui / daisyUI / Ionic / Flutter: implementation/component coverage only.
+- Mobbin: real production flow comparison.
+- Uiverse: motion/effect inspiration only.
+
+Ready-specific hard checks:
+- child must understand the next action without specialist UI terminology;
+- visual adventure identity is preserved while semantics/accessibility improve;
+- applicable states are not silently omitted: default/pressed/focus/selected/disabled/loading/empty/error/offline/success/retry/recovery;
+- overlay components preserve entry/exit focus and recoverable context where relevant;
+- system/service failure is not presented as the child's mistake;
+- focus/keyboard/screen-reader semantics are validated for web/PWA even when the primary device is touch;
+- library-level accessibility claims do not substitute for integrated Ready verification;
+- token/component normalization must not flatten the confirmed handcrafted adventure composition into a generic dashboard.
+
+Reference matrix: `MASTER/UI_REFERENCE_COMPARISON_MATRIX.json`.
+
+
 ## 22. Implementation truth snapshot — reverified 2026-09-12
 
 This snapshot is evidence only and becomes stale as code changes.
