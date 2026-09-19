@@ -17,6 +17,21 @@ role:
   orchestrator: TAKY
   executor: CODEX
 objective: <single implementation objective>
+working_model:
+  primary_outcome: <what useful result must exist>
+  priority_order:
+    - <priority controlling trade-offs>
+  protected_state:
+    - <confirmed state that must survive>
+  execution_implications:
+    - <what the loaded rules change in this task>
+  rule_to_execution:
+    - rule_ref: <applicable canonical/project rule>
+      effect: ACTION | CONSTRAINT | ACCEPTANCE | HOLD | NOT_APPLICABLE
+      implication: <concrete execution consequence>
+  next_action: <first executable action>
+  stop_conditions:
+    - <real blocker / approval / completion boundary>
 source_of_truth:
   - current_user_instruction
   - taky_canonical_rules
@@ -55,6 +70,7 @@ requested_transition: CODEX_DONE
 ## Hard locks
 
 1. Missing material required fields => `TASK_CONTRACT_INCOMPLETE`.
+1A. Applicable rules listed without a usable `working_model` / `rule_to_execution` mapping => preflight FAIL; reading/citing rules alone is not task readiness.
 2. `verified_base_head: UNVERIFIED` is allowed only when execution cannot technically verify it; the completion report MUST preserve `LIVE_HEAD_UNVERIFIED` and MUST NOT imply freshness was proven.
 3. Executor MUST NOT enlarge `change_scope.allowed` without orchestrator approval.
 4. Acceptance criteria are controlled by the orchestrator/user authority chain, not silently rewritten by the executor.
