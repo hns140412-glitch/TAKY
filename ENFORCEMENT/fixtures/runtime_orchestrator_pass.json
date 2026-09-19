@@ -59,5 +59,23 @@
       "real authority blocker",
       "task contract complete"
     ]
-  }
+  },
+  "project": "Ready & Set",
+  "repository": "hns140412-glitch/Ready-Set",
+  "base_branch": "main",
+  "verified_base_head": "0123456789abcdef",
+  "allowed_change_scope": [
+    "src/approved-component"
+  ],
+  "acceptance_tests": [
+    "requested behavior is observable in the target component",
+    "unrelated behavior remains unchanged"
+  ],
+  "required_validation": [
+    "diff_scope",
+    "build",
+    "relevant_tests",
+    "regression"
+  ],
+  "mobile_runtime_required": true
 }
