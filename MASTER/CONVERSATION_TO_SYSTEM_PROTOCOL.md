@@ -284,6 +284,25 @@ If every material review-result item has a valid disposition, owner/destination,
 
 Do not use deployment, runtime or device status as a reason to reopen C2S unless new evidence shows that an atom was omitted, falsely converged, wrongly dispositioned, or mapped to the wrong owner/destination.
 
+## 14.2 Evidence stream / knowledge projection / execution track — HARD LOCK
+
+To prevent C2S from becoming either a lossy summary or an execution-status tracker, TAKY SHALL keep three conceptual layers separate:
+
+1. **Evidence Stream** — recoverable original/user/source evidence and append-only correction lineage.
+2. **Knowledge Projection** — current interpreted atoms, relationships, dispositions, owners and canonical/current-state projections.
+3. **Execution Track** — implementation, CI, runtime, deployment, device and external-system realization states.
+
+`EVIDENCE STREAM -> KNOWLEDGE PROJECTION -> OPTIONAL DOWNSTREAM EXECUTION`.
+
+Rules:
+- later corrections SHALL supersede/adjust prior meaning without erasing the recoverable prior evidence;
+- current canonical/project state SHOULD be treated as a projection of evidence + accepted atom relationships, not as a replacement for source history;
+- downstream execution state MAY be referenced from an atom but SHALL NOT determine C2S closure;
+- execution evidence that reveals a misunderstood/omitted requirement MAY feed back as new EVIDENCE/CORRECTION/LESSON atoms and reopen only the affected C2S scope;
+- a C2S ledger SHOULD record downstream state only as a pointer/status, never as a closure prerequisite.
+
+This separation follows TAKY's own source/system distinction and keeps provenance, current knowledge and realization truth independently inspectable.
+
 ## 15. Runtime activation — CONDITIONAL HARD GATE
 
 Runtime/command activation is specialized by `OS/C2S_RUNTIME_ACTIVATION.md`.
