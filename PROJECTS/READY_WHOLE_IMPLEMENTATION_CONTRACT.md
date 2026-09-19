@@ -590,6 +590,23 @@ Fail:
 - card-UI escape
 - functional PASS claimed as visual-fidelity PASS
 
+## 21A. External UI reference activation — 2026-09-19
+
+Ready activates `TKY-UIREF-001` in validation-first mode.
+
+Reviewed source roles:
+- Material Design 3: component taxonomy/state/reference comparison only.
+- Apple HIG/UI Design Tips: iPhone/PWA platform-fit, touch-target, legibility, layout, feedback and accessibility validation.
+- daisyUI: normalized component vocabulary/state naming and optional implementation reference; no automatic theme inheritance.
+- Mobbin: real-world flow/pattern comparison; no branded composition copying and no automatic pattern adoption.
+
+Hard:
+- `EXTERNAL REFERENCE != READY AUTHORITY`.
+- Existing adventure/exploration identity, Focus direction and confirmed Ready locks remain protected.
+- Reference findings may create `ADOPT / ADJUST / HOLD / REJECT / CONFLICT` candidates; material visual/interaction changes require authorization under TAKY governance.
+- Generic SaaS/dashboard convergence caused by external libraries/references = FAIL.
+- Current supplied reference message claims 9 sites + 110 UI terms, but only four named sources are currently recoverable; the remaining material stays `UNVERIFIED_SOURCE_COVERAGE` until recovered.
+
 ## 22. Implementation truth snapshot — reverified 2026-09-12
 
 This snapshot is evidence only and becomes stale as code changes.
