@@ -114,6 +114,9 @@
     "MASTER/REMASTER_REV00_DRAFT.md": {
       "class": "CANDIDATE",
       "canonical": false
+    },
+    "MASTER/MASTER_FILE_REGISTRY.json": {
+      "class": "ACTIVE_SUPPORT"
     }
   }
 }
