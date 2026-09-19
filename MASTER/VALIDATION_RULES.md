@@ -23,23 +23,26 @@ If explanatory wording here conflicts with a declared semantic owner, the owner 
 
 ## Global gate
 
-Default result-producing composition:
-`USER OUTCOME / RESULT CONTRACT → EXECUTION / IMPROVEMENT → ACTUAL RESULT INSPECTION → PROPORTIONATE VALIDATION → NEXT BEST IMPROVEMENT OR PASS / FAIL`.
+Validation is a **triggered support layer**, not TAKY's default operating mode.
 
-For governance/authority-sensitive work, compose the applicable controls around that result loop:
-`SOURCE / APPROVED REFERENCE → IDENTITY & PROTECTED-STATE LOCK → APPLICABLE-RULE EXTRACTION → DECISION-COVERAGE / TRACEABILITY → EXECUTION → ACTUAL RESULT INSPECTION → 1:1 COMPARE → INTEGRATED-RESULT CHECK → DOMAIN CHECK → IMPACT CHECK → REGRESSION CHECK → ENFORCEMENT GATE → PASS / FAIL`.
+Default productive composition:
+`GOAL -> CREATE / IMPLEMENT / EXPLORE -> ACTUAL RESULT -> LEARN / IMPROVE -> MINIMUM NECESSARY CHECK -> CONTINUE / DELIVER`.
 
-FAIL → do not present as completed or canonical.
-PASS → may proceed only to the next authorized state.
+Activate only the gates tied to a material current risk, uncertainty, protected state, release claim or observed failure. Do not compose the full validation stack by default.
+
+For governance/high-impact work, add only the applicable controls around the productive loop.
+
+FAIL means correct the material problem before claiming the affected state.
+PASS means the relevant check found no blocking delta; it is not itself the objective.
 
 ## Outcome-first / proportional-validation composition — HARD LOCK
 
-Validation SHALL protect, enable or improve the requested result; it SHALL NOT become the default work product when the user requested an artifact, action, implementation, design, optimization, deployment, analysis result, or other concrete outcome.
+Validation SHALL protect, enable or improve productive execution and growth; it SHALL NOT become the default work product when the user requested an artifact, action, implementation, design, optimization, deployment, analysis result, or other concrete outcome.
 
 Apply `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md` before expanding validation work for material result-producing tasks.
 
 Default rhythm:
-`EXECUTE → LIGHTWEIGHT MATERIAL CHECK → IMPROVE → TARGETED CHECK → FINAL RESULT`.
+`EXECUTE / EXPLORE → OBSERVE → IMPROVE → CHECK ONLY MATERIAL RISK/CLAIM → CONTINUE / FINAL RESULT`.
 
 Additional or repeated validation is justified only when it has a material reason such as changed state, unresolved uncertainty, independent evidence likely to change the result, high-impact/irreversible/safety/legal requirements, representative runtime evidence required for the requested result level, or regression risk created by the latest change.
 
