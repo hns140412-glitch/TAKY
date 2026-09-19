@@ -1,0 +1,278 @@
+{
+  "schema_version": "1.0",
+  "census_id": "ACCOUNT_CONVERSATION_SOURCE_CENSUS_2026-09-19",
+  "observed_surface": "Google Drive root folder 0AAUYj9LzDTO8Uk9PVA",
+  "observed_at": "2026-09-19",
+  "claim_boundary": "Drive-observed saved conversation sources only; not proof of all ChatGPT account conversations.",
+  "raw_html_pages": [
+    {
+      "chat_id": "6aa5dc7a-3b80-83ee-aaf6-f7792abef303",
+      "drive_id": "1xyGpguGBwhqUhWl9rxUJD32Gq1JNjhyL",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5dc43-3040-83e8-af76-68050ef2fa84",
+      "drive_id": "1fhry1kKBiRcpnYp7ai9EnHXcaaPuBhus",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5dbfe-70dc-83ee-ade9-5f07ace4058e",
+      "drive_id": "1OkS7Lr_pTjt8is90XJLdFtjgZ2dvETZ_",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5dbd1-7a88-83e8-93d9-93183c6ac14e",
+      "drive_id": "19YpkjRaZMdqpLpBqQrOVeqW3C_BxEZ5p",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5db99-0e68-83ee-b6fd-98077eacb493",
+      "drive_id": "19iJzy651UJdsU9W9R3mKKNnMxVQZcKNZ",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5db78-f6fc-83ee-904c-c500460d5bd3",
+      "drive_id": "12A-7HWbVmd6tRFPlFPY8kTEgkSt7hroe",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5db60-7a18-83ee-9e30-6b9f1c2b810f",
+      "drive_id": "1h2cqFfCQlBk_JRP3QZJcPaaAXfzLxGD4",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5db28-4fb8-83ee-9fa8-d900c73ec144",
+      "drive_id": "1t58_qRnR265U6O5Wa-3k7_doB2nVINAa",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5db11-0384-83e8-b10e-3f7930dc34ec",
+      "drive_id": "1Ly3vhaf64zTAM2FLaiCvxmiWVsHpfFg1",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5daf5-3e74-83ee-9904-8e1fd63a3bc6",
+      "drive_id": "1_gxOTO50v0r9erXOw3HRh20Oyi5ZzoUF",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5dadd-ee10-83ee-82f6-a09eca4d4ef2",
+      "drive_id": "14x4WbSvba2fHoxn3YqZ-MoA6bNSjfLE1",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5dacb-dd40-83ee-a890-8ad43db2bee6",
+      "drive_id": "1Wv1m7rhfZ-5qdw-d_tsss3HWsiW3FJZ2",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5da84-cf54-83e8-bd0e-6eac86a613e9",
+      "drive_id": "1Kq7pn6_gdNUvtrSUfGzj2Zw2AMr5kdzR",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5da62-dbc0-83ee-a6e2-5dc94bc5b83e",
+      "drive_id": "10IEJtjF5bTH5GZ8uGlDc-A5kSU9nX8U5",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5da47-c8b0-83e8-a603-f4e55d86e169",
+      "drive_id": "1xyZ1lGtZ57_fgjfiSYQDQS8AOtn9-kyV",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5da23-78d0-83ee-ba9b-95e42aa7ee55",
+      "drive_id": "1FzmWg_6yMvfnnuYzdPxO1nS9p9IdS62i",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d9f6-a5b4-83e8-8d49-7850a56dcef2",
+      "drive_id": "1eQrtOPy4YEkqaSkqj0crpRuOvWSx7dPn",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d9cc-6620-83ee-b995-e9371e11941c",
+      "drive_id": "1cvzKBp1Pn0klj6kpb0bfVjBUN-pBieNQ",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d985-6238-83e8-831b-8bebc559eb14",
+      "drive_id": "1fTT9TKbny1bm6U09reLVDafNPdaRj2mM",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d955-1510-83ee-9b36-f6b00f50101e",
+      "drive_id": "1nB_zdJA5Rh3Ss3noxO4jVNCVGVgvRjtp",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d901-2c80-83e8-aaa2-3f6a57902a8a",
+      "drive_id": "1KjAdxORZz1doRLd5xoMIuLcni1Qs8yDq",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d8ba-3ef8-83ee-be49-a29662c8e4d8",
+      "drive_id": "1Av-vo-Vw1WangIZ3rrM_4LuYcGDhllsk",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d88e-7674-83ee-982c-2e29c114dd6e",
+      "drive_id": "1NLOIqbVv1m_ovY6vYHmOKIGYOQCn8gGK",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6aa5d7a0-0bf0-83e8-b84a-0d29fea2cb08",
+      "drive_id": "1AFzWqZbYMk5E50GRMZ_0c4O0N_qBbsuL",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "REGISTERED_OR_KNOWN"
+    },
+    {
+      "chat_id": "6a98c3ae-526c-83ee-9593-c735df1d2153",
+      "drive_id": "1fnFbXE9PhXjVWD3oXd0E0wm1Anr9aVNg",
+      "mime_type": "text/html",
+      "source_class": "PAGE_CAPTURE",
+      "security_status": "SECURITY_HOLD_SANITIZE_REQUIRED",
+      "canonical_authority": "RAW_EVIDENCE_ONLY_AFTER_SAFE_EXTRACTION",
+      "registry_status": "NEWLY_DISCOVERED_GAP"
+    }
+  ],
+  "chatgpt_preserved_folder": {
+    "folder_id": "1hy4m2zDYdPpgPjKRgi53EwvSHVxmoVS1",
+    "observed_files": [
+      {
+        "drive_id": "1UA_bSOB8RgXRRzu3-F5mC9XasTPqKPfwRgdsWlDRp6I",
+        "title": "강북5구역_도시정비사업_대화전체보존_2026-09-06",
+        "class": "PRESERVED_TRANSCRIPT"
+      },
+      {
+        "drive_id": "1SY754n1aYHD5-Y5OjSHIpsuIr7QqDKZq3FnnIWL6Vus",
+        "title": "GUIDE_Ready_Set_현재대화_원문전체보존_2026-09-06",
+        "class": "PRESERVED_TRANSCRIPT"
+      },
+      {
+        "drive_id": "1fLFR9pwn3AVVCFtSf86TyFsZFuYp5SSYMV4P7rFc6z4",
+        "title": "GUIDE_Ready & Set_대화 전체 기록_2026-09-06",
+        "class": "PRESERVED_TRANSCRIPT"
+      }
+    ]
+  },
+  "known_duplicate_or_derived_families": [
+    "P01_SANITIZED_6aa* = sanitized derivative of corresponding PAGE_CAPTURE",
+    "P02_RAW copies = copied working-pack instances of existing preserved sources",
+    "HANDOFF / CURRENT_TRUTH / derived audit documents are REFERENCE_ONLY unless independently raw",
+    "same-title .md/.txt/.docx variants require duplicate/hash/content-range comparison before counting as unique conversations"
+  ],
+  "discovered_gaps": [
+    {
+      "gap_id": "CENSUS-GAP-001",
+      "chat_id": "6a98c3ae-526c-83ee-9593-c735df1d2153",
+      "drive_id": "1fnFbXE9PhXjVWD3oXd0E0wm1Anr9aVNg",
+      "title": "Snap & Pop 로직",
+      "issue": "Present in Drive root but absent from prior TAKY_NOTEBOOKLM_SOURCE_REGISTRY inventory.",
+      "classification": "SILENT_SOURCE_LOSS_CANDIDATE",
+      "disposition": "ADOPT_IN_CENSUS_AND_SOURCE_REGISTRY"
+    }
+  ],
+  "coverage": {
+    "raw_html_observed": 25,
+    "prior_registry_raw_html": 24,
+    "newly_discovered_registry_gap": 1,
+    "full_account_history": false,
+    "inaccessible_or_unrepresented_account_history": "UNVERIFIED_SOURCE_COVERAGE"
+  }
+}
