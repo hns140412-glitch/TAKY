@@ -103,7 +103,7 @@ Forbidden shortcuts include:
 
 Controlled TAKY runtime uses `MASTER/EXECUTOR_TRANSPORT_SCHEMA.json` and `ENFORCEMENT/executor_transport.py` to wrap a validated task contract in an integrity-bound dispatch envelope.
 
-Built-in transport is `FILE_QUEUE`. It means the task is machine-ready for an executor adapter; it **does not** mean Codex was actually invoked.
+Built-in transports are `FILE_QUEUE` and `GITHUB_ISSUE_QUEUE`. `GITHUB_ISSUE_QUEUE` publishes the immutable dispatch envelope as an auditable GitHub Issue via the protocol in `OS/GITHUB_EXECUTOR_QUEUE.md`. Queue publication means the task is available to an executor adapter; it **does not** mean Codex accepted or executed it.
 
 An external adapter must return a receipt bound to:
 `task_id + provider + task_contract_sha256 + executor_run_id + status`.
