@@ -1,12 +1,16 @@
 {
-  "fixture_version": "2026-09-14.1",
-  "scope": "Evidence-backed pre-execution activation, orchestrator/implementation ownership, context-history activation, validation-progress truthfulness, and compacted-context rehydration.",
+  "fixture_version": "2026-09-19.2",
+  "scope": "Evidence-backed pre-execution activation plus operational rule assimilation: loaded rules must be converted into a working model that drives action, constraints, priorities and next step.",
   "cases": [
     {
       "id": "EVID-01",
       "phase": "historical_failure",
       "expectation": "contains",
-      "expected_detected": ["KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING","ROLE_OWNER_VIOLATION"],
+      "expected_detected": [
+        "KNOWN_CONTEXT_EVIDENCE_MISSING",
+        "HISTORY_EVIDENCE_MISSING",
+        "ROLE_OWNER_VIOLATION"
+      ],
       "record": {
         "pre_execution_gate_required": true,
         "role": "ORCHESTRATOR",
@@ -27,24 +31,38 @@
         "role": "ORCHESTRATOR",
         "execution_owner": "CODEX",
         "action_class": "SPECIFY_ACCEPTANCE",
-        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
-        "context_evidence_refs": ["HISTORY/FAILURE_LEDGER_2026-09-14_READYSET_ORCHESTRATOR_DRIFT.md"],
-        "history_query_refs": ["query:HISTORY:READYSET+ORCHESTRATOR+POST_CORRECTION_REOCCURRENCE"]
+        "applicable_rule_refs": [
+          "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"
+        ],
+        "context_evidence_refs": [
+          "HISTORY/FAILURE_LEDGER_2026-09-14_READYSET_ORCHESTRATOR_DRIFT.md"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:READYSET+ORCHESTRATOR+POST_CORRECTION_REOCCURRENCE"
+        ]
       }
     },
     {
       "id": "EVID-02",
       "phase": "historical_failure",
       "expectation": "contains",
-      "expected_detected": ["VALIDATION_AS_PRODUCT_PROGRESS"],
+      "expected_detected": [
+        "VALIDATION_AS_PRODUCT_PROGRESS"
+      ],
       "record": {
         "pre_execution_gate_required": true,
         "role": "ORCHESTRATOR",
         "execution_owner": "CI",
         "action_class": "VALIDATION_ONLY",
-        "applicable_rule_refs": ["MASTER/VALIDATION_RULES.md"],
-        "context_evidence_refs": ["MASTER/ENFORCEMENT_PROTOCOL.md#9"],
-        "history_query_refs": ["query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"],
+        "applicable_rule_refs": [
+          "MASTER/VALIDATION_RULES.md"
+        ],
+        "context_evidence_refs": [
+          "MASTER/ENFORCEMENT_PROTOCOL.md#9"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"
+        ],
         "claims_product_progress_advance": true
       }
     },
@@ -58,9 +76,15 @@
         "role": "ORCHESTRATOR",
         "execution_owner": "CI",
         "action_class": "VALIDATION_ONLY",
-        "applicable_rule_refs": ["MASTER/VALIDATION_RULES.md"],
-        "context_evidence_refs": ["MASTER/ENFORCEMENT_PROTOCOL.md#9"],
-        "history_query_refs": ["query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"],
+        "applicable_rule_refs": [
+          "MASTER/VALIDATION_RULES.md"
+        ],
+        "context_evidence_refs": [
+          "MASTER/ENFORCEMENT_PROTOCOL.md#9"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:VALIDATION_AS_PRODUCT_PROGRESS"
+        ],
         "claims_product_progress_advance": false
       }
     },
@@ -68,15 +92,23 @@
       "id": "EVID-03",
       "phase": "historical_failure",
       "expectation": "contains",
-      "expected_detected": ["HISTORY_EVIDENCE_MISSING"],
+      "expected_detected": [
+        "HISTORY_EVIDENCE_MISSING"
+      ],
       "record": {
         "pre_execution_gate_required": true,
         "role": "ORCHESTRATOR",
         "execution_owner": "CODEX",
         "action_class": "SPECIFY_ACCEPTANCE",
-        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
-        "context_evidence_refs": ["MASTER/MASTER_LOGIC.md"],
-        "history_query_refs": ["query:HISTORY:READYSET"],
+        "applicable_rule_refs": [
+          "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"
+        ],
+        "context_evidence_refs": [
+          "MASTER/MASTER_LOGIC.md"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:READYSET"
+        ],
         "resumed_or_context_compacted": true,
         "preflight_rehydration_evidence_refs": []
       }
@@ -91,18 +123,29 @@
         "role": "ORCHESTRATOR",
         "execution_owner": "CODEX",
         "action_class": "SPECIFY_ACCEPTANCE",
-        "applicable_rule_refs": ["MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"],
-        "context_evidence_refs": ["MASTER/MASTER_LOGIC.md"],
-        "history_query_refs": ["query:HISTORY:READYSET"],
+        "applicable_rule_refs": [
+          "MASTER/RULE_REGISTRY.json#TKY-ENFORCEMENT-001"
+        ],
+        "context_evidence_refs": [
+          "MASTER/MASTER_LOGIC.md"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:READYSET"
+        ],
         "resumed_or_context_compacted": true,
-        "preflight_rehydration_evidence_refs": ["handoff:READYSET:latest", "history:2026-09-14-orchestrator-drift"]
+        "preflight_rehydration_evidence_refs": [
+          "handoff:READYSET:latest",
+          "history:2026-09-14-orchestrator-drift"
+        ]
       }
     },
     {
       "id": "EVID-04",
       "phase": "historical_failure",
       "expectation": "contains",
-      "expected_detected": ["STATE_CLAIM_MISMATCH"],
+      "expected_detected": [
+        "STATE_CLAIM_MISMATCH"
+      ],
       "record": {
         "claims_runtime_enforced": true,
         "live_runtime_auto_invocation_verified": false
@@ -116,6 +159,76 @@
       "record": {
         "claims_runtime_enforced": false,
         "live_runtime_auto_invocation_verified": false
+      }
+    },
+    {
+      "id": "EVID-05",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "SPECIFY_ACCEPTANCE",
+        "applicable_rule_refs": [
+          "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+        ],
+        "context_evidence_refs": [
+          "conversation:current"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:READYSET"
+        ],
+        "working_model": null
+      }
+    },
+    {
+      "id": "EVID-05",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "pre_execution_gate_required": true,
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CODEX",
+        "action_class": "SPECIFY_ACCEPTANCE",
+        "applicable_rule_refs": [
+          "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+        ],
+        "context_evidence_refs": [
+          "conversation:current"
+        ],
+        "history_query_refs": [
+          "query:HISTORY:READYSET"
+        ],
+        "working_model": {
+          "primary_outcome": "Turn applicable TAKY rules into an executable Codex instruction.",
+          "priority_order": [
+            "user intent",
+            "protected project state",
+            "productive next action"
+          ],
+          "protected_state": [
+            "confirmed project decisions"
+          ],
+          "execution_implications": [
+            "TAKY derives scope and acceptance; Codex implements only that scope."
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+              "effect": "ACTION",
+              "implication": "Produce the requested executable contract, not a prose summary."
+            }
+          ],
+          "next_action": "Create the bounded implementation task.",
+          "stop_conditions": [
+            "real blocker or contract complete"
+          ]
+        }
       }
     }
   ]
