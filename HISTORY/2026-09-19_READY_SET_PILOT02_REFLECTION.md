@@ -25,19 +25,16 @@ Therefore automated CI green does **not** mean the multi-task exploration contra
 ## Today's Island gap
 Current child UI contains exploration wording and Planner TODO presentation, but Today's Island / exploration-pin semantics are not first-class runtime state/contract. This remains P0.
 
-## NotebookLM integration
-`PILOT_02_READY_SET` now exists in Drive with:
-- RAW source pack
-- working/source map
-- NotebookLM query pack
-- output folder
-- C2S review checklist/folder
-- accepted-backfill folder
+## Drive-first C2S and optional NotebookLM
+`PILOT_02_READY_SET` exists in Drive with RAW source pack, working/source map, optional NotebookLM query/output folders, C2S review and accepted-backfill areas.
 
-Current ChatGPT toolset has no NotebookLM connector. Therefore NotebookLM execution remains an external consumer step:
-`Drive sources -> NotebookLM -> Drive output -> TAKY raw recheck -> C2S`.
+The required recovery path is now:
+`DRIVE RAW -> SOURCE REGISTRY -> RAW RECHECK -> C2S -> CONTEXT MANIFEST -> COVERAGE/SEMANTIC VALIDATION -> REVERSE RECONSTRUCTION`.
 
-NotebookLM output is never canonical by itself.
+Current ChatGPT tools have Google Drive access but no direct NotebookLM connector. NotebookLM is therefore OPTIONAL evidence assistance only:
+`Drive sources -> NotebookLM -> candidate output -> raw recheck -> C2S`.
+
+C2S completion does not require NotebookLM execution. NotebookLM output is never canonical by itself.
 
 ## TAKY context enforcement
 Draft PR #22 introduces:
@@ -64,7 +61,7 @@ Correct next order:
 ## Open / Hold
 - OPEN_CONFLICT: target time required vs optional.
 - HOLD: weekly/daily final visual lock.
-- OPEN: consumer NotebookLM output not yet imported.
+- OPTIONAL: NotebookLM candidate output may be imported later as EVIDENCE_ASSIST; it does not block C2S.
 - OPEN: iPhone device validation after P0 fixes.
 
 ## Coverage
