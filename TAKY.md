@@ -30,7 +30,8 @@ ALWAYS LOAD THE LATEST TAKY FROM THE CANONICAL GITHUB REPOSITORY BEFORE APPLYING
 MEMORY IS A ROUTING AID, NOT THE SOURCE OF TRUTH.
 
 CANONICAL LOADED ≠ CANONICAL APPLIED.
-After loading TAKY, identify task-relevant OS / DOMAIN / PROJECT / GUIDE / validation rules and compare the actual result against applicable rules before claiming PASS.
+CANONICAL READ ≠ OPERATIONAL ASSIMILATION.
+After loading TAKY, identify task-relevant OS / DOMAIN / PROJECT / GUIDE rules and convert materially applicable rules into the compact operational working model required by `MASTER/INTENT_EXECUTION_PROTOCOL.md`: primary outcome, priority order, protected state, execution implications, rule-to-execution mapping, next action and stop conditions. In TAKY-controlled repository runtimes, route material execution through `ENFORCEMENT/runtime_orchestrator.py` before action. Compare the actual result against applicable rules before claiming PASS.
 
 Boot order:
 1. Load `TAKY.md`.

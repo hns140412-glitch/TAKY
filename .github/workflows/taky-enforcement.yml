@@ -92,6 +92,7 @@ jobs:
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
+          python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -118,6 +119,15 @@ jobs:
           echo "Expected fresh-context Notion routing failure observed"
       - name: Validate structured preflight evidence
         run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
+      - name: Validate controlled runtime orchestrator
+        run: python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+      - name: Reject runtime without operational assimilation
+        run: |
+          if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
+            echo "Expected runtime orchestrator to block missing working model"
+            exit 1
+          fi
+          echo "Expected runtime working-model failure observed"
       - name: Replay evidence integrity failures
         run: python ENFORCEMENT/evidence_bridge_regression.py
       - name: Validate Codex task contract fixture
