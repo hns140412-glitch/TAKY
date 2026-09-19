@@ -1,0 +1,142 @@
+{
+  "ledger_version": "2026-09-19.1",
+  "source_artifact": {
+    "source_class": "DERIVED_REVIEW_RESULT",
+    "title": "PILOT_02_READY_SET_C2S_DIRECT_REVIEW_NOTION_WIDE",
+    "drive_file_id": "15PWE3Pc4wstcT_p5fAVTvHlnGFxbUenWA2u1bZJc2nE",
+    "source_url": "https://docs.google.com/document/d/15PWE3Pc4wstcT_p5fAVTvHlnGFxbUenWA2u1bZJc2nE/edit",
+    "authority": "REFERENCE_ONLY_UNTIL_BACKED_BY_PRIMARY_OR_CURRENT_EVIDENCE"
+  },
+  "compile_policy": {
+    "rule_id": "TKY-C2S-001",
+    "result_artifact_is_c2s_source": true,
+    "no_record_only": true,
+    "completion_requires_material_item_disposition": true,
+    "unmapped_material": 0,
+    "silent_loss": 0
+  },
+  "items": [
+    {
+      "id": "C2S-NWR-001",
+      "owner": "READY",
+      "disposition": "PRESERVE_EXISTING",
+      "utilization_state": "APPLIED_RUNTIME",
+      "action_ref": "Ready-Set planner runtime chain through ready-planner-v01.js and current Ready runtime",
+      "next_action": "RUNTIME_VERIFY"
+    },
+    {
+      "id": "C2S-NWR-002",
+      "owner": "READY",
+      "disposition": "ADOPT_DESIGN",
+      "utilization_state": "PLANNED",
+      "action_ref": "Ready local-first architecture backlog",
+      "next_action": "IMPLEMENT_INDEXEDDB_OUTBOX_AFTER_RUNTIME_VERIFY"
+    },
+    {
+      "id": "C2S-NWR-003",
+      "owner": "READY",
+      "disposition": "ADOPT_IMPLEMENTATION_CANDIDATE",
+      "utilization_state": "PLANNED",
+      "action_ref": "Ready automatic QA backlog",
+      "next_action": "IMPLEMENT_BROWSER_E2E_HARNESS"
+    },
+    {
+      "id": "C2S-NWR-004",
+      "owner": "READY",
+      "disposition": "ADJUST",
+      "utilization_state": "PLANNED",
+      "action_ref": "Ready accessibility targeted gap review",
+      "next_action": "COMPARE_IMPLEMENTED_VS_MISSING"
+    },
+    {
+      "id": "C2S-NWR-005",
+      "owner": "READY",
+      "disposition": "ADOPT",
+      "utilization_state": "PARTIAL",
+      "action_ref": "VALIDATION_STATUS owns freshness; old REV_06 report marked stale",
+      "next_action": "REGENERATE_CURRENT_REV07_RUNTIME_EVIDENCE"
+    },
+    {
+      "id": "C2S-NWR-006",
+      "owner": "WORK-OS",
+      "disposition": "ADJUST_IMPLEMENTATION",
+      "utilization_state": "APPLIED_CANONICAL",
+      "action_ref": "OS/WORK_OS.md; OS/ACTION_SKILL_REGISTRY.json",
+      "next_action": "USE_IN_WORK_ROUTING"
+    },
+    {
+      "id": "C2S-NWR-007",
+      "owner": "WORK-OS/_LAB",
+      "disposition": "ADOPT_CANDIDATE",
+      "utilization_state": "IMPLEMENTED_MINIMUM",
+      "action_ref": "OS/ACTION_SKILL_REGISTRY.json; ENFORCEMENT/work_os_productive_router.py",
+      "next_action": "EXPAND_FROM_USAGE_EVIDENCE"
+    },
+    {
+      "id": "C2S-NWR-008",
+      "owner": "WORK-OS",
+      "disposition": "ADOPT_CANDIDATE",
+      "utilization_state": "IMPLEMENTED_MINIMUM",
+      "action_ref": "OS/ACTION_SKILL_REGISTRY.json; ENFORCEMENT/work_os_productive_router.py",
+      "next_action": "EXPAND_FROM_OUTPUT_USE"
+    },
+    {
+      "id": "C2S-NWR-009",
+      "owner": "SKILLS/TAKY-ASSETS",
+      "disposition": "ADJUST_CANDIDATE",
+      "utilization_state": "PLANNED",
+      "action_ref": "Reusable asset recipe backlog",
+      "next_action": "REGISTER_RECURRING_REAL_RECIPES_ONLY"
+    },
+    {
+      "id": "C2S-NWR-010",
+      "owner": "WORK-OS/CONTENT",
+      "disposition": "REJECT_SET_PRESERVE",
+      "utilization_state": "REJECTED",
+      "action_ref": "Preserved as negative policy set; no product promotion",
+      "next_action": "APPLY_WHEN_CONTENT_TASK_REQUIRES"
+    },
+    {
+      "id": "C2S-NWR-011",
+      "owner": "WORK-OS",
+      "disposition": "ADOPT_CANDIDATE",
+      "utilization_state": "PLANNED",
+      "action_ref": "Volatile capability registry backlog",
+      "next_action": "IMPLEMENT_WHEN_COST_COMPATIBILITY_DECISIONS_REQUIRE"
+    },
+    {
+      "id": "C2S-NWR-012",
+      "owner": "READY/WORK-OS",
+      "disposition": "HOLD",
+      "utilization_state": "HOLD",
+      "action_ref": "Optional automation intentionally excluded from current Ready critical path",
+      "next_action": "RECHECK_ONLY_AFTER_COST_PRIVACY_FAILURE_QUEUE_IDEMPOTENCY"
+    },
+    {
+      "id": "C2S-NWR-013",
+      "owner": "TAKY",
+      "disposition": "SUPERSEDED",
+      "utilization_state": "SUPERSEDED",
+      "action_ref": "OS/DRIVE_C2S_DIRECT.md and active continuity/C2S route",
+      "next_action": "NONE_UNLESS_USER_REENABLES_NOTEBOOKLM"
+    },
+    {
+      "id": "C2S-NWR-014",
+      "owner": "TAKY",
+      "disposition": "OPEN_NON_BLOCKING",
+      "utilization_state": "OPEN",
+      "action_ref": "UNVERIFIED_SOURCE_COVERAGE:web_designing.pdf",
+      "next_action": "RECOVER_SOURCE_IF_MATERIAL"
+    }
+  ],
+  "coverage": {
+    "material_item_count": 14,
+    "mapped_material_item_count": 14,
+    "unmapped_material_item_count": 0,
+    "silent_loss_count": 0,
+    "open_or_hold_count": 6,
+    "inaccessible_source_limitation": [
+      "web_designing.pdf"
+    ]
+  }
+}
