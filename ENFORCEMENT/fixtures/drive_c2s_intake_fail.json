@@ -1,0 +1,21 @@
+{
+  "intake_id": "DRV-C2S-FIXTURE-001",
+  "source_title": "Current Work result",
+  "drive_file_id": "drive-file-fixture",
+  "project_or_domain": "Ready & Set",
+  "source_class": "WORK_RESULT",
+  "canonical_impact": "REQUIRED",
+  "c2s_status": "CANONICAL_WRITTEN_VERIFIED",
+  "notebooklm_required": true,
+  "material_atoms": [
+    {
+      "atom_id": "A1",
+      "type": "CORRECTION",
+      "disposition": "ADOPT",
+      "owner": "OS/DRIVE_C2S_DIRECT.md"
+    }
+  ],
+  "unmapped_material": 1,
+  "silent_loss": 0,
+  "canonical_write_ref": ""
+}
