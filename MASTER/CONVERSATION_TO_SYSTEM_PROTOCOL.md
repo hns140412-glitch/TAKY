@@ -130,13 +130,29 @@ For material system-building conversations:
 -> COMPARE WITH CURRENT TAKY
 -> CLASSIFY DELTA
 -> MAP TO OWNER/FRONTIER/OPEN/HISTORY
--> APPLY AUTHORIZED REFLECTION
--> IMPACT CHECK
+-> ROUTE AUTHORIZED REFLECTION / DOWNSTREAM ACTION
 -> COVERAGE CLOSURE
 -> REVERSE RECONSTRUCTION
--> RECORD DELTA`
+-> RECORD COMPILE DELTA
+-> APPLY/VERIFY OWNER REFLECTION AS A SEPARATE STATE WHEN REQUIRED`
 
 Do not jump directly from chat to a rewritten MASTER.
+
+### 7.1 Compile closure vs reflection completion — HARD LOCK
+
+C2S compilation and owner reflection are adjacent but independent states.
+
+- `C2S_COMPILE_CLOSED`: recovered-scope material meaning is atomized, linked, dispositioned, owned/destined, coverage-closed and reverse-reconstructable.
+- `REFLECTION_COMPLETE`: all atoms whose disposition requires an authorized owner/canonical change have actually been reflected and verified in the owning system.
+- `DOWNSTREAM_EXECUTION_COMPLETE`: implementation/runtime/deploy/device work created by those atoms is complete at the required level.
+
+An atom may be fully C2S-compiled while its reflection or implementation remains explicitly `OPEN / PLANNED / PARTIAL / TOOL_BLOCKED`.
+
+However, when the **user command itself** requires "반영 / 저장반영 / canonical write", task completion remains governed by the intent/execution contract and SHALL NOT be claimed merely because C2S compilation closed.
+
+`C2S_COMPILE_CLOSED != USER REQUEST COMPLETE`.
+`C2S_COMPILE_CLOSED != REFLECTION_COMPLETE`.
+`REFLECTION_COMPLETE != DOWNSTREAM_EXECUTION_COMPLETE`.
 
 ## 8. Coverage Closure — HARD LOCK
 
