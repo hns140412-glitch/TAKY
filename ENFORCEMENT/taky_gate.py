@@ -101,6 +101,41 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if action == "VALIDATION_ONLY" and b(r,"claims_product_progress_advance"):
             f.append("VALIDATION_AS_PRODUCT_PROGRESS")
 
+        # Rule retrieval is not enough. Material preflight must compile rules into an
+        # operational working model that can drive execution.
+        wm = r.get("working_model")
+        if not isinstance(wm, dict):
+            f.append("RULE_NOT_APPLIED")
+        else:
+            primary = str(wm.get("primary_outcome","")).strip()
+            next_action = str(wm.get("next_action","")).strip()
+            priorities = wm.get("priority_order", [])
+            implications = wm.get("execution_implications", [])
+            mappings = wm.get("rule_to_execution", [])
+            if not primary or not next_action:
+                f.append("RULE_NOT_APPLIED")
+            if not isinstance(priorities, list) or not any(str(x).strip() for x in priorities):
+                f.append("RULE_NOT_APPLIED")
+            if not isinstance(implications, list) or not any(str(x).strip() for x in implications):
+                f.append("RULE_NOT_APPLIED")
+            if not isinstance(mappings, list):
+                f.append("RULE_NOT_APPLIED")
+            else:
+                usable = []
+                for m in mappings:
+                    if not isinstance(m, dict):
+                        continue
+                    ref = str(m.get("rule_ref","")).strip()
+                    effect = str(m.get("effect","")).strip().upper()
+                    implication = str(m.get("implication","")).strip()
+                    if ref and effect in {"ACTION","CONSTRAINT","ACCEPTANCE","HOLD","NOT_APPLICABLE"} and implication:
+                        usable.append(ref)
+                applicable = r.get("applicable_rule_refs", [])
+                if len(set(usable)) < len(applicable):
+                    f.append("RULE_NOT_APPLIED")
+            if b(wm,"read_only_summary"):
+                f.append("RULE_NOT_APPLIED")
+
     if b(r,"claims_runtime_enforced") and not b(r,"live_runtime_auto_invocation_verified"):
         f.append("STATE_CLAIM_MISMATCH")
 
