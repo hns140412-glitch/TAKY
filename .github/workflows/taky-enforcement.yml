@@ -36,6 +36,7 @@ on:
       - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json'
       - 'OS/COMMAND_INTERACTION.md'
       - 'OS/WORK_OS.md'
       - 'OS/ACTION_SKILL_REGISTRY.json'
@@ -120,6 +121,29 @@ jobs:
           python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
+      - name: Validate Notion review V2.1 freshness ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json')
+          d=json.loads(p.read_text())
+          s=d['summary']
+          assert s['material_item_count']==39
+          assert s['mapped_material_item_count']==39
+          assert s['unmapped_material_item_count']==0
+          assert s['silent_loss_count']==0
+          assert s['review_result_without_owner']==0
+          assert s['review_result_without_action']==0
+          assert s['review_result_without_utilization_state']==0
+          ids={x['id'] for x in d['freshness_patch']}
+          assert ids=={'C2S-NWR2-018','C2S-NWR2-019','C2S-NWR2-039'}
+          for x in d['freshness_patch']:
+            for k in ('owner','disposition','utilization_state','action_ref','next_action','verification_status'):
+              assert str(x.get(k,'')).strip(), (x['id'],k)
+          assert d['live_baseline']['ready_device_verified'] is False
+          assert d['live_baseline']['ready_production_verified'] is False
+          PY
       - name: Validate direct Drive C2S intake
         run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
       - name: Validate Work OS productive routing
