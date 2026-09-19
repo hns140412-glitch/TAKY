@@ -104,6 +104,7 @@ jobs:
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
+          python -m py_compile ENFORCEMENT/c2s_semantic_boundary_regression.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
@@ -451,6 +452,8 @@ jobs:
         run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
       - name: Validate conversation-to-system coverage fixture
         run: python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_pass.json
+      - name: Guard C2S semantic core and stale residue
+        run: python ENFORCEMENT/c2s_semantic_boundary_regression.py
       - name: Reject lossy conversation-to-system fixture
         run: |
           if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_fail.json; then
