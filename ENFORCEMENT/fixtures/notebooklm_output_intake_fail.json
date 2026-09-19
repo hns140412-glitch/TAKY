@@ -1,0 +1,23 @@
+{
+  "output_id": "P02_NOTEBOOKLM_OUTPUT_FIXTURE_FAIL",
+  "authority": "CANONICAL",
+  "canonical_status": "PENDING_RAW_RECHECK",
+  "source_refs": [
+    "P02_RAW_01",
+    "P02_RAW_02"
+  ],
+  "coverage": {
+    "claims_full_account_history": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "N1",
+      "source_ref": "P02_RAW_01",
+      "actor": "USER",
+      "semantic_content": "candidate decision",
+      "candidate_disposition": "ADOPT",
+      "needs_raw_recheck": false,
+      "canonicalized": true
+    }
+  ]
+}
