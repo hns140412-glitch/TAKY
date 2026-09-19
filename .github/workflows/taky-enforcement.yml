@@ -167,6 +167,8 @@ jobs:
           PY
       - name: Validate direct Drive C2S intake
         run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Validate direct Drive C2S compile closure with reflection still open
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_compile_closed_pass.json
       - name: Validate Work OS reusable and volatile registries
         run: |
           python ENFORCEMENT/work_os_registry_validator.py \
