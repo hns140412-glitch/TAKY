@@ -592,7 +592,7 @@ Fail:
 
 ## 21A. External UI reference activation — 2026-09-19
 
-Ready activates `TKY-UIREF-001` in validation-first mode.
+Ready activates `TKY-UIREF-001` in growth-first / targeted-validation mode.
 
 Reviewed source roles:
 - Material Design 3: component taxonomy/state/reference comparison only.
@@ -609,10 +609,10 @@ Hard:
 
 ### 21A.1 Ready broad comparison profile — 2026-09-19
 
-Ready UI review SHALL use a targeted multi-layer comparison rather than one design system as a universal answer.
+Ready UI work SHALL first create/improve the child experience and implementation using targeted references; multi-layer comparison is activated only where it produces a material design/implementation gain or resolves a concrete risk.
 
-Default Ready stack for material child-facing PWA screens:
-`READY PROJECT AUTHORITY -> APPLE/PLATFORM GUIDANCE -> WCAG/WAI-ARIA -> ONE MATURE DESIGN-SYSTEM COMPARISON -> ACCESSIBLE PRIMITIVE/IMPLEMENTATION CHECK -> ACTUAL IPHONE RESULT`.
+Default Ready path for material child-facing PWA screens:
+`READY PROJECT AUTHORITY -> BUILD/IMPROVE ACTUAL EXPERIENCE -> USE TARGETED PLATFORM/ACCESSIBILITY/IMPLEMENTATION REFERENCES AS NEEDED -> ACTUAL IPHONE RESULT -> LEARN/IMPROVE`.
 
 Additional sources are selected by task:
 - Carbon / Fluent / GOV.UK: state, form, validation, error/recovery and accessibility comparison.

@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.4",
+  "registry_version": "2026-09-19.5",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -10,7 +10,7 @@
     {
       "rule_id": "TKY-OUTCOME-001",
       "owner": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
-      "scope": "outcome-first execution, goal-driven exploration, result-quality optimization, best-next-action and bounded validation"
+      "scope": "productive creation, compounding growth, outcome-first execution, goal-driven exploration, best-next-action and bounded validation"
     },
     {
       "rule_id": "TKY-RECOVERY-001",
@@ -50,7 +50,7 @@
     {
       "rule_id": "TKY-VALIDATION-001",
       "owner": "MASTER/VALIDATION_RULES.md",
-      "scope": "validation composition and claim-level gating"
+      "scope": "triggered validation composition and claim-level gating; subordinate to productive execution"
     },
     {
       "rule_id": "TKY-C2S-001",
@@ -70,7 +70,7 @@
     {
       "rule_id": "TKY-UIREF-001",
       "owner": "MASTER/UI_REFERENCE_PROTOCOL.md",
-      "scope": "external UI/UX reference intake, authority isolation, project protection, UI vocabulary normalization and validation-first application"
+      "scope": "external UI/UX reference intake, possibility discovery, reusable UI learning, project protection, vocabulary normalization and targeted validation"
     }
   ]
 }

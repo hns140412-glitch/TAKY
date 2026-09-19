@@ -2,7 +2,7 @@
 
 Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
 Rule ID: TKY-UIREF-001
-Role: Govern intake, evaluation, project application and validation use of external UI/UX references without allowing reference material to overwrite TAKY authority or user-approved project design.
+Role: Use external UI/UX references to generate better possibilities, vocabulary, implementation choices and learning while protecting project authority; validation is a supporting filter, not the primary purpose.
 Authority: TAKY / GRAND MASTER > this protocol > project-specific UI contracts > implementation.
 Related: `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/VALIDATION_RULES.md`, `MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md`, `MASTER/TRACEABILITY_PROTOCOL.md`.
 
@@ -144,7 +144,7 @@ Required lineage:
 
 ## 10. Validation use
 
-External UI references are most valuable as validation dimensions when a project direction is already locked.
+External UI references are valuable first for expanding possibilities, learning patterns and improving implementation; when a project direction is locked, they also provide targeted validation dimensions.
 
 Applicable checks may include:
 - hierarchy;
@@ -168,7 +168,7 @@ A validation finding is not automatically authorization to redesign.
 For Ready & Set specifically:
 - the confirmed adventure/exploration identity remains project authority;
 - the confirmed Focus UI and existing Ready visual locks remain protected;
-- external UI references are used first to improve clarity, platform fit, component-state completeness and validation;
+- external UI references are used to discover better patterns, implementation options and reusable UI knowledge, then to check clarity/platform fit/state completeness where material;
 - generic SaaS/dashboard inheritance remains disallowed;
 - Material/Apple/component-library/Mobbin patterns may inform implementation or candidate refinements only when they preserve Ready's project identity.
 
@@ -198,7 +198,7 @@ Machine-readable evidence index: `MASTER/UI_REFERENCE_REGISTRY.json`.
 
 TAKY SHALL NOT treat one UI guide, library or gallery as a complete design authority.
 
-For material UI/UX review, select the smallest useful stack from distinct evidence layers:
+For material UI/UX work, select the smallest useful stack that helps create or improve the result; do not load a comparison stack merely to perform validation:
 
 1. `PROJECT AUTHORITY` — approved project contract, Golden UI, Visual ID, user-confirmed flow.
 2. `PLATFORM GUIDANCE` — Apple HIG / Material or equivalent platform guidance.
