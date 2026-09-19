@@ -14,9 +14,6 @@ on:
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
-      - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
-      - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
-      - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
       - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
@@ -39,6 +36,8 @@ on:
       - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
       - '.github/workflows/taky-enforcement.yml'
   pull_request:
     paths:
@@ -53,9 +52,6 @@ on:
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
-      - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
-      - 'MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json'
-      - 'MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
       - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
       - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
@@ -74,6 +70,8 @@ on:
       - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
       - '.github/workflows/taky-enforcement.yml'
 
 permissions:
@@ -111,16 +109,36 @@ jobs:
           python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
           python -m py_compile ENFORCEMENT/github_queue_consumer.py
           python -m py_compile ENFORCEMENT/github_queue_poll_plan.py
-          python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
           python -m py_compile ENFORCEMENT/notion_review_fresh_context_validator.py
           python -m py_compile ENFORCEMENT/drive_c2s_intake_validator.py
+          python -m py_compile ENFORCEMENT/work_os_productive_router.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Validate direct Drive C2S intake
         run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Validate Work OS productive routing
+        run: |
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_pipeline.json > /tmp/work-pipeline.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_idea.json > /tmp/work-idea.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_visual.json > /tmp/work-visual.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/work-pipeline.json').read_text())['route']['next_stage']=='VERIFY'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['destination']=='_LAB'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['canonical'] is False
+          assert json.loads(Path('/tmp/work-visual.json').read_text())['route']['visualization']=='FLOW_DIAGRAM'
+          PY
+      - name: Reject incomplete Work OS idea routing
+        run: |
+          if python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_fail.json; then
+            echo "Expected incomplete idea record to fail"
+            exit 1
+          fi
+          echo "Expected Work OS router failure observed"
       - name: Reject NotebookLM-dependent direct C2S intake
         run: |
           if python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_fail.json; then
@@ -412,17 +430,6 @@ jobs:
           echo "Expected lossy-coverage failure observed"
       - name: Validate architecture conversation C2S ledger
         run: python ENFORCEMENT/conversation_coverage_validator.py HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json
-      - name: Validate NotebookLM source registry fixture
-        run: python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_pass.json
-      - name: Reject unsafe NotebookLM source fixture
-        run: |
-          if python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_fail.json; then
-            echo "Expected unsafe NotebookLM source fixture to be rejected"
-            exit 1
-          fi
-          echo "Expected NotebookLM source-security failure observed"
-      - name: Validate NotebookLM Pilot 01 source registry
-        run: python ENFORCEMENT/notebooklm_source_validator.py HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json
       - name: Validate lightweight conversation continuity
         run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_pass.json
       - name: Validate targeted historical recovery

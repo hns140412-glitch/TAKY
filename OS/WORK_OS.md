@@ -20,6 +20,46 @@ The `TAKY-WORK-OS` repository is a subordinate implementation / operating reposi
 When an external Work OS rule conflicts with this central contract, central TAKY authority governs unless an approved ownership change explicitly says otherwise.
 The implementation repository SHOULD record the inherited central Work OS contract/version where useful for drift control.
 
+## 1.1 Productive execution pipeline — HARD LOCK
+
+Work OS default productive rhythm:
+`GOAL -> DISCOVER -> BUILD -> VERIFY -> SHIP -> LEARN`.
+
+Meaning:
+- GOAL: define the useful outcome and protected constraints.
+- DISCOVER: gather only the evidence/options needed to act.
+- BUILD: create/improve the actual result.
+- VERIFY: run material checks tied to real risk/claim.
+- SHIP: deliver or hand off the authorized result.
+- LEARN: capture reusable lessons/assets and next growth opportunity.
+
+`VERIFY != CENTER OF WORK`.
+`NO BUILD DELTA + MORE CHECKS AVAILABLE != PRODUCTIVE PROGRESS`.
+
+Machine routing baseline:
+`OS/ACTION_SKILL_REGISTRY.json`
+`ENFORCEMENT/work_os_productive_router.py`.
+
+### _LAB ideation routing
+
+Ideas are routed to `_LAB` with minimal metadata:
+`idea / novelty / usefulness / cost / evidence_state`.
+
+`_LAB != CANONICAL`.
+The router SHALL NOT auto-promote ideas into MASTER/project requirements.
+
+### Visualization routing
+
+Default relationship mapping:
+- comparison -> table
+- process/sequence -> flow diagram
+- numeric relation -> chart
+- interface structure -> wireframe
+- spatial location -> map
+- simple explanation -> text
+
+This is a working-output choice, not a governance authority.
+
 ## 2. Conversation Continuity / Persistent Work Surfaces
 
 `CONTINUITY IS THE PURPOSE; FOLDERS ARE IMPLEMENTATION SURFACES`

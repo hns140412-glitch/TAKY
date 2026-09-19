@@ -1,0 +1,74 @@
+{
+  "registry_version": "2026-09-19.1",
+  "purpose": "Minimal executable Work OS routing for productive work. Validation is bounded support, not the primary output.",
+  "pipeline": [
+    "GOAL",
+    "DISCOVER",
+    "BUILD",
+    "VERIFY",
+    "SHIP",
+    "LEARN"
+  ],
+  "stages": {
+    "GOAL": {
+      "purpose": "define the useful result and protected constraints",
+      "next_default": "DISCOVER"
+    },
+    "DISCOVER": {
+      "purpose": "find the smallest useful evidence/options needed to act",
+      "next_default": "BUILD"
+    },
+    "BUILD": {
+      "purpose": "create or improve the actual artifact/runtime/result",
+      "next_default": "VERIFY"
+    },
+    "VERIFY": {
+      "purpose": "run only material checks required by risk/claim",
+      "next_default": "SHIP"
+    },
+    "SHIP": {
+      "purpose": "deliver/publish/hand off the authorized result",
+      "next_default": "LEARN"
+    },
+    "LEARN": {
+      "purpose": "capture reusable lessons/assets and next growth opportunity",
+      "next_default": null
+    }
+  },
+  "routers": {
+    "ideation": {
+      "default_destination": "_LAB",
+      "required_fields": [
+        "idea",
+        "novelty",
+        "usefulness",
+        "cost",
+        "evidence_state"
+      ],
+      "allowed_evidence_state": [
+        "OBSERVED",
+        "INFERRED",
+        "EXPERIMENTAL",
+        "UNVERIFIED"
+      ],
+      "auto_promote_to_canonical": false
+    },
+    "visualization": {
+      "relation_map": {
+        "comparison": "TABLE",
+        "process_flow": "FLOW_DIAGRAM",
+        "numeric_relation": "CHART",
+        "interface_structure": "WIREFRAME",
+        "spatial_location": "MAP",
+        "simple_explanation": "TEXT"
+      },
+      "default": "TEXT"
+    }
+  },
+  "hard_locks": [
+    "VALIDATION_IS_BOUNDED_RAIL",
+    "IDEA_TO_LAB_NOT_CANONICAL",
+    "ROUTER_OUTPUT_IS_A_WORKING_CHOICE_NOT_AUTHORITY",
+    "USEFUL_OUTPUT_OVER_PROCESS_CEREMONY"
+  ]
+}
