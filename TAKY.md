@@ -35,6 +35,7 @@ After loading TAKY, identify task-relevant OS / DOMAIN / PROJECT / GUIDE rules a
 
 Boot order:
 1. Load `TAKY.md`.
+1A. Load `MASTER/MASTER_FILE_REGISTRY.json` when MASTER-file authority, discovery, cleanup, migration, or ambiguous document status is material; a file's presence under `MASTER/` does not itself make it active authority.
 2. Load `MASTER/MASTER_LOGIC.md`.
 2A. For material result-producing work, load `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md` and identify the primary outcome, task-relevant quality dimensions, current result state, next best improvement and valid stop condition. Result improvement outranks equivalent/redundant validation unless a hard risk/authority gate requires the validation first.
 2B. For material execution/continue/result-form work, load `MASTER/INTENT_EXECUTION_PROTOCOL.md`; delegated continuation SHALL NOT stop before a real blocker/required decision/completion or valid outcome-optimization stop condition.
