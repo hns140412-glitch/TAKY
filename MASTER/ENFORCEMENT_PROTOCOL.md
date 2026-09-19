@@ -267,6 +267,21 @@ The validator does not prove semantic correctness of every atom, inaccessible so
 
 A prose statement such as "전체 반영" without a scoped coverage ledger/equivalent evidence SHALL NOT be treated as mechanically proven C2S coverage.
 
+C2S coverage enforcement SHALL NOT require downstream execution-state evidence such as:
+- implementation complete;
+- CI pass;
+- runtime/browser pass;
+- deployment/production provenance;
+- physical-device verification.
+
+Those are separate claim domains. Their absence may keep downstream work OPEN, but SHALL NOT make a valid C2S coverage ledger fail.
+
+Conversely, downstream verification success SHALL NOT substitute for missing C2S evidence. A deployed or device-verified implementation can still be C2S-incomplete if material atoms were omitted, falsely converged, or left unmapped.
+
+`C2S COVERAGE PASS != IMPLEMENTATION PASS`.
+`IMPLEMENTATION PASS != C2S COVERAGE PASS`.
+
+
 
 ## 14. C2S runtime composition bridge — HARD LOCK
 

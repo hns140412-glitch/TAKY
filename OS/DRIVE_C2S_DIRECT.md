@@ -32,8 +32,9 @@ Default execution contract:
 5. directly read the persisted source from Drive;
 6. activate TKY-C2S-001 when the material contains durable rule/decision/correction/strategy/system changes;
 7. atomize and map to owner/disposition;
-8. perform authorized owner/canonical write;
-9. verify post-write state and record unresolved OPEN/HOLD/CONFLICT separately.
+8. route required owner/canonical reflection as a separate reflection state;
+9. when the user command requires reflection and write authority exists, perform the authorized owner/canonical write;
+10. verify post-write state and record unresolved OPEN/HOLD/CONFLICT separately.
 
 If the material is only a deliverable with no durable rule/system delta, stop after durable Drive save + pointer verification.
 
@@ -93,8 +94,9 @@ For `canonical_impact=REQUIRED`:
 - raw/current user evidence takes priority;
 - actor and latest correction must be known or explicitly unresolved;
 - every material atom receives disposition and owner;
-- canonical write must be evidenced;
-- coverage within declared scope must close under TKY-C2S-001.
+- C2S compile closure and owner-reflection state must be reported separately;
+- if the active user command requires canonical reflection, canonical write must be evidenced before that **task** is called complete;
+- coverage within declared scope must close under TKY-C2S-001 independently of downstream implementation/runtime/deployment/device state.
 
 For `canonical_impact=CANDIDATE`, save + atomize + HOLD/OPEN is allowed without forced promotion.
 

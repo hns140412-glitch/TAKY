@@ -193,6 +193,21 @@ Use only dimensions materially relevant to the requested result and risk profile
 
 `ALL POSSIBLE DIMENSIONS ≠ REQUIRED DIMENSIONS`.
 
+## C2S claim boundary — HARD LOCK
+
+For TKY-C2S-001, validation SHALL target knowledge-compilation truth:
+- recovered-scope coverage;
+- atom/disposition/destination integrity;
+- correction/WHY lineage;
+- no silent loss / no false convergence;
+- reverse reconstruction.
+
+Do not automatically compose implementation, runtime, deploy, release or device gates into a C2S closure check.
+
+Downstream validation is activated only when the user is asking for downstream realization, or when execution evidence materially challenges the correctness of the C2S knowledge projection.
+
+`C2S VALIDATION STACK != FULL PRODUCT VALIDATION STACK`.
+
 ## Claim-level gate
 
 LOGIC PASS ≠ SCHEMA PASS ≠ DATA PASS ≠ RUNTIME PASS ≠ INTEGRATION PASS ≠ BUILD PASS ≠ LOCAL PASS ≠ DEPLOY PASS ≠ RELEASE PASS.

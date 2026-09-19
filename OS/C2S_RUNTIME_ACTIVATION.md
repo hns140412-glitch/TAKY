@@ -24,13 +24,13 @@ Do **not** require C2S merely because:
 ## 1. Command routing
 
 ### 타키 반영 / 타키 업데이트 / 기준 반영
-`RECOVER APPLICABLE SOURCE -> C2S ATOMIZE/LINK -> COMPARE -> AUTHORIZED WRITE -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> HISTORY`.
+`RECOVER APPLICABLE SOURCE -> C2S ATOMIZE/LINK -> COMPARE -> DISPOSITION/OWNER ROUTE -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> C2S_COMPILE_CLOSED -> AUTHORIZED WRITE/REFLECTION WHEN REQUIRED -> REFLECTION STATE -> HISTORY`.
 
 A prose-only "반영했습니다" without the durable write/evidence required by the request is not enough.
 
 ### ㄱ / 계속 / 진행
 Delegated continuation inherits the active execution contract.
-If C2S was already required by the active contract, it remains required until the relevant compile/write/coverage stop condition.
+If C2S was already required by the active contract, it remains required until the relevant **compile** stop condition. A separate user-requested reflection/write action may continue after C2S compile closure under the same execution contract.
 If C2S was not required, `ㄱ` does not activate it by itself.
 
 ### /대화전체보존

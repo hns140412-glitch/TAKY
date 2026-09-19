@@ -1,0 +1,23 @@
+{
+  "intake_id": "DRV-C2S-COMPILE-CLOSED-001",
+  "source_title": "Current Work result",
+  "drive_file_id": "drive-file-fixture",
+  "project_or_domain": "Ready & Set",
+  "source_class": "WORK_RESULT",
+  "canonical_impact": "REQUIRED",
+  "c2s_status": "C2S_COMPILE_CLOSED",
+  "notebooklm_required": false,
+  "material_atoms": [
+    {
+      "atom_id": "A1",
+      "type": "REQUIREMENT",
+      "disposition": "ADOPT",
+      "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md"
+    }
+  ],
+  "unmapped_material": 0,
+  "silent_loss": 0,
+  "downstream_required_for_c2s_closure": false,
+  "reflection_status": "OPEN",
+  "canonical_write_ref": ""
+}

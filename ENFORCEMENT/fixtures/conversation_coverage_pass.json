@@ -72,5 +72,27 @@
       "runtime atom extraction",
       "coverage ledger generation"
     ]
+  },
+  "c2s_closure": {
+    "status": "CLOSED",
+    "basis": "KNOWLEDGE_COMPILATION",
+    "downstream_required_for_closure": false,
+    "notes": "C2S compile closes on knowledge coverage even while downstream realization remains open."
+  },
+  "reflection_state": {
+    "status": "OPEN",
+    "required_targets": [
+      "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+    ],
+    "completed_targets": [],
+    "notes": "Fixture intentionally proves compile closure is independent from owner reflection."
+  },
+  "downstream_execution": {
+    "implementation_status": "OPEN",
+    "ci_status": "NOT_PERFORMED",
+    "runtime_status": "NOT_PERFORMED",
+    "deployment_status": "NOT_PERFORMED",
+    "device_status": "NOT_PERFORMED",
+    "external_integration_status": "NOT_APPLICABLE"
   }
 }

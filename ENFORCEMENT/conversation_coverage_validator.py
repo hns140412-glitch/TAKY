@@ -80,6 +80,18 @@ def main(path):
         if rr.get(key) is not True:
             fail(f"reverse reconstruction failed: {key}")
 
+    closure = data.get("c2s_closure")
+    if closure is not None:
+        if closure.get("status") != "CLOSED":
+            fail("c2s_closure.status must be CLOSED for compile completion")
+        if closure.get("basis") != "KNOWLEDGE_COMPILATION":
+            fail("c2s_closure.basis must be KNOWLEDGE_COMPILATION")
+        if closure.get("downstream_required_for_closure") is not False:
+            fail("downstream execution must not be required for C2S closure")
+
+    # Downstream realization state is intentionally non-gating here.
+    # Implementation/CI/runtime/deploy/device truth is governed separately.
+
     scope = data.get("source_scope") or {}
     if not scope.get("description") or not scope.get("coverage_status"):
         fail("source_scope missing description/coverage_status")

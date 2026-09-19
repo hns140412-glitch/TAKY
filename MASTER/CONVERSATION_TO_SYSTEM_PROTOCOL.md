@@ -130,13 +130,29 @@ For material system-building conversations:
 -> COMPARE WITH CURRENT TAKY
 -> CLASSIFY DELTA
 -> MAP TO OWNER/FRONTIER/OPEN/HISTORY
--> APPLY AUTHORIZED REFLECTION
--> IMPACT CHECK
+-> ROUTE AUTHORIZED REFLECTION / DOWNSTREAM ACTION
 -> COVERAGE CLOSURE
 -> REVERSE RECONSTRUCTION
--> RECORD DELTA`
+-> RECORD COMPILE DELTA
+-> APPLY/VERIFY OWNER REFLECTION AS A SEPARATE STATE WHEN REQUIRED`
 
 Do not jump directly from chat to a rewritten MASTER.
+
+### 7.1 Compile closure vs reflection completion — HARD LOCK
+
+C2S compilation and owner reflection are adjacent but independent states.
+
+- `C2S_COMPILE_CLOSED`: recovered-scope material meaning is atomized, linked, dispositioned, owned/destined, coverage-closed and reverse-reconstructable.
+- `REFLECTION_COMPLETE`: all atoms whose disposition requires an authorized owner/canonical change have actually been reflected and verified in the owning system.
+- `DOWNSTREAM_EXECUTION_COMPLETE`: implementation/runtime/deploy/device work created by those atoms is complete at the required level.
+
+An atom may be fully C2S-compiled while its reflection or implementation remains explicitly `OPEN / PLANNED / PARTIAL / TOOL_BLOCKED`.
+
+However, when the **user command itself** requires "반영 / 저장반영 / canonical write", task completion remains governed by the intent/execution contract and SHALL NOT be claimed merely because C2S compilation closed.
+
+`C2S_COMPILE_CLOSED != USER REQUEST COMPLETE`.
+`C2S_COMPILE_CLOSED != REFLECTION_COMPLETE`.
+`REFLECTION_COMPLETE != DOWNSTREAM_EXECUTION_COMPLETE`.
 
 ## 8. Coverage Closure — HARD LOCK
 
@@ -247,6 +263,61 @@ Ask the user only when a real semantic ambiguity materially changes the system a
 `RAW PRESERVED != SYSTEM REFLECTED`
 `SYSTEM REFLECTED != GROWTH MAP COMPLETE`
 
+
+## 14.1 C2S closure boundary — HARD LOCK
+
+C2S closure is a knowledge-compilation state, not an implementation, runtime, deployment or device-verification state.
+
+C2S SHALL be judged only on recovered-scope knowledge transformation and traceability:
+- evidence preserved or explicitly unavailable;
+- material atoms extracted;
+- corrections/dependencies/WHY linked;
+- each material atom dispositioned and mapped to an owner/destination;
+- unresolved OPEN/CONFLICT/FRONTIER items explicitly retained;
+- `UNMAPPED_MATERIAL = 0`;
+- `SILENT_LOSS = 0`;
+- `FALSE_CONVERGENCE = 0` when measured;
+- reverse reconstruction passes for the declared recovered scope.
+
+The following are NOT C2S closure requirements:
+- code implementation;
+- CI execution;
+- browser/runtime QA;
+- deployment or production provenance;
+- physical-device verification;
+- external service connection;
+- production data migration.
+
+Those belong to downstream execution/verification tracks and may remain OPEN while C2S is CLOSED.
+
+State axes SHALL remain independent:
+
+`C2S_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+
+A review/result artifact may create downstream implementation or verification actions, but those actions MUST NOT be reclassified as unresolved C2S coverage merely because execution is still pending.
+
+If every material review-result item has a valid disposition, owner/destination, utilization route and next action or terminal reason, C2S may close while the downstream action remains `OPEN / PARTIAL / TOOL_BLOCKED / PLANNED`.
+
+Do not use deployment, runtime or device status as a reason to reopen C2S unless new evidence shows that an atom was omitted, falsely converged, wrongly dispositioned, or mapped to the wrong owner/destination.
+
+## 14.2 Evidence stream / knowledge projection / execution track — HARD LOCK
+
+To prevent C2S from becoming either a lossy summary or an execution-status tracker, TAKY SHALL keep three conceptual layers separate:
+
+1. **Evidence Stream** — recoverable original/user/source evidence and append-only correction lineage.
+2. **Knowledge Projection** — current interpreted atoms, relationships, dispositions, owners and canonical/current-state projections.
+3. **Execution Track** — implementation, CI, runtime, deployment, device and external-system realization states.
+
+`EVIDENCE STREAM -> KNOWLEDGE PROJECTION -> OPTIONAL DOWNSTREAM EXECUTION`.
+
+Rules:
+- later corrections SHALL supersede/adjust prior meaning without erasing the recoverable prior evidence;
+- current canonical/project state SHOULD be treated as a projection of evidence + accepted atom relationships, not as a replacement for source history;
+- downstream execution state MAY be referenced from an atom but SHALL NOT determine C2S closure;
+- execution evidence that reveals a misunderstood/omitted requirement MAY feed back as new EVIDENCE/CORRECTION/LESSON atoms and reopen only the affected C2S scope;
+- a C2S ledger SHOULD record downstream state only as a pointer/status, never as a closure prerequisite.
+
+This separation follows TAKY's own source/system distinction and keeps provenance, current knowledge and realization truth independently inspectable.
 
 ## 15. Runtime activation — CONDITIONAL HARD GATE
 
