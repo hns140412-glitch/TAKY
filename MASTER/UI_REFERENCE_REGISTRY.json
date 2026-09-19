@@ -1,0 +1,71 @@
+{
+  "registry_version": "2026-09-19.1",
+  "rule_id": "TKY-UIREF-001",
+  "purpose": "Evidence index for external UI/UX references. Entries are reference material, not canonical project design authority.",
+  "declared_source_set": {
+    "claimed_site_count": 9,
+    "claimed_ui_term_count": 110,
+    "verified_site_count": 4,
+    "unverified_site_count": 5,
+    "ui_term_list_status": "UNVERIFIED_SOURCE_COVERAGE",
+    "note": "The supplied message shows four named sites and states 9 sites + 110 UI terms. Missing items are not inferred."
+  },
+  "sources": [
+    {
+      "source_id": "UIREF-M3",
+      "name": "Material Design 3 Components",
+      "url": "https://m3.material.io/components",
+      "class": "DESIGN_SYSTEM_REFERENCE",
+      "publisher": "Google / Material Design",
+      "verification": "VERIFIED_URL",
+      "use": ["component taxonomy", "interaction/state reference", "accessibility/design-system comparison"],
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-APPLE-HIG",
+      "name": "Apple Human Interface Guidelines / UI Design Tips",
+      "url": "https://developer.apple.com/design/tips/",
+      "class": "PLATFORM_GUIDANCE",
+      "publisher": "Apple",
+      "verification": "VERIFIED_URL",
+      "use": ["iPhone/PWA platform validation", "touch target", "legibility", "layout", "feedback", "accessibility"],
+      "authority": "REFERENCE_ONLY_WITH_PLATFORM_VALIDATION_ROLE"
+    },
+    {
+      "source_id": "UIREF-DAISYUI",
+      "name": "daisyUI Components",
+      "url": "https://daisyui.com/components/",
+      "class": "COMPONENT_LIBRARY_REFERENCE",
+      "publisher": "daisyUI",
+      "verification": "VERIFIED_URL",
+      "use": ["component vocabulary", "state naming", "implementation convenience"],
+      "authority": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "UIREF-MOBBIN",
+      "name": "Mobbin",
+      "url": "https://mobbin.com/",
+      "class": "REAL_WORLD_PATTERN_LIBRARY",
+      "publisher": "Mobbin",
+      "verification": "VERIFIED_URL",
+      "use": ["real-world flows", "UI pattern comparison", "screen/flow research"],
+      "authority": "REFERENCE_ONLY"
+    }
+  ],
+  "project_activation": {
+    "Ready-Set": {
+      "mode": "VALIDATION_FIRST",
+      "protected": [
+        "adventure/exploration identity",
+        "confirmed Focus UI direction",
+        "project-specific visual hierarchy and child-facing tone"
+      ],
+      "prohibited_auto_effect": [
+        "replace Golden UI",
+        "generic SaaS/dashboard convergence",
+        "copy third-party branded composition",
+        "change confirmed interaction without approval"
+      ]
+    }
+  }
+}
