@@ -179,7 +179,9 @@
   ],
   "notebooklm": {
     "direct_connector_available": false,
-    "operational_mode": "Drive source pack -> consumer NotebookLM source selection/analysis -> Drive output -> TAKY raw recheck/C2S review",
+    "required_for_context_pass": false,
+    "blocking": false,
+    "role": "OPTIONAL_EVIDENCE_ASSIST",
     "pack": "PILOT_02_READY_SET",
     "output_authority": "REFERENCE_ONLY_EVIDENCE_ASSIST",
     "source_map_drive_id": "1TGfTqXGDJePfUvBSEYs8F9rPZpE9tKVs3zIan9F3338",
@@ -192,5 +194,16 @@
     "Add regression tests that fail on single-task collapse and fake-task substitution.",
     "Rebuild staging preview from corrected runtime.",
     "Only then resume narrow iPhone device validation."
-  ]
+  ],
+  "drive_c2s": {
+    "status": "REQUIRED_PATH",
+    "context_pass_without_notebooklm": true,
+    "declared_scope_recovery": "PASS",
+    "validators": [
+      "conversation_coverage_validator",
+      "c2s_semantic_integrity_validator",
+      "project_context_validator",
+      "reverse_reconstruction"
+    ]
+  }
 }
