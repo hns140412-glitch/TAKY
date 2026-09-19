@@ -10,8 +10,8 @@
       "transport": "GITHUB_ISSUE_QUEUE",
       "queue_repository": "hns140412-glitch/Ready-Set",
       "workflow_path": ".github/workflows/taky-codex-executor.yml",
-      "implementation_commit": "1cd19aabe26043adb167c4d919770c55686d8173",
-      "state": "IMPLEMENTED_WORKFLOW_VALID_CREDENTIAL_ABSENT",
+      "implementation_commit": "584a89a5b3056f63a305a55f89de6adc219cdffd",
+      "state": "IMPLEMENTED_EVENT_DRIVEN_CREDENTIAL_ABSENT",
       "queue_ready": true,
       "credential_requirement": {
         "kind": "GITHUB_ACTIONS_SECRET",
@@ -25,11 +25,12 @@
       },
       "workflow_validation": {
         "github_parser_valid": true,
-        "selftest_run_id": 35430211255,
+        "selftest_run_id": 35430318042,
         "selftest_conclusion": "success",
-        "missing_credential_runtime_observed": true,
-        "missing_credential_run_id": 35430099105,
-        "blocker_reporting_fix_commit": "1cd19aabe26043adb167c4d919770c55686d8173"
+        "issue_event_trigger_active": true,
+        "live_queue_run_id": 35430355396,
+        "live_queue_result": "CREDENTIAL_BLOCKED_CONFIRMED",
+        "credential_present": false
       }
     }
   ]
