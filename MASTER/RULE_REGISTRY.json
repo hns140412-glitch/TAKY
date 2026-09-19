@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.5",
+  "registry_version": "2026-09-19.6",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -71,6 +71,11 @@
       "rule_id": "TKY-UIREF-001",
       "owner": "MASTER/UI_REFERENCE_PROTOCOL.md",
       "scope": "external UI/UX reference intake, possibility discovery, reusable UI learning, project protection, vocabulary normalization and targeted validation"
+    },
+    {
+      "rule_id": "TKY-CODEX-001",
+      "owner": "MASTER/CODEX_TASK_CONTRACT.md",
+      "scope": "Codex/executor task materialization, completion evidence, review, rework and lifecycle transitions"
     }
   ]
 }

@@ -99,6 +99,27 @@ Forbidden shortcuts include:
 - `CODEX_DONE -> MERGED`
 - `TAKY_REVIEW -> DEPLOYED` when approval is required but missing
 
+## Executor return -> TAKY review loop
+
+Codex/executor completion evidence SHALL use the shape owned by `MASTER/EXECUTOR_RESULT_SCHEMA.json`.
+
+Controlled-runtime review path:
+`CODEX_DONE EVIDENCE -> TAKY_REVIEW -> PASS ? HUMAN_APPROVAL : REWORK -> UPDATED TASK -> CODEX`.
+
+`ENFORCEMENT/executor_review_loop.py` deterministically checks:
+- task identity;
+- changed-file scope;
+- every acceptance criterion has explicit evidence;
+- every required validation gate has explicit status/evidence;
+- required mobile runtime evidence;
+- scope deviations;
+- blocking unresolved risks;
+- commit reference.
+
+A failed review does not ask the user to debug. It emits concrete defect evidence and a REWORK transition that can be returned to the executor.
+
+This loop is an evidence/control implementation. It does not prove semantic correctness beyond the evidence supplied, and it does not itself invoke an external Codex service.
+
 ## Review gates
 
 TAKY review SHALL evaluate, when applicable:

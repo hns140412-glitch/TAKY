@@ -1,0 +1,45 @@
+{
+  "schema_version": "2026-09-19.1",
+  "purpose": "Completion evidence envelope returned by Codex or another implementation executor for TAKY review.",
+  "required": [
+    "task_id",
+    "root_cause_or_rationale",
+    "changed_files",
+    "acceptance_results",
+    "validation_results",
+    "unresolved_risks",
+    "commit_ref",
+    "requested_transition"
+  ],
+  "acceptance_result": {
+    "required": [
+      "criterion",
+      "status",
+      "evidence"
+    ],
+    "status_enum": [
+      "PASS",
+      "FAIL",
+      "UNVERIFIED",
+      "NOT_RUN"
+    ]
+  },
+  "validation_result": {
+    "status_enum": [
+      "PASS",
+      "FAIL",
+      "NOT_APPLICABLE",
+      "UNVERIFIED",
+      "NOT_RUN"
+    ],
+    "evidence_required_when_pass": true
+  },
+  "rules": [
+    "task_id must match the task contract",
+    "all task acceptance criteria must have explicit results",
+    "required validation gates must be explicitly reported",
+    "changed files must stay inside allowed change scope",
+    "CODEX_DONE is evidence return, not TAKY_PASS",
+    "missing evidence never becomes PASS"
+  ]
+}

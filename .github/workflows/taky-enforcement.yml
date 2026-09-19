@@ -95,6 +95,7 @@ jobs:
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
+          python -m py_compile ENFORCEMENT/executor_review_loop.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -137,6 +138,26 @@ jobs:
           python ENFORCEMENT/codex_task_contract_validator.py /tmp/generated_contract.json
       - name: Validate REWORK state transition
         run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
+      - name: Validate successful executor review
+        run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Route failed executor review to REWORK
+        run: |
+          if python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json; then
+            echo "Expected failed executor evidence to require REWORK"
+            exit 1
+          fi
+          python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json > /tmp/review.json || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/review.json').read_text())
+          assert data.get('review_decision') == 'REWORK'
+          transition=data.get('state_transition') or {}
+          transition['defects']=data.get('defects', [])
+          transition['acceptance_delta']=data.get('acceptance_delta', [])
+          Path('/tmp/rework_transition.json').write_text(json.dumps(transition, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/execution_state_engine.py /tmp/rework_transition.json
       - name: Reject forbidden state shortcut
         run: |
           if python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_shortcut_fail.json; then
