@@ -4,7 +4,7 @@ Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
 Rule ID: TKY-CONTINUITY-001
 Role: Preserve the total meaning of conversation across chats without forcing the full historical corpus into every turn, and prevent unnecessary user re-asking.
 Authority: TAKY / GRAND MASTER > this protocol > lower-layer project/domain continuity specializations.
-Related: `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md`, `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`, `STATE.md`.
+Related: `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `OS/DRIVE_C2S_DIRECT.md`, `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`, `STATE.md`.
 
 ## 0. Core doctrine — HARD LOCK
 
@@ -14,7 +14,7 @@ Related: `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/NOTEBOOKLM_RECOVER
 `TOTAL CONVERSATION != TOTAL CONTEXT LOADED EVERY TURN`
 `LIGHTWEIGHT != LOSSY`
 `NO RE-ASK != ALWAYS FULL-SCAN`
-`NOTEBOOKLM AVAILABLE != NOTEBOOKLM ALWAYS-ON`
+`NOTEBOOKLM DEFAULT ROUTE = OFF`
 
 The system SHALL preserve material conversational totality through raw evidence, C2S atoms, state/history, source registries and indexed recovery surfaces while keeping ordinary execution on the smallest sufficient working set.
 
@@ -41,9 +41,9 @@ Default for new-chat resume and durable work.
 
 ### L2 — INDEXED / TARGETED RECOVERY
 Use:
-- NotebookLM topic/project notebook or prepared source pack;
-- Drive Source Registry;
+- Drive Source Registry / direct Drive sources;
 - targeted historical search/index;
+- C2S/history/source pointers;
 - derived analysis as REFERENCE_ONLY.
 
 Use only when L0/L1 does not safely resolve a material historical/context question.
@@ -94,7 +94,7 @@ TAKY SHALL NOT ask the user to repeat or re-explain a materially recoverable pri
 Before re-asking, attempt the lowest-cost applicable sequence:
 1. current conversation / active contract;
 2. L1 canonical continuity;
-3. targeted L2 NotebookLM/index search when relevant;
+3. targeted L2 Drive/index search when relevant;
 4. targeted L3 raw-source verification when needed.
 
 Ask only when:
@@ -113,7 +113,7 @@ L4 full forensic/global reconstruction SHALL NOT run:
 - on every new chat;
 - on every `ㄱ`;
 - at every conversation end;
-- because a NotebookLM notebook exists;
+- because a historical auxiliary index exists;
 - because a minor historical detail is uncertain.
 
 L4 is reserved for explicit full/global historical audit or an equivalently authorized reconstruction task.
@@ -141,7 +141,7 @@ For `ㄱ / 계속 / 진행`:
 - preserve the active contract;
 - remain at L0 unless a material dependency requires escalation;
 - do not rehydrate unrelated historical context;
-- do not run NotebookLM merely because continuation occurs.
+- do not invoke excluded auxiliary recovery systems merely because continuation occurs.
 
 ## 7. Conversation-end rule
 
@@ -151,49 +151,47 @@ At conversation end:
 - update pointers needed for resume;
 - release unnecessary historical context.
 
-Do **not** perform full NotebookLM/global rescan by default.
+Do **not** perform full/global rescan by default.
 
 This creates a cheap incremental continuity loop:
 `TALK -> MATERIAL DELTA -> C2S/STATE -> RELEASE CONTEXT`.
 
-## 8. NotebookLM role in lightweight continuity
+## 8. Direct Drive role in lightweight continuity
 
-NotebookLM is a **targeted cold-memory index/recovery accelerator**, not the always-loaded memory layer.
+Google Drive is the default durable historical/source surface for L2 targeted recovery.
 
-Use NotebookLM when:
-- the user asks about prior discussions not resolved by L1;
-- multiple conversations on the same topic must be compared;
-- correction history or omitted details need recovery;
-- a domain/project notebook can answer without loading global history.
+Use direct Drive retrieval when:
+- L1 does not resolve a material prior decision;
+- a saved Work/ChatGPT result or source must be recovered;
+- multiple project sources need comparison;
+- a direct source pointer exists.
 
-Do not use NotebookLM when:
-- current conversation already contains the answer;
-- STATE/canonical owner resolves the task;
-- the question is unrelated to historical context.
+Do not require an auxiliary synthesis layer before C2S.
 
-NotebookLM output remains governed by TKY-NBLM-001.
+`DRIVE POINTER -> DIRECT READ -> TARGETED RAW CHECK -> C2S WHEN MATERIAL`.
+
+NotebookLM is excluded from the active continuity route unless the user explicitly re-enables it in a future decision.
 
 ## 9. Notebook partition / global index strategy
 
 Avoid one giant notebook as the only recovery surface.
 
-Preferred:
+Preferred Drive/index partitions:
 - TAKY Core / Governance;
 - Work OS / Notion;
 - Ready & Set;
 - Architecture;
-- project-specific notebooks as material;
-- other domain notebooks when justified.
+- project-specific source folders/indexes as material.
 
 Maintain a lightweight global Source Registry / Topic Map containing:
 - source ID;
 - date/range;
 - topic/project/domain;
 - source class;
-- notebook/source-pack destination;
+- Drive/source-pack destination;
 - latest correction/status pointers.
 
-For cross-domain questions, use the global index to select the smallest relevant notebook/source set rather than querying every notebook.
+For cross-domain questions, use the global index to select the smallest relevant Drive/source set rather than querying every notebook.
 
 ## 10. Materiality filter
 
@@ -237,7 +235,7 @@ Do not chase perfect historical completeness for an ordinary task when the remai
 For conversation-derived canonical change:
 - L1 canonical context is mandatory;
 - current conversation evidence may be sufficient for new current decisions;
-- NotebookLM-derived historical claims require L3 raw recheck before promotion;
+- derived historical claims require L3 raw recheck before promotion;
 - C2S coverage applies to the declared material source scope;
 - full account-history scan is not required unless the user's requested scope is global/full.
 
@@ -261,7 +259,7 @@ The target is **high continuity / low context cost**.
 Fail or correct course when:
 - user is asked to repeat recoverable context;
 - L4 was used without explicit full/global reconstruction scope;
-- NotebookLM was invoked despite L0/L1 being sufficient;
+- an excluded/heavy recovery path was invoked despite L0/L1 being sufficient;
 - a summary replaced raw evidence for a material disputed decision;
 - old context remained loaded after it was safely persisted and no longer needed;
 - cross-project context contaminated the active task;
@@ -271,6 +269,6 @@ Fail or correct course when:
 
 This protocol defines canonical selection/recovery behavior and repository-testable continuity records.
 
-It does not prove that hosted ChatGPT automatically reads repository state or calls NotebookLM on every new chat. Where platform auto-invocation is unavailable, an explicit TAKY invocation remains the reliable bootstrap.
+It does not prove that hosted ChatGPT automatically reads repository state or calls external recovery systems on every new chat. Where platform auto-invocation is unavailable, an explicit TAKY invocation remains the reliable bootstrap.
 
 END
