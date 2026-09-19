@@ -193,6 +193,10 @@ NO USER-AS-QA.
 For material TAKY-building conversations, activate `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md` (TKY-C2S-001) in addition to the Context Ledger.
 
 Operational shorthand:
-`RAW EVIDENCE -> ATOMS -> RELATIONSHIPS/CORRECTIONS -> OWNER/FRONTIER/OPEN -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> GROWTH MAP`.
+`RAW EVIDENCE -> ATOMS -> RELATIONSHIPS/CORRECTIONS -> OWNER/FRONTIER/OPEN -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> C2S_COMPILE_CLOSED -> GROWTH MAP`.
 
 Do not claim "전부 반영" merely because a compact summary or MASTER rewrite exists. Within recovered scope, material items must be dispositioned/mapped and silent loss must be zero.
+
+C2S compile closure remains independent from owner reflection and downstream realization:
+`C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+A pending implementation/runtime/deployment/device action does not reopen C2S unless it reveals a knowledge-compilation defect; conversely C2S closure does not satisfy a user request that separately requires canonical reflection or implementation.
