@@ -215,7 +215,7 @@ Recovered intent from the current conversation:
 This bootstrap event establishes the protocol and the cross-conversation recovery-witness/pattern model; it does not claim historical conversations have already been perfectly reconstructed. Historical backfill remains an explicit recovery task and genuinely inaccessible raw history remains `UNVERIFIED_SOURCE_COVERAGE`. Known recoverable misses SHALL instead use the recovery-failure taxonomy rather than being hidden under that label.
 
 
-## 11. Conversation-to-System compilation bridge
+## 14. Conversation-to-System compilation bridge
 
 This Ledger preserves continuity and decision formation. Durable system compilation/coverage closure is separately governed by `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md` (TKY-C2S-001).
 
