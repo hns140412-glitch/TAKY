@@ -9,30 +9,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  c2s-system:
+  drive-c2s-core:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Rule registry lint
         run: python ENFORCEMENT/rule_registry_lint.py
-
-      - name: Validate Ready NotebookLM source registry
-        run: |
-          python ENFORCEMENT/notebooklm_source_validator.py             PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json
-
-      - name: Validate NotebookLM output intake PASS
-        run: |
-          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_pass.json
-
-      - name: Verify NotebookLM bad intake fails closed
-        shell: bash
-        run: |
-          set +e
-          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_fail.json
-          code=$?
-          set -e
-          test "$code" -ne 0
 
       - name: Validate adversarial C2S PASS
         run: |
@@ -64,3 +47,37 @@ jobs:
       - name: Validate actual Ready project context
         run: |
           python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved PROJECTS/READY_SET_CONTEXT_RESOLUTION_2026-09-19.json
+
+      - name: Assert NotebookLM is non-blocking
+        run: |
+          python - <<'PY'
+          import json
+          m=json.load(open('PROJECTS/READY_SET_CONTEXT_MANIFEST.json',encoding='utf-8'))
+          assert m['drive_c2s_recovery']['required'] is True
+          assert m['drive_c2s_recovery']['notebooklm_required'] is False
+          assert m['notebooklm_recovery']['required'] is False
+          assert m['notebooklm_recovery']['blocking'] is False
+          print('PASS: Drive-first C2S core does not require NotebookLM')
+          PY
+
+  notebooklm-optional-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate optional Ready NotebookLM source registry
+        run: |
+          python ENFORCEMENT/notebooklm_source_validator.py             PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json
+
+      - name: Validate optional NotebookLM output intake PASS
+        run: |
+          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_pass.json
+
+      - name: Verify bad NotebookLM intake fails closed
+        shell: bash
+        run: |
+          set +e
+          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_fail.json
+          code=$?
+          set -e
+          test "$code" -ne 0
