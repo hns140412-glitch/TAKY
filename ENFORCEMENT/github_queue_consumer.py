@@ -34,11 +34,17 @@ def validate_envelope(envelope: dict) -> list[str]:
         failures.append("DISPATCH_PROVIDER_UNSUPPORTED")
     return failures
 
-def _comment(kind: str, data: dict) -> str:
+def _comment(kind: str, data: dict, source_comment_id=None, issue_ack: bool=False) -> str:
+    markers = [f"<!-- TAKY_QUEUE_CONSUMER:{kind} -->"]
+    if issue_ack:
+        markers.append("<!-- TAKY_QUEUE_ISSUE_ACK -->")
+    if source_comment_id is not None:
+        markers.append(f"<!-- TAKY_QUEUE_SOURCE_COMMENT:{source_comment_id} -->")
     return (
-        f"<!-- TAKY_QUEUE_CONSUMER:{kind} -->\n"
-        f"**TAKY Queue Consumer — {kind}**\n\n"
-        "```json\n"
+        "\n".join(markers)
+        + "\n"
+        + f"**TAKY Queue Consumer — {kind}**\n\n"
+        + "```json\n"
         + json.dumps(data, ensure_ascii=False, indent=2)
         + "\n```\n"
     )
@@ -52,7 +58,7 @@ def consume(event: dict) -> dict:
     parsed_issue = parse_issue(str(issue.get("body", "")))
     if not parsed_issue.get("pass"):
         data = {"detected": parsed_issue.get("detected", [])}
-        return {"pass": False, "action": "REJECT_QUEUE", "comment": _comment("REJECTED", data)}
+        return {"pass": False, "action": "REJECT_QUEUE", "comment": _comment("REJECTED", data, issue_ack=True)}
 
     envelope = parsed_issue["envelope"]
     failures = validate_envelope(envelope)
@@ -60,7 +66,7 @@ def consume(event: dict) -> dict:
         return {
             "pass": False,
             "action": "REJECT_QUEUE",
-            "comment": _comment("REJECTED", {"task_id": envelope.get("task_id"), "detected": failures}),
+            "comment": _comment("REJECTED", {"task_id": envelope.get("task_id"), "detected": failures}, issue_ack=True),
         }
 
     event_name = str(event.get("_event_name") or "")
@@ -72,9 +78,10 @@ def consume(event: dict) -> dict:
             "status": "WAITING_EXECUTOR_RECEIPT",
             "external_executor_invocation_verified": False,
         }
-        return {"pass": True, "action": "QUEUE_READY", "comment": _comment("QUEUE_READY", data)}
+        return {"pass": True, "action": "QUEUE_READY", "comment": _comment("QUEUE_READY", data, issue_ack=True)}
 
     comment = event.get("comment") or {}
+    source_comment_id = comment.get("id")
     parsed = parse_comment(str(comment.get("body", "")))
     if not parsed.get("pass"):
         return {"pass": True, "action": "IGNORE_NON_MACHINE_COMMENT", "comment": None}
@@ -93,7 +100,7 @@ def consume(event: dict) -> dict:
         return {
             "pass": bool(checked["pass"]),
             "action": kind,
-            "comment": _comment(kind, data),
+            "comment": _comment(kind, data, source_comment_id=source_comment_id),
         }
 
     if result is not None:
@@ -112,7 +119,7 @@ def consume(event: dict) -> dict:
         return {
             "pass": kind != "RESULT_REJECTED",
             "action": kind,
-            "comment": _comment(kind, data),
+            "comment": _comment(kind, data, source_comment_id=source_comment_id),
         }
 
     return {"pass": True, "action": "IGNORE_EMPTY_MACHINE_COMMENT", "comment": None}

@@ -10,9 +10,11 @@ on:
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'OS/GITHUB_EXECUTOR_QUEUE.md'
       - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'OS/GITHUB_EXECUTOR_QUEUE.md'
       - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
@@ -103,6 +105,7 @@ jobs:
           python -m py_compile ENFORCEMENT/executor_cycle.py
           python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
           python -m py_compile ENFORCEMENT/github_queue_consumer.py
+          python -m py_compile ENFORCEMENT/github_queue_poll_plan.py
           python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
           python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
           python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
@@ -217,6 +220,43 @@ jobs:
           assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
           assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
           assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          PY
+      - name: Validate scheduled queue poller idempotency
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          receipt_event=json.loads(Path('/tmp/queue-receipt-event.json').read_text())
+          result_event=json.loads(Path('/tmp/queue-result-event.json').read_text())
+          snapshot={
+            'number':101,
+            'title':issue['title'],
+            'body':issue['body'],
+            'comments':[
+              {'id':201,'body':receipt_event['comment']['body']},
+              {'id':202,'body':result_event['comment']['body']},
+            ]
+          }
+          Path('/tmp/poll-snapshot.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot.json --output /tmp/poll-plan-1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          plan=json.loads(Path('/tmp/poll-plan-1.json').read_text())
+          assert len(plan['comments_to_publish']) == 3, plan
+          for i, body in enumerate(plan['comments_to_publish'], start=301):
+            snapshot['comments'].append({'id':i,'body':body})
+          Path('/tmp/poll-snapshot-acked.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-acked.json --output /tmp/poll-plan-2.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-2.json').read_text())
+          assert plan['comments_to_publish'] == [], plan
           PY
       - name: Validate executor transport and closed review cycle
         run: |

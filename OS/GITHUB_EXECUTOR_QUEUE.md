@@ -61,6 +61,27 @@ The result then flows through:
 
 If TAKY review returns REWORK, the orchestrator posts a new dispatch or explicit rework comment bound to the same task lineage and updated contract hash. Silent mutation of the original machine dispatch block is forbidden.
 
+## Event + Poll Fallback
+
+Primary consumer workflow:
+`.github/workflows/taky-executor-queue-consumer.yml`
+
+Fallback poller:
+`.github/workflows/taky-executor-queue-poller.yml`
+
+Some GitHub mutations created by automation credentials may not recursively trigger another workflow event. Therefore queue reliability does not depend on the issue/comment event alone.
+
+The fallback poller scans open TAKY queue issues every 15 minutes and processes only unacknowledged machine blocks.
+
+Idempotency markers:
+- `<!-- TAKY_QUEUE_ISSUE_ACK -->` — queue issue already evaluated.
+- `<!-- TAKY_QUEUE_SOURCE_COMMENT:<id> -->` — executor receipt/result comment already consumed.
+
+`EVENT MISSED != QUEUE LOST`.
+`POLL RETRY != DUPLICATE REVIEW`.
+
+The poller does not create executor receipts or results. It only consumes evidence that already exists in the queue.
+
 ## Closure
 
 Queue issue closure is allowed only after one of:
