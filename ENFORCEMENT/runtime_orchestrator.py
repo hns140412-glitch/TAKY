@@ -15,6 +15,7 @@ from pathlib import Path
 from c2s_preflight_bridge import run as run_c2s_preflight
 from codex_task_contract_builder import build as build_codex_task_contract
 from executor_transport import build_envelope as build_executor_envelope
+from executor_adapter_registry import resolve as resolve_executor_adapter
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -89,13 +90,22 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         detected.extend(task_contract_result.get("detected", []))
 
     dispatch_result = None
+    adapter_result = None
     if not detected and isinstance(task_contract_result, dict) and task_contract_result.get("task_contract"):
-        dispatch_result = build_executor_envelope(
-            task_contract_result["task_contract"],
-            transport=record.get("executor_transport", "FILE_QUEUE"),
-            provider=record.get("executor_provider", "CODEX"),
-        )
-        detected.extend(dispatch_result.get("detected", []))
+        task_contract = task_contract_result["task_contract"]
+        transport = record.get("executor_transport", "FILE_QUEUE")
+        if (task_contract.get("executor_automation") or {}).get("target_repository_local") is True:
+            registry_path = repo_root / "MASTER" / "EXECUTOR_ADAPTER_REGISTRY.json"
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            adapter_result = resolve_executor_adapter(task_contract, transport, registry)
+            detected.extend(adapter_result.get("detected", []))
+        if not detected:
+            dispatch_result = build_executor_envelope(
+                task_contract,
+                transport=transport,
+                provider=record.get("executor_provider", "CODEX"),
+            )
+            detected.extend(dispatch_result.get("detected", []))
 
     detected = list(dict.fromkeys(detected))
     authorized = not detected
@@ -118,6 +128,11 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "dispatch_envelope": (
             dispatch_result.get("dispatch_envelope")
             if authorized and isinstance(dispatch_result, dict)
+            else None
+        ),
+        "executor_adapter": (
+            adapter_result.get("adapter")
+            if authorized and isinstance(adapter_result, dict)
             else None
         ),
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
