@@ -1,0 +1,66 @@
+name: TAKY C2S System Validation
+
+on:
+  push:
+    branches:
+      - main
+      - 'taky/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  c2s-system:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rule registry lint
+        run: python ENFORCEMENT/rule_registry_lint.py
+
+      - name: Validate Ready NotebookLM source registry
+        run: |
+          python ENFORCEMENT/notebooklm_source_validator.py             PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json
+
+      - name: Validate NotebookLM output intake PASS
+        run: |
+          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_pass.json
+
+      - name: Verify NotebookLM bad intake fails closed
+        shell: bash
+        run: |
+          set +e
+          python ENFORCEMENT/notebooklm_output_intake_validator.py             ENFORCEMENT/fixtures/notebooklm_output_intake_fail.json
+          code=$?
+          set -e
+          test "$code" -ne 0
+
+      - name: Validate adversarial C2S PASS
+        run: |
+          python ENFORCEMENT/c2s_semantic_integrity_validator.py             ENFORCEMENT/fixtures/c2s_adversarial_pass.json
+
+      - name: Verify adversarial C2S failures fail closed
+        shell: bash
+        run: |
+          for f in             ENFORCEMENT/fixtures/c2s_adversarial_correction_fail.json             ENFORCEMENT/fixtures/c2s_adversarial_false_convergence_fail.json             ENFORCEMENT/fixtures/c2s_adversarial_coverage_lie_fail.json             ENFORCEMENT/fixtures/c2s_adversarial_open_resolution_fail.json             ENFORCEMENT/fixtures/c2s_adversarial_notebook_authority_fail.json
+          do
+            set +e
+            python ENFORCEMENT/c2s_semantic_integrity_validator.py "$f"
+            code=$?
+            set -e
+            if [ "$code" -eq 0 ]; then
+              echo "Expected fail-closed but got PASS: $f"
+              exit 1
+            fi
+          done
+
+      - name: Validate actual Ready recovery coverage
+        run: |
+          python ENFORCEMENT/conversation_coverage_validator.py             HISTORY/2026-09-19_READY_SET_PILOT02_RECOVERY_LEDGER.json
+
+      - name: Validate actual Ready semantic integrity
+        run: |
+          python ENFORCEMENT/c2s_semantic_integrity_validator.py             HISTORY/2026-09-19_READY_SET_PILOT02_RECOVERY_LEDGER.json
+
+      - name: Validate actual Ready project context
+        run: |
+          python ENFORCEMENT/project_context_validator.py             PROJECTS/READY_SET_CONTEXT_MANIFEST.json             --resolved PROJECTS/READY_SET_CONTEXT_RESOLUTION_2026-09-19.json
