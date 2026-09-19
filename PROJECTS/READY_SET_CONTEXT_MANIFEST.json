@@ -14,20 +14,22 @@
     "order": [
       "L0_HOT",
       "L1_WARM",
-      "L2_NOTEBOOKLM_INDEXED",
+      "L2_DRIVE_INDEXED",
       "L3_RAW",
       "L4_FULL_FORENSIC"
     ],
     "ask_last": true,
     "full_scan_last": true,
-    "no_guess_on_missing_history": true
+    "no_guess_on_missing_history": true,
+    "notebooklm_assist": "OPTIONAL_EVIDENCE_ASSIST"
   },
   "required_taky_rules": [
     "TKY-C2S-001",
     "TKY-CONTINUITY-001",
     "TKY-CONTEXT-001",
     "TKY-VALIDATION-001",
-    "TKY-ENFORCEMENT-001"
+    "TKY-ENFORCEMENT-001",
+    "TKY-C2S-ROUNDTRIP-001"
   ],
   "required_project_contracts": [
     {
@@ -155,14 +157,27 @@
       "system_status_drive_id": "1Bc-Xy6tN7o2_xMQ43DSOEvl2Nw7vUNjJ8TiwEnt7J48"
     },
     "roundtrip_protocol": "TKY-C2S-ROUNDTRIP-001",
-    "machine_registry": "PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json"
+    "machine_registry": "PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json",
+    "required": false,
+    "blocking": false,
+    "role": "OPTIONAL_EVIDENCE_ASSIST"
   },
   "context_pass_conditions": [
     "all required project contracts resolved",
     "latest correction lineage loaded",
     "current implementation authority loaded when implementation work is requested",
+    "Drive/raw source path sufficient for declared scope",
     "OPEN/CONFLICT/HOLD preserved",
     "no silent substitution from summary when raw recovery is needed",
-    "reverse reconstruction PASS"
-  ]
+    "coverage validator PASS",
+    "semantic integrity validator PASS",
+    "reverse reconstruction PASS",
+    "NotebookLM is NOT required for context PASS"
+  ],
+  "drive_c2s_recovery": {
+    "required": true,
+    "canonical_path": "DRIVE_RAW -> SOURCE_REGISTRY -> RAW_RECHECK -> C2S -> CONTEXT_MANIFEST -> VALIDATORS -> REVERSE_RECONSTRUCTION",
+    "notebooklm_required": false,
+    "notebooklm_role": "OPTIONAL_EVIDENCE_ASSIST"
+  }
 }
