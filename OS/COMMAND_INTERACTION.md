@@ -142,7 +142,7 @@ Conversation-derived system/canonical updates SHALL activate `OS/C2S_RUNTIME_ACT
 
 Routing:
 - `타키 반영 / 타키 업데이트 / 기준 반영 / 회사 기준 반영` + material durable rule/standard change -> C2S required.
-- `ㄱ / 계속 / 진행` -> inherit current execution contract. If C2S is already active, continue through its coverage/reflect/history stop condition; otherwise do not activate C2S merely because of the shorthand.
+- `ㄱ / 계속 / 진행` -> inherit current execution contract. If C2S is already active, continue through its C2S compile stop condition. Separate reflection/write/history steps continue only when they are part of the active execution contract; otherwise do not activate or extend C2S merely because of the shorthand.
 - `/대화전체보존` -> RAW evidence preservation only; no automatic canonical promotion.
 - `대화 종료` -> detect and ledger material uncompiled system-building deltas before Handoff when present; preserve OPEN/FRONTIER/CONFLICT without auto-promoting them.
 - `/재개` -> recover unresolved atoms, correction lineage, destinations and growth gaps when relevant.
@@ -174,7 +174,7 @@ Cross-chat continuity SHALL follow TKY-CONTINUITY-001.
 Default behavior:
 - same-chat `ㄱ / 계속 / 진행` -> L0 active working set;
 - new-chat `최신 타키 기준으로 재개` -> L1 STATE + applicable owner + active/open deltas;
-- prior-detail recall unresolved at L1 -> targeted L2 NotebookLM/index;
+- prior-detail recall unresolved at L1 -> targeted L2 Drive/source-registry/index recovery;
 - exact correction/canonical dispute -> targeted L3 raw verification;
 - explicit `전체/최초대화부터/전역 역검증` -> L4 forensic scope.
 
