@@ -246,6 +246,57 @@
         }
       },
       "additionalProperties": true
+    },
+    "c2s_closure": {
+      "type": "object",
+      "required": [
+        "status",
+        "basis",
+        "downstream_required_for_closure"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "CLOSED",
+            "OPEN"
+          ]
+        },
+        "basis": {
+          "const": "KNOWLEDGE_COMPILATION"
+        },
+        "downstream_required_for_closure": {
+          "const": false
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "downstream_execution": {
+      "type": "object",
+      "description": "Optional realization snapshot. Informational for C2S closure; governed by downstream protocols.",
+      "properties": {
+        "implementation_status": {
+          "type": "string"
+        },
+        "ci_status": {
+          "type": "string"
+        },
+        "runtime_status": {
+          "type": "string"
+        },
+        "deployment_status": {
+          "type": "string"
+        },
+        "device_status": {
+          "type": "string"
+        },
+        "external_integration_status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
     }
   },
   "additionalProperties": true
