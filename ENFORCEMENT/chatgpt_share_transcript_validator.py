@@ -20,6 +20,7 @@ FORBIDDEN = [
     re.compile(r"Bearer\s+[A-Za-z0-9._~+/-]{12,}", re.I),
 ]
 MESSAGE_HEADER = re.compile(r"^## \[\d{4}\] (USER|ASSISTANT) — ", re.M)
+INTERNAL_CONTENT = re.compile(r"^CONTENT_TYPE:\s*(thoughts|reasoning_recap|model_editable_context|code|tool|analysis|system)\s*$", re.I | re.M)
 
 def main(path: Path) -> int:
     text = path.read_text(encoding="utf-8", errors="replace")
@@ -30,6 +31,9 @@ def main(path: Path) -> int:
     hits = [p.pattern for p in FORBIDDEN if p.search(text)]
     if hits:
         print("FAIL: forbidden session/auth pattern(s): " + repr(hits))
+        return 1
+    if INTERNAL_CONTENT.search(text):
+        print("FAIL: internal/non-user-visible content type leaked into sanitized transcript")
         return 1
     count = len(MESSAGE_HEADER.findall(text))
     if count == 0:
