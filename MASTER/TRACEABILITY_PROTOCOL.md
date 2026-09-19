@@ -11,7 +11,7 @@ DESIGN APPROVED ≠ FUNCTION IMPLEMENTED.
 FUNCTION IMPLEMENTED ≠ ACTUAL RESULT VERIFIED.
 DEPLOYED ≠ RELEASE PASS.
 
-A material requirement is complete only when its active decision state and downstream realization can be traced forward and the actual result can be traced backward to authoritative source/evidence.
+A material requirement's **realization** is complete only when its active decision state and applicable downstream realization can be traced forward and the actual result can be traced backward to authoritative source/evidence. This is a realization/release statement, not a C2S closure rule. A requirement may be C2S-compiled and correctly owned while implementation/runtime/deployment/device realization remains OPEN.
 
 ## 2. Required Bidirectional Trace
 
@@ -82,6 +82,19 @@ Allowed dispositions:
 PRESERVE / ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED.
 
 A material source item with no explicit destination/disposition is MISSING.
+
+## 4.1 C2S boundary inside end-to-end traceability — HARD LOCK
+
+Gate A/B traceability can establish that conversation/source meaning was correctly compiled and reflected. Gates C-F establish downstream realization where applicable.
+
+Therefore:
+- `C2S_CLOSED` may coexist with downstream holes that are explicitly owned as implementation/verification work;
+- a downstream hole is not automatically a C2S hole;
+- it becomes a C2S defect only when the hole reveals missing/misclassified source meaning, wrong disposition, wrong owner/destination, broken correction lineage or unreconstructable intent;
+- downstream realization completion SHALL use terms such as `REALIZATION_COMPLETE / RELEASE_PASS`, not `C2S_COMPLETE`.
+
+`GATE A/B PASS != GATE C-F PASS`.
+`GATE C-F OPEN != C2S OPEN` when A/B knowledge compilation is complete and the downstream gap is explicitly routed.
 
 ## 5. Six Realization Gates — HARD GATE
 
