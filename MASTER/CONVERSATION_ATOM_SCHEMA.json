@@ -297,6 +297,37 @@
         }
       },
       "additionalProperties": true
+    },
+    "reflection_state": {
+      "type": "object",
+      "description": "Optional owner/canonical reflection snapshot. Independent from C2S compile closure.",
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_APPLICABLE",
+            "OPEN",
+            "PARTIAL",
+            "COMPLETE",
+            "TOOL_BLOCKED"
+          ]
+        },
+        "required_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "completed_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
     }
   },
   "additionalProperties": true
