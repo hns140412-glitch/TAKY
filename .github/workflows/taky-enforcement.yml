@@ -158,7 +158,7 @@ jobs:
           adapter=data.get('executor_adapter') or {}
           envelope=data.get('dispatch_envelope') or {}
           assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
-          assert adapter.get('implementation_commit') == '0b3a3cf463abf60ddc14e5306f91da2092afed1c', adapter
+          assert adapter.get('implementation_commit') == '1cd19aabe26043adb167c4d919770c55686d8173', adapter
           assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
           assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
           assert envelope.get('external_executor_invocation_verified') is False
