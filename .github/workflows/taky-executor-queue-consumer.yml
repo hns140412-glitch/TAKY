@@ -45,7 +45,6 @@ jobs:
           Path('/tmp/taky-queue-action.txt').write_text(str(plan.get('action') or ''), encoding='utf-8')
           PY
       - name: Publish TAKY queue response
-        if: hashFiles('/tmp/taky-queue-comment.md') != ''
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
