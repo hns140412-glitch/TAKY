@@ -99,6 +99,26 @@ Forbidden shortcuts include:
 - `CODEX_DONE -> MERGED`
 - `TAKY_REVIEW -> DEPLOYED` when approval is required but missing
 
+## Executor transport boundary
+
+Controlled TAKY runtime uses `MASTER/EXECUTOR_TRANSPORT_SCHEMA.json` and `ENFORCEMENT/executor_transport.py` to wrap a validated task contract in an integrity-bound dispatch envelope.
+
+Built-in transport is `FILE_QUEUE`. It means the task is machine-ready for an executor adapter; it **does not** mean Codex was actually invoked.
+
+An external adapter must return a receipt bound to:
+`task_id + provider + task_contract_sha256 + executor_run_id + status`.
+
+Executor results are accepted only when they preserve the same task id, provider and contract hash. `ENFORCEMENT/executor_result_ingest.py` rejects mismatched/tampered returns before review.
+
+The controlled return cycle is:
+`DISPATCH ENVELOPE -> EXTERNAL EXECUTOR/ADAPTER -> RESULT INGEST -> TAKY REVIEW -> STATE TRANSITION`.
+
+`ENFORCEMENT/executor_cycle.py` composes the last three stages.
+
+`DISPATCH_READY != DISPATCHED`.
+`DISPATCHED != EXECUTED`.
+`EXECUTOR RESULT != TAKY PASS`.
+
 ## Executor return -> TAKY review loop
 
 Codex/executor completion evidence SHALL use the shape owned by `MASTER/EXECUTOR_RESULT_SCHEMA.json`.
