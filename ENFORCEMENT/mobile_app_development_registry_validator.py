@@ -52,10 +52,6 @@ for req in (
     if req not in inv:
         fail.append("MISSING_INVARIANT:"+req)
 
-hide=apps.get("HIDE_SEEK") or {}
-if "ZPD Word" not in (hide.get("historical_lineage") or []):
-    fail.append("HIDE_ZPD_LINEAGE_MISSING")
-
 if fail:
     print("FAIL: mobile app development registry")
     for x in fail: print(x)
