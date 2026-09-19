@@ -8,7 +8,6 @@
   "claims_runtime_enforced": false,
   "live_runtime_auto_invocation_verified": false,
   "resumed_or_context_compacted": false,
-  "conversation_system_compile_required": false,
   "applicable_rule_refs": [
     {
       "source_kind": "repo_file",
@@ -20,18 +19,18 @@
   "context_evidence_refs": [
     {
       "source_kind": "conversation",
-      "source_id": "runtime-orchestrator-fixture",
-      "immutable_revision": "fixture-rev-1",
-      "captured_at": "2026-09-19T00:00:00+09:00"
+      "source_id": "current-conversation-readyset-role-correction",
+      "immutable_revision": "conversation-turn-set-2026-09-14",
+      "captured_at": "2026-09-14T00:00:00+09:00"
     }
   ],
   "history_query_refs": [
     {
       "source_kind": "repo_commit",
-      "source_id": "runtime-orchestrator-history",
-      "commit_sha": "c478d4e04a3de122b79ce404e23b01250a4e1b49",
+      "source_id": "failure-history-commit",
+      "commit_sha": "172cbf66a0b4560ef0374010adf83e295b07d7f5",
       "evidence_paths": [
-        "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+        "HISTORY/2026-09-14_GEMINI_ENFORCEMENT_REVIEW_INTEGRATION.md"
       ]
     }
   ],
