@@ -149,8 +149,13 @@
           "id": "19HFkSIFejISore_qLeWbrDDzn_HYkFUkaOtUMoDfpj4",
           "class": "CURRENT_CONVERSATION_CAPTURE"
         }
-      ]
-    }
+      ],
+      "runbook_drive_id": "1BhTktvtVfDkVv-xIfp3D1UjPZmoCOEe02MVE1CG3eiw",
+      "output_template_drive_id": "1haC0yQ295226HlfKp3GutzCchTB6omIAdE_RaGlMnyg",
+      "system_status_drive_id": "1Bc-Xy6tN7o2_xMQ43DSOEvl2Nw7vUNjJ8TiwEnt7J48"
+    },
+    "roundtrip_protocol": "TKY-C2S-ROUNDTRIP-001",
+    "machine_registry": "PROJECTS/READY_SET_NOTEBOOKLM_SOURCE_REGISTRY.json"
   },
   "context_pass_conditions": [
     "all required project contracts resolved",
