@@ -1,0 +1,93 @@
+{
+  "ledger_version": "2026-09-20.1",
+  "source_artifact": {
+    "source_class": "DERIVED_REVIEW_RESULT",
+    "drive_documents": [
+      {
+        "title": "NOTION_WIDE_REVIEW_SOURCE_CENSUS",
+        "id": "1C1F_ockQxwwRle8wl07qvZQJwc76dZLdw-LgMgoDSSY"
+      },
+      {
+        "title": "NOTION_WIDE_REVIEW_C2S_LEDGER_V2",
+        "id": "19ctmdVntGJjtzILCFBC9LLcCFKp8lBtVLFojhktRGHU"
+      },
+      {
+        "title": "NOTION_TO_TAKY_REFLECTION_GAP",
+        "id": "1l9bTbPcFfDIhtP_bdJeCA71uEJrVqyNLE3LW4ybI-Qk"
+      },
+      {
+        "title": "NOTION_TO_READY_IMPLEMENTATION_GAP",
+        "id": "1dcfAoz6wgHJJN61XDrrH0g3DMgc622vHfbA9mPObCz4"
+      },
+      {
+        "title": "NOTION_REVIEW_C2S_CLOSURE_REPORT",
+        "id": "1ejg4tKRhKWo5mGXvuqP_PsbUhRVhSVFKflFGjc6rIqM"
+      }
+    ],
+    "authority": "REFERENCE_ONLY_UNTIL_BACKED_BY_PRIMARY_OR_CURRENT_EVIDENCE"
+  },
+  "live_baseline": {
+    "taky_main": "a195273406a6fea657de4b298bd4c61f9b9040a2",
+    "ready_main": "7f5b428ebc270685da02cbccebd27576cbfee9c0",
+    "ready_verified_runtime_parent": "f5fd4c2dfff953a1fce567f0762c71981acacb1f",
+    "ready_actions_run_id": 35472619346,
+    "ready_ci": "PASS",
+    "ready_chromium_runtime": "PASS",
+    "ready_device_verified": false,
+    "ready_production_verified": false
+  },
+  "compile_policy": {
+    "rule_id": "TKY-C2S-001",
+    "result_artifact_is_c2s_source": true,
+    "no_record_only": true,
+    "completion_requires_material_item_disposition": true,
+    "unmapped_material": 0,
+    "silent_loss": 0
+  },
+  "summary": {
+    "material_item_count": 39,
+    "mapped_material_item_count": 39,
+    "reflection_gap_count": 3,
+    "source_gap_count": 2,
+    "unmapped_material_item_count": 0,
+    "silent_loss_count": 0,
+    "review_result_without_owner": 0,
+    "review_result_without_action": 0,
+    "review_result_without_utilization_state": 0
+  },
+  "freshness_patch": [
+    {
+      "id": "C2S-NWR2-018",
+      "owner": "READY",
+      "disposition": "ADJUST",
+      "utilization_state": "PARTIAL",
+      "implementation_status": "CODED",
+      "verification_status": "CI_VERIFIED; RUNTIME_VERIFIED; DEVICE_NOT_VERIFIED; PRODUCTION_REMOTE_NOT_VERIFIED",
+      "action_ref": "Ready-Set ready-sync-adapter-v01.js + Outbox integration",
+      "next_action": "Configure authorized production backend endpoint and verify remote retry/idempotency/conflict/reconnect.",
+      "supersedes_state": "LOCAL_ONLY-only interpretation"
+    },
+    {
+      "id": "C2S-NWR2-019",
+      "owner": "READY",
+      "disposition": "ADJUST",
+      "utilization_state": "PARTIAL",
+      "implementation_status": "CODED",
+      "verification_status": "CI_VERIFIED; RUNTIME_VERIFIED; DEVICE_NOT_VERIFIED; PRODUCTION_BACKEND_NOT_CONFIGURED",
+      "action_ref": "Ready-Set ready-sync-adapter-v01.js HTTP_JSON_V1",
+      "next_action": "Connect real backend and verify end-to-end cloud synchronization.",
+      "supersedes_state": "OPEN-as-not-implemented"
+    },
+    {
+      "id": "C2S-NWR2-039",
+      "owner": "READY",
+      "disposition": "ADJUST",
+      "utilization_state": "PARTIAL",
+      "implementation_status": "EVIDENCE_PROVENANCE",
+      "verification_status": "Verified parent f5fd4c2d; current head 7f5b428e is validation-state refresh; exact-head discipline remains required after material runtime changes.",
+      "action_ref": "Ready-Set VALIDATION_STATUS.json",
+      "next_action": "Retain immutable head-to-evidence provenance and regenerate exact-head evidence after material runtime code changes.",
+      "supersedes_state": "4f73e5d vs 56c31ac stale-head gap"
+    }
+  ]
+}
