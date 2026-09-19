@@ -23,6 +23,7 @@ For every implementation task, record or verify:
 - repository and target branch
 - current remote/base HEAD or otherwise verified current ref
 - objective
+- operational working model: primary outcome, priority order, protected state, rule-to-execution implications, next action, stop conditions
 - allowed change scope
 - forbidden/unrelated changes
 - acceptance tests
@@ -30,6 +31,8 @@ For every implementation task, record or verify:
 - human approval requirements
 
 If any material field is missing, status is `TASK_CONTRACT_INCOMPLETE`; implementation completion MUST NOT be claimed.
+
+Reading or citing TAKY/project files is not sufficient preflight. The applicable rules must be translated into concrete task effects before implementation begins.
 
 ## Change discipline
 - Prefer the smallest sufficient diff.
