@@ -8,10 +8,7 @@ on:
       - 'ENFORCEMENT/**'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
-      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
-      - '.github/workflows/taky-executor-queue-consumer.yml'
-      - '.github/workflows/taky-executor-queue-poller.yml'
-      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
       - 'OS/GITHUB_EXECUTOR_QUEUE.md'
       - '.github/workflows/taky-executor-queue-consumer.yml'
       - '.github/workflows/taky-executor-queue-poller.yml'
@@ -48,6 +45,11 @@ on:
       - 'TAKY.md'
       - 'ENFORCEMENT/**'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json'
@@ -101,6 +103,7 @@ jobs:
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
           python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_adapter_registry.py
           python -m py_compile ENFORCEMENT/executor_result_ingest.py
           python -m py_compile ENFORCEMENT/executor_cycle.py
           python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
@@ -146,6 +149,20 @@ jobs:
           Path('/tmp/generated_contract.json').write_text(json.dumps(contract, ensure_ascii=False, indent=2)+'\n')
           PY
           python ENFORCEMENT/codex_task_contract_validator.py /tmp/generated_contract.json
+      - name: Validate Ready target-local executor adapter routing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          adapter=data.get('executor_adapter') or {}
+          envelope=data.get('dispatch_envelope') or {}
+          assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
+          assert adapter.get('implementation_commit') == '8cfe0a47526f15dac0eea79a1ac178483e3c3e5a', adapter
+          assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
+          assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
+          assert envelope.get('external_executor_invocation_verified') is False
+          PY
       - name: Validate REWORK state transition
         run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
       - name: Validate successful executor review
