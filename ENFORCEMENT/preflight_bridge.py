@@ -24,6 +24,8 @@ def run(record: dict, repo_root: Path) -> dict:
             refs = record.get(bucket)
             if not isinstance(refs, list) or not refs:
                 failures.append(f"{bucket}:MISSING")
+        if not isinstance(record.get("working_model"), dict):
+            failures.append("working_model:MISSING")
     failures.extend(evidence_failures)
     failures.extend(validate_record(record))
     unique = list(dict.fromkeys(failures))
