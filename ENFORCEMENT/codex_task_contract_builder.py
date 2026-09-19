@@ -49,11 +49,19 @@ def build(record: dict) -> dict:
         },
         "investigate": record.get("investigate", []),
         "acceptance_tests": record["acceptance_tests"],
+        "acceptance_checks": record.get("acceptance_checks", [
+            {"criterion": x, "mode": "EVIDENCE_ONLY"} for x in record["acceptance_tests"]
+        ]),
         "validation": {
             "required": record.get("required_validation", [
                 "diff_scope", "build", "relevant_tests", "regression"
             ]),
+            "profile": record.get("validation_profile", "GENERIC_EVIDENCE_V1"),
             "mobile_runtime_required": bool(record.get("mobile_runtime_required", False)),
+        },
+        "executor_automation": {
+            "profile": record.get("executor_profile", "GENERIC_CODEX_V1"),
+            "target_repository_local": bool(record.get("target_repository_local", False)),
         },
         "human_approval": {
             "merge_required": bool(record.get("merge_approval_required", True)),
