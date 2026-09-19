@@ -248,6 +248,42 @@ Ask the user only when a real semantic ambiguity materially changes the system a
 `SYSTEM REFLECTED != GROWTH MAP COMPLETE`
 
 
+## 14.1 C2S closure boundary — HARD LOCK
+
+C2S closure is a knowledge-compilation state, not an implementation, runtime, deployment or device-verification state.
+
+C2S SHALL be judged only on recovered-scope knowledge transformation and traceability:
+- evidence preserved or explicitly unavailable;
+- material atoms extracted;
+- corrections/dependencies/WHY linked;
+- each material atom dispositioned and mapped to an owner/destination;
+- unresolved OPEN/CONFLICT/FRONTIER items explicitly retained;
+- `UNMAPPED_MATERIAL = 0`;
+- `SILENT_LOSS = 0`;
+- `FALSE_CONVERGENCE = 0` when measured;
+- reverse reconstruction passes for the declared recovered scope.
+
+The following are NOT C2S closure requirements:
+- code implementation;
+- CI execution;
+- browser/runtime QA;
+- deployment or production provenance;
+- physical-device verification;
+- external service connection;
+- production data migration.
+
+Those belong to downstream execution/verification tracks and may remain OPEN while C2S is CLOSED.
+
+State axes SHALL remain independent:
+
+`C2S_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+
+A review/result artifact may create downstream implementation or verification actions, but those actions MUST NOT be reclassified as unresolved C2S coverage merely because execution is still pending.
+
+If every material review-result item has a valid disposition, owner/destination, utilization route and next action or terminal reason, C2S may close while the downstream action remains `OPEN / PARTIAL / TOOL_BLOCKED / PLANNED`.
+
+Do not use deployment, runtime or device status as a reason to reopen C2S unless new evidence shows that an atom was omitted, falsely converged, wrongly dispositioned, or mapped to the wrong owner/destination.
+
 ## 15. Runtime activation — CONDITIONAL HARD GATE
 
 Runtime/command activation is specialized by `OS/C2S_RUNTIME_ACTIVATION.md`.
