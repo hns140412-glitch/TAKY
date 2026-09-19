@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 
 SUPPORTED_PROVIDERS = {"CODEX"}
-SUPPORTED_TRANSPORTS = {"FILE_QUEUE", "EXTERNAL_ADAPTER"}
+SUPPORTED_TRANSPORTS = {"FILE_QUEUE", "GITHUB_ISSUE_QUEUE", "EXTERNAL_ADAPTER"}
 
 def canonical_bytes(value: dict) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
