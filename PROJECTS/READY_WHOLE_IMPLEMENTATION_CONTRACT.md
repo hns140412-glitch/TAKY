@@ -605,7 +605,7 @@ Hard:
 - Existing adventure/exploration identity, Focus direction and confirmed Ready locks remain protected.
 - Reference findings may create `ADOPT / ADJUST / HOLD / REJECT / CONFLICT` candidates; material visual/interaction changes require authorization under TAKY governance.
 - Generic SaaS/dashboard convergence caused by external libraries/references = FAIL.
-- Current supplied reference message claims 9 sites + 110 UI terms, but only four named sources are currently recoverable; the remaining material stays `UNVERIFIED_SOURCE_COVERAGE` until recovered.
+- The supplied Notion screen recording recovers the 9-site reference set as 10 entries across 9 sites/domains and 11 vocabulary groups. The page-author claim of 110 UI terms is accepted as source metadata but not mechanically re-counted from a stable export. Numeric/usage heuristics from the glossary require official-source verification before becoming Ready rules.
 
 ## 22. Implementation truth snapshot — reverified 2026-09-12
 
