@@ -285,6 +285,41 @@ External/derived synthesis of any kind enters C2S as `REFERENCE_ONLY / EVIDENCE_
 
 If original/current evidence cannot be confirmed, keep the candidate `OPEN / HOLD / UNVERIFIED`.
 
+## 16.1 Review/result artifacts are first-class C2S inputs — HARD LOCK
+
+A material review, audit, comparison, analysis, research synthesis, validation report, retrospective, or Work result is itself a system-building result artifact.
+
+`SOURCE REVIEWED -> REVIEW RESULT CREATED -> REVIEW RESULT C2S COMPILED -> UTILIZATION ROUTED`.
+
+TAKY SHALL NOT stop at "review document saved" when the result contains material:
+- requirements/corrections;
+- discovered gaps;
+- implementation candidates;
+- rejections/holds;
+- evidence corrections;
+- new owner/destination assignments;
+- reusable strategies/assets;
+- unresolved coverage.
+
+Every material review-result item MUST receive:
+- stable result-item id;
+- source artifact pointer;
+- authority/source class;
+- disposition;
+- owner/destination;
+- utilization_state;
+- action_ref;
+- next_action or explicit terminal reason.
+
+Allowed utilization states include:
+`APPLIED_CANONICAL / APPLIED_RUNTIME / IMPLEMENTED_MINIMUM / PARTIAL / PLANNED / HOLD / REJECTED / SUPERSEDED / OPEN`.
+
+`RESULT RECORDED != RESULT UTILIZED`.
+`REVIEW SAVED != C2S CLOSED`.
+`REVIEW RESULT WITH MATERIAL ITEMS + NO UTILIZATION ROUTE = SILENT LOSS CANDIDATE`.
+
+If a review result is derived from secondary analysis, it remains subordinate to primary/current evidence for authority, but its discovered gaps/actions still require explicit routing rather than disappearance.
+
 ## 17. Incremental continuity / context economy
 
 C2S preserves material conversational totality but SHALL NOT require all historical atoms to be loaded into every active turn.
