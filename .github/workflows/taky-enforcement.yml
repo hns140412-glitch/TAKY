@@ -105,6 +105,7 @@ jobs:
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
           python -m py_compile ENFORCEMENT/c2s_semantic_boundary_regression.py
+          python -m py_compile ENFORCEMENT/master_file_registry_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
@@ -126,6 +127,8 @@ jobs:
           python -m py_compile ENFORCEMENT/work_os_registry_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
+      - name: Validate MASTER file authority registry
+        run: python ENFORCEMENT/master_file_registry_validator.py
       - name: Validate Notion review V2.1 freshness ledger
         run: |
           python - <<'PY'
