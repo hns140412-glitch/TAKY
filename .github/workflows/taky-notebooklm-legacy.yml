@@ -1,0 +1,26 @@
+name: TAKY NotebookLM Legacy Checks
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  legacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile legacy NotebookLM validator
+        run: python -m py_compile ENFORCEMENT/notebooklm_source_validator.py
+      - name: Validate legacy NotebookLM source fixtures
+        run: |
+          python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_pass.json
+          if python ENFORCEMENT/notebooklm_source_validator.py ENFORCEMENT/fixtures/notebooklm_source_fail.json; then
+            echo "Expected unsafe NotebookLM fixture to fail"
+            exit 1
+          fi
+          python ENFORCEMENT/notebooklm_source_validator.py HISTORY/2026-09-19_NOTEBOOKLM_PILOT01_SOURCE_REGISTRY.json
