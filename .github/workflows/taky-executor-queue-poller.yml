@@ -1,0 +1,53 @@
+name: TAKY Executor Queue Poller
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: taky-executor-queue-poller
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile poller
+        run: |
+          python -m py_compile ENFORCEMENT/github_queue_poll_plan.py
+          python -m py_compile ENFORCEMENT/github_queue_consumer.py
+          python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
+          python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_result_ingest.py
+          python -m py_compile ENFORCEMENT/executor_review_loop.py
+          python -m py_compile ENFORCEMENT/executor_cycle.py
+          python -m py_compile ENFORCEMENT/execution_state_engine.py
+      - name: Poll open TAKY executor queue issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh issue list --state open --limit 100 --json number,title > /tmp/open-issues.json
+          jq -r '.[] | select(.title | startswith("[TAKY EXECUTOR QUEUE]")) | .number' /tmp/open-issues.json > /tmp/queue-issue-numbers.txt
+          while IFS= read -r ISSUE_NUMBER; do
+            [ -z "$ISSUE_NUMBER" ] && continue
+            gh issue view "$ISSUE_NUMBER" --json number,title,body,comments > "/tmp/queue-${ISSUE_NUMBER}.json"
+            python ENFORCEMENT/github_queue_poll_plan.py \
+              --snapshot "/tmp/queue-${ISSUE_NUMBER}.json" \
+              --output "/tmp/queue-${ISSUE_NUMBER}-plan.json" >/dev/null
+            jq -r '.comments_to_publish[] | @base64' "/tmp/queue-${ISSUE_NUMBER}-plan.json" | while IFS= read -r ITEM; do
+              [ -z "$ITEM" ] && continue
+              BODY="$(printf '%s' "$ITEM" | base64 --decode)"
+              gh issue comment "$ISSUE_NUMBER" --body "$BODY" >/dev/null
+            done
+          done < /tmp/queue-issue-numbers.txt
