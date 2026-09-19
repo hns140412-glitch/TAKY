@@ -7,8 +7,8 @@ from pathlib import Path
 ALLOWED_IMPACT={"NONE","CANDIDATE","REQUIRED"}
 ALLOWED_STATUS={
     "DRIVE_SAVED","DRIVE_POINTER_VERIFIED","DIRECT_C2S_INTAKE_READY",
-    "C2S_ATOMIZED","OWNER_REFLECTED","CANONICAL_WRITTEN_VERIFIED",
-    "OPEN","HOLD","CONFLICT"
+    "C2S_ATOMIZED","C2S_COMPILE_CLOSED","OWNER_REFLECTED","REFLECTION_COMPLETE",
+    "CANONICAL_WRITTEN_VERIFIED","OPEN","HOLD","CONFLICT"
 }
 
 def validate(rec: dict) -> list[str]:
@@ -24,15 +24,18 @@ def validate(rec: dict) -> list[str]:
         f.append("INVALID:c2s_status")
     if rec.get("notebooklm_required") is True:
         f.append("NOTEBOOKLM_DEPENDENCY_FORBIDDEN")
-    if status in {"C2S_ATOMIZED","OWNER_REFLECTED","CANONICAL_WRITTEN_VERIFIED"}:
+    if status in {"C2S_ATOMIZED","C2S_COMPILE_CLOSED","OWNER_REFLECTED","REFLECTION_COMPLETE","CANONICAL_WRITTEN_VERIFIED"}:
         atoms=rec.get("material_atoms")
         if not isinstance(atoms,list) or not atoms:
             f.append("MATERIAL_ATOMS_MISSING")
-    if impact=="REQUIRED" and status=="CANONICAL_WRITTEN_VERIFIED":
+    if status=="C2S_COMPILE_CLOSED":
         if rec.get("unmapped_material",1)!=0:
             f.append("UNMAPPED_MATERIAL_NONZERO")
         if rec.get("silent_loss",1)!=0:
             f.append("SILENT_LOSS_NONZERO")
+        if rec.get("downstream_required_for_c2s_closure") is True:
+            f.append("DOWNSTREAM_CONFLATION_FORBIDDEN")
+    if impact=="REQUIRED" and status in {"OWNER_REFLECTED","REFLECTION_COMPLETE","CANONICAL_WRITTEN_VERIFIED"}:
         if not str(rec.get("canonical_write_ref","")).strip():
             f.append("CANONICAL_WRITE_REF_MISSING")
     return f
