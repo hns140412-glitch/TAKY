@@ -456,6 +456,13 @@ jobs:
             exit 1
           fi
           echo "Expected failure observed"
+      - name: Reject C2S downstream-state conflation
+        run: |
+          if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_downstream_conflation_fail.json; then
+            echo "Expected downstream-conflated C2S closure to be rejected"
+            exit 1
+          fi
+          echo "Expected C2S/downstream separation failure observed"
       - name: Validate C2S runtime bridge
         run: |
           python ENFORCEMENT/c2s_preflight_bridge.py \
