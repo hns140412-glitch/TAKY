@@ -1,0 +1,27 @@
+{
+  "source_artifact": {
+    "source_class": "DERIVED_REVIEW_RESULT",
+    "title": "fixture review",
+    "drive_file_id": "fixture"
+  },
+  "compile_policy": {
+    "result_artifact_is_c2s_source": false,
+    "no_record_only": false
+  },
+  "items": [
+    {
+      "id": "R-001",
+      "owner": "READY",
+      "disposition": "ADOPT",
+      "utilization_state": "",
+      "action_ref": "",
+      "next_action": ""
+    }
+  ],
+  "coverage": {
+    "material_item_count": 1,
+    "mapped_material_item_count": 0,
+    "unmapped_material_item_count": 1,
+    "silent_loss_count": 1
+  }
+}
