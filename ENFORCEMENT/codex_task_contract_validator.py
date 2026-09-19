@@ -64,6 +64,8 @@ def validate(record):
                 fail(errors, f"ACCEPTANCE_CHECK_UNKNOWN_CRITERION:{criterion or 'MISSING'}")
             if mode not in {"EVIDENCE_ONLY", "MANUAL", "PROFILE_CHECK"}:
                 fail(errors, f"ACCEPTANCE_CHECK_INVALID_MODE:{mode or 'MISSING'}")
+            if "command" in item:
+                fail(errors, "UNTRUSTED_TASK_COMMAND:acceptance_checks.command")
             if criterion:
                 seen.add(criterion)
         for criterion in acceptance:
@@ -78,6 +80,8 @@ def validate(record):
     profile = str(validation.get("profile", "")).strip()
     if not profile:
         fail(errors, "TASK_CONTRACT_INCOMPLETE:validation.profile")
+    if "commands" in validation or "command" in validation:
+        fail(errors, "UNTRUSTED_TASK_COMMAND:validation")
 
     automation = record.get("executor_automation", {})
     if automation:
