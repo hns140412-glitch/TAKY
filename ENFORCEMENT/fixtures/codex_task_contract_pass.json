@@ -15,7 +15,9 @@
     "verified_live_repository_state"
   ],
   "change_scope": {
-    "allowed": ["approved_component"],
+    "allowed": [
+      "approved_component"
+    ],
     "forbidden": [
       "unrelated_refactor",
       "silent_requirement_change",
@@ -27,8 +29,14 @@
     "existing unrelated behavior remains unchanged"
   ],
   "validation": {
-    "required": ["diff_scope", "build", "relevant_tests", "regression"],
-    "mobile_runtime_required": true
+    "required": [
+      "diff_scope",
+      "build",
+      "relevant_tests",
+      "regression"
+    ],
+    "mobile_runtime_required": true,
+    "profile": "GENERIC_EVIDENCE_V1"
   },
   "human_approval": {
     "merge_required": true,
@@ -45,5 +53,19 @@
   "current_state": "IN_PROGRESS",
   "next_state": "CODEX_DONE",
   "requested_transition": "CODEX_DONE",
-  "claims_taky_pass": false
+  "claims_taky_pass": false,
+  "acceptance_checks": [
+    {
+      "criterion": "requested behavior is observable",
+      "mode": "PROFILE_CHECK"
+    },
+    {
+      "criterion": "existing unrelated behavior remains unchanged",
+      "mode": "EVIDENCE_ONLY"
+    }
+  ],
+  "executor_automation": {
+    "profile": "GENERIC_CODEX_V1",
+    "target_repository_local": false
+  }
 }
