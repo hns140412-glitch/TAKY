@@ -1,0 +1,38 @@
+{
+  "task_id": "RUNTIME-ORCH-FAIL-001",
+  "pre_execution_gate_required": true,
+  "role": "ORCHESTRATOR",
+  "execution_owner": "CODEX",
+  "action_class": "SPECIFY_ACCEPTANCE",
+  "claims_product_progress_advance": false,
+  "claims_runtime_enforced": false,
+  "live_runtime_auto_invocation_verified": false,
+  "resumed_or_context_compacted": false,
+  "conversation_system_compile_required": false,
+  "applicable_rule_refs": [
+    {
+      "source_kind": "repo_file",
+      "source_id": "fixture-rule-seed",
+      "path": "ENFORCEMENT/fixtures/evidence_seed.txt",
+      "sha256": "d8e0e35dd505bed4ff6cc4fdfe04ba698b840ce2c39aa9c0d75ccad18d11f5c1"
+    }
+  ],
+  "context_evidence_refs": [
+    {
+      "source_kind": "conversation",
+      "source_id": "runtime-orchestrator-fixture",
+      "immutable_revision": "fixture-rev-1",
+      "captured_at": "2026-09-19T00:00:00+09:00"
+    }
+  ],
+  "history_query_refs": [
+    {
+      "source_kind": "repo_commit",
+      "source_id": "runtime-orchestrator-history",
+      "commit_sha": "c478d4e04a3de122b79ce404e23b01250a4e1b49",
+      "evidence_paths": [
+        "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+      ]
+    }
+  ]
+}
