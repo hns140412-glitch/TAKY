@@ -60,6 +60,35 @@ Default relationship mapping:
 
 This is a working-output choice, not a governance authority.
 
+## 1.2 Reusable recipe registry
+
+Reusable operating recipes are registered in:
+`OS/ASSET_SKILL_RECIPE_REGISTRY.json`.
+
+A recipe is allowed only when it represents a real recurring workflow with evidence pointers.
+Required semantics include:
+`recipe_id / owner / version / evidence_count / source_pointers / preserve / allowed_change / rights_or_consent / verification / utilization / deprecation`.
+
+`RECIPE != CANONICAL AUTHORITY`.
+`ONE-OFF TASK != REUSABLE RECIPE`.
+`RECIPE WITHOUT EVIDENCE != ACTIVE RECIPE`.
+
+Recipes should reduce repeated reconstruction while preserving source authority, rights/consent boundaries, and validation requirements.
+
+## 1.3 Volatile capability registry
+
+Claims about tools, models, connectors, costs, quotas, compatibility and availability can become stale.
+Material routing or user-facing decisions that rely on such claims SHOULD use:
+`OS/VOLATILE_CAPABILITY_REGISTRY.json`.
+
+Each volatile claim must retain:
+`checked_at / source / freshness_ttl / recheck_trigger / fallback / owner`.
+
+`PAST CAPABILITY != CURRENT CAPABILITY`.
+`STALE CLAIM != ROUTING AUTHORITY`.
+
+When a material claim is outside its freshness window or a recheck trigger fires, Work OS must refresh the claim before using it to choose a route or make a definitive current-state statement.
+
 ## 2. Conversation Continuity / Persistent Work Surfaces
 
 `CONTINUITY IS THE PURPOSE; FOLDERS ARE IMPLEMENTATION SURFACES`

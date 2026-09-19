@@ -1,0 +1,44 @@
+{
+  "registry_version": "2026-09-20.1",
+  "purpose": "Track volatile capability/cost/compatibility/availability claims that can become stale and must be rechecked before they drive routing or user-facing claims.",
+  "hard_locks": [
+    "VOLATILE_CLAIM_REQUIRES_CHECKED_AT",
+    "VOLATILE_CLAIM_REQUIRES_SOURCE",
+    "TTL_EXPIRY_REQUIRES_RECHECK",
+    "STALE_CAPABILITY_CLAIM_MUST_NOT_DRIVE_ROUTING",
+    "FALLBACK_MUST_BE_EXPLICIT_WHEN_MATERIAL"
+  ],
+  "required_fields": [
+    "capability_id",
+    "scope",
+    "claim",
+    "state",
+    "checked_at",
+    "source",
+    "freshness_ttl_hours",
+    "recheck_trigger",
+    "fallback",
+    "owner"
+  ],
+  "entries": [
+    {
+      "capability_id": "READY-REMOTE-SYNC-BACKEND-CONFIG",
+      "scope": "Ready & Set / remote synchronization availability",
+      "claim": "HTTP_JSON_V1 sync adapter exists and is runtime-verified, but no production backend endpoint is configured.",
+      "state": "PARTIAL_AVAILABLE",
+      "checked_at": "2026-09-20T07:20:00+09:00",
+      "source": [
+        "Ready-Set/VALIDATION_STATUS.json",
+        "Ready-Set/ready-sync-adapter-v01.js"
+      ],
+      "freshness_ttl_hours": 24,
+      "recheck_trigger": [
+        "before claiming cloud sync is available",
+        "before routing production data through remote sync",
+        "after Ready-Set deployment or sync configuration change"
+      ],
+      "fallback": "Remain LOCAL_ONLY and keep Outbox pending; do not claim production cloud synchronization.",
+      "owner": "READY/WORK-OS"
+    }
+  ]
+}

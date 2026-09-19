@@ -40,6 +40,8 @@ on:
       - 'OS/COMMAND_INTERACTION.md'
       - 'OS/WORK_OS.md'
       - 'OS/ACTION_SKILL_REGISTRY.json'
+      - 'OS/ASSET_SKILL_RECIPE_REGISTRY.json'
+      - 'OS/VOLATILE_CAPABILITY_REGISTRY.json'
       - '.github/workflows/taky-enforcement.yml'
   pull_request:
     paths:
@@ -119,6 +121,7 @@ jobs:
           python -m py_compile ENFORCEMENT/drive_c2s_intake_validator.py
           python -m py_compile ENFORCEMENT/work_os_productive_router.py
           python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
+          python -m py_compile ENFORCEMENT/work_os_registry_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Validate Notion review V2.1 freshness ledger
@@ -146,6 +149,11 @@ jobs:
           PY
       - name: Validate direct Drive C2S intake
         run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Validate Work OS reusable and volatile registries
+        run: |
+          python ENFORCEMENT/work_os_registry_validator.py \
+            --recipe OS/ASSET_SKILL_RECIPE_REGISTRY.json \
+            --capability OS/VOLATILE_CAPABILITY_REGISTRY.json
       - name: Validate Work OS productive routing
         run: |
           python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_pipeline.json > /tmp/work-pipeline.json
