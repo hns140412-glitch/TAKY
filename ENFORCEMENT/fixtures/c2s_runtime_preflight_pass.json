@@ -34,5 +34,32 @@
         "HISTORY/2026-09-19_CONVERSATION_TO_SYSTEM_GROWTH_INTEGRATION.md"
       ]
     }
-  ]
+  ],
+  "working_model": {
+    "primary_outcome": "Compile the material conversation delta into durable TAKY governance without losing source lineage.",
+    "priority_order": [
+      "user correction",
+      "productive canonical reflection",
+      "C2S coverage integrity"
+    ],
+    "protected_state": [
+      "existing canonical authority and source lineage"
+    ],
+    "execution_implications": [
+      "Governance write must follow C2S activation and preserve the material conversation delta."
+    ],
+    "rule_to_execution": [
+      {
+        "rule_ref": "fixture-rule-seed",
+        "effect": "ACTION",
+        "implication": "Apply the recovered rule evidence to the governance write path."
+      }
+    ],
+    "next_action": "Run C2S preflight bridge with the coverage ledger, then perform the authorized governance write.",
+    "stop_conditions": [
+      "coverage failure",
+      "authority blocker",
+      "authorized write complete"
+    ]
+  }
 }
