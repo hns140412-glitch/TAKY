@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.4",
+  "registry_version": "2026-09-19.5",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -71,6 +71,11 @@
       "rule_id": "TKY-CONTEXT-001",
       "owner": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
       "scope": "project context manifest, required-context loading, NotebookLM/Drive escalation and fail-closed execution gate"
+    },
+    {
+      "rule_id": "TKY-C2S-ROUNDTRIP-001",
+      "owner": "MASTER/NOTEBOOKLM_C2S_ROUNDTRIP_PROTOCOL.md",
+      "scope": "Drive/NotebookLM input-output roundtrip, raw recheck, semantic integrity, output intake and recovery completion gate"
     }
   ]
 }
