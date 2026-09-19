@@ -1,0 +1,52 @@
+{
+  "ledger_id": "FIXTURE-C2S-DOWNSTREAM-CONFLATION-FAIL-001",
+  "source_scope": {
+    "description": "knowledge-complete scope incorrectly tied to downstream execution",
+    "coverage_status": "RECOVERED_SCOPE_COMPLETE",
+    "unavailable_ranges": []
+  },
+  "atoms": [
+    {
+      "atom_id": "A-001",
+      "type": "REQUIREMENT",
+      "material": true,
+      "source_pointer": "conversation:1",
+      "actor": "USER",
+      "content": "Preserve C2S compile closure independently from deployment.",
+      "scope": "GLOBAL",
+      "why": "Avoid reopening knowledge compilation because downstream execution is pending.",
+      "disposition": "ADOPT",
+      "destination": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "implementation_status": "OPEN",
+      "verification_status": "NOT_PERFORMED"
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 1,
+    "mapped_material": 1,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true,
+    "notes": "Knowledge reconstruction itself passes."
+  },
+  "c2s_closure": {
+    "status": "CLOSED",
+    "basis": "KNOWLEDGE_COMPILATION",
+    "downstream_required_for_closure": true
+  },
+  "reflection_state": {
+    "status": "OPEN"
+  },
+  "downstream_execution": {
+    "implementation_status": "OPEN",
+    "runtime_status": "NOT_PERFORMED",
+    "deployment_status": "NOT_PERFORMED",
+    "device_status": "NOT_PERFORMED"
+  }
+}
