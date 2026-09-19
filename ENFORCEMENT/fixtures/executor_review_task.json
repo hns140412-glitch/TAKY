@@ -1,0 +1,83 @@
+{
+  "task_id": "RNS-REVIEW-001",
+  "project": "Ready & Set",
+  "repository": "hns140412-glitch/Ready-Set",
+  "base_branch": "main",
+  "verified_base_head": "0123456789abcdef",
+  "role": {
+    "orchestrator": "TAKY",
+    "executor": "CODEX"
+  },
+  "objective": "Implement one bounded mobile web app change and return evidence for TAKY review.",
+  "working_model": {
+    "primary_outcome": "Implement one bounded mobile web app change and preserve confirmed behavior.",
+    "priority_order": [
+      "user-visible result",
+      "protected state",
+      "minimum sufficient validation"
+    ],
+    "protected_state": [
+      "existing unrelated behavior"
+    ],
+    "execution_implications": [
+      "Only change the approved component and return concrete evidence."
+    ],
+    "rule_to_execution": [
+      {
+        "rule_ref": "MASTER/CODEX_TASK_CONTRACT.md",
+        "effect": "CONSTRAINT",
+        "implication": "Do not claim TAKY_PASS; return CODEX_DONE evidence."
+      }
+    ],
+    "next_action": "Implement the approved component change.",
+    "stop_conditions": [
+      "implementation complete",
+      "real blocker"
+    ]
+  },
+  "source_of_truth": [
+    "current_user_instruction",
+    "taky_canonical_rules",
+    "verified_live_repository_state"
+  ],
+  "change_scope": {
+    "allowed": [
+      "src/approved_component"
+    ],
+    "forbidden": [
+      "unrelated_refactor",
+      "silent_requirement_change",
+      "direct_production_deploy"
+    ]
+  },
+  "investigate": [],
+  "acceptance_tests": [
+    "requested behavior is observable",
+    "existing unrelated behavior remains unchanged"
+  ],
+  "validation": {
+    "required": [
+      "diff_scope",
+      "build",
+      "relevant_tests",
+      "regression"
+    ],
+    "mobile_runtime_required": true
+  },
+  "human_approval": {
+    "merge_required": true,
+    "production_deploy_required": true
+  },
+  "deliverables": [
+    "root_cause_or_rationale",
+    "changed_files",
+    "validation_commands",
+    "validation_results",
+    "unresolved_risks",
+    "commit_ref"
+  ],
+  "current_state": "IN_PROGRESS",
+  "next_state": "CODEX_DONE",
+  "requested_transition": "CODEX_DONE",
+  "claims_taky_pass": false
+}
