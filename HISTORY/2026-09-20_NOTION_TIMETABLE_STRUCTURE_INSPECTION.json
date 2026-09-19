@@ -1,0 +1,52 @@
+{
+  "ledger_version": "2026-09-20.1",
+  "atom_id": "C2S-NWR2-037",
+  "source_class": "CURRENT_LIVE_STATE",
+  "inspected_at": "2026-09-20T07:30:00+09:00",
+  "workspace": "soma님의 워크스페이스",
+  "target_database": {
+    "title": "Ready & Set 시간표",
+    "database_url": "https://app.notion.com/p/60fc9b3d981e4dc7b9a5357baccefd74",
+    "active_data_source": "collection://8864a66f-9375-4fc0-86f8-0046a5abee5a",
+    "active_row_count": 12,
+    "active_schema_role": "Ready & Set schedule source"
+  },
+  "confirmed_defect": {
+    "data_source": "collection://3d2fa868-dc2a-8005-be3a-000bffcb4577",
+    "displayed_title": "새 데이터 소스",
+    "internal_name": "",
+    "schema": [
+      "Name: title"
+    ],
+    "row_count": 0,
+    "has_dedicated_empty_view": true,
+    "relation_to_active_schedule": "NONE_OBSERVED",
+    "classification": "CONFIRMED_EMPTY_DUPLICATE_DATA_SOURCE"
+  },
+  "cleanup_attempt": {
+    "requested_action": "trash confirmed empty duplicate data source",
+    "method": "Notion update_data_source in_trash=true",
+    "result": "TOOL_BLOCKED",
+    "error": "object_not_found",
+    "retry_with_bare_uuid": "same object_not_found",
+    "active_source_modified": false
+  },
+  "c2s_result": {
+    "prior_group": "B_REFLECTION_GAP",
+    "new_group": "C_IMPLEMENTATION_OR_TOOL_GAP",
+    "disposition": "ADJUST",
+    "utilization_state": "OPEN_TOOL_BLOCKED",
+    "owner": "NOTION/READY",
+    "action_ref": "Live Notion Ready & Set 시간표 database",
+    "next_action": "Remove/trash only the confirmed empty duplicate data source when a supported mutation path is available; do not touch the active 12-row schedule source.",
+    "reflection_gap_closed": true,
+    "cleanup_complete": false
+  },
+  "coverage": {
+    "source_pointer_verified": true,
+    "defect_verified": true,
+    "cleanup_claimed_complete": false,
+    "unmapped_material": 0,
+    "silent_loss": 0
+  }
+}

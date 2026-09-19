@@ -37,6 +37,7 @@ on:
       - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
       - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
       - 'HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json'
       - 'OS/COMMAND_INTERACTION.md'
       - 'OS/WORK_OS.md'
       - 'OS/ACTION_SKILL_REGISTRY.json'
@@ -146,6 +147,23 @@ jobs:
               assert str(x.get(k,'')).strip(), (x['id'],k)
           assert d['live_baseline']['ready_device_verified'] is False
           assert d['live_baseline']['ready_production_verified'] is False
+          PY
+      - name: Validate live Notion timetable structure inspection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json').read_text())
+          assert d['atom_id']=='C2S-NWR2-037'
+          assert d['target_database']['active_row_count']==12
+          assert d['confirmed_defect']['row_count']==0
+          assert d['confirmed_defect']['classification']=='CONFIRMED_EMPTY_DUPLICATE_DATA_SOURCE'
+          assert d['cleanup_attempt']['result']=='TOOL_BLOCKED'
+          assert d['cleanup_attempt']['active_source_modified'] is False
+          assert d['c2s_result']['reflection_gap_closed'] is True
+          assert d['c2s_result']['cleanup_complete'] is False
+          assert d['coverage']['unmapped_material']==0
+          assert d['coverage']['silent_loss']==0
           PY
       - name: Validate direct Drive C2S intake
         run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
