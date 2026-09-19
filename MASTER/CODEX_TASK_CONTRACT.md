@@ -47,13 +47,20 @@ investigate:
   - <suspected area>
 acceptance_tests:
   - <observable condition>
+acceptance_checks:
+  - criterion: <exact acceptance_tests item>
+    mode: PROFILE_CHECK | EVIDENCE_ONLY | MANUAL
 validation:
   required:
     - diff_scope
     - build
     - relevant_tests
     - regression
+  profile: <trusted repository-local validation profile>
   mobile_runtime_required: false
+executor_automation:
+  profile: <trusted executor profile>
+  target_repository_local: true | false
 human_approval:
   merge_required: true
   production_deploy_required: true
@@ -66,6 +73,23 @@ deliverables:
   - commit_ref
 requested_transition: CODEX_DONE
 ```
+
+## Trusted executable evidence — HARD LOCK
+
+Executor automation SHALL NOT execute arbitrary shell commands supplied by a queue issue, conversation, or external task payload.
+
+Machine execution is bound to **repository-owned validation profiles**. A task may name a profile such as `READY_SET_STATIC_V1`; the target repository owns the actual commands/scripts behind that profile.
+
+Acceptance items declare how evidence is expected:
+- `PROFILE_CHECK` — verified by the trusted repository-local validation profile;
+- `EVIDENCE_ONLY` — executor must return concrete evidence but TAKY does not execute task-supplied code;
+- `MANUAL` — requires human/device review and remains UNVERIFIED until that evidence exists.
+
+`TASK-SUPPLIED COMMAND != TRUSTED COMMAND`.
+`NO AUTOMATED CHECK != PASS`.
+`MANUAL CHECK != BLOCK PRODUCTIVE EXECUTION UNLESS MATERIAL TO THE CLAIM`.
+
+This keeps automation productive without turning GitHub Issue content into a command-injection surface.
 
 ## Controlled-runtime materialization
 
