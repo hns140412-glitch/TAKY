@@ -17,8 +17,7 @@
     "VALIDATION_ONLY_PR != MERGE_CANDIDATE.",
     "DRIVE_BUILD_OR_HANDOFF != SOURCE_OF_TRUTH.",
     "NETLIFY_PROJECT_NAME != PRODUCT_IDENTITY.",
-    "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED.",
-    "ZPD_WORD_LINEAGE is historical lineage under current HIDE_SEEK product identity; do not create a second active product unless explicitly re-authorized."
+    "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED."
   ],
   "apps": {
     "READY_SET": {
@@ -135,10 +134,6 @@
     },
     "HIDE_SEEK": {
       "product_name": "Hide & Seek",
-      "historical_lineage": [
-        "ZPD Word",
-        "ZPD_WORD"
-      ],
       "role": "Vocabulary Discovery / Retrieval Specialist",
       "github": {
         "repo": "hns140412-glitch/Hide-Seek",
@@ -166,24 +161,24 @@
       "netlify": [
         {
           "site_id": "55aa69e3-1da8-4e4f-9b83-23de14b8fc87",
-          "site_name": "dainty-froyo-a6e427",
+          "site_name": "hide-seek-taky",
           "role": "PRODUCTION",
           "deployed_commit": "49fa106ff20f7c497d7f18bd903be34479ec28c3",
           "deployed_branch": "main",
           "provenance": "GIT_COMMIT_PROVEN",
           "relation_to_current_main": "EXACT_SHA_MATCH",
-          "residue": "Netlify deploy commit_url still records historical repository lineage hns140412-glitch/ZPD-Word; current GitHub repository resolves to Hide-Seek."
+          "residue": "Existing deploy record predates the current repository/product rename; refresh provenance on the next Git-driven deploy."
         }
       ],
       "legacy_drive_refs": [
         {
           "id": "1emF7nw1AL3SxWKYWV9WJYYWzvc0BYrBf",
-          "name": "ZPD_WORD_PWA_REV_07_VALIDATED_BUILD",
+          "name": "LEGACY_HIDE_SEEK_PWA_REV_07_VALIDATED_BUILD",
           "classification": "LEGACY_REFERENCE"
         },
         {
           "id": "13WluU_hk0bSLg4VV7AybdoikHUAvsBvE",
-          "name": "ZPD_WORD_PWA_REV_07_VALIDATED_BUILD",
+          "name": "LEGACY_HIDE_SEEK_PWA_REV_07_VALIDATED_BUILD",
           "classification": "LEGACY_REFERENCE_PARENT"
         },
         {
