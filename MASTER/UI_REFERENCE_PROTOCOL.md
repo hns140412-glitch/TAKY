@@ -180,7 +180,17 @@ Verified visible sources from the supplied reference message:
 3. daisyUI components — `https://daisyui.com/components/`
 4. Mobbin — `https://mobbin.com/`
 
-The supplied message states a larger set of 9 sites and 110 UI terms. The other 5 sites and the full 110-term list are not yet recoverable from the accessible source, so they remain `UNVERIFIED_SOURCE_COVERAGE` and SHALL NOT be fabricated.
+The supplied Notion screen recording recovers the intended 9-site reference set as 10 reference entries across 9 sites/domains: Apple HIG + Apple Design Tips (same Apple site), Material Design 3, Flutter Widget catalog, Ionic Components, daisyUI, Uiverse, Penpot, IBM Carbon and Mobbin. The page also organizes the UI vocabulary into 11 groups: screen scaffolding, navigation, lists, input, selection, actions/buttons, overlays, status/display, motion/dynamic effects, stacking/overlap and presentation/mockup frames. The exact 110-term count is treated as the page author's declared count unless mechanically enumerated from a stable source export.
+
+### Source-quality boundary — HARD LOCK
+
+The recovered Notion page is an educational glossary/curation artifact. Its labels, warnings and numeric heuristics are useful orientation aids but are not automatically official platform requirements.
+
+Examples visible in the source include shorthand such as bottom-navigation item-count guidance, a 44pt touch target note, FAB usage notes and simplified component descriptions. Before any numeric/platform constraint becomes a project rule, verify it against the current official source when available.
+
+`GLOSSARY EXPLANATION != OFFICIAL REQUIREMENT`
+`AUTHOR HEURISTIC != PLATFORM HARD LOCK`
+`TERM PRESENT != COMPONENT REQUIRED`
 
 Machine-readable evidence index: `MASTER/UI_REFERENCE_REGISTRY.json`.
 
