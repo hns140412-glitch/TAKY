@@ -1,0 +1,28 @@
+{
+  "registry_version": "2026-09-19.1",
+  "purpose": "Machine-readable executor adapter routing. Secrets are never stored here.",
+  "adapters": [
+    {
+      "adapter_id": "READY_SET_GITHUB_CODEX_V1",
+      "repository": "hns140412-glitch/Ready-Set",
+      "executor_profile": "READY_SET_CODEX_V1",
+      "validation_profile": "READY_SET_STATIC_V1",
+      "transport": "GITHUB_ISSUE_QUEUE",
+      "queue_repository": "hns140412-glitch/Ready-Set",
+      "workflow_path": ".github/workflows/taky-codex-executor.yml",
+      "implementation_commit": "8cfe0a47526f15dac0eea79a1ac178483e3c3e5a",
+      "state": "IMPLEMENTED_CREDENTIAL_UNVERIFIED",
+      "queue_ready": true,
+      "credential_requirement": {
+        "kind": "GITHUB_ACTIONS_SECRET",
+        "name": "OPENAI_API_KEY",
+        "value_stored_in_taky": false
+      },
+      "authority_boundaries": {
+        "direct_merge": false,
+        "production_deploy": false,
+        "human_merge_approval_required": true
+      }
+    }
+  ]
+}
