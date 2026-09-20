@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
+        "main_head": "65d123cabd22588064af798853a12d1084e637d5",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -78,11 +78,12 @@
         }
       ],
       "learning_engine": {
-        "version": "LEARNING_MASTER_V0.3",
-        "main_merge_sha": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
-        "verified_pr_head": "8579c26993b3bb44d3597fa0b120c050ce4f053c",
-        "subject_master": "READY_SUBJECT_MASTER_V0.1",
-        "learning_reference": "READY_LEARNING_REFERENCE_V0.2",
+        "version": "LEARNING_MASTER_V0.4",
+        "main_merge_sha": "65d123cabd22588064af798853a12d1084e637d5",
+        "verified_pr_head": "80be72f7406f0de123894f1e2e3237b3d7b45114",
+        "subject_master": "READY_SUBJECT_MASTER_V0.2",
+        "learning_reference": "READY_LEARNING_REFERENCE_V0.3",
+        "standard_matcher": "READY_LEARNING_STANDARD_MATCHER_V0.2",
         "subject_coverage": [
           "연산",
           "한자",
@@ -98,44 +99,51 @@
           "ASSIGNMENT_FACT",
           "TEACHER_INSTRUCTION",
           "SUBJECT_MASTER",
+          "STANDARD_MATCHER",
           "LEARNING_REFERENCE",
           "LEARNING_MASTER",
           "LEARNING_UNIT",
           "PLANNER_V2",
           "DATED_TODO"
         ],
-        "reference_policy": {
-          "official_school_band": "2022_REVISED_ELEMENTARY_5_6",
-          "actual_textbook_unit_mapping": "REQUIRES_FACT_AND_BOOK_CONTEXT",
-          "unknown_subject": "REFERENCE_GAP",
+        "matching_policy": {
+          "actual_context_required": true,
+          "domain_candidate_only_without_verified_standard_record": true,
+          "official_standard_code_binding": "UNBOUND_REQUIRES_VERIFIED_STANDARD_RECORD",
+          "ambiguity_state": "CANDIDATE",
+          "missing_context_state": "REFERENCE_GAP",
+          "unknown_subject_state": "REFERENCE_GAP",
           "reference_may_override_assignment": false
         },
         "validation": {
-          "ready_integration_ci": {
-            "run_id": 35486105993,
-            "status": "PASS"
-          },
-          "worker_selftest": {
-            "run_id": 35486105978,
-            "status": "PASS"
-          },
-          "chromium_runtime": {
-            "run_id": 35486105920,
-            "status": "PASS",
-            "tests": "41/41"
-          },
-          "exact_main_post_merge": {
-            "status": "PASS",
-            "runtime_e2e": {
-              "run_id": 35486168383,
+          "pr_head": {
+            "ready_integration_ci": {
+              "run_id": 35490408847,
               "status": "PASS"
             },
             "worker_selftest": {
-              "run_id": 35486168380,
+              "run_id": 35490408853,
               "status": "PASS"
             },
-            "integration_ci_note": "Ready Integration CI is PR-event validation; exact-main push revalidation is represented by Runtime E2E and Worker Self-Test."
+            "chromium_runtime": {
+              "run_id": 35490408842,
+              "status": "PASS"
+            }
+          },
+          "exact_main": {
+            "runtime_e2e": {
+              "run_id": 35490645890,
+              "status": "PASS",
+              "verified_deploy_source_packaging": "PASS"
+            },
+            "note": "Exact-main runtime verified on Ready main 65d123cabd22588064af798853a12d1084e637d5."
           }
+        },
+        "curriculum_authority": {
+          "current_elementary_framework_notice": "NCEC_NOTICE_2026_1",
+          "subject_curriculum_notice": "MOE_NOTICE_2022_33",
+          "ncic_reference": "NCIC_2022_REVISED_ELEMENTARY_ACHIEVEMENT_STANDARDS",
+          "rule": "Current elementary/general framework authority and subject-specific achievement-standard lineage are tracked separately."
         }
       }
     },
