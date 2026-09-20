@@ -1,9 +1,9 @@
 # TAKY ACTIVE RULE PROFILE
 
 [TAKY_ACTIVE_RULE_PROFILE]
-PROFILE_VERSION: 2026-09-20.4
+PROFILE_VERSION: 2026-09-20.5
 SOURCE_REPOSITORY: hns140412-glitch/TAKY
-SOURCE_CANONICAL_HEAD: ddc7eff82db85350c2cd659562c7c417d00dac2a
+SOURCE_CANONICAL_HEAD: 6c630a0ffc872fb422943e1988eb6bc5f78d51bd
 STATUS: DERIVED_EXECUTION_PROJECTION / NON_SEMANTIC_OWNER
 
 Purpose: compact always-on execution guidance for delegated agents such as Codex. This file does not own rule semantics. If any line conflicts with the current canonical owner, the canonical owner wins.
