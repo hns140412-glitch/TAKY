@@ -442,10 +442,10 @@ Project-specific detailed UI, swipe, timer, lock-screen, orientation and visual 
 
 ## 18. OTHER FUNCTIONAL APP REGRESSION CONTRACTS
 
-Hide & Seek (historical lineage: ZPD Word):
+Hide & Seek:
 `사진 / Camera intake → OCR Review-before-Commit → 단어/의미 학습 → 취약단어 → CODE RED → RETRACE → 완료`
 Preserve cumulative word/sense memory, camera-first intake, OCR Review-before-Commit, weak-word priority, CODE RED and retrace identity.
-The historical ZPD Word product name and police/capture child-facing world are SUPERSEDED; validated learning-core lineage remains protected through the current Hide & Seek owner.
+The former product name and police/capture child-facing world are SUPERSEDED; validated learning-core lineage remains protected through the current Hide & Seek owner.
 
 Snap & Pop:
 Preserve thinking/writing/creation purpose. Guide does not become the writer/grader. Five writing tools remain freely usable under its current project decisions; old map/tool unlocking is superseded. Family Expansion remains separated from core unless explicitly integrated by project authority.
