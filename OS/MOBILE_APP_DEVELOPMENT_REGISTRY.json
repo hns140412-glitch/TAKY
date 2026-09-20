@@ -17,7 +17,8 @@
     "VALIDATION_ONLY_PR != MERGE_CANDIDATE.",
     "DRIVE_BUILD_OR_HANDOFF != SOURCE_OF_TRUTH.",
     "NETLIFY_PROJECT_NAME != PRODUCT_IDENTITY.",
-    "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED."
+    "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED.",
+    "APP_SOURCE_CODE_SINGLE_SOURCE = GITHUB; Drive must not host a competing current source-code copy."
   ],
   "apps": {
     "READY_SET": {
@@ -231,7 +232,7 @@
   },
   "routing": {
     "new_app_source": "Create/use one GitHub product repository; register here before production deployment.",
-    "app_documents": "Use TAKY/10_PROJECTS/<APP> Drive root; do not create a second app root elsewhere.",
+    "app_documents": "Use TAKY/10_PROJECTS/<APP> for design/assets/review/QA/release-handoff/reference material; do not maintain a competing current source-code tree in Drive.",
     "shared_assets": "Use TAKY-ASSETS + TAKY/10_PROJECTS/SHARED_ASSETS.",
     "app_catalog": "Use TAKY-MOBILE + TAKY/10_PROJECTS/MOBILE_CATALOG.",
     "validation_pr": "Label/classify as VALIDATION_ONLY; never infer merge intent from open state.",
