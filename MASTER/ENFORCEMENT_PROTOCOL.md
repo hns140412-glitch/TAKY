@@ -352,6 +352,34 @@ Conversely, downstream verification success SHALL NOT substitute for missing C2S
 
 
 
+## 13.1 C2S historical evidence recovery gate — HARD LOCK
+
+When C2S requires recovery of a material prior decision/artifact and the user asserts that it previously existed, execution SHALL bind TKY-C2S-001 §11.1 and TKY-RECOVERY-001 §1.1B before classifying the item as missing/unrecovered.
+
+Structured fields:
+- `c2s_historical_recovery_required`;
+- `prior_existence_asserted_by_user`;
+- `evidence_recovery_pass_performed`;
+- `evidence_recovery_query_modes[]`;
+- `evidence_recovery_source_families[]`;
+- `material_legacy_terms_available`;
+- `material_decision_markers_applicable`;
+- `material_attachment_lineage_available`;
+- `material_reverse_trace_available`;
+- `material_recovery_families_available`;
+- `evidence_recovery_result`;
+- `claims_historical_absence`;
+- `user_provided_evidence_after_missing_claim`.
+
+Hard behavior:
+- prior existence asserted + no Evidence Recovery Pass -> `RECOVERY_FAILED`;
+- applicable legacy-term / decision-marker / attachment-lineage / reverse-trace dimension skipped -> `RECOVERY_FAILED`;
+- materially available recovery families not sufficiently attempted -> `RECOVERY_FAILED`;
+- strong historical-absence claim while result is not `TRUE_UNAVAILABLE` -> `RECOVERY_FAILED + FALSE_MISSING_DECLARATION`;
+- user later supplies recoverable evidence after TAKY's missing claim -> `USER_FORCED_RECOVERY + USER_AS_QA + RECOVERY_FAILED`.
+
+Reference replay: `C2S-RECOVERY-01` in `ENFORCEMENT/replay_cases_v5.json`.
+
 ## 14. C2S runtime composition bridge — HARD LOCK
 
 For TAKY-controlled runtimes that perform conversation-derived governance/system writes, use:
