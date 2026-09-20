@@ -200,7 +200,14 @@
               },
               "runtime_e2e": {
                 "run_id": 35499071393,
-                "status": "PENDING"
+                "status": "FAIL_BASELINE_EQUIVALENT",
+                "failed": 12,
+                "passed": 29,
+                "baseline_run_id": 35498488055,
+                "baseline_failed": 12,
+                "baseline_passed": 29,
+                "normalized_failed_set_identical": true,
+                "new_runtime_regression": 0
               }
             }
           }
