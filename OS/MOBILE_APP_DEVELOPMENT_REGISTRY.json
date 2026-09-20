@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "3da884901eed0005f1437d1a0546c1f86297936b",
+        "main_head": "781739190b2b52b91146ef290ee16bcdf5433308",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -140,6 +140,18 @@
               "status": "PASS",
               "verified_deploy_source_packaging": "PASS"
             }
+          },
+          "coverage_v02": {
+            "pr_number": 56,
+            "branch_head": "2fd96e2f57d70b1ff4d3880e7e1aca2a664f1183",
+            "integration_ci": {
+              "run_id": 35496722929,
+              "status": "PASS"
+            },
+            "runtime_e2e": {
+              "run_id": 35496722964,
+              "status": "PENDING"
+            }
           }
         },
         "curriculum_authority": {
@@ -149,7 +161,7 @@
           "rule": "Current elementary/general framework authority and subject-specific achievement-standard lineage are tracked separately."
         },
         "official_standard_registry": {
-          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.1",
+          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.2",
           "coverage_status": "PARTIAL_VERIFIED",
           "active_subjects": [
             "국어",
@@ -165,7 +177,32 @@
           "source_authority": [
             "NCIC",
             "GYEONGGI_PROVINCIAL_OFFICE_OF_EDUCATION"
-          ]
+          ],
+          "dataset_status": "MIXED_VERIFIED",
+          "coverage": {
+            "영어": {
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 20,
+              "expected_total": 20
+            },
+            "국어": {
+              "status": "PARTIAL_VERIFIED",
+              "verified_record_count": 7
+            },
+            "수학": {
+              "status": "PARTIAL_VERIFIED",
+              "verified_record_count": 1
+            },
+            "사회": {
+              "status": "PARTIAL_VERIFIED",
+              "verified_record_count": 2
+            },
+            "과학": {
+              "status": "PARTIAL_VERIFIED",
+              "verified_record_count": 4
+            }
+          },
+          "source_evidence_note": "English 5-6 full 20-record set verified from official education-office curriculum table; other subjects remain partial."
         }
       }
     },
