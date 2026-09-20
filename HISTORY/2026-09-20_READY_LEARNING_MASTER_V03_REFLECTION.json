@@ -1,6 +1,6 @@
 {
   "record_id": "2026-09-20_READY_LEARNING_MASTER_V03_REFLECTION",
-  "status": "REFLECTION_STAGED",
+  "status": "REFLECTION_VALIDATED_EXACT_MAIN",
   "ready": {
     "repo": "hns140412-glitch/Ready-Set",
     "main_merge_sha": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
@@ -38,8 +38,10 @@
     "Module-load test now requires Subject Master and Learning Reference globals."
   ],
   "current_boundaries": {
-    "exact_main_post_merge_reverify": "NOT_YET_OBSERVED",
+    "exact_main_post_merge_reverify": "PASS",
     "device_verified": false,
-    "production_verified": false
+    "production_verified": false,
+    "exact_main_runtime_run": 35486168383,
+    "exact_main_worker_run": 35486168380
   }
 }
