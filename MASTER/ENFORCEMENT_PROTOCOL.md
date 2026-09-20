@@ -159,6 +159,44 @@ This gate is domain-independent. It applies to implementation, validation, exter
 Reference replay:
 `python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json`.
 
+## 4.5 External-resource / hosting call budget gate — HARD LOCK
+
+External hosting, deployment, production validation, paid API execution, quota-bearing preview creation, and repeated remote status polling are material side effects. They SHALL NOT be used as a substitute for lower-cost repository/branch/CI/runtime validation.
+
+Default rule:
+`LOCAL/BRANCH → CI/RUNTIME → ONE FROZEN CANDIDATE → EXTERNAL DEPLOY/VALIDATION`.
+
+Required execution-record fields when applicable:
+- `external_resource_action`;
+- `external_resource_name`;
+- `external_call_budget`;
+- `external_call_count_for_same_goal`;
+- `candidate_sha_frozen`;
+- `same_external_call_repeated_without_new_evidence`;
+- `deployment_attempted_before_candidate_frozen`;
+- `lower_cost_local_validation_available`;
+- `external_call_selected_before_local_closure`;
+- for status polling: `external_status_poll`, `no_new_trigger_since_last_external_check`, `material_external_state_change_expected`.
+
+Hard behavior:
+- default budget for one deployment/preview goal is 1 external execution unless the governing workflow explicitly defines another budget;
+- a second equivalent deploy/status call requires materially new evidence, a new trigger/state transition, or explicit override;
+- if branch/CI/runtime validation can answer the question, repeated hosting calls are blocked;
+- deployment before candidate SHA/build is frozen is blocked;
+- polling an unchanged external state without a new trigger and without a material reason to expect change is blocked;
+- a lower-impact compliant path SHALL be preferred over a quota/cost-bearing external side effect.
+
+Violation ⇒ `RULE_NOT_APPLIED`; repeated violation after correction may additionally be `POST_CORRECTION_REOCCURRENCE`.
+
+This rule applies even when the external tool is technically available and authorized. Tool availability does not imply that another call is justified.
+
+`TOOL AVAILABLE != CALL JUSTIFIED`.
+`STATUS CHECK != PROGRESS`.
+`RETRY WITHOUT NEW EVIDENCE != VALIDATION`.
+`HOSTING CALL != FREE SIDE EFFECT`.
+
+Reference replay lives in `ENFORCEMENT/replay_cases_v5.json`.
+
 ## 4.3 Notion link-review execution gate — HARD LOCK
 
 Semantic workflow ownership remains `OS/NOTION_OPS.md` (TKY-NOTION-001). This section only defines the auditable execution expression.
