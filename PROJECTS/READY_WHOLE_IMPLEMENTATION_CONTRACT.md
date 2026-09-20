@@ -235,6 +235,50 @@ Examples:
 
 Do not blindly stack multiple high-reasoning/high-load tasks because minutes fit.
 
+### 6.1 Learning-engine authority chain — HARD LOCK
+
+Ready learning interpretation SHALL preserve the following authority/data-flow separation:
+
+`Assignment FACT / Teacher Instruction → Subject Master → Official Standard Registry → Standard Matcher → Unit Mapping Evidence → Learning Reference → Learning Master → Learning Unit → Planner`
+
+Hard rules:
+- Assignment FACT and explicit teacher instruction remain execution truth and SHALL NOT be overridden by curriculum-reference inference.
+- Official achievement-standard codes may bind only from a verified official record plus sufficiently specific evidence. Unsupported or ambiguous binding remains NULL/UNBOUND.
+- Unit Mapping Evidence is evidence, not curriculum authority. It SHALL NOT create or overwrite an official achievement-standard code.
+- Unit Mapping application requires actual FACT context: `grade + semester + explicit unit_name`.
+- `workbook_name`, assignment `title`, concept/skill target, or generated interpretation SHALL NOT substitute for `unit_name`.
+- Matching grade/semester alone SHALL NOT prove a unit match; verified unit-title evidence is required before `UNIT_MAPPING_CONTEXT_MATCHED`.
+- A verified achievement-standard code SHALL NOT erase unresolved unit-mapping state. Unit-mapping uncertainty must propagate through Learning Reference / Learning Master / Learning Unit provenance.
+- Subject Master unresolved unit-context gaps may close only from actual factual unit context, not inferred/generated context.
+- Science and piano remain independently modeled Subject Masters where applicable; generic workbook-range handling SHALL NOT silently replace subject-specific interpretation.
+- Learning Master interprets/divides learning work but SHALL NOT create dated work instances.
+- Planner remains the only owner that creates `DATED TODO`.
+- English achievement-standard coverage may exist independently from unit-mapping coverage. Lack of a verified English standard-unit connection table in the current mapping source remains an explicit GAP, not an inferred mapping.
+
+### 6.2 Current learning-engine candidate state — EXECUTION TRUTH
+
+As of the validated Ready PR #68 review:
+- Ready repository: `hns140412-glitch/Ready-Set`
+- branch: `taky/unit-mapping-table-full-v02`
+- reviewed PR head: `87922bf5e39f510303797ff95ceee481980c497c`
+- PR state: OPEN / NOT MERGED
+- Subject Master: `0.2.1`
+- Official Standard Registry: `0.3.0`, 177 active records
+- Official Unit Map: `0.2.2`, 196 mapping records across 157 mapped standards for Korean/Social/Math/Science
+- Standard Matcher: `0.4.1`
+- Learning Reference: `0.3.0`
+- Learning Master: `0.5.1`
+- Integration CI #105: PASS
+- learning-master-contract: PASS
+- semantic-contracts: PASS
+- TAKY Codex Worker Self-Test #290: PASS
+- whole-app Chromium Runtime E2E #186: FAIL
+
+State boundary:
+`PR_REVIEW_VALIDATED + CODED + CI_VERIFIED != READY_MAIN_CURRENT_IMPLEMENTATION`.
+The above versions SHALL NOT be presented as current Ready main implementation until PR #68 is merged and post-merge current-state verification is performed.
+The whole-app Runtime E2E failure SHALL NOT be rewritten as a learning-engine runtime PASS; separately passing learning contracts prove only their scoped contract evidence.
+
 ## 7. Planner allocation / condition
 
 Planner inputs:
