@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "65d123cabd22588064af798853a12d1084e637d5",
+        "main_head": "3da884901eed0005f1437d1a0546c1f86297936b",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -79,11 +79,11 @@
       ],
       "learning_engine": {
         "version": "LEARNING_MASTER_V0.4",
-        "main_merge_sha": "65d123cabd22588064af798853a12d1084e637d5",
-        "verified_pr_head": "80be72f7406f0de123894f1e2e3237b3d7b45114",
+        "main_merge_sha": "3da884901eed0005f1437d1a0546c1f86297936b",
+        "verified_pr_head": "60487cc9d6638262e9f3e3399f9b25a025df9631",
         "subject_master": "READY_SUBJECT_MASTER_V0.2",
         "learning_reference": "READY_LEARNING_REFERENCE_V0.3",
-        "standard_matcher": "READY_LEARNING_STANDARD_MATCHER_V0.2",
+        "standard_matcher": "READY_LEARNING_STANDARD_MATCHER_V0.3",
         "subject_coverage": [
           "연산",
           "한자",
@@ -109,7 +109,7 @@
         "matching_policy": {
           "actual_context_required": true,
           "domain_candidate_only_without_verified_standard_record": true,
-          "official_standard_code_binding": "UNBOUND_REQUIRES_VERIFIED_STANDARD_RECORD",
+          "official_standard_code_binding": "BOUND_ONLY_FROM_VERIFIED_REGISTRY",
           "ambiguity_state": "CANDIDATE",
           "missing_context_state": "REFERENCE_GAP",
           "unknown_subject_state": "REFERENCE_GAP",
@@ -118,25 +118,28 @@
         "validation": {
           "pr_head": {
             "ready_integration_ci": {
-              "run_id": 35490408847,
+              "run_id": 35495443198,
               "status": "PASS"
             },
             "worker_selftest": {
-              "run_id": 35490408853,
+              "run_id": 35495443192,
               "status": "PASS"
             },
             "chromium_runtime": {
-              "run_id": 35490408842,
+              "run_id": 35495443179,
               "status": "PASS"
             }
           },
           "exact_main": {
+            "worker_selftest": {
+              "run_id": 35495533592,
+              "status": "PASS"
+            },
             "runtime_e2e": {
-              "run_id": 35490645890,
+              "run_id": 35495533574,
               "status": "PASS",
               "verified_deploy_source_packaging": "PASS"
-            },
-            "note": "Exact-main runtime verified on Ready main 65d123cabd22588064af798853a12d1084e637d5."
+            }
           }
         },
         "curriculum_authority": {
@@ -144,6 +147,25 @@
           "subject_curriculum_notice": "MOE_NOTICE_2022_33",
           "ncic_reference": "NCIC_2022_REVISED_ELEMENTARY_ACHIEVEMENT_STANDARDS",
           "rule": "Current elementary/general framework authority and subject-specific achievement-standard lineage are tracked separately."
+        },
+        "official_standard_registry": {
+          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.1",
+          "coverage_status": "PARTIAL_VERIFIED",
+          "active_subjects": [
+            "국어",
+            "수학",
+            "사회",
+            "과학",
+            "영어"
+          ],
+          "text_policy": "PARAPHRASED_INDEX_WITH_OFFICIAL_SOURCE_POINTER",
+          "no_guessing": true,
+          "binding_rule": "Only unique sufficiently strong matches against verified records may populate official_standard_code.",
+          "unverified_record_behavior": "NULL_UNBOUND",
+          "source_authority": [
+            "NCIC",
+            "GYEONGGI_PROVINCIAL_OFFICE_OF_EDUCATION"
+          ]
         }
       }
     },
