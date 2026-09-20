@@ -103,17 +103,18 @@ Claim boundary:
 `BROWSER E2E AVAILABLE != BROWSER E2E REQUIRED EVERY TURN`
 `USAGE LIMIT INTERRUPTION != RESTART FROM ZERO`
 
-## Ready learning-engine reviewed candidate — 2026-09-20
+## Ready learning-engine current main — 2026-09-20
 - repository: `hns140412-glitch/Ready-Set`
-- PR: #68 `taky/unit-mapping-table-full-v02`
-- reviewed head: `87922bf5e39f510303797ff95ceee481980c497c`
-- state: `PR_CANDIDATE_REVIEW_VALIDATED / NOT_MERGED / NOT_READY_MAIN_CURRENT`
-- focused evidence: Integration CI #105 PASS; semantic-contracts PASS; learning-master-contract PASS; TAKY Codex Worker Self-Test #290 PASS
-- whole-app Chromium Runtime E2E #186: FAIL
-- candidate versions: Subject Master 0.2.1 / Unit Map 0.2.2 / Standard Matcher 0.4.1 / Learning Master 0.5.1
+- merged PR: #68
+- current reflected main SHA: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`
+- state: `READY_MAIN_CURRENT / CODED / CI_VERIFIED / RUNTIME_VERIFIED`
+- exact-main evidence: Integration CI #119 PASS; TAKY Codex Worker Self-Test #322 PASS; Ready Runtime E2E #205 PASS
+- learning versions: Subject Master 0.2.1 / Unit Map 0.2.2 / Standard Matcher 0.4.1 / Learning Master 0.5.1
 - canonical reflection: `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md §6.1–6.2`
 - review evidence: `HISTORY/2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68.json`
-- hard boundary: candidate review/reflection SHALL NOT be presented as Ready main current implementation until merge + post-merge current-state verification.
+- device verification: NOT_RUN
+- production verification: NOT_VERIFIED; Netlify current deploy still points to pre-merge Ready main evidence and must be verified after deployment refresh.
+- hard boundary: `RUNTIME_VERIFIED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`.
 
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
