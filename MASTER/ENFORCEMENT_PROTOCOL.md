@@ -239,6 +239,43 @@ The user SHALL NOT be used as the default fresh-chat/Work tester when a reposito
 `USER MANUAL SMOKE TEST ≠ REQUIRED REPOSITORY VALIDATION`.
 `FRESH-CONTEXT REPLAY PASS ≠ HOSTED AUTO-INVOCATION VERIFIED`.
 
+## 4.6 Engineering execution-profile gate — HARD LOCK
+
+Semantic ownership remains `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md` (TKY-ENGEXEC-001). This section defines only the auditable/mechanical expression.
+
+When an execution record sets `engineering_execution_profile_required=true`, the record SHALL provide a known profile and a compact execution contract with:
+- baseline evidence references;
+- protected state;
+- target delta;
+- acceptance conditions;
+- validation steps;
+- regression scope;
+- remaining unknowns;
+- report mode.
+
+Supported reusable profiles:
+`REPAIR / ARCHITECTURE_CHANGE / DATABASE_MIGRATION / SECURITY_REVIEW / UI_IMPLEMENTATION`.
+
+Selected profile-specific requirements SHALL be present and satisfied. The gate SHALL block at least:
+- REPAIR that lacks failure evidence, a falsifiable root cause, minimum-sufficient delta, targeted retest or regression definition;
+- repetition of the same failed repair approach under materially unchanged conditions without new evidence;
+- ARCHITECTURE_CHANGE without current pattern/owner/interface impact inspection, or forced fragmentation without demonstrated benefit;
+- DATABASE_MIGRATION without migration artifact, compatibility/access/referential/index-impact reasoning, migration test and rollback/forward-fix path;
+- unjustified unconditional cascade deletion where lifecycle/history semantics were not checked;
+- SECURITY_REVIEW driven by an arbitrary fixed finding count rather than evidence/applicable attack surface;
+- SECURITY_REVIEW lacking attack-surface/control/finding/severity/regression evidence;
+- UI_IMPLEMENTATION that treats an external design brand/style as project authority or fails to recover the applicable project reference/contract;
+- concise user reporting that reduces internal validation or hides a material failed/unknown gate.
+
+Violation uses the existing `RULE_NOT_APPLIED` / `STATE_CLAIM_MISMATCH` semantics rather than introducing a parallel failure taxonomy.
+
+Reference replay:
+`python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_engineering_profiles_v1.json`.
+
+`PROFILE SELECTED != PROFILE APPLIED`.
+`SHORT REPORT != SHORT VALIDATION`.
+`TEMPLATE BEST PRACTICE != PROJECT-SAFE EXECUTION`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
