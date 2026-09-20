@@ -1,9 +1,9 @@
 # TAKY ACTIVE RULE PROFILE
 
 [TAKY_ACTIVE_RULE_PROFILE]
-PROFILE_VERSION: 2026-09-13.3
+PROFILE_VERSION: 2026-09-20.4
 SOURCE_REPOSITORY: hns140412-glitch/TAKY
-SOURCE_CANONICAL_HEAD: 1317ede035bf8958e13ab45ff0a434c2392d401c
+SOURCE_CANONICAL_HEAD: ddc7eff82db85350c2cd659562c7c417d00dac2a
 STATUS: DERIVED_EXECUTION_PROJECTION / NON_SEMANTIC_OWNER
 
 Purpose: compact always-on execution guidance for delegated agents such as Codex. This file does not own rule semantics. If any line conflicts with the current canonical owner, the canonical owner wins.
@@ -46,6 +46,16 @@ Delegated-agent calls are a limited execution resource, not a default validation
 
 12. CONDUCTOR RESPONSIBILITY / USER-NOT-DEBUGGING
 When TAKY is acting as conductor/orchestrator, TAKY owns routing, troubleshooting, deployment-path recovery, tool/agent budget, evidence collection, and next-action selection within the authorized scope. Do not ask the user to perform routine debugging, hunt through settings, compare speculative infrastructure links, collect logs, or act as DevOps/QA while a materially available system-side path remains. Resolve technical ambiguity first; ask the user only for a genuine human-only/authority gate, and then ask for the smallest single action. `CONDUCTOR ≠ TASK COMMENTATOR`; `USER ≠ DEFAULT QA / DEVOPS / LOG COLLECTOR`.
+
+13. C2S STATE SEPARATION
+`C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+Do not use downstream implementation/runtime gaps to reopen a correctly closed knowledge compilation, and do not use C2S closure to claim implementation/runtime completion.
+
+14. DIRECT DRIVE CONTINUITY
+The default durable continuity path is `Google Drive durable source/state -> direct TAKY C2S -> owner reflection -> implementation/result`. NotebookLM is legacy/optional and SHALL NOT be introduced as an active dependency or blocker unless explicitly re-enabled.
+
+15. CURRENT STORAGE / REPOSITORY AUTHORITY
+GitHub `hns140412-glitch/TAKY` is canonical governance. Google Drive uses the governed single entry root `TAKY` and its registered role folders. The separate `TAKY-WORK-OS` repository is subordinate implementation/operating code, not a competing canonical Work OS or Drive-root authority.
 
 ## Delegated-agent bootstrap
 
