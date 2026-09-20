@@ -126,6 +126,19 @@ Claim boundary:
 - hard boundary: `RENEWAL_CANDIDATE != READY_MAIN_CURRENT`.
 - next implementation after renewal promotion: P1 Planner reality engine, then P2 Child FACT confirmation, P3 cross-app continuity, P4 UI/product-language consolidation, P5 legacy cleanup, P6 device, P7 production.
 
+## Ready renewal C2S closure — 2026-09-20
+- continuity evidence read first: Google Drive `READY_SET_HANDOFF_2026-09-20_LATEST`.
+- Ready main reverified: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`.
+- renewal branch: `taky/ready-renewal-v01`, Draft PR #73.
+- reviewed implementation snapshot: `450caf84b23788b40a93e070742d86edc0165baa`.
+- branch evidence at reviewed snapshot: Ready Integration CI #130 PASS / Worker Self-Test #331 PASS / Runtime E2E #216 PASS, 45/45.
+- P1 Planner reality engine: CODED + CI_VERIFIED + RUNTIME_VERIFIED on candidate; main promotion pending.
+- P1 semantics: confirmed availability profiles + commitments + travel/prep/meal/rest-compatible blocking + before/after buffers; zero-executable-window dates excluded; availability is an executability gate, never study-volume authority.
+- next unresolved implementation gate: P2 generic `CHILD INPUT → PARENT REVIEW/CONFIRM → FACT → LEARNING MASTER → PLANNER → TODAY`.
+- external hosting was not used for this review/C2S closure.
+- deployment candidate remains NOT_FROZEN; Netlify/external deployment remains blocked until exact frozen candidate + TAKY external-resource gate.
+- `REVIEW_SNAPSHOT_CLOSED != MAIN_MERGED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`.
+
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
 Conversation text alone is not durable state.
