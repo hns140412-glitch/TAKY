@@ -75,11 +75,11 @@ Shared Character/Relationship rules SHALL NOT erase project identity.
 ## 6. CURRENT APP-FAMILY CORRECTION
 
 Current user-facing vocabulary app name is `Hide & Seek`.
-Historical `ZPD Word` is lineage only; its police/capture child-facing world is SUPERSEDED.
+The former product identity is lineage only; its police/capture child-facing world is SUPERSEDED.
 
 Validated learning-core concepts such as Camera/Photo intake, OCR Review-before-Commit, weak-word priority, CODE RED, RETRACE and cumulative word/sense memory remain candidates/protected project logic under the current Hide & Seek owner according to the active project master.
 
-If `OS/GUIDE_FAMILY_LEARNING_OS.md` still contains the label `ZPD Word`, treat that label as a stale cross-canonical reference to be normalized during the next app-family comparison; do not revive the superseded world/name.
+If `OS/GUIDE_FAMILY_LEARNING_OS.md` contains any superseded former-name label, treat it as a stale cross-canonical reference to be normalized during the next app-family comparison; do not revive the superseded world/name.
 
 ## 7. VALIDATION / STATUS
 
@@ -87,7 +87,7 @@ If `OS/GUIDE_FAMILY_LEARNING_OS.md` still contains the label `ZPD Word`, treat t
 - One Good Reflection recovery: INTEGRATED
 - Special Friend existence: INTEGRATED / DETAIL UNVERIFIED
 - project-specific ownership separation: PRESERVED
-- stale ZPD label normalization inside the parent GUIDE file: PENDING APP-FAMILY COMPARISON
+- stale former-name label normalization inside the parent GUIDE file: RESOLVED
 - runtime realization: UNVERIFIED
 
 NO USER-AS-QA.
