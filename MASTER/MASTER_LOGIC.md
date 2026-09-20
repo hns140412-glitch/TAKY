@@ -490,6 +490,9 @@ Activation principles:
 - distinct alternatives SHALL NOT be flattened merely to simplify the canonical narrative;
 - material system-building work SHALL preserve WHY, correction lineage, OPEN/CONFLICT/FRONTIER state and ownership;
 - current TAKY should expose high-value missing flesh and preferentially grow those gaps rather than repeatedly restating the skeleton.
+- C2S compile closure is a knowledge-compilation state, not proof of owner reflection or downstream realization.
+- `C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+- downstream execution gaps remain separately owned and SHALL reopen C2S only when new evidence exposes missing/misclassified meaning, broken correction lineage, wrong disposition/owner/destination, false convergence, or failed reverse reconstruction.
 
 This rule owns compilation/coverage semantics only; source authority, intent, outcome, recovery, traceability and domain-specific semantics remain with their declared owners.
 

@@ -35,6 +35,7 @@ After loading TAKY, identify task-relevant OS / DOMAIN / PROJECT / GUIDE rules a
 
 Boot order:
 1. Load `TAKY.md`.
+1A. Load `MASTER/MASTER_FILE_REGISTRY.json` when MASTER-file authority, discovery, cleanup, migration, or ambiguous document status is material; a file's presence under `MASTER/` does not itself make it active authority.
 2. Load `MASTER/MASTER_LOGIC.md`.
 2A. For material result-producing work, load `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md` and identify the primary outcome, task-relevant quality dimensions, current result state, next best improvement and valid stop condition. Result improvement outranks equivalent/redundant validation unless a hard risk/authority gate requires the validation first.
 2B. For material execution/continue/result-form work, load `MASTER/INTENT_EXECUTION_PROTOCOL.md`; delegated continuation SHALL NOT stop before a real blocker/required decision/completion or valid outcome-optimization stop condition.
@@ -193,6 +194,10 @@ NO USER-AS-QA.
 For material TAKY-building conversations, activate `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md` (TKY-C2S-001) in addition to the Context Ledger.
 
 Operational shorthand:
-`RAW EVIDENCE -> ATOMS -> RELATIONSHIPS/CORRECTIONS -> OWNER/FRONTIER/OPEN -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> GROWTH MAP`.
+`RAW EVIDENCE -> ATOMS -> RELATIONSHIPS/CORRECTIONS -> OWNER/FRONTIER/OPEN -> COVERAGE CLOSURE -> REVERSE RECONSTRUCTION -> C2S_COMPILE_CLOSED -> GROWTH MAP`.
 
 Do not claim "전부 반영" merely because a compact summary or MASTER rewrite exists. Within recovered scope, material items must be dispositioned/mapped and silent loss must be zero.
+
+C2S compile closure remains independent from owner reflection and downstream realization:
+`C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
+A pending implementation/runtime/deployment/device action does not reopen C2S unless it reveals a knowledge-compilation defect; conversely C2S closure does not satisfy a user request that separately requires canonical reflection or implementation.

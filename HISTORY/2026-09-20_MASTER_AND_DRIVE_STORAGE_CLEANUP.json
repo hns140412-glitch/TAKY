@@ -1,0 +1,58 @@
+{
+  "record_id": "2026-09-20_MASTER_AND_DRIVE_STORAGE_CLEANUP",
+  "status": "STRUCTURAL_CLEANUP_APPLIED_DRIVE__GITHUB_PR_PENDING",
+  "principles": [
+    "Preserve active semantics and evidence; cleanup is not deletion.",
+    "GitHub TAKY remains canonical governance authority.",
+    "Google Drive is durable working/source/result/handoff/reference surface.",
+    "Path or folder presence does not imply authority.",
+    "Prefer ID-preserving move/rename; do not delete by duplicate name alone."
+  ],
+  "github": {
+    "master_file_registry": "MASTER/MASTER_FILE_REGISTRY.json",
+    "classes": [
+      "ACTIVE_OWNER",
+      "ACTIVE_SUPPORT",
+      "LEGACY_OPTIONAL",
+      "HISTORICAL_EVIDENCE",
+      "CANDIDATE"
+    ],
+    "validator": "ENFORCEMENT/master_file_registry_validator.py",
+    "c2s_semantic_guard": "ENFORCEMENT/c2s_semantic_boundary_regression.py",
+    "branch": "taky/c2s-nano-audit-cleanup-v01",
+    "pull_request": 49
+  },
+  "drive": {
+    "root": {
+      "id": "1WjH-Q2tWFvVNCiBy9r-D9U72Ac7DH61d",
+      "name": "TAKY"
+    },
+    "role_folders": {
+      "00_ACTIVE": "13mi9eFNCLpYNREdUdU93EblWg3UXt_s1",
+      "10_PROJECTS": "1Yuxj6XkNGP-fBiZ5jIuL_Db41wpne36e",
+      "20_REVIEWS_C2S": "1xEWrQI5Ds0k_lMu3O00c73E-NxbR3S9d",
+      "80_HANDOFF": "1NA0qEtgmQD8xcTFFSMRQomrVYUP9yM35",
+      "90_ARCHIVE": "1yhbHZDQRHLbEnok4A_AKZrxZv7lr5610"
+    },
+    "moved_or_renamed": [
+      "private TAKY-WORK-OS -> TAKY/00_ACTIVE/WORK_OS",
+      "Ready_Set -> TAKY/10_PROJECTS/READY_SET",
+      "root _HANDOFF -> TAKY/80_HANDOFF/HANDOFF_HISTORY",
+      "04_TAKY_C2S_REVIEW -> TAKY/20_REVIEWS_C2S/C2S_REVIEW",
+      "NOTEBOOKLM_RECOVERY -> TAKY/90_ARCHIVE/LEGACY_NOTEBOOKLM_RECOVERY",
+      "same-name PILOT folders renamed by actual content role",
+      "root Ready/Notion handoff and execution docs moved to project/handoff/review roles",
+      "2026-09-12 governance patch PDFs moved under archive",
+      "ChatGPT raw HTML/share exports moved from My Drive root to RAW_CHAT_EXPORTS_2026-09-12",
+      "known empty duplicate handoff renamed and isolated under DUPLICATES_INCOMPLETE",
+      "shared old TAKY-WORK-OS and Ready PRE-RC folders renamed LEGACY without moving or permission mutation"
+    ],
+    "destructive_deletion_performed": false,
+    "ids_preserved_on_move": true,
+    "map": "OS/DRIVE_STORAGE_MAP.json"
+  },
+  "semantic_integrity": {
+    "c2s_core_drift": "NOT_DETECTED",
+    "note": "Cleanup changes storage/authority discoverability only; active C2S meaning remains protected by semantic regression guard."
+  }
+}

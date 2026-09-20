@@ -81,4 +81,4 @@ Report separately:
 
 ## 7. CURRENT APP ALIAS
 Use current product names.
-Historical `ZPD Word` deployment aliases SHALL route to the current `Hide & Seek` product owner when the intended project is unambiguous.
+Superseded former-name deployment aliases SHALL route to the current `Hide & Seek` product owner when the intended project is unambiguous.
