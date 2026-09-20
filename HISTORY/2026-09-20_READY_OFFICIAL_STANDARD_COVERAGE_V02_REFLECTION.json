@@ -1,0 +1,66 @@
+{
+  "record_id": "2026-09-20_READY_OFFICIAL_STANDARD_COVERAGE_V02_REFLECTION",
+  "status": "READY_MERGED_EXACT_MAIN_RUNTIME_PENDING",
+  "ready": {
+    "repo": "hns140412-glitch/Ready-Set",
+    "merge_sha": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
+    "pull_request": 56,
+    "pr_head": "94133339017d58c146a32e622aef9ff471128dd4"
+  },
+  "coverage": {
+    "total_active_verified_records": 176,
+    "korean": {
+      "verified": 34,
+      "expected": 34,
+      "status": "VERIFIED_FULL_SUBJECT_COVERAGE"
+    },
+    "math": {
+      "verified": 45,
+      "expected": 45,
+      "status": "VERIFIED_FULL_SUBJECT_COVERAGE"
+    },
+    "social": {
+      "verified": 26,
+      "expected": 27,
+      "status": "PARTIAL_VERIFIED_SOURCE_CODE_AMBIGUITY",
+      "gap": "SOURCE_TABLE_SECOND_6사09_ROW_DUPLICATES_CODE_6사09-01"
+    },
+    "science": {
+      "verified": 51,
+      "expected": 51,
+      "status": "VERIFIED_FULL_SUBJECT_COVERAGE"
+    },
+    "english": {
+      "verified": 20,
+      "expected": 20,
+      "status": "VERIFIED_FULL_SUBJECT_COVERAGE"
+    }
+  },
+  "validation": {
+    "semantic_contract": {
+      "run_id": 35498337112,
+      "status": "PASS"
+    },
+    "pr_runtime": {
+      "run_id": 35498337278,
+      "status": "FAIL_BASELINE_EQUIVALENT",
+      "failed": 12,
+      "passed": 29,
+      "baseline_run_id": 35497871056,
+      "baseline_failed": 12,
+      "baseline_passed": 29,
+      "normalized_failed_set_identical": true,
+      "new_runtime_regression": 0
+    },
+    "exact_main_runtime": {
+      "run_id": 35498488055,
+      "status": "PENDING"
+    }
+  },
+  "hard_locks": [
+    "No silent repair of source-table ambiguity.",
+    "Official standard code binds only from a unique sufficiently strong verified record.",
+    "Unsupported or ambiguous cases remain NULL / UNBOUND.",
+    "Assignment FACT / teacher instruction remain execution truth."
+  ]
+}
