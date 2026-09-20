@@ -161,7 +161,14 @@
             "merge_sha": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
             "exact_main_runtime": {
               "run_id": 35498488055,
-              "status": "PENDING"
+              "status": "FAIL_BASELINE_EQUIVALENT",
+              "failed": 12,
+              "passed": 29,
+              "baseline_run_id": 35497871056,
+              "baseline_failed": 12,
+              "baseline_passed": 29,
+              "normalized_failed_set_identical": true,
+              "new_runtime_regression": 0
             }
           }
         },
