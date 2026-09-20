@@ -1,5 +1,5 @@
 {
-  "fixture_version": "2026-09-21.1",
+  "fixture_version": "2026-09-21.2",
   "scope": "Engineering execution profile replay: repair, architecture, database migration, security review, UI implementation, concise-report validation.",
   "cases": [
     {
@@ -40,7 +40,8 @@
           "minimal_delta_defined": true,
           "targeted_retest_defined": true,
           "regression_check_defined": true,
-          "same_failed_approach_repeated_without_new_evidence": true
+          "same_failed_approach_repeated_without_new_evidence": true,
+          "remaining_unknowns": []
         }
       }
     },
@@ -80,7 +81,8 @@
           "minimal_delta_defined": true,
           "targeted_retest_defined": true,
           "regression_check_defined": true,
-          "same_failed_approach_repeated_without_new_evidence": false
+          "same_failed_approach_repeated_without_new_evidence": false,
+          "remaining_unknowns": []
         }
       }
     },
@@ -119,7 +121,8 @@
           "interface_contract_checked": true,
           "minimum_sufficient_complexity": true,
           "integration_check_defined": true,
-          "forced_fragmentation_without_benefit": true
+          "forced_fragmentation_without_benefit": true,
+          "remaining_unknowns": []
         }
       }
     },
@@ -156,7 +159,8 @@
           "interface_contract_checked": true,
           "minimum_sufficient_complexity": true,
           "integration_check_defined": true,
-          "forced_fragmentation_without_benefit": false
+          "forced_fragmentation_without_benefit": false,
+          "remaining_unknowns": []
         }
       }
     },
@@ -196,7 +200,8 @@
           "rollback_or_forward_fix_defined": true,
           "migration_test_defined": true,
           "post_migration_verify_defined": true,
-          "unconditional_cascade_without_lifecycle_justification": true
+          "unconditional_cascade_without_lifecycle_justification": true,
+          "remaining_unknowns": []
         }
       }
     },
@@ -235,7 +240,8 @@
           "rollback_or_forward_fix_defined": true,
           "migration_test_defined": true,
           "post_migration_verify_defined": true,
-          "unconditional_cascade_without_lifecycle_justification": false
+          "unconditional_cascade_without_lifecycle_justification": false,
+          "remaining_unknowns": []
         }
       }
     },
@@ -274,7 +280,8 @@
           "evidence_based_findings": [],
           "severity_prioritized": true,
           "security_regression_defined": true,
-          "arbitrary_finding_quota": true
+          "arbitrary_finding_quota": true,
+          "remaining_unknowns": []
         }
       }
     },
@@ -312,7 +319,8 @@
           "severity_prioritized": true,
           "security_regression_defined": true,
           "arbitrary_finding_quota": false,
-          "claims_security_complete": false
+          "claims_security_complete": false,
+          "remaining_unknowns": []
         }
       }
     },
@@ -348,7 +356,8 @@
           "design_contract_ref": "PROJECT/UI_MASTER.md",
           "responsive_states_defined": true,
           "accessibility_check_defined": true,
-          "external_style_as_project_authority": true
+          "external_style_as_project_authority": true,
+          "remaining_unknowns": []
         }
       }
     },
@@ -382,7 +391,8 @@
           "design_contract_ref": "PROJECT/UI_MASTER.md",
           "responsive_states_defined": true,
           "accessibility_check_defined": true,
-          "external_style_as_project_authority": false
+          "external_style_as_project_authority": false,
+          "remaining_unknowns": []
         }
       }
     },
@@ -422,7 +432,8 @@
           "root_cause": "known cause",
           "minimal_delta_defined": true,
           "targeted_retest_defined": true,
-          "regression_check_defined": true
+          "regression_check_defined": true,
+          "remaining_unknowns": []
         }
       }
     }
