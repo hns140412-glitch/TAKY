@@ -124,7 +124,18 @@
             "status": "PASS",
             "tests": "41/41"
           },
-          "exact_main_post_merge": "NOT_YET_OBSERVED"
+          "exact_main_post_merge": {
+            "status": "PASS",
+            "runtime_e2e": {
+              "run_id": 35486168383,
+              "status": "PASS"
+            },
+            "worker_selftest": {
+              "run_id": 35486168380,
+              "status": "PASS"
+            },
+            "integration_ci_note": "Ready Integration CI is PR-event validation; exact-main push revalidation is represented by Runtime E2E and Worker Self-Test."
+          }
         }
       }
     },
