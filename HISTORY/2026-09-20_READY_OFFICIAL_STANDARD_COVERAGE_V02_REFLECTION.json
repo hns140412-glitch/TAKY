@@ -1,6 +1,6 @@
 {
   "record_id": "2026-09-20_READY_OFFICIAL_STANDARD_COVERAGE_V02_REFLECTION",
-  "status": "READY_MERGED_EXACT_MAIN_RUNTIME_PENDING",
+  "status": "REFLECTION_READY_BASELINE_EQUIVALENT_RUNTIME",
   "ready": {
     "repo": "hns140412-glitch/Ready-Set",
     "merge_sha": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
@@ -54,7 +54,12 @@
     },
     "exact_main_runtime": {
       "run_id": 35498488055,
-      "status": "PENDING"
+      "status": "FAIL_BASELINE_EQUIVALENT",
+      "failed": 12,
+      "passed": 29,
+      "baseline_run_id": 35497871056,
+      "normalized_failed_set_identical": true,
+      "new_runtime_regression": 0
     }
   },
   "hard_locks": [
