@@ -5,6 +5,9 @@ on:
     paths:
       - 'AGENTS.md'
       - 'TAKY.md'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
@@ -48,6 +51,9 @@ on:
     paths:
       - 'AGENTS.md'
       - 'TAKY.md'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
