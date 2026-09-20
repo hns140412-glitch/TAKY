@@ -238,3 +238,5 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 - RVR-136 and RVR-137 were initialized conservatively as `ATTEMPTED / OPEN` because their Notion bodies contain captured material but their external root URL field was blank and current source-graph closure was not established.
 - New rule: Work launch readiness requires two stable independent inventory reads plus structured-state completeness, fallback archive verification, and P0/P1 state consistency; if the inventory mutates, readiness fails closed and validation repeats without using the user as tester.
 
+
+- 2026-09-20 — TAKY master-surface drift cleanup: repaired Outcome Optimization duplicate section ID, refreshed Active Rule projection, aligned subordinate TAKY-WORK-OS Drive routing, resynced Drive GRAND MASTER mirror, archived NotebookLM registry as legacy. Evidence: HISTORY/2026-09-20_TAKY_MASTER_SURFACE_DRIFT_CLEANUP.md
