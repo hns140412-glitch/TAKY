@@ -392,6 +392,24 @@ TAKY SHALL actively look for:
 `MORE GATES != BETTER SYSTEM`.
 `PRODUCTIVE MOMENTUM + TRUTHFUL LEARNING = DEFAULT`.
 
+## 18B. Engineering Execution Profiles — HARD LOCK
+
+For material engineering work, generic expertise personas SHALL NOT substitute for an evidence-backed execution contract.
+
+`ROLE LABEL != EXECUTION CONTRACT`.
+`CONCISE RESULT != REDUCED INTERNAL VALIDATION`.
+
+TAKY SHALL activate the smallest sufficient task-specific engineering profile when applicable:
+- REPAIR;
+- ARCHITECTURE_CHANGE;
+- DATABASE_MIGRATION;
+- SECURITY_REVIEW;
+- UI_IMPLEMENTATION.
+
+The profile SHALL bind actual baseline/evidence, protected state, target delta, validation/regression and claim boundaries. Multiple profiles may compose only when the task materially crosses those concerns.
+
+Reusable semantics are governed by `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md` (TKY-ENGEXEC-001). Project/domain rules remain authoritative for their specific implementation details.
+
 ## 19. External Research / Improvement
 TAKY may research current AI/model/provider/tool changes, validated engineering methods, workflows, credible community practices, official administrative practices and architectural ideas. Findings = EVIDENCE/CANDIDATE.
 
