@@ -34,7 +34,7 @@ Select one or more profiles only when materially applicable:
 - `SECURITY_REVIEW` — attack-surface review, vulnerability remediation, abuse-path validation, security-sensitive change.
 - `UI_IMPLEMENTATION` — UI/UX implementation or redesign where visual/system consistency and interaction behavior matter.
 
-Multiple profiles MAY compose when the task actually crosses concerns. Profile composition SHALL remain bounded to materially applicable concerns.
+For deterministic enforcement, each material action record SHALL select one primary profile. Cross-concern work MAY compose profiles by sequencing profile-specific action records/slices under the same higher-level task. Composition SHALL remain bounded to materially applicable concerns.
 
 Do not select profiles merely to make a prompt sound expert. The selected profile SHALL change concrete execution behavior.
 
