@@ -225,6 +225,39 @@ Default:
 
 Incremental compilation SHALL NOT be assumed sufficient forever. Periodic reverse audit compares current TAKY against recoverable original sources and restores missing, wrongly held, wrongly rejected or falsely converged items.
 
+## 11.1 Evidence Recovery Pass before unresolved/missing classification — HARD LOCK
+
+When a C2S compile depends on a prior decision, prior approved artifact, historical character/spec, earlier correction, or other material state that the user says previously existed, a failed direct lookup SHALL NOT be treated as evidence that the item did not exist.
+
+`NO_EVIDENCE_FOUND != EVIDENCE_ABSENT`
+`SEARCH MISS != HISTORICAL ABSENCE`
+`CURRENT TERM MISS != LEGACY TERM MISS`
+`TEXT MISS != ATTACHMENT / IMAGE / ZIP / MANIFEST MISS`
+
+Before classifying such material as `OPEN_UNRECOVERED / NOT_FOUND / UNVERIFIED_SOURCE_COVERAGE`, C2S SHALL run an **Evidence Recovery Pass** at fit-for-purpose depth.
+
+Minimum recovery dimensions when materially available:
+1. **Term lineage search** — current term + legacy term + superseded/alternate names;
+2. **Entity/relationship search** — people/character/project/entity combinations and relation phrases, not exact keywords only;
+3. **Decision-marker search** — e.g. `확정 / LOCK / PASS / 기준 / 1번 / 수정 / 교체 / HOLD / SUPERSEDED / approved / final`;
+4. **Source-family expansion** — raw transcript/library, Handoff/Context Ledger, historical MASTER/REV, Drive/Notion/workspace, repository/history;
+5. **Attachment lineage** — images, screenshots, ZIPs, manifests, embedded artifacts and parent/sibling folders;
+6. **Version/neighbor trace** — preceding/following revisions, related folders and files when one material trace is found;
+7. **Reverse evidence search** — search from a known later claim/summary back toward the original evidence source.
+
+If the user explicitly asserts that a material artifact/decision existed and TAKY has materially accessible recovery paths, C2S SHALL prefer `RECOVERY_REQUIRED` over declaring absence until the Evidence Recovery Pass is exhausted to the applicable depth.
+
+A recovery pass result must distinguish:
+- `RECOVERED_DIRECT`;
+- `RECOVERED_CORROBORATED`;
+- `NOT_FOUND_IN_CHECKED_SOURCES`;
+- `UNVERIFIED_SOURCE_COVERAGE`;
+- `TRUE_UNAVAILABLE`.
+
+Only `TRUE_UNAVAILABLE` may justify a strong absence conclusion, and only when governed recovery criteria are satisfied.
+
+When later user-provided evidence proves that TAKY previously declared a recoverable item missing, create a recovery-failure/correction atom and propagate the correction to every affected canonical/project artifact. Do not patch only the latest document.
+
 ## 12. Growth, not archival accumulation
 
 Preservation alone is insufficient. Compiled knowledge SHALL support growth:
