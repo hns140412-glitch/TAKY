@@ -138,7 +138,7 @@
       "github": {
         "repo": "hns140412-glitch/Hide-Seek",
         "default_branch": "main",
-        "main_head": "49fa106ff20f7c497d7f18bd903be34479ec28c3",
+        "main_head": "b3c12e8585d6805a579b2ee89083aa91345ce967",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -166,8 +166,8 @@
           "deployed_commit": "49fa106ff20f7c497d7f18bd903be34479ec28c3",
           "deployed_branch": "main",
           "provenance": "GIT_COMMIT_PROVEN",
-          "relation_to_current_main": "EXACT_SHA_MATCH",
-          "residue": "Existing deploy record predates the current repository/product rename; refresh provenance on the next Git-driven deploy."
+          "relation_to_current_main": "DEPLOYED_STALE",
+          "residue": "Current Netlify deploy record predates the Hide & Seek identity purge and must not be treated as current-main deployment proof."
         }
       ],
       "legacy_drive_refs": [
@@ -209,7 +209,7 @@
       "github": {
         "repo": "hns140412-glitch/TAKY-MOBILE",
         "default_branch": "main",
-        "main_head": "588bfcdeb90b33b38e9dc53592a97228d6586274",
+        "main_head": "9bcb7d9660834818457704db2c0a5b16c9964c95",
         "state": "CATALOG_OR_SHARED_INFRA"
       },
       "drive": {
