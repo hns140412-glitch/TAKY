@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "c596bf7c846f0f3fe6e3cbadf1d3d204b2d23952",
+        "main_head": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -55,16 +55,6 @@
           "number": 5,
           "classification": "VALIDATION_ONLY",
           "note": "device validation preview only; DO NOT MERGE"
-        },
-        {
-          "number": 30,
-          "classification": "ACTIVE_WORK_REBASE_REQUIRED",
-          "note": "Adaptive Planner confirmation loop; old base"
-        },
-        {
-          "number": 32,
-          "classification": "ACTIVE_WORK_REBASE_REQUIRED",
-          "note": "persistent remote sync backend; old base"
         }
       ],
       "netlify": [
@@ -86,7 +76,68 @@
           "provenance": "PROVENANCE_UNKNOWN_UPLOAD",
           "relation_to_current_main": "NOT_VERIFIED"
         }
-      ]
+      ],
+      "learning_engine": {
+        "version": "LEARNING_MASTER_V0.3",
+        "main_merge_sha": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
+        "verified_pr_head": "8579c26993b3bb44d3597fa0b120c050ce4f053c",
+        "subject_master": "READY_SUBJECT_MASTER_V0.1",
+        "learning_reference": "READY_LEARNING_REFERENCE_V0.2",
+        "subject_coverage": [
+          "연산",
+          "한자",
+          "국어",
+          "사회",
+          "수학",
+          "과학",
+          "생각하는 피자",
+          "영어",
+          "피아노"
+        ],
+        "authority_chain": [
+          "ASSIGNMENT_FACT",
+          "TEACHER_INSTRUCTION",
+          "SUBJECT_MASTER",
+          "LEARNING_REFERENCE",
+          "LEARNING_MASTER",
+          "LEARNING_UNIT",
+          "PLANNER_V2",
+          "DATED_TODO"
+        ],
+        "reference_policy": {
+          "official_school_band": "2022_REVISED_ELEMENTARY_5_6",
+          "actual_textbook_unit_mapping": "REQUIRES_FACT_AND_BOOK_CONTEXT",
+          "unknown_subject": "REFERENCE_GAP",
+          "reference_may_override_assignment": false
+        },
+        "validation": {
+          "ready_integration_ci": {
+            "run_id": 35486105993,
+            "status": "PASS"
+          },
+          "worker_selftest": {
+            "run_id": 35486105978,
+            "status": "PASS"
+          },
+          "chromium_runtime": {
+            "run_id": 35486105920,
+            "status": "PASS",
+            "tests": "41/41"
+          },
+          "exact_main_post_merge": {
+            "status": "PASS",
+            "runtime_e2e": {
+              "run_id": 35486168383,
+              "status": "PASS"
+            },
+            "worker_selftest": {
+              "run_id": 35486168380,
+              "status": "PASS"
+            },
+            "integration_ci_note": "Ready Integration CI is PR-event validation; exact-main push revalidation is represented by Runtime E2E and Worker Self-Test."
+          }
+        }
+      }
     },
     "SNAP_POP": {
       "product_name": "Snap & Pop",
