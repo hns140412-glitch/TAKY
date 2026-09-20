@@ -139,6 +139,45 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
     if b(r,"claims_runtime_enforced") and not b(r,"live_runtime_auto_invocation_verified"):
         f.append("STATE_CLAIM_MISMATCH")
 
+
+    # Generic pre-action rule-application gate.
+    # A material action is not allowed to rely on "rule loaded" alone. The action must
+    # carry explicit rule bindings and all required preconditions must be satisfied.
+    if b(r,"material_action_planned"):
+        action_id=str(r.get("action_id","")).strip()
+        refs=sl(r,"action_rule_refs")
+        bindings=r.get("action_rule_bindings",[])
+        preconditions=r.get("action_preconditions",[])
+        if not action_id:
+            f.append("RULE_NOT_APPLIED")
+        if not refs:
+            f.append("KNOWN_CONTEXT_EVIDENCE_MISSING")
+        usable=set()
+        if isinstance(bindings,list):
+            for item in bindings:
+                if not isinstance(item,dict):
+                    continue
+                ref=str(item.get("rule_ref","")).strip()
+                effect=str(item.get("effect","")).strip().upper()
+                implication=str(item.get("implication","")).strip()
+                if ref and effect in {"ACTION","CONSTRAINT","ACCEPTANCE","HOLD","NOT_APPLICABLE"} and implication:
+                    usable.add(ref)
+        if len(usable) < len(set(refs)):
+            f.append("RULE_NOT_APPLIED")
+        if not isinstance(preconditions,list) or not preconditions:
+            f.append("RULE_NOT_APPLIED")
+        else:
+            for p in preconditions:
+                if not isinstance(p,dict):
+                    f.append("RULE_NOT_APPLIED")
+                    continue
+                if bool(p.get("required",True)) and not bool(p.get("satisfied",False)):
+                    f.append("RULE_NOT_APPLIED")
+        if b(r,"action_conflicts_with_rule"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"lower_impact_compliant_path_available") and b(r,"higher_cost_side_effect_selected") and not b(r,"explicit_override_approved"):
+            f.append("RULE_NOT_APPLIED")
+
     if (b(r,"delegated_continuation") and b(r,"authorized_next_action_available")
         and not b(r,"real_blocker_present") and not b(r,"human_confirmation_required_now")
         and b(r,"stopped_before_blocker")):
