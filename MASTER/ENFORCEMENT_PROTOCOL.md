@@ -128,6 +128,37 @@ When the user requests a concrete artifact/action/result and the system has auth
 
 If a concrete authorized result was required and the response stopped at explanation/plan, classify at least `SUBSTITUTE_RESULT`; add `OUTPUT_FORM_MISMATCH` when the requested form was not supplied, and `PREMATURE_STOP` when delegated continuation was also active.
 
+## 4.4 Pre-action rule-application gate — HARD LOCK
+
+This is the generic control for the recurring failure pattern:
+
+`RULE EXISTS → RULE LOADED → ACTION STILL VIOLATES RULE`.
+
+Before any material action, the execution record SHALL bind applicable rules to the exact action and SHALL prove required preconditions before the action is allowed.
+
+Minimum structured fields:
+- `material_action_planned`;
+- `action_id`;
+- `action_rule_refs`;
+- `action_rule_bindings[]` with `rule_ref / effect / implication`;
+- `action_preconditions[]` with `id / required / satisfied`;
+- `action_conflicts_with_rule`;
+- when relevant, `lower_impact_compliant_path_available`, `higher_cost_side_effect_selected`, and explicit override approval.
+
+Execution rule:
+- a material action with no rule binding is blocked;
+- a required precondition that is not satisfied blocks the action;
+- an action that conflicts with an applicable rule is blocked;
+- if a lower-impact compliant path exists, selecting a higher-cost side effect without explicit override is blocked.
+
+Violation classification: `RULE_NOT_APPLIED`.
+Repeated violation after the correction may additionally be `POST_CORRECTION_REOCCURRENCE`.
+
+This gate is domain-independent. It applies to implementation, validation, external validation, deployment, C2S, reflection, handoff, repository writes, and other material actions.
+
+Reference replay:
+`python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json`.
+
 ## 4.3 Notion link-review execution gate — HARD LOCK
 
 Semantic workflow ownership remains `OS/NOTION_OPS.md` (TKY-NOTION-001). This section only defines the auditable execution expression.
