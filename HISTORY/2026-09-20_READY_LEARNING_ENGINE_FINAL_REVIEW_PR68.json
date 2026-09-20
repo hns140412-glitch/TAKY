@@ -1,0 +1,140 @@
+{
+  "record_id": "2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68",
+  "status": "PR_CANDIDATE_REVIEW_VALIDATED_NOT_MAIN",
+  "authority_boundary": {
+    "canonical_project_owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+    "ready_repo": "hns140412-glitch/Ready-Set",
+    "pull_request": 68,
+    "branch": "taky/unit-mapping-table-full-v02",
+    "reviewed_head": "87922bf5e39f510303797ff95ceee481980c497c",
+    "merged": false,
+    "rule": "PR review evidence may update TAKY project rules and review history, but MUST NOT be promoted to Ready main current implementation before merge + post-merge verification."
+  },
+  "learning_engine": {
+    "authority_chain": [
+      "Assignment FACT / Teacher Instruction",
+      "Subject Master",
+      "Official Standard Registry",
+      "Standard Matcher",
+      "Unit Mapping Evidence",
+      "Learning Reference",
+      "Learning Master",
+      "Learning Unit",
+      "Planner"
+    ],
+    "versions": {
+      "subject_master": "0.2.1",
+      "official_standard_registry": "0.3.0",
+      "official_unit_map": "0.2.2",
+      "standard_matcher": "0.4.1",
+      "learning_reference": "0.3.0",
+      "learning_master": "0.5.1"
+    },
+    "standard_registry": {
+      "total_active_records": 177,
+      "coverage": {
+        "korean": 34,
+        "math": 45,
+        "social": 27,
+        "science": 51,
+        "english": 20
+      }
+    },
+    "unit_map": {
+      "mapping_records": 196,
+      "mapped_standards": 157,
+      "mapped_subjects": [
+        "국어",
+        "사회",
+        "수학",
+        "과학"
+      ],
+      "english_status": "NO_STANDARD_UNIT_CONNECTION_TABLE_IN_THIS_SOURCE"
+    }
+  },
+  "final_review_corrections": [
+    {
+      "id": "LE-FR-001",
+      "defect": "Learning Unit provenance could substitute concept_skill_target for missing fact.unit_name.",
+      "correction": "Unit mapping now receives only explicit fact.unit_name.",
+      "protected_semantic": "Generated interpretation cannot fabricate factual unit context."
+    },
+    {
+      "id": "LE-FR-002",
+      "defect": "Verified standard binding could clear unresolved unit-mapping state.",
+      "correction": "Unit-map unresolved state now propagates through Standard Matcher / Learning Reference / Learning Master.",
+      "protected_semantic": "STANDARD_BOUND != UNIT_MAPPING_RESOLVED."
+    },
+    {
+      "id": "LE-FR-003",
+      "defect": "Unit map could use workbook_name/title as unit_name fallback.",
+      "correction": "Only explicit unit_name is accepted for unit mapping.",
+      "protected_semantic": "WORKBOOK_OR_TITLE != FACTUAL_UNIT_NAME."
+    },
+    {
+      "id": "LE-FR-004",
+      "defect": "Grade + semester score alone could produce a false UNIT_MAPPING_CONTEXT_MATCHED.",
+      "correction": "Verified UNIT_TITLE_MATCH evidence is mandatory before mapping application.",
+      "protected_semantic": "GRADE_SEMESTER_MATCH != UNIT_MATCH."
+    },
+    {
+      "id": "LE-FR-005",
+      "defect": "Subject Master unit-context unresolved state remained permanently open even with factual grade/semester/unit context.",
+      "correction": "Only actual factual unit context may close the subject-master unit-context gap.",
+      "protected_semantic": "ACTUAL_FACT_CONTEXT closes the gap; inferred/generated context does not."
+    },
+    {
+      "id": "LE-FR-006",
+      "defect": "Standard Matcher metadata still declared standard_codes_bound:false despite conditional verified binding.",
+      "correction": "Metadata aligned to CONDITIONAL_VERIFIED_RECORD_ONLY.",
+      "protected_semantic": "Metadata must reflect actual authority semantics."
+    }
+  ],
+  "hard_locks": [
+    "Assignment FACT / teacher instruction remain execution truth.",
+    "Official standard code requires verified official record plus sufficiently specific evidence.",
+    "Unit Mapping Evidence cannot create/overwrite official standard code.",
+    "Unit mapping requires grade + semester + explicit unit_name.",
+    "workbook_name/title/concept target cannot substitute for unit_name.",
+    "Verified unit-title evidence is required for UNIT_MAPPING_CONTEXT_MATCHED.",
+    "Unit-map unresolved state propagates and is not erased by standard binding.",
+    "Learning Master does not create DATED TODO.",
+    "Planner alone creates DATED TODO.",
+    "English unit-map gap remains explicit unless a verified source is added."
+  ],
+  "validation": {
+    "integration_ci": {
+      "run_id": 35502541016,
+      "run_number": 105,
+      "status": "PASS"
+    },
+    "semantic_contracts": {
+      "job_id": 106056767688,
+      "status": "PASS"
+    },
+    "learning_master_contract": {
+      "job_id": 106056767804,
+      "status": "PASS"
+    },
+    "worker_self_test": {
+      "run_id": 35502541039,
+      "run_number": 290,
+      "status": "PASS"
+    },
+    "whole_app_runtime_e2e": {
+      "run_id": 35502541046,
+      "run_number": 186,
+      "status": "FAIL",
+      "scope_note": "Whole-app Chromium runtime failure; not converted to learning-engine runtime PASS."
+    }
+  },
+  "claim_ladder": {
+    "coded": true,
+    "ci_verified": true,
+    "runtime_verified": false,
+    "device_verified": false,
+    "production_verified": false,
+    "ready_main_current": false
+  },
+  "c2s_boundary": "C2S/reflection of the reviewed learning-engine rules is allowed independently from downstream merge/runtime/device state. Reflection complete does not imply Ready main implementation."
+}
