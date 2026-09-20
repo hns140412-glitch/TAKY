@@ -1,5 +1,5 @@
 {
-  "fixture_version": "2026-09-20.2",
+  "fixture_version": "2026-09-20.3",
   "scope": "Generic PRE-ACTION RULE APPLICATION GATE. Prevents known/loaded standards from being ignored at action time across implementation, validation, deployment, C2S, external verification and other material actions. Includes external-resource/hosting call budget and no-duplicate-call enforcement.",
   "cases": [
     {
@@ -224,6 +224,65 @@
         "external_status_poll": true,
         "no_new_trigger_since_last_external_check": false,
         "material_external_state_change_expected": true
+      }
+    },
+    {
+      "id": "C2S-RECOVERY-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RECOVERY_FAILED",
+        "FALSE_MISSING_DECLARATION"
+      ],
+      "record": {
+        "c2s_historical_recovery_required": true,
+        "prior_existence_asserted_by_user": true,
+        "evidence_recovery_pass_performed": false,
+        "evidence_recovery_query_modes": [
+          "current_terms"
+        ],
+        "evidence_recovery_source_families": [
+          "current_document"
+        ],
+        "material_legacy_terms_available": true,
+        "material_decision_markers_applicable": true,
+        "material_attachment_lineage_available": true,
+        "material_reverse_trace_available": true,
+        "material_recovery_families_available": 4,
+        "evidence_recovery_result": "NOT_FOUND_IN_CHECKED_SOURCES",
+        "claims_historical_absence": true
+      }
+    },
+    {
+      "id": "C2S-RECOVERY-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "c2s_historical_recovery_required": true,
+        "prior_existence_asserted_by_user": true,
+        "evidence_recovery_pass_performed": true,
+        "evidence_recovery_query_modes": [
+          "current_terms",
+          "legacy_terms",
+          "semantic_entity_relations",
+          "decision_markers",
+          "attachment_lineage",
+          "reverse_trace"
+        ],
+        "evidence_recovery_source_families": [
+          "raw_transcript_library",
+          "handoff_context",
+          "drive_workspace",
+          "repository_history"
+        ],
+        "material_legacy_terms_available": true,
+        "material_decision_markers_applicable": true,
+        "material_attachment_lineage_available": true,
+        "material_reverse_trace_available": true,
+        "material_recovery_families_available": 4,
+        "evidence_recovery_result": "RECOVERED_DIRECT",
+        "claims_historical_absence": false
       }
     }
   ]
