@@ -269,6 +269,81 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if b(r,"notion_user_used_as_smoke_tester"):
             f += ["USER_AS_QA","USER_FORCED_RECOVERY"]
 
+    # Engineering execution profiles: reusable task-specific contracts.
+    if b(r,"engineering_execution_profile_required"):
+        profile=str(r.get("engineering_profile","")).strip().upper()
+        allowed={"REPAIR","ARCHITECTURE_CHANGE","DATABASE_MIGRATION","SECURITY_REVIEW","UI_IMPLEMENTATION"}
+        ec=r.get("engineering_contract")
+        if profile not in allowed or not isinstance(ec,dict):
+            f.append("RULE_NOT_APPLIED")
+        else:
+            common_lists=["baseline_evidence_refs","protected_state","acceptance_conditions","validation_steps","regression_scope"]
+            for key in common_lists:
+                val=ec.get(key)
+                if not isinstance(val,list) or not any(str(x).strip() for x in val):
+                    f.append("RULE_NOT_APPLIED")
+            if not str(ec.get("target_delta","")).strip():
+                f.append("RULE_NOT_APPLIED")
+            if not str(ec.get("report_mode","")).strip():
+                f.append("RULE_NOT_APPLIED")
+            if "remaining_unknowns" not in ec or not isinstance(ec.get("remaining_unknowns"), list):
+                f.append("RULE_NOT_APPLIED")
+            if b(ec,"concise_user_output") and b(ec,"internal_validation_reduced_for_concise_output"):
+                f.append("RULE_NOT_APPLIED")
+            if b(ec,"material_failed_or_unknown_gate_hidden"):
+                f.append("STATE_CLAIM_MISMATCH")
+
+            if profile=="REPAIR":
+                if not has_refs(ec,"failure_evidence_refs"):
+                    f.append("RULE_NOT_APPLIED")
+                for key in ["root_cause","minimal_delta_defined","targeted_retest_defined","regression_check_defined"]:
+                    val=ec.get(key)
+                    if (key=="root_cause" and not str(val or "").strip()) or (key!="root_cause" and val is not True):
+                        f.append("RULE_NOT_APPLIED")
+                if b(ec,"same_failed_approach_repeated_without_new_evidence"):
+                    f.append("RULE_NOT_APPLIED")
+
+            elif profile=="ARCHITECTURE_CHANGE":
+                if not has_refs(ec,"existing_pattern_refs"):
+                    f.append("RULE_NOT_APPLIED")
+                for key in ["owner_boundary_checked","interface_contract_checked","minimum_sufficient_complexity","integration_check_defined"]:
+                    if ec.get(key) is not True:
+                        f.append("RULE_NOT_APPLIED")
+                if b(ec,"forced_fragmentation_without_benefit"):
+                    f.append("RULE_NOT_APPLIED")
+
+            elif profile=="DATABASE_MIGRATION":
+                for key in ["migration_artifact_defined","backward_compatibility_checked","referential_action_justified",
+                            "rls_or_access_control_checked","index_lock_impact_checked","rollback_or_forward_fix_defined",
+                            "migration_test_defined","post_migration_verify_defined"]:
+                    if ec.get(key) is not True:
+                        f.append("RULE_NOT_APPLIED")
+                if b(ec,"unconditional_cascade_without_lifecycle_justification"):
+                    f.append("RULE_NOT_APPLIED")
+
+            elif profile=="SECURITY_REVIEW":
+                for key in ["attack_surface_defined","severity_prioritized","security_regression_defined"]:
+                    if ec.get(key) is not True:
+                        f.append("RULE_NOT_APPLIED")
+                if not has_refs(ec,"applicable_controls_refs"):
+                    f.append("RULE_NOT_APPLIED")
+                findings=ec.get("evidence_based_findings")
+                if not isinstance(findings,list):
+                    f.append("RULE_NOT_APPLIED")
+                if b(ec,"arbitrary_finding_quota"):
+                    f.append("RULE_NOT_APPLIED")
+                if b(ec,"claims_security_complete") and not b(ec,"complete_security_scope_evidenced"):
+                    f.append("STATE_CLAIM_MISMATCH")
+
+            elif profile=="UI_IMPLEMENTATION":
+                for key in ["project_reference_checked","responsive_states_defined","accessibility_check_defined"]:
+                    if ec.get(key) is not True:
+                        f.append("RULE_NOT_APPLIED")
+                if not str(ec.get("design_contract_ref","")).strip():
+                    f.append("RULE_NOT_APPLIED")
+                if b(ec,"external_style_as_project_authority"):
+                    f.append("AUTHORITY_BOUNDARY_VIOLATION")
+
     # Outcome-first gate: validation may not displace available result improvement.
     if b(r,"outcome_optimization_required"):
         blocked_by_overvalidation = (

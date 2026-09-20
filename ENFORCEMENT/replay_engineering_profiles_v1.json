@@ -1,0 +1,441 @@
+{
+  "fixture_version": "2026-09-21.2",
+  "scope": "Engineering execution profile replay: repair, architecture, database migration, security review, UI implementation, concise-report validation.",
+  "cases": [
+    {
+      "id": "ENG-REPAIR-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "REPAIR",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "error.log",
+            "src/app.ts"
+          ],
+          "protected_state": [
+            "existing API contract"
+          ],
+          "target_delta": "fix failing parser",
+          "acceptance_conditions": [
+            "same input succeeds"
+          ],
+          "validation_steps": [
+            "targeted test"
+          ],
+          "regression_scope": [
+            "parser callers"
+          ],
+          "report_mode": "concise",
+          "concise_user_output": true,
+          "internal_validation_reduced_for_concise_output": false,
+          "failure_evidence_refs": [
+            "error.log"
+          ],
+          "root_cause": "invalid branch selection",
+          "minimal_delta_defined": true,
+          "targeted_retest_defined": true,
+          "regression_check_defined": true,
+          "same_failed_approach_repeated_without_new_evidence": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-REPAIR-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "REPAIR",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "error.log",
+            "src/app.ts"
+          ],
+          "protected_state": [
+            "existing API contract"
+          ],
+          "target_delta": "fix failing parser branch only",
+          "acceptance_conditions": [
+            "same input succeeds"
+          ],
+          "validation_steps": [
+            "targeted test"
+          ],
+          "regression_scope": [
+            "parser callers"
+          ],
+          "report_mode": "concise",
+          "concise_user_output": true,
+          "internal_validation_reduced_for_concise_output": false,
+          "failure_evidence_refs": [
+            "error.log"
+          ],
+          "root_cause": "parser selects legacy branch for v2 payload",
+          "minimal_delta_defined": true,
+          "targeted_retest_defined": true,
+          "regression_check_defined": true,
+          "same_failed_approach_repeated_without_new_evidence": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-ARCH-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "ARCHITECTURE_CHANGE",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "architecture.md"
+          ],
+          "protected_state": [
+            "public interface"
+          ],
+          "target_delta": "extract responsibility",
+          "acceptance_conditions": [
+            "behavior preserved"
+          ],
+          "validation_steps": [
+            "module tests"
+          ],
+          "regression_scope": [
+            "integration"
+          ],
+          "report_mode": "normal",
+          "existing_pattern_refs": [
+            "architecture.md"
+          ],
+          "owner_boundary_checked": true,
+          "interface_contract_checked": true,
+          "minimum_sufficient_complexity": true,
+          "integration_check_defined": true,
+          "forced_fragmentation_without_benefit": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-ARCH-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "ARCHITECTURE_CHANGE",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "architecture.md"
+          ],
+          "protected_state": [
+            "public interface"
+          ],
+          "target_delta": "extract one cohesive owner module",
+          "acceptance_conditions": [
+            "behavior preserved"
+          ],
+          "validation_steps": [
+            "module tests"
+          ],
+          "regression_scope": [
+            "integration"
+          ],
+          "report_mode": "normal",
+          "existing_pattern_refs": [
+            "architecture.md"
+          ],
+          "owner_boundary_checked": true,
+          "interface_contract_checked": true,
+          "minimum_sufficient_complexity": true,
+          "integration_check_defined": true,
+          "forced_fragmentation_without_benefit": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-DB-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "DATABASE_MIGRATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "schema.sql"
+          ],
+          "protected_state": [
+            "history rows"
+          ],
+          "target_delta": "add child relation",
+          "acceptance_conditions": [
+            "old app reads continue"
+          ],
+          "validation_steps": [
+            "migration test"
+          ],
+          "regression_scope": [
+            "read/write paths"
+          ],
+          "report_mode": "normal",
+          "migration_artifact_defined": true,
+          "backward_compatibility_checked": true,
+          "referential_action_justified": false,
+          "rls_or_access_control_checked": true,
+          "index_lock_impact_checked": true,
+          "rollback_or_forward_fix_defined": true,
+          "migration_test_defined": true,
+          "post_migration_verify_defined": true,
+          "unconditional_cascade_without_lifecycle_justification": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-DB-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "DATABASE_MIGRATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "schema.sql"
+          ],
+          "protected_state": [
+            "history rows"
+          ],
+          "target_delta": "add child relation with RESTRICT semantics",
+          "acceptance_conditions": [
+            "old app reads continue"
+          ],
+          "validation_steps": [
+            "migration test",
+            "allow/deny access test"
+          ],
+          "regression_scope": [
+            "read/write paths"
+          ],
+          "report_mode": "normal",
+          "migration_artifact_defined": true,
+          "backward_compatibility_checked": true,
+          "referential_action_justified": true,
+          "rls_or_access_control_checked": true,
+          "index_lock_impact_checked": true,
+          "rollback_or_forward_fix_defined": true,
+          "migration_test_defined": true,
+          "post_migration_verify_defined": true,
+          "unconditional_cascade_without_lifecycle_justification": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-SEC-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "SECURITY_REVIEW",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "api.ts"
+          ],
+          "protected_state": [
+            "tenant isolation"
+          ],
+          "target_delta": "review auth boundary",
+          "acceptance_conditions": [
+            "cross-tenant access denied"
+          ],
+          "validation_steps": [
+            "abuse test"
+          ],
+          "regression_scope": [
+            "auth paths"
+          ],
+          "report_mode": "normal",
+          "attack_surface_defined": true,
+          "applicable_controls_refs": [
+            "OWASP-ASVS"
+          ],
+          "evidence_based_findings": [],
+          "severity_prioritized": true,
+          "security_regression_defined": true,
+          "arbitrary_finding_quota": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-SEC-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "SECURITY_REVIEW",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "api.ts"
+          ],
+          "protected_state": [
+            "tenant isolation"
+          ],
+          "target_delta": "review auth boundary",
+          "acceptance_conditions": [
+            "cross-tenant access denied"
+          ],
+          "validation_steps": [
+            "abuse test"
+          ],
+          "regression_scope": [
+            "auth paths"
+          ],
+          "report_mode": "normal",
+          "attack_surface_defined": true,
+          "applicable_controls_refs": [
+            "OWASP-ASVS"
+          ],
+          "evidence_based_findings": [],
+          "severity_prioritized": true,
+          "security_regression_defined": true,
+          "arbitrary_finding_quota": false,
+          "claims_security_complete": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-UI-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "AUTHORITY_BOUNDARY_VIOLATION"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "UI_IMPLEMENTATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "golden-ui.png"
+          ],
+          "protected_state": [
+            "exploration identity"
+          ],
+          "target_delta": "implement settings screen",
+          "acceptance_conditions": [
+            "matches project reference"
+          ],
+          "validation_steps": [
+            "render compare"
+          ],
+          "regression_scope": [
+            "navigation"
+          ],
+          "report_mode": "normal",
+          "project_reference_checked": true,
+          "design_contract_ref": "PROJECT/UI_MASTER.md",
+          "responsive_states_defined": true,
+          "accessibility_check_defined": true,
+          "external_style_as_project_authority": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-UI-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "UI_IMPLEMENTATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "golden-ui.png"
+          ],
+          "protected_state": [
+            "exploration identity"
+          ],
+          "target_delta": "implement settings screen",
+          "acceptance_conditions": [
+            "matches project reference"
+          ],
+          "validation_steps": [
+            "render compare"
+          ],
+          "regression_scope": [
+            "navigation"
+          ],
+          "report_mode": "normal",
+          "project_reference_checked": true,
+          "design_contract_ref": "PROJECT/UI_MASTER.md",
+          "responsive_states_defined": true,
+          "accessibility_check_defined": true,
+          "external_style_as_project_authority": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-CONCISE-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "REPAIR",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "error.log"
+          ],
+          "protected_state": [
+            "existing behavior"
+          ],
+          "target_delta": "fix one defect",
+          "acceptance_conditions": [
+            "failure gone"
+          ],
+          "validation_steps": [
+            "test"
+          ],
+          "regression_scope": [
+            "affected path"
+          ],
+          "report_mode": "concise",
+          "concise_user_output": true,
+          "internal_validation_reduced_for_concise_output": true,
+          "failure_evidence_refs": [
+            "error.log"
+          ],
+          "root_cause": "known cause",
+          "minimal_delta_defined": true,
+          "targeted_retest_defined": true,
+          "regression_check_defined": true,
+          "remaining_unknowns": []
+        }
+      }
+    }
+  ]
+}
