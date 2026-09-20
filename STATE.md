@@ -116,6 +116,16 @@ Claim boundary:
 - production verification: NOT_VERIFIED; Netlify current deploy still points to pre-merge Ready main evidence and must be verified after deployment refresh.
 - hard boundary: `RUNTIME_VERIFIED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`.
 
+## Ready renewal candidate — 2026-09-20
+- Ready main remains `6142cfeb5599a625d61ffa1faca866b2b6817cc8` and remains current implementation truth.
+- renewal branch: `taky/ready-renewal-v01`
+- Draft PR: #73
+- candidate scope: refresh exact-main validation/version truth; rebuild decision ledger; align runtime/product authority; add PRE-ACTION/branch-first workflow; define P0→P7 renewal implementation order.
+- TAKY Ready owner updated: `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md §22 / §25`
+- promotion state: CANDIDATE / NOT_MERGED
+- hard boundary: `RENEWAL_CANDIDATE != READY_MAIN_CURRENT`.
+- next implementation after renewal promotion: P1 Planner reality engine, then P2 Child FACT confirmation, P3 cross-app continuity, P4 UI/product-language consolidation, P5 legacy cleanup, P6 device, P7 production.
+
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
 Conversation text alone is not durable state.
