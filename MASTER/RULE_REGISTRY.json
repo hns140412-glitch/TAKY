@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-20.1",
+  "registry_version": "2026-09-21.1",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -81,6 +81,11 @@
       "rule_id": "TKY-DRIVEC2S-001",
       "owner": "OS/DRIVE_C2S_DIRECT.md",
       "scope": "direct Google Drive durable intake, /저장반영 routing, direct C2S activation and NotebookLM-free persistence"
+    },
+    {
+      "rule_id": "TKY-ENGEXEC-001",
+      "owner": "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md",
+      "scope": "task-specific engineering execution profiles for repair, architecture change, database migration, security review and UI implementation"
     }
   ]
 }
