@@ -137,7 +137,8 @@
             },
             "runtime_e2e": {
               "run_id": 35490465673,
-              "status": "PENDING"
+              "status": "PASS",
+              "verified_deploy_source_packaging": "PASS"
             }
           }
         }
