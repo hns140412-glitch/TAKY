@@ -286,6 +286,30 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
             and not b(r,"high_risk_gate_pending")):
             f.append("PREMATURE_STOP")
 
+    # C2S targeted historical Evidence Recovery Pass.
+    # Prevents exact-keyword/source-surface misses from being upgraded to historical absence.
+    if b(r,"c2s_historical_recovery_required"):
+        if b(r,"prior_existence_asserted_by_user") and not b(r,"evidence_recovery_pass_performed"):
+            f.append("RECOVERY_FAILED")
+        modes=set(sl(r,"evidence_recovery_query_modes"))
+        families=set(sl(r,"evidence_recovery_source_families"))
+        if b(r,"material_legacy_terms_available") and "legacy_terms" not in modes:
+            f.append("RECOVERY_FAILED")
+        if b(r,"material_decision_markers_applicable") and "decision_markers" not in modes:
+            f.append("RECOVERY_FAILED")
+        if b(r,"material_attachment_lineage_available") and "attachment_lineage" not in modes:
+            f.append("RECOVERY_FAILED")
+        if b(r,"material_reverse_trace_available") and "reverse_trace" not in modes:
+            f.append("RECOVERY_FAILED")
+        required_families=min(3,i(r,"material_recovery_families_available",len(families)))
+        if required_families and len(families) < required_families:
+            f.append("RECOVERY_FAILED")
+        result=str(r.get("evidence_recovery_result","")).strip().upper()
+        if b(r,"claims_historical_absence") and result not in {"TRUE_UNAVAILABLE"}:
+            f += ["RECOVERY_FAILED","FALSE_MISSING_DECLARATION"]
+        if b(r,"user_provided_evidence_after_missing_claim") and b(r,"source_recoverable_by_taky",True):
+            f += ["USER_FORCED_RECOVERY","USER_AS_QA","RECOVERY_FAILED"]
+
     if b(r,"negative_existence_claim"):
         paths=i(r,"recovery_paths_checked")
         if paths < 2 and b(r,"material_alternate_path_available"): f.append("RECOVERY_FAILED")
