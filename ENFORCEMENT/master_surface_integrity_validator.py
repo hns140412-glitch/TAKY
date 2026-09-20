@@ -44,7 +44,7 @@ if not m:
     fail("ACTIVE_RULE_PROFILE missing valid SOURCE_CANONICAL_HEAD")
 source=m.group(1)
 try:
-    subprocess.run(["git","cat-file","-e",f"{source}^commit"],cwd=ROOT,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+    subprocess.run(["git","cat-file","-e",f"{source}^{{commit}}"],cwd=ROOT,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     subprocess.run(["git","merge-base","--is-ancestor",source,"HEAD"],cwd=ROOT,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 except subprocess.CalledProcessError:
     fail("ACTIVE_RULE_PROFILE source canonical head is not a recoverable ancestor of HEAD")
