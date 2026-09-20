@@ -286,6 +286,8 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
                 f.append("RULE_NOT_APPLIED")
             if not str(ec.get("report_mode","")).strip():
                 f.append("RULE_NOT_APPLIED")
+            if "remaining_unknowns" not in ec or not isinstance(ec.get("remaining_unknowns"), list):
+                f.append("RULE_NOT_APPLIED")
             if b(ec,"concise_user_output") and b(ec,"internal_validation_reduced_for_concise_output"):
                 f.append("RULE_NOT_APPLIED")
             if b(ec,"material_failed_or_unknown_gate_hidden"):
