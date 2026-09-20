@@ -178,6 +178,27 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if b(r,"lower_impact_compliant_path_available") and b(r,"higher_cost_side_effect_selected") and not b(r,"explicit_override_approved"):
             f.append("RULE_NOT_APPLIED")
 
+    # External-resource call budget / duplicate-call gate.
+    # Prevents hosted validation/deploy/status APIs from being used as a substitute for
+    # branch/local/CI closure and blocks repeated external calls without new evidence.
+    if b(r,"external_resource_action"):
+        budget=max(1,i(r,"external_call_budget",1))
+        used=i(r,"external_call_count_for_same_goal")
+        if used > budget and not b(r,"explicit_override_approved"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"same_external_call_repeated_without_new_evidence"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"deployment_attempted_before_candidate_frozen"):
+            f.append("RULE_NOT_APPLIED")
+        if (b(r,"lower_cost_local_validation_available")
+            and b(r,"external_call_selected_before_local_closure")
+            and not b(r,"explicit_override_approved")):
+            f.append("RULE_NOT_APPLIED")
+        if (b(r,"external_status_poll")
+            and b(r,"no_new_trigger_since_last_external_check")
+            and not b(r,"material_external_state_change_expected")):
+            f.append("RULE_NOT_APPLIED")
+
     if (b(r,"delegated_continuation") and b(r,"authorized_next_action_available")
         and not b(r,"real_blocker_present") and not b(r,"human_confirmation_required_now")
         and b(r,"stopped_before_blocker")):

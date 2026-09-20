@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-20.1",
-  "scope": "Generic PRE-ACTION RULE APPLICATION GATE. Prevents known/loaded standards from being ignored at action time across implementation, validation, deployment, C2S, external verification and other material actions.",
+  "fixture_version": "2026-09-20.2",
+  "scope": "Generic PRE-ACTION RULE APPLICATION GATE. Prevents known/loaded standards from being ignored at action time across implementation, validation, deployment, C2S, external verification and other material actions. Includes external-resource/hosting call budget and no-duplicate-call enforcement.",
   "cases": [
     {
       "id": "PREACTION-01",
@@ -152,6 +152,78 @@
           }
         ],
         "action_conflicts_with_rule": true
+      }
+    },
+    {
+      "id": "PREACTION-04",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "external_resource_action": true,
+        "external_resource_name": "Netlify",
+        "external_call_budget": 1,
+        "external_call_count_for_same_goal": 4,
+        "candidate_sha_frozen": false,
+        "same_external_call_repeated_without_new_evidence": true,
+        "deployment_attempted_before_candidate_frozen": true,
+        "lower_cost_local_validation_available": true,
+        "external_call_selected_before_local_closure": true,
+        "explicit_override_approved": false
+      }
+    },
+    {
+      "id": "PREACTION-04",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "external_resource_action": true,
+        "external_resource_name": "Netlify",
+        "external_call_budget": 1,
+        "external_call_count_for_same_goal": 1,
+        "candidate_sha_frozen": true,
+        "same_external_call_repeated_without_new_evidence": false,
+        "deployment_attempted_before_candidate_frozen": false,
+        "lower_cost_local_validation_available": false,
+        "external_call_selected_before_local_closure": false,
+        "explicit_override_approved": false
+      }
+    },
+    {
+      "id": "PREACTION-05",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "external_resource_action": true,
+        "external_resource_name": "Netlify",
+        "external_call_budget": 1,
+        "external_call_count_for_same_goal": 1,
+        "candidate_sha_frozen": true,
+        "external_status_poll": true,
+        "no_new_trigger_since_last_external_check": true,
+        "material_external_state_change_expected": false
+      }
+    },
+    {
+      "id": "PREACTION-05",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "external_resource_action": true,
+        "external_resource_name": "Netlify",
+        "external_call_budget": 1,
+        "external_call_count_for_same_goal": 1,
+        "candidate_sha_frozen": true,
+        "external_status_poll": true,
+        "no_new_trigger_since_last_external_check": false,
+        "material_external_state_change_expected": true
       }
     }
   ]
