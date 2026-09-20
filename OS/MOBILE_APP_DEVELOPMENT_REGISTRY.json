@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "3da884901eed0005f1437d1a0546c1f86297936b",
+        "main_head": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -140,6 +140,36 @@
               "status": "PASS",
               "verified_deploy_source_packaging": "PASS"
             }
+          },
+          "coverage_v02": {
+            "pr_number": 56,
+            "pr_head": "94133339017d58c146a32e622aef9ff471128dd4",
+            "semantic_contract": {
+              "run_id": 35498337112,
+              "status": "PASS"
+            },
+            "pr_runtime": {
+              "run_id": 35498337278,
+              "status": "FAIL_BASELINE_EQUIVALENT",
+              "failed": 12,
+              "passed": 29,
+              "current_main_baseline_run_id": 35497871056,
+              "current_main_baseline_failed": 12,
+              "current_main_baseline_passed": 29,
+              "new_runtime_regression": 0
+            },
+            "merge_sha": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
+            "exact_main_runtime": {
+              "run_id": 35498488055,
+              "status": "FAIL_BASELINE_EQUIVALENT",
+              "failed": 12,
+              "passed": 29,
+              "baseline_run_id": 35497871056,
+              "baseline_failed": 12,
+              "baseline_passed": 29,
+              "normalized_failed_set_identical": true,
+              "new_runtime_regression": 0
+            }
           }
         },
         "curriculum_authority": {
@@ -149,23 +179,41 @@
           "rule": "Current elementary/general framework authority and subject-specific achievement-standard lineage are tracked separately."
         },
         "official_standard_registry": {
-          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.1",
-          "coverage_status": "PARTIAL_VERIFIED",
-          "active_subjects": [
-            "국어",
-            "수학",
-            "사회",
-            "과학",
-            "영어"
-          ],
+          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.2",
+          "dataset_status": "MIXED_VERIFIED",
+          "total_active_verified_records": 176,
+          "coverage": {
+            "국어": {
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 34,
+              "expected_total": 34
+            },
+            "수학": {
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 45,
+              "expected_total": 45
+            },
+            "사회": {
+              "status": "PARTIAL_VERIFIED_SOURCE_CODE_AMBIGUITY",
+              "verified_record_count": 26,
+              "expected_total": 27,
+              "gap": "SOURCE_TABLE_SECOND_6사09_ROW_DUPLICATES_CODE_6사09-01"
+            },
+            "과학": {
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 51,
+              "expected_total": 51
+            },
+            "영어": {
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 20,
+              "expected_total": 20
+            }
+          },
           "text_policy": "PARAPHRASED_INDEX_WITH_OFFICIAL_SOURCE_POINTER",
           "no_guessing": true,
           "binding_rule": "Only unique sufficiently strong matches against verified records may populate official_standard_code.",
-          "unverified_record_behavior": "NULL_UNBOUND",
-          "source_authority": [
-            "NCIC",
-            "GYEONGGI_PROVINCIAL_OFFICE_OF_EDUCATION"
-          ]
+          "unverified_record_behavior": "NULL_UNBOUND"
         }
       }
     },
