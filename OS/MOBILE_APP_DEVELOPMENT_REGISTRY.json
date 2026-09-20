@@ -27,7 +27,7 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "f2eca36a8ce3a2a8eba6349feb29e0093da54d84",
+        "main_head": "1b6880fb08f29c2ad25229fc65c53f9a77b8f20b",
         "state": "SOURCE_CURRENT"
       },
       "drive": {
@@ -79,7 +79,7 @@
       ],
       "learning_engine": {
         "version": "LEARNING_MASTER_V0.4",
-        "main_merge_sha": "3da884901eed0005f1437d1a0546c1f86297936b",
+        "main_merge_sha": "1b6880fb08f29c2ad25229fc65c53f9a77b8f20b",
         "verified_pr_head": "60487cc9d6638262e9f3e3399f9b25a025df9631",
         "subject_master": "READY_SUBJECT_MASTER_V0.2",
         "learning_reference": "READY_LEARNING_REFERENCE_V0.3",
@@ -170,6 +170,39 @@
               "normalized_failed_set_identical": true,
               "new_runtime_regression": 0
             }
+          },
+          "unit_map_v01": {
+            "pr_number": 62,
+            "pr_head": "ff07944ca3de60de398f8260cf05e2b778fa6266",
+            "integration_ci": {
+              "run_id": 35498949077,
+              "status": "PASS"
+            },
+            "worker_selftest": {
+              "run_id": 35498949104,
+              "status": "PASS"
+            },
+            "pr_runtime": {
+              "run_id": 35498949113,
+              "status": "FAIL_BASELINE_EQUIVALENT",
+              "failed": 12,
+              "passed": 29,
+              "baseline_run_id": 35498488055,
+              "baseline_failed": 12,
+              "baseline_passed": 29,
+              "normalized_failed_set_identical": true,
+              "new_runtime_regression": 0
+            },
+            "exact_main": {
+              "worker_selftest": {
+                "run_id": 35499071379,
+                "status": "PASS"
+              },
+              "runtime_e2e": {
+                "run_id": 35499071393,
+                "status": "PENDING"
+              }
+            }
           }
         },
         "curriculum_authority": {
@@ -179,9 +212,9 @@
           "rule": "Current elementary/general framework authority and subject-specific achievement-standard lineage are tracked separately."
         },
         "official_standard_registry": {
-          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.2",
-          "dataset_status": "MIXED_VERIFIED",
-          "total_active_verified_records": 176,
+          "version": "READY_OFFICIAL_STANDARD_REGISTRY_V0.3",
+          "dataset_status": "VERIFIED_FULL_CORE_SUBJECT_COVERAGE",
+          "total_active_verified_records": 177,
           "coverage": {
             "국어": {
               "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
@@ -194,10 +227,9 @@
               "expected_total": 45
             },
             "사회": {
-              "status": "PARTIAL_VERIFIED_SOURCE_CODE_AMBIGUITY",
-              "verified_record_count": 26,
-              "expected_total": 27,
-              "gap": "SOURCE_TABLE_SECOND_6사09_ROW_DUPLICATES_CODE_6사09-01"
+              "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
+              "verified_record_count": 27,
+              "expected_total": 27
             },
             "과학": {
               "status": "VERIFIED_FULL_SUBJECT_COVERAGE",
@@ -210,10 +242,30 @@
               "expected_total": 20
             }
           },
-          "text_policy": "PARAPHRASED_INDEX_WITH_OFFICIAL_SOURCE_POINTER",
-          "no_guessing": true,
-          "binding_rule": "Only unique sufficiently strong matches against verified records may populate official_standard_code.",
-          "unverified_record_behavior": "NULL_UNBOUND"
+          "no_guessing": true
+        },
+        "unit_mapping_evidence": {
+          "version": "READY_OFFICIAL_UNIT_MAP_V0.1",
+          "source_type": "OFFICIAL_EDUCATION_OFFICE_EXAMPLE_MAPPING",
+          "authority_separation": "MAPPING_EVIDENCE_NOT_CURRICULUM_AUTHORITY",
+          "context_required": [
+            "grade",
+            "semester",
+            "unit_context"
+          ],
+          "apply_state": "UNIT_MAPPING_CONTEXT_MATCHED",
+          "insufficient_context_state": "UNIT_MAPPING_EVIDENCE_AVAILABLE_NOT_APPLIED",
+          "universal_publisher_textbook_truth": false,
+          "initial_verified_examples": [
+            "6국01-04",
+            "6사09-01",
+            "6사09-02",
+            "6사10-01",
+            "6수01-05",
+            "6과01-01",
+            "6과01-02",
+            "6과01-03"
+          ]
         }
       }
     },
