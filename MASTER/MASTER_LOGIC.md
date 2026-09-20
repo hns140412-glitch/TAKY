@@ -406,7 +406,7 @@ TAKY SHALL activate the smallest sufficient task-specific engineering profile wh
 - SECURITY_REVIEW;
 - UI_IMPLEMENTATION.
 
-The profile SHALL bind actual baseline/evidence, protected state, target delta, validation/regression and claim boundaries. Multiple profiles may compose only when the task materially crosses those concerns.
+The profile SHALL bind actual baseline/evidence, protected state, target delta, validation/regression and claim boundaries. Each material action record selects one primary profile; cross-concern work sequences profile-specific records/slices under the same task.
 
 Reusable semantics are governed by `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md` (TKY-ENGEXEC-001). Project/domain rules remain authoritative for their specific implementation details.
 
