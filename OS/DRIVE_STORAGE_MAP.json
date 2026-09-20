@@ -31,6 +31,22 @@
         "READY_SET": {
           "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
           "name": "READY_SET"
+        },
+        "SNAP_POP": {
+          "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
+          "name": "SNAP_POP"
+        },
+        "HIDE_SEEK": {
+          "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
+          "name": "HIDE_SEEK"
+        },
+        "SHARED_ASSETS": {
+          "id": "1AybZa2Q3ISkIxMzfA9koMzfaVOwRqSBd",
+          "name": "SHARED_ASSETS"
+        },
+        "MOBILE_CATALOG": {
+          "id": "1ZrA0uOOvtA6rohLDiFK4WZEycHbeto0m",
+          "name": "MOBILE_CATALOG"
         }
       }
     },
@@ -89,6 +105,7 @@
     "Handoff artifacts belong under HANDOFF and remain recovery evidence, not source of truth.",
     "C2S/review artifacts belong under REVIEWS_C2S; downstream project implementation artifacts belong under PROJECTS.",
     "NotebookLM material is legacy/optional and excluded from the default active route.",
-    "Shared legacy folders with external permissions must not be silently moved or permission-mutated during cleanup."
+    "Shared legacy folders with external permissions must not be silently moved or permission-mutated during cleanup.",
+    "Current mobile app source code lives in GitHub product repositories; Drive project roots hold design/assets/review/QA/release-handoff/reference material, not a competing current source tree."
   ]
 }
