@@ -1,0 +1,47 @@
+{
+  "record_id": "2026-09-20_READY_LEARNING_STANDARD_MATCHER_V04_REFLECTION",
+  "status": "EXACT_MAIN_RUNTIME_PENDING",
+  "ready": {
+    "repo": "hns140412-glitch/Ready-Set",
+    "main_sha": "65d123cabd22588064af798853a12d1084e637d5",
+    "learning_master": "0.4.0",
+    "learning_reference": "0.3.0",
+    "subject_master": "0.2.0",
+    "standard_matcher": "0.2.0"
+  },
+  "implemented": [
+    "Evidence-based subject-domain matching from actual assignment/workbook/range/teacher context",
+    "MATCHED_DOMAIN_CANDIDATE / CANDIDATE / REFERENCE_GAP separation",
+    "No fabricated official achievement-standard code",
+    "Standard-match provenance on Learning Master analysis and Learning Units",
+    "Current curriculum authority split: NCEC 2026-1 elementary/general framework vs MOE 2022-33 subject-specific curricula"
+  ],
+  "validation": {
+    "pr_head": {
+      "integration_ci": {
+        "run_id": 35490587518,
+        "status": "PASS"
+      },
+      "runtime_e2e": {
+        "run_id": 35490587519,
+        "status": "PASS"
+      }
+    },
+    "exact_main": {
+      "runtime_e2e": {
+        "run_id": 35490645890,
+        "status": "PENDING"
+      }
+    }
+  },
+  "authority_sources": {
+    "current_elementary_framework": "NCEC_NOTICE_2026_1",
+    "subject_curriculum_lineage": "MOE_NOTICE_2022_33",
+    "official_structured_reference": "NCIC_2022_REVISED_ELEMENTARY_ACHIEVEMENT_STANDARDS"
+  },
+  "boundaries": {
+    "exact_textbook_unit_to_standard_code": "UNBOUND_REQUIRES_VERIFIED_STANDARD_RECORD",
+    "device_verified": false,
+    "production_verified": false
+  }
+}
