@@ -1,0 +1,71 @@
+{
+  "record_id": "2026-09-20_READY_UNIT_MAPPING_EVIDENCE_V01_REFLECTION",
+  "status": "REFLECTION_READY_BASELINE_EQUIVALENT_RUNTIME",
+  "ready": {
+    "repo": "hns140412-glitch/Ready-Set",
+    "main_sha": "1b6880fb08f29c2ad25229fc65c53f9a77b8f20b",
+    "pull_request": 62,
+    "pr_head": "ff07944ca3de60de398f8260cf05e2b778fa6266"
+  },
+  "official_standard_registry": {
+    "version": "0.3.0",
+    "status": "VERIFIED_FULL_CORE_SUBJECT_COVERAGE",
+    "total_active_records": 177,
+    "coverage": {
+      "korean": "34/34",
+      "math": "45/45",
+      "social": "27/27",
+      "science": "51/51",
+      "english": "20/20"
+    }
+  },
+  "unit_mapping_evidence": {
+    "version": "0.1.0",
+    "source_type": "OFFICIAL_EDUCATION_OFFICE_EXAMPLE_MAPPING",
+    "rule": "Mapping evidence is separate from curriculum authority and requires actual grade/semester/unit context before application.",
+    "initial_codes": [
+      "6국01-04",
+      "6사09-01",
+      "6사09-02",
+      "6사10-01",
+      "6수01-05",
+      "6과01-01",
+      "6과01-02",
+      "6과01-03"
+    ]
+  },
+  "validation": {
+    "integration_ci": {
+      "run_id": 35498949077,
+      "status": "PASS"
+    },
+    "worker_selftest_pr": {
+      "run_id": 35498949104,
+      "status": "PASS"
+    },
+    "pr_runtime": {
+      "run_id": 35498949113,
+      "status": "FAIL_BASELINE_EQUIVALENT",
+      "failed": 12,
+      "passed": 29,
+      "new_runtime_regression": 0
+    },
+    "exact_main_worker": {
+      "run_id": 35499071379,
+      "status": "PASS"
+    },
+    "exact_main_runtime": {
+      "run_id": 35499071393,
+      "status": "FAIL_BASELINE_EQUIVALENT",
+      "failed": 12,
+      "passed": 29,
+      "new_runtime_regression": 0
+    }
+  },
+  "hard_locks": [
+    "Unit mapping evidence cannot create or override an official achievement-standard code.",
+    "Actual grade/semester/unit context is required before unit mapping is applied.",
+    "Assignment FACT / teacher instruction remain execution truth.",
+    "Universal publisher-textbook equivalence is not claimed."
+  ]
+}
