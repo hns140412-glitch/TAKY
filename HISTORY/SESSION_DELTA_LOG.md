@@ -240,3 +240,5 @@ Parent/base commit: 995805ec2d38fcac7911f9b2316554d0d2b58868.
 
 
 - 2026-09-20 — TAKY master-surface drift cleanup: repaired Outcome Optimization duplicate section ID, refreshed Active Rule projection, aligned subordinate TAKY-WORK-OS Drive routing, resynced Drive GRAND MASTER mirror, archived NotebookLM registry as legacy. Evidence: HISTORY/2026-09-20_TAKY_MASTER_SURFACE_DRIFT_CLEANUP.md
+
+- 2026-09-20 — Reflected Ready learning-engine final PR #68 review under current TAKY authority/claim boundaries. Project contract now locks FACT→Subject Master→official standards→unit evidence→Learning Master→Planner separation; candidate remains NOT_MERGED / NOT_READY_MAIN_CURRENT. Evidence: HISTORY/2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68.json
