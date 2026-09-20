@@ -1,0 +1,158 @@
+{
+  "fixture_version": "2026-09-20.1",
+  "scope": "Generic PRE-ACTION RULE APPLICATION GATE. Prevents known/loaded standards from being ignored at action time across implementation, validation, deployment, C2S, external verification and other material actions.",
+  "cases": [
+    {
+      "id": "PREACTION-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "material_action_planned": true,
+        "action_id": "external-validation-or-deploy",
+        "action_rule_refs": [
+          "MASTER/ENFORCEMENT_PROTOCOL.md#4"
+        ],
+        "action_rule_bindings": [
+          {
+            "rule_ref": "MASTER/ENFORCEMENT_PROTOCOL.md#4",
+            "effect": "CONSTRAINT",
+            "implication": "Use branch/CI/runtime verification before higher-cost external side effects."
+          }
+        ],
+        "action_preconditions": [
+          {
+            "id": "branch_validation_closed",
+            "required": true,
+            "satisfied": false
+          },
+          {
+            "id": "runtime_validation_closed",
+            "required": true,
+            "satisfied": false
+          }
+        ],
+        "lower_impact_compliant_path_available": true,
+        "higher_cost_side_effect_selected": true,
+        "explicit_override_approved": false
+      }
+    },
+    {
+      "id": "PREACTION-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "material_action_planned": true,
+        "action_id": "external-validation-or-deploy",
+        "action_rule_refs": [
+          "MASTER/ENFORCEMENT_PROTOCOL.md#4"
+        ],
+        "action_rule_bindings": [
+          {
+            "rule_ref": "MASTER/ENFORCEMENT_PROTOCOL.md#4",
+            "effect": "CONSTRAINT",
+            "implication": "Use branch/CI/runtime verification before higher-cost external side effects."
+          }
+        ],
+        "action_preconditions": [
+          {
+            "id": "branch_validation_closed",
+            "required": true,
+            "satisfied": true
+          },
+          {
+            "id": "runtime_validation_closed",
+            "required": true,
+            "satisfied": true
+          }
+        ],
+        "lower_impact_compliant_path_available": false,
+        "higher_cost_side_effect_selected": false,
+        "explicit_override_approved": false
+      }
+    },
+    {
+      "id": "PREACTION-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "material_action_planned": true,
+        "action_id": "generic-material-action",
+        "action_rule_refs": [
+          "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+        ],
+        "action_rule_bindings": [],
+        "action_preconditions": [
+          {
+            "id": "required_state_loaded",
+            "required": true,
+            "satisfied": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "PREACTION-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "material_action_planned": true,
+        "action_id": "generic-material-action",
+        "action_rule_refs": [
+          "MASTER/INTENT_EXECUTION_PROTOCOL.md"
+        ],
+        "action_rule_bindings": [
+          {
+            "rule_ref": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+            "effect": "ACTION",
+            "implication": "Execute only within the user's current authorized scope."
+          }
+        ],
+        "action_preconditions": [
+          {
+            "id": "required_state_loaded",
+            "required": true,
+            "satisfied": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "PREACTION-03",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "material_action_planned": true,
+        "action_id": "conflicting-action",
+        "action_rule_refs": [
+          "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md"
+        ],
+        "action_rule_bindings": [
+          {
+            "rule_ref": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+            "effect": "CONSTRAINT",
+            "implication": "Do not displace productive implementation with unnecessary validation loops."
+          }
+        ],
+        "action_preconditions": [
+          {
+            "id": "scope_ready",
+            "required": true,
+            "satisfied": true
+          }
+        ],
+        "action_conflicts_with_rule": true
+      }
+    }
+  ]
+}
