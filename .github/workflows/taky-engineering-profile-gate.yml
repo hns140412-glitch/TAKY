@@ -1,0 +1,36 @@
+name: TAKY Engineering Profile Gate
+
+on:
+  push:
+    paths:
+      - 'MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md'
+      - 'MASTER/MASTER_LOGIC.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'ENFORCEMENT/taky_gate.py'
+      - 'ENFORCEMENT/replay_engineering_profiles_v1.json'
+      - '.github/workflows/taky-engineering-profile-gate.yml'
+  pull_request:
+    paths:
+      - 'MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md'
+      - 'MASTER/MASTER_LOGIC.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'ENFORCEMENT/taky_gate.py'
+      - 'ENFORCEMENT/replay_engineering_profiles_v1.json'
+      - '.github/workflows/taky-engineering-profile-gate.yml'
+
+jobs:
+  engineering-profile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate rule registry JSON
+        run: python -m json.tool MASTER/RULE_REGISTRY.json >/dev/null
+      - name: Replay engineering execution profiles
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_engineering_profiles_v1.json
+      - name: Re-run generic pre-action regression
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
