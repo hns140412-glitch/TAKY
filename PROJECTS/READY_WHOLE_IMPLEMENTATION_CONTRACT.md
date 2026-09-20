@@ -682,29 +682,40 @@ Ready-specific hard checks:
 Reference matrix: `MASTER/UI_REFERENCE_COMPARISON_MATRIX.json`.
 
 
-## 22. Implementation truth snapshot — reverified 2026-09-12
+## 22. Implementation truth snapshot — reverified 2026-09-20
 
 This snapshot is evidence only and becomes stale as code changes.
 
-Known:
-- Ready isolated branch: `runtime-session-bridge-2026-09-10`
-- branch HEAD reverified at reflection: `0dabe55bff83262d53c084c87faa11d2f2e56f52`
-- Parent/Child semantic code = partial
-- Parent capture-first UI = partial/gap
-- learning-load runtime interpretation = gap/partial
-- Planner allocation = stale/partial, needs rework
-- Notion timetable DB = exists
-- native Notion Calendar model = ADR/gap
-- standalone/hybrid schedule adapter = gap
-- schedule profile/revision/override = gap
-- specialist handoff code = exists, real iPhone timer roundtrip unverified
-- timestamp timer baseline = exists, lock/swap regression unverified
-- lock-screen visibility = requirement preserved, not implemented
-- retrospective actual-result candidate = partial, device unverified
-- WEEK/DAY final visual = design gate
-- Focus visual direction = confirmed, final fidelity regression still needed
+Current Ready main:
+- repository: `hns140412-glitch/Ready-Set`
+- main SHA: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`
+- Ready Integration CI #119: PASS
+- Ready Runtime E2E #205: PASS, 42/42
+- TAKY Codex Worker Self-Test #322: PASS
+- Learning Engine PR #68: merged to main
+- Learning Engine versions: Subject Master 0.2.1 / Official Standard Registry 0.3.0 / Unit Map 0.2.2 / Standard Matcher 0.4.1 / Learning Reference 0.3.0 / Learning Master 0.5.1
+- Local-first/browser recovery: runtime verified
+- Parent/Child boundary: runtime verified
+- per-task session finalization / carry-over: runtime verified
+- Device QA harness: coded/runtime verified in browser
+- physical iPhone DEVICE_VERIFIED: NOT PERFORMED
+- PRODUCTION_VERIFIED: NOT VERIFIED
+- cross-app Ready ↔ Hide & Seek / Snap & Pop physical/runtime roundtrip: OPEN
+- Planner real-life availability windows: OPEN
+- Child FACT generic confirmation path: OPEN
+- exploration WEEK/DAY/TODAY product-language consolidation: PARTIAL
+- legacy Time Attack / manifest / README / cache/version residue cleanup: OPEN
+- lock-screen timer visibility: NOT IMPLEMENTED
 
-`CODE EXISTS ≠ ACTUAL BEHAVIOR VERIFIED`
+Current renewal branch:
+- `taky/ready-renewal-v01`
+- Draft PR #73
+- purpose: refresh canonical current truth, version/validation state, decision ledger, and next implementation sequence.
+- PR state is candidate only until merged; it does not replace current main implementation truth.
+
+`CODE EXISTS != ACTUAL BEHAVIOR VERIFIED`
+`RUNTIME_VERIFIED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`
+`CANDIDATE RENEWAL != MAIN CURRENT`
 
 ## 23. Regression / release gates
 
@@ -771,23 +782,61 @@ When a requirement appears:
 4. classify true new item
 5. never silently rewrite authority
 
-## 25. Implementation order
+## 25. Implementation order — READY_RENEWAL_01
 
-Do not jump from logic directly to child visual HTML.
+The prior 2026-09-12 implementation order is superseded.
 
-1. Parent Mode functional information architecture
-2. Schedule profile/revision/override data contract
-3. Notion/standalone/hybrid adapter boundary
-4. Homework capture entry + Review-before-Commit
-5. Learning-load interpretation boundary
-6. Planner allocation contract
-7. TODAY TASK projection
-8. cross-app/timer continuity harness
-9. WEEK/DAY visual contract and hero mockup
-10. implementation
-11. same-viewport visual QA
-12. iPhone continuity regression
-13. only then explicit production promotion
+Current result-driven order:
+
+### P0 — canonical/current-truth renewal
+- refresh Ready validation/version truth to exact main SHA;
+- remove stale active-state claims;
+- separate historical REV/Time Attack provenance from current authority;
+- align Ready project rules with TAKY PRE-ACTION enforcement.
+- current candidate: Draft PR #73 on `taky/ready-renewal-v01`.
+
+### P1 — Planner reality engine
+Implement executable free windows from:
+school / academy / travel / meals / preparation / rest / safety buffer / fixed events.
+
+Hard:
+- free time is capacity, not mandatory study volume;
+- Planner remains sole DATED TODO owner;
+- fixed commitments are not silently moved.
+
+### P2 — Child FACT confirmation closure
+Complete:
+`CHILD INPUT → PARENT REVIEW/CONFIRM → FACT → LEARNING MASTER → PLANNER → TODAY`.
+
+### P3 — cross-app execution continuity
+Close:
+`Ready → Hide & Seek / Snap & Pop → Ready`
+while preserving session_id / goal_id / task_id / lap_id / timing / return_target.
+
+Shared expedition-member personality/lifecycle/behavior authority is owned upstream by Snap & Pop under TAKY governance. Ready consumes the shared projection and must not fork a competing rule system.
+
+### P4 — exploration UI/product-language consolidation
+Unify WEEK / DAY / TODAY / Mission / Session / Result around Ready's adventure/base-camp identity.
+Remove stale Time Attack / Focus Mode product identity while preserving explicitly confirmed visual details.
+
+### P5 — legacy/version cleanup
+Normalize manifest / README / service-worker cache / version labels and remove stale active-authority residue.
+
+### P6 — final physical-device gate
+After exact candidate SHA has passed branch CI + Runtime:
+- perform one deliberate physical iPhone verification;
+- do not use Netlify/device as routine debugging;
+- validate background/lock/app-switch/PWA recovery and cross-app continuity where implemented.
+
+### P7 — production verification
+Only after authorized promotion:
+- verify deployed SHA/provenance;
+- Identity/cloud roundtrip;
+- PWA production behavior;
+- release state.
+
+Execution priority:
+`IMPLEMENT / IMPROVE → BRANCH CI/RUNTIME → INTEGRATED REVIEW → REQUIRED APPROVAL → DEVICE FINAL GATE → PRODUCTION FINAL GATE`.
 
 ## 26. Recovered source lineage
 
