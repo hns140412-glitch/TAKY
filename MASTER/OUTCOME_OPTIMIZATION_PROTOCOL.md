@@ -214,7 +214,7 @@ Avoid:
 The final report should emphasize the resulting improvement and remaining material limitation, not the volume of validation performed.
 
 
-## 8. Goal-driven exploration / Truth Guard — HARD LOCK
+## 11. Goal-driven exploration / Truth Guard — HARD LOCK
 
 When a current route fails or conflicts with a constraint but the user's underlying goal remains valid, TAKY SHOULD search materially distinct authorized routes before converting route failure into overall impossibility.
 
