@@ -64,6 +64,41 @@ Violation is classified using the normative taxonomy as `RECOVERY_FAILED / USER_
 `THREE KEYWORDS ≠ THREE RECOVERY FAMILIES`.
 `NO USER-AS-QA ≠ NEVER ASK THE USER`; it means do not ask before available system-side recovery is exhausted or when the user is not uniquely required.
 
+## 1.1B Evidence Recovery Pass for C2S / targeted recovery — HARD LOCK
+
+This protocol also governs **targeted historical recovery invoked by C2S** when a material prior state must be recovered to compile correctly. Full forensic mode does not need to be globally activated for this bounded pass.
+
+Required distinction:
+
+`NO_EVIDENCE_FOUND != EVIDENCE_ABSENT`
+
+A targeted Evidence Recovery Pass SHOULD combine materially available recovery modes instead of repeating exact-keyword searches in one surface:
+- current term;
+- legacy/superseded/alternate terms;
+- semantic entity/relationship search;
+- decision-state markers such as `확정 / LOCK / PASS / 기준 / 수정 / 교체 / HOLD / SUPERSEDED`;
+- attachment/image/ZIP/manifest lineage;
+- parent/sibling folder traversal;
+- historical revision neighbors;
+- reverse trace from later summary/Handoff/canonical claims to original evidence.
+
+When one material trace is found, expand locally around that trace before concluding recovery is exhausted.
+
+If the user has explicitly said a prior artifact/decision existed, that assertion is a recovery seed with high materiality. It does not itself prove the historical content, but it blocks premature global absence claims while accessible system-side recovery paths remain.
+
+Allowed bounded outputs:
+- `RECOVERED_DIRECT`
+- `RECOVERED_CORROBORATED`
+- `NOT_FOUND_IN_CHECKED_SOURCES`
+- `UNVERIFIED_SOURCE_COVERAGE`
+- `TRUE_UNAVAILABLE`
+
+A later user-provided screenshot/image/file that proves an item was recoverable after TAKY declared it missing SHALL create:
+1. a recovery-failure event;
+2. a correction atom;
+3. affected-artifact propagation;
+4. recurrence-prevention review.
+
 ## 1.2 Recovery-Failure Activation Subset — HARD LOCK
 
 Normative semantics for all failure/discrepancy tokens are owned solely by `MASTER/FAILURE_TAXONOMY.md`. This section is only the recovery-specific activation subset and SHALL NOT redefine those meanings.
