@@ -1,0 +1,45 @@
+{
+  "record_id": "2026-09-20_READY_LEARNING_MASTER_V03_REFLECTION",
+  "status": "REFLECTION_STAGED",
+  "ready": {
+    "repo": "hns140412-glitch/Ready-Set",
+    "main_merge_sha": "96463fbcb2fcda6f2726161f2dc7fdd3550ceabe",
+    "pull_request": 42,
+    "verified_pr_head": "8579c26993b3bb44d3597fa0b120c050ce4f053c",
+    "validation": {
+      "integration_ci": 35486105993,
+      "worker_selftest": 35486105978,
+      "runtime_e2e": 35486105920,
+      "runtime_tests": "41/41 PASS"
+    }
+  },
+  "implemented": [
+    "Learning Master v0.3",
+    "Learning Reference v0.2",
+    "Subject Master v0.1",
+    "Science explicit profile",
+    "Piano explicit profile",
+    "Talent program Subject Masters for arithmetic, hanja and thinking-pizza",
+    "Elementary 5-6 national-curriculum reference band for Korean, Math, Social Studies, Science and English",
+    "Reference provenance on Learning Master analysis and Learning Units",
+    "Generic WORKBOOK_RANGE precedence fix",
+    "Unknown subject REFERENCE_GAP",
+    "PWA cache coverage for new modules"
+  ],
+  "authority_lock": [
+    "Assignment FACT and teacher instruction remain execution truth.",
+    "Reference sources assist interpretation and never overwrite assignment truth.",
+    "Actual grade-5 textbook-unit binding requires real textbook/workbook/range/teacher context.",
+    "Planner remains the sole DATED TODO creator."
+  ],
+  "regression_cleanup": [
+    "Updated stale Talent test that expected zero Planner TODOs.",
+    "Talent intake runtime now waits for async FACT interpretation before asserting state.",
+    "Module-load test now requires Subject Master and Learning Reference globals."
+  ],
+  "current_boundaries": {
+    "exact_main_post_merge_reverify": "NOT_YET_OBSERVED",
+    "device_verified": false,
+    "production_verified": false
+  }
+}
