@@ -255,29 +255,32 @@ Hard rules:
 - Planner remains the only owner that creates `DATED TODO`.
 - English achievement-standard coverage may exist independently from unit-mapping coverage. Lack of a verified English standard-unit connection table in the current mapping source remains an explicit GAP, not an inferred mapping.
 
-### 6.2 Current learning-engine candidate state — EXECUTION TRUTH
+### 6.2 Current learning-engine main state — EXECUTION TRUTH
 
-As of the validated Ready PR #68 review:
+Ready PR #68 has been merged to main after current-main conflict resolution.
+
 - Ready repository: `hns140412-glitch/Ready-Set`
-- branch: `taky/unit-mapping-table-full-v02`
-- reviewed PR head: `87922bf5e39f510303797ff95ceee481980c497c`
-- PR state: OPEN / NOT MERGED
+- merged PR: #68
+- merged main SHA: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`
+- integration head before merge: `29dc5fcbb773e5a9c129971a5c878710f6a5645a`
 - Subject Master: `0.2.1`
 - Official Standard Registry: `0.3.0`, 177 active records
 - Official Unit Map: `0.2.2`, 196 mapping records across 157 mapped standards for Korean/Social/Math/Science
 - Standard Matcher: `0.4.1`
 - Learning Reference: `0.3.0`
 - Learning Master: `0.5.1`
-- Integration CI #105: PASS
-- learning-master-contract: PASS
-- semantic-contracts: PASS
-- TAKY Codex Worker Self-Test #290: PASS
-- whole-app Chromium Runtime E2E #186: FAIL
+- Ready Integration CI #118: PASS
+- TAKY Codex Worker Self-Test #321: PASS
+- Ready Runtime E2E #204: PASS
+- exact-main Ready Integration CI #119: PASS
+- exact-main TAKY Codex Worker Self-Test #322: PASS
+- exact-main Ready Runtime E2E #205: PASS
 
 State boundary:
-`PR_REVIEW_VALIDATED + CODED + CI_VERIFIED != READY_MAIN_CURRENT_IMPLEMENTATION`.
-The above versions SHALL NOT be presented as current Ready main implementation until PR #68 is merged and post-merge current-state verification is performed.
-The whole-app Runtime E2E failure SHALL NOT be rewritten as a learning-engine runtime PASS; separately passing learning contracts prove only their scoped contract evidence.
+`READY_MAIN_CURRENT_IMPLEMENTATION = YES` for the merged learning-engine/device-QA scope above.
+`DEVICE_VERIFIED = NO` until a physical device execution is completed.
+`PRODUCTION_VERIFIED = NO` until the deployed Netlify site is verified to serve the merged main artifact.
+GitHub/main verification does not imply deployment completion.
 
 ## 7. Planner allocation / condition
 
