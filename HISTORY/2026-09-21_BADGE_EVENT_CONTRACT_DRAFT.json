@@ -1,0 +1,79 @@
+{
+  "schema_version": "TAKY_BADGE_EVENT_DRAFT_V01",
+  "status": "RECOVERY_DRAFT_NOT_MASTER_CANONICAL",
+  "principles": {
+    "cross_app": true,
+    "event_first": true,
+    "no_global_child_level": true,
+    "no_gacha": true,
+    "no_competition_required": true,
+    "no_loss_for_absence": true,
+    "preserve_real_event_provenance": true
+  },
+  "activity_event": {
+    "event_id": "string",
+    "app_id": "ready-set | snap-pop | hide-and-seek | other",
+    "child_id": "string|null",
+    "occurred_at": "ISO-8601",
+    "event_type": "string",
+    "context": {
+      "session_id": "string|null",
+      "task_id": "string|null",
+      "learning_unit_id": "string|null",
+      "source_ref": "string|null"
+    },
+    "evidence": {
+      "summary": "short factual description",
+      "metrics": "object|null",
+      "user_authored_text_ref": "reference only|null"
+    }
+  },
+  "badge_candidate": {
+    "candidate_id": "string",
+    "source_event_id": "string",
+    "badge_key": "OPEN_CATALOG_KEY",
+    "reason": "why this event maps to the badge",
+    "confidence": "0..1|null",
+    "state": "CANDIDATE | CONFIRMED"
+  },
+  "badge_record": {
+    "badge_key": "string",
+    "discovered_at": "ISO-8601",
+    "occurrence_count": "integer>=1",
+    "tier": {
+      "order": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ],
+      "stars": "1..5"
+    },
+    "occurrence_event_ids": [
+      "string"
+    ],
+    "profile_identity_ref": "string|null",
+    "theme_ref": "string|null"
+  },
+  "display": {
+    "undiscovered": "SHADOW_OR_FAINT",
+    "collection": true,
+    "diary_share_brging_mode": true,
+    "visual": {
+      "shape": "CIRCULAR",
+      "style": "HAND_DRAWN_PASTEL",
+      "center": "STRONGER_COLOR",
+      "outer_edge": "GRADIENT_TRANSPARENT",
+      "tier_stars": "UPPER_CIRCULAR_GEM_STARS"
+    }
+  },
+  "open_items": [
+    "EXACT_BADGE_CATALOG",
+    "EXACT_EVENT_TO_BADGE_RULES",
+    "TITLE_UNLOCK_ALGORITHM",
+    "SHARED_STORAGE_BACKEND",
+    "CROSS_APP_SYNC",
+    "SPECIAL_ENCOUNTER_DEPENDENCY"
+  ]
+}
