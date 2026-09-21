@@ -1,0 +1,149 @@
+{
+  "schema_version": "TKY_C2S_ATOMS_V1",
+  "scope": "LEARNING_MATERIAL_UTILIZATION_2026-09-21",
+  "source_class": "REFERENCE_ONLY_EVIDENCE_ASSIST",
+  "evidence": {
+    "current_attachments": [
+      "IMG_8285.jpeg",
+      "IMG_8286.jpeg",
+      "IMG_8287.jpeg",
+      "IMG_8288.jpeg",
+      "IMG_8289.jpeg",
+      "IMG_8290.jpeg",
+      "IMG_8291.jpeg",
+      "IMG_8292.jpeg",
+      "IMG_8293.jpeg",
+      "IMG_8294.jpeg"
+    ],
+    "same_conversation_semantic_sets": [
+      "diary_scaffolding_reference_set",
+      "math_question_comprehension_reference_set"
+    ]
+  },
+  "owner_locks": {
+    "ready_learning_engine": "homework interpretation / Learning Unit / Hanja level resolution / scaffold routing",
+    "hide_seek": "Language Memory & Meaning",
+    "snap_pop": "thought / expression / writing / speaking",
+    "ready_set": "session / task / planner / execution timing"
+  },
+  "atoms": [
+    {
+      "id": "LRN-UTIL-001",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Start recall from one memorable scene before full chronology.",
+      "owner": "Snap & Pop",
+      "utilization": "SCENE_FIRST_RECALL"
+    },
+    {
+      "id": "LRN-UTIL-002",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Use visible detail, sound, spoken words and emotion/body state as recall cues.",
+      "owner": "Snap & Pop",
+      "secondary": "Hide & Seek",
+      "utilization": "SENSORY_RECALL_LADDER"
+    },
+    {
+      "id": "LRN-UTIL-003",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Let the learner say the idea first, then convert the learner's own expression into writing.",
+      "owner": "Snap & Pop",
+      "utilization": "ORAL_BEFORE_WRITING"
+    },
+    {
+      "id": "LRN-UTIL-004",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Expand output progressively from phrase/sentence to short structured text.",
+      "owner": "Snap & Pop",
+      "secondary": "Ready Learning Engine",
+      "utilization": "GRADUAL_EXPRESSION_EXPANSION"
+    },
+    {
+      "id": "LRN-UTIL-005",
+      "type": "REQUIREMENT",
+      "state": "PLANNED",
+      "summary": "Offer context-bound alternative expressions instead of generic synonym lists.",
+      "owner": "Hide & Seek",
+      "consumer": "Snap & Pop",
+      "utilization": "EXPRESSION_VARIATION"
+    },
+    {
+      "id": "LRN-UTIL-006",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Teach expression through realistic child situations and learner-first responses.",
+      "owner": "Snap & Pop",
+      "secondary": "Hide & Seek",
+      "utilization": "SITUATION_TO_LANGUAGE"
+    },
+    {
+      "id": "LRN-UTIL-007",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Learn idioms/proverbs/four-character idioms as meaning -> situation -> example -> reuse.",
+      "owner": "Hide & Seek",
+      "consumer": "Snap & Pop",
+      "utilization": "MEANING_CONTEXT_REUSE"
+    },
+    {
+      "id": "LRN-UTIL-008",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Link Hanja form, core meaning, familiar usage and retrieval cue; level remains Ready-owned.",
+      "owner": "Hide & Seek",
+      "authority_dependency": "Ready Learning Engine",
+      "utilization": "FORM_MEANING_USAGE_CHAIN"
+    },
+    {
+      "id": "LRN-UTIL-009",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Represent writing genres as reusable scaffold nodes rather than worksheet-specific templates.",
+      "owner": "Snap & Pop",
+      "secondary": "Ready Learning Engine",
+      "utilization": "WRITING_SCAFFOLD_GRAPH"
+    },
+    {
+      "id": "LRN-UTIL-010",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Require understanding of the full math question and target before computation.",
+      "owner": "Ready Learning Engine",
+      "utilization": "QUESTION_BEFORE_CALCULATION"
+    },
+    {
+      "id": "LRN-UTIL-011",
+      "type": "STRATEGY",
+      "state": "PLANNED",
+      "summary": "Have the learner restate what the problem asks in their own words before solving.",
+      "owner": "Ready Learning Engine",
+      "consumer": "Snap & Pop",
+      "utilization": "PROBLEM_RESTATE"
+    },
+    {
+      "id": "LRN-UTIL-012",
+      "type": "CONSTRAINT",
+      "state": "PRESERVE_EXPAND",
+      "summary": "Scaffold but do not replace the child's voice with polished adult/AI prose.",
+      "owner": "Learning App Family",
+      "destinations": [
+        "Snap authorship guard",
+        "Learning Engine prompting policy"
+      ],
+      "utilization": "PRESERVE_CHILD_VOICE"
+    }
+  ],
+  "closure": {
+    "material_atoms": 12,
+    "mapped_material_atoms": 12,
+    "UNMAPPED_MATERIAL": 0,
+    "SILENT_LOSS": 0,
+    "FALSE_CONVERGENCE": 0,
+    "C2S_COMPILE_CLOSED": true,
+    "REFLECTION_COMPLETE": false,
+    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+  }
+}
