@@ -5,7 +5,11 @@
     "UNMAPPED_MATERIAL": 0,
     "SILENT_LOSS": 0,
     "FALSE_CONVERGENCE": 0,
-    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": true,
+    "CI_VERIFIED": true,
+    "RUNTIME_VERIFIED": true,
+    "DEVICE_VERIFIED": false,
+    "PRODUCTION_VERIFIED": false
   },
   "baselines": {
     "ready": {
@@ -37,44 +41,50 @@
     {
       "id": "LAF-INT-001",
       "type": "CONFLICT",
-      "state": "OPEN",
+      "state": "CLOSED_BRANCH_VERIFIED",
       "summary": "READY_LEARNING_CONTEXT_V1 is documented/consumed by Snap but not produced by Ready and not consumed by Hide.",
       "destination": "Learning App Family contract + Ready/Hide/Snap adapters"
     },
     {
       "id": "LAF-INT-002",
       "type": "CORRECTION",
-      "state": "OPEN",
+      "state": "CLOSED_BRANCH_VERIFIED",
       "summary": "HELP_NEEDED must normalize to WAITING_FOR_PARENT, not BLOCKED.",
       "destination": "Ready runtime inbound result normalization"
     },
     {
       "id": "LAF-INT-003",
       "type": "CONFLICT",
-      "state": "OPEN",
+      "state": "CLOSED_BRANCH_VERIFIED",
       "summary": "Snap active branch is 584 ahead and 3 behind main; shared release/PWA/event main changes must be capability-reconciled before next freeze.",
       "destination": "Snap reconciliation branch"
     },
     {
       "id": "LAF-INT-004",
       "type": "DECISION",
-      "state": "LOCKED",
+      "state": "LOCKED_VERIFIED",
       "summary": "Ready Learning Engine owns homework/Learning Unit/Hanja level; Hide owns Language Memory and consumes resolved learning context only.",
       "destination": "central learning-context contract + Hide regression"
     },
     {
       "id": "LAF-INT-005",
       "type": "DECISION",
-      "state": "LOCKED",
+      "state": "LOCKED_VERIFIED",
       "summary": "Hide vocabulary passed to Snap remains source-owned expression material; no mastery or ownership transfer.",
       "destination": "Snap vocabulary material contract"
     },
     {
       "id": "LAF-INT-006",
       "type": "DECISION",
-      "state": "LOCKED",
+      "state": "LOCKED_VERIFIED",
       "summary": "Badge/crew shared event mechanics remain semantic-light; award/economy/catalog authority stays domain-owned.",
       "destination": "TAKY shared event boundary + Snap"
     }
-  ]
+  ],
+  "integration_evidence": {
+    "ready_sha": "8f2c097ae52fcb53b22ca9bc0f9a867ff660dc48",
+    "hide_sha": "5ff6a4a4e6b65588acf4c8da503411320365b900",
+    "snap_sha": "a720b5d35e096feda9b83bc88ffe5d06f89b3ed2",
+    "taky_cross_app_run_id": 35585709946
+  }
 }
