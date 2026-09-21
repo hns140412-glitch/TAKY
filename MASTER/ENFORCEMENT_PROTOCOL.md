@@ -338,6 +338,22 @@ Reference replay:
 `SHORT REPORT != SHORT VALIDATION`.
 `TEMPLATE BEST PRACTICE != PROJECT-SAFE EXECUTION`.
 
+## 4.7 Product-implementation integrity gate — HARD LOCK
+
+When a material implementation/progress report sets `product_integrity_gate_required=true`, the deterministic gate SHALL require:
+- a product completion matrix/equivalent evidence;
+- separate CODED / CI / RUNTIME / DEVICE claim levels;
+- structural-integrity status;
+- representative-input status when variable real-world input is material;
+- active integration freshness status when cross-app/service integration is material;
+- no use of docs/tests/fixture-only evidence as direct product-completion increments.
+
+If structural integrity is `FAIL` or `REWRITE_REQUIRED`, the execution record SHALL include a REPAIR vs REFACTOR vs REWRITE/REBUILD disposition with preservation/migration boundaries before feature-growth completion can PASS.
+
+If a report claims a higher product state than its evidence ceiling, classify `STATE_CLAIM_MISMATCH`; when it claims completion, also `PREMATURE_PASS`.
+
+Canonical owner: `MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.

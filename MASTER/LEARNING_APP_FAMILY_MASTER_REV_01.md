@@ -205,6 +205,20 @@ Current shared high-priority gap families include:
 `FAMILY BACKLOG ITEM != PROJECT IMPLEMENTATION`.
 `PROJECT IMPLEMENTATION WITHOUT APPLICABLE GAP REVIEW = REVIEW_REQUIRED` when a material OPEN/PARTIAL item applies.
 
+## 11A. PRODUCT IMPLEMENTATION INTEGRITY — HARD LOCK
+
+Ready & Set, Hide & Seek and Snap & Pop SHALL apply `MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md` to material implementation/progress claims.
+
+Family-wide rules:
+- core/domain contracts, C2S closure, test count and CI success do not directly equal product completion;
+- each app keeps a product-completion matrix against its actual user-facing requirement inventory;
+- structural integrity, representative input, UI/UX realization, current integration path, runtime and device evidence remain separate;
+- if architecture is a material cause of unsafe growth or validation/product divergence, feature growth pauses for explicit REPAIR / REFACTOR / REWRITE-REBUILD disposition;
+- reusable family/shared assets remain reusable-asset maturity and SHALL NOT be averaged into a rewrite target's implementation percentage;
+- historical deployed URLs or stale production paths SHALL NOT prove current family integration.
+
+This gate applies symmetrically to all three apps; it is not a Hide-only exception.
+
 ## 12. REGRESSION GATE
 
 A release fails if any of the following occur:

@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.2",
+  "registry_version": "2026-09-21.3",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -91,6 +91,11 @@
       "rule_id": "TKY-GROWTH-001",
       "owner": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
       "scope": "GitHub-ecosystem-first growth intelligence, pattern/failure extraction, localized experiments, downstream gap persistence and current-best/frontier evolution"
+    },
+    {
+      "rule_id": "TKY-PRODUCT-001",
+      "owner": "MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md",
+      "scope": "interactive-product implementation integrity, structural health, completion-claim ceilings, representative-input/runtime/device separation, and repair/refactor/rewrite disposition"
     }
   ]
 }

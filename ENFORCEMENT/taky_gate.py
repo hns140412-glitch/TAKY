@@ -411,6 +411,79 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
                 if b(ec,"external_style_as_project_authority"):
                     f.append("AUTHORITY_BOUNDARY_VIOLATION")
 
+    # Product implementation integrity: prevent validation/test/documentation success
+    # from inflating interactive-product completion claims.
+    if b(r,"product_integrity_gate_required"):
+        matrix=r.get("product_completion_matrix")
+        if not isinstance(matrix,list) or not matrix:
+            f.append("RULE_NOT_APPLIED")
+        else:
+            valid_status={"NOT_STARTED","SKELETON","PARTIAL","FUNCTIONAL","RUNTIME_VERIFIED","DEVICE_VERIFIED"}
+            for row in matrix:
+                if not isinstance(row,dict):
+                    f.append("RULE_NOT_APPLIED"); continue
+                if not str(row.get("feature","")).strip():
+                    f.append("RULE_NOT_APPLIED")
+                if str(row.get("status","")).strip().upper() not in valid_status:
+                    f.append("RULE_NOT_APPLIED")
+                if not str(row.get("evidence_ref","")).strip():
+                    f.append("KNOWN_CONTEXT_EVIDENCE_MISSING")
+                if "user_path_reachable" not in row:
+                    f.append("RULE_NOT_APPLIED")
+                if "known_gaps" not in row or not isinstance(row.get("known_gaps"),list):
+                    f.append("RULE_NOT_APPLIED")
+
+        claim_levels=r.get("product_claim_levels")
+        required_levels=["CODED","CI_VERIFIED","RUNTIME_VERIFIED","DEVICE_VERIFIED"]
+        if not isinstance(claim_levels,dict):
+            f.append("RULE_NOT_APPLIED")
+        else:
+            for key in required_levels:
+                if key not in claim_levels:
+                    f.append("RULE_NOT_APPLIED")
+
+        structural=str(r.get("structural_integrity_status","")).strip().upper()
+        if structural not in {"PASS","REVIEW_REQUIRED","FAIL","REWRITE_REQUIRED"}:
+            f.append("RULE_NOT_APPLIED")
+
+        if b(r,"representative_input_material") and not str(r.get("representative_input_status","")).strip():
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"cross_app_or_service_integration_material") and not str(r.get("integration_freshness_status","")).strip():
+            f.append("RULE_NOT_APPLIED")
+
+        if b(r,"docs_tests_or_fixtures_directly_increased_product_completion"):
+            f.append("STATE_CLAIM_MISMATCH")
+        if b(r,"fixture_only_evidence_claimed_as_real_input_complete"):
+            f.append("STATE_CLAIM_MISMATCH")
+        if b(r,"stale_integration_path_counted_as_current"):
+            f.append("STATE_CLAIM_MISMATCH")
+
+        if structural in {"FAIL","REWRITE_REQUIRED"}:
+            disposition=str(r.get("architecture_disposition","")).strip().upper()
+            if disposition not in {"REPAIR","REFACTOR","REWRITE","REBUILD"}:
+                f.append("RULE_NOT_APPLIED")
+            if disposition in {"REWRITE","REBUILD"}:
+                for key in ["preserved_assets","migration_boundary","cutover_condition","rollback_or_reference_path","intentionally_not_migrated"]:
+                    val=r.get(key)
+                    if key in {"preserved_assets","intentionally_not_migrated"}:
+                        if not isinstance(val,list):
+                            f.append("RULE_NOT_APPLIED")
+                    elif not str(val or "").strip():
+                        f.append("RULE_NOT_APPLIED")
+            if b(r,"feature_growth_claimed_complete_without_architecture_disposition"):
+                f.append("PREMATURE_PASS")
+
+        try:
+            reported=float(r.get("reported_product_completion"))
+            ceiling=float(r.get("evidence_product_completion_ceiling"))
+            if reported > ceiling:
+                f.append("STATE_CLAIM_MISMATCH")
+                if b(r,"claims_product_complete"):
+                    f.append("PREMATURE_PASS")
+        except (TypeError,ValueError):
+            if r.get("reported_product_completion") is not None or r.get("evidence_product_completion_ceiling") is not None:
+                f.append("RULE_NOT_APPLIED")
+
     # Outcome-first gate: validation may not displace available result improvement.
     if b(r,"outcome_optimization_required"):
         blocked_by_overvalidation = (
