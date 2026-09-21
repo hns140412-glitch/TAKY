@@ -10,6 +10,16 @@ Notion is used as an operational collaboration surface for work visibility, task
 Notion is not TAKY canonical source-of-truth by use alone.
 Notion is not the sole authority for project calculations, geometry/drawings, original evidence files, laws/regulations or official approvals when those owners remain elsewhere.
 
+### External growth boundary
+
+Notion is an internal operational/data-storage surface for TAKY work. It may preserve links, review evidence, pattern records, backlog state and outcomes, but it is not the primary external engineering growth engine.
+
+When the objective is to improve TAKY, Work OS or software/PWA architecture from current public practice, route external discovery through `MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md` / `TKY-GROWTH-001`, with GitHub repository/community/platform evidence searched directly when material. Project/Work results may then be projected back into Notion for operation and continuity.
+
+`NOTION DATA STORE != EXTERNAL RESEARCH ENGINE`
+`NOTION LINK QUEUE != COMPLETE GITHUB ECOSYSTEM REVIEW`
+
+
 ## 1.1 Reference-Only Isolation — HARD LOCK
 
 Material collected from Notion as an idea/reference/page excerpt defaults to:
