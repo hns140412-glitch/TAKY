@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.5",
+  "registry_version": "2026-09-21.6",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -233,7 +233,7 @@
       "capability_id": "CAP-LOCAL-QUEUE-001",
       "title": "Local durable outbox/retry/idempotency mechanism",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
-      "state": "EXTRACTION_OPEN",
+      "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
       "current_evidence": [
         "Ready-Set:ready-local-first-v01.js",
@@ -242,13 +242,56 @@
       "semantic_exclusions": [
         "domain entity version meaning",
         "conflict resolution authority",
-        "family/work ownership"
+        "family/work ownership",
+        "family or organization identity",
+        "roles/permissions",
+        "event business meaning",
+        "transport endpoint/authentication",
+        "storage schema ownership",
+        "domain-specific retry override meaning"
       ],
       "consumers": {
-        "Ready-Set": "CURRENT_PROJECT_IMPLEMENTATION_EXISTS",
+        "Ready-Set": "MIGRATION_OPEN",
         "Hide-Seek": "OPEN",
-        "Snap-Pop": "OPEN"
-      }
+        "Snap-Pop": "OPEN",
+        "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
+      },
+      "implementation": "SHARED/runtime/local-queue.js",
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "required_fields": [
+          "queue_version",
+          "event_id",
+          "idempotency_key",
+          "status",
+          "attempts",
+          "max_attempts",
+          "next_retry_at",
+          "created_at",
+          "updated_at"
+        ],
+        "states": [
+          "PENDING",
+          "IN_FLIGHT",
+          "RETRY",
+          "ACKED",
+          "DEAD_LETTER",
+          "SUPERSEDED"
+        ],
+        "retry_rule": "retry count is bounded by max_attempts; exhaustion produces DEAD_LETTER",
+        "backoff_rule": "exponential backoff is bounded by max_ms",
+        "ack_rule": "ACKED stores transport ack/version metadata only; domain acceptance meaning remains consumer-owned",
+        "persistence_rule": "primitive defines queue-entry lifecycle only; storage engine/database ownership remains consumer/adapter-specific"
+      },
+      "acceptance_conditions": [
+        "queue identity uses immutable event_id/idempotency_key and is not derived from state digest",
+        "retry is bounded and transitions to DEAD_LETTER",
+        "backoff is deterministic and bounded",
+        "ACKED and SUPERSEDED are terminal queue mechanics only",
+        "domain conflict resolution and authority stay outside the primitive"
+      ]
     },
     {
       "capability_id": "CAP-OCR-INGEST-001",
