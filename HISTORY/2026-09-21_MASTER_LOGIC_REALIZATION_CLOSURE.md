@@ -1,7 +1,9 @@
 # 2026-09-21 TAKY / MASTER LOGIC REALIZATION CLOSURE
 
-Status: CANDIDATE_CLOSURE_PENDING_CI
+Status: VALIDATED_CLOSURE
 Branch self-check: PASS — reverse-trace residue assertions recomputed against the candidate head with zero failures.
+Canonical CI: TAKY Enforcement Replay #618 / run 35563331865 = SUCCESS.
+Closure merge: PR #82 → main `2c12afcdbb4e3c2e209928bde11ef85e5f34622b`.
 Scope: TAKY → Work OS / Learning OS → Learning App Family → Ready / Hide / Snap reverse realization trace.
 
 ## Purpose
