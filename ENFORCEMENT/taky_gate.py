@@ -269,6 +269,22 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         if b(r,"notion_user_used_as_smoke_tester"):
             f += ["USER_AS_QA","USER_FORCED_RECOVERY"]
 
+    # Architecture-profile auto-activation.
+    # A material architecture/shared-core/OS-boundary change must not bypass
+    # TKY-ENGEXEC-001 merely because the caller forgot to set the profile-required flag.
+    architecture_change = (
+        b(r,"architecture_change_planned")
+        or b(r,"shared_core_change_planned")
+        or b(r,"os_boundary_change_planned")
+        or b(r,"cross_domain_architecture_change_planned")
+        or b(r,"ownership_move_planned")
+    )
+    if architecture_change:
+        if not b(r,"engineering_execution_profile_required"):
+            f.append("RULE_NOT_APPLIED")
+        if str(r.get("engineering_profile","")).strip().upper() != "ARCHITECTURE_CHANGE":
+            f.append("RULE_NOT_APPLIED")
+
     # Engineering execution profiles: reusable task-specific contracts.
     if b(r,"engineering_execution_profile_required"):
         profile=str(r.get("engineering_profile","")).strip().upper()
