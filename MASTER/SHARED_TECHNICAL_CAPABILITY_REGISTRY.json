@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.7",
+  "registry_version": "2026-09-21.8",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -198,8 +198,8 @@
       ],
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Hide-Seek": "MIGRATION_OPEN",
-        "Snap-Pop": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
+        "Snap-Pop": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
       "tests": [
@@ -248,6 +248,30 @@
           "scope": "Ready local-first captures use immutable event envelope identity distinct from state/payload digest",
           "semantic_boundary": "Ready retains scope meaning, family authentication, remote conflict detection, KEEP_LOCAL/ACCEPT_REMOTE resolution and IndexedDB schema ownership.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Hide-Seek": {
+          "main_sha": "a19ef8dd9b3884571e74d349b8f5b7198a93414a",
+          "pr": 7,
+          "pr_head_sha": "6861df0107de4cd696787cbba75bbaa1ef1d9e4b",
+          "validation_ci": {
+            "run_id": 35557296883,
+            "conclusion": "success"
+          },
+          "scope": "Hide bridge emits TAKY immutable event envelopes while preserving Hide-owned type/app/session/task/learning projections.",
+          "semantic_boundary": "Hide retains learning/session/capture event meaning and context projection; no shared identity/role/permission authority.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Snap-Pop": {
+          "main_sha": "d761dd1435f45f7679f869f5b7a510ccf6ebf370",
+          "pr": 4,
+          "pr_head_sha": "cbf16a645df1e6795daaf06adc79e8aaf313dc1f",
+          "validation_ci": {
+            "run_id": 35557469432,
+            "conclusion": "success"
+          },
+          "scope": "Snap bridge emits TAKY immutable event envelopes while preserving Snap-owned type/app/session/task/exploration projections.",
+          "semantic_boundary": "Snap retains exploration/expression event meaning and context projection; no shared identity/role/permission authority.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       }
     },
@@ -274,8 +298,8 @@
       ],
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Hide-Seek": "OPEN",
-        "Snap-Pop": "OPEN",
+        "Hide-Seek": "OPEN__NO_DURABLE_TRANSPORT_REQUIREMENT",
+        "Snap-Pop": "OPEN__NO_DURABLE_TRANSPORT_REQUIREMENT",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
       "implementation": "SHARED/runtime/local-queue.js",
@@ -334,6 +358,18 @@
           "scope": "Ready local-first outbox uses shared queue lifecycle for PENDING/IN_FLIGHT/RETRY/ACKED/DEAD_LETTER/SUPERSEDED while Ready retains conflict/auth/storage semantics",
           "semantic_boundary": "Ready retains scope meaning, family authentication, remote conflict detection, KEEP_LOCAL/ACCEPT_REMOTE resolution and IndexedDB schema ownership.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      },
+      "non_adoption_evidence": {
+        "Hide-Seek": {
+          "inspected_main_sha": "a19ef8dd9b3884571e74d349b8f5b7198a93414a",
+          "finding": "Current bridge retains a bounded local event history but has no retry/ack/dead-letter transport lifecycle.",
+          "decision": "Do not force CAP-LOCAL-QUEUE-001 until a real durable transport requirement exists."
+        },
+        "Snap-Pop": {
+          "inspected_main_sha": "d761dd1435f45f7679f869f5b7a510ccf6ebf370",
+          "finding": "Current bridge retains a session event history but has no retry/ack/dead-letter transport lifecycle.",
+          "decision": "Do not force CAP-LOCAL-QUEUE-001 until a real durable transport requirement exists."
         }
       }
     },
