@@ -1,0 +1,111 @@
+{
+  "fixture_version": "2026-09-21.1",
+  "scope": "Product implementation integrity replay: completion inflation, structural failure disposition, and compliant product reporting.",
+  "cases": [
+    {
+      "id": "PRODUCT-INTEGRITY-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "STATE_CLAIM_MISMATCH",
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "product_integrity_gate_required": true,
+        "product_completion_matrix": [
+          {
+            "feature": "core flow",
+            "status": "RUNTIME_VERIFIED",
+            "evidence_ref": "fixture-browser-ci",
+            "user_path_reachable": true,
+            "known_gaps": [
+              "real input unverified"
+            ]
+          }
+        ],
+        "product_claim_levels": {
+          "CODED": 85,
+          "CI_VERIFIED": 83,
+          "RUNTIME_VERIFIED": 77,
+          "DEVICE_VERIFIED": 0
+        },
+        "structural_integrity_status": "REWRITE_REQUIRED",
+        "representative_input_material": true,
+        "representative_input_status": "FIXTURE_ONLY",
+        "cross_app_or_service_integration_material": true,
+        "integration_freshness_status": "STALE_DEPLOY_URL",
+        "docs_tests_or_fixtures_directly_increased_product_completion": true,
+        "fixture_only_evidence_claimed_as_real_input_complete": true,
+        "stale_integration_path_counted_as_current": true,
+        "reported_product_completion": 77,
+        "evidence_product_completion_ceiling": 52,
+        "architecture_disposition": "",
+        "feature_growth_claimed_complete_without_architecture_disposition": true
+      }
+    },
+    {
+      "id": "PRODUCT-INTEGRITY-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "product_integrity_gate_required": true,
+        "product_completion_matrix": [
+          {
+            "feature": "capture-to-learning",
+            "status": "PARTIAL",
+            "evidence_ref": "branch-runtime-and-gap-audit",
+            "user_path_reachable": true,
+            "representative_input": false,
+            "known_gaps": [
+              "real print OCR not verified",
+              "device camera not verified"
+            ]
+          },
+          {
+            "feature": "mobile device path",
+            "status": "NOT_STARTED",
+            "evidence_ref": "DEVICE_VERIFIED=0",
+            "user_path_reachable": false,
+            "representative_input": "NOT_APPLICABLE",
+            "known_gaps": [
+              "device verification pending"
+            ]
+          }
+        ],
+        "product_claim_levels": {
+          "CODED": 68,
+          "CI_VERIFIED": 62,
+          "RUNTIME_VERIFIED": 55,
+          "DEVICE_VERIFIED": 0
+        },
+        "structural_integrity_status": "REWRITE_REQUIRED",
+        "representative_input_material": true,
+        "representative_input_status": "PARTIAL_UNVERIFIED",
+        "cross_app_or_service_integration_material": true,
+        "integration_freshness_status": "BRANCH_CONTRACT_VERIFIED_LIVE_CROSS_APP_UNVERIFIED",
+        "docs_tests_or_fixtures_directly_increased_product_completion": false,
+        "fixture_only_evidence_claimed_as_real_input_complete": false,
+        "stale_integration_path_counted_as_current": false,
+        "reported_product_completion": 52,
+        "evidence_product_completion_ceiling": 52,
+        "architecture_disposition": "REWRITE",
+        "preserved_assets": [
+          "domain contracts",
+          "OCR adapter contract",
+          "memory evidence semantics",
+          "Ready/Planner handoff contract",
+          "fixtures"
+        ],
+        "migration_boundary": "replace app shell/runtime/state ownership; preserve validated domain contracts and migrate persisted data through explicit adapter",
+        "cutover_condition": "new runtime passes requirement matrix, representative browser E2E and migration regression before candidate freeze",
+        "rollback_or_reference_path": "legacy branch retained as reference implementation only",
+        "intentionally_not_migrated": [
+          "monolithic app.js execution architecture",
+          "stale hard-coded integration endpoints"
+        ],
+        "feature_growth_claimed_complete_without_architecture_disposition": false
+      }
+    }
+  ]
+}
