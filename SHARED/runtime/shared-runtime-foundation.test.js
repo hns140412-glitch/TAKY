@@ -4,6 +4,7 @@ const pwa=require('./pwa-update-state.js');
 const eventEnvelope=require('./event-envelope.js');
 const localQueue=require('./local-queue.js');
 const vision=require('./vision-ingest.js');
+const httpJson=require('./http-json.js');
 
 function descriptor(overrides={}){
   return {
@@ -143,3 +144,19 @@ assert.equal(norm.ok,true);
 assert.equal(vision.validateEvidence(norm.result,['img-1','img-2']).ok,true);
 assert.equal(vision.validateEvidence(norm.result,['img-2']).ok,false);
 console.log('PASS: shared vision ingest keeps transport/evidence mechanics separate from domain semantics');
+
+
+const retrySeconds=httpJson.parseRetryAfter('2',0);
+assert.equal(retrySeconds,2000);
+const retryDate=httpJson.parseRetryAfter('Thu, 01 Jan 1970 00:00:05 GMT',0);
+assert.equal(retryDate,5000);
+assert.equal(httpJson.normalizeStatus(200).category,'SUCCESS');
+assert.equal(httpJson.normalizeStatus(409).category,'CONFLICT');
+assert.equal(httpJson.normalizeStatus(429,{retry_after:'3',now_ms:0}).retry_after_ms,3000);
+assert.equal(httpJson.normalizeStatus(503).retryable,true);
+assert.equal(httpJson.normalizeStatus(403).category,'AUTH_REJECTED');
+const jsonInit=httpJson.buildRequestInit({method:'post',headers:{Accept:'application/json'},body:{x:1}});
+assert.equal(jsonInit.method,'POST');
+assert.equal(jsonInit.headers['Content-Type'],'application/json');
+assert.equal(jsonInit.body,'{"x":1}');
+console.log('PASS: shared HTTP transport normalizes request/status/rate-limit mechanics without domain authority');

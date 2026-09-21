@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.11",
+  "registry_version": "2026-09-21.12",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -460,12 +460,44 @@
       "capability_id": "CAP-HTTP-ADAPTER-001",
       "title": "External/Public API request-cache-rate-limit adapter mechanics",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
-      "state": "CANDIDATE_EXTRACTION",
+      "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
       "semantic_exclusions": [
         "public-data meaning",
         "architecture/legal conclusion",
-        "learning-data meaning"
+        "learning-data meaning",
+        "endpoint ownership",
+        "API credential ownership",
+        "authentication identity",
+        "roles/permissions",
+        "cross-domain authority",
+        "domain retry policy",
+        "domain conflict resolution",
+        "cache invalidation semantics"
+      ],
+      "implementation": "SHARED/runtime/http-json.js",
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "request_rule": "normalize method/headers/body/timeout without owning endpoint, credentials or auth authority",
+        "response_rule": "normalize HTTP status into transport categories and parse JSON opportunistically",
+        "rate_limit_rule": "parse Retry-After into retry_after_ms without deciding domain scheduling policy",
+        "retryability_rule": "mark timeout, 429 and 5xx as technically retryable; actual retry decision remains consumer-owned",
+        "auth_rule": "401/403 are normalized as AUTH_REJECTED only; shared transport never decides identity, role or permission"
+      },
+      "consumers": {
+        "Ready-Set": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATION_OPEN",
+        "Snap-Pop": "NO_CURRENT_EXTERNAL_HTTP_CONSUMER",
+        "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
+      },
+      "acceptance_conditions": [
+        "request body/header normalization is deterministic",
+        "Retry-After parsing supports seconds and HTTP-date forms",
+        "HTTP status normalization does not infer business meaning",
+        "authentication rejection is reported but identity/permission decisions remain outside shared transport",
+        "consumer owns endpoint, credentials, retry scheduling and response interpretation"
       ]
     },
     {
