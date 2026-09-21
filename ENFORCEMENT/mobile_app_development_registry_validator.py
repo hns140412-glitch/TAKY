@@ -14,6 +14,13 @@ if fresh.get("current_state_claim_requires_live_refresh") is not True:
     fail.append("LIVE_REFRESH_GATE_MISSING")
 if not isinstance(fresh.get("refresh_triggers"),list) or not fresh.get("refresh_triggers"):
     fail.append("FRESHNESS_TRIGGER_MISSING")
+automation=fresh.get("automation") or {}
+if automation.get("checker")!="ENFORCEMENT/mobile_app_registry_live_refresh.py":
+    fail.append("LIVE_REFRESH_CHECKER_MISSING")
+if automation.get("workflow")!=".github/workflows/mobile-registry-live-refresh.yml":
+    fail.append("LIVE_REFRESH_WORKFLOW_MISSING")
+if automation.get("fail_on_source_head_drift") is not True:
+    fail.append("LIVE_REFRESH_DRIFT_GATE_DISABLED")
 
 
 apps=d.get("apps") or {}
