@@ -73,6 +73,7 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
         "action_class": action,
         "route_role": expected_role,
         "execution_owner": owner,
+        "material_taky_turn": bool(record.get("material_taky_turn", False)),
         "conversation_system_compile_required": bool(
             record.get("conversation_system_compile_required", False)
         ),
