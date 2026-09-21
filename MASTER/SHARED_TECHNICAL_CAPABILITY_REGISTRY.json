@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.6",
+  "registry_version": "2026-09-21.7",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -197,7 +197,7 @@
         "domain ordering semantics beyond an optional opaque sequence value"
       ],
       "consumers": {
-        "Ready-Set": "MIGRATION_OPEN",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATION_OPEN",
         "Snap-Pop": "MIGRATION_OPEN",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
@@ -227,7 +227,29 @@
         "created envelopes are immutable",
         "validation rejects payload-digest drift",
         "the primitive does not infer identity, role, permission, domain ownership or event meaning"
-      ]
+      ],
+      "consumer_evidence": {
+        "Ready-Set": {
+          "main_sha": "6ef001c1fa89d24d0aeb75c4028fcce9667a3669",
+          "pr": 78,
+          "pr_head_sha": "d21aef60e456a8455d5bcd99ef814a4d20e28c45",
+          "integration_ci": {
+            "run_id": 35557138949,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35557139213,
+            "conclusion": "success"
+          },
+          "codex_selftest": {
+            "run_id": 35557139327,
+            "conclusion": "success"
+          },
+          "scope": "Ready local-first captures use immutable event envelope identity distinct from state/payload digest",
+          "semantic_boundary": "Ready retains scope meaning, family authentication, remote conflict detection, KEEP_LOCAL/ACCEPT_REMOTE resolution and IndexedDB schema ownership.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      }
     },
     {
       "capability_id": "CAP-LOCAL-QUEUE-001",
@@ -251,7 +273,7 @@
         "domain-specific retry override meaning"
       ],
       "consumers": {
-        "Ready-Set": "MIGRATION_OPEN",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "OPEN",
         "Snap-Pop": "OPEN",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
@@ -291,7 +313,29 @@
         "backoff is deterministic and bounded",
         "ACKED and SUPERSEDED are terminal queue mechanics only",
         "domain conflict resolution and authority stay outside the primitive"
-      ]
+      ],
+      "consumer_evidence": {
+        "Ready-Set": {
+          "main_sha": "6ef001c1fa89d24d0aeb75c4028fcce9667a3669",
+          "pr": 78,
+          "pr_head_sha": "d21aef60e456a8455d5bcd99ef814a4d20e28c45",
+          "integration_ci": {
+            "run_id": 35557138949,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35557139213,
+            "conclusion": "success"
+          },
+          "codex_selftest": {
+            "run_id": 35557139327,
+            "conclusion": "success"
+          },
+          "scope": "Ready local-first outbox uses shared queue lifecycle for PENDING/IN_FLIGHT/RETRY/ACKED/DEAD_LETTER/SUPERSEDED while Ready retains conflict/auth/storage semantics",
+          "semantic_boundary": "Ready retains scope meaning, family authentication, remote conflict detection, KEEP_LOCAL/ACCEPT_REMOTE resolution and IndexedDB schema ownership.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      }
     },
     {
       "capability_id": "CAP-OCR-INGEST-001",
