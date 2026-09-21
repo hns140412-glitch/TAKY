@@ -63,6 +63,12 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         ("unclassified_conflict","UNCLASSIFIED_CONFLICT")]:
         if b(r,key): f.append(token)
 
+    # Universal TAKY basis auto-activation for material TAKY-governed turns.
+    # Material TAKY work must enter pre-execution without relying on the user
+    # to repeat "TAKY 기준" every time.
+    if b(r,"material_taky_turn") and not b(r,"pre_execution_gate_required"):
+        f.append("RULE_NOT_APPLIED")
+
     # Evidence-backed pre-execution activation. Unknown/missing role/action fails closed.
     if b(r,"pre_execution_gate_required"):
         if not has_refs(r,"applicable_rule_refs"):

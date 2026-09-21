@@ -4,6 +4,16 @@ Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 Role: Cross-project user-intent, command-discovery and voice/text interaction owner.
 Authority: TAKY / GRAND MASTER > COMMAND / INTERACTION OS > DOMAIN / PROJECT command composition.
 
+## 0.1 Default TAKY activation
+
+Users do not need to repeat `타키 기준`, `최신 TAKY 기준`, or an equivalent prefix for every TAKY-governed request.
+
+When the current conversation/project clearly belongs to TAKY, Work OS, Learning OS, a governed mobile-web app, or another TAKY-owned workflow, the latest applicable TAKY canonical state is the default basis. Explicit TAKY commands remain useful for recovery/resume or when the user wants to force a fresh canonical reload, but absence of the prefix does not disable TAKY governance.
+
+`NO TAKY PREFIX != NO TAKY GOVERNANCE`.
+
+Apply only the rules/owners relevant to the task. Default activation SHALL NOT turn ordinary low-risk conversation into maximum-process execution.
+
 ## 1. COMMAND DISCOVERY
 
 The user SHALL NOT be required to memorize every TAKY command.

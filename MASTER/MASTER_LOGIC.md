@@ -22,6 +22,34 @@ This document is the lossless structural rewrite of the protected pre-remaster G
 - AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS.
 - No canonical modification without applicable authority, validation, rollback protection and post-write verification.
 
+## 0.1 TAKY Universal Operating Basis — HARD LOCK
+
+TAKY is the default governance and execution basis across all TAKY-governed work surfaces, not a project-specific optional checklist.
+
+Applies to:
+- ChatGPT reasoning/answers about TAKY-governed projects and systems;
+- GRAND MASTER / OS / DOMAIN / PROJECT design and revision;
+- Work OS and Learning OS architecture/operation;
+- mobile-web/PWA application planning, implementation, validation and release;
+- code/tool/agent/Codex/Work execution contracts;
+- research, evidence review, C2S, handoff, artifact generation and external actions.
+
+Default sequence:
+`LATEST CANONICAL TAKY -> TASK/SCOPE -> APPLICABLE OWNER/RULE EXTRACTION -> OPERATIONAL WORKING MODEL -> ACTION/ANSWER -> RESULT COMPARE -> TARGETED VALIDATION`.
+
+The user does not need to prefix each request with "TAKY 기준". TAKY-governed context activates TAKY by default.
+
+Universal basis does NOT mean loading every rule or running maximum validation on every trivial turn. Global invariants remain active; lower owner/rule sets are loaded only when applicable and validation remains proportional to risk/materiality.
+
+`TAKY DEFAULT != ALL RULES ALWAYS`.
+`UNIVERSAL GOVERNANCE != UNIVERSAL HEAVYWEIGHT PROCESS`.
+`CHATGPT ANSWER != EXEMPT FROM TAKY`.
+`MOBILE APP IMPLEMENTATION != EXEMPT FROM TAKY`.
+`WORK OS != EXEMPT FROM TAKY`.
+`LEARNING OS != EXEMPT FROM TAKY`.
+
+Hosted ChatGPT automatic repository-gate invocation remains a separate runtime capability claim. Canonical intent/application requirements SHALL NOT be described as mechanically enforced in hosted chat unless that interception is directly verified.
+
 ## 1. Architecture, Scope & Authority
 GRAND MASTER governs cross-system authority, scope, evidence, validation, approval, privacy, revision, traceability, recovery, evolution and source-of-truth rules. Lower layers specialize execution but SHALL NOT silently weaken higher authority.
 
