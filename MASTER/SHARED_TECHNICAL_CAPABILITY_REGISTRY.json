@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.9",
+  "registry_version": "2026-09-21.10",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -402,7 +402,7 @@
         "confidence_rule": "confidence is opaque numeric metadata; threshold meaning remains consumer-owned"
       },
       "consumers": {
-        "Ready-Set": "MIGRATION_OPEN",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATION_OPEN",
         "Snap-Pop": "NO_CURRENT_OCR_CONSUMER",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
@@ -413,7 +413,29 @@
         "generic result evidence cannot reference unknown source ids",
         "shared primitive does not define OCR prompts, extracted business fields, review authority or commit semantics",
         "consumer may retain provider-specific transport and domain-specific interpretation"
-      ]
+      ],
+      "consumer_evidence": {
+        "Ready-Set": {
+          "main_sha": "1cb6dfe77c71e7a3dbffb13c49078ae75fb594b6",
+          "pr": 79,
+          "pr_head_sha": "0fe9367bf406bc1e656b4de6c7d7c8e83f1635e9",
+          "integration_ci": {
+            "run_id": 35558336771,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35558336756,
+            "conclusion": "success"
+          },
+          "codex_selftest": {
+            "run_id": 35558336758,
+            "conclusion": "success"
+          },
+          "scope": "Ready capture analysis uses shared manifest/request/result/evidence validation and rejects unknown evidence source ids before domain commit.",
+          "semantic_boundary": "Ready retains ANSWER_REFERENCE exclusion meaning, Parent review, FACT confirmation, provider transport/auth, capture storage and assignment interpretation.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      }
     },
     {
       "capability_id": "CAP-HTTP-ADAPTER-001",
