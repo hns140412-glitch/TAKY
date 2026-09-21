@@ -44,11 +44,19 @@ for(const field of [
   must(snap,field,'Snap learning context field');
 }
 
-must(vocab,'sourceOwner:"HIDE_SEEK"','Hide vocabulary owner');
-must(vocab,'role:"EXPRESSION_MATERIAL_ONLY"','Vocabulary expression-only');
-must(vocab,'autoInsertAllowed:false','No vocabulary auto insert');
-must(vocab,'masteryMutationAllowed:false','No vocabulary mastery mutation');
-must(vocab,'vocabularyOwnershipTransferred:false','No vocabulary ownership transfer');
+const vm=require('vm');
+const vocabWindow={};
+vm.runInNewContext(vocab,{window:vocabWindow,Object,Array,String,Number,Math,RegExp});
+const material=vocabWindow.SnapPopVocabularyMaterial.normalize({
+  word:'explore',
+  word_context:'find something new',
+  from_app:'hide-seek'
+});
+assert.strictEqual(material.sourceOwner,'HIDE_SEEK','Hide vocabulary owner');
+assert.strictEqual(material.role,'EXPRESSION_MATERIAL_ONLY','Vocabulary expression-only');
+assert.strictEqual(material.autoInsertAllowed,false,'No vocabulary auto insert');
+assert.strictEqual(material.masteryMutationAllowed,false,'No vocabulary mastery mutation');
+assert.strictEqual(material.vocabularyOwnershipTransferred,false,'No vocabulary ownership transfer');
 
 const plannerModule=require(path.join(readyRoot,'ready-planner-v01.js'));
 const memory=new Map();
