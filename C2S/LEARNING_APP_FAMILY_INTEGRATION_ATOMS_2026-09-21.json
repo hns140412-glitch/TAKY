@@ -1,0 +1,80 @@
+{
+  "schema_version": "TKY_C2S_ATOMS_V1",
+  "scope": "LEARNING_APP_FAMILY_INTEGRATION_2026-09-21",
+  "closure": {
+    "UNMAPPED_MATERIAL": 0,
+    "SILENT_LOSS": 0,
+    "FALSE_CONVERGENCE": 0,
+    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+  },
+  "baselines": {
+    "ready": {
+      "repo": "hns140412-glitch/Ready-Set",
+      "ref": "main",
+      "sha": "98df214a6078f16f2b6710016898a4d7798798db"
+    },
+    "hide": {
+      "repo": "hns140412-glitch/Hide-Seek",
+      "ref": "implementation/hide-seek-capture-session-v02",
+      "sha": "7136c22b23e05b5f902a15f7e421d79aeb7a8574",
+      "relation": {
+        "ahead": 526,
+        "behind": 0
+      }
+    },
+    "snap": {
+      "repo": "hns140412-glitch/Snap-Pop",
+      "ref": "taky/snap-pop-implementation-2026-09-20",
+      "sha": "3af4d5076ed464b43c7f8e3fa60f7612539376fe",
+      "relation": {
+        "ahead": 584,
+        "behind": 3,
+        "status": "DIVERGED"
+      }
+    }
+  },
+  "atoms": [
+    {
+      "id": "LAF-INT-001",
+      "type": "CONFLICT",
+      "state": "OPEN",
+      "summary": "READY_LEARNING_CONTEXT_V1 is documented/consumed by Snap but not produced by Ready and not consumed by Hide.",
+      "destination": "Learning App Family contract + Ready/Hide/Snap adapters"
+    },
+    {
+      "id": "LAF-INT-002",
+      "type": "CORRECTION",
+      "state": "OPEN",
+      "summary": "HELP_NEEDED must normalize to WAITING_FOR_PARENT, not BLOCKED.",
+      "destination": "Ready runtime inbound result normalization"
+    },
+    {
+      "id": "LAF-INT-003",
+      "type": "CONFLICT",
+      "state": "OPEN",
+      "summary": "Snap active branch is 584 ahead and 3 behind main; shared release/PWA/event main changes must be capability-reconciled before next freeze.",
+      "destination": "Snap reconciliation branch"
+    },
+    {
+      "id": "LAF-INT-004",
+      "type": "DECISION",
+      "state": "LOCKED",
+      "summary": "Ready Learning Engine owns homework/Learning Unit/Hanja level; Hide owns Language Memory and consumes resolved learning context only.",
+      "destination": "central learning-context contract + Hide regression"
+    },
+    {
+      "id": "LAF-INT-005",
+      "type": "DECISION",
+      "state": "LOCKED",
+      "summary": "Hide vocabulary passed to Snap remains source-owned expression material; no mastery or ownership transfer.",
+      "destination": "Snap vocabulary material contract"
+    },
+    {
+      "id": "LAF-INT-006",
+      "type": "DECISION",
+      "state": "LOCKED",
+      "summary": "Badge/crew shared event mechanics remain semantic-light; award/economy/catalog authority stays domain-owned.",
+      "destination": "TAKY shared event boundary + Snap"
+    }
+  ]
+}
