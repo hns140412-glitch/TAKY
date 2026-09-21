@@ -27,11 +27,16 @@
     "forbidden_fields": [
       "role",
       "permission",
+      "permissions",
       "family_id",
+      "child_id",
       "child_identity_authority",
       "planner_authority",
       "allocation_authority",
       "dated_todo_authority",
+      "hanja_grade",
+      "hanja_level",
+      "grade_inference",
       "hanja_grade_inference",
       "hanja_level_inference"
     ]
