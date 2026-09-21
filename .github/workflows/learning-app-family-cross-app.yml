@@ -1,0 +1,55 @@
+name: Learning App Family Cross-App Contract
+
+on:
+  push:
+    branches:
+      - taky/learning-app-family-integration-2026-09-21
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-app-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout TAKY exact commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Fetch pinned Ready integration delta
+        run: |
+          mkdir -p _integration
+          git clone --quiet https://github.com/hns140412-glitch/Ready-Set.git _integration/Ready-Set
+          cd _integration/Ready-Set
+          git checkout --quiet f124c60ca86860165d27c11cebf0f36f0962edf8
+      - name: Fetch pinned Hide integration delta
+        run: |
+          git clone --quiet https://github.com/hns140412-glitch/Hide-Seek.git _integration/Hide-Seek
+          cd _integration/Hide-Seek
+          git checkout --quiet ff2918c7633c608f61be70a0f5a2ce794d76affd
+      - name: Fetch pinned Snap reconciliation delta
+        run: |
+          git clone --quiet https://github.com/hns140412-glitch/Snap-Pop.git _integration/Snap-Pop
+          cd _integration/Snap-Pop
+          git checkout --quiet 3d3d10318bb9f655030cd266e6762d1dcf1ec923
+      - name: Validate central and cross-app contract
+        run: node ENFORCEMENT/learning_app_family_cross_app_validator.mjs
+      - name: Re-run Ready focused contracts
+        working-directory: _integration/Ready-Set
+        run: |
+          node tests/learning-app-family-return-contract.test.js
+          node tests/learning-context-producer-contract.test.js
+          node .github/scripts/ready_planner_contract_test.js
+      - name: Re-run Hide consumer ownership contract
+        working-directory: _integration/Hide-Seek
+        run: node tools/validate-hide-learning-context.js
+      - name: Re-run Snap context and vocabulary contracts
+        working-directory: _integration/Snap-Pop
+        run: |
+          node scripts/validate-learning-app-family-context.mjs
+          node scripts/validate-vocabulary-material-ownership.mjs
