@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.13",
+  "registry_version": "2026-09-21.14",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -487,7 +487,7 @@
         "auth_rule": "401/403 are normalized as AUTH_REJECTED only; shared transport never decides identity, role or permission"
       },
       "consumers": {
-        "Ready-Set": "MIGRATION_OPEN",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Snap-Pop": "NO_CURRENT_EXTERNAL_HTTP_CONSUMER",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
@@ -510,6 +510,26 @@
           },
           "scope": "Hide Gemini requests use shared timeout/JSON/status/Retry-After transport normalization.",
           "semantic_boundary": "Hide retains Gemini endpoint/model selection, API key ownership, prompt content, vocabulary semantics and user-facing error meaning.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Ready-Set": {
+          "main_sha": "488bb6aabbd7401d1f1834578a8b6b1b28032311",
+          "pr": 80,
+          "pr_head_sha": "f2b3bfd7e279f47c5e09a61637154caf0b7fb257",
+          "integration_ci": {
+            "run_id": 35558838941,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35558838918,
+            "conclusion": "success"
+          },
+          "codex_selftest": {
+            "run_id": 35558838919,
+            "conclusion": "success"
+          },
+          "scope": "Ready sync adapter uses shared timeout/JSON/status/Retry-After transport normalization.",
+          "semantic_boundary": "Ready retains endpoint configuration, family authentication, 409 conflict meaning, retry scheduling and response semantics.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       },
