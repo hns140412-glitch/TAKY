@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.2",
+  "registry_version": "2026-09-21.3",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -48,7 +48,7 @@
       ],
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Hide-Seek": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Snap-Pop": "MIGRATION_OPEN",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
@@ -72,6 +72,17 @@
             "conclusion": "success"
           },
           "scope": "release descriptor authority, VERSION/package/registry drift gate, service-worker release_id cache identity",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Hide-Seek": {
+          "main_sha": "dac52579275f8d45991d2a2312f22dcb7fd7ef83",
+          "pr": 6,
+          "pr_head_sha": "c60eec3fd5a03f0b943795846af3b9a838ef2b70",
+          "validation_ci": {
+            "run_id": 35555160869,
+            "conclusion": "success"
+          },
+          "scope": "Hide authoritative release descriptor + release_id cache identity",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       }
@@ -108,7 +119,7 @@
       ],
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Hide-Seek": "MIGRATION_P0",
+        "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Snap-Pop": "MIGRATION_P0"
       },
       "acceptance_conditions": [
@@ -131,6 +142,17 @@
             "conclusion": "success"
           },
           "scope": "shared PWA update state machine + Ready-owned safe-point adapter; no install-time skipWaiting",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Hide-Seek": {
+          "main_sha": "dac52579275f8d45991d2a2312f22dcb7fd7ef83",
+          "pr": 6,
+          "pr_head_sha": "c60eec3fd5a03f0b943795846af3b9a838ef2b70",
+          "validation_ci": {
+            "run_id": 35555160869,
+            "conclusion": "success"
+          },
+          "scope": "shared PWA update state machine + Hide-owned learning/capture safe-point adapter",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       }
