@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.1",
+  "registry_version": "2026-09-21.2",
   "purpose": "Classify every MASTER root artifact so location does not imply authority. Paths remain stable until a separately validated migration proves references will not break.",
   "authority_rule": "MASTER_DIRECTORY_PRESENCE != ACTIVE_CANONICAL_AUTHORITY",
   "classes": {
@@ -120,6 +120,12 @@
     },
     "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
+    },
+    "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
+    "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json": {
+      "class": "ACTIVE_SUPPORT"
     }
   }
 }
