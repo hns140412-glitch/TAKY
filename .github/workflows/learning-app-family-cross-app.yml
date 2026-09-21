@@ -1,0 +1,41 @@
+name: Learning App Family Cross-App Regression
+
+on:
+  push:
+    branches:
+      - taky/learning-app-family-p6-2026-09-21
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-app-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout TAKY integration gate
+        uses: actions/checkout@v4
+      - name: Checkout Ready integration candidate
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Ready-Set
+          ref: f124c60ca86860165d27c11cebf0f36f0962edf8
+          path: integration/ready
+      - name: Checkout Hide integration candidate
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: cdbd8953368688b6b66d8da02b94e681291d4660
+          path: integration/hide
+      - name: Checkout Snap integration candidate
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Snap-Pop
+          ref: e17e1469951995c35b1a3f0a7bc030303b723574
+          path: integration/snap
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run cross-app contract regression
+        run: node tests/learning-app-family-cross-app-regression.js
