@@ -21,6 +21,21 @@ PRIORITY SHALL NOT BE REVERSED.
 Learning analysis is not a higher-order justification for increasing study volume.
 Guide success = the child needs Guide less over time.
 
+## 0.1 Work OS / Learning OS sibling boundary — HARD LOCK
+
+Family Learning OS is a first-class OS under TAKY, not a child module of Work OS.
+
+Current relation:
+`TAKY -> WORK_OS`
+`TAKY -> LEARNING_OS`
+
+Shared technical services may be reused only when they remain semantic-light. Child/parent/family identity, relationships, learning roles/permissions, child-data authority and learning-plan/history meaning remain Learning-owned and SHALL NOT be inherited from Work organization/admin authority.
+
+If the same human participates in both domains, account linkage does not create cross-domain authority. Any future linkage requires an explicit scoped federation/projection contract.
+
+Machine-readable support map:
+`MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json`.
+
 ## 1. OWNERSHIP / AUTHORITY — HARD LOCK
 
 `MAIN = HOW TO MANAGE`
