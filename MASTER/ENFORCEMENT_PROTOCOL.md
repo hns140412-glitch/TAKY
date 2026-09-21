@@ -159,6 +159,27 @@ This gate is domain-independent. It applies to implementation, validation, exter
 Reference replay:
 `python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json`.
 
+## 4.4B Architecture profile auto-activation — HARD LOCK
+
+A material architecture/shared-core/OS-boundary/ownership move SHALL NOT depend on the caller remembering to opt into the `ARCHITECTURE_CHANGE` profile.
+
+When any execution record declares one of the following material intents:
+- `architecture_change_planned=true`;
+- `shared_core_change_planned=true`;
+- `os_boundary_change_planned=true`;
+- `cross_domain_architecture_change_planned=true`;
+- `ownership_move_planned=true`;
+
+the deterministic gate SHALL require:
+- `engineering_execution_profile_required=true`;
+- `engineering_profile=ARCHITECTURE_CHANGE`.
+
+Omission or a different profile => `RULE_NOT_APPLIED`.
+
+This closes the activation gap between "the rule exists" and "the architecture-specific rule was actually selected for the action."
+
+`MATERIAL ARCHITECTURE INTENT != OPTIONAL ARCHITECTURE PROFILE`.
+
 ## 4.4A Architecture owner/sharing boundary gate — HARD LOCK
 
 Semantic ownership is defined by `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md` under the `ARCHITECTURE_CHANGE` profile. This section defines the deterministic execution expression.
