@@ -54,6 +54,7 @@ on:
       - 'AGENTS.md'
       - 'TAKY.md'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
