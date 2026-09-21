@@ -2,6 +2,7 @@ const assert=require('assert');
 const release=require('./release-contract.js');
 const pwa=require('./pwa-update-state.js');
 const eventEnvelope=require('./event-envelope.js');
+const localQueue=require('./local-queue.js');
 
 function descriptor(overrides={}){
   return {
@@ -94,3 +95,27 @@ assert.equal(eventA.payload.a,1);
 const tampered={...eventA,payload:{a:9,b:2}};
 assert.equal(eventEnvelope.validate(tampered).ok,false);
 console.log('PASS: shared immutable event envelope identity is distinct from payload digest');
+
+
+const q0=localQueue.create({event_id:'evt-1',idempotency_key:'idem-1',max_attempts:3,created_at:'2026-09-21T00:00:00.000Z'});
+assert.equal(localQueue.validate(q0).ok,true);
+assert.equal(localQueue.canAttempt(q0,'2026-09-21T00:00:00.000Z'),true);
+let qi=localQueue.markInFlight(q0,'2026-09-21T00:00:00.000Z').row;
+let qr=localQueue.markRetry(qi,'NETWORK','2026-09-21T00:00:00.000Z',{base_ms:1000,max_ms:8000}).row;
+assert.equal(qr.status,'RETRY');
+assert.equal(qr.attempts,1);
+assert.equal(qr.next_retry_at,'2026-09-21T00:00:01.000Z');
+assert.equal(localQueue.canAttempt(qr,'2026-09-21T00:00:00.500Z'),false);
+qi=localQueue.markInFlight(qr,'2026-09-21T00:00:01.000Z').row;
+qr=localQueue.markRetry(qi,'NETWORK','2026-09-21T00:00:01.000Z',{base_ms:1000,max_ms:8000}).row;
+assert.equal(qr.status,'RETRY');
+assert.equal(qr.attempts,2);
+qi=localQueue.markInFlight(qr,'2026-09-21T00:00:03.000Z').row;
+const dead=localQueue.markRetry(qi,'NETWORK','2026-09-21T00:00:03.000Z').row;
+assert.equal(dead.status,'DEAD_LETTER');
+assert.equal(dead.attempts,3);
+const ack=localQueue.markAcked(localQueue.markInFlight(q0,'2026-09-21T00:00:00.000Z').row,{ack_token:'ack-1',remote_version:'v2',now:'2026-09-21T00:00:02.000Z'}).row;
+assert.equal(ack.status,'ACKED');
+assert.equal(ack.ack_token,'ack-1');
+assert.equal(Object.isFrozen(ack),true);
+console.log('PASS: shared local queue bounded retry, dead-letter and ack lifecycle');
