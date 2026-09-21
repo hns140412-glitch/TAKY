@@ -20,6 +20,21 @@ The `TAKY-WORK-OS` repository is a subordinate implementation / operating reposi
 When an external Work OS rule conflicts with this central contract, central TAKY authority governs unless an approved ownership change explicitly says otherwise.
 The implementation repository SHOULD record the inherited central Work OS contract/version where useful for drift control.
 
+### 1.0A Work OS / Learning OS sibling boundary — HARD LOCK
+
+Work OS is not the parent/common semantic container of Learning OS.
+
+Current relation:
+`TAKY -> WORK_OS`
+`TAKY -> LEARNING_OS`
+
+They may reuse semantic-light shared technical mechanisms, but Work organization/team roles, permissions, approvals and project-task meaning remain Work-owned. Family/child/parent identity, learning roles and learning-plan meaning remain Learning-owned.
+
+Cross-domain linkage, if ever required, SHALL use an explicit scoped federation/projection contract rather than implicit role/identity inheritance.
+
+Machine-readable support map:
+`MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json`.
+
 ## 1.1 Productive execution pipeline — HARD LOCK
 
 Work OS default productive rhythm:
