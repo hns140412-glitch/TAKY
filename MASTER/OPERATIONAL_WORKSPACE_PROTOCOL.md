@@ -19,6 +19,18 @@ Each materially important data class SHALL have one approved authority/owner sys
 
 Project-specific authority mapping belongs to the owning DOMAIN / PROJECT / WORKFLOW master.
 
+## 1.1 External growth vs internal workspace — HARD LOCK
+
+Operational workspaces such as Notion primarily store, coordinate and project internal work/evidence. They are not the default external engineering discovery engine.
+
+For software/tooling/PWA/Work OS improvement:
+`GITHUB / PLATFORM ECOSYSTEM -> TKY-GROWTH-001 -> LOCALIZED CANDIDATE / GAP -> OWNER REFLECTION / PROJECT WORK -> OPTIONAL WORKSPACE PROJECTION`.
+
+A workspace may store research captures, pattern records, backlog items and dispositions, but storage location does not determine research authority or growth priority.
+
+`NOTION STORED != GITHUB/PLATFORM RESEARCHED`
+`WORKSPACE DATA != EXTERNAL CURRENT-BEST EVIDENCE`
+
 ## 2. Operational Record Contract — HARD LOCK
 
 Material work items SHOULD preserve, as applicable: stable ID, Project/entity link, accountable owner, reviewer/approver when required, due date/gate, state, priority/blocker, source/evidence link, decision/approval link, affected dependencies, completion evidence, latest validation state, and change/history pointer.

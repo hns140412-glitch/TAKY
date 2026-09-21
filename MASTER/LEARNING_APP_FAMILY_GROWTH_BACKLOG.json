@@ -1,0 +1,156 @@
+{
+  "registry_version": "2026-09-21.1",
+  "owner_rule": "TKY-GROWTH-001",
+  "scope": "Shared mobile-web/PWA and TAKY execution-growth gaps discovered from current repository inspection plus external engineering ecosystem comparison.",
+  "state_semantics": {
+    "OPEN": "Material gap remains to be implemented or validated.",
+    "PARTIAL": "Some supporting implementation exists but exit conditions are not met.",
+    "VALIDATED": "Exit conditions are met for the declared scope.",
+    "HOLD": "Deferred with explicit reason/exit condition.",
+    "SUPERSEDED": "Replaced by a newer gap/pattern with lineage."
+  },
+  "items": [
+    {
+      "gap_id": "GROWTH-PWA-UPDATE-001",
+      "priority": "P0",
+      "title": "Atomic safe-point PWA update lifecycle",
+      "applies_to": ["Ready-Set", "Hide-Seek", "Snap-Pop"],
+      "state": "OPEN",
+      "evidence": [
+        "Learning App Family Master requires safe-point activation during active learning.",
+        "Ready-Set sw.js currently calls skipWaiting() during install, while Hide-Seek uses an explicit APPLY_UPDATE message."
+      ],
+      "improvement_direction": "Unify DETECT -> DOWNLOAD -> WAITING -> SAFE_POINT -> ACTIVATE -> VERSION_HANDSHAKE -> RESTORE behavior across the app family.",
+      "exit_conditions": [
+        "No service-worker activation can invalidate an active learning session.",
+        "Waiting update is explicit and traceable.",
+        "Old/new app shell asset mixing is regression-tested.",
+        "Representative installed-PWA update flow is runtime/device verified."
+      ],
+      "owner_destination": "Learning App Family + each project runtime"
+    },
+    {
+      "gap_id": "GROWTH-VERSION-TUPLE-001",
+      "priority": "P0",
+      "title": "App/SW/schema version tuple and compatibility check",
+      "applies_to": ["Ready-Set", "Hide-Seek", "Snap-Pop"],
+      "state": "OPEN",
+      "evidence": [
+        "Ready-Set app.js/VERSION.json/service-worker cache identifiers currently expose different version strings."
+      ],
+      "improvement_direction": "Create one machine-readable release tuple containing app_version, sw_version, data_schema_version and contract_version; verify compatibility at boot/update.",
+      "exit_conditions": [
+        "One authoritative release tuple is consumed by app and service worker.",
+        "Build/CI fails on incompatible or drifting version identifiers.",
+        "Migration/rollback behavior is defined for schema changes."
+      ],
+      "owner_destination": "Learning App Family release contract + project build/runtime"
+    },
+    {
+      "gap_id": "GROWTH-LOCALFIRST-CONFLICT-001",
+      "priority": "P0",
+      "title": "Version-aware local-first reconciliation",
+      "applies_to": ["Ready-Set", "shared learning data"],
+      "state": "PARTIAL",
+      "evidence": [
+        "Ready-Set already has IndexedDB snapshots, outbox, retries, idempotency and a conflict store.",
+        "Current conflict resolution is whole-payload KEEP_LOCAL or ACCEPT_REMOTE without explicit base/local/remote version semantics."
+      ],
+      "improvement_direction": "Add entity/base/local/remote versions and classify mergeable, authority-owned and semantic conflicts before synchronization is expanded.",
+      "exit_conditions": [
+        "Concurrent edits cannot silently overwrite newer accepted state.",
+        "Conflict classification and deterministic resolution rules exist.",
+        "Retry remains idempotent across reconnect/reload.",
+        "Representative concurrent/offline replay passes."
+      ],
+      "owner_destination": "Shared learning data/sync capability + Ready-Set implementation"
+    },
+    {
+      "gap_id": "GROWTH-STATE-EVENT-001",
+      "priority": "P1",
+      "title": "Separate current state synchronization from event/history identity",
+      "applies_to": ["Ready-Set", "Hide-Seek", "Snap-Pop"],
+      "state": "OPEN",
+      "evidence": [
+        "Ready-Set local-first outbox derives an event id from scope plus payload digest, which is suitable for snapshot deduplication but not always for repeated historical events."
+      ],
+      "improvement_direction": "Use explicit immutable event_id for history/events and separate state snapshot/version identity for synchronization.",
+      "exit_conditions": [
+        "Repeated identical user events remain distinguishable when history requires it.",
+        "Snapshot deduplication does not erase material event history.",
+        "Event replay is idempotent."
+      ],
+      "owner_destination": "Shared learning event/data contract"
+    },
+    {
+      "gap_id": "GROWTH-FAMILY-APP-REGISTRY-001",
+      "priority": "P0",
+      "title": "Cross-app registry and contract handshake",
+      "applies_to": ["Ready-Set", "Hide-Seek", "Snap-Pop"],
+      "state": "OPEN",
+      "evidence": [
+        "Ready-Set runtime currently contains hard-coded hosted origins for specialist apps and passes session identifiers through URL/runtime bridges."
+      ],
+      "improvement_direction": "Introduce a family app registry with app_id, origin, contract_version, minimum_compatible_version, capabilities and return protocol; reject incompatible handoffs before navigation.",
+      "exit_conditions": [
+        "No project requires hard-coded opaque production origin in business logic.",
+        "Cross-app contract incompatibility is detected before handoff.",
+        "Return/result deduplication is version-aware.",
+        "Local/preview/production environments can map origins without changing domain logic."
+      ],
+      "owner_destination": "Learning App Family shared runtime contract"
+    },
+    {
+      "gap_id": "GROWTH-EXTERNAL-BUDGET-001",
+      "priority": "P1",
+      "title": "External side-effect budget and evidence yield",
+      "applies_to": ["TAKY", "all deployable apps"],
+      "state": "OPEN",
+      "evidence": [
+        "TAKY already guards external resources, but recent app work showed repeated hosting/deploy calls can consume quota without corresponding implementation evidence."
+      ],
+      "improvement_direction": "Track external preview/build/deploy/API/agent actions as side effects with purpose, evidence expected, actual evidence and retry reason.",
+      "exit_conditions": [
+        "Repeated external call without new evidence is blocked or explicitly justified.",
+        "Frozen-candidate deploy path is distinguishable from implementation/test work.",
+        "External-call history can explain why each costly action occurred."
+      ],
+      "owner_destination": "TAKY enforcement/operations + project release workflows"
+    },
+    {
+      "gap_id": "GROWTH-OUTCOME-LEARNING-001",
+      "priority": "P1",
+      "title": "Outcome and learning feedback metrics",
+      "applies_to": ["TAKY", "Work OS", "all apps"],
+      "state": "OPEN",
+      "evidence": [
+        "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden."
+      ],
+      "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion.",
+      "exit_conditions": [
+        "Material adopted growth changes have at least one relevant outcome signal where measurable.",
+        "Rules that add cost without demonstrated value can be adjusted or retired.",
+        "CURRENT_BEST updates cite outcome/regression evidence."
+      ],
+      "owner_destination": "TKY-GROWTH-001 + Outcome Optimization"
+    },
+    {
+      "gap_id": "GROWTH-GITHUB-INTEL-001",
+      "priority": "P1",
+      "title": "GitHub ecosystem pattern intelligence as repeatable research input",
+      "applies_to": ["TAKY", "Work OS", "all engineering projects"],
+      "state": "PARTIAL",
+      "evidence": [
+        "Current Deep Analysis already calls for relevant case research and principle extraction.",
+        "GitHub repo, issues, discussions, PR/release/community evidence is not yet represented as a persistent growth backlog/learning loop."
+      ],
+      "improvement_direction": "Use TKY-GROWTH-001 to turn high-signal repository/community research into pattern records, localized candidates, experiments and CURRENT_BEST/FRONTIER updates.",
+      "exit_conditions": [
+        "Deep-search results preserve inspected cases and concrete local gaps.",
+        "Material adopted findings have owner/destination and validation evidence.",
+        "Research does not collapse into generic policy accumulation."
+      ],
+      "owner_destination": "TAKY growth intelligence"
+    }
+  ]
+}

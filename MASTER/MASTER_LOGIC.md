@@ -168,6 +168,22 @@ Optimization SHALL NOT precede preservation of required evidence/decisions/const
 
 Deep Analysis may conclude PASS / PASS_WITH_CONDITIONS / REVIEW_REQUIRED / CONFLICT / UNVERIFIED / FAIL. SELF-VALIDATION NOT COMPLETED → PASS PROHIBITED. Material coverage failure → PASS PROHIBITED.
 
+## 8.1 Growth Intelligence / External Pattern Learning — HARD LOCK
+
+Deep research must create growth, not merely more policy.
+
+For software/tooling/mobile-web/PWA/Work OS work, use `MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md` / `TKY-GROWTH-001` when external ecosystem learning is material.
+
+Default:
+`CURRENT REALITY -> GITHUB/PLATFORM ECOSYSTEM RESEARCH -> SUCCESS/FAILURE/EVOLUTION PATTERN -> TAKY/PROJECT GAP -> LOCALIZED CANDIDATE -> EXPERIMENT/IMPLEMENTATION -> OUTCOME + REGRESSION -> CURRENT_BEST / FRONTIER`.
+
+GitHub ecosystem research includes repository code/architecture plus Issues, PR/review, Discussions, releases/changelog and relevant community/platform evidence when useful. Popularity is only one signal.
+
+Material reusable gaps discovered centrally SHALL receive a stable downstream owner/backlog route so lower apps can consume them during implementation. Do not turn every external pattern into GRAND MASTER text.
+
+`GAP DISCOVERED + NO OWNER/ROUTE = SILENT LOSS CANDIDATE`.
+`MORE RULES != MORE CAPABILITY`.
+
 ## 9. Reflection / Reverse Validation — HARD LOCK
 Reviewing sources is insufficient. Material decisions SHALL be represented in the resulting MASTER/plan/design/implementation/deployment or explicit disposition state.
 
