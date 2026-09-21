@@ -179,6 +179,32 @@ Snap & Pop Family Expansion remains project-owned. Recover its active inherited 
 
 Ready project-specific Main Guide + Random Guest behavior remains Ready-owned. `SPECIAL FRIEND` remains a separate GUIDE recovery concept unless direct source evidence establishes equivalence.
 
+## 11.2 SHARED GROWTH BACKLOG INHERITANCE — HARD LOCK
+
+The family SHALL consume applicable unresolved shared engineering gaps from:
+`MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json`.
+
+This support registry is not proof of implementation. It preserves centrally discovered deficiencies, improvement direction and exit conditions so project development does not lose them.
+
+Before material implementation/release work in Ready & Set, Hide & Seek or Snap & Pop:
+1. load applicable OPEN/PARTIAL family growth items;
+2. map each material item to the project implementation/milestone, or mark NOT_APPLICABLE/HOLD with reason;
+3. implement against the current project MASTER rather than replacing project authority;
+4. update evidence only when the stated exit conditions are actually met;
+5. preserve newer evidence that supersedes an older growth item.
+
+Current shared high-priority gap families include:
+- safe-point PWA/service-worker update atomicity;
+- unified app/SW/data-schema/contract version compatibility;
+- version-aware local-first conflict/reconciliation;
+- state snapshot vs immutable event/history separation;
+- cross-app registry and contract handshake;
+- external side-effect/deploy budget;
+- outcome/learning feedback evidence.
+
+`FAMILY BACKLOG ITEM != PROJECT IMPLEMENTATION`.
+`PROJECT IMPLEMENTATION WITHOUT APPLICABLE GAP REVIEW = REVIEW_REQUIRED` when a material OPEN/PARTIAL item applies.
+
 ## 12. REGRESSION GATE
 
 A release fails if any of the following occur:
