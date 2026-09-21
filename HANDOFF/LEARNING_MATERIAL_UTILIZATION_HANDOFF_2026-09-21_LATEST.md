@@ -1,6 +1,6 @@
 # LEARNING ENGINE + MATERIAL UTILIZATION HANDOFF — 2026-09-21 LATEST
 
-Status: READY_FOR_NEW_CHAT_REFLECTION
+Status: REFLECTION_CLOSED__DOWNSTREAM_IMPLEMENTATION_OPEN
 TAKY branch: `taky/c2s-learning-material-utilization-2026-09-21`
 
 ## Read first
@@ -11,56 +11,64 @@ TAKY branch: `taky/c2s-learning-material-utilization-2026-09-21`
 4. `C2S/LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21.json`
 5. `C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_C2S_2026-09-21.md`
 6. `C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_ATOMS_2026-09-21.json`
-7. `C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md`
-8. `C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json`
+7. `C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_REFLECTION_2026-09-21.md`
+8. `C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_REFLECTION_2026-09-21.json`
+9. `C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md`
+10. `C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json`
 
 ## Current closure state
 
 Initial atoms = 12
 Initial reflection = 12/12 complete
 Supplemental atoms = 9 (LRN-UTIL-013..021)
+Supplement reflection = 9/9 complete
 Total material atoms = 21
+Total reflection = 21/21 complete
+
 UNMAPPED_MATERIAL = 0
 SILENT_LOSS = 0
 FALSE_CONVERGENCE = 0
 C2S_COMPILE_CLOSED = true
-Supplement reflection = OPEN
+REFLECTION_COMPLETE = true
 DOWNSTREAM_IMPLEMENTATION_COMPLETE = false
 
-## Existing initial 12
+## Supplemental reflection result
 
-SCENE_FIRST_RECALL
-SENSORY_RECALL_LADDER
-ORAL_BEFORE_WRITING
-GRADUAL_EXPRESSION_EXPANSION
-EXPRESSION_VARIATION
-SITUATION_TO_LANGUAGE
-MEANING_CONTEXT_REUSE
-FORM_MEANING_USAGE_CHAIN
-WRITING_SCAFFOLD_GRAPH
-QUESTION_BEFORE_CALCULATION
-PROBLEM_RESTATE
-PRESERVE_CHILD_VOICE
+- IMPLEMENTED: 1
+- PARTIAL_IMPLEMENTATION: 4
+- DUPLICATE: 3
+- HOLD: 1
+- OWNERSHIP_ERROR: 0
+- new independent capability GAP: 1
 
-Initial reflection produced 12 atom-level gaps consolidated to 7 capability gaps.
-Do not assume those gaps are still current without refreshing the product rebuild branches.
+New GAP:
+- GAP-CAP-08 — Ready Meaning/Connection Scaffold Routing
+  - LRN-UTIL-014 CONCEPT_TO_PERSONAL_EXPERIENCE
+  - LRN-UTIL-015 UNDERSTAND_CONNECT_RETRIEVE_CHAIN
 
-## New supplemental 9
+Do not create separate GAPs for:
+- LRN-UTIL-013: merge into GAP-CAP-02 / GAP-CAP-03
+- LRN-UTIL-016: duplicate/strengthening of GAP-CAP-06
+- LRN-UTIL-017: P2 HOLD
+- LRN-UTIL-018: existing Ready↔Hide review-roundtrip/integration work
+- LRN-UTIL-019: merge into GAP-CAP-04 / GAP-CAP-05
+- LRN-UTIL-020: merge into GAP-CAP-03
+- LRN-UTIL-021: safety/policy lock, no feature GAP
 
-DIALOGUE_AS_COGNITIVE_SCAFFOLD
-CONCEPT_TO_PERSONAL_EXPERIENCE
-UNDERSTAND_CONNECT_RETRIEVE_CHAIN
-PROCESS_VERBALIZATION_BEFORE_FINAL
-REAL_WORLD_CONCEPT_DISCOVERY
-SHORT_FREQUENT_RETRIEVAL
-ROOT_SEMANTIC_VOCABULARY_MAP
-ONE_LINE_CONCEPT_EXPRESSION
-MOTIVATION_FROM_EVIDENCE_NOT_GENDER
+Real consolidated implementation GAP count = 8.
+
+## Current practical utilization
+
+Conservative whole-system estimate:
+- mechanism-level learning-material utilization: ~49%
+- end-to-end learner-flow utilization: ~37%
+
+Do not convert these numbers into product-completion claims.
 
 ## Ownership locks
 
 Ready & Set
-= session / task routing / Planner / execution timing / goal session / LAP tracking
+= session / task routing / Planner / execution timing / Goal Session / LAP
 
 Ready Learning Engine
 = assignment interpretation / Learning Unit / level resolution / Hanja grade resolution / scaffold routing
@@ -71,69 +79,35 @@ Hide & Seek
 Snap & Pop
 = thought / expression / writing / speaking / language use
 
-No ownership transfer is allowed merely because a source example crosses domains.
-
-## Important product evidence reinforced
-
-ONE GOAL
-ONE SESSION
-MULTIPLE APPS
-ONE LEARNING HISTORY
-
-Ready & Set = orchestrate / execute / track.
-Hide & Seek = find / hint / discover / recall experience; engine terminology stays internal.
-Snap & Pop = expression specialist, not only Korean writing.
-
-Goal Session can contain multiple tasks.
-Each task can have a LAP record.
-The session closes once after the task sequence, not as disconnected timers.
-
-## Source safety / quality locks
+## Source safety locks
 
 - Attachments remain REFERENCE_ONLY / EVIDENCE_ASSIST.
-- Do not copy source layouts, illustrations, word lists, card text or exercise sequence verbatim.
-- Hanja semantic-map idea is reusable; source data itself is not canonical.
+- Do not copy source layouts, illustrations, word lists, card text, wording or exercise sequence.
+- Hanja/root semantic-map mechanisms may be abstracted; source data is not canonical.
 - Social-media claims are not scientific authority.
 - Do NOT encode gender stereotypes as motivation logic.
-- Learner adaptation uses observed behavior, explicit preference, performance, history and guardian-confirmed context.
+- Adapt using observed behavior, explicit preference, performance, history and guardian-confirmed context.
 
-## Next exact work
+## Product-code boundary
 
-Refresh live branches before writing code:
-- TAKY: `taky/c2s-learning-material-utilization-2026-09-21`
-- Ready & Set: current rebuild branch
-- Hide & Seek: current rebuild branch
-- Snap & Pop: current rebuild branch
+This reflection pass changed TAKY C2S documentation only.
+Ready / Hide / Snap product code was not modified.
 
-Then reflection-map ONLY supplemental atoms 013–021 first.
-For each classify:
-IMPLEMENTED / PARTIAL_IMPLEMENTATION / NOT_IMPLEMENTED / DUPLICATE / OWNERSHIP_ERROR / IMPLEMENTATION_GAP / HOLD.
+## Next work
 
-Then:
-- consolidate real gaps,
-- cross-check against the initial 7 capability gaps,
-- avoid duplicate implementation,
-- do not edit product code until the current rebuild gate allows it,
-- report reflection progress, closure, real gap count and actual whole-system utilization every turn.
+Product implementation must follow each app's rebuild/runtime gate and owner:
+1. preserve the 8-gap consolidated map;
+2. implement only when the owning rebuild branch gate permits;
+3. do not duplicate Ready↔Hide review-roundtrip work as a material-utilization feature;
+4. keep GAP-CAP-08 inside Ready Learning Engine scaffold routing;
+5. continue to report:
+   - reflection progress,
+   - C2S closure,
+   - real implementation GAP count,
+   - actual whole-system utilization.
 
-## New-chat starter
+## Resume command
 
 최신 TAKY 기준으로 Learning Engine + 학습 참고자료 활용성 C2S 후속 작업을 재개해.
-
-GitHub `hns140412-glitch/TAKY`의 `taky/c2s-learning-material-utilization-2026-09-21` 브랜치를 live refresh하고,
-`HANDOFF/LEARNING_MATERIAL_UTILIZATION_HANDOFF_2026-09-21_LATEST.md`와 그 문서의 Read first 목록을 순서대로 읽어.
-
-기존 12 atom reflection은 닫혀 있고, 추가 첨부자료에서 생성된 LRN-UTIL-013~021 9개 supplemental atom의 reflection이 OPEN이다.
-Ready / Hide / Snap 최신 rebuild branch를 먼저 refresh한 뒤 제품 코드를 수정하지 말고 013~021부터 현재 구조와 대조해서 IMPLEMENTED / PARTIAL / NOT_IMPLEMENTED / DUPLICATE / OWNERSHIP_ERROR / GAP / HOLD로 분류해.
-기존 7 capability GAP과 중복되는 것은 합치고 새 GAP을 과장해서 만들지 마.
-
-소유권:
-Ready & Set = session/task routing/Planner/Goal Session/LAP
-Ready Learning Engine = 과제 해석/Learning Unit/수준·한자 급수/scaffold routing
-Hide & Seek = Language Memory & Meaning
-Snap & Pop = thought/expression/writing/speaking/language use
-
-첨부자료는 REFERENCE_ONLY / EVIDENCE_ASSIST이며 원문·레이아웃·문구·교재 순서를 복제하지 마.
-성별 고정 동기화 같은 검증되지 않은 일반화는 구현하지 마.
-
-항상 reflection 진행률, C2S closure, 실제 구현 GAP 수, 전체 학습 시스템 실제 활용도를 같이 보고해.
+`HANDOFF/LEARNING_MATERIAL_UTILIZATION_HANDOFF_2026-09-21_LATEST.md`의 Read first를 순서대로 읽고 현재 21/21 reflection closure와 consolidated 8 GAP을 복원해.
+제품 코드 수정은 각 Ready / Hide / Snap rebuild gate가 허용하는 범위에서만 진행하고, 중복 GAP을 만들지 마.
