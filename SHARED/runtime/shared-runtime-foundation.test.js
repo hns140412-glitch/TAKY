@@ -1,6 +1,7 @@
 const assert=require('assert');
 const release=require('./release-contract.js');
 const pwa=require('./pwa-update-state.js');
+const eventEnvelope=require('./event-envelope.js');
 
 function descriptor(overrides={}){
   return {
@@ -68,3 +69,27 @@ for(const [event,expected] of [
 }
 
 console.log('PASS: shared runtime foundation release compatibility and safe PWA state transitions');
+
+
+const eventA=eventEnvelope.create({
+  source:'test-consumer',
+  event_type:'OPAQUE_TEST_EVENT',
+  payload:{b:2,a:1},
+  correlation_id:'corr-1'
+});
+const eventB=eventEnvelope.create({
+  source:'test-consumer',
+  event_type:'OPAQUE_TEST_EVENT',
+  payload:{a:1,b:2},
+  correlation_id:'corr-1'
+});
+assert.equal(eventEnvelope.validate(eventA).ok,true);
+assert.notEqual(eventA.event_id,eventB.event_id);
+assert.equal(eventA.payload_digest,eventB.payload_digest);
+assert.equal(eventA.idempotency_key,eventA.event_id);
+assert.equal(Object.isFrozen(eventA),true);
+assert.equal(Object.isFrozen(eventA.payload),true);
+assert.throws(()=>{eventA.payload.a=9;},/read only|Cannot assign|object is not extensible/i);
+const tampered={...eventA,payload:{a:9,b:2}};
+assert.equal(eventEnvelope.validate(tampered).ok,false);
+console.log('PASS: shared immutable event envelope identity is distinct from payload digest');
