@@ -1,0 +1,29 @@
+name: Mobile Registry Live Refresh Check
+
+on:
+  pull_request:
+    paths:
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
+      - 'ENFORCEMENT/mobile_app_registry_live_refresh.py'
+      - '.github/workflows/mobile-registry-live-refresh.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 0 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  live-head-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate registry structure
+        run: python ENFORCEMENT/mobile_app_development_registry_validator.py
+      - name: Compare registry source heads with live GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python ENFORCEMENT/mobile_app_registry_live_refresh.py
