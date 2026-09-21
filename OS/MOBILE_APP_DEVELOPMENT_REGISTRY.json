@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-20.1",
+  "registry_version": "2026-09-21.2",
   "purpose": "Single registry for TAKY mobile web app development surfaces across GitHub, Google Drive and Netlify. Prevent source, validation, deploy and legacy artifacts from being mistaken for each other.",
   "state_model": [
     "SOURCE_CURRENT",
@@ -18,7 +18,8 @@
     "DRIVE_BUILD_OR_HANDOFF != SOURCE_OF_TRUTH.",
     "NETLIFY_PROJECT_NAME != PRODUCT_IDENTITY.",
     "CODED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED.",
-    "APP_SOURCE_CODE_SINGLE_SOURCE = GITHUB; Drive must not host a competing current source-code copy."
+    "APP_SOURCE_CODE_SINGLE_SOURCE = GITHUB; Drive must not host a competing current source-code copy.",
+    "REGISTRY_SNAPSHOT != LIVE_CURRENT_STATE; refresh volatile GitHub/deploy claims when material."
   ],
   "apps": {
     "READY_SET": {
@@ -27,8 +28,10 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "1b6880fb08f29c2ad25229fc65c53f9a77b8f20b",
-        "state": "SOURCE_CURRENT"
+        "main_head": "5b1d88a153c54d470db044bf81c5a237fa0d66a8",
+        "state": "SOURCE_CURRENT",
+        "head_evidence_state": "LIVE_REFRESHED_2026-09-21",
+        "head_change_note": "README authority cleanup merged after prior implementation baseline; current main SHA updated without upgrading runtime/device claims."
       },
       "drive": {
         "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
@@ -282,8 +285,10 @@
       "github": {
         "repo": "hns140412-glitch/Snap-Pop",
         "default_branch": "main",
-        "main_head": "0e2b5bee094045dc03656ab22b4bed630d4d670f",
-        "state": "SOURCE_CURRENT"
+        "main_head": "1c1a4e8d009c25e37e74c8d07b0ae33f0a89c6d0",
+        "state": "SOURCE_CURRENT",
+        "head_evidence_state": "LIVE_REFRESHED_2026-09-21",
+        "head_change_note": "README authority cleanup merged; current main differs from deployed commit by documentation-only change known from PR #2."
       },
       "drive": {
         "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
@@ -305,7 +310,8 @@
           "deployed_commit": "0e2b5bee094045dc03656ab22b4bed630d4d670f",
           "deployed_branch": "main",
           "provenance": "GIT_COMMIT_PROVEN",
-          "relation_to_current_main": "EXACT_SHA_MATCH"
+          "relation_to_current_main": "DEPLOYED_STALE",
+          "residue": "Current main adds README authority cleanup after deployed commit. Runtime code change is not claimed, but exact deploy SHA no longer matches current main."
         }
       ],
       "legacy_drive_refs": [
@@ -328,7 +334,8 @@
         "repo": "hns140412-glitch/Hide-Seek",
         "default_branch": "main",
         "main_head": "b3c12e8585d6805a579b2ee89083aa91345ce967",
-        "state": "SOURCE_CURRENT"
+        "state": "SOURCE_CURRENT",
+        "head_evidence_state": "LIVE_REFRESHED_2026-09-21"
       },
       "drive": {
         "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
@@ -425,5 +432,17 @@
     "app_catalog": "Use TAKY-MOBILE + TAKY/10_PROJECTS/MOBILE_CATALOG.",
     "validation_pr": "Label/classify as VALIDATION_ONLY; never infer merge intent from open state.",
     "release_claim": "Require exact Git commit ↔ deploy ID provenance and separate device evidence."
+  },
+  "freshness_policy": {
+    "class": "VOLATILE_OPERATIONAL_SNAPSHOT",
+    "snapshot_date": "2026-09-21",
+    "current_state_claim_requires_live_refresh": true,
+    "refresh_triggers": [
+      "before definitive current-main or open-PR claims",
+      "before deploy/release decisions",
+      "after a product repository merge",
+      "when a stored deploy relation is used to claim exact current deployment"
+    ],
+    "rule": "Registry values are preserved operational snapshots. SOURCE_CURRENT identifies the source repository/branch, not perpetual freshness of the stored SHA."
   }
 }
