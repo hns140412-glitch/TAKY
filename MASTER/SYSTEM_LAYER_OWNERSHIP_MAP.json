@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-21.7",
+  "map_version": "2026-09-21.8",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -389,11 +389,15 @@
     {
       "gap_id": "LAYER-GAP-005",
       "priority": "P1",
-      "state": "PARTIAL",
-      "finding": "TAKY mobile app development registry contains snapshot heads and deployment relationships that can become stale relative to fast-moving app repositories.",
-      "direction": "keep snapshot metadata but require live refresh for material current-state/release claims; automate refresh later if value justifies it",
+      "state": "VALIDATED",
+      "finding": "Mobile app development registry remains a volatile snapshot, but live GitHub default-branch drift is now automatically checked on relevant PRs, manual runs and a daily schedule.",
+      "direction": "Use live-head checker for source-current claims; keep deploy/device freshness separate and require provider-specific provenance before deployment claims.",
       "evidence": [
-        "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json now declares volatile snapshot semantics and live-refresh triggers."
+        "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json refreshed to current Ready/Hide/Snap/TAKY-ASSETS/TAKY-MOBILE heads.",
+        "ENFORCEMENT/mobile_app_registry_live_refresh.py",
+        ".github/workflows/mobile-registry-live-refresh.yml",
+        "Mobile Registry Live Refresh Check run 35560051513 SUCCESS",
+        "TAKY Enforcement Replay run 35560051489 SUCCESS"
       ]
     },
     {
