@@ -1,0 +1,182 @@
+{
+  "registry_version": "2026-09-21.1",
+  "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
+  "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
+  "invariants": [
+    "SHARED_TECHNICAL_CAPABILITY != SHARED_DOMAIN_AUTHORITY",
+    "SHARED_ENGINE != SHARED_DATA != SHARED_SEMANTICS != SHARED_AUTHORITY",
+    "A shared implementation must expose a stable mechanism contract and explicit semantic exclusions.",
+    "A consumer migration is not complete until the consumer uses the shared contract and regression evidence exists.",
+    "REFERENCE_IMPLEMENTATION_PRESENT != CONSUMER_MIGRATED"
+  ],
+  "capabilities": [
+    {
+      "capability_id": "CAP-RELEASE-COMPAT-001",
+      "title": "Release descriptor and compatibility mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "REFERENCE_IMPLEMENTED",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "implementation": "SHARED/runtime/release-contract.js",
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "required_fields": [
+          "app_id",
+          "app_version",
+          "runtime_version",
+          "data_schema_version",
+          "contract_version",
+          "release_id"
+        ],
+        "compatibility_dimensions": [
+          "contract_version",
+          "data_schema_version"
+        ],
+        "result_states": [
+          "COMPATIBLE",
+          "INCOMPATIBLE_CONTRACT",
+          "INCOMPATIBLE_SCHEMA",
+          "INVALID_DESCRIPTOR"
+        ]
+      },
+      "semantic_exclusions": [
+        "product identity meaning",
+        "domain migration policy",
+        "who may approve release",
+        "domain-specific rollback decision"
+      ],
+      "consumers": {
+        "Ready-Set": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATION_OPEN",
+        "Snap-Pop": "MIGRATION_OPEN",
+        "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
+      },
+      "acceptance_conditions": [
+        "descriptor validation is deterministic",
+        "compatibility result is explicit",
+        "consumer-specific release semantics remain outside the shared primitive",
+        "consumer drift can be caught by CI after migration"
+      ]
+    },
+    {
+      "capability_id": "CAP-PWA-UPDATE-001",
+      "title": "PWA safe update lifecycle state machine",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "REFERENCE_IMPLEMENTED",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "implementation": "SHARED/runtime/pwa-update-state.js",
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "states": [
+          "IDLE",
+          "UPDATE_DETECTED",
+          "DOWNLOADED_WAITING",
+          "SAFE_TO_ACTIVATE",
+          "ACTIVATING",
+          "RESTORING",
+          "READY",
+          "FAILED"
+        ],
+        "required_transition_rule": "activation is impossible from DOWNLOADED_WAITING until safe_point=true",
+        "family_semantic_hook": "consumer supplies safe_point; shared primitive does not decide what counts as a safe learning/work state"
+      },
+      "semantic_exclusions": [
+        "what constitutes a safe point for a learning session",
+        "what constitutes a safe point for a Work OS workflow",
+        "what user/session data must be restored",
+        "release approval"
+      ],
+      "consumers": {
+        "Ready-Set": "MIGRATION_P0",
+        "Hide-Seek": "MIGRATION_P0",
+        "Snap-Pop": "MIGRATION_P0"
+      },
+      "acceptance_conditions": [
+        "waiting update cannot transition directly to activation without safe point",
+        "failure state is explicit",
+        "consumer supplies persistence/restore hooks",
+        "browser service-worker adapter remains a lower implementation adapter"
+      ]
+    },
+    {
+      "capability_id": "CAP-EVENT-ENVELOPE-001",
+      "title": "Immutable event envelope identity",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "DESIGN_READY_IMPLEMENTATION_OPEN",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "implementation": null,
+      "semantic_exclusions": [
+        "event business meaning",
+        "domain history retention policy",
+        "domain conflict resolution"
+      ],
+      "consumers": {
+        "Ready-Set": "P1",
+        "Hide-Seek": "P1",
+        "Snap-Pop": "P1"
+      }
+    },
+    {
+      "capability_id": "CAP-LOCAL-QUEUE-001",
+      "title": "Local durable outbox/retry/idempotency mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "EXTRACTION_OPEN",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "current_evidence": [
+        "Ready-Set:ready-local-first-v01.js",
+        "Ready-Set:ready-sync-adapter-v01.js"
+      ],
+      "semantic_exclusions": [
+        "domain entity version meaning",
+        "conflict resolution authority",
+        "family/work ownership"
+      ],
+      "consumers": {
+        "Ready-Set": "CURRENT_PROJECT_IMPLEMENTATION_EXISTS",
+        "Hide-Seek": "OPEN",
+        "Snap-Pop": "OPEN"
+      }
+    },
+    {
+      "capability_id": "CAP-OCR-INGEST-001",
+      "title": "Generic OCR/vision ingestion mechanics",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "CANDIDATE_EXTRACTION",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "semantic_exclusions": [
+        "assignment FACT confirmation",
+        "vocabulary pairing semantics",
+        "architecture/document interpretation"
+      ]
+    },
+    {
+      "capability_id": "CAP-HTTP-ADAPTER-001",
+      "title": "External/Public API request-cache-rate-limit adapter mechanics",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "CANDIDATE_EXTRACTION",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "semantic_exclusions": [
+        "public-data meaning",
+        "architecture/legal conclusion",
+        "learning-data meaning"
+      ]
+    },
+    {
+      "capability_id": "CAP-AUTH-TRANSPORT-001",
+      "title": "Authentication/session transport mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "state": "HOLD_BEFORE_EXTRACTION",
+      "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
+      "semantic_exclusions": [
+        "organization identity",
+        "family/child identity",
+        "roles/permissions",
+        "cross-domain authority"
+      ],
+      "hold_reason": "Do not extract until a concrete multi-consumer mechanism can be shared without collapsing Work/Learning identity boundaries."
+    }
+  ]
+}

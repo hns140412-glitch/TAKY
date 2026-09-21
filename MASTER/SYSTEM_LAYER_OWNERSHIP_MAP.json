@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-21.2",
+  "map_version": "2026-09-21.3",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -35,9 +35,9 @@
     },
     "SHARED_TECHNICAL_CAPABILITY": {
       "class": "SEMANTIC_LIGHT_SHARED_MECHANISM",
-      "semantic_owner": "NO_SINGLE_CODE_OWNER_YET",
+      "semantic_owner": "SEMANTIC_LIGHT_MECHANISMS_REGISTERED_IN_MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
       "parent": "TAKY_CORE",
-      "state": "STRUCTURAL_LAYER_DEFINED__CODE_EXTRACTION_OPEN",
+      "state": "REFERENCE_IMPLEMENTATION_STARTED__CONSUMER_MIGRATION_OPEN",
       "owns_candidate_mechanisms": [
         "generic transport and request envelope",
         "generic storage/local durable queue primitives",
@@ -56,6 +56,11 @@
         "work project/task meaning",
         "cross-domain authority",
         "domain-specific conflict resolution semantics"
+      ],
+      "implementation_registry": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "reference_implementations": [
+        "CAP-RELEASE-COMPAT-001 -> SHARED/runtime/release-contract.js",
+        "CAP-PWA-UPDATE-001 -> SHARED/runtime/pwa-update-state.js"
       ]
     },
     "WORK_OS": {
@@ -326,16 +331,26 @@
     {
       "gap_id": "LAYER-GAP-001",
       "priority": "P0",
-      "state": "OPEN",
+      "state": "PARTIAL",
       "finding": "Shared technical capability layer is architecturally defined here but has no single implementation package/registry yet; technical primitives remain distributed across family/project/runtime code.",
-      "direction": "extract only proven reusable technical primitives behind stable contracts; preserve domain semantics in Work/Learning/Family owners"
+      "direction": "continue extraction only after each mechanism proves reuse value; migrate consumers through compatibility adapters rather than duplicating the shared source",
+      "evidence": [
+        "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+        "SHARED/runtime/release-contract.js",
+        "SHARED/runtime/pwa-update-state.js",
+        "ENFORCEMENT/shared_technical_capability_validator.py"
+      ]
     },
     {
       "gap_id": "LAYER-GAP-002",
       "priority": "P0",
-      "state": "OPEN",
+      "state": "PARTIAL",
       "finding": "Learning App Family currently owns several technical requirements (PWA safe update, version tuple, local-first mechanics) that should be reviewed for split into generic mechanism + family-specific semantic policy.",
-      "direction": "do not move wholesale; split mechanism from session/learning semantics and migrate with compatibility adapters"
+      "direction": "next migrate Ready first against shared release/PWA contracts, then Hide/Snap; local-first mechanism remains separate extraction work",
+      "evidence": [
+        "CAP-PWA-UPDATE-001 splits generic lifecycle mechanism from consumer safe-point semantics.",
+        "CAP-RELEASE-COMPAT-001 splits generic compatibility mechanics from product/domain release authority."
+      ]
     },
     {
       "gap_id": "LAYER-GAP-003",
