@@ -99,7 +99,37 @@ Required behavior:
 
 `MODULARITY WHEN BENEFICIAL != FORCED FRAGMENTATION`.
 `NEW MODULE COUNT != ARCHITECTURAL QUALITY`.
+
 `EXISTING PATTERN != IMMUTABLE PATTERN`; demonstrated defects may justify an authorized structural change.
+
+### 4.1 Architecture boundary compilation — HARD LOCK
+
+Before proposing or implementing a material shared-core, cross-domain, OS split/merge, ownership move, or common-capability extraction, compile the architecture boundary before selecting the structure.
+
+Required pre-structure model:
+1. `OWNER MAP` — identify which layer/domain owns the meaning, authority, lifecycle and mutation rights for each material responsibility;
+2. `SHARING CLASS` — classify each candidate as one of:
+   - `SHARED_TECHNICAL_PRIMITIVE` — transport/storage/sync/runtime mechanism with minimal domain meaning;
+   - `DOMAIN_OWNED_SEMANTIC` — meaning/role/authority/state owned by one domain/OS and not globally shared;
+   - `EXPLICIT_FEDERATION` — separately owned identities/states linked through a scoped contract, consent/authority and revocation where applicable;
+   - `NOT_SHARED` — intentionally isolated;
+3. `PROTECTED BOUNDARIES` — identity, role, permission, ownership, data authority, child/family/work/tenant boundaries and other materially protected semantics as applicable;
+4. `COUNTEREXAMPLE CHECK` — test at least one realistic case where the same actor/entity participates in different domains or where shared infrastructure could accidentally transfer authority/meaning;
+5. only then select the minimum sufficient shared structure.
+
+Default:
+`SHARE MECHANISM BEFORE MEANING`.
+A common login/account, database, event bus, identifier or storage layer SHALL NOT imply common domain identity, role, permission, ownership or authority.
+
+`SAME PERSON != SAME DOMAIN IDENTITY`.
+`ACCOUNT LINK != AUTHORITY LINK`.
+`SHARED ENGINE != SHARED DATA != SHARED SEMANTICS != SHARED AUTHORITY`.
+`COMMON CAPABILITY != COMMON OWNER`.
+
+A shared layer SHOULD remain semantic-light. Cross-domain semantic/authority linkage requires an explicit federation contract rather than implicit inheritance.
+
+If a proposed common layer would cause one domain's administrator/owner/role to gain authority in another domain merely from shared identity or infrastructure, the proposal fails the architecture boundary check.
+
 
 ## 5. DATABASE_MIGRATION profile — Safe Schema/Data Change
 
