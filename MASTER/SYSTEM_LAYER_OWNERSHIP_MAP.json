@@ -1,0 +1,383 @@
+{
+  "map_version": "2026-09-21.1",
+  "status": "ACTIVE_SUPPORT_OWNER_MAP",
+  "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
+  "invariants": [
+    "TAKY_CORE is the global governance basis and is not a product/domain feature owner.",
+    "WORK_OS and LEARNING_OS are sibling operating systems under TAKY; neither is the parent of the other.",
+    "SHARED_TECHNICAL_CAPABILITY is semantic-light and may share mechanisms, not domain identity/role/permission/authority by default.",
+    "SHARED_ENGINE != SHARED_DATA != SHARED_SEMANTICS != SHARED_AUTHORITY.",
+    "SAME_PERSON != SAME_DOMAIN_IDENTITY.",
+    "ACCOUNT_LINK != AUTHORITY_LINK.",
+    "LEARNING_APP_FAMILY is subordinate to LEARNING_OS and owns cross-app learning-family contracts, not global technical authority.",
+    "PROJECT_APP owns product-specific behavior and SHALL NOT redefine higher shared/domain contracts.",
+    "ADAPTER/PLATFORM owns platform integration mechanics only and SHALL NOT become product/domain authority."
+  ],
+  "layers": {
+    "TAKY_CORE": {
+      "class": "GLOBAL_GOVERNANCE",
+      "semantic_owner": "MASTER/MASTER_LOGIC.md",
+      "parent": null,
+      "owns": [
+        "authority and source-of-truth rules",
+        "intent/orchestration/routing",
+        "evidence and validation",
+        "C2S/recovery/handoff",
+        "growth intelligence",
+        "cross-system execution truthfulness"
+      ],
+      "does_not_own": [
+        "Work-domain operational semantics",
+        "learning/family semantics",
+        "app-specific product behavior",
+        "platform-specific implementation details"
+      ]
+    },
+    "SHARED_TECHNICAL_CAPABILITY": {
+      "class": "SEMANTIC_LIGHT_SHARED_MECHANISM",
+      "semantic_owner": "NO_SINGLE_CODE_OWNER_YET",
+      "parent": "TAKY_CORE",
+      "state": "STRUCTURAL_LAYER_DEFINED__CODE_EXTRACTION_OPEN",
+      "owns_candidate_mechanisms": [
+        "generic transport and request envelope",
+        "generic storage/local durable queue primitives",
+        "generic sync/retry/backoff/idempotency primitives",
+        "generic event envelope/trace correlation",
+        "generic release/version compatibility primitives",
+        "generic PWA update state-machine primitives",
+        "generic OCR/vision ingestion primitives",
+        "generic external API adapter mechanics",
+        "generic authentication transport/session mechanism"
+      ],
+      "forbidden_implicit_ownership": [
+        "organization identity/role/permission",
+        "family/child/parent identity/role/permission",
+        "learning task meaning",
+        "work project/task meaning",
+        "cross-domain authority",
+        "domain-specific conflict resolution semantics"
+      ]
+    },
+    "WORK_OS": {
+      "class": "OPERATING_SYSTEM",
+      "semantic_owner": "OS/WORK_OS.md",
+      "parent": "TAKY_CORE",
+      "sibling_of": [
+        "LEARNING_OS"
+      ],
+      "owns": [
+        "cross-project productive workflow",
+        "work/project operational routing",
+        "workspace/Notion operational use",
+        "mail operations",
+        "work attachment/source continuity",
+        "work-domain task/issue/decision coordination"
+      ],
+      "protected_nonshared_semantics": [
+        "organization/team membership",
+        "work roles/permissions",
+        "project approval authority",
+        "work-specific task/decision lifecycle"
+      ]
+    },
+    "LEARNING_OS": {
+      "class": "OPERATING_SYSTEM",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "TAKY_CORE",
+      "sibling_of": [
+        "WORK_OS"
+      ],
+      "owns": [
+        "family learning management semantics",
+        "child schedule/capacity interpretation",
+        "assignment/learning-plan meaning",
+        "parent/child/guide learning authority",
+        "learning intervention and self-direction semantics",
+        "subject/main/functional-app ownership boundaries"
+      ],
+      "protected_nonshared_semantics": [
+        "child identity in learning context",
+        "parent/guardian/family relationship",
+        "learning-role authority",
+        "child data ownership/isolation",
+        "learning progress/history meaning"
+      ]
+    },
+    "LEARNING_APP_FAMILY": {
+      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
+      "semantic_owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "Ready/Hide/Snap cross-app learning session contract",
+        "family app role separation",
+        "shared learning handoff semantics",
+        "family-safe update requirements where session semantics are material",
+        "family-wide growth backlog inheritance"
+      ],
+      "does_not_own": [
+        "global Work OS semantics",
+        "organization identity/permission",
+        "global platform/PWA mechanics beyond family-specific requirements"
+      ]
+    },
+    "READY_SET": {
+      "class": "PROJECT_APP",
+      "semantic_owner": "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "learning BASE CAMP",
+        "Planner/TODAY execution projection",
+        "Ready session orchestration",
+        "per-task result/carry-over flow",
+        "Ready-specific capture and execution UI"
+      ],
+      "must_inherit": [
+        "TAKY_CORE",
+        "LEARNING_OS",
+        "LEARNING_APP_FAMILY"
+      ]
+    },
+    "HIDE_SEEK": {
+      "class": "PROJECT_APP",
+      "semantic_owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "vocabulary discovery/retrieval experience",
+        "vocabulary-specific OCR/retrieval semantics",
+        "Hide-specific child-facing world",
+        "vocabulary task result evidence"
+      ],
+      "must_inherit": [
+        "TAKY_CORE",
+        "LEARNING_OS",
+        "LEARNING_APP_FAMILY"
+      ]
+    },
+    "SNAP_POP": {
+      "class": "PROJECT_APP",
+      "semantic_owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "thought-to-expression experience",
+        "child-authored writing/speaking interaction",
+        "expression task result evidence",
+        "Snap-specific world/reward semantics"
+      ],
+      "must_inherit": [
+        "TAKY_CORE",
+        "LEARNING_OS",
+        "LEARNING_APP_FAMILY"
+      ]
+    },
+    "WORK_DOMAIN_PROJECT": {
+      "class": "PROJECT_OR_DOMAIN",
+      "semantic_owner": "DOMAIN/PROJECT_OWNED",
+      "parent": "WORK_OS",
+      "owns": [
+        "domain/project-specific facts, rules, workflows and outputs",
+        "architecture/public-data semantics where applicable",
+        "project-specific authority mappings"
+      ],
+      "must_inherit": [
+        "TAKY_CORE",
+        "WORK_OS"
+      ]
+    },
+    "PLATFORM_ADAPTER": {
+      "class": "IMPLEMENTATION_ADAPTER",
+      "semantic_owner": "IMPLEMENTATION_OWNED",
+      "parent": "SHARED_TECHNICAL_CAPABILITY",
+      "owns": [
+        "Netlify/GitHub/Drive/Notion/API connector mechanics",
+        "browser/PWA/platform integration",
+        "environment-specific endpoint/config mapping"
+      ],
+      "does_not_own": [
+        "TAKY governance",
+        "Work/Learning semantic authority",
+        "project product identity"
+      ]
+    }
+  },
+  "capability_classification": [
+    {
+      "item": "authentication/session transport",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "current_owner": "implementation-specific",
+      "semantic_boundary": "authentication mechanism may be shared; Work and Learning identities/roles/permissions remain separately owned"
+    },
+    {
+      "item": "organization identity, membership, roles, permissions",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "WORK_OS"
+    },
+    {
+      "item": "family/child/parent identity, relationships, roles, permissions",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "LEARNING_OS"
+    },
+    {
+      "item": "same-human link across Work and Learning",
+      "class": "EXPLICIT_FEDERATION",
+      "owner": "NO_ACTIVE_CONTRACT",
+      "state": "HOLD_UNTIL_REAL_USE_CASE",
+      "boundary": "must be scoped, consent/authority aware, revocable where applicable; never implicit"
+    },
+    {
+      "item": "generic storage/sync/outbox/retry/idempotency mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "EXTRACTION_OPEN"
+    },
+    {
+      "item": "domain conflict resolution meaning",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "owning OS/domain/project"
+    },
+    {
+      "item": "generic immutable event envelope and correlation/idempotency",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "EXTRACTION_OPEN"
+    },
+    {
+      "item": "event meaning/history interpretation",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "owning OS/domain/project"
+    },
+    {
+      "item": "PWA update lifecycle mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "CANDIDATE_EXTRACTION_FROM_LEARNING_APP_FAMILY",
+      "note": "family/session safe-point semantics remain LEARNING_APP_FAMILY/LEARNING_OS owned"
+    },
+    {
+      "item": "release/version compatibility mechanism",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "CANDIDATE_EXTRACTION_FROM_APP_FAMILY"
+    },
+    {
+      "item": "cross-app learning handoff/session semantics",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "LEARNING_APP_FAMILY"
+    },
+    {
+      "item": "OCR/vision engine mechanics",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "CANDIDATE_EXTRACTION"
+    },
+    {
+      "item": "assignment intake/review-before-FACT semantics",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "LEARNING_OS"
+    },
+    {
+      "item": "public/external API request/cache/rate-limit adapter mechanics",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "CANDIDATE_EXTRACTION"
+    },
+    {
+      "item": "architecture/public-data interpretation and project decisions",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "WORK_DOMAIN_PROJECT"
+    },
+    {
+      "item": "generic calendar/time transport reference",
+      "class": "SHARED_TECHNICAL_PRIMITIVE",
+      "owner": "SHARED_TECHNICAL_CAPABILITY",
+      "state": "CANDIDATE_EXTRACTION"
+    },
+    {
+      "item": "Work scheduling/task semantics",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "WORK_OS"
+    },
+    {
+      "item": "Learning schedule/planner/assignment semantics",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "LEARNING_OS"
+    }
+  ],
+  "cross_layer_rules": [
+    {
+      "from": "WORK_OS",
+      "to": "LEARNING_OS",
+      "allowed": "explicit projection/event/federation contract only",
+      "forbidden": "direct role/permission/identity inheritance"
+    },
+    {
+      "from": "LEARNING_OS",
+      "to": "WORK_OS",
+      "allowed": "explicit projection/event/federation contract only",
+      "forbidden": "direct family/child authority leakage into work domain"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "WORK_OS|LEARNING_OS",
+      "allowed": "mechanism/service reuse",
+      "forbidden": "semantic ownership takeover"
+    }
+  ],
+  "review_findings": [
+    {
+      "gap_id": "LAYER-GAP-001",
+      "priority": "P0",
+      "state": "OPEN",
+      "finding": "Shared technical capability layer is architecturally defined here but has no single implementation package/registry yet; technical primitives remain distributed across family/project/runtime code.",
+      "direction": "extract only proven reusable technical primitives behind stable contracts; preserve domain semantics in Work/Learning/Family owners"
+    },
+    {
+      "gap_id": "LAYER-GAP-002",
+      "priority": "P0",
+      "state": "OPEN",
+      "finding": "Learning App Family currently owns several technical requirements (PWA safe update, version tuple, local-first mechanics) that should be reviewed for split into generic mechanism + family-specific semantic policy.",
+      "direction": "do not move wholesale; split mechanism from session/learning semantics and migrate with compatibility adapters"
+    },
+    {
+      "gap_id": "LAYER-GAP-003",
+      "priority": "P0",
+      "state": "OPEN",
+      "finding": "Ready README still presents a historical '타임어택 PWA' deployment identity while the active product contract says Ready & Set is a learning BASE CAMP/session orchestrator.",
+      "direction": "project repo documentation cleanup; README must point to the current canonical product contract and must not revive historical product identity"
+    },
+    {
+      "gap_id": "LAYER-GAP-004",
+      "priority": "P1",
+      "state": "OPEN",
+      "finding": "Snap & Pop README says REV10 deployment UI candidate while current active product master is REV12.",
+      "direction": "refresh README authority pointer/status without altering active product semantics"
+    },
+    {
+      "gap_id": "LAYER-GAP-005",
+      "priority": "P1",
+      "state": "OPEN",
+      "finding": "TAKY mobile app development registry contains snapshot heads and deployment relationships that can become stale relative to fast-moving app repositories.",
+      "direction": "treat repository/head/deploy data as volatile evidence with freshness/recheck semantics; do not use registry snapshot as live truth without refresh"
+    },
+    {
+      "gap_id": "LAYER-GAP-006",
+      "priority": "P1",
+      "state": "HOLD",
+      "finding": "No active cross-domain Work↔Learning identity federation contract exists.",
+      "direction": "remain unimplemented until a real use case requires cross-domain linkage; default is isolation"
+    }
+  ],
+  "source_evidence": [
+    "MASTER/MASTER_LOGIC.md",
+    "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
+    "OS/WORK_OS.md",
+    "OS/GUIDE_FAMILY_LEARNING_OS.md",
+    "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+    "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json",
+    "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",
+    "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
+    "hns140412-glitch/Ready-Set:READY_SET_RUNTIME_STATE_MODEL.md",
+    "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+    "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md"
+  ],
+  "claim_boundary": "This map establishes/refines ownership classification only. It does not prove shared-core code extraction, project migration, runtime integration, deployment, or device verification."
+}
