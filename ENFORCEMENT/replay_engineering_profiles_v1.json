@@ -1,5 +1,5 @@
 {
-  "fixture_version": "2026-09-21.2",
+  "fixture_version": "2026-09-21.3",
   "scope": "Engineering execution profile replay: repair, architecture, database migration, security review, UI implementation, concise-report validation.",
   "cases": [
     {
@@ -122,7 +122,40 @@
           "minimum_sufficient_complexity": true,
           "integration_check_defined": true,
           "forced_fragmentation_without_benefit": true,
-          "remaining_unknowns": []
+          "remaining_unknowns": [],
+          "semantic_boundary_checked": true,
+          "authority_boundary_checked": true,
+          "owner_map": [
+            {
+              "scope": "existing public interface",
+              "owner": "current architecture owner"
+            },
+            {
+              "scope": "extracted responsibility",
+              "owner": "target cohesive module"
+            }
+          ],
+          "sharing_classification": [
+            {
+              "item": "public interface transport",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            },
+            {
+              "item": "domain behavior",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "current architecture owner"
+            }
+          ],
+          "boundary_counterexamples": [
+            {
+              "scenario": "same caller uses both old and new module paths during migration",
+              "expected_boundary": "domain behavior remains owned by current architecture owner until explicit transfer"
+            }
+          ],
+          "shared_layer_proposed": true,
+          "shared_layer_semantic_light": true,
+          "cross_domain_authority_shared_by_default": false,
+          "shared_semantic_or_authority_without_explicit_federation": false
         }
       }
     },
@@ -160,7 +193,40 @@
           "minimum_sufficient_complexity": true,
           "integration_check_defined": true,
           "forced_fragmentation_without_benefit": false,
-          "remaining_unknowns": []
+          "remaining_unknowns": [],
+          "semantic_boundary_checked": true,
+          "authority_boundary_checked": true,
+          "owner_map": [
+            {
+              "scope": "existing public interface",
+              "owner": "current architecture owner"
+            },
+            {
+              "scope": "extracted responsibility",
+              "owner": "target cohesive module"
+            }
+          ],
+          "sharing_classification": [
+            {
+              "item": "public interface transport",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            },
+            {
+              "item": "domain behavior",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "current architecture owner"
+            }
+          ],
+          "boundary_counterexamples": [
+            {
+              "scenario": "same caller uses both old and new module paths during migration",
+              "expected_boundary": "domain behavior remains owned by current architecture owner until explicit transfer"
+            }
+          ],
+          "shared_layer_proposed": true,
+          "shared_layer_semantic_light": true,
+          "cross_domain_authority_shared_by_default": false,
+          "shared_semantic_or_authority_without_explicit_federation": false
         }
       }
     },
@@ -433,6 +499,177 @@
           "minimal_delta_defined": true,
           "targeted_retest_defined": true,
           "regression_check_defined": true,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-ARCH-BOUNDARY-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "AUTHORITY_BOUNDARY_VIOLATION"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "ARCHITECTURE_CHANGE",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "TAKY master",
+            "Work OS",
+            "Learning OS"
+          ],
+          "protected_state": [
+            "Work authority isolation",
+            "family/child authority isolation"
+          ],
+          "target_delta": "create one shared identity core for Work OS and Learning OS",
+          "acceptance_conditions": [
+            "shared infrastructure without authority leakage"
+          ],
+          "validation_steps": [
+            "architecture boundary replay"
+          ],
+          "regression_scope": [
+            "Work OS",
+            "Learning OS"
+          ],
+          "report_mode": "normal",
+          "existing_pattern_refs": [
+            "MASTER/MASTER_LOGIC.md",
+            "OS/NOTION_OPS.md",
+            "OS/GUIDE_FAMILY_LEARNING_OS.md"
+          ],
+          "owner_boundary_checked": true,
+          "interface_contract_checked": true,
+          "minimum_sufficient_complexity": true,
+          "integration_check_defined": true,
+          "semantic_boundary_checked": true,
+          "authority_boundary_checked": true,
+          "owner_map": [
+            {
+              "scope": "organization roles",
+              "owner": "Work OS"
+            },
+            {
+              "scope": "parent/child/family roles",
+              "owner": "Learning OS"
+            }
+          ],
+          "sharing_classification": [
+            {
+              "item": "authentication transport",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            },
+            {
+              "item": "organization/family identity and authority",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            }
+          ],
+          "boundary_counterexamples": [
+            {
+              "scenario": "same person is company PM and a parent",
+              "expected_boundary": "PM authority must not grant family/child authority"
+            }
+          ],
+          "shared_layer_proposed": true,
+          "shared_layer_semantic_light": false,
+          "cross_domain_authority_shared_by_default": true,
+          "shared_semantic_or_authority_without_explicit_federation": true,
+          "forced_fragmentation_without_benefit": false,
+          "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-ARCH-BOUNDARY-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "ARCHITECTURE_CHANGE",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "TAKY master",
+            "Work OS",
+            "Learning OS"
+          ],
+          "protected_state": [
+            "Work authority isolation",
+            "family/child authority isolation"
+          ],
+          "target_delta": "share only semantic-light technical primitives and link separately owned identities through explicit federation when needed",
+          "acceptance_conditions": [
+            "shared infrastructure without authority leakage",
+            "domain roles remain independently owned"
+          ],
+          "validation_steps": [
+            "architecture boundary replay",
+            "cross-domain authority counterexample"
+          ],
+          "regression_scope": [
+            "Work OS",
+            "Learning OS"
+          ],
+          "report_mode": "normal",
+          "existing_pattern_refs": [
+            "MASTER/MASTER_LOGIC.md",
+            "OS/NOTION_OPS.md",
+            "OS/GUIDE_FAMILY_LEARNING_OS.md"
+          ],
+          "owner_boundary_checked": true,
+          "interface_contract_checked": true,
+          "minimum_sufficient_complexity": true,
+          "integration_check_defined": true,
+          "semantic_boundary_checked": true,
+          "authority_boundary_checked": true,
+          "owner_map": [
+            {
+              "scope": "organization roles/permissions",
+              "owner": "Work OS"
+            },
+            {
+              "scope": "parent/child/family roles/permissions",
+              "owner": "Learning OS"
+            },
+            {
+              "scope": "generic transport/storage/sync primitives",
+              "owner": "Shared Capability Layer"
+            }
+          ],
+          "sharing_classification": [
+            {
+              "item": "transport/storage/sync mechanism",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            },
+            {
+              "item": "organization identity/roles/permissions",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "Work OS"
+            },
+            {
+              "item": "family/child identity/roles/permissions",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "Learning OS"
+            },
+            {
+              "item": "optional same-human account linkage",
+              "class": "EXPLICIT_FEDERATION",
+              "owner": "Cross-domain federation contract"
+            }
+          ],
+          "boundary_counterexamples": [
+            {
+              "scenario": "same person is company PM and a parent",
+              "expected_boundary": "PM authority and Parent authority remain isolated; only explicit scoped federation can link account references"
+            }
+          ],
+          "shared_layer_proposed": true,
+          "shared_layer_semantic_light": true,
+          "cross_domain_authority_shared_by_default": false,
+          "shared_semantic_or_authority_without_explicit_federation": false,
+          "forced_fragmentation_without_benefit": false,
           "remaining_unknowns": []
         }
       }

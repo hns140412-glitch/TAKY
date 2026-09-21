@@ -306,9 +306,54 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
             elif profile=="ARCHITECTURE_CHANGE":
                 if not has_refs(ec,"existing_pattern_refs"):
                     f.append("RULE_NOT_APPLIED")
-                for key in ["owner_boundary_checked","interface_contract_checked","minimum_sufficient_complexity","integration_check_defined"]:
+                for key in ["owner_boundary_checked","interface_contract_checked","minimum_sufficient_complexity","integration_check_defined",
+                            "semantic_boundary_checked","authority_boundary_checked"]:
                     if ec.get(key) is not True:
                         f.append("RULE_NOT_APPLIED")
+
+                owner_map=ec.get("owner_map")
+                if not isinstance(owner_map,list) or not owner_map:
+                    f.append("RULE_NOT_APPLIED")
+                else:
+                    for item in owner_map:
+                        if not isinstance(item,dict):
+                            f.append("RULE_NOT_APPLIED"); continue
+                        if not str(item.get("scope","")).strip() or not str(item.get("owner","")).strip():
+                            f.append("RULE_NOT_APPLIED")
+
+                sharing=ec.get("sharing_classification")
+                allowed_sharing={"SHARED_TECHNICAL_PRIMITIVE","DOMAIN_OWNED_SEMANTIC","EXPLICIT_FEDERATION","NOT_SHARED"}
+                if not isinstance(sharing,list) or not sharing:
+                    f.append("RULE_NOT_APPLIED")
+                else:
+                    for item in sharing:
+                        if not isinstance(item,dict):
+                            f.append("RULE_NOT_APPLIED"); continue
+                        cls=str(item.get("class","")).strip().upper()
+                        if not str(item.get("item","")).strip() or cls not in allowed_sharing:
+                            f.append("RULE_NOT_APPLIED")
+                        if cls in {"DOMAIN_OWNED_SEMANTIC","EXPLICIT_FEDERATION","NOT_SHARED"} and not str(item.get("owner","")).strip():
+                            f.append("RULE_NOT_APPLIED")
+
+                counterexamples=ec.get("boundary_counterexamples")
+                if not isinstance(counterexamples,list) or not counterexamples:
+                    f.append("RULE_NOT_APPLIED")
+                else:
+                    usable_counterexample=False
+                    for item in counterexamples:
+                        if not isinstance(item,dict):
+                            continue
+                        if str(item.get("scenario","")).strip() and str(item.get("expected_boundary","")).strip():
+                            usable_counterexample=True
+                    if not usable_counterexample:
+                        f.append("RULE_NOT_APPLIED")
+
+                if b(ec,"shared_layer_proposed") and ec.get("shared_layer_semantic_light") is not True:
+                    f.append("RULE_NOT_APPLIED")
+                if b(ec,"cross_domain_authority_shared_by_default"):
+                    f.append("AUTHORITY_BOUNDARY_VIOLATION")
+                if b(ec,"shared_semantic_or_authority_without_explicit_federation"):
+                    f.append("AUTHORITY_BOUNDARY_VIOLATION")
                 if b(ec,"forced_fragmentation_without_benefit"):
                     f.append("RULE_NOT_APPLIED")
 
