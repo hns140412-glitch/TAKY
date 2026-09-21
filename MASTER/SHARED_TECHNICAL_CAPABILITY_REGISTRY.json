@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.10",
+  "registry_version": "2026-09-21.11",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -403,7 +403,7 @@
       },
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Hide-Seek": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Snap-Pop": "NO_CURRENT_OCR_CONSUMER",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
@@ -434,6 +434,25 @@
           "scope": "Ready capture analysis uses shared manifest/request/result/evidence validation and rejects unknown evidence source ids before domain commit.",
           "semantic_boundary": "Ready retains ANSWER_REFERENCE exclusion meaning, Parent review, FACT confirmation, provider transport/auth, capture storage and assignment interpretation.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Hide-Seek": {
+          "main_sha": "d4e071ffcedc00dd1919f3c6b3a71ee5c118d73c",
+          "pr": 8,
+          "pr_head_sha": "7af67cae236cb47d9f014ade08bb0988190d21b9",
+          "validation_ci": {
+            "run_id": 35558516556,
+            "conclusion": "success"
+          },
+          "scope": "Hide single-photo and batch OCR use shared source manifest/request/result/evidence mechanics.",
+          "semantic_boundary": "Hide retains Gemini prompts, English-Korean pairing, confidence/review semantics, API credentials, capture-session meaning and sheet commit semantics.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      },
+      "non_adoption_evidence": {
+        "Snap-Pop": {
+          "inspected_main_sha": "d761dd1435f45f7679f869f5b7a510ccf6ebf370",
+          "finding": "Current Snap runtime has no OCR/vision ingestion path requiring CAP-OCR-INGEST-001.",
+          "decision": "Do not add an unused shared vision primitive."
         }
       }
     },
