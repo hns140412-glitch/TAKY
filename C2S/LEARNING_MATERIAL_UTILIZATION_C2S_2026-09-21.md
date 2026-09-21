@@ -1,6 +1,6 @@
 # LEARNING MATERIAL UTILIZATION C2S — 2026-09-21
 
-Status: C2S_COMPILE_CLOSED__REFLECTION_OPEN
+Status: C2S_COMPILE_CLOSED__REFLECTION_CLOSED__DOWNSTREAM_IMPLEMENTATION_OPEN
 Scope: Learning Engine + Learning App Family utilization of user-supplied learning-reference materials
 Authority: TKY-C2S-001 + current Learning App Family integration contract
 
@@ -264,5 +264,15 @@ Open limitations:
 - earlier same-conversation image sets were semantically recovered but not rematerialized as stable binary pointers in this compile.
 
 C2S_COMPILE_CLOSED = true
-REFLECTION_COMPLETE = false
+REFLECTION_COMPLETE = true
 DOWNSTREAM_IMPLEMENTATION_COMPLETE = false
+
+
+## 10. Reflection closure update
+
+Reflection was completed against live rebuild branches on 2026-09-21.
+Canonical reflection outputs:
+- `C2S/LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21.md`
+- `C2S/LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21.json`
+
+Product-code implementation remains open; no Ready / Hide / Snap product code was changed by this reflection pass.
