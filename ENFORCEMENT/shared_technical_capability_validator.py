@@ -15,7 +15,7 @@ if len(ids)!=len(set(ids)):
     fail.append("DUPLICATE_CAPABILITY_ID")
 
 by_id={x.get("capability_id"):x for x in caps if isinstance(x,dict)}
-for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001","CAP-LOCAL-QUEUE-001"):
+for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001","CAP-LOCAL-QUEUE-001","CAP-OCR-INGEST-001"):
     c=by_id.get(cid)
     if not c:
         fail.append("MISSING_CAPABILITY:"+cid)
@@ -54,6 +54,13 @@ pwa=by_id.get("CAP-PWA-UPDATE-001") or {}
 rule=((pwa.get("mechanism_contract") or {}).get("required_transition_rule") or "")
 if "safe_point=true" not in rule:
     fail.append("PWA_SAFE_POINT_RULE_MISSING")
+
+ocr=by_id.get("CAP-OCR-INGEST-001") or {}
+if ocr.get("state")!="REFERENCE_IMPLEMENTED":
+    fail.append("OCR_INGEST_REFERENCE_IMPLEMENTATION_MISSING")
+for x in ("assignment FACT confirmation","vocabulary pairing semantics","parent/child review authority","roles/permissions"):
+    if x not in (ocr.get("semantic_exclusions") or []):
+        fail.append("OCR_SEMANTIC_EXCLUSION_MISSING:"+x)
 
 auth=by_id.get("CAP-AUTH-TRANSPORT-001") or {}
 if auth.get("state")!="HOLD_BEFORE_EXTRACTION":
