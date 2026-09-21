@@ -224,6 +224,27 @@ RULE MENTIONED ≠ RESULT VALIDATED.
 `LATEST CANONICAL → TASK/DOMAIN/PROJECT SCOPE → APPLICABLE RULE EXTRACTION → ACTIVE HARD LOCKS/FLEX/HOLD/CONFLICT → RESULT CONTRACT → 1:1 RESULT COMPARE → PASS/FAIL`.
 Lower MASTER/GUIDE/domain/voice/visual/data/workflow/device rules SHALL be compared when applicable, not replaced by generic best practice.
 
+### 10.1A Pre-structure operational compilation — HARD LOCK
+
+For material architecture/shared-core/OS-boundary decisions, applicable rules must be compiled into an operational boundary model before proposing the structure.
+
+Required sequence:
+`APPLICABLE OWNERS/RULES -> OWNER MAP -> SHARING CLASS -> PROTECTED BOUNDARIES -> COUNTEREXAMPLE -> STRUCTURE CANDIDATE -> INTEGRATION/REGRESSION`.
+
+The purpose is to prevent a locally plausible solution from silently violating a known higher-level ownership or authority rule.
+
+Minimum reasoning objects when applicable:
+- `OWNER MAP`: who owns meaning, lifecycle, mutation and authority;
+- `SHARING CLASS`: technical primitive vs domain semantic vs explicit federation vs intentional isolation;
+- `PROTECTED BOUNDARIES`: identity/role/permission/data/authority separation;
+- `COUNTEREXAMPLE`: a realistic case that would expose accidental semantic or authority leakage.
+
+Default:
+`SHARE MECHANISM BEFORE MEANING`.
+`COMMON INFRASTRUCTURE != COMMON IDENTITY / ROLE / AUTHORITY`.
+
+Architecture-specific execution semantics and deterministic enforcement are owned by `TKY-ENGEXEC-001` and `MASTER/ENFORCEMENT_PROTOCOL.md`.
+
 ### 10.2 Validation Independence — HARD LOCK
 SELF-VALIDATION = result vs contract/active rules.
 CROSS-VALIDATION = independent evidence path/method/source/representation/validator where fit-for-purpose.
