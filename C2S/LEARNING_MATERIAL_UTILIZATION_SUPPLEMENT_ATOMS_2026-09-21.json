@@ -17,99 +17,31 @@
     "snap_pop": "thought / expression / writing / speaking"
   },
   "atoms": [
-    {
-      "id": "LRN-UTIL-013",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "DIALOGUE_AS_COGNITIVE_SCAFFOLD",
-      "owner": "Snap & Pop",
-      "summary": "Use dialogue to surface and clarify learner thinking before/during expression while preserving learner authorship."
-    },
-    {
-      "id": "LRN-UTIL-014",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "CONCEPT_TO_PERSONAL_EXPERIENCE",
-      "owner": "Ready Learning Engine",
-      "secondary": "Snap & Pop",
-      "summary": "Connect abstract concepts to prior knowledge or familiar learner experience before formal expression."
-    },
-    {
-      "id": "LRN-UTIL-015",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "UNDERSTAND_CONNECT_RETRIEVE_CHAIN",
-      "owner": "Ready Learning Engine",
-      "summary": "Prefer understanding, meaningful connection, then later retrieval rather than isolated rote repetition alone."
-    },
-    {
-      "id": "LRN-UTIL-016",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "PROCESS_VERBALIZATION_BEFORE_FINAL",
-      "owner": "Ready Learning Engine",
-      "secondary": "Snap & Pop",
-      "summary": "Ask the learner to verbalize what is asked and how they would solve before/alongside final answer entry."
-    },
-    {
-      "id": "LRN-UTIL-017",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "REAL_WORLD_CONCEPT_DISCOVERY",
-      "owner": "Ready Learning Engine",
-      "summary": "Discover concepts through observable real-world situations before or alongside formal notation when appropriate."
-    },
-    {
-      "id": "LRN-UTIL-018",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "SHORT_FREQUENT_RETRIEVAL",
-      "owner": "Hide & Seek",
-      "secondary": "Ready Learning Engine",
-      "summary": "Use brief repeated retrieval/re-encounter loops instead of depending only on long one-shot memorization."
-    },
-    {
-      "id": "LRN-UTIL-019",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "ROOT_SEMANTIC_VOCABULARY_MAP",
-      "owner": "Hide & Seek",
-      "secondary": "Ready Learning Engine",
-      "summary": "Use root/character to core meaning to related words to familiar context/image to retrieval cue to reuse."
-    },
-    {
-      "id": "LRN-UTIL-020",
-      "type": "STRATEGY",
-      "state": "PLANNED",
-      "utilization": "ONE_LINE_CONCEPT_EXPRESSION",
-      "owner": "Snap & Pop",
-      "summary": "Ask for one short original sentence after a concept/question before larger expression expansion."
-    },
-    {
-      "id": "LRN-UTIL-021",
-      "type": "POLICY",
-      "state": "PLANNED",
-      "utilization": "MOTIVATION_FROM_EVIDENCE_NOT_GENDER",
-      "owner": "Ready Learning Engine / Ready & Set",
-      "summary": "Never hard-code motivation by gender; adapt using observed behavior, preferences, history, difficulty response and explicit context."
-    }
+    {"id":"LRN-UTIL-013","type":"STRATEGY","state":"PLANNED","utilization":"DIALOGUE_AS_COGNITIVE_SCAFFOLD","owner":"Snap & Pop","summary":"Use dialogue to surface and clarify learner thinking before/during expression while preserving learner authorship."},
+    {"id":"LRN-UTIL-014","type":"STRATEGY","state":"PLANNED","utilization":"CONCEPT_TO_PERSONAL_EXPERIENCE","owner":"Ready Learning Engine","secondary":"Snap & Pop","summary":"Connect abstract concepts to prior knowledge or familiar learner experience before formal expression."},
+    {"id":"LRN-UTIL-015","type":"STRATEGY","state":"PLANNED","utilization":"UNDERSTAND_CONNECT_RETRIEVE_CHAIN","owner":"Ready Learning Engine","summary":"Prefer understanding, meaningful connection, then later retrieval rather than isolated rote repetition alone."},
+    {"id":"LRN-UTIL-016","type":"STRATEGY","state":"PLANNED","utilization":"PROCESS_VERBALIZATION_BEFORE_FINAL","owner":"Ready Learning Engine","secondary":"Snap & Pop","summary":"Ask the learner to verbalize what is asked and how they would solve before/alongside final answer entry."},
+    {"id":"LRN-UTIL-017","type":"STRATEGY","state":"PLANNED","utilization":"REAL_WORLD_CONCEPT_DISCOVERY","owner":"Ready Learning Engine","summary":"Discover concepts through observable real-world situations before or alongside formal notation when appropriate."},
+    {"id":"LRN-UTIL-018","type":"STRATEGY","state":"PLANNED","utilization":"SHORT_FREQUENT_RETRIEVAL","owner":"Hide & Seek","secondary":"Ready Learning Engine","summary":"Use brief repeated retrieval/re-encounter loops instead of depending only on long one-shot memorization."},
+    {"id":"LRN-UTIL-019","type":"STRATEGY","state":"PLANNED","utilization":"ROOT_SEMANTIC_VOCABULARY_MAP","owner":"Hide & Seek","secondary":"Ready Learning Engine","summary":"Use root/character to core meaning to related words to familiar context/image to retrieval cue to reuse."},
+    {"id":"LRN-UTIL-020","type":"STRATEGY","state":"PLANNED","utilization":"ONE_LINE_CONCEPT_EXPRESSION","owner":"Snap & Pop","summary":"Ask for one short original sentence after a concept/question before larger expression expansion."},
+    {"id":"LRN-UTIL-021","type":"POLICY","state":"PLANNED","utilization":"MOTIVATION_FROM_EVIDENCE_NOT_GENDER","owner":"Ready Learning Engine / Ready & Set","summary":"Never hard-code motivation by gender; adapt using observed behavior, preferences, history, difficulty response and explicit context."}
   ],
-  "strengthened_existing_atoms": [
-    "ORAL_BEFORE_WRITING",
-    "PRESERVE_CHILD_VOICE",
-    "QUESTION_BEFORE_CALCULATION",
-    "PROBLEM_RESTATE",
-    "FORM_MEANING_USAGE_CHAIN",
-    "MEANING_CONTEXT_REUSE",
-    "WRITING_SCAFFOLD_GRAPH",
-    "SITUATION_TO_LANGUAGE",
-    "GRADUAL_EXPRESSION_EXPANSION"
-  ],
+  "strengthened_existing_atoms": ["ORAL_BEFORE_WRITING","PRESERVE_CHILD_VOICE","QUESTION_BEFORE_CALCULATION","PROBLEM_RESTATE","FORM_MEANING_USAGE_CHAIN","MEANING_CONTEXT_REUSE","WRITING_SCAFFOLD_GRAPH","SITUATION_TO_LANGUAGE","GRADUAL_EXPRESSION_EXPANSION"],
   "non_material_product_evidence": {
     "family_roles_reinforced": true,
     "one_goal_one_session_multiple_apps_one_learning_history": true,
     "goal_session_task_lap_model_reinforced": true,
     "hide_child_facing_find_hint_discover_recall_language_reinforced": true
+  },
+  "reflection": {
+    "status": "COMPLETE",
+    "canonical_md": "C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_REFLECTION_2026-09-21.md",
+    "canonical_json": "C2S/LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_REFLECTION_2026-09-21.json",
+    "reflected_atoms": 9,
+    "new_independent_capability_gap_count": 1,
+    "total_consolidated_capability_gap_count": 8,
+    "downstream_product_code_changed": false
   },
   "closure": {
     "initial_atoms": 12,
@@ -121,7 +53,8 @@
     "FALSE_CONVERGENCE": 0,
     "C2S_COMPILE_CLOSED": true,
     "REFLECTION_COMPLETE_INITIAL_12": true,
-    "REFLECTION_COMPLETE_SUPPLEMENT_013_021": false,
+    "REFLECTION_COMPLETE_SUPPLEMENT_013_021": true,
+    "REFLECTION_COMPLETE_TOTAL_21": true,
     "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
   }
 }
