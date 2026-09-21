@@ -1,6 +1,6 @@
 # LEARNING APP FAMILY — INTEGRATION C2S — 2026-09-21
 
-Status: INTEGRATION_REVIEW_CLOSED__DOWNSTREAM_FIXES_OPEN
+Status: INTEGRATION_IMPLEMENTATION_CLOSED_BRANCH_VERIFIED__DEVICE_PRODUCTION_OPEN
 Scope: TAKY → Learning OS → Learning App Family → Ready & Set / Hide & Seek / Snap & Pop
 
 ## 1. Live source baseline
@@ -63,7 +63,7 @@ These IDs are correlation/orchestration identity only. They do not transfer doma
 
 ## 3. Integration findings
 
-### GAP-INT-001 — Learning context producer/consumer chain is incomplete
+### GAP-INT-001 — CLOSED — Learning context producer/consumer chain
 
 Current evidence:
 - Snap active branch has a fail-closed `READY_LEARNING_CONTEXT_V1` decoder and LearningContextProvider.
@@ -100,7 +100,7 @@ Forbidden:
 - Hanja grade inference inside Hide
 - specialist mutation of Ready FACT / Learning Master
 
-### GAP-INT-002 — HELP_NEEDED semantic loss at Ready return
+### GAP-INT-002 — CLOSED — HELP_NEEDED semantic correction at Ready return
 
 Current evidence:
 - Hide and Snap can emit `HELP_NEEDED`.
@@ -116,7 +116,7 @@ Required correction:
 - preserve specialist provenance/event id.
 - carry-over / Parent review must use the normalized Ready state without overwriting specialist evidence.
 
-### GAP-INT-003 — Snap active branch diverged from shared-foundation main
+### GAP-INT-003 — CLOSED BY CAPABILITY RECONCILIATION — Snap shared-foundation divergence
 
 Current evidence:
 - active Snap branch: +584 / -3 relative to main.
@@ -242,6 +242,62 @@ Within this integration-review scope:
 - SILENT_LOSS = 0
 - FALSE_CONVERGENCE = 0
 - CORRECTION_PROPAGATION = COMPLETE for the gaps listed above
-- DOWNSTREAM_IMPLEMENTATION_COMPLETE = false
+- DOWNSTREAM_IMPLEMENTATION_COMPLETE = true for P1-P7 branch-only integration scope
 
 END
+
+
+## 8. Final branch-only implementation closure — 2026-09-21
+
+Central contract:
+- `MASTER/READY_LEARNING_CONTEXT_V1.json`
+- owner: Learning App Family
+- producer: Ready & Set
+- consumers: Hide & Seek / Snap & Pop
+- semantic-light advisory metadata only.
+
+Exact verified code heads used by the central cross-app regression:
+- Ready & Set: `8f2c097ae52fcb53b22ca9bc0f9a867ff660dc48`
+- Hide & Seek integration v3: `5ff6a4a4e6b65588acf4c8da503411320365b900`
+- Snap & Pop integration v2: `a720b5d35e096feda9b83bc88ffe5d06f89b3ed2`
+
+P1-P7:
+- P1 Ready HELP_NEEDED / BLOCKED semantics: COMPLETE.
+- P2 Ready READY_LEARNING_CONTEXT_V1 producer: COMPLETE.
+- P3 Hide resolved-context consumer / ownership boundary: COMPLETE.
+- P4 Snap consumer alignment: COMPLETE.
+- P5 Snap README + shared release/PWA + event-envelope capability reconciliation: COMPLETE without broad rebase.
+- P6 cross-app contract regression: COMPLETE.
+- P7 TAKY + Ready + Hide + Snap C2S/handoff synchronization: COMPLETE.
+
+Cross-app regression paths:
+- Ready -> Hide -> Ready: PASS.
+- Ready -> Snap -> Ready: PASS.
+- Ready -> Hide -> Snap -> Ready: PASS.
+
+Locked invariants re-verified:
+- session_id / goal_id / task_id / lap_id / return_target preserved.
+- HELP_NEEDED -> WAITING_FOR_PARENT.
+- explicit BLOCKED -> BLOCKED.
+- Ready Planner IN_PROGRESS <= 1.
+- specialist completion != Ready SESSION_END.
+- Hide Language Memory != assignment / homework / Hanja grade.
+- Hanja grade/level resolution remains Ready Learning Engine authority.
+- Hide vocabulary remains source-owned expression material in Snap.
+- autoInsert=false / masteryMutation=false / vocabularyOwnershipTransferred=false.
+- shared release/PWA/event mechanisms do not transfer family identity, role or permission authority.
+
+Verification state:
+- CODED: YES for P1-P6 integration implementation.
+- CI_VERIFIED: YES.
+- RUNTIME_VERIFIED: YES at each app integration runtime plus central executable cross-app contract harness.
+- DEVICE_VERIFIED: NO / NOT_RUN.
+- PRODUCTION_VERIFIED: NO / NOT_RUN.
+- Netlify / hosted deployment: NOT_RUN for this integration task.
+- merge to product main branches: NOT_RUN.
+
+Important:
+The exact verified SHAs above are integration evidence points, not permission to overwrite newer active product development.
+Before any future edit, refresh live HEAD and carry integration capabilities forward by delta only.
+
+END FINAL INTEGRATION CLOSURE
