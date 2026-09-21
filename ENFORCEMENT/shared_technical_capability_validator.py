@@ -15,7 +15,7 @@ if len(ids)!=len(set(ids)):
     fail.append("DUPLICATE_CAPABILITY_ID")
 
 by_id={x.get("capability_id"):x for x in caps if isinstance(x,dict)}
-for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001","CAP-LOCAL-QUEUE-001","CAP-OCR-INGEST-001"):
+for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001","CAP-LOCAL-QUEUE-001","CAP-OCR-INGEST-001","CAP-HTTP-ADAPTER-001"):
     c=by_id.get(cid)
     if not c:
         fail.append("MISSING_CAPABILITY:"+cid)
@@ -61,6 +61,13 @@ if ocr.get("state")!="REFERENCE_IMPLEMENTED":
 for x in ("assignment FACT confirmation","vocabulary pairing semantics","parent/child review authority","roles/permissions"):
     if x not in (ocr.get("semantic_exclusions") or []):
         fail.append("OCR_SEMANTIC_EXCLUSION_MISSING:"+x)
+
+http=by_id.get("CAP-HTTP-ADAPTER-001") or {}
+if http.get("state")!="REFERENCE_IMPLEMENTED":
+    fail.append("HTTP_ADAPTER_REFERENCE_IMPLEMENTATION_MISSING")
+for x in ("API credential ownership","authentication identity","roles/permissions","cross-domain authority"):
+    if x not in (http.get("semantic_exclusions") or []):
+        fail.append("HTTP_SEMANTIC_EXCLUSION_MISSING:"+x)
 
 auth=by_id.get("CAP-AUTH-TRANSPORT-001") or {}
 if auth.get("state")!="HOLD_BEFORE_EXTRACTION":
