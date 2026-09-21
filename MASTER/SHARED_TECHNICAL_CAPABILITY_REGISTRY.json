@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.1",
+  "registry_version": "2026-09-21.2",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -47,7 +47,7 @@
         "domain-specific rollback decision"
       ],
       "consumers": {
-        "Ready-Set": "MIGRATION_OPEN",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATION_OPEN",
         "Snap-Pop": "MIGRATION_OPEN",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
@@ -57,7 +57,24 @@
         "compatibility result is explicit",
         "consumer-specific release semantics remain outside the shared primitive",
         "consumer drift can be caught by CI after migration"
-      ]
+      ],
+      "consumer_evidence": {
+        "Ready-Set": {
+          "main_sha": "687ab58c6f5755312e959802d543b8e34b1f734b",
+          "pr": 77,
+          "pr_head_sha": "3366910ae7227fa1bec56de36fb0ca31af3b5758",
+          "integration_ci": {
+            "run_id": 35553227871,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35553227798,
+            "conclusion": "success"
+          },
+          "scope": "release descriptor authority, VERSION/package/registry drift gate, service-worker release_id cache identity",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      }
     },
     {
       "capability_id": "CAP-PWA-UPDATE-001",
@@ -90,7 +107,7 @@
         "release approval"
       ],
       "consumers": {
-        "Ready-Set": "MIGRATION_P0",
+        "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATION_P0",
         "Snap-Pop": "MIGRATION_P0"
       },
@@ -99,7 +116,24 @@
         "failure state is explicit",
         "consumer supplies persistence/restore hooks",
         "browser service-worker adapter remains a lower implementation adapter"
-      ]
+      ],
+      "consumer_evidence": {
+        "Ready-Set": {
+          "main_sha": "687ab58c6f5755312e959802d543b8e34b1f734b",
+          "pr": 77,
+          "pr_head_sha": "3366910ae7227fa1bec56de36fb0ca31af3b5758",
+          "integration_ci": {
+            "run_id": 35553227871,
+            "conclusion": "success"
+          },
+          "runtime_e2e": {
+            "run_id": 35553227798,
+            "conclusion": "success"
+          },
+          "scope": "shared PWA update state machine + Ready-owned safe-point adapter; no install-time skipWaiting",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      }
     },
     {
       "capability_id": "CAP-EVENT-ENVELOPE-001",
