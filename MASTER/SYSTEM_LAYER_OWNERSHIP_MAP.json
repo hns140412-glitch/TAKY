@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-21.3",
+  "map_version": "2026-09-21.4",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -60,7 +60,8 @@
       "implementation_registry": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
       "reference_implementations": [
         "CAP-RELEASE-COMPAT-001 -> SHARED/runtime/release-contract.js",
-        "CAP-PWA-UPDATE-001 -> SHARED/runtime/pwa-update-state.js"
+        "CAP-PWA-UPDATE-001 -> SHARED/runtime/pwa-update-state.js",
+        "CAP-EVENT-ENVELOPE-001 -> SHARED/runtime/event-envelope.js"
       ]
     },
     "WORK_OS": {

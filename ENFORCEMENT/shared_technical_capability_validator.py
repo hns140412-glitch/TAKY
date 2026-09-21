@@ -15,7 +15,7 @@ if len(ids)!=len(set(ids)):
     fail.append("DUPLICATE_CAPABILITY_ID")
 
 by_id={x.get("capability_id"):x for x in caps if isinstance(x,dict)}
-for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001"):
+for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001"):
     c=by_id.get(cid)
     if not c:
         fail.append("MISSING_CAPABILITY:"+cid)
@@ -31,6 +31,14 @@ fields=((release.get("mechanism_contract") or {}).get("required_fields") or [])
 for f in ("app_id","app_version","runtime_version","data_schema_version","contract_version","release_id"):
     if f not in fields:
         fail.append("RELEASE_FIELD_MISSING:"+f)
+
+event_cap=by_id.get("CAP-EVENT-ENVELOPE-001") or {}
+event_contract=event_cap.get("mechanism_contract") or {}
+if "event_id is immutable event identity" not in (event_contract.get("identity_rule") or ""):
+    fail.append("EVENT_IDENTITY_RULE_MISSING")
+for x in ("family or organization ownership","role/permission/authority"):
+    if x not in (event_cap.get("semantic_exclusions") or []):
+        fail.append("EVENT_SEMANTIC_EXCLUSION_MISSING:"+x)
 
 pwa=by_id.get("CAP-PWA-UPDATE-001") or {}
 rule=((pwa.get("mechanism_contract") or {}).get("required_transition_rule") or "")
