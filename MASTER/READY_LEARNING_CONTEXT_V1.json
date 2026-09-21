@@ -1,0 +1,81 @@
+{
+  "contract_version": "READY_LEARNING_CONTEXT_V1",
+  "owner": "LEARNING_APP_FAMILY",
+  "producer": "READY_SET",
+  "consumers": [
+    "HIDE_SEEK",
+    "SNAP_POP"
+  ],
+  "required_fields": [
+    "learning_unit_id",
+    "analysis_id",
+    "assignment_id",
+    "subject",
+    "concept_skill_target",
+    "activity_types",
+    "cognitive_load_profile",
+    "confidence",
+    "unresolved_flags"
+  ],
+  "optional_fields": [
+    "divisible_boundary",
+    "provenance"
+  ],
+  "transport": "BASE64URL_JSON_QUERY_PARAM_learning_context",
+  "authority_boundary": {
+    "advisory_learning_metadata_only": true,
+    "forbidden_fields": [
+      "role",
+      "permission",
+      "family_id",
+      "child_identity_authority",
+      "planner_authority",
+      "allocation_authority",
+      "dated_todo_authority",
+      "hanja_grade_inference",
+      "hanja_level_inference"
+    ]
+  },
+  "ownership": {
+    "READY_SET": [
+      "session",
+      "task_routing",
+      "planner",
+      "dated_todo",
+      "learning_unit",
+      "hanja_grade_level_resolution"
+    ],
+    "HIDE_SEEK": [
+      "language_memory",
+      "memory_ladder",
+      "cumulative_language_memory_evidence"
+    ],
+    "SNAP_POP": [
+      "thought_expression",
+      "writing",
+      "speaking",
+      "expression_evidence"
+    ]
+  },
+  "shared_transport_ids": [
+    "session_id",
+    "goal_id",
+    "task_id",
+    "lap_id",
+    "return_target"
+  ],
+  "invariants": [
+    "READY_PLANNER_IN_PROGRESS_MAX_1",
+    "SPECIALIST_COMPLETION_NE_SESSION_END",
+    "APP_SWITCH_NE_SESSION_END",
+    "HELP_NEEDED_TO_WAITING_FOR_PARENT",
+    "EXPLICIT_BLOCKED_TO_BLOCKED"
+  ],
+  "vocabulary_bridge": {
+    "sourceOwner_preserved": true,
+    "role": "EXPRESSION_MATERIAL_ONLY",
+    "autoInsert": false,
+    "masteryMutation": false,
+    "vocabularyOwnershipTransferred": false
+  }
+}
