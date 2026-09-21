@@ -36,7 +36,7 @@ jobs:
         run: |
           git clone --quiet https://github.com/hns140412-glitch/Snap-Pop.git _integration/Snap-Pop
           cd _integration/Snap-Pop
-          git checkout --quiet 3d3d10318bb9f655030cd266e6762d1dcf1ec923
+          git checkout --quiet 702c315f3e61d031a4e14525d6d1dad59647b823
       - name: Validate central and cross-app contract
         run: node ENFORCEMENT/learning_app_family_cross_app_validator.mjs
       - name: Re-run Ready focused contracts
