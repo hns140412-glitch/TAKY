@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-21.6",
+  "map_version": "2026-09-21.7",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -37,7 +37,7 @@
       "class": "SEMANTIC_LIGHT_SHARED_MECHANISM",
       "semantic_owner": "SEMANTIC_LIGHT_MECHANISMS_REGISTERED_IN_MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
       "parent": "TAKY_CORE",
-      "state": "REFERENCE_IMPLEMENTATION_STARTED__CONSUMER_MIGRATION_OPEN",
+      "state": "REFERENCE_IMPLEMENTATIONS_ACTIVE__SELECTIVE_CONSUMER_MIGRATION_VERIFIED__AUTH_HOLD",
       "owns_candidate_mechanisms": [
         "generic transport and request envelope",
         "generic storage/local durable queue primitives",
@@ -213,7 +213,9 @@
       "item": "authentication/session transport",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "current_owner": "implementation-specific",
-      "semantic_boundary": "authentication mechanism may be shared; Work and Learning identities/roles/permissions remain separately owned"
+      "semantic_boundary": "authentication mechanism may be shared; Work and Learning identities/roles/permissions remain separately owned",
+      "state": "HOLD_BEFORE_EXTRACTION",
+      "note": "Mechanism sharing remains deferred until a real multi-consumer case proves reuse without Work/Learning identity or authority leakage."
     },
     {
       "item": "organization identity, membership, roles, permissions",
@@ -236,7 +238,8 @@
       "item": "generic storage/sync/outbox/retry/idempotency mechanism",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "EXTRACTION_OPEN"
+      "state": "REFERENCE_IMPLEMENTED__READY_MIGRATED",
+      "note": "Hide/Snap are intentionally not queue consumers until a durable transport requirement exists."
     },
     {
       "item": "domain conflict resolution meaning",
@@ -247,7 +250,7 @@
       "item": "generic immutable event envelope and correlation/idempotency",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "EXTRACTION_OPEN"
+      "state": "REFERENCE_IMPLEMENTED__READY_HIDE_SNAP_MIGRATED"
     },
     {
       "item": "event meaning/history interpretation",
@@ -258,14 +261,14 @@
       "item": "PWA update lifecycle mechanism",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "CANDIDATE_EXTRACTION_FROM_LEARNING_APP_FAMILY",
-      "note": "family/session safe-point semantics remain LEARNING_APP_FAMILY/LEARNING_OS owned"
+      "state": "REFERENCE_IMPLEMENTED__READY_HIDE_SNAP_MIGRATED",
+      "note": "Shared lifecycle mechanism is active; product/family safe-point meaning remains consumer-owned."
     },
     {
       "item": "release/version compatibility mechanism",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "CANDIDATE_EXTRACTION_FROM_APP_FAMILY"
+      "state": "REFERENCE_IMPLEMENTED__READY_HIDE_SNAP_MIGRATED"
     },
     {
       "item": "cross-app learning handoff/session semantics",
@@ -276,7 +279,8 @@
       "item": "OCR/vision engine mechanics",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "CANDIDATE_EXTRACTION"
+      "state": "REFERENCE_IMPLEMENTED__READY_HIDE_MIGRATED",
+      "note": "Snap has no current OCR consumer; domain prompts/review/FACT semantics remain outside shared ownership."
     },
     {
       "item": "assignment intake/review-before-FACT semantics",
@@ -287,7 +291,8 @@
       "item": "public/external API request/cache/rate-limit adapter mechanics",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "owner": "SHARED_TECHNICAL_CAPABILITY",
-      "state": "CANDIDATE_EXTRACTION"
+      "state": "REFERENCE_IMPLEMENTED__READY_HIDE_MIGRATED",
+      "note": "Current primitive covers timeout/JSON/status/Retry-After transport normalization; response meaning and credentials remain consumer-owned."
     },
     {
       "item": "architecture/public-data interpretation and project decisions",
@@ -335,25 +340,30 @@
     {
       "gap_id": "LAYER-GAP-001",
       "priority": "P0",
-      "state": "PARTIAL",
-      "finding": "Shared technical capability layer is architecturally defined here but has no single implementation package/registry yet; technical primitives remain distributed across family/project/runtime code.",
-      "direction": "continue extraction only after each mechanism proves reuse value; migrate consumers through compatibility adapters rather than duplicating the shared source",
+      "state": "VALIDATED",
+      "finding": "Shared technical capability layer now has a machine-readable registry, enforced semantic boundaries and active reference implementations for proven reusable mechanisms.",
+      "direction": "continue selective extraction only when reuse is proven; do not expand shared ownership into domain identity, role, permission or authority.",
       "evidence": [
         "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
         "SHARED/runtime/release-contract.js",
         "SHARED/runtime/pwa-update-state.js",
+        "SHARED/runtime/event-envelope.js",
+        "SHARED/runtime/local-queue.js",
+        "SHARED/runtime/vision-ingest.js",
+        "SHARED/runtime/http-json.js",
         "ENFORCEMENT/shared_technical_capability_validator.py"
       ]
     },
     {
       "gap_id": "LAYER-GAP-002",
       "priority": "P0",
-      "state": "PARTIAL",
-      "finding": "Learning App Family currently owns several technical requirements (PWA safe update, version tuple, local-first mechanics) that should be reviewed for split into generic mechanism + family-specific semantic policy.",
-      "direction": "next migrate Ready first against shared release/PWA contracts, then Hide/Snap; local-first mechanism remains separate extraction work",
+      "state": "VALIDATED",
+      "finding": "Learning App Family technical requirements were split into semantic-light shared mechanisms plus consumer-owned learning/session policy for release/PWA/event/local-queue/vision/HTTP scopes.",
+      "direction": "preserve consumer/domain semantics; add new shared primitives only from proven repeated technical mechanisms.",
       "evidence": [
-        "CAP-PWA-UPDATE-001 splits generic lifecycle mechanism from consumer safe-point semantics.",
-        "CAP-RELEASE-COMPAT-001 splits generic compatibility mechanics from product/domain release authority."
+        "Ready release/PWA/event/queue/vision/HTTP consumers are CI/runtime verified.",
+        "Hide release/PWA/event/vision/HTTP consumers are CI/runtime verified.",
+        "Snap release/PWA/event consumers are CI/runtime verified; queue/OCR/HTTP non-adoption is explicit where no real requirement exists."
       ]
     },
     {
@@ -407,5 +417,5 @@
     "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
     "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md"
   ],
-  "claim_boundary": "This map establishes/refines ownership classification only. It does not prove shared-core code extraction, project migration, runtime integration, deployment, or device verification."
+  "claim_boundary": "This map now records verified shared reference implementations and documented consumer migrations where evidence exists. It does not imply DEVICE_VERIFIED, PRODUCTION_VERIFIED, implicit Work↔Learning identity federation, or shared domain authority."
 }
