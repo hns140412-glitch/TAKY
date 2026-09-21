@@ -6,6 +6,7 @@ on:
       - 'AGENTS.md'
       - 'TAKY.md'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
@@ -53,6 +54,7 @@ on:
       - 'AGENTS.md'
       - 'TAKY.md'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
@@ -117,6 +119,7 @@ jobs:
           python -m py_compile ENFORCEMENT/master_surface_integrity_validator.py
           python -m py_compile ENFORCEMENT/drive_storage_map_validator.py
           python -m py_compile ENFORCEMENT/mobile_app_development_registry_validator.py
+          python -m py_compile ENFORCEMENT/system_layer_ownership_validator.py
           python -m py_compile ENFORCEMENT/current_product_identity_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
@@ -141,6 +144,8 @@ jobs:
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Validate MASTER file authority registry
         run: python ENFORCEMENT/master_file_registry_validator.py
+      - name: Validate system layer ownership map
+        run: python ENFORCEMENT/system_layer_ownership_validator.py
       - name: Validate MASTER structural integrity and active projection
         run: python ENFORCEMENT/master_surface_integrity_validator.py
       - name: Validate Drive storage role map
