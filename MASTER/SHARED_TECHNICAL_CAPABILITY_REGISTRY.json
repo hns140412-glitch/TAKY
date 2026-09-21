@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.8",
+  "registry_version": "2026-09-21.9",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -377,12 +377,42 @@
       "capability_id": "CAP-OCR-INGEST-001",
       "title": "Generic OCR/vision ingestion mechanics",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
-      "state": "CANDIDATE_EXTRACTION",
+      "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
       "semantic_exclusions": [
         "assignment FACT confirmation",
         "vocabulary pairing semantics",
-        "architecture/document interpretation"
+        "architecture/document interpretation",
+        "prompt content or business extraction schema",
+        "parent/child review authority",
+        "provider credential ownership",
+        "family or organization identity",
+        "roles/permissions",
+        "domain-specific confidence thresholds"
+      ],
+      "implementation": "SHARED/runtime/vision-ingest.js",
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "manifest_rule": "normalize source identity/mime/size and explicit analyzability without inferring document meaning",
+        "request_rule": "build provider-agnostic ingest request with opaque source and metadata",
+        "result_rule": "normalize provider output into opaque result items linked to evidence source ids",
+        "evidence_rule": "validate that result evidence links only reference known source ids",
+        "confidence_rule": "confidence is opaque numeric metadata; threshold meaning remains consumer-owned"
+      },
+      "consumers": {
+        "Ready-Set": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATION_OPEN",
+        "Snap-Pop": "NO_CURRENT_OCR_CONSUMER",
+        "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
+      },
+      "acceptance_conditions": [
+        "manifest normalization is deterministic",
+        "unsupported or excluded sources are explicit rather than silently analyzed",
+        "generic result evidence cannot reference unknown source ids",
+        "shared primitive does not define OCR prompts, extracted business fields, review authority or commit semantics",
+        "consumer may retain provider-specific transport and domain-specific interpretation"
       ]
     },
     {

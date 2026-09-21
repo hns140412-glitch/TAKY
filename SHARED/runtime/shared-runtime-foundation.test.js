@@ -3,6 +3,7 @@ const release=require('./release-contract.js');
 const pwa=require('./pwa-update-state.js');
 const eventEnvelope=require('./event-envelope.js');
 const localQueue=require('./local-queue.js');
+const vision=require('./vision-ingest.js');
 
 function descriptor(overrides={}){
   return {
@@ -119,3 +120,26 @@ assert.equal(ack.status,'ACKED');
 assert.equal(ack.ack_token,'ack-1');
 assert.equal(Object.isFrozen(ack),true);
 console.log('PASS: shared local queue bounded retry, dead-letter and ack lifecycle');
+
+
+const manifest=vision.normalizeManifest([
+  {source_id:'img-1',mime_type:'image/jpeg',size:100},
+  {source_id:'answer-1',mime_type:'image/png',exclude_from_analysis:true}
+]);
+assert.equal(manifest.ok,true);
+assert.equal(manifest.items[0].analyzable,true);
+assert.equal(manifest.items[1].analyzable,false);
+assert.equal(manifest.items[1].exclusion_reason,'EXPLICITLY_EXCLUDED');
+const req=vision.buildRequest({source:'test',manifest:[
+  {source_id:'img-1',mime_type:'image/jpeg'},
+  {source_id:'img-2',mime_type:'image/webp'}
+]});
+assert.equal(req.ok,true);
+assert.deepEqual([...req.request.analyzable_source_ids],['img-1','img-2']);
+const norm=vision.normalizeResult({request_id:req.request.request_id,provider:'test',items:[
+  {evidence_source_ids:['img-1'],provider_payload:{opaque:'value'}}
+]});
+assert.equal(norm.ok,true);
+assert.equal(vision.validateEvidence(norm.result,['img-1','img-2']).ok,true);
+assert.equal(vision.validateEvidence(norm.result,['img-2']).ok,false);
+console.log('PASS: shared vision ingest keeps transport/evidence mechanics separate from domain semantics');
