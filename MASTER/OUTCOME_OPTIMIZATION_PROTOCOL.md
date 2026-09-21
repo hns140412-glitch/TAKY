@@ -88,6 +88,16 @@ For code/runtime work, prefer representative execution evidence over prose specu
 For design/creative work, prefer direct comparison of actual alternatives/result states over checklist expansion.
 For research/analysis, prefer synthesis that changes the recommendation/result over accumulating redundant sources.
 
+## 3.1 Outcome-to-growth feedback
+
+When a material implementation/research improvement produces reusable evidence, route the lesson through `TKY-GROWTH-001` rather than leaving it as an isolated success/failure.
+
+Preferred:
+`BUILD -> OBSERVE -> IMPROVE -> MEASURE MATERIAL OUTCOME -> REUSABLE LESSON/PATTERN -> OWNER/BACKLOG/CURRENT_BEST`.
+
+Do not create a metric merely to satisfy process. Capture only outcome signals that can change future execution or retire a weak pattern.
+
+
 ## 4. Validation budget / anti-overvalidation — HARD LOCK
 
 Validation intensity SHALL be proportional to material risk, uncertainty, irreversibility and consequence.
