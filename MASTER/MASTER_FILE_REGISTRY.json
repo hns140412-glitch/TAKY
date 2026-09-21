@@ -132,6 +132,9 @@
     },
     "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json": {
       "class": "ACTIVE_SUPPORT"
+    },
+    "MASTER/READY_LEARNING_CONTEXT_V1.json": {
+      "class": "ACTIVE_SUPPORT"
     }
   }
 }
