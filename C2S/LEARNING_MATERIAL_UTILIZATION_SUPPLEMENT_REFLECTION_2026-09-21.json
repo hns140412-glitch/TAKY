@@ -1,0 +1,106 @@
+{
+  "schema_version": "TKY_C2S_REFLECTION_V1",
+  "scope": "LEARNING_MATERIAL_UTILIZATION_SUPPLEMENT_REFLECTION_2026-09-21",
+  "product_code_changed": false,
+  "atoms": [
+    {
+      "id": "LRN-UTIL-013",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap_disposition": [
+        "GAP-CAP-02",
+        "GAP-CAP-03"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-014",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap_disposition": [
+        "GAP-CAP-08"
+      ],
+      "new_gap": true
+    },
+    {
+      "id": "LRN-UTIL-015",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap_disposition": [
+        "GAP-CAP-08"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-016",
+      "classification": "DUPLICATE",
+      "gap_disposition": [
+        "GAP-CAP-06"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-017",
+      "classification": "HOLD",
+      "gap_disposition": [],
+      "new_gap": false,
+      "priority": "P2"
+    },
+    {
+      "id": "LRN-UTIL-018",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap_disposition": [
+        "EXISTING_READY_HIDE_REVIEW_ROUNDTRIP_INTEGRATION"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-019",
+      "classification": "DUPLICATE",
+      "gap_disposition": [
+        "GAP-CAP-04",
+        "GAP-CAP-05"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-020",
+      "classification": "DUPLICATE",
+      "gap_disposition": [
+        "GAP-CAP-03"
+      ],
+      "new_gap": false
+    },
+    {
+      "id": "LRN-UTIL-021",
+      "classification": "IMPLEMENTED",
+      "gap_disposition": [],
+      "new_gap": false,
+      "policy_level": true
+    }
+  ],
+  "consolidated_gap_count": 8,
+  "consolidated_gaps": [
+    "GAP-CAP-01 Snap Recall Entry",
+    "GAP-CAP-02 Snap Oral-to-Writing Bridge",
+    "GAP-CAP-03 Progressive Expression Scaffold",
+    "GAP-CAP-04 Hide Contextual Reuse Layer",
+    "GAP-CAP-05 Hide Hanja Memory Chain Completion",
+    "GAP-CAP-06 Ready Question-Comprehension Gate",
+    "GAP-CAP-07 Family Child-Voice Policy Completion",
+    "GAP-CAP-08 Ready Meaning/Connection Scaffold Routing"
+  ],
+  "utilization": {
+    "reflection_progress_percent": 100,
+    "mechanism_percent_estimate": 49,
+    "end_to_end_percent_estimate": 37
+  },
+  "closure": {
+    "initial_reflection": "12/12",
+    "supplement_reflection": "9/9",
+    "total_reflection": "21/21",
+    "UNMAPPED_MATERIAL": 0,
+    "SILENT_LOSS": 0,
+    "FALSE_CONVERGENCE": 0,
+    "C2S_COMPILE_CLOSED": true,
+    "REFLECTION_COMPLETE": true,
+    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+  }
+}
