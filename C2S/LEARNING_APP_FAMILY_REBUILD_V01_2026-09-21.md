@@ -140,3 +140,71 @@ CODED alone is never product implementation completion.
 These are practical-use estimates, not code-presence scores.
 
 END
+
+
+## Rebuild execution checkpoint
+
+Dedicated rebuild branches:
+- Ready: `taky/ready-rebuild-v01-2026-09-21`
+- Hide: `taky/hide-rebuild-v01-2026-09-21`
+- Snap: `taky/snap-rebuild-v01-2026-09-21`
+
+Active product branches remain untouched.
+
+### Foundation implemented in all three apps
+- `src/core/state-store.js`
+- `src/shell/app-shell.js`
+- `src/integrations/contract-gate.js`
+- executable rebuild validator
+- rebuild-only GitHub Actions workflow
+
+Foundation exact-commit CI:
+- Ready `215b31837358fdfa7c89b435cb4512fda63f1e0d`: PASS
+- Hide `88399e41c59929dfe226085298d0718cec852de3`: PASS
+- Snap `50a6af1857a994bb156f24abd4c1df233c0ddbcc`: PASS
+
+### First domain extraction
+Ready:
+- `src/planner/planner-domain.js`
+- `src/planner/outcome-policy.js`
+- state mapping / session ownership / carry policy extracted.
+
+Hide:
+- `src/vocabulary/word-domain.js`
+- `src/retrieval/retrieval-flow.js`
+- word normalization / NEW-REVIEW inference / retrieval base phase machine extracted.
+
+Snap:
+- `src/exploration/exploration-session.js`
+- `src/exploration/exploration-flow.js`
+- exploration session shape / writing recovery / 3-step transition extracted.
+
+Parity validation:
+- Ready first domain parity commit `92f395f9c0335fa3c693361dd09fb3cea8a620cb`: PASS.
+- Hide first domain parity commit `c2b9a0bb3103e6e431b6d9b1f2095d9220363669`: PASS.
+- Snap first domain parity commit `9ee807001ff3b262a2865bb9ca5ebfd87582cdd2`: PASS.
+
+Second flow extraction latest commits:
+- Ready `578681c57c5dd37722a2fcffc7e8862d6dbd253e`: CI queued at checkpoint.
+- Hide `880cd6f98a60d35a13389501e4ac2f3c0e83ec9b`: CI queued at checkpoint.
+- Snap `1332d958bdc4a8b2bec93900dbe2dbdb2a840ea2`: PASS.
+
+## Reporting rule during rebuild
+
+Two percentages must stay separate:
+
+1. EXISTING_PRODUCT_USABLE_IMPLEMENTATION
+   - Ready baseline ~48%
+   - Hide baseline ~45%
+   - Snap baseline ~40%
+   - family ~44–48%
+
+2. REBUILD_MIGRATION_COMPLETION
+   - counts only capabilities actually migrated into the new architecture and parity/runtime verified.
+   - foundation scaffolding alone does not count as user-facing completion.
+   - existing product percentage does not increase merely because shadow modules were created.
+
+Next:
+- wire one bounded production path per app into the new modules;
+- preserve old path as fallback until parity;
+- then begin removing monolith responsibilities.
