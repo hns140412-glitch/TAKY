@@ -76,6 +76,14 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
         "conversation_system_compile_required": bool(
             record.get("conversation_system_compile_required", False)
         ),
+        "architecture_change_planned": bool(record.get("architecture_change_planned", False)),
+        "shared_core_change_planned": bool(record.get("shared_core_change_planned", False)),
+        "os_boundary_change_planned": bool(record.get("os_boundary_change_planned", False)),
+        "cross_domain_architecture_change_planned": bool(
+            record.get("cross_domain_architecture_change_planned", False)
+        ),
+        "ownership_move_planned": bool(record.get("ownership_move_planned", False)),
+        "engineering_profile": str(record.get("engineering_profile", "")).strip().upper(),
     }
     return state, failures
 
