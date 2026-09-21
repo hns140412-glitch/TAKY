@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-21.1",
+  "map_version": "2026-09-21.2",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -340,23 +340,32 @@
     {
       "gap_id": "LAYER-GAP-003",
       "priority": "P0",
-      "state": "OPEN",
+      "state": "VALIDATED",
       "finding": "Ready README still presents a historical '타임어택 PWA' deployment identity while the active product contract says Ready & Set is a learning BASE CAMP/session orchestrator.",
-      "direction": "project repo documentation cleanup; README must point to the current canonical product contract and must not revive historical product identity"
+      "direction": "project repo documentation cleanup; README must point to the current canonical product contract and must not revive historical product identity",
+      "evidence": [
+        "Ready-Set PR #74 merged at 5b1d88a153c54d470db044bf81c5a237fa0d66a8"
+      ]
     },
     {
       "gap_id": "LAYER-GAP-004",
       "priority": "P1",
-      "state": "OPEN",
+      "state": "VALIDATED",
       "finding": "Snap & Pop README says REV10 deployment UI candidate while current active product master is REV12.",
-      "direction": "refresh README authority pointer/status without altering active product semantics"
+      "direction": "refresh README authority pointer/status without altering active product semantics",
+      "evidence": [
+        "Snap-Pop PR #2 merged at 1c1a4e8d009c25e37e74c8d07b0ae33f0a89c6d0"
+      ]
     },
     {
       "gap_id": "LAYER-GAP-005",
       "priority": "P1",
-      "state": "OPEN",
+      "state": "PARTIAL",
       "finding": "TAKY mobile app development registry contains snapshot heads and deployment relationships that can become stale relative to fast-moving app repositories.",
-      "direction": "treat repository/head/deploy data as volatile evidence with freshness/recheck semantics; do not use registry snapshot as live truth without refresh"
+      "direction": "keep snapshot metadata but require live refresh for material current-state/release claims; automate refresh later if value justifies it",
+      "evidence": [
+        "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json now declares volatile snapshot semantics and live-refresh triggers."
+      ]
     },
     {
       "gap_id": "LAYER-GAP-006",
