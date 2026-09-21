@@ -1,5 +1,5 @@
 {
-  "fixture_version": "2026-09-21.3",
+  "fixture_version": "2026-09-21.4",
   "scope": "Engineering execution profile replay: repair, architecture, database migration, security review, UI implementation, concise-report validation.",
   "cases": [
     {
@@ -671,6 +671,108 @@
           "shared_semantic_or_authority_without_explicit_federation": false,
           "forced_fragmentation_without_benefit": false,
           "remaining_unknowns": []
+        }
+      }
+    },
+    {
+      "id": "ENG-ARCH-AUTO-03",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "architecture_change_planned": true,
+        "shared_core_change_planned": true
+      }
+    },
+    {
+      "id": "ENG-ARCH-AUTO-03",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "architecture_change_planned": true,
+        "shared_core_change_planned": true,
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "ARCHITECTURE_CHANGE",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "MASTER/MASTER_LOGIC.md",
+            "Work OS",
+            "Learning OS"
+          ],
+          "protected_state": [
+            "Work semantic authority",
+            "Learning semantic authority"
+          ],
+          "target_delta": "introduce semantic-light shared capability layer without cross-domain authority inheritance",
+          "acceptance_conditions": [
+            "technical primitives may be shared",
+            "domain identity and authority remain isolated"
+          ],
+          "validation_steps": [
+            "owner-map check",
+            "cross-domain counterexample replay"
+          ],
+          "regression_scope": [
+            "Work OS",
+            "Learning OS",
+            "shared capability consumers"
+          ],
+          "report_mode": "normal",
+          "remaining_unknowns": [],
+          "existing_pattern_refs": [
+            "MASTER/MASTER_LOGIC.md",
+            "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md"
+          ],
+          "owner_boundary_checked": true,
+          "interface_contract_checked": true,
+          "minimum_sufficient_complexity": true,
+          "integration_check_defined": true,
+          "semantic_boundary_checked": true,
+          "authority_boundary_checked": true,
+          "owner_map": [
+            {
+              "scope": "Work roles/permissions",
+              "owner": "Work OS"
+            },
+            {
+              "scope": "Family/child roles/permissions",
+              "owner": "Learning OS"
+            },
+            {
+              "scope": "generic transport/storage/sync mechanism",
+              "owner": "Shared Capability Layer"
+            }
+          ],
+          "sharing_classification": [
+            {
+              "item": "transport/storage/sync mechanism",
+              "class": "SHARED_TECHNICAL_PRIMITIVE"
+            },
+            {
+              "item": "Work identity/authority",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "Work OS"
+            },
+            {
+              "item": "Learning identity/authority",
+              "class": "DOMAIN_OWNED_SEMANTIC",
+              "owner": "Learning OS"
+            }
+          ],
+          "boundary_counterexamples": [
+            {
+              "scenario": "same person is company PM and parent",
+              "expected_boundary": "PM authority does not imply parent/child authority"
+            }
+          ],
+          "shared_layer_proposed": true,
+          "shared_layer_semantic_light": true,
+          "cross_domain_authority_shared_by_default": false,
+          "shared_semantic_or_authority_without_explicit_federation": false,
+          "forced_fragmentation_without_benefit": false
         }
       }
     }
