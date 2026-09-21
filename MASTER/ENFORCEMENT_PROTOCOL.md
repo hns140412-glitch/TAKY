@@ -159,6 +159,30 @@ This gate is domain-independent. It applies to implementation, validation, exter
 Reference replay:
 `python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json`.
 
+## 4.4A Architecture owner/sharing boundary gate — HARD LOCK
+
+Semantic ownership is defined by `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md` under the `ARCHITECTURE_CHANGE` profile. This section defines the deterministic execution expression.
+
+Before a material shared-core, OS split/merge, cross-domain common layer, ownership move, or common-capability extraction can pass the architecture execution gate, the engineering contract SHALL contain:
+- non-empty `owner_map[]` with explicit `scope / owner`;
+- non-empty `sharing_classification[]` using only `SHARED_TECHNICAL_PRIMITIVE / DOMAIN_OWNED_SEMANTIC / EXPLICIT_FEDERATION / NOT_SHARED`;
+- `semantic_boundary_checked=true`;
+- `authority_boundary_checked=true`;
+- at least one usable `boundary_counterexamples[]` entry with `scenario / expected_boundary`;
+- when a shared layer is proposed, `shared_layer_semantic_light=true`;
+- no implicit cross-domain authority sharing;
+- no semantic/authority sharing without explicit federation.
+
+A shared authentication account, identifier, database, transport, event bus, storage engine or sync mechanism SHALL NOT by itself prove shared identity, role, permission, ownership, lifecycle or authority.
+
+Violation:
+- incomplete pre-structure boundary model ⇒ `RULE_NOT_APPLIED`;
+- implicit cross-domain authority/semantic inheritance ⇒ `AUTHORITY_BOUNDARY_VIOLATION`.
+
+This gate exists to prevent solution-first architecture where a plausible shared layer is proposed before ownership and non-shareable semantics are compiled.
+
+Reference replay is included in `ENFORCEMENT/replay_engineering_profiles_v1.json`.
+
 ## 4.5 External-resource / hosting call budget gate — HARD LOCK
 
 External hosting, deployment, production validation, paid API execution, quota-bearing preview creation, and repeated remote status polling are material side effects. They SHALL NOT be used as a substitute for lower-cost repository/branch/CI/runtime validation.
