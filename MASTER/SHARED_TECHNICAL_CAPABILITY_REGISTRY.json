@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.3",
+  "registry_version": "2026-09-21.4",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -49,7 +49,7 @@
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Snap-Pop": "MIGRATION_OPEN",
+        "Snap-Pop": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
       "acceptance_conditions": [
@@ -83,6 +83,18 @@
             "conclusion": "success"
           },
           "scope": "Hide authoritative release descriptor + release_id cache identity",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Snap-Pop": {
+          "main_sha": "a015686ab48153bd874bbb86f12a0a2777a8233c",
+          "pr": 3,
+          "pr_head_sha": "2fea74ae9ea9ab361c654fc781588870b80f8250",
+          "validation_ci": {
+            "run_id": 35555920665,
+            "conclusion": "success"
+          },
+          "scope": "Snap authoritative release descriptor + release_id cache identity",
+          "runtime_note": "Initial browser failures were test-race diagnostics; final run #4 passed after waiting for async IndexedDB/UI transitions. Product active-state write remains the safe-point source.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       }
@@ -120,7 +132,7 @@
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
-        "Snap-Pop": "MIGRATION_P0"
+        "Snap-Pop": "MIGRATED__CI_RUNTIME_VERIFIED"
       },
       "acceptance_conditions": [
         "waiting update cannot transition directly to activation without safe point",
@@ -153,6 +165,18 @@
             "conclusion": "success"
           },
           "scope": "shared PWA update state machine + Hide-owned learning/capture safe-point adapter",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        },
+        "Snap-Pop": {
+          "main_sha": "a015686ab48153bd874bbb86f12a0a2777a8233c",
+          "pr": 3,
+          "pr_head_sha": "2fea74ae9ea9ab361c654fc781588870b80f8250",
+          "validation_ci": {
+            "run_id": 35555920665,
+            "conclusion": "success"
+          },
+          "scope": "shared PWA update state machine + Snap-owned active-exploration safe-point adapter",
+          "runtime_note": "Initial browser failures were test-race diagnostics; final run #4 passed after waiting for async IndexedDB/UI transitions. Product active-state write remains the safe-point source.",
           "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
         }
       }
