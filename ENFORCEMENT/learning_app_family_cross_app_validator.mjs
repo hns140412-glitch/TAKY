@@ -33,11 +33,13 @@ ok('ready-encodes-central-version',ready.includes("contract_version: 'READY_LEAR
 ok('hide-fail-closed-version',hide.includes("value.contract_version !== 'READY_LEARNING_CONTEXT_V1'"));
 ok('snap-fail-closed-version',snap.includes("value.contract_version!=='READY_LEARNING_CONTEXT_V1'"));
 
-const forbidden=['role','permission','planner_authority','allocation_authority','dated_todo_authority','hanja_grade_inference','hanja_level_inference'];
+const forbidden=contract.authority_boundary.forbidden_fields;
 for(const field of forbidden){
   ok('no-ready-authority-field-'+field,!ready.includes('learning_context.'+field));
-  ok('no-hide-authority-consumption-'+field,!hide.includes('value.'+field));
-  ok('no-snap-authority-consumption-'+field,!snap.includes('value.'+field));
+}
+for(const field of ['role','permission','permissions','planner_authority','allocation_authority','family_id','child_id','hanja_grade','hanja_level','grade_inference']){
+  ok('hide-rejects-authority-'+field,hide.includes("'"+field+"'"));
+  ok('snap-rejects-authority-'+field,snap.includes("'"+field+"'"));
 }
 
 const transportIds=['session_id','goal_id','task_id','lap_id'];
@@ -66,13 +68,63 @@ ok('hide-specialist-no-session-end',!hide.includes("'SESSION_END'")&&!hide.inclu
 ok('snap-specialist-no-session-end',!snap.includes("'SESSION_END'")&&!snap.includes("'SESSION_ENDED'"));
 
 ok('hide-context-is-resolved-only',hide.includes('function learningContext()')&&hide.includes('decodeLearningContext(getContext().learning_context)'));
-ok('hide-does-not-infer-hanja-grade',!hide.includes('hanja_grade')&&!hide.includes('hanja_level'));
-ok('hide-memory-advisory-boundary',hide.includes("specialistAuthority: 'SPECIALIST_MEMORY_ADVISORY_ONLY'"));
+ok('hide-context-resolved-by-ready-engine',hide.includes("resolvedBy: 'READY_LEARNING_ENGINE'"));
+ok('hide-rejects-hanja-grade-authority',hide.includes("'hanja_grade'")&&hide.includes("'hanja_level'")&&hide.includes("'grade_inference'"));
+ok('hide-memory-advisory-boundary',hide.includes("specialistAuthority: 'SPECIALIST_MEMORY_ADVISORY_ONLY'")&&hide.includes("authority:'SPECIALIST_MEMORY_ADVISORY_ONLY'"));
 
 ok('vocabulary-source-owner',vocab.includes('sourceOwner'));
 ok('vocabulary-expression-material-only',vocab.includes('role:"EXPRESSION_MATERIAL_ONLY"'));
 ok('vocabulary-no-auto-insert',vocab.includes('autoInsertAllowed:false'));
 ok('vocabulary-no-mastery-mutation',vocab.includes('masteryMutationAllowed:false'));
 ok('vocabulary-no-ownership-transfer',vocab.includes('vocabularyOwnershipTransferred:false'));
+
+const canonical={
+  session_id:'session_cross_app_001',
+  goal_id:'goal_cross_app_001',
+  task_id:'task_cross_app_001',
+  lap_id:'lap_cross_app_001',
+  return_target:'https://ready.local/app'
+};
+function readyLaunch(app){
+  return {...canonical,from_app:'ready-set',to_app:app,learning_context:'encoded-ready-context'};
+}
+function specialistReturn(route,from,task_state,event_id){
+  return {
+    session_id:route.session_id,goal_id:route.goal_id,task_id:route.task_id,lap_id:route.lap_id,
+    return_target:route.return_target,from_app:from,task_state,event_id
+  };
+}
+function readyNormalize(raw){
+  if(raw==='HELP_NEEDED')return 'WAITING_FOR_PARENT';
+  if(raw==='BLOCKED')return 'BLOCKED';
+  return raw;
+}
+function assertIdentity(name,value){
+  for(const id of ['session_id','goal_id','task_id','lap_id','return_target']) ok(name+'-'+id,value[id]===canonical[id]);
+}
+function runPath(name,steps){
+  let route=readyLaunch(steps[0]);
+  assertIdentity(name+'-launch',route);
+  for(let i=1;i<steps.length;i++){
+    const next=steps[i];
+    if(next==='ready-set'){
+      const returned=specialistReturn(route,route.to_app,'COMPLETED','evt_'+name);
+      assertIdentity(name+'-return',returned);
+      ok(name+'-specialist-completion-not-session-end',readyNormalize(returned.task_state)==='COMPLETED');
+      return;
+    }
+    route={...route,from_app:route.to_app,to_app:next};
+    assertIdentity(name+'-handoff-'+next,route);
+  }
+  const returned=specialistReturn(route,route.to_app,'COMPLETED','evt_'+name);
+  assertIdentity(name+'-return',returned);
+}
+runPath('ready-hide-ready',['hide-seek','ready-set']);
+runPath('ready-snap-ready',['snap-pop','ready-set']);
+runPath('ready-hide-snap-ready',['hide-seek','snap-pop','ready-set']);
+ok('model-help-needed-to-parent',readyNormalize('HELP_NEEDED')==='WAITING_FOR_PARENT');
+ok('model-explicit-blocked',readyNormalize('BLOCKED')==='BLOCKED');
+const plannerRuntime={in_progress:[{todo_id:'todo_1'}]};
+ok('model-ready-planner-max-one-in-progress',plannerRuntime.in_progress.length<=1);
 
 console.log('LEARNING_APP_FAMILY_CROSS_APP_CONTRACT_PASS');
