@@ -143,7 +143,15 @@
     "SILENT_LOSS": 0,
     "FALSE_CONVERGENCE": 0,
     "C2S_COMPILE_CLOSED": true,
-    "REFLECTION_COMPLETE": false,
+    "REFLECTION_COMPLETE": true,
     "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+  },
+  "reflection": {
+    "status": "COMPLETE",
+    "canonical_md": "C2S/LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21.md",
+    "canonical_json": "C2S/LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21.json",
+    "atom_level_gap_count": 12,
+    "consolidated_capability_gap_count": 7,
+    "downstream_product_code_changed": false
   }
 }
