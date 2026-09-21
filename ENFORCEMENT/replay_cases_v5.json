@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-20.2",
-  "scope": "Generic PRE-ACTION RULE APPLICATION GATE. Prevents known/loaded standards from being ignored at action time across implementation, validation, deployment, C2S, external verification and other material actions. Includes external-resource/hosting call budget and no-duplicate-call enforcement.",
+  "fixture_version": "2026-09-21.3",
+  "scope": "Generic PRE-ACTION RULE APPLICATION GATE plus universal TAKY material-turn activation, external-resource/hosting call budget and no-duplicate-call enforcement.",
   "cases": [
     {
       "id": "PREACTION-01",
@@ -224,6 +224,63 @@
         "external_status_poll": true,
         "no_new_trigger_since_last_external_check": false,
         "material_external_state_change_expected": true
+      }
+    },
+    {
+      "id": "PREACTION-TAKY-UNIVERSAL-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "material_taky_turn": true,
+        "pre_execution_gate_required": false
+      }
+    },
+    {
+      "id": "PREACTION-TAKY-UNIVERSAL-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "material_taky_turn": true,
+        "pre_execution_gate_required": true,
+        "applicable_rule_refs": [
+          "MASTER/MASTER_LOGIC.md#0.1"
+        ],
+        "context_evidence_refs": [
+          "current TAKY-governed conversation"
+        ],
+        "history_query_refs": [
+          "canonical main"
+        ],
+        "role": "ORCHESTRATOR",
+        "execution_owner": "CHATGPT",
+        "action_class": "STATUS_REPORT",
+        "working_model": {
+          "primary_outcome": "Answer the TAKY-governed request using current canonical rules without requiring a TAKY prefix.",
+          "priority_order": [
+            "apply relevant canonical owners",
+            "preserve protected state",
+            "avoid unnecessary process"
+          ],
+          "execution_implications": [
+            "use only applicable rules",
+            "do not claim repository runtime interception for hosted chat"
+          ],
+          "rule_to_execution": [
+            {
+              "rule_ref": "MASTER/MASTER_LOGIC.md#0.1",
+              "effect": "CONSTRAINT",
+              "implication": "Treat TAKY as the default basis for the governed turn and keep validation proportional."
+            }
+          ],
+          "next_action": "Produce the governed answer.",
+          "stop_conditions": [
+            "requested result materially satisfied"
+          ]
+        }
       }
     }
   ]
