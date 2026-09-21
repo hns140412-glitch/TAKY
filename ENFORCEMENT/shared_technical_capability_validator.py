@@ -15,7 +15,7 @@ if len(ids)!=len(set(ids)):
     fail.append("DUPLICATE_CAPABILITY_ID")
 
 by_id={x.get("capability_id"):x for x in caps if isinstance(x,dict)}
-for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001"):
+for cid in ("CAP-RELEASE-COMPAT-001","CAP-PWA-UPDATE-001","CAP-EVENT-ENVELOPE-001","CAP-LOCAL-QUEUE-001"):
     c=by_id.get(cid)
     if not c:
         fail.append("MISSING_CAPABILITY:"+cid)
@@ -39,6 +39,16 @@ if "event_id is immutable event identity" not in (event_contract.get("identity_r
 for x in ("family or organization ownership","role/permission/authority"):
     if x not in (event_cap.get("semantic_exclusions") or []):
         fail.append("EVENT_SEMANTIC_EXCLUSION_MISSING:"+x)
+
+queue=by_id.get("CAP-LOCAL-QUEUE-001") or {}
+queue_contract=queue.get("mechanism_contract") or {}
+if "DEAD_LETTER" not in (queue_contract.get("states") or []):
+    fail.append("LOCAL_QUEUE_DEAD_LETTER_MISSING")
+if "bounded by max_attempts" not in (queue_contract.get("retry_rule") or ""):
+    fail.append("LOCAL_QUEUE_BOUNDED_RETRY_RULE_MISSING")
+for x in ("conflict resolution authority","family or organization identity","roles/permissions"):
+    if x not in (queue.get("semantic_exclusions") or []):
+        fail.append("LOCAL_QUEUE_SEMANTIC_EXCLUSION_MISSING:"+x)
 
 pwa=by_id.get("CAP-PWA-UPDATE-001") or {}
 rule=((pwa.get("mechanism_contract") or {}).get("required_transition_rule") or "")
