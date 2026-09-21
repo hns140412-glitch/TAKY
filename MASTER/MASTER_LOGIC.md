@@ -62,6 +62,22 @@ Hard boundaries:
 Before promotion classify a rule as `GLOBAL INVARIANT / SHARED CAPABILITY CONTRACT / DOMAIN RULE / PROJECT RULE / REFERENCE ONLY / CANDIDATE`.
 Useful, repeated or strict project behavior does not become GRAND MASTER merely by recurrence. Lower layers may specialize or strengthen applicable rules but SHALL NOT silently globalize project-specific behavior.
 
+### 1.2 System layer ownership map — HARD LOCK
+
+For material Work OS / Learning OS / shared-capability / mobile-app architecture decisions, use `MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json` as the machine-readable support map for current layer ownership and protected sharing boundaries.
+
+The map does not create a second semantic authority. Its entries point to the actual owning GRAND MASTER / OS / family / project contracts.
+
+Current structural baseline:
+- `WORK_OS` and `LEARNING_OS` are siblings under TAKY;
+- a shared technical capability layer may own semantic-light mechanisms only;
+- Learning App Family is subordinate to Learning OS and owns cross-app learning-family semantics;
+- Ready & Set / Hide & Seek / Snap & Pop remain project owners of their specialized product behavior;
+- platform adapters do not become domain/product authority.
+
+`OWNER MAP != NEW MASTER AUTHORITY`.
+`SHARED TECHNICAL PRIMITIVE != SHARED DOMAIN SEMANTIC`.
+
 ## 2. Source of Truth & Storage Authority
 GitHub TAKY = CANONICAL MASTER SOURCE.
 Google Drive = WORKING / MIRROR / REFERENCE SURFACE.
