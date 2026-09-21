@@ -62,7 +62,8 @@
         "CAP-RELEASE-COMPAT-001 -> SHARED/runtime/release-contract.js",
         "CAP-PWA-UPDATE-001 -> SHARED/runtime/pwa-update-state.js",
         "CAP-EVENT-ENVELOPE-001 -> SHARED/runtime/event-envelope.js",
-        "CAP-LOCAL-QUEUE-001 -> SHARED/runtime/local-queue.js"
+        "CAP-LOCAL-QUEUE-001 -> SHARED/runtime/local-queue.js",
+        "CAP-OCR-INGEST-001 -> SHARED/runtime/vision-ingest.js"
       ]
     },
     "WORK_OS": {
