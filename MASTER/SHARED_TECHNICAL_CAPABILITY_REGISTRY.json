@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.4",
+  "registry_version": "2026-09-21.5",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -185,19 +185,49 @@
       "capability_id": "CAP-EVENT-ENVELOPE-001",
       "title": "Immutable event envelope identity",
       "class": "SHARED_TECHNICAL_PRIMITIVE",
-      "state": "DESIGN_READY_IMPLEMENTATION_OPEN",
+      "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
-      "implementation": null,
+      "implementation": "SHARED/runtime/event-envelope.js",
       "semantic_exclusions": [
         "event business meaning",
         "domain history retention policy",
-        "domain conflict resolution"
+        "domain conflict resolution",
+        "family or organization ownership",
+        "role/permission/authority",
+        "domain ordering semantics beyond an optional opaque sequence value"
       ],
       "consumers": {
-        "Ready-Set": "P1",
-        "Hide-Seek": "P1",
-        "Snap-Pop": "P1"
-      }
+        "Ready-Set": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATION_OPEN",
+        "Snap-Pop": "MIGRATION_OPEN",
+        "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
+      },
+      "tests": [
+        "SHARED/runtime/shared-runtime-foundation.test.js"
+      ],
+      "mechanism_contract": {
+        "required_fields": [
+          "envelope_version",
+          "event_id",
+          "event_type",
+          "source",
+          "occurred_at",
+          "idempotency_key",
+          "payload_digest",
+          "payload"
+        ],
+        "identity_rule": "event_id is immutable event identity and MUST NOT be derived from payload/state digest",
+        "correlation_rule": "correlation_id is optional transport correlation only and does not imply authority or ownership",
+        "idempotency_rule": "idempotency_key defaults to event_id but may be supplied explicitly by the consumer",
+        "payload_rule": "payload is an immutable snapshot inside the created envelope; payload_digest is integrity metadata, not event identity"
+      },
+      "acceptance_conditions": [
+        "two events with identical payloads may have different event_id values",
+        "identical payload snapshots produce the same payload_digest",
+        "created envelopes are immutable",
+        "validation rejects payload-digest drift",
+        "the primitive does not infer identity, role, permission, domain ownership or event meaning"
+      ]
     },
     {
       "capability_id": "CAP-LOCAL-QUEUE-001",
