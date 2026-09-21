@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.12",
+  "registry_version": "2026-09-21.13",
   "status": "ACTIVE_SUPPORT_IMPLEMENTATION_REGISTRY",
   "purpose": "Machine-readable registry for reusable semantic-light technical mechanisms shared across TAKY-governed systems. Semantic/domain authority remains with Work OS, Learning OS, family and project owners.",
   "invariants": [
@@ -488,7 +488,7 @@
       },
       "consumers": {
         "Ready-Set": "MIGRATION_OPEN",
-        "Hide-Seek": "MIGRATION_OPEN",
+        "Hide-Seek": "MIGRATED__CI_RUNTIME_VERIFIED",
         "Snap-Pop": "NO_CURRENT_EXTERNAL_HTTP_CONSUMER",
         "Work OS": "OPTIONAL_WHEN_RUNTIME_EXISTS"
       },
@@ -498,7 +498,28 @@
         "HTTP status normalization does not infer business meaning",
         "authentication rejection is reported but identity/permission decisions remain outside shared transport",
         "consumer owns endpoint, credentials, retry scheduling and response interpretation"
-      ]
+      ],
+      "consumer_evidence": {
+        "Hide-Seek": {
+          "main_sha": "c0831a46ac0aa9d32c6dcc6a1e07ff70a8d155eb",
+          "pr": 9,
+          "pr_head_sha": "ffb9e3491f13fc591a6df3b405528b80aa3f1ffb",
+          "validation_ci": {
+            "run_id": 35558812153,
+            "conclusion": "success"
+          },
+          "scope": "Hide Gemini requests use shared timeout/JSON/status/Retry-After transport normalization.",
+          "semantic_boundary": "Hide retains Gemini endpoint/model selection, API key ownership, prompt content, vocabulary semantics and user-facing error meaning.",
+          "claim_boundary": "CODED + CI_VERIFIED + RUNTIME_VERIFIED; not DEVICE_VERIFIED or PRODUCTION_VERIFIED"
+        }
+      },
+      "non_adoption_evidence": {
+        "Snap-Pop": {
+          "inspected_main_sha": "d761dd1435f45f7679f869f5b7a510ccf6ebf370",
+          "finding": "Current Snap runtime has no external HTTP transport requiring CAP-HTTP-ADAPTER-001.",
+          "decision": "Do not add an unused shared HTTP primitive."
+        }
+      }
     },
     {
       "capability_id": "CAP-AUTH-TRANSPORT-001",
