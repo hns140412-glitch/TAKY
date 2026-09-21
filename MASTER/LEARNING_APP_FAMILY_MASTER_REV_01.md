@@ -164,7 +164,7 @@ Shared-family compaction SHALL NOT be used as a substitute for the current detai
 Before declaring a project detail missing, recover the applicable active/inherited project MASTER and reverify its repository/branch HEAD.
 
 Current recoverable owner routes:
-- Ready & Set → `hns140412-glitch/Ready-Set` → `Ready_Set_Ui_Master_Logic_REV_07.md`, which inherits `Ready_Set_Ui_Master_Logic_REV_06.md` unless explicitly overridden.
+- Ready & Set → `hns140412-glitch/Ready-Set` → `READY_SET_CANONICAL_PRODUCT_CONTRACT.md` + `READY_SET_RUNTIME_STATE_MODEL.md`; historical REV_06/REV_07 material is lineage only unless explicitly preserved by the active rewrite canonical.
 - Hide & Seek → `hns140412-glitch/Hide-Seek` → `Hide_Seek_UI_MASTER_LOGIC_REV_04.md`.
 - Snap & Pop → `hns140412-glitch/Snap-Pop` → `Snap_Pop_UI_MASTER_LOGIC_REV_12.md`, which preserves/inherits applicable REV_11/REV_10 detail unless explicitly superseded.
 

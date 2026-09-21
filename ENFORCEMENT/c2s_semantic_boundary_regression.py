@@ -62,6 +62,35 @@ if len(major_numbers) != len(set(major_numbers)):
 if any(b <= a for a, b in zip(major_numbers, major_numbers[1:])):
     failures.append(f"NON_MONOTONIC_MAJOR_SECTION:MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md:{major_numbers}")
 
+
+
+# Realization closure: central owner pointers and growth states must track current implementation truth.
+family_master = read("MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md")
+if "Ready_Set_Ui_Master_Logic_REV_07.md" in family_master:
+    failures.append("STALE:MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md:Ready legacy owner pointer")
+if "READY_SET_CANONICAL_PRODUCT_CONTRACT.md" not in family_master:
+    failures.append("MISSING:MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md:Ready current canonical pointer")
+
+import json
+growth = json.loads(read("MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json"))
+growth_by_id = {x.get("gap_id"): x for x in growth.get("items", [])}
+for gap_id in (
+    "GROWTH-PWA-UPDATE-001",
+    "GROWTH-VERSION-TUPLE-001",
+    "GROWTH-STATE-EVENT-001",
+    "GROWTH-EXTERNAL-BUDGET-001",
+):
+    row = growth_by_id.get(gap_id)
+    if not row:
+        failures.append(f"MISSING_GROWTH_ITEM:{gap_id}")
+    elif row.get("state") == "OPEN":
+        failures.append(f"STALE_GROWTH_STATE:{gap_id}:OPEN_AFTER_IMPLEMENTATION")
+
+for gap_id in ("GROWTH-STATE-EVENT-001", "GROWTH-LOCALFIRST-CONFLICT-001"):
+    owner = str((growth_by_id.get(gap_id) or {}).get("owner_destination", ""))
+    if "Shared learning data" in owner or "Shared learning event/data contract" in owner:
+        failures.append(f"AMBIGUOUS_SHARED_SEMANTIC_OWNER:{gap_id}")
+
 if failures:
     print("FAIL: C2S semantic boundary regression")
     for item in failures:
