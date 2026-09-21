@@ -26,17 +26,17 @@ jobs:
           mkdir -p _integration
           git clone --quiet https://github.com/hns140412-glitch/Ready-Set.git _integration/Ready-Set
           cd _integration/Ready-Set
-          git checkout --quiet f124c60ca86860165d27c11cebf0f36f0962edf8
+          git checkout --quiet 8f2c097ae52fcb53b22ca9bc0f9a867ff660dc48
       - name: Fetch pinned Hide integration delta
         run: |
           git clone --quiet https://github.com/hns140412-glitch/Hide-Seek.git _integration/Hide-Seek
           cd _integration/Hide-Seek
-          git checkout --quiet ff2918c7633c608f61be70a0f5a2ce794d76affd
+          git checkout --quiet 5ff6a4a4e6b65588acf4c8da503411320365b900
       - name: Fetch pinned Snap reconciliation delta
         run: |
           git clone --quiet https://github.com/hns140412-glitch/Snap-Pop.git _integration/Snap-Pop
           cd _integration/Snap-Pop
-          git checkout --quiet 702c315f3e61d031a4e14525d6d1dad59647b823
+          git checkout --quiet a720b5d35e096feda9b83bc88ffe5d06f89b3ed2
       - name: Validate central and cross-app contract
         run: node ENFORCEMENT/learning_app_family_cross_app_validator.mjs
       - name: Re-run Ready focused contracts
@@ -47,9 +47,10 @@ jobs:
           node .github/scripts/ready_planner_contract_test.js
       - name: Re-run Hide consumer ownership contract
         working-directory: _integration/Hide-Seek
-        run: node tools/validate-hide-learning-context.js
+        run: node tools/validate-hide-learning-context-v3.js
       - name: Re-run Snap context and vocabulary contracts
         working-directory: _integration/Snap-Pop
         run: |
-          node scripts/validate-learning-app-family-context.mjs
+          node scripts/validate-ready-learning-context.mjs
           node scripts/validate-vocabulary-material-ownership.mjs
+          node tests/shared-runtime-contract.test.js
