@@ -89,8 +89,12 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
     return state, failures
 
 def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
-    gate = run_c2s_preflight(record, repo_root, coverage_record)
-    state, runtime_failures = derive_runtime_state(record)
+    # Entering the controlled TAKY runtime is itself a material TAKY-governed turn.
+    # Do not depend on the caller/user to opt into TAKY governance.
+    effective_record = dict(record)
+    effective_record["material_taky_turn"] = True
+    gate = run_c2s_preflight(effective_record, repo_root, coverage_record)
+    state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
 
     task_contract_result = None
