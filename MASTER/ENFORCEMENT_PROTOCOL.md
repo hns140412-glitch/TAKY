@@ -22,6 +22,23 @@ A material rule that is mechanically checkable or replayable SHALL have a concre
 
 If no executable enforcement exists for a material mechanically-checkable rule, status is `ENFORCEMENT_MISSING`; prose existence alone SHALL NOT be described as recurrence-prevention PASS.
 
+## 0.1 Universal-basis activation gate — HARD LOCK
+
+For TAKY-controlled runtimes, material answers/actions across MASTER/OS/project/mobile-web/Work/Codex/tool surfaces SHALL enter the pre-execution path without requiring the user to restate "TAKY 기준".
+
+When an execution record marks `material_taky_turn=true`, the deterministic gate requires:
+- `pre_execution_gate_required=true`;
+- non-empty applicable rule/context/history evidence;
+- an operational `working_model` mapping applicable rules to execution;
+- truthful claim ceiling for runtime enforcement.
+
+For low-risk/non-material conversational turns, a full repository preflight need not be created, but the answer remains subject to active universal invariants and SHALL NOT knowingly contradict applicable canonical state.
+
+`TAKY-GOVERNED MATERIAL TURN + NO PREFLIGHT = RULE_NOT_APPLIED`.
+`NO TAKY PREFIX != NO TAKY GOVERNANCE`.
+
+This repository gate can enforce only runtimes that actually invoke it. Hosted ChatGPT native auto-invocation remains UNVERIFIED unless directly evidenced.
+
 ## 1. Pre-response negative-existence gate — HARD LOCK
 
 Before a material claim equivalent to “없다 / 말한 적 없다 / 규칙이 없다 / 자료가 없다 / 확인되지 않는다”, the execution record SHALL contain sufficient recovery evidence.
