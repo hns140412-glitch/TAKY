@@ -1,0 +1,132 @@
+{
+  "schema_version": "TKY_C2S_REFLECTION_V1",
+  "scope": "LEARNING_MATERIAL_UTILIZATION_REFLECTION_2026-09-21",
+  "baselines": {
+    "ready": {
+      "repo": "hns140412-glitch/Ready-Set",
+      "ref": "taky/ready-rebuild-v01-2026-09-21",
+      "sha": "da42d5121087b58201e85b5135d9b0c0765625f2"
+    },
+    "hide": {
+      "repo": "hns140412-glitch/Hide-Seek",
+      "ref": "taky/hide-rebuild-v01-2026-09-21",
+      "sha": "880cd6f98a60d35a13389501e4ac2f3c0e83ec9b"
+    },
+    "snap": {
+      "repo": "hns140412-glitch/Snap-Pop",
+      "ref": "taky/snap-rebuild-v01-2026-09-21",
+      "sha": "1332d958bdc4a8b2bec93900dbe2dbdb2a840ea2"
+    }
+  },
+  "ownership_locks": {
+    "ready_set": "session / task routing / Planner",
+    "ready_learning_engine": "assignment interpretation / Learning Unit / level and Hanja grade interpretation / scaffold routing",
+    "hide_seek": "Language Memory & Meaning",
+    "snap_pop": "thought / expression / writing / speaking"
+  },
+  "atoms": [
+    {
+      "utilization": "SCENE_FIRST_RECALL",
+      "owner": "Snap & Pop",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-001"
+    },
+    {
+      "utilization": "SENSORY_RECALL_LADDER",
+      "owner": "Snap & Pop",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-002"
+    },
+    {
+      "utilization": "ORAL_BEFORE_WRITING",
+      "owner": "Snap & Pop",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-003"
+    },
+    {
+      "utilization": "GRADUAL_EXPRESSION_EXPANSION",
+      "owner": "Snap & Pop",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-004"
+    },
+    {
+      "utilization": "EXPRESSION_VARIATION",
+      "owner": "Hide & Seek",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-005"
+    },
+    {
+      "utilization": "SITUATION_TO_LANGUAGE",
+      "owner": "Snap & Pop",
+      "classification": "NOT_IMPLEMENTED",
+      "gap": "GAP-LMU-006"
+    },
+    {
+      "utilization": "MEANING_CONTEXT_REUSE",
+      "owner": "Hide & Seek",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-007"
+    },
+    {
+      "utilization": "FORM_MEANING_USAGE_CHAIN",
+      "owner": "Hide & Seek",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-008"
+    },
+    {
+      "utilization": "WRITING_SCAFFOLD_GRAPH",
+      "owner": "Snap & Pop",
+      "classification": "PARTIAL_IMPLEMENTATION_P2_HOLD_FULL_GENRE",
+      "gap": "GAP-LMU-009"
+    },
+    {
+      "utilization": "QUESTION_BEFORE_CALCULATION",
+      "owner": "Ready Learning Engine",
+      "classification": "NOT_IMPLEMENTED",
+      "gap": "GAP-LMU-010"
+    },
+    {
+      "utilization": "PROBLEM_RESTATE",
+      "owner": "Ready Learning Engine",
+      "classification": "NOT_IMPLEMENTED",
+      "gap": "GAP-LMU-011"
+    },
+    {
+      "utilization": "PRESERVE_CHILD_VOICE",
+      "owner": "Learning App Family",
+      "classification": "PARTIAL_IMPLEMENTATION",
+      "gap": "GAP-LMU-012"
+    }
+  ],
+  "duplicate_count": 0,
+  "ownership_error_count": 0,
+  "atom_level_gap_count": 12,
+  "consolidated_capability_gap_count": 7,
+  "consolidated_gaps": [
+    "GAP-CAP-01 Snap Recall Entry",
+    "GAP-CAP-02 Snap Oral-to-Writing Bridge",
+    "GAP-CAP-03 Progressive Expression Scaffold",
+    "GAP-CAP-04 Hide Contextual Reuse Layer",
+    "GAP-CAP-05 Hide Hanja Memory Chain Completion",
+    "GAP-CAP-06 Ready Question-Comprehension Gate",
+    "GAP-CAP-07 Family Child-Voice Policy Completion"
+  ],
+  "utilization": {
+    "reflection_progress_percent": 100,
+    "partial_atoms": 9,
+    "not_implemented_atoms": 3,
+    "fully_implemented_family_atoms": 0,
+    "weighted_mechanism_utilization_percent": 46,
+    "weighted_end_to_end_utilization_percent": 34
+  },
+  "closure": {
+    "material_atoms": 12,
+    "reflected_atoms": 12,
+    "UNMAPPED_MATERIAL": 0,
+    "SILENT_LOSS": 0,
+    "FALSE_CONVERGENCE": 0,
+    "C2S_COMPILE_CLOSED": true,
+    "REFLECTION_COMPLETE": true,
+    "DOWNSTREAM_IMPLEMENTATION_COMPLETE": false
+  }
+}
