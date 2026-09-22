@@ -1,0 +1,126 @@
+{
+  "version": "2026-09-22",
+  "status": "C2S_COMPILE_CLOSED",
+  "atoms": [
+    {
+      "id": "TAKY-ARCH-001",
+      "type": "CORRECTION",
+      "statement": "Ready & Set and Character Visual ID are separate development streams; integrate later by contract.",
+      "owner": "LEARNING_OS/FAMILY_ARCHITECTURE",
+      "destination": "Ready consumer contract + independent Character implementation",
+      "state": "REFLECTED"
+    },
+    {
+      "id": "TAKY-ARCH-002",
+      "type": "CORRECTION",
+      "statement": "Planner is independent of Ready and owns plan/progress management.",
+      "owner": "PLANNER_ENGINE",
+      "destination": "Learning-domain service architecture",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-003",
+      "type": "CORRECTION",
+      "statement": "Learning Engine is independent of Ready; Ready is an execution consumer.",
+      "owner": "LEARNING_ENGINE",
+      "destination": "Learning-domain service architecture",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-004",
+      "type": "DECISION",
+      "statement": "Learning Engine and Planner are sibling semantic services.",
+      "owner": "LEARNING_OS",
+      "destination": "System ownership graph",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-005",
+      "type": "DECISION",
+      "statement": "Ready/Hide/Snap consume multiple OS/domain services and return events/evidence.",
+      "owner": "LEARNING_APP_FAMILY",
+      "destination": "Interaction graph",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-006",
+      "type": "CORRECTION",
+      "statement": "The same ownership/consumption principle applies to Work OS, Learning OS, TAKY and future OS/domain systems.",
+      "owner": "TAKY_CORE",
+      "destination": "Whole-system architecture",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-007",
+      "type": "DECISION",
+      "statement": "A tree-only architecture is insufficient; TAKY requires ownership hierarchy plus interaction graph.",
+      "owner": "TAKY_CORE",
+      "destination": "SYSTEM_LAYER_OWNERSHIP_MAP successor/update",
+      "state": "OPEN_IMPLEMENTATION"
+    },
+    {
+      "id": "TAKY-ARCH-008",
+      "type": "REQUIREMENT",
+      "statement": "Think Again, Keep Your Key. and Think Again, You're The Key. are TAKY's paired slogans and core principles.",
+      "owner": "TAKY_CORE",
+      "destination": "TAKY.md + MASTER_LOGIC",
+      "state": "REFLECTED"
+    },
+    {
+      "id": "TAKY-ARCH-009",
+      "type": "DECISION",
+      "statement": "Think Again defines reasoning/search/verification conditions; Keep Your Key defines control/ownership; You're The Key defines human agency/accountability.",
+      "owner": "TAKY_CORE",
+      "destination": "AI activity specification framework",
+      "state": "REFLECTED"
+    },
+    {
+      "id": "TAKY-ARCH-010",
+      "type": "REQUIREMENT",
+      "statement": "TAKY defines what to think, what to search, what evidence to trust, and what result to produce.",
+      "owner": "TAKY_CORE",
+      "destination": "Reasoning/Research/Execution/Output standard",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-011",
+      "type": "REQUIREMENT",
+      "statement": "Hallucination/context loss/recreation must be blocked at root-cause level before output.",
+      "owner": "TAKY_CORE",
+      "destination": "Pre-action prevention gates",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-012",
+      "type": "DECISION",
+      "statement": "Implementation host/repository location must never imply semantic ownership.",
+      "owner": "TAKY_CORE",
+      "destination": "Ownership graph + validation",
+      "state": "REFLECTION_COMPLETE"
+    },
+    {
+      "id": "TAKY-ARCH-013",
+      "type": "OPEN",
+      "statement": "Work OS requires the same semantic-owner vs implementation-host audit.",
+      "owner": "WORK_OS",
+      "destination": "Next-chat P0",
+      "state": "OPEN"
+    },
+    {
+      "id": "TAKY-ARCH-014",
+      "type": "OPEN",
+      "statement": "TAKY runtime/orchestrator layers require the same ownership audit.",
+      "owner": "TAKY_CORE",
+      "destination": "Next-chat P0",
+      "state": "OPEN"
+    },
+    {
+      "id": "TAKY-ARCH-015",
+      "type": "OPEN",
+      "statement": "Planner/Learning code extraction must wait until semantic ownership and contracts are frozen.",
+      "owner": "LEARNING_OS",
+      "destination": "Downstream implementation",
+      "state": "OPEN"
+    }
+  ]
+}
