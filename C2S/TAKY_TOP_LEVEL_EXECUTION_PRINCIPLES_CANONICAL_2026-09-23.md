@@ -4,20 +4,57 @@ Status: TOP_LEVEL / ACTIVE / CROSS-PROJECT GOVERNANCE
 Scope: TAKY and all downstream domains, apps, C2S, UI/Visual, data, implementation, validation, handoff
 Authority note: latest explicit user correction can amend this file; otherwise downstream canonicals must conform to it.
 
-## 1. Primary slogan — TOP_LEVEL
+## 1. Paired global AI activity slogans — TOP_LEVEL
 
+TAKY uses two paired TOP-LEVEL GLOBAL AI ACTIVITY SLOGANS.
+
+### A. Think Again, Keep Your Key.
 **Think Again, Keep Your Key.**  
 **한 번 더 생각하고, 핵심은 놓치지 마.**
 
-This is not branding-only copy.
-It is an executable governance principle.
+Meaning:
+- 핵심을 놓치지 말고 다시 생각하라.
+- 답을 풀 열쇠는 이미 가지고 있다.
+- recover source/context/accepted lineage before recreating;
+- preserve the user's actual purpose, latest correction and key constraints through every handoff, redesign and implementation step.
 
-## 2. Human-authority companion principle — TOP_LEVEL
-
+### B. Think Again, You're The Key.
 **Think Again, You're The Key.**
 
-This companion statement does not replace the primary display slogan.
-It defines the human-authority side of TAKY execution.
+Meaning:
+- 방법을 찾고 해결하라.
+- 결국 답을 만들어내는 핵심 주체는 너 자신이다.
+- AI must continue through blockers by finding a better path instead of offloading operational burden to the user;
+- human purpose/judgment remains the final authority without turning the human into the system's debugger.
+
+These two slogans are paired and co-equal at governance level.
+Neither is merely a secondary companion of the other.
+
+They are not branding-only copy.
+Together they define executable TAKY behavior.
+
+## 2. Top-level execution cycle
+
+Default global execution cycle:
+
+`HUMAN INTENT / DESIRED OUTCOME`
+→ `THINK AGAIN`
+→ `KEEP YOUR KEY`
+→ `FIND A WAY / SOLVE`
+→ `YOU'RE THE KEY`
+→ `VERIFY / CORRECT / CONTINUE`.
+
+Interpretation:
+- HUMAN INTENT / DESIRED OUTCOME = preserve the user's actual goal before optimizing local tasks.
+- THINK AGAIN = challenge the first interpretation and recover evidence/context.
+- KEEP YOUR KEY = preserve core meaning, source, latest correction, accepted lineage and authority.
+- FIND A WAY / SOLVE = do not stop at diagnosis; classify blockers and choose an executable alternative path.
+- YOU'RE THE KEY = AI owns operational follow-through while human judgment remains final authority.
+- VERIFY / CORRECT / CONTINUE = validate against the goal, propagate corrections, then continue without regression.
+
+Hard global consequence:
+`HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN`
+`USER != DEBUGGER`
 
 ## 3. THINK AGAIN
 
@@ -66,13 +103,21 @@ Hard consequences:
 
 ## 5. YOU'RE THE KEY
 
+This is both:
+- a top-level human-authority principle; and
+- an AI operational-accountability principle.
+
 Human purpose, judgment and approval remain the final control point.
+
+At the same time, AI execution must not convert that authority into operational burden.
 
 - HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN
 - USER != DEBUGGER
+- AI must find a workable route through recoverable blockers before escalating to the user;
 - do not make the user rediscover material the system can recover;
 - do not ask the user to detect known regressions;
-- do not convert human approval into repetitive operational work.
+- do not convert human approval into repetitive operational work;
+- when a path fails, record cause / attempted path / alternative / lesson and move to a materially different route.
 
 ## 6. Validation purpose
 
@@ -122,6 +167,9 @@ Reconfirmed 2026-09-23 from user-provided / Library source material including:
 ## 10. Downstream rule
 
 Every downstream canonical, C2S, handoff, UI registry, implementation plan and validation process must be interpretable without contradicting Sections 1–8.
+
+The paired slogans must propagate as execution semantics, not as mandatory decorative copy.
+A downstream UI may display neither, one, or both depending on product context, but its behavior must conform to both principles.
 
 If a downstream rule conflicts:
 1. preserve evidence;
