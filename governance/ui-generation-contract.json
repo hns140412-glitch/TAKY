@@ -1,5 +1,5 @@
 {
-  "version": "TAKY_UI_GENERATION_GATE_V2_POSITIVE_FIRST",
+  "version": "TAKY_UI_GENERATION_GATE_V3_VISUAL_ID_LOCKED",
   "status": "ENFORCED",
   "authority": "C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md",
   "philosophy": "REQUIRED_STRUCTURE_FIRST",
@@ -16,7 +16,9 @@
     "explorer_identity": "PERSISTENT_EXPLORER_ID",
     "crew_identity_source": "CANONICAL_CORE6_OR_APPROVED_EXPANSION",
     "tts_actual_speech": "HOLD",
-    "history": "PRESERVE"
+    "history": "PRESERVE",
+    "crew_visual_id_state": "HARD_LOCK",
+    "crew_generation": "DERIVATIVE_PROJECTION_ONLY"
   },
   "screen_contracts": {
     "CREW_DEPARTURE_SCENE": {
@@ -43,15 +45,23 @@
       ],
       "open": [
         "exact_final_art_direction"
-      ]
+      ],
+      "invariants": {
+        "crew_visual_id_hard_lock": true,
+        "derivative_projection_only": true
+      },
+      "reference_policy": {
+        "approved_visual_id_required_for_character_render": true,
+        "fallback_if_unavailable": "PLACEHOLDER_ONLY"
+      }
     },
     "CHARACTER_PREP": {
       "purpose": "PREPARE_SAME_CHILD_CHARACTER_INPUTS",
       "sequence": [
         "SOURCE_PHOTO",
+        "SIGNATURE_ITEM",
         "DIRECTION_ROUND_1",
-        "DIRECTION_ROUND_2",
-        "SIGNATURE_ITEM_PERSISTENCE"
+        "DIRECTION_ROUND_2"
       ],
       "entities": {
         "completed_user_character": "ABSENT",
@@ -185,5 +195,55 @@
     "DO_NOT_REDESIGN_LOCKED_TIMER",
     "DO_NOT_ENABLE_ACTUAL_TTS_SPEECH_WHILE_HOLD"
   ],
-  "generation_rule": "REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION"
+  "generation_rule": "REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION",
+  "crew_visual_id_contract": {
+    "state": "HARD_LOCK",
+    "authority": "APPROVED_CORE6_VISUAL_ID_ASSETS",
+    "generation_semantics": "LOCKED_ID_DERIVATIVE_PROJECTION_NOT_REINTERPRETATION",
+    "canonical_ids": [
+      "dubi",
+      "lori",
+      "ink",
+      "nova",
+      "take",
+      "zero"
+    ],
+    "canonical_display_names": {
+      "dubi": "두비",
+      "lori": "로리",
+      "ink": "잉크",
+      "nova": "노바",
+      "take": "테이크",
+      "zero": "제로"
+    },
+    "locked_layers": [
+      "species",
+      "face",
+      "silhouette",
+      "body_proportion",
+      "identity_markings",
+      "fur_or_primary_identity_color",
+      "signature_clothing_structure",
+      "signature_equipment",
+      "core_palette",
+      "visual_id"
+    ],
+    "mutable_action_layers": [
+      "expression",
+      "pose",
+      "gesture",
+      "action",
+      "screen_position",
+      "short_dialogue",
+      "reaction"
+    ],
+    "shared_expedition_accent": {
+      "activation_stage": "SHARED_EXPEDITION_ACCENT",
+      "allowed_only_in": "THEME_ADAPTIVE_APPAREL_ZONES_PER_VISUAL_ID",
+      "never_changes_identity": true,
+      "historical_artwork_immutable_by_default": true
+    },
+    "missing_reference_policy": "PLACEHOLDER_ONLY",
+    "hard_rule": "PLACEHOLDER_GT_WRONG_CHARACTER"
+  }
 }
