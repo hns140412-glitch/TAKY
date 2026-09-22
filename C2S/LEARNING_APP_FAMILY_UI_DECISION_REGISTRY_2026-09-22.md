@@ -295,3 +295,38 @@ Timer remains LOCKED and outside current redesign.
 Recent generic poster / invented-character / placeholder / crop-overlay patch outputs are REJECTED as current visual baselines.
 
 END
+
+
+## 16. CORRECTION PROPAGATION — 2026-09-23
+
+### Character onboarding
+LOCKED:
+- direction/preference input and A/B/C result selection are different stages;
+- do not repeat the same mood choice in both stages;
+- 3-choice direction sets must be semantically distinct, not near-synonyms;
+- Visual ID confirmation is followed by Shared Expedition Accent before world entry.
+
+### World entry
+LOCKED:
+`Voyage/Drop → Island discovery → Island name → Base Camp move → Base Camp name → Ready`.
+
+No visual compression may omit island naming or Base Camp naming.
+
+### Ready Weekly
+LOCKED semantic contract:
+- Planner-first;
+- Mon–Sun;
+- fixed commitment / DATED TODO / free window separation;
+- today marker;
+- before-school task only when actual data contains one;
+- island/Base Camp is contextual background, not the information owner.
+
+REGRESSION:
+- generic 5-tab bottom navigation on Ready Weekly that creates extra primary screens.
+
+Ready primary architecture remains:
+1. 이번 주 여정
+2. 오늘의 탐험길
+3. 그냥! 지금 하면 돼! Timer
+
+This packet corrects a previously returned visual that did not reflect already-requested user deltas.
