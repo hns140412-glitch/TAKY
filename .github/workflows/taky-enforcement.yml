@@ -138,6 +138,7 @@ jobs:
           python -m py_compile ENFORCEMENT/drive_storage_map_validator.py
           python -m py_compile ENFORCEMENT/mobile_app_development_registry_validator.py
           python -m py_compile ENFORCEMENT/system_layer_ownership_validator.py
+          python -m py_compile ENFORCEMENT/canonical_reference_integrity_validator.py
           python -m py_compile ENFORCEMENT/shared_technical_capability_validator.py
           python -m py_compile ENFORCEMENT/current_product_identity_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
@@ -167,6 +168,8 @@ jobs:
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
         run: python ENFORCEMENT/system_layer_ownership_validator.py
+      - name: Validate canonical reference and header integrity
+        run: python ENFORCEMENT/canonical_reference_integrity_validator.py
       - name: Validate MASTER structural integrity and active projection
         run: python ENFORCEMENT/master_surface_integrity_validator.py
       - name: Validate Drive storage role map
@@ -261,6 +264,8 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
       - name: Replay generic pre-action rule-application fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
+      - name: Replay root-cause hallucination and context prevention fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v6.json
       - name: Validate fresh-context Notion review routing
         run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
       - name: Reject fresh-context Notion structure-substitution regression

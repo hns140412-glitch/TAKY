@@ -1,0 +1,262 @@
+{
+  "fixture_version": "2026-09-22.1",
+  "scope": "Root-cause prevention fixtures for hallucination, context loss, owner drift, stale canonical use, false missing, silent supersession, terminology regression and unjustified answer variance.",
+  "cases": [
+    {
+      "id": "ROOT-CAUSE-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SOURCE_RECOVERY_BYPASSED"
+      ],
+      "record": {
+        "source_recovery_required": true,
+        "source_recovery_completed": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "source_recovery_required": true,
+        "source_recovery_completed": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SUMMARY_AUTHORITY_PROMOTION"
+      ],
+      "record": {
+        "summary_used_as_authority": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "summary_used_as_authority": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-03",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SEARCH_MISS_AS_ABSENCE"
+      ],
+      "record": {
+        "search_miss_treated_as_source_absence": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-03",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "search_miss_treated_as_source_absence": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-04",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "IMPLEMENTATION_HOST_OWNER_PROMOTION",
+        "OWNER_DRIFT"
+      ],
+      "record": {
+        "implemented_in_used_as_semantic_owner": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-04",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "implemented_in_used_as_semantic_owner": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-05",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "LIVE_REFRESH_BYPASSED"
+      ],
+      "record": {
+        "current_state_claim_planned": true,
+        "live_refresh_completed": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-05",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "current_state_claim_planned": true,
+        "live_refresh_completed": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-06",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "UNJUSTIFIED_DECISION_REWRITE"
+      ],
+      "record": {
+        "settled_decision_rewrite_planned": true,
+        "delta_evidence_present": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-06",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "settled_decision_rewrite_planned": true,
+        "delta_evidence_present": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-07",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "SILENT_SUPERSESSION"
+      ],
+      "record": {
+        "supersession_applied": true,
+        "supersession_trace_present": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-07",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "supersession_applied": true,
+        "supersession_trace_present": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-08",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "TERMINOLOGY_REGRESSION"
+      ],
+      "record": {
+        "active_terminology_regressed": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-08",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "active_terminology_regressed": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-09",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "ANSWER_VARIANCE_WITHOUT_EVIDENCE"
+      ],
+      "record": {
+        "answer_changed_from_prior_canonical": true,
+        "new_material_evidence_present": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-09",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "answer_changed_from_prior_canonical": true,
+        "new_material_evidence_present": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-10",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "CONTEXT_LOSS"
+      ],
+      "record": {
+        "required_context_missing": true,
+        "continued_without_recovery": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-10",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "required_context_missing": false,
+        "continued_without_recovery": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-11",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "UNKNOWN_PROMOTED_TO_FACT"
+      ],
+      "record": {
+        "unknown_promoted_to_fact": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-11",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "unknown_promoted_to_fact": false
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-12",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "OWNER_DRIFT",
+        "UNKNOWN_PROMOTED_TO_FACT"
+      ],
+      "record": {
+        "semantic_owner_unresolved": true,
+        "authority_promoted_anyway": true
+      }
+    },
+    {
+      "id": "ROOT-CAUSE-12",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "semantic_owner_unresolved": true,
+        "authority_promoted_anyway": false
+      }
+    }
+  ]
+}

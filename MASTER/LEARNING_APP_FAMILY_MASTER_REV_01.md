@@ -21,17 +21,19 @@ Shared invariant:
 
 `ONE ISLAND / ONE SESSION / MULTIPLE TASKS / MULTIPLE APPS / ONE LEARNING HISTORY`
 
-## 2. ISLAND ONBOARDING — HARD LOCK
+## 2. WORLD ENTRY / ISLAND ONBOARDING — DEFERRED EXPANSION
 
-Initial experience:
+The historical sequence below is preserved as design lineage, but it is no longer a mandatory core-startup dependency:
 
 `ISLAND DISCOVERY → CHILD NAMES ISLAND → STARTING POINT → BUILD BASE CAMP → CHILD NAMES BASE CAMP → RADIO LINK WITH GUIDE → FIRST JOURNEY`
 
-Rules:
-- `ISLAND_NAME = CHILD_DEFINED`
-- `BASE_CAMP_NAME = CHILD_DEFINED`
-- System may suggest names, but direct child naming/speaking is primary.
-- BASE CAMP is the functional shared start/return point; its display name may be child-defined.
+Current rule:
+- core learning app usability SHALL NOT depend on cinematic/world-entry onboarding;
+- world-entry intro/drop/voyage/island-discovery behavior is a separately developed optional family experience capability;
+- if activated later, `ISLAND_NAME = CHILD_DEFINED` and `BASE_CAMP_NAME = CHILD_DEFINED` remain preserved lineage requirements unless explicitly superseded;
+- BASE CAMP may remain a functional shared start/return concept without forcing the expansion sequence.
+
+Supersession trace: 2026-09-22 system architecture realignment reclassified forced world-entry onboarding from core HARD LOCK to deferred expansion capability.
 
 ## 3. SHARED SESSION CONTRACT — HARD LOCK
 
@@ -40,7 +42,11 @@ Rules:
 - `MULTIPLE TASKS` allowed
 - `ONE ACTIVE TASK`
 - `ONE ACTIVE LAP`
-- `ONE SESSION STATE OWNER = Ready & Set`
+- `SESSION_SEMANTIC_OWNER = LEARNING_APP_FAMILY`
+- `SESSION_RUNTIME_COORDINATOR = Ready & Set (CURRENT IMPLEMENTATION)`
+- `SESSION_UI_HOST = Ready & Set (CURRENT IMPLEMENTATION)`
+
+The current Ready implementation may host/co-ordinate session state, but implementation/runtime hosting SHALL NOT be interpreted as semantic ownership.
 
 Task transition and app transition are different events:
 
@@ -152,11 +158,13 @@ Do not repeatedly churn icons/names during active UI exploration.
 
 ## 11. PROJECT BOUNDARIES
 
-Ready & Set owns orchestration/session state.
-Hide & Seek owns vocabulary task experience/results.
-Snap & Pop owns thought/expression experience/results and its original gem/wish/blessing growth world.
-Guide owns detailed guidance/persona logic.
+Learning App Family owns the cross-app session/handoff semantic contract.
+Ready & Set owns BASE CAMP / TODAY / Mission / Focus / Result execution UX and is the current session runtime coordinator/UI host.
+Hide & Seek owns vocabulary/language-memory specialist task experience/results.
+Snap & Pop owns thought/expression specialist experience/results and its current project-owned exploration/growth semantics.
+Guide/탐험대 relationship terminology and source ownership must follow the active terminology migration/canonical owner; this file does not promote legacy wording by convenience.
 Learning Domain owns long-term learning interpretation/history.
+Character Visual ID is developed as a separate family experience capability and is consumed by Ready through a versioned projection; Ready does not own Character Visual ID semantics.
 
 ### 11.1 PROJECT OWNER POINTER REGISTRY — HARD RECOVERY ROUTE
 
