@@ -150,3 +150,91 @@ Do not begin by creating a fresh mockup.
 
 Think Again, Keep Your Key.
 한 번 더 생각하고, 핵심은 놓치지 마.
+
+
+## 10. USER CORRECTION PACKET — 2026-09-23 / UNREFLECTED DELTAS
+
+This packet records corrections that had already been requested by the user but were not reflected in the returned visual.
+
+### 10.1 Character Prep vs Character Reveal duplication
+
+Observed regression:
+- a Character Prep screen asks the child to choose a mood/direction after photo + Signature Item;
+- the following A/B/C Character Reveal screen again presents mood-like alternatives as if another preference choice is required.
+
+Correction:
+- PREP/CONSULTATION owns the direction choice.
+- REVEAL owns the generated A/B/C results.
+- REVEAL MUST NOT ask the same semantic preference again.
+- same child / same source identity / different generated directions remains required.
+- current canonical selection contract remains: direct direction choice(s) first, then system contrast/composition, then A/B/C reveal.
+
+Rule:
+`DIRECTION INPUT != CHARACTER RESULT SELECTION`.
+
+### 10.2 Three direction choices must be meaningfully distinct
+
+Rejected:
+- three cards that are merely adjacent positive-energy adjectives or visually near-identical moods.
+
+Required:
+- each 3-choice set must contain clearly distinguishable directions;
+- no duplicate semantics disguised by different copy;
+- contrast must be perceivable from pose/expression/material/accent, not only text.
+- historical lineage of `활발 / 따뜻 / 차분` is usable as a differentiation reference, but exact labels remain subordinate to the latest Character canonical.
+
+### 10.3 Shared Expedition Accent / theme is NOT omitted
+
+Required chronology after Visual ID:
+`CHARACTER CONFIRM / VISUAL ID → SHARED_EXPEDITION_ACCENT → VOYAGE / DROP`.
+
+The selected expedition accent/theme may propagate only to THEME_ADAPTIVE zones:
+- user apparel/accent;
+- approved Crew apparel/trim/patch zones;
+- shared expedition gear / selected UI accents.
+
+It must not replace Core Crew identity colors/features.
+
+### 10.4 Island and Base Camp sequence is NOT omitted
+
+Required world-entry chronology:
+`VOYAGE / DROP → ISLAND DISCOVERY → ISLAND NAME → MOVE TO BASE CAMP → BASE CAMP NAME → READY ENTRY`.
+
+No compressed transition may silently remove:
+- first island discovery;
+- island naming;
+- Base Camp move;
+- Base Camp naming.
+
+### 10.5 Ready Weekly correction
+
+The recovered Ready Weekly candidate is NOT accepted as-is.
+
+Weekly must be:
+`PLANNER FIRST → BASE CAMP/ISLAND CONTEXT SECOND → CHARACTER OPTIONAL`.
+
+Must show:
+- Mon–Sun;
+- fixed commitments;
+- Planner DATED TODO;
+- real free windows;
+- today marker;
+- before-school task when actual Planner data contains one.
+
+Additional correction:
+- a generic 5-tab bottom navigation on the Weekly screen is a regression against the current Ready primary architecture.
+- Ready primary screens remain EXACTLY 3: Weekly / Today / locked Timer.
+- Weekly must not promote Base Camp / Friends / Explore / More into extra primary screens.
+
+Do not invent schedule facts to make the mockup look complete.
+Use actual Planner data when available; otherwise mark mockup data as synthetic.
+
+### 10.6 Execution gate
+
+Before any next image:
+1. preserve recovered BASE visual lineage;
+2. apply only the deltas above;
+3. self-check chronology + duplicate semantics + Weekly planner contract;
+4. output one 390×844 iPhone screen at a time.
+
+These corrections are known regression checks. The user must not be asked to rediscover them.
