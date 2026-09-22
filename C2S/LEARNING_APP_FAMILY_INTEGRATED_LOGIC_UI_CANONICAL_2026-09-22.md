@@ -4543,4 +4543,164 @@ Critical regression locks are intentionally limited to identity/history/locked-r
 
 This supersedes blacklist-heavy governance style from prior generation-gate revisions.
 
+
+## 136. C2S closure — UI visual correction / resume preparation — 2026-09-23
+
+Status: CURRENT CORRECTION PROPAGATION / RESUME READY
+
+### 136.1 Latest user correction
+
+The active UI task was over-expanded.
+
+The intended task is NOT:
+- rebuild the family UI from zero;
+- replace prior good visual lineage with new placeholders;
+- create a new governance/validator subsystem as the main work;
+- ask the user to identify repeated visual regressions.
+
+The intended task IS:
+`RECOVER BEST EXISTING BASE → IDENTIFY EXACT DELTAS → MODIFY ONLY THOSE DELTAS → REVIEW IPHONE SCREEN`.
+
+This correction supersedes recent “restart from blank / placeholder / generic new high-fi” execution behavior.
+
+### 136.2 Resume-preparation invariant
+
+When the user says `재개준비`, treat it as one workflow:
+
+`C2S CAPTURE → CORRECTION PROPAGATION → CLOSED/OPEN SPLIT → CURRENT SNAPSHOT → NEXT EXECUTION POINT → HANDOFF/NEW-CHAT PROMPT`.
+
+A resume prompt without C2S/current-state capture is incomplete.
+
+### 136.3 Current source lineage to recover before any new visual generation
+
+The next conversation must inspect the actual prior assets and user-source evidence first:
+
+1. `함께 준비하는 탐험대 여정.png`
+   - onboarding / exploration-crew / character-formation visual lineage
+   - useful base lineage, NOT automatically accepted wholesale
+
+2. `가이드☆ 여섯 친구의 찬란한 여정.png`
+   - Core 6 visual lineage for 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로
+   - visual-ID verification history exists, but final 1:1 verification remains incomplete
+
+3. `나만의 섬, 더 많은 이야기.png`
+   - one persistent island
+   - island discovery/name
+   - Base Camp movement/name
+   - Ready / Hide / Snap regional-world lineage
+   - later Home/map details may contain stale structures; use element-level lineage only
+
+4. `imagegen.png` + associated user text
+   - direct user correction evidence for onboarding chronology and character proportion/theme direction
+   - evidence source, not a visual baseline by itself
+
+No new mockup should be generated until these are compared and the actual BASE + DELTA MAP is stated.
+
+### 136.4 Recent generated artifacts — REJECTED
+
+The following recent execution families are REJECTED and must not become fallback/base references:
+
+- multi-phone poster/high-fi board generated after the user asked for corrections;
+- generated iPhone candidates that invented or substituted Crew/user characters;
+- placeholder-only onboarding wireframes;
+- crop/overlay “delta patch” PNGs presented as if they were corrected final mockups;
+- any generated screen that used a generic island/adventure aesthetic instead of preserving recovered visual lineage.
+
+Reason:
+they changed too much, omitted existing decisions, or required the user to debug repeated regressions.
+
+They may remain only as FAILURE EVIDENCE.
+
+### 136.5 Onboarding semantic continuity that must remain visible
+
+The visual flow must preserve all meaningful atoms, including:
+
+EXPLORATION CREW INTRO / FAMILIARITY
+→ PRIMARY COMPANION SELECT
+→ companion name/nickname where current lineage requires it
+→ user photo capture/library
+→ Signature Item
+→ two direct direction-choice rounds under current canonical labels
+→ A/B/C same-child formation
+→ select / likeness correction / Visual ID confirm
+→ SHARED_EXPEDITION_ACCENT
+→ Voyage / Drop
+→ ISLAND DISCOVERY
+→ ISLAND NAME
+→ BASE CAMP MOVE
+→ BASE CAMP NAME
+→ READY ENTRY.
+
+Do not collapse away:
+- companion selection;
+- shared expedition accent;
+- island discovery;
+- island naming;
+- Base Camp naming.
+
+Exact visual grouping may be compacted only after preserving these semantic atoms.
+
+### 136.6 Ready Weekly correction
+
+Ready remains exactly three primary screens:
+1. 이번 주 여정
+2. 오늘의 탐험길
+3. locked Timer
+
+For Weekly:
+`PLANNER FIRST → BASE CAMP CONTEXT SECOND → CHARACTER OPTIONAL`.
+
+Must communicate:
+- Mon–Sun
+- fixed commitments
+- Planner DATED TODO
+- meaningful free windows
+- today marker
+- before-school task when data contains one.
+
+The existing locked Timer is not part of current visual redesign.
+
+### 136.7 Visual-work discipline
+
+Current work mode:
+- DELTA EDIT, not redesign.
+- preserve accepted visual lineage.
+- classify element-level validity rather than approve/reject a whole old sheet blindly.
+- do not promote an attractive atmosphere into structural authority.
+- do not create placeholder final screens when exact visual lineage is recoverable.
+- do not use the user as regression detector.
+
+### 136.8 CLOSED / OPEN
+
+CLOSED for resume:
+- work mode = DELTA EDIT
+- recent generated regressions = REJECTED
+- user-debugger workflow = REJECTED
+- one persistent island topology semantics remain
+- Core 6 names remain locked
+- companion / shared accent / island discovery+name / Base Camp name cannot be silently omitted
+- Ready 3-screen invariant remains
+- Timer remains locked
+- no deploy / Netlify / main merge / device-pass claim
+
+OPEN:
+- exact prior visual BASE to use for the next delta-edit
+- exact element-level ACCEPTED vs REFERENCE_ONLY split for recovered old mockups
+- final Core 6 Visual ID 1:1 verification
+- final high-fi composition for onboarding corrected screens
+- Ready Weekly final high-fi composition
+- downstream Hide / Snap high-fi after the above baseline is stable
+
+### 136.9 Exact next execution point
+
+NEXT:
+1. live-refresh TAKY and relevant app branches;
+2. inspect the four source-lineage assets above;
+3. identify ONE actual base candidate per affected screen;
+4. produce a concise DELTA MAP only;
+5. cross-check against current integrated canonical and UI decision registry;
+6. only then produce one iPhone 390×844 corrected candidate screen at a time.
+
+Do not begin by creating a fresh mockup.
+
 END
