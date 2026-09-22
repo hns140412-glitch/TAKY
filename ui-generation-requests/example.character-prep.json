@@ -1,15 +1,24 @@
 {
   "screen_id": "CHARACTER_PREP",
   "output": {
-    "one_screen_per_image": true,
+    "artifact": "SINGLE_IPHONE_SCREEN",
     "device": "iphone_portrait",
+    "one_screen_per_image": true,
     "multiple_phones": 1,
     "poster": false
   },
-  "entities": {
-    "user_character": false,
-    "crew_ids": []
-  },
+  "sequence": [
+    "SOURCE_PHOTO",
+    "SIGNATURE_ITEM",
+    "DIRECTION_ROUND_1",
+    "DIRECTION_ROUND_2"
+  ],
+  "required_components": [
+    "PHOTO_SOURCE",
+    "ROUND_1",
+    "ROUND_2",
+    "SIGNATURE_ITEM"
+  ],
   "choice_sets": {
     "round_1": [
       "신나고 발랄하게",
@@ -22,10 +31,9 @@
       "조금 더 모험가다운 모습"
     ]
   },
-  "features": [
-    "SOURCE_PHOTO_PLACEHOLDER",
-    "SIGNATURE_ITEM"
-  ],
+  "entities": {
+    "completed_user_character_present": false
+  },
   "tts": {
     "actual_speech": false
   }
