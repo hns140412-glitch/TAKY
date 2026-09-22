@@ -286,3 +286,107 @@ Recommended character-only amplitude:
 Important:
 device-orientation input controls layer position only.
 It never modifies locked Visual ID geometry.
+
+
+## 12. Sensor-parallax runtime contract — iPhone/PWA
+
+Effect name:
+`SENSOR_PARALLAX_DEPTH_V01`
+
+Meaning:
+device tilt changes only the 2.5D layer offset so the scene feels deeper.
+It is not a gameplay input and is never required to understand or operate the UI.
+
+### Activation
+- HTTPS / secure context required.
+- Feature-detect DeviceOrientationEvent.
+- Do not request sensor permission on cold launch.
+- If the browser exposes requestPermission(), request only from a meaningful user gesture.
+- Suggested trigger for ONB-01: first Crew tap / first primary action, not an extra settings wizard.
+- permission denied / unsupported = silently remain in STATIC_DEPTH.
+
+### Calibration
+At activation:
+- capture current beta/gamma as neutral origin;
+- use relative delta from that origin;
+- clamp large physical tilt so small UI motion remains comfortable.
+
+Recommended input window:
+- beta relative clamp: about ±12 deg
+- gamma relative clamp: about ±12 deg
+
+Absolute compass/heading is unnecessary.
+
+### Rendering pipeline
+`SENSOR EVENT -> TARGET X/Y -> CLAMP -> SMOOTH -> requestAnimationFrame -> CSS TRANSFORM`
+
+Implementation preference:
+- event listener updates target values only;
+- visual updates run inside requestAnimationFrame;
+- use transform/translate3d or CSS custom properties;
+- do not push sensor values through high-frequency React state;
+- use will-change only on the few moving layers and only while active.
+
+### ONB-01 depth multipliers
+
+TIER A / full depth:
+- foreground prop: 6–10 px
+- CURRENT_FOCUS Crew: 4–7 px
+- other Crew: 2–4 px
+- mid background: 1–3 px
+- far background: 0–1 px
+
+Directions may be inverted by layer to create depth separation.
+Keep total movement subtle.
+
+TIER B / character only — DEFAULT SAFE MODE:
+- background: static
+- CURRENT_FOCUS Crew: 3–6 px
+- other Crew: 1–3 px
+- contact shadow: opposite-direction micro shift allowed
+- UI text/buttons: static
+
+TIER C:
+- all sensor transforms off
+- depth remains through overlap / static scale / shadow / atmospheric perspective.
+
+### Smoothing
+Use low-amplitude interpolation rather than raw sensor data.
+Target feel:
+- responsive but slightly weighted;
+- no jitter;
+- no spring wobble after the phone stops;
+- no overshoot that makes characters feel detached from the ground.
+
+### Visual ID safety
+Sensor input may modify:
+- x/y layer position
+- optional contact-shadow offset
+
+Sensor input may NOT modify:
+- face
+- body geometry
+- silhouette
+- proportions
+- identity colors
+- signature equipment
+- scale pumping
+- character rotation that changes perceived anatomy.
+
+`DEVICE_TILT -> DEPTH POSITION`
+not
+`DEVICE_TILT -> CHARACTER DEFORMATION`.
+
+### Accessibility / battery / performance
+- prefers-reduced-motion => TIER C.
+- hidden/inactive page => stop sensor visual loop.
+- detach listeners when screen unmounts.
+- no sensor permission retry loop.
+- full depth is optional enhancement.
+- ONB-01 should ship safely as TIER B first if profiling is uncertain.
+
+Current implementation priority:
+`CHARACTER_ONLY_FIRST -> PROFILE -> FULL_DEPTH_OPTIONAL`.
+
+This matches the user's latest performance correction:
+if full background + Crew sensor parallax is heavy, preserve only character-layer depth.
