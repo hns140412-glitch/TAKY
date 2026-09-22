@@ -1,6 +1,6 @@
 # TAKY BETA ARCHITECTURE PLAN — 2026-09-22
 
-Status: BETA CANDIDATE / PLANNING ONLY
+Status: BETA CANDIDATE / DESIGN-TO-PRE-DEVICE EXECUTION TARGET
 
 ## 1. Architecture goal
 
@@ -100,10 +100,12 @@ L1 FAST STRUCTURAL
 L2 AFFECTED DOMAIN
 - only changed domain and consumers
 
-L3 INTEGRATION / RELEASE
+L3 INTEGRATION / PRE-DEVICE
 - cross-domain
 - runtime/browser
-- deployment/device
+- integration acceptance
+- deployment only if specifically required by an approved pre-device path
+- physical device excluded
 
 ## 9. State model
 
@@ -124,12 +126,19 @@ local/static/CI
 Integration:
 runtime/browser
 
-Release:
-frozen candidate
+Pre-device candidate:
+frozen architecture/contracts
+-> selective CI
+-> runtime/browser/integration verification
+-> PRE_DEVICE_CANDIDATE
+
+Release/deployment:
+separate later stage
 -> external-resource gate
 -> deployment
+-> physical-device verification when explicitly started
 
-Netlify is a release adapter, not a normal development loop.
+Netlify is a release adapter, not a normal development or architecture-validation loop.
 
 ## 11. Architecture review axes
 
@@ -146,3 +155,30 @@ Every candidate is compared on:
 - ownership clarity
 - observability
 - adaptability
+
+
+## 12. BETA execution horizon
+
+This architecture plan is not documentation-only.
+
+After the architecture and lossless migration model are frozen, the same BETA program may:
+- rewrite BETA canonical-candidate documents;
+- normalize headers/references/identity aliases;
+- align runtime paths and validators;
+- extract or bridge contracts;
+- realign implementation hosts and consumers;
+- run focused CI;
+- run runtime/browser/integration checks.
+
+The program stops before physical-device verification.
+
+Completion vocabulary:
+- ARCHITECTURE_FROZEN
+- LOSSLESS_MAPPING_CLOSED
+- BETA_REWRITTEN
+- IMPLEMENTATION_REALIGNED
+- CI_VERIFIED
+- RUNTIME_VERIFIED
+- INTEGRATION_VERIFIED
+- PRE_DEVICE_CANDIDATE
+- DEVICE_VERIFIED = NOT_RUN
