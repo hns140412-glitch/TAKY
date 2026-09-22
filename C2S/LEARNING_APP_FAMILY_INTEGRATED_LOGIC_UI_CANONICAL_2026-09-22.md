@@ -794,4 +794,314 @@ HIDE UI = LOGIC STRONG / FINAL VISUAL OPEN.
 SNAP UI = RECONCILIATION REQUIRED / FINAL VISUAL OPEN.
 DEVICE / PRODUCTION = NOT_ASSERTED.
 
+
+## 25. Deep audit findings — 2026-09-22 second pass
+
+This section records contradictions found by re-reading the existing Crew MASTER / machine-readable rules / current runtime / Badge / app UI C2S together.
+
+### A-01 Crew intervention ladder drift — CORRECT
+Historical machine-readable `data/exploration-crew-rules.json` currently contains:
+`OBSERVE → SHORT_REACTION → ASK → HINT → WAIT → MINIMAL_REASK → CHILD_EXPRESSES`.
+
+The later MASTER and current integrated product intent require:
+`OBSERVE → WAIT → SHORT_REACTION → QUESTION → HINT → MINIMAL RE-QUESTION → CHILD EXPRESSION`.
+
+The machine-readable ordering is STALE.
+WAIT occurs before reaction/question/hint unless an explicit safety or user-requested exception applies.
+
+### A-02 Crew starter count drift — CORRECT
+Historical Crew sources contain older 6 starter and later 5–6 starter candidate range.
+Current direct correction: initial six known Crew members begin together and all six introduce themselves before one primary companion is selected.
+
+Current canonical:
+- CORE_STARTER_VISIBLE = 6
+- all six introduced/familiarized
+- one primary companion selected
+- five remain known active Crew
+
+The older 5–6 range is SUPERSEDED for the current onboarding.
+
+### A-03 Roster count drift — CORRECT
+Historical:
+- max roster 20
+- world-region allocation boards
+- Special max 12
+
+Current latest structure:
+- Core 6
+- Expansion +12
+- standard Crew target 18
+- Special Guest separate encounter class
+
+Therefore:
+- 20 is not a current character hard cap
+- historical 20 behavior slots remain behavior archetypes
+- exact 12 Expansion identities remain OPEN until Core 6 system quality is stable
+- Special Guest roster/count remains OPEN
+
+### A-04 Crew ownership drift in app documents — CENTRALIZE
+Stale app-local statements such as `SNAP_POP_OWNED` for family Crew identity/behavior and Hide/Ready statements that Snap owns Crew semantics are historical source ownership.
+
+Current family semantics:
+`TAKY_SHARED_EXPLORATION_CREW_CANONICAL`.
+
+Snap / Hide / Ready each own only contextual projection and app-specific dialogue/action surfaces.
+
+### A-05 Personality Pack completeness — DO NOT INVENT
+Recovered Core 6:
+- Visual ID: HARD LOCK
+- core personality: strong recovered evidence
+- signature voice direction: recovered
+- HABIT / REACTION / RELATIONSHIP EXCEPTION / WORLD ROUTINE / MEMORY: uneven by member; some partial
+
+Rule:
+missing detail = `RECOVERY_REQUIRED`, not permission to fill generically.
+
+Known robust core:
+- 두비: curiosity / vitality / youngest-energy
+- 로리: warmth / empathy / attentiveness
+- 잉크: observation / ideas / strategic/independent
+- 노바: energy / challenge / action
+- 테이크: organization / steadiness / responsibility
+- 제로: music / ease / emotional support
+
+Do not flatten six personalities into interchangeable “cute helper” behavior.
+
+### A-06 Relationship frequency ambiguity — CORRECT SEMANTICS
+Historical sources include “frequently met” as one relationship signal.
+Later MASTER establishes affinity as meaningful shared experience rather than raw usage frequency.
+
+Canonical interpretation:
+frequency may contribute only when attached to meaningful shared interaction.
+Raw opens, session count, login count, or repetitive farming cannot raise relationship by themselves.
+
+### A-07 Voice runtime role collapse — IMPLEMENTATION GAP
+Current Snap `voice-runtime.js` forces every TTS request to `voiceRole:"crew"` and `responseOwner:"EXPLORATION_CREW"`.
+
+This does not implement the integrated distinction:
+- CREW_VOICE
+- SYSTEM_TTS
+
+Required before shared audio UI freeze:
+- distinct voiceRole values
+- distinct ownership/telemetry semantics
+- SYSTEM_TTS must not impersonate Crew
+- accessibility auto-read may use SYSTEM_TTS
+- Crew dialogue uses CREW_VOICE
+
+### A-08 Always-listening prohibition — PRESERVE
+Current Snap voice runtime explicitly rejects continuous/realtime listening and uses one-shot USER_MIC capture.
+
+PRESERVE unless explicitly reopened.
+UI must show bounded recording state.
+No hidden background listening.
+
+### A-09 Listen-again contract — LOGIC STRONG / UI-RUNTIME MAPPING OPEN
+Crew MASTER requires:
+- auto-read configurable
+- listen-again available where relevant
+- visible text retained
+- listening and speaking controls separated
+
+Current runtime has speak/listen primitives, but family-wide replay component/state mapping is not yet proven across all apps.
+
+Status: UI_RUNTIME_MAPPING_REQUIRED.
+
+### A-10 Child recording ownership — CORRECT
+Current Snap listen policy uses `responseOwner:"EXPLORATION_CREW"`, but child microphone input is semantically the child's expression/evidence.
+
+Canonical:
+- capture transport may be app runtime
+- CHILD_RECORDING history binds to child/app record context
+- Crew reacts after completion
+- Crew is not semantic owner of the child's recording
+
+Implementation review required before cross-app recording reuse.
+
+### A-11 Random recording → Special encounter lineage — REVIEW_REQUIRED
+Historical evidence includes a recording-triggered random Special encounter concept.
+
+Preserve provenance, but do not make every recording an encounter trigger.
+
+Before activation close:
+- privacy/consent
+- eligible recording event
+- cooldown/farming prevention
+- no pressure to record
+- no reward advantage
+- child-visible explanation if needed
+
+Status: RECOVERED_CONCEPT / NOT_CURRENT_ACTIVE_LOCK.
+
+### A-12 Episode persistence — CONTRACT GAP
+World behavior grammar is strong, but current cross-app storage/consumer contract for:
+- episode_id
+- crew_id
+- Explorer_ID
+- origin app/region
+- participants
+- memory write
+- future callback
+- badge linkage
+- voice reference
+- replay/privacy
+
+is not yet canonicalized in runtime.
+
+No app may fake cross-app episode continuity in UI until this contract exists.
+
+### A-13 Character profile lifecycle — CONTRACT GAP
+Current Character Core supports first formation strongly but not:
+- profile photo refresh
+- age-aware version transition
+- historical visual version binding
+- current vs historical Character display policy
+
+UI must include a future-safe profile refresh path but must not pretend automatic age progression is already coded.
+
+### A-14 Badge × Character version × Crew episode — OPEN BUT REQUIRED
+Badge history may reference:
+- Character version at event time
+- Crew participant
+- Episode
+- app/region
+- source record
+
+Need one explicit historical rendering rule before final collection UI.
+
+### A-15 Ready “획득 별” conflict — STILL OPEN
+Ready generic stars remain unresolved against BADGE_STAR_GRADE.
+Do not reuse the same star visual/name in Weekly/Daily/Timer/share until reconciled.
+
+### A-16 Hide Crew ownership statement — STALE
+Hide UI packet still says Snap owns Crew identity/personality/intervention grammar.
+Future interpretation:
+- shared TAKY Crew canonical owns family semantics
+- Hide owns Jungle/Waterfall usage, timing, and learning-safe projection
+
+### A-17 Snap Crew JSON source status — SOURCE LINEAGE, NOT FINAL AUTHORITY
+`data/exploration-crew-rules.json` remains valuable evidence and implementation source, but conflicting fields must migrate before being treated as current machine authority.
+
+Known stale fields:
+- explorationCrew = SNAP_POP_OWNED
+- crewBehaviorRules = SNAP_POP_OWNED
+- old intervention order
+- longTermCeiling = 20
+- older starter-range/conflict metadata
+
+## 26. Core 6 behavior/UI minimum contract
+Before Expansion Crew production, each Core 6 must demonstrate:
+- canonical identity
+- locked Visual ID
+- core personality
+- signature voice direction
+- listening gesture
+- waiting behavior
+- short reaction grammar
+- question style
+- hint style
+- completion acknowledgement
+- joke boundary
+- relationship exception
+- at least one ordinary-day routine
+- at least one cross-app contextual example
+- memory callback pattern
+
+Expansion +12 starts only after this template works for all Core 6.
+
+## 27. Cross-app Crew projection matrix
+
+### Ready
+Purpose: companionship around planning/execution, not schedule control.
+
+Allowed:
+- Base Camp life
+- route/start/reunion reaction
+- brief next-task reaction
+- Timer start/help/recovery/completion moments
+
+Forbidden:
+- timetable obstruction
+- assigning Planner dates
+- persistent chatter during Timer
+- grading task result
+
+### Hide
+Purpose: retrieval-safe companionship.
+
+Allowed:
+- pre-start
+- walkie-talkie
+- listening
+- short context reaction
+- LINK/PIECE support within learning rules
+- CATCH/history reaction
+- completion
+
+Forbidden:
+- answer reveal
+- grading
+- memory-strength claim from weak evidence
+- talking over recall
+
+### Snap
+Purpose: thought/expression companionship.
+
+Allowed:
+- listen
+- wait
+- short reaction
+- question
+- one hint
+- contextual Ask/Imagination reaction
+
+Forbidden:
+- final wording
+- auto-rewrite presented as child output
+- reaction overlay covering draft/CTA
+- Crew voice masquerading as factual system authority
+
+## 28. UI gates created by this audit
+The following block final high-fi where relevant:
+
+GATE-01 CHARACTER_PROFILE_REFRESH
+Profile update/version/age UI contract not closed.
+
+GATE-02 CREW_MACHINE_RULE_MIGRATION
+Old Snap machine-readable Crew rules conflict with current canonical.
+
+GATE-03 AUDIO_ROLE_SEPARATION
+CREW_VOICE vs SYSTEM_TTS not implemented distinctly in current Snap voice runtime.
+
+GATE-04 CHILD_RECORDING_OWNERSHIP
+Recording ownership/history/privacy contract must be explicit.
+
+GATE-05 EPISODE_PERSISTENCE
+Cross-app episode/memory envelope not implemented/canonicalized.
+
+GATE-06 BADGE_HISTORY_RENDERING
+Character-version/Crew/episode linkage display rule open.
+
+GATE-07 READY_GENERIC_STAR
+Generic Ready star vs Badge Star Grade unresolved.
+
+These gates do not block all low-fi.
+They block any low/high-fi region that would hard-code the unresolved behavior.
+
+## 29. Integrated execution order from this point
+Do not split into separate handoff conversations.
+
+1. migrate/normalize Crew machine rules against this canonical
+2. close Character Profile Refresh + Age Progression contract
+3. close Voice/Listening/Child Recording contract
+4. close Episode/Memory cross-app envelope
+5. close Badge historical linkage + generic-star conflict
+6. build one Logic-to-UI matrix for all shared systems
+7. project it into Ready / Hide / Snap screen inventories
+8. run cross-app regression
+9. only then finish low-fi
+10. then high-fi
+
+END OF SECOND-PASS AUDIT
+
 END
