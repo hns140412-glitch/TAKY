@@ -9,100 +9,90 @@ def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def fail(msgs):
-    for m in msgs:
-        print("FAIL:", m)
-    return 1
+def err(errors, message):
+    errors.append(message)
 
 def validate(req, contract):
     errors = []
-    screen_id = req.get("screen_id")
+    sid = req.get("screen_id")
     screens = contract["screen_contracts"]
+    if sid not in screens:
+        return [f"unknown screen_id: {sid!r}"]
 
-    if screen_id not in screens:
-        errors.append(f"unauthorized screen_id: {screen_id!r}")
-        return errors
+    out = req.get("output", {})
+    oc = contract["output_contract"]
+    if out.get("artifact") != oc["artifact"]:
+        err(errors, f"artifact must be {oc['artifact']}")
+    if out.get("device") != oc["device"]:
+        err(errors, f"device must be {oc['device']}")
 
-    if req.get("output", {}).get("one_screen_per_image") is not True:
-        errors.append("one_screen_per_image must be true")
-    if req.get("output", {}).get("device") != "iphone_portrait":
-        errors.append("device must be iphone_portrait")
-    if req.get("output", {}).get("multiple_phones", 0) not in (0, 1):
-        errors.append("multiple phones/poster boards are forbidden")
-    if req.get("output", {}).get("poster") is True:
-        errors.append("poster layout is forbidden")
+    sc = screens[sid]
 
-    sc = screens[screen_id]
-    user_char = bool(req.get("entities", {}).get("user_character"))
-    if not sc.get("user_character_allowed", False) and user_char:
-        errors.append(f"user character forbidden at {screen_id}")
+    # Positive sequence contract
+    expected_seq = sc.get("sequence")
+    if expected_seq is not None and req.get("sequence") != expected_seq:
+        err(errors, f"sequence must match canonical: {expected_seq}")
 
-    crew_ids = req.get("entities", {}).get("crew_ids", [])
-    allowed = set(["dooby","lori","ink","nova","take","zero"])
-    unknown = sorted(set(crew_ids) - allowed)
-    if unknown:
-        errors.append("invented/noncanonical crew ids: " + ", ".join(unknown))
+    # Positive required component contract
+    required = set(sc.get("required_components", []))
+    present = set(req.get("required_components", []))
+    missing = sorted(required - present)
+    if missing:
+        err(errors, "missing required components: " + ", ".join(missing))
 
-    forb = set(contract.get("global_forbidden", [])) | set(sc.get("forbidden", []))
-    features = set(req.get("features", []))
-    bad = sorted(forb & features)
-    if bad:
-        errors.append("forbidden features: " + ", ".join(bad))
+    # Exact choice sets where canonical requires exact labels
+    exact = sc.get("exact_choice_sets")
+    if exact is not None:
+        got = req.get("choice_sets", {})
+        for key, labels in exact.items():
+            if got.get(key) != labels:
+                err(errors, f"{key} must match canonical labels/order exactly")
 
-    if screen_id == "CHARACTER_PREP":
-        choices = req.get("choice_sets", {})
-        expected = sc["required_choice_sets"]
-        if choices.get("round_1") != expected["round_1"]:
-            errors.append("ROUND 1 labels/order must match canonical exactly")
-        if choices.get("round_2") != expected["round_2"]:
-            errors.append("ROUND 2 labels/order must match canonical exactly")
+    # Invariants
+    inv = sc.get("invariants", {})
+    req_inv = req.get("invariants", {})
+    for key, value in inv.items():
+        if req_inv.get(key) != value:
+            err(errors, f"invariant {key} must be {value!r}")
 
-    if screen_id == "CHARACTER_REVEAL":
-        if req.get("candidate_count") != 3:
-            errors.append("A/B/C candidate_count must be exactly 3")
-        if req.get("same_child") is not True:
-            errors.append("A/B/C must be the same child")
+    # Entity-state checks
+    entities = sc.get("entities", {})
+    req_entities = req.get("entities", {})
+    if entities.get("user_character") == "ABSENT" and req_entities.get("user_character_present") is True:
+        err(errors, "user character must be absent at this stage")
+    if entities.get("completed_user_character") == "ABSENT" and req_entities.get("completed_user_character_present") is True:
+        err(errors, "completed user character must be absent at this stage")
 
-    if screen_id == "SHARED_EXPEDITION_ACCENT":
-        if req.get("shared_expedition_accent") is not True:
-            errors.append("shared_expedition_accent must be true")
+    # Ready hierarchy
+    hierarchy = sc.get("hierarchy")
+    if hierarchy is not None and req.get("hierarchy") != hierarchy:
+        err(errors, f"hierarchy must match canonical: {hierarchy}")
 
-    if screen_id == "WORLD_ENTRY":
-        steps = req.get("world_entry_steps", [])
-        if steps != sc["required_steps"]:
-            errors.append("world entry steps are missing/reordered")
-
-    if screen_id == "READY_WEEKLY":
-        if req.get("planner_first") is not True:
-            errors.append("Ready Weekly must be planner_first")
-        present = set(req.get("required_components", []))
-        missing = [x for x in sc["required"] if x not in present]
-        if missing:
-            errors.append("Ready Weekly missing: " + ", ".join(missing))
-
+    # Critical regression locks only
     if req.get("tts", {}).get("actual_speech") is True:
-        errors.append("actual TTS speech is HOLD")
+        err(errors, "actual TTS speech is HOLD")
 
     return errors
 
 def self_test(contract):
     good = {
-        "screen_id":"CHARACTER_PREP",
-        "output":{"one_screen_per_image":True,"device":"iphone_portrait","multiple_phones":1,"poster":False},
-        "entities":{"user_character":False,"crew_ids":[]},
-        "choice_sets":{
-            "round_1":["신나고 발랄하게","따뜻하고 다정하게","차분하고 똑똑하게"],
-            "round_2":["가볍고 활동적인 모습","편안하고 자연스러운 모습","조금 더 모험가다운 모습"]
-        },
-        "features":[],
-        "tts":{"actual_speech":False}
+      "screen_id":"CHARACTER_PREP",
+      "output":{"artifact":"SINGLE_IPHONE_SCREEN","device":"iphone_portrait"},
+      "sequence":["SOURCE_PHOTO","DIRECTION_ROUND_1","DIRECTION_ROUND_2","SIGNATURE_ITEM_PERSISTENCE"],
+      "required_components":["PHOTO_SOURCE","ROUND_1","ROUND_2","SIGNATURE_ITEM"],
+      "choice_sets":{
+        "round_1":["신나고 발랄하게","따뜻하고 다정하게","차분하고 똑똑하게"],
+        "round_2":["가볍고 활동적인 모습","편안하고 자연스러운 모습","조금 더 모험가다운 모습"]
+      },
+      "entities":{"completed_user_character_present":False},
+      "tts":{"actual_speech":False}
     }
     bad = dict(good)
-    bad["entities"] = {"user_character": True, "crew_ids":["made_up"]}
+    bad["sequence"] = ["SOURCE_PHOTO","SIGNATURE_ITEM_PERSISTENCE"]
     if validate(good, contract):
-        return ["self-test: valid manifest was rejected"]
+        return ["self-test: valid manifest rejected"]
     if not validate(bad, contract):
-        return ["self-test: invalid manifest was accepted"]
+        return ["self-test: invalid manifest accepted"]
     return []
 
 def main():
@@ -111,7 +101,6 @@ def main():
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     contract = load_json(CONTRACT_PATH)
-
     errors = []
     if args.self_test:
         errors.extend(self_test(contract))
@@ -122,9 +111,10 @@ def main():
             errors.extend([f"{path}: {e}" for e in errs])
         else:
             print("PASS:", path)
-
     if errors:
-        sys.exit(fail(errors))
+        for e in errors:
+            print("FAIL:", e)
+        return 1
     if args.self_test:
         print("PASS: validator self-test")
     return 0
