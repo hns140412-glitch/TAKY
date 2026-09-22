@@ -1,0 +1,35 @@
+name: TAKY UI Generation Gate
+
+on:
+  pull_request:
+    paths:
+      - 'governance/ui-generation-contract.json'
+      - 'scripts/validate_ui_generation.py'
+      - 'ui-generation-requests/**'
+      - '.github/workflows/ui-generation-gate.yml'
+  push:
+    paths:
+      - 'governance/ui-generation-contract.json'
+      - 'scripts/validate_ui_generation.py'
+      - 'ui-generation-requests/**'
+
+jobs:
+  validate-ui-generation-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Self-test gate
+        run: python scripts/validate_ui_generation.py --self-test
+      - name: Validate generation request manifests
+        shell: bash
+        run: |
+          shopt -s nullglob
+          files=(ui-generation-requests/*.json)
+          if [ ${#files[@]} -gt 0 ]; then
+            python scripts/validate_ui_generation.py "${files[@]}"
+          else
+            echo "No UI generation manifests present."
+          fi
