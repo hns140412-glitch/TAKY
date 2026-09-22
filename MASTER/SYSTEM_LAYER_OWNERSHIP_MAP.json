@@ -1,17 +1,27 @@
 {
-  "map_version": "2026-09-21.8",
-  "status": "ACTIVE_SUPPORT_OWNER_MAP",
-  "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
+  "map_version": "2026-09-22.1",
+  "status": "ACTIVE_OWNERSHIP_HIERARCHY_AND_INTERACTION_GRAPH",
+  "purpose": "Machine-readable whole-system architecture map separating semantic ownership hierarchy from interaction/runtime relationships. It preserves canonical semantic owners, prevents implementation-host promotion to authority, and models explicit projection/event/contract flows without making TAKY or any app the owner of all meaning.",
   "invariants": [
-    "TAKY_CORE is the global governance basis and is not a product/domain feature owner.",
+    "TAKY_CORE governs flow, evidence, routing and validation; it is not the semantic owner of every domain.",
+    "OWNERSHIP_HIERARCHY != INTERACTION_GRAPH.",
+    "IMPLEMENTED_IN != OWNS.",
+    "HOSTED_BY != SEMANTIC_OWNER.",
+    "RUNTIME_COORDINATOR != SEMANTIC_OWNER.",
+    "UI_HOST != SEMANTIC_OWNER.",
+    "ROUTES_TO != OWNS.",
+    "APP != OS.",
+    "APP_REPOSITORY != DOMAIN_AUTHORITY.",
     "WORK_OS and LEARNING_OS are sibling operating systems under TAKY; neither is the parent of the other.",
     "SHARED_TECHNICAL_CAPABILITY is semantic-light and may share mechanisms, not domain identity/role/permission/authority by default.",
     "SHARED_ENGINE != SHARED_DATA != SHARED_SEMANTICS != SHARED_AUTHORITY.",
     "SAME_PERSON != SAME_DOMAIN_IDENTITY.",
     "ACCOUNT_LINK != AUTHORITY_LINK.",
-    "LEARNING_APP_FAMILY is subordinate to LEARNING_OS and owns cross-app learning-family contracts, not global technical authority.",
-    "PROJECT_APP owns product-specific behavior and SHALL NOT redefine higher shared/domain contracts.",
-    "ADAPTER/PLATFORM owns platform integration mechanics only and SHALL NOT become product/domain authority."
+    "LEARNING_ENGINE INTERPRETS; PLANNER_ENGINE MANAGES; EXECUTION_APPS EXECUTE.",
+    "Apps consume versioned projections/contracts and return events/evidence; they SHALL NOT directly mutate another owner's semantic state.",
+    "SUMMARY != AUTHORITY.",
+    "SEARCH_MISS != SOURCE_ABSENCE.",
+    "NO_DELTA_EVIDENCE -> NO_REWRITE_OF_SETTLED_DECISION."
   ],
   "layers": {
     "TAKY_CORE": {
@@ -130,24 +140,50 @@
       ]
     },
     "READY_SET": {
-      "class": "PROJECT_APP",
+      "class": "PROJECT_APP_EXECUTION_TOOL",
       "semantic_owner": "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
       "parent": "LEARNING_APP_FAMILY",
       "owns": [
-        "learning BASE CAMP",
-        "Planner/TODAY execution projection",
-        "Ready session orchestration",
-        "per-task result/carry-over flow",
-        "Ready-specific capture and execution UI"
+        "learning BASE CAMP execution experience",
+        "TODAY/Mission/Focus/Result UX",
+        "focus/timer interaction",
+        "Ready-specific capture/review UI",
+        "execution-state/result capture",
+        "child-facing allowed plan-adjustment interaction"
       ],
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
         "LEARNING_APP_FAMILY"
+      ],
+      "consumes": [
+        "PLANNER_ENGINE projection",
+        "LEARNING_ENGINE context",
+        "ASSIGNMENT_FACT_DOMAIN facts",
+        "LEARNING_IDENTITY_AUTHORITY projection",
+        "LEARNING_APP_FAMILY session contract",
+        "CHARACTER_VISUAL_ID projection"
+      ],
+      "returns_events_to": [
+        "PLANNER_ENGINE",
+        "LEARNING_HISTORY_EVIDENCE",
+        "LEARNING_APP_FAMILY session contract"
+      ],
+      "runtime_roles": {
+        "session_runtime_coordinator": "CURRENT",
+        "session_semantic_owner": "LEARNING_APP_FAMILY",
+        "ui_host": "READY_SET"
+      },
+      "does_not_own": [
+        "Planner semantics",
+        "Learning Engine semantics",
+        "Assignment FACT lifecycle semantics",
+        "family identity/role/permission semantics",
+        "cross-app session semantic contract"
       ]
     },
     "HIDE_SEEK": {
-      "class": "PROJECT_APP",
+      "class": "PROJECT_APP_SPECIALIST_EXECUTION_TOOL",
       "semantic_owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
       "parent": "LEARNING_APP_FAMILY",
       "owns": [
@@ -160,10 +196,26 @@
         "TAKY_CORE",
         "LEARNING_OS",
         "LEARNING_APP_FAMILY"
+      ],
+      "consumes": [
+        "language-memory/learning context",
+        "PLANNER_ENGINE task/plan projection",
+        "LEARNING_APP_FAMILY session/handoff contract",
+        "LEARNING_IDENTITY_AUTHORITY scoped member projection"
+      ],
+      "returns_events_to": [
+        "PLANNER_ENGINE",
+        "LEARNING_HISTORY_EVIDENCE",
+        "LEARNING_APP_FAMILY"
+      ],
+      "does_not_own": [
+        "global Planner state",
+        "family identity authority",
+        "Ready session semantics"
       ]
     },
     "SNAP_POP": {
-      "class": "PROJECT_APP",
+      "class": "PROJECT_APP_SPECIALIST_EXECUTION_TOOL",
       "semantic_owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
       "parent": "LEARNING_APP_FAMILY",
       "owns": [
@@ -176,6 +228,22 @@
         "TAKY_CORE",
         "LEARNING_OS",
         "LEARNING_APP_FAMILY"
+      ],
+      "consumes": [
+        "expression/production learning context",
+        "PLANNER_ENGINE task/plan projection",
+        "LEARNING_APP_FAMILY session/handoff contract",
+        "LEARNING_IDENTITY_AUTHORITY scoped member projection"
+      ],
+      "returns_events_to": [
+        "PLANNER_ENGINE",
+        "LEARNING_HISTORY_EVIDENCE",
+        "LEARNING_APP_FAMILY"
+      ],
+      "does_not_own": [
+        "global Planner state",
+        "family identity authority",
+        "Ready session semantics"
       ]
     },
     "WORK_DOMAIN_PROJECT": {
@@ -205,6 +273,190 @@
         "TAKY governance",
         "Work/Learning semantic authority",
         "project product identity"
+      ]
+    },
+    "LEARNING_IDENTITY_AUTHORITY": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "learning-context child identity",
+        "parent/guardian/family relationships",
+        "learning roles and scoped authority",
+        "child data ownership/isolation policy"
+      ],
+      "implementation_hosts": [
+        "CURRENTLY_DISTRIBUTED"
+      ],
+      "ui_hosts": [
+        "READY_SET where current login/profile/review surfaces exist"
+      ],
+      "does_not_own": [
+        "generic authentication transport/session mechanism",
+        "work identity/roles/permissions"
+      ]
+    },
+    "ASSIGNMENT_FACT_DOMAIN": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "assignment intake meaning",
+        "review-before-FACT semantics",
+        "confirmed assignment FACT lifecycle",
+        "source/provenance requirements for assignment facts"
+      ],
+      "implementation_hosts": [
+        "READY_SET capture/review adapters may currently host implementation"
+      ],
+      "consumes_mechanisms": [
+        "SHARED_TECHNICAL_CAPABILITY OCR/vision ingestion"
+      ],
+      "does_not_own": [
+        "generic OCR mechanics",
+        "Ready-specific capture UI"
+      ]
+    },
+    "LEARNING_ENGINE": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "LEARNING_OS",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "learner/subject/task interpretation",
+        "concept and skill target interpretation",
+        "difficulty/load interpretation",
+        "learning-unit sizing",
+        "review recommendation",
+        "specialist-need classification"
+      ],
+      "implementation_hosts": [
+        "CURRENTLY_PARTLY_IMPLEMENTED_IN_READY_SET_REPOSITORY_PENDING_EXTRACTION"
+      ],
+      "consumers": [
+        "PLANNER_ENGINE",
+        "READY_SET",
+        "HIDE_SEEK",
+        "SNAP_POP",
+        "LEARNING_FAMILY_ROUTER"
+      ],
+      "does_not_own": [
+        "calendar placement",
+        "DATED TODO planning semantics",
+        "Ready execution UX"
+      ]
+    },
+    "PLANNER_ENGINE": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "LEARNING_OS",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "life events/commitments/schedules planning input interpretation",
+        "deadline/recurrence/due-window planning semantics",
+        "availability/capacity planning interpretation",
+        "weekly/daily plan composition",
+        "DATED TODO semantics",
+        "carry-over/reflow/rescheduling",
+        "plan-vs-actual interpretation",
+        "progress/completion aggregation",
+        "adaptive duration estimate",
+        "forecast/next-plan continuity",
+        "cross-app overall learning plan state"
+      ],
+      "implementation_hosts": [
+        "CURRENTLY_PARTLY_IMPLEMENTED_IN_READY_SET_REPOSITORY_PENDING_EXTRACTION"
+      ],
+      "consumers": [
+        "READY_SET",
+        "HIDE_SEEK",
+        "SNAP_POP"
+      ],
+      "accepts_events_from": [
+        "READY_SET",
+        "HIDE_SEEK",
+        "SNAP_POP",
+        "LEARNING_HISTORY_EVIDENCE"
+      ],
+      "does_not_own": [
+        "Ready TODAY/Mission/Focus/Result UX",
+        "subject learning interpretation"
+      ]
+    },
+    "LEARNING_HISTORY_EVIDENCE": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "LEARNING_OS",
+      "parent": "LEARNING_OS",
+      "owns": [
+        "long-term learning evidence/history meaning",
+        "normalized execution evidence intake",
+        "cross-app learning evidence continuity"
+      ],
+      "accepts_events_from": [
+        "READY_SET",
+        "HIDE_SEEK",
+        "SNAP_POP"
+      ],
+      "publishes_to": [
+        "LEARNING_ENGINE",
+        "PLANNER_ENGINE"
+      ]
+    },
+    "LEARNING_FAMILY_ROUTER": {
+      "class": "DOMAIN_RUNTIME_CONTRACT",
+      "semantic_owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "mapping learning-engine specialist-need classifications to family app destinations",
+        "cross-app handoff contract shape"
+      ],
+      "runtime_coordinator": "READY_SET_CURRENT_BASE_CAMP_TRANSITION_HOST",
+      "consumes": [
+        "LEARNING_ENGINE specialist-need projection"
+      ],
+      "routes_to": [
+        "READY_SET",
+        "HIDE_SEEK",
+        "SNAP_POP"
+      ],
+      "does_not_own": [
+        "learning need interpretation itself",
+        "app-specific task semantics"
+      ]
+    },
+    "CHARACTER_VISUAL_ID": {
+      "class": "FAMILY_EXPERIENCE_CAPABILITY",
+      "semantic_owner": "LEARNING_APP_FAMILY",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "visual-character generation semantics",
+        "source-photo-to-candidate flow",
+        "candidate selection/likeness correction",
+        "Visual ID lock",
+        "Character Master projection"
+      ],
+      "implementation_hosts": [
+        "INDEPENDENT_CHARACTER_IMPLEMENTATION_STREAM"
+      ],
+      "consumers": [
+        "READY_SET and future learning-family surfaces via versioned projection"
+      ],
+      "does_not_own": [
+        "learning identity authority",
+        "family role/permission",
+        "Ready product semantics"
+      ]
+    },
+    "WORLD_ENTRY_EXPANSION": {
+      "class": "OPTIONAL_FAMILY_EXPERIENCE_CAPABILITY",
+      "semantic_owner": "LEARNING_APP_FAMILY",
+      "parent": "LEARNING_APP_FAMILY",
+      "state": "DEFERRED_EXPANSION",
+      "owns": [
+        "optional intro/drop/voyage/world-entry experience semantics"
+      ],
+      "does_not_own": [
+        "core app startup availability",
+        "learning plan semantics",
+        "identity authority"
       ]
     }
   },
@@ -338,6 +590,27 @@
   ],
   "review_findings": [
     {
+      "gap_id": "ARCH-REALIGN-001",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "Tree-only architecture could not represent independent semantic ownership and cross-service/app interactions.",
+      "direction": "Use ownership hierarchy plus interaction graph; never infer ownership from runtime interaction."
+    },
+    {
+      "gap_id": "ARCH-REALIGN-002",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "Planner, Learning Engine, Assignment FACT and Learning Identity were not explicit first-class semantic nodes.",
+      "direction": "Preserve independent semantic owners before physical code extraction."
+    },
+    {
+      "gap_id": "ARCH-REALIGN-003",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "Ready mixed semantic ownership, runtime coordination and UI hosting.",
+      "direction": "Ready remains execution/base-camp tool and current session runtime coordinator only where explicitly stated."
+    },
+    {
       "gap_id": "LAYER-GAP-001",
       "priority": "P0",
       "state": "VALIDATED",
@@ -421,5 +694,239 @@
     "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
     "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md"
   ],
-  "claim_boundary": "This map now records verified shared reference implementations and documented consumer migrations where evidence exists. It does not imply DEVICE_VERIFIED, PRODUCTION_VERIFIED, implicit Work↔Learning identity federation, or shared domain authority."
+  "claim_boundary": "This map is a semantic architecture correction, not proof of physical code extraction, runtime migration, device verification or production deployment. Current verified app flows must be preserved until versioned contracts are frozen and downstream extraction is separately implemented/validated.",
+  "architecture_model": {
+    "ownership_hierarchy": {
+      "purpose": "Defines who owns semantic meaning/authority.",
+      "relation": "OWNS",
+      "root": "TAKY_CORE",
+      "rule": "Parent/child here describes semantic/governance containment only; it SHALL NOT be inferred from repository location or runtime hosting."
+    },
+    "interaction_graph": {
+      "purpose": "Defines runtime/data-flow relationships independently from semantic ownership.",
+      "allowed_edge_types": [
+        "CONSUMES",
+        "PUBLISHES_PROJECTION",
+        "ACCEPTS_EVENT",
+        "ROUTES_TO",
+        "COORDINATES",
+        "IMPLEMENTED_IN",
+        "HOSTED_BY",
+        "UI_HOSTED_BY",
+        "FEDERATES_WITH",
+        "MUST_NOT_MUTATE"
+      ],
+      "rule": "No interaction edge transfers semantic ownership unless a separate canonical ownership change is explicitly approved and recorded."
+    }
+  },
+  "interaction_graph": [
+    {
+      "from": "TAKY_CORE",
+      "type": "COORDINATES",
+      "to": "WORK_OS",
+      "contract": "governance/routing/evidence; no semantic takeover"
+    },
+    {
+      "from": "TAKY_CORE",
+      "type": "COORDINATES",
+      "to": "LEARNING_OS",
+      "contract": "governance/routing/evidence; no semantic takeover"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "WORK_OS",
+      "contract": "semantic-light reusable mechanisms only"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "LEARNING_OS",
+      "contract": "semantic-light reusable mechanisms only"
+    },
+    {
+      "from": "LEARNING_IDENTITY_AUTHORITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "READY_SET",
+      "contract": "scoped learning identity/authority projection"
+    },
+    {
+      "from": "LEARNING_IDENTITY_AUTHORITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "HIDE_SEEK",
+      "contract": "scoped member/session identity only"
+    },
+    {
+      "from": "LEARNING_IDENTITY_AUTHORITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "SNAP_POP",
+      "contract": "scoped member/session identity only"
+    },
+    {
+      "from": "ASSIGNMENT_FACT_DOMAIN",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "LEARNING_ENGINE",
+      "contract": "confirmed assignment facts with provenance"
+    },
+    {
+      "from": "LEARNING_ENGINE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "PLANNER_ENGINE",
+      "contract": "learning units/load/review/specialist-need context"
+    },
+    {
+      "from": "LEARNING_ENGINE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "LEARNING_FAMILY_ROUTER",
+      "contract": "specialist-need classification"
+    },
+    {
+      "from": "PLANNER_ENGINE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "READY_SET",
+      "contract": "selected/dated executable plan projection"
+    },
+    {
+      "from": "PLANNER_ENGINE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "HIDE_SEEK",
+      "contract": "specialist task/plan context"
+    },
+    {
+      "from": "PLANNER_ENGINE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "SNAP_POP",
+      "contract": "specialist task/plan context"
+    },
+    {
+      "from": "LEARNING_FAMILY_ROUTER",
+      "type": "ROUTES_TO",
+      "to": "READY_SET",
+      "contract": "general/base-camp execution"
+    },
+    {
+      "from": "LEARNING_FAMILY_ROUTER",
+      "type": "ROUTES_TO",
+      "to": "HIDE_SEEK",
+      "contract": "memory/retrieval specialist execution"
+    },
+    {
+      "from": "LEARNING_FAMILY_ROUTER",
+      "type": "ROUTES_TO",
+      "to": "SNAP_POP",
+      "contract": "expression/production specialist execution"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "READY_SET",
+      "contract": "session/handoff contract"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "HIDE_SEEK",
+      "contract": "session/handoff contract"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "SNAP_POP",
+      "contract": "session/handoff contract"
+    },
+    {
+      "from": "CHARACTER_VISUAL_ID",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "READY_SET",
+      "contract": "versioned visual identity projection"
+    },
+    {
+      "from": "READY_SET",
+      "type": "ACCEPTS_EVENT",
+      "to": "PLANNER_ENGINE",
+      "contract": "progress/result/actual-duration/help/check/block events"
+    },
+    {
+      "from": "HIDE_SEEK",
+      "type": "ACCEPTS_EVENT",
+      "to": "PLANNER_ENGINE",
+      "contract": "retrieval/progress/result events"
+    },
+    {
+      "from": "SNAP_POP",
+      "type": "ACCEPTS_EVENT",
+      "to": "PLANNER_ENGINE",
+      "contract": "production/progress/result events"
+    },
+    {
+      "from": "READY_SET",
+      "type": "ACCEPTS_EVENT",
+      "to": "LEARNING_HISTORY_EVIDENCE",
+      "contract": "learning/execution evidence"
+    },
+    {
+      "from": "HIDE_SEEK",
+      "type": "ACCEPTS_EVENT",
+      "to": "LEARNING_HISTORY_EVIDENCE",
+      "contract": "retrieval/memory evidence"
+    },
+    {
+      "from": "SNAP_POP",
+      "type": "ACCEPTS_EVENT",
+      "to": "LEARNING_HISTORY_EVIDENCE",
+      "contract": "production/expression evidence"
+    },
+    {
+      "from": "LEARNING_HISTORY_EVIDENCE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "LEARNING_ENGINE",
+      "contract": "normalized evidence/history for next interpretation"
+    },
+    {
+      "from": "LEARNING_HISTORY_EVIDENCE",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "PLANNER_ENGINE",
+      "contract": "actual/progress history for replanning"
+    },
+    {
+      "from": "READY_SET",
+      "type": "MUST_NOT_MUTATE",
+      "to": "HIDE_SEEK",
+      "contract": "shared meaning only through owner contracts"
+    },
+    {
+      "from": "READY_SET",
+      "type": "MUST_NOT_MUTATE",
+      "to": "SNAP_POP",
+      "contract": "shared meaning only through owner contracts"
+    },
+    {
+      "from": "HIDE_SEEK",
+      "type": "MUST_NOT_MUTATE",
+      "to": "READY_SET",
+      "contract": "shared meaning only through owner contracts"
+    },
+    {
+      "from": "SNAP_POP",
+      "type": "MUST_NOT_MUTATE",
+      "to": "READY_SET",
+      "contract": "shared meaning only through owner contracts"
+    },
+    {
+      "from": "WORK_OS",
+      "type": "FEDERATES_WITH",
+      "to": "LEARNING_OS",
+      "contract": "HOLD_UNTIL_EXPLICIT_REAL_USE_CASE; no identity/authority inheritance"
+    }
+  ],
+  "role_separation": {
+    "fields": [
+      "semantic_owner",
+      "implementation_host",
+      "runtime_coordinator",
+      "ui_host",
+      "consumer"
+    ],
+    "rule": "A component may occupy multiple operational roles, but semantic ownership SHALL be declared independently and cannot be inferred from the others."
+  }
 }
