@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-22.1",
+  "map_version": "2026-09-22.2",
   "status": "ACTIVE_OWNERSHIP_HIERARCHY_AND_INTERACTION_GRAPH",
   "purpose": "Machine-readable whole-system architecture map separating semantic ownership hierarchy from interaction/runtime relationships. It preserves canonical semantic owners, prevents implementation-host promotion to authority, and models explicit projection/event/contract flows without making TAKY or any app the owner of all meaning.",
   "invariants": [
@@ -252,12 +252,19 @@
       "parent": "WORK_OS",
       "owns": [
         "domain/project-specific facts, rules, workflows and outputs",
-        "architecture/public-data semantics where applicable",
-        "project-specific authority mappings"
+        "architecture/design interpretation where applicable",
+        "public-data domain interpretation where applicable",
+        "CAD/Excel automation semantics where tied to project/domain meaning",
+        "report/document content semantics where project-owned",
+        "approval/submission workflow meaning and project-specific authority mappings"
       ],
       "must_inherit": [
         "TAKY_CORE",
         "WORK_OS"
+      ],
+      "coordinated_by": [
+        "WORK_OS",
+        "TAKY_RUNTIME_ORCHESTRATOR where governed routing is required"
       ]
     },
     "PLATFORM_ADAPTER": {
@@ -458,6 +465,113 @@
         "learning plan semantics",
         "identity authority"
       ]
+    },
+    "TAKY_RUNTIME_ORCHESTRATOR": {
+      "class": "GOVERNANCE_RUNTIME_COORDINATOR",
+      "semantic_owner": "TAKY_CORE",
+      "parent": "TAKY_CORE",
+      "implementation_hosts": [
+        "ENFORCEMENT/runtime_orchestrator.py",
+        "ENFORCEMENT/taky_gate.py and related bridges"
+      ],
+      "owns": [
+        "controlled governance runtime routing mechanics",
+        "preflight/gate composition",
+        "execution-role routing state"
+      ],
+      "coordinates": [
+        "WORK_OS",
+        "LEARNING_OS",
+        "WORK_DOMAIN_PROJECT",
+        "learning-domain services and app execution via governed contracts"
+      ],
+      "does_not_own": [
+        "work-domain facts/meaning",
+        "learning-domain facts/meaning",
+        "project product semantics",
+        "human final approval authority"
+      ]
+    },
+    "WORK_IDENTITY_AUTHORITY": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "OS/WORK_OS.md",
+      "parent": "WORK_OS",
+      "owns": [
+        "organization/team membership semantics",
+        "work roles/permissions",
+        "project approval authority mapping"
+      ],
+      "does_not_own": [
+        "family/child/parent learning identity",
+        "generic auth transport/session mechanism"
+      ]
+    },
+    "WORK_PROJECT_COORDINATION": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "OS/WORK_OS.md",
+      "parent": "WORK_OS",
+      "owns": [
+        "cross-project work-item coordination semantics",
+        "work task/issue/decision lifecycle",
+        "project routing/coordination"
+      ],
+      "does_not_own": [
+        "project-specific technical facts/rules",
+        "project-specific approval meaning when owned by project/domain master"
+      ]
+    },
+    "WORK_SOURCE_CONTINUITY": {
+      "class": "DOMAIN_SEMANTIC_SERVICE",
+      "semantic_owner": "OS/WORK_OS.md",
+      "parent": "WORK_OS",
+      "owns": [
+        "attachment/source continuity semantics",
+        "persistence status/provenance index semantics",
+        "handoff/recovery index relationships"
+      ],
+      "implementation_hosts": [
+        "TAKY/Library/Drive/project repositories as applicable"
+      ],
+      "does_not_own": [
+        "underlying project fact meaning",
+        "original external source authority"
+      ]
+    },
+    "WORK_MAIL_OPERATIONS": {
+      "class": "DOMAIN_SERVICE",
+      "semantic_owner": "OS/MAIL_OPS.md",
+      "parent": "WORK_OS",
+      "owns": [
+        "business correspondence reconstruction semantics",
+        "mail archival/history semantics",
+        "thread/contact/project-linking semantics"
+      ],
+      "implementation_hosts": [
+        "connected mail providers/connectors and archival workflows"
+      ],
+      "does_not_own": [
+        "project design/calculation semantics",
+        "project approval authority",
+        "provider transport state as permanent truth"
+      ]
+    },
+    "WORKSPACE_PROJECTION_SERVICE": {
+      "class": "DOMAIN_PROJECTION_SERVICE",
+      "semantic_owner": "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
+      "parent": "WORK_OS",
+      "owns": [
+        "operational projection/coordination semantics",
+        "workspace record/view/traceability contract"
+      ],
+      "implementation_hosts": [
+        "Notion and future work-management surfaces"
+      ],
+      "does_not_own": [
+        "canonical project facts",
+        "numeric/calculation authority",
+        "CAD/BIM geometry authority",
+        "original evidence authority"
+      ]
     }
   },
   "capability_classification": [
@@ -589,6 +703,20 @@
     }
   ],
   "review_findings": [
+    {
+      "gap_id": "ARCH-REALIGN-004",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "Work OS previously grouped coordination surfaces and project/domain semantics too broadly.",
+      "direction": "Keep Mail/Source Continuity/Workspace Projection as Work services; architecture/public-data/CAD-Excel/report/approval semantics remain project/domain-owned where applicable."
+    },
+    {
+      "gap_id": "ARCH-REALIGN-005",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "TAKY runtime orchestrator implementation could be mistaken for global semantic authority.",
+      "direction": "Model orchestrator as governance runtime coordinator/implementation host only; domains keep semantic ownership and humans retain final accountable authority."
+    },
     {
       "gap_id": "ARCH-REALIGN-001",
       "priority": "P0",
@@ -917,6 +1045,66 @@
       "type": "FEDERATES_WITH",
       "to": "LEARNING_OS",
       "contract": "HOLD_UNTIL_EXPLICIT_REAL_USE_CASE; no identity/authority inheritance"
+    },
+    {
+      "from": "TAKY_CORE",
+      "type": "HOSTED_BY",
+      "to": "TAKY_RUNTIME_ORCHESTRATOR",
+      "contract": "governance runtime implementation; hosting does not transfer domain ownership"
+    },
+    {
+      "from": "TAKY_RUNTIME_ORCHESTRATOR",
+      "type": "COORDINATES",
+      "to": "WORK_OS",
+      "contract": "governed route/preflight only"
+    },
+    {
+      "from": "TAKY_RUNTIME_ORCHESTRATOR",
+      "type": "COORDINATES",
+      "to": "LEARNING_OS",
+      "contract": "governed route/preflight only"
+    },
+    {
+      "from": "WORK_IDENTITY_AUTHORITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "WORK_PROJECT_COORDINATION",
+      "contract": "scoped work identity/authority projection"
+    },
+    {
+      "from": "WORK_PROJECT_COORDINATION",
+      "type": "ROUTES_TO",
+      "to": "WORK_DOMAIN_PROJECT",
+      "contract": "project work routing; project retains domain authority"
+    },
+    {
+      "from": "WORK_SOURCE_CONTINUITY",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "WORK_PROJECT_COORDINATION",
+      "contract": "source/persistence/provenance continuity projection"
+    },
+    {
+      "from": "WORK_MAIL_OPERATIONS",
+      "type": "PUBLISHES_PROJECTION",
+      "to": "WORK_PROJECT_COORDINATION",
+      "contract": "mail evidence/thread/project linkage"
+    },
+    {
+      "from": "WORKSPACE_PROJECTION_SERVICE",
+      "type": "CONSUMES",
+      "to": "WORK_PROJECT_COORDINATION",
+      "contract": "projects/issues/decisions/evidence operational projection"
+    },
+    {
+      "from": "WORKSPACE_PROJECTION_SERVICE",
+      "type": "MUST_NOT_MUTATE",
+      "to": "WORK_DOMAIN_PROJECT",
+      "contract": "projection write is not canonical project source commit"
+    },
+    {
+      "from": "WORK_OS",
+      "type": "COORDINATES",
+      "to": "WORK_DOMAIN_PROJECT",
+      "contract": "cross-project operational coordination without semantic takeover"
     }
   ],
   "role_separation": {
