@@ -430,4 +430,74 @@ Before new high-fi:
 - create one comparative composition matrix for Ready Home / Snap Home / Hide Home;
 - only after that allow new high-fi proposals.
 
+
+## 15. 2026-09-23 LINEAGE RECOVERY / REJECTION PACKET
+
+### SOURCE-LINEAGE-01 — 함께 준비하는 탐험대 여정.png
+STATUS: REFERENCE / BASE_CANDIDATE
+VALID:
+- onboarding / exploration-preparation visual lineage
+- prior Crew/character-formation composition evidence
+RULE:
+use element-level recovery; do not approve the whole sheet automatically.
+
+### SOURCE-LINEAGE-02 — 가이드☆ 여섯 친구의 찬란한 여정.png
+STATUS: REFERENCE / CORE6 VISUAL LINEAGE
+VALID:
+- historical differentiation of 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로
+OPEN:
+- final Visual ID 1:1 verification.
+
+### SOURCE-LINEAGE-03 — 나만의 섬, 더 많은 이야기.png
+STATUS: REFERENCE / WORLD-SEQUENCE BASE_CANDIDATE
+VALID:
+- persistent one-island direction
+- island reveal/name
+- Base Camp move/name
+- Ready / Hide / Snap regional continuity
+NOT AUTOMATICALLY VALID:
+- older Home/map details that conflict with current Ready 3-screen correction.
+
+### SOURCE-LINEAGE-04 — imagegen.png + direct user text
+STATUS: SOURCE EVIDENCE
+VALID:
+- onboarding chronology correction
+- photo/item/direction/character setup lineage
+- Voyage/Drop
+- island discovery/name
+- Base Camp name
+- character proportion/theme direction
+NOT A VISUAL BASE BY ITSELF.
+
+### REJECT-2026-09-23-A — generic multi-phone high-fi poster
+STATUS: REJECTED
+WHY:
+- altered established flow
+- omitted/duplicated semantic steps
+- invented/substituted visual language
+- Ready Weekly regression.
+
+### REJECT-2026-09-23-B — invented Crew/child iPhone candidates
+STATUS: REJECTED
+WHY:
+- did not preserve Core 6 / character timing / prior lineage.
+
+### REJECT-2026-09-23-C — placeholder onboarding wireframes
+STATUS: REJECTED AS FINAL MOCKUP
+WHY:
+- structural scratch only
+- visual regression from prior lineage.
+
+### REJECT-2026-09-23-D — crop/overlay delta-patch PNG set
+STATUS: REJECTED
+WHY:
+- mechanical patching was presented as corrected visual design
+- did not faithfully preserve the actual base composition.
+
+### Current base state
+NO SINGLE VISUAL BASE IS RE-LOCKED YET.
+
+NEXT:
+recover the source assets above, compare them screen-by-screen, identify the exact BASE + DELTA MAP, then generate nothing until that review is complete.
+
 END
