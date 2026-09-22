@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-22.2",
+  "map_version": "2026-09-22.3",
   "status": "ACTIVE_OWNERSHIP_HIERARCHY_AND_INTERACTION_GRAPH",
   "purpose": "Machine-readable whole-system architecture map separating semantic ownership hierarchy from interaction/runtime relationships. It preserves canonical semantic owners, prevents implementation-host promotion to authority, and models explicit projection/event/contract flows without making TAKY or any app the owner of all meaning.",
   "invariants": [
@@ -704,6 +704,13 @@
   ],
   "review_findings": [
     {
+      "gap_id": "ARCH-REALIGN-006",
+      "priority": "P0",
+      "state": "CORRECTED_IN_MAP",
+      "finding": "Initial interaction graph used ACCEPTS_EVENT with publisher-to-receiver direction, which was semantically ambiguous.",
+      "direction": "Normalize ACCEPTS_EVENT as receiver -> event source and validate direction deterministically."
+    },
+    {
       "gap_id": "ARCH-REALIGN-004",
       "priority": "P0",
       "state": "CORRECTED_IN_MAP",
@@ -969,40 +976,40 @@
       "contract": "versioned visual identity projection"
     },
     {
-      "from": "READY_SET",
+      "from": "PLANNER_ENGINE",
       "type": "ACCEPTS_EVENT",
-      "to": "PLANNER_ENGINE",
-      "contract": "progress/result/actual-duration/help/check/block events"
+      "to": "READY_SET",
+      "contract": "accepts progress/result/actual-duration/help/check/block events published by Ready"
     },
     {
-      "from": "HIDE_SEEK",
+      "from": "PLANNER_ENGINE",
       "type": "ACCEPTS_EVENT",
-      "to": "PLANNER_ENGINE",
-      "contract": "retrieval/progress/result events"
+      "to": "HIDE_SEEK",
+      "contract": "accepts retrieval/progress/result events published by Hide"
     },
     {
-      "from": "SNAP_POP",
+      "from": "PLANNER_ENGINE",
       "type": "ACCEPTS_EVENT",
-      "to": "PLANNER_ENGINE",
-      "contract": "production/progress/result events"
+      "to": "SNAP_POP",
+      "contract": "accepts production/progress/result events published by Snap"
     },
     {
-      "from": "READY_SET",
+      "from": "LEARNING_HISTORY_EVIDENCE",
       "type": "ACCEPTS_EVENT",
-      "to": "LEARNING_HISTORY_EVIDENCE",
-      "contract": "learning/execution evidence"
+      "to": "READY_SET",
+      "contract": "accepts learning/execution evidence published by Ready"
     },
     {
-      "from": "HIDE_SEEK",
+      "from": "LEARNING_HISTORY_EVIDENCE",
       "type": "ACCEPTS_EVENT",
-      "to": "LEARNING_HISTORY_EVIDENCE",
-      "contract": "retrieval/memory evidence"
+      "to": "HIDE_SEEK",
+      "contract": "accepts retrieval/memory evidence published by Hide"
     },
     {
-      "from": "SNAP_POP",
+      "from": "LEARNING_HISTORY_EVIDENCE",
       "type": "ACCEPTS_EVENT",
-      "to": "LEARNING_HISTORY_EVIDENCE",
-      "contract": "production/expression evidence"
+      "to": "SNAP_POP",
+      "contract": "accepts production/expression evidence published by Snap"
     },
     {
       "from": "LEARNING_HISTORY_EVIDENCE",
@@ -1116,5 +1123,8 @@
       "consumer"
     ],
     "rule": "A component may occupy multiple operational roles, but semantic ownership SHALL be declared independently and cannot be inferred from the others."
+  },
+  "interaction_semantics": {
+    "ACCEPTS_EVENT": "Edge direction is RECEIVER -> EVENT_SOURCE. The receiver owns interpretation of accepted event meaning within its semantic boundary; the event source does not gain receiver ownership."
   }
 }
