@@ -19,6 +19,10 @@ HARD_FAILURE_CLASSES = {
     "ROLE_OWNER_VIOLATION","KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING",
     "VALIDATION_AS_PRODUCT_PROGRESS","ROLE_MISSING","ACTION_CLASS_MISSING","EXECUTION_OWNER_MISSING",
     "UNKNOWN_ROLE","UNKNOWN_ACTION_CLASS","ROLE_ACTION_NOT_ALLOWED",
+    "SOURCE_RECOVERY_BYPASSED","SUMMARY_AUTHORITY_PROMOTION","SEARCH_MISS_AS_ABSENCE",
+    "IMPLEMENTATION_HOST_OWNER_PROMOTION","LIVE_REFRESH_BYPASSED",
+    "UNJUSTIFIED_DECISION_REWRITE","SILENT_SUPERSESSION","TERMINOLOGY_REGRESSION",
+    "ANSWER_VARIANCE_WITHOUT_EVIDENCE","UNKNOWN_PROMOTED_TO_FACT","OWNER_DRIFT","CONTEXT_LOSS",
 }
 
 VALID_ROLES = {"ORCHESTRATOR","IMPLEMENTER","VALIDATOR","HUMAN_APPROVER"}
@@ -62,6 +66,34 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         ("material_omission","OMISSION"),("stale_state_used","STALE_STATE"),
         ("unclassified_conflict","UNCLASSIFIED_CONFLICT")]:
         if b(r,key): f.append(token)
+
+    # Root-cause prevention gates for hallucination/context loss/recreation.
+    # These fail before output when authority recovery, owner boundaries, or
+    # continuity evidence is insufficient.
+    if b(r,"source_recovery_required") and not b(r,"source_recovery_completed"):
+        f.append("SOURCE_RECOVERY_BYPASSED")
+    if b(r,"summary_used_as_authority"):
+        f.append("SUMMARY_AUTHORITY_PROMOTION")
+    if b(r,"search_miss_treated_as_source_absence"):
+        f.append("SEARCH_MISS_AS_ABSENCE")
+    if b(r,"implemented_in_used_as_semantic_owner"):
+        f += ["IMPLEMENTATION_HOST_OWNER_PROMOTION","OWNER_DRIFT"]
+    if (b(r,"current_state_claim_planned") or b(r,"live_refresh_required")) and not b(r,"live_refresh_completed"):
+        f.append("LIVE_REFRESH_BYPASSED")
+    if b(r,"settled_decision_rewrite_planned") and not b(r,"delta_evidence_present"):
+        f.append("UNJUSTIFIED_DECISION_REWRITE")
+    if b(r,"supersession_applied") and not b(r,"supersession_trace_present"):
+        f.append("SILENT_SUPERSESSION")
+    if b(r,"active_terminology_regressed"):
+        f.append("TERMINOLOGY_REGRESSION")
+    if b(r,"answer_changed_from_prior_canonical") and not b(r,"new_material_evidence_present"):
+        f.append("ANSWER_VARIANCE_WITHOUT_EVIDENCE")
+    if b(r,"unknown_promoted_to_fact"):
+        f.append("UNKNOWN_PROMOTED_TO_FACT")
+    if b(r,"required_context_missing") and b(r,"continued_without_recovery"):
+        f.append("CONTEXT_LOSS")
+    if b(r,"semantic_owner_unresolved") and b(r,"authority_promoted_anyway"):
+        f += ["OWNER_DRIFT","UNKNOWN_PROMOTED_TO_FACT"]
 
     # Universal TAKY basis auto-activation for material TAKY-governed turns.
     # Material TAKY work must enter pre-execution without relying on the user
