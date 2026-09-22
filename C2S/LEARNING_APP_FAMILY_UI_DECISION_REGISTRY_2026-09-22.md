@@ -330,3 +330,25 @@ Ready primary architecture remains:
 3. 그냥! 지금 하면 돼! Timer
 
 This packet corrects a previously returned visual that did not reflect already-requested user deltas.
+
+
+## 17. CORE 6 VISUAL ID STATE SPLIT — 2026-09-23
+
+HARD LOCK:
+- Core 6 Visual ID identity set and member mapping:
+  두비 / 로리 / 잉크 / 노바 / 테이크 / 제로.
+- locked species / silhouette / body proportion / identity markings / canonical visual lineage.
+
+PER-CANDIDATE CHECK:
+- every newly generated screen/pose/group image must be visually compared to the locked ID source.
+- FAIL/OPEN applies to the candidate asset only.
+
+Forbidden state propagation:
+`CANDIDATE_UNVERIFIED -> CORE6_VISUAL_ID_OPEN`.
+
+Correct propagation:
+`CANDIDATE_UNVERIFIED -> CANDIDATE_UNVERIFIED`
+`CANDIDATE_MISMATCH -> CANDIDATE_REJECTED`
+`CORE6_VISUAL_ID -> REMAINS_HARD_LOCK`.
+
+This distinction prevents a lost pointer or failed generation from silently recreating the Crew.
