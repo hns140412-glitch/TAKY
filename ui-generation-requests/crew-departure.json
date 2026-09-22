@@ -1,0 +1,44 @@
+{
+  "screen_id": "CREW_DEPARTURE_SCENE",
+  "output": {
+    "one_screen_per_image": true,
+    "device": "iphone_portrait",
+    "multiple_phones": 1,
+    "poster": false,
+    "baseline_width": 390,
+    "baseline_height": 844
+  },
+  "entities": {
+    "user_character": false,
+    "crew_ids": [
+      "dooby",
+      "lori",
+      "ink",
+      "nova",
+      "take",
+      "zero"
+    ],
+    "crew_visual_mode": "CANONICAL_PLACEHOLDER_ONLY"
+  },
+  "required_components": [
+    "CORE6_ALL_VISIBLE",
+    "ONE_FOCUSED_MEMBER",
+    "SHORT_SELF_INTRO_TEXT",
+    "PRIMARY_ACTION_NEXT_OR_SELECT",
+    "EXPEDITION_STAGING_ENVIRONMENT"
+  ],
+  "features": [
+    "NO_COMPLETED_USER_CHARACTER",
+    "NO_POWER_STATS",
+    "NO_RARITY",
+    "NO_BOTTOM_NAV",
+    "NO_TTS_ACTUAL_SPEECH"
+  ],
+  "navigation": {
+    "persistent_bottom_nav": false
+  },
+  "tts": {
+    "actual_speech": false
+  },
+  "notes": "Use labeled silhouette/placeholder slots for the six canonical Crew if exact approved Visual ID references are unavailable. Do not invent species, colors, clothing, or faces."
+}
