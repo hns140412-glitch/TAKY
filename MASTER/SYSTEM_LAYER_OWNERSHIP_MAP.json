@@ -45,7 +45,7 @@
     },
     "SHARED_TECHNICAL_CAPABILITY": {
       "class": "SEMANTIC_LIGHT_SHARED_MECHANISM",
-      "semantic_owner": "SEMANTIC_LIGHT_MECHANISMS_REGISTERED_IN_MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "semantic_owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
       "parent": "TAKY_CORE",
       "state": "REFERENCE_IMPLEMENTATIONS_ACTIVE__SELECTIVE_CONSUMER_MIGRATION_VERIFIED__AUTH_HOLD",
       "owns_candidate_mechanisms": [
@@ -75,7 +75,8 @@
         "CAP-LOCAL-QUEUE-001 -> SHARED/runtime/local-queue.js",
         "CAP-OCR-INGEST-001 -> SHARED/runtime/vision-ingest.js",
         "CAP-HTTP-ADAPTER-001 -> SHARED/runtime/http-json.js"
-      ]
+      ],
+      "semantic_owner_note": "Registry owns semantic-light mechanism classification/support; TAKY global governance remains MASTER/MASTER_LOGIC.md."
     },
     "WORK_OS": {
       "class": "OPERATING_SYSTEM",
