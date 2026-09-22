@@ -238,3 +238,27 @@ Before any next image:
 4. output one 390×844 iPhone screen at a time.
 
 These corrections are known regression checks. The user must not be asked to rediscover them.
+
+
+## 11. SOURCE RECOVERY / BASE SELECTION CLOSED — 2026-09-23
+
+Current durable map:
+`C2S/LEARNING_APP_FAMILY_UI_VISUAL_BASE_DELTA_MAP_2026-09-23.md`
+
+Recovery result:
+- source lineage recovered;
+- element-level dispositions recorded;
+- exact BASE candidate chosen per affected onboarding/Ready screen;
+- duplicate direction-vs-result semantics closed;
+- Shared Expedition Accent omission closed;
+- Island/Base Camp naming omission closed;
+- Ready Weekly 5-tab / Planner regression closed.
+
+New exact next execution point:
+`ONB-01 Core 6 Crew Familiarity`
+→ one 390×844 screen
+→ HF-01 visual lineage
+→ Core 6 exact identity/name check
+→ then ONB-02 only after ONB-01 review.
+
+Do not restart source recovery unless new contradictory evidence appears.
