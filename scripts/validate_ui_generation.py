@@ -68,6 +68,36 @@ def validate(req, contract):
     if hierarchy is not None and req.get("hierarchy") != hierarchy:
         err(errors, f"hierarchy must match canonical: {hierarchy}")
 
+    # Locked Crew Visual ID contract
+    crew_contract = contract.get("crew_visual_id_contract", {})
+    if entities.get("crew") == "CORE6_CANONICAL":
+        canonical_ids = crew_contract.get("canonical_ids", [])
+        if req_entities.get("crew_ids") != canonical_ids:
+            err(errors, f"crew_ids must match locked canonical order: {canonical_ids}")
+        if req_entities.get("crew_visual_id_state") != "HARD_LOCK_REFERENCE":
+            err(errors, "crew_visual_id_state must be HARD_LOCK_REFERENCE")
+
+        ref_state = req.get("crew_reference", {})
+        render_mode = req.get("crew_render_mode")
+        approved_available = ref_state.get("approved_visual_id_available")
+        if approved_available is True and render_mode != "LOCKED_ID_DERIVATIVE":
+            err(errors, "approved Crew Visual IDs available: render mode must be LOCKED_ID_DERIVATIVE")
+        if approved_available is not True and render_mode != "PLACEHOLDER_ONLY":
+            err(errors, "without exact approved Crew Visual ID references, render mode must be PLACEHOLDER_ONLY")
+
+        locked = set(crew_contract.get("locked_layers", []))
+        mutations = set(req.get("crew_mutations", []))
+        illegal = sorted(locked & mutations)
+        if illegal:
+            err(errors, "Crew locked Visual ID layers may not mutate: " + ", ".join(illegal))
+
+        allowed = set(crew_contract.get("mutable_action_layers", []))
+        if sid == "SHARED_EXPEDITION_ACCENT":
+            allowed.add("theme_adaptive_apparel_zones")
+        unknown_mutations = sorted(mutations - allowed)
+        if unknown_mutations:
+            err(errors, "unsupported Crew mutation layers: " + ", ".join(unknown_mutations))
+
     # Critical regression locks only
     if req.get("tts", {}).get("actual_speech") is True:
         err(errors, "actual TTS speech is HOLD")
@@ -78,7 +108,7 @@ def self_test(contract):
     good = {
       "screen_id":"CHARACTER_PREP",
       "output":{"artifact":"SINGLE_IPHONE_SCREEN","device":"iphone_portrait"},
-      "sequence":["SOURCE_PHOTO","DIRECTION_ROUND_1","DIRECTION_ROUND_2","SIGNATURE_ITEM_PERSISTENCE"],
+      "sequence":["SOURCE_PHOTO","SIGNATURE_ITEM","DIRECTION_ROUND_1","DIRECTION_ROUND_2"],
       "required_components":["PHOTO_SOURCE","ROUND_1","ROUND_2","SIGNATURE_ITEM"],
       "choice_sets":{
         "round_1":["신나고 발랄하게","따뜻하고 다정하게","차분하고 똑똑하게"],
