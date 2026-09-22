@@ -1,0 +1,431 @@
+{
+  "meta": {
+    "id": "TAKY_BETA_ARCHITECTURE_CONVERGENCE_ATOMS_2026-09-22",
+    "status": "C2S_COMPILE_CLOSED__CONSULTING_CONVERGENCE_OPEN",
+    "branch": "taky/system-architecture-realignment-2026-09-22",
+    "claim_boundary": {
+      "reflection_complete": false,
+      "canonical_write": false,
+      "implementation_complete": false,
+      "deploy": false,
+      "device": false,
+      "beta_frozen": false
+    }
+  },
+  "atoms": [
+    {
+      "id": "ARCH-001",
+      "type": "DECISION",
+      "statement": "Exploration Crew rules and Badge system must apply consistently across Ready, Hide, and Snap.",
+      "owner": "LEARNING_APP_FAMILY_ECOSYSTEM",
+      "disposition": "ADOPT",
+      "status": "CONFIRMED_USER_DIRECTION"
+    },
+    {
+      "id": "ARCH-002",
+      "type": "INVARIANT",
+      "statement": "Cross-app visibility does not transfer semantic ownership.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "CANDIDATE_GLOBAL_INVARIANT"
+    },
+    {
+      "id": "ARCH-003",
+      "type": "INVARIANT",
+      "statement": "One event may have many valid interpreters, but semantic owners do not directly mutate each other's state.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "CANDIDATE_GLOBAL_INVARIANT"
+    },
+    {
+      "id": "ARCH-004",
+      "type": "ROOT_CAUSE",
+      "statement": "OWNER TYPE COLLAPSE: semantic owner, runtime/state owner, mutation authority, implementation owner and UI host are conflated under the word owner.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "ARCH-005",
+      "type": "ROOT_CAUSE",
+      "statement": "CANONICAL GENERATION DRIFT: legacy GUIDE/MAIN/Ready-centered language coexists with Learning Identity/Learning Engine/Planner/Family model.",
+      "owner": "LEARNING_OS",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "ARCH-006",
+      "type": "ROOT_CAUSE",
+      "statement": "SHADOW CURRENT STATE / PROJECTION copies current meaning across STATE, active profiles and volatile registries.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "ARCH-007",
+      "type": "ROOT_CAUSE",
+      "statement": "OPERATIONAL EXPRESSION PROLIFERATION and GOVERNANCE ACTIVATION GAP are stronger causes of TAKY heaviness than raw rule count.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "ARCH-008",
+      "type": "CORRECTION",
+      "statement": "Incident-specific app bugs are not proven to be broadly promoted into global TAKY rules; direct incident-to-global-rule leakage is weaker than initially hypothesized.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADJUST",
+      "status": "EVIDENCE_CORRECTED"
+    },
+    {
+      "id": "ARCH-009",
+      "type": "DECISION",
+      "statement": "C2S is necessary complexity; it is not the primary bloat root cause unless it absorbs execution truth or creates shadow canonicals.",
+      "owner": "TAKY_CORE",
+      "disposition": "PRESERVE",
+      "status": "STRONG"
+    },
+    {
+      "id": "LEARN-001",
+      "type": "DECISION",
+      "statement": "Learning Engine interprets; Planner manages; execution apps execute.",
+      "owner": "LEARNING_OS",
+      "disposition": "PRESERVE",
+      "status": "HIGH_CONFIDENCE"
+    },
+    {
+      "id": "LEARN-002",
+      "type": "DECISION",
+      "statement": "Ready is execution/base-camp and current runtime coordinator/UI host, not Planner or Learning Engine semantic owner.",
+      "owner": "READY_SET",
+      "disposition": "PRESERVE",
+      "status": "HIGH_CONFIDENCE"
+    },
+    {
+      "id": "LEARN-003",
+      "type": "DECISION",
+      "statement": "Learning App Family owns cross-app session/handoff/routing semantics.",
+      "owner": "LEARNING_APP_FAMILY",
+      "disposition": "PRESERVE",
+      "status": "HIGH_CONFIDENCE"
+    },
+    {
+      "id": "CREW-001",
+      "type": "DECISION",
+      "statement": "Exploration Crew should be modeled as a first-class logical semantic domain with Snap as current steward/incubator and canonical host, not as duplicated per-app Guide systems.",
+      "owner": "EXPLORATION_CREW_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "CREW-002",
+      "type": "DECISION",
+      "statement": "Snap stewardship does not mean permanent equivalence between Snap app lifecycle and Exploration Crew domain authority.",
+      "owner": "EXPLORATION_CREW_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "CREW-003",
+      "type": "DECISION",
+      "statement": "Shared crew identity, Visual ID lineage, core personality, name history, relationship/affinity semantics and encounter semantics remain stable across apps; only contextual behavior varies.",
+      "owner": "EXPLORATION_CREW_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "CREW-004",
+      "type": "GAP",
+      "statement": "Ready rebuild still retains local Guide identity/name/voice system and lacks closed crew projection in specialist handoff.",
+      "owner": "READY_SET",
+      "disposition": "OPEN",
+      "status": "UPDATE_REQUIRED"
+    },
+    {
+      "id": "CREW-005",
+      "type": "ROLE_CHANGE",
+      "statement": "OS/GUIDE_CHARACTER_RELATIONSHIP should retain family-wide relationship constraints but stop owning actual crew roster/personality/name history/affinity/encounter semantics.",
+      "owner": "LEARNING_OS",
+      "disposition": "OWNERSHIP_TRANSFER",
+      "status": "CANDIDATE"
+    },
+    {
+      "id": "CREW-006",
+      "type": "OPEN",
+      "statement": "SPECIAL FRIEND, READY RANDOM GUEST and SNAP SPECIAL CREW remain distinct until direct evidence proves equivalence.",
+      "owner": "LEARNING_APP_FAMILY",
+      "disposition": "HOLD",
+      "status": "RECOVERY_REQUIRED"
+    },
+    {
+      "id": "BADGE-001",
+      "type": "DECISION",
+      "statement": "Badge should be modeled as a first-class cross-app Badge Experience Domain rather than merely a Snap-local reward.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "BADGE-002",
+      "type": "DECISION",
+      "statement": "Apps emit factual/explicit experience events; apps do not directly award badges or mutate Badge History.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "BADGE-003",
+      "type": "INVARIANT",
+      "statement": "Badge star is tier/grade presentation and is distinct from Gem, Wish, EXP, character power and leaderboard semantics.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "USER_CONFIRMED"
+    },
+    {
+      "id": "BADGE-004",
+      "type": "GAP",
+      "statement": "Ready and Hide shared badge-event producers are not yet connected; cross-app Badge History/display consistency is not closed.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "OPEN",
+      "status": "PARTIAL_IMPLEMENTATION"
+    },
+    {
+      "id": "BADGE-005",
+      "type": "CORRECTION",
+      "statement": "Generic count-to-tier progression must not be promoted as universal badge policy; event count does not directly equal star/tier.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "ADJUST",
+      "status": "STRONG"
+    },
+    {
+      "id": "BADGE-006",
+      "type": "HOLD",
+      "statement": "Historical ~60 badge names/triggers remain WORKING_DRAFT_NOT_ACTIVE; exact active catalog, thresholds and tier applicability remain open.",
+      "owner": "BADGE_EXPERIENCE_DOMAIN",
+      "disposition": "HOLD",
+      "status": "SOURCE_COVERAGE_OPEN"
+    },
+    {
+      "id": "BADGE-007",
+      "type": "GAP",
+      "statement": "Ready share card generic done*5 '획득 별' conflicts with Badge star semantics and is a strong supersede/update candidate.",
+      "owner": "READY_SET",
+      "disposition": "SUPERSEDED",
+      "status": "UPDATE_REQUIRED"
+    },
+    {
+      "id": "HIST-001",
+      "type": "DECISION",
+      "statement": "Learning History, Badge History, Crew Relationship Memory and Wish Economy Ledger remain separate owner histories; do not create a mega global history ledger.",
+      "owner": "MULTI_DOMAIN",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "IDENT-001",
+      "type": "DECISION",
+      "statement": "Stable learner/profile identity is a shared reference key, not the semantic owner of Badge or Crew.",
+      "owner": "LEARNING_IDENTITY_AUTHORITY",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "IDENT-002",
+      "type": "OPEN",
+      "statement": "Profile Character Visual ID and Exploration Crew Visual ID should be separated logically; exact permanent ownership detail remains open.",
+      "owner": "LEARNING_APP_FAMILY",
+      "disposition": "HOLD",
+      "status": "OPEN"
+    },
+    {
+      "id": "SHARE-001",
+      "type": "DECISION",
+      "statement": "Share is a composition/presentation surface and must consume projections; it must not infer or award semantic meaning.",
+      "owner": "APP_UI",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "SNAP-001",
+      "type": "DECISION",
+      "statement": "Snap Product Growth/EXP, Snap Wish Economy, Badge Experience, Crew Affinity/World State and Learning History are distinct semantic domains even if rendered near each other.",
+      "owner": "SNAP_POP",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "TAKY-001",
+      "type": "DECISION",
+      "statement": "TAKY depth should be preserved while the active surface carried into each task is reduced: DEEP MEMORY — LIGHT EXECUTION.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "TAKY-002",
+      "type": "DECISION",
+      "statement": "Semantic node does not require a new file/repository/registry; logical separation precedes physical extraction.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "TAKY-003",
+      "type": "ROLE_CHANGE",
+      "statement": "ENFORCEMENT_PROTOCOL is a strong candidate to be treated as mechanical/executable support rather than an independent semantic owner.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADJUST",
+      "status": "CANDIDATE"
+    },
+    {
+      "id": "TAKY-004",
+      "type": "CONSOLIDATE",
+      "statement": "CONVERSATION_CONTEXT_LEDGER_PROTOCOL is a strong consolidation candidate because C2S/Continuity/Recovery/Traceability now own much of its former meaning.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADJUST",
+      "status": "CANDIDATE"
+    },
+    {
+      "id": "TAKY-005",
+      "type": "CONSOLIDATE",
+      "statement": "REVISION_GOVERNANCE is a consolidation candidate into MASTER_LOGIC with compatibility pointer retained.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADJUST",
+      "status": "CANDIDATE"
+    },
+    {
+      "id": "TAKY-006",
+      "type": "POINTERIZE",
+      "statement": "Persistent ACTIVE_RULE_PROFILE is a shadow-current candidate; prefer on-demand task-relevant rule composition if no indispensable consumer requires persistent projection.",
+      "owner": "TAKY_CORE",
+      "disposition": "HOLD",
+      "status": "CONSUMER_ANALYSIS_OPEN"
+    },
+    {
+      "id": "TAKY-007",
+      "type": "POINTERIZE",
+      "statement": "STATE.md current/history contamination should be redesigned toward small current state plus historical pointers.",
+      "owner": "TAKY_CORE",
+      "disposition": "ADJUST",
+      "status": "CANDIDATE"
+    },
+    {
+      "id": "CI-001",
+      "type": "FINDING",
+      "statement": "taky-enforcement.yml is one 59-step job spanning core, C2S/continuity, Work/Notion/Drive, executor/Codex and multiple replay families.",
+      "owner": "TAKY_CI",
+      "disposition": "ADOPT",
+      "status": "EVIDENCED"
+    },
+    {
+      "id": "CI-002",
+      "type": "DECISION",
+      "statement": "The problem is too-wide validation activation, not validator count alone.",
+      "owner": "TAKY_CI",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "CI-003",
+      "type": "DECISION",
+      "statement": "Candidate CI direction: always-run aggregator + FAST CORE + affected semantic/deep suites + release/migration suites + conditional historical replay.",
+      "owner": "TAKY_CI",
+      "disposition": "ADOPT",
+      "status": "CONVERGED_CANDIDATE"
+    },
+    {
+      "id": "CI-004",
+      "type": "INVARIANT",
+      "statement": "Validators/tests are consumers in the impact graph and can become stale when semantic/UI contracts change.",
+      "owner": "TAKY_CI",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "BETA-001",
+      "type": "DECISION",
+      "statement": "Existing BETA docs remain consulting inputs/HOLD rather than frozen execution standard because UI/C2S/Data/App streams are still converging in parallel.",
+      "owner": "TAKY_BETA",
+      "disposition": "PRESERVE",
+      "status": "OPEN"
+    },
+    {
+      "id": "BETA-002",
+      "type": "DECISION",
+      "statement": "Impact reopening should be targeted: NEW EVIDENCE -> OWNER -> CONTRACT -> CONSUMER -> VALIDATOR CONSUMER -> TARGETED REGRESSION.",
+      "owner": "TAKY_BETA",
+      "disposition": "ADOPT",
+      "status": "STRONG"
+    },
+    {
+      "id": "BETA-003",
+      "type": "OPEN",
+      "statement": "Do not code/cleanup/dispatch Codex/merge/deploy until BETA standards freeze after sufficient convergence.",
+      "owner": "TAKY_BETA",
+      "disposition": "HOLD",
+      "status": "HUMAN_APPROVAL_BOUNDARY"
+    }
+  ],
+  "relations": [
+    [
+      "CREW-001",
+      "REFINES",
+      "ARCH-001"
+    ],
+    [
+      "BADGE-001",
+      "REFINES",
+      "ARCH-001"
+    ],
+    [
+      "CREW-005",
+      "RESOLVES_CONFLICT_WITH",
+      "CREW-001"
+    ],
+    [
+      "BADGE-003",
+      "SEPARATES_FROM",
+      "SNAP-001"
+    ],
+    [
+      "HIST-001",
+      "IMPLEMENTS",
+      "ARCH-003"
+    ],
+    [
+      "CI-003",
+      "IMPLEMENTS",
+      "TAKY-001"
+    ],
+    [
+      "TAKY-003",
+      "ADDRESSES",
+      "ARCH-007"
+    ],
+    [
+      "TAKY-004",
+      "ADDRESSES",
+      "ARCH-007"
+    ],
+    [
+      "TAKY-006",
+      "ADDRESSES",
+      "ARCH-006"
+    ],
+    [
+      "TAKY-007",
+      "ADDRESSES",
+      "ARCH-006"
+    ],
+    [
+      "BETA-002",
+      "IMPLEMENTS",
+      "CI-004"
+    ],
+    [
+      "BETA-003",
+      "GATES",
+      "BETA-001"
+    ]
+  ]
+}
