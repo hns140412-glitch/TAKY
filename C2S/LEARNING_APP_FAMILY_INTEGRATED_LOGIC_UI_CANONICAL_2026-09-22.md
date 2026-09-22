@@ -244,8 +244,26 @@ User-selected hoodie color may act as a Character presentation accent:
 - selected personal UI/profile accents
 - some badge/share expression where appropriate.
 
-It must NOT recolor or mutate Crew Visual IDs.
-Crew harmonization happens through world lighting and material response, not identity recoloring.
+Crew identity-defining traits must remain stable, but the selected family accent color MAY propagate to approved changeable apparel/accent zones on Crew outfits.
+
+Allowed propagation:
+- Crew hoodie / jacket / scarf / patch / trim accent zones explicitly marked as THEME_ADAPTIVE
+- shared expedition gear accents
+- selected UI/profile accents
+
+Must remain stable:
+- species
+- face
+- silhouette
+- body proportions
+- core identity markings
+- canonical signature features
+- any non-theme-adaptive locked color zones.
+
+Rule:
+CREW_IDENTITY_COLOR != THEME_ADAPTIVE_APPAREL_COLOR.
+
+World harmonization still relies on lighting/material response, but selected expedition color can visibly unify the user Character and Crew through adaptive clothing accents.
 
 ## 7. Exploration Crew canonical
 
@@ -2663,11 +2681,13 @@ use the user character’s hoodie/accent as a visual-unity anchor without recolo
 
 Rules:
 - affects user Character primary accent.
-- may inform selected profile/share accent.
-- may influence tiny UI accent only where semantically safe.
-- MUST NOT recolor Crew canonical Visual IDs.
+- becomes the shared expedition accent color.
+- propagates to approved THEME_ADAPTIVE apparel zones on Crew (for example hoodie/jacket/scarf/patch/trim where defined).
+- may inform selected profile/share/UI accents.
+- MUST NOT alter Crew species, face, silhouette, body proportions, signature markings or non-adaptive identity colors.
 - MUST NOT recolor world geography into a new theme.
-- exact palette propagation remains controlled, not global.
+- exact adaptive zones are defined per Crew Visual ID so identity remains recognizable.
+- changing the shared accent updates current presentation without deleting historical visuals/events.
 
 ## 78. Formation screen 12 — Voyage / Drop
 
@@ -3122,11 +3142,15 @@ Preferred interaction:
 - one confirm action.
 
 Do not:
-- expose full color wheel
-- recolor Crew
-- recolor island
-- re-run A/B/C due to accent color
-- turn into wardrobe customization.
+- expose uncontrolled full wardrobe customization
+- recolor Crew identity-defining features
+- recolor island geography
+- re-run A/B/C merely because accent color changed.
+
+Do:
+- propagate the selected expedition accent to the user Character and approved Crew THEME_ADAPTIVE apparel zones
+- preview the group together when choosing color
+- preserve each Crew member's recognizability.
 
 Status:
 HOODIE_ACCENT_FULL_SCREEN = SUPERSEDED.
@@ -3177,22 +3201,44 @@ not
 
 Current low-fi is directionally correct but should be even less like recreation.
 
-Preferred flow:
+Preferred flow distinguishes two modes:
 
+A. PROFILE QUICK UPDATE
 PROFILE PHOTO CHANGED
 → small non-blocking Character refresh prompt
-→ side-by-side preview only if child/parent chooses
+→ side-by-side preview
 → update / keep current.
 
-Do not reopen:
-- Signature Item selection
-- Crew selection
-- island naming
-- full mood consultation by default.
+Default quick-update behavior:
+- preserve current primary companion
+- preserve Signature Item
+- preserve current direction
+- preserve island/base-camp names
+- preserve history.
 
-Direction reuse:
-- current Character direction/identity remains baseline.
-- only reopen direction consultation if explicitly requested.
+B. PROFILE REBUILD / 다시 만들기
+When the child/authorized user explicitly chooses “프로필 다시 만들기”, reopen the full personal setup flow.
+
+May reselect:
+- source photo
+- Primary Companion
+- companion display name
+- Signature Exploration Item
+- direction round 1
+- direction round 2
+- A/B/C Character choice
+- likeness correction
+- hoodie/shared accent color
+- Voyage / Drop presentation preference
+- island name
+- Base Camp name
+
+History rule:
+- Explorer_ID stays the same
+- prior Character versions remain history
+- prior Crew relationship / Badge / Episode / learning records are preserved
+- changing current companion or names does not erase prior relationship/history
+- island/base-camp rename does not reset world history.
 
 Age progression:
 - update can subtly adjust body proportion and age expression.
@@ -3403,5 +3449,74 @@ Proceed with one family-level **LOW-FI CRITIQUE CLOSURE**:
 - then mark which surfaces can enter HIGH-FI CANDIDATE and which must remain OPEN.
 
 No new handoff file.
+
+
+## 108. User correction — Profile Rebuild + Shared Expedition Color
+
+### 108.1 Profile modes
+
+Two different actions are canonical:
+
+`PROFILE_QUICK_UPDATE`
+- lightweight photo/age-aware refresh
+- preserves current setup by default.
+
+`PROFILE_REBUILD`
+- explicit “다시 만들기”
+- reopens the full personal configuration journey.
+
+PROFILE_REBUILD may reselect:
+- photo
+- Primary Companion
+- companion name
+- Signature Item
+- visual directions
+- A/B/C
+- likeness correction
+- shared expedition accent color
+- Voyage / Drop
+- island name
+- Base Camp name.
+
+Persistence:
+- Explorer_ID never changes.
+- historical Character versions remain.
+- Crew relationship/history remains.
+- Badge/Episode/learning history remains.
+- renaming/reselection changes current state, not historical truth.
+
+### 108.2 Shared Expedition Color
+
+The user-selected color is not user-character-only.
+
+Canonical meaning:
+`SHARED_EXPEDITION_ACCENT`
+
+It may drive:
+- user Character hoodie/accent
+- approved Crew hoodie/outfit adaptive zones
+- expedition patches/trim
+- selected profile/share/UI accents.
+
+Crew Visual ID must define:
+- `LOCKED_IDENTITY_COLORS`
+- `THEME_ADAPTIVE_APPAREL_ZONES`
+
+Changing SHARED_EXPEDITION_ACCENT:
+- updates present/future visual projection
+- does not mutate historical event artwork unless explicitly re-rendered
+- does not change Crew identity.
+
+### 108.3 UI implication
+
+Color selection preview should show:
+- user Character
+- current Primary Companion
+- optionally a small Core Crew lineup
+
+so the child can see the shared expedition color before confirming.
+
+This supersedes the prior rule that Crew apparel must never change color.
+Only identity-defining color features remain locked.
 
 END
