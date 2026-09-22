@@ -2,9 +2,30 @@
 
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 
-**TAKY — Think Again, Keep Your Key.**
+**TAKY — Think Again, Keep Your Key.**  
+**TAKY — Think Again, You're The Key.**
 
-> 한 번 더 생각하고, 핵심은 놓치지 마.
+> 한 번 더 생각하고, 핵심은 놓치지 마.  
+> 한 번 더 생각하고, 결국 핵심은 당신이다.
+
+## Dual slogan principle
+TAKY has two inseparable slogans:
+
+- `Think Again, Keep Your Key.`
+- `Think Again, You're The Key.`
+
+They operate together.
+
+`Keep Your Key` means each system, domain, owner and person preserves its essential meaning, authority, identity, provenance and role through orchestration and integration.
+
+`You're The Key` means the human remains the final center of purpose, judgment, ownership and meaningful decision. Systems, OS layers, apps, tools and AI exist to support the human outcome; they are not the purpose themselves.
+
+Architectural corollaries:
+- `INTEGRATE WITHOUT COLLAPSING OWNERSHIP.`
+- `SHARE WITHOUT LOSING THE KEY.`
+- `ROUTE WITHOUT MAKING THE ROUTER THE OWNER.`
+- `AUTOMATE WITHOUT REMOVING HUMAN AGENCY.`
+- `SYSTEM QUALITY SERVES HUMAN OUTCOME.`
 
 ## System definition
 TAKY is the central master system. It contains and executes the GRAND MASTER logic and routes to OS, domain, project, skill, tool, agent, validation, history, deployment, and shared capability policies.
