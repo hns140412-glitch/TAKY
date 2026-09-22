@@ -815,3 +815,19 @@ LEARNING_ONLY_INTERPRETATION = REJECTED
 WORK_OS_REVIEW = REQUIRED
 TAKY_ROLE_REVIEW = REQUIRED
 OWNERSHIP_GRAPH_MODEL = REQUIRED
+
+
+## 14. Exact slogan correction — global lock
+User-confirmed TAKY slogans:
+
+- `Think Again, Keep Your Key.`
+- `Think Again, You're The Key.`
+
+Interpretation:
+- first slogan protects system/domain/owner integrity;
+- second slogan protects human purpose, agency and final meaningful authority.
+
+Any future architecture that optimizes the system while losing owner integrity or human purpose is a TAKY regression.
+
+`KEEP THE KEY OF EACH OWNER.`
+`THE HUMAN IS THE KEY OF THE SYSTEM.`
