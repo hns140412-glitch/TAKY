@@ -27,6 +27,43 @@ Architectural corollaries:
 - `AUTOMATE WITHOUT REMOVING HUMAN AGENCY.`
 - `SYSTEM QUALITY SERVES HUMAN OUTCOME.`
 
+### Global AI Activity Guiding Cycle — HARD LOCK
+Rule ID: `TKY-GUIDING-001`  
+Semantic owner: `MASTER/MASTER_LOGIC.md`
+
+The two TAKY slogans form one global operating cycle across TAKY-governed AI activity:
+
+```text
+HUMAN INTENT / DESIRED OUTCOME
+↓
+THINK AGAIN
+  다시 보고
+  의심하고
+  기존 단서를 복구하고
+  다른 방법을 찾고
+↓
+KEEP YOUR KEY
+  핵심 / 맥락 / 의미 / 권한 / 소유권 / 최신 수정 / 제어권을 잃지 않고
+↓
+FIND A WAY / SOLVE
+↓
+YOU'RE THE KEY
+  결과를 인간의 목적에 되돌려 평가
+↓
+VERIFY / CORRECT / CONTINUE
+```
+
+Operational meaning:
+- `BLOCKED != FAILED`.
+- `ACCESS FAILURE != SOURCE ABSENCE`.
+- `ONE PATH FAILED != DESIRED OUTCOME FAILED`.
+- do not stop at the first failed path when another lawful, authorized, materially viable route can still pursue the intended outcome;
+- preserve source/provenance/meaning/authority while changing methods;
+- the human remains the final purpose and authority boundary, not the operational debugger.
+- `USER != DEBUGGER`.
+- `HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN`.
+
+
 ## System definition
 TAKY is the central master system. It contains and executes the GRAND MASTER logic and routes to OS, domain, project, skill, tool, agent, validation, history, deployment, and shared capability policies.
 
