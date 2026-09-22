@@ -267,4 +267,31 @@ Before any new mockup or implementation:
 5. flag conflicts;
 6. map logic → owner/state/event/persistence → UI before high-fi.
 
+
+## 15. LATEST VISUAL WORK MODE — 2026-09-23
+
+Parent correction:
+`C2S/LEARNING_APP_FAMILY_UI_VISUAL_RESUME_C2S_2026-09-23.md`
+
+LOCKED execution mode:
+`RECOVER EXISTING BASE → ELEMENT-LEVEL REVIEW → DELTA MAP → DELTA EDIT`.
+
+Current visual task is not a greenfield redesign.
+
+Before a new candidate:
+- recover actual prior visual lineage;
+- identify exact BASE screen;
+- separate ACCEPTED / REFERENCE_ONLY / REJECTED / SUPERSEDED by element;
+- state only the deltas to change.
+
+The user must not be used as the routine regression detector for already-known rules.
+
+Onboarding continuity must retain:
+Crew familiarity → Primary Companion → character formation → Shared Expedition Accent → Voyage/Drop → Island discovery/name → Base Camp move/name → Ready.
+
+Ready Weekly visual composition remains OPEN/PROVISIONAL, but Planner semantics are LOCKED.
+Timer remains LOCKED and outside current redesign.
+
+Recent generic poster / invented-character / placeholder / crop-overlay patch outputs are REJECTED as current visual baselines.
+
 END
