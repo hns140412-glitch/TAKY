@@ -122,6 +122,39 @@
       "character_3d_flip",
       "camera_shake",
       "heavy_particles"
-    ]
+    ],
+    "device_tilt_depth": {
+      "enabled_as_candidate": true,
+      "semantics": "LAYER_POSITION_ONLY_NOT_IDENTITY_DEFORMATION",
+      "performance_tiers": {
+        "full_depth": {
+          "use_when": "PERFORMANCE_STABLE",
+          "layers": [
+            "foreground_props",
+            "focused_crew",
+            "other_crew",
+            "mid_background",
+            "far_background"
+          ]
+        },
+        "character_only": {
+          "use_when": "FULL_DEPTH_TOO_HEAVY",
+          "background_static": true,
+          "crew_translation_px": [
+            2,
+            8
+          ],
+          "focused_crew_stronger_than_others": true,
+          "allow_shadow_shift": true,
+          "body_warp": false,
+          "face_warp": false,
+          "scale_pumping": false
+        },
+        "static_depth": {
+          "use_when": "REDUCED_MOTION_OR_SENSOR_UNAVAILABLE_OR_PERFORMANCE_CONSTRAINED",
+          "tilt_response": false
+        }
+      }
+    }
   }
 }
