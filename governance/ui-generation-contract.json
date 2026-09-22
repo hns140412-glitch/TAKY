@@ -1,0 +1,120 @@
+{
+  "version": "TAKY_UI_GENERATION_GATE_V1",
+  "status": "ENFORCED",
+  "authority": "C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md",
+  "output": {
+    "one_screen_per_image": true,
+    "device": "iphone_portrait",
+    "baseline_width": 390,
+    "baseline_height": 844,
+    "poster_forbidden": true,
+    "contact_sheet_forbidden": true,
+    "multiple_phones_forbidden": true
+  },
+  "screen_contracts": {
+    "CREW_DEPARTURE_SCENE": {
+      "user_character_allowed": false,
+      "crew_policy": "CORE6_ONLY_OR_PLACEHOLDER",
+      "required_crew_ids": [
+        "dooby",
+        "lori",
+        "ink",
+        "nova",
+        "take",
+        "zero"
+      ],
+      "forbidden": [
+        "COMPLETED_USER_CHARACTER",
+        "INVENTED_CREW",
+        "POWER_STATS",
+        "RARITY"
+      ]
+    },
+    "CHARACTER_PREP": {
+      "user_character_allowed": false,
+      "crew_policy": "OPTIONAL_CANONICAL_ONLY",
+      "required_choice_sets": {
+        "round_1": [
+          "신나고 발랄하게",
+          "따뜻하고 다정하게",
+          "차분하고 똑똑하게"
+        ],
+        "round_2": [
+          "가볍고 활동적인 모습",
+          "편안하고 자연스러운 모습",
+          "조금 더 모험가다운 모습"
+        ]
+      },
+      "forbidden": [
+        "COMPLETED_USER_CHARACTER",
+        "PARAPHRASED_DIRECTION_CHOICES",
+        "INVENTED_CREW"
+      ]
+    },
+    "CHARACTER_REVEAL": {
+      "user_character_allowed": true,
+      "first_completed_character_stage": true,
+      "required_candidate_count": 3,
+      "same_child_required": true,
+      "forbidden": [
+        "CHIBI",
+        "SD_PROPORTION",
+        "DIFFERENT_CHILD_IDENTITIES"
+      ]
+    },
+    "SHARED_EXPEDITION_ACCENT": {
+      "user_character_allowed": true,
+      "shared_accent_required": true,
+      "crew_adaptive_apparel_preview": true,
+      "forbidden": [
+        "RECOLOR_CREW_IDENTITY",
+        "RECOLOR_WORLD_GEOGRAPHY"
+      ]
+    },
+    "WORLD_ENTRY": {
+      "user_character_allowed": true,
+      "required_steps": [
+        "VOYAGE_OR_DROP",
+        "ISLAND_REVEAL",
+        "ISLAND_NAME",
+        "BASE_CAMP_MOVE",
+        "BASE_CAMP_NAME",
+        "READY_HANDOFF"
+      ],
+      "forbidden": [
+        "NEW_CHARACTER_GENERATION",
+        "FEATURE_DASHBOARD",
+        "REWARD_SCREEN"
+      ]
+    },
+    "READY_WEEKLY": {
+      "user_character_allowed": true,
+      "character_priority": "OPTIONAL",
+      "planner_first": true,
+      "required": [
+        "MON_SUN",
+        "FIXED_COMMITMENT",
+        "PLANNER_DATED_TODO",
+        "FREE_WINDOW",
+        "TODAY_MARKER"
+      ],
+      "forbidden": [
+        "PERSISTENT_BOTTOM_NAV_INVENTION",
+        "TIMER_REDESIGN",
+        "PASTEL_CARD_WALL",
+        "MAP_FIRST",
+        "GENERIC_REWARD_STARS"
+      ]
+    }
+  },
+  "global_forbidden": [
+    "INVENTED_CREW",
+    "INVENTED_PERSISTENT_BOTTOM_NAV",
+    "TIMER_REDESIGN",
+    "GENERIC_REWARD_STARS",
+    "ACTUAL_TTS_CLAIM",
+    "POSTER_LAYOUT",
+    "MULTI_PHONE_BOARD"
+  ],
+  "generation_rule": "NO_VALIDATOR_PASS_NO_IMAGE_GENERATION"
+}
