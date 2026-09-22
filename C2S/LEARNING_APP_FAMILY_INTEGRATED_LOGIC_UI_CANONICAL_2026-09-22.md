@@ -3886,4 +3886,302 @@ This does NOT mean:
 Next:
 HIGH-FI CANDIDATE pass should begin from the four Formation scenes and the three app entry/home surfaces together so the family visual system is judged comparatively, not app-by-app in isolation.
 
+
+## 119. External reference synthesis for High-fi Candidate Pass
+
+Purpose:
+Extract principles only. Do not copy exact commercial visual style/assets.
+
+### 119.1 Child-facing learning reference
+
+Observed useful principles from current Khan Academy Kids public product/help materials:
+- Home presents a clear dominant next action rather than exposing all features equally.
+- Character presence can support warmth and orientation, but learning entry remains obvious.
+- Progress/history lives in a secondary library/progress context rather than overwhelming the primary learning action.
+- Visual interface minimizes dense written language and uses child-friendly hierarchy.
+
+TAKY adoption:
+- keep one dominant action.
+- use Character/Crew for orientation, not as competing dashboard content.
+- place Profile/Crew/Badge history in secondary shared hubs.
+- never copy their character style, iconography or page composition.
+
+### 119.2 Travel/planner reference
+
+Current travel-itinerary design guidance emphasizes that confirmed items, suggestions, changes and sequence must remain distinguishable at a glance.
+
+TAKY adoption for Ready:
+- fixed commitment / Planner TODO / free window must stay visually distinct.
+- geography/metaphor cannot blur schedule status.
+- Daily must make time/sequence obvious before world decoration.
+
+### 119.3 RPG / living-world reference
+
+Useful recurring principles from current mobile RPG/UI case studies:
+- environmental depth can coexist with legible UI if overlays are restrained.
+- the world should occupy the visual field while task controls remain clearly layered.
+- complex systems need progressive disclosure and active-context hierarchy.
+- HUD restraint preserves immersion.
+- a “living world” moment is strongest when the interface does not become an inventory/store/stat wall.
+
+TAKY adoption:
+- Formation / Snap Home / Hide Home may use deeper world exposure.
+- task surfaces flatten/quiet down.
+- Ready Weekly/Daily remain information-first.
+- avoid RPG economy/status/HUD conventions that imply combat, rarity, power or grind.
+
+## 120. Family High-fi Visual System Candidate V1
+
+Status:
+- HIGH_FI_CANDIDATE_SYSTEM
+- NOT_FINAL_VISUAL_LOCK
+- must be judged across multiple app surfaces together.
+
+### 120.1 Core visual sentence
+
+`LIVING ILLUSTRATED ISLAND + QUIET FUNCTIONAL GLASS + SAME-WORLD CHARACTER RENDERING + APP-SPECIFIC DENSITY`
+
+Interpretation:
+- world is illustrated and spatial, not generic flat background.
+- information surfaces are restrained/translucent where appropriate.
+- task screens simplify aggressively.
+- Character/Crew share lighting/material/world response.
+- Ready/Hide/Snap maintain distinct dialects.
+
+### 120.2 Composition layers
+
+1. WORLD LAYER
+   - island/base camp/jungle/waterfall/beach
+   - strong depth, atmosphere, environmental storytelling.
+
+2. IDENTITY LAYER
+   - user Character
+   - primary companion
+   - contextual guest/crew.
+
+3. INFORMATION LAYER
+   - planner, word set, writing prompt, state/status.
+
+4. ACTION LAYER
+   - one dominant CTA
+   - secondary actions reduced.
+
+5. FEEDBACK LAYER
+   - brief reaction
+   - state change
+   - badge acknowledgement only when canonical.
+
+Rule:
+higher-number layers must not erase lower-layer spatial identity, but function/action must remain readable.
+
+## 121. Shared surface language
+
+### Glass / translucent surfaces
+
+Use when:
+- world continuity matters;
+- information amount is moderate;
+- contrast can remain stable.
+
+Avoid:
+- stacking multiple glass cards;
+- blur over high-detail text area;
+- low-contrast frosted-on-bright scenery.
+
+Preferred:
+- one main translucent plane
+- edge fade / subtle depth
+- strong text contrast
+- minimal border
+- no glossy “tech dashboard” neon.
+
+### Solid/calm surfaces
+
+Use for:
+- writing
+- factual explanation
+- intense recall
+- forms/naming
+- high-reading-density areas.
+
+World can remain visible only as edge/environment framing.
+
+## 122. Family palette logic
+
+World palette:
+- region-specific natural palette.
+
+Shared Expedition Accent:
+- user-selected
+- Character hoodie/accent
+- Crew theme-adaptive apparel zones
+- patch/trim
+- limited shared profile/UI accent.
+
+Do not let selected accent:
+- recolor the entire island;
+- overpower semantic state colors;
+- erase Crew identity colors;
+- become reward rarity color.
+
+Semantic colors remain independent from personal accent.
+
+## 123. Character rendering rule for High-fi
+
+User Character:
+- natural child proportion
+- source-photo likeness preserved
+- illustration with soft material detail
+- readable silhouette
+- not doll-like glossy avatar render
+- not SD/chibi.
+
+Crew:
+- hard-locked species/silhouette/core identity
+- same scene lighting
+- adaptive expedition apparel accent
+- personality visible through posture/action.
+
+Rendering integration:
+- same shadow softness
+- same atmospheric light
+- same fabric/material treatment
+- same environmental color bounce.
+
+FAIL:
+Character or Crew appears pasted from a different renderer.
+
+## 124. High-fi candidate board — required comparative set
+
+One review board should contain at least these 7 surfaces together:
+
+A. CREW_DEPARTURE_SCENE
+B. CHARACTER_PREP_SCENE
+C. CHARACTER_REVEAL_SCENE
+D. WORLD_ENTRY_SEQUENCE
+E. READY WEEKLY
+F. HIDE HOME
+G. SNAP HOME
+
+Reason:
+If these seven do not look like one family while remaining functionally different, individual screen polish is premature.
+
+Optional second board:
+- Ready Daily
+- Hide TRACE
+- Snap Writing
+- Profile Hub
+- Crew Hub
+- Badge History Hub.
+
+## 125. Board A composition requirements
+
+### A. Crew Departure
+- expedition staging area before departure
+- six Crew visible
+- one currently self-presenting
+- enough motion/personality contrast
+- no stats/cards wall
+- same SHARED_EXPEDITION_ACCENT visible in adaptive clothing zones.
+
+### B. Character Prep
+- photo source context
+- signature item
+- mood/direction choices
+- expedition packing environment
+- feels like preparing to leave, not avatar settings.
+
+### C. Character Reveal
+- A/B/C same child
+- one enlarged candidate
+- clear likeness hierarchy
+- inline accent preview with user + primary companion.
+- no body-ratio drift.
+
+### D. World Entry
+- island reveal
+- Character + companion
+- entry-mode continuity
+- high environment depth
+- no dashboard.
+
+### E. Ready Weekly
+- one dominant schedule plane
+- Base Camp visible around edges/behind
+- planner readability before scenery
+- no map-first composition.
+
+### F. Hide Home
+- jungle/waterfall regional depth
+- current learning set as translucent wordbook/slips
+- Crew integrated environmentally
+- one primary start action.
+
+### G. Snap Home
+- beach/living-world composition
+- five landmarks legible in-world
+- Character + companion medium prominence
+- resume/Ask/Imagination contextual, not dashboard cards.
+
+## 126. Board B task-surface requirements
+
+Ready Daily:
+- almost-flat functional timeline
+- world cues minimal
+- current/next emphasis.
+
+Hide TRACE:
+- task object center
+- Crew WAITING
+- voice/mic affordance visible
+- no hint-before-wait visual cue.
+
+Snap Writing:
+- writing field dominant
+- Crew low-priority contextual
+- voice/hint secondary.
+
+Profile Hub:
+- current Character large
+- Quick Update / Rebuild clearly distinct
+- shared accent preview.
+
+Crew Hub:
+- current relationship/history first
+- roster secondary.
+
+Badge History:
+- meaningful trace/experience first
+- badge grid secondary.
+
+## 127. Candidate visual quality gate
+
+PASS requires:
+- family resemblance without app sameness;
+- strong spatial hierarchy;
+- one dominant action;
+- no generic dashboard/card-wall;
+- no character renderer mismatch;
+- no chibi regression;
+- Ready remains planner-first;
+- Hide remains retrieval-first;
+- Snap remains expression/world-first;
+- Crew and Badge do not become collection/economy systems;
+- shared accent visible but not overpowering;
+- text remains readable at 390×844;
+- actual TTS output remains out of scope.
+
+## 128. High-fi candidate status
+
+READY_FOR_IMAGE_CANDIDATE:
+- Board A 7-surface comparative visual system.
+- Board B 6-surface task/detail system.
+
+NOT_READY_FOR_FINAL_FREEZE:
+- final exact art style
+- production assets
+- exact character likeness assets for a real user photo unless current source photo is supplied in the active conversation
+- Expansion +12/Special Guest final visuals
+- production TTS speech.
+
 END
