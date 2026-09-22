@@ -1,0 +1,32 @@
+{
+  "screen_id": "CHARACTER_PREP",
+  "output": {
+    "one_screen_per_image": true,
+    "device": "iphone_portrait",
+    "multiple_phones": 1,
+    "poster": false
+  },
+  "entities": {
+    "user_character": false,
+    "crew_ids": []
+  },
+  "choice_sets": {
+    "round_1": [
+      "신나고 발랄하게",
+      "따뜻하고 다정하게",
+      "차분하고 똑똑하게"
+    ],
+    "round_2": [
+      "가볍고 활동적인 모습",
+      "편안하고 자연스러운 모습",
+      "조금 더 모험가다운 모습"
+    ]
+  },
+  "features": [
+    "SOURCE_PHOTO_PLACEHOLDER",
+    "SIGNATURE_ITEM"
+  ],
+  "tts": {
+    "actual_speech": false
+  }
+}
