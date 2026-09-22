@@ -50,7 +50,7 @@ Element disposition:
 
 ### SRC-B — 가이드☆ 여섯 친구의 찬란한 여정.png
 Role: Core 6 historical Visual ID / silhouette / apparel / expression lineage.
-Overall status: CORE6 VISUAL LINEAGE / FINAL 1:1 OPEN.
+Overall status: CORE6 VISUAL ID IDENTITY = HARD LOCK / NEW RENDER MATCH = VERIFY PER OUTPUT.
 
 Core 6:
 1. 두비
@@ -70,10 +70,11 @@ ACCEPTED:
 
 REFERENCE_ONLY:
 - age/personality captions as historical descriptive art notes
-- any “PASS / 1:1 verified” text printed inside the image itself.
+- “PASS / 1:1 verified” text printed inside a derivative image when it refers only to that derivative render.
 
-Reason:
-a screenshot is not self-authoritative and current canonical still keeps final 1:1 Visual ID verification OPEN.
+State rule:
+the Core 6 Visual ID identity set is already user-confirmed and HARD LOCK.
+A screenshot is not self-authoritative for a NEW render's match status, but lack of a new-render check does not reopen the underlying Visual ID.
 
 SUPERSEDED / forbidden regressions:
 - 로리→토리 Korean display regression
@@ -320,9 +321,12 @@ Current canonical = PHOTO → ITEM → DIRECTION 1 → DIRECTION 2.
 Resolution: CURRENT CANONICAL WINS; preserve individual SRC-A screen designs, reorder them.
 
 Conflict B:
-SRC-B board prints 1:1 PASS.
-Current canonical says final Core 6 1:1 verification OPEN.
-Resolution: OPEN wins; screenshot PASS is reference text only.
+SRC-B and earlier approval lineage contain Core 6 Visual ID lock/pass evidence.
+A later integration note incorrectly treated missing per-output verification as if the identity set itself were OPEN.
+Resolution:
+- Core 6 Visual ID identity = HARD LOCK.
+- each newly generated derivative/group composition = VERIFY AGAINST LOCKED ID.
+- derivative failure never reopens or replaces the locked identity.
 
 Conflict C:
 some later boards compress Island/Base Camp naming.
@@ -384,7 +388,7 @@ NAV = exact Ready 3-primary architecture.
 ## 10. OPEN after this recovery
 
 OPEN:
-- final Core 6 1:1 Visual ID verification
+- per-output Core 6 render/projection match verification
 - exact wording/axis labels for Direction Round 1 and 2
 - exact Shared Expedition Accent high-fi composition
 - final Ready Weekly actual Planner dataset for a non-synthetic mockup
@@ -412,3 +416,16 @@ No deploy / Netlify / main merge / device PASS.
 
 Think Again, Keep Your Key.
 한 번 더 생각하고, 핵심은 놓치지 마.
+
+
+## 12. Core 6 lock semantics
+
+Canonical distinction:
+- `VISUAL_ID_LOCK` = identity authority. CLOSED / HARD LOCK.
+- `RENDER_MATCH_CHECK` = quality/regression gate for a particular generated asset. Re-run for every new asset.
+
+Never use:
+`new image not yet checked → Visual ID OPEN`.
+
+Use:
+`new image not yet checked → that image UNVERIFIED`.
