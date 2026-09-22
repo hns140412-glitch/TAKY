@@ -48,7 +48,7 @@ Inspect actual prior assets first:
 
 2. `가이드☆ 여섯 친구의 찬란한 여정.png`
    - Core 6 visual lineage
-   - final 1:1 Visual ID verification remains OPEN
+   - Core 6 Visual ID identity set = HARD LOCK; only each newly generated/projection asset requires a separate 1:1 match check
 
 3. `나만의 섬, 더 많은 이야기.png`
    - one persistent island
@@ -132,7 +132,7 @@ Timer is LOCKED and outside current redesign.
 
 - exact prior visual BASE per affected screen
 - exact element-level ACCEPTED vs REFERENCE_ONLY split for recovered old mockups
-- final Core 6 Visual ID 1:1 verification
+- per-output Core 6 render/projection 1:1 match check
 - final corrected onboarding high-fi composition
 - Ready Weekly final high-fi composition
 - downstream Hide / Snap high-fi after family baseline stabilizes
@@ -262,3 +262,16 @@ New exact next execution point:
 → then ONB-02 only after ONB-01 review.
 
 Do not restart source recovery unless new contradictory evidence appears.
+
+
+## 12. CORE 6 VISUAL ID CORRECTION — 2026-09-23
+
+Do not mark the Core 6 Visual ID identity itself OPEN.
+
+Current state:
+- Core 6 identity/Visual ID set = HARD LOCK / RECOVERED USER-CONFIRMED
+- new visual candidate = must be checked against that locked ID
+- candidate mismatch = candidate REJECTED, Visual ID remains LOCKED
+- missing exact asset in the current image-generation context = SOURCE RECOVERY BLOCKER, not permission to invent a new Crew.
+
+This corrects the prior resume wording that incorrectly stated "final Core 6 Visual ID 1:1 verification OPEN."
