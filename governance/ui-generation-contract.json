@@ -1,39 +1,63 @@
 {
-  "version": "TAKY_UI_GENERATION_GATE_V1",
+  "version": "TAKY_UI_GENERATION_GATE_V2_POSITIVE_FIRST",
   "status": "ENFORCED",
   "authority": "C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md",
-  "output": {
-    "one_screen_per_image": true,
+  "philosophy": "REQUIRED_STRUCTURE_FIRST",
+  "output_contract": {
+    "artifact": "SINGLE_IPHONE_SCREEN",
     "device": "iphone_portrait",
-    "baseline_width": 390,
-    "baseline_height": 844,
-    "poster_forbidden": true,
-    "contact_sheet_forbidden": true,
-    "multiple_phones_forbidden": true
+    "baseline": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "family_invariants": {
+    "world": "ONE_SHARED_ISLAND",
+    "explorer_identity": "PERSISTENT_EXPLORER_ID",
+    "crew_identity_source": "CANONICAL_CORE6_OR_APPROVED_EXPANSION",
+    "tts_actual_speech": "HOLD",
+    "history": "PRESERVE"
   },
   "screen_contracts": {
     "CREW_DEPARTURE_SCENE": {
-      "user_character_allowed": false,
-      "crew_policy": "CORE6_ONLY_OR_PLACEHOLDER",
-      "required_crew_ids": [
-        "dooby",
-        "lori",
-        "ink",
-        "nova",
-        "take",
-        "zero"
+      "purpose": "MEET_CORE6_THEN_CHOOSE_PRIMARY_COMPANION",
+      "sequence": [
+        "INTRODUCE_CORE6",
+        "FOCUS_ONE_MEMBER_AT_A_TIME",
+        "PRIMARY_COMPANION_SELECTION"
       ],
-      "forbidden": [
-        "COMPLETED_USER_CHARACTER",
-        "INVENTED_CREW",
-        "POWER_STATS",
-        "RARITY"
+      "entities": {
+        "user_character": "ABSENT",
+        "crew": "CORE6_CANONICAL"
+      },
+      "required_components": [
+        "CORE6_PRESENCE",
+        "FOCUSED_MEMBER_STATE",
+        "SHORT_PERSONALITY_CUE",
+        "PRIMARY_ACTION"
+      ],
+      "allowed_variation": [
+        "environment_composition",
+        "micro_motion",
+        "copy_tone_within_canonical_meaning"
+      ],
+      "open": [
+        "exact_final_art_direction"
       ]
     },
     "CHARACTER_PREP": {
-      "user_character_allowed": false,
-      "crew_policy": "OPTIONAL_CANONICAL_ONLY",
-      "required_choice_sets": {
+      "purpose": "PREPARE_SAME_CHILD_CHARACTER_INPUTS",
+      "sequence": [
+        "SOURCE_PHOTO",
+        "DIRECTION_ROUND_1",
+        "DIRECTION_ROUND_2",
+        "SIGNATURE_ITEM_PERSISTENCE"
+      ],
+      "entities": {
+        "completed_user_character": "ABSENT",
+        "crew": "OPTIONAL_CANONICAL_CONTEXT"
+      },
+      "exact_choice_sets": {
         "round_1": [
           "신나고 발랄하게",
           "따뜻하고 다정하게",
@@ -45,35 +69,67 @@
           "조금 더 모험가다운 모습"
         ]
       },
-      "forbidden": [
-        "COMPLETED_USER_CHARACTER",
-        "PARAPHRASED_DIRECTION_CHOICES",
-        "INVENTED_CREW"
+      "required_components": [
+        "PHOTO_SOURCE",
+        "ROUND_1",
+        "ROUND_2",
+        "SIGNATURE_ITEM"
+      ],
+      "open": [
+        "exact_item_picker_composition"
       ]
     },
     "CHARACTER_REVEAL": {
-      "user_character_allowed": true,
-      "first_completed_character_stage": true,
-      "required_candidate_count": 3,
-      "same_child_required": true,
-      "forbidden": [
-        "CHIBI",
-        "SD_PROPORTION",
-        "DIFFERENT_CHILD_IDENTITIES"
+      "purpose": "FIRST_COMPLETED_CHARACTER_APPEARANCE",
+      "sequence": [
+        "ABC_SHOW",
+        "SELECT_ONE",
+        "OPTIONAL_LIKENESS_CORRECTION",
+        "VISUAL_ID_CONFIRM"
+      ],
+      "entities": {
+        "user_character": "ABC_SAME_CHILD"
+      },
+      "invariants": {
+        "candidate_count": 3,
+        "same_child": true,
+        "natural_child_proportion": true
+      },
+      "required_components": [
+        "A",
+        "B",
+        "C",
+        "SELECTED_CANDIDATE",
+        "LIKENESS_CHECK"
+      ],
+      "open": [
+        "exact_comparison_layout"
       ]
     },
     "SHARED_EXPEDITION_ACCENT": {
-      "user_character_allowed": true,
-      "shared_accent_required": true,
-      "crew_adaptive_apparel_preview": true,
-      "forbidden": [
-        "RECOLOR_CREW_IDENTITY",
-        "RECOLOR_WORLD_GEOGRAPHY"
+      "purpose": "UNIFY_CURRENT_EXPEDITION_PRESENTATION",
+      "sequence": [
+        "COLOR_SELECT",
+        "GROUP_PREVIEW",
+        "CONFIRM"
+      ],
+      "invariants": {
+        "shared_expedition_accent": true,
+        "crew_adaptive_apparel": true,
+        "crew_identity_preserved": true
+      },
+      "required_components": [
+        "COLOR_CHOICES",
+        "USER_CHARACTER_PREVIEW",
+        "PRIMARY_COMPANION_OR_CORE6_PREVIEW"
+      ],
+      "open": [
+        "exact_palette_size"
       ]
     },
     "WORLD_ENTRY": {
-      "user_character_allowed": true,
-      "required_steps": [
+      "purpose": "ENTER_SAME_ISLAND_AND_REACH_READY",
+      "sequence": [
         "VOYAGE_OR_DROP",
         "ISLAND_REVEAL",
         "ISLAND_NAME",
@@ -81,40 +137,53 @@
         "BASE_CAMP_NAME",
         "READY_HANDOFF"
       ],
-      "forbidden": [
-        "NEW_CHARACTER_GENERATION",
-        "FEATURE_DASHBOARD",
-        "REWARD_SCREEN"
+      "required_components": [
+        "ENTRY_MODE",
+        "ISLAND",
+        "ISLAND_NAME",
+        "BASE_CAMP",
+        "BASE_CAMP_NAME",
+        "READY_DESTINATION"
+      ],
+      "open": [
+        "transition_choreography"
       ]
     },
     "READY_WEEKLY": {
-      "user_character_allowed": true,
-      "character_priority": "OPTIONAL",
-      "planner_first": true,
-      "required": [
+      "purpose": "COMPACT_WEEK_ORIENTATION",
+      "hierarchy": [
+        "PLANNER",
+        "BASE_CAMP_CONTEXT",
+        "OPTIONAL_CHARACTER"
+      ],
+      "required_components": [
         "MON_SUN",
         "FIXED_COMMITMENT",
         "PLANNER_DATED_TODO",
         "FREE_WINDOW",
         "TODAY_MARKER"
       ],
-      "forbidden": [
-        "PERSISTENT_BOTTOM_NAV_INVENTION",
-        "TIMER_REDESIGN",
-        "PASTEL_CARD_WALL",
-        "MAP_FIRST",
-        "GENERIC_REWARD_STARS"
+      "semantic_distinction": {
+        "fixed_commitment": "TIME_ANCHORED",
+        "planner_todo": "ACTIONABLE_TASK",
+        "free_window": "OPEN_TIME"
+      },
+      "allowed_variation": [
+        "schedule_plane_geometry",
+        "base_camp_background_crop",
+        "today_emphasis"
+      ],
+      "open": [
+        "exact_high_fi_composition"
       ]
     }
   },
-  "global_forbidden": [
-    "INVENTED_CREW",
-    "INVENTED_PERSISTENT_BOTTOM_NAV",
-    "TIMER_REDESIGN",
-    "GENERIC_REWARD_STARS",
-    "ACTUAL_TTS_CLAIM",
-    "POSTER_LAYOUT",
-    "MULTI_PHONE_BOARD"
+  "critical_regression_locks": [
+    "DO_NOT_CHANGE_EXPLORER_ID",
+    "DO_NOT_SUBSTITUTE_NONCANONICAL_CREW",
+    "DO_NOT_SHOW_COMPLETED_USER_CHARACTER_BEFORE_CHARACTER_REVEAL",
+    "DO_NOT_REDESIGN_LOCKED_TIMER",
+    "DO_NOT_ENABLE_ACTUAL_TTS_SPEECH_WHILE_HOLD"
   ],
-  "generation_rule": "NO_VALIDATOR_PASS_NO_IMAGE_GENERATION"
+  "generation_rule": "REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION"
 }
