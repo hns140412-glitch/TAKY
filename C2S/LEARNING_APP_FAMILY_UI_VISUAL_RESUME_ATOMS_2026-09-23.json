@@ -1,0 +1,67 @@
+{
+  "id": "LEARNING_APP_FAMILY_UI_VISUAL_RESUME_ATOMS_2026-09-23",
+  "status": "C2S_EVIDENCE_ATOMS_NOT_GLOBAL_AUTHORITY",
+  "parent": "C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md",
+  "atoms": [
+    {
+      "id": "UIR-001",
+      "type": "DECISION",
+      "statement": "재개준비 includes C2S capture, correction propagation, CLOSED/OPEN split, CURRENT snapshot, next execution point, and handoff/new-chat prompt.",
+      "disposition": "PRESERVE"
+    },
+    {
+      "id": "UIR-002",
+      "type": "CORRECTION",
+      "statement": "Current visual task is delta-edit of the best existing base, not greenfield redesign.",
+      "disposition": "CORRECT"
+    },
+    {
+      "id": "UIR-003",
+      "type": "CORRECTION",
+      "statement": "Recent generic poster, invented-character, placeholder-wireframe, and crop-overlay outputs are rejected as visual baselines.",
+      "disposition": "SUPERSEDE"
+    },
+    {
+      "id": "UIR-004",
+      "type": "REQUIREMENT",
+      "statement": "Recover actual prior source assets and identify exact BASE + DELTA MAP before any new visual generation.",
+      "disposition": "PRESERVE"
+    },
+    {
+      "id": "UIR-005",
+      "type": "REQUIREMENT",
+      "statement": "Do not use the user as a regression/debug detector for known criteria.",
+      "disposition": "PRESERVE"
+    },
+    {
+      "id": "UIR-006",
+      "type": "REQUIREMENT",
+      "statement": "Onboarding preserves crew familiarity, primary companion, character formation, shared expedition accent, Voyage/Drop, island discovery/name, Base Camp move/name, Ready entry.",
+      "disposition": "PRESERVE"
+    },
+    {
+      "id": "UIR-007",
+      "type": "REQUIREMENT",
+      "statement": "Ready Weekly is planner-first with fixed commitments, DATED TODO, free windows, today marker, and before-school items when present.",
+      "disposition": "PRESERVE"
+    },
+    {
+      "id": "UIR-008",
+      "type": "OPEN",
+      "statement": "Exact prior visual BASE and element-level accepted properties must be recovered before next mockup.",
+      "disposition": "OPEN"
+    },
+    {
+      "id": "UIR-009",
+      "type": "OPEN",
+      "statement": "Core 6 final Visual ID 1:1 verification remains incomplete.",
+      "disposition": "OPEN"
+    },
+    {
+      "id": "UIR-010",
+      "type": "STRATEGY",
+      "statement": "Do not react to regression by proliferating prohibition clauses; preserve positive product structure and source lineage.",
+      "disposition": "PRESERVE"
+    }
+  ]
+}
