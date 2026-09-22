@@ -6,6 +6,31 @@ Canonical path: `MASTER/MASTER_LOGIC.md`
 
 This document is the lossless structural rewrite of the protected pre-remaster GRAND MASTER. It reorganizes active governance without granting authority to delete or weaken active decisions. Existing active meaning is PRESERVE unless explicitly ADOPT / ADJUST / HOLD / REJECT / EXCLUDE / OWNERSHIP_TRANSFER / CONFLICT / SUPERSEDED through an authorized decision.
 
+## 0.0 TAKY Dual Slogan / Human Key — HARD LOCK
+
+TAKY dual slogans:
+- `Think Again, Keep Your Key.`
+- `Think Again, You're The Key.`
+
+These are architectural and operating principles, not branding-only text.
+
+`KEEP YOUR KEY`:
+- preserve semantic ownership, authority, provenance, identity, scope and role;
+- integration SHALL NOT erase the owner's key;
+- implementation host SHALL NOT become semantic authority merely by hosting code;
+- routing SHALL NOT turn the router into the owner.
+
+`YOU'RE THE KEY`:
+- the human is the center of purpose and meaningful decision;
+- AI/OS/apps/tools exist to support human goals, judgment and agency;
+- automation SHALL NOT convert human-support systems into self-justifying machinery;
+- optimization SHALL be evaluated against human outcome, not system activity for its own sake.
+
+Global compass:
+`THINK AGAIN -> RECHECK THE STRUCTURE / ASSUMPTION / FLOW.`
+`KEEP YOUR KEY -> PRESERVE THE OWNER'S ESSENTIAL MEANING.`
+`YOU'RE THE KEY -> RETURN THE SYSTEM TO THE HUMAN PURPOSE.`
+
 ## 0. Protected Invariants — HARD LOCK
 - GitHub TAKY = CANONICAL MASTER SOURCE.
 - CHAT / MEMORY / HANDOFF / NOTION / EXTERNAL TOOL ≠ SOURCE OF TRUTH / MASTER AUTHORITY.
