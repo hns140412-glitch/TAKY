@@ -290,3 +290,81 @@ Before any new mockup or UI implementation:
 5. update this registry when a new decision crosses app boundaries.
 
 END
+
+
+## 11. 2026-09-22 integrated UI decision delta — Hide / shared island / records
+
+### FAMILY_LOCKED additions
+- fixed-island topology remains one persistent island; app regions are not separate worlds.
+- onboarding continuity:
+  CHARACTER / EXPLORER BUILD
+  → TRAVEL-PREPARATION / CREW BUILD
+  → DROP OR VOYAGE
+  → ENTER FIXED ISLAND
+  → NAME ISLAND
+  → ENTER READY BASE CAMP
+  → NAME BASE CAMP
+  → CONTINUE THROUGH SAME ISLAND.
+- island name and base-camp name are editable later.
+- renaming island/base-camp never resets learning history, Planner, badges, crew relationship, Explorer_ID, island geography, or app-region placement.
+- Ready & Set = Base Camp / Island Map.
+- Hide & Seek = Jungle / Waterfall.
+- Snap & Pop = Beach.
+- current Explorer and companion continuity crosses regions.
+- app switching should visually read as movement within one island, not launching unrelated worlds.
+- shared badge award may appear as a dedicated cross-app overlay/window in Ready / Hide / Snap at meaningful transitions.
+- badge/calendar history must never become streak-pressure or punitive absence tracking.
+
+### HIDE LOCKED additions
+- Hide learner-facing IA is TRACE / LINK / PIECE / CATCH and is NOT a mandatory linear projection of Runtime V2 internal states.
+- first TRACE = NEW-only.
+- review TRACE is a distinct review-play variant and may mix prior / re-hidden / weakness-priority items.
+- LINK = verified principle/relationship → related-choice discrimination → mixed tap-based connection test.
+- PIECE = final missing critical-structure completion, generalized beyond English.
+- CATCH = cumulative treasure/record space containing item history, Badge Book, Calendar, item detail, and contextual Memory Ladder.
+- Memory Ladder is contextual, not a required bottom tab.
+- primary Hide bottom navigation candidate: HOME / 홈, EXPLORE / 탐험, CATCH / 보물함.
+- Hide Home is a Jungle/Waterfall regional base point, not the whole-island map.
+- Home states:
+  1) no confirmed set → acquire clues/homework source;
+  2) clue review → OCR/review/correction/merge/exclude;
+  3) set ready → show actual learning set and launch learning.
+- when Ready Planner provides an explicit target/set, Hide shows that target.
+- when no Ready target exists, Hide default child-facing set may show confirmed English vocabulary 12.
+- confirmed English 12 should be visible as a wordbook-like translucent tile/slip board; preferred initial study is 3×4 on 390×844, subject to visual QA.
+- homework/photo intake is framed as acquiring clues, not technical file upload.
+- crew appearance slots in Hide: pre-start companion / walkie-talkie / context reaction / LINK support / PIECE support / CATCH-badge reaction / completion.
+- crew remains companion, not teacher/grader/answer engine.
+- badge book is growth/history, not score/power.
+- calendar is date-oriented learning history, not streak.
+- cumulative English lexical/sense history survives mission boundaries and can later feed review.
+
+### HIDE LOCK_CANDIDATE visual direction
+- fixed island world/environment is the visual anchor; app surfaces must preserve regional continuity.
+- environment is high-density and spatial; UI floats over it rather than replacing it with card walls.
+- translucent learning panels/wordbook slips are preferred over opaque dashboard tiles where legibility permits.
+- visual reference direction: commercial game main-screen composition with deep environment, layered depth and restrained overlays; do NOT copy a copyrighted game's exact art/style/assets.
+- character/explorer must share the island's lighting/material/detail language and must not read as a separate glossy doll/avatar-maker render pasted over the world.
+- final Explorer visual ID is supplied by the separate character/travel-preparation workflow and consumed through runtime identity slots.
+
+### HIDE SUPERSEDED / forbidden
+- mandatory child-facing FIRST FIND → MEANING CLUE → CONNECTION TRAIL → HIDDEN WORDS → FINAL SEEK → SEEK AGAIN as the UI IA.
+- Hide drawing a new/random island or unrelated forest background per screen.
+- hard-coded character art replacing character_id/Explorer_ID continuity.
+- treating the learner avatar as an Exploration Crew member.
+- glossy card-wall / generic dashboard treatment that obscures the fixed island environment.
+
+### Cross-app propagation
+- fixed-island onboarding/naming/rename invariants: YES / FAMILY_LOCKED.
+- Ready/Hide/Snap region placement: YES / FAMILY_LOCKED.
+- cross-app badge award overlay semantics: YES / FAMILY_LOCKED; exact visual treatment remains app/family UI review.
+- Hide TRACE/LINK/PIECE/CATCH composition: REFERENCE_ONLY.
+- Hide 12-word translucent wordbook board: REFERENCE_ONLY / Hide-local.
+- high-density environment + translucent overlay composition: LOCK_CANDIDATE reference for family visual synthesis, not final family visual lock.
+
+### Remaining OPEN
+- final family-wide art direction and exact rendering language.
+- exact island pixel topology / landmark geometry.
+- exact transition choreography between Ready map and specialist regions.
+- exact badge-overlay art treatment and cadence.
+- final physical-device visual QA.
