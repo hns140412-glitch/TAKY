@@ -465,3 +465,173 @@ Required contracts:
 - PLANNER_REPLAN_EVENT_V1
 
 Planner separation state: ARCHITECTURE_CORRECTED / CANONICAL_APPLICATION_PENDING / IMPLEMENTATION_EXTRACTION_NOT_STARTED
+
+
+## 12. User correction — Apps consume multiple independent OS/domain services
+Date: 2026-09-22
+Disposition: CORRECTION / ARCHITECTURE MODEL EXPANSION
+
+User correction:
+Ready & Set / Hide & Seek / Snap & Pop must not be modeled as the primary system center.
+There are multiple independent OS/domain services.
+Apps consume, share through governed contracts, and return events/evidence to those services.
+
+### Corrected conceptual model
+
+TAKY is governance/orchestration.
+Below TAKY are multiple first-class OS/domain-service owners.
+Apps are execution/projection surfaces.
+
+Candidate structure:
+
+```
+TAKY
+├─ SHARED_TECHNICAL_CAPABILITY
+│  └─ semantic-light infrastructure mechanisms
+│
+├─ WORK_OS
+│
+├─ LEARNING_OS
+│  ├─ LEARNING_IDENTITY / AUTHORITY
+│  ├─ ASSIGNMENT_FACT_DOMAIN
+│  ├─ LEARNING_ENGINE
+│  ├─ PLANNER_ENGINE
+│  ├─ LEARNING_HISTORY / EVIDENCE
+│  └─ LEARNING_APP_FAMILY CONTRACTS
+│
+├─ CHARACTER / VISUAL ID SERVICE
+│  └─ independent identity-visualization capability with scoped learning-family integration
+│
+├─ EXPERIENCE / WORLD / EXPANSION SERVICES
+│  └─ intro / world-entry / optional narrative experiences
+│
+└─ PROJECT / DOMAIN SERVICES AS NEEDED
+```
+
+The exact promotion of CHARACTER/WORLD to OS vs domain-service vs family-capability remains subject to owner analysis.
+The key lock is that they are NOT implicitly subordinate to Ready.
+
+### App role
+
+```
+READY_SET
+- consumes Planner plan projection
+- consumes Learning Engine context
+- consumes scoped Learning Identity
+- may consume Character Visual ID projection
+- executes TODAY / Mission / Focus / Result
+- emits progress/result/time/help/check events
+
+HIDE_SEEK
+- consumes Learning Engine language-memory context
+- consumes scoped plan/task context when scheduled
+- may consume Character/experience projections
+- executes retrieval/memory specialist work
+- emits memory/retrieval evidence
+
+SNAP_POP
+- consumes Learning Engine production/expression context
+- consumes scoped plan/task context when scheduled
+- owns exploration-crew product semantics where applicable
+- executes expression/exploration work
+- emits production/expression evidence
+```
+
+Apps do not directly mutate each other's semantic state.
+
+### Exchange rule
+
+Correct pattern:
+`OWNER SERVICE -> VERSIONED PROJECTION/COMMAND -> APP -> EVENT/EVIDENCE -> OWNER SERVICE`
+
+Cross-app sharing occurs through:
+- shared domain owner,
+- family contract,
+- explicit projection/event,
+not through implicit shared mutable app state.
+
+Examples:
+```
+ASSIGNMENT_FACT -> PLANNER
+LEARNING_ENGINE -> PLANNER
+PLANNER -> READY/HIDE/SNAP
+LEARNING_ENGINE -> READY/HIDE/SNAP
+READY/HIDE/SNAP -> LEARNING_HISTORY
+READY/HIDE/SNAP -> PLANNER progress
+LEARNING_HISTORY -> LEARNING_ENGINE
+CHARACTER_VISUAL_ID -> READY/HIDE/SNAP projection
+```
+
+### Horizontal service composition
+
+A task may consume multiple services at once.
+
+Example:
+```
+ASSIGNMENT FACT
+ + LEARNING ENGINE interpretation
+ + PLANNER placement
+ + CHARACTER projection
+ + FAMILY session contract
+ -> READY execution
+
+execution result
+ -> PLANNER progress/replan
+ -> LEARNING HISTORY
+ -> LEARNING ENGINE adaptation
+```
+
+Therefore:
+`ONE APP != ONE OWNER STACK`
+`APP != OS`
+`APP REPOSITORY != DOMAIN AUTHORITY`
+`SHARED THROUGH CONTRACT != SHARED MUTABLE OWNERSHIP`
+
+### Required architecture correction
+
+The machine-readable owner map must eventually support:
+1. vertical ownership hierarchy;
+2. horizontal dependency/consumption edges;
+3. event/projection return paths;
+4. distinction between semantic owner, runtime host, UI host, and implementation repository;
+5. service-to-app many-to-many relationships.
+
+A pure tree is insufficient.
+Target representation should be an ownership graph.
+
+Suggested edge types:
+- OWNS
+- CONSUMES
+- PUBLISHES_PROJECTION
+- ACCEPTS_EVENT
+- ROUTES_TO
+- COORDINATES
+- IMPLEMENTED_IN
+- HOSTED_BY
+- FEDERATES_WITH
+- MUST_NOT_MUTATE
+
+### Consequence for current Ready/Hide/Snap surgery
+
+Ready:
+- remove semantic ownership assumptions for Planner/Learning/Assignment/Family authority.
+- retain execution UX and adapters.
+
+Hide:
+- retain specialist language-memory semantics.
+- consume plan/learning projections without scheduling authority.
+
+Snap:
+- retain expression/exploration semantics.
+- consume plan/learning projections.
+- exploration-crew ownership remains Snap-origin unless explicitly transferred.
+
+Planner/Learning/Identity/Character:
+- develop and validate independently where their semantics are cross-app.
+- integrate by versioned contracts.
+
+Status:
+ARCHITECTURE_GRAPH_CORRECTION = IDENTIFIED
+TREE_ONLY_MODEL = INSUFFICIENT
+CANONICAL_OWNER_MAP_UPDATE = PENDING
+APP_EXTRACTION = NOT_STARTED
