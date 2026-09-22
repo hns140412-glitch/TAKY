@@ -3519,4 +3519,371 @@ so the child can see the shared expedition color before confirming.
 This supersedes the prior rule that Crew apparel must never change color.
 Only identity-defining color features remain locked.
 
+
+## 109. LOW-FI CRITIQUE CLOSURE — Profile / Crew History / Badge entry hierarchy
+
+### 109.1 Family entry hierarchy
+
+Shared secondary systems must not each become a permanent top-level tab across all apps.
+
+Canonical hierarchy:
+
+`PROFILE HUB`
+→ current Character
+→ Quick Update
+→ Profile Rebuild
+→ Shared Expedition Accent
+→ Character version history
+
+`CREW HUB`
+→ current Primary Companion
+→ recent shared memories
+→ known friends
+→ friend detail / rename / travel together
+→ discovered/Special encounter history
+
+`BADGE HISTORY HUB`
+→ recent meaningful traces
+→ memorable experiences
+→ grown badges
+→ all badges
+→ badge detail / linked record / share
+
+Entry principle:
+- Profile = identity management
+- Crew = relationship/history
+- Badge = experience/history
+- none of these is a score/reward/equipment system.
+
+### 109.2 Primary access model
+
+FAMILY_LOCK_CANDIDATE:
+- one shared secondary `ME / 나` entry or equivalent profile access point is preferred for Profile + Crew + Badge history.
+- exact label/icon remains visual-review dependent.
+- child-facing apps may expose contextual shortcuts, but no app becomes sole owner.
+
+Preferred structure:
+
+`ME / 나`
+- 내 캐릭터
+- 탐험대
+- 배지/기록
+
+Reason:
+these systems persist across Ready / Hide / Snap and should not feel app-owned.
+
+### 109.3 App-local shortcut rule
+
+Ready may shortcut:
+- Profile
+- current companion
+- recent badge/history
+from secondary settings/profile access only.
+
+Hide may shortcut:
+- Crew memory from CATCH
+- Badge Book preview from CATCH
+but must route to shared semantics.
+
+Snap may shortcut:
+- Crew relationship surface
+- Growth/record-linked badge preview
+but Snap local Growth/Wish remains distinct.
+
+No app may:
+- duplicate full shared Profile settings
+- create a separate incompatible Crew roster
+- create a local canonical Badge catalog.
+
+## 110. Profile Hub low-fi closure
+
+```
+┌──────────────────────────────┐
+│ 나 / 프로필                   │
+│                              │
+│ [Current Character large]     │
+│ [Primary Companion small]     │
+│                              │
+│ [사진/모습 빠른 업데이트]      │
+│ [프로필 다시 만들기]          │
+│ [탐험 색 바꾸기]              │
+│                              │
+│ 예전 모습 보기                │
+└──────────────────────────────┘
+```
+
+Rules:
+- Quick Update and Rebuild are visually distinct.
+- Rebuild is not destructive reset.
+- “예전 모습” = Character version history, not duplicate profile.
+- Shared Expedition Accent can be changed independently without full rebuild if desired.
+- accent preview includes Character + current companion; Core 6 lineup optional.
+
+Status:
+PROFILE_HUB = HIGH_FI_CANDIDATE
+Exact visual styling = OPEN.
+
+## 111. Crew Hub low-fi closure
+
+```
+┌──────────────────────────────┐
+│ 탐험대                        │
+│                              │
+│ 지금 같이 다니는 친구         │
+│ [Primary Companion]           │
+│                              │
+│ 최근 같이 있었던 일           │
+│ [Episode / memory snippets]   │
+│                              │
+│ 다시 만나고 싶은 친구         │
+│ [Known friends horizontal]    │
+│                              │
+│ [전체 친구 보기]              │
+└──────────────────────────────┘
+```
+
+Friend detail:
+```
+[friend portrait / current adaptive outfit]
+[canonical/current name]
+[처음 만난 날]
+[함께한 일]
+[기억나는 장면]
+[같이 있던 배지/기록]
+[같이 다니기]
+[이름 바꾸기]
+```
+
+Rules:
+- current relationship first, catalog second.
+- no rarity slots.
+- no power/stat.
+- Special Guest undiscovered = story clue, not locked collectible silhouette.
+- adaptive outfit color follows current SHARED_EXPEDITION_ACCENT where allowed.
+- historical episode art may retain historical accent/version when provenance matters.
+
+Status:
+CREW_HUB = HIGH_FI_CANDIDATE
+SPECIAL_GUEST_DETAIL = OPEN where roster/evidence incomplete.
+
+## 112. Badge History Hub low-fi closure
+
+```
+┌──────────────────────────────┐
+│ 배지와 흔적                   │
+│                              │
+│ 최근 남긴 흔적                │
+│ [recent meaningful event]     │
+│                              │
+│ 기억에 남는 경험              │
+│ [experience-linked badges]    │
+│                              │
+│ 성장한 배지                   │
+│ [progressed canonical badges] │
+│                              │
+│ [전체 배지 보기]              │
+└──────────────────────────────┘
+```
+
+Badge detail:
+```
+[Badge art]
+[name / tier / star grade]
+[왜 생겼는지]
+[언제 / 어디서]
+[당시 Character version]
+[함께한 Crew / episode]
+[연결된 기록 보기]
+[공유 optional]
+```
+
+Rules:
+- history/context before total count.
+- no missing-slot pressure.
+- no completion percentage.
+- no rarity.
+- no Wish Gem.
+- no generic Ready star.
+
+Status:
+BADGE_HISTORY_HUB = HIGH_FI_CANDIDATE
+FINAL_BADGE_COLLECTION_ART = OPEN.
+
+## 113. Cross-app entry projection
+
+### Ready
+
+Primary remains exactly:
+- 이번 주 여정
+- 오늘의 탐험길
+- Timer.
+
+Shared secondary entry:
+- Profile/Me access from existing secondary shell/settings/profile affordance.
+- no persistent fourth primary tab added solely for Profile/Crew/Badge.
+
+Contextual:
+- Weekly/Daily may show small current Character/Companion.
+- canonical Badge acknowledgement may appear after a relevant event.
+- Profile rebuild never starts accidentally from planner content.
+
+### Hide
+
+Primary IA remains:
+- Home
+- Explore
+- CATCH.
+
+CATCH may host contextual shortcuts:
+- Crew memory
+- Badge history preview
+- episode/history.
+
+But:
+- full Crew identity/history authority is shared.
+- full Badge canonical authority is shared.
+- Profile rebuild remains shared Profile Hub, not Hide local.
+
+### Snap
+
+Snap may expose:
+- Crew Hub shortcut from companion/secondary menu.
+- Badge/history via records/growth context.
+- Profile through shared Profile Hub.
+
+Must preserve:
+- Wish economy remains local and separate.
+- Growth != Badge.
+- Crew Hub != character inventory.
+
+## 114. Character/Crew scale continuity contract
+
+Across Formation → Ready → Hide → Snap:
+
+User Character relative prominence:
+- Formation: protagonist / large
+- Ready Weekly/Daily: optional small–medium
+- Hide Home: small–medium
+- Hide task screens: small/contextual
+- Snap Home: medium
+- Snap Writing: small/contextual
+- Profile Hub: large
+- Badge historical detail: event-dependent.
+
+Primary Companion:
+- Formation selection: large
+- Home/world surfaces: medium
+- task surfaces: small
+- Crew Hub/detail: large.
+
+Core rule:
+A character should never appear to “change species/style/proportion” simply because app region changed.
+
+## 115. Shared Expedition Accent propagation closure
+
+Current accent is family presentation state.
+
+Applies to current/future projections:
+- user hoodie/accent
+- Crew THEME_ADAPTIVE apparel zones
+- expedition patches/trim
+- selected shared/profile UI accents.
+
+Does NOT automatically recolor:
+- old historical event artwork
+- Badge art identity layer if historical snapshot uses event-time appearance
+- Crew LOCKED_IDENTITY_COLORS
+- island geography.
+
+When Profile Rebuild changes accent:
+- all current app surfaces resolve to the new accent.
+- historical detail may preserve event-time accent.
+- no learning/history state resets.
+
+## 116. High-fi eligibility matrix after critique closure
+
+### ENTER HIGH-FI CANDIDATE
+
+Character Formation:
+- CREW_DEPARTURE_SCENE
+- CHARACTER_PREP_SCENE
+- CHARACTER_REVEAL_SCENE
+- WORLD_ENTRY_SEQUENCE
+
+Shared:
+- PROFILE_HUB
+- CREW_HUB
+- BADGE_HISTORY_HUB shell/detail structure
+
+Ready:
+- WEEKLY
+- DAILY
+- Timer connection only; Timer itself remains existing visual lock.
+
+Hide:
+- HOME
+- TRACE
+- LINK
+- PIECE
+- CATCH core composition.
+
+Snap:
+- HOME
+- WRITING
+- ASK
+- UNDERSTAND
+- IMAGINATION
+- RESULT
+- RECORDS core composition.
+
+### REMAIN OPEN / PARTIAL
+
+- exact family art/render system V3+
+- age/proportion calibration bands
+- missing Core 6 Personality Pack details
+- Expansion +12 actual identities/assets
+- Special Guest final roster/cadence
+- final shared Me/Profile icon/label
+- Snap final persistent primary navigation
+- exact transition animation choreography
+- final Badge art asset set
+- production TTS speech.
+
+## 117. High-fi generation gate
+
+A screen may enter high-fi only if:
+
+1. screen purpose is closed;
+2. owner is closed;
+3. state/event/persistence mapping exists;
+4. Character/Crew role is explicit;
+5. Shared Expedition Accent behavior is explicit where visible;
+6. non-happy states exist;
+7. app-specific job remains primary;
+8. no legacy/superseded reward/ownership rule returns;
+9. TTS actual speech is not falsely treated as completed;
+10. generated visual is treated as candidate until human review.
+
+## 118. Low-fi critique closure verdict
+
+FAMILY_LOW_FI_LOGIC = CLOSED_FOR_CURRENT_SCOPE
+
+Meaning:
+- shared identity/history systems now have entry hierarchy;
+- Character Formation is consolidated into four major scenes;
+- Ready / Hide / Snap primary jobs remain distinct;
+- Profile Rebuild permits full reselection without history loss;
+- Shared Expedition Accent unifies current Character + adaptive Crew apparel;
+- Crew and Badge remain relationship/history systems rather than inventory/reward systems.
+
+This does NOT mean:
+- final visual frozen;
+- high-fi approved;
+- code implemented;
+- device verified;
+- TTS solved.
+
+Next:
+HIGH-FI CANDIDATE pass should begin from the four Formation scenes and the three app entry/home surfaces together so the family visual system is judged comparatively, not app-by-app in isolation.
+
 END
