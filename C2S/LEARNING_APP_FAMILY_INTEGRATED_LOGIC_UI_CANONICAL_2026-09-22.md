@@ -4184,4 +4184,175 @@ NOT_READY_FOR_FINAL_FREEZE:
 - Expansion +12/Special Guest final visuals
 - production TTS speech.
 
+
+## 129. User correction — Generated High-fi candidate regression
+
+The previous generated candidate is REJECTED as authority.
+
+### 129.1 Character Formation duplication
+
+FAIL:
+- screen 3 and screen 4 both behaved as character reveal/confirmation;
+- final Character appeared too early;
+- the flow collapsed distinct decision atoms.
+
+Correction:
+- user Character MUST NOT appear before A/B/C reveal.
+- Character Prep uses photo source + Signature Item + two direct direction choices only.
+- Character Reveal is the FIRST point where completed A/B/C character candidates appear.
+- World Entry is not another Character confirmation screen.
+
+### 129.2 Exact direction-selection contract — RESTORED
+
+The child makes exactly TWO direct choices.
+
+ROUND 1 — choose 1 of 3:
+1. 신나고 발랄하게
+2. 따뜻하고 다정하게
+3. 차분하고 똑똑하게
+
+ROUND 2 — choose 1 of 3:
+1. 가볍고 활동적인 모습
+2. 편안하고 자연스러운 모습
+3. 조금 더 모험가다운 모습
+
+Then:
+- system creates an automatic contrast direction;
+- system composes A/B/C;
+- A/B/C = same child, different direction;
+- child does NOT directly choose three moods/categories;
+- do not replace the exact 3-choice sets with generic labels such as lively/curious/warm/bold/focused/imaginative.
+
+### 129.3 Signature Item order
+
+Current source recovery confirms Character Core order:
+PHOTO
+→ DIRECTION ROUND 1
+→ DIRECTION ROUND 2
+→ SYSTEM AUTO-CONTRAST
+→ SIGNATURE ITEM one persistent item where required
+→ A/B/C
+→ SELECT
+→ LIKENESS CORRECTION
+→ VISUAL ID LOCK.
+
+However, whole onboarding lineage also contains an earlier narrative order:
+PHOTO
+→ ITEM
+→ MOOD
+→ CHARACTER.
+
+Disposition:
+- LOGIC authority for current Character Core = direction choices before A/B/C;
+- Signature Item MUST persist across all A/B/C;
+- exact visual placement of item selection may be before or between direction steps only if it does not alter the two-choice contract.
+- current High-fi candidate should avoid inventing a contradictory new sequence.
+
+### 129.4 Exploration color is a distinct post-Character step
+
+After Character confirmation:
+`SHARED_EXPEDITION_ACCENT`
+
+The selected color applies to:
+- user Character hoodie/accent
+- approved Crew adaptive hoodie/outfit zones
+- shared expedition gear accents.
+
+This is a separate choice from mood/direction.
+It must not be omitted.
+
+### 129.5 World-entry steps must not be omitted
+
+After Character + exploration color:
+- Voyage / Drop selection
+- island discovery/reveal
+- island naming
+- Base Camp movement
+- Base Camp naming
+- Ready entry.
+
+These may be visually grouped into a continuous sequence, but the semantic decisions must remain visible and recoverable.
+
+## 130. Ready Weekly — regression correction
+
+Previous generated Weekly candidate is REJECTED.
+
+FAIL observed:
+- generic school/academy mock schedule invented as if authoritative;
+- dense 7-column tile grid became a pastel card wall;
+- free time / fixed commitments / Planner TODO distinction depended mainly on color;
+- bottom navigation was invented;
+- Base Camp/world artwork competed with the planner;
+- “이번 주 여정” became decorative rather than compact schedule-first;
+- demo content did not clearly mark itself as MOCKUP_ONLY / SYNTHETIC;
+- pre-school task coverage was not deliberately stress-tested.
+
+Correct Weekly contract:
+
+`PLANNER FIRST → BASE CAMP SECOND → CHARACTER OPTIONAL`
+
+Required:
+- Mon–Sun compact overview
+- fixed commitments
+- Planner DATED TODO
+- meaningful free windows
+- today marker
+- before-school task when demo/runtime contains one
+- selected day → Daily
+- synthetic data clearly non-authoritative.
+
+Visual semantics must distinguish schedule types by more than color:
+- FIXED COMMITMENT = time-anchored line/block grammar
+- PLANNER DATED TODO = actionable task grammar
+- FREE WINDOW = open-space/light grammar
+- COMPLETED = subdued but legible state.
+
+Forbidden:
+- invented persistent bottom nav
+- RPG map-first weekly
+- seven opaque pastel columns/cards covering the world
+- generic “school every weekday” sample treated as user fact
+- character or Crew dominating the planner
+- generic reward stars.
+
+## 131. Revised High-fi candidate sequence
+
+For next iPhone-ratio candidate set, show these in order:
+
+1. CREW INTRO / SELECT
+   - no user Character
+   - Core 6 only
+
+2. CHARACTER PREP
+   - source photo placeholder
+   - ROUND 1 exact 3 choices
+   - ROUND 2 exact 3 choices
+   - Signature Item persistence
+   - NO completed user Character
+
+3. CHARACTER REVEAL
+   - first appearance of A/B/C same-child candidates
+   - select one
+   - optional likeness correction
+   - final Visual ID confirmation
+
+4. EXPLORATION COLOR
+   - user Character + current companion/Core 6 preview
+   - shared hoodie/outfit accent updates
+
+5. WORLD ENTRY
+   - Voyage / Drop
+   - island reveal
+   - island name
+   - Base Camp move/name
+   - Ready handoff
+
+6. READY WEEKLY
+   - compact planner-first weekly
+   - translucent Base Camp context
+   - no invented nav
+   - semantic schedule-type distinction
+
+Do not compress 3–5 into duplicate Character screens.
+
 END
