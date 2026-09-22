@@ -4493,4 +4493,25 @@ Regenerate only in this order, one iPhone screen per image:
 Do not proceed to the next image until the previous image is checked against Section 132.
 
 
+
+## 134. Executable UI Generation Gate
+
+Markdown review alone is insufficient. The following executable controls are now part of TAKY governance:
+
+- `governance/ui-generation-contract.json` — machine-readable allowed/forbidden screen contract
+- `scripts/validate_ui_generation.py` — validator
+- `.github/workflows/ui-generation-gate.yml` — CI gate
+- `ui-generation-requests/*.json` — mandatory pre-generation manifests
+
+Hard process:
+`CANONICAL → GENERATION MANIFEST → VALIDATOR PASS → IMAGE GENERATION → POST-GENERATION REGRESSION REVIEW`
+
+If validation fails:
+`NO IMAGE GENERATION`.
+
+For ChatGPT image-generation work, the assistant must not call image generation until the current screen's manifest satisfies the validator contract.
+The generated image is still a candidate and must be checked after generation; a valid prompt cannot guarantee image-model compliance.
+
+This executable gate supplements, not replaces, the integrated canonical.
+
 END
