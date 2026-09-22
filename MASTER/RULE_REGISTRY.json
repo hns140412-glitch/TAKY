@@ -1,7 +1,12 @@
 {
-  "registry_version": "2026-09-21.2",
+  "registry_version": "2026-09-22.1",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
+    {
+      "rule_id": "TKY-GUIDING-001",
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "scope": "global TAKY dual-slogan execution cycle: human intent/outcome -> think again -> keep the key -> find a way/solve -> human-key evaluation -> verify/correct/continue; blocker recovery without shifting operational burden to the user"
+    },
     {
       "rule_id": "TKY-INTENT-001",
       "owner": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
