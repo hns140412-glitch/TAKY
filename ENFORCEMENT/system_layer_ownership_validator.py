@@ -9,7 +9,9 @@ fail = []
 
 layers = data.get("layers") or {}
 required_layers = {
-    "TAKY_CORE","SHARED_TECHNICAL_CAPABILITY","WORK_OS","LEARNING_OS",
+    "TAKY_CORE","TAKY_RUNTIME_ORCHESTRATOR","SHARED_TECHNICAL_CAPABILITY",
+    "WORK_OS","WORK_IDENTITY_AUTHORITY","WORK_PROJECT_COORDINATION","WORK_SOURCE_CONTINUITY",
+    "WORK_MAIL_OPERATIONS","WORKSPACE_PROJECTION_SERVICE","LEARNING_OS",
     "LEARNING_IDENTITY_AUTHORITY","ASSIGNMENT_FACT_DOMAIN","LEARNING_ENGINE",
     "PLANNER_ENGINE","LEARNING_HISTORY_EVIDENCE","LEARNING_APP_FAMILY",
     "LEARNING_FAMILY_ROUTER","CHARACTER_VISUAL_ID","WORLD_ENTRY_EXPANSION",
@@ -47,6 +49,12 @@ if not isinstance(model.get("interaction_graph"), dict):
 for service in ("LEARNING_IDENTITY_AUTHORITY","ASSIGNMENT_FACT_DOMAIN","LEARNING_ENGINE","PLANNER_ENGINE","LEARNING_HISTORY_EVIDENCE"):
     if (layers.get(service) or {}).get("parent") != "LEARNING_OS":
         fail.append(f"LEARNING_DOMAIN_SERVICE_PARENT_INVALID:{service}")
+
+if (layers.get("TAKY_RUNTIME_ORCHESTRATOR") or {}).get("parent") != "TAKY_CORE":
+    fail.append("TAKY_RUNTIME_ORCHESTRATOR_PARENT_INVALID")
+for service in ("WORK_IDENTITY_AUTHORITY","WORK_PROJECT_COORDINATION","WORK_SOURCE_CONTINUITY","WORK_MAIL_OPERATIONS","WORKSPACE_PROJECTION_SERVICE"):
+    if (layers.get(service) or {}).get("parent") != "WORK_OS":
+        fail.append(f"WORK_DOMAIN_SERVICE_PARENT_INVALID:{service}")
 
 for family_capability in ("LEARNING_FAMILY_ROUTER","CHARACTER_VISUAL_ID","WORLD_ENTRY_EXPANSION"):
     if (layers.get(family_capability) or {}).get("parent") != "LEARNING_APP_FAMILY":
@@ -87,6 +95,10 @@ else:
         ("HIDE_SEEK","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
         ("SNAP_POP","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
         ("CHARACTER_VISUAL_ID","PUBLISHES_PROJECTION","READY_SET"),
+        ("TAKY_RUNTIME_ORCHESTRATOR","COORDINATES","WORK_OS"),
+        ("TAKY_RUNTIME_ORCHESTRATOR","COORDINATES","LEARNING_OS"),
+        ("WORK_PROJECT_COORDINATION","ROUTES_TO","WORK_DOMAIN_PROJECT"),
+        ("WORKSPACE_PROJECTION_SERVICE","MUST_NOT_MUTATE","WORK_DOMAIN_PROJECT"),
     }
     for edge in sorted(required_edges - edge_keys):
         fail.append("REQUIRED_INTERACTION_EDGE_MISSING:" + "->".join(edge))
@@ -96,6 +108,12 @@ if (layers.get("PLANNER_ENGINE") or {}).get("semantic_owner") == "READY_SET":
     fail.append("PLANNER_OWNER_DRIFT_TO_READY")
 if (layers.get("LEARNING_ENGINE") or {}).get("semantic_owner") == "READY_SET":
     fail.append("LEARNING_ENGINE_OWNER_DRIFT_TO_READY")
+if (layers.get("TAKY_RUNTIME_ORCHESTRATOR") or {}).get("semantic_owner") not in {"TAKY_CORE","MASTER/MASTER_LOGIC.md"}:
+    fail.append("TAKY_RUNTIME_OWNER_DRIFT")
+workspace_forbidden = " ".join(str(x) for x in ((layers.get("WORKSPACE_PROJECTION_SERVICE") or {}).get("does_not_own") or []))
+for phrase in ("canonical project facts","numeric/calculation authority","CAD/BIM geometry authority","original evidence authority"):
+    if phrase not in workspace_forbidden:
+        fail.append("WORKSPACE_AUTHORITY_BOUNDARY_MISSING:" + phrase)
 
 shared=layers.get("SHARED_TECHNICAL_CAPABILITY") or {}
 if shared.get("class") != "SEMANTIC_LIGHT_SHARED_MECHANISM":
