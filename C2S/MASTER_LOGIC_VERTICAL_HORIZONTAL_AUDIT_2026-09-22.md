@@ -347,3 +347,121 @@ PLANNER_SEPARATION = NOT_STARTED
 LEARNING_ENGINE_SEPARATION = NOT_STARTED
 
 This audit intentionally avoids false convergence.
+
+
+## 11. User correction — Planner is an independent planning/progress manager
+Date: 2026-09-22
+Disposition: CORRECTION / P0 ARCHITECTURE UPDATE CANDIDATE
+
+User correction:
+Ready & Set is primarily an execution tool. Planner must be independently responsible for receiving schedule/event/assignment/homework inputs, producing and maintaining the plan, receiving progress/completion evidence back from execution tools, and continuously managing the combined plan state.
+
+### Corrected ownership
+PLANNER is NOT a Ready child module.
+PLANNER is an independent semantic service under LEARNING_OS.
+
+PLANNER owns:
+- life events / commitments / academy schedules / fixed events
+- assignment / homework scheduling inputs
+- deadlines / recurrence / due windows
+- available-time and capacity interpretation for planning
+- weekly/daily plan composition
+- DATED TODO planning semantics
+- carry-over / rescheduling / reflow
+- plan-vs-actual comparison
+- progress / completion aggregation
+- adaptive duration estimates
+- forecast / next-plan continuity
+- overall plan state across multiple execution apps
+
+READY_SET owns:
+- child-facing execution of a selected/planned work item
+- TODAY/Mission/Focus/Result experience
+- focus/timer interaction
+- execution-state capture
+- child adjustment/feedback UI within allowed planner constraints
+- sending execution events/results back to Planner
+
+READY_SET does NOT own:
+- the global learning plan
+- assignment/date authority
+- schedule integration
+- carry-over policy
+- cross-app overall progress aggregation
+- next-plan forecasting
+
+### Corrected Planner event flow
+INPUT SOURCES
+- family/life schedule events
+- academy/school events
+- assignment/homework facts
+- deadlines
+- parent/child plan adjustments
+- Learning Engine learning-unit estimates/recommendations
+
+-> PLANNER
+- reconcile commitments
+- calculate available windows
+- compose weekly/daily plan
+- publish executable plan projection
+
+-> READY / HIDE / SNAP / OTHER EXECUTION TOOLS
+- execute relevant work
+- emit progress / partial / completed / blocked / deferred / actual-time / help/check evidence
+
+-> PLANNER
+- aggregate actual progress
+- maintain remaining work
+- carry-over/reflow
+- update estimates
+- produce next executable projection
+
+This is a closed planning loop, not a Ready-owned loop.
+
+Canonical shorthand:
+`EVENTS + ASSIGNMENTS + LEARNING UNITS -> PLANNER -> EXECUTION TOOLS -> PROGRESS/RESULT -> PLANNER -> NEXT PLAN`
+
+### Relationship to Learning Engine
+PLANNER and LEARNING_ENGINE are sibling semantic services under LEARNING_DOMAIN_CORE.
+
+LEARNING_ENGINE answers:
+- what the learner needs to learn/practice/review
+- how a subject/task should be interpreted
+- difficulty/load/review recommendation
+- suggested learning unit size and specialist need
+
+PLANNER answers:
+- when/how much/in what order to place executable work within real-life constraints
+- what remains, what moves, what is completed, and what happens next
+
+Rule:
+`LEARNING_ENGINE INTERPRETS LEARNING NEED; PLANNER MANAGES TIME/PLAN/PROGRESS; READY EXECUTES.`
+
+### Corrected target hierarchy excerpt
+```
+LEARNING_OS
+├─ LEARNING_IDENTITY_AUTHORITY
+├─ LEARNING_DOMAIN_CORE
+│  ├─ LEARNING_ENGINE
+│  ├─ PLANNER_ENGINE   <-- independent service
+│  ├─ ASSIGNMENT_FACT_DOMAIN
+│  └─ LEARNING_HISTORY / EVIDENCE
+└─ LEARNING_APP_FAMILY
+   ├─ READY_SET        <-- execution tool / plan consumer
+   ├─ HIDE_SEEK
+   └─ SNAP_POP
+```
+
+### Implementation consequence
+Current Ready planner code may be treated as an implementation-host snapshot only during extraction.
+Repository location MUST NOT imply Planner semantic ownership.
+Extraction should preserve behavior via a versioned Planner Projection / Event Contract before physical code movement.
+
+Required contracts:
+- PLANNER_INPUT_EVENT_V1
+- PLANNER_PLAN_PROJECTION_V1
+- EXECUTION_PROGRESS_EVENT_V1
+- EXECUTION_RESULT_EVENT_V1
+- PLANNER_REPLAN_EVENT_V1
+
+Planner separation state: ARCHITECTURE_CORRECTED / CANONICAL_APPLICATION_PENDING / IMPLEMENTATION_EXTRACTION_NOT_STARTED
