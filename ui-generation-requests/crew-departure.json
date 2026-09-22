@@ -1,38 +1,54 @@
 {
   "screen_id": "CREW_DEPARTURE_SCENE",
   "output": {
-    "one_screen_per_image": true,
+    "artifact": "SINGLE_IPHONE_SCREEN",
     "device": "iphone_portrait",
+    "one_screen_per_image": true,
     "multiple_phones": 1,
     "poster": false,
     "baseline_width": 390,
     "baseline_height": 844
   },
+  "sequence": [
+    "INTRODUCE_CORE6",
+    "FOCUS_ONE_MEMBER_AT_A_TIME",
+    "PRIMARY_COMPANION_SELECTION"
+  ],
   "entities": {
-    "user_character": false,
+    "user_character_present": false,
     "crew_ids": [
-      "dooby",
+      "dubi",
       "lori",
       "ink",
       "nova",
       "take",
       "zero"
     ],
-    "crew_visual_mode": "CANONICAL_PLACEHOLDER_ONLY"
+    "crew_visual_id_state": "HARD_LOCK_REFERENCE"
   },
-  "required_components": [
-    "CORE6_ALL_VISIBLE",
-    "ONE_FOCUSED_MEMBER",
-    "SHORT_SELF_INTRO_TEXT",
-    "PRIMARY_ACTION_NEXT_OR_SELECT",
-    "EXPEDITION_STAGING_ENVIRONMENT"
+  "invariants": {
+    "crew_visual_id_hard_lock": true,
+    "derivative_projection_only": true
+  },
+  "crew_reference": {
+    "approved_visual_id_available": false,
+    "required_source": "EXACT_APPROVED_CORE6_VISUAL_ID_ASSETS"
+  },
+  "crew_render_mode": "PLACEHOLDER_ONLY",
+  "crew_mutations": [
+    "expression",
+    "pose",
+    "gesture",
+    "action",
+    "screen_position",
+    "short_dialogue",
+    "reaction"
   ],
-  "features": [
-    "NO_COMPLETED_USER_CHARACTER",
-    "NO_POWER_STATS",
-    "NO_RARITY",
-    "NO_BOTTOM_NAV",
-    "NO_TTS_ACTUAL_SPEECH"
+  "required_components": [
+    "CORE6_PRESENCE",
+    "FOCUSED_MEMBER_STATE",
+    "SHORT_PERSONALITY_CUE",
+    "PRIMARY_ACTION"
   ],
   "navigation": {
     "persistent_bottom_nav": false
@@ -40,5 +56,5 @@
   "tts": {
     "actual_speech": false
   },
-  "notes": "Use labeled silhouette/placeholder slots for the six canonical Crew if exact approved Visual ID references are unavailable. Do not invent species, colors, clothing, or faces."
+  "notes": "For a real Crew render, exact approved Visual ID references must be attached to the image-generation context and approved_visual_id_available must become true. Without them, placeholders only. Never regenerate or reinterpret Crew identity."
 }
