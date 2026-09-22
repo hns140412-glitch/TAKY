@@ -60,5 +60,68 @@
   "tts": {
     "actual_speech": false
   },
-  "notes": "Use the exact approved Core 6 Visual ID references. Preserve identity, species, face, silhouette, body proportion, identity colors/markings, signature clothing/equipment. Change only expression/pose/gesture/action/position/dialogue/reaction. No user Character on this screen."
+  "notes": "Use the exact approved Core 6 Visual ID references. Preserve identity, species, face, silhouette, body proportion, identity colors/markings, signature clothing/equipment. Change only expression/pose/gesture/action/position/dialogue/reaction. No user Character on this screen.",
+  "motion_intent": {
+    "category": [
+      "FOCUS_CHANGE",
+      "STATE_CHANGE",
+      "WORLD_LIFE"
+    ],
+    "initial_group_reveal": {
+      "one_time": true,
+      "stagger_ms": [
+        70,
+        100
+      ],
+      "opacity": true,
+      "small_positional_offset": true,
+      "low_bounce_spring": true
+    },
+    "current_focus": {
+      "one_member_at_a_time": true,
+      "character_specific_gesture": true,
+      "scale_max": 1.04,
+      "transition_ms": [
+        220,
+        360
+      ],
+      "move_focus_indicator_not_identity": true
+    },
+    "non_focused_crew": {
+      "micro_reaction_only": true,
+      "disappear": false
+    },
+    "tap_feedback": {
+      "scale_range": [
+        0.97,
+        0.99
+      ],
+      "immediate_state_feedback": true
+    },
+    "world_life": [
+      "flag_fabric_flutter",
+      "lantern_glow_variation",
+      "cloud_drift",
+      "small_water_shimmer",
+      "rope_or_tag_micro_sway"
+    ],
+    "reduced_motion": {
+      "required": true,
+      "remove_parallax": true,
+      "remove_travel_transform": true,
+      "preserve_focus_hierarchy": true,
+      "opacity_or_instant_state_fallback": true
+    },
+    "rejected": [
+      "continuous_bounce",
+      "all_six_full_amplitude_motion",
+      "rpg_aura",
+      "selection_confetti",
+      "face_morph",
+      "body_squash_stretch",
+      "character_3d_flip",
+      "camera_shake",
+      "heavy_particles"
+    ]
+  }
 }
