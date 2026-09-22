@@ -1556,4 +1556,263 @@ No Netlify.
 No main merge.
 No device PASS claim.
 
+
+## 41. Ready & Set — Screen / State / Transition matrix
+
+Ready primary-screen invariant:
+`WEEKLY ↔ DAILY → TIMER → DAILY`
+
+No fourth primary screen without explicit impact review.
+
+| Surface | Purpose | Core states | Primary action | Shared-system projection | Return / persistence |
+|---|---|---|---|---|---|
+| WEEKLY / 이번 주 여정 | week orientation | LOADING / EMPTY / READY / OFFLINE / STALE / SYNC_CONFLICT | select day | current Character optional; Crew minimal; Badge none by default | selected day persists into Daily |
+| DAILY / 오늘의 탐험길 | one-day execution route | LOADING / EMPTY / READY / CURRENT / COMPLETED / PARTIAL / BLOCKED / WAITING_FOR_PARENT / OFFLINE / STALE / CARRY_REQUIRED | select executable TODO / enter Timer | Character optional; Crew next-task/reunion contextual; Badge only post-event acknowledgement | date, anchor, task state preserved |
+| TIMER / 그냥! 지금 하면 돼! | execute active task | READY / RUNNING / PAUSED_EXPLICITLY / HELP / COMPLETION_PENDING / COMPLETED / PARTIAL / BLOCKED / OFFLINE_SAFE | start/continue/complete | Crew minimal and quiet; no Badge meter; no generic star | returns to same Daily task; APP_SWITCH != PAUSE |
+
+### 41.1 Ready non-primary projections
+
+These are NOT new primary screens by default:
+
+- Mission setup → Daily inline expansion / sheet.
+- Focus → Timer state.
+- Wrap-up → Timer/Daily completion sheet.
+- Result → Daily task result state / completion sheet.
+- Parent approval pending → Daily state/notice.
+- Carry-over / reflow → Daily/Weekly Planner-owned proposal state.
+- Capture / Save and Analyze → contextual intake flow; does not become a fourth child home.
+- History/profile/settings → secondary shell/surface, outside the 3 primary learning screens.
+- Character Profile Refresh → shared Profile/Character surface, not Ready Planner ownership.
+- Shared Badge collection → shared/profile-authorized surface; Ready may preview, not own.
+
+### 41.2 Ready orphan audit
+
+SUPERSEDED as primary screens:
+- standalone Base Camp Home dashboard
+- standalone Island Map primary screen
+- Mission primary screen
+- Result primary screen
+- old 6/7-screen Ready IA.
+
+BACKGROUND_ONLY:
+- Learning Master decomposition
+- sync/outbox/conflict engine
+- badge evidence producer
+- Character version resolver.
+
+OPEN:
+- exact profile/settings entry point
+- exact shared Badge collection entry
+- exact Character refresh entry from profile shell.
+
+## 42. Hide & Seek — Screen / State / Transition matrix
+
+Canonical child flow is not forced linear, but the learning loop is coherent:
+
+`HOME → EXPLORE → TRACE / LINK / PIECE → COMPLETION → CATCH / RETURN`
+
+| Surface | Purpose | Core states | Primary action | Crew/audio | Return / persistence |
+|---|---|---|---|---|---|
+| HIDE_HOME | source/set readiness | ACQUIRE / REVIEW / READY / LOADING / OFFLINE / STALE / BLOCKED | acquire/review/start | companion contextual | Ready target/set preserved |
+| HIDE_EXPLORE | choose retrieval activity | READY / REVIEW_AVAILABLE / OFFLINE | TRACE/LINK/PIECE | small companion | returns Home/Catch |
+| TRACE | fast think-first retrieval | NEW / REVIEW / LISTENING / WAITING / CORRECTED / RETRY / OFFLINE | child response | OBSERVE→WAIT; walkie/listen optional | item evidence preserved |
+| LINK | relation/discrimination | READY / WAITING / PARTIAL / RETRY / OFFLINE | connect/select | question/hint only when allowed | preserves set/item state |
+| PIECE | critical structure completion | READY / WAITING / PARTIAL / RETRY / OFFLINE | complete missing structure | no answer reveal | preserves item state |
+| HIDE_COMPLETION | close current exploration | SUCCESS / PARTIAL / BLOCKED / READY_RETURN | return/report | brief acknowledgement | returns Ready context if handed off |
+| CATCH | cumulative records/treasure | EMPTY / READY / OFFLINE / STALE | open item/history | Crew history reaction allowed | cumulative across missions |
+| BADGE_BOOK preview | shared badge history preview | EMPTY / READY / MIGRATED_HISTORY | open canonical badge | shared Badge semantics | shared detail/return |
+| CALENDAR | dated history | EMPTY / READY | open date | no streak pressure | history only |
+| MEMORY_LADDER | contextual recall state | READY / PARTIAL / RETRY | next recall | no ability ranking | contextual return |
+
+### 42.1 Hide shared-system rules
+
+- Character = current Character version.
+- Crew = shared canonical; Hide owns only timing/context.
+- walkie-talkie MUST visually separate listen vs speak.
+- CHILD_RECORDING = child/app record.
+- Crew voice after capture; never over recall.
+- Badge Book = shared badge preview/history, not Hide-owned catalog.
+- Calendar = history, not streak.
+
+### 42.2 Hide orphan audit
+
+SUPERSEDED:
+- old mandatory FIRST FIND → MEANING CLUE → CONNECTION TRAIL → HIDDEN WORDS → FINAL SEEK IA.
+- police/detective/arrest framing.
+- generic reward dashboard.
+
+APP_LOCAL:
+- TRACE/LINK/PIECE exact composition.
+- 12-word board.
+- Jungle/Waterfall regional presentation.
+
+BACKGROUND_ONLY:
+- memory scoring/model state not useful to child.
+- internal evidence provenance.
+- review scheduling engine.
+
+OPEN:
+- final high-fi composition.
+- exact Badge overlay cadence.
+- exact episode callback placement.
+
+## 43. Snap & Pop — Screen / State / Transition matrix
+
+Product loop:
+`HOME → LANDMARK/WRITING → RESULT → HOME/RECORDS`
+
+Parallel contextual loops:
+`HOME/WRITING → ASK → UNDERSTAND → RETURN or EXPRESSION`
+`WRITING → IMAGINATION → RETURN_TO_SAME_DRAFT`
+`HOME/secondary → RECORDS / GROWTH / TREASURE / CREW / SPECIAL / SETTINGS`
+
+| Surface | Purpose | Core states | Primary action | Crew/audio | Return / persistence |
+|---|---|---|---|---|---|
+| SP_HOME | choose/resume expression | LOADING / EMPTY / READY / RESUME / OFFLINE | destination/resume | main companion contextual | draft/session preserved |
+| LANDMARK_SHEET | preview expression lens | READY / RESUME | start | short preview reaction | close/home |
+| SP_WRITING | child-authored expression | WAIT / LISTENING / EDITING / HINT_OFFER / PARTIAL / OFFLINE / STALE / RECOVERY | write/speak/next | OBSERVE→WAIT; child recording; reaction after | same draft preserved |
+| SP_RESULT | close expression | SUCCESS / PARTIAL_SAVE / RETRY | return map | brief acknowledgement | record saved, no reward dashboard |
+| SP_ASK | factual curiosity | READY / LISTENING / OFFLINE / BLOCKED | ask | child recording optional | routes Understand |
+| SP_UNDERSTAND | verified explanation | VERIFIED / PARTIAL / INSUFFICIENT / RETRY | return | SYSTEM_TTS by default; Crew wrapper optional/non-authoritative | return exact context |
+| SP_IMAGINATION | optional idea expansion | LOADING / READY / PARTIAL / OFFLINE / STALE / RECOVERY | choose/expand | Crew contextual only | same source draft/step restored |
+| SP_RECORDS | retrieve authored work | EMPTY / READY / OFFLINE | open record | history reaction optional | original/revision provenance |
+| SP_RECORD_EDIT | revision | DIRTY / SAVING / RETRY / READY | save revision | no auto-authoring | original preserved |
+| SP_GROWTH | continuity view | EMPTY / READY | view history | Crew contextual | Badge separated |
+| SP_TREASURE | Snap Gem/Wish | EMPTY / READY / INSUFFICIENT | open Wish Shop | not Badge | Snap-only economy |
+| SP_WISH_SHOP | spend Snap gem | READY / CONFIRM / BUSY / INSUFFICIENT / SUCCESS | explicit confirm | Crew may react, no power effect | transaction ledger |
+| SP_CREW | relationship/friend view | STARTER / KNOWN / UNDISCOVERED / REUNION | select/rename/history | shared Crew semantics | stable crew_id |
+| SP_SPECIAL | optional encounter | INVITE / ACTIVE / SKIP / COMPLETE | participate/skip | Special encounter rules | no penalty |
+| SP_SETTINGS/FAMILY | preferences/family mode | READY / DISABLED / CHILD_SWITCH | save/switch | no Crew authority change | exact prior mode restore |
+
+### 43.1 Snap shared-system corrections
+
+- Crew family semantics are shared, not Snap-owned.
+- `voice-runtime.js` current role collapse is implementation debt.
+- Ask/Understand factual authority is not Crew identity.
+- voice input is child-owned recording.
+- Wish Gem never becomes Badge growth mark.
+- Growth never becomes Badge score.
+- Special never becomes rarity tier.
+
+### 43.2 Snap orphan audit
+
+SUPERSEDED / HOLD:
+- generic “Crew owns all voice” runtime assumption.
+- all implementation domains exposed as primary nav.
+- Result reward/meta overload.
+- app-local badge authority.
+- old family-wide Crew ownership claim.
+
+APP_LOCAL:
+- five landmark composition.
+- writing field.
+- Ask/Understand visual composition.
+- Imagination visual composition.
+- Wish economy UI.
+
+BACKGROUND_ONLY:
+- stale-result rejection internals.
+- semantic verification/provider plumbing.
+- ledger details not useful to child.
+
+OPEN:
+- final primary nav.
+- final Home composition.
+- exact Crew/friend-album entry.
+- final high-fi.
+
+## 44. Cross-family orphan / duplication audit
+
+### 44.1 Must be SHARED, not rebuilt per app
+- Explorer_ID continuity
+- Character version resolver
+- Profile refresh / age progression semantics
+- Core Crew identity/personality/listening rules
+- relationship/memory semantics
+- Episode envelope
+- Badge canonical semantics
+- Character/Crew world-style contract
+- generic voice-role vocabulary.
+
+### 44.2 Must remain APP_LOCAL
+- Ready Planner authority and Timer
+- Hide retrieval/Memory Ladder learning semantics
+- Snap writing/Ask/Imagination/Wish economy
+- regional visual dialects.
+
+### 44.3 Must remain BACKGROUND_ONLY unless needed
+- provider/model confidence
+- internal evidence math
+- sync internals
+- dedupe keys
+- raw badge candidate review internals
+- raw semantic traces.
+
+### 44.4 SUPERSEDED / remove from future UI
+- Ready generic “획득 별”
+- app-specific duplicate badge systems
+- Snap as sole family Crew owner
+- Hide police/detective framing
+- Character one-shot-forever photo assumption
+- separate disconnected app worlds
+- generic card-wall harmonization.
+
+## 45. Low-fi eligibility by area
+
+### Ready
+- Weekly: ELIGIBLE after current integrated matrix.
+- Daily: ELIGIBLE after current integrated matrix.
+- Timer: NO NEW LOW-FI; locked asset reference only.
+- Profile Refresh: LOW-FI ELIGIBLE, implementation open.
+- Badge collection: NOT READY for final composition; entry IA open.
+
+### Hide
+- Home / Explore / TRACE / LINK / PIECE / Completion / CATCH: LOW-FI ELIGIBLE.
+- Badge overlay/detail: PARTIAL; shared visual treatment still open.
+- Episode callback: PARTIAL; placement open.
+
+### Snap
+- Home / Writing / Ask / Understand / Imagination / Result / Records: LOW-FI ELIGIBLE.
+- primary nav: PROVISIONAL, cross-review required.
+- Crew relationship surface: PARTIAL, shared friend-album IA open.
+- Growth/Treasure: ELIGIBLE with strict semantic separation.
+
+## 46. Unified UI acceptance rule
+
+A low-fi/high-fi candidate FAILS if any of the following is true:
+
+- requires a new owner not present in logic;
+- hides an existing material state;
+- invents a reward/economy;
+- changes Character/Crew identity;
+- lets Crew speak before WAIT/listen logic permits;
+- turns SYSTEM_TTS into a character without explicit context;
+- loses return_target/session/draft context;
+- converts history into streak/score;
+- makes Badge/Gem/Affinity visually indistinguishable;
+- relies on Character asset for core layout to function;
+- contradicts app-local product job;
+- treats a visual mockup as data authority.
+
+## 47. Integrated status after Screen/State/Transition audit
+
+SHARED LOGIC:
+- Character/Profile lifecycle: CONTRACT CLOSED / CODE OPEN
+- Crew machine rule: MIGRATED
+- Crew ownership: CENTRALIZED
+- Voice/listening semantics: CONTRACT CLOSED / CODE OPEN
+- Episode envelope: CONTRACT CLOSED / CODE OPEN
+- Badge history linkage: CONTRACT DEFINED / FINAL VISUAL OPEN
+- Ready generic star: SUPERSEDED FOR NEW UI / CODE CLEANUP OPEN
+
+APP UI:
+- Ready Weekly/Daily: LOW-FI READY
+- Ready Timer: VISUAL LOCKED
+- Hide: LOGIC-TO-LOW-FI READY for core screens
+- Snap: CORE SCREENS LOW-FI READY; nav/crew collection still partial
+
+NEXT:
+one comparative low-fi system pass across Ready / Hide / Snap, beginning with app homes/entry surfaces and shared Character/Crew slots, while preserving app-specific task screens.
+
+
 END
