@@ -831,3 +831,183 @@ Any future architecture that optimizes the system while losing owner integrity o
 
 `KEEP THE KEY OF EACH OWNER.`
 `THE HUMAN IS THE KEY OF THE SYSTEM.`
+
+
+## 15. Hallucination / Context Drift / Re-creation Prevention Gate
+Date: 2026-09-22
+Disposition: USER CORRECTION / ROOT-CAUSE PREVENTION STANDARD
+
+TAKY must prevent failure causes upstream, not only detect bad outputs downstream.
+
+### Target failure classes
+- HALLUCINATION
+- CONTEXT_LOSS
+- CONTEXT_SHRINKAGE
+- PRIOR_DECISION_RECREATION
+- UNSOURCED_REINTERPRETATION
+- OWNER_DRIFT
+- STALE_CANONICAL_USE
+- FALSE_MISSING
+- SILENT_SUPERSESSION
+- TERMINOLOGY_REGRESSION
+- IMPLEMENTATION_LOCATION_PROMOTED_TO_AUTHORITY
+- ANSWER_VARIANCE_WITHOUT_NEW_EVIDENCE
+
+### Root causes and blockers
+
+1. Missing source recovery
+Cause:
+assistant answers from partial memory/summary instead of current canonical/source.
+Blocker:
+`SOURCE RECOVERY GATE`
+Before material claims, recover applicable current canonical, latest correction, owner, and live implementation evidence where relevant.
+
+2. Context compression mistaken for truth
+Cause:
+handoff/summary/memory becomes substitute for original decision/source.
+Blocker:
+`SUMMARY != AUTHORITY`
+Use summary only as routing/index.
+Material decisions require owner/source trace.
+
+3. Existing answer silently regenerated
+Cause:
+model reconstructs a plausible answer rather than preserving a prior settled decision.
+Blocker:
+`PRESERVE BEFORE RECREATE`
+Before creating a new rule/structure, search for existing active/inherited decision and classify:
+PRESERVE / ADJUST / SUPERSEDE / CONFLICT.
+
+4. Current implementation mistaken for semantic truth
+Cause:
+code location or current host is treated as owner.
+Blocker:
+`IMPLEMENTED_IN != OWNS`
+Always distinguish:
+SEMANTIC_OWNER / IMPLEMENTATION_HOST / UI_HOST / RUNTIME_COORDINATOR / CONSUMER.
+
+5. Search miss converted to absence
+Cause:
+single retrieval failure becomes "없다/없었다".
+Blocker:
+`SEARCH MISS != SOURCE ABSENCE`
+Use multi-path recovery before negative-existence claims.
+Classify RECOVERY_FAILED when unresolved.
+
+6. Stale branch / stale document
+Cause:
+historical SHA, Handoff or cached document used as current state.
+Blocker:
+`LIVE REFRESH BEFORE CURRENT CLAIM`
+Current repo/branch/head must be refreshed for material current-state claims.
+
+7. Terminology drift
+Cause:
+old names and superseded concepts reappear.
+Blocker:
+`CANONICAL TERM REGISTRY / SUPERSESSION TRACE`
+Latest terminology must shadow legacy aliases.
+Legacy terms remain historical only.
+
+8. Unverified inference promoted to fact
+Cause:
+plausible reasoning fills missing fields.
+Blocker:
+`UNKNOWN STAYS UNKNOWN`
+Inference must be labeled and may not overwrite FACT/DECISION.
+
+9. Cross-layer contamination
+Cause:
+Ready/Work/App-specific logic is promoted upward or reused as global truth.
+Blocker:
+`RULE SCOPE GATE`
+Classify every material rule as GLOBAL / OS / DOMAIN / FAMILY / PROJECT / REFERENCE / CANDIDATE before reflection.
+
+10. Answer-to-answer inconsistency
+Cause:
+new response differs from earlier confirmed answer without new evidence.
+Blocker:
+`DELTA JUSTIFICATION GATE`
+If a material answer changes, identify:
+- prior answer/decision,
+- new evidence/correction,
+- changed clause,
+- reason,
+- impact,
+- supersession status.
+No unexplained rewrite.
+
+11. Prompt-local optimization
+Cause:
+current user sentence is answered in isolation, losing long-running project intent.
+Blocker:
+`INTENT CONTINUITY GATE`
+Recover:
+- current objective,
+- protected decisions,
+- unresolved work,
+- user's latest corrections,
+before proposing architecture or implementation changes.
+
+12. Validation after the fact only
+Cause:
+hallucination reaches output and is caught only by final review.
+Blocker:
+`PRE-ACTION CONTRADICTION CHECK`
+Before material output/action:
+- compare proposed claim against active owner rules,
+- check for conflicting prior decision,
+- check missing evidence,
+- check ownership/scope,
+- check current-state freshness.
+
+### Required TAKY execution loop
+
+```
+REQUEST
+-> CONTEXT RECOVERY
+-> ACTIVE OWNER/RULE RECOVERY
+-> PRIOR DECISION CHECK
+-> CURRENT EVIDENCE REFRESH
+-> UNKNOWN/INFERENCE SEPARATION
+-> OWNER/SCOPE CHECK
+-> PROPOSED DELTA
+-> CONTRADICTION / RECREATION CHECK
+-> EXECUTION / ANSWER
+-> RESULT COMPARE
+-> CROSS / IMPACT / REGRESSION VALIDATION
+-> TRACE / SUPERSESSION
+```
+
+### Mandatory claim objects for material work
+For each material conclusion:
+- CLAIM
+- SOURCE / EVIDENCE
+- OWNER
+- FRESHNESS
+- CONFIDENCE
+- PRIOR DECISION LINK
+- CHANGE OR PRESERVE
+- UNKNOWN / INFERENCE boundary
+- RESULT / IMPLEMENTATION state
+
+### Anti-hallucination hard rules
+`NO SOURCE -> NO FACT CLAIM`
+`NO OWNER -> NO AUTHORITY PROMOTION`
+`NO DELTA EVIDENCE -> NO REWRITE OF SETTLED DECISION`
+`NO LIVE REFRESH -> NO CURRENT-STATE CLAIM`
+`NO RECOVERY EXHAUSTION -> NO NEGATIVE-EXISTENCE CLAIM`
+`NO SUPERSESSION TRACE -> NO SILENT REPLACEMENT`
+`PLAUSIBLE != TRUE`
+`CONSISTENT-SOUNDING != CANONICAL`
+
+### Desired outcome
+TAKY should make hallucination and context drift harder to produce, not merely easier to detect.
+
+The prevention target is:
+`CAUSE BLOCKED BEFORE OUTPUT > ERROR FOUND AFTER OUTPUT`
+
+Status:
+ROOT_CAUSE_PREVENTION_MODEL = DEFINED
+CANONICAL_ENFORCEMENT = PENDING
+DETERMINISTIC_REPLAY_FIXTURES = REQUIRED
