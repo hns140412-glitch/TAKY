@@ -1104,4 +1104,456 @@ Do not split into separate handoff conversations.
 
 END OF SECOND-PASS AUDIT
 
+
+## 30. Character Profile Refresh / Age Progression contract — CURRENT CANONICAL
+
+### 30.1 Trigger classes
+
+A Character refresh may be considered when:
+- PROFILE_PHOTO_CHANGED: child/parent explicitly changes profile photo.
+- PROFILE_AGE_CONTEXT_CHANGED: explicit profile age/birth context crosses a meaningful age/proportion boundary.
+- MANUAL_CHARACTER_REFRESH_REQUESTED: authorized user explicitly asks to refresh the character.
+
+Do NOT trigger Character regeneration from:
+- mere app launch,
+- elapsed days alone,
+- inferred age from a photo,
+- badge/crew/learning events,
+- mood change alone.
+
+### 30.2 State machine
+
+`CURRENT_ACTIVE`
+→ `REFRESH_AVAILABLE`
+→ `NEW_SOURCE_REGISTERED`
+→ `SAME_IDENTITY_UPDATE_PREVIEW`
+→ `CONSISTENCY_REVIEW`
+→ `HUMAN_CONFIRM`
+→ `NEW_VERSION_ACTIVE`
+→ previous version `HISTORICAL_PRESERVED`
+
+Abort/cancel:
+- current active version remains unchanged.
+- no partial replacement.
+
+### 30.3 Version identity
+
+Stable:
+- Explorer_ID
+- Character canonical identity lineage
+
+Versioned:
+- character_visual_id
+- source-photo provenance
+- age-context snapshot
+- hairstyle/presentation evidence
+- derivative assets
+- activated_at
+- supersedes_version_id.
+
+Required fields:
+- `character_version_id`
+- `explorer_id`
+- `source_version_id`
+- `age_context`
+- `identity_assurance`
+- `status`
+- `activated_at`
+- `supersedes`
+- `historical_use_allowed`.
+
+### 30.4 Historical record policy
+
+Historical records MUST NOT be silently re-rendered as if the current Character existed in the past.
+
+Default history rule:
+- event/history surface may preserve the Character version active at the event time;
+- current profile surfaces show current active Character;
+- when both matter, UI may show “그때의 모습 / 지금 모습” without implying a new Explorer.
+
+Status:
+EVENT_TIME_CHARACTER_VERSION_DEFAULT = LOCK_CANDIDATE.
+Final wording/visual treatment requires UI review, but history provenance is mandatory.
+
+### 30.5 Age/proportion rule
+
+Age-aware projection must alter proportion gradually enough to preserve identity continuity.
+
+Required:
+- no perpetual toddler/chibi body;
+- no abrupt adultization;
+- no dwarf proportion;
+- explicit age context is source of truth;
+- profile photo can update visible facial/hair cues;
+- final result remains an illustration, not a photoreal impersonation.
+
+Exact age buckets remain OPEN until family Character art calibration.
+
+## 31. Shared Voice / Listening / Child Recording contract — CURRENT CANONICAL
+
+### 31.1 Semantic roles
+
+`CHILD_RECORDING`
+- child-authored speech/input;
+- record/evidence belongs to child/app context;
+- Crew may listen/react but does not own content.
+
+`CREW_VOICE`
+- one Crew member's character voice;
+- governed by shared Crew identity/personality;
+- contextual text may be app-local.
+
+`SYSTEM_TTS`
+- accessibility/information reading;
+- never impersonates Crew;
+- may read prompts/instructions where enabled.
+
+`AMBIENT_AUDIO`
+- region/world ambience;
+- never sole carrier of required information.
+
+### 31.2 Recording state model
+
+`IDLE`
+→ `MIC_PERMISSION_REQUEST`
+→ `READY_TO_RECORD`
+→ `LISTENING`
+→ `PROCESSING`
+→ `TRANSCRIPT_READY / AUDIO_READY`
+→ `CHILD_CONFIRM_OR_CONTINUE`
+→ `CREW_REACTION_ELIGIBLE`
+
+Recovery:
+- PERMISSION_DENIED
+- NO_SPEECH
+- STT_UNAVAILABLE
+- OFFLINE
+- CANCELLED
+- RETRY.
+
+Hard rule:
+Crew reaction occurs AFTER the child recording/listening segment, not over it.
+
+### 31.3 Listening behavior
+
+While `LISTENING`:
+- Crew does not speak;
+- only low-salience listening gesture;
+- input controls remain clear;
+- no hint escalation;
+- no animation that implies impatience;
+- long speech is allowed within bounded capture behavior.
+
+While `WAITING`:
+- silence is valid;
+- no countdown pressure unless the learning task itself explicitly requires one;
+- first escalation is short supportive presence, not answer/hint.
+
+### 31.4 Privacy / capture boundary
+
+Preserve:
+- no always-listening;
+- no hidden background microphone;
+- explicit microphone state;
+- one-shot/bounded capture baseline.
+
+Recording retention, raw audio persistence, transcript persistence, parent access, deletion and share permission must be explicit per data policy before production.
+Until then:
+- UI must not promise permanent voice memory;
+- episode/badge systems may reference a semantic event without requiring raw audio retention.
+
+### 31.5 Listen-again / replay
+
+Where a prompt or Crew line can be spoken:
+- visible text remains;
+- replay/listen-again can be offered;
+- replay does not auto-start a recording;
+- listening and speaking controls remain distinct.
+
+## 32. Shared Episode / Memory envelope — CURRENT CANONICAL
+
+### 32.1 Episode purpose
+
+Episodes make the island and Crew feel continuous across apps.
+They are not rewards, levels, or mandatory quests.
+
+### 32.2 Canonical envelope
+
+Required semantic fields:
+
+- `episode_id`
+- `explorer_id`
+- `episode_type`
+- `origin_app`
+- `origin_region`
+- `participants[]`
+- `primary_crew_id?`
+- `trigger_event_ref?`
+- `started_at`
+- `closed_at?`
+- `status`
+- `memory_summary`
+- `relationship_effect_ref?`
+- `future_callback_key?`
+- `badge_event_refs[]`
+- `record_refs[]`
+- `voice_ref?`
+- `privacy_scope`
+- `continuation_allowed`.
+
+### 32.3 Episode classes
+
+PRESERVE:
+- ORDINARY_DAY
+- LIFESTYLE_VARIATION
+- VACATION_RETURN
+- EXPEDITION_DISPATCH
+- SPECIAL_ENCOUNTER
+- MYSTERY_CONTINUITY
+- REUNION.
+
+An episode may begin in one app and be referenced later in another if:
+- same Explorer_ID;
+- involved Crew continuity exists;
+- privacy scope permits;
+- callback is contextual, not disruptive.
+
+### 32.4 Memory writing rule
+
+Do not store every interaction as a “memory”.
+
+Memory-worthy:
+- meaningful shared event
+- first meeting
+- rename/nickname event
+- special encounter
+- notable recovery/retry
+- meaningful child-created artifact reference
+- relationship-specific moment.
+
+Not memory-worthy by itself:
+- app open
+- raw tap count
+- passive time elapsed
+- idle time
+- generic completion with no narrative/relationship meaning.
+
+### 32.5 Cross-app callback rule
+
+A callback must:
+- be short;
+- not block the learning task;
+- not reveal private/raw recording content unexpectedly;
+- preserve original app context;
+- not pretend the Crew witnessed something outside recorded provenance.
+
+## 33. Badge History / Character / Crew / Episode linkage — CURRENT CANONICAL
+
+### 33.1 Badge history envelope
+
+A canonical badge history entry MAY reference:
+- badge_id
+- tier
+- star_grade
+- earned/progressed_at
+- source_app
+- source_region
+- source_record_ref
+- character_version_id_at_event
+- crew_ids[]
+- episode_id?
+- share_ref?.
+
+### 33.2 Rendering rule
+
+History integrity takes priority over decorative consistency.
+
+LOCK_CANDIDATE:
+- historical Badge detail uses event-time Character version when available;
+- current Character may appear separately as current profile context;
+- do not silently redraw old events using the newest Character version.
+
+Crew Visual ID is stable; relationship/display-name history may show the historically valid name where meaningful.
+
+### 33.3 Ready generic “획득 별” correction
+
+Current Ready share runtime calculates a generic “획득 별” from completion count.
+No current shared semantic owner/evidence contract justifies this unit.
+
+Disposition:
+`LEGACY_GENERIC_READY_STAR = UI_DISABLED_PENDING_SEPARATE_SEMANTIC_APPROVAL`
+
+Rules:
+- do not relabel it as Badge Star Grade;
+- do not show it beside Badge Star Grade;
+- do not use it in new Weekly/Daily/Timer/share high-fi;
+- implementation may remove/hide the legacy field in the next Ready code delta;
+- if a future distinct reward unit is desired, it requires explicit owner/meaning/evidence/visual separation.
+
+This closes GATE-07 at the logic/UI-contract level.
+Runtime cleanup remains IMPLEMENTATION_PENDING.
+
+## 34. Shared Logic-to-UI matrix — canonical minimum
+
+| Logic | Owner | Persistent truth | UI projection | Crew | Badge | Audio | Critical recovery |
+|---|---|---|---|---|---|---|---|
+| Character current identity | Shared Character | Explorer_ID + active Character version | Profile/onboarding/app slots | companion contextual | badge protagonist can consume version | none required | retain prior active version |
+| Character refresh | Shared Character | version lineage | Profile refresh flow | may accompany, never decides | history preserved | optional system read | cancel keeps current |
+| Age progression | Shared Character | explicit age context | proportion/presentation update | no Crew identity mutation | history preserved | none | no silent update |
+| Primary companion | Shared Crew | crew_id + relationship | onboarding/profile/app slots | primary presence | contextual only | Crew voice | switch preserves history |
+| Crew listening | Shared Crew | transient interaction state | recording/task surfaces | LISTENING/WAITING | none | child recording + later Crew voice | mic/stt fallback |
+| Child recording | App record + shared semantics | app record/evidence ref | mic/transcript/replay | listens/reacts after | evidence only if approved | CHILD_RECORDING | manual text path |
+| Episode | Shared Episode | episode envelope | subtle callbacks/history | participant | optional linked badge event | optional refs | do not block task |
+| Badge | TAKY Shared Badge | canonical badge instance/history | contextual acknowledgement/collection/share | supporting only | self | optional read | no award from weak proxy |
+| App switch | Ready/session + family continuity | session/task/lap/return | transition/return | persists | persists | stop/continue per explicit state | restore prior context |
+
+## 35. Ready UI projection additions
+
+### Weekly / 이번 주 여정
+May show:
+- current profile Character as small contextual identity, if layout permits;
+- primary companion only when it helps orientation/continuity;
+- no Badge dashboard;
+- no legacy generic stars.
+
+Must preserve:
+- schedule readability;
+- Planner authority;
+- fixed vs TODO vs free-window meaning.
+
+### Daily / 오늘의 탐험길
+May show:
+- next-task Crew reaction;
+- return/reunion line when contextually valid;
+- recording icon only when the task actually supports child voice input.
+
+Must not:
+- place Crew chatter on every row;
+- infer badge from completion alone;
+- hide schedule state behind illustration.
+
+### Timer
+Character/Crew minimal.
+No Badge progress meter.
+No generic stars.
+No ambient dialogue during active focus unless explicitly requested/help/recovery/completion.
+
+## 36. Hide UI projection additions
+
+Home / TRACE / LINK / PIECE / CATCH must consume:
+- current Character version;
+- current primary Crew;
+- shared Crew listening/waiting semantics;
+- shared Badge semantics.
+
+TRACE:
+- during recall, default Crew = OBSERVE/WAIT.
+- no answer-bearing gesture/dialogue.
+
+LINK/PIECE:
+- question/hint escalation only after task logic permits.
+- Crew personality modifies wording/gesture, not difficulty/answer.
+
+CATCH/history:
+- may surface episode/badge/relationship history.
+- Calendar remains history, never streak.
+
+Walkie-talkie:
+- visually distinguishes LISTEN vs SPEAK.
+- bounded microphone state.
+- no always-listening.
+
+## 37. Snap UI projection additions
+
+Writing:
+- default loop obeys OBSERVE → WAIT before intervention.
+- voice input = CHILD_RECORDING.
+- Crew voice response happens after capture.
+- SYSTEM_TTS is separate from character voice.
+
+Ask / Understand:
+- factual/system explanation voice, if used, defaults to SYSTEM_TTS unless an explicit Crew conversational wrapper is separately identified.
+- Crew must not become source of factual authority.
+
+Imagination:
+- Crew may contextualize but does not author final expression.
+
+Records:
+- original/revision/voice record provenance preserved.
+- future Character-version history can render event-time identity.
+
+Crew:
+- shared canonical identity/relationship semantics.
+- app-local Beach presentation only.
+
+## 38. Cross-app regression checklist — mandatory
+
+Before low-fi freeze and again before high-fi:
+
+1. Same Explorer_ID survives all app transitions.
+2. Current Character version is consumed consistently.
+3. Historical Character versions are not overwritten.
+4. Core 6 Visual IDs never drift.
+5. Crew personality does not collapse into generic helper copy.
+6. WAIT occurs before hint escalation.
+7. Crew never talks over CHILD_RECORDING.
+8. SYSTEM_TTS never impersonates Crew.
+9. App switch does not end Ready session.
+10. Episode callback never blocks the learning task.
+11. Badge observation never becomes silent award.
+12. Badge Star Grade never merges with Wish Gem or generic star.
+13. Absence never causes affinity/streak penalty.
+14. Profile/Character refresh never resets Crew/Badge/Island/learning history.
+15. Ready remains exactly three primary screens.
+16. Hide remains retrieval specialist.
+17. Snap remains child-authored expression specialist.
+18. 390×844 hierarchy remains readable.
+19. non-happy states preserve context.
+20. no provisional visual choice is promoted to family lock without review.
+
+## 39. Gate status after contract closure
+
+GATE-01 CHARACTER_PROFILE_REFRESH:
+- LOGIC CONTRACT = CLOSED
+- IMPLEMENTATION = OPEN
+- FINAL VISUAL = OPEN
+
+GATE-02 CREW_MACHINE_RULE_MIGRATION:
+- MACHINE RULE = MIGRATED on Snap branch
+- cross-app code consumers = REVIEW_REQUIRED
+
+GATE-03 AUDIO_ROLE_SEPARATION:
+- LOGIC CONTRACT = CLOSED
+- Snap runtime implementation = OPEN
+
+GATE-04 CHILD_RECORDING_OWNERSHIP:
+- LOGIC CONTRACT = CLOSED
+- retention/privacy/runtime mapping = OPEN
+
+GATE-05 EPISODE_PERSISTENCE:
+- SEMANTIC ENVELOPE = CLOSED
+- storage/runtime implementation = OPEN
+
+GATE-06 BADGE_HISTORY_RENDERING:
+- HISTORY DEFAULT = LOCK_CANDIDATE
+- final UI treatment = OPEN
+
+GATE-07 READY_GENERIC_STAR:
+- SEMANTIC/UI DECISION = CLOSED: disable legacy generic star pending separate approval
+- code cleanup = OPEN
+
+## 40. Next single integrated step
+
+Next work is ONE pass:
+- build app-complete Screen/State/Transition matrices for Ready / Hide / Snap against Sections 30–39;
+- identify every orphan function and every orphan UI idea;
+- classify each as SHARED / APP_LOCAL / BACKGROUND_ONLY / SUPERSEDED / OPEN;
+- then begin low-fi only for screens whose logic rows are closed.
+
+No separate handoff file.
+No deployment.
+No Netlify.
+No main merge.
+No device PASS claim.
+
 END
