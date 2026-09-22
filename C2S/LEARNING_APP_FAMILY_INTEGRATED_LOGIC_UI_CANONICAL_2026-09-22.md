@@ -4355,4 +4355,142 @@ For next iPhone-ratio candidate set, show these in order:
 
 Do not compress 3–5 into duplicate Character screens.
 
+
+## 132. HARD GENERATION GATE — regression stop
+
+Status: MANDATORY BEFORE EVERY UI IMAGE GENERATION.
+
+The previous high-fi poster/contact-sheet candidate is REJECTED and may not be reused as visual baseline.
+
+### 132.1 Output format lock
+
+User-facing generated UI results MUST be:
+- one app screen per generated image;
+- iPhone portrait proportion baseline 390×844 or equivalent tall-phone aspect;
+- no poster board;
+- no contact sheet;
+- no multiple phones inside one image;
+- no presentation-board captions around the phone;
+- no invented persistent device navigation.
+
+If multiple screens are needed, generate them as separate images in sequence.
+
+### 132.2 Pre-generation contradiction checklist
+
+Before generating a screen, the prompt/compiler must explicitly verify:
+
+1. SCREEN_ID is one currently authorized screen/state.
+2. USER_CHARACTER_ALLOWED_AT_THIS_STAGE = true/false.
+3. CREW_IDS allowed are canonical only.
+4. exact UI choice labels/count are locked and copied exactly where required.
+5. Signature Item order is not silently changed.
+6. SHARED_EXPEDITION_ACCENT is present only at its authorized stage.
+7. WORLD_ENTRY decisions are not omitted.
+8. Ready 3-screen invariant remains intact.
+9. Ready Weekly is planner-first/compact, not tile/card-wall.
+10. no persistent bottom nav unless an existing approved runtime explicitly requires it.
+11. Timer visual is never regenerated.
+12. no generic reward stars.
+13. no invented profile/character/crew species or identities.
+14. actual TTS speech remains HOLD.
+15. output aspect is single iPhone screen.
+
+Any FAIL = DO NOT GENERATE.
+
+### 132.3 Character appearance timing hard lock
+
+Before A/B/C reveal:
+- NO completed user Character.
+- source photo placeholder/capture UI allowed.
+- Crew allowed only where onboarding stage explicitly permits.
+
+First completed user Character appearance:
+`CHARACTER_REVEAL / A-B-C`.
+
+World Entry may show the already-confirmed Character, never regenerate/reinterpret it.
+
+### 132.4 Core 6 generation hard lock
+
+Image generation must NOT invent replacement Crew.
+
+Allowed current canonical IDs only:
+- 두비
+- 로리
+- 잉크
+- 노바
+- 테이크
+- 제로
+
+If exact approved Visual ID references are unavailable to the image tool:
+- use neutral labeled placeholders/silhouette slots;
+- do NOT invent species/body/color as a substitute.
+
+PLACEHOLDER > WRONG CHARACTER.
+
+### 132.5 Exact direction-choice lock
+
+ROUND 1 — exactly one of three:
+- 신나고 발랄하게
+- 따뜻하고 다정하게
+- 차분하고 똑똑하게
+
+ROUND 2 — exactly one of three:
+- 가볍고 활동적인 모습
+- 편안하고 자연스러운 모습
+- 조금 더 모험가다운 모습
+
+No paraphrased mood categories in visual candidates until explicitly reopened.
+
+### 132.6 Ready Weekly generation hard lock
+
+Required visual grammar:
+- compact Mon–Sun overview
+- schedule-first
+- fixed commitments / Planner DATED TODO / free windows distinguishable by shape/structure/text, not color alone
+- today marker
+- pre-school task if demo includes it
+- Base Camp is background/context only
+- no seven-column pastel card wall
+- no whole-island map
+- no bottom nav invention
+- no Character dominance
+- no Timer redesign.
+
+Use synthetic demo data only when clearly labeled internally as mockup data; never imply it is the user's actual schedule.
+
+### 132.7 Image-generation prompt compiler rule
+
+Do not prompt image generation from broad prose such as:
+“children learning app family” or “adventure learning UI”.
+
+Each prompt must compile from:
+- exact SCREEN_ID
+- ALLOWED_ENTITIES
+- FORBIDDEN_ENTITIES
+- REQUIRED_COMPONENTS
+- REQUIRED_TEXT/CHOICE COUNT
+- CHARACTER_VISIBILITY
+- CREW_VISIBILITY
+- WORLD_DENSITY
+- PRIMARY_ACTION
+- NAVIGATION_CONSTRAINTS
+- REGRESSION_BLACKLIST
+- IPHONE_ASPECT_ONLY.
+
+Broad aesthetic prompts are subordinate to these constraints.
+
+## 133. Current generation recovery order
+
+Regenerate only in this order, one iPhone screen per image:
+
+1. CREW_DEPARTURE_SCENE — no user Character
+2. CHARACTER_PREP — no completed user Character
+3. CHARACTER_REVEAL — first completed Character
+4. SHARED_EXPEDITION_ACCENT
+5. WORLD_ENTRY
+6. READY_WEEKLY
+
+Do not proceed to the next image until the previous image is checked against Section 132.
+
+
 END
