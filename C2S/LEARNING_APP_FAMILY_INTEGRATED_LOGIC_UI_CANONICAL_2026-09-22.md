@@ -1815,4 +1815,544 @@ NEXT:
 one comparative low-fi system pass across Ready / Hide / Snap, beginning with app homes/entry surfaces and shared Character/Crew slots, while preserving app-specific task screens.
 
 
+
+## 48. Comparative Low-fi System Pass — family level
+
+Status:
+- LOW_FI_SYSTEM_DRAFT
+- NOT_HIGH_FI
+- NOT_FINAL_VISUAL_LOCK
+
+Purpose:
+Compare Ready / Hide / Snap side-by-side using one interaction grammar while preserving different app jobs.
+
+### 48.1 Shared shell grammar
+
+All three apps should recognize the same child/world identity without forcing the same layout.
+
+Shared shell elements:
+- top identity/context area: app/region + current Explorer context
+- one dominant content zone
+- one dominant primary action
+- optional contextual Character/Crew slot
+- secondary/help actions visually subordinate
+- return/context restoration always explicit
+- offline/stale/recovery state visible without replacing the whole world with a generic error page.
+
+Do NOT force:
+- identical bottom navigation
+- identical card geometry
+- identical world exposure
+- identical Character placement
+- identical reward/status strip.
+
+### 48.2 Shared Character/Crew slot hierarchy
+
+`CHARACTER_SLOT`
+- protagonist/user identity
+- may be absent if the screen is task-dense
+- never mandatory for task completion.
+
+`MAIN_COMPANION_SLOT`
+- one primary companion
+- low-to-medium visual priority
+- same Crew ID across apps.
+
+`CREW_REACTION_SLOT`
+- short-lived contextual appearance
+- never persistent large speech bubble
+- obeys OBSERVE → WAIT → REACT hierarchy.
+
+`GUEST_SLOT`
+- episode/special/context only
+- not always visible
+- no power/rarity treatment.
+
+Priority:
+TASK / INFORMATION > USER CHARACTER > MAIN COMPANION > GUEST DECORATION.
+
+## 49. Ready low-fi — 이번 주 여정
+
+Goal:
+understand the week before noticing world art.
+
+Baseline 390×844:
+
+```
+┌──────────────────────────────┐
+│ Ready & Set      [Profile]   │
+│ 이번 주 여정                  │
+│ 이번 주를 한눈에              │
+│                              │
+│ ┌──────────────────────────┐ │
+│ │ 월  화  수  목  금  토  일 │ │
+│ │                          │ │
+│ │ [고정] 학교/학원          │ │
+│ │ [할일] Planner TODO       │ │
+│ │ [여유] Free Window        │ │
+│ │                          │ │
+│ │ 오늘 ▾                    │ │
+│ └──────────────────────────┘ │
+│                              │
+│ 이번 주 흐름                  │
+│ [간결한 밀도/진행 표시]       │
+│                              │
+│ [MAIN_COMPANION_SLOT?]        │
+│                              │
+│        [오늘 보기]            │
+└──────────────────────────────┘
+```
+
+Rules:
+- one dominant Planner plane, not 7 separate colorful cards.
+- Base Camp scenery visible around/behind margins, not through unreadable text.
+- today selection is spatial/semantic focus.
+- no map pins, quest icons, treasure markers as schedule substitutes.
+- character/crew optional and small.
+- no generic star/reward meter.
+- badge acknowledgement appears only if a canonical event exists.
+
+### 49.1 Weekly item encoding
+
+Fixed commitment:
+- strongest time anchor
+- stable line/block treatment
+- not tappable as “mission” by default.
+
+Planner TODO:
+- task semantics
+- actionable when date/time is valid
+- may lead Daily/Timer.
+
+Free Window:
+- lighter open interval
+- no implication that child “must study” there.
+
+Completed:
+- reduced emphasis but remains legible.
+
+Conflict/overload:
+- shown as schedule condition, not failure/bad-state gamification.
+
+## 50. Ready low-fi — 오늘의 탐험길
+
+Goal:
+chronological execution with minimal visual fatigue.
+
+```
+┌──────────────────────────────┐
+│ ← 이번 주        [Profile]   │
+│ 오늘의 탐험길                 │
+│ 9월 22일                      │
+│                              │
+│ 07:20  등교 전 할 일          │
+│        [TODO / 상태]          │
+│         │                    │
+│ 08:30  학교                   │
+│         │                    │
+│ 15:30  학원/고정 일정         │
+│         │                    │
+│ 17:20  자유 시간              │
+│         │                    │
+│ 18:00  다음 할 일             │ ← CURRENT/NEXT
+│        [지금 시작]            │
+│                              │
+│ [CREW_REACTION_SLOT?]         │
+│                              │
+│ 상태: 부분완료/대기/이월 등    │
+└──────────────────────────────┘
+```
+
+Rules:
+- true vertical timeline.
+- current/next item visually dominant.
+- Crew reaction only around start/return/recovery/completion.
+- no Crew on every schedule row.
+- Timer CTA only on executable TODO.
+- fixed schedule never masquerades as learning mission.
+- carry-over appears as Planner-owned state, not child failure.
+
+### 50.1 Weekly → Daily transition
+
+LOCK_CANDIDATE:
+- selected day expands/moves into Daily
+- background/base-camp continuity persists
+- 250–400ms range candidate
+- reduced-motion = immediate semantic focus change
+- no cinematic transition that delays task access.
+
+## 51. Ready Timer integration low-fi
+
+No redesign.
+
+Only verify:
+- entry carries task_id/session/lap context.
+- exit returns exact Daily location.
+- Crew is quiet during RUNNING.
+- help/recovery can summon contextual Crew briefly.
+- completion can acknowledge, then returns to Daily.
+- no badge meter/generic stars during focus.
+
+## 52. Hide low-fi — Home
+
+Goal:
+show source/set readiness without dashboard overload.
+
+```
+┌──────────────────────────────┐
+│ Hide & Seek      Jungle      │
+│ [Character small] [Crew]     │
+│                              │
+│ 오늘 찾을 흔적                │
+│                              │
+│ ┌──────────────────────────┐ │
+│ │ STATE A: 단서 가져오기     │ │
+│ │ or                       │ │
+│ │ STATE B: 단서 확인/수정    │ │
+│ │ or                       │ │
+│ │ STATE C: 준비된 12개 세트  │ │
+│ │ [3 × 4 translucent slips]│ │
+│ └──────────────────────────┘ │
+│                              │
+│        [탐험 시작]            │
+│                              │
+│ [무전기]        [기록/보물함] │
+└──────────────────────────────┘
+```
+
+Rules:
+- only one readiness state visible at a time.
+- 12-word board is learning object, not decorative card grid.
+- Jungle/Waterfall scenery visible but does not reduce word readability.
+- Ready-provided target clearly takes precedence.
+- Crew presence feels local/environmental, not floating assistant avatar.
+
+## 53. Hide low-fi — TRACE
+
+Goal:
+think first.
+
+```
+┌──────────────────────────────┐
+│ ← 탐험             3 / 12   │
+│ TRACE                        │
+│                              │
+│        [문제/단서]            │
+│                              │
+│        [아이 응답 영역]       │
+│                              │
+│ [CREW: OBSERVE / WAIT]        │
+│                              │
+│ [말해서 답하기]  [다시 듣기]  │
+│                              │
+│          [다음]               │
+└──────────────────────────────┘
+```
+
+Hard behavior:
+- no automatic hint before wait threshold/explicit request.
+- while recording: Crew listening gesture only.
+- after capture: short reaction.
+- wrong/uncertain response never gets shaming treatment.
+
+## 54. Hide low-fi — LINK / PIECE
+
+Shared structure:
+- one core learning object
+- one primary answer action
+- contextual Crew support
+- no multi-card dashboard.
+
+LINK:
+```
+[verified relation/context]
+        ↓
+[choice / connection area]
+        ↓
+[child connects/selects]
+```
+
+PIECE:
+```
+[critical structure / missing part]
+        ↓
+[child completes]
+        ↓
+[short verification / continue]
+```
+
+Crew:
+- wording/gesture changes by personality
+- answer/difficulty does not.
+
+## 55. Hide low-fi — CATCH
+
+Goal:
+cumulative history, not prize cabinet.
+
+```
+┌──────────────────────────────┐
+│ CATCH / 보물함               │
+│                              │
+│ [최근 잡은 단어/개념]         │
+│ [날짜별 기록]                 │
+│ [Badge Book preview]          │
+│ [Calendar]                    │
+│ [Memory Ladder contextual]    │
+│                              │
+│ [Episode/crew memory snippet] │
+└──────────────────────────────┘
+```
+
+Rules:
+- no streak flame.
+- no rank.
+- Badge Book uses shared badge semantics.
+- Crew memories are story/history, not power progression.
+
+## 56. Snap low-fi — Home
+
+Goal:
+answer only:
+1) where to go,
+2) whether something can be resumed,
+3) where Ask/Imagination lives.
+
+```
+┌──────────────────────────────┐
+│ Snap & Pop        Beach      │
+│ [Explorer] [Main Companion]  │
+│                              │
+│ 어디로 가볼까?                │
+│                              │
+│        [living world map]     │
+│   ○아이디어  ○감정            │
+│   ○묘사      ○관점            │
+│        ○마무리                │
+│                              │
+│ [이어 하던 탐험]  ← only if any│
+│                              │
+│ 궁금한 게 있어?               │
+│ 상상해볼래?                   │
+└──────────────────────────────┘
+```
+
+Rules:
+- no Family/Badge/Wish/Settings card wall on Home.
+- current Crew present but not dominant.
+- Special only when relevant.
+- Ask and Imagination visually/semantically separate.
+- five landmarks remain accessible.
+
+## 57. Snap low-fi — Writing
+
+Goal:
+child-authored expression dominates.
+
+```
+┌──────────────────────────────┐
+│ ← 지도            1 / 3     │
+│ [랜드마크 이름]               │
+│ 짧은 질문                     │
+│                              │
+│ ┌──────────────────────────┐ │
+│ │ 내가 쓰는 곳              │ │
+│ │                          │ │
+│ │                          │ │
+│ └──────────────────────────┘ │
+│                              │
+│ [Crew: OBSERVE / WAIT]        │
+│                              │
+│ [말해서 쓰기]   [힌트 하나]   │
+│                              │
+│         [다음]                │
+└──────────────────────────────┘
+```
+
+Rules:
+- writing field is largest functional area.
+- Crew never covers writing field.
+- voice input uses CHILD_RECORDING.
+- Crew reaction after voice capture.
+- hint is optional and one-step.
+- no AI rewrite presented as child's text.
+
+## 58. Snap low-fi — Ask / Understand
+
+ASK:
+```
+[궁금한 게 있어?]
+[질문 입력 / 말하기]
+[물어보기]
+```
+
+UNDERSTAND:
+```
+[질문]
+[truth status: 확인됨 / 일부 확인 / 정보 부족]
+[짧은 설명]
+[optional visual/mental model]
+[내 표현으로 이어가기?]
+[돌아가기]
+```
+
+Audio:
+- factual reading = SYSTEM_TTS by default.
+- Crew may add short contextual reaction but not act as factual authority.
+
+## 59. Snap low-fi — Imagination / Result
+
+Imagination:
+- explicit optional entry
+- fragments/options, not completed child sentence
+- return restores exact draft/step.
+
+Result:
+```
+[내가 만든 표현]
+[짧은 Crew acknowledgement]
+[기록에서 보기]
+[지도 돌아가기]
+```
+
+No:
+- reward explosion
+- badge dashboard
+- gem/badge/affinity mixed score strip.
+
+## 60. Comparative visual density contract
+
+World exposure:
+- Ready Weekly: LOW–MED
+- Ready Daily: LOW
+- Ready Timer: existing locked asset
+- Hide Home: MED–HIGH
+- Hide TRACE/LINK/PIECE: LOW–MED
+- Hide CATCH: LOW–MED
+- Snap Home: HIGH
+- Snap Writing: LOW
+- Snap Understand: LOW
+- Snap Result: MED
+- Character Formation: MED–HIGH with controlled focus.
+
+Character prominence:
+- Onboarding/Formation: HIGH
+- Home/world screens: MED
+- task screens: LOW
+- history/badge scene: contextual.
+
+Crew prominence:
+- intro/select: HIGH
+- home: LOW–MED
+- task: LOW
+- episode/special: MED–HIGH
+- history: contextual.
+
+## 61. Cross-app motion grammar
+
+Shared motion categories:
+1. PLACE_CHANGE
+2. STATE_CHANGE
+3. FOCUS_CHANGE
+4. WORLD_LIFE
+
+Do not introduce reward motion as a separate global system.
+
+PLACE_CHANGE:
+- Ready Weekly→Daily
+- Ready/Hide/Snap region transitions
+- app handoff/return.
+
+STATE_CHANGE:
+- acquire→review→ready
+- recording start/stop
+- task completion/partial/recovery.
+
+FOCUS_CHANGE:
+- current/next task
+- selected word/landmark
+- hint reveal.
+
+WORLD_LIFE:
+- low-intensity environmental motion
+- never required for understanding.
+
+Reduced motion:
+- remove parallax/idle/shared-element travel
+- preserve hierarchy and state clarity.
+
+## 62. Cross-app audio grammar in UI
+
+Visible controls:
+- Listen/replay icon + label when unfamiliar
+- Speak/record distinct icon + label
+- recording state clear
+- no hidden microphone.
+
+During CHILD_RECORDING:
+- ambient may duck
+- Crew voice silent
+- Crew animation restrained
+- system TTS silent.
+
+After recording:
+- process/confirm
+- then optional Crew reaction.
+
+## 63. Shared Badge UI placement low-fi rule
+
+Badge may appear as:
+- small contextual acknowledgement after a canonical event
+- history/collection preview
+- share context
+- record linkage.
+
+Badge may NOT:
+- occupy permanent top status strip across every app
+- become navigation badge counter pressure
+- sit beside Wish Gem as equivalent currency
+- replace the actual task/result.
+
+## 64. Comparative failure tests
+
+A candidate fails if:
+- Ready looks like a game map before a planner.
+- Hide looks like a generic flashcard dashboard with jungle wallpaper.
+- Snap looks like a feature menu instead of a living expression world.
+- Crew seems like three different personalities across apps for same ID.
+- Character proportions revert to chibi/dwarf.
+- app task screens use the same generic card template.
+- world art covers primary learning information.
+- voice/mic controls are ambiguous.
+- history becomes streak pressure.
+- Badge/Gem/Affinity are visually conflated.
+- app switching feels like opening unrelated products.
+
+## 65. Low-fi pass verdict
+
+READY_WEEKLY = PASS_TO_CRITIQUE
+READY_DAILY = PASS_TO_CRITIQUE
+READY_TIMER = REFERENCE_ONLY / NO REDESIGN
+
+HIDE_HOME = PASS_TO_CRITIQUE
+HIDE_TRACE = PASS_TO_CRITIQUE
+HIDE_LINK = PASS_TO_CRITIQUE
+HIDE_PIECE = PASS_TO_CRITIQUE
+HIDE_CATCH = PASS_TO_CRITIQUE
+
+SNAP_HOME = PASS_TO_CRITIQUE
+SNAP_WRITING = PASS_TO_CRITIQUE
+SNAP_ASK_UNDERSTAND = PASS_TO_CRITIQUE
+SNAP_IMAGINATION = PASS_TO_CRITIQUE
+SNAP_RESULT = PASS_TO_CRITIQUE
+
+OPEN before high-fi:
+- final Character Formation screen-by-screen low-fi under latest onboarding flow
+- exact shared Profile/Character refresh UI
+- shared Crew friend/history collection IA
+- shared Badge collection IA
+- exact app transition choreography
+- final primary nav choices where still provisional.
+
+
 END
