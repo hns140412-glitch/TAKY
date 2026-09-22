@@ -4584,7 +4584,7 @@ The next conversation must inspect the actual prior assets and user-source evide
 
 2. `가이드☆ 여섯 친구의 찬란한 여정.png`
    - Core 6 visual lineage for 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로
-   - visual-ID verification history exists, but final 1:1 verification remains incomplete
+   - Core 6 Visual ID identity set is USER-CONFIRMED / HARD LOCK and must not be reopened; only each new rendered/projection asset requires a separate 1:1 match regression check
 
 3. `나만의 섬, 더 많은 이야기.png`
    - one persistent island
@@ -4689,7 +4689,7 @@ CLOSED for resume:
 OPEN:
 - exact prior visual BASE to use for the next delta-edit
 - exact element-level ACCEPTED vs REFERENCE_ONLY split for recovered old mockups
-- final Core 6 Visual ID 1:1 verification
+- per-output Core 6 projection/render 1:1 match verification (does NOT reopen the locked Visual ID identity set)
 - final high-fi composition for onboarding corrected screens
 - Ready Weekly final high-fi composition
 - downstream Hide / Snap high-fi after the above baseline is stable
@@ -4707,3 +4707,27 @@ NEXT:
 Do not begin by creating a fresh mockup.
 
 END
+
+
+### 136.10 Core 6 Visual ID state correction — 2026-09-23
+
+Previous wording incorrectly collapsed two different states.
+
+LOCKED / MUST NOT REOPEN:
+- the Core 6 Visual ID identity set itself;
+- 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로 identity mapping;
+- each member's locked species / silhouette / proportion / identity markings / canonical visual lineage.
+
+PER-OUTPUT REGRESSION GATE:
+- whether a newly generated group shot, onboarding screen, derivative pose, age/proportion projection, or theme-adaptive outfit still matches the locked Visual ID 1:1.
+
+Therefore:
+`CORE6_VISUAL_ID_IDENTITY = HARD_LOCK`
+`NEW_RENDER_MATCH = VERIFY_PER_OUTPUT`
+
+A failed or unverified new render means:
+`RENDER FAIL / OPEN`
+not
+`VISUAL ID OPEN`.
+
+Historical/source recovery evidence already established the Core 6 identity set as user-confirmed. Future visual work must retrieve and use that locked identity instead of recreating or re-deciding it.
