@@ -1,5 +1,61 @@
 # LEARNING APP FAMILY UI / VISUAL INTEGRATION HANDOFF — 2026-09-22 LATEST
 
+# LATEST RESUME OVERRIDE — 2026-09-23
+
+Status: CURRENT / C2S-CLOSED / DELTA-EDIT RESUME
+
+Read before older sections:
+1. `C2S/LEARNING_APP_FAMILY_UI_VISUAL_RESUME_C2S_2026-09-23.md`
+2. `C2S/LEARNING_APP_FAMILY_UI_VISUAL_RESUME_ATOMS_2026-09-23.json`
+3. `C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md`
+4. `C2S/LEARNING_APP_FAMILY_UI_DECISION_REGISTRY_2026-09-22.md`
+5. `C2S/LEARNING_APP_FAMILY_VISUAL_MOCKUP_INTEGRATION_REGISTRY_2026-09-22.md`
+
+Current phase:
+`RECOVER BEST EXISTING VISUAL BASE → ELEMENT-LEVEL REVIEW → DELTA MAP → DELTA EDIT`.
+
+Do not restart UI architecture or generate a fresh generic mockup first.
+
+Recover these actual source-lineage assets before any new image:
+- 함께 준비하는 탐험대 여정.png
+- 가이드☆ 여섯 친구의 찬란한 여정.png
+- 나만의 섬, 더 많은 이야기.png
+- imagegen.png + associated user correction text
+
+Recent generic poster / invented-character screens / placeholder wireframes / crop-overlay patch outputs are REJECTED as baselines and remain failure evidence only.
+
+Required onboarding continuity:
+Crew intro/familiarity
+→ Primary Companion
+→ naming/alias where applicable
+→ photo
+→ Signature Item
+→ current canonical direction choices
+→ A/B/C
+→ likeness / Visual ID
+→ Shared Expedition Accent
+→ Voyage / Drop
+→ Island discovery
+→ Island name
+→ Base Camp move
+→ Base Camp name
+→ Ready.
+
+Ready remains exactly:
+- 이번 주 여정
+- 오늘의 탐험길
+- locked Timer.
+
+Exact next action:
+1. live refresh;
+2. inspect four source assets;
+3. choose exact BASE candidate per affected screen;
+4. write concise DELTA MAP;
+5. only then create one corrected 390×844 iPhone screen at a time.
+
+No deploy / Netlify / main merge / device PASS claim.
+
+
 Status: ACTIVE / PRE-MOCKUP INTEGRATION
 Scope: Ready & Set / Snap & Pop / Hide & Seek
 Deployment / Netlify / main merge / DEVICE_VERIFIED: NOT RUN
