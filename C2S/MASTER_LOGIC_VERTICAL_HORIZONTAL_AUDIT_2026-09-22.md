@@ -635,3 +635,183 @@ ARCHITECTURE_GRAPH_CORRECTION = IDENTIFIED
 TREE_ONLY_MODEL = INSUFFICIENT
 CANONICAL_OWNER_MAP_UPDATE = PENDING
 APP_EXTRACTION = NOT_STARTED
+
+
+## 13. Architecture compass — Think Again, Keep Your Key
+Date: 2026-09-22
+Disposition: USER CORRECTION / GLOBAL ARCHITECTURE COMPASS
+
+TAKY slogan:
+`Think Again, Keep Your Key.`
+`한 번 더 생각하고, 핵심은 놓치지 마.`
+
+This is not branding only.
+It is the architectural compass for TAKY-governed systems.
+
+### Meaning for system structure
+
+THINK AGAIN:
+- do not freeze an early tree just because it once worked;
+- re-evaluate ownership when implementation pressure distorts architecture;
+- re-check upstream/downstream and before/after flow before extracting or integrating;
+- allow multiple OS/domain services to evolve independently;
+- allow better structures to supersede locally convenient but inverted dependencies.
+
+KEEP YOUR KEY:
+- preserve each system's semantic key/authority;
+- Work OS must retain Work meaning and authority;
+- Learning OS must retain Learning/family meaning and authority;
+- TAKY must retain governance/orchestration/validation authority;
+- apps/tools must not silently absorb upstream semantic ownership;
+- integration must preserve provenance, owner, scope and return path.
+
+Global rule:
+`INTEGRATE WITHOUT COLLAPSING OWNERSHIP.`
+`SHARE WITHOUT LOSING THE KEY.`
+`ROUTE WITHOUT MAKING THE ROUTER THE OWNER.`
+`HOST WITHOUT PROMOTING THE HOST TO AUTHORITY.`
+
+### Corrected whole-system model
+
+TAKY is not a monolithic super-app.
+TAKY is the governance/orchestration/evidence/validation layer that coordinates multiple first-class OS/domain systems.
+
+Candidate whole-system architecture:
+
+```
+TAKY CORE
+├─ Governance / Authority
+├─ Orchestration / Routing
+├─ Evidence / Validation
+├─ C2S / Handoff / Recovery
+└─ Growth / Evolution
+
+FIRST-CLASS OS / DOMAIN SYSTEMS
+├─ WORK_OS
+│  ├─ work identity / organization / role authority
+│  ├─ project/workflow/task semantics
+│  ├─ mail / source / document operations
+│  ├─ architecture/cad/excel/public-data domains
+│  └─ work-specific engines/services
+│
+├─ LEARNING_OS
+│  ├─ learning identity / family authority
+│  ├─ assignment fact
+│  ├─ learning engine
+│  ├─ planner engine
+│  ├─ learning history/evidence
+│  └─ learning-family session/contracts
+│
+├─ OTHER DOMAIN/OS SYSTEMS AS REAL NEED EMERGES
+│  └─ only when semantic ownership is genuinely independent
+│
+└─ SHARED TECHNICAL CAPABILITY
+   └─ semantic-light reusable mechanisms only
+```
+
+### Cross-OS relationship
+
+Work OS, Learning OS and future OS/domain systems may consume technical mechanisms and exchange explicit projections/events where a real use case exists.
+
+They SHALL NOT implicitly merge semantic authority.
+
+Examples:
+- same person may have Work identity and Learning-family identity, but these are not automatically the same authority object;
+- a calendar transport may be shared technically, while Work schedule meaning and Learning planner meaning remain separate;
+- a file/OCR mechanism may be shared while architectural-document meaning and homework FACT meaning remain separate;
+- a notification transport may be shared while approval/action authority remains domain-owned.
+
+Rule:
+`SHARED MECHANISM != SHARED SEMANTIC OWNER.`
+`CROSS-OS EVENT != CROSS-OS AUTHORITY.`
+
+### TAKY relationship to OS systems
+
+TAKY may:
+- discover the applicable owner;
+- route work;
+- enforce evidence/validation rules;
+- coordinate cross-OS handoff;
+- detect conflicts;
+- preserve correction lineage;
+- trigger human approval when required.
+
+TAKY must not:
+- become the semantic owner of every OS/domain object;
+- copy domain state into GRAND MASTER as a substitute for owner systems;
+- centralize identity/permission semantics merely for convenience;
+- turn orchestration into data ownership.
+
+Rule:
+`TAKY GOVERNS THE FLOW; OWNERS KEEP THE KEY.`
+
+### Work OS correction implication
+
+The same audit principle used for Learning OS must be applied to Work OS.
+
+Review required:
+- which capabilities are truly Work OS semantic owners;
+- which are project/domain services under Work OS;
+- which are only current implementation hosts;
+- which should be independent reusable services;
+- which are merely shared technical mechanisms.
+
+Examples to review:
+- mail operations
+- Notion operations
+- project/source registry
+- architecture intelligence
+- CAD/Excel automation
+- public-data adapters
+- document/report generation
+- approval/submission workflows
+
+Do not assume "currently in Work OS" means "Work OS must own all semantics forever."
+
+### Required master-logic representation
+
+A single parent-child tree is insufficient for the entire TAKY system.
+
+Target model needs BOTH:
+
+1. OWNERSHIP HIERARCHY
+- who owns meaning / authority / lifecycle
+
+2. INTERACTION GRAPH
+- who consumes whose projection
+- who emits events back
+- who coordinates
+- who hosts implementation
+- who must not mutate another owner's state
+
+Required graph edge classes:
+- OWNS
+- CONSUMES
+- PUBLISHES_PROJECTION
+- ACCEPTS_EVENT
+- ROUTES_TO
+- COORDINATES
+- IMPLEMENTED_IN
+- HOSTED_BY
+- FEDERATES_WITH
+- MUST_NOT_MUTATE
+
+### Global stop condition
+
+Before any further extraction/integration/rebuild:
+1. identify semantic owner;
+2. identify implementation host separately;
+3. identify consumers;
+4. identify input/output contracts;
+5. identify event return path;
+6. verify upstream/downstream impact;
+7. preserve the owner's key.
+
+If these cannot be stated clearly, architecture work is not ready to proceed.
+
+Status:
+GLOBAL_FLOW_CORRECTION = IDENTIFIED
+LEARNING_ONLY_INTERPRETATION = REJECTED
+WORK_OS_REVIEW = REQUIRED
+TAKY_ROLE_REVIEW = REQUIRED
+OWNERSHIP_GRAPH_MODEL = REQUIRED
