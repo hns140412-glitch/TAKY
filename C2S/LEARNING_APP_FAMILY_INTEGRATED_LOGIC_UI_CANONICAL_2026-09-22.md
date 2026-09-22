@@ -4514,4 +4514,33 @@ The generated image is still a candidate and must be checked after generation; a
 
 This executable gate supplements, not replaces, the integrated canonical.
 
+
+## 135. Governance correction — positive contracts over prohibition lists
+
+User correction:
+TAKY must not grow by endlessly adding “do not” clauses.
+
+Current rule:
+`DEFINE WHAT MUST BE TRUE` before defining what must not happen.
+
+Every UI generation contract should prioritize:
+1. PURPOSE
+2. OWNER
+3. REQUIRED SEQUENCE
+4. REQUIRED COMPONENTS
+5. INVARIANTS
+6. ALLOWED VARIATION
+7. OPEN
+8. only then a small set of CRITICAL REGRESSION LOCKS.
+
+The UI generation machine contract is upgraded to:
+`TAKY_UI_GENERATION_GATE_V2_POSITIVE_FIRST`.
+
+Positive validation now checks whether the intended structure is complete.
+It no longer treats a growing blacklist as the primary governance mechanism.
+
+Critical regression locks are intentionally limited to identity/history/locked-runtime violations that would materially corrupt the product.
+
+This supersedes blacklist-heavy governance style from prior generation-gate revisions.
+
 END
