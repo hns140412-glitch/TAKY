@@ -124,37 +124,25 @@
       "heavy_particles"
     ],
     "device_tilt_depth": {
-      "enabled_as_candidate": true,
-      "semantics": "LAYER_POSITION_ONLY_NOT_IDENTITY_DEFORMATION",
-      "performance_tiers": {
-        "full_depth": {
-          "use_when": "PERFORMANCE_STABLE",
-          "layers": [
-            "foreground_props",
-            "focused_crew",
-            "other_crew",
-            "mid_background",
-            "far_background"
-          ]
-        },
-        "character_only": {
-          "use_when": "FULL_DEPTH_TOO_HEAVY",
-          "background_static": true,
-          "crew_translation_px": [
-            2,
-            8
-          ],
-          "focused_crew_stronger_than_others": true,
-          "allow_shadow_shift": true,
-          "body_warp": false,
-          "face_warp": false,
-          "scale_pumping": false
-        },
-        "static_depth": {
-          "use_when": "REDUCED_MOTION_OR_SENSOR_UNAVAILABLE_OR_PERFORMANCE_CONSTRAINED",
-          "tilt_response": false
-        }
-      }
+      "contract": "SENSOR_PARALLAX_DEPTH_V01",
+      "default_tier": "CHARACTER_ONLY",
+      "upgrade_to_full_depth": "ONLY_AFTER_RUNTIME_PROFILE_PASS",
+      "activation": "AFTER_FIRST_MEANINGFUL_CREW_USER_GESTURE_IF_PERMISSION_REQUIRED",
+      "neutral_calibration": true,
+      "clamp_degrees": 12,
+      "focused_crew_px": [
+        3,
+        6
+      ],
+      "other_crew_px": [
+        1,
+        3
+      ],
+      "background_static": true,
+      "ui_static": true,
+      "contact_shadow_micro_shift": true,
+      "reduced_motion": "STATIC_DEPTH",
+      "identity_deformation": false
     }
   }
 }
