@@ -21,7 +21,15 @@ No separate handoff is required for continuity. Existing C2S files remain source
 
 ## 1. Authority / precedence
 
-Execution-method gate: all work in this scope must satisfy the TAKY top-level execution principles (`THINK AGAIN / KEEP YOUR KEY / YOU'RE THE KEY`). Latest explicit user correction may amend those principles.
+Execution-method gate: all work in this scope must satisfy the paired TAKY TOP-LEVEL GLOBAL AI ACTIVITY SLOGANS and their execution semantics:
+
+- `Think Again, Keep Your Key.`
+- `Think Again, You're The Key.`
+
+They are co-equal governance principles, not primary + secondary. Operational interpretation:
+`HUMAN INTENT → THINK AGAIN → KEEP YOUR KEY → FIND A WAY / SOLVE → YOU'RE THE KEY → VERIFY / CORRECT / CONTINUE`.
+
+Latest explicit user correction may amend those principles.
 
 1. latest direct user correction
 2. TAKY FAMILY_LOCKED / shared canonical decisions
