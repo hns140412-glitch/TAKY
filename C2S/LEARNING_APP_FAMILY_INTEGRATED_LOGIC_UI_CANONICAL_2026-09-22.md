@@ -2355,4 +2355,636 @@ OPEN before high-fi:
 - final primary nav choices where still provisional.
 
 
+
+## 66. Character Formation — end-to-end low-fi flow
+
+Status:
+- LOGIC CLOSED ENOUGH FOR LOW-FI
+- FINAL VISUAL NOT LOCKED
+- existing approved Character Formation lineage must be delta-edited, not replaced.
+
+Current onboarding sequence:
+
+1. Crew self-introduction / familiarity
+2. Primary companion selection
+3. Companion display name / nickname setting
+4. User photo capture or photo-library selection
+5. Signature Exploration Item selection
+6. Mood / direction consultation
+7. A/B/C Character formation
+8. Likeness correction / Character confirmation
+9. Hoodie/accent color confirmation
+10. Voyage or Drop entry mode
+11. Island discovery
+12. Island naming
+13. Move to Base Camp
+14. Base Camp naming
+15. Ready Home entry
+
+This sequence is one story, not fourteen disconnected settings pages.
+
+## 67. Formation screen 01 — Crew self-introduction
+
+Goal:
+make all Core 6 familiar before asking the child to choose.
+
+```
+┌──────────────────────────────┐
+│ 탐험을 떠나기 전             │
+│ 먼저 우리를 만나봐!          │
+│                              │
+│ [두비] [로리] [잉크]          │
+│ [노바] [테이크] [제로]        │
+│                              │
+│ 선택된 한 명이 앞으로 나옴    │
+│ [짧은 자기소개 + 행동]        │
+│                              │
+│        [다음 친구]            │
+└──────────────────────────────┘
+```
+
+Rules:
+- all six appear during this stage.
+- exact same card template repeated six times is not enough; personality must show in body language and micro-behavior.
+- no power/stat/rarity labels.
+- no “best match” score.
+- no winner/loser framing.
+- one member may occupy focus while others remain visible as same Crew.
+- Visual ID HARD LOCK.
+
+## 68. Formation screen 02 — Primary companion selection
+
+Goal:
+choose one companion to travel with first.
+
+```
+┌──────────────────────────────┐
+│ 누구와 먼저 떠날까?           │
+│                              │
+│ [6 Crew lineup]               │
+│                              │
+│ 선택 멤버 확대                │
+│ [personality short cue]       │
+│ [behavior preview]            │
+│                              │
+│      [이 친구와 출발]         │
+└──────────────────────────────┘
+```
+
+Rules:
+- Primary Companion != only Crew.
+- remaining five stay known active friends.
+- no functional difference.
+- no learning/reward advantage.
+- selection is emotional/companionship choice.
+
+## 69. Formation screen 03 — Companion naming
+
+Goal:
+personalize relationship without breaking canonical identity.
+
+```
+┌──────────────────────────────┐
+│ 이 친구를 뭐라고 부를까?      │
+│                              │
+│ 기본 이름: 두비               │
+│ [이름 입력]                   │
+│ [추천 이름 보기]              │
+│                              │
+│ 원래 이름은 기록에 남아요     │
+│                              │
+│          [정했어]             │
+└──────────────────────────────┘
+```
+
+Data rule:
+- crew_id stable.
+- canonical_name permanent.
+- current display_name mutable.
+- previous names/history preserved.
+- name change never changes affinity/memory.
+
+## 70. Formation screen 04 — User photo source
+
+Goal:
+capture current identity source.
+
+```
+┌──────────────────────────────┐
+│ 이제 네 모습을 보여줘         │
+│                              │
+│ [사진 찍기]                   │
+│ [사진 보관함에서 고르기]       │
+│                              │
+│ 얼굴이 잘 보이는 사진이 좋아   │
+│                              │
+│ [선택된 사진 preview]          │
+│          [이 사진 사용]        │
+└──────────────────────────────┘
+```
+
+Rules:
+- face identity is primary.
+- do not ask child to choose rendering engine/style family here.
+- photo is source evidence, not final UI avatar.
+- no age inference from photo as authoritative age source.
+
+## 71. Formation screen 05 — Signature Exploration Item
+
+Goal:
+select exactly one enduring personal exploration motif.
+
+```
+┌──────────────────────────────┐
+│ 탐험할 때 하나만 챙긴다면?    │
+│                              │
+│ [Item A] [Item B] [Item C]   │
+│ [Item D] [Item E] [...]      │
+│                              │
+│ 선택 item preview             │
+│                              │
+│        [이걸 챙길래]          │
+└──────────────────────────────┘
+```
+
+Rules:
+- exactly one signature item.
+- persists across A/B/C, likeness correction and derivatives.
+- item enhances identity, does not hide face/body.
+- avoid costume-editor explosion.
+
+## 72. Formation screen 06 — Direction round 1
+
+Goal:
+child chooses one visual/personality direction, not a different identity.
+
+```
+┌──────────────────────────────┐
+│ 어떤 느낌이 더 너 같아?       │
+│                              │
+│ [A direction card]            │
+│ [B direction card]            │
+│ [C direction card]            │
+│                              │
+│        [이 느낌]              │
+└──────────────────────────────┘
+```
+
+Cards come from the recovered direction pool:
+- LIVELY
+- CURIOUS
+- WARM
+- BOLD
+- FOCUSED
+- IMAGINATIVE
+
+Rules:
+- three choices in round 1.
+- cards express direction, not different faces.
+- source-photo identity outranks direction.
+
+
+## 73. Formation screen 07 — Direction round 2
+
+Goal:
+choose a second distinct direction after confirming round 1.
+
+```
+┌──────────────────────────────┐
+│ 한 가지 더 골라볼까?          │
+│                              │
+│ [Direction 1]                 │
+│ [Direction 2]                 │
+│ [Direction 3]                 │
+│                              │
+│        [이 느낌도 좋아]        │
+└──────────────────────────────┘
+```
+
+Rules:
+- exactly one selection.
+- should not simply repeat round 1.
+- system derives the third contrast direction automatically.
+- the child does NOT directly choose the system contrast.
+
+## 74. Formation screen 08 — A/B/C generation / discovery
+
+Goal:
+show three same-child character directions with strong likeness continuity.
+
+```
+┌──────────────────────────────┐
+│ 네 캐릭터가 도착했어          │
+│                              │
+│ [A]      [B]      [C]        │
+│                              │
+│ A = 선택 1                    │
+│ B = 선택 2                    │
+│ C = 자동 대비                 │
+│                              │
+│ [한 명씩 크게 보기]           │
+│                              │
+│        [비교해볼래]           │
+└──────────────────────────────┘
+```
+
+Mandatory visual checks:
+- same face identity across A/B/C.
+- source-photo facial traits remain recognizable.
+- age-appropriate human child body proportion.
+- no SD/chibi/dwarf body.
+- result #5 proportion direction is the preferred current reference relative to #4.
+- Signature Item persists in all three.
+- Crew Visual IDs remain unchanged.
+
+## 75. Formation screen 09 — Likeness correction
+
+Goal:
+fix likeness without changing the chosen identity direction.
+
+```
+┌──────────────────────────────┐
+│ 조금 더 닮게 맞춰볼까?        │
+│                              │
+│ [source photo]  [chosen char] │
+│                              │
+│ 얼굴 / 머리 / 인상 확인       │
+│                              │
+│ [이대로 좋아]                 │
+│ [조금 더 닮게]                │
+└──────────────────────────────┘
+```
+
+Rules:
+- correction uses source identity as authority.
+- no new unrelated style family.
+- no body-ratio regression.
+- correction is not a new character generation from scratch.
+
+## 76. Formation screen 10 — Character confirmation
+
+Goal:
+lock the selected same-child Visual ID.
+
+```
+┌──────────────────────────────┐
+│ 이 모습으로 함께 갈까?        │
+│                              │
+│ [final candidate large]       │
+│                              │
+│ Signature Item                │
+│ selected direction cues       │
+│                              │
+│        [이 모습으로 갈래]      │
+└──────────────────────────────┘
+```
+
+State:
+`VISUAL_ID_LOCKED`.
+
+This does not imply every derivative asset is already ready.
+
+## 77. Formation screen 11 — Hoodie / accent color
+
+Goal:
+use the user character’s hoodie/accent as a visual-unity anchor without recoloring the Crew.
+
+```
+┌──────────────────────────────┐
+│ 후드 색을 골라볼까?           │
+│                              │
+│ [color chips / swatches]      │
+│                              │
+│ [character preview]           │
+│                              │
+│        [이 색으로]            │
+└──────────────────────────────┘
+```
+
+Rules:
+- affects user Character primary accent.
+- may inform selected profile/share accent.
+- may influence tiny UI accent only where semantically safe.
+- MUST NOT recolor Crew canonical Visual IDs.
+- MUST NOT recolor world geography into a new theme.
+- exact palette propagation remains controlled, not global.
+
+## 78. Formation screen 12 — Voyage / Drop
+
+Goal:
+choose how the child enters the same fixed island.
+
+```
+┌──────────────────────────────┐
+│ 이제 섬으로 갈 시간이야       │
+│                              │
+│ [항해 모드]    [낙하 모드]    │
+│                              │
+│ 짧은 미리보기                 │
+│                              │
+│        [출발]                 │
+└──────────────────────────────┘
+```
+
+Rules:
+- presentation choice, not gameplay advantage.
+- does not redefine Character identity.
+- same destination island.
+- no hidden reward difference.
+
+## 79. Formation screen 13 — Island discovery
+
+Goal:
+make world arrival feel like discovery, not app setup.
+
+```
+┌──────────────────────────────┐
+│ [island reveal]               │
+│                              │
+│ [Character + Primary Crew]    │
+│                              │
+│ 처음 보는 섬                  │
+│                              │
+│        [가까이 가보기]        │
+└──────────────────────────────┘
+```
+
+Rules:
+- high visual density allowed here.
+- no feature dashboard.
+- island topology remains fixed.
+- transition should preserve same Character/Crew identity.
+
+## 80. Formation screen 14 — Island naming
+
+```
+┌──────────────────────────────┐
+│ 이 섬 이름은 뭐로 할까?       │
+│                              │
+│ [name input]                  │
+│ [recommendation optional]     │
+│                              │
+│        [이 이름으로]          │
+└──────────────────────────────┘
+```
+
+Rule:
+renaming later never resets learning/world history.
+
+## 81. Formation screen 15 — Move to Base Camp
+
+Goal:
+spatially connect island discovery to Ready.
+
+```
+┌──────────────────────────────┐
+│ [island → Base Camp movement] │
+│                              │
+│ [Character + Primary Crew]    │
+│                              │
+│ 베이스캠프가 보여             │
+│                              │
+│        [가보자]               │
+└──────────────────────────────┘
+```
+
+Rules:
+- same island.
+- no “new app launch” visual break.
+- Ready entry is a place transition.
+
+## 82. Formation screen 16 — Base Camp naming
+
+```
+┌──────────────────────────────┐
+│ 우리 베이스캠프 이름은?       │
+│                              │
+│ [name input]                  │
+│ [recommendation optional]     │
+│                              │
+│        [정했어]               │
+└──────────────────────────────┘
+```
+
+Naming does not alter Planner ownership/state.
+
+## 83. Formation screen 17 — Ready Home handoff
+
+Goal:
+land directly in the existing Ready world without inventing a fourth Ready primary screen.
+
+```
+┌──────────────────────────────┐
+│ Base Camp arrival             │
+│                              │
+│ [Character + Crew small]      │
+│                              │
+│ 이번 주 여정으로 자연스럽게    │
+│ 이어지는 transition           │
+└──────────────────────────────┘
+```
+
+Rule:
+final destination is Ready’s existing three-screen architecture.
+Do not create a permanent onboarding-only Home dashboard.
+
+## 84. Character Formation visual hierarchy
+
+High:
+- source photo identity
+- user Character
+- Core 6 during introduction
+- chosen primary companion during selection.
+
+Medium:
+- island discovery
+- Voyage/Drop
+- Base Camp arrival.
+
+Low:
+- form controls
+- technical generation states
+- system terminology.
+
+Avoid:
+- generic avatar maker
+- “RPG class select”
+- stat sheets
+- rarity
+- multiple cosmetic editors
+- photo-real cutout pasted on illustrated world.
+
+## 85. Profile Refresh low-fi
+
+This is NOT onboarding again.
+
+```
+┌──────────────────────────────┐
+│ 프로필                        │
+│ [현재 Character]              │
+│                              │
+│ 사진이 바뀌었어               │
+│ [새 사진 preview]             │
+│                              │
+│ 캐릭터도 새 모습으로          │
+│ 업데이트할까?                 │
+│                              │
+│ [나중에] [미리보기]           │
+└──────────────────────────────┘
+```
+
+Preview:
+```
+┌──────────────────────────────┐
+│ 지금 모습     새 모습         │
+│ [vN]          [candidate]     │
+│                              │
+│ 같은 아이인지 확인            │
+│ 나이/비율 변화 확인           │
+│                              │
+│ [유지]       [업데이트]        │
+└──────────────────────────────┘
+```
+
+Rules:
+- no automatic silent replacement.
+- current version remains active until confirmation.
+- Crew/Badge/Island/history untouched.
+- historical Character versions preserved.
+
+## 86. Crew Friend / History IA — low-fi direction
+
+Goal:
+relationship/history, not roster collection.
+
+Preferred mental model:
+`친구 앨범 / 함께한 탐험`, not inventory.
+
+```
+┌──────────────────────────────┐
+│ 탐험대                        │
+│                              │
+│ [현재 동행]                   │
+│ [Core 6 known friends]        │
+│ [Later discovered friends]    │
+│                              │
+│ 선택 friend detail:           │
+│ - 처음 만난 날                │
+│ - 현재 이름 / 이전 이름       │
+│ - 함께한 사건                 │
+│ - 기억나는 에피소드           │
+│ - 같이 있던 Badge             │
+│                              │
+│ [같이 다니기] / [이름 바꾸기] │
+└──────────────────────────────┘
+```
+
+Rules:
+- no owned/equipped/rare language.
+- no power/stat comparison.
+- undiscovered Special Guest remains clue/shadow where appropriate.
+- Expansion Crew appears gradually.
+
+## 87. Badge Collection IA — low-fi direction
+
+Goal:
+experience/history collection, not reward inventory.
+
+```
+┌──────────────────────────────┐
+│ 배지                          │
+│                              │
+│ [recent meaningful badge]     │
+│                              │
+│ [experience families]         │
+│ [history/date/context]        │
+│                              │
+│ badge detail:                 │
+│ - name                        │
+│ - tier                        │
+│ - star grade                  │
+│ - when / where                │
+│ - linked Character version    │
+│ - Crew / episode context      │
+│                              │
+│ [기록 보기] [공유 optional]   │
+└──────────────────────────────┘
+```
+
+Rules:
+- no leaderboard.
+- no generic completion stars.
+- no Wish Gem balance.
+- no badge farming CTA.
+- event-time Character version preferred in historical detail when available.
+
+## 88. TTS actual speech HOLD — explicit correction
+
+User correction:
+Only the parts that actually speak through TTS are HOLD.
+
+Continue now:
+- CHILD_RECORDING
+- microphone UI
+- LISTENING / WAITING states
+- replay of recorded child audio where supported
+- transcript flow
+- Crew reaction logic
+- audio slot/state contracts
+- ambient audio logic
+- visual listening gestures.
+
+HOLD:
+- actual CREW_VOICE TTS output
+- actual SYSTEM_TTS spoken output
+- TTS provider selection
+- synthetic voice timbre
+- synthetic prosody/emotion tuning
+- synthetic character voice casting.
+
+Important:
+- TTS HOLD does NOT block UI/logic low-fi.
+- screens may reserve “speak/replay” affordance state without asserting production TTS quality.
+- do not mark spoken TTS behavior as runtime-verified until separate voice track closes.
+
+## 89. Character Formation low-fi verdict
+
+CREW_INTRO = PASS_TO_CRITIQUE
+PRIMARY_COMPANION = PASS_TO_CRITIQUE
+COMPANION_NAME = PASS_TO_CRITIQUE
+PHOTO_SOURCE = PASS_TO_CRITIQUE
+SIGNATURE_ITEM = PASS_TO_CRITIQUE
+DIRECTION_ROUND_1 = PASS_TO_CRITIQUE
+DIRECTION_ROUND_2 = PASS_TO_CRITIQUE
+ABC_DISCOVERY = PASS_TO_CRITIQUE
+LIKENESS_CORRECTION = PASS_TO_CRITIQUE
+CHARACTER_CONFIRM = PASS_TO_CRITIQUE
+HOODIE_ACCENT = PASS_TO_CRITIQUE
+VOYAGE_DROP = PASS_TO_CRITIQUE
+ISLAND_DISCOVERY = PASS_TO_CRITIQUE
+ISLAND_NAME = PASS_TO_CRITIQUE
+BASE_CAMP_MOVE = PASS_TO_CRITIQUE
+BASE_CAMP_NAME = PASS_TO_CRITIQUE
+READY_HANDOFF = PASS_TO_CRITIQUE
+
+PROFILE_REFRESH = PASS_TO_CRITIQUE
+CREW_FRIEND_HISTORY = PASS_TO_CRITIQUE
+BADGE_COLLECTION = PASS_TO_CRITIQUE
+
+Actual TTS speech = HOLD / SEPARATE TRACK.
+
+## 90. Next integrated critique pass
+
+Before any high-fi:
+1. critique Character Formation flow for unnecessary steps/overload;
+2. test whether item-before-mood is visually natural;
+3. verify A/B/C same-child likeness hierarchy;
+4. verify #5 proportion reference dominance over #4;
+5. verify hoodie accent does not recolor Crew;
+6. verify Crew intro personalities are visually distinguishable without stat cards;
+7. verify Profile Refresh feels like update, not recreation;
+8. verify Friend/History and Badge Collection do not become inventory/reward dashboards;
+9. verify Ready/Hide/Snap entry surfaces still match the same Character/Crew history;
+10. keep actual TTS speech excluded from this pass.
+
 END
