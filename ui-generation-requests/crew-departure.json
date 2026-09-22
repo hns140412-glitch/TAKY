@@ -31,10 +31,14 @@
     "derivative_projection_only": true
   },
   "crew_reference": {
-    "approved_visual_id_available": false,
-    "required_source": "EXACT_APPROVED_CORE6_VISUAL_ID_ASSETS"
+    "approved_visual_id_available": true,
+    "required_source": "EXACT_APPROVED_CORE6_VISUAL_ID_ASSETS",
+    "references": [
+      "가이드☆ 여섯 친구의 찬란한 여정.png",
+      "current-conversation high-fi Core 6 departure/familiarity screen"
+    ]
   },
-  "crew_render_mode": "PLACEHOLDER_ONLY",
+  "crew_render_mode": "LOCKED_ID_DERIVATIVE",
   "crew_mutations": [
     "expression",
     "pose",
@@ -56,5 +60,5 @@
   "tts": {
     "actual_speech": false
   },
-  "notes": "For a real Crew render, exact approved Visual ID references must be attached to the image-generation context and approved_visual_id_available must become true. Without them, placeholders only. Never regenerate or reinterpret Crew identity."
+  "notes": "Use the exact approved Core 6 Visual ID references. Preserve identity, species, face, silhouette, body proportion, identity colors/markings, signature clothing/equipment. Change only expression/pose/gesture/action/position/dialogue/reaction. No user Character on this screen."
 }
