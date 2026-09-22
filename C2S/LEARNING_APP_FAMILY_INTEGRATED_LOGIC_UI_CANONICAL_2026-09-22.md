@@ -2987,4 +2987,421 @@ Before any high-fi:
 9. verify Ready/Hide/Snap entry surfaces still match the same Character/Crew history;
 10. keep actual TTS speech excluded from this pass.
 
+
+## 91. Aggressive critique — Character Formation flow
+
+Verdict:
+The 17-step low-fi is logically complete but visually too fragmented if implemented as 17 discrete full screens.
+The canonical story should remain complete while UI presentation collapses adjacent decisions into fewer continuous scenes.
+
+### 91.1 Fragmentation risks found
+
+RISK-01:
+Crew self-intro → companion selection → companion naming can feel like three separate settings pages.
+
+Correction:
+Treat as one `CREW_DEPARTURE_SCENE` with internal states:
+INTRODUCE_ALL → FOCUS_MEMBER → SELECT_PRIMARY → OPTIONAL_NAME.
+
+RISK-02:
+Photo source → Signature Item → Direction round 1 → Direction round 2 can become an avatar wizard.
+
+Correction:
+Treat as one `CHARACTER_PREP_SCENE` with progressive spatial composition:
+PHOTO → ITEM → DIRECTION_1 → DIRECTION_2.
+Keep one persistent expedition-preparation environment rather than card-by-card setup pages.
+
+RISK-03:
+A/B/C → likeness correction → final confirm → hoodie color can over-extend character editing.
+
+Correction:
+Treat as one `CHARACTER_REVEAL_SCENE`:
+ABC_DISCOVERY → SELECT → OPTIONAL_LIKENESS_CORRECTION → CONFIRM → ACCENT.
+Hoodie/accent should appear as a finishing touch, not a second character editor.
+
+RISK-04:
+Voyage/Drop → island discovery → island name → Base Camp travel → Base Camp name → Ready handoff can become six consecutive confirmation screens.
+
+Correction:
+Treat as one `WORLD_ENTRY_SEQUENCE` with only essential stops:
+ENTRY_MODE → ISLAND_REVEAL → ISLAND_NAME → BASE_CAMP_ARRIVAL → BASE_CAMP_NAME → READY.
+Most movement is transition state, not a full decision screen.
+
+### 91.2 Recommended scene model
+
+17 logical steps remain traceable, but child-facing full-screen scenes reduce to 4 major chapters:
+
+1. `CREW_DEPARTURE_SCENE`
+   - all six introductions
+   - primary companion
+   - optional companion name
+
+2. `CHARACTER_PREP_SCENE`
+   - photo
+   - Signature Item
+   - direction round 1
+   - direction round 2
+
+3. `CHARACTER_REVEAL_SCENE`
+   - A/B/C
+   - likeness correction
+   - final Visual ID confirm
+   - hoodie/accent finishing touch
+
+4. `WORLD_ENTRY_SEQUENCE`
+   - Voyage/Drop
+   - island discovery
+   - island naming
+   - Base Camp arrival
+   - Base Camp naming
+   - Ready handoff
+
+Rule:
+Logical atoms remain separate internally.
+Visual scenes may combine them when ownership/state boundaries remain explicit.
+
+## 92. Critique — Item before mood/direction
+
+Verdict:
+KEEP.
+
+Reason:
+Signature Item before direction makes the item part of the same identity across A/B/C.
+If item is selected after A/B/C, it risks becoming cosmetic customization and weakens candidate comparability.
+
+UI correction:
+- Item should be chosen in the same preparation environment as the photo.
+- Do not show a giant catalog.
+- surface exactly 3 recommended choices first, with access to the remaining approved catalog secondarily.
+- after selection, the item remains visibly packed/held through direction consultation.
+
+## 93. Critique — A/B/C identity and likeness hierarchy
+
+Hard hierarchy:
+
+SOURCE PHOTO IDENTITY
+> AGE-APPROPRIATE PROPORTION
+> SELECTED SIGNATURE ITEM
+> DIRECTION DIFFERENCE
+> DECORATIVE STYLE VARIATION
+
+If A/B/C differ so much that the child reads them as three different people, FAIL.
+
+A/B/C may vary:
+- expression
+- pose
+- motion energy
+- atmosphere
+- small apparel styling
+- world lighting reaction.
+
+A/B/C must preserve:
+- face structure
+- eye/feature relation
+- hairstyle identity cues
+- age impression
+- body age/proportion
+- Signature Item.
+
+Current proportion reference:
+- visual reference #5 > #4.
+- #4 may inform staging only where non-conflicting.
+- no chibi compression.
+
+## 94. Critique — Hoodie/accent placement
+
+Current separate full screen is probably excessive.
+
+Correction:
+Move hoodie/accent to the final portion of `CHARACTER_REVEAL_SCENE`.
+
+Preferred interaction:
+- final confirmed Character stays large
+- 4–6 curated accent swatches
+- immediate live preview
+- one confirm action.
+
+Do not:
+- expose full color wheel
+- recolor Crew
+- recolor island
+- re-run A/B/C due to accent color
+- turn into wardrobe customization.
+
+Status:
+HOODIE_ACCENT_FULL_SCREEN = SUPERSEDED.
+HOODIE_ACCENT_INLINE_FINISH = LOCK_CANDIDATE.
+
+## 95. Critique — Crew introduction quality
+
+Core 6 introduction must not be six static cards.
+
+Required differentiation:
+- silhouette
+- idle movement
+- entrance behavior
+- listening gesture
+- one-line personality expression
+- one distinctive interaction with another Crew member or environment where appropriate.
+
+Do not require TTS.
+Actual TTS speech remains HOLD.
+Text + gesture + motion is sufficient for current UI pass.
+
+Recommended introduction grammar:
+`ENTER → NOTICE CHILD → SELF-EXPRESSION → SMALL INTERACTION → STEP_BACK`.
+
+All six should feel noisy/alive enough to self-present, but not so chaotic that primary companion selection becomes unreadable.
+
+## 96. Critique — Companion selection
+
+No “recommended best companion”.
+
+The interface may help the child remember each member through:
+- short personality cue
+- signature gesture
+- recent intro moment.
+
+Forbidden:
+- match percentage
+- personality score
+- functional advantage
+- “best for English / best for focus”.
+
+Primary companion means:
+`WHO TRAVELS WITH ME FIRST`
+not
+`WHO IS STRONGEST`.
+
+## 97. Critique — Profile Refresh
+
+Current low-fi is directionally correct but should be even less like recreation.
+
+Preferred flow:
+
+PROFILE PHOTO CHANGED
+→ small non-blocking Character refresh prompt
+→ side-by-side preview only if child/parent chooses
+→ update / keep current.
+
+Do not reopen:
+- Signature Item selection
+- Crew selection
+- island naming
+- full mood consultation by default.
+
+Direction reuse:
+- current Character direction/identity remains baseline.
+- only reopen direction consultation if explicitly requested.
+
+Age progression:
+- update can subtly adjust body proportion and age expression.
+- if visual change is too large, human confirmation becomes mandatory.
+
+## 98. Critique — Friend / History IA
+
+The current “탐험대” surface risks becoming a collection screen if it leads with roster tiles.
+
+Correction:
+Lead with relationship continuity:
+
+1. 현재 같이 다니는 친구
+2. 최근 같이 있었던 일
+3. 다시 만나고 싶은 친구
+4. 전체 친구 보기
+
+Full roster is secondary.
+
+Friend detail should prioritize:
+- first meeting
+- shared episode
+- current/previous name
+- memorable reaction
+- linked Badge/history
+over:
+- species/stat/category metadata.
+
+Undiscovered Special Guest:
+- clue/shadow/story trace
+- not silhouette rarity slot.
+
+## 99. Critique — Badge Collection IA
+
+The current collection draft is still too close to an achievement catalog if it begins with a badge grid.
+
+Correction:
+Primary organization should be by meaningful experience/history, with badges as markers.
+
+Preferred entry order:
+1. 최근 남긴 흔적
+2. 기억에 남는 경험
+3. 성장한 배지
+4. 전체 배지 보기
+
+Badge detail:
+- why/when
+- linked child-created record
+- associated Crew/episode
+- event-time Character version
+- tier/star grade
+- optional share.
+
+Do not foreground:
+- total badge count
+- completion percentage
+- missing badge silhouettes
+- rarity.
+These create collection pressure.
+
+## 100. Critique — World Entry sequence
+
+Voyage/Drop should remain a meaningful choice.
+Everything after it should feel like travel, not forms.
+
+Recommended:
+- Voyage/Drop = explicit 2-choice screen
+- Island reveal = cinematic/state transition
+- Island naming = one short intervention
+- Base Camp travel = transition
+- Base Camp naming = one short intervention
+- Ready Weekly appears as destination.
+
+Do not insert:
+- tutorial carousel
+- app feature explanation
+- reward
+- multiple confirmations
+between island discovery and Ready.
+
+## 101. Critique — onboarding duration / escape hatches
+
+A long onboarding can fatigue the child even if each step is good.
+
+Required:
+- progress expressed as journey, not “3/17 setup”.
+- safe resume state after every major scene.
+- no loss if app closes.
+- back action within current scene where feasible.
+- do not require redoing Crew intro after photo/provider failure.
+- provider/generation wait must not trap the child on a spinner.
+
+Generation pending behavior:
+- save state
+- allow calm waiting activity / return later
+- resume directly at Character Reveal when candidate assets are ready.
+
+## 102. Critique — failure and recovery states
+
+Crew scene:
+- asset missing → use canonical fallback silhouette/name, do not invent replacement identity.
+
+Photo:
+- permission denied → photo library/manual retry path.
+- unusable image → explain visible issue only, do not infer sensitive traits.
+
+Character generation:
+- provider unavailable → preserve photo/item/direction choices.
+- partial A/B/C generation → do not silently compare 2 as if complete; allow retry missing candidate or explicit partial-review mode if later approved.
+
+Likeness correction:
+- failed correction → previous selected candidate remains intact.
+
+Naming:
+- sync failure → local-first pending state, no reset.
+
+World entry:
+- interrupted transition → resume at last confirmed state.
+
+## 103. Critique — Character/Crew/Badge continuity across app homes
+
+Required shared identity check:
+
+Ready:
+- same active Character
+- same primary companion
+- no character-generation controls.
+
+Hide:
+- same active Character
+- same primary companion
+- Crew behavior adapted to retrieval.
+
+Snap:
+- same active Character
+- same primary companion
+- Crew behavior adapted to expression.
+
+Profile refresh:
+- once vN+1 activates, all current app surfaces resolve to it.
+- historical badge/episode/detail surfaces may intentionally display vN if event-time provenance requires.
+
+## 104. Critique — TTS HOLD regression guard
+
+Actual TTS output remains HOLD only.
+
+Do NOT accidentally remove:
+- text dialogue
+- listening gesture
+- mic input
+- transcript
+- recorded-child replay
+- Crew reaction timing
+- audio state slots.
+
+Do NOT claim:
+- Crew voice quality
+- System TTS naturalness
+- spoken runtime pass
+until separate TTS track is reopened and validated.
+
+## 105. Revised Character Formation low-fi scene verdict
+
+`CREW_DEPARTURE_SCENE` = PASS
+- internal states: intro 6 → primary companion → optional naming
+
+`CHARACTER_PREP_SCENE` = PASS
+- photo → item → direction 1 → direction 2
+
+`CHARACTER_REVEAL_SCENE` = PASS
+- A/B/C → select → optional likeness correction → confirm → inline hoodie accent
+
+`WORLD_ENTRY_SEQUENCE` = PASS
+- Voyage/Drop → island reveal → island name → Base Camp → Base Camp name → Ready
+
+Compared with prior 17-full-screen interpretation:
+- logical coverage = preserved
+- child-facing scene fragmentation = reduced
+- continuity = improved
+- settings-wizard risk = reduced.
+
+## 106. Remaining logic/UI OPEN after aggressive critique
+
+Still OPEN:
+- exact age/proportion calibration bands
+- exact Core 6 missing Personality Pack details where source recovery is incomplete
+- Expansion +12 identities
+- Special Guest roster/cadence
+- shared Friend/History final entry point
+- shared Badge final entry point
+- exact Profile shell location
+- Snap final primary nav
+- exact cross-app transition choreography
+- high-fi art system
+- actual TTS speech track.
+
+Not blockers for current comparative low-fi critique:
+- TTS provider/voice quality
+- production deploy
+- device verification.
+
+## 107. Next integrated step
+
+Proceed with one family-level **LOW-FI CRITIQUE CLOSURE**:
+- compare the 4 Character Formation scenes against Ready / Hide / Snap homes;
+- ensure same Character/Crew silhouette, world-scale and navigation continuity;
+- resolve Profile / Friend / Badge entry hierarchy;
+- then mark which surfaces can enter HIGH-FI CANDIDATE and which must remain OPEN.
+
+No new handoff file.
+
 END
