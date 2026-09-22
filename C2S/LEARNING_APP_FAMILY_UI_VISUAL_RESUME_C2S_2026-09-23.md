@@ -1,8 +1,21 @@
 # LEARNING APP FAMILY UI / VISUAL RESUME C2S — 2026-09-23
 
 Status: CURRENT CORRECTION CLOSURE / RESUME READY
+Top-level execution governance: `C2S/TAKY_TOP_LEVEL_EXECUTION_PRINCIPLES_CANONICAL_2026-09-23.md`
 Parent authority: C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md
 Atoms: C2S/LEARNING_APP_FAMILY_UI_VISUAL_RESUME_ATOMS_2026-09-23.json
+
+## 0. TAKY top-level gate
+
+Primary slogan and execution rule:
+- **Think Again, Keep Your Key.**
+- **한 번 더 생각하고, 핵심은 놓치지 마.**
+
+Human-authority companion principle:
+- **Think Again, You're The Key.**
+
+For this UI/Visual resume, that means:
+`RECOVER BEFORE RECREATE → PRESERVE ACCEPTED LINEAGE → DELTA BEFORE REDESIGN → USER != DEBUGGER`.
 
 ## 1. Latest correction
 
