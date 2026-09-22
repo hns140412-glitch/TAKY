@@ -91,9 +91,9 @@ else:
         ("LEARNING_ENGINE","PUBLISHES_PROJECTION","LEARNING_FAMILY_ROUTER"),
         ("LEARNING_FAMILY_ROUTER","ROUTES_TO","HIDE_SEEK"),
         ("LEARNING_FAMILY_ROUTER","ROUTES_TO","SNAP_POP"),
-        ("READY_SET","ACCEPTS_EVENT","PLANNER_ENGINE"),
-        ("HIDE_SEEK","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
-        ("SNAP_POP","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+        ("PLANNER_ENGINE","ACCEPTS_EVENT","READY_SET"),
+        ("LEARNING_HISTORY_EVIDENCE","ACCEPTS_EVENT","HIDE_SEEK"),
+        ("LEARNING_HISTORY_EVIDENCE","ACCEPTS_EVENT","SNAP_POP"),
         ("CHARACTER_VISUAL_ID","PUBLISHES_PROJECTION","READY_SET"),
         ("TAKY_RUNTIME_ORCHESTRATOR","COORDINATES","WORK_OS"),
         ("TAKY_RUNTIME_ORCHESTRATOR","COORDINATES","LEARNING_OS"),
@@ -102,6 +102,18 @@ else:
     }
     for edge in sorted(required_edges - edge_keys):
         fail.append("REQUIRED_INTERACTION_EDGE_MISSING:" + "->".join(edge))
+
+    # ACCEPTS_EVENT direction is receiver -> event source.
+    forbidden_event_directions = {
+        ("READY_SET","ACCEPTS_EVENT","PLANNER_ENGINE"),
+        ("HIDE_SEEK","ACCEPTS_EVENT","PLANNER_ENGINE"),
+        ("SNAP_POP","ACCEPTS_EVENT","PLANNER_ENGINE"),
+        ("READY_SET","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+        ("HIDE_SEEK","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+        ("SNAP_POP","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+    }
+    for edge in sorted(forbidden_event_directions & edge_keys):
+        fail.append("ACCEPTS_EVENT_DIRECTION_REVERSED:" + "->".join(edge))
 
 # Current runtime hosting must not be promoted into semantic ownership.
 if (layers.get("PLANNER_ENGINE") or {}).get("semantic_owner") == "READY_SET":
