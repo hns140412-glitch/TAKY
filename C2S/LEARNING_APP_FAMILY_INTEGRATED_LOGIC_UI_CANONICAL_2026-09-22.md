@@ -1,6 +1,7 @@
 # LEARNING APP FAMILY — INTEGRATED LOGIC → UI CANONICAL — 2026-09-22
 
 Status: ACTIVE INTEGRATED CANONICAL / CORRECTION PROPAGATION AUTHORITY
+Top-level execution governance: `C2S/TAKY_TOP_LEVEL_EXECUTION_PRINCIPLES_CANONICAL_2026-09-23.md`
 Scope: TAKY → Learning App Family → Character / Profile / Age / Exploration Crew / Voice & Listening / Episode & Memory / Badge / Shared Island / Ready & Set / Hide & Seek / Snap & Pop / UI Projection
 Rule: THIS FILE IS THE SINGLE READ-FIRST INTEGRATION CANONICAL FOR THE ABOVE SCOPE.
 No separate handoff is required for continuity. Existing C2S files remain source lineage/evidence and are not deleted.
@@ -19,6 +20,8 @@ No separate handoff is required for continuity. Existing C2S files remain source
   - exact HEAD: `60b15325864e57003fb4f322098afad687c07757`
 
 ## 1. Authority / precedence
+
+Execution-method gate: all work in this scope must satisfy the TAKY top-level execution principles (`THINK AGAIN / KEEP YOUR KEY / YOU'RE THE KEY`). Latest explicit user correction may amend those principles.
 
 1. latest direct user correction
 2. TAKY FAMILY_LOCKED / shared canonical decisions
