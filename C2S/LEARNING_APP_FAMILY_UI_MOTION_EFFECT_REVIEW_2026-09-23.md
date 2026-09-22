@@ -238,3 +238,51 @@ Motion is an overlay/projection of the same BASE composition.
 
 Think Again, Keep Your Key.
 한 번 더 생각하고, 핵심은 놓치지 마.
+
+
+## 11. Device-tilt depth / performance fallback — 2026-09-23
+
+Target effect:
+phone tilt/orientation subtly changes perceived depth between character and environment.
+
+This is a 2.5D depth effect, not a Character deformation effect.
+
+Performance tiers:
+
+### TIER A — FULL DEPTH
+Use only when runtime performance is stable.
+- foreground props: highest micro-offset
+- focused Crew: medium micro-offset
+- non-focused Crew: slightly lower offset
+- mid-background: low offset
+- far background: very low / near-static
+- lighting/shadow response may shift subtly with tilt
+
+### TIER B — CHARACTER-ONLY DEPTH
+Preferred fallback when full layered parallax is too heavy.
+- background remains static
+- Crew layer responds to device tilt with very small x/y translation
+- focused Crew may receive slightly stronger depth offset than non-focused Crew
+- optional shadow/ground contact shift reinforces depth
+- no body warp, face warp, scale pumping, or silhouette distortion
+
+### TIER C — NO SENSOR MOTION
+For reduced-motion, unsupported sensors, permission denial, battery/performance constraints:
+- no tilt response
+- preserve the same depth through static composition, overlap, atmospheric perspective and shadow hierarchy
+
+Rule:
+`FULL_DEPTH_IF_STABLE -> CHARACTER_ONLY_IF_HEAVY -> STATIC_DEPTH_IF_REQUIRED`.
+
+The effect must degrade gracefully.
+Loss of sensor/parallax must never reduce task clarity or Crew identity fidelity.
+
+Recommended character-only amplitude:
+- translation: approximately 2–8 px total response
+- rotation: none or extremely small visual-plane correction only
+- scale: fixed
+- spring/smoothing: slow, low-amplitude, no wobble
+
+Important:
+device-orientation input controls layer position only.
+It never modifies locked Visual ID geometry.
