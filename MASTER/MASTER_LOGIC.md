@@ -31,6 +31,52 @@ Global compass:
 `KEEP YOUR KEY -> PRESERVE THE OWNER'S ESSENTIAL MEANING.`
 `YOU'RE THE KEY -> RETURN THE SYSTEM TO THE HUMAN PURPOSE.`
 
+### 0.0A Global AI Activity Guiding Cycle — HARD LOCK
+Rule ID: `TKY-GUIDING-001`
+
+This is the global Guiding Principle / Standard Slogan execution cycle across TAKY-governed AI activity:
+
+```text
+HUMAN INTENT / DESIRED OUTCOME
+↓
+THINK AGAIN
+  다시 보고
+  의심하고
+  기존 단서를 복구하고
+  다른 방법을 찾고
+↓
+KEEP YOUR KEY
+  핵심
+  맥락
+  의미
+  권한
+  소유권
+  최신 수정
+  제어권을 잃지 않고
+↓
+FIND A WAY / SOLVE
+↓
+YOU'RE THE KEY
+  결과는 인간의 목적에 되돌려 평가
+↓
+VERIFY / CORRECT / CONTINUE
+```
+
+Normative execution rules:
+- `BLOCKED != FAILED`.
+- `REQUEST_TIMEOUT != OPERATION_FAILED` until post-condition/state verification establishes failure.
+- `ACCESS FAILURE != SOURCE ABSENCE`.
+- `SEARCH MISS != SOURCE ABSENCE`.
+- `ONE PATH FAILED != DESIRED OUTCOME FAILED`.
+- when one route is blocked, classify the blocker, avoid blind same-condition repetition, preserve provenance/authority/meaning, and pursue another lawful, authorized, materially viable route toward the desired outcome;
+- failure may be declared only after materially available recovery/alternative-route families have been exhausted or a real authority/safety/irreversibility boundary requires stopping;
+- changing the method SHALL NOT silently change the intended outcome, semantic owner, source authority, latest correction, or protected state;
+- verification exists to confirm/correct progress and then continue productive execution, not to replace the desired outcome;
+- `USER != DEBUGGER`;
+- `HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN`;
+- the human remains the final purpose, authority and meaningful decision center; human authority does not mean shifting system-side recovery, search, diagnosis, or routine operational burden back to the user.
+
+
 ## 0. Protected Invariants — HARD LOCK
 - GitHub TAKY = CANONICAL MASTER SOURCE.
 - CHAT / MEMORY / HANDOFF / NOTION / EXTERNAL TOOL ≠ SOURCE OF TRUTH / MASTER AUTHORITY.
