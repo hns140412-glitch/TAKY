@@ -10,8 +10,10 @@ fail = []
 layers = data.get("layers") or {}
 required_layers = {
     "TAKY_CORE","SHARED_TECHNICAL_CAPABILITY","WORK_OS","LEARNING_OS",
-    "LEARNING_APP_FAMILY","READY_SET","HIDE_SEEK","SNAP_POP",
-    "WORK_DOMAIN_PROJECT","PLATFORM_ADAPTER"
+    "LEARNING_IDENTITY_AUTHORITY","ASSIGNMENT_FACT_DOMAIN","LEARNING_ENGINE",
+    "PLANNER_ENGINE","LEARNING_HISTORY_EVIDENCE","LEARNING_APP_FAMILY",
+    "LEARNING_FAMILY_ROUTER","CHARACTER_VISUAL_ID","WORLD_ENTRY_EXPANSION",
+    "READY_SET","HIDE_SEEK","SNAP_POP","WORK_DOMAIN_PROJECT","PLATFORM_ADAPTER"
 }
 if not required_layers.issubset(layers):
     fail.append("MISSING_LAYERS:" + ",".join(sorted(required_layers - set(layers))))
@@ -33,6 +35,67 @@ for app in ("READY_SET","HIDE_SEEK","SNAP_POP"):
     inherits=set((layers.get(app) or {}).get("must_inherit") or [])
     if not {"TAKY_CORE","LEARNING_OS","LEARNING_APP_FAMILY"}.issubset(inherits):
         fail.append(f"APP_INHERITANCE_INCOMPLETE:{app}")
+
+
+# Whole-system architecture must separate ownership hierarchy from interaction graph.
+model = data.get("architecture_model") or {}
+if not isinstance(model.get("ownership_hierarchy"), dict):
+    fail.append("OWNERSHIP_HIERARCHY_MODEL_MISSING")
+if not isinstance(model.get("interaction_graph"), dict):
+    fail.append("INTERACTION_GRAPH_MODEL_MISSING")
+
+for service in ("LEARNING_IDENTITY_AUTHORITY","ASSIGNMENT_FACT_DOMAIN","LEARNING_ENGINE","PLANNER_ENGINE","LEARNING_HISTORY_EVIDENCE"):
+    if (layers.get(service) or {}).get("parent") != "LEARNING_OS":
+        fail.append(f"LEARNING_DOMAIN_SERVICE_PARENT_INVALID:{service}")
+
+for family_capability in ("LEARNING_FAMILY_ROUTER","CHARACTER_VISUAL_ID","WORLD_ENTRY_EXPANSION"):
+    if (layers.get(family_capability) or {}).get("parent") != "LEARNING_APP_FAMILY":
+        fail.append(f"FAMILY_CAPABILITY_PARENT_INVALID:{family_capability}")
+
+ready = layers.get("READY_SET") or {}
+ready_forbidden = " ".join(str(x) for x in (ready.get("does_not_own") or []))
+for phrase in ("Planner semantics","Learning Engine semantics","Assignment FACT lifecycle semantics","family identity/role/permission semantics"):
+    if phrase not in ready_forbidden:
+        fail.append("READY_OWNER_BOUNDARY_MISSING:" + phrase)
+
+graph = data.get("interaction_graph") or []
+if not isinstance(graph, list) or not graph:
+    fail.append("INTERACTION_GRAPH_EDGES_MISSING")
+else:
+    allowed_types = set(((model.get("interaction_graph") or {}).get("allowed_edge_types") or []))
+    known_nodes = set(layers)
+    edge_keys = set()
+    for edge in graph:
+        if not isinstance(edge, dict):
+            fail.append("INVALID_INTERACTION_EDGE")
+            continue
+        src, typ, dst = edge.get("from"), edge.get("type"), edge.get("to")
+        if src not in known_nodes or dst not in known_nodes:
+            fail.append(f"INTERACTION_EDGE_UNKNOWN_NODE:{src}->{dst}")
+        if typ not in allowed_types:
+            fail.append(f"INTERACTION_EDGE_TYPE_INVALID:{typ}")
+        edge_keys.add((src,typ,dst))
+
+    required_edges = {
+        ("ASSIGNMENT_FACT_DOMAIN","PUBLISHES_PROJECTION","LEARNING_ENGINE"),
+        ("LEARNING_ENGINE","PUBLISHES_PROJECTION","PLANNER_ENGINE"),
+        ("PLANNER_ENGINE","PUBLISHES_PROJECTION","READY_SET"),
+        ("LEARNING_ENGINE","PUBLISHES_PROJECTION","LEARNING_FAMILY_ROUTER"),
+        ("LEARNING_FAMILY_ROUTER","ROUTES_TO","HIDE_SEEK"),
+        ("LEARNING_FAMILY_ROUTER","ROUTES_TO","SNAP_POP"),
+        ("READY_SET","ACCEPTS_EVENT","PLANNER_ENGINE"),
+        ("HIDE_SEEK","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+        ("SNAP_POP","ACCEPTS_EVENT","LEARNING_HISTORY_EVIDENCE"),
+        ("CHARACTER_VISUAL_ID","PUBLISHES_PROJECTION","READY_SET"),
+    }
+    for edge in sorted(required_edges - edge_keys):
+        fail.append("REQUIRED_INTERACTION_EDGE_MISSING:" + "->".join(edge))
+
+# Current runtime hosting must not be promoted into semantic ownership.
+if (layers.get("PLANNER_ENGINE") or {}).get("semantic_owner") == "READY_SET":
+    fail.append("PLANNER_OWNER_DRIFT_TO_READY")
+if (layers.get("LEARNING_ENGINE") or {}).get("semantic_owner") == "READY_SET":
+    fail.append("LEARNING_ENGINE_OWNER_DRIFT_TO_READY")
 
 shared=layers.get("SHARED_TECHNICAL_CAPABILITY") or {}
 if shared.get("class") != "SEMANTIC_LIGHT_SHARED_MECHANISM":
@@ -84,4 +147,4 @@ if fail:
         print(x)
     raise SystemExit(1)
 
-print("PASS: TAKY/Work/Learning/shared/family/project ownership boundaries are explicit and identity/authority sharing fails closed")
+print("PASS: ownership hierarchy and interaction graph are explicit; domain engines remain independent of app/runtime hosts; identity/authority sharing fails closed")
