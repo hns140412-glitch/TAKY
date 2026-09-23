@@ -461,7 +461,44 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
     if b(r,"latest_correction_exists") and not b(r,"latest_correction_applied"):
         f += ["STALE_STATE","WRONG_REFLECTION"]
 
-    # Production-artifact / pre-user exposure gate.\n    if b(r,"production_artifact_planned"):\n        artifact_class=str(r.get("artifact_class","")).strip().upper()\n        production_classes={"PREVIEW","FINAL","USER_FACING"}\n        if artifact_class not in production_classes:\n            f.append("RULE_NOT_APPLIED")\n        if b(r,"authorized_production_route_required",True) and not b(r,"authorized_production_route_used"):\n            f.append("RULE_NOT_APPLIED")\n        if b(r,"one_off_implementation_used"):\n            f.append("RULE_NOT_APPLIED")\n        if b(r,"forbidden_production_operation_used"):\n            f.append("AUTHORITY_BOUNDARY_VIOLATION")\n        if b(r,"pre_user_validation_required",True) and not b(r,"pre_user_validation_passed"):\n            f.append("RULE_NOT_APPLIED")\n        if b(r,"user_exposure_requested") and not b(r,"pre_user_validation_passed"):\n            f.append("USER_AS_QA")\n\n    # Reference presence is not reference-effect proof.\n    if b(r,"reference_effect_required"):\n        if not b(r,"reference_compile_trace_complete"):\n            f.append("RULE_NOT_APPLIED")\n        if not b(r,"reference_output_effect_validated"):\n            f.append("RULE_NOT_APPLIED")\n\n    # DATE != CONTENT CHANGE.\n    if b(r,"source_equivalence_decision"):\n        if b(r,"timestamp_only_freshness_inference") and not b(r,"content_equivalence_evidence_present"):\n            f.append("RULE_NOT_APPLIED")\n\n    # Resume / retrospective / surgery are distinct continuation modes.\n    if b(r,"handoff_mode_required"):\n        mode=str(r.get("handoff_mode","")).strip().upper()\n        if mode not in {"RESUME","RETROSPECTIVE","SURGERY"}:\n            f.append("RULE_NOT_APPLIED")\n        if mode=="SURGERY" and b(r,"known_bad_structure_forced_preserved"):\n            f.append("RULE_NOT_APPLIED")\n\n    if b(r,"mechanically_checkable_rule") and not b(r,"enforcement_expression_present"):
+    # Production-artifact / pre-user exposure gate.
+    if b(r,"production_artifact_planned"):
+        artifact_class=str(r.get("artifact_class","")).strip().upper()
+        production_classes={"PREVIEW","FINAL","USER_FACING"}
+        if artifact_class not in production_classes:
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"authorized_production_route_required",True) and not b(r,"authorized_production_route_used"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"one_off_implementation_used"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"forbidden_production_operation_used"):
+            f.append("AUTHORITY_BOUNDARY_VIOLATION")
+        if b(r,"pre_user_validation_required",True) and not b(r,"pre_user_validation_passed"):
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"user_exposure_requested") and not b(r,"pre_user_validation_passed"):
+            f.append("USER_AS_QA")
+
+    # Reference presence is not reference-effect proof.
+    if b(r,"reference_effect_required"):
+        if not b(r,"reference_compile_trace_complete"):
+            f.append("RULE_NOT_APPLIED")
+        if not b(r,"reference_output_effect_validated"):
+            f.append("RULE_NOT_APPLIED")
+
+    # DATE != CONTENT CHANGE.
+    if b(r,"source_equivalence_decision"):
+        if b(r,"timestamp_only_freshness_inference") and not b(r,"content_equivalence_evidence_present"):
+            f.append("RULE_NOT_APPLIED")
+
+    # Resume / retrospective / surgery are distinct continuation modes.
+    if b(r,"handoff_mode_required"):
+        mode=str(r.get("handoff_mode","")).strip().upper()
+        if mode not in {"RESUME","RETROSPECTIVE","SURGERY"}:
+            f.append("RULE_NOT_APPLIED")
+        if mode=="SURGERY" and b(r,"known_bad_structure_forced_preserved"):
+            f.append("RULE_NOT_APPLIED")
+
+    if b(r,"mechanically_checkable_rule") and not b(r,"enforcement_expression_present"):
         f.append("ENFORCEMENT_MISSING")
     if b(r,"rule_cited") and b(r,"rule_violated"): f.append("RULE_NOT_APPLIED")
     if b(r,"recurrence_prevention_claim") and not b(r,"representative_replay_performed"):
