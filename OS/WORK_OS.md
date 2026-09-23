@@ -104,6 +104,24 @@ Each volatile claim must retain:
 
 When a material claim is outside its freshness window or a recheck trigger fires, Work OS must refresh the claim before using it to choose a route or make a definitive current-state statement.
 
+
+
+## 1.4 Drawing / Report Production Routing — HARD LOCK
+
+Normative child protocol: `MASTER/DRAWING_PRODUCTION_GOVERNANCE.md`.
+
+For drawing, architectural-report and source-geometry-dependent production:
+
+`TASK -> ROUTER -> AUTHORIZED_ENGINE -> VALIDATION -> USER_EXPOSURE_GATE -> OUTPUT`.
+
+Hard rules:
+- `ENGINE_AVAILABLE + BYPASS_USED = GOVERNANCE_FAILURE`.
+- One-off Python / ReportLab / generic HTML / equivalent local scripts are `EXPERIMENT|DIAGNOSTIC` only unless explicitly registered as an authorized engine.
+- `USER_PREVIEW|FINAL` requires producer-route provenance and blocking gate receipts.
+- `NO PASS -> NO SHOW`.
+- Human approval is for governed choice, not basic defect discovery.
+- Resume/Handoff must support `RESUME|RETROSPECTIVE|SURGERY`; repeated structural failure shall not be blindly resumed.
+
 ## 2. Conversation Continuity / Persistent Work Surfaces
 
 `CONTINUITY IS THE PURPOSE; FOLDERS ARE IMPLEMENTATION SURFACES`
