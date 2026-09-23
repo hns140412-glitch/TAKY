@@ -205,7 +205,10 @@
     "DO_NOT_PRESENT_RULE_MISMATCH",
     "CORE6_EXACT_REFERENCE_IMAGE_BINDING_REQUIRED",
     "CORE6_TEXT_ONLY_REGENERATION_FORBIDDEN",
-    "STALE_CHARACTER_VARIANT_CANNOT_OVERRIDE_CANONICAL_VISUAL_ID"
+    "STALE_CHARACTER_VARIANT_CANNOT_OVERRIDE_CANONICAL_VISUAL_ID",
+    "IF_CANONICAL_BIND_EXISTS_USE_IT_DIRECTLY",
+    "DO_NOT_RESEARCH_OR_RESELECT_BOUND_VISUAL_ID_SOURCE",
+    "GENERATION_CALL_MUST_CONSUME_BOUND_REFERENCE"
   ],
   "generation_rule": "RULE_APPLICATION_BRIEF_PASS_BEFORE_REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION",
   "crew_visual_id_contract": {
@@ -281,7 +284,20 @@
         "canonical_equipment_structure"
       ],
       "missing_source_behavior": "BLOCKED_ASSET_BINDING",
-      "mismatch_behavior": "REJECT_DERIVATIVE_KEEP_VISUAL_ID_LOCKED"
+      "mismatch_behavior": "REJECT_DERIVATIVE_KEEP_VISUAL_ID_LOCKED",
+      "canonical_bind_state": "EXISTS_HARD_LOCK",
+      "execution_requirement": "GENERATION_CALL_MUST_CONSUME_EXISTING_CANONICAL_BIND",
+      "if_bind_exists_do_not": [
+        "RESEARCH_NEW_SOURCE",
+        "RESELECT_SOURCE_CANDIDATE",
+        "REINTERPRET_VISUAL_ID",
+        "TEXT_ONLY_REGENERATION"
+      ],
+      "failure_classification": {
+        "bind_missing": "BLOCKED_ASSET_BINDING",
+        "bind_exists_but_not_consumed": "EXECUTION_BINDING_BYPASS",
+        "derivative_mismatch": "REJECT_DERIVATIVE_KEEP_VISUAL_ID_LOCKED"
+      }
     }
   },
   "motion_effect_contracts": {
