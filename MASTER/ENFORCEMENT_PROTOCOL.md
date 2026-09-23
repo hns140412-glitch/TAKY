@@ -512,4 +512,48 @@ MUST fail.
 
 The sanitizer/validator proves transcript extraction and declared security-pattern exclusion for the processed file. It does not prove semantic completeness outside that saved page's `linear_conversation`.
 
+## 17. Production artifact / user-exposure authority gate — HARD LOCK
+
+For any domain that produces a PREVIEW / FINAL / USER_FACING artifact, the authorized production path SHALL be explicit and mechanically checkable.
+
+Core route:
+TASK → AUTHORIZED ROUTER → AUTHORIZED ENGINE/EXECUTOR → PRE-USER VALIDATION → USER EXPOSURE GATE → OUTPUT.
+
+ENGINE AVAILABLE + BYPASS USED = GOVERNANCE FAILURE.
+NO PASS → NO SHOW.
+
+Required structured fields when applicable:
+- production_artifact_planned;
+- artifact_class;
+- authorized_production_route_required;
+- authorized_production_route_used;
+- one_off_implementation_used;
+- forbidden_production_operation_used;
+- pre_user_validation_required;
+- pre_user_validation_passed;
+- user_exposure_requested.
+
+Rules:
+- one-off/local workaround implementations may be used as EXPERIMENT/DIAGNOSTIC but SHALL NOT directly create PREVIEW/FINAL/USER_FACING output when an authorized engine/executor exists;
+- a production result that used an explicitly forbidden production operation fails authority admission;
+- user exposure before applicable pre-user validation passes is blocked;
+- asking the user to discover defects that were mechanically detectable before exposure is USER_AS_QA, not HUMAN APPROVAL.
+
+Reference-effect work additionally requires:
+- reference_effect_required=true;
+- reference_compile_trace_complete=true;
+- reference_output_effect_validated=true.
+
+Reference presence/citation alone does not prove utilization.
+
+For source freshness/equivalence decisions:
+DATE != CONTENT CHANGE.
+Timestamp-only inference without content-equivalence evidence cannot establish content delta/staleness.
+
+For handoff-driven continuation, material workflows SHOULD declare RESUME / RETROSPECTIVE / SURGERY.
+SURGERY may supersede/deprecate a known-bad prior structure; Handoff does not force preservation of a flawed architecture.
+
+Deterministic expression lives in ENFORCEMENT/taky_gate.py.
+Representative replay: ENFORCEMENT/replay_cases_v6.json.
+
 END
