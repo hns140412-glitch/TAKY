@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Branch-only Policy Gate validation target; no product feature activation.
 import argparse, json, sys
 from pathlib import Path
 
