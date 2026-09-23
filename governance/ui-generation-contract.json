@@ -1,6 +1,6 @@
 {
-  "version": "TAKY_UI_GENERATION_GATE_V3_VISUAL_ID_LOCKED",
-  "status": "ENFORCED",
+  "version": "TAKY_UI_GENERATION_GATE_V4_RUNTIME_BINDING_HARD_LOCK",
+  "status": "ENFORCED_HARD_LOCK",
   "authority": "C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md",
   "philosophy": "REQUIRED_STRUCTURE_FIRST",
   "output_contract": {
@@ -193,7 +193,13 @@
     "DO_NOT_SUBSTITUTE_NONCANONICAL_CREW",
     "DO_NOT_SHOW_COMPLETED_USER_CHARACTER_BEFORE_CHARACTER_REVEAL",
     "DO_NOT_REDESIGN_LOCKED_TIMER",
-    "DO_NOT_ENABLE_ACTUAL_TTS_SPEECH_WHILE_HOLD"
+    "DO_NOT_ENABLE_ACTUAL_TTS_SPEECH_WHILE_HOLD",
+    "DO_NOT_SHIP_FULL_SCREEN_MOCKUP_CROP",
+    "DO_NOT_REPLACE_APPROVED_ANCHOR_WITH_GENERIC_UI",
+    "DO_NOT_PRESENT_MOCKUP_AS_RUNTIME_PROOF",
+    "REQUIRE_DECOMPOSED_ASSET_BINDING",
+    "REQUIRE_390X844_RUNTIME_ANCHOR_COMPARISON",
+    "CORRECT_DRIFT_BEFORE_USER_REVIEW"
   ],
   "generation_rule": "REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION",
   "crew_visual_id_contract": {
@@ -311,7 +317,7 @@
   },
   "mockup_to_runtime_binding": {
     "authority": "C2S/LEARNING_APP_FAMILY_UI_MOCKUP_TO_RUNTIME_BINDING_2026-09-23.md",
-    "status": "ENFORCED",
+    "status": "HARD_LOCK",
     "completion_rule": [
       "FUNCTIONAL_CONTRACT_PASS",
       "VISUAL_BINDING_PASS",
@@ -365,6 +371,33 @@
         "ISLAND_ARRIVAL_SCENE"
       ],
       "next": "DIRECTION_ROUND_1"
+    },
+    "reopen_policy": "EXPLICIT_USER_REOPEN_ONLY",
+    "required_pipeline": [
+      "APPROVED_VISUAL",
+      "ANCHOR_BINDING",
+      "SCENE_DECOMPOSITION",
+      "HIGH_DENSITY_INDIVIDUAL_ASSETS",
+      "APP_ASSETS_FOLDER",
+      "LIVE_DOM_CSS_COMPONENT_COMPOSITION",
+      "MOTION_OR_DEPTH_EFFECTS",
+      "RUNTIME_SCREENSHOT_390x844",
+      "ANCHOR_REGRESSION_CHECK",
+      "CORRECT_BEFORE_USER_REVIEW"
+    ],
+    "runtime_asset_policy": {
+      "full_screen_mockup": "REFERENCE_ONLY",
+      "full_screen_mockup_crop_for_runtime": "FORBIDDEN",
+      "functional_text_and_controls": "LIVE_UI_ONLY",
+      "character_and_crew": "CANONICAL_ASSET_BINDING_REQUIRED",
+      "decomposed_asset_layers": [
+        "BACKGROUND_WORLD",
+        "CHARACTER_OR_CREW",
+        "TASK_OBJECT",
+        "FOREGROUND",
+        "TEXTURE_SURFACE",
+        "LIGHT_SHADOW_FX"
+      ]
     }
   }
 }
