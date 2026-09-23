@@ -1,0 +1,73 @@
+{
+  "version": "2026-09-23.1",
+  "status": "WORKING_IMPLEMENTATION_CONTRACT_NOT_MERGED",
+  "authority": {
+    "latest_user_correction": "2026-09-23 Learning App Family UI/Visual resume request",
+    "canonical_bind_required": true,
+    "reopen_core6_visual_id": false
+  },
+  "core6": {
+    "order": ["Dooby","Rory","Ink","Nova","Take","Zero"],
+    "canonical_bind": "EXISTS",
+    "visual_id_state": "HARD_LOCK",
+    "derivative_allowed": ["expression","pose","gesture","action","screen_position","prop_interaction"],
+    "protected": ["species","face","silhouette","body_ratio","unique_markings","primary_fur_or_color","signature_outfit_structure","signature_equipment_structure"]
+  },
+  "world": {
+    "setup_space": "PRE_TRAVEL_PACKING_PREPARATION_SPACE",
+    "island_role": "DESTINATION_HINT_ONLY",
+    "island_hint_channels": ["map","photo","postcard","window_view","travel_note"]
+  },
+  "flow": [
+    "CORE6_MEET",
+    "CREW_SELECT",
+    "CREW_NAME_OR_CALLSIGN",
+    "USER_PHOTO",
+    "SIGNATURE_ITEM",
+    "DIRECTION_1",
+    "DIRECTION_2",
+    "SYSTEM_CONTRAST_DIRECTION",
+    "ABC_SAME_CHILD_CANDIDATES",
+    "SELECT",
+    "LIKENESS_ADJUST",
+    "VISUAL_ID_CONFIRM",
+    "SHARED_EXPEDITION_ACCENT",
+    "VOYAGE_OR_DROP",
+    "ISLAND_DISCOVERY",
+    "ISLAND_NAME",
+    "BASE_CAMP_MOVE",
+    "BASE_CAMP_NAME",
+    "READY"
+  ],
+  "existing_runtime_sequence_lock": [
+    "USER_PHOTO",
+    "SIGNATURE_ITEM",
+    "DIRECTION_1",
+    "DIRECTION_2"
+  ],
+  "signature_item_enum": [
+    "CAMERA",
+    "COMPASS",
+    "EXPLORATION_NOTEBOOK",
+    "BINOCULARS",
+    "WATER_BOTTLE"
+  ],
+  "rendering_contract": {
+    "approved_mockup_is_anchor": true,
+    "whole_mockup_crop_as_runtime": false,
+    "live_dom_required_for": ["ui","buttons","text","selection_state","progress_state"],
+    "asset_layers": ["background","character","props","foreground","texture","light_shadow_fx"]
+  },
+  "motion": {
+    "default_tier": "CHARACTER_ONLY_SENSOR_DEPTH",
+    "ui_sensor_motion": false,
+    "reduced_motion_fallback": "STATIC_DEPTH",
+    "visual_id_deformation": false
+  },
+  "validation": {
+    "viewport": "390x844",
+    "runtime_capture_required": true,
+    "anchor_regression_required": true,
+    "reject_before_user_exposure_on_mismatch": true
+  }
+}
