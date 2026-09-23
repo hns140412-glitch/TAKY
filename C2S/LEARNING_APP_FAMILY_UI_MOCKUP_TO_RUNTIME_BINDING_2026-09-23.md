@@ -1,6 +1,6 @@
 # LEARNING APP FAMILY — MOCKUP → RUNTIME BINDING CONTRACT — 2026-09-23
 
-Status: ACTIVE / IMPLEMENTATION GATE
+Status: HARD_LOCK / ENFORCED IMPLEMENTATION GATE
 Authority:
 - C2S/TAKY_TOP_LEVEL_EXECUTION_PRINCIPLES_CANONICAL_2026-09-23.md
 - C2S/LEARNING_APP_FAMILY_INTEGRATED_LOGIC_UI_CANONICAL_2026-09-22.md
@@ -304,3 +304,30 @@ This is a direct consequence of:
 
 `Think Again, You're The Key.`
 → carry the accepted result through to executable implementation instead of transferring regression detection to the user.
+
+
+## 14. LOCK STATE — 2026-09-23
+
+`MOCKUP_TO_RUNTIME_METHOD = HARD_LOCK`
+
+Authority:
+latest explicit user instruction.
+
+Locked pipeline:
+`APPROVED VISUAL → ANCHOR BINDING → DECOMPOSED ASSETS → ASSETS FOLDER → LIVE UI → MOTION/DEPTH → 390×844 RUNTIME CAPTURE → REGRESSION CHECK`.
+
+Forbidden substitutions:
+- full-screen mockup crop as implementation;
+- generic UI shell replacing approved art direction;
+- recreating locked Crew/Character identity;
+- showing a newly generated mockup as proof of implemented UI;
+- skipping runtime screenshot comparison;
+- silently resetting to a previous flow step.
+
+Completion:
+`FUNCTIONAL_CONTRACT_PASS + ASSET_BINDING_PASS + VISUAL_BINDING_PASS + SCREENSHOT_REGRESSION_PASS`.
+
+Reopen:
+`EXPLICIT_USER_REOPEN_ONLY`.
+
+Any conflicting downstream instruction is STALE unless it is a later explicit user correction.
