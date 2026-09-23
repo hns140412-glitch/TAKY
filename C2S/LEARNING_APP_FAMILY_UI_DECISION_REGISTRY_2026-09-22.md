@@ -461,3 +461,85 @@ They MUST NOT redefine the slogans.
 
 `SLOGAN -> GOVERNS METHODS`
 `METHODS != SLOGAN MEANING`
+
+
+## 20. APPROVED STATE INHERITANCE — PRIOR CONFIRMED DECISIONS — 2026-09-23
+
+This section restores previously confirmed decisions as inherited protected state.
+A newer local implementation slice MUST NOT silently narrow, replace, or reinterpret them.
+
+### Core 6 / companion formation
+- Core 6 = 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로.
+- Existing confirmed Visual IDs remain HARD_LOCK across Ready & Set / Snap & Pop / Hide & Seek.
+- All six are introduced before primary companion selection.
+- One becomes the primary companion; the other five remain Crew, not discarded.
+- canonical character identity and user-facing nickname/display name are separate.
+- relationship/history/atlas records follow the same companion identity across the family.
+- user character = protagonist; selected companion = partner; remaining five = Crew.
+
+### User character formation
+- source photo identity is preserved.
+- no completed user character is shown before the A/B/C candidate stage.
+- user selects Direction 1 and Direction 2; system adds the contrast direction.
+- A/B/C are the SAME CHILD with different expression/direction, not three different identities.
+- profile recreation may reopen user choices, but it does not mutate Core 6 canonical identity.
+- shared expedition accent may propagate to the user character / Crew clothing accents without changing character identity.
+
+### Tools / items — inherited scope
+The locked five Signature Items are NOT the total tool inventory.
+
+Character Formation selection contract:
+- 카메라
+- 나침반
+- 탐험 노트
+- 쌍안경
+- 물병
+Choose exactly one.
+
+Previously confirmed character-associated tool vocabulary remains available as world/character semantics and MUST NOT be erased by the five-item selection projection:
+- 두비: existing confirmed Doobi tool lineage from the Core 6 guide remains inherited.
+- 로리: 돋보기 / 식물 도감 / 지도.
+- 잉크: 노트 / 펜 / 잉크.
+- 노바: 별 조각 / 랜턴 / 별 지도.
+- 테이크: 쌍안경 / 로프 / 멀티툴.
+- 제로: 물병 / 방수 케이스 / 매트.
+
+Common exploration asset vocabulary includes maps, books, lanterns, bags/luggage, camera, binoculars, water bottle, compass, travel tags, photos/postcards and other approved preparation-space props.
+
+Snap & Pop retains its previously confirmed separate rule:
+- five tools are freely usable;
+- old map/tool unlocking progression is SUPERSEDED.
+Do not project that unlock system back into Character Formation.
+
+### Shared world / journey inheritance
+- Character Formation occurs in the PRE-TRAVEL preparation/packing world.
+- before Voyage/Drop, the island is only hinted by map/photo/postcard/window/travel notes.
+- after Voyage/Drop: island discovery → island naming → Base Camp move → Base Camp naming → Ready.
+- one shared island/world is retained across the app family rather than creating a separate island per app.
+- Ready & Set = Base Camp / hub.
+- Hide & Seek = jungle / waterfall exploration region.
+- Snap & Pop = beach exploration region.
+- island name and Base Camp name may change.
+- learning history, badge/growth history, Crew relationship, Explorer_ID, island/world continuity remain accumulated.
+
+### Shared family systems
+Previously confirmed family-wide systems remain cross-app concerns:
+- 탐험대 rules;
+- badge system (star = grade/classification);
+- gems;
+- wishes;
+- blessings;
+- meaningful/fun history shown with badge on sharing surfaces.
+
+These systems are not owned or redefined by a single app-specific UI slice.
+
+### Inheritance rule
+`NEW RESULT → INHERIT APPROVED DNA → APPLY ONLY APPROVED DELTA → COMPARE`
+
+Therefore:
+`LOCAL_RUNTIME_PROJECTION != NEW_CANONICAL`
+`5_SIGNATURE_ITEMS != TOTAL_TOOL_INVENTORY`
+`8_COMMON_TOOL_ASSETS != TOTAL_WORLD_TOOL_INVENTORY`
+`APP-SPECIFIC IMPLEMENTATION != FAMILY-WIDE REDEFINITION`
+
+If a local implementation is narrower than an inherited confirmed decision, the local implementation is incomplete; the inherited decision is not reopened.
