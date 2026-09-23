@@ -158,6 +158,11 @@ takes precedence over greenfield redesign.
 
 Do not create a fresh mockup when a recoverable accepted lineage exists.
 
+Implementation consequence:
+`APPROVED MOCKUP → ASSETIZE → BUILD → VERIFY`.
+
+For UI implementation, an accepted visual must be carried into runtime through decomposed assets + live UI composition. A full-screen screenshot crop is not implementation, and a beautiful mockup does not count as UI completion until the actual runtime is compared against it.
+
 ## 9. Evidence lineage for this lock
 
 Reconfirmed 2026-09-23 from user-provided / Library source material including:
