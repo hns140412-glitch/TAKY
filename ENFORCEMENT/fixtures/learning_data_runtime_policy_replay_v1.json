@@ -1,0 +1,136 @@
+{
+  "schema": "TAKY_LEARNING_DATA_POLICY_REPLAY_V1",
+  "cases": [
+    {
+      "id": "POLICY-REPLAY-01",
+      "request": {
+        "function_id": "UNKNOWN",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "STANDARD_LOOKUP",
+        "provenance": []
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_UNKNOWN_POLICY"
+    },
+    {
+      "id": "POLICY-REPLAY-02",
+      "request": {
+        "function_id": "LE-H01",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "AUTOMATIC_PREREQUISITE_ENFORCEMENT",
+        "provenance": []
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_HOLD"
+    },
+    {
+      "id": "POLICY-REPLAY-03",
+      "request": {
+        "function_id": "LE-F05",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "QUALITATIVE_RISK_LABEL_DISPLAY",
+        "provenance": [
+          "FIRST_PARTY_QUALITATIVE_LABEL_REF"
+        ],
+        "human_review_evidence": {
+          "approval_id": "review-1"
+        }
+      },
+      "expected_decision": "ALLOW_CONDITIONAL",
+      "expected_reason": "POLICY_ALLOW"
+    },
+    {
+      "id": "POLICY-REPLAY-04",
+      "request": {
+        "function_id": "LE-H02",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "NUMERIC_THRESHOLD_CLASSIFICATION",
+        "provenance": []
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_HOLD"
+    },
+    {
+      "id": "POLICY-REPLAY-05",
+      "request": {
+        "function_id": "LE-F03",
+        "consumer_app": "HIDE_SEEK",
+        "requested_behavior": "CONTEXTUAL_SENSE_SUPPORT",
+        "provenance": [
+          "NIKL_SOURCE_REF",
+          "EXPLICIT_CONTEXT_BINDING"
+        ]
+      },
+      "expected_decision": "ALLOW_CONDITIONAL",
+      "expected_reason": "POLICY_ALLOW"
+    },
+    {
+      "id": "POLICY-REPLAY-06",
+      "request": {
+        "function_id": "LE-F03",
+        "consumer_app": "HIDE_SEEK",
+        "requested_behavior": "CONTEXTUAL_SENSE_SUPPORT",
+        "provenance": [
+          "NIKL_SOURCE_REF",
+          "EXPLICIT_CONTEXT_BINDING"
+        ],
+        "requested_claims": [
+          "GLOBAL_SINGLE_SENSE"
+        ]
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_CLAIM_BOUNDARY"
+    },
+    {
+      "id": "POLICY-REPLAY-07",
+      "request": {
+        "function_id": "LE-H03",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "ALMAENGI_CRITICAL_EVALUATION_PRODUCT_CLAIM",
+        "provenance": [
+          "KICE_SOURCE_REF"
+        ]
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_HOLD"
+    },
+    {
+      "id": "POLICY-REPLAY-08",
+      "request": {
+        "function_id": "LE-F06",
+        "consumer_app": "SNAP_POP",
+        "requested_behavior": "GENRE_RUBRIC_REFERENCE",
+        "provenance": []
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_PROVENANCE_REQUIRED"
+    },
+    {
+      "id": "POLICY-REPLAY-09",
+      "request": {
+        "function_id": "LE-F03",
+        "consumer_app": "HIDE_SEEK",
+        "requested_behavior": "SCHEDULE_DATE_MUTATION",
+        "provenance": [
+          "NIKL_SOURCE_REF",
+          "EXPLICIT_CONTEXT_BINDING"
+        ]
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_BEHAVIOR_NOT_ALLOWED"
+    },
+    {
+      "id": "POLICY-REPLAY-10",
+      "request": {
+        "function_id": "LE-F05",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "REMEDIATION_REFERENCE_CANDIDATE",
+        "provenance": [
+          "FIRST_PARTY_QUALITATIVE_LABEL_REF"
+        ]
+      },
+      "expected_decision": "DENY",
+      "expected_reason": "DENY_HUMAN_REVIEW_REQUIRED"
+    }
+  ]
+}
