@@ -1,6 +1,6 @@
 {
-  "fixture_version": "2026-09-23.1",
-  "scope": "Hannam system-surgery replay: production-route authority, no-pass-no-show, reference compilation, content freshness, handoff mode.",
+  "fixture_version": "2026-09-23.2",
+  "scope": "Hannam system-surgery replay: production-route authority, no-pass-no-show, reference compilation, content freshness, handoff mode. Post-fix production fixtures require evidence-backed receipt/bundle lineage.",
   "cases": [
     {
       "id": "PRODUCTION-BYPASS-01",
@@ -28,13 +28,75 @@
       "record": {
         "production_artifact_planned": true,
         "artifact_class": "FINAL",
-        "authorized_production_route_required": true,
-        "authorized_production_route_used": true,
         "one_off_implementation_used": false,
         "forbidden_production_operation_used": false,
-        "pre_user_validation_required": true,
-        "pre_user_validation_passed": true,
-        "user_exposure_requested": true
+        "user_exposure_requested": true,
+        "execution_receipt": {
+          "receipt_type": "AUTHORIZED_ENGINE_EXECUTION",
+          "route": "TASK>ROUTER>AUTHORIZED_ENGINE",
+          "engine_id": "DRAWING_ENGINE_V2",
+          "engine_version": "2.3.0",
+          "engine_commit_sha": "fixture-sha",
+          "source_digest": "sha256:source",
+          "artifact_digest": "sha256:artifact",
+          "validation_bundle_id": "VB-REPLAY-001"
+        },
+        "validation_bundle": {
+          "validation_bundle_id": "VB-REPLAY-001",
+          "source_digest": "sha256:source",
+          "artifact_digest": "sha256:artifact",
+          "gates": {
+            "SOURCE": {
+              "status": "PASS",
+              "validator": "source-lock",
+              "evidence_refs": [
+                "SRC-1"
+              ]
+            },
+            "GEOMETRY": {
+              "status": "PASS",
+              "validator": "geometry-diff",
+              "evidence_refs": [
+                "GEO-1"
+              ]
+            },
+            "FACT": {
+              "status": "PASS",
+              "validator": "fact-validator",
+              "evidence_refs": [
+                "FACT-1"
+              ]
+            },
+            "SEMANTIC": {
+              "status": "PASS",
+              "validator": "semantic-validator",
+              "evidence_refs": [
+                "SEM-1"
+              ]
+            },
+            "REFERENCE_EFFECT": {
+              "status": "PASS",
+              "validator": "reference-effect",
+              "evidence_refs": [
+                "REF-1"
+              ]
+            },
+            "ARCHITECTURAL_READABILITY": {
+              "status": "PASS",
+              "validator": "readability-validator",
+              "evidence_refs": [
+                "READ-1"
+              ]
+            },
+            "USER_EFFECT": {
+              "status": "PASS",
+              "validator": "user-effect-validator",
+              "evidence_refs": [
+                "USER-1"
+              ]
+            }
+          }
+        }
       }
     },
     {
@@ -62,10 +124,73 @@
       "record": {
         "production_artifact_planned": true,
         "artifact_class": "PREVIEW",
-        "authorized_production_route_used": true,
-        "pre_user_validation_required": true,
-        "pre_user_validation_passed": true,
-        "user_exposure_requested": true
+        "user_exposure_requested": true,
+        "execution_receipt": {
+          "receipt_type": "AUTHORIZED_ENGINE_EXECUTION",
+          "route": "TASK>ROUTER>AUTHORIZED_ENGINE",
+          "engine_id": "DRAWING_ENGINE_V2",
+          "engine_version": "2.3.0",
+          "engine_commit_sha": "fixture-sha",
+          "source_digest": "sha256:source",
+          "artifact_digest": "sha256:artifact",
+          "validation_bundle_id": "VB-REPLAY-001"
+        },
+        "validation_bundle": {
+          "validation_bundle_id": "VB-REPLAY-001",
+          "source_digest": "sha256:source",
+          "artifact_digest": "sha256:artifact",
+          "gates": {
+            "SOURCE": {
+              "status": "PASS",
+              "validator": "source-lock",
+              "evidence_refs": [
+                "SRC-1"
+              ]
+            },
+            "GEOMETRY": {
+              "status": "PASS",
+              "validator": "geometry-diff",
+              "evidence_refs": [
+                "GEO-1"
+              ]
+            },
+            "FACT": {
+              "status": "PASS",
+              "validator": "fact-validator",
+              "evidence_refs": [
+                "FACT-1"
+              ]
+            },
+            "SEMANTIC": {
+              "status": "PASS",
+              "validator": "semantic-validator",
+              "evidence_refs": [
+                "SEM-1"
+              ]
+            },
+            "REFERENCE_EFFECT": {
+              "status": "PASS",
+              "validator": "reference-effect",
+              "evidence_refs": [
+                "REF-1"
+              ]
+            },
+            "ARCHITECTURAL_READABILITY": {
+              "status": "PASS",
+              "validator": "readability-validator",
+              "evidence_refs": [
+                "READ-1"
+              ]
+            },
+            "USER_EFFECT": {
+              "status": "PASS",
+              "validator": "user-effect-validator",
+              "evidence_refs": [
+                "USER-1"
+              ]
+            }
+          }
+        }
       }
     },
     {
