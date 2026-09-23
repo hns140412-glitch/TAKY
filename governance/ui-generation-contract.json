@@ -308,5 +308,63 @@
       },
       "locked_identity_rule": "POSITION_ONLY_NO_VISUAL_ID_DEFORMATION"
     }
+  },
+  "mockup_to_runtime_binding": {
+    "authority": "C2S/LEARNING_APP_FAMILY_UI_MOCKUP_TO_RUNTIME_BINDING_2026-09-23.md",
+    "status": "ENFORCED",
+    "completion_rule": [
+      "FUNCTIONAL_CONTRACT_PASS",
+      "VISUAL_BINDING_PASS",
+      "SCREENSHOT_REGRESSION_PASS"
+    ],
+    "baseline": {
+      "width": 390,
+      "height": 844
+    },
+    "required_packet_fields": [
+      "anchor_id",
+      "approved_visual_source",
+      "flow_step",
+      "screen_purpose",
+      "required_components",
+      "forbidden_components",
+      "layout_zones",
+      "character_or_crew_slot_rule",
+      "background_context_rule",
+      "primary_cta",
+      "motion_depth_rule",
+      "data_binding",
+      "non_happy_states",
+      "regression_checklist"
+    ],
+    "global_regression_locks": [
+      "NO_GENERIC_DASHBOARD_REPLACEMENT",
+      "NO_WHITE_FORM_SHELL_REPLACEMENT",
+      "NO_STALE_5_TAB_NAV",
+      "NO_STEP_REGRESSION",
+      "NO_INVENTED_CHARACTER_ASSET",
+      "WORLD_CONTEXT_MUST_REMAIN_VISIBLE"
+    ],
+    "current_signature_item_anchor": {
+      "flow_step": "SIGNATURE_ITEM",
+      "background_context": "BEFORE_TRAVEL_PACKING_PREPARATION_SPACE",
+      "options": [
+        "카메라",
+        "나침반",
+        "탐험 노트",
+        "쌍안경",
+        "물병"
+      ],
+      "selection_count": 1,
+      "forbidden": [
+        "PHOTO_CAPTURE_PANEL",
+        "EXAMPLE_CHILD_PHOTOS",
+        "CAMERA_GALLERY_UPLOAD",
+        "CREW_PERSONALITY_RESELECTION",
+        "COMPLETED_USER_CHARACTER",
+        "ISLAND_ARRIVAL_SCENE"
+      ],
+      "next": "DIRECTION_ROUND_1"
+    }
   }
 }
