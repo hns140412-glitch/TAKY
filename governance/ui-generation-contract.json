@@ -202,7 +202,10 @@
     "CORRECT_DRIFT_BEFORE_USER_REVIEW",
     "RULE_APPLICATION_BRIEF_REQUIRED_BEFORE_GENERATION",
     "SELF_VALIDATE_OUTPUT_AGAINST_DECLARED_RULES",
-    "DO_NOT_PRESENT_RULE_MISMATCH"
+    "DO_NOT_PRESENT_RULE_MISMATCH",
+    "CORE6_EXACT_REFERENCE_IMAGE_BINDING_REQUIRED",
+    "CORE6_TEXT_ONLY_REGENERATION_FORBIDDEN",
+    "STALE_CHARACTER_VARIANT_CANNOT_OVERRIDE_CANONICAL_VISUAL_ID"
   ],
   "generation_rule": "RULE_APPLICATION_BRIEF_PASS_BEFORE_REQUIRED_STRUCTURE_PASS_BEFORE_GENERATION",
   "crew_visual_id_contract": {
@@ -253,7 +256,33 @@
       "historical_artwork_immutable_by_default": true
     },
     "missing_reference_policy": "PLACEHOLDER_ONLY",
-    "hard_rule": "PLACEHOLDER_GT_WRONG_CHARACTER"
+    "hard_rule": "PLACEHOLDER_GT_WRONG_CHARACTER",
+    "derivative_generation_gate": {
+      "status": "HARD_LOCK",
+      "source_binding": "EXACT_CANONICAL_REFERENCE_IMAGE_REQUIRED",
+      "text_only_regeneration": "FORBIDDEN",
+      "stale_or_legacy_variant_as_source": "FORBIDDEN",
+      "allowed_changes": [
+        "expression",
+        "pose",
+        "gesture",
+        "action",
+        "screen_position",
+        "contextual_prop_interaction"
+      ],
+      "forbidden_changes": [
+        "species",
+        "face",
+        "silhouette",
+        "body_proportion",
+        "identity_markings",
+        "fur_or_primary_identity_color",
+        "canonical_clothing_structure",
+        "canonical_equipment_structure"
+      ],
+      "missing_source_behavior": "BLOCKED_ASSET_BINDING",
+      "mismatch_behavior": "REJECT_DERIVATIVE_KEEP_VISUAL_ID_LOCKED"
+    }
   },
   "motion_effect_contracts": {
     "sensor_parallax_depth_v01": {
