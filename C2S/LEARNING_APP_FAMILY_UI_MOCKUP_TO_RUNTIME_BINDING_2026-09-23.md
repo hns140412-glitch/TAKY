@@ -331,3 +331,37 @@ Reopen:
 `EXPLICIT_USER_REOPEN_ONLY`.
 
 Any conflicting downstream instruction is STALE unless it is a later explicit user correction.
+
+
+## 15. PRE-OUTPUT RULE APPLICATION GATE — HARD LOCK
+
+Before generating, editing, implementing, or presenting a Learning App Family UI/visual result, state the exact rule application brief first.
+
+Required brief:
+- source / approved anchor;
+- locked Visual ID or accepted lineage;
+- current flow step;
+- invariants to preserve;
+- exact DELTA;
+- forbidden regression;
+- validation check that will be used.
+
+Execution:
+`RULE BRIEF → BUILD → COMPARE → CORRECT → PRESENT`.
+
+For Core 6 work, the brief must explicitly name the locked member(s) and state that species / face / silhouette / proportion / identity markings / canonical clothing structure will not be reinterpreted.
+
+For approved UI work, the brief must explicitly state whether the output is:
+- REFERENCE ASSET,
+- DECOMPOSED RUNTIME ASSET,
+- LIVE RUNTIME UI,
+- or VALIDATION EVIDENCE.
+
+A full-screen board, concept sheet or newly interpreted character cannot silently substitute for a requested runtime asset.
+
+If the generated result contradicts the declared brief:
+`RESULT = REJECT`
+and it must not be promoted to an approved anchor or runtime asset.
+
+`RULE_FIRST_OUTPUT_SECOND = HARD_LOCK`
+`EXPLICIT_USER_REOPEN_ONLY`.
