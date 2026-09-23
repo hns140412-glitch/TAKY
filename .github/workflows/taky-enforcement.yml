@@ -261,6 +261,8 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
       - name: Replay generic pre-action rule-application fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
+      - name: Replay production authority and no-pass-no-show fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v6.json
       - name: Validate fresh-context Notion review routing
         run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
       - name: Reject fresh-context Notion structure-substitution regression
