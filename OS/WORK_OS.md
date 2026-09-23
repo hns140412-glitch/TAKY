@@ -246,3 +246,15 @@ Hard rules:
 ## 9. Revision
 
 Per GRAND MASTER governance, `/반영` does not increment Revision. This remains REV_00 until explicit user finalization establishes an official revision.
+
+
+## 10. Engine-backed production routing — HARD LOCK
+
+When Work OS has an authorized engine for a material result-producing task, production artifacts SHALL route through it.
+Ad-hoc Python/HTML/ReportLab/direct generative output may remain diagnostic or experimental, but cannot be promoted to `PREVIEW / FINAL / USER_FACING` without migration into the authorized engine and regression evidence.
+
+Required shape:
+`TASK -> ROUTER -> AUTHORIZED ENGINE -> VALIDATION -> USER EXPOSURE GATE -> OUTPUT`.
+
+`ENGINE_AVAILABLE + BYPASS_USED = GOVERNANCE_FAILURE`.
+`HUMAN IS THE KEY != HUMAN IS THE DEBUGGER`.
