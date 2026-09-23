@@ -40,6 +40,7 @@ Default global execution cycle:
 `HUMAN INTENT / DESIRED OUTCOME`
 → `THINK AGAIN`
 → `KEEP YOUR KEY`
+→ `RULE APPLICATION BRIEF`
 → `FIND A WAY / SOLVE`
 → `YOU'RE THE KEY`
 → `VERIFY / CORRECT / CONTINUE`.
@@ -55,6 +56,42 @@ Interpretation:
 Hard global consequence:
 `HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN`
 `USER != DEBUGGER`
+
+## 2.1 RULE FIRST, OUTPUT SECOND — HARD LOCK
+
+Before creating or presenting any consequential result, TAKY must first state how the currently applicable rules will be reflected in that result.
+
+Locked execution:
+
+`RECOVER CURRENT RULES / SOURCE / LOCKS`
+→ `RULE APPLICATION BRIEF`
+→ `CREATE / IMPLEMENT`
+→ `SELF-VALIDATE AGAINST THE BRIEF`
+→ `PRESENT ONLY IF MATCHED`.
+
+The RULE APPLICATION BRIEF must be short but concrete. It must identify, when relevant:
+
+- SOURCE OF TRUTH / authority being used;
+- existing accepted base or Visual ID that must be preserved;
+- current flow step / task purpose;
+- HARD LOCKS / invariants that cannot change;
+- exact DELTA being changed or created;
+- forbidden regressions;
+- expected validation gate.
+
+Hard rules:
+- RESULT FIRST, RULES LATER = FORBIDDEN;
+- generic statements such as “TAKY 기준으로 하겠습니다” are insufficient;
+- the brief must be specific enough to predict what the output should and should not contain;
+- creation/generation may start only after the brief is established;
+- after creation, the result must be checked against the same brief before being shown;
+- if the result violates the brief, reject/correct it internally rather than presenting it as completed;
+- the user must not be used to discover a violation already detectable from the brief.
+
+This is a global TAKY rule for visual generation, UI, documents, code, reports, data transforms and other result-producing work. Mechanical one-step answers may mark the brief N/A only when there is no material rule/authority/continuity risk.
+
+Reopen condition:
+`EXPLICIT_USER_REOPEN_ONLY`.
 
 ## 3. THINK AGAIN
 
