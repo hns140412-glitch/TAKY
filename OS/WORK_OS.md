@@ -246,3 +246,120 @@ Hard rules:
 ## 9. Revision
 
 Per GRAND MASTER governance, `/반영` does not increment Revision. This remains REV_00 until explicit user finalization establishes an official revision.
+
+
+## 10. Production Execution / User Exposure Governance — HARD LOCK (2026-09-23)
+
+This section corrects a structural failure discovered during the Hannam drawing/report workflow.
+
+### 10.1 Engine enforcement
+
+A reusable engine is not considered operational merely because code exists.
+
+`ENGINE_AVAILABLE + BYPASS_USED = GOVERNANCE_FAILURE`
+
+For governed production work, the allowed path is:
+
+`TASK -> ROUTER -> AUTHORIZED_ENGINE -> VALIDATION -> USER_EXPOSURE_GATE -> OUTPUT`
+
+A one-off Python script, ReportLab routine, generic HTML generator, raster masking script, generative redraw path, or similar local workaround MAY be used only as `EXPERIMENT / DIAGNOSTIC` unless explicitly registered as an authorized engine.
+
+`EXPERIMENT / DIAGNOSTIC != PRODUCTION_RESULT`
+`ONE_OFF_SCRIPT != USER_FACING_ARTIFACT_AUTHORITY`
+
+If an authorized engine exists for the task, a bypass path SHALL NOT create FINAL, PREVIEW-as-final, RELEASE, or other user-facing production artifacts.
+
+### 10.2 Layer authority
+
+Drawing/presentation execution SHALL preserve this authority order:
+
+`L0 SOURCE AUTHORITY`
+`L1 GEOMETRY`
+`L2 SEMANTIC`
+`L3 PRESENTATION`
+`L4 ENTOURAGE`
+`L5 ANNOTATION`
+`L6 AI / ATMOSPHERE`
+`L7 FINAL VALIDATION`
+`L8 USER EXPOSURE GATE`
+
+No lower-authority layer may mutate a higher-authority layer without an explicit governed contract.
+
+In particular:
+- raster masks cannot have destructive authority over protected geometry;
+- generative output cannot become geometry authority;
+- presentation cannot precede semantic verification;
+- narrative claims cannot exceed evidence strength.
+
+### 10.3 No Pass -> No Show
+
+User-facing production output requires all applicable gates to PASS before exposure.
+
+Minimum gate family:
+- SOURCE_GATE
+- GEOMETRY_GATE
+- FACT_GATE
+- SEMANTIC_GATE
+- REFERENCE_EFFECT_GATE
+- ARCHITECTURAL_READABILITY_GATE
+- A3_GATE when applicable
+- USER_EFFECT_GATE
+
+`ANY REQUIRED GATE != PASS -> USER EXPOSURE BLOCKED`
+
+This is an execution rule, not a reporting convention. A failed result may be retained internally as diagnostic evidence but SHALL NOT be presented as a completed or approved result.
+
+### 10.4 User is not the debugger
+
+`HUMAN IS THE KEY != HUMAN IS THE DEBUGGER`
+`USER != DEBUGGER`
+
+Human approval is reserved for final judgment, design choice, policy choice, or intentional ambiguity that genuinely requires human authority.
+
+Errors that can be mechanically or evidentially checked before exposure — including missing walls/cores/entries, wrong rotation/crop, unverified semantics, unsupported narrative, missing reference effect, generic layout regression, or engine bypass — SHALL be treated as PRE-USER VALIDATION responsibilities.
+
+### 10.5 Reference compiler requirement
+
+Reference mining is not complete until reusable DNA is compiled into execution parameters.
+
+Required trace:
+
+`REFERENCE -> MINED_DNA -> DESIGN_TOKEN -> ENGINE_PARAMETER -> OUTPUT_EFFECT -> VALIDATION`
+
+A reference name or prose description alone SHALL NOT count as applied reference utilization.
+
+`REFERENCE_MENTIONED != REFERENCE_APPLIED`
+`CLARITY_GAIN != REFERENCE_EFFECT`
+
+### 10.6 Source freshness
+
+Modification time is evidence about file activity, not proof of content change.
+
+`DATE != CONTENT CHANGE`
+
+Freshness/supersession decisions SHOULD use content identity, revision evidence, source authority, or verified semantic/geometry deltas when available. A later timestamp alone SHALL NOT demote content-identical evidence.
+
+### 10.7 Resume mode vs surgery mode
+
+Handoff MUST declare the intended continuation mode when material:
+
+- `RESUME`: continue a validated structure from current state.
+- `RETROSPECTIVE`: analyze failures without continuing production.
+- `SURGERY`: change execution contracts/architecture because the current structure is unsafe or ineffective.
+- `RE_ARCHITECTURE`: supersede/deprecate structural assumptions and rebuild routing/ownership.
+
+A resume packet SHALL NOT force continuation when evidence shows the preserved structure is itself defective.
+
+`HANDOFF != STRUCTURAL IMMUNITY`
+`RESUME != REPEAT THE SAME FAILURE PATH`
+
+### 10.8 Quality state separation
+
+The following states are independent and SHALL NOT be collapsed:
+
+`SOURCE_FIDELITY != PRESENTATION_QUALITY`
+`CLARITY_GAIN != REFERENCE_EFFECT`
+`CODE_PASS != PRODUCT_PASS`
+`ENGINE_PASS != VISUAL_PASS`
+
+Geometry preservation is necessary for drawing work but is not sufficient evidence of presentation quality or professional-family equivalence.
