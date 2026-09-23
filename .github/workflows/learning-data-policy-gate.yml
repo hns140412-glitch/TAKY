@@ -1,0 +1,18 @@
+name: Learning Data Policy Gate
+on:
+  push:
+    branches:
+      - taky/learning-data-policy-gate-2026-09-23
+  workflow_dispatch:
+jobs:
+  policy-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate policy schema
+        run: python ENFORCEMENT/learning_data_runtime_policy_validator.py
+      - name: Replay negative and conditional cases
+        run: python ENFORCEMENT/learning_data_runtime_policy_validator.py --replay ENFORCEMENT/fixtures/learning_data_runtime_policy_replay_v1.json
