@@ -407,3 +407,33 @@ If a derivative mismatches:
 
 Reopen:
 `EXPLICIT_USER_REOPEN_ONLY`.
+
+
+## 17. EXISTING BIND MUST BE CONSUMED — CORRECTION — 2026-09-23
+
+Correction:
+Core 6 canonical Visual ID binding already exists and is HARD LOCKED.
+
+Therefore the failure mode is not automatically `BLOCKED_ASSET_BINDING`.
+
+Correct classification:
+
+`CANONICAL_BIND = EXISTS`
++
+`GENERATION CALL DOES NOT CONSUME BIND`
+=
+`EXECUTION_BINDING_BYPASS`.
+
+When a canonical bind already exists:
+- do not search for another source;
+- do not reselect historical candidate files;
+- do not reconstruct identity from text;
+- do not reopen Visual ID authority;
+- pass the existing bound canonical reference into the generation/edit operation.
+
+Only when the canonical bind itself is genuinely unavailable may the state become `BLOCKED_ASSET_BINDING`.
+
+Hard rule:
+`BOUND SOURCE EXISTS → USE BOUND SOURCE DIRECTLY`.
+
+A generation result created without consuming the existing bind is REJECT even if it looks visually similar.
