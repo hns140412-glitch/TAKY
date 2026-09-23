@@ -462,20 +462,70 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
         f += ["STALE_STATE","WRONG_REFLECTION"]
 
     # Production-artifact / pre-user exposure gate.
+    # Self-asserted booleans are insufficient. Production requires an evidence-backed
+    # execution receipt and validation bundle whose lineage agrees.
     if b(r,"production_artifact_planned"):
         artifact_class=str(r.get("artifact_class","")).strip().upper()
         production_classes={"PREVIEW","FINAL","USER_FACING"}
         if artifact_class not in production_classes:
             f.append("RULE_NOT_APPLIED")
-        if b(r,"authorized_production_route_required",True) and not b(r,"authorized_production_route_used"):
-            f.append("RULE_NOT_APPLIED")
+
         if b(r,"one_off_implementation_used"):
             f.append("RULE_NOT_APPLIED")
         if b(r,"forbidden_production_operation_used"):
             f.append("AUTHORITY_BOUNDARY_VIOLATION")
-        if b(r,"pre_user_validation_required",True) and not b(r,"pre_user_validation_passed"):
+
+        receipt=r.get("execution_receipt")
+        bundle=r.get("validation_bundle")
+        if not isinstance(receipt,dict):
             f.append("RULE_NOT_APPLIED")
-        if b(r,"user_exposure_requested") and not b(r,"pre_user_validation_passed"):
+            receipt={}
+        if not isinstance(bundle,dict):
+            f.append("RULE_NOT_APPLIED")
+            bundle={}
+
+        if str(receipt.get("receipt_type","")).strip().upper()!="AUTHORIZED_ENGINE_EXECUTION":
+            f.append("RULE_NOT_APPLIED")
+        if str(receipt.get("route","")).strip().upper().replace(" ","")!="TASK>ROUTER>AUTHORIZED_ENGINE":
+            f.append("RULE_NOT_APPLIED")
+        for key in ("engine_id","engine_version","engine_commit_sha","source_digest","artifact_digest","validation_bundle_id"):
+            if not str(receipt.get(key,"")).strip():
+                f.append("RULE_NOT_APPLIED")
+
+        for key in ("validation_bundle_id","source_digest","artifact_digest"):
+            if not str(bundle.get(key,"")).strip():
+                f.append("RULE_NOT_APPLIED")
+
+        if str(receipt.get("validation_bundle_id","")).strip()!=str(bundle.get("validation_bundle_id","")).strip():
+            f.append("STATE_CLAIM_MISMATCH")
+        if str(receipt.get("source_digest","")).strip()!=str(bundle.get("source_digest","")).strip():
+            f.append("STATE_CLAIM_MISMATCH")
+        if str(receipt.get("artifact_digest","")).strip()!=str(bundle.get("artifact_digest","")).strip():
+            f.append("STATE_CLAIM_MISMATCH")
+
+        required_gates=["SOURCE","GEOMETRY","FACT","SEMANTIC","REFERENCE_EFFECT","ARCHITECTURAL_READABILITY","USER_EFFECT"]
+        if b(r,"narrative_present"): required_gates.append("NARRATIVE_EVIDENCE")
+        if b(r,"a3_required"): required_gates.append("A3")
+        gates=bundle.get("gates") if isinstance(bundle.get("gates"),dict) else {}
+        gate_failed=False
+        for gate_name in required_gates:
+            entry=gates.get(gate_name)
+            if not isinstance(entry,dict):
+                gate_failed=True
+                f.append("RULE_NOT_APPLIED")
+                continue
+            if str(entry.get("status","")).strip().upper()!="PASS":
+                gate_failed=True
+                f.append("RULE_NOT_APPLIED")
+            if not str(entry.get("validator","")).strip():
+                gate_failed=True
+                f.append("RULE_NOT_APPLIED")
+            refs=entry.get("evidence_refs")
+            if not isinstance(refs,list) or not refs or any(not str(x).strip() for x in refs):
+                gate_failed=True
+                f.append("RULE_NOT_APPLIED")
+
+        if b(r,"user_exposure_requested") and (gate_failed or not receipt or not bundle):
             f.append("USER_AS_QA")
 
     # Reference presence is not reference-effect proof.
