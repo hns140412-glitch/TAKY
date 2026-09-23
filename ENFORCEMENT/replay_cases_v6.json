@@ -1,0 +1,160 @@
+{
+  "fixture_version": "2026-09-23.1",
+  "scope": "Hannam system-surgery replay: production-route authority, no-pass-no-show, reference compilation, content freshness, handoff mode.",
+  "cases": [
+    {
+      "id": "PRODUCTION-BYPASS-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "production_artifact_planned": true,
+        "artifact_class": "FINAL",
+        "authorized_production_route_required": true,
+        "authorized_production_route_used": false,
+        "one_off_implementation_used": true,
+        "pre_user_validation_required": true,
+        "pre_user_validation_passed": true,
+        "user_exposure_requested": true
+      }
+    },
+    {
+      "id": "PRODUCTION-BYPASS-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "production_artifact_planned": true,
+        "artifact_class": "FINAL",
+        "authorized_production_route_required": true,
+        "authorized_production_route_used": true,
+        "one_off_implementation_used": false,
+        "forbidden_production_operation_used": false,
+        "pre_user_validation_required": true,
+        "pre_user_validation_passed": true,
+        "user_exposure_requested": true
+      }
+    },
+    {
+      "id": "USER-EXPOSURE-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED",
+        "USER_AS_QA"
+      ],
+      "record": {
+        "production_artifact_planned": true,
+        "artifact_class": "PREVIEW",
+        "authorized_production_route_used": true,
+        "pre_user_validation_required": true,
+        "pre_user_validation_passed": false,
+        "user_exposure_requested": true
+      }
+    },
+    {
+      "id": "USER-EXPOSURE-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "production_artifact_planned": true,
+        "artifact_class": "PREVIEW",
+        "authorized_production_route_used": true,
+        "pre_user_validation_required": true,
+        "pre_user_validation_passed": true,
+        "user_exposure_requested": true
+      }
+    },
+    {
+      "id": "FORBIDDEN-OP-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "AUTHORITY_BOUNDARY_VIOLATION"
+      ],
+      "record": {
+        "production_artifact_planned": true,
+        "artifact_class": "USER_FACING",
+        "authorized_production_route_used": true,
+        "forbidden_production_operation_used": true,
+        "pre_user_validation_passed": true,
+        "user_exposure_requested": true
+      }
+    },
+    {
+      "id": "REFERENCE-EFFECT-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "reference_effect_required": true,
+        "reference_compile_trace_complete": false,
+        "reference_output_effect_validated": false
+      }
+    },
+    {
+      "id": "REFERENCE-EFFECT-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "reference_effect_required": true,
+        "reference_compile_trace_complete": true,
+        "reference_output_effect_validated": true
+      }
+    },
+    {
+      "id": "FRESHNESS-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "source_equivalence_decision": true,
+        "timestamp_only_freshness_inference": true,
+        "content_equivalence_evidence_present": false
+      }
+    },
+    {
+      "id": "FRESHNESS-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "source_equivalence_decision": true,
+        "timestamp_only_freshness_inference": false,
+        "content_equivalence_evidence_present": true
+      }
+    },
+    {
+      "id": "HANDOFF-SURGERY-01",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED"
+      ],
+      "record": {
+        "handoff_mode_required": true,
+        "handoff_mode": "SURGERY",
+        "known_bad_structure_forced_preserved": true
+      }
+    },
+    {
+      "id": "HANDOFF-SURGERY-01",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "handoff_mode_required": true,
+        "handoff_mode": "SURGERY",
+        "known_bad_structure_forced_preserved": false
+      }
+    }
+  ]
+}
