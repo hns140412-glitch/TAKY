@@ -445,8 +445,10 @@ use element-level recovery; do not approve the whole sheet automatically.
 STATUS: REFERENCE / CORE6 VISUAL LINEAGE
 VALID:
 - historical differentiation of 두비 / 로리 / 잉크 / 노바 / 테이크 / 제로
-OPEN:
-- final Visual ID 1:1 verification.
+AUTHORITY:
+- historical source lineage only.
+- Core 6 canonical Visual IDs are already HARD_LOCK elsewhere and MUST NOT be reopened from this reference entry.
+- new derivative assets are validated against the locked canonical; mismatch rejects the derivative only.
 
 ### SOURCE-LINEAGE-03 — 나만의 섬, 더 많은 이야기.png
 STATUS: REFERENCE / WORLD-SEQUENCE BASE_CANDIDATE
@@ -494,10 +496,50 @@ WHY:
 - mechanical patching was presented as corrected visual design
 - did not faithfully preserve the actual base composition.
 
-### Current base state
-NO SINGLE VISUAL BASE IS RE-LOCKED YET.
+### Current base state — CORRECTED 2026-09-23
+There is no single full-screen image that becomes runtime authority.
 
-NEXT:
-recover the source assets above, compare them screen-by-screen, identify the exact BASE + DELTA MAP, then generate nothing until that review is complete.
+However, approved Character Formation anchors ARE locked for their bound hierarchy:
+- CF-A01 Crew Familiarity
+- CF-A02 Primary Companion Select
+- CF-A03 Companion Name / Alias
+- CF-A05 Signature Item
+
+Runtime authority is the composition method:
+`APPROVED ANCHOR → DECOMPOSED HIGH-DENSITY ASSETS → LIVE DOM/CSS → MOTION/DEPTH → 390×844 RUNTIME CAPTURE → ANCHOR REGRESSION CHECK`.
+
+Future screens may remain OPEN/DELTA, but the accepted anchor lineage above is not reopened.
 
 END
+
+
+## 16. LATEST MOCKUP / ASSET RESIDUE FILTER — 2026-09-23
+
+### Accepted anchor hierarchy
+Character Formation:
+- CF-A01 = LOCKED anchor
+- CF-A02 = LOCKED anchor
+- CF-A03 = LOCKED anchor
+- CF-A05 = CURRENT IMPLEMENTATION anchor
+
+An accepted anchor is not a runtime screenshot and is not a free-form inspiration image.
+It constrains hierarchy/composition while implementation remains live DOM + decomposed assets.
+
+### Search exclusion
+Do not allow these to become the current base:
+- generic multi-phone posters;
+- invented Crew derivatives;
+- placeholder onboarding wireframes;
+- crop/overlay patch outputs;
+- older Handoff wording that says accepted anchors are globally NOT_LOCKED;
+- old Signature Item catalogs;
+- legacy character candidates inconsistent with Core 6 canonical bind.
+
+### Asset truth states
+- path present in manifest + binary absent = ASSET_PENDING
+- binary present + no consumer = ORPHAN_CANDIDATE
+- consumer present + wrong canonical bind = EXECUTION_BINDING_BYPASS
+- accepted reference image = REGRESSION_REFERENCE_ONLY
+- live DOM screenshot = RUNTIME_EVIDENCE
+
+This section supersedes conflicting earlier wording in this registry.
