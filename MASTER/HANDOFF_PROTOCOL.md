@@ -146,6 +146,21 @@ If canonical/evidence cannot be accessed or recovered, mark RESUME VERIFICATION 
 
 Do not execute merely because a Handoff contains a next-action sentence. First verify authority, current state, applicable realization gate and evidence against canonical/source material when available.
 
+## 6.1 Continuation mode — HARD LOCK
+
+A Handoff SHALL NOT assume that continuity is always the correct next behavior.
+
+When prior architecture/workflow quality is material, classify the continuation mode as one of:
+- RESUME — continue the last valid architecture/state;
+- RETROSPECTIVE — analyze failures without producing the prior project result;
+- SURGERY — re-architecture mode that may supersede/deprecate known-bad prior structures.
+
+HANDOFF != OBLIGATION TO PRESERVE A KNOWN-BAD STRUCTURE.
+RESUME != RETROSPECTIVE != SURGERY.
+
+A SURGERY handoff must preserve evidence/lineage while allowing invalidated architecture, routes, contracts or recipes to be classified SUPERSEDED / DEPRECATED / EXPERIMENTAL.
+Human approval remains for material intent/choice boundaries; it is not required merely to preserve a previously failing implementation path.
+
 ## 7. Compression Rule
 
 COMPACT ≠ HANDOFF.
