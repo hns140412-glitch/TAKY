@@ -421,35 +421,43 @@ The failure applies to the stale/failed artifact or consumer, not to the canonic
 `DERIVATIVE_FAILURE -> REJECT_DERIVATIVE`
 `CORE6_VISUAL_ID -> REMAINS_HARD_LOCK`
 
+## 19. GLOBAL AI ACTIVITY SLOGAN — AUTHORITATIVE MEANING — 2026-09-23
 
-## 19. BALANCED RESPONSE MODEL — 2026-09-23
+These slogans are top-level guiding principles across TAKY and must not be reinterpreted as app/domain-specific slogans or reduced to a single tactic such as aggressive review, defensive review, validation, or implementation.
 
-TAKY execution must balance offensive discovery with defensive continuity.
+### Think Again, Keep Your Key
+Authoritative meaning:
+- 핵심을 놓치지 말고 다시 생각하라.
+- 답을 풀 열쇠는 이미 가지고 있다.
 
-`Think Again, Keep Your Key.`
-means:
-- THINK AGAIN: challenge stale assumptions, broken bindings, regressions, duplicates and dead consumers.
-- KEEP YOUR KEY: protect accepted authority, working runtime, approved anchors, locked identity and recoverable state before changing anything.
+Execution meaning:
+- 다시 보고
+- 의심하고
+- 기준 단서를 복구하고
+- 다른 방법을 찾되
+- 핵심 / 맥락 / 의미 / 권한 / 소유권 / 최신 수정 / 제어권을 잃지 않는다.
 
-Required execution order:
-`PROTECT → ATTACK → ISOLATE → REPAIR → REGRESSION CHECK`
+### Think Again, You’re The Key
+Authoritative meaning:
+- 방법을 찾고 해결하라.
+- 결국 답을 만들어내는 핵심 주체는 인간이다.
 
-Rules:
-- PROTECT: freeze last-known-good evidence before structural change.
-- ATTACK: inspect only outside the protected set unless new evidence directly proves the protected set is wrong.
-- ISOLATE: quarantine a bad derivative/consumer/test; do not reopen its canonical parent.
-- REPAIR: make the smallest dependency-aware change that restores the intended contract.
-- REGRESSION CHECK: validate affected surfaces first; run broad regression once after the repair set is stable.
+Human authority:
+- AI 활동의 최종 판단과 책임 주체는 인간이다.
+- HUMAN IS THE KEY.
+- HUMAN IS THE TRIGGER.
+- USER != DEBUGGER.
 
-Anti-extremes:
-- aggressive validation is not permission to reopen every decision;
-- defensive protection is not permission to leave known defects untouched;
-- more gates are not automatically safer;
-- fewer checks are not automatically faster;
-- discovery order must not become implementation order.
+### Unified execution cycle
+`HUMAN INTENT / DESIRED OUTCOME
+→ THINK AGAIN
+→ KEEP YOUR KEY
+→ FIND A WAY / SOLVE
+→ YOU'RE THE KEY
+→ VERIFY / CORRECT / CONTINUE`
 
-Decision rule:
-`PROTECTED + WORKING + CURRENT -> PRESERVE`
-`STALE / WRONG CONSUMER -> ISOLATE + REWIRE`
-`MISSING IMPLEMENTATION -> FILL DELTA`
-`UNKNOWN -> HOLD WITHOUT CONTAMINATING CURRENT`
+Operational methods such as offensive review, defensive protection, quarantine, rollback, validation, implementation, or recovery are subordinate methods only.
+They MUST NOT redefine the slogans.
+
+`SLOGAN -> GOVERNS METHODS`
+`METHODS != SLOGAN MEANING`
