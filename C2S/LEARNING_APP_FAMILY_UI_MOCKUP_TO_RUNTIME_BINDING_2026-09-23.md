@@ -261,3 +261,46 @@ Before presenting a runtime screen:
 
 Think Again, Keep Your Key.
 Think Again, You're The Key.
+
+
+## 13. Assetization / result-presentation rule — 2026-09-23
+
+Approved mockups are executable visual anchors, not full-screen runtime assets.
+
+Required implementation path:
+
+`APPROVED MOCKUP`
+→ `SCENE DECOMPOSITION`
+→ `HIGH-DENSITY INDIVIDUAL ILLUSTRATION ASSETS`
+→ `APP ASSETS FOLDER`
+→ `LIVE DOM/CSS COMPOSITION`
+→ `MOTION / SENSOR DEPTH`
+→ `390×844 RUNTIME SCREENSHOT`
+→ `ANCHOR COMPARISON`.
+
+Forbidden:
+- crop a complete approved mockup and ship it as a screen/background;
+- bake functional buttons/text/progress/selected state into a screenshot;
+- ignore an approved anchor and produce a generic runtime form;
+- claim UI quality from a mockup when the actual runtime has not been compared.
+
+Asset layers should be separable where the scene requires:
+- background/world;
+- Crew/Character;
+- task-specific object/item;
+- foreground occlusion props;
+- texture/surface;
+- light/shadow/FX.
+
+The actual application result presented for approval must be the runtime composition whenever implementation is the task.
+
+A new high-fi mockup is allowed only for:
+- an unresolved screen with no accepted base; or
+- an explicit DELTA that cannot be resolved from the current approved anchor.
+
+This is a direct consequence of:
+`Think Again, Keep Your Key.`
+→ preserve the accepted visual/product key.
+
+`Think Again, You're The Key.`
+→ carry the accepted result through to executable implementation instead of transferring regression detection to the user.
