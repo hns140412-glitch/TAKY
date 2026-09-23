@@ -352,3 +352,71 @@ Correct propagation:
 `CORE6_VISUAL_ID -> REMAINS_HARD_LOCK`.
 
 This distinction prevents a lost pointer or failed generation from silently recreating the Crew.
+
+
+## 18. LATEST EXECUTION RESIDUE FILTER — 2026-09-23
+
+Purpose:
+prevent stale C2S/HANDOFF/contracts/assets from re-entering the active UI/Visual execution path.
+
+### CURRENT read path
+For Learning App Family UI/Visual implementation, read in this order only:
+1. this UI Decision Registry;
+2. `C2S/LEARNING_APP_FAMILY_VISUAL_MOCKUP_INTEGRATION_REGISTRY_2026-09-22.md`;
+3. app-local `HANDOFF/TAKY_UI_DECISION_REGISTRY_POINTER_2026-09-22.md`;
+4. app-local latest approved-anchor / runtime-binding authority;
+5. runtime source and asset manifest.
+
+Older C2S/HANDOFF documents are recovery evidence only unless explicitly referenced by one of the CURRENT pointers above.
+
+### Residue classification
+- stale rule already absorbed by CURRENT: SUPERSEDED / SEARCH-EXCLUDED
+- duplicate pointer/summary: DEDUP / ARCHIVE
+- Handoff contradicting current source/runtime: HANDOFF_OVERRIDE_REQUIRED
+- asset path with no binary: ASSET_PENDING, not IMPLEMENTED
+- runtime consumer using pre-lock identity: EXECUTION_BINDING_BYPASS / REPLACE
+- old screenshot/mockup not in accepted lineage: REFERENCE_ONLY or REJECTED
+- orphan asset with zero runtime consumer: ORPHAN_CANDIDATE; remove only after use-count verification
+
+### Character Formation current locks
+- Core 6 identity set remains HARD_LOCK.
+- Approved implementation anchors CF-A01 / CF-A02 / CF-A03 / CF-A05 are binding for their defined hierarchy.
+- Signature Item fixed set is exactly:
+  카메라 / 나침반 / 탐험 노트 / 쌍안경 / 물병.
+- Character Formation context = before-travel packing/preparation space.
+- island = destination hint only before Voyage/Drop.
+- sensor depth default = CHARACTER_ONLY; UI itself must not move.
+- approved full-screen images are regression references only and may not become runtime UI.
+
+### Flow lock
+`Core 6 만나기
+→ 동행 탐험대원 선택
+→ 동행 탐험대원 이름/호칭
+→ 사용자 사진
+→ Signature Item
+→ 탐험 방향 1
+→ 탐험 방향 2
+→ 시스템 자동 대비 방향
+→ A/B/C 동일 아이 후보
+→ 선택
+→ 닮기 보정
+→ Visual ID 확정
+→ Shared Expedition Accent
+→ Voyage / Drop
+→ 섬 발견
+→ 섬 이름
+→ Base Camp 이동
+→ Base Camp 이름
+→ Ready`
+
+Within Character core, the corrected implementation order after photo is:
+`사진 → Signature Item → 방향1 → 방향2`.
+
+### Anti-loop rule
+A previously settled HARD_LOCK is never reopened merely because a stale file, missing pointer, failed derivative, or old runtime consumer is discovered.
+The failure applies to the stale/failed artifact or consumer, not to the canonical lock.
+
+`RESIDUE_FOUND != REOPEN_CANONICAL`
+`BINDING_FAILURE -> FIX_BINDING`
+`DERIVATIVE_FAILURE -> REJECT_DERIVATIVE`
+`CORE6_VISUAL_ID -> REMAINS_HARD_LOCK`
