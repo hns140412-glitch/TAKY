@@ -148,7 +148,7 @@ When applicable, use this order:
 
 A narrower task may mark a step N/A, but must not silently skip a relevant upstream dependency.
 
-## 8. Current UI/Visual implication
+## 8. Current UI/Visual implication — HARD LOCK
 
 For Learning App Family UI/Visual work:
 
@@ -162,6 +162,38 @@ Implementation consequence:
 `APPROVED MOCKUP → ASSETIZE → BUILD → VERIFY`.
 
 For UI implementation, an accepted visual must be carried into runtime through decomposed assets + live UI composition. A full-screen screenshot crop is not implementation, and a beautiful mockup does not count as UI completion until the actual runtime is compared against it.
+
+### 8.1 Approved visual → runtime execution method — HARD LOCK
+
+This execution method is now globally locked for TAKY UI work unless the user explicitly reopens it:
+
+`APPROVED MOCKUP / ACCEPTED VISUAL`
+→ `ANCHOR BINDING`
+→ `SCENE DECOMPOSITION`
+→ `HIGH-DENSITY INDIVIDUAL ASSETS`
+→ `APP ASSETS FOLDER`
+→ `LIVE DOM / CSS / COMPONENT COMPOSITION`
+→ `MOTION / DEPTH EFFECTS`
+→ `390×844 RUNTIME SCREENSHOT`
+→ `ANCHOR REGRESSION CHECK`
+→ `CORRECT BEFORE USER REVIEW`.
+
+Hard rules:
+- approved visual = implementation authority for visual hierarchy;
+- approved full-screen mockup = REFERENCE / REGRESSION EVIDENCE ONLY, never the runtime screen asset;
+- crop-and-ship of a complete mockup is forbidden;
+- functional text/buttons/progress/selected states remain live UI;
+- illustration is assetized into separable layers where motion/depth or reuse requires it;
+- locked Character/Crew identity must bind from canonical assets, never be recreated from memory;
+- when an approved base exists, DELTA implementation takes precedence over redesign;
+- a new mockup is permitted only for an unresolved screen or an explicit unresolved delta;
+- implementation result shown for approval must be the runtime composition, not a substitute mockup;
+- obvious visual/semantic drift must be rejected and corrected before the user sees it.
+
+Reopen condition:
+`EXPLICIT_USER_REOPEN_ONLY`.
+
+Downstream documents may specialize asset names or component structure, but may not weaken this method.
 
 ## 9. Evidence lineage for this lock
 
