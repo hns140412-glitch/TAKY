@@ -365,3 +365,45 @@ and it must not be promoted to an approved anchor or runtime asset.
 
 `RULE_FIRST_OUTPUT_SECOND = HARD_LOCK`
 `EXPLICIT_USER_REOPEN_ONLY`.
+
+
+## 16. CORE 6 DERIVATIVE SOURCE BINDING — HARD LOCK
+
+Core 6 Visual ID derivatives must be generated from the exact canonical Visual ID reference image, not from a text description of the character.
+
+`CANONICAL VISUAL ID IMAGE → DERIVATIVE EDIT / PROJECTION`
+
+Forbidden:
+- text-only re-generation of a locked Core 6 member;
+- using a stale or legacy species/version as a source candidate;
+- synthesizing a “similar” character and treating it as the same Visual ID;
+- mixing multiple historical variants into a new interpretation.
+
+Allowed delta only:
+- expression;
+- pose;
+- gesture;
+- action;
+- screen position;
+- contextual prop interaction.
+
+Identity layers remain immutable:
+- species;
+- face;
+- silhouette;
+- body proportion;
+- identity markings;
+- fur / primary identity color;
+- canonical clothing structure;
+- canonical equipment structure.
+
+If the exact canonical reference cannot be bound into the generation/edit process:
+`BLOCKED_ASSET_BINDING`
+and generation must stop.
+
+If a derivative mismatches:
+`DERIVATIVE = REJECT`
+`CORE6_VISUAL_ID = REMAINS_HARD_LOCK`
+
+Reopen:
+`EXPLICIT_USER_REOPEN_ONLY`.
