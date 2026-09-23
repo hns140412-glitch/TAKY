@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-21.3",
+  "registry_version": "2026-09-21.4",
   "purpose": "Single registry for TAKY mobile web app development surfaces across GitHub, Google Drive and Netlify. Prevent source, validation, deploy and legacy artifacts from being mistaken for each other.",
   "state_model": [
     "SOURCE_CURRENT",
@@ -28,10 +28,10 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "488bb6aabbd7401d1f1834578a8b6b1b28032311",
+        "main_head": "78e56cc3cdab423ca7b36b3aa879afd1410c7797",
         "state": "SOURCE_CURRENT",
         "head_evidence_state": "LIVE_REFRESHED_2026-09-21",
-        "head_change_note": "README authority cleanup merged after prior implementation baseline; current main SHA updated without upgrading runtime/device claims.",
+        "head_change_note": "Ready PR #81 connected Planner V2 to actual free-window evidence; PR #82 refreshed validation metadata without changing runtime code. Runtime code basis for R5 is a85bc52c9ead654e058ac1c5a8369e7e9c53dd5e.",
         "live_refresh_source": "GITHUB_MAIN_HEAD_QUERY"
       },
       "drive": {
@@ -453,11 +453,11 @@
     "rule": "Registry values are preserved operational snapshots. SOURCE_CURRENT identifies the source repository/branch, not perpetual freshness of the stored SHA.",
     "last_manual_live_refresh": {
       "at": "2026-09-21",
-      "source": "GitHub main head queries",
+      "source": "GitHub main head queries after Ready PR #82",
       "apps": {
-        "READY_SET": "488bb6aabbd7401d1f1834578a8b6b1b28032311",
-        "HIDE_SEEK": "c0831a46ac0aa9d32c6dcc6a1e07ff70a8d155eb",
+        "READY_SET": "78e56cc3cdab423ca7b36b3aa879afd1410c7797",
         "SNAP_POP": "d761dd1435f45f7679f869f5b7a510ccf6ebf370",
+        "HIDE_SEEK": "c0831a46ac0aa9d32c6dcc6a1e07ff70a8d155eb",
         "SHARED_ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
         "MOBILE_CATALOG": "9bcb7d9660834818457704db2c0a5b16c9964c95"
       }
