@@ -4739,3 +4739,21 @@ not
 `VISUAL ID OPEN`.
 
 Historical/source recovery evidence already established the Core 6 identity set as user-confirmed. Future visual work must retrieve and use that locked identity instead of recreating or re-deciding it.
+
+
+## MOCKUP → RUNTIME BINDING OVERRIDE — 2026-09-23
+
+Implementation of approved high-fi UI is governed by:
+`C2S/LEARNING_APP_FAMILY_UI_MOCKUP_TO_RUNTIME_BINDING_2026-09-23.md`.
+
+Hard completion rule:
+`FUNCTIONAL_CONTRACT_PASS + VISUAL_BINDING_PASS + SCREENSHOT_REGRESSION_PASS`.
+
+An implementation that functions but materially loses the approved visual hierarchy, background/world continuity, Character/Crew identity, task-surface grammar, primary CTA hierarchy, or current flow step is NOT UI_COMPLETE.
+
+Current Character Formation world context:
+`BEFORE-TRAVEL PACKING / PREPARATION SPACE`.
+The one-island world is destination continuity, not the preparation-stage background.
+
+USER != DEBUGGER:
+obvious mockup-to-runtime drift must be caught before presenting the runtime screen to the user.
