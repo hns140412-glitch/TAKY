@@ -1,0 +1,73 @@
+{
+  "artifact_class": "FINAL",
+  "user_exposure_requested": true,
+  "operations": [
+    "VECTOR_STYLE_LAYER"
+  ],
+  "execution_receipt": {
+    "receipt_type": "AUTHORIZED_ENGINE_EXECUTION",
+    "route": "TASK>ROUTER>AUTHORIZED_ENGINE",
+    "engine_id": "DRAWING_ENGINE_V2",
+    "engine_version": "2.3.0",
+    "engine_commit_sha": "abc123",
+    "source_digest": "sha256:source",
+    "artifact_digest": "sha256:other",
+    "validation_bundle_id": "VB-001"
+  },
+  "validation_bundle": {
+    "validation_bundle_id": "VB-001",
+    "source_digest": "sha256:source",
+    "artifact_digest": "sha256:artifact",
+    "gates": {
+      "SOURCE": {
+        "status": "PASS",
+        "validator": "source-lock",
+        "evidence_refs": [
+          "SOURCE-EVIDENCE-1"
+        ]
+      },
+      "GEOMETRY": {
+        "status": "PASS",
+        "validator": "geometry-diff",
+        "evidence_refs": [
+          "GEOMETRY-EVIDENCE-1"
+        ]
+      },
+      "FACT": {
+        "status": "PASS",
+        "validator": "fact-validator",
+        "evidence_refs": [
+          "FACT-EVIDENCE-1"
+        ]
+      },
+      "SEMANTIC": {
+        "status": "PASS",
+        "validator": "semantic-validator",
+        "evidence_refs": [
+          "SEMANTIC-EVIDENCE-1"
+        ]
+      },
+      "REFERENCE_EFFECT": {
+        "status": "PASS",
+        "validator": "reference-effect",
+        "evidence_refs": [
+          "REFERENCE_EFFECT-EVIDENCE-1"
+        ]
+      },
+      "ARCHITECTURAL_READABILITY": {
+        "status": "PASS",
+        "validator": "readability-validator",
+        "evidence_refs": [
+          "ARCHITECTURAL_READABILITY-EVIDENCE-1"
+        ]
+      },
+      "USER_EFFECT": {
+        "status": "PASS",
+        "validator": "user-effect-validator",
+        "evidence_refs": [
+          "USER_EFFECT-EVIDENCE-1"
+        ]
+      }
+    }
+  }
+}
