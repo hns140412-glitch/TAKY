@@ -420,3 +420,36 @@ The failure applies to the stale/failed artifact or consumer, not to the canonic
 `BINDING_FAILURE -> FIX_BINDING`
 `DERIVATIVE_FAILURE -> REJECT_DERIVATIVE`
 `CORE6_VISUAL_ID -> REMAINS_HARD_LOCK`
+
+
+## 19. BALANCED RESPONSE MODEL — 2026-09-23
+
+TAKY execution must balance offensive discovery with defensive continuity.
+
+`Think Again, Keep Your Key.`
+means:
+- THINK AGAIN: challenge stale assumptions, broken bindings, regressions, duplicates and dead consumers.
+- KEEP YOUR KEY: protect accepted authority, working runtime, approved anchors, locked identity and recoverable state before changing anything.
+
+Required execution order:
+`PROTECT → ATTACK → ISOLATE → REPAIR → REGRESSION CHECK`
+
+Rules:
+- PROTECT: freeze last-known-good evidence before structural change.
+- ATTACK: inspect only outside the protected set unless new evidence directly proves the protected set is wrong.
+- ISOLATE: quarantine a bad derivative/consumer/test; do not reopen its canonical parent.
+- REPAIR: make the smallest dependency-aware change that restores the intended contract.
+- REGRESSION CHECK: validate affected surfaces first; run broad regression once after the repair set is stable.
+
+Anti-extremes:
+- aggressive validation is not permission to reopen every decision;
+- defensive protection is not permission to leave known defects untouched;
+- more gates are not automatically safer;
+- fewer checks are not automatically faster;
+- discovery order must not become implementation order.
+
+Decision rule:
+`PROTECTED + WORKING + CURRENT -> PRESERVE`
+`STALE / WRONG CONSUMER -> ISOLATE + REWIRE`
+`MISSING IMPLEMENTATION -> FILL DELTA`
+`UNKNOWN -> HOLD WITHOUT CONTAMINATING CURRENT`
