@@ -259,3 +259,11 @@ Do not claim "전부 반영" merely because a compact summary or MASTER rewrite 
 C2S compile closure remains independent from owner reflection and downstream realization:
 `C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
 A pending implementation/runtime/deployment/device action does not reopen C2S unless it reveals a knowledge-compilation defect; conversely C2S closure does not satisfy a user request that separately requires canonical reflection or implementation.
+
+
+## Execution-path enforcement correction — 2026-09-23
+
+For material engine-backed production work, load `MASTER/EXECUTION_PATH_ENFORCEMENT_PROTOCOL.md`.
+An implemented engine is not considered applied unless the actual result route is attested and passes the applicable user-exposure gate.
+`ENGINE_AVAILABLE + BYPASS_USED = GOVERNANCE_FAILURE`.
+`NO PASS -> NO SHOW` applies to blocking pre-user gates.
