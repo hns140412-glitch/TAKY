@@ -16,6 +16,7 @@ from c2s_preflight_bridge import run as run_c2s_preflight
 from codex_task_contract_builder import build as build_codex_task_contract
 from executor_transport import build_envelope as build_executor_envelope
 from executor_adapter_registry import resolve as resolve_executor_adapter
+from execution_checkpoint import guard as guard_checkpoint
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -97,6 +98,24 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
 
+    checkpoint_guard_result = None
+    checkpoint_cfg = effective_record.get("checkpoint_guard")
+    if isinstance(checkpoint_cfg, dict) and checkpoint_cfg.get("required") is True:
+        namespace = checkpoint_cfg.get("namespace")
+        task_id = checkpoint_cfg.get("task_id")
+        if not isinstance(namespace, str) or not namespace.strip():
+            detected.append("CHECKPOINT_NAMESPACE_MISSING")
+        if not isinstance(task_id, str) or not task_id.strip():
+            detected.append("CHECKPOINT_TASK_ID_MISSING")
+        if not detected:
+            checkpoint_guard_result = guard_checkpoint(
+                repo_root,
+                namespace=namespace,
+                task_id=task_id,
+                expected_atomic_unit=checkpoint_cfg.get("expected_atomic_unit"),
+            )
+            detected.extend(checkpoint_guard_result.get("detected", []))
+
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
         task_contract_result = build_codex_task_contract(record)
@@ -148,6 +167,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             if authorized and isinstance(adapter_result, dict)
             else None
         ),
+        "checkpoint_guard": checkpoint_guard_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "hosted_chatgpt_auto_invocation_verified": False,
         "external_executor_invocation_verified": False,
