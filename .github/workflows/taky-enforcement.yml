@@ -142,6 +142,7 @@ jobs:
           python -m py_compile ENFORCEMENT/current_product_identity_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
@@ -280,6 +281,9 @@ jobs:
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
+
+      - name: Local Google Drive workspace regression
+        run: python ENFORCEMENT/local_drive_workspace_test.py
       - name: Validate generated Codex task contract
         run: |
           python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json
