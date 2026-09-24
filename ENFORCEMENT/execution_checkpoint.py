@@ -114,20 +114,21 @@ def persist(record: dict[str, Any], repo_root: Path, append_history: bool = True
     enriched["checkpoint_hash"] = checkpoint_hash(record)
     payload = canonical_bytes(enriched)
 
+    # Check immutable history before mutating CURRENT. A conflicting history
+    # identity must never advance the active resume pointer.
+    if append_history and history.exists():
+        existing = history.read_bytes()
+        if existing != payload:
+            return {
+                "pass": False,
+                "detected": ["HISTORY_IMMUTABILITY_CONFLICT"],
+                "current_path": str(current),
+                "history_path": str(history),
+            }
+
     _atomic_write(current, payload)
-    if append_history:
-        if history.exists():
-            existing = history.read_bytes()
-            if existing != payload:
-                return {
-                    "pass": False,
-                    "detected": ["HISTORY_IMMUTABILITY_CONFLICT"],
-                    "current_path": str(current),
-                    "history_path": str(history),
-                }
-        else:
-            history.parent.mkdir(parents=True, exist_ok=True)
-            history.write_bytes(payload)
+    if append_history and not history.exists():
+        _atomic_write(history, payload)
 
     return {
         "pass": True,
