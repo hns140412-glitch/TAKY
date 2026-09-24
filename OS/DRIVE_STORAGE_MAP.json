@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-20.1",
+  "version": "2026-09-24.1",
   "purpose": "Single-entry Google Drive routing map for TAKY durable working/source/review/handoff/archive material. GitHub remains canonical governance authority.",
   "authority": {
     "github": "CANONICAL_GOVERNANCE",
@@ -106,6 +106,16 @@
     "C2S/review artifacts belong under REVIEWS_C2S; downstream project implementation artifacts belong under PROJECTS.",
     "NotebookLM material is legacy/optional and excluded from the default active route.",
     "Shared legacy folders with external permissions must not be silently moved or permission-mutated during cleanup.",
-    "Current mobile app source code lives in GitHub product repositories; Drive project roots hold design/assets/review/QA/release-handoff/reference material, not a competing current source tree."
-  ]
+    "Current mobile app source code lives in GitHub product repositories; Drive project roots hold design/assets/review/QA/release-handoff/reference material, not a competing current source tree.",
+    "Local execution MAY use OS/LOCAL_DRIVE_WORKSPACE.md with drive-sync as a Google Drive Computer backup mirror; this does not create a new Drive canonical root or move Git repositories into synced storage."
+  ],
+  "local_execution_profile": {
+    "profile": "OS/LOCAL_DRIVE_WORKSPACE.md",
+    "mode": "LOCAL_FIRST_GOOGLE_DRIVE_COMPUTER_BACKUP_MIRROR",
+    "state_root": "<TAKY_LOCAL_ROOT>/drive-sync",
+    "active_writer": "LOCAL_WORKSPACE",
+    "durable_mirror": "GOOGLE_DRIVE_COMPUTER_BACKUP",
+    "github_repos_inside_sync": false,
+    "canonical_governance_unchanged": true
+  }
 }
