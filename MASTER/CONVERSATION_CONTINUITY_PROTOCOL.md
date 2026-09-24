@@ -143,18 +143,32 @@ For `ㄱ / 계속 / 진행`:
 - do not rehydrate unrelated historical context;
 - do not invoke excluded auxiliary recovery systems merely because continuation occurs.
 
-## 7. Conversation-end rule
+## 7. Incremental checkpoint + conversation-end rule — HARD LOCK
+
+Do not wait for conversation end to persist execution state.
+
+After each independently meaningful atomic unit whose result changes DONE / OPEN / NEXT / corrections / authority pointers / blocker or acceptance state:
+
+`ATOMIC UNIT -> VERIFY DELTA -> WRITE CURRENT -> APPEND MINIMAL HISTORY -> NEXT UNIT`
+
+The active resume pointer follows `MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md` and SHOULD remain compact. A new chat SHOULD be able to continue from:
+
+`STATE -> APPLICABLE OWNER -> CURRENT -> OPEN/NEXT -> CONTINUE`
+
+without replaying the previous conversation.
 
 At conversation end:
-- persist material delta through C2S/state/history as applicable;
+- persist any remaining material delta through C2S/state/history as applicable;
+- ensure the latest atomic CURRENT checkpoint is not stale;
 - preserve OPEN/FRONTIER/CONFLICT/corrections;
 - update pointers needed for resume;
 - release unnecessary historical context.
 
 Do **not** perform full/global rescan by default.
+Do **not** generate a heavyweight Handoff when a verified CURRENT checkpoint is sufficient.
 
 This creates a cheap incremental continuity loop:
-`TALK -> MATERIAL DELTA -> C2S/STATE -> RELEASE CONTEXT`.
+`TALK -> ATOMIC DELTA -> CURRENT -> C2S/STATE WHEN MATERIAL -> RELEASE CONTEXT`.
 
 ## 8. Direct Drive role in lightweight continuity
 
