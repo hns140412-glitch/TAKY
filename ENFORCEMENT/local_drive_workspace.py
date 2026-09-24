@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Bootstrap and validate the TAKY local + Google Drive workspace.
 
-This utility creates a local execution layout where only drive-sync/ is meant
-to be selected in Google Drive for desktop. Git repositories and high-churn
-cache/temp data remain outside that synced subtree.
+This utility creates the durable TAKY workspace directly inside an already
+Google Drive-synchronized local folder. Git repositories and high-churn
+cache/temp data remain outside this workspace.
 """
 from __future__ import annotations
 
@@ -13,17 +13,12 @@ import os
 from pathlib import Path
 
 LAYOUT = [
-    "drive-sync/CURRENT",
-    "drive-sync/INDEX",
-    "drive-sync/C2S_WORK",
-    "drive-sync/HANDOFF",
-    "drive-sync/HISTORY",
-    "drive-sync/EXPORT",
-    "local-only/cache",
-    "local-only/temp",
-    "local-only/extracted",
-    "local-only/renders",
-    "repos",
+    "CURRENT",
+    "INDEX",
+    "C2S_WORK",
+    "HANDOFF",
+    "HISTORY",
+    "EXPORT",
 ]
 
 CONFIG = ".taky-local-workspace.json"
@@ -36,12 +31,10 @@ def init_workspace(root: Path) -> dict:
         (root / rel).mkdir(parents=True, exist_ok=True)
 
     cfg = {
-        "version": "1.0",
+        "version": "1.1",
         "root": str(root),
-        "state_root": str(root / "drive-sync"),
-        "sync_selection": str(root / "drive-sync"),
-        "local_only_root": str(root / "local-only"),
-        "repos_root": str(root / "repos"),
+        "state_root": str(root),
+        "sync_mode": "EXISTING_SYNCED_PARENT",
         "authority": {
             "local": "EXECUTION_SURFACE",
             "google_drive_computer_backup": "DURABLE_MIRROR",
@@ -49,9 +42,9 @@ def init_workspace(root: Path) -> dict:
             "github": "CODE_GOVERNANCE_VERSION_AUTHORITY",
         },
         "notes": [
-            "Select only drive-sync/ in Google Drive for desktop backup/sync.",
-            "Keep Git working trees outside drive-sync/.",
-            "Set TAKY_STATE_ROOT to drive-sync/ for local atomic CURRENT persistence.",
+            "The parent folder is already synchronized by Google Drive for desktop.",
+            "Keep Git working trees and high-churn cache/temp outside TAKY_WORKSPACE.",
+            "Set TAKY_STATE_ROOT to TAKY_WORKSPACE for local atomic CURRENT persistence.",
         ],
     }
     config_path = root / CONFIG
@@ -83,11 +76,10 @@ def doctor(root: Path) -> dict:
         if not (root / rel).exists():
             detected.append(f"MISSING:{rel}")
 
-    sync_root = root / "drive-sync"
-    repos_root = root / "repos"
+    sync_root = root
 
     if _contains_git_metadata(sync_root):
-        detected.append("GIT_METADATA_INSIDE_DRIVE_SYNC")
+        detected.append("GIT_METADATA_INSIDE_TAKY_WORKSPACE")
 
     try:
         sync_root.mkdir(parents=True, exist_ok=True)
@@ -97,8 +89,6 @@ def doctor(root: Path) -> dict:
     except OSError:
         detected.append("DRIVE_SYNC_ROOT_NOT_WRITABLE")
 
-    if repos_root == sync_root or sync_root in repos_root.parents:
-        detected.append("REPOS_ROOT_INSIDE_DRIVE_SYNC")
 
     cfg_path = root / CONFIG
     if not cfg_path.exists():
