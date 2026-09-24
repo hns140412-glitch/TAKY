@@ -43,7 +43,7 @@ with tempfile.TemporaryDirectory() as tmp:
     }), encoding="utf-8")
 
     env = dict(os.environ)
-    env["TAKY_STATE_ROOT"] = str(base / "drive-sync")
+    env["TAKY_STATE_ROOT"] = str(base)
     w = subprocess.run(
         [sys.executable, str(CHECKPOINT), "write", "--record", str(record), "--repo-root", str(base / "repos")],
         capture_output=True,
@@ -52,9 +52,9 @@ with tempfile.TemporaryDirectory() as tmp:
     )
     assert w.returncode == 0, (w.stdout, w.stderr)
     written = json.loads(w.stdout)
-    assert written["state_root"] == str((base / "drive-sync").resolve())
+    assert written["state_root"] == str(base.resolve())
 
-    current = base / "drive-sync" / "CURRENT" / "TEST" / "LOCAL_TEST.json"
+    current = base / "CURRENT" / "TEST" / "LOCAL_TEST.json"
     assert current.exists()
 
     g = subprocess.run(
