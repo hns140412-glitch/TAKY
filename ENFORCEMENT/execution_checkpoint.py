@@ -104,12 +104,12 @@ def _atomic_write(path: Path, payload: bytes) -> None:
             os.unlink(temp_name)
 
 
-def persist(record: dict[str, Any], repo_root: Path, append_history: bool = True) -> dict[str, Any]:
+def persist(record: dict[str, Any], state_root: Path, append_history: bool = True) -> dict[str, Any]:
     failures = validate(record)
     if failures:
         return {"pass": False, "detected": failures}
 
-    current, history = paths(repo_root, record)
+    current, history = paths(state_root, record)
     enriched = dict(record)
     enriched["checkpoint_hash"] = checkpoint_hash(record)
     payload = canonical_bytes(enriched)
@@ -140,12 +140,12 @@ def persist(record: dict[str, Any], repo_root: Path, append_history: bool = True
 
 
 def guard(
-    repo_root: Path,
+    state_root: Path,
     namespace: str,
     task_id: str,
     expected_atomic_unit: str | None = None,
 ) -> dict[str, Any]:
-    current = repo_root / "CURRENT" / _slug(namespace) / f"{_slug(task_id)}.json"
+    current = state_root / "CURRENT" / _slug(namespace) / f"{_slug(task_id)}.json"
     if not current.exists():
         return {"pass": False, "detected": ["CURRENT_CHECKPOINT_MISSING"], "current_path": str(current)}
     try:
@@ -172,6 +172,7 @@ def main() -> int:
     write = sub.add_parser("write")
     write.add_argument("--record", type=Path, required=True)
     write.add_argument("--repo-root", type=Path, default=Path.cwd())
+    write.add_argument("--state-root", type=Path)
     write.add_argument("--no-history", action="store_true")
 
     check = sub.add_parser("guard")
@@ -179,19 +180,31 @@ def main() -> int:
     check.add_argument("--task-id", required=True)
     check.add_argument("--expected-atomic-unit")
     check.add_argument("--repo-root", type=Path, default=Path.cwd())
+    check.add_argument("--state-root", type=Path)
 
     args = ap.parse_args()
 
+    env_state_root = os.environ.get("TAKY_STATE_ROOT")
+    state_root = (
+        args.state_root
+        if args.state_root is not None
+        else Path(env_state_root).expanduser()
+        if env_state_root
+        else args.repo_root
+    ).resolve()
+
     if args.command == "write":
         record = json.loads(args.record.read_text(encoding="utf-8"))
-        result = persist(record, args.repo_root, append_history=not args.no_history)
+        result = persist(record, state_root, append_history=not args.no_history)
+        result["state_root"] = str(state_root)
     else:
         result = guard(
-            args.repo_root,
+            state_root,
             namespace=args.namespace,
             task_id=args.task_id,
             expected_atomic_unit=args.expected_atomic_unit,
         )
+        result["state_root"] = str(state_root)
 
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["pass"] else 1
