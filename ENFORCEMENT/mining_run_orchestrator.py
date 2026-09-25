@@ -9,25 +9,9 @@ import argparse, json
 from pathlib import Path
 from strategy_failure_memory import prepare_next_run
 from mining_goal_decomposition import apply_to_task
+from mining_depth_router import route_depth
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
-
-def route_depth(task: dict) -> dict:
-    if task.get("known_complete"):
-        return {"research_depth_decision":"D0","routing_score":0,"depth_ceiling":str(task.get("max_research_depth","D4")).upper(),"reason":"KNOWN_COMPLETE"}
-    unknown = len(task.get("unknown", []) or [])
-    conflict = len(task.get("conflict", []) or [])
-    advanced = len(task.get("advanced_requirements", []) or [])
-    freshness = bool(task.get("freshness_required"))
-    high_stakes = bool(task.get("high_stakes"))
-    score = unknown + 2*conflict + advanced + int(freshness) + 2*int(high_stakes)
-    if score == 0 and task.get("goal") and task.get("auto_research", True):
-        score = 1
-    depth = "D0" if score == 0 else "D1" if score <= 2 else "D2" if score <= 4 else "D3" if score <= 6 else "D4"
-    ceiling = str(task.get("max_research_depth", "D4")).upper()
-    if ceiling not in DEPTH_ORDER: ceiling = "D4"
-    if DEPTH_ORDER[depth] > DEPTH_ORDER[ceiling]: depth = ceiling
-    return {"research_depth_decision": depth, "routing_score": score, "depth_ceiling": ceiling}
 
 def build_frontier(task: dict, depth: str) -> list[dict]:
     if depth == "D0": return []
