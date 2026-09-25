@@ -1,8 +1,8 @@
 {
-  "checkpoint_version": "1.2",
+  "checkpoint_version": "1.3",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED__AUTHORITY_RECONCILED_V26__VERIFIED_VECTOR_CHANNEL_MAIN",
+  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED__REAL_V26_679_REGRESSION_CLOSED__VERIFIED_VECTOR_CHANNEL_MAIN",
   "status": "OPERATIONS",
   "authority_current": {
     "source_index": {
@@ -41,10 +41,13 @@
     "Verified neural vector retrieval contract implemented in ENFORCEMENT/data_index_vector_search.py",
     "Search projection can fuse VERIFIED_NEURAL_VECTOR through RRF only when neural_embedding_verified=true and model_id/dimension match",
     "Existing token-cosine fallback remains unchanged when verified vectors are absent",
-    "PR #109 merged to main at 7975f3b3dd8d36646f4f49e02bc89941b6258fdc"
+    "PR #109 merged to main at 7975f3b3dd8d36646f4f49e02bc89941b6258fdc",
+    "REAL_V26_SEARCH_PROJECTION_REGRESSION closed on actual V26/V6 679-source payload without RAW reread or full reindex",
+    "PR #112 merged to main at a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3 after TAKY Enforcement Replay and Verified Vector Retrieval CI SUCCESS",
+    "Compatibility projection now materializes legacy duplicate/fragment group membership into conservative source-to-source relations for relation expansion while temporal_group remains candidate-only",
+    "Search result cards now expose source_ref and provenance fields needed by Index -> Learning handoff"
   ],
   "open": [
-    "Run the main-branch search projection against a materialized real V26 679-source payload and capture regression evidence",
     "Materialize a real V26 neural vector index with explicit model_id, dimension, and neural_embedding_verified metadata",
     "Bind a matching query embedding provider or verified query-vector producer; do not claim neural semantic retrieval before this exists",
     "Validate DETAIL_L2 anchor fetch escalation on real V26 source records",
@@ -66,7 +69,32 @@
     "DATA_SOURCE_INDEX_2026-09-25_V6.json",
     "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
-    "github:hns140412-glitch/TAKY@7975f3b3dd8d36646f4f49e02bc89941b6258fdc"
+    "github:hns140412-glitch/TAKY@7975f3b3dd8d36646f4f49e02bc89941b6258fdc",
+    "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3"
   ],
-  "updated_at": "2026-09-26T07:15:00+09:00"
+  "updated_at": "2026-09-26T08:25:00+09:00",
+  "real_v26_regression": {
+    "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "source_count": 679,
+    "unique_source_ids": 679,
+    "source_loss": false,
+    "exact_source_id": "PASS",
+    "exact_title_top1": "PASS",
+    "structured_family_filter": "PASS",
+    "structured_authority_filter": "PASS",
+    "lexical_representative_queries": "PASS",
+    "compatibility_relation_materialization": "PASS_WITHOUT_RAW_REREAD",
+    "source_ref_provenance_surface": "PASS",
+    "detail_l2_available_records": 6,
+    "held_detail_unavailable_records": 2,
+    "current_relation_field_explicit_records": 8,
+    "current_isolation_basis": "V26_CURRENT_PAYLOAD_SELECTION_NOT_FILENAME_ORDER",
+    "relation_note": "Legacy duplicate/fragment groups are converted conservatively for retrieval compatibility; temporal_group is not promoted to family or identity.",
+    "remaining_limitations": [
+      "Most legacy V26 rows do not carry explicit current_relation per-record; CURRENT isolation is enforced by loading the promoted V26 payload itself.",
+      "DETAIL_L2 anchor fetch escalation still requires live-path validation on actual sources.",
+      "No materialized verified neural vector index or matching query embedding provider exists yet."
+    ]
+  }
 }
