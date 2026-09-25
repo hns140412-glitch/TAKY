@@ -54,7 +54,7 @@
     "pr": 8,
     "head_sha": "909018cf22bbff746bf4a6896dbd0561d09a8b49",
     "ci": {
-      "Validate Snap & Pop": "CI_PENDING_RECHECK"
+      "Validate Snap & Pop": "SUCCESS"
     },
     "world_theme_binding": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
     "crew_visual_binding": "OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET",
