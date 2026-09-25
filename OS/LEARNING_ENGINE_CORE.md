@@ -473,4 +473,39 @@ Current implementation:
 - LEARNING/benchmark/promotion-policy.js
 
 
+## 18. No-loss evaluation lifecycle
+
+Promotion is not a retention boundary.
+
+Hard locks:
+- HOLD != DROP
+- REJECTED != DELETE
+- NOT_ELIGIBLE != DISCARD
+- SUPERSEDED != ERASED
+- CURRENT != HISTORY
+
+Every estimator evaluation is appended to an immutable evaluation ledger.
+
+Required lifecycle:
+BENCHMARK RESULT
+-> PROMOTION REPORT
+-> IMMUTABLE EVALUATION LEDGER
+-> CURRENT PROJECTION
+-> RECONSIDERATION QUEUE
+
+Retention rules:
+- HOLD results are retained with blockers and evidence receipt provenance.
+- HUMAN_REVIEW_AVAILABLE results are retained even when not promoted.
+- REJECTED decisions retain both the original evaluation and rejection rationale.
+- PROMOTED decisions retain the source evaluation and human decision.
+- policy/version changes never overwrite prior evaluations.
+- new evidence receipts trigger reconsideration of the latest retained evaluation for the same member × subject × concept_skill_target.
+- identical report replay is idempotently deduplicated, not duplicated.
+- no promotion report is considered complete unless it has a ledger entry.
+
+Current implementations:
+- LEARNING/lifecycle/evaluation-ledger.js
+- LEARNING/lifecycle/evaluation-orchestrator.js
+
+
 END
