@@ -247,4 +247,38 @@ Patterns considered:
 - Netlify Async Workloads/Background Functions: useful later for durable offline optimization/replay jobs, not semantic ownership.
 - Community reports: inconsistent user grading semantics and retention/workload coupling can skew adaptive models.
 
+## 12. Estimator promotion lane
+
+Candidates are benchmarked behind the stable Core contract.
+
+Current candidates:
+- OBSERVATIONAL_BENCHMARK_V1
+- BKT_BENCHMARK_CANDIDATE
+- DSR_MEMORY_BENCHMARK_CANDIDATE
+
+Synthetic/fixture tests may prove:
+- determinism;
+- invalid-input handling;
+- cold-start behavior;
+- sparse-data behavior;
+- instrument-change handling;
+- absence of schedule authority leakage.
+
+Synthetic/fixture tests may NOT prove model superiority.
+
+Promotion requires real replay evidence and all of:
+1. time-based held-out evaluation, not only retrospective fit;
+2. same semantic instrument/version or explicit drift handling;
+3. enough evidence volume for the target skill family;
+4. baseline comparison against the current observational model;
+5. no material degradation in cold-start/sparse-data cases;
+6. calibration/uncertainty evidence where numeric probability is emitted;
+7. deterministic replay for the same model version/config;
+8. human-readable decision provenance;
+9. regression success across member/subject/skill isolation;
+10. no calendar/date authority leakage.
+
+No candidate may self-promote.
+Model promotion requires a new validated CURRENT decision.
+
 END
