@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const E=require('./badge-evidence-contract.js');
+const err=E.verify('ERROR_DISCOVERY',{explicit_child_action:true,evidence_ref:'evt:1',source_contract_id:'TAKY_CHILD_SELF_CORRECTION_V1',error_marked_by_child:true,before_artifact_ref:'a:before',after_artifact_ref:'a:after'});
+assert.equal(err.family,'ERROR_DISCOVERY');
+assert.throws(()=>E.verify('DEEP_THINKING',{explicit_child_action:true,evidence_ref:'evt:2',source_contract_id:'TAKY_CHILD_REFLECTION_ARTIFACT_V1',child_chose_to_reflect:true,reflection_artifact_ref:'a:r',elapsed_ms:9000}),/WEAK_PROXY_FORBIDDEN/);
+const deep=E.verify('DEEP_THINKING',{explicit_child_action:true,evidence_ref:'evt:3',source_contract_id:'TAKY_CHILD_REFLECTION_ARTIFACT_V1',child_chose_to_reflect:true,reflection_artifact_ref:'a:r'});
+assert.equal(deep.inference_allowed,false);
+const special=E.verify('SPECIAL_BEHAVIOR',{explicit_child_action:true,evidence_ref:'evt:4',source_contract_id:'TAKY_DECLARED_SPECIAL_ACTION_V1',declared_by_feature:true,feature_contract_id:'FEATURE_X_V1',behavior_code:'SPECIAL_X'},{allowed_feature_contracts:['FEATURE_X_V1'],allowed_behavior_codes:['SPECIAL_X']});
+assert.equal(special.behavior_code,'SPECIAL_X');
+console.log('TAKY_BADGE_EXPLICIT_EVIDENCE_V1_PASS');
