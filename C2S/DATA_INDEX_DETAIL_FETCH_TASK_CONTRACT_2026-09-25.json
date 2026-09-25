@@ -1,0 +1,18 @@
+{
+  "schema": "TAKY_DATA_INDEX_DETAIL_FETCH_TASK_CONTRACT_V1",
+  "date": "2026-09-25",
+  "status": "IMPLEMENTATION_SLICE",
+  "source_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "input_pipeline": "D5_PLUS_RELATION_EXPANSION",
+  "escalation_rule": "ONLY_FOR_RESULT_WITH_DETAIL_AVAILABLE_TRUE_AND_ONLY_ON_EXPLICIT_NEED",
+  "fetch_scope": "DERIVED_EXISTING_DETAIL_L2_ONLY",
+  "guards": [
+    "DETAIL_FETCH_DOES_NOT_CHANGE_BASE_RANK",
+    "DETAIL_FETCH_DOES_NOT_CHANGE_AUTHORITY",
+    "DETAIL_FETCH_DOES_NOT_TRIGGER_RAW_READ",
+    "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+    "INDEXING != LEARNING"
+  ]
+}
