@@ -47,17 +47,68 @@ assert.equal(allowed.evidence_policy.results[0].decision,'ALLOW');
 assert.equal(allowed.trace.evidence_policy_ids.includes('P-F01-READY'),true);
 assert.equal(Runtime.validate(allowed).ok,true);
 
+const indexed=Runtime.derive({
+  scope,
+  evidence,
+  indexed_evidence_handoff:{
+    query_context:{
+      function_id:'LE-F01',
+      consumer_app:'READY_SET',
+      requested_behavior:'STANDARD_ALIGNMENT'
+    },
+    candidates:[{
+      source_id:'SRC-OFFICIAL-1',
+      source_ref:'INDEX:SRC-OFFICIAL-1',
+      source_family:'OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS',
+      source_type:'OFFICIAL_CURRICULUM',
+      authority_class:'OFFICIAL',
+      provenance:['OFFICIAL_STANDARD_REF'],
+      detail_anchor:'DETAIL:SRC-OFFICIAL-1#standard'
+    }]
+  }
+});
+assert.equal(indexed.ok,true);
+assert.deepEqual(indexed.trace.source_refs,['INDEX:SRC-OFFICIAL-1']);
+assert.equal(indexed.evidence_policy.results[0].decision,'ALLOW');
+assert.equal(indexed.indexed_evidence.invariant,'INDEX_RETRIEVAL_METADATA_IS_CONTEXT_NOT_LEARNER_PERFORMANCE');
+assert.equal(indexed.learner_state.observed.unique_evidence_count,1,'indexed reference metadata must not become learner performance evidence');
+
 const missingProvenance=Runtime.derive({
   scope,
   evidence,
-  evidence_policy_requests:[{
-    function_id:'LE-F03',
-    consumer_app:'HIDE_SEEK',
-    requested_behavior:'CONTEXTUAL_SENSE_SUPPORT',
-    provenance:['NIKL_SOURCE_REF']
-  }]
+  indexed_evidence_handoff:{
+    query_context:{
+      function_id:'LE-F03',
+      consumer_app:'HIDE_SEEK',
+      requested_behavior:'CONTEXTUAL_SENSE_SUPPORT'
+    },
+    candidates:[{
+      source_id:'SRC-NIKL-1',
+      source_ref:'INDEX:SRC-NIKL-1',
+      provenance:['NIKL_SOURCE_REF']
+    }]
+  }
 });
 assert.equal(missingProvenance.ok,false);
+assert.equal(missingProvenance.reason,'EVIDENCE_POLICY_DENIED');
 assert.equal(missingProvenance.evidence_policy.denied[0].reason,'DENY_PROVENANCE_REQUIRED');
+
+const invalidHandoff=Runtime.derive({
+  scope,
+  evidence,
+  indexed_evidence_handoff:{
+    query_context:{
+      function_id:'LE-F06',
+      consumer_app:'SNAP_POP',
+      requested_behavior:'WRITING_PROCESS_SCAFFOLD'
+    },
+    candidates:[{
+      source_id:'SRC-WRITE-1',
+      provenance:['WRITING_CORPUS_SOURCE_REF']
+    }]
+  }
+});
+assert.equal(invalidHandoff.ok,false);
+assert.equal(invalidHandoff.reason,'INDEXED_EVIDENCE_HANDOFF_INVALID');
 
 console.log('LEARNING_RUNTIME_POLICY_INTEGRATION_PASS');
