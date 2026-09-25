@@ -25,6 +25,18 @@ function baseFromEvent(event={},context={}){
     response_latency_ms:finite(payload.responseLatencyMs),
     verified_outcome:null,
     raw_app_signals:{},
+    execution_context:{
+      family_id:clean(context.family_id||event.family_id||payload.family_id)||null,
+      member_id:clean(context.member_id||event.member_id||event.child_id||payload.member_id)||null,
+      profile_id:clean(context.profile_id||event.profile_id||payload.profile_id)||null,
+      assignment_id:clean(context.assignment_id||event.assignment_id||payload.assignment_id)||null,
+      analysis_id:clean(context.analysis_id||event.analysis_id||payload.analysis_id)||null,
+      learning_unit_id:clean(context.learning_unit_id||event.learning_unit_id||payload.learning_unit_id)||null,
+      todo_id:clean(context.todo_id||event.todo_id||payload.todo_id)||null,
+      session_id:clean(context.session_id||event.session_id||payload.session_id)||null,
+      task_id:clean(context.task_id||event.task_id||payload.task_id)||null,
+      lap_id:clean(context.lap_id||event.lap_id||payload.lap_id)||null
+    },
     provenance:{
       authority:'CANONICAL_EVIDENCE_ADAPTER_ONLY',
       source_event_type:clean(event.event_type||event.type),
