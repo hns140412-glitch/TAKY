@@ -64,6 +64,7 @@ function issueBatchReceipt(evidence=[],options={}){
     member_id:r.member_id,
     subject:r.subject,
     concept_skill_target:r.concept_skill_target,
+    learning_target_id:r.learning_target_id||null,
     evidence_type:r.evidence_type,
     source_app:r.source_app,
     instrument_version:r.instrument_version,
