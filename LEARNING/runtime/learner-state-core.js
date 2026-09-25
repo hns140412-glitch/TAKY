@@ -76,10 +76,12 @@
 
     const spacedDays=new Set(accepted.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const instrumentVersions=[...new Set(accepted.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
-    const instrumentChangeDetected=instrumentVersions.length>1;
 
     const performanceEvidence=accepted.filter(e=>clean(e.evidence_type)!=='CHILD_SELF_REPORT');
+    const performanceSpacedDays=new Set(performanceEvidence.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const memoryEvidence=performanceEvidence.filter(e=>clean(e.evidence_type)==='MEMORY_RETRIEVAL_EVIDENCE');
+    const memoryInstrumentVersions=[...new Set(memoryEvidence.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
+    const instrumentChangeDetected=memoryInstrumentVersions.length>1;
     const memoryStrengths=memoryEvidence.map(e=>finite(e?.memory?.average_strength)).filter(Number.isFinite);
     const latestStrength=memoryStrengths.length?memoryStrengths.at(-1):null;
     const priorMedian=memoryStrengths.length>=3?median(memoryStrengths.slice(0,-1)):null;
@@ -119,6 +121,7 @@
         unique_evidence_count:accepted.length,
         performance_evidence_count:performanceEvidence.length,
         spaced_observation_days:spacedDays.size,
+        performance_spaced_observation_days:performanceSpacedDays.size,
         first_observed_at:accepted[0]?.observed_at||null,
         last_observed_at:accepted.at(-1)?.observed_at||null,
         assisted_count:assisted,
@@ -128,11 +131,12 @@
         memory_strength_values:memoryStrengths,
         max_review_priority:priorities.length?Math.max(...priorities):null,
         instrument_versions:instrumentVersions,
+        memory_instrument_versions:memoryInstrumentVersions,
         source_apps:[...new Set(accepted.map(e=>clean(e.source_app)).filter(Boolean))].sort(),
         evidence_ids:accepted.map(e=>evidenceKey(e))
       },
       inferred:{
-        evidence_sufficiency:evidenceSufficiency(performanceEvidence.length,spacedDays.size),
+        evidence_sufficiency:evidenceSufficiency(performanceEvidence.length,performanceSpacedDays.size),
         memory_baseline_median:Number.isFinite(priorMedian)?Math.round(priorMedian*10)/10:null,
         latest_memory_strength:latestStrength,
         memory_delta:Number.isFinite(delta)?Math.round(delta*10)/10:null,
