@@ -468,7 +468,11 @@ Preserve thinking/writing/creation purpose. Guide does not become the writer/gra
 Piano Practice:
 Maintain separate Practice Sub-Master + App. AI is a practice coach, not teacher replacement; compare primarily against the child's own prior performance and use actual practice/performance evidence.
 
-## 19. SHARED LEARNING ENGINE
+## 19. SHARED LEARNING CAPABILITIES / LEARNING ENGINE BOUNDARY
+
+The Guide-facing shared capabilities in this section are NOT the Learning Engine Core.
+
+Learning Engine Core authority is defined in `OS/LEARNING_ENGINE_CORE.md` and owns learner-state interpretation, evidence interpretation, uncertainty and pedagogical intent.
 
 Guide-owned shared capabilities may include:
 - Focused Practice / Deep Thinking modes
@@ -486,7 +490,15 @@ Guide-owned shared capabilities may include:
 Meta-regulation candidate:
 `PLAN → DO → MONITOR → ADJUST → EVALUATE`
 
+Boundary:
+- `SUBJECT / PRACTICE SUB-MASTER = subject/practice interpretation`
+- `LEARNING ENGINE CORE = learner-state + evidence interpretation + pedagogical adaptation`
+- `MAIN / PLANNER = whole-life allocation + dated placement`
+- `FUNCTIONAL APP = execution experience`
+- `GUIDE CAPABILITY = child-facing support / intervention`
+
 Shared capability ownership SHALL NOT merge private data or erase domain interpretation ownership.
+Learning Engine Core SHALL NOT absorb Ready session runtime, Planner date authority or specialist-app UI.
 
 ## 20. DATA & PRIVACY — HARD LOCK
 
