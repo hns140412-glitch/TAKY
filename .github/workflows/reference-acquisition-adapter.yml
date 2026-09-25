@@ -1,0 +1,32 @@
+name: TAKY Reference Acquisition Adapter
+
+on:
+  push:
+    branches:
+      - taky/external-acquisition-adapter-2026-09-26
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/reference_acquisition_adapter.py'
+      - 'ENFORCEMENT/reference_acquisition_adapter_test.py'
+      - 'ENFORCEMENT/reference_acquisition_runtime_binding_test.py'
+      - 'ENFORCEMENT/runtime_orchestrator.py'
+      - '.github/workflows/reference-acquisition-adapter.yml'
+
+jobs:
+  acquisition-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Adapter regression
+        working-directory: ENFORCEMENT
+        run: python reference_acquisition_adapter_test.py
+      - name: Runtime binding contract
+        working-directory: ENFORCEMENT
+        run: python reference_acquisition_runtime_binding_test.py
+      - name: Python syntax
+        run: |
+          python -m py_compile ENFORCEMENT/reference_acquisition_adapter.py
+          python -m py_compile ENFORCEMENT/runtime_orchestrator.py
