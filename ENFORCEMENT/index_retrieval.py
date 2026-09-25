@@ -9,7 +9,7 @@ RANK_FUSION -> RELATION_EXPANSION -> DETAIL_FETCH.
 This module never mutates RAW/INDEX/CURRENT and never decides learning policy.
 """
 from __future__ import annotations
-import math, re
+import math, re, unicodedata
 from collections import defaultdict
 
 EXACT_FIELDS={
@@ -23,7 +23,8 @@ RELATION_TYPES={
 }
 
 def _norm(value):
-    return " ".join(re.findall(r"[A-Za-z0-9_가-힣]+", str(value or "").lower()))
+    text=unicodedata.normalize("NFKC",str(value or "")).lower()
+    return " ".join(re.findall(r"[A-Za-z0-9_가-힣]+",text))
 
 def _tokens(value):
     return [x for x in _norm(value).split() if x]
