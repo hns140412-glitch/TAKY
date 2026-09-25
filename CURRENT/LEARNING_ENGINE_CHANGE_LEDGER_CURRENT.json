@@ -591,6 +591,28 @@
         "REGRESSION_GREEN",
         "MANUAL_REVIEW"
       ]
+    },
+    {
+      "entry_id": "apply:ready-core-decision-required-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "VALIDATION_RULE",
+      "title": "Ready adaptive review requires Core decision",
+      "description": "Ready adaptive evidence review and carry-over review now fail closed without an independent Learning Engine Runtime Decision. Legacy Ready-local learnerAdaptiveProfile/memoryConcern logic is not a default runtime authority and is reachable only through explicit compatibility opt-in.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "Ready-Set:ready-integration-v1.js",
+      "evidence_refs": [
+        "Ready-Set:ready-integration-v1.js",
+        "Ready-Set:tests/learning-decision-required.spec.js",
+        "Ready-Set:tests/core-adaptive-plan-integration.spec.js",
+        "Ready-Set:tests/learning-evidence-review-idempotency.spec.js"
+      ],
+      "blockers": [],
+      "destination": "READY_SET_ADAPTER",
+      "created_at": "2026-09-25T09:38:00.000Z",
+      "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v2",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
