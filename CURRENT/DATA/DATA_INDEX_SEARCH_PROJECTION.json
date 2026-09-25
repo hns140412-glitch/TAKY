@@ -30,7 +30,7 @@
     "True neural embedding/vector provider integration only if an explicit provider/index becomes available and is separately authorized",
     "Two oversize video content holds only when streaming partial-frame access or local sync source becomes available"
   ],
-  "next": "WAIT_FOR_GENUINE_NEW_OR_CHANGED_AUTHORITATIVE_SOURCE_EVIDENCE",
+  "next": "SCAN_INBOX_FIRST_AND_DATA_SUBTREE_AS_SAFETY_NET_WHEN_NEW_MATERIAL_ARRIVES",
   "invariants": [
     "CURRENT_V24_REMAINS_AUTHORITY",
     "SOURCE_REINDEX_ALL_FALSE",
@@ -58,10 +58,25 @@
     "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
     "github:hns140412-glitch/TAKY@fa2c73aa56530a987030826048f9e5a809496ff1"
   ],
-  "updated_at": "2026-09-25T20:30:00+09:00",
+  "updated_at": "2026-09-25T20:45:00+09:00",
   "last_delta_scan": {
     "checkpoint": "C2S/DATA_INDEX_INCREMENTAL_DELTA_SCAN_2026-09-25.json",
     "result": "NO_AUTHORITATIVE_DELTA_ACCEPTED",
     "accepted_delta_count": 0
+  },
+  "delta_discovery": {
+    "status": "ACTIVE",
+    "contract": "C2S/DATA_DELTA_DISCOVERY_CONTRACT_2026-09-25.json",
+    "data_root_id": "1_dJS5oJ7szSZL_Ljbek4dlvIGobUgbv4",
+    "inbox_id": "1h_DPWYVQgT36tkP5WYrdxPprGHMYwq7K",
+    "order": [
+      "INBOX_SCAN",
+      "DATA_SUBTREE_RECENT_CHANGE_SCAN",
+      "KNOWN_SOURCE_COMPARISON",
+      "DELTA_CLASSIFY",
+      "INCREMENTAL_INDEX_IF_ACCEPTED"
+    ],
+    "ci_run_id": 36130555542,
+    "validated_head": "946bc7543b4e987b38a77a2e784e35bd6f9f8406"
   }
 }
