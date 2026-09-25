@@ -40,3 +40,16 @@ assert.equal(F.validate(leaked).ok,false);
 assert.equal(F.validate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 console.log('PEDAGOGICAL_FEEDBACK_INTENT_PASS');
+
+const retentionAndDecline=F.derive({
+  ok:true,
+  scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{},
+  inferred:{
+    retention_signal:'RETENTION_AT_RISK',
+    trend:'DECLINING'
+  }
+});
+const retrievals=retentionAndDecline.intents.filter(x=>x.intent==='RETRIEVAL_CHECKPOINT');
+assert.equal(retrievals.length,1,'duplicate retrieval intents must merge');
+assert.deepEqual(retrievals[0].bases,['RETENTION_AT_RISK','DECLINING_MEMORY_TREND']);
