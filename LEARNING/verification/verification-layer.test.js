@@ -25,6 +25,7 @@ const evidence={
   subject:'영어',
   concept_skill_target:'vocabulary',
   evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',
+  source_app:'hide-seek',
   verified_outcome:null
 };
 const applied=V.applyReceipt(evidence,issued.receipt);
@@ -55,7 +56,7 @@ const snapReceipt=V.issueReceipt({
 assert.equal(snapReceipt.ok,true);
 const snap=V.applyReceipt({
   event_id:'s1',member_id:'A',subject:'영어',concept_skill_target:'vocabulary',
-  evidence_type:'LEARNER_PRODUCTION_EVIDENCE',verified_outcome:null
+  evidence_type:'LEARNER_PRODUCTION_EVIDENCE',source_app:'snap-pop',verified_outcome:null
 },snapReceipt.receipt);
 assert.equal(snap.ok,true);
 
