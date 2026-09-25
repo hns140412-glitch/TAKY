@@ -37,7 +37,7 @@ function fromHide(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'hide-seek'});
   const p=event.payload||{};
   const memory=p.memorySummary||p.trailSummary?.memorySummary||null;
-  out.evidence_type=memory?'MEMORY_RETRIEVAL_EVIDENCE':'SPECIALIST_OUTCOME_UNKNOWN';
+  out.evidence_type=(memory||p.verification_candidate)?'MEMORY_RETRIEVAL_EVIDENCE':'SPECIALIST_OUTCOME_UNKNOWN';
   out.memory=memory?{
     average_strength:finite(memory.averageMemoryStrength),
     review_advisories:Array.isArray(memory.reviewAdvisories)?memory.reviewAdvisories.slice(0,24):[],
@@ -48,7 +48,15 @@ function fromHide(event={},context={}){
     valid_word_count:finite(p.validWordCount),
     sheet_status:clean(p.sheetStatus)||null
   };
-  if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return applied.evidence;out.verification_error=applied;}
+  if(context.verification_receipt){
+    const applied=Verification.applyReceipt(out,context.verification_receipt);
+    if(applied.ok)return applied.evidence;
+    out.verification_error=applied;
+  }else if(p.verification_candidate){
+    const applied=Verification.issueFromCandidate(out,p.verification_candidate);
+    if(applied.ok)return applied.evidence;
+    out.verification_error=applied;
+  }
   return out;
 }
 
