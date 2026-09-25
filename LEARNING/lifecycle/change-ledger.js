@@ -70,6 +70,9 @@ function currentProjection(ledger={}){
   }
   return [...latest.values()].map(e=>({
     entry_id:e.entry_id,type:e.type,title:e.title,state:e.state,owner:e.owner,destination:e.destination,
+    blockers:Array.isArray(e.blockers)?[...e.blockers]:[],
+    evidence_refs:Array.isArray(e.evidence_refs)?[...e.evidence_refs]:[],
+    reconsider_on:Array.isArray(e.reconsider_on)?[...e.reconsider_on]:[],
     retained_history_count:(ledger.entries||[]).filter(x=>x.type===e.type&&x.title===e.title&&x.owner===e.owner).length,
     needs_reconsideration:e.state!=='APPLIED'&&e.state!=='SUPERSEDED'
   }));
