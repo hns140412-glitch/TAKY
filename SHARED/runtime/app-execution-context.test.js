@@ -3,13 +3,14 @@ const assert=require('node:assert/strict');
 const C=require('./app-execution-context.js');
 
 const full=C.normalize({
-  family_id:'F1',member_id:'M1',profile_id:'P1',
+  family_id:'F1',member_id:'M1',actor_member_id:'PARENT1',profile_id:'P1',
   assignment_id:'A1',analysis_id:'AN1',learning_unit_id:'LU1',todo_id:'T1',
   session_id:'S1',task_id:'TASK1',lap_id:'L1',
   source_app:'ready-set',target_app:'hide-seek',return_target:'https://ready.example/app'
 });
 assert.equal(full.context_contract,'TAKY_APP_EXECUTION_CONTEXT_V1');
 assert.equal(C.validate(full,{linked:true}).ok,true);
+assert.equal(full.actor_member_id,'PARENT1');
 assert.equal(full.learning_unit_id,'LU1');
 assert.equal(full.todo_id,'T1');
 
