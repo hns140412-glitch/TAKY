@@ -308,6 +308,8 @@ def search(
     filters: dict[str, str] | None = None,
     limit: int = 10,
     relation_depth: int = 1,
+    semantic_vector_scores: dict[str, float] | None = None,
+    semantic_metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     filters = filters or {}
     candidates = apply_filters(records, filters)
@@ -316,7 +318,15 @@ def search(
     exact = exact_scores(candidates, query)
     lexical = lexical_scores(candidates, query)
     token_cosine = token_cosine_scores(candidates, query)
-    fused = rrf_fuse([exact, lexical, token_cosine])
+    vector_scores_verified = {
+        sid: score
+        for sid, score in (semantic_vector_scores or {}).items()
+        if sid in by_id and isinstance(score, (int, float)) and score > 0
+    }
+    channels_for_fusion = [exact, lexical, token_cosine]
+    if vector_scores_verified:
+        channels_for_fusion.append(vector_scores_verified)
+    fused = rrf_fuse(channels_for_fusion)
     pre_relation = _rank(fused)
     fused = relation_expand(pre_relation, by_id, fused, relation_depth)
     ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
@@ -338,22 +348,32 @@ def search(
                     "exact": sid in exact,
                     "lexical": sid in lexical,
                     "token_cosine_fallback": sid in token_cosine,
+                    "verified_neural_vector": sid in vector_scores_verified,
                     "relation_expanded": sid not in pre_relation and sid in fused,
                 },
             }
         )
 
+    vector_enabled = bool(vector_scores_verified)
+    pipeline = [
+        "STRUCTURED_FILTER",
+        "EXACT_RETRIEVAL",
+        "LEXICAL_RETRIEVAL",
+        "TOKEN_COSINE_FALLBACK",
+    ]
+    if vector_enabled:
+        pipeline.append("VERIFIED_NEURAL_VECTOR")
+    pipeline.extend(["RRF", "RELATION_EXPANSION"])
+
     return {
         "projection_authoritative": False,
-        "pipeline": [
-            "STRUCTURED_FILTER",
-            "EXACT_RETRIEVAL",
-            "LEXICAL_RETRIEVAL",
-            "TOKEN_COSINE_FALLBACK",
-            "RRF",
-            "RELATION_EXPANSION",
-        ],
-        "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC",
+        "pipeline": pipeline,
+        "semantic_mode": (
+            "NEURAL_EMBEDDING_VECTOR_VERIFIED"
+            if vector_enabled
+            else "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+        ),
+        "semantic_metadata": semantic_metadata if vector_enabled else None,
         "query": query,
         "filters": filters,
         "candidate_count": len(candidates),
@@ -382,6 +402,8 @@ def main() -> int:
     ap.add_argument("--filter", action="append", default=[])
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--relation-depth", type=int, default=1)
+    ap.add_argument("--vector-index", type=Path)
+    ap.add_argument("--query-vector", type=Path)
     args = ap.parse_args()
 
     if args.limit < 1:
@@ -389,12 +411,35 @@ def main() -> int:
     if args.relation_depth < 0:
         ap.error("--relation-depth must be >= 0")
 
+    vector_scores_input = None
+    vector_meta = None
+    if bool(args.vector_index) != bool(args.query_vector):
+        ap.error("--vector-index and --query-vector must be supplied together")
+    if args.vector_index and args.query_vector:
+        from data_index_vector_search import (
+            load_query_vector,
+            load_vector_index,
+            metadata as vector_metadata,
+            vector_scores,
+        )
+        vector_index = load_vector_index(args.vector_index)
+        query_vector = load_query_vector(args.query_vector)
+        allowed_ids = {r["source_id"] for r in load_index(args.index)}
+        vector_scores_input = vector_scores(
+            vector_index,
+            query_vector,
+            allowed_source_ids=allowed_ids,
+        )
+        vector_meta = vector_metadata(vector_index)
+
     result = search(
         load_index(args.index),
         args.query,
         filters=_parse_filters(args.filter),
         limit=args.limit,
         relation_depth=args.relation_depth,
+        semantic_vector_scores=vector_scores_input,
+        semantic_metadata=vector_meta,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
