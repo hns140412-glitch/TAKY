@@ -1,5 +1,6 @@
 (function(root,factory){
-  const api=factory(require('../evidence/self-reflection-evidence.js'));
+  const dep=(typeof module!=='undefined'&&module.exports)?require('../evidence/self-reflection-evidence.js'):(root?.TakySelfReflectionEvidence||null);
+  const api=factory(dep);
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   if(root)root.TakyLearningEngineCoreV2=api;
 })(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection){
