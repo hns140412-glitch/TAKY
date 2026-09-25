@@ -186,6 +186,8 @@ jobs:
         run: node LEARNING/lifecycle/evaluation-ledger.test.js
       - name: Validate Learning Engine reevaluation orchestrator
         run: node LEARNING/lifecycle/evaluation-orchestrator.test.js
+      - name: Validate no-loss Learning Engine change ledger
+        run: node LEARNING/lifecycle/change-ledger.test.js
       - name: Validate Learning Engine replay dataset contract
         run: node LEARNING/replay/replay-dataset.test.js
       - name: Validate Learning Engine replay benchmark bridge
