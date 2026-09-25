@@ -5,10 +5,10 @@
   "atomic_unit": "SEARCH_PROJECTION_IMPLEMENTATION_AND_REGRESSION_CLOSED",
   "status": "OPERATIONS",
   "authority_current": {
-    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
-    "id": "1ePONYrWt0MLC6lovuIlhsm1cl32UT6WeelQmc1YetIs",
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s",
     "promotion": "EXECUTED",
-    "v25_created": true
+    "v26_created": true
   },
   "done": [
     "D1 architecture/design CLOSED",
@@ -25,7 +25,9 @@
     "Closure checkpoint created at C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json",
     "New-chat handoff created at HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
     "V24 666 + verified delta6 promoted to V25 672",
-    "V25 current regression CI 36132812106 SUCCESS at 8dc2540b09b5b9d9b7afd3655f896ece018f895e"
+    "V25 current regression CI 36132812106 SUCCESS at 8dc2540b09b5b9d9b7afd3655f896ece018f895e",
+    "V25 672 + verified delta7 promoted to V26 679",
+    "V26 current regression CI 36142214985 SUCCESS at e937a80abe6aa1ad1827bb81e7a211f92f6cde5b"
   ],
   "open": [
     "Operations-only incremental handling for genuinely new or changed authoritative source evidence",
@@ -34,11 +36,11 @@
   ],
   "next": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY__SCAN_INBOX_FIRST_AND_RECURSIVE_DATA_TREE_AS_SAFETY_NET",
   "invariants": [
-    "CURRENT_V25_IS_AUTHORITY",
-    "SOURCE_INDEX_V5_IS_AUTHORITY",
+    "CURRENT_V26_IS_AUTHORITY",
+    "SOURCE_INDEX_V6_IS_AUTHORITY",
+    "PROMOTION_V26_EXECUTED",
     "SOURCE_REINDEX_ALL_FALSE",
     "SEARCH_PROJECTION_NON_AUTHORITATIVE",
-    "PROMOTION_V25_EXECUTED",
     "MINING != INDEXING",
     "INDEXING != LEARNING",
     "INBOX_PRIORITY_WITH_RECURSIVE_DATA_TREE_SAFETY_NET",
@@ -47,31 +49,31 @@
     "USER != DEBUGGER"
   ],
   "evidence": {
-    "corpus_total": 672,
+    "corpus_total": 679,
     "relation_pairs": 6,
     "relation_edges": 12,
-    "detail_records": 12,
-    "semantic_resolved": 670,
+    "detail_records": 19,
+    "semantic_resolved": 677,
     "content_access_holds": 2,
     "paraphrase_lexical_hit_at_10": "0/8",
     "paraphrase_semantic_hit_at_10": "7/8",
     "paraphrase_hybrid_hit_at_10": "8/8"
   },
   "source_refs": [
-    "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
-    "DATA_SOURCE_INDEX_2026-09-25_V5.json",
-    "C2S/DATA_UTILIZATION_INDEX_V25_PROMOTION_RECEIPT_2026-09-25.json",
-    "C2S/DATA_INDEX_V25_PROMOTION_CLOSURE_2026-09-25.json",
+    "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
+    "C2S/DATA_INDEX_V26_PROMOTION_CLOSURE_2026-09-25.json",
     "HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
-    "github:hns140412-glitch/TAKY@8dc2540b09b5b9d9b7afd3655f896ece018f895e"
+    "github:hns140412-glitch/TAKY@e937a80abe6aa1ad1827bb81e7a211f92f6cde5b"
   ],
-  "updated_at": "2026-09-25T21:20:00+09:00",
+  "updated_at": "2026-09-25T22:27:00+09:00",
   "last_delta_scan": {
-    "checkpoint": "C2S/DATA_DELTA_DISCOVERY_RECURSION_CORRECTION_2026-09-25.json",
-    "result": "AUTHORITATIVE_DELTA6_ACCEPTED_AND_PROMOTED",
-    "accepted_delta_count": 6,
-    "base_total": 666,
-    "current_total": 672
+    "checkpoint": "C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V3.json",
+    "result": "AUTHORITATIVE_DELTA7_ACCEPTED_AND_PROMOTED",
+    "accepted_delta_count": 7,
+    "base_total": 672,
+    "current_total": 679
   },
   "delta_discovery": {
     "status": "ACTIVE",
@@ -85,16 +87,16 @@
       "DELTA_CLASSIFY",
       "INCREMENTAL_INDEX_IF_ACCEPTED"
     ],
-    "ci_run_id": 36132812106,
-    "validated_head": "8dc2540b09b5b9d9b7afd3655f896ece018f895e"
+    "ci_run_id": 36142214985,
+    "validated_head": "e937a80abe6aa1ad1827bb81e7a211f92f6cde5b"
   },
   "pending_authoritative_delta": {
     "status": "PROMOTED",
-    "base_total": 666,
-    "delta_count": 6,
-    "current_total": 672,
-    "checkpoint": "C2S/DATA_INDEX_DELTA6_INGEST_CHECKPOINT_2026-09-25.json",
-    "promotion_receipt_drive_id": "1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU",
-    "promotion_closure": "C2S/DATA_INDEX_V25_PROMOTION_CLOSURE_2026-09-25.json"
+    "base_total": 672,
+    "delta_count": 7,
+    "current_total": 679,
+    "checkpoint": "C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V3.json",
+    "promotion_receipt_drive_id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w",
+    "promotion_closure": "C2S/DATA_INDEX_V26_PROMOTION_CLOSURE_2026-09-25.json"
   }
 }
