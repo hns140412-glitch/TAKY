@@ -1,34 +1,29 @@
 (function(root,factory){
-  const api=factory();
+  const api=factory(root);
   if(typeof module==='object'&&module.exports) module.exports=api;
   else root.TakyCrewVisualProjection=Object.freeze(api);
-})(typeof globalThis!=='undefined'?globalThis:this,function(){
+})(typeof globalThis!=='undefined'?globalThis:this,function(root){
   'use strict';
   const VERSION='TAKY_CREW_VISUAL_PROJECTION_V1';
+  const Identity=(typeof module==='object'&&module.exports)
+    ? require('./crew-visual-identity.js')
+    : root.TakyCrewVisualIdentity;
+  if(!Identity?.identity) throw new Error('TAKY_CREW_VISUAL_IDENTITY_REQUIRED');
   const clean=v=>String(v??'').trim();
-  const CORE=Object.freeze({
-    'crew.core.dubi':Object.freeze({canonical_name:'두비',lineage:'dog-like',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'}),
-    'crew.core.lori':Object.freeze({canonical_name:'로리',lineage:'rabbit / pink-braid lineage',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'}),
-    'crew.core.ink':Object.freeze({canonical_name:'잉크',lineage:'female dark fox / goggles / dark tone',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'}),
-    'crew.core.nova':Object.freeze({canonical_name:'노바',lineage:'brown otter-ferret-like / goggles / ponytail',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'}),
-    'crew.core.take':Object.freeze({canonical_name:'테이크',lineage:'panda',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'}),
-    'crew.core.zero':Object.freeze({canonical_name:'제로',lineage:'penguin / headphones / cap',status:'VISUAL_ID_RECOVERED_ASSET_BINDING_OPEN'})
-  });
 
   function normalize(input={}){
     const character_id=clean(input.character_id);
-    const base=CORE[character_id];
-    if(!base)throw new Error('CREW_VISUAL_CHARACTER_UNKNOWN');
-    const asset_ref=clean(input.asset_ref)||null;
-    const theme_id=clean(input.theme_id)||null;
+    const identity=Identity.identity(character_id);
+    if(!identity) throw new Error('CREW_VISUAL_CHARACTER_UNKNOWN');
     return Object.freeze({
       crew_visual_projection_contract:VERSION,
       character_id,
-      canonical_name:base.canonical_name,
-      lineage:base.lineage,
-      identity_status:base.status,
-      asset_ref,
-      theme_id,
+      canonical_name:identity.canonical_name,
+      species:identity.species,
+      identity,
+      asset_ref:clean(input.asset_ref)||null,
+      theme_id:clean(input.theme_id)||null,
+      personality_prop_ref:clean(input.personality_prop_ref)||null,
       identity_mutation_allowed:false,
       functional_advantage:null,
       reward_advantage:null
@@ -36,11 +31,11 @@
   }
 
   function bindReviewedAsset(input={}){
-    if(input.reviewed!==true)throw new Error('CREW_VISUAL_REVIEW_REQUIRED');
+    if(input.reviewed!==true) throw new Error('CREW_VISUAL_REVIEW_REQUIRED');
     const asset_ref=clean(input.asset_ref);
-    if(!asset_ref)throw new Error('CREW_VISUAL_ASSET_REF_REQUIRED');
+    if(!asset_ref) throw new Error('CREW_VISUAL_ASSET_REF_REQUIRED');
     return normalize({...input,asset_ref});
   }
 
-  return Object.freeze({VERSION,CORE,normalize,bindReviewedAsset});
+  return Object.freeze({VERSION,normalize,bindReviewedAsset});
 });
