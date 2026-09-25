@@ -1,0 +1,52 @@
+{
+  "schema": "TAKY_DATA_INDEX_V25_PROMOTION_CLOSURE_V1",
+  "date": "2026-09-25",
+  "status": "PROMOTION_CLOSED",
+  "drive_authority": {
+    "current_pointer_id": "1JNvFBrmY7H-j6v1WX1G3qGbieS7BR8Qbt4O54D1mNcU",
+    "utilization_v25": {
+      "name": "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
+      "id": "1ePONYrWt0MLC6lovuIlhsm1cl32UT6WeelQmc1YetIs"
+    },
+    "source_index_v5": {
+      "name": "DATA_SOURCE_INDEX_2026-09-25_V5.json",
+      "id": "1xYRw898zSObt_4gTHe0r54PlvjweXr7SPyRqgH_vqD8"
+    },
+    "promotion_receipt": {
+      "name": "C2S/DATA_UTILIZATION_INDEX_V25_PROMOTION_RECEIPT_2026-09-25.json",
+      "id": "1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU"
+    },
+    "pre_v25_current_history_id": "1PFIIdx5kjMpcE5jMveusQg1T1dVM-8PuB7Cn98-uELk"
+  },
+  "corpus": {
+    "prior_total": 666,
+    "added": 6,
+    "current_total": 672,
+    "semantic_resolved": 670,
+    "content_access_holds": 2
+  },
+  "projection": {
+    "semantic_fixture": "PROJECTIONS/fixtures/data_index_v25_semantic_projection.json",
+    "relation_fixture": "PROJECTIONS/fixtures/data_index_v25_relation_projection.json",
+    "detail_fixture": "PROJECTIONS/fixtures/data_index_v25_detail_projection.json",
+    "detail_records": 12,
+    "relation_edges": 12,
+    "search_projection_authoritative": false
+  },
+  "validation": {
+    "head": "8dc2540b09b5b9d9b7afd3655f896ece018f895e",
+    "ci_run_id": 36132812106,
+    "result": "SUCCESS",
+    "v24_regression_preserved": true,
+    "delta6_ingest_pass": true,
+    "v25_current_regression_pass": true
+  },
+  "operations": {
+    "mode": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY",
+    "source_reindex_all": false,
+    "inbox_priority": true,
+    "recursive_data_tree_safety_net": true,
+    "netlify": "NONE",
+    "deployment": "NONE"
+  }
+}
