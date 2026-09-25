@@ -362,4 +362,47 @@ Hard locks:
 - APP completion state != verified prediction target.
 - VERIFIED_TARGET requires explicit verification semantics.
 
+## 15. Verification layer
+
+A binary verified target must be backed by a versioned verification receipt.
+
+Canonical verification path:
+
+APP / TASK EVIDENCE
+-> VERIFIER
+-> LEARNING_VERIFICATION_RECEIPT
+-> CANONICAL EVIDENCE
+-> REPLAY VERIFIED_TARGET
+
+Allowed verifier classes in V1:
+- ANSWER_KEY_EXACT
+- RETRIEVAL_EXACT_MATCH
+- HUMAN_RUBRIC_BINARY
+
+Required receipt fields:
+- receipt_id
+- target_event_id
+- verified_at
+- verifier_type
+- verifier_version
+- outcome: 0 or 1
+- member_id
+- subject
+- concept_skill_target
+- reference_id
+- reviewer_role when human rubric is used
+
+Rules:
+- CHILD_SELF_REPORT cannot become a verified target.
+- APP completion cannot become a verified target.
+- APP-local mastery/score cannot become a verified target.
+- Receipt event/member/subject/skill must match the canonical evidence.
+- Human rubric verification requires an explicit rubric/reference and reviewer role.
+- A raw verified_outcome without receipt authority is OBSERVATION_ONLY.
+- Verification proves only the target event outcome; it does not prove global mastery.
+
+Current implementation:
+- LEARNING/verification/verification-layer.js
+
+
 END
