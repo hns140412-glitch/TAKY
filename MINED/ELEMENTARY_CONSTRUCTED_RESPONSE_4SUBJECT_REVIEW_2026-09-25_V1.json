@@ -1,0 +1,83 @@
+{
+  "schema": "TAKY_ELEMENTARY_CONSTRUCTED_RESPONSE_4SUBJECT_REVIEW_V1",
+  "date": "2026-09-25",
+  "official_sources": [
+    {
+      "subject": "국어",
+      "published": "2026-03-12",
+      "title": "초등 3~6학년 국어과 서논술형 평가도구 자료집",
+      "source": "인천학교지원서비스 / 인천광역시교육청",
+      "status": "OFFICIAL_SOURCE_CONFIRMED"
+    },
+    {
+      "subject": "사회",
+      "published": "2026-03-12",
+      "title": "초등 3~6학년 사회과 서논술형 평가도구 자료집",
+      "source": "인천학교지원서비스 / 인천광역시교육청",
+      "status": "OFFICIAL_SOURCE_CONFIRMED"
+    },
+    {
+      "subject": "수학",
+      "published": "2026-09-01",
+      "title": "초등 수학과 서논술형 평가 도움자료",
+      "source": "인천광역시교육청",
+      "attachments": [
+        "PDF",
+        "HWPX item appendix"
+      ],
+      "status": "OFFICIAL_SOURCE_CONFIRMED"
+    },
+    {
+      "subject": "과학",
+      "published": "2026-09-01",
+      "title": "초등 과학과 서논술형 평가 도움자료",
+      "source": "인천광역시교육청",
+      "attachments": [
+        "PDF",
+        "HWPX item appendix"
+      ],
+      "status": "OFFICIAL_SOURCE_CONFIRMED"
+    }
+  ],
+  "drive_presence_check": {
+    "exact_presence": {
+      "국어": "NOT_CONFIRMED",
+      "사회": "NOT_CONFIRMED",
+      "수학": "NOT_CONFIRMED",
+      "과학": "NOT_CONFIRMED"
+    },
+    "note": "Semantic Drive search returned the generic 2026 elementary assessment guide and unrelated source.html matches; no exact-title file match was treated as present."
+  },
+  "acquisition_verdict": {
+    "국어": "P2_CHECK_BEFORE_ACQUIRE_DUE_EXISTING_WRITING_COVERAGE",
+    "사회": "P1_ACQUIRE",
+    "수학": "P1_ACQUIRE",
+    "과학": "P1_ACQUIRE"
+  },
+  "rationale": [
+    "Math/science 2026-09 sources materially improve freshness and subject-specific constructed-response coverage.",
+    "Social constructed-response coverage is comparatively weak in the current DATA set.",
+    "Korean constructed-response coverage is already stronger, so exact semantic overlap should be checked before acquisition."
+  ],
+  "expected_detail_fields": [
+    "grade",
+    "achievement_standard",
+    "assessment_element",
+    "prompt",
+    "basic_answer",
+    "accepted_answer",
+    "scoring_criteria",
+    "scoring_caution",
+    "feedback_or_instructional_note",
+    "subject",
+    "source_page"
+  ],
+  "guards": [
+    "OFFICIAL_EDUCATION_OFFICE_RESOURCE != NATIONAL_CURRICULUM_CANONICAL",
+    "ASSESSMENT_ITEM != PREREQUISITE_CAUSAL_PROOF",
+    "SCORING_CRITERION != GLOBAL_MASTERY",
+    "EXACT_TITLE_ABSENCE_IN_SEARCH != PROOF_OF_NONEXISTENCE",
+    "NEW_SOURCE_REQUIRES_INDEXING_BEFORE_DOMAIN_USE"
+  ],
+  "next_action": "Acquire math/science/social official binaries first when direct attachment endpoints are resolvable; check Korean overlap before full acquisition."
+}
