@@ -490,6 +490,54 @@
       "parent_entry_id": "correct:data-prerequisite-candidates-applied-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:ready-learning-engine-adapter-v2",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Ready independent Learning Engine decision adapter",
+      "description": "Ready now consumes TAKY Runtime Decision Contract through a translation-only adapter. Core pedagogical intent is preserved; Planner retains dated allocation; Ready does not acquire learner-model authority.",
+      "state": "APPLIED",
+      "owner": "READY_SET",
+      "source_ref": "hns140412-glitch/Ready-Set:src/learning/learning-engine-adapter-v2.js",
+      "evidence_refs": [
+        "Ready-Set:src/learning/learning-engine-adapter-v2.js",
+        "Ready-Set:ready-integration-v1.js",
+        "LEARNING/runtime/decision-contract.js"
+      ],
+      "blockers": [],
+      "destination": "READY_SET_ADAPTER",
+      "created_at": "2026-09-25T07:28:00.000Z",
+      "parent_entry_id": "apply:runtime-decision-contract-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
+    },
+    {
+      "entry_id": "hold:ready-embedded-learning-logic-extraction-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Extract remaining Ready-embedded learning logic",
+      "description": "ready-integration-v1.js still contains legacy learnerAdaptiveProfile, memoryConcern and direct ReadyLearningMaster reinterpretation paths. They are explicitly marked LEGACY_COMPATIBILITY and must be migrated to independent Learning Engine Core without breaking validated V1 behavior.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "hns140412-glitch/Ready-Set:ready-integration-v1.js",
+      "evidence_refs": [
+        "Ready-Set:ready-integration-v1.js",
+        "Ready-Set:HANDOFF/READY_LEARNING_ENGINE_ADAPTER_CURRENT_2026-09-25.md"
+      ],
+      "blockers": [
+        "LEGACY_V1_RUNTIME_COMPATIBILITY",
+        "CORE_DECISION_TO_PLANNER_MIGRATION_NOT_YET_COMPLETE"
+      ],
+      "destination": "LEARNING_ENGINE_CORE + READY_SET_ADAPTER",
+      "created_at": "2026-09-25T07:29:00.000Z",
+      "parent_entry_id": "apply:ready-learning-engine-adapter-v2",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "DEPENDENCY_CLOSED",
+        "MANUAL_REVIEW",
+        "REGRESSION_GREEN"
+      ]
     }
   ]
 }
