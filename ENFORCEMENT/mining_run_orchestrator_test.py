@@ -6,10 +6,16 @@ MEMORY={"strategies":[{"strategy_id":"S1","task_family":"LEARNING_ENGINE","goal_
 
 class OrchestratorTest(unittest.TestCase):
     def test_d0_no_frontier(self):
-        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"use known approved state","max_research_depth":"D4"},"memory":MEMORY})
+        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"use known approved state","max_research_depth":"D4","known_complete":True},"memory":MEMORY})
         self.assertEqual(r["plan"]["research_depth_decision"],"D0")
         self.assertEqual(r["plan"]["search_frontier"],[])
         self.assertTrue(r["plan"]["execution_allowed"])
+
+    def test_auto_goal_decomposition_starts_research(self):
+        r=orchestrate({"task":{"task_family":"GENERAL_RESEARCH","goal":"compare implementation approaches"},"memory":MEMORY})
+        self.assertEqual(r["plan"]["research_depth_decision"],"D1")
+        self.assertTrue(r["plan"]["search_frontier"])
+        self.assertEqual(r["plan"]["search_frontier"][0]["origin"],"GENERIC_SCAFFOLD")
 
     def test_failed_route_uses_replacement(self):
         r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:stale","unknown":["fresh evidence"]},"memory":MEMORY})
