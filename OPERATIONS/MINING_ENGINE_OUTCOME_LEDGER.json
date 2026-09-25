@@ -1,0 +1,21 @@
+{
+  "schema": "TAKY_MINING_ENGINE_OUTCOME_LEDGER_V1",
+  "campaign": "OPERATIONS/MINING_ENGINE_OPS_CAMPAIGN_01_2026-09-25.md",
+  "status": "OPEN",
+  "target_real_runs": 12,
+  "minimum_distinct_task_families": 4,
+  "runs": [],
+  "aggregates": {
+    "real_runs_recorded": 0,
+    "distinct_task_families": [],
+    "strategy_review_eligible": [],
+    "recurring_failure_patterns": [],
+    "v3_triggered": false
+  },
+  "guards": {
+    "synthetic_fixture_not_counted_as_real_run": true,
+    "live_capture_without_user_outcome_not_counted_as_real_run": true,
+    "single_run_no_auto_promotion": true,
+    "closed_v2_not_reopened_without_evidence": true
+  }
+}
