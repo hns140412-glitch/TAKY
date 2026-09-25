@@ -28,6 +28,7 @@ function baseFromEvent(event={},context={}){
     execution_context:{
       family_id:clean(context.family_id||event.family_id||payload.family_id)||null,
       member_id:clean(context.member_id||event.member_id||event.child_id||payload.member_id)||null,
+      actor_member_id:clean(context.actor_member_id||event.actor_member_id||payload.actor_member_id)||null,
       profile_id:clean(context.profile_id||event.profile_id||payload.profile_id)||null,
       assignment_id:clean(context.assignment_id||event.assignment_id||payload.assignment_id)||null,
       analysis_id:clean(context.analysis_id||event.analysis_id||payload.analysis_id)||null,
