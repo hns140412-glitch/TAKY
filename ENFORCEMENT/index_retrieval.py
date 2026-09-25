@@ -24,7 +24,7 @@ RELATION_TYPES={
 
 def _norm(value):
     text=unicodedata.normalize("NFKC",str(value or "")).lower()
-    return " ".join(re.findall(r"[A-Za-z0-9_가-힣]+",text))
+    return " ".join(re.findall(r"[A-Za-z0-9가-힣]+",text))
 
 def _tokens(value):
     return [x for x in _norm(value).split() if x]
