@@ -1,0 +1,145 @@
+{
+  "version": "2026-09-21.3",
+  "status": "RECOVERY_CLASSIFIED_CURRENT_SCOPE",
+  "productRole": "PROCESS_AND_EXPERIENCE_COLLECTION_NOT_SCORE_OR_POWER",
+  "catalog": {
+    "targetScaleApprox": 60,
+    "expandableFromObservedActivity": true,
+    "finalCatalogStatus": "OPEN",
+    "historicalDraftStatus": "WORKING_DRAFT"
+  },
+  "tiers": [
+    {
+      "id": "GREEN",
+      "order": 1,
+      "stars": 5
+    },
+    {
+      "id": "BLUE",
+      "order": 2,
+      "stars": 5
+    },
+    {
+      "id": "RED",
+      "order": 3,
+      "stars": 5
+    },
+    {
+      "id": "GOLD",
+      "order": 4,
+      "stars": 5
+    },
+    {
+      "id": "PLATINUM",
+      "order": 5,
+      "stars": 5
+    }
+  ],
+  "visual": {
+    "shape": "CIRCLE",
+    "illustration": "HAND_DRAWN_PASTEL",
+    "growthAdornment": "FIVE_GEM_STARS_UPPER_SEMICIRCLE",
+    "protagonist": "PROFILE_CHARACTER",
+    "composition": [
+      "COMMON_BADGE_ART",
+      "CHILD_IDENTITY_LAYER",
+      "BADGE_GROWTH_LAYER"
+    ],
+    "identityRule": "IDENTITY_STABLE_THEME_EXPRESSION_VARIABLE",
+    "themeExpression": {
+      "contract": "SNAP_POP_BADGE_THEME_EXPRESSION_V1",
+      "authority": "COSMETIC_ONLY",
+      "exactAssetSet": "OPEN_UNRESOLVED_UNTIL_REVIEWED",
+      "forbiddenMutation": [
+        "PROFILE_IDENTITY",
+        "BADGE_GROWTH_TIER_STARS",
+        "EXP_GEM_ECONOMY",
+        "AWARD_STATE",
+        "POWER"
+      ]
+    }
+  },
+  "antiPatterns": [
+    "CHARACTER_POWER_LEVEL",
+    "LEADERBOARD",
+    "PUNITIVE_BADGE_REMOVAL",
+    "STREAK_PRESSURE",
+    "EXP_GEM_EQUIVALENCE",
+    "AUTO_CANONICALIZE_HISTORICAL_DRAFT"
+  ],
+  "eventFamilies": [
+    "SELF_START",
+    "TIME_CREATION",
+    "EXTRA_TASK",
+    "FOCUS",
+    "RETURN_RECOVERY",
+    "HELP_REQUEST",
+    "ERROR_DISCOVERY",
+    "RETRY",
+    "DEEP_THINKING",
+    "ISSUE_DURATION",
+    "SELF_EXPLANATION",
+    "PLAN_ADAPTATION",
+    "SPECIAL_BEHAVIOR",
+    "WRITING_EXPLORATION"
+  ],
+  "recovery": {
+    "classification": "CONFIRMED_HOLD_WORKING_OPEN_CLOSED_FOR_RETRIEVED_SCOPE",
+    "sourceCoverage": "OPEN",
+    "closureDocument": "C2S/SNAP_POP_BADGE_SOURCE_RECOVERY_2026-09-21.md",
+    "catalogActivation": "FORBIDDEN_UNTIL_CANONICAL_REVIEW",
+    "directUserOriginRecovered": true,
+    "readyHoldBoundaryRecovered": true,
+    "assistantProposalsAreCanonical": false
+  },
+  "separation": [
+    "CHARACTER_LEVEL",
+    "EXP",
+    "GEM",
+    "AFFINITY",
+    "WORLD_STATE",
+    "LEADERBOARD",
+    "POWER"
+  ],
+  "provenance": {
+    "directUserEvidence": [
+      {
+        "source": "SANITIZED_ACCOUNT_TRANSCRIPT_2026-09-08_[0165]",
+        "meaning": "BADGE_OR_TITLE_COLLECTION_AS_FUN_ELEMENT"
+      },
+      {
+        "source": "SANITIZED_ACCOUNT_TRANSCRIPT_2026-09-08_[0167]",
+        "meaning": "INCLUDE_DONE_WELL_MISTAKE_AND_IMPROVEMENT_EXPERIENCE"
+      },
+      {
+        "source": "SANITIZED_ACCOUNT_TRANSCRIPT_2026-09-08_[0169]",
+        "meaning": "APPROX_60_EXPANDABLE_FROM_CHILD_ACTIVITY_WITH_BEHAVIOR_EXAMPLES"
+      },
+      {
+        "source": "SANITIZED_ACCOUNT_TRANSCRIPT_2026-09-08_VISUAL_LINEAGE",
+        "meaning": "CIRCULAR_WITTY_SITUATION_BASED_BADGE_DIRECTION"
+      }
+    ],
+    "readyHoldBoundary": [
+      "CHARACTER_LEVEL_GROWTH_ECONOMY",
+      "ADVANCED_REWARD_ECONOMY",
+      "SOCIAL_COMPETITION_LEADERBOARD",
+      "CHARACTER_GACHA",
+      "COMPLEX_GROWTH_SCORE"
+    ],
+    "workingOnly": [
+      "HISTORICAL_60_NAMES",
+      "EXACT_HISTORICAL_TRIGGER_WORDING",
+      "BADGE_TO_TITLE_PROMOTION_RULE",
+      "SHARED_BADGE_VARIANTS",
+      "EXACT_COLLECTION_SURFACE_COPY"
+    ],
+    "open": [
+      "INTRO_PROFILE_BADGE_MOTIF_AS_FUNCTIONAL_RULE",
+      "FINAL_DISPLAY_SURFACES_AND_OWNERSHIP",
+      "BADGE_TITLE_RELATIONSHIP",
+      "CROSS_APP_AWARD_THRESHOLDS_AND_DEDUPE",
+      "OLD_OBSERVATION_MIGRATION"
+    ]
+  }
+}
