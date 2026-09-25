@@ -319,6 +319,27 @@
         "MANUAL_REVIEW",
         "DEPENDENCY_CLOSED"
       ]
+    },
+    {
+      "entry_id": "correct:concept-graph-current-applied-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Concept prerequisite and dependency graph",
+      "description": "Correction: the declared-source concept dependency graph contract remains APPLIED. Only automatic promotion of data-derived relation candidates remains unresolved and is tracked separately under Data-derived prerequisite relation candidates.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "deferred:concept-graph-v1",
+      "evidence_refs": [
+        "LEARNING/domain-model/concept-dependency-graph.js",
+        "LEARNING/domain-model/concept-dependency-graph.test.js",
+        "hold:data-prerequisite-candidates-v1"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/domain-model/concept-dependency-graph.js",
+      "created_at": "2026-09-25T07:09:00.000Z",
+      "parent_entry_id": "hold:data-prerequisite-candidates-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
