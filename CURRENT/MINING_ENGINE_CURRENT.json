@@ -1,0 +1,17 @@
+{
+  "schema": "TAKY_MINING_ENGINE_CURRENT_V1",
+  "date": "2026-09-25",
+  "status": "CLOSED",
+  "scope_status": {
+    "original_10_step_v2_plan": "100_PERCENT_CLOSED",
+    "practical_mining_core_v2": "100_PERCENT_CLOSED",
+    "operations_growth": "ONGOING_EVIDENCE_DRIVEN"
+  },
+  "branch": "taky/mining-engine-v2-current-reconciler-2026-09-25",
+  "verified_implementation_head": "cea03abb327ae3737ed0b64dd308ea9447980c22",
+  "closure": "C2S/MINING_ENGINE_V2_CLOSURE_2026-09-25.md",
+  "handoff": "HANDOFF/MINING_ENGINE_V2_NEW_CHAT_START_2026-09-25_LATEST.md",
+  "live_capture": "ENFORCEMENT/mining_e2e_live_capture_2026-09-25.json",
+  "reopen_rule": "ONLY_WITH_NEW_REGRESSION_OR_OPERATIONAL_EVIDENCE",
+  "next_mode": "OPERATIONS"
+}
