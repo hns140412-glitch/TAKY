@@ -60,3 +60,32 @@ assert.equal(A.validateCanonical(leaked).ok,false);
 assert.equal(A.validateCanonical(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 console.log('CANONICAL_LEARNING_EVIDENCE_ADAPTER_PASS');
+
+const autoVerified=A.fromHide({
+  event_id:'h3',
+  source:'hide-seek',
+  event_type:'RETRIEVAL_ATTEMPT_RESULT',
+  occurred_at:'2026-09-27T07:00:00.000Z',
+  payload:{
+    instrumentVersion:'HIDE_CODE_RED_V1',
+    interactionMode:'CORE',
+    assisted:false,
+    attemptCount:1,
+    responseLatencyMs:1200,
+    verification_candidate:{
+      verifier_type:'RETRIEVAL_EXACT_MATCH',
+      verifier_version:'HIDE_CODE_RED_V1',
+      target_semantics:'UNASSISTED_EXACT_RETRIEVAL',
+      outcome:1,
+      reference_id:'hide-word:sheet-1:w1:spelling',
+      basis:'DETERMINISTIC_LOCAL_MATCH',
+      result_type:'CORRECT'
+    }
+  }
+},ctx);
+assert.equal(autoVerified.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
+assert.equal(autoVerified.verified_outcome,1);
+assert.equal(autoVerified.verification.verifier_type,'RETRIEVAL_EXACT_MATCH');
+assert.equal(autoVerified.instrument_version,'HIDE_CODE_RED_V1');
+assert.equal(autoVerified.assistance,'UNASSISTED');
+assert.equal(A.validateCanonical(autoVerified).ok,true);
