@@ -180,6 +180,8 @@ jobs:
         run: node LEARNING/benchmark/estimator-benchmark.test.js
       - name: Validate Learning Engine replay dataset contract
         run: node LEARNING/data/replay-dataset-builder.test.js
+      - name: Validate Learning Engine evidence normalizer
+        run: node LEARNING/data/evidence-normalizer.test.js
       - name: Validate MASTER structural integrity and active projection
         run: python ENFORCEMENT/master_surface_integrity_validator.py
       - name: Validate Drive storage role map
