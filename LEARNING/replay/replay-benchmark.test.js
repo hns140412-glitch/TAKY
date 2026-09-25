@@ -38,6 +38,11 @@ const real=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill
 const realOut=Bridge.benchmarkReplay(real.dataset);
 assert.equal(realOut.promotion_eligible,false);
 assert.equal(realOut.promotion_blockers.includes('REAL_EVIDENCE_REQUIRED'),false);
+assert.equal(realOut.promotion_blockers.includes('REAL_EVIDENCE_RECEIPT_REQUIRED'),true);
 assert.equal(realOut.promotion_blockers.includes('HUMAN_PROMOTION_REVIEW_REQUIRED'),true);
+
+const receipted=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{created_at:'2026-09-25T00:00:00.000Z',source_kind:'REAL_EVIDENCE',evidence_receipt_id:'receipt_001'});
+const receiptedOut=Bridge.benchmarkReplay(receipted.dataset);
+assert.equal(receiptedOut.promotion_blockers.includes('REAL_EVIDENCE_RECEIPT_REQUIRED'),false);
 
 console.log('LEARNING_REPLAY_BENCHMARK_PASS');
