@@ -77,6 +77,7 @@ function buildDataset(evidence=[],scopeInput={},options={}){
         created_at:options.created_at||new Date(0).toISOString(),
         source_kind:options.source_kind||'SYNTHETIC_FIXTURE',
         raw_evidence_immutable:true,
+        evidence_receipt_id:clean(options.evidence_receipt_id)||null,
         notes:options.notes||null
       }
     },
