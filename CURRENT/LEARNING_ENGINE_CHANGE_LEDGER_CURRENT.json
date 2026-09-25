@@ -767,6 +767,36 @@
         "DEPENDENCY_CLOSED",
         "MANUAL_REVIEW"
       ]
+    },
+    {
+      "entry_id": "hold:hosted-central-evidence-transport-v2",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Hosted central evidence transport connection",
+      "description": "Durable state adapter, strong-consistency conditional writes, family/member authorization, authenticated transport, and Netlify Blobs adapter are implemented. Remaining work is binding a server-side identity resolver and Function endpoint, then passing the explicit deployment gate.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "hold:hosted-central-evidence-transport-v1",
+      "evidence_refs": [
+        "LEARNING/transport/durable-evidence-store-adapter.js",
+        "LEARNING/transport/transport-auth-policy.js",
+        "LEARNING/transport/authenticated-evidence-transport.js",
+        "LEARNING/transport/netlify-blobs-transport-adapter.js",
+        "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json"
+      ],
+      "blockers": [
+        "SERVER_IDENTITY_RESOLVER_NOT_CONNECTED",
+        "FUNCTION_ENDPOINT_NOT_BOUND",
+        "PRODUCTION_DEPLOYMENT_HOLD"
+      ],
+      "destination": "LEARNING_RUNTIME_TRANSPORT",
+      "created_at": "2026-09-25T12:55:00.000Z",
+      "parent_entry_id": "hold:hosted-central-evidence-transport-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "DEPENDENCY_CLOSED",
+        "MANUAL_REVIEW"
+      ]
     }
   ]
 }
