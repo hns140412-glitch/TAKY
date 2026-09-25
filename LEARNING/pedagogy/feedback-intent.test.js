@@ -53,3 +53,14 @@ const retentionAndDecline=F.derive({
 const retrievals=retentionAndDecline.intents.filter(x=>x.intent==='RETRIEVAL_CHECKPOINT');
 assert.equal(retrievals.length,1,'duplicate retrieval intents must merge');
 assert.deepEqual(retrievals[0].bases,['RETENTION_AT_RISK','DECLINING_MEMORY_TREND']);
+
+const unresolvedRecovery=F.derive({
+  ok:true,
+  scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{},
+  inferred:{
+    recovery_signal:'UNRESOLVED_RECOVERY'
+  }
+});
+assert.equal(unresolvedRecovery.intents.some(x=>x.intent==='TARGETED_RECOVERY_PRACTICE'),true);
+assert.equal(F.validate(unresolvedRecovery).ok,true);
