@@ -190,6 +190,8 @@ jobs:
         run: node LEARNING/evidence/self-reflection-evidence.test.js
       - name: Validate item-scoped learning recovery profile
         run: node LEARNING/runtime/recovery-profile.test.js
+      - name: Validate unified Learning Engine runtime decision contract
+        run: node LEARNING/runtime/decision-contract.test.js
       - name: Validate pedagogical feedback intent
         run: node LEARNING/pedagogy/feedback-intent.test.js
       - name: Validate Learning Engine estimator benchmark lane
