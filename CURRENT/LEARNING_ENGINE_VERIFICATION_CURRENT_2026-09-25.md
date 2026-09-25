@@ -261,7 +261,7 @@ Legacy extraction status:
 
 ## Remaining OPEN
 
-Current no-loss ledger projection has exactly two unresolved items:
+Current no-loss ledger projection has exactly three unresolved items:
 
 1. Forgetting and retention estimator — HOLD
    - advisory retention baseline is implemented;
@@ -272,6 +272,11 @@ Current no-loss ledger projection has exactly two unresolved items:
    - deterministic train-only calibrator is implemented;
    - real time-held-out calibration evidence is still insufficient;
    - must pass calibration/promotion policy and human review before promotion.
+
+3. Hosted central evidence transport connection — HOLD
+   - cumulative specialist intake, immutable receipts, durable Ready outbox, fail-safe sync, durable store adapter, family/member auth policy and Netlify Blobs adapter are implemented;
+   - remaining boundary is server-side identity resolver + Function endpoint binding;
+   - deployment remains explicitly HOLD, so no Netlify call/deploy has been performed.
 
 Closed/applied:
 - metacognitive self-reflection evidence;
@@ -284,7 +289,12 @@ Closed/applied:
 - unified Learning Engine runtime decision contract;
 - Core Adaptive Plan Intent;
 - Ready independent Learning Engine Adapter V2;
-- Ready embedded learning logic extraction into explicit compatibility quarantine.
+- Ready embedded learning logic extraction into explicit compatibility quarantine;
+- specialist evidence central intake pipeline;
+- durable store/concurrency adapter;
+- transport family/member authorization;
+- authenticated transport wrapper;
+- Netlify Blobs transport adapter.
 
 No estimator auto-promotion.
 Ready is not the Learning Engine.
