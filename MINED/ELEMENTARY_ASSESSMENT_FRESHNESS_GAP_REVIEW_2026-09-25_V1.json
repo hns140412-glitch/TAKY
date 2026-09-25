@@ -1,0 +1,50 @@
+{
+  "schema": "TAKY_ELEMENTARY_ASSESSMENT_FRESHNESS_GAP_REVIEW_V1",
+  "date": "2026-09-25",
+  "finding": "NEW_OFFICIAL_ASSESSMENT_MATERIAL_FOUND",
+  "source": {
+    "publisher": "인천광역시교육청",
+    "published": "2026-09-01",
+    "title": "초등 3~6학년 수학과, 과학과 서·논술형 평가 도움자료",
+    "authority_class": "OFFICIAL_EDUCATION_OFFICE",
+    "assets": [
+      "초등 수학과 서논술형 평가 도움자료.pdf",
+      "초등 과학과 서논술형 평가 도움자료.pdf",
+      "[부록] 초등 수학과 서논술형 평가 문항.hwpx",
+      "[부록] 초등 과학과 서논술형 평가 문항.hwpx"
+    ]
+  },
+  "current_data_comparison": {
+    "existing_strengths": [
+      "2026 KICE elementary assessment guidance",
+      "current Korean-language descriptive/essay assessment examples",
+      "structured writing corpus"
+    ],
+    "likely_gap": [
+      "current 2026 math descriptive/essay item examples",
+      "current 2026 science descriptive/essay item examples",
+      "subject-specific scoring/example expansion"
+    ],
+    "drive_exact_presence": "NOT_CONFIRMED",
+    "note": "Semantic Drive search returned unrelated/weak matches, so presence was not inferred."
+  },
+  "verdict": "P1_ACQUISITION_CANDIDATE",
+  "acquisition_scope": [
+    "official PDF first",
+    "HWPX item appendix if directly downloadable",
+    "index as official assessment/example source",
+    "mine item/rubric/achievement-standard anchors on demand"
+  ],
+  "expected_value": [
+    "fresh 2026 subject-specific constructed-response examples",
+    "math/science coverage beyond Korean-language corpus",
+    "current scoring/rubric structure",
+    "cross-subject validation for AI Hub writing assessment data"
+  ],
+  "guards": [
+    "EDUCATION_OFFICE_EXAMPLE != NATIONAL_STANDARD_AUTHORITY",
+    "ITEM_SEQUENCE != PREREQUISITE_CAUSALITY",
+    "ASSESSMENT_EXAMPLE != LEARNER_MASTERY",
+    "NEW_SOURCE != AUTO_CANONICAL"
+  ]
+}
