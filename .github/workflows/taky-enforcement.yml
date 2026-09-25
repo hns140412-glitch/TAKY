@@ -373,6 +373,7 @@ jobs:
           python synthesis_barrier_test.py
           python behavioral_eval_test.py
           python trace_to_regression_test.py
+          python runtime_hardening_integration_test.py
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
