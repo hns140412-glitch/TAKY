@@ -13,5 +13,12 @@
   "handoff": "HANDOFF/MINING_ENGINE_V2_NEW_CHAT_START_2026-09-25_LATEST.md",
   "live_capture": "ENFORCEMENT/mining_e2e_live_capture_2026-09-25.json",
   "reopen_rule": "ONLY_WITH_NEW_REGRESSION_OR_OPERATIONAL_EVIDENCE",
-  "next_mode": "OPERATIONS"
+  "next_mode": "OPERATIONS",
+  "operations": {
+    "campaign": "OPERATIONS/MINING_ENGINE_OPS_CAMPAIGN_01_2026-09-25.md",
+    "outcome_ledger": "OPERATIONS/MINING_ENGINE_OUTCOME_LEDGER.json",
+    "status": "OPEN",
+    "progress": "0/12 REAL RUNS",
+    "rule": "ONLY_REAL_USER_OUTCOME_COUNTS"
+  }
 }
