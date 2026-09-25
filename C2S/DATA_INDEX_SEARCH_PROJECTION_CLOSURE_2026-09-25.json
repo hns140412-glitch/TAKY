@@ -1,0 +1,70 @@
+{
+  "schema": "TAKY_DATA_INDEX_SEARCH_PROJECTION_CLOSURE_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "status": "IMPLEMENTATION_AND_REGRESSION_CLOSED",
+  "branch": "taky/data-indexing-d4-semantic-2026-09-25",
+  "final_head": "fa2c73aa56530a987030826048f9e5a809496ff1",
+  "final_ci_run_id": 36127081256,
+  "current_authority": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "id": "1wy2H6INwj45EzV4k2nI9mPoqlbTPi3Hbf3zvG_Rwc0M",
+    "remains_current": true
+  },
+  "closed": [
+    "D1_ARCHITECTURE_DESIGN",
+    "D2_EXACT_STRUCTURED_RETRIEVAL",
+    "D3_LEXICAL_RETRIEVAL",
+    "D4_CONTROLLED_SEMANTIC_VECTOR_LIMITED_BASELINE",
+    "D5_HYBRID_RRF",
+    "RELATION_EXPANSION_EXPLICIT_ONLY",
+    "DETAIL_FETCH_EXISTING_L2_ON_DEMAND",
+    "RAW_FETCH_CANDIDATE_GATE_NO_AUTO_FETCH",
+    "PARAPHRASE_REGRESSION_WITH_LIMITATION_RETAINED",
+    "FULL_CONTRACT_REGRESSION"
+  ],
+  "evidence": {
+    "corpus_total": 666,
+    "index_l1_coverage": 666,
+    "semantic_resolved": 664,
+    "content_access_holds": 2,
+    "relation_pairs": 6,
+    "relation_edges": 12,
+    "detail_records": 6,
+    "paraphrase": {
+      "lexical_hit_at_10": "0/8",
+      "semantic_hit_at_10": "7/8",
+      "hybrid_hit_at_10": "8/8",
+      "independent_generalization_claim": false
+    }
+  },
+  "invariants": [
+    "SOURCE_REINDEX_ALL_FALSE",
+    "SEARCH_PROJECTION_NON_AUTHORITATIVE",
+    "CURRENT_V24_UNCHANGED",
+    "V25_NOT_CREATED",
+    "PROMOTION_NOT_EXECUTED",
+    "NETLIFY_NONE",
+    "DEPLOYMENT_NONE",
+    "MINING != INDEXING",
+    "INDEXING != LEARNING",
+    "USER != DEBUGGER"
+  ],
+  "promotion_assessment": {
+    "result": "NO_PROMOTION_REQUIRED",
+    "rationale": [
+      "No authoritative source corpus change occurred.",
+      "No canonical index/source identity change occurred.",
+      "Implemented assets are rebuildable derived search projections and regression gates.",
+      "CURRENT V24 already explicitly records search_projection_authoritative=false and incremental migration mode.",
+      "Creating V25 only to reflect derived execution assets would violate the separation between CURRENT authority and rebuildable search projection."
+    ],
+    "promote_only_if": [
+      "authoritative INDEX/CURRENT content changes",
+      "new source corpus evidence changes CURRENT state",
+      "explicit schema/current-state mutation requires a new checkpoint",
+      "a formal governance decision promotes a new derived checkpoint"
+    ]
+  },
+  "next_mode": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY",
+  "resume_rule": "Inherit this closure. Do not reopen closed search-projection stages unless new regression evidence or authoritative input changes."
+}
