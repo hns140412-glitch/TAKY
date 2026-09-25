@@ -1,0 +1,37 @@
+{
+  "schema": "TAKY_DATA_DELTA_DISCOVERY_OPERATIONS_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "status": "VERIFIED_ACTIVE",
+  "drive": {
+    "data_root_id": "1_dJS5oJ7szSZL_Ljbek4dlvIGobUgbv4",
+    "data_root_title": "Data",
+    "inbox_id": "1h_DPWYVQgT36tkP5WYrdxPprGHMYwq7K",
+    "inbox_title": "INBOX"
+  },
+  "behavior": {
+    "inbox": "PRIMARY_EXPLICIT_INGEST_QUEUE",
+    "data_subtree": "RECENT_CHANGE_SAFETY_NET",
+    "inbox_required": false,
+    "inbox_priority": true,
+    "new_file_auto_accept": false,
+    "full_reindex": false
+  },
+  "classifications": [
+    "NEW_SOURCE",
+    "UPDATED_SOURCE",
+    "VERSION_CANDIDATE",
+    "EXACT_DUPLICATE",
+    "DERIVED_NOT_SOURCE",
+    "IGNORE"
+  ],
+  "implementation": "PROJECTIONS/data_delta_discovery.py",
+  "test": "PROJECTIONS/data_delta_discovery_test.py",
+  "ci": {
+    "run_id": 36130555542,
+    "head": "946bc7543b4e987b38a77a2e784e35bd6f9f8406",
+    "result": "SUCCESS"
+  },
+  "current_authority": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "v25_created": false,
+  "promotion_executed": false
+}
