@@ -178,6 +178,8 @@ jobs:
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate Learning Engine estimator benchmark lane
         run: node LEARNING/benchmark/estimator-benchmark.test.js
+      - name: Validate estimator promotion policy
+        run: node LEARNING/benchmark/promotion-policy.test.js
       - name: Validate Learning Engine replay dataset contract
         run: node LEARNING/replay/replay-dataset.test.js
       - name: Validate Learning Engine replay benchmark bridge
