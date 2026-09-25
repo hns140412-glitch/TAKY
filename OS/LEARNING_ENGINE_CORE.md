@@ -375,9 +375,11 @@ APP / TASK EVIDENCE
 -> REPLAY VERIFIED_TARGET
 
 Allowed verifier classes in V1:
-- ANSWER_KEY_EXACT
-- RETRIEVAL_EXACT_MATCH
-- HUMAN_RUBRIC_BINARY
+- Hide & Seek MEMORY_RETRIEVAL_EVIDENCE -> RETRIEVAL_EXACT_MATCH
+- Ready structured-practice evidence -> ANSWER_KEY_EXACT
+- Snap & Pop learner-production evidence -> HUMAN_RUBRIC_BINARY
+
+Generic verifier names exist, but app/evidence combinations are constrained by LEARNING/verification/verifier-policy.js.
 
 Required receipt fields:
 - receipt_id
