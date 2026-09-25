@@ -19,6 +19,7 @@ from executor_adapter_registry import resolve as resolve_executor_adapter
 from execution_checkpoint import guard as guard_checkpoint
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
+from reference_acquisition_adapter import acquire as acquire_reference
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
 
 ROUTES = {
@@ -126,6 +127,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             detected.extend(checkpoint_guard_result.get("detected", []))
 
     reference_intake_result = None
+    reference_acquisition_result = None
     reference_intake_execution = None
     intent_text = str(effective_record.get("intent_text", "") or "")
     has_reference_source = any(
@@ -136,7 +138,43 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         reference_intake_result = route_reference_intake(effective_record)
         if not reference_intake_result.get("pass"):
             detected.extend(reference_intake_result.get("detected", []))
-        elif isinstance(effective_record.get("reference_intake_execution"), dict):
+        elif (
+            reference_intake_result.get("route_type") == "REFERENCE_INTAKE_REVIEW"
+            and effective_record.get("reference_acquisition_execute") is True
+            and not isinstance(effective_record.get("reference_intake_execution"), dict)
+        ):
+            destination = _safe_repo_path(
+                repo_root,
+                effective_record.get("reference_acquisition_destination") or "DATA/INBOX/ACQUIRED",
+            )
+            if destination is None:
+                detected.append("REFERENCE_ACQUISITION_DESTINATION_INVALID")
+            elif not effective_record.get("source_url"):
+                detected.append("REFERENCE_ACQUISITION_SOURCE_URL_REQUIRED")
+            elif not detected:
+                reference_acquisition_result = acquire_reference(
+                    str(effective_record.get("source_url")),
+                    destination_dir=destination,
+                    max_bytes=int(effective_record.get("reference_acquisition_max_bytes") or 25 * 1024 * 1024),
+                    timeout_seconds=int(effective_record.get("reference_acquisition_timeout_seconds") or 20),
+                )
+                if not reference_acquisition_result.get("pass"):
+                    detected.extend(reference_acquisition_result.get("detected", []))
+                else:
+                    effective_record["reference_intake_execution"] = {
+                        "acquisition_state": reference_acquisition_result.get("acquisition_state"),
+                        "reason": reference_acquisition_result.get("reason"),
+                        "preserved_path": reference_acquisition_result.get("preserved_path"),
+                        "sha256": reference_acquisition_result.get("sha256"),
+                        "content_type": reference_acquisition_result.get("content_type"),
+                        "content_length": reference_acquisition_result.get("content_length"),
+                        "final_url": reference_acquisition_result.get("final_url"),
+                    }
+        if (
+            reference_intake_result.get("pass")
+            and isinstance(effective_record.get("reference_intake_execution"), dict)
+            and not detected
+        ):
             reference_intake_execution = execute_reference_intake(
                 effective_record,
                 reference_intake_result,
@@ -216,10 +254,13 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         ),
         "checkpoint_guard": checkpoint_guard_result,
         "reference_intake_route": reference_intake_result,
+        "reference_acquisition_result": reference_acquisition_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
-        "reference_intake_fetch_verified": False,
+        "reference_intake_fetch_verified": bool(
+            reference_acquisition_result and reference_acquisition_result.get("pass")
+        ),
         "reference_intake_persistence_verified": bool(
             reference_intake_execution and reference_intake_execution.get("pass")
         ),
