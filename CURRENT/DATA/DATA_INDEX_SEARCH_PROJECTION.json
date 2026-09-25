@@ -23,7 +23,9 @@
     "Full contract regression CLOSED",
     "Final execution/regression CI run 36127081256 SUCCESS at fa2c73aa56530a987030826048f9e5a809496ff1",
     "Closure checkpoint created at C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json",
-    "New-chat handoff created at HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md"
+    "New-chat handoff created at HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
+    "V24 666 + verified delta6 promoted to V25 672",
+    "V25 current regression CI 36132812106 SUCCESS at 8dc2540b09b5b9d9b7afd3655f896ece018f895e"
   ],
   "open": [
     "Operations-only incremental handling for genuinely new or changed authoritative source evidence",
@@ -32,13 +34,14 @@
   ],
   "next": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY__SCAN_INBOX_FIRST_AND_RECURSIVE_DATA_TREE_AS_SAFETY_NET",
   "invariants": [
-    "CURRENT_V24_REMAINS_AUTHORITY",
+    "CURRENT_V25_IS_AUTHORITY",
+    "SOURCE_INDEX_V5_IS_AUTHORITY",
     "SOURCE_REINDEX_ALL_FALSE",
     "SEARCH_PROJECTION_NON_AUTHORITATIVE",
-    "V25_NOT_CREATED",
-    "PROMOTION_NOT_EXECUTED",
+    "PROMOTION_V25_EXECUTED",
     "MINING != INDEXING",
     "INDEXING != LEARNING",
+    "INBOX_PRIORITY_WITH_RECURSIVE_DATA_TREE_SAFETY_NET",
     "NETLIFY_NONE",
     "DEPLOYMENT_NONE",
     "USER != DEBUGGER"
@@ -55,16 +58,20 @@
     "paraphrase_hybrid_hit_at_10": "8/8"
   },
   "source_refs": [
-    "C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json",
+    "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
+    "DATA_SOURCE_INDEX_2026-09-25_V5.json",
+    "C2S/DATA_UTILIZATION_INDEX_V25_PROMOTION_RECEIPT_2026-09-25.json",
+    "C2S/DATA_INDEX_V25_PROMOTION_CLOSURE_2026-09-25.json",
     "HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
-    "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
-    "github:hns140412-glitch/TAKY@fa2c73aa56530a987030826048f9e5a809496ff1"
+    "github:hns140412-glitch/TAKY@8dc2540b09b5b9d9b7afd3655f896ece018f895e"
   ],
-  "updated_at": "2026-09-25T21:10:00+09:00",
+  "updated_at": "2026-09-25T21:20:00+09:00",
   "last_delta_scan": {
-    "checkpoint": "C2S/DATA_INDEX_INCREMENTAL_DELTA_SCAN_2026-09-25.json",
-    "result": "NO_AUTHORITATIVE_DELTA_ACCEPTED",
-    "accepted_delta_count": 0
+    "checkpoint": "C2S/DATA_DELTA_DISCOVERY_RECURSION_CORRECTION_2026-09-25.json",
+    "result": "AUTHORITATIVE_DELTA6_ACCEPTED_AND_PROMOTED",
+    "accepted_delta_count": 6,
+    "base_total": 666,
+    "current_total": 672
   },
   "delta_discovery": {
     "status": "ACTIVE",
@@ -87,6 +94,7 @@
     "delta_count": 6,
     "current_total": 672,
     "checkpoint": "C2S/DATA_INDEX_DELTA6_INGEST_CHECKPOINT_2026-09-25.json",
-    "promotion_receipt_drive_id": "1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU"
+    "promotion_receipt_drive_id": "1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU",
+    "promotion_closure": "C2S/DATA_INDEX_V25_PROMOTION_CLOSURE_2026-09-25.json"
   }
 }
