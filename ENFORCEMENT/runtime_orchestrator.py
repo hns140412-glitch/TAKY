@@ -20,6 +20,7 @@ from execution_checkpoint import guard as guard_checkpoint
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
+from behavioral_eval import evaluate as evaluate_behavior
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -163,6 +164,19 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             if not learning_gap_result.get("pass"):
                 detected.extend(learning_gap_result.get("detected", []))
 
+    behavioral_eval_result = None
+    behavioral_cfg = effective_record.get("behavioral_eval")
+    if isinstance(behavioral_cfg, dict) and behavioral_cfg.get("required") is True:
+        observations = behavioral_cfg.get("observed")
+        assertions = behavioral_cfg.get("assertions")
+        if not isinstance(observations, dict):
+            detected.append("BEHAVIORAL_EVAL_OBSERVED_INVALID")
+        elif not isinstance(assertions, list) or not assertions:
+            detected.append("BEHAVIORAL_EVAL_ASSERTIONS_INVALID")
+        elif not detected:
+            behavioral_eval_result = evaluate_behavior(observations, assertions)
+            detected.extend(behavioral_eval_result.get("detected", []))
+
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
         task_contract_result = build_codex_task_contract(record)
@@ -218,6 +232,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
+        "behavioral_eval": behavioral_eval_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "reference_intake_fetch_verified": False,
         "reference_intake_persistence_verified": bool(
