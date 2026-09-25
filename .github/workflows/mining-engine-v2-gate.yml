@@ -17,6 +17,8 @@ on:
       - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - 'ENFORCEMENT/mining_run_orchestrator.py'
       - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_engine_step12_unseen_goal.py'
+      - 'ENFORCEMENT/mining_engine_step12_unseen_goal_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -48,6 +50,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_engine_step9_gate.py
           python -m py_compile ENFORCEMENT/mining_engine_step10_adversarial.py
           python -m py_compile ENFORCEMENT/mining_run_orchestrator.py
+          python -m py_compile ENFORCEMENT/mining_engine_step12_unseen_goal.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -60,3 +63,5 @@ jobs:
         run: python ENFORCEMENT/mining_engine_step10_adversarial_test.py
       - name: Test Step 11 mining run orchestrator
         run: python ENFORCEMENT/mining_run_orchestrator_test.py
+      - name: Test Step 12 unseen-goal generalization
+        run: python ENFORCEMENT/mining_engine_step12_unseen_goal_test.py
