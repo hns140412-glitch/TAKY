@@ -15,7 +15,8 @@ function classifyLabel(e={}){
   const type=clean(e.evidence_type);
   const outcome=e.verified_outcome;
   if(type==='CHILD_SELF_REPORT') return {label_status:'OBSERVATION_ONLY',exclusion_reason:'SELF_REPORT_NOT_VERIFIED_TARGET'};
-  if(outcome===0||outcome===1) return {label_status:'VERIFIED_TARGET',exclusion_reason:null};
+  if((outcome===0||outcome===1)&&clean(e?.verification?.receipt_id)) return {label_status:'VERIFIED_TARGET',exclusion_reason:null};
+  if(outcome===0||outcome===1) return {label_status:'OBSERVATION_ONLY',exclusion_reason:'VERIFICATION_RECEIPT_REQUIRED'};
   return {label_status:'OBSERVATION_ONLY',exclusion_reason:'NO_VERIFIED_BINARY_OUTCOME'};
 }
 
@@ -36,6 +37,9 @@ function toReplayRecord(e={}){
     response_latency_ms:finite(e.response_latency_ms),
     verified_outcome:(e.verified_outcome===0||e.verified_outcome===1)?e.verified_outcome:null,
     memory_strength:finite(e?.memory?.average_strength??e.memory_strength),
+    verification_receipt_id:clean(e?.verification?.receipt_id)||null,
+    verifier_type:clean(e?.verification?.verifier_type)||null,
+    verifier_version:clean(e?.verification?.verifier_version)||null,
     label_status:label.label_status,
     exclusion_reason:label.exclusion_reason
   };
@@ -123,6 +127,7 @@ function selfValidate(dataset={}){
     if(t<prev)issues.push('NOT_CHRONOLOGICAL');
     prev=t;
     if(r.evidence_type==='CHILD_SELF_REPORT'&&r.label_status==='VERIFIED_TARGET')issues.push('SELF_REPORT_PROMOTED');
+    if(r.label_status==='VERIFIED_TARGET'&&!clean(r.verification_receipt_id))issues.push('VERIFIED_TARGET_WITHOUT_RECEIPT');
   }
   return {ok:issues.length===0,issues};
 }
