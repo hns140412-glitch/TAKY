@@ -21,9 +21,10 @@ for(const required of [
   assert.equal(titles.has(required),true,'missing retained change: '+required);
 }
 const pending=L.pending(ledger);
-assert.equal(pending.length>=2,true);
+assert.equal(pending.length>=3,true);
 assert.equal(pending.some(x=>x.title==='Forgetting and retention estimator'),true);
 assert.equal(pending.some(x=>x.title==='Calibrated BKT estimator'),true);
+assert.equal(pending.some(x=>x.title==='Data-derived prerequisite relation candidates'),true);
 
 const reflectionHistory=ledger.entries.filter(x=>x.title==='Metacognitive self-reflection evidence');
 assert.equal(reflectionHistory.some(x=>x.state==='HOLD'),true);
@@ -35,6 +36,7 @@ const graphHistory=ledger.entries.filter(x=>x.title==='Concept prerequisite and 
 assert.equal(graphHistory.some(x=>x.state==='DEFERRED'),true);
 assert.equal(graphHistory.some(x=>x.state==='APPLIED'),true);
 assert.equal(pending.some(x=>x.title==='Concept prerequisite and dependency graph'),false);
+assert.equal(L.currentProjection(ledger).find(x=>x.title==='Concept prerequisite and dependency graph').state,'APPLIED');
 assert.equal(ledger.entries.every(x=>x.retention==='IMMUTABLE_HISTORY'),true);
 
 console.log('LEARNING_CHANGE_LEDGER_CURRENT_PASS');
