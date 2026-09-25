@@ -215,6 +215,36 @@
         "MANUAL_REVIEW",
         "DEPENDENCY_CLOSED"
       ]
+    },
+    {
+      "entry_id": "hold:bkt-calibration-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ESTIMATOR",
+      "title": "Calibrated BKT estimator",
+      "description": "Deterministic train-only BKT calibration candidate implemented with future held-out evaluation. Runtime estimator authority remains unpromoted pending enough real verified targets, calibration thresholds and human promotion review.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:005",
+      "evidence_refs": [
+        "LEARNING/estimators/bkt-calibration-candidate.js",
+        "LEARNING/benchmark/estimator-benchmark.js",
+        "LEARNING/benchmark/promotion-policy.js"
+      ],
+      "blockers": [
+        "INSUFFICIENT_REAL_VERIFIED_TARGETS",
+        "CALIBRATION_NOT_YET_ESTABLISHED_ON_REAL_EVIDENCE",
+        "PROMOTION_POLICY_NOT_YET_PASSED"
+      ],
+      "destination": "LEARNING/estimators/bkt-calibration-candidate.js",
+      "created_at": "2026-09-25T07:00:00.000Z",
+      "parent_entry_id": "hold:retention-baseline-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
     }
   ]
 }
