@@ -316,4 +316,50 @@ Authoritative schema:
 Validator/builder:
 - LEARNING/replay/replay-dataset.js
 
+## 14. Canonical Learning Evidence adapter contract
+
+Apps do not write learner-state truth directly.
+
+Canonical path:
+
+APP EVENT
+-> CANONICAL LEARNING EVIDENCE ADAPTER
+-> REPLAY LABEL CLASSIFICATION
+-> LEARNER STATE / ESTIMATOR
+
+Responsibilities:
+
+APP:
+- emit actual interaction/result signals;
+- preserve source-specific meaning;
+- do not claim global mastery.
+
+CANONICAL ADAPTER:
+- normalize field names and provenance;
+- preserve raw app signals;
+- preserve member/subject/concept scope;
+- never convert an app-local score into mastery by itself;
+- never create a verified target unless an explicit verification layer supplies verified_outcome.
+
+REPLAY CLASSIFIER:
+- VERIFIED_TARGET only for explicit verified binary target evidence;
+- CHILD_SELF_REPORT remains OBSERVATION_ONLY;
+- authorship/completion alone remains OBSERVATION_ONLY;
+- missing outcome remains OBSERVATION_ONLY.
+
+CORE / ESTIMATOR:
+- interpret canonical evidence;
+- maintain uncertainty;
+- produce learner-state/pedagogical intent only.
+
+Current canonical adapter:
+- LEARNING/adapters/canonical-evidence.js
+
+Hard locks:
+- HIDE caseMastery != universal mastery.
+- SNAP child_authored != objective mastery.
+- READY completed != mastered.
+- APP completion state != verified prediction target.
+- VERIFIED_TARGET requires explicit verification semantics.
+
 END
