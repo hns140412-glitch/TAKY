@@ -63,6 +63,9 @@ on:
       - 'ENFORCEMENT/learning_growth_memory_test.py'
       - 'ENFORCEMENT/learning_mining_gap_loop.py'
       - 'ENFORCEMENT/learning_mining_gap_loop_test.py'
+      - 'ENFORCEMENT/index_document_adapter.py'
+      - 'ENFORCEMENT/index_actual_corpus_e2e_test.py'
+      - 'ENFORCEMENT/fixtures/index_runtime_projection_v24_666.json'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -118,6 +121,7 @@ jobs:
           python -m py_compile ENFORCEMENT/learning_orchestrator.py
           python -m py_compile ENFORCEMENT/learning_growth_memory.py
           python -m py_compile ENFORCEMENT/learning_mining_gap_loop.py
+          python -m py_compile ENFORCEMENT/index_document_adapter.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -172,6 +176,8 @@ jobs:
         run: python ENFORCEMENT/learning_growth_memory_test.py
       - name: Test Learning-Mining evidence gap loop
         run: python ENFORCEMENT/learning_mining_gap_loop_test.py
+      - name: Test actual 666-source index corpus E2E
+        run: python ENFORCEMENT/index_actual_corpus_e2e_test.py
       - name: Test heterogeneous E2E benchmark
         run: python ENFORCEMENT/mining_e2e_benchmark_test.py
       - name: Test live-captured heterogeneous E2E benchmark
