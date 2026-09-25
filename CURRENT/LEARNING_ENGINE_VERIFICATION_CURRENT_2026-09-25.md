@@ -292,3 +292,26 @@ No estimator auto-promotion.
 Production / merge / Netlify deployment remains HOLD.
 
 Netlify / production deployment: HOLD.
+
+## Repository reality correction — Ready consumer adapter — 2026-09-25
+
+Live repository audit supersedes any implication that the Ready adapter is already on `main`.
+
+Verified repository state:
+- Ready `main`: `98df214a6078f16f2b6710016898a4d7798798db`
+- Feature branch: `taky/learning-consumer-adapter-2026-09-25`
+- Branch relation: 3 commits ahead of `main`, 0 behind
+- Actual branch changes:
+  - `ready-integration-v1.js`
+  - `.github/scripts/ready_learning_consumer_adapter_test.js`
+  - `.github/workflows/ready-integration-ci.yml`
+- Previously referenced `src/learning/learning-engine-adapter-v2.js` and `tests/core-adaptive-plan-integration.spec.js` were not present in the audited Ready branch tree.
+
+Current claim boundary:
+- Learning Engine Core / Runtime Decision / Adaptive Plan in TAKY: implemented and retained.
+- Ready consumer translation path: FEATURE_BRANCH_IMPLEMENTED_NOT_MAIN.
+- Ready main promotion: NOT EVIDENCED.
+- Legacy Ready learning logic extraction: remains HOLD.
+- Production / Netlify deployment: HOLD.
+
+This correction preserves prior ledger history and changes only the current interpretation of repository implementation state.
