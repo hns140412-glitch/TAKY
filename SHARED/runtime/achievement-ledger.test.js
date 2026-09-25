@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const L=require('./achievement-ledger.js');
+let l=L.blank('C1');
+const award={achievement_contract:'TAKY_ACHIEVEMENT_DECISION_V1',achievement_id:'A1',member_id:'C1',badge_id:'B1'};
+let r=L.append(l,award);
+assert.equal(r.ok,true);assert.equal(r.reason,'APPENDED');assert.equal(r.ledger.awards.length,1);
+r=L.append(r.ledger,award);assert.equal(r.reason,'IDEMPOTENT_DUPLICATE');assert.equal(r.ledger.awards.length,1);
+assert.equal(L.hasBadge(r.ledger,'B1'),true);
+assert.equal(L.append(r.ledger,{...award,achievement_id:'A2',member_id:'C2'}).reason,'MEMBER_SCOPE_MISMATCH');
+console.log('TAKY_ACHIEVEMENT_LEDGER_V1_PASS');
