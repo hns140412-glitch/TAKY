@@ -6,31 +6,77 @@
   'use strict';
   const VERSION='TAKY_ACHIEVEMENT_LEDGER_V1';
   const clean=v=>String(v??'').trim();
-  function blank(member_id=null){
-    return Object.freeze({achievement_ledger_contract:VERSION,member_id:clean(member_id)||null,awards:Object.freeze([]),revision:0});
+
+  function empty(member_id=null){
+    return Object.freeze({
+      achievement_ledger_contract:VERSION,
+      member_id:clean(member_id)||null,
+      entries:Object.freeze([]),
+      revision:0
+    });
   }
-  function normalize(input={}){
-    const awards=Array.isArray(input.awards)?input.awards.filter(x=>x&&typeof x==='object').map(x=>Object.freeze({...x})):[];
-    const seen=new Set(),dedup=[];
-    for(const a of awards){
-      const id=clean(a.achievement_id);
-      if(!id||seen.has(id))continue;
-      seen.add(id);dedup.push(a);
+
+  function normalizeEntry(input={}){
+    return Object.freeze({
+      achievement_id:clean(input.achievement_id)||null,
+      member_id:clean(input.member_id)||null,
+      badge_id:clean(input.badge_id)||null,
+      rule_id:clean(input.rule_id)||null,
+      source_event_id:clean(input.source_event_id)||null,
+      source_event_type:clean(input.source_event_type)||null,
+      awarded_at:input.awarded_at||null,
+      revoked:false
+    });
+  }
+
+  function normalizeLedger(input={}){
+    const member_id=clean(input.member_id)||null;
+    const seen=new Set(),entries=[];
+    for(const raw of Array.isArray(input.entries)?input.entries:[]){
+      const e=normalizeEntry(raw);
+      if(!e.achievement_id||seen.has(e.achievement_id))continue;
+      if(member_id&&e.member_id&&e.member_id!==member_id)continue;
+      seen.add(e.achievement_id); entries.push(e);
     }
-    return Object.freeze({achievement_ledger_contract:VERSION,member_id:clean(input.member_id)||null,awards:Object.freeze(dedup),revision:Number.isInteger(input.revision)?input.revision:0});
+    return Object.freeze({
+      achievement_ledger_contract:VERSION,
+      member_id,
+      entries:Object.freeze(entries),
+      revision:Number.isInteger(input.revision)?input.revision:0
+    });
   }
+
   function append(input={},award={}){
-    const ledger=normalize(input);
-    if(!award||award.achievement_contract!=='TAKY_ACHIEVEMENT_DECISION_V1')return {ok:false,reason:'ACHIEVEMENT_DECISION_REQUIRED',ledger};
-    const achievement_id=clean(award.achievement_id),member_id=clean(award.member_id);
-    if(!achievement_id||!member_id)return {ok:false,reason:'ACHIEVEMENT_IDENTITY_REQUIRED',ledger};
-    if(ledger.member_id&&ledger.member_id!==member_id)return {ok:false,reason:'MEMBER_SCOPE_MISMATCH',ledger};
-    if(ledger.awards.some(x=>x.achievement_id===achievement_id))return {ok:true,reason:'IDEMPOTENT_DUPLICATE',ledger};
-    return {ok:true,reason:'APPENDED',ledger:normalize({member_id:ledger.member_id||member_id,awards:[...ledger.awards,award],revision:ledger.revision+1})};
+    const ledger=normalizeLedger(input);
+    const e=normalizeEntry(award);
+    if(!e.achievement_id||!e.member_id||!e.badge_id||!e.source_event_id)
+      return {ok:false,reason:'ACHIEVEMENT_ENTRY_INCOMPLETE',ledger};
+    if(ledger.member_id&&ledger.member_id!==e.member_id)
+      return {ok:false,reason:'ACHIEVEMENT_MEMBER_SCOPE_MISMATCH',ledger};
+    if(ledger.entries.some(x=>x.achievement_id===e.achievement_id))
+      return {ok:true,reason:'IDEMPOTENT_ALREADY_RECORDED',ledger};
+    if(ledger.entries.some(x=>x.member_id===e.member_id&&x.badge_id===e.badge_id&&x.source_event_id===e.source_event_id))
+      return {ok:true,reason:'IDEMPOTENT_SOURCE_ALREADY_RECORDED',ledger};
+    return {
+      ok:true,
+      reason:'RECORDED',
+      ledger:normalizeLedger({
+        member_id:ledger.member_id||e.member_id,
+        entries:[...ledger.entries,e],
+        revision:ledger.revision+1
+      })
+    };
   }
-  function hasBadge(input={},badge_id){
-    const id=clean(badge_id);
-    return normalize(input).awards.some(x=>clean(x.badge_id)===id);
+
+  function hasAward(input={},badge_id,source_event_id=null){
+    const ledger=normalizeLedger(input),badge=clean(badge_id),source=clean(source_event_id);
+    return ledger.entries.some(x=>x.badge_id===badge&&(!source||x.source_event_id===source));
   }
-  return Object.freeze({VERSION,blank,normalize,append,hasBadge});
+
+  function byBadge(input={},badge_id){
+    const ledger=normalizeLedger(input),badge=clean(badge_id);
+    return ledger.entries.filter(x=>x.badge_id===badge);
+  }
+
+  return Object.freeze({VERSION,empty,normalizeEntry,normalizeLedger,append,hasAward,byBadge});
 });
