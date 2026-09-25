@@ -93,4 +93,32 @@ function applyReceipt(evidence={},receipt={}){
   };
 }
 
-module.exports=Object.freeze({VERSION,ALLOWED_VERIFIERS,validateReceipt,issueReceipt,applyReceipt});
+function issueFromCandidate(evidence={},candidate={}){
+  const verifierType=clean(candidate.verifier_type);
+  if(verifierType!=='RETRIEVAL_EXACT_MATCH')return {ok:false,reason:'CANDIDATE_VERIFIER_NOT_ALLOWED'};
+  if(clean(candidate.basis)!=='DETERMINISTIC_LOCAL_MATCH')return {ok:false,reason:'CANDIDATE_BASIS_INVALID'};
+  if(candidate.outcome!==0&&candidate.outcome!==1)return {ok:false,reason:'CANDIDATE_OUTCOME_INVALID'};
+  const policy=VerifierPolicy.canVerify({
+    source_app:clean(evidence.source_app),
+    evidence_type:clean(evidence.evidence_type),
+    verifier_type:verifierType,
+    auto:true
+  });
+  if(!policy.ok)return {ok:false,reason:policy.reason};
+  const issued=issueReceipt({
+    receipt_id:'vr:'+clean(evidence.event_id)+':'+clean(candidate.verifier_version||'v1'),
+    target_event_id:clean(evidence.event_id),
+    verified_at:clean(evidence.observed_at),
+    verifier_type:verifierType,
+    verifier_version:clean(candidate.verifier_version),
+    outcome:candidate.outcome,
+    member_id:clean(evidence.member_id),
+    subject:clean(evidence.subject),
+    concept_skill_target:clean(evidence.concept_skill_target),
+    reference_id:clean(candidate.reference_id)
+  });
+  if(!issued.ok)return issued;
+  return applyReceipt(evidence,issued.receipt);
+}
+
+module.exports=Object.freeze({VERSION,ALLOWED_VERIFIERS,validateReceipt,issueReceipt,applyReceipt,issueFromCandidate});
