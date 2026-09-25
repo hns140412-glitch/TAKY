@@ -34,6 +34,7 @@ function benchmarkReplay(dataset={}){
     promotion_eligible:false,
     promotion_blockers:[
       dataset.provenance?.source_kind!=='REAL_EVIDENCE'?'REAL_EVIDENCE_REQUIRED':null,
+      dataset.provenance?.source_kind==='REAL_EVIDENCE'&&!dataset.provenance?.evidence_receipt_id?'REAL_EVIDENCE_RECEIPT_REQUIRED':null,
       split.diagnostics.instrument_drift_into_holdout?'INSTRUMENT_DRIFT_REVIEW_REQUIRED':null,
       verified.length<20?'MIN_REAL_TARGET_COUNT_NOT_MET':null,
       'HUMAN_PROMOTION_REVIEW_REQUIRED'
