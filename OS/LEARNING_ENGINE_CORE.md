@@ -439,4 +439,38 @@ Current implementation:
 - LEARNING/receipts/real-evidence-receipt.js
 
 
+## 17. Estimator promotion policy V1
+
+Promotion review is blocked until enough real verified evidence exists.
+
+Initial conservative thresholds:
+- minimum verified targets per member × subject × concept_skill_target: 30
+- minimum time-held-out prediction points: 8
+- minimum stable-instrument held-out points: 8
+- maximum instrument-drift fraction in held-out: 20%
+- minimum Brier improvement over observational baseline: 0.01
+- candidate may not be worse than baseline on aggregate Brier
+- maximum calibration MAE: 0.15
+- maximum allowed sparse-data Brier degradation vs baseline: 0.03
+
+These are promotion-review gates, not claims of educational validity.
+They are versioned and may change only through evidence-backed review.
+
+A candidate becomes promotion-review eligible only when:
+1. dataset-level gates pass;
+2. candidate Brier improvement gate passes;
+3. calibration gate passes;
+4. sparse-data degradation gate passes;
+5. instrument-drift gate passes;
+6. real evidence receipt provenance is present.
+
+Even when eligible:
+- auto_promotion = false;
+- a human promotion review is required;
+- no candidate may change runtime Core authority without a new validated CURRENT decision.
+
+Current implementation:
+- LEARNING/benchmark/promotion-policy.js
+
+
 END
