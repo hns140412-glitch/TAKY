@@ -1,9 +1,10 @@
 (function(root,factory){
-  const dep=(typeof module!=='undefined'&&module.exports)?require('../evidence/self-reflection-evidence.js'):(root?.TakySelfReflectionEvidence||null);
-  const api=factory(dep);
+  const reflection=(typeof module!=='undefined'&&module.exports)?require('../evidence/self-reflection-evidence.js'):(root?.TakySelfReflectionEvidence||null);
+  const retention=(typeof module!=='undefined'&&module.exports)?require('../estimators/retention-state-baseline.js'):(root?.TakyRetentionStateBaseline||null);
+  const api=factory(reflection,retention);
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   if(root)root.TakyLearningEngineCoreV2=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection){
+})(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection,RetentionBaseline){
   'use strict';
 
   const VERSION='TAKY_LEARNING_ENGINE_CORE_V2_0_2';
@@ -109,6 +110,9 @@
 
     const priorities=memoryEvidence.flatMap(e=>Array.isArray(e?.memory?.review_advisories)?e.memory.review_advisories:[])
       .map(x=>finite(x?.nextReviewPriority??x?.priority)).filter(Number.isFinite);
+    const retentionCandidate=RetentionBaseline?.derive
+      ? RetentionBaseline.derive(accepted,{now_ms:Number.isFinite(options.now_ms)?options.now_ms:undefined})
+      : null;
 
     return {
       ok:true,
@@ -150,13 +154,23 @@
         trend,
         instrument_change_detected:instrumentChangeDetected,
         assistance_dependency_signal:assistanceSignal,
-        retention_signal:'MODEL_NOT_BOUND',
+        retention_signal:retentionCandidate?.evidence_count>0?retentionCandidate.retention_state:'MODEL_NOT_BOUND',
+        retention_candidate:retentionCandidate?{
+          estimator_id:retentionCandidate.estimator_id,
+          estimator_version:retentionCandidate.estimator_version,
+          forgetting_risk:retentionCandidate.forgetting_risk,
+          stability_days:retentionCandidate.stability_days,
+          retrievability_estimate:retentionCandidate.retrievability_estimate,
+          confidence:retentionCandidate.confidence,
+          promoted:false
+        }:null,
         repeated_confusion_signal:reflectionSummary.repeated_confusions.length?'REPEATED_SELF_REPORTED_CONFUSION':'NONE_OBSERVED',
         metacognitive_recall_signal:reflectionSummary.knew_but_could_not_recall_count>0?'KNEW_BUT_RECALL_FAILED_REPORTED':'NONE_OBSERVED'
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
         mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection is observation-only and excluded from performance targets',
+        retention_basis:'retention-state baseline is advisory-only until real time-held-out promotion gates pass',
         scheduling_basis:'Core emits no dated schedule'
       },
       invalid_evidence_count:invalid.length,
