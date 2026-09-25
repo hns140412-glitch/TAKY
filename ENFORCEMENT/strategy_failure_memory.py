@@ -48,7 +48,14 @@ def select_strategy(
     for strategy in strategies:
         if str(strategy.get("status", "")).upper() != "PROMOTED":
             continue
+
         sfamily = str(strategy.get("task_family", "")).strip().upper()
+
+        # A promoted strategy from another explicit task family must never leak
+        # into this run merely because goal text happens to look similar.
+        if family and sfamily and sfamily != family:
+            continue
+
         family_score = 1.0 if family and sfamily == family else 0.0
         goal_score = _similarity(goal, strategy.get("goal_pattern", ""))
         score = 0.65 * family_score + 0.35 * goal_score
