@@ -82,7 +82,15 @@ function fromReady(event={},context={}){
   const p=event.payload||event;
   if(clean(context.evidence_type||p.evidence_type))out.evidence_type=clean(context.evidence_type||p.evidence_type);
   if(clean(out.evidence_type)==='CHILD_SELF_REPORT')out.verified_outcome=null;
-  else if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};out.verification_error=applied;}
+  else if(context.verification_receipt){
+    const applied=Verification.applyReceipt(out,context.verification_receipt);
+    if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};
+    out.verification_error=applied;
+  }else if(p.verification_candidate){
+    const applied=Verification.issueFromCandidate(out,p.verification_candidate);
+    if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};
+    out.verification_error=applied;
+  }
   out.raw_app_signals={
     ready_state:clean(p.ready_state||p.task_state||p.state)||null,
     actual_minutes:finite(p.actual_minutes),
