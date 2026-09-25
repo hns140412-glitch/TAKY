@@ -64,3 +64,6 @@ assert.equal(D.selfValidate(leaked).ok,false);
 assert.equal(D.selfValidate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 console.log('LEARNING_REPLAY_DATASET_PASS');
+
+assert.equal(ds.authority,'COMPATIBILITY_ONLY');
+assert.equal(ds.canonical_replay_builder,'../replay/replay-dataset.js');
