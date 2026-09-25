@@ -170,11 +170,24 @@ Existing retained OPEN/HOLD findings include:
 - Calibrated BKT estimator
 - Concept prerequisite and dependency graph
 
+## Retention baseline candidate
+
+Implemented:
+- explainable retention-state baseline from verified retrieval evidence
+- Core advisory retention_signal integration
+- pedagogical RETRIEVAL_CHECKPOINT mapping for RETENTION_AT_RISK
+- duplicate intent merging while preserving multiple evidence bases
+
+Not promoted:
+- model.retention_probability remains null
+- scheduling authority remains false
+- candidate remains HOLD in change ledger pending enough real verified retrieval targets and promotion-policy pass
+
 ## Remaining OPEN
 
-1. Accumulate enough real verified targets per concept_skill_target.
-2. Compare Observational/BKT/DSR candidates on real time-held-out evidence.
-3. Add calibration/error reporting once minimum real target count is reached.
+1. Accumulate enough real verified retrieval targets per concept_skill_target for retention-candidate promotion review.
+2. Calibrate/evaluate BKT candidate on real time-held-out evidence.
+3. Build concept prerequisite/dependency graph contract without premature inference.
 4. No estimator promotion until real-evidence thresholds and promotion review pass.
 5. Production/Netlify deployment remains HOLD.
 
