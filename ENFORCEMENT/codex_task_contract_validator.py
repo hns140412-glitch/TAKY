@@ -41,7 +41,7 @@ def _scope_conflict(change_item, preserve_item):
 
     change_pathlike = "/" in change or change.endswith("/")
     preserve_pathlike = "/" in preserve or preserve.endswith("/")
-    if change_pathlike and preserve_pathlike:
+    if change_pathlike or preserve_pathlike:
         cbase = change.rstrip("/")
         pbase = preserve.rstrip("/")
         return (
