@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taky.local/schemas/learning-engine-replay-dataset-v1.json",
+  "title": "TAKY Learning Engine Replay Dataset V1",
+  "type": "object",
+  "required": ["dataset_version","scope","records","split_policy","provenance"],
+  "properties": {
+    "dataset_version": {"const":"TAKY_LEARNING_REPLAY_V1"},
+    "scope": {
+      "type":"object",
+      "required":["member_id","subject","concept_skill_target"],
+      "properties":{
+        "member_id":{"type":"string","minLength":1},
+        "subject":{"type":"string","minLength":1},
+        "concept_skill_target":{"type":"string","minLength":1}
+      },
+      "additionalProperties":false
+    },
+    "records": {
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["event_id","observed_at","member_id","subject","concept_skill_target","evidence_type","source_app","instrument_version","label_status"],
+        "properties":{
+          "event_id":{"type":"string","minLength":1},
+          "observed_at":{"type":"string","format":"date-time"},
+          "member_id":{"type":"string","minLength":1},
+          "subject":{"type":"string","minLength":1},
+          "concept_skill_target":{"type":"string","minLength":1},
+          "evidence_type":{"type":"string","minLength":1},
+          "source_app":{"type":"string","minLength":1},
+          "instrument_version":{"type":"string","minLength":1},
+          "interaction_mode":{"type":["string","null"]},
+          "assistance":{"enum":["ASSISTED","UNASSISTED","UNKNOWN",null]},
+          "attempt_count":{"type":["integer","null"],"minimum":0},
+          "response_latency_ms":{"type":["number","null"],"minimum":0},
+          "verified_outcome":{"type":["integer","null"],"enum":[0,1,null]},
+          "memory_strength":{"type":["number","null"],"minimum":0,"maximum":100},
+          "label_status":{"enum":["VERIFIED_TARGET","OBSERVATION_ONLY","EXCLUDED"]},
+          "exclusion_reason":{"type":["string","null"]}
+        },
+        "additionalProperties":true
+      }
+    },
+    "split_policy":{
+      "type":"object",
+      "required":["kind","holdout_fraction","respect_time_order","respect_instrument_boundaries"],
+      "properties":{
+        "kind":{"const":"TIME_HELD_OUT"},
+        "holdout_fraction":{"type":"number","exclusiveMinimum":0,"exclusiveMaximum":0.5},
+        "respect_time_order":{"const":true},
+        "respect_instrument_boundaries":{"const":true}
+      },
+      "additionalProperties":false
+    },
+    "provenance":{
+      "type":"object",
+      "required":["created_at","source_kind","raw_evidence_immutable"],
+      "properties":{
+        "created_at":{"type":"string","format":"date-time"},
+        "source_kind":{"enum":["REAL_EVIDENCE","SYNTHETIC_FIXTURE","MIXED"]},
+        "raw_evidence_immutable":{"const":true},
+        "notes":{"type":["string","null"]}
+      },
+      "additionalProperties":false
+    }
+  },
+  "additionalProperties":false
+}
