@@ -18,6 +18,7 @@ from executor_transport import build_envelope as build_executor_envelope
 from executor_adapter_registry import resolve as resolve_executor_adapter
 from execution_checkpoint import guard as guard_checkpoint
 from reference_intake_router import route as route_reference_intake
+from reference_intake_executor import execute as execute_reference_intake
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -60,8 +61,6 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
     if expected_role is None:
         failures.append("RUNTIME_ROUTE_UNKNOWN")
     elif action not in {"STATUS_REPORT"}:
-        # execution_owner is the actual actor/tool owner, while route_role is the
-        # capability family that must own the next step.
         if not owner:
             failures.append("EXECUTION_OWNER_MISSING")
 
@@ -91,8 +90,6 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
     return state, failures
 
 def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
-    # Entering the controlled TAKY runtime is itself a material TAKY-governed turn.
-    # Do not depend on the caller/user to opt into TAKY governance.
     effective_record = dict(record)
     effective_record["material_taky_turn"] = True
     gate = run_c2s_preflight(effective_record, repo_root, coverage_record)
@@ -118,6 +115,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             detected.extend(checkpoint_guard_result.get("detected", []))
 
     reference_intake_result = None
+    reference_intake_execution = None
     intent_text = str(effective_record.get("intent_text", "") or "")
     has_reference_source = any(
         effective_record.get(k)
@@ -127,6 +125,14 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         reference_intake_result = route_reference_intake(effective_record)
         if not reference_intake_result.get("pass"):
             detected.extend(reference_intake_result.get("detected", []))
+        elif isinstance(effective_record.get("reference_intake_execution"), dict):
+            reference_intake_execution = execute_reference_intake(
+                effective_record,
+                reference_intake_result,
+                repo_root,
+            )
+            if not reference_intake_execution.get("pass"):
+                detected.extend(reference_intake_execution.get("detected", []))
 
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
@@ -181,7 +187,12 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         ),
         "checkpoint_guard": checkpoint_guard_result,
         "reference_intake_route": reference_intake_result,
+        "reference_intake_execution": reference_intake_execution,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
+        "reference_intake_fetch_verified": False,
+        "reference_intake_persistence_verified": bool(
+            reference_intake_execution and reference_intake_execution.get("pass")
+        ),
         "hosted_chatgpt_auto_invocation_verified": False,
         "external_executor_invocation_verified": False,
     }
