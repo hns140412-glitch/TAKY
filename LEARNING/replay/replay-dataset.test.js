@@ -66,3 +66,10 @@ assert.equal(R.selfValidate(invalid).ok,false);
 assert.equal(R.selfValidate(invalid).issues.includes('SELF_REPORT_PROMOTED'),true);
 
 console.log('LEARNING_REPLAY_DATASET_PASS');
+
+const targetRecord=R.toReplayRecord({
+  ...e('tid1',28,1),
+  learning_target_id:'word:essential',
+  verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-tid1',verifier_type:'RETRIEVAL_EXACT_MATCH',verifier_version:'1'}
+});
+assert.equal(targetRecord.learning_target_id,'word:essential');
