@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const A=require('./canonical-evidence.js');
 const V=require('../verification/verification-layer.js');
 
-const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
+const ctx={member_id:'A',family_id:'F1',profile_id:'P1',assignment_id:'AS1',analysis_id:'AN1',learning_unit_id:'LU1',todo_id:'TD1',session_id:'S1',task_id:'TK1',lap_id:'L1',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
 
 const hide=A.fromHide({
   event_id:'h1',source:'hide-seek',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T07:00:00.000Z',
@@ -13,6 +13,15 @@ assert.equal(hide.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
 assert.equal(hide.learning_target_id,'w1');
 assert.equal(hide.memory.average_strength,67);
 assert.equal(hide.raw_app_signals.case_mastery,84);
+assert.equal(hide.execution_context.family_id,'F1');
+assert.equal(hide.execution_context.member_id,'A');
+assert.equal(hide.execution_context.assignment_id,'AS1');
+assert.equal(hide.execution_context.analysis_id,'AN1');
+assert.equal(hide.execution_context.learning_unit_id,'LU1');
+assert.equal(hide.execution_context.todo_id,'TD1');
+assert.equal(hide.execution_context.session_id,'S1');
+assert.equal(hide.execution_context.task_id,'TK1');
+assert.equal(hide.execution_context.lap_id,'L1');
 assert.equal(hide.verified_outcome,null,'app mastery score must not become verified outcome');
 assert.equal(A.validateCanonical(hide).ok,true);
 
