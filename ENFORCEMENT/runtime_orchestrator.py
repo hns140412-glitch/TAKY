@@ -80,6 +80,11 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
         "primary_outcome": wm.get("primary_outcome"),
         "priority_order": wm.get("priority_order", []),
         "protected_state": wm.get("protected_state", []),
+        "change_set": record.get("allowed_change_scope", []),
+        "preserve_set": record.get(
+            "preserve_change_scope",
+            wm.get("protected_state", []),
+        ),
         "next_action": wm.get("next_action"),
         "stop_conditions": wm.get("stop_conditions", []),
         "action_class": action,
