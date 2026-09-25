@@ -34,6 +34,7 @@ const opts=R.replayOptions(issued.receipt);
 assert.equal(opts.ok,true);
 const built=Replay.buildDataset(rows,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{
   ...opts.options,
+  evidence_receipt:issued.receipt,
   created_at:'2026-09-25T00:00:00.000Z'
 });
 assert.equal(built.ok,true);
