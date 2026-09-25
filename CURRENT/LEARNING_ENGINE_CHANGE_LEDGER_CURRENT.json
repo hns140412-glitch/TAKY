@@ -362,6 +362,30 @@
       "parent_entry_id": "correct:concept-graph-current-applied-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:item-target-provenance-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "EVIDENCE_SCHEMA",
+      "title": "Item-level learning target provenance",
+      "description": "Preserve learning_target_id from canonical app evidence through immutable receipt digest, replay records, benchmark input and benchmark points. Legacy replay builder remains compatibility-only.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/adapters/canonical-evidence.js",
+      "evidence_refs": [
+        "LEARNING/adapters/canonical-evidence.js",
+        "LEARNING/receipts/real-evidence-receipt.js",
+        "LEARNING/replay/replay-dataset.js",
+        "LEARNING/replay/replay-benchmark.js",
+        "LEARNING/benchmark/estimator-benchmark.js",
+        "LEARNING/data/replay-dataset-builder.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/evidence-provenance",
+      "created_at": "2026-09-25T07:12:00.000Z",
+      "parent_entry_id": "apply:item-recovery-profile-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
