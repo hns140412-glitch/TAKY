@@ -35,6 +35,9 @@ on:
       - 'PROJECTIONS/data_delta_discovery.py'
       - 'PROJECTIONS/data_delta_discovery_test.py'
       - 'C2S/DATA_DELTA_DISCOVERY_CONTRACT_2026-09-25.json'
+      - 'PROJECTIONS/data_index_delta6_ingest_test.py'
+      - 'PROJECTIONS/fixtures/data_index_v24_plus_delta6_candidate_projection.json'
+      - 'C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V1.json'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
@@ -71,6 +74,7 @@ jobs:
           python -m py_compile PROJECTIONS/data_index_incremental_projection_test.py
           python -m py_compile PROJECTIONS/data_delta_discovery.py
           python -m py_compile PROJECTIONS/data_delta_discovery_test.py
+          python -m py_compile PROJECTIONS/data_index_delta6_ingest_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
@@ -91,3 +95,5 @@ jobs:
         run: python PROJECTIONS/data_index_incremental_projection_test.py
       - name: Validate data delta discovery baseline
         run: python PROJECTIONS/data_delta_discovery_test.py
+      - name: Validate six-source incremental ingest candidate
+        run: python PROJECTIONS/data_index_delta6_ingest_test.py
