@@ -1,0 +1,63 @@
+{
+  "checkpoint_version": "2.0",
+  "task_id": "DATA_INDEX_SEARCH_PROJECTION",
+  "namespace": "DATA",
+  "atomic_unit": "SEARCH_PROJECTION_IMPLEMENTATION_AND_REGRESSION_CLOSED",
+  "status": "OPERATIONS",
+  "authority_current": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "id": "1wy2H6INwj45EzV4k2nI9mPoqlbTPi3Hbf3zvG_Rwc0M",
+    "promotion": "NOT_EXECUTED",
+    "v25_created": false
+  },
+  "done": [
+    "D1 architecture/design CLOSED",
+    "D2 exact/structured retrieval CLOSED",
+    "D3 lexical retrieval CLOSED",
+    "D4 controlled semantic vector limited baseline CLOSED",
+    "D5 hybrid RRF CLOSED",
+    "Explicit relation expansion CLOSED",
+    "Existing DETAIL_L2 on-demand fetch CLOSED",
+    "RAW candidate gate without automatic RAW fetch CLOSED",
+    "Paraphrase regression CLOSED with standalone semantic limitation retained",
+    "Full contract regression CLOSED",
+    "Final execution/regression CI run 36127081256 SUCCESS at fa2c73aa56530a987030826048f9e5a809496ff1",
+    "Closure checkpoint created at C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json",
+    "New-chat handoff created at HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md"
+  ],
+  "open": [
+    "Operations-only incremental handling for genuinely new or changed authoritative source evidence",
+    "True neural embedding/vector provider integration only if an explicit provider/index becomes available and is separately authorized",
+    "Two oversize video content holds only when streaming partial-frame access or local sync source becomes available"
+  ],
+  "next": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY",
+  "invariants": [
+    "CURRENT_V24_REMAINS_AUTHORITY",
+    "SOURCE_REINDEX_ALL_FALSE",
+    "SEARCH_PROJECTION_NON_AUTHORITATIVE",
+    "V25_NOT_CREATED",
+    "PROMOTION_NOT_EXECUTED",
+    "MINING != INDEXING",
+    "INDEXING != LEARNING",
+    "NETLIFY_NONE",
+    "DEPLOYMENT_NONE",
+    "USER != DEBUGGER"
+  ],
+  "evidence": {
+    "corpus_total": 666,
+    "relation_pairs": 6,
+    "relation_edges": 12,
+    "detail_records": 6,
+    "paraphrase_lexical_hit_at_10": "0/8",
+    "paraphrase_semantic_hit_at_10": "7/8",
+    "paraphrase_hybrid_hit_at_10": "8/8"
+  },
+  "source_refs": [
+    "C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json",
+    "HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
+    "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "github:hns140412-glitch/TAKY@fa2c73aa56530a987030826048f9e5a809496ff1"
+  ],
+  "updated_at": "2026-09-25T20:00:00+09:00",
+  "history_role": "IMMUTABLE_MINIMAL_CHECKPOINT"
+}
