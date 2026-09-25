@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict');
+const W=require('./world-state.js');
+let s=W.blank('C1');
+let r=W.setPresence(s,{character_id:'crew.core.dubi',state:'WITH_EXPLORER',story_reason:'함께 탐험'});
+assert.equal(r.ok,true);s=r.state;
+r=W.recordRawPresence(s);assert.equal(r.state.relationships.length,0);
+r=W.recordMeaningfulEpisode(s,{character_id:'crew.core.dubi',memory_ref:'memory:1',source_event_id:'E1'});
+assert.equal(r.ok,true);s=r.state;
+assert.equal(s.relationships[0].meaningful_episode_count,1);
+assert.equal(s.relationships[0].absence_decay,false);
+assert.equal(s.relationships[0].power_effect,null);
+r=W.setEncounter(s,{character_id:'crew.special.x',state:'TRACE',clue_refs:['clue:footprint']});
+assert.equal(r.ok,true);
+assert.equal(r.state.special_encounters[0].exact_probability,null);
+console.log('TAKY_WORLD_STATE_V1_PASS');
