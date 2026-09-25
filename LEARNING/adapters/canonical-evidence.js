@@ -1,5 +1,6 @@
 'use strict';
 
+const Verification=require('../verification/verification-layer.js');
 const VERSION='TAKY_CANONICAL_LEARNING_EVIDENCE_V1';
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
@@ -47,7 +48,7 @@ function fromHide(event={},context={}){
     valid_word_count:finite(p.validWordCount),
     sheet_status:clean(p.sheetStatus)||null
   };
-  if(context.verified_outcome===0||context.verified_outcome===1)out.verified_outcome=context.verified_outcome;
+  if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return applied.evidence;out.verification_error=applied;}
   return out;
 }
 
@@ -64,7 +65,7 @@ function fromSnap(event={},context={}){
     child_authored:p.child_authored===true,
     used_handoff_word:clean(p.used_handoff_word)||null
   };
-  if(context.verified_outcome===0||context.verified_outcome===1)out.verified_outcome=context.verified_outcome;
+  if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return applied.evidence;out.verification_error=applied;}
   return out;
 }
 
@@ -73,7 +74,7 @@ function fromReady(event={},context={}){
   const p=event.payload||event;
   if(clean(context.evidence_type||p.evidence_type))out.evidence_type=clean(context.evidence_type||p.evidence_type);
   if(clean(out.evidence_type)==='CHILD_SELF_REPORT')out.verified_outcome=null;
-  else if(context.verified_outcome===0||context.verified_outcome===1)out.verified_outcome=context.verified_outcome;
+  else if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};out.verification_error=applied;}
   out.raw_app_signals={
     ready_state:clean(p.ready_state||p.task_state||p.state)||null,
     actual_minutes:finite(p.actual_minutes),
@@ -99,6 +100,7 @@ function validateCanonical(e={}){
   }
   if(!Number.isFinite(Date.parse(e.observed_at||'')))issues.push('INVALID_TIME');
   if(e.verified_outcome!==null&&e.verified_outcome!==0&&e.verified_outcome!==1)issues.push('VERIFIED_OUTCOME_INVALID');
+  if((e.verified_outcome===0||e.verified_outcome===1)&&!e.verification?.receipt_id)issues.push('VERIFIED_OUTCOME_WITHOUT_RECEIPT');
   if(e.evidence_type==='CHILD_SELF_REPORT'&&e.verified_outcome!==null)issues.push('SELF_REPORT_CANNOT_BE_VERIFIED_TARGET');
   for(const k of ['schedule_date','planner_date','due_at','due_date']){
     if(Object.prototype.hasOwnProperty.call(e,k))issues.push('SCHEDULE_AUTHORITY_LEAK');
