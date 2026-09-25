@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const V=require('./crew-visual-projection.js');
+const x=V.normalize({character_id:'crew.core.ink'});
+assert.equal(x.canonical_name,'잉크');
+assert.equal(x.asset_ref,null);
+assert.equal(x.identity_mutation_allowed,false);
+assert.throws(()=>V.bindReviewedAsset({character_id:'crew.core.ink',asset_ref:'asset:ink'}),/REVIEW_REQUIRED/);
+const bound=V.bindReviewedAsset({character_id:'crew.core.ink',asset_ref:'asset:ink',reviewed:true});
+assert.equal(bound.asset_ref,'asset:ink');
+console.log('TAKY_CREW_VISUAL_PROJECTION_V1_PASS');
