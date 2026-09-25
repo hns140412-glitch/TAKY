@@ -1,0 +1,162 @@
+{
+  "schema": "TAKY_DATA_INDEX_DETAIL_PROJECTION_FIXTURE_V1",
+  "source_current": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "id": "1wy2H6INwj45EzV4k2nI9mPoqlbTPi3Hbf3zvG_Rwc0M",
+    "total": 666
+  },
+  "projection_authoritative": false,
+  "raw_reread": false,
+  "generated_from": "EXISTING_V24_DETAIL_L2_ONLY",
+  "detail_record_count": 6,
+  "records": [
+    {
+      "source_id": "1ubekcD5SxhDkKCv6YAoP-tdEBRtI-4VL",
+      "canonical_title": "헷갈리는 모음 ㅔ vs ㅐ 50 .pdf",
+      "media_type": "application/pdf",
+      "source_family": "KOREAN_E_AE_VOWEL_SPELLING_VISUAL_REFERENCE",
+      "source_type": "SINGLE_PAGE_SPELLING_VISUAL_REFERENCE_PDF",
+      "authority_class": "COMMUNITY_EDUCATOR_PRACTICE_LAYER",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "pdf": {
+          "page_count": 1,
+          "reviewed_pages": [
+            1
+          ],
+          "anchors": [
+            "vowel contrast grid",
+            "example-word image grid"
+          ]
+        }
+      }
+    },
+    {
+      "source_id": "1Raxjkp_DurvFU2b2a6-e028s9xXM29f8",
+      "canonical_title": "파닉스 학생용 링크(고해상).pdf",
+      "media_type": "application/pdf",
+      "source_family": "SEOUL_PHONICS_STUDENT_BOOK",
+      "source_type": "LOCAL_EDUCATION_AUTHORITY_STUDENT_WORKBOOK_PDF",
+      "authority_class": "LOCAL_EDUCATION_AUTHORITY_PUBLISHED_MATERIAL",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "pdf": {
+          "page_count": 57,
+          "reviewed_pages": [
+            1,
+            2,
+            30,
+            57
+          ],
+          "anchors": [
+            "cover",
+            "introduction",
+            "practice page",
+            "back cover"
+          ]
+        }
+      }
+    },
+    {
+      "source_id": "1I24ECWone7giWBFhMMkRJMUgeOeWDaa3",
+      "canonical_title": "영유아 수학전집.pdf",
+      "media_type": "application/pdf",
+      "source_family": "EARLY_CHILDHOOD_MATH_BOOK_COLLECTION_CATALOG",
+      "source_type": "CURATED_BOOK_COLLECTION_CATALOG_PDF",
+      "authority_class": "CURATED_COMMERCIAL_RESOURCE_LAYER",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "pdf": {
+          "page_count": 3,
+          "reviewed_pages": [
+            1,
+            2,
+            3
+          ],
+          "anchors": [
+            "1-2 age band",
+            "2-4 age band",
+            "5-7 age band"
+          ]
+        }
+      }
+    },
+    {
+      "source_id": "1Qm7ikc9vNaFQrBnM2bMBvLWWx2B4RFYF",
+      "canonical_title": "아카이브.zip",
+      "media_type": "application/zip",
+      "source_family": "MIXED_EDUCATION_RESOURCE_ARCHIVE_PACKAGE",
+      "source_type": "ARCHIVE_PACKAGE",
+      "authority_class": "MIXED_AUTHORITY_PACKAGE",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "package": {
+          "entry_count": 18,
+          "substantive_asset_count": 13,
+          "metadata_junk_count": 5,
+          "child_types": [
+            "PDF",
+            "XLSX"
+          ],
+          "child_roles": [
+            "literacy diagnostic",
+            "reading log",
+            "history notes",
+            "math worksheet",
+            "book list/catalog"
+          ]
+        }
+      }
+    },
+    {
+      "source_id": "1Du5AJ4DRTK-j0XxArQ3Z2CyjvHA0YOEd",
+      "canonical_title": "호반 표준시방서.zip",
+      "media_type": "application/zip",
+      "source_family": "HOBAN_STANDARD_SPECIFICATION_PACKAGE",
+      "source_type": "CORPORATE_CONSTRUCTION_SPECIFICATION_ARCHIVE",
+      "authority_class": "CORPORATE_PRACTICE_SPECIFICATION_LAYER",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "package": {
+          "entry_count": 9,
+          "substantive_asset_count": 9,
+          "child_types": [
+            "HWP"
+          ],
+          "revision_hints": [
+            "Rev.13",
+            "Rev.04",
+            "Rev.04-1",
+            "Rev.02"
+          ]
+        }
+      }
+    },
+    {
+      "source_id": "1NWfrJBY2DqrDJtrQyndWkNrZ0wMPESZy",
+      "canonical_title": "위례지구단위시행지침(27차).zip",
+      "media_type": "application/zip",
+      "source_family": "WIRYE_DISTRICT_UNIT_PLAN_GUIDELINE_27TH_PACKAGE",
+      "source_type": "PUBLIC_PLANNING_GUIDELINE_ARCHIVE",
+      "authority_class": "PUBLIC_ADMINISTRATIVE_DOCUMENT_PACKAGE_UNVERIFIED_ORIGIN",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_l2": {
+        "package": {
+          "entry_count": 6,
+          "substantive_asset_count": 6,
+          "child_types": [
+            "HWP"
+          ],
+          "structure": [
+            "표지/목차",
+            "제1편",
+            "제2편",
+            "제3편",
+            "제4편(1)",
+            "제4편(2)"
+          ]
+        }
+      }
+    }
+  ]
+}
