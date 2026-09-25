@@ -12,12 +12,85 @@
     "EXACT_DUPLICATE_OF"
   ],
   "inferred_relations": false,
-  "source_pair_count": 0,
-  "edge_count": 0,
+  "source_pair_count": 6,
+  "edge_count": 12,
   "notes": [
     "Derived only from explicit exact_duplicate_pairs recorded in CURRENT V24.",
     "No relation is inferred from temporal_group, source_family, title similarity, or search score.",
     "FRAGMENT_OF/VERSION_OF/SUPERSEDES expansion remains OPEN until directed evidence is available."
   ],
-  "edges": []
+  "edges": [
+    {
+      "from": "1d7PvJhF_cL8Ov2eIVj9k38LgKmYUPDfA",
+      "to": "1lPwNUz-gyna41L_k3g94bg0kczPBaQyP",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1lPwNUz-gyna41L_k3g94bg0kczPBaQyP",
+      "to": "1d7PvJhF_cL8Ov2eIVj9k38LgKmYUPDfA",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1gTmi5v5gqjp-9O1smBRImZlkZIL_a0vP",
+      "to": "1vqNoZegqr59kaSU56XR4B07IHvbOsDe-",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1vqNoZegqr59kaSU56XR4B07IHvbOsDe-",
+      "to": "1gTmi5v5gqjp-9O1smBRImZlkZIL_a0vP",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1dul3ffdH1Uf5oxzEI5xp_cGX2JPsgWmu",
+      "to": "1hg6B1bHNlJw_ESVDZX9V0i5wwAk6erme",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1hg6B1bHNlJw_ESVDZX9V0i5wwAk6erme",
+      "to": "1dul3ffdH1Uf5oxzEI5xp_cGX2JPsgWmu",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1zq6R7LNG_yE4xZjGSo_SLT4zjiqLpVrC",
+      "to": "1G__V0zgaxCd5WzPhLxoX153M1bRdwXzo",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1G__V0zgaxCd5WzPhLxoX153M1bRdwXzo",
+      "to": "1zq6R7LNG_yE4xZjGSo_SLT4zjiqLpVrC",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": null
+    },
+    {
+      "from": "1fd8k6UdUaOpE4V7GVRNB08M6z9VN6S69",
+      "to": "1YFll8iz2vF9BY5Deqa-DYG_3BUq685jw",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": "sha256:b91167c5aecedbcfcb6aed496af1e8f539b7c3014fcb76d03feb909964862dab"
+    },
+    {
+      "from": "1YFll8iz2vF9BY5Deqa-DYG_3BUq685jw",
+      "to": "1fd8k6UdUaOpE4V7GVRNB08M6z9VN6S69",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": "sha256:b91167c5aecedbcfcb6aed496af1e8f539b7c3014fcb76d03feb909964862dab"
+    },
+    {
+      "from": "1R1glxxooUBcPC2fZL6zpPhp1xfSC18vV",
+      "to": "1oh4ptVhPi7JHF6TVqKeJcJNn087BcEte",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": "sha256:24a7262542d27ba2c52f501c7c202872f66e7752da81a7340e425a3abe59e0ff"
+    },
+    {
+      "from": "1oh4ptVhPi7JHF6TVqKeJcJNn087BcEte",
+      "to": "1R1glxxooUBcPC2fZL6zpPhp1xfSC18vV",
+      "type": "EXACT_DUPLICATE_OF",
+      "hash": "sha256:24a7262542d27ba2c52f501c7c202872f66e7752da81a7340e425a3abe59e0ff"
+    }
+  ]
 }
