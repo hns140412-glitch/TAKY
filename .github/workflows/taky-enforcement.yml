@@ -184,6 +184,8 @@ jobs:
         run: node LEARNING/replay/replay-benchmark.test.js
       - name: Validate Learning Engine verification layer
         run: node LEARNING/verification/verification-layer.test.js
+      - name: Validate app-specific verifier policy
+        run: node LEARNING/verification/verifier-policy.test.js
       - name: Validate canonical Learning Evidence adapters
         run: node LEARNING/adapters/canonical-evidence.test.js
       - name: Validate canonical evidence into replay labels
