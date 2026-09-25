@@ -32,6 +32,9 @@ on:
       - 'PROJECTIONS/data_index_incremental_projection_test.py'
       - 'C2S/DATA_INDEX_INCREMENTAL_OPERATIONS_CONTRACT_2026-09-25.json'
       - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
+      - 'PROJECTIONS/data_delta_discovery.py'
+      - 'PROJECTIONS/data_delta_discovery_test.py'
+      - 'C2S/DATA_DELTA_DISCOVERY_CONTRACT_2026-09-25.json'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
@@ -66,6 +69,8 @@ jobs:
           python -m py_compile PROJECTIONS/data_index_full_contract_regression_test.py
           python -m py_compile PROJECTIONS/data_index_incremental_projection.py
           python -m py_compile PROJECTIONS/data_index_incremental_projection_test.py
+          python -m py_compile PROJECTIONS/data_delta_discovery.py
+          python -m py_compile PROJECTIONS/data_delta_discovery_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
@@ -84,3 +89,5 @@ jobs:
         run: python PROJECTIONS/data_index_full_contract_regression_test.py
       - name: Validate incremental operations baseline
         run: python PROJECTIONS/data_index_incremental_projection_test.py
+      - name: Validate data delta discovery baseline
+        run: python PROJECTIONS/data_delta_discovery_test.py
