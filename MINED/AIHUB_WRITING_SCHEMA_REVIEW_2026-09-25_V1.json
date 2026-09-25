@@ -1,0 +1,117 @@
+{
+  "schema": "TAKY_AIHUB_WRITING_SCHEMA_REVIEW_V1",
+  "date": "2026-09-25",
+  "verdict": "ACCEPT_WITH_SCOPED_INGEST",
+  "primary_dataset": "AIHUB_WRITING_71818",
+  "supplementary_dataset": "AIHUB_WRITING_71819",
+  "verified_structure": {
+    "common": [
+      "essay_question",
+      "essay_answer",
+      "expert.score.votes_1",
+      "expert.score.votes_2",
+      "expert.feedback.votes_1",
+      "score.personal.holistic",
+      "score.personal.analytic",
+      "analytic rubric_key",
+      "analytic feedback",
+      "rubric.analytic"
+    ],
+    "dataset_71818": {
+      "type": "서술형 글쓰기",
+      "subjects": [
+        "국어",
+        "사회",
+        "과학",
+        "수학"
+      ],
+      "grades": [
+        "초5",
+        "초6",
+        "중1",
+        "중2",
+        "중3"
+      ],
+      "question_fields": [
+        "id",
+        "type",
+        "subject",
+        "topic",
+        "level",
+        "grade",
+        "prompt",
+        "keyword"
+      ],
+      "answer_fields": [
+        "id",
+        "region",
+        "gender",
+        "reference",
+        "text",
+        "len_syllable",
+        "len_word"
+      ]
+    },
+    "dataset_71819": {
+      "type": "논술형 글쓰기",
+      "subjects": [
+        "국어",
+        "사회",
+        "과학"
+      ],
+      "grades": [
+        "초5",
+        "초6",
+        "중1",
+        "중2",
+        "중3"
+      ],
+      "distinctive_fields": [
+        "essay_question.purpose",
+        "rubric.purpose",
+        "rubric.achievement"
+      ],
+      "purposes": [
+        "설명",
+        "설득",
+        "친교 및 정서"
+      ],
+      "rubric_examples": [
+        "과제수행의 충실성",
+        "설명의 명료성",
+        "문장의 연결성",
+        "글의 통일성",
+        "어휘의 적절성",
+        "어법의 정확성"
+      ]
+    }
+  },
+  "ingest_decision": {
+    "dataset_71818": "PRIMARY_SAMPLE_AND_SCHEMA_TARGET",
+    "dataset_71819": "SUPPLEMENT_ONLY_FOR_PURPOSE_ACHIEVEMENT_ARGUMENTATION_DIMENSIONS",
+    "full_duplicate_ingest": "NO",
+    "elementary_scope": [
+      "초5",
+      "초6"
+    ],
+    "first_sample_target_per_dataset": 50
+  },
+  "rationale": [
+    "71818 directly fills student-response -> score -> rubric -> feedback lineage gap.",
+    "71819 largely shares the same assessment skeleton but adds explicit writing purpose and achievement linkage.",
+    "Using 71818 as the primary corpus and 71819 as a selective supplement minimizes duplication while preserving unique dimensions."
+  ],
+  "learning_engine_nonclaims": [
+    "AI Hub rubric is not official curriculum authority.",
+    "Dataset score is not global writing ability.",
+    "Observed feedback is not causal remediation proof.",
+    "Student metadata must not drive learner diagnosis without separate validation."
+  ],
+  "next_actions": [
+    "Obtain approved lightweight/sample data for 71818.",
+    "Validate 50 elementary grade 5/6 records for stable relational lineage.",
+    "Sample 71819 only for purpose/achievement/argumentation dimensions.",
+    "Compare against current STRUCTURED_WRITING_INSTRUCTION_CORPUS for semantic redundancy.",
+    "Promote only metadata/schema pointer until lawful private RAW is actually acquired."
+  ]
+}
