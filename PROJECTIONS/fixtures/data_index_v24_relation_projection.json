@@ -1,0 +1,21 @@
+{
+  "schema": "TAKY_DATA_INDEX_RELATION_PROJECTION_FIXTURE_V1",
+  "source_current": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "id": "1wy2H6INwj45EzV4k2nI9mPoqlbTPi3Hbf3zvG_Rwc0M",
+    "total": 666
+  },
+  "projection_authoritative": false,
+  "raw_reread": false,
+  "relation_scope": "EXPLICIT_VERIFIED_RELATIONS_ONLY",
+  "allowed_relation_types": [
+    "EXACT_DUPLICATE_OF"
+  ],
+  "inferred_relations": false,
+  "notes": [
+    "Derived only from explicit exact_duplicate_pairs already recorded in CURRENT V24.",
+    "No FRAGMENT_OF, VERSION_OF, SUPERSEDES, RELATED_TO, or SAME_FAMILY_AS edge is inferred from temporal_group/source_family."
+  ],
+  "edge_count": 0,
+  "edges": []
+}
