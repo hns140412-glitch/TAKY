@@ -208,6 +208,8 @@ jobs:
         run: node LEARNING/lifecycle/evaluation-orchestrator.test.js
       - name: Validate automatic real-evidence evaluation trigger
         run: node LEARNING/lifecycle/real-evidence-evaluation-trigger.test.js
+      - name: Validate estimator data readiness snapshot
+        run: node LEARNING/lifecycle/estimator-data-readiness.test.js
       - name: Validate no-loss Learning Engine change ledger
         run: node LEARNING/lifecycle/change-ledger.test.js
       - name: Validate retained Learning Engine change ledger CURRENT
