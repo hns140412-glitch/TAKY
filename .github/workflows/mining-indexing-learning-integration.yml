@@ -11,8 +11,12 @@ on:
       - 'LEARNING/policy/**'
       - 'LEARNING/intake/indexed-evidence-handoff.js'
       - 'LEARNING/intake/indexed-evidence-handoff.test.js'
+      - 'LEARNING/runtime/evidence-gap.js'
+      - 'LEARNING/runtime/evidence-gap.test.js'
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+      - 'ENFORCEMENT/learning_evidence_gap_broker.py'
+      - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
       - 'ENFORCEMENT/reference_intake_executor.py'
       - 'ENFORCEMENT/reference_intake_executor_test.py'
       - 'ENFORCEMENT/runtime_orchestrator.py'
@@ -32,6 +36,8 @@ jobs:
         run: node LEARNING/policy/evidence-policy-bridge.test.js
       - name: Index to Learning evidence handoff
         run: node LEARNING/intake/indexed-evidence-handoff.test.js
+      - name: Learning evidence gap emitter
+        run: node LEARNING/runtime/evidence-gap.test.js
       - name: Learning runtime policy integration
         run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
       - name: Existing learner state regression
@@ -41,3 +47,6 @@ jobs:
       - name: Reference intake disposition lifecycle
         working-directory: ENFORCEMENT
         run: python reference_intake_executor_test.py
+      - name: Index-first evidence gap broker
+        working-directory: ENFORCEMENT
+        run: python learning_evidence_gap_broker_test.py
