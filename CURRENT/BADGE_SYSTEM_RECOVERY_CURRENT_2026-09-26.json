@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_SYSTEM_RECOVERY",
   "namespace": "BADGE",
-  "status": "PARTIAL",
+  "status": "NO_EXECUTABLE_CODE_OPEN",
   "updated_at": "2026-09-26",
   "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
   "hard_locks": {
@@ -107,5 +107,49 @@
     "keep Crew content in CONTENT_APPROVAL_HOLD until genuine Snap-owned approved asset evidence exists",
     "merge draft PRs only with intentional approval",
     "after merges, verify exact main heads and rerun regressions before final main CLOSED promotion"
-  ]
+  ],
+  "execution_gate": {
+    "state": "WAITING_FOR_INTENTIONAL_MERGE_OR_APPROVED_CONTENT",
+    "executable_code_open": false,
+    "allowed_next_actions": [
+      "intentional merge decision for Hide-Seek PR #17",
+      "intentional merge decision for Snap-Pop PR #8",
+      "intentional merge decision for Ready-Set PR #105",
+      "supply genuine Snap-owned reviewed/approved Crew asset content",
+      "post-merge exact-main regression verification"
+    ],
+    "forbidden_without_new_evidence": [
+      "reopen SP-BADGE-006 implementation",
+      "reopen SP-BADGE-008 implementation",
+      "rebuild Ready World State consumer",
+      "activate historical 60-badge catalog",
+      "switch to DATA INDEXING/vector work"
+    ]
+  },
+  "merge_readiness": {
+    "hide_seek_pr_17": {
+      "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
+      "base_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
+      "current_main_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    },
+    "snap_pop_pr_8": {
+      "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
+      "base_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
+      "current_main_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    },
+    "ready_set_pr_105": {
+      "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
+      "base_sha": "e030d685c9717f9fab691dab379326e9e9067303",
+      "current_main_sha": "e030d685c9717f9fab691dab379326e9e9067303",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    }
+  }
 }
