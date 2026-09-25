@@ -212,12 +212,21 @@ Implemented centrally:
 - weak proxies forbidden:
   elapsed time, silence, retry/edit counts, score/confidence, AI/model inference
 
+Implemented source contracts:
+- `TAKY_BADGE_SOURCE_EVIDENCE_V1`
+- `TAKY_CHILD_SELF_CORRECTION_V1`
+- `TAKY_CHILD_REFLECTION_ARTIFACT_V1`
+- `TAKY_DECLARED_SPECIAL_ACTION_V1`
+- each requires explicit child action and rejects inference-only evidence.
+- central source contract → strong badge validator compatibility is Enforcement verified.
+
 Current runtime gap:
-- Ready / Hide / Snap do NOT yet emit the required strong source contracts:
-  - `TAKY_CHILD_SELF_CORRECTION_V1`
-  - `TAKY_CHILD_REFLECTION_ARTIFACT_V1`
-  - `TAKY_DECLARED_SPECIAL_ACTION_V1`
-- therefore ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR must not be inferred or awarded.
+- Ready / Hide / Snap load the source-evidence contract but do NOT auto-call it.
+- existing app UX does not yet provide strong enough child-authored source artifacts for:
+  ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR.
+- Hide explicit RETRY remains RETRY evidence only and must not be promoted to ERROR_DISCOVERY.
+- Ready parent/system replanning must not be used as child badge evidence.
+- therefore ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR remain runtime-producer OPEN and must not be inferred or awarded.
 
 ### SP-BADGE-008
 Status: PARTIAL
@@ -332,11 +341,12 @@ No item may activate merely because it exists in recovered source.
 ## 10. Next functional OPEN
 
 1. Verify newest `TAKY_BADGE_CANDIDATE_REVIEW_V1` exact-head Enforcement.
-2. Keep SP-BADGE-006 PARTIAL until real explicit source producers exist.
-3. Define/implement explicit source UX only where product behavior already supplies strong evidence; never infer from weak proxies.
-4. Add cross-app member-scoped badge candidate/award storage runtime only after an active catalog item is separately confirmed.
-5. Bind Crew / Badge Theme visuals only to reviewed asset refs.
-6. Recalculate overall master functional completion after badge runtime activation boundary is resolved.
+2. Keep SP-BADGE-006 PARTIAL until real explicit child source producers exist.
+3. Shared source-evidence contracts are implemented and loaded in Ready / Hide / Snap with auto-wiring forbidden by regression tests.
+4. Define/implement explicit source UX only where product behavior genuinely supplies strong evidence; never infer from weak proxies.
+5. Add cross-app member-scoped badge candidate/award storage runtime only after an active catalog item is separately confirmed.
+6. Bind Crew / Badge Theme visuals only to reviewed asset refs.
+7. Recalculate overall master functional completion after badge runtime activation boundary is resolved.
 
 Think Again, Keep Your Key.  
 Think Again, You’re The Key.
