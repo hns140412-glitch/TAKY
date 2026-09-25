@@ -1,0 +1,31 @@
+{
+  "schema": "TAKY_MINING_ENGINE_MEMORY_V1",
+  "strategies": [
+    {
+      "strategy_id": "STRAT-L5-LEARNING-001",
+      "task_family": "LEARNING_ENGINE",
+      "goal_pattern": "adaptive learner mastery review scheduling",
+      "status": "PROMOTED",
+      "source_eval": "held-out-regression-approved"
+    },
+    {
+      "strategy_id": "STRAT-UI-CANDIDATE-001",
+      "task_family": "PRODUCT_UI",
+      "goal_pattern": "one-screen exploration UI runtime character slots",
+      "status": "CANDIDATE"
+    }
+  ],
+  "failures": [
+    {
+      "failure_id": "FAIL-SEARCH-001",
+      "task_family": "LEARNING_ENGINE",
+      "route_signature": "search:known-stale-endpoint",
+      "state": "RESOLVED",
+      "new_evidence_required": true,
+      "replacement_routes": [
+        "search:official-direct",
+        "search:verified-mirror"
+      ]
+    }
+  ]
+}
