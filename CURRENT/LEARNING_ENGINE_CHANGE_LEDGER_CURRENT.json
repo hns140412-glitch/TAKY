@@ -386,6 +386,26 @@
       "parent_entry_id": "apply:item-recovery-profile-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:current-enforcement-trigger-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "VALIDATION_RULE",
+      "title": "Learning Engine CURRENT enforcement trigger",
+      "description": "TAKY Enforcement now runs when CURRENT/LEARNING_ENGINE_* files change, preventing retained-state or ledger mutations from bypassing regression validation.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": ".github/workflows/taky-enforcement.yml",
+      "evidence_refs": [
+        ".github/workflows/taky-enforcement.yml",
+        "LEARNING/lifecycle/change-ledger-current.test.js"
+      ],
+      "blockers": [],
+      "destination": ".github/workflows/taky-enforcement.yml",
+      "created_at": "2026-09-25T07:15:00.000Z",
+      "parent_entry_id": "apply:item-target-provenance-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
