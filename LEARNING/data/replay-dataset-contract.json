@@ -1,0 +1,49 @@
+{
+  "schema_id": "TAKY_LEARNING_REPLAY_DATASET_V1",
+  "status": "ACTIVE_CANDIDATE",
+  "purpose": "Validated chronological evidence replay for estimator benchmarking and future promotion review.",
+  "invariants": [
+    "RAW_EVIDENCE_IMMUTABLE",
+    "VALIDATED_EVENT_REQUIRED",
+    "MEMBER_SUBJECT_SKILL_SCOPE_REQUIRED",
+    "INSTRUMENT_VERSION_REQUIRED",
+    "CHRONOLOGICAL_ORDER_REQUIRED",
+    "TRAIN_PRECEDES_HELD_OUT",
+    "DUPLICATE_EVENT_ID_FORBIDDEN",
+    "SELF_REPORT_NOT_VERIFIED_PERFORMANCE",
+    "SYNTHETIC_DATA_NOT_PROMOTION_EVIDENCE",
+    "NO_SCHEDULE_AUTHORITY"
+  ],
+  "required_event_fields": [
+    "event_id",
+    "observed_at",
+    "member_id",
+    "subject",
+    "concept_skill_target",
+    "evidence_type",
+    "source_app",
+    "instrument_version"
+  ],
+  "split_contract": {
+    "strategy": "TIME_ORDERED",
+    "minimum_train_events": 3,
+    "minimum_held_out_events": 1,
+    "future_only_held_out": true,
+    "random_shuffle_forbidden": true
+  },
+  "quality_flags": [
+    "INVALID_EVENT",
+    "DUPLICATE_EVENT_ID",
+    "INSTRUMENT_CHANGE_BOUNDARY",
+    "SELF_REPORT_ONLY",
+    "SPARSE_HISTORY",
+    "MISSING_VERIFIED_OUTCOME",
+    "SYNTHETIC_ONLY",
+    "HELD_OUT_LEAKAGE"
+  ],
+  "promotion_boundary": {
+    "fixture_or_synthetic_can_promote": false,
+    "real_evidence_required": true,
+    "model_promotion_requires_human_review": true
+  }
+}
