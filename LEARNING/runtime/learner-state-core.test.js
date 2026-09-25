@@ -20,6 +20,7 @@ const rows=[
   e('a1','A','영어','VOCABULARY',{strength:82,assisted:false}),
   e('a2','A','영어','VOCABULARY',{strength:75,assisted:true,observed_at:'2026-09-26T07:00:00.000Z'}),
   e('a2','A','영어','VOCABULARY',{strength:75,assisted:true,observed_at:'2026-09-26T07:00:00.000Z'}),
+  e('a3','A','영어','VOCABULARY',{strength:60,assisted:false,observed_at:'2026-09-27T07:00:00.000Z'}),
   e('m1','A','수학','FRACTION',{strength:20}),
   e('b1','B','영어','VOCABULARY',{strength:10}),
   e('self1','A','영어','VOCABULARY',{evidence_type:'CHILD_SELF_REPORT',source_app:'ready-set',instrument_version:'ready-v1',verified_performance:true})
@@ -27,11 +28,15 @@ const rows=[
 
 const a=Core.deriveSkillState(rows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(a.ok,true);
-assert.equal(a.observed.unique_evidence_count,3);
-assert.deepEqual(a.observed.evidence_ids,['a1','self1','a2']);
+assert.equal(a.observed.unique_evidence_count,4);
+assert.deepEqual(a.observed.evidence_ids,['a1','self1','a2','a3']);
 assert.equal(a.observed.child_self_report_count,1);
 assert.equal(a.observed.verified_performance_count,0,'self report must not become verified performance');
 assert.deepEqual(a.observed.instrument_versions,['hide-v1','ready-v1']);
+assert.deepEqual(a.observed.memory_instrument_versions,['hide-v1']);
+assert.equal(a.inferred.instrument_change_detected,false);
+assert.equal(a.inferred.trend,'DECLINING');
+assert.equal(a.inferred.evidence_sufficiency,'EMERGING');
 assert.equal(a.model.mastery_estimate,null);
 assert.equal(a.model.retention_probability,null);
 assert.equal(a.model.scheduling_authority,false);
@@ -44,6 +49,11 @@ const math=Core.deriveSkillState(rows,{member_id:'A',subject:'수학',concept_sk
 assert.equal(math.observed.unique_evidence_count,1);
 const childB=Core.deriveSkillState(rows,{member_id:'B',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(childB.observed.unique_evidence_count,1);
+
+const mixed=[...rows,e('a4','A','영어','VOCABULARY',{strength:59,instrument_version:'hide-v2',observed_at:'2026-09-28T07:00:00.000Z'})];
+const held=Core.deriveSkillState(mixed,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
+assert.equal(held.inferred.instrument_change_detected,true);
+assert.equal(held.inferred.trend,'INSTRUMENT_CHANGE_HOLD');
 
 const replay=Core.deriveSkillState(rows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.deepEqual(replay,a,'same input must be deterministic');
