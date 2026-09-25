@@ -1,4 +1,9 @@
-'use strict';
+(function(root,factory){
+  const api=factory();
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
+  if(root)root.TakyRetentionStateBaseline=api;
+})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  'use strict';
 
 const VERSION='TAKY_RETENTION_STATE_BASELINE_V1';
 const clean=v=>String(v??'').trim();
@@ -118,4 +123,5 @@ function selfValidate(result={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,validVerifiedRetrieval,derive,selfValidate});
+  return Object.freeze({VERSION,validVerifiedRetrieval,derive,selfValidate});
+});
