@@ -9,6 +9,8 @@ on:
       - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
       - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'LEARNING/policy/**'
+      - 'LEARNING/intake/indexed-evidence-handoff.js'
+      - 'LEARNING/intake/indexed-evidence-handoff.test.js'
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
       - 'ENFORCEMENT/reference_intake_executor.py'
@@ -28,6 +30,8 @@ jobs:
           python-version: '3.12'
       - name: Evidence policy bridge
         run: node LEARNING/policy/evidence-policy-bridge.test.js
+      - name: Index to Learning evidence handoff
+        run: node LEARNING/intake/indexed-evidence-handoff.test.js
       - name: Learning runtime policy integration
         run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
       - name: Existing learner state regression
