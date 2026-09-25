@@ -1,0 +1,169 @@
+{
+  "schema": "TAKY_MINING_ENGINE_L5_HETEROGENEOUS_PILOTS_V1",
+  "cases": [
+    {
+      "case_id": "L5-LEARNING-001",
+      "task_family": "LEARNING_ENGINE",
+      "run": {
+        "KNOWN": [
+          "official standards/evidence matrix exist",
+          "learner-model implementation not yet authorized"
+        ],
+        "WEAK": [
+          "adaptive mastery evidence is incomplete"
+        ],
+        "UNKNOWN": [
+          "best learner-state transition model"
+        ],
+        "CONFLICT": [
+          "more signals may improve accuracy but increase complexity"
+        ],
+        "FOUNDATION_REQUIREMENTS": [
+          "learner event schema",
+          "evidence boundary"
+        ],
+        "ADVANCED_REQUIREMENTS": [
+          "mastery estimation",
+          "adaptive review"
+        ],
+        "ALTERNATIVE_PATHS": [
+          "rule-first",
+          "probabilistic",
+          "hybrid"
+        ],
+        "SEARCH_FRONTIER": [
+          {
+            "id": "learner_event_schema"
+          },
+          {
+            "id": "mastery_evidence"
+          },
+          {
+            "id": "adaptive_review_validation"
+          }
+        ],
+        "READY_FOR_USER": [
+          "foundation-to-advanced research plan ready"
+        ],
+        "research_depth_decision": "D3"
+      },
+      "gold": {
+        "expected_frontier_ids": [
+          "learner_event_schema",
+          "mastery_evidence",
+          "adaptive_review_validation"
+        ],
+        "expected_depth": "D3",
+        "ready_for_user": true
+      }
+    },
+    {
+      "case_id": "L5-ARCH-001",
+      "task_family": "ARCHITECTURE_WORK",
+      "run": {
+        "KNOWN": [
+          "source-of-truth drawings and verified numeric levels exist"
+        ],
+        "WEAK": [
+          "presentation/reference expression layer may still need refinement"
+        ],
+        "UNKNOWN": [
+          "which representation references best preserve geometry"
+        ],
+        "CONFLICT": [
+          "visual richness must not alter geometry"
+        ],
+        "FOUNDATION_REQUIREMENTS": [
+          "drawing geometry lock",
+          "level/distance facts"
+        ],
+        "ADVANCED_REQUIREMENTS": [
+          "reference-grade diagram expression",
+          "render pipeline"
+        ],
+        "ALTERNATIVE_PATHS": [
+          "vector post-process",
+          "controlled AI render",
+          "hybrid"
+        ],
+        "SEARCH_FRONTIER": [
+          {
+            "id": "geometry_preservation_pipeline"
+          },
+          {
+            "id": "reference_grade_expression"
+          }
+        ],
+        "READY_FOR_USER": [
+          "implementation options can be compared without rereading all source material"
+        ],
+        "research_depth_decision": "D2"
+      },
+      "gold": {
+        "expected_frontier_ids": [
+          "geometry_preservation_pipeline",
+          "reference_grade_expression"
+        ],
+        "expected_depth": "D2",
+        "ready_for_user": true
+      }
+    },
+    {
+      "case_id": "L5-UI-001",
+      "task_family": "PRODUCT_UI",
+      "run": {
+        "KNOWN": [
+          "central UI rules and app-specific pointers exist"
+        ],
+        "WEAK": [
+          "some screens remain visually or functionally unsettled"
+        ],
+        "UNKNOWN": [
+          "which interaction patterns best preserve one-screen flow"
+        ],
+        "CONFLICT": [
+          "dense illustration vs readability"
+        ],
+        "FOUNDATION_REQUIREMENTS": [
+          "approved flow",
+          "visual IDs",
+          "device ratio"
+        ],
+        "ADVANCED_REQUIREMENTS": [
+          "motion",
+          "runtime character slots",
+          "cross-app consistency"
+        ],
+        "ALTERNATIVE_PATHS": [
+          "static-first",
+          "motion-first",
+          "hybrid"
+        ],
+        "SEARCH_FRONTIER": [
+          {
+            "id": "one_screen_interaction_patterns"
+          },
+          {
+            "id": "runtime_character_slot_patterns"
+          },
+          {
+            "id": "cross_app_visual_consistency"
+          }
+        ],
+        "READY_FOR_USER": [
+          "reference search can proceed from unresolved deltas only"
+        ],
+        "research_depth_decision": "D3"
+      },
+      "gold": {
+        "expected_frontier_ids": [
+          "one_screen_interaction_patterns",
+          "runtime_character_slot_patterns",
+          "cross_app_visual_consistency"
+        ],
+        "expected_depth": "D3",
+        "ready_for_user": true
+      }
+    }
+  ]
+}
