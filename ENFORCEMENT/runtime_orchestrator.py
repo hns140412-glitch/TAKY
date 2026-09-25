@@ -107,6 +107,67 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
 
+    synthesis_barrier_result = None
+    synthesis_cfg = effective_record.get("synthesis_barrier")
+    if isinstance(synthesis_cfg, dict) and synthesis_cfg.get("required") is True:
+        expected_children = synthesis_cfg.get("expected_children")
+        child_results = synthesis_cfg.get("child_results")
+        if not isinstance(expected_children, list) or not expected_children or any(
+            not isinstance(x, str) or not x.strip() for x in expected_children
+        ):
+            detected.append("SYNTHESIS_EXPECTED_CHILDREN_INVALID")
+            expected_children = []
+        if not isinstance(child_results, list):
+            detected.append("SYNTHESIS_CHILD_RESULTS_INVALID")
+            child_results = []
+
+        by_id = {}
+        malformed = []
+        for item in child_results:
+            if not isinstance(item, dict):
+                malformed.append("NON_OBJECT")
+                continue
+            child_id = str(item.get("child_id", "")).strip()
+            status = str(item.get("status", "")).strip().upper()
+            structured = item.get("structured_result")
+            if not child_id or status != "COMPLETED" or not isinstance(structured, dict):
+                malformed.append(child_id or "MISSING_ID")
+                continue
+            by_id[child_id] = item
+
+        missing = [child_id for child_id in expected_children if child_id not in by_id]
+        unexpected = sorted(child_id for child_id in by_id if child_id not in set(expected_children))
+        if malformed:
+            detected.append("SYNTHESIS_CHILD_RESULT_MALFORMED:" + ",".join(sorted(set(malformed))))
+        if missing:
+            detected.append("SYNTHESIS_CHILD_RESULTS_INCOMPLETE:" + ",".join(missing))
+        if unexpected:
+            detected.append("SYNTHESIS_UNEXPECTED_CHILD_RESULT:" + ",".join(unexpected))
+
+        synthesis_barrier_result = {
+            "required": True,
+            "expected_children": expected_children,
+            "completed_children": sorted(by_id),
+            "missing_children": missing,
+            "unexpected_children": unexpected,
+            "structured_results": [
+                by_id[child_id]["structured_result"]
+                for child_id in expected_children
+                if child_id in by_id
+            ],
+            "synthesis_ready": not malformed and not missing and not unexpected and bool(expected_children),
+        }
+    else:
+        synthesis_barrier_result = {
+            "required": False,
+            "expected_children": [],
+            "completed_children": [],
+            "missing_children": [],
+            "unexpected_children": [],
+            "structured_results": [],
+            "synthesis_ready": True,
+        }
+
     checkpoint_guard_result = None
     checkpoint_cfg = effective_record.get("checkpoint_guard")
     if isinstance(checkpoint_cfg, dict) and checkpoint_cfg.get("required") is True:
@@ -215,6 +276,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             else None
         ),
         "checkpoint_guard": checkpoint_guard_result,
+        "synthesis_barrier": synthesis_barrier_result,
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
