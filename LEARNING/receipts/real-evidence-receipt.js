@@ -109,6 +109,36 @@ function validateBatchReceipt(receipt={},evidence=[]){
   return {ok:issues.length===0,issues};
 }
 
+function extendBatchReceipt(previousReceipt={},previousEvidence=[],newEvidence=[],options={}){
+  const previousCheck=validateBatchReceipt(previousReceipt,previousEvidence);
+  if(!previousCheck.ok)return {ok:false,reason:'PREVIOUS_RECEIPT_INVALID',issues:previousCheck.issues};
+  const previousIds=new Set((Array.isArray(previousEvidence)?previousEvidence:[]).map(x=>clean(x.event_id)));
+  const overlap=(Array.isArray(newEvidence)?newEvidence:[]).filter(x=>previousIds.has(clean(x.event_id)));
+  if(overlap.length)return {ok:false,reason:'EVENT_ALREADY_RECEIPTED',event_ids:overlap.map(x=>x.event_id)};
+  const combined=[...(Array.isArray(previousEvidence)?previousEvidence:[]),...(Array.isArray(newEvidence)?newEvidence:[])];
+  const issued=issueBatchReceipt(combined,{
+    receipt_id:options.receipt_id,
+    created_at:options.created_at
+  });
+  if(!issued.ok)return issued;
+  issued.receipt.parent_receipt_id=previousReceipt.receipt_id;
+  issued.receipt.parent_evidence_digest_sha256=previousReceipt.evidence_digest_sha256;
+  issued.receipt.incremental_event_count=(Array.isArray(newEvidence)?newEvidence:[]).length;
+  return issued;
+}
+
+function validateReceiptChain(receipts=[]){
+  const rows=Array.isArray(receipts)?receipts:[];
+  const issues=[];
+  for(let i=1;i<rows.length;i++){
+    const prev=rows[i-1],cur=rows[i];
+    if(clean(cur.parent_receipt_id)!==clean(prev.receipt_id))issues.push('PARENT_RECEIPT_MISMATCH:'+i);
+    if(clean(cur.parent_evidence_digest_sha256)!==clean(prev.evidence_digest_sha256))issues.push('PARENT_DIGEST_MISMATCH:'+i);
+    if(Number(cur.event_count)<Number(prev.event_count))issues.push('EVENT_COUNT_REGRESSION:'+i);
+  }
+  return {ok:issues.length===0,issues};
+}
+
 function replayOptions(receipt={}){
   if(clean(receipt.authority)!=='REAL_LEARNING_EVIDENCE_RECEIPT'||!clean(receipt.receipt_id)){
     return {ok:false,reason:'REAL_EVIDENCE_RECEIPT_INVALID'};
@@ -123,4 +153,4 @@ function replayOptions(receipt={}){
   };
 }
 
-module.exports=Object.freeze({VERSION,digest,validateCanonicalVerified,issueBatchReceipt,validateBatchReceipt,replayOptions});
+module.exports=Object.freeze({VERSION,digest,validateCanonicalVerified,issueBatchReceipt,validateBatchReceipt,extendBatchReceipt,validateReceiptChain,replayOptions});
