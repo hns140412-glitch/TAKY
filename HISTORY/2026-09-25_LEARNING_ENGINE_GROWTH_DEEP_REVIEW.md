@@ -7,6 +7,8 @@ Scope: independent Learning Engine Core growth research and localization
 
 - CAHLR/pyBKT: per-skill Bayesian mastery; individual priors/learn/guess/slip variants.
 - pyKT toolkit: deep KT benchmark family including forgetting-aware and uncertainty-aware models.
+- 2025 session-to-session validation research: retrospective KT fit can degrade under time-based future prediction and may miss spacing/forgetting dynamics.
+- 2025 uncertainty-aware KT: interaction uncertainty should be modeled explicitly rather than collapsed into a single certain state.
 - Open Spaced Repetition FSRS / ts-fsrs: difficulty, stability, retrievability separation; optimizer from review logs; pure model/scheduler APIs.
 - SkillCoco: open-source BKT + spaced repetition + local-first mastery loop.
 - Netlify Functions / Background Functions / Async Workloads: immutable deployments and durable async/event jobs.
@@ -33,6 +35,7 @@ Scope: independent Learning Engine Core growth research and localization
 - single success = mastery.
 - app-specific score promoted directly to global mastery.
 - deep KT black box before enough clean labeled history exists.
+- promoting BKT/forgetting variants from retrospective fit alone without time-based held-out validation.
 - cloud/background function as semantic authority.
 
 ## Hold until evidence volume is sufficient
