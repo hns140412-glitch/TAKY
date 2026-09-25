@@ -1,0 +1,26 @@
+{
+  "schema": "TAKY_DATA_INDEX_RELATION_EXPANSION_TASK_CONTRACT_V1",
+  "date": "2026-09-25",
+  "status": "IMPLEMENTATION_SLICE",
+  "source_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "input_pipeline": "D5_RRF_HYBRID_V1",
+  "output": "D5_RESULTS_PLUS_NON_AUTHORITATIVE_RELATED_RESULTS",
+  "relation_scope": [
+    "EXACT_DUPLICATE_OF"
+  ],
+  "forbidden_inference": [
+    "TEMPORAL_GROUP_TO_RELATION",
+    "SOURCE_FAMILY_TO_RELATION",
+    "TITLE_SIMILARITY_TO_RELATION",
+    "SEMANTIC_SCORE_TO_RELATION"
+  ],
+  "guards": [
+    "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+    "RELATION_EXPANSION_DOES_NOT_CHANGE_D5_RANK",
+    "STRUCTURED_FILTER_APPLIES_TO_RELATED_RESULTS",
+    "MINING != INDEXING",
+    "INDEXING != LEARNING"
+  ]
+}
