@@ -1,5 +1,8 @@
 'use strict';
 
+const AUTHORITY='COMPATIBILITY_ONLY';
+const CANONICAL_REPLAY_BUILDER='../replay/replay-dataset.js';
+
 const clean=v=>String(v??'').trim();
 const REQUIRED=['event_id','observed_at','member_id','subject','concept_skill_target','evidence_type','source_app','instrument_version'];
 
@@ -74,6 +77,8 @@ function buildReplayDataset(events=[],options={}){
 
   return {
     ok:invalid.length===0&&duplicates.length===0,
+    authority:AUTHORITY,
+    canonical_replay_builder:CANONICAL_REPLAY_BUILDER,
     dataset_contract:'TAKY_LEARNING_REPLAY_DATASET_V1',
     synthetic,
     promotion_eligible:false,
@@ -95,6 +100,8 @@ function stripInternal(e){const x={...e};delete x.__time;return x;}
 function selfValidate(ds){
   const issues=[];
   if(!ds||ds.dataset_contract!=='TAKY_LEARNING_REPLAY_DATASET_V1') issues.push('CONTRACT_MISSING');
+  if(ds?.authority!==AUTHORITY) issues.push('COMPATIBILITY_AUTHORITY_MISSING');
+  if(ds?.canonical_replay_builder!==CANONICAL_REPLAY_BUILDER) issues.push('CANONICAL_REPLAY_POINTER_MISSING');
   if(ds?.promotion_eligible!==false) issues.push('AUTO_PROMOTION_FORBIDDEN');
   if((ds?.duplicate_event_ids||[]).length) issues.push('DUPLICATE_EVENT_ID');
   for(const g of ds?.groups||[]){
@@ -107,4 +114,4 @@ function selfValidate(ds){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({validateEvent,buildReplayDataset,selfValidate});
+module.exports=Object.freeze({AUTHORITY,CANONICAL_REPLAY_BUILDER,validateEvent,buildReplayDataset,selfValidate});
