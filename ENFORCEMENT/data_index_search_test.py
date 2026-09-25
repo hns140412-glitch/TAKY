@@ -157,4 +157,30 @@ with tempfile.TemporaryDirectory() as tmp:
     data = json.loads(cli.stdout)
     assert data["results"][0]["source_id"] == "SRC-001"
 
+# 11. default family diversification caps same-family results at 3
+family_records = [
+    normalize_record(
+        {
+            "source_id": f"FAM-{i:02d}",
+            "title": f"Architecture item {i}",
+            "source_family": "ARCHITECTURE_WORK_SOURCE" if i < 5 else f"OTHER_FAMILY_{i}",
+            "source_type": "REFERENCE",
+            "authority_level": "REFERENCE_ONLY",
+        }
+    )
+    for i in range(8)
+]
+r = search(family_records, "Architecture", limit=8, relation_depth=0)
+families = [x["source_family"] for x in r["results"]]
+assert families.count("ARCHITECTURE_WORK_SOURCE") <= 3
+assert r["family_cap_applied"] is True
+assert r["family_cap"] == 3
+
+# 12. explicit family request lifts the default family cap
+r = search(family_records, "ARCHITECTURE_WORK_SOURCE", limit=8, relation_depth=0)
+families = [x["source_family"] for x in r["results"]]
+assert families.count("ARCHITECTURE_WORK_SOURCE") == 5
+assert r["family_cap_applied"] is False
+assert r["family_cap"] is None
+
 print("data_index_search: PASS")
