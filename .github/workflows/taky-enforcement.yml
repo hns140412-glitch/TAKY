@@ -194,6 +194,8 @@ jobs:
         run: node LEARNING/runtime/decision-contract.test.js
       - name: Validate pedagogical feedback intent
         run: node LEARNING/pedagogy/feedback-intent.test.js
+      - name: Validate adaptive learning plan intent
+        run: node LEARNING/pedagogy/adaptive-plan-contract.test.js
       - name: Validate Learning Engine estimator benchmark lane
         run: node LEARNING/benchmark/estimator-benchmark.test.js
       - name: Validate estimator promotion policy
