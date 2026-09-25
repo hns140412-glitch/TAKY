@@ -10,6 +10,7 @@ from pathlib import Path
 from strategy_failure_memory import prepare_next_run
 from mining_goal_decomposition import apply_to_task
 from mining_depth_router import route_depth
+from mining_growth_loop import propose_growth
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
@@ -84,6 +85,7 @@ def orchestrate(payload: dict) -> dict:
         "plan": plan,
         "execution_receipt": receipt,
         "memory_learning_proposal": _learning_proposal(task, prior, receipt) if receipt else None,
+        "growth_proposal": propose_growth({"task_family":task.get("task_family"),"goal":task.get("goal"),"selected_route":route}, payload.get("outcome",{})) if payload.get("outcome") else None,
         "authority_guard": {
             "current_authority_unchanged": True,
             "memory_auto_promotion": False,
