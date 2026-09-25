@@ -41,6 +41,10 @@ def build(record: dict) -> dict:
         ]),
         "change_scope": {
             "allowed": record["allowed_change_scope"],
+            "preserve": record.get(
+                "preserve_change_scope",
+                wm.get("protected_state", []),
+            ),
             "forbidden": record.get("forbidden_change_scope", [
                 "unrelated_refactor",
                 "silent_requirement_change",
