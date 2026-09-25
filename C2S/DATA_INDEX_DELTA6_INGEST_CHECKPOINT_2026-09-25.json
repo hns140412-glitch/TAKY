@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_DATA_INDEX_DELTA6_INGEST_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "status": "DELTA6_VERIFIED__PROMOTION_REQUIRED",
+  "base_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "base_total": 666,
+  "accepted_delta_count": 6,
+  "candidate_total": 672,
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "ci": {
+    "run_id": 36131436577,
+    "head": "fa9332883df42219c4abb99925936970e48aeed6",
+    "result": "SUCCESS"
+  },
+  "delta_groups": {
+    "learning_pdf_sources": 2,
+    "image_edit_prompt_capture_sources": 4
+  },
+  "sources": [
+    "1tg5X0aoJkBUCXLcGmV-OEgTVDud65fcd",
+    "1j20aPIXSl8Ll6TbamvJVo7ez2iPt1wJB",
+    "1PKL4w7XOtKBPhPEejKkHoGkDRhOSrGv5",
+    "1esFLtkP-2QaQM7AoeSi0U7gWR7D5EFj7",
+    "1th-m_QOgy_P6clXhAZrQcdVAynqD4IGk",
+    "1RAQ13s0fMdE17Jk9-baOnBsochodEM1a"
+  ],
+  "promotion": {
+    "required": true,
+    "executed": false,
+    "rationale": "Six verified source IDs are absent from both V24 and DATA_SOURCE_INDEX_V4 and passed incremental ingest regression.",
+    "next": "BUILD_CANONICAL_SOURCE_INDEX_AND_UTILIZATION_CURRENT_DELTA_PROMOTION"
+  },
+  "guards": [
+    "CURRENT_V24_REMAINS_UNTIL_EXPLICIT_PROMOTION",
+    "CANDIDATE_672 != CURRENT_672",
+    "NO_FULL_REINDEX",
+    "NO_NETLIFY",
+    "USER != DEBUGGER"
+  ]
+}
