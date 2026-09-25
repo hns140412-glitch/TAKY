@@ -75,3 +75,15 @@ const broken=JSON.parse(JSON.stringify(second.receipt));
 broken.parent_receipt_id='wrong';
 assert.equal(R.validateReceiptChain([first.receipt,broken]).ok,false);
 assert.equal(R.validateReceiptChain([first.receipt,broken]).issues[0].startsWith('PARENT_RECEIPT_MISMATCH'),true);
+
+const targetRows=[
+  {...ev('t1',29,1),learning_target_id:'word:essential'},
+  {...ev('t2',30,0),learning_target_id:'word:except'}
+];
+const targetIssued=R.issueBatchReceipt(targetRows,{created_at:'2026-09-30T00:00:00.000Z'});
+assert.equal(targetIssued.ok,true);
+const targetTampered=JSON.parse(JSON.stringify(targetRows));
+targetTampered[0].learning_target_id='word:changed';
+const targetCheck=R.validateBatchReceipt(targetIssued.receipt,targetTampered);
+assert.equal(targetCheck.ok,false);
+assert.equal(targetCheck.issues.includes('EVIDENCE_DIGEST_MISMATCH'),true);
