@@ -1,0 +1,30 @@
+{
+  "schema": "TAKY_DATA_INDEX_CURRENT_V25_RECONCILIATION_V1",
+  "date": "2026-09-25",
+  "status": "RECONCILED",
+  "issue": "CURRENT contained stale V24 invariants and pre-promotion source_refs after V25 promotion.",
+  "corrected_authority": {
+    "utilization_v25": {
+      "name": "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
+      "id": "1ePONYrWt0MLC6lovuIlhsm1cl32UT6WeelQmc1YetIs"
+    },
+    "source_index_v5": {
+      "name": "DATA_SOURCE_INDEX_2026-09-25_V5.json",
+      "id": "1xYRw898zSObt_4gTHe0r54PlvjweXr7SPyRqgH_vqD8"
+    },
+    "current_pointer_id": "1JNvFBrmY7H-j6v1WX1G3qGbieS7BR8Qbt4O54D1mNcU",
+    "promotion_receipt_id": "1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU"
+  },
+  "corpus": {
+    "prior": 666,
+    "delta": 6,
+    "current": 672,
+    "semantic_resolved": 670,
+    "holds": 2
+  },
+  "duplicate_cleanup": {
+    "accidental_copy_source_index_deleted": "1wJDvC4ZJjTDdqDlqg8DSweKHZUSIWMrYzMOQnQZxHDE",
+    "accidental_copy_utilization_index_deleted": "1qp2M-MVABrfUPVECL8tATdzTK3TAsLt5X9tKUKnyykA"
+  },
+  "next": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY"
+}
