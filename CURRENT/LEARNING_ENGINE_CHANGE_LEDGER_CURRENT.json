@@ -245,6 +245,26 @@
         "MANUAL_REVIEW",
         "DEPENDENCY_CLOSED"
       ]
+    },
+    {
+      "entry_id": "apply:concept-dependency-graph-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Concept prerequisite and dependency graph",
+      "description": "Implemented declared-source concept dependency graph and pedagogical readiness signals; automatic prerequisite inference from sparse learner data remains forbidden.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:006",
+      "evidence_refs": [
+        "LEARNING/domain-model/concept-dependency-graph.js",
+        "LEARNING/domain-model/concept-dependency-graph.test.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/domain-model/concept-dependency-graph.js",
+      "created_at": "2026-09-25T07:05:00.000Z",
+      "parent_entry_id": "hold:bkt-calibration-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
