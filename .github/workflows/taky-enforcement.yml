@@ -188,6 +188,8 @@ jobs:
         run: node SHARED/runtime/exploration-event.test.js
       - name: Validate shared achievement decision
         run: node SHARED/runtime/achievement-decision.test.js
+      - name: Validate shared crew registry
+        run: node SHARED/runtime/crew-registry.test.js
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
