@@ -20,7 +20,18 @@ for(const required of [
 ]){
   assert.equal(titles.has(required),true,'missing retained change: '+required);
 }
-assert.equal(L.pending(ledger).length>=5,true);
+const pending=L.pending(ledger);
+assert.equal(pending.length>=3,true);
+assert.equal(pending.some(x=>x.title==='Forgetting and retention estimator'),true);
+assert.equal(pending.some(x=>x.title==='Calibrated BKT estimator'),true);
+assert.equal(pending.some(x=>x.title==='Concept prerequisite and dependency graph'),true);
+
+const reflectionHistory=ledger.entries.filter(x=>x.title==='Metacognitive self-reflection evidence');
+assert.equal(reflectionHistory.some(x=>x.state==='HOLD'),true);
+assert.equal(reflectionHistory.some(x=>x.state==='APPLIED'),true);
+const feedbackHistory=ledger.entries.filter(x=>x.title==='Pedagogical feedback intent');
+assert.equal(feedbackHistory.some(x=>x.state==='HOLD'),true);
+assert.equal(feedbackHistory.some(x=>x.state==='APPLIED'),true);
 assert.equal(ledger.entries.every(x=>x.retention==='IMMUTABLE_HISTORY'),true);
 
 console.log('LEARNING_CHANGE_LEDGER_CURRENT_PASS');
