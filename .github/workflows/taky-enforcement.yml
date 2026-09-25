@@ -179,6 +179,8 @@ jobs:
       - name: Validate Learning Engine estimator benchmark lane
         run: node LEARNING/benchmark/estimator-benchmark.test.js
       - name: Validate Learning Engine replay dataset contract
+        run: node LEARNING/replay/replay-dataset.test.js
+      - name: Validate Learning Engine replay dataset contract
         run: node LEARNING/data/replay-dataset-builder.test.js
       - name: Validate Learning Engine evidence normalizer
         run: node LEARNING/data/evidence-normalizer.test.js
