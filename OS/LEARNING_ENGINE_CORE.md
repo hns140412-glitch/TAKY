@@ -281,4 +281,38 @@ Promotion requires real replay evidence and all of:
 No candidate may self-promote.
 Model promotion requires a new validated CURRENT decision.
 
+## 13. Real evidence replay dataset contract
+
+Raw learning evidence is never promoted directly into estimator training/evaluation.
+
+Canonical replay flow:
+
+RAW EVIDENCE
+-> semantic validation
+-> scope isolation
+-> instrument/version preservation
+-> label classification
+-> chronological normalization
+-> time-held-out split
+-> candidate benchmark
+-> calibration/error analysis
+-> promotion review
+
+Replay rules:
+- CHILD_SELF_REPORT remains OBSERVATION_ONLY unless independently verified by a permitted performance source.
+- Missing or ambiguous outcome is OBSERVATION_ONLY, not failure.
+- Duplicate event_id is deduplicated.
+- Different member / subject / concept_skill_target evidence cannot enter the same skill replay.
+- Instrument-version changes are preserved and must be surfaced at the train/holdout boundary.
+- Raw evidence remains immutable; replay records are derived projections.
+- Only VERIFIED_TARGET rows may be scored as prediction targets.
+- Time order must be preserved; random split is not the default.
+- Real-evidence replay and synthetic fixtures must be provenance-distinguishable.
+
+Authoritative schema:
+- LEARNING/replay/learning-replay-dataset.schema.json
+
+Validator/builder:
+- LEARNING/replay/replay-dataset.js
+
 END
