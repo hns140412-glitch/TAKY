@@ -1,0 +1,67 @@
+{
+  "schema": "TAKY_DATA_INDEX_FULL_CONTRACT_AUTHORITY_FIXTURE_V1",
+  "generated_from_drive_authority": true,
+  "generated_at": "2026-09-25",
+  "projection_authoritative": false,
+  "authority_refs": {
+    "current": {
+      "id": "1JNvFBrmY7H-j6v1WX1G3qGbieS7BR8Qbt4O54D1mNcU",
+      "schema": "TAKY_DATA_UTILIZATION_INDEXING_CURRENT_POINTER_V2"
+    },
+    "schema_contract": {
+      "id": "1tGde9cw6lgnxlaC3Cnq0SfTFja_ta3R8cmavxdfmOCw",
+      "schema": "TAKY_DATA_INDEX_SCHEMA_CONTRACT_V1"
+    },
+    "compatibility_map": {
+      "id": "1Thb8T8NKhfNkwA7ZQwN0xaR30BLinnDSSP8G9pZuI-I",
+      "schema": "TAKY_DATA_INDEX_COMPATIBILITY_MAP_V1"
+    },
+    "role_contract": {
+      "id": "1CQbKPr4uKXvy8F3SCfIbdQ1FvuCcpeG7IDGSZq2MpR4",
+      "schema": "TAKY_MINING_INDEXING_LEARNING_ROLE_CONTRACT_V1"
+    }
+  },
+  "expected": {
+    "current_name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "current_id": "1wy2H6INwj45EzV4k2nI9mPoqlbTPi3Hbf3zvG_Rwc0M",
+    "corpus_total": 666,
+    "index_l1_coverage": 666,
+    "semantic_resolved": 664,
+    "content_access_holds": 2,
+    "migration_mode": "INCREMENTAL_ON_TOUCH_OR_QUERY",
+    "full_reindex_required": false,
+    "source_reindex_all": false,
+    "search_projection_authoritative": false,
+    "current_rule": "EXPLICIT_POINTER_PROMOTION_ONLY",
+    "search_pipeline": [
+      "STRUCTURED_FILTER",
+      "LEXICAL_RETRIEVAL",
+      "SEMANTIC_RETRIEVAL",
+      "RANK_FUSION",
+      "RELATION_EXPANSION",
+      "DETAIL_FETCH",
+      "RAW_FETCH_IF_NEEDED"
+    ],
+    "role_boundary": {
+      "mining_engine": "SOURCE_DISCOVERY_AND_ACQUISITION",
+      "indexing": "ORGANIZE_CLASSIFY_RELATE_AND_RETRIEVE",
+      "learning_engine": "DECIDE_HOW_INDEXED_EVIDENCE_IS_USED"
+    },
+    "required_guards": [
+      "RAW_IS_IMMUTABLE_SOURCE",
+      "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+      "TEMPORAL_GROUP != SOURCE_FAMILY",
+      "CURRENT_POINTER != NEWEST_FILENAME",
+      "MINING != INDEXING",
+      "INDEXING != LEARNING",
+      "USER != DEBUGGER"
+    ],
+    "held_oversize_ids": [
+      "1bnDccQ1aDJf5Y7bDiA-9kUJ0LZ-c-sYy",
+      "114osqcmcJAaVDecmpkneNdCgcD4JRRto"
+    ],
+    "netlify": "NONE",
+    "deployment": "NONE"
+  },
+  "note": "Compact regression fixture derived from Drive authority; not a replacement for authority documents."
+}
