@@ -15,6 +15,8 @@ on:
       - 'LEARNING/runtime/evidence-gap.test.js'
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+      - 'LEARNING/lifecycle/outcome-growth-feedback.js'
+      - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
       - 'ENFORCEMENT/reference_intake_executor.py'
@@ -38,6 +40,8 @@ jobs:
         run: node LEARNING/intake/indexed-evidence-handoff.test.js
       - name: Learning evidence gap emitter
         run: node LEARNING/runtime/evidence-gap.test.js
+      - name: Outcome growth feedback
+        run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
       - name: Learning runtime policy integration
         run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
       - name: Existing learner state regression
