@@ -64,7 +64,7 @@ State: `PARTIAL`
 
 Repository: `hns140412-glitch/Snap-Pop`  
 Draft PR: #8  
-Exact head: `9f0fe438233d149840baf7ed23449925e4e9fad1`
+Exact head: `909018cf22bbff746bf4a6896dbd0561d09a8b49`
 
 World / Theme:
 - reviewed runtime scene `assets/world/golden_world_scene.jpg` explicitly bound;
@@ -73,6 +73,8 @@ World / Theme:
 - reference-board direct runtime binding forbidden;
 - automatic asset promotion forbidden;
 - automatic RELEASE PASS forbidden.
+- `assets/character/character_master_hd.jpg` and `assets/guide/maltipoo_guide_hd.jpg` are initial lineage assets, NOT reviewed individual Crew binding evidence.
+- Ready Core 6 Visual IDs SHALL NOT be auto-imported into Snap; project visual authority is owner-scoped.
 
 Crew Visual:
 - `OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET`.
@@ -80,7 +82,7 @@ Crew Visual:
 - Only bind when a genuinely reviewed/approved individual Crew/Character asset exists.
 
 CI:
-- Validate Snap & Pop = SUCCESS
+- Validate Snap & Pop = CI PENDING RECHECK for hardened exact head
 
 Remaining OPEN:
 - reviewed individual Crew/Character asset binding;
