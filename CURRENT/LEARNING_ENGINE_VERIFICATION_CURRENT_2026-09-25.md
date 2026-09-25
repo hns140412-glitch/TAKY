@@ -183,6 +183,55 @@ Not promoted:
 - scheduling authority remains false
 - candidate remains HOLD in change ledger pending enough real verified retrieval targets and promotion-policy pass
 
+
+## Learner State V2 integration audit
+
+Integrated runtime axes:
+- evidence sufficiency
+- personal trend
+- retention / forgetting risk baseline
+- item-scoped recovery
+- assistance dependence
+- self-reported confusion / metacognition
+- declared prerequisite readiness
+- instrument drift
+
+These axes remain separate signals. They are not collapsed into one opaque score.
+
+Unified runtime entry:
+- LEARNING/runtime/decision-contract.js
+
+Runtime Decision Contract:
+- receives learner state + pedagogical feedback intent + optional prerequisite readiness;
+- resolves priority/conflicts;
+- emits pedagogical action intent only;
+- HOLDs interpretation when evidence is absent or instrument drift invalidates comparison;
+- keeps sparse evidence as advisory rather than fabricating certainty;
+- Ready may translate intent to execution plan;
+- Planner alone owns dated allocation;
+- specialist apps own interaction execution/evidence.
+
+Recovery correction:
+- item recovery episodes now require verified_outcome + LEARNING_VERIFICATION_RECEIPT;
+- learning_target_id alone is insufficient;
+- unverified target events remain excluded.
+
+No-loss automatic real-evidence evaluation:
+- every valid REAL_LEARNING_EVIDENCE_RECEIPT is evaluated and retained, even below replay minimum;
+- below-minimum results are recorded as HOLD rather than discarded;
+- identical receipt/report replay is deduplicated;
+- new receipts remain independently traceable.
+
+Validation checkpoint:
+- exact HEAD ba7e1e70336f56d38bd81b48c31894998676013c
+- TAKY Enforcement run 36106173148: SUCCESS
+- unified runtime decision contract: SUCCESS
+- verified-only recovery regression: SUCCESS
+- retention baseline: SUCCESS
+- calibrated BKT candidate: SUCCESS
+- prerequisite graph + candidate retention: SUCCESS
+- no-loss ledgers / CURRENT retention: SUCCESS
+
 ## Remaining OPEN
 
 1. Accumulate enough real verified retrieval targets per concept_skill_target for retention-candidate promotion review.
