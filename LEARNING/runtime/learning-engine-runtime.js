@@ -7,6 +7,7 @@ const Decision=require('./decision-contract.js');
 const EvidencePolicy=require('../policy/evidence-policy-bridge.js');
 const IndexedEvidence=require('../intake/indexed-evidence-handoff.js');
 const EvidenceGap=require('./evidence-gap.js');
+const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -108,6 +109,34 @@ function derive(input={}){
   };
 }
 
+function applyOutcome({runtime_result={},outcome={},index_gap_route=null}={}){
+  if(runtime_result?.ok!==true){
+    return {ok:false,reason:'VALID_RUNTIME_RESULT_REQUIRED'};
+  }
+  const feedback=OutcomeFeedback.derive({
+    outcome,
+    prior_decision:runtime_result.decision||{},
+    prior_evidence_gap:runtime_result.evidence_gap||null,
+    index_gap_route
+  });
+  const checked=OutcomeFeedback.validate(feedback);
+  if(!checked.ok){
+    return {ok:false,reason:'OUTCOME_FEEDBACK_INVALID',issues:checked.issues,feedback};
+  }
+  return {
+    ok:true,
+    engine_runtime:VERSION,
+    authority:'TAKY_LEARNING_ENGINE_CORE',
+    scope:runtime_result.scope||null,
+    outcome_feedback:feedback,
+    trace:{
+      prior_evidence_gap_id:runtime_result.evidence_gap?.gap_id||null,
+      index_gap_decision:index_gap_route?.decision||null,
+      mining_strategy_feedback_candidate:!!feedback.mining_strategy_feedback_candidate
+    }
+  };
+}
+
 function validate(result={}){
   const issues=[];
   if(result?.ok!==true)issues.push('RUNTIME_NOT_OK');
@@ -134,4 +163,4 @@ function validate(result={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,derive,validate});
+module.exports=Object.freeze({VERSION,derive,applyOutcome,validate});
