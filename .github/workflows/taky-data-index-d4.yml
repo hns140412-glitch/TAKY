@@ -10,6 +10,10 @@ on:
       - 'PROJECTIONS/data_index_semantic_projection_test.py'
       - 'PROJECTIONS/data_index_hybrid_search.py'
       - 'PROJECTIONS/data_index_hybrid_search_test.py'
+      - 'PROJECTIONS/data_index_relation_expansion.py'
+      - 'PROJECTIONS/data_index_relation_expansion_test.py'
+      - 'PROJECTIONS/fixtures/data_index_v24_relation_projection.json'
+      - 'C2S/DATA_INDEX_RELATION_EXPANSION_TASK_CONTRACT_2026-09-25.json'
       - 'PROJECTIONS/fixtures/data_index_v24_semantic_projection.json'
       - 'ENFORCEMENT/data_index_search.py'
       - 'ENFORCEMENT/data_index_search_test.py'
@@ -37,9 +41,13 @@ jobs:
           python -m py_compile PROJECTIONS/data_index_semantic_projection_test.py
           python -m py_compile PROJECTIONS/data_index_hybrid_search.py
           python -m py_compile PROJECTIONS/data_index_hybrid_search_test.py
+          python -m py_compile PROJECTIONS/data_index_relation_expansion.py
+          python -m py_compile PROJECTIONS/data_index_relation_expansion_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
         run: python PROJECTIONS/data_index_semantic_projection_test.py
       - name: Validate D5 hybrid retrieval suite
         run: python PROJECTIONS/data_index_hybrid_search_test.py
+      - name: Validate relation expansion suite
+        run: python PROJECTIONS/data_index_relation_expansion_test.py
