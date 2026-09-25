@@ -49,15 +49,15 @@
     ]
   },
   "sp_badge_008": {
-    "status": "PARTIAL",
+    "status": "IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
     "repo": "hns140412-glitch/Snap-Pop",
     "pr": 8,
-    "head_sha": "909018cf22bbff746bf4a6896dbd0561d09a8b49",
+    "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
     "ci": {
       "Validate Snap & Pop": "SUCCESS"
     },
     "world_theme_binding": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
-    "crew_visual_binding": "OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET",
+    "crew_visual_binding": "IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
     "implemented": [
       "reviewed runtime world visual binding for assets/world/golden_world_scene.jpg",
       "assets/reference/approved_visual_source.png remains reference lineage only",
@@ -65,10 +65,14 @@
       "automatic asset promotion forbidden",
       "automatic release pass forbidden",
       "initial character_master_hd.jpg and maltipoo_guide_hd.jpg explicitly forbidden as approved Crew binding evidence",
-      "Ready Core 6 cross-app auto import forbidden because project visual authority is owner-scoped"
+      "Ready Core 6 cross-app auto import forbidden because project visual authority is owner-scoped",
+      "Snap-owned Crew Asset Approval Gate/Registry implemented",
+      "approved Crew runtime binding requires owner=snap-pop",
+      "approved Crew runtime binding requires APPROVED_RUNTIME_ASSET + user confirmation + review evidence",
+      "implementation readiness is separated from content approval state"
     ],
     "open": [
-      "approved individual Crew/Character visual asset binding",
+      "actual Snap-owned reviewed/approved individual Crew/Character asset content approval",
       "merge decision for draft PR #8"
     ]
   },
@@ -99,8 +103,9 @@
   "next": [
     "preserve CLOSED items",
     "do not activate 60 historical catalog",
-    "resolve SP-BADGE-008 Crew reviewed asset only when an actually approved individual asset exists",
+    "treat SP-BADGE-008 code as implementation closed; do not reopen without regression evidence",
+    "keep Crew content in CONTENT_APPROVAL_HOLD until genuine Snap-owned approved asset evidence exists",
     "merge draft PRs only with intentional approval",
-    "after merges, verify exact main heads and rerun regressions before final CLOSED promotion"
+    "after merges, verify exact main heads and rerun regressions before final main CLOSED promotion"
   ]
 }
