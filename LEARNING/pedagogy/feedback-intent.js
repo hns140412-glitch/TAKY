@@ -38,6 +38,10 @@ function derive(state={}){
     addIntent('RETRIEVAL_CHECKPOINT','HIGH','RETENTION_AT_RISK');
   }
 
+  if(inferred.recovery_signal==='UNRESOLVED_RECOVERY'){
+    addIntent('TARGETED_RECOVERY_PRACTICE','HIGH','UNRESOLVED_RECOVERY');
+  }
+
   if(inferred.trend==='DECLINING'){
     addIntent('RETRIEVAL_CHECKPOINT','HIGH','DECLINING_MEMORY_TREND');
   }else if(inferred.trend==='IMPROVING'){
