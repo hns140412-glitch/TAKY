@@ -538,6 +538,59 @@
         "MANUAL_REVIEW",
         "REGRESSION_GREEN"
       ]
+    },
+    {
+      "entry_id": "apply:adaptive-plan-intent-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_RULE",
+      "title": "Core adaptive learning plan intent",
+      "description": "Learning Engine Core now emits an explicit adaptive plan intent for unit-span policy, retrieval checkpoints, recovery intensity, assistance fading and target learning IDs. Consumer apps may apply it but cannot derive learner-state policy or calendar dates from it.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/pedagogy/adaptive-plan-contract.js",
+      "evidence_refs": [
+        "LEARNING/pedagogy/adaptive-plan-contract.js",
+        "LEARNING/runtime/decision-contract.js",
+        "Ready-Set:src/learning/learning-engine-adapter-v2.js",
+        "Ready-Set:ready-learning-master-v01.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/pedagogy/adaptive-plan-contract.js",
+      "created_at": "2026-09-25T09:25:00.000Z",
+      "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
+    },
+    {
+      "entry_id": "hold:ready-embedded-learning-logic-extraction-v2",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Extract remaining Ready-embedded learning logic",
+      "description": "Core Decision -> Adaptive Plan -> Ready Adapter -> subject-unit reinterpretation -> Planner path is implemented. Remaining legacy logic is now compatibility-only for callers that still invoke reviewLearningEvidence/reviewEscalatedCarryOver without a Core decision.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "hold:ready-embedded-learning-logic-extraction-v1",
+      "evidence_refs": [
+        "LEARNING/pedagogy/adaptive-plan-contract.js",
+        "LEARNING/runtime/decision-contract.js",
+        "Ready-Set:src/learning/learning-engine-adapter-v2.js",
+        "Ready-Set:ready-integration-v1.js",
+        "Ready-Set:ready-learning-master-v01.js",
+        "Ready-Set:tests/core-adaptive-plan-integration.spec.js"
+      ],
+      "blockers": [
+        "LEGACY_CALLERS_WITHOUT_CORE_DECISION_REMAIN",
+        "LEGACY_COMPATIBILITY_REMOVAL_REQUIRES_FINAL_RUNTIME_REPLAY_GREEN"
+      ],
+      "destination": "LEARNING_ENGINE_CORE + READY_SET_ADAPTER",
+      "created_at": "2026-09-25T09:26:00.000Z",
+      "parent_entry_id": "apply:adaptive-plan-intent-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "DEPENDENCY_CLOSED",
+        "REGRESSION_GREEN",
+        "MANUAL_REVIEW"
+      ]
     }
   ]
 }
