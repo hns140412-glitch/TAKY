@@ -11,6 +11,9 @@ on:
       - 'LEARNING/policy/**'
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+      - 'ENFORCEMENT/reference_intake_executor.py'
+      - 'ENFORCEMENT/reference_intake_executor_test.py'
+      - 'ENFORCEMENT/runtime_orchestrator.py'
 
 jobs:
   integration-regression:
@@ -20,6 +23,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Evidence policy bridge
         run: node LEARNING/policy/evidence-policy-bridge.test.js
       - name: Learning runtime policy integration
@@ -28,3 +34,6 @@ jobs:
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Existing decision contract regression
         run: node LEARNING/runtime/decision-contract.test.js
+      - name: Reference intake disposition lifecycle
+        working-directory: ENFORCEMENT
+        run: python reference_intake_executor_test.py
