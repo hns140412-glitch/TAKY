@@ -26,6 +26,7 @@ function benchmarkReplay(dataset={}){
     authority:'REPLAY_BENCHMARK_ONLY',
     dataset_version:dataset.dataset_version,
     source_kind:dataset.provenance?.source_kind||null,
+    evidence_receipt_id:dataset.provenance?.evidence_receipt_id||null,
     scope:dataset.scope,
     verified_target_count:verified.length,
     observation_only_count:split.diagnostics.observation_only_count,
