@@ -7,6 +7,7 @@ const finite=v=>Number.isFinite(Number(v))?Number(v):null;
 function derive(rows=[]){
   const seq=(Array.isArray(rows)?rows:[])
     .filter(e=>clean(e.learning_target_id))
+    .filter(e=>(e.verified_outcome===0||e.verified_outcome===1)&&clean(e?.verification?.authority)==='LEARNING_VERIFICATION_RECEIPT')
     .filter(e=>Number.isFinite(Date.parse(e.observed_at||'')))
     .slice()
     .sort((a,b)=>Date.parse(a.observed_at)-Date.parse(b.observed_at)||clean(a.event_id).localeCompare(clean(b.event_id)));
@@ -15,7 +16,7 @@ function derive(rows=[]){
     return {
       ok:true,
       profile_version:VERSION,
-      status:'INSUFFICIENT_TARGET_IDENTITY',
+      status:(Array.isArray(rows)?rows:[]).some(e=>clean(e.learning_target_id))?'INSUFFICIENT_VERIFIED_TARGET_EVENTS':'INSUFFICIENT_TARGET_IDENTITY',
       target_count:0,
       recovery_episode_count:0,
       recovered_episode_count:0,
