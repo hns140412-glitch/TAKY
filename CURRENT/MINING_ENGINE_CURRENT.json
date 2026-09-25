@@ -11,6 +11,7 @@
   "verified_implementation_head": "cea03abb327ae3737ed0b64dd308ea9447980c22",
   "closure": "C2S/MINING_ENGINE_V2_CLOSURE_2026-09-25.md",
   "handoff": "HANDOFF/MINING_ENGINE_V2_NEW_CHAT_START_2026-09-25_LATEST.md",
+  "operations_handoff": "HANDOFF/MINING_ENGINE_OPERATIONS_NEW_CHAT_START_2026-09-25_LATEST.md",
   "live_capture": "ENFORCEMENT/mining_e2e_live_capture_2026-09-25.json",
   "reopen_rule": "ONLY_WITH_NEW_REGRESSION_OR_OPERATIONAL_EVIDENCE",
   "next_mode": "OPERATIONS",
@@ -19,6 +20,7 @@
     "outcome_ledger": "OPERATIONS/MINING_ENGINE_OUTCOME_LEDGER.json",
     "status": "OPEN",
     "progress": "0/12 REAL RUNS",
-    "rule": "ONLY_REAL_USER_OUTCOME_COUNTS"
+    "rule": "ONLY_REAL_USER_OUTCOME_COUNTS",
+    "next": "Verify official attachments, integrity and duplication for the 2026-09-01 Incheon elementary math/science constructed-response assessment package; keep AI Hub 71818 and NIKL 2025 corpus access holds without repeating blocked routes; prerequisite graph remains 0 PROMOTE / 24 HOLD / 0 REJECT."
   }
 }
