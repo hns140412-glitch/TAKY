@@ -14,6 +14,7 @@
       context_contract:VERSION,
       family_id:clean(input.family_id)||null,
       member_id:clean(input.member_id||input.child_id)||null,
+      actor_member_id:clean(input.actor_member_id)||null,
       profile_id:clean(input.profile_id)||null,
 
       assignment_id:clean(input.assignment_id)||null,
@@ -70,6 +71,7 @@
     return {
       family_id:c.family_id,
       member_id:c.member_id,
+      actor_member_id:c.actor_member_id,
       profile_id:c.profile_id,
       assignment_id:c.assignment_id,
       analysis_id:c.analysis_id,
@@ -86,7 +88,7 @@
     const p=search instanceof URLSearchParams?search:new URLSearchParams(String(search||'').replace(/^\?/,''));
     const raw={};
     for(const key of [
-      'family_id','member_id','profile_id','assignment_id','analysis_id','learning_unit_id','todo_id',
+      'family_id','member_id','actor_member_id','profile_id','assignment_id','analysis_id','learning_unit_id','todo_id',
       'session_id','task_id','lap_id','source_app','from_app','target_app','return_target','child_id'
     ]){
       const v=p.get(key); if(v)raw[key]=v;
