@@ -34,6 +34,14 @@ function derive(state={}){
     });
   }
 
+  if(inferred.retention_signal==='RETENTION_AT_RISK'){
+    intents.push({
+      intent:'RETRIEVAL_CHECKPOINT',
+      priority:'HIGH',
+      basis:'RETENTION_AT_RISK'
+    });
+  }
+
   if(inferred.trend==='DECLINING'){
     intents.push({
       intent:'RETRIEVAL_CHECKPOINT',
