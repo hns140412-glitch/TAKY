@@ -613,6 +613,34 @@
       "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v2",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "hold:ready-embedded-learning-logic-extraction-v3",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Extract remaining Ready-embedded learning logic",
+      "description": "Legacy learnerAdaptiveProfile, memoryConcern and legacy adaptive review calculation are physically isolated into src/learning/legacy-ready-learning-compat.js. Ready integration and ReadyLearningMaster no longer contain those thresholds/derivations. Default adaptive review is fail-closed without a Core decision. Final closure awaits the latest full Ready Runtime E2E.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "hold:ready-embedded-learning-logic-extraction-v2",
+      "evidence_refs": [
+        "Ready-Set:src/learning/legacy-ready-learning-compat.js",
+        "Ready-Set:ready-integration-v1.js",
+        "Ready-Set:ready-learning-master-v01.js",
+        "Ready-Set:tests/legacy-ready-learning-compat.test.js",
+        "Ready-Set:.github/workflows/runtime-e2e.yml"
+      ],
+      "blockers": [
+        "FINAL_READY_RUNTIME_E2E_GREEN_PENDING"
+      ],
+      "destination": "READY_SET_COMPATIBILITY_QUARANTINE",
+      "created_at": "2026-09-25T12:28:00.000Z",
+      "parent_entry_id": "apply:ready-core-decision-required-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "REGRESSION_GREEN",
+        "MANUAL_REVIEW"
+      ]
     }
   ]
 }
