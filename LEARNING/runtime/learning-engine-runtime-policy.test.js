@@ -73,6 +73,34 @@ assert.equal(indexed.evidence_policy.results[0].decision,'ALLOW');
 assert.equal(indexed.indexed_evidence.invariant,'INDEX_RETRIEVAL_METADATA_IS_CONTEXT_NOT_LEARNER_PERFORMANCE');
 assert.equal(indexed.learner_state.observed.unique_evidence_count,1,'indexed reference metadata must not become learner performance evidence');
 
+const sparse=Runtime.derive({
+  scope,
+  evidence:[{
+    ...evidence[0],
+    event_id:'sparse-1'
+  }]
+});
+assert.equal(sparse.ok,true);
+assert.equal(sparse.evidence_gap?.mining_request_authorized,false);
+
+const outcomeFeedback=Runtime.applyOutcome({
+  runtime_result:sparse,
+  outcome:{
+    verified_outcome:0,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-outcome-1'},
+    assistance:'ASSISTED',
+    assisted:true,
+    attempt_count:2,
+    source_app:'hide-seek',
+    learning_target_id:'word:a'
+  },
+  index_gap_route:{decision:'MINING_REQUEST',index_sufficient:false}
+});
+assert.equal(outcomeFeedback.ok,true);
+assert.equal(outcomeFeedback.outcome_feedback.learning_strategy_feedback.verified_target,true);
+assert.equal(!!outcomeFeedback.outcome_feedback.mining_strategy_feedback_candidate,true);
+assert.equal(outcomeFeedback.outcome_feedback.mining_strategy_feedback_candidate.promotion_authorized,false);
+
 const missingProvenance=Runtime.derive({
   scope,
   evidence,
