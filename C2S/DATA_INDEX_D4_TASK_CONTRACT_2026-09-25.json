@@ -1,0 +1,65 @@
+{
+  "schema": "TAKY_DATA_INDEX_D4_TASK_CONTRACT_V1",
+  "task_id": "DATA_INDEX_SEARCH_PROJECTION_D4_SEMANTIC_2026-09-25",
+  "repository": "hns140412-glitch/TAKY",
+  "target_branch": "taky/data-indexing-d4-semantic-2026-09-25",
+  "verified_base_head": "60b422d77889db8fd15ec32e0894ae7959dd0455",
+  "objective": "Add the smallest runnable semantic/vector retrieval projection over CURRENT V24-derived INDEX L1/DETAIL text and validate the six locked D4 stress queries without mutating authoritative data.",
+  "working_model": {
+    "primary_outcome": "Prove or reject semantic recall gain before D5 hybrid/RRF work.",
+    "priority_order": [
+      "CURRENT isolation",
+      "no RAW reread/reindex",
+      "semantic recall evidence",
+      "no D2/D3 regression",
+      "no authority leakage"
+    ],
+    "protected_state": [
+      "C2S/DATA_UTILIZATION_INDEXING_CURRENT_2026-09-24.json",
+      "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+      "RAW",
+      "existing D1/D2/D3 behavior"
+    ],
+    "rule_to_execution": [
+      "SEARCH_PROJECTION is derived and non-authoritative",
+      "semantic score never overrides authority/current state",
+      "CURRENT V24 only; historical V1..V23 excluded",
+      "no value_statement/function_ids/runtime utilization decisions in semantic corpus",
+      "D1/D2/D3 remain CLOSED unless regression evidence appears"
+    ],
+    "next_action": "Build CURRENT-derived projection fixture, add classic dense semantic-vector baseline, run locked D4 stress queries and existing search regression.",
+    "stop_conditions": [
+      "semantic recall does not add relevant candidates",
+      "exact/current isolation regresses",
+      "implementation requires RAW reread or CURRENT mutation",
+      "dependency/runtime cannot execute reproducibly"
+    ]
+  },
+  "allowed_change_scope": [
+    "new D4 semantic projection code",
+    "derived V24 metadata fixture",
+    "D4 tests/regression receipt on feature branch"
+  ],
+  "forbidden_changes": [
+    "CURRENT pointer mutation",
+    "V24 mutation",
+    "V25 creation/promotion",
+    "RAW mutation/reread",
+    "Netlify/deployment",
+    "D1/D2/D3 redesign",
+    "domain/learning policy decisions"
+  ],
+  "acceptance_tests": [
+    "existing ENFORCEMENT/data_index_search_test.py remains PASS",
+    "semantic corpus has 666 CURRENT records and contains no forbidden decision fields",
+    "six locked D4 stress queries execute lexical-vs-semantic comparison",
+    "semantic candidates improve relevant recall on at least one locked gap and do not alter exact/current boundaries",
+    "projection remains explicitly non-authoritative"
+  ],
+  "required_validation_commands": [
+    "python ENFORCEMENT/data_index_search_test.py",
+    "python PROJECTIONS/data_index_semantic_projection_test.py",
+    "python PROJECTIONS/data_index_semantic_regression.py --fixture PROJECTIONS/fixtures/data_index_v24_semantic_projection.json"
+  ],
+  "human_approval_requirements": "No merge/current promotion/deployment in this task. Feature-branch implementation and validation only."
+}
