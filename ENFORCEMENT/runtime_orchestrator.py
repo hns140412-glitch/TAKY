@@ -20,6 +20,7 @@ from execution_checkpoint import guard as guard_checkpoint
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
+from trace_to_regression import build_case as build_regression_case
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -163,6 +164,12 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             if not learning_gap_result.get("pass"):
                 detected.extend(learning_gap_result.get("detected", []))
 
+    regression_capture_result = None
+    regression_event = effective_record.get("regression_capture")
+    if isinstance(regression_event, dict):
+        regression_capture_result = build_regression_case(regression_event)
+        detected.extend(regression_capture_result.get("detected", []))
+
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
         task_contract_result = build_codex_task_contract(record)
@@ -218,6 +225,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
+        "regression_capture": regression_capture_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "reference_intake_fetch_verified": False,
         "reference_intake_persistence_verified": bool(
