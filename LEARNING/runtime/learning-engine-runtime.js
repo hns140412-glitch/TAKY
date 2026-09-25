@@ -4,12 +4,24 @@ const Core=require('./learner-state-core.js');
 const Feedback=require('../pedagogy/feedback-intent.js');
 const Graph=require('../domain-model/concept-dependency-graph.js');
 const Decision=require('./decision-contract.js');
+const EvidencePolicy=require('../policy/evidence-policy-bridge.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
 function derive(input={}){
   const evidence=Array.isArray(input.evidence)?input.evidence:[];
   const scope=input.scope||{};
+
+  const policyRequests=Array.isArray(input.evidence_policy_requests)?input.evidence_policy_requests:[];
+  const evidencePolicy=EvidencePolicy.evaluateBatch(policyRequests);
+  if(policyRequests.length && !evidencePolicy.ok){
+    return {
+      ok:false,
+      reason:'EVIDENCE_POLICY_DENIED',
+      evidence_policy:evidencePolicy
+    };
+  }
+
   const learnerState=Core.deriveSkillState(evidence,scope,input.state_options||{});
   if(!learnerState.ok)return {ok:false,reason:'LEARNER_STATE_FAILED',detail:learnerState};
 
@@ -43,13 +55,17 @@ function derive(input={}){
     learner_state:learnerState,
     feedback_intent:feedback,
     prerequisite_readiness:readiness,
+    evidence_policy:evidencePolicy,
     decision,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
       learner_state_version:learnerState.core_version||null,
       feedback_contract:feedback.intent_contract||null,
       graph_version:readiness?.graph_version||null,
-      decision_contract:decision.decision_contract||null
+      decision_contract:decision.decision_contract||null,
+      evidence_policy_bridge:evidencePolicy.bridge_version||null,
+      evidence_policy_version:evidencePolicy.policy_version||null,
+      evidence_policy_ids:evidencePolicy.results.map(x=>x.policy_id).filter(Boolean)
     },
     cannot_influence:[
       'SCHEDULE_DATE',
@@ -69,6 +85,7 @@ function validate(result={}){
   if(result.learner_state&&!Core.selfValidate(result.learner_state).ok)issues.push('LEARNER_STATE_INVALID');
   if(result.feedback_intent&&!Feedback.validate(result.feedback_intent).ok)issues.push('FEEDBACK_INVALID');
   if(result.prerequisite_readiness&&!Graph.validateReadiness(result.prerequisite_readiness).ok)issues.push('READINESS_INVALID');
+  if(result.evidence_policy&&result.evidence_policy.ok!==true)issues.push('EVIDENCE_POLICY_INVALID');
   if(result.decision&&!Decision.validate(result.decision).ok)issues.push('DECISION_INVALID');
 
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
