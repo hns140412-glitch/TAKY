@@ -1,0 +1,51 @@
+{
+  "schema": "TAKY_PREREQUISITE_TARGETED_GAP_REVIEW_V1",
+  "date": "2026-09-25",
+  "targets": [
+    {
+      "edge": "STC-R002",
+      "source": "4수01-13 decimal concept/place-value entry",
+      "target": "6수01-15 decimal division",
+      "new_evidence": [
+        {
+          "source": "KCI 2026 Tier 2 RTI decimal division study",
+          "design": "AB single-case, 3 sixth-grade at-risk students, 13 intervention sessions",
+          "finding": "decimal division achievement improved markedly and maintenance remained >=80%",
+          "evidence_class": "TARGET_INTERVENTION_EFFECTIVENESS"
+        },
+        {
+          "source": "HiJUMP math remedial resource map",
+          "finding": "4수 decimal topics and 6수01-15 decimal division are explicitly represented as remediation resources",
+          "evidence_class": "RESOURCE_SEQUENCE_AND_COVERAGE_SIGNAL"
+        }
+      ],
+      "verdict": "HOLD",
+      "reason": "Target intervention effectiveness is supported, but no verified study isolates 4수01-13 mastery/remediation as a necessary causal precursor to 6수01-15 improvement."
+    },
+    {
+      "edge_group": "6수01-06/07 -> 6수01-08",
+      "new_evidence": [
+        {
+          "source": "fraction intervention/tutor literature",
+          "finding": "equivalence/common-denominator instruction is commonly sequenced before unlike-denominator addition and can be measured before/after intervention",
+          "evidence_class": "INSTRUCTIONAL_SEQUENCE_AND_MECHANISM_SIGNAL"
+        }
+      ],
+      "verdict": "HOLD",
+      "reason": "Sequence/mechanism evidence is stronger than before but not enough to prove a curriculum-edge necessary cause for the TAKY prerequisite graph."
+    }
+  ],
+  "promote_evidence_requirement": [
+    "same-learner pretest shows source-skill deficit",
+    "source-skill-specific intervention changes source mastery",
+    "target performance changes after source intervention",
+    "target gain is not explained only by direct target teaching",
+    "skill mapping is semantically aligned to the exact TAKY source and target standards"
+  ],
+  "global_state": "0_PROMOTE_24_HOLD_0_REJECT",
+  "guards": [
+    "TARGET_INTERVENTION_EFFECT != SOURCE_TO_TARGET_CAUSALITY",
+    "RESOURCE_ORDER != NECESSARY_PREREQUISITE",
+    "TOPIC_REMEDIATION != EDGE_CAUSAL_PROOF"
+  ]
+}
