@@ -1,0 +1,73 @@
+{
+  "schema": "TAKY_NIKL_WORD_SENSE_2025_ACCESS_AND_INTERSECTION_PLAN_V1",
+  "date": "2026-09-25",
+  "source": {
+    "title": "어휘 의미 분석 말뭉치 2025",
+    "publisher": "국립국어원 모두의 말뭉치",
+    "release_date": "2026-06-30",
+    "version": "1.0",
+    "function": "다의어를 구별하여 우리말샘 의미 번호를 부착한 말뭉치"
+  },
+  "access_state": {
+    "corpus_list_visible": true,
+    "request_entry_visible": true,
+    "preview_entry_visible": true,
+    "pc_download_required": true,
+    "current_service_notice": "일부 기능 장애로 신청 불가 안내가 노출됨",
+    "direct_public_bulk_download": false,
+    "verdict": "ACCESS_AVAILABLE_IN_PRINCIPLE__CURRENT_REQUEST_FLOW_TEMPORARILY_DEGRADED"
+  },
+  "current_taky_ambiguity": {
+    "total": 209,
+    "classes": {
+      "MULTI_POS_CONTEXT_REQUIRED": 26,
+      "GRADE_FILTER_UNIQUE_CANDIDATE": 82,
+      "SAME_POS_MULTI_HOMONYM_CONTEXT_REQUIRED": 92,
+      "APPLICABILITY_REVIEW_NO_GRADE_COMPATIBLE": 9
+    }
+  },
+  "intersection_plan": {
+    "first_priority_classes": [
+      "SAME_POS_MULTI_HOMONYM_CONTEXT_REQUIRED",
+      "MULTI_POS_CONTEXT_REQUIRED"
+    ],
+    "initial_surface_targets": [
+      "가장",
+      "고르다",
+      "구하다",
+      "그리다",
+      "말",
+      "맞다",
+      "맞히다",
+      "바르다",
+      "보다",
+      "세다"
+    ],
+    "batch_size": 50,
+    "match_keys": [
+      "surface_form",
+      "pos",
+      "urimalsaem_semantic_id_or_sense_no",
+      "sentence_context"
+    ],
+    "confirm_only_when": [
+      "surface form overlaps TAKY ambiguous set",
+      "corpus sense tag maps to a current NIKL candidate lexeme",
+      "elementary instructional/assessment context is compatible",
+      "no contradiction with explicit learner-event context"
+    ]
+  },
+  "expected_outputs": [
+    "candidate_context_occurrences",
+    "sense-tag-to-lexeme mapping",
+    "context-specific CONFIRMED or HOLD relation",
+    "no global single-sense mapping"
+  ],
+  "guards": [
+    "CORPUS_SENSE_TAG != ELEMENTARY_CONTEXT_BY_DEFAULT",
+    "ONE_OCCURRENCE != GLOBAL_SINGLE_SENSE",
+    "GRADE_FILTER != SEMANTIC_AUTHORITY",
+    "NIKL_AUTHORITY_REQUIRES_CONTEXT_MATCH_FOR_TAKY_BINDING",
+    "ACCESS_OUTAGE_DOES_NOT_JUSTIFY_BYPASS"
+  ]
+}
