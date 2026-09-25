@@ -1,5 +1,6 @@
 'use strict';
 
+const AdaptivePlan=require('../pedagogy/adaptive-plan-contract.js');
 const VERSION='TAKY_RUNTIME_DECISION_CONTRACT_V1';
 const clean=v=>String(v??'').trim();
 
@@ -38,6 +39,9 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
     });
   }
 
+  const adaptivePlan=AdaptivePlan.derive(feedback_intent);
+  if(!adaptivePlan.ok)return {ok:false,reason:'ADAPTIVE_PLAN_DERIVATION_FAILED'};
+
   const intents=(feedback_intent.intents||[]).map(normalizeIntent)
     .sort((a,b)=>(PRIORITY[b.priority]||0)-(PRIORITY[a.priority]||0)||a.intent.localeCompare(b.intent));
 
@@ -66,6 +70,7 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
     blockers,
     advisories,
     pedagogical_actions:actions,
+    adaptive_plan:adaptivePlan,
     execution_status:hold?'HOLD_FOR_MORE_RELIABLE_INTERPRETATION':'PEDAGOGICAL_ACTION_AVAILABLE',
     authority:'LEARNING_DECISION_INTENT_ONLY',
     can_influence:[
@@ -97,6 +102,7 @@ function validate(d={}){
   if(!d?.ok)issues.push('DECISION_NOT_OK');
   if(d.authority!=='LEARNING_DECISION_INTENT_ONLY')issues.push('AUTHORITY_INVALID');
   if(d.consumer_contract?.planner!=='OWNS_DATED_ALLOCATION')issues.push('PLANNER_BOUNDARY_INVALID');
+  if(!AdaptivePlan.validate(d.adaptive_plan||{}).ok)issues.push('ADAPTIVE_PLAN_INVALID');
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
   const walk=v=>{
     if(!v||typeof v!=='object')return false;
