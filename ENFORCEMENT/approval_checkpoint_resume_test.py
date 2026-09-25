@@ -78,10 +78,11 @@ class ApprovalCheckpointResumeTest(unittest.TestCase):
                 expected_atomic_unit="approval-boundary",
                 expected_checkpoint_hash=saved["checkpoint_hash"],
             )
-            # The stored approved hash remains in the mutated record, so hash identity
-            # alone cannot detect arbitrary manual file tampering. Runtime mutation is
-            # still caught when a new checkpoint is persisted and a different hash is used.
-            self.assertTrue(result["pass"], result["detected"])
+            self.assertFalse(result["pass"])
+            self.assertIn(
+                "CURRENT_CHECKPOINT_INTEGRITY_MISMATCH",
+                result["detected"],
+            )
 
     def test_orchestrator_contains_approval_checkpoint_binding(self):
         source = (
