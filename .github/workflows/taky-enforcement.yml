@@ -176,6 +176,8 @@ jobs:
         run: python ENFORCEMENT/system_layer_ownership_validator.py
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
+      - name: Validate retention state baseline candidate
+        run: node LEARNING/estimators/retention-state-baseline.test.js
       - name: Validate metacognitive self-reflection evidence
         run: node LEARNING/evidence/self-reflection-evidence.test.js
       - name: Validate pedagogical feedback intent
