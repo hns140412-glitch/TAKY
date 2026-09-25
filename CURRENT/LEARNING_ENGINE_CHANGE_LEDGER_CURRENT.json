@@ -186,6 +186,35 @@
       "parent_entry_id": "apply:self-reflection-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "hold:retention-baseline-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ESTIMATOR",
+      "title": "Forgetting and retention estimator",
+      "description": "Explainable retention-state baseline candidate implemented and integrated as advisory-only. Runtime probability/model authority remains unpromoted pending real verified retrieval evidence and promotion gates.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:004",
+      "evidence_refs": [
+        "LEARNING/estimators/retention-state-baseline.js",
+        "LEARNING/runtime/learner-state-core.js",
+        "LEARNING/pedagogy/feedback-intent.js"
+      ],
+      "blockers": [
+        "INSUFFICIENT_REAL_VERIFIED_RETRIEVAL_TARGETS",
+        "PROMOTION_POLICY_NOT_YET_PASSED"
+      ],
+      "destination": "LEARNING/estimators/retention-state-baseline.js",
+      "created_at": "2026-09-25T06:55:00.000Z",
+      "parent_entry_id": "apply:feedback-intent-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
     }
   ]
 }
