@@ -200,6 +200,8 @@ jobs:
         run: node SHARED/runtime/world-state.test.js
       - name: Validate crew visual projection
         run: node SHARED/runtime/crew-visual-projection.test.js
+      - name: Validate badge theme expression
+        run: node SHARED/runtime/badge-theme-expression.test.js
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
