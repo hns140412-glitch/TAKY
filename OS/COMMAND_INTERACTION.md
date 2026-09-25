@@ -113,6 +113,72 @@ The runtime output authorizes a route; it does not execute arbitrary shell comma
 `CONTROLLED RUNTIME PASS != HOSTED CHATGPT AUTO-INVOCATION`.
 `ROUTE AUTHORIZED != TASK COMPLETED`.
 
+## 1.5 REFERENCE INTAKE REVIEW ROUTING — HARD LOCK
+
+When the user supplies or points to an external/reference source and uses natural language such as
+`이거 검토해`, `이 자료 참고해`, `이 자료 참고하게 하고 싶어`, `자료로 써`, or equivalent,
+TAKY SHALL distinguish a plain read-only review from a reference-intake review.
+
+### A. Plain review
+Explicit `/검토`, `타키 검토`, or `타키 기준으로 검토` without a reference-intake intent remains:
+`READ / ANALYZE / COMPARE ONLY`.
+It does not itself authorize canonical write, policy promotion, or durable owner mutation.
+
+### B. Reference-intake review
+When a material source is supplied/referenced and the user's intent is to make TAKY use it as reference/evidence,
+route automatically as:
+
+`SOURCE / LOCATOR`
+→ `MINING: SOURCE ACQUISITION + MATERIAL DESCENDANT / COUNTER-EVIDENCE DISCOVERY WHEN NEEDED`
+→ `INDEX EXISTENCE / DUPLICATE / VERSION CHECK`
+→ `INDEXING: INCREMENTAL CLASSIFICATION + RELATIONS + RETRIEVAL METADATA`
+→ `DOMAIN CONSUMER REVIEW`
+→ `LEARNING ENGINE WHEN THE CONSUMER IS LEARNING`
+→ `GAP EMISSION BACK TO MINING WHEN EVIDENCE IS INSUFFICIENT`
+→ `REFERENCE-ONLY / CANDIDATE DISPOSITION`
+→ `REPORT`
+
+For learning-domain material, the cross-engine role boundary is:
+- Mining Engine acquires/discovers evidence.
+- Indexing classifies, relates and makes the evidence retrievable.
+- Learning Engine decides how the indexed evidence may inform learning strategy, diagnostics, review/remediation or other learning actions.
+
+The user SHALL NOT need to separately command `마이닝해`, `인덱싱해`, and `러닝엔진에 넣어` when the reference-intake intent is already clear.
+
+### C. Promotion and authority guard
+Reference-intake review does not make the source authoritative by itself.
+
+`REFERENCE INTAKE != CANONICAL PROMOTION`
+`INDEXED != APPROVED POLICY`
+`SEARCH RANK != LEARNING DECISION`
+`SOURCE CLAIM != VERIFIED FACT`
+`MINING != INDEXING != LEARNING`
+
+A newly reviewed source may be retained/indexed as `REFERENCE_ONLY`, `EVIDENCE_CANDIDATE`, `HOLD`, `REJECT`, or another governed disposition.
+Canonical policy/rule mutation still requires the applicable owner reflection/promotion path.
+
+### D. Incremental execution
+Reference intake SHALL use the current shared data/indexing contracts and SHALL NOT reprocess the whole corpus.
+
+Default:
+- check whether the source already exists;
+- if exact duplicate, link/reuse instead of cloning;
+- if changed/new version, create the correct version/relation edge;
+- index only the new/changed source and materially required descendants;
+- use current Search Projection for retrieval;
+- fetch RAW/DETAIL only when required;
+- emit evidence gaps instead of inventing missing evidence.
+
+`REFERENCE INTAKE != FULL CORPUS REINDEX`
+`NEW SOURCE != NEW CANONICAL`
+`DUPLICATE != NEW EVIDENCE`
+
+### E. Controlled-runtime enforcement
+Repository-controlled runtimes may use `ENFORCEMENT/reference_intake_router.py` to classify the request and produce the cross-engine route.
+This proves controlled-runtime routing only; it does not prove hosted ChatGPT automatically executes repository code.
+
+`CONTROLLED ROUTER AVAILABLE != HOSTED CHAT AUTO-INVOCATION VERIFIED`
+
 ## 2. CORE BOUNDARIES
 
 `/검토 ≠ /반영`
