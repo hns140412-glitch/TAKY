@@ -95,7 +95,7 @@ function applyReceipt(evidence={},receipt={}){
 
 function issueFromCandidate(evidence={},candidate={}){
   const verifierType=clean(candidate.verifier_type);
-  if(verifierType!=='RETRIEVAL_EXACT_MATCH')return {ok:false,reason:'CANDIDATE_VERIFIER_NOT_ALLOWED'};
+  if(!['RETRIEVAL_EXACT_MATCH','ANSWER_KEY_EXACT'].includes(verifierType))return {ok:false,reason:'CANDIDATE_VERIFIER_NOT_ALLOWED'};
   if(clean(candidate.basis)!=='DETERMINISTIC_LOCAL_MATCH')return {ok:false,reason:'CANDIDATE_BASIS_INVALID'};
   if(candidate.outcome!==0&&candidate.outcome!==1)return {ok:false,reason:'CANDIDATE_OUTCOME_INVALID'};
   const policy=VerifierPolicy.canVerify({
