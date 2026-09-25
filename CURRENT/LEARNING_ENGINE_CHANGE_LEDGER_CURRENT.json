@@ -427,6 +427,27 @@
       "parent_entry_id": "apply:current-enforcement-trigger-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:real-evidence-auto-evaluation-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "VALIDATION_RULE",
+      "title": "Automatic retained evaluation for real evidence receipts",
+      "description": "Every valid REAL_LEARNING_EVIDENCE_RECEIPT now produces a retained estimator evaluation. Below replay minimum it records HOLD instead of silently skipping; identical receipt evaluation is idempotently deduplicated.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/lifecycle/real-evidence-evaluation-trigger.js",
+      "evidence_refs": [
+        "LEARNING/lifecycle/real-evidence-evaluation-trigger.js",
+        "LEARNING/lifecycle/evaluation-orchestrator.js",
+        "LEARNING/lifecycle/evaluation-ledger.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/lifecycle/real-evidence-evaluation-trigger.js",
+      "created_at": "2026-09-25T07:22:00.000Z",
+      "parent_entry_id": "apply:data-prerequisite-policy-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
