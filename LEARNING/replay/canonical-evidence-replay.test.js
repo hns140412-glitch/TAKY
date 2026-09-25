@@ -2,13 +2,26 @@
 const assert=require('node:assert/strict');
 const A=require('../adapters/canonical-evidence.js');
 const R=require('./replay-dataset.js');
+const V=require('../verification/verification-layer.js');
 
 const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
+const verifiedReceipt=V.issueReceipt({
+  receipt_id:'vr-h2',
+  target_event_id:'h2',
+  verified_at:'2026-09-21T07:01:00.000Z',
+  verifier_type:'RETRIEVAL_EXACT_MATCH',
+  verifier_version:'1.0.0',
+  outcome:1,
+  member_id:'A',
+  subject:'영어',
+  concept_skill_target:'vocabulary',
+  reference_id:'answer-key:vocab-001'
+}).receipt;
 const canonical=[
   A.fromHide({event_id:'h1',source:'hide-seek',occurred_at:'2026-09-20T07:00:00.000Z',payload:{caseMastery:90,memorySummary:{averageMemoryStrength:70}}},ctx),
-  A.fromHide({event_id:'h2',source:'hide-seek',occurred_at:'2026-09-21T07:00:00.000Z',payload:{memorySummary:{averageMemoryStrength:75}}},{...ctx,verified_outcome:1}),
+  A.fromHide({event_id:'h2',source:'hide-seek',occurred_at:'2026-09-21T07:00:00.000Z',payload:{memorySummary:{averageMemoryStrength:75}}},{...ctx,verification_receipt:verifiedReceipt}),
   A.fromSnap({event_id:'s1',source:'snap-pop',occurred_at:'2026-09-22T07:00:00.000Z',payload:{child_authored:true,landmark:'beach',step:3}},ctx),
-  A.fromReady({event_id:'r1',source:'ready-set',occurred_at:'2026-09-23T07:00:00.000Z',payload:{evidence_type:'CHILD_SELF_REPORT',self_report:{felt_easy:true}}},{...ctx,evidence_type:'CHILD_SELF_REPORT',verified_outcome:1})
+  A.fromReady({event_id:'r1',source:'ready-set',occurred_at:'2026-09-23T07:00:00.000Z',payload:{evidence_type:'CHILD_SELF_REPORT',self_report:{felt_easy:true}}},{...ctx,evidence_type:'CHILD_SELF_REPORT'})
 ];
 
 for(const row of canonical)assert.equal(A.validateCanonical(row).ok,true);
