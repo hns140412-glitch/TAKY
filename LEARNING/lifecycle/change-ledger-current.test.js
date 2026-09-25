@@ -27,7 +27,7 @@ const pending=L.pending(ledger);
 assert.equal(pending.length>=2,true);
 assert.equal(pending.some(x=>x.title==='Forgetting and retention estimator'),true);
 assert.equal(pending.some(x=>x.title==='Calibrated BKT estimator'),true);
-assert.equal(pending.some(x=>x.title==='Extract remaining Ready-embedded learning logic'),true);
+assert.equal(pending.some(x=>x.title==='Extract remaining Ready-embedded learning logic'),false);
 assert.equal(pending.some(x=>x.title==='Data-derived prerequisite relation candidates'),false);
 
 const reflectionHistory=ledger.entries.filter(x=>x.title==='Metacognitive self-reflection evidence');
@@ -48,8 +48,10 @@ assert.equal(L.currentProjection(ledger).find(x=>x.title==='Data-derived prerequ
 assert.equal(L.currentProjection(ledger).find(x=>x.title==='Core adaptive learning plan intent').state,'APPLIED');
 assert.equal(L.currentProjection(ledger).find(x=>x.title==='Ready adaptive review requires Core decision').state,'APPLIED');
 const readyLegacy=L.currentProjection(ledger).find(x=>x.title==='Extract remaining Ready-embedded learning logic');
-assert.equal(readyLegacy.state,'HOLD');
-assert.equal(readyLegacy.blockers.includes('LEGACY_CALLERS_WITHOUT_CORE_DECISION_REMAIN'),true);
+assert.equal(readyLegacy.state,'APPLIED');
+const readyLegacyHistory=ledger.entries.filter(x=>x.title==='Extract remaining Ready-embedded learning logic');
+assert.equal(readyLegacyHistory.some(x=>x.state==='HOLD'),true);
+assert.equal(readyLegacyHistory.some(x=>x.state==='APPLIED'),true);
 assert.equal(ledger.entries.every(x=>x.retention==='IMMUTABLE_HISTORY'),true);
 
 console.log('LEARNING_CHANGE_LEDGER_CURRENT_PASS');
