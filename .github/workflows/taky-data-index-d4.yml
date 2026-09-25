@@ -38,6 +38,11 @@ on:
       - 'PROJECTIONS/data_index_delta6_ingest_test.py'
       - 'PROJECTIONS/fixtures/data_index_v24_plus_delta6_candidate_projection.json'
       - 'C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V1.json'
+      - 'PROJECTIONS/fixtures/data_index_v25_semantic_projection.json'
+      - 'PROJECTIONS/fixtures/data_index_v25_relation_projection.json'
+      - 'PROJECTIONS/fixtures/data_index_v25_detail_projection.json'
+      - 'PROJECTIONS/data_index_v25_current_regression_test.py'
+      - 'C2S/DATA_INDEX_RAW_ESCALATION_TASK_CONTRACT_2026-09-25_V2.json'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
@@ -75,6 +80,7 @@ jobs:
           python -m py_compile PROJECTIONS/data_delta_discovery.py
           python -m py_compile PROJECTIONS/data_delta_discovery_test.py
           python -m py_compile PROJECTIONS/data_index_delta6_ingest_test.py
+          python -m py_compile PROJECTIONS/data_index_v25_current_regression_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
@@ -97,3 +103,5 @@ jobs:
         run: python PROJECTIONS/data_delta_discovery_test.py
       - name: Validate six-source incremental ingest candidate
         run: python PROJECTIONS/data_index_delta6_ingest_test.py
+      - name: Validate V25 current indexing regression
+        run: python PROJECTIONS/data_index_v25_current_regression_test.py
