@@ -1,0 +1,58 @@
+{
+  "schema": "TAKY_DATA_DELTA_DISCOVERY_RECURSION_CORRECTION_V1",
+  "date": "2026-09-25",
+  "status": "CORRECTED",
+  "issue": "PREVIOUS_DATA_DELTA_SCAN_WAS_NOT_FULLY_RECURSIVE",
+  "consequence": "Nested Data/capture additions were missed by the first scan.",
+  "authoritative_comparison": {
+    "v24_source_count": 666,
+    "actual_data_tree_file_count": 837,
+    "missing_from_v24_total": 171,
+    "likely_source_missing_count": 6
+  },
+  "likely_source_missing": [
+    {
+      "source_id": "1tg5X0aoJkBUCXLcGmV-OEgTVDud65fcd",
+      "title": "사회역사 한자어휘.pdf",
+      "path": "Data/사회역사 한자어휘.pdf",
+      "kind": "PREEXISTING_UNINDEXED_CANDIDATE"
+    },
+    {
+      "source_id": "1j20aPIXSl8Ll6TbamvJVo7ez2iPt1wJB",
+      "title": "국어.pdf",
+      "path": "Data/국어.pdf",
+      "kind": "PREEXISTING_UNINDEXED_CANDIDATE"
+    },
+    {
+      "source_id": "1PKL4w7XOtKBPhPEejKkHoGkDRhOSrGv5",
+      "title": "IMG_8996.PNG",
+      "path": "Data/capture/IMG_8996.PNG",
+      "kind": "NEW_POST_V24_CAPTURE"
+    },
+    {
+      "source_id": "1esFLtkP-2QaQM7AoeSi0U7gWR7D5EFj7",
+      "title": "IMG_8995.PNG",
+      "path": "Data/capture/IMG_8995.PNG",
+      "kind": "NEW_POST_V24_CAPTURE"
+    },
+    {
+      "source_id": "1th-m_QOgy_P6clXhAZrQcdVAynqD4IGk",
+      "title": "IMG_8998.PNG",
+      "path": "Data/capture/IMG_8998.PNG",
+      "kind": "NEW_POST_V24_CAPTURE"
+    },
+    {
+      "source_id": "1RAQ13s0fMdE17Jk9-baOnBsochodEM1a",
+      "title": "IMG_9001.PNG",
+      "path": "Data/capture/IMG_9001.PNG",
+      "kind": "NEW_POST_V24_CAPTURE"
+    }
+  ],
+  "corrected_discovery_rule": [
+    "TRAVERSE_DATA_ROOT_RECURSIVELY",
+    "COMPARE_ACTUAL_DRIVE_FILE_IDS_AGAINST_CURRENT_SOURCE_IDS",
+    "DO_NOT_RELY_ONLY_ON_MODIFIED_TIME",
+    "INBOX_PRIORITY_DOES_NOT_REPLACE_RECURSIVE_DATA_SCAN"
+  ],
+  "promotion": "NOT_YET__CANDIDATES_REQUIRE_CLASSIFICATION_AND_INGEST_VALIDATION"
+}
