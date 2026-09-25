@@ -11,8 +11,16 @@ or automatic policy promotion.
 from __future__ import annotations
 import hashlib
 
-ALLOWED_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","REFERENCE_ONLY"}
-HOLD_CLASSES={"HOLD","REVIEW_REQUIRED"}
+ALLOWED_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","REFERENCE_ONLY","DIRECT_USE_READY"}
+HOLD_CLASSES={"HOLD","REVIEW_REQUIRED","RESEARCH_CANDIDATE","NO_CURRENT_CONSUMER"}
+LEGACY_UTILIZATION_MAP={
+    "CONDITIONAL_USE":"CONDITIONAL",
+    "DIRECT_USE_READY":"DIRECT_USE_READY",
+    "REFERENCE_ONLY":"REFERENCE_ONLY",
+    "REVIEW_REQUIRED":"REVIEW_REQUIRED",
+    "RESEARCH_CANDIDATE":"RESEARCH_CANDIDATE",
+    "NO_CURRENT_CONSUMER":"NO_CURRENT_CONSUMER",
+}
 
 def _id(text:str)->str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
@@ -48,7 +56,8 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
 def _usable_evidence(evidence:list[dict])->list[dict]:
     out=[]
     for row in evidence or []:
-        cls=str(row.get("authorization_class") or row.get("utilization_class") or "REFERENCE_ONLY").upper()
+        raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "REFERENCE_ONLY").upper()
+        cls=LEGACY_UTILIZATION_MAP.get(raw_cls,raw_cls)
         if cls in HOLD_CLASSES:
             continue
         if cls in ALLOWED_EVIDENCE_CLASSES or cls=="DIRECT_USE_READY":
