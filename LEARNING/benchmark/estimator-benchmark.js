@@ -110,6 +110,7 @@ function timeHeldOut(rows=[],options={}){
     const bkt=bktCandidate(history,options.bkt_params||{});
     const dsr=dsrMemoryCandidate(history,{next_at:target.__at});
     points.push({
+      history_count:history.length,
       target_event_id:target.event_id||null,
       target_outcome:target.verified_outcome,
       instrument_changed:!!instrumentChanged,
