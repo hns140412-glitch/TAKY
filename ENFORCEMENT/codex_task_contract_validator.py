@@ -27,6 +27,30 @@ def fail(errors, message):
     errors.append(message)
 
 
+def _scope_item(value):
+    return str(value or "").strip()
+
+
+def _scope_conflict(change_item, preserve_item):
+    change = _scope_item(change_item)
+    preserve = _scope_item(preserve_item)
+    if not change or not preserve:
+        return False
+    if change == preserve:
+        return True
+
+    change_pathlike = "/" in change or change.endswith("/")
+    preserve_pathlike = "/" in preserve or preserve.endswith("/")
+    if change_pathlike and preserve_pathlike:
+        cbase = change.rstrip("/")
+        pbase = preserve.rstrip("/")
+        return (
+            cbase.startswith(pbase + "/")
+            or pbase.startswith(cbase + "/")
+        )
+    return False
+
+
 def validate(record):
     errors = []
     for field in REQUIRED:
@@ -40,8 +64,30 @@ def validate(record):
         fail(errors, "ROLE_OWNER_VIOLATION:executor_must_be_CODEX")
 
     scope = record.get("change_scope", {})
-    if not scope.get("allowed"):
+    allowed = scope.get("allowed")
+    if not allowed:
         fail(errors, "TASK_CONTRACT_INCOMPLETE:change_scope.allowed")
+    elif not isinstance(allowed, list) or any(not _scope_item(x) for x in allowed):
+        fail(errors, "CHANGE_SET_INVALID")
+
+    if "preserve" not in scope:
+        fail(errors, "PRESERVE_SET_MISSING")
+        preserve = []
+    else:
+        preserve = scope.get("preserve")
+        if not isinstance(preserve, list) or any(not _scope_item(x) for x in preserve):
+            fail(errors, "PRESERVE_SET_INVALID")
+            preserve = []
+
+    if isinstance(allowed, list) and isinstance(preserve, list):
+        for change_item in allowed:
+            for preserve_item in preserve:
+                if _scope_conflict(change_item, preserve_item):
+                    fail(
+                        errors,
+                        f"CHANGE_PRESERVE_CONFLICT:{_scope_item(change_item)}<->{_scope_item(preserve_item)}",
+                    )
+
     forbidden = set(scope.get("forbidden", []))
     for required_lock in {"unrelated_refactor", "silent_requirement_change", "direct_production_deploy"}:
         if required_lock not in forbidden:
