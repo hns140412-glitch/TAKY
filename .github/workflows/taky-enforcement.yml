@@ -228,6 +228,12 @@ jobs:
         run: node LEARNING/intake/specialist-event-pipeline.test.js
       - name: Validate central evidence transport ingest handler
         run: node LEARNING/intake/transport-handler.test.js
+      - name: Validate durable evidence store adapter
+        run: node LEARNING/transport/durable-evidence-store-adapter.test.js
+      - name: Validate learning transport auth policy
+        run: node LEARNING/transport/transport-auth-policy.test.js
+      - name: Validate authenticated evidence transport
+        run: node LEARNING/transport/authenticated-evidence-transport.test.js
       - name: Validate Learning Engine verification layer
         run: node LEARNING/verification/verification-layer.test.js
       - name: Validate app-specific verifier policy
