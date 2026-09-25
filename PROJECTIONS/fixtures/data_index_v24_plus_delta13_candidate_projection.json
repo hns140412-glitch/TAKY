@@ -1,0 +1,437 @@
+{
+  "schema": "TAKY_DATA_INDEX_V24_PLUS_DELTA13_CANDIDATE_PROJECTION_V1",
+  "base_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "projection_authoritative": false,
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "delta_count": 13,
+  "candidate_total": 679,
+  "records": [
+    {
+      "source_id": "1tg5X0aoJkBUCXLcGmV-OEgTVDud65fcd",
+      "canonical_title": "사회역사 한자어휘.pdf",
+      "source_family": "MIDDLE_SCHOOL_SOCIAL_HANJA_VOCAB_2015",
+      "source_type": "PDF_LEARNING_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "learning",
+        "vocabulary",
+        "hanja",
+        "social_studies"
+      ],
+      "controlled_terms": [
+        "중학교",
+        "사회",
+        "한자어휘",
+        "교과서",
+        "문해력",
+        "어휘"
+      ],
+      "keywords": [
+        "시차",
+        "고도",
+        "일교차",
+        "경지",
+        "식생",
+        "유목"
+      ],
+      "entities": [],
+      "short_summary": "2015 개정 교육과정 중학교 사회 교과서 핵심 단어와 한자 뜻, 교과 의미, 생활 예시를 정리한 문해력·어휘 학습 자료.",
+      "detail_terms": [
+        "2015 개정 교육과정",
+        "중학교 사회",
+        "한자 뜻",
+        "교과 의미",
+        "생활 예시"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1j20aPIXSl8Ll6TbamvJVo7ez2iPt1wJB",
+      "canonical_title": "국어.pdf",
+      "source_family": "MIDDLE_SCHOOL_KOREAN_VOCAB_2015",
+      "source_type": "PDF_LEARNING_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "learning",
+        "vocabulary",
+        "korean_language",
+        "hanja"
+      ],
+      "controlled_terms": [
+        "중학교",
+        "국어",
+        "교과서",
+        "문해력",
+        "어휘",
+        "한자"
+      ],
+      "keywords": [
+        "각색",
+        "갈등",
+        "건의문",
+        "극적",
+        "공감",
+        "관점",
+        "토론"
+      ],
+      "entities": [],
+      "short_summary": "2015 개정 교육과정 중학교 국어 교과서 핵심 어휘의 한자 뜻, 교과 의미, 생활 예시를 정리한 문해력·어휘 학습 자료.",
+      "detail_terms": [
+        "2015 개정 교육과정",
+        "중학교 국어",
+        "한자 뜻",
+        "교과 의미",
+        "생활 예시"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1s1JJ5yjIy5E9iDEbC4Ug4UWKDw17a-sC",
+      "canonical_title": "IMG_8991.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CAROUSEL_INTRO"
+      ],
+      "keywords": [
+        "CAROUSEL_INTRO"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "ChatGPT 사진 편집 프롬프트 10개를 소개하는 carousel 시작 슬라이드.",
+      "detail_terms": [
+        "CAROUSEL_INTRO"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1QO6O7gTvHs3ez-vxvp0XmALnaRROYtFs",
+      "canonical_title": "IMG_8992.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "EXPERT_CORRECTION"
+      ],
+      "keywords": [
+        "EXPERT_CORRECTION"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "얼굴·이목구비·피부결·체형·헤어·옷은 유지하고 조명·선명도·색 균형·노출만 자연스럽게 보정하는 프롬프트.",
+      "detail_terms": [
+        "EXPERT_CORRECTION"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1SkileVnnKE0pi6-nK7x-AlF8ZtcLe6hN",
+      "canonical_title": "IMG_8993.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "REMOVE_OBJECT"
+      ],
+      "keywords": [
+        "REMOVE_OBJECT"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "지울 대상을 지정하고 배경·조명·그림자·질감·반사를 맞춰 자연스럽게 메우는 프롬프트.",
+      "detail_terms": [
+        "REMOVE_OBJECT"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1URWZqQZ6vnm_ZJGyXKVGnIUTY13wZB-f",
+      "canonical_title": "IMG_8994.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CHANGE_BACKGROUND"
+      ],
+      "keywords": [
+        "CHANGE_BACKGROUND"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "인물은 유지하고 배경만 바꾸되 새 환경의 조명·그림자·색·원근을 맞추는 프롬프트.",
+      "detail_terms": [
+        "CHANGE_BACKGROUND"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1esFLtkP-2QaQM7AoeSi0U7gWR7D5EFj7",
+      "canonical_title": "IMG_8995.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "QUALITY_ENHANCE"
+      ],
+      "keywords": [
+        "QUALITY_ENHANCE"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "구도와 내용을 유지하면서 디테일·노출·색 정확도·대비·선명도를 개선하는 프롬프트.",
+      "detail_terms": [
+        "QUALITY_ENHANCE"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1PKL4w7XOtKBPhPEejKkHoGkDRhOSrGv5",
+      "canonical_title": "IMG_8996.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CHANGE_CLOTHING"
+      ],
+      "keywords": [
+        "CHANGE_CLOTHING"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "얼굴·헤어·체형·포즈·손·피부톤·배경은 유지하고 옷만 자연스럽게 교체하는 프롬프트.",
+      "detail_terms": [
+        "CHANGE_CLOTHING"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "12LxIgO4r-IS7D_Dew6X4PADdUsCoNR-6",
+      "canonical_title": "IMG_8997.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "EXPAND_IMAGE"
+      ],
+      "keywords": [
+        "EXPAND_IMAGE"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "원본 안쪽은 건드리지 않고 바깥 영역만 원하는 비율로 자연스럽게 확장하는 프롬프트.",
+      "detail_terms": [
+        "EXPAND_IMAGE"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1th-m_QOgy_P6clXhAZrQcdVAynqD4IGk",
+      "canonical_title": "IMG_8998.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CHANGE_TIME_OF_DAY"
+      ],
+      "keywords": [
+        "CHANGE_TIME_OF_DAY"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "장면 구조는 유지하고 시간대와 하늘·빛 방향·색온도·반사·그림자를 일관되게 바꾸는 프롬프트.",
+      "detail_terms": [
+        "CHANGE_TIME_OF_DAY"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1CN28Wr_oON9zIymCun55QB3J9QtXteoc",
+      "canonical_title": "IMG_8999.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "OPEN_EYES"
+      ],
+      "keywords": [
+        "OPEN_EYES"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "표정·시선 방향·조명·눈매·인상은 유지하고 감긴 눈만 자연스럽게 뜬 눈으로 보정하는 프롬프트.",
+      "detail_terms": [
+        "OPEN_EYES"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1RAQ13s0fMdE17Jk9-baOnBsochodEM1a",
+      "canonical_title": "IMG_9001.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "REMOVE_CLOTHING_WRINKLES"
+      ],
+      "keywords": [
+        "REMOVE_CLOTHING_WRINKLES"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "의복의 소재·핏·박음선·질감을 유지하면서 거슬리는 주름·접힘만 자연스럽게 보정하는 프롬프트.",
+      "detail_terms": [
+        "REMOVE_CLOTHING_WRINKLES"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    },
+    {
+      "source_id": "1LxKJytS0AsAbdOT5p9RTegMuIfdonTs5",
+      "canonical_title": "IMG_9002.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "PRO_COLOR_GRADE"
+      ],
+      "keywords": [
+        "PRO_COLOR_GRADE"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "피부톤과 인물은 유지하고 하이라이트·그림자·대비·채도를 정리해 영화 같은 색보정을 적용하는 프롬프트.",
+      "detail_terms": [
+        "PRO_COLOR_GRADE"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true
+    }
+  ]
+}
