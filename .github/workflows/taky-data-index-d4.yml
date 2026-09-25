@@ -17,6 +17,10 @@ on:
       - 'PROJECTIONS/fixtures/data_index_v24_semantic_projection.json'
       - 'ENFORCEMENT/data_index_search.py'
       - 'ENFORCEMENT/data_index_search_test.py'
+      - 'PROJECTIONS/data_index_detail_fetch.py'
+      - 'PROJECTIONS/data_index_detail_fetch_test.py'
+      - 'PROJECTIONS/fixtures/data_index_v24_detail_projection.json'
+      - 'C2S/DATA_INDEX_DETAIL_FETCH_TASK_CONTRACT_2026-09-25.json'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
@@ -43,6 +47,8 @@ jobs:
           python -m py_compile PROJECTIONS/data_index_hybrid_search_test.py
           python -m py_compile PROJECTIONS/data_index_relation_expansion.py
           python -m py_compile PROJECTIONS/data_index_relation_expansion_test.py
+          python -m py_compile PROJECTIONS/data_index_detail_fetch.py
+          python -m py_compile PROJECTIONS/data_index_detail_fetch_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
@@ -51,3 +57,5 @@ jobs:
         run: python PROJECTIONS/data_index_hybrid_search_test.py
       - name: Validate relation expansion suite
         run: python PROJECTIONS/data_index_relation_expansion_test.py
+      - name: Validate detail fetch escalation
+        run: python PROJECTIONS/data_index_detail_fetch_test.py
