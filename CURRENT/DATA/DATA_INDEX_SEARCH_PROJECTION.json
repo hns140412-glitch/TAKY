@@ -34,7 +34,7 @@
     "True neural embedding/vector provider integration only if an explicit provider/index becomes available and is separately authorized",
     "Two oversize video content holds only when streaming partial-frame access or local sync source becomes available"
   ],
-  "next": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY__SCAN_INBOX_FIRST_AND_RECURSIVE_DATA_TREE_AS_SAFETY_NET",
+  "next": "WAIT_FOR_GENUINE_NEW_OR_CHANGED_AUTHORITATIVE_SOURCE_EVIDENCE",
   "invariants": [
     "CURRENT_V26_IS_AUTHORITY",
     "SOURCE_INDEX_V6_IS_AUTHORITY",
@@ -67,7 +67,7 @@
     "HANDOFF/DATA_INDEXING_SEARCH_PROJECTION_NEW_CHAT_START_2026-09-25_LATEST.md",
     "github:hns140412-glitch/TAKY@e937a80abe6aa1ad1827bb81e7a211f92f6cde5b"
   ],
-  "updated_at": "2026-09-25T22:27:00+09:00",
+  "updated_at": "2026-09-26T08:00:00+09:00",
   "last_delta_scan": {
     "checkpoint": "C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V3.json",
     "result": "AUTHORITATIVE_DELTA7_ACCEPTED_AND_PROMOTED",
@@ -98,5 +98,13 @@
     "checkpoint": "C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V3.json",
     "promotion_receipt_drive_id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w",
     "promotion_closure": "C2S/DATA_INDEX_V26_PROMOTION_CLOSURE_2026-09-25.json"
+  },
+  "latest_operations_scan": {
+    "date": "2026-09-26",
+    "checkpoint": "C2S/DATA_INDEX_V26_OPERATIONS_DELTA_SCAN_2026-09-26.json",
+    "result": "NO_AUTHORITATIVE_DELTA_ACCEPTED",
+    "accepted_delta_count": 0,
+    "excluded_candidate": "REFERENCE_ACQUISITION_QUEUE_CURRENT",
+    "exclusion_reason": "DERIVED_NOT_SOURCE__USER_ACTION_QUEUE"
   }
 }
