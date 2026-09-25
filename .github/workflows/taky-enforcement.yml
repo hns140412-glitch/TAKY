@@ -184,6 +184,8 @@ jobs:
         run: node LEARNING/replay/replay-benchmark.test.js
       - name: Validate canonical Learning Evidence adapters
         run: node LEARNING/adapters/canonical-evidence.test.js
+      - name: Validate canonical evidence into replay labels
+        run: node LEARNING/replay/canonical-evidence-replay.test.js
       - name: Validate Learning Engine replay dataset contract
         run: node LEARNING/data/replay-dataset-builder.test.js
       - name: Validate Learning Engine evidence normalizer
