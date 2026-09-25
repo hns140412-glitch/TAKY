@@ -15,7 +15,7 @@ class MiningCoreTest(unittest.TestCase):
   r=resume(c,e)
   self.assertEqual(r["cycle"],2); self.assertTrue(r["stop"]); self.assertEqual(r["stop_reason"],"EVIDENCE_SUFFICIENT")
  def test_conflict_stays_open(self):
-  e=[{"frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"claim":"A","independent_support_count":2},{"frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"claim":"B","independent_support_count":2}]
+  e=[{"evidence_id":"a","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"ALLOW","independent_support_count":2},{"evidence_id":"b","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"DENY","independent_support_count":2}]
   c=checkpoint({"task_family":"X","goal":"new goal"},[F[0]],e)
   self.assertFalse(c["stop"]); self.assertEqual(c["frontier"][0]["status"],"CONFLICT"); self.assertEqual(c["next_queries"][0]["purpose"],"RESOLVE_CONFLICT")
 if __name__=="__main__": unittest.main()
