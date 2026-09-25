@@ -14,6 +14,7 @@ function baseFromEvent(event={},context={}){
     member_id:clean(context.member_id||event.member_id||event.child_id||payload.member_id),
     subject:clean(context.subject||payload.subject).toLowerCase(),
     concept_skill_target:clean(context.concept_skill_target||payload.concept_skill_target).toLowerCase(),
+    learning_target_id:clean(context.learning_target_id||payload.learning_target_id||payload.lexical_id||payload.word_id||payload.item_id)||null,
     evidence_type:'SPECIALIST_OUTCOME_UNKNOWN',
     source_app:clean(event.source||event.app||context.source_app),
     instrument_version:clean(payload.instrumentVersion||payload.instrument_version||context.instrument_version)||'UNSPECIFIED',
