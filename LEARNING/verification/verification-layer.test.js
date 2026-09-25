@@ -61,3 +61,34 @@ const snap=V.applyReceipt({
 assert.equal(snap.ok,true);
 
 console.log('LEARNING_VERIFICATION_LAYER_PASS');
+
+const candidateEvidence={
+  event_id:'hc1',
+  observed_at:'2026-09-25T10:00:00.000Z',
+  member_id:'A',
+  subject:'영어',
+  concept_skill_target:'vocabulary',
+  source_app:'hide-seek',
+  evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',
+  verified_outcome:null
+};
+const candidateApplied=V.issueFromCandidate(candidateEvidence,{
+  verifier_type:'RETRIEVAL_EXACT_MATCH',
+  verifier_version:'HIDE_CODE_RED_V1',
+  outcome:1,
+  reference_id:'hide-word:sheet-1:w1:spelling',
+  basis:'DETERMINISTIC_LOCAL_MATCH'
+});
+assert.equal(candidateApplied.ok,true);
+assert.equal(candidateApplied.evidence.verified_outcome,1);
+assert.equal(candidateApplied.evidence.verification.verifier_type,'RETRIEVAL_EXACT_MATCH');
+
+const badCandidate=V.issueFromCandidate(candidateEvidence,{
+  verifier_type:'RETRIEVAL_EXACT_MATCH',
+  verifier_version:'HIDE_CODE_RED_V1',
+  outcome:1,
+  reference_id:'hide-word:sheet-1:w1:spelling',
+  basis:'APP_SCORE_ONLY'
+});
+assert.equal(badCandidate.ok,false);
+assert.equal(badCandidate.reason,'CANDIDATE_BASIS_INVALID');
