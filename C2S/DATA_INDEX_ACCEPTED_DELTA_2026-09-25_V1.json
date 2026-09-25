@@ -1,0 +1,308 @@
+{
+  "schema": "TAKY_DATA_INDEX_ACCEPTED_DELTA_V1",
+  "date": "2026-09-25",
+  "status": "INGEST_ACCEPTED_PENDING_CANONICAL_PROMOTION",
+  "base_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "base_source_index": "DATA_SOURCE_INDEX_2026-09-22_V4.json",
+  "delta_count": 6,
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "records": [
+    {
+      "source_id": "1tg5X0aoJkBUCXLcGmV-OEgTVDud65fcd",
+      "canonical_title": "사회역사 한자어휘.pdf",
+      "source_family": "MIDDLE_SCHOOL_SOCIAL_HANJA_VOCAB_2015",
+      "source_type": "PDF_LEARNING_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "learning",
+        "vocabulary",
+        "hanja",
+        "social_studies"
+      ],
+      "controlled_terms": [
+        "중학교",
+        "사회",
+        "한자어휘",
+        "교과서",
+        "문해력",
+        "어휘"
+      ],
+      "keywords": [
+        "시차",
+        "고도",
+        "일교차",
+        "경지",
+        "식생",
+        "유목"
+      ],
+      "entities": [],
+      "short_summary": "2015 개정 교육과정 중학교 사회 교과서 핵심 단어와 한자 뜻, 교과 의미, 생활 예시를 정리한 문해력·어휘 학습 자료.",
+      "detail_terms": [
+        "2015 개정 교육과정",
+        "중학교 사회",
+        "한자 뜻",
+        "교과 의미",
+        "생활 예시"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/사회역사 한자어휘.pdf",
+        "origin_type": "USER_DRIVE_SOURCE"
+      }
+    },
+    {
+      "source_id": "1j20aPIXSl8Ll6TbamvJVo7ez2iPt1wJB",
+      "canonical_title": "국어.pdf",
+      "source_family": "MIDDLE_SCHOOL_KOREAN_VOCAB_2015",
+      "source_type": "PDF_LEARNING_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "learning",
+        "vocabulary",
+        "korean_language",
+        "hanja"
+      ],
+      "controlled_terms": [
+        "중학교",
+        "국어",
+        "교과서",
+        "문해력",
+        "어휘",
+        "한자"
+      ],
+      "keywords": [
+        "각색",
+        "갈등",
+        "건의문",
+        "극적",
+        "대단원",
+        "공감",
+        "관점",
+        "토론"
+      ],
+      "entities": [],
+      "short_summary": "2015 개정 교육과정 중학교 국어 교과서 핵심 어휘의 한자 뜻, 교과 의미, 생활 예시를 정리한 문해력·어휘 학습 자료.",
+      "detail_terms": [
+        "2015 개정 교육과정",
+        "중학교 국어",
+        "한자 뜻",
+        "교과 의미",
+        "생활 예시"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/국어.pdf",
+        "origin_type": "USER_DRIVE_SOURCE"
+      }
+    },
+    {
+      "source_id": "1PKL4w7XOtKBPhPEejKkHoGkDRhOSrGv5",
+      "canonical_title": "IMG_8996.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "옷 바꾸기",
+        "인물 고정",
+        "부분 편집",
+        "ChatGPT 이미지 편집"
+      ],
+      "keywords": [
+        "얼굴",
+        "헤어",
+        "체형",
+        "포즈",
+        "손",
+        "피부톤",
+        "배경",
+        "옷만 교체"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "Instagram carousel의 ChatGPT 이미지 편집 프롬프트 참고 슬라이드. 인물 요소를 유지하고 옷만 자연스럽게 교체하는 편집 지침.",
+      "detail_terms": [
+        "옷 바꾸기",
+        "인물 고정",
+        "옷만 교체"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/capture/IMG_8996.PNG",
+        "origin_type": "USER_CAPTURE",
+        "publisher_or_account": "lazy_owen"
+      }
+    },
+    {
+      "source_id": "1esFLtkP-2QaQM7AoeSi0U7gWR7D5EFj7",
+      "canonical_title": "IMG_8995.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "화질 올리기",
+        "구도 고정",
+        "내용 고정",
+        "ChatGPT 이미지 편집"
+      ],
+      "keywords": [
+        "디테일",
+        "노출",
+        "색 정확도",
+        "대비",
+        "선명도",
+        "인공적 금지"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "Instagram carousel의 ChatGPT 이미지 편집 프롬프트 참고 슬라이드. 구도와 내용을 유지하면서 디테일·노출·색 정확도·대비·선명도를 개선하는 지침.",
+      "detail_terms": [
+        "화질 올리기",
+        "구도 고정",
+        "내용 고정"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/capture/IMG_8995.PNG",
+        "origin_type": "USER_CAPTURE",
+        "publisher_or_account": "lazy_owen"
+      }
+    },
+    {
+      "source_id": "1th-m_QOgy_P6clXhAZrQcdVAynqD4IGk",
+      "canonical_title": "IMG_8998.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "시간대 바꾸기",
+        "조명 변경",
+        "ChatGPT 이미지 편집"
+      ],
+      "keywords": [
+        "일출",
+        "골든아워",
+        "노을",
+        "밤",
+        "하늘",
+        "빛 방향",
+        "색온도",
+        "반사",
+        "그림자",
+        "창문"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "Instagram carousel의 ChatGPT 이미지 편집 프롬프트 참고 슬라이드. 장면 구조는 유지하고 시간대와 관련 조명 요소를 함께 일관되게 바꾸는 지침.",
+      "detail_terms": [
+        "시간대 바꾸기",
+        "하늘",
+        "빛 방향",
+        "색온도",
+        "반사",
+        "그림자"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/capture/IMG_8998.PNG",
+        "origin_type": "USER_CAPTURE",
+        "publisher_or_account": "lazy_owen"
+      }
+    },
+    {
+      "source_id": "1RAQ13s0fMdE17Jk9-baOnBsochodEM1a",
+      "canonical_title": "IMG_9001.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "옷 주름 펴기",
+        "부분 보정",
+        "ChatGPT 이미지 편집"
+      ],
+      "keywords": [
+        "소재",
+        "핏",
+        "박음선",
+        "질감",
+        "자연스러운 주름",
+        "접힘",
+        "봉제선"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "Instagram carousel의 ChatGPT 이미지 편집 프롬프트 참고 슬라이드. 의복의 소재·핏·박음선·질감을 유지하면서 거슬리는 주름과 접힘만 자연스럽게 보정하는 지침.",
+      "detail_terms": [
+        "옷 주름 펴기",
+        "부분 보정",
+        "소재",
+        "핏",
+        "박음선",
+        "질감"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "NEW_DELTA_2026-09-25",
+      "current_relation": "CANDIDATE",
+      "detail_available": true,
+      "provenance": {
+        "drive_path": "Data/capture/IMG_9001.PNG",
+        "origin_type": "USER_CAPTURE",
+        "publisher_or_account": "lazy_owen"
+      }
+    }
+  ],
+  "relation_hints": [
+    {
+      "type": "SAME_FAMILY_AS",
+      "family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "members": [
+        "1PKL4w7XOtKBPhPEejKkHoGkDRhOSrGv5",
+        "1esFLtkP-2QaQM7AoeSi0U7gWR7D5EFj7",
+        "1th-m_QOgy_P6clXhAZrQcdVAynqD4IGk",
+        "1RAQ13s0fMdE17Jk9-baOnBsochodEM1a"
+      ],
+      "exact_duplicate": false
+    }
+  ],
+  "promotion_required": true,
+  "promotion_reason": "Authoritative source corpus gains six verified sources absent from both V24 and DATA_SOURCE_INDEX_V4."
+}
