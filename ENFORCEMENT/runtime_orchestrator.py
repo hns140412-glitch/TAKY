@@ -21,6 +21,19 @@ from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
 
+PRIVILEGED_ACTIONS = {
+    "GOVERNANCE_WRITE",
+    "IMPLEMENTATION_WRITE",
+    "IMPLEMENTATION_EXECUTE",
+}
+
+UNTRUSTED_SOURCE_CLASSES = {
+    "UNTRUSTED_EXTERNAL",
+    "PUBLIC_WEB",
+    "COMMUNITY",
+    "EXTERNAL_REFERENCE",
+}
+
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
     "ROUTE": "ORCHESTRATOR",
@@ -97,6 +110,7 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
         ),
         "ownership_move_planned": bool(record.get("ownership_move_planned", False)),
         "engineering_profile": str(record.get("engineering_profile", "")).strip().upper(),
+        "source_trust_class": str(record.get("source_trust_class", "")).strip().upper(),
     }
     return state, failures
 
@@ -106,6 +120,43 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     gate = run_c2s_preflight(effective_record, repo_root, coverage_record)
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
+
+    quarantine_result = None
+    source_trust = state.get("source_trust_class")
+    action_class = state.get("action_class")
+    if source_trust in UNTRUSTED_SOURCE_CLASSES and action_class in PRIVILEGED_ACTIONS:
+        clearance = effective_record.get("quarantine_clearance")
+        clearance_ok = (
+            isinstance(clearance, dict)
+            and str(clearance.get("authority", "")).strip().upper() == "VALIDATOR"
+            and bool(str(clearance.get("evidence_ref", "")).strip())
+            and clearance.get("verified") is True
+        )
+        quarantine_result = {
+            "required": True,
+            "cleared": clearance_ok,
+            "source_trust_class": source_trust,
+            "action_class": action_class,
+            "clearance_authority": (
+                str(clearance.get("authority", "")).strip().upper()
+                if isinstance(clearance, dict)
+                else None
+            ),
+            "evidence_ref": (
+                clearance.get("evidence_ref")
+                if isinstance(clearance, dict)
+                else None
+            ),
+        }
+        if not clearance_ok:
+            detected.append("UNTRUSTED_SOURCE_PRIVILEGED_ACTION_QUARANTINE")
+    else:
+        quarantine_result = {
+            "required": False,
+            "cleared": True,
+            "source_trust_class": source_trust,
+            "action_class": action_class,
+        }
 
     checkpoint_guard_result = None
     checkpoint_cfg = effective_record.get("checkpoint_guard")
@@ -215,6 +266,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             else None
         ),
         "checkpoint_guard": checkpoint_guard_result,
+        "source_quarantine": quarantine_result,
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
