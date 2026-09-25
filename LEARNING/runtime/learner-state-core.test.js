@@ -28,7 +28,7 @@ const rows=[
 const a=Core.deriveSkillState(rows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(a.ok,true);
 assert.equal(a.observed.unique_evidence_count,3);
-assert.deepEqual(a.observed.evidence_ids,['a1','a2','self1']);
+assert.deepEqual(a.observed.evidence_ids,['a1','self1','a2']);
 assert.equal(a.observed.child_self_report_count,1);
 assert.equal(a.observed.verified_performance_count,0,'self report must not become verified performance');
 assert.deepEqual(a.observed.instrument_versions,['hide-v1','ready-v1']);
@@ -36,6 +36,9 @@ assert.equal(a.model.mastery_estimate,null);
 assert.equal(a.model.retention_probability,null);
 assert.equal(a.model.scheduling_authority,false);
 assert.equal(Core.selfValidate(a).ok,true);
+const leaked=JSON.parse(JSON.stringify(a)); leaked.inferred={schedule_date:'2026-09-30'};
+assert.equal(Core.selfValidate(leaked).ok,false);
+assert.equal(Core.selfValidate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 const math=Core.deriveSkillState(rows,{member_id:'A',subject:'수학',concept_skill_target:'FRACTION'});
 assert.equal(math.observed.unique_evidence_count,1);
