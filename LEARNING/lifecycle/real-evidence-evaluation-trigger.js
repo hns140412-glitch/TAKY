@@ -4,6 +4,7 @@ const Receipt=require('../receipts/real-evidence-receipt.js');
 const Replay=require('../replay/replay-dataset.js');
 const ReplayBenchmark=require('../replay/replay-benchmark.js');
 const Orchestrator=require('./evaluation-orchestrator.js');
+const DataReadiness=require('./estimator-data-readiness.js');
 
 function placeholderBenchmark(receipt={},dataset={},reason='INSUFFICIENT_VERIFIED_TARGETS'){
   const verified=(dataset?.records||[]).filter(r=>r.label_status==='VERIFIED_TARGET').length;
@@ -65,12 +66,20 @@ function evaluateReceipt({ledger,receipt,canonical_evidence,created_at,promotion
   });
   if(!recorded.ok)return recorded;
 
+  const readiness=DataReadiness.readiness([{
+    receipt,
+    canonical_evidence:evidence
+  }],{
+    min_verified_targets:promotion_policy?.min_verified_targets
+  });
+
   return {
     ok:true,
     receipt_id:receipt.receipt_id,
     scope:receipt.scope,
     benchmark_status,
     report:recorded.report,
+    data_readiness:readiness,
     ledger:recorded.ledger,
     ledger_entry:recorded.ledger_entry,
     deduplicated:recorded.deduplicated===true,
@@ -84,6 +93,8 @@ function selfValidate(result={}){
   if(result.invariant!=='EVERY_VALID_REAL_EVIDENCE_RECEIPT_GETS_A_RETAINED_EVALUATION')issues.push('RETENTION_INVARIANT_MISSING');
   if(result.ok&&!result.ledger_entry)issues.push('LEDGER_ENTRY_REQUIRED');
   if(result.report?.auto_promotion!==false)issues.push('AUTO_PROMOTION_FORBIDDEN');
+  if(!result.data_readiness?.ok)issues.push('DATA_READINESS_REQUIRED');
+  if(result.data_readiness?.promotion_authority!==false)issues.push('DATA_READINESS_PROMOTION_AUTHORITY_FORBIDDEN');
   return {ok:issues.length===0,issues};
 }
 
