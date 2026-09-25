@@ -13,6 +13,12 @@ const mk=(id,day,outcome,extra={})=>({
   source_app:extra.source_app||'hide-seek',
   instrument_version:extra.instrument_version||'hide-v1',
   verified_outcome:outcome,
+  verification:(outcome===0||outcome===1)&&extra.evidence_type!=='CHILD_SELF_REPORT'?{
+    authority:'LEARNING_VERIFICATION_RECEIPT',
+    receipt_id:'vr-'+id,
+    verifier_type:'RETRIEVAL_EXACT_MATCH',
+    verifier_version:'1.0.0'
+  }:null,
   memory:{average_strength:extra.strength??70}
 });
 
