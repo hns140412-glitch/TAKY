@@ -55,6 +55,10 @@ on:
       - 'ENFORCEMENT/mining_index_bridge_test.py'
       - 'ENFORCEMENT/learning_index_bridge.py'
       - 'ENFORCEMENT/learning_index_bridge_test.py'
+      - 'ENFORCEMENT/learning_runtime.py'
+      - 'ENFORCEMENT/learning_runtime_test.py'
+      - 'ENFORCEMENT/learning_orchestrator.py'
+      - 'ENFORCEMENT/learning_orchestrator_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -106,6 +110,8 @@ jobs:
           python -m py_compile ENFORCEMENT/index_retrieval.py
           python -m py_compile ENFORCEMENT/mining_index_bridge.py
           python -m py_compile ENFORCEMENT/learning_index_bridge.py
+          python -m py_compile ENFORCEMENT/learning_runtime.py
+          python -m py_compile ENFORCEMENT/learning_orchestrator.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -152,6 +158,10 @@ jobs:
         run: python ENFORCEMENT/mining_index_bridge_test.py
       - name: Test Learning shared index bridge
         run: python ENFORCEMENT/learning_index_bridge_test.py
+      - name: Test central Learning Engine runtime
+        run: python ENFORCEMENT/learning_runtime_test.py
+      - name: Test Learning Engine orchestration
+        run: python ENFORCEMENT/learning_orchestrator_test.py
       - name: Test heterogeneous E2E benchmark
         run: python ENFORCEMENT/mining_e2e_benchmark_test.py
       - name: Test live-captured heterogeneous E2E benchmark
