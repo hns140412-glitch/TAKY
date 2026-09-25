@@ -47,6 +47,8 @@ on:
       - 'ENFORCEMENT/mining_growth_loop_test.py'
       - 'ENFORCEMENT/mining_e2e_benchmark.py'
       - 'ENFORCEMENT/mining_e2e_benchmark_test.py'
+      - 'ENFORCEMENT/mining_e2e_live_capture_2026-09-25.json'
+      - 'ENFORCEMENT/mining_e2e_live_captured_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -135,3 +137,5 @@ jobs:
         run: python ENFORCEMENT/mining_growth_loop_test.py
       - name: Test heterogeneous E2E benchmark
         run: python ENFORCEMENT/mining_e2e_benchmark_test.py
+      - name: Test live-captured heterogeneous E2E benchmark
+        run: python ENFORCEMENT/mining_e2e_live_captured_test.py
