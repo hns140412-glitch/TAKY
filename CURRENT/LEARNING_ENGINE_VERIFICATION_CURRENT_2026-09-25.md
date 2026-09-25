@@ -17,6 +17,8 @@ APP RESULT
 -> VERIFICATION POLICY
 -> LEARNING_VERIFICATION_RECEIPT
 -> VERIFIED_TARGET / OBSERVATION_ONLY
+-> REAL_LEARNING_EVIDENCE_RECEIPT
+-> SKILL-SCOPED INTAKE
 -> TIME-HELD-OUT REPLAY
 -> ESTIMATOR BENCHMARK
 -> HUMAN PROMOTION REVIEW
@@ -106,13 +108,42 @@ Hide verification producer:
 - validate workflow 36099927544 SUCCESS
 - parallel GitHub Pages deployment workflow failed at Configure Pages; this is not a Learning Engine/Hide functional validation failure.
 
+
+## Real Evidence accumulation
+
+Verified canonical evidence is accumulated with immutable receipts.
+
+Rules:
+- one receipt scope = member × subject × concept_skill_target;
+- duplicate event_id is rejected;
+- batch digest is SHA-256 bound to canonical verified evidence;
+- replay revalidates the digest before accepting REAL_EVIDENCE;
+- string receipt ids alone are insufficient;
+- incremental growth creates a new receipt linked to parent_receipt_id + parent evidence digest;
+- prior receipts are not overwritten;
+- broken parent receipt/digest chains fail validation;
+- multi-scope intake partitions evidence before receipt issuance;
+- unverified evidence is rejected from real verified intake.
+
+Current modules:
+- LEARNING/receipts/real-evidence-receipt.js
+- LEARNING/intake/real-evidence-intake.js
+
+Validation:
+- immutable batch receipt regression: GREEN
+- tamper/digest mismatch regression: GREEN
+- incremental receipt chain regression: GREEN
+- duplicate event regression: GREEN
+- member/subject/skill scope partition regression: GREEN
+- unverified evidence rejection: GREEN
+- TAKY run 36102162246: all Learning Engine receipt/intake steps SUCCESS at checkpoint
+
 ## Remaining OPEN
 
-1. Ready verified-answer-key producer adapter.
-2. Snap human-rubric receipt producer flow.
-3. Real evidence receipt pipeline for replay datasets.
-4. Accumulate real verified targets by skill.
-5. Compare Observational/BKT/DSR candidates on real time-held-out evidence.
-6. No estimator promotion until real-evidence thresholds and promotion review pass.
+1. Accumulate enough real verified targets per concept_skill_target.
+2. Compare Observational/BKT/DSR candidates on real time-held-out evidence.
+3. Add calibration/error reporting once minimum real target count is reached.
+4. No estimator promotion until real-evidence thresholds and promotion review pass.
+5. Production/Netlify deployment remains HOLD.
 
 Netlify / production deployment: HOLD.
