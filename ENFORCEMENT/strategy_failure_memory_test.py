@@ -53,6 +53,17 @@ class StrategyFailureMemoryTest(unittest.TestCase):
         )
         self.assertIsNone(result["selected"])
 
+    def test_cross_family_strategy_not_reused(self):
+        result = select_strategy(
+            {
+                "task_family": "ARCHITECTURE_WORK",
+                "goal": "adaptive learner mastery review scheduling",
+            },
+            [PROMOTED],
+        )
+        self.assertIsNone(result["selected"])
+        self.assertEqual(result["reason"], "NO_PROMOTED_MATCH")
+
     def test_known_failed_route_is_blocked(self):
         result = apply_failure_memory(
             {
