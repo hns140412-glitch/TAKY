@@ -1,0 +1,152 @@
+{
+  "ledger_version": "TAKY_LEARNING_CHANGE_LEDGER_V1",
+  "retention": "IMMUTABLE_HISTORY",
+  "entries": [
+    {
+      "entry_id": "seed:001",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "EVIDENCE_SCHEMA",
+      "title": "Canonical evidence provenance and verification receipts",
+      "description": "Preserve concept skill target, instrument version, assistance and verifier receipt provenance.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [
+        "LEARNING/adapters/canonical-evidence.js",
+        "LEARNING/verification/verification-layer.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/adapters + LEARNING/verification",
+      "created_at": "2026-09-25T00:00:00.000Z",
+      "parent_entry_id": null,
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
+    },
+    {
+      "entry_id": "seed:002",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Metacognitive self-reflection evidence",
+      "description": "Capture learner self-reflection such as easy/hard, hint-assisted recall, confusion and knew-but-could-not-recall as evidence without treating it as verified performance.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [],
+      "blockers": [
+        "SELF_REFLECTION_EVIDENCE_CONTRACT_NOT_IMPLEMENTED"
+      ],
+      "destination": "LEARNING/evidence",
+      "created_at": "2026-09-25T00:01:00.000Z",
+      "parent_entry_id": "seed:001",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
+    },
+    {
+      "entry_id": "seed:003",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_RULE",
+      "title": "Pedagogical feedback intent",
+      "description": "Core should emit feedback intent such as stable meaning but unstable spelling, recurring confusion, or short-delay retrieval need; apps own final wording.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [],
+      "blockers": [
+        "FEEDBACK_INTENT_OUTPUT_CONTRACT_NOT_IMPLEMENTED"
+      ],
+      "destination": "LEARNING/pedagogy",
+      "created_at": "2026-09-25T00:02:00.000Z",
+      "parent_entry_id": "seed:002",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
+    },
+    {
+      "entry_id": "seed:004",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ESTIMATOR",
+      "title": "Forgetting and retention estimator",
+      "description": "Model retention/forgetting risk separately from simple freshness cutoffs and without owning calendar dates.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [
+        "LEARNING/benchmark/estimator-benchmark.js"
+      ],
+      "blockers": [
+        "INSUFFICIENT_REAL_VERIFIED_RETRIEVAL_TARGETS"
+      ],
+      "destination": "LEARNING/estimators",
+      "created_at": "2026-09-25T00:03:00.000Z",
+      "parent_entry_id": "seed:003",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
+    },
+    {
+      "entry_id": "seed:005",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ESTIMATOR",
+      "title": "Calibrated BKT estimator",
+      "description": "Evaluate calibrated per-skill probabilistic knowledge tracing only after sufficient real time-held-out evidence.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [
+        "LEARNING/benchmark/estimator-benchmark.js",
+        "LEARNING/benchmark/promotion-policy.js"
+      ],
+      "blockers": [
+        "INSUFFICIENT_REAL_VERIFIED_TARGETS",
+        "CALIBRATION_NOT_YET_ESTABLISHED"
+      ],
+      "destination": "LEARNING/estimators",
+      "created_at": "2026-09-25T00:04:00.000Z",
+      "parent_entry_id": "seed:004",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
+    },
+    {
+      "entry_id": "seed:006",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Concept prerequisite and dependency graph",
+      "description": "Represent prerequisite relationships across concept_skill_target states without inferring them prematurely from sparse data.",
+      "state": "DEFERRED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "HISTORY/2026-09-25_LEARNING_ENGINE_GROWTH_DEEP_REVIEW.md",
+      "evidence_refs": [],
+      "blockers": [
+        "PREREQUISITE_EVIDENCE_MODEL_NOT_YET_DEFINED"
+      ],
+      "destination": "LEARNING/domain-model",
+      "created_at": "2026-09-25T00:05:00.000Z",
+      "parent_entry_id": "seed:005",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
+    }
+  ]
+}
