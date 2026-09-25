@@ -17,6 +17,7 @@ from codex_task_contract_builder import build as build_codex_task_contract
 from executor_transport import build_envelope as build_executor_envelope
 from executor_adapter_registry import resolve as resolve_executor_adapter
 from execution_checkpoint import guard as guard_checkpoint
+from reference_intake_router import route as route_reference_intake
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -116,6 +117,17 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             )
             detected.extend(checkpoint_guard_result.get("detected", []))
 
+    reference_intake_result = None
+    intent_text = str(effective_record.get("intent_text", "") or "")
+    has_reference_source = any(
+        effective_record.get(k)
+        for k in ("has_reference_source", "source_url", "source_id", "source_locator")
+    )
+    if has_reference_source and any(term in intent_text.lower() for term in ("검토", "참고", "자료로", "분석")):
+        reference_intake_result = route_reference_intake(effective_record)
+        if not reference_intake_result.get("pass"):
+            detected.extend(reference_intake_result.get("detected", []))
+
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
         task_contract_result = build_codex_task_contract(record)
@@ -168,6 +180,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             else None
         ),
         "checkpoint_guard": checkpoint_guard_result,
+        "reference_intake_route": reference_intake_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "hosted_chatgpt_auto_invocation_verified": False,
         "external_executor_invocation_verified": False,

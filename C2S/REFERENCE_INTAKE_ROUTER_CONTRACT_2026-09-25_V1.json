@@ -1,0 +1,53 @@
+{
+  "schema": "TAKY_REFERENCE_INTAKE_ROUTER_CONTRACT_V1",
+  "status": "ACTIVE_CROSS_ENGINE_ROUTING_CONTRACT",
+  "effective_date": "2026-09-25",
+  "semantic_owner": "OS/COMMAND_INTERACTION.md",
+  "role_contract_ref": "C2S/MINING_INDEXING_LEARNING_ROLE_CONTRACT_2026-09-25_V1.json",
+  "trigger": {
+    "required": [
+      "material source or locator",
+      "review/reference-use intent"
+    ],
+    "examples": [
+      "이거 검토해",
+      "이 자료 참고해",
+      "이 자료 참고하게 하고 싶어",
+      "자료로 써"
+    ],
+    "explicit_plain_review_exclusions": [
+      "/검토",
+      "타키 검토",
+      "타키 기준으로 검토"
+    ]
+  },
+  "pipeline": [
+    "SOURCE_OR_LOCATOR",
+    "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+    "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+    "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+    "DOMAIN_CONSUMER_REVIEW",
+    "LEARNING_ENGINE_IF_LEARNING_DOMAIN",
+    "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+    "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+    "REPORT"
+  ],
+  "defaults": {
+    "full_corpus_reindex": false,
+    "canonical_promotion": false,
+    "duplicate_behavior": "LINK_OR_REUSE",
+    "changed_source_behavior": "INCREMENTAL_VERSION_RELATION_UPDATE",
+    "source_disposition": "REFERENCE_ONLY_OR_EVIDENCE_CANDIDATE"
+  },
+  "guards": [
+    "MINING != INDEXING",
+    "INDEXING != LEARNING",
+    "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+    "INDEXED != APPROVED_POLICY",
+    "SEARCH_RANK != LEARNING_DECISION",
+    "DUPLICATE != NEW_EVIDENCE",
+    "USER != DEBUGGER"
+  ],
+  "executable_ref": "ENFORCEMENT/reference_intake_router.py",
+  "execution_claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME_ONLY"
+}
