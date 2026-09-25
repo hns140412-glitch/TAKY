@@ -1,0 +1,28 @@
+{
+  "schema": "TAKY_DATA_INDEX_PARAPHRASE_REGRESSION_CORRECTION_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "failed_run_id": 36126787259,
+  "failed_head": "1048ab84ecdab12724ebd465618f5a88594f480c",
+  "observed": {
+    "case_count": 8,
+    "lexical_hit_at_10": 0,
+    "semantic_hit_at_10": 7,
+    "hybrid_hit_at_10": 8,
+    "failed_case": "PH-Q7",
+    "failed_case_semantic_hit": false,
+    "failed_case_hybrid_hit": true
+  },
+  "interpretation": [
+    "CONTROLLED_SEMANTIC_STANDALONE_IS_NOT_PERFECT_ON_PARAPHRASE_SUITE",
+    "D5_HYBRID_RECOVERS_THE_STANDALONE_SEMANTIC_MISS",
+    "DO_NOT_TUNE_QUERY_OR_EXPECTED_FAMILY_TO_HIDE_THE_MISS",
+    "PRODUCT_RETRIEVAL_GATE_SHOULD_ASSERT_HYBRID_PATH_WHILE_REPORTING_STANDALONE_SEMANTIC_LIMITATION"
+  ],
+  "corrected_gate": {
+    "hybrid_hit_at_10_required": "8/8",
+    "semantic_hit_at_10_minimum": "7/8",
+    "semantic_only_wins_minimum": 6,
+    "independent_generalization_claim": false
+  },
+  "promotion": "FORBIDDEN_BY_THIS_CHECKPOINT"
+}
