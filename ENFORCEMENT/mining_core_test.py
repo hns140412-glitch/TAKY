@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from mining_core import checkpoint,resume,evidence_score
+from mining_core import checkpoint,resume,evidence_score,apply_external_receipts
 
 F=[{"id":"law","question":"official rule"},{"id":"impl","question":"implementation evidence"}]
 class MiningCoreTest(unittest.TestCase):
@@ -18,4 +18,9 @@ class MiningCoreTest(unittest.TestCase):
   e=[{"evidence_id":"a","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"ALLOW","independent_support_count":2},{"evidence_id":"b","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"DENY","independent_support_count":2}]
   c=checkpoint({"task_family":"X","goal":"new goal"},[F[0]],e)
   self.assertFalse(c["stop"]); self.assertEqual(c["frontier"][0]["status"],"CONFLICT"); self.assertEqual(c["next_queries"][0]["purpose"],"RESOLVE_CONFLICT")
+ def test_external_receipt_resumes_checkpoint(self):
+  c=checkpoint({"task_family":"X","goal":"new goal"},[{"id":"law","question":"official rule"}],[])
+  r=apply_external_receipts(c,[{"frontier_id":"law","query":"official rule","adapter":"WEB","results":[{"url":"https://example.gov/r","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"text","scope":"current","value":"A","independent_support_count":2}]}])
+  self.assertEqual(r["external_ingest"]["accepted_evidence"],1); self.assertTrue(r["stop"])
+
 if __name__=="__main__": unittest.main()
