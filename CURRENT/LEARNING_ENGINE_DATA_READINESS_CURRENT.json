@@ -1,7 +1,7 @@
 {
   "projection_version": "TAKY_LEARNING_ENGINE_DATA_READINESS_CURRENT_V1",
   "authority": "LEARNING_ENGINE_CORE",
-  "generated_at": "2026-09-25T12:40:00.000Z",
+  "generated_at": "2026-09-26T07:15:00+09:00",
   "minimum_verified_retrieval_targets_for_promotion_review": 30,
   "code_path": {
     "specialist_event_pipeline": "IMPLEMENTED",
@@ -14,13 +14,21 @@
     "durable_store_adapter": "IMPLEMENTED",
     "transport_auth_policy": "IMPLEMENTED",
     "authenticated_transport": "IMPLEMENTED",
-    "netlify_blobs_transport_adapter": "IMPLEMENTED"
+    "netlify_blobs_transport_adapter": "IMPLEMENTED",
+    "evidence_policy_bridge": "IMPLEMENTED",
+    "indexed_evidence_handoff": "IMPLEMENTED",
+    "evidence_gap_router": "IMPLEMENTED",
+    "outcome_growth_feedback": "IMPLEMENTED",
+    "growth_strategy_ledger": "IMPLEMENTED",
+    "durable_growth_strategy_store_adapter": "IMPLEMENTED",
+    "real_outcome_growth_e2e": "IMPLEMENTED_AND_CI_VERIFIED"
   },
   "runtime_connection": {
     "hosted_central_transport": "ADAPTER_READY_NOT_BOUND",
     "production_deployment": "HOLD",
     "netlify_deployment": "HOLD",
     "live_persisted_receipt_store": "NOT_MATERIALIZED_IN_REPOSITORY",
+    "live_growth_strategy_store": "ADAPTER_READY_NOT_BOUND",
     "identity_resolver": "NOT_CONNECTED",
     "function_endpoint": "NOT_BOUND"
   },
@@ -30,12 +38,17 @@
     "It does not mean the learner has zero evidence in the apps.",
     "Ready retains packets durably until an immutable central ingest receipt is acknowledged.",
     "Verified evidence receives REAL_EVIDENCE_RECEIPT; observation-only evidence receives OBSERVATION_INGEST_RECEIPT.",
-    "Hosted storage, strong-consistency conditional writes, and family/member authorization adapters are implemented but not deployed."
+    "Growth strategy memory now has an append-only durable adapter that references REAL_LEARNING_EVIDENCE_RECEIPT instead of copying raw evidence.",
+    "Verified outcome feedback and Mining strategy feedback candidates can accumulate longitudinally, but promotion_authority and strategy_change_authorized remain false.",
+    "Hosted storage, strong-consistency conditional writes, family/member authorization, and growth-ledger adapters are implemented but the live central stores are not bound or deployed."
   ],
   "invariants": [
     "HOLD != DROP",
     "OBSERVATION_ONLY != VERIFIED_TARGET",
     "NO_PACKET_ACK_WITHOUT_IMMUTABLE_CENTRAL_INGEST_RECEIPT",
-    "PROMOTION_READINESS != ESTIMATOR_PROMOTION"
+    "PROMOTION_READINESS != ESTIMATOR_PROMOTION",
+    "REAL_OUTCOME_FEEDBACK != AUTOMATIC_STRATEGY_PROMOTION",
+    "MINING_STRATEGY_FEEDBACK_CANDIDATE != MINING_STRATEGY_CHANGE",
+    "RAW_EVIDENCE_IMMUTABLE_AND_REFERENCED_BY_RECEIPT"
   ]
 }
