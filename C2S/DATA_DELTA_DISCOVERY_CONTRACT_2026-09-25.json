@@ -1,0 +1,37 @@
+{
+  "schema": "TAKY_DATA_DELTA_DISCOVERY_CONTRACT_V1",
+  "date": "2026-09-25",
+  "status": "OPERATIONS_ACTIVE",
+  "drive": {
+    "data_root_id": "1_dJS5oJ7szSZL_Ljbek4dlvIGobUgbv4",
+    "inbox_id": "1h_DPWYVQgT36tkP5WYrdxPprGHMYwq7K",
+    "inbox_role": "PRIMARY_EXPLICIT_INGEST_QUEUE",
+    "data_subtree_role": "SAFETY_NET_FOR_RECENT_NEW_OR_MODIFIED_ITEMS"
+  },
+  "discovery_order": [
+    "INBOX_SCAN",
+    "DATA_SUBTREE_RECENT_CHANGE_SCAN",
+    "KNOWN_SOURCE_COMPARISON",
+    "DELTA_CLASSIFY",
+    "INCREMENTAL_INDEX_IF_ACCEPTED"
+  ],
+  "classifications": [
+    "NEW_SOURCE",
+    "UPDATED_SOURCE",
+    "VERSION_CANDIDATE",
+    "EXACT_DUPLICATE",
+    "DERIVED_NOT_SOURCE",
+    "IGNORE"
+  ],
+  "guards": [
+    "NEW_FILE != AUTHORITATIVE_SOURCE_DELTA",
+    "HANDOFF_C2S_CURRENT_HISTORY_MINED_ARE_NOT_RAW_SOURCE_BY_DEFAULT",
+    "DO_NOT_FULL_REINDEX",
+    "DO_NOT_AUTO_PROMOTE",
+    "DO_NOT_REREAD_RAW_UNLESS_NEEDED_FOR_CLASSIFICATION",
+    "INBOX_ITEMS_GET_PRIORITY_BUT_NOT_AUTOMATIC_ACCEPTANCE",
+    "DATA_SUBTREE_SCAN_PREVENTS_INBOX_BYPASS_LOSS"
+  ],
+  "accepted_delta_output": "NORMALIZED_INDEX_L1_DELTA_ONLY",
+  "downstream": "PROJECTIONS/data_index_incremental_projection.py"
+}
