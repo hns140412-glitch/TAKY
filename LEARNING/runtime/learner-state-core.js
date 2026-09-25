@@ -1,8 +1,8 @@
 (function(root,factory){
-  const api=factory();
+  const api=factory(require('../evidence/self-reflection-evidence.js'));
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   if(root)root.TakyLearningEngineCoreV2=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(){
+})(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection){
   'use strict';
 
   const VERSION='TAKY_LEARNING_ENGINE_CORE_V2_0_2';
@@ -77,7 +77,11 @@
     const spacedDays=new Set(accepted.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const instrumentVersions=[...new Set(accepted.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
 
-    const performanceEvidence=accepted.filter(e=>clean(e.evidence_type)!=='CHILD_SELF_REPORT');
+    const reflectionEvidence=accepted.filter(e=>clean(e.evidence_type)==='SELF_REFLECTION_EVIDENCE');
+    const reflectionSummary=SelfReflection?.summarize?SelfReflection.summarize(reflectionEvidence):{
+      reflection_count:0,difficulty_counts:{},recall_state_counts:{},confidence_counts:{},hint_report_count:0,repeated_confusions:[],knew_but_could_not_recall_count:0
+    };
+    const performanceEvidence=accepted.filter(e=>!['CHILD_SELF_REPORT','SELF_REFLECTION_EVIDENCE'].includes(clean(e.evidence_type)));
     const performanceSpacedDays=new Set(performanceEvidence.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const memoryEvidence=performanceEvidence.filter(e=>clean(e.evidence_type)==='MEMORY_RETRIEVAL_EVIDENCE');
     const memoryInstrumentVersions=[...new Set(memoryEvidence.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
@@ -127,6 +131,8 @@
         assisted_count:assisted,
         unassisted_count:unassisted,
         child_self_report_count:accepted.filter(e=>clean(e.evidence_type)==='CHILD_SELF_REPORT').length,
+        self_reflection_count:reflectionSummary.reflection_count,
+        self_reflection:reflectionSummary,
         verified_performance_count:performanceEvidence.filter(e=>e.verified_performance===true).length,
         memory_strength_values:memoryStrengths,
         max_review_priority:priorities.length?Math.max(...priorities):null,
@@ -144,11 +150,12 @@
         instrument_change_detected:instrumentChangeDetected,
         assistance_dependency_signal:assistanceSignal,
         retention_signal:'MODEL_NOT_BOUND',
-        repeated_confusion_signal:'UNMODELED'
+        repeated_confusion_signal:reflectionSummary.repeated_confusions.length?'REPEATED_SELF_REPORTED_CONFUSION':'NONE_OBSERVED',
+        metacognitive_recall_signal:reflectionSummary.knew_but_could_not_recall_count>0?'KNEW_BUT_RECALL_FAILED_REPORTED':'NONE_OBSERVED'
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
-        mastery_basis:'not estimated until a calibrated estimator is bound',
+        mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection is observation-only and excluded from performance targets',
         scheduling_basis:'Core emits no dated schedule'
       },
       invalid_evidence_count:invalid.length,
