@@ -1,5 +1,6 @@
 'use strict';
 
+const VerifierPolicy=require('./verifier-policy.js');
 const VERSION='TAKY_LEARNING_VERIFICATION_V1';
 const clean=v=>String(v??'').trim();
 
@@ -65,6 +66,13 @@ function applyReceipt(evidence={},receipt={}){
   if(clean(evidence.evidence_type)==='CHILD_SELF_REPORT')issues.push('SELF_REPORT_NOT_VERIFIABLE_TARGET');
   const spec=ALLOWED_VERIFIERS[clean(receipt.verifier_type)];
   if(spec&&!spec.allowed_evidence.includes(clean(evidence.evidence_type)))issues.push('VERIFIER_EVIDENCE_TYPE_MISMATCH');
+  const policy=VerifierPolicy.canVerify({
+    source_app:clean(evidence.source_app),
+    evidence_type:clean(evidence.evidence_type),
+    verifier_type:clean(receipt.verifier_type),
+    auto:clean(receipt.verifier_type)!=='HUMAN_RUBRIC_BINARY'
+  });
+  if(!policy.ok)issues.push(policy.reason);
   if(issues.length)return {ok:false,reason:'VERIFICATION_SCOPE_MISMATCH',issues};
   return {
     ok:true,
