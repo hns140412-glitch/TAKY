@@ -178,6 +178,8 @@ jobs:
         run: python ENFORCEMENT/system_layer_ownership_validator.py
       - name: Validate shared app execution context
         run: node SHARED/runtime/app-execution-context.test.js
+      - name: Validate family member storage scope
+        run: node SHARED/runtime/storage-scope.test.js
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
