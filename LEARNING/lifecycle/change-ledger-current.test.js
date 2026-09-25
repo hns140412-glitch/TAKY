@@ -17,6 +17,8 @@ for(const required of [
   'Forgetting and retention estimator',
   'Calibrated BKT estimator',
   'Concept prerequisite and dependency graph',
+  'Core adaptive learning plan intent',
+  'Ready adaptive review requires Core decision',
   'Extract remaining Ready-embedded learning logic'
 ]){
   assert.equal(titles.has(required),true,'missing retained change: '+required);
@@ -43,6 +45,11 @@ const dataCandidateHistory=ledger.entries.filter(x=>x.title==='Data-derived prer
 assert.equal(dataCandidateHistory.some(x=>x.state==='HOLD'),true);
 assert.equal(dataCandidateHistory.some(x=>x.state==='APPLIED'),true);
 assert.equal(L.currentProjection(ledger).find(x=>x.title==='Data-derived prerequisite relation candidates').state,'APPLIED');
+assert.equal(L.currentProjection(ledger).find(x=>x.title==='Core adaptive learning plan intent').state,'APPLIED');
+assert.equal(L.currentProjection(ledger).find(x=>x.title==='Ready adaptive review requires Core decision').state,'APPLIED');
+const readyLegacy=L.currentProjection(ledger).find(x=>x.title==='Extract remaining Ready-embedded learning logic');
+assert.equal(readyLegacy.state,'HOLD');
+assert.equal(readyLegacy.blockers.includes('LEGACY_CALLERS_WITHOUT_CORE_DECISION_REMAIN'),true);
 assert.equal(ledger.entries.every(x=>x.retention==='IMMUTABLE_HISTORY'),true);
 
 console.log('LEARNING_CHANGE_LEDGER_CURRENT_PASS');
