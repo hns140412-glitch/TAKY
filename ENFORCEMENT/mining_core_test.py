@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from mining_core import checkpoint,resume,evidence_score,apply_external_receipts
+from mining_core import checkpoint,resume,evidence_score,apply_external_receipts,synthesize_checkpoint
 
 F=[{"id":"law","question":"official rule"},{"id":"impl","question":"implementation evidence"}]
 class MiningCoreTest(unittest.TestCase):
@@ -22,5 +22,11 @@ class MiningCoreTest(unittest.TestCase):
   c=checkpoint({"task_family":"X","goal":"new goal"},[{"id":"law","question":"official rule"}],[])
   r=apply_external_receipts(c,[{"frontier_id":"law","query":"official rule","adapter":"WEB","results":[{"url":"https://example.gov/r","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"text","scope":"current","value":"A","independent_support_count":2}]}])
   self.assertEqual(r["external_ingest"]["accepted_evidence"],1); self.assertTrue(r["stop"])
+
+ def test_synthesis_preserves_checkpoint_trace(self):
+  c=checkpoint({"task_family":"X","goal":"new goal"},[{"id":"f","kind":"FOUNDATION","question":"base"}],[{"evidence_id":"e1","frontier_id":"f","source_class":"OFFICIAL","direct_support":True,"claim":"base claim","independent_support_count":2}])
+  s=synthesize_checkpoint(c)
+  self.assertEqual(s["checkpoint_resume_key"],c["resume_key"])
+  self.assertEqual(s["synthesis"]["sections"]["foundation"][0]["frontier_id"],"f")
 
 if __name__=="__main__": unittest.main()
