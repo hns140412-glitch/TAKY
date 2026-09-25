@@ -54,3 +54,6 @@ jobs:
       - name: Index-first evidence gap broker
         working-directory: ENFORCEMENT
         run: python learning_evidence_gap_broker_test.py
+      - name: Full Mining Indexing Learning growth E2E
+        working-directory: ENFORCEMENT
+        run: python cross_engine_growth_e2e_test.py
