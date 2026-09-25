@@ -16,7 +16,8 @@ for(const required of [
   'Pedagogical feedback intent',
   'Forgetting and retention estimator',
   'Calibrated BKT estimator',
-  'Concept prerequisite and dependency graph'
+  'Concept prerequisite and dependency graph',
+  'Extract remaining Ready-embedded learning logic'
 ]){
   assert.equal(titles.has(required),true,'missing retained change: '+required);
 }
@@ -24,6 +25,7 @@ const pending=L.pending(ledger);
 assert.equal(pending.length>=2,true);
 assert.equal(pending.some(x=>x.title==='Forgetting and retention estimator'),true);
 assert.equal(pending.some(x=>x.title==='Calibrated BKT estimator'),true);
+assert.equal(pending.some(x=>x.title==='Extract remaining Ready-embedded learning logic'),true);
 assert.equal(pending.some(x=>x.title==='Data-derived prerequisite relation candidates'),false);
 
 const reflectionHistory=ledger.entries.filter(x=>x.title==='Metacognitive self-reflection evidence');
