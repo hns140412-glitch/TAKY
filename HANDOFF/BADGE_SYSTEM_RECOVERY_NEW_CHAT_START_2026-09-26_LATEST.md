@@ -60,11 +60,11 @@ Remaining OPEN:
 
 ## 4. SP-BADGE-008
 
-State: `PARTIAL`
+State: `IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD`
 
 Repository: `hns140412-glitch/Snap-Pop`  
 Draft PR: #8  
-Exact head: `909018cf22bbff746bf4a6896dbd0561d09a8b49`
+Exact head: `94c637fc87983a490ebf1047a07f108474b5dca1`
 
 World / Theme:
 - reviewed runtime scene `assets/world/golden_world_scene.jpg` explicitly bound;
@@ -77,17 +77,24 @@ World / Theme:
 - Ready Core 6 Visual IDs SHALL NOT be auto-imported into Snap; project visual authority is owner-scoped.
 
 Crew Visual:
-- `OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET`.
+- implementation state = `CLOSED`.
+- content state = `CONTENT_APPROVAL_HOLD`.
+- Snap-owned Crew Asset Approval Gate/Registry is implemented.
+- runtime binding requires `owner=snap-pop`, `APPROVED_RUNTIME_ASSET`, explicit user confirmation and review evidence.
+- initial `character_master_hd.jpg` / `maltipoo_guide_hd.jpg` remain lineage-only and cannot satisfy approval.
+- Ready Core 6 cross-app auto import remains forbidden.
 - Do not invent or auto-promote a Crew asset.
-- Only bind when a genuinely reviewed/approved individual Crew/Character asset exists.
+- Actual reviewed/approved individual Crew asset remains a content dependency, not an implementation gap.
 
 CI:
 - Validate Snap & Pop = SUCCESS
 
 Remaining OPEN:
-- reviewed individual Crew/Character asset binding;
+- actual Snap-owned reviewed/approved individual Crew/Character asset approval/content;
 - merge decision for draft PR #8;
 - post-merge exact-main regression.
+
+Do NOT reopen SP-BADGE-008 implementation merely because approved Crew content is not yet supplied.
 
 ## 5. Ready World State consumer
 
@@ -131,7 +138,7 @@ Do not:
 
 1. Keep SP-BADGE-006 implementation closed candidate.
 2. Keep SP-BADGE-008 World/Theme closed candidate.
-3. Preserve Crew visual OPEN until approved individual asset evidence exists.
+3. Keep Crew content in CONTENT_APPROVAL_HOLD; implementation stays CLOSED unless regression evidence appears.
 4. Merge draft PRs only by intentional decision.
 5. After any merge, verify exact main heads and rerun regressions.
 6. Only then promote corresponding items from candidate to final CLOSED.
