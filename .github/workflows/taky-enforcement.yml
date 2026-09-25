@@ -178,6 +178,8 @@ jobs:
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate metacognitive self-reflection evidence
         run: node LEARNING/evidence/self-reflection-evidence.test.js
+      - name: Validate pedagogical feedback intent
+        run: node LEARNING/pedagogy/feedback-intent.test.js
       - name: Validate Learning Engine estimator benchmark lane
         run: node LEARNING/benchmark/estimator-benchmark.test.js
       - name: Validate estimator promotion policy
