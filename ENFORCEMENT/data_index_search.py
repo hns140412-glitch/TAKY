@@ -106,6 +106,7 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "language": classification.get("language") or record.get("language"),
         "modality": classification.get("modality") or record.get("modality"),
         "origin_type": origin_type,
+        "origin_locator": provenance.get("origin_locator") or record.get("origin_locator") or record.get("url"),
         "publisher_or_account": provenance.get("publisher_or_account") or record.get("publisher_or_account"),
         "short_summary": discovery.get("short_summary")
         or (record.get("value_statement") if isinstance(record.get("value_statement"), str) else None),
@@ -121,8 +122,67 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "review_state": state.get("review_state") or record.get("review_bucket"),
         "current_relation": state.get("current_relation") or record.get("current_relation"),
         "temporal_group": record.get("temporal_group"),
+        "legacy_duplicate_group": record.get("duplicate_group"),
+        "legacy_fragment_group": record.get("fragment_group"),
+        "legacy_version_relation": record.get("version_relation"),
     }
     return normalized
+
+
+def materialize_legacy_relations(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Derive source-to-source compatibility relations without rereading RAW.
+
+    Temporal groups remain candidate-only and are intentionally excluded.
+    Duplicate groups are mapped conservatively: binary/SHA groups become exact,
+    other duplicate groups become near-duplicate relations. Fragment groups are
+    linked as RELATED_TO siblings with an explicit qualifier so they can support
+    reconstruction without claiming identity or hierarchy.
+    """
+    duplicate_groups: defaultdict[str, list[str]] = defaultdict(list)
+    fragment_groups: defaultdict[str, list[str]] = defaultdict(list)
+    for record in records:
+        source_id = record.get("source_id")
+        if not source_id:
+            continue
+        if record.get("legacy_duplicate_group"):
+            duplicate_groups[str(record["legacy_duplicate_group"])].append(source_id)
+        if record.get("legacy_fragment_group"):
+            fragment_groups[str(record["legacy_fragment_group"])].append(source_id)
+
+    for record in records:
+        source_id = record.get("source_id")
+        relations = record.setdefault("relations", [])
+        seen = {(r.get("type"), r.get("target"), r.get("qualifier")) for r in relations if isinstance(r, dict)}
+
+        dup_group = record.get("legacy_duplicate_group")
+        if dup_group:
+            relation_type = (
+                "EXACT_DUPLICATE_OF"
+                if ("BINARY_EXACT" in str(dup_group).upper() or "SHA256" in str(dup_group).upper())
+                else "NEAR_DUPLICATE_OF"
+            )
+            for target in duplicate_groups.get(str(dup_group), []):
+                key = (relation_type, target, "LEGACY_DUPLICATE_GROUP_COMPAT")
+                if target != source_id and key not in seen:
+                    relations.append({
+                        "type": relation_type,
+                        "target": target,
+                        "qualifier": "LEGACY_DUPLICATE_GROUP_COMPAT",
+                    })
+                    seen.add(key)
+
+        fragment_group = record.get("legacy_fragment_group")
+        if fragment_group:
+            for target in fragment_groups.get(str(fragment_group), []):
+                key = ("RELATED_TO", target, "LEGACY_FRAGMENT_GROUP_COMPAT")
+                if target != source_id and key not in seen:
+                    relations.append({
+                        "type": "RELATED_TO",
+                        "target": target,
+                        "qualifier": "LEGACY_FRAGMENT_GROUP_COMPAT",
+                    })
+                    seen.add(key)
+    return records
 
 
 def _extract_records(payload: Any) -> list[dict[str, Any]]:
@@ -151,7 +211,8 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 def load_index(path: Path) -> list[dict[str, Any]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     records = [normalize_record(x) for x in _extract_records(payload)]
-    return [x for x in records if x.get("source_id")]
+    records = [x for x in records if x.get("source_id")]
+    return materialize_legacy_relations(records)
 
 
 def _matches_filter(record: dict[str, Any], key: str, expected: str) -> bool:
@@ -343,6 +404,16 @@ def search(
                 "authority_class": r.get("authority_class"),
                 "current_relation": r.get("current_relation"),
                 "detail_available": r.get("detail_available"),
+                "source_ref": {
+                    "source_id": sid,
+                    "locator": r.get("locator"),
+                    "content_hash": r.get("content_hash"),
+                },
+                "provenance": {
+                    "origin_type": r.get("origin_type"),
+                    "origin_locator": r.get("origin_locator"),
+                    "publisher_or_account": r.get("publisher_or_account"),
+                },
                 "score": round(score, 8),
                 "channels": {
                     "exact": sid in exact,

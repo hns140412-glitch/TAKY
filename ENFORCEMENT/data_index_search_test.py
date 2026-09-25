@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 SCRIPT = ROOT / "data_index_search.py"
 sys.path.insert(0, str(ROOT))
 
-from data_index_search import normalize_record, search
+from data_index_search import materialize_legacy_relations, normalize_record, search
 
 RECORDS = [
     {
@@ -24,7 +24,14 @@ RECORDS = [
             "identity": {
                 "source_id": "SRC-001",
                 "canonical_title": "서울 PHONICS 학생용",
+                "locator": "DATA/phonics.pdf",
                 "media_type": "application/pdf",
+                "content_hash": "sha256:test-phonics",
+            },
+            "provenance": {
+                "origin_type": "LOCAL_EDUCATION_AUTHORITY_PUBLICATION",
+                "origin_locator": "https://example.invalid/phonics",
+                "publisher_or_account": "SEOUL_EDU",
             },
             "classification": {
                 "source_family": "SEOUL_PHONICS_STUDENT_BOOK",
@@ -85,7 +92,7 @@ RECORDS = [
     },
 ]
 
-records = [normalize_record(r) for r in RECORDS]
+records = materialize_legacy_relations([normalize_record(r) for r in RECORDS])
 
 # 1. exact source_id
 r = search(records, "SRC-001")
@@ -112,30 +119,38 @@ assert {x["source_family"] for x in same_temporal} == {
     "READY_SET_MOBILE_PREVIEW_RUNTIME_REFERENCE",
 }
 
-# 6. duplicate-group compatibility hint does not become exact-duplicate identity
+# 6. duplicate-group compatibility becomes a conservative source relation, not identity merge
 a = next(x for x in records if x["source_id"] == "SRC-003")
 b = next(x for x in records if x["source_id"] == "SRC-004")
 assert a["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
 assert b["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
-assert not any(x.get("type") == "EXACT_DUPLICATE_OF" for x in a["relations"])
+assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-004" for x in a["relations"])
+assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-003" for x in b["relations"])
 
 # 7. relation expansion can surface linked indexed source
 r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1)
 ids = [x["source_id"] for x in r["results"]]
 assert "SRC-001" in ids and "SRC-002" in ids
 
-# 8. search projection does not expose domain decision fields as core result data
+# 8. sourceRef/provenance are surfaced without leaking domain decision metadata
+r = search(records, "서울 PHONICS 학생용")
+assert r["results"][0]["source_ref"]["source_id"] == "SRC-001"
+assert r["results"][0]["source_ref"]["locator"] == "DATA/phonics.pdf"
+assert r["results"][0]["provenance"]["origin_type"] == "LOCAL_EDUCATION_AUTHORITY_PUBLICATION"
+assert r["results"][0]["provenance"]["publisher_or_account"] == "SEOUL_EDU"
+
+# 9. search projection does not expose domain decision fields as core result data
 r = search(records, "학습도구어")
 payload = json.dumps(r, ensure_ascii=False)
 assert "DIRECT_USE_READY" not in payload
 assert "LE-F02" not in payload
 assert "MAPPED_NOT_CONNECTED" not in payload
 
-# 9. semantic channel is explicitly fallback, not embedding claim
+# 10. semantic channel is explicitly fallback, not embedding claim
 assert r["semantic_mode"] == "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
 assert r["projection_authoritative"] is False
 
-# 10. CLI smoke test against a V24-like container
+# 11. CLI smoke test against a V24-like container
 with tempfile.TemporaryDirectory() as tmp:
     p = Path(tmp) / "index.json"
     p.write_text(json.dumps({"source_entries": RECORDS}, ensure_ascii=False), encoding="utf-8")
