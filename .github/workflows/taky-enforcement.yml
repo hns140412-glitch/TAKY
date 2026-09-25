@@ -184,6 +184,8 @@ jobs:
         run: node LEARNING/replay/replay-benchmark.test.js
       - name: Validate real learning evidence receipt pipeline
         run: node LEARNING/receipts/real-evidence-receipt.test.js
+      - name: Validate skill-scoped real evidence intake
+        run: node LEARNING/intake/real-evidence-intake.test.js
       - name: Validate Learning Engine verification layer
         run: node LEARNING/verification/verification-layer.test.js
       - name: Validate app-specific verifier policy
