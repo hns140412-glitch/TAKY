@@ -9,6 +9,8 @@ on:
       - 'PROJECTIONS/data_index_semantic_projection.py'
       - 'PROJECTIONS/data_index_semantic_projection_test.py'
       - 'PROJECTIONS/fixtures/data_index_v24_semantic_projection.json'
+      - 'ENFORCEMENT/data_index_search.py'
+      - 'ENFORCEMENT/data_index_search_test.py'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
