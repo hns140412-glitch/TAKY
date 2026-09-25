@@ -7,6 +7,7 @@ Every cycle returns a checkpoint so interruption never requires restarting.
 from __future__ import annotations
 import hashlib, json
 from typing import Iterable
+from mining_claim_relations import analyze
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -34,9 +35,11 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         fid=str(item.get("id"))
         ev=by.get(fid,[])
         best=max((x["quality_score"] for x in ev),default=0.0)
-        conflict=len({str(x.get("claim")) for x in ev if x.get("claim")})>1
+        relations=analyze(ev)
+        conflict=relations["conflict"]
+        unresolved=relations["unresolved_pairs"]
         status="CONFLICT" if conflict else "CLOSED" if best>=threshold else "OPEN"
-        out.append({**item,"status":status,"best_evidence_score":best,"evidence_count":len(ev)})
+        out.append({**item,"status":status,"best_evidence_score":best,"evidence_count":len(ev),"claim_relations":relations,"unresolved_claim_pairs":unresolved})
     return out
 
 def next_queries(assessed:list[dict])->list[dict]:
