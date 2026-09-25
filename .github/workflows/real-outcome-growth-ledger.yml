@@ -1,0 +1,35 @@
+name: TAKY Real Outcome Growth Ledger
+
+on:
+  push:
+    branches:
+      - taky/real-outcome-growth-ledger-2026-09-26
+  pull_request:
+    paths:
+      - 'LEARNING/lifecycle/growth-strategy-ledger.js'
+      - 'LEARNING/lifecycle/growth-strategy-ledger.test.js'
+      - 'LEARNING/lifecycle/real-outcome-growth-e2e.test.js'
+      - 'LEARNING/transport/durable-growth-strategy-store-adapter.js'
+      - 'LEARNING/transport/durable-growth-strategy-store-adapter.test.js'
+      - '.github/workflows/real-outcome-growth-ledger.yml'
+
+jobs:
+  longitudinal-growth-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Existing real evidence receipt regression
+        run: node LEARNING/receipts/real-evidence-receipt.test.js
+      - name: Existing outcome growth feedback regression
+        run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
+      - name: Growth strategy ledger
+        run: node LEARNING/lifecycle/growth-strategy-ledger.test.js
+      - name: Durable growth store adapter
+        run: node LEARNING/transport/durable-growth-strategy-store-adapter.test.js
+      - name: Real outcome growth E2E
+        run: node LEARNING/lifecycle/real-outcome-growth-e2e.test.js
+      - name: Existing Learning runtime integration
+        run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
