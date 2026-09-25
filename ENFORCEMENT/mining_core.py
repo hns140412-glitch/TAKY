@@ -9,6 +9,7 @@ import hashlib, json
 from typing import Iterable
 from mining_claim_relations import analyze
 from mining_goal_sufficiency import evaluate as evaluate_goal_sufficiency
+from mining_external_adapter import ingest_receipt
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -64,3 +65,17 @@ def resume(checkpoint_state:dict,new_evidence:list[dict])->dict:
     frontier=[{"id":x["id"],"question":x.get("question"),"kind":x.get("kind")} for x in checkpoint_state.get("frontier",[])]
     evidence=list(checkpoint_state.get("evidence",[]))+list(new_evidence)
     return checkpoint(task,frontier,evidence,checkpoint_state)
+
+
+def apply_external_receipts(checkpoint_state:dict, receipts:list[dict])->dict:
+    """Ingest provider-independent external receipts then resume from checkpoint."""
+    new=[]; rejected=[]
+    for receipt in receipts or []:
+        ing=ingest_receipt(receipt)
+        if ing.get("accepted"):
+            new.extend(ing.get("evidence",[]))
+        else:
+            rejected.append({"frontier_id":receipt.get("frontier_id"),"errors":ing.get("errors",[])})
+    out=resume(checkpoint_state,new)
+    out["external_ingest"]={"accepted_evidence":len(new),"rejected_receipts":rejected}
+    return out
