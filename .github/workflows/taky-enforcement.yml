@@ -182,6 +182,8 @@ jobs:
         run: node LEARNING/estimators/retention-state-baseline.test.js
       - name: Validate declared concept dependency graph
         run: node LEARNING/domain-model/concept-dependency-graph.test.js
+      - name: Validate data-derived relation promotion policy
+        run: node LEARNING/domain-model/relation-promotion-policy.test.js
       - name: Validate calibrated BKT candidate
         run: node LEARNING/estimators/bkt-calibration-candidate.test.js
       - name: Validate metacognitive self-reflection evidence
