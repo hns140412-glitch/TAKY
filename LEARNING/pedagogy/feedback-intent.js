@@ -8,60 +8,44 @@ function derive(state={}){
   const intents=[];
   const inferred=state.inferred||{};
   const observed=state.observed||{};
+  const addIntent=(intent,priority,basis,extra={})=>{
+    const existing=intents.find(x=>x.intent===intent);
+    if(existing){
+      existing.bases=[...(existing.bases||[existing.basis]),basis].filter(Boolean);
+      delete existing.basis;
+      if(priority==='HIGH'||(priority==='MEDIUM'&&existing.priority==='LOW'))existing.priority=priority;
+      Object.assign(existing,extra);
+      return;
+    }
+    intents.push({intent,priority,basis,...extra});
+  };
 
   if(inferred.repeated_confusion_signal==='REPEATED_SELF_REPORTED_CONFUSION'){
-    intents.push({
-      intent:'DISAMBIGUATE_CONFUSION',
-      priority:'HIGH',
-      basis:'REPEATED_SELF_REPORTED_CONFUSION',
+    addIntent('DISAMBIGUATE_CONFUSION','HIGH','REPEATED_SELF_REPORTED_CONFUSION',{
       targets:(observed.self_reflection?.repeated_confusions||[]).map(x=>x.target)
     });
   }
 
   if(inferred.metacognitive_recall_signal==='KNEW_BUT_RECALL_FAILED_REPORTED'){
-    intents.push({
-      intent:'SHORT_DELAY_RETRIEVAL',
-      priority:'MEDIUM',
-      basis:'KNEW_BUT_RECALL_FAILED_REPORTED'
-    });
+    addIntent('SHORT_DELAY_RETRIEVAL','MEDIUM','KNEW_BUT_RECALL_FAILED_REPORTED');
   }
 
   if(inferred.assistance_dependency_signal==='ASSISTANCE_DOMINANT'){
-    intents.push({
-      intent:'REDUCE_ASSISTANCE_GRADUALLY',
-      priority:'MEDIUM',
-      basis:'ASSISTANCE_DOMINANT'
-    });
+    addIntent('REDUCE_ASSISTANCE_GRADUALLY','MEDIUM','ASSISTANCE_DOMINANT');
   }
 
   if(inferred.retention_signal==='RETENTION_AT_RISK'){
-    intents.push({
-      intent:'RETRIEVAL_CHECKPOINT',
-      priority:'HIGH',
-      basis:'RETENTION_AT_RISK'
-    });
+    addIntent('RETRIEVAL_CHECKPOINT','HIGH','RETENTION_AT_RISK');
   }
 
   if(inferred.trend==='DECLINING'){
-    intents.push({
-      intent:'RETRIEVAL_CHECKPOINT',
-      priority:'HIGH',
-      basis:'DECLINING_MEMORY_TREND'
-    });
+    addIntent('RETRIEVAL_CHECKPOINT','HIGH','DECLINING_MEMORY_TREND');
   }else if(inferred.trend==='IMPROVING'){
-    intents.push({
-      intent:'MAINTAIN_CHALLENGE',
-      priority:'LOW',
-      basis:'IMPROVING_MEMORY_TREND'
-    });
+    addIntent('MAINTAIN_CHALLENGE','LOW','IMPROVING_MEMORY_TREND');
   }
 
   if(!intents.length){
-    intents.push({
-      intent:'CONTINUE_OBSERVATION',
-      priority:'LOW',
-      basis:'NO_STRONG_PEDAGOGICAL_SIGNAL'
-    });
+    addIntent('CONTINUE_OBSERVATION','LOW','NO_STRONG_PEDAGOGICAL_SIGNAL');
   }
 
   return {
