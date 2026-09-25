@@ -1,6 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict');
 const Core=require('./learner-state-core.js');
+const Reflection=require('../evidence/self-reflection-evidence.js');
 
 const e=(id,member,subject,target,opts={})=>({
   event_id:id,
@@ -44,6 +45,24 @@ assert.equal(Core.selfValidate(a).ok,true);
 const leaked=JSON.parse(JSON.stringify(a)); leaked.inferred={schedule_date:'2026-09-30'};
 assert.equal(Core.selfValidate(leaked).ok,false);
 assert.equal(Core.selfValidate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
+
+const refl1=Reflection.create({
+  event_id:'ref1',observed_at:'2026-09-28T08:00:00.000Z',member_id:'A',subject:'영어',
+  concept_skill_target:'VOCABULARY',source_app:'hide-seek',difficulty:'HARD',
+  recall_state:'KNEW_BUT_COULD_NOT_RECALL',confidence:'MEDIUM',confusion_with:['except']
+}).evidence;
+const refl2=Reflection.create({
+  event_id:'ref2',observed_at:'2026-09-29T08:00:00.000Z',member_id:'A',subject:'영어',
+  concept_skill_target:'VOCABULARY',source_app:'hide-seek',difficulty:'OK',
+  recall_state:'RECALLED_WITH_HINT',confidence:'HIGH',confusion_with:['except'],used_hint:true
+}).evidence;
+const withReflection=Core.deriveSkillState([...rows,refl1,refl2],{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
+assert.equal(withReflection.observed.self_reflection_count,2);
+assert.equal(withReflection.observed.performance_evidence_count,a.observed.performance_evidence_count,'reflection must not count as performance evidence');
+assert.equal(withReflection.observed.verified_performance_count,a.observed.verified_performance_count,'reflection must not become verified performance');
+assert.equal(withReflection.inferred.repeated_confusion_signal,'REPEATED_SELF_REPORTED_CONFUSION');
+assert.equal(withReflection.inferred.metacognitive_recall_signal,'KNEW_BUT_RECALL_FAILED_REPORTED');
+assert.equal(withReflection.model.mastery_estimate,null);
 
 const math=Core.deriveSkillState(rows,{member_id:'A',subject:'수학',concept_skill_target:'FRACTION'});
 assert.equal(math.observed.unique_evidence_count,1);
