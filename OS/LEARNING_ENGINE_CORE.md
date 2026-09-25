@@ -508,4 +508,33 @@ Current implementations:
 - LEARNING/lifecycle/evaluation-orchestrator.js
 
 
+## 19. Retention-state baseline candidate
+
+An explainable retention-state baseline is implemented as an advisory candidate.
+
+It uses only verified MEMORY_RETRIEVAL_EVIDENCE with LEARNING_VERIFICATION_RECEIPT authority.
+
+Outputs may include:
+- retention_state
+- forgetting_risk
+- stability_days
+- retrievability_estimate
+- confidence
+
+Hard boundaries:
+- promoted = false until real time-held-out promotion gates pass;
+- Core model.retention_probability remains null before promotion;
+- retention signal may influence pedagogical intent only;
+- no review date, due date or calendar placement may be emitted;
+- Planner remains the only dated scheduling owner.
+
+Current implementation:
+- LEARNING/estimators/retention-state-baseline.js
+
+Current lifecycle:
+- candidate implementation: complete
+- runtime promotion: HOLD
+- blocker: insufficient real verified retrieval targets + promotion policy not passed
+
+
 END
