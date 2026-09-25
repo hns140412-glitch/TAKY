@@ -10,20 +10,27 @@
     "ready_fail_safe_sync": "IMPLEMENTED",
     "real_evidence_receipt_chain": "IMPLEMENTED",
     "automatic_evaluation": "IMPLEMENTED",
-    "readiness_projection": "IMPLEMENTED"
+    "readiness_projection": "IMPLEMENTED",
+    "durable_store_adapter": "IMPLEMENTED",
+    "transport_auth_policy": "IMPLEMENTED",
+    "authenticated_transport": "IMPLEMENTED",
+    "netlify_blobs_transport_adapter": "IMPLEMENTED"
   },
   "runtime_connection": {
-    "hosted_central_transport": "NOT_CONNECTED",
+    "hosted_central_transport": "ADAPTER_READY_NOT_BOUND",
     "production_deployment": "HOLD",
     "netlify_deployment": "HOLD",
-    "live_persisted_receipt_store": "NOT_MATERIALIZED_IN_REPOSITORY"
+    "live_persisted_receipt_store": "NOT_MATERIALIZED_IN_REPOSITORY",
+    "identity_resolver": "NOT_CONNECTED",
+    "function_endpoint": "NOT_BOUND"
   },
   "scopes": [],
   "interpretation": [
     "Empty scopes means no live central receipt store has been materialized here yet.",
     "It does not mean the learner has zero evidence in the apps.",
-    "Once transport is connected, each accepted receipt updates scope counts automatically.",
-    "Observation-only evidence is acknowledged separately and is never coerced into a verified target."
+    "Ready retains packets durably until an immutable central ingest receipt is acknowledged.",
+    "Verified evidence receives REAL_EVIDENCE_RECEIPT; observation-only evidence receives OBSERVATION_INGEST_RECEIPT.",
+    "Hosted storage, strong-consistency conditional writes, and family/member authorization adapters are implemented but not deployed."
   ],
   "invariants": [
     "HOLD != DROP",
