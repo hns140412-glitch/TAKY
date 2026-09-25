@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');
+const T=require('./badge-theme-expression.js');
+const unresolved=T.normalize({theme_id:'theme.jungle',asset_state:'UNRESOLVED',expression_cue:'exploration'});
+assert.equal(unresolved.cosmetic_only,true);
+assert.equal(unresolved.identity_mutation_allowed,false);
+assert.equal(unresolved.asset_refs.length,0);
+assert.throws(()=>T.normalize({theme_id:'x',tier:'GOLD'}),/AUTHORITY_VIOLATION/);
+assert.throws(()=>T.normalize({theme_id:'x',asset_state:'REVIEWED_ASSET_SET'}),/REVIEWED_ASSET_REQUIRED/);
+const reviewed=T.normalize({theme_id:'theme.reviewed',asset_state:'REVIEWED_ASSET_SET',asset_refs:['asset:1']});
+assert.equal(reviewed.asset_refs[0],'asset:1');
+console.log('TAKY_BADGE_THEME_EXPRESSION_V1_PASS');
