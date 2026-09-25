@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-24.1",
+  "registry_version": "2026-09-25.1",
   "purpose": "Classify every MASTER root artifact so location does not imply authority. Paths remain stable until a separately validated migration proves references will not break.",
   "authority_rule": "MASTER_DIRECTORY_PRESENCE != ACTIVE_CANONICAL_AUTHORITY",
   "classes": {
@@ -10,134 +10,53 @@
     "CANDIDATE": "Non-canonical proposal/draft. Never load as current authority."
   },
   "files": {
-    "MASTER/CODEX_TASK_CONTRACT.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/ENFORCEMENT_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/FAILURE_TAXONOMY.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/HANDOFF_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/INTENT_EXECUTION_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/MASTER_LOGIC.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/RECOVERY_FORENSICS_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/REVISION_GOVERNANCE.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/TRACEABILITY_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/UI_REFERENCE_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/VALIDATION_RULES.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/CONVERSATION_ATOM_SCHEMA.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/CONVERSATION_CONTINUITY_SCHEMA.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/EXECUTION_REGRESSION_FIXTURES.md": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/EXECUTOR_ADAPTER_REGISTRY.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/EXECUTOR_RESULT_SCHEMA.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/EXECUTOR_TRANSPORT_SCHEMA.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/RULE_REGISTRY.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/UI_REFERENCE_COMPARISON_MATRIX.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/UI_REFERENCE_REGISTRY.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md": {
-      "class": "LEGACY_OPTIONAL",
-      "default_activation": false
-    },
-    "MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json": {
-      "class": "LEGACY_OPTIONAL",
-      "default_activation": false
-    },
-    "MASTER/CHANGELOG_COMMAND_CONTRACT_20260910.md": {
-      "class": "HISTORICAL_EVIDENCE"
-    },
-    "MASTER/CHANGELOG_REMASTER_REV00_20260910.md": {
-      "class": "HISTORICAL_EVIDENCE"
-    },
-    "MASTER/REMASTER_REV00_MIGRATION_MATRIX.md": {
-      "class": "HISTORICAL_EVIDENCE"
-    },
-    "MASTER/SNAPSHOT_PRE_COMMAND_CONTRACT_UPDATE_20260910.md": {
-      "class": "HISTORICAL_EVIDENCE"
-    },
-    "MASTER/SNAPSHOT_PRE_REMASTER_REV00.md": {
-      "class": "HISTORICAL_EVIDENCE"
-    },
-    "MASTER/REMASTER_REV00_DRAFT.md": {
-      "class": "CANDIDATE",
-      "canonical": false
-    },
-    "MASTER/MASTER_FILE_REGISTRY.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json": {
-      "class": "ACTIVE_SUPPORT"
-    },
-    "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md": {
-      "class": "ACTIVE_OWNER"
-    },
-    "MASTER/EXECUTION_CHECKPOINT_SCHEMA.json": {
-      "class": "ACTIVE_SUPPORT"
+    "MASTER/CODEX_TASK_CONTRACT.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/ENFORCEMENT_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/FAILURE_TAXONOMY.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/HANDOFF_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/INTENT_EXECUTION_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/MASTER_LOGIC.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/RECOVERY_FORENSICS_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/REVISION_GOVERNANCE.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/TRACEABILITY_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/UI_REFERENCE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/VALIDATION_RULES.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/CONVERSATION_ATOM_SCHEMA.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/CONVERSATION_CONTINUITY_SCHEMA.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/EXECUTION_REGRESSION_FIXTURES.md": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/EXECUTOR_ADAPTER_REGISTRY.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/EXECUTOR_RESULT_SCHEMA.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/EXECUTOR_TRANSPORT_SCHEMA.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/RULE_REGISTRY.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/UI_REFERENCE_COMPARISON_MATRIX.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/UI_REFERENCE_REGISTRY.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md": {"class":"LEGACY_OPTIONAL","default_activation":false},
+    "MASTER/NOTEBOOKLM_SOURCE_SCHEMA.json": {"class":"LEGACY_OPTIONAL","default_activation":false},
+    "MASTER/CHANGELOG_COMMAND_CONTRACT_20260910.md": {"class":"HISTORICAL_EVIDENCE"},
+    "MASTER/CHANGELOG_REMASTER_REV00_20260910.md": {"class":"HISTORICAL_EVIDENCE"},
+    "MASTER/REMASTER_REV00_MIGRATION_MATRIX.md": {"class":"HISTORICAL_EVIDENCE"},
+    "MASTER/SNAPSHOT_PRE_COMMAND_CONTRACT_UPDATE_20260910.md": {"class":"HISTORICAL_EVIDENCE"},
+    "MASTER/SNAPSHOT_PRE_REMASTER_REV00.md": {"class":"HISTORICAL_EVIDENCE"},
+    "MASTER/REMASTER_REV00_DRAFT.md": {"class":"CANDIDATE","canonical":false},
+    "MASTER/MASTER_FILE_REGISTRY.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/EXECUTION_CHECKPOINT_SCHEMA.json": {"class":"ACTIVE_SUPPORT"},
+    "MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json": {
+      "class":"ACTIVE_SUPPORT",
+      "authority_owner":"LEARNING_ENGINE_CORE",
+      "source_authority":"LEARNING_DATA_COMPLETENESS_MATRIX_2026-09-23_V49.json",
+      "runtime_role":"EVIDENCE_POLICY_REGISTRY"
     }
   }
 }

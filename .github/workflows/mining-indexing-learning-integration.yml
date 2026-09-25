@@ -1,0 +1,59 @@
+name: TAKY Mining Indexing Learning Integration
+
+on:
+  push:
+    branches:
+      - taky/mining-indexing-learning-integration-2026-09-25
+  pull_request:
+    paths:
+      - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
+      - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
+      - 'LEARNING/policy/**'
+      - 'LEARNING/intake/indexed-evidence-handoff.js'
+      - 'LEARNING/intake/indexed-evidence-handoff.test.js'
+      - 'LEARNING/runtime/evidence-gap.js'
+      - 'LEARNING/runtime/evidence-gap.test.js'
+      - 'LEARNING/runtime/learning-engine-runtime.js'
+      - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+      - 'LEARNING/lifecycle/outcome-growth-feedback.js'
+      - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
+      - 'ENFORCEMENT/learning_evidence_gap_broker.py'
+      - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
+      - 'ENFORCEMENT/reference_intake_executor.py'
+      - 'ENFORCEMENT/reference_intake_executor_test.py'
+      - 'ENFORCEMENT/runtime_orchestrator.py'
+
+jobs:
+  integration-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Evidence policy bridge
+        run: node LEARNING/policy/evidence-policy-bridge.test.js
+      - name: Index to Learning evidence handoff
+        run: node LEARNING/intake/indexed-evidence-handoff.test.js
+      - name: Learning evidence gap emitter
+        run: node LEARNING/runtime/evidence-gap.test.js
+      - name: Outcome growth feedback
+        run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
+      - name: Learning runtime policy integration
+        run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
+      - name: Existing learner state regression
+        run: node LEARNING/runtime/learner-state-core.test.js
+      - name: Existing decision contract regression
+        run: node LEARNING/runtime/decision-contract.test.js
+      - name: Reference intake disposition lifecycle
+        working-directory: ENFORCEMENT
+        run: python reference_intake_executor_test.py
+      - name: Index-first evidence gap broker
+        working-directory: ENFORCEMENT
+        run: python learning_evidence_gap_broker_test.py
+      - name: Full Mining Indexing Learning growth E2E
+        working-directory: ENFORCEMENT
+        run: python cross_engine_growth_e2e_test.py

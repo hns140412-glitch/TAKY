@@ -1,33 +1,58 @@
 {
-  "checkpoint_version": "1.0",
+  "checkpoint_version": "1.1",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED",
-  "status": "RUNNING",
+  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED__AUTHORITY_RECONCILED_V26",
+  "status": "OPERATIONS",
+  "authority_current": {
+    "source_index": {
+      "name": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+      "id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc"
+    },
+    "utilization_index": {
+      "name": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+      "id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s"
+    },
+    "promotion_receipt": {
+      "name": "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
+      "id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w"
+    },
+    "source_entries_total": 679,
+    "indexed_l1": 679,
+    "semantic_content_resolved": 677,
+    "content_access_holds": 2,
+    "full_reindex": false,
+    "source_loss": false
+  },
   "done": [
-    "CURRENT V24 corpus state restored without reopening CLOSED source indexing",
     "Executable search projection implemented in ENFORCEMENT/data_index_search.py",
     "Regression coverage implemented in ENFORCEMENT/data_index_search_test.py",
     "TAKY Enforcement Replay run 761 completed successfully",
-    "PR #94 squash-merged to main at 2ed0c2de069ac5e80e996e35dfac20a950bd44db"
+    "PR #94 squash-merged to main at 2ed0c2de069ac5e80e996e35dfac20a950bd44db",
+    "Authority pointer reconciled from stale V24/666 to promoted V26/V6/679 without reopening CLOSED indexing"
   ],
   "open": [
-    "Run projection against the real V24 666-source index payload and capture regression evidence",
-    "Add true embedding/vector semantic retrieval only when an embedding provider/index is explicitly available",
-    "Validate DETAIL_L2 anchor fetch escalation on real source records"
+    "Run the main-branch search projection against a materialized real V26 679-source payload and capture regression evidence",
+    "Add true neural embedding/vector semantic retrieval only when an explicit provider/index is available",
+    "Validate DETAIL_L2 anchor fetch escalation on real V26 source records",
+    "Keep SEARCH_PROJECTION non-authoritative and separate from domain decision policy"
   ],
-  "next": "REAL_V24_SEARCH_PROJECTION_REGRESSION",
+  "next": "REAL_V26_SEARCH_PROJECTION_REGRESSION",
   "corrections": [
     "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
     "TOKEN_COSINE_FALLBACK != EMBEDDING_SEMANTIC",
-    "INDEXING != DOMAIN_DECISION_ENGINE"
+    "INDEXING != DOMAIN_DECISION_ENGINE",
+    "V24_666_POINTER_SUPERSEDED_BY_V26_679",
+    "DERIVED_CURRENT_AUTHORITY != CANONICAL_SOURCE_TRUTH"
   ],
   "source_refs": [
     "C2S/DATA_INDEX_SCHEMA_CONTRACT_2026-09-25_V1.json",
     "C2S/DATA_INDEX_COMPATIBILITY_MAP_2026-09-25_V1.json",
     "C2S/MINING_INDEXING_LEARNING_ROLE_CONTRACT_2026-09-25_V1.json",
-    "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
-    "github:hns140412-glitch/TAKY@2ed0c2de069ac5e80e996e35dfac20a950bd44db"
+    "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
+    "github:hns140412-glitch/TAKY@ddc8c93a9cc9fc8c9510bab96f15dfd04a34d9a1"
   ],
-  "updated_at": "2026-09-25T10:40:20+09:00"
+  "updated_at": "2026-09-25T22:40:00+09:00"
 }
