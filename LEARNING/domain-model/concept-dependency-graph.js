@@ -10,7 +10,9 @@ function validateRelation(r={}){
   }
   if(!['PREREQUISITE','SUPPORTS','CONFUSABLE_WITH'].includes(clean(r.relation_type)))issues.push('RELATION_TYPE_INVALID');
   if(clean(r.from_concept)===clean(r.to_concept))issues.push('SELF_RELATION_FORBIDDEN');
-  if(r.inferred_from_learner_data===true)issues.push('LEARNER_DATA_AUTO_INFERENCE_FORBIDDEN');
+  const authority=clean(r.authority)||'DECLARED_DOMAIN_RELATION';
+  if(r.inferred_from_learner_data===true&&authority!=='DATA_CANDIDATE')issues.push('LEARNER_DATA_AUTO_INFERENCE_FORBIDDEN');
+  if(authority==='DATA_CANDIDATE'&&!Number.isFinite(Number(r.confidence)))issues.push('DATA_CANDIDATE_CONFIDENCE_REQUIRED');
   return {ok:issues.length===0,issues};
 }
 
@@ -21,6 +23,8 @@ function build(relations=[]){
     if(!v.ok){rejected.push({relation_id:r?.relation_id||null,issues:v.issues});continue;}
     if(ids.has(r.relation_id)){rejected.push({relation_id:r.relation_id,issues:['DUPLICATE_RELATION_ID']});continue;}
     ids.add(r.relation_id);
+    const authority=clean(r.authority)||'DECLARED_DOMAIN_RELATION';
+    const candidate=authority==='DATA_CANDIDATE';
     accepted.push({
       relation_id:clean(r.relation_id),
       subject:clean(r.subject).toLowerCase(),
@@ -29,22 +33,58 @@ function build(relations=[]){
       relation_type:clean(r.relation_type),
       source_ref:clean(r.source_ref),
       source_version:clean(r.source_version)||null,
-      authority:clean(r.authority)||'DECLARED_DOMAIN_RELATION',
-      inferred_from_learner_data:false
+      authority,
+      inferred_from_learner_data:candidate,
+      confidence:candidate?Math.max(0,Math.min(1,Number(r.confidence))):null,
+      state:candidate?'CANDIDATE':'ACTIVE',
+      can_influence_learning_sequence:!candidate,
+      can_influence_calendar:false
     });
   }
+  const active=accepted.filter(r=>r.state==='ACTIVE');
+  const candidate=accepted.filter(r=>r.state==='CANDIDATE');
+  const cycles=findPrerequisiteCycles(active);
   return {
-    ok:true,
+    ok:cycles.length===0,
     graph_version:VERSION,
     relations:accepted,
+    active_relations:active,
+    candidate_relations:candidate,
     rejected,
-    authority:'DECLARED_RELATIONS_ONLY'
+    cycles,
+    authority:'DECLARED_RELATIONS_ACTIVE_DATA_CANDIDATES_RETAINED',
+    scheduling_authority:false
   };
+}
+
+function findPrerequisiteCycles(relations=[]){
+  const edges=(relations||[]).filter(r=>r.relation_type==='PREREQUISITE'&&r.state!=='CANDIDATE');
+  const adj=new Map();
+  for(const r of edges){
+    const from=r.subject+'::'+r.from_concept,to=r.subject+'::'+r.to_concept;
+    if(!adj.has(from))adj.set(from,[]);
+    adj.get(from).push(to);
+  }
+  const visiting=new Set(),visited=new Set(),stack=[],cycles=[];
+  function dfs(n){
+    if(visiting.has(n)){
+      const i=stack.indexOf(n);
+      cycles.push([...stack.slice(i),n]);
+      return;
+    }
+    if(visited.has(n))return;
+    visiting.add(n);stack.push(n);
+    for(const next of adj.get(n)||[])dfs(next);
+    stack.pop();visiting.delete(n);visited.add(n);
+  }
+  for(const n of adj.keys())dfs(n);
+  return cycles;
 }
 
 function prerequisitesFor(graph={},subject='',concept=''){
   const s=clean(subject).toLowerCase(),c=clean(concept).toLowerCase();
-  return (graph.relations||[]).filter(r=>r.subject===s&&r.to_concept===c&&r.relation_type==='PREREQUISITE');
+  const source=graph.active_relations||graph.relations||[];
+  return source.filter(r=>r.subject===s&&r.to_concept===c&&r.relation_type==='PREREQUISITE'&&r.state!=='CANDIDATE');
 }
 
 function deriveReadiness(graph={},skillStates=[],subject='',concept=''){
@@ -78,6 +118,11 @@ function deriveReadiness(graph={},skillStates=[],subject='',concept=''){
   };
 }
 
+function candidateRelationsFor(graph={},subject='',concept=''){
+  const s=clean(subject).toLowerCase(),c=clean(concept).toLowerCase();
+  return (graph.candidate_relations||[]).filter(r=>r.subject===s&&(r.from_concept===c||r.to_concept===c));
+}
+
 function validateReadiness(r={}){
   const issues=[];
   if(r.scheduling_authority!==false)issues.push('SCHEDULING_AUTHORITY_FORBIDDEN');
@@ -85,4 +130,15 @@ function validateReadiness(r={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,validateRelation,build,prerequisitesFor,deriveReadiness,validateReadiness});
+function selfValidate(graph={}){
+  const issues=[];
+  if(graph.scheduling_authority!==false)issues.push('SCHEDULING_AUTHORITY_FORBIDDEN');
+  if((graph.cycles||[]).length)issues.push('ACTIVE_PREREQUISITE_CYCLE');
+  for(const r of graph.candidate_relations||[]){
+    if(r.can_influence_learning_sequence!==false)issues.push('CANDIDATE_RELATION_LEAK');
+    if(r.can_influence_calendar!==false)issues.push('CALENDAR_AUTHORITY_LEAK');
+  }
+  return {ok:issues.length===0,issues};
+}
+
+module.exports=Object.freeze({VERSION,validateRelation,build,findPrerequisiteCycles,prerequisitesFor,candidateRelationsFor,deriveReadiness,validateReadiness,selfValidate});
