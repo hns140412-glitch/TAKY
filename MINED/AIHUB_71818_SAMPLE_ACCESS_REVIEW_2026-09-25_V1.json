@@ -1,0 +1,39 @@
+{
+  "schema": "TAKY_AIHUB_71818_SAMPLE_ACCESS_REVIEW_V1",
+  "date": "2026-09-25",
+  "candidate": "AIHUB_WRITING_71818",
+  "status": "ACCESS_HOLD_FOR_50_RECORD_SAMPLE",
+  "public_verification": {
+    "lightweight_sample_offered": true,
+    "public_dataset_page": true,
+    "public_annotation_schema": true,
+    "public_real_example": true,
+    "public_quality_metrics": true,
+    "direct_50_record_sample_url_exposed": false,
+    "full_api_download_requires_approval": true
+  },
+  "verified_before_sample": [
+    "raw/source/label formats: TXT/XLS -> CSV -> JSON",
+    "essay_question fields include type, subject, topic, level, grade, prompt, keyword",
+    "essay_answer includes answer text and response metadata",
+    "expert scoring and feedback structures are present",
+    "analytic rubric entries include score, rubric_key and qualitative feedback",
+    "grade scope includes elementary 5 and 6",
+    "training/validation/test split is published"
+  ],
+  "still_requires_actual_sample": [
+    "record-level referential integrity across prompt-response-score-feedback",
+    "duplicate rate within elementary subset",
+    "null/missing field rate",
+    "rater disagreement distribution",
+    "feedback specificity and usefulness distribution",
+    "presence of synthetic or low-information feedback patterns",
+    "PII/masking behavior in actual lightweight sample",
+    "semantic overlap against existing TAKY writing corpus"
+  ],
+  "access_boundary": {
+    "reason": "AI Hub exposes a lightweight-sample option but the searchable public page does not expose a direct downloadable 50-record sample URL; full API download requires dataset download approval.",
+    "action": "Do not fabricate or scrape around access controls. Keep source as CONDITIONAL_ACCEPT and resume sample validation only when an approved sample or lawful user-provided download is available."
+  },
+  "current_verdict": "CONDITIONAL_ACCEPT__PUBLIC_SCHEMA_PASS__RECORD_SAMPLE_PENDING"
+}
