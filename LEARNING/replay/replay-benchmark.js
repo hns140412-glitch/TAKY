@@ -12,6 +12,7 @@ function benchmarkReplay(dataset={}){
 
   const verified=[...split.train,...split.holdout].map(r=>({
     event_id:r.event_id,
+    learning_target_id:r.learning_target_id||null,
     observed_at:r.observed_at,
     verified_outcome:r.verified_outcome,
     instrument_version:r.instrument_version,
