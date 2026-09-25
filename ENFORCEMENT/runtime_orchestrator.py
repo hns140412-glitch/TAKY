@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from c2s_preflight_bridge import run as run_c2s_preflight
 from codex_task_contract_builder import build as build_codex_task_contract
 from executor_transport import build_envelope as build_executor_envelope
 from executor_adapter_registry import resolve as resolve_executor_adapter
-from execution_checkpoint import guard as guard_checkpoint
+from execution_checkpoint import guard as guard_checkpoint, persist as persist_checkpoint
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
@@ -107,6 +108,70 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
 
+    approval_checkpoint_result = None
+    approval_cfg = effective_record.get("approval_checkpoint")
+    if state.get("action_class") == "HUMAN_APPROVAL":
+        if not isinstance(approval_cfg, dict) or approval_cfg.get("required") is not True:
+            detected.append("APPROVAL_CHECKPOINT_REQUIRED")
+        else:
+            namespace = approval_cfg.get("namespace")
+            atomic_unit = approval_cfg.get("atomic_unit")
+            if not isinstance(namespace, str) or not namespace.strip():
+                detected.append("APPROVAL_CHECKPOINT_NAMESPACE_MISSING")
+            if not isinstance(atomic_unit, str) or not atomic_unit.strip():
+                detected.append("APPROVAL_CHECKPOINT_ATOMIC_UNIT_MISSING")
+            if not detected:
+                checkpoint_record = {
+                    "checkpoint_version": "1.0",
+                    "task_id": effective_record.get("task_id"),
+                    "namespace": namespace,
+                    "atomic_unit": atomic_unit,
+                    "status": "BLOCKED",
+                    "done": list(approval_cfg.get("done", [])),
+                    "open": list(approval_cfg.get("open", [])),
+                    "next": approval_cfg.get("resume_next") or state.get("next_action"),
+                    "corrections": list(approval_cfg.get("corrections", [])),
+                    "source_refs": list(approval_cfg.get("source_refs", [])),
+                    "updated_at": approval_cfg.get("updated_at") or datetime.now(timezone.utc).isoformat(),
+                    "approval_binding": {
+                        "action_class": state.get("action_class"),
+                        "execution_owner": state.get("execution_owner"),
+                        "primary_outcome": state.get("primary_outcome"),
+                        "next_action": state.get("next_action"),
+                        "protected_state": state.get("protected_state", []),
+                    },
+                }
+                approval_checkpoint_result = persist_checkpoint(
+                    checkpoint_record,
+                    repo_root,
+                    append_history=True,
+                )
+                detected.extend(approval_checkpoint_result.get("detected", []))
+
+    approval_resume_result = None
+    resume_cfg = effective_record.get("approval_resume")
+    if isinstance(resume_cfg, dict) and resume_cfg.get("required") is True:
+        if not effective_record.get("human_approval_evidence"):
+            detected.append("HUMAN_APPROVAL_EVIDENCE_MISSING_FOR_RESUME")
+        namespace = resume_cfg.get("namespace")
+        task_id = resume_cfg.get("task_id") or effective_record.get("task_id")
+        checkpoint_hash = resume_cfg.get("expected_checkpoint_hash")
+        if not isinstance(namespace, str) or not namespace.strip():
+            detected.append("APPROVAL_RESUME_NAMESPACE_MISSING")
+        if not isinstance(task_id, str) or not task_id.strip():
+            detected.append("APPROVAL_RESUME_TASK_ID_MISSING")
+        if not isinstance(checkpoint_hash, str) or not checkpoint_hash.strip():
+            detected.append("APPROVAL_RESUME_CHECKPOINT_HASH_MISSING")
+        if not detected:
+            approval_resume_result = guard_checkpoint(
+                repo_root,
+                namespace=namespace,
+                task_id=task_id,
+                expected_atomic_unit=resume_cfg.get("expected_atomic_unit"),
+                expected_checkpoint_hash=checkpoint_hash,
+            )
+            detected.extend(approval_resume_result.get("detected", []))
+
     checkpoint_guard_result = None
     checkpoint_cfg = effective_record.get("checkpoint_guard")
     if isinstance(checkpoint_cfg, dict) and checkpoint_cfg.get("required") is True:
@@ -122,6 +187,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
                 namespace=namespace,
                 task_id=task_id,
                 expected_atomic_unit=checkpoint_cfg.get("expected_atomic_unit"),
+                expected_checkpoint_hash=checkpoint_cfg.get("expected_checkpoint_hash"),
             )
             detected.extend(checkpoint_guard_result.get("detected", []))
 
@@ -215,6 +281,8 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             else None
         ),
         "checkpoint_guard": checkpoint_guard_result,
+        "approval_checkpoint": approval_checkpoint_result,
+        "approval_resume_guard": approval_resume_result,
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
