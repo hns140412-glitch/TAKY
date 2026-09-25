@@ -613,6 +613,36 @@
       "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v2",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "correct:ready-adapter-repository-reality-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Ready independent Learning Engine decision adapter",
+      "description": "Repository reality correction: Ready main remains at 98df214a6078f16f2b6710016898a4d7798798db. The implementation currently evidenced in GitHub exists only on branch taky/learning-consumer-adapter-2026-09-25, which is 3 commits ahead of main and changes ready-integration-v1.js, .github/scripts/ready_learning_consumer_adapter_test.js, and .github/workflows/ready-integration-ci.yml. Previously cited src/learning/learning-engine-adapter-v2.js and tests/core-adaptive-plan-integration.spec.js paths are not present in the audited branch tree. Treat the adapter as FEATURE_BRANCH_IMPLEMENTED_NOT_MAIN until promotion evidence exists.",
+      "state": "HOLD",
+      "owner": "READY_SET",
+      "source_ref": "apply:ready-learning-engine-adapter-v2",
+      "evidence_refs": [
+        "Ready-Set@taky/learning-consumer-adapter-2026-09-25:ready-integration-v1.js",
+        "Ready-Set@taky/learning-consumer-adapter-2026-09-25:.github/scripts/ready_learning_consumer_adapter_test.js",
+        "Ready-Set@taky/learning-consumer-adapter-2026-09-25:.github/workflows/ready-integration-ci.yml",
+        "Ready-Set compare main...taky/learning-consumer-adapter-2026-09-25: ahead_by=3, behind_by=0"
+      ],
+      "blockers": [
+        "READY_MAIN_PROMOTION_NOT_EVIDENCED",
+        "PREVIOUS_EVIDENCE_REF_PATHS_NOT_PRESENT"
+      ],
+      "destination": "READY_SET_ADAPTER",
+      "created_at": "2026-09-25T10:30:00.000Z",
+      "parent_entry_id": "apply:ready-core-decision-required-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED",
+        "REGRESSION_GREEN"
+      ]
     }
   ]
 }
