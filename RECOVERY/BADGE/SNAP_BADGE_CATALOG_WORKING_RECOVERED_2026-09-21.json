@@ -1,0 +1,426 @@
+{
+  "version": "2026-09-21.1",
+  "status": "WORKING_DRAFT_NOT_ACTIVE",
+  "items": [
+    {
+      "draftId": "BDG-DRAFT-001",
+      "name": "해뜰락말락",
+      "historicalTriggerText": "평소보다 일찍 일어나 학습 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-002",
+      "name": "꼬끼오 출발",
+      "historicalTriggerText": "아침 알람 후 바로 일어남",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-003",
+      "name": "아침 한입",
+      "historicalTriggerText": "식사 전 짧은 과제 하나 수행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-004",
+      "name": "밥먹고 한번더",
+      "historicalTriggerText": "아침식사 후 다시 학습으로 복귀",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-005",
+      "name": "출발 준비 끝",
+      "historicalTriggerText": "등교 준비까지 흐트러짐 없이 완료",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-006",
+      "name": "시간 발견자",
+      "historicalTriggerText": "스스로 빈 시간을 찾아 과제 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-007",
+      "name": "없던시간 뿅",
+      "historicalTriggerText": "원래 계획에 없던 시간을 만들어 추가 수행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-008",
+      "name": "하나 더!",
+      "historicalTriggerText": "할 일을 끝내고 스스로 하나 더 선택",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-009",
+      "name": "몰래 시작",
+      "historicalTriggerText": "부모가 말하기 전에 스스로 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-010",
+      "name": "말하기 전에 GO",
+      "historicalTriggerText": "안내 직후 지체 없이 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-011",
+      "name": "내가 고를래",
+      "historicalTriggerText": "오늘 할 일을 스스로 선택",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-012",
+      "name": "작전 짜기",
+      "historicalTriggerText": "순서를 스스로 정해 실행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-013",
+      "name": "딱 하나 집중",
+      "historicalTriggerText": "한 과제에 흔들리지 않고 집중",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-014",
+      "name": "번개 완료",
+      "historicalTriggerText": "예상보다 훨씬 빠르게 제대로 완료",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-015",
+      "name": "천천히 정확히",
+      "historicalTriggerText": "오래 걸렸지만 꼼꼼하게 완료",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-016",
+      "name": "한칸씩",
+      "historicalTriggerText": "큰 과제를 차근차근 나눠 완료",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-017",
+      "name": "결국 해냈다",
+      "historicalTriggerText": "예상보다 오래 걸렸어도 끝까지 완료",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-018",
+      "name": "집중 불꽃",
+      "historicalTriggerText": "평소보다 긴 집중 구간 발생",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-019",
+      "name": "조용한 몰입",
+      "historicalTriggerText": "개입 없이 조용히 몰입",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-020",
+      "name": "흐름 탔다!",
+      "historicalTriggerText": "자연스럽게 다음 과제로 이어감",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-021",
+      "name": "다시 왔어",
+      "historicalTriggerText": "쉬거나 흐트러진 뒤 스스로 복귀",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-022",
+      "name": "돌아온 집중",
+      "historicalTriggerText": "집중 이탈 후 다시 제대로 집중",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-023",
+      "name": "집중 회수",
+      "historicalTriggerText": "딴짓하다 스스로 알아채고 돌아옴",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-024",
+      "name": "구조 성공",
+      "historicalTriggerText": "막혔지만 도움을 활용해 다시 진행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-025",
+      "name": "도움 신호",
+      "historicalTriggerText": "필요한 순간 스스로 도움 요청",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-026",
+      "name": "뭔가 이상한데?",
+      "historicalTriggerText": "자기 실수를 스스로 발견",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-027",
+      "name": "실수 청소부",
+      "historicalTriggerText": "틀린 문제를 찾아 정리",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-028",
+      "name": "고쳐서 완성",
+      "historicalTriggerText": "오답을 수정해 결국 해결",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-029",
+      "name": "한번 더!",
+      "historicalTriggerText": "실패 후 스스로 재도전",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-030",
+      "name": "범인은 여기!",
+      "historicalTriggerText": "왜 틀렸는지 원인을 찾아냄",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-031",
+      "name": "마지막 조각",
+      "historicalTriggerText": "오래 막혔던 문제를 결국 해결",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-032",
+      "name": "아하!",
+      "historicalTriggerText": "모르던 개념을 이해한 순간",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-033",
+      "name": "잠깐만…",
+      "historicalTriggerText": "성급히 답하지 않고 다시 생각",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-034",
+      "name": "두번 봤다",
+      "historicalTriggerText": "조건/문제를 다시 읽어 실수 예방",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-035",
+      "name": "계산 탐정",
+      "historicalTriggerText": "계산 실수를 스스로 찾아 수정",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-036",
+      "name": "지우개 용사",
+      "historicalTriggerText": "틀리는 걸 두려워하지 않고 고쳐 씀",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-037",
+      "name": "생각이 길었다",
+      "historicalTriggerText": "한 문제를 오래 깊게 고민",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-038",
+      "name": "생각의 동굴",
+      "historicalTriggerText": "평소보다 해결 시간이 크게 길어진 문제를 끝까지 탐색",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-039",
+      "name": "막힘 돌파",
+      "historicalTriggerText": "오래 막힌 구간을 해결",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-040",
+      "name": "오늘은 여기까지",
+      "historicalTriggerText": "무리하지 않고 적절한 시점에 멈춤",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-041",
+      "name": "예상초과 탐험",
+      "historicalTriggerText": "예상시간을 넘겼지만 학습 의미가 있었음",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-042",
+      "name": "시간 어디갔지?",
+      "historicalTriggerText": "몰입해서 예상보다 오래 수행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-043",
+      "name": "쉬고 다시",
+      "historicalTriggerText": "휴식 후 제시간에 복귀",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-044",
+      "name": "5분 지킴이",
+      "historicalTriggerText": "휴식 타이머 후 스스로 돌아옴",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-045",
+      "name": "유혹 피하기",
+      "historicalTriggerText": "놀거리/딴짓 유혹을 이기고 진행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-046",
+      "name": "책상 재등장",
+      "historicalTriggerText": "하기 싫었던 과제를 다시 꺼내 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-047",
+      "name": "밀린짐 정리",
+      "historicalTriggerText": "Carry-over 과제를 스스로 처리",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-048",
+      "name": "오늘 안 넘긴다",
+      "historicalTriggerText": "남은 일을 스스로 확인하고 마무리",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-049",
+      "name": "가볍게 끝!",
+      "historicalTriggerText": "작은 과제를 빠르게 정리해 부담 제거",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-050",
+      "name": "어려운거 먼저",
+      "historicalTriggerText": "어려운 과제를 스스로 먼저 선택",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-051",
+      "name": "쉬운거부터!",
+      "historicalTriggerText": "쉬운 과제로 시동을 걸어 결국 전체 진행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-052",
+      "name": "방법 바꿔보기",
+      "historicalTriggerText": "안 풀리자 다른 방법으로 시도",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-053",
+      "name": "설명해볼게",
+      "historicalTriggerText": "배운 것을 자기 말로 설명",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-054",
+      "name": "어제보다 익숙",
+      "historicalTriggerText": "이전에 어려웠던 활동이 수월해짐",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-055",
+      "name": "깜짝 추가탐험",
+      "historicalTriggerText": "요구하지 않은 추가 학습을 자발적으로 함",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-056",
+      "name": "계획 변경 성공",
+      "historicalTriggerText": "갑작스러운 일정 변화에도 다시 계획해 수행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-057",
+      "name": "그래도 출발",
+      "historicalTriggerText": "컨디션이 좋지 않은 날에도 가능한 만큼 시작",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-058",
+      "name": "충전하고 왔어",
+      "historicalTriggerText": "피곤함을 인지하고 쉬었다가 다시 수행",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-059",
+      "name": "탐험대와 해결",
+      "historicalTriggerText": "탐험대의 힌트를 최소한으로 받고 스스로 해결",
+      "status": "WORKING_DRAFT",
+      "active": false
+    },
+    {
+      "draftId": "BDG-DRAFT-060",
+      "name": "오늘 좀 특별한데?",
+      "historicalTriggerText": "기존 조건에 없는 의미 있는 특별행동 발견",
+      "status": "WORKING_DRAFT",
+      "active": false
+    }
+  ]
+}
