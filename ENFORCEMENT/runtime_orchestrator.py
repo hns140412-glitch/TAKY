@@ -97,6 +97,7 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
         ),
         "ownership_move_planned": bool(record.get("ownership_move_planned", False)),
         "engineering_profile": str(record.get("engineering_profile", "")).strip().upper(),
+        "worker_context": record.get("worker_context"),
     }
     return state, failures
 
@@ -106,6 +107,54 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     gate = run_c2s_preflight(effective_record, repo_root, coverage_record)
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
+
+    context_firewall_result = None
+    worker_context = effective_record.get("worker_context")
+    if isinstance(worker_context, dict):
+        isolated = worker_context.get("isolated") is True
+        allowed_refs = worker_context.get("allowed_context_refs")
+        return_fields = worker_context.get("return_fields")
+        forbidden_payload_keys = {
+            "full_conversation",
+            "full_chat_history",
+            "entire_history",
+            "parent_runtime_state",
+            "all_rules",
+        }
+        present_forbidden = sorted(
+            key for key in forbidden_payload_keys
+            if key in worker_context and worker_context.get(key) not in (None, "", [], {})
+        )
+        if not isolated:
+            detected.append("CONTEXT_FIREWALL_ISOLATION_REQUIRED")
+        if not isinstance(allowed_refs, list) or not allowed_refs or any(
+            not isinstance(x, str) or not x.strip() for x in allowed_refs
+        ):
+            detected.append("CONTEXT_FIREWALL_ALLOWED_REFS_INVALID")
+        if not isinstance(return_fields, list) or not return_fields or any(
+            not isinstance(x, str) or not x.strip() for x in return_fields
+        ):
+            detected.append("CONTEXT_FIREWALL_RETURN_CONTRACT_INVALID")
+        if present_forbidden:
+            detected.append(
+                "CONTEXT_FIREWALL_FORBIDDEN_BULK_CONTEXT:"
+                + ",".join(present_forbidden)
+            )
+        context_firewall_result = {
+            "required": True,
+            "isolated": isolated,
+            "allowed_context_refs": allowed_refs if isinstance(allowed_refs, list) else [],
+            "return_fields": return_fields if isinstance(return_fields, list) else [],
+            "forbidden_bulk_context": present_forbidden,
+        }
+    else:
+        context_firewall_result = {
+            "required": False,
+            "isolated": None,
+            "allowed_context_refs": [],
+            "return_fields": [],
+            "forbidden_bulk_context": [],
+        }
 
     checkpoint_guard_result = None
     checkpoint_cfg = effective_record.get("checkpoint_guard")
@@ -215,6 +264,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             else None
         ),
         "checkpoint_guard": checkpoint_guard_result,
+        "context_firewall": context_firewall_result,
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
