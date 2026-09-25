@@ -52,9 +52,9 @@
     "status": "PARTIAL",
     "repo": "hns140412-glitch/Snap-Pop",
     "pr": 8,
-    "head_sha": "9f0fe438233d149840baf7ed23449925e4e9fad1",
+    "head_sha": "909018cf22bbff746bf4a6896dbd0561d09a8b49",
     "ci": {
-      "Validate Snap & Pop": "SUCCESS"
+      "Validate Snap & Pop": "CI_PENDING_RECHECK"
     },
     "world_theme_binding": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
     "crew_visual_binding": "OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET",
@@ -63,7 +63,9 @@
       "assets/reference/approved_visual_source.png remains reference lineage only",
       "reference board direct runtime binding forbidden",
       "automatic asset promotion forbidden",
-      "automatic release pass forbidden"
+      "automatic release pass forbidden",
+      "initial character_master_hd.jpg and maltipoo_guide_hd.jpg explicitly forbidden as approved Crew binding evidence",
+      "Ready Core 6 cross-app auto import forbidden because project visual authority is owner-scoped"
     ],
     "open": [
       "approved individual Crew/Character visual asset binding",
