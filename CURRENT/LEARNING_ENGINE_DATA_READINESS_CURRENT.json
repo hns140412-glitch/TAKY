@@ -1,0 +1,34 @@
+{
+  "projection_version": "TAKY_LEARNING_ENGINE_DATA_READINESS_CURRENT_V1",
+  "authority": "LEARNING_ENGINE_CORE",
+  "generated_at": "2026-09-25T12:40:00.000Z",
+  "minimum_verified_retrieval_targets_for_promotion_review": 30,
+  "code_path": {
+    "specialist_event_pipeline": "IMPLEMENTED",
+    "central_transport_handler": "IMPLEMENTED",
+    "ready_durable_outbox": "IMPLEMENTED",
+    "ready_fail_safe_sync": "IMPLEMENTED",
+    "real_evidence_receipt_chain": "IMPLEMENTED",
+    "automatic_evaluation": "IMPLEMENTED",
+    "readiness_projection": "IMPLEMENTED"
+  },
+  "runtime_connection": {
+    "hosted_central_transport": "NOT_CONNECTED",
+    "production_deployment": "HOLD",
+    "netlify_deployment": "HOLD",
+    "live_persisted_receipt_store": "NOT_MATERIALIZED_IN_REPOSITORY"
+  },
+  "scopes": [],
+  "interpretation": [
+    "Empty scopes means no live central receipt store has been materialized here yet.",
+    "It does not mean the learner has zero evidence in the apps.",
+    "Once transport is connected, each accepted receipt updates scope counts automatically.",
+    "Observation-only evidence is acknowledged separately and is never coerced into a verified target."
+  ],
+  "invariants": [
+    "HOLD != DROP",
+    "OBSERVATION_ONLY != VERIFIED_TARGET",
+    "NO_PACKET_ACK_WITHOUT_IMMUTABLE_CENTRAL_INGEST_RECEIPT",
+    "PROMOTION_READINESS != ESTIMATOR_PROMOTION"
+  ]
+}
