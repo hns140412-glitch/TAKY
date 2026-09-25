@@ -1,81 +1,94 @@
-# DATA INDEXING SEARCH PROJECTION — NEW CHAT START — 2026-09-25
+# DATA INDEXING — NEW CHAT START — 2026-09-25
 
 CURRENT authority:
-DATA_UTILIZATION_INDEX_2026-09-25_V24.json
+DATA_UTILIZATION_INDEX_2026-09-25_V25.json
+Drive id:
+1ePONYrWt0MLC6lovuIlhsm1cl32UT6WeelQmc1YetIs
 
-CURRENT operational state:
-CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json
+Source index authority:
+DATA_SOURCE_INDEX_2026-09-25_V5.json
+Drive id:
+1xYRw898zSObt_4gTHe0r54PlvjweXr7SPyRqgH_vqD8
 
-Latest operations checkpoints:
-- C2S/DATA_INDEX_SEARCH_PROJECTION_CLOSURE_2026-09-25.json
-- C2S/DATA_INDEX_OPERATIONS_BASELINE_CHECKPOINT_2026-09-25.json
-- C2S/DATA_INDEX_INCREMENTAL_DELTA_SCAN_2026-09-25.json
+Drive CURRENT pointer:
+1JNvFBrmY7H-j6v1WX1G3qGbieS7BR8Qbt4O54D1mNcU
 
-## HARD INHERIT
-- V24 remains CURRENT
-- V25 not created
-- promotion not executed
-- source_reindex_all=false
-- RAW reread default=false
-- Netlify=NONE
-- deployment=NONE
-- USER != DEBUGGER
+Promotion receipt:
+C2S/DATA_UTILIZATION_INDEX_V25_PROMOTION_RECEIPT_2026-09-25.json
+Drive id:
+1odBxcc2WcSDGp_Z7iFD-hR-OdINQVejKanmAqqIOFXU
 
-## CLOSED
-- D1 architecture/design
-- D2 exact/structured retrieval
-- D3 lexical retrieval
-- D4 controlled semantic vector limited baseline
-- D5 hybrid RRF
-- explicit relation expansion
-- existing DETAIL_L2 on-demand fetch
-- RAW candidate gate without automatic RAW fetch
-- paraphrase regression
-- full contract regression
-- incremental operations baseline
+Promotion closure:
+C2S/DATA_INDEX_V25_PROMOTION_CLOSURE_2026-09-25.json
 
-Validated implementation/regression HEAD:
-09aa9a5a51d01730f70c3919992bdd9f504f3dac
+## CURRENT STATUS
+- source corpus = 672
+- INDEX L1 = 672 / 672
+- semantic/content resolved = 670 / 672
+- content access HOLD = 2 oversize videos
+- relation explicit exact-duplicate pairs = 6
+- relation directed edges = 12
+- DETAIL records = 12
+- source_reindex_all = false
+- search projection authoritative = false
+- Netlify = NONE
+- deployment = NONE
 
-Validated CI:
-36128296981 SUCCESS
+## DELTA THAT CREATED V25
+V24 666 → +6 verified source delta → V25 672
 
-## IMPORTANT LIMITATION
-Paraphrase suite:
-- lexical hit@10 = 0/8
-- controlled semantic hit@10 = 7/8
-- hybrid hit@10 = 8/8
-This is not independent generalization proof.
+Added:
+- middle-school social-studies hanja vocabulary PDF
+- middle-school Korean-language vocabulary PDF
+- 4 lazy_owen ChatGPT image-editing prompt carousel captures
 
-## CURRENT OPERATIONS MODE
+Discovery correction:
+Data scanning MUST be recursive.
+Do not rely only on recent modifiedTime.
+Compare actual Data-tree Drive file IDs against CURRENT source IDs.
+
+## ACTIVE DISCOVERY
+Primary:
+Data/INBOX
+Drive folder id:
+1h_DPWYVQgT36tkP5WYrdxPprGHMYwq7K
+
+Safety net:
+recursive scan of Data tree
+Drive root id:
+1_dJS5oJ7szSZL_Ljbek4dlvIGobUgbv4
+
+Flow:
+INBOX_SCAN
+→ RECURSIVE_DATA_TREE_SCAN
+→ KNOWN_SOURCE_ID_COMPARISON
+→ DELTA_CLASSIFY
+→ INCREMENTAL_INDEX_IF_ACCEPTED
+→ affected projection rebuild
+→ regression
+→ promotion only if authority changed
+
+NEW_FILE != AUTHORITATIVE_SOURCE_DELTA.
+
+## VALIDATION
+Latest validated HEAD:
+8dc2540b09b5b9d9b7afd3655f896ece018f895e
+
+GitHub Actions:
+36132812106 SUCCESS
+
+Historical V24 gates remain preserved and V25 current regression passes.
+
+## OPEN
+1. Two oversize video HOLD sources only if a new streaming/partial-frame/local-sync access path appears.
+2. Genuine future source delta when it arrives.
+3. True neural embedding provider integration only if separately available and authorized.
+
+## NEXT MODE
 OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY
 
-Incremental path:
-genuine new/changed authoritative source evidence
-→ normalized INDEX_L1 delta
-→ affected projection only
-→ regression
-→ promotion decision only if authority changed
-
-## LATEST DELTA SCAN
-Result:
-NO_AUTHORITATIVE_DELTA_ACCEPTED
-
-Accepted delta count:
-0
-
-Inspected post-V24 candidates were derived HANDOFF/C2S artifacts or a blank ingest-contract placeholder, so none entered the 666-source corpus.
-
-Current next:
-WAIT_FOR_GENUINE_NEW_OR_CHANGED_AUTHORITATIVE_SOURCE_EVIDENCE
-
-## REOPEN RULE
-Do not reopen CLOSED implementation stages unless there is:
-1. new regression evidence, or
-2. authoritative input change.
-
-Do not treat a newly created file as a new source automatically.
-NEW_FILE != AUTHORITATIVE_SOURCE_DELTA.
+Do not reopen CLOSED development stages without new regression evidence or authoritative input change.
 
 Think Again, Keep Your Key.
 Think Again, You’re The Key.
+USER != DEBUGGER.
