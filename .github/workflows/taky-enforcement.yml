@@ -224,6 +224,8 @@ jobs:
         run: node LEARNING/intake/real-evidence-intake.test.js
       - name: Validate cumulative specialist evidence intake pipeline
         run: node LEARNING/intake/specialist-event-pipeline.test.js
+      - name: Validate central evidence transport ingest handler
+        run: node LEARNING/intake/transport-handler.test.js
       - name: Validate Learning Engine verification layer
         run: node LEARNING/verification/verification-layer.test.js
       - name: Validate app-specific verifier policy
