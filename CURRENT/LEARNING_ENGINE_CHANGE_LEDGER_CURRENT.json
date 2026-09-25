@@ -641,6 +641,33 @@
         "REGRESSION_GREEN",
         "MANUAL_REVIEW"
       ]
+    },
+    {
+      "entry_id": "apply:ready-embedded-learning-logic-extraction-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "ADAPTER_CONTRACT",
+      "title": "Extract remaining Ready-embedded learning logic",
+      "description": "Closed: Ready-local learnerAdaptiveProfile, memoryConcern and legacy adaptive review calculations were removed from default Ready integration/LearningMaster code and isolated in an explicit compatibility-only module. Adaptive review now fails closed without an independent Core decision; Core Adaptive Plan is the default authority. Compatibility code is retained for recovery/lineage and does not confer runtime authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "hold:ready-embedded-learning-logic-extraction-v3",
+      "evidence_refs": [
+        "Ready-Set:src/learning/legacy-ready-learning-compat.js",
+        "Ready-Set:ready-integration-v1.js",
+        "Ready-Set:ready-learning-master-v01.js",
+        "Ready-Set:tests/legacy-ready-learning-compat.test.js",
+        "Ready-Set:tests/core-adaptive-plan-integration.spec.js",
+        "Ready-Set:tests/adaptive-learning-loop.spec.js",
+        "Ready-Set:tests/recurring-adaptive-memory-loop.spec.js",
+        "Ready-Set:tests/learning-evidence-review-idempotency.spec.js",
+        "Ready-Set:actions/run/36134910799"
+      ],
+      "blockers": [],
+      "destination": "READY_SET_COMPATIBILITY_QUARANTINE",
+      "created_at": "2026-09-25T12:30:00.000Z",
+      "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v3",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
