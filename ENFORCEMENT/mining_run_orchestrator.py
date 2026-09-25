@@ -11,6 +11,7 @@ from strategy_failure_memory import prepare_next_run
 from mining_goal_decomposition import apply_to_task
 from mining_depth_router import route_depth
 from mining_growth_loop import propose_growth
+from mining_index_bridge import query_frontier
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
@@ -64,6 +65,24 @@ def orchestrate(payload: dict) -> dict:
     if not frontier and task.get("decomposed_frontier"):
         limit={"D0":0,"D1":2,"D2":4,"D3":6,"D4":10}.get(depth["research_depth_decision"],0)
         frontier=list(task.get("decomposed_frontier",[]))[:limit]
+    index_rows = payload.get("index_rows") or []
+    index_result = query_frontier(
+        frontier,
+        index_rows,
+        semantic_scores=payload.get("semantic_scores"),
+        relations=payload.get("index_relations"),
+        detail_rows=payload.get("detail_rows"),
+        min_results=int(payload.get("index_min_results",1) or 1),
+        top_k=int(payload.get("index_top_k",5) or 5),
+    ) if frontier else {
+        "schema":"TAKY_MINING_INDEX_FIRST_BRIDGE_V1",
+        "resolved_from_index":[],
+        "external_mining_frontier":[],
+        "trace":[],
+        "counts":{"frontier_total":0,"resolved_from_index":0,"external_required":0},
+        "guards":{"index_does_not_decide_domain_use":True,"search_projection_is_not_source_of_truth":True},
+    }
+    external_frontier = index_result["external_mining_frontier"]
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
     route = (
         prior["failure_memory"]["replacement_routes"][0]
@@ -77,6 +96,9 @@ def orchestrate(payload: dict) -> dict:
         "selected_route": route,
         **depth,
         "search_frontier": frontier,
+        "index_first": index_result,
+        "external_search_frontier": external_frontier,
+        "external_search_required": bool(external_frontier),
         "execution_allowed": not blocked,
     }
     return {
@@ -91,6 +113,8 @@ def orchestrate(payload: dict) -> dict:
             "memory_auto_promotion": False,
             "failure_auto_resolution": False,
             "user_not_debugger": True,
+            "index_retrieval_does_not_decide_domain_use": True,
+            "external_mining_only_for_unresolved_index_gap": True,
         },
     }
 
