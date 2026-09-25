@@ -265,6 +265,34 @@
       "parent_entry_id": "hold:bkt-calibration-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "deferred:concept-graph-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Concept prerequisite and dependency graph",
+      "description": "Declared prerequisite graph contract, readiness signal, candidate-edge retention and active-cycle guards are implemented. Automatic data-derived prerequisite promotion remains deferred.",
+      "state": "DEFERRED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:006",
+      "evidence_refs": [
+        "LEARNING/domain-model/concept-dependency-graph.js",
+        "LEARNING/domain-model/concept-dependency-graph.test.js"
+      ],
+      "blockers": [
+        "DATA_CANDIDATE_PROMOTION_POLICY_NOT_DEFINED",
+        "REAL_CROSS_SKILL_EVIDENCE_INSUFFICIENT"
+      ],
+      "destination": "LEARNING/domain-model/concept-dependency-graph.js",
+      "created_at": "2026-09-25T07:05:00.000Z",
+      "parent_entry_id": "apply:concept-dependency-graph-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "POLICY_CHANGE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
     }
   ]
 }
