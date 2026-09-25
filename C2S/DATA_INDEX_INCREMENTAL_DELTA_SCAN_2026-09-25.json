@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_DATA_INDEX_INCREMENTAL_DELTA_SCAN_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "status": "NO_AUTHORITATIVE_DELTA_ACCEPTED",
+  "current_authority": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "scan_scope": "RECENT_DRIVE_CHANGES_AFTER_V24_CREATION",
+  "accepted_delta_count": 0,
+  "rejected_or_non_source_candidates": [
+    {
+      "drive_id": "13ueWLiOFIICn5WfogMMYidyrANzKjym_5UNwcuKPxeY",
+      "title": "HANDOFF/DATA_INDEXING_NEW_CHAT_START_2026-09-25_LATEST",
+      "disposition": "DERIVED_HANDOFF_NOT_RAW_SOURCE"
+    },
+    {
+      "drive_id": "1IoCKasdkaU-Y7mQXoDRqJpSweRbOqUxgMeXpoKRaexg",
+      "title": "C2S/DATA_INDEX_SEARCH_PROJECTION_D4_D5_CHECKPOINT_2026-09-25",
+      "disposition": "DERIVED_CHECKPOINT_NOT_RAW_SOURCE"
+    },
+    {
+      "drive_id": "1v7UklXjkGZB0OKZsYZARoH3Elx0xz_j18P70_SgFK0c",
+      "title": "AIHUB_WRITING_INGEST_CONTRACT_2026-09-25_V1.json",
+      "disposition": "EMPTY_PLACEHOLDER_INGEST_CONTRACT__NOT_AUTHORITATIVE_SOURCE_EVIDENCE",
+      "v24_present": false,
+      "google_doc_content": "EMPTY_EXCEPT_NEWLINE"
+    }
+  ],
+  "operations": {
+    "incremental_projection_run": false,
+    "source_reindex_all": false,
+    "raw_reread": false,
+    "current_pointer_mutated": false,
+    "promotion_performed": false,
+    "v25_created": false
+  },
+  "rationale": [
+    "Recent derived HANDOFF/C2S artifacts do not constitute new RAW/source evidence.",
+    "The only non-HANDOFF/C2S candidate inspected is an empty Google Doc placeholder with no source payload.",
+    "Incremental projection should run only for an accepted normalized INDEX_L1 delta backed by authoritative source evidence."
+  ],
+  "next": "WAIT_FOR_GENUINE_NEW_OR_CHANGED_AUTHORITATIVE_SOURCE_EVIDENCE"
+}
