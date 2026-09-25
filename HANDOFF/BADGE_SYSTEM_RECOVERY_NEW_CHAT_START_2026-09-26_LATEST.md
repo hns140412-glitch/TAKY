@@ -82,7 +82,7 @@ Crew Visual:
 - Only bind when a genuinely reviewed/approved individual Crew/Character asset exists.
 
 CI:
-- Validate Snap & Pop = CI PENDING RECHECK for hardened exact head
+- Validate Snap & Pop = SUCCESS
 
 Remaining OPEN:
 - reviewed individual Crew/Character asset binding;
