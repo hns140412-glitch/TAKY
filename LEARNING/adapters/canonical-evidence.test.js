@@ -7,9 +7,10 @@ const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',inst
 
 const hide=A.fromHide({
   event_id:'h1',source:'hide-seek',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T07:00:00.000Z',
-  payload:{caseMastery:84,validWordCount:12,sheetStatus:'COMPLETED',memorySummary:{averageMemoryStrength:67,reviewAdvisories:[{lexicalId:'w1',nextReviewPriority:90}],prioritySemantics:'ADVISORY_SIGNAL_NOT_DATE'}}
+  payload:{word_id:'w1',caseMastery:84,validWordCount:12,sheetStatus:'COMPLETED',memorySummary:{averageMemoryStrength:67,reviewAdvisories:[{lexicalId:'w1',nextReviewPriority:90}],prioritySemantics:'ADVISORY_SIGNAL_NOT_DATE'}}
 },ctx);
 assert.equal(hide.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
+assert.equal(hide.learning_target_id,'w1');
 assert.equal(hide.memory.average_strength,67);
 assert.equal(hide.raw_app_signals.case_mastery,84);
 assert.equal(hide.verified_outcome,null,'app mastery score must not become verified outcome');
