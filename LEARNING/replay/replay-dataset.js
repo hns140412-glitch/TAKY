@@ -29,6 +29,7 @@ function toReplayRecord(e={}){
     member_id:clean(e.member_id),
     subject:clean(e.subject).toLowerCase(),
     concept_skill_target:clean(e.concept_skill_target).toLowerCase(),
+    learning_target_id:clean(e.learning_target_id)||null,
     evidence_type:clean(e.evidence_type),
     source_app:clean(e.source_app),
     instrument_version:clean(e.instrument_version),
