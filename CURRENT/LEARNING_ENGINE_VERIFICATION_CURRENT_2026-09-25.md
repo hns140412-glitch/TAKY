@@ -234,10 +234,34 @@ Validation checkpoint:
 
 ## Remaining OPEN
 
-1. Accumulate enough real verified retrieval targets per concept_skill_target for retention-candidate promotion review.
-2. Calibrate/evaluate BKT candidate on real time-held-out evidence.
-3. Build concept prerequisite/dependency graph contract without premature inference.
-4. No estimator promotion until real-evidence thresholds and promotion review pass.
-5. Production/Netlify deployment remains HOLD.
+Current no-loss ledger projection has exactly three unresolved items:
+
+1. Forgetting and retention estimator — HOLD
+   - implementation exists as advisory baseline;
+   - needs sufficient real verified retrieval targets;
+   - must pass promotion policy before runtime estimator authority changes.
+
+2. Calibrated BKT estimator — HOLD
+   - deterministic train-only calibrator exists;
+   - needs real time-held-out calibration evidence;
+   - must pass calibration/promotion policy and human review.
+
+3. Extract remaining Ready-embedded learning logic — HOLD
+   - Ready Adapter V2 for independent Core decisions is implemented;
+   - legacy learnerAdaptiveProfile / memoryConcern / direct ReadyLearningMaster reinterpretation remains compatibility-only;
+   - migrate only after Core-decision-to-Planner path is fully regression-green.
+
+Already closed/applied:
+- metacognitive self-reflection evidence;
+- pedagogical feedback intent;
+- declared concept prerequisite/dependency graph;
+- guarded data-derived relation candidate policy;
+- item-scoped recovery profile;
+- item-level learning_target_id provenance;
+- automatic retained evaluation for every real evidence receipt;
+- unified Learning Engine runtime decision contract.
+
+No estimator auto-promotion.
+Production / merge / Netlify deployment remains HOLD.
 
 Netlify / production deployment: HOLD.
