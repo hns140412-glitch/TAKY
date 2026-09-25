@@ -1,5 +1,6 @@
 'use strict';
 
+const RealReceipt=require('../receipts/real-evidence-receipt.js');
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
 
@@ -66,6 +67,20 @@ function buildDataset(evidence=[],scopeInput={},options={}){
   }
   records.sort((a,b)=>Date.parse(a.observed_at)-Date.parse(b.observed_at)||a.event_id.localeCompare(b.event_id));
   const fraction=Number.isFinite(options.holdout_fraction)?Math.min(0.5,Math.max(0.05,Number(options.holdout_fraction))):0.25;
+  const sourceKind=options.source_kind||'SYNTHETIC_FIXTURE';
+  let evidenceReceiptId=clean(options.evidence_receipt_id)||null;
+  if(sourceKind==='REAL_EVIDENCE'){
+    const receipt=options.evidence_receipt;
+    if(!receipt)return {ok:false,reason:'REAL_EVIDENCE_RECEIPT_REQUIRED'};
+    const verifiedRaw=(Array.isArray(evidence)?evidence:[]).filter(raw=>{
+      const s=normalizeScope(raw||{});
+      return s.member_id===scope.member_id&&s.subject===scope.subject&&s.concept_skill_target===scope.concept_skill_target&&
+        (raw?.verified_outcome===0||raw?.verified_outcome===1)&&clean(raw?.verification?.receipt_id);
+    });
+    const receiptCheck=RealReceipt.validateBatchReceipt(receipt,verifiedRaw);
+    if(!receiptCheck.ok)return {ok:false,reason:'REAL_EVIDENCE_RECEIPT_MISMATCH',issues:receiptCheck.issues};
+    evidenceReceiptId=receipt.receipt_id;
+  }
   return {
     ok:true,
     dataset:{
@@ -80,9 +95,9 @@ function buildDataset(evidence=[],scopeInput={},options={}){
       },
       provenance:{
         created_at:options.created_at||new Date(0).toISOString(),
-        source_kind:options.source_kind||'SYNTHETIC_FIXTURE',
+        source_kind:sourceKind,
         raw_evidence_immutable:true,
-        evidence_receipt_id:clean(options.evidence_receipt_id)||null,
+        evidence_receipt_id:evidenceReceiptId,
         notes:options.notes||null
       }
     },
