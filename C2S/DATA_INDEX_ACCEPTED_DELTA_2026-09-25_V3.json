@@ -1,0 +1,249 @@
+{
+  "schema": "TAKY_DATA_INDEX_ACCEPTED_DELTA_V3",
+  "date": "2026-09-25",
+  "status": "INGEST_ACCEPTED_FOR_V26_PROMOTION",
+  "supersedes": "C2S/DATA_INDEX_ACCEPTED_DELTA_2026-09-25_V2.json",
+  "base_current": "DATA_UTILIZATION_INDEX_2026-09-25_V25.json",
+  "base_source_index": "DATA_SOURCE_INDEX_2026-09-25_V5.json",
+  "base_total": 672,
+  "delta_count": 7,
+  "candidate_total": 679,
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+  "records": [
+    {
+      "source_id": "1s1JJ5yjIy5E9iDEbC4Ug4UWKDw17a-sC",
+      "canonical_title": "IMG_8991.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CAROUSEL_INTRO"
+      ],
+      "keywords": [
+        "CAROUSEL_INTRO"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "ChatGPT 사진 편집 프롬프트 10개 소개",
+      "detail_terms": [
+        "CAROUSEL_INTRO"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "1QO6O7gTvHs3ez-vxvp0XmALnaRROYtFs",
+      "canonical_title": "IMG_8992.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "EXPERT_CORRECTION"
+      ],
+      "keywords": [
+        "EXPERT_CORRECTION"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "전문가 보정: 인물 유지, 조명·선명도·색 균형·노출 개선",
+      "detail_terms": [
+        "EXPERT_CORRECTION"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "1SkileVnnKE0pi6-nK7x-AlF8ZtcLe6hN",
+      "canonical_title": "IMG_8993.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "REMOVE_OBJECT"
+      ],
+      "keywords": [
+        "REMOVE_OBJECT"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "대상 지우기: 배경·조명·그림자·질감·반사 복원",
+      "detail_terms": [
+        "REMOVE_OBJECT"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "1URWZqQZ6vnm_ZJGyXKVGnIUTY13wZB-f",
+      "canonical_title": "IMG_8994.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "CHANGE_BACKGROUND"
+      ],
+      "keywords": [
+        "CHANGE_BACKGROUND"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "배경 바꾸기: 인물 유지, 새 환경 조명·그림자·색·원근 일치",
+      "detail_terms": [
+        "CHANGE_BACKGROUND"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "12LxIgO4r-IS7D_Dew6X4PADdUsCoNR-6",
+      "canonical_title": "IMG_8997.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "EXPAND_IMAGE"
+      ],
+      "keywords": [
+        "EXPAND_IMAGE"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "사진 넓히기: 원본 잠금, 바깥 영역만 비율 확장",
+      "detail_terms": [
+        "EXPAND_IMAGE"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "1CN28Wr_oON9zIymCun55QB3J9QtXteoc",
+      "canonical_title": "IMG_8999.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "OPEN_EYES"
+      ],
+      "keywords": [
+        "OPEN_EYES"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "감은 눈 뜨게: 표정·시선·조명·눈매·인상 유지",
+      "detail_terms": [
+        "OPEN_EYES"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    },
+    {
+      "source_id": "1LxKJytS0AsAbdOT5p9RTegMuIfdonTs5",
+      "canonical_title": "IMG_9002.PNG",
+      "source_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+      "source_type": "IMAGE_CAPTURE_REFERENCE",
+      "authority_class": "REFERENCE_LAYER",
+      "domain_facets": [
+        "image_editing",
+        "prompt_reference",
+        "visual_workflow"
+      ],
+      "controlled_terms": [
+        "ChatGPT 이미지 편집",
+        "사진 편집 프롬프트",
+        "PRO_COLOR_GRADE"
+      ],
+      "keywords": [
+        "PRO_COLOR_GRADE"
+      ],
+      "entities": [
+        "lazy_owen"
+      ],
+      "short_summary": "프로처럼 색보정: 피부톤·인물 유지, 하이라이트·그림자·대비·채도 정리",
+      "detail_terms": [
+        "PRO_COLOR_GRADE"
+      ],
+      "index_state": "VERIFIED",
+      "review_state": "CONTENT_REVIEWED",
+      "current_relation": "CURRENT_INDEX_ENTRY",
+      "detail_available": true
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "source_id": "1kGkLA8fIYxrfHfPHL5wzjdW2Z_zbEkBWbBkmY_Wg034",
+      "title": "REFERENCE_ACQUISITION_QUEUE_CURRENT",
+      "classification": "DERIVED_NOT_SOURCE"
+    }
+  ],
+  "promotion_required": true,
+  "target_source_index": {
+    "name": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc"
+  },
+  "target_utilization_index": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s"
+  }
+}
