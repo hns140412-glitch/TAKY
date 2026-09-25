@@ -13,6 +13,8 @@ on:
       - 'ENFORCEMENT/strategy_failure_memory_test.py'
       - 'ENFORCEMENT/mining_engine_step9_gate.py'
       - 'ENFORCEMENT/mining_engine_step9_gate_test.py'
+      - 'ENFORCEMENT/mining_engine_step10_adversarial.py'
+      - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -24,6 +26,8 @@ on:
       - 'ENFORCEMENT/strategy_failure_memory_test.py'
       - 'ENFORCEMENT/mining_engine_step9_gate.py'
       - 'ENFORCEMENT/mining_engine_step9_gate_test.py'
+      - 'ENFORCEMENT/mining_engine_step10_adversarial.py'
+      - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
 
 jobs:
@@ -40,6 +44,7 @@ jobs:
           python -m py_compile ENFORCEMENT/anticipation_evaluator.py
           python -m py_compile ENFORCEMENT/strategy_failure_memory.py
           python -m py_compile ENFORCEMENT/mining_engine_step9_gate.py
+          python -m py_compile ENFORCEMENT/mining_engine_step10_adversarial.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -48,3 +53,5 @@ jobs:
         run: python ENFORCEMENT/strategy_failure_memory_test.py
       - name: Test unified Step 9 gate
         run: python ENFORCEMENT/mining_engine_step9_gate_test.py
+      - name: Test Step 10 adversarial review
+        run: python ENFORCEMENT/mining_engine_step10_adversarial_test.py
