@@ -407,4 +407,36 @@ Current implementation:
 - LEARNING/verification/verification-layer.js
 
 
+## 16. Real Evidence Receipt Pipeline
+
+REAL_EVIDENCE is not a caller-declared label.
+
+A replay dataset may claim REAL_EVIDENCE only when the verified canonical events are bound to an immutable batch receipt.
+
+Canonical path:
+
+VERIFIED CANONICAL EVIDENCE
+-> REAL_LEARNING_EVIDENCE_RECEIPT
+-> digest revalidation
+-> REAL_EVIDENCE replay dataset
+-> time-held-out benchmark
+
+Receipt invariants:
+- all events share one member / subject / concept_skill_target scope;
+- every event has LEARNING_VERIFICATION_RECEIPT authority;
+- duplicate event_id is rejected;
+- event order is normalized chronologically;
+- assessment instrument versions are preserved;
+- receipt contains event ids, verification receipt ids, source apps and instrument versions;
+- a SHA-256 digest binds the batch to the evidence used to issue it;
+- replay creation recomputes and compares the digest;
+- any evidence mutation after issuance invalidates the receipt.
+
+A string evidence_receipt_id alone is insufficient.
+The actual REAL_LEARNING_EVIDENCE_RECEIPT object must validate against the canonical evidence at replay-build time.
+
+Current implementation:
+- LEARNING/receipts/real-evidence-receipt.js
+
+
 END
