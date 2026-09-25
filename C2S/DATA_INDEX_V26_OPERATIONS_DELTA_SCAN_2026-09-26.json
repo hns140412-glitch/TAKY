@@ -1,0 +1,45 @@
+{
+  "schema": "TAKY_DATA_INDEX_V26_OPERATIONS_DELTA_SCAN_V1",
+  "date": "2026-09-26",
+  "status": "NO_AUTHORITATIVE_DELTA_ACCEPTED",
+  "authority": {
+    "utilization_index": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "utilization_index_id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s",
+    "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "source_index_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+    "total_sources": 679
+  },
+  "scan": {
+    "mode": "INBOX_PRIORITY_PLUS_RECURSIVE_DATA_TREE_FILE_ID_DIFF",
+    "data_root_id": "1_dJS5oJ7szSZL_Ljbek4dlvIGobUgbv4",
+    "inbox_id": "1h_DPWYVQgT36tkP5WYrdxPprGHMYwq7K",
+    "data_tree_file_count": 852,
+    "folders_scanned": 5,
+    "missing_from_v6_total": 173,
+    "likely_source_candidates": 1,
+    "accepted_delta_count": 0
+  },
+  "excluded": [
+    {
+      "source_id": "1kGkLA8fIYxrfHfPHL5wzjdW2Z_zbEkBWbBkmY_Wg034",
+      "title": "REFERENCE_ACQUISITION_QUEUE_CURRENT",
+      "disposition": "DERIVED_NOT_SOURCE",
+      "reason": "USER_ACTION_QUEUE_FOR_UNACQUIRED_REMOTE_MATERIALS__NOT_ACQUIRED_RAW_EVIDENCE"
+    }
+  ],
+  "operations": {
+    "source_reindex_all": false,
+    "raw_reread": false,
+    "projection_rebuild": false,
+    "current_pointer_mutated": false,
+    "promotion_performed": false
+  },
+  "next": "WAIT_FOR_GENUINE_NEW_OR_CHANGED_AUTHORITATIVE_SOURCE_EVIDENCE",
+  "guards": [
+    "NEW_FILE != AUTHORITATIVE_SOURCE_DELTA",
+    "ACQUISITION_QUEUE != RAW_SOURCE",
+    "CURRENT_V26_REMAINS_AUTHORITY",
+    "SOURCE_INDEX_V6_REMAINS_AUTHORITY",
+    "USER != DEBUGGER"
+  ]
+}
