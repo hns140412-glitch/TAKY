@@ -30,8 +30,8 @@ def route_depth(task:dict)->dict:
     unknown=len(task.get("unknown",[]) or [])
     conflict=len(task.get("conflict",[]) or [])
     advanced=len(task.get("advanced_requirements",[]) or [])
-    structural_uncertainty=min(1.0,(unknown + advanced*.5)/4.0)
-    structural_risk=min(1.0,conflict/2.0)
+    structural_uncertainty=min(1.0,(unknown + advanced*2.0)/4.0)
+    structural_risk=1.0 if conflict else (0.25 if advanced else 0.0)
     explicit["uncertainty"]=max(explicit["uncertainty"],structural_uncertainty)
     explicit["evidence_risk"]=max(explicit["evidence_risk"],structural_risk)
 
