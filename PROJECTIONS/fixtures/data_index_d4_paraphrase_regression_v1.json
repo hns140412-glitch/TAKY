@@ -1,0 +1,91 @@
+{
+  "schema": "TAKY_DATA_INDEX_D4_PARAPHRASE_REGRESSION_FIXTURE_V1",
+  "benchmark_kind": "PSEUDO_HELD_OUT_PARAPHRASE__NOT_INDEPENDENT_GENERALIZATION_PROOF",
+  "source_current": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+  "source_reindex_all": false,
+  "raw_reread": false,
+  "authored_stress_queries_reused": false,
+  "cases": [
+    {
+      "id": "PH-Q1",
+      "query": "취약한 단원을 다시 잡기 위한 진단·반복 학습 참고자료",
+      "families": [
+        "KICE_ELEMENTARY_ASSESSMENT_2026",
+        "UNIT_ASSESSMENT_5_6",
+        "UNIT_ASSESSMENT_1_4"
+      ]
+    },
+    {
+      "id": "PH-Q2",
+      "query": "CAD 선형은 건드리지 않고 렌더 품질만 높이는 참고자료",
+      "families": [
+        "ARCHITECTURE_AI_PROMPT_AND_RENDERING_WORKFLOW_SOCIAL_REFERENCE",
+        "ARCHITECTURE_AI_RENDERING_SOCIAL_DISCUSSION_REFERENCE",
+        "AI_ARCHITECTURE_VISUALIZATION_SOCIAL_REFERENCE"
+      ]
+    },
+    {
+      "id": "PH-Q3",
+      "query": "사람이 오류 추적을 반복하지 않아도 세션 상태를 되살리는 구조",
+      "families": [
+        "AI_TROUBLESHOOTING_PROCESS_REDUCTION_CONVERSATION_REFERENCE",
+        "GIT_FETCH_TLS_RUNTIME_SESSION_BRIDGE_FAILURE_REFERENCE"
+      ]
+    },
+    {
+      "id": "PH-Q4",
+      "query": "부모와 자녀의 시간표와 과제를 함께 조율하는 플래너 자료",
+      "families": [
+        "FAMILY_WALL_PLANNER_SOCIAL_DESIGN_REFERENCE",
+        "LEARNING_APP_UI_AND_PLANNER_REFERENCE",
+        "READY_SET_ASSIGNMENT_ROUTER_AND_SCHEDULE_LOGIC_CHAT_REFERENCE",
+        "READY_SET_EXPLORER_WEEKLY_PLANNER_UI_REFERENCE"
+      ]
+    },
+    {
+      "id": "PH-Q5",
+      "query": "어근과 연상을 이용해 단어 회상을 돕는 학습 자료",
+      "families": [
+        "KANG_SEONGTAE_VOCAB_MAP",
+        "BA_PPA_FOLD_WORD_RETRIEVAL"
+      ]
+    },
+    {
+      "id": "PH-Q6",
+      "query": "예전 심의 문서를 현행 규정으로 오해하지 않게 보는 건축 사례",
+      "families": [
+        "SADANG_STATION_AREA_REDEVELOPMENT_INTEGRATED_REVIEW_CASE",
+        "SEOUL_PUBLIC_HOUSING_INTEGRATED_REVIEW_CASE_REFERENCE",
+        "SEONGSU_OFFICE_BUILDING_REVIEW_LANDSCAPE_CASE_REFERENCE"
+      ],
+      "title_contains": [
+        "2014",
+        "2016"
+      ]
+    },
+    {
+      "id": "PH-Q7",
+      "query": "아이 학습 진단 결과를 바탕으로 부족한 부분을 반복 연습할 자료",
+      "families": [
+        "KICE_ELEMENTARY_ASSESSMENT_2026",
+        "UNIT_ASSESSMENT_5_6",
+        "UNIT_ASSESSMENT_1_4"
+      ]
+    },
+    {
+      "id": "PH-Q8",
+      "query": "형태 보존을 전제로 건축 도면을 시각화하는 워크플로 자료",
+      "families": [
+        "ARCHITECTURE_AI_PROMPT_AND_RENDERING_WORKFLOW_SOCIAL_REFERENCE",
+        "ARCHITECTURE_AI_RENDERING_SOCIAL_DISCUSSION_REFERENCE",
+        "AI_ARCHITECTURE_VISUALIZATION_SOCIAL_REFERENCE"
+      ]
+    }
+  ],
+  "claims_forbidden": [
+    "INDEPENDENT_HELD_OUT_GENERALIZATION",
+    "NEURAL_EMBEDDING",
+    "SEMANTIC_SCORE_IS_AUTHORITY",
+    "PROMOTION_FROM_THIS_BENCHMARK_ALONE"
+  ]
+}
