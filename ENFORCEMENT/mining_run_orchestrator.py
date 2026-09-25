@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse, json
 from pathlib import Path
 from strategy_failure_memory import prepare_next_run
+from mining_goal_decomposition import apply_to_task
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
@@ -65,12 +66,15 @@ def _learning_proposal(task: dict, memory_prior: dict, receipt: dict) -> dict:
     }
 
 def orchestrate(payload: dict) -> dict:
-    task = payload.get("task", {})
+    task = apply_to_task(payload.get("task", {}))
     memory = payload.get("memory", {})
     receipt = payload.get("execution_receipt")
     prior = prepare_next_run(task, memory)
     depth = route_depth(task)
     frontier = build_frontier(task, depth["research_depth_decision"])
+    if not frontier and task.get("decomposed_frontier"):
+        limit={"D0":0,"D1":2,"D2":4,"D3":6,"D4":10}.get(depth["research_depth_decision"],0)
+        frontier=list(task.get("decomposed_frontier",[]))[:limit]
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
     route = (
         prior["failure_memory"]["replacement_routes"][0]
