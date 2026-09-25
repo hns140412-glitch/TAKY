@@ -43,6 +43,8 @@ on:
       - 'ENFORCEMENT/mining_live_execution_loop_test.py'
       - 'ENFORCEMENT/mining_synthesis.py'
       - 'ENFORCEMENT/mining_synthesis_test.py'
+      - 'ENFORCEMENT/mining_growth_loop.py'
+      - 'ENFORCEMENT/mining_growth_loop_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -87,6 +89,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_live_execution.py
           python -m py_compile ENFORCEMENT/mining_live_execution_loop.py
           python -m py_compile ENFORCEMENT/mining_synthesis.py
+          python -m py_compile ENFORCEMENT/mining_growth_loop.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -125,3 +128,5 @@ jobs:
         run: python ENFORCEMENT/mining_live_execution_loop_test.py
       - name: Test evidence synthesis
         run: python ENFORCEMENT/mining_synthesis_test.py
+      - name: Test outcome growth loop
+        run: python ENFORCEMENT/mining_growth_loop_test.py
