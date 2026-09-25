@@ -232,6 +232,33 @@ Validation checkpoint:
 - prerequisite graph + candidate retention: SUCCESS
 - no-loss ledgers / CURRENT retention: SUCCESS
 
+
+## Core Adaptive Plan Intent
+
+Implemented and TAKY Enforcement GREEN:
+- LEARNING/pedagogy/adaptive-plan-contract.js
+- Unified Runtime Decision Contract now carries Core-owned adaptive_plan.
+- Core owns the reason/policy for:
+  - unit-span reduction intent
+  - retrieval checkpoint intent
+  - recovery floor
+  - assistance fading
+  - target learning IDs
+- consumer apps may apply the plan but cannot derive new learner-state policy from it.
+- adaptive plan has no dated scheduling authority.
+
+Ready integration:
+- Ready Adapter V2 preserves the Core adaptive plan.
+- ReadyLearningMaster applies the plan to subject-specific unit structure.
+- Planner preserves plan provenance only; Planner alone chooses dates.
+- stale Planner outputs are invalidated before Core-driven reanalysis.
+- dedicated Core adaptive plan -> Ready reanalysis -> Planner integration regression is GREEN.
+
+Legacy extraction status:
+- Core decision paths bypass Ready-local learnerAdaptiveProfile / memoryConcern.
+- primary adaptive-loop regressions are being migrated to Core decisions.
+- legacy fallback remains compatibility-only until every residual caller is verified/migrated.
+
 ## Remaining OPEN
 
 Current no-loss ledger projection has exactly three unresolved items:
@@ -247,9 +274,9 @@ Current no-loss ledger projection has exactly three unresolved items:
    - must pass calibration/promotion policy and human review.
 
 3. Extract remaining Ready-embedded learning logic — HOLD
-   - Ready Adapter V2 for independent Core decisions is implemented;
-   - legacy learnerAdaptiveProfile / memoryConcern / direct ReadyLearningMaster reinterpretation remains compatibility-only;
-   - migrate only after Core-decision-to-Planner path is fully regression-green.
+   - Core Decision -> Adaptive Plan -> Ready Adapter -> subject-unit reinterpretation -> Planner path is implemented and regression-green;
+   - Core decision paths bypass learnerAdaptiveProfile / memoryConcern;
+   - remaining blocker is residual caller migration plus final full-runtime replay before deleting the compatibility fallback.
 
 Already closed/applied:
 - metacognitive self-reflection evidence;
