@@ -1,6 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict');
 const A=require('./canonical-evidence.js');
+const V=require('../verification/verification-layer.js');
 
 const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
 
@@ -26,16 +27,33 @@ assert.equal(A.validateCanonical(snap).ok,true);
 const ready=A.fromReady({
   event_id:'r1',source:'ready-set',occurred_at:'2026-09-25T09:00:00.000Z',
   payload:{evidence_type:'CHILD_SELF_REPORT',self_report:{difficulty:'HARD'}}
-},{...ctx,evidence_type:'CHILD_SELF_REPORT',verified_outcome:1});
+},{...ctx,evidence_type:'CHILD_SELF_REPORT'});
 assert.equal(ready.evidence_type,'CHILD_SELF_REPORT');
 assert.equal(ready.verified_outcome,null);
 assert.equal(A.validateCanonical(ready).ok,true);
 
+const receipt=V.issueReceipt({
+  receipt_id:'vr-h2',
+  target_event_id:'h2',
+  verified_at:'2026-09-26T07:01:00.000Z',
+  verifier_type:'RETRIEVAL_EXACT_MATCH',
+  verifier_version:'1.0.0',
+  outcome:1,
+  member_id:'A',
+  subject:'영어',
+  concept_skill_target:'vocabulary',
+  reference_id:'answer-key:vocab-001'
+}).receipt;
 const verifiedHide=A.fromHide({
   event_id:'h2',source:'hide-seek',event_type:'TASK_COMPLETED',occurred_at:'2026-09-26T07:00:00.000Z',
   payload:{memorySummary:{averageMemoryStrength:80}}
-},{...ctx,verified_outcome:1});
-assert.equal(verifiedHide.verified_outcome,1,'verified outcome must come only from adapter context/verification layer');
+},{...ctx,verification_receipt:receipt});
+assert.equal(verifiedHide.verified_outcome,1,'verified outcome must require a valid verification receipt');
+assert.equal(verifiedHide.verification.receipt_id,'vr-h2');
+
+const forged={...hide,verified_outcome:1};
+assert.equal(A.validateCanonical(forged).ok,false);
+assert.equal(A.validateCanonical(forged).issues.includes('VERIFIED_OUTCOME_WITHOUT_RECEIPT'),true);
 
 const leaked={...hide,due_at:'2026-09-30T07:00:00.000Z'};
 assert.equal(A.validateCanonical(leaked).ok,false);
