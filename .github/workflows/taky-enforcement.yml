@@ -194,6 +194,8 @@ jobs:
         run: node SHARED/runtime/crew-registry.test.js
       - name: Validate badge candidate review contract
         run: node SHARED/runtime/badge-candidate-review.test.js
+      - name: Validate explicit badge source evidence contracts
+        run: node SHARED/runtime/badge-source-evidence.test.js
       - name: Validate crew visual identity projection
         run: node SHARED/runtime/crew-visual-identity.test.js
       - name: Validate explicit-event world state
