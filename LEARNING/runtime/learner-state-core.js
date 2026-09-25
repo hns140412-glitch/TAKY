@@ -1,10 +1,11 @@
 (function(root,factory){
   const reflection=(typeof module!=='undefined'&&module.exports)?require('../evidence/self-reflection-evidence.js'):(root?.TakySelfReflectionEvidence||null);
   const retention=(typeof module!=='undefined'&&module.exports)?require('../estimators/retention-state-baseline.js'):(root?.TakyRetentionStateBaseline||null);
-  const api=factory(reflection,retention);
+  const recovery=(typeof module!=='undefined'&&module.exports)?require('./recovery-profile.js'):(root?.TakyLearningRecoveryProfile||null);
+  const api=factory(reflection,retention,recovery);
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   if(root)root.TakyLearningEngineCoreV2=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection,RetentionBaseline){
+})(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection,RetentionBaseline,RecoveryProfile){
   'use strict';
 
   const VERSION='TAKY_LEARNING_ENGINE_CORE_V2_0_2';
@@ -113,6 +114,7 @@
     const retentionCandidate=RetentionBaseline?.derive
       ? RetentionBaseline.derive(accepted,{now_ms:Number.isFinite(options.now_ms)?options.now_ms:undefined})
       : null;
+    const recoveryProfile=RecoveryProfile?.derive?RecoveryProfile.derive(accepted):null;
 
     return {
       ok:true,
@@ -165,12 +167,17 @@
           promoted:false
         }:null,
         repeated_confusion_signal:reflectionSummary.repeated_confusions.length?'REPEATED_SELF_REPORTED_CONFUSION':'NONE_OBSERVED',
-        metacognitive_recall_signal:reflectionSummary.knew_but_could_not_recall_count>0?'KNEW_BUT_RECALL_FAILED_REPORTED':'NONE_OBSERVED'
+        metacognitive_recall_signal:reflectionSummary.knew_but_could_not_recall_count>0?'KNEW_BUT_RECALL_FAILED_REPORTED':'NONE_OBSERVED',
+        recovery_profile:recoveryProfile,
+        recovery_signal:recoveryProfile?.status==='OBSERVED'
+          ?(recoveryProfile.unresolved_episode_count>0?'UNRESOLVED_RECOVERY':recoveryProfile.recovered_episode_count>0?'RECOVERY_OBSERVED':'NO_RECOVERY_EPISODE')
+          :'INSUFFICIENT_TARGET_IDENTITY'
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
         mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection is observation-only and excluded from performance targets',
         retention_basis:'retention-state baseline is advisory-only until real time-held-out promotion gates pass',
+        recovery_basis:'recovery profile is observational and item-scoped; missing target identity is not inferred',
         scheduling_basis:'Core emits no dated schedule'
       },
       invalid_evidence_count:invalid.length,
