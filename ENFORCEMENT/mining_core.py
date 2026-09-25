@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib, json
 from typing import Iterable
 from mining_claim_relations import analyze
+from mining_goal_sufficiency import evaluate as evaluate_goal_sufficiency
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -52,8 +53,11 @@ def next_queries(assessed:list[dict])->list[dict]:
 def checkpoint(task:dict, frontier:list[dict], evidence:list[dict], previous:dict|None=None)->dict:
     goal=normalize_goal(task); assessed=assess_frontier(frontier,evidence)
     open_items=[x for x in assessed if x["status"]!="CLOSED"]
+    sufficiency=evaluate_goal_sufficiency(task,assessed)
     cycle=int((previous or {}).get("cycle",0))+1
-    return {"schema":"TAKY_MINING_CORE_CHECKPOINT_V1","goal":goal,"cycle":cycle,"frontier":assessed,"evidence":evidence,"next_queries":next_queries(assessed),"stop":not open_items,"stop_reason":"EVIDENCE_SUFFICIENT" if not open_items else "EVIDENCE_GAPS_REMAIN","resume_key":_id(json.dumps({"g":goal["goal_id"],"c":cycle,"o":[x["id"] for x in open_items]},sort_keys=True,ensure_ascii=False)),"guards":{"checkpoint_is_not_canonical":True,"external_adapter_required":True,"source_authority_preserved":True}}
+    stop=not open_items and sufficiency["goal_sufficient"]
+    reason="GOAL_AND_EVIDENCE_SUFFICIENT" if stop else "GOAL_GAPS_REMAIN" if not sufficiency["goal_sufficient"] else "EVIDENCE_GAPS_REMAIN"
+    return {"schema":"TAKY_MINING_CORE_CHECKPOINT_V1","goal":goal,"cycle":cycle,"frontier":assessed,"evidence":evidence,"goal_sufficiency":sufficiency,"next_queries":next_queries(assessed),"stop":stop,"stop_reason":reason,"resume_key":_id(json.dumps({"g":goal["goal_id"],"c":cycle,"o":[x["id"] for x in open_items],"required":sufficiency["required_ids"]},sort_keys=True,ensure_ascii=False)),"guards":{"checkpoint_is_not_canonical":True,"external_adapter_required":True,"source_authority_preserved":True,"evidence_sufficient_is_not_goal_sufficient":True}}
 
 def resume(checkpoint_state:dict,new_evidence:list[dict])->dict:
     task={"goal":checkpoint_state["goal"]["goal"],"task_family":checkpoint_state["goal"].get("task_family")}
