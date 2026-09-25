@@ -7,6 +7,7 @@ const e=(id,target,day,outcome,opts={})=>({
   learning_target_id:target,
   observed_at:`2026-09-${String(day).padStart(2,'0')}T07:00:00.000Z`,
   verified_outcome:outcome,
+  verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-'+id},
   assisted:opts.assisted,
   assistance:opts.assisted===true?'ASSISTED':opts.assisted===false?'UNASSISTED':'UNKNOWN',
   attempt_count:opts.attempt_count
@@ -39,3 +40,10 @@ assert.equal(R.validate(leaked).ok,false);
 assert.equal(R.validate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 console.log('LEARNING_RECOVERY_PROFILE_PASS');
+
+const unverifiedTarget=R.derive([{
+  event_id:'u1',learning_target_id:'word:u',observed_at:'2026-09-22T07:00:00.000Z',
+  verified_outcome:0,verification:null
+}]);
+assert.equal(unverifiedTarget.status,'INSUFFICIENT_VERIFIED_TARGET_EVENTS');
+assert.equal(unverifiedTarget.recovery_episode_count,0);
