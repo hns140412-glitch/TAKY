@@ -48,3 +48,12 @@ assert.equal(coldDsr.promoted,false);
 assert.equal(coldDsr.note.includes('cold-start'),true);
 
 console.log('LEARNING_ESTIMATOR_BENCHMARK_PASS');
+
+const targetSeq=[
+  {...row('t1',20,0,35),learning_target_id:'word:a'},
+  {...row('t2',21,1,55),learning_target_id:'word:b'},
+  {...row('t3',22,1,70),learning_target_id:'word:c'}
+];
+const targetBench=B.timeHeldOut(targetSeq,{min_history:1});
+assert.equal(targetBench.points[0].target_learning_target_id,'word:b');
+assert.equal(targetBench.points[1].target_learning_target_id,'word:c');
