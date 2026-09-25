@@ -24,6 +24,8 @@ on:
       - 'PROJECTIONS/data_index_raw_escalation.py'
       - 'PROJECTIONS/data_index_raw_escalation_test.py'
       - 'C2S/DATA_INDEX_RAW_ESCALATION_TASK_CONTRACT_2026-09-25.json'
+      - 'PROJECTIONS/data_index_paraphrase_regression_test.py'
+      - 'PROJECTIONS/fixtures/data_index_d4_paraphrase_regression_v1.json'
       - '.github/workflows/taky-data-index-d4.yml'
   pull_request:
     paths:
@@ -54,6 +56,7 @@ jobs:
           python -m py_compile PROJECTIONS/data_index_detail_fetch_test.py
           python -m py_compile PROJECTIONS/data_index_raw_escalation.py
           python -m py_compile PROJECTIONS/data_index_raw_escalation_test.py
+          python -m py_compile PROJECTIONS/data_index_paraphrase_regression_test.py
       - name: Preserve D2 D3 regression
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Validate D4 semantic stress suite
@@ -66,3 +69,5 @@ jobs:
         run: python PROJECTIONS/data_index_detail_fetch_test.py
       - name: Validate RAW escalation candidate gate
         run: python PROJECTIONS/data_index_raw_escalation_test.py
+      - name: Validate paraphrase semantic regression
+        run: python PROJECTIONS/data_index_paraphrase_regression_test.py
