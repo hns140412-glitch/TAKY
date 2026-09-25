@@ -5,6 +5,7 @@ const Feedback=require('../pedagogy/feedback-intent.js');
 const Graph=require('../domain-model/concept-dependency-graph.js');
 const Decision=require('./decision-contract.js');
 const EvidencePolicy=require('../policy/evidence-policy-bridge.js');
+const IndexedEvidence=require('../intake/indexed-evidence-handoff.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -12,13 +13,28 @@ function derive(input={}){
   const evidence=Array.isArray(input.evidence)?input.evidence:[];
   const scope=input.scope||{};
 
-  const policyRequests=Array.isArray(input.evidence_policy_requests)?input.evidence_policy_requests:[];
+  let indexedEvidence=null;
+  let policyRequests=Array.isArray(input.evidence_policy_requests)?[...input.evidence_policy_requests]:[];
+
+  if(input.indexed_evidence_handoff){
+    indexedEvidence=IndexedEvidence.prepare(input.indexed_evidence_handoff);
+    if(!indexedEvidence.ok){
+      return {
+        ok:false,
+        reason:'INDEXED_EVIDENCE_HANDOFF_INVALID',
+        indexed_evidence:indexedEvidence
+      };
+    }
+    policyRequests=[...policyRequests,...indexedEvidence.policy_requests];
+  }
+
   const evidencePolicy=EvidencePolicy.evaluateBatch(policyRequests);
   if(policyRequests.length && !evidencePolicy.ok){
     return {
       ok:false,
       reason:'EVIDENCE_POLICY_DENIED',
-      evidence_policy:evidencePolicy
+      evidence_policy:evidencePolicy,
+      indexed_evidence:indexedEvidence
     };
   }
 
@@ -55,14 +71,17 @@ function derive(input={}){
     learner_state:learnerState,
     feedback_intent:feedback,
     prerequisite_readiness:readiness,
+    indexed_evidence:indexedEvidence,
     evidence_policy:evidencePolicy,
     decision,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
+      source_refs:indexedEvidence?.source_refs||[],
       learner_state_version:learnerState.core_version||null,
       feedback_contract:feedback.intent_contract||null,
       graph_version:readiness?.graph_version||null,
       decision_contract:decision.decision_contract||null,
+      indexed_evidence_handoff:indexedEvidence?.version||null,
       evidence_policy_bridge:evidencePolicy.bridge_version||null,
       evidence_policy_version:evidencePolicy.policy_version||null,
       evidence_policy_ids:evidencePolicy.results.map(x=>x.policy_id).filter(Boolean)
@@ -85,6 +104,7 @@ function validate(result={}){
   if(result.learner_state&&!Core.selfValidate(result.learner_state).ok)issues.push('LEARNER_STATE_INVALID');
   if(result.feedback_intent&&!Feedback.validate(result.feedback_intent).ok)issues.push('FEEDBACK_INVALID');
   if(result.prerequisite_readiness&&!Graph.validateReadiness(result.prerequisite_readiness).ok)issues.push('READINESS_INVALID');
+  if(result.indexed_evidence&&result.indexed_evidence.ok!==true)issues.push('INDEXED_EVIDENCE_INVALID');
   if(result.evidence_policy&&result.evidence_policy.ok!==true)issues.push('EVIDENCE_POLICY_INVALID');
   if(result.decision&&!Decision.validate(result.decision).ok)issues.push('DECISION_INVALID');
 
