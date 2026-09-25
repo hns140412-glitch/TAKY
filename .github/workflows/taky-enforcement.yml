@@ -192,6 +192,10 @@ jobs:
         run: node SHARED/runtime/achievement-ledger.test.js
       - name: Validate shared crew registry
         run: node SHARED/runtime/crew-registry.test.js
+      - name: Validate crew visual identity projection
+        run: node SHARED/runtime/crew-visual-identity.test.js
+      - name: Validate explicit-event world state
+        run: node SHARED/runtime/world-state.test.js
       - name: Validate recovered badge guards
         run: node SHARED/runtime/badge-recovery-guards.test.js
       - name: Validate shared badge catalog guard
