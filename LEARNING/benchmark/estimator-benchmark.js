@@ -112,6 +112,7 @@ function timeHeldOut(rows=[],options={}){
     points.push({
       history_count:history.length,
       target_event_id:target.event_id||null,
+      target_learning_target_id:target.learning_target_id||null,
       target_outcome:target.verified_outcome,
       instrument_changed:!!instrumentChanged,
       predictions:{observational:obs,bkt,dsr},
