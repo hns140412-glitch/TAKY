@@ -293,6 +293,32 @@
         "MANUAL_REVIEW",
         "DEPENDENCY_CLOSED"
       ]
+    },
+    {
+      "entry_id": "hold:data-prerequisite-candidates-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Data-derived prerequisite relation candidates",
+      "description": "Retain prerequisite/support/confusion relations suggested by learner data as non-active candidates until explicit evidence-backed review promotes them to declared domain relations.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/domain-model/concept-dependency-graph.js",
+      "evidence_refs": [
+        "LEARNING/domain-model/concept-dependency-graph.js",
+        "LEARNING/domain-model/concept-dependency-graph.test.js"
+      ],
+      "blockers": [
+        "DOMAIN_RELATION_REVIEW_REQUIRED"
+      ],
+      "destination": "LEARNING/domain-model/concept-dependency-graph.js",
+      "created_at": "2026-09-25T07:08:00.000Z",
+      "parent_entry_id": "deferred:concept-graph-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "MANUAL_REVIEW",
+        "DEPENDENCY_CLOSED"
+      ]
     }
   ]
 }
