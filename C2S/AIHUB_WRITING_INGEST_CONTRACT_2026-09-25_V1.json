@@ -1,0 +1,73 @@
+{
+  "schema": "TAKY_AIHUB_WRITING_INGEST_CONTRACT_V1",
+  "date": "2026-09-25",
+  "status": "CONDITIONAL_ACCEPT",
+  "candidate_ids": [
+    "AIHUB_WRITING_71818",
+    "AIHUB_WRITING_71819"
+  ],
+  "target_gap": "STRUCTURED_WRITING_INSTRUCTION_CORPUS__STUDENT_RESPONSE_SCORE_FEEDBACK_LINEAGE",
+  "ingest_sequence": [
+    "METADATA_POINTER_ONLY",
+    "SCHEMA_AND_SAMPLE_REVIEW",
+    "LICENSE_ACCESS_GUARD_CHECK",
+    "ELEMENTARY_5_6_SAMPLE_VALIDATION",
+    "OVERLAP_CHECK",
+    "PRIVATE_RAW_ACQUISITION_ONLY_IF_NEEDED",
+    "INDEX_L1",
+    "DETAIL_L2_ON_DEMAND",
+    "DOMAIN_REQUERY"
+  ],
+  "index_l1": {
+    "source_family": "AIHUB_K12_WRITING_ASSESSMENT",
+    "source_type": "EXTERNAL_DATASET",
+    "authority_class": "CURATED_AI_TRAINING_DATASET",
+    "domain_facets": [
+      "ELEMENTARY_WRITING",
+      "ASSESSMENT",
+      "RUBRIC",
+      "FEEDBACK",
+      "STUDENT_RESPONSE"
+    ],
+    "language": "ko",
+    "modality": "text"
+  },
+  "detail_l2_candidates": [
+    "grade",
+    "subject",
+    "prompt",
+    "difficulty",
+    "writing_purpose",
+    "student_response",
+    "evaluator",
+    "overall_score",
+    "analytic_rubric_scores",
+    "rubric_keys",
+    "qualitative_feedback",
+    "source_record_id"
+  ],
+  "guards": [
+    "MINED != CANONICAL",
+    "SOURCE_DATASET != OFFICIAL_CURRICULUM_AUTHORITY",
+    "RUBRIC_SCORE != GLOBAL_WRITING_ABILITY",
+    "STUDENT_RESPONSE != CAUSAL_DIAGNOSIS",
+    "FEEDBACK_EXAMPLE != PRESCRIPTIVE_REMEDIATION",
+    "TRAINING_DATA_LICENSE != UNRESTRICTED_REDISTRIBUTION",
+    "SAMPLE_DATA_MAY_DIFFER_FROM_FULL_DATA",
+    "RAW_FULL_COPY_REQUIRES_EXPLICIT_NEED_AND_VALID_ACCESS"
+  ],
+  "acquisition_gate": {
+    "pass": [
+      "prompt-response-score-feedback linkage confirmed",
+      "elementary 5-6 sample usable",
+      "license compatible with private project use",
+      "no material redundancy"
+    ],
+    "hold": [
+      "lineage unstable",
+      "feedback provenance unclear",
+      "license conflicts",
+      "sample differs materially from published structure"
+    ]
+  }
+}
