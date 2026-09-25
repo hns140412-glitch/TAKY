@@ -1,0 +1,33 @@
+{
+  "checkpoint_version": "1.0",
+  "task_id": "DATA_INDEX_SEARCH_PROJECTION",
+  "namespace": "DATA",
+  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED",
+  "status": "RUNNING",
+  "done": [
+    "CURRENT V24 corpus state restored without reopening CLOSED source indexing",
+    "Executable search projection implemented in ENFORCEMENT/data_index_search.py",
+    "Regression coverage implemented in ENFORCEMENT/data_index_search_test.py",
+    "TAKY Enforcement Replay run 761 completed successfully",
+    "PR #94 squash-merged to main at 2ed0c2de069ac5e80e996e35dfac20a950bd44db"
+  ],
+  "open": [
+    "Run projection against the real V24 666-source index payload and capture regression evidence",
+    "Add true embedding/vector semantic retrieval only when an embedding provider/index is explicitly available",
+    "Validate DETAIL_L2 anchor fetch escalation on real source records"
+  ],
+  "next": "REAL_V24_SEARCH_PROJECTION_REGRESSION",
+  "corrections": [
+    "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+    "TOKEN_COSINE_FALLBACK != EMBEDDING_SEMANTIC",
+    "INDEXING != DOMAIN_DECISION_ENGINE"
+  ],
+  "source_refs": [
+    "C2S/DATA_INDEX_SCHEMA_CONTRACT_2026-09-25_V1.json",
+    "C2S/DATA_INDEX_COMPATIBILITY_MAP_2026-09-25_V1.json",
+    "C2S/MINING_INDEXING_LEARNING_ROLE_CONTRACT_2026-09-25_V1.json",
+    "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "github:hns140412-glitch/TAKY@2ed0c2de069ac5e80e996e35dfac20a950bd44db"
+  ],
+  "updated_at": "2026-09-25T10:40:20+09:00"
+}
