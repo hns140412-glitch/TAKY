@@ -147,6 +147,8 @@ jobs:
           python -m py_compile ENFORCEMENT/shared_technical_capability_validator.py
           python -m py_compile ENFORCEMENT/current_product_identity_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
+          python -m py_compile ENFORCEMENT/behavioral_eval.py
+          python -m py_compile ENFORCEMENT/trace_to_regression.py
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
@@ -359,6 +361,18 @@ jobs:
         run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
       - name: Validate controlled runtime orchestrator
         run: python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+
+      - name: Runtime hardening focused regressions
+        working-directory: ENFORCEMENT
+        run: |
+          python change_preserve_contract_test.py
+          python execution_outcome_state_test.py
+          python approval_checkpoint_resume_test.py
+          python untrusted_reader_quarantine_test.py
+          python context_firewall_test.py
+          python synthesis_barrier_test.py
+          python behavioral_eval_test.py
+          python trace_to_regression_test.py
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
