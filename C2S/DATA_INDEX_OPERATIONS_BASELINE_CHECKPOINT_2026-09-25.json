@@ -1,0 +1,48 @@
+{
+  "schema": "TAKY_DATA_INDEX_OPERATIONS_BASELINE_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "status": "OPERATIONS_BASELINE_VERIFIED",
+  "branch": "taky/data-indexing-d4-semantic-2026-09-25",
+  "validated_head": "09aa9a5a51d01730f70c3919992bdd9f504f3dac",
+  "ci_run_id": 36128296981,
+  "current_authority": {
+    "name": "DATA_UTILIZATION_INDEX_2026-09-25_V24.json",
+    "remains_current": true,
+    "v25_created": false,
+    "promotion_executed": false
+  },
+  "corrected_stale_state": {
+    "path": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json",
+    "from_status": "RUNNING",
+    "to_status": "OPERATIONS",
+    "stale_next_removed": "REAL_V24_SEARCH_PROJECTION_REGRESSION"
+  },
+  "incremental_operations": {
+    "contract": "C2S/DATA_INDEX_INCREMENTAL_OPERATIONS_CONTRACT_2026-09-25.json",
+    "implementation": "PROJECTIONS/data_index_incremental_projection.py",
+    "test": "PROJECTIONS/data_index_incremental_projection_test.py",
+    "mode": "INCREMENTAL_ON_TOUCH_OR_QUERY",
+    "full_reindex_performed": false,
+    "raw_reread_default": false,
+    "current_pointer_mutation": false,
+    "promotion_performed": false
+  },
+  "regression": {
+    "d2_d3": "PASS",
+    "d4": "PASS",
+    "d5": "PASS",
+    "relation": "PASS",
+    "detail": "PASS",
+    "raw_candidate_gate": "PASS",
+    "paraphrase": "PASS",
+    "full_contract": "PASS",
+    "incremental_operations": "PASS"
+  },
+  "remaining_nonblocking_open": [
+    "TRUE_NEURAL_EMBEDDING_PROVIDER_ONLY_IF_EXPLICITLY_AVAILABLE_AND_AUTHORIZED",
+    "OVERSIZE_VIDEO_2_RETRY_ONLY_WITH_NEW_STREAMING_OR_LOCAL_SYNC_ACCESS",
+    "REAL_NEW_OR_CHANGED_SOURCE_DELTA_WHEN_IT_ACTUALLY_ARRIVES"
+  ],
+  "next_mode": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY",
+  "reopen_rule": "Do not reopen closed implementation stages without new regression evidence or authoritative input change."
+}
