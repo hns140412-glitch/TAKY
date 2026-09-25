@@ -10,7 +10,7 @@ fail = []
 layers = data.get("layers") or {}
 required_layers = {
     "TAKY_CORE","SHARED_TECHNICAL_CAPABILITY","WORK_OS","LEARNING_OS",
-    "LEARNING_APP_FAMILY","READY_SET","HIDE_SEEK","SNAP_POP",
+    "LEARNING_ENGINE_CORE","LEARNING_APP_FAMILY","READY_SET","HIDE_SEEK","SNAP_POP",
     "WORK_DOMAIN_PROJECT","PLATFORM_ADAPTER"
 }
 if not required_layers.issubset(layers):
@@ -24,6 +24,12 @@ if "LEARNING_OS" not in ((layers.get("WORK_OS") or {}).get("sibling_of") or []):
     fail.append("WORK_LEARNING_SIBLING_LINK_MISSING")
 if "WORK_OS" not in ((layers.get("LEARNING_OS") or {}).get("sibling_of") or []):
     fail.append("LEARNING_WORK_SIBLING_LINK_MISSING")
+if (layers.get("LEARNING_ENGINE_CORE") or {}).get("parent") != "LEARNING_OS":
+    fail.append("LEARNING_ENGINE_CORE_PARENT_INVALID")
+engine=layers.get("LEARNING_ENGINE_CORE") or {}
+for forbidden in ("dated scheduling or calendar placement","Ready session runtime","specialist app UI/interaction"):
+    if forbidden not in (engine.get("does_not_own") or []):
+        fail.append("LEARNING_ENGINE_CORE_BOUNDARY_MISSING:" + forbidden)
 if (layers.get("LEARNING_APP_FAMILY") or {}).get("parent") != "LEARNING_OS":
     fail.append("LEARNING_APP_FAMILY_PARENT_INVALID")
 
@@ -55,6 +61,7 @@ required_exact={
     "cross-app learning handoff/session semantics":("DOMAIN_OWNED_SEMANTIC","LEARNING_APP_FAMILY"),
     "Work scheduling/task semantics":("DOMAIN_OWNED_SEMANTIC","WORK_OS"),
     "Learning schedule/planner/assignment semantics":("DOMAIN_OWNED_SEMANTIC","LEARNING_OS"),
+    "learner modeling and pedagogical adaptation semantics":("DOMAIN_OWNED_SEMANTIC","LEARNING_ENGINE_CORE"),
 }
 for item,(cls,owner) in required_exact.items():
     x=by_item.get(item)
