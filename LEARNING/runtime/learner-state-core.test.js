@@ -69,6 +69,29 @@ assert.equal(math.observed.unique_evidence_count,1);
 const childB=Core.deriveSkillState(rows,{member_id:'B',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(childB.observed.unique_evidence_count,1);
 
+const verifiedMemoryRows=[
+  {
+    ...e('vr1','A','영어','VOCABULARY',{strength:40,observed_at:'2026-09-20T07:00:00.000Z'}),
+    verified_outcome:0,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-vr1'}
+  },
+  {
+    ...e('vr2','A','영어','VOCABULARY',{strength:65,observed_at:'2026-09-22T07:00:00.000Z'}),
+    verified_outcome:1,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-vr2'}
+  },
+  {
+    ...e('vr3','A','영어','VOCABULARY',{strength:80,observed_at:'2026-09-25T07:00:00.000Z'}),
+    verified_outcome:1,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-vr3'}
+  }
+];
+const retentionState=Core.deriveSkillState(verifiedMemoryRows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'},{now_ms:Date.parse('2026-10-20T07:00:00.000Z')});
+assert.equal(retentionState.inferred.retention_signal,'RETENTION_AT_RISK');
+assert.equal(retentionState.inferred.retention_candidate.promoted,false);
+assert.equal(retentionState.model.retention_probability,null,'advisory retention candidate must not become promoted runtime probability');
+assert.equal(retentionState.model.scheduling_authority,false);
+
 const mixed=[...rows,e('a4','A','영어','VOCABULARY',{strength:59,instrument_version:'hide-v2',observed_at:'2026-09-28T07:00:00.000Z'})];
 const held=Core.deriveSkillState(mixed,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(held.inferred.instrument_change_detected,true);
