@@ -57,3 +57,27 @@ jobs:
       - name: Full Mining Indexing Learning growth E2E
         working-directory: ENFORCEMENT
         run: python cross_engine_growth_e2e_test.py
+      - name: Change preserve contract
+        working-directory: ENFORCEMENT
+        run: python change_preserve_contract_test.py
+      - name: Execution outcome state
+        working-directory: ENFORCEMENT
+        run: python execution_outcome_state_test.py
+      - name: Approval checkpoint resume
+        working-directory: ENFORCEMENT
+        run: python approval_checkpoint_resume_test.py
+      - name: Untrusted reader quarantine
+        working-directory: ENFORCEMENT
+        run: python untrusted_reader_quarantine_test.py
+      - name: Context firewall
+        working-directory: ENFORCEMENT
+        run: python context_firewall_test.py
+      - name: Synthesis barrier
+        working-directory: ENFORCEMENT
+        run: python synthesis_barrier_test.py
+      - name: Behavioral eval
+        working-directory: ENFORCEMENT
+        run: python behavioral_eval_test.py
+      - name: Trace to regression
+        working-directory: ENFORCEMENT
+        run: python trace_to_regression_test.py
