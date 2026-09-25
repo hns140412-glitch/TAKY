@@ -1,0 +1,50 @@
+name: Mining Engine V2 Gate
+
+on:
+  push:
+    branches:
+      - taky/mining-engine-v2-current-reconciler-2026-09-25
+    paths:
+      - 'ENFORCEMENT/current_reconciler.py'
+      - 'ENFORCEMENT/current_reconciler_test.py'
+      - 'ENFORCEMENT/anticipation_evaluator.py'
+      - 'ENFORCEMENT/anticipation_evaluator_test.py'
+      - 'ENFORCEMENT/strategy_failure_memory.py'
+      - 'ENFORCEMENT/strategy_failure_memory_test.py'
+      - 'ENFORCEMENT/mining_engine_step9_gate.py'
+      - 'ENFORCEMENT/mining_engine_step9_gate_test.py'
+      - '.github/workflows/mining-engine-v2-gate.yml'
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/current_reconciler.py'
+      - 'ENFORCEMENT/current_reconciler_test.py'
+      - 'ENFORCEMENT/anticipation_evaluator.py'
+      - 'ENFORCEMENT/anticipation_evaluator_test.py'
+      - 'ENFORCEMENT/strategy_failure_memory.py'
+      - 'ENFORCEMENT/strategy_failure_memory_test.py'
+      - 'ENFORCEMENT/mining_engine_step9_gate.py'
+      - 'ENFORCEMENT/mining_engine_step9_gate_test.py'
+      - '.github/workflows/mining-engine-v2-gate.yml'
+
+jobs:
+  mining-engine-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile Mining Engine V2
+        run: |
+          python -m py_compile ENFORCEMENT/current_reconciler.py
+          python -m py_compile ENFORCEMENT/anticipation_evaluator.py
+          python -m py_compile ENFORCEMENT/strategy_failure_memory.py
+          python -m py_compile ENFORCEMENT/mining_engine_step9_gate.py
+      - name: Test CURRENT reconciler
+        run: python ENFORCEMENT/current_reconciler_test.py
+      - name: Test L5 anticipation evaluator
+        run: python ENFORCEMENT/anticipation_evaluator_test.py
+      - name: Test strategy and failure memory
+        run: python ENFORCEMENT/strategy_failure_memory_test.py
+      - name: Test unified Step 9 gate
+        run: python ENFORCEMENT/mining_engine_step9_gate_test.py
