@@ -1,0 +1,104 @@
+{
+  "task_id": "BADGE_SYSTEM_RECOVERY",
+  "namespace": "BADGE",
+  "status": "PARTIAL",
+  "updated_at": "2026-09-26",
+  "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
+  "hard_locks": {
+    "user_not_debugger": true,
+    "data_indexing_vector_transition_forbidden": true,
+    "historical_badge_catalog": {
+      "count": 60,
+      "state": "WORKING_DRAFT_NOT_ACTIVE",
+      "auto_canonicalize": false,
+      "auto_activate": false,
+      "auto_award": false
+    },
+    "forbidden_auto_inference": [
+      "ERROR_DISCOVERY",
+      "DEEP_THINKING",
+      "SPECIAL_BEHAVIOR"
+    ]
+  },
+  "closed_inherited": [
+    "ACHIEVEMENT_DECISION",
+    "AWARD_LEDGER",
+    "CANDIDATE_REVIEW",
+    "HIDE_SNAP_BADGE_SOURCE_AUTO_INFERENCE_REGRESSION"
+  ],
+  "sp_badge_006": {
+    "status": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
+    "repo": "hns140412-glitch/Hide-Seek",
+    "pr": 17,
+    "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
+    "ci": {
+      "Learning Runtime Bridge Validation": "SUCCESS",
+      "Validate Hide & Seek": "SUCCESS"
+    },
+    "implemented": [
+      "explicit child-authored self-reflection UX producer",
+      "SELF_REFLECTION_EVIDENCE emission only after explicit user selection and confirmation",
+      "verified_outcome remains null",
+      "mastery authority forbidden",
+      "direct award forbidden",
+      "candidate review required",
+      "telemetry inference disabled for ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR"
+    ],
+    "open": [
+      "merge decision for draft PR #17"
+    ]
+  },
+  "sp_badge_008": {
+    "status": "PARTIAL",
+    "repo": "hns140412-glitch/Snap-Pop",
+    "pr": 8,
+    "head_sha": "9f0fe438233d149840baf7ed23449925e4e9fad1",
+    "ci": {
+      "Validate Snap & Pop": "SUCCESS"
+    },
+    "world_theme_binding": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
+    "crew_visual_binding": "OPEN_HOLD_NO_APPROVED_INDIVIDUAL_ASSET",
+    "implemented": [
+      "reviewed runtime world visual binding for assets/world/golden_world_scene.jpg",
+      "assets/reference/approved_visual_source.png remains reference lineage only",
+      "reference board direct runtime binding forbidden",
+      "automatic asset promotion forbidden",
+      "automatic release pass forbidden"
+    ],
+    "open": [
+      "approved individual Crew/Character visual asset binding",
+      "merge decision for draft PR #8"
+    ]
+  },
+  "ready_world_state_consumer": {
+    "status": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
+    "repo": "hns140412-glitch/Ready-Set",
+    "pr": 105,
+    "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
+    "ci": {
+      "Learning Runtime Bridge Validation": "SUCCESS",
+      "Ready Integration CI": "SUCCESS",
+      "Planner Free Window Gate": "SUCCESS",
+      "Ready Runtime E2E": "SUCCESS"
+    },
+    "guards": [
+      "consumer_only",
+      "ready_does_not_own_world_state",
+      "ready_does_not_mutate_crew_identity",
+      "reference_board_direct_binding=false",
+      "auto_asset_promotion=false",
+      "auto_badge_activation=false",
+      "auto_award=false"
+    ],
+    "open": [
+      "merge decision for draft PR #105"
+    ]
+  },
+  "next": [
+    "preserve CLOSED items",
+    "do not activate 60 historical catalog",
+    "resolve SP-BADGE-008 Crew reviewed asset only when an actually approved individual asset exists",
+    "merge draft PRs only with intentional approval",
+    "after merges, verify exact main heads and rerun regressions before final CLOSED promotion"
+  ]
+}
