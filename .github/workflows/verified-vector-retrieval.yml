@@ -1,0 +1,31 @@
+name: TAKY Verified Vector Retrieval
+
+on:
+  push:
+    branches:
+      - taky/vector-semantic-retrieval-2026-09-26
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/data_index_search.py'
+      - 'ENFORCEMENT/data_index_vector_search.py'
+      - 'ENFORCEMENT/data_index_vector_search_test.py'
+      - '.github/workflows/verified-vector-retrieval.yml'
+
+jobs:
+  vector-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Existing search projection regression
+        working-directory: ENFORCEMENT
+        run: python data_index_search_test.py
+      - name: Verified vector retrieval regression
+        working-directory: ENFORCEMENT
+        run: python data_index_vector_search_test.py
+      - name: Syntax check
+        run: |
+          python -m py_compile ENFORCEMENT/data_index_search.py
+          python -m py_compile ENFORCEMENT/data_index_vector_search.py
