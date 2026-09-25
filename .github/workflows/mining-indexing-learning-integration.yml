@@ -1,0 +1,30 @@
+name: TAKY Mining Indexing Learning Integration
+
+on:
+  push:
+    branches:
+      - taky/mining-indexing-learning-integration-2026-09-25
+  pull_request:
+    paths:
+      - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
+      - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
+      - 'LEARNING/policy/**'
+      - 'LEARNING/runtime/learning-engine-runtime.js'
+      - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+
+jobs:
+  integration-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Evidence policy bridge
+        run: node LEARNING/policy/evidence-policy-bridge.test.js
+      - name: Learning runtime policy integration
+        run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
+      - name: Existing learner state regression
+        run: node LEARNING/runtime/learner-state-core.test.js
+      - name: Existing decision contract regression
+        run: node LEARNING/runtime/decision-contract.test.js
