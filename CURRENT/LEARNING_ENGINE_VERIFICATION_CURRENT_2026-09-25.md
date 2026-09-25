@@ -138,6 +138,38 @@ Validation:
 - unverified evidence rejection: GREEN
 - TAKY run 36102162246: all Learning Engine receipt/intake steps SUCCESS at checkpoint
 
+
+## No-loss promotion / reflection lifecycle
+
+Unapplied or unpromoted work is not discarded.
+
+Hard locks:
+- HOLD != DROP
+- REJECTED != DELETE
+- NOT_ELIGIBLE != DISCARD
+- SUPERSEDED != ERASED
+- CURRENT != HISTORY
+
+Estimator evaluations:
+- every promotion report is appended to LEARNING/lifecycle/evaluation-ledger.js;
+- HOLD and HUMAN_REVIEW_AVAILABLE results are both retained;
+- human REJECTED/PROMOTED/DEFERRED decisions append new decision entries and never erase the source evaluation;
+- a new evidence receipt or policy version creates a reconsideration-queue entry for the same skill scope;
+- identical replay is deduplicated idempotently.
+
+Learning Engine changes generally:
+- estimator, policy, learner-state, evidence-schema, pedagogy-rule, adapter-contract and validation-rule proposals use LEARNING/lifecycle/change-ledger.js;
+- APPLIED / HOLD / DEFERRED / REJECTED / SUPERSEDED states all remain immutable history;
+- CURRENT/LEARNING_ENGINE_CHANGE_LEDGER_CURRENT.json retains unresolved and applied findings;
+- CI fails if retained deep-review items disappear.
+
+Existing retained OPEN/HOLD findings include:
+- Metacognitive self-reflection evidence
+- Pedagogical feedback intent
+- Forgetting and retention estimator
+- Calibrated BKT estimator
+- Concept prerequisite and dependency graph
+
 ## Remaining OPEN
 
 1. Accumulate enough real verified targets per concept_skill_target.
