@@ -261,24 +261,19 @@ Legacy extraction status:
 
 ## Remaining OPEN
 
-Current no-loss ledger projection has exactly three unresolved items:
+Current no-loss ledger projection has exactly two unresolved items:
 
 1. Forgetting and retention estimator — HOLD
-   - implementation exists as advisory baseline;
-   - needs sufficient real verified retrieval targets;
-   - must pass promotion policy before runtime estimator authority changes.
+   - advisory retention baseline is implemented;
+   - real verified retrieval targets are still insufficient for promotion review;
+   - must pass real time-held-out promotion policy before runtime estimator authority changes.
 
 2. Calibrated BKT estimator — HOLD
-   - deterministic train-only calibrator exists;
-   - needs real time-held-out calibration evidence;
-   - must pass calibration/promotion policy and human review.
+   - deterministic train-only calibrator is implemented;
+   - real time-held-out calibration evidence is still insufficient;
+   - must pass calibration/promotion policy and human review before promotion.
 
-3. Extract remaining Ready-embedded learning logic — HOLD
-   - Core Decision -> Adaptive Plan -> Ready Adapter -> subject-unit reinterpretation -> Planner path is implemented and regression-green;
-   - Core decision paths bypass learnerAdaptiveProfile / memoryConcern;
-   - remaining blocker is residual caller migration plus final full-runtime replay before deleting the compatibility fallback.
-
-Already closed/applied:
+Closed/applied:
 - metacognitive self-reflection evidence;
 - pedagogical feedback intent;
 - declared concept prerequisite/dependency graph;
@@ -286,9 +281,15 @@ Already closed/applied:
 - item-scoped recovery profile;
 - item-level learning_target_id provenance;
 - automatic retained evaluation for every real evidence receipt;
-- unified Learning Engine runtime decision contract.
+- unified Learning Engine runtime decision contract;
+- Core Adaptive Plan Intent;
+- Ready independent Learning Engine Adapter V2;
+- Ready embedded learning logic extraction into explicit compatibility quarantine.
 
 No estimator auto-promotion.
+Ready is not the Learning Engine.
+Planner remains dated-allocation authority.
 Production / merge / Netlify deployment remains HOLD.
 
 Netlify / production deployment: HOLD.
+
