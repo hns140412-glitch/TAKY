@@ -308,6 +308,7 @@ Replay rules:
 - Only VERIFIED_TARGET rows may be scored as prediction targets.
 - Time order must be preserved; random split is not the default.
 - Real-evidence replay and synthetic fixtures must be provenance-distinguishable.
+- REAL_EVIDENCE declaration alone is not promotion evidence; an evidence_receipt_id from the owning evidence pipeline is required before promotion review.
 
 Authoritative schema:
 - LEARNING/replay/learning-replay-dataset.schema.json
