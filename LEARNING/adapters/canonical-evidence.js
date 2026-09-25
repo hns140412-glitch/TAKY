@@ -16,7 +16,7 @@ function baseFromEvent(event={},context={}){
     concept_skill_target:clean(context.concept_skill_target||payload.concept_skill_target).toLowerCase(),
     evidence_type:'SPECIALIST_OUTCOME_UNKNOWN',
     source_app:clean(event.source||event.app||context.source_app),
-    instrument_version:clean(context.instrument_version||payload.instrumentVersion||payload.instrument_version)||'UNSPECIFIED',
+    instrument_version:clean(payload.instrumentVersion||payload.instrument_version||context.instrument_version)||'UNSPECIFIED',
     interaction_mode:clean(payload.interactionMode||payload.interaction_mode)||'UNKNOWN',
     assistance:payload.assisted===true?'ASSISTED':payload.assisted===false?'UNASSISTED':'UNKNOWN',
     assisted:payload.assisted===true?true:payload.assisted===false?false:null,
