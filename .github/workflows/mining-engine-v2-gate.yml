@@ -37,6 +37,10 @@ on:
       - 'ENFORCEMENT/mining_provider_executor_test.py'
       - 'ENFORCEMENT/mining_provider_execution_loop.py'
       - 'ENFORCEMENT/mining_provider_execution_loop_test.py'
+      - 'ENFORCEMENT/mining_live_execution.py'
+      - 'ENFORCEMENT/mining_live_execution_test.py'
+      - 'ENFORCEMENT/mining_live_execution_loop.py'
+      - 'ENFORCEMENT/mining_live_execution_loop_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -78,6 +82,8 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_external_adapter.py
           python -m py_compile ENFORCEMENT/mining_provider_executor.py
           python -m py_compile ENFORCEMENT/mining_provider_execution_loop.py
+          python -m py_compile ENFORCEMENT/mining_live_execution.py
+          python -m py_compile ENFORCEMENT/mining_live_execution_loop.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -110,3 +116,7 @@ jobs:
         run: python ENFORCEMENT/mining_provider_executor_test.py
       - name: Test provider execution loop
         run: python ENFORCEMENT/mining_provider_execution_loop_test.py
+      - name: Test live provider execution
+        run: python ENFORCEMENT/mining_live_execution_test.py
+      - name: Test live provider fallback loop
+        run: python ENFORCEMENT/mining_live_execution_loop_test.py
