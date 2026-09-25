@@ -68,9 +68,16 @@ def lexical_retrieval(rows, query):
         ]
         toks=set()
         for f in fields: toks.update(_tokens(f))
-        overlap=len(q & toks)
+        exact_overlap=len(q & toks)
+        partial_overlap=0
+        for qt in q - toks:
+            if len(qt) < 2: continue
+            if re.fullmatch(r"[가-힣]+",qt) and any(qt in tok for tok in toks if re.fullmatch(r"[가-힣]+",tok)):
+                partial_overlap+=1
+        overlap=exact_overlap+partial_overlap
         if overlap:
-            score=overlap/max(1,math.sqrt(len(q)*max(1,len(toks))))
+            weighted=exact_overlap+(0.85*partial_overlap)
+            score=weighted/max(1,math.sqrt(len(q)*max(1,len(toks))))
             scored.append((_row_id(row),score,row))
     return sorted(scored,key=lambda x:(-x[1],x[0]))
 
