@@ -147,6 +147,45 @@
         "MANUAL_REVIEW",
         "DEPENDENCY_CLOSED"
       ]
+    },
+    {
+      "entry_id": "apply:self-reflection-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Metacognitive self-reflection evidence",
+      "description": "Implemented observation-only metacognitive evidence and Core summary integration without performance/mastery authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:002",
+      "evidence_refs": [
+        "LEARNING/evidence/self-reflection-evidence.js",
+        "LEARNING/runtime/learner-state-core.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/evidence/self-reflection-evidence.js",
+      "created_at": "2026-09-25T06:50:00.000Z",
+      "parent_entry_id": "seed:006",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:feedback-intent-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_RULE",
+      "title": "Pedagogical feedback intent",
+      "description": "Implemented Core-owned pedagogical intents from learner-state signals while consumer apps retain final wording/UI copy.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "seed:003",
+      "evidence_refs": [
+        "LEARNING/pedagogy/feedback-intent.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/pedagogy/feedback-intent.js",
+      "created_at": "2026-09-25T06:51:00.000Z",
+      "parent_entry_id": "apply:self-reflection-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
