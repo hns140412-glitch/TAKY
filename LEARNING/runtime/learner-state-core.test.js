@@ -92,6 +92,42 @@ assert.equal(retentionState.inferred.retention_candidate.promoted,false);
 assert.equal(retentionState.model.retention_probability,null,'advisory retention candidate must not become promoted runtime probability');
 assert.equal(retentionState.model.scheduling_authority,false);
 
+const recoveryRows=[
+  {
+    ...e('rec1','A','영어','VOCABULARY',{strength:40,observed_at:'2026-09-20T07:00:00.000Z'}),
+    learning_target_id:'word:a',
+    verified_outcome:0,
+    assisted:true,
+    assistance:'ASSISTED',
+    attempt_count:2,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-rec1'}
+  },
+  {
+    ...e('rec2','A','영어','VOCABULARY',{strength:70,observed_at:'2026-09-21T07:00:00.000Z'}),
+    learning_target_id:'word:a',
+    verified_outcome:1,
+    assisted:false,
+    assistance:'UNASSISTED',
+    attempt_count:1,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-rec2'}
+  },
+  {
+    ...e('rec3','A','영어','VOCABULARY',{strength:45,observed_at:'2026-09-21T08:00:00.000Z'}),
+    learning_target_id:'word:b',
+    verified_outcome:0,
+    assisted:true,
+    assistance:'ASSISTED',
+    attempt_count:2,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr-rec3'}
+  }
+];
+const recoveryState=Core.deriveSkillState(recoveryRows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
+assert.equal(recoveryState.inferred.recovery_signal,'UNRESOLVED_RECOVERY');
+assert.equal(recoveryState.inferred.recovery_profile.recovered_episode_count,1);
+assert.equal(recoveryState.inferred.recovery_profile.unresolved_episode_count,1);
+assert.equal(recoveryState.model.mastery_estimate,null);
+assert.equal(recoveryState.model.scheduling_authority,false);
+
 const mixed=[...rows,e('a4','A','영어','VOCABULARY',{strength:59,instrument_version:'hide-v2',observed_at:'2026-09-28T07:00:00.000Z'})];
 const held=Core.deriveSkillState(mixed,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(held.inferred.instrument_change_detected,true);
