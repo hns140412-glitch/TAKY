@@ -70,3 +70,34 @@ const none=G.deriveReadiness(graph,states,'수학','geometry');
 assert.equal(none.readiness,'NO_DECLARED_PREREQUISITE');
 
 console.log('CONCEPT_DEPENDENCY_GRAPH_PASS');
+
+const candidateGraph=G.build([
+  {
+    relation_id:'cand1',
+    subject:'수학',
+    from_concept:'number_sense',
+    to_concept:'fraction_basics',
+    relation_type:'PREREQUISITE',
+    source_ref:'learner-analysis:trial-001',
+    authority:'DATA_CANDIDATE',
+    inferred_from_learner_data:true,
+    confidence:0.72
+  }
+]);
+assert.equal(candidateGraph.ok,true);
+assert.equal(candidateGraph.active_relations.length,0);
+assert.equal(candidateGraph.candidate_relations.length,1);
+assert.equal(candidateGraph.candidate_relations[0].state,'CANDIDATE');
+assert.equal(candidateGraph.candidate_relations[0].can_influence_learning_sequence,false);
+assert.equal(G.prerequisitesFor(candidateGraph,'수학','fraction_basics').length,0,'data candidate must not become active prerequisite');
+assert.equal(G.candidateRelationsFor(candidateGraph,'수학','fraction_basics').length,1);
+assert.equal(G.selfValidate(candidateGraph).ok,true);
+
+const cycle=G.build([
+  {relation_id:'c1',subject:'수학',from_concept:'a',to_concept:'b',relation_type:'PREREQUISITE',source_ref:'curriculum:v1'},
+  {relation_id:'c2',subject:'수학',from_concept:'b',to_concept:'a',relation_type:'PREREQUISITE',source_ref:'curriculum:v1'}
+]);
+assert.equal(cycle.ok,false);
+assert.equal(cycle.cycles.length>0,true);
+assert.equal(G.selfValidate(cycle).ok,false);
+assert.equal(G.selfValidate(cycle).issues.includes('ACTIVE_PREREQUISITE_CYCLE'),true);
