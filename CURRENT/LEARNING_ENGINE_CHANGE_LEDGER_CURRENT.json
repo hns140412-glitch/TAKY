@@ -340,6 +340,28 @@
       "parent_entry_id": "hold:data-prerequisite-candidates-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:item-recovery-profile-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Item-scoped recovery profile",
+      "description": "Preserve learning_target_id and derive same-target failure-to-success recovery, assistance dependence and unresolved recovery as advisory learner-state signals without mastery or schedule authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/runtime/recovery-profile.js",
+      "evidence_refs": [
+        "LEARNING/adapters/canonical-evidence.js",
+        "LEARNING/runtime/recovery-profile.js",
+        "LEARNING/runtime/learner-state-core.js",
+        "LEARNING/pedagogy/feedback-intent.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/runtime/recovery-profile.js",
+      "created_at": "2026-09-25T07:12:00.000Z",
+      "parent_entry_id": "correct:concept-graph-current-applied-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
