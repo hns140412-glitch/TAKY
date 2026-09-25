@@ -668,6 +668,27 @@
       "parent_entry_id": "hold:ready-embedded-learning-logic-extraction-v3",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "apply:estimator-data-readiness-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "VALIDATION_RULE",
+      "title": "Estimator real-evidence readiness snapshot",
+      "description": "Adds scope-level visibility into verified retrieval target counts and remaining evidence needed before retention/BKT promotion review can even start. Readiness has no promotion authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "LEARNING/lifecycle/estimator-data-readiness.js",
+      "evidence_refs": [
+        "LEARNING/lifecycle/estimator-data-readiness.js",
+        "LEARNING/lifecycle/estimator-data-readiness.test.js",
+        "LEARNING/benchmark/promotion-policy.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/lifecycle/estimator-data-readiness.js",
+      "created_at": "2026-09-25T12:35:00.000Z",
+      "parent_entry_id": "apply:ready-embedded-learning-logic-extraction-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
