@@ -39,6 +39,9 @@ assert.equal(first.ok,true);
 assert.equal(first.benchmark_status,'HOLD_BELOW_REPLAY_MINIMUM');
 assert.equal(first.report.decision,'HOLD');
 assert.equal(first.ledger_entry.disposition,'HOLD_RETAINED');
+assert.equal(first.data_readiness.scopes[0].verified_retrieval_target_count,1);
+assert.equal(first.data_readiness.scopes[0].remaining_verified_targets,29);
+assert.equal(first.data_readiness.promotion_authority,false);
 assert.equal(Trigger.selfValidate(first).ok,true);
 ledger=first.ledger;
 
@@ -63,6 +66,8 @@ const second=Trigger.evaluateReceipt({
 });
 assert.equal(second.ok,true);
 assert.equal(second.report.decision,'HOLD');
+assert.equal(second.data_readiness.scopes[0].verified_retrieval_target_count,2);
+assert.equal(second.data_readiness.scopes[0].remaining_verified_targets,28);
 assert.equal(second.ledger.entries.length,2);
 assert.equal(second.ledger.entries[0].evidence_receipt_id,r1.receipt.receipt_id);
 assert.equal(second.ledger.entries[1].evidence_receipt_id,r2.receipt.receipt_id);
