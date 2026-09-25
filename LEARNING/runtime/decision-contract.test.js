@@ -35,6 +35,10 @@ assert.equal(out.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
 assert.equal(out.pedagogical_actions[0].priority,'HIGH');
 assert.equal(out.advisories.some(x=>x.code==='PREREQUISITE_RISK'),true);
 assert.equal(out.consumer_contract.planner,'OWNS_DATED_ALLOCATION');
+assert.equal(out.adaptive_plan.authority,'LEARNING_ADAPTIVE_PLAN_INTENT_ONLY');
+assert.equal(out.adaptive_plan.unit_span_policy,'REDUCE');
+assert.equal(out.adaptive_plan.add_retrieval_checkpoint,true);
+assert.equal(out.adaptive_plan.recovery_floor,'HIGH');
 assert.equal(D.validate(out).ok,true);
 
 const sparse=D.derive({
