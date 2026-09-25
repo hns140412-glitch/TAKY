@@ -37,6 +37,15 @@ function appendEvaluation(ledgerInput={},report={},options={}){
   const checked=validateReport(report);
   if(!checked.ok)return {ok:false,reason:'INVALID_PROMOTION_REPORT',issues:checked.issues};
   const ledger=JSON.parse(JSON.stringify(ledgerInput?.ledger_version?ledgerInput:emptyLedger()));
+  const reportDigest=digest(report);
+  const existing=ledger.entries.find(e=>
+    e.entry_type==='ESTIMATOR_EVALUATION' &&
+    e.scope_key===scopeKey(report.scope) &&
+    e.policy_version===report.policy_version &&
+    e.evidence_receipt_id===report.evidence_receipt_id &&
+    e.report_digest_sha256===reportDigest
+  );
+  if(existing)return {ok:true,ledger,entry:existing,deduplicated:true};
   const parent=ledger.entries.at(-1)||null;
   const payload={
     entry_type:'ESTIMATOR_EVALUATION',
@@ -50,7 +59,7 @@ function appendEvaluation(ledgerInput={},report={},options={}){
     promotion_review_available:report.promotion_review_available===true,
     dataset_blockers:report.dataset_blockers||[],
     candidates:report.candidates||{},
-    report_digest_sha256:digest(report),
+    report_digest_sha256:reportDigest,
     parent_entry_id:parent?.entry_id||null,
     retention:RETENTION,
     disposition:report.decision==='HUMAN_REVIEW_AVAILABLE'?'REVIEW_AVAILABLE_RETAINED':'HOLD_RETAINED',
