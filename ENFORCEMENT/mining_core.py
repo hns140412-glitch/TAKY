@@ -10,6 +10,7 @@ from typing import Iterable
 from mining_claim_relations import analyze
 from mining_goal_sufficiency import evaluate as evaluate_goal_sufficiency
 from mining_external_adapter import ingest_receipt
+from mining_synthesis import synthesize
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -79,3 +80,9 @@ def apply_external_receipts(checkpoint_state:dict, receipts:list[dict])->dict:
     out=resume(checkpoint_state,new)
     out["external_ingest"]={"accepted_evidence":len(new),"rejected_receipts":rejected}
     return out
+
+
+def synthesize_checkpoint(checkpoint_state:dict)->dict:
+    """Build trace-preserving synthesis from a Mining Core checkpoint."""
+    out=synthesize(checkpoint_state)
+    return {"checkpoint_resume_key":checkpoint_state.get("resume_key"),"synthesis":out}
