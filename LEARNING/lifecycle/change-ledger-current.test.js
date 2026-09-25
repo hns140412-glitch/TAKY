@@ -19,14 +19,16 @@ for(const required of [
   'Concept prerequisite and dependency graph',
   'Core adaptive learning plan intent',
   'Ready adaptive review requires Core decision',
-  'Extract remaining Ready-embedded learning logic'
+  'Extract remaining Ready-embedded learning logic',
+  'Hosted central evidence transport connection'
 ]){
   assert.equal(titles.has(required),true,'missing retained change: '+required);
 }
 const pending=L.pending(ledger);
-assert.equal(pending.length>=2,true);
+assert.equal(pending.length>=3,true);
 assert.equal(pending.some(x=>x.title==='Forgetting and retention estimator'),true);
 assert.equal(pending.some(x=>x.title==='Calibrated BKT estimator'),true);
+assert.equal(pending.some(x=>x.title==='Hosted central evidence transport connection'),true);
 assert.equal(pending.some(x=>x.title==='Extract remaining Ready-embedded learning logic'),false);
 assert.equal(pending.some(x=>x.title==='Data-derived prerequisite relation candidates'),false);
 
