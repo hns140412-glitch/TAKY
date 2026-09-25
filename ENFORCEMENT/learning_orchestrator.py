@@ -6,7 +6,8 @@ Evidence gaps remain explicit and may be handed to Mining later.
 """
 from __future__ import annotations
 from learning_index_bridge import retrieve_learning_evidence
-from learning_runtime import run_learning_cycle
+from learning_runtime import run_learning_cycle,evaluate_outcome
+from learning_growth_memory import observe,aggregate
 
 def orchestrate_learning(payload:dict)->dict:
     request=payload.get("evidence_request") or {}
@@ -29,15 +30,25 @@ def orchestrate_learning(payload:dict)->dict:
     }
     runtime=run_learning_cycle(runtime_payload)
     gap=runtime.get("evidence_gap") or retrieval.get("evidence_gap")
+    outcome_observation=None
+    growth_memory=None
+    history=list(payload.get("learning_memory") or [])
+    if payload.get("outcome") is not None:
+        outcome_observation=evaluate_outcome(runtime,payload.get("outcome") or {})
+        history.append(observe(runtime,outcome_observation))
+        growth_memory=aggregate(history)
     return {
         "schema":"TAKY_LEARNING_ORCHESTRATOR_V1",
         "retrieval":retrieval,
         "runtime":runtime,
         "mining_request_candidate":gap,
+        "outcome_observation":outcome_observation,
+        "growth_memory":growth_memory,
         "guards":{
             "index_checked_before_mining":True,
             "learning_does_not_acquire_sources":True,
             "planner_date_authority_preserved":True,
             "mining_request_is_gap_only":True,
+            "learning_memory_does_not_auto_promote":True,
         },
     }
