@@ -142,3 +142,42 @@ Do not:
 4. Merge draft PRs only by intentional decision.
 5. After any merge, verify exact main heads and rerun regressions.
 6. Only then promote corresponding items from candidate to final CLOSED.
+
+
+## 8. FINAL EXECUTION GATE — 2026-09-26
+
+State: `NO_EXECUTABLE_CODE_OPEN`
+
+Verified merge readiness:
+- Hide & Seek PR #17
+  - head `93aa625f91e027cfd6bc212e2b74d8418d3f9b81`
+  - current main/base `39af27ec92396d67ac1e50f1dfebe3446b41f15a`
+  - mergeable = true
+  - all relevant CI = SUCCESS
+- Snap & Pop PR #8
+  - head `94c637fc87983a490ebf1047a07f108474b5dca1`
+  - current main/base `c250159949dc57545c04f97dc62fb9fdc7a966f1`
+  - mergeable = true
+  - all relevant CI = SUCCESS
+- Ready & Set PR #105
+  - head `ccccdbf3077ab055f1c6d964ba8988ebf1656bff`
+  - current main/base `e030d685c9717f9fab691dab379326e9e9067303`
+  - mergeable = true
+  - all relevant CI = SUCCESS
+
+No stale-base drift exists at this checkpoint.
+
+Allowed next actions only:
+1. intentional merge decision for one or more draft PRs;
+2. genuine Snap-owned reviewed/approved Crew asset content becomes available;
+3. after a merge, exact-main regression verification.
+
+Without one of those triggers:
+- do not reopen SP-BADGE-006 implementation;
+- do not reopen SP-BADGE-008 implementation;
+- do not rebuild Ready World State consumer;
+- do not activate the 60 historical catalog;
+- do not switch to DATA INDEXING/vector work.
+
+`NO_EXECUTABLE_CODE_OPEN != FINAL_MAIN_MERGED`
+`CONTENT_APPROVAL_HOLD != IMPLEMENTATION_GAP`
