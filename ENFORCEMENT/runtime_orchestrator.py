@@ -19,6 +19,7 @@ from executor_adapter_registry import resolve as resolve_executor_adapter
 from execution_checkpoint import guard as guard_checkpoint
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
+from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
 
 ROUTES = {
     "ORCHESTRATE": "ORCHESTRATOR",
@@ -38,6 +39,17 @@ ROUTES = {
 
 def _nonempty(x):
     return isinstance(x, str) and bool(x.strip())
+
+def _safe_repo_path(repo_root: Path, relative: object) -> Path | None:
+    if not isinstance(relative, str) or not relative.strip():
+        return None
+    root = repo_root.resolve()
+    candidate = (repo_root / relative).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:
+        return None
+    return candidate
 
 def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
     failures: list[str] = []
@@ -60,9 +72,8 @@ def derive_runtime_state(record: dict) -> tuple[dict, list[str]]:
     expected_role = ROUTES.get(action)
     if expected_role is None:
         failures.append("RUNTIME_ROUTE_UNKNOWN")
-    elif action not in {"STATUS_REPORT"}:
-        if not owner:
-            failures.append("EXECUTION_OWNER_MISSING")
+    elif action not in {"STATUS_REPORT"} and not owner:
+        failures.append("EXECUTION_OWNER_MISSING")
 
     state = {
         "task_id": record.get("task_id"),
@@ -134,6 +145,24 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             if not reference_intake_execution.get("pass"):
                 detected.extend(reference_intake_execution.get("detected", []))
 
+    learning_gap_result = None
+    gap = effective_record.get("learning_evidence_gap")
+    if isinstance(gap, dict):
+        gap_index_path = _safe_repo_path(repo_root, effective_record.get("learning_evidence_index_path"))
+        if gap_index_path is None:
+            detected.append("LEARNING_EVIDENCE_INDEX_PATH_INVALID")
+        elif not gap_index_path.exists():
+            detected.append("LEARNING_EVIDENCE_INDEX_PATH_MISSING")
+        elif not detected:
+            learning_gap_result = route_learning_evidence_gap(
+                gap,
+                index_path=gap_index_path,
+                min_results=int(effective_record.get("learning_evidence_min_results") or 1),
+                consumer="LEARNING_ENGINE",
+            )
+            if not learning_gap_result.get("pass"):
+                detected.extend(learning_gap_result.get("detected", []))
+
     task_contract_result = None
     if not detected and state.get("action_class") == "SPECIFY_ACCEPTANCE" and state.get("execution_owner") == "CODEX":
         task_contract_result = build_codex_task_contract(record)
@@ -188,11 +217,16 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "checkpoint_guard": checkpoint_guard_result,
         "reference_intake_route": reference_intake_result,
         "reference_intake_execution": reference_intake_execution,
+        "learning_evidence_gap_route": learning_gap_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "reference_intake_fetch_verified": False,
         "reference_intake_persistence_verified": bool(
             reference_intake_execution and reference_intake_execution.get("pass")
         ),
+        "learning_gap_index_check_verified": bool(
+            learning_gap_result and learning_gap_result.get("index_checked")
+        ),
+        "learning_direct_mining_verified": False,
         "hosted_chatgpt_auto_invocation_verified": False,
         "external_executor_invocation_verified": False,
     }
