@@ -68,7 +68,8 @@ function derive(input={}){
   const evidenceGap=EvidenceGap.derive({
     scope:learnerState.scope,
     decision,
-    indexed_evidence:indexedEvidence
+    indexed_evidence:indexedEvidence,
+    reference_requirement:input.reference_evidence_requirement||null
   });
   if(!evidenceGap.ok)return {ok:false,reason:'EVIDENCE_GAP_DERIVATION_FAILED',detail:evidenceGap};
 
