@@ -1,118 +1,38 @@
 (function(root,factory){
-  const api=factory();
-  if(typeof module==='object'&&module.exports) module.exports=api;
-  else root.TakyWorldState=Object.freeze(api);
+ const api=factory(); if(typeof module==='object'&&module.exports)module.exports=api; else root.TakyWorldState=Object.freeze(api);
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
-  'use strict';
-  const VERSION='TAKY_WORLD_STATE_V1';
-  const PRESENCE=new Set(['WITH_EXPLORER','HUB','DISPATCH','SUPPORT','VACATION','REST','SICK','FREE_EXPLORATION','SPECIAL_EVENT','UNKNOWN']);
-  const ENCOUNTER=new Set(['UNDISCOVERED','TRACE','ENCOUNTER_WINDOW','FIRST_MEETING','KNOWN_FRIEND','SELECTABLE_COMPANION','REUNION']);
-  const clean=v=>String(v??'').trim();
-
-  function blank(member_id=null){
-    return Object.freeze({
-      world_state_contract:VERSION,
-      member_id:clean(member_id)||null,
-      primary_companion_id:null,
-      crew_presence:Object.freeze([]),
-      relationships:Object.freeze([]),
-      special_encounters:Object.freeze([]),
-      world_memories:Object.freeze([]),
-      revision:0
-    });
-  }
-
-  function normalizePresence(input={}){
-    const state=clean(input.state).toUpperCase();
-    return Object.freeze({
-      character_id:clean(input.character_id)||null,
-      state:PRESENCE.has(state)?state:'UNKNOWN',
-      hub_id:clean(input.hub_id)||null,
-      since_at:input.since_at||null,
-      story_reason:clean(input.story_reason)||null
-    });
-  }
-
-  function normalizeRelationship(input={}){
-    return Object.freeze({
-      character_id:clean(input.character_id)||null,
-      meaningful_episode_count:Math.max(0,Number(input.meaningful_episode_count)||0),
-      last_meaningful_episode_at:input.last_meaningful_episode_at||null,
-      memory_refs:Object.freeze(Array.isArray(input.memory_refs)?[...new Set(input.memory_refs.map(clean).filter(Boolean))].slice(-120):[]),
-      expression_unlock_refs:Object.freeze(Array.isArray(input.expression_unlock_refs)?[...new Set(input.expression_unlock_refs.map(clean).filter(Boolean))].slice(-40):[]),
-      power_effect:null,
-      reward_multiplier:null,
-      absence_decay:false
-    });
-  }
-
-  function normalizeEncounter(input={}){
-    const state=clean(input.state).toUpperCase();
-    return Object.freeze({
-      character_id:clean(input.character_id)||null,
-      state:ENCOUNTER.has(state)?state:'UNDISCOVERED',
-      clue_refs:Object.freeze(Array.isArray(input.clue_refs)?[...new Set(input.clue_refs.map(clean).filter(Boolean))].slice(-40):[]),
-      last_event_at:input.last_event_at||null,
-      exact_probability:null,
-      exact_cadence:null,
-      miss_penalty:false,
-      power_advantage:false
-    });
-  }
-
-  function normalize(input={}){
-    const member_id=clean(input.member_id)||null;
-    const presence=(Array.isArray(input.crew_presence)?input.crew_presence:[]).map(normalizePresence).filter(x=>x.character_id);
-    const relationships=(Array.isArray(input.relationships)?input.relationships:[]).map(normalizeRelationship).filter(x=>x.character_id);
-    const encounters=(Array.isArray(input.special_encounters)?input.special_encounters:[]).map(normalizeEncounter).filter(x=>x.character_id);
-    return Object.freeze({
-      world_state_contract:VERSION,
-      member_id,
-      primary_companion_id:clean(input.primary_companion_id)||null,
-      crew_presence:Object.freeze(presence),
-      relationships:Object.freeze(relationships),
-      special_encounters:Object.freeze(encounters),
-      world_memories:Object.freeze(Array.isArray(input.world_memories)?input.world_memories.slice(-200).map(x=>Object.freeze({...x})):[]),
-      revision:Number.isInteger(input.revision)?input.revision:0
-    });
-  }
-
-  function setPresence(input={},next={}){
-    const state=normalize(input),p=normalizePresence(next);
-    if(!p.character_id)return {ok:false,reason:'CHARACTER_ID_REQUIRED',state};
-    const rows=state.crew_presence.filter(x=>x.character_id!==p.character_id);
-    rows.push(p);
-    return {ok:true,state:normalize({...state,crew_presence:rows,revision:state.revision+1})};
-  }
-
-  function recordMeaningfulEpisode(input={},episode={}){
-    const state=normalize(input),character_id=clean(episode.character_id),memory_ref=clean(episode.memory_ref);
-    if(!character_id||!memory_ref)return {ok:false,reason:'MEANINGFUL_EPISODE_IDENTITY_REQUIRED',state};
-    const rows=[...state.relationships];
-    const i=rows.findIndex(x=>x.character_id===character_id);
-    const current=i>=0?rows[i]:normalizeRelationship({character_id});
-    const next=normalizeRelationship({
-      ...current,
-      meaningful_episode_count:current.meaningful_episode_count+1,
-      last_meaningful_episode_at:episode.occurred_at||new Date().toISOString(),
-      memory_refs:[...current.memory_refs,memory_ref]
-    });
-    if(i>=0)rows[i]=next;else rows.push(next);
-    return {ok:true,state:normalize({...state,relationships:rows,world_memories:[...state.world_memories,{memory_ref,character_id,occurred_at:episode.occurred_at||new Date().toISOString(),source_event_id:clean(episode.source_event_id)||null}],revision:state.revision+1})};
-  }
-
-  function recordRawPresence(input={}){
-    // Opening/logging-in alone must not raise affinity.
-    return {ok:true,reason:'NO_AFFINITY_MUTATION',state:normalize(input)};
-  }
-
-  function setEncounter(input={},next={}){
-    const state=normalize(input),enc=normalizeEncounter(next);
-    if(!enc.character_id)return {ok:false,reason:'CHARACTER_ID_REQUIRED',state};
-    const rows=state.special_encounters.filter(x=>x.character_id!==enc.character_id);
-    rows.push(enc);
-    return {ok:true,state:normalize({...state,special_encounters:rows,revision:state.revision+1})};
-  }
-
-  return Object.freeze({VERSION,PRESENCE_STATES:Object.freeze([...PRESENCE]),ENCOUNTER_STATES:Object.freeze([...ENCOUNTER]),blank,normalize,normalizePresence,normalizeRelationship,normalizeEncounter,setPresence,recordMeaningfulEpisode,recordRawPresence,setEncounter});
+ 'use strict';
+ const VERSION='TAKY_WORLD_STATE_V1';
+ const STATES=new Set(['AT_HUB','EXPEDITION','SUPPORTING_OTHER_HUB','VACATION','RESTING','FREE_EXPLORING','SPECIAL_EVENT','MAIN_COMPANION']);
+ const clean=v=>String(v??'').trim();
+ function empty(member_id=null){return Object.freeze({world_state_contract:VERSION,member_id:clean(member_id)||null,crew:Object.freeze({}),events:Object.freeze([]),revision:0,absence_penalty:false,full_daily_simulation:false})}
+ function normalize(input={}){
+   const crew={};
+   for(const [id,row] of Object.entries(input.crew||{})){
+     const state=clean(row?.state).toUpperCase();
+     if(!STATES.has(state))continue;
+     crew[id]=Object.freeze({character_id:id,state,location_ref:clean(row.location_ref)||null,updated_at:row.updated_at||null,source_event_id:clean(row.source_event_id)||null});
+   }
+   return Object.freeze({world_state_contract:VERSION,member_id:clean(input.member_id)||null,crew:Object.freeze(crew),events:Object.freeze(Array.isArray(input.events)?input.events.slice(-200):[]),revision:Number.isInteger(input.revision)?input.revision:0,absence_penalty:false,full_daily_simulation:false});
+ }
+ function apply(input={},event={}){
+   const w=normalize(input),event_id=clean(event.event_id); if(!event_id)return {ok:false,reason:'WORLD_EVENT_ID_REQUIRED',world:w};
+   if(w.events.some(x=>x.event_id===event_id))return {ok:true,reason:'IDEMPOTENT_ALREADY_APPLIED',world:w};
+   const type=clean(event.type).toUpperCase(),character_id=clean(event.character_id),next={...w.crew};
+   if(['CREW_STATE_SET','SET_MAIN_COMPANION','SPECIAL_EVENT_STARTED','RETURN_REUNION_RECORDED'].includes(type)){
+     if(!character_id)return {ok:false,reason:'WORLD_CHARACTER_ID_REQUIRED',world:w};
+     let state=clean(event.state).toUpperCase();
+     if(type==='SET_MAIN_COMPANION')state='MAIN_COMPANION';
+     if(type==='SPECIAL_EVENT_STARTED')state='SPECIAL_EVENT';
+     if(type==='RETURN_REUNION_RECORDED'&&!state)state=next[character_id]?.state||'AT_HUB';
+     if(!STATES.has(state))return {ok:false,reason:'WORLD_STATE_INVALID',world:w};
+     if(type==='SET_MAIN_COMPANION'){
+       for(const [id,row] of Object.entries(next))if(id!==character_id&&row.state==='MAIN_COMPANION')next[id]=Object.freeze({...row,state:'AT_HUB',updated_at:event.occurred_at||null,source_event_id:event_id});
+     }
+     next[character_id]=Object.freeze({character_id,state,location_ref:clean(event.location_ref)||null,updated_at:event.occurred_at||new Date().toISOString(),source_event_id:event_id});
+   }else return {ok:false,reason:'WORLD_EVENT_TYPE_UNSUPPORTED',world:w};
+   return {ok:true,reason:'APPLIED',world:normalize({member_id:w.member_id,crew:next,events:[...w.events,{event_id,type,character_id,occurred_at:event.occurred_at||new Date().toISOString()}],revision:w.revision+1})};
+ }
+ function canonicalFromSynthetic(candidate={}){return {ok:false,reason:'SYNTHETIC_WORLD_STATE_NOT_CANONICAL',candidate};}
+ return Object.freeze({VERSION,STATES:Object.freeze([...STATES]),empty,normalize,apply,canonicalFromSynthetic});
 });
