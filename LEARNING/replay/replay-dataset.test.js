@@ -14,6 +14,12 @@ const e=(id,day,outcome,opts={})=>({
   interaction_mode:'RECALL',
   assistance:opts.assistance||'UNASSISTED',
   verified_outcome:outcome,
+  verification:(outcome===0||outcome===1)&&opts.evidence_type!=='CHILD_SELF_REPORT'?{
+    authority:'LEARNING_VERIFICATION_RECEIPT',
+    receipt_id:'vr-'+id,
+    verifier_type:'RETRIEVAL_EXACT_MATCH',
+    verifier_version:'1.0.0'
+  }:null,
   memory:{average_strength:opts.strength??70}
 });
 
