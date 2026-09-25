@@ -42,4 +42,10 @@ class OrchestratorTest(unittest.TestCase):
         self.assertEqual(p["status"],"OPEN")
         self.assertFalse(r["authority_guard"]["failure_auto_resolution"])
 
+    def test_outcome_growth_proposal_is_advisory(self):
+        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"find reference","route_signature":"search:web"},"memory":MEMORY,"outcome":{"success":True,"accuracy":1,"usefulness":1,"completeness":1,"efficiency":1,"user_correction_rate":0}})
+        g=r["growth_proposal"]
+        self.assertEqual(g["proposal"]["status"],"CANDIDATE")
+        self.assertFalse(g["proposal"]["promotion_allowed"])
+
 if __name__=="__main__": unittest.main()
