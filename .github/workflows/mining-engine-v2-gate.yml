@@ -25,6 +25,8 @@ on:
       - 'ENFORCEMENT/mining_source_strategy_test.py'
       - 'ENFORCEMENT/mining_claim_relations.py'
       - 'ENFORCEMENT/mining_claim_relations_test.py'
+      - 'ENFORCEMENT/mining_goal_sufficiency.py'
+      - 'ENFORCEMENT/mining_goal_sufficiency_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -60,6 +62,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_core.py
           python -m py_compile ENFORCEMENT/mining_source_strategy.py
           python -m py_compile ENFORCEMENT/mining_claim_relations.py
+          python -m py_compile ENFORCEMENT/mining_goal_sufficiency.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -80,3 +83,5 @@ jobs:
         run: python ENFORCEMENT/mining_source_strategy_test.py
       - name: Test semantic claim relations
         run: python ENFORCEMENT/mining_claim_relations_test.py
+      - name: Test goal sufficiency stop
+        run: python ENFORCEMENT/mining_goal_sufficiency_test.py
