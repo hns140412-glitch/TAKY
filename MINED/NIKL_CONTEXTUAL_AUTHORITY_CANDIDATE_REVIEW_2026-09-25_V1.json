@@ -1,0 +1,86 @@
+{
+  "schema": "TAKY_NIKL_CONTEXTUAL_AUTHORITY_CANDIDATE_REVIEW_V1",
+  "date": "2026-09-25",
+  "current_state": {
+    "contextual_bindings_total": 8,
+    "current_method": "explicit learner-event, standard, or instructional contexts only",
+    "global_single_sense_mapping": false
+  },
+  "candidates": [
+    {
+      "id": "NIKL_WORD_SENSE_TAGGED_CORPUS_2025",
+      "title": "어휘 의미 분석 말뭉치 2025",
+      "priority": "P1",
+      "authority": "NATIONAL_INSTITUTE_OF_KOREAN_LANGUAGE",
+      "published": "2026-06-30",
+      "function": "distinguishes polysemous words and attaches Urimalsaem semantic IDs",
+      "value": [
+        "direct word-sense-tagged contextual evidence",
+        "authority-aligned semantic ID linkage",
+        "candidate expansion beyond eight manual contextual bindings"
+      ],
+      "limitation": [
+        "corpus context is not automatically elementary learner context",
+        "word-sense tag does not by itself prove pedagogical suitability",
+        "must cross-filter against elementary grade5-6 instructional/assessment context"
+      ],
+      "verdict": "ACCEPT_AS_AUTHORITY_CANDIDATE"
+    },
+    {
+      "id": "NIKL_MULTI_LAYER_STRUCTURE_CORPUS_2025",
+      "title": "한국어 다층위 구조 분석 말뭉치 2025",
+      "priority": "P1_5",
+      "authority": "NATIONAL_INSTITUTE_OF_KOREAN_LANGUAGE",
+      "published": "2026-06-30",
+      "function": "multi-level analysis including morphology, lexical semantics, syntax and semantic roles",
+      "value": [
+        "context-rich structural evidence around ambiguous lexemes",
+        "supports cross-validation of lexical-semantic tags with syntax/semantic roles"
+      ],
+      "limitation": [
+        "heavier than needed for simple lexical disambiguation",
+        "use selectively for difficult cases rather than full ingest"
+      ],
+      "verdict": "SELECTIVE_SUPPLEMENT"
+    },
+    {
+      "id": "NIKL_CONTEXT_INFERENCE_CORPUS_2025",
+      "title": "대화 맥락 추론 말뭉치 2025",
+      "priority": "P3",
+      "authority": "NATIONAL_INSTITUTE_OF_KOREAN_LANGUAGE",
+      "function": "context/common-sense/world-knowledge inference examples",
+      "value": [
+        "reasoning/reference patterns for contextual interpretation"
+      ],
+      "limitation": [
+        "not a direct word-sense authority layer",
+        "dialogue context differs from elementary instructional text"
+      ],
+      "verdict": "REFERENCE_ONLY"
+    }
+  ],
+  "recommended_ingest_scope": {
+    "primary": "NIKL_WORD_SENSE_TAGGED_CORPUS_2025",
+    "initial_filter": [
+      "surface forms overlapping current 209 ambiguous tool-vocabulary set",
+      "grade5-6 curriculum/assessment/tool-language contexts where available",
+      "sense IDs matching current NIKL 40K candidate lexemes"
+    ],
+    "initial_batch_size": 50,
+    "use_multi_layer_corpus_for": "only unresolved or conflicting high-value cases",
+    "do_not_bulk_resolve_remaining_ambiguous_surfaces": true
+  },
+  "promotion_rule": [
+    "word-sense-tagged corpus supplies candidate sense evidence",
+    "elementary instructional/assessment context must still match",
+    "only context-specific binding may be confirmed",
+    "no global single-sense mapping"
+  ],
+  "guards": [
+    "WORD_SENSE_TAG != LEARNER_UNDERSTANDING",
+    "CORPUS_CONTEXT != ELEMENTARY_CONTEXT",
+    "ONE_TAGGED_OCCURRENCE != GLOBAL_SINGLE_SENSE",
+    "GRADE_COMPATIBILITY != SEMANTIC_AUTHORITY",
+    "NIKL_AUTHORITY_DOES_NOT_OVERRIDE_CONTEXT_REQUIREMENT"
+  ]
+}
