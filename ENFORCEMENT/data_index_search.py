@@ -274,6 +274,30 @@ def rrf_fuse(channels: list[dict[str, float]]) -> dict[str, float]:
     return dict(fused)
 
 
+def _family_diversify(
+    ranked: list[tuple[str, float]],
+    by_id: dict[str, dict[str, Any]],
+    cap: int,
+) -> list[tuple[str, float]]:
+    """Limit family domination while preserving rank order.
+
+    Records without a family are treated independently. Explicit-family
+    requests bypass this helper in search().
+    """
+    if cap <= 0:
+        return ranked
+    counts: defaultdict[str, int] = defaultdict(int)
+    out: list[tuple[str, float]] = []
+    for sid, score in ranked:
+        family = by_id[sid].get("source_family")
+        key = str(family) if family else f"__NO_FAMILY__:{sid}"
+        if counts[key] >= cap:
+            continue
+        counts[key] += 1
+        out.append((sid, score))
+    return out
+
+
 def relation_expand(
     ranked_ids: list[str],
     by_id: dict[str, dict[str, Any]],
@@ -308,6 +332,7 @@ def search(
     filters: dict[str, str] | None = None,
     limit: int = 10,
     relation_depth: int = 1,
+    family_cap: int = 3,
 ) -> dict[str, Any]:
     filters = filters or {}
     candidates = apply_filters(records, filters)
@@ -320,6 +345,12 @@ def search(
     pre_relation = _rank(fused)
     fused = relation_expand(pre_relation, by_id, fused, relation_depth)
     ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
+    explicit_family = "family" in filters or any(
+        query.strip().lower() == str(r.get("source_family") or "").lower()
+        for r in candidates
+    )
+    if not explicit_family:
+        ranked = _family_diversify(ranked, by_id, family_cap)
 
     results = []
     for sid, score in ranked[:limit]:
@@ -357,6 +388,8 @@ def search(
         "query": query,
         "filters": filters,
         "candidate_count": len(candidates),
+        "family_cap": None if explicit_family else family_cap,
+        "family_cap_applied": not explicit_family,
         "result_count": len(results),
         "results": results,
     }
@@ -382,12 +415,15 @@ def main() -> int:
     ap.add_argument("--filter", action="append", default=[])
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--relation-depth", type=int, default=1)
+    ap.add_argument("--family-cap", type=int, default=3)
     args = ap.parse_args()
 
     if args.limit < 1:
         ap.error("--limit must be >= 1")
     if args.relation_depth < 0:
         ap.error("--relation-depth must be >= 0")
+    if args.family_cap < 0:
+        ap.error("--family-cap must be >= 0")
 
     result = search(
         load_index(args.index),
@@ -395,6 +431,7 @@ def main() -> int:
         filters=_parse_filters(args.filter),
         limit=args.limit,
         relation_depth=args.relation_depth,
+        family_cap=args.family_cap,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
