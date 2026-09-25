@@ -144,6 +144,12 @@
               "string",
               "null"
             ]
+          },
+          "learning_target_id": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "additionalProperties": true
