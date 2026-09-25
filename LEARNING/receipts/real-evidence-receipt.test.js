@@ -56,3 +56,22 @@ const unverified=[...rows,{...ev('e5',25,1),verification:null}];
 assert.equal(R.issueBatchReceipt(unverified).reason,'INVALID_VERIFIED_EVIDENCE');
 
 console.log('REAL_LEARNING_EVIDENCE_RECEIPT_PASS');
+
+const first=R.issueBatchReceipt([ev('c1',26,1),ev('c2',27,0)],{created_at:'2026-09-27T00:00:00.000Z'});
+assert.equal(first.ok,true);
+const second=R.extendBatchReceipt(first.receipt,first.canonical_evidence,[ev('c3',28,1)],{created_at:'2026-09-28T00:00:00.000Z'});
+assert.equal(second.ok,true);
+assert.equal(second.receipt.parent_receipt_id,first.receipt.receipt_id);
+assert.equal(second.receipt.parent_evidence_digest_sha256,first.receipt.evidence_digest_sha256);
+assert.equal(second.receipt.event_count,3);
+assert.equal(second.receipt.incremental_event_count,1);
+assert.equal(R.validateReceiptChain([first.receipt,second.receipt]).ok,true);
+
+const overlap=R.extendBatchReceipt(first.receipt,first.canonical_evidence,[ev('c2',29,1)]);
+assert.equal(overlap.ok,false);
+assert.equal(overlap.reason,'EVENT_ALREADY_RECEIPTED');
+
+const broken=JSON.parse(JSON.stringify(second.receipt));
+broken.parent_receipt_id='wrong';
+assert.equal(R.validateReceiptChain([first.receipt,broken]).ok,false);
+assert.equal(R.validateReceiptChain([first.receipt,broken]).issues[0].startsWith('PARENT_RECEIPT_MISMATCH'),true);
