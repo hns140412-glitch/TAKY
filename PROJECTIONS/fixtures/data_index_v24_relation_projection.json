@@ -12,10 +12,12 @@
     "EXACT_DUPLICATE_OF"
   ],
   "inferred_relations": false,
-  "notes": [
-    "Derived only from explicit exact_duplicate_pairs already recorded in CURRENT V24.",
-    "No FRAGMENT_OF, VERSION_OF, SUPERSEDES, RELATED_TO, or SAME_FAMILY_AS edge is inferred from temporal_group/source_family."
-  ],
+  "source_pair_count": 0,
   "edge_count": 0,
+  "notes": [
+    "Derived only from explicit exact_duplicate_pairs recorded in CURRENT V24.",
+    "No relation is inferred from temporal_group, source_family, title similarity, or search score.",
+    "FRAGMENT_OF/VERSION_OF/SUPERSEDES expansion remains OPEN until directed evidence is available."
+  ],
   "edges": []
 }
