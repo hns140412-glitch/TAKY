@@ -190,6 +190,12 @@ jobs:
         run: node SHARED/runtime/achievement-decision.test.js
       - name: Validate shared crew registry
         run: node SHARED/runtime/crew-registry.test.js
+      - name: Validate shared badge catalog guard
+        run: node SHARED/runtime/badge-catalog-guard.test.js
+      - name: Validate explicit badge evidence contract
+        run: node SHARED/runtime/badge-evidence-contract.test.js
+      - name: Validate shared achievement ledger
+        run: node SHARED/runtime/achievement-ledger.test.js
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
