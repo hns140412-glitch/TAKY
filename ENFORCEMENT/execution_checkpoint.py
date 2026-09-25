@@ -155,9 +155,17 @@ def guard(
         return {"pass": False, "detected": ["CURRENT_CHECKPOINT_UNREADABLE"], "current_path": str(current)}
 
     failures = validate(record)
+
+    stored_hash = record.get("checkpoint_hash")
+    unhashed = dict(record)
+    unhashed.pop("checkpoint_hash", None)
+    actual_hash = checkpoint_hash(unhashed)
+    if stored_hash != actual_hash:
+        failures.append("CURRENT_CHECKPOINT_INTEGRITY_MISMATCH")
+
     if expected_atomic_unit is not None and record.get("atomic_unit") != expected_atomic_unit:
         failures.append("CURRENT_CHECKPOINT_STALE_OR_WRONG_UNIT")
-    if expected_checkpoint_hash is not None and record.get("checkpoint_hash") != expected_checkpoint_hash:
+    if expected_checkpoint_hash is not None and stored_hash != expected_checkpoint_hash:
         failures.append("CURRENT_CHECKPOINT_HASH_MISMATCH")
 
     return {
