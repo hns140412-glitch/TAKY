@@ -33,6 +33,10 @@ on:
       - 'ENFORCEMENT/mining_depth_router_test.py'
       - 'ENFORCEMENT/mining_external_adapter.py'
       - 'ENFORCEMENT/mining_external_adapter_test.py'
+      - 'ENFORCEMENT/mining_provider_executor.py'
+      - 'ENFORCEMENT/mining_provider_executor_test.py'
+      - 'ENFORCEMENT/mining_provider_execution_loop.py'
+      - 'ENFORCEMENT/mining_provider_execution_loop_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
   pull_request:
     paths:
@@ -72,6 +76,8 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_goal_decomposition.py
           python -m py_compile ENFORCEMENT/mining_depth_router.py
           python -m py_compile ENFORCEMENT/mining_external_adapter.py
+          python -m py_compile ENFORCEMENT/mining_provider_executor.py
+          python -m py_compile ENFORCEMENT/mining_provider_execution_loop.py
       - name: Test CURRENT reconciler
         run: python ENFORCEMENT/current_reconciler_test.py
       - name: Test L5 anticipation evaluator
@@ -100,3 +106,7 @@ jobs:
         run: python ENFORCEMENT/mining_depth_router_test.py
       - name: Test external mining adapter
         run: python ENFORCEMENT/mining_external_adapter_test.py
+      - name: Test provider execution contract
+        run: python ENFORCEMENT/mining_provider_executor_test.py
+      - name: Test provider execution loop
+        run: python ENFORCEMENT/mining_provider_execution_loop_test.py
