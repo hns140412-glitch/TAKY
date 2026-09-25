@@ -2,6 +2,7 @@
 const assert=require('node:assert/strict');
 const Replay=require('./replay-dataset.js');
 const Bridge=require('./replay-benchmark.js');
+const RealReceipt=require('../receipts/real-evidence-receipt.js');
 
 const mk=(id,day,outcome,extra={})=>({
   event_id:id,
@@ -40,15 +41,24 @@ assert.equal(out.promotion_blockers.includes('REAL_EVIDENCE_REQUIRED'),true);
 assert.equal(out.promotion_blockers.includes('MIN_REAL_TARGET_COUNT_NOT_MET'),true);
 assert.equal(Bridge.selfValidate(out).ok,true);
 
-const real=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{created_at:'2026-09-25T00:00:00.000Z',source_kind:'REAL_EVIDENCE'});
-const realOut=Bridge.benchmarkReplay(real.dataset);
-assert.equal(realOut.promotion_eligible,false);
-assert.equal(realOut.promotion_blockers.includes('REAL_EVIDENCE_REQUIRED'),false);
-assert.equal(realOut.promotion_blockers.includes('REAL_EVIDENCE_RECEIPT_REQUIRED'),true);
-assert.equal(realOut.promotion_blockers.includes('HUMAN_PROMOTION_REVIEW_REQUIRED'),true);
+const verifiedRaw=raw.filter(x=>(x.verified_outcome===0||x.verified_outcome===1)&&x.verification?.receipt_id&&x.evidence_type!=='CHILD_SELF_REPORT');
+const issued=RealReceipt.issueBatchReceipt(verifiedRaw,{created_at:'2026-09-25T00:00:00.000Z'});
+assert.equal(issued.ok,true);
 
-const receipted=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{created_at:'2026-09-25T00:00:00.000Z',source_kind:'REAL_EVIDENCE',evidence_receipt_id:'receipt_001'});
+const missingReceipt=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{created_at:'2026-09-25T00:00:00.000Z',source_kind:'REAL_EVIDENCE'});
+assert.equal(missingReceipt.ok,false);
+assert.equal(missingReceipt.reason,'REAL_EVIDENCE_RECEIPT_REQUIRED');
+
+const receipted=Replay.buildDataset(raw,{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},{
+  created_at:'2026-09-25T00:00:00.000Z',
+  source_kind:'REAL_EVIDENCE',
+  evidence_receipt:issued.receipt
+});
+assert.equal(receipted.ok,true);
 const receiptedOut=Bridge.benchmarkReplay(receipted.dataset);
+assert.equal(receiptedOut.promotion_eligible,false);
+assert.equal(receiptedOut.promotion_blockers.includes('REAL_EVIDENCE_REQUIRED'),false);
 assert.equal(receiptedOut.promotion_blockers.includes('REAL_EVIDENCE_RECEIPT_REQUIRED'),false);
+assert.equal(receiptedOut.promotion_blockers.includes('HUMAN_PROMOTION_REVIEW_REQUIRED'),true);
 
 console.log('LEARNING_REPLAY_BENCHMARK_PASS');
