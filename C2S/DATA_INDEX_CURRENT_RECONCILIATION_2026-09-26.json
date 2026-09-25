@@ -1,0 +1,50 @@
+{
+  "schema": "TAKY_DATA_INDEX_CURRENT_RECONCILIATION_CHECKPOINT_V1",
+  "date": "2026-09-26",
+  "status": "CURRENT_RECONCILED_TO_V26",
+  "drive_current_pointer": {
+    "id": "1JNvFBrmY7H-j6v1WX1G3qGbieS7BR8Qbt4O54D1mNcU",
+    "utilization_index": {
+      "name": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+      "id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s"
+    },
+    "source_index": {
+      "name": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+      "id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc"
+    }
+  },
+  "current_status": {
+    "total": 679,
+    "index_l1": 679,
+    "semantic_resolved": 677,
+    "content_access_holds": 2,
+    "source_reindex_all": false
+  },
+  "promotion": {
+    "receipt": "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
+    "receipt_id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w",
+    "validation_ci_run": 36142214985,
+    "validation_ci_result": "SUCCESS",
+    "validated_head": "e937a80abe6aa1ad1827bb81e7a211f92f6cde5b"
+  },
+  "reconciliation_actions": [
+    "CONFIRMED_V5_672_ALREADY_EXISTED",
+    "CONFIRMED_V25_672_ALREADY_PROMOTED",
+    "CONFIRMED_V6_679_ALREADY_EXISTED",
+    "CONFIRMED_V26_679_ALREADY_PROMOTED",
+    "DID_NOT_CREATE_DUPLICATE_V5_OR_V25",
+    "APPENDED_V26_CURRENT_NOTE_TO_DRIVE_DATA_INDEXING_HANDOFF",
+    "APPENDED_V26_CURRENT_CORRECTION_TO_CROSS_ENGINE_AUDIT"
+  ],
+  "current_mode": "OPERATIONS_AND_INCREMENTAL_CHANGE_ONLY",
+  "guards": [
+    "CURRENT_POINTER_FIRST",
+    "NEWEST_FILE != CURRENT",
+    "SOURCE_REINDEX_ALL_FALSE",
+    "SEARCH_PROJECTION_NON_AUTHORITATIVE",
+    "MINING != INDEXING",
+    "INDEXING != LEARNING",
+    "NETLIFY_NONE",
+    "DEPLOYMENT_NONE"
+  ]
+}
