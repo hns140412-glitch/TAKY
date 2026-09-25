@@ -11,12 +11,13 @@ class T(unittest.TestCase):
  def test_three_family_e2e_pipeline(self):
   cases=[]
   for cid,fam,goal in [("A","ARCHITECTURE_REGULATION","verify setback rule"),("B","DEVICE_PROCUREMENT","compare scanner workflow"),("C","MOTION_REFERENCE","find runtime interaction reference")]:
-   frontier_id=f"{goal}: definition".replace(" ","_").lower()
-   rid,rr=runtime_for(frontier_id,f"{goal}: definition","PUBLIC_DATA" if fam=="ARCHITECTURE_REGULATION" else "WEB")
+   frontier_id=f"{goal}: definition"
+   rid,rr=runtime_for(frontier_id,frontier_id,"PUBLIC_DATA")
    cases.append({
     "case_id":cid,
     "task":{"task_family":fam,"goal":goal,"foundation_requirements":[f"{goal}: definition"],"max_research_depth":"D1"},
     "runtime_results":{rid:rr},
+    "provider_preferences":{frontier_id:["OFFICIAL"]},
     "max_providers_per_query":1,
     "outcome":{"success":True,"accuracy":1,"usefulness":1,"completeness":1,"efficiency":.9,"user_correction_rate":0},
     "expected":{"min_evidence":1,"growth_type":"STRATEGY_OBSERVATION"}
