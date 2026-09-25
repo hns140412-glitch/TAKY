@@ -448,6 +448,26 @@
       "parent_entry_id": "apply:data-prerequisite-policy-v1",
       "retention": "IMMUTABLE_HISTORY",
       "reconsider_on": []
+    },
+    {
+      "entry_id": "correct:data-prerequisite-candidates-applied-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "LEARNER_STATE",
+      "title": "Data-derived prerequisite relation candidates",
+      "description": "Correction: logical transition uses the same LEARNER_STATE type as the original HOLD entry. Candidate retention/promotion policy is implemented; learner-data relations remain non-active until personal advisory review and can never auto-promote to global domain prerequisite truth.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "apply:data-prerequisite-policy-v1",
+      "evidence_refs": [
+        "LEARNING/domain-model/concept-dependency-graph.js",
+        "LEARNING/domain-model/relation-promotion-policy.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/domain-model/relation-promotion-policy.js",
+      "created_at": "2026-09-25T07:24:00.000Z",
+      "parent_entry_id": "apply:real-evidence-auto-evaluation-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
     }
   ]
 }
