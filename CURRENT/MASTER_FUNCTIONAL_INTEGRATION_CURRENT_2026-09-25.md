@@ -13,22 +13,22 @@ Deployment: NOT AUTHORIZED
 - Learning interpretation / learner state / adaptive intent → Learning Engine
 - Dated allocation / replanning → Planner
 - Session execution → Ready & Set
-- Language memory/retrieval specialist → Hide & Seek
-- Writing/expression specialist → Snap & Pop
-- Family identity / member / role / profile → Family Platform
+- Language memory / retrieval specialist → Hide & Seek
+- Writing / expression specialist → Snap & Pop
+- Family identity / member / role / shared profile → Family Platform
 - Cross-app storage / sync primitives → Shared Runtime
-- Crew / Badge / world-wide experience rules → Exploration System (OPEN integration audit)
+- Crew / Badge / Achievement / World State → Exploration System
 
 `CODE LOCATION != FUNCTION OWNERSHIP`
 
-## 2. Shared contracts implemented on feature branch
+## 2. Shared contracts — current feature-branch state
 
 ### TAKY_APP_EXECUTION_CONTEXT_V1
-Status: IMPLEMENTED / TAKY ENFORCEMENT VERIFIED
+Status: IMPLEMENTED / ENFORCEMENT VERIFIED
 
 Preserves:
 - family_id
-- member_id = learner/data subject
+- member_id = learner / data subject
 - actor_member_id = authenticated actor
 - profile_id
 - assignment_id
@@ -43,31 +43,17 @@ Preserves:
 ### TAKY_CANONICAL_LEARNING_EVIDENCE_V1
 Status: PRE-EXISTING CORE + EXECUTION LINEAGE EXTENDED / VERIFIED
 
-Execution provenance now retains actor/learner and assignment→lap lineage.
-
 ### TAKY_FAMILY_MEMBER_STORAGE_SCOPE_V1
 Status: IMPLEMENTED / VERIFIED
 
 Rule:
 `FAMILY BOUNDARY = DATA BOUNDARY = STORAGE BOUNDARY`
 
-Authenticated storage keys are scoped by family × learner member. Anonymous local mode retains legacy keys.
-
 ### TAKY_FAMILY_CONTEXT_V1
 Status: IMPLEMENTED / VERIFIED
 
-Locks:
+Lock:
 `authentication != member identity != role != storage connection`
-
-FamilyContext owns normalized:
-- authenticated state
-- family_id
-- member_id
-- role
-- session_id
-- auth provider provenance
-
-Provider credentials/password handling remain provider-owned and are not part of FamilyContext.
 
 ### TAKY_FAMILY_MEMBER_REGISTRY_V1
 Status: IMPLEMENTED / VERIFIED
@@ -77,14 +63,184 @@ Owns:
 - stable member identity
 - CHILD/PARENT role projection
 - shared member profile: display_name / avatar_ref
-- parent local active-child selection
+- parent active-child projection
 
-App-specific guide/companion/style state is explicitly NOT family-profile authority.
+### TAKY_EXPLORATION_EVENT_V1
+Status: IMPLEMENTED / VERIFIED
 
-## 3. Ready integration state
+Normalizes Ready / Hide / Snap events into:
+- EXECUTION
+- RETRIEVAL
+- EXPRESSION
+- HANDOFF
+- SUPPORT
+- SYSTEM
+
+### TAKY_ACHIEVEMENT_DECISION_V1
+Status: IMPLEMENTED / VERIFIED
+
+Owns:
+- rule + event matching
+- threshold decision
+- no duplicate award decision
+- no app-local badge authority
+
+### TAKY_ACHIEVEMENT_LEDGER_V1
+Status: IMPLEMENTED / ENFORCEMENT VERIFIED
+
+Owns:
+- member-scoped award ledger
+- achievement-id idempotency
+- source-event dedupe
+- no cross-member ledger mutation
+
+### TAKY_BADGE_CANDIDATE_REVIEW_V1
+Status: IMPLEMENTED / ENFORCEMENT PENDING/VERIFY
+
+Rules:
+- evidence_event_ids required
+- REVIEW_REQUIRED by default
+- active=false
+- award_authorized=false
+- catalog_insert_authorized=false
+- trigger_activation_authorized=false
+- review may advance only to catalog-review state or reject
+- no auto award / no auto catalog insertion
+
+### TAKY_CREW_REGISTRY_V1
+Status: IMPLEMENTED / VERIFIED
+
+Core starter 6:
+- Dubi / Lori / Ink / Nova / Take / Zero
+
+Rules:
+- starter roster reference only
+- roster ceiling = 20
+- one primary companion
+- rename history preserved
+- no functional/power advantage
+
+### TAKY_CREW_VISUAL_PROJECTION_V1
+Status: IMPLEMENTED / VERIFIED CONTRACT
+
+Current boundary:
+- identity lineage recovered
+- reviewed asset binding is still OPEN
+- visual projection may not mutate identity / power / reward
+
+### TAKY_WORLD_STATE_V1
+Status: IMPLEMENTED / VERIFIED
+
+Owns:
+- crew presence
+- meaningful episode relationships
+- special encounter state
+- world memories
+- no raw-presence affinity increase
+- no absence decay
+- no power advantage
+- exact encounter probability/cadence remains unresolved
+
+### TAKY_BADGE_THEME_EXPRESSION_V1
+Status: IMPLEMENTED / VERIFIED CONTRACT
+
+Rules:
+- cosmetic-only expression
+- identity mutation forbidden
+- tier / growth / power / reward / economy mutation forbidden
+- REVIEWED_ASSET_SET requires actual reviewed asset refs
+- exact reviewed theme asset binding remains OPEN
+
+## 3. Badge source recovery authority
+
+Recovered current-scope sources:
+- Drive `SNAP_POP_HANDOFF_2026-09-21_LATEST`
+- Ready historical HOLD boundary
+- sanitized account-transcript provenance
+- recovered historical Snap badge source files
+
+Recovered artifacts:
+- `EXPLORATION/recovery/snap-2026-09-21/SNAP_POP_BADGE_SOURCE_RECOVERY_2026-09-21.md`
+- `RECOVERY/BADGE/SNAP_BADGE_SYSTEM_RECOVERED_2026-09-21.json`
+- `RECOVERY/BADGE/SNAP_BADGE_CATALOG_WORKING_RECOVERED_2026-09-21.json`
+
+### CONFIRMED
+- Badge = process / experience collection axis.
+- Badge != Character Level / EXP / Gem / Affinity / World State / Leaderboard / Power.
+- behavior families include:
+  SELF_START, TIME_CREATION, EXTRA_TASK, FOCUS, RETURN_RECOVERY, HELP_REQUEST,
+  ERROR_DISCOVERY, RETRY, DEEP_THINKING, ISSUE_DURATION, SELF_EXPLANATION,
+  PLAN_ADAPTATION, SPECIAL_BEHAVIOR, WRITING_EXPLORATION.
+- visual language: circular / hand-drawn-pastel direction.
+- Profile Character is protagonist.
+- tiers GREEN / BLUE / RED / GOLD / PLATINUM.
+- 1–5 upper-semicircle gem/star growth marks.
+- no punishment for absence / no earned-experience removal / no streak pressure.
+
+### HOLD
+- character growth economy as badge mechanic
+- advanced reward economy
+- social competition / leaderboard
+- badge → EXP/Gem/Affinity/Power automatic conversion
+
+### WORKING
+- historical `BDG-DRAFT-001..060`
+- exact historical names / trigger wording
+- exact threshold / cadence / display copy
+- all 60 remain `WORKING_DRAFT_NOT_ACTIVE`
+- all remain `active=false`
+
+### OPEN
+- final active badge catalog membership
+- canonical award thresholds/cadence
+- old-observation migration
+- exact display-surface ownership
+- exact reviewed theme asset binding
+- remaining unrecovered source coverage
+
+## 4. SP-BADGE recovery status
+
+### SP-BADGE-006
+Status: PARTIAL / DO NOT CLOSE
+
+Implemented centrally:
+- behavior taxonomy / anti-labeling boundary
+- strong evidence guard for:
+  - ERROR_DISCOVERY
+  - DEEP_THINKING
+  - SPECIAL_BEHAVIOR
+- weak proxies forbidden:
+  elapsed time, silence, retry/edit counts, score/confidence, AI/model inference
+
+Current runtime gap:
+- Ready / Hide / Snap do NOT yet emit the required strong source contracts:
+  - `TAKY_CHILD_SELF_CORRECTION_V1`
+  - `TAKY_CHILD_REFLECTION_ARTIFACT_V1`
+  - `TAKY_DECLARED_SPECIAL_ACTION_V1`
+- therefore ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR must not be inferred or awarded.
+
+### SP-BADGE-008
+Status: PARTIAL
+
+Implemented:
+- stable Profile Character identity layer
+- badge visual compositor semantics recovered
+- GREEN / BLUE / RED / GOLD / PLATINUM growth presentation contract
+- Theme Expression contract
+- cosmetic-only fail-closed guard
+
+OPEN:
+- exact reviewed Theme Expression assets/system binding
+
+## 5. Ready integration state
 
 Feature branch:
 `taky/family-member-scope-isolation-2026-09-25`
+
+Latest exact-head:
+`1c36fd2f540f0c483eba4e43c59e1628ad851d27`
+
+Ready Runtime E2E: SUCCESS
 
 Verified slices:
 - FamilyContext adapter
@@ -97,87 +253,90 @@ Verified slices:
 - Ready app_state actor-scoped persistence
 - family members read API
 - shared profile update API
-- active learner UI in Settings / Planner Admin
-- specialist launch carries learner identity + actor provenance + learning lineage
+- shared Crew read/update boundary
+- shared World State endpoint + Ready adapter
+- explicit World State browser mutation regression
+- specialist launch carries learner / actor / learning lineage / companion identity
+- Exploration Event projection
 
-Latest verified Ready Runtime E2E evidence before this CURRENT write:
-- `d5994eba7594e2ad754eab9394043d5fcffc3ee1` — SUCCESS
-- newer integration commits remain feature-branch only and require exact-head green before promotion.
-
-## 4. Hide integration state
-
-Feature branch:
-`taky/family-member-scope-isolation-2026-09-25`
-
-Implemented:
-- member-scoped local state
-- member-scoped asset DB
-- execution lineage bridge
-- actor_member_id provenance
-- shared member display-name projection
-- authenticated shared display name is Family Platform authoritative
-- Hide guide / companion remains Hide-owned
-
-Last fully green baseline before newest profile-authority guard:
-- `4c7eab9a38418aece0abc33c15424c5b2001c979` — SUCCESS
-
-Newest profile-authority guard requires exact-head green before promotion.
-
-## 5. Snap integration state
+## 6. Hide integration state
 
 Feature branch:
 `taky/family-member-scope-isolation-2026-09-25`
 
-Implemented:
-- member-scoped IndexedDB
-- execution lineage bridge
-- actor_member_id provenance
-- shared member display-name projection in header
-- Snap guide / exploration semantics remain Snap-owned
+Latest verified exact-head:
+`7a08e6d882f66f668007d7f244868c0783b2a8d2`
+
+Validate Hide & Seek: SUCCESS
 
 Verified:
-- `b3a8459e6515cdf741fb55a00fd30ba5656ecb79` — SUCCESS
+- member-scoped state / asset DB
+- execution lineage
+- actor provenance
+- shared profile authority
+- companion context continuity
+- Exploration Event projection
 
-## 6. Key corrected architectural defect
+## 7. Snap integration state
 
-Previous ambiguity:
-- authenticated actor member == learning-data subject
+Feature branch:
+`taky/family-member-scope-isolation-2026-09-25`
 
-Corrected rule:
-- `actor_member_id` = authenticated user performing action
+Latest verified exact-head:
+`49241d0f29e67ef620adbf6869de494bb91107dc`
+
+Validate Snap & Pop: SUCCESS
+
+Verified:
+- member-scoped IndexedDB
+- execution lineage
+- actor provenance
+- shared member profile projection
+- companion context continuity
+- Exploration Event projection
+
+Snap local EXP / Gem / Growth / Blessing remain Snap-local progression and are NOT common badge authority.
+
+## 8. Key architectural locks
+
+### Actor vs learner
+- `actor_member_id` = authenticated user performing the action
 - `member_id` = learner / data subject
 
-Example:
-Parent edits Child A Planner:
-- actor_member_id = PARENT
-- member_id = CHILD_A
-- Planner / Assignment storage = CHILD_A scope
-- Ready parent UI state = PARENT scope
+### Badge vs economy
+- Badge != EXP
+- Badge != Gem
+- Badge != Affinity
+- Badge != World State
+- Badge != Character power
 
-## 7. Promotion boundary
+### Crew
+- Character choice does not grant capability advantage.
+- SPECIAL is encounter style only, not a power tier.
+- exact encounter probability/cadence remains OPEN.
 
-DO NOT claim main implementation for these slices until each repository exact-head branch is green and explicit promotion occurs.
+### Badge activation
+Historical 60-item catalog is recovery material only.
+No item may activate merely because it exists in recovered source.
 
-Current state:
-- TAKY contracts: FEATURE_BRANCH_VERIFIED
-- Ready integration: FEATURE_BRANCH_IMPLEMENTED / partial exact-head verification in progress
-- Hide integration: FEATURE_BRANCH_IMPLEMENTED / newest exact-head verification in progress
-- Snap integration: FEATURE_BRANCH_VERIFIED
+## 9. Promotion boundary
+
+- TAKY shared contracts: FEATURE_BRANCH_VERIFIED except newest candidate-review exact-head verification until green.
+- Ready: FEATURE_BRANCH_VERIFIED
+- Hide: FEATURE_BRANCH_VERIFIED
+- Snap: FEATURE_BRANCH_VERIFIED
 - main merge: NOT DONE
 - Netlify deployment: NOT DONE
 - production verification: NOT DONE
 
-## 8. Next functional OPEN
+## 10. Next functional OPEN
 
-1. Finish exact-head verification for newest Ready + Hide integration commits.
-2. Audit common Crew / Badge / World authority:
-   - current Snap-centric badge runtime
-   - Ready external expedition-member dependency
-   - Hide companion state
-   - cross-app achievement event contract
-3. Build one common Exploration System contract without moving repositories prematurely.
-4. Verify badge/crew events preserve family/member + execution lineage.
-5. Recalculate master functional implementation rate after Exploration System audit.
+1. Verify newest `TAKY_BADGE_CANDIDATE_REVIEW_V1` exact-head Enforcement.
+2. Keep SP-BADGE-006 PARTIAL until real explicit source producers exist.
+3. Define/implement explicit source UX only where product behavior already supplies strong evidence; never infer from weak proxies.
+4. Add cross-app member-scoped badge candidate/award storage runtime only after an active catalog item is separately confirmed.
+5. Bind Crew / Badge Theme visuals only to reviewed asset refs.
+6. Recalculate overall master functional completion after badge runtime activation boundary is resolved.
 
 Think Again, Keep Your Key.  
 Think Again, You’re The Key.
