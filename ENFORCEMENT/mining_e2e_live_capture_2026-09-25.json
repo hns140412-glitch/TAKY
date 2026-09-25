@@ -1,0 +1,58 @@
+{
+  "schema": "TAKY_MINING_LIVE_CAPTURE_SET_V1",
+  "captured_date": "2026-09-25",
+  "cases": [
+    {
+      "case_id": "LIVE-PUBLIC-DATA-BUILDING-REGISTER",
+      "task_family": "PUBLIC_DATA",
+      "goal": "verify current building register API availability",
+      "frontier": "current building register API availability",
+      "provider": "PUBLIC_DATA",
+      "preferred_source_class": "OFFICIAL",
+      "source": {
+        "url": "https://www.data.go.kr/data/15134735/openapi.do",
+        "title": "국토교통부_건축HUB_건축물대장정보 서비스",
+        "source_class": "OFFICIAL",
+        "claim": "The Ministry of Land, Infrastructure and Transport provides a REST OpenAPI for building register information, with JSON and XML formats.",
+        "direct_support": true,
+        "fresh_enough": true,
+        "independent_support_count": 2,
+        "published_at": "2026-07-10"
+      }
+    },
+    {
+      "case_id": "LIVE-GITHUB-RETRY",
+      "task_family": "IMPLEMENTATION_REFERENCE",
+      "goal": "verify retry backoff implementation evidence",
+      "frontier": "retry backoff implementation evidence",
+      "provider": "GITHUB",
+      "preferred_source_class": "IMPLEMENTATION",
+      "source": {
+        "url": "https://github.com/googleapis/python-genai/blob/main/google/genai/_gaos/utils/retries.py",
+        "title": "googleapis/python-genai retries.py",
+        "source_class": "IMPLEMENTATION",
+        "claim": "The implementation contains exponential backoff with configurable interval, exponent, elapsed-time limits, and jitter behavior.",
+        "direct_support": true,
+        "fresh_enough": true,
+        "independent_support_count": 2
+      }
+    },
+    {
+      "case_id": "LIVE-WEB-FETCH-CANCEL",
+      "task_family": "WEB_RUNTIME_REFERENCE",
+      "goal": "verify fetch cancellation implementation reference",
+      "frontier": "fetch cancellation implementation reference",
+      "provider": "WEB",
+      "preferred_source_class": "ACADEMIC",
+      "source": {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+        "title": "Using the Fetch API - MDN Web Docs",
+        "source_class": "ACADEMIC",
+        "claim": "Fetch requests can be made cancelable by passing an AbortSignal from AbortController and calling abort().",
+        "direct_support": true,
+        "fresh_enough": true,
+        "independent_support_count": 2
+      }
+    }
+  ]
+}
