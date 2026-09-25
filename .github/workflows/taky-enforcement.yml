@@ -184,6 +184,8 @@ jobs:
         run: node SHARED/runtime/family-context.test.js
       - name: Validate shared family member registry
         run: node SHARED/runtime/family-member-registry.test.js
+      - name: Validate shared exploration event
+        run: node SHARED/runtime/exploration-event.test.js
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
