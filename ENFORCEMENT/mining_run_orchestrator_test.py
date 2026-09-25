@@ -17,6 +17,20 @@ class OrchestratorTest(unittest.TestCase):
         self.assertTrue(r["plan"]["search_frontier"])
         self.assertEqual(r["plan"]["search_frontier"][0]["origin"],"GENERIC_SCAFFOLD")
 
+    def test_index_first_resolves_and_reduces_external_frontier(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Official fraction standard","short_summary":"fraction standard","keywords":["fraction","standard"],"authority_class":"OFFICIAL"}]
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"check evidence","unknown":["fraction standard","decimal intervention"]},"memory":MEMORY,"index_rows":rows})
+        self.assertEqual(r["plan"]["index_first"]["counts"]["resolved_from_index"],1)
+        self.assertEqual(r["plan"]["index_first"]["counts"]["external_required"],1)
+        self.assertEqual(len(r["plan"]["external_search_frontier"]),1)
+        self.assertTrue(r["plan"]["external_search_required"])
+
+    def test_index_first_can_eliminate_external_search(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Fresh official evidence","short_summary":"fresh official evidence","keywords":["fresh","evidence"],"authority_class":"OFFICIAL"}]
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"verify","unknown":["fresh evidence"]},"memory":MEMORY,"index_rows":rows})
+        self.assertFalse(r["plan"]["external_search_required"])
+        self.assertEqual(r["plan"]["external_search_frontier"],[])
+
     def test_failed_route_uses_replacement(self):
         r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:stale","unknown":["fresh evidence"]},"memory":MEMORY})
         self.assertEqual(r["plan"]["next_action"],"USE_REPLACEMENT_ROUTE")
