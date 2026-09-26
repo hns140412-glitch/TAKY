@@ -135,7 +135,9 @@
     "select production durable conditional store and server-only signing key after region/quota/auth checks",
     "anchor last committed CAS checkpoint externally to detect complete signed-history rollback",
     "connect provider-verified Achievement Decision and approved active badge source to CAS write boundary",
-    "bind authenticated child-scoped Badge Reader to Ready/Snap DRAFT interfaces without browser write authority"
+    "bind authenticated child-scoped Badge Reader to Ready/Snap DRAFT interfaces without browser write authority",
+    "treat Ready combined #112 as preferred integration candidate rather than separately promoting #110 and #111",
+    "connect multi-instance CAS Award Ledger only after owner-authored real Decision and active catalog provider exist"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -439,12 +441,25 @@
       "RESOLVE_READY_PR_110_AND_111_BRANCH_ORDER_AND_DEPLOY_GATE",
       "SNAP_REAL_AUTHENTICATED_CHILD_VIEWER_AND_BADGE_READ_ADAPTER",
       "EXPLICIT_PARENT_TARGET_CHILD_READ_SCOPE_IF_PLANNER_PARENT_VIEW_IS_DESIRED"
-    ]
+    ],
+    "ready_combined_pr": {
+      "repo": "hns140412-glitch/Ready-Set",
+      "number": 112,
+      "exact_head": "6d29015bf84893877ff47dcc6d9b8d5376ddea09",
+      "status": "DRAFT_UNMERGED_CI_SUCCESS",
+      "regression": "READY_RUNTIME_E2E_53_TESTS_PASS_ALL_SEVEN_WORKFLOWS_SUCCESS",
+      "merges_content_of": [
+        "DRAFT_PR_110_RELATION_PERMISSION",
+        "DRAFT_PR_111_DAY_WEEK_BADGE_RAIL"
+      ],
+      "actual_production_badge_reader": "OPEN",
+      "netlify_deployment": "NONE"
+    }
   },
   "badge_multidevice_cas_2026_09_26": {
     "authority": "OPEN_ADDRESSED_SERVER_SIDE_SIGNED_AWARD_LEDGER_FOR_MULTIPLE_INSTANCES",
     "previous_local_ledger": "PRESERVED_ALREADY_CLOSED_LOCAL_NODE_PROVIDER_NOT_A_SITE_WIDE_BACKEND",
-    "implementation": "BRANCH_IMPLEMENTED_CI_PENDING",
+    "implementation": "PR_155_EXACT_HEAD_CI_SUCCESS_PENDING_MAIN_PROMOTION",
     "files": [
       "BADGE/badge-award-ledger-cas-store.js",
       "BADGE/badge-award-ledger-cas-store.test.js"
@@ -459,6 +474,9 @@
     "anti_rollback_checkpoint_anchor": "OPEN",
     "production_region_quota_gate": "OPEN",
     "no_deploy": true,
-    "source_authority": "Netlify Blobs conditional write docs / existing Ready remote store verified"
+    "source_authority": "Netlify Blobs conditional write docs / existing Ready remote store verified",
+    "tested_head": "6d0330706ca094cf1c8488846c9a2dcc5fd95ece",
+    "tested_workflow_run": "36244775276_SUCCESS",
+    "test_scope": "TWO_CONCURRENT_REAWARDS_PRESERVED_DUPLICATE_DENIED_SIGNED_REPLAY_CROSS_FAMILY_TAMPER_AND_KST"
   }
 }
