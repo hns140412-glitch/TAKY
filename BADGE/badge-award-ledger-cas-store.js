@@ -36,10 +36,11 @@ function createCasAwardLedger({store,family_id,signingKey,verifyDecision,isBadge
  const family=family_id;
  const clock=now||(()=>new Date().toISOString());
  const scope=(child,badge)=>scopeOk(child)&&scopeOk(badge);
- // Derive an opaque key from the family, child and badge with a server secret:
- // client cannot dictate or enumerate raw storage keys through this object.
- const objectKey=(child,badge)=>'badge-award-cas/'+hmac(signingKey,
-   'STORE_KEY\n'+family+'\n'+child+'\n'+badge);
+ // Key location remains STABLE if a signing key is rotated. A wrong key must
+ // read existing records and fail integrity, never create a parallel ledger.
+ // Server scope controls prevent browser access to these object keys.
+ const objectKey=(child,badge)=>'badge-award-cas/'+hash(
+   'BADGE_CAS_KEY_V1\\n'+family+'\\n'+child+'\\n'+badge);
  const genesis=(child,badge)=>hmac(signingKey,'GENESIS\n'+family+'\n'+child+'\n'+badge);
  const empty=(child,badge)=>({
    contract:STORE_CONTRACT,family_id:family,child_id:child,badge_id:badge,
