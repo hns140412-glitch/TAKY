@@ -66,13 +66,13 @@ function reader(list=()=>catalog){
   // Reconstruct a valid prior-format signed ledger that had only approved_at,
   // never silently treating that timestamp as the actual award day.
   const legacyFile=path.join(directory,crypto.createHash('sha256')
-    .update(family_id+'\\0'+child_id+'\\0'+'LEGACY_BADGE').digest('hex')+'.json');
+    .update(family_id+'\0'+child_id+'\0'+'LEGACY_BADGE').digest('hex')+'.json');
   const raw=JSON.parse(fs.readFileSync(legacyFile,'utf8'));
   assert.equal(raw.rows.length,1);
   delete raw.rows[0].record.awarded_at;
   const oldRecord=raw.rows[0].record;
   const legacyDigest=crypto.createHmac('sha256',signingKey)
-    .update(oldRecord.previous_digest+'\\n'+JSON.stringify(oldRecord)).digest('hex');
+    .update(oldRecord.previous_digest+'\n'+JSON.stringify(oldRecord)).digest('hex');
   raw.rows[0].digest=legacyDigest;raw.checkpoint=legacyDigest;
   fs.writeFileSync(legacyFile,JSON.stringify(raw));
 
