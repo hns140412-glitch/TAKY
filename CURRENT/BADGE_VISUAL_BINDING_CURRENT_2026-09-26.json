@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "REGISTRY_AND_RENDERER_MAIN_CLOSED_ASSET_AND_APP_BINDING_OPEN",
+  "status": "HUMAN_APPROVAL_REQUIRED_FOR_FINAL_ASSET_SET",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -64,7 +64,7 @@
     "canonical_asset_set_selected": false
   },
   "open": [
-    "explicitly approved badge asset set recovery or approval",
+    "human approval/identification of final badge asset source",
     "badge_id/visual_id to approved asset 1:1 binding",
     "cross-app display surface ownership",
     "app runtime consumer/surface binding",
@@ -77,5 +77,24 @@
     "stars mean grade classification",
     "do not couple badge visuals to EXP/gem/affinity/power",
     "do not reopen closed badge evidence/award logic without regression evidence"
-  ]
+  ],
+  "approval_gate": {
+    "required": true,
+    "reason": "NO_EXPLICIT_FINAL_APPROVAL_RECOVERED_FOR_CANDIDATE_SHEETS",
+    "candidates": [
+      {
+        "id": "A",
+        "file": "귀여운 탐험가 배지 컬렉션.png",
+        "exact_catalog_matches": 10,
+        "total": 12
+      },
+      {
+        "id": "B",
+        "file": "파스텔 탐험대 배지 12종.png",
+        "exact_catalog_matches": 8,
+        "total": 12
+      }
+    ],
+    "alternate": "IDENTIFY_OTHER_HISTORICAL_FINAL_ASSET_SOURCE"
+  }
 }
