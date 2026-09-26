@@ -1,0 +1,51 @@
+{
+  "namespace": "SYSTEM_WIDE_REVIEW",
+  "task_id": "TAKY_SYSTEM_WIDE_INTEGRATION_AND_CURRENT_CLEANUP",
+  "status": "ACTIVE_REVIEW__DRAFT_NOT_MAIN",
+  "goal": "Improve actual end-to-end growth/outcome across TAKY, Mining, Indexing, Central Learning, Planner, Ready, Hide and Snap; eliminate numbered-document CURRENT selection and stale references without erasing history.",
+  "authority": {
+    "canonical_repo": "hns140412-glitch/TAKY",
+    "verified_main_at_start": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+    "draft_pr": 162,
+    "working_branch": "review/revisionless-current-20260927",
+    "exact_head": "RECHECK_BRANCH_AFTER_WRITE",
+    "current_selection": "NAMESPACE_SEMANTIC_OWNER_PLUS_VERIFIED_SOURCE_AND_RECEIPT"
+  },
+  "protected": [
+    "Think Again, Keep Your Key / Think Again, You're The Key / no slogan reinterpretation",
+    "USER != DEBUGGER",
+    "CLOSED inherited unless real regression",
+    "Work OS and ARCHI GROW feature work HOLD, last",
+    "Badge is owned in another chat; no edits",
+    "No main merge, production deploy, Netlify or unapproved paid service"
+  ],
+  "done": [
+    "Recovered main STATE, original revision policy, shared family master and master file registry",
+    "Verified 43/43 master-file classification and logical alias paths in draft",
+    "Verified unchanged body of shared-family contract against main",
+    "Introduced versionless document identity and immutable history policy in existing owner document on draft",
+    "Patched GRAND MASTER only header and revision/lineage sections in draft",
+    "Mapped DATA CURRENT promoted 679-source Drive IDs/receipt without reindex or copy",
+    "Created single stable C2S/REVISIONLESS_CURRENT_TRANSITION.md with source and functional gap matrix"
+  ],
+  "evidence": {
+    "data_index_source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+    "data_utilization_id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s",
+    "data_promotion_receipt_id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w",
+    "data_promoted_source_count": 679,
+    "source_coverage": "MATERIAL_CURRENT_SOURCES_READ__PREVIOUS_CHAT_FULL_TRANSCRIPT_UNVERIFIED",
+    "draft_policy": "MASTER/REVISION_GOVERNANCE.md",
+    "transition_matrix": "C2S/REVISIONLESS_CURRENT_TRANSITION.md"
+  },
+  "open": [
+    "Read-only consumer/reference inventory for legacy REV/V physical paths; search miss is not source absence",
+    "Implementation-owner reader migration to namespace stable aliases, stale/higher-number refusal and duplicate authority fail-close, focused regression",
+    "DATA promoted ID/receipt selection and shared-family logical owner smoke test in real readers, without raw 679-source reindex",
+    "Whole-system actual evidence path across source -> index -> central learning -> review-need -> Planner dated allocation -> app result; map real blockers rather than invent complete",
+    "Cross-app family/member isolation, live identity/server/outbox/ACK integration and device acceptance per owning project",
+    "Refresh this stable CURRENT after each independent verified batch; no new numbered copies"
+  ],
+  "next": "Review all affected current-reader references and prepare a narrow implementation task contract for semantic CURRENT resolver; preserve legacy files until tested consumer migration.",
+  "implementation_status": "GOVERNANCE_DRAFT_AND_REGISTRY_DECLARATIVE_ALIAS_ONLY__RUNTIME_RESOLVER_NOT_YET_IMPLEMENTED",
+  "updated_at": "2026-09-27"
+}
