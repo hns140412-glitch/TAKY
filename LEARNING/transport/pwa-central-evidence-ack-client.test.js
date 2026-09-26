@@ -8,7 +8,7 @@ const body={ok:true,storage_confirmed:true,
  acknowledgement_kind:'OBSERVATION_INGEST_RECEIPT',
  receipt_id:'observation:server-committed-1',
  receipt_scope:{family_id:'F1',member_id:'CHILD_A'},
- source_app:'hide-seek',duplicate:false};
+ source_app:'hide-seek',packet_id:packet.packet_id,event_id:packet.event.event_id,duplicate:false};
 (async()=>{
  let calls=0,last=null,selected='CHILD_A';
  const client=Client.create({
@@ -40,6 +40,21 @@ const body={ok:true,storage_confirmed:true,
  }).ok,false);
  assert.equal(Client.validateAck(packet,200,{...body,storage_confirmed:false}).ok,false);
  assert.equal(Client.validateAck(packet,200,{...body,receipt_id:''}).ok,false);
+ assert.equal(Client.validateAck(packet,200,{...body,event_id:'another-event'}).ok,false);
+ assert.equal(Client.validateAck(packet,200,{...body,packet_id:'hide-seek:another'}).ok,false);
+ // A successful HTTP response arriving after logout/member switch is NOT ACK.
+ let postAwaitMember='CHILD_A';
+ const switched=Client.create({
+  endpointUrl:'https://learning.example.test/api/learning/evidence',
+  tokenProvider:async()=> 'test-only-id-token-0000001',
+  sessionProvider:async()=>({authenticated:true,family_id:'F1',
+   selected_member_id:postAwaitMember}),
+  fetchImpl:async()=>{postAwaitMember='CHILD_B';
+    return {status:200,json:async()=>body};}
+ });
+ const late=await switched.sendPending(packet);
+ assert.equal(late.ok,false);
+ assert.equal(late.reason,'SESSION_CHANGED_BEFORE_ACK');
  const wrong=Client.create({endpointUrl:'https://learning.example.test/api/learning/evidence',
   tokenProvider:async()=> 'test-only-id-token-0000001',
   sessionProvider:async()=>({authenticated:true,family_id:'F1',selected_member_id:'CHILD_A'}),
