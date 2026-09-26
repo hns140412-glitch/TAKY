@@ -303,3 +303,12 @@ Production / merge / Netlify deployment remains HOLD.
 
 Netlify / production deployment: HOLD.
 
+
+
+## LATEST RESUME OVERRIDE — CENTRAL EVIDENCE HTTP BOUNDARY — 2026-09-26
+
+Preserve all previously CLOSED Learning Core, learner state, evidence receipts, Adaptive Plan Intent and independent Core role. The three high-level OPEN lines remain retention/BKT held and hosted transport, but hosted transport has a new **implemented provider-neutral HTTP ingress sub-slice**: `LEARNING/transport/central-learning-http-endpoint.js`, `central-learning-http-endpoint.test.js`, and durable store no-false-ACK regression. Exact PR #157, head `688eaa6be17a0106b07cc1b69949d6f28ba77733`, TAKY Enforcement run `36247334212` SUCCESS at this checkpoint.
+
+This module is not a deployed Function, real OAuth verifier, real app-specific server verification provider or configured production store. Its server-injected `verifyBearerToken` and `verifySpecialistEvidence` must be supplied by the authorized runtime. The PWA's self-declared exact-match/human-review candidate is **observation-only by default**, never verified performance, until checked against a server-owned reference/provenance. A successful receipt is returned only after confirmed durable write with ETag; no full child learning state crosses the ACK. Central Learning Core != PWA; Planner remains calendar authority; Drive keeps only incremental source/index and versioned, verified archive role per `OS/LEARNING_ENGINE_DRIVE_HYBRID_STORAGE_REVIEW_2026-09-26.md`.
+
+Next concrete hosted OPEN: choose/verify actual upstream auth issuer/audience/expiry and authoritative family membership; provide real specialist verification sources; bind a selected durable central store and request framework; exercise PWA offline outbox/ACK and privacy/security before release. Retention/BKT estimator promotion and Netlify deploy remain HOLD. Do not count local fake bearer/verifier tests as real production binding.
