@@ -16,6 +16,23 @@ from executor_cycle import run as run_executor_cycle
 from github_issue_executor_queue import parse_issue, parse_comment
 
 QUEUE_PREFIX = "[TAKY EXECUTOR QUEUE]"
+TRUSTED_MACHINE_COMMENT_ACTORS = {"github-actions[bot]"}
+
+def _actor_login(value: object) -> str:
+    if isinstance(value, dict):
+        author = value.get("author")
+        if isinstance(author, dict):
+            login = author.get("login")
+            if isinstance(login, str) and login.strip():
+                return login.strip()
+        if isinstance(author, str) and author.strip():
+            return author.strip()
+        user = value.get("user")
+        if isinstance(user, dict):
+            login = user.get("login")
+            if isinstance(login, str) and login.strip():
+                return login.strip()
+    return ""
 
 def validate_envelope(envelope: dict) -> list[str]:
     failures: list[str] = []
@@ -88,6 +105,19 @@ def consume(event: dict) -> dict:
 
     receipt = parsed.get("receipt")
     result = parsed.get("result")
+    actor = _actor_login(comment)
+    if (receipt is not None or result is not None) and actor.lower() not in TRUSTED_MACHINE_COMMENT_ACTORS:
+        data = {
+            "task_id": envelope.get("task_id"),
+            "actor": actor or None,
+            "detected": ["QUEUE_MACHINE_COMMENT_ACTOR_UNTRUSTED"],
+        }
+        return {
+            "pass": False,
+            "action": "REJECT_UNTRUSTED_MACHINE_COMMENT",
+            "comment": _comment("SOURCE_REJECTED", data, source_comment_id=source_comment_id),
+        }
+
     if receipt is not None:
         checked = validate_receipt(envelope, receipt)
         kind = "RECEIPT_ACCEPTED" if checked["pass"] else "RECEIPT_REJECTED"

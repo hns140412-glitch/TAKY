@@ -404,11 +404,19 @@ jobs:
           adapter=data.get('executor_adapter') or {}
           envelope=data.get('dispatch_envelope') or {}
           assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
-          assert adapter.get('implementation_commit') == '14988ea16a345557aa0a8262b11e73b9e02fe12d', adapter
+          assert adapter.get('implementation_commit') == '1d672d862cc8329a5f19ca91c9ed6a338752f5ae', adapter
           liveness=adapter.get('liveness_recovery') or {}
           assert liveness.get('state') == 'ACTIVE_IN_READY_SET_MAIN', liveness
           assert liveness.get('provider_binding') == 'GITHUB_ACTIONS_RUN_AND_JOB_STATE', liveness
           assert liveness.get('side_effect_retry_contract_bypass') is False, liveness
+          source=adapter.get('queue_source_provenance') or {}
+          assert source.get('state') == 'ACTIVE_IN_READY_SET_MAIN', source
+          assert source.get('public_untrusted_issue_execution_blocked') is True, source
+          bridge=adapter.get('cross_repo_queue_bridge') or {}
+          assert bridge.get('queue_repository') == 'hns140412-glitch/Ready-Set', bridge
+          assert bridge.get('consumer_repository') == 'hns140412-glitch/TAKY', bridge
+          assert bridge.get('state') == 'CROSS_REPO_CREDENTIAL_ABSENT', bridge
+          assert bridge.get('builtin_github_token_cross_repo_write_capable') is False, bridge
           assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
           assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
           assert envelope.get('external_executor_invocation_verified') is False
@@ -455,7 +463,8 @@ jobs:
           from pathlib import Path
           issue=json.loads(Path('/tmp/github-issue.json').read_text())
           env=json.loads(Path('/tmp/github-envelope.json').read_text())
-          open_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}}
+          trusted_issue={'number': 101, 'title': issue['title'], 'body': issue['body'], 'author': {'login':'hns140412-glitch'}, 'authorAssociation':'OWNER'}
+          open_event={'issue': trusted_issue}
           Path('/tmp/queue-open-event.json').write_text(json.dumps(open_event))
           receipt={
             'task_id':env['task_id'],
@@ -465,7 +474,7 @@ jobs:
             'status':'ACCEPTED'
           }
           receipt_comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->'
-          receipt_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}, 'comment': {'body': receipt_comment}}
+          receipt_event={'issue': trusted_issue, 'comment': {'body': receipt_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
           Path('/tmp/queue-receipt-event.json').write_text(json.dumps(receipt_event))
           report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
           result={
@@ -475,18 +484,24 @@ jobs:
             'completion_report':report
           }
           result_comment='<!-- TAKY_EXECUTOR_RESULT_JSON_BEGIN -->\n'+json.dumps(result)+'\n<!-- TAKY_EXECUTOR_RESULT_JSON_END -->'
-          result_event={'issue': {'number': 101, 'title': issue['title'], 'body': issue['body']}, 'comment': {'body': result_comment}}
+          result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
           Path('/tmp/queue-result-event.json').write_text(json.dumps(result_event))
+          forged_result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'untrusted-user'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-forged-result-event.json').write_text(json.dumps(forged_result_event))
           PY
           python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-open-event.json --event-name issues --output /tmp/queue-open-plan.json
           python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-receipt-event.json --event-name issue_comment --output /tmp/queue-receipt-plan.json
           python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-result-event.json --event-name issue_comment --output /tmp/queue-result-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-forged-result-event.json --event-name issue_comment --output /tmp/queue-forged-result-plan.json
           python - <<'PY'
           import json
           from pathlib import Path
           assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
           assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
           assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          forged=json.loads(Path('/tmp/queue-forged-result-plan.json').read_text())
+          assert forged['action']=='REJECT_UNTRUSTED_MACHINE_COMMENT', forged
+          assert forged['pass'] is False, forged
           PY
       - name: Validate scheduled queue poller idempotency
         run: |
@@ -500,14 +515,16 @@ jobs:
             'number':101,
             'title':issue['title'],
             'body':issue['body'],
+            'author':{'login':'hns140412-glitch'},
+            'authorAssociation':'OWNER',
             'comments':[
-              {'id':201,'body':receipt_event['comment']['body']},
-              {'id':202,'body':result_event['comment']['body']},
+              {'id':201,'body':receipt_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
+              {'id':202,'body':result_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
             ]
           }
           Path('/tmp/poll-snapshot.json').write_text(json.dumps(snapshot))
           PY
-          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot.json --output /tmp/poll-plan-1.json
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-1.json
           python - <<'PY'
           import json
           from pathlib import Path
@@ -515,15 +532,28 @@ jobs:
           plan=json.loads(Path('/tmp/poll-plan-1.json').read_text())
           assert len(plan['comments_to_publish']) == 3, plan
           for i, body in enumerate(plan['comments_to_publish'], start=301):
-            snapshot['comments'].append({'id':i,'body':body})
+            snapshot['comments'].append({'id':i,'body':body,'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'})
           Path('/tmp/poll-snapshot-acked.json').write_text(json.dumps(snapshot))
           PY
-          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-acked.json --output /tmp/poll-plan-2.json
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-acked.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-2.json
           python - <<'PY'
           import json
           from pathlib import Path
           plan=json.loads(Path('/tmp/poll-plan-2.json').read_text())
           assert plan['comments_to_publish'] == [], plan
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          snapshot['author']={'login':'untrusted-user'}
+          snapshot['authorAssociation']='NONE'
+          Path('/tmp/poll-snapshot-forged.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-forged.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-forged.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-forged.json').read_text())
+          assert plan['pass'] is False, plan
+          assert plan['comments_to_publish'] == [], plan
+          assert plan['processed'][0]['action'] == 'REJECT_UNTRUSTED_QUEUE_ISSUE', plan
           PY
       - name: Validate executor transport and closed review cycle
         run: |

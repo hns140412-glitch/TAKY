@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-26.1",
+  "registry_version": "2026-09-26.2",
   "purpose": "Machine-readable executor adapter routing. Secrets are never stored here.",
   "adapters": [
     {
@@ -10,8 +10,8 @@
       "transport": "GITHUB_ISSUE_QUEUE",
       "queue_repository": "hns140412-glitch/Ready-Set",
       "workflow_path": ".github/workflows/taky-codex-executor.yml",
-      "implementation_commit": "14988ea16a345557aa0a8262b11e73b9e02fe12d",
-      "state": "IMPLEMENTED_EVENT_DRIVEN_CREDENTIAL_ABSENT",
+      "implementation_commit": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+      "state": "IMPLEMENTED_LOCAL_WORKER_CREDENTIAL_ABSENT_CROSS_REPO_CONSUMER_CREDENTIAL_ABSENT",
       "queue_ready": true,
       "credential_requirement": {
         "kind": "GITHUB_ACTIONS_SECRET",
@@ -27,14 +27,15 @@
         "github_parser_valid": true,
         "selftest_run_id": 36217444896,
         "selftest_conclusion": "success",
-        "issue_event_trigger_active": true,
+        "issue_event_trigger_active": false,
         "live_queue_run_id": 35430355396,
         "live_queue_result": "CREDENTIAL_BLOCKED_CONFIRMED",
         "credential_present": false,
         "integration_ci_run_id": 36217444886,
         "integration_ci_conclusion": "success",
         "runtime_e2e_run_id": 36217444893,
-        "runtime_e2e_conclusion": "success"
+        "runtime_e2e_conclusion": "success",
+        "issue_event_trigger_note": "TAKY-repo issue events do not fire for Ready-Set queue_repository"
       },
       "liveness_recovery": {
         "state": "ACTIVE_IN_READY_SET_MAIN",
@@ -47,14 +48,45 @@
           "pending",
           "requested"
         ],
-        "safe_reclaim_rule": "terminal failure/cancel/timeout only when materialize job is confirmed skipped",
+        "safe_reclaim_rule": "terminal failure/timed_out/startup_failure only when materialize job is confirmed skipped",
         "reconciliation_required_when": [
           "provider liveness unknown",
           "previous run succeeded but no result exists",
           "materialize job may have started"
         ],
         "preserves_attempt_lineage": true,
-        "side_effect_retry_contract_bypass": false
+        "side_effect_retry_contract_bypass": false,
+        "cancellation_rule": "cancelled run requires explicit human decision; never automatic reclaim"
+      },
+      "queue_source_provenance": {
+        "state": "ACTIVE_IN_READY_SET_MAIN",
+        "trusted_issue_actors": [
+          "hns140412-glitch",
+          "github-actions[bot]"
+        ],
+        "trusted_machine_comment_actors": [
+          "github-actions[bot]"
+        ],
+        "public_untrusted_issue_execution_blocked": true,
+        "ready_set_main_commit": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae"
+      },
+      "cross_repo_queue_bridge": {
+        "queue_repository": "hns140412-glitch/Ready-Set",
+        "consumer_repository": "hns140412-glitch/TAKY",
+        "builtin_github_token_cross_repo_write_capable": false,
+        "state": "CROSS_REPO_CREDENTIAL_ABSENT",
+        "credential_requirement": {
+          "kind": "GITHUB_ACTIONS_SECRET",
+          "name": "TAKY_CROSS_REPO_TOKEN",
+          "recommended_credential": "FINE_GRAINED_PAT_OR_GITHUB_APP_TOKEN",
+          "required_permissions": [
+            "Ready-Set issues:read",
+            "Ready-Set issues:write"
+          ],
+          "value_stored_in_taky": false
+        },
+        "remote_poller_behavior_without_credential": "FAIL_CLOSED_NO_REMOTE_SCAN",
+        "event_driven_taky_repo_consumer_is_remote_queue_authority": false
       }
     }
   ]

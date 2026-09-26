@@ -31,23 +31,41 @@ jobs:
           python -m py_compile ENFORCEMENT/executor_review_loop.py
           python -m py_compile ENFORCEMENT/executor_cycle.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
-      - name: Poll open TAKY executor queue issues
+      - name: Poll configured TAKY executor queue repository
         env:
-          GH_TOKEN: ${{ github.token }}
+          LOCAL_GH_TOKEN: ${{ github.token }}
+          TAKY_CROSS_REPO_TOKEN: ${{ secrets.TAKY_CROSS_REPO_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
-          gh issue list --state open --limit 100 --json number,title > /tmp/open-issues.json
+          QUEUE_REPOSITORY="$(jq -r '.adapters[] | select(.adapter_id=="READY_SET_GITHUB_CODEX_V1") | .queue_repository' MASTER/EXECUTOR_ADAPTER_REGISTRY.json)"
+          if [ -z "$QUEUE_REPOSITORY" ] || [ "$QUEUE_REPOSITORY" = "null" ]; then
+            echo "QUEUE_REPOSITORY_MISSING"
+            exit 1
+          fi
+
+          if [ "$QUEUE_REPOSITORY" != "$GITHUB_REPOSITORY" ]; then
+            if [ -z "${TAKY_CROSS_REPO_TOKEN:-}" ]; then
+              echo "CROSS_REPO_QUEUE_CREDENTIAL_ABSENT: queue=$QUEUE_REPOSITORY consumer=$GITHUB_REPOSITORY"
+              exit 0
+            fi
+            export GH_TOKEN="$TAKY_CROSS_REPO_TOKEN"
+          else
+            export GH_TOKEN="$LOCAL_GH_TOKEN"
+          fi
+
+          gh issue list -R "$QUEUE_REPOSITORY" --state open --limit 100 --json number,title > /tmp/open-issues.json
           jq -r '.[] | select(.title | startswith("[TAKY EXECUTOR QUEUE]")) | .number' /tmp/open-issues.json > /tmp/queue-issue-numbers.txt
           while IFS= read -r ISSUE_NUMBER; do
             [ -z "$ISSUE_NUMBER" ] && continue
-            gh issue view "$ISSUE_NUMBER" --json number,title,body,comments > "/tmp/queue-${ISSUE_NUMBER}.json"
+            gh issue view -R "$QUEUE_REPOSITORY" "$ISSUE_NUMBER" --json number,title,body,comments,author,authorAssociation > "/tmp/queue-${ISSUE_NUMBER}.json"
             python ENFORCEMENT/github_queue_poll_plan.py \
               --snapshot "/tmp/queue-${ISSUE_NUMBER}.json" \
+              --queue-repository "$QUEUE_REPOSITORY" \
               --output "/tmp/queue-${ISSUE_NUMBER}-plan.json" >/dev/null
             jq -r '.comments_to_publish[] | @base64' "/tmp/queue-${ISSUE_NUMBER}-plan.json" | while IFS= read -r ITEM; do
               [ -z "$ITEM" ] && continue
               BODY="$(printf '%s' "$ITEM" | base64 --decode)"
-              gh issue comment "$ISSUE_NUMBER" --body "$BODY" >/dev/null
+              gh issue comment -R "$QUEUE_REPOSITORY" "$ISSUE_NUMBER" --body "$BODY" >/dev/null
             done
           done < /tmp/queue-issue-numbers.txt
