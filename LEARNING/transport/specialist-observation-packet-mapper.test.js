@@ -13,6 +13,9 @@ for(const [app,type] of Object.entries(Mapper.TYPES)){
  assert.equal(packet.packet_id,app+':'+event.event_id);
  assert.throws(()=>Mapper.map({source_app:app,event,session:{...session,selected_member_id:'B'}}),/MEMBER_SCOPE_MISMATCH/);
  assert.throws(()=>Mapper.map({source_app:app,event:{...event,family_id:'OTHER'},session}),/FAMILY_SCOPE_MISMATCH/);
+ assert.throws(()=>Mapper.map({source_app:app,event:{...event,payload:{...event.payload,member_id:'OTHER'}},session}),/PAYLOAD_MEMBER_SCOPE_CONFLICT/);
+ assert.throws(()=>Mapper.map({source_app:app,event:{...event,payload:{...event.payload,child_id:'OTHER'}},session}),/PAYLOAD_MEMBER_SCOPE_CONFLICT/);
+ assert.throws(()=>Mapper.map({source_app:app,event:{...event,payload:{...event.payload,family_id:'OTHER'}},session}),/FAMILY_SCOPE_MISMATCH/);
  assert.throws(()=>Mapper.map({source_app:app,event:{...event,payload:{...event.payload,auto_award:true}},session}),/AUTHORITY_ESCALATION_DENIED/);
  assert.throws(()=>Mapper.map({source_app:app,event,session:{...session,authenticated:false}}),/TRUSTED_SELECTED_MEMBER_SESSION_REQUIRED/);
  assert.throws(()=>Mapper.map({source_app:app,event:{...event,event_id:''},session}),/SPECIALIST_OBSERVATION_EVENT_REQUIRED/);
