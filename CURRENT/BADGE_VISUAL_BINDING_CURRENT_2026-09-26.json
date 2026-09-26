@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "DURABLE_AWARD_LEDGER_CORE_BRANCH_IMPLEMENTED_PRODUCTION_BINDINGS_OPEN",
+  "status": "DURABLE_AWARD_LEDGER_CORE_TESTED_PRODUCTION_BINDINGS_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -60,9 +60,9 @@
     "ledger_history_bridge": "BRANCH_IMPLEMENTED_FAIL_CLOSED_NOT_LIVE_BOUND",
     "trusted_award_ledger_source": "NOT_FOUND_IN_VERIFIED_MAIN_REPOS",
     "ledger_bridge_tests": "PR_HEAD_SUCCESS_36233712281",
-    "owner_neutral_node_award_ledger": "BRANCH_IMPLEMENTED",
-    "ledger_to_visual_composition": "BRANCH_IMPLEMENTED_TEST_ONLY_APPROVED_ASSET",
-    "ledger_persistence_integration_tests": "PR_CI_PENDING",
+    "owner_neutral_node_award_ledger": "IMPLEMENTED_TESTED_PR_146",
+    "ledger_to_visual_composition": "IMPLEMENTED_TESTED_WITH_TEST_ONLY_APPROVED_ASSET",
+    "ledger_persistence_integration_tests": "PR_HEAD_SUCCESS_36234126470",
     "actual_authenticated_decision_provider": "NOT_CONNECTED",
     "real_family_scope_authorization": "NOT_CONNECTED",
     "production_signing_key_and_backup": "NOT_CONFIGURED",
