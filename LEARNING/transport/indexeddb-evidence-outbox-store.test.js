@@ -62,6 +62,9 @@ function fakeIDB(){
  assert.equal([one,two].filter(Boolean).length,1);
  assert.equal((await a.read()).version,1);
  assert.equal(await b.compareAndSwap(0,{entries:[]}),false);
+ // Clear the disposable CAS probe row before testing scoped queue behavior.
+ const probe=await a.read();
+ assert.equal(await a.compareAndSwap(probe.version,{entries:[]}),true);
  const q=Outbox.create({storage:a});
  const p={packet_id:'hide-seek:e1',source_app:'hide-seek',
   context:{family_id:'F',member_id:'A'},
