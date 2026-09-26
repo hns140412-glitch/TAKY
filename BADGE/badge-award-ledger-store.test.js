@@ -29,6 +29,7 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   assert.equal(projected.ok,true);
   assert.equal(projected.ownership_state,'LOCKED');
   assert.equal(award(store,0,'INITIAL_AWARD',{},false).reason,'APPROVED_DECISION_REQUIRED');
+  assert.equal(award(store,7,'INITIAL_AWARD',{decision_status:'REJECTED'}).reason,'APPROVED_DECISION_RECEIPT_INCOMPLETE');
   assert.equal(award(store,0,'INITIAL_AWARD',{badge_id:'WORKING_DRAFT_001'}).reason,'BADGE_NOT_ACTIVE_OR_CHILD_NOT_AUTHORIZED');
   assert.equal(award(store,0,'INITIAL_AWARD',{child_id:'CHILD_B'}).reason,'BADGE_NOT_ACTIVE_OR_CHILD_NOT_AUTHORIZED');
   assert.equal(award(store,0,'REAWARD').reason,'AWARD_KIND_OUT_OF_SEQUENCE');
@@ -41,6 +42,13 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   assert.equal(projected.ok,true);
   assert.equal(projected.ownership_state,'EARNED');
   assert.equal(projected.state.star_count,0);
+  const firstSnapshot=await store.source.loadCompleteHistory({child_id,badge_id});
+  const ledgerFile=fs.readdirSync(directory).find(x=>x.endsWith('.json'));
+  const lockFile=path.join(directory,ledgerFile+'.lock');
+  fs.writeFileSync(lockFile,'other-writer-lock');
+  assert.equal(award(store,111,'REAWARD').reason,'LEDGER_LOCK_OR_DURABLE_WRITE_FAILED');
+  fs.unlinkSync(lockFile);
+  assert.equal((await store.source.loadCompleteHistory({child_id,badge_id})).rows.length,1);
   for(let i=1;i<=5;i++)assert.equal(award(create(),i,'REAWARD').ok,true);
   projected=await deriveFromLedger({...options,source:create().source});
   assert.equal(projected.ok,true);
@@ -48,6 +56,7 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   assert.equal(projected.state.tier,'BLUE');
   assert.equal(projected.state.star_count,0);
   const snapshot=await store.source.loadCompleteHistory({child_id,badge_id});
+  assert.equal((await store.source.verifyAwardRow(firstSnapshot.rows[0],{child_id,badge_id,checkpoint:firstSnapshot.checkpoint})).ok,false); // Stale snapshot after new awards.
   assert.equal(snapshot.complete,true);
   assert.equal(snapshot.rows.length,6);
   assert.equal((await store.source.verifyAwardRow(snapshot.rows[1],{child_id,badge_id,checkpoint:snapshot.checkpoint})).ok,true);
