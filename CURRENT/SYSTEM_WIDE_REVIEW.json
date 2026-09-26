@@ -28,7 +28,9 @@
     "Patched GRAND MASTER only header and revision/lineage sections in draft",
     "Mapped DATA CURRENT promoted 679-source Drive IDs/receipt without reindex or copy",
     "Created single stable C2S/REVISIONLESS_CURRENT_TRANSITION.md with source and functional gap matrix",
-    "Compared current three app main HEADs against open integration branches; recorded unmerged evidence chain gap in the same C2S matrix"
+    "Compared current three app main HEADs against open integration branches; recorded unmerged evidence chain gap in the same C2S matrix",
+    "Implemented read-only semantic_current_resolver.py: stable master/family owner aliases, fail-closed unknown/stale/duplicate/legacy path, data promoted ID selection without filename ordering",
+    "Added eight focused resolver tests and wired them into TAKY Enforcement Replay workflow"
   ],
   "evidence": {
     "data_index_source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
@@ -50,18 +52,21 @@
       "ready_roundtrip_pr": 100,
       "ready_weekly_availability_pr": 93,
       "merged_into_main": false
-    }
+    },
+    "semantic_current_resolver": "ENFORCEMENT/semantic_current_resolver.py",
+    "semantic_current_regression": "ENFORCEMENT/semantic_current_resolver_test.py",
+    "first_resolver_code_head": "c7ac3b26e9cc8240d96c298f12d544ea3de79372"
   },
   "open": [
     "Read-only consumer/reference inventory for legacy REV/V physical paths; search miss is not source absence",
-    "Implementation-owner reader migration to namespace stable aliases, stale/higher-number refusal and duplicate authority fail-close, focused regression",
+    "Migrate existing app/TAKY consumers to tested semantic resolver; standalone reader and tests exist, app consumers still OPEN",
     "DATA promoted ID/receipt selection and shared-family logical owner smoke test in real readers, without raw 679-source reindex",
     "Whole-system actual evidence path across source -> index -> central learning -> review-need -> Planner dated allocation -> app result; map real blockers rather than invent complete",
     "Cross-app family/member isolation, live identity/server/outbox/ACK integration and device acceptance per owning project",
     "Refresh this stable CURRENT after each independent verified batch; no new numbered copies",
     "Review PR #159 and current individual app contracts for one end-to-end trusted member/evidence/Planner consumer acceptance slice without touching badges or Work OS"
   ],
-  "next": "Stabilize revisionless aliases in actual readers and choose the smallest end-to-end integration slice: central trusted family/member evidence ACK -> learning review need -> Planner dated allocation -> app result. No false live/readiness claim.",
-  "implementation_status": "GOVERNANCE_DRAFT_AND_REGISTRY_DECLARATIVE_ALIAS_ONLY__RUNTIME_RESOLVER_NOT_YET_IMPLEMENTED",
+  "next": "Check exact-head enforcement replay of semantic resolver, inspect failing log if any, then verify external DATA promotion receipt readback and consumer migration. Preserve legacy source paths.",
+  "implementation_status": "SCOPED_SEMANTIC_CURRENT_READER_IMPLEMENTED_ON_DRAFT__EXTERNAL_DRIVE_RECEIPT_READBACK_AND_APP_CONSUMER_MIGRATION_OPEN",
   "updated_at": "2026-09-27"
 }
