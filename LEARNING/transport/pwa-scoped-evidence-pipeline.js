@@ -9,9 +9,11 @@ const IndexedDB=require('./indexeddb-evidence-outbox-store.js');
 const Client=require('./pwa-central-evidence-ack-client.js');
 const VERSION='TAKY_PWA_SCOPED_EVIDENCE_PIPELINE_V1';
 const clean=x=>typeof x==='string'?x.trim():'';
-function create({indexedDB,dbName,endpointUrl,fetchImpl,tokenProvider,
+function create({indexedDB,dbName,storageAdapter=null,endpointUrl,fetchImpl,tokenProvider,
  sessionProvider,clock=Date.now,leaseMs=30000}={}){
- const storage=IndexedDB.create({indexedDB,dbName});
+ const storage=storageAdapter||IndexedDB.create({indexedDB,dbName});
+ if(typeof storage?.read!=='function'||typeof storage?.compareAndSwap!=='function'||
+    typeof storage?.close!=='function')throw Error('PIPELINE_PERSISTENT_STORAGE_REQUIRED');
  const queue=Outbox.create({storage,clock,leaseMs});
  const client=Client.create({endpointUrl,fetchImpl,tokenProvider,sessionProvider});
  async function activeScope(source_app){
