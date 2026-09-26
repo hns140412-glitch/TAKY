@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "REAWARD_VISUAL_CORRECTION_MAIN_CLOSED_FINAL_ASSET_AND_APP_WIRING_OPEN",
+  "status": "DURABLE_AWARD_LEDGER_CORE_BRANCH_IMPLEMENTED_PRODUCTION_BINDINGS_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -59,7 +59,15 @@
     "corrected_main_ci": "BADGE_VISUAL_REGISTRY_VALIDATION_SUCCESS",
     "ledger_history_bridge": "BRANCH_IMPLEMENTED_FAIL_CLOSED_NOT_LIVE_BOUND",
     "trusted_award_ledger_source": "NOT_FOUND_IN_VERIFIED_MAIN_REPOS",
-    "ledger_bridge_tests": "PR_HEAD_SUCCESS_36233712281"
+    "ledger_bridge_tests": "PR_HEAD_SUCCESS_36233712281",
+    "owner_neutral_node_award_ledger": "BRANCH_IMPLEMENTED",
+    "ledger_to_visual_composition": "BRANCH_IMPLEMENTED_TEST_ONLY_APPROVED_ASSET",
+    "ledger_persistence_integration_tests": "PR_CI_PENDING",
+    "actual_authenticated_decision_provider": "NOT_CONNECTED",
+    "real_family_scope_authorization": "NOT_CONNECTED",
+    "production_signing_key_and_backup": "NOT_CONFIGURED",
+    "active_canonical_badge_catalog": "NOT_APPROVED",
+    "real_app_consumer": "NOT_WIRED"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -88,7 +96,10 @@
     "app import of badge presentation CSS and renderer",
     "post-promotion star display/reset policy confirmation",
     "identify real authoritative Award Ledger executable/read provider and receipt schema",
-    "bind trusted provider to central ledger history bridge; verify real replay"
+    "bind trusted provider to central ledger history bridge; verify real replay",
+    "wire actual authenticated Achievement Decision owner into durable Award Ledger writer",
+    "provide server-side signing key, authorized child scope and durable multi-device backup/rollback anchor",
+    "connect real approved catalog and app consumer to verified ledger-to-visual composition"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -148,7 +159,7 @@
     "final_asset_source": "NOT_VERIFIED"
   },
   "ledger_source_audit": {
-    "status": "NO_EXECUTABLE_VERIFIED_AWARD_LEDGER_READ_PROVIDER_LOCATED",
+    "status": "NEW_EXECUTABLE_OWNER_NEUTRAL_STORE_CREATED_NOT_BOUND_TO_PRODUCTION_DECISION_OWNER",
     "main_repositories": [
       "TAKY",
       "Snap-Pop",
@@ -157,6 +168,6 @@
     ],
     "historical_snap_candidate_ledgers": "NOT_AN_AWARD_LEDGER",
     "direct_history_bridge_activation": false,
-    "note": "source adapter requires actual owner-provided COMPLETE scoped history and verified rows; test mocks are not production"
+    "note": "The preexisting main repos had no read/verify owner; new core implements local Node persisted source behind injected trusted verifier and active badge authorizer. Tests use mocks; live award source not connected."
   }
 }
