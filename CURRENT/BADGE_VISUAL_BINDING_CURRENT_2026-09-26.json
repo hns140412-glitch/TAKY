@@ -128,7 +128,10 @@
     "connect trusted active/approved badge catalog list for calendar after visual/content approval",
     "resolve optional family praise gift history lane and message visibility separately from Achievement Award Ledger",
     "connect production signed award-time source and multi-device durable storage without reinterpreting old approval timestamps",
-    "authorize actual family gift-history reader before composing child's gift calendar lane"
+    "authorize actual family gift-history reader before composing child's gift calendar lane",
+    "bind real authenticated no-store badge month/detail/collection reader to Ready and Snap display drafts",
+    "validate Ready #110/#111 dependency and deployment gate before main promotion",
+    "integrate day-level verified badge pins only, never infer individual task attribution from same-date timestamp"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -159,7 +162,10 @@
     "moment rank distinct from same-badge reaward star-tier progression",
     "family praise badge gift catalogue distinct from 60+20 achievement catalogue",
     "witty naming proposals may not trigger Award Ledger, approve unbound art or overwrite source catalogue titles",
-    "history discovery proposals never trigger earned-only unlock toast"
+    "history discovery proposals never trigger earned-only unlock toast",
+    "planner badge display must be retrospective optional encouragement, never mandatory achievement quota",
+    "Ready/Snap PRs are CI-tested DRAFT UNMERGED and not live or deployed",
+    "no badge data copied into local planner tasks, browser reward counters or SW private cache"
   ],
   "approval_gate": {
     "required": true,
@@ -342,7 +348,7 @@
   },
   "badge_award_history_calendar_2026_09_26": {
     "authority": "DIRECT_USER_PER_BADGE_AWARD_HISTORY_AND_CALENDAR",
-    "status": "BRANCH_IMPLEMENTED_PENDING_CI_NOT_LIVE_APP",
+    "status": "MAIN_IMPLEMENTED_CI_SUCCESS_36242815668_NO_LIVE_APP_BACKEND",
     "source": "SIGNED_AWARD_LEDGER_ONLY",
     "source_timestamp": "SIGNED_ACTUAL_AWARDED_AT_DISTINCT_FROM_DECISION_APPROVED_AT",
     "legacy_timestamp_policy": "LEGACY_MISSING_AWARDED_AT_UNDATED_NOT_INFERRED_FROM_APPROVAL",
@@ -357,15 +363,15 @@
     "trusted_month_catalog": "ONLY_ACTIVE_APPROVED_BADGE_IDS_FROM_SERVER_PROVIDER",
     "family_praise_gift_history": "SEPARATE_EVENT_LANE_NOT_ACHIEVEMENT_AWARD_LEDGER",
     "implementation": {
-      "signed_ledger_awarded_at": "BRANCH_IMPLEMENTED",
-      "verified_receipt_history_replay": "BRANCH_IMPLEMENTED",
-      "child_month_projection": "BRANCH_IMPLEMENTED",
-      "family_history_reader": "BRANCH_IMPLEMENTED",
-      "real_app_ui": "OPEN",
+      "signed_ledger_awarded_at": "MAIN_IMPLEMENTED_TESTED",
+      "verified_receipt_history_replay": "MAIN_IMPLEMENTED_TESTED",
+      "child_month_projection": "MAIN_IMPLEMENTED_TESTED",
+      "family_history_reader": "MAIN_IMPLEMENTED_TESTED",
+      "real_app_ui": "READY_AND_SNAP_DRAFT_UI_IMPLEMENTED_TESTED_NOT_MERGED_OR_LIVE",
       "real_multi_device_ledger_provider": "OPEN",
       "production_active_approved_badge_provider": "OPEN",
-      "signed_gift_journal_calendar_projection": "BRANCH_IMPLEMENTED_CI_TESTED_TEST_ONLY_PROVIDER",
-      "separate_calendar_lane_composer": "BRANCH_IMPLEMENTED_CI_TESTED",
+      "signed_gift_journal_calendar_projection": "MAIN_IMPLEMENTED_TESTED",
+      "separate_calendar_lane_composer": "MAIN_IMPLEMENTED_TESTED",
       "real_family_gift_history_read_endpoint": "OPEN"
     },
     "guards": [
@@ -377,6 +383,54 @@
       "NO_APP_DEPLOYMENT",
       "FAMILY_GIFT_CALENDAR_DOES_NOT_CREDIT_WALLET_OR_INCREMENT_ACHIEVEMENT_STARS",
       "FAMILY_GIFT_HISTORY_READ_REQUIRES_SEPARATE_AUTHORIZATION"
+    ]
+  },
+  "badge_planner_celebration_2026_09_26": {
+    "authority": "DIRECT_USER_EARNED_BADGES_IN_WEEKLY_AND_DAILY_EXPLORATION_PLAN",
+    "policy": "OPTIONAL_RETROSPECTIVE_ENCOURAGEMENT_NOT_TASK_GOAL_OR_REQUIREMENT",
+    "displays": {
+      "weekly": "THIS_WEEK_EXPEDITION_TRACES_UP_TO_THREE_EARNED_BADGE_CHIPS_AND_DATE_MARKERS",
+      "daily": "SELECTED_DAY_FIRST_ACQUISITION_REAWARD_OR_SINGLE_PROMOTION_EVENT",
+      "no_awards": "NEUTRAL_NO_PRESSURE_COPY",
+      "visual": "TEXT_ONLY_EXPEDITION_PIN_PENDING_APPROVED_ART",
+      "member": "AUTHENTICATED_CHILD_ONLY_UNTIL_EXPLICIT_SERVER_SCOPED_PARENT_TARGET_READER"
+    },
+    "actual_source": "SIGNED_AWARD_LEDGER_VERIFIED_ASIA_SEOUL_MONTH_PROJECTION",
+    "ready_pr": {
+      "repo": "hns140412-glitch/Ready-Set",
+      "number": 111,
+      "exact_head": "c038a37bb2728522ef8312e69ee4c84745ac4725",
+      "status": "DRAFT_UNMERGED",
+      "all_exact_head_checks": "SUCCESS_INCLUDING_CHROMIUM_RUNTIME_E2E",
+      "default_live_read_adapter": "NOT_CONNECTED",
+      "main_sha_at_branch": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+      "deployment": "NONE"
+    },
+    "snap_pr": {
+      "repo": "hns140412-glitch/Snap-Pop",
+      "number": 9,
+      "exact_head": "268aac41d68dc30551e094952dddd14fc3c10713",
+      "status": "DRAFT_UNMERGED",
+      "exact_head_ci": "SUCCESS",
+      "actual_getViewer_getCollection_getMonth_getBadgeHistory": "NOT_CONNECTED",
+      "private_api_service_worker_cache": "BYPASS_ADDED_ON_DRAFT",
+      "main_sha_at_branch": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+      "deployment": "NONE"
+    },
+    "scope_guards": [
+      "BADGE_PIN_IS_DAY_LEVEL_NO_TASK_CORRELATION_WITHOUT_VERIFIED_SOURCE",
+      "NO_ACHIEVEMENT_GOAL_OR_STREAK_REQUIREMENT",
+      "NO_FAKE_LOCAL_BADGE_HISTORY_OR_BROWSER_SELF_AWARD",
+      "PARENT_HAS_NO_PERSONAL_UNEARNED_BADGE_ATLAS",
+      "NO_PRIVATE_API_CACHE",
+      "APPROVED_ASSETS_STILL_NOT_BOUND"
+    ],
+    "open": [
+      "PRODUCTION_CHILD_AUTHENTICATED_NO_STORE_BADGE_MONTH_DETAIL_AND_COLLECTION_SERVER_ENDPOINT",
+      "APPROVED_ACTIVE_BADGE_CATALOG_AND_ASSETS",
+      "RESOLVE_READY_PR_110_AND_111_BRANCH_ORDER_AND_DEPLOY_GATE",
+      "SNAP_REAL_AUTHENTICATED_CHILD_VIEWER_AND_BADGE_READ_ADAPTER",
+      "EXPLICIT_PARENT_TARGET_CHILD_READ_SCOPE_IF_PLANNER_PARENT_VIEW_IS_DESIRED"
     ]
   }
 }
