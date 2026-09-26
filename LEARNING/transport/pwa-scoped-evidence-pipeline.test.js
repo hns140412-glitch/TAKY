@@ -30,8 +30,14 @@ const pipeline=Pipeline.create({
  }
 });
 (async()=>{
- assert.equal((await pipeline.enqueue(packet('one'))).queued,true);
- assert.equal((await pipeline.enqueue(packet('one'))).duplicate,true);
+ assert.equal((await pipeline.enqueueObservation('hide-seek',{
+  event_id:'one',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
+  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A'}
+ })).queued,true);
+ assert.equal((await pipeline.enqueueObservation('hide-seek',{
+  event_id:'one',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
+  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A'}
+ })).duplicate,true);
  await assert.rejects(()=>pipeline.enqueue({...packet('two'),context:{
   ...packet('two').context,member_id:'B'}}),/EVIDENCE_ENQUEUE_SESSION_SCOPE_MISMATCH/);
  assert.equal((await pipeline.flushOne('hide-seek','worker')).status,'PENDING');
