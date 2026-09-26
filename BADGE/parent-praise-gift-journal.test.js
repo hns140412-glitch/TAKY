@@ -45,7 +45,7 @@ const item=(id,count)=>({
   const repeated=await createService(makeJournal()).sendGift(parent,item('gift-001',5));
   assert.equal(repeated.ok,true);assert.equal(repeated.idempotent,true);
   assert.equal(repeated.gift_id,first.gift_id);
-  assert.equal((await service.sendGift(parent,item('gift-001',4))).reason,'GIFT_PERSISTENCE_RECEIPT_INVALID');
+  assert.equal((await service.sendGift(parent,item('gift-001',4))).reason,'GIFT_IDEMPOTENCY_CONFLICT');
   assert.equal(makeJournal().readGiftHistory().rows.length,1);
   const second=await service.sendGift(parent,item('gift-002',5));
   assert.equal(second.ok,true);assert.equal(second.gem_count,5);
