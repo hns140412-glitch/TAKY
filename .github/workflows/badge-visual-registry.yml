@@ -66,3 +66,7 @@ jobs:
         run: node --check BADGE/family-praise-gift-journal.js
       - name: Authorized family giver and V2 journal regression
         run: node BADGE/family-praise-gift.test.js
+      - name: 60 preset and 20 history discovery syntax
+        run: node --check BADGE/badge-story-discovery.js
+      - name: Story hierarchy and history discovery regression
+        run: node BADGE/badge-story-discovery.test.js

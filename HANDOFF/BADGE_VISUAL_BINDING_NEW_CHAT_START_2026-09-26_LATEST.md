@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — 60 PRESET + ~20 HISTORY BADGE STORIES — 2026-09-26
+
+User wants 60 pre-set exploration badges (preserve original 60 historical IDs and witty names) with varied merit-scene hierarchy and about 20 extra child-personal discoveries according to actual learning history. Working rank axis POCKET(20)/FIELD(20)/EXPEDITION(14)/SECRET(6), tone independently WITTY/WARM/BRAVE/CURIOUS. This is narrative / visual distinctiveness, NOT the existing approved reaward star-tier axis.
+
+Read `BADGE/badge-60-story-20-history-working.json`, `BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md`, validator/proposal tests and CURRENT. All 60 source labels/IDs preserved; they are pre-set story slots NOT automatically runtime active or image approved. The 20 learning-history templates only produce child-scoped `REVIEW_REQUIRED_NOT_AWARD` candidates from distinct evidence verified by injected trusted capability; real Learning Engine evidence adapter and Decision/Award Ledger wiring still OPEN. No screenshot/telemetry-to-award shortcuts.
+
+Scene entrance: small moment clue -> pastel imaginary exploration merit patch -> separate child-specific avatar -> owned/stars from signed ledger -> gradient-fade border. Parent remains without personal unearned atlas; family praise gift separate and gem 1..5 per gift. No 60 activation, no A/B asset approval, no Netlify deployment. Verify exact-head CI prior to main promotion.
+
+---
+
 # LATEST RESUME OVERRIDE — READY FAMILY RELATION / GIFT PERMISSION PR — 2026-09-26
 
 TAKY family gift V2 in TAKY main remains authority. Ready-Set PR #110 at exact head `274ad4d6a14a202b69c9f808e74286140c2ed92a` (base Ready main `1d672d862cc8329a5f19ca91c9ed6a338752f5ae`) implements separately provisioned FAMILY_ADULT and verified relationships (grandparent, guardian, other adult family) without Parent Planner or Child learner authority. Sibling remains CHILD relation with distinct gift permission. Trusted Identity app metadata `family_permissions` gates `FAMILY_PRAISE_GIFT`, no relation grants automatically. Read-only GET /api/family/gift-permission does not authorize sending a gift. FAMILY_ADULT is denied old Ready Planner sync both client and server.
