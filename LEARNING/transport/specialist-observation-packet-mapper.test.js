@@ -4,7 +4,7 @@ const Mapper=require('./specialist-observation-packet-mapper.js');
 const session={authenticated:true,family_id:'F',selected_member_id:'A'};
 for(const [app,type] of Object.entries(Mapper.TYPES)){
  const event={event_id:app+'-e1',source_app:app,type,occurred_at:'2026-09-27T10:00:00Z',
-  member_id:'A',payload:{member_id:'A',observation_only:true,global_mastery_claim:false}};
+  member_id:'A',payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary',observation_only:true,global_mastery_claim:false}};
  const packet=Mapper.map({source_app:app,event,session});
  assert.equal(packet.context.member_id,'A');
  assert.equal(packet.evidence_policy.observation_only,true);
