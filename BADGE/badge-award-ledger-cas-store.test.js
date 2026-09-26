@@ -46,6 +46,7 @@ const verifier=x=>x?.trusted===true?{ok:true,receipt:x.receipt}:{ok:false};
 const active=({family_id:f,child_id:c,badge_id:b})=>
  f===family_id&&c===child_id&&b===badge_id;
 const create=(opts={})=>createCasAwardLedger({
+ experimentalNonProduction:true,
  store,family_id,signingKey:key,verifyDecision:verifier,isBadgeActive:active,
  now:()=> '2026-09-26T15:00:00.000Z',...opts
 });
@@ -60,8 +61,10 @@ const projection=(ledger)=>deriveFromLedger({
  source:ledger.source,child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATINUM']
 });
 (async()=>{
+ assert.throws(()=>createCasAwardLedger({store,family_id,signingKey:key,
+   verifyDecision:verifier,isBadgeActive:active}),/EXPERIMENTAL_CAS_NOT_PRODUCTION_STORAGE/);
  assert.throws(()=>createCasAwardLedger({family_id,signingKey:key,
-   verifyDecision:verifier,isBadgeActive:active}),/ATOMIC_CONDITIONAL_STORE_REQUIRED/);
+   experimentalNonProduction:true,verifyDecision:verifier,isBadgeActive:active}),/ATOMIC_CONDITIONAL_STORE_REQUIRED/);
  assert.throws(()=>create({signingKey:Buffer.alloc(3)}),/TRUSTED_SIGNING_KEY_REQUIRED/);
  assert.throws(()=>create({maxRetries:0}),/BOUNDED_CAS_RETRIES_REQUIRED/);
  assert.throws(()=>create({maxRetries:9}),/BOUNDED_CAS_RETRIES_REQUIRED/);
@@ -130,7 +133,7 @@ const projection=(ledger)=>deriveFromLedger({
  assert.equal((await projection(wrong)).ok,false);
  assert.equal((await award(wrong,5,'REAWARD')).reason,'STRONG_LEDGER_READ_OR_INTEGRITY_FAILED');
  const foreign=createCasAwardLedger({
-   store,family_id:'FAMILY_B',signingKey:key,verifyDecision:verifier,
+   store,family_id:'FAMILY_B',experimentalNonProduction:true,signingKey:key,verifyDecision:verifier,
    isBadgeActive:()=>false
  });
  assert.equal((await deriveFromLedger({source:foreign.source,child_id,badge_id})).ownership_state,'LOCKED');
