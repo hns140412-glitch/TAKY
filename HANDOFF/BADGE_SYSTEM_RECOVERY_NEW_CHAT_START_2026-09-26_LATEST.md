@@ -226,3 +226,28 @@ Hard locks continue:
 - USER != DEBUGGER.
 
 Do not reopen these implementation items without new regression evidence.
+
+
+## 10. CREW CONTENT EVIDENCE REVIEW — 2026-09-26
+
+State: `CONTENT_APPROVAL_HOLD_CONFIRMED`
+
+Evidence sources rechecked:
+- Snap & Pop historical UI MASTER revisions in ChatGPT Library;
+- Snap handover material;
+- Library image assets matching Snap / Character / Guide / Maltipoo queries;
+- Snap-Pop repository asset tree;
+- TAKY-ASSETS;
+- TAKY Guide / Character authority documents.
+
+Findings:
+- historical material preserves Character Master / Guide Companion identity rules;
+- concepts may depict a boy/girl/Maltipoo for structure explanation, but those depictions are not automatically canonical runtime assets;
+- Library image hits are UI boards / master-guide boards, not individually approved Crew runtime image files;
+- no reviewed/approved Snap-owned individual Crew runtime asset file was recovered;
+- initial repository `character_master_hd.jpg` and `maltipoo_guide_hd.jpg` remain lineage-only under current review authority.
+
+Conclusion:
+- `CONTENT_APPROVAL_HOLD_CONFIRMED`
+- `IMPLEMENTATION_REOPEN_REQUIRED = false`
+- when genuine approved Crew content becomes available, add an approval registry record and bind it; do not redesign SP-BADGE-008 implementation.
