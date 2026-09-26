@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from github_queue_consumer import consume, QUEUE_PREFIX
-from github_issue_executor_queue import BEGIN_RECEIPT, BEGIN_RESULT
+from github_issue_executor_queue import BEGIN_CANCEL, BEGIN_RECEIPT, BEGIN_RESULT
 
 ISSUE_ACK="<!-- TAKY_QUEUE_ISSUE_ACK -->"
 SOURCE_PREFIX="<!-- TAKY_QUEUE_SOURCE_COMMENT:"
@@ -26,6 +26,7 @@ def plan(snapshot: dict) -> dict:
     bodies=[str(c.get("body") or "") for c in comments if isinstance(c,dict)]
     out=[]
     processed=[]
+    close_issue=False
 
     if not any(ISSUE_ACK in b for b in bodies):
         result=consume({"_event_name":"issues","issue":issue})
@@ -38,17 +39,34 @@ def plan(snapshot: dict) -> dict:
             continue
         cid=c.get("id")
         body=str(c.get("body") or "")
-        if BEGIN_RECEIPT not in body and BEGIN_RESULT not in body:
+        if BEGIN_RECEIPT not in body and BEGIN_RESULT not in body and BEGIN_CANCEL not in body:
             continue
         marker=f"{SOURCE_PREFIX}{cid} -->"
         if any(marker in b for b in bodies):
             continue
-        result=consume({"_event_name":"issue_comment","issue":issue,"comment":{"id":cid,"body":body}})
+        author=c.get("author") or c.get("user") or {}
+        result=consume({
+            "_event_name":"issue_comment",
+            "issue":issue,
+            "comment":{
+                "id":cid,
+                "body":body,
+                "author":author,
+                "authorAssociation":c.get("authorAssociation") or c.get("author_association"),
+            },
+        })
         if result.get("comment"):
             out.append(result["comment"])
             processed.append({"kind":"comment","comment_id":cid,"action":result.get("action")})
+        if result.get("close_issue") is True:
+            close_issue=True
 
-    return {"pass":True,"comments_to_publish":out,"processed":processed}
+    return {
+        "pass":True,
+        "comments_to_publish":out,
+        "processed":processed,
+        "close_issue":close_issue,
+    }
 
 def main()->int:
     ap=argparse.ArgumentParser()
