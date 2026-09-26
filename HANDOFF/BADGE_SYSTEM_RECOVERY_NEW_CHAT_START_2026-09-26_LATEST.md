@@ -181,3 +181,48 @@ Without one of those triggers:
 
 `NO_EXECUTABLE_CODE_OPEN != FINAL_MAIN_MERGED`
 `CONTENT_APPROVAL_HOLD != IMPLEMENTATION_GAP`
+
+
+## 9. FINAL MAIN CLOSURE — 2026-09-26
+
+All three implementation PRs were intentionally merged and verified on current main.
+
+### Hide & Seek / SP-BADGE-006
+- PR #17 merged.
+- main exact head: `1156c559bbc3da239b30606912ab0ae0548af0a3`
+- post-merge `Validate Hide & Seek` = SUCCESS
+- state: `FINAL_MAIN_CLOSED`
+
+### Snap & Pop / SP-BADGE-008
+- PR #8 merged.
+- main exact head: `3de97be0d12dd6244a942b0c137c2efe578a43b6`
+- post-merge `Validate Snap & Pop` = SUCCESS
+- World / Theme implementation: `FINAL_MAIN_CLOSED`
+- Crew implementation: `FINAL_MAIN_CLOSED`
+- Crew content: `CONTENT_APPROVAL_HOLD`
+- missing approved Crew content SHALL NOT reopen implementation.
+
+### Ready & Set / World State consumer
+- PR #105 merged.
+- main exact head: `6ab7bbe17625ed6cf227ff1b689c76564119c1bd`
+- post-merge `Ready Integration CI` = SUCCESS
+- post-merge `Ready Runtime E2E` = SUCCESS
+- state: `FINAL_MAIN_CLOSED`
+
+### Final execution state
+
+`FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD`
+
+Executable code OPEN: NONE.
+
+Only remaining dependency:
+- genuine Snap-owned reviewed/approved individual Crew/Character asset content.
+
+Hard locks continue:
+- historical 60-badge catalog remains `WORKING_DRAFT_NOT_ACTIVE`;
+- no auto canonicalize / activate / award;
+- no telemetry inference for ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR;
+- no DATA INDEXING/vector scope switch;
+- USER != DEBUGGER.
+
+Do not reopen these implementation items without new regression evidence.
