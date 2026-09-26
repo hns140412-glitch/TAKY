@@ -23,6 +23,7 @@ const members={
 };
 const ledger=(family_id)=>createLedger({
  directory:path.join(root,crypto.createHash('sha256').update(family_id).digest('hex')),
+ family_id,
  signingKey:key,
  verifyDecision:x=>x?.trusted===true?{ok:true,receipt:x.receipt}:{ok:false},
  isBadgeActive:x=>x.badge_id==='APPROVED_BADGE'&&x.child_id==='CHILD_A'
@@ -33,13 +34,14 @@ function reader({memberOverride=null,sourceOverride=null}={}){
   lookupIdentityMember:async id=>memberOverride||members[id]||null,
   openFamilyLedgerSource:async ({family_id})=>{
    if(sourceOverride)return sourceOverride;
-   return Object.freeze({...ledger(family_id).source,family_id});
+   return ledger(family_id).source;
   }
  });
 }
 const args={child_id:'CHILD_A',badge_id:'APPROVED_BADGE',tier_order:tiers};
 const award=(i,kind)=>ledger('FAMILY_A').appendApprovedDecision({trusted:true,receipt:{
  decision_id:'decision-'+i,decision_ref:'verified-test-decision-'+i,
+ family_id:'FAMILY_A',
  child_id:'CHILD_A',badge_id:'APPROVED_BADGE',
  decision_status:'APPROVED',award_kind:kind,approved_at:'2026-09-26T09:00:00Z'
 }});
