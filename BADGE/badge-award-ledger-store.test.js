@@ -9,12 +9,12 @@ const {deriveFromLedger}=require('./badge-ledger-projection-bridge.js');
 
 const directory=fs.mkdtempSync(path.join(os.tmpdir(),'taky-badge-award-ledger-'));
 const signingKey=crypto.randomBytes(32);
-const child_id='CHILD_A',badge_id='ACTIVE_BADGE_1';
+const family_id='FAMILY_A',child_id='CHILD_A',badge_id='ACTIVE_BADGE_1';
 const verifier=input=>input?.trustedDecision===true ? {ok:true,receipt:input.receipt} : {ok:false};
 const active=({child_id:member,badge_id:id})=>member==='CHILD_A'&&id==='ACTIVE_BADGE_1';
-const create=(key=signingKey)=>createLedger({directory,signingKey:key,verifyDecision:verifier,isBadgeActive:active});
+const create=(key=signingKey)=>createLedger({directory,family_id,signingKey:key,verifyDecision:verifier,isBadgeActive:active});
 const receipt=(i,kind='REAWARD',override={})=>({
- decision_id:'decision-'+i,decision_ref:'DECISION_LEDGER_REF_'+i,
+ decision_id:'decision-'+i,decision_ref:'DECISION_LEDGER_REF_'+i,family_id,
  child_id,badge_id,decision_status:'APPROVED',award_kind:kind,approved_at:'2026-09-26T09:00:00Z',...override
 });
 const award=(store,i,kind,override={},trustedDecision=true)=>
@@ -23,12 +23,14 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
 
 (async()=>{
  try{
-  assert.throws(()=>createLedger({directory,verifyDecision:verifier,isBadgeActive:active}),/TRUSTED_SIGNING_KEY_REQUIRED/);
+  assert.throws(()=>createLedger({directory,family_id,verifyDecision:verifier,isBadgeActive:active}),/TRUSTED_SIGNING_KEY_REQUIRED/);
+  assert.throws(()=>createLedger({directory,signingKey,verifyDecision:verifier,isBadgeActive:active}),/EXPLICIT_FAMILY_SCOPE_REQUIRED/);
   const store=create();
   let projected=await deriveFromLedger({...options,source:store.source});
   assert.equal(projected.ok,true);
   assert.equal(projected.ownership_state,'LOCKED');
   assert.equal(award(store,0,'INITIAL_AWARD',{},false).reason,'APPROVED_DECISION_REQUIRED');
+  assert.equal(award(store,0,'INITIAL_AWARD',{family_id:'FAMILY_B'}).reason,'DECISION_FAMILY_SCOPE_MISMATCH');
   assert.equal(award(store,7,'INITIAL_AWARD',{decision_status:'REJECTED'}).reason,'APPROVED_DECISION_RECEIPT_INCOMPLETE');
   assert.equal(award(store,0,'INITIAL_AWARD',{badge_id:'WORKING_DRAFT_001'}).reason,'BADGE_NOT_ACTIVE_OR_CHILD_NOT_AUTHORIZED');
   assert.equal(award(store,0,'INITIAL_AWARD',{child_id:'CHILD_B'}).reason,'BADGE_NOT_ACTIVE_OR_CHILD_NOT_AUTHORIZED');
