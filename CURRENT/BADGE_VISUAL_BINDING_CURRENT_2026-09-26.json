@@ -115,7 +115,10 @@
     "connect Parent Praise Badge Gift Journal to child Family Praise Collection, distinct from achievement award ledger",
     "extend Ready identity family graph beyond binary Parent/Child without changing existing membership authority",
     "establish server-verified explicit Family Praise Gift capability per member, not inferred from kinship",
-    "connect V2 family gifts to real Ready service, approved family praise catalog and child wallet; no Netlify deployment without gates"
+    "connect V2 family gifts to real Ready service, approved family praise catalog and child wallet; no Netlify deployment without gates",
+    "resolve Ready PR #110 safe main promotion only after deploy gate and auto-deploy coupling verification",
+    "implement trusted family invitation/relationship and gift permission grant management with explicit consent",
+    "bind TAKY V2 family praise gift service to production Ready API, shared gift journal, child gem wallet and approved assets"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -249,12 +252,30 @@
       "v2_gift_service": "PR_149_EXACT_HEAD_TESTED",
       "v2_signed_journal": "PR_149_EXACT_HEAD_TESTED",
       "v1_parent_only_modules": "PRESERVED_HISTORICAL_NOT_LATEST",
-      "ready_family_identity": "CURRENT_REAL_CODE_PARENT_CHILD_ONLY",
+      "ready_family_identity": "PR_110_IMPLEMENTED_TESTED_DRAFT_NOT_MAIN",
       "ready_grandparent_relative_relationship_provider": "OPEN",
-      "trusted_family_gift_permission_provider": "OPEN",
+      "trusted_family_gift_permission_provider": "PR_110_SERVER_READ_PREDICATE_IMPLEMENTED_NO_LIVE_GIFT_HANDLER",
       "actual_ready_endpoint_and_shared_persistence": "OPEN",
       "child_gem_wallet_and_approved_badge_collection": "OPEN",
-      "v2_ci_run": "36236992963_SUCCESS_BEFORE_CURRENT_STATUS_COMMIT"
+      "v2_ci_run": "36236992963_SUCCESS_BEFORE_CURRENT_STATUS_COMMIT",
+      "ready_family_auth_pr": {
+        "repository": "hns140412-glitch/Ready-Set",
+        "pr": 110,
+        "status": "DRAFT_UNMERGED_ALL_PR_HEAD_CHECKS_SUCCESS",
+        "head": "274ad4d6a14a202b69c9f808e74286140c2ed92a",
+        "base_main": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+        "capabilities": [
+          "PROVISIONED_FAMILY_ADULT_WITH_SEPARATE_RELATION",
+          "SERVER_APP_METADATA_FAMILY_PRAISE_GIFT_PERMISSION_READ",
+          "EXISTING_PARENT_CHILD_AUTHORITY_PRESERVED",
+          "FAMILY_ADULT_BLOCKED_FROM_PLANNER_SYNC",
+          "READ_ONLY_SERVER_CAPABILITY_ENDPOINT"
+        ],
+        "ci": "READY_INTEGRATION_AND_RUNTIME_E2E_AND_ALL_OTHER_CHECKS_SUCCESS",
+        "merge": "NOT_DONE_TO_AVOID_UNVERIFIED_AUTODEPLOY_GATE",
+        "netlify_tool_called": false
+      },
+      "gift_permission_grant_workflow": "OPEN_NO_SELF_ASSIGNMENT"
     },
     "authority": "DIRECT_USER_2026-09-26"
   }
