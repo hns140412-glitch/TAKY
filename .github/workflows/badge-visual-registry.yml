@@ -40,3 +40,11 @@ jobs:
         run: node --check BADGE/badge-ledger-projection-bridge.js
       - name: Award Ledger bridge regression
         run: node BADGE/badge-ledger-projection-bridge.test.js
+      - name: Durable Award Ledger syntax
+        run: node --check BADGE/badge-award-ledger-store.js
+      - name: Durable Award Ledger persisted replay
+        run: node BADGE/badge-award-ledger-store.test.js
+      - name: Verified ledger-to-visual syntax
+        run: node --check BADGE/badge-ledger-visual-binding.js
+      - name: Verified ledger-to-visual persisted integration
+        run: node BADGE/badge-ledger-visual-binding.test.js
