@@ -260,6 +260,9 @@ jobs:
           node --check LEARNING/transport/pwa-central-evidence-ack-client.js
           node --check LEARNING/transport/pwa-central-evidence-ack-client.test.js
           node LEARNING/transport/pwa-central-evidence-ack-client.test.js
+          node --check LEARNING/transport/scoped-evidence-outbox.js
+          node --check LEARNING/transport/scoped-evidence-outbox.test.js
+          node LEARNING/transport/scoped-evidence-outbox.test.js
           node --check LEARNING/transport/encrypted-drive-archive-export.js
           node --check LEARNING/transport/encrypted-drive-archive-export.test.js
           node LEARNING/transport/encrypted-drive-archive-export.test.js
