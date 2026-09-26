@@ -251,6 +251,9 @@ jobs:
           node --check LEARNING/transport/server-specialist-verifier.js
           node --check LEARNING/transport/server-specialist-verifier.test.js
           node LEARNING/transport/server-specialist-verifier.test.js
+          node --check LEARNING/transport/server-specialist-reference-store.js
+          node --check LEARNING/transport/server-specialist-reference-store.test.js
+          node LEARNING/transport/server-specialist-reference-store.test.js
           node --check LEARNING/transport/central-store-conformance.js
           node --check LEARNING/transport/central-store-conformance.test.js
           node LEARNING/transport/central-store-conformance.test.js
