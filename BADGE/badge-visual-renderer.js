@@ -17,12 +17,15 @@ function buildRenderModel(record={},ownership={},profile={}){
   const stars=ownership.star_count;
   if(!validStars(stars))issues.push('REAWARD_STAR_COUNT_0_TO_5_REQUIRED');
   if(state==='LOCKED'&&stars!==0)issues.push('LOCKED_BADGE_CANNOT_HAVE_REAWARD_STARS');
-  const childId=clean(ownership.child_id),profileChildId=clean(profile.child_id);
+  const childId=clean(ownership.child_id),profileChildId=clean(profile?.child_id);
+  // The approved badge BASE may render on its own. A profile overlay is optional,
+  // but if supplied it must be complete and scoped to this child.
+  const profileProvided=profile!=null&&typeof profile==='object'&&Object.keys(profile).length>0;
   if(!childId)issues.push('CHILD_SCOPE_REQUIRED');
   if(state==='EARNED'){
     if(ownership.ownership_source!=='AWARD_LEDGER'||ownership.award_status!=='AWARDED')issues.push('VERIFIED_AWARD_OWNERSHIP_REQUIRED');
     if(!clean(ownership.tier))issues.push('TIER_REQUIRED');
-    if(profile.authority!=='CHILD_PROFILE'||!profileChildId||profileChildId!==childId||!clean(profile.avatar_asset_ref))
+    if(profileProvided&&(profile.authority!=='CHILD_PROFILE'||!profileChildId||profileChildId!==childId||!clean(profile.avatar_asset_ref)))
       issues.push('MATCHING_CHILD_PROFILE_OVERLAY_REQUIRED');
   }
   if(state==='LOCKED'&&profileChildId&&profileChildId!==childId)issues.push('CROSS_CHILD_PROFILE_FORBIDDEN');
@@ -35,7 +38,7 @@ function buildRenderModel(record={},ownership={},profile={}){
     asset_version:clean(record.asset_version,80)||null,
     child_id:childId,ownership_state:state,tier:clean(ownership.tier,40)||null,
     star_count:stars,
-    character_overlay_ref:state==='EARNED'?clean(profile.avatar_asset_ref):null,
+    character_overlay_ref:state==='EARNED'&&profileProvided?clean(profile.avatar_asset_ref):null,
     silhouette:state==='LOCKED',
     border_fx:'SOFT_RADIAL_GRADIENT_FADE',
     insignia_style:'FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA',
@@ -74,17 +77,21 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
     character.decoding='async';
     figure.append(character);
   }
-  const stars=doc.createElement('div');
-  stars.className='takyBadgeReawardStars';
-  stars.setAttribute('aria-label','재획득 별 '+model.star_count+'개');
-  for(let i=0;i<5;i++){
-    const star=doc.createElement('span');
-    star.className=i<model.star_count?'is-earned':'is-empty';
-    star.textContent='★';
-    star.setAttribute('aria-hidden','true');
-    stars.append(star);
+  // The upper-arc ornament represents earned reacquisitions only: zero has no stars.
+  // Keep the art and child profile separate from the progress ornament.
+  if(model.ownership_state==='EARNED'&&model.star_count>0){
+    const stars=doc.createElement('div');
+    stars.className='takyBadgeReawardStars';
+    stars.setAttribute('aria-label','재획득 별 '+model.star_count+'개');
+    for(let i=0;i<model.star_count;i++){
+      const star=doc.createElement('span');
+      star.className='takyBadgeReawardStar';
+      star.setAttribute('aria-hidden','true');
+      // CSS draws the medal ornament, not a platform-dependent text glyph.
+      stars.append(star);
+    }
+    figure.append(stars);
   }
-  figure.append(stars);
   const caption=doc.createElement('figcaption');
   caption.textContent=model.title;
   figure.append(caption);
