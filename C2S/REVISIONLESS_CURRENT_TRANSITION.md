@@ -47,7 +47,7 @@ These SHA values are **dated source evidence**, not permanent CURRENT. Requery b
 
 ## 4. Rollout boundary
 A. FIRST: revisionless language + migration coverage on separate candidate branch; no main promotion.
-B. NEXT: implementation owner scans readers/references, introduces namespace-stable alias selector and compatibility map; test stale/higher-number/ambiguous/current-evidence cases.
+B. IN PROGRESS: read-only semantic owner resolver and eight focused tests implemented in `ENFORCEMENT/semantic_current_resolver.py` / `_test.py`; wired to TAKY Enforcement Replay. Unknown/higher-number/ambiguous/legacy paths fail closed. DATA resolver reads explicitly selected IDs, not filename sort. External Drive receipt readback and real app consumer migration remain OPEN; do not describe this standalone reader as universal interception.
 C. THEN: migrate actual owners one by one with exact original hash and readback; start with data source selector and shared-family owner path, not 679-source reindex.
 D. LATER: optional physical rename after references are updated, archive original paths as history. Separate necessary runtime/schema/API/SW/model compatibility versioning from document authority.
 E. Test productive system outcomes (source->index->learning->planner->app->result) rather than endlessly generating new revision reports.
