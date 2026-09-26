@@ -1,12 +1,24 @@
-# LATEST RESUME OVERRIDE — FINAL MAIN CLOSURE — 2026-09-26
+# BADGE SYSTEM RECOVERY — NEW CHAT START — 2026-09-26 LATEST
 
-**This section overrides all older/pre-merge status text below.**
-
-Current state: `FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD`  
+Status: `FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD`  
 Executable code OPEN: **NONE**  
-Implementation reopen required: **NO**
+Implementation reopen required: **NO**  
+USER != DEBUGGER.
 
-Final main heads:
+## 0. RESUME HARD LOCK
+
+Resume in this order:
+
+INHERIT APPROVED STATE  
+→ restore `CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json`  
+→ verify current app main heads  
+→ inherit FINAL_MAIN_CLOSED items  
+→ act only if new regression evidence or approved Crew content exists
+
+Do not reopen CLOSED implementation without new regression evidence.
+
+## 1. FINAL MAIN HEADS
+
 - Hide & Seek: `1156c559bbc3da239b30606912ab0ae0548af0a3`
 - Snap & Pop: `3de97be0d12dd6244a942b0c137c2efe578a43b6`
 - Ready & Set: `6ab7bbe17625ed6cf227ff1b689c76564119c1bd`
@@ -17,272 +29,105 @@ Post-merge regression:
 - Ready `Ready Integration CI` = SUCCESS
 - Ready `Ready Runtime E2E` = SUCCESS
 
-Only remaining dependency:
-- genuine Snap-owned reviewed/approved individual Crew/Character asset content.
+## 2. SP-BADGE-006
 
-When that content exists:
-- add an approval registry record and bind it;
-- do **not** redesign or reopen SP-BADGE-008 implementation.
-
-Hard locks:
-- 60 historical badge catalog = `WORKING_DRAFT_NOT_ACTIVE`
-- no auto canonicalize / activate / award
-- no telemetry auto-inference for `ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR`
-- do not switch this recovery task to DATA INDEXING/vector work
-- USER != DEBUGGER
-
----
-
-# BADGE SYSTEM RECOVERY — NEW CHAT START — 2026-09-26 LATEST
-
-Status: PARTIAL / HOLD-SAFE  
-Scope lock: BADGE SYSTEM RECOVERY ONLY  
-Do not switch to DATA INDEXING / vector work.  
-USER != DEBUGGER.
-
-## 0. HARD LOCK
-
-Resume in this order:
-
-INHERIT APPROVED STATE  
-→ restore BADGE CURRENT  
-→ verify exact app heads / PR heads  
-→ inherit CLOSED  
-→ execute only remaining OPEN
-
-Do not reopen CLOSED without new regression evidence.
-
-## 1. Historical catalog
-
-- 60 historical badge catalog: recovered.
-- State: `WORKING_DRAFT_NOT_ACTIVE`.
-- Auto canonicalize: FORBIDDEN.
-- Auto activate: FORBIDDEN.
-- Auto award: FORBIDDEN.
-
-## 2. CLOSED inherited
-
-- Achievement Decision: implemented.
-- Award Ledger: implemented.
-- Candidate Review: implemented.
-- Hide/Snap badge-source auto-inference prohibition regression: verified.
-
-## 3. SP-BADGE-006
-
-State: `IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED`
-
-Repository: `hns140412-glitch/Hide-Seek`  
-Draft PR: #17  
-Exact head: `93aa625f91e027cfd6bc212e2b74d8418d3f9b81`
+State: `FINAL_MAIN_CLOSED`
 
 Implemented:
-- real child-authored self-reflection UX producer after TEST_READY;
-- evidence emitted only after explicit child selections + explicit confirmation;
-- evidence type = `SELF_REFLECTION_EVIDENCE`;
+- explicit child-authored self-reflection UX producer;
+- `SELF_REFLECTION_EVIDENCE` only after explicit selection + confirmation;
 - `verified_outcome=null`;
-- direct mastery authority forbidden;
+- mastery authority forbidden;
 - direct award forbidden;
 - Candidate Review required;
-- telemetry-driven inference for `ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR` forbidden.
+- no telemetry inference for `ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR`.
 
-CI:
-- Learning Runtime Bridge Validation = SUCCESS
-- Validate Hide & Seek = SUCCESS
+No executable OPEN remains.
 
-Remaining OPEN:
-- merge decision for draft PR #17;
-- after merge, exact-main regression only.
+## 3. SP-BADGE-008
 
-## 4. SP-BADGE-008
-
-State: `IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD`
-
-Repository: `hns140412-glitch/Snap-Pop`  
-Draft PR: #8  
-Exact head: `94c637fc87983a490ebf1047a07f108474b5dca1`
+State: `FINAL_MAIN_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD`
 
 World / Theme:
-- reviewed runtime scene `assets/world/golden_world_scene.jpg` explicitly bound;
-- state = `IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED`;
-- `assets/reference/approved_visual_source.png` remains reference/lineage only;
-- reference-board direct runtime binding forbidden;
-- automatic asset promotion forbidden;
-- automatic RELEASE PASS forbidden.
-- `assets/character/character_master_hd.jpg` and `assets/guide/maltipoo_guide_hd.jpg` are initial lineage assets, NOT reviewed individual Crew binding evidence.
-- Ready Core 6 Visual IDs SHALL NOT be auto-imported into Snap; project visual authority is owner-scoped.
+- reviewed runtime world binding complete;
+- reference image remains lineage/reference only;
+- auto asset promotion forbidden;
+- auto RELEASE PASS forbidden.
 
-Crew Visual:
-- implementation state = `CLOSED`.
-- content state = `CONTENT_APPROVAL_HOLD`.
-- Snap-owned Crew Asset Approval Gate/Registry is implemented.
-- runtime binding requires `owner=snap-pop`, `APPROVED_RUNTIME_ASSET`, explicit user confirmation and review evidence.
-- initial `character_master_hd.jpg` / `maltipoo_guide_hd.jpg` remain lineage-only and cannot satisfy approval.
-- Ready Core 6 cross-app auto import remains forbidden.
-- Do not invent or auto-promote a Crew asset.
-- Actual reviewed/approved individual Crew asset remains a content dependency, not an implementation gap.
-
-CI:
-- Validate Snap & Pop = SUCCESS
-
-Remaining OPEN:
-- actual Snap-owned reviewed/approved individual Crew/Character asset approval/content;
-- merge decision for draft PR #8;
-- post-merge exact-main regression.
-
-Do NOT reopen SP-BADGE-008 implementation merely because approved Crew content is not yet supplied.
-
-## 5. Ready World State consumer
-
-State: `IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED`
-
-Repository: `hns140412-glitch/Ready-Set`  
-Draft PR: #105  
-Exact head: `ccccdbf3077ab055f1c6d964ba8988ebf1656bff`
-
-Implemented:
-- Ready consumes reviewed World State / Theme Expression only;
-- Ready does not own World State;
-- Ready does not mutate Crew identity;
-- unreviewed World/Crew visual rejected;
-- reference-board direct binding forbidden;
-- automatic asset promotion forbidden;
-- automatic badge activation forbidden;
-- automatic award forbidden.
-
-Exact-head CI:
-- Learning Runtime Bridge Validation = SUCCESS
-- Ready Integration CI = SUCCESS
-- Planner Free Window Gate = SUCCESS
-- Ready Runtime E2E = SUCCESS
-
-Remaining OPEN:
-- merge decision for draft PR #105;
-- after merge, exact-main verification.
-
-## 6. Do not regress
-
-Do not:
-- reactivate the 60 historical catalog;
-- infer `ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR` from telemetry;
-- turn correct/incorrect learning telemetry directly into badge awards;
-- treat a reference image as a reviewed runtime asset;
-- let Ready become World State owner;
-- switch this recovery session into DATA INDEXING/vector work.
-
-## 7. Next execution order
-
-1. Keep SP-BADGE-006 implementation closed candidate.
-2. Keep SP-BADGE-008 World/Theme closed candidate.
-3. Keep Crew content in CONTENT_APPROVAL_HOLD; implementation stays CLOSED unless regression evidence appears.
-4. Merge draft PRs only by intentional decision.
-5. After any merge, verify exact main heads and rerun regressions.
-6. Only then promote corresponding items from candidate to final CLOSED.
-
-
-## 8. FINAL EXECUTION GATE — 2026-09-26
-
-State: `NO_EXECUTABLE_CODE_OPEN`
-
-Verified merge readiness:
-- Hide & Seek PR #17
-  - head `93aa625f91e027cfd6bc212e2b74d8418d3f9b81`
-  - current main/base `39af27ec92396d67ac1e50f1dfebe3446b41f15a`
-  - mergeable = true
-  - all relevant CI = SUCCESS
-- Snap & Pop PR #8
-  - head `94c637fc87983a490ebf1047a07f108474b5dca1`
-  - current main/base `c250159949dc57545c04f97dc62fb9fdc7a966f1`
-  - mergeable = true
-  - all relevant CI = SUCCESS
-- Ready & Set PR #105
-  - head `ccccdbf3077ab055f1c6d964ba8988ebf1656bff`
-  - current main/base `e030d685c9717f9fab691dab379326e9e9067303`
-  - mergeable = true
-  - all relevant CI = SUCCESS
-
-No stale-base drift exists at this checkpoint.
-
-Allowed next actions only:
-1. intentional merge decision for one or more draft PRs;
-2. genuine Snap-owned reviewed/approved Crew asset content becomes available;
-3. after a merge, exact-main regression verification.
-
-Without one of those triggers:
-- do not reopen SP-BADGE-006 implementation;
-- do not reopen SP-BADGE-008 implementation;
-- do not rebuild Ready World State consumer;
-- do not activate the 60 historical catalog;
-- do not switch to DATA INDEXING/vector work.
-
-`NO_EXECUTABLE_CODE_OPEN != FINAL_MAIN_MERGED`
-`CONTENT_APPROVAL_HOLD != IMPLEMENTATION_GAP`
-
-
-## 9. FINAL MAIN CLOSURE — 2026-09-26
-
-All three implementation PRs were intentionally merged and verified on current main.
-
-### Hide & Seek / SP-BADGE-006
-- PR #17 merged.
-- main exact head: `1156c559bbc3da239b30606912ab0ae0548af0a3`
-- post-merge `Validate Hide & Seek` = SUCCESS
-- state: `FINAL_MAIN_CLOSED`
-
-### Snap & Pop / SP-BADGE-008
-- PR #8 merged.
-- main exact head: `3de97be0d12dd6244a942b0c137c2efe578a43b6`
-- post-merge `Validate Snap & Pop` = SUCCESS
-- World / Theme implementation: `FINAL_MAIN_CLOSED`
-- Crew implementation: `FINAL_MAIN_CLOSED`
-- Crew content: `CONTENT_APPROVAL_HOLD`
-- missing approved Crew content SHALL NOT reopen implementation.
-
-### Ready & Set / World State consumer
-- PR #105 merged.
-- main exact head: `6ab7bbe17625ed6cf227ff1b689c76564119c1bd`
-- post-merge `Ready Integration CI` = SUCCESS
-- post-merge `Ready Runtime E2E` = SUCCESS
-- state: `FINAL_MAIN_CLOSED`
-
-### Final execution state
-
-`FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD`
-
-Executable code OPEN: NONE.
+Crew:
+- implementation is CLOSED;
+- Snap-owned Crew Asset Approval Gate/Registry is implemented;
+- approved runtime binding requires:
+  - `owner=snap-pop`
+  - `APPROVED_RUNTIME_ASSET`
+  - explicit user confirmation
+  - review evidence
+- initial `character_master_hd.jpg` and `maltipoo_guide_hd.jpg` remain lineage-only;
+- Ready Core 6 cross-app auto import is forbidden;
+- missing approved Crew content is a content dependency, not an implementation gap.
 
 Only remaining dependency:
 - genuine Snap-owned reviewed/approved individual Crew/Character asset content.
 
-Hard locks continue:
-- historical 60-badge catalog remains `WORKING_DRAFT_NOT_ACTIVE`;
-- no auto canonicalize / activate / award;
-- no telemetry inference for ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR;
-- no DATA INDEXING/vector scope switch;
-- USER != DEBUGGER.
+When approved content exists:
+- add an approval registry record;
+- bind the approved asset;
+- do not redesign SP-BADGE-008 implementation.
 
-Do not reopen these implementation items without new regression evidence.
+## 4. READY WORLD STATE CONSUMER
 
+State: `FINAL_MAIN_CLOSED`
 
-## 10. CREW CONTENT EVIDENCE REVIEW — 2026-09-26
+Implemented:
+- consumer-only reviewed World State / Theme Expression;
+- Ready does not own World State;
+- Ready does not mutate Crew identity;
+- unreviewed World/Crew visuals rejected;
+- reference-board direct binding forbidden;
+- auto asset promotion / badge activation / award forbidden.
+
+No executable OPEN remains.
+
+## 5. HISTORICAL BADGE CATALOG
+
+60 historical badges:
+- state = `WORKING_DRAFT_NOT_ACTIVE`
+- auto canonicalize = FORBIDDEN
+- auto activate = FORBIDDEN
+- auto award = FORBIDDEN
+
+Do not change this state unless separately and explicitly approved.
+
+## 6. CREW CONTENT EVIDENCE REVIEW
 
 State: `CONTENT_APPROVAL_HOLD_CONFIRMED`
 
-Evidence sources rechecked:
-- Snap & Pop historical UI MASTER revisions in ChatGPT Library;
+Rechecked:
+- Snap historical UI MASTER revisions;
 - Snap handover material;
-- Library image assets matching Snap / Character / Guide / Maltipoo queries;
+- ChatGPT Library Snap/Character/Guide image assets;
 - Snap-Pop repository asset tree;
 - TAKY-ASSETS;
-- TAKY Guide / Character authority documents.
+- TAKY Guide / Character authority docs.
 
-Findings:
-- historical material preserves Character Master / Guide Companion identity rules;
-- concepts may depict a boy/girl/Maltipoo for structure explanation, but those depictions are not automatically canonical runtime assets;
-- Library image hits are UI boards / master-guide boards, not individually approved Crew runtime image files;
+Result:
 - no reviewed/approved Snap-owned individual Crew runtime asset file was recovered;
-- initial repository `character_master_hd.jpg` and `maltipoo_guide_hd.jpg` remain lineage-only under current review authority.
+- UI boards and concept figures are reference/example material, not automatic canonical runtime assets;
+- `IMPLEMENTATION_REOPEN_REQUIRED = false`.
 
-Conclusion:
-- `CONTENT_APPROVAL_HOLD_CONFIRMED`
-- `IMPLEMENTATION_REOPEN_REQUIRED = false`
-- when genuine approved Crew content becomes available, add an approval registry record and bind it; do not redesign SP-BADGE-008 implementation.
+## 7. FINAL EXECUTION GATE
+
+`NO_EXECUTABLE_CODE_OPEN`
+
+Allowed trigger:
+1. genuine approved Snap-owned Crew content appears; or
+2. new regression evidence appears on current main.
+
+Without one of those triggers:
+- do not reopen SP-BADGE-006;
+- do not reopen SP-BADGE-008 implementation;
+- do not rebuild Ready World State consumer;
+- do not activate the 60 historical badge catalog;
+- do not switch this recovery task into DATA INDEXING/vector work.
+
+`CONTENT_APPROVAL_HOLD != IMPLEMENTATION_GAP`
