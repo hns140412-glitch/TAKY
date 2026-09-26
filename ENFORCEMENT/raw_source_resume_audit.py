@@ -91,25 +91,31 @@ def audit(root, manifest_path, inventory_path, handoff_path):
         if item.get("type")=="CORRECTION" and not item.get("correction_targets"):
             errors.append(f"CORRECTION_TARGET_MISSING: {key}")
         expected[key]=item
-    covered=set()
+    # Character-span accounting instead of whole-line accounting: a short quote
+    # must not certify an unquoted requirement/correction later on the same line.
+    masks={sid:bytearray(len(content)) for sid,content in raw.items()}
     for key,item in expected.items():
         sid=item.get("raw_source_id")
         quote=item.get("exact_quote","")
-        if sid in raw and quote and raw[sid].count(quote)==1:
+        if sid in raw and isinstance(quote,str) and quote and raw[sid].count(quote)==1:
             start=raw[sid].index(quote)
             end=start+len(quote)
-            first=raw[sid][:start].count("\n")+1
-            last=raw[sid][:end-1].count("\n")+1
-            covered.update((sid,n) for n in range(first,last+1))
+            masks[sid][start:end]=b"\\x01"*(end-start)
     for sid,content in raw.items():
-        for line_no,line in enumerate(content.splitlines(),1):
-            if not line.strip():
-                continue
+        cursor=0
+        for line_no,line in enumerate(content.splitlines(keepends=True),1):
             key=(sid,line_no)
-            if key not in covered and key not in excluded:
-                errors.append(f"UNACCOUNTED_RAW_LINE: {sid}:{line_no}")
-            if key in covered and key in excluded:
-                errors.append(f"EXCLUDED_BUT_MATERIAL: {sid}:{line_no}")
+            significant=[cursor+i for i,ch in enumerate(line) if not ch.isspace()]
+            covered_count=sum(bool(masks[sid][pos]) for pos in significant)
+            if significant:
+                if key in excluded:
+                    if covered_count:
+                        errors.append(f"EXCLUDED_BUT_MATERIAL: {sid}:{line_no}")
+                elif not covered_count:
+                    errors.append(f"UNACCOUNTED_RAW_LINE: {sid}:{line_no}")
+                elif covered_count<len(significant):
+                    errors.append(f"PARTIAL_RAW_LINE_COVERAGE: {sid}:{line_no}")
+            cursor+=len(line)
     for sid,line in excluded:
         if sid not in raw or line>len(raw[sid].splitlines()) or not raw[sid].splitlines()[line-1].strip():
             errors.append(f"INVALID_EXCLUDED_LINE_REFERENCE: {sid}:{line}")
