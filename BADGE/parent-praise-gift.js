@@ -118,6 +118,7 @@ function createParentPraiseGiftService({
     let written;
     try{written=await appendGiftRecord(Object.freeze({...record}))}
     catch{return fail('GIFT_PERSISTENCE_FAILED')}
+    if(written?.reason==='CONFLICTING_IDEMPOTENCY_KEY')return fail('GIFT_IDEMPOTENCY_CONFLICT');
     if(!written||written.ok!==true||written.persisted!==true||
       !clean(written.gift_id)||written.family_id!==record.family_id||
       written.receiver_child_id!==record.receiver_child_id||
