@@ -173,6 +173,14 @@ const parse=r=>JSON.parse(r.body);
     assert.equal((await noStore.handle(request(packet('store-down-1')))).status,503);
     assert.throws(()=>create({store}),/TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED/);
     assert.throws(()=>create({verifyBearerToken:trustedToken,store:null}),/DURABLE_CONDITIONAL_STORE_REQUIRED/);
+    const alwaysConflict=create({store:{
+      async getWithMetadata(){return null},
+      async setJSON(){return {modified:false,etag:'concurrent-writer'}}
+    },verifyBearerToken:trustedToken});
+    const conflictResponse=await alwaysConflict.handle(request(packet('cas-conflict')));
+    assert.equal(conflictResponse.status,503);
+    assert.equal(parse(conflictResponse).ok,false);
+    assert.equal(parse(conflictResponse).reason,'DURABLE_STORE_CONFLICT_RETRY_EXHAUSTED');
     assert(verifyCalls>=5);
     console.log('CENTRAL_LEARNING_HTTP_ENDPOINT_PASS: real local durable receipts; forged browser verifier downgraded; trusted server-only promotion; bearer/family/member isolation; idempotent no-store ACK; outage denial');
   }finally{await fs.rm(root,{recursive:true,force:true})}
