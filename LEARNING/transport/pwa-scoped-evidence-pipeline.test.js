@@ -30,14 +30,23 @@ const pipeline=Pipeline.create({
  }
 });
 (async()=>{
- assert.equal((await pipeline.enqueueObservation('hide-seek',{
-  event_id:'one',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
-  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'}
+ assert.equal((await pipeline.enqueueBridge('hide-seek',{
+  source:'hide-seek',event_type:'LEARNING_MEMORY_SIGNAL',type:'LEARNING_MEMORY_SIGNAL',
+  event_id:'one',occurred_at:'2026-09-27T01:00:00Z',child_id:'A',
+  payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary',
+   observation_only:true,global_mastery_claim:false}
  })).queued,true);
- assert.equal((await pipeline.enqueueObservation('hide-seek',{
-  event_id:'one',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
-  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'}
+ assert.equal((await pipeline.enqueueBridge('hide-seek',{
+  source:'hide-seek',event_type:'LEARNING_MEMORY_SIGNAL',type:'LEARNING_MEMORY_SIGNAL',
+  event_id:'one',occurred_at:'2026-09-27T01:00:00Z',child_id:'A',
+  payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary',
+   observation_only:true,global_mastery_claim:false}
  })).duplicate,true);
+ await assert.rejects(()=>pipeline.enqueueBridge('hide-seek',{
+  source:'hide-seek',event_type:'LEARNING_MEMORY_SIGNAL',type:'LEARNING_MEMORY_SIGNAL',
+  event_id:'missing-skill',occurred_at:'2026-09-27T01:00:00Z',
+  payload:{member_id:'A',subject:'english',observation_only:true,global_mastery_claim:false}
+ }),/BRIDGE_LEARNING_SCOPE_MISSING_HOLD/);
  await assert.rejects(()=>pipeline.enqueue({...packet('two'),context:{
   ...packet('two').context,member_id:'B'}}),/EVIDENCE_ENQUEUE_SESSION_SCOPE_MISMATCH/);
  assert.equal((await pipeline.flushOne('hide-seek','worker')).status,'PENDING');
