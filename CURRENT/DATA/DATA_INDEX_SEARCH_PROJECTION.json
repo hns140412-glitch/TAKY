@@ -1,8 +1,8 @@
 {
-  "checkpoint_version": "1.5",
+  "checkpoint_version": "1.6",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__LOCAL_NEURAL_TECH_VERIFIED__DETAIL_L2_ESCALATION_VERIFIED",
+  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__DETAIL_L2_VERIFIED__LOCAL_RUNTIME_BINDINGS_CLOSED__APPROVED_NEURAL_MODEL_BINDING_OPEN",
   "status": "OPERATIONS",
   "authority_current": {
     "source_index": {
@@ -53,14 +53,19 @@
     "PR #118 merged to main at e170a9a51f66dbe97fe1675df737b7608d362be9 after TAKY Enforcement Replay SUCCESS",
     "DETAIL_L2 live escalation verified on actual V26 source: index/detail anchor existed, lightweight connector text fetch returned empty, and RAW fetch was performed only for the selected source",
     "Selected RAW escalation source 1ubekcD5SxhDkKCv6YAoP-tdEBRtI-4VL fetched successfully at 3,757,574 bytes",
-    "Oversize held videos were not retried; existing streaming/local-sync retry policy remains intact"
+    "Oversize held videos were not retried; existing streaming/local-sync retry policy remains intact",
+    "Local-controlled durable receipt and growth store binding closed in Learning runtime without deployment",
+    "Provider-neutral family/member identity resolver and local learning endpoint binding closed with cross-family/member denial",
+    "PR #121 merged at 042ab345a85ed3ce67a87602b3873f99322b5fdd and PR #123 merged at dd13c4c3ada69796f2b22364032e0386218ef47a"
   ],
   "open": [
     "Bind a durable approved pretrained/local embedding artifact for V26; current experimental corpus-local model is REJECTED_NOT_PROMOTED",
     "Bind the matching approved query model/provider; generic provider code exists but no approved model is bound",
+    "Bind an upstream authentication provider such as Google/OIDC to the provider-neutral identity resolver when deployment/auth integration is authorized",
+    "Bind hosted central endpoint/store only when deployment is authorized; local-controlled path is already verified",
     "Keep SEARCH_PROJECTION non-authoritative and separate from domain decision policy"
   ],
-  "next": "LIVE_RECEIPT_AND_GROWTH_DURABLE_STORE_BINDING",
+  "next": "APPROVED_PRETRAINED_OR_VALIDATED_LOCAL_EMBEDDING_MODEL_BINDING",
   "corrections": [
     "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
     "TOKEN_COSINE_FALLBACK != EMBEDDING_SEMANTIC",
@@ -80,7 +85,7 @@
     "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3",
     "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9"
   ],
-  "updated_at": "2026-09-26T09:36:00+09:00",
+  "updated_at": "2026-09-26T09:40:00+09:00",
   "real_v26_regression": {
     "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
@@ -101,8 +106,8 @@
     "relation_note": "Legacy duplicate/fragment groups are converted conservatively for retrieval compatibility; temporal_group is not promoted to family or identity.",
     "remaining_limitations": [
       "Most legacy V26 rows do not carry explicit current_relation per-record; CURRENT isolation is enforced by loading the promoted V26 payload itself.",
-      "DETAIL_L2 anchor fetch escalation still requires live-path validation on actual sources.",
-      "No materialized verified neural vector index or matching query embedding provider exists yet."
+      "A technically valid local 679/679 neural vector materialization exists, but the experimental corpus-local model failed semantic quality probes and remains REJECTED_NOT_PROMOTED.",
+      "An approved pretrained or otherwise quality-validated embedding model and matching query provider are not yet bound."
     ]
   },
   "neural_materialization_checkpoint": {

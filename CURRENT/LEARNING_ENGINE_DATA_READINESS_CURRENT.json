@@ -1,7 +1,7 @@
 {
   "projection_version": "TAKY_LEARNING_ENGINE_DATA_READINESS_CURRENT_V1",
   "authority": "LEARNING_ENGINE_CORE",
-  "generated_at": "2026-09-26T07:15:00+09:00",
+  "generated_at": "2026-09-26T09:40:00+09:00",
   "minimum_verified_retrieval_targets_for_promotion_review": 30,
   "code_path": {
     "specialist_event_pipeline": "IMPLEMENTED",
@@ -21,26 +21,32 @@
     "outcome_growth_feedback": "IMPLEMENTED",
     "growth_strategy_ledger": "IMPLEMENTED",
     "durable_growth_strategy_store_adapter": "IMPLEMENTED",
-    "real_outcome_growth_e2e": "IMPLEMENTED_AND_CI_VERIFIED"
+    "real_outcome_growth_e2e": "IMPLEMENTED_AND_CI_VERIFIED",
+    "local_json_strong_store": "IMPLEMENTED_AND_CI_VERIFIED",
+    "family_member_identity_resolver": "IMPLEMENTED_AND_CI_VERIFIED",
+    "local_learning_endpoint": "IMPLEMENTED_AND_CI_VERIFIED"
   },
   "runtime_connection": {
     "hosted_central_transport": "ADAPTER_READY_NOT_BOUND",
     "production_deployment": "HOLD",
     "netlify_deployment": "HOLD",
-    "live_persisted_receipt_store": "NOT_MATERIALIZED_IN_REPOSITORY",
-    "live_growth_strategy_store": "ADAPTER_READY_NOT_BOUND",
-    "identity_resolver": "NOT_CONNECTED",
-    "function_endpoint": "NOT_BOUND"
+    "live_persisted_receipt_store": "HOSTED_NOT_MATERIALIZED__LOCAL_CONTROLLED_BOUND",
+    "live_growth_strategy_store": "HOSTED_ADAPTER_READY_NOT_BOUND__LOCAL_CONTROLLED_BOUND",
+    "identity_resolver": "PROVIDER_NEUTRAL_LOCAL_CONTROLLED_BOUND__UPSTREAM_AUTH_PROVIDER_NOT_BOUND",
+    "function_endpoint": "LOCAL_CONTROLLED_BOUND__HOSTED_ENDPOINT_NOT_BOUND",
+    "local_controlled_persisted_receipt_store": "BOUND_AND_CI_VERIFIED",
+    "local_controlled_growth_strategy_store": "BOUND_AND_CI_VERIFIED"
   },
   "scopes": [],
   "interpretation": [
-    "Empty scopes means no live central receipt store has been materialized here yet.",
-    "It does not mean the learner has zero evidence in the apps.",
-    "Ready retains packets durably until an immutable central ingest receipt is acknowledged.",
-    "Verified evidence receives REAL_EVIDENCE_RECEIPT; observation-only evidence receives OBSERVATION_INGEST_RECEIPT.",
-    "Growth strategy memory now has an append-only durable adapter that references REAL_LEARNING_EVIDENCE_RECEIPT instead of copying raw evidence.",
-    "Verified outcome feedback and Mining strategy feedback candidates can accumulate longitudinally, but promotion_authority and strategy_change_authorized remain false.",
-    "Hosted storage, strong-consistency conditional writes, family/member authorization, and growth-ledger adapters are implemented but the live central stores are not bound or deployed."
+    "Local-controlled receipt persistence is now materially bound to the durable evidence adapter through a file-backed strong-consistency store.",
+    "Local-controlled growth strategy persistence is now materially bound through the same strong-consistency contract.",
+    "Persistence survives store re-open; duplicate growth receipt ingestion is idempotent; conflicting feedback for the same receipt fails closed.",
+    "Family/member identity resolution is provider-neutral and bound to a local endpoint; cross-family and cross-member packets are denied before persistence.",
+    "Multi-family principals require explicit family selection.",
+    "Google/OIDC or another upstream authentication provider remains a binding boundary; it is not hard-coded into TAKY.",
+    "Hosted central transport and hosted endpoint remain unbound and production/Netlify deployment remain HOLD.",
+    "Raw learner evidence is referenced by immutable receipt and is not copied into the growth ledger; promotion_authority and strategy_change_authorized remain false."
   ],
   "invariants": [
     "HOLD != DROP",
@@ -50,5 +56,25 @@
     "REAL_OUTCOME_FEEDBACK != AUTOMATIC_STRATEGY_PROMOTION",
     "MINING_STRATEGY_FEEDBACK_CANDIDATE != MINING_STRATEGY_CHANGE",
     "RAW_EVIDENCE_IMMUTABLE_AND_REFERENCED_BY_RECEIPT"
-  ]
+  ],
+  "local_controlled_binding_checkpoint": {
+    "durable_receipt_store": "PASS",
+    "durable_growth_store": "PASS",
+    "persistence_after_reopen": "PASS",
+    "duplicate_receipt_idempotency": "PASS",
+    "conflicting_feedback_fail_closed": "PASS",
+    "raw_evidence_copied": false,
+    "promotion_authority": false,
+    "family_member_identity_isolation": "PASS",
+    "cross_family_write": "DENIED",
+    "cross_member_write": "DENIED",
+    "upstream_auth_provider_binding": "OPEN",
+    "hosted_endpoint_binding": "OPEN",
+    "netlify_deployment": "HOLD",
+    "production_deployment": "HOLD",
+    "main_commits": [
+      "github:hns140412-glitch/TAKY@042ab345a85ed3ce67a87602b3873f99322b5fdd",
+      "github:hns140412-glitch/TAKY@dd13c4c3ada69796f2b22364032e0386218ef47a"
+    ]
+  }
 }
