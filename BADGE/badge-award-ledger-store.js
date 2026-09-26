@@ -20,13 +20,17 @@ const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&
 const scopeKey=(family,child,badge)=>hash(family+'\0'+child+'\0'+badge);
 const genesis=(secret,family,child,badge)=>hmac(secret,'GENESIS\n'+family+'\n'+child+'\n'+badge);
 
-function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActive}={}){
+const isSignedUtcInstant=value=>typeof value==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
+
+function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActive,now}={}){
   if(!clean(directory)||!path.isAbsolute(directory))throw Error('ABSOLUTE_LEDGER_DIRECTORY_REQUIRED');
   const family=clean(family_id);
   if(!family||family!==family_id||family.length>128)throw Error('EXPLICIT_FAMILY_SCOPE_REQUIRED');
   if(!Buffer.isBuffer(signingKey)||signingKey.length<32)throw Error('TRUSTED_SIGNING_KEY_REQUIRED');
   if(typeof verifyDecision!=='function'||typeof isBadgeActive!=='function')
     throw Error('TRUSTED_DECISION_AND_ACTIVE_CATALOG_CAPABILITIES_REQUIRED');
+  if(now!==undefined&&typeof now!=='function')throw Error('TRUSTED_AWARD_CLOCK_REQUIRED');
+  const trustedNow=now||(()=>new Date().toISOString());
   fs.mkdirSync(directory,{recursive:true,mode:0o700});
   const file=(child,badge)=>path.join(directory,scopeKey(family,child,badge)+'.json');
   const validScope=(child,badge)=>clean(child)===child&&clean(badge)===badge&&child.length<=128&&badge.length<=128;
@@ -50,6 +54,7 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
         receipt.award_kind!==(i===0?'INITIAL_AWARD':'REAWARD')||
         !clean(receipt.decision_id)||!clean(receipt.decision_ref)||
         !clean(receipt.award_id)||!clean(receipt.approved_at)||
+        (receipt.awarded_at!==undefined&&!isSignedUtcInstant(receipt.awarded_at))||
         decisions.has(receipt.decision_id)||awards.has(receipt.award_id)||
         receipt.previous_digest!==previous||
         receipt.award_id!==hash('AWARD\n'+family+'\n'+child+'\n'+badge+'\n'+receipt.decision_id)||
@@ -86,12 +91,16 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
       const sequence=data.rows.length,neededKind=sequence===0?'INITIAL_AWARD':'REAWARD';
       if(r.award_kind!==neededKind)return deny('AWARD_KIND_OUT_OF_SEQUENCE');
       const awardId=hash('AWARD\n'+family+'\n'+child+'\n'+badge+'\n'+r.decision_id);
+      let awardedAt;
+      try{awardedAt=trustedNow();}catch{return deny('TRUSTED_AWARD_TIME_UNAVAILABLE')}
+      if(!isSignedUtcInstant(awardedAt))return deny('TRUSTED_AWARD_TIME_INVALID');
       const record={
         ledger_sequence:sequence,award_id:awardId,decision_id:r.decision_id,
         family_id:family,
         decision_ref:r.decision_ref,child_id:child,badge_id:badge,
         decision_status:'APPROVED',award_status:'AWARDED',award_kind:r.award_kind,
-        approved_at:r.approved_at,previous_digest:data.checkpoint
+        approved_at:r.approved_at,previous_digest:data.checkpoint,
+        awarded_at:awardedAt
       };
       const digest=hmac(signingKey,data.checkpoint+'\n'+JSON.stringify(record));
       const updated={...data,rows:[...data.rows,{record,digest}],checkpoint:digest};
@@ -101,7 +110,7 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
       fs.renameSync(temp,f);temp=null;
       const dirFd=fs.openSync(directory,'r');
       try{fs.fsyncSync(dirFd)}finally{fs.closeSync(dirFd)}
-      return {ok:true,award_id:awardId,ledger_sequence:sequence,checkpoint:digest};
+      return {ok:true,award_id:awardId,ledger_sequence:sequence,checkpoint:digest,awarded_at:awardedAt};
     }catch{return deny('LEDGER_LOCK_OR_DURABLE_WRITE_FAILED')}
     finally{
       if(temp){try{fs.unlinkSync(temp)}catch{}}
@@ -130,7 +139,8 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
         authority:'AWARD_LEDGER',decision_status:r.decision_status,
         award_status:r.award_status,award_id:r.award_id,
         family_id:r.family_id,child_id:r.child_id,badge_id:r.badge_id,award_kind:r.award_kind,
-        ledger_sequence:r.ledger_sequence,source_checkpoint:checkpoint
+        ledger_sequence:r.ledger_sequence,source_checkpoint:checkpoint,
+        awarded_at:r.awarded_at??null,decision_approved_at:r.approved_at
       }};
     }
   });
