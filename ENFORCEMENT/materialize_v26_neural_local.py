@@ -11,7 +11,7 @@ from pathlib import Path
 from data_index_local_embedding_provider import (
     EXPECTED_DIMENSION, MODEL_ID, build_index, build_query
 )
-from data_index_vector_search import load_query_vector, load_vector_index, vector_scores
+from data_index_vector_search import load_query_vector, load_vector_index, vector_scores\nfrom data_index_search import load_index, search
 
 def main() -> None:
     p=argparse.ArgumentParser()
@@ -47,7 +47,7 @@ def main() -> None:
       "status":"PASS","source_count":679,"unique_vector_source_ids":len(idx["vectors"]),
       "model_id":idx["provider"]["model_id"],"dimension":idx["provider"]["dimension"],
       "neural_embedding_verified":True,"positive_query_scores":len(scores),
-      "payload_location_exposed":False,
+      "payload_location_exposed":False,"verified_vector_channel_active":True,
       "note":"V26 remained local; receipt contains no source titles, locators, or raw content."
     }
     rp.write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
