@@ -1,4 +1,5 @@
 'use strict';
+const cryptoProvider=require('node:crypto').webcrypto;
 const assert=require('node:assert/strict');
 const Outbox=require('./scoped-evidence-outbox.js');
 const Client=require('./pwa-central-evidence-ack-client.js');
@@ -15,7 +16,7 @@ const packet=id=>({packet_id:'hide-seek:'+id,source_app:'hide-seek',
  event:{source:'hide-seek',event_id:id}});
 const scope=['F','A','hide-seek'];
 (async()=>{
- const q=Outbox.create({storage,clock:()=>now,leaseMs:1000});
+ const q=Outbox.create({storage,clock:()=>now,leaseMs:1000,cryptoProvider});
  const p=packet('one');
  assert.equal((await q.enqueue(p)).queued,true);
  assert.equal((await q.enqueue(p)).duplicate,true);
