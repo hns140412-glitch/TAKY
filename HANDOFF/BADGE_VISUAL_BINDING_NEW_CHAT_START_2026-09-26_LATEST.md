@@ -5,7 +5,7 @@
 - `stars != grade classification`
 - First verified award unlocks the badge with 0 stars.
 - A distinct reviewed/approved REAWARD of the SAME badge for the SAME child adds exactly 1 star.
-- FIVE reaward stars promote to the next configured tier. Show the five stars in the promotion moment, then begin the new tier at zero.
+- FIVE reaward stars promote to the next configured tier. Five stars triggering the tier change is confirmed; showing the completed five and restarting the next tier at zero are provisional until explicitly confirmed.
 - Raw activity/repetition telemetry NEVER equals reaward. Projection requires prevalidated Award Ledger receipt, has duplicate and member-scope guards.
 - Design: fictional exploration-crew campaign-merit insignia / unit-patch feeling, pastel, round, hand-drawn; not an actual military insignia.
 - Base art and child-specific profile character are separate layers.
