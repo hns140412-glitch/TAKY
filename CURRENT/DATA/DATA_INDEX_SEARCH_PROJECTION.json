@@ -1,8 +1,8 @@
 {
-  "checkpoint_version": "1.4",
+  "checkpoint_version": "1.5",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__LOCAL_NEURAL_MATERIALIZATION_TECHNICALLY_VERIFIED__QUALITY_PROMOTION_OPEN",
+  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__LOCAL_NEURAL_TECH_VERIFIED__DETAIL_L2_ESCALATION_VERIFIED",
   "status": "OPERATIONS",
   "authority_current": {
     "source_index": {
@@ -50,15 +50,17 @@
     "Local corpus neural experiment model TAKY_LOCAL_SKIPGRAM_META_V1 was technically neural but rejected for semantic quality and was not promoted",
     "Guarded local query-vector provider implemented; rejected/unapproved models fail closed unless explicit experimental flag is used",
     "Vector materialization validator implemented to require exact 1:1 source_id coverage",
-    "PR #118 merged to main at e170a9a51f66dbe97fe1675df737b7608d362be9 after TAKY Enforcement Replay SUCCESS"
+    "PR #118 merged to main at e170a9a51f66dbe97fe1675df737b7608d362be9 after TAKY Enforcement Replay SUCCESS",
+    "DETAIL_L2 live escalation verified on actual V26 source: index/detail anchor existed, lightweight connector text fetch returned empty, and RAW fetch was performed only for the selected source",
+    "Selected RAW escalation source 1ubekcD5SxhDkKCv6YAoP-tdEBRtI-4VL fetched successfully at 3,757,574 bytes",
+    "Oversize held videos were not retried; existing streaming/local-sync retry policy remains intact"
   ],
   "open": [
     "Bind a durable approved pretrained/local embedding artifact for V26; current experimental corpus-local model is REJECTED_NOT_PROMOTED",
     "Bind the matching approved query model/provider; generic provider code exists but no approved model is bound",
-    "Validate DETAIL_L2 anchor fetch escalation on real V26 source records",
     "Keep SEARCH_PROJECTION non-authoritative and separate from domain decision policy"
   ],
-  "next": "APPROVED_LOCAL_PRETRAINED_EMBEDDING_ARTIFACT_BINDING_THEN_QUERY_PROVIDER_BIND",
+  "next": "LIVE_RECEIPT_AND_GROWTH_DURABLE_STORE_BINDING",
   "corrections": [
     "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
     "TOKEN_COSINE_FALLBACK != EMBEDDING_SEMANTIC",
@@ -78,7 +80,7 @@
     "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3",
     "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9"
   ],
-  "updated_at": "2026-09-26T09:32:00+09:00",
+  "updated_at": "2026-09-26T09:36:00+09:00",
   "real_v26_regression": {
     "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
@@ -119,5 +121,22 @@
     "generic_query_provider": "IMPLEMENTED_DEFAULT_FAIL_CLOSED",
     "approved_model_binding": "OPEN",
     "pretrained_candidate_note": "multilingual sentence-transformer class identified; runtime binary/model download not yet available in current controlled environment"
+  },
+  "detail_l2_escalation_checkpoint": {
+    "v26_detail_records_total": 8,
+    "usable_detail_records": 6,
+    "held_detail_records": 2,
+    "representative_source_id": "1ubekcD5SxhDkKCv6YAoP-tdEBRtI-4VL",
+    "detail_type": "pdf",
+    "detail_anchor_examples": [
+      "vowel contrast grid",
+      "example-word image grid"
+    ],
+    "lightweight_fetch": "EMPTY_CONTENT",
+    "raw_escalation": "SUCCESS",
+    "raw_file_size_bytes": 3757574,
+    "full_corpus_raw_load": false,
+    "held_video_retry": false,
+    "interpretation": "DETAIL_ANCHOR_FIRST__RAW_ONLY_IF_NEEDED__VERIFIED"
   }
 }
