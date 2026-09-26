@@ -14,7 +14,7 @@ Family praise badge and gem gifts remain **separate signed gift-journal calendar
 
 ## Verified PR pointers (not deployed)
 - Ready-Set PR #111 (https://github.com/hns140412-glitch/Ready-Set/pull/111), exact head `c038a37bb2728522ef8312e69ee4c84745ac4725`, all PR checks SUCCESS including Chromium Runtime E2E. DRAFT/UNMERGED; main at branch start `1d672d862cc8329a5f19ca91c9ed6a338752f5ae`.
-- Snap-Pop PR #9 (https://github.com/hns140412-glitch/Snap-Pop/pull/9), exact head `268aac41d68dc30551e094952dddd14fc3c10713`, Validate Snap & Pop SUCCESS including Playwright. DRAFT/UNMERGED; main at branch start `3de97be0d12dd6244a942b0c137c2efe578a43b6`. Private `/api/` GET requests bypass service-worker cache.
+- Snap-Pop PR #9 (https://github.com/hns140412-glitch/Snap-Pop/pull/9), exact head `7652c3fb0ec99796768f3993b05cf7c0946dcd9e`, Validate Snap & Pop SUCCESS including Playwright. DRAFT/UNMERGED; main at branch start `3de97be0d12dd6244a942b0c137c2efe578a43b6`. Private `/api/` GET requests bypass service-worker cache.
 - TAKY PR #153 central history/calendar is in main `76b9dbc77f147c44f44818b62bb66af891a9be65`, post-merge Badge CI SUCCESS.
 
 ## OPEN
