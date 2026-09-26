@@ -1,3 +1,16 @@
+# LATEST DELTA — DURABLE LEDGER CORE IMPLEMENTATION (PR #146, 2026-09-26)
+
+Previous audit correctly found NO existing executable source. This PR adds a new Node-only owner-neutral implementation:
+- `BADGE/badge-award-ledger-store.js`: verified Decision + active badge gates, signed child/badge-scoped append-only logical history (atomic snapshot replacement), exclusive per-scope lock, HMAC chain and verified COMPLETE history source.
+- `BADGE/badge-ledger-visual-binding.js`: maps verified history only to LOCKED/EARNED visual render models; no self-award.
+- Integration tests use temporary files and explicit TEST-ONLY fake Decision authority, test-only active badge and test-only approved visual record. No real user awards or assets are activated.
+
+**PRODUCTION NOT WIRED**: the actual authoritative Achievement Decision verifier, family/member authentication, active final catalog source, persistent server-side HMAC key management, multi-device durable backend, real approved visual registry snapshot and app consumer are still unresolved. Do NOT put this Node signing key in browser/PWA JS or treat a caller boolean as approval. The test mock is not authentication. HMAC chaining detects edits but alone does not prevent whole-ledger rollback; external checkpoint anchoring/backup policy is still required for production.
+
+The new code is real executable storage/testing, not evidence that previously closed badge logic already had a functioning runtime. Historical 60 catalog remains inactive. No Netlify deployment.
+
+---
+
 # BADGE VERIFIED AWARD LEDGER BRIDGE — SOURCE AUDIT — 2026-09-26
 
 ## Scope
