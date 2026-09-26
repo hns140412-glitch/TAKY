@@ -42,7 +42,8 @@
       "gem_currency": false,
       "affinity": false,
       "power": false,
-      "top_tier_rule": "OPEN"
+      "top_tier_rule": "OPEN",
+      "post_promotion_star_policy": "PROVISIONAL_RESET_TO_ZERO_PENDING_CONFIRMATION"
     },
     "character_layer": {
       "source": "CHILD_PROFILE",
