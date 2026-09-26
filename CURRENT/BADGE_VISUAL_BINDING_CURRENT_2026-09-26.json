@@ -127,7 +127,8 @@
     "bind actual child-scoped badge detail history and month calendar surface to authenticated app",
     "connect trusted active/approved badge catalog list for calendar after visual/content approval",
     "resolve optional family praise gift history lane and message visibility separately from Achievement Award Ledger",
-    "connect production signed award-time source and multi-device durable storage without reinterpreting old approval timestamps"
+    "connect production signed award-time source and multi-device durable storage without reinterpreting old approval timestamps",
+    "authorize actual family gift-history reader before composing child's gift calendar lane"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -362,7 +363,10 @@
       "family_history_reader": "BRANCH_IMPLEMENTED",
       "real_app_ui": "OPEN",
       "real_multi_device_ledger_provider": "OPEN",
-      "production_active_approved_badge_provider": "OPEN"
+      "production_active_approved_badge_provider": "OPEN",
+      "signed_gift_journal_calendar_projection": "BRANCH_IMPLEMENTED_CI_TESTED_TEST_ONLY_PROVIDER",
+      "separate_calendar_lane_composer": "BRANCH_IMPLEMENTED_CI_TESTED",
+      "real_family_gift_history_read_endpoint": "OPEN"
     },
     "guards": [
       "NO_FAKE_CALENDAR_DATES",
@@ -370,7 +374,9 @@
       "NO_CROSS_CHILD_HISTORY",
       "NO_AUTO_AWARD",
       "NO_DRAFT_60_ACTIVATION",
-      "NO_APP_DEPLOYMENT"
+      "NO_APP_DEPLOYMENT",
+      "FAMILY_GIFT_CALENDAR_DOES_NOT_CREDIT_WALLET_OR_INCREMENT_ACHIEVEMENT_STARS",
+      "FAMILY_GIFT_HISTORY_READ_REQUIRES_SEPARATE_AUTHORIZATION"
     ]
   }
 }
