@@ -20,6 +20,7 @@ async function deriveFromLedger({source,child_id,badge_id,tier_order}={}){
   catch{return blocked('AWARD_LEDGER_READ_FAILED');}
   if(!snapshot||snapshot.kind!=='COMPLETE_CHILD_BADGE_AWARD_HISTORY'||
       snapshot.complete!==true||snapshot.child_id!==child||snapshot.badge_id!==badge||
+      (text(source.family_id)&&snapshot.family_id!==source.family_id)||
       !text(snapshot.checkpoint)||!Array.isArray(snapshot.rows)||
       !Number.isSafeInteger(snapshot.row_count)||snapshot.row_count!==snapshot.rows.length)
     return blocked('INCOMPLETE_OR_MISMATCHED_AWARD_LEDGER_SNAPSHOT');
@@ -35,6 +36,7 @@ async function deriveFromLedger({source,child_id,badge_id,tier_order}={}){
       return blocked('AWARD_LEDGER_ROW_NOT_VERIFIED');
     const receipt=check.receipt;
     if(receipt.child_id!==child||receipt.badge_id!==badge||
+        (text(source.family_id)&&receipt.family_id!==source.family_id)||
         receipt.authority!=='AWARD_LEDGER' ||
         receipt.source_checkpoint!==snapshot.checkpoint ||
         !Number.isSafeInteger(receipt.ledger_sequence)||

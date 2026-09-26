@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — FAMILY BADGE ACCESS (PR #147, 2026-09-26)
+
+- Ready main has server-verified Netlify Identity family/member role mapping and linked Child accounts. It is an AUTH foundation, NOT an Achievement Decision grant or Badge Award Ledger.
+- New TAKY `BADGE/badge-family-read-access.js` gates reads through trusted server session + provider-verified same-family child and explicitly family-bound source; Parent can read own family's verified Child, Child self only. No fake client bootstrap.
+- Badge Award Ledger HMAC/file key/award receipt now includes immutable family_id. Cross-family file transplant and rewritten family fields are rejected. Bridge checks signed snapshot and receipt family.
+- Exact PR CI must be checked before claiming main CLOSED. No actual Ready API function or live multi-device store has been wired; no Netlify deploy.
+- Next OPEN: real server identity lookup and Decision verifier, shared atomic persistent backend/key management, actual approved badge art, runtime surfaces and promotion/top-tier details.
+
+---
+
 # LATEST RESUME OVERRIDE — DURABLE LEDGER CORE SLICE (PR #146, 2026-09-26)
 
 Implemented/tested in PR #146 (verify exact main before declaring main closure): `BADGE/badge-award-ledger-store.js` and `BADGE/badge-ledger-visual-binding.js` with real Node file persistence + signed scoped history and persisted replay tests. They are not production-wired: trusted Decision/auth/active-catalog adapters, server key and app consumer remain OPEN. Do not use browser-side secrets or claim a live award from test mocks.

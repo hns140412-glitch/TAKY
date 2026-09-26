@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "DURABLE_AWARD_LEDGER_CORE_TESTED_PRODUCTION_BINDINGS_OPEN",
+  "status": "FAMILY_SCOPED_BADGE_READ_CORE_TESTED_LIVE_APP_BINDINGS_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -67,7 +67,13 @@
     "real_family_scope_authorization": "NOT_CONNECTED",
     "production_signing_key_and_backup": "NOT_CONFIGURED",
     "active_canonical_badge_catalog": "NOT_APPROVED",
-    "real_app_consumer": "NOT_WIRED"
+    "real_app_consumer": "NOT_WIRED",
+    "family_scoped_read_access": "PR_147_TESTED_SERVER_ONLY",
+    "signed_family_namespace": "PR_147_TESTED",
+    "cross_family_ledger_transplant_regression": "PR_147_SUCCESS",
+    "ready_identity_source": "FOUND_READY_MAIN_AUTH_SESSION_AND_FAMILY_LINK",
+    "ready_actual_server_endpoint_binding": "NOT_CONNECTED",
+    "production_shared_durable_storage": "NOT_CONNECTED_NODE_FILESTORE_ONLY"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -99,7 +105,10 @@
     "bind trusted provider to central ledger history bridge; verify real replay",
     "wire actual authenticated Achievement Decision owner into durable Award Ledger writer",
     "provide server-side signing key, authorized child scope and durable multi-device backup/rollback anchor",
-    "connect real approved catalog and app consumer to verified ledger-to-visual composition"
+    "connect real approved catalog and app consumer to verified ledger-to-visual composition",
+    "integrate Ready server getUser and verified member lookup with badge family reader",
+    "replace standalone Node filesystem backend with production-appropriate shared durable atomic store and rollback anchor",
+    "connect actual authorized Achievement Decision validator without browser authority"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -111,7 +120,11 @@
     "five approved reacquisitions promote to next configured tier",
     "child avatar remains separate member-scoped layer",
     "unearned is silhouette, earned is active pastel",
-    "never automatically approve candidate A/B assets"
+    "never automatically approve candidate A/B assets",
+    "family_id is signed into award ledger record and replay source",
+    "Ready sync event store is not Badge Award Ledger",
+    "test-only Ready session/bootstrap cannot authorize badge reading",
+    "Node Function local filesystem is not cross-device production persistence"
   ],
   "approval_gate": {
     "required": true,
