@@ -1,3 +1,38 @@
+# LATEST RESUME OVERRIDE — FINAL MAIN CLOSURE — 2026-09-26
+
+**This section overrides all older/pre-merge status text below.**
+
+Current state: `FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD`  
+Executable code OPEN: **NONE**  
+Implementation reopen required: **NO**
+
+Final main heads:
+- Hide & Seek: `1156c559bbc3da239b30606912ab0ae0548af0a3`
+- Snap & Pop: `3de97be0d12dd6244a942b0c137c2efe578a43b6`
+- Ready & Set: `6ab7bbe17625ed6cf227ff1b689c76564119c1bd`
+
+Post-merge regression:
+- Hide `Validate Hide & Seek` = SUCCESS
+- Snap `Validate Snap & Pop` = SUCCESS
+- Ready `Ready Integration CI` = SUCCESS
+- Ready `Ready Runtime E2E` = SUCCESS
+
+Only remaining dependency:
+- genuine Snap-owned reviewed/approved individual Crew/Character asset content.
+
+When that content exists:
+- add an approval registry record and bind it;
+- do **not** redesign or reopen SP-BADGE-008 implementation.
+
+Hard locks:
+- 60 historical badge catalog = `WORKING_DRAFT_NOT_ACTIVE`
+- no auto canonicalize / activate / award
+- no telemetry auto-inference for `ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR`
+- do not switch this recovery task to DATA INDEXING/vector work
+- USER != DEBUGGER
+
+---
+
 # BADGE SYSTEM RECOVERY — NEW CHAT START — 2026-09-26 LATEST
 
 Status: PARTIAL / HOLD-SAFE  
