@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -9,6 +10,9 @@ REQUIRED = [
     "role", "objective", "source_of_truth", "change_scope", "acceptance_tests",
     "validation", "human_approval", "deliverables", "requested_transition"
 ]
+
+EFFECT_CLASSES = {"READ_ONLY", "REPLAY_SAFE_MUTATION", "NON_IDEMPOTENT_MUTATION"}
+SHA256_HEX = re.compile(r"^[0-9a-f]{64}$")
 
 ALLOWED_TRANSITIONS = {
     "READY": {"ASSIGNED_TO_CODEX"},
@@ -135,6 +139,40 @@ def validate(record):
             fail(errors, "TASK_CONTRACT_INCOMPLETE:executor_automation.profile")
         if "target_repository_local" not in automation:
             fail(errors, "TASK_CONTRACT_INCOMPLETE:executor_automation.target_repository_local")
+
+    effect_policy = record.get("effect_policy")
+    if effect_policy is not None:
+        if not isinstance(effect_policy, dict):
+            fail(errors, "EFFECT_POLICY_INVALID")
+        else:
+            effect_class = str(effect_policy.get("effect_class", "")).strip().upper()
+            if effect_class not in EFFECT_CLASSES:
+                fail(errors, f"EFFECT_CLASS_INVALID:{effect_class or 'MISSING'}")
+
+            fingerprint = effect_policy.get("request_fingerprint")
+            if effect_class != "READ_ONLY":
+                if not isinstance(fingerprint, str) or not SHA256_HEX.fullmatch(fingerprint):
+                    fail(errors, "EFFECT_REQUEST_FINGERPRINT_REQUIRED")
+            elif fingerprint not in (None, "") and (
+                not isinstance(fingerprint, str) or not SHA256_HEX.fullmatch(fingerprint)
+            ):
+                fail(errors, "EFFECT_REQUEST_FINGERPRINT_INVALID")
+
+            retry_budget = effect_policy.get("retry_budget")
+            if not isinstance(retry_budget, int) or isinstance(retry_budget, bool) or not 0 <= retry_budget <= 5:
+                fail(errors, "EFFECT_RETRY_BUDGET_INVALID")
+
+            reconcile = effect_policy.get("reconcile_before_retry")
+            if not isinstance(reconcile, bool):
+                fail(errors, "EFFECT_RECONCILE_FLAG_INVALID")
+            if effect_class == "NON_IDEMPOTENT_MUTATION" and reconcile is not True:
+                fail(errors, "NON_IDEMPOTENT_RECONCILE_REQUIRED")
+
+            compensation_ref = effect_policy.get("compensation_ref")
+            if compensation_ref is not None and (
+                not isinstance(compensation_ref, str) or not compensation_ref.strip()
+            ):
+                fail(errors, "EFFECT_COMPENSATION_REF_INVALID")
 
     requested = record.get("requested_transition")
     if requested not in {"CODEX_DONE", "REWORK", "TAKY_REVIEW", "HUMAN_APPROVAL", "MERGED", "DEPLOYED"}:
