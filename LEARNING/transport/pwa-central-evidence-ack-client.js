@@ -20,6 +20,8 @@ function validateAck(packet,status,body={}){
     body.storage_confirmed!==true||
     !RECEIPTS.has(body.acknowledgement_kind)||
     !clean(body.receipt_id)||body.source_app!==packet.source_app||
+    body.packet_id!==packet.packet_id||
+    body.event_id!==packet.event.event_id||
     body.receipt_scope?.family_id!==packet.context.family_id||
     body.receipt_scope?.member_id!==packet.context.member_id||
     typeof body.duplicate!=='boolean')
@@ -68,7 +70,18 @@ function create({endpointUrl,fetchImpl,tokenProvider,sessionProvider}={}){
          ?'CENTRAL_AUTHORIZATION_REQUIRED':'CENTRAL_HTTP_'+response.status};
    }
    const ack=validateAck(packet,response.status,body);
-   return ack.ok?ack:{...ack,retryable:true};
+   if(!ack.ok)return {...ack,retryable:true};
+   // A member/session change during a network await must not ACK a row
+   // belonging to the previous selected learner, even with valid HTTP proof.
+   let after;
+   try{after=await sessionProvider()}catch{
+     return {ok:false,retryable:true,reason:'SESSION_RECHECK_UNAVAILABLE'};
+   }
+   if(after?.authenticated!==true||
+      after.family_id!==packet.context.family_id||
+      after.selected_member_id!==packet.context.member_id)
+     return {ok:false,retryable:true,reason:'SESSION_CHANGED_BEFORE_ACK'};
+   return ack;
  }
  return Object.freeze({version:VERSION,sendPending});
 }
