@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — READY FAMILY RELATION / GIFT PERMISSION PR — 2026-09-26
+
+TAKY family gift V2 in TAKY main remains authority. Ready-Set PR #110 at exact head `274ad4d6a14a202b69c9f808e74286140c2ed92a` (base Ready main `1d672d862cc8329a5f19ca91c9ed6a338752f5ae`) implements separately provisioned FAMILY_ADULT and verified relationships (grandparent, guardian, other adult family) without Parent Planner or Child learner authority. Sibling remains CHILD relation with distinct gift permission. Trusted Identity app metadata `family_permissions` gates `FAMILY_PRAISE_GIFT`, no relation grants automatically. Read-only GET /api/family/gift-permission does not authorize sending a gift. FAMILY_ADULT is denied old Ready Planner sync both client and server.
+
+Ready PR #110 ALL exact-head checks PASS including Integration CI and Chromium Runtime E2E; it is still DRAFT / UNMERGED to avoid unverified Netlify auto-deploy linkage. Do NOT claim Ready main or real PWA integration is complete. No Netlify tool was called or manual deploy performed. Existing 60 historical badge drafts inactive; child real wallet/approved gift assets/actual transfer endpoint still OPEN. Latest gem gift rule 1..5 per individual transaction, parent has no personal unearned atlas. See CURRENT and Ready PR #110.
+
+OPEN: identify safe deployment/merge gate; actual server-side family invitation and explicit grant management, trusted child target lookup and production gift write/wallet/collection adapter. Do not mutate auth roles via client self-service or treat a family relation as an authorization.
+
+---
+
 # LATEST RESUME OVERRIDE — FAMILY RELATION ≠ PARENT ROLE — 2026-09-26
 
 Direct user correction: Family includes Parent, Grandparent, Guardian, Sibling and other relatives/members. The previous Parent-only Gift interpretation (PR #148) is superseded for new implementation, but V1 files/history are preserved. Family relationship never automatically grants praise gift permission; grant `FAMILY_PRAISE_GIFT` independently through a verified server-side family provider. A verified Child/Sibling can be a giver if separately permitted; self-gift, parent-recipient and cross-family gifting remain blocked.
