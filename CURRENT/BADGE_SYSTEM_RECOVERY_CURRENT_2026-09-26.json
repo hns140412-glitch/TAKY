@@ -1,0 +1,165 @@
+{
+  "task_id": "BADGE_SYSTEM_RECOVERY",
+  "namespace": "BADGE",
+  "status": "FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD",
+  "updated_at": "2026-09-26",
+  "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
+  "hard_locks": {
+    "user_not_debugger": true,
+    "data_indexing_vector_transition_forbidden": true,
+    "historical_badge_catalog": {
+      "count": 60,
+      "state": "WORKING_DRAFT_NOT_ACTIVE",
+      "auto_canonicalize": false,
+      "auto_activate": false,
+      "auto_award": false
+    },
+    "forbidden_auto_inference": [
+      "ERROR_DISCOVERY",
+      "DEEP_THINKING",
+      "SPECIAL_BEHAVIOR"
+    ]
+  },
+  "closed_inherited": [
+    "ACHIEVEMENT_DECISION",
+    "AWARD_LEDGER",
+    "CANDIDATE_REVIEW",
+    "HIDE_SNAP_BADGE_SOURCE_AUTO_INFERENCE_REGRESSION"
+  ],
+  "sp_badge_006": {
+    "status": "FINAL_MAIN_CLOSED",
+    "repo": "hns140412-glitch/Hide-Seek",
+    "pr": 17,
+    "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
+    "ci": {
+      "Learning Runtime Bridge Validation": "SUCCESS",
+      "Validate Hide & Seek": "SUCCESS"
+    },
+    "implemented": [
+      "explicit child-authored self-reflection UX producer",
+      "SELF_REFLECTION_EVIDENCE emission only after explicit user selection and confirmation",
+      "verified_outcome remains null",
+      "mastery authority forbidden",
+      "direct award forbidden",
+      "candidate review required",
+      "telemetry inference disabled for ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR"
+    ],
+    "open": [],
+    "main_sha": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Validate Hide & Seek": "SUCCESS"
+    }
+  },
+  "sp_badge_008": {
+    "status": "FINAL_MAIN_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
+    "repo": "hns140412-glitch/Snap-Pop",
+    "pr": 8,
+    "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
+    "ci": {
+      "Validate Snap & Pop": "SUCCESS"
+    },
+    "world_theme_binding": "FINAL_MAIN_CLOSED",
+    "crew_visual_binding": "FINAL_MAIN_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
+    "implemented": [
+      "reviewed runtime world visual binding for assets/world/golden_world_scene.jpg",
+      "assets/reference/approved_visual_source.png remains reference lineage only",
+      "reference board direct runtime binding forbidden",
+      "automatic asset promotion forbidden",
+      "automatic release pass forbidden",
+      "initial character_master_hd.jpg and maltipoo_guide_hd.jpg explicitly forbidden as approved Crew binding evidence",
+      "Ready Core 6 cross-app auto import forbidden because project visual authority is owner-scoped",
+      "Snap-owned Crew Asset Approval Gate/Registry implemented",
+      "approved Crew runtime binding requires owner=snap-pop",
+      "approved Crew runtime binding requires APPROVED_RUNTIME_ASSET + user confirmation + review evidence",
+      "implementation readiness is separated from content approval state"
+    ],
+    "open": [
+      "actual Snap-owned reviewed/approved individual Crew/Character asset approval/content"
+    ],
+    "main_sha": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Validate Snap & Pop": "SUCCESS"
+    }
+  },
+  "ready_world_state_consumer": {
+    "status": "FINAL_MAIN_CLOSED",
+    "repo": "hns140412-glitch/Ready-Set",
+    "pr": 105,
+    "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
+    "ci": {
+      "Learning Runtime Bridge Validation": "SUCCESS",
+      "Ready Integration CI": "SUCCESS",
+      "Planner Free Window Gate": "SUCCESS",
+      "Ready Runtime E2E": "SUCCESS"
+    },
+    "guards": [
+      "consumer_only",
+      "ready_does_not_own_world_state",
+      "ready_does_not_mutate_crew_identity",
+      "reference_board_direct_binding=false",
+      "auto_asset_promotion=false",
+      "auto_badge_activation=false",
+      "auto_award=false"
+    ],
+    "open": [],
+    "main_sha": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Ready Integration CI": "SUCCESS",
+      "Ready Runtime E2E": "SUCCESS"
+    }
+  },
+  "next": [
+    "preserve FINAL_MAIN_CLOSED items",
+    "keep 60 historical badge catalog WORKING_DRAFT_NOT_ACTIVE",
+    "keep Snap Crew content in CONTENT_APPROVAL_HOLD until genuine approved asset evidence exists",
+    "do not reopen implementation without regression evidence"
+  ],
+  "execution_gate": {
+    "state": "NO_EXECUTABLE_CODE_OPEN",
+    "executable_code_open": false,
+    "allowed_next_actions": [
+      "supply genuine Snap-owned reviewed/approved Crew asset content when available"
+    ],
+    "forbidden_without_new_evidence": [
+      "reopen SP-BADGE-006 implementation",
+      "reopen SP-BADGE-008 implementation",
+      "rebuild Ready World State consumer",
+      "activate historical 60-badge catalog",
+      "switch to DATA INDEXING/vector work"
+    ]
+  },
+  "merge_readiness": {
+    "hide_seek_pr_17": {
+      "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
+      "base_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
+      "current_main_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    },
+    "snap_pop_pr_8": {
+      "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
+      "base_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
+      "current_main_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    },
+    "ready_set_pr_105": {
+      "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
+      "base_sha": "e030d685c9717f9fab691dab379326e9e9067303",
+      "current_main_sha": "e030d685c9717f9fab691dab379326e9e9067303",
+      "mergeable": true,
+      "ci": "ALL_SUCCESS",
+      "draft": true
+    }
+  },
+  "final_main": {
+    "hide_seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+    "snap_pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+    "ready_set": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd"
+  }
+}
