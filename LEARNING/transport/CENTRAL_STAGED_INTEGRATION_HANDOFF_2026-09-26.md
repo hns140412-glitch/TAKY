@@ -82,3 +82,8 @@ USER != DEBUGGER. Do not ask the user to run fixture tests. No rollback of Core 
 - Prior exact-head `5779e525` CI #36251334129 SUCCESS. Read actual Hide/Snap `emit` envelopes: both retain EventEnvelope `source,event_type,event_id,occurred_at` plus bridge `type,payload`; Hide also has `child_id`, Snap's envelope does not necessarily expose `child_id`. Existing Ready integration is a Planner action consumer, not an equivalent raw learning observation producer.
 - New `specialist-bridge-event-adapter.js` requires exact matching source/type/event_type, stable original event_id, payload member_id and rejects conflicting child_id; Ready path requires an explicitly produced observation with matching member and observation_only. Included in browser bundle and CI regression. No automatic postMessage listener, event fabrication or member inference.
 - OPEN: product repo opt-in wiring to audited bundle and trusted selected-member auth; actual Ready evidence producer; real browser and live central tests. No main/Netlify changes.
+
+## LATEST DELTA — canonical learning-scope gate
+- Prior exact-head `d898b0a3` CI #36251955145 SUCCESS.
+- Cross-checked mapper output against `server-transport-kernel.js` canonicalization. A packet with only family/member but no subject or concept_skill_target would reach HTTP then fail `CANONICAL_INVALID`, so mapper now requires both and a valid observed timestamp, writes them into context, and preserves optional learning_target_id. Updated mapping, browser bundle and pipeline fixtures.
+- Product bridge events with absent subject/skill remain unqueued until explicit trusted context resolves them; never fabricate defaults. No product repository mutation, main merge, live service or Netlify.
