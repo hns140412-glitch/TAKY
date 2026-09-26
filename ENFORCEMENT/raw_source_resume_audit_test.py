@@ -69,4 +69,43 @@ class RawResumeAuditTests(unittest.TestCase):
  def test_unresolved_correction_target(self):
   self.items[1]["correction_targets"]=["unknown"]
   self.assertTrue(any("CORRECTION_TARGET_UNRESOLVED" in x for x in self.run_audit()))
+ def test_real_repo_command_contract_scope_detects_three_handoff_omissions(self):
+  # An actual checked-out source section, not a handwritten synthetic conversation.
+  # Claim boundary: this section only; not all chat history or a full bundle acceptance.
+  contract=(Path(__file__).resolve().parents[1]/"OS"/"COMMAND_INTERACTION.md").read_text(encoding="utf-8")
+  heading="## 0.3 Natural `재개` / `재개준비` command — HARD LOCK"
+  self.assertIn(heading,contract)
+  excerpt=contract[contract.index(heading):].split("## 1. COMMAND DISCOVERY",1)[0]
+  lines=[line for line in excerpt.splitlines() if line.strip()]
+  self.assertEqual(len(lines),len(set(lines)),"source quotes must be unique")
+  self.raw.write_text(excerpt,encoding="utf-8")
+  self.items=[{"source_id":f"CMD03-L{n}","raw_source_id":"CMD03",
+               "exact_quote":line,"content_sha256":h(line.encode("utf-8")),
+               "classification":"PRESERVE","type":"DECISION"}
+              for n,line in enumerate(lines,1)]
+  self.manifest={"scope_id":"repo:OS/COMMAND_INTERACTION.md#0.3",
+                 "scope_boundary":"checked-out actual command contract section 0.3 only; no historical chat coverage claim",
+                 "unavailable_sources":[],"excluded_lines":[],
+                 "raw_sources":[{"source_id":"CMD03","path":"raw.md","sha256":h(self.raw.read_bytes())}],
+                 "material_items":self.items}
+  self.inventory={"source_scope":self.manifest["scope_id"],"source_revision":"checked-out-0.3",
+                  "coverage_status":"SOURCE_RECOVERED","source_items":[
+                   {"source_id":x["source_id"],"source_pointer":f'raw:CMD03#{x["source_id"]}',
+                    "content_sha256":x["content_sha256"],"classification":"PRESERVE"}
+                    for x in self.items]}
+  self.coverage={"source_revision":"checked-out-0.3","coverage_items":[
+                 {"source_id":x["source_id"],"content_sha256":x["content_sha256"],
+                  "classification":"PRESERVE","recoverable_pointer":f'raw:CMD03#{x["source_id"]}'}
+                  for x in self.items]}
+  self.assertEqual([],self.run_audit())
+  for label,needle in (("decision","A standalone `재개`"),
+                       ("latest override","Read the ENTIRE latest relevant HANDOFF"),
+                       ("user correction","Do not stop at a status recital.")):
+   with self.subTest(omission=label):
+    candidate=next(x for x in self.items if needle in x["exact_quote"])
+    old=self.coverage["coverage_items"]
+    self.coverage["coverage_items"]=[x for x in old if x["source_id"]!=candidate["source_id"]]
+    errors=self.run_audit()
+    self.assertIn(f'OMITTED_SOURCE_ITEM: {candidate["source_id"]}',errors)
+    self.coverage["coverage_items"]=old
 if __name__=="__main__":unittest.main()
