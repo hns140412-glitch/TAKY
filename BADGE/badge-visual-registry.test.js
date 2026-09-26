@@ -7,9 +7,14 @@ const registry=JSON.parse(fs.readFileSync(path.join(__dirname,'badge-visual-regi
 
 assert.equal(registry.items.length,60);
 assert.equal(registry.status,'WORKING_DRAFT_VISUAL_REGISTRY_NOT_ACTIVE');
-assert.equal(registry.visual_contract.grade_stars.meaning,'GRADE_CLASSIFICATION');
-assert.equal(registry.visual_contract.grade_stars.progress_counter,false);
-assert.equal(registry.visual_contract.grade_stars.gem_currency,false);
+assert.equal(registry.visual_contract.reacquisition_stars.meaning,'APPROVED_REAWARD_COUNT_WITHIN_CURRENT_TIER');
+assert.equal(registry.visual_contract.reacquisition_stars.first_award,'ACTIVATES_BADGE_WITH_ZERO_STARS');
+assert.equal(registry.visual_contract.reacquisition_stars.tier_up_at,5);
+assert.equal(registry.visual_contract.reacquisition_stars.telemetry_repeat_is_not_reaward,true);
+assert.equal(registry.visual_contract.reacquisition_stars.gem_currency,false);
+assert.equal(registry.visual_contract.character_layer.source,'CHILD_PROFILE');
+assert.equal(registry.visual_contract.ownership_presentation.unearned,'SILHOUETTE');
+assert.equal(registry.visual_contract.border_fx,'SOFT_RADIAL_GRADIENT_FADE');
 assert.equal(registry.items.every(x=>x.active===false),true);
 assert.equal(registry.items.every(x=>x.asset_state==='UNBOUND'),true);
 assert.equal(registry.items.every(x=>x.renderer_binding===false),true);

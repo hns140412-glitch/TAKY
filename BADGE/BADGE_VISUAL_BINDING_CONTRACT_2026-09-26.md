@@ -1,42 +1,37 @@
-# TAKY BADGE VISUAL BINDING CONTRACT — 2026-09-26
+# BADGE VISUAL & REAWARD CONTRACT — latest user correction, 2026-09-26
 
-Status: RECOVERED_STYLE_CONTRACT / ASSET_BINDING_OPEN
+Authority: direct user correction overrides older "grade classification" interpretation.
+Scope: correct star semantics and visual presentation; preserve the already closed Evidence → Candidate Review → Achievement Decision → Award Ledger logic.
 
-## Confirmed visual direction
-- Shape: circular.
-- Illustration: hand-drawn / pastel.
-- Protagonist: Profile Character.
-- Recovered palette lineage: GREEN → BLUE → RED → GOLD → PLATINUM.
-- Stars: 1–5 **grade classification**, not a repeat counter, EXP, gem, affinity, score, power, or streak.
+## Meaning of a badge
+A fictional exploration crew's campaign/achievement insignia (탐험대 공적 훈장 / 부대 표장 느낌), not a score, a weapon, a power-up, or an actual military decoration. Maintain a child-friendly hand-drawn pastel look.
 
-## Historical runtime correction
-The historical Snap compositor was preview-only and correctly did not award badges, but its count→tier/star progression must not be revived as canonical behavior after the later user correction that badge stars represent grade classification.
+## Acquisition and stars
+- FIRST approved acquisition: activate the badge in the child's collection; zero stars.
+- Each subsequent DISTINCT, approved acquisition of the SAME badge for the SAME child: one additional star.
+- 5 re-acquisition stars: change to the next tier. The five-star promotion threshold is user-confirmed. Showing five stars during the promotion and resetting the new tier to zero are PROVISIONAL presentation/projection policies pending separate confirmation.
+- A mere repeated activity event, time spent, right/wrong answer, raw telemetry, EXP or gem does not count as reacquisition. Only accepted Award Ledger receipts following the existing review/decision process qualify.
+- Dedupe by award receipt ID; reject cross-child or cross-badge projection.
+- Historical tier-name/palette lineage: GREEN / BLUE / RED / GOLD / PLATINUM. The final tier list and what happens AFTER the last tier remain OPEN; do not invent a rank beyond the defined list.
 
-## Catalog boundary
-- Historical 60 names remain `WORKING_DRAFT_NOT_ACTIVE`.
-- Visual IDs created in `badge-visual-registry-working.json` are working identifiers only.
-- A working visual ID does not activate a badge and does not approve an asset.
+This REPLACES and supersedes the obsolete "1–5 stars = grade classification" text in earlier documents and code. The old historical preview's automatic observation-count → tier/stars calculation must not be restored.
 
-## Asset approval gate
-A runtime badge asset may bind only when all are true:
-1. exact badge/visual identity is known;
-2. asset state = `APPROVED_RUNTIME_ASSET`;
-3. approval status = `APPROVED_RUNTIME_ASSET`;
-4. explicit approval evidence is recorded;
-5. renderer binding is explicitly enabled;
-6. the badge itself is separately active under its badge logic authority.
+## Five separate visual layers
+1. Approved badge base art: round, pastel, fictional campaign-merit composition, expedition icon/ribbon, NO baked-in individual child character.
+2. CHILD_PROFILE character overlay: separate and child-scoped; never transplant another child's profile/identity.
+3. Ownership state: LOCKED = silhouette/desaturated; EARNED = active color after verified award.
+4. Reacquisition progress: 0–5 stars per current tier, driven only by approved reawards.
+5. Border: soft radial/conic pastel gradient that dissipates towards the edge.
 
-## Variant sheet evidence
-Recovered Library sheets:
-- `귀여운 탐험가 배지 컬렉션.png`
-- `파스텔 탐험대 배지 12종.png`
+For a real image, registry approval and child's ownership are separate. An unapproved image remains unrenderable even in silhouette; a non-owned badge with approved art appears only as a LOCKED silhouette, not as an awarded item.
 
-They are visually consistent with the recovered direction but differ in names/scenes and have no recovered explicit final-approval evidence. Therefore:
-- REFERENCE / CANDIDATE EVIDENCE only;
-- no auto-cropping into production assets;
-- no automatic canonicalization;
-- no 1:1 runtime binding until explicit approval evidence exists.
+## Approval and historical content
+60 draft names remain WORKING_DRAFT_NOT_ACTIVE. Both recovered 12-badge sheets remain reference candidates, not approved final per-badge assets. User favors the pastel final direction but the exact historical final source file has not been verified. No silent selection, cropping, asset promotion, catalog activation, or automatic award.
 
-## Ownership
-TAKY owns the cross-app visual registry/approval contract.
-App runtimes consume approved visual records; they do not infer or self-approve assets.
+## Implementation boundary
+- Central registry validates semantic contract and approval.
+- `badge-reaward-progress.js` is a pure projection from PREVALIDATED authoritative award receipts; it does not itself award badges or validate the cryptographic origin of input.
+- Renderer consumes approved assets and an authoritative ownership projection; it is NOT itself a decision maker.
+- Child profile overlay must come from the matching child's profile.
+- `badge-visual-presentation.css` is a shared style contract until explicitly imported by an app.
+- Actual app surface wiring remains OPEN.

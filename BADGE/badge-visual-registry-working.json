@@ -18,16 +18,6 @@
     "shape": "CIRCLE",
     "illustration": "HAND_DRAWN_PASTEL",
     "protagonist": "PROFILE_CHARACTER",
-    "grade_stars": {
-      "range": [
-        1,
-        5
-      ],
-      "meaning": "GRADE_CLASSIFICATION",
-      "progress_counter": false,
-      "gem_currency": false,
-      "exp": false
-    },
     "recovered_tier_palette": [
       "GREEN",
       "BLUE",
@@ -36,7 +26,37 @@
       "PLATINUM"
     ],
     "tier_assignment_rule": "OPEN",
-    "exact_asset_set": "OPEN_UNRESOLVED_UNTIL_EXPLICIT_APPROVAL"
+    "exact_asset_set": "OPEN_UNRESOLVED_UNTIL_EXPLICIT_APPROVAL",
+    "reacquisition_stars": {
+      "range": [
+        0,
+        5
+      ],
+      "meaning": "APPROVED_REAWARD_COUNT_WITHIN_CURRENT_TIER",
+      "first_award": "ACTIVATES_BADGE_WITH_ZERO_STARS",
+      "reaward": "ONE_STAR_PER_DISTINCT_APPROVED_REAWARD",
+      "tier_up_at": 5,
+      "star_source": "AWARD_LEDGER_ONLY",
+      "telemetry_repeat_is_not_reaward": true,
+      "exp": false,
+      "gem_currency": false,
+      "affinity": false,
+      "power": false,
+      "top_tier_rule": "OPEN",
+      "post_promotion_star_policy": "PROVISIONAL_RESET_TO_ZERO_PENDING_CONFIRMATION"
+    },
+    "character_layer": {
+      "source": "CHILD_PROFILE",
+      "separate_from_base_art": true,
+      "child_scope_required": true
+    },
+    "ownership_presentation": {
+      "unearned": "SILHOUETTE",
+      "earned": "ACTIVE_PASTEL"
+    },
+    "border_fx": "SOFT_RADIAL_GRADIENT_FADE",
+    "insignia_direction": "FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA",
+    "asset_approval_remains_separate_from_earning": true
   },
   "items": [
     {
