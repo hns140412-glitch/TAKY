@@ -1,0 +1,29 @@
+name: Source Inventory Omission Gate
+
+on:
+  push:
+    paths:
+      - 'ENFORCEMENT/source_inventory_omission_gate.py'
+      - 'ENFORCEMENT/source_inventory_omission_gate_test.py'
+      - '.github/workflows/source-inventory-omission-gate.yml'
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/source_inventory_omission_gate.py'
+      - 'ENFORCEMENT/source_inventory_omission_gate_test.py'
+      - '.github/workflows/source-inventory-omission-gate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-inventory-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and run positive and adversarial omission regressions
+        run: |
+          python -m py_compile ENFORCEMENT/source_inventory_omission_gate.py ENFORCEMENT/source_inventory_omission_gate_test.py
+          python -m unittest discover -s ENFORCEMENT -p 'source_inventory_omission_gate_test.py' -v
