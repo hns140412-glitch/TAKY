@@ -24,6 +24,10 @@ The user confirmed that the Learning Engine is a separate TAKY-owned service, no
 - Passes only method, path, headers and string body to the previously tested central endpoint; neither endpoint nor this bridge generates awards or writes Google Drive.
 - Can be mounted on a separately approved server host; tests use `http.createServer` bound only to 127.0.0.1 with ephemeral port and `LocalJsonStrongStore`.
 
+## Additional adversarial correction to central ingress
+
+The #157 central endpoint had stripped a client payload's `verification_candidate` but not a nested `context.verification_receipt`. The underlying canonical adapter accepts such a receipt by matching its fields, so a browser could fabricate one with correct event/member/subject and falsely promote itself. This PR explicitly strips all client-owned proof fields from top-level, context, event, evidence and payload, and feeds **only the scrubbed packet** into the server-specialist verification callback. A server callback accidentally echoing its input now cannot launder original PWA verification assertions. New tests inject a structurally valid forged Hide exact-match receipt and a fake Snap parent human-rubric receipt: both must remain OBSERVATION_ONLY without verified scope receipts. Only a distinct real server-owned verifier result may add proof.
+
 ## Tests and limits
 `google-node-central-integration.test.js` uses an explicitly TEST-ONLY Google ticket stub and server membership fixtures, and exercises real loopback HTTP, observation-only forged PWA exact-match, family/child/sibling authorization, changed email but stable Google `sub`, adult gift-only denial, expiry/issuer/audience checks, Origin and preflight, large body, and committed no-store ACK.
 
