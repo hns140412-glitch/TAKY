@@ -31,13 +31,34 @@ const header=(headers,name)=>{
 const scrub=(packet)=>{
   const p=JSON.parse(JSON.stringify(packet));
   delete p.verification_input;
+  delete p.verification_receipt;
+  delete p.verification_candidate;
+  delete p.verified_outcome;
+  // Context is client-owned, too. The canonical evidence adapter accepts a
+  // context.verification_receipt, so failing to scrub it lets an attacker
+  // fabricate a structurally valid receipt and promote their own answer.
+  if(object(p.context)){
+    delete p.context.verification_receipt;
+    delete p.context.verification_input;
+    delete p.context.verification_candidate;
+    delete p.context.verified_outcome;
+  }
+  if(object(p.event)){
+    delete p.event.verification_receipt;
+    delete p.event.verification_input;
+    delete p.event.verification_candidate;
+    delete p.event.verified_outcome;
+  }
   if(object(p.evidence)){
     delete p.evidence.verification_candidate;
+    delete p.evidence.verification_receipt;
+    delete p.evidence.verification_input;
     delete p.evidence.verification;
     delete p.evidence.verified_outcome;
   }
   if(object(p.event?.payload)){
     delete p.event.payload.verification_candidate;
+    delete p.event.payload.verification_receipt;
     delete p.event.payload.verification_input;
     delete p.event.payload.verification;
     delete p.event.payload.verified_outcome;
@@ -98,7 +119,10 @@ function create({
    if(verifySpecialistEvidence){
      let verified;
      try{verified=await verifySpecialistEvidence({
-       packet:JSON.parse(JSON.stringify(packet)),
+       // Never pass the original raw client verification claims into the
+       // verifier callback: a verifier accidentally echoing its input would
+       // otherwise launder untrusted proof into server-approved evidence.
+       packet:JSON.parse(JSON.stringify(safe)),
        identity:Object.freeze({...identity,
          authorized_member_ids:Object.freeze([...identity.authorized_member_ids])})
      })}catch{return bad(503,'TRUSTED_SPECIALIST_VERIFICATION_UNAVAILABLE')}
