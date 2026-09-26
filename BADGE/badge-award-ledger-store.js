@@ -94,6 +94,9 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
       let awardedAt;
       try{awardedAt=trustedNow();}catch{return deny('TRUSTED_AWARD_TIME_UNAVAILABLE')}
       if(!isSignedUtcInstant(awardedAt))return deny('TRUSTED_AWARD_TIME_INVALID');
+      // Preserve chronological ordering for a badge even if the server clock drifts.
+      const latestAwardAt=data.rows[data.rows.length-1]?.record.awarded_at;
+      if(latestAwardAt&&awardedAt<latestAwardAt)return deny('AWARD_TIME_REGRESSION');
       const record={
         ledger_sequence:sequence,award_id:awardId,decision_id:r.decision_id,
         family_id:family,
