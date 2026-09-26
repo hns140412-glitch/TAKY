@@ -1,3 +1,18 @@
+# LATEST RESUME OVERRIDE — REAWARD VISUAL CORRECTION MAIN CLOSURE — 2026-09-26
+
+Direct user correction of star semantics and exploration merit-insignia presentation merged to TAKY main: `568c4126f596c513738287fb947273c1f8bee2a9`. Post-merge Badge Visual Registry Validation: SUCCESS.
+
+FIRST award unlocks a badge with zero stars. Distinct approved REAWARD ledger receipts increment stars; five trigger tier change. Actual ledger adapter is NOT wired yet. Post-promotion zero reset is provisional, not explicitly approved. Pure projection and layered renderer contract/CSS are on main but not imported into app runtime.
+
+Drive image search (both connected accounts, badge/배지/뱃지/pastel/explorer terms and matching image inspection) found no verified exact final badge sheet. Candidate A/B remain reference only; do not auto-approve.
+
+Current state: `REAWARD_VISUAL_CORRECTION_MAIN_CLOSED_FINAL_ASSET_AND_APP_WIRING_OPEN`.
+CLOSED logic remains CLOSED. Historical 60 badges remain `WORKING_DRAFT_NOT_ACTIVE`.
+NEXT: locate explicit final asset approval, ledger adapter integration, child-scoped overlay and app surface binding; resolve tier rollover/terminal policy.
+No asset selection, catalog activation, app deployment or Netlify action was done.
+
+---
+
 # BADGE VISUAL BINDING — NEW CHAT START — 2026-09-26 LATEST
 
 ## LATEST DIRECT USER CORRECTION (highest priority)
