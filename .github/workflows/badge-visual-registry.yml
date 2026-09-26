@@ -48,3 +48,7 @@ jobs:
         run: node --check BADGE/badge-ledger-visual-binding.js
       - name: Verified ledger-to-visual persisted integration
         run: node BADGE/badge-ledger-visual-binding.test.js
+      - name: Family badge read access syntax
+        run: node --check BADGE/badge-family-read-access.js
+      - name: Verified family badge access regression
+        run: node BADGE/badge-family-read-access.test.js
