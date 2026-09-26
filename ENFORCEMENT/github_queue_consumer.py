@@ -16,6 +16,7 @@ from executor_cycle import run as run_executor_cycle
 from github_issue_executor_queue import parse_issue, parse_comment
 
 QUEUE_PREFIX = "[TAKY EXECUTOR QUEUE]"
+CANCELLATION_AUTHOR_ASSOCIATIONS = {"OWNER", "MEMBER", "COLLABORATOR"}
 
 def validate_envelope(envelope: dict) -> list[str]:
     failures: list[str] = []
@@ -33,6 +34,37 @@ def validate_envelope(envelope: dict) -> list[str]:
     if str(envelope.get("provider", "")).upper() != "CODEX":
         failures.append("DISPATCH_PROVIDER_UNSUPPORTED")
     return failures
+
+def validate_cancellation(envelope: dict, issue: dict, comment: dict, cancellation: dict) -> list[str]:
+    failures: list[str] = []
+    if cancellation.get("task_id") != envelope.get("task_id"):
+        failures.append("CANCELLATION_TASK_ID_MISMATCH")
+    if cancellation.get("task_contract_sha256") != envelope.get("task_contract_sha256"):
+        failures.append("CANCELLATION_CONTRACT_HASH_MISMATCH")
+    if str(cancellation.get("decision", "")).strip().upper() != "CANCEL":
+        failures.append("CANCELLATION_DECISION_INVALID")
+    for key in ("cancellation_id", "authority_ref", "reason"):
+        value = cancellation.get(key)
+        if not isinstance(value, str) or not value.strip():
+            failures.append(f"CANCELLATION_{key.upper()}_MISSING")
+
+    issue_number = issue.get("number")
+    if cancellation.get("queue_issue_number") != issue_number:
+        failures.append("CANCELLATION_QUEUE_ISSUE_MISMATCH")
+
+    user = comment.get("user") or comment.get("author") or {}
+    actor_login = user.get("login") if isinstance(user, dict) else None
+    association = str(
+        comment.get("author_association")
+        or comment.get("authorAssociation")
+        or ""
+    ).strip().upper()
+    if not actor_login or cancellation.get("authority_ref") != actor_login:
+        failures.append("CANCELLATION_AUTHORITY_ACTOR_MISMATCH")
+    if association not in CANCELLATION_AUTHOR_ASSOCIATIONS:
+        failures.append("CANCELLATION_AUTHORITY_NOT_REPOSITORY_TRUSTED")
+    return failures
+
 
 def _comment(kind: str, data: dict, source_comment_id=None, issue_ack: bool=False) -> str:
     markers = [f"<!-- TAKY_QUEUE_CONSUMER:{kind} -->"]
@@ -88,6 +120,25 @@ def consume(event: dict) -> dict:
 
     receipt = parsed.get("receipt")
     result = parsed.get("result")
+    cancellation = parsed.get("cancellation")
+
+    if cancellation is not None:
+        failures = validate_cancellation(envelope, issue, comment, cancellation)
+        kind = "TASK_CANCELLED" if not failures else "CANCELLATION_REJECTED"
+        data = {
+            "task_id": envelope.get("task_id"),
+            "cancellation_id": cancellation.get("cancellation_id"),
+            "authority_ref": cancellation.get("authority_ref"),
+            "reason": cancellation.get("reason"),
+            "detected": failures,
+        }
+        return {
+            "pass": not failures,
+            "action": kind,
+            "comment": _comment(kind, data, source_comment_id=source_comment_id),
+            "close_issue": not failures,
+        }
+
     if receipt is not None:
         checked = validate_receipt(envelope, receipt)
         kind = "RECEIPT_ACCEPTED" if checked["pass"] else "RECEIPT_REJECTED"
