@@ -27,7 +27,8 @@
     "Introduced versionless document identity and immutable history policy in existing owner document on draft",
     "Patched GRAND MASTER only header and revision/lineage sections in draft",
     "Mapped DATA CURRENT promoted 679-source Drive IDs/receipt without reindex or copy",
-    "Created single stable C2S/REVISIONLESS_CURRENT_TRANSITION.md with source and functional gap matrix"
+    "Created single stable C2S/REVISIONLESS_CURRENT_TRANSITION.md with source and functional gap matrix",
+    "Compared current three app main HEADs against open integration branches; recorded unmerged evidence chain gap in the same C2S matrix"
   ],
   "evidence": {
     "data_index_source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
@@ -36,7 +37,20 @@
     "data_promoted_source_count": 679,
     "source_coverage": "MATERIAL_CURRENT_SOURCES_READ__PREVIOUS_CHAT_FULL_TRANSCRIPT_UNVERIFIED",
     "draft_policy": "MASTER/REVISION_GOVERNANCE.md",
-    "transition_matrix": "C2S/REVISIONLESS_CURRENT_TRANSITION.md"
+    "transition_matrix": "C2S/REVISIONLESS_CURRENT_TRANSITION.md",
+    "product_main_snapshot_2026_09_27": {
+      "ready_set": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+      "hide_seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+      "snap_pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+      "note": "refresh live before action"
+    },
+    "integration_draft_status": {
+      "central_learning_pr": 159,
+      "hide_evidence_pr": 19,
+      "ready_roundtrip_pr": 100,
+      "ready_weekly_availability_pr": 93,
+      "merged_into_main": false
+    }
   },
   "open": [
     "Read-only consumer/reference inventory for legacy REV/V physical paths; search miss is not source absence",
@@ -44,9 +58,10 @@
     "DATA promoted ID/receipt selection and shared-family logical owner smoke test in real readers, without raw 679-source reindex",
     "Whole-system actual evidence path across source -> index -> central learning -> review-need -> Planner dated allocation -> app result; map real blockers rather than invent complete",
     "Cross-app family/member isolation, live identity/server/outbox/ACK integration and device acceptance per owning project",
-    "Refresh this stable CURRENT after each independent verified batch; no new numbered copies"
+    "Refresh this stable CURRENT after each independent verified batch; no new numbered copies",
+    "Review PR #159 and current individual app contracts for one end-to-end trusted member/evidence/Planner consumer acceptance slice without touching badges or Work OS"
   ],
-  "next": "Review all affected current-reader references and prepare a narrow implementation task contract for semantic CURRENT resolver; preserve legacy files until tested consumer migration.",
+  "next": "Stabilize revisionless aliases in actual readers and choose the smallest end-to-end integration slice: central trusted family/member evidence ACK -> learning review need -> Planner dated allocation -> app result. No false live/readiness claim.",
   "implementation_status": "GOVERNANCE_DRAFT_AND_REGISTRY_DECLARATIVE_ALIAS_ONLY__RUNTIME_RESOLVER_NOT_YET_IMPLEMENTED",
   "updated_at": "2026-09-27"
 }
