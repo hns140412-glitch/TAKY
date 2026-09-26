@@ -22,7 +22,12 @@ Child Badge Collection has one-screen switching:
 - **날짜 미확인**: legacy verified awards without actual append time shown separately with no fabricated calendar day.
 - Approved visual art and actual asset binding are separately required for real art; calendar can truthfully show text/status with a neutral placeholder if art is still unapproved.
 
-Family Praise Badge gifts and gem gifts live in a **separate event lane / gift journal**. They can later share an authorized child's timeline/calendar view with explicit "가족의 칭찬" or "보석 선물" labels but MUST NOT count as Achievement reawards or auto-credit the Gem Wallet. Giver identity/message is subject to approved family-reader privacy and visibility policy. Parent has no personal unearned badge atlas.
+Family Praise Badge gifts and gem gifts live in a **separate event lane / gift journal**. The new read-only `BADGE/badge-family-gift-calendar.js` accepts only an injected trusted V2 signed gift journal, scopes to the recipient child, and builds separately labeled `FAMILY_PRAISE_BADGE_GIFT` and `FAMILY_GEM_GIFT` events. `composeChildCalendar` can put both lanes in the same month grid while preserving independent counts and provenance. A gift NEVER counts as an Achievement reaward, and the journaled gem total is not an assertion that the live Gem Wallet has been credited. The real service must independently authorize every gift-history read before invoking this projection; no live endpoint is added. Giver identity/message is subject to approved family-reader privacy and visibility policy. Parent has no personal unearned badge atlas.
+
+## Calendar interaction proposal
+- A small event indicator on a date: expedition badge for a verified achievement; a separate gift-ribbon for family praise; a gem-shaped mark for journaled gem gifts. Markers are visual categories, not reward amounts.
+- Tapping a date opens a day sheet with chronological entries. Tapping an achievement entry opens that badge's full event history. Gift entries open their separate approved gift-history detail, never the achievement reaward ledger.
+- Keep month-grid switching on one screen, no lengthy scrolling. Support reduced motion, labels instead of color-only meaning, and an explicit undated archive section for legacy awards.
 
 ## Regression gates
 - New actual signed award timestamp differs from Decision approval timestamp.
@@ -33,4 +38,4 @@ Family Praise Badge gifts and gem gifts live in a **separate event lane / gift j
 - Same source history drives detail + calendar; historical 60 draft and new 20 discovery proposals never appear as awarded records just because they have narrative titles.
 
 ## Still OPEN / no production claim
-The live app UI, verified multi-device Award Ledger backend, actual authenticated Achievement Decision source, final approved visual art, trusted production active badge catalogue and deployment remain OPEN. The existing tests use explicit fake authorities and temporary Node storage. This scope changes no deployed PWA or user's real award history, does not auto-activate the 60 preset content slots, and does not merge pending Ready PR #110.
+The live app UI, verified multi-device Award Ledger backend, actual authenticated Achievement Decision source, final approved visual art, trusted production active badge catalogue, actual family gift history-read authorization endpoint and deployment remain OPEN. The existing tests use explicit fake authorities and temporary Node storage. This scope changes no deployed PWA or user's real award history, does not auto-activate the 60 preset content slots, and does not merge pending Ready PR #110.
