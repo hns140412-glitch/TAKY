@@ -1,4 +1,5 @@
 'use strict';
+const cryptoProvider=require('node:crypto').webcrypto;
 const assert=require('node:assert/strict');
 const Adapter=require('./indexeddb-evidence-outbox-store.js');
 const Outbox=require('./scoped-evidence-outbox.js');
@@ -65,13 +66,13 @@ function fakeIDB(){
  // Clear the disposable CAS probe row before testing scoped queue behavior.
  const probe=await a.read();
  assert.equal(await a.compareAndSwap(probe.version,{entries:[]}),true);
- const q=Outbox.create({storage:a});
+ const q=Outbox.create({storage:a,cryptoProvider});
  const p={packet_id:'hide-seek:e1',source_app:'hide-seek',
   context:{family_id:'F',member_id:'A'},
   event:{event_id:'e1',source:'hide-seek'}};
  assert.equal((await q.enqueue(p)).queued,true);
  assert.equal((await q.enqueue(p)).duplicate,true);
- const rows=await Outbox.create({storage:b}).list(['F','A','hide-seek']);
+ const rows=await Outbox.create({storage:b,cryptoProvider}).list(['F','A','hide-seek']);
  assert.equal(rows.length,1);
  assert.equal(rows[0].status,'PENDING');
  await a.close();await b.close();
