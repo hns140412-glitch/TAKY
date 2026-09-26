@@ -1,3 +1,15 @@
+# LATEST VERIFIED SOURCE — READY FAMILY AUTH / BADGE READ ACCESS — 2026-09-26
+
+Ready-Set main `1d672d862cc8329a5f19ca91c9ed6a338752f5ae` contains `netlify/functions/ready-family-auth-core.js` and `auth-session.mjs` (server-verified `NETLIFY_IDENTITY` family/member/role mapping), `family-link-child.mjs` (Parent links Child), `ready-sync.mjs` and `ready-sync-core.js` (family-scoped remote event persistence). They are real family/auth facilities, not Badge Award Decision authority. The current Ready `ready-sync` event get/set service is NOT a verified atomic, ordered Badge Award Ledger and is not substituted for it.
+
+This slice implements `BADGE/badge-family-read-access.js`, a SERVER-ONLY consumer requiring injected trusted session resolution, live identity membership lookup and a source bound to the same family. Parent reads only verified children in own family, child self only. No browser bootstrap/fake session grants access.
+
+The Node ledger now requires `family_id` in scoped file identity, source snapshots, receipts, award IDs and HMAC genesis/chain, so copying a signed child/badge file into another family fails even with the same key and child ID. Older test-only pre-family files are deliberately not silently migrated. Source family and snapshot/receipt family must agree in projection.
+
+Production blockers remain: actual Ready endpoint/API composition, trusted Achievement Decision validator, external durable family store that supports ordered/atomic writes and rollback anchoring, server-only signing-key management, final approved badge catalog/art, real child profile overlay and browser consumer. Do NOT deploy the Node filesystem ledger as if Netlify function local disk were a shared multi-device backend. No deploy was performed.
+
+---
+
 # LATEST DELTA — DURABLE LEDGER CORE IMPLEMENTATION (PR #146, 2026-09-26)
 
 Previous audit correctly found NO existing executable source. This PR adds a new Node-only owner-neutral implementation:
