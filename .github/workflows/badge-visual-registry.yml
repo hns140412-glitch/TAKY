@@ -60,3 +60,9 @@ jobs:
         run: node --check BADGE/parent-praise-gift-journal.js
       - name: Durable parent gift journal regression
         run: node BADGE/parent-praise-gift-journal.test.js
+      - name: Family relationship-agnostic praise syntax
+        run: node --check BADGE/family-praise-gift.js
+      - name: Family gift journal V2 syntax
+        run: node --check BADGE/family-praise-gift-journal.js
+      - name: Authorized family giver and V2 journal regression
+        run: node BADGE/family-praise-gift.test.js
