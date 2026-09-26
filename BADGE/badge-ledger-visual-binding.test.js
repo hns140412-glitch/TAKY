@@ -7,9 +7,9 @@ const crypto=require('node:crypto');
 const {createLedger}=require('./badge-award-ledger-store.js');
 const {resolveBadgeDisplay}=require('./badge-ledger-visual-binding.js');
 const directory=fs.mkdtempSync(path.join(os.tmpdir(),'taky-badge-vertical-'));
-const child_id='CHILD_A',badge_id='ACTIVE_BADGE_1';
+const family_id='FAMILY_A',child_id='CHILD_A',badge_id='ACTIVE_BADGE_1';
 const tier_order=['GREEN','BLUE','RED','GOLD','PLATINUM'];
-const store=createLedger({directory,signingKey:crypto.randomBytes(32),
+const store=createLedger({directory,family_id,signingKey:crypto.randomBytes(32),
  verifyDecision:x=>x?.trusted===true?{ok:true,receipt:x.receipt}:{ok:false},
  isBadgeActive:x=>x.child_id===child_id&&x.badge_id===badge_id});
 const record={
@@ -21,7 +21,7 @@ const record={
 const profile={authority:'CHILD_PROFILE',child_id,avatar_asset_ref:'tests/fixtures/child-a.webp'};
 const args={source:store.source,child_id,badge_id,tier_order,visualRecord:record,profile};
 const award=(i,award_kind)=>store.appendApprovedDecision({trusted:true,receipt:{
- decision_id:'decision-'+i,decision_ref:'test-decision-'+i,child_id,badge_id,
+ decision_id:'decision-'+i,decision_ref:'test-decision-'+i,family_id,child_id,badge_id,
  decision_status:'APPROVED',award_kind,approved_at:'2026-09-26T09:00:00Z'
 }});
 (async()=>{
