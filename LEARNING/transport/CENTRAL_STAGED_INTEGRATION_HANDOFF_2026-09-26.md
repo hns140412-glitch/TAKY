@@ -87,3 +87,9 @@ USER != DEBUGGER. Do not ask the user to run fixture tests. No rollback of Core 
 - Prior exact-head `d898b0a3` CI #36251955145 SUCCESS.
 - Cross-checked mapper output against `server-transport-kernel.js` canonicalization. A packet with only family/member but no subject or concept_skill_target would reach HTTP then fail `CANONICAL_INVALID`, so mapper now requires both and a valid observed timestamp, writes them into context, and preserves optional learning_target_id. Updated mapping, browser bundle and pipeline fixtures.
 - Product bridge events with absent subject/skill remain unqueued until explicit trusted context resolves them; never fabricate defaults. No product repository mutation, main merge, live service or Netlify.
+
+## LATEST DELTA — fail-closed real bridge entrypoints
+- Prior exact-head `b90b2207` CI #36253065554 SUCCESS.
+- Actual Hide/Snap bridge adapter now rejects missing subject or concept_skill_target with `BRIDGE_LEARNING_SCOPE_MISSING_HOLD` and enforces each producer's observation/contextual-only flags. Ready requires explicit observation with subject/skill, never infers a learning outcome from Planner allocation.
+- PWA pipeline now offers explicit `enqueueBridge('hide-seek'|'snap-pop',raw)` and `enqueueReadyObservation(explicitObservation)` methods, routed through mapped packet and second authenticated selected-member scope check. Integration test exercises original Hide envelope and missing-skill rejection. No automatic event listeners or product repo mutation.
+- OPEN: trusted selected-member session provider, actual product opt-in asset binding, real browser IDB/multitab and credentialed central E2E. Draft PR, main/Netlify untouched.
