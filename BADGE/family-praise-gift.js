@@ -52,7 +52,9 @@ function createFamilyPraiseGiftService({
     })}catch{return fail('GIVER_PERMISSION_LOOKUP_FAILED')}
     if(!grant||grant.allowed!==true||grant.membership_verified!==true||
        grant.permission!=='FAMILY_PRAISE_GIFT'||grant.family_id!==session.family_id||
-       grant.giver_member_id!==session.member_id)
+       grant.giver_member_id!==session.member_id||
+       grant.action!==(mutation?'SEND_GIFT':'VIEW_GIFT_OPTIONS')||
+       grant.target_child_id!==targetChildId)
       return fail('FAMILY_GIFT_PERMISSION_REQUIRED');
     return {ok:true,session,member};
   }
