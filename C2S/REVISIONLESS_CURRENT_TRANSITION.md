@@ -52,5 +52,9 @@ C. THEN: migrate actual owners one by one with exact original hash and readback;
 D. LATER: optional physical rename after references are updated, archive original paths as history. Separate necessary runtime/schema/API/SW/model compatibility versioning from document authority.
 E. Test productive system outcomes (source->index->learning->planner->app->result) rather than endlessly generating new revision reports.
 
+### Authenticated DATA receipt readback (2026-09-27)
+Independently fetched all three original Google Drive IDs under the TAKY account. The original source and utilization objects remain present with their expected IDs; the original promotion receipt is a Google-native document, not an inferred filename. Its exact candidate ID, source ID, 679/679/679 counts, source-set equality, seven accepted delta records, no source loss, no full reindex, and `canonical:false` match the namespace CURRENT pointer. Drive source and utilization metadata last modified 2026-09-25T13:40:13Z / 13:40:17Z; receipt 13:41:43Z. This confirms the selected receipt at read time, **not** that the entire DATA universe has no newer approved promotion elsewhere.
+`ENFORCEMENT/semantic_current_resolver.py` now accepts `--receipt-file` for independently authenticated original receipt JSON and fails closed on mismatched IDs, coverage or safety flags. Its fixture test represents the verified receipt fields, not a live credentialed fetch in CI. Keep the original IDs in DATA CURRENT and preserve historical filenames as provenance.
+
 ## 5. Recovery / verification
 Current tested state is draft/proposal, not current on main; old source files remain physically unchanged. Every future current pointer must include namespace, semantic owner, actual ID/path, selection receipt, exact evidence, check time and state; if unknown/ambiguous, fail without falling back to greatest revision or newest timestamp. Do not claim full system completion or any invented percentage.
