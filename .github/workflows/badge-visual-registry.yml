@@ -32,3 +32,7 @@ jobs:
         run: node --check BADGE/badge-visual-renderer.js
       - name: Renderer guard regression
         run: node BADGE/badge-visual-renderer.test.js
+      - name: Reaward progression syntax
+        run: node --check BADGE/badge-reaward-progress.js
+      - name: Reaward progression regression
+        run: node BADGE/badge-reaward-progress.test.js
