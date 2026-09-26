@@ -4,20 +4,25 @@
  * Queue entries are immutable packets, scoped to one family/member/app.
  * A successful central ACK is recorded only by a matching lease owner.
  */
-const crypto=require('node:crypto');
 const VERSION='TAKY_SCOPED_EVIDENCE_OUTBOX_V1';
 const APPS=new Set(['ready-set','hide-seek','snap-pop']);
 const clean=x=>typeof x==='string'?x.trim():'';
-const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?
  Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
-const fingerprint=p=>hash(canonical(p));
+async function fingerprint(p,cryptoProvider){
+ const bytes=new TextEncoder().encode(JSON.stringify(canonical(p)));
+ const digest=await cryptoProvider.subtle.digest('SHA-256',bytes);
+ return Array.from(new Uint8Array(digest),x=>x.toString(16).padStart(2,'0')).join('');
+}
 const scopeOf=p=>[p?.context?.family_id,p?.context?.member_id,p?.source_app];
 const same=(a,b)=>a.every((v,i)=>v===b[i]);
 const valid=p=>p&&APPS.has(p.source_app)&&clean(p.packet_id)&&
  clean(p.context?.family_id)&&clean(p.context?.member_id)&&
  clean(p.event?.event_id)&&p.event.source===p.source_app;
-function create({storage,clock=Date.now,leaseMs=30000}={}){
+function create({storage,clock=Date.now,leaseMs=30000,cryptoProvider=globalThis.crypto}={}){
+ if(typeof cryptoProvider?.randomUUID!=='function'||
+    typeof cryptoProvider?.subtle?.digest!=='function')
+  throw Error('BROWSER_WEB_CRYPTO_REQUIRED');
  if(typeof storage?.read!=='function'||typeof storage?.compareAndSwap!=='function')
   throw Error('ATOMIC_PERSISTENT_OUTBOX_ADAPTER_REQUIRED');
  if(typeof clock!=='function'||!Number.isInteger(leaseMs)||leaseMs<1000)
@@ -36,7 +41,7 @@ function create({storage,clock=Date.now,leaseMs=30000}={}){
  }
  async function enqueue(packet){
   if(!valid(packet))throw Error('SCOPED_EVIDENCE_PACKET_REQUIRED');
-  const immutable=structuredClone(packet),digest=fingerprint(immutable);
+  const immutable=structuredClone(packet),digest=await fingerprint(immutable,cryptoProvider);
   return change(s=>{
    const key=immutable.source_app+':'+immutable.packet_id;
    const old=s.entries.find(x=>x.key===key);
@@ -57,7 +62,7 @@ function create({storage,clock=Date.now,leaseMs=30000}={}){
    const row=s.entries.find(x=>same(x.scope,scope)&&
     (x.status==='PENDING'||(x.status==='IN_FLIGHT'&&x.lease?.until<=clock())));
    if(!row)return {write:false,value:null};
-   row.status='IN_FLIGHT';row.lease={owner,until:clock()+leaseMs,nonce:crypto.randomUUID()};
+   row.status='IN_FLIGHT';row.lease={owner,until:clock()+leaseMs,nonce:cryptoProvider.randomUUID()};
    row.attempts++;
    return {write:true,value:{key:row.key,packet:structuredClone(row.packet),
     digest:row.digest,owner,nonce:row.lease.nonce,attempts:row.attempts}};
