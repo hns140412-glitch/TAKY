@@ -98,8 +98,8 @@ def audit(root, manifest_path, inventory_path, handoff_path):
         if sid in raw and quote and raw[sid].count(quote)==1:
             start=raw[sid].index(quote)
             end=start+len(quote)
-            first=raw[sid][:start].count("\\n")+1
-            last=raw[sid][:end-1].count("\\n")+1
+            first=raw[sid][:start].count("\n")+1
+            last=raw[sid][:end-1].count("\n")+1
             covered.update((sid,n) for n in range(first,last+1))
     for sid,content in raw.items():
         for line_no,line in enumerate(content.splitlines(),1):
