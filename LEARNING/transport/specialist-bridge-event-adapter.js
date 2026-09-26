@@ -9,6 +9,14 @@ function fromBridge(source_app,raw){
   !clean(raw.event_id)||!clean(raw.occurred_at)||!raw.payload||
   typeof raw.payload!=='object'||!clean(raw.payload.member_id))
   throw Error('EXACT_SPECIALIST_BRIDGE_EVENT_REQUIRED');
+ if(!clean(raw.payload.subject)||!clean(raw.payload.concept_skill_target))
+  throw Error('BRIDGE_LEARNING_SCOPE_MISSING_HOLD');
+ if(source_app==='hide-seek'&&
+   (raw.payload.observation_only!==true||raw.payload.global_mastery_claim!==false))
+  throw Error('HIDE_OBSERVATION_ONLY_CONTRACT_REQUIRED');
+ if(source_app==='snap-pop'&&
+   (raw.payload.contextual_evidence_only!==true||raw.payload.global_mastery_claim!==false))
+  throw Error('SNAP_CONTEXTUAL_ONLY_CONTRACT_REQUIRED');
  if(raw.child_id&&raw.child_id!==raw.payload.member_id)
   throw Error('BRIDGE_CHILD_PAYLOAD_SCOPE_CONFLICT');
  return {
@@ -20,7 +28,8 @@ function fromBridge(source_app,raw){
 function readyObservation({event_id,occurred_at,member_id,payload}={}){
  if(!clean(event_id)||!clean(occurred_at)||!clean(member_id)||
   !payload||typeof payload!=='object'||payload.member_id!==member_id||
-  payload.observation_only!==true)
+  payload.observation_only!==true||!clean(payload.subject)||
+  !clean(payload.concept_skill_target))
   throw Error('READY_EXPLICIT_OBSERVATION_REQUIRED');
  return {source_app:'ready-set',type:'READY_LEARNING_OBSERVATION',
   event_id,occurred_at,member_id,payload:structuredClone(payload)};
