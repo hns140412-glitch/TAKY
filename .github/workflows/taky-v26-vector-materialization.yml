@@ -1,0 +1,102 @@
+name: TAKY V26 Neural Vector Materialization
+
+on:
+  workflow_dispatch:
+    inputs:
+      utilization_payload_url:
+        description: 'Public HTTPS URL for DATA_UTILIZATION_INDEX_2026-09-25_V26.json'
+        required: true
+        type: string
+      probe_query:
+        description: 'Query used to verify matching query-vector generation'
+        required: false
+        default: '한국어 학습 자료'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: ENFORCEMENT/requirements-embedding-local.txt
+      - name: Validate explicit HTTPS payload URL
+        env:
+          PAYLOAD_URL: ${{ inputs.utilization_payload_url }}
+        run: |
+          python - <<'PY'
+          import os
+          from urllib.parse import urlparse
+          u=urlparse(os.environ['PAYLOAD_URL'])
+          assert u.scheme == 'https', 'HTTPS_REQUIRED'
+          assert u.hostname, 'HOST_REQUIRED'
+          PY
+      - name: Install local embedding runtime
+        run: python -m pip install -r ENFORCEMENT/requirements-embedding-local.txt
+      - name: Fetch promoted V26 payload
+        env:
+          PAYLOAD_URL: ${{ inputs.utilization_payload_url }}
+        run: |
+          curl --fail --location --proto '=https' --max-redirs 3 --max-filesize 30000000 \
+            "$PAYLOAD_URL" -o /tmp/v26.json
+      - name: Verify V26 authority shape
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/v26.json', encoding='utf-8'))
+          assert d.get('schema_version') == 'DATA_UTILIZATION_INDEX_V26', d.get('schema_version')
+          rows=d.get('source_entries')
+          assert isinstance(rows,list) and len(rows)==679, len(rows or [])
+          PY
+      - name: Materialize 679-source neural index
+        run: |
+          python ENFORCEMENT/data_index_local_embedding_provider.py index \
+            --payload /tmp/v26.json --output /tmp/v26-neural-index.json
+      - name: Materialize matching query vector
+        env:
+          PROBE_QUERY: ${{ inputs.probe_query }}
+        run: |
+          python ENFORCEMENT/data_index_local_embedding_provider.py query \
+            --text "$PROBE_QUERY" --output /tmp/query-vector.json
+      - name: Verify vector contract and 1:1 source coverage
+        run: |
+          PYTHONPATH=ENFORCEMENT python - <<'PY'
+          import json
+          from pathlib import Path
+          from data_index_vector_search import load_vector_index, load_query_vector, vector_scores
+          idx=load_vector_index(Path('/tmp/v26-neural-index.json'))
+          q=load_query_vector(Path('/tmp/query-vector.json'))
+          assert idx['provider']['model_id']==q['model_id']
+          assert idx['provider']['dimension']==q['dimension']==384
+          assert len(idx['vectors'])==679
+          scores=vector_scores(idx,q)
+          assert scores, 'NO_POSITIVE_VECTOR_SCORES'
+          receipt={
+            'status':'PASS',
+            'source_count':679,
+            'unique_vector_source_ids':len(idx['vectors']),
+            'model_id':idx['provider']['model_id'],
+            'dimension':idx['provider']['dimension'],
+            'neural_embedding_verified':True,
+            'positive_query_scores':len(scores),
+          }
+          Path('/tmp/materialization-receipt.json').write_text(
+            json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(receipt,ensure_ascii=False))
+          PY
+      - name: Upload controlled materialization artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: taky-v26-neural-vector-materialization
+          path: |
+            /tmp/v26-neural-index.json
+            /tmp/query-vector.json
+            /tmp/materialization-receipt.json
+          retention-days: 7
