@@ -44,6 +44,10 @@ jobs:
         run: node --check BADGE/badge-award-ledger-store.js
       - name: Durable Award Ledger persisted replay
         run: node BADGE/badge-award-ledger-store.test.js
+      - name: Child badge calendar projection syntax
+        run: node --check BADGE/badge-award-calendar.js
+      - name: Signed badge award history and Seoul calendar integration
+        run: node BADGE/badge-award-calendar.test.js
       - name: Verified ledger-to-visual syntax
         run: node --check BADGE/badge-ledger-visual-binding.js
       - name: Verified ledger-to-visual persisted integration
