@@ -82,7 +82,7 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   // the same signing key, child ID and badge ID.
   const familyB='FAMILY_B';
   const familyBFile=path.join(directory,crypto.createHash('sha256')
-    .update(familyB+'\\0'+child_id+'\\0'+badge_id).digest('hex')+'.json');
+    .update(familyB+'\0'+child_id+'\0'+badge_id).digest('hex')+'.json');
   const otherFamily=createLedger({directory,family_id:familyB,signingKey,
     verifyDecision:verifier,isBadgeActive:active});
   fs.writeFileSync(familyBFile,old);
