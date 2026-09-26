@@ -1,0 +1,73 @@
+/* Shared presentation contract; consuming apps must explicitly import this file. */
+.takyBadgeInsignia {
+  --badge-fade-a: #c7e7d7;
+  --badge-fade-b: #d8ceef;
+  --badge-fade-c: #f4d5c8;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.takyBadgeInsignia::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(from 20deg,var(--badge-fade-a),var(--badge-fade-b),var(--badge-fade-c),var(--badge-fade-a));
+  -webkit-mask: radial-gradient(circle, transparent 58%, #000 76%, transparent 99%);
+  mask: radial-gradient(circle, transparent 58%, #000 76%, transparent 99%);
+  filter: blur(3px);
+  opacity: .88;
+}
+.takyBadgeInsignia .takyBadgeBaseArt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  grid-area: 1 / 1;
+}
+.takyBadgeInsignia .takyBadgeCharacterLayer {
+  position: absolute;
+  width: 62%;
+  height: 68%;
+  left: 19%;
+  top: 16%;
+  object-fit: contain;
+  z-index: 1;
+}
+.takyBadgeInsignia .takyBadgeReawardStars {
+  position: absolute;
+  z-index: 4;
+  top: 3%;
+  left: 15%;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: clamp(12px, 4vw, 22px);
+}
+.takyBadgeInsignia .takyBadgeReawardStars .is-empty {opacity: .26;}
+.takyBadgeInsignia figcaption {
+  position: absolute;
+  z-index: 4;
+  bottom: 9%;
+  max-width: 80%;
+  font-size: .8rem;
+  text-align: center;
+}
+.takyBadgeInsignia[data-badge-state="LOCKED"] .takyBadgeBaseArt {
+  filter: grayscale(1) brightness(.67) contrast(.8);
+  opacity: .56;
+}
+.takyBadgeInsignia[data-badge-state="LOCKED"] .takyBadgeReawardStars,
+.takyBadgeInsignia[data-badge-state="LOCKED"] figcaption {opacity: .38;}
+.takyBadgeInsignia[data-badge-state="LOCKED"]::before {opacity: .34;}
+@media (prefers-reduced-motion: reduce) {
+  .takyBadgeInsignia {animation: none !important; transition: none !important;}
+}
