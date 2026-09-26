@@ -17,40 +17,42 @@ const hmac=(secret,s)=>crypto.createHmac('sha256',secret).update(s).digest('hex'
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&
   a.length===64&&b.length===64&&crypto.timingSafeEqual(Buffer.from(a,'hex'),Buffer.from(b,'hex'));
-const scopeKey=(child,badge)=>hash(child+'\0'+badge);
-const genesis=(secret,child,badge)=>hmac(secret,'GENESIS\n'+child+'\n'+badge);
+const scopeKey=(family,child,badge)=>hash(family+'\0'+child+'\0'+badge);
+const genesis=(secret,family,child,badge)=>hmac(secret,'GENESIS\n'+family+'\n'+child+'\n'+badge);
 
-function createLedger({directory,signingKey,verifyDecision,isBadgeActive}={}){
+function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActive}={}){
   if(!clean(directory)||!path.isAbsolute(directory))throw Error('ABSOLUTE_LEDGER_DIRECTORY_REQUIRED');
+  const family=clean(family_id);
+  if(!family||family!==family_id||family.length>128)throw Error('EXPLICIT_FAMILY_SCOPE_REQUIRED');
   if(!Buffer.isBuffer(signingKey)||signingKey.length<32)throw Error('TRUSTED_SIGNING_KEY_REQUIRED');
   if(typeof verifyDecision!=='function'||typeof isBadgeActive!=='function')
     throw Error('TRUSTED_DECISION_AND_ACTIVE_CATALOG_CAPABILITIES_REQUIRED');
   fs.mkdirSync(directory,{recursive:true,mode:0o700});
-  const file=(child,badge)=>path.join(directory,scopeKey(child,badge)+'.json');
+  const file=(child,badge)=>path.join(directory,scopeKey(family,child,badge)+'.json');
   const validScope=(child,badge)=>clean(child)===child&&clean(badge)===badge&&child.length<=128&&badge.length<=128;
   const empty=(child,badge)=>({
-    contract:STORE_CONTRACT,child_id:child,badge_id:badge,
-    rows:[],checkpoint:genesis(signingKey,child,badge)
+    contract:STORE_CONTRACT,family_id:family,child_id:child,badge_id:badge,
+    rows:[],checkpoint:genesis(signingKey,family,child,badge)
   });
   function readVerified(child,badge){
     if(!validScope(child,badge))throw Error('LEDGER_SCOPE_REQUIRED');
     const f=file(child,badge);
     const data=fs.existsSync(f)?JSON.parse(fs.readFileSync(f,'utf8')):empty(child,badge);
-    if(data.contract!==STORE_CONTRACT||data.child_id!==child||data.badge_id!==badge||!Array.isArray(data.rows))
+    if(data.contract!==STORE_CONTRACT||data.family_id!==family||data.child_id!==child||data.badge_id!==badge||!Array.isArray(data.rows))
       throw Error('LEDGER_SCOPE_OR_SHAPE_INVALID');
-    let previous=genesis(signingKey,child,badge);
+    let previous=genesis(signingKey,family,child,badge);
     const decisions=new Set(),awards=new Set();
     for(let i=0;i<data.rows.length;i++){
       const row=data.rows[i],receipt=row?.record||{};
       if(!row||row.record?.ledger_sequence!==i||
-        receipt.child_id!==child||receipt.badge_id!==badge||
+        receipt.family_id!==family||receipt.child_id!==child||receipt.badge_id!==badge||
         receipt.award_status!=='AWARDED'||receipt.decision_status!=='APPROVED'||
         receipt.award_kind!==(i===0?'INITIAL_AWARD':'REAWARD')||
         !clean(receipt.decision_id)||!clean(receipt.decision_ref)||
         !clean(receipt.award_id)||!clean(receipt.approved_at)||
         decisions.has(receipt.decision_id)||awards.has(receipt.award_id)||
         receipt.previous_digest!==previous||
-        receipt.award_id!==hash('AWARD\n'+child+'\n'+badge+'\n'+receipt.decision_id)||
+        receipt.award_id!==hash('AWARD\n'+family+'\n'+child+'\n'+badge+'\n'+receipt.decision_id)||
         !same(row.digest,hmac(signingKey,previous+'\n'+JSON.stringify(receipt))))
         throw Error('LEDGER_INTEGRITY_OR_SEQUENCE_FAILED');
       decisions.add(receipt.decision_id);awards.add(receipt.award_id);
@@ -82,9 +84,11 @@ function createLedger({directory,signingKey,verifyDecision,isBadgeActive}={}){
         return deny('DUPLICATE_APPROVED_DECISION');
       const sequence=data.rows.length,neededKind=sequence===0?'INITIAL_AWARD':'REAWARD';
       if(r.award_kind!==neededKind)return deny('AWARD_KIND_OUT_OF_SEQUENCE');
-      const awardId=hash('AWARD\n'+child+'\n'+badge+'\n'+r.decision_id);
+      if(clean(r.family_id)!==family)return deny('DECISION_FAMILY_SCOPE_MISMATCH');
+      const awardId=hash('AWARD\n'+family+'\n'+child+'\n'+badge+'\n'+r.decision_id);
       const record={
         ledger_sequence:sequence,award_id:awardId,decision_id:r.decision_id,
+        family_id:family,
         decision_ref:r.decision_ref,child_id:child,badge_id:badge,
         decision_status:'APPROVED',award_status:'AWARDED',award_kind:r.award_kind,
         approved_at:r.approved_at,previous_digest:data.checkpoint
@@ -105,11 +109,11 @@ function createLedger({directory,signingKey,verifyDecision,isBadgeActive}={}){
     }
   }
   const source=Object.freeze({
-    contract:SOURCE_CONTRACT,
+    contract:SOURCE_CONTRACT,family_id:family,
     async loadCompleteHistory({child_id,badge_id}={}){
       const data=readVerified(child_id,badge_id);
       return {kind:'COMPLETE_CHILD_BADGE_AWARD_HISTORY',complete:true,
-        child_id,badge_id,row_count:data.rows.length,checkpoint:data.checkpoint,
+        family_id:family,child_id,badge_id,row_count:data.rows.length,checkpoint:data.checkpoint,
         rows:data.rows.map(row=>JSON.parse(JSON.stringify(row)))};
     },
     async verifyAwardRow(row,{child_id,badge_id,checkpoint}={}){
@@ -125,7 +129,7 @@ function createLedger({directory,signingKey,verifyDecision,isBadgeActive}={}){
       return {ok:true,source_contract:SOURCE_CONTRACT,receipt:{
         authority:'AWARD_LEDGER',decision_status:r.decision_status,
         award_status:r.award_status,award_id:r.award_id,
-        child_id:r.child_id,badge_id:r.badge_id,award_kind:r.award_kind,
+        family_id:r.family_id,child_id:r.child_id,badge_id:r.badge_id,award_kind:r.award_kind,
         ledger_sequence:r.ledger_sequence,source_checkpoint:checkpoint
       }};
     }
