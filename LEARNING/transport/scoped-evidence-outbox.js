@@ -23,7 +23,7 @@ function create({storage,clock=Date.now,leaseMs=30000}={}){
  if(typeof clock!=='function'||!Number.isInteger(leaseMs)||leaseMs<1000)
   throw Error('OUTBOX_CLOCK_AND_LEASE_REQUIRED');
  async function change(mutator){
-  for(let n=0;n<12;n++){
+  for(let n=0;n<32;n++){
    const r=await storage.read();
    if(!r||!Array.isArray(r.data?.entries))throw Error('OUTBOX_READ_INVALID');
    const next=structuredClone(r.data);
@@ -57,10 +57,10 @@ function create({storage,clock=Date.now,leaseMs=30000}={}){
    const row=s.entries.find(x=>same(x.scope,scope)&&
     (x.status==='PENDING'||(x.status==='IN_FLIGHT'&&x.lease?.until<=clock())));
    if(!row)return {write:false,value:null};
-   row.status='IN_FLIGHT';row.lease={owner,until:clock()+leaseMs};
+   row.status='IN_FLIGHT';row.lease={owner,until:clock()+leaseMs,nonce:crypto.randomUUID()};
    row.attempts++;
    return {write:true,value:{key:row.key,packet:structuredClone(row.packet),
-    digest:row.digest,owner,attempts:row.attempts}};
+    digest:row.digest,owner,nonce:row.lease.nonce,attempts:row.attempts}};
   });
  }
  async function settle(claimed,result){
@@ -68,7 +68,7 @@ function create({storage,clock=Date.now,leaseMs=30000}={}){
   return change(s=>{
    const row=s.entries.find(x=>x.key===claimed.key);
    if(!row||row.status!=='IN_FLIGHT'||row.lease?.owner!==claimed.owner||
-    row.digest!==claimed.digest||row.lease.until<=clock())
+    row.digest!==claimed.digest||row.lease?.nonce!==claimed.nonce||row.lease.until<=clock())
     return {write:false,value:{updated:false,reason:'STALE_OR_WRONG_LEASE'}};
    if(result?.ok===true){
     // sendPending() alone validates the authenticated central response;
