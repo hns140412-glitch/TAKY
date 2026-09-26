@@ -1,0 +1,79 @@
+{
+  "task_id": "BADGE_VISUAL_BINDING",
+  "namespace": "BADGE_VISUAL",
+  "status": "REGISTRY_IMPLEMENTED_ASSET_AND_RUNTIME_BINDING_OPEN",
+  "updated_at": "2026-09-26",
+  "authority": [
+    "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
+    "BADGE/BADGE_VISUAL_BINDING_CONTRACT_2026-09-26.md",
+    "BADGE/badge-visual-registry-working.json",
+    "BADGE/badge-visual-candidate-evidence.json"
+  ],
+  "inherited_closed": {
+    "badge_logic": true,
+    "evidence": true,
+    "candidate_review": true,
+    "achievement_decision": true,
+    "award_ledger": true,
+    "auto_inference_guards": true
+  },
+  "recovered": {
+    "historical_catalog_count": 60,
+    "historical_catalog_status": "WORKING_DRAFT_NOT_ACTIVE",
+    "historical_visual_runtime": "RECOVERED_PREVIEW_ONLY",
+    "historical_exact_asset_set": "NOT_RECOVERED_AS_APPROVED",
+    "style_contract": {
+      "shape": "CIRCLE",
+      "illustration": "HAND_DRAWN_PASTEL",
+      "protagonist": "PROFILE_CHARACTER",
+      "palette_lineage": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ],
+      "stars": "GRADE_CLASSIFICATION_1_TO_5"
+    }
+  },
+  "implementation": {
+    "central_visual_registry": "IMPLEMENTED_BRANCH_CANDIDATE",
+    "registry_entry_count": 60,
+    "registry_activation": false,
+    "registry_asset_binding": false,
+    "registry_renderer_binding": false,
+    "validation": "SUCCESS",
+    "exact_head": "414be27dedc0a11c6ce20d2d91d6e9d3b6e6bd84"
+  },
+  "candidate_visual_evidence": {
+    "sheet_a": {
+      "name": "귀여운 탐험가 배지 컬렉션.png",
+      "exact_catalog_matches": 10,
+      "total": 12,
+      "status": "REFERENCE_CANDIDATE_ONLY"
+    },
+    "sheet_b": {
+      "name": "파스텔 탐험대 배지 12종.png",
+      "exact_catalog_matches": 8,
+      "total": 12,
+      "status": "REFERENCE_CANDIDATE_ONLY"
+    },
+    "explicit_final_approval_recovered": false,
+    "canonical_asset_set_selected": false
+  },
+  "open": [
+    "explicitly approved badge asset set recovery or approval",
+    "badge_id/visual_id to approved asset 1:1 binding",
+    "cross-app display surface ownership",
+    "app runtime renderer consumer binding",
+    "final tier assignment rule"
+  ],
+  "hard_locks": [
+    "do not activate historical 60 catalog",
+    "do not treat candidate sheets as approved assets",
+    "do not infer stars from repeat count",
+    "stars mean grade classification",
+    "do not couple badge visuals to EXP/gem/affinity/power",
+    "do not reopen closed badge evidence/award logic without regression evidence"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_SYSTEM_RECOVERY",
   "namespace": "BADGE",
-  "status": "FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD",
+  "status": "LOGIC_CLOSED_VISUAL_BINDING_OPEN",
   "updated_at": "2026-09-26",
   "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
   "hard_locks": {
@@ -119,10 +119,12 @@
     "do not reopen implementation without regression evidence"
   ],
   "execution_gate": {
-    "state": "NO_EXECUTABLE_CODE_OPEN",
-    "executable_code_open": false,
+    "state": "BADGE_LOGIC_CLOSED_VISUAL_BINDING_OPEN",
+    "executable_code_open": true,
     "allowed_next_actions": [
-      "supply genuine Snap-owned reviewed/approved Crew asset content when available"
+      "recover explicit approved badge visual asset evidence",
+      "complete approved asset registry binding",
+      "complete app runtime renderer binding"
     ],
     "forbidden_without_new_evidence": [
       "reopen SP-BADGE-006 implementation",
@@ -186,5 +188,12 @@
     "only_remaining_dependency": "SNAP_OWNED_APPROVED_CREW_CONTENT",
     "implementation_reopen_required": false,
     "authority": "THIS_CURRENT_OVERRIDES_PRE_MERGE_SNAPSHOTS"
+  },
+  "visual_binding": {
+    "status": "REGISTRY_IMPLEMENTED_ASSET_AND_RUNTIME_BINDING_OPEN",
+    "current": "CURRENT/BADGE_VISUAL_BINDING_CURRENT_2026-09-26.json",
+    "historical_60_catalog_active": false,
+    "approved_asset_set_recovered": false,
+    "app_runtime_renderer_bound": false
   }
 }
