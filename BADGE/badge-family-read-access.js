@@ -81,7 +81,7 @@ function createFamilyBadgeReader({resolveServerSession,lookupIdentityMember,open
     const scope=await authorizeChildScope(request,child_id);
     if(!scope.ok)return scope;
     if(typeof listActiveBadgeIds!=='function')return deny('TRUSTED_ACTIVE_BADGE_LIST_REQUIRED');
-    if(typeof month!=='string'||!/^\\d{4}-(0[1-9]|1[0-2])$/.test(month))
+    if(typeof month!=='string'||!/^\d{4}-(0[1-9]|1[0-2])$/.test(month))
       return deny('VALID_YEAR_MONTH_REQUIRED');
     let catalog;
     try{catalog=await listActiveBadgeIds({family_id:scope.family_id,child_id:scope.child_id})}
