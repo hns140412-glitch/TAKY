@@ -16,7 +16,8 @@ function stateKey(packet={}){
 async function readState(store,key){
   const entry=await store.getWithMetadata(key,{type:'json',consistency:'strong'});
   if(!entry||entry.data==null)return {exists:false,state:Pipeline.emptyState(),etag:null};
-  return {exists:true,state:entry.data,etag:entry.etag||null};
+  if(!entry.etag||typeof entry.etag!=='string')throw new Error('EXISTING_STRONG_STATE_ETAG_REQUIRED');
+  return {exists:true,state:entry.data,etag:entry.etag};
 }
 
 async function writeState(store,key,state,{etag,exists}={}){
@@ -38,7 +39,9 @@ async function ingestPacket(store,packet={},options={}){
     if(!result.ok)return result;
 
     const write=await writeState(store,key,result.state,{etag:current.etag,exists:current.exists});
-    if(write?.modified!==false){
+    // A missing/unconfirmed store response must never be reported as a saved
+    // verified learning receipt. A false conditional result is a real conflict.
+    if(write?.modified===true&&typeof write.etag==='string'&&write.etag){
       return {
         ...result,
         durable_store:{
@@ -51,6 +54,7 @@ async function ingestPacket(store,packet={},options={}){
         }
       };
     }
+    if(write?.modified!==false)return {ok:false,reason:'DURABLE_STORE_WRITE_UNCONFIRMED',retryable:true};
   }
 
   return {
