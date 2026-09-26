@@ -50,4 +50,7 @@ jobs:
               BODY="$(printf '%s' "$ITEM" | base64 --decode)"
               gh issue comment "$ISSUE_NUMBER" --body "$BODY" >/dev/null
             done
+            if [ "$(jq -r '.close_issue // false' "/tmp/queue-${ISSUE_NUMBER}-plan.json")" = "true" ]; then
+              gh issue close "$ISSUE_NUMBER" --reason "not planned" >/dev/null
+            fi
           done < /tmp/queue-issue-numbers.txt
