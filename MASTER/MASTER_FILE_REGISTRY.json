@@ -82,6 +82,8 @@
       "class":"ACTIVE_SUPPORT",
       "authority_owner":"LEARNING_ENGINE_CORE",
       "source_authority":"LEARNING_DATA_COMPLETENESS_MATRIX_2026-09-23_V49.json",
+      "source_authority_status":"HISTORICAL_SOURCE_LABEL_NOT_VERIFIED_LIVE_CURRENT",
+      "current_authority_resolution":"LEARNING_ENGINE_CORE_AND_APPLICABLE_NAMESPACE_CURRENT; NO_FILENAME_FALLBACK",
       "runtime_role":"EVIDENCE_POLICY_REGISTRY"
     }
   }
