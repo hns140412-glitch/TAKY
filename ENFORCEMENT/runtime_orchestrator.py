@@ -17,7 +17,11 @@ from c2s_preflight_bridge import run as run_c2s_preflight
 from codex_task_contract_builder import build as build_codex_task_contract
 from executor_transport import build_envelope as build_executor_envelope
 from executor_adapter_registry import resolve as resolve_executor_adapter
-from execution_checkpoint import guard as guard_checkpoint, persist as persist_checkpoint
+from execution_checkpoint import (
+    consume_approval,
+    guard as guard_checkpoint,
+    persist as persist_checkpoint,
+)
 from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from reference_acquisition_adapter import acquire as acquire_reference
@@ -319,25 +323,30 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
                 detected.extend(approval_checkpoint_result.get("detected", []))
 
     approval_resume_result = None
+    approval_consumption_result = None
+    approval_evidence = effective_record.get("human_approval_evidence")
     resume_cfg = effective_record.get("approval_resume")
     if isinstance(resume_cfg, dict) and resume_cfg.get("required") is True:
-        if not effective_record.get("human_approval_evidence"):
+        if not approval_evidence:
             detected.append("HUMAN_APPROVAL_EVIDENCE_MISSING_FOR_RESUME")
         namespace = resume_cfg.get("namespace")
         task_id = resume_cfg.get("task_id") or effective_record.get("task_id")
         checkpoint_hash = resume_cfg.get("expected_checkpoint_hash")
+        atomic_unit = resume_cfg.get("expected_atomic_unit")
         if not isinstance(namespace, str) or not namespace.strip():
             detected.append("APPROVAL_RESUME_NAMESPACE_MISSING")
         if not isinstance(task_id, str) or not task_id.strip():
             detected.append("APPROVAL_RESUME_TASK_ID_MISSING")
         if not isinstance(checkpoint_hash, str) or not checkpoint_hash.strip():
             detected.append("APPROVAL_RESUME_CHECKPOINT_HASH_MISSING")
+        if not isinstance(atomic_unit, str) or not atomic_unit.strip():
+            detected.append("APPROVAL_RESUME_ATOMIC_UNIT_MISSING")
         if not detected:
             approval_resume_result = guard_checkpoint(
                 repo_root,
                 namespace=namespace,
                 task_id=task_id,
-                expected_atomic_unit=resume_cfg.get("expected_atomic_unit"),
+                expected_atomic_unit=atomic_unit,
                 expected_checkpoint_hash=checkpoint_hash,
             )
             detected.extend(approval_resume_result.get("detected", []))
@@ -478,6 +487,23 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             )
             detected.extend(dispatch_result.get("detected", []))
 
+    if (
+        not detected
+        and isinstance(resume_cfg, dict)
+        and resume_cfg.get("required") is True
+        and isinstance(approval_resume_result, dict)
+        and approval_resume_result.get("pass") is True
+    ):
+        approval_consumption_result = consume_approval(
+            repo_root,
+            namespace=resume_cfg.get("namespace"),
+            task_id=resume_cfg.get("task_id") or effective_record.get("task_id"),
+            expected_atomic_unit=resume_cfg.get("expected_atomic_unit"),
+            expected_checkpoint_hash=resume_cfg.get("expected_checkpoint_hash"),
+            evidence=approval_evidence,
+        )
+        detected.extend(approval_consumption_result.get("detected", []))
+
     detected = list(dict.fromkeys(detected))
     authorized = not detected
     return {
@@ -509,6 +535,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "checkpoint_guard": checkpoint_guard_result,
         "approval_checkpoint": approval_checkpoint_result,
         "approval_resume_guard": approval_resume_result,
+        "approval_consumption": approval_consumption_result,
         "context_firewall": context_firewall_result,
         "source_quarantine": quarantine_result,
         "synthesis_barrier": synthesis_barrier_result,

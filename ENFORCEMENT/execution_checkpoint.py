@@ -13,7 +13,7 @@ import json
 import os
 import re
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -173,6 +173,172 @@ def guard(
         "detected": failures,
         "current_path": str(current),
         "checkpoint": record,
+    }
+
+
+def validate_approval_evidence(
+    evidence: object,
+    *,
+    namespace: str,
+    task_id: str,
+    checkpoint_hash_value: str,
+    atomic_unit: str,
+) -> tuple[dict[str, Any] | None, list[str]]:
+    failures: list[str] = []
+    if not isinstance(evidence, dict):
+        return None, ["APPROVAL_EVIDENCE_INVALID"]
+
+    approval_id = evidence.get("approval_id")
+    approver_ref = evidence.get("approver_ref")
+    decision = str(evidence.get("decision", "")).strip().upper()
+
+    if not isinstance(approval_id, str) or not approval_id.strip():
+        failures.append("APPROVAL_ID_MISSING")
+    if not isinstance(approver_ref, str) or not approver_ref.strip():
+        failures.append("APPROVER_REF_MISSING")
+    if decision != "APPROVE":
+        failures.append("APPROVAL_DECISION_NOT_APPROVED")
+    if evidence.get("namespace") != namespace:
+        failures.append("APPROVAL_EVIDENCE_NAMESPACE_MISMATCH")
+    if evidence.get("task_id") != task_id:
+        failures.append("APPROVAL_EVIDENCE_TASK_ID_MISMATCH")
+    if evidence.get("checkpoint_hash") != checkpoint_hash_value:
+        failures.append("APPROVAL_EVIDENCE_CHECKPOINT_HASH_MISMATCH")
+    if evidence.get("atomic_unit") != atomic_unit:
+        failures.append("APPROVAL_EVIDENCE_ATOMIC_UNIT_MISMATCH")
+
+    normalized = {
+        "approval_id": approval_id.strip() if isinstance(approval_id, str) else None,
+        "approver_ref": approver_ref.strip() if isinstance(approver_ref, str) else None,
+        "decision": decision,
+        "namespace": namespace,
+        "task_id": task_id,
+        "checkpoint_hash": checkpoint_hash_value,
+        "atomic_unit": atomic_unit,
+    }
+    return normalized, failures
+
+
+def consume_approval(
+    state_root: Path,
+    *,
+    namespace: str,
+    task_id: str,
+    expected_atomic_unit: str,
+    expected_checkpoint_hash: str,
+    evidence: object,
+) -> dict[str, Any]:
+    guarded = guard(
+        state_root,
+        namespace=namespace,
+        task_id=task_id,
+        expected_atomic_unit=expected_atomic_unit,
+        expected_checkpoint_hash=expected_checkpoint_hash,
+    )
+    if not guarded.get("pass"):
+        return {
+            "pass": False,
+            "detected": list(guarded.get("detected", [])),
+            "approval_consumed": False,
+            "checkpoint_guard": guarded,
+        }
+
+    checkpoint = guarded.get("checkpoint") or {}
+    failures: list[str] = []
+    if checkpoint.get("status") != "BLOCKED":
+        failures.append("APPROVAL_CHECKPOINT_NOT_BLOCKED")
+    if not isinstance(checkpoint.get("approval_binding"), dict):
+        failures.append("APPROVAL_BINDING_MISSING")
+
+    normalized, evidence_failures = validate_approval_evidence(
+        evidence,
+        namespace=namespace,
+        task_id=task_id,
+        checkpoint_hash_value=expected_checkpoint_hash,
+        atomic_unit=expected_atomic_unit,
+    )
+    failures.extend(evidence_failures)
+    if failures:
+        return {
+            "pass": False,
+            "detected": failures,
+            "approval_consumed": False,
+            "checkpoint_guard": guarded,
+        }
+
+    claim_dir = (
+        state_root
+        / "HISTORY"
+        / "APPROVAL_CONSUMPTIONS"
+        / _slug(namespace)
+        / _slug(task_id)
+    )
+    claim_path = claim_dir / f"{_slug(expected_checkpoint_hash)}.json"
+    claim = {
+        "approval_id": normalized["approval_id"],
+        "approver_ref": normalized["approver_ref"],
+        "decision": normalized["decision"],
+        "namespace": namespace,
+        "task_id": task_id,
+        "atomic_unit": expected_atomic_unit,
+        "source_checkpoint_hash": expected_checkpoint_hash,
+        "consumed_at": datetime.now(timezone.utc).isoformat(),
+    }
+    claim_payload = canonical_bytes(claim)
+    claim_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        fd = os.open(str(claim_path), os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    except FileExistsError:
+        return {
+            "pass": False,
+            "detected": ["APPROVAL_ALREADY_CONSUMED"],
+            "approval_consumed": False,
+            "claim_path": str(claim_path),
+            "checkpoint_guard": guarded,
+        }
+
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(claim_payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except Exception:
+        try:
+            claim_path.unlink()
+        except OSError:
+            pass
+        raise
+
+    consumed_record = dict(checkpoint)
+    consumed_record.pop("checkpoint_hash", None)
+    consumed_record["status"] = "COMPLETE"
+    consumed_record["open"] = []
+    consumed_record["done"] = list(consumed_record.get("done", [])) + [
+        f"human approval consumed:{normalized['approval_id']}"
+    ]
+    consumed_record["updated_at"] = claim["consumed_at"]
+    consumed_record["approval_consumption"] = claim
+
+    persisted = persist(consumed_record, state_root, append_history=True)
+    if not persisted.get("pass"):
+        return {
+            "pass": False,
+            "detected": list(persisted.get("detected", []))
+            + ["APPROVAL_CLAIMED_BUT_CHECKPOINT_COMPLETION_FAILED"],
+            "approval_consumed": True,
+            "claim_path": str(claim_path),
+            "checkpoint_guard": guarded,
+        }
+
+    return {
+        "pass": True,
+        "detected": [],
+        "approval_consumed": True,
+        "approval_id": normalized["approval_id"],
+        "source_checkpoint_hash": expected_checkpoint_hash,
+        "completed_checkpoint_hash": persisted.get("checkpoint_hash"),
+        "claim_path": str(claim_path),
+        "checkpoint_guard": guarded,
     }
 
 
