@@ -137,7 +137,9 @@ function create({
    catch{return bad(503,'CENTRAL_DURABLE_INGEST_UNAVAILABLE')}
    if(!result?.ok){
      const denied=result?.reason==='TRANSPORT_NOT_AUTHORIZED';
-     return bad(denied?403:422,denied?'TRANSPORT_NOT_AUTHORIZED':
+     // CAS exhaustion is retryable; never classify it as a permanent evidence failure.
+     const retryable=result?.retryable===true;
+     return bad(denied?403:retryable?503:422,denied?'TRANSPORT_NOT_AUTHORIZED':
        clean(result?.reason)||'EVIDENCE_NOT_ACCEPTED');
    }
    if(!['REAL_EVIDENCE_RECEIPT','OBSERVATION_INGEST_RECEIPT'].includes(result.acknowledgement_kind)||
