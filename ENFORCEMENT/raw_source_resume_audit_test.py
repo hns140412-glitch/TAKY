@@ -10,7 +10,7 @@ class RawResumeAuditTests(unittest.TestCase):
   self.m=self.root/"raw_manifest.json";self.i=self.root/"inventory.json";self.o=self.root/"coverage.json"
   self.items=[{"source_id":"D1","raw_source_id":"R1","exact_quote":"Original decision A.","content_sha256":h(b"Original decision A."),"classification":"PRESERVE","type":"DECISION"},
    {"source_id":"C2","raw_source_id":"R1","exact_quote":"Later correction B.","content_sha256":h(b"Later correction B."),"classification":"ADJUST","type":"CORRECTION","correction_targets":["D1"]}]
-  self.manifest={"scope_id":"case-1","scope_boundary":"fixture raw.md only","unavailable_sources":[],"raw_sources":[{"source_id":"R1","path":"raw.md","sha256":h(self.raw.read_bytes())}],"material_items":self.items}
+  self.manifest={"scope_id":"case-1","scope_boundary":"fixture raw.md only","unavailable_sources":[],"excluded_lines":[],"raw_sources":[{"source_id":"R1","path":"raw.md","sha256":h(self.raw.read_bytes())}],"material_items":self.items}
   self.inventory={"source_scope":"case-1","source_revision":"rev1","coverage_status":"SOURCE_RECOVERED","source_items":[{"source_id":x["source_id"],"source_pointer":f"raw:R1#{x['source_id']}","content_sha256":x["content_sha256"],"classification":x["classification"]} for x in self.items]}
   self.coverage={"source_revision":"rev1","coverage_items":[{"source_id":x["source_id"],"content_sha256":x["content_sha256"],"classification":x["classification"],"handoff_location":f"HANDOFF.md#{x['source_id']}",**({"correction_linkage":["D1"]} if x["source_id"]=="C2" else {})} for x in self.items]}
  def run_audit(self):
@@ -39,6 +39,20 @@ class RawResumeAuditTests(unittest.TestCase):
  def test_unavailable_source_blocks_full_pass(self):
   self.manifest["unavailable_sources"]=["conversation:missing"]
   self.assertTrue(any("UNAVAILABLE_SOURCES" in x for x in self.run_audit()))
+ def test_unlisted_raw_line_fails_even_when_inventory_and_handoff_agree(self):
+  self.raw.write_text("Original decision A.\\nLater correction B.\\nForgotten requirement C.\\n")
+  self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
+  self.assertTrue(any("UNACCOUNTED_RAW_LINE: R1:3" in x for x in self.run_audit()))
+ def test_exclusion_requires_reason(self):
+  self.raw.write_text("Original decision A.\\nLater correction B.\\nNonmaterial greeting.\\n")
+  self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
+  self.manifest["excluded_lines"]=[{"raw_source_id":"R1","line":3,"reason":""}]
+  self.assertTrue(any("INVALID_EXCLUSION" in x for x in self.run_audit()))
+ def test_explicit_nonmaterial_exclusion_passes(self):
+  self.raw.write_text("Original decision A.\\nLater correction B.\\nNonmaterial greeting.\\n")
+  self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
+  self.manifest["excluded_lines"]=[{"raw_source_id":"R1","line":3,"reason":"nonmaterial greeting"}]
+  self.assertEqual([],self.run_audit())
  def test_missing_quote(self):
   self.items[1]["exact_quote"]="Never said this"
   self.assertTrue(any("RAW_QUOTE_NOT_UNIQUE_OR_MISSING" in x for x in self.run_audit()))
