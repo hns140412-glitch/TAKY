@@ -23,7 +23,11 @@ const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&HEX.test(a)&&HEX.tes
 const timestamp=s=>typeof s==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(s)&&
  Number.isFinite(Date.parse(s))&&new Date(s).toISOString()===s;
 const scopeOk=s=>typeof s==='string'&&s.length>0&&s.length<=128&&s===clean(s);
-function createCasAwardLedger({store,family_id,signingKey,verifyDecision,isBadgeActive,now,maxRetries=5}={}){
+function createCasAwardLedger({store,family_id,signingKey,verifyDecision,isBadgeActive,now,maxRetries=5,experimentalNonProduction=false}={}){
+ // Intent guard, NOT an authentication boundary. This provider cannot satisfy
+ // transactional Award Ledger invariants in a production object store.
+ if(experimentalNonProduction!==true||process.env.CONTEXT==='production')
+   throw Error('EXPERIMENTAL_CAS_NOT_PRODUCTION_STORAGE');
  if(!store||typeof store.getWithMetadata!=='function'||typeof store.set!=='function')
    throw Error('ATOMIC_CONDITIONAL_STORE_REQUIRED');
  if(!scopeOk(family_id))throw Error('EXPLICIT_FAMILY_SCOPE_REQUIRED');
