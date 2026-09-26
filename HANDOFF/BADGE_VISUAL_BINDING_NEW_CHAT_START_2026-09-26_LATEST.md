@@ -1,3 +1,11 @@
+# LATEST RESUME OVERRIDE — DURABLE LEDGER CORE SLICE (PR #146, 2026-09-26)
+
+Newly implemented on feature branch: `BADGE/badge-award-ledger-store.js` and `BADGE/badge-ledger-visual-binding.js` with real Node file persistence + signed scoped history and persisted replay tests. They are not production-wired: trusted Decision/auth/active-catalog adapters, server key and app consumer remain OPEN. Do not use browser-side secrets or claim a live award from test mocks.
+
+First verified acquisition unlocks badge/0 stars; five approved unique reawards promote tier. Historical 60 remain `WORKING_DRAFT_NOT_ACTIVE`; visual A/B remain candidates. No deployment. See CURRENT and `BADGE/BADGE_LEDGER_SOURCE_AUDIT_2026-09-26.md`.
+
+---
+
 # LATEST RESUME OVERRIDE — AWARD LEDGER SOURCE AUDIT — 2026-09-26
 
 - Verified current main repositories: there is NO grounded executable Badge Award Ledger read/verification provider at present. Historical Snap `badgeCandidateReviews` / `badgeEvents` / `badgeProgress` are NOT final Award Ledger.
