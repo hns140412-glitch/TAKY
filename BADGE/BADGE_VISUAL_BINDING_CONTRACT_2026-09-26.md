@@ -9,7 +9,7 @@ A fictional exploration crew's campaign/achievement insignia (탐험대 공적 �
 ## Acquisition and stars
 - FIRST approved acquisition: activate the badge in the child's collection; zero stars.
 - Each subsequent DISTINCT, approved acquisition of the SAME badge for the SAME child: one additional star.
-- 5 re-acquisition stars: change to the next tier. During the promotion event the completed five stars may be shown; after promotion the within-tier count starts again at zero.
+- 5 re-acquisition stars: change to the next tier. The five-star promotion threshold is user-confirmed. Showing five stars during the promotion and resetting the new tier to zero are PROVISIONAL presentation/projection policies pending separate confirmation.
 - A mere repeated activity event, time spent, right/wrong answer, raw telemetry, EXP or gem does not count as reacquisition. Only accepted Award Ledger receipts following the existing review/decision process qualify.
 - Dedupe by award receipt ID; reject cross-child or cross-badge projection.
 - Historical tier-name/palette lineage: GREEN / BLUE / RED / GOLD / PLATINUM. The final tier list and what happens AFTER the last tier remain OPEN; do not invent a rank beyond the defined list.
