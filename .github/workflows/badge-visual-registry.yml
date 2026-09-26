@@ -48,6 +48,10 @@ jobs:
         run: node --check BADGE/badge-award-ledger-cas-store.js
       - name: Multi-instance conditional CAS ledger concurrency and signed history
         run: node BADGE/badge-award-ledger-cas-store.test.js
+      - name: Transactional PostgreSQL ledger syntax
+        run: node --check BADGE/badge-award-ledger-transactional.js
+      - name: Transactional signed ledger concurrency and rollback regression
+        run: node BADGE/badge-award-ledger-transactional.test.js
       - name: Child badge calendar projection syntax
         run: node --check BADGE/badge-award-calendar.js
       - name: Signed badge award history and Seoul calendar integration
