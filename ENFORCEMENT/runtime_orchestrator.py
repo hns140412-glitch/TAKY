@@ -332,18 +332,21 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         namespace = resume_cfg.get("namespace")
         task_id = resume_cfg.get("task_id") or effective_record.get("task_id")
         checkpoint_hash = resume_cfg.get("expected_checkpoint_hash")
+        atomic_unit = resume_cfg.get("expected_atomic_unit")
         if not isinstance(namespace, str) or not namespace.strip():
             detected.append("APPROVAL_RESUME_NAMESPACE_MISSING")
         if not isinstance(task_id, str) or not task_id.strip():
             detected.append("APPROVAL_RESUME_TASK_ID_MISSING")
         if not isinstance(checkpoint_hash, str) or not checkpoint_hash.strip():
             detected.append("APPROVAL_RESUME_CHECKPOINT_HASH_MISSING")
+        if not isinstance(atomic_unit, str) or not atomic_unit.strip():
+            detected.append("APPROVAL_RESUME_ATOMIC_UNIT_MISSING")
         if not detected:
             approval_resume_result = guard_checkpoint(
                 repo_root,
                 namespace=namespace,
                 task_id=task_id,
-                expected_atomic_unit=resume_cfg.get("expected_atomic_unit"),
+                expected_atomic_unit=atomic_unit,
                 expected_checkpoint_hash=checkpoint_hash,
             )
             detected.extend(approval_resume_result.get("detected", []))
