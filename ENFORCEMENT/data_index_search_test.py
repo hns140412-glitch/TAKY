@@ -54,6 +54,7 @@ RECORDS = [
             },
             "relations": [{"type": "RELATED_TO", "target": "SRC-002"}],
         },
+        "detail_l2": {"pdf": {"page_count": 57, "reviewed_pages": [1, 2, 30, 57], "anchors": ["cover", "practice page"]}},
     },
     {
         "source_id": "SRC-002",
@@ -150,7 +151,22 @@ assert "MAPPED_NOT_CONNECTED" not in payload
 assert r["semantic_mode"] == "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
 assert r["projection_authoritative"] is False
 
-# 11. CLI smoke test against a V24-like container
+# 11. DETAIL_L2 is preferred and RAW is not required when anchors exist
+r = search(records, "서울 PHONICS 학생용")
+esc = r["results"][0]["detail_escalation"]
+assert esc["stage"] == "DETAIL_L2"
+assert esc["raw_required"] is False
+assert "practice page" in esc["detail_l2"]["anchors"]
+assert esc["detail_l2"]["reviewed_units"]["reviewed_pages"] == [1, 2, 30, 57]
+
+# 12. missing DETAIL explicitly escalates to RAW
+r = search(records, "학습도구어")
+esc = r["results"][0]["detail_escalation"]
+assert esc["stage"] == "RAW_REQUIRED"
+assert esc["reason"] == "DETAIL_UNAVAILABLE"
+assert esc["raw_required"] is True
+
+# 13. CLI smoke test against a V24-like container
 with tempfile.TemporaryDirectory() as tmp:
     p = Path(tmp) / "index.json"
     p.write_text(json.dumps({"source_entries": RECORDS}, ensure_ascii=False), encoding="utf-8")
