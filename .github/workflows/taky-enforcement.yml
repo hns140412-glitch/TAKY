@@ -248,6 +248,9 @@ jobs:
           node --check LEARNING/transport/central-google-node-host.js
           node --check LEARNING/transport/central-google-node-host.test.js
           node LEARNING/transport/central-google-node-host.test.js
+          node --check LEARNING/transport/server-specialist-verifier.js
+          node --check LEARNING/transport/server-specialist-verifier.test.js
+          node LEARNING/transport/server-specialist-verifier.test.js
       - name: Validate learning transport auth policy
         run: node LEARNING/transport/transport-auth-policy.test.js
       - name: Validate authenticated evidence transport
