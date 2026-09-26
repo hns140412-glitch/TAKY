@@ -1,0 +1,30 @@
+name: Badge Visual Registry Validation
+
+on:
+  push:
+    branches:
+      - main
+      - taky/badge-visual-binding-recovery-2026-09-26
+    paths:
+      - 'BADGE/**'
+      - '.github/workflows/badge-visual-registry.yml'
+  pull_request:
+    paths:
+      - 'BADGE/**'
+      - '.github/workflows/badge-visual-registry.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check
+        run: node --check BADGE/badge-visual-registry.js
+      - name: Registry guard regression
+        run: node BADGE/badge-visual-registry.test.js
