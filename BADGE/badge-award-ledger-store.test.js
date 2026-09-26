@@ -78,6 +78,19 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   assert.equal((await deriveFromLedger({...options,source:store.source})).ok,false);
   fs.writeFileSync(file,old);
   assert.equal((await deriveFromLedger({...options,source:store.source})).ok,true);
+  // A signed ledger cannot be transplanted across family namespaces, even with
+  // the same signing key, child ID and badge ID.
+  const familyB='FAMILY_B';
+  const familyBFile=path.join(directory,crypto.createHash('sha256')
+    .update(familyB+'\\0'+child_id+'\\0'+badge_id).digest('hex')+'.json');
+  const otherFamily=createLedger({directory,family_id:familyB,signingKey,
+    verifyDecision:verifier,isBadgeActive:active});
+  fs.writeFileSync(familyBFile,old);
+  assert.equal((await deriveFromLedger({...options,source:otherFamily.source})).ok,false);
+  const forgedFamily=JSON.parse(old);forgedFamily.family_id=familyB;
+  for(const row of forgedFamily.rows)row.record.family_id=familyB;
+  fs.writeFileSync(familyBFile,JSON.stringify(forgedFamily));
+  assert.equal((await deriveFromLedger({...options,source:otherFamily.source})).ok,false);
   console.log('durable badge Award Ledger + real persisted replay: PASS');
  }finally{fs.rmSync(directory,{recursive:true,force:true})}
 })().catch(e=>{console.error(e);process.exitCode=1});
