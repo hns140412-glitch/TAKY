@@ -1,4 +1,5 @@
 'use strict';
+const cryptoProvider=require('node:crypto').webcrypto;
 const assert=require('node:assert/strict');
 const Pipeline=require('./pwa-scoped-evidence-pipeline.js');
 let data={entries:[]},version=0,selected='A',offline=true;
@@ -14,7 +15,7 @@ const packet=id=>({packet_id:'hide-seek:'+id,source_app:'hide-seek',
  event_type:'RETRIEVAL_RESULT',payload:{member_id:'A'}}});
 let calls=0;
 const pipeline=Pipeline.create({
- storageAdapter:storage,endpointUrl:'https://central.example.test/api/learning/evidence',
+ storageAdapter:storage,cryptoProvider,endpointUrl:'https://central.example.test/api/learning/evidence',
  tokenProvider:async()=> 'test-bearer-1234567890',
  sessionProvider:async()=>({authenticated:true,family_id:'F',selected_member_id:selected}),
  fetchImpl:async(url,options)=>{
