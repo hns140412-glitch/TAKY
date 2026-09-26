@@ -55,14 +55,45 @@ def resolve_promoted_data(registry: dict, root: Path = ROOT) -> dict:
             "promotion_receipt_id": ids[2], "source_entries_total": authority["source_entries_total"],
             "verification_scope": "LOCAL_POINTER_CONSISTENCY_ONLY__EXTERNAL_RECEIPT_READBACK_REQUIRED"}
 
+def verify_data_receipt(registry: dict, receipt: dict, root: Path = ROOT) -> dict:
+    """Cross-check a separately fetched original receipt, not its versioned title."""
+    selected = resolve_promoted_data(registry, root)
+    if not isinstance(receipt, dict) or receipt.get("canonical") is not False:
+        raise CurrentResolutionError("INVALID_DERIVED_RECEIPT_ROLE")
+    candidate, source, checks = (receipt.get(k, {}) for k in ("candidate", "source_index", "checks"))
+    if candidate.get("id") != selected["utilization_index_id"] or source.get("id") != selected["source_index_id"]:
+        raise CurrentResolutionError("PROMOTION_RECEIPT_ID_MISMATCH")
+    n = selected["source_entries_total"]
+    if any(checks.get(k) != n for k in ("source_entries_total", "source_index_entries_total", "index_l1_coverage")):
+        raise CurrentResolutionError("PROMOTION_RECEIPT_COVERAGE_MISMATCH")
+    for key in ("json_parse", "source_id_sets_equal", "all_delta_sources_present", "v26_current_regression", "current_pointer_rule_respected"):
+        if checks.get(key) is not True:
+            raise CurrentResolutionError("PROMOTION_RECEIPT_CHECK_MISSING:" + key)
+    for key in ("source_loss", "full_reindex", "raw_reread", "search_projection_authoritative"):
+        if checks.get(key) is not False:
+            raise CurrentResolutionError("PROMOTION_RECEIPT_GUARD_FAILED:" + key)
+    if receipt.get("decision") != "PROMOTE_V26_TO_CURRENT_DERIVED_CHECKPOINT":
+        raise CurrentResolutionError("PROMOTION_RECEIPT_DECISION_MISMATCH")
+    return {"status": "RECEIPT_MATCHES_POINTER", "semantic_owner": selected["semantic_owner"],
+            "source_index_id": selected["source_index_id"], "utilization_index_id": selected["utilization_index_id"],
+            "promotion_receipt_id": selected["promotion_receipt_id"], "source_entries_total": n,
+            "verification_scope": "PROVIDED_RECEIPT_CONTENT_CROSSCHECK__AUTHENTICATED_FETCH_MUST_BE_INDEPENDENT"}
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--owner", required=True, help="Stable semantic owner ID, not a REV/V filename")
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--receipt-file", type=Path, help="Independently authenticated original receipt JSON; never inferred from filename")
     args = parser.parse_args()
     try:
         registry = json.loads((args.root / "MASTER/MASTER_FILE_REGISTRY.json").read_text(encoding="utf-8-sig"))
-        result = resolve_promoted_data(registry, args.root) if args.owner == "DATA_SEARCH_PROJECTION" else resolve_owner(registry, args.owner, args.root)
+        if args.receipt_file and args.owner != "DATA_SEARCH_PROJECTION":
+            raise CurrentResolutionError("RECEIPT_ONLY_FOR_DATA_PROJECTION")
+        if args.receipt_file:
+            receipt = json.loads(args.receipt_file.read_text(encoding="utf-8-sig"))
+            result = verify_data_receipt(registry, receipt, args.root)
+        else:
+            result = resolve_promoted_data(registry, args.root) if args.owner == "DATA_SEARCH_PROJECTION" else resolve_owner(registry, args.owner, args.root)
     except (CurrentResolutionError, OSError, ValueError, KeyError, TypeError) as exc:
         print(json.dumps({"status": "HOLD", "error": str(exc)}, ensure_ascii=False))
         return 1
