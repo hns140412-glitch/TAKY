@@ -26,4 +26,16 @@ User command: `재개준비` = preserve and validate; `재개` = restore and EXE
 ## Operational answer contract
 Think Again, Keep Your Key. / Think Again, You're The Key.
 HUMAN INTENT -> THINK AGAIN -> KEEP YOUR KEY -> FIND A WAY/SOLVE -> YOU'RE THE KEY -> VERIFY/CORRECT/CONTINUE.
-All TAKY-governed replies concise: result, evidence, remaining OPEN. No repetitive excuses, no user-as-debugger, no self-reported PASS. 
+All TAKY-governed replies concise: result, evidence, remaining OPEN. No repetitive excuses, no user-as-debugger, no self-reported PASS.
+
+## LATEST RESUME OVERRIDE — SOURCE SPAN AND REAL REPOSITORY SCOPE — 2026-09-27
+This section supersedes earlier checkpoint SHA/CI status statements above; preserve older text only as historical execution evidence.
+
+- Live main verified at review: `8e78af8b77d1f3e132f05c99cd6b69a7f258a23e`. Before every subsequent action, recheck live main and active branch. Draft PR #161 remains UNMERGED / NOT DEPLOYED.
+- Independently found a fail-open hole in original raw audit: quoting the first portion of a raw line marked the entire line covered, allowing a second requirement/correction on that same line to disappear. Fixed using character-span masks; whole-line exclusions cannot launder partially quoted lines.
+- Exact tested code HEAD: `fdfcfb64e75e8bec2c7f7cf793d5cc36580c7296`. Source Inventory Omission Gate CI SUCCESS (15 raw, 6 inventory, 3 acceptance tests): https://github.com/hns140412-glitch/TAKY/actions/runs/36279012291/job/108507158297 . TAKY Enforcement Replay SUCCESS: https://github.com/hns140412-glitch/TAKY/actions/runs/36279015379/job/108507166614 .
+- The raw regression now includes an actual checked-out repository source excerpt, `OS/COMMAND_INTERACTION.md §0.3` (13 unique nonblank lines). It checks an intact declared scope and deletion of three separate confirmed lines: standalone resume intent, ENTIRE latest HANDOFF/override and no-status-only user correction. This proves fail-closed for THAT source section only, NOT complete old chat recovery, not semantic source-universe inventory, not full bundle acceptance.
+- Read-back-confirmed Google Drive reference: https://drive.google.com/file/d/1uL4d2vv6O3x97BKhdR1L2zXGZfQ_E5hd/view . Earlier Library fallback-only storage note is outdated. Neither the Drive reference nor this draft handoff supersedes latest canonical main.
+- Branch-local status checkpoint: `CURRENT/LOSSLESS_RESUME_CURRENT_2026-09-27.json`; it records tested code HEAD separately from subsequent documentation commits. Verify readback and latest SHA.
+- Remaining OPEN, NOT 100%: independent actual historical/raw source-scope receipt; separate material extraction and second pass; real source manifest->frozen inventory->coverage->bundle full acceptance and section readback; real corrected decision/latest-override deletion against true handoff; fresh-session reverse reconstruction; runtime entrypoint wiring. Hosted ChatGPT automatic interception remains NOT IMPLEMENTED/UNVERIFIED.
+- Preserve CLOSED, no main merge, production deploy, Netlify or unrelated project edits. Badge is owned in another chat and remains outside this PR.
