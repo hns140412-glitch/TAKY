@@ -242,6 +242,44 @@ jobs:
           node --check LEARNING/transport/google-learning-principal.js
           node --check LEARNING/transport/node-http-learning-bridge.js
           node LEARNING/transport/google-node-central-integration.test.js
+          node --check LEARNING/transport/server-family-registry-provider.js
+          node --check LEARNING/transport/server-family-registry-provider.test.js
+          node LEARNING/transport/server-family-registry-provider.test.js
+          node --check LEARNING/transport/central-google-node-host.js
+          node --check LEARNING/transport/central-google-node-host.test.js
+          node LEARNING/transport/central-google-node-host.test.js
+          node --check LEARNING/transport/server-specialist-verifier.js
+          node --check LEARNING/transport/server-specialist-verifier.test.js
+          node LEARNING/transport/server-specialist-verifier.test.js
+          node --check LEARNING/transport/server-specialist-reference-store.js
+          node --check LEARNING/transport/server-specialist-reference-store.test.js
+          node LEARNING/transport/server-specialist-reference-store.test.js
+          node --check LEARNING/transport/central-store-conformance.js
+          node --check LEARNING/transport/central-store-conformance.test.js
+          node LEARNING/transport/central-store-conformance.test.js
+          node --check LEARNING/transport/pwa-central-evidence-ack-client.js
+          node --check LEARNING/transport/pwa-central-evidence-ack-client.test.js
+          node LEARNING/transport/pwa-central-evidence-ack-client.test.js
+          node --check LEARNING/transport/scoped-evidence-outbox.js
+          node --check LEARNING/transport/scoped-evidence-outbox.test.js
+          node LEARNING/transport/scoped-evidence-outbox.test.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.test.js
+          node LEARNING/transport/indexeddb-evidence-outbox-store.test.js
+          node --check LEARNING/transport/pwa-scoped-evidence-pipeline.js
+          node --check LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
+          node LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
+          node --check LEARNING/transport/pwa-central-durable-e2e.test.js
+          node LEARNING/transport/pwa-central-durable-e2e.test.js
+          node --check LEARNING/transport/specialist-observation-packet-mapper.js
+          node LEARNING/transport/specialist-observation-packet-mapper.test.js
+          node --check LEARNING/transport/build-browser-evidence-bundle.js
+          node LEARNING/transport/build-browser-evidence-bundle.test.js
+          node --check LEARNING/transport/specialist-bridge-event-adapter.js
+          node LEARNING/transport/specialist-bridge-event-adapter.test.js
+          node --check LEARNING/transport/encrypted-drive-archive-export.js
+          node --check LEARNING/transport/encrypted-drive-archive-export.test.js
+          node LEARNING/transport/encrypted-drive-archive-export.test.js
       - name: Validate learning transport auth policy
         run: node LEARNING/transport/transport-auth-policy.test.js
       - name: Validate authenticated evidence transport

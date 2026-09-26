@@ -55,6 +55,8 @@ const parse=r=>JSON.parse(r.body);
     assert(!a.body.includes('authorized_member_ids'));
     assert(!a.body.includes('verification_candidate'));
     assert.equal(parse(a).receipt_scope.family_id,'F1');
+    assert.equal(parse(a).packet_id,'hide-seek:forged-1');
+    assert.equal(parse(a).event_id,'forged-1');
 
     const saved=await store.getWithMetadata('families/F1/members/CHILD_A/learning-engine/state-v1',
       {type:'json',consistency:'strong'});
@@ -106,6 +108,21 @@ const parse=r=>JSON.parse(r.body);
     assert.equal(dup.status,200);
     assert.equal(parse(dup).duplicate,true);
     assert.equal(parse(dup).acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+    const mutatedEvent=packet('forged-1');
+    mutatedEvent.event.payload.memorySummary={averageMemoryStrength:0.9};
+    const replayConflict=await endpoint.handle(request(mutatedEvent));
+    assert.equal(replayConflict.status,422);
+    assert.equal(parse(replayConflict).reason,'EVENT_OR_PACKET_ID_REPLAY_PAYLOAD_MISMATCH');
+    const reusedPacket=packet('different-event');
+    reusedPacket.packet_id='hide-seek:forged-1';
+    const packetConflict=await endpoint.handle(request(reusedPacket));
+    assert.equal(packetConflict.status,422);
+    assert.equal(parse(packetConflict).reason,'EVENT_OR_PACKET_ID_REPLAY_PAYLOAD_MISMATCH');
+    const originalAfterConflicts=await store.getWithMetadata(
+      'families/F1/members/CHILD_A/learning-engine/state-v1',
+      {type:'json',consistency:'strong'});
+    assert.equal(originalAfterConflicts.data.observation_only
+      .filter(x=>x.event_id==='forged-1').length,1);
 
     const badToken=await endpoint.handle(request(packet('forged-2'),'invalid-bearer-token-001'));
     assert.equal(badToken.status,401);
@@ -173,6 +190,14 @@ const parse=r=>JSON.parse(r.body);
     assert.equal((await noStore.handle(request(packet('store-down-1')))).status,503);
     assert.throws(()=>create({store}),/TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED/);
     assert.throws(()=>create({verifyBearerToken:trustedToken,store:null}),/DURABLE_CONDITIONAL_STORE_REQUIRED/);
+    const alwaysConflict=create({store:{
+      async getWithMetadata(){return null},
+      async setJSON(){return {modified:false,etag:'concurrent-writer'}}
+    },verifyBearerToken:trustedToken});
+    const conflictResponse=await alwaysConflict.handle(request(packet('cas-conflict')));
+    assert.equal(conflictResponse.status,503);
+    assert.equal(parse(conflictResponse).ok,false);
+    assert.equal(parse(conflictResponse).reason,'DURABLE_STORE_CONFLICT_RETRY_EXHAUSTED');
     assert(verifyCalls>=5);
     console.log('CENTRAL_LEARNING_HTTP_ENDPOINT_PASS: real local durable receipts; forged browser verifier downgraded; trusted server-only promotion; bearer/family/member isolation; idempotent no-store ACK; outage denial');
   }finally{await fs.rm(root,{recursive:true,force:true})}
