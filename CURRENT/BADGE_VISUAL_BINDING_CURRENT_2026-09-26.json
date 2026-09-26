@@ -121,7 +121,9 @@
     "bind TAKY V2 family praise gift service to production Ready API, shared gift journal, child gem wallet and approved assets",
     "map 20 history discovery evidence kinds to actual Learning Engine and app evidence contracts",
     "review 60 preset rank/tone/story/motif and approve separately from final visual image source",
-    "add child-scoped personal discovery UX without auto-awarding or exposing sibling histories"
+    "add child-scoped personal discovery UX without auto-awarding or exposing sibling histories",
+    "editorially review original witty display titles and 80 reveal copy options without replacing canonical IDs",
+    "after approval integrate child-scoped awarded-only title/toast/flavor layers in app renderer without triggering from discovery candidates"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -150,7 +152,9 @@
     "60 preset content slots are not 60 runtime-active or awarded badges",
     "20 new history discoveries are verified child-scoped proposals, not invented memories or automatic rewards",
     "moment rank distinct from same-badge reaward star-tier progression",
-    "family praise badge gift catalogue distinct from 60+20 achievement catalogue"
+    "family praise badge gift catalogue distinct from 60+20 achievement catalogue",
+    "witty naming proposals may not trigger Award Ledger, approve unbound art or overwrite source catalogue titles",
+    "history discovery proposals never trigger earned-only unlock toast"
   ],
   "approval_gate": {
     "required": true,
@@ -313,5 +317,22 @@
     "family_praise_gifts": "SEPARATE_CATALOG_AND_JOURNAL",
     "asset_policy": "NO_AUTO_APPROVE_A_OR_B",
     "deployment": false
+  },
+  "witty_badge_copy_2026_09_26": {
+    "user_direction": "INCORPORATE_WOW_STYLE_ACHIEVEMENT_NAME_WIT_INTO_TAKY_ORIGINAL_COPY",
+    "authority": "REFERENCE_STYLE_NOT_TITLE_COPY",
+    "source_preserved": "BADGE/badge-60-story-20-history-working.json",
+    "proposed_copy": "BADGE/badge-wow-inspired-copyworking.json",
+    "original_preset_variants": 60,
+    "original_history_variants": 20,
+    "composition": "DISPLAY_TITLE_PROPOSAL+UNLOCK_TOAST_PROPOSAL+FLAVOR_TEXT_PROPOSAL",
+    "status": "BRANCH_IMPLEMENTED_COPY_ONLY_NOT_RUNTIME_APPROVED",
+    "no_wow_title_copy": true,
+    "canonical_name_override": false,
+    "criteria_override": false,
+    "auto_award": false,
+    "asset_approval": false,
+    "live_app_binding": false,
+    "eligibility": "UNLOCK_TOAST_ONLY_AFTER_AUTHORIZED_VERIFIED_AWARD_AND_APPROVED_ASSET"
   }
 }
