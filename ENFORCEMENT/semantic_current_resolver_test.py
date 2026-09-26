@@ -4,7 +4,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from semantic_current_resolver import ROOT, CurrentResolutionError, resolve_owner, resolve_promoted_data
+from semantic_current_resolver import ROOT, CurrentResolutionError, resolve_owner, resolve_promoted_data, verify_data_receipt
 
 class SemanticCurrentResolverTest(unittest.TestCase):
     @classmethod
@@ -21,6 +21,33 @@ class SemanticCurrentResolverTest(unittest.TestCase):
         self.assertEqual(x["source_index_id"],"13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc")
         self.assertEqual(x["utilization_index_id"],"1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s")
         self.assertEqual(x["promotion_receipt_id"],"1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w")
+
+    def test_original_drive_receipt_crosscheck(self):
+        # Exact relevant fields independently fetched from the promoted original Drive receipt.
+        receipt = {
+            "canonical": False,
+            "candidate": {"id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s"},
+            "source_index": {"id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc"},
+            "checks": {
+                "source_entries_total":679,"source_index_entries_total":679,"index_l1_coverage":679,
+                "json_parse":True,"source_id_sets_equal":True,"all_delta_sources_present":True,
+                "v26_current_regression":True,"current_pointer_rule_respected":True,
+                "source_loss":False,"full_reindex":False,"raw_reread":False,
+                "search_projection_authoritative":False
+            },
+            "decision":"PROMOTE_V26_TO_CURRENT_DERIVED_CHECKPOINT"
+        }
+        result=verify_data_receipt(self.registry,receipt)
+        self.assertEqual(result["status"],"RECEIPT_MATCHES_POINTER")
+        for field,value,error in (
+            ("candidate",{"id":"some newer V999 id"},"PROMOTION_RECEIPT_ID_MISMATCH"),
+            ("checks",{**receipt["checks"],"source_entries_total":680},"PROMOTION_RECEIPT_COVERAGE_MISMATCH"),
+            ("checks",{**receipt["checks"],"source_loss":True},"PROMOTION_RECEIPT_GUARD_FAILED"),
+        ):
+            altered=copy.deepcopy(receipt)
+            altered[field]=value
+            with self.assertRaisesRegex(CurrentResolutionError,error):
+                verify_data_receipt(self.registry,altered)
 
     def test_unknown_even_if_filename_looks_newer(self):
         for owner in ("LEARNING_APP_FAMILY_MASTER_REV_99","DATA_UTILIZATION_INDEX_V999",""):
