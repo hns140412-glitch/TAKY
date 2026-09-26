@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_SYSTEM_RECOVERY",
   "namespace": "BADGE",
-  "status": "NO_EXECUTABLE_CODE_OPEN",
+  "status": "POST_MERGE_VALIDATION_IN_PROGRESS",
   "updated_at": "2026-09-26",
   "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
   "hard_locks": {
@@ -27,7 +27,7 @@
     "HIDE_SNAP_BADGE_SOURCE_AUTO_INFERENCE_REGRESSION"
   ],
   "sp_badge_006": {
-    "status": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
+    "status": "MAIN_MERGED_POST_MERGE_CI_PASS",
     "repo": "hns140412-glitch/Hide-Seek",
     "pr": 17,
     "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
@@ -44,12 +44,15 @@
       "candidate review required",
       "telemetry inference disabled for ERROR_DISCOVERY / DEEP_THINKING / SPECIAL_BEHAVIOR"
     ],
-    "open": [
-      "merge decision for draft PR #17"
-    ]
+    "open": [],
+    "main_sha": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Validate Hide & Seek": "SUCCESS"
+    }
   },
   "sp_badge_008": {
-    "status": "IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
+    "status": "MAIN_MERGED_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
     "repo": "hns140412-glitch/Snap-Pop",
     "pr": 8,
     "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
@@ -72,12 +75,16 @@
       "implementation readiness is separated from content approval state"
     ],
     "open": [
-      "actual Snap-owned reviewed/approved individual Crew/Character asset content approval",
-      "merge decision for draft PR #8"
-    ]
+      "actual Snap-owned reviewed/approved individual Crew/Character asset approval/content"
+    ],
+    "main_sha": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Validate Snap & Pop": "SUCCESS"
+    }
   },
   "ready_world_state_consumer": {
-    "status": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
+    "status": "MAIN_MERGED_POST_MERGE_CI_PARTIAL",
     "repo": "hns140412-glitch/Ready-Set",
     "pr": 105,
     "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
@@ -97,8 +104,14 @@
       "auto_award=false"
     ],
     "open": [
-      "merge decision for draft PR #105"
-    ]
+      "post-merge Ready Runtime E2E completion"
+    ],
+    "main_sha": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd",
+    "pr_merged": true,
+    "post_merge_ci": {
+      "Ready Integration CI": "SUCCESS",
+      "Ready Runtime E2E": "IN_PROGRESS"
+    }
   },
   "next": [
     "preserve CLOSED items",
@@ -109,14 +122,11 @@
     "after merges, verify exact main heads and rerun regressions before final main CLOSED promotion"
   ],
   "execution_gate": {
-    "state": "WAITING_FOR_INTENTIONAL_MERGE_OR_APPROVED_CONTENT",
+    "state": "POST_MERGE_VALIDATION_IN_PROGRESS",
     "executable_code_open": false,
     "allowed_next_actions": [
-      "intentional merge decision for Hide-Seek PR #17",
-      "intentional merge decision for Snap-Pop PR #8",
-      "intentional merge decision for Ready-Set PR #105",
-      "supply genuine Snap-owned reviewed/approved Crew asset content",
-      "post-merge exact-main regression verification"
+      "complete post-merge Ready Runtime E2E verification",
+      "supply genuine Snap-owned reviewed/approved Crew asset content"
     ],
     "forbidden_without_new_evidence": [
       "reopen SP-BADGE-006 implementation",
