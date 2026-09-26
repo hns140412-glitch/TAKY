@@ -1,4 +1,4 @@
-# MULTI-INSTANCE SIGNED AWARD LEDGER — CONDITIONAL CAS PROVIDER — 2026-09-26
+> **STATUS CORRECTION — SUPERSEDED FOR PRODUCTION CHOICE, 2026-09-26.** Preserve this document as historical CAS experiment only. Netlify's August 31, 2026 official guide says user-level transactional data and read-modify-write invariants belong in a transactional DB, not Blobs even with conditional retries. The CAS module now requires `experimentalNonProduction:true`. Latest implementation authority for a production candidate is `BADGE/BADGE_TRANSACTIONAL_DB_SOURCE_CONTRACT_2026-09-26.md`. No actual database or production deployment has been activated.\n\n# MULTI-INSTANCE SIGNED AWARD LEDGER — CONDITIONAL CAS PROVIDER — 2026-09-26
 
 ## Open addressed
 The original `BADGE/badge-award-ledger-store.js` uses safe local Node exclusive filesystem locks and immutable signed chained rows but is **not** a multi-instance Netlify persistence adapter. Ready's current `ready-sync-core.js` uses ordinary remote `get/set`; it is a general task-event store, not an Achievement Award Ledger. An ordinary read→set can lose simultaneous award writes.
