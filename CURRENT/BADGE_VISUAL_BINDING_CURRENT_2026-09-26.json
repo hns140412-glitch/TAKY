@@ -54,7 +54,8 @@
     "reaward_projection": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_WIRED_TO_AWARD_LEDGER",
     "layered_renderer_update": "IMPLEMENTED_BRANCH_CANDIDATE",
     "visual_css_tokens": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_YET_IMPORTED_BY_APPS",
-    "semantic_correction_branch": "taky/badge-reaward-insignia-correction-2026-09-26"
+    "semantic_correction_branch": "taky/badge-reaward-insignia-correction-2026-09-26",
+    "provisional_post_promotion_reset": "ZERO_ON_NEXT_TIER"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -80,7 +81,8 @@
     "final tier assignment rule",
     "award ledger schema adapter to prevalidated reaward projection",
     "final top-tier behavior",
-    "app import of badge presentation CSS and renderer"
+    "app import of badge presentation CSS and renderer",
+    "post-promotion star display/reset policy confirmation"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -121,6 +123,7 @@
     "design": "FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA_PASTEL",
     "profile_overlay": "CHILD_SCOPED_SEPARATE_LAYER",
     "unearned": "SILHOUETTE",
-    "border": "SOFT_RADIAL_GRADIENT_FADE"
+    "border": "SOFT_RADIAL_GRADIENT_FADE",
+    "post_promotion_star_reset": "NOT_EXPLICITLY_CONFIRMED"
   }
 }
