@@ -39,6 +39,12 @@ const award=(i,award_kind)=>store.appendApprovedDecision({trusted:true,receipt:{
    assert.equal(result.render_model.ownership_state,'EARNED');
    assert.equal(result.render_model.star_count,0);
    assert.equal(result.render_model.character_overlay_ref,profile.avatar_asset_ref);
+   const baseOnly=await resolveBadgeDisplay({...args,profile:{}});
+   assert.equal(baseOnly.ok,true);
+   assert.equal(baseOnly.render_model.ownership_state,'EARNED');
+   assert.equal(baseOnly.render_model.character_overlay_ref,null);
+   assert.equal((await resolveBadgeDisplay({...args,profile:{authority:'CHILD_PROFILE',child_id}})).ok,false);
+
    assert.equal((await resolveBadgeDisplay({...args,profile:{...profile,child_id:'CHILD_B'}})).ok,false);
    for(let i=1;i<=5;i++)assert.equal(award(i,'REAWARD').ok,true);
    result=await resolveBadgeDisplay(args);
