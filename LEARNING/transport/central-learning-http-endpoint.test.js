@@ -60,7 +60,7 @@ const parse=r=>JSON.parse(r.body);
       {type:'json',consistency:'strong'});
     assert(saved?.etag);
     assert.equal(saved.data.observation_only.length,1);
-    assert.equal(saved.data.verified_by_scope&&Object.keys(saved.data.verified_by_scope).length,0);
+    assert.equal(Object.keys(saved.data.scope_receipts||{}).length,0);
     const dup=await endpoint.handle(request(packet('forged-1')));
     assert.equal(dup.status,200);
     assert.equal(parse(dup).duplicate,true);
@@ -109,7 +109,7 @@ const parse=r=>JSON.parse(r.body);
     assert.equal(trustedCalls,1);
     const after=await store.getWithMetadata('families/F1/members/CHILD_A/learning-engine/state-v1',
       {type:'json',consistency:'strong'});
-    assert(Object.keys(after.data.verified_by_scope).length>0);
+    assert(Object.keys(after.data.scope_receipts||{}).length>0);
     const assertedFromChild=create({store,verifyBearerToken:trustedToken,
       verifySpecialistEvidence:async ({packet:p})=>({ok:true,packet:{
         ...p,context:{...p.context,member_id:'CHILD_B'}
