@@ -77,17 +77,21 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
     character.decoding='async';
     figure.append(character);
   }
-  const stars=doc.createElement('div');
-  stars.className='takyBadgeReawardStars';
-  stars.setAttribute('aria-label','재획득 별 '+model.star_count+'개');
-  for(let i=0;i<5;i++){
-    const star=doc.createElement('span');
-    star.className=i<model.star_count?'is-earned':'is-empty';
-    star.textContent='★';
-    star.setAttribute('aria-hidden','true');
-    stars.append(star);
+  // The upper-arc ornament represents earned reacquisitions only: zero has no stars.
+  // Keep the art and child profile separate from the progress ornament.
+  if(model.ownership_state==='EARNED'&&model.star_count>0){
+    const stars=doc.createElement('div');
+    stars.className='takyBadgeReawardStars';
+    stars.setAttribute('aria-label','재획득 별 '+model.star_count+'개');
+    for(let i=0;i<model.star_count;i++){
+      const star=doc.createElement('span');
+      star.className='takyBadgeReawardStar';
+      star.setAttribute('aria-hidden','true');
+      // CSS draws the medal ornament, not a platform-dependent text glyph.
+      stars.append(star);
+    }
+    figure.append(stars);
   }
-  figure.append(stars);
   const caption=doc.createElement('figcaption');
   caption.textContent=model.title;
   figure.append(caption);
