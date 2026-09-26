@@ -40,6 +40,27 @@ JSON with at least:
 
 Receipt validation remains owned by `ENFORCEMENT/executor_transport.py`.
 
+## Executor Liveness / Recovery
+
+An `ACCEPTED` receipt is execution ownership evidence, not permanent ownership.
+
+For provider-bound adapters that expose run/job status, the adapter must distinguish:
+- active run: keep ownership; do not dispatch a duplicate executor;
+- terminal failed/cancelled/timed-out run with materialization confirmed not started: controlled reclaim may create a new attempt;
+- successful run without a RESULT: reconcile missing result evidence before any replay;
+- run where materialization may have started: reconcile external side effects before any replay;
+- provider liveness unknown: fail closed; do not blind-takeover.
+
+Recovery receipts preserve `attempt` and `recovery_of_run_id` so task lineage remains auditable.
+
+`CONCURRENCY != LIVENESS`.
+`RECEIPT != PERMANENT LEASE`.
+`DEAD WORKER != BLIND RETRY`.
+
+Executor recovery must not bypass `SIDE_EFFECT_RETRY_CONTRACT`. If an earlier attempt may have produced an external side effect, effect reconciliation remains mandatory before replay.
+
+The Ready & Set GitHub/Codex adapter implements this contract by resolving GitHub Actions run/job state before selecting a previously accepted task.
+
 ## Result
 
 Completion is posted as a second machine block:
