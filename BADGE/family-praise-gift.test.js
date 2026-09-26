@@ -73,9 +73,10 @@ const gift=(id,count=5,target='CHILD_A')=>({
   assert.equal((await service().sendGift(request('grandparent'),gift('parent-target-01',1,'PARENT_A'))).reason,'VERIFIED_CHILD_FAMILY_MEMBERSHIP_REQUIRED');
   assert.equal((await service().sendGift(request('parent'),{...gift('old-parent-field'),explicit_parent_action:true,explicit_gift_action:false})).reason,'EXPLICIT_GIFT_ACTION_REQUIRED');
   assert.equal((await service().sendGift(request('parent'),{...gift('forged-role-01'),giver_role:'GRANDPARENT'})).reason,'CLIENT_AUTHORITY_FIELDS_FORBIDDEN');
-  for(const n of [0,6,-2,1.5,'5',null,undefined]){
+  for(const n of [0,6,-2,1.5,'5',null]){
    assert.equal((await service().sendGift(request('grandparent'),gift('invalid-gem-'+String(n),n))).reason,'GEM_GIFT_PER_TRANSACTION_LIMIT_1_TO_5');
   }
+  assert.equal((await service().sendGift(request('grandparent'),{...gift('invalid-gem-undefined'),gem_count:undefined})).reason,'GEM_GIFT_PER_TRANSACTION_LIMIT_1_TO_5');
   assert.equal(journal().readGiftHistory().rows.length,0);
   for(const [who,id,n] of [
    ['parent','family-praise-parent-01',5],
