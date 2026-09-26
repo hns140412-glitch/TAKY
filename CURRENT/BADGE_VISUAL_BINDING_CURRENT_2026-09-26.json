@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "HUMAN_APPROVAL_REQUIRED_FOR_FINAL_ASSET_SET",
+  "status": "REAWARD_SEMANTICS_CORRECTION_IMPLEMENTED_BRANCH_CANDIDATE",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -33,7 +33,12 @@
         "GOLD",
         "PLATINUM"
       ],
-      "stars": "GRADE_CLASSIFICATION_1_TO_5"
+      "stars": "FIRST_AWARD_UNLOCKS_ZERO_STARS; DISTINCT_APPROVED_REAWARD_ADDS_ONE; FIVE_STARS_TIER_UP",
+      "character_layer": "SEPARATE_CHILD_SCOPED_PROFILE_OVERLAY",
+      "unearned": "SILHOUETTE",
+      "earned": "ACTIVE_PASTEL",
+      "border_fx": "SOFT_RADIAL_GRADIENT_FADE",
+      "insignia_style": "FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA"
     }
   },
   "implementation": {
@@ -45,7 +50,11 @@
     "validation": "POST_MERGE_SUCCESS",
     "exact_head": "414be27dedc0a11c6ce20d2d91d6e9d3b6e6bd84",
     "central_renderer_contract": "FINAL_MAIN_CLOSED",
-    "main_sha": "78df221d9987ec33c90c51bd59c53ae0f3eddf42"
+    "main_sha": "78df221d9987ec33c90c51bd59c53ae0f3eddf42",
+    "reaward_projection": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_WIRED_TO_AWARD_LEDGER",
+    "layered_renderer_update": "IMPLEMENTED_BRANCH_CANDIDATE",
+    "visual_css_tokens": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_YET_IMPORTED_BY_APPS",
+    "semantic_correction_branch": "taky/badge-reaward-insignia-correction-2026-09-26"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -68,15 +77,22 @@
     "badge_id/visual_id to approved asset 1:1 binding",
     "cross-app display surface ownership",
     "app runtime consumer/surface binding",
-    "final tier assignment rule"
+    "final tier assignment rule",
+    "award ledger schema adapter to prevalidated reaward projection",
+    "final top-tier behavior",
+    "app import of badge presentation CSS and renderer"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
     "do not treat candidate sheets as approved assets",
-    "do not infer stars from repeat count",
-    "stars mean grade classification",
     "do not couple badge visuals to EXP/gem/affinity/power",
-    "do not reopen closed badge evidence/award logic without regression evidence"
+    "do not reopen closed badge evidence/award logic without regression evidence",
+    "stars increment only from distinct approved REAWARD ledger receipts, never raw telemetry",
+    "first acquisition unlocks badge with zero stars",
+    "five approved reacquisitions promote to next configured tier",
+    "child avatar remains separate member-scoped layer",
+    "unearned is silhouette, earned is active pastel",
+    "never automatically approve candidate A/B assets"
   ],
   "approval_gate": {
     "required": true,
@@ -96,5 +112,15 @@
       }
     ],
     "alternate": "IDENTIFY_OTHER_HISTORICAL_FINAL_ASSET_SOURCE"
+  },
+  "latest_user_correction": {
+    "authority": "DIRECT_USER_2026-09-26",
+    "stars": "REACQUISITION_NOT_GRADE_CLASSIFICATION",
+    "first_acquisition": "UNLOCK_ZERO_STARS",
+    "tier_up_at": 5,
+    "design": "FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA_PASTEL",
+    "profile_overlay": "CHILD_SCOPED_SEPARATE_LAYER",
+    "unearned": "SILHOUETTE",
+    "border": "SOFT_RADIAL_GRADIENT_FADE"
   }
 }
