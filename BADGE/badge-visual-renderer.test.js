@@ -13,6 +13,13 @@ const render=api.buildRenderModel(approved,earned,child);
 assert.equal(render.ok,true);
 assert.equal(render.star_count,3);
 assert.equal(render.character_overlay_ref,child.avatar_asset_ref);
+const earnedBaseOnly=api.buildRenderModel(approved,earned);
+assert.equal(earnedBaseOnly.ok,true);
+assert.equal(earnedBaseOnly.ownership_state,'EARNED');
+assert.equal(earnedBaseOnly.character_overlay_ref,null);
+assert.equal(api.buildRenderModel(approved,earned,{authority:'CHILD_PROFILE',child_id:'CHILD_A'}).ok,false);
+assert.equal(api.buildRenderModel(approved,earned,{authority:'CHILD_PROFILE',child_id:'CHILD_B',avatar_asset_ref:child.avatar_asset_ref}).ok,false);
+
 assert.equal(render.border_fx,'SOFT_RADIAL_GRADIENT_FADE');
 assert.equal(render.semantics.five_stars_promote_tier,true);
 assert.equal(render.semantics.telemetry_repeat_is_not_reaward,true);
@@ -37,6 +44,10 @@ const host=new FakeNode('div');
 assert.equal(api.renderInto(host,approved,earned,child,doc).ok,true);
 assert.equal(host.dataset.badgeVisualState,'EARNED');
 assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,1);
+assert.equal(api.renderInto(host,approved,earned,{},doc).ok,true);
+assert.equal(host.dataset.badgeVisualState,'EARNED');
+assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,0);
+
 assert.equal(api.renderInto(host,approved,{child_id:'CHILD_A',ownership_state:'LOCKED',star_count:0},{},doc).ok,true);
 assert.equal(host.dataset.badgeVisualState,'LOCKED');
 assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,0);
