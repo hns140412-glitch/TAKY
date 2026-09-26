@@ -404,7 +404,7 @@ jobs:
           adapter=data.get('executor_adapter') or {}
           envelope=data.get('dispatch_envelope') or {}
           assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
-          assert adapter.get('implementation_commit') == 'a32f289df733fcef8a5d8d2ceea5c071bea6269d', adapter
+          assert adapter.get('implementation_commit') == '1d672d862cc8329a5f19ca91c9ed6a338752f5ae', adapter
           liveness=adapter.get('liveness_recovery') or {}
           assert liveness.get('state') == 'ACTIVE_IN_READY_SET_MAIN', liveness
           assert liveness.get('provider_binding') == 'GITHUB_ACTIONS_RUN_AND_JOB_STATE', liveness
