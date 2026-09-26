@@ -118,6 +118,7 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "legacy_relation_hints": legacy_relation_hints,
         "index_state": state.get("index_state") or record.get("source_review_state"),
         "detail_available": state.get("detail_available") if "detail_available" in state else bool(record.get("detail_l2")),
+        "detail_l2": record.get("detail_l2") if isinstance(record.get("detail_l2"), dict) else None,
         "stale_state": state.get("stale_state") or record.get("stale_state"),
         "review_state": state.get("review_state") or record.get("review_bucket"),
         "current_relation": state.get("current_relation") or record.get("current_relation"),
@@ -363,6 +364,37 @@ def relation_expand(
     return out
 
 
+def detail_escalation(record: dict[str, Any]) -> dict[str, Any]:
+    """Prefer indexed DETAIL_L2 anchors; escalate to RAW only when DETAIL is absent/insufficient."""
+    detail = record.get("detail_l2")
+    if not record.get("detail_available") or not isinstance(detail, dict) or not detail:
+        return {"stage": "RAW_REQUIRED", "reason": "DETAIL_UNAVAILABLE", "detail_l2": None, "raw_required": True}
+
+    anchors: list[str] = []
+    reviewed_units: dict[str, Any] = {}
+    for modality, payload in detail.items():
+        if not isinstance(payload, dict):
+            continue
+        anchors.extend(str(x) for x in (payload.get("anchors") or []) if str(x).strip())
+        for key in ("reviewed_pages", "reviewed_frames", "reviewed_segments", "entry_count"):
+            if payload.get(key) is not None:
+                reviewed_units[key] = payload.get(key)
+
+    if anchors or reviewed_units:
+        return {
+            "stage": "DETAIL_L2",
+            "reason": "DETAIL_ANCHOR_AVAILABLE",
+            "detail_l2": {"modalities": sorted(detail.keys()), "anchors": anchors, "reviewed_units": reviewed_units},
+            "raw_required": False,
+        }
+    return {
+        "stage": "RAW_REQUIRED",
+        "reason": "DETAIL_INSUFFICIENT",
+        "detail_l2": {"modalities": sorted(detail.keys()), "anchors": [], "reviewed_units": {}},
+        "raw_required": True,
+    }
+
+
 def search(
     records: list[dict[str, Any]],
     query: str,
@@ -404,6 +436,7 @@ def search(
                 "authority_class": r.get("authority_class"),
                 "current_relation": r.get("current_relation"),
                 "detail_available": r.get("detail_available"),
+                "detail_escalation": detail_escalation(r),
                 "source_ref": {
                     "source_id": sid,
                     "locator": r.get("locator"),
