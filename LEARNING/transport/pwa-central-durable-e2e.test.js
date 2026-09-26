@@ -72,6 +72,29 @@ const HTTP=require('./central-learning-http-endpoint.js');
   assert.equal((await pipeline.enqueueBridge('hide-seek',raw('bridge-e1'))).duplicate,true);
   assert.equal((await pipeline.flushOne('hide-seek','fixture-worker')).processed,false);
   assert.equal(serverCalls,1);
+  const snap={
+   source:'snap-pop',event_type:'LEARNING_OUTCOME',type:'LEARNING_OUTCOME',
+   event_id:'snap-e1',occurred_at:'2026-09-27T01:01:00.000Z',
+   payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary',
+    contextual_evidence_only:true,global_mastery_claim:false,
+    completed:true,evidence_of_improvement:true}
+  };
+  assert.equal((await pipeline.enqueueBridge('snap-pop',snap)).queued,true);
+  assert.equal((await pipeline.flushOne('snap-pop','fixture-worker')).status,'ACKED');
+  assert.equal((await pipeline.listActive('snap-pop'))[0].receipt.kind,'OBSERVATION_INGEST_RECEIPT');
+  assert.equal((await pipeline.enqueueReadyObservation({
+   event_id:'ready-e1',occurred_at:'2026-09-27T01:02:00.000Z',member_id:'A',
+   payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary',
+    observation_only:true,practice_completed:true}
+  })).queued,true);
+  assert.equal((await pipeline.flushOne('ready-set','fixture-worker')).status,'ACKED');
+  assert.equal((await pipeline.listActive('ready-set'))[0].receipt.kind,'OBSERVATION_INGEST_RECEIPT');
+  assert.equal(serverCalls,3);
+  const all=await centralStore.getWithMetadata(
+   'families/F/members/A/learning-engine/state-v1',{type:'json',consistency:'strong'});
+  assert.deepEqual(new Set(all.data.observation_only.map(x=>x.event_id)),
+   new Set(['bridge-e1','snap-e1','ready-e1']));
+  assert.equal(Object.keys(all.data.scope_receipts||{}).length,0);
   await assert.rejects(()=>pipeline.enqueueBridge('hide-seek',{
    ...raw('missing-skill'),payload:{...raw('missing-skill').payload,concept_skill_target:null}
   }),/BRIDGE_LEARNING_SCOPE_MISSING_HOLD/);
@@ -87,8 +110,8 @@ const HTTP=require('./central-learning-http-endpoint.js');
   assert.equal(rows.find(x=>x.key==='hide-seek:hide-seek:bad-token').status,'BLOCKED');
   assert.equal((await centralStore.getWithMetadata(
    'families/F/members/A/learning-engine/state-v1',
-   {type:'json',consistency:'strong'})).data.observation_only.length,1);
+   {type:'json',consistency:'strong'})).data.observation_only.length,3);
   await pipeline.close();
-  console.log('PWA_CENTRAL_DURABLE_E2E_PASS: bridge->mapped packet->scoped outbox->bearer/family HTTP->durable observation->exact ACK; replay, scope, missing skill and invalid-token gates');
+  console.log('PWA_CENTRAL_DURABLE_E2E_PASS: Hide Snap Ready events -> scoped outbox -> bearer/family HTTP -> durable observation -> exact ACK; replay, scope, missing skill and invalid-token gates');
  }finally{await fs.rm(root,{recursive:true,force:true})}
 })().catch(e=>{console.error(e);process.exitCode=1});
