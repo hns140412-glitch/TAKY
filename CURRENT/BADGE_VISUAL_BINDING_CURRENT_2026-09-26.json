@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "FAMILY_SCOPED_BADGE_READ_CORE_TESTED_LIVE_APP_BINDINGS_OPEN",
+  "status": "FAMILY_RELATIONSHIP_NEUTRAL_GIFT_V2_BRANCH_CANDIDATE_LIVE_INTEGRATION_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -112,7 +112,10 @@
     "connect authenticated Ready family Parent praise gift endpoint without deploying",
     "activate only separately approved Family Praise Badge gift catalog and assets",
     "connect approved Gem Gift Journal to child-scoped idempotent Gem Wallet consumer",
-    "connect Parent Praise Badge Gift Journal to child Family Praise Collection, distinct from achievement award ledger"
+    "connect Parent Praise Badge Gift Journal to child Family Praise Collection, distinct from achievement award ledger",
+    "extend Ready identity family graph beyond binary Parent/Child without changing existing membership authority",
+    "establish server-verified explicit Family Praise Gift capability per member, not inferred from kinship",
+    "connect V2 family gifts to real Ready service, approved family praise catalog and child wallet; no Netlify deployment without gates"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -132,7 +135,12 @@
     "Parent never has a personal LOCKED/unearned badge atlas",
     "parent gem gift is an integer 1..5 PER TRANSACTION (not an inferred daily or lifetime cap)",
     "parent gift journal is distinct from Achievement Award Ledger and not automatically a gem-wallet credit",
-    "historical 60 draft badges cannot be gifted or activated by parent options"
+    "historical 60 draft badges cannot be gifted or activated by parent options",
+    "Family membership != Parent role; kinship labels do not grant FAMILY_PRAISE_GIFT",
+    "Parent has no personal locked/unearned badge atlas",
+    "Parent-only V1 gift service is historical; latest V2 requires explicit family member permission",
+    "Each GEM gift remains an integer 1..5, no invented daily/monthly/lifetime quota",
+    "Do not interpret a gift journal receipt as an Achievement Award or child Gem Wallet balance credit"
   ],
   "approval_gate": {
     "required": true,
@@ -202,8 +210,8 @@
     "gem_max_per_gift": 5,
     "other_period_limits": "NOT_SPECIFIED_DO_NOT_INVENT",
     "implementation": {
-      "parent_gift_service": "PR_148_IMPLEMENTED_PENDING_EXACT_HEAD_CI",
-      "durable_signed_gift_journal": "PR_148_IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "parent_gift_service": "MAIN_PR_148_HISTORICAL_V1_NOT_LATEST_FAMILY_DESIGN",
+      "durable_signed_gift_journal": "MAIN_PR_148_HISTORICAL_V1_PRESERVED",
       "live_ready_api": "OPEN",
       "real_approved_family_praise_badge_catalog": "OPEN",
       "child_gem_wallet_credit_consumer": "OPEN",
@@ -216,6 +224,37 @@
       "historic_60_draft_badges_auto_giftable": false,
       "gift_event_does_not_automatically_change_live_gem_balance": true,
       "repeat_parent_praise_badge_star_rule": "OPEN_NOT_AUTO_COUPLED_TO_CHILD_ACHIEVEMENT_STARS"
-    }
+    },
+    "status": "HISTORICAL_V1_SUPERSEDED_BY_FAMILY_RELATIONSHIP_NEUTRAL_V2"
+  },
+  "family_praise_gifts_v2": {
+    "user_correction": "FAMILY_INCLUDES_MEMBERS_BEYOND_PARENT",
+    "model": "FAMILY_MEMBERSHIP_SEPARATE_FROM_RELATIONSHIP_SEPARATE_FROM_GIFT_PERMISSION",
+    "sample_relationships_not_permissions": [
+      "PARENT",
+      "GRANDPARENT",
+      "GUARDIAN",
+      "SIBLING",
+      "OTHER_RELATIVE"
+    ],
+    "giver_permission": "FAMILY_PRAISE_GIFT_EXPLICIT_TRUSTED_PROVIDER_ONLY",
+    "recipient": "PROVIDER_VERIFIED_CHILD_SAME_FAMILY",
+    "parent_personal_unearned_badge_atlas": false,
+    "gift_options": [
+      "APPROVED_ACTIVE_FAMILY_PRAISE_BADGE",
+      "GEM_1_TO_5_PER_GIFT"
+    ],
+    "recurring_gift_period_limit": "NOT_DEFINED",
+    "implementation": {
+      "v2_gift_service": "BRANCH_IMPLEMENTED_PENDING_CI",
+      "v2_signed_journal": "BRANCH_IMPLEMENTED_PENDING_CI",
+      "v1_parent_only_modules": "PRESERVED_HISTORICAL_NOT_LATEST",
+      "ready_family_identity": "CURRENT_REAL_CODE_PARENT_CHILD_ONLY",
+      "ready_grandparent_relative_relationship_provider": "OPEN",
+      "trusted_family_gift_permission_provider": "OPEN",
+      "actual_ready_endpoint_and_shared_persistence": "OPEN",
+      "child_gem_wallet_and_approved_badge_collection": "OPEN"
+    },
+    "authority": "DIRECT_USER_2026-09-26"
   }
 }
