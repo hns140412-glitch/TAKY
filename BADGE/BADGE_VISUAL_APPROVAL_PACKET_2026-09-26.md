@@ -78,8 +78,8 @@ The following may be preserved regardless of which asset sheet is approved:
 - hand-drawn / pastel;
 - Profile Character protagonist;
 - recovered GREEN → BLUE → RED → GOLD → PLATINUM palette lineage;
-- 1–5 stars mean **grade classification**;
-- stars are not repeat count, EXP, gem, affinity, score, power, or streak.
+- first acquisition unlocks the badge; each approved reacquisition adds one star; five stars trigger a tier promotion;
+- stars are not activity telemetry / raw repeat count, EXP, gem, affinity, score, power, or streak. Only distinct approved reacquisition Award Ledger receipts count.
 
 ## Approval action
 
@@ -99,3 +99,10 @@ After approval:
 4. enable renderer binding only for those approved entries;
 5. wire app display surfaces;
 6. run runtime regression.
+
+## Latest appearance clarification
+- Target: fictional exploration-crew campaign-merit insignia feeling, pastel hand-drawn and round.
+- Profile character is a separate child-specific overlay, NOT baked into base art.
+- Unearned badge = silhouette; earned badge = active full color.
+- Border = disappearing soft pastel gradient.
+- Candidate A/B are both still unapproved asset sheets. Pastel art direction is confirmed, exact final source is not.
