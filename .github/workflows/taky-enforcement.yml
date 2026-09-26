@@ -263,6 +263,9 @@ jobs:
           node --check LEARNING/transport/scoped-evidence-outbox.js
           node --check LEARNING/transport/scoped-evidence-outbox.test.js
           node LEARNING/transport/scoped-evidence-outbox.test.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.test.js
+          node LEARNING/transport/indexeddb-evidence-outbox-store.test.js
           node --check LEARNING/transport/encrypted-drive-archive-export.js
           node --check LEARNING/transport/encrypted-drive-archive-export.test.js
           node LEARNING/transport/encrypted-drive-archive-export.test.js
