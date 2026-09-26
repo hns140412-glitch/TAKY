@@ -43,6 +43,16 @@ class RawResumeAuditTests(unittest.TestCase):
   self.raw.write_text("Original decision A.\nLater correction B.\nForgotten requirement C.\n")
   self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
   self.assertTrue(any("UNACCOUNTED_RAW_LINE: R1:3" in x for x in self.run_audit()))
+ def test_unlisted_material_same_line_fails(self):
+  # A quote covering any part of a line must not certify the rest of that line.
+  self.raw.write_text("Original decision A. Forgotten requirement C.\nLater correction B.\n",encoding="utf-8")
+  self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
+  self.assertTrue(any("PARTIAL_RAW_LINE_COVERAGE: R1:1" in x for x in self.run_audit()))
+ def test_partial_quote_cannot_be_hidden_by_whole_line_exclusion(self):
+  self.raw.write_text("Original decision A. Hidden requirement C.\nLater correction B.\n",encoding="utf-8")
+  self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
+  self.manifest["excluded_lines"]=[{"raw_source_id":"R1","line":1,"reason":"ignore rest"}]
+  self.assertTrue(any("EXCLUDED_BUT_MATERIAL: R1:1" in x for x in self.run_audit()))
  def test_exclusion_requires_reason(self):
   self.raw.write_text("Original decision A.\nLater correction B.\nNonmaterial greeting.\n")
   self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
