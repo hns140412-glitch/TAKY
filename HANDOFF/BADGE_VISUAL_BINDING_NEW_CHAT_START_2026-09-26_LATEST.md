@@ -1,3 +1,11 @@
+# LATEST RESUME OVERRIDE — MULTI-INSTANCE AWARD LEDGER CAS CORE — 2026-09-26
+
+The user approved continuation of actual app badge history. Ready independent DRAFT #110 (family relations) and #111 (child week/day earned badge rails) have now been **combined** in Ready-Set DRAFT PR #112 exact head `6d29015bf84893877ff47dcc6d9b8d5376ddea09`, preserving both `app.js`/CI changes. All combined PR checks SUCCESS including **53 Playwright tests** and cross-role isolation; original #110/#111 remain lineage only, no Ready main merge or Netlify deployment. Snap DRAFT #9 exact head `7652c3fb0ec99796768f3993b05cf7c0946dcd9e` passed all 7 UI/runtime tests; no production Badge Reader bound.
+
+New `BADGE/badge-award-ledger-cas-store.js` uses injected strong read + conditional ETag CAS writes with bounded retries and signed full-history replay, instead of unsafe ordinary remote get/set. Do not confuse pure tested provider code with configured Netlify Blobs store or deployed multi-device Award Ledger. It retains legacy local Node provider unchanged. Need trusted server secrets, Achievement Decision provider, approved active badges, scoped live endpoints and external checkpoint anchoring (valid-old-history rollback remains an OPEN threat). Read `BADGE/BADGE_AWARD_CAS_MULTIDEVICE_CONTRACT_2026-09-26.md` plus latest CURRENT, exact PR HEAD and CI before promotion. No Netlify tool calls, no 60 draft activation, no grant or art approval.
+
+---
+
 # LATEST RESUME OVERRIDE — OPTIONAL EARNED BADGE TRACES IN DAY/WEEK PLANNER AND SNAP RECORDS — 2026-09-26
 
 Direct user wants earned badges in Ready daily/weekly exploration plans to raise delight and motivation. **Retrospective celebration, NOT required quota, streak, task completion criterion, XP/gem conversion or task-to-badge correlation based only on same calendar date.** Date-level tiny text merit pin in Week and compact '이날 발견한 훈장' in Day, up to 3 names; quiet neutral empty state. Approved art required before visual image binding.
