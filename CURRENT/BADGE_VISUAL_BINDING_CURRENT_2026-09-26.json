@@ -59,7 +59,7 @@
     "corrected_main_ci": "BADGE_VISUAL_REGISTRY_VALIDATION_SUCCESS",
     "ledger_history_bridge": "BRANCH_IMPLEMENTED_FAIL_CLOSED_NOT_LIVE_BOUND",
     "trusted_award_ledger_source": "NOT_FOUND_IN_VERIFIED_MAIN_REPOS",
-    "ledger_bridge_tests": "PR_CI_PENDING"
+    "ledger_bridge_tests": "PR_HEAD_SUCCESS_36233712281"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
