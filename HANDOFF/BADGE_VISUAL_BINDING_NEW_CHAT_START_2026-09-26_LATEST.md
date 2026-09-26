@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — BADGE ACQUISITION HISTORY / CALENDAR — 2026-09-26
+
+Direct user instruction: Keep each badge's *entire acquisition history* and show it in child-specific detail timelines and a monthly calendar. The one source of truth is the signed Award Ledger, not app telemetry, story prompts or family gift records. New append has distinct UTC signed `awarded_at` and `approved_at`; legacy signed records without actual award timestamp remain in "날짜 미확인", not assigned to a guessed day. New `BADGE/badge-award-calendar.js` builds Asia/Seoul month cells; existing family reader gets `getBadgeHistory` and `getMonth` with auth and approved active catalog gates; one tier promotion is ONE underlying REAWARD event.
+
+See `BADGE/BADGE_ACQUISITION_HISTORY_CALENDAR_2026-09-26.md` and latest CURRENT; verify exact-head CI before declaring main closure. Child self / existing verified Parent scope only; other relatives do not inherit private history access from family membership or praise-gift permission. Gift journal is distinct and can be an explicitly labeled separate future calendar lane, never an Achievement grant.
+
+No real app surfaces, real approved 60/20 catalogue/asset, Gem Wallet, Netlify deployment or pending Ready PR #110 merge in this slice.
+
+---
+
 # LATEST RESUME OVERRIDE — ORIGINAL WITTY BADGE NAMING INSPIRED BY WoW — 2026-09-26
 
 Direct user wants witty, clever WoW-achievement-style names in TAKY. Use writing craft, not direct borrowed WoW names. New `BADGE/badge-wow-inspired-copyworking.json` keeps 60 historical canonical names/IDs and 20 history-template IDs, and proposes 80 original display-name alternatives, earned-only reveal toasts and warm flavor texts. Humorous devices include situational twist, talking objects, Korean pun, self-aware and mystery reveal. `BADGE/badge-wow-inspired-copy-validator.js` guards source identity/uniqueness/status.
