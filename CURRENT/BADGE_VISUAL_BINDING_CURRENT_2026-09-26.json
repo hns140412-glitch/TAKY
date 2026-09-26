@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "FAMILY_RELATIONSHIP_NEUTRAL_GIFT_V2_BRANCH_CANDIDATE_LIVE_INTEGRATION_OPEN",
+  "status": "FAMILY_RELATIONSHIP_NEUTRAL_GIFT_V2_CI_TESTED_LIVE_INTEGRATION_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -246,14 +246,15 @@
     ],
     "recurring_gift_period_limit": "NOT_DEFINED",
     "implementation": {
-      "v2_gift_service": "BRANCH_IMPLEMENTED_PENDING_CI",
-      "v2_signed_journal": "BRANCH_IMPLEMENTED_PENDING_CI",
+      "v2_gift_service": "PR_149_EXACT_HEAD_TESTED",
+      "v2_signed_journal": "PR_149_EXACT_HEAD_TESTED",
       "v1_parent_only_modules": "PRESERVED_HISTORICAL_NOT_LATEST",
       "ready_family_identity": "CURRENT_REAL_CODE_PARENT_CHILD_ONLY",
       "ready_grandparent_relative_relationship_provider": "OPEN",
       "trusted_family_gift_permission_provider": "OPEN",
       "actual_ready_endpoint_and_shared_persistence": "OPEN",
-      "child_gem_wallet_and_approved_badge_collection": "OPEN"
+      "child_gem_wallet_and_approved_badge_collection": "OPEN",
+      "v2_ci_run": "36236992963_SUCCESS_BEFORE_CURRENT_STATUS_COMMIT"
     },
     "authority": "DIRECT_USER_2026-09-26"
   }
