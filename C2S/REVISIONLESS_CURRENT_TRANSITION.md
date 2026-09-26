@@ -38,6 +38,13 @@ Scope: whole TAKY architecture review; Work OS feature work HOLD, badge visual/c
 | Snap & Pop | specialist observation/world-state contract distinct from central learning | confirm current head and affected real producer/consumer only where required; badge separate chat |
 | Work OS / ARCHI GROW | part of TAKY sibling scope | feature work HOLD, only map shared semantics and dependencies, no building/deployment in this slice |
 
+### Verified current product/repository comparison at this review
+These SHA values are **dated source evidence**, not permanent CURRENT. Requery before any implementation/merge/deploy claim.
+- Ready & Set main: `1d672d862cc8329a5f19ca91c9ed6a338752f5ae`; review roundtrip PR #100 is OPEN/DRAFT, and weekly availability PR #93 is OPEN/unmerged. Therefore do not treat either branch as current main functionality.
+- Hide & Seek main: `1156c559bbc3da239b30606912ab0ae0548af0a3`; real scoped evidence PR #19 is OPEN/DRAFT, not live credentialed service.
+- Snap & Pop main: `3de97be0d12dd6244a942b0c137c2efe578a43b6`; no badge work performed in this review.
+- Central Learning integration PR #159 remains OPEN/DRAFT and explicitly lacks operational live Google binding/host/store. Correct next cross-system target is actual trusted family/member session and evidence ACK followed by Learning review need -> Planner dated allocation -> app execution/result, not another unrelated local version.
+
 ## 4. Rollout boundary
 A. FIRST: revisionless language + migration coverage on separate candidate branch; no main promotion.
 B. NEXT: implementation owner scans readers/references, introduces namespace-stable alias selector and compatibility map; test stale/higher-number/ambiguous/current-evidence cases.
