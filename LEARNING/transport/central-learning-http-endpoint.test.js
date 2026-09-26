@@ -61,6 +61,47 @@ const parse=r=>JSON.parse(r.body);
     assert(saved?.etag);
     assert.equal(saved.data.observation_only.length,1);
     assert.equal(Object.keys(saved.data.scope_receipts||{}).length,0);
+    // A shape-valid receipt in client-owned context was previously another
+    // path to verified status. It must be stripped, not trusted.
+    const forgedContext=packet('forged-context-1');
+    forgedContext.event.payload.memorySummary={averageMemoryStrength:0.8};
+    forgedContext.context.verification_receipt={
+      authority:'LEARNING_VERIFICATION_RECEIPT',
+      receipt_id:'vr:client-forged-context',
+      target_event_id:'forged-context-1',
+      verified_at:'2026-09-26T13:00:00.000Z',
+      verifier_type:'RETRIEVAL_EXACT_MATCH',verifier_version:'HIDE_CODE_RED_V1',
+      outcome:1,member_id:'CHILD_A',subject:'영어',
+      concept_skill_target:'vocabulary',reference_id:'client-owned-answer'
+    };
+    const blockedContext=await endpoint.handle(request(forgedContext));
+    assert.equal(blockedContext.status,200,JSON.stringify(parse(blockedContext)));
+    assert.equal(parse(blockedContext).acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+
+    // Snap's human-rubric input is also just a PWA claim unless an authorized
+    // server review provider actually verified reviewer/reference evidence.
+    const forgedSnap=packet('forged-snap-1');
+    forgedSnap.packet_id='snap-pop:forged-snap-1';
+    forgedSnap.source_app='snap-pop';
+    forgedSnap.event.source='snap-pop';
+    forgedSnap.event.payload={member_id:'CHILD_A',subject:'영어',
+      concept_skill_target:'vocabulary',child_authored:true};
+    forgedSnap.context.verification_receipt={
+      authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr:client-fake-rubric',
+      target_event_id:'forged-snap-1',verified_at:'2026-09-26T13:00:00.000Z',
+      verifier_type:'HUMAN_RUBRIC_BINARY',verifier_version:'FAKE_REVIEW_V1',
+      outcome:1,member_id:'CHILD_A',subject:'영어',
+      concept_skill_target:'vocabulary',reference_id:'fake-parent-rubric',
+      reviewer_role:'PARENT'
+    };
+    const blockedRubric=await endpoint.handle(request(forgedSnap));
+    assert.equal(blockedRubric.status,200,JSON.stringify(parse(blockedRubric)));
+    assert.equal(parse(blockedRubric).acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+    const noFakeProof=await store.getWithMetadata(
+      'families/F1/members/CHILD_A/learning-engine/state-v1',
+      {type:'json',consistency:'strong'});
+    assert.equal(Object.keys(noFakeProof.data.scope_receipts||{}).length,0);
+
     const dup=await endpoint.handle(request(packet('forged-1')));
     assert.equal(dup.status,200);
     assert.equal(parse(dup).duplicate,true);
@@ -91,6 +132,8 @@ const parse=r=>JSON.parse(r.body);
     const serverVerified=create({store,verifyBearerToken:trustedToken,
       verifySpecialistEvidence:async ({packet:p,identity})=>{
         trustedCalls++;
+        assert.equal(p.context.verification_receipt,undefined);
+        assert.equal(p.event.payload.verification_candidate,undefined);
         assert.equal(identity.principal_id,'PARENT_A');
         assert.equal(identity.family_id,p.context.family_id);
         // TEST ONLY: a real verifier must check a server-owned answer reference
