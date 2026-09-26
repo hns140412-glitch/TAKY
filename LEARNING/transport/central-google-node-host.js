@@ -8,13 +8,15 @@
  */
 const Google=require('./google-learning-principal.js');
 const Registry=require('./server-family-registry-provider.js');
+const References=require('./server-specialist-reference-store.js');
+const Specialist=require('./server-specialist-verifier.js');
 const Central=require('./central-learning-http-endpoint.js');
 const NodeBridge=require('./node-http-learning-bridge.js');
 const VERSION='TAKY_CENTRAL_GOOGLE_NODE_HOST_COMPOSITION_V1';
 
 function create({
  googleAuthLibrary,oauth2Client,clientIds,registryStore,evidenceStore,
- allowedOrigins,verifySpecialistEvidence=null,now=Date.now
+ referenceStore=null,allowedOrigins,verifySpecialistEvidence=null,now=Date.now
 }={}){
  if(!Array.isArray(allowedOrigins)||!allowedOrigins.length)
    throw Error('HOST_EXPLICIT_BROWSER_ORIGINS_REQUIRED');
@@ -28,9 +30,16 @@ function create({
    googleAuthLibrary,oauth2Client,clientIds,
    lookupMemberships:registry.lookupMemberships,now
  });
+ if(referenceStore&&verifySpecialistEvidence)
+   throw Error('HOST_AMBIGUOUS_SPECIALIST_VERIFIER_CONFIGURATION');
+ const sources=referenceStore?References.create({store:referenceStore}):null;
+ const specialist=sources?Specialist.create({
+   loadAssessment:sources.loadAssessment,
+   loadHumanReview:sources.loadHumanReview,now
+ }):null;
  const endpoint=Central.create({
    verifyBearerToken:google.verifyBearerToken,store:evidenceStore,
-   verifySpecialistEvidence
+   verifySpecialistEvidence:specialist?.verifySpecialistEvidence||verifySpecialistEvidence
  });
  const handler=NodeBridge.createHandler({endpoint,allowedOrigins});
  return Object.freeze({version:VERSION,handler});
