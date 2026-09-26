@@ -72,7 +72,8 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
     if(r.decision_status!=='APPROVED'||!clean(r.decision_id)||
       !clean(r.decision_ref)||!clean(r.approved_at)||!['INITIAL_AWARD','REAWARD'].includes(r.award_kind))
       return deny('APPROVED_DECISION_RECEIPT_INCOMPLETE');
-    try{if(isBadgeActive({child_id:child,badge_id:badge,decision:r})!==true)
+    if(clean(r.family_id)!==family)return deny('DECISION_FAMILY_SCOPE_MISMATCH');
+    try{if(isBadgeActive({family_id:family,child_id:child,badge_id:badge,decision:r})!==true)
       return deny('BADGE_NOT_ACTIVE_OR_CHILD_NOT_AUTHORIZED')}
     catch{return deny('BADGE_AUTHORIZATION_FAILED')}
     const f=file(child,badge),lock=f+'.lock';let lockFd=null,temp=null;
@@ -84,7 +85,6 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
         return deny('DUPLICATE_APPROVED_DECISION');
       const sequence=data.rows.length,neededKind=sequence===0?'INITIAL_AWARD':'REAWARD';
       if(r.award_kind!==neededKind)return deny('AWARD_KIND_OUT_OF_SEQUENCE');
-      if(clean(r.family_id)!==family)return deny('DECISION_FAMILY_SCOPE_MISMATCH');
       const awardId=hash('AWARD\n'+family+'\n'+child+'\n'+badge+'\n'+r.decision_id);
       const record={
         ledger_sequence:sequence,award_id:awardId,decision_id:r.decision_id,
