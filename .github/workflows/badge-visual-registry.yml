@@ -52,3 +52,7 @@ jobs:
         run: node --check BADGE/badge-family-read-access.js
       - name: Verified family badge access regression
         run: node BADGE/badge-family-read-access.test.js
+      - name: Parent praise gift syntax
+        run: node --check BADGE/parent-praise-gift.js
+      - name: Parent praise gift regression
+        run: node BADGE/parent-praise-gift.test.js
