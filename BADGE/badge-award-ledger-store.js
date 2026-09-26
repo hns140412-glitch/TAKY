@@ -59,24 +59,6 @@ function createLedger({directory,signingKey,verifyDecision,isBadgeActive}={}){
     if(!same(previous,data.checkpoint))throw Error('LEDGER_CHECKPOINT_INVALID');
     return data;
   }
-  function writeAtomically(f,data){
-    const lock=f+'.lock', temporary=f+'.tmp-'+crypto.randomUUID();
-    let lockFd=null,tmpFd=null;
-    try{
-      lockFd=fs.openSync(lock,'wx',0o600);
-      // Caller re-reads after lock acquisition, never relying on a stale snapshot.
-      const text=JSON.stringify(data,null,2)+'\n';
-      tmpFd=fs.openSync(temporary,'wx',0o600);
-      fs.writeFileSync(tmpFd,text);fs.fsyncSync(tmpFd);fs.closeSync(tmpFd);tmpFd=null;
-      fs.renameSync(temporary,f);
-      const dirFd=fs.openSync(directory,'r');
-      try{fs.fsyncSync(dirFd)}finally{fs.closeSync(dirFd)}
-    }finally{
-      if(tmpFd!==null)fs.closeSync(tmpFd);
-      try{fs.unlinkSync(temporary)}catch{}
-      if(lockFd!==null){fs.closeSync(lockFd);fs.unlinkSync(lock)}
-    }
-  }
   function appendApprovedDecision(input){
     let checked;
     try{checked=verifyDecision(input)}catch{return deny('TRUSTED_ACHIEVEMENT_DECISION_VERIFICATION_FAILED')}
