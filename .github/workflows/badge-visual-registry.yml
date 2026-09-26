@@ -28,3 +28,7 @@ jobs:
         run: node --check BADGE/badge-visual-registry.js
       - name: Registry guard regression
         run: node BADGE/badge-visual-registry.test.js
+      - name: Renderer syntax check
+        run: node --check BADGE/badge-visual-renderer.js
+      - name: Renderer guard regression
+        run: node BADGE/badge-visual-renderer.test.js
