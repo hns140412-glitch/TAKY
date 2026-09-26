@@ -18,6 +18,9 @@
     "allowed": [
       "approved_component"
     ],
+    "preserve": [
+      "unrelated_project_state"
+    ],
     "forbidden": [
       "unrelated_refactor",
       "silent_requirement_change",
