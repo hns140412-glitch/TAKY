@@ -70,5 +70,7 @@ const scope=['F','A','hide-seek'];
  const replacement=await q.claim(scope,'replacement');
  assert.equal((await q.settle(old,valid2)).updated,false);
  assert.equal(replacement.owner,'replacement');
+ assert.equal((await q.settle({...replacement,nonce:old.nonce},valid2)).updated,false);
+ assert.equal((await q.list(scope))[2].status,'IN_FLIGHT');
  console.log('SCOPED_EVIDENCE_OUTBOX_PASS: atomic enqueue/dedupe, exclusive lease, offline retry, account switch block, mismatched ACK denial, exact ACK commit, expired lease takeover');
 })().catch(e=>{console.error(e);process.exitCode=1});
