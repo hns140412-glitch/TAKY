@@ -1,0 +1,203 @@
+{
+  "version": "2026-09-26.1",
+  "status": "CANDIDATE_EVIDENCE_NOT_APPROVAL",
+  "sheets": [
+    {
+      "evidence_id": "BADGE_SHEET_CANDIDATE_A",
+      "file_name": "귀여운 탐험가 배지 컬렉션.png",
+      "approval_status": "NO_EXPLICIT_FINAL_APPROVAL_RECOVERED",
+      "labels": [
+        "해뜰락말락",
+        "집중의 시작",
+        "없던시간 뿅",
+        "아침 한입",
+        "출발 준비 끝",
+        "딱 하나 집중",
+        "결국 해냈다",
+        "오답 탐정",
+        "쉬고 다시",
+        "계획 변경 성공",
+        "그래도 출발",
+        "오늘 좀 특별한데?"
+      ],
+      "role": "REFERENCE_CANDIDATE_ONLY",
+      "auto_crop_to_runtime": false,
+      "auto_bind": false,
+      "items": [
+        {
+          "position": 1,
+          "label": "해뜰락말락",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-001"
+        },
+        {
+          "position": 2,
+          "label": "집중의 시작",
+          "exact_catalog_match": false,
+          "draft_id": null
+        },
+        {
+          "position": 3,
+          "label": "없던시간 뿅",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-007"
+        },
+        {
+          "position": 4,
+          "label": "아침 한입",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-003"
+        },
+        {
+          "position": 5,
+          "label": "출발 준비 끝",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-005"
+        },
+        {
+          "position": 6,
+          "label": "딱 하나 집중",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-013"
+        },
+        {
+          "position": 7,
+          "label": "결국 해냈다",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-017"
+        },
+        {
+          "position": 8,
+          "label": "오답 탐정",
+          "exact_catalog_match": false,
+          "draft_id": null
+        },
+        {
+          "position": 9,
+          "label": "쉬고 다시",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-043"
+        },
+        {
+          "position": 10,
+          "label": "계획 변경 성공",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-056"
+        },
+        {
+          "position": 11,
+          "label": "그래도 출발",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-057"
+        },
+        {
+          "position": 12,
+          "label": "오늘 좀 특별한데?",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-060"
+        }
+      ]
+    },
+    {
+      "evidence_id": "BADGE_SHEET_CANDIDATE_B",
+      "file_name": "파스텔 탐험대 배지 12종.png",
+      "approval_status": "NO_EXPLICIT_FINAL_APPROVAL_RECOVERED",
+      "labels": [
+        "해뜰락말락",
+        "출발 준비 끝",
+        "없던시간 뿅",
+        "딱 하나 집중",
+        "결국 해냈다",
+        "실수 청소부",
+        "아하!",
+        "탐험대와 함께",
+        "우리의 발견",
+        "쉬고 다시",
+        "오늘도 성장중",
+        "오늘은 특별해"
+      ],
+      "role": "REFERENCE_CANDIDATE_ONLY",
+      "auto_crop_to_runtime": false,
+      "auto_bind": false,
+      "items": [
+        {
+          "position": 1,
+          "label": "해뜰락말락",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-001"
+        },
+        {
+          "position": 2,
+          "label": "출발 준비 끝",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-005"
+        },
+        {
+          "position": 3,
+          "label": "없던시간 뿅",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-007"
+        },
+        {
+          "position": 4,
+          "label": "딱 하나 집중",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-013"
+        },
+        {
+          "position": 5,
+          "label": "결국 해냈다",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-017"
+        },
+        {
+          "position": 6,
+          "label": "실수 청소부",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-027"
+        },
+        {
+          "position": 7,
+          "label": "아하!",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-032"
+        },
+        {
+          "position": 8,
+          "label": "탐험대와 함께",
+          "exact_catalog_match": false,
+          "draft_id": null
+        },
+        {
+          "position": 9,
+          "label": "우리의 발견",
+          "exact_catalog_match": false,
+          "draft_id": null
+        },
+        {
+          "position": 10,
+          "label": "쉬고 다시",
+          "exact_catalog_match": true,
+          "draft_id": "BDG-DRAFT-043"
+        },
+        {
+          "position": 11,
+          "label": "오늘도 성장중",
+          "exact_catalog_match": false,
+          "draft_id": null
+        },
+        {
+          "position": 12,
+          "label": "오늘은 특별해",
+          "exact_catalog_match": false,
+          "draft_id": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "sheet_a_exact_matches": 10,
+    "sheet_b_exact_matches": 8,
+    "canonical_asset_set_selected": false
+  }
+}
