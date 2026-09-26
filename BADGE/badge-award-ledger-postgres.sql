@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS taky_badge_award_event (
   award_id char(64) NOT NULL CHECK (award_id ~ '^[0-9a-f]{64}$'),
   -- TEXT rather than JSONB deliberately preserves the HMAC-signed canonical
   -- JSON byte representation and property ordering used by the existing ledger.
-  record_json text NOT NULL CHECK (length(record_json) > 0 AND record_json IS JSON),
+  record_json text NOT NULL CHECK (length(record_json) > 0),
   digest char(64) NOT NULL CHECK (digest ~ '^[0-9a-f]{64}$'),
   PRIMARY KEY (family_id,child_id,badge_id,ledger_sequence),
   UNIQUE (family_id,child_id,badge_id,decision_id),
