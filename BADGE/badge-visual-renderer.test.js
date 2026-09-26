@@ -26,4 +26,24 @@ assert.equal(api.buildRenderModel(approved,{...earned,ownership_source:'ACTIVITY
 assert.equal(api.buildRenderModel(approved,{...earned,child_id:'CHILD_B'},child).ok,false);
 assert.equal(api.buildRenderModel({...approved,asset_state:'UNBOUND'},earned,child).ok,false);
 assert.equal(api.buildRenderModel(approved,{...earned,repeat_count:100,star_count:3},child).star_count,3);
+class FakeNode {
+  constructor(tag){this.tagName=tag;this.children=[];this.dataset={};this.attributes={};}
+  append(...children){this.children.push(...children);}
+  replaceChildren(...children){this.children=[...children];}
+  setAttribute(key,value){this.attributes[key]=value;}
+}
+const doc={createElement:tag=>new FakeNode(tag)};
+const host=new FakeNode('div');
+assert.equal(api.renderInto(host,approved,earned,child,doc).ok,true);
+assert.equal(host.dataset.badgeVisualState,'EARNED');
+assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,1);
+assert.equal(api.renderInto(host,approved,{child_id:'CHILD_A',ownership_state:'LOCKED',star_count:0},{},doc).ok,true);
+assert.equal(host.dataset.badgeVisualState,'LOCKED');
+assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,0);
+assert.equal(api.renderInto(host,{...approved,asset_state:'UNBOUND'},earned,child,doc).ok,false);
+assert.equal(host.children.length,0);
+assert.equal(host.dataset.badgeVisualState,'UNBOUND_OR_UNAPPROVED');
+const css=require('node:fs').readFileSync(require('node:path').join(__dirname,'badge-visual-presentation.css'),'utf8');
+assert.match(css,/radial-gradient/);
+assert.match(css,/data-badge-state="LOCKED"/);
 console.log('badge visual renderer reaward and layered states: PASS');
