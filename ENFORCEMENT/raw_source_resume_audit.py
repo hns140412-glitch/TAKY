@@ -51,6 +51,24 @@ def audit(root, manifest_path, inventory_path, handoff_path):
             raw[sid]=data.decode("utf-8")
         except UnicodeDecodeError:
             errors.append(f"non-UTF8 raw source: {sid}")
+    # Strict raw-line accounting: every nonblank line in every declared raw file
+    # must be represented by a material quote or explicitly excluded with a reason.
+    # This prevents a preparer from simply leaving an inconvenient source line
+    # out of both the inventory and the handoff.
+    exclusions=manifest.get("excluded_lines")
+    if not isinstance(exclusions,list):
+        errors.append("excluded_lines must be an explicit list (empty allowed)")
+        exclusions=[]
+    excluded={}
+    for entry in exclusions:
+        sid=entry.get("raw_source_id")
+        line=entry.get("line")
+        if not isinstance(line,int) or line<1 or not entry.get("reason"):
+            errors.append(f"INVALID_EXCLUSION: {sid}:{line}")
+        elif (sid,line) in excluded:
+            errors.append(f"DUPLICATE_EXCLUSION: {sid}:{line}")
+        else:
+            excluded[(sid,line)]=entry
     seen=set()
     expected={}
     for item in items:
@@ -73,6 +91,28 @@ def audit(root, manifest_path, inventory_path, handoff_path):
         if item.get("type")=="CORRECTION" and not item.get("correction_targets"):
             errors.append(f"CORRECTION_TARGET_MISSING: {key}")
         expected[key]=item
+    covered=set()
+    for key,item in expected.items():
+        sid=item.get("raw_source_id")
+        quote=item.get("exact_quote","")
+        if sid in raw and quote and raw[sid].count(quote)==1:
+            start=raw[sid].index(quote)
+            end=start+len(quote)
+            first=raw[sid][:start].count("\\n")+1
+            last=raw[sid][:end-1].count("\\n")+1
+            covered.update((sid,n) for n in range(first,last+1))
+    for sid,content in raw.items():
+        for line_no,line in enumerate(content.splitlines(),1):
+            if not line.strip():
+                continue
+            key=(sid,line_no)
+            if key not in covered and key not in excluded:
+                errors.append(f"UNACCOUNTED_RAW_LINE: {sid}:{line_no}")
+            if key in covered and key in excluded:
+                errors.append(f"EXCLUDED_BUT_MATERIAL: {sid}:{line_no}")
+    for sid,line in excluded:
+        if sid not in raw or line>len(raw[sid].splitlines()) or not raw[sid].splitlines()[line-1].strip():
+            errors.append(f"INVALID_EXCLUDED_LINE_REFERENCE: {sid}:{line}")
     for key,item in expected.items():
         for target in item.get("correction_targets",[]):
             if target not in expected:
