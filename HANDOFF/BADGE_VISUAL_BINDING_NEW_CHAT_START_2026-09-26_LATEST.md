@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — OPTIONAL EARNED BADGE TRACES IN DAY/WEEK PLANNER AND SNAP RECORDS — 2026-09-26
+
+Direct user wants earned badges in Ready daily/weekly exploration plans to raise delight and motivation. **Retrospective celebration, NOT required quota, streak, task completion criterion, XP/gem conversion or task-to-badge correlation based only on same calendar date.** Date-level tiny text merit pin in Week and compact '이날 발견한 훈장' in Day, up to 3 names; quiet neutral empty state. Approved art required before visual image binding.
+
+Actual tested DRAFT app PRs: Ready-Set [#111](https://github.com/hns140412-glitch/Ready-Set/pull/111), exact head `c038a37bb2728522ef8312e69ee4c84745ac4725`, ALL CI SUCCESS including Chromium E2E; Snap-Pop [#9](https://github.com/hns140412-glitch/Snap-Pop/pull/9), exact head `268aac41d68dc30551e094952dddd14fc3c10713`, CI SUCCESS. Both UNMERGED and UNDEPLOYED due unverified main→Netlify auto-deploy coupling. Ready adds read-only child signed-month projection rails; Snap Records adds single-screen 탐험일지/배지 도감/캘린더 and signed-detail shell. No app has actual production authenticated Badge Reader yet; default is truthful unconnected, test fixtures only. Snap SW draft excludes all /api from offline caching. Parent has no personal unearned atlas. Existing historical 60 remain unapproved/unbound.
+
+TAKY PR #153 merged main `76b9dbc77f147c44f44818b62bb66af891a9be65`; signed Award Ledger → verified child history/calendar, and separately labeled signed Family Gift read lane are executable, CI success. Previous branch-status strings in older docs do not override this exact merged main. Ready PR #110 (extended family roles) remains independently DRAFT; #111 starts from current Ready main without #110, so explicitly rebase/retest in whichever merge order is eventually authorized. No Netlify tool calls. Next OPEN: real server-approved asset/catalog + server session-bound no-store getMonth/getBadgeHistory/getCollection/getViewer, relation/permission source, then branch conflict/regression and actual release gate.
+
+---
+
 # CALENDAR DELTA — SEPARATE SIGNED FAMILY GIFT LANE — 2026-09-26
 
 The same bounded history PR also adds `BADGE/badge-family-gift-calendar.js`. It reads a trusted signed V2 gift journal, filters recipient Child, groups Korean-time gifts by date, and composes **separate** achievement / family praise badge / journaled gem gift lanes. It does not issue awards, increment reaward stars, or claim a live wallet credit. The real family gift-history reader's authorization remains OPEN. See updated BADGE acquisition history/calendar spec and CI.
