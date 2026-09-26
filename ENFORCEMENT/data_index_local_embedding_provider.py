@@ -56,7 +56,7 @@ def _source_id(row: dict[str, Any]) -> str:
     return str(ident.get("source_id") or row.get("source_id") or "").strip()
 
 def build_index(payload_path: Path, output_path: Path) -> None:
-    payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    payload = json.loads(payload_path.read_text(encoding="utf-8-sig"))
     rows = payload.get("source_entries")
     if not isinstance(rows, list):
         raise LocalEmbeddingProviderError("SOURCE_ENTRIES_MISSING")
