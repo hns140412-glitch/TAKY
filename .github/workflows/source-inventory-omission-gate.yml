@@ -5,11 +5,15 @@ on:
     paths:
       - 'ENFORCEMENT/source_inventory_omission_gate.py'
       - 'ENFORCEMENT/source_inventory_omission_gate_test.py'
+      - 'ENFORCEMENT/raw_source_resume_audit.py'
+      - 'ENFORCEMENT/raw_source_resume_audit_test.py'
       - '.github/workflows/source-inventory-omission-gate.yml'
   pull_request:
     paths:
       - 'ENFORCEMENT/source_inventory_omission_gate.py'
       - 'ENFORCEMENT/source_inventory_omission_gate_test.py'
+      - 'ENFORCEMENT/raw_source_resume_audit.py'
+      - 'ENFORCEMENT/raw_source_resume_audit_test.py'
       - '.github/workflows/source-inventory-omission-gate.yml'
 
 permissions:
@@ -25,5 +29,6 @@ jobs:
           python-version: '3.12'
       - name: Compile and run positive and adversarial omission regressions
         run: |
-          python -m py_compile ENFORCEMENT/source_inventory_omission_gate.py ENFORCEMENT/source_inventory_omission_gate_test.py
+          python -m py_compile ENFORCEMENT/source_inventory_omission_gate.py ENFORCEMENT/source_inventory_omission_gate_test.py ENFORCEMENT/raw_source_resume_audit.py ENFORCEMENT/raw_source_resume_audit_test.py
+          python -m unittest discover -s ENFORCEMENT -p '*resume_audit_test.py' -v
           python -m unittest discover -s ENFORCEMENT -p 'source_inventory_omission_gate_test.py' -v
