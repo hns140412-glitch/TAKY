@@ -7,6 +7,7 @@ runtime/task context into the canonical Codex task contract shape.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -16,6 +17,48 @@ REQUIRED_CONTEXT = [
     "project", "repository", "base_branch", "verified_base_head",
     "allowed_change_scope", "acceptance_tests"
 ]
+
+def _effect_policy(record: dict) -> dict | None:
+    configured = any(
+        key in record
+        for key in (
+            "effect_class",
+            "side_effect_request",
+            "retry_budget",
+            "reconcile_before_retry",
+            "compensation_ref",
+        )
+    )
+    if not configured:
+        return None
+
+    effect_class = str(record.get("effect_class", "READ_ONLY")).strip().upper()
+    payload = record.get("side_effect_request")
+    request_fingerprint = None
+    if isinstance(payload, dict):
+        canonical = json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        request_fingerprint = hashlib.sha256(canonical).hexdigest()
+
+    return {
+        "effect_class": effect_class,
+        "request_fingerprint": request_fingerprint,
+        "reconcile_before_retry": bool(
+            record.get(
+                "reconcile_before_retry",
+                effect_class == "NON_IDEMPOTENT_MUTATION",
+            )
+        ),
+        "retry_budget": record.get(
+            "retry_budget",
+            0 if effect_class == "READ_ONLY" else 1,
+        ),
+        "compensation_ref": record.get("compensation_ref"),
+    }
 
 def build(record: dict) -> dict:
     missing = [k for k in REQUIRED_CONTEXT if not record.get(k)]
@@ -84,6 +127,10 @@ def build(record: dict) -> dict:
         "requested_transition": "CODEX_DONE",
         "claims_taky_pass": False,
     }
+    effect_policy = _effect_policy(record)
+    if effect_policy is not None:
+        task["effect_policy"] = effect_policy
+
     errors = validate(task)
     return {
         "pass": not errors,
