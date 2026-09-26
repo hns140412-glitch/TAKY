@@ -70,3 +70,7 @@ jobs:
         run: node --check BADGE/badge-story-discovery.js
       - name: Story hierarchy and history discovery regression
         run: node BADGE/badge-story-discovery.test.js
+      - name: Witty original badge copy validator syntax
+        run: node --check BADGE/badge-wow-inspired-copy-validator.js
+      - name: Witty 60+20 badge copy source preservation regression
+        run: node BADGE/badge-wow-inspired-copy-validator.test.js

@@ -1,3 +1,11 @@
+# LATEST RESUME OVERRIDE — ORIGINAL WITTY BADGE NAMING INSPIRED BY WoW — 2026-09-26
+
+Direct user wants witty, clever WoW-achievement-style names in TAKY. Use writing craft, not direct borrowed WoW names. New `BADGE/badge-wow-inspired-copyworking.json` keeps 60 historical canonical names/IDs and 20 history-template IDs, and proposes 80 original display-name alternatives, earned-only reveal toasts and warm flavor texts. Humorous devices include situational twist, talking objects, Korean pun, self-aware and mystery reveal. `BADGE/badge-wow-inspired-copy-validator.js` guards source identity/uniqueness/status.
+
+This is *editorial candidate content*, not source-name override or production asset approval, not actual 60+20 catalog activation or any Award Ledger issuance. Discovery candidates never show earned-only toast. Read `BADGE/BADGE_WITTY_NAMING_WOW_REFERENCE_2026-09-26.md` and current state before follow-up. WoW reference examples cited therein, no copyright title copied. Preserve separate same-badge verified reaward stars/tiers, parent no locked atlas, family permission and per-gift gem 1..5. No Netlify deployment.
+
+---
+
 # LATEST RESUME OVERRIDE — 60 PRESET + ~20 HISTORY BADGE STORIES — 2026-09-26
 
 User wants 60 pre-set exploration badges (preserve original 60 historical IDs and witty names) with varied merit-scene hierarchy and about 20 extra child-personal discoveries according to actual learning history. Working rank axis POCKET(20)/FIELD(20)/EXPEDITION(14)/SECRET(6), tone independently WITTY/WARM/BRAVE/CURIOUS. This is narrative / visual distinctiveness, NOT the existing approved reaward star-tier axis.
