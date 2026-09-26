@@ -27,6 +27,7 @@ function validateAck(packet,status,body={}){
     typeof body.duplicate!=='boolean')
    return {ok:false,reason:'CENTRAL_COMMITTED_ACK_SCOPE_INVALID'};
  return {ok:true,ack_token:body.receipt_id,
+   packet_id:body.packet_id,event_id:body.event_id,
    acknowledgement_kind:body.acknowledgement_kind,duplicate:body.duplicate,
    observation_only:body.acknowledgement_kind==='OBSERVATION_INGEST_RECEIPT'};
 }
