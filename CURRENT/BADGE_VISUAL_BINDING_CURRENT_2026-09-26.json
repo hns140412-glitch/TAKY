@@ -108,7 +108,11 @@
     "connect real approved catalog and app consumer to verified ledger-to-visual composition",
     "integrate Ready server getUser and verified member lookup with badge family reader",
     "replace standalone Node filesystem backend with production-appropriate shared durable atomic store and rollback anchor",
-    "connect actual authorized Achievement Decision validator without browser authority"
+    "connect actual authorized Achievement Decision validator without browser authority",
+    "connect authenticated Ready family Parent praise gift endpoint without deploying",
+    "activate only separately approved Family Praise Badge gift catalog and assets",
+    "connect approved Gem Gift Journal to child-scoped idempotent Gem Wallet consumer",
+    "connect Parent Praise Badge Gift Journal to child Family Praise Collection, distinct from achievement award ledger"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -124,7 +128,11 @@
     "family_id is signed into award ledger record and replay source",
     "Ready sync event store is not Badge Award Ledger",
     "test-only Ready session/bootstrap cannot authorize badge reading",
-    "Node Function local filesystem is not cross-device production persistence"
+    "Node Function local filesystem is not cross-device production persistence",
+    "Parent never has a personal LOCKED/unearned badge atlas",
+    "parent gem gift is an integer 1..5 PER TRANSACTION (not an inferred daily or lifetime cap)",
+    "parent gift journal is distinct from Achievement Award Ledger and not automatically a gem-wallet credit",
+    "historical 60 draft badges cannot be gifted or activated by parent options"
   ],
   "approval_gate": {
     "required": true,
@@ -182,5 +190,32 @@
     "historical_snap_candidate_ledgers": "NOT_AN_AWARD_LEDGER",
     "direct_history_bridge_activation": false,
     "note": "The preexisting main repos had no read/verify owner; new core implements local Node persisted source behind injected trusted verifier and active badge authorizer. Tests use mocks; live award source not connected."
+  },
+  "family_parent_praise_gifts": {
+    "authority": "DIRECT_USER_2026-09-26",
+    "parent_role": "GIFT_GIVER_NO_PERSONAL_LOCKED_UNEARNED_BADGE_ATLAS",
+    "gifts": [
+      "FAMILY_PRAISE_BADGE",
+      "GEM"
+    ],
+    "gem_min_per_gift": 1,
+    "gem_max_per_gift": 5,
+    "other_period_limits": "NOT_SPECIFIED_DO_NOT_INVENT",
+    "implementation": {
+      "parent_gift_service": "PR_148_IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "durable_signed_gift_journal": "PR_148_IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "live_ready_api": "OPEN",
+      "real_approved_family_praise_badge_catalog": "OPEN",
+      "child_gem_wallet_credit_consumer": "OPEN",
+      "family_praise_badge_collection_consumer": "OPEN"
+    },
+    "rules": {
+      "family_member_and_parent_server_identity_required": true,
+      "gift_journal_separate_from_achievement_award_ledger": true,
+      "parent_unearned_badge_states_forbidden": true,
+      "historic_60_draft_badges_auto_giftable": false,
+      "gift_event_does_not_automatically_change_live_gem_balance": true,
+      "repeat_parent_praise_badge_star_rule": "OPEN_NOT_AUTO_COUPLED_TO_CHILD_ACHIEVEMENT_STARS"
+    }
   }
 }

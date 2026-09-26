@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — PARENT PRAISE GIFTS / GEM CAP — 2026-09-26
+
+Direct user correction: Parents can praise a Child with a badge or gems, but Parent has NO personal unearned/locked badge collection. Parent is a giver, not a collector. A GEM gift is integer **1..5 per individual transaction**; do not impose a daily/monthly/lifetime limit without user instruction.
+
+PR #148 implements server-gated Parent Gift options + submission and a separate, signed durable Family Gift Journal with idempotency/tamper/family tests. This journal does NOT automatically credit actual child Gem Wallet or issue Achievement Award Ledger events. Only dedicated approved `FAMILY_PRAISE_BADGE` choices are giftable; historical 60 working drafts remain inactive. Re-gifting a praise badge is a separate event; whether its re-acquisition should affect stars is OPEN, never silently inferred.
+
+Read `BADGE/PARENT_PRAISE_GIFT_CONTRACT_2026-09-26.md` and CURRENT for exact scoped implementation. Verify PR exact head and CI before claiming main closure. Real Ready endpoint, trusted production persistence, approved gift catalogue and child wallet/collection UI remain OPEN. No Netlify deployment.
+
+---
+
 # LATEST RESUME OVERRIDE — FAMILY BADGE ACCESS (PR #147, 2026-09-26)
 
 - Ready main has server-verified Netlify Identity family/member role mapping and linked Child accounts. It is an AUTH foundation, NOT an Achievement Decision grant or Badge Award Ledger.
