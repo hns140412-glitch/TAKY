@@ -36,3 +36,7 @@ jobs:
         run: node --check BADGE/badge-reaward-progress.js
       - name: Reaward progression regression
         run: node BADGE/badge-reaward-progress.test.js
+      - name: Award Ledger bridge syntax
+        run: node --check BADGE/badge-ledger-projection-bridge.js
+      - name: Award Ledger bridge regression
+        run: node BADGE/badge-ledger-projection-bridge.test.js

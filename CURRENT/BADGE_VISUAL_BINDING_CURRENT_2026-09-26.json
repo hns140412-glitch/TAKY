@@ -56,7 +56,10 @@
     "visual_css_tokens": "MAIN_CLOSED_NOT_YET_IMPORTED_BY_APPS",
     "provisional_post_promotion_reset": "ZERO_ON_NEXT_TIER",
     "corrected_main_sha": "568c4126f596c513738287fb947273c1f8bee2a9",
-    "corrected_main_ci": "BADGE_VISUAL_REGISTRY_VALIDATION_SUCCESS"
+    "corrected_main_ci": "BADGE_VISUAL_REGISTRY_VALIDATION_SUCCESS",
+    "ledger_history_bridge": "BRANCH_IMPLEMENTED_FAIL_CLOSED_NOT_LIVE_BOUND",
+    "trusted_award_ledger_source": "NOT_FOUND_IN_VERIFIED_MAIN_REPOS",
+    "ledger_bridge_tests": "PR_HEAD_SUCCESS_36233712281"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -83,7 +86,9 @@
     "award ledger schema adapter to prevalidated reaward projection",
     "final top-tier behavior",
     "app import of badge presentation CSS and renderer",
-    "post-promotion star display/reset policy confirmation"
+    "post-promotion star display/reset policy confirmation",
+    "identify real authoritative Award Ledger executable/read provider and receipt schema",
+    "bind trusted provider to central ledger history bridge; verify real replay"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -141,5 +146,17 @@
     "result": "NONE_IS_A_VERIFIED_FINAL_BADGE_SHEET",
     "recovered_library_sheets_remain": "A_AND_B_REFERENCE_CANDIDATES_ONLY",
     "final_asset_source": "NOT_VERIFIED"
+  },
+  "ledger_source_audit": {
+    "status": "NO_EXECUTABLE_VERIFIED_AWARD_LEDGER_READ_PROVIDER_LOCATED",
+    "main_repositories": [
+      "TAKY",
+      "Snap-Pop",
+      "Hide-Seek",
+      "Ready-Set"
+    ],
+    "historical_snap_candidate_ledgers": "NOT_AN_AWARD_LEDGER",
+    "direct_history_bridge_activation": false,
+    "note": "source adapter requires actual owner-provided COMPLETE scoped history and verified rows; test mocks are not production"
   }
 }
