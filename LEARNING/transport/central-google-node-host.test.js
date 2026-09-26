@@ -6,6 +6,7 @@ const os=require('node:os'),path=require('node:path'),crypto=require('node:crypt
 const {LocalJsonStrongStore}=require('./local-json-strong-store.js');
 const Host=require('./central-google-node-host.js');
 const Registry=require('./server-family-registry-provider.js');
+const References=require('./server-specialist-reference-store.js');
 const now=Date.UTC(2026,8,26,13),nowSec=Math.floor(now/1000);
 const sub='GOOGLE_PARENT_SUB',clientId='TEST_WEB_CLIENT_ID';
 const subjectHash=crypto.createHash('sha256').update('GOOGLE_OIDC:'+sub).digest('hex');
@@ -31,11 +32,23 @@ const packet=(id,member='CHILD_A')=>({
  try{
   const registryStore=await new LocalJsonStrongStore(path.join(root,'identity')).init();
   const evidenceStore=await new LocalJsonStrongStore(path.join(root,'evidence')).init();
+  const referenceStore=await new LocalJsonStrongStore(path.join(root,'references')).init();
+  const refScope={family_id:'F1',member_id:'CHILD_A',event_id:'host-ref-1',
+   source_app:'hide-seek',reference_id:'server-assignment-host-ref-1'};
+  await referenceStore.setJSON(References.assessmentKey(refScope),{
+   ...refScope,authority:'TAKY_SERVER_ASSESSMENT_REFERENCE_V1',version:1,
+   issuer_service:'CENTRAL_ASSESSMENT_ISSUER',issuer_authorized:true,
+   status:'ACTIVE',subject:'영어',concept_skill_target:'vocabulary',
+   expected_response:'apple',match_rule:'EXACT_NFC',
+   instrument_version:'HIDE_CODE_RED_V1',
+   issued_at:'2026-09-26T11:00:00.000Z',
+   expires_at:'2026-09-26T14:00:00.000Z'
+  },{onlyIfNew:true});
   const key=Registry.subjectRecordKey(sub);
   await registryStore.setJSON(key,baseRecord,{onlyIfNew:true});
   const host=Host.create({
    clientIds:[clientId],allowedOrigins:['https://hide.example.test'],
-   registryStore,evidenceStore,now:()=>now,
+   registryStore,evidenceStore,referenceStore,now:()=>now,
    // TEST-ONLY ticket. Production must supply real google-auth-library.
    oauth2Client:{verifyIdToken:async()=>({getPayload:()=>({
     iss:'https://accounts.google.com',aud:clientId,sub,
@@ -58,6 +71,21 @@ const packet=(id,member='CHILD_A')=>({
    'families/F1/members/CHILD_A/learning-engine/state-v1',{consistency:'strong',type:'json'});
   assert(saved?.etag);
   assert.equal(saved.data.observation_only.length,1);
+  const p=packet('host-ref-1');
+  p.event.payload.assessment_ref='server-assignment-host-ref-1';
+  p.event.payload.response_text='apple';
+  const verified=await send(p);
+  const receipt=await verified.json();
+  assert.equal(verified.status,200,JSON.stringify(receipt));
+  assert.equal(receipt.acknowledgement_kind,'REAL_EVIDENCE_RECEIPT');
+  assert.equal(receipt.packet_id,p.packet_id);
+  assert.equal(receipt.event_id,p.event.event_id);
+  const unknown=packet('host-unissued-1');
+  unknown.event.payload.assessment_ref='server-assignment-host-ref-1';
+  unknown.event.payload.response_text='apple';
+  const unissued=await send(unknown);
+  assert.equal((await unissued.json()).acknowledgement_kind,
+   'OBSERVATION_INGEST_RECEIPT');
   const sibling=await send(packet('host-sibling-1','CHILD_B'));
   assert.equal(sibling.status,403);
   const old=await registryStore.getWithMetadata(key,{consistency:'strong',type:'json'});
