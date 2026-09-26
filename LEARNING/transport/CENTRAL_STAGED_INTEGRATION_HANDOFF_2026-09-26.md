@@ -44,3 +44,9 @@ USER != DEBUGGER. Do not ask the user to run fixture tests. No rollback of Core 
 - New regression tests cover dedupe, divergent payload, competing claims, offline retry, member switch blocking, wrong receipt, exact receipt, cross-member isolation and expired lease takeover.
 - This is an INJECTABLE QUEUE CONTRACT + in-memory atomic fixture test, not browser IndexedDB persistence, not Ready/Hide/Snap repo integration, and not operational central connectivity. Browser persistent CAS implementation, explicit BLOCKED recovery UI, selected-member session handling and app-specific producer binding remain OPEN.
 - Do not merge PR #159 or call Netlify without separate approval. Retention estimator and calibrated BKT remain HOLD.
+
+## LATEST DELTA — IndexedDB browser persistence and product-repo discovery
+
+- `indexeddb-evidence-outbox-store.js` implements the existing outbox storage contract with a browser IndexedDB readwrite transaction enclosing read/version check/write, so multiple tabs cannot both commit the same CAS version. Its database is explicitly separate from planner/app_state snapshot sync. Cross-instance transaction fixture added to CI; this is a deterministic fake IndexedDB transaction, not an actual Safari/Chrome device/browser certification.
+- Product repositories discovered: `hns140412-glitch/Ready-Set`, `Hide-Seek`, `Snap-Pop`. Ready currently has `ready-local-first-v01.js` and `ready-sync-adapter-v01.js` for app-state/Planner snapshots. No product repo was modified in this slice. Next OPEN is inspect exact current product heads and existing event producers, then introduce evidence-only adapter and test per product without replacing snapshot sync or Netlify deployment.
+- Live OAuth/admin registry, trusted reference issuer/reviewer workflow, production durable central store, live Drive/KMS/Indexing and product PWA binding remain OPEN. PR #159 stays draft; main unchanged.
