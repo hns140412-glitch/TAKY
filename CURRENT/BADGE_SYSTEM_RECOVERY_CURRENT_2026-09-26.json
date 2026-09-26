@@ -114,7 +114,8 @@
   "next": [
     "preserve FINAL_MAIN_CLOSED items",
     "keep 60 historical badge catalog WORKING_DRAFT_NOT_ACTIVE",
-    "keep Snap Crew content in CONTENT_APPROVAL_HOLD until genuine approved asset evidence exists",
+    "keep Snap Crew content in CONTENT_APPROVAL_HOLD until genuine approved individual asset evidence exists",
+    "when approved asset arrives, add approval registry record only; do not redesign implementation",
     "do not reopen implementation without regression evidence"
   ],
   "execution_gate": {
@@ -161,5 +162,25 @@
     "hide_seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
     "snap_pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
     "ready_set": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd"
+  },
+  "content_evidence_review": {
+    "status": "NO_APPROVED_INDIVIDUAL_CREW_RUNTIME_ASSET_FOUND",
+    "searched_sources": [
+      "ChatGPT Library Snap & Pop UI Master Logic REV_03/04/06/10",
+      "Snap_Pop_HANDOVER_REV_10_20260904",
+      "Library image assets matching Snap/Guide/Character queries",
+      "Snap-Pop repository asset tree",
+      "TAKY-ASSETS main",
+      "TAKY character/guide authority docs"
+    ],
+    "findings": [
+      "historical docs preserve Character Master / Guide Companion identity and dynamic user configuration",
+      "historical docs require reuse of the selected Guide Master identity but do not identify a reviewed runtime asset file",
+      "Library image hits are UI boards/master guide images, not individually approved Crew runtime assets",
+      "specific boy/girl/Maltipoo figures shown in UI concepts are examples and must not be promoted as canonical runtime Crew assets",
+      "Snap repository initial character_master_hd.jpg and maltipoo_guide_hd.jpg remain lineage-only under current review authority"
+    ],
+    "conclusion": "CONTENT_APPROVAL_HOLD_CONFIRMED",
+    "implementation_reopen_required": false
   }
 }
