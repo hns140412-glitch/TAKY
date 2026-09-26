@@ -403,7 +403,11 @@ jobs:
           adapter=data.get('executor_adapter') or {}
           envelope=data.get('dispatch_envelope') or {}
           assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
-          assert adapter.get('implementation_commit') == '584a89a5b3056f63a305a55f89de6adc219cdffd', adapter
+          assert adapter.get('implementation_commit') == '14988ea16a345557aa0a8262b11e73b9e02fe12d', adapter
+          liveness=adapter.get('liveness_recovery') or {}
+          assert liveness.get('state') == 'ACTIVE_IN_READY_SET_MAIN', liveness
+          assert liveness.get('provider_binding') == 'GITHUB_ACTIONS_RUN_AND_JOB_STATE', liveness
+          assert liveness.get('side_effect_retry_contract_bypass') is False, liveness
           assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
           assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
           assert envelope.get('external_executor_invocation_verified') is False
