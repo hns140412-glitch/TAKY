@@ -41,9 +41,18 @@ function validateRegistry(registry={}){
   if(registry.status!=='WORKING_DRAFT_VISUAL_REGISTRY_NOT_ACTIVE')issues.push('REGISTRY_STATUS_INVALID');
   if(registry.hard_locks?.catalog_activation!==false)issues.push('CATALOG_ACTIVATION_GUARD_MISSING');
   if(registry.hard_locks?.auto_asset_binding!==false)issues.push('AUTO_BINDING_GUARD_MISSING');
-  if(registry.visual_contract?.grade_stars?.meaning!=='GRADE_CLASSIFICATION')issues.push('STAR_MEANING_INVALID');
-  if(registry.visual_contract?.grade_stars?.gem_currency!==false)issues.push('STAR_GEM_COUPLING_FORBIDDEN');
-  if(registry.visual_contract?.grade_stars?.progress_counter!==false)issues.push('STAR_PROGRESS_COUPLING_FORBIDDEN');
+  const starRule=registry.visual_contract?.reacquisition_stars;
+  if(starRule?.meaning!=='APPROVED_REAWARD_COUNT_WITHIN_CURRENT_TIER')issues.push('STAR_MEANING_INVALID');
+  if(starRule?.first_award!=='ACTIVATES_BADGE_WITH_ZERO_STARS')issues.push('INITIAL_AWARD_STAR_RULE_INVALID');
+  if(starRule?.reaward!=='ONE_STAR_PER_DISTINCT_APPROVED_REAWARD')issues.push('REAWARD_STAR_RULE_INVALID');
+  if(starRule?.tier_up_at!==5 || starRule?.star_source!=='AWARD_LEDGER_ONLY')issues.push('TIER_UP_RULE_INVALID');
+  if(starRule?.telemetry_repeat_is_not_reaward!==true)issues.push('TELEMETRY_STAR_INFERENCE_FORBIDDEN');
+  if(starRule?.gem_currency!==false||starRule?.exp!==false||starRule?.affinity!==false||starRule?.power!==false)issues.push('STAR_ECONOMY_COUPLING_FORBIDDEN');
+  if(registry.visual_contract?.grade_stars!==undefined)issues.push('OBSOLETE_GRADE_CLASSIFICATION_RULE');
+  if(registry.visual_contract?.character_layer?.source!=='CHILD_PROFILE'||registry.visual_contract?.character_layer?.separate_from_base_art!==true)issues.push('CHILD_PROFILE_LAYER_REQUIRED');
+  if(registry.visual_contract?.ownership_presentation?.unearned!=='SILHOUETTE'||registry.visual_contract?.ownership_presentation?.earned!=='ACTIVE_PASTEL')issues.push('OWNERSHIP_VISUAL_STATES_REQUIRED');
+  if(registry.visual_contract?.border_fx!=='SOFT_RADIAL_GRADIENT_FADE')issues.push('BORDER_FADE_REQUIRED');
+  if(registry.visual_contract?.insignia_direction!=='FICTIONAL_EXPLORATION_CREW_CAMPAIGN_MERIT_INSIGNIA')issues.push('EXPLORATION_INSIGNIA_REQUIRED');
   for(const item of registry.items||[]){
     const checked=validateEntry(item);
     if(!checked.ok)issues.push(...checked.issues.map(code=>`${item.draft_id||'UNKNOWN'}:${code}`));
