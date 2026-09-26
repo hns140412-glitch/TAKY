@@ -18,6 +18,8 @@ BEGIN_RECEIPT="<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->"
 END_RECEIPT="<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->"
 BEGIN_RESULT="<!-- TAKY_EXECUTOR_RESULT_JSON_BEGIN -->"
 END_RESULT="<!-- TAKY_EXECUTOR_RESULT_JSON_END -->"
+BEGIN_CANCEL="<!-- TAKY_EXECUTOR_CANCEL_JSON_BEGIN -->"
+END_CANCEL="<!-- TAKY_EXECUTOR_CANCEL_JSON_END -->"
 
 def issue_payload(envelope: dict) -> dict:
     task_id=str(envelope.get("task_id","")).strip()
@@ -65,12 +67,43 @@ def parse_issue(text:str) -> dict:
         return {"pass":False,"detected":["GITHUB_QUEUE_DISPATCH_BLOCK_MISSING"],"envelope":None}
     return {"pass":True,"detected":[],"envelope":envelope}
 
+def cancellation_comment(envelope: dict, cancellation: dict) -> dict:
+    task_id=str(envelope.get("task_id","")).strip()
+    contract_hash=str(envelope.get("task_contract_sha256","")).strip()
+    payload=dict(cancellation or {})
+    payload["task_id"]=task_id
+    payload["task_contract_sha256"]=contract_hash
+    failures=[]
+    for key in ("cancellation_id","authority_ref","reason"):
+        if not isinstance(payload.get(key),str) or not payload[key].strip():
+            failures.append(f"CANCELLATION_{key.upper()}_MISSING")
+    if str(payload.get("decision","")).strip().upper()!="CANCEL":
+        failures.append("CANCELLATION_DECISION_INVALID")
+    issue_number=payload.get("queue_issue_number")
+    if not isinstance(issue_number,int) or isinstance(issue_number,bool) or issue_number < 1:
+        failures.append("CANCELLATION_QUEUE_ISSUE_NUMBER_INVALID")
+    if failures:
+        return {"pass":False,"detected":failures,"comment":None}
+    payload["decision"]="CANCEL"
+    return {
+        "pass":True,
+        "detected":[],
+        "comment":BEGIN_CANCEL+"\n"+json.dumps(payload,ensure_ascii=False,sort_keys=True)+"\n"+END_CANCEL+"\n",
+    }
+
 def parse_comment(text:str) -> dict:
     receipt=_extract(text,BEGIN_RECEIPT,END_RECEIPT)
     result=_extract(text,BEGIN_RESULT,END_RESULT)
-    if receipt is None and result is None:
+    cancellation=_extract(text,BEGIN_CANCEL,END_CANCEL)
+    if receipt is None and result is None and cancellation is None:
         return {"pass":False,"detected":["GITHUB_QUEUE_MACHINE_BLOCK_MISSING"]}
-    return {"pass":True,"detected":[],"receipt":receipt,"result":result}
+    return {
+        "pass":True,
+        "detected":[],
+        "receipt":receipt,
+        "result":result,
+        "cancellation":cancellation,
+    }
 
 def main()->int:
     ap=argparse.ArgumentParser()
@@ -80,6 +113,10 @@ def main()->int:
     p.add_argument("--output",type=Path)
     q=sub.add_parser("parse-comment")
     q.add_argument("--comment",type=Path,required=True)
+    x=sub.add_parser("cancel-comment")
+    x.add_argument("--envelope",type=Path,required=True)
+    x.add_argument("--cancellation",type=Path,required=True)
+    x.add_argument("--output",type=Path)
     i=sub.add_parser("parse-issue")
     i.add_argument("--issue-body",type=Path,required=True)
     args=ap.parse_args()
@@ -91,6 +128,12 @@ def main()->int:
             args.output.write_text(json.dumps(out["issue"],ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     elif args.cmd=="parse-comment":
         out=parse_comment(args.comment.read_text(encoding="utf-8"))
+    elif args.cmd=="cancel-comment":
+        env=json.loads(args.envelope.read_text(encoding="utf-8"))
+        cancellation=json.loads(args.cancellation.read_text(encoding="utf-8"))
+        out=cancellation_comment(env,cancellation)
+        if out["pass"] and args.output:
+            args.output.write_text(out["comment"],encoding="utf-8")
     else:
         out=parse_issue(args.issue_body.read_text(encoding="utf-8"))
     print(json.dumps(out,ensure_ascii=False,indent=2))
