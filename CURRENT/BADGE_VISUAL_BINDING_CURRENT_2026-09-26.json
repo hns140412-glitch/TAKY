@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "REAWARD_SEMANTICS_CORRECTION_IMPLEMENTED_BRANCH_CANDIDATE",
+  "status": "REAWARD_VISUAL_CORRECTION_MAIN_CLOSED_FINAL_ASSET_AND_APP_WIRING_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -51,11 +51,12 @@
     "exact_head": "414be27dedc0a11c6ce20d2d91d6e9d3b6e6bd84",
     "central_renderer_contract": "FINAL_MAIN_CLOSED",
     "main_sha": "78df221d9987ec33c90c51bd59c53ae0f3eddf42",
-    "reaward_projection": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_WIRED_TO_AWARD_LEDGER",
-    "layered_renderer_update": "IMPLEMENTED_BRANCH_CANDIDATE",
-    "visual_css_tokens": "IMPLEMENTED_BRANCH_CANDIDATE_NOT_YET_IMPORTED_BY_APPS",
-    "semantic_correction_branch": "taky/badge-reaward-insignia-correction-2026-09-26",
-    "provisional_post_promotion_reset": "ZERO_ON_NEXT_TIER"
+    "reaward_projection": "MAIN_CLOSED_PURE_PROJECTION_NOT_YET_ADAPTED_TO_REAL_AWARD_LEDGER",
+    "layered_renderer_update": "MAIN_CLOSED_CONTRACT_NOT_YET_WIRED_TO_APP",
+    "visual_css_tokens": "MAIN_CLOSED_NOT_YET_IMPORTED_BY_APPS",
+    "provisional_post_promotion_reset": "ZERO_ON_NEXT_TIER",
+    "corrected_main_sha": "568c4126f596c513738287fb947273c1f8bee2a9",
+    "corrected_main_ci": "BADGE_VISUAL_REGISTRY_VALIDATION_SUCCESS"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -125,5 +126,20 @@
     "unearned": "SILHOUETTE",
     "border": "SOFT_RADIAL_GRADIENT_FADE",
     "post_promotion_star_reset": "NOT_EXPLICITLY_CONFIRMED"
+  },
+  "asset_search_2026_09_26": {
+    "primary_connected_drive": "SEARCHED_BADGE_BAEJI_PASTEL_EXPLORER_TERMS_AND_VIEWED_MATCHING_IMAGE_BYTES",
+    "secondary_connected_drive": "NO_RELEVANT_RESULTS",
+    "searched_images": [
+      "IMG_8395.PNG",
+      "IMG_8232.PNG",
+      "99E3547F-C014-4F12-BF8C-954176652CF9.PNG",
+      "003_5f6767aad094.png",
+      "fullpage.png",
+      "IMG_8752.PNG"
+    ],
+    "result": "NONE_IS_A_VERIFIED_FINAL_BADGE_SHEET",
+    "recovered_library_sheets_remain": "A_AND_B_REFERENCE_CANDIDATES_ONLY",
+    "final_asset_source": "NOT_VERIFIED"
   }
 }
