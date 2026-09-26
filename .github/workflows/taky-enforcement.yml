@@ -269,6 +269,8 @@ jobs:
           node --check LEARNING/transport/pwa-scoped-evidence-pipeline.js
           node --check LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
           node LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
+          node --check LEARNING/transport/specialist-observation-packet-mapper.js
+          node LEARNING/transport/specialist-observation-packet-mapper.test.js
           node --check LEARNING/transport/encrypted-drive-archive-export.js
           node --check LEARNING/transport/encrypted-drive-archive-export.test.js
           node LEARNING/transport/encrypted-drive-archive-export.test.js
