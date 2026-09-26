@@ -1,8 +1,8 @@
 {
-  "checkpoint_version": "1.3",
+  "checkpoint_version": "1.4",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1_IMPLEMENTED_AND_CI_VERIFIED__REAL_V26_679_REGRESSION_CLOSED__VERIFIED_VECTOR_CHANNEL_MAIN",
+  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__LOCAL_NEURAL_MATERIALIZATION_TECHNICALLY_VERIFIED__QUALITY_PROMOTION_OPEN",
   "status": "OPERATIONS",
   "authority_current": {
     "source_index": {
@@ -30,9 +30,9 @@
     "lexical_retrieval": "IMPLEMENTED",
     "token_cosine_fallback": "IMPLEMENTED__NOT_NEURAL_SEMANTIC",
     "verified_neural_vector_channel": "IMPLEMENTED",
-    "materialized_v26_neural_vector_index": "NOT_PRESENT_IN_REPOSITORY",
-    "query_embedding_provider": "NOT_BOUND",
-    "vector_activation_rule": "ONLY_WHEN_VERIFIED_NEURAL_INDEX_AND_MATCHING_QUERY_VECTOR_EXIST"
+    "materialized_v26_neural_vector_index": "LOCAL_CONTROLLED_RUNTIME_MATERIALIZED_679_OF_679__DURABLE_ARTIFACT_BINDING_OPEN",
+    "query_embedding_provider": "GENERIC_LOCAL_PROVIDER_IMPLEMENTED__APPROVED_MODEL_NOT_BOUND",
+    "vector_activation_rule": "DEFAULT_FAIL_CLOSED_UNLESS_QUALITY_STATUS_APPROVED_AND_MODEL_ID_DIMENSION_MATCH"
   },
   "done": [
     "Executable search projection implemented in ENFORCEMENT/data_index_search.py",
@@ -45,15 +45,20 @@
     "REAL_V26_SEARCH_PROJECTION_REGRESSION closed on actual V26/V6 679-source payload without RAW reread or full reindex",
     "PR #112 merged to main at a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3 after TAKY Enforcement Replay and Verified Vector Retrieval CI SUCCESS",
     "Compatibility projection now materializes legacy duplicate/fragment group membership into conservative source-to-source relations for relation expansion while temporal_group remains candidate-only",
-    "Search result cards now expose source_ref and provenance fields needed by Index -> Learning handoff"
+    "Search result cards now expose source_ref and provenance fields needed by Index -> Learning handoff",
+    "Local-controlled V26 neural materialization produced 679/679 vectors with unique source_id coverage and no missing/extra ids",
+    "Local corpus neural experiment model TAKY_LOCAL_SKIPGRAM_META_V1 was technically neural but rejected for semantic quality and was not promoted",
+    "Guarded local query-vector provider implemented; rejected/unapproved models fail closed unless explicit experimental flag is used",
+    "Vector materialization validator implemented to require exact 1:1 source_id coverage",
+    "PR #118 merged to main at e170a9a51f66dbe97fe1675df737b7608d362be9 after TAKY Enforcement Replay SUCCESS"
   ],
   "open": [
-    "Materialize a real V26 neural vector index with explicit model_id, dimension, and neural_embedding_verified metadata",
-    "Bind a matching query embedding provider or verified query-vector producer; do not claim neural semantic retrieval before this exists",
+    "Bind a durable approved pretrained/local embedding artifact for V26; current experimental corpus-local model is REJECTED_NOT_PROMOTED",
+    "Bind the matching approved query model/provider; generic provider code exists but no approved model is bound",
     "Validate DETAIL_L2 anchor fetch escalation on real V26 source records",
     "Keep SEARCH_PROJECTION non-authoritative and separate from domain decision policy"
   ],
-  "next": "REAL_V26_VECTOR_INDEX_AND_QUERY_PROVIDER_MATERIALIZATION",
+  "next": "APPROVED_LOCAL_PRETRAINED_EMBEDDING_ARTIFACT_BINDING_THEN_QUERY_PROVIDER_BIND",
   "corrections": [
     "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
     "TOKEN_COSINE_FALLBACK != EMBEDDING_SEMANTIC",
@@ -70,9 +75,10 @@
     "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
     "github:hns140412-glitch/TAKY@7975f3b3dd8d36646f4f49e02bc89941b6258fdc",
-    "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3"
+    "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3",
+    "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9"
   ],
-  "updated_at": "2026-09-26T08:25:00+09:00",
+  "updated_at": "2026-09-26T09:32:00+09:00",
   "real_v26_regression": {
     "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
@@ -96,5 +102,22 @@
       "DETAIL_L2 anchor fetch escalation still requires live-path validation on actual sources.",
       "No materialized verified neural vector index or matching query embedding provider exists yet."
     ]
+  },
+  "neural_materialization_checkpoint": {
+    "experimental_model_id": "TAKY_LOCAL_SKIPGRAM_META_V1",
+    "dimension": 64,
+    "source_count": 679,
+    "vector_count": 679,
+    "unique_source_ids": true,
+    "missing_source_ids": 0,
+    "extra_source_ids": 0,
+    "neural_embedding_verified": true,
+    "training_scope": "INDEX_METADATA_ONLY__NO_RAW_REREAD",
+    "quality_status": "REJECTED_NOT_PROMOTED__SEMANTIC_PROBE_QUALITY_INSUFFICIENT",
+    "public_repo_artifact": false,
+    "durable_private_artifact_binding": "OPEN",
+    "generic_query_provider": "IMPLEMENTED_DEFAULT_FAIL_CLOSED",
+    "approved_model_binding": "OPEN",
+    "pretrained_candidate_note": "multilingual sentence-transformer class identified; runtime binary/model download not yet available in current controlled environment"
   }
 }
