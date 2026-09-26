@@ -21,7 +21,12 @@ function map({source_app,event,session}={}){
   throw Error('SPECIALIST_OBSERVATION_EVENT_REQUIRED');
  const member=event.member_id||event.payload.member_id||event.payload.child_id;
  if(member!==session.selected_member_id)throw Error('SPECIALIST_EVENT_MEMBER_SCOPE_MISMATCH');
- if(event.family_id&&event.family_id!==session.family_id)
+ // A matching top-level member must not mask a contradictory inner payload.
+ for(const id of [event.payload.member_id,event.payload.child_id]){
+  if(id!=null&&id!==member)throw Error('SPECIALIST_PAYLOAD_MEMBER_SCOPE_CONFLICT');
+ }
+ if((event.family_id&&event.family_id!==session.family_id)||
+    (event.payload.family_id&&event.payload.family_id!==session.family_id))
   throw Error('SPECIALIST_EVENT_FAMILY_SCOPE_MISMATCH');
  const subject=clean(event.payload.subject);
  const skill=clean(event.payload.concept_skill_target);
