@@ -118,7 +118,10 @@
     "connect V2 family gifts to real Ready service, approved family praise catalog and child wallet; no Netlify deployment without gates",
     "resolve Ready PR #110 safe main promotion only after deploy gate and auto-deploy coupling verification",
     "implement trusted family invitation/relationship and gift permission grant management with explicit consent",
-    "bind TAKY V2 family praise gift service to production Ready API, shared gift journal, child gem wallet and approved assets"
+    "bind TAKY V2 family praise gift service to production Ready API, shared gift journal, child gem wallet and approved assets",
+    "map 20 history discovery evidence kinds to actual Learning Engine and app evidence contracts",
+    "review 60 preset rank/tone/story/motif and approve separately from final visual image source",
+    "add child-scoped personal discovery UX without auto-awarding or exposing sibling histories"
   ],
   "hard_locks": [
     "do not activate historical 60 catalog",
@@ -143,7 +146,11 @@
     "Parent has no personal locked/unearned badge atlas",
     "Parent-only V1 gift service is historical; latest V2 requires explicit family member permission",
     "Each GEM gift remains an integer 1..5, no invented daily/monthly/lifetime quota",
-    "Do not interpret a gift journal receipt as an Achievement Award or child Gem Wallet balance credit"
+    "Do not interpret a gift journal receipt as an Achievement Award or child Gem Wallet balance credit",
+    "60 preset content slots are not 60 runtime-active or awarded badges",
+    "20 new history discoveries are verified child-scoped proposals, not invented memories or automatic rewards",
+    "moment rank distinct from same-badge reaward star-tier progression",
+    "family praise badge gift catalogue distinct from 60+20 achievement catalogue"
   ],
   "approval_gate": {
     "required": true,
@@ -278,5 +285,33 @@
       "gift_permission_grant_workflow": "OPEN_NO_SELF_ASSIGNMENT"
     },
     "authority": "DIRECT_USER_2026-09-26"
+  },
+  "badge_story_expansion_2026_09_26": {
+    "authority": "DIRECT_USER_60_PRESET_AND_APPROX_20_PERSONAL_HISTORY_DISCOVERIES",
+    "source_preservation": "KEEP_EXISTING_60_NAMES_IDS_ORDER",
+    "preset_scene_count": 60,
+    "hierarchy": "POCKET_20_FIELD_20_EXPEDITION_14_SECRET_6",
+    "hierarchy_meaning": "MOMENT_AND_VISUAL_SCENE_NOT_LEARNER_SCORE",
+    "cross_tone": [
+      "WITTY",
+      "WARM",
+      "BRAVE",
+      "CURIOUS"
+    ],
+    "history_discovery_initial_templates": 20,
+    "expansion_behavior": "CHILD_SCOPED_VERIFIED_HISTORY_CANDIDATE_ONLY_REVIEW_REQUIRED_NOT_AWARD",
+    "implementation": {
+      "story_working_catalog": "BRANCH_IMPLEMENTED",
+      "catalog_validator": "BRANCH_IMPLEMENTED",
+      "verified_history_proposal_projection": "BRANCH_IMPLEMENTED_TEST_MOCK_ONLY",
+      "actual_learning_history_evidence_adapter": "OPEN",
+      "criteria_version_approval": "OPEN",
+      "runtime_visual_asset_approval": "OPEN",
+      "child_achievement_collection_ui": "OPEN"
+    },
+    "stars": "INDEPENDENT_PREEXISTING_VERIFIED_REAWARD_RULE",
+    "family_praise_gifts": "SEPARATE_CATALOG_AND_JOURNAL",
+    "asset_policy": "NO_AUTO_APPROVE_A_OR_B",
+    "deployment": false
   }
 }
