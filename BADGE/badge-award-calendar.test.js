@@ -88,6 +88,19 @@ function reader(list=()=>catalog){
   assert.equal(progress.history[5].star_count_before,4);
   assert.equal(progress.history[5].star_count_after,0);
   assert.equal(progress.history[5].to_tier,'BLUE');
+  const regressedClock=createLedger({
+    directory,family_id,signingKey,now:()=>dates[0],
+    verifyDecision:x=>x?.testTrusted===true?{ok:true,receipt:x.receipt}:{ok:false},
+    isBadgeActive:x=>approvedBadges.has(x.badge_id)&&x.child_id===child_id
+  });
+  const backdated=regressedClock.appendApprovedDecision({testTrusted:true,receipt:{
+    family_id,child_id,badge_id:'BADGE_A',decision_id:'BADGE_A-backdated',
+    decision_ref:'verified-new-decision',decision_status:'APPROVED',
+    award_kind:'REAWARD',approved_at:'2026-09-26T10:00:00Z'
+  }});
+  assert.equal(backdated.reason,'AWARD_TIME_REGRESSION');
+  assert.equal((await ledger.source.loadCompleteHistory({child_id,badge_id:'BADGE_A'})).row_count,6);
+
   const legacyProjected=await deriveFromLedger({
     source:ledger.source,child_id,badge_id:'LEGACY_BADGE',tier_order:tiers
   });
