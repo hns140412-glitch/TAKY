@@ -342,7 +342,19 @@ Reference replay:
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
 
+For lifecycle transitions into `MERGED` or `DEPLOYED`, approval evidence SHALL be bound to the exact transition context:
+- task id;
+- source state;
+- requested destination state;
+- concrete target reference (for example the reviewed commit/PR head or the deployment artifact/environment target);
+- deterministic approval-context hash.
+
+An approval for one target SHALL NOT be portable to a changed commit, changed merge target, changed deployment artifact, or different transition. A changed target requires fresh approval evidence.
+
+Repository-side evidence such as `approver_ref` is a recoverable evidence reference unless the provider/runtime independently proves authenticated reviewer identity. TAKY SHALL NOT overclaim identity authentication from a string field alone.
+
 If approval is required and not present, classify `HUMAN_APPROVAL_MISSING / FAIL`.
+Malformed, stale, target-mismatched, transition-mismatched, or rejected approval evidence SHALL fail closed.
 Names such as “Prime Agent”, “continual harness”, “lesson evolution”, “AI approval”, or “validated” SHALL NOT substitute for human approval.
 
 ## 5.1 Reference-only authority isolation gate — HARD LOCK
