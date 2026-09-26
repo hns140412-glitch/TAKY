@@ -43,6 +43,7 @@ jobs:
           comment=plan.get('comment')
           Path('/tmp/taky-queue-comment.md').write_text(comment or '', encoding='utf-8')
           Path('/tmp/taky-queue-action.txt').write_text(str(plan.get('action') or ''), encoding='utf-8')
+          Path('/tmp/taky-queue-close.txt').write_text('true' if plan.get('close_issue') is True else 'false', encoding='utf-8')
           PY
       - name: Publish TAKY queue response
         env:
@@ -52,4 +53,7 @@ jobs:
           if [ -s /tmp/taky-queue-comment.md ]; then
             BODY="$(cat /tmp/taky-queue-comment.md)"
             gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments" -f body="$BODY" >/dev/null
+          fi
+          if [ "$(cat /tmp/taky-queue-close.txt)" = "true" ]; then
+            gh issue close "$ISSUE_NUMBER" --reason "not planned" >/dev/null
           fi
