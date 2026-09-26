@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_VISUAL_BINDING",
   "namespace": "BADGE_VISUAL",
-  "status": "REGISTRY_IMPLEMENTED_ASSET_AND_RUNTIME_BINDING_OPEN",
+  "status": "REGISTRY_AND_RENDERER_MAIN_CLOSED_ASSET_AND_APP_BINDING_OPEN",
   "updated_at": "2026-09-26",
   "authority": [
     "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
@@ -37,13 +37,15 @@
     }
   },
   "implementation": {
-    "central_visual_registry": "IMPLEMENTED_BRANCH_CANDIDATE",
+    "central_visual_registry": "FINAL_MAIN_CLOSED",
     "registry_entry_count": 60,
     "registry_activation": false,
     "registry_asset_binding": false,
     "registry_renderer_binding": false,
-    "validation": "SUCCESS",
-    "exact_head": "414be27dedc0a11c6ce20d2d91d6e9d3b6e6bd84"
+    "validation": "POST_MERGE_SUCCESS",
+    "exact_head": "414be27dedc0a11c6ce20d2d91d6e9d3b6e6bd84",
+    "central_renderer_contract": "FINAL_MAIN_CLOSED",
+    "main_sha": "78df221d9987ec33c90c51bd59c53ae0f3eddf42"
   },
   "candidate_visual_evidence": {
     "sheet_a": {
@@ -65,7 +67,7 @@
     "explicitly approved badge asset set recovery or approval",
     "badge_id/visual_id to approved asset 1:1 binding",
     "cross-app display surface ownership",
-    "app runtime renderer consumer binding",
+    "app runtime consumer/surface binding",
     "final tier assignment rule"
   ],
   "hard_locks": [
