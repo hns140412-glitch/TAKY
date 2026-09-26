@@ -1,7 +1,7 @@
 {
   "task_id": "BADGE_SYSTEM_RECOVERY",
   "namespace": "BADGE",
-  "status": "POST_MERGE_VALIDATION_IN_PROGRESS",
+  "status": "FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD",
   "updated_at": "2026-09-26",
   "authority_rule": "USER_HOLD_SNAPSHOT_PLUS_VERIFIED_EXACT_HEADS",
   "hard_locks": {
@@ -27,7 +27,7 @@
     "HIDE_SNAP_BADGE_SOURCE_AUTO_INFERENCE_REGRESSION"
   ],
   "sp_badge_006": {
-    "status": "MAIN_MERGED_POST_MERGE_CI_PASS",
+    "status": "FINAL_MAIN_CLOSED",
     "repo": "hns140412-glitch/Hide-Seek",
     "pr": 17,
     "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
@@ -52,15 +52,15 @@
     }
   },
   "sp_badge_008": {
-    "status": "MAIN_MERGED_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
+    "status": "FINAL_MAIN_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
     "repo": "hns140412-glitch/Snap-Pop",
     "pr": 8,
     "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
     "ci": {
       "Validate Snap & Pop": "SUCCESS"
     },
-    "world_theme_binding": "IMPLEMENTATION_CLOSED_CANDIDATE_MAIN_NOT_MERGED",
-    "crew_visual_binding": "IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
+    "world_theme_binding": "FINAL_MAIN_CLOSED",
+    "crew_visual_binding": "FINAL_MAIN_IMPLEMENTATION_CLOSED_CONTENT_APPROVAL_HOLD",
     "implemented": [
       "reviewed runtime world visual binding for assets/world/golden_world_scene.jpg",
       "assets/reference/approved_visual_source.png remains reference lineage only",
@@ -84,7 +84,7 @@
     }
   },
   "ready_world_state_consumer": {
-    "status": "MAIN_MERGED_POST_MERGE_CI_PARTIAL",
+    "status": "FINAL_MAIN_CLOSED",
     "repo": "hns140412-glitch/Ready-Set",
     "pr": 105,
     "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
@@ -103,30 +103,25 @@
       "auto_badge_activation=false",
       "auto_award=false"
     ],
-    "open": [
-      "post-merge Ready Runtime E2E completion"
-    ],
+    "open": [],
     "main_sha": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd",
     "pr_merged": true,
     "post_merge_ci": {
       "Ready Integration CI": "SUCCESS",
-      "Ready Runtime E2E": "IN_PROGRESS"
+      "Ready Runtime E2E": "SUCCESS"
     }
   },
   "next": [
-    "preserve CLOSED items",
-    "do not activate 60 historical catalog",
-    "treat SP-BADGE-008 code as implementation closed; do not reopen without regression evidence",
-    "keep Crew content in CONTENT_APPROVAL_HOLD until genuine Snap-owned approved asset evidence exists",
-    "merge draft PRs only with intentional approval",
-    "after merges, verify exact main heads and rerun regressions before final main CLOSED promotion"
+    "preserve FINAL_MAIN_CLOSED items",
+    "keep 60 historical badge catalog WORKING_DRAFT_NOT_ACTIVE",
+    "keep Snap Crew content in CONTENT_APPROVAL_HOLD until genuine approved asset evidence exists",
+    "do not reopen implementation without regression evidence"
   ],
   "execution_gate": {
-    "state": "POST_MERGE_VALIDATION_IN_PROGRESS",
+    "state": "NO_EXECUTABLE_CODE_OPEN",
     "executable_code_open": false,
     "allowed_next_actions": [
-      "complete post-merge Ready Runtime E2E verification",
-      "supply genuine Snap-owned reviewed/approved Crew asset content"
+      "supply genuine Snap-owned reviewed/approved Crew asset content when available"
     ],
     "forbidden_without_new_evidence": [
       "reopen SP-BADGE-006 implementation",
@@ -161,5 +156,10 @@
       "ci": "ALL_SUCCESS",
       "draft": true
     }
+  },
+  "final_main": {
+    "hide_seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+    "snap_pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+    "ready_set": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd"
   }
 }
