@@ -10,7 +10,7 @@
       "transport": "GITHUB_ISSUE_QUEUE",
       "queue_repository": "hns140412-glitch/Ready-Set",
       "workflow_path": ".github/workflows/taky-codex-executor.yml",
-      "implementation_commit": "a32f289df733fcef8a5d8d2ceea5c071bea6269d",
+      "implementation_commit": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
       "state": "IMPLEMENTED_LOCAL_WORKER_CREDENTIAL_ABSENT_CROSS_REPO_CONSUMER_CREDENTIAL_ABSENT",
       "queue_ready": true,
       "credential_requirement": {
@@ -48,14 +48,15 @@
           "pending",
           "requested"
         ],
-        "safe_reclaim_rule": "terminal failure/cancel/timeout only when materialize job is confirmed skipped",
+        "safe_reclaim_rule": "terminal failure/timed_out/startup_failure only when materialize job is confirmed skipped",
         "reconciliation_required_when": [
           "provider liveness unknown",
           "previous run succeeded but no result exists",
           "materialize job may have started"
         ],
         "preserves_attempt_lineage": true,
-        "side_effect_retry_contract_bypass": false
+        "side_effect_retry_contract_bypass": false,
+        "cancellation_rule": "cancelled run requires explicit human decision; never automatic reclaim"
       },
       "queue_source_provenance": {
         "state": "ACTIVE_IN_READY_SET_MAIN",
@@ -66,7 +67,8 @@
         "trusted_machine_comment_actors": [
           "github-actions[bot]"
         ],
-        "public_untrusted_issue_execution_blocked": true
+        "public_untrusted_issue_execution_blocked": true,
+        "ready_set_main_commit": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae"
       },
       "cross_repo_queue_bridge": {
         "queue_repository": "hns140412-glitch/Ready-Set",
