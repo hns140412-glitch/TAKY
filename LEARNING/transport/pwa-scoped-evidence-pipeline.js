@@ -8,6 +8,7 @@ const Outbox=require('./scoped-evidence-outbox.js');
 const IndexedDB=require('./indexeddb-evidence-outbox-store.js');
 const Client=require('./pwa-central-evidence-ack-client.js');
 const Mapper=require('./specialist-observation-packet-mapper.js');
+const Bridge=require('./specialist-bridge-event-adapter.js');
 const VERSION='TAKY_PWA_SCOPED_EVIDENCE_PIPELINE_V1';
 const clean=x=>typeof x==='string'?x.trim():'';
 function create({indexedDB,dbName,storageAdapter=null,endpointUrl,fetchImpl,tokenProvider,
@@ -35,6 +36,12 @@ function create({indexedDB,dbName,storageAdapter=null,endpointUrl,fetchImpl,toke
   const packet=Mapper.map({source_app,event,session});
   return enqueue(packet); // Recheck session after mapping; no cross-member enqueue.
  }
+ async function enqueueBridge(source_app,raw){
+  return enqueueObservation(source_app,Bridge.fromBridge(source_app,raw));
+ }
+ async function enqueueReadyObservation(explicitObservation){
+  return enqueueObservation('ready-set',Bridge.readyObservation(explicitObservation));
+ }
  async function flushOne(source_app,owner){
   const scope=await activeScope(source_app);
   if(!clean(owner))throw Error('EVIDENCE_FLUSH_OWNER_REQUIRED');
@@ -50,6 +57,6 @@ function create({indexedDB,dbName,storageAdapter=null,endpointUrl,fetchImpl,toke
  async function listActive(source_app){
   return queue.list(await activeScope(source_app));
  }
- return Object.freeze({version:VERSION,enqueue,enqueueObservation,flushOne,listActive,close:storage.close});
+ return Object.freeze({version:VERSION,enqueue,enqueueObservation,enqueueBridge,enqueueReadyObservation,flushOne,listActive,close:storage.close});
 }
 module.exports=Object.freeze({VERSION,create});
