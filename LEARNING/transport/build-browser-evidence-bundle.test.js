@@ -13,7 +13,7 @@ const p=browser.TakyCentralEvidence.mapper.map({
  source_app:'hide-seek',
  session:{authenticated:true,family_id:'F',selected_member_id:'A'},
  event:{event_id:'e1',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
- occurred_at:'2026-09-27T10:00:00Z',member_id:'A',payload:{member_id:'A'}}
+ occurred_at:'2026-09-27T10:00:00Z',member_id:'A',payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'}}
 });
 assert.equal(p.context.family_id,'F');
 assert.throws(()=>browser.TakyCentralEvidence.pipeline.create({
