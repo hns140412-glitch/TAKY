@@ -40,16 +40,16 @@ class RawResumeAuditTests(unittest.TestCase):
   self.manifest["unavailable_sources"]=["conversation:missing"]
   self.assertTrue(any("UNAVAILABLE_SOURCES" in x for x in self.run_audit()))
  def test_unlisted_raw_line_fails_even_when_inventory_and_handoff_agree(self):
-  self.raw.write_text("Original decision A.\\nLater correction B.\\nForgotten requirement C.\\n")
+  self.raw.write_text("Original decision A.\nLater correction B.\nForgotten requirement C.\n")
   self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
   self.assertTrue(any("UNACCOUNTED_RAW_LINE: R1:3" in x for x in self.run_audit()))
  def test_exclusion_requires_reason(self):
-  self.raw.write_text("Original decision A.\\nLater correction B.\\nNonmaterial greeting.\\n")
+  self.raw.write_text("Original decision A.\nLater correction B.\nNonmaterial greeting.\n")
   self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
   self.manifest["excluded_lines"]=[{"raw_source_id":"R1","line":3,"reason":""}]
   self.assertTrue(any("INVALID_EXCLUSION" in x for x in self.run_audit()))
  def test_explicit_nonmaterial_exclusion_passes(self):
-  self.raw.write_text("Original decision A.\\nLater correction B.\\nNonmaterial greeting.\\n")
+  self.raw.write_text("Original decision A.\nLater correction B.\nNonmaterial greeting.\n")
   self.manifest["raw_sources"][0]["sha256"]=h(self.raw.read_bytes())
   self.manifest["excluded_lines"]=[{"raw_source_id":"R1","line":3,"reason":"nonmaterial greeting"}]
   self.assertEqual([],self.run_audit())
