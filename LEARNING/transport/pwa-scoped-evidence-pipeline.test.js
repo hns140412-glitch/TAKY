@@ -36,7 +36,7 @@ const pipeline=Pipeline.create({
  })).queued,true);
  assert.equal((await pipeline.enqueueObservation('hide-seek',{
   event_id:'one',source_app:'hide-seek',type:'LEARNING_MEMORY_SIGNAL',
-  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A'}
+  occurred_at:'2026-09-27T01:00:00Z',member_id:'A',payload:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'}
  })).duplicate,true);
  await assert.rejects(()=>pipeline.enqueue({...packet('two'),context:{
   ...packet('two').context,member_id:'B'}}),/EVIDENCE_ENQUEUE_SESSION_SCOPE_MISMATCH/);
