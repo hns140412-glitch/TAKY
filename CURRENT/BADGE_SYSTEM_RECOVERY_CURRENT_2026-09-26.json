@@ -134,28 +134,25 @@
   },
   "merge_readiness": {
     "hide_seek_pr_17": {
-      "head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
-      "base_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
-      "current_main_sha": "39af27ec92396d67ac1e50f1dfebe3446b41f15a",
-      "mergeable": true,
-      "ci": "ALL_SUCCESS",
-      "draft": true
+      "merged": true,
+      "state": "closed",
+      "pr_head_sha": "93aa625f91e027cfd6bc212e2b74d8418d3f9b81",
+      "main_sha": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+      "post_merge_ci": "SUCCESS"
     },
     "snap_pop_pr_8": {
-      "head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
-      "base_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
-      "current_main_sha": "c250159949dc57545c04f97dc62fb9fdc7a966f1",
-      "mergeable": true,
-      "ci": "ALL_SUCCESS",
-      "draft": true
+      "merged": true,
+      "state": "closed",
+      "pr_head_sha": "94c637fc87983a490ebf1047a07f108474b5dca1",
+      "main_sha": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+      "post_merge_ci": "SUCCESS"
     },
     "ready_set_pr_105": {
-      "head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
-      "base_sha": "e030d685c9717f9fab691dab379326e9e9067303",
-      "current_main_sha": "e030d685c9717f9fab691dab379326e9e9067303",
-      "mergeable": true,
-      "ci": "ALL_SUCCESS",
-      "draft": true
+      "merged": true,
+      "state": "closed",
+      "pr_head_sha": "ccccdbf3077ab055f1c6d964ba8988ebf1656bff",
+      "main_sha": "6ab7bbe17625ed6cf227ff1b689c76564119c1bd",
+      "post_merge_ci": "SUCCESS"
     }
   },
   "final_main": {
@@ -182,5 +179,12 @@
     ],
     "conclusion": "CONTENT_APPROVAL_HOLD_CONFIRMED",
     "implementation_reopen_required": false
+  },
+  "resume_override": {
+    "status": "FINAL_MAIN_CLOSED_WITH_CONTENT_HOLD",
+    "executable_code_open": false,
+    "only_remaining_dependency": "SNAP_OWNED_APPROVED_CREW_CONTENT",
+    "implementation_reopen_required": false,
+    "authority": "THIS_CURRENT_OVERRIDES_PRE_MERGE_SNAPSHOTS"
   }
 }
