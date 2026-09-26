@@ -1,3 +1,15 @@
+# LATEST RESUME OVERRIDE — FAMILY RELATION ≠ PARENT ROLE — 2026-09-26
+
+Direct user correction: Family includes Parent, Grandparent, Guardian, Sibling and other relatives/members. The previous Parent-only Gift interpretation (PR #148) is superseded for new implementation, but V1 files/history are preserved. Family relationship never automatically grants praise gift permission; grant `FAMILY_PRAISE_GIFT` independently through a verified server-side family provider. A verified Child/Sibling can be a giver if separately permitted; self-gift, parent-recipient and cross-family gifting remain blocked.
+
+V2: `BADGE/family-praise-gift.js` + `BADGE/family-praise-gift-journal.js` use `giver_member_id` and a distinct signing/idempotency domain; tests mock authorized Parent/Grandparent/Guardian/Sibling and an unapproved relative. This is NOT proof of live Ready relation support. Ready main Identity core still models binary PARENT/CHILD; real multi-relation family authority and gift-permission resolver remain OPEN.
+
+GEM gift is 1..5 per single gift (not per day/week/month). Parent still has no personal unearned/locked Badge atlas. Gift Journal ≠ Achievement Award Ledger ≠ credited Gem Wallet. No historical 60 activation, no production asset selection, no deployment. Check PR exact-head/main CI before declaring implemented CLOSED.
+
+Read `BADGE/FAMILY_PRAISE_GIFT_V2_CONTRACT_2026-09-26.md`, then current state, and continue ONLY remaining OPEN.
+
+---
+
 # LATEST RESUME OVERRIDE — PARENT PRAISE GIFTS / GEM CAP — 2026-09-26
 
 Direct user correction: Parents can praise a Child with a badge or gems, but Parent has NO personal unearned/locked badge collection. Parent is a giver, not a collector. A GEM gift is integer **1..5 per individual transaction**; do not impose a daily/monthly/lifetime limit without user instruction.
