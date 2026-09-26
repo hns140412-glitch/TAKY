@@ -1,3 +1,13 @@
+# LATEST RESUME OVERRIDE — AWARD LEDGER SOURCE AUDIT — 2026-09-26
+
+- Verified current main repositories: there is NO grounded executable Badge Award Ledger read/verification provider at present. Historical Snap `badgeCandidateReviews` / `badgeEvents` / `badgeProgress` are NOT final Award Ledger.
+- `BADGE/badge-ledger-projection-bridge.js` creates a fail-closed interface for a complete, child/badge-scoped, verified award history. It is NOT a live connection.
+- Do not claim real Award Ledger integration or badge runtime display merely because this bridge CI passes. Find actual owner API/receipt schema first and then connect, without reopening CLOSED award decision behavior.
+- First award unlocks with zero stars, approved distinct reawards add one, five reawards promote tier; raw observation counts do not count.
+- See `BADGE/BADGE_LEDGER_SOURCE_AUDIT_2026-09-26.md` and latest `CURRENT/BADGE_VISUAL_BINDING_CURRENT_2026-09-26.json`.
+
+---
+
 # LATEST RESUME OVERRIDE — REAWARD VISUAL CORRECTION MAIN CLOSURE — 2026-09-26
 
 Direct user correction of star semantics and exploration merit-insignia presentation merged to TAKY main: `568c4126f596c513738287fb947273c1f8bee2a9`. Post-merge Badge Visual Registry Validation: SUCCESS.
