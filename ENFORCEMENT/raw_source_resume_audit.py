@@ -100,7 +100,7 @@ def audit(root, manifest_path, inventory_path, handoff_path):
         if sid in raw and isinstance(quote,str) and quote and raw[sid].count(quote)==1:
             start=raw[sid].index(quote)
             end=start+len(quote)
-            masks[sid][start:end]=b"\\x01"*(end-start)
+            masks[sid][start:end]=bytes([1])*(end-start)
     for sid,content in raw.items():
         cursor=0
         for line_no,line in enumerate(content.splitlines(keepends=True),1):
