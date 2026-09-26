@@ -61,7 +61,7 @@ const record=(sub,memberships)=>({
   const revoked=await store.getWithMetadata(key,{consistency:'strong',type:'json'});
   await store.setJSON(key,{...good,expires_at:new Date(now-1).toISOString()},
    {onlyIfMatch:revoked.etag});
-  assert.deepEqual(await provider.lookupMemberships({provider:'GOOGLE_OIDC',subject),[]);
+  assert.deepEqual(await provider.lookupMemberships({provider:'GOOGLE_OIDC',subject}),[]);
   const old=await store.getWithMetadata(key,{consistency:'strong',type:'json'});
   const corrupted={...good,subject_sha256:hash('OTHER_SUB')};
   await store.setJSON(key,corrupted,{onlyIfMatch:old.etag});
