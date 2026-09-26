@@ -369,6 +369,7 @@ jobs:
           python execution_outcome_state_test.py
           python approval_checkpoint_resume_test.py
           python execution_state_approval_binding_test.py
+          python task_cancellation_contract_test.py
           python untrusted_reader_quarantine_test.py
           python context_firewall_test.py
           python synthesis_barrier_test.py
