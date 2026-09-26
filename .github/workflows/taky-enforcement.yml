@@ -273,6 +273,8 @@ jobs:
           node LEARNING/transport/specialist-observation-packet-mapper.test.js
           node --check LEARNING/transport/build-browser-evidence-bundle.js
           node LEARNING/transport/build-browser-evidence-bundle.test.js
+          node --check LEARNING/transport/specialist-bridge-event-adapter.js
+          node LEARNING/transport/specialist-bridge-event-adapter.test.js
           node --check LEARNING/transport/encrypted-drive-archive-export.js
           node --check LEARNING/transport/encrypted-drive-archive-export.test.js
           node LEARNING/transport/encrypted-drive-archive-export.test.js
