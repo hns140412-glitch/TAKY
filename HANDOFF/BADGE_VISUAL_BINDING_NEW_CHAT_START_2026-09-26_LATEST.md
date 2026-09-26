@@ -1,12 +1,12 @@
 # BADGE VISUAL BINDING — NEW CHAT START — 2026-09-26 LATEST
 
-Status: `REGISTRY_IMPLEMENTED_ASSET_AND_RUNTIME_BINDING_OPEN`
+Status: `REGISTRY_AND_RENDERER_MAIN_CLOSED_ASSET_AND_APP_BINDING_OPEN`
 
 ## Resume order
 
 INHERIT BADGE LOGIC CLOSED
 → read `CURRENT/BADGE_VISUAL_BINDING_CURRENT_2026-09-26.json`
-→ verify central registry exact head / CI
+→ verify central registry + renderer exact main / CI
 → recover explicit approved visual evidence only
 → bind approved assets 1:1
 → connect app runtime renderer
@@ -58,3 +58,23 @@ Do not auto-select, crop, canonicalize, or runtime-bind either sheet.
 5. verify exact runtime rendering.
 
 `BADGE_LOGIC_CLOSED != BADGE_VISUAL_BINDING_CLOSED`
+
+
+## Main closure checkpoint
+
+TAKY main exact head: `78df221d9987ec33c90c51bd59c53ae0f3eddf42`
+
+Closed on main:
+- 60-item working visual registry;
+- fail-closed registry guard;
+- candidate-sheet evidence index;
+- fail-closed badge visual renderer contract;
+- registry/renderer regression CI = SUCCESS.
+
+Still OPEN:
+- explicit approved final badge asset set;
+- 1:1 approved asset binding;
+- cross-app display surface ownership;
+- actual app consumer/surface wiring.
+
+Do not confuse renderer implementation with asset approval.
