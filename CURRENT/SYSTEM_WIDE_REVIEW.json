@@ -8,8 +8,9 @@
     "verified_main_at_start": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
     "draft_pr": 162,
     "working_branch": "review/revisionless-current-20260927",
-    "exact_head": "RECHECK_BRANCH_AFTER_WRITE",
-    "current_selection": "NAMESPACE_SEMANTIC_OWNER_PLUS_VERIFIED_SOURCE_AND_RECEIPT"
+    "current_selection": "NAMESPACE_SEMANTIC_OWNER_PLUS_VERIFIED_SOURCE_AND_RECEIPT",
+    "last_verified_code_and_policy_head": "d62f9ec76659393079c8699352aeadcb89d86595",
+    "latest_branch_head_must_be_queried_live": true
   },
   "protected": [
     "Think Again, Keep Your Key / Think Again, You're The Key / no slogan reinterpretation",
