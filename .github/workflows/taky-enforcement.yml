@@ -232,6 +232,11 @@ jobs:
         run: node LEARNING/intake/transport-handler.test.js
       - name: Validate durable evidence store adapter
         run: node LEARNING/transport/durable-evidence-store-adapter.test.js
+      - name: Validate central authenticated evidence HTTP boundary and committed receipt ACK
+        run: |
+          node --check LEARNING/transport/central-learning-http-endpoint.js
+          node LEARNING/transport/central-learning-http-endpoint.test.js
+          node LEARNING/transport/durable-evidence-commit-ack.test.js
       - name: Validate learning transport auth policy
         run: node LEARNING/transport/transport-auth-policy.test.js
       - name: Validate authenticated evidence transport
