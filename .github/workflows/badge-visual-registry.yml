@@ -56,3 +56,7 @@ jobs:
         run: node --check BADGE/parent-praise-gift.js
       - name: Parent praise gift regression
         run: node BADGE/parent-praise-gift.test.js
+      - name: Parent gift journal syntax
+        run: node --check BADGE/parent-praise-gift-journal.js
+      - name: Durable parent gift journal regression
+        run: node BADGE/parent-praise-gift-journal.test.js
