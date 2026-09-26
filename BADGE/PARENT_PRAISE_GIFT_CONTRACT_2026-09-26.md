@@ -1,4 +1,4 @@
-# FAMILY PARENT PRAISE GIFTS — 2026-09-26
+> HISTORICAL V1 — SUPERSEDED for new family gifting by `BADGE/FAMILY_PRAISE_GIFT_V2_CONTRACT_2026-09-26.md`. The family is not Parent-only. Preserve V1 lineage; do not inherit its Parent-only assumption into new implementation.\n\n# FAMILY PARENT PRAISE GIFTS — 2026-09-26
 
 ## Direct user authority
 
