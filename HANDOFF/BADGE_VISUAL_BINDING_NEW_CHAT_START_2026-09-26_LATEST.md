@@ -1,3 +1,9 @@
+# CALENDAR DELTA — SEPARATE SIGNED FAMILY GIFT LANE — 2026-09-26
+
+The same bounded history PR also adds `BADGE/badge-family-gift-calendar.js`. It reads a trusted signed V2 gift journal, filters recipient Child, groups Korean-time gifts by date, and composes **separate** achievement / family praise badge / journaled gem gift lanes. It does not issue awards, increment reaward stars, or claim a live wallet credit. The real family gift-history reader's authorization remains OPEN. See updated BADGE acquisition history/calendar spec and CI.
+
+---
+
 # LATEST RESUME OVERRIDE — BADGE ACQUISITION HISTORY / CALENDAR — 2026-09-26
 
 Direct user instruction: Keep each badge's *entire acquisition history* and show it in child-specific detail timelines and a monthly calendar. The one source of truth is the signed Award Ledger, not app telemetry, story prompts or family gift records. New append has distinct UTC signed `awarded_at` and `approved_at`; legacy signed records without actual award timestamp remain in "날짜 미확인", not assigned to a guessed day. New `BADGE/badge-award-calendar.js` builds Asia/Seoul month cells; existing family reader gets `getBadgeHistory` and `getMonth` with auth and approved active catalog gates; one tier promotion is ONE underlying REAWARD event.
