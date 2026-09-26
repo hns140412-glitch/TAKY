@@ -72,3 +72,8 @@ USER != DEBUGGER. Do not ask the user to run fixture tests. No rollback of Core 
 - Replaced outbox Node-only crypto with injected standard Web Crypto `subtle.digest('SHA-256')` and `randomUUID()`. Existing Node tests inject `node:crypto.webcrypto` as a fixture; production browser uses `globalThis.crypto`. Digest remains canonical SHA-256, no weakened hash or plaintext token persistence.
 - Added audited five-module, dependency-free browser bundle builder and isolated Node-free browser-like VM test. Builder runs at build time only; the browser artifact has no Node builtin dependency. This is a build/test contract, not yet a committed distributable in Ready/Hide/Snap or real mobile browser certification.
 - Remaining OPEN: actual PWA asset distribution and trusted session integration; real browser IndexedDB multi-tab test (current fixture is deterministic), central live service and credentialed end-to-end. Draft PR only; no main merge or Netlify.
+
+## LATEST DELTA — mapped observation enqueue
+- Prior Web Crypto/browser-bundle exact-head `71635aff` CI #36251236528 SUCCESS.
+- `pwa-scoped-evidence-pipeline.js` now exposes `enqueueObservation(source_app,event)`: maps an explicitly typed Ready/Hide/Snap observation using the trusted session, then rechecks current selected family/member in `enqueue` before atomic persistence. The pipeline test exercises actual mapper-to-queue integration, dedupe, offline and member-switch behavior. No automatic raw event listener, guessed identity, trusted rubric issuer, or product repo wiring.
+- OPEN: review real product event payload shapes and stable event IDs, trusted OAuth family session adapter, browser bundle distribution and real-browser IndexedDB tests. Draft PR only; no main or Netlify changes.
