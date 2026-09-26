@@ -401,7 +401,7 @@
       "number": 111,
       "exact_head": "c038a37bb2728522ef8312e69ee4c84745ac4725",
       "status": "DRAFT_UNMERGED",
-      "all_exact_head_checks": "SUCCESS_INCLUDING_CHROMIUM_RUNTIME_E2E",
+      "all_exact_head_checks": "SUCCESS_READY_RUNTIME_E2E_50_TESTS_PASS",
       "default_live_read_adapter": "NOT_CONNECTED",
       "main_sha_at_branch": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
       "deployment": "NONE"
@@ -409,9 +409,9 @@
     "snap_pr": {
       "repo": "hns140412-glitch/Snap-Pop",
       "number": 9,
-      "exact_head": "268aac41d68dc30551e094952dddd14fc3c10713",
+      "exact_head": "7652c3fb0ec99796768f3993b05cf7c0946dcd9e",
       "status": "DRAFT_UNMERGED",
-      "exact_head_ci": "SUCCESS",
+      "exact_head_ci": "SUCCESS_RUN_36243867472_7_PLAYWRIGHT_PASS",
       "actual_getViewer_getCollection_getMonth_getBadgeHistory": "NOT_CONNECTED",
       "private_api_service_worker_cache": "BYPASS_ADDED_ON_DRAFT",
       "main_sha_at_branch": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
