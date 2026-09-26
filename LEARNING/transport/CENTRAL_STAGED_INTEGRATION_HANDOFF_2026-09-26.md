@@ -66,3 +66,9 @@ USER != DEBUGGER. Do not ask the user to run fixture tests. No rollback of Core 
 - Prior exact-head `476e5a09` CI #36250643442 SUCCESS.
 - New `specialist-observation-packet-mapper.js` explicitly maps three named observation types into source-scoped packets only with authenticated family/selected-member session and matching source event/member. It denies family/member mismatch and unauthorized mastery/award/Planner-date claims. Test covers all three apps. This does not silently treat existing raw bridge event as centrally verified assessment.
 - IMPORTANT OPEN found during integration review: `scoped-evidence-outbox.js` currently imports Node `node:crypto` and modules are CommonJS. These are not directly loadable as unbundled browser scripts. Before claiming actual PWA integration, provide tested browser-compatible bundling or Web Crypto implementation and real browser IndexedDB transaction tests. No live app repository or deployment changes.
+
+## LATEST DELTA — Web Crypto and browser bundle
+- Prior exact-head `513dd85b` CI #36251030155 SUCCESS.
+- Replaced outbox Node-only crypto with injected standard Web Crypto `subtle.digest('SHA-256')` and `randomUUID()`. Existing Node tests inject `node:crypto.webcrypto` as a fixture; production browser uses `globalThis.crypto`. Digest remains canonical SHA-256, no weakened hash or plaintext token persistence.
+- Added audited five-module, dependency-free browser bundle builder and isolated Node-free browser-like VM test. Builder runs at build time only; the browser artifact has no Node builtin dependency. This is a build/test contract, not yet a committed distributable in Ready/Hide/Snap or real mobile browser certification.
+- Remaining OPEN: actual PWA asset distribution and trusted session integration; real browser IndexedDB multi-tab test (current fixture is deterministic), central live service and credentialed end-to-end. Draft PR only; no main merge or Netlify.
