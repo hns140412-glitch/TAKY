@@ -34,7 +34,7 @@ def main() -> None:
     build_index(a.payload,idxp)
     build_query(a.probe_query,qp)
     idx=load_vector_index(idxp); q=load_query_vector(qp)
-    if idx["provider"]["model_id"]!=q["model_id"]!=MODEL_ID:
+    if idx["provider"]["model_id"] != MODEL_ID or q["model_id"] != MODEL_ID:
         raise SystemExit("MODEL_ID_MISMATCH")
     if idx["provider"]["dimension"]!=q["dimension"] or q["dimension"]!=EXPECTED_DIMENSION:
         raise SystemExit("DIMENSION_MISMATCH")
