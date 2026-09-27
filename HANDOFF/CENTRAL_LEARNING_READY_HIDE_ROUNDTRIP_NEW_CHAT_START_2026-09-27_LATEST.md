@@ -1,0 +1,73 @@
+# CENTRAL LEARNING × READY & SET × HIDE V2 — NEW CHAT START / LOSS-RESISTANT HANDOFF — 2026-09-27
+
+**Classification:** RESUME PACKAGE on TAKY Draft PR #159; a source-recovery map, NOT a new main/CURRENT authority; recipient must recheck all live HEADs. Produced at user's explicit `재개준비`. This is a repository-accessible handoff, NOT a portable/full offline bundle. No fresh-session resume simulation has yet been performed.
+
+## 1. CANONICAL STATE / hard-lock boot order
+INHERIT APPROVED STATE → latest TAKY CURRENT / applicable owner authority → EXACT LIVE MAIN HEAD for each repo → latest relevant HANDOFF (this file is a dated pointer) → CLOSED inheritance → actual HEAD/CI + delta comparison → remaining OPEN/NEXT only. MAIN + CURRENT outrank old fixed SHA/branch/HANDOFF. Existing CLOSED stays closed absent new regression evidence. Cross-chat work can advance concurrently: re-read the live PR HEAD immediately before edits; never overwrite its newer commits.
+
+TAKY slogans MUST retain their original meanings:
+- **Think Again, Keep Your Key.** 한 번 더 생각하고 핵심은 놓치지 마.
+- **Think Again, You’re The Key.** 방법을 찾고 해결하라; human remains the central actor.
+- HUMAN INTENT → THINK AGAIN → KEEP YOUR KEY → FIND A WAY/SOLVE → YOU'RE THE KEY → VERIFY/CORRECT/CONTINUE. USER != DEBUGGER.
+Do not reinterpret slogans as only approval, control or validation. Avoid repetitive incremental status replies; implement feasible OPEN until real user decision is necessary, but never claim background work when the chat response has ended.
+
+## 2. CURRENT GOAL / owner and authority boundaries
+Complete functional, end-to-end scoped learning loop:
+Hide per-word memory observation → Ready scoped observation-only evidence outbox → TAKY server authenticated durable ACK → central Learning Engine pedagogical intent → Ready Planner chooses confirmed date and target TODO → Ready V2 dispatch to Hide only for its requested lexical IDs → Hide returns completed or partial specialist result → Ready preserves distinct Hide memory + checkpoint progress observations and repeats the loop without promoting unverified self-report.
+Mining discovers; Indexing relates/retrieves; central Learning Engine owns global policy/decisions; Ready Planner owns dates; Ready executes/reports; Hide generates memory evidence and only local specialist advisories; Snap separate and badge work elsewhere. Google Drive archive/reference != live learner-state transactional store. CENTRAL ACK != CENTRAL DECISION != specialist result != verified assessment receipt.
+
+## 3. EXACT VERIFIED SOURCE POINTERS AT HANDOFF (snapshots, NOT permanently fixed authority)
+- TAKY `hns140412-glitch/TAKY`: main `8e78af8b77d1f3e132f05c99cd6b69a7f258a23e`; Draft PR #159 branch `learning/server-family-registry-provider-20260926`, head before THIS handoff file `e7eb206131e0b9f2db3bf2d08cf28bf20a579c39`; 3/3 checks success. Re-fetch new head after this file commit. Prior #156–#158 and core governance are inherited CLOSED.
+- Ready `hns140412-glitch/Ready-Set`: LIVE main `1d672d862cc8329a5f19ca91c9ed6a338752f5ae`. Draft PR #100 branch `integration/hide-memory-review-roundtrip-v01`, head `f82e5818b192c280e6d66a0fd5d4e10baaecf9a5`, 10/10 checks success. IMPORTANT branch vs live main DIVERGED +194/-19 at inspection. New main commits include TAKY executor liveness, cancelled-run protection, queue-source provenance and CLI compatibility. Do not treat PR #100's older base `98df214a...` as current main; reconcile impacted shared files (especially `ready-integration-v1.js`) selectively; no blind broad rebase or overwrite.
+- Hide V2 `hns140412-glitch/Hide-Seek`: main `1156c559bbc3da239b30606912ab0ae0548af0a3`; Draft PR #12 branch `rewrite/hide-runtime-v2-2026-09-21`, head `2837737de225cded731c8e91498035305a187eaa`; `validate-v2` SUCCESS. PR mergeability `dirty`; vs live main DIVERGED +1114/-11. It is NOT merged, NOT a production release. Preserve V2 work; classify/resolve conflict deliberately, without rewriting unrelated 1114-commit history.
+- Hide separate Draft PR #19 branch `taky/hide-memory-owner-correction-2026-09-27`, head `6d304af1f0d2bf5ce8678023ef2c62604a9e5deb`, 2/2 checks success. PR #19 (main-based) != PR #12 (V2 draft). Do not accidentally replace V2 bridge with the legacy main/PR19 code or treat their success as V2 test.
+- Sources: TAKY `CURRENT/LEARNING_ENGINE_VERIFICATION_CURRENT_2026-09-25.md`, `LEARNING/transport/CENTRAL_STAGED_INTEGRATION_HANDOFF_2026-09-26.md`, `MASTER/HANDOFF_PROTOCOL.md`; each live PR files below. Do not falsely promote this handoff to CURRENT.
+
+## 4. CONFIRMED / PROTECTED DECISIONS and user corrections
+- Real login and physical-device validation EXCLUDED for this phase, not silently simulated or claimed. Real OAuth/admin registry/operational cloud store and paid APIs require independent gates. main merge, Netlify/deployment and live data migration HOLD. Badge UI separately in another conversation; Work OS HOLD. No new user approval required for safe Draft code/tests; ask only at a real external gate.
+- Preserve exact central member/family scope before and after async calls, no browser-supplied impersonation. Observation-only Hide memory may request a retry checkpoint but cannot inflate verified performance, evidence sufficiency, mastery/trend or automatic award.
+- Specialist V2 route MUST be an explicitly configured correct `/v2.html` URL (HTTPS or permitted loopback test), no legacy fallback for central scoped tasks. Unknown/missing lexical targets must not silently run the entire active mission. No needlessly reopening old CLOSED or duplicating unrelated badges/visual work.
+- Do not substitute central vs local review policy ownership: local legacy `EXPLICIT_READY_PLANNER_REVIEW_DIRECTIVE / READY_LEARNING_ENGINE`; central `EXPLICIT_CENTRAL_PLANNER_REVIEW_DIRECTIVE / TAKY_LEARNING_ENGINE_CORE`; both allow Planner to choose date. Never promote locally generated response into a server-authenticated receipt.
+
+## 5. LAST VALID WORKING STATE / REALIZATION TRACE (code vs tested vs live)
+TAKY PR #159 central:
+`LEARNING/transport/central-learning-decision-http-endpoint.js` + `central-google-node-host.js` and Node HTTP bridge implement read-only `/api/learning/decision`: trusted Google principal/member grant + strong durable verified batch receipts; distinct from ingest ACK. `LEARNING/runtime/observation-review-intent.js` permits explicit observation-only retrieval checkpoint intent without adding unverified evidence to learner-state estimators. `ready-hide-observation-roundtrip.test.js`, `observation-review-intent.test.js` and central HTTP/host tests verify review targets and checkpoint self-report without proof promotion; current CI 3/3. No real server deployment/real login proven.
+
+Ready PR #100:
+- `ready-central-observation-handoff-v01.js`, `ready-central-learning-roundtrip-v01.js`, HTTP client/intake, `ready-central-intent-to-planner-v01.js` implement scoped pending queue → central ACK/decision → Planner dated checkpoint and feedback. No free-standing fake session. Dual Hide result+checkpoint progress are distinct event IDs. Terminal old checkpoint cannot be recycled on same receipt; new central basis can reconcile previous carry.
+- `ready-central-hide-directive-v01.js` constructs central lexical-ID-specific V2 task directive from actual Planner TODO and bound child scope, verifies exact task, lexical IDs, scoped item IDs and progress vs completion. `ready-runtime-v07.js` routes ONLY explicit target central work to Hide V2, checks incoming completed/partial payload and wraps up only actual specialist evidence. `ready-hide-memory-review-v01.js` supports V2 `TASK_COMPLETED` and `TASK_PARTIAL` event/state alignment. `app.js` preflights central specialist route before marking Planner task IN_PROGRESS; preserves partial/result across navigation/reload and protects sibling carry-over.
+- Latest Ready commit `f82e581...`: private URL-fragment `learning_event` return parsed first, legacy query compatible, cleaned after accepted event. `tests/central-hide-partial-browser.spec.js`, `central-hide-runtime.spec.js`, `central-hide-directive.test.js`, roundtrip/CI tests provide real browser fixture coverage; current 10/10 checks. This is browser/local fixture validation, NOT proof that separately hosted production apps and live credentials already run together.
+- Ready main has advanced independently (see §3) and the Draft branch still needs selective compatibility reconciliation, not forced merge.
+
+Hide V2 PR #12:
+- `src/v2/ready-bridge.js` consumes both central and local review directive; matches exact lexical IDs and task identity; targets can span separate original missions via a provenance-linked `READY_SCOPED_REVIEW_BUNDLE`. Missing targets/other active session do not fall back to arbitrary mission. `src/v2/learning-session.js` requires actual target queue, `src/v2/app.js` routes review and retains completed session, `src/v2/memory-engine.js` scopes returned memory summary without overwriting full mission aggregate. Bundled review evidence gets linked back to original word records without duplicate wordbook counting.
+- V2 return includes `reviewedLexicalIds`, scoped item IDs, original mission evidence, actual COMPLETE or PARTIAL event, and only returns to an approved origin. Sensitive `learning_event` now uses URL fragment rather than server-visible query. Returned progress is not central receipt. Tests `tests/hide-v2-central-review.spec.js` + workflow `validate-v2` pass at inspected exact HEAD.
+- PR #12 has merge conflict with current main; independent PR #19 must not be mixed in via blind file overwrite. V2 not deployed.
+
+## 6. VALIDATION / CLASSIFICATION
+CLOSED inherited: central LE intent and verified receipt contracts, original role/ownership separation, existing Ready/Hide V2 Draft tests as actually evidenced on their own exact HEADs. Latest exact-head counts at handoff: TAKY #159 3/3 success, Ready #100 10/10 success, Hide #12 validate-v2 success, Hide #19 2/2 success. NO proof of live device, production OAuth, Netlify or hosted 3-app end-to-end. Never claim these counts cover commits that happen later.
+
+Hold: Netlify/deploy, main merges, production credential/admin family enrollment, operational store/cost/privacy gate, retention estimator/BKT promotion, Work OS; badge work outside this execution slice.
+
+Superseded/invalid patterns: naked query `learning_event` as sole private-return path (legacy compatibility retained); unverified memory as verified learner performance; “missing lexical IDs → run all mission”; completed task from bare Ready wrap button; reassign same terminal checkpoint from same old evidence; inactive/sibling carry-over shown cross-scope. Do not resuscitate.
+
+## 7. UNRESOLVED / OPEN, next order (DO ACTUAL WORK)
+1. **FIRST:** Recheck CURRENT, main and all 4 PR exact heads/CI, especially Ready main's independently merged 19 commits and concurrent branch commits. Recover latest source changes, not just this snapshot. Check PR #12 mergeability and identify conflict files; preserve original historical branch and don't blind-rebase.
+2. Cross-repo contract walk from a **real generated Ready central `target_learning_ids` / Planner TODO**, through actual Ready V2 directive, Hide V2 scoped mission/bundle, completion/partial fragment return and Ready Wrap; detect any differences in `task_id/session_id/lap_id`, lexicalId ordering, scopeItemIds and result summaries. Create/adjust focused integration fixtures. Current product CI tests are run in separate repos; a *single installed hosted triple-app live environment* remains OPEN.
+3. Check multi-mission bundle return and reconciliation of copied evidence to original mission for idempotency, late updates, mixed mission/completed/unrelated active sessions; no duplicate wordbook counting or loss of original learning evidence. Probe stale fragment/replay and session/child switch handling.
+4. Check Ready partial vs completed outcome after V2 roundtrip, one active Planner task, actual_ms, reload, same-source repeated central decision, fresh central decision carry reconciliation. Keep local legacy path intact.
+5. After exact contract/tests pass, classify branch compatibility conflicts: Ready PR #100 vs newer main shared executor integration; Hide PR #12 vs main/PR #19. Targeted reconciliation on draft branches only when safe; if material conflicting human choice genuinely required, report exact boundary rather than guessing.
+6. Report CODED / UNIT+CI / BROWSER FIXTURE / DEVICE / LIVE AUTH+SERVER / PRODUCTION separately. Only actually verified counts, no invented overall percent.
+
+## 8. ROLLBACK / RECOVERY POINTERS
+Original PR branch heads and commit IDs in §3 are exact working snapshots. Fetch GitHub commits/compare before any edit; for a failing later change recover exact prior passing commit, inspect CI logs and patch targeted regression. Do not hard reset, overwrite unrelated concurrent work or reinterpret stale snapshots as live authority.
+
+## 9. VALIDATION STATUS OF THIS HANDOFF
+- Source pointers: accessible in this chat via connected GitHub; fresh-session capability must be rechecked. Cross-repo pointer-based, not self-contained offline.
+- Protected state, user corrections, HOLD and CLOSED/OPEN classification: included.
+- HEAD freshness: verified for §3 at generation, MUST reverify on next chat.
+- Portable source snapshot/manifest/bundle closure: NOT APPLICABLE (not claimed full offline handoff).
+- Resume simulation in a genuinely new session: NOT YET, explicitly OPEN; the file does not declare its own resume PASS.
+
+## 10. COPY-PASTE NEW CHAT RESUME PROMPT
+최신 TAKY 기준으로 중앙 Learning Engine × Ready & Set × Hide V2 통합 작업을 재개해. 먼저 TAKY Draft PR #159의 `HANDOFF/CENTRAL_LEARNING_READY_HIDE_ROUNDTRIP_NEW_CHAT_START_2026-09-27_LATEST.md`를 읽고, CURRENT → 각 저장소 EXACT LIVE MAIN HEAD → 최신 관련 HANDOFF/owner 계약 → 각 Draft PR의 LIVE HEAD/CI/compare → CLOSED 상속 → 남은 OPEN 순서로 복원해. HEAD는 핸드오프의 고정 SHA를 authority로 사용하지 말고 다시 확인해. Ready PR #100과 현재 main은 diverged, Hide V2 PR #12는 dirty이며 Hide PR #19는 별도 계열이므로 임의 리베이스/덮어쓰기 금지. 우선 Ready 중앙 단어 ID → Planner TODO → Hide V2 exact lexical review(여러 원본 미션 bundle 포함) → 실제 completed/partial fragment return → Ready 결과/이월 → 중앙 observation-only 재입력까지 교차 회귀검증 및 남은 구현을 진행해. 중앙 ACK·중앙 판단·관찰·실제 검증 증거를 구분하고 정책은 중앙 Learning Engine, 날짜는 Planner, 기억 신호는 Hide가 맡는다. Think Again, Keep Your Key. Think Again, You’re The Key. USER != DEBUGGER. 자의적 슬로건 해석 금지. 승인 필요 전까지 Draft 코드와 CI의 남은 OPEN을 실제로 진행해. Work OS/뱃지는 이번 작업 대상 아님. 실제 로그인·실기기 제외, main 병합·Netlify·배포·유료 리소스 호출 HOLD. 실증하지 않은 것을 완료로 보고하지 마.
