@@ -44,15 +44,15 @@
     "No main merge, Netlify deployment, Work OS, real award or catalog activation"
   ],
   "next_open": [
-    "Rebuild rejected low-detail candidates as high-density individual source-approved art, without inventing characters or asking 60 user approval prompts",
-    "Visual self-review each final badge at 64/120/200/320 against the six-image storyboard and record per-badge layout approval evidence",
-    "Supply separately reviewed child profile and Snap-owned Crew assets from the actual owner authority; no invented fallback avatars",
-    "With server-approved active catalog and verified signed Award Ledger, map central asset records and optional overlay slots to Ready/Snap consumers",
-    "Maintain no main merge/Netlify/activation/award until separately authorized"
+    "Render 60 actual unique final high-quality hand-drawn pastel emblem illustrations using per-ID witty directions; replace rejected flat sketches, not crop concept or make contact sheet",
+    "Self-review final 64/120/200/320 pictures individually for content, source, clarity and artwork layering; record genuine evidence",
+    "Promote only visually reviewed individual art/overlay layout into actual approved asset registry; maintain separate child and Snap Crew assets",
+    "Wire production asset resolution to approved, active registry plus verified same-child Ledger after runtime integration evidence",
+    "Never auto-activate historical catalog, auto-award, main merge, Netlify, Work OS"
   ],
   "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART",
   "asset_management": {
-    "status": "IMPLEMENTED_DRAFT_ONLY_NO_RUNTIME_BINDING",
+    "status": "60_SOURCE_SPECIFIC_DEV_BINDINGS_IMPLEMENTED_NOT_PRODUCTION_ACTIVATED",
     "registry": "BADGE/assets/asset-registry-working.json",
     "scene_sources_root": "BADGE/ui/assets/individual/001..060",
     "shared_asset_root": "BADGE/assets/shared",
@@ -114,7 +114,13 @@
         "BADGE/badge-visual-presentation.css"
       ],
       "progress": "IMPLEMENTED_IN_DRAFT_CI_PENDING_EXACT_HEAD"
-    }
+    },
+    "dev_binding_manifest": "BADGE/ui/badge-dev-preview-bindings-60.json",
+    "creative_direction_manifest": "BADGE/assets/individual-art-direction-60.json",
+    "preview_bound_count": 60,
+    "final_approved_image_count": 0,
+    "runtime_bound_count": 0,
+    "art_qa_gate": "BLOCKED_PENDING_60_STORY_SPECIFIC_FINAL_ILLUSTRATIONS_AND_BROWSER_VISUAL_PARITY"
   },
   "visual_direction_001": {
     "latest_user_feedback": "User positively received compact witty pastel hand-drawn blanket kingdom concept; asks for border and star/tier expression to be applied correctly.",
@@ -122,5 +128,42 @@
     "motif": "blanket hill and pillow castle, dawn sun, small escape ladder and lantern",
     "status": "DIRECTION_ACCEPTED_CONDITIONAL_NOT_FINAL_ASSET_APPROVAL",
     "mandatory_revision": "source asset must be independently illustrated and separated from stars, rim, tier and optional characters; tiny-size QA against approved storyboard remains OPEN"
+  },
+  "latest_progress": {
+    "date": "2026-09-27",
+    "mode": "ALL_60_SOURCE_SPECIFIC_DRAFT_BINDING_AND_ILLUSTRATION_DIRECTIVES",
+    "user_instruction": "same witty pastel individual art direction for all 60 and bind; independent shared rim, stars, tier and optional approved character overlays",
+    "visual_direction_file": "BADGE/assets/individual-art-direction-60.json",
+    "creative_direction_count": 60,
+    "creative_direction_unique_count": 60,
+    "development_binding_manifest": "BADGE/ui/badge-dev-preview-bindings-60.json",
+    "single_scene_inspector": "BADGE/ui/badge-dev-binding-inspector.html",
+    "development_bindings": 60,
+    "physical_layer_files": 120,
+    "separate_raster_previews": 60,
+    "common_shared_svg_files": 4,
+    "final_painterly_originals_verified": 0,
+    "production_asset_bindings": 0,
+    "active_historical_badges": 0,
+    "verified_awards_issued": 0,
+    "notes": "The 60 currently bound candidate SVGs are prior visually rejected flat drafts; this is honest development wiring, not 60 final illustrations or release. New 60 art directions are story-unique, with compact witty 64px visual brief per original ID.",
+    "validated_code_head": "a72890dbb664e36f2a3cf6be0d04029f053c85cb",
+    "validated_workflows": [
+      {
+        "name": "Badge UI contract checks",
+        "run_id": 36297842391,
+        "conclusion": "success"
+      },
+      {
+        "name": "Badge Visual Registry Validation",
+        "run_id": 36297842399,
+        "conclusion": "success"
+      }
+    ],
+    "artifacts": {
+      "github_run_id": 36297842391,
+      "artifact_id": 10924288028,
+      "artifact_name": "badge-60-independent-scene-candidates"
+    }
   }
 }
