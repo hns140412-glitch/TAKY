@@ -25,3 +25,5 @@ jobs:
         run: node BADGE/ui/badge-atlas.test.cjs
       - name: Badge renderer regression
         run: node BADGE/badge-visual-renderer.test.js
+      - name: Independently-authored 60 artwork structural QA
+        run: python3 BADGE/ui/test_individual_art_60.py
