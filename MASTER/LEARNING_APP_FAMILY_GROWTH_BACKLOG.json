@@ -203,7 +203,8 @@
         "TAKY CAP-OCR-INGEST-001 is a shared reference ingestion mechanism, not a live Google OCR test.",
         "Hide PR #12 includes fixture-based family OCR adapter/browser flow and explicitly holds live OCR provider verification.",
         "Ready product capture contract requires originals -> review draft -> Parent correction -> confirmed FACT.",
-        "Hide PR #12 hide-family-ocr-adapter.js constructs normalizedEvidence.request_id from its own outgoing ingest.request.request_id; the observed response processing does not independently establish a server-echoed trusted request id. TAKY validateForRequest on this locally rewrapped object alone is not proof of server/provider roundtrip correlation."
+        "Hide PR #12 hide-family-ocr-adapter.js constructs normalizedEvidence.request_id from its own outgoing ingest.request.request_id; the observed response processing does not independently establish a server-echoed trusted request id. TAKY validateForRequest on this locally rewrapped object alone is not proof of server/provider roundtrip correlation.",
+        "Owner draft routes for actual app-side use: Ready PR #113 and Hide V2 stacked PR #20; their CI outcomes must be checked per exact HEAD. These drafts do not establish a real Google provider call or deployed server echo."
       ],
       "improvement_direction": "Do not rebuild the existing family capture transport or Hide vocabulary adapter. Compare Google Cloud Vision OCR/Gemini image input using synthetic nonpersonal ground-truth print/handwriting samples; keep source_id, per-field uncertainty, review-before-FACT, partial page retry and cost/privacy evidence. NVIDIA models remain optional independent research baseline, not automatic provider substitution.",
       "exit_conditions": [
@@ -222,6 +223,24 @@
         "https://cloud.google.com/vision/pricing",
         "https://cloud.google.com/vision/docs/data-usage",
         "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "integration_candidates": [
+        {
+          "owner": "Ready-Set",
+          "pr": "https://github.com/hns140412-glitch/Ready-Set/pull/113",
+          "head_sha": "1c05843ca42fcd25292b3dd9c40252c13d0f1f17",
+          "base_sha": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+          "state": "DRAFT_CONSUMER_ADAPTER_CI_VERIFIED_ONLY",
+          "scope": "vendor staged source plus Ready review draft correlation and excluded reference negative tests; server endpoint not yet verified"
+        },
+        {
+          "owner": "Hide-Seek V2",
+          "pr": "https://github.com/hns140412-glitch/Hide-Seek/pull/20",
+          "head_sha": "7c2ac5344a8ffc9fa45fd851ee982523aafd7ac6",
+          "base_sha": "1ccbd372890ba079accadb86e7610cd3fdad240a",
+          "state": "DRAFT_STACKED_ON_PR12_PENDING_FULL_CI",
+          "scope": "family OCR response echo, explicit per-row source and versioned source vendor copy; PR12 not rebased or overwritten"
+        }
       ]
     }
   ]
