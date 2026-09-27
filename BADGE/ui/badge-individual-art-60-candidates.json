@@ -1,0 +1,1233 @@
+{
+  "schema": "TAKY_INDIVIDUAL_BADGE_ART_60_CANDIDATES_V1",
+  "date": "2026-09-27",
+  "lineage": {
+    "source_presets": "BADGE/badge-60-story-20-history-working.json",
+    "copy_proposals": "BADGE/badge-wow-inspired-copyworking.json",
+    "approved_storyboard": "BADGE/ui/APPROVED_STORYBOARD_2026-09-27.md"
+  },
+  "status": "INDEPENDENT_ART_CANDIDATES_NO_AUTO_BINDING",
+  "created_scene_count": 60,
+  "unique_background_files": 60,
+  "unique_interior_files": 60,
+  "shared_effects_not_baked": [
+    "rim",
+    "frame",
+    "shadow",
+    "star and reaward tier",
+    "lock",
+    "grayscale"
+  ],
+  "children_or_crew_painted_into_base": false,
+  "approval_process": "BATCH_SELF_QA_NOT_60_MANUAL_APPROVAL_LOOPS",
+  "do_not_conflate": [
+    "asset production",
+    "style match",
+    "formal runtime approval",
+    "award ledger ownership",
+    "catalog activation",
+    "deployment"
+  ],
+  "items": [
+    {
+      "id": "BDG-DRAFT-001",
+      "visual_id": "BADGE_VISUAL_DRAFT_001",
+      "canonical_title": "해뜰락말락",
+      "copy_proposal": "이불 왕국 탈출기",
+      "source_motif": "이불에서 삐져나온 작은 태양",
+      "source_storyline": "이불 왕국과 협상 끝. 아직 해가 덜 떴지만 탐험은 시작됐다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/001/background.svg",
+        "interior": "./assets/individual/001/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-002",
+      "visual_id": "BADGE_VISUAL_DRAFT_002",
+      "canonical_title": "꼬끼오 출발",
+      "copy_proposal": "알람보다 한발 먼저",
+      "source_motif": "닭 대신 나팔 부는 종달새",
+      "source_storyline": "세상이 조용한 사이 먼저 울린 출발 신호.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/002/background.svg",
+        "interior": "./assets/individual/002/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-003",
+      "visual_id": "BADGE_VISUAL_DRAFT_003",
+      "canonical_title": "아침 한입",
+      "copy_proposal": "한 입 먹고 한 칸",
+      "source_motif": "토스트와 연필이 교차한 작은 깃발",
+      "source_storyline": "아침의 첫 단서가 책상 위에 착륙했다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/003/background.svg",
+        "interior": "./assets/individual/003/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-004",
+      "visual_id": "BADGE_VISUAL_DRAFT_004",
+      "canonical_title": "밥먹고 한번더",
+      "copy_proposal": "밥심으로 2라운드",
+      "source_motif": "주먹밥과 돌아오는 부메랑",
+      "source_storyline": "배도 채우고 머리도 한 번 더!",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/004/background.svg",
+        "interior": "./assets/individual/004/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-005",
+      "visual_id": "BADGE_VISUAL_DRAFT_005",
+      "canonical_title": "출발 준비 끝",
+      "copy_proposal": "신발끈은 이미 출발했다",
+      "source_motif": "묶인 신발끈과 작은 나침반",
+      "source_storyline": "신발끈부터 마음까지 출발 준비 완료.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/005/background.svg",
+        "interior": "./assets/individual/005/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-006",
+      "visual_id": "BADGE_VISUAL_DRAFT_006",
+      "canonical_title": "시간 발견자",
+      "copy_proposal": "잃어버린 분을 찾습니다",
+      "source_motif": "시계 틈에서 솟는 새싹",
+      "source_storyline": "아무도 못 본 틈새 시간을 찾아냈다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/006/background.svg",
+        "interior": "./assets/individual/006/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-007",
+      "visual_id": "BADGE_VISUAL_DRAFT_007",
+      "canonical_title": "없던시간 뿅",
+      "copy_proposal": "시계의 비밀 주머니",
+      "source_motif": "시계 모자를 쓴 마술 토끼",
+      "source_storyline": "어디 있었지? 주머니 속 5분 발견!",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/007/background.svg",
+        "interior": "./assets/individual/007/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-008",
+      "visual_id": "BADGE_VISUAL_DRAFT_008",
+      "canonical_title": "하나 더!",
+      "copy_proposal": "한 개는 덤입니다",
+      "source_motif": "한 장 더 펼쳐지는 지도",
+      "source_storyline": "하나 끝냈는데, 작은 용기가 하나 더 나왔다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/008/background.svg",
+        "interior": "./assets/individual/008/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-009",
+      "visual_id": "BADGE_VISUAL_DRAFT_009",
+      "canonical_title": "몰래 시작",
+      "copy_proposal": "아무도 안 시켰는데요?",
+      "source_motif": "발자국 뒤에 숨은 작은 깃발",
+      "source_storyline": "누가 시키기도 전에 슬쩍 출발했다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/009/background.svg",
+        "interior": "./assets/individual/009/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-010",
+      "visual_id": "BADGE_VISUAL_DRAFT_010",
+      "canonical_title": "말하기 전에 GO",
+      "copy_proposal": "말보다 빠른 발자국",
+      "source_motif": "출발선 위의 가벼운 운동화",
+      "source_storyline": "말하기 전에 손이 먼저 움직인 날.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/010/background.svg",
+        "interior": "./assets/individual/010/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-011",
+      "visual_id": "BADGE_VISUAL_DRAFT_011",
+      "canonical_title": "내가 고를래",
+      "copy_proposal": "내 작전, 내가 결재",
+      "source_motif": "고르는 손과 세 갈래 오솔길",
+      "source_storyline": "오늘의 첫 선택은 바로 내 손으로.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/011/background.svg",
+        "interior": "./assets/individual/011/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-012",
+      "visual_id": "BADGE_VISUAL_DRAFT_012",
+      "canonical_title": "작전 짜기",
+      "copy_proposal": "연필 참모총장",
+      "source_motif": "접이식 작전지도와 연필",
+      "source_storyline": "작전이 생기면 미로도 지도가 된다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/012/background.svg",
+        "interior": "./assets/individual/012/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-013",
+      "visual_id": "BADGE_VISUAL_DRAFT_013",
+      "canonical_title": "딱 하나 집중",
+      "copy_proposal": "한 칸 집중 본부",
+      "source_motif": "한 칸에 모인 스포트라이트",
+      "source_storyline": "세상은 잠깐 조용히, 지금은 이 한 칸.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/013/background.svg",
+        "interior": "./assets/individual/013/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-014",
+      "visual_id": "BADGE_VISUAL_DRAFT_014",
+      "canonical_title": "번개 완료",
+      "copy_proposal": "번개도 검토했습니다",
+      "source_motif": "번개와 체크 표시가 든 구름",
+      "source_storyline": "번개보다 중요한 건 끝까지 확인했다는 사실.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/014/background.svg",
+        "interior": "./assets/individual/014/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-015",
+      "visual_id": "BADGE_VISUAL_DRAFT_015",
+      "canonical_title": "천천히 정확히",
+      "copy_proposal": "거북이의 정밀 탐험",
+      "source_motif": "거북이와 정교한 작은 자",
+      "source_storyline": "급할수록 천천히. 거북이에게 배운 비밀 기술.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/015/background.svg",
+        "interior": "./assets/individual/015/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-016",
+      "visual_id": "BADGE_VISUAL_DRAFT_016",
+      "canonical_title": "한칸씩",
+      "copy_proposal": "한 칸의 반란",
+      "source_motif": "나란히 놓인 징검다리",
+      "source_storyline": "한 칸이 다음 한 칸을 불러왔다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/016/background.svg",
+        "interior": "./assets/individual/016/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-017",
+      "visual_id": "BADGE_VISUAL_DRAFT_017",
+      "canonical_title": "결국 해냈다",
+      "copy_proposal": "끝판왕은 마지막 한 칸",
+      "source_motif": "구불길 끝의 승리 깃발",
+      "source_storyline": "끝이 안 보이던 길에도 도착 깃발이 있었다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/017/background.svg",
+        "interior": "./assets/individual/017/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-018",
+      "visual_id": "BADGE_VISUAL_DRAFT_018",
+      "canonical_title": "집중 불꽃",
+      "copy_proposal": "불꽃은 조용히 탄다",
+      "source_motif": "유리병 속 작은 불꽃",
+      "source_storyline": "집중의 불씨를 조용히 지켜냈다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/018/background.svg",
+        "interior": "./assets/individual/018/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-019",
+      "visual_id": "BADGE_VISUAL_DRAFT_019",
+      "canonical_title": "조용한 몰입",
+      "copy_proposal": "머릿속은 대원정 중",
+      "source_motif": "밤하늘 도서관의 작은 등불",
+      "source_storyline": "조용했는데, 머릿속에선 탐험 중이었다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/019/background.svg",
+        "interior": "./assets/individual/019/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-020",
+      "visual_id": "BADGE_VISUAL_DRAFT_020",
+      "canonical_title": "흐름 탔다!",
+      "copy_proposal": "집중 급류 탑승",
+      "source_motif": "종이배가 흐르는 리본 물길",
+      "source_storyline": "오늘은 흐름이 나를 데려갔다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/020/background.svg",
+        "interior": "./assets/individual/020/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-021",
+      "visual_id": "BADGE_VISUAL_DRAFT_021",
+      "canonical_title": "다시 왔어",
+      "copy_proposal": "집중이 귀가했습니다",
+      "source_motif": "되돌아온 발자국 두 쌍",
+      "source_storyline": "잠시 멀어졌다가도 다시 돌아올 줄 아는 탐험가.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/021/background.svg",
+        "interior": "./assets/individual/021/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-022",
+      "visual_id": "BADGE_VISUAL_DRAFT_022",
+      "canonical_title": "돌아온 집중",
+      "copy_proposal": "잠깐 외출한 집중 씨",
+      "source_motif": "집으로 돌아오는 작은 나침반",
+      "source_storyline": "집중이 잠깐 외출했다가 귀가했다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/022/background.svg",
+        "interior": "./assets/individual/022/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-023",
+      "visual_id": "BADGE_VISUAL_DRAFT_023",
+      "canonical_title": "집중 회수",
+      "copy_proposal": "흩어진 마음 수거함",
+      "source_motif": "그물에 담긴 별빛 조각",
+      "source_storyline": "흩어진 마음을 차곡차곡 회수 완료.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/023/background.svg",
+        "interior": "./assets/individual/023/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-024",
+      "visual_id": "BADGE_VISUAL_DRAFT_024",
+      "canonical_title": "구조 성공",
+      "copy_proposal": "오늘 한 조각 구조 완료",
+      "source_motif": "구조용 튜브 속 과제 카드",
+      "source_storyline": "어긋난 하루에서 오늘의 한 조각을 구했다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/024/background.svg",
+        "interior": "./assets/individual/024/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-025",
+      "visual_id": "BADGE_VISUAL_DRAFT_025",
+      "canonical_title": "도움 신호",
+      "copy_proposal": "SOS도 기술이다",
+      "source_motif": "작은 무전기와 손전등",
+      "source_storyline": "도움이 필요한 순간 신호를 보냈다. 이것도 용기!",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/025/background.svg",
+        "interior": "./assets/individual/025/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-026",
+      "visual_id": "BADGE_VISUAL_DRAFT_026",
+      "canonical_title": "뭔가 이상한데?",
+      "copy_proposal": "이상한 건 못 지나쳐",
+      "source_motif": "쌍안경을 든 물음표",
+      "source_storyline": "정답보다 먼저 이상한 낌새를 발견했다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/026/background.svg",
+        "interior": "./assets/individual/026/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-027",
+      "visual_id": "BADGE_VISUAL_DRAFT_027",
+      "canonical_title": "실수 청소부",
+      "copy_proposal": "실수 청소부",
+      "source_motif": "빗자루 대신 돋보기 든 청소부",
+      "source_storyline": "실수는 쓰레기가 아니라 내일의 단서였다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/027/background.svg",
+        "interior": "./assets/individual/027/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-028",
+      "visual_id": "BADGE_VISUAL_DRAFT_028",
+      "canonical_title": "고쳐서 완성",
+      "copy_proposal": "수정이 나를 키웠다",
+      "source_motif": "기워진 지도와 반짝이는 실",
+      "source_storyline": "흔적을 따라 다시 고치니 그림이 맞아떨어졌다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/028/background.svg",
+        "interior": "./assets/individual/028/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-029",
+      "visual_id": "BADGE_VISUAL_DRAFT_029",
+      "canonical_title": "한번 더!",
+      "copy_proposal": "다시 누르는 용기",
+      "source_motif": "다시 돌아온 부메랑의 다른 궤적",
+      "source_storyline": "똑같은 출발이 아니야. 이번엔 새로운 길을 봤어.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/029/background.svg",
+        "interior": "./assets/individual/029/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-030",
+      "visual_id": "BADGE_VISUAL_DRAFT_030",
+      "canonical_title": "범인은 여기!",
+      "copy_proposal": "범인은 3번째 줄",
+      "source_motif": "탐정 모자 쓴 지우개와 발자국",
+      "source_storyline": "엉뚱한 곳에 숨어 있던 오류 용의자 검거!",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/030/background.svg",
+        "interior": "./assets/individual/030/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-031",
+      "visual_id": "BADGE_VISUAL_DRAFT_031",
+      "canonical_title": "마지막 조각",
+      "copy_proposal": "퍼즐은 마지막에 웃는다",
+      "source_motif": "지도 구멍을 메우는 퍼즐 조각",
+      "source_storyline": "마지막 조각은 생각보다 가까이에 있었다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/031/background.svg",
+        "interior": "./assets/individual/031/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-032",
+      "visual_id": "BADGE_VISUAL_DRAFT_032",
+      "canonical_title": "아하!",
+      "copy_proposal": "머릿속 전구 긴급 점등",
+      "source_motif": "벌떡 일어난 전구 생명체",
+      "source_storyline": "머릿속 전구가 갑자기 기상했다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/032/background.svg",
+        "interior": "./assets/individual/032/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-033",
+      "visual_id": "BADGE_VISUAL_DRAFT_033",
+      "canonical_title": "잠깐만…",
+      "copy_proposal": "잠깐! 생각 검문",
+      "source_motif": "잠깐 멈춘 모래시계와 돋보기",
+      "source_storyline": "대답 직전에 멈춘 1초, 이게 탐정의 감각.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/033/background.svg",
+        "interior": "./assets/individual/033/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-034",
+      "visual_id": "BADGE_VISUAL_DRAFT_034",
+      "canonical_title": "두번 봤다",
+      "copy_proposal": "두 번째 눈이 찾았다",
+      "source_motif": "겹쳐진 안경 두 개와 작은 별",
+      "source_storyline": "한 번 더 보니 보이지 않던 게 보였다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/034/background.svg",
+        "interior": "./assets/individual/034/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-035",
+      "visual_id": "BADGE_VISUAL_DRAFT_035",
+      "canonical_title": "계산 탐정",
+      "copy_proposal": "숫자의 알리바이",
+      "source_motif": "숫자 발자국을 쫓는 탐정",
+      "source_storyline": "계산이 삐끗한 곳에 작은 발자국이 있었다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/035/background.svg",
+        "interior": "./assets/individual/035/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-036",
+      "visual_id": "BADGE_VISUAL_DRAFT_036",
+      "canonical_title": "지우개 용사",
+      "copy_proposal": "지우개는 퇴각하지 않는다",
+      "source_motif": "지우개에서 자라는 새싹",
+      "source_storyline": "지운 자리에 더 좋은 생각이 자랐다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/036/background.svg",
+        "interior": "./assets/individual/036/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-037",
+      "visual_id": "BADGE_VISUAL_DRAFT_037",
+      "canonical_title": "생각이 길었다",
+      "copy_proposal": "장고 끝에 지도 한 장",
+      "source_motif": "길어진 실과 작은 등불",
+      "source_storyline": "생각이 길어진 건 길을 잃어서만은 아니야.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/037/background.svg",
+        "interior": "./assets/individual/037/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-038",
+      "visual_id": "BADGE_VISUAL_DRAFT_038",
+      "canonical_title": "생각의 동굴",
+      "copy_proposal": "동굴에 답이 살고 있다",
+      "source_motif": "생각 동굴 속 보석 같은 물음표",
+      "source_storyline": "동굴 깊은 곳에서 나만의 답을 찾아왔다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/038/background.svg",
+        "interior": "./assets/individual/038/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-039",
+      "visual_id": "BADGE_VISUAL_DRAFT_039",
+      "canonical_title": "막힘 돌파",
+      "copy_proposal": "막다른 길의 뒷문",
+      "source_motif": "갈림길을 비추는 랜턴",
+      "source_storyline": "막힌 길은 벽이 아니라 방향을 바꾸라는 표지판.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/039/background.svg",
+        "interior": "./assets/individual/039/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-040",
+      "visual_id": "BADGE_VISUAL_DRAFT_040",
+      "canonical_title": "오늘은 여기까지",
+      "copy_proposal": "멈춤도 실력입니다",
+      "source_motif": "안전하게 접힌 캠프 지도",
+      "source_storyline": "잘 멈추는 것도 탐험의 기술. 내일 다시 출발!",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/040/background.svg",
+        "interior": "./assets/individual/040/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-041",
+      "visual_id": "BADGE_VISUAL_DRAFT_041",
+      "canonical_title": "예상초과 탐험",
+      "copy_proposal": "지도 밖으로 한 발",
+      "source_motif": "지도 가장자리 밖의 작은 발자국",
+      "source_storyline": "지도 바깥까지 걸어본 뜻밖의 하루.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/041/background.svg",
+        "interior": "./assets/individual/041/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-042",
+      "visual_id": "BADGE_VISUAL_DRAFT_042",
+      "canonical_title": "시간 어디갔지?",
+      "copy_proposal": "시계 실종 사건",
+      "source_motif": "숨바꼭질하는 시계",
+      "source_storyline": "시계가 어디 갔지? 신나게 몰입한 흔적 발견.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/042/background.svg",
+        "interior": "./assets/individual/042/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-043",
+      "visual_id": "BADGE_VISUAL_DRAFT_043",
+      "canonical_title": "쉬고 다시",
+      "copy_proposal": "휴식 후 재접속",
+      "source_motif": "해먹과 다시 펼친 지도",
+      "source_storyline": "쉬고 나니 다시 보이는 오솔길.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/043/background.svg",
+        "interior": "./assets/individual/043/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-044",
+      "visual_id": "BADGE_VISUAL_DRAFT_044",
+      "canonical_title": "5분 지킴이",
+      "copy_proposal": "5분은 내가 지킨다",
+      "source_motif": "다섯 잎 나뭇잎 시계",
+      "source_storyline": "딱 5분을 지켜낸 작고 단단한 약속.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/044/background.svg",
+        "interior": "./assets/individual/044/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-045",
+      "visual_id": "BADGE_VISUAL_DRAFT_045",
+      "canonical_title": "유혹 피하기",
+      "copy_proposal": "딴길은 다음에",
+      "source_motif": "게임기 대신 지도 향하는 발자국",
+      "source_storyline": "유혹은 지나갔다. 탐험가는 자기 길로.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/045/background.svg",
+        "interior": "./assets/individual/045/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-046",
+      "visual_id": "BADGE_VISUAL_DRAFT_046",
+      "canonical_title": "책상 재등장",
+      "copy_proposal": "책상: 돌아온 주인",
+      "source_motif": "먼지 털고 돌아온 미니 책상",
+      "source_storyline": "책상에 돌아온 건 연필만이 아니었다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/046/background.svg",
+        "interior": "./assets/individual/046/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-047",
+      "visual_id": "BADGE_VISUAL_DRAFT_047",
+      "canonical_title": "밀린짐 정리",
+      "copy_proposal": "배낭의 질서 회복",
+      "source_motif": "정돈된 배낭 속 체크리스트",
+      "source_storyline": "밀린 짐에도 작은 칸부터 자리가 생겼다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/047/background.svg",
+        "interior": "./assets/individual/047/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-048",
+      "visual_id": "BADGE_VISUAL_DRAFT_048",
+      "canonical_title": "오늘 안 넘긴다",
+      "copy_proposal": "내일의 나에게 휴가를",
+      "source_motif": "달력 위에 내려놓은 작은 꾸러미",
+      "source_storyline": "내일의 나에게 오늘의 짐을 떠넘기지 않았다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/048/background.svg",
+        "interior": "./assets/individual/048/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-049",
+      "visual_id": "BADGE_VISUAL_DRAFT_049",
+      "canonical_title": "가볍게 끝!",
+      "copy_proposal": "마무리의 깃털",
+      "source_motif": "깃털과 도착 스탬프",
+      "source_storyline": "가볍게 마무리, 기분은 묵직한 성취.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/049/background.svg",
+        "interior": "./assets/individual/049/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-050",
+      "visual_id": "BADGE_VISUAL_DRAFT_050",
+      "canonical_title": "어려운거 먼저",
+      "copy_proposal": "큰 문부터 노크",
+      "source_motif": "작은 용사와 큰 문턱",
+      "source_storyline": "먼저 들어간 동굴에서 큰 용기를 가져왔다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/050/background.svg",
+        "interior": "./assets/individual/050/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-051",
+      "visual_id": "BADGE_VISUAL_DRAFT_051",
+      "canonical_title": "쉬운거부터!",
+      "copy_proposal": "작은 문부터 똑똑",
+      "source_motif": "낮은 징검다리와 출발 신발",
+      "source_storyline": "쉬운 길로 몸을 풀어 출발하는 것도 작전.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/051/background.svg",
+        "interior": "./assets/individual/051/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-052",
+      "visual_id": "BADGE_VISUAL_DRAFT_052",
+      "canonical_title": "방법 바꿔보기",
+      "copy_proposal": "열쇠는 하나가 아니지",
+      "source_motif": "두 모양의 열쇠가 든 도구 상자",
+      "source_storyline": "방법을 바꿨더니 새로운 문이 열렸다.",
+      "moment_rank": "FIELD",
+      "base_layers": {
+        "background": "./assets/individual/052/background.svg",
+        "interior": "./assets/individual/052/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-053",
+      "visual_id": "BADGE_VISUAL_DRAFT_053",
+      "canonical_title": "설명해볼게",
+      "copy_proposal": "말풍선의 연금술",
+      "source_motif": "말풍선이 펼치는 지도",
+      "source_storyline": "다른 사람에게 설명하니 내 생각도 선명해졌다.",
+      "moment_rank": "EXPEDITION",
+      "base_layers": {
+        "background": "./assets/individual/053/background.svg",
+        "interior": "./assets/individual/053/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-054",
+      "visual_id": "BADGE_VISUAL_DRAFT_054",
+      "canonical_title": "어제보다 익숙",
+      "copy_proposal": "어제의 나와 재회",
+      "source_motif": "다시 만난 단어 카드와 손짓",
+      "source_storyline": "같은 단서가 오늘은 조금 더 친해졌다.",
+      "moment_rank": "POCKET",
+      "base_layers": {
+        "background": "./assets/individual/054/background.svg",
+        "interior": "./assets/individual/054/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-055",
+      "visual_id": "BADGE_VISUAL_DRAFT_055",
+      "canonical_title": "깜짝 추가탐험",
+      "copy_proposal": "지도에 없던 보너스 스테이지",
+      "source_motif": "지도 옆 작은 팝업 깃발",
+      "source_storyline": "예고 없이 나타난 추가 퀘스트! 놀라지 않고 살펴봤다.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/055/background.svg",
+        "interior": "./assets/individual/055/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-056",
+      "visual_id": "BADGE_VISUAL_DRAFT_056",
+      "canonical_title": "계획 변경 성공",
+      "copy_proposal": "계획표의 유연체조",
+      "source_motif": "갈아 탄 종이배와 나침반",
+      "source_storyline": "길이 바뀌어도 목적지는 잃지 않았다.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/056/background.svg",
+        "interior": "./assets/individual/056/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-057",
+      "visual_id": "BADGE_VISUAL_DRAFT_057",
+      "canonical_title": "그래도 출발",
+      "copy_proposal": "준비 덜 됐어도 출항",
+      "source_motif": "살짝 열린 캠프 문과 발자국",
+      "source_storyline": "완벽히 준비되지 않아도 첫 걸음은 가능했다.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/057/background.svg",
+        "interior": "./assets/individual/057/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-058",
+      "visual_id": "BADGE_VISUAL_DRAFT_058",
+      "canonical_title": "충전하고 왔어",
+      "copy_proposal": "잠깐 쉬고, 다시 출항",
+      "source_motif": "햇볕 충전 배낭과 휴식 벤치",
+      "source_storyline": "잠깐 충전하고 돌아온 에너지가 반짝.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/058/background.svg",
+        "interior": "./assets/individual/058/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-059",
+      "visual_id": "BADGE_VISUAL_DRAFT_059",
+      "canonical_title": "탐험대와 해결",
+      "copy_proposal": "우리끼리 미니 원정대",
+      "source_motif": "맞잡은 손과 합쳐지는 지도",
+      "source_storyline": "혼자 못 풀 때 손을 잡으니 더 넓은 지도가 열렸다.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/059/background.svg",
+        "interior": "./assets/individual/059/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    },
+    {
+      "id": "BDG-DRAFT-060",
+      "visual_id": "BADGE_VISUAL_DRAFT_060",
+      "canonical_title": "오늘 좀 특별한데?",
+      "copy_proposal": "오늘의 별자리, 나만 알아",
+      "source_motif": "색다른 별자리를 품은 탐험 훈장",
+      "source_storyline": "정해둔 이름 말고, 오늘의 이야기로 붙인 특별 표장.",
+      "moment_rank": "SECRET",
+      "base_layers": {
+        "background": "./assets/individual/060/background.svg",
+        "interior": "./assets/individual/060/interior.svg"
+      },
+      "crew": null,
+      "shared_frame": "BADGE_UI_SHARED",
+      "shared_stars": "AWARD_LEDGER_RENDERED_ONLY",
+      "qa_status": "CREATED_STRUCTURAL_QA_PENDING_CI",
+      "approved": false,
+      "runtime_bound": false,
+      "active": false
+    }
+  ]
+}
