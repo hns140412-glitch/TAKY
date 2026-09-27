@@ -12,6 +12,10 @@ const earned={badge_id:'BDG-DRAFT-001',child_id:'CHILD_A',ownership_state:'EARNE
 const render=api.buildRenderModel(approved,earned,child);
 assert.equal(render.ok,true);
 assert.equal(render.star_count,3);
+assert.equal(api.buildRenderModel(approved,{...earned,star_count:0},child).ok,false);
+const layered={...approved,layers:{background:{approved:true,asset_ref:'assets/badges/001/background.webp'},interior:{approved:true,asset_ref:'assets/badges/001/interior.webp'},crew:{approved:true,asset_ref:'assets/crew/approved/crew.webp'},effect:{approved:true,asset_ref:'assets/badges/001/effect.webp'}}};
+assert.equal(api.buildRenderModel(layered,earned,child).ok,true);
+assert.equal(api.buildRenderModel({...layered,layers:{crew:{approved:false,asset_ref:'x'}}},earned,child).ok,false);
 assert.equal(render.character_overlay_ref,child.avatar_asset_ref);
 const earnedBaseOnly=api.buildRenderModel(approved,earned);
 assert.equal(earnedBaseOnly.ok,true);
@@ -43,6 +47,8 @@ const doc={createElement:tag=>new FakeNode(tag)};
 const host=new FakeNode('div');
 assert.equal(api.renderInto(host,approved,earned,child,doc).ok,true);
 assert.equal(host.dataset.badgeVisualState,'EARNED');
+assert.equal(api.renderInto(host,layered,earned,child,doc).ok,true);
+assert.equal(host.children[0].children.filter(x=>String(x.className).startsWith('takyBadgeLayer ')).length,4);
 assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,1);
 let ornament=host.children[0].children.find(x=>x.className==='takyBadgeReawardStars');
 assert.equal(ornament.children.length,3);
@@ -50,8 +56,10 @@ assert.equal(ornament.children.every(x=>x.className==='takyBadgeReawardStar'&&x.
 assert.equal(api.renderInto(host,approved,earned,{},doc).ok,true);
 assert.equal(host.dataset.badgeVisualState,'EARNED');
 assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,0);
-assert.equal(api.renderInto(host,approved,{...earned,star_count:0},{},doc).ok,true);
-assert.equal(host.children[0].children.some(x=>x.className==='takyBadgeReawardStars'),false);
+assert.equal(api.renderInto(host,approved,{...earned,star_count:0},{},doc).ok,false);
+assert.equal(host.children.length,0);
+assert.equal(api.renderInto(host,approved,{...earned,star_count:1},{},doc).ok,true);
+assert.equal(host.children[0].children.find(x=>x.className==='takyBadgeReawardStars').children.length,1);
 assert.equal(api.renderInto(host,approved,{...earned,star_count:5},{},doc).ok,true);
 assert.equal(host.children[0].children.find(x=>x.className==='takyBadgeReawardStars').children.length,5);
 
@@ -67,4 +75,4 @@ assert.match(css,/top: -7%/);
 assert.match(css,/clip-path: polygon/);
 assert.doesNotMatch(css,/\.is-empty/);
 assert.match(css,/data-badge-state="LOCKED"/);
-console.log('badge visual renderer reaward and layered states: PASS');
+console.log('badge visual renderer first-award one star and approved layers: PASS');
