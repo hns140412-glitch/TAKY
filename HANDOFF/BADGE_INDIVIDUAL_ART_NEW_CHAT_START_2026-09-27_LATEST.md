@@ -59,3 +59,17 @@ On DRAFT PR #163 (base: PR #160 branch, not main), newly added:
 - `BADGE/assets/test_badge_assets.py` plus UI CJS/ESM and managed compositor tests; existing UI CI runs all of them from one entry point. Original exact storyboard and parent #160 retain authority.
 
 **Important status:** 60 draft vector candidates and 120 source layers do exist; final visually accepted originals 0/60; approved individual child/Crew visual content 0; production binding/activation 0. Slot position and layer implementation must not be described as real reviewed characters or completed UI visual parity. Work OS HOLD, no Netlify, main merge, auto-award or catalog promotion. Next open: generate actual high-density individual originals, self-verify per story, approve true layered assets and placement with recorded evidence, then connect reviewed asset registry / true server ledger reader to apps. Exact PR HEAD and CI must always be refreshed after this HANDOFF save.
+
+---
+
+## LATEST VISUAL DETAIL — 001 WITTY DIRECTION + COMMON RIM / STAR / TIER (2026-09-27)
+
+The user positively received the compact pastel hand-drawn illustration direction for 001, but specifically asked to ensure the border, stars and tier expression are correctly applied. Treat this as **direction acceptance conditional on shared decoration**, NOT as approved finished individual PNG, all 60 art approvals, any child/Crew identity acceptance or runtime activation.
+
+Implementation on draft PR #163 only:
+- Both `BADGE/ui/badge-atlas.css` and `BADGE/badge-visual-presentation.css` use the SAME shared pastel rim SVG `BADGE/assets/shared/rim.svg`, independent of tier; original scene never contains this rim.
+- Single `BADGE/assets/shared/star-mask.svg` draws upper-arc stars; count 1–5 comes only from verified Ledger projection, `data-stars` drives proportional upper-arc positions in 64 / 120 / 200 / 320px layouts.
+- Only star fill color varies with GREEN/BLUE/RED/GOLD/PLATINUM; never multiply rim files by tier or bake stars into 60 interiors. Locked state must not pretend an award, and optional character/Crew remain their separate approved overlays.
+- Obsolete central CSS flex offsets were removed to avoid overriding the responsive arc. Both atlas and original read-only renderer have count/layout regression checks.
+- SOURCE STYLE priority: witty symbolic image readable at icon sizes, pastel hand-drawn texture, core detail and original badge storyline before scenery or hyper-realistic painting. In particular, blanket/bedding hill, pillow fort, morning sun, tiny ladder/lantern for 001. Do not replace original identity or generate a 60-tile contact sheet.
+- Prior 120 flat vector source assets still remain UNAPPROVED; their structural CI does not prove final visual quality. Recheck latest exact HEAD CI after this addendum. No merge, deployment or automatic award.
