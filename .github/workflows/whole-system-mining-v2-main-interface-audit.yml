@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/whole-system-mining-v2-main-interface-audit.yml'
       - 'ENFORCEMENT/tests/mining-v2-main-contract-audit.py'
+      - 'ENFORCEMENT/mining_v2_reference_gap_guard.py'
+      - 'ENFORCEMENT/tests/mining-v2-source-guard-audit.py'
   workflow_dispatch:
 
 permissions:
@@ -44,3 +46,5 @@ jobs:
           python-version: '3.12'
       - name: Exercise actual main Learning gap and separate Mining V2 plan contract
         run: python ENFORCEMENT/tests/mining-v2-main-contract-audit.py
+      - name: Assert current V26 pointer and fail-closed independently reviewed provider evidence
+        run: python ENFORCEMENT/tests/mining-v2-source-guard-audit.py
