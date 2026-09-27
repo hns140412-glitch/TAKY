@@ -84,6 +84,43 @@
     "preview_auth_not_production_auth": true,
     "parent_pr": 160,
     "art_pr": 163,
-    "scope_status": "CENTRAL_ASSET_LAYOUT_IMPLEMENTED; VISUAL_ART_FINAL_AND_APP_PRODUCTION_BINDING_STILL_OPEN"
+    "scope_status": "CENTRAL_ASSET_LAYOUT_IMPLEMENTED; VISUAL_ART_FINAL_AND_APP_PRODUCTION_BINDING_STILL_OPEN",
+    "shared_ornaments": {
+      "rim": "BADGE/assets/shared/rim.svg",
+      "star_shape": "BADGE/assets/shared/star-mask.svg",
+      "tier_palette": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ],
+      "star_arc_count": [
+        1,
+        5
+      ],
+      "source": "verified Award Ledger view only",
+      "size_contexts_px": [
+        64,
+        120,
+        200,
+        320
+      ],
+      "star_position": "responsive upper arc",
+      "rim_policy": "ONE_PASTEL_RIM_INDEPENDENT_OF_TIER",
+      "lock_policy": "shared greyed visual and mask; never invent earned stars",
+      "css": [
+        "BADGE/ui/badge-atlas.css",
+        "BADGE/badge-visual-presentation.css"
+      ],
+      "progress": "IMPLEMENTED_IN_DRAFT_CI_PENDING_EXACT_HEAD"
+    }
+  },
+  "visual_direction_001": {
+    "latest_user_feedback": "User positively received compact witty pastel hand-drawn blanket kingdom concept; asks for border and star/tier expression to be applied correctly.",
+    "design_direction": "COMPACT_WITTY_SYMBOLIC_HAND_DRAWN_PASTEL",
+    "motif": "blanket hill and pillow castle, dawn sun, small escape ladder and lantern",
+    "status": "DIRECTION_ACCEPTED_CONDITIONAL_NOT_FINAL_ASSET_APPROVAL",
+    "mandatory_revision": "source asset must be independently illustrated and separated from stars, rim, tier and optional characters; tiny-size QA against approved storyboard remains OPEN"
   }
 }
