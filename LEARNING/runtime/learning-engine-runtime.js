@@ -8,12 +8,17 @@ const EvidencePolicy=require('../policy/evidence-policy-bridge.js');
 const IndexedEvidence=require('../intake/indexed-evidence-handoff.js');
 const EvidenceGap=require('./evidence-gap.js');
 const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
+const ObservationReview=require('./observation-review-intent.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
 function derive(input={}){
   const evidence=Array.isArray(input.evidence)?input.evidence:[];
   const scope=input.scope||{};
+  const observationReview=Array.isArray(input.observation_only)
+    ?ObservationReview.prepare(input.observation_only,scope):null;
+  if(observationReview&&!observationReview.ok)
+    return {ok:false,reason:'OBSERVATION_REVIEW_INVALID',detail:observationReview};
 
   let indexedEvidence=null;
   let policyRequests=Array.isArray(input.evidence_policy_requests)?[...input.evidence_policy_requests]:[];
@@ -40,11 +45,17 @@ function derive(input={}){
     };
   }
 
-  const learnerState=Core.deriveSkillState(evidence,scope,input.state_options||{});
+  const learnerState=Core.deriveSkillState([
+    ...evidence,...(observationReview?.evidence||[])
+  ],scope,input.state_options||{});
   if(!learnerState.ok)return {ok:false,reason:'LEARNER_STATE_FAILED',detail:learnerState};
 
-  const feedback=Feedback.derive(learnerState);
-  if(!feedback.ok)return {ok:false,reason:'FEEDBACK_INTENT_FAILED',detail:feedback};
+  const baselineFeedback=Feedback.derive(learnerState);
+  if(!baselineFeedback.ok)return {ok:false,reason:'FEEDBACK_INTENT_FAILED',detail:baselineFeedback};
+  const feedback=observationReview
+    ?ObservationReview.augmentFeedback(baselineFeedback,observationReview)
+    :baselineFeedback;
+  if(!feedback.ok)return {ok:false,reason:'OBSERVATION_FEEDBACK_INVALID',detail:feedback};
 
   let readiness=null;
   if(input.prerequisite_graph){
@@ -87,6 +98,9 @@ function derive(input={}){
     evidence_gap:evidenceGap.gap,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
+      observation_review_policy:observationReview?.policy_version||null,
+      observation_review_evidence_ids:observationReview?.evidence_ids||[],
+      observation_review_digest_sha256:observationReview?.basis_digest_sha256||null,
       source_refs:indexedEvidence?.source_refs||[],
       learner_state_version:learnerState.core_version||null,
       feedback_contract:feedback.intent_contract||null,
