@@ -18,8 +18,10 @@ for(const tier of TIERS)for(let n=1;n<=5;n++){
 for(const n of [0,6,-1,1.5])assert.throws(()=>badgeStars(n,'green'));
 assert.throws(()=>badgeStars(1,'unknown'));
 const approved=()=>({approved:true,asset_ref:'individual-file.svg'});
-const a={approved:true,visualId:'BADGE_VISUAL_DRAFT_001',layers:{background:approved(),interior:approved(),frame:approved(),shadow:approved()}};
-assert.equal(!!validAsset(a),true);
-assert.equal(!!validAsset({...a,layers:{background:approved()}}),false,'missing layers must not be called finished');
-assert.equal(!!validAsset({...a,layers:{...a.layers,crew:{approved:false,asset_ref:'unreviewed.svg'}}}),false,'unapproved overlay forbidden');
-console.log('badge atlas contract: PASS — 60 unique entries, 5 tier colors, 1–5 stars, required independent layers');
+const a={approved:true,visualId:'BADGE_VISUAL_DRAFT_001',layers:{interior:approved()}};
+assert.equal(!!validAsset(a),true,'independent illustration alone is sufficient');
+assert.equal(!!validAsset({...a,layers:{}}),false,'individual interior art is required');
+assert.equal(!!validAsset({...a,layers:{interior:approved(),frame:approved()}}),false,'per-badge frame duplication is forbidden');
+assert.equal(!!validAsset({...a,layers:{...a.layers,crew:{approved:false,asset_ref:'unreviewed.svg'}}}),false,'unapproved crew overlay forbidden');
+assert.equal(!!validAsset({...a,layers:{interior:{approved:true,asset_ref:'https://invalid.example/a.svg'}}}),false,'external artwork path forbidden');
+console.log('badge atlas contract: PASS — 60 unique entries, 5 tier colors, 1–5 stars, individual art + shared frame');
