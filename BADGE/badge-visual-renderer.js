@@ -90,6 +90,7 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
   if(model.ownership_state==='EARNED'&&model.star_count>0){
     const stars=doc.createElement('div');
     stars.className='takyBadgeReawardStars';
+    stars.dataset.stars=String(model.star_count);
     stars.setAttribute('aria-label',model.star_count+'성');
     for(let i=0;i<model.star_count;i++){
       const star=doc.createElement('span');
