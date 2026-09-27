@@ -52,6 +52,7 @@ assert.equal(host.children[0].children.filter(x=>String(x.className).startsWith(
 assert.equal(host.children[0].children.filter(x=>x.className==='takyBadgeCharacterLayer').length,1);
 let ornament=host.children[0].children.find(x=>x.className==='takyBadgeReawardStars');
 assert.equal(ornament.children.length,3);
+assert.equal(ornament.dataset.stars,'3','verified count reaches the responsive shared star arc');
 assert.equal(ornament.children.every(x=>x.className==='takyBadgeReawardStar'&&x.textContent===undefined),true);
 assert.equal(api.renderInto(host,approved,earned,{},doc).ok,true);
 assert.equal(host.dataset.badgeVisualState,'EARNED');
@@ -75,4 +76,10 @@ assert.match(css,/top: -7%/);
 assert.match(css,/clip-path: polygon/);
 assert.doesNotMatch(css,/\.is-empty/);
 assert.match(css,/data-badge-state="LOCKED"/);
+
+assert.ok(css.includes("assets/shared/rim.svg"),'shared rim identical across Badge Atlas and renderer');
+assert.ok(css.includes("assets/shared/star-mask.svg"),'shared star shape is not baked into individual art');
+assert.ok(css.includes("container-type:inline-size"),'64/120/200/320px ornament sizing');
+for(let count=1;count<=5;count++)assert.ok(css.includes('data-stars="'+count+'"'),'star arc '+count);
+
 console.log('badge visual renderer first-award one star and approved layers: PASS');
