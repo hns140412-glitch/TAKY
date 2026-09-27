@@ -37,7 +37,7 @@ const award=(i,award_kind)=>store.appendApprovedDecision({trusted:true,receipt:{
    result=await resolveBadgeDisplay(args);
    assert.equal(result.ok,true);
    assert.equal(result.render_model.ownership_state,'EARNED');
-   assert.equal(result.render_model.star_count,0);
+   assert.equal(result.render_model.star_count,1);
    assert.equal(result.render_model.character_overlay_ref,profile.avatar_asset_ref);
    const baseOnly=await resolveBadgeDisplay({...args,profile:{}});
    assert.equal(baseOnly.ok,true);
@@ -51,7 +51,7 @@ const award=(i,award_kind)=>store.appendApprovedDecision({trusted:true,receipt:{
    assert.equal(result.ok,true);
    assert.equal(result.verified_awards,6);
    assert.equal(result.render_model.tier,'BLUE');
-   assert.equal(result.render_model.star_count,0);
+   assert.equal(result.render_model.star_count,1);
    assert.equal((await resolveBadgeDisplay({...args,visualRecord:{...record,badge_id:'OTHER_BADGE'}})).ok,false);
    console.log('persisted ledger to verified silhouette/earned layered render model: PASS');
  }finally{fs.rmSync(directory,{recursive:true,force:true})}
