@@ -95,10 +95,26 @@
   function validateEvidence(result,knownSourceIds=[]){
     const known=new Set((knownSourceIds||[]).map(clean).filter(Boolean));
     const unknown=[];
-    for(const item of result?.items||[]){
-      for(const id of item.evidence_source_ids||[]) if(!known.has(id)) unknown.push({result_id:item.result_id,source_id:id});
+    const missing=[];
+    const invalid_confidence=[];
+    for(const [index,item] of (result?.items||[]).entries()){
+      const result_id=clean(item?.result_id)||('item_'+index);
+      const ids=Array.isArray(item?.evidence_source_ids)?item.evidence_source_ids:[];
+      if(!ids.length) missing.push({result_id,reason:'EVIDENCE_SOURCE_REQUIRED'});
+      for(const id of ids){
+        const source_id=clean(id);
+        if(!known.has(source_id)) unknown.push({result_id,source_id});
+      }
+      if(item?.confidence!=null&&!Number.isFinite(item.confidence)){
+        invalid_confidence.push({result_id,reason:'NONFINITE_CONFIDENCE'});
+      }
     }
-    return {ok:unknown.length===0,unknown:Object.freeze(unknown)};
+    return {
+      ok:unknown.length===0&&missing.length===0&&invalid_confidence.length===0,
+      unknown:Object.freeze(unknown),
+      missing:Object.freeze(missing),
+      invalid_confidence:Object.freeze(invalid_confidence)
+    };
   }
 
   return Object.freeze({
