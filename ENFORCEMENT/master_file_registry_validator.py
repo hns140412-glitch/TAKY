@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
+from semantic_current_resolver import CurrentResolutionError, resolve_owner, resolve_promoted_data
 
 ROOT=Path(__file__).resolve().parents[1]
 master=ROOT/"MASTER"
@@ -23,6 +24,17 @@ for path,meta in entries.items():
         fail.append(f"LEGACY_DEFAULT_NOT_FALSE:{path}")
     if cls=="CANDIDATE" and meta.get("canonical") is not False:
         fail.append(f"CANDIDATE_CANONICAL_NOT_FALSE:{path}")
+
+# Consumer integration: validate the actual semantic owner resolution, not merely
+# the declarative alias path. No highest-REV/V discovery or fallback.
+for owner in registry.get("logical_owner_aliases", {}):
+    try:
+        if owner == "DATA_SEARCH_PROJECTION":
+            resolve_promoted_data(registry, ROOT)
+        else:
+            resolve_owner(registry, owner, ROOT)
+    except (CurrentResolutionError, OSError, ValueError, KeyError, TypeError) as exc:
+        fail.append(f"SEMANTIC_CURRENT_RESOLUTION_FAILED:{owner}:{exc}")
 
 # High-risk known artifacts must never silently become active.
 for path in (

@@ -1,6 +1,6 @@
-# TAKY GRAND MASTER LOGIC — REV_00 REMASTERED
+# TAKY GRAND MASTER LOGIC
 
-Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE / CANONICAL
+Status: PRE-FINALIZATION EVOLVING DESIGN SOURCE / CURRENT CANONICAL ON MAIN; revisionless naming transition proposed on work branch
 Role: Highest internal governance logic of TAKY.
 Canonical path: `MASTER/MASTER_LOGIC.md`
 
@@ -465,19 +465,15 @@ Resume verification:
 `FRESH SESSION ASSUMPTION → HANDOFF → LATEST CANONICAL → SOURCE POINTER RECOVERY → ACTUAL EVIDENCE → LAST VALID STATE → RECONSTRUCT → SOURCE COMPARE → OMISSION/CONFLICT/AUTHORITY/REGRESSION → RESUME PASS/FAIL/UNKNOWN`.
 Operational details remain governed by `MASTER/HANDOFF_PROTOCOL.md`.
 
-## 13. State, Lifecycle, Memory, History & Revision
+## 13. State, Lifecycle, Memory, History & Change Lineage
 Lifecycle:
 `DRAFT → CANDIDATE → VALIDATED → APPROVED → COMMITTED → RELEASED → SUPERSEDED`.
 
 Memory levels remain L0 TURN / L1 TASK / L2 PROJECT / L3 APPROVED PROJECT KNOWLEDGE / L4 DOMAIN / L5 MASTER GOVERNANCE.
 MEMORY = ROUTING/RECOVERY AID ≠ CANONICAL AUTHORITY. Do not store the entire TAKY system in conversational memory; retrieve canonical rules/evidence on demand.
 
-PRE-CONFIRMATION: ALL MASTER/GUIDE/DOMAIN/APP = REV_00.
-TEST/REVIEW/REMASTER/CANDIDATE CHANGE/REFLECTION SHALL NOT increment Revision.
-EXPLICIT USER FINALIZATION establishes first official Revision.
-WORK SNAPSHOT ≠ OFFICIAL REVISION.
-HISTORICAL FILE REVISION ≠ CURRENT OFFICIAL REVISION.
-Historical committed state SHALL remain recoverable and SHALL NOT be silently rewritten.
+Document authority SHALL be determined by semantic owner, verified namespace CURRENT and original change/approval evidence, never an increasing REV/V label or the newest-looking filename. Do not increment official document revision numbers for review, remaster, candidate, reflection or finalization. Finalization changes lifecycle/authority state and preserves an immutable Git/Drive/content-hash evidence point; it does not create a second numbered current master. Historical labels remain lineage-only and recoverable. Keep technical schema/API/data/release compatibility versions when consumers require them, but they do not establish document authority. Migration and compatibility rules are owned by `MASTER/REVISION_GOVERNANCE.md`.
+`WORK SNAPSHOT != CURRENT AUTHORITY`. `HISTORICAL REVISION LABEL != CURRENT AUTHORITY`. Historical committed state SHALL remain recoverable and SHALL NOT be silently rewritten.
 
 ## 14. Rollback / Snapshot & Delta-First Recovery
 Before canonical modification preserve a recoverable rollback point: canonical commit/snapshot, affected files/sections, delta, reason, systems, validation/regression and rollback target.
@@ -641,7 +637,7 @@ A repeated user correction across conversations is high-value evidence that the 
 `LESSON RECORDED ≠ LESSON VERIFIED ≠ SKILL/RULE PROMOTED ≠ REGRESSION PREVENTED`.
 
 ## 23. Canonical Remaster Status
-This `MASTER/MASTER_LOGIC.md` file is the active REV_00 canonical GRAND MASTER after the approved structural rewrite. The protected pre-remaster state remains recoverable through repository history and `MASTER/SNAPSHOT_PRE_REMASTER_REV00.md`. The candidate and migration files remain validation/history evidence and do not supersede this canonical path.
+This stable `MASTER/MASTER_LOGIC.md` path is the active GRAND MASTER on canonical main. Former REV_00 wording is preserved as historical evidence, not used to choose current authority. The protected pre-remaster state remains recoverable through repository history and `MASTER/SNAPSHOT_PRE_REMASTER_REV00.md`. The candidate and migration files remain validation/history evidence and do not supersede this canonical path.
 
 Known Baseline 01 source gaps remain `UNVERIFIED_SOURCE_COVERAGE`; canonical remaster completion SHALL NOT be misreported as full historical source recovery or runtime/implementation PASS.
 

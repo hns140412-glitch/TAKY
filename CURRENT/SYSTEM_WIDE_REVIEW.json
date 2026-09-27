@@ -1,0 +1,82 @@
+{
+  "namespace": "SYSTEM_WIDE_REVIEW",
+  "task_id": "TAKY_SYSTEM_WIDE_INTEGRATION_AND_CURRENT_CLEANUP",
+  "status": "ACTIVE_REVIEW__DRAFT_NOT_MAIN",
+  "goal": "Improve actual end-to-end growth/outcome across TAKY, Mining, Indexing, Central Learning, Planner, Ready, Hide and Snap; eliminate numbered-document CURRENT selection and stale references without erasing history.",
+  "authority": {
+    "canonical_repo": "hns140412-glitch/TAKY",
+    "verified_main_at_start": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+    "draft_pr": 162,
+    "working_branch": "review/revisionless-current-20260927",
+    "current_selection": "NAMESPACE_SEMANTIC_OWNER_PLUS_VERIFIED_SOURCE_AND_RECEIPT",
+    "last_verified_code_and_policy_head": "d62f9ec76659393079c8699352aeadcb89d86595",
+    "latest_branch_head_must_be_queried_live": true
+  },
+  "protected": [
+    "Think Again, Keep Your Key / Think Again, You're The Key / no slogan reinterpretation",
+    "USER != DEBUGGER",
+    "CLOSED inherited unless real regression",
+    "Work OS and ARCHI GROW feature work HOLD, last",
+    "Badge is owned in another chat; no edits",
+    "No main merge, production deploy, Netlify or unapproved paid service"
+  ],
+  "done": [
+    "Recovered main STATE, original revision policy, shared family master and master file registry",
+    "Verified 43/43 master-file classification and logical alias paths in draft",
+    "Verified unchanged body of shared-family contract against main",
+    "Introduced versionless document identity and immutable history policy in existing owner document on draft",
+    "Patched GRAND MASTER only header and revision/lineage sections in draft",
+    "Mapped DATA CURRENT promoted 679-source Drive IDs/receipt without reindex or copy",
+    "Created single stable C2S/REVISIONLESS_CURRENT_TRANSITION.md with source and functional gap matrix",
+    "Compared current three app main HEADs against open integration branches; recorded unmerged evidence chain gap in the same C2S matrix",
+    "Implemented read-only semantic_current_resolver.py: stable master/family owner aliases, fail-closed unknown/stale/duplicate/legacy path, data promoted ID selection without filename ordering",
+    "Added eight focused resolver tests and wired them into TAKY Enforcement Replay workflow",
+    "Independently fetched and cross-checked authenticated original Drive DATA source, utilization and promotion receipt IDs; 679 counts, no source loss and canonical:false receipt match",
+    "Added independently supplied receipt content crosscheck and negative ID/count/guard regression in semantic CURRENT resolver",
+    "Integrated semantic_current_resolver into existing ENFORCEMENT/master_file_registry_validator.py: actual authority registry CI now resolves every declared semantic owner and promoted DATA pointer, failing closed on mismatch"
+  ],
+  "evidence": {
+    "data_index_source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+    "data_utilization_id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s",
+    "data_promotion_receipt_id": "1OnnfRLofzOsQcr2snWAnzdU6ihRrYYG3eg_XFXNgg9w",
+    "data_promoted_source_count": 679,
+    "source_coverage": "MATERIAL_CURRENT_SOURCES_READ__PREVIOUS_CHAT_FULL_TRANSCRIPT_UNVERIFIED",
+    "draft_policy": "MASTER/REVISION_GOVERNANCE.md",
+    "transition_matrix": "C2S/REVISIONLESS_CURRENT_TRANSITION.md",
+    "product_main_snapshot_2026_09_27": {
+      "ready_set": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+      "hide_seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+      "snap_pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+      "note": "refresh live before action"
+    },
+    "integration_draft_status": {
+      "central_learning_pr": 159,
+      "hide_evidence_pr": 19,
+      "ready_roundtrip_pr": 100,
+      "ready_weekly_availability_pr": 93,
+      "merged_into_main": false
+    },
+    "semantic_current_resolver": "ENFORCEMENT/semantic_current_resolver.py",
+    "semantic_current_regression": "ENFORCEMENT/semantic_current_resolver_test.py",
+    "first_resolver_code_head": "c7ac3b26e9cc8240d96c298f12d544ea3de79372",
+    "drive_receipt_readback": {
+      "source_modified": "2026-09-25T13:40:13.229Z",
+      "utilization_modified": "2026-09-25T13:40:17.103Z",
+      "receipt_modified": "2026-09-25T13:41:43.309Z",
+      "matched": "SOURCE_ID_UTILIZATION_ID_679_COUNTS_NO_SOURCE_LOSS",
+      "scope": "SELECTED_RECEIPT_READBACK_NOT_EXHAUSTIVE_NEW_PROMOTION_DISCOVERY"
+    }
+  },
+  "open": [
+    "Read-only consumer/reference inventory for legacy REV/V physical paths; search miss is not source absence",
+    "Existing TAKY MASTER registry CI consumer migrated to semantic resolver; remaining handoff/app readers not yet migrated",
+    "Whole-system actual evidence path across source -> index -> central learning -> review-need -> Planner dated allocation -> app result; map real blockers rather than invent complete",
+    "Cross-app family/member isolation, live identity/server/outbox/ACK integration and device acceptance per owning project",
+    "Refresh this stable CURRENT after each independent verified batch; no new numbered copies",
+    "Review PR #159 and current individual app contracts for one end-to-end trusted member/evidence/Planner consumer acceptance slice without touching badges or Work OS",
+    "Bind real caller/consumer to semantic_current_resolver and authenticated receipt fetch rather than fixture-only CI; never silently infer source by newest version"
+  ],
+  "next": "Verify exact-head CI for integrated MASTER registry consumer; inventory remaining explicit numbered-path readers and migrate by owner without touching independent checkpoint schema or history.",
+  "implementation_status": "SEMANTIC_RESOLVER_BOUND_TO_EXISTING_TAKY_MASTER_REGISTRY_CI_CONSUMER_ON_DRAFT__APP_READERS_OPEN__NO_MAIN_MERGE",
+  "updated_at": "2026-09-27"
+}

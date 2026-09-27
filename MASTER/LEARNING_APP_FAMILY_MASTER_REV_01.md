@@ -1,7 +1,7 @@
-# Learning App Family Master — REV_00
+# Learning App Family Master
 
-> Status: REV_00 / PRE-CONFIRMATION; previously approved shared content preserved
-> Historical filename REV_01 is a lineage identifier, not official finalization.
+> Status: PRE-FINALIZATION / inherited approved shared content preserved; current authority requires owner and main-head verification.
+> Semantic owner: LEARNING_APP_FAMILY_MASTER. Existing numbered physical filename is a compatibility/lineage route, NOT a current selector; migrate callers before any rename.
 > Date: 2026-09-06
 > Scope: Ready & Set / Hide & Seek / Snap & Pop shared world, session, app-routing, Guide and PWA update contracts
 > Authority: TAKY / GRAND MASTER > applicable GUIDE / Family Learning OS rules > this shared capability contract > project masters > implementation
@@ -218,4 +218,4 @@ A release fails if any of the following occur:
 - Imagination Cloud becomes decorative or answer-generating,
 - child-defined island/base-camp names are lost after update.
 
-END — LEARNING APP FAMILY MASTER REV_00
+END — LEARNING APP FAMILY MASTER

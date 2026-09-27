@@ -2,6 +2,32 @@
   "registry_version": "2026-09-25.1",
   "purpose": "Classify every MASTER root artifact so location does not imply authority. Paths remain stable until a separately validated migration proves references will not break.",
   "authority_rule": "MASTER_DIRECTORY_PRESENCE != ACTIVE_CANONICAL_AUTHORITY",
+  "current_selection_rule": "Semantic owner/namespace CURRENT plus verified source ID/path and selection receipt. Never choose greatest REV/V label or newest-looking filename.",
+  "alias_migration_status": "DRAFT_WORK_BRANCH__READERS_NOT_VERIFIED__NO_RENAME_OR_PROMOTION",
+  "logical_owner_aliases": {
+    "TAKY_GRAND_MASTER": {
+      "path": "MASTER/MASTER_LOGIC.md",
+      "class": "ACTIVE_OWNER",
+      "alias_state": "STABLE_EXISTING_PATH"
+    },
+    "TAKY_CHANGE_HISTORY_POLICY": {
+      "path": "MASTER/REVISION_GOVERNANCE.md",
+      "class": "ACTIVE_OWNER",
+      "alias_state": "STABLE_EXISTING_PATH"
+    },
+    "LEARNING_APP_FAMILY_MASTER": {
+      "path": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "class": "ACTIVE_OWNER",
+      "alias_state": "LEGACY_PHYSICAL_PATH_WITH_STABLE_LOGICAL_ALIAS",
+      "physical_rename": "HOLD_UNTIL_ALL_CONSUMERS_MIGRATED"
+    },
+    "DATA_SEARCH_PROJECTION": {
+      "path": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json",
+      "class": "NAMESPACE_CURRENT_POINTER",
+      "alias_state": "STABLE_EXISTING_PATH",
+      "selection_rule": "Read promoted source/index Drive IDs and receipt in payload; do not choose V filename"
+    }
+  },
   "classes": {
     "ACTIVE_OWNER": "Normative semantic owner or active canonical protocol/template.",
     "ACTIVE_SUPPORT": "Machine-readable schema/registry/matrix or support artifact used by an active owner.",
@@ -18,12 +44,12 @@
     "MASTER/FAILURE_TAXONOMY.md": {"class":"ACTIVE_OWNER"},
     "MASTER/HANDOFF_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
     "MASTER/INTENT_EXECUTION_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
-    "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md": {"class":"ACTIVE_OWNER"},
-    "MASTER/MASTER_LOGIC.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md": {"class":"ACTIVE_OWNER","logical_id":"LEARNING_APP_FAMILY_MASTER"},
+    "MASTER/MASTER_LOGIC.md": {"class":"ACTIVE_OWNER","logical_id":"TAKY_GRAND_MASTER"},
     "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
     "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
     "MASTER/RECOVERY_FORENSICS_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
-    "MASTER/REVISION_GOVERNANCE.md": {"class":"ACTIVE_OWNER"},
+    "MASTER/REVISION_GOVERNANCE.md": {"class":"ACTIVE_OWNER","logical_id":"TAKY_CHANGE_HISTORY_POLICY"},
     "MASTER/TRACEABILITY_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
     "MASTER/UI_REFERENCE_PROTOCOL.md": {"class":"ACTIVE_OWNER"},
     "MASTER/VALIDATION_RULES.md": {"class":"ACTIVE_OWNER"},
@@ -56,6 +82,8 @@
       "class":"ACTIVE_SUPPORT",
       "authority_owner":"LEARNING_ENGINE_CORE",
       "source_authority":"LEARNING_DATA_COMPLETENESS_MATRIX_2026-09-23_V49.json",
+      "source_authority_status":"HISTORICAL_SOURCE_LABEL_NOT_VERIFIED_LIVE_CURRENT",
+      "current_authority_resolution":"LEARNING_ENGINE_CORE_AND_APPLICABLE_NAMESPACE_CURRENT; NO_FILENAME_FALLBACK",
       "runtime_role":"EVIDENCE_POLICY_REGISTRY"
     }
   }
