@@ -30,3 +30,15 @@ Latest change: atlas validAsset requires approved individual interior art; optio
 
 ## Resume execution order
 INHERIT APPROVED STATE -> CURRENT and latest HANDOFF -> exact main and PR HEAD -> CLOSED inherited -> OPEN only. Apply slogans in original meaning: Think Again, Keep Your Key / Think Again, You're The Key. USER != DEBUGGER. Next: deliver independent 001 art, verify no unwanted sheet/text/rim/star and visually compare against original approved style; then proceed badge by badge 002..060 with unique IDs and no automatic activation. Update UI binding only when each actual approved asset exists. Do not conflate generated proposal with approved runtime art. Run tests and visual comparison before claiming done. Do not stop for unnecessary approval questions, but do not bypass asset approval/merge/deploy gates.
+
+---
+
+## LATEST OVERRIDE — 60 VECTOR CANDIDATE ART + TRUE VISUAL QA (2026-09-27)
+
+After inheriting PR #160's state, work continued on a **separate draft PR #163** (`taky/badge-60-independent-scene-art-20260927`, base: PR #160 branch, NOT main). See `CURRENT/BADGE_INDIVIDUAL_ART_CURRENT_2026-09-27.json` and `BADGE/ui/ART_VISUAL_QA_2026-09-27.md`.
+
+Produced 60 individual candidate scene pairs: `BADGE/ui/assets/individual/001..060/{background,interior}.svg` = 120 distinct SVG files; source-anchored manifest and isolated single-scene inspector; CI additionally rendered 60 **independent** 1024px PNG previews (no contact sheet). Structural 60-ID mapping and raster QA at 64/120/200/320 passed. CI runs at inspected art HEAD `abd78c5175d708d76d1df0160f10fae7d142f334`: UI 36289956771 SUCCESS, Visual Registry 36289956704 SUCCESS; 60-PNG artifact ID 10921779029.
+
+**CRITICAL CORRECTION:** Actual preview images 001 and 026 were visually inspected and FAIL the approved high-density painterly illustration direction: too flat/simple. The other 58 are NOT certified by that sample. The 60 SVGs are rejectable structural **vector sketch candidates**, NOT finished or approved badge originals. Production-quality approved illustration count **0/60**; runtime binding and historical catalog activation **0**. Do not cite CI or image count to claim design fidelity or finished work. User does NOT want 60 per-artwork human approval loops; execution owner must self-QA as a batch against each unique storyline, motif, layer, art quality and approved six-screen image reference. Keep source references and prior CLOSED untouched.
+
+Next exact OPEN: replace draft illustrations with independently authored high-density originals, preserve individual layer separation and common rim/star/tier/lock, compare actual browser UI against the user-supplied original. No new storyboard, no arbitrary Crew, no concept-sheet crops, no auto asset approval/activation, no main merge, Work OS or Netlify.
