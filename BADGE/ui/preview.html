@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>배지 도감 — 구현 검증용</title><link rel="stylesheet" href="./badge-atlas.css"></head>
+<body style="margin:0;background:#fff8e8"><div id="app"></div>
+<script type="module">
+import {mountBadgeAtlas} from './badge-atlas.js';
+// Isolated preview only. Real awards and assets must come from verified runtime sources.
+// No fabricated awards or cropped storyboard images are injected here.
+const ui=mountBadgeAtlas(document.getElementById('app'),{
+ assets:{},awards:{},
+ onNavigate:key=>{document.getElementById('preview-status').textContent='외부 화면 연결 대기: '+key},
+ onOpen:id=>{document.getElementById('preview-status').textContent='상세 화면: '+id},
+ onShare:id=>{document.getElementById('preview-status').textContent='공유 연결 대기: '+id}
+});
+window.badgePreview=Object.freeze({showAward:id=>ui.showAward(id),refresh:awards=>ui.refresh(awards)});
+</script><output id="preview-status" aria-live="polite" style="position:fixed;top:0;left:0;z-index:30;font:12px sans-serif;background:#fff9;padding:3px"></output></body></html>
