@@ -82,6 +82,31 @@ const parse=r=>JSON.parse(r.body);
   assert(d.runtime_result.decision.pedagogical_actions.some(x=>
    x.intent==='RETRIEVAL_CHECKPOINT'&&x.basis.includes('HIDE_MEMORY_ADVISORY_ONLY')));
   assert(!advised.body.includes('planner_date'));
+  const checkpoint={
+   packet_id:'ready-set:checkpoint-feedback-1',source_app:'ready-set',
+   context:scope,event:{source:'ready-set',type:'READY_LEARNING_OBSERVATION',
+    event_id:'checkpoint-feedback-1',occurred_at:'2026-09-27T03:00:00.000Z',
+    payload:{...scope,source_task_id:'checkpoint-task-1',
+     source_planner_todo_id:'central-todo-1',observation_only:true,
+     global_mastery_claim:false,evidence_type:'CHILD_SELF_REPORT',
+     instrument_version:'READY_CENTRAL_CHECKPOINT_V1',ready_state:'PARTIAL',
+     actual_minutes:2,checkpoint_completion_is_verified_recall:false}}
+  };
+  const checkpointAck=await evidence.handle(request(Evidence.ENDPOINT,checkpoint));
+  assert.equal(checkpointAck.status,200,JSON.stringify(parse(checkpointAck)));
+  assert.equal(parse(checkpointAck).acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+  const afterCheckpoint=await store.getWithMetadata(Durable.stateKey({context:scope}),
+   {type:'json',consistency:'strong'});
+  const progress=afterCheckpoint.data.observation_only.find(
+   x=>x.event_id==='checkpoint-feedback-1');
+  assert.equal(progress.evidence_type,'CHILD_SELF_REPORT');
+  assert.equal(progress.raw_app_signals.ready_state,'PARTIAL');
+  assert.equal(progress.raw_app_signals.actual_minutes,2);
+  assert.equal(progress.verified_outcome,null);
+  assert.equal(Object.keys(afterCheckpoint.data.scope_receipts).length,0);
+  const reread=await decision.handle(request(Decision.ENDPOINT,scope));
+  assert.equal(parse(reread).runtime_result.trace.verified_evidence_count,0);
+  assert.equal(parse(reread).runtime_result.trace.observation_review_evidence_count,1);
   const latest=await store.getWithMetadata(Durable.stateKey({context:scope}),
    {type:'json',consistency:'strong'});
   assert.equal(Object.keys(latest.data.scope_receipts).length,0);
