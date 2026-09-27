@@ -45,9 +45,9 @@ function derive(input={}){
     };
   }
 
-  const learnerState=Core.deriveSkillState([
-    ...evidence,...(observationReview?.evidence||[])
-  ],scope,input.state_options||{});
+  // Observation-only review signals inform an explicit pedagogical intent,
+  // never learner performance counts, strength trends or estimator inputs.
+  const learnerState=Core.deriveSkillState(evidence,scope,input.state_options||{});
   if(!learnerState.ok)return {ok:false,reason:'LEARNER_STATE_FAILED',detail:learnerState};
 
   const baselineFeedback=Feedback.derive(learnerState);
@@ -72,7 +72,8 @@ function derive(input={}){
   const decision=Decision.derive({
     learner_state:learnerState,
     feedback_intent:feedback,
-    prerequisite_readiness:readiness
+    prerequisite_readiness:readiness,
+    observation_review_actionable:observationReview?.actionable===true
   });
   if(!decision.ok)return {ok:false,reason:'RUNTIME_DECISION_FAILED',detail:decision};
 
