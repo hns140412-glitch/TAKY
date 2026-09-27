@@ -23,6 +23,8 @@ const parse=r=>JSON.parse(r.body);
   const evidence=Evidence.create({store,verifyBearerToken:verify});
   const decision=Decision.create({store,verifyBearerToken:verify});
   const summary={authority:'SPECIALIST_MEMORY_ADVISORY_ONLY',
+   reviewPolicyOwner:'TAKY_LEARNING_ENGINE_CORE',
+   scheduleOwner:'READY_SET_PLANNER',
    prioritySemantics:'ADVISORY_SIGNAL_NOT_DATE',
    averageMemoryStrength:41,reviewAdvisories:[
     {lexicalId:'word-a',nextReviewPriority:80,advisoryOnly:true}]};
@@ -31,7 +33,7 @@ const parse=r=>JSON.parse(r.body);
     type:'READY_LEARNING_OBSERVATION',occurred_at:'2026-09-27T01:00:00.000Z',
     payload:{...scope,source_task_id:'task-1',observation_only:true,
      global_mastery_claim:false,evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',
-     instrument_version:'HIDE_SPECIALIST_RESULT_V1',
+     instrument_version:'HIDE_SPECIALIST_RESULT_V2',
      forwarded_source_app:'hide-seek',ready_state:'COMPLETED',
      memorySummary:summary}}};
   const ack=await evidence.handle(request(Evidence.ENDPOINT,packet));
