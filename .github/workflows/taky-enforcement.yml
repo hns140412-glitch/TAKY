@@ -237,6 +237,8 @@ jobs:
           node --check LEARNING/transport/central-learning-http-endpoint.js
           node LEARNING/transport/central-learning-http-endpoint.test.js
           node LEARNING/transport/durable-evidence-commit-ack.test.js
+          node --check LEARNING/transport/central-learning-decision-http-endpoint.js
+          node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Validate Google subject and server membership + real Node central learning HTTP bridge
         run: |
           node --check LEARNING/transport/google-learning-principal.js
