@@ -69,7 +69,7 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
   figure.dataset.badgeVisualId=model.visual_id;
   figure.dataset.badgeState=model.ownership_state;
   figure.dataset.badgeStars=String(model.star_count);
-  figure.dataset.badgeTier=model.tier.toUpperCase();
+  figure.dataset.badgeTier=(model.tier||'NONE').toUpperCase();
   const base=doc.createElement('img');
   base.className='takyBadgeBaseArt';
   base.src=model.base_asset_path;
@@ -85,7 +85,7 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
     character.decoding='async';
     figure.append(character);
   }
-  // The upper-arc ornament represents earned reacquisitions only: zero has no stars.
+  // The upper-arc ornament includes the first verified award (one star).
   // Keep the art and child profile separate from the progress ornament.
   if(model.ownership_state==='EARNED'&&model.star_count>0){
     const stars=doc.createElement('div');
