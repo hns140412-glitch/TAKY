@@ -1,4 +1,4 @@
-name: Whole-System Ready Snap Paired Audit
+name: Whole-System Learning Family Paired Audit
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/whole-system-ready-snap-paired-audit.yml'
       - 'ENFORCEMENT/tests/whole-system-ready-snap-paired.spec.js'
+      - 'ENFORCEMENT/tests/whole-system-ready-hide-paired.spec.js'
   workflow_dispatch:
 
 permissions:
@@ -32,10 +33,18 @@ jobs:
           ref: 8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40
           path: snap
           persist-credentials: false
+      - name: Checkout exact Hide V2 Draft #12 source (no merge)
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: 1ccbd372890ba079accadb86e7610cd3fdad240a
+          path: hide
+          persist-credentials: false
       - name: Assert exact independent source commit IDs
         run: |
           test "$(git -C ready rev-parse HEAD)" = "9c8df0fc72aea3d07a4c59eb432be541bf4a5c44"
           test "$(git -C snap rev-parse HEAD)" = "8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40"
+          test "$(git -C hide rev-parse HEAD)" = "1ccbd372890ba079accadb86e7610cd3fdad240a"
       - name: Prepare browser fixture
         uses: actions/setup-node@v4
         with:
@@ -48,11 +57,12 @@ jobs:
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 --directory ready > /tmp/taky-audit-ready.log 2>&1 &
           python3 -m http.server 4174 --bind 127.0.0.1 --directory snap > /tmp/taky-audit-snap.log 2>&1 &
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory hide > /tmp/taky-audit-hide.log 2>&1 &
           for i in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:4173/ >/dev/null && curl -fsS http://127.0.0.1:4174/ >/dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null && curl -fsS http://127.0.0.1:4174/ >/dev/null && curl -fsS http://127.0.0.1:4175/v2.html >/dev/null; then exit 0; fi
             sleep 1
           done
-          cat /tmp/taky-audit-ready.log /tmp/taky-audit-snap.log
+          cat /tmp/taky-audit-ready.log /tmp/taky-audit-snap.log /tmp/taky-audit-hide.log
           exit 1
-      - name: Run actual two-origin Ready → Snap → Ready contextual evidence fixture
-        run: npx playwright test ENFORCEMENT/tests/whole-system-ready-snap-paired.spec.js --reporter=line
+      - name: Run actual three-source paired Ready → Snap and Ready → Hide browser fixtures
+        run: npx playwright test ENFORCEMENT/tests/whole-system-ready-snap-paired.spec.js ENFORCEMENT/tests/whole-system-ready-hide-paired.spec.js --reporter=line
