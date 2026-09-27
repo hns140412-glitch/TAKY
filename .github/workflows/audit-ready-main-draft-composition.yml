@@ -1,0 +1,67 @@
+name: Audit Ready Main Plus Cross-App Draft Composition
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - 'ENFORCEMENT/tests/ready-main-draft-composition.py'
+      - '.github/workflows/audit-ready-main-draft-composition.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  combined-source-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Ready-Set
+          ref: 98df214a6078f16f2b6710016898a4d7798798db
+          path: ready-base
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Ready-Set
+          ref: 1d672d862cc8329a5f19ca91c9ed6a338752f5ae
+          path: ready-main
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Ready-Set
+          ref: 9c8df0fc72aea3d07a4c59eb432be541bf4a5c44
+          path: ready-draft
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Byte-verify disjoint source changes and assemble disposable combined tree
+        run: python ENFORCEMENT/tests/ready-main-draft-composition.py ready-base ready-main ready-draft combined
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate retained main-owned Learning and world-state consumer
+        run: node scripts/validate-learning-runtime-bridge.mjs
+        working-directory: combined
+      - name: Verify ready and cross-app static contracts
+        run: |
+          node tests/shared-runtime-contract.test.js
+          node tests/ready-snap-run-scope.test.js
+        working-directory: combined
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+        working-directory: combined
+      - name: Serve composed source on isolated loopback
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory combined > /tmp/ready-audit-combined.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ready-audit-combined.log
+          exit 1
+      - name: Run all existing product Playwright browser regressions on composed source
+        run: npx playwright test tests/*.spec.js --reporter=line
+        working-directory: combined
