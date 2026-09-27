@@ -484,6 +484,14 @@
       "external_provider_evaluation": {
         "status": "REFERENCE_ONLY__NO_LIVE_PROVIDER_ROUTING_OR_KEY",
         "intake": "NVIDIA carousel and moodmode.ai creator-discovery pattern; cross-check each claim with original provider terms, endpoint status and test evidence.",
+        "discovery_sources": [
+          {"url": "https://www.instagram.com/moodmode.ai/", "role": "CREATOR_WATCHLIST", "access": "PROFILE_IDENTIFIED_POST_FEED_NOT_FULLY_RETRIEVED"},
+          {"url": "https://futuretools.io/", "role": "TOOL_DISCOVERY_ONLY"},
+          {"url": "https://www.therundown.ai/tools", "role": "CURATED_TOOL_DISCOVERY_ONLY"},
+          {"url": "https://huggingface.co/models?sort=trending", "role": "MODEL_CARD_AND_TREND_DISCOVERY"},
+          {"url": "https://www.producthunt.com/topics/artificial-intelligence", "role": "PRODUCT_DISCOVERY_AND_USER_FEEDBACK"}
+        ],
+        "source_promotion_rule": "Social/curated mention -> exact post/claim if accessible -> original vendor model card/docs/terms -> permitted nonpersonal task pilot -> owner disposition. Advertorial, popularity, screenshots and model card alone cannot prove free production use or runtime quality.",
         "candidate_sources": [
           "https://build.nvidia.com/models",
           "https://docs.api.nvidia.com/nim/docs/product",
