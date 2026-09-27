@@ -54,6 +54,37 @@ const parse=r=>JSON.parse(r.body);
    'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
   const replay=await evidence.handle(request(Evidence.ENDPOINT,packet));
   assert.equal(parse(replay).duplicate,true);
-  console.log('READY_HIDE_CENTRAL_OBSERVATION_PASS: memory evidence remains lossless observation without verified promotion or Planner dates');
+  // An explicitly labeled Hide memory advisory can trigger another check,
+  // but it remains unverified and cannot become a score or a date.
+  const actionable=structuredClone(packet);
+  actionable.packet_id='ready-set:ready-observation-2';
+  actionable.event.event_id='ready-observation-2';
+  actionable.event.occurred_at='2026-09-27T02:00:00.000Z';
+  actionable.event.payload.memorySummary.reviewAdvisories=[{
+   lexicalId:'word-a',nextReviewPriority:80,
+   advisoryOnly:true,evidenceBasis:'HIDE_MEMORY_EVIDENCE',
+   needsUnassistedRecall:true
+  }];
+  const advisoryAck=await evidence.handle(request(Evidence.ENDPOINT,actionable));
+  assert.equal(advisoryAck.status,200,JSON.stringify(parse(advisoryAck)));
+  assert.equal(parse(advisoryAck).acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+  const advised=await decision.handle(request(Decision.ENDPOINT,scope));
+  assert.equal(advised.status,200,JSON.stringify(parse(advised)));
+  const d=parse(advised);
+  assert.equal(d.runtime_result.trace.verified_evidence_count,0);
+  assert.equal(d.runtime_result.trace.verified_receipt_id,null);
+  assert.equal(d.runtime_result.trace.basis_kind,'OBSERVATION_ADVISORY_ONLY');
+  assert.equal(d.runtime_result.trace.observation_review_evidence_count,1);
+  assert.equal(d.observation_proof_promotion,false);
+  assert.equal(d.observation_only_excluded,false);
+  assert.equal(d.runtime_result.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
+  assert.equal(d.runtime_result.decision.adaptive_plan.add_retrieval_checkpoint,true);
+  assert(d.runtime_result.decision.pedagogical_actions.some(x=>
+   x.intent==='RETRIEVAL_CHECKPOINT'&&x.basis.includes('HIDE_MEMORY_ADVISORY_ONLY')));
+  assert(!advised.body.includes('planner_date'));
+  const latest=await store.getWithMetadata(Durable.stateKey({context:scope}),
+   {type:'json',consistency:'strong'});
+  assert.equal(Object.keys(latest.data.scope_receipts).length,0);
+  console.log('READY_HIDE_CENTRAL_OBSERVATION_PASS: durable advisory -> central retrieval checkpoint intent; no verified proof, mastery or Planner date');
  }finally{await fs.rm(root,{recursive:true,force:true})}
 })().catch(e=>{console.error(e);process.exitCode=1});
