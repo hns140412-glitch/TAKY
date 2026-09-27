@@ -432,9 +432,10 @@
       "mechanism_contract": {
         "manifest_rule": "normalize source identity/mime/size and explicit analyzability without inferring document meaning",
         "request_rule": "build provider-agnostic ingest request with opaque source and metadata",
-        "result_rule": "normalize provider output into opaque result items linked to evidence source ids",
+        "result_rule": "normalize provider output into opaque result items linked to evidence source ids; validation fails closed on malformed result, repeated result IDs or nonfinite optional numeric confidence",
         "evidence_rule": "validate result evidence source ids are nonempty and reference known sources; reject nonfinite optional numeric confidence; domain meaning and thresholds remain consumer-owned",
-        "confidence_rule": "confidence is optional finite numeric metadata; provider-specific scale and threshold meaning remain consumer-owned"
+        "confidence_rule": "confidence is optional finite numeric metadata; provider-specific scale and threshold meaning remain consumer-owned",
+        "request_binding_rule": "validateForRequest binds normalized result to exact request_id and only the analyzable source IDs in its canonical manifest, excluding reference-only or unsupported input"
       },
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
@@ -448,7 +449,8 @@
         "generic result evidence cannot reference unknown source ids",
         "a result item with no evidence source id or nonfinite confidence does not pass generic evidence validation",
         "shared primitive does not define OCR prompts, extracted business fields, review authority or commit semantics",
-        "consumer may retain provider-specific transport and domain-specific interpretation"
+        "consumer may retain provider-specific transport and domain-specific interpretation",
+        "request-bound validation excludes nonanalyzable reference images and rejects stale request IDs"
       ],
       "consumer_evidence": {
         "Ready-Set": {
