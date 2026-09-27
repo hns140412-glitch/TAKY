@@ -27,3 +27,18 @@ jobs:
         run: node BADGE/badge-visual-renderer.test.js
       - name: Independently-authored 60 artwork structural QA
         run: python3 BADGE/ui/test_individual_art_60.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated SVG raster QA dependencies
+        run: python -m pip install cairosvg pillow
+      - name: Raster integration QA at 64/120/200/320 px
+        run: python BADGE/ui/render_individual_art_60.py
+      - name: Archive 60 separate illustration previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: badge-60-independent-scene-candidates
+          path: |
+            BADGE/ui/rendered-individual-candidates/*.png
+            BADGE/ui/badge-individual-art-60-candidates.json
+          retention-days: 14
