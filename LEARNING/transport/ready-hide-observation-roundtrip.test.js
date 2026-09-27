@@ -79,6 +79,7 @@ const parse=r=>JSON.parse(r.body);
   assert.equal(d.observation_only_excluded,false);
   assert.equal(d.runtime_result.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
   assert.equal(d.runtime_result.decision.adaptive_plan.add_retrieval_checkpoint,true);
+  assert.deepEqual(d.runtime_result.decision.adaptive_plan.target_learning_ids,['word-a']);
   assert(d.runtime_result.decision.pedagogical_actions.some(x=>
    x.intent==='RETRIEVAL_CHECKPOINT'&&x.basis.includes('HIDE_MEMORY_ADVISORY_ONLY')));
   assert(!advised.body.includes('planner_date'));
