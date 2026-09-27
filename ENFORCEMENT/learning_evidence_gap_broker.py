@@ -32,6 +32,25 @@ def _eligible(hit,gap):
     if auth and hit.get("authority_class") not in auth:return False
     return True
 
+# V26 retains descriptive authority labels such as AUTHORITY_LAYER rather
+# than silently converting source metadata to OFFICIAL. This is a *review
+# candidate*, never an equivalent trusted official class or domain approval.
+# Keep the set narrow: uncertain/historical/derived labels do not qualify.
+OFFICIAL_TAXONOMY_REVIEW_CANDIDATES=frozenset({"AUTHORITY_LAYER"})
+
+def _pending_authority_review(hit,gap):
+    if not isinstance(hit,dict):return False
+    fam=set(gap.get("acceptable_source_families") or [])
+    auth=set(gap.get("acceptable_authority_classes") or [])
+    if "OFFICIAL" not in auth:return False
+    if fam and hit.get("source_family") not in fam:return False
+    if hit.get("authority_class") not in OFFICIAL_TAXONOMY_REVIEW_CANDIDATES:return False
+    ref=hit.get("source_ref") or {}
+    # No source_ref, no safe escalation. A search label alone is not proof.
+    return isinstance(ref,dict) and bool(ref.get("source_id")) and (
+        ref.get("source_id")==hit.get("source_id")) and bool(
+        ref.get("locator") or (hit.get("provenance") or {}).get("origin_locator"))
+
 def route_gap(gap:dict[str,Any],*,index_path:Path,min_results:int=1,consumer:str="LEARNING_ENGINE")->dict[str,Any]:
     if not isinstance(gap,dict): return {"pass":False,"detected":["EVIDENCE_GAP_REQUIRED"]}
     if gap.get("owner")!="LEARNING_ENGINE_CORE": return {"pass":False,"detected":["EVIDENCE_GAP_OWNER_INVALID"]}
@@ -70,6 +89,39 @@ def route_gap(gap:dict[str,Any],*,index_path:Path,min_results:int=1,consumer:str
             "decision":"INDEX_REQUERY","mining_request":None,
             "retrieval":{**result,"eligible_results":eligible},
             "invariant":"INDEX_FIRST__MINING_ONLY_IF_REFERENCE_EVIDENCE_INSUFFICIENT"
+        }
+
+    # Source already found under V26's descriptive authority taxonomy can
+    # be held for independent authority review. Do not auto-convert it to an
+    # OFFICIAL result, but also do not send unnecessary external Mining until
+    # the candidate's review is resolved. The ORIGINAL index/class stays intact.
+    pending=[x for x in result.get("results",[]) if _pending_authority_review(x,gap)]
+    if len(eligible)+len(pending)>=min_results:
+        return {
+            "pass":True,"version":VERSION,"gap_id":gap.get("gap_id"),
+            "index_checked":True,"index_sufficient":False,
+            "decision":"INDEX_AUTHORITY_REVIEW_REQUIRED","mining_request":None,
+            "authority_review_request":{
+                "request_type":"INDEPENDENT_INDEX_SOURCE_AUTHORITY_REVIEW",
+                "scope":gap.get("scope") or {},
+                "requested_authority_classes":gap.get("acceptable_authority_classes") or [],
+                "source_candidates":[{
+                    "source_id":hit["source_id"],
+                    "source_ref":hit["source_ref"],
+                    "source_family":hit.get("source_family"),
+                    "source_authority_literal":hit.get("authority_class"),
+                    "review_status":"PENDING_INDEPENDENT_SOURCE_VERIFICATION",
+                } for hit in pending],
+                "guards":{
+                    "raw_authority_label_preserved":True,
+                    "candidate_is_not_official_proof":True,
+                    "candidate_is_not_learning_authorization":True,
+                    "no_automatic_mining_or_index_promotion":True,
+                }
+            },
+            "retrieval":{**result,"eligible_results":eligible,
+                         "authority_review_candidates":pending},
+            "invariant":"INDEX_FIRST__UNCERTAIN_EXISTING_AUTHORITY_REVIEW_BEFORE_EXTERNAL_MINING"
         }
 
     request={
