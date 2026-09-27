@@ -19,6 +19,7 @@ on:
       - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
+      - 'ENFORCEMENT/learning_index_authority_review_test.py'
       - 'ENFORCEMENT/reference_intake_executor.py'
       - 'ENFORCEMENT/reference_intake_executor_test.py'
       - 'ENFORCEMENT/runtime_orchestrator.py'
@@ -54,6 +55,9 @@ jobs:
       - name: Index-first evidence gap broker
         working-directory: ENFORCEMENT
         run: python learning_evidence_gap_broker_test.py
+      - name: V26 descriptive authority requires independent review before Mining
+        working-directory: ENFORCEMENT
+        run: python learning_index_authority_review_test.py
       - name: Full Mining Indexing Learning growth E2E
         working-directory: ENFORCEMENT
         run: python cross_engine_growth_e2e_test.py
