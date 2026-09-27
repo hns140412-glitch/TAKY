@@ -69,6 +69,7 @@ function renderInto(host,record={},ownership={},profile={},doc=globalThis.docume
   figure.dataset.badgeVisualId=model.visual_id;
   figure.dataset.badgeState=model.ownership_state;
   figure.dataset.badgeStars=String(model.star_count);
+  figure.dataset.badgeTier=model.tier.toUpperCase();
   const base=doc.createElement('img');
   base.className='takyBadgeBaseArt';
   base.src=model.base_asset_path;
