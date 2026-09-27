@@ -365,7 +365,7 @@ export const TIERS=['green','blue','red','gold','platinum'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validAsset=a=>a?.approved===true&&/^BADGE_VISUAL_DRAFT_\d{3}$/.test(a?.visualId||'')&&a?.layers&&['background','interior','frame','shadow'].every(k=>a.layers[k]?.approved===true&&a.layers[k]?.asset_ref)&&Object.values(a.layers).every(l=>l?.approved===true&&safeAssetRef(l?.asset_ref));
 const layerOrder=['shadow','background','interior','crew','foreground','frame','effect'];
-const safeAssetRef=ref=>typeof ref==='string'&&/^(?:\\.\\/|\\.\\.\\/|\\/)?[a-zA-Z0-9_./-]+\\.(?:png|webp|svg|avif)$/.test(ref)&&!ref.includes('..\\/..');
+const safeAssetRef=ref=>typeof ref==='string'&&ref.length<240&&!ref.includes('..')&&!ref.includes(':')&&!ref.includes('?')&&!ref.includes('#')&&['.png','.webp','.svg','.avif'].some(ext=>ref.toLowerCase().endsWith(ext))&&Array.from(ref).every(ch=>'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-'.includes(ch));
 export function badgeStars(n,tier){if(!Number.isInteger(n)||n<1||n>5||!TIERS.includes(tier))throw Error('Invalid stars/tier');return '<span class="badge-stars tier-'+tier+'" aria-label="'+n+'성">'+Array.from({length:n},()=>'<i class="badge-star" aria-hidden="true"></i>').join('')+'</span>'}
 export function mountBadgeAtlas(root,{assets={},awards={},onOpen=()=>{},onShare=()=>{},onNavigate=()=>{}}={}){
  if(!root)throw Error('root required');let screen='home',filter='all',selected=null,category='all',celebrating=null;
