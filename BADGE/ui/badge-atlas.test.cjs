@@ -77,3 +77,5 @@ assert.match(css,/assets\/shared\/rim\.svg/);
 assert.match(css,/badge-character-front/);
 assert.match(css,/prefers-reduced-motion/);
 console.log('Badge atlas overlay contract PASS — 60 identities, approved base-only, separate optional same-child overlays, safe placement, shared assets, fail closed.');
+// Keep the original ES-module source/copy and candidate-registry regressions in the existing CI entry point.
+require('node:child_process').execFileSync(process.execPath,['--test',path.join(__dirname,'badge-atlas.test.mjs')],{stdio:'inherit'});
