@@ -35,7 +35,8 @@ function prepare(rows=[],scope={}){
     needsUnassistedRecall:x.needsUnassistedRecall===true,
     advisoryOnly:true,evidenceBasis:'HIDE_MEMORY_EVIDENCE'}));
   if(!advisories.length)continue;
-  const strength=Number(row.memory.average_strength);
+  const strength=typeof row.memory.average_strength==='number'?
+   row.memory.average_strength:null;
   evidence.push({
    event_id:row.event_id,observed_at:row.observed_at,
    member_id:scope.member_id,subject:scope.subject,
