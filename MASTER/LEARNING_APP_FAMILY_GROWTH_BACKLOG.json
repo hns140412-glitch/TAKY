@@ -202,7 +202,8 @@
         "User clarification 2026-09-28: Google API OCR was researched but an actual provider call/application was not trialed.",
         "TAKY CAP-OCR-INGEST-001 is a shared reference ingestion mechanism, not a live Google OCR test.",
         "Hide PR #12 includes fixture-based family OCR adapter/browser flow and explicitly holds live OCR provider verification.",
-        "Ready product capture contract requires originals -> review draft -> Parent correction -> confirmed FACT."
+        "Ready product capture contract requires originals -> review draft -> Parent correction -> confirmed FACT.",
+        "Hide PR #12 hide-family-ocr-adapter.js constructs normalizedEvidence.request_id from its own outgoing ingest.request.request_id; the observed response processing does not independently establish a server-echoed trusted request id. TAKY validateForRequest on this locally rewrapped object alone is not proof of server/provider roundtrip correlation."
       ],
       "improvement_direction": "Do not rebuild the existing family capture transport or Hide vocabulary adapter. Compare Google Cloud Vision OCR/Gemini image input using synthetic nonpersonal ground-truth print/handwriting samples; keep source_id, per-field uncertainty, review-before-FACT, partial page retry and cost/privacy evidence. NVIDIA models remain optional independent research baseline, not automatic provider substitution.",
       "exit_conditions": [
@@ -211,7 +212,9 @@
         "No child/customer personal data is used during a trial by default; provider-specific terms and spend cap are verified before calls.",
         "Ready owns family capture transport and Parent FACT confirmation; Hide only owns vocabulary pairing and interaction semantics.",
         "Negative regression proves no OCR draft can become confirmed FACT or verified mastery without owning review/verification.",
-        "No production claim, paid auto-escalation, main merge or Netlify deployment from this candidate."
+        "No production claim, paid auto-escalation, main merge or Netlify deployment from this candidate.",
+        "Authorized Ready /api/capture/analyze response correlation is independently checked: server echoes or securely binds exact request_id and allowed source ids; Hide compares returned binding before constructing a normalized result, rather than treating its own request id as provider proof.",
+        "Consumer adoption of validateForRequest is proven on exact owner branch/HEAD with multi-capture, excluded-answer-reference, retry and cross-batch negative regressions; central helper CI alone is not consumer migration."
       ],
       "owner_destination": "Ready-Set family capture/OCR owner; Hide-Seek V2 vocabulary adapter consumer; TAKY shared CAP-OCR-INGEST-001 for generic mechanism only",
       "cross_domain_reuse": "Eunha Farm and ARCHI GROW may reuse only technical mechanism after separate Work-domain evidence, not child/Parent semantics.",
