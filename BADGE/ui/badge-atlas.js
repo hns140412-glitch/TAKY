@@ -371,7 +371,7 @@ const validEvidence=refs=>Array.isArray(refs)&&refs.length>0&&refs.every(x=>type
 const approvedLayer=l=>l?.approved===true&&safeAssetRef(l.asset_ref);
 const validAsset=a=>a?.approved===true&&a.active===true&&a.renderer_binding===true&&
  a.asset_state==='APPROVED_RUNTIME_ASSET'&&a.approval_status==='APPROVED_RUNTIME_ASSET'&&
- validEvidence(a.approvalEvidenceRefs)&&/^BADGE_VISUAL_DRAFT_\\d{3}$/.test(a.visualId||'')&&
+ validEvidence(a.approvalEvidenceRefs)&&/^BADGE_VISUAL_DRAFT_\d{3}$/.test(a.visualId||'')&&
  a.layers&&approvedLayer(a.layers.background)&&approvedLayer(a.layers.interior)&&
  Object.entries(a.layers).every(([k,l])=>individualLayers.includes(k)&&approvedLayer(l));
 const verifiedAward=a=>a?.verified===true&&a?.ownership_source==='AWARD_LEDGER'&&
