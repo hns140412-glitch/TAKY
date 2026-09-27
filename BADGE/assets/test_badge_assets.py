@@ -12,6 +12,13 @@ visual=json.loads((ROOT/"BADGE"/"badge-visual-registry-working.json").read_text(
 assert len(source["presets"])==len(visual["items"])==len(catalog["items"])==len(slots["items"])==60
 assert catalog["live_binding"] is False and catalog["automatic_approval"] is False
 assert catalog["type"]=="CANDIDATE_ASSET_INDEX_NOT_ACTIVE_CATALOG"
+assert catalog["asset_binding_projection"]["kind"]=="STAGING_PREVIEW_ONLY"
+assert catalog["asset_binding_projection"]["preview_layer_binding_count"]==60
+assert catalog["asset_binding_projection"]["approved_runtime_binding_count"]==0
+creative=json.loads((assets/"individual-art-direction-60.json").read_text(encoding="utf-8"))["items"]
+assert len(creative)==60
+assert len({x["scene_brief"] for x in creative})==60
+
 assert slots["status"]=="PROVISIONAL_GEOMETRY_NOT_RUNTIME_APPROVAL"
 for shared in ("rim.svg","shadow.svg","star-mask.svg","lock.svg"):
     path=assets/"shared"/shared
@@ -26,6 +33,11 @@ for i,(entry,source_entry,slot,reg) in enumerate(zip(catalog["items"],source["pr
     assert entry["source_title"]==source_entry["stable_name"]==reg["name"]
     assert entry["storyline"]==source_entry["storyline"] and entry["scene_motif"]==source_entry["motif"]
     assert entry["runtime_approved"] is False and entry["runtime_bound"] is False and entry["active"] is False
+    assert entry["preview_bound"] is True
+    assert entry["preview_binding_ref"]==f"BADGE/ui/badge-dev-preview-bindings-60.json#{entry['badge_id']}"
+    assert entry["individual_art_direction_ref"]==f"BADGE/assets/individual-art-direction-60.json#{entry['badge_id']}"
+    assert creative[i-1]["badge_id"]==entry["badge_id"]
+
     assert entry["character_asset_ref"] is None and entry["crew_asset_ref"] is None
     assert reg["active"] is False and reg["renderer_binding"] is False and reg["asset_path"] is None
     assert reg["approval_evidence_refs"]==[] and reg["approval_status"]=="NOT_APPROVED"
