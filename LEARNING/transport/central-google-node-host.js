@@ -11,6 +11,7 @@ const Registry=require('./server-family-registry-provider.js');
 const References=require('./server-specialist-reference-store.js');
 const Specialist=require('./server-specialist-verifier.js');
 const Central=require('./central-learning-http-endpoint.js');
+const Decision=require('./central-learning-decision-http-endpoint.js');
 const NodeBridge=require('./node-http-learning-bridge.js');
 const VERSION='TAKY_CENTRAL_GOOGLE_NODE_HOST_COMPOSITION_V1';
 
@@ -41,7 +42,10 @@ function create({
    verifyBearerToken:google.verifyBearerToken,store:evidenceStore,
    verifySpecialistEvidence:specialist?.verifySpecialistEvidence||verifySpecialistEvidence
  });
- const handler=NodeBridge.createHandler({endpoint,allowedOrigins});
+ const decisionEndpoint=Decision.create({
+   verifyBearerToken:google.verifyBearerToken,store:evidenceStore
+ });
+ const handler=NodeBridge.createHandler({endpoint,decisionEndpoint,allowedOrigins});
  return Object.freeze({version:VERSION,handler});
 }
 module.exports=Object.freeze({VERSION,create});
