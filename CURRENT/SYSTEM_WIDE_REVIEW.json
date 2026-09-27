@@ -32,7 +32,8 @@
     "Implemented read-only semantic_current_resolver.py: stable master/family owner aliases, fail-closed unknown/stale/duplicate/legacy path, data promoted ID selection without filename ordering",
     "Added eight focused resolver tests and wired them into TAKY Enforcement Replay workflow",
     "Independently fetched and cross-checked authenticated original Drive DATA source, utilization and promotion receipt IDs; 679 counts, no source loss and canonical:false receipt match",
-    "Added independently supplied receipt content crosscheck and negative ID/count/guard regression in semantic CURRENT resolver"
+    "Added independently supplied receipt content crosscheck and negative ID/count/guard regression in semantic CURRENT resolver",
+    "Integrated semantic_current_resolver into existing ENFORCEMENT/master_file_registry_validator.py: actual authority registry CI now resolves every declared semantic owner and promoted DATA pointer, failing closed on mismatch"
   ],
   "evidence": {
     "data_index_source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
@@ -68,14 +69,14 @@
   },
   "open": [
     "Read-only consumer/reference inventory for legacy REV/V physical paths; search miss is not source absence",
-    "Migrate existing app/TAKY consumers to tested semantic resolver; standalone reader and tests exist, app consumers still OPEN",
+    "Existing TAKY MASTER registry CI consumer migrated to semantic resolver; remaining handoff/app readers not yet migrated",
     "Whole-system actual evidence path across source -> index -> central learning -> review-need -> Planner dated allocation -> app result; map real blockers rather than invent complete",
     "Cross-app family/member isolation, live identity/server/outbox/ACK integration and device acceptance per owning project",
     "Refresh this stable CURRENT after each independent verified batch; no new numbered copies",
     "Review PR #159 and current individual app contracts for one end-to-end trusted member/evidence/Planner consumer acceptance slice without touching badges or Work OS",
     "Bind real caller/consumer to semantic_current_resolver and authenticated receipt fetch rather than fixture-only CI; never silently infer source by newest version"
   ],
-  "next": "Check exact-head CI for receipt verifier, then map and migrate existing reader call sites one by one without renaming original source files.",
-  "implementation_status": "SCOPED_RESOLVER_AND_RECEIPT_CROSSCHECK_IMPLEMENTED_DRAFT__AUTHENTICATED_DRIVE_READBACK_VERIFIED_IN_REVIEW__LIVE_CALLER_BINDING_OPEN",
+  "next": "Verify exact-head CI for integrated MASTER registry consumer; inventory remaining explicit numbered-path readers and migrate by owner without touching independent checkpoint schema or history.",
+  "implementation_status": "SEMANTIC_RESOLVER_BOUND_TO_EXISTING_TAKY_MASTER_REGISTRY_CI_CONSUMER_ON_DRAFT__APP_READERS_OPEN__NO_MAIN_MERGE",
   "updated_at": "2026-09-27"
 }
