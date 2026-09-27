@@ -1,0 +1,53 @@
+{
+  "schema": "TAKY_BADGE_INDIVIDUAL_ART_CURRENT_V1",
+  "date": "2026-09-27",
+  "authority": "DRAFT_BRANCH_PROJECTION_ONLY_MAIN_AND_OLDER_CURRENT_UNCHANGED",
+  "parent_pr": 160,
+  "art_pr": 163,
+  "base_parent_pr_head_at_branch": "6aac6fec05fb9c5fe29580165d4831cb963b9222",
+  "main_at_start": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+  "source": "HANDOFF/BADGE_INDIVIDUAL_ART_NEW_CHAT_START_2026-09-27_LATEST.md",
+  "approved_storyboard": "BADGE/ui/APPROVED_STORYBOARD_2026-09-27.md",
+  "assets": {
+    "independent_ids": 60,
+    "background_svg_files": 60,
+    "interior_svg_files": 60,
+    "rendered_png_previews": 60,
+    "final_illustration_approved": 0,
+    "asset_registry_bound": 0,
+    "catalog_activated": 0,
+    "award_issued": 0
+  },
+  "evidence": {
+    "structural_qa": "SUCCESS",
+    "raster_qa": "SUCCESS",
+    "last_visual_inspected": [
+      "001",
+      "026"
+    ],
+    "last_visual_verdict": "FAIL_HIGH_DENSITY_STORYBOARD_STYLE",
+    "tested_art_commit": "abd78c5175d708d76d1df0160f10fae7d142f334",
+    "ci_badge_ui_run": 36289956771,
+    "ci_visual_registry_run": 36289956704,
+    "qa_note": "BADGE/ui/ART_VISUAL_QA_2026-09-27.md",
+    "raster_artifact_id": 10921779029
+  },
+  "hard_locks": [
+    "USER != DEBUGGER",
+    "No 60 per-item user approval loop; execution owner performs batch self-QA",
+    "Never substitute asset existence or CI for visual match",
+    "No contact sheet, new UI concept board or sheet crop",
+    "Preserve original six screen image authority and 60 identities",
+    "No arbitrary child/Crew character",
+    "Keep common frame/rim/star/tier/lock separate from per-story artwork",
+    "Never auto-bind or approve rejected draft",
+    "No main merge, Netlify deployment, Work OS, real award or catalog activation"
+  ],
+  "next_open": [
+    "Replace flat vector drafts with per-story high-density individual illustrations matching user original style; no invented characters",
+    "For each independently rendered art keep physical background/interior/optional foreground layers and verify mobile 64/120/200/320",
+    "Then run side-by-side visual diff of actual browser UI against original six image storyboard; fix layout and source motifs",
+    "Only after evidence, bind actual reviewed assets without auto-activating the historical catalog"
+  ],
+  "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART"
+}
