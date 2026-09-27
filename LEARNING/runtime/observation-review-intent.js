@@ -62,6 +62,9 @@ function augmentFeedback(feedback,prepared){
  if(feedback?.ok!==true||prepared?.ok!==true)
   return {ok:false,reason:'VALID_FEEDBACK_AND_DURABLE_ADVISORY_REQUIRED'};
  if(!prepared.actionable)return feedback;
+ // These are review candidates only, never verified mastered targets.
+ const targets=[...new Set(prepared.evidence.flatMap(x=>
+   (x.memory?.review_advisories||[]).map(a=>clean(a.lexicalId)).filter(Boolean)))].slice(0,24);
  const intents=[...feedback.intents.map(x=>({...x}))];
  const existing=intents.find(x=>x.intent==='RETRIEVAL_CHECKPOINT');
  if(existing){
@@ -70,9 +73,10 @@ function augmentFeedback(feedback,prepared){
    ...(existing.bases||[existing.basis].filter(Boolean)),
    'HIDE_MEMORY_ADVISORY_ONLY'])];
   delete existing.basis;
+  existing.targets=[...new Set([...(existing.targets||[]),...targets])];
  }else{
   intents.push({intent:'RETRIEVAL_CHECKPOINT',priority:'HIGH',
-   basis:'HIDE_MEMORY_ADVISORY_ONLY'});
+   basis:'HIDE_MEMORY_ADVISORY_ONLY',targets});
  }
  return {...feedback,intents,observation_review_authority:VERSION};
 }
