@@ -54,6 +54,8 @@ assert.equal(many.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
 assert.equal(derived.decision.authority,'LEARNING_DECISION_INTENT_ONLY');
 assert.equal(derived.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
 assert.equal(derived.decision.adaptive_plan.add_retrieval_checkpoint,true);
+assert.deepEqual(derived.decision.adaptive_plan.target_learning_ids,['word-a']);
+assert(derived.decision.pedagogical_actions.some(x=>x.intent==='RETRIEVAL_CHECKPOINT'&&x.targets.includes('word-a')));
 assert(derived.decision.pedagogical_actions.some(x=>
  x.intent==='RETRIEVAL_CHECKPOINT'&&x.basis.includes('HIDE_MEMORY_ADVISORY_ONLY')));
 assert.equal(derived.trace.observation_review_digest_sha256,prepared.basis_digest_sha256);
