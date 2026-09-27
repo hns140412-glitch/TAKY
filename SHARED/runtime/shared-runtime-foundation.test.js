@@ -143,7 +143,28 @@ const norm=vision.normalizeResult({request_id:req.request.request_id,provider:'t
 assert.equal(norm.ok,true);
 assert.equal(vision.validateEvidence(norm.result,['img-1','img-2']).ok,true);
 assert.equal(vision.validateEvidence(norm.result,['img-2']).ok,false);
-console.log('PASS: shared vision ingest keeps transport/evidence mechanics separate from domain semantics');
+const unlinked=vision.normalizeResult({request_id:req.request.request_id,provider:'test',items:[
+  {provider_payload:{opaque:'unlinked-provider-answer'}}
+]});
+assert.equal(unlinked.ok,true);
+assert.equal(vision.validateEvidence(unlinked.result,['img-1','img-2']).ok,false);
+assert.equal(vision.validateEvidence(unlinked.result,['img-1','img-2']).missing[0].reason,'EVIDENCE_SOURCE_REQUIRED');
+const nonfinite=vision.normalizeResult({request_id:req.request.request_id,provider:'test',items:[
+  {evidence_source_ids:['img-1'],confidence:'unavailable',provider_payload:{opaque:'value'}}
+]});
+assert.equal(nonfinite.ok,true);
+assert.equal(vision.validateEvidence(nonfinite.result,['img-1']).ok,false);
+assert.equal(vision.validateEvidence(nonfinite.result,['img-1']).invalid_confidence[0].reason,'NONFINITE_CONFIDENCE');
+const unknownAndUnlinked=vision.normalizeResult({request_id:req.request.request_id,items:[
+  {evidence_source_ids:['not-in-manifest'],confidence:null},
+  {evidence_source_ids:[],confidence:null}
+]});
+const validation=vision.validateEvidence(unknownAndUnlinked.result,['img-1','img-2']);
+assert.equal(validation.ok,false);
+assert.equal(validation.unknown.length,1);
+assert.equal(validation.missing.length,1);
+assert.equal(validation.invalid_confidence.length,0);
+console.log('PASS: shared vision ingest fails closed for unknown/unlinked evidence and nonfinite confidence');
 
 
 const retrySeconds=httpJson.parseRetryAfter('2',0);
