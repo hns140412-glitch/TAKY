@@ -18,7 +18,7 @@ for shared in ("rim.svg","shadow.svg","star-mask.svg","lock.svg"):
     assert path.is_file(), shared
     svg=ET.fromstring(path.read_text(encoding="utf-8"))
     assert svg.tag=="{http://www.w3.org/2000/svg}svg"
-    assert "512 512"==svg.attrib["viewBox"]
+    assert "0 0 512 512"==svg.attrib["viewBox"]
 for i,(entry,source_entry,slot,reg) in enumerate(zip(catalog["items"],source["presets"],slots["items"],visual["items"]),1):
     code=f"{i:03d}"
     assert entry["badge_id"]==source_entry["source_draft_id"]==slot["badge_id"]==reg["draft_id"]
