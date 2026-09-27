@@ -1,0 +1,58 @@
+name: Whole-System Ready Snap Paired Audit
+
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - '.github/workflows/whole-system-ready-snap-paired-audit.yml'
+      - 'ENFORCEMENT/tests/whole-system-ready-snap-paired.spec.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  paired-browser-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout TAKY isolated audit harness
+        uses: actions/checkout@v4
+      - name: Checkout exact Ready Draft #100 source (no merge)
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Ready-Set
+          ref: 2d111c21173d0f9fe4b7b371a3863af22f335df3
+          path: ready
+          persist-credentials: false
+      - name: Checkout exact Snap Draft #11 source (no merge)
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Snap-Pop
+          ref: 8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40
+          path: snap
+          persist-credentials: false
+      - name: Assert exact independent source commit IDs
+        run: |
+          test "$(git -C ready rev-parse HEAD)" = "2d111c21173d0f9fe4b7b371a3863af22f335df3"
+          test "$(git -C snap rev-parse HEAD)" = "8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40"
+      - name: Prepare browser fixture
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install local Playwright test runner
+        run: |
+          npm install --no-save --no-package-lock @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve independently pinned app sources (no Netlify)
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory ready > /tmp/taky-audit-ready.log 2>&1 &
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory snap > /tmp/taky-audit-snap.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null && curl -fsS http://127.0.0.1:4174/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/taky-audit-ready.log /tmp/taky-audit-snap.log
+          exit 1
+      - name: Run actual two-origin Ready → Snap → Ready contextual evidence fixture
+        run: npx playwright test ENFORCEMENT/tests/whole-system-ready-snap-paired.spec.js --reporter=line
