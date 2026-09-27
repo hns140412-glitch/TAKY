@@ -44,11 +44,11 @@
     "No main merge, Netlify deployment, Work OS, real award or catalog activation"
   ],
   "next_open": [
-    "Render 60 actual unique final high-quality hand-drawn pastel emblem illustrations using per-ID witty directions; replace rejected flat sketches, not crop concept or make contact sheet",
-    "Self-review final 64/120/200/320 pictures individually for content, source, clarity and artwork layering; record genuine evidence",
-    "Promote only visually reviewed individual art/overlay layout into actual approved asset registry; maintain separate child and Snap Crew assets",
-    "Wire production asset resolution to approved, active registry plus verified same-child Ledger after runtime integration evidence",
-    "Never auto-activate historical catalog, auto-award, main merge, Netlify, Work OS"
+    "Correct exact 31 visual defects listed in badge QA evidence; do not reuse 001's sunrise/palette as theme for all badges",
+    "Recheck 29 conditional scene candidates and 31 replacements at 64/120/200/320 for exact source story, circle transparency, character/flag/grade separation",
+    "Verify separate management of inner-scene PNG and external shared rim, stars/tier/lock and optional approved Snap Crew/Profile overlay",
+    "Only then bind actual reviewed individual PNGs to source IDs, no old vector alias; verify runtime Ledger and same child-family authority",
+    "No automatic award, main merge, Netlify deployment, Work OS"
   ],
   "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART",
   "asset_management": {
@@ -165,5 +165,58 @@
       "artifact_id": 10924288028,
       "artifact_name": "badge-60-independent-scene-candidates"
     }
+  },
+  "painting_candidate_qa_20260927": {
+    "authority_file": "BADGE/assets/BADGE_60_PAINTERLY_VISUAL_QA_2026-09-27.md",
+    "candidate_count": 60,
+    "source_mapping_count": 60,
+    "independent_file_hashes": 60,
+    "technical_size": "1254x1254 RGBA transparent corners",
+    "visual_screening_sizes": [
+      64,
+      120
+    ],
+    "visual_scene_candidate_conditional_pass": 29,
+    "revision_required": 31,
+    "revision_ids": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      21,
+      25,
+      28,
+      33,
+      34,
+      40,
+      42,
+      43,
+      44,
+      46,
+      53,
+      55,
+      58,
+      60
+    ],
+    "actual_art_approval_count": 0,
+    "actual_painterly_runtime_bindings": 0,
+    "autonomous_awards": 0,
+    "layered_source_evidence": "FLATTENED_PNG_ONLY_BACKGROUND_INTERIOR_FOREGROUND_NOT_VERIFIED",
+    "raw_png_delivery": "conversation file package; NOT checked into GitHub",
+    "legacy_svg_dev_binding_count": 60,
+    "legacy_svg_not_promoted": true
   }
 }
