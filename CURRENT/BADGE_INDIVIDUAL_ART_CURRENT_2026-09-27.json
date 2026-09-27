@@ -44,10 +44,46 @@
     "No main merge, Netlify deployment, Work OS, real award or catalog activation"
   ],
   "next_open": [
-    "Replace flat vector drafts with per-story high-density individual illustrations matching user original style; no invented characters",
-    "For each independently rendered art keep physical background/interior/optional foreground layers and verify mobile 64/120/200/320",
-    "Then run side-by-side visual diff of actual browser UI against original six image storyboard; fix layout and source motifs",
-    "Only after evidence, bind actual reviewed assets without auto-activating the historical catalog"
+    "Rebuild rejected low-detail candidates as high-density individual source-approved art, without inventing characters or asking 60 user approval prompts",
+    "Visual self-review each final badge at 64/120/200/320 against the six-image storyboard and record per-badge layout approval evidence",
+    "Supply separately reviewed child profile and Snap-owned Crew assets from the actual owner authority; no invented fallback avatars",
+    "With server-approved active catalog and verified signed Award Ledger, map central asset records and optional overlay slots to Ready/Snap consumers",
+    "Maintain no main merge/Netlify/activation/award until separately authorized"
   ],
-  "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART"
+  "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART",
+  "asset_management": {
+    "status": "IMPLEMENTED_DRAFT_ONLY_NO_RUNTIME_BINDING",
+    "registry": "BADGE/assets/asset-registry-working.json",
+    "scene_sources_root": "BADGE/ui/assets/individual/001..060",
+    "shared_asset_root": "BADGE/assets/shared",
+    "shared_svg_sources": [
+      "rim.svg",
+      "shadow.svg",
+      "star-mask.svg",
+      "lock.svg"
+    ],
+    "separate_overlay_slots": "BADGE/assets/overlays/slots-working.json",
+    "overlay_slot_records": 60,
+    "approved_profile_asset_count": 0,
+    "approved_snap_crew_asset_count": 0,
+    "optional_character_free_base": true,
+    "optional_profile_and_crew_overlap": true,
+    "profile_gate": "SAME_VERIFIED_CHILD_AND_FAMILY_APPROVED_PROFILE_ONLY",
+    "crew_gate": "REVIEWED_SNAP_OWNED_APPROVED_INDIVIDUAL_CREW_ONLY",
+    "per_badge_geometry": "PROVISIONAL_UNTIL_FINAL_ART_LAYOUT_REVIEW",
+    "core_compositor": "BADGE/badge-managed-asset-compositor.js",
+    "ui_compositor": "BADGE/ui/badge-atlas.js",
+    "tests": [
+      "BADGE/ui/badge-atlas.test.cjs",
+      "BADGE/ui/badge-atlas.test.mjs",
+      "BADGE/badge-managed-asset-compositor.test.js",
+      "BADGE/assets/test_badge_assets.py"
+    ],
+    "shared_vs_individual_separated": true,
+    "draft_art_runtime_approved": 0,
+    "preview_auth_not_production_auth": true,
+    "parent_pr": 160,
+    "art_pr": 163,
+    "scope_status": "CENTRAL_ASSET_LAYOUT_IMPLEMENTED; VISUAL_ART_FINAL_AND_APP_PRODUCTION_BINDING_STILL_OPEN"
+  }
 }
