@@ -35,6 +35,22 @@ assert.equal(derived.ok,true,JSON.stringify(derived));
 assert.equal(Runtime.validate(derived).ok,true);
 assert.equal(derived.learner_state.model.mastery_estimate,null);
 assert.equal(derived.learner_state.observed.verified_performance_count,0);
+assert.equal(derived.learner_state.observed.unique_evidence_count,0);
+assert.equal(derived.learner_state.observed.performance_evidence_count,0);
+assert.equal(derived.learner_state.inferred.evidence_sufficiency,'NONE');
+assert(derived.decision.advisories.some(x=>x.code==='UNVERIFIED_ADVISORY_RECHECK'));
+assert(!derived.decision.blockers.some(x=>x.code==='NO_EVIDENCE'));
+const many=Runtime.derive({scope,evidence:[],observation_only:Array.from({length:8},(_,i)=>({
+ ...base,event_id:'advisory-'+i,observed_at:new Date(Date.parse(base.observed_at)+i*86400000).toISOString(),
+ memory:{...base.memory,average_strength:95-i*10}
+}))});
+assert.equal(many.ok,true);
+assert.equal(many.learner_state.observed.unique_evidence_count,0);
+assert.equal(many.learner_state.observed.performance_evidence_count,0);
+assert.equal(many.learner_state.inferred.evidence_sufficiency,'NONE');
+assert.equal(many.learner_state.inferred.trend,'INSUFFICIENT_EVIDENCE');
+assert.equal(many.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
+
 assert.equal(derived.decision.authority,'LEARNING_DECISION_INTENT_ONLY');
 assert.equal(derived.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
 assert.equal(derived.decision.adaptive_plan.add_retrieval_checkpoint,true);
