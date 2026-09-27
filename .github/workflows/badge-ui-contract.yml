@@ -45,4 +45,6 @@ jobs:
             BADGE/ui/rendered-individual-candidates/*.png
             BADGE/ui/assets/individual/**/*.svg
             BADGE/ui/badge-individual-art-60-candidates.json
+            BADGE/assets/**
+            BADGE/badge-managed-asset-compositor.js
           retention-days: 14
