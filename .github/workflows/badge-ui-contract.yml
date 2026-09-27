@@ -40,5 +40,6 @@ jobs:
           name: badge-60-independent-scene-candidates
           path: |
             BADGE/ui/rendered-individual-candidates/*.png
+            BADGE/ui/assets/individual/**/*.svg
             BADGE/ui/badge-individual-art-60-candidates.json
           retention-days: 14
