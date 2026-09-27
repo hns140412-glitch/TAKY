@@ -3,8 +3,9 @@
 /**
  * Read-only, authenticated Learning Engine decision endpoint.
  * Evidence ingestion and receipt issuance stay at /api/learning/evidence.
- * This route only derives intent from the server's durable, validated
- * verified evidence. Observation-only events cannot be promoted into proof.
+ * Verified performance and low-confidence review advisory are independent
+ * inputs from server-durable state. Observation-only events can request another
+ * learning checkpoint but cannot become verified performance or mastery.
  */
 const Identity=require('./family-member-identity-resolver.js');
 const Durable=require('./durable-evidence-store-adapter.js');
@@ -83,25 +84,37 @@ function create({verifyBearerToken,store}={}){
    evidence=group.canonical_evidence;
    receiptId=group.receipt.receipt_id;
   }
-  // Observation-only rows are intentionally excluded, even when the browser
-  // sent a convincing memory strength or an unauthenticated verifier claim.
+  // Only scoped durable Ready-forwarded Hide advisories enter the observation
+  // intent lane. The runtime sanitizes them; they never enter verified receipts.
+  if(stored&& !Array.isArray(stored.data.observation_only))
+   return fail(503,'CENTRAL_OBSERVATION_STATE_INVALID');
   let runtime;
-  try{runtime=Runtime.derive({scope,evidence})}
+  try{runtime=Runtime.derive({scope,evidence,
+    observation_only:stored?.data?.observation_only||[]})}
   catch{return fail(503,'CENTRAL_RUNTIME_UNAVAILABLE')}
   if(!runtime.ok||!Runtime.validate(runtime).ok)
    return fail(503,'CENTRAL_RUNTIME_INVALID');
+  const observationIds=runtime.trace.observation_review_evidence_ids||[];
+  const advisoryUsed=observationIds.length>0;
   const safe={
    ok:true,authority:runtime.authority,engine_runtime:runtime.engine_runtime,
    scope:runtime.scope,decision:runtime.decision,
    cannot_influence:runtime.cannot_influence,
    trace:{evidence_ids:runtime.trace.evidence_ids,
     decision_contract:runtime.trace.decision_contract,
-    verified_receipt_id:receiptId,verified_evidence_count:evidence.length}
+    verified_receipt_id:receiptId,verified_evidence_count:evidence.length,
+    observation_review_evidence_ids:observationIds,
+    observation_review_evidence_count:observationIds.length,
+    observation_review_digest_sha256:runtime.trace.observation_review_digest_sha256,
+    basis_kind:receiptId?(advisoryUsed?'VERIFIED_WITH_OBSERVATION_ADVISORY':'VERIFIED_ONLY')
+      :(advisoryUsed?'OBSERVATION_ADVISORY_ONLY':'NO_EVIDENCE')}
   };
   return response(200,{ok:true,authenticated_server_response:true,
    receipt_scope:{family_id:identity.family_id,member_id:scope.member_id},
-   runtime_result:safe,source:'SERVER_DURABLE_VERIFIED_EVIDENCE_ONLY',
-   observation_only_excluded:true});
+   runtime_result:safe,
+   source:advisoryUsed?'SERVER_DURABLE_AUTHENTICATED_ADVISORY_AND_VERIFIED_EVIDENCE'
+     :'SERVER_DURABLE_VERIFIED_EVIDENCE_ONLY',
+   observation_only_excluded:!advisoryUsed,observation_proof_promotion:false});
  }});
 }
 module.exports=Object.freeze({VERSION,ENDPOINT,MAX_BODY_BYTES,create});
