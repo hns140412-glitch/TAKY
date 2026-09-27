@@ -166,6 +166,33 @@ assert.equal(validation.missing.length,1);
 assert.equal(validation.invalid_confidence.length,0);
 console.log('PASS: shared vision ingest fails closed for unknown/unlinked evidence and nonfinite confidence');
 
+assert.equal(vision.validateEvidence(null,['img-1']).ok,false);
+assert.equal(vision.validateEvidence(null,['img-1']).reason,'INVALID_VISION_RESULT');
+assert.equal(vision.validateEvidence({request_id:req.request.request_id,items:[]},['img-1']).ok,false);
+assert.equal(vision.validateEvidence(norm.result,'img-1').ok,false);
+const wrongRequest=vision.buildRequest({request_id:'other-request',source:'test',manifest:[
+  {source_id:'img-1',mime_type:'image/jpeg'}
+]});
+assert.equal(vision.validateForRequest(norm.result,wrongRequest.request).reason,'VISION_REQUEST_ID_MISMATCH');
+assert.equal(vision.validateForRequest(norm.result,req.request).ok,true);
+const excluding=vision.buildRequest({request_id:'exclude-test',source:'test',manifest:[
+  {source_id:'img-1',mime_type:'image/jpeg'},
+  {source_id:'answer-1',mime_type:'image/png',exclude_from_analysis:true}
+]});
+const excludedResult=vision.normalizeResult({request_id:'exclude-test',items:[
+  {evidence_source_ids:['answer-1'],provider_payload:{answer:'do-not-use'}}
+]});
+assert.equal(vision.validateForRequest(excludedResult.result,excluding.request).ok,false);
+assert.equal(vision.validateForRequest(excludedResult.result,excluding.request).unknown[0].source_id,'answer-1');
+assert.equal(vision.validateForRequest(norm.result,{...req.request,analyzable_source_ids:['img-1','img-1']}).reason,'VISION_REQUEST_MANIFEST_MISMATCH');
+const repeatedResult=vision.normalizeResult({request_id:req.request.request_id,items:[
+  {result_id:'repeat-id',evidence_source_ids:['img-1']},
+  {result_id:'repeat-id',evidence_source_ids:['img-2']}
+]});
+assert.equal(vision.validateForRequest(repeatedResult.result,req.request).ok,false);
+assert.equal(vision.validateForRequest(repeatedResult.result,req.request).duplicate_result_ids[0].reason,'DUPLICATE_RESULT_ID');
+console.log('PASS: vision request binding rejects stale batch, excluded answer references, malformed/duplicate evidence');
+
 
 const retrySeconds=httpJson.parseRetryAfter('2',0);
 assert.equal(retrySeconds,2000);
