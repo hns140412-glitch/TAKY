@@ -188,6 +188,38 @@
         "Research does not collapse into generic policy accumulation."
       ],
       "owner_destination": "TAKY growth intelligence"
+    },
+    {
+      "gap_id": "GROWTH-OCR-LIVE-PROVIDER-001",
+      "priority": "P1",
+      "title": "Verify actual Google OCR provider against approved family intake and review draft",
+      "applies_to": [
+        "Ready-Set",
+        "Hide-Seek"
+      ],
+      "state": "OPEN",
+      "evidence": [
+        "User clarification 2026-09-28: Google API OCR was researched but an actual provider call/application was not trialed.",
+        "TAKY CAP-OCR-INGEST-001 is a shared reference ingestion mechanism, not a live Google OCR test.",
+        "Hide PR #12 includes fixture-based family OCR adapter/browser flow and explicitly holds live OCR provider verification.",
+        "Ready product capture contract requires originals -> review draft -> Parent correction -> confirmed FACT."
+      ],
+      "improvement_direction": "Do not rebuild the existing family capture transport or Hide vocabulary adapter. Compare Google Cloud Vision OCR/Gemini image input using synthetic nonpersonal ground-truth print/handwriting samples; keep source_id, per-field uncertainty, review-before-FACT, partial page retry and cost/privacy evidence. NVIDIA models remain optional independent research baseline, not automatic provider substitution.",
+      "exit_conditions": [
+        "Real authorized provider invocation and exact model/API SKU are evidenced; fixture-only success remains separately labeled.",
+        "Field-level ground truth, printed/new-vs-review vocabulary/handwriting errors, latency and actual billed units are recorded.",
+        "No child/customer personal data is used during a trial by default; provider-specific terms and spend cap are verified before calls.",
+        "Ready owns family capture transport and Parent FACT confirmation; Hide only owns vocabulary pairing and interaction semantics.",
+        "Negative regression proves no OCR draft can become confirmed FACT or verified mastery without owning review/verification.",
+        "No production claim, paid auto-escalation, main merge or Netlify deployment from this candidate."
+      ],
+      "owner_destination": "Ready-Set family capture/OCR owner; Hide-Seek V2 vocabulary adapter consumer; TAKY shared CAP-OCR-INGEST-001 for generic mechanism only",
+      "cross_domain_reuse": "Eunha Farm and ARCHI GROW may reuse only technical mechanism after separate Work-domain evidence, not child/Parent semantics.",
+      "research_sources": [
+        "https://cloud.google.com/vision/pricing",
+        "https://cloud.google.com/vision/docs/data-usage",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
     }
   ]
 }
