@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: hns140412-glitch/Ready-Set
-          ref: 2d111c21173d0f9fe4b7b371a3863af22f335df3
+          ref: 9c8df0fc72aea3d07a4c59eb432be541bf4a5c44
           path: ready
           persist-credentials: false
       - name: Checkout exact Snap Draft #11 source (no merge)
@@ -34,7 +34,7 @@ jobs:
           persist-credentials: false
       - name: Assert exact independent source commit IDs
         run: |
-          test "$(git -C ready rev-parse HEAD)" = "2d111c21173d0f9fe4b7b371a3863af22f335df3"
+          test "$(git -C ready rev-parse HEAD)" = "9c8df0fc72aea3d07a4c59eb432be541bf4a5c44"
           test "$(git -C snap rev-parse HEAD)" = "8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40"
       - name: Prepare browser fixture
         uses: actions/setup-node@v4
