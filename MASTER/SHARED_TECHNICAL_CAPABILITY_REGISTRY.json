@@ -380,9 +380,22 @@
         "status": "RESEARCH_CANDIDATE_NOT_RUNTIME_APPLIED",
         "source_intake": "User-supplied 14-image NVIDIA/moodmode.ai carousel; source profile is discovery only, original per-post retrieval not verified.",
         "candidate_providers": [
-          {"provider": "GOOGLE_CLOUD_VISION_OCR", "state": "REVIEWED_ONLY_LIVE_API_CALL_NOT_VERIFIED", "source": "https://cloud.google.com/vision/pricing", "privacy_source": "https://cloud.google.com/vision/docs/data-usage"},
-          {"provider": "GOOGLE_GEMINI_IMAGE_INPUT", "state": "REVIEWED_ONLY_LIVE_OCR_CALL_NOT_VERIFIED", "source": "https://ai.google.dev/gemini-api/docs/pricing"},
-          {"provider": "NVIDIA_NIM_OCR_VISION", "state": "REFERENCE_ONLY_NO_ENDPOINT_OR_CALL_ASSUMED", "source": "https://build.nvidia.com/models"}
+          {
+            "provider": "GOOGLE_CLOUD_VISION_OCR",
+            "state": "REVIEWED_ONLY_LIVE_API_CALL_NOT_VERIFIED",
+            "source": "https://cloud.google.com/vision/pricing",
+            "privacy_source": "https://cloud.google.com/vision/docs/data-usage"
+          },
+          {
+            "provider": "GOOGLE_GEMINI_IMAGE_INPUT",
+            "state": "REVIEWED_ONLY_LIVE_OCR_CALL_NOT_VERIFIED",
+            "source": "https://ai.google.dev/gemini-api/docs/pricing"
+          },
+          {
+            "provider": "NVIDIA_NIM_OCR_VISION",
+            "state": "REFERENCE_ONLY_NO_ENDPOINT_OR_CALL_ASSUMED",
+            "source": "https://build.nvidia.com/models"
+          }
         ],
         "owner_links": [
           "Ready-Set owns family capture/OCR intake transport and Parent review-before-FACT.",
@@ -420,8 +433,8 @@
         "manifest_rule": "normalize source identity/mime/size and explicit analyzability without inferring document meaning",
         "request_rule": "build provider-agnostic ingest request with opaque source and metadata",
         "result_rule": "normalize provider output into opaque result items linked to evidence source ids",
-        "evidence_rule": "validate that result evidence links only reference known source ids",
-        "confidence_rule": "confidence is opaque numeric metadata; threshold meaning remains consumer-owned"
+        "evidence_rule": "validate result evidence source ids are nonempty and reference known sources; reject nonfinite optional numeric confidence; domain meaning and thresholds remain consumer-owned",
+        "confidence_rule": "confidence is optional finite numeric metadata; provider-specific scale and threshold meaning remain consumer-owned"
       },
       "consumers": {
         "Ready-Set": "MIGRATED__CI_RUNTIME_VERIFIED",
@@ -433,6 +446,7 @@
         "manifest normalization is deterministic",
         "unsupported or excluded sources are explicit rather than silently analyzed",
         "generic result evidence cannot reference unknown source ids",
+        "a result item with no evidence source id or nonfinite confidence does not pass generic evidence validation",
         "shared primitive does not define OCR prompts, extracted business fields, review authority or commit semantics",
         "consumer may retain provider-specific transport and domain-specific interpretation"
       ],
@@ -485,11 +499,27 @@
         "status": "REFERENCE_ONLY__NO_LIVE_PROVIDER_ROUTING_OR_KEY",
         "intake": "NVIDIA carousel and moodmode.ai creator-discovery pattern; cross-check each claim with original provider terms, endpoint status and test evidence.",
         "discovery_sources": [
-          {"url": "https://www.instagram.com/moodmode.ai/", "role": "CREATOR_WATCHLIST", "access": "PROFILE_IDENTIFIED_POST_FEED_NOT_FULLY_RETRIEVED"},
-          {"url": "https://futuretools.io/", "role": "TOOL_DISCOVERY_ONLY"},
-          {"url": "https://www.therundown.ai/tools", "role": "CURATED_TOOL_DISCOVERY_ONLY"},
-          {"url": "https://huggingface.co/models?sort=trending", "role": "MODEL_CARD_AND_TREND_DISCOVERY"},
-          {"url": "https://www.producthunt.com/topics/artificial-intelligence", "role": "PRODUCT_DISCOVERY_AND_USER_FEEDBACK"}
+          {
+            "url": "https://www.instagram.com/moodmode.ai/",
+            "role": "CREATOR_WATCHLIST",
+            "access": "PROFILE_IDENTIFIED_POST_FEED_NOT_FULLY_RETRIEVED"
+          },
+          {
+            "url": "https://futuretools.io/",
+            "role": "TOOL_DISCOVERY_ONLY"
+          },
+          {
+            "url": "https://www.therundown.ai/tools",
+            "role": "CURATED_TOOL_DISCOVERY_ONLY"
+          },
+          {
+            "url": "https://huggingface.co/models?sort=trending",
+            "role": "MODEL_CARD_AND_TREND_DISCOVERY"
+          },
+          {
+            "url": "https://www.producthunt.com/topics/artificial-intelligence",
+            "role": "PRODUCT_DISCOVERY_AND_USER_FEEDBACK"
+          }
         ],
         "source_promotion_rule": "Social/curated mention -> exact post/claim if accessible -> original vendor model card/docs/terms -> permitted nonpersonal task pilot -> owner disposition. Advertorial, popularity, screenshots and model card alone cannot prove free production use or runtime quality.",
         "candidate_sources": [
@@ -499,7 +529,18 @@
           "https://cloud.google.com/vision/pricing",
           "https://ai.google.dev/gemini-api/docs/pricing"
         ],
-        "selection_gate": ["task fit", "exact endpoint availability", "price and hard spend limit", "trial versus production permission", "data handling", "credential/host ownership", "response schema", "source/provenance", "fallback", "measured outcomes"],
+        "selection_gate": [
+          "task fit",
+          "exact endpoint availability",
+          "price and hard spend limit",
+          "trial versus production permission",
+          "data handling",
+          "credential/host ownership",
+          "response schema",
+          "source/provenance",
+          "fallback",
+          "measured outcomes"
+        ],
         "existing_implementation": "SHARED/runtime/http-json.js; reuse its status/timeout/Retry-After normalization, do not create a second external API router from a social post.",
         "owner_routing": "Mining discovers; Indexing relates and retrieves source evidence; Learning Core owns pedagogy; Planner owns dates; Work-domain project owns architecture/order conclusions. Provider transport owns none of these meanings.",
         "promotion_gate": "Only isolated nonpersonal fixture tests before real connector/key use; no model auto-promotion, no unattended paid tier, no main merge or deployment from this research intake.",
