@@ -63,7 +63,7 @@ function augmentFeedback(feedback,prepared){
   return {ok:false,reason:'VALID_FEEDBACK_AND_DURABLE_ADVISORY_REQUIRED'};
  if(!prepared.actionable)return feedback;
  // These are review candidates only, never verified mastered targets.
- const targets=[...new Set(prepared.evidence.flatMap(x=>
+ const targets=[...new Set(prepared.evidence.slice().reverse().flatMap(x=>
    (x.memory?.review_advisories||[]).map(a=>clean(a.lexicalId)).filter(Boolean)))].slice(0,24);
  const intents=[...feedback.intents.map(x=>({...x}))];
  const existing=intents.find(x=>x.intent==='RETRIEVAL_CHECKPOINT');
