@@ -28,6 +28,8 @@ jobs:
         run: node BADGE/badge-visual-renderer.test.js
       - name: Separate badge asset registry and overlay-slot guards
         run: python3 BADGE/assets/test_badge_assets.py
+      - name: 60 individual source-specific draft bindings and offline inspector
+        run: python3 BADGE/ui/test_dev_bindings_60.py
       - name: Independently-authored 60 artwork structural QA
         run: python3 BADGE/ui/test_individual_art_60.py
       - uses: actions/setup-python@v5
@@ -47,4 +49,7 @@ jobs:
             BADGE/ui/badge-individual-art-60-candidates.json
             BADGE/assets/**
             BADGE/badge-managed-asset-compositor.js
+            BADGE/ui/badge-dev-preview-bindings-60.json
+            BADGE/ui/badge-dev-binding-inspector.html
+            BADGE/ui/badge-atlas.css
           retention-days: 14
