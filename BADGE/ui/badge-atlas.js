@@ -364,7 +364,7 @@ export const BADGE_COPY = [
 export const TIERS=['green','blue','red','gold','platinum'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Individual badge artwork only. Rim, shadow, stars and lock are shared UI primitives.
-const safeAssetRef=ref=>typeof ref==='string'&&ref.length<240&&!ref.includes('..')&&!ref.includes(':')&&!ref.includes('?')&&!ref.includes('#')&&['.png','.webp','.svg','.avif'].some(ext=>ref.toLowerCase().endsWith(ext))&&Array.from(ref).every(ch=>'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-'.includes(ch));
+const safeAssetRef=ref=>typeof ref==='string'&&ref.length>0&&ref.length<240&&!ref.startsWith('/')&&!ref.includes('//')&&!ref.includes('..')&&!ref.includes(':')&&!ref.includes('?')&&!ref.includes('#')&&['.png','.webp','.svg','.avif'].some(ext=>ref.toLowerCase().endsWith(ext))&&Array.from(ref).every(ch=>'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-'.includes(ch));
 // Every scene remains independently usable. Character/Crew are separate verified overlays.
 const individualLayers=['background','interior','foreground'];
 const validEvidence=refs=>Array.isArray(refs)&&refs.length>0&&refs.every(x=>typeof x==='string'&&x.length>0&&x.length<200);
