@@ -1,0 +1,1192 @@
+{
+  "schema": "TAKY_BADGE_OVERLAY_SLOTS_V1",
+  "status": "PROVISIONAL_GEOMETRY_NOT_RUNTIME_APPROVAL",
+  "canvas": {
+    "width": 512,
+    "height": 512,
+    "safe_top_reserved_for_stars_pct": 18,
+    "frame_unobstructed": true
+  },
+  "coordinate_system": "percentage of art plane, center anchored at x/y",
+  "defaults": {
+    "profile": {
+      "x": 24,
+      "y": 72,
+      "scale": 35,
+      "depth": "BEHIND_FOREGROUND"
+    },
+    "crew": {
+      "x": 77,
+      "y": 76,
+      "scale": 27,
+      "depth": "BEHIND_FOREGROUND"
+    }
+  },
+  "constraints": {
+    "profile_x": [
+      15,
+      40
+    ],
+    "crew_x": [
+      60,
+      85
+    ],
+    "y": [
+      55,
+      83
+    ],
+    "scale": [
+      15,
+      42
+    ],
+    "depth": [
+      "BEHIND_FOREGROUND",
+      "ABOVE_FOREGROUND"
+    ],
+    "slot_is_asset": false,
+    "slot_is_character_id": false,
+    "renderer_must_require_actual_approved_overlay_asset": true
+  },
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "visual_id": "BADGE_VISUAL_DRAFT_001",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-002",
+      "visual_id": "BADGE_VISUAL_DRAFT_002",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-003",
+      "visual_id": "BADGE_VISUAL_DRAFT_003",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-004",
+      "visual_id": "BADGE_VISUAL_DRAFT_004",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "visual_id": "BADGE_VISUAL_DRAFT_005",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-006",
+      "visual_id": "BADGE_VISUAL_DRAFT_006",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "visual_id": "BADGE_VISUAL_DRAFT_007",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-008",
+      "visual_id": "BADGE_VISUAL_DRAFT_008",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "visual_id": "BADGE_VISUAL_DRAFT_009",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "visual_id": "BADGE_VISUAL_DRAFT_010",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-011",
+      "visual_id": "BADGE_VISUAL_DRAFT_011",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-012",
+      "visual_id": "BADGE_VISUAL_DRAFT_012",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-013",
+      "visual_id": "BADGE_VISUAL_DRAFT_013",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-014",
+      "visual_id": "BADGE_VISUAL_DRAFT_014",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-015",
+      "visual_id": "BADGE_VISUAL_DRAFT_015",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-016",
+      "visual_id": "BADGE_VISUAL_DRAFT_016",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-017",
+      "visual_id": "BADGE_VISUAL_DRAFT_017",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-018",
+      "visual_id": "BADGE_VISUAL_DRAFT_018",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-019",
+      "visual_id": "BADGE_VISUAL_DRAFT_019",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-020",
+      "visual_id": "BADGE_VISUAL_DRAFT_020",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-021",
+      "visual_id": "BADGE_VISUAL_DRAFT_021",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-022",
+      "visual_id": "BADGE_VISUAL_DRAFT_022",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-023",
+      "visual_id": "BADGE_VISUAL_DRAFT_023",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-024",
+      "visual_id": "BADGE_VISUAL_DRAFT_024",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-025",
+      "visual_id": "BADGE_VISUAL_DRAFT_025",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-026",
+      "visual_id": "BADGE_VISUAL_DRAFT_026",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-027",
+      "visual_id": "BADGE_VISUAL_DRAFT_027",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-028",
+      "visual_id": "BADGE_VISUAL_DRAFT_028",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-029",
+      "visual_id": "BADGE_VISUAL_DRAFT_029",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-030",
+      "visual_id": "BADGE_VISUAL_DRAFT_030",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-031",
+      "visual_id": "BADGE_VISUAL_DRAFT_031",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-032",
+      "visual_id": "BADGE_VISUAL_DRAFT_032",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-033",
+      "visual_id": "BADGE_VISUAL_DRAFT_033",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-034",
+      "visual_id": "BADGE_VISUAL_DRAFT_034",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-035",
+      "visual_id": "BADGE_VISUAL_DRAFT_035",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-036",
+      "visual_id": "BADGE_VISUAL_DRAFT_036",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-037",
+      "visual_id": "BADGE_VISUAL_DRAFT_037",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-038",
+      "visual_id": "BADGE_VISUAL_DRAFT_038",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-039",
+      "visual_id": "BADGE_VISUAL_DRAFT_039",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-040",
+      "visual_id": "BADGE_VISUAL_DRAFT_040",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-041",
+      "visual_id": "BADGE_VISUAL_DRAFT_041",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "visual_id": "BADGE_VISUAL_DRAFT_042",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-043",
+      "visual_id": "BADGE_VISUAL_DRAFT_043",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-044",
+      "visual_id": "BADGE_VISUAL_DRAFT_044",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-045",
+      "visual_id": "BADGE_VISUAL_DRAFT_045",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-046",
+      "visual_id": "BADGE_VISUAL_DRAFT_046",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-047",
+      "visual_id": "BADGE_VISUAL_DRAFT_047",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-048",
+      "visual_id": "BADGE_VISUAL_DRAFT_048",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-049",
+      "visual_id": "BADGE_VISUAL_DRAFT_049",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-050",
+      "visual_id": "BADGE_VISUAL_DRAFT_050",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-051",
+      "visual_id": "BADGE_VISUAL_DRAFT_051",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-052",
+      "visual_id": "BADGE_VISUAL_DRAFT_052",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-053",
+      "visual_id": "BADGE_VISUAL_DRAFT_053",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "visual_id": "BADGE_VISUAL_DRAFT_054",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-055",
+      "visual_id": "BADGE_VISUAL_DRAFT_055",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-056",
+      "visual_id": "BADGE_VISUAL_DRAFT_056",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-057",
+      "visual_id": "BADGE_VISUAL_DRAFT_057",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-058",
+      "visual_id": "BADGE_VISUAL_DRAFT_058",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-059",
+      "visual_id": "BADGE_VISUAL_DRAFT_059",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    },
+    {
+      "badge_id": "BDG-DRAFT-060",
+      "visual_id": "BADGE_VISUAL_DRAFT_060",
+      "profile": {
+        "x": 24,
+        "y": 72,
+        "scale": 35,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "crew": {
+        "x": 77,
+        "y": 76,
+        "scale": 27,
+        "depth": "BEHIND_FOREGROUND"
+      },
+      "review_status": "PROVISIONAL_UNTIL_FINAL_INDIVIDUAL_ART",
+      "approved_character_id": null,
+      "approved_crew_id": null
+    }
+  ]
+}
