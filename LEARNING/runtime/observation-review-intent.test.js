@@ -18,6 +18,8 @@ assert.equal(prepared.actionable,true);
 assert.equal(prepared.evidence[0].verified_outcome,null);
 assert.equal(prepared.evidence[0].verified_performance,false);
 assert.equal(prepared.evidence[0].memory.average_strength,41);
+assert.equal(Review.prepare([{...base,memory:{...base.memory,average_strength:null}}],scope)
+ .evidence[0].memory.average_strength,null);
 assert.match(prepared.basis_digest_sha256,/^[a-f0-9]{64}$/);
 assert.deepEqual(Review.prepare([base,base],{...scope,member_id:'CHILD_B'}).evidence,[]);
 for(const invalid of [
