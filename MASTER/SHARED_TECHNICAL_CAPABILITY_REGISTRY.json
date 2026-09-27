@@ -376,6 +376,28 @@
     {
       "capability_id": "CAP-OCR-INGEST-001",
       "title": "Generic OCR/vision ingestion mechanics",
+      "external_provider_evaluation": {
+        "status": "RESEARCH_CANDIDATE_NOT_RUNTIME_APPLIED",
+        "source_intake": "User-supplied 14-image NVIDIA/moodmode.ai carousel; source profile is discovery only, original per-post retrieval not verified.",
+        "candidate_providers": [
+          {"provider": "GOOGLE_CLOUD_VISION_OCR", "state": "REVIEWED_ONLY_LIVE_API_CALL_NOT_VERIFIED", "source": "https://cloud.google.com/vision/pricing", "privacy_source": "https://cloud.google.com/vision/docs/data-usage"},
+          {"provider": "GOOGLE_GEMINI_IMAGE_INPUT", "state": "REVIEWED_ONLY_LIVE_OCR_CALL_NOT_VERIFIED", "source": "https://ai.google.dev/gemini-api/docs/pricing"},
+          {"provider": "NVIDIA_NIM_OCR_VISION", "state": "REFERENCE_ONLY_NO_ENDPOINT_OR_CALL_ASSUMED", "source": "https://build.nvidia.com/models"}
+        ],
+        "owner_links": [
+          "Ready-Set owns family capture/OCR intake transport and Parent review-before-FACT.",
+          "Hide-Seek owns vocabulary OCR pairing/retrieval semantics; reuse existing family adapter, do not fork an engine.",
+          "Eunha Farm order/address extraction belongs to its separate Work-domain owner, not Learning family.",
+          "ARCHI GROW drawing/table source interpretation belongs to Work-domain project owner."
+        ],
+        "pilot_exit": [
+          "Representative synthetic/non-personal printed and handwritten samples with field-level ground truth.",
+          "Real provider call + cost/quota + data-policy verified independently of fixture/browser success.",
+          "Original source id/page/field provenance preserved; low-confidence rows remain review draft, never auto-FACT.",
+          "No customer address, child photo, learning record or confidential plan sent to trial API by default."
+        ],
+        "claim_boundary": "Existing CAP-OCR-INGEST-001 shared reference implementation is not evidence of a completed Google OCR API invocation or provider accuracy test."
+      },
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
@@ -459,6 +481,22 @@
     {
       "capability_id": "CAP-HTTP-ADAPTER-001",
       "title": "External/Public API request-cache-rate-limit adapter mechanics",
+      "external_provider_evaluation": {
+        "status": "REFERENCE_ONLY__NO_LIVE_PROVIDER_ROUTING_OR_KEY",
+        "intake": "NVIDIA carousel and moodmode.ai creator-discovery pattern; cross-check each claim with original provider terms, endpoint status and test evidence.",
+        "candidate_sources": [
+          "https://build.nvidia.com/models",
+          "https://docs.api.nvidia.com/nim/docs/product",
+          "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf",
+          "https://cloud.google.com/vision/pricing",
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "selection_gate": ["task fit", "exact endpoint availability", "price and hard spend limit", "trial versus production permission", "data handling", "credential/host ownership", "response schema", "source/provenance", "fallback", "measured outcomes"],
+        "existing_implementation": "SHARED/runtime/http-json.js; reuse its status/timeout/Retry-After normalization, do not create a second external API router from a social post.",
+        "owner_routing": "Mining discovers; Indexing relates and retrieves source evidence; Learning Core owns pedagogy; Planner owns dates; Work-domain project owns architecture/order conclusions. Provider transport owns none of these meanings.",
+        "promotion_gate": "Only isolated nonpersonal fixture tests before real connector/key use; no model auto-promotion, no unattended paid tier, no main merge or deployment from this research intake.",
+        "claim_boundary": "No NVIDIA key, Google OCR invocation, model benchmark, production account or user-data upload is established by this registry entry."
+      },
       "class": "SHARED_TECHNICAL_PRIMITIVE",
       "state": "REFERENCE_IMPLEMENTED",
       "owner_layer": "SHARED_TECHNICAL_CAPABILITY",
