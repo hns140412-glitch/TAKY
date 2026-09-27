@@ -1,0 +1,44 @@
+name: Audit Index Authority V2 Composition
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - 'ENFORCEMENT/tests/mining-v2-authority-review-compose-audit.py'
+      - '.github/workflows/audit-authority-v2-compose.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authority-v2-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 8e78af8b77d1f3e132f05c99cd6b69a7f258a23e
+          path: canonical-main
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: e6d5ec69ce693e36f5b3aaf9ac42f01d510959b6
+          path: mining-v2
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 31c0346222b3454ba6ac098ae127a8facd23ef4a
+          path: authority-review
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact main, Mining and authority review source heads
+        run: |
+          test "$(git -C canonical-main rev-parse HEAD)" = "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e"
+          test "$(git -C mining-v2 rev-parse HEAD)" = "e6d5ec69ce693e36f5b3aaf9ac42f01d510959b6"
+          test "$(git -C authority-review rev-parse HEAD)" = "31c0346222b3454ba6ac098ae127a8facd23ef4a"
+      - name: Check independent review versus Index eligibility versus V2 reference gap
+        run: python ENFORCEMENT/tests/mining-v2-authority-review-compose-audit.py
