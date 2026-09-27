@@ -59,6 +59,19 @@ assert(derived.decision.pedagogical_actions.some(x=>x.intent==='RETRIEVAL_CHECKP
 assert(derived.decision.pedagogical_actions.some(x=>
  x.intent==='RETRIEVAL_CHECKPOINT'&&x.basis.includes('HIDE_MEMORY_ADVISORY_ONLY')));
 assert.equal(derived.trace.observation_review_digest_sha256,prepared.basis_digest_sha256);
+const dated=Array.from({length:27},(_,i)=>({
+ ...base,event_id:'latest-'+i,
+ observed_at:new Date(Date.parse(base.observed_at)+i*86400000).toISOString(),
+ memory:{...base.memory,review_advisories:[{
+  lexicalId:'word-'+i,advisoryOnly:true,evidenceBasis:'HIDE_MEMORY_EVIDENCE',
+  nextReviewPriority:80,needsUnassistedRecall:true}]}
+}));
+const mostRecent=Runtime.derive({scope,evidence:[],observation_only:dated});
+assert.equal(mostRecent.ok,true);
+assert.equal(mostRecent.decision.adaptive_plan.target_learning_ids.length,24);
+assert.equal(mostRecent.decision.adaptive_plan.target_learning_ids[0],'word-26');
+assert(!mostRecent.decision.adaptive_plan.target_learning_ids.includes('word-0'));
+assert.equal(mostRecent.learner_state.observed.performance_evidence_count,0);
 const empty=Runtime.derive({scope,evidence:[],observation_only:[]});
 assert.equal(empty.ok,true);
 assert.equal(empty.decision.execution_status,'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
