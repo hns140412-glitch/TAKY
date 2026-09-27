@@ -365,14 +365,55 @@ export const TIERS=['green','blue','red','gold','platinum'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Individual badge artwork only. Rim, shadow, stars and lock are shared UI primitives.
 const safeAssetRef=ref=>typeof ref==='string'&&ref.length<240&&!ref.includes('..')&&!ref.includes(':')&&!ref.includes('?')&&!ref.includes('#')&&['.png','.webp','.svg','.avif'].some(ext=>ref.toLowerCase().endsWith(ext))&&Array.from(ref).every(ch=>'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-'.includes(ch));
-const individualLayers=['background','interior','foreground','crew'];
-const validAsset=a=>a?.approved===true&&/^BADGE_VISUAL_DRAFT_\d{3}$/.test(a?.visualId||'')&&a?.layers&&a.layers.interior?.approved===true&&safeAssetRef(a.layers.interior.asset_ref)&&Object.entries(a.layers).every(([k,l])=>individualLayers.includes(k)&&l?.approved===true&&safeAssetRef(l?.asset_ref));
-const layerOrder=individualLayers;
+// Every scene remains independently usable. Character/Crew are separate verified overlays.
+const individualLayers=['background','interior','foreground'];
+const validEvidence=refs=>Array.isArray(refs)&&refs.length>0&&refs.every(x=>typeof x==='string'&&x.length>0&&x.length<200);
+const approvedLayer=l=>l?.approved===true&&safeAssetRef(l.asset_ref);
+const validAsset=a=>a?.approved===true&&a.active===true&&a.renderer_binding===true&&
+ a.asset_state==='APPROVED_RUNTIME_ASSET'&&a.approval_status==='APPROVED_RUNTIME_ASSET'&&
+ validEvidence(a.approvalEvidenceRefs)&&/^BADGE_VISUAL_DRAFT_\\d{3}$/.test(a.visualId||'')&&
+ a.layers&&approvedLayer(a.layers.background)&&approvedLayer(a.layers.interior)&&
+ Object.entries(a.layers).every(([k,l])=>individualLayers.includes(k)&&approvedLayer(l));
+const verifiedAward=a=>a?.verified===true&&a?.ownership_source==='AWARD_LEDGER'&&
+ a?.award_status==='AWARDED'&&typeof a.child_id==='string'&&a.child_id.length>0&&
+ Number.isInteger(a.stars)&&a.stars>=1&&a.stars<=5&&TIERS.includes(String(a.tier||'').toLowerCase());
+// Layout is content-specific; these coordinates are reviewed with the final art, never inferred from a sketch.
+const validPlacement=(p,kind)=>p&&p.review_status==='APPROVED_LAYOUT'&&validEvidence(p.reviewEvidenceRefs)&&
+ Number.isInteger(p.x)&&p.x>=(kind==='profile'?15:60)&&p.x<=(kind==='profile'?40:85)&&
+ Number.isInteger(p.y)&&p.y>=55&&p.y<=83&&Number.isInteger(p.scale)&&p.scale>=15&&p.scale<=42&&
+ ['BEHIND_FOREGROUND','ABOVE_FOREGROUND'].includes(p.depth);
+const validOverlay=(o,kind,award)=>{if(!o||o.approved!==true||
+ o.approval_status!=='APPROVED_RUNTIME_ASSET'||!validEvidence(o.approvalEvidenceRefs)||
+ !safeAssetRef(o.asset_ref)||o.child_id!==award.child_id||!verifiedAward(award))return false;
+ if(award.family_id&&o.family_id!==award.family_id)return false;
+ return kind==='profile'?o.authority==='CHILD_PROFILE'&&typeof o.visual_id==='string'&&o.visual_id.length>0:
+ o.authority==='SNAP_OWNED_CREW_ASSET'&&o.owner==='snap-pop'&&typeof o.character_id==='string'&&o.character_id.length>0;
+};
+const layerImg=(ref,klass,attrs='')=>'<img class="'+klass+'" src="'+esc(ref)+'" alt="" loading="lazy" decoding="async" '+attrs+'>';
+const layoutStyle=p=>'style="--overlay-x:'+p.x+'%;--overlay-y:'+p.y+'%;--overlay-scale:'+p.scale+'%;"';
+const optionalOverlay=(o,slot,kind)=>layerImg(o.asset_ref,'badge-character-overlay badge-character-'+kind+
+ (slot.depth==='ABOVE_FOREGROUND'?' badge-character-front':''),layoutStyle(slot));
+export function composeBadgeArtwork(b,a,award={},overlays={}){
+ if(!b||!validAsset(a)||a.visualId!=='BADGE_VISUAL_DRAFT_'+b.id.slice(-3))
+   return '<span class="badge-unbound" data-asset-state="UNBOUND">개별 원화 준비 중</span>';
+ const hasEarned=verifiedAward(award), provided=hasEarned?['profile','crew'].filter(k=>overlays?.[k]!=null):[];
+ for(const kind of provided)if(!validOverlay(overlays[kind],kind,award)||
+ !validPlacement(a.overlay_slots?.[kind],kind))
+   return '<span class="badge-unbound" data-asset-state="INVALID_OVERLAY">오버레이 연결 검증 대기</span>';
+ let html='';
+ for(const key of ['background','interior'])html+=layerImg(a.layers[key].asset_ref,'badge-art-layer badge-art-'+key);
+ for(const kind of provided)if(a.overlay_slots[kind].depth==='BEHIND_FOREGROUND')
+   html+=optionalOverlay(overlays[kind],a.overlay_slots[kind],kind);
+ if(a.layers.foreground)html+=layerImg(a.layers.foreground.asset_ref,'badge-art-layer badge-art-foreground');
+ for(const kind of provided)if(a.overlay_slots[kind].depth==='ABOVE_FOREGROUND')
+   html+=optionalOverlay(overlays[kind],a.overlay_slots[kind],kind);
+ return html;
+}
 export function badgeStars(n,tier){if(!Number.isInteger(n)||n<1||n>5||!TIERS.includes(tier))throw Error('Invalid stars/tier');return '<span class="badge-stars tier-'+tier+'" aria-label="'+n+'성">'+Array.from({length:n},()=>'<i class="badge-star" aria-hidden="true"></i>').join('')+'</span>'}
-export function mountBadgeAtlas(root,{assets={},awards={},onOpen=()=>{},onShare=()=>{},onNavigate=()=>{}}={}){
+export function mountBadgeAtlas(root,{assets={},awards={},overlays={},onOpen=()=>{},onShare=()=>{},onNavigate=()=>{}}={}){
  if(!root)throw Error('root required');let screen='home',filter='all',selected=null,category='all',celebrating=null;
- const earned=id=>awards[id]?.verified===true&&awards[id]?.ownership_source==='AWARD_LEDGER'&&awards[id]?.award_status==='AWARDED'&&Number.isInteger(awards[id]?.stars)&&awards[id].stars>=1&&awards[id].stars<=5&&TIERS.includes(String(awards[id]?.tier||'').toLowerCase());
- const art=b=>{let a=assets[b.id];if(!validAsset(a)||a.visualId!=='BADGE_VISUAL_DRAFT_'+b.id.slice(-3))return '<span class="badge-unbound" data-asset-state="UNBOUND">개별 원화 준비 중</span>';return layerOrder.filter(k=>a.layers[k]).map(k=>'<img class="badge-art-layer badge-art-'+k+'" src="'+esc(a.layers[k].asset_ref)+'" alt="" loading="lazy">').join('')};
+ const earned=id=>verifiedAward(awards[id]);
+ const art=b=>composeBadgeArtwork(b,assets[b.id],awards[b.id],overlays);
  const emblem=(b,size='')=>{let e=earned(b.id),a=awards[b.id]||{};return '<span class="badge-emblem '+size+(e?'':' is-locked')+'">'+art(b)+(e?badgeStars(a.stars,String(a.tier).toLowerCase()):'<span class="badge-locked-star" aria-hidden="true">★</span><span class="badge-lock" aria-label="미획득">잠금</span>')+'</span>'};
  const nav=()=>'<nav class="badge-bottom" aria-label="하단 탐색">'+[['home','⌂','홈'],['atlas','◈','배지 도감'],['mission','▣','오늘의 미션'],['record','▤','탐험 기록'],['more','•••','더보기']].map(([k,i,n])=>'<button type="button" data-nav="'+k+'" '+(screen===k?'aria-current="page"':'')+'><span class="badge-nav-icon">'+i+'</span><small>'+n+'</small></button>').join('')+'</nav>';
  const tile=b=>'<button class="badge-tile" type="button" data-id="'+b.id+'" aria-label="'+esc(b.title)+(earned(b.id)?' 획득':' 미획득')+'">'+emblem(b)+'<span class="badge-index">'+b.id.slice(-3)+'</span><span class="badge-name">'+esc(b.title)+'</span></button>';
