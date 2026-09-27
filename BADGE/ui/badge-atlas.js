@@ -409,7 +409,7 @@ export function composeBadgeArtwork(b,a,award={},overlays={}){
    html+=optionalOverlay(overlays[kind],a.overlay_slots[kind],kind);
  return html;
 }
-export function badgeStars(n,tier){if(!Number.isInteger(n)||n<1||n>5||!TIERS.includes(tier))throw Error('Invalid stars/tier');return '<span class="badge-stars tier-'+tier+'" aria-label="'+n+'성">'+Array.from({length:n},()=>'<i class="badge-star" aria-hidden="true"></i>').join('')+'</span>'}
+export function badgeStars(n,tier){if(!Number.isInteger(n)||n<1||n>5||!TIERS.includes(tier))throw Error('Invalid stars/tier');return '<span class="badge-stars tier-'+tier+'" data-stars="'+n+'" aria-label="'+n+'성">'+Array.from({length:n},()=>'<i class="badge-star" aria-hidden="true"></i>').join('')+'</span>'}
 export function mountBadgeAtlas(root,{assets={},awards={},overlays={},onOpen=()=>{},onShare=()=>{},onNavigate=()=>{}}={}){
  if(!root)throw Error('root required');let screen='home',filter='all',selected=null,category='all',celebrating=null;
  const earned=id=>verifiedAward(awards[id]);
