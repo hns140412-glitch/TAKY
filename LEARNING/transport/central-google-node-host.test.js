@@ -67,6 +67,18 @@ const packet=(id,member='CHILD_A')=>({
   assert.equal(ack.acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
   assert.equal(ack.storage_confirmed,true);
   assert.equal(ack.receipt_scope.member_id,'CHILD_A');
+  const decisionUrl='http://127.0.0.1:'+server.address().port+'/api/learning/decision';
+  const getDecision=()=>fetch(decisionUrl,{method:'POST',headers:{
+   Authorization:'Bearer test-only-ticket-0001','Content-Type':'application/json',
+   Origin:'https://hide.example.test'},body:JSON.stringify({
+    family_id:'F1',member_id:'CHILD_A',subject:'영어',
+    concept_skill_target:'vocabulary'})});
+  const onlyObservation=await getDecision();
+  assert.equal(onlyObservation.status,200);
+  const hold=await onlyObservation.json();
+  assert.equal(hold.runtime_result.trace.verified_evidence_count,0);
+  assert.equal(hold.runtime_result.decision.execution_status,
+   'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
   const saved=await evidenceStore.getWithMetadata(
    'families/F1/members/CHILD_A/learning-engine/state-v1',{consistency:'strong',type:'json'});
   assert(saved?.etag);
@@ -80,6 +92,14 @@ const packet=(id,member='CHILD_A')=>({
   assert.equal(receipt.acknowledgement_kind,'REAL_EVIDENCE_RECEIPT');
   assert.equal(receipt.packet_id,p.packet_id);
   assert.equal(receipt.event_id,p.event.event_id);
+  const centralDecision=await getDecision();
+  assert.equal(centralDecision.status,200);
+  const decisionBody=await centralDecision.json();
+  assert.equal(decisionBody.authenticated_server_response,true);
+  assert.equal(decisionBody.runtime_result.trace.verified_evidence_count,1);
+  assert.equal(decisionBody.runtime_result.decision.authority,'LEARNING_DECISION_INTENT_ONLY');
+  assert.equal(decisionBody.runtime_result.decision.consumer_contract.planner,
+   'OWNS_DATED_ALLOCATION');
   const unknown=packet('host-unissued-1');
   unknown.event.payload.assessment_ref='server-assignment-host-ref-1';
   unknown.event.payload.response_text='apple';
@@ -91,12 +111,13 @@ const packet=(id,member='CHILD_A')=>({
   const old=await registryStore.getWithMetadata(key,{consistency:'strong',type:'json'});
   await registryStore.setJSON(key,{...baseRecord,status:'REVOKED'},{onlyIfMatch:old.etag});
   const revoked=await send(packet('host-revoked-1'));
+  assert.equal((await getDecision()).status,401);
   assert.equal(revoked.status,401);
   const unavailable=Host.create.bind(null,{clientIds:[clientId],registryStore,evidenceStore,
    allowedOrigins:[],oauth2Client:{verifyIdToken:async()=>null}});
   assert.throws(unavailable,/HOST_EXPLICIT_BROWSER_ORIGINS_REQUIRED/);
   assert(!JSON.stringify(ack).includes(sub));
-  console.log('CENTRAL_GOOGLE_NODE_HOST_PASS: real loopback routing with server registry, durable observation ACK, sibling rejection, immediate registry revocation');
+  console.log('CENTRAL_GOOGLE_NODE_HOST_PASS: real loopback evidence and central decision routing, observation-only hold, verified evidence decision, sibling rejection and immediate registry revocation');
  }finally{
   if(server)await new Promise((resolve,reject)=>server.close(e=>e?reject(e):resolve()));
   await fs.rm(root,{recursive:true,force:true});
