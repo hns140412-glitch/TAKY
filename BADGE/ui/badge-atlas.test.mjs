@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {test} from 'node:test';
+const src=readFileSync(new URL('./badge-atlas.js',import.meta.url),'utf8');
+const css=readFileSync(new URL('./badge-atlas.css',import.meta.url),'utf8');
+const source=JSON.parse(readFileSync(new URL('../badge-wow-inspired-copyworking.json',import.meta.url),'utf8'));
+const moduleUrl='data:text/javascript;base64,'+Buffer.from(src).toString('base64');
+const {BADGE_COPY,badgeStars}=await import(moduleUrl);
+test('all 60 original display titles, toast and stories remain exact',()=>{assert.equal(BADGE_COPY.length,60);assert.deepEqual(BADGE_COPY,source.preset_copy.map(x=>({id:x.source_draft_id,title:x.display_title_proposal,toast:x.unlock_toast_proposal,story:x.flavor_text_proposal})));assert.equal(new Set(BADGE_COPY.map(x=>x.id)).size,60)});
+test('first award is one star; 1–5 are rendered without placeholders',()=>{for(let n=1;n<=5;n++){const html=badgeStars(n,'green');assert.equal((html.match(/class="badge-star"/g)||[]).length,n)}for(const n of [0,6,-1,1.5])assert.throws(()=>badgeStars(n,'green'))});
+test('five tier colors are independent from border',()=>{for(const t of ['green','blue','red','gold','platinum'])assert.match(badgeStars(1,t),new RegExp('tier-'+t));assert.throws(()=>badgeStars(1,'purple'));assert.match(css,/\.tier-platinum\{--star:/);assert.doesNotMatch(css,/\.tier-(?:green|blue|red|gold|platinum)\{[^}]*border/)});
+test('no sheet cropping, no blue buttons and no unapproved artwork',()=>{assert.match(src,/assets\[id\]\?\.approved===true/);assert.match(src,/assets\[id\]\?\.baseArtUrl/);assert.doesNotMatch(css,/object-position|background-position|#(?:0d6efd|007bff|2563eb)/i);assert.match(css,/--olive:#63794a/)});
