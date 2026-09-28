@@ -1,0 +1,49 @@
+name: Audit Hide Main V2 Independent Owner Collisions
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - '.github/workflows/audit-hide-owner-source-collisions.yml'
+      - 'ENFORCEMENT/tests/hide-v2-main-pr19-conflict-inventory.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-owner-collision-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: c0831a46ac0aa9d32c6dcc6a1e07ff70a8d155eb
+          path: hide-base
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: 1156c559bbc3da239b30606912ab0ae0548af0a3
+          path: hide-main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: 1ccbd372890ba079accadb86e7610cd3fdad240a
+          path: hide-v2
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/Hide-Seek
+          ref: 6d304af1f0d2bf5ce8678023ef2c62604a9e5deb
+          path: hide-pr19
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fail on accidental overlap changes or lost independent producer
+        run: python ENFORCEMENT/tests/hide-v2-main-pr19-conflict-inventory.py hide-base hide-main hide-v2 hide-pr19
