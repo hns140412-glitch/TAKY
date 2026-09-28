@@ -188,4 +188,29 @@ with tempfile.TemporaryDirectory() as tmp:
     data = json.loads(cli.stdout)
     assert data["results"][0]["source_id"] == "SRC-001"
 
+
+# 14. Exported native Docs may include a BOM; CURRENT remains loadable.
+from data_index_search import load_index
+with tempfile.TemporaryDirectory() as tmp:
+    exported = Path(tmp) / "drive-current-export.json"
+    exported.write_text("\ufeff" + json.dumps({"source_entries": RECORDS}, ensure_ascii=False), encoding="utf-8")
+    assert len(load_index(exported)) == len(RECORDS)
+
+# 15. Exact controlled terms (e.g. achievement codes) must beat incidental tokens.
+standard_fixture = [
+    normalize_record({
+        "source_id": "WR-STANDARD",
+        "title": "일기 글쓰기 교사용",
+        "index_l1": {"discovery": {"controlled_terms": ["2국03-04"]}}
+    }),
+    normalize_record({
+        "source_id": "UNRELATED",
+        "title": "나라 국 어휘맵 2 03 04",
+        "index_l1": {"discovery": {"controlled_terms": ["어휘맵"]}}
+    }),
+]
+code_result = search(standard_fixture, "2국03-04")
+assert [x["source_id"] for x in code_result["results"]] == ["WR-STANDARD"]
+assert "EXACT_SHORT_CIRCUIT" in code_result["pipeline"]
+
 print("data_index_search: PASS")
