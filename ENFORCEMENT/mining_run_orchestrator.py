@@ -164,6 +164,7 @@ def orchestrate(payload: dict) -> dict:
             task, next_frontier, next_frontier, next_index,
             depth=depth["research_depth_decision"],
             verified_checkpoint=verified_checkpoint,
+            provider_results=provider_results,
         )
         follow_up["index_first"] = next_index
         follow_up["pending_actions"] = next_pending
@@ -246,6 +247,13 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
                 "guards": {"network_calls_performed_by_orchestrator": False,
                            "current_authority_unchanged": True}}
     requests = plan.get("planned_provider_requests") or []
+    follow_up = plan.get("follow_up_activation") or {}
+    using_deferred_batch = False
+    active_frontier = plan["search_frontier"]
+    if not requests and follow_up.get("state") == "READY_NEXT_BATCH":
+        requests = follow_up.get("planned_provider_requests") or []
+        active_frontier = follow_up["frontier"]
+        using_deferred_batch = bool(requests)
     if not requests:
         return {"schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
                 "state": "NO_PROVIDER_ACTION", "execution_batch": None, "plan": plan,
@@ -281,6 +289,21 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
     prior = prior_checkpoint if prior_checkpoint is not None else core_checkpoint(
         task, plan["search_frontier"], []
     )
+    if using_deferred_batch:
+        # Extend, never replace, the original Core frontier and goal contract.
+        # Previously verified evidence is carried forward exactly once.
+        carried = [{
+            key: row.get(key) for key in
+            ("id", "question", "kind", "origin", "decomposition_id")
+            if key in row
+        } for row in prior.get("frontier", [])]
+        known = {str(row.get("id")) for row in carried}
+        carried.extend(dict(row) for row in active_frontier
+                       if str(row.get("id")) not in known)
+        prior = core_checkpoint(
+            prior.get("task_contract") or task,
+            carried, list(prior.get("evidence") or []), prior,
+        )
     current_checkpoint = (apply_external_receipts(prior, batch["receipts"])
                           if batch["receipts"] else prior)
     next_input = dict(payload)
@@ -291,6 +314,7 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
     return {
         "schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
         "state": "RECONCILED",
+        "batch_scope": "DEFERRED_REQUIRED" if using_deferred_batch else "CURRENT",
         "dispatched_request_ids": [req["request_id"] for req in selected],
         "execution_batch": batch,
         "checkpoint": current_checkpoint,
