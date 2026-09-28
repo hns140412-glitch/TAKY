@@ -21,6 +21,9 @@ on:
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
       - 'ENFORCEMENT/reference_intake_executor.py'
       - 'ENFORCEMENT/reference_intake_executor_test.py'
+      - 'ENFORCEMENT/reference_index_owner_receipt.py'
+      - 'ENFORCEMENT/reference_index_owner_receipt_test.py'
+      - 'ENFORCEMENT/cross_engine_growth_e2e_test.py'
       - 'ENFORCEMENT/runtime_orchestrator.py'
 
 jobs:
@@ -51,6 +54,9 @@ jobs:
       - name: Reference intake disposition lifecycle
         working-directory: ENFORCEMENT
         run: python reference_intake_executor_test.py
+      - name: Independently provisioned Indexing owner receipt and hostile claims
+        working-directory: ENFORCEMENT
+        run: python reference_index_owner_receipt_test.py
       - name: Index-first evidence gap broker
         working-directory: ENFORCEMENT
         run: python learning_evidence_gap_broker_test.py
