@@ -46,3 +46,7 @@ No main merge, production deployment, Netlify, paid model/API, automatic canonic
 
 ## C2S validity
 CURRENT/HANDOFF files to be written/read back alongside this checkpoint. NOT a claim that all system-wide source files have been opened, all 15 audit issues have closed, all real endpoints were invoked or CI is live at this instant. A changed head requires rechecking relevant diffs/CI, not discarding proven CLOSED.
+
+
+## Latest append-only override — §T selective Hide source inspection
+Live Hide main/#12/#19 unchanged; #12 mergeable=false. Original bridges confirm V2 retains local scoped memory advisory but lacks main/#19 child-authored reflection and #19 durable central-outbox functions. #19's memory signal starts with input.member_id override whereas V2 explicitly rejects a conflicting member against a present linked context. Main's original anti-auto-badge contract must survive owner review; neither branch may wholesale replace the other. #19 CI success is on its own HEAD with fixture authority, and its PR description pins an older #159 commit; actual #159 advanced 33 commits, so latest combined ACK/review protocol is OPEN. **Hide disposition: SOURCE_CONTRACT_REVIEWED / SELECTIVE_COMPOSITION_HOLD; combined-source CI NOT TESTED.** Full evidence is in whole-system audit §T. No app branch, main, badge art or deployment changed. Continue separate Indexing issuer/V26 host loader/trusted outcome OPENs.
