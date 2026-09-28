@@ -42,6 +42,34 @@ class OrchestratorTest(unittest.TestCase):
         self.assertEqual(r["plan"]["research_depth_decision"],"D2")
         self.assertLessEqual(len(r["plan"]["search_frontier"]),4)
 
+    def test_explicit_critical_frontier_is_not_dropped_by_unknown(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"verify official source",
+              "unknown":["secondary background"],"critical_requirements":["verify original official evidence"],
+              "max_research_depth":"D2"}
+        result=orchestrate({"task":task,"memory":MEMORY})
+        frontier=result["plan"]["search_frontier"]
+        critical=result["plan"]["unplanned_critical_frontier_ids"]
+        self.assertEqual(critical,[])
+        self.assertEqual(frontier[0]["kind"],"CRITICAL")
+        self.assertIn("verify original official evidence",[x["question"] for x in frontier])
+
+    def test_depth_cap_must_report_unplanned_critical_items(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"audit four essential inputs",
+              "critical_requirements":["critical first","critical second","critical third"],
+              "max_research_depth":"D1"}
+        result=orchestrate({"task":task,"memory":MEMORY})
+        self.assertTrue(result["plan"]["unplanned_critical_frontier_ids"])
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+
+    def test_index_hit_is_not_automatically_evidence_verified(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Official fraction standard",
+               "short_summary":"fraction standard","keywords":["fraction","standard"],
+               "authority_class":"OFFICIAL"}]
+        result=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"verify",
+                                     "unknown":["fraction standard"]},"memory":MEMORY,"index_rows":rows})
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+        self.assertTrue(result["plan"]["index_verification_required"])
+
     def test_success_only_proposes_candidate(self):
         r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:official"},"memory":MEMORY,"execution_receipt":{"success":True,"route_signature":"search:official"}})
         p=r["memory_learning_proposal"]
