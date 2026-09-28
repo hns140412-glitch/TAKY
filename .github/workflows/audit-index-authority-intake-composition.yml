@@ -1,0 +1,65 @@
+name: Audit Combined Index Authority and Owner Receipt Drafts
+
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - '.github/workflows/audit-index-authority-intake-composition.yml'
+      - 'ENFORCEMENT/tests/taky-index-authority-intake-compose.py'
+      - 'ENFORCEMENT/tests/taky-index-authority-intake-combined.test.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-composed-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout canonical TAKY main
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 8e78af8b77d1f3e132f05c99cd6b69a7f258a23e
+          path: canonical-main
+          persist-credentials: false
+      - name: Checkout source authority review Draft 164
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 31c0346222b3454ba6ac098ae127a8facd23ef4a
+          path: authority-draft
+          persist-credentials: false
+      - name: Checkout Indexing owner receipt Draft 167
+        uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: d397e85431b4ed864b339d0bf9d8dc123dcdfd66
+          path: owner-draft
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact heads and compose nonoverlapping source into disposable directory
+        run: python ENFORCEMENT/tests/taky-index-authority-intake-compose.py canonical-main authority-draft owner-draft combined
+      - name: Assert reviewed authority remains unresolved after independently registered Indexing receipt
+        working-directory: combined/ENFORCEMENT
+        run: python ../../ENFORCEMENT/tests/taky-index-authority-intake-combined.test.py
+      - name: Run source authority review and original evidence-gap regressions
+        working-directory: combined/ENFORCEMENT
+        run: |
+          python learning_index_authority_review_test.py
+          python learning_evidence_gap_broker_test.py
+      - name: Run Index-owner receipt and original intake regressions
+        working-directory: combined/ENFORCEMENT
+        run: |
+          python reference_index_owner_receipt_test.py
+          python reference_intake_executor_test.py
+      - name: Run actual Learning–Mining–Index growth fixture with both changes
+        working-directory: combined/ENFORCEMENT
+        run: python cross_engine_growth_e2e_test.py
