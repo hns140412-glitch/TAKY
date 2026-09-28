@@ -3,6 +3,7 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -46,7 +47,8 @@ class ResumeTests(unittest.TestCase):
         self.checkpoint()
         e = verify_checkpoint(self.state, "DATA", "ONE")
         self.assertEqual(e["status"], "LOCAL_INTEGRITY_VERIFIED")
-        payload = generate(self.config, self.root / "report")
+        with mock.patch("continuity_resume.git_snapshot", return_value={"issues": [], "live_freshness": "NOT_CHECKED"}):
+            payload = generate(self.config, self.root / "report")
         self.assertEqual(payload["overall"], "REVIEW_REQUIRED")
         self.assertIsNone(payload["entries"][0]["snapshot"])
         self.assertNotIn("still-open", (self.root / "report" / "CHATGPT_RESUME_NOTE.md").read_text())
