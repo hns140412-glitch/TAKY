@@ -90,4 +90,72 @@ with tempfile.TemporaryDirectory() as temp:
         assert "duplicated" in str(exc)
     else:
         raise AssertionError("duplicated CURRENT accepted")
+
+# Read-only multi-universe composition: Source V6 original + CURRENT V26 + 2
+# staged writing originals + 4 link-only provider records.
+from data_index_bridge import load_source_grounded_universe
+from data_index_external_intake import SCHEMA as EXTERNAL_SCHEMA
+source = {"schema": "TAKY_DATA_SOURCE_INDEX_V6", "entries": [{
+    "source_id": "existing-1", "title": "기존 학습 자료",
+    "mime_type": "application/pdf", "review_state": "CONTENT_REVIEWED",
+    "url": "https://drive.google.com/file/d/existing-1/view",
+    "content_summary": "원본 평가 기준과 피드백",
+}]}
+source_pointer = copy.deepcopy(POINTER)
+source_pointer["source_authority"]["source_index"]["name"] = "DATA_SOURCE_INDEX_2026-09-25_V6.json"
+def provider(i, kind):
+    return {
+        "schema": EXTERNAL_SCHEMA, "external_namespace": "PROVIDER_"+str(i),
+        "provider_native_id": "native_"+str(i), "source_title": "독립 자료 "+str(i),
+        "original_locator": "https://example.org/item/"+str(i),
+        "source_kind": kind, "evidence_extent": "LISTING_METADATA",
+        "rights_state": "UNKNOWN_REVIEW_REQUIRED", "privacy_class": "PUBLIC",
+        "observed_at": "2026-09-29", "attribution": "Publisher metadata",
+        "content_hash": None, "original_content_acquired": False, "current_promoted": False,
+    }
+external_manifest = {
+    "schema": "TAKY_EXTERNAL_DISCOVERY_MANIFEST_V1", "state": "STAGED_LINK_ONLY_NOT_CURRENT",
+    "authority": {"current_pointer_modified": False,
+                  "external_original_content_acquired": False,
+                  "corpus_addition_to_DATA_679": False},
+    "sources": [provider(i,k) for i,k in enumerate([
+        "OFFICIAL_STANDARD", "PUBLIC_API_LISTING", "OPEN_SOURCE_ISSUE", "COMMUNITY_DISCUSSION"])],
+}
+with tempfile.TemporaryDirectory() as temp:
+    root = Path(temp)
+    def save(name, payload):
+        p = root/name
+        p.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        return p
+    source_path=save("source.json", source)
+    current_path=save("current.json", INDEX)
+    pointer_path=save("pointer.json", source_pointer)
+    bridge_path=save("bridge.json", BRIDGE)
+    external_path=save("external.json", external_manifest)
+    rows, proof = load_source_grounded_universe(
+        source_path,current_path,pointer_path,bridge_path,external_path)
+    assert len(rows)==7 and len({v["source_id"] for v in rows})==7
+    assert proof["data_current_count"]==1 and proof["writing_originals_staged_count"]==2
+    assert proof["external_discovery_link_only_count"]==4
+    assert proof["temporary_retrieval_candidate_count"]==7
+    assert proof["data_current_pointer_modified"] is False
+    assert rows[0]["origin_locator"].endswith("/existing-1/view")
+    assert rows[0]["short_summary"] == "원본 평가 기준과 피드백"
+    assert rows[3]["source_id"] == "EXTERNAL::PROVIDER_0::native_0"
+    assert rows[3]["content_hash"] is None and not rows[3]["detail_available"]
+    assert search(rows,"EXTERNAL::PROVIDER_0::native_0")["results"][0]["source_ref"]["locator"].endswith("/item/0")
+    bad = copy.deepcopy(external_manifest)
+    bad["authority"]["current_pointer_modified"] = True
+    save("external.json",bad)
+    try: load_source_grounded_universe(source_path,current_path,pointer_path,bridge_path,external_path)
+    except ValueError as exc: assert "AUTHORITY_INVALID" in str(exc)
+    else: raise AssertionError("external pointer promotion accepted")
+    bad=copy.deepcopy(external_manifest)
+    bad["sources"][0]["privacy_class"]="AUTHORIZED_PRIVATE"
+    save("external.json",bad)
+    try: load_source_grounded_universe(source_path,current_path,pointer_path,bridge_path,external_path)
+    except ValueError as exc: assert "PRIVATE_SOURCE" in str(exc)
+    else: raise AssertionError("private external source reached shared search")
+print("source_grounded_universe: PASS (1 current + 2 staged PDF + 4 external link-only; negative gates)")
+
 print("data_index_bridge: PASS (schema, identity, pair, provenance, stage, collision, CLI)")
