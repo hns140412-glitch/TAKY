@@ -79,3 +79,17 @@ taky resume -ConfigPath 'PATH_TO_REVIEWED_LOCAL_CONFIG.json' -IncludeContext -Li
 This includes compact CURRENT DONE/OPEN/NEXT/corrections in a private local JSON report and queries live main; review before sharing. A missing/mismatched checkpoint or owner makes status BLOCKED. Even a valid local hash yields only REVIEW_REQUIRED: owner authority, source recoverability, remote freshness and simulation are separate gates. There is NO automatic hosted chat ingestion, Google Drive sync-state verification, or canonical write.
 
 Tests: `python -m unittest discover -s TOOLS/LOCAL_BRIDGE -p "continuity_resume_test.py" -v`; dedicated Windows/Ubuntu PR workflow also checks script parsing and a console help smoke test. GitHub CI is distinct from user's PC test.
+
+## Notion → PowerShell local freshness receipt (opt-in candidate)
+
+The separate `TAKY-NOTION-STATUS.ps1` audits **existing** SOURCE VAULT `reports/INCREMENTAL_SUMMARY.json`, `INCREMENTAL_QUEUE.json`, `INCREMENTAL_ERRORS.json` and the presence/JSON validity of `MINING_INBOX_HANDOFF.json`. It creates only aggregate receipts in Documents/TAKY-PC-Reports; it does not call Notion, collect originals, patch rows, run Mining, acknowledge the queue or sync Drive. The actual HANDOFF semantic schema is separately validated by PR #169's owned bridge. It does not auto-install in, or invoke, the existing scheduled Notion task.
+
+After separately approving/staging this candidate locally, from **Windows PowerShell**, explicitly supply a recent externally verified Notion row count:
+```powershell
+& "$env:LOCALAPPDATA\TAKY\Tools\TAKY-NOTION-STATUS.ps1" -VaultRoot 'D:\Git PWA\TAKY-SOURCE-VAULT' -ExpectedNotionCount 148
+```
+The count 148 above is **only a dated 2026-09-29 connector observation**, not a future permanent constant or an automatically refreshed API value. If no fresh independent count is available, omit `-ExpectedNotionCount`; a consistent local queue then returns `LOCAL_QUEUE_CONSISTENT_LIVE_CURRENT_UNKNOWN`, never `CURRENT VERIFIED`. Optionally use `-TaskName 'EXACT_DISCOVERED_WINDOWS_TASK_NAME' -TaskPath '\'` to query a specific existing Windows Task Scheduler task read-only, once its actual name/path is confirmed. Do not guess the name or treat exit code 0 as proof of Notion/page/Drive success.
+
+A discrepancy returns nonzero exit code 2 and local `NOTION_STATUS.json` marked `HOLD_LOCAL_OR_FRESHNESS_GAP`. A matching count only proves count parity, **not equal page-ID sets, source-body SHA, actual live Notion auth, scheduled execution, Mining, Drive sync or canonical promotion**. The report deliberately excludes page IDs, source URLs and bodies. Inputs' hashes and aggregate counts are retained privately; do not upload reports to GitHub.
+
+Tested in GitHub Windows PowerShell 5.1 synthetic CI: matching count passes, stale count fails closed, original fixture files unchanged by SHA-256, no source identifiers in the receipt. Actual user PC Windows scheduled task and current SOURCE VAULT reports remain OPEN. This candidate is Draft only.
