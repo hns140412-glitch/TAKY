@@ -228,20 +228,21 @@
         {
           "owner": "Ready-Set",
           "pr": "https://github.com/hns140412-glitch/Ready-Set/pull/113",
-          "head_sha": "1c05843ca42fcd25292b3dd9c40252c13d0f1f17",
+          "head_sha": "177294ca48bc796ba01d986b66cf1f97c40255a3",
           "base_sha": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
-          "state": "DRAFT_CONSUMER_ADAPTER_CI_VERIFIED_ONLY",
-          "scope": "vendor staged source plus Ready review draft correlation and excluded reference negative tests; server endpoint not yet verified"
+          "state": "DRAFT_FRONTEND_AND_SERVER_CONTRACT_CI_VERIFIED_NOT_DEPLOYED",
+          "scope": "Ready adapter plus existing server endpoint and pure metadata/evidence regression; server echoes exact request id, rejects excluded answer reference, invalid upload/source; no provider-live claim."
         },
         {
           "owner": "Hide-Seek V2",
           "pr": "https://github.com/hns140412-glitch/Hide-Seek/pull/20",
-          "head_sha": "7c2ac5344a8ffc9fa45fd851ee982523aafd7ac6",
+          "head_sha": "0367e57fdd7526d0d6ee4404ef87584e02812c8c",
           "base_sha": "1ccbd372890ba079accadb86e7610cd3fdad240a",
-          "state": "DRAFT_STACKED_ON_PR12_PENDING_FULL_CI",
-          "scope": "family OCR response echo, explicit per-row source and versioned source vendor copy; PR12 not rebased or overwritten"
+          "state": "DRAFT_STACKED_ON_PR12_TESTS_TO_VERIFY_EXACT_HEAD",
+          "scope": "Hide V2 shared adapter exact response echo plus explicit per-row provenance; browser fixtures now independently echo multipart request/page; no real family Hide server handler exists."
         }
-      ]
+      ],
+      "source_recovery_correction": "Existing Ready main netlify/functions/capture-analyze.mjs was recovered from merged Ready PR #41. Its coded provider is OPENAI_RESPONSES_VISION with server-only OPENAI_API_KEY, not Google OCR. Google API remains researched, without actual provider-call or operating-cost proof. Current shared Ready route authorizes PARENT only and does not implement HIDE_VOCABULARY output; staged Ready PR #113 explicitly returns 422 HIDE_VOCABULARY_UNSUPPORTED until an Owner-authorized real domain provider and CHILD grant are implemented."
     }
   ]
 }
