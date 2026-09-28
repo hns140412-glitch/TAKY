@@ -156,6 +156,55 @@ with tempfile.TemporaryDirectory() as temp:
     try: load_source_grounded_universe(source_path,current_path,pointer_path,bridge_path,external_path)
     except ValueError as exc: assert "PRIVATE_SOURCE" in str(exc)
     else: raise AssertionError("private external source reached shared search")
+
+# Optional selected-source evidence roundtrip retains a staged-only 1+2+4 scope.
+from data_index_evidence_overlay import SCHEMA as EVIDENCE_SCHEMA, STATE as EVIDENCE_STATE, FACT_KIND
+section_notes=[]
+for source_row in external_manifest["sources"]:
+    role=source_row["source_kind"]
+    method,fact=FACT_KIND[role]
+    section_notes.append({
+        "source_id": "EXTERNAL::"+source_row["external_namespace"]+"::"+source_row["provider_native_id"],
+        "original_locator": source_row["original_locator"], "source_kind": role,
+        "inspection_method": method, "fact_status":fact, "section_ref":"Named original section",
+        "evidence_summary":"Selected original page section directly reviewed for its stated content and limitations.",
+        "limits":"Only this selected section observed; no whole document or full-text reuse claim.",
+        "reviewed_at":"2026-09-29","content_hash":None,"full_content_acquired":False,
+        "rights_verified":False,"reuse_scope":"SHORT_ORIGINAL_PARAPHRASE_ONLY",
+        "detail_location_verified":"SECTION_LABEL_NOT_SPATIAL_BBOX",
+    })
+delta={
+    "schema":EVIDENCE_SCHEMA,"state":EVIDENCE_STATE,
+    "parent_manifest_document_id":"test-base-document",
+    "authority":{"current_pointer_modified":False,"source_manifest_modified":False,
+       "raw_full_content_acquired":False,"rights_for_full_text_reuse_verified":False,
+       "source_hashes_verified":0},
+    "entries":section_notes,
+}
+with tempfile.TemporaryDirectory() as temp:
+    root=Path(temp)
+    def put(name,data):
+        p=root/name;p.write_text(json.dumps(data,ensure_ascii=False),encoding="utf-8")
+        return p
+    source_path=put("source.json",source)
+    current_path=put("current.json",INDEX)
+    pointer_path=put("pointer.json",source_pointer)
+    bridge_path=put("bridge.json",BRIDGE)
+    external_path=put("external.json",external_manifest)
+    evidence_path=put("evidence.json",delta)
+    records,meta=load_source_grounded_universe(source_path,current_path,pointer_path,
+        bridge_path,external_path,evidence_path,"test-base-document")
+    assert len(records)==7 and meta["external_evidence_receipt"]["notes_joined"]==4
+    assert records[3]["short_summary"].startswith("Selected original page")
+    assert records[3]["content_hash"] is None and records[3]["current_relation"]=="NO_CURRENT_PROMOTION"
+    assert meta["data_current_pointer_modified"] is False
+    bad=copy.deepcopy(delta);bad["entries"][0]["source_id"]="EXTERNAL::UNLISTED::anything"
+    put("evidence.json",bad)
+    try:load_source_grounded_universe(source_path,current_path,pointer_path,
+         bridge_path,external_path,evidence_path,"test-base-document")
+    except ValueError as exc:assert "UNKNOWN_OR_DUPLICATE_ID" in str(exc)
+    else:raise AssertionError("Unknown evidence source ID accepted")
+print("source_grounded_evidence: PASS (staged selected sections, no content/promotion, origin gate)")
 print("source_grounded_universe: PASS (1 current + 2 staged PDF + 4 external link-only; negative gates)")
 
 print("data_index_bridge: PASS (schema, identity, pair, provenance, stage, collision, CLI)")
