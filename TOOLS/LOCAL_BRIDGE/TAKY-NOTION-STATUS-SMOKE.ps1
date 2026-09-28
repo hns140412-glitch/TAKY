@@ -21,7 +21,15 @@ $files=@(Get-ChildItem -LiteralPath $reports -File)
 $before=@{};foreach($file in $files){$before[$file.Name]=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash}
 $scriptPath=Join-Path $PSScriptRoot 'TAKY-NOTION-STATUS.ps1'
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $scriptPath -VaultRoot $vault -ExpectedNotionCount 2 -OutputRoot $output
-if ($LASTEXITCODE -ne 0) { throw 'SYNTH_CURRENT_MATCH_SHOULD_PASS' }
+if ($LASTEXITCODE -ne 0) {
+    $debug=@(Get-ChildItem -LiteralPath $output -Recurse -Filter NOTION_STATUS.json -File | Select-Object -First 1)
+    if ($debug.Count) {
+        $x=Get-Content -LiteralPath $debug[0].FullName -Raw | ConvertFrom-Json
+        Write-Host ('SYNTH_DEBUG_STATUS='+$x.status+' ISSUES='+(@($x.issues) -join ',')+
+          ' COUNTS='+($x.counts | ConvertTo-Json -Compress -Depth 3))
+    }
+    throw 'SYNTH_CURRENT_MATCH_SHOULD_PASS'
+}
 $receipts=@(Get-ChildItem -LiteralPath $output -Recurse -Filter NOTION_STATUS.json -File)
 if ($receipts.Count -ne 1) { throw 'SYNTH_MISSING_PASS_RECEIPT' }
 $pass=Get-Content -LiteralPath $receipts[0].FullName -Raw | ConvertFrom-Json
