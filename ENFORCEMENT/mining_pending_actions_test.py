@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Targeted regression for unprocessed Mining classification, action and resume."""
 import unittest
-from mining_run_orchestrator import orchestrate
+from mining_run_orchestrator import orchestrate, advance_provider_batch
 from mining_core import checkpoint as mining_checkpoint, apply_external_receipts
 
 
@@ -257,6 +257,80 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(item["next_action"]["type"],"TRY_NEXT_PROVIDER")
         self.assertEqual([r["provider"] for r in p["planned_provider_requests"]],["GITHUB"])
         self.assertEqual(len(p["planned_provider_requests"]),1)
+
+    def test_provider_batch_reconciles_verified_success_and_empty_gap(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"compare two source claims",
+              "unknown":["official A","official B"],"max_research_depth":"D1"}
+        initial=orchestrate({"task":task,"memory":{}})
+        reqs=initial["plan"]["planned_provider_requests"]
+        first={}
+        for request in reqs:
+            first.setdefault(request["frontier_id"],request)
+        self.assertEqual(len(first),2)
+        runtime={}
+        for fid,req in first.items():
+            if fid=="official A":
+                runtime[req["request_id"]]={"state":"SUCCESS","response":{"results":[
+                    {"source_id":"A-ORIGINAL","url":"https://example.gov/original",
+                     "claim":"Original A","source_class":"PRIMARY",
+                     "direct_support":True,"fresh_enough":True,
+                     "excerpt_ref":"page:1#p:1","independent_support_count":2}]}}
+            else:
+                runtime[req["request_id"]]={"state":"EMPTY","response":{"results":[]}}
+        result=advance_provider_batch({"task":task,"memory":{}},runtime)
+        self.assertEqual(result["state"],"RECONCILED")
+        self.assertTrue(result["checkpoint"]["evidence"])
+        self.assertEqual(find_by_question(result["plan"],"official A")["classification"],"EVIDENCE_VERIFIED")
+        self.assertEqual(find_by_question(result["plan"],"official B")["classification"],"EMPTY_PROVIDER_RESULT")
+        self.assertEqual({r["frontier_id"] for r in result["plan"]["planned_provider_requests"]},{"official B"})
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+        self.assertFalse(result["guards"]["network_calls_performed_by_orchestrator"])
+
+    def test_provider_failure_prepares_different_fallback_without_retrying_same_provider(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"find one official source",
+              "unknown":["official claim"],"max_research_depth":"D1"}
+        initial=orchestrate({"task":task,"memory":{}})
+        first=initial["plan"]["planned_provider_requests"][0]
+        out=advance_provider_batch({"task":task,"memory":{}},{
+            first["request_id"]:{"state":"FAILED","error":"NETWORK_FAILURE"}
+        })
+        self.assertEqual(out["state"],"RECONCILED")
+        item=find_by_question(out["plan"],"official claim")
+        self.assertEqual(item["next_action"]["type"],"TRY_NEXT_PROVIDER")
+        self.assertEqual([r["provider"] for r in out["plan"]["planned_provider_requests"]],["PUBLIC_DATA"])
+        self.assertNotEqual(out["plan"]["planned_provider_requests"][0]["request_id"],first["request_id"])
+        self.assertEqual(len(out["execution_batch"]["results"]),1)
+
+    def test_access_denial_holds_instead_of_bypassing_provider(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"retrieve protected material",
+              "unknown":["protected PDF"]}
+        first=orchestrate({"task":task,"memory":{}})["plan"]["planned_provider_requests"][0]
+        out=advance_provider_batch({"task":task,"memory":{}},{
+            first["request_id"]:{"state":"FAILED","error":"ACCESS_DENIED"}
+        })
+        item=find_by_question(out["plan"],"protected PDF")
+        self.assertEqual(item["classification"],"ACCESS_HOLD")
+        self.assertEqual(item["state"],"HOLD")
+        self.assertEqual(out["plan"]["planned_provider_requests"],[])
+
+    def test_provider_success_without_exact_anchor_is_not_evidence_completion(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"find source","unknown":["source X"]}
+        first=orchestrate({"task":task,"memory":{}})["plan"]["planned_provider_requests"][0]
+        out=advance_provider_batch({"task":task,"memory":{}},{
+            first["request_id"]:{"state":"SUCCESS","response":{"results":[
+                {"source_id":"X","url":"https://example.gov/x","claim":"X","source_class":"PRIMARY",
+                 "direct_support":True,"independent_support_count":2}]}}
+        })
+        self.assertEqual(find_by_question(out["plan"],"source X")["classification"],
+                         "PROVIDER_RESULT_UNVERIFIED")
+        self.assertFalse(out["plan"]["research_complete_eligible"])
+
+    def test_previous_checkpoint_from_another_goal_is_rejected(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"goal one","unknown":["source X"]}
+        old=mining_checkpoint({"task_family":"GENERAL_RESEARCH","goal":"another goal"},[],[])
+        result=advance_provider_batch({"task":task,"memory":{},"verified_checkpoint":old},{})
+        self.assertEqual(result["state"],"HOLD_CHECKPOINT_GOAL_MISMATCH")
+        self.assertEqual(result["execution_batch"],None)
 
     def test_known_complete_cannot_silently_override_new_explicit_gap(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "already complete",
