@@ -4,7 +4,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from source_vault_handoff_bridge import build_receipt, InputError, safe_url, source_kind
+from source_vault_handoff_bridge import build_receipt, InputError, safe_url, source_kind, candidate_url
 
 class SourceVaultBridgeTest(unittest.TestCase):
     def write(self, directory, items):
@@ -35,6 +35,34 @@ class SourceVaultBridgeTest(unittest.TestCase):
     def test_bad_urls(self):
         for u in ('file:///C:/secret','http://user:password@example.org','javascript:alert(1)'):
             self.assertEqual(safe_url(u),'')
+
+    def test_normalized_url_fallback_v22(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            x=self.sample(); x['url']=''; x['normalized_url']='https://example.org/a?utm_campaign=one&logNo=123'
+            self.write(tmp,[x])
+            r=build_receipt(Path(tmp))
+            self.assertEqual(r['routes'][0]['kind'],'PUBLIC_URL_CANDIDATE')
+            self.assertEqual(r['routes'][0]['source_url'],'https://example.org/a?logNo=123')
+
+    def test_conflict_blocks_auto_external_acquisition(self):
+        row={'url_conflict':True,'url':'https://example.org/a',
+             'normalized_url':'https://example.org/b'}
+        self.assertEqual(candidate_url(row),'')
+        self.assertEqual(source_kind(row),'HOLD_URL_CONFLICT')
+
+    def test_body_links_are_review_only(self):
+        row={'url':'', 'block_link_candidates':[{'url':'https://example.org/somewhere'}]}
+        self.assertEqual(source_kind(row),'REVIEW_BODY_LINK_CANDIDATES')
+        self.assertEqual(candidate_url(row),'')
+
+    def test_secret_query_never_enters_router_receipt(self):
+        got=safe_url('https://example.org/a?x-amz-signature=secret&api_key=hidden&mcp_token=private&logNo=123')
+        self.assertEqual(got,'https://example.org/a?logNo=123')
+
+    def test_actual_v22_attachment_node(self):
+        row={'url':'','record_type':'ATTACHMENT_ONLY',
+             'material_nodes':[{'kind':'NOTION_ATTACHMENT','block_id':'b1'}]}
+        self.assertEqual(source_kind(row),'NOTION_ATTACHMENT_ACQUISITION')
 
     def test_fail_closed_missing_handoff(self):
         with tempfile.TemporaryDirectory() as tmp:
