@@ -98,6 +98,34 @@ Preferred:
 Do not create a metric merely to satisfy process. Capture only outcome signals that can change future execution or retire a weak pattern.
 
 
+
+## 3.2 Change-aware observation -> next useful action — APPLICATION NOTE
+
+The user's eight-frame example of a purported round-the-clock AI operator offers a **method analogy**, not evidence of its actual service performance, an endorsed trading system, or an instruction to make every TAKY project autonomous.
+
+The existing owners already cover discovery (Mining), source and relationship traceability (Indexing), owner-specific interpretation/decision (e.g. central Learning or the appropriate Work owner), actual execution (the relevant app/Planner), and result feedback (this protocol and TKY-GROWTH-001). **Do not create a parallel scan/signal/plan/risk/watch/decision engine or move authority to a model/provider.**
+
+Use the existing outcome contract to choose the smallest useful observation cadence:
+
+- **Event-triggered:** a relevant original source revision, meaningful new evidence, project-owned exception, result gap, or changed constraint can justify revisiting only its affected scope. Compare against the prior authoritative source and action; do not infer a material change merely from another summary or a popular social post.
+- **Scheduled only where useful:** a domain owner may require a clock-based check when time itself can alter the useful action. The owner chooses frequency, cost/privacy budget and stop condition. A "24-hour" label is not a requirement for continuous LLM calls or an always-on service.
+- **No new material signal:** retain the approved/current result, do not repeatedly revalidate an unchanged input or reopen CLOSED without new evidence. Return to a productive next action or stop when the outcome contract is satisfied.
+
+When a trigger matters, reuse rather than replace the established loop:
+
+`OWNER GOAL + BASELINE / SOURCE -> OBSERVABLE CHANGE OR RESULT GAP
+-> LOCAL INTERPRETATION (FACT / INFERENCE / UNKNOWN SEPARATE)
+-> MOST USEFUL REVERSIBLE OR AUTHORIZED NEXT ACTION + FAILURE/RECOVERY CONDITION
+-> EXECUTE WITH EXISTING OWNER AUTHORITY
+-> COMPARE OBSERVED RESULT TO INTENDED RESULT AT THE ACTUAL EVIDENCE SCOPE
+-> CONTINUE / ADJUST / HOLD / OWNER DECISION / STOP`
+
+The scan identifies a candidate; it does **not** create a verified fact or approve an action. The plan is a proposed action, not an executed result. The risk check is sized to the proposed action's consequence and can happen before or during execution; it is not a universal checklist. A human choice is required where the existing owner/authority contract requires one, not as an invented approval gate on every low-risk step. Preserve USER != DEBUGGER.
+
+When reporting improvement, differentiate fixture, CI, runtime/device, external-provider and actual user/business/learning outcome. Reuse the already-open `GROWTH-OUTCOME-LEARNING-001` for the missing before/change/after evidence; a test pass never silently becomes measured real-world benefit or `CURRENT_BEST`. If the necessary result cannot be observed yet, report the unverified scope and continue an authorized useful action rather than manufacture a metric, new taxonomy or monitoring infrastructure.
+
+Apply this same routing pattern across domains through each existing owner, without copying domain logic into TAKY. The current explicit HOLD for a project remains HOLD: this general method neither performs work on it nor reactivates it. This note is complementary to the existing TKY-GROWTH-001 protocol and its separate draft work; reconcile overlapping wording against the exact latest authority before any promotion.
+
 ## 4. Validation budget / anti-overvalidation — HARD LOCK
 
 Validation intensity SHALL be proportional to material risk, uncertainty, irreversibility and consequence.
