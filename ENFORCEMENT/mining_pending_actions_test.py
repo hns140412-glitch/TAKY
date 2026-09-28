@@ -137,7 +137,7 @@ class PendingActionTest(unittest.TestCase):
         waiting = plan(task, verified_checkpoint=one)["follow_up_activation"]
         self.assertEqual(waiting["state"], "WAIT_CURRENT_BATCH_EVIDENCE")
         two = apply_external_receipts(one, [receipt(selected[1], 2)])
-        self.assertTrue(two["stop"])
+        self.assertFalse(two["stop"],"Deferred source C must keep entire goal OPEN")
         ready = plan(task, verified_checkpoint=two)["follow_up_activation"]
         self.assertEqual(ready["state"], "READY_NEXT_BATCH")
         self.assertEqual([x["question"] for x in ready["frontier"]], ["source C"])
@@ -351,6 +351,28 @@ class PendingActionTest(unittest.TestCase):
         result=advance_provider_batch({"task":task,"memory":{},"verified_checkpoint":old},{})
         self.assertEqual(result["state"],"HOLD_CHECKPOINT_GOAL_MISMATCH")
         self.assertEqual(result["execution_batch"],None)
+
+    def test_provider_batch_current_success_not_full_goal_success_if_deferred_critical(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"three official inputs",
+              "critical_requirements":["source A","source B","source C"],
+              "max_research_depth":"D1"}
+        first=orchestrate({"task":task,"memory":{}})["plan"]
+        requests={}
+        for req in first["planned_provider_requests"]:
+            requests.setdefault(req["frontier_id"],req)
+        injected={req["request_id"]:{"state":"SUCCESS","response":{"results":[{
+            "source_id":"SRC-"+fid,"source_identity":"SRC-"+fid,
+            "url":"https://example.gov/"+fid.replace(" ","-"),
+            "source_class":"PRIMARY","claim":"verified "+fid,"direct_support":True,
+            "fresh_enough":True,"excerpt_ref":"page:1#paragraph:1",
+            "independent_support_count":2}]}}
+            for fid,req in requests.items()}
+        result=advance_provider_batch({"task":task,"memory":{}},injected)
+        self.assertEqual(result["state"],"RECONCILED")
+        self.assertFalse(result["checkpoint"]["stop"])
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+        self.assertEqual(result["plan"]["follow_up_activation"]["state"],"READY_NEXT_BATCH")
+        self.assertEqual([x["question"] for x in result["plan"]["follow_up_activation"]["frontier"]],["source C"])
 
     def test_known_complete_cannot_silently_override_new_explicit_gap(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "already complete",
