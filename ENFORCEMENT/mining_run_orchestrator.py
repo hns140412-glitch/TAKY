@@ -12,24 +12,35 @@ from mining_goal_decomposition import apply_to_task
 from mining_depth_router import route_depth
 from mining_growth_loop import propose_growth
 from mining_index_bridge import query_frontier
+from mining_pending_actions import classify_pending, activate_next_batch
+from mining_provider_execution_loop import build_requests
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
-def build_frontier(task: dict, depth: str) -> list[dict]:
+def build_frontier(task: dict, depth: str, *, unbounded=False) -> list[dict]:
     """Prioritize explicit intent and critical evidence within the depth budget.
 
     Generic dimensions are research scaffolding, never allowed to displace an
     explicit critical requirement without exposing it as unplanned.
     """
-    if depth == "D0":
+    if depth == "D0" and not unbounded:
         return []
-    items, seen = [], set()
+    items, seen = [], {}
 
     def add(item: dict) -> None:
         question = str(item.get("question") or item.get("id") or "").strip()
-        if question and question not in seen:
-            seen.add(question)
-            items.append(dict(item))
+        if not question:
+            return
+        if question in seen:
+            previous = items[seen[question]]
+            refs = [item.get("id"), item.get("decomposition_id"), *(item.get("aliases") or [])]
+            existing = {previous.get("id"), previous.get("decomposition_id"),
+                        *(previous.get("aliases") or [])}
+            previous.setdefault("aliases", [])
+            previous["aliases"].extend(str(x) for x in refs if x and x not in existing)
+            return
+        seen[question] = len(items)
+        items.append(dict(item))
 
     decomposed = task.get("decomposed_frontier") or []
     # Preserve exact IDs from goal decomposition for downstream sufficiency checks.
@@ -55,14 +66,15 @@ def build_frontier(task: dict, depth: str) -> list[dict]:
                 continue
             # Generic scaffolding is only a fallback for an otherwise vague goal;
             # do not inflate a concrete user's bounded research frontier.
-            if has_explicit_scope and item.get("origin") == "GENERIC_SCAFFOLD":
+            if (has_explicit_scope and item.get("origin") == "GENERIC_SCAFFOLD"
+                    and not (kind == "ALTERNATIVE" and task.get("alternatives_required"))):
                 continue
             # Legacy frontier consumers use the actual question as the ID.
             # Retain the decomposition ID separately for goal-sufficiency mapping.
             add({**item, "decomposition_id": item.get("id"), "id": item.get("question")})
 
     limit = {"D1": 2, "D2": 4, "D3": 6, "D4": 10}.get(depth, 0)
-    return items[:limit]
+    return items if unbounded else items[:limit]
 
 def _learning_proposal(task: dict, memory_prior: dict, receipt: dict) -> dict:
     success = bool(receipt.get("success"))
@@ -93,10 +105,8 @@ def orchestrate(payload: dict) -> dict:
     receipt = payload.get("execution_receipt")
     prior = prepare_next_run(task, memory)
     depth = route_depth(task)
+    full_frontier = build_frontier(task, depth["research_depth_decision"], unbounded=True)
     frontier = build_frontier(task, depth["research_depth_decision"])
-    if not frontier and task.get("decomposed_frontier"):
-        limit={"D0":0,"D1":2,"D2":4,"D3":6,"D4":10}.get(depth["research_depth_decision"],0)
-        frontier=list(task.get("decomposed_frontier",[]))[:limit]
     index_rows = payload.get("index_rows") or []
     index_result = query_frontier(
         frontier,
@@ -116,16 +126,24 @@ def orchestrate(payload: dict) -> dict:
     }
     external_frontier = index_result["external_mining_frontier"]
     verification_frontier = index_result.get("verification_frontier", [])
-    selected_ids = ({str(item.get("id")) for item in frontier}
-                    | {str(item.get("decomposition_id")) for item in frontier
-                       if item.get("decomposition_id")})
-    unplanned_critical = [fid for fid in task.get("critical_frontier_ids", [])
-                          if fid not in selected_ids]
-    unplanned_required = list(dict.fromkeys(
-        unplanned_critical + [fid for fid in task.get("goal_decomposition", {}).get("explicit_requirement_ids", [])
-                              if fid not in selected_ids]
-    ))
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
+    provider_results = payload.get("provider_results")
+    if provider_results is None and isinstance(payload.get("execution_batch"), dict):
+        provider_results = payload["execution_batch"].get("results")
+    pending = classify_pending(
+        task, full_frontier, frontier, index_result,
+        route_blocked=blocked, provider_results=provider_results,
+        depth=depth["research_depth_decision"],
+    )
+    unplanned = [x for x in pending["items"] if x["classification"] in
+                 {"DEPTH_DEFERRED", "DEPTH_CONFLICT"}]
+    unplanned_critical = [x["frontier_id"] for x in unplanned if x["kind"] == "CRITICAL"]
+    unplanned_required = [x["frontier_id"] for x in unplanned if x["required_for_goal"]]
+    follow_up = activate_next_batch(
+        pending, frontier, payload.get("verified_checkpoint"),
+        depth=depth["research_depth_decision"], route_blocked=blocked,
+    )
+    prepared_requests = build_requests(pending["ready_query_plans"]) if not blocked else []
     route = (
         prior["failure_memory"]["replacement_routes"][0]
         if prior["next_action"] == "USE_REPLACEMENT_ROUTE" and prior["failure_memory"]["replacement_routes"]
@@ -144,8 +162,11 @@ def orchestrate(payload: dict) -> dict:
         "index_verification_required": bool(verification_frontier),
         "unplanned_critical_frontier_ids": unplanned_critical,
         "unplanned_required_frontier_ids": unplanned_required,
-        "research_complete_eligible": (not blocked and not unplanned_required
-                                       and not external_frontier and not verification_frontier),
+        "pending_actions": pending,
+        "next_batch_preview": pending["next_batch_preview"],
+        "follow_up_activation": follow_up,
+        "planned_provider_requests": prepared_requests,
+        "research_complete_eligible": pending["research_complete_eligible"],
         "execution_allowed": not blocked,
     }
     return {
