@@ -2,6 +2,7 @@
 """Targeted regression for unprocessed Mining classification, action and resume."""
 import unittest
 from mining_run_orchestrator import orchestrate
+from mining_core import checkpoint as mining_checkpoint, apply_external_receipts
 
 
 def plan(task, **kwargs):
@@ -113,28 +114,54 @@ class PendingActionTest(unittest.TestCase):
         self.assertFalse(p["execution_allowed"])
         self.assertEqual(p["planned_provider_requests"], [])
 
-    def test_next_batch_requires_verified_current_checkpoint(self):
+    def test_next_batch_requires_real_source_anchored_checkpoint(self):
         task = {"task_family": "GENERAL_RESEARCH", "goal": "three sources",
                 "critical_requirements": ["source A", "source B", "source C"],
                 "max_research_depth": "D1"}
         p = plan(task)
         self.assertEqual(p["follow_up_activation"]["state"], "WAIT_VERIFIED_CHECKPOINT")
-        first = p["search_frontier"][0]["id"]
-        second = p["search_frontier"][1]["id"]
-        checkpoint = {"schema": "TAKY_MINING_CORE_CHECKPOINT_V1", "resume_key": "cp-1",
-                      "frontier": [{"id": first, "status": "CLOSED", "evidence_count": 1,
-                                    "best_evidence_score": 0.9},
-                                   {"id": second, "status": "OPEN", "evidence_count": 0,
-                                    "best_evidence_score": 0.0}]}
-        waiting = plan(task, verified_checkpoint=checkpoint)["follow_up_activation"]
+        selected = p["search_frontier"]
+        start = mining_checkpoint(task, selected, [])
+
+        def receipt(item, number):
+            return {"frontier_id": item["id"], "query": item["question"], "adapter": "WEB",
+                    "results": [{"source_id": "OFF-" + str(number),
+                                 "url": "https://example.gov/source/" + str(number),
+                                 "source_identity": "official-" + str(number),
+                                 "source_class": "PRIMARY", "direct_support": True,
+                                 "claim": "Evidence for " + item["question"],
+                                 "excerpt_ref": "page:" + str(number) + "#paragraph:1",
+                                 "independent_support_count": 2}]}
+
+        one = apply_external_receipts(start, [receipt(selected[0], 1)])
+        waiting = plan(task, verified_checkpoint=one)["follow_up_activation"]
         self.assertEqual(waiting["state"], "WAIT_CURRENT_BATCH_EVIDENCE")
-        checkpoint["frontier"][1].update(status="CLOSED", evidence_count=1,
-                                         best_evidence_score=0.9)
-        ready = plan(task, verified_checkpoint=checkpoint)["follow_up_activation"]
+        two = apply_external_receipts(one, [receipt(selected[1], 2)])
+        self.assertTrue(two["stop"])
+        ready = plan(task, verified_checkpoint=two)["follow_up_activation"]
         self.assertEqual(ready["state"], "READY_NEXT_BATCH")
         self.assertEqual([x["question"] for x in ready["frontier"]], ["source C"])
-        self.assertEqual(ready["checkpoint_resume_key"], "cp-1")
+        self.assertEqual(ready["checkpoint_resume_key"], two["resume_key"])
         self.assertFalse(ready["external_execution_performed"])
+
+    def test_forged_closed_status_and_unanchored_source_cannot_activate_next_batch(self):
+        task = {"task_family": "GENERAL_RESEARCH", "goal": "bounded evidence",
+                "critical_requirements": ["a", "b", "c"], "max_research_depth": "D1"}
+        p = plan(task)
+        ids = [x["id"] for x in p["search_frontier"]]
+        alleged = {"schema": "TAKY_MINING_CORE_CHECKPOINT_V1", "resume_key": "unverified",
+                   "frontier": [{"id": fid, "status": "CLOSED", "evidence_count": 1,
+                                 "best_evidence_score": 0.925} for fid in ids],
+                   "evidence": []}
+        out = plan(task, verified_checkpoint=alleged)["follow_up_activation"]
+        self.assertNotEqual(out["state"], "READY_NEXT_BATCH")
+        alleged["evidence"] = [{"frontier_id": fid, "source_id": "OFF" + fid,
+                                 "source_class": "PRIMARY", "claim": "a candidate claim",
+                                 "direct_support": True, "fresh_enough": True,
+                                 "independent_support_count": 2} for fid in ids]
+        out = plan(task, verified_checkpoint=alleged)["follow_up_activation"]
+        self.assertEqual(out["state"], "WAIT_SOURCE_ANCHOR")
+        self.assertEqual(set(out["missing_anchor_ids"]), set(ids))
 
     def test_known_complete_cannot_silently_override_new_explicit_gap(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "already complete",
