@@ -29,3 +29,21 @@ Expected files: `CHATGPT_REPORT.md`, `REPOSITORIES.csv`, `DRIVE_INVENTORY.json`,
 
 ## Known limits
 `AheadOfTracking` and `BehindTracking` are local tracking-ref comparisons, not server-side main divergence. Drive inventory is top-level metadata, not content verification. Scheduled automation and automatic ChatGPT reads are not delivered by this script.
+
+## TAKY Console (opt-in)
+`TAKY-CONSOLE.ps1` wraps the existing bridge. It does not talk to the OpenAI API, take control of ChatGPT, install a scheduled task, or automatically upload a report.
+
+Direct invocation, with the Console and Bridge in the same local folder:
+```powershell
+& "$env:LOCALAPPDATA\TAKY\Tools\TAKY-CONSOLE.ps1" chat
+& "$env:LOCALAPPDATA\TAKY\Tools\TAKY-CONSOLE.ps1" status
+& "$env:LOCALAPPDATA\TAKY\Tools\TAKY-CONSOLE.ps1" report
+& "$env:LOCALAPPDATA\TAKY\Tools\TAKY-CONSOLE.ps1" report -ReportAction copy
+```
+To enable `taky chat`, `taky status`, `taky report` as short commands, add this manually to the current PowerShell session (no profile mutation is performed by the script):
+```powershell
+function taky { & "$env:LOCALAPPDATA\TAKY\Tools\TAKY-CONSOLE.ps1" @args }
+```
+To persist it, the user must deliberately add the function to their PowerShell profile. Never replace an existing profile automatically. Do not paste sensitive output to chat without review. `report` merely opens the report folder; clipboard copy requires explicit `-ReportAction copy`.
+
+No automatic version refresh is implemented. The candidate scripts are on Draft PR #170 and require PC installation and testing before promotion; an old local main may not contain them.
