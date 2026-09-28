@@ -3,14 +3,17 @@
 [CmdletBinding()]
 param(
     [Parameter(Position=0)]
-    [ValidateSet('chat','status','report','help')]
+    [ValidateSet('chat','status','report','resume','help')]
     [string]$Command = 'help',
     [ValidateSet('open','copy','path')]
     [string]$ReportAction = 'open',
     [string]$Root = 'D:\Git PWA',
     [string]$DriveRoot = 'F:\',
     [string]$ReportRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'TAKY-PC-Reports'),
-    [switch]$SkipRemote
+    [switch]$SkipRemote,
+    [string]$ConfigPath,
+    [switch]$IncludeContext,
+    [switch]$LiveRemote
 )
 $ErrorActionPreference='Stop'
 switch ($Command) {
@@ -49,12 +52,30 @@ switch ($Command) {
         }
         break
     }
+    'resume' {
+        if (-not $ConfigPath) { throw 'RESUME_CONFIG_REQUIRED: supply an explicit reviewed JSON config using -ConfigPath' }
+        if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) { throw 'RESUME_CONFIG_NOT_FOUND' }
+        $scriptPath=Join-Path $PSScriptRoot 'continuity_resume.py'
+        if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) { throw ('Missing continuity reader: '+$scriptPath) }
+        $python=Get-Command python -ErrorAction SilentlyContinue
+        if (-not $python) { throw 'PYTHON_NOT_FOUND: no automatic installation or fallback' }
+        $out=Join-Path $ReportRoot ('RESUME-EVIDENCE-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
+        $invokeArgs=@($scriptPath,'--config',$ConfigPath,'--output',$out)
+        if ($IncludeContext) { $invokeArgs += '--include-context' }
+        if ($LiveRemote) { $invokeArgs += '--live-remote' }
+        & $python.Source @invokeArgs
+        if ($LASTEXITCODE -ne 0) { throw ('Resume evidence BLOCKED or failed. Exit: '+$LASTEXITCODE) }
+        Write-Host ('Review the local resume evidence folder before sharing: '+$out)
+        break
+    }
     'help' {
         @(
             'TAKY CONSOLE v0.1',
             '  taky chat                    Open normal ChatGPT in your browser',
             '  taky status                  Run read-only Local Bridge; open results folder',
             '  taky report                  Open latest report folder',
+            '  taky resume -ConfigPath FILE  Read explicit namespace CURRENT and owner evidence',
+            '  taky resume -ConfigPath FILE -IncludeContext -LiveRemote  Opt-in content/live HEAD',
             '  taky report -ReportAction copy  Copy latest report (explicit action)',
             '  taky report -ReportAction path  Print exact latest report path',
             '  taky status -SkipRemote      Inspect PC without live remote checks',
