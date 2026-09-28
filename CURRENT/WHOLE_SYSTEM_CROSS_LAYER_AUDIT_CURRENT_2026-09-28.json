@@ -1,0 +1,87 @@
+{
+  "schema": "TAKY_WHOLE_SYSTEM_CROSS_LAYER_AUDIT_LOGICAL_CURRENT_V1",
+  "namespace": "WHOLE_SYSTEM_CROSS_LAYER_AUDIT",
+  "authority_role": "DERIVED_AUDIT_POINTER_ONLY__NOT_CANONICAL_MASTER_CURRENT",
+  "as_of": "2026-09-28",
+  "scope": "TAKY governance, C2S, Mining, Indexing, independent Learning Core, Planner, Ready, Hide, Snap, evidence/outcome/growth, owner boundaries, release and UI source fidelity",
+  "status": "IN_PROGRESS__CROSS_LAYER_FIXTURE_EVIDENCE__REAL_INSTALLED_AND_TRUSTED_HOST_OPEN",
+  "source_of_truth_order": [
+    "current authoritative namespace pointers",
+    "EXACT LIVE main and Draft SHA/CI",
+    "full historical source and owner contracts",
+    "C2S whole-system audit §§A-S",
+    "latest C2S checkpoint and HANDOFF override"
+  ],
+  "read_first": {
+    "full_audit": "C2S/WHOLE_SYSTEM_CROSS_LAYER_AUDIT_2026-09-28.md",
+    "c2s_checkpoint": "C2S/WHOLE_SYSTEM_CROSS_LAYER_C2S_2026-09-28_LATEST.md",
+    "handoff": "HANDOFF/WHOLE_SYSTEM_CROSS_LAYER_NEW_CHAT_START_2026-09-28_LATEST.md",
+    "main_state": "STATE.md",
+    "main_ownership": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+    "search_current": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+  },
+  "index_current_locator": {
+    "source_index_name": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "source_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+    "utilization_index_name": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "utilization_id": "1wjoNxZVhM7L_BL7VFtbAGuV-NwzrF4U3pK7y5vrRC3s",
+    "total": 679,
+    "content_resolved": 677,
+    "held_oversized_videos": 2,
+    "full_reindex": false
+  },
+  "observed_source_heads_not_locked": {
+    "TAKY_main": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+    "TAKY_Draft_159": "4e7a357321faf60ad3adeb608a77fa7c79e492a5",
+    "TAKY_Draft_164": "31c0346222b3454ba6ac098ae127a8facd23ef4a",
+    "TAKY_Draft_167": "d397e85431b4ed864b339d0bf9d8dc123dcdfd66",
+    "MiningV2_separate_branch": "e6d5ec69ce693e36f5b3aaf9ac42f01d510959b6",
+    "Ready_main": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+    "Ready_Draft_100": "9c8df0fc72aea3d07a4c59eb432be541bf4a5c44",
+    "Hide_main": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+    "Hide_Draft_12_dirty": "1ccbd372890ba079accadb86e7610cd3fdad240a",
+    "Hide_Draft_19_separate": "6d304af1f0d2bf5ce8678023ef2c62604a9e5deb",
+    "Snap_main": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+    "Snap_Draft_11": "8a73cf62d8b5a0a97e6ab6b4508acd1d804d3c40"
+  },
+  "finding_register": {
+    "through": "AUD-15",
+    "detail_source": "C2S/WHOLE_SYSTEM_CROSS_LAYER_AUDIT_2026-09-28.md",
+    "disposition_source": "C2S/WHOLE_SYSTEM_CROSS_LAYER_C2S_2026-09-28_LATEST.md"
+  },
+  "closed_inherited": [
+    "historical Mining V2 defined development closure, separately housed",
+    "V26/V6 679 source pointer and integrity/2 HOLD",
+    "Ready Draft100 own CI 64/64",
+    "Snap Draft11 own browser 8/8",
+    "3-source Ready↔Snap and Ready↔Hide paired CI two distinct roundtrips",
+    "Ready main + Draft100 disposable 64/64 combined source",
+    "TAKY Draft164 + Draft167 controlled 24-case combined source",
+    "audit-only guarded main↔V2 source/authority/provider/receipt/current-scope suites",
+    "central Draft159 server-verifier to main receipt to growth candidate source fixture"
+  ],
+  "open_primary": "Hide main + V2 Draft12 + independent owner Draft19 conflict resolution; preservation of main-only reflection producer and owner/badge constraints, NO BLIND TRANSPLANT",
+  "open_other": [
+    "trusted hosted native preflight authority",
+    "actual family/member storage and legacy migration",
+    "source-backed V26 loader and real independently issued Indexing reviewer receipt",
+    "actual constrained provider dispatch, no automatic promotion",
+    "real authenticated server assessment/gap/longitudinal outcomes",
+    "PWA/local-first and app release/device acceptance",
+    "approved Visual IDs/assets and non-card UI exact 1:1 equivalence",
+    "Work OS held, adjacent domains follow separate owner plans"
+  ],
+  "prohibitions": [
+    "not new master CURRENT",
+    "do not infer global implementation percentage",
+    "CLOSED inherited unless new regression",
+    "no blind branch merge or rebase",
+    "no main merge or Netlify",
+    "no paid service or real hosted auth/device pilot",
+    "no mass reindex / RAW read / held video retry",
+    "no badge/approved art overwrite",
+    "USER != DEBUGGER"
+  ],
+  "implementation_authorization": "AUDIT_ONLY__NO_MAIN_OR_PRODUCTION_CHANGE",
+  "resume_action": "READ CURRENT -> EXACT LIVE HEAD/CI -> full AUDIT newest §S and C2S checkpoint -> HANDOFF latest override -> CLOSED inherit -> selective Hide conflicting files and original owner constraints -> next OPEN"
+}
