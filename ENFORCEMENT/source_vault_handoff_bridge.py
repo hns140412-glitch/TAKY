@@ -20,7 +20,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from reference_intake_router import route
 
 SCHEMA = 'TAKY_SOURCE_VAULT_CENTRAL_ROUTER_BRIDGE_V1'
-TRACKING = {'fbclid', 'gclid', 'msclkid', 'mcp_token', 'session_sync_attempted', 'source', 'proxyreferer', 'trackingcode', 'notrackingcode', 'access_token', 'id_token'}
+TRACKING = {'fbclid', 'gclid', 'msclkid', 'mcp_token', 'session_sync_attempted', 'source', 'proxyreferer', 'trackingcode', 'notrackingcode', 'access_token', 'id_token', 'token', 'key', 'api_key', 'apikey', 'signature', 'sig', 'secret', 'password', 'credential', 'session', 'auth', 'authorization', 'expires', 'code'}
 REQUIRED = ('INCREMENTAL_QUEUE.json', 'MINING_INBOX_HANDOFF.json', 'INCREMENTAL_SUMMARY.json')
 
 class InputError(ValueError):
@@ -39,10 +39,18 @@ def safe_url(value: object) -> str:
         if parsed.scheme not in {'http', 'https'} or not parsed.hostname or parsed.username or parsed.password:
             return ''
         items = [(k, v) for k, v in parse_qsl(parsed.query, keep_blank_values=True)
-                 if not k.lower().startswith('utm_') and k.lower() not in TRACKING]
+                 if not k.lower().startswith(('utm_', 'x-amz-', 'x-goog-')) and k.lower() not in TRACKING]
         return urlunsplit((parsed.scheme, parsed.netloc, parsed.path, urlencode(items), ''))
     except (ValueError, TypeError):
         return ''
+
+
+def candidate_url(row: dict[str, Any]) -> str:
+    # V2.2 can restore source URLs from the normalized field even when URL is blank.
+    # A conflicting pair never gets selected automatically.
+    if row.get('url_conflict'):
+        return ''
+    return safe_url(row.get('url') or row.get('normalized_url'))
 
 
 def source_kind(row: dict[str, Any]) -> str:
@@ -52,13 +60,15 @@ def source_kind(row: dict[str, Any]) -> str:
         return 'NOTION_CHILD_DISCOVERY'
     if row.get('record_type') == 'ATTACHMENT_ONLY':
         return 'NOTION_ATTACHMENT_ACQUISITION'
-    if safe_url(row.get('url')):
+    if candidate_url(row):
         return 'PUBLIC_URL_CANDIDATE'
     nodes = row.get('material_nodes') or []
     if any(isinstance(x, dict) and x.get('kind') == 'NOTION_CHILD' for x in nodes):
         return 'NOTION_CHILD_DISCOVERY'
     if any(isinstance(x, dict) and x.get('kind') == 'NOTION_ATTACHMENT' for x in nodes):
         return 'NOTION_ATTACHMENT_ACQUISITION'
+    if row.get('block_link_candidates'):
+        return 'REVIEW_BODY_LINK_CANDIDATES'
     return 'REVIEW_NO_SOURCE_LOCATOR'
 
 
@@ -87,7 +97,7 @@ def build_receipt(report_dir: Path) -> dict[str, Any]:
     for row in q:
         kind = source_kind(row)
         page_id = row['notion_page_id']
-        normalized = safe_url(row.get('url')) if kind == 'PUBLIC_URL_CANDIDATE' else ''
+        normalized = candidate_url(row) if kind == 'PUBLIC_URL_CANDIDATE' else ''
         record = {'intent_text': '신규 참고자료의 원문을 확보하고 기존 자료와 비교 검토하여 활용 후보로 기록',
                   'reference_intake_intent': True, 'has_reference_source': True,
                   'source_id': f'notion:{page_id}', 'source_locator': f'notion:{page_id}',
