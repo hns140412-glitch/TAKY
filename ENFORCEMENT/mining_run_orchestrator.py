@@ -43,10 +43,19 @@ def build_frontier(task: dict, depth: str) -> list[dict]:
             if question:
                 add({"id": question, "kind": kind, "question": question,
                      "origin": "TASK_SIGNAL"})
+    has_explicit_scope = any(task.get(key) for key in (
+        "critical_requirements", "requirements", "unknown", "conflict",
+        "foundation_requirements", "advanced_requirements", "alternative_requirements"
+    ))
     for kind in ("FOUNDATION", "ADVANCED", "ALTERNATIVE"):
         for item in decomposed:
-            if item.get("kind") == kind:
-                add(item)
+            if item.get("kind") != kind:
+                continue
+            # Generic scaffolding is only a fallback for an otherwise vague goal;
+            # do not inflate a concrete user's bounded research frontier.
+            if has_explicit_scope and item.get("origin") == "GENERIC_SCAFFOLD":
+                continue
+            add(item)
 
     limit = {"D1": 2, "D2": 4, "D3": 6, "D4": 10}.get(depth, 0)
     return items[:limit]
