@@ -194,6 +194,70 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(out["state"], "WAIT_SOURCE_ANCHOR")
         self.assertEqual(set(out["missing_anchor_ids"]), set(ids))
 
+    def test_verified_first_item_is_not_requeued_after_resume(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"verify two required facts",
+              "unknown":["first fact","second fact"],"max_research_depth":"D1"}
+        original=plan(task)
+        first=original["search_frontier"][0]
+        cp=mining_checkpoint(task,original["search_frontier"],[])
+        cp=apply_external_receipts(cp,[{
+            "frontier_id":first["id"],"query":first["question"],"adapter":"WEB",
+            "results":[{"source_id":"SRC-1","source_identity":"SRC-1","url":"https://example.gov/first",
+                        "claim":"first fact","source_class":"PRIMARY","direct_support":True,
+                        "fresh_enough":True,"excerpt_ref":"page:1#p:1","independent_support_count":2}]
+        }])
+        resumed=plan(task,verified_checkpoint=cp)
+        completed=find_by_question(resumed,"first fact")
+        remaining=find_by_question(resumed,"second fact")
+        self.assertEqual(completed["classification"],"EVIDENCE_VERIFIED")
+        self.assertEqual(completed["state"],"CLOSED")
+        self.assertIsNone(completed["query_plan"])
+        self.assertEqual(remaining["classification"],"SOURCE_GAP")
+        self.assertEqual({x["frontier_id"] for x in resumed["planned_provider_requests"]},{"second fact"})
+        self.assertFalse(resumed["research_complete_eligible"])
+
+    def test_all_required_anchored_closure_eliminates_redundant_queries(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"verify two facts",
+              "unknown":["A","B"],"max_research_depth":"D1"}
+        original=plan(task)
+        cp=mining_checkpoint(task,original["search_frontier"],[])
+        receipts=[{
+            "frontier_id":x["id"],"query":x["question"],"adapter":"WEB",
+            "results":[{"source_id":"S-"+x["id"],"source_identity":"S-"+x["id"],
+                        "url":"https://example.gov/"+x["id"],"claim":"Verified "+x["question"],
+                        "source_class":"PRIMARY","direct_support":True,"fresh_enough":True,
+                        "excerpt_ref":"page:1#p:1","independent_support_count":2}]
+        } for x in original["search_frontier"]]
+        cp=apply_external_receipts(cp,receipts)
+        resumed=plan(task,verified_checkpoint=cp)
+        self.assertTrue(resumed["research_complete_eligible"])
+        self.assertEqual(resumed["planned_provider_requests"],[])
+        self.assertEqual(resumed["pending_actions"]["counts"]["required_open"],0)
+        self.assertEqual(resumed["follow_up_activation"]["state"],"NO_DEFERRED_REQUIRED")
+
+    def test_forged_closed_does_not_skip_next_search(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"verify official claim",
+              "unknown":["claim"],"max_research_depth":"D1"}
+        original=plan(task)
+        forged={"schema":"TAKY_MINING_CORE_CHECKPOINT_V1","frontier":[
+            {"id":"claim","status":"CLOSED","evidence_count":1,"best_evidence_score":1.0}],
+            "evidence":[],"resume_key":"fake"}
+        resumed=plan(task,verified_checkpoint=forged)
+        self.assertNotEqual(find_by_question(resumed,"claim")["classification"],"EVIDENCE_VERIFIED")
+        self.assertTrue(resumed["planned_provider_requests"])
+        self.assertFalse(resumed["research_complete_eligible"])
+
+    def test_failed_provider_next_route_is_concrete_and_not_same_provider(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"find one source","unknown":["official answer"]}
+        failed={"official answer":{"state":"FAILED","provider":"WEB",
+                                   "error":"TEMPORARY_NETWORK_FAILURE","next_provider":"GITHUB"}}
+        p=plan(task,provider_results=failed)
+        item=find_by_question(p,"official answer")
+        self.assertEqual(item["classification"],"PROVIDER_FAILURE")
+        self.assertEqual(item["next_action"]["type"],"TRY_NEXT_PROVIDER")
+        self.assertEqual([r["provider"] for r in p["planned_provider_requests"]],["GITHUB"])
+        self.assertEqual(len(p["planned_provider_requests"]),1)
+
     def test_known_complete_cannot_silently_override_new_explicit_gap(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "already complete",
                   "known_complete": True, "critical_requirements": ["new official evidence"]})
