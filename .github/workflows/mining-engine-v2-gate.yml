@@ -89,6 +89,10 @@ on:
       - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - 'ENFORCEMENT/index_retrieval.py'
       - 'ENFORCEMENT/index_retrieval_test.py'
+      - 'ENFORCEMENT/mining_run_orchestrator.py'
+      - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_index_bridge.py'
+      - 'ENFORCEMENT/mining_index_bridge_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
 
 jobs:
