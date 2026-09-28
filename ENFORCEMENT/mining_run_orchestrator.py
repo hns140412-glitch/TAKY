@@ -37,7 +37,9 @@ def build_frontier(task: dict, depth: str) -> list[dict]:
         for item in decomposed:
             if item.get("kind") == kind:
                 add(item)
-    for kind, field in (("CONFLICT", "conflict"), ("UNKNOWN", "unknown")):
+    # Keep the established source-order and frontier IDs for normal questions;
+    # only explicit critical/requirements receive new priority.
+    for kind, field in (("UNKNOWN", "unknown"), ("CONFLICT", "conflict")):
         for value in task.get(field, []) or []:
             question = str(value).strip()
             if question:
@@ -55,7 +57,9 @@ def build_frontier(task: dict, depth: str) -> list[dict]:
             # do not inflate a concrete user's bounded research frontier.
             if has_explicit_scope and item.get("origin") == "GENERIC_SCAFFOLD":
                 continue
-            add(item)
+            # Legacy frontier consumers use the actual question as the ID.
+            # Retain the decomposition ID separately for goal-sufficiency mapping.
+            add({**item, "decomposition_id": item.get("id"), "id": item.get("question")})
 
     limit = {"D1": 2, "D2": 4, "D3": 6, "D4": 10}.get(depth, 0)
     return items[:limit]
@@ -112,7 +116,9 @@ def orchestrate(payload: dict) -> dict:
     }
     external_frontier = index_result["external_mining_frontier"]
     verification_frontier = index_result.get("verification_frontier", [])
-    selected_ids = {str(item.get("id")) for item in frontier}
+    selected_ids = ({str(item.get("id")) for item in frontier}
+                    | {str(item.get("decomposition_id")) for item in frontier
+                       if item.get("decomposition_id")})
     unplanned_critical = [fid for fid in task.get("critical_frontier_ids", [])
                           if fid not in selected_ids]
     unplanned_required = list(dict.fromkeys(
