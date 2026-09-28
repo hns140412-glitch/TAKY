@@ -109,8 +109,9 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "origin_type": origin_type,
         "origin_locator": provenance.get("origin_locator") or record.get("origin_locator") or record.get("url"),
         "publisher_or_account": provenance.get("publisher_or_account") or record.get("publisher_or_account"),
-        "short_summary": discovery.get("short_summary")
-        or (record.get("value_statement") if isinstance(record.get("value_statement"), str) else None),
+        # Utilization value_statement is a consuming-domain decision, not a
+        # discovery summary. Never copy it into the shared search projection.
+        "short_summary": discovery.get("short_summary") or record.get("short_summary"),
         "controlled_terms": discovery.get("controlled_terms") or record.get("controlled_terms") or [],
         "keywords": discovery.get("keywords") or record.get("keywords") or [],
         "entities": discovery.get("entities") or record.get("entities") or [],
@@ -434,6 +435,20 @@ def search(
     candidates = apply_filters(records, filters)
     by_id = {r["source_id"]: r for r in candidates}
 
+    # A raw score dict is not proof of neural embeddings. Require the
+    # validated channel metadata before it can carry that label or influence rank.
+    if semantic_vector_scores:
+        meta = semantic_metadata if isinstance(semantic_metadata, dict) else {}
+        if not (meta.get("semantic_mode") == "NEURAL_EMBEDDING_VECTOR_VERIFIED"
+                and meta.get("neural_embedding_verified") is True
+                and isinstance(meta.get("model_id"), str) and meta["model_id"].strip()
+                and isinstance(meta.get("dimension"), int) and meta["dimension"] >= 2):
+            raise ValueError("VECTOR_METADATA_NOT_VERIFIED")
+        if any(not isinstance(x, (int, float)) or isinstance(x, bool)
+               or not math.isfinite(x) or x <= 0 or x > 1
+               for x in semantic_vector_scores.values()):
+            raise ValueError("VECTOR_SCORE_INVALID")
+
     exact = exact_scores(candidates, query)
     strong_exact = strong_exact_scores(candidates, query)
     exact.update(strong_exact)
@@ -448,9 +463,10 @@ def search(
         lexical = lexical_scores(candidates, query)
         token_cosine = token_cosine_scores(candidates, query)
         vector_scores_verified = {
-            sid: score
+            sid: float(score)
             for sid, score in (semantic_vector_scores or {}).items()
-            if sid in by_id and isinstance(score, (int, float)) and score > 0
+            if sid in by_id and isinstance(score, (int, float)) and not isinstance(score, bool)
+            and math.isfinite(score) and 0 < score <= 1
         }
         channels_for_fusion = [exact, lexical, token_cosine]
         if vector_scores_verified:
