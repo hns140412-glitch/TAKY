@@ -155,17 +155,56 @@
         "Work OS",
         "all apps"
       ],
-      "state": "OPEN",
+      "state": "PARTIAL",
       "evidence": [
-        "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden."
+        "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden.",
+        "TAKY draft-only ENFORCEMENT/growth_outcome_observation.py plus 10 synthetic replay cases: explicit before/after evidence, material source changes and missing real-outcome scope are deterministically differentiated. Does not perform monitoring or confer owner/approval/release authority."
       ],
-      "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion.",
+      "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion. Connect intended result to before/after evidence, owner-declared material-change triggers, the next relevant review and actual outcome; report the evidence-level gap instead of calling fixture/CI activity real-world improvement.",
       "exit_conditions": [
         "Material adopted growth changes have at least one relevant outcome signal where measurable.",
         "Rules that add cost without demonstrated value can be adjusted or retired.",
-        "CURRENT_BEST updates cite outcome/regression evidence."
+        "CURRENT_BEST updates cite outcome/regression evidence.",
+        "Representative owning project feeds a genuinely observed outcome and a materially changed source/action through this read-only path, and proves its own follow-up reduced a relevant failure/rework or improved the user result.",
+        "A CI-only or reference-only outcome cannot satisfy a separately required device, live-provider or operational evidence scope, and no observation alone promotes CURRENT_BEST or reopens CLOSED without new evidence."
       ],
-      "owner_destination": "TKY-GROWTH-001 + Outcome Optimization"
+      "owner_destination": "TKY-GROWTH-001 + Outcome Optimization",
+      "implementation_candidate": {
+        "phase": "DRAFT_REVIEW_ONLY",
+        "path": "ENFORCEMENT/growth_outcome_observation.py",
+        "fixtures": "ENFORCEMENT/fixtures/growth_outcome_observation_cases.json",
+        "role": "Deterministically classify owner-submitted observation evidence; no new AI, watch service, workflow scheduler or global semantic authority.",
+        "reference_origin": "User-supplied eight-frame social carousel about a '24-hour trader'; method analogy only, NOT proof of the pictured author's system, trading outcome, safety or TAKY runtime.",
+        "outcomes_not_yet_proven": [
+          "real owner-consumer integration",
+          "operational before/after effect",
+          "continuous monitoring",
+          "domain-specific risk thresholds",
+          "actual live result"
+        ],
+        "downstream_owner_routes": [
+          {
+            "owner": "ARCHI_GROW_PROJECT",
+            "candidate": "Changed public-data or design-condition evidence -> inspect only affected alternatives; architecture rules/decisions remain project owned.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "LEARNING_ENGINE_CORE_AND_READY_PLANNER",
+            "candidate": "New validated learning outcome -> re-evaluate pedagogical intent in Core, while Planner alone places dates.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "EUNHA_FARM_WORK_PROJECT",
+            "candidate": "Order/address/shipping exception and correction outcome -> reassess only affected order; Parent retains confirmation.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "TAKY_GROWTH",
+            "candidate": "Material source revision, repeated defect, or post-change outcome delta -> owner-scoped follow-up using actual evidence, no auto re-open of CLOSED.",
+            "state": "DRAFT_HELPER_ONLY"
+          }
+        ]
+      }
     },
     {
       "gap_id": "GROWTH-GITHUB-INTEL-001",
