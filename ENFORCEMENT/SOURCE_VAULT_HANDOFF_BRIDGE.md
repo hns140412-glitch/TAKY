@@ -32,3 +32,12 @@ Result: reports/SOURCE_VAULT_SNAPSHOT_EVIDENCE.json. This is NOT a semantic Mini
 
 ### Operational activation gate
 The user-visible schedule is a separate local Windows task. This Draft does not modify that task, install the bridge, or configure a free local semantic runtime. A scheduled ChatGPT subscription is not a local autonomous model/API service. Before claiming end-to-end one-click Mining, require a verified local/authorized semantic analysis runtime, source-by-source analysis receipts, independent Indexing-owner verification, and unattended Windows run proof. Until then, preserve the pending queue.
+
+
+### Bounded public URL acquisition (NEW, opt-in only)
+ENFORCEMENT/source_vault_external_acquisition.py consumes the same validated queue/handoff/summary and calls the EXISTING reference_acquisition_adapter.acquire only for URL-property-derived PUBLIC_URL_CANDIDATE records, up to three network attempts per invocation. A bare body hyperlink, URL-property conflict, Notion container or signed Notion attachment is never automatically treated as the external original. Default is dry-run with no write or network. A specifically authorized local run may add immutable files under existing SOURCE VAULT/data/notion_incremental/acquired_external/ and append its local receipt under existing reports/SOURCE_VAULT_EXTERNAL_ACQUISITION.json. Repeated runs verify the prior raw bytes by SHA-256 before reusing; duplicate URLs share one capture with distinct per-page receipts. Access restrictions and unresolved sources remain review items. The original pending queue is not acknowledged or deleted. No software subscription or model API is implied.
+
+Dry-run (no network): python ENFORCEMENT/source_vault_external_acquisition.py --vault-root "D:\Git PWA\TAKY-SOURCE-VAULT"
+Explicit bounded run (not scheduled or installed by this Draft): python ENFORCEMENT/source_vault_external_acquisition.py --vault-root "D:\Git PWA\TAKY-SOURCE-VAULT" --execute-public --max-fetches 3
+
+Still OPEN: installing/authorizing a supported local execution route, Notion child and attachment binary acquisition via an authorized Notion API context, actual semantic Mining model/runtime and its held-out tests, independent Indexing owner receipt (PR #167), and unattended schedule proof. Do not claim end-to-end completion from unit CI, and do not copy private SOURCE VAULT data into GitHub.
