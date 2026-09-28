@@ -41,12 +41,45 @@ def _provider_receipt(provider_results, ids: set[str]) -> dict | None:
     return None
 
 
+def _verified_checkpoint_items(frontier: list[dict], checkpoint: dict | None) -> dict[str, list[str]]:
+    """Re-assess Core evidence: an asserted CLOSED flag or provider success is not proof."""
+    if not isinstance(checkpoint, dict) or checkpoint.get("schema") != "TAKY_MINING_CORE_CHECKPOINT_V1":
+        return {}
+    evidence = checkpoint.get("evidence")
+    if not isinstance(evidence, list):
+        return {}
+    from mining_core import assess_frontier
+    assessed = {str(x.get("id")): x for x in assess_frontier(frontier, evidence)}
+    declared = {str(x.get("id")): x for x in checkpoint.get("frontier", [])
+                if isinstance(x, dict)}
+    closed = {}
+    for item in frontier:
+        fid = str(item.get("id") or "")
+        if assessed.get(fid, {}).get("status") != "CLOSED" or declared.get(fid, {}).get("status") != "CLOSED":
+            continue
+        anchors = [
+            e for e in evidence if isinstance(e, dict)
+            and str(e.get("frontier_id")) in _ids(item)
+            and (e.get("source_identity") or e.get("source_id") or e.get("source_url"))
+            and e.get("excerpt_ref") and (e.get("claim") or e.get("subject"))
+            and e.get("direct_support") is True and e.get("fresh_enough", True) is not False
+        ]
+        if anchors:
+            closed[fid] = list(dict.fromkeys(
+                str(e.get("source_id") or e.get("source_identity") or e.get("source_url"))
+                for e in anchors
+            ))
+    return closed
+
+
 def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -> dict:
     fid = str(item.get("id") or "")
     question = str(item.get("question") or fid)
     source_ids = list(source_ids or [])
     common = {"frontier_id": fid, "question": question,
               "source_ids": source_ids, "external_execution_performed": False}
+    if category == "EVIDENCE_VERIFIED":
+        return {**common, "type": "NO_ACTION", "when": "ALREADY_VERIFIED"}
     if category == "DEPTH_DEFERRED":
         return {**common, "type": "QUEUE_NEXT_BOUNDED_BATCH",
                 "when": "AFTER_VERIFIED_CURRENT_BATCH_CHECKPOINT"}
@@ -88,9 +121,12 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
             "when": "NEW_ROUTE_OR_SOURCE_FAMILY"}
 
 
-def _query_plan(item: dict, category: str) -> dict | None:
+def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None:
     if category not in {"SOURCE_GAP", "SOURCE_REFRESH_REQUIRED",
-                        "CONFLICT_UNRESOLVED", "EMPTY_PROVIDER_RESULT"}:
+                        "CONFLICT_UNRESOLVED", "EMPTY_PROVIDER_RESULT",
+                        "PROVIDER_FAILURE"}:
+        return None
+    if category == "PROVIDER_FAILURE" and not next_provider:
         return None
     fid = str(item.get("id") or "")
     return {
@@ -98,18 +134,21 @@ def _query_plan(item: dict, category: str) -> dict | None:
         "query": str(item.get("question") or fid),
         "purpose": "RESOLVE_CONFLICT" if category == "CONFLICT_UNRESOLVED" else "FILL_EVIDENCE_GAP",
         "prefer": SOURCE_PREFER,
+        **({"next_provider": next_provider} if category == "PROVIDER_FAILURE" else {}),
     }
 
 
 def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict],
                      index_result: dict, *, route_blocked=False,
-                     provider_results=None, depth="D1") -> dict:
+                     provider_results=None, depth="D1",
+                     verified_checkpoint=None) -> dict:
     """Preserve *all* questions, classify why each is pending and provide action instructions.
 
     A source hit or a provider SUCCESS is only a candidate; actual closure is
     established by Mining Core's evidence-assessed checkpoint.
     """
     selected_ids = set().union(*(_ids(x) for x in selected)) if selected else set()
+    verified = _verified_checkpoint_items(full_frontier, verified_checkpoint)
     verifying = {str(x.get("id")): x for x in index_result.get("verification_frontier", [])}
     trace_by_id = {str(x.get("frontier_id")): x for x in index_result.get("trace", [])}
     entries = []
@@ -119,7 +158,9 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         required = _required(item, task)
         is_selected = bool(ids & selected_ids)
         trace = trace_by_id.get(fid, {})
-        candidate_ids = list(trace.get("source_ids") or [])
+        candidate_ids = list(dict.fromkeys(
+            list(trace.get("source_ids") or []) + verified.get(fid, [])
+        ))
         rejected = list(trace.get("rejected_index_candidates") or [])
         receipt = _provider_receipt(provider_results, ids) if is_selected else None
         provider_state = str((receipt or {}).get("state") or "").upper()
@@ -138,7 +179,9 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
                 if isinstance(x, dict) and x.get("source_id")
             ]))
 
-        if not is_selected:
+        if fid in verified:
+            category = "EVIDENCE_VERIFIED"
+        elif not is_selected:
             category = ("DEPTH_CONFLICT" if depth == "D0" and required else
                         "DEPTH_DEFERRED" if required else "OPTIONAL_SCOPE_REVIEW")
         elif route_blocked:
@@ -161,7 +204,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
                         else "SOURCE_REVIEW_HOLD")
         else:
             category = "SOURCE_GAP"
-        state = ("HOLD" if category in {"ROUTE_BLOCKED", "ACCESS_HOLD", "DEPTH_CONFLICT",
+        state = ("CLOSED" if category == "EVIDENCE_VERIFIED" else
+                 "HOLD" if category in {"ROUTE_BLOCKED", "ACCESS_HOLD", "DEPTH_CONFLICT",
                                        "SOURCE_REVIEW_HOLD"} or
                  (category == "PROVIDER_FAILURE" and not next_provider)
                  else "CANDIDATE" if category == "OPTIONAL_SCOPE_REVIEW"
@@ -184,7 +228,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
             "source_ids": candidate_ids,
             "excluded_source_candidates": rejected,
             "next_action": action,
-            "query_plan": _query_plan(item, category) if state == "READY" else None,
+            "query_plan": (_query_plan(item, category, next_provider=next_provider)
+                           if state == "READY" else None),
             "completion_evidence": ("A source-anchored, conflict-checked Mining Core frontier CLOSED checkpoint"
                                     if required else "An explicit relevance decision; optional scope is not silently mandatory"),
             "retry_condition": action["when"],
@@ -192,7 +237,7 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         }
         entries.append(entry)
 
-    required_open = [x for x in entries if x["required_for_goal"]]
+    required_open = [x for x in entries if x["required_for_goal"] and x["state"] != "CLOSED"]
     deferred = [x for x in entries if x["classification"] == "DEPTH_DEFERRED"]
     deferred.sort(key=lambda x: (x["priority"], x["order"]))
     limit = DEPTH_LIMIT.get(depth, 0)
@@ -209,7 +254,10 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         "ready_query_plans": [x["query_plan"] for x in entries if x["query_plan"]],
         "next_batch_preview": [x["frontier_id"] for x in deferred[:limit]],
         "next_batch_activation": "AFTER_VERIFIED_CURRENT_BATCH_CHECKPOINT",
-        "research_complete_eligible": not route_blocked and not required_open and bool(task.get("known_complete")),
+        "research_complete_eligible": (not route_blocked and not required_open
+                                        and (bool(full_frontier) or bool(task.get("known_complete")))
+                                        and (bool(task.get("known_complete")) or not any(
+                                            x["classification"] == "OPTIONAL_SCOPE_REVIEW" for x in entries))),
         "guards": {
             "no_unprocessed_required_item_is_silently_dropped": True,
             "search_hit_is_not_evidence_closure": True,
