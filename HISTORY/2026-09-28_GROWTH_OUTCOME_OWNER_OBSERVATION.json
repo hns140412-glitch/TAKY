@@ -2,7 +2,7 @@
   "snapshot_kind": "OWNER_EVIDENCE_SNAPSHOT_NOT_AUTOMATIC_MONITOR",
   "captured_for": "TKY-GROWTH-001 / GROWTH-OUTCOME-LEARNING-001",
   "date": "2026-09-28",
-  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim.",
+  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim. Added exact Library-read source PDF observations; GitHub CI does not validate Library bytes, so provenance is a recorded observation, not runtime validation of external files.",
   "only_exact_head_and_scope": true,
   "main_untouched": true,
   "observations": [
@@ -94,21 +94,113 @@
         "change_ref": "M-027 / AG-014 candidate registered in ARCHIGROW_NEW_CHAT_START_2026-09-26_LATEST; no verified application result.",
         "required_evidence_scope": "SOURCE_LOCKED_WORK_ARTIFACT",
         "before": {
-          "state": "UNVERIFIED",
-          "evidence_refs": [],
-          "facts": "Current Work PDF/DWG/geometry baseline and user-accepted comparison not inspected or measured in this task; handoff is only a locator."
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97"
+          ],
+          "facts": "Existing 2-page ARCHIGROW_HANNAM_AG014_SOURCE_CHECK_V02_2026-09-26.pdf includes submitted-plan comparison and source-QA register, not an owner-approved project implementation."
         },
         "after": {
-          "state": "NOT_OBSERVED",
+          "state": "OBSERVED",
           "outcome": "UNKNOWN",
-          "evidence_refs": [],
-          "facts": "The handoff explicitly says AG-001..014 are reference links and NONE is asserted implemented/applied/verified."
+          "evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "facts": "A 2-page V5 source-grounded comparison board exists and visually preserves YKH original ALT-01 p9/10 and ALT-02 p20/21 excerpts and the p5/p15 submitted area-table values. Whether the board is accepted into a current Work deliverable is NOT observed."
         },
         "trigger": {
           "state": "UNKNOWN",
-          "note": "No new owner-approved Work artifact, geometry revision, or result evidence verified."
+          "note": "Actual latest approved Work geometry, project/level version and architect/client approval remain unverified; cannot infer no material revision."
         },
-        "claim_boundary": "Do not turn handoff source details or reference methodology into verified architecture outcome. This is an explicit evidence gap, not an instruction to redo CLOSED."
+        "claim_boundary": "Original previous snapshot's statement that no ARCHI GROW source-grounded artifact was observed is corrected by the recovered existing V02 and V5 PDFs. Preview existence is observed; original Work DWG geometry proof, user approval, report insertion and statutory checking remain OPEN."
+      },
+      "correction": {
+        "previous_error": "EARLIER_SNAPSHOT_MISTOOK_HANDOFF_FOR_COMPLETE_ARTIFACT_INVENTORY",
+        "new_sources": [
+          "library:file_00000000a320820695e93e424d918a97",
+          "library:file_0000000031a88206a1c2ced13d68da92",
+          "https://docs.google.com/spreadsheets/d/1NXr40dDVG1pzLDJmesaXJ2svd-5oJSx3yQLRM1MAcCw/edit#gid=1201175768"
+        ],
+        "disposition": "ADJUST_IN_PLACE_KEEP_SAME_OBSERVATION_ID"
+      }
+    },
+    {
+      "evidence_kind": "SOURCE_PDF_V02_TO_V5_ARTIFACT_EXISTS_NOT_USER_OUTCOME",
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-AG014-SOURCE_BOARD-PREVIEW-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "AG-014 / M-027 / YKH 38-page submitted proposal",
+        "human_outcome": "Produce a comparison preview that retains ALT identities, identifies each drawing/source and keeps design inferences separate from submission facts.",
+        "change_ref": "Existing V02 source-linked two-page source/QA board -> existing V5 two-page layout revision, NOT a new design proposal or final Work deliverable.",
+        "required_evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97"
+          ],
+          "facts": "V02 p1 already had original ALT p10/p21 excerpts and ALT area differences; p2 independently documented location/level/source discrepancies."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "facts": "V5 p1 includes original YKH ALT-01 p9/10, ALT-02 p20/21 excerpt panels and observable narrative; p2 compares 585.39 vs 729.69m2 footprint; 1170.77 vs 1105.50m2 aboveground; 907.99 vs 982.50m2 basement; 2078.76 vs 2088.00m2 total. Scope means a comparison preview exists, not proven presentation quality improvement or Work acceptance."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "STORED_YKH_V02_V5_ARTIFACT_CONTENT_ONLY",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_0000000031a88206a1c2ced13d68da92"
+          ],
+          "note": "These stored artifact contents were read. This does NOT claim that live Work DWG/level authority has no new revisions."
+        },
+        "claim_boundary": "Preview-specific candidate only; not an architect-approved presentation, full Work source reconciliation, independent legal/area calculation or objectively measured user benefit."
+      }
+    },
+    {
+      "evidence_kind": "SOURCE_PDF_CROSS_ARTIFACT_QA_VISIBILITY",
+      "expected_status": "RECHECK_REQUIRED",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-AG014-V5-QA-CARRYFORWARD-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "AG-014 / ARCHIGROW_APPLICATION row 15",
+        "human_outcome": "Do not release the comparison as a standalone approved client/work artifact while earlier source QA is unresolved or hidden.",
+        "change_ref": "Existing V02 p2 explicit discrepancy register -> existing V5 two-page comparison viewed as standalone potential report component.",
+        "required_evidence_scope": "SOURCE_QA_RELEASE_RECONCILIATION",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97"
+          ],
+          "facts": "V02 p2 records P02 location mismatch (Bundang/Seohyeon labels), Work P04 1F +88.00 / 2F +91.80 versus later instructed +88.65 / +92.15, road vs site weighted mean and unverified CAD overlay."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "UNKNOWN",
+          "evidence_scope": "COMPARISON_PREVIEW_ONLY",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92"
+          ],
+          "facts": "V5 p1/2 shows source and general HOLD statements but does not visibly reproduce the explicit P02 map and floor-level discrepancy register from V02. Whether the original appendix is attached wherever V5 is used remains unknown."
+        },
+        "trigger": {
+          "state": "MATERIAL_CHANGE",
+          "change_kind": "EXISTING_SOURCE_QA_NOT_VISIBLE_IN_STANDALONE_PREVIEW",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_0000000031a88206a1c2ced13d68da92"
+          ],
+          "note": "Owner should preserve/attach V02 QA appendix or carry forward specific status before optional use; do not pretend omission proves a legal or design error."
+        },
+        "claim_boundary": "Presentation/source-visibility QA only; neither hidden geometry failure nor legal noncompliance is inferred; original PDF/DWG and prior approved decisions unchanged."
       }
     }
   ]
