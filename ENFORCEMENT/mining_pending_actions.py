@@ -72,6 +72,9 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
     if category == "INDEX_EVIDENCE_UNVERIFIED":
         return {**common, "type": "VERIFY_INDEX_SOURCE_AND_EXACT_ANCHOR",
                 "when": "SOURCE_ANCHOR_AND_CLAIM_CHECK"}
+    if category == "PROVIDER_RESULT_UNVERIFIED":
+        return {**common, "type": "VALIDATE_PROVIDER_RECEIPT_AND_EXACT_EVIDENCE",
+                "when": "SOURCE_ANCHOR_AND_CLAIM_CHECK"}
     if category == "SOURCE_REFRESH_REQUIRED":
         return {**common, "type": "REACQUIRE_CURRENT_SOURCE_THEN_INDEX_VERSION_REVIEW",
                 "when": "NEW_PRIMARY_OR_CURRENT_SOURCE_FOUND"}
@@ -123,6 +126,17 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         provider_error = str((receipt or {}).get("error_code") or (receipt or {}).get("error") or "").upper()
         next_provider = (receipt or {}).get("next_provider")
         next_provider = str(next_provider).strip() if next_provider else None
+        attempted_provider = str((receipt or {}).get("provider") or "")
+        if next_provider and next_provider.upper() == attempted_provider.upper():
+            next_provider = None  # never reissue the same failed route as an alternative
+        provider_evidence = ((receipt or {}).get("receipt") or {}).get("results") or (receipt or {}).get("results") or []
+        if not isinstance(provider_evidence, list):
+            provider_evidence = []
+        if provider_evidence:
+            candidate_ids = list(dict.fromkeys(candidate_ids + [
+                str(x.get("source_id")) for x in provider_evidence
+                if isinstance(x, dict) and x.get("source_id")
+            ]))
 
         if not is_selected:
             category = ("DEPTH_CONFLICT" if depth == "D0" and required else
@@ -133,8 +147,10 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
             category = "ACCESS_HOLD"
         elif provider_state == "FAILED":
             category = "PROVIDER_FAILURE"
-        elif provider_state == "EMPTY":
+        elif provider_state == "EMPTY" or (provider_state == "SUCCESS" and not provider_evidence):
             category = "EMPTY_PROVIDER_RESULT"
+        elif provider_state == "SUCCESS":
+            category = "PROVIDER_RESULT_UNVERIFIED"
         elif fid in verifying:
             category = "INDEX_EVIDENCE_UNVERIFIED"
         elif item.get("kind") == "CONFLICT":
@@ -219,9 +235,13 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
         if x.get("status") == "CLOSED" and int(x.get("evidence_count") or 0) > 0
         and float(x.get("best_evidence_score") or 0.0) >= 0.65
     }
+    required_selected = {
+        str(item.get("frontier_id")) for item in pending.get("items", [])
+        if item.get("selected_this_batch") and item.get("required_for_goal")
+    }
     remaining = [
         str(item.get("id")) for item in selected
-        if (_required(item, {}) and not (_ids(item) & verified))
+        if str(item.get("id")) in required_selected and not (_ids(item) & verified)
     ]
     if remaining:
         return {"state": "WAIT_CURRENT_BATCH_EVIDENCE", "unresolved_current": remaining,
