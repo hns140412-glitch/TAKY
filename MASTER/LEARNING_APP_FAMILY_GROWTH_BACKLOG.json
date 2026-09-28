@@ -158,7 +158,8 @@
       "state": "PARTIAL",
       "evidence": [
         "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden.",
-        "TAKY draft-only ENFORCEMENT/growth_outcome_observation.py plus 10 synthetic replay cases: explicit before/after evidence, material source changes and missing real-outcome scope are deterministically differentiated. Does not perform monitoring or confer owner/approval/release authority."
+        "TAKY draft-only ENFORCEMENT/growth_outcome_observation.py plus 10 synthetic replay cases: explicit before/after evidence, material source changes and missing real-outcome scope are deterministically differentiated. Does not perform monitoring or confer owner/approval/release authority.",
+        "2026-09-28 first owner evidence snapshot records source-scoped CI before/after for Hide, bounded Ready CI-versus-device gap, and ARCHI GROW unobserved Work artifact. Replayed in existing TAKY CI. These are historical scoped observations, not live watches or app-level runtime consumers."
       ],
       "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion. Connect intended result to before/after evidence, owner-declared material-change triggers, the next relevant review and actual outcome; report the evidence-level gap instead of calling fixture/CI activity real-world improvement.",
       "exit_conditions": [
@@ -166,7 +167,8 @@
         "Rules that add cost without demonstrated value can be adjusted or retired.",
         "CURRENT_BEST updates cite outcome/regression evidence.",
         "Representative owning project feeds a genuinely observed outcome and a materially changed source/action through this read-only path, and proves its own follow-up reduced a relevant failure/rework or improved the user result.",
-        "A CI-only or reference-only outcome cannot satisfy a separately required device, live-provider or operational evidence scope, and no observation alone promotes CURRENT_BEST or reopens CLOSED without new evidence."
+        "A CI-only or reference-only outcome cannot satisfy a separately required device, live-provider or operational evidence scope, and no observation alone promotes CURRENT_BEST or reopens CLOSED without new evidence.",
+        "A project-owned, source-locked actual work or learning outcome must be measured before any USER_OUTCOME_VERIFIED claim; a real CI observation alone does not satisfy this."
       ],
       "owner_destination": "TKY-GROWTH-001 + Outcome Optimization",
       "implementation_candidate": {
@@ -203,7 +205,29 @@
             "candidate": "Material source revision, repeated defect, or post-change outcome delta -> owner-scoped follow-up using actual evidence, no auto re-open of CLOSED.",
             "state": "DRAFT_HELPER_ONLY"
           }
-        ]
+        ],
+        "owner_observation_snapshot": {
+          "path": "HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json",
+          "scope": "READ_ONLY_EXACT_HEAD_CAPTURED_SOURCE_SNAPSHOT_NOT_LIVE_MONITOR",
+          "examples": [
+            {
+              "owner": "HIDE_SEEK_V2",
+              "state": "OBSERVED_TARGET_MET_CANDIDATE",
+              "evidence": "Draft PR #20: initial browser CI 8/5 failures on two suites; final exact HEAD 93/80 passed; limited to CI_BROWSER; no provider, device, or user-result claim."
+            },
+            {
+              "owner": "READY_SET",
+              "state": "EVIDENCE_SCOPE_GAP",
+              "evidence": "Draft PR #113: integration+runtime browser CI success, required DEVICE_AND_LIVE_PROVIDER not fulfilled."
+            },
+            {
+              "owner": "ARCHI_GROW_PROJECT",
+              "state": "AWAITING_OUTCOME",
+              "evidence": "Owner handoff registers M-027/AG-014 as reference candidate; no verified source-locked Work comparison applied."
+            }
+          ],
+          "exit_status": "PARTIAL__CI_OWNER_SNAPSHOT_ONLY__REAL_OPERATIONAL_IMPROVEMENT_OPEN"
+        }
       }
     },
     {
