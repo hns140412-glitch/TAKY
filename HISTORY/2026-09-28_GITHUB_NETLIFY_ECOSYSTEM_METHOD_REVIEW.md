@@ -41,12 +41,12 @@ Do not convert stars, unresolved issue counts or comment count into a universal 
 
 ### C. Declared success must not override fresh authority
 - Argo CD #28980 (Jul 30): reported real sync phase Succeeded despite a resource being skipped after dry-run detected change: https://github.com/argoproj/argo-cd/issues/28980
-- Argo CD #29732 (Sep 15): issue listing describes rejected same-repo multi-source revision generation proceeding with a stale revision, a source-lineage case rather than a verified TAKY fault: https://github.com/argoproj/argo-cd/issues/29732
+- Argo CD #29732 (Sep 15): the reporter describes `stopWatching(gk, ns)` canceling a GroupKind-shared watch on a NotFound in one namespace, leaving other namespace resource caches apparently live but stale until full resync. This is an issue report (not an independently reproduced TAKY fault); it supports distinguishing an observed refresh/watcher receipt from actual source freshness, NOT a multi-source revision failure: https://github.com/argoproj/argo-cd/issues/29732
 - Argo CD discussion #19666: users report sync-wave ordering discrepancies and discuss health checks/delays: https://github.com/argoproj/argo-cd/discussions/19666
 - TAKY use: CURRENT + EXACT HEAD + authoritative original + post-write readback remain different checkpoints. Avoid blanket rechecking when no changed source; target checks to materially affected revision/Owner.
 
 ### D. Prioritization, throttling, and approval are independent controls
-- Renovate discussion #42888 (Jul 2026, answered): prPriority orders processing; it does not prevent PR creation if rate-limit capacity exists; schedule/approval/disable control actual hold: https://github.com/renovatebot/renovate/discussions/42888
+- Renovate discussion #42888 (Apr 24, 2026; closed/locked at inspection): the discussion distinguishes prPriority ordering from an execution/schedule hold. Low priority alone cannot prevent a PR while capacity exists; use the actual scheduling or creation/approval conditions to express a hold: https://github.com/renovatebot/renovate/discussions/42888
 - Renovate discussion #45360 (Aug 2026): author describes batch PRs touching a common lock file and conflict after merging a subset; a community scenario, not reason to automatically merge more: https://github.com/renovatebot/renovate/discussions/45360
 - Temporal issue #8901 / maintainer comment Jan 9: replay/retry makes activity idempotency necessary because network/worker failures can cause repetition independently of workflow retry: https://github.com/temporalio/temporal/issues/8901
 - TAKY use: distinguish source importance, review urgency, actual execution permission, quota and owner HOLD. Do not auto-promote OPEN or queue simply because priority is high; avoid duplicate side effects during retries.
@@ -60,7 +60,7 @@ Official:
 - Netlify default ignores unchanged base-directory builds; a custom `[build] ignore` command uses 0 to skip and 1 to build. IMPORTANT: build hooks bypass custom ignore (official explicit exception): https://docs.netlify.com/build/configure-builds/ignore-builds/
 - Netlify CLI uses draft deploy by default and `--prod` for live; retries can target BRANCH HEAD rather than prior exact SHA, so name and verify the desired source before publication: https://github.com/netlify/cli/blob/main/docs/commands/deploy.md and https://www.netlify.com/knowledge-base/how-to-deploy-a-site-to-netlify/
 - Notifications distinguish deploy started/succeeded/failed/locked/unlocked: https://docs.netlify.com/deploy/deploy-notifications/
-- Old failed/cancelled deploy logs/assets may be automatically cleaned after 30 days (90 paid); retain only minimum essential source/receipt externally where authorized: https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/
+- Netlify documents default deploy retention of 30 days (90 on paid plans), including failed/cancelled deploys; currently published, most recent successful production and most recent successful branch deploys have listed exceptions. Once an eligible deploy is removed its log/artifacts may no longer be retrievable. Retain only minimum essential source/receipt elsewhere where authorized: https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/
 
 Community counterevidence (user-specific account reports, do NOT generalize to all accounts or assert unresolved for this user):
 - July 2026 forum report: preview succeeded while production was blocked despite apparently available credits; author later reported support/engineering resolved their case: https://answers.netlify.com/t/production-deploys-blocked-by-stale-credit-usage-exceeded-flag-despite-330-credits-available/164819
@@ -81,3 +81,18 @@ Community counterevidence (user-specific account reports, do NOT generalize to a
 Official platform doc determines claimed supported behavior; exact implementation/version and regression determine observed operation; maintainer reply/closed issue adds context but not independent full validation; comment/creator reel is a discovery witness, not runtime proof. Record the exact source, as-of date, adverse reports and any unresolved counterexample. One actionable central methodological improvement is sufficient for a source to be useful even when its star count is small.
 
 This research document can support future central PR review; it neither changes the canonical main nor claims app-runtime, Netlify-account or end-user outcome verification.
+
+## 6. Final evidence recheck and cross-draft promotion boundary — 2026-09-28
+
+Checked primary GitHub issue bodies for n8n #38503/#37779, Promptfoo #10481, Langfuse #14797/#15216, Argo CD #28980/#29732, Temporal #8901, Netlify CLI #7933; inspected relevant n8n/Temporal/Langfuse comments. Checked Renovate discussions #42888/#45360 separately because Discussions are not GitHub Issues. Checked official Netlify credit billing, ignored builds, deploy management and CLI deploy documentation. The discussion/source corrections above supersede the earlier text in this draft; they are NOT corrections to TAKY main or any paused project.
+
+Source discrepancy ledger (do not silently preserve incorrect claims):
+- `CORRECTION_SOURCE_ARGO_29732`: prior line called this multi-source stale revision. Actual issue concerns cancelling a GroupKind shared watch and other namespace caches going stale. Corrected above, linked original issue.
+- `CORRECTION_SOURCE_RENOVATE_42888_DATE`: original month was written as July. Original discussion shows April 24, 2026. Corrected above.
+- `CLARIFICATION_NETLIFY_RETENTION`: original shorthand mentioned only failed/cancelled cleanup. Official docs describe broader deploy retention and specific protected successful deploy exceptions. Corrected above.
+- `AUTHOR_EVIDENCE_NOT_PRODUCT_FIX`: n8n #37779 commenter reports reproducing with draft PR; do not claim merged upstream. Langfuse #14797 is closed but a maintainer declined the proposed code fix in the thread; do not equate issue closure with release/fix. Promptfoo #10481 remains an issue report, not an installed evaluator fix. Temporal #8901 is a feature/request discussion with maintainer guidance to make activities idempotent, not evidence that Temporal automatically provides idempotent external side effects.
+- `VOLATILE_POPULARITY`: the rounded star snapshot is dated discovery metadata, not a reproducible product rating or basis for purchasing/installing tools. Actual platform docs/issue reproduction and fit-to-TAKY gap control any candidate promotion.
+
+Central mergeability is separate from semantic authority: PR #168 (only existing Outcome method + this reference HISTORY) and distinct Draft PR #166 (Growth note + scoped observation helper + mixed owner examples) branch from the same main and have **no overlapping changed path**; however both describe an event-triggered observation loop. Preserve the complementary meanings: Outcome owns `when observe/recheck vs execute/stop`; Growth owns `how outcome/evidence becomes a reusable pattern`. Do not merge duplicated clauses, port project-specific histories into GRAND MASTER, or re-open a paused project as part of central promotion. No existing app PR or source repo was changed here.
+
+Final disposition for this artifact: `REFERENCE_ONLY_RECONCILED`. Main remains unchanged; original issue/community evidence remains attributable and contestable. This document does not assert live Netlify account credit, project deploy, external-provider result, operating improvement, or independent reproduction of commenters' systems.
