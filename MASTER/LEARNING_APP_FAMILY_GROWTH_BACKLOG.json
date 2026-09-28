@@ -161,7 +161,8 @@
         "TAKY draft-only ENFORCEMENT/growth_outcome_observation.py plus 10 synthetic replay cases: explicit before/after evidence, material source changes and missing real-outcome scope are deterministically differentiated. Does not perform monitoring or confer owner/approval/release authority.",
         "2026-09-28 first owner evidence snapshot records source-scoped CI before/after for Hide, bounded Ready CI-versus-device gap, and ARCHI GROW unobserved Work artifact. Replayed in existing TAKY CI. These are historical scoped observations, not live watches or app-level runtime consumers.",
         "Recovered AG-014 original YKH 38p, existing V02 source+QA board and V5 two-page preview: previous handoff-only 'not observed' inference corrected. Preview existence is observed, while actual Work result/architect acceptance and concrete V02 QA carry-forward remain OPEN. 5 owner observations in HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json.",
-        "AG-014 source-role correction: separate six-page Hannam REV01 design-study report reflects user-specified latest 1F +88.65 / 2F +92.15 and road average +82.88, while earlier Work section/FACT_LOCK still depicts +88.00 / +91.80; original DWG acquired but semantic entity parsing not proven. V5 comparison board does not supersede V02 QA or canonical Work geometry. Owner ARCHIGROW_APPLICATION AG-014 review/result cell updated without status promotion."
+        "AG-014 source-role correction: separate six-page Hannam REV01 design-study report reflects user-specified latest 1F +88.65 / 2F +92.15 and road average +82.88, while earlier Work section/FACT_LOCK still depicts +88.00 / +91.80; original DWG acquired but semantic entity parsing not proven. V5 comparison board does not supersede V02 QA or canonical Work geometry. Owner ARCHIGROW_APPLICATION AG-014 review/result cell updated without status promotion.",
+        "Direct 2026-09-28 PDF p2 cross-check found the historical AG-014/015/V02 QA source label wrong: Bundang/Seohyeon/Tancheon is on separate 20-page 2026-0923_한남동 고급빌라 규모검토.pdf, not independent 38-page TalkFile-YKH P02. Original 38p is not quarantined on this basis; historical V02 kept, existing two owner Sheet rows corrected in place and source correction observed in history snapshot (6 cases). Work folder direct-child listing shows 2026-0923 DWG later than 4-page PDF, no separately proven revised-level drawing; no semantic DWG verification or report deployment."
       ],
       "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion. Connect intended result to before/after evidence, owner-declared material-change triggers, the next relevant review and actual outcome; report the evidence-level gap instead of calling fixture/CI activity real-world improvement.",
       "exit_conditions": [
@@ -225,10 +226,10 @@
             {
               "owner": "ARCHI_GROW_PROJECT",
               "state": "PREVIEW_OBSERVED__USER_OUTCOME_OPEN__QA_RECHECK_REQUIRED",
-              "evidence": "Existing ARCHIGROW_HANNAM_AG014_SOURCE_CHECK_V02 (source-linked comparison + p2 discrepancy register) and ARCHI_GROW_YOUTUBE_TO_HANNAM_APPLICATION_V5 (2-page original-source ALT preview) recovered from Library; source board is observed but no reviewed Work implementation or measured client result. Standalone V5 must not silently hide V02's location/level/source QA."
+              "evidence": "Recovered V02 source/QA and V5 two-page original 38p ALT comparison remain preview only. Direct source cross-check isolates misannotated Bundang/Seohyeon map to different 20p PDF P02; 38p TalkFile-YKH P02 visually shows Hannam/Itaewon. Owner AG-014/015 source attribution corrected and read back. Actual revised Work DWG/entity geometry and end-user/client acceptance OPEN; V02 QA appendix needs additive correction/attachment."
             }
           ],
-          "exit_status": "PARTIAL__CI_OWNER_OBSERVATIONS_PLUS_ARCHI_SOURCE_BOARD_PREVIEW__REAL_OPERATIONAL_USER_OUTCOME_OPEN"
+          "exit_status": "PARTIAL__CI_OBSERVATIONS_PLUS_ARCHI_SOURCE_VERSION_CORRECTION_AND_PREVIEW__WORK_USER_OUTCOME_OPEN"
         }
       }
     },
