@@ -180,6 +180,7 @@ jobs:
         run: |
           python -m py_compile ENFORCEMENT/growth_outcome_observation.py
           python ENFORCEMENT/growth_outcome_observation.py --self-test ENFORCEMENT/fixtures/growth_outcome_observation_cases.json
+          python ENFORCEMENT/growth_outcome_observation.py --replay-snapshot HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json
       - name: Validate shared technical capability foundation
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
