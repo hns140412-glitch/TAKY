@@ -125,8 +125,16 @@ a = next(x for x in records if x["source_id"] == "SRC-003")
 b = next(x for x in records if x["source_id"] == "SRC-004")
 assert a["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
 assert b["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
-assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-004" for x in a["relations"])
-assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-003" for x in b["relations"])
+assert any(x.get("type") == "RELATED_TO" and x.get("target") == "SRC-004" and x.get("qualifier") == "LEGACY_DUPLICATE_GROUP_UNVERIFIED" for x in a["relations"])
+assert any(x.get("type") == "RELATED_TO" and x.get("target") == "SRC-003" and x.get("qualifier") == "LEGACY_DUPLICATE_GROUP_UNVERIFIED" for x in b["relations"])
+assert not any(x.get("type") in ("EXACT_DUPLICATE_OF", "NEAR_DUPLICATE_OF") for x in a["relations"] + b["relations"])
+# A legacy SHA256/BINARY_EXACT name is not verified digest equality.
+candidate = materialize_legacy_relations([normalize_record(x) for x in [
+    {"source_id": "A", "title": "Alpha", "duplicate_group": "SHA256_BUT_NOT_VALIDATED"},
+    {"source_id": "B", "title": "Beta", "duplicate_group": "SHA256_BUT_NOT_VALIDATED"},
+]])
+assert all(not any(rel.get("type") == "EXACT_DUPLICATE_OF" for rel in row["relations"]) for row in candidate)
+assert not search(candidate, "Alpha", relation_depth=1)["results"][0]["channels"]["relation_expanded"]
 
 # 7. relation expansion can surface linked indexed source
 r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1)
