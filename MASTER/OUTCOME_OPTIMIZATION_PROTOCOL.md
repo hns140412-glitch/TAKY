@@ -124,7 +124,7 @@ The scan identifies a candidate; it does **not** create a verified fact or appro
 
 When reporting improvement, differentiate fixture, CI, runtime/device, external-provider and actual user/business/learning outcome. Reuse the already-open `GROWTH-OUTCOME-LEARNING-001` for the missing before/change/after evidence; a test pass never silently becomes measured real-world benefit or `CURRENT_BEST`. If the necessary result cannot be observed yet, report the unverified scope and continue an authorized useful action rather than manufacture a metric, new taxonomy or monitoring infrastructure.
 
-Apply this same routing pattern across domains through each existing owner, without copying domain logic into TAKY. The current explicit HOLD for a project remains HOLD: this general method neither performs work on it nor reactivates it. This note is complementary to the existing TKY-GROWTH-001 protocol and its separate draft work; reconcile overlapping wording against the exact latest authority before any promotion.
+Apply this same routing pattern across domains through each existing owner, without copying domain logic into TAKY. The current explicit HOLD for a project remains HOLD: this general method neither performs work on it nor reactivates it. This note is complementary to the existing TKY-GROWTH-001 protocol and its separate draft work; reconcile overlapping wording against the exact latest authority before any promotion. Supporting public GitHub/Netlify sources, counterexamples and limitations are preserved as REFERENCE_ONLY in `HISTORY/2026-09-28_GITHUB_NETLIFY_ECOSYSTEM_METHOD_REVIEW.md`; neither stars nor community reports alone establish TAKY implementation fitness.
 
 ## 4. Validation budget / anti-overvalidation — HARD LOCK
 
