@@ -157,6 +157,7 @@ jobs:
           python -m py_compile ENFORCEMENT/data_index_gap_router.py
           python -m py_compile ENFORCEMENT/data_index_detail_contract.py
           python -m py_compile ENFORCEMENT/data_index_external_intake.py
+          python -m py_compile ENFORCEMENT/data_index_evidence_overlay.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
@@ -412,6 +413,8 @@ jobs:
         run: python ENFORCEMENT/data_index_detail_contract_test.py
       - name: Multi-provider link-only intake regression
         run: python ENFORCEMENT/data_index_external_intake_test.py
+      - name: Staged selected-source evidence provenance regression
+        run: python ENFORCEMENT/data_index_evidence_overlay_test.py
       - name: Validate generated Codex task contract
         run: |
           python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json
