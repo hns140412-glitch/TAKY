@@ -30,11 +30,12 @@ function create({resolveIdentity,loadVerifiedEvidence,loadIndexGapRoute}={}){
   try{
    stored=await loadVerifiedEvidence({identity,member_id:request.member_id,event_id:request.event_id});
   }catch{return fail('SERVER_OWNED_EVIDENCE_LOOKUP_FAILED')}
-  const event=stored?.canonical_evidence,receipt=stored?.batch_receipt;
+  const event=stored?.batch_evidence?.[0],receipt=stored?.batch_receipt;
   if(!event||!receipt||!Array.isArray(stored?.batch_evidence)||
      stored.batch_evidence.length!==1||
      stored.batch_evidence[0]?.event_id!==request.event_id||
      Receipt.validateBatchReceipt(receipt,stored.batch_evidence).ok!==true||
+     JSON.stringify(stored.canonical_evidence)!==JSON.stringify(event)||
      event.event_id!==request.event_id||event.member_id!==request.member_id||
      event.event_id!==stored.batch_evidence[0].event_id||
      event.verification?.receipt_id!==stored.batch_evidence[0]?.verification?.receipt_id||
