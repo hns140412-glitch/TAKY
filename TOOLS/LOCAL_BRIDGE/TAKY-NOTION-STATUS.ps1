@@ -61,7 +61,11 @@ foreach ($name in @('INCREMENTAL_SUMMARY.json','INCREMENTAL_QUEUE.json','INCREME
 if ($rawByName.ContainsKey('INCREMENTAL_SUMMARY.json') -and $rawByName.ContainsKey('INCREMENTAL_QUEUE.json')) {
     try {
         $summary=ConvertFrom-Json -InputObject $rawByName['INCREMENTAL_SUMMARY.json']
-        [object[]]$queue=@(ConvertFrom-Json -InputObject $rawByName['INCREMENTAL_QUEUE.json'])
+        # Windows PowerShell 5.1 can emit a JSON array as ONE pipeline value;
+        # wrapping ConvertFrom-Json in @() counts its container, not its rows.
+        $parsedQueue=ConvertFrom-Json -InputObject $rawByName['INCREMENTAL_QUEUE.json']
+        if (-not ($parsedQueue -is [array])) { throw 'QUEUE_JSON_NOT_ARRAY' }
+        [object[]]$queue=$parsedQueue
         $ids=@($queue | ForEach-Object { [string]$_.notion_page_id })
         $unique=@($ids | Where-Object { $_ -and $_.Trim() } | Sort-Object -Unique)
         $new=@($queue | Where-Object { $_.kind -eq 'NEW' })
@@ -87,9 +91,13 @@ if ($rawByName.ContainsKey('INCREMENTAL_SUMMARY.json') -and $rawByName.ContainsK
     }
 }
 if ($rawByName.ContainsKey('INCREMENTAL_ERRORS.json')) {
-    [object[]]$errors=@(ConvertFrom-Json -InputObject $rawByName['INCREMENTAL_ERRORS.json'])
-    $results.counts['errorRows']=$errors.Count
-    if ($errors.Count) { [void]$issues.Add('COLLECTOR_ERRORS_PRESENT') }
+    $parsedErrors=ConvertFrom-Json -InputObject $rawByName['INCREMENTAL_ERRORS.json']
+    if (-not ($parsedErrors -is [array])) { [void]$issues.Add('INVALID_ERRORS_ARRAY_SHAPE') }
+    else {
+        [object[]]$errors=$parsedErrors
+        $results.counts['errorRows']=$errors.Count
+        if ($errors.Count) { [void]$issues.Add('COLLECTOR_ERRORS_PRESENT') }
+    }
 }
 # An existing Handoff file is checked for JSON parse/existence only; the owned
 # source_vault_handoff_bridge.py separately verifies its exact schema and IDs.
@@ -109,7 +117,7 @@ if ($TaskName) {
         $results.windowsTask.state='UNKNOWN'
     }
 }
-$results.issues=@($issues.ToArray())
+$results.issues=$issues.ToArray()
 $results.status=if ($issues.Count) {'HOLD_LOCAL_OR_FRESHNESS_GAP'} elseif ($ExpectedNotionCount -gt 0) {
     'COUNT_MATCHES_SUPPLIED_SNAPSHOT_IDS_UNVERIFIED'
 } else {'LOCAL_QUEUE_CONSISTENT_LIVE_CURRENT_UNKNOWN'}
