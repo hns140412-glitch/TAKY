@@ -4,6 +4,7 @@ Captured: 2026-09-28 (public source snapshot)
 Status: REFERENCE_ONLY / CANDIDATE_LOCALIZATION / NOT_IMPLEMENTATION_AUTHORIZATION  
 Authority: This is source/evidence history, NOT another Master rule, Owner, platform guarantee, live monitor, adoption decision or deployment request.  
 Scope: Central TAKY Mining -> Indexing -> Growth/Outcome method; project-specific app or paused-project implementation EXCLUDED. No personal, child, customer, confidential or connected account information was used in public research.
+Original method witness: eight social-carousel screenshots provided by the user in this conversation on 2026-09-28, depicting a purported 24-hour AI trader's scanner -> signal -> plan -> risk -> monitor -> human decision stages. Treated only as an analogy for TAKY's change-aware observation/result loop; neither the pictured product/model, trading performance nor live deployment was independently verified. This source is historical context, NOT a master operational instruction or permission for automated trading/continuous paid model calls.
 
 ## 1. Selection rule: popularity is discovery, not evidence of fitness
 
