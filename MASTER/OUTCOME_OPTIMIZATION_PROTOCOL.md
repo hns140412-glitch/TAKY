@@ -101,7 +101,7 @@ Do not create a metric merely to satisfy process. Capture only outcome signals t
 
 ## 3.2 Change-aware observation -> next useful action — APPLICATION NOTE
 
-The user's eight-frame example of a purported round-the-clock AI operator offers a **method analogy**, not evidence of its actual service performance, an endorsed trading system, or an instruction to make every TAKY project autonomous.
+External automation examples are discovery and method analogies, not independent evidence of deployed performance or authorization to make TAKY projects autonomous. Preserve each source's identity, limitations and corrections in HISTORY; promote only owner-appropriate, evidence-backed operating principles.
 
 The existing owners already cover discovery (Mining), source and relationship traceability (Indexing), owner-specific interpretation/decision (e.g. central Learning or the appropriate Work owner), actual execution (the relevant app/Planner), and result feedback (this protocol and TKY-GROWTH-001). **Do not create a parallel scan/signal/plan/risk/watch/decision engine or move authority to a model/provider.**
 
