@@ -27,6 +27,7 @@ on:
       - '.github/workflows/taky-executor-queue-consumer.yml'
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md'
       - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
@@ -86,6 +87,7 @@ on:
       - '.github/workflows/taky-executor-queue-consumer.yml'
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md'
       - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
@@ -174,6 +176,10 @@ jobs:
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Validate MASTER file authority registry
         run: python ENFORCEMENT/master_file_registry_validator.py
+      - name: Validate owner-scoped growth observation outcomes
+        run: |
+          python -m py_compile ENFORCEMENT/growth_outcome_observation.py
+          python ENFORCEMENT/growth_outcome_observation.py --self-test ENFORCEMENT/fixtures/growth_outcome_observation_cases.json
       - name: Validate shared technical capability foundation
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
