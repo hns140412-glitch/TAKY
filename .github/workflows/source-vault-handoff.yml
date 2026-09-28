@@ -6,6 +6,8 @@ on:
       - 'ENFORCEMENT/source_vault_handoff_bridge_test.py'
       - 'ENFORCEMENT/source_vault_snapshot_evidence.py'
       - 'ENFORCEMENT/source_vault_snapshot_evidence_test.py'
+      - 'ENFORCEMENT/source_vault_external_acquisition.py'
+      - 'ENFORCEMENT/source_vault_external_acquisition_test.py'
       - '.github/workflows/source-vault-handoff.yml'
   push:
     branches:
@@ -26,3 +28,4 @@ jobs:
         run: |
           python -m unittest discover -s ENFORCEMENT -p 'source_vault_handoff_bridge_test.py' -v
           python -m unittest discover -s ENFORCEMENT -p 'source_vault_snapshot_evidence_test.py' -v
+          python -m unittest discover -s ENFORCEMENT -p 'source_vault_external_acquisition_test.py' -v
