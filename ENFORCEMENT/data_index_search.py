@@ -136,10 +136,9 @@ def materialize_legacy_relations(records: list[dict[str, Any]]) -> list[dict[str
     """Derive source-to-source compatibility relations without rereading RAW.
 
     Temporal groups remain candidate-only and are intentionally excluded.
-    Duplicate groups are mapped conservatively: binary/SHA groups become exact,
-    other duplicate groups become near-duplicate relations. Fragment groups are
-    linked as RELATED_TO siblings with an explicit qualifier so they can support
-    reconstruction without claiming identity or hierarchy.
+    Legacy duplicate-group strings (including strings containing SHA256 or
+    BINARY_EXACT) are not digest evidence. Keep such links candidate-only;
+    fragment group siblings are likewise hints, not authoritative relationships.
     """
     duplicate_groups: defaultdict[str, list[str]] = defaultdict(list)
     fragment_groups: defaultdict[str, list[str]] = defaultdict(list)
@@ -159,18 +158,13 @@ def materialize_legacy_relations(records: list[dict[str, Any]]) -> list[dict[str
 
         dup_group = record.get("legacy_duplicate_group")
         if dup_group:
-            relation_type = (
-                "EXACT_DUPLICATE_OF"
-                if ("BINARY_EXACT" in str(dup_group).upper() or "SHA256" in str(dup_group).upper())
-                else "NEAR_DUPLICATE_OF"
-            )
             for target in duplicate_groups.get(str(dup_group), []):
-                key = (relation_type, target, "LEGACY_DUPLICATE_GROUP_COMPAT")
+                key = ("RELATED_TO", target, "LEGACY_DUPLICATE_GROUP_UNVERIFIED")
                 if target != source_id and key not in seen:
                     relations.append({
-                        "type": relation_type,
+                        "type": "RELATED_TO",
                         "target": target,
-                        "qualifier": "LEGACY_DUPLICATE_GROUP_COMPAT",
+                        "qualifier": "LEGACY_DUPLICATE_GROUP_UNVERIFIED",
                     })
                     seen.add(key)
 
@@ -381,6 +375,13 @@ def relation_expand(
                 continue
             base = out.get(sid, 0.0)
             for rel in record.get("relations", []):
+                # Candidate-only compatibility edges cannot influence relevance
+                # as though a content relationship had been proved.
+                if rel.get("qualifier") in {
+                    "LEGACY_DUPLICATE_GROUP_UNVERIFIED",
+                    "LEGACY_FRAGMENT_GROUP_COMPAT",
+                }:
+                    continue
                 target = rel.get("target")
                 if target in by_id and target not in out:
                     out[target] = base * 0.35
