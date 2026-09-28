@@ -11,6 +11,7 @@ from mining_claim_relations import analyze
 from mining_goal_sufficiency import evaluate as evaluate_goal_sufficiency
 from mining_external_adapter import ingest_receipt
 from mining_synthesis import synthesize
+from mining_goal_decomposition import decompose
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -20,6 +21,69 @@ def _id(text:str)->str:
 def normalize_goal(task:dict)->dict:
     goal=str(task.get("goal","")).strip()
     return {"goal":goal,"task_family":task.get("task_family"),"goal_id":_id(f"{task.get('task_family')}|{goal}")}
+
+def preserve_task_contract(task:dict, frontier:list[dict])->dict:
+    """Keep the original required goal scope through every checkpoint/resume.
+
+    Derive only explicitly declared required items (plus explicitly requested
+    alternatives). Generic scaffolding never silently becomes a hard goal.
+    Existing callers with no explicit contract preserve the legacy fallback.
+    """
+    contract={key:task.get(key) for key in (
+        "goal","task_family","critical_frontier_ids","foundation_frontier_ids",
+        "advanced_frontier_ids","alternative_frontier_ids","alternatives_required",
+        "required_frontier_ids"
+    ) if key in task}
+    by_question={str(x.get("question")):str(x.get("id")) for x in frontier
+                 if x.get("question") and x.get("id")}
+    def ordered(values):
+        return list(dict.fromkeys(str(x) for x in values if x))
+    derived=decompose(task)
+    critical=ordered(task.get("critical_frontier_ids") or
+                     [by_question.get(text, fid) for text,fid in
+                      zip(task.get("critical_requirements",[]) or [],
+                          derived["critical_frontier_ids"])])
+    if critical:
+        contract["critical_frontier_ids"]=critical
+    explicit=ordered(
+        [by_question.get(text, fid) for text,fid in
+         zip(task.get("requirements",[]) or [],derived["explicit_requirement_ids"])]
+    )
+    required=ordered(task.get("required_frontier_ids") or [])
+    if "required_frontier_ids" in task:
+        required=ordered(required+critical)
+    else:
+        declared=bool(any(task.get(k) for k in (
+            "critical_requirements","requirements","unknown","conflict",
+            "foundation_requirements","advanced_requirements",
+            "alternative_requirements","critical_frontier_ids",
+            "foundation_frontier_ids","advanced_frontier_ids")))
+        if declared:
+            required=ordered(
+                critical + explicit
+                + [by_question.get(str(q), str(q)) for k in (
+                    "unknown","conflict","foundation_requirements",
+                    "advanced_requirements"
+                ) for q in (task.get(k,[]) or [])]
+                + list(task.get("foundation_frontier_ids") or [])
+                + list(task.get("advanced_frontier_ids") or [])
+                + ([by_question.get(str(q),str(q)) for q in
+                    (task.get("alternative_requirements",[]) or [])]
+                   + list(task.get("alternative_frontier_ids") or [])
+                   if task.get("alternatives_required") else [])
+            )
+    if required or "required_frontier_ids" in task:
+        contract["required_frontier_ids"]=required
+    # Do not retain synthetic/decomposed IDs for a dimension when the user's
+    # actual selected frontier uses legacy question IDs.
+    for key,field in (("foundation_frontier_ids","foundation_requirements"),
+                      ("advanced_frontier_ids","advanced_requirements"),
+                      ("alternative_frontier_ids","alternative_requirements")):
+        if task.get(field):
+            contract[key]=ordered(by_question.get(str(q),str(q))
+                                  for q in task.get(field,[]) or [])
+    return contract
+
 
 def evidence_score(e:dict)->float:
     authority=AUTHORITY.get(str(e.get("source_class","UNKNOWN")).upper(),0)/4
@@ -53,16 +117,20 @@ def next_queries(assessed:list[dict])->list[dict]:
     return q
 
 def checkpoint(task:dict, frontier:list[dict], evidence:list[dict], previous:dict|None=None)->dict:
+    task=preserve_task_contract(task,frontier)
     goal=normalize_goal(task); assessed=assess_frontier(frontier,evidence)
     open_items=[x for x in assessed if x["status"]!="CLOSED"]
     sufficiency=evaluate_goal_sufficiency(task,assessed)
     cycle=int((previous or {}).get("cycle",0))+1
     stop=not open_items and sufficiency["goal_sufficient"]
     reason="GOAL_AND_EVIDENCE_SUFFICIENT" if stop else "GOAL_GAPS_REMAIN" if not sufficiency["goal_sufficient"] else "EVIDENCE_GAPS_REMAIN"
-    return {"schema":"TAKY_MINING_CORE_CHECKPOINT_V1","goal":goal,"cycle":cycle,"frontier":assessed,"evidence":evidence,"goal_sufficiency":sufficiency,"next_queries":next_queries(assessed),"stop":stop,"stop_reason":reason,"resume_key":_id(json.dumps({"g":goal["goal_id"],"c":cycle,"o":[x["id"] for x in open_items],"required":sufficiency["required_ids"]},sort_keys=True,ensure_ascii=False)),"guards":{"checkpoint_is_not_canonical":True,"external_adapter_required":True,"source_authority_preserved":True,"evidence_sufficient_is_not_goal_sufficient":True}}
+    return {"schema":"TAKY_MINING_CORE_CHECKPOINT_V1","goal":goal,"task_contract":task,"cycle":cycle,"frontier":assessed,"evidence":evidence,"goal_sufficiency":sufficiency,"next_queries":next_queries(assessed),"stop":stop,"stop_reason":reason,"resume_key":_id(json.dumps({"g":goal["goal_id"],"c":cycle,"o":[x["id"] for x in open_items],"required":sufficiency["required_ids"]},sort_keys=True,ensure_ascii=False)),"guards":{"checkpoint_is_not_canonical":True,"external_adapter_required":True,"source_authority_preserved":True,"evidence_sufficient_is_not_goal_sufficient":True}}
 
 def resume(checkpoint_state:dict,new_evidence:list[dict])->dict:
-    task={"goal":checkpoint_state["goal"]["goal"],"task_family":checkpoint_state["goal"].get("task_family")}
+    task=dict(checkpoint_state.get("task_contract") or {
+        "goal":checkpoint_state["goal"]["goal"],
+        "task_family":checkpoint_state["goal"].get("task_family")
+    })
     frontier=[{"id":x["id"],"question":x.get("question"),"kind":x.get("kind")} for x in checkpoint_state.get("frontier",[])]
     evidence=list(checkpoint_state.get("evidence",[]))+list(new_evidence)
     return checkpoint(task,frontier,evidence,checkpoint_state)
