@@ -100,8 +100,9 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
                 "next_provider": next_provider,
                 "when": "DIFFERENT_PROVIDER_AVAILABLE" if next_provider else "NEW_EVIDENCE_OR_CHANGED_METHOD"}
     if category == "EMPTY_PROVIDER_RESULT":
-        return {**common, "type": "CHANGE_SOURCE_FAMILY_OR_QUERY",
-                "when": "REVISED_SEARCH_ROUTE"}
+        return {**common, "type": "TRY_NEXT_PROVIDER" if next_provider else "REVISE_QUERY_OR_HOLD",
+                "next_provider": next_provider,
+                "when": "DIFFERENT_PROVIDER_AVAILABLE" if next_provider else "NEW_QUERY_OR_CHANGED_METHOD"}
     if category == "INDEX_EVIDENCE_UNVERIFIED":
         return {**common, "type": "VERIFY_INDEX_SOURCE_AND_EXACT_ANCHOR",
                 "when": "SOURCE_ANCHOR_AND_CLAIM_CHECK"}
@@ -126,7 +127,7 @@ def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None
                         "CONFLICT_UNRESOLVED", "EMPTY_PROVIDER_RESULT",
                         "PROVIDER_FAILURE"}:
         return None
-    if category == "PROVIDER_FAILURE" and not next_provider:
+    if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} and not next_provider:
         return None
     fid = str(item.get("id") or "")
     return {
@@ -134,7 +135,8 @@ def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None
         "query": str(item.get("question") or fid),
         "purpose": "RESOLVE_CONFLICT" if category == "CONFLICT_UNRESOLVED" else "FILL_EVIDENCE_GAP",
         "prefer": SOURCE_PREFER,
-        **({"next_provider": next_provider} if category == "PROVIDER_FAILURE" else {}),
+        **({"next_provider": next_provider}
+           if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} else {}),
     }
 
 
@@ -168,8 +170,11 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         next_provider = (receipt or {}).get("next_provider")
         next_provider = str(next_provider).strip() if next_provider else None
         attempted_provider = str((receipt or {}).get("provider") or "")
-        if next_provider and next_provider.upper() == attempted_provider.upper():
-            next_provider = None  # never reissue the same failed route as an alternative
+        if next_provider:
+            from mining_provider_executor import SUPPORTED_PROVIDERS
+            if (next_provider.upper() == attempted_provider.upper()
+                    or next_provider.upper() not in SUPPORTED_PROVIDERS):
+                next_provider = None  # never retry the same or an unsupported route
         provider_evidence = ((receipt or {}).get("receipt") or {}).get("results") or (receipt or {}).get("results") or []
         if not isinstance(provider_evidence, list):
             provider_evidence = []
@@ -207,7 +212,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         state = ("CLOSED" if category == "EVIDENCE_VERIFIED" else
                  "HOLD" if category in {"ROUTE_BLOCKED", "ACCESS_HOLD", "DEPTH_CONFLICT",
                                        "SOURCE_REVIEW_HOLD"} or
-                 (category == "PROVIDER_FAILURE" and not next_provider)
+                 (category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"}
+                  and not next_provider)
                  else "CANDIDATE" if category == "OPTIONAL_SCOPE_REVIEW"
                  else "DEFERRED" if category == "DEPTH_DEFERRED" else "READY")
         action = _action(item, category, source_ids=candidate_ids, next_provider=next_provider)
