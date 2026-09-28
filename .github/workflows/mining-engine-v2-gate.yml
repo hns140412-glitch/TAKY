@@ -17,6 +17,8 @@ on:
       - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - 'ENFORCEMENT/mining_run_orchestrator.py'
       - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_pending_actions.py'
+      - 'ENFORCEMENT/mining_pending_actions_test.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal_test.py'
       - 'ENFORCEMENT/mining_core.py'
@@ -91,6 +93,8 @@ on:
       - 'ENFORCEMENT/index_retrieval_test.py'
       - 'ENFORCEMENT/mining_run_orchestrator.py'
       - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_pending_actions.py'
+      - 'ENFORCEMENT/mining_pending_actions_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
       - 'ENFORCEMENT/mining_index_bridge_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
@@ -111,6 +115,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_engine_step9_gate.py
           python -m py_compile ENFORCEMENT/mining_engine_step10_adversarial.py
           python -m py_compile ENFORCEMENT/mining_run_orchestrator.py
+          python -m py_compile ENFORCEMENT/mining_pending_actions.py
           python -m py_compile ENFORCEMENT/mining_engine_step12_unseen_goal.py
           python -m py_compile ENFORCEMENT/mining_core.py
           python -m py_compile ENFORCEMENT/mining_source_strategy.py
@@ -150,6 +155,8 @@ jobs:
         run: python ENFORCEMENT/mining_engine_step10_adversarial_test.py
       - name: Test Step 11 mining run orchestrator
         run: python ENFORCEMENT/mining_run_orchestrator_test.py
+      - name: Test unprocessed mining next actions
+        run: python ENFORCEMENT/mining_pending_actions_test.py
       - name: Test Step 12 unseen-goal generalization
         run: python ENFORCEMENT/mining_engine_step12_unseen_goal_test.py
       - name: Test resumable Mining Core
