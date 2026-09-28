@@ -1,0 +1,38 @@
+name: Audit Server Verification Growth Composition
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - '.github/workflows/audit-server-verification-growth-compose.yml'
+      - 'ENFORCEMENT/tests/specialist-outcome-growth-compose.test.js'
+      - 'ENFORCEMENT/trusted_outcome_growth_audit.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-composed-verifier-growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 8e78af8b77d1f3e132f05c99cd6b69a7f258a23e
+          path: canonical-main
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 4e7a357321faf60ad3adeb608a77fa7c79e492a5
+          path: central-draft
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Assert independent actual main and central verifier Draft source HEADs
+        run: |
+          test "$(git -C canonical-main rev-parse HEAD)" = "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e"
+          test "$(git -C central-draft rev-parse HEAD)" = "4e7a357321faf60ad3adeb608a77fa7c79e492a5"
+      - name: Verify scorer to immutable receipt to scoped growth seam without product merge
+        run: node ENFORCEMENT/tests/specialist-outcome-growth-compose.test.js
