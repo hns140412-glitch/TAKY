@@ -70,7 +70,8 @@
     "PWA/local-first and app release/device acceptance",
     "approved Visual IDs/assets and non-card UI exact 1:1 equivalence",
     "Work OS held, adjacent domains follow separate owner plans",
-    "AUD-16 local collector: 0/1/N manifest JSON type normalization; untracked metadata and cached-versus-live ref honesty"
+    "AUD-16 local collector: 0/1/N manifest JSON type normalization; untracked metadata and cached-versus-live ref honesty",
+    "AUD-17: scheduled ZIP no-change != actual global validation; compare branch topology and separate CI/host/device evidence"
   ],
   "prohibitions": [
     "not new master CURRENT",
@@ -85,5 +86,5 @@
   ],
   "implementation_authorization": "AUDIT_ONLY__NO_MAIN_OR_PRODUCTION_CHANGE",
   "resume_action": "READ CURRENT -> EXACT LIVE HEAD/CI -> audit §T and C2S checkpoint/HANDOFF -> CLOSED inherit -> owner-authorized narrow Hide source composition or HOLD -> operational independent Indexing issuer, V26 loader, trusted real outcome, local-first and UI OPEN",
-  "latest_appendix": "C2S/WHOLE_SYSTEM_CROSS_LAYER_AUDIT_2026-09-28.md §U"
+  "latest_appendix": "C2S/WHOLE_SYSTEM_CROSS_LAYER_AUDIT_2026-09-28.md §V"
 }
