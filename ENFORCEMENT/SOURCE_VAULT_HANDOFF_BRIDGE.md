@@ -20,3 +20,15 @@ Only when separately authorized and provisioned, run read-only routing with:
 python ENFORCEMENT/source_vault_handoff_bridge.py --reports "D:\Git PWA\TAKY-SOURCE-VAULT\reports"
 
 Result is SOURCE_VAULT_ROUTER_RECEIPT.json, NOT a Mining completion receipt. No changes to 03:30 / 13:00 schedule, SOURCE VAULT root, Netlify or repository main.
+
+
+### Deterministic local snapshot evidence stage
+The companion source_vault_snapshot_evidence.py uses the *same validated handoff* and reads only the existing SOURCE VAULT data/notion_incremental/snapshots/<Page ID>/<fingerprint>/blocks.json under an explicitly supplied trusted vault root. It rejects claimed paths outside that root, invalid page/fingerprint locators, oversized/malformed snapshots, duplicate queue IDs and input changes. The output records actual raw-byte SHA-256 and block-ID-scoped text evidence, with attachment and child-page discovery gaps explicitly flagged. A directory fingerprint is merely an existing collector locator; the raw-byte hash proves only the bytes read.
+
+Run (when authorized) from TAKY:
+python ENFORCEMENT/source_vault_snapshot_evidence.py --vault-root "D:\Git PWA\TAKY-SOURCE-VAULT"
+
+Result: reports/SOURCE_VAULT_SNAPSHOT_EVIDENCE.json. This is NOT a semantic Mining report, an acquired external URL page/attachment, an Indexing receipt, or an acknowledgment. It does not run on the user's PC merely because the GitHub Draft branch was updated. The evidence file contains extracted user content; keep it local and do not commit it into a public repository.
+
+### Operational activation gate
+The user-visible schedule is a separate local Windows task. This Draft does not modify that task, install the bridge, or configure a free local semantic runtime. A scheduled ChatGPT subscription is not a local autonomous model/API service. Before claiming end-to-end one-click Mining, require a verified local/authorized semantic analysis runtime, source-by-source analysis receipts, independent Indexing-owner verification, and unattended Windows run proof. Until then, preserve the pending queue.
