@@ -2,7 +2,7 @@
   "snapshot_kind": "OWNER_EVIDENCE_SNAPSHOT_NOT_AUTOMATIC_MONITOR",
   "captured_for": "TKY-GROWTH-001 / GROWTH-OUTCOME-LEARNING-001",
   "date": "2026-09-28",
-  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim. Added exact Library-read source PDF observations; GitHub CI does not validate Library bytes, so provenance is a recorded observation, not runtime validation of external files.",
+  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim. Added exact Library-read source PDF observations; GitHub CI does not validate Library bytes, so provenance is a recorded observation, not runtime validation of external files. Separate Library fact-lock, revised design-study PDF and raw-DWG receipt distinguish instructed text revision from actual DWG geometry.",
   "only_exact_head_and_scope": true,
   "main_untouched": true,
   "observations": [
@@ -178,29 +178,34 @@
         "before": {
           "state": "OBSERVED",
           "evidence_refs": [
-            "library:file_00000000a320820695e93e424d918a97"
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_00000000664082069be012dbfca81cdb"
           ],
-          "facts": "V02 p2 records P02 location mismatch (Bundang/Seohyeon labels), Work P04 1F +88.00 / 2F +91.80 versus later instructed +88.65 / +92.15, road vs site weighted mean and unverified CAD overlay."
+          "facts": "V02 p2 records P02 location mismatch (Bundang/Seohyeon labels), Work P04 1F +88.00 / 2F +91.80 versus later instructed +88.65 / +92.15, road vs site weighted mean and unverified CAD overlay. Historical HANNAM_737-21_FACT_LOCK_2026-09-23.md records original verified PDF page levels +88.00/+91.80, and original DWG signature not semantic parsing."
         },
         "after": {
           "state": "OBSERVED",
           "outcome": "UNKNOWN",
           "evidence_scope": "COMPARISON_PREVIEW_ONLY",
           "evidence_refs": [
-            "library:file_0000000031a88206a1c2ced13d68da92"
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_0000000005fc82099b51cbc6905a08bb",
+            "library:file_000000009e00820683c5e8c41ceee5c0"
           ],
-          "facts": "V5 p1/2 shows source and general HOLD statements but does not visibly reproduce the explicit P02 map and floor-level discrepancy register from V02. Whether the original appendix is attached wherever V5 is used remains unknown."
+          "facts": "V5 p1/2 shows source and general HOLD statements but does not visibly reproduce the explicit P02 map and floor-level discrepancy register from V02. Whether the original appendix is attached wherever V5 is used remains unknown. Separate 6-page 한남동_737-21_고급주택_규모검토_설계기획보고서_TAKY_REV01.pdf was recovered; its TEXT records later user revision B1 +84.00 / 1F +88.65 / 2F +92.15 / road average +82.88 / AB 10,000mm. This is documented revision/report evidence, NOT demonstrated that the older Work PDF or DWG graphic was updated. DWG source receipt says RAW_DWG_ACQUIRED__SEMANTIC_GEOMETRY_NOT_YET_EXTRACTED."
         },
         "trigger": {
           "state": "MATERIAL_CHANGE",
           "change_kind": "EXISTING_SOURCE_QA_NOT_VISIBLE_IN_STANDALONE_PREVIEW",
           "evidence_refs": [
             "library:file_00000000a320820695e93e424d918a97",
-            "library:file_0000000031a88206a1c2ced13d68da92"
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_0000000005fc82099b51cbc6905a08bb",
+            "library:file_00000000664082069be012dbfca81cdb"
           ],
-          "note": "Owner should preserve/attach V02 QA appendix or carry forward specific status before optional use; do not pretend omission proves a legal or design error."
+          "note": "Owner should preserve/attach V02 QA appendix or carry forward specific status before optional use; do not pretend omission proves a legal or design error. Revised design-study PDF exists, but its revised text must not be cited as validated current DWG entities or proof an older Work section graphic already matches."
         },
-        "claim_boundary": "Presentation/source-visibility QA only; neither hidden geometry failure nor legal noncompliance is inferred; original PDF/DWG and prior approved decisions unchanged."
+        "claim_boundary": "Presentation/source-visibility QA only; neither hidden geometry failure nor legal noncompliance is inferred; original PDF/DWG and prior approved decisions unchanged. Keep later user level correction authoritative for that instructed revision without rewriting older source representation; latest approved drawing reconciliation is still OPEN."
       }
     }
   ]
