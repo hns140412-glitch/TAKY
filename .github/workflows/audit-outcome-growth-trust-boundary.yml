@@ -1,0 +1,41 @@
+name: Audit Outcome Growth Trust Boundary
+on:
+  push:
+    branches: [audit/whole-system-cross-layer-20260928]
+    paths:
+      - '.github/workflows/audit-outcome-growth-trust-boundary.yml'
+      - 'ENFORCEMENT/trusted_outcome_growth_audit.js'
+      - 'ENFORCEMENT/tests/trusted-outcome-growth-audit.test.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-bound-growth-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: 8e78af8b77d1f3e132f05c99cd6b69a7f258a23e
+          path: canonical-main
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: hns140412-glitch/TAKY
+          ref: e6d5ec69ce693e36f5b3aaf9ac42f01d510959b6
+          path: mining-v2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Assert independent source HEADs
+        run: |
+          test "$(git -C canonical-main rev-parse HEAD)" = "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e"
+          test "$(git -C mining-v2 rev-parse HEAD)" = "e6d5ec69ce693e36f5b3aaf9ac42f01d510959b6"
+      - name: Execute actual Learning and Mining sources with guarded test-only evidence lookup
+        run: node ENFORCEMENT/tests/trusted-outcome-growth-audit.test.js
