@@ -27,7 +27,7 @@ jobs:
       - name: Parse and smoke help only
         shell: powershell
         run: |
-          foreach ($name in @('TAKY-CONSOLE.ps1','TAKY-LOCAL-BRIDGE.ps1')) {
+          foreach ($name in @('TAKY-CONSOLE.ps1','TAKY-LOCAL-BRIDGE.ps1','TAKY-NOTION-STATUS.ps1','TAKY-NOTION-STATUS-SMOKE.ps1')) {
             $file = Join-Path 'TOOLS/LOCAL_BRIDGE' $name
             $tokens = $null
             $parseErrors = $null
@@ -35,3 +35,6 @@ jobs:
             if ($parseErrors.Count) { throw "$name parse failed: $parseErrors" }
           }
           & powershell.exe -NoProfile -ExecutionPolicy Bypass -File TOOLS/LOCAL_BRIDGE/TAKY-CONSOLE.ps1 help
+      - name: Synthetic Notion receipt freshness vs stale comparison (PowerShell 5.1)
+        shell: powershell
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File TOOLS/LOCAL_BRIDGE/TAKY-NOTION-STATUS-SMOKE.ps1
