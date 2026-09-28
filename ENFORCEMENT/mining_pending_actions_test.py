@@ -283,8 +283,28 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(find_by_question(result["plan"],"official A")["classification"],"EVIDENCE_VERIFIED")
         self.assertEqual(find_by_question(result["plan"],"official B")["classification"],"EMPTY_PROVIDER_RESULT")
         self.assertEqual({r["frontier_id"] for r in result["plan"]["planned_provider_requests"]},{"official B"})
+        self.assertEqual({r["provider"] for r in result["plan"]["planned_provider_requests"]},{"PUBLIC_DATA"})
         self.assertFalse(result["plan"]["research_complete_eligible"])
         self.assertFalse(result["guards"]["network_calls_performed_by_orchestrator"])
+
+    def test_empty_provider_uses_changed_route_or_waits_for_revised_query(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"find one source",
+              "unknown":["source Z"],"max_research_depth":"D1"}
+        original=orchestrate({"task":task,"memory":{}})
+        primary=original["plan"]["planned_provider_requests"][0]
+        out=advance_provider_batch({"task":task,"memory":{}},{
+            primary["request_id"]:{"state":"EMPTY","response":{"results":[]}}
+        })
+        item=find_by_question(out["plan"],"source Z")
+        self.assertEqual(item["classification"],"EMPTY_PROVIDER_RESULT")
+        self.assertEqual(item["next_action"]["type"],"TRY_NEXT_PROVIDER")
+        self.assertEqual([x["provider"] for x in out["plan"]["planned_provider_requests"]],["PUBLIC_DATA"])
+        held=plan(task,provider_results={"source Z":{
+            "state":"EMPTY","provider":"WEB","next_provider":"WEB","receipt":{"results":[]}
+        }})
+        item=find_by_question(held,"source Z")
+        self.assertEqual(item["state"],"HOLD")
+        self.assertEqual(held["planned_provider_requests"],[])
 
     def test_provider_failure_prepares_different_fallback_without_retrying_same_provider(self):
         task={"task_family":"GENERAL_RESEARCH","goal":"find one official source",
