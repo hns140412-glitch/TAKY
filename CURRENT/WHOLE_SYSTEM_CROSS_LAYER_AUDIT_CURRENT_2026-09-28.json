@@ -60,7 +60,7 @@
     "audit-only guarded main↔V2 source/authority/provider/receipt/current-scope suites",
     "central Draft159 server-verifier to main receipt to growth candidate source fixture"
   ],
-  "open_primary": "Hide main + V2 Draft12 + independent owner Draft19 conflict resolution; preservation of main-only reflection producer and owner/badge constraints, NO BLIND TRANSPLANT",
+  "open_primary": "Hide V2 #12/main/#19 SOURCE_CONTRACT_REVIEWED__SELECTIVE_COMPOSITION_HOLD; V2 bridge lacks main/#19 child-authored reflection and #19 central outbox, #19 signal input scope differs from V2 mismatch guard; latest #159 central compatibility not tested",
   "open_other": [
     "trusted hosted native preflight authority",
     "actual family/member storage and legacy migration",
@@ -83,5 +83,6 @@
     "USER != DEBUGGER"
   ],
   "implementation_authorization": "AUDIT_ONLY__NO_MAIN_OR_PRODUCTION_CHANGE",
-  "resume_action": "READ CURRENT -> EXACT LIVE HEAD/CI -> full AUDIT newest §S and C2S checkpoint -> HANDOFF latest override -> CLOSED inherit -> selective Hide conflicting files and original owner constraints -> next OPEN"
+  "resume_action": "READ CURRENT -> EXACT LIVE HEAD/CI -> audit §T and C2S checkpoint/HANDOFF -> CLOSED inherit -> owner-authorized narrow Hide source composition or HOLD -> operational independent Indexing issuer, V26 loader, trusted real outcome, local-first and UI OPEN",
+  "latest_appendix": "C2S/WHOLE_SYSTEM_CROSS_LAYER_AUDIT_2026-09-28.md §T"
 }
