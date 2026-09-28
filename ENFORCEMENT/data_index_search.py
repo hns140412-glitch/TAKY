@@ -18,6 +18,7 @@ import argparse
 import json
 import math
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
@@ -210,7 +211,7 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 
 
 def load_index(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
     records = [normalize_record(x) for x in _extract_records(payload)]
     records = [x for x in records if x.get("source_id")]
     return materialize_legacy_relations(records)
@@ -263,6 +264,31 @@ def exact_scores(records: list[dict[str, Any]], query: str) -> dict[str, float]:
             score = 0.7
         if score:
             scores[r["source_id"]] = score
+    return scores
+
+
+def strong_exact_scores(records: list[dict[str, Any]], query: str) -> dict[str, float]:
+    """Source ID/title/controlled-term equality, independent of fuzzy token scoring."""
+    def canon(value: Any) -> str:
+        return unicodedata.normalize("NFKC", str(value or "")).casefold().strip()
+
+    q = canon(query)
+    if not q:
+        return {}
+    scores: dict[str, float] = {}
+    for record in records:
+        sid = record.get("source_id")
+        if not sid:
+            continue
+        terms = record.get("controlled_terms") or []
+        if not isinstance(terms, list):
+            terms = [terms]
+        if q == canon(sid):
+            scores[sid] = 1.0
+        elif q == canon(record.get("canonical_title")):
+            scores[sid] = 0.95
+        elif q in {canon(term) for term in terms if term is not None}:
+            scores[sid] = 0.92
     return scores
 
 
@@ -409,17 +435,27 @@ def search(
     by_id = {r["source_id"]: r for r in candidates}
 
     exact = exact_scores(candidates, query)
-    lexical = lexical_scores(candidates, query)
-    token_cosine = token_cosine_scores(candidates, query)
-    vector_scores_verified = {
-        sid: score
-        for sid, score in (semantic_vector_scores or {}).items()
-        if sid in by_id and isinstance(score, (int, float)) and score > 0
-    }
-    channels_for_fusion = [exact, lexical, token_cosine]
-    if vector_scores_verified:
-        channels_for_fusion.append(vector_scores_verified)
-    fused = rrf_fuse(channels_for_fusion)
+    strong_exact = strong_exact_scores(candidates, query)
+    exact.update(strong_exact)
+    # Strong ID/title/controlled-term matches stay exact. In particular an
+    # achievement code must not lose to incidental partial Korean tokens.
+    if strong_exact:
+        lexical: dict[str, float] = {}
+        token_cosine: dict[str, float] = {}
+        vector_scores_verified: dict[str, float] = {}
+        fused = dict(strong_exact)
+    else:
+        lexical = lexical_scores(candidates, query)
+        token_cosine = token_cosine_scores(candidates, query)
+        vector_scores_verified = {
+            sid: score
+            for sid, score in (semantic_vector_scores or {}).items()
+            if sid in by_id and isinstance(score, (int, float)) and score > 0
+        }
+        channels_for_fusion = [exact, lexical, token_cosine]
+        if vector_scores_verified:
+            channels_for_fusion.append(vector_scores_verified)
+        fused = rrf_fuse(channels_for_fusion)
     pre_relation = _rank(fused)
     fused = relation_expand(pre_relation, by_id, fused, relation_depth)
     ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
@@ -459,15 +495,14 @@ def search(
         )
 
     vector_enabled = bool(vector_scores_verified)
-    pipeline = [
-        "STRUCTURED_FILTER",
-        "EXACT_RETRIEVAL",
-        "LEXICAL_RETRIEVAL",
-        "TOKEN_COSINE_FALLBACK",
-    ]
-    if vector_enabled:
-        pipeline.append("VERIFIED_NEURAL_VECTOR")
-    pipeline.extend(["RRF", "RELATION_EXPANSION"])
+    pipeline = ["STRUCTURED_FILTER", "EXACT_RETRIEVAL"]
+    if strong_exact:
+        pipeline.extend(["EXACT_SHORT_CIRCUIT", "RELATION_EXPANSION"])
+    else:
+        pipeline.extend(["LEXICAL_RETRIEVAL", "TOKEN_COSINE_FALLBACK"])
+        if vector_enabled:
+            pipeline.append("VERIFIED_NEURAL_VECTOR")
+        pipeline.extend(["RRF", "RELATION_EXPANSION"])
 
     return {
         "projection_authoritative": False,
