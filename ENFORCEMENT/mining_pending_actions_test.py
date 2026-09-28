@@ -144,6 +144,37 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(ready["checkpoint_resume_key"], two["resume_key"])
         self.assertFalse(ready["external_execution_performed"])
 
+    def test_activated_batch_queries_index_before_proposing_provider_calls(self):
+        task = {"task_family": "GENERAL_RESEARCH", "goal": "three research inputs",
+                "critical_requirements": ["alpha", "beta", "gamma"],
+                "max_research_depth": "D1"}
+        initial = plan(task)
+        selected = initial["search_frontier"]
+        checkpoint = mining_checkpoint(task, selected, [])
+        receipts = [
+            {"frontier_id": item["id"], "query": item["question"], "adapter": "WEB",
+             "results": [{"source_id": "S-" + item["question"], "source_class": "PRIMARY",
+                          "url": "https://example.gov/" + item["question"],
+                          "claim": item["question"], "direct_support": True,
+                          "excerpt_ref": "page:1#paragraph:1", "independent_support_count": 2}]}
+            for item in selected
+        ]
+        verified = apply_external_receipts(checkpoint, receipts)
+        no_index = plan(task, verified_checkpoint=verified)["follow_up_activation"]
+        self.assertEqual(no_index["state"], "READY_NEXT_BATCH")
+        self.assertTrue(no_index["planned_provider_requests"])
+        self.assertFalse(no_index["external_execution_performed"])
+        with_index = plan(
+            task, verified_checkpoint=verified,
+            index_rows=[{"source_id": "S-gamma", "canonical_title": "gamma",
+                         "short_summary": "gamma", "authority_class": "OFFICIAL"}]
+        )["follow_up_activation"]
+        self.assertEqual(with_index["state"], "READY_NEXT_BATCH")
+        self.assertEqual([x["question"] for x in with_index["verification_frontier"]], ["gamma"])
+        self.assertEqual(with_index["planned_provider_requests"], [])
+        self.assertEqual(with_index["pending_actions"]["items"][0]["classification"],
+                         "INDEX_EVIDENCE_UNVERIFIED")
+
     def test_forged_closed_status_and_unanchored_source_cannot_activate_next_batch(self):
         task = {"task_family": "GENERAL_RESEARCH", "goal": "bounded evidence",
                 "critical_requirements": ["a", "b", "c"], "max_research_depth": "D1"}
