@@ -230,19 +230,45 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
         return {"state": "HOLD_ROUTE", "frontier": [], "query_plans": []}
     if not isinstance(checkpoint, dict) or checkpoint.get("schema") != "TAKY_MINING_CORE_CHECKPOINT_V1":
         return {"state": "WAIT_VERIFIED_CHECKPOINT", "frontier": [], "query_plans": []}
-    verified = {
-        str(x.get("id")) for x in checkpoint.get("frontier", [])
-        if x.get("status") == "CLOSED" and int(x.get("evidence_count") or 0) > 0
-        and float(x.get("best_evidence_score") or 0.0) >= 0.65
-    }
+    # A caller-provided CLOSED label is not proof. Reassess the evidence with
+    # the existing Mining Core and demand source identity + an exact anchor.
+    from mining_core import assess_frontier
+
+    evidence = checkpoint.get("evidence")
+    if not isinstance(evidence, list):
+        return {"state": "WAIT_VERIFIED_CHECKPOINT", "reason": "MISSING_EVIDENCE_LEDGER",
+                "frontier": [], "query_plans": []}
+    assessed = {str(x.get("id")): x for x in assess_frontier(selected, evidence)}
+    declared = {str(x.get("id")): x for x in checkpoint.get("frontier", [])
+                if isinstance(x, dict)}
     required_selected = {
         str(item.get("frontier_id")) for item in pending.get("items", [])
         if item.get("selected_this_batch") and item.get("required_for_goal")
     }
-    remaining = [
-        str(item.get("id")) for item in selected
-        if str(item.get("id")) in required_selected and not (_ids(item) & verified)
-    ]
+    remaining = []
+    missing_anchors = []
+    for item in selected:
+        fid = str(item.get("id"))
+        if fid not in required_selected:
+            continue
+        actual = assessed.get(fid, {})
+        reported = declared.get(fid, {})
+        closed = actual.get("status") == "CLOSED" and reported.get("status") == "CLOSED"
+        if not closed:
+            remaining.append(fid)
+            continue
+        anchored = any(
+            isinstance(e, dict) and str(e.get("frontier_id")) in _ids(item)
+            and (e.get("source_identity") or e.get("source_id") or e.get("source_url"))
+            and e.get("excerpt_ref") and (e.get("claim") or e.get("subject"))
+            and e.get("direct_support") is True
+            for e in evidence
+        )
+        if not anchored:
+            missing_anchors.append(fid)
+    if missing_anchors:
+        return {"state": "WAIT_SOURCE_ANCHOR", "missing_anchor_ids": missing_anchors,
+                "unresolved_current": remaining, "frontier": [], "query_plans": []}
     if remaining:
         return {"state": "WAIT_CURRENT_BATCH_EVIDENCE", "unresolved_current": remaining,
                 "frontier": [], "query_plans": []}
