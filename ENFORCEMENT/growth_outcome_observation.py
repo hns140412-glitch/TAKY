@@ -101,16 +101,44 @@ def self_test(path):
     print(f"PASS: outcome observation replay: {len(cases)} cases / no auto action or promotion")
 
 
+def snapshot_test(path):
+    """Replay a historically captured source snapshot; do NOT fetch current GitHub/Drive."""
+    snapshot = json.loads(Path(path).read_text(encoding="utf-8"))
+    assert snapshot.get("snapshot_kind") == "OWNER_EVIDENCE_SNAPSHOT_NOT_AUTOMATIC_MONITOR"
+    assert snapshot.get("only_exact_head_and_scope") is True
+    observations = snapshot.get("observations")
+    assert isinstance(observations, list) and len(observations) >= 3
+    owners = set()
+    observed = 0
+    for item in observations:
+        record = item["record"]
+        assert nonempty(item.get("evidence_kind")), record.get("observation_id")
+        assert nonempty(record.get("claim_boundary")), record.get("observation_id")
+        evaluated = assess(record)
+        assert evaluated["status"] == item["expected_status"], (record.get("observation_id"), evaluated)
+        assert not any(evaluated[k] for k in
+                       ("execution_authorized", "owner_decision_made", "automatic_current_promotion"))
+        owners.add(evaluated["owner"])
+        observed += int(record.get("after", {}).get("state") == "OBSERVED")
+    assert len(owners) >= 3 and observed >= 2, "Expected multiple real owner scopes"
+    print(f"PASS: owner evidence snapshot replay: {len(observations)} records / "
+          "evidence-specific states / no live status or automatic promotion")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", nargs="?", help="Observation record JSON or list of records")
-    parser.add_argument("--self-test", dest="fixture", help="Run local fixture cases")
+    parser.add_argument("--self-test", dest="fixture", help="Run local synthetic fixture cases")
+    parser.add_argument("--replay-snapshot", dest="snapshot", help="Replay captured owner evidence WITHOUT fetching live status")
     args = parser.parse_args()
     if args.fixture:
         self_test(args.fixture)
         return
+    if args.snapshot:
+        snapshot_test(args.snapshot)
+        return
     if not args.input:
-        parser.error("provide an input JSON file or --self-test")
+        parser.error("provide an input JSON file, --self-test, or --replay-snapshot")
     data = json.loads(Path(args.input).read_text(encoding="utf-8"))
     records = data if isinstance(data, list) else [data]
     output = [assess(record) for record in records]
