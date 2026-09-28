@@ -144,6 +144,27 @@ def orchestrate(payload: dict) -> dict:
         depth=depth["research_depth_decision"], route_blocked=blocked,
     )
     prepared_requests = build_requests(pending["ready_query_plans"]) if not blocked else []
+    if follow_up.get("state") == "READY_NEXT_BATCH":
+        # A verified checkpoint activates the next bounded batch. Consult the
+        # shared Index again before proposing any external provider request.
+        next_frontier = follow_up["frontier"]
+        next_index = query_frontier(
+            next_frontier, index_rows,
+            semantic_scores=payload.get("semantic_scores"),
+            relations=payload.get("index_relations"),
+            detail_rows=payload.get("detail_rows"),
+            min_results=int(payload.get("index_min_results", 1) or 1),
+            top_k=int(payload.get("index_top_k", 5) or 5),
+        )
+        next_pending = classify_pending(
+            task, next_frontier, next_frontier, next_index,
+            depth=depth["research_depth_decision"],
+        )
+        follow_up["index_first"] = next_index
+        follow_up["pending_actions"] = next_pending
+        follow_up["planned_provider_requests"] = build_requests(next_pending["ready_query_plans"])
+        follow_up["verification_frontier"] = next_index.get("verification_frontier", [])
+        follow_up["external_execution_performed"] = False
     route = (
         prior["failure_memory"]["replacement_routes"][0]
         if prior["next_action"] == "USE_REPLACEMENT_ROUTE" and prior["failure_memory"]["replacement_routes"]
