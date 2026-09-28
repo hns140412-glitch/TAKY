@@ -124,11 +124,56 @@ def load_explicit_overlay(index_path: Path, pointer_path: Path, bridge_path: Pat
     return base + extra, info
 
 
+
+def load_source_grounded_universe(source_index_path, current_index_path, pointer_path, bridge_path, external_manifest_path=None):
+    """Read-only compose: 679 source-authoritative DATA + separately staged candidates."""
+    from data_index_source_composer import compose_source_l1
+    from data_index_external_intake import stage_external_candidates
+    current, pointer = _read_json(current_index_path), _read_json(pointer_path)
+    expected_id, expected_count = _validate_current(current, pointer)
+    base, source_receipt = compose_source_l1(_read_json(source_index_path), current, pointer)
+    if len(base) != expected_count:
+        raise ValueError("SOURCE_GROUNDED_COUNT_MISMATCH")
+    bridge = validate_and_project_bridge(_read_json(bridge_path), expected_id)
+    source_ids = {r["source_id"] for r in base}
+    bridge_ids = {r["source_id"] for r in bridge}
+    if len(bridge_ids) != len(bridge) or source_ids & bridge_ids:
+        raise ValueError("BRIDGE_SOURCE_ID_COLLISION")
+    external, external_receipt = [], {"state": "NOT_SUPPLIED", "candidate_count": 0}
+    if external_manifest_path is not None:
+        manifest = _read_json(external_manifest_path)
+        boundary = manifest.get("authority") or {}
+        if (manifest.get("schema") != "TAKY_EXTERNAL_DISCOVERY_MANIFEST_V1"
+            or manifest.get("state") != "STAGED_LINK_ONLY_NOT_CURRENT"
+            or boundary.get("current_pointer_modified") is not False
+            or boundary.get("external_original_content_acquired") is not False
+            or boundary.get("corpus_addition_to_DATA_679") is not False):
+            raise ValueError("EXTERNAL_MANIFEST_AUTHORITY_INVALID")
+        external, external_receipt = stage_external_candidates(
+            manifest.get("sources"), existing_source_ids=source_ids | bridge_ids)
+        if any(r["intake_envelope"]["privacy_class"] != "PUBLIC" for r in external):
+            raise ValueError("EXTERNAL_PRIVATE_SOURCE_NOT_ELIGIBLE_FOR_PUBLIC_PROJECTION")
+    records = base + bridge + external
+    if len({r["source_id"] for r in records}) != len(records):
+        raise ValueError("UNIVERSE_SOURCE_ID_COLLISION")
+    return records, {
+        "projection_authoritative": False, "source_grounded": source_receipt,
+        "data_current_count": expected_count, "writing_originals_staged_count": len(bridge),
+        "external_discovery_link_only_count": len(external),
+        "temporary_retrieval_candidate_count": len(records),
+        "data_current_pointer_modified": False, "external_staged_not_current": True,
+        "original_files_copied": False, "detail_content_auto_verified": False,
+        "external_receipt": external_receipt,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Search CURRENT plus separately staged external relation bridge")
     parser.add_argument("--current-index", required=True, type=Path)
     parser.add_argument("--current-pointer", required=True, type=Path)
     parser.add_argument("--bridge", required=True, type=Path)
+    parser.add_argument("--source-index", type=Path)
+    parser.add_argument("--external-manifest", type=Path)
     parser.add_argument("--query", required=True)
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--filter", action="append", default=[])
@@ -144,7 +189,12 @@ def main() -> int:
             parser.error("filter key and value must be non-empty")
         filters[key.strip()] = val.strip()
     try:
-        records, info = load_explicit_overlay(args.current_index, args.current_pointer, args.bridge)
+        if args.external_manifest and not args.source_index:
+            parser.error("--external-manifest requires --source-index")
+        if args.source_index:
+            records, info = load_source_grounded_universe(args.source_index, args.current_index, args.current_pointer, args.bridge, args.external_manifest)
+        else:
+            records, info = load_explicit_overlay(args.current_index, args.current_pointer, args.bridge)
     except (ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
     result = search(records, args.query, filters=filters, limit=args.limit)
