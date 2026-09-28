@@ -49,7 +49,7 @@ jobs:
         run: python ENFORCEMENT/tests/taky-index-authority-intake-compose.py canonical-main authority-draft owner-draft combined
       - name: Assert reviewed authority remains unresolved after independently registered Indexing receipt
         working-directory: combined/ENFORCEMENT
-        run: python ../../ENFORCEMENT/tests/taky-index-authority-intake-combined.test.py
+        run: PYTHONPATH=.:${PYTHONPATH:-} python ../../ENFORCEMENT/tests/taky-index-authority-intake-combined.test.py
       - name: Run source authority review and original evidence-gap regressions
         working-directory: combined/ENFORCEMENT
         run: |
