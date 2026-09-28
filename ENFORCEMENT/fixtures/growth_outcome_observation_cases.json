@@ -1,0 +1,296 @@
+{
+  "fixture_set": "GROWTH_OUTCOME_OBSERVATION_SYNTHETIC_REPLAY",
+  "synthetic_only": true,
+  "no_live_provider_or_device_claim": true,
+  "cases": [
+    {
+      "name": "draft-ci-is-not-live-provider",
+      "expected_status": "EVIDENCE_SCOPE_GAP",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI",
+          "evidence_refs": [
+            "fixture:ci-run"
+          ]
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "new-material-source-change",
+      "expected_status": "RECHECK_REQUIRED",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI",
+          "evidence_refs": [
+            "fixture:ci-run"
+          ]
+        },
+        "trigger": {
+          "state": "MATERIAL_CHANGE",
+          "change_kind": "SOURCE_REVISION",
+          "evidence_refs": [
+            "fixture:revised-official-source"
+          ]
+        }
+      }
+    },
+    {
+      "name": "observed-target-missed",
+      "expected_status": "OUTCOME_GAP",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MISSED",
+          "evidence_scope": "LIVE_PROVIDER",
+          "evidence_refs": [
+            "fixture:observed-failure"
+          ]
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "same-scope-result-with-baseline-is-only-candidate",
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "LIVE_PROVIDER",
+          "evidence_refs": [
+            "fixture:observed-target"
+          ]
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "no-post-result",
+      "expected_status": "AWAITING_OUTCOME",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "NOT_OBSERVED",
+          "outcome": "UNKNOWN",
+          "evidence_refs": []
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "unverified-baseline",
+      "expected_status": "BASELINE_UNVERIFIED",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "UNVERIFIED",
+          "evidence_refs": []
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "LIVE_PROVIDER",
+          "evidence_refs": [
+            "fixture:observed-target"
+          ]
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "unknown-trigger-is-not-no-change",
+      "expected_status": "WATCH_UNVERIFIED",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "LIVE_PROVIDER",
+          "evidence_refs": [
+            "fixture:observed-target"
+          ]
+        },
+        "trigger": {
+          "state": "UNKNOWN"
+        }
+      }
+    },
+    {
+      "name": "material-change-without-source-cannot-reopen-closed",
+      "expected_status": "RECORD_INVALID",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI",
+          "evidence_refs": [
+            "fixture:ci-run"
+          ]
+        },
+        "trigger": {
+          "state": "MATERIAL_CHANGE",
+          "change_kind": "SOURCE_REVISION",
+          "evidence_refs": []
+        }
+      }
+    },
+    {
+      "name": "assertion-without-evidence-is-invalid",
+      "expected_status": "RECORD_INVALID",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "TAKY_GROWTH",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "LIVE_PROVIDER",
+          "evidence_refs": []
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    },
+    {
+      "name": "missing-owner-is-invalid",
+      "expected_status": "RECORD_INVALID",
+      "record": {
+        "observation_id": "fixture:obs-1",
+        "owner": "",
+        "target_ref": "GROWTH-OUTCOME-LEARNING-001",
+        "human_outcome": "Reduce rework while preserving accurate state claims",
+        "change_ref": "fixture:proposed-change",
+        "required_evidence_scope": "LIVE_PROVIDER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "fixture:baseline-evidence"
+          ]
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI",
+          "evidence_refs": [
+            "fixture:ci-run"
+          ]
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE"
+        }
+      }
+    }
+  ]
+}
