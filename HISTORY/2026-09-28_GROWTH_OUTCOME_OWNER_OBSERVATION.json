@@ -1,0 +1,115 @@
+{
+  "snapshot_kind": "OWNER_EVIDENCE_SNAPSHOT_NOT_AUTOMATIC_MONITOR",
+  "captured_for": "TKY-GROWTH-001 / GROWTH-OUTCOME-LEARNING-001",
+  "date": "2026-09-28",
+  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim.",
+  "only_exact_head_and_scope": true,
+  "main_untouched": true,
+  "observations": [
+    {
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "evidence_kind": "REAL_GITHUB_CI_SNAPSHOT",
+      "record": {
+        "observation_id": "OBS-HIDE-V2-FIXTURE-RECOVERY-20260928",
+        "owner": "HIDE_SEEK_V2",
+        "target_ref": "https://github.com/hns140412-glitch/Hide-Seek/pull/20",
+        "human_outcome": "Restore the scoped Hide V2 browser regression suite after evidence-provenance tightening without claiming provider or device readiness.",
+        "change_ref": "Hide PR #20 draft initial HEAD 14ebe496b12c7935865ec695f2a079d833d61a0c -> final HEAD 0367e57fdd7526d0d6ee4404ef87584e02812c8c",
+        "required_evidence_scope": "CI_BROWSER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360281450",
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360281358"
+          ],
+          "facts": "Initial runs: Validate Hide & Seek 8 failed/85 passed; Validate Hide Runtime V2 5 failed/75 passed. These were browser fixture/contract regressions, NOT field/provider failures."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI_BROWSER",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360595434",
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360595384"
+          ],
+          "facts": "Final exact head: Validate Hide & Seek 93 passed; Validate Hide Runtime V2 80 passed. All jobs succeeded on this scoped draft."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "EXACT_HEAD_AT_SNAPSHOT_ONLY",
+          "checked_head": "0367e57fdd7526d0d6ee4404ef87584e02812c8c",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/pull/20"
+          ],
+          "note": "No later HEAD is asserted; reevaluate if owner source/CI changes."
+        },
+        "claim_boundary": "This is actual CI before/after evidence. It does not establish external OCR, approved implementation, installed PWA, family auth, or end-user learning improvement."
+      }
+    },
+    {
+      "expected_status": "EVIDENCE_SCOPE_GAP",
+      "evidence_kind": "REAL_GITHUB_CI_SNAPSHOT",
+      "record": {
+        "observation_id": "OBS-READY-OCR-CONTRACT-DEVICE-GAP-20260928",
+        "owner": "READY_SET",
+        "target_ref": "https://github.com/hns140412-glitch/Ready-Set/pull/113",
+        "human_outcome": "Keep capture request/source review contract working in a real deployed device/provider flow.",
+        "change_ref": "Ready Draft PR #113 exact HEAD 177294ca48bc796ba01d986b66cf1f97c40255a3",
+        "required_evidence_scope": "DEVICE_AND_LIVE_PROVIDER",
+        "before": {
+          "state": "UNVERIFIED",
+          "evidence_refs": [],
+          "facts": "No observed before/after on installed device or real provider was obtained."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI_BROWSER",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36360498752",
+            "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36360498841"
+          ],
+          "facts": "Ready Integration CI and Runtime E2E both succeeded at the Draft HEAD with fixture tests."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "EXACT_HEAD_AT_SNAPSHOT_ONLY",
+          "checked_head": "177294ca48bc796ba01d986b66cf1f97c40255a3",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Ready-Set/pull/113"
+          ],
+          "note": "No later head considered."
+        },
+        "claim_boundary": "CI is not equivalent to verified device, privacy/price, operating server or actual provider invocation."
+      }
+    },
+    {
+      "expected_status": "AWAITING_OUTCOME",
+      "evidence_kind": "OWNER_HANDOFF_SOURCE_STATUS",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-HANNAM-M027-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "https://docs.google.com/document/d/1YsDtrbQHWCVNuU82siO9-upcQFVyaxGo6bH0BHiVrkE/edit",
+        "human_outcome": "Use source-locked site evidence and design questions to produce a concrete ALT-01 versus ALT-02 architectural comparison that improves the actual submission without altering approved geometry or facts.",
+        "change_ref": "M-027 / AG-014 candidate registered in ARCHIGROW_NEW_CHAT_START_2026-09-26_LATEST; no verified application result.",
+        "required_evidence_scope": "SOURCE_LOCKED_WORK_ARTIFACT",
+        "before": {
+          "state": "UNVERIFIED",
+          "evidence_refs": [],
+          "facts": "Current Work PDF/DWG/geometry baseline and user-accepted comparison not inspected or measured in this task; handoff is only a locator."
+        },
+        "after": {
+          "state": "NOT_OBSERVED",
+          "outcome": "UNKNOWN",
+          "evidence_refs": [],
+          "facts": "The handoff explicitly says AG-001..014 are reference links and NONE is asserted implemented/applied/verified."
+        },
+        "trigger": {
+          "state": "UNKNOWN",
+          "note": "No new owner-approved Work artifact, geometry revision, or result evidence verified."
+        },
+        "claim_boundary": "Do not turn handoff source details or reference methodology into verified architecture outcome. This is an explicit evidence gap, not an instruction to redo CLOSED."
+      }
+    }
+  ]
+}
