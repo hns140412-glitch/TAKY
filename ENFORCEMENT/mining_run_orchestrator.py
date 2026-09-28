@@ -14,6 +14,8 @@ from mining_growth_loop import propose_growth
 from mining_index_bridge import query_frontier
 from mining_pending_actions import classify_pending, activate_next_batch
 from mining_provider_execution_loop import build_requests
+from mining_live_execution import execute_batch
+from mining_core import checkpoint as core_checkpoint, apply_external_receipts, normalize_goal
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
@@ -209,6 +211,100 @@ def orchestrate(payload: dict) -> dict:
             "external_mining_only_for_unresolved_index_gap": True,
         },
     }
+
+
+def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
+    """Bounded receipt-driven continuation using the existing provider/Core contracts.
+
+    The caller supplies a result for each chosen request; this function does
+    not access the network, persist a queue, modify CURRENT, or promote data.
+    Only the first preferred request for each frontier is dispatched per
+    batch. A failed/empty request may advertise the next *different*
+    permitted provider on the following turn.
+    """
+    task = payload.get("task") or {}
+    prior_checkpoint = payload.get("verified_checkpoint")
+    if prior_checkpoint is not None:
+        goal = (prior_checkpoint.get("goal") or {}) if isinstance(prior_checkpoint, dict) else {}
+        if (prior_checkpoint.get("schema") != "TAKY_MINING_CORE_CHECKPOINT_V1"
+                or goal.get("goal_id") != normalize_goal(task)["goal_id"]):
+            return {
+                "schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
+                "state": "HOLD_CHECKPOINT_GOAL_MISMATCH",
+                "execution_batch": None,
+                "plan": None,
+                "guards": {"network_calls_performed_by_orchestrator": False,
+                           "current_authority_unchanged": True},
+            }
+
+    initial = orchestrate(payload)
+    plan = initial["plan"]
+    if not plan["execution_allowed"]:
+        return {"schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
+                "state": "HOLD_FAILED_ROUTE",
+                "execution_batch": None, "plan": plan,
+                "guards": {"network_calls_performed_by_orchestrator": False,
+                           "current_authority_unchanged": True}}
+    requests = plan.get("planned_provider_requests") or []
+    if not requests:
+        return {"schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
+                "state": "NO_PROVIDER_ACTION", "execution_batch": None, "plan": plan,
+                "guards": {"network_calls_performed_by_orchestrator": False,
+                           "current_authority_unchanged": True}}
+
+    first_by_frontier = {}
+    for req in requests:
+        first_by_frontier.setdefault(str(req.get("frontier_id")), req)
+    selected = list(first_by_frontier.values())
+    batch = execute_batch(selected, runtime_results or {})
+    selected_ids = {str(req.get("request_id")) for req in selected}
+    access_errors = {"ACCESS_DENIED", "AUTH_REQUIRED", "LOGIN_REQUIRED",
+                     "PERMISSION_DENIED", "RESTRICTED", "PAYWALL", "ACCESS_HOLD"}
+    successful = {str(row.get("frontier_id")) for row in batch["results"]
+                  if row.get("state") == "SUCCESS"
+                  and (row.get("receipt") or {}).get("results")}
+    for row in batch["results"]:
+        fid = str(row.get("frontier_id"))
+        error = str(row.get("error") or "").upper()
+        if (fid in successful or row.get("state") not in {"FAILED", "EMPTY"}
+                or error in access_errors):
+            continue
+        alternative = next((
+            req for req in requests
+            if str(req.get("frontier_id")) == fid
+            and str(req.get("request_id")) not in selected_ids
+            and str(req.get("provider")).upper() != str(row.get("provider")).upper()
+        ), None)
+        if alternative:
+            row["next_provider"] = alternative["provider"]
+
+    prior = prior_checkpoint if prior_checkpoint is not None else core_checkpoint(
+        task, plan["search_frontier"], []
+    )
+    current_checkpoint = (apply_external_receipts(prior, batch["receipts"])
+                          if batch["receipts"] else prior)
+    next_input = dict(payload)
+    next_input.pop("provider_results", None)
+    next_input["verified_checkpoint"] = current_checkpoint
+    next_input["execution_batch"] = batch
+    updated = orchestrate(next_input)
+    return {
+        "schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
+        "state": "RECONCILED",
+        "dispatched_request_ids": [req["request_id"] for req in selected],
+        "execution_batch": batch,
+        "checkpoint": current_checkpoint,
+        "plan": updated["plan"],
+        "next_run_input": next_input,
+        "guards": {
+            "network_calls_performed_by_orchestrator": False,
+            "results_are_provider_supplied_not_independently_verified": True,
+            "checkpoint_is_not_canonical": True,
+            "memory_auto_promotion": False,
+            "current_authority_unchanged": True,
+        },
+    }
+
 
 def main() -> int:
     p=argparse.ArgumentParser(); p.add_argument("--input",type=Path,required=True); a=p.parse_args()
