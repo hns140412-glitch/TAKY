@@ -3,6 +3,20 @@ import json, os, subprocess, tempfile, unittest
 from pathlib import Path
 
 from reference_intake_executor import execute as execute_reference
+
+def test_only_index_owner(source_id, proposal):
+    # Independently fixed Indexing fixture, never the Mining-side verified bit.
+    registry={
+        "SRC-OFFICIAL-1":("V26+E2E","INDEX:SRC-OFFICIAL-1","TEST_INDEX_REVIEW_OFFICIAL"),
+        "SRC-WRITING-1":("V26+E2E2","INDEX:SRC-WRITING-1","TEST_INDEX_REVIEW_WRITING"),
+    }
+    row=registry.get(source_id)
+    if row is None:return None
+    version,reference,evidence_ref=row
+    return {"issuer":"INDEXING_OWNER","reviewed":True,"decision":"INDEXED",
+            "source_id":source_id,"source_ref":reference,"index_version":version,
+            "review_evidence_refs":[evidence_ref]}
+
 from learning_evidence_gap_broker import route_gap
 
 REPO_ROOT=Path(__file__).resolve().parents[1]
@@ -39,7 +53,7 @@ class CrossEngineE2E(unittest.TestCase):
                     "recorded_at":"2026-09-25T15:00:00+00:00",
                     "index_result":{"verified":True,"source_id":"SRC-OFFICIAL-1","index_version":"V26+E2E","source_ref":"INDEX:SRC-OFFICIAL-1"}
                 }
-            },ROUTE,root)
+            },ROUTE,root,independent_index_owner_verifier=test_only_index_owner)
             self.assertTrue(first["pass"])
             self.assertEqual([x["state"] for x in first["emitted"]],["REGISTERED","INDEXED","EVIDENCE_CANDIDATE"])
             self.assertFalse(first["canonical_promotion"])
@@ -110,7 +124,7 @@ class CrossEngineE2E(unittest.TestCase):
                     "recorded_at":"2026-09-25T15:02:00+00:00",
                     "index_result":{"verified":True,"source_id":"SRC-WRITING-1","index_version":"V26+E2E2","source_ref":"INDEX:SRC-WRITING-1"}
                 }
-            },ROUTE,root)
+            },ROUTE,root,independent_index_owner_verifier=test_only_index_owner)
             self.assertTrue(second["pass"]); self.assertFalse(second["canonical_promotion"])
             rows.append({
                 "source_id":"SRC-WRITING-1","title":"영어 writing rubric process",
