@@ -8,10 +8,15 @@ def evaluate(task:dict, assessed:list[dict])->dict:
     foundation={str(x) for x in task.get("foundation_frontier_ids",[]) or []}
     advanced={str(x) for x in task.get("advanced_frontier_ids",[]) or []}
     alternatives={str(x) for x in task.get("alternative_frontier_ids",[]) or []}
-    required=critical|foundation|advanced
-    if task.get("alternatives_required"): required|=alternatives
-    # If no explicit semantic groups exist, every declared frontier remains required.
-    if not required: required=set(by)
+    # An explicit, preserved whole-goal inventory outranks the active batch.
+    # Without it retain the original V2 dimension-based fallback semantics.
+    if "required_frontier_ids" in task:
+        required={str(x) for x in (task.get("required_frontier_ids") or [])}|critical
+    else:
+        required=critical|foundation|advanced
+        if task.get("alternatives_required"): required|=alternatives
+        # Legacy direct Core calls may not supply a whole-goal contract.
+        if not required: required=set(by)
     missing=sorted(x for x in required if x not in by)
     unresolved=sorted(x for x in required if x in by and by[x].get("status")!="CLOSED")
     critical_unresolved=sorted(x for x in critical if x not in by or by[x].get("status")!="CLOSED")
