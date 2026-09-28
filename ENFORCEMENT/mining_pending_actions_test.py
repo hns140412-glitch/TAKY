@@ -374,6 +374,42 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(result["plan"]["follow_up_activation"]["state"],"READY_NEXT_BATCH")
         self.assertEqual([x["question"] for x in result["plan"]["follow_up_activation"]["frontier"]],["source C"])
 
+    def test_two_stage_receipts_finish_three_required_sources_without_researching_closed_ones(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"3 independent required documents",
+              "critical_requirements":["source A","source B","source C"],
+              "max_research_depth":"D1"}
+        input_state={"task":task,"memory":{}}
+        def runtime_for_requests(reqs):
+            chosen={}
+            for req in reqs:
+                chosen.setdefault(req["frontier_id"],req)
+            return {req["request_id"]:{"state":"SUCCESS","response":{"results":[{
+                "source_id":"ID-"+str(idx),"source_identity":"ID-"+str(idx),
+                "url":"https://example.gov/doc/"+str(idx),
+                "claim":"document for "+fid,"source_class":"PRIMARY",
+                "direct_support":True,"fresh_enough":True,
+                "excerpt_ref":"page:1#paragraph:1","independent_support_count":2}]}}
+                for idx,(fid,req) in enumerate(chosen.items(),1)}
+        stage_one=advance_provider_batch(
+            input_state,
+            runtime_for_requests(orchestrate(input_state)["plan"]["planned_provider_requests"]))
+        self.assertFalse(stage_one["checkpoint"]["stop"])
+        follow=stage_one["plan"]["follow_up_activation"]
+        self.assertEqual(follow["state"],"READY_NEXT_BATCH")
+        self.assertEqual([x["question"] for x in follow["frontier"]],["source C"])
+        stage_two=advance_provider_batch(
+            stage_one["next_run_input"],
+            runtime_for_requests(follow["planned_provider_requests"]))
+        self.assertEqual(stage_two["state"],"RECONCILED")
+        self.assertEqual({x["frontier_id"] for x in stage_two["execution_batch"]["results"]},
+                         {follow["frontier"][0]["id"]})
+        self.assertEqual(len(stage_two["checkpoint"]["frontier"]),3)
+        self.assertEqual(len(stage_two["checkpoint"]["evidence"]),3)
+        self.assertTrue(stage_two["checkpoint"]["stop"])
+        self.assertTrue(stage_two["plan"]["research_complete_eligible"])
+        self.assertEqual(stage_two["plan"]["planned_provider_requests"],[])
+        self.assertEqual(stage_two["plan"]["follow_up_activation"]["state"],"NO_DEFERRED_REQUIRED")
+
     def test_known_complete_cannot_silently_override_new_explicit_gap(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "already complete",
                   "known_complete": True, "critical_requirements": ["new official evidence"]})
