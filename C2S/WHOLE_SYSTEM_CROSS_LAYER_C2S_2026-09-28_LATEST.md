@@ -54,3 +54,7 @@ Live Hide main/#12/#19 unchanged; #12 mergeable=false. Original bridges confirm 
 
 ## Latest audit pointer — §U local collector source evidence
 Google Drive 17:58 seven-repository ZIP was read and integrity checked. Exact local checkout/main/origin-cache distinction preserved; current live PR heads rechecked without changes. AUD-16 OPEN: single-item *-files.json object versus multiple-item array, untracked omitted and no live fetch in collector; hash selection is not full-tree equivalence. Hide owner selective composition remains HOLD. Preserve source and prior CLOSED; no automatic product merge/deploy.
+
+
+## Latest 20:00 analysis pointer — audit §V
+17:58→20:00 ZIPs are CRC-valid; only SUMMARY GeneratedAt/Output differ, 19 other files identical. Seven tracked-local snapshots show no collector-detectable changes, not a global functional PASS. Actual local Ready/Hide/Snap working branches diverge from main and their active Drafts; avoid pull/reset/rebase. AUD-16 scheduled collector remains V1, AUD-17 OPEN distinguishes local snapshot delta from independent live authority and functional CI. Exact proof, comparison counts and bounded next steps in audit §V. No product/main changes.
