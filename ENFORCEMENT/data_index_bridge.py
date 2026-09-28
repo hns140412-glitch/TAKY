@@ -125,10 +125,11 @@ def load_explicit_overlay(index_path: Path, pointer_path: Path, bridge_path: Pat
 
 
 
-def load_source_grounded_universe(source_index_path, current_index_path, pointer_path, bridge_path, external_manifest_path=None):
+def load_source_grounded_universe(source_index_path, current_index_path, pointer_path, bridge_path, external_manifest_path=None, external_evidence_path=None, external_manifest_document_id=None):
     """Read-only compose: 679 source-authoritative DATA + separately staged candidates."""
     from data_index_source_composer import compose_source_l1
     from data_index_external_intake import stage_external_candidates
+    from data_index_evidence_overlay import attach_selected_section_notes
     current, pointer = _read_json(current_index_path), _read_json(pointer_path)
     expected_id, expected_count = _validate_current(current, pointer)
     base, source_receipt = compose_source_l1(_read_json(source_index_path), current, pointer)
@@ -153,6 +154,14 @@ def load_source_grounded_universe(source_index_path, current_index_path, pointer
             manifest.get("sources"), existing_source_ids=source_ids | bridge_ids)
         if any(r["intake_envelope"]["privacy_class"] != "PUBLIC" for r in external):
             raise ValueError("EXTERNAL_PRIVATE_SOURCE_NOT_ELIGIBLE_FOR_PUBLIC_PROJECTION")
+    evidence_receipt = {"state": "NOT_SUPPLIED", "notes_joined": 0}
+    if external_evidence_path is not None:
+        if external_manifest_path is None or not external_manifest_document_id:
+            raise ValueError("EVIDENCE_REQUIRES_MANIFEST_AND_DOCUMENT_ID")
+        external, evidence_receipt = attach_selected_section_notes(
+            external, manifest, _read_json(external_evidence_path),
+            external_manifest_document_id,
+        )
     records = base + bridge + external
     if len({r["source_id"] for r in records}) != len(records):
         raise ValueError("UNIVERSE_SOURCE_ID_COLLISION")
@@ -164,6 +173,7 @@ def load_source_grounded_universe(source_index_path, current_index_path, pointer
         "data_current_pointer_modified": False, "external_staged_not_current": True,
         "original_files_copied": False, "detail_content_auto_verified": False,
         "external_receipt": external_receipt,
+        "external_evidence_receipt": evidence_receipt,
     }
 
 
@@ -174,6 +184,8 @@ def main() -> int:
     parser.add_argument("--bridge", required=True, type=Path)
     parser.add_argument("--source-index", type=Path)
     parser.add_argument("--external-manifest", type=Path)
+    parser.add_argument("--external-evidence", type=Path)
+    parser.add_argument("--external-manifest-doc-id")
     parser.add_argument("--query", required=True)
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--filter", action="append", default=[])
@@ -189,10 +201,12 @@ def main() -> int:
             parser.error("filter key and value must be non-empty")
         filters[key.strip()] = val.strip()
     try:
+        if args.external_evidence and (not args.external_manifest or not args.external_manifest_doc_id):
+            parser.error("--external-evidence requires --external-manifest and --external-manifest-doc-id")
         if args.external_manifest and not args.source_index:
             parser.error("--external-manifest requires --source-index")
         if args.source_index:
-            records, info = load_source_grounded_universe(args.source_index, args.current_index, args.current_pointer, args.bridge, args.external_manifest)
+            records, info = load_source_grounded_universe(args.source_index, args.current_index, args.current_pointer, args.bridge, args.external_manifest, args.external_evidence, args.external_manifest_doc_id)
         else:
             records, info = load_explicit_overlay(args.current_index, args.current_pointer, args.bridge)
     except (ValueError, KeyError, TypeError) as exc:
