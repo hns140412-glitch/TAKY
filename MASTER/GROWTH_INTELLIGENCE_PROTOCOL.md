@@ -203,6 +203,24 @@ Possible measures, when applicable:
 
 Metrics are evidence aids, not universal scorecards. Choose measures that fit the actual work.
 
+### 9A. Material-change and outcome observation, not continuous model polling — APPLICATION NOTE
+
+When a growth pattern is applied, capture only the smallest owner-scoped evidence that can change the next useful action:
+
+`HUMAN OUTCOME + TARGET / BEFORE EVIDENCE + CHANGE REFERENCE + EXPECTED RESULT
+-> ACTUAL OBSERVATION + EVIDENCE SCOPE
+-> MATERIAL CHANGE TRIGGER / RESULT GAP
+-> OWNING LAYER RECHECK OR CONTINUE
+-> OWNER DISPOSITION + FURTHER ACTUAL OUTCOME`
+
+- Source revisions, new evidence, meaningful failure/exception and actual result differences may trigger a targeted review. Routine repeats or social-media trend posts do not automatically reopen CLOSED work or cause scheduled external model calls.
+- A trigger must have its own source reference and owner-scoped materiality interpretation. `UNKNOWN` stays unknown; the evaluator must not manufacture a change or hide absent evidence.
+- Distinguish `CI / fixture / draft / device / actual external provider / real operational outcome` by the explicitly requested evidence scope. A CI PASS must not be relabeled as an observed product or user outcome.
+- Owner supplies whether an objective was met; a generic helper checks traceability and reported evidence scope, not project thresholds, pedagogy, architectural/legal judgment, farm order meaning, or approval authority.
+- `OBSERVED_TARGET_MET_CANDIDATE` means the declared evidence matches the requested scope. It is NOT `ADOPTED`, `CURRENT_BEST`, `MAIN_MERGED`, `RELEASED`, or an automatic approval.
+- Use the already-open `GROWTH-OUTCOME-LEARNING-001` owner backlog item for this improvement. Reference helper: `ENFORCEMENT/growth_outcome_observation.py` (read-only candidate, synthetic replay). No additional orchestration/monitoring engine is created.
+- Analogy source: eight images supplied by the user of a purported round-the-clock trading system. The useful transferable pattern is purposeful observation, conditional re-evaluation and human-centered decision support; the post is not proof of the shown service's implementation, returns, or TAKY interoperability. This is not a financial/trading project requirement.
+
 ## 10. C2S / reflection boundary
 
 External research enters as reference/case evidence.
