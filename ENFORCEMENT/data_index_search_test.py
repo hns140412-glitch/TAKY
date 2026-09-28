@@ -213,4 +213,21 @@ code_result = search(standard_fixture, "2국03-04")
 assert [x["source_id"] for x in code_result["results"]] == ["WR-STANDARD"]
 assert "EXACT_SHORT_CIRCUIT" in code_result["pipeline"]
 
+# 16. Shared discovery must not silently inherit Learning/utilization decisions.
+legacy_with_decision = normalize_record({
+    "source_id": "DECISION_BOUNDARY",
+    "title": "중립적 원본 제목",
+    "value_statement": "DIRECT_USE_READY SENSITIVE_DOMAIN_RECOMMENDATION",
+    "utilization_class": "DIRECT_USE_READY",
+})
+assert legacy_with_decision["short_summary"] is None
+assert not search([legacy_with_decision], "SENSITIVE_DOMAIN_RECOMMENDATION")["results"]
+explicit_discovery = normalize_record({
+    "source_id": "EXPLICIT_DISCOVERY",
+    "title": "중립적 원본 제목",
+    "value_statement": "SENSITIVE_DOMAIN_RECOMMENDATION",
+    "index_l1": {"discovery": {"short_summary": "원본 근거와 위치를 찾아가는 자료"}},
+})
+assert explicit_discovery["short_summary"] == "원본 근거와 위치를 찾아가는 자료"
+
 print("data_index_search: PASS")
