@@ -16,20 +16,39 @@ from mining_index_bridge import query_frontier
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
 
 def build_frontier(task: dict, depth: str) -> list[dict]:
-    if depth == "D0": return []
+    """Prioritize explicit intent and critical evidence within the depth budget.
+
+    Generic dimensions are research scaffolding, never allowed to displace an
+    explicit critical requirement without exposing it as unplanned.
+    """
+    if depth == "D0":
+        return []
     items, seen = [], set()
-    for kind, values in (
-        ("UNKNOWN", task.get("unknown", [])),
-        ("CONFLICT", task.get("conflict", [])),
-        ("FOUNDATION", task.get("foundation_requirements", [])),
-        ("ADVANCED", task.get("advanced_requirements", [])),
-    ):
-        for value in values or []:
-            key = str(value).strip()
-            if key and key not in seen:
-                seen.add(key)
-                items.append({"id": key, "kind": kind, "question": key})
-    limit = {"D1":2,"D2":4,"D3":6,"D4":10}.get(depth, 0)
+
+    def add(item: dict) -> None:
+        question = str(item.get("question") or item.get("id") or "").strip()
+        if question and question not in seen:
+            seen.add(question)
+            items.append(dict(item))
+
+    decomposed = task.get("decomposed_frontier") or []
+    # Preserve exact IDs from goal decomposition for downstream sufficiency checks.
+    for kind in ("CRITICAL", "REQUIREMENT"):
+        for item in decomposed:
+            if item.get("kind") == kind:
+                add(item)
+    for kind, field in (("CONFLICT", "conflict"), ("UNKNOWN", "unknown")):
+        for value in task.get(field, []) or []:
+            question = str(value).strip()
+            if question:
+                add({"id": question, "kind": kind, "question": question,
+                     "origin": "TASK_SIGNAL"})
+    for kind in ("FOUNDATION", "ADVANCED", "ALTERNATIVE"):
+        for item in decomposed:
+            if item.get("kind") == kind:
+                add(item)
+
+    limit = {"D1": 2, "D2": 4, "D3": 6, "D4": 10}.get(depth, 0)
     return items[:limit]
 
 def _learning_proposal(task: dict, memory_prior: dict, receipt: dict) -> dict:
@@ -83,6 +102,14 @@ def orchestrate(payload: dict) -> dict:
         "guards":{"index_does_not_decide_domain_use":True,"search_projection_is_not_source_of_truth":True},
     }
     external_frontier = index_result["external_mining_frontier"]
+    verification_frontier = index_result.get("verification_frontier", [])
+    selected_ids = {str(item.get("id")) for item in frontier}
+    unplanned_critical = [fid for fid in task.get("critical_frontier_ids", [])
+                          if fid not in selected_ids]
+    unplanned_required = list(dict.fromkeys(
+        unplanned_critical + [fid for fid in task.get("goal_decomposition", {}).get("explicit_requirement_ids", [])
+                              if fid not in selected_ids]
+    ))
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
     route = (
         prior["failure_memory"]["replacement_routes"][0]
@@ -99,6 +126,11 @@ def orchestrate(payload: dict) -> dict:
         "index_first": index_result,
         "external_search_frontier": external_frontier,
         "external_search_required": bool(external_frontier),
+        "index_verification_required": bool(verification_frontier),
+        "unplanned_critical_frontier_ids": unplanned_critical,
+        "unplanned_required_frontier_ids": unplanned_required,
+        "research_complete_eligible": (not blocked and not unplanned_required
+                                       and not external_frontier and not verification_frontier),
         "execution_allowed": not blocked,
     }
     return {
