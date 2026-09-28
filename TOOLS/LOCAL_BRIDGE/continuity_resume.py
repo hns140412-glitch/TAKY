@@ -168,6 +168,7 @@ def generate(config, output, *, include_context=False, network=False):
                 entry["owner"]["git"] = git_snapshot(None)
             else:
                 entry["owner"]["git"] = git_snapshot(Path(owner["repo"]).expanduser(), network=network)
+                entry["issues"].extend(entry["owner"]["git"]["issues"])
             owner_ref = owner.get("canonical_path")
             if not isinstance(owner_ref, str) or not owner_ref.strip():
                 entry["issues"].append("CANONICAL_POINTER_MISSING")
