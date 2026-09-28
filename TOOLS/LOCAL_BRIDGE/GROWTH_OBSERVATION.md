@@ -53,3 +53,11 @@ Output outside the declared root: `OBSERVATION_RECEIPT.json`, `OBSERVATION_REPOR
 - metadata only, no source or repo writes;
 - Windows/Ubuntu unit regression and Windows PowerShell parser gate;
 - Windows PC actual path/config/Drive-sync runtime proof remains OPEN; do not deploy or merge.
+
+## External evidence verified on 2026-09-28 (reference, not authority)
+- DVC: https://origin-doc.dvc.org/user-guide/data-management/remote-storage and https://origin-doc.dvc.org/user-guide/data-management/importing-external-data document external data storage and pointer/metadata separation. Localize only explicit source identity/hash and change detection, not DVC installation/migration.
+- DVC Issue #11041: https://github.com/iterative/dvc/issues/11041 documents a reported missing directory-manifest/cache edge case. Treat a reported no-delta status as insufficient proof of source recoverability; preserve missing/unreadable checks.
+- Google Drive: https://developers.google.com/workspace/drive/api/guides/manage-changes specifies startPageToken/changes.list for authoritative server-side change-feed retrieval, with push notifications as hints. The current local SHA observer is not a substitute for authenticated Drive change tokens or sync freshness.
+- GitHub Actions: https://docs.github.com/en/actions/reference/security/secure-use recommends least-privilege token; this PR explicitly uses contents:read and uploads no local/private artifacts.
+- Netlify: https://docs.netlify.com/build/configure-builds/build-hooks/ confirms build-hook POST triggers builds; https://docs.netlify.com/deploy/deploy-types/deploy-previews/ describes PR preview side effects. This candidate must not call Netlify. The open community report https://github.com/netlify/cli/issues/7933 highlights a possible extra Edge bundling on --no-build, therefore a no-build flag cannot be assumed zero side effect.
+- Growth observation must show a real outcome improvement later (fewer duplicate retrievals, fewer lost deltas, actionable routed evidence), not merely another successful CI check. Comparison at first real PC pilot and second run is still OPEN.
