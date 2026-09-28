@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds executable provider requests from Mining Core next queries."""
 from __future__ import annotations
-from mining_provider_executor import build_execution_request
+from mining_provider_executor import build_execution_request, SUPPORTED_PROVIDERS
 
 DEFAULT_PROVIDER_ORDER={
  "PRIMARY":["WEB","PUBLIC_DATA","GITHUB"],
@@ -13,6 +13,12 @@ DEFAULT_PROVIDER_ORDER={
 }
 
 def choose_providers(query_plan:dict)->list[str]:
+    override=query_plan.get("next_provider")
+    if override is not None:
+        provider=str(override).strip().upper()
+        # A documented alternative is a single explicit route, not another
+        # retry of the default provider set or an arbitrary tool name.
+        return [provider] if provider in SUPPORTED_PROVIDERS else []
     prefs=[str(x).upper() for x in (query_plan.get("prefer") or query_plan.get("preferred_source_classes") or [])]
     out=[]
     for source_class in prefs or ["UNKNOWN"]:
