@@ -27,6 +27,27 @@ def _candidate_usable(row: dict) -> bool:
     return True
 
 
+def _excluded_candidate_reason(row: dict) -> str | None:
+    state = row.get("state") if isinstance(row.get("state"), dict) else {}
+    for key in ("stale_state", "current_relation", "review_state", "index_state"):
+        value = str(row.get(key) or state.get(key) or "").upper()
+        if value.startswith("STALE"):
+            return "STALE"
+        if value.startswith("SUPERSEDED"):
+            return "SUPERSEDED"
+        if value.startswith(("HELD", "HOLD")):
+            return "SOURCE_REVIEW_HOLD"
+        if value.startswith("REJECTED"):
+            return "REJECTED"
+        if value in {"REVIEW_REQUIRED", "REFERENCE_ONLY", "UNVERIFIED"}:
+            return "SOURCE_REVIEW_HOLD"
+    classification = row.get("classification") if isinstance(row.get("classification"), dict) else {}
+    authority = str(row.get("authority_class") or classification.get("authority_class") or "").upper()
+    if authority in {"REFERENCE_ONLY", "UNKNOWN_UNVERIFIED"}:
+        return "SOURCE_REVIEW_HOLD"
+    return None
+
+
 def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None,
                    detail_rows=None, min_results=1, top_k=5):
     located, unresolved, verification, traces = [], [], [], []
@@ -44,6 +65,10 @@ def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None
         )
         primary = result.get("primary", [])
         qualified = [x for x in primary if _candidate_usable(x.get("row") or {})]
+        rejected = [
+            {"source_id": x.get("source_id"), "reason": _excluded_candidate_reason(x.get("row") or {})}
+            for x in primary if not _candidate_usable(x.get("row") or {})
+        ]
         enough = len(qualified) >= required_count
         traces.append({
             "frontier_id": fid,
@@ -53,6 +78,7 @@ def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None
             "evidence_sufficient": False,
             "retrieval_hit_count": len(primary),
             "qualified_index_hits": len(qualified),
+            "rejected_index_candidates": rejected,
             "verification_required": enough,
             "retrieval_counts": result.get("counts", {}),
             "source_ids": [x.get("source_id") for x in primary],
