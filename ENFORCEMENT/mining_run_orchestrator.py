@@ -127,6 +127,7 @@ def orchestrate(payload: dict) -> dict:
     external_frontier = index_result["external_mining_frontier"]
     verification_frontier = index_result.get("verification_frontier", [])
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
+    verified_checkpoint = payload.get("verified_checkpoint")
     provider_results = payload.get("provider_results")
     if provider_results is None and isinstance(payload.get("execution_batch"), dict):
         provider_results = payload["execution_batch"].get("results")
@@ -134,13 +135,14 @@ def orchestrate(payload: dict) -> dict:
         task, full_frontier, frontier, index_result,
         route_blocked=blocked, provider_results=provider_results,
         depth=depth["research_depth_decision"],
+        verified_checkpoint=verified_checkpoint,
     )
     unplanned = [x for x in pending["items"] if x["classification"] in
                  {"DEPTH_DEFERRED", "DEPTH_CONFLICT"}]
     unplanned_critical = [x["frontier_id"] for x in unplanned if x["kind"] == "CRITICAL"]
     unplanned_required = [x["frontier_id"] for x in unplanned if x["required_for_goal"]]
     follow_up = activate_next_batch(
-        pending, frontier, payload.get("verified_checkpoint"),
+        pending, frontier, verified_checkpoint,
         depth=depth["research_depth_decision"], route_blocked=blocked,
     )
     prepared_requests = build_requests(pending["ready_query_plans"]) if not blocked else []
@@ -159,6 +161,7 @@ def orchestrate(payload: dict) -> dict:
         next_pending = classify_pending(
             task, next_frontier, next_frontier, next_index,
             depth=depth["research_depth_decision"],
+            verified_checkpoint=verified_checkpoint,
         )
         follow_up["index_first"] = next_index
         follow_up["pending_actions"] = next_pending
