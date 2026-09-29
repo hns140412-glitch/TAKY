@@ -33,6 +33,15 @@ assert result["edges"][0]["target_source_ref"]["locator"].endswith("/teacher")
 assert result["projection_authoritative"] is False
 assert result["current_promoted"] is False and result["domain_use_approved"] is False
 assert result["index_owner_receipt_verified"] is False
+# Real-manifest shape has an unresolved logical family node alongside a
+# validated student/teacher link. Requested link is present, whole graph isn't.
+mixed = source("student", relation=[{"type": "PART_OF", "target": "FAMILY"}, pair])
+narrow = assemble_relation_context([mixed, teacher], "student", required_types={"RELATED_TO"})
+assert narrow["relation_context_complete_for_request"] is True
+assert narrow["visible_graph_integrity_complete"] is False
+assert narrow["edges"][0]["status"] == "LOGICAL_NODE_NOT_MATERIALIZED"
+assert narrow["edges"][1]["status"] == "STAGED_METADATA_LINK_NOT_CANONICAL"
+assert assemble_relation_context([mixed, teacher], "student", required_types={"PART_OF"})["relation_context_complete_for_request"] is False
 # A provider can copy the same relation fields. They must not self-certify rank.
 from data_index_search import search
 untrusted_rank = search(rows, "student", relation_depth=1)
