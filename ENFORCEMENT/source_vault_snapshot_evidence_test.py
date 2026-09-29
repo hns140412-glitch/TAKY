@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from source_vault_snapshot_evidence import build_snapshot_receipt, _folder, InputError
+from source_vault_snapshot_evidence import build_snapshot_receipt, _folder, _extract, InputError
 
 class VaultSnapshotEvidenceTest(unittest.TestCase):
     def setup_case(self, root, *, with_file=True, corrupt=False, child=False):
@@ -63,6 +63,47 @@ class VaultSnapshotEvidenceTest(unittest.TestCase):
             root,report,q=self.setup_case(td)
             q[0]['block_snapshot_folder']=str(Path(td)/'other'/'data'/'notion_incremental'/'snapshots'/'test-page-1'/('1'*64))
             with self.assertRaises(InputError): _folder(root,q[0])
+
+    def test_table_cells_and_equation_are_preserved_at_exact_block_anchors(self):
+        blocks = [{"id":"table-1","type":"table","table":{},"has_children":True,
+                   "_children":[{"id":"row-1","type":"table_row",
+                     "table_row":{"cells":[[{"plain_text":"첫 열"}],
+                                           [{"plain_text":"둘째 열"}]]},
+                     "has_children":False}]},
+                  {"id":"equation-1","type":"equation",
+                   "equation":{"expression":"a^2+b^2"},"has_children":False}]
+        text, count, flags = _extract(blocks)
+        self.assertEqual(count,3)
+        self.assertEqual([x["text"] for x in text],["첫 열","둘째 열","a^2+b^2"])
+        self.assertEqual([x["cell_index"] for x in text if x["field"]=="cells"],[0,1])
+        self.assertEqual(text[0]["block_path"],["table-1","row-1"])
+        self.assertEqual(flags,[])
+
+    def test_image_only_and_caption_are_not_ocr_claims(self):
+        blocks=[{"id":"image-1","type":"image",
+                 "image":{"caption":[{"plain_text":"이미지 설명"}],
+                          "file":{"url":"https://private.invalid/signed"}},
+                 "has_children":False}]
+        text, count, flags = _extract(blocks)
+        self.assertEqual([x["text"] for x in text],["이미지 설명"])
+        self.assertIn("ATTACHMENT_BYTES_NOT_ACQUIRED", flags)
+        self.assertIn("IMAGE_CONTENT_NOT_OCR_EXTRACTED", flags)
+        self.assertNotIn("https://private.invalid",repr(text))
+
+    def test_child_title_is_metadata_and_unknown_type_must_hold(self):
+        blocks=[{"id":"c","type":"child_page","child_page":{"title":"child name"},
+                 "has_children":False},
+                {"id":"future","type":"novel_notion_content","novel_notion_content":{},
+                 "has_children":False}]
+        text, _, flags = _extract(blocks)
+        self.assertEqual(text[0]["scope"],"NOTION_CHILD_TITLE_METADATA_ONLY")
+        self.assertIn("CHILD_PAGE_NOT_RECURSIVELY_ACQUIRED",flags)
+        self.assertIn("UNSUPPORTED_NOTION_BLOCK_TYPE:novel_notion_content",flags)
+
+    def test_non_list_table_cells_fail_closed(self):
+        with self.assertRaisesRegex(InputError,"SNAPSHOT_TABLE_CELLS_INVALID"):
+            _extract([{"id":"bad-row","type":"table_row",
+                       "table_row":{"cells":"not cells"},"has_children":False}])
 
     def test_guard_duplicate_queue(self):
         with tempfile.TemporaryDirectory() as td:
