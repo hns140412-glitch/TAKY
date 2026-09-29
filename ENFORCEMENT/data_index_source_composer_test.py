@@ -67,6 +67,12 @@ assert records[1]["short_summary"] is None and records[2]["short_summary"] is No
 assert records[0]["field_lineage"]["short_summary"] == "SOURCE_V6_CONTENT_REVIEWED"
 assert records[1]["field_lineage"]["source_family"] == "UTILIZATION_V26_DERIVED_CANDIDATE"
 assert records[2]["field_lineage"]["source_family"] == "UNKNOWN"
+# Search must expose source-family lineage rather than silently presenting a
+# V26-derived family as reviewed original-source evidence.
+assert search(records, "SRC-1")["results"][0]["classification_provenance"]["source_family"] == "SOURCE_V6_RECORDED"
+assert search(records, "SRC-2")["results"][0]["classification_provenance"]["source_family"] == "UTILIZATION_V26_DERIVED_CANDIDATE"
+assert search(records, "SRC-3")["results"][0]["classification_provenance"]["source_family"] == "UNKNOWN"
+assert search(records, "SRC-2")["results"][0]["classification_provenance"]["short_summary"] == "UNKNOWN_NOT_INFERRED"
 assert records[1]["relation_candidates"]["duplicate_group"] == "SHA256_BUT_NOT_VALIDATED"
 assert records[1]["relations"] == []
 assert all(r["detail_available"] is False for r in records)
