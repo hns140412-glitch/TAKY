@@ -364,8 +364,11 @@ def relation_expand(
     by_id: dict[str, dict[str, Any]],
     fused: dict[str, float],
     depth: int = 1,
+    trusted_relation_keys: frozenset[tuple[str, str, str]] | None = None,
 ) -> dict[str, float]:
-    if depth <= 0:
+    # Relation record fields can be provider-supplied or forged. Recorded evidence
+    # is not an independently provisioned Indexing-owner receipt. Fail closed.
+    if depth <= 0 or not trusted_relation_keys:
         return fused
     out = dict(fused)
     frontier = ranked_ids[:10]
@@ -381,6 +384,7 @@ def relation_expand(
                 # an unverified label or relation alone is not proof of relevance.
                 target = rel.get("target")
                 if (target in by_id and target not in out
+                        and (sid, rel.get("type"), target) in trusted_relation_keys
                         and relation_has_recorded_evidence(record, rel, by_id[target])):
                     out[target] = base * 0.35
                     next_frontier.append(target)
@@ -429,6 +433,7 @@ def search(
     relation_depth: int = 1,
     semantic_vector_scores: dict[str, float] | None = None,
     semantic_metadata: dict[str, Any] | None = None,
+    trusted_relation_keys: frozenset[tuple[str, str, str]] | None = None,
 ) -> dict[str, Any]:
     filters = filters or {}
     candidates = apply_filters(records, filters)
@@ -472,7 +477,8 @@ def search(
             channels_for_fusion.append(vector_scores_verified)
         fused = rrf_fuse(channels_for_fusion)
     pre_relation = _rank(fused)
-    fused = relation_expand(pre_relation, by_id, fused, relation_depth)
+    fused = relation_expand(pre_relation, by_id, fused, relation_depth,
+                            trusted_relation_keys=trusted_relation_keys)
     ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
 
     results = []
@@ -538,6 +544,8 @@ def search(
         "query": query,
         "filters": filters,
         "candidate_count": len(candidates),
+        "relation_rank_gate": ("CALLER_SUPPLIED_VALIDATED_KEYS_NOT_CANONICAL"
+                               if trusted_relation_keys else "NO_INDEPENDENT_VALIDATED_RELATION_KEYS"),
         "result_count": len(results),
         "results": results,
     }
