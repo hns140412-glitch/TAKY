@@ -52,7 +52,7 @@ RECORDS = [
                 "review_state": "REVIEWED",
                 "current_relation": "CURRENT_INDEX_ENTRY",
             },
-            "relations": [{"type": "RELATED_TO", "target": "SRC-002"}],
+            "relations": [{"type": "RELATED_TO", "target": "SRC-002", "verification_state": "VERIFIED", "evidence_ref": "TEST:REVIEWED_SOURCE_PAIR"}],
         },
         "detail_l2": {"pdf": {"page_count": 57, "reviewed_pages": [1, 2, 30, 57], "anchors": ["cover", "practice page"]}},
     },
@@ -140,6 +140,15 @@ assert not search(candidate, "Alpha", relation_depth=1)["results"][0]["channels"
 r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1)
 ids = [x["source_id"] for x in r["results"]]
 assert "SRC-001" in ids and "SRC-002" in ids
+# An arbitrary relationship with no recorded evidence must not boost search results.
+unproven = [
+    normalize_record({"source_id": "REL-A", "title": "Alpha",
+                      "index_l1": {"relations": [{"type": "RELATED_TO", "target": "REL-B"}]}}),
+    normalize_record({"source_id": "REL-B", "title": "Distant unrelated item"}),
+]
+assert [x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]] == ["REL-A"]
+unproven[0]["relations"][0].update(verification_state="VERIFIED", evidence_ref="TEST:RECORDED_EDGE")
+assert {x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]} == {"REL-A", "REL-B"}
 
 # 8. sourceRef/provenance are surfaced without leaking domain decision metadata
 r = search(records, "서울 PHONICS 학생용")
