@@ -155,6 +155,7 @@ jobs:
           python -m py_compile ENFORCEMENT/data_index_bridge.py
           python -m py_compile ENFORCEMENT/data_index_relation_context.py
           python -m py_compile ENFORCEMENT/data_index_lifecycle_assurance.py
+          python -m py_compile ENFORCEMENT/data_index_asset_binding.py
           python -m py_compile ENFORCEMENT/data_index_source_composer.py
           python -m py_compile ENFORCEMENT/data_index_gap_router.py
           python -m py_compile ENFORCEMENT/data_index_detail_contract.py
@@ -411,6 +412,8 @@ jobs:
         run: python ENFORCEMENT/data_index_relation_context_test.py
       - name: Source conservation, graph integrity and delta impact regression
         run: python ENFORCEMENT/data_index_lifecycle_assurance_test.py
+      - name: Approved asset source-to-binding evidence regression
+        run: python ENFORCEMENT/data_index_asset_binding_test.py
       - name: Source-grounded V6/V26 composer regression
         run: python ENFORCEMENT/data_index_source_composer_test.py
       - name: Index evidence-gap reverse handoff regression
