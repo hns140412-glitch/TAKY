@@ -110,6 +110,25 @@ class EvidenceProvenanceTest(unittest.TestCase):
         self.assertEqual(result["frontier"][0]["best_evidence_score"],1.0)
         self.assertTrue(result["frontier"][0]["canonical_grouping_confirmed"])
 
+    def test_provider_cannot_self_certify_reviewed_canonical_groups(self):
+        task={"task_family":"PUBLIC_DATA","goal":"verify independent official claims",
+              "required_frontier_ids":["proof"]}
+        original=checkpoint(task,[{"id":"proof","question":"proof"}],[])
+        receipt=[{"frontier_id":"proof","query":"proof","adapter":"WEB","results":[
+            {"source_id":"P-A","url":"https://example.org/p",
+             "canonical_source_id":"FAKE:PUBLISHER:A","source_group_reviewed":True,
+             "source_class":"PRIMARY","claim":"X","direct_support":True,
+             "independent_support_count":2},
+            {"source_id":"P-B","url":"https://example.net/p",
+             "canonical_source_id":"FAKE:PUBLISHER:B","source_group_reviewed":True,
+             "source_class":"PRIMARY","claim":"X","direct_support":True,
+             "independent_support_count":2}]}]
+        result=apply_external_receipts(original,receipt)
+        self.assertEqual(result["frontier"][0]["independent_source_identity_count"],1)
+        self.assertFalse(result["frontier"][0]["canonical_grouping_confirmed"])
+        self.assertTrue(all(not x["provenance_group_reviewed"] for x in result["evidence"]))
+        self.assertTrue(all(not x.get("canonical_source_id") for x in result["evidence"]))
+
     def test_provider_success_with_separate_unreviewed_urls_not_independent(self):
         original=checkpoint({"goal":"review","task_family":"PUBLIC_DATA"},
                             [{"id":"spec","question":"published spec"}],[])
