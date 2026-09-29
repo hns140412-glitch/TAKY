@@ -15,6 +15,7 @@ from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
+from datetime import timedelta
 
 from source_vault_handoff_bridge import build_receipt, REQUIRED, InputError
 from source_vault_snapshot_evidence import build_snapshot_receipt
@@ -77,25 +78,53 @@ def verified_text(data: bytes, mime: str) -> str:
     return raw
 
 
+
+def _observed_block_capture_at(root: Path, route: dict, current: dict) -> str | None:
+    """Correlate an actual previous block API read, not this adapter's run clock."""
+    page_id = str(route["source_id"]).removeprefix("notion:")
+    entry = (current.get("entries") or {}).get(page_id) or {}
+    fp = str(route.get("snapshot_locator_hint") or "")
+    expected = root / "data" / "notion_incremental" / "snapshots" / page_id / fp
+    if (entry.get("block_status") != "OK"
+            or entry.get("block_fingerprint") != fp
+            or not entry.get("block_snapshot_folder")
+            or Path(entry["block_snapshot_folder"]).resolve() != expected.resolve()):
+        return None
+    value = entry.get("checked_at")
+    if not isinstance(value, str):
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None or parsed > datetime.now(timezone.utc) + timedelta(minutes=1):
+            return None
+    except ValueError:
+        return None
+    return parsed.isoformat()
+
+
+
 def _snapshot(source_id: str, locator: str, content: str, *,
               scope: str, original_sha256: str, recorded_at: str | None,
-              fragment_anchors: list | None = None) -> dict:
+              fragment_anchors: list | None = None,
+              unresolved_parts: list | None = None) -> dict:
     if not isinstance(content, str) or not content.strip() or not locator:
         raise InputError("INCOMPLETE_SOURCE_SNAPSHOT")
     return {
         "schema": MINING_SOURCE_SCHEMA,
         "source_id": source_id,
-        "retrieval_state": "FETCHED",
+        "retrieval_state": "FETCHED" if recorded_at else "CAPTURE_TIME_UNVERIFIED",
         "source_locator": locator,
         "source_text": content,
         # Mining V2 audits SHA256 of exact source_text UTF-8. RAW byte digest
         # is separate, not replaced by a normalized/rendered text hash.
         "source_sha256": digest(content.encode("utf-8")),
         "original_sha256": original_sha256,
-        "retrieved_at": recorded_at or datetime.now(timezone.utc).isoformat(),
+        "retrieved_at": recorded_at,
         "source_updated_at": None,
         "source_scope": scope,
         "fragment_anchors": fragment_anchors or [],
+        "source_completeness": "PARTIAL_UNRESOLVED_CONTENT" if unresolved_parts else "BOUNDED_TEXT_ONLY",
+        "unresolved_parts": unresolved_parts or [],
         "source_claim_reviewed": False,
         "external_original_is_not_notion_block_text": scope == "PUBLIC_TEXT_ORIGINAL",
     }
@@ -114,6 +143,11 @@ def prepare(report_dir: Path, vault_root: Path) -> dict:
     if notion_receipt["router_input_count"] != router["input_count"]:
         raise InputError("NOTION_SNAPSHOT_COUNT_MISMATCH")
     local_by_id = {row["source_id"]: row for row in notion_receipt["entries"]}
+    current_path = root / "data" / "notion_incremental" / "CURRENT.json"
+    current_hash = digest(current_path.read_bytes()) if current_path.is_file() else None
+    current = json.loads(current_path.read_text(encoding="utf-8-sig")) if current_hash else {}
+    if not isinstance(current, dict) or not isinstance(current.get("entries") or {}, dict):
+        raise InputError("NOTION_CURRENT_STATE_INVALID")
     acquisition_path = reports / OUTPUT
     ledger = _read_prior(acquisition_path)
     if acquisition_path.exists():
@@ -133,17 +167,29 @@ def prepare(report_dir: Path, vault_root: Path) -> dict:
         if item is None:
             raise InputError("MISSING_NOTION_EVIDENCE_ROW")
         flags = item.get("flags") or []
-        if item.get("state") == "NOTION_BLOCK_TEXT_EXTRACTED" and not flags:
-            chunks = item.get("extracted") or []
+        chunks = [chunk for chunk in (item.get("extracted") or [])
+                  if chunk.get("scope") == "NOTION_BLOCK_TEXT_ONLY"]
+        if item.get("state") == "NOTION_BLOCK_TEXT_EXTRACTED" and chunks:
             text = "\n".join(chunk["text"] for chunk in chunks)
+            checked_at = _observed_block_capture_at(root, route, current)
             source_snapshots.append(_snapshot(
                 source_id + ":notion_blocks", route["source_id"], text,
-                scope="NOTION_BLOCK_TEXT_ONLY", original_sha256=item["snapshot_sha256"],
-                recorded_at=notion_receipt["created_at"],
+                scope="NOTION_BLOCK_TEXT_PARTIAL" if flags else "NOTION_BLOCK_TEXT_ONLY",
+                original_sha256=item["snapshot_sha256"],
+                recorded_at=checked_at,
+                unresolved_parts=flags,
                 fragment_anchors=[{"block_id": chunk["block_id"],
-                                   "block_path": chunk["block_path"]} for chunk in chunks]
+                                   "block_path": chunk["block_path"],
+                                   "field": chunk.get("field"),
+                                   "cell_index": chunk.get("cell_index")} for chunk in chunks]
             ))
             counts["notion_blocks"] += 1
+            if not checked_at:
+                held.append({"source_id": source_id, "part": "CAPTURE_TIME",
+                             "reason": ["NOTION_CAPTURE_TIME_NOT_MATCHED_TO_CURRENT_STATE"]})
+            if flags:
+                held.append({"source_id": source_id, "part": "UNRESOLVED_NOTION_MATERIAL",
+                             "reason": flags})
         else:
             held.append({"source_id": source_id, "part": "NOTION_BLOCK_TEXT",
                          "reason": flags or ["NOTION_TEXT_NOT_AVAILABLE"]})
@@ -176,6 +222,9 @@ def prepare(report_dir: Path, vault_root: Path) -> dict:
         counts["public_original"] += 1
     if {name: digest((reports / name).read_bytes()) for name in REQUIRED} != before:
         raise InputError("PENDING_INPUT_CHANGED_DURING_EXTRACTION")
+    if current_hash is not None and (not current_path.is_file()
+            or digest(current_path.read_bytes()) != current_hash):
+        raise InputError("NOTION_CURRENT_CHANGED_DURING_EXTRACTION")
     counts["held"] = len(held)
     return {
         "schema": SCHEMA,
