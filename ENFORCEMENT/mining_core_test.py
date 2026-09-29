@@ -18,6 +18,41 @@ class MiningCoreTest(unittest.TestCase):
   e=[{"evidence_id":"a","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"ALLOW","independent_support_count":2},{"evidence_id":"b","frontier_id":"law","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"allowed","scope":"same","polarity":"DENY","independent_support_count":2}]
   c=checkpoint({"task_family":"X","goal":"new goal"},[F[0]],e)
   self.assertFalse(c["stop"]); self.assertEqual(c["frontier"][0]["status"],"CONFLICT"); self.assertEqual(c["next_queries"][0]["purpose"],"RESOLVE_CONFLICT")
+ def test_disputed_goal_requires_cross_source_claim_relation_not_one_high_score(self):
+  from mining_core import assess_frontier
+  frontier=[{"id":"D","kind":"CONFLICT","question":"which official rule is current?"}]
+  first={"evidence_id":"A","frontier_id":"D","source_identity":"publisher:A",
+         "source_class":"OFFICIAL","claim":"current setback is 10m",
+         "direct_support":True,"fresh_enough":True,"independent_support_count":2,
+         "subject":"setback","predicate":"minimum","scope":"current city","value":"10m"}
+  alone=assess_frontier(frontier,[first])[0]
+  self.assertEqual(alone["status"],"OPEN")
+  self.assertFalse(alone["conflict_question_reconciled"])
+  self.assertEqual(alone["best_evidence_score"],.925)
+  other={**first,"evidence_id":"B","source_identity":"publisher:B",
+         "claim":"an unrelated heritage rule","subject":"heritage","predicate":"height"}
+  unrelated=assess_frontier(frontier,[first,other])[0]
+  self.assertEqual(unrelated["independent_source_identity_count"],2)
+  self.assertEqual(unrelated["status"],"OPEN")
+  corroborated={**first,"evidence_id":"B","source_identity":"publisher:B"}
+  matched=assess_frontier(frontier,[first,corroborated])[0]
+  self.assertEqual(matched["status"],"CLOSED")
+  self.assertTrue(matched["conflict_question_reconciled"])
+  unreviewed=[{**row,"adapter":"WEB","evidence_origin":"PROVIDER_RECEIPT"}
+              for row in [first,corroborated]]
+  unverified=assess_frontier(frontier,unreviewed)[0]
+  self.assertEqual(unverified["independent_source_identity_count"],1)
+  self.assertEqual(unverified["status"],"OPEN")
+
+ def test_unresolved_original_dispute_keeps_resolution_query_purpose(self):
+  from mining_core import checkpoint
+  front=[{"id":"D","kind":"CONFLICT","question":"resolve two rules"}]
+  evidence=[{"frontier_id":"D","source_identity":"A","source_class":"OFFICIAL",
+             "claim":"claim","direct_support":True,"independent_support_count":2}]
+  cp=checkpoint({"goal":"resolve two rules","task_family":"GENERAL_RESEARCH"},front,evidence)
+  self.assertFalse(cp["stop"])
+  self.assertEqual(cp["next_queries"][0]["purpose"],"RESOLVE_CONFLICT")
+
  def test_external_receipt_resumes_checkpoint(self):
   c=checkpoint({"task_family":"X","goal":"new goal"},[{"id":"law","question":"official rule"}],[])
   r=apply_external_receipts(c,[{"frontier_id":"law","query":"official rule","adapter":"WEB","results":[{"url":"https://example.gov/r","source_class":"OFFICIAL","direct_support":True,"subject":"rule","predicate":"text","scope":"current","value":"A","independent_support_count":2}]}])
