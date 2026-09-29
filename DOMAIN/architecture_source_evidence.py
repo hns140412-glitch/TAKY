@@ -11,6 +11,7 @@ import json
 import re
 from pathlib import Path
 from architecture_hwpx_text import extract as extract_hwpx
+from architecture_spreadsheet_text import extract as extract_spreadsheet
 
 MAX_TEXT_BYTES = 12 * 1024 * 1024
 MAX_EXCERPTS = 5
@@ -39,6 +40,10 @@ def packet(index_payload: dict, source_id: str, file: Path, *, revision: str, qu
         extracted = extract_hwpx(file)
         content = extracted['text']
         method = 'HWPX_SECTION_XML'
+    elif suffix in ('.xlsx', '.xlsm'):
+        extracted = extract_spreadsheet(file)
+        content = extracted['text']
+        method = 'OOXML_CELLS_NO_FORMULA_EVALUATION'
     elif suffix in ('.txt', '.md'):
         if file.stat().st_size > MAX_TEXT_BYTES:
             raise ValueError('TEXT_BYTES_LIMIT_EXCEEDED')
