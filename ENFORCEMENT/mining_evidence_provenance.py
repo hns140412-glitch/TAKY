@@ -7,7 +7,7 @@ from URLs, or make a domain-owner utilization decision.
 """
 from __future__ import annotations
 
-DUPLICATE_GROUP_RELATIONS={"EXACT_DUPLICATE_OF","VERSION_OF"}
+DUPLICATE_GROUP_RELATIONS={"EXACT_DUPLICATE_OF"}
 REVIEWED_STATES={"REVIEWED","APPROVED","VERIFIED"}
 
 
@@ -73,9 +73,9 @@ def enrich_from_index(evidence:list[dict], index_rows:list[dict]|None=None,
             item["provenance_group_reviewed"]=_reviewed(row)
             item["source_group_basis"]="INDEX_EXPLICIT_GROUP"
         elif len(groups[root(sid)])>1:
-            # Exact/versions relations let us collapse duplicate observations.
-            # That relation ALONE does not prove *different* independent publishers.
+            # Only reviewed exact-duplicate relation can collapse publication surfaces.
+            # VERSION_OF is lineage, not proof of byte/claim equivalence.
             item["canonical_source_id"]="INDEX_DUPLICATE_GROUP:"+root(sid)
-            item["source_group_basis"]="INDEX_EXACT_OR_VERSION_RELATION"
+            item["source_group_basis"]="INDEX_EXACT_DUPLICATE_RELATION"
         out.append(item)
     return out
