@@ -21,7 +21,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         semantic_scores=semantic_scores,
         relations=relations,
         detail_rows=detail_rows,
-        top_k=int(request.get("top_k",5) or 5),
+        top_k=max(int(request.get("top_k",5) or 5),len(index_rows or [])),
         relation_hops=int(request.get("relation_hops",1) or 1),
     )
     minimum=int(request.get("minimum_results",1) or 1)
@@ -30,6 +30,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
     # Learning evidence request merely by entering a search projection.
     reviewable=[x for x in primary if str((x.get("row") or {}).get("index_state") or "").upper()
                 not in {"CANDIDATE","STAGED","PENDING","HELD","REJECTED"}]
+    reviewable=reviewable[:max(0,int(request.get("top_k",5) or 5))]
     sufficient=len(reviewable)>=minimum
     gap=None if sufficient else {
         "type":"LEARNING_EVIDENCE_GAP",
