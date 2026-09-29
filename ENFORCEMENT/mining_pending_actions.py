@@ -15,6 +15,8 @@ PRIORITY = {"CRITICAL": 0, "REQUIREMENT": 1, "CONFLICT": 2,
             "UNKNOWN": 3, "FOUNDATION": 4, "ADVANCED": 5, "ALTERNATIVE": 6}
 ACCESS_ERRORS = {"ACCESS_DENIED", "AUTH_REQUIRED", "LOGIN_REQUIRED",
                  "PERMISSION_DENIED", "RESTRICTED", "PAYWALL", "ACCESS_HOLD"}
+UNCERTAIN_ERRORS = {"IN_FLIGHT_UNCERTAIN", "CORRUPT_ATTEMPT_JOURNAL",
+                    "SOURCE_RECEIPT_STALE"}
 
 
 def _ids(item: dict) -> set[str]:
@@ -107,6 +109,9 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
     if category == "ROUTE_BLOCKED":
         return {**common, "type": "REPLAN_WITH_FAILURE_MEMORY",
                 "when": "NEW_EVIDENCE_OR_MATERIALLY_DIFFERENT_ROUTE"}
+    if category == "IN_FLIGHT_HOLD":
+        return {**common, "type": "RECONCILE_IN_FLIGHT_ATTEMPT",
+                "when": "RECOVER_OR_VERIFY_ORIGINAL_RECEIPT_BEFORE_NEW_EXECUTION"}
     if category == "ACCESS_HOLD":
         return {**common, "type": "FIND_PERMITTED_ALTERNATIVE_OR_HOLD",
                 "when": "AUTHORIZED_ROUTE_OR_ACCESS_STATUS_CHANGE"}
@@ -241,6 +246,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
                         "DEPTH_DEFERRED" if required else "OPTIONAL_SCOPE_REVIEW")
         elif route_blocked:
             category = "ROUTE_BLOCKED"
+        elif provider_error in UNCERTAIN_ERRORS:
+            category = "IN_FLIGHT_HOLD"
         elif provider_error in ACCESS_ERRORS or provider_state in ACCESS_ERRORS:
             category = "ACCESS_HOLD"
         elif provider_state == "FAILED":
@@ -262,8 +269,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         else:
             category = "SOURCE_GAP"
         state = ("CLOSED" if category == "EVIDENCE_VERIFIED" else
-                 "HOLD" if category in {"ROUTE_BLOCKED", "ACCESS_HOLD", "DEPTH_CONFLICT",
-                                       "SOURCE_REVIEW_HOLD"} or
+                 "HOLD" if category in {"ROUTE_BLOCKED", "ACCESS_HOLD", "IN_FLIGHT_HOLD",
+                                       "DEPTH_CONFLICT", "SOURCE_REVIEW_HOLD"} or
                  (category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"}
                   and not next_provider)
                  else "CANDIDATE" if category == "OPTIONAL_SCOPE_REVIEW"
