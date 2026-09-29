@@ -10,6 +10,7 @@ on:
       - 'ENFORCEMENT/source_vault_external_acquisition_test.py'
       - 'ENFORCEMENT/source_vault_mining_evidence_bridge.py'
       - 'ENFORCEMENT/source_vault_mining_evidence_bridge_test.py'
+      - 'ENFORCEMENT/source_vault_mining_v2_contract_test.py'
       - '.github/workflows/source-vault-handoff.yml'
   push:
     branches:
@@ -32,3 +33,14 @@ jobs:
           python -m unittest discover -s ENFORCEMENT -p 'source_vault_snapshot_evidence_test.py' -v
           python -m unittest discover -s ENFORCEMENT -p 'source_vault_external_acquisition_test.py' -v
           python -m unittest discover -s ENFORCEMENT -p 'source_vault_mining_evidence_bridge_test.py' -v
+
+      - name: Verify SOURCE VAULT input contract against pinned Mining V2 draft (synthetic only)
+        uses: actions/checkout@v4
+        with:
+          ref: 224d573b3334299629f4b39ca6379fd945dc006f
+          path: mining-v2
+          persist-credentials: false
+      - name: Enforce independent claim review on actual Mining V2 core
+        env:
+          PYTHONPATH: ENFORCEMENT:mining-v2/ENFORCEMENT
+        run: python -m unittest discover -s ENFORCEMENT -p 'source_vault_mining_v2_contract_test.py' -v
