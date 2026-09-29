@@ -179,9 +179,14 @@ def build_snapshot_receipt(report_dir: Path, vault_root: Path) -> dict[str, Any]
             if not isinstance(blocks, list):
                 raise InputError("SNAPSHOT_BLOCKS_NOT_ARRAY")
             extracted, count, flags = _extract(blocks)
-            result.update({"state": "NOTION_BLOCK_TEXT_EXTRACTED" if extracted else "NOTION_BLOCK_NO_TEXT",
+            semantic_count = sum(x["scope"] == "NOTION_BLOCK_TEXT_ONLY" for x in extracted)
+            metadata_count = len(extracted) - semantic_count
+            result.update({"state": "NOTION_BLOCK_TEXT_EXTRACTED" if semantic_count else "NOTION_BLOCK_NO_TEXT",
                            "snapshot_sha256": hashlib.sha256(data).hexdigest(),
                            "snapshot_bytes": len(data), "block_count": count,
+                           "semantic_text_item_count": semantic_count,
+                           "metadata_only_item_count": metadata_count,
+                           "content_completeness": "PARTIAL_MATERIAL_OR_LINKED_CONTENT_OPEN" if flags else "NOTION_BLOCK_TEXT_ONLY_NOT_EXTERNAL_ORIGINAL",
                            "extracted": extracted, "flags": flags})
         except (InputError, ValueError, UnicodeError, OSError, json.JSONDecodeError) as exc:
             result["state"] = "SNAPSHOT_HOLD"
