@@ -30,6 +30,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
     # Learning evidence request merely by entering a search projection.
     reviewable=[x for x in primary if str((x.get("row") or {}).get("index_state") or "").upper()
                 not in {"CANDIDATE","STAGED","PENDING","HELD","REJECTED"}]
+    staged=[x for x in primary if x not in reviewable]
     reviewable=reviewable[:max(0,int(request.get("top_k",5) or 5))]
     sufficient=len(reviewable)>=minimum
     gap=None if sufficient else {
@@ -41,7 +42,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         "minimum_authority":request.get("minimum_authority"),
         "minimum_freshness":request.get("minimum_freshness"),
         "existing_evidence_count":len(reviewable),
-        "staged_candidate_count":len(primary)-len(reviewable),
+        "staged_candidate_count":len(staged),
         "why_insufficient":f"MINIMUM_REVIEWABLE_RESULTS_NOT_MET:{len(reviewable)}/{minimum}",
     }
     return {
@@ -49,7 +50,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         "request_id":request.get("request_id"),
         "learning_context":request.get("learning_context"),
         "evidence_candidates":reviewable,
-        "staged_discovery_candidates":[x for x in primary if x not in reviewable],
+        "staged_discovery_candidates":staged,
         "relation_expansion":result.get("expanded",[]),
         "details":result.get("details",[]),
         "retrieval_counts":result.get("counts",{}),
