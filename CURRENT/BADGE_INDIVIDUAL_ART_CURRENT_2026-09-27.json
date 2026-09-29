@@ -218,5 +218,27 @@
     "raw_png_delivery": "conversation file package; NOT checked into GitHub",
     "legacy_svg_dev_binding_count": 60,
     "legacy_svg_not_promoted": true
+  },
+  "latest_handoff_20260929": {
+    "date": "2026-09-29",
+    "kind": "RESUME_PREPARATION_ONLY_NO_ARTWORK_EXECUTION",
+    "handoff_path": "HANDOFF/BADGE_INDIVIDUAL_ART_NEW_CHAT_START_2026-09-29_LATEST.md",
+    "handoff_commit": "8527b72afeeedded1c4c62b663771da1112285ac",
+    "main_head_at_handoff": "09df3d4f011e815e56d41433139bc2fcc7e1a97e",
+    "pr_number": 163,
+    "pr_head_before_handoff": "2fa9eca237981ff801d5645719de321c7edca73a",
+    "source_queue": "BADGE/assets/visual-rework-queue-working.json",
+    "source_locked_batch": "BADGE/assets/rework-batch-01-source-locked.json",
+    "conditional_candidate_count": 29,
+    "correction_id_count": 31,
+    "special_state": {
+      "BDG-DRAFT-012": "USER_SELECTED_CANDIDATE_QA_OPEN_NOT_FINAL",
+      "BDG-DRAFT-040": "LATEST_REJECTED_REWORK_OPEN"
+    },
+    "final_approved": 0,
+    "painterly_production_png_bindings": 0,
+    "active_badges": 0,
+    "award_events": 0,
+    "note": "LATEST handoff and current pointer supersede historical prose counts; exact HEAD must be re-fetched on resume. User command 재개준비 only writes handoff/current and stops; no image generation."
   }
 }
