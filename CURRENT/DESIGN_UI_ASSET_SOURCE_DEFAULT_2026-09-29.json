@@ -1,0 +1,36 @@
+{
+  "schema_version": "TAKY_CURRENT_ASSET_SOURCE_V1",
+  "updated_at": "2026-09-29",
+  "rule_id": "TKY-ASSET-001",
+  "authority_owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+  "scope": "ALL_TAKY_GOVERNED_VISUAL_DESIGN_AND_UI_TASKS",
+  "decision": "User requires new and existing conversations to default to GitHub TAKY-ASSETS storage for approved/reusable original images, separate UI layers, original Visual ID derivatives and asset manifests.",
+  "canonical_asset_repo": "hns140412-glitch/TAKY-ASSETS",
+  "canonical_source_role": "approved/reusable original and separately addressable source layers",
+  "consumers": [
+    "Ready-Set",
+    "Hide-Seek",
+    "Snap-Pop",
+    "other TAKY visual UI consumers"
+  ],
+  "consumer_role": "pinned source manifest + verified derived PWA build copies, not second source authority",
+  "required_evidence": [
+    "source pointer/approved reference",
+    "actual binary GitHub path and source revision",
+    "file integrity and asset/layer manifest",
+    "Visual ID/consent check as applicable",
+    "real UI asset binding",
+    "design/reference/render/interaction comparison"
+  ],
+  "prohibitions": [
+    "no image-only completion claim",
+    "no ZIP-only asset registration claim",
+    "no screenshot crop as standalone layer",
+    "no unauthorized asset recreation or flattening",
+    "no global publication of private original photos",
+    "no premature Netlify/main release"
+  ],
+  "hosted_cross_chat_automatic_loading": "UNVERIFIED",
+  "explicit_bootstrap": "Latest TAKY asset rule TKY-ASSET-001: assets original and separate layers to TAKY-ASSETS; UI binds revisioned source and verifies real render.",
+  "status": "USER_CONFIRMED_GOVERNANCE_DECISION"
+}
