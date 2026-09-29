@@ -7,7 +7,7 @@ import tempfile
 import zlib
 from pathlib import Path
 
-from data_index_asset_binding import audit_visual_bindings
+from data_index_asset_binding import audit_visual_bindings, audit_consumer_static_footprint
 
 
 def chunk(tag, body):
@@ -104,4 +104,41 @@ with tempfile.TemporaryDirectory() as d:
     absent = audit_visual_bindings(registry, [binding], local_asset_root=root)
     assert absent["cards"][0]["local_binary_evidence_state"] == "LOCAL_BINARY_UNAVAILABLE"
     assert not absent["producer_quality_verified"]
+# Exact live-source-like snapshot, not a claimed browser/visual proof.
+old = audit_consumer_static_footprint(
+    "hide_seek_forest_asset.png",
+    app_tree_paths=["assets/backgrounds/park.png", "assets/backgrounds/academy.png"],
+    inspected_code={
+        "styles.css": '.app-shell{background:url("./assets/backgrounds/park.png") center/cover}',
+        "index.html": '<div id="app"></div>',
+    },
+)
+assert old["static_snapshot_indicates_unbound"] is True
+assert old["runtime_import_verified"] is False
+assert old["source_tree_expected_name_found"] is False
+assert "./assets/backgrounds/park.png" in old["observed_static_image_refs"]["styles.css"]
+staged = audit_consumer_static_footprint(
+    "hide_seek_forest_asset.png",
+    app_tree_paths=["assets/backgrounds/hide_seek_forest_asset.png"],
+    inspected_code={"styles.css": 'url("./assets/backgrounds/hide_seek_forest_asset.png")'},
+)
+assert staged["source_tree_expected_name_found"] is True
+assert staged["source_code_expected_name_found"] is True
+assert staged["static_snapshot_indicates_unbound"] is False
+assert staged["runtime_import_verified"] is False
+assert staged["render_visual_match_verified"] is False
+for bad in ["../escape.png", "foo/bar.png", "", "scene.svg"]:
+    try:
+        audit_consumer_static_footprint(bad, app_tree_paths=[], inspected_code={"x": "y"})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("unsafe or unsupported asset basename passed")
+try:
+    audit_consumer_static_footprint("scene.png", app_tree_paths=["/absolute/scene.png"], inspected_code={"x":"y"})
+except ValueError:
+    pass
+else:
+    raise AssertionError("invalid app snapshot path passed")
+
 print("data_index_asset_binding: PASS (byte integrity, path traversal, approval scope, pointer identity and no false UI completion)")
