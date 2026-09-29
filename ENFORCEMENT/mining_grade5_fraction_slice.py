@@ -8,7 +8,6 @@ This module never assigns canonical SourceID, learner mastery or Planner date.
 """
 from __future__ import annotations
 
-import re
 from fractions import Fraction
 
 MATH_PDF_SHA256="d14a34c1e9ab005727ab84bf563be3c3b2906578956890994ce9945bd981261e"
@@ -65,6 +64,8 @@ def check_response(payload:dict)->dict:
             return _hold("STRUCTURED_STEP_REQUIRED")
         method=str(item.get("operation") or "").upper()
         factor=_number(item.get("factor"))
+        if factor is not None and factor > MAX_FACTOR:
+            factor=None
         val=item.get("fraction") or {}
         n=_number(val.get("numerator")) if isinstance(val,dict) else None
         d=_number(val.get("denominator")) if isinstance(val,dict) else None
