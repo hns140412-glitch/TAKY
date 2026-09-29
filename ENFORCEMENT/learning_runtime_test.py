@@ -21,6 +21,14 @@ class LearningRuntimeTest(unittest.TestCase):
   self.assertFalse(r["next_learning_action"]["planner_allocation_allowed"])
   self.assertEqual(r["evidence_gap"]["type"],"LEARNING_EVIDENCE_GAP")
 
+ def test_candidate_with_reference_only_cannot_allocate_planner(self):
+  r=run_learning_cycle({"context":{"skill_id":"SCIENCE"},
+   "evidence_candidates":[{"source_id":"NEW","index_state":"CANDIDATE",
+     "utilization_class":"REFERENCE_ONLY","authorization_class":"READY_WITH_GUARDS"}],
+   "observations":[{"correct":False},{"correct":False}]})
+  self.assertEqual(r["strategy_selection"]["strategy"],"HOLD_FOR_EVIDENCE")
+  self.assertFalse(r["next_learning_action"]["planner_allocation_allowed"])
+
  def test_outcome_only_proposes_memory_observation(self):
   run=run_learning_cycle({"context":{"skill_id":"VOCAB"},"evidence_candidates":EVID,"observations":[{"correct":True}]})
   o=evaluate_outcome(run,{"completed":True,"evidence_of_improvement":True})
