@@ -94,19 +94,47 @@ def evidence_score(e:dict)->float:
 
 def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=.65)->list[dict]:
     by={}
-    for e in evidence:
-        fid=str(e.get("frontier_id",""))
-        by.setdefault(fid,[]).append({**e,"quality_score":evidence_score(e)})
+    for row in evidence:
+        fid=str(row.get("frontier_id",""))
+        by.setdefault(fid,[]).append(dict(row))
     out=[]
     for item in frontier:
         fid=str(item.get("id"))
-        ev=by.get(fid,[])
+        raw=by.get(fid,[])
+        # A source can have multiple publication surfaces (HTML/catalog/API JSON).
+        # Provider-supplied independent_support_count is only a claim. Never
+        # upgrade it beyond independently identifiable source identities.
+        identities={
+            str(row.get("source_identity") or row.get("source_url") or
+                row.get("source_id") or "").strip()
+            for row in raw
+        }
+        identities.discard("")
+        independently_identified=len(identities)
+        cap=max(1,independently_identified)
+        ev=[]
+        for row in raw:
+            try:
+                claimed=max(1,int(row.get("independent_support_count",1) or 1))
+            except (TypeError,ValueError):
+                claimed=1
+            effective=min(claimed,cap)
+            scored={**row,"claimed_independent_support_count":claimed,
+                    "independent_support_count":effective,
+                    "independence_checked":True}
+            scored["quality_score"]=evidence_score(scored)
+            ev.append(scored)
         best=max((x["quality_score"] for x in ev),default=0.0)
         relations=analyze(ev)
         conflict=relations["conflict"]
         unresolved=relations["unresolved_pairs"]
         status="CONFLICT" if conflict else "CLOSED" if best>=threshold else "OPEN"
-        out.append({**item,"status":status,"best_evidence_score":best,"evidence_count":len(ev),"claim_relations":relations,"unresolved_claim_pairs":unresolved})
+        out.append({**item,"status":status,"best_evidence_score":best,
+                    "evidence_count":len(ev),
+                    "independent_source_identity_count":independently_identified,
+                    "source_identity_required_for_independence":True,
+                    "claim_relations":relations,
+                    "unresolved_claim_pairs":unresolved})
     return out
 
 def next_queries(assessed:list[dict])->list[dict]:
