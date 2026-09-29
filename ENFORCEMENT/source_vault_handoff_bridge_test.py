@@ -50,6 +50,35 @@ class SourceVaultBridgeTest(unittest.TestCase):
         self.assertEqual(candidate_url(row),'')
         self.assertEqual(source_kind(row),'HOLD_URL_CONFLICT')
 
+    def test_unflagged_material_url_conflict_holds(self):
+        row = self.sample()
+        row['normalized_url'] = 'https://example.org/another'
+        # Even if an old collector forgot its explicit conflict flag, no URL is chosen.
+        self.assertNotIn('url_conflict', row)
+        self.assertEqual(candidate_url(row), '')
+        self.assertEqual(source_kind(row), 'HOLD_URL_CONFLICT')
+        with tempfile.TemporaryDirectory() as tmp:
+            self.write(tmp, [row])
+            receipt = build_receipt(Path(tmp))
+            self.assertEqual(receipt['route_counts'], {'HOLD_URL_CONFLICT': 1})
+            self.assertIsNone(receipt['routes'][0]['source_url'])
+
+    def test_sanitized_equivalent_url_does_not_false_conflict(self):
+        row = self.sample()
+        row['normalized_url'] = 'https://example.org/a?logNo=123'
+        self.assertEqual(candidate_url(row), 'https://example.org/a?logNo=123')
+        row['url'] = 'https://example.org/a?logNo=123&x=ok'
+        row['normalized_url'] = 'https://example.org/a?x=ok&logNo=123'
+        self.assertEqual(source_kind(row), 'PUBLIC_URL_CANDIDATE')
+
+    def test_summary_live_total_mismatch_holds(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.write(tmp, [self.sample()])
+            (Path(tmp)/'INCREMENTAL_SUMMARY.json').write_text(
+                json.dumps({'queue_count': 1, 'notion_total': 2}), encoding='utf8')
+            with self.assertRaisesRegex(InputError, 'SUMMARY_NOTION_TOTAL_MISMATCH'):
+                build_receipt(Path(tmp))
+
     def test_body_links_are_review_only(self):
         row={'url':'', 'block_link_candidates':[{'url':'https://example.org/somewhere'}]}
         self.assertEqual(source_kind(row),'REVIEW_BODY_LINK_CANDIDATES')
