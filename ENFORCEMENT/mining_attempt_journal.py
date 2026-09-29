@@ -29,7 +29,8 @@ ACQUISITION_FIELDS={
 
 
 def _hash(value):
-    return hashlib.sha256(str(value).encode("utf-8")).hexdigest()
+    raw=value if isinstance(value,bytes) else str(value).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def _sync_directory(directory):
