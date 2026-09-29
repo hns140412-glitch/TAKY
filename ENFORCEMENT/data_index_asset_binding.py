@@ -137,3 +137,53 @@ def audit_visual_bindings(
         "asset_binding_count": len(cards), "cards": cards,
         "claim_ceiling": "LOCAL_BINARY_IDENTITY_AND_METADATA_BINDING_IF_PROVIDED",
     }
+
+
+def audit_consumer_static_footprint(
+    approved_asset_basename: str,
+    *, app_tree_paths: list[str],
+    inspected_code: dict[str, str],
+) -> dict[str, Any]:
+    """A bounded source-file check, never an app build or runtime attestation.
+
+    The caller must obtain tree/content snapshots from its authorized source.
+    Static presence is only a *candidate* binding; absence means absent in
+    inspected files and tree, not that dynamic runtime use is impossible.
+    """
+    name = _required(approved_asset_basename, "APPROVED_ASSET_NAME")
+    if name in {".", ".."} or "/" in name or "\\" in name or not name.lower().endswith(".png"):
+        raise ValueError("APPROVED_ASSET_BASENAME_INVALID")
+    if not isinstance(app_tree_paths, list) or not all(
+        isinstance(path, str) and path and not path.startswith("/")
+        for path in app_tree_paths
+    ):
+        raise ValueError("APP_TREE_SNAPSHOT_INVALID")
+    if not isinstance(inspected_code, dict) or not inspected_code or not all(
+        isinstance(path, str) and path and isinstance(body, str)
+        for path, body in inspected_code.items()
+    ):
+        raise ValueError("INSPECTED_CODE_INVALID")
+    import re
+    # The result is a conservative signal, not proof that an arbitrary string
+    # is the actual DOM/CSS image source. Compare actual render separately.
+    hits = [path for path, body in inspected_code.items() if name in body]
+    asset_tree_hits = [path for path in app_tree_paths if path.rsplit("/", 1)[-1] == name]
+    local_image_refs: dict[str, list[str]] = {}
+    for path, body in inspected_code.items():
+        refs = re.findall(r"""(?:src\s*=\s*["']|url\(\s*["']?)([^"')]+?\.(?:png|jpg|jpeg|webp))""", body, flags=re.I)
+        if refs:
+            local_image_refs[path] = sorted(set(refs))[:30]
+    return {
+        "schema": "TAKY_INDEX_STATIC_CONSUMER_FOOTPRINT_V1",
+        "asset_basename": name,
+        "source_tree_expected_name_found": bool(asset_tree_hits),
+        "source_code_expected_name_found": bool(hits),
+        "tree_matching_paths": asset_tree_hits,
+        "code_matching_files": hits,
+        "observed_static_image_refs": local_image_refs,
+        "static_snapshot_indicates_unbound": not bool(asset_tree_hits or hits),
+        "runtime_import_verified": False,
+        "asset_binary_hash_verified_from_tree": False,
+        "render_visual_match_verified": False,
+        "claim_ceiling": "BOUNDED_STATIC_SOURCE_SNAPSHOT_ONLY",
+    }
