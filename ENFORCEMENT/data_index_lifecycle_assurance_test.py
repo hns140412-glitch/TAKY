@@ -67,6 +67,16 @@ broken = [record("A", "alpha", [{"type": "DERIVED_FROM", "target": "discarded-de
 report = audit_projected_universe(broken, expected_source_ids={"A"})
 assert report["issue_counts"]["DANGLING_PHYSICAL_EDGE"] == 1
 assert report["state"] == "STRUCTURAL_GAPS"
+# Incremental update is blocked rather than discarding dangling old relations.
+try:
+    plan_incremental_impact(broken, [{"event_id": "delta", "source_id": "A",
+                                     "change_type": "MODIFIED"}],
+                            start_cursor="start", end_cursor="end",
+                            change_feed_exhausted=True)
+except ValueError as exc:
+    assert "PRIOR_GRAPH_INTEGRITY_UNRESOLVED" in str(exc)
+else:
+    raise AssertionError("dangling old graph was ignored during incremental refresh")
 
 # A label or hash without independently verified source bytes is NOT binary proof.
 dup = [
