@@ -45,6 +45,51 @@ class MiningCoreTest(unittest.TestCase):
   self.assertIn("cross-check note",c["goal_sufficiency"]["missing_required"])
   self.assertEqual(c["task_contract"]["goal"],task["goal"])
 
+ def test_same_official_dataset_two_surfaces_not_two_independent_sources(self):
+  from mining_core import assess_frontier
+  item=[{"id":"M1","question":"published metadata"}]
+  doc={"frontier_id":"M1","source_identity":"data.go.kr:15134735",
+       "source_id":"HTML-15134735","source_url":"https://www.data.go.kr/data/15134735/openapi.do",
+       "source_class":"OFFICIAL","claim":"REST / JSON+XML","direct_support":True,
+       "fresh_enough":True,"independent_support_count":2}
+  meta={**doc,"source_id":"CATALOG-15134735",
+        "source_url":"https://www.data.go.kr/catalog/15134735/openapi.json"}
+  out=assess_frontier(item,[doc,meta])[0]
+  self.assertEqual(out["evidence_count"],2)
+  self.assertEqual(out["independent_source_identity_count"],1)
+  self.assertEqual(out["best_evidence_score"],.925)
+
+ def test_distinct_canonical_origins_allow_independent_support_when_claimed(self):
+  from mining_core import assess_frontier
+  one={"frontier_id":"F","source_identity":"publisher:A","source_class":"PRIMARY",
+       "claim":"X","direct_support":True,"fresh_enough":True,
+       "independent_support_count":2}
+  two={**one,"source_identity":"publisher:B"}
+  out=assess_frontier([{"id":"F","question":"X"}],[one,two])[0]
+  self.assertEqual(out["independent_source_identity_count"],2)
+  self.assertEqual(out["best_evidence_score"],1.0)
+
+ def test_public_catalog_metadata_cannot_close_credentialed_runtime_goal(self):
+  task={"task_family":"PUBLIC_DATA","goal":"assess 건축HUB registry API usability",
+        "required_frontier_ids":["PUBLISHED_SPEC","AUTHENTICATED_RESPONSE"]}
+  front=[{"id":"PUBLISHED_SPEC","kind":"CRITICAL","question":"published REST JSON XML metadata"},
+         {"id":"AUTHENTICATED_RESPONSE","kind":"CRITICAL",
+          "question":"actual authorized API returns a building register record"}]
+  published={"frontier_id":"PUBLISHED_SPEC","source_identity":"data.go.kr:15134735",
+             "source_id":"DATA-GO-KR-15134735",
+             "source_url":"https://www.data.go.kr/data/15134735/openapi.do",
+             "source_class":"OFFICIAL","claim":"REST, JSON+XML metadata is published",
+             "direct_support":True,"fresh_enough":True,
+             "excerpt_ref":"Open API info: API type / data format",
+             "independent_support_count":1}
+  c=checkpoint(task,front,[published])
+  self.assertEqual(c["frontier"][0]["status"],"CLOSED")
+  self.assertEqual(c["frontier"][1]["status"],"OPEN")
+  self.assertFalse(c["stop"])
+  self.assertEqual(c["goal_sufficiency"]["unresolved_critical"],[])
+  self.assertIn("AUTHENTICATED_RESPONSE",c["goal_sufficiency"]["unresolved_required"])
+  self.assertEqual(c["next_queries"][0]["frontier_id"],"AUTHENTICATED_RESPONSE")
+
  def test_synthesis_preserves_checkpoint_trace(self):
   c=checkpoint({"task_family":"X","goal":"new goal"},[{"id":"f","kind":"FOUNDATION","question":"base"}],[{"evidence_id":"e1","frontier_id":"f","source_class":"OFFICIAL","direct_support":True,"claim":"base claim","independent_support_count":2}])
   s=synthesize_checkpoint(c)
