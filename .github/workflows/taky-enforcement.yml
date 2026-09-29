@@ -645,6 +645,8 @@ jobs:
             exit 1
           fi
           echo "Expected forbidden transition failure observed"
+      - name: Replay AI-producer artifact PRE/POST negative and recovery cases
+        run: python ENFORCEMENT/producer_artifact_gate_test.py
       - name: Reject runtime without operational assimilation
         run: |
           if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
