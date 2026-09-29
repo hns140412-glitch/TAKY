@@ -9,8 +9,46 @@ or task-family ownership is invented by this helper.
 """
 from __future__ import annotations
 from collections.abc import Callable
+from pathlib import Path
+import hashlib
+from urllib.parse import urlsplit
 from mining_run_orchestrator import orchestrate, advance_provider_batch
 from mining_provider_executor import SUPPORTED_PROVIDERS
+
+MAX_ORIGINAL_RECEIPT_BYTES = 25 * 1024 * 1024
+
+
+def _verified_acquisition(proof):
+    """Verify actual file bytes independently of a provider's claimed state.
+
+    This is a *local integrity* check, not proof of publisher identity,
+    permission, download transport, or domain approval.
+    """
+    if not isinstance(proof,dict) or proof.get("state")!="ACQUIRED_AND_PRESERVED":
+        return None
+    try:
+        size=int(proof.get("size_bytes"))
+        digest=str(proof.get("sha256") or "")
+        path=Path(proof["preserved_path"])
+        final=str(proof.get("final_url") or "")
+        parsed=urlsplit(final)
+        if (not 0 < size <= MAX_ORIGINAL_RECEIPT_BYTES or len(digest)!=64
+                or not all(c in "0123456789abcdef" for c in digest.lower())
+                or parsed.scheme.lower() not in {"http","https"} or not parsed.hostname
+                or proof.get("canonical_promotion") is not False
+                or not path.is_file() or path.stat().st_size!=size):
+            return None
+        h=hashlib.sha256()
+        with path.open("rb") as stream:
+            for chunk in iter(lambda:stream.read(1024*1024),b""):
+                h.update(chunk)
+        if h.hexdigest()!=digest.lower():
+            return None
+        return {key:proof.get(key) for key in (
+            "state","sha256","size_bytes","preserved_path","final_url",
+            "content_type","canonical_promotion")}
+    except (OSError,ValueError,TypeError,KeyError):
+        return None
 
 
 def _selected_requests(plan):
@@ -49,6 +87,8 @@ def _result(state, *, current, plan, events, reason=None, last=None):
             "no_auto_current_write_or_promotion":True,
             "provider_result_is_evidence_candidate":True,
             "failed_and_successful_siblings_preserved":True,
+            "source_files_preserved_requires_independent_local_sha_check":True,
+            "local_integrity_not_publisher_authenticity":True,
         },
     }
 
@@ -142,7 +182,8 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                         output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
                                 "error_type":type(exc).__name__}
             runtime_results[str(request["request_id"])]=output
-            proof=output.get("source_acquisition")
+            claimed_proof=output.get("source_acquisition")
+            proof=_verified_acquisition(claimed_proof)
             events.append({
                 "request_id":request["request_id"],
                 "frontier_id":request["frontier_id"],
@@ -152,7 +193,11 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 "callback_invoked":was_called,
                 "replayed_from_local_journal":journal_replay,
                 "external_fetch_performed":output.get("external_fetch_performed") is True,
-                # Physical acquisition receipt is distinct from claim support.
+                "source_acquisition_integrity":(
+                    "VERIFIED_LOCAL_BYTES" if proof else
+                    "REJECTED_UNVERIFIED_RECEIPT" if isinstance(claimed_proof,dict)
+                    else "NOT_CLAIMED"),
+                # Provider metadata does not count as physical acquisition proof.
                 **({"source_acquisition":{
                     key:proof.get(key) for key in (
                         "state","sha256","size_bytes","preserved_path","final_url",
