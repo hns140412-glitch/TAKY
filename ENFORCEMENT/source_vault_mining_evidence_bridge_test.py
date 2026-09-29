@@ -35,6 +35,12 @@ class VaultToMiningInputTest(unittest.TestCase):
         (report/"INCREMENTAL_QUEUE.json").write_text(json.dumps([row]),encoding="utf8")
         (report/"MINING_INBOX_HANDOFF.json").write_text(json.dumps({"items":[row]}),encoding="utf8")
         (report/"INCREMENTAL_SUMMARY.json").write_text(json.dumps({"queue_count":1,"notion_total":1}),encoding="utf8")
+        current=root/"data"/"notion_incremental"/"CURRENT.json"
+        current.parent.mkdir(parents=True,exist_ok=True)
+        current.write_text(json.dumps({"entries":{pid:{
+            "block_status":"OK","block_fingerprint":fingerprint,
+            "block_snapshot_folder":str(folder),
+            "checked_at":"2026-09-28T01:00:00Z"}}}),encoding="utf8")
         return root,report,pid,sha(original)
 
     def ledger(self,root,report,pid,*,body=b"<html><p>External original</p><script>IGNORE_ME</script></html>",
@@ -69,6 +75,43 @@ class VaultToMiningInputTest(unittest.TestCase):
                 self.assertFalse(receipt[key],key)
             self.assertEqual(receipt["claim_reviews"],[])
             self.assertEqual({name:sha((report/name).read_bytes()) for name in REQUIRED},before)
+
+    def test_adapter_time_does_not_fake_old_capture_recency(self):
+        with tempfile.TemporaryDirectory() as td:
+            root, report, pid, _ = self.case(td, source_url="")
+            receipt = prepare(report, root)
+            snapshot = receipt["source_snapshots"][0]
+            self.assertEqual(snapshot["retrieved_at"],"2026-09-28T01:00:00+00:00")
+            self.assertNotEqual(snapshot["retrieved_at"],receipt["created_at"])
+            self.assertEqual(snapshot["retrieval_state"],"FETCHED")
+            (root/"data"/"notion_incremental"/"CURRENT.json").unlink()
+            unknown = prepare(report, root)
+            self.assertIsNone(unknown["source_snapshots"][0]["retrieved_at"])
+            self.assertEqual(unknown["source_snapshots"][0]["retrieval_state"],
+                             "CAPTURE_TIME_UNVERIFIED")
+            self.assertIn("NOTION_CAPTURE_TIME_NOT_MATCHED_TO_CURRENT_STATE",
+                          unknown["held"][0]["reason"])
+
+    def test_partial_text_kept_with_media_gap_and_not_fake_full(self):
+        with tempfile.TemporaryDirectory() as td:
+            root, report, pid, _ = self.case(td, source_url="")
+            queue=json.loads((report/"INCREMENTAL_QUEUE.json").read_text())
+            folder=Path(queue[0]["block_snapshot_folder"])
+            blocks=json.loads((folder/"blocks.json").read_text())
+            blocks.append({"id":"image-1","type":"image",
+                           "image":{"file":{"url":"https://signed.invalid/example"},"caption":[]},
+                           "has_children":False})
+            (folder/"blocks.json").write_text(json.dumps(blocks),encoding="utf8")
+            receipt=prepare(report,root)
+            self.assertEqual(receipt["counts"]["notion_blocks"],1)
+            snapshot=receipt["source_snapshots"][0]
+            self.assertEqual(snapshot["source_scope"],"NOTION_BLOCK_TEXT_PARTIAL")
+            self.assertEqual(snapshot["source_completeness"],"PARTIAL_UNRESOLVED_CONTENT")
+            self.assertIn("IMAGE_CONTENT_NOT_OCR_EXTRACTED",snapshot["unresolved_parts"])
+            self.assertEqual(snapshot["source_text"],"Source statement from Notion")
+            self.assertTrue(any(x["part"]=="UNRESOLVED_NOTION_MATERIAL"
+                                for x in receipt["held"]))
+            self.assertFalse(receipt["semantic_mining_executed"])
 
     def test_verified_public_bytes_separate_and_script_invisible(self):
         with tempfile.TemporaryDirectory() as td:
