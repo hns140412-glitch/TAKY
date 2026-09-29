@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from architecture_source_probe import run
+from architecture_source_probe import run, source_handoff
 
 HERE = Path(__file__).parent
 BASE = json.loads((HERE/'architecture_growth_backlog.json').read_text(encoding='utf-8'))
@@ -31,6 +31,20 @@ class ProbeTest(unittest.TestCase):
         self.assertTrue(res['snapshot']['index_payload_sha256'])
         self.assertEqual(res['results'][0]['state'],'INDEX_OWNER_SUITABILITY_REVIEW_REQUIRED')
         self.assertFalse(res['results'][0]['may_emit_index_result'])
+    def test_v26_generic_data_path_is_not_raw_and_preserves_owner_file_id(self):
+        row={'source_id':'owner-drive-file-id','source_ref':{'source_id':'owner-drive-file-id','locator':'DATA'},'provenance':{}}
+        handoff=source_handoff(row)
+        self.assertEqual(handoff['source_id'],'owner-drive-file-id')
+        self.assertTrue(handoff['owner_resolution_required'])
+        self.assertIsNone(handoff['specific_locator'])
+        self.assertFalse(handoff['content_claim_allowed'])
+
+    def test_specific_origin_locator_retained_without_claiming_fetch(self):
+        h=source_handoff({'source_ref':{'source_id':'sample-id','locator':'DATA'},
+                          'provenance':{'origin_locator':'owner://raw/source'}})
+        self.assertEqual(h['specific_locator'],'owner://raw/source')
+        self.assertFalse(h['raw_content_retrieved'])
+
     def test_missing_engine_fails(self):
         with self.assertRaises(FileNotFoundError):run(BASE,self.file,Path(self.tmp.name)/'fake.py')
     def test_existing_arbitrary_python_engine_rejected_before_import(self):
