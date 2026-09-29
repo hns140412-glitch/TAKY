@@ -193,7 +193,14 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
     established by Mining Core's evidence-assessed checkpoint.
     """
     selected_ids = set().union(*(_ids(x) for x in selected)) if selected else set()
-    verified = _verified_checkpoint_items(full_frontier, verified_checkpoint)
+    from mining_core import normalize_goal
+    expected_goal_id = normalize_goal(task)["goal_id"]
+    bound_checkpoint = (
+        verified_checkpoint if isinstance(verified_checkpoint, dict)
+        and (verified_checkpoint.get("goal") or {}).get("goal_id") == expected_goal_id
+        else None
+    )
+    verified = _verified_checkpoint_items(full_frontier, bound_checkpoint)
     verifying = {str(x.get("id")): x for x in index_result.get("verification_frontier", [])}
     trace_by_id = {str(x.get("frontier_id")): x for x in index_result.get("trace", [])}
     entries = []
@@ -297,6 +304,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
     limit = DEPTH_LIMIT.get(depth, 0)
     return {
         "schema": "TAKY_MINING_PENDING_ACTIONS_V1",
+        "goal_id": expected_goal_id,
+        "checkpoint_binding_valid": verified_checkpoint is None or bound_checkpoint is not None,
         "items": entries,
         "counts": {
             "total": len(entries),
@@ -332,6 +341,10 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
         return {"state": "HOLD_ROUTE", "frontier": [], "query_plans": []}
     if not isinstance(checkpoint, dict) or checkpoint.get("schema") != "TAKY_MINING_CORE_CHECKPOINT_V1":
         return {"state": "WAIT_VERIFIED_CHECKPOINT", "frontier": [], "query_plans": []}
+    if (pending.get("goal_id") and
+            (checkpoint.get("goal") or {}).get("goal_id") != pending["goal_id"]):
+        return {"state": "WAIT_CHECKPOINT_GOAL_MISMATCH",
+                "frontier": [], "query_plans": []}
     # A caller-provided CLOSED label is not proof. Reassess the evidence with
     # the existing Mining Core and demand source identity + an exact anchor.
     from mining_core import assess_frontier
