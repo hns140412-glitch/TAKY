@@ -56,6 +56,12 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
 def _usable_evidence(evidence:list[dict])->list[dict]:
     out=[]
     for row in evidence or []:
+        # REFERENCE_ONLY applies to an established Index source, not a newly
+        # discovered external candidate. Candidate state always wins.
+        if str(row.get("index_state") or "").upper() in {
+            "CANDIDATE","STAGED","PENDING","HELD","REJECTED"
+        }:
+            continue
         raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "REFERENCE_ONLY").upper()
         cls=LEGACY_UTILIZATION_MAP.get(raw_cls,raw_cls)
         if cls in HOLD_CLASSES:
