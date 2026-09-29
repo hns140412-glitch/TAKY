@@ -49,6 +49,16 @@ class EvidenceTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'EXTRACTION_ROUTE_REQUIRED'):
             packet(self.idx, 'exact-owner-file-id', old, revision='owner-rev-1', query='방수')
 
+    def test_xlsm_source_binding_does_not_execute_macros(self):
+        archive = self.dir / 'sample.xlsm'
+        with zipfile.ZipFile(archive, 'w') as out:
+            out.writestr('xl/worksheets/sheet1.xml',
+                '<worksheet><sheetData><row r="1"><c r="A1" t="inlineStr"><is><t>법규 검토</t></is></c></row></sheetData></worksheet>')
+            out.writestr('xl/vbaProject.bin', b'NEVER_RUN')
+        r = packet(self.idx, 'exact-owner-file-id', archive, revision='owner-rev-1', query='법규')
+        self.assertTrue(r['query_evidence_found'])
+        self.assertEqual(r['extraction_method'], 'OOXML_CELLS_NO_FORMULA_EVALUATION')
+
     def test_hwpx_actual_sections_bind_to_source(self):
         archive = self.dir / 'sample.hwpx'
         with zipfile.ZipFile(archive, 'w') as out:
