@@ -46,17 +46,17 @@
   "observed_central_main_tree_sha": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
   "observed_central_main_tree_truncated": false,
   "exact_asset_basename_paths_in_observed_main": 0,
-  "central_binary_commit_verified": false,
+  "central_binary_commit_verified": true,
   "runtime_app_import_verified": false,
   "actual_render_comparison_verified": false,
   "permission_rights_to_publish_originals_not_assumed": true,
   "approval_recorded_in_library_registry_not_independently_reapproved": true,
-  "claim_ceiling": "TWO_APPROVED_REGISTRY_POINTERS_AND_LOCAL_LIBRARY_PNG_BYTE_IDENTITY_VERIFIED_ONLY",
+  "claim_ceiling": "CENTRAL_DRAFT_BINARY_AND_APP_DRAFT_COPIES_VERIFIED_NOT_RUNTIME",
   "open": [
-    "CENTRAL_REPO_BINARY_REGISTRATION_AND_INTEGRITY",
-    "APPLICATION_EXACT_SHA_IMPORT",
-    "REAL_RENDER_INTERACTION_DESIGN_MATCH",
-    "INDEPENDENT_PRODUCER_GATE_RECEIPT"
+    "CENTRAL_STAGED_OWNER_APPROVAL_AND_MAIN_PROMOTION",
+    "APP_SCREEN_CONTRACT_AND_ACTUAL_RUNTIME_WIRING",
+    "RENDER_INTERACTION_AND_VISUAL_FIDELITY",
+    "INDEPENDENT_PRODUCER_GATE_AND_RELEASE"
   ],
   "no_source_bytes_stored_in_this_repo": true,
   "no_current_write": true,
@@ -104,6 +104,41 @@
     "scope_limit": "EXACT_MAIN_TREE_AND_SELECTED_STATIC_FILES_ONLY; runtime could be dynamic; no device inspection performed",
     "central_registration_upload_status": "OPEN_NO_BINARY_TRANSFER_ROUTE_VERIFIED",
     "temporary_interaccount_transfer": "TEMPORARY_STAGING_COPIES_DELETED; NO_PRODUCTION_OR_CANONICAL_PATH_MODIFIED",
-    "no_changed_app_runtime": true
-  }
+    "no_changed_app_runtime": true,
+    "previous_baseline_note": "App main prior backgrounds unchanged; separate Draft branches now contain exact pinned source copies with no CSS/HTML runtime substitution"
+  },
+  "central_asset_staging": {
+    "repo": "hns140412-glitch/TAKY-ASSETS",
+    "pr": 3,
+    "branch": "stage/approved-learning-environments-2026-09-30",
+    "head": "a251775daac51236193bcbc951ac2f74b561a8a3",
+    "verified_source_binary_commit": "0a54c6004225a1917a5ef6d877acd725644e0f13",
+    "independent_fresh_clone_sha256_and_git_blob_readback": true,
+    "source_count": 2,
+    "main_merged": false
+  },
+  "app_pinned_copy_staging": [
+    {
+      "app": "Hide & Seek",
+      "repo": "hns140412-glitch/Hide-Seek",
+      "pr": 24,
+      "head": "ad84e6e97e09236dfc2b8bd8b8eb441c2e29d5cd",
+      "path": "assets/taky-approved/hide_seek_forest_asset.png",
+      "source_sha256_verified": true,
+      "runtime_import_verified": false,
+      "main_merged": false
+    },
+    {
+      "app": "Snap & Pop",
+      "repo": "hns140412-glitch/Snap-Pop",
+      "pr": 12,
+      "head": "3cdc94e71ec31f37fb30038e87e6f4dd5808bcb8",
+      "path": "assets/taky-approved/snap_pop_beach_asset.png",
+      "source_sha256_verified": true,
+      "runtime_import_verified": false,
+      "main_merged": false
+    }
+  ],
+  "central_binary_commit_scope": "EXACT_DRAFT_BRANCH_ONLY_NOT_MAIN",
+  "temporary_cross_account_transfer_status": "PENDING_EXACT_TEMP_STAGING_CLEANUP"
 }
