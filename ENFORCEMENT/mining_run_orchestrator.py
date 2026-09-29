@@ -304,8 +304,13 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
             prior.get("task_contract") or task,
             carried, list(prior.get("evidence") or []), prior,
         )
-    current_checkpoint = (apply_external_receipts(prior, batch["receipts"])
-                          if batch["receipts"] else prior)
+    current_checkpoint = (
+        apply_external_receipts(
+            prior, batch["receipts"],
+            index_rows=payload.get("index_rows"),
+            index_relations=payload.get("index_relations"),
+        ) if batch["receipts"] else prior
+    )
     next_input = dict(payload)
     next_input.pop("provider_results", None)
     next_input["verified_checkpoint"] = current_checkpoint
