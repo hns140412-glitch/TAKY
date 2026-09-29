@@ -16,6 +16,7 @@ from mining_pending_actions import classify_pending, activate_next_batch
 from mining_provider_execution_loop import build_requests, choose_providers
 from mining_provider_executor import build_execution_request
 from mining_research_assurance import audit_research
+from mining_source_watch import plan_source_work
 from mining_live_execution import execute_batch
 from mining_core import checkpoint as core_checkpoint, apply_external_receipts, normalize_goal
 
@@ -126,7 +127,13 @@ def _learning_proposal(task: dict, memory_prior: dict, receipt: dict) -> dict:
     }
 
 def orchestrate(payload: dict) -> dict:
-    task = apply_to_task(payload.get("task", {}))
+    watch_plan = (plan_source_work(payload.get("source_watch"))
+                  if "source_watch" in payload else None)
+    task_input = dict(payload.get("task") or {})
+    if watch_plan is not None and watch_plan["selected"]:
+        task_input["requirements"] = list(task_input.get("requirements") or []) + [
+            row["question"] for row in watch_plan["selected"]]
+    task = apply_to_task(task_input)
     memory = payload.get("memory", {})
     receipt = payload.get("execution_receipt")
     prior = prepare_next_run(task, memory)
@@ -243,6 +250,7 @@ def orchestrate(payload: dict) -> dict:
         ),
         **depth,
         "search_frontier": frontier,
+        "source_watch_plan": watch_plan,
         "index_first": index_result,
         "external_search_frontier": external_frontier,
         "external_search_required": bool(external_frontier),
@@ -302,6 +310,10 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
 
     initial = orchestrate(payload)
     plan = initial["plan"]
+    watch_plan = plan.get("source_watch_plan")
+    if watch_plan is not None and watch_plan["selected"]:
+        task = {**task, "requirements": list(task.get("requirements") or []) + [
+            row["question"] for row in watch_plan["selected"]]}
     if not plan["execution_allowed"]:
         return {"schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
                 "state": "HOLD_FAILED_ROUTE",
