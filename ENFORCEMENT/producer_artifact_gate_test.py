@@ -23,8 +23,8 @@ class ProducerArtifactGateTests(unittest.TestCase):
         checks = {}
         for key in ("source_trace", "semantic_check", "regression_check", "delivery_check", "visual_check"):
             p = self.root / (key + ".txt")
-            p.write_text(key + " witness")
-            checks[key] = dict(passed=True, evidence_path=p.name)
+            p.write_bytes(b"\\x89PNG\\r\\n\\x1a\\n" + b"sample render") if key == "visual_check" else p.write_text(key + " witness")
+            checks[key] = dict(passed=True, evidence_path=p.name, evidence_sha256=hashlib.sha256(p.read_bytes()).hexdigest())
         import producer_artifact_gate as gate
         return dict(contract_sha256=gate._digest(self.contract), output_sha256=hashlib.sha256(output.read_bytes()).hexdigest(), **checks)
 
@@ -99,6 +99,24 @@ class ProducerArtifactGateTests(unittest.TestCase):
         del receipt["baseline_hashes"]
         evidence = self.evidence()
         self.assertIn("POST_BASELINE_RECEIPT_MISSING", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_visual_text_cannot_claim_render(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        p = self.root / "visual_check.txt"
+        p.write_text("looks good")
+        evidence["visual_check"]["evidence_sha256"] = hashlib.sha256(p.read_bytes()).hexdigest()
+        self.assertIn("POST_VISUAL_CHECK_NOT_RENDER", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_evidence_hash_mismatch_blocks(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        (self.root / "semantic_check.txt").write_text("changed after review")
+        self.assertIn("POST_SEMANTIC_CHECK_EVIDENCE_HASH_MISMATCH", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_approval_string_cannot_self_certify_completion(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "COMPLETE"
+        evidence["human_approval_ref"] = "self-reported"
+        self.assertIn("INDEPENDENT_RESULT_VALIDATION_NOT_IMPLEMENTED", postflight(self.contract, receipt, evidence, self.root)["detected"])
     def test_path_escape_blocks(self):
         self.contract["output_path"] = "../escape.xlsx"
         self.assertIn("PATH_ESCAPES_ROOT", preflight(self.contract, self.root)["detected"])
