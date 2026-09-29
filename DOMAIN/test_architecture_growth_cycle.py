@@ -42,8 +42,13 @@ class CycleTest(unittest.TestCase):
 
     def test_insufficient_index_routes_mining(self):
         i = base_item()
-        i['index_receipt'] = {'checked': True, 'receipt_id': 'idx-002', 'sufficient': False}
+        i['index_receipt'] = {'checked': True, 'receipt_id': 'idx-002', 'sufficient': False, 'index_payload_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'insufficiency_evidence': 'Fixture source applicability review found missing original content.'}
         self.assertEqual(assess(i)['result']['route'], 'MINING_GAP_REQUEST')
+
+    def test_unproved_insufficiency_cannot_request_mining(self):
+        i = base_item()
+        i['index_receipt'] = {'checked': True, 'receipt_id': 'self-asserted', 'sufficient': False}
+        self.assertEqual(assess(i)['detected'], ['INDEX_INSUFFICIENCY_PROOF_REQUIRED'])
 
     def test_sufficient_index_routes_domain_method(self):
         self.assertEqual(assess(indexed_item())['result']['route'], 'DOMAIN_METHOD_SYNTHESIS')
