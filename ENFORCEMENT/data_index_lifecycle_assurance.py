@@ -51,19 +51,20 @@ def _cycle_count(graph: dict[str, set[str]]) -> int:
     # Count nontrivial strongly connected components, not paths or duplicate cycles.
     order: list[str] = []
     seen: set[str] = set()
-    def visit(root: str) -> None:
-        stack = [(root, False)]
+    for root in sorted(graph):
+        if root in seen:
+            continue
+        seen.add(root)
+        stack = [(root, iter(sorted(graph.get(root, ())))) ]
         while stack:
-            node, finished = stack.pop()
-            if finished:
+            node, targets = stack[-1]
+            target = next(targets, None)
+            if target is None:
                 order.append(node)
-            elif node not in seen:
-                seen.add(node)
-                stack.append((node, True))
-                stack.extend((target, False) for target in graph.get(node, ()) if target not in seen)
-    for root in graph:
-        if root not in seen:
-            visit(root)
+                stack.pop()
+            elif target not in seen:
+                seen.add(target)
+                stack.append((target, iter(sorted(graph.get(target, ())))))
     reverse: dict[str, set[str]] = defaultdict(set)
     for origin, targets in graph.items():
         for target in targets:
@@ -230,11 +231,14 @@ def plan_incremental_impact(
     reverse: dict[str, set[str]] = defaultdict(set)
     review_only: dict[str, set[str]] = defaultdict(set)
     for sid, row in by_id.items():
-        for edge in row.get("relations") or []:
+        edges = row.get("relations") or []
+        if not isinstance(edges, list):
+            raise ValueError("IMPACT_RELATIONS_NOT_LIST")
+        for edge in edges:
             if not isinstance(edge, dict):
                 continue
             target = edge.get("target")
-            if target in by_id and target != sid and isinstance(target, str):
+            if isinstance(target, str) and target in by_id and target != sid:
                 if edge.get("type") in DEPENDENCY_EDGES:
                     reverse[target].add(sid)
                 elif edge.get("type") == "RELATED_TO":
