@@ -42,8 +42,24 @@ def _provider_receipt(provider_results, ids: set[str]) -> dict | None:
     return None
 
 
+def _anchored_rows(item: dict, evidence: list[dict]) -> list[dict]:
+    """Eligible sources must themselves have the anchor, not borrow a weak row's."""
+    return [
+        e for e in evidence if isinstance(e, dict)
+        and str(e.get("frontier_id")) in _ids(item)
+        and (e.get("source_identity") or e.get("source_id") or e.get("source_url"))
+        and e.get("excerpt_ref") and (e.get("claim") or e.get("subject"))
+        and e.get("direct_support") is True and e.get("fresh_enough", True) is not False
+    ]
+
+
 def _verified_checkpoint_items(frontier: list[dict], checkpoint: dict | None) -> dict[str, list[str]]:
-    """Re-assess Core evidence: an asserted CLOSED flag or provider success is not proof."""
+    """Reassess BOTH whole evidence and only eligible source-anchored evidence.
+
+    A high-scoring unanchored row plus a separate low-scoring anchored row
+    cannot launder a frontier into EVIDENCE_VERIFIED or release a deferred batch.
+    An asserted CLOSED label or a provider SUCCESS is never sufficient.
+    """
     if not isinstance(checkpoint, dict) or checkpoint.get("schema") != "TAKY_MINING_CORE_CHECKPOINT_V1":
         return {}
     evidence = checkpoint.get("evidence")
@@ -58,18 +74,16 @@ def _verified_checkpoint_items(frontier: list[dict], checkpoint: dict | None) ->
         fid = str(item.get("id") or "")
         if assessed.get(fid, {}).get("status") != "CLOSED" or declared.get(fid, {}).get("status") != "CLOSED":
             continue
-        anchors = [
-            e for e in evidence if isinstance(e, dict)
-            and str(e.get("frontier_id")) in _ids(item)
-            and (e.get("source_identity") or e.get("source_id") or e.get("source_url"))
-            and e.get("excerpt_ref") and (e.get("claim") or e.get("subject"))
-            and e.get("direct_support") is True and e.get("fresh_enough", True) is not False
-        ]
-        if anchors:
-            closed[fid] = list(dict.fromkeys(
-                str(e.get("source_id") or e.get("source_identity") or e.get("source_url"))
-                for e in anchors
-            ))
+        anchors = _anchored_rows(item, evidence)
+        if not anchors:
+            continue
+        # Never use quality/independence from an ineligible sibling row.
+        if assess_frontier([item], anchors)[0]["status"] != "CLOSED":
+            continue
+        closed[fid] = list(dict.fromkeys(
+            str(e.get("source_id") or e.get("source_identity") or e.get("source_url"))
+            for e in anchors
+        ))
     return closed
 
 
@@ -254,6 +268,7 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
             "question": item.get("question") or fid,
             "kind": item.get("kind"),
             "origin": item.get("origin"),
+            "expected_source_filename": item.get("expected_source_filename"),
             "priority": PRIORITY.get(str(item.get("kind") or ""), 7),
             "order": position,
             "required_for_goal": required,
@@ -328,6 +343,7 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
     assessed = {str(x.get("id")): x for x in assess_frontier(selected, evidence)}
     declared = {str(x.get("id")): x for x in checkpoint.get("frontier", [])
                 if isinstance(x, dict)}
+    verified = _verified_checkpoint_items(selected, checkpoint)
     required_selected = {
         str(item.get("frontier_id")) for item in pending.get("items", [])
         if item.get("selected_this_batch") and item.get("required_for_goal")
@@ -344,17 +360,13 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
         if not closed:
             remaining.append(fid)
             continue
-        anchored = any(
-            isinstance(e, dict) and str(e.get("frontier_id")) in _ids(item)
-            and (e.get("source_identity") or e.get("source_id") or e.get("source_url"))
-            and e.get("excerpt_ref") and (e.get("claim") or e.get("subject"))
-            and e.get("direct_support") is True
-            for e in evidence
-        )
-        if not anchored:
+        # The same eligible source evidence must actually cause CLOSED.
+        # Sharing a frontier ID with an unanchored strong row is not enough.
+        if fid not in verified:
             missing_anchors.append(fid)
     if missing_anchors:
         return {"state": "WAIT_SOURCE_ANCHOR", "missing_anchor_ids": missing_anchors,
+                "reason": "ELIGIBLE_ANCHORED_EVIDENCE_NOT_SUFFICIENT",
                 "unresolved_current": remaining, "frontier": [], "query_plans": []}
     if remaining:
         return {"state": "WAIT_CURRENT_BATCH_EVIDENCE", "unresolved_current": remaining,
@@ -371,6 +383,8 @@ def activate_next_batch(pending: dict, selected: list[dict], checkpoint: dict,
     next_frontier = [{
         "id": x["frontier_id"], "decomposition_id": x.get("decomposition_id"),
         "question": x["question"], "kind": x["kind"], "origin": x.get("origin"),
+        **({"expected_source_filename": x["expected_source_filename"]}
+           if x.get("expected_source_filename") else {}),
     } for x in batch]
     return {
         "state": "READY_NEXT_BATCH",
