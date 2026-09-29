@@ -29,11 +29,15 @@ def build_frontier(task: dict, depth: str, *, unbounded=False) -> list[dict]:
     if depth == "D0" and not unbounded:
         return []
     items, seen = [], {}
+    exact_targets={str(x).strip() for x in (task.get("exact_source_targets") or [])
+                   if str(x).strip()}
 
     def add(item: dict) -> None:
         question = str(item.get("question") or item.get("id") or "").strip()
         if not question:
             return
+        if question in exact_targets:
+            item={**item,"expected_source_filename":question}
         if question in seen:
             previous = items[seen[question]]
             refs = [item.get("id"), item.get("decomposition_id"), *(item.get("aliases") or [])]
