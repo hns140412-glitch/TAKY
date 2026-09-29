@@ -84,7 +84,9 @@ def _proof(evidence, snapshot_by_id, reviews_by_id, trusted_reviewers, task):
         or review.get("excerpt_sha256")!=_digest(excerpt)
         or review.get("excerpt_ref")!=evidence.get("excerpt_ref")
         or str(review.get("reviewer_id") or "") not in trusted_reviewers
-        or not review.get("reviewed_at")):
+        or not _date(review.get("reviewed_at"))
+        or not _date(snap.get("retrieved_at"))
+        or _date(review.get("reviewed_at")) < _date(snap.get("retrieved_at"))):
         return "CLAIM_SUPPORT_UNREVIEWED", sid
     if review.get("claim_supported") is not True:
         return "CLAIM_NOT_SUPPORTED", sid
