@@ -25,6 +25,9 @@ def run(backlog: dict, index_file: Path, index_module: Path, *, limit: int = 5) 
         raise ValueError('BACKLOG_SCHEMA_INVALID')
     if not index_file.is_file() or not index_module.is_file():
         raise FileNotFoundError('REAL_INDEX_PAYLOAD_AND_EXISTING_SEARCH_IMPLEMENTATION_REQUIRED')
+    expected_engine = Path(__file__).resolve().parent.parent / 'ENFORCEMENT' / 'data_index_search.py'
+    if index_module.resolve() != expected_engine.resolve():
+        raise ValueError('UNTRUSTED_INDEX_ENGINE_PATH')
     if not 1 <= limit <= 20:
         raise ValueError('LIMIT_INVALID')
     spec = importlib.util.spec_from_file_location('taky_readonly_index_search', index_module)
