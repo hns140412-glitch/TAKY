@@ -289,6 +289,7 @@ class PendingActionTest(unittest.TestCase):
         for request in reqs:
             first.setdefault(request["frontier_id"],request)
         self.assertEqual(len(first),2)
+        self.assertEqual({r["provider"] for r in first.values()},{"PUBLIC_DATA"})
         runtime={}
         for fid,req in first.items():
             if fid=="official A":
@@ -305,7 +306,7 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(find_by_question(result["plan"],"official A")["classification"],"EVIDENCE_VERIFIED")
         self.assertEqual(find_by_question(result["plan"],"official B")["classification"],"EMPTY_PROVIDER_RESULT")
         self.assertEqual({r["frontier_id"] for r in result["plan"]["planned_provider_requests"]},{"official B"})
-        self.assertEqual({r["provider"] for r in result["plan"]["planned_provider_requests"]},{"PUBLIC_DATA"})
+        self.assertEqual({r["provider"] for r in result["plan"]["planned_provider_requests"]},{"WEB"})
         self.assertFalse(result["plan"]["research_complete_eligible"])
         self.assertFalse(result["guards"]["network_calls_performed_by_orchestrator"])
 
@@ -333,13 +334,14 @@ class PendingActionTest(unittest.TestCase):
               "unknown":["official claim"],"max_research_depth":"D1"}
         initial=orchestrate({"task":task,"memory":{}})
         first=initial["plan"]["planned_provider_requests"][0]
+        self.assertEqual(first["provider"],"PUBLIC_DATA")
         out=advance_provider_batch({"task":task,"memory":{}},{
             first["request_id"]:{"state":"FAILED","error":"NETWORK_FAILURE"}
         })
         self.assertEqual(out["state"],"RECONCILED")
         item=find_by_question(out["plan"],"official claim")
         self.assertEqual(item["next_action"]["type"],"TRY_NEXT_PROVIDER")
-        self.assertEqual([r["provider"] for r in out["plan"]["planned_provider_requests"]],["PUBLIC_DATA"])
+        self.assertEqual([r["provider"] for r in out["plan"]["planned_provider_requests"]],["WEB"])
         self.assertNotEqual(out["plan"]["planned_provider_requests"][0]["request_id"],first["request_id"])
         self.assertEqual(len(out["execution_batch"]["results"]),1)
 
