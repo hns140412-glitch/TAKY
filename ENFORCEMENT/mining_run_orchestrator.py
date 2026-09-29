@@ -394,7 +394,22 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
         ) if batch["receipts"] else prior
     )
     next_input = dict(payload)
-    next_input.pop("provider_results", None)
+    # Keep the last observed result per frontier through subsequent batches.
+    # Otherwise an ACCESS_HOLD or unverified receipt from a sibling vanishes
+    # when a different sibling is searched, causing unauthorized/redundant retry.
+    previous_results = payload.get("provider_results")
+    if previous_results is None and isinstance(payload.get("execution_batch"), dict):
+        previous_results = payload["execution_batch"].get("results")
+    retained = {}
+    if isinstance(previous_results, dict):
+        retained.update({str(key):value for key,value in previous_results.items()
+                         if isinstance(value,dict)})
+    elif isinstance(previous_results, list):
+        retained.update({str(row["frontier_id"]):row for row in previous_results
+                         if isinstance(row,dict) and row.get("frontier_id")})
+    retained.update({str(row["frontier_id"]):row for row in batch["results"]
+                     if row.get("frontier_id")})
+    next_input["provider_results"] = retained
     next_input["verified_checkpoint"] = current_checkpoint
     next_input["execution_batch"] = batch
     next_input["provider_attempts"] = history
