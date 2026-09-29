@@ -5,6 +5,7 @@ import json
 import unittest
 from mining_core import checkpoint
 from mining_research_assurance import audit_research
+from mining_run_orchestrator import orchestrate
 
 
 def sha(text): return hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -75,6 +76,31 @@ class ResearchAssuranceTest(unittest.TestCase):
         self.assertFalse(out["real_user_outcome_countable"])
         self.assertEqual(out["next_actions"],[])
         self.assertNotIn("Exact fact",json.dumps(out))
+
+    def test_reviewer_verdict_before_snapshot_and_invalid_time_cannot_pass(self):
+        prior=review("A"); prior["reviewed_at"]="2026-09-28"
+        current=review("B")
+        out=run(rows=[evidence("A"),evidence("B")],
+                snaps=[source("A"),source("B")],
+                reviews=[prior,current])
+        self.assertEqual(out["items"][0]["state"],"CLAIM_SUPPORT_UNREVIEWED")
+        prior["reviewed_at"]="not-a-date"
+        out=run(rows=[evidence("A"),evidence("B")],
+                snaps=[source("A"),source("B")],
+                reviews=[prior,current])
+        self.assertFalse(out["operational_research_ready"])
+
+    def test_request_cannot_grant_itself_trusted_reviewer_authority(self):
+        cp=checkpoint(TASK,FRONTIER,[evidence("A"),evidence("B")])
+        plan=orchestrate({
+            "task":TASK,"verified_checkpoint":cp,
+            "source_snapshots":[source("A"),source("B")],
+            "claim_reviews":[review("A"),review("B")],
+            "trusted_reviewer_ids":["trusted-source-validator"],
+        })["plan"]
+        self.assertFalse(plan["operational_research_ready"])
+        self.assertTrue(all(x["state"]=="CLAIM_SUPPORT_UNREVIEWED"
+                            for x in plan["research_assurance"]["items"]))
 
     def test_wrong_snapshot_hash_or_absent_span_never_passes(self):
         a=source("A");a["source_sha256"]="0"*64
