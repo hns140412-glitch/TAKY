@@ -7,7 +7,6 @@ need external acquisition, while retrieved candidates still require verification
 """
 from __future__ import annotations
 from index_retrieval import retrieve
-from pathlib import PurePosixPath
 from urllib.parse import unquote, urlsplit
 import re
 import unicodedata
@@ -20,7 +19,7 @@ def _filename(value):
     if "://" in v:
         v=urlsplit(v).path
     v=v.replace("\\","/").rsplit("/",1)[-1]
-    return re.sub(r"\\s+"," ",v).casefold().strip()
+    return " ".join(v.split()).casefold().strip()
 
 
 def _exact_source_file(row, expected):
