@@ -35,7 +35,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "침대와 평화 협상에 성공한 작은 탐험가.",
+      "unlock_toast_proposal": "해가 뜨기 전에 내가 먼저 떴다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-004",
@@ -51,7 +55,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "잠깐 쉬고 다시 시작한 둘째 출발.",
+      "unlock_toast_proposal": "밥 먹었으니 연필도 한 번 더!",
+      "wordplay_device": "CALLBACK",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-005",
@@ -67,7 +75,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "준비를 마치고 내 속도로 출발.",
+      "unlock_toast_proposal": "마음은 뒤따라오면 돼!",
+      "wordplay_device": "TALKING_OBJECT",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-006",
@@ -83,7 +95,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "빈틈을 찾아 나만의 작전을 끼워 넣었다.",
+      "unlock_toast_proposal": "시계 구석에 시간이 숨어 있었네?",
+      "wordplay_device": "PUN_WORDPLAY",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-007",
@@ -99,7 +115,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "숨은 여유를 발견한 시간 탐험가.",
+      "unlock_toast_proposal": "없던 시간 같은데, 진짜 있었어!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-008",
@@ -115,7 +135,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "마음이 남은 날의 작은 추가 작전.",
+      "unlock_toast_proposal": "용기가 한 개 더 나왔습니다.",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-009",
@@ -131,7 +155,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "부탁받기 전에 스스로 선택한 첫걸음.",
+      "unlock_toast_proposal": "범인은 스스로 시작한 나였습니다.",
+      "wordplay_device": "SELF_AWARE",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-010",
@@ -147,7 +175,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "생각을 시작으로 이어 붙인 순간.",
+      "unlock_toast_proposal": "출발 신호보다 발이 먼저 움직였다.",
+      "wordplay_device": "CONTRAST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-011",
@@ -163,7 +195,11 @@
       ],
       "status": "REWORK_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "스스로 고른 계획을 자기 언어로 정했다.",
+      "unlock_toast_proposal": "오늘의 작전 승인자: 나!",
+      "wordplay_device": "SELF_AWARE",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-012",
@@ -179,7 +215,13 @@
       ],
       "status": "USER_SELECTED_CANDIDATE_QA_OPEN",
       "source_file_verified": false,
-      "final_approved": false
+      "final_approved": false,
+      "core_detail_proposal": "하고 싶은 순서를 직접 짜 본 날.",
+      "unlock_toast_proposal": "작전지도는 이제 연필에게 맡겨라.",
+      "wordplay_device": "TALKING_OBJECT",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     }
-  ]
+  ],
+  "copy_authority": "BADGE/badge-wow-inspired-copyworking.json",
+  "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED"
 }
