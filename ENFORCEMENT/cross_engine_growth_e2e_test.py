@@ -24,6 +24,21 @@ def write_index(path,rows):
 
 ROUTE={"pass":True,"route_type":"REFERENCE_INTAKE_REVIEW","domain":"learning","consumer":"LEARNING_ENGINE"}
 
+# Separately provisioned fixed TEST_ONLY Index-owner registry; never
+# read self-claimed issuer/verified/evidence from the acquisition request.
+TEST_OWNER_REGISTRY={
+    "SRC-OFFICIAL-1":{"source_ref":"INDEX:SRC-OFFICIAL-1","index_version":"V26+E2E"},
+    "SRC-WRITING-1":{"source_ref":"INDEX:SRC-WRITING-1","index_version":"V26+E2E2"},
+}
+def independent_test_index_owner(sid, proposal):
+    reviewed=TEST_OWNER_REGISTRY.get(sid)
+    if reviewed is None:
+        return None
+    return {"issuer":"INDEXING_OWNER","reviewed":True,"decision":"INDEXED",
+            "source_id":sid,"source_ref":reviewed["source_ref"],
+            "index_version":reviewed["index_version"],
+            "review_evidence_refs":["TEST_ONLY_OWNER_REGISTRY:"+sid]}
+
 class CrossEngineE2E(unittest.TestCase):
     def test_source_to_learning_to_gap_to_mining_to_requery_to_outcome(self):
         with tempfile.TemporaryDirectory() as td:
@@ -39,7 +54,7 @@ class CrossEngineE2E(unittest.TestCase):
                     "recorded_at":"2026-09-25T15:00:00+00:00",
                     "index_result":{"verified":True,"source_id":"SRC-OFFICIAL-1","index_version":"V26+E2E","source_ref":"INDEX:SRC-OFFICIAL-1"}
                 }
-            },ROUTE,root)
+            },ROUTE,root,independent_index_owner_verifier=independent_test_index_owner)
             self.assertTrue(first["pass"])
             self.assertEqual([x["state"] for x in first["emitted"]],["REGISTERED","INDEXED","EVIDENCE_CANDIDATE"])
             self.assertFalse(first["canonical_promotion"])
@@ -110,7 +125,7 @@ class CrossEngineE2E(unittest.TestCase):
                     "recorded_at":"2026-09-25T15:02:00+00:00",
                     "index_result":{"verified":True,"source_id":"SRC-WRITING-1","index_version":"V26+E2E2","source_ref":"INDEX:SRC-WRITING-1"}
                 }
-            },ROUTE,root)
+            },ROUTE,root,independent_index_owner_verifier=independent_test_index_owner)
             self.assertTrue(second["pass"]); self.assertFalse(second["canonical_promotion"])
             rows.append({
                 "source_id":"SRC-WRITING-1","title":"영어 writing rubric process",

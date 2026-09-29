@@ -6,6 +6,11 @@ from pathlib import Path
 
 from reference_intake_executor import execute
 
+def independent_test_owner(sid, proposal):
+    return {"issuer":"INDEXING_OWNER","reviewed":True,"decision":"INDEXED",
+            "source_id":"SRC-1","source_ref":"INDEX:SRC-1",
+            "index_version":"V26+DELTA","review_evidence_refs":["TEST_OWNER_SRC_1"]}
+
 ROUTE={
     "pass": True,
     "route_type": "REFERENCE_INTAKE_REVIEW",
@@ -30,7 +35,7 @@ class ReferenceIntakeExecutorTest(unittest.TestCase):
                         "source_ref":"INDEX:SRC-1"
                     }
                 }
-            }, ROUTE, root)
+            }, ROUTE, root, independent_index_owner_verifier=independent_test_owner)
             self.assertTrue(result["pass"])
             self.assertEqual([x["state"] for x in result["emitted"]],["REGISTERED","INDEXED","EVIDENCE_CANDIDATE"])
             self.assertEqual(result["next_handoff"],"DOMAIN_CONSUMER_REQUERY")

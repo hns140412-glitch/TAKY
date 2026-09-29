@@ -1,0 +1,34 @@
+name: Index Owner Receipt Gate
+
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/reference_index_owner_receipt.py'
+      - 'ENFORCEMENT/reference_index_owner_receipt_test.py'
+      - 'ENFORCEMENT/reference_intake_executor.py'
+      - 'ENFORCEMENT/reference_intake_executor_test.py'
+      - '.github/workflows/index-owner-receipt-gate.yml'
+  push:
+    paths:
+      - 'ENFORCEMENT/reference_index_owner_receipt.py'
+      - 'ENFORCEMENT/reference_index_owner_receipt_test.py'
+      - 'ENFORCEMENT/reference_intake_executor.py'
+      - 'ENFORCEMENT/reference_intake_executor_test.py'
+      - '.github/workflows/index-owner-receipt-gate.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile owner receipt and intake boundary
+        run: python -m py_compile ENFORCEMENT/reference_index_owner_receipt.py ENFORCEMENT/reference_intake_executor.py ENFORCEMENT/reference_index_owner_receipt_test.py ENFORCEMENT/reference_intake_executor_test.py
+      - name: Run forged receipt, identity mismatch and failure-path tests
+        run: python ENFORCEMENT/reference_index_owner_receipt_test.py
+      - name: Preserve existing reference intake regressions
+        run: python ENFORCEMENT/reference_intake_executor_test.py
