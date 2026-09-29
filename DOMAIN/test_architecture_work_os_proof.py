@@ -31,6 +31,9 @@ class ProofTest(unittest.TestCase):
     def test_path_escape(self):
         self.packet['evidence'][0]['relative_path']='../x'
         self.assertIn('PATH_ESCAPE:SOURCE_MANIFEST',preflight(self.packet,self.root)['problems'])
+    def test_nan_metric_rejected(self):
+        self.packet['comparison']['observed']=float('nan')
+        self.assertIn('NONFINITE_COMPARISON_VALUE',preflight(self.packet,self.root)['problems'])
     def test_no_metric(self):
         self.packet.pop('comparison')
         self.assertIn('NUMERIC_BASELINE_OUTCOME_REQUIRED',preflight(self.packet,self.root)['problems'])
