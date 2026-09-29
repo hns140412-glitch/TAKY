@@ -56,6 +56,9 @@ def enrich_from_index(evidence:list[dict], index_rows:list[dict]|None=None,
     out=[]
     for source in evidence or []:
         item=dict(source)
+        # The legacy External Adapter does not reliably retain the receipt's
+        # provider name; entering through this function is the origin evidence.
+        item["evidence_origin"]="PROVIDER_RECEIPT"
         sid=str(item.get("source_id") or "")
         row=rows.get(sid)
         item["provenance_group_reviewed"]=False
