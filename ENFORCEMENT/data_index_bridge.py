@@ -207,6 +207,10 @@ def main() -> int:
     parser.add_argument("--query", required=True)
     parser.add_argument("--context-source-id", help="Explicit read-only one-hop relationship context for an authorized source ID")
     parser.add_argument("--require-relation-type", action="append", default=[], help="Relation type required for this context request; repeatable")
+    parser.add_argument("--emit-context-gaps", action="store_true", help="Emit read-only Index-first gap proposals; never dispatch")
+    parser.add_argument("--context-scope-namespace", help="Explicit namespace for gap proposals")
+    parser.add_argument("--context-privacy-class", choices=["PUBLIC", "AUTHORIZED_PRIVATE", "RESTRICTED"])
+    parser.add_argument("--context-raw-access", choices=["NOT_CHECKED", "ACCESSIBLE", "PARTIAL", "MISSING", "DENIED"], default="NOT_CHECKED")
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--filter", action="append", default=[])
     args = parser.parse_args()
@@ -214,6 +218,8 @@ def main() -> int:
         parser.error("limit must be positive")
     if args.require_relation_type and not args.context_source_id:
         parser.error("--require-relation-type requires --context-source-id")
+    if args.emit_context_gaps and not (args.context_source_id and args.context_scope_namespace and args.context_privacy_class):
+        parser.error("--emit-context-gaps needs --context-source-id, --context-scope-namespace and --context-privacy-class")
     filters = {}
     for arg in args.filter:
         if "=" not in arg:
@@ -244,6 +250,14 @@ def main() -> int:
                 required_types=set(args.require_relation_type))
         except ValueError as exc:
             parser.error(str(exc))
+        if args.emit_context_gaps:
+            from data_index_gap_router import proposals_from_relation_context
+            try:
+                result["index_gap_routing"] = proposals_from_relation_context(
+                    result["relation_context"], scope_namespace=args.context_scope_namespace,
+                    privacy_class=args.context_privacy_class, raw_access=args.context_raw_access)
+            except ValueError as exc:
+                parser.error(str(exc))
     result["overlay_provenance"] = info
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
