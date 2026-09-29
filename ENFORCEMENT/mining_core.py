@@ -12,6 +12,7 @@ from mining_goal_sufficiency import evaluate as evaluate_goal_sufficiency
 from mining_external_adapter import ingest_receipt
 from mining_synthesis import synthesize
 from mining_goal_decomposition import decompose
+from mining_evidence_provenance import enrich_from_index
 
 AUTHORITY={"PRIMARY":4,"OFFICIAL":4,"ACADEMIC":3,"IMPLEMENTATION":2,"COMMUNITY":1,"UNKNOWN":0}
 
@@ -104,12 +105,23 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         # A source can have multiple publication surfaces (HTML/catalog/API JSON).
         # Provider-supplied independent_support_count is only a claim. Never
         # upgrade it beyond independently identifiable source identities.
-        identities={
-            str(row.get("canonical_source_id") or row.get("source_family_id") or
-                row.get("source_identity") or row.get("source_url") or
-                row.get("source_id") or "").strip()
-            for row in raw
-        }
+        # An adapter normally uses a URL/title as source_identity. Different
+        # URLs are not independent publishers. Only explicitly reviewed
+        # canonical groups from Index can increase provider corroboration.
+        provider_evidence=any(row.get("adapter") for row in raw)
+        reviewed_provider_groups=bool(raw) and all(
+            row.get("provenance_group_reviewed") is True and
+            row.get("canonical_source_id") for row in raw
+        )
+        if provider_evidence and not reviewed_provider_groups:
+            identities={"UNVERIFIED_PROVIDER_ORIGIN"} if raw else set()
+        else:
+            identities={
+                str(row.get("canonical_source_id") or row.get("source_family_id") or
+                    row.get("source_identity") or row.get("source_url") or
+                    row.get("source_id") or "").strip()
+                for row in raw
+            }
         identities.discard("")
         independently_identified=len(identities)
         cap=max(1,independently_identified)
@@ -133,6 +145,7 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         out.append({**item,"status":status,"best_evidence_score":best,
                     "evidence_count":len(ev),
                     "independent_source_identity_count":independently_identified,
+                    "canonical_grouping_confirmed": reviewed_provider_groups if provider_evidence else False,
                     "source_identity_required_for_independence":True,
                     "claim_relations":relations,
                     "unresolved_claim_pairs":unresolved})
@@ -165,8 +178,9 @@ def resume(checkpoint_state:dict,new_evidence:list[dict])->dict:
     return checkpoint(task,frontier,evidence,checkpoint_state)
 
 
-def apply_external_receipts(checkpoint_state:dict, receipts:list[dict])->dict:
-    """Ingest provider-independent external receipts then resume from checkpoint."""
+def apply_external_receipts(checkpoint_state:dict, receipts:list[dict], *,
+                            index_rows=None, index_relations=None)->dict:
+    """Ingest provider-independent receipts; enrich only from exact Index source IDs."""
     new=[]; rejected=[]
     for receipt in receipts or []:
         ing=ingest_receipt(receipt)
@@ -174,6 +188,7 @@ def apply_external_receipts(checkpoint_state:dict, receipts:list[dict])->dict:
             new.extend(ing.get("evidence",[]))
         else:
             rejected.append({"frontier_id":receipt.get("frontier_id"),"errors":ing.get("errors",[])})
+    new=enrich_from_index(new,index_rows,index_relations)
     out=resume(checkpoint_state,new)
     out["external_ingest"]={"accepted_evidence":len(new),"rejected_receipts":rejected}
     return out
