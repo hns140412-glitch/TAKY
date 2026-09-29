@@ -31,6 +31,15 @@ class ProofTest(unittest.TestCase):
     def test_path_escape(self):
         self.packet['evidence'][0]['relative_path']='../x'
         self.assertIn('PATH_ESCAPE:SOURCE_MANIFEST',preflight(self.packet,self.root)['problems'])
+    def test_empty_evidence_rejected(self):
+        e=self.packet['evidence'][0]
+        (self.root/e['relative_path']).write_bytes(b'')
+        e['sha256']=hashlib.sha256(b'').hexdigest()
+        self.assertIn('EVIDENCE_FILE_EMPTY:SOURCE_MANIFEST',preflight(self.packet,self.root)['problems'])
+    def test_reused_file_under_different_role_rejected(self):
+        a,b=self.packet['evidence'][:2]
+        b['relative_path']=a['relative_path']; b['sha256']=a['sha256']
+        self.assertIn('EVIDENCE_FILE_REUSED:WORK_OS_ARTIFACT',preflight(self.packet,self.root)['problems'])
     def test_nan_metric_rejected(self):
         self.packet['comparison']['observed']=float('nan')
         self.assertIn('NONFINITE_COMPARISON_VALUE',preflight(self.packet,self.root)['problems'])
