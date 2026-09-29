@@ -17,7 +17,7 @@ class ReplayTest(unittest.TestCase):
         events = [
             ev('source1', 'SOURCE_RECEIPT', 'INDEXING', 'src1', {'id':'fixture-usable','location':'fixture://source','revision':'fixture-v1','role':'SOURCE_EVIDENCE'}),
             ev('e1', 'INDEX_RESULT', 'INDEXING', 'idx-1', {'checked': True, 'sufficient': True,
-                'receipt_id': 'idx-1', 'eligible_source_ids': ['fixture-usable'], 'sufficiency_evidence':'fixture-review', 'index_payload_sha256':'fixture-index-hash'}),
+                'receipt_id': 'idx-1', 'eligible_source_ids': ['fixture-usable'], 'sufficiency_evidence':'fixture-review', 'index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}),
             ev('e2', 'METHOD_CANDIDATE', 'ARCHI_GROW', 'method-1', {'id': 'method-1',
                 'rationale': 'Compare', 'tradeoff': 'Time', 'falsification': 'Missing applicability',
                 'source_ids': ['fixture-usable']}),
@@ -33,20 +33,31 @@ class ReplayTest(unittest.TestCase):
 
     def test_exact_duplicate_event_is_idempotent(self):
         event = ev('e1', 'INDEX_RESULT', 'INDEXING', 'idx-1', {'checked': True,
-            'sufficient': False, 'receipt_id': 'idx-1'})
+            'sufficient': False, 'receipt_id': 'idx-1', 'index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'insufficiency_evidence':'fixture reviewed missing source'})
         self.assertEqual(len(replay(BASE, [event, copy.deepcopy(event)])['event_history']), 1)
 
     def test_id_conflict_rejected(self):
         event = ev('e1', 'INDEX_RESULT', 'INDEXING', 'idx-1', {'checked': True,
-            'sufficient': False, 'receipt_id': 'idx-1'})
+            'sufficient': False, 'receipt_id': 'idx-1', 'index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'insufficiency_evidence':'fixture reviewed missing source'})
         conflict = copy.deepcopy(event); conflict['payload']['sufficient'] = True
         with self.assertRaisesRegex(ValueError, 'EVENT_ID_CONTENT_CONFLICT'):
             replay(BASE, [event, conflict])
 
     def test_hold_cannot_be_bypassed(self):
         event = ev('e5', 'INDEX_RESULT', 'INDEXING', 'idx-5', {'checked': True,
-            'sufficient': False, 'receipt_id': 'idx-5'}, 'AG-HOLD-CTB')
+            'sufficient': False, 'receipt_id': 'idx-5', 'index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'insufficiency_evidence':'fixture review'}, 'AG-HOLD-CTB')
         with self.assertRaisesRegex(ValueError, 'HELD_SCOPE_EVENT_REJECTED'):
+            replay(BASE, [event])
+
+    def test_unproved_insufficiency_rejected(self):
+        event = ev('bad-index', 'INDEX_RESULT', 'INDEXING', 'idx-bad',
+            {'checked': True, 'sufficient': False, 'receipt_id': 'idx-bad'})
+        with self.assertRaisesRegex(ValueError, 'INDEX_SNAPSHOT_SHA256_REQUIRED'):
+            replay(BASE, [event])
+
+    def test_trial_cannot_arrive_before_method(self):
+        event = ev('early-trial', 'WORK_OS_TRIAL', 'WORK_OS', 'trial-early', {'receipt_id':'trial-early'})
+        with self.assertRaisesRegex(ValueError, 'TRIAL_OUT_OF_ORDER'):
             replay(BASE, [event])
 
     def test_outcome_without_trial_rejected(self):
@@ -56,7 +67,7 @@ class ReplayTest(unittest.TestCase):
 
     def test_invalid_issuer_rejected(self):
         event = ev('e7', 'INDEX_RESULT', 'ARCHI_GROW', 'idx-7', {'checked': True,
-            'sufficient': False, 'receipt_id': 'idx-7'})
+            'sufficient': False, 'receipt_id': 'idx-7', 'index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'insufficiency_evidence':'fixture review'})
         with self.assertRaisesRegex(ValueError, 'EVENT_OWNER_OR_TYPE_INVALID'):
             replay(BASE, [event])
 
@@ -69,7 +80,7 @@ class ProofReplayTest(unittest.TestCase):
         from architecture_growth_event_replay import replay
         prefix = [
             ev('src-p','SOURCE_RECEIPT','INDEXING','src-p', {'id':'fixture-usable','location':'fixture://source','revision':'fixture-v1','role':'SOURCE_EVIDENCE'}),
-            ev('p1','INDEX_RESULT','INDEXING','idx-p', {'checked':True,'sufficient':True,'receipt_id':'idx-p','eligible_source_ids':['fixture-usable'], 'sufficiency_evidence':'fixture-review','index_payload_sha256':'fixture-index-hash'}),
+            ev('p1','INDEX_RESULT','INDEXING','idx-p', {'checked':True,'sufficient':True,'receipt_id':'idx-p','eligible_source_ids':['fixture-usable'], 'sufficiency_evidence':'fixture-review','index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}),
             ev('p2','METHOD_CANDIDATE','ARCHI_GROW','method-p',{'id':'method-p','rationale':'fixture','tradeoff':'fixture','falsification':'fixture','source_ids':['fixture-usable']}),
             ev('p3','WORK_OS_TRIAL','WORK_OS','trial-p',{'receipt_id':'trial-p'}),
         ]
@@ -93,7 +104,7 @@ class ProofReplayTest(unittest.TestCase):
             mb=json.dumps(manifest).encode();(root/'manifest.json').write_bytes(mb)
             prefix=[
                 ev('src-p','SOURCE_RECEIPT','INDEXING','src-p', {'id':'fixture-usable','location':'fixture://source','revision':'fixture-v1','role':'SOURCE_EVIDENCE'}),
-            ev('p1','INDEX_RESULT','INDEXING','idx-p', {'checked':True,'sufficient':True,'receipt_id':'idx-p','eligible_source_ids':['fixture-usable'], 'sufficiency_evidence':'fixture-review','index_payload_sha256':'fixture-index-hash'}),
+            ev('p1','INDEX_RESULT','INDEXING','idx-p', {'checked':True,'sufficient':True,'receipt_id':'idx-p','eligible_source_ids':['fixture-usable'], 'sufficiency_evidence':'fixture-review','index_payload_sha256':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}),
                 ev('p2','METHOD_CANDIDATE','ARCHI_GROW','method-p',{'id':'method-p','rationale':'fixture','tradeoff':'fixture','falsification':'fixture','source_ids':['fixture-usable']}),
                 ev('p3','WORK_OS_TRIAL','WORK_OS','trial-p',{'receipt_id':'trial-p'}),
             ]
