@@ -32,6 +32,10 @@ def _result(state, *, current, plan, events, reason=None, last=None):
         "state":state,
         "reason":reason,
         "invocations":len(events),
+        "source_files_preserved":sum(
+            1 for event in events
+            if (event.get("source_acquisition") or {}).get("state")=="ACQUIRED_AND_PRESERVED"
+        ),
         "events":events,
         "checkpoint":(last or {}).get("checkpoint") or current.get("verified_checkpoint"),
         "next_run_input":(last or {}).get("next_run_input") or current,
@@ -106,12 +110,21 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
                         "error_type":type(exc).__name__}
             runtime_results[str(request["request_id"])]=output
+            proof=output.get("source_acquisition")
             events.append({
                 "request_id":request["request_id"],
                 "frontier_id":request["frontier_id"],
                 "provider":provider,
                 "reported_state":str(output["state"]).upper(),
                 "error":output.get("error"),
+                "external_fetch_performed":output.get("external_fetch_performed") is True,
+                # A registered acquisition tool returns physically checked
+                # provenance. Keep it outside the source/claim evidence score.
+                **({"source_acquisition":{
+                    key:proof.get(key) for key in (
+                        "state","sha256","size_bytes","preserved_path","final_url",
+                        "content_type","canonical_promotion")
+                }} if isinstance(proof,dict) else {}),
             })
         step=advance_provider_batch(current,runtime_results)
         last=step
