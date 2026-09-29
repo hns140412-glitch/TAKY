@@ -109,6 +109,9 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
     if category == "PROVIDER_RESULT_UNVERIFIED":
         return {**common, "type": "VALIDATE_PROVIDER_RECEIPT_AND_EXACT_EVIDENCE",
                 "when": "SOURCE_ANCHOR_AND_CLAIM_CHECK"}
+    if category == "SOURCE_IDENTITY_MISMATCH":
+        return {**common, "type": "SEARCH_EXACT_FILE_ACROSS_PERMITTED_SOURCES",
+                "when": "EXACT_FILENAME_AND_BINARY_PROVENANCE_VERIFIED"}
     if category == "SOURCE_REFRESH_REQUIRED":
         return {**common, "type": "REACQUIRE_CURRENT_SOURCE_THEN_INDEX_VERSION_REVIEW",
                 "when": "NEW_PRIMARY_OR_CURRENT_SOURCE_FOUND"}
@@ -125,7 +128,7 @@ def _action(item: dict, category: str, *, source_ids=None, next_provider=None) -
 def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None:
     if category not in {"SOURCE_GAP", "SOURCE_REFRESH_REQUIRED",
                         "CONFLICT_UNRESOLVED", "EMPTY_PROVIDER_RESULT",
-                        "PROVIDER_FAILURE"}:
+                        "PROVIDER_FAILURE", "SOURCE_IDENTITY_MISMATCH"}:
         return None
     if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} and not next_provider:
         return None
@@ -133,7 +136,9 @@ def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None
     return {
         "frontier_id": fid,
         "query": str(item.get("question") or fid),
-        "purpose": "RESOLVE_CONFLICT" if category == "CONFLICT_UNRESOLVED" else "FILL_EVIDENCE_GAP",
+        "purpose": ("ACQUIRE_EXACT_FILE" if category == "SOURCE_IDENTITY_MISMATCH"
+                    else "RESOLVE_CONFLICT" if category == "CONFLICT_UNRESOLVED"
+                    else "FILL_EVIDENCE_GAP"),
         "prefer": SOURCE_PREFER,
         **({"next_provider": next_provider}
            if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} else {}),
@@ -206,6 +211,8 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
         elif rejected:
             causes = {str(x.get("reason") or "").upper() for x in rejected}
             category = ("SOURCE_REFRESH_REQUIRED" if causes & {"STALE", "SUPERSEDED"}
+                        else "SOURCE_IDENTITY_MISMATCH"
+                        if causes == {"SOURCE_IDENTITY_MISMATCH"}
                         else "SOURCE_REVIEW_HOLD")
         else:
             category = "SOURCE_GAP"
@@ -236,7 +243,9 @@ def classify_pending(task: dict, full_frontier: list[dict], selected: list[dict]
             "next_action": action,
             "query_plan": (_query_plan(item, category, next_provider=next_provider)
                            if state == "READY" else None),
-            "completion_evidence": ("A source-anchored, conflict-checked Mining Core frontier CLOSED checkpoint"
+            "completion_evidence": ("Exact named file recovered with readable binary, SHA-256 and origin"
+                                    if category == "SOURCE_IDENTITY_MISMATCH"
+                                    else "A source-anchored, conflict-checked Mining Core frontier CLOSED checkpoint"
                                     if required else "An explicit relevance decision; optional scope is not silently mandatory"),
             "retry_condition": action["when"],
             "automatic_promotion_allowed": False,
