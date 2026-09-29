@@ -21,6 +21,7 @@ If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do n
 - hosted ChatGPT native tool-call automatic preflight: `UNVERIFIED`
 - live hosted runtime fail-closed claim: `PROHIBITED`
 - P0 open architecture issue: `#2 Trusted routing authority + runtime preflight interception`
+- Visual design/UI asset-source default (user decision 2026-09-29): `TKY-ASSET-001` at `MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md`; original reusable assets and layers go to GitHub `TAKY-ASSETS`, app repos keep pinned manifest + verified deployment copies. Image/ZIP alone does not satisfy asset upload or UI implementation; current hosted cross-chat automatic interception remains UNVERIFIED.
 
 ## Current unresolved root issues
 1. Trusted routing authority independent from executor is not implemented.

@@ -92,6 +92,7 @@ Normative execution rules:
 - HANDOFF ≠ SOURCE OF TRUTH. HANDOFF COMPLETE ≠ RESUME VERIFIED.
 - AGREED ≠ SAVED ≠ CANONICAL WRITTEN ≠ IMPLEMENTED ≠ BUILT ≠ DEPLOYED ≠ RELEASE PASS.
 - No canonical modification without applicable authority, validation, rollback protection and post-write verification.
+- For every TAKY-governed mockup/UI or reusable visual asset task, original approved assets and separately useful layers default to the GitHub `TAKY-ASSETS` source repository; app folders hold exact-revision pointers and verified build copies only. Apply `TKY-ASSET-001` (`MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md`) without weakening project-specific Golden UI or Visual ID authority.
 
 ## 0.1 TAKY Universal Operating Basis — HARD LOCK
 
