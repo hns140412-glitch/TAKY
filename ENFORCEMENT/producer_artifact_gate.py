@@ -62,6 +62,18 @@ def preflight(contract: dict, root: Path) -> dict:
     return {"pass": not errors, "detected": errors, "contract_sha256": _digest(contract),
             "baseline_hashes": baseline_hashes if not errors else {}}
 
+def _visual_witness_is_render(path: Path) -> bool:
+    """Reject prose/empty witnesses masquerading as visual proof.
+
+    A valid image/PDF is only a render artifact, not proof of matching design.
+    """
+    head = path.read_bytes()[:12]
+    return (head.startswith(b"\\x89PNG\\r\\n\\x1a\\n")
+            or head.startswith(b"\\xff\\xd8\\xff")
+            or head.startswith(b"%PDF-")
+            or (head.startswith(b"RIFF") and head[8:12] == b"WEBP"))
+
+
 def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dict:
     errors = []
     if not receipt.get("pass") or receipt.get("contract_sha256") != _digest(contract):
@@ -105,14 +117,22 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
                 errors.append("POST_" + key.upper() + "_EVIDENCE_MISSING")
             elif p == output or p in evidence_paths:
                 errors.append("POST_" + key.upper() + "_EVIDENCE_NOT_DISTINCT")
+            elif key == "visual_check" and not _visual_witness_is_render(p):
+                errors.append("POST_VISUAL_CHECK_NOT_RENDER")
+            elif not isinstance(witness.get("evidence_sha256"), str) or witness["evidence_sha256"] != _sha(p):
+                errors.append("POST_" + key.upper() + "_EVIDENCE_HASH_MISMATCH")
             else:
                 evidence_paths.add(p)
         except ValueError:
             errors.append("POST_" + key.upper() + "_EVIDENCE_INVALID")
     if evidence.get("user_as_debugger"):
         errors.append("USER_AS_QA")
-    if evidence.get("claim") in {"COMPLETE", "RELEASE_READY"} and not evidence.get("human_approval_ref"):
-        errors.append("HUMAN_APPROVAL_MISSING")
+    if evidence.get("claim") in {"COMPLETE", "RELEASE_READY"}:
+        if not evidence.get("human_approval_ref"):
+            errors.append("HUMAN_APPROVAL_MISSING")
+        # This gate checks receipts and signatures, not the actual fidelity of a
+        # rendered design. An approval string must never elevate it to PASS.
+        errors.append("INDEPENDENT_RESULT_VALIDATION_NOT_IMPLEMENTED")
     return {"pass": not errors, "detected": errors, "claim_ceiling": "EVIDENCE_RECORDED_NOT_INDEPENDENTLY_VERIFIED" if not errors else "UNVERIFIED"}
 
 def main() -> int:
