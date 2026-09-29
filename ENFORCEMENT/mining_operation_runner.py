@@ -71,10 +71,14 @@ def _result(state, *, current, plan, events, reason=None, last=None):
         "reason":reason,
         "invocations":sum(1 for event in events if event.get("callback_invoked") is True),
         "attempt_records":len(events),
-        "source_files_preserved":sum(
-            1 for event in events
+        # Deduplicate by checked content hash; one original encountered in
+        # multiple search branches is not several acquired unique files.
+        "source_files_preserved":len({
+            (event.get("source_acquisition") or {}).get("sha256")
+            for event in events
             if (event.get("source_acquisition") or {}).get("state")=="ACQUIRED_AND_PRESERVED"
-        ),
+            and (event.get("source_acquisition") or {}).get("sha256")
+        }),
         "events":events,
         "checkpoint":(last or {}).get("checkpoint") or current.get("verified_checkpoint"),
         "next_run_input":(last or {}).get("next_run_input") or current,
