@@ -23,7 +23,7 @@ class ProducerArtifactGateTests(unittest.TestCase):
         checks = {}
         for key in ("source_trace", "semantic_check", "regression_check", "delivery_check", "visual_check"):
             p = self.root / (key + ".txt")
-            p.write_bytes(b"\\x89PNG\\r\\n\\x1a\\n" + b"sample render") if key == "visual_check" else p.write_text(key + " witness")
+            p.write_bytes(b"\x89PNG\r\n\x1a\n" + b"sample render") if key == "visual_check" else p.write_text(key + " witness")
             checks[key] = dict(passed=True, evidence_path=p.name, evidence_sha256=hashlib.sha256(p.read_bytes()).hexdigest())
         import producer_artifact_gate as gate
         return dict(contract_sha256=gate._digest(self.contract), output_sha256=hashlib.sha256(output.read_bytes()).hexdigest(), **checks)
