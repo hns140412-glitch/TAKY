@@ -13,12 +13,31 @@ from mining_depth_router import route_depth
 from mining_growth_loop import propose_growth
 from mining_index_bridge import query_frontier
 from mining_pending_actions import classify_pending, activate_next_batch
-from mining_provider_execution_loop import build_requests
+from mining_provider_execution_loop import build_requests, choose_providers
+from mining_provider_executor import build_execution_request
 from mining_research_assurance import audit_research
 from mining_live_execution import execute_batch
 from mining_core import checkpoint as core_checkpoint, apply_external_receipts, normalize_goal
 
 DEPTH_ORDER = {"D0":0,"D1":1,"D2":2,"D3":3,"D4":4}
+ROUTE_PROVIDER = {
+    "search:web":"WEB", "search:github":"GITHUB",
+    "search:official":"PUBLIC_DATA", "search:public_data":"PUBLIC_DATA",
+    "WEB":"WEB", "GITHUB":"GITHUB", "PUBLIC_DATA":"PUBLIC_DATA",
+}
+
+
+def _route_provider(route) -> str | None:
+    """Interpret supported explicit route signatures, never guess an opaque route."""
+    value=str(route or "").strip()
+    return ROUTE_PROVIDER.get(value) or ROUTE_PROVIDER.get(value.lower())
+
+
+def _apply_route_to_queries(queries:list[dict], selected_route) -> list[dict]:
+    route=_route_provider(selected_route)
+    return [{**q, **({"next_provider":route} if route and not q.get("next_provider") else {})}
+            for q in queries]
+
 
 def build_frontier(task: dict, depth: str, *, unbounded=False) -> list[dict]:
     """Prioritize explicit intent and critical evidence within the depth budget.
@@ -138,6 +157,15 @@ def orchestrate(payload: dict) -> dict:
     provider_results = payload.get("provider_results")
     if provider_results is None and isinstance(payload.get("execution_batch"), dict):
         provider_results = payload["execution_batch"].get("results")
+    # A selected replacement route must reach the actual provider requests,
+    # not stop at an advisory plan label.
+    route = (
+        prior["failure_memory"]["replacement_routes"][0]
+        if prior["next_action"] == "USE_REPLACEMENT_ROUTE"
+        and prior["failure_memory"]["replacement_routes"]
+        else task.get("route_signature")
+    )
+    route_provider = _route_provider(route)
     pending = classify_pending(
         task, full_frontier, frontier, index_result,
         route_blocked=blocked, provider_results=provider_results,
@@ -152,7 +180,9 @@ def orchestrate(payload: dict) -> dict:
         pending, frontier, verified_checkpoint,
         depth=depth["research_depth_decision"], route_blocked=blocked,
     )
-    prepared_requests = build_requests(pending["ready_query_plans"]) if not blocked else []
+    prepared_requests = build_requests(
+        _apply_route_to_queries(pending["ready_query_plans"], route)
+    ) if not blocked else []
     if follow_up.get("state") == "READY_NEXT_BATCH":
         # A verified checkpoint activates the next bounded batch. Consult the
         # shared Index again before proposing any external provider request.
@@ -173,7 +203,9 @@ def orchestrate(payload: dict) -> dict:
         )
         follow_up["index_first"] = next_index
         follow_up["pending_actions"] = next_pending
-        follow_up["planned_provider_requests"] = build_requests(next_pending["ready_query_plans"])
+        follow_up["planned_provider_requests"] = build_requests(
+            _apply_route_to_queries(next_pending["ready_query_plans"], route)
+        )
         follow_up["verification_frontier"] = next_index.get("verification_frontier", [])
         follow_up["external_execution_performed"] = False
     assurance = audit_research(
@@ -186,16 +218,13 @@ def orchestrate(payload: dict) -> dict:
         trusted_reviewer_ids=None,
         source_access_results=payload.get("source_access_results"),
     )
-    route = (
-        prior["failure_memory"]["replacement_routes"][0]
-        if prior["next_action"] == "USE_REPLACEMENT_ROUTE" and prior["failure_memory"]["replacement_routes"]
-        else task.get("route_signature")
-    )
     plan = {
         "goal": task.get("goal"),
         "task_family": task.get("task_family"),
         "next_action": prior["next_action"],
         "selected_route": route,
+        "selected_route_provider": route_provider,
+        "selected_route_executable": bool(route_provider),
         **depth,
         "search_frontier": frontier,
         "index_first": index_result,
