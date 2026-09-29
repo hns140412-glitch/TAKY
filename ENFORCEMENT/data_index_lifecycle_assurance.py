@@ -203,6 +203,11 @@ def plan_incremental_impact(
 ) -> dict[str, Any]:
     """Calculate reverse dependency impact without deleting, fetching or committing."""
     by_id = _source_map(rows)
+    # An incremental delta cannot safely skip old dangling references or
+    # invalid/cyclic recorded version edges; audit the exact prior snapshot.
+    prior = audit_projected_universe(rows)
+    if prior["issue_counts"]:
+        raise ValueError("PRIOR_GRAPH_INTEGRITY_UNRESOLVED")
     if not isinstance(start_cursor, str) or not start_cursor:
         raise ValueError("START_CURSOR_REQUIRED")
     if not isinstance(events, list) or not isinstance(change_feed_exhausted, bool):
