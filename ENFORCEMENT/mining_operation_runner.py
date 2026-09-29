@@ -31,7 +31,8 @@ def _result(state, *, current, plan, events, reason=None, last=None):
         "schema":"TAKY_MINING_OPERATION_RUNNER_V1",
         "state":state,
         "reason":reason,
-        "invocations":len(events),
+        "invocations":sum(1 for event in events if event.get("callback_invoked") is True),
+        "attempt_records":len(events),
         "source_files_preserved":sum(
             1 for event in events
             if (event.get("source_acquisition") or {}).get("state")=="ACQUIRED_AND_PRESERVED"
@@ -85,30 +86,36 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                    else "HOLD_NO_ACTION")
             return _result(state,current=current,plan=plan,events=events,
                            reason="NO_EXECUTABLE_PROVIDER_ACTION",last=last)
-        missing=[str(r.get("provider")) for r in requests
-                 if str(r.get("provider") or "").upper() not in provider_map]
-        if missing:
+        if not provider_map:
             return _result("HOLD_PROVIDER_ADAPTER_UNAVAILABLE",current=current,
                            plan=plan,events=events,
-                           reason="REGISTER_AUTHORIZED_PROVIDER:"+",".join(sorted(set(missing))),
-                           last=last)
-        if len(events)+len(requests)>max_calls:
+                           reason="NO_AUTHORIZED_PROVIDER_REGISTERED",last=last)
+        callable_requests=[r for r in requests if
+                           str(r.get("provider") or "").upper() in provider_map]
+        invoked=sum(1 for event in events if event.get("callback_invoked") is True)
+        # Do not abandon an available sibling merely because another branch
+        # has no registered adapter. Missing adapters are explicit noncalls.
+        if invoked+len(callable_requests)>max_calls:
             return _result("HOLD_BUDGET",current=current,plan=plan,events=events,
                            reason="MAX_PROVIDER_CALLS_REACHED",last=last)
         runtime_results={}
         for request in requests:
             provider=str(request["provider"]).upper()
-            try:
-                output=provider_map[provider](dict(request))
-                if not isinstance(output,dict) or str(output.get("state") or "").upper() not in {
-                    "SUCCESS","EMPTY","FAILED"
-                }:
-                    output={"state":"FAILED","error":"INVALID_PROVIDER_RESULT"}
-            except Exception as exc:
-                # Never mistake an exception for successful research, never
-                # copy exception text (may contain credentials or raw content).
-                output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
-                        "error_type":type(exc).__name__}
+            was_called=provider in provider_map
+            if not was_called:
+                output={"state":"FAILED","error":"PROVIDER_ADAPTER_UNAVAILABLE"}
+            else:
+                try:
+                    output=provider_map[provider](dict(request))
+                    if not isinstance(output,dict) or str(output.get("state") or "").upper() not in {
+                        "SUCCESS","EMPTY","FAILED"
+                    }:
+                        output={"state":"FAILED","error":"INVALID_PROVIDER_RESULT"}
+                except Exception as exc:
+                    # Never treat a child exception as research completion.
+                    # Avoid copying exception text (may carry credentials).
+                    output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
+                            "error_type":type(exc).__name__}
             runtime_results[str(request["request_id"])]=output
             proof=output.get("source_acquisition")
             events.append({
@@ -117,9 +124,9 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 "provider":provider,
                 "reported_state":str(output["state"]).upper(),
                 "error":output.get("error"),
+                "callback_invoked":was_called,
                 "external_fetch_performed":output.get("external_fetch_performed") is True,
-                # A registered acquisition tool returns physically checked
-                # provenance. Keep it outside the source/claim evidence score.
+                # Physical acquisition receipt is distinct from claim support.
                 **({"source_acquisition":{
                     key:proof.get(key) for key in (
                         "state","sha256","size_bytes","preserved_path","final_url",
