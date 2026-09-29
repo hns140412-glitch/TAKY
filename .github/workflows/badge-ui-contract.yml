@@ -2,10 +2,8 @@ name: Badge UI contract checks
 on:
   pull_request:
     paths:
-      - 'BADGE/ui/**'
-      - 'BADGE/assets/**'
-      - 'BADGE/badge-visual-renderer.js'
-      - 'BADGE/badge-visual-renderer.test.js'
+      - 'BADGE/**'
+      - '.github/workflows/badge-ui-contract.yml'
   workflow_dispatch:
 jobs:
   badge-contract:
@@ -41,6 +39,10 @@ jobs:
           python-version: '3.12'
       - name: Install isolated SVG raster QA dependencies
         run: python -m pip install cairosvg pillow
+      - name: Hard-block invented or unreviewed production art bytes
+        run: |
+          python BADGE/assets/verify_art_admission.py
+          python BADGE/assets/verify_art_admission_test.py
       - name: Raster integration QA at 64/120/200/320 px
         run: python BADGE/ui/render_individual_art_60.py
       - name: Archive 60 separate illustration previews
