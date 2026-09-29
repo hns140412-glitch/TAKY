@@ -130,6 +130,10 @@ class LocalAttemptJournal:
         except (OSError,ValueError,TypeError,KeyError):
             return None
 
+    def will_invoke(self,request):
+        """For preflight budget only; existing INTENT/corrupt entries never rerun."""
+        return not self._path(request).exists()
+
     def execute(self,request,provider_fn):
         """Return (safe result, actual callback invoked, replayed receipt).
 
@@ -147,7 +151,21 @@ class LocalAttemptJournal:
             if saved is None:
                 return {"state":"FAILED","error":"CORRUPT_ATTEMPT_JOURNAL"},False,False
             if saved["state"]=="RECEIPT":
-                return saved["result"],False,True
+                result=saved["result"]
+                proof=result.get("source_acquisition") or {}
+                if proof.get("state")=="ACQUIRED_AND_PRESERVED":
+                    # A cached binary-acquisition receipt without its original
+                    # bytes is NOT a successful replay. Never follow arbitrary
+                    # paths or trust stale claims.
+                    try:
+                        source=Path(proof["preserved_path"])
+                        size=int(proof["size_bytes"])
+                        if (not source.is_file() or source.stat().st_size!=size
+                            or _hash(source.read_bytes())!=proof["sha256"]):
+                            raise ValueError("STALE_OR_CHANGED_ORIGINAL")
+                    except (OSError,KeyError,ValueError,TypeError):
+                        return {"state":"FAILED","error":"SOURCE_RECEIPT_STALE"},False,False
+                return result,False,True
             return {"state":"FAILED","error":"IN_FLIGHT_UNCERTAIN"},False,False
         with os.fdopen(fd,"wb") as out:
             raw=(json.dumps(intent,sort_keys=True,ensure_ascii=False)+"\n").encode("utf-8")
