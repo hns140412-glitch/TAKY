@@ -79,6 +79,26 @@ class ProducerArtifactGateTests(unittest.TestCase):
         evidence = self.evidence()
         evidence["claim"] = "COMPLETE"
         self.assertIn("HUMAN_APPROVAL_MISSING", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_source_mutation_after_pre_blocks(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        (self.root / "source.txt").write_text("Modified source")
+        self.assertIn("POST_SOURCE_REF_CHANGED", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_authority_mutation_after_pre_blocks(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        (self.root / "authority.txt").write_text("Modified approval")
+        self.assertIn("POST_AUTHORITY_REF_CHANGED", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_shared_evidence_file_does_not_launder_multiple_checks(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["visual_check"]["evidence_path"] = evidence["semantic_check"]["evidence_path"]
+        self.assertIn("POST_VISUAL_CHECK_EVIDENCE_NOT_DISTINCT", postflight(self.contract, receipt, evidence, self.root)["detected"])
+    def test_forged_baseline_free_receipt_blocks(self):
+        receipt = preflight(self.contract, self.root)
+        del receipt["baseline_hashes"]
+        evidence = self.evidence()
+        self.assertIn("POST_BASELINE_RECEIPT_MISSING", postflight(self.contract, receipt, evidence, self.root)["detected"])
     def test_path_escape_blocks(self):
         self.contract["output_path"] = "../escape.xlsx"
         self.assertIn("PATH_ESCAPES_ROOT", preflight(self.contract, self.root)["detected"])
