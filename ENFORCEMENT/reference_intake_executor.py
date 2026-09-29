@@ -15,7 +15,9 @@ import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
+
+from reference_index_owner_receipt import bind_verified_index_result
 
 ACQUISITION_STATES = {
     "ACQUIRED_AND_PRESERVED",
@@ -107,6 +109,8 @@ def execute(
     record: dict[str, Any],
     route_result: dict[str, Any],
     repo_root: Path,
+    *,
+    independent_index_owner_verifier: Callable[[str, dict], object] | None = None,
 ) -> dict[str, Any]:
     if route_result.get("pass") is not True or route_result.get("route_type") != "REFERENCE_INTAKE_REVIEW":
         return {"pass": False, "detected": ["REFERENCE_INTAKE_ROUTE_REQUIRED"]}
@@ -197,9 +201,13 @@ def execute(
             "canonical_promotion": False,
         }
 
-    index_result = execution.get("index_result")
-    indexed = isinstance(index_result, dict) and index_result.get("verified") is True
-    if not indexed:
+    # Provider-side `verified` is a claim, not an Indexing owner receipt.
+    # In particular, source A must never be written INDEXED using source B's
+    # index_result. Unconfigured reviewer preserves REGISTERED, not silent loss.
+    index_binding = bind_verified_index_result(
+        record, execution.get("index_result"), independent_index_owner_verifier
+    )
+    if not index_binding.get("ok"):
         ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         return {
             "pass": True,
@@ -207,8 +215,10 @@ def execute(
             "emitted": emitted,
             "ledger_path": str(LEDGER_RELATIVE_PATH),
             "next_handoff": "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+            "index_guard_reason": index_binding.get("reason"),
             "canonical_promotion": False,
         }
+    index_result = index_binding["result"]
 
     emitted.append(_append(
         ledger,
@@ -222,6 +232,8 @@ def execute(
             "duplicate_relation": index_result.get("duplicate_relation"),
             "version_relation": index_result.get("version_relation"),
             "source_ref": index_result.get("source_ref"),
+            "index_review_issuer": index_result.get("review_issuer"),
+            "index_review_evidence_refs": index_result.get("review_evidence_refs"),
         },
     ))
 

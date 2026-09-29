@@ -6,6 +6,17 @@ from pathlib import Path
 
 from reference_intake_executor import execute
 
+def fixture_index_owner(source_id, proposal):
+    # Independent TEST-ONLY registry: no verdict derives from input.verified.
+    registry={"SRC-1":("V26+DELTA","INDEX:SRC-1","TEST_INDEX_OWNER_PACKET_01")}
+    row=registry.get(source_id)
+    if not row:return None
+    version,source_ref,evidence_ref=row
+    return {"issuer":"INDEXING_OWNER","reviewed":True,"decision":"INDEXED",
+            "source_id":source_id,"index_version":version,
+            "source_ref":source_ref,"review_evidence_refs":[evidence_ref]}
+
+
 ROUTE={
     "pass": True,
     "route_type": "REFERENCE_INTAKE_REVIEW",
@@ -30,7 +41,7 @@ class ReferenceIntakeExecutorTest(unittest.TestCase):
                         "source_ref":"INDEX:SRC-1"
                     }
                 }
-            }, ROUTE, root)
+            }, ROUTE, root, independent_index_owner_verifier=fixture_index_owner)
             self.assertTrue(result["pass"])
             self.assertEqual([x["state"] for x in result["emitted"]],["REGISTERED","INDEXED","EVIDENCE_CANDIDATE"])
             self.assertEqual(result["next_handoff"],"DOMAIN_CONSUMER_REQUERY")
