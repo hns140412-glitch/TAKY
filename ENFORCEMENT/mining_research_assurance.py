@@ -24,6 +24,7 @@ ACTION = {
     "EXACT_SPAN_MISSING": "RECOVER_EXACT_PASSAGE",
     "CLAIM_SUPPORT_UNREVIEWED": "VERIFY_CLAIM_AGAINST_EXACT_SOURCE",
     "CLAIM_NOT_SUPPORTED": "CORRECT_CLAIM_AND_REOPEN_RESEARCH",
+    "GROUNDED_EVIDENCE_INSUFFICIENT": "RESEARCH_WITH_VERIFIED_SOURCE_AND_CLAIM",
     "FRESHNESS_UNVERIFIED": "CHECK_OFFICIAL_CURRENT_VERSION",
     "STALE_SOURCE": "REACQUIRE_CURRENT_SOURCE",
     "ACCESS_HOLD": "PRESERVE_HOLD_AND_FIND_AUTHORIZED_ALTERNATIVE",
@@ -149,10 +150,18 @@ def audit_research(task:dict, full_frontier:list[dict], checkpoint=None, *,
             if not candidates: state="EVIDENCE_MISSING";sid=""
             else:
                 proofs=[_proof(e,snapshots,reviews,allowed,task) for e in candidates]
+                grounded=[{**e, "frontier_id":actual_id} for e,p in zip(candidates,proofs)
+                          if p[0]=="SOURCE_GROUNDED"]
                 state,sid=next((p for p in proofs if p[0]=="SOURCE_GROUNDED"),proofs[0])
-                if state!="SOURCE_GROUNDED":
-                    # An explicit failed independent claim check outranks any
-                    # merely missing snapshot/claim review.
+                if grounded:
+                    # A review of a weak anchored source is not enough when
+                    # the checkpoint's closure actually came from a different,
+                    # unreviewed (or unacquired) high-scoring source. Assess
+                    # the independently grounded subset against the same Core.
+                    from mining_core import assess_frontier
+                    if assess_frontier([item],grounded)[0]["status"]!="CLOSED":
+                        state="GROUNDED_EVIDENCE_INSUFFICIENT"
+                if state not in {"SOURCE_GROUNDED","GROUNDED_EVIDENCE_INSUFFICIENT"}:
                     failed=next((p for p in proofs if p[0]=="CLAIM_NOT_SUPPORTED"),None)
                     if failed: state,sid=failed
         items.append({"frontier_id":actual_id,"required_id":fid,
