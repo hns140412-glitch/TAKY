@@ -14,6 +14,7 @@ from mining_growth_loop import propose_growth
 from mining_index_bridge import query_frontier
 from mining_pending_actions import classify_pending, activate_next_batch
 from mining_provider_execution_loop import build_requests
+from mining_research_assurance import audit_research
 from mining_live_execution import execute_batch
 from mining_core import checkpoint as core_checkpoint, apply_external_receipts, normalize_goal
 
@@ -171,6 +172,13 @@ def orchestrate(payload: dict) -> dict:
         follow_up["planned_provider_requests"] = build_requests(next_pending["ready_query_plans"])
         follow_up["verification_frontier"] = next_index.get("verification_frontier", [])
         follow_up["external_execution_performed"] = False
+    assurance = audit_research(
+        task, full_frontier, verified_checkpoint,
+        source_snapshots=payload.get("source_snapshots"),
+        claim_reviews=payload.get("claim_reviews"),
+        trusted_reviewer_ids=payload.get("trusted_reviewer_ids"),
+        source_access_results=payload.get("source_access_results"),
+    )
     route = (
         prior["failure_memory"]["replacement_routes"][0]
         if prior["next_action"] == "USE_REPLACEMENT_ROUTE" and prior["failure_memory"]["replacement_routes"]
@@ -190,6 +198,8 @@ def orchestrate(payload: dict) -> dict:
         "unplanned_critical_frontier_ids": unplanned_critical,
         "unplanned_required_frontier_ids": unplanned_required,
         "pending_actions": pending,
+        "research_assurance": assurance,
+        "operational_research_ready": assurance["operational_research_ready"],
         "next_batch_preview": pending["next_batch_preview"],
         "follow_up_activation": follow_up,
         "planned_provider_requests": prepared_requests,
