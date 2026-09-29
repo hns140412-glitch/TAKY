@@ -28,6 +28,10 @@ jobs:
         run: node BADGE/badge-visual-renderer.test.js
       - name: Separate badge asset registry and overlay-slot guards
         run: python3 BADGE/assets/test_badge_assets.py
+      - name: Enforce 60 badge art rework truth and negative fixtures
+        run: |
+          python3 BADGE/assets/verify_visual_rework_queue.py
+          python3 BADGE/assets/verify_visual_rework_queue_test.py
       - name: 60 individual source-specific draft bindings and offline inspector
         run: python3 BADGE/ui/test_dev_bindings_60.py
       - name: Independently-authored 60 artwork structural QA
