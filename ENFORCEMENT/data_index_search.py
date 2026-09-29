@@ -486,6 +486,13 @@ def search(
                 "title": r.get("canonical_title"),
                 "source_family": r.get("source_family"),
                 "source_type": r.get("source_type"),
+                "classification_provenance": {
+                    "source_family": (r.get("field_lineage") or {}).get("source_family")
+                        or "NOT_ATTESTED_IN_SEARCH_VIEW",
+                    "short_summary": (r.get("field_lineage") or {}).get("short_summary")
+                        or "NOT_ATTESTED_IN_SEARCH_VIEW",
+                    "source_review_state": r.get("source_review_state") or r.get("review_state"),
+                },
                 "authority_class": r.get("authority_class"),
                 "current_relation": r.get("current_relation"),
                 "detail_available": r.get("detail_available"),
