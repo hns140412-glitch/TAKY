@@ -40,7 +40,9 @@ assert items[0]["current_relation"] == "EXTERNAL_BRIDGE_STAGED"
 assert "GRADE_1_2" in items[0]["domain_facets"]
 r = search(items, STUDENT, limit=10)
 assert r["results"][0]["source_id"] == STUDENT
-assert {v["source_id"] for v in r["results"]} == {STUDENT, TEACHER}
+# A staged metadata receipt is not an independent Indexing-owner rank receipt.
+assert {v["source_id"] for v in r["results"]} == {STUDENT}
+assert r["relation_rank_gate"] == "NO_INDEPENDENT_VALIDATED_RELATION_KEYS"
 assert r["results"][0]["detail_escalation"]["stage"] == "RAW_REQUIRED"
 # Bridge proof is metadata-scoped and must never become production/CURRENT authority.
 from data_index_relation_context import assemble_relation_context
