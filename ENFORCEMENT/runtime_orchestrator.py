@@ -28,6 +28,7 @@ from reference_acquisition_adapter import acquire as acquire_reference
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
 from behavioral_eval import evaluate as evaluate_behavior
 from trace_to_regression import build_case as build_regression_case
+from producer_artifact_gate import preflight as producer_artifact_preflight, postflight as producer_artifact_postflight
 
 PRIVILEGED_ACTIONS = {
     "GOVERNANCE_WRITE",
@@ -134,6 +135,29 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
     gate = run_c2s_preflight(effective_record, repo_root, coverage_record)
     state, runtime_failures = derive_runtime_state(effective_record)
     detected = list(dict.fromkeys(list(gate.get("detected", [])) + runtime_failures))
+
+    # Explicit artifact-producing route: PRE before producer dispatch, POST for a
+    # supplied actual output/evidence. This does NOT intercept hosted ChatGPT.
+    artifact_gate_result = None
+    artifact_contract = effective_record.get("artifact_contract")
+    if effective_record.get("artifact_production") is True or artifact_contract is not None:
+        if not isinstance(artifact_contract, dict):
+            detected.append("ARTIFACT_PRE_CONTRACT_MISSING")
+        else:
+            artifact_gate_result = producer_artifact_preflight(artifact_contract, repo_root)
+            detected.extend(artifact_gate_result.get("detected", []))
+            if effective_record.get("artifact_phase") == "POST":
+                evidence = effective_record.get("artifact_evidence")
+                receipt = effective_record.get("artifact_pre_receipt")
+                if not isinstance(evidence, dict) or not isinstance(receipt, dict):
+                    detected.append("ARTIFACT_POST_EVIDENCE_OR_RECEIPT_MISSING")
+                else:
+                    artifact_gate_result = producer_artifact_postflight(
+                        artifact_contract, receipt, evidence, repo_root
+                    )
+                    detected.extend(artifact_gate_result.get("detected", []))
+            elif effective_record.get("artifact_phase", "PRE") != "PRE":
+                detected.append("ARTIFACT_PHASE_INVALID")
 
     context_firewall_result = None
     worker_context = effective_record.get("worker_context")
@@ -545,6 +569,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "learning_evidence_gap_route": learning_gap_result,
         "behavioral_eval": behavioral_eval_result,
         "regression_capture": regression_capture_result,
+        "producer_artifact_gate": artifact_gate_result,
         "claim_ceiling": "CONTROLLED_REPOSITORY_RUNTIME",
         "reference_intake_fetch_verified": bool(
             reference_acquisition_result and reference_acquisition_result.get("pass")
