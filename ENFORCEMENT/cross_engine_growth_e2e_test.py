@@ -13,7 +13,25 @@ def node_call(mode,payload):
 const fs=require('fs');
 const Runtime=require(process.argv[1]);
 const input=JSON.parse(fs.readFileSync(0,'utf8'));
-const out=process.argv[2]==='outcome' ? Runtime.applyOutcome(input) : Runtime.derive(input);
+// Explicit TEST_ONLY registry outside the input payload; no requester self-verification.
+const TEST_OWNER_ROWS={
+ 'SRC-OFFICIAL-1':{source_ref:'INDEX:SRC-OFFICIAL-1',
+   source_family:'OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS',source_type:'OFFICIAL_CURRICULUM',
+   authority_class:'OFFICIAL',provenance:['OFFICIAL_STANDARD_REF'],
+   detail_anchor:'DETAIL:SRC-OFFICIAL-1#standard'},
+ 'SRC-WRITING-1':{source_ref:'INDEX:SRC-WRITING-1',
+   source_family:'STRUCTURED_WRITING_CORPUS',source_type:'OFFICIAL_WRITING_REFERENCE',
+   authority_class:'OFFICIAL',provenance:['WRITING_CORPUS_SOURCE_REF'],
+   detail_anchor:'DETAIL:SRC-WRITING-1#rubric'}
+};
+function independentTestOwner(sid,ref){
+ const row=TEST_OWNER_ROWS[sid];
+ if(!row || row.source_ref!==ref)return null;
+ return {...row,issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',
+   domain_use_authorized:true,source_id:sid,index_version:'TEST_ONLY_1',
+   review_evidence_refs:['TEST_ONLY_OWNER:'+sid]};
+}
+const out=process.argv[2]==='outcome' ? Runtime.applyOutcome(input) : Runtime.derive(input,independentTestOwner);
 process.stdout.write(JSON.stringify(out));
 """
     p=subprocess.run(["node","-e",script,str(NODE_RUNTIME),mode],input=json.dumps(payload,ensure_ascii=False),text=True,capture_output=True,check=True)
