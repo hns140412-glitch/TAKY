@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """The runner invokes real registered callables, not pre-injected fake dispatch claims."""
 import unittest
+import tempfile
+from pathlib import Path
 from mining_operation_runner import run_with_providers
 
 
@@ -159,6 +161,26 @@ class OperationRunnerTest(unittest.TestCase):
         self.assertEqual(out["state"],"HOLD_BUDGET")
         self.assertEqual(out["invocations"],1)
         self.assertEqual(len(out["next_run_input"]["provider_attempts"]),1)
+
+    def test_provider_cannot_claim_acquired_file_count_without_retrievable_bytes(self):
+        with tempfile.TemporaryDirectory() as td:
+            fake=Path(td)/"file.pdf"  # intentionally never created
+            def spoof(request):
+                return {**found(request),"source_acquisition":{
+                    "state":"ACQUIRED_AND_PRESERVED",
+                    "sha256":"a"*64,"size_bytes":123,
+                    "preserved_path":str(fake),
+                    "final_url":"https://publisher.example/file.pdf",
+                    "canonical_promotion":False,
+                }}
+            out=run_with_providers(payload("A"),{"WEB":spoof})
+            self.assertEqual(out["source_files_preserved"],0)
+            self.assertEqual(out["events"][0]["source_acquisition_integrity"],
+                             "REJECTED_UNVERIFIED_RECEIPT")
+            self.assertNotIn("source_acquisition",out["events"][0])
+            self.assertFalse(out["operational_research_ready"])
+            self.assertEqual(len(out["checkpoint"]["evidence"]),1,
+                             "Discovery candidate is preserved but not acquired-file proof.")
 
     def test_memory_replacement_is_actual_invoked_provider_not_just_plan_text(self):
         memory={"failures":[{
