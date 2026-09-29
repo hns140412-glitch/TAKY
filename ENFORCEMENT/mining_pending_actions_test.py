@@ -63,6 +63,28 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(item["excluded_source_candidates"][0]["reason"], "STALE")
         self.assertTrue(p["planned_provider_requests"])
 
+    def test_existing_source_strategy_actually_changes_dispatched_provider_by_need(self):
+        cases=[
+            ("official regulation latest text","RULE","PUBLIC_DATA"),
+            ("runtime implementation example in repository","IMPLEMENTATION","GITHUB"),
+            ("community experience review","EXPERIENCE","WEB"),
+        ]
+        for question,need,provider in cases:
+            with self.subTest(question=question):
+                p=plan({"task_family":"GENERAL_RESEARCH","goal":"compare evidence routes",
+                        "unknown":[question],"max_research_depth":"D1"})
+                entry=find_by_question(p,question)
+                self.assertEqual(entry["query_plan"]["evidence_need"],need)
+                self.assertEqual(p["planned_provider_requests"][0]["provider"],provider)
+                self.assertEqual(p["planned_provider_requests"][0]["frontier_id"],question)
+
+    def test_explicit_exact_file_goes_to_authoritative_discovery_before_generic_web(self):
+        question="초등 수학과 서논술형 평가 도움자료.pdf"
+        p=plan({"task_family":"SOURCE_ACQUISITION","goal":"recover original attachment",
+                "unknown":[question],"exact_source_targets":[question]})
+        self.assertEqual(find_by_question(p,question)["query_plan"]["prefer"][0],"OFFICIAL")
+        self.assertEqual(p["planned_provider_requests"][0]["provider"],"PUBLIC_DATA")
+
     def test_conflict_requires_independent_counterevidence_not_a_false_close(self):
         p = plan({"task_family": "GENERAL_RESEARCH", "goal": "conflicting guidance",
                   "conflict": ["two official sources disagree"]})
