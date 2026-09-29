@@ -29,7 +29,14 @@ def orchestrate_learning(payload:dict)->dict:
         "observations":payload.get("observations") or [],
     }
     runtime=run_learning_cycle(runtime_payload)
-    gap=runtime.get("evidence_gap") or retrieval.get("evidence_gap")
+    # A runtime policy gap must not erase the original Index search question.
+    gap=(dict(retrieval.get("evidence_gap") or {}) | dict(runtime.get("evidence_gap") or {})) or None
+    if gap and not gap.get("query"):
+        gap["query"]=str(request.get("query") or request.get("learning_context") or "").strip()
+    if gap and request.get("minimum_authority") and not gap.get("minimum_authority"):
+        gap["minimum_authority"]=request["minimum_authority"]
+    if gap and request.get("minimum_freshness") and not gap.get("minimum_freshness"):
+        gap["minimum_freshness"]=request["minimum_freshness"]
     outcome_observation=None
     growth_memory=None
     history=list(payload.get("learning_memory") or [])
