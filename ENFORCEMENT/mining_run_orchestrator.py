@@ -176,7 +176,10 @@ def orchestrate(payload: dict) -> dict:
         task, full_frontier, verified_checkpoint,
         source_snapshots=payload.get("source_snapshots"),
         claim_reviews=payload.get("claim_reviews"),
-        trusted_reviewer_ids=payload.get("trusted_reviewer_ids"),
+        # Never take reviewer authority from a caller-supplied research payload.
+        # A host with verified reviewer identity may invoke audit_research
+        # separately with its authenticated, server-owned policy.
+        trusted_reviewer_ids=None,
         source_access_results=payload.get("source_access_results"),
     )
     route = (
