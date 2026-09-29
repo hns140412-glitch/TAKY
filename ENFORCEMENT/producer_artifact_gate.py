@@ -79,6 +79,7 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
                 errors.append("POST_" + key.upper() + "_INVALID")
     if evidence.get("contract_sha256") != _digest(contract):
         errors.append("POST_CONTRACT_BINDING_MISSING")
+    output = None
     try:
         output = _rooted(root, contract.get("output_path"))
         if not output.is_file() or not output.stat().st_size:
