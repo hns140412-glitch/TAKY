@@ -127,9 +127,9 @@ def assess(item):
         return {'pass': True, 'result': _route(item, 'REAL_PROOF_GAP', 'WORK_OS',
             'Independently verify a real source-backed project result and regression before domain adoption review.',
             'Real project/REV, independent verification and regression receipt.', blockers=['PASS_CLAIM_NOT_REAL_PROJECT_PROVEN'])}
-    return {'pass': True, 'result': _route(item, 'HUMAN_ADOPTION_REVIEW', 'ARCHI_GROW',
-        'Review as candidate for existing CURRENT_BEST/FRONTIER owner; never self-promote.',
-        'Recorded human approval, applicability, superseded method and rollback conditions.',
+    return {'pass': True, 'result': _route(item, 'EVIDENCE_AUTHENTICITY_REVIEW', 'WORK_OS',
+        'Verify source-owner identity, independent QA substance, metric acceptance and project/revision against owner-held records before requesting adoption review.',
+        'Owner-attested independent review, project applicability, metric acceptance, regression and rollback conditions.',
         payload={'candidate_id': candidate['id'], 'outcome_receipt_id': outcome['receipt_id'],
                  'independent_verification_receipt': outcome['independent_verification_receipt']})}
 
