@@ -102,6 +102,8 @@ def assemble_relation_context(
                     "source_id": target_id, "locator": target.get("locator"),
                     "title": target.get("canonical_title"),
                     "source_family": target.get("source_family"),
+                    "source_family_origin": (target.get("field_lineage") or {}).get("source_family")
+                        or "NOT_ATTESTED_IN_CONTEXT",
                     "review_state": target.get("review_state"),
                     "current_relation": target.get("current_relation"),
                 }
@@ -126,6 +128,8 @@ def assemble_relation_context(
         "index_owner_receipt_verified": False,
         "root_source_ref": {
             "source_id": root_source_id, "locator": root.get("locator"),
+            "source_family_origin": (root.get("field_lineage") or {}).get("source_family")
+                or "NOT_ATTESTED_IN_CONTEXT",
             "review_state": root.get("review_state"),
             "current_relation": root.get("current_relation"),
         },
