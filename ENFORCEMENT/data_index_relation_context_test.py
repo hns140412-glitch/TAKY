@@ -33,6 +33,11 @@ assert result["edges"][0]["target_source_ref"]["locator"].endswith("/teacher")
 assert result["projection_authoritative"] is False
 assert result["current_promoted"] is False and result["domain_use_approved"] is False
 assert result["index_owner_receipt_verified"] is False
+# A provider can copy the same relation fields. They must not self-certify rank.
+from data_index_search import search
+untrusted_rank = search(rows, "student", relation_depth=1)
+assert [x["source_id"] for x in untrusted_rank["results"]] == ["student"]
+assert untrusted_rank["relation_rank_gate"] == "NO_INDEPENDENT_VALIDATED_RELATION_KEYS"
 
 # The query-filter/authorization boundary must not return excluded metadata.
 filtered = assemble_relation_context(rows, "student", eligible_ids={"student"})
