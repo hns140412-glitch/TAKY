@@ -36,6 +36,34 @@ class BadgeReworkTruthTests(unittest.TestCase):
     def test_story_change_fails(self):
         r=copy.deepcopy(self.r);r["items"][11]["scene_motif"]="invented"
         self.assertIn("SOURCE_SEMANTIC_DRIFT",self.check(r=r))
+    def test_batch_01_is_source_locked(self):
+        self.assertEqual([], self.check())
+    def test_batch_01_cannot_falsely_claim_approval(self):
+        from unittest.mock import patch
+        import verify_visual_rework_queue as gate
+        original=gate.Path.read_text
+        def changed(path, *args, **kwargs):
+            raw=original(path,*args,**kwargs)
+            if str(path).endswith("rework-batch-01-source-locked.json"):
+                document=json.loads(raw)
+                document["items"][0]["final_approved"]=True
+                return json.dumps(document)
+            return raw
+        with patch.object(gate.Path,"read_text",changed):
+            self.assertIn("REWORK_BATCH_FALSE_COMPLETION",self.check())
+    def test_batch_01_source_motif_change_rejected(self):
+        from unittest.mock import patch
+        import verify_visual_rework_queue as gate
+        original=gate.Path.read_text
+        def changed(path, *args, **kwargs):
+            raw=original(path,*args,**kwargs)
+            if str(path).endswith("rework-batch-01-source-locked.json"):
+                document=json.loads(raw)
+                document["items"][0]["source_motif"]="invented"
+                return json.dumps(document)
+            return raw
+        with patch.object(gate.Path,"read_text",changed):
+            self.assertIn("REWORK_BATCH_SOURCE_DRIFT",self.check())
     def test_netlify_hold(self):
         q=copy.deepcopy(self.q);q["netlify"]="READY"
         self.assertIn("RELEASE_HOLD_BYPASS",self.check(q=q))
