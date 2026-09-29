@@ -45,16 +45,35 @@ def safe_url(value: object) -> str:
         return ''
 
 
-def candidate_url(row: dict[str, Any]) -> str:
-    # V2.2 can restore source URLs from the normalized field even when URL is blank.
-    # A conflicting pair never gets selected automatically.
+def _comparison_url(value: object) -> tuple:
+    """Compare only sanitized, same-origin URL identity; query presentation order is irrelevant."""
+    safe = safe_url(value)
+    if not safe:
+        return ()
+    parsed = urlsplit(safe)
+    return (parsed.scheme.lower(), parsed.netloc.lower(), parsed.path,
+            tuple(sorted(parse_qsl(parsed.query, keep_blank_values=True))))
+
+
+def url_conflict_detected(row: dict[str, Any]) -> bool:
+    # Never trust a missing/false flag as proof that two separate source locators agree.
     if row.get('url_conflict'):
+        return True
+    direct = _comparison_url(row.get('url'))
+    normalized = _comparison_url(row.get('normalized_url'))
+    return bool(direct and normalized and direct != normalized)
+
+
+def candidate_url(row: dict[str, Any]) -> str:
+    # An absent URL may use normalized_url; two materially different locators
+    # require source review, not a silent choice (including shortened redirects).
+    if url_conflict_detected(row):
         return ''
     return safe_url(row.get('url') or row.get('normalized_url'))
 
 
 def source_kind(row: dict[str, Any]) -> str:
-    if row.get('url_conflict'):
+    if url_conflict_detected(row):
         return 'HOLD_URL_CONFLICT'
     if row.get('record_type') == 'NOTION_CONTAINER':
         return 'NOTION_CHILD_DISCOVERY'
@@ -90,6 +109,8 @@ def build_receipt(report_dir: Path) -> dict[str, Any]:
         raise InputError('QUEUE_HANDOFF_MISMATCH')
     if summary.get('queue_count') != len(q):
         raise InputError('SUMMARY_COUNT_MISMATCH')
+    if summary.get('notion_total') is not None and summary.get('notion_total') != len(q):
+        raise InputError('SUMMARY_NOTION_TOTAL_MISMATCH')
     if any(row.get('mining_status') != 'PENDING_NOT_PROMOTED' for row in q):
         raise InputError('QUEUE_CONTAINS_ACK_OR_PROMOTION')
 
