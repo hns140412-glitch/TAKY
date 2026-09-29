@@ -341,7 +341,9 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
         }
     batch = execute_batch(selected, runtime_results)
     access_errors = {"ACCESS_DENIED", "AUTH_REQUIRED", "LOGIN_REQUIRED",
-                     "PERMISSION_DENIED", "RESTRICTED", "PAYWALL", "ACCESS_HOLD"}
+                     "PERMISSION_DENIED", "RESTRICTED", "PAYWALL", "ACCESS_HOLD",
+                     "IN_FLIGHT_UNCERTAIN", "CORRUPT_ATTEMPT_JOURNAL",
+                     "SOURCE_RECEIPT_STALE"}
     history = [dict(x) for x in (payload.get("provider_attempts") or [])
                if isinstance(x, dict)]
     active_pending = (follow_up.get("pending_actions") if using_deferred_batch
