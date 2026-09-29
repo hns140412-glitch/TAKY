@@ -61,5 +61,49 @@
   "no_source_bytes_stored_in_this_repo": true,
   "no_current_write": true,
   "no_main_merge": true,
-  "no_deployment": true
+  "no_deployment": true,
+  "consumer_static_source_audit": {
+    "observed_at": "2026-09-30",
+    "status": "BOTH_APPROVED_ASSETS_ABSENT_FROM_INSPECTED_APP_MAIN_TREES_AND_MAIN_STATIC_REFERENCES",
+    "consumers": [
+      {
+        "visual_id": "TAKY-LAF-SNAP-HOME-COAST-20260927-A",
+        "repo": "hns140412-glitch/Snap-Pop",
+        "head": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+        "expected": "snap_pop_beach_asset.png",
+        "inspected_files": [
+          {
+            "path": "index.html",
+            "static_runtime_reference": "assets/world/golden_world_scene.jpg"
+          },
+          {
+            "path": "snap-reviewed-visual-binding-v1.js",
+            "static_runtime_reference": "assets/world/golden_world_scene.jpg"
+          }
+        ],
+        "actual_asset_in_main_tree": false
+      },
+      {
+        "visual_id": "TAKY-LAF-HIDE-HOME-MOSSFALL-20260927-A",
+        "repo": "hns140412-glitch/Hide-Seek",
+        "head": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+        "expected": "hide_seek_forest_asset.png",
+        "inspected_files": [
+          {
+            "path": "styles.css",
+            "static_runtime_reference": "./assets/backgrounds/park.png"
+          },
+          {
+            "path": "styles.css",
+            "static_runtime_reference": "./assets/backgrounds/academy.png"
+          }
+        ],
+        "actual_asset_in_main_tree": false
+      }
+    ],
+    "scope_limit": "EXACT_MAIN_TREE_AND_SELECTED_STATIC_FILES_ONLY; runtime could be dynamic; no device inspection performed",
+    "central_registration_upload_status": "OPEN_NO_BINARY_TRANSFER_ROUTE_VERIFIED",
+    "temporary_interaccount_transfer": "TEMPORARY_STAGING_COPIES_DELETED; NO_PRODUCTION_OR_CANONICAL_PATH_MODIFIED",
+    "no_changed_app_runtime": true
+  }
 }
