@@ -113,7 +113,7 @@ class ProofReplayTest(unittest.TestCase):
                 'independent_verification_receipt':'fixture-qa','regression_receipt':'fixture-regression',
                 'evidence_manifest':'manifest.json','evidence_manifest_sha256':hashlib.sha256(mb).hexdigest()})
             result=replay(BASE,prefix+[out],evidence_root=root)
-            self.assertEqual(result['event_history'][-1]['resulting_route'],'HUMAN_ADOPTION_REVIEW')
+            self.assertEqual(result['event_history'][-1]['resulting_route'],'EVIDENCE_AUTHENTICITY_REVIEW')
             (root/'REGRESSION.txt').write_text('tampered')
             with self.assertRaisesRegex(ValueError,'PASS_PROOF_PREFLIGHT_FAILED'):
                 replay(BASE,prefix+[out],evidence_root=root)
