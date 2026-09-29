@@ -20,6 +20,26 @@ UNVERIFIED_QUALIFIERS = frozenset({
 })
 
 
+def relation_has_recorded_evidence(root: dict[str, Any], relation: dict[str, Any],
+                                   target: dict[str, Any]) -> bool:
+    """Evidence gate for relevance expansion only; never grants canonical status."""
+    typ = relation.get("type")
+    proof = relation.get("evidence_ref")
+    state = relation.get("verification_state")
+    if typ not in SOURCE_RELATIONS or relation.get("qualifier") in UNVERIFIED_QUALIFIERS:
+        return False
+    if state not in {"VERIFIED", "STAGED_MANIFEST_VALIDATED"} or not isinstance(proof, str) or not proof.strip():
+        return False
+    if typ == "EXACT_DUPLICATE_OF":
+        return bool(
+            state == "VERIFIED" and root.get("content_hash")
+            and root.get("content_hash") == target.get("content_hash")
+            and root.get("content_hash_verification") == "INDEPENDENT_BINARY_VERIFIED"
+            and target.get("content_hash_verification") == "INDEPENDENT_BINARY_VERIFIED"
+        )
+    return True
+
+
 def assemble_relation_context(
     records: list[dict[str, Any]],
     root_source_id: str,
@@ -83,16 +103,11 @@ def assemble_relation_context(
             target = by_id[target_id]
             proof = relation.get("evidence_ref")
             state = relation.get("verification_state")
-            if typ == "EXACT_DUPLICATE_OF" and not (
-                root.get("content_hash") and root.get("content_hash") == target.get("content_hash")
-                and root.get("content_hash_verification") == "INDEPENDENT_BINARY_VERIFIED"
-                and target.get("content_hash_verification") == "INDEPENDENT_BINARY_VERIFIED"
-                and state == "VERIFIED" and isinstance(proof, str) and proof.strip()
-            ):
+            if typ == "EXACT_DUPLICATE_OF" and not relation_has_recorded_evidence(root, relation, target):
                 edge["status"] = "EXACT_DUPLICATE_PROOF_REQUIRED"
-            elif state == "STAGED_MANIFEST_VALIDATED" and isinstance(proof, str) and proof.strip():
+            elif state == "STAGED_MANIFEST_VALIDATED" and relation_has_recorded_evidence(root, relation, target):
                 edge["status"] = "STAGED_METADATA_LINK_NOT_CANONICAL"
-            elif state == "VERIFIED" and isinstance(proof, str) and proof.strip():
+            elif state == "VERIFIED" and relation_has_recorded_evidence(root, relation, target):
                 edge["status"] = "EVIDENCE_RECORDED_NOT_OWNER_ATTESTED"
             else:
                 edge["status"] = "RELATION_EVIDENCE_MISSING"
@@ -134,5 +149,6 @@ def assemble_relation_context(
             "current_relation": root.get("current_relation"),
         },
         "edge_count": len(edges), "edges": edges, "evidence_gaps": gaps,
-        "relation_context_complete_for_request": not gaps,
+        "relation_context_complete_for_request": bool(required_types) and not gaps,
+        "assessment_scope": "EXPLICIT_REQUESTED_ONE_HOP_RELATION_TYPES_ONLY",
     }
