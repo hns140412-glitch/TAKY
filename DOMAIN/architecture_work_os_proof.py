@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 
 VERSION = 'ARCHIGROW_WORK_OS_PROOF_PREFLIGHT_V1'
@@ -55,6 +56,8 @@ def preflight(manifest: dict, root: Path) -> dict:
         result = manifest.get('comparison') or {}
         if not all(k in result and isinstance(result[k], (int, float)) and not isinstance(result[k], bool) for k in ('baseline', 'observed')):
             problems.append('NUMERIC_BASELINE_OUTCOME_REQUIRED')
+        if any(isinstance(result.get(k), (int, float)) and not math.isfinite(result[k]) for k in ('baseline', 'observed')):
+            problems.append('NONFINITE_COMPARISON_VALUE')
         if not isinstance(result.get('unit'), str) or not result['unit'].strip():
             problems.append('COMPARISON_UNIT_REQUIRED')
     return {'schema': VERSION, 'decision': 'READY_FOR_INDEPENDENT_DOMAIN_REVIEW' if not problems else 'HOLD_EVIDENCE_INCOMPLETE',
