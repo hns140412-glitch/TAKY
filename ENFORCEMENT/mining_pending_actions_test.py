@@ -216,6 +216,58 @@ class PendingActionTest(unittest.TestCase):
         self.assertEqual(out["state"], "WAIT_SOURCE_ANCHOR")
         self.assertEqual(set(out["missing_anchor_ids"]), set(ids))
 
+    def test_weak_anchor_cannot_launder_high_score_unanchored_closure(self):
+        task={"goal":"verify three primary findings","task_family":"GENERAL_RESEARCH",
+              "critical_requirements":["A","B","C"],"max_research_depth":"D1"}
+        current=plan(task)
+        first,second=current["search_frontier"]
+        fid=first["id"]
+        strong_unanchored={"frontier_id":fid,"source_id":"UNANCHORED",
+                           "source_class":"OFFICIAL","claim":"high score, no excerpt",
+                           "direct_support":True,"fresh_enough":True}
+        weak_anchored={"frontier_id":fid,"source_id":"LOW-QUALITY",
+                       "source_class":"COMMUNITY","claim":"low score but has excerpt",
+                       "excerpt_ref":"page:1#p:1","direct_support":True,
+                       "fresh_enough":True}
+        good_second={"frontier_id":second["id"],"source_id":"GOOD-B",
+                     "source_class":"OFFICIAL","claim":"source B",
+                     "excerpt_ref":"page:2#p:1","direct_support":True,
+                     "fresh_enough":True}
+        cp=mining_checkpoint(task,current["search_frontier"],
+                             [strong_unanchored,weak_anchored,good_second])
+        self.assertEqual(cp["frontier"][0]["status"],"CLOSED",
+                         "This reproduces Core scoring a strong unanchored row.")
+        first_pending=plan(task,verified_checkpoint=cp)
+        self.assertNotEqual(find_by_question(first_pending,"A")["classification"],
+                            "EVIDENCE_VERIFIED")
+        self.assertEqual(first_pending["follow_up_activation"]["state"],"WAIT_SOURCE_ANCHOR")
+        self.assertIn(fid,first_pending["follow_up_activation"]["missing_anchor_ids"])
+        self.assertFalse(first_pending["research_complete_eligible"])
+        corrected={**strong_unanchored,"excerpt_ref":"page:3#p:2"}
+        repaired=mining_checkpoint(task,current["search_frontier"],
+                                  [corrected,weak_anchored,good_second])
+        resumed=plan(task,verified_checkpoint=repaired)
+        self.assertEqual(find_by_question(resumed,"A")["classification"],
+                         "EVIDENCE_VERIFIED")
+        self.assertEqual(resumed["follow_up_activation"]["state"],"READY_NEXT_BATCH")
+
+    def test_deferred_exact_source_preserves_file_identity_on_activation(self):
+        files=["First.pdf","Second.pdf","Third.pdf"]
+        task={"goal":"acquire three original sources","task_family":"SOURCE_ACQUISITION",
+              "unknown":files,"exact_source_targets":files,"max_research_depth":"D1"}
+        initial=plan(task)
+        cp=mining_checkpoint(task,initial["search_frontier"],[
+            {"frontier_id":row["id"],"source_id":"S-"+row["id"],
+             "source_class":"OFFICIAL","claim":"original",
+             "excerpt_ref":"file:0-20","direct_support":True,"fresh_enough":True}
+            for row in initial["search_frontier"]
+        ])
+        nxt=plan(task,verified_checkpoint=cp)["follow_up_activation"]
+        self.assertEqual(nxt["state"],"READY_NEXT_BATCH")
+        self.assertEqual(nxt["frontier"][0]["expected_source_filename"],"Third.pdf")
+        self.assertTrue(nxt["index_first"]["trace"][0]["exact_identity_match_required"])
+        self.assertEqual(nxt["planned_provider_requests"][0]["provider"],"PUBLIC_DATA")
+
     def test_verified_first_item_is_not_requeued_after_resume(self):
         task={"task_family":"GENERAL_RESEARCH","goal":"verify two required facts",
               "unknown":["first fact","second fact"],"max_research_depth":"D1"}
