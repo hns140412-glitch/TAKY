@@ -142,7 +142,7 @@ def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None
     # An explicit original file or publisher rule should reach an authorized
     # authoritative/public-data route first; implementation examples go to
     # implementation sources, not generic primary web snippets.
-    if category in {"SOURCE_IDENTITY_MISMATCH", "SOURCE_REFRESH_REQUIRED"}:
+    if item.get("expected_source_filename") or category in {"SOURCE_IDENTITY_MISMATCH", "SOURCE_REFRESH_REQUIRED"}:
         preferred = ["OFFICIAL", "PRIMARY"] + [
             x for x in preferred if x not in {"OFFICIAL", "PRIMARY"}
         ]
