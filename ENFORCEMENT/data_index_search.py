@@ -23,6 +23,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
+from data_index_relation_context import relation_has_recorded_evidence
+
 TOKEN_RE = re.compile(r"[0-9A-Za-z_\-\.]+|[가-힣]+")
 RRF_K = 60.0
 
@@ -375,15 +377,11 @@ def relation_expand(
                 continue
             base = out.get(sid, 0.0)
             for rel in record.get("relations", []):
-                # Candidate-only compatibility edges cannot influence relevance
-                # as though a content relationship had been proved.
-                if rel.get("qualifier") in {
-                    "LEGACY_DUPLICATE_GROUP_UNVERIFIED",
-                    "LEGACY_FRAGMENT_GROUP_COMPAT",
-                }:
-                    continue
+                # Recorded relation evidence is necessary to expand ranking;
+                # an unverified label or relation alone is not proof of relevance.
                 target = rel.get("target")
-                if target in by_id and target not in out:
+                if (target in by_id and target not in out
+                        and relation_has_recorded_evidence(record, rel, by_id[target])):
                     out[target] = base * 0.35
                     next_frontier.append(target)
         frontier = next_frontier
