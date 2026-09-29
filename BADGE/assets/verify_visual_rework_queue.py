@@ -69,6 +69,55 @@ def verify(queue, source, registry, visual):
                 errors.append("REWORK_BATCH_ACCEPTANCE_INCOMPLETE")
             if bid=="BDG-DRAFT-012" and item.get("status")!="USER_SELECTED_CANDIDATE_QA_OPEN":
                 errors.append("REWORK_BATCH_012_APPROVAL_DRIFT")
+    # Recovered witty copy is an input contract, not an optional editorial note.
+    # Fail closed if any of the 60 source-specific art briefs loses its title,
+    # substantive detail, reveal line, or provenance / expression technique.
+    copy=read("BADGE/badge-wow-inspired-copyworking.json")
+    direction_document=read("BADGE/assets/individual-art-direction-60.json")
+    all_copy=copy.get("preset_copy", [])
+    all_briefs=direction_document.get("items", [])
+    if len(all_copy)!=60 or len(all_briefs)!=60 or len(copy.get("discovery_copy", []))!=20:
+        errors.append("WITTY_COPY_60_PLUS_20_INTEGRITY")
+    copy_by_id={x.get("source_draft_id"):x for x in all_copy}
+    source_by_id={x["source_draft_id"]:x for x in source["presets"]}
+    if len(copy_by_id)!=60:
+        errors.append("WITTY_COPY_ID_DUPLICATION")
+    if direction_document.get("copy_authority")!="BADGE/badge-wow-inspired-copyworking.json" or direction_document.get("copy_status")!="COPY_PROPOSAL_NOT_RUNTIME_APPROVED":
+        errors.append("ART_DIRECTION_COPY_AUTHORITY")
+    brief_by_id={}
+    for brief in all_briefs:
+        bid=brief.get("badge_id")
+        if bid in brief_by_id: errors.append("ART_DIRECTION_ID_DUPLICATION")
+        brief_by_id[bid]=brief
+        original=source_by_id.get(bid)
+        authored=copy_by_id.get(bid)
+        if not original or not authored:
+            errors.append("ART_DIRECTION_UNKNOWN_SOURCE_OR_COPY")
+            continue
+        required_pairs=(
+            ("canonical_title",original["stable_name"]),
+            ("source_motif",original["motif"]),
+            ("source_storyline",original["storyline"]),
+            ("display_title_proposal",authored["display_title_proposal"]),
+            ("core_detail_proposal",authored["flavor_text_proposal"]),
+            ("unlock_toast_proposal",authored["unlock_toast_proposal"]),
+            ("wordplay_device",authored["wordplay_device"]),
+            ("copy_status","COPY_PROPOSAL_NOT_RUNTIME_APPROVED"),
+            ("copy_source_ref","BADGE/badge-wow-inspired-copyworking.json#"+bid),
+            ("artwork_text_policy","NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT")
+        )
+        if authored.get("canonical_title")!=original["stable_name"] or any(brief.get(k)!=v or not v for k,v in required_pairs):
+            errors.append("ART_DIRECTION_WITTY_COPY_DRIFT")
+    if [x.get("badge_id") for x in all_briefs]!=ids or set(copy_by_id)!=set(ids):
+        errors.append("ART_DIRECTION_COPY_ORDER_OR_SET")
+    if batch_path.is_file():
+        batch=json.loads(batch_path.read_text(encoding="utf-8"))
+        if batch.get("copy_authority")!="BADGE/badge-wow-inspired-copyworking.json" or batch.get("copy_status")!="COPY_PROPOSAL_NOT_RUNTIME_APPROVED":
+            errors.append("REWORK_BATCH_COPY_AUTHORITY")
+        for entry in batch.get("items", []):
+            brief=brief_by_id.get(entry.get("badge_id"))
+            if brief and any(entry.get(k)!=brief.get(k) for k in ("core_detail_proposal","unlock_toast_proposal","wordplay_device","artwork_text_policy")):
+                errors.append("REWORK_BATCH_WITTY_COPY_DRIFT")
     return sorted(set(errors))
 
 def main():
