@@ -54,7 +54,8 @@ def _result(state, *, current, plan, events, reason=None, last=None):
 
 
 def run_with_providers(payload:dict, providers:dict[str,Callable],
-                       *, max_rounds:int=6, max_calls:int=12)->dict:
+                       *, max_rounds:int=6, max_calls:int=12,
+                       journal=None)->dict:
     """Run actual callable provider attempts and bounded different-route fallbacks.
 
     State may be RESOLVED_FOR_SOURCE_REVIEW, NEEDS_EVIDENCE_VERIFICATION,
@@ -69,6 +70,11 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
     current=dict(payload)
     events=[]
     last=None
+    if journal is not None:
+        from mining_core import normalize_goal
+        if getattr(journal,"goal_id",None)!=normalize_goal(payload.get("task") or {})["goal_id"]:
+            return _result("HOLD_RUN_STATE",current=current,plan=None,events=[],
+                           reason="JOURNAL_GOAL_MISMATCH")
     for _round in range(max_rounds):
         plan=orchestrate(current)["plan"]
         if not plan["execution_allowed"]:
@@ -106,21 +112,26 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
         runtime_results={}
         for request in requests:
             provider=str(request["provider"]).upper()
-            was_called=provider in provider_map
-            if not was_called:
-                output={"state":"FAILED","error":"PROVIDER_ADAPTER_UNAVAILABLE"}
+            journal_replay=False
+            if journal is not None:
+                output,was_called,journal_replay=journal.execute(
+                    request,provider_map.get(provider))
             else:
-                try:
-                    output=provider_map[provider](dict(request))
-                    if not isinstance(output,dict) or str(output.get("state") or "").upper() not in {
-                        "SUCCESS","EMPTY","FAILED"
-                    }:
-                        output={"state":"FAILED","error":"INVALID_PROVIDER_RESULT"}
-                except Exception as exc:
-                    # Never treat a child exception as research completion.
-                    # Avoid copying exception text (may carry credentials).
-                    output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
-                            "error_type":type(exc).__name__}
+                was_called=provider in provider_map
+                if not was_called:
+                    output={"state":"FAILED","error":"PROVIDER_ADAPTER_UNAVAILABLE"}
+                else:
+                    try:
+                        output=provider_map[provider](dict(request))
+                        if not isinstance(output,dict) or str(output.get("state") or "").upper() not in {
+                            "SUCCESS","EMPTY","FAILED"
+                        }:
+                            output={"state":"FAILED","error":"INVALID_PROVIDER_RESULT"}
+                    except Exception as exc:
+                        # Never treat a child exception as research completion.
+                        # Avoid copying exception text (may carry credentials).
+                        output={"state":"FAILED","error":"PROVIDER_EXECUTION_EXCEPTION",
+                                "error_type":type(exc).__name__}
             runtime_results[str(request["request_id"])]=output
             proof=output.get("source_acquisition")
             events.append({
@@ -130,6 +141,7 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 "reported_state":str(output["state"]).upper(),
                 "error":output.get("error"),
                 "callback_invoked":was_called,
+                "replayed_from_local_journal":journal_replay,
                 "external_fetch_performed":output.get("external_fetch_performed") is True,
                 # Physical acquisition receipt is distinct from claim support.
                 **({"source_acquisition":{
@@ -144,6 +156,12 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
             return _result("HOLD_RUN_STATE",current=current,plan=plan,events=events,
                            reason=step.get("state"),last=last)
         current=step["next_run_input"]
+        if any(str(x.get("error") or "").upper() in {
+                "IN_FLIGHT_UNCERTAIN","CORRUPT_ATTEMPT_JOURNAL"
+            } for x in step["execution_batch"].get("results", [])):
+            if not _selected_requests(step["plan"]):
+                return _result("HOLD_IN_FLIGHT_UNCERTAIN",current=current,plan=step["plan"],
+                               events=events,reason="RECONCILE_ATTEMPT_BEFORE_REPLAY",last=last)
         if any(x.get("state") in {"FAILED","EMPTY"} and str(x.get("error") or "").upper() in {
                 "ACCESS_DENIED","AUTH_REQUIRED","LOGIN_REQUIRED","PERMISSION_DENIED",
                 "RESTRICTED","PAYWALL","ACCESS_HOLD",
