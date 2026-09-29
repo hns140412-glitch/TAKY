@@ -1,5 +1,5 @@
 {
-  "schema": "TAKY_BADGE_60_WITTY_INDIVIDUAL_ART_BRIEFS_V1",
+  "schema": "TAKY_BADGE_60_WITTY_INDIVIDUAL_ART_BRIEFS_V2",
   "visual_authority": "BADGE/ui/APPROVED_STORYBOARD_2026-09-27.md",
   "status": "60_CUSTOM_SCENE_DIRECTIONS_NO_IMAGE_APPROVAL",
   "style": "individual pastel hand-drawn painterly badge art; 2–4 clear details; 64px symbol recognition; not photoreal, diorama or panorama",
@@ -22,7 +22,13 @@
       "witty_key_detail": "작은 사다리와 랜턴",
       "small_icon_read": "이불 언덕+태양",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "침대와 평화 협상에 성공한 작은 탐험가.",
+      "unlock_toast_proposal": "해가 뜨기 전에 내가 먼저 떴다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-001",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-002",
@@ -35,7 +41,13 @@
       "witty_key_detail": "나팔 끝 둥근 햇살",
       "small_icon_read": "새+나팔",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "첫 출발 신호를 스스로 보냈다.",
+      "unlock_toast_proposal": "꼬끼오는 오늘 휴가입니다.",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-002",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-003",
@@ -48,7 +60,13 @@
       "witty_key_detail": "토스트 귀퉁이의 깃발",
       "small_icon_read": "빵+연필",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "아주 작은 아침 작전부터 가볍게 시작.",
+      "unlock_toast_proposal": "뇌에도 아침 식사가 도착!",
+      "wordplay_device": "PUN_WORDPLAY",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-003",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-004",
@@ -61,7 +79,13 @@
       "witty_key_detail": "되돌림 궤적 속 주먹밥",
       "small_icon_read": "밥+큰 원호",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "잠깐 쉬고 다시 시작한 둘째 출발.",
+      "unlock_toast_proposal": "밥 먹었으니 연필도 한 번 더!",
+      "wordplay_device": "CALLBACK",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-004",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-005",
@@ -74,7 +98,13 @@
       "witty_key_detail": "활처럼 뻗는 끈",
       "small_icon_read": "신발+나침반",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "준비를 마치고 내 속도로 출발.",
+      "unlock_toast_proposal": "마음은 뒤따라오면 돼!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-005",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-006",
@@ -87,7 +117,13 @@
       "witty_key_detail": "분침이 싹을 가리킴",
       "small_icon_read": "원형 시계+싹",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "빈틈을 찾아 나만의 작전을 끼워 넣었다.",
+      "unlock_toast_proposal": "시계 구석에 시간이 숨어 있었네?",
+      "wordplay_device": "PUN_WORDPLAY",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-006",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-007",
@@ -100,7 +136,13 @@
       "witty_key_detail": "숨은 5분을 다섯 점으로 표현",
       "small_icon_read": "시계+토끼 귀",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "숨은 여유를 발견한 시간 탐험가.",
+      "unlock_toast_proposal": "없던 시간 같은데, 진짜 있었어!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-007",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-008",
@@ -113,7 +155,13 @@
       "witty_key_detail": "예상 밖의 새 지도",
       "small_icon_read": "지도 펼침 두 겹",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "마음이 남은 날의 작은 추가 작전.",
+      "unlock_toast_proposal": "용기가 한 개 더 나왔습니다.",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-008",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-009",
@@ -126,7 +174,13 @@
       "witty_key_detail": "깃발이 살짝 숨음",
       "small_icon_read": "발자국+깃발",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "부탁받기 전에 스스로 선택한 첫걸음.",
+      "unlock_toast_proposal": "범인은 스스로 시작한 나였습니다.",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-009",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-010",
@@ -139,7 +193,13 @@
       "witty_key_detail": "꼬리의 짧은 빈 말풍선",
       "small_icon_read": "대각 운동화",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "생각을 시작으로 이어 붙인 순간.",
+      "unlock_toast_proposal": "출발 신호보다 발이 먼저 움직였다.",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-010",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-011",
@@ -152,7 +212,13 @@
       "witty_key_detail": "직접 고른 길",
       "small_icon_read": "손+세 갈래",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "스스로 고른 계획을 자기 언어로 정했다.",
+      "unlock_toast_proposal": "오늘의 작전 승인자: 나!",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-011",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-012",
@@ -165,7 +231,13 @@
       "witty_key_detail": "얽힌 선에서 나온 한 줄",
       "small_icon_read": "지도+연필",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "하고 싶은 순서를 직접 짜 본 날.",
+      "unlock_toast_proposal": "작전지도는 이제 연필에게 맡겨라.",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-012",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-013",
@@ -178,7 +250,13 @@
       "witty_key_detail": "나머지 칸은 부드럽게 흐림",
       "small_icon_read": "밝은 한 칸",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "눈앞의 한 과제에 시선을 모은 순간.",
+      "unlock_toast_proposal": "나머지 세상은 잠깐 대기!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-013",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-014",
@@ -191,7 +269,13 @@
       "witty_key_detail": "번개 꼬리가 마지막 확인 획",
       "small_icon_read": "체크 번개",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "빠르게 끝낸 뒤에도 중요한 점을 살폈다.",
+      "unlock_toast_proposal": "빨랐지만 확인도 잊지 않았다!",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-014",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-015",
@@ -204,7 +288,13 @@
       "witty_key_detail": "느린 걸음과 똑바른 자",
       "small_icon_read": "거북이+자",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "속도보다 방향과 확인을 선택한 날.",
+      "unlock_toast_proposal": "천천히 가도 길은 정확히 찾는다.",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-015",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-016",
@@ -217,7 +307,13 @@
       "witty_key_detail": "돌 사이 점프 흔적",
       "small_icon_read": "세 돌 계단",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "한 번에 다 하지 않아도 쌓이는 전진.",
+      "unlock_toast_proposal": "작은 한 칸이 다음 칸을 데려왔다.",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-016",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-017",
@@ -230,7 +326,13 @@
       "witty_key_detail": "도착 직전의 한 굽이",
       "small_icon_read": "굽은 길+깃발",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "어려웠던 여정의 끝에서 만난 작은 도착.",
+      "unlock_toast_proposal": "마지막 한 칸도 결국 지나왔다!",
+      "wordplay_device": "CALLBACK",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-017",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-018",
@@ -243,7 +345,13 @@
       "witty_key_detail": "과하지 않은 은은한 빛",
       "small_icon_read": "병+불씨",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "작은 집중을 스스로 지켜낸 순간.",
+      "unlock_toast_proposal": "반짝! 그런데 방해하지는 않을게.",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-018",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-019",
@@ -256,7 +364,13 @@
       "witty_key_detail": "펼친 책에서 빛 원 하나",
       "small_icon_read": "책+램프",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "조용히 몰입한 자기만의 탐험 시간.",
+      "unlock_toast_proposal": "밖은 조용한데 안은 바쁘다!",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-019",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-020",
@@ -269,7 +383,13 @@
       "witty_key_detail": "부드러운 S자 물결",
       "small_icon_read": "종이배+물길",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "한 번 시작한 일이 자연스럽게 이어진 날.",
+      "unlock_toast_proposal": "어라, 흐름이 나를 데려갔다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-020",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-021",
@@ -282,7 +402,13 @@
       "witty_key_detail": "돌아오는 두 번째 발",
       "small_icon_read": "왕복 발자국",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "멀어진 마음을 다시 돌아오게 했다.",
+      "unlock_toast_proposal": "문 열어 주세요, 집중 왔어요!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-021",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-022",
@@ -295,7 +421,13 @@
       "witty_key_detail": "문 앞의 작은 궤적",
       "small_icon_read": "나침반+집",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "잠시 흐트러졌다가도 이어간 순간.",
+      "unlock_toast_proposal": "외출한 집중 씨가 무사 귀환!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-022",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-023",
@@ -308,7 +440,13 @@
       "witty_key_detail": "그물 밖 마지막 빛 하나",
       "small_icon_read": "그물+빛",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "하나씩 다시 모아 과제로 돌아왔다.",
+      "unlock_toast_proposal": "잃어버린 마음 조각 전부 회수!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-023",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-024",
@@ -321,7 +459,13 @@
       "witty_key_detail": "파도 두 가닥",
       "small_icon_read": "튜브+카드",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "어긋난 일정에서도 할 수 있는 것을 건졌다.",
+      "unlock_toast_proposal": "하루 전체 말고, 이 조각은 지켰다!",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-024",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-025",
@@ -334,7 +478,13 @@
       "witty_key_detail": "두 물체 사이 짧은 신호",
       "small_icon_read": "무전기+등불",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "필요할 때 무전기를 켤 줄 아는 탐험가.",
+      "unlock_toast_proposal": "도움을 요청한 용기도 접수 완료!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-025",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-026",
@@ -347,7 +497,13 @@
       "witty_key_detail": "렌즈 둘 중 하나만 변함",
       "small_icon_read": "쌍안경+?",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "모르는 부분을 그냥 넘기지 않고 질문했다.",
+      "unlock_toast_proposal": "흠… 수상한 단서를 포착했다!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-026",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-027",
@@ -360,7 +516,13 @@
       "witty_key_detail": "먼지 대신 단서",
       "small_icon_read": "돋보기+빗자루",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "틀렸던 흔적을 버리지 않고 다시 들여다봤다.",
+      "unlock_toast_proposal": "쓰레기 아닙니다. 단서입니다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-027",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-028",
@@ -373,7 +535,13 @@
       "witty_key_detail": "수선 뒤 이어지는 길",
       "small_icon_read": "지도+실",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "고친 흔적까지 내 탐험 지도가 된다.",
+      "unlock_toast_proposal": "지운 자리에 새 생각 등장!",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-028",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-029",
@@ -386,7 +554,13 @@
       "witty_key_detail": "두 회전 궤적의 차이",
       "small_icon_read": "부메랑+이중 궤도",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "한 번 더 하며 다른 길을 찾아간 날.",
+      "unlock_toast_proposal": "재도전 버튼은 소모품이 아닙니다.",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-029",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-030",
@@ -399,7 +573,13 @@
       "witty_key_detail": "지우개에 지워진 흔적",
       "small_icon_read": "모자 지우개",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "헷갈린 지점을 구체적으로 다시 찾았다.",
+      "unlock_toast_proposal": "사건 해결! 현장엔 숫자가 남았다.",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-030",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-031",
@@ -412,7 +592,13 @@
       "witty_key_detail": "반짝이는 맞물린 경계",
       "small_icon_read": "지도+조각",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "중요한 연결을 스스로 알아본 순간.",
+      "unlock_toast_proposal": "마지막 조각이 제 자리로 귀환!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-031",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-032",
@@ -425,7 +611,13 @@
       "witty_key_detail": "작은 발 대신 들뜬 각도",
       "small_icon_read": "전구",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "어렵던 내용이 어느 순간 이어졌다.",
+      "unlock_toast_proposal": "앗! 방금 무언가 연결됐어.",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-032",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-033",
@@ -438,7 +630,13 @@
       "witty_key_detail": "딱 한 알의 모래",
       "small_icon_read": "모래시계+돋보기",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "한 번 멈춘 덕분에 새 단서가 보였다.",
+      "unlock_toast_proposal": "급한 답변은 여기서 잠시 정차!",
+      "wordplay_device": "PUN_WORDPLAY",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-033",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-034",
@@ -451,7 +649,13 @@
       "witty_key_detail": "중첩으로 보이는 별빛",
       "small_icon_read": "두 안경",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "다시 확인하는 능력을 스스로 발휘했다.",
+      "unlock_toast_proposal": "첫눈엔 안 보이던 게 여기 있었네.",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-034",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-035",
@@ -464,7 +668,13 @@
       "witty_key_detail": "하나만 반대 방향",
       "small_icon_read": "숫자 발자국+돋보기",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "계산의 흔적을 끝까지 추적한 탐정.",
+      "unlock_toast_proposal": "숫자들이 모두 진술을 마쳤습니다.",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-035",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-036",
@@ -477,7 +687,13 @@
       "witty_key_detail": "흰 지움 가루와 두 잎",
       "small_icon_read": "지우개+싹",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "수정은 포기가 아니라 다음 도전이다.",
+      "unlock_toast_proposal": "지워도 작전은 계속된다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-036",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-037",
@@ -490,7 +706,13 @@
       "witty_key_detail": "길어진 실이 정리됨",
       "small_icon_read": "실+등불",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "답을 서두르지 않고 길을 살폈다.",
+      "unlock_toast_proposal": "생각이 길어진 데는 이유가 있었지.",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-037",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-038",
@@ -503,7 +725,13 @@
       "witty_key_detail": "한 점 빛이 동굴 깊이서 솟음",
       "small_icon_read": "동굴+?",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "고민 속에서 나만의 연결을 찾아냈다.",
+      "unlock_toast_proposal": "깊이 들어가니 힌트가 반짝!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-038",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-039",
@@ -516,7 +744,13 @@
       "witty_key_detail": "막힌 벽 뒤 돌아가는 화살",
       "small_icon_read": "갈림길+램프",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "막힘 뒤에 새로운 방법을 발견한 날.",
+      "unlock_toast_proposal": "벽인 줄 알았는데 문이었어!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-039",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-040",
@@ -529,7 +763,13 @@
       "witty_key_detail": "접힌 마지막 모서리",
       "small_icon_read": "접힌 지도+텐트",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "멈춰야 할 때 잘 마무리한 경험.",
+      "unlock_toast_proposal": "오늘의 캠프, 안전하게 접수 완료.",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-040",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-041",
@@ -542,7 +782,13 @@
       "witty_key_detail": "지도 바깥의 새로운 길",
       "small_icon_read": "지도 밖 발",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "계획보다 조금 더 살펴본 새로운 길.",
+      "unlock_toast_proposal": "지도 제작자도 예상 못 한 한 걸음!",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-041",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-042",
@@ -555,7 +801,13 @@
       "witty_key_detail": "시곗바늘이 삐죽",
       "small_icon_read": "해먹+시계",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "몰입하다 시간의 흐름을 잊은 순간.",
+      "unlock_toast_proposal": "마지막 목격 장소: 집중 중.",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-042",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-043",
@@ -568,7 +820,13 @@
       "witty_key_detail": "펴지는 접힌 자국",
       "small_icon_read": "해먹+지도",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "충전한 뒤 자기 페이스로 돌아왔다.",
+      "unlock_toast_proposal": "쉬었다고 탐험이 삭제되진 않아요.",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-043",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-044",
@@ -581,7 +839,13 @@
       "witty_key_detail": "잎의 끝이 다섯 방향",
       "small_icon_read": "다섯 잎 시계",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "크지 않아도 지킬 수 있는 시간을 지켰다.",
+      "unlock_toast_proposal": "작은 약속을 꼭 쥔 다섯 손가락!",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-044",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-045",
@@ -594,7 +858,13 @@
       "witty_key_detail": "전환하는 짧은 선",
       "small_icon_read": "게임기+지도",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "하고 싶던 딴짓보다 선택한 일로 돌아왔다.",
+      "unlock_toast_proposal": "유혹 씨, 오늘은 예약 마감입니다.",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-045",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-046",
@@ -607,7 +877,13 @@
       "witty_key_detail": "책상 한쪽 반짝",
       "small_icon_read": "책상+연필",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "다시 앉아 시작한 것만으로 생긴 변화.",
+      "unlock_toast_proposal": "자리가 주인을 알아봤다!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-046",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-047",
@@ -620,7 +896,13 @@
       "witty_key_detail": "마지막 카드가 쏙",
       "small_icon_read": "배낭+체크",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "밀린 것을 조금씩 나눠 정돈한 날.",
+      "unlock_toast_proposal": "배낭 속 물건들이 제자리 찾기!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-047",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-048",
@@ -633,7 +915,13 @@
       "witty_key_detail": "오늘 칸만 진하게",
       "small_icon_read": "달력+짐",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "오늘 가능한 몫을 오늘 정리했다.",
+      "unlock_toast_proposal": "미래의 나에게 택배 안 보냈다!",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-048",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-049",
@@ -646,7 +934,13 @@
       "witty_key_detail": "가벼운 바람 궤적",
       "small_icon_read": "깃털+도장",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "오늘의 작전을 기분 좋게 접었다.",
+      "unlock_toast_proposal": "가볍게 끝났지만 기억은 남았다.",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-049",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-050",
@@ -659,7 +953,13 @@
       "witty_key_detail": "문틈에서 한 줄기 빛",
       "small_icon_read": "문턱+발",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "부담스럽던 과제를 스스로 먼저 살폈다.",
+      "unlock_toast_proposal": "어서 오세요, 어려운 문제 님!",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-050",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-051",
@@ -672,7 +972,13 @@
       "witty_key_detail": "첫 돌의 통통 착지",
       "small_icon_read": "신발+낮은 돌",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "가벼운 출발을 전략으로 고른 날.",
+      "unlock_toast_proposal": "워밍업이라고 얕보면 곤란해.",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-051",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-052",
@@ -685,7 +991,13 @@
       "witty_key_detail": "서로 다른 자물쇠 느낌",
       "small_icon_read": "도구상자+두 열쇠",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "나에게 맞는 방법으로 문제를 다시 열었다.",
+      "unlock_toast_proposal": "첫 열쇠가 아니면 둘째 열쇠!",
+      "wordplay_device": "CALLBACK",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-052",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-053",
@@ -698,7 +1010,13 @@
       "witty_key_detail": "말할수록 선명해지는 길",
       "small_icon_read": "말풍선 지도",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "내 언어로 생각을 정리해 보여준 날.",
+      "unlock_toast_proposal": "설명했더니 내 머리도 이해했다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-053",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-054",
@@ -711,7 +1029,13 @@
       "witty_key_detail": "친숙하게 포개진 두 장",
       "small_icon_read": "두 카드+손짓",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "익숙해진 부분을 스스로 느낀 순간.",
+      "unlock_toast_proposal": "어라, 이 단서 이제 낯익다!",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-054",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-055",
@@ -724,7 +1048,13 @@
       "witty_key_detail": "튀어오르는 짧은 선",
       "small_icon_read": "지도+깃발",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "예상 밖의 할 일을 차분히 살펴본 날.",
+      "unlock_toast_proposal": "추가 작전 발견. 놀라지 마세요!",
+      "wordplay_device": "SELF_AWARE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-055",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-056",
@@ -737,7 +1067,13 @@
       "witty_key_detail": "기존 길과 새 길",
       "small_icon_read": "배+나침반",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "바뀐 일정을 다른 길로 이어간 순간.",
+      "unlock_toast_proposal": "계획표도 스트레칭할 줄 압니다.",
+      "wordplay_device": "TALKING_OBJECT",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-056",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-057",
@@ -750,7 +1086,13 @@
       "witty_key_detail": "문틈 아침 빛",
       "small_icon_read": "문+발자국",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "처음부터 완벽할 필요 없이 시작했다.",
+      "unlock_toast_proposal": "완벽한 날씨는 기다리지 않았다.",
+      "wordplay_device": "CONTRAST",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-057",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-058",
@@ -763,7 +1105,13 @@
       "witty_key_detail": "가방 속 따뜻한 빛",
       "small_icon_read": "배낭+벤치",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "내 상태를 돌보고 다시 선택한 도전.",
+      "unlock_toast_proposal": "배터리 충전 완료. 속도는 내 마음!",
+      "wordplay_device": "QUIET_PRIDE",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-058",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-059",
@@ -776,7 +1124,13 @@
       "witty_key_detail": "중앙의 완성되는 지도",
       "small_icon_read": "두 손+지도",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "함께 힘을 모으되 내 발걸음도 남았다.",
+      "unlock_toast_proposal": "지도 두 장이 만나 길 하나가 됐다.",
+      "wordplay_device": "WARM_CALLBACK",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-059",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     },
     {
       "badge_id": "BDG-DRAFT-060",
@@ -789,7 +1143,16 @@
       "witty_key_detail": "정형 별 대신 독특한 세 점",
       "small_icon_read": "개성 있는 별자리",
       "design_status": "UNIQUE_BRIEF_NOT_FINAL_ILLUSTRATION",
-      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY"
+      "character_overlay": "OPTIONAL_SEPARATE_APPROVED_VISUAL_ONLY",
+      "core_detail_proposal": "남과 비교하지 않아도 남는 특별한 하루.",
+      "unlock_toast_proposal": "오늘만의 조각이 별자리가 됐다.",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+      "copy_source_ref": "BADGE/badge-wow-inspired-copyworking.json#BDG-DRAFT-060",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
     }
-  ]
+  ],
+  "copy_authority": "BADGE/badge-wow-inspired-copyworking.json",
+  "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED",
+  "copy_rule": "Each art direction MUST inherit source stable name, original motif/storyline, witty display title, heartfelt detail, reveal toast and actual wordplay device. None implies final approval or requires text painted in art."
 }
