@@ -50,4 +50,51 @@ for field in ("scope_namespace","gap_kind","evidence_question","why_index_insuff
     try: build_gap_proposal({**BASE,field:""})
     except ValueError: pass
     else: raise AssertionError("missing field accepted: "+field)
+# A relationship miss reuses the same Index-first proposal path, not a new queue.
+from data_index_gap_router import proposals_from_relation_context
+relation_context = {
+    "schema": "TAKY_INDEX_RELATION_CONTEXT_V1",
+    "root_source_ref": {"source_id": "SRC-REL"},
+    "evidence_gaps": [
+        {"type": "RELATED_TO", "reason": "RELATION_EVIDENCE_MISSING"},
+        {"type": "RELATED_TO", "reason": "TARGET_OUTSIDE_QUERY_FILTER"},
+        {"type": "EXACT_DUPLICATE_OF", "reason": "EXACT_DUPLICATE_PROOF_REQUIRED"},
+        {"type": "PART_OF", "reason": "LOGICAL_NODE_NOT_MATERIALIZED"},
+        {"type": "VERSION_OF", "reason": "SOURCE_ENDPOINT_NOT_IN_UNIVERSE"},
+        {"reason": "EDGE_BUDGET_EXCEEDED"},
+    ],
+}
+q = proposals_from_relation_context(relation_context, scope_namespace="DATA_TEST",
+                                    privacy_class="AUTHORIZED_PRIVATE")
+assert len(q["proposals"]) == 4
+assert {x["route"] for x in q["proposals"]} == {"INDEXING_PRECHECK"}
+assert len(q["local_holds"]) == 2
+assert q["local_holds"][0]["target_metadata_returned"] is False
+assert not q["mining_requests_dispatched"] and not q["current_promoted"]
+assert all(x["mining_handoff"] is None for x in q["proposals"])
+active = proposals_from_relation_context(relation_context, scope_namespace="DATA_TEST",
+                                         privacy_class="AUTHORIZED_PRIVATE", raw_access="ACCESSIBLE")
+assert sum(x["route"] == "INDEXING_INTERNAL" for x in active["proposals"]) == 3
+assert sum(x["route"] == "INDEXING_PRECHECK" for x in active["proposals"]) == 1
+denied = proposals_from_relation_context(relation_context, scope_namespace="DATA_TEST",
+                                         privacy_class="RESTRICTED", raw_access="DENIED")
+assert sum(x["route"] == "MINING_REQUEST_DRAFT" for x in denied["proposals"]) == 3
+assert all(x["mining_handoff"]["search_constraints"]["privacy_constraint"] == "NO_EXTERNAL_ACCOUNT_DISCLOSURE"
+           for x in denied["proposals"] if x["route"] == "MINING_REQUEST_DRAFT")
+assert len(proposals_from_relation_context({"schema":"TAKY_INDEX_RELATION_CONTEXT_V1",
+    "root_source_ref":{"source_id":"SRC-REL"},"evidence_gaps":[]},
+    scope_namespace="DATA_TEST",privacy_class="PUBLIC")["proposals"]) == 0
+for invalid in [
+    {**relation_context, "schema": "FORGED"},
+    {**relation_context, "root_source_ref": {"source_id": ""}},
+    {**relation_context, "evidence_gaps": [None]},
+]:
+    try:
+        proposals_from_relation_context(invalid, scope_namespace="DATA_TEST",privacy_class="PUBLIC")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Bad relation context accepted")
+print("data_index_gap_router: PASS (relation context -> Index-first reversible drafts and filter holds)")
+
 print("data_index_gap_router: PASS (routing, no auto mining, privacy, replay, returns, negative gates)")
