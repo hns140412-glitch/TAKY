@@ -7,6 +7,7 @@ executor, persistent INDEX owner, or authority-promotion mechanism.
 from __future__ import annotations
 
 from collections import Counter
+from mining_source_strategy import infer_need, SOURCE_POLICIES
 
 DEPTH_LIMIT = {"D0": 0, "D1": 2, "D2": 4, "D3": 6, "D4": 10}
 SOURCE_PREFER = ["PRIMARY", "OFFICIAL", "ACADEMIC"]
@@ -133,13 +134,36 @@ def _query_plan(item: dict, category: str, *, next_provider=None) -> dict | None
     if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} and not next_provider:
         return None
     fid = str(item.get("id") or "")
+    need = infer_need(item)
+    policy = SOURCE_POLICIES[need]
+    preferred = list(policy["preferred"]) + [
+        name for name in policy["secondary"] if name not in policy["preferred"]
+    ]
+    # An explicit original file or publisher rule should reach an authorized
+    # authoritative/public-data route first; implementation examples go to
+    # implementation sources, not generic primary web snippets.
+    if category in {"SOURCE_IDENTITY_MISMATCH", "SOURCE_REFRESH_REQUIRED"}:
+        preferred = ["OFFICIAL", "PRIMARY"] + [
+            x for x in preferred if x not in {"OFFICIAL", "PRIMARY"}
+        ]
+    elif need == "RULE":
+        preferred = ["OFFICIAL", "PRIMARY"] + [
+            x for x in preferred if x not in {"OFFICIAL", "PRIMARY"}
+        ]
+    elif need == "IMPLEMENTATION":
+        preferred = ["IMPLEMENTATION", "PRIMARY"] + [
+            x for x in preferred if x not in {"IMPLEMENTATION", "PRIMARY"}
+        ]
     return {
         "frontier_id": fid,
         "query": str(item.get("question") or fid),
         "purpose": ("ACQUIRE_EXACT_FILE" if category == "SOURCE_IDENTITY_MISMATCH"
                     else "RESOLVE_CONFLICT" if category == "CONFLICT_UNRESOLVED"
                     else "FILL_EVIDENCE_GAP"),
-        "prefer": SOURCE_PREFER,
+        "evidence_need": need,
+        "prefer": preferred,
+        "secondary_source_classes": list(policy["secondary"]),
+        "community_role": policy["community_role"],
         **({"next_provider": next_provider}
            if category in {"PROVIDER_FAILURE", "EMPTY_PROVIDER_RESULT"} else {}),
     }
