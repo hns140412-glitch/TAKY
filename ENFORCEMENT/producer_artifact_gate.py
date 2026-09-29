@@ -68,8 +68,8 @@ def _visual_witness_is_render(path: Path) -> bool:
     A valid image/PDF is only a render artifact, not proof of matching design.
     """
     head = path.read_bytes()[:12]
-    return (head.startswith(b"\\x89PNG\\r\\n\\x1a\\n")
-            or head.startswith(b"\\xff\\xd8\\xff")
+    return (head.startswith(b"\x89PNG\r\n\x1a\n")
+            or head.startswith(b"\xff\xd8\xff")
             or head.startswith(b"%PDF-")
             or (head.startswith(b"RIFF") and head[8:12] == b"WEBP"))
 
