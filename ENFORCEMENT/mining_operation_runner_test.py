@@ -31,6 +31,25 @@ class OperationRunnerTest(unittest.TestCase):
         self.assertEqual(output["invocations"],0)
         self.assertFalse(output["operational_research_ready"])
 
+    def test_missing_adapter_does_not_abandon_other_available_research_branch(self):
+        calls=[]
+        def web(req):
+            calls.append(req["frontier_id"])
+            return found(req)
+        query_a="runtime implementation example"
+        query_b="generic background source"
+        result=run_with_providers(payload(query_a,query_b),{"WEB":web})
+        self.assertEqual(set(calls),{query_a,query_b})
+        self.assertEqual(result["invocations"],2)
+        self.assertEqual(result["attempt_records"],3)
+        skipped=[e for e in result["events"] if not e["callback_invoked"]]
+        self.assertEqual(len(skipped),1)
+        self.assertEqual(skipped[0]["provider"],"GITHUB")
+        self.assertEqual(skipped[0]["error"],"PROVIDER_ADAPTER_UNAVAILABLE")
+        self.assertEqual({x["frontier_id"] for x in result["checkpoint"]["evidence"]},
+                         {query_a,query_b})
+        self.assertFalse(result["operational_research_ready"])
+
     def test_failure_invokes_different_provider_and_retains_evidence(self):
         events=[]
         def web(req):
