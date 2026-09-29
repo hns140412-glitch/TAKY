@@ -16,6 +16,20 @@ from architecture_growth_cycle import FROZEN_TAGS, PRIORITY, VERSION
 BRIDGE_VERSION = 'ARCHIGROW_INDEX_PROBE_V1'
 
 
+def source_handoff(row: dict) -> dict:
+    """Preserve resolvable source identity; a generic DATA folder is not RAW."""
+    ref = row.get('source_ref') or {}
+    provenance = row.get('provenance') or {}
+    locator = ref.get('locator')
+    origin = provenance.get('origin_locator')
+    identity = ref.get('source_id') or row.get('source_id')
+    specific = next((x for x in (origin, locator) if isinstance(x, str) and x.strip() and x.strip() not in ('DATA', 'REFERENCE', '00_INBOX_USER')), None)
+    return {'source_id': identity, 'specific_locator': specific,
+            'owner_resolution_required': specific is None,
+            'raw_content_retrieved': False, 'content_claim_allowed': False}
+
+
+
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -63,7 +77,7 @@ def run(backlog: dict, index_file: Path, index_module: Path, *, limit: int = 5) 
             'gap_id': gap_id, 'query_executed': True, 'query': query,
             'state': 'INDEX_OWNER_SUITABILITY_REVIEW_REQUIRED',
             'retrieval_mode': hit.get('semantic_mode'), 'candidate_count': hit.get('candidate_count'),
-            'candidates': [{k: row.get(k) for k in ('source_id', 'title', 'authority_class', 'current_relation', 'source_ref', 'provenance', 'detail_escalation', 'channels')} for row in hit['results']],
+            'candidates': [dict({k: row.get(k) for k in ('source_id', 'title', 'authority_class', 'current_relation', 'source_ref', 'provenance', 'detail_escalation', 'channels')}, source_handoff=source_handoff(row)) for row in hit['results']],
             'owner_review_required': ['source is actually about the gap', 'source revision/currentness', 'project applicability', 'source content supports claim', 'source rights/access'],
             'may_emit_index_result': False,
             'may_request_mining': False,
