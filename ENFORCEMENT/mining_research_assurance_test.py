@@ -91,9 +91,11 @@ class ResearchAssuranceTest(unittest.TestCase):
         self.assertFalse(out["operational_research_ready"])
 
     def test_request_cannot_grant_itself_trusted_reviewer_authority(self):
-        cp=checkpoint(TASK,FRONTIER,[evidence("A"),evidence("B")])
+        scoped={**TASK,"unknown":["A","B"],"derive_generic_dimensions":False,
+                "max_research_depth":"D1"}
+        cp=checkpoint(scoped,FRONTIER,[evidence("A"),evidence("B")])
         plan=orchestrate({
-            "task":TASK,"verified_checkpoint":cp,
+            "task":scoped,"verified_checkpoint":cp,
             "source_snapshots":[source("A"),source("B")],
             "claim_reviews":[review("A"),review("B")],
             "trusted_reviewer_ids":["trusted-source-validator"],
