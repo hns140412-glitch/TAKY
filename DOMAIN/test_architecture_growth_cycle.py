@@ -81,8 +81,18 @@ class CycleTest(unittest.TestCase):
             'independent_verification_receipt': 'qa-001', 'regression_receipt': 'reg-001',
             'proof_preflight': 'FILE_HASH_PASS__DOMAIN_REVIEW_PENDING'}}
         r = assess(i)['result']
-        self.assertEqual(r['route'], 'HUMAN_ADOPTION_REVIEW')
+        self.assertEqual(r['route'], 'EVIDENCE_AUTHENTICITY_REVIEW')
         self.assertFalse(r['automatic_canonical_promotion'])
+
+    def test_hash_pass_cannot_claim_authenticated_review(self):
+        i = method_item()
+        i['work_os_trial'] = {'receipt_id': 'work-001', 'outcome': {
+            'receipt_id': 'out-001', 'state': 'PASS',
+            'real_project_ref': 'untrusted', 'project_revision': 'untrusted',
+            'independent_verification_receipt': 'self-claimed',
+            'regression_receipt': 'self-claimed',
+            'proof_preflight': 'FILE_HASH_PASS__DOMAIN_REVIEW_PENDING'}}
+        self.assertEqual(assess(i)['result']['route'], 'EVIDENCE_AUTHENTICITY_REVIEW')
 
     def test_frozen_tags_override_nominal_open_status(self):
         i = method_item()
