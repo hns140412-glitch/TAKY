@@ -1,0 +1,30 @@
+name: Architecture growth domain routing check
+on:
+  pull_request:
+    paths:
+      - 'DOMAIN/architecture_growth_cycle.py'
+      - 'DOMAIN/architecture_growth_backlog.json'
+      - 'DOMAIN/test_architecture_growth_cycle.py'
+      - 'DOMAIN/architecture_growth_event_replay.py'
+      - 'DOMAIN/test_architecture_growth_event_replay.py'
+      - 'DOMAIN/architecture_source_probe.py'
+      - 'DOMAIN/test_architecture_source_probe.py'
+      - 'DOMAIN/architecture_work_os_proof.py'
+      - 'DOMAIN/test_architecture_work_os_proof.py'
+      - 'ENFORCEMENT/data_index_search.py'
+      - '.github/workflows/architecture-growth-routing.yml'
+  workflow_dispatch:
+jobs:
+  routing-regression:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Negative and regression tests
+        run: python3 -m unittest discover -s DOMAIN -p 'test_architecture*.py' -v
+      - name: Validate current domain board without external side effects
+        run: python3 DOMAIN/architecture_growth_cycle.py DOMAIN/architecture_growth_backlog.json --output /tmp/architecture_growth_board.json
