@@ -225,6 +225,7 @@ def orchestrate(payload: dict) -> dict:
         "selected_route": route,
         "selected_route_provider": route_provider,
         "selected_route_executable": bool(route_provider),
+        "provider_attempt_history": list(payload.get("provider_attempts") or []),
         **depth,
         "search_frontier": frontier,
         "index_first": index_result,
@@ -310,27 +311,47 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
     for req in requests:
         first_by_frontier.setdefault(str(req.get("frontier_id")), req)
     selected = list(first_by_frontier.values())
-    batch = execute_batch(selected, runtime_results or {})
-    selected_ids = {str(req.get("request_id")) for req in selected}
+    # Missing caller result is NOT a failed provider call: no invocation happened.
+    missing = [str(req["request_id"]) for req in selected
+               if not isinstance(runtime_results, dict)
+               or str(req["request_id"]) not in runtime_results]
+    if missing:
+        return {
+            "schema":"TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
+            "state":"WAIT_RUNTIME_RESULT", "execution_batch":None,
+            "missing_request_ids":missing, "plan":plan,
+            "guards":{"network_calls_performed_by_orchestrator":False,
+                      "missing_result_is_not_provider_failure":True,
+                      "current_authority_unchanged":True},
+        }
+    batch = execute_batch(selected, runtime_results)
     access_errors = {"ACCESS_DENIED", "AUTH_REQUIRED", "LOGIN_REQUIRED",
                      "PERMISSION_DENIED", "RESTRICTED", "PAYWALL", "ACCESS_HOLD"}
-    successful = {str(row.get("frontier_id")) for row in batch["results"]
-                  if row.get("state") == "SUCCESS"
-                  and (row.get("receipt") or {}).get("results")}
+    history = [dict(x) for x in (payload.get("provider_attempts") or [])
+               if isinstance(x, dict)]
+    active_pending = (follow_up.get("pending_actions") if using_deferred_batch
+                      else plan["pending_actions"]) or {}
+    query_by_fid = {str(q.get("frontier_id")):q
+                    for q in active_pending.get("ready_query_plans", [])}
     for row in batch["results"]:
         fid = str(row.get("frontier_id"))
         error = str(row.get("error") or "").upper()
-        if (fid in successful or row.get("state") not in {"FAILED", "EMPTY"}
+        provider = str(row.get("provider") or "").upper()
+        history.append({"frontier_id":fid, "provider":provider,
+                        "request_id":row.get("request_id"),
+                        "state":row.get("state"), "error":row.get("error")})
+        # Access/auth holds require an authorized different route, not
+        # an automatic bypass. A valid nonempty result waits for proof review.
+        if (row.get("state") not in {"FAILED", "EMPTY"}
                 or error in access_errors):
             continue
-        alternative = next((
-            req for req in requests
-            if str(req.get("frontier_id")) == fid
-            and str(req.get("request_id")) not in selected_ids
-            and str(req.get("provider")).upper() != str(row.get("provider")).upper()
-        ), None)
+        query = dict(query_by_fid.get(fid) or {})
+        query.pop("next_provider", None)
+        used = {str(h.get("provider") or "").upper() for h in history
+                if str(h.get("frontier_id")) == fid}
+        alternative = next((p for p in choose_providers(query) if p not in used), None)
         if alternative:
-            row["next_provider"] = alternative["provider"]
+            row["next_provider"] = alternative
 
     prior = prior_checkpoint if prior_checkpoint is not None else core_checkpoint(
         task, plan["search_frontier"], []
@@ -361,6 +382,7 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
     next_input.pop("provider_results", None)
     next_input["verified_checkpoint"] = current_checkpoint
     next_input["execution_batch"] = batch
+    next_input["provider_attempts"] = history
     updated = orchestrate(next_input)
     return {
         "schema": "TAKY_MINING_PROVIDER_BATCH_ADVANCE_V1",
@@ -368,6 +390,7 @@ def advance_provider_batch(payload: dict, runtime_results: dict) -> dict:
         "batch_scope": "DEFERRED_REQUIRED" if using_deferred_batch else "CURRENT",
         "dispatched_request_ids": [req["request_id"] for req in selected],
         "execution_batch": batch,
+        "provider_attempts": history,
         "checkpoint": current_checkpoint,
         "plan": updated["plan"],
         "next_run_input": next_input,
