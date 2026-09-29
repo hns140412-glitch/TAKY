@@ -105,7 +105,8 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         # Provider-supplied independent_support_count is only a claim. Never
         # upgrade it beyond independently identifiable source identities.
         identities={
-            str(row.get("source_identity") or row.get("source_url") or
+            str(row.get("canonical_source_id") or row.get("source_family_id") or
+                row.get("source_identity") or row.get("source_url") or
                 row.get("source_id") or "").strip()
             for row in raw
         }
