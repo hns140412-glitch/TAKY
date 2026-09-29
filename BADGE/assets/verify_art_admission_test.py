@@ -2,7 +2,10 @@
 """Negative admission tests: claims, fake evidence and wrong sources never become artwork."""
 import copy
 import unittest
-from verify_art_admission import ROOT, read, verify
+from verify_art_admission import ROOT, read, verify, check_circle_png, exact_file
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from PIL import Image
 
 class BadgeArtAdmissionTests(unittest.TestCase):
     @classmethod
@@ -31,6 +34,30 @@ class BadgeArtAdmissionTests(unittest.TestCase):
     def test_declared_release_is_blocked(self):
         d=copy.deepcopy(self.empty);d["deployment"]="READY"
         self.assertIn("ART_ADMISSION_SCHEMA_OR_DEPLOY_HOLD",verify(ROOT,d))
+    def test_opaque_square_is_rejected_from_actual_pixels(self):
+        with TemporaryDirectory() as tmp:
+            path=Path(tmp)/"bad.png"
+            Image.new("RGBA",(1024,1024),(20,30,40,255)).save(path)
+            issues=[]
+            check_circle_png(path,1024,issues,"001_composite")
+            self.assertIn("001_composite_OUTSIDE_CIRCLE_NOT_TRANSPARENT",issues)
+    def test_wrong_alpha_or_dimensions_rejected(self):
+        with TemporaryDirectory() as tmp:
+            path=Path(tmp)/"bad.png"
+            Image.new("RGB",(800,800),(20,30,40)).save(path)
+            issues=[]
+            check_circle_png(path,1024,issues,"001_composite")
+            self.assertIn("001_composite_SIZE_OR_RGBA",issues)
+    def test_fake_hash_is_rejected_even_when_file_exists(self):
+        with TemporaryDirectory() as tmp:
+            path=Path(tmp)/"BADGE/assets/individual/001/background.png"
+            path.parent.mkdir(parents=True)
+            Image.new("RGBA",(1024,1024),(0,0,0,0)).save(path)
+            issues=[]
+            found=exact_file(Path(tmp),{"path":"BADGE/assets/individual/001/background.png","sha256":"0"*64},
+                             "BADGE/assets/individual/001/",(".png",),issues,"001_background")
+            self.assertIsNone(found)
+            self.assertIn("001_background_MISSING_OR_HASH_MISMATCH",issues)
     def test_no_unknown_empty_items_shape(self):
         d=copy.deepcopy(self.empty);d["items"]=None
         self.assertEqual(["ART_ADMISSION_ITEMS_REQUIRED"],verify(ROOT,d))
