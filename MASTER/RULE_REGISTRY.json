@@ -96,6 +96,11 @@
       "rule_id": "TKY-GROWTH-001",
       "owner": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
       "scope": "GitHub-ecosystem-first growth intelligence, pattern/failure extraction, localized experiments, downstream gap persistence and current-best/frontier evolution"
+    },
+    {
+      "rule_id": "TKY-ASSET-001",
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "scope": "global default for approved/reusable visual asset originals and separate layers in TAKY-ASSETS, exact-revision app pointers and verified PWA build copies, design-to-UI source/visual/runtime delivery gate across chats"
     }
   ]
 }
