@@ -1,0 +1,65 @@
+{
+  "schema": "TAKY_INDEX_ASSET_CONSUMPTION_CASE_V1",
+  "date": "2026-09-30",
+  "state": "EVIDENCE_CASE_NOT_CURRENT_OR_CANONICAL_ASSET_REGISTRY",
+  "scope": "APPROVED_ENVIRONMENT_ONLY_NOT_CHARACTERS_OR_FULL_UI",
+  "governing_rule": "TKY-ASSET-001",
+  "source_registry": "ChatGPT Library: /TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/registry.visual-ids.json",
+  "reference_asset_id": "TAKY-LAF-UI-HOME-SNAP-HIDE-20260927-A",
+  "original_reference_sha256": "6cd65b6d82f3306bab6fa93064780c96a3e4849484a8cc8add1926108a6db6f2",
+  "reference_asset_binary_reverified_in_this_case": false,
+  "source_owner": "User-approved visual registry; INDEX stores projection only",
+  "measured_via": "Independently read original Library PNG bytes, SHA-256 and PNG IHDR dimensions in isolated working container, not registry assertion alone",
+  "entries": [
+    {
+      "visual_id": "TAKY-LAF-SNAP-HOME-COAST-20260927-A",
+      "consumer_app": "Snap & Pop",
+      "asset_basename": "snap_pop_beach_asset.png",
+      "source_library_scoped_path": "/TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/assets/snap_pop_beach_asset.png",
+      "declared_sha256": "f15af01680e2db44ef8af1dff749169f1082ddd15b3760a96da7ff2211eb8259",
+      "measured_sha256": "f15af01680e2db44ef8af1dff749169f1082ddd15b3760a96da7ff2211eb8259",
+      "dimensions_px": [
+        941,
+        1672
+      ],
+      "bytes": 2287028,
+      "hash_match": true,
+      "dimensions_match": true
+    },
+    {
+      "visual_id": "TAKY-LAF-HIDE-HOME-MOSSFALL-20260927-A",
+      "consumer_app": "Hide & Seek",
+      "asset_basename": "hide_seek_forest_asset.png",
+      "source_library_scoped_path": "/TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/assets/hide_seek_forest_asset.png",
+      "declared_sha256": "1f7aa500a177e25820649cc485355297cbc4fb89909df1f7f43e4ff7ddbe2419",
+      "measured_sha256": "1f7aa500a177e25820649cc485355297cbc4fb89909df1f7f43e4ff7ddbe2419",
+      "dimensions_px": [
+        941,
+        1672
+      ],
+      "bytes": 3137077,
+      "hash_match": true,
+      "dimensions_match": true
+    }
+  ],
+  "central_asset_repo": "hns140412-glitch/TAKY-ASSETS",
+  "observed_central_main_tree_sha": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
+  "observed_central_main_tree_truncated": false,
+  "exact_asset_basename_paths_in_observed_main": 0,
+  "central_binary_commit_verified": false,
+  "runtime_app_import_verified": false,
+  "actual_render_comparison_verified": false,
+  "permission_rights_to_publish_originals_not_assumed": true,
+  "approval_recorded_in_library_registry_not_independently_reapproved": true,
+  "claim_ceiling": "TWO_APPROVED_REGISTRY_POINTERS_AND_LOCAL_LIBRARY_PNG_BYTE_IDENTITY_VERIFIED_ONLY",
+  "open": [
+    "CENTRAL_REPO_BINARY_REGISTRATION_AND_INTEGRITY",
+    "APPLICATION_EXACT_SHA_IMPORT",
+    "REAL_RENDER_INTERACTION_DESIGN_MATCH",
+    "INDEPENDENT_PRODUCER_GATE_RECEIPT"
+  ],
+  "no_source_bytes_stored_in_this_repo": true,
+  "no_current_write": true,
+  "no_main_merge": true,
+  "no_deployment": true
+}
