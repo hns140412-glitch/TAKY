@@ -59,6 +59,20 @@ class MiningCoreTest(unittest.TestCase):
   self.assertEqual(out["independent_source_identity_count"],1)
   self.assertEqual(out["best_evidence_score"],.925)
 
+ def test_canonical_group_collapses_distinct_document_urls(self):
+  from mining_core import assess_frontier
+  rows=[{"frontier_id":"F","canonical_source_id":"PUB:DATASET-1",
+         "source_identity":"HTML:D1","source_class":"OFFICIAL",
+         "source_url":"https://example.gov/item/1","claim":"published specification",
+         "direct_support":True,"fresh_enough":True,"independent_support_count":2},
+        {"frontier_id":"F","canonical_source_id":"PUB:DATASET-1",
+         "source_identity":"JSON:D1","source_class":"OFFICIAL",
+         "source_url":"https://example.gov/catalog/1","claim":"published specification",
+         "direct_support":True,"fresh_enough":True,"independent_support_count":2}]
+  x=assess_frontier([{"id":"F","question":"published specification"}],rows)[0]
+  self.assertEqual(x["independent_source_identity_count"],1)
+  self.assertEqual(x["best_evidence_score"],.925)
+
  def test_distinct_canonical_origins_allow_independent_support_when_claimed(self):
   from mining_core import assess_frontier
   one={"frontier_id":"F","source_identity":"publisher:A","source_class":"PRIMARY",
