@@ -48,6 +48,9 @@ context = assemble_relation_context(items, STUDENT, required_types={"RELATED_TO"
 assert context["relation_context_complete_for_request"]
 assert context["edges"][0]["status"] == "STAGED_METADATA_LINK_NOT_CANONICAL"
 assert context["edges"][0]["target_source_ref"]["source_id"] == TEACHER
+assert context["edges"][0]["target_source_ref"]["source_family_origin"] == "STAGED_MANIFEST_METADATA_NOT_CURRENT"
+assert r["results"][0]["classification_provenance"]["source_family"] == "STAGED_MANIFEST_METADATA_NOT_CURRENT"
+assert r["results"][0]["classification_provenance"]["short_summary"] == "STAGED_PAIR_METADATA_NOT_PDF_CONTENT_REVIEW"
 assert context["current_promoted"] is False and context["domain_use_approved"] is False
 assert not r["projection_authoritative"]
 assert {v["source_id"] for v in search(items, "일기", filters={"domain": "GRADE_1_2"})["results"]} == {STUDENT, TEACHER}
