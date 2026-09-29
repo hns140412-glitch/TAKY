@@ -59,16 +59,26 @@ def replay(backlog: dict, events: list[dict], *, evidence_root: Path | None = No
         elif kind == 'INDEX_RESULT':
             if gap.get('index_receipt'):
                 raise ValueError('INDEX_RESULT_REPLACEMENT_REQUIRES_NEW_GAP_REVISION:' + identity)
+            if not isinstance(payload.get('index_payload_sha256'), str) or len(payload['index_payload_sha256']) != 64 or any(c not in '0123456789abcdef' for c in payload['index_payload_sha256'].lower()):
+                raise ValueError('INDEX_SNAPSHOT_SHA256_REQUIRED:' + identity)
+            if payload.get('sufficient') is False and not (isinstance(payload.get('insufficiency_evidence'), str) and payload['insufficiency_evidence'].strip()):
+                raise ValueError('INDEX_INSUFFICIENCY_PROOF_REQUIRED:' + identity)
+            if gap.get('index_receipt'):
+                raise ValueError('INDEX_RESULT_REPLACEMENT_REQUIRES_NEW_GAP_REVISION:' + identity)
             if payload.get('checked') is not True or not isinstance(payload.get('sufficient'), bool) or payload.get('receipt_id') != event['receipt_id']:
                 raise ValueError('INDEX_RECEIPT_INVALID:' + identity)
             if payload['sufficient'] and (not payload.get('sufficiency_evidence') or not payload.get('index_payload_sha256')):
                 raise ValueError('INDEX_SUFFICIENCY_PROOF_REQUIRED:' + identity)
             gap['index_receipt'] = payload
         elif kind == 'METHOD_CANDIDATE':
+            if assess(gap)['result']['route'] != 'DOMAIN_METHOD_SYNTHESIS':
+                raise ValueError('METHOD_OUT_OF_ORDER:' + identity)
             if gap.get('method_candidate'):
                 raise ValueError('METHOD_REPLACEMENT_REQUIRES_NEW_GAP_REVISION:' + identity)
             gap['method_candidate'] = payload
         elif kind == 'WORK_OS_TRIAL':
+            if assess(gap)['result']['route'] != 'WORK_OS_TRIAL_HANDOFF':
+                raise ValueError('TRIAL_OUT_OF_ORDER:' + identity)
             if gap.get('work_os_trial'):
                 raise ValueError('TRIAL_REPLACEMENT_REQUIRES_NEW_GAP_REVISION:' + identity)
             if payload.get('receipt_id') != event['receipt_id']:
