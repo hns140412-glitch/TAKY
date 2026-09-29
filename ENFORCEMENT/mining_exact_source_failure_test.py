@@ -31,7 +31,7 @@ class ExactFileRecoveryTests(unittest.TestCase):
         self.assertTrue(result["trace"][0]["exact_identity_match_required"])
         self.assertEqual(result["trace"][0]["qualified_index_hits"],0)
         self.assertIn("SOURCE_IDENTITY_MISMATCH",
-                      [r["reason"] for r in result["trace"][0]["rejected_index_candidates"])
+                      [r["reason"] for r in result["trace"][0]["rejected_index_candidates"]])
 
     def test_exact_filename_is_a_candidate_not_retrieved_binary_or_evidence(self):
         row={"id":"A","question":MATH,"expected_source_filename":MATH}
