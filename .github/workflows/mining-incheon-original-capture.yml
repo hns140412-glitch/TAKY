@@ -1,0 +1,116 @@
+name: Mining Incheon Single Original Capture
+
+on:
+  push:
+    branches:
+      - taky/mining-evidence-frontier-regression-2026-09-29
+    paths:
+      - '.github/workflows/mining-incheon-original-capture.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Resolve publisher-listed exact file paths and acquire bounded originals
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, io, json, pathlib, re, urllib.request, urllib.error, zipfile
+          from urllib.parse import urljoin,urlparse
+          ROOT='https://www.ice.go.kr'
+          PAGE=ROOT+'/ice/na/ntt/selectNttInfo.do?bbsAllView=Y&bbsId=1630&mi=&nttSn=3383177'
+          EXPECT=[
+            '[부록] 초등 수학과 서논술형 평가 문항.hwpx',
+            '[부록] 초등 과학과 서논술형 평가 문항.hwpx',
+            '초등 수학과 서논술형 평가 도움자료.pdf',
+            '초등 과학과 서논술형 평가 도움자료.pdf',
+          ]
+          OUT=pathlib.Path('incheon-originals')
+          OUT.mkdir(exist_ok=True)
+          class OfficialOnly(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,req,fp,code,msg,headers,newurl):
+                  parsed=urlparse(newurl)
+                  if parsed.scheme!='https' or parsed.hostname not in ('ice.go.kr','www.ice.go.kr'):
+                      raise ValueError('CROSS_HOST_REDIRECT_REJECTED')
+                  return super().redirect_request(req,fp,code,msg,headers,newurl)
+          opener=urllib.request.build_opener(OfficialOnly)
+          def fetch(url,limit):
+              p=urlparse(url)
+              if p.scheme!='https' or p.hostname not in ('ice.go.kr','www.ice.go.kr'):
+                  raise ValueError('NONOFFICIAL_TARGET_REJECTED')
+              req=urllib.request.Request(url,headers={
+                  'User-Agent':'Mozilla/5.0 (compatible; TAKY-source-verification/1.0)',
+                  'Accept':'*/*',
+              })
+              with opener.open(req,timeout=35) as response:
+                  raw=response.read(limit+1)
+                  if len(raw)>limit: raise ValueError('RESPONSE_SIZE_BOUND_EXCEEDED')
+                  if urlparse(response.url).hostname not in ('ice.go.kr','www.ice.go.kr'):
+                      raise ValueError('FINAL_HOST_NOT_OFFICIAL')
+                  return raw, response.status,response.url,response.headers.get('Content-Type','')
+          manifest={'schema':'TAKY_INCHEON_ORIGINAL_CAPTURE_V1','publisher_page':PAGE,'publisher_post_id':'3383177','results':[]}
+          try:
+              raw,status,final,typ=fetch(PAGE,2_000_000)
+              if status!=200 or 'html' not in typ.lower():raise ValueError('PUBLISHER_PAGE_NOT_HTML_200')
+              source=raw.decode('utf-8','replace')
+              pattern=r"DEXT5UPLOAD\.AddUploadedFile\('3383177',\s*'([^']+)',\s*'([^']+)',\s*'(\d+)',\s*'(\d+)'"
+              matches=re.findall(pattern,source)
+              indexed={name:(path,int(size),number) for name,path,size,number in matches}
+              print('PUBLISHER_METADATA_MATCHES',len(matches),'EXACT_EXPECTED',sum(name in indexed for name in EXPECT))
+              for i,name in enumerate(EXPECT,1):
+                  item={'index':i,'original_filename':name,'state':'HOLD'}
+                  manifest['results'].append(item)
+                  try:
+                      if name not in indexed:raise ValueError('EXACT_PUBLISHER_ENTRY_MISSING')
+                      path,size,file_id=indexed[name]
+                      suffix='.hwpx' if name.endswith('.hwpx') else '.pdf'
+                      if (not path.startswith('/upload/ice/na/bbs_1630/2026/09/')
+                          or not path.endswith(suffix) or size<100 or size>100_000_000):
+                          raise ValueError('UNEXPECTED_PUBLISHER_FILE_METADATA')
+                      url=urljoin(ROOT,path)
+                      data,http,actual,mime=fetch(url,size+1)
+                      if http!=200:raise ValueError('FILE_HTTP_NOT_200')
+                      if len(data)!=size:raise ValueError('PUBLISHER_SIZE_MISMATCH')
+                      if suffix=='.pdf':
+                          if not data.startswith(b'%PDF-'):raise ValueError('PDF_SIGNATURE_MISMATCH')
+                      else:
+                          if not zipfile.is_zipfile(io.BytesIO(data)):raise ValueError('HWPX_ZIP_SIGNATURE_MISMATCH')
+                          with zipfile.ZipFile(io.BytesIO(data)) as z:
+                              names=set(z.namelist())
+                              if 'mimetype' not in names and 'Contents/content.hpf' not in names:
+                                  raise ValueError('HWPX_STRUCTURE_MISMATCH')
+                      target=OUT/(str(i)+suffix)
+                      target.write_bytes(data)
+                      digest=hashlib.sha256(data).hexdigest()
+                      item.update(state='ACQUIRED_SHA256_VERIFIED',source_url=actual,
+                                  expected_size=size,actual_size=len(data),sha256=digest,
+                                  publisher_file_id=file_id,content_type=mime,
+                                  artifact_filename=target.name)
+                      print('ORIGINAL_VERIFIED',i,name,len(data),digest,url)
+                  except (OSError,ValueError,zipfile.BadZipFile) as exc:
+                      item['error']=type(exc).__name__+':'+str(exc)[:120]
+                      print('ORIGINAL_HOLD',i,name,item['error'])
+          except (OSError,ValueError) as exc:
+              manifest['page_error']=type(exc).__name__+':'+str(exc)[:140]
+              print('OFFICIAL_PAGE_HOLD',manifest['page_error'])
+          manifest['acquired_count']=sum(x['state']=='ACQUIRED_SHA256_VERIFIED' for x in manifest['results'])
+          manifest['expected_count']=4
+          (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('ORIGINAL_CAPTURE_RESULT',json.dumps({
+              'acquired_count':manifest['acquired_count'],'expected_count':4,
+              'errors':[x.get('error') for x in manifest['results'] if x.get('error')],
+              'page_error':manifest.get('page_error')
+          },ensure_ascii=False))
+          PY
+      - name: Preserve one-day acquisition handoff without committing source data to the repo
+        uses: actions/upload-artifact@v4
+        with:
+          name: incheon-official-originals-one-day
+          path: incheon-originals/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
