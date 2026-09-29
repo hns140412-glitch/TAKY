@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import unittest
-from mining_run_orchestrator import orchestrate
+from mining_run_orchestrator import orchestrate, advance_provider_batch
+from mining_core import checkpoint
 
 MEMORY={"strategies":[{"strategy_id":"S1","task_family":"LEARNING_ENGINE","goal_pattern":"adaptive mastery scheduling","status":"PROMOTED"}],"failures":[{"failure_id":"F1","task_family":"LEARNING_ENGINE","route_signature":"search:stale","state":"RESOLVED","new_evidence_required":True,"replacement_routes":["search:official"]}]}
 
@@ -69,6 +70,32 @@ class OrchestratorTest(unittest.TestCase):
                                      "unknown":["fraction standard"]},"memory":MEMORY,"index_rows":rows})
         self.assertFalse(result["plan"]["research_complete_eligible"])
         self.assertTrue(result["plan"]["index_verification_required"])
+
+    def test_foreign_goal_checkpoint_cannot_close_or_skip_this_research(self):
+        question="shared source"
+        old_task={"task_family":"GENERAL_RESEARCH","goal":"old unrelated goal",
+                  "unknown":[question]}
+        current_task={**old_task,"goal":"new actual goal"}
+        frontier=[{"id":question,"question":question,"kind":"UNKNOWN"}]
+        old=checkpoint(old_task,frontier,[{
+            "frontier_id":question,"source_id":"OLD-SOURCE",
+            "source_class":"OFFICIAL","claim":"old strong finding",
+            "excerpt_ref":"page:1#p:1","direct_support":True,"fresh_enough":True,
+        }])
+        self.assertEqual(old["frontier"][0]["status"],"CLOSED")
+        out=orchestrate({"task":current_task,"memory":{},
+                         "verified_checkpoint":old})["plan"]
+        self.assertEqual(out["checkpoint_binding_state"],
+                         "REJECTED_GOAL_OR_SCHEMA_MISMATCH")
+        self.assertNotEqual(out["pending_actions"]["items"][0]["classification"],
+                            "EVIDENCE_VERIFIED")
+        self.assertFalse(out["research_complete_eligible"])
+        self.assertTrue(out["planned_provider_requests"],
+                        "New goal must retain its own evidence search.")
+        self.assertEqual(out["follow_up_activation"]["state"],"WAIT_VERIFIED_CHECKPOINT")
+        advance=advance_provider_batch({"task":current_task,"memory":{},
+                                        "verified_checkpoint":old},{})
+        self.assertEqual(advance["state"],"HOLD_CHECKPOINT_GOAL_MISMATCH")
 
     def test_success_only_proposes_candidate(self):
         r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:official"},"memory":MEMORY,"execution_receipt":{"success":True,"route_signature":"search:official"}})
