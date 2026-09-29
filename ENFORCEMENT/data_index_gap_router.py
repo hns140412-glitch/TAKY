@@ -15,13 +15,13 @@ KINDS = {
     "ORIGINAL_MISSING", "ACCESS_BLOCKED", "PRIMARY_PROVENANCE_MISSING",
     "VERSION_UNRESOLVED", "CONTRADICTORY_SOURCES", "COVERAGE_MISSING",
     "DETAIL_ANCHOR_MISSING", "CLASSIFICATION_AMBIGUOUS", "RETRIEVAL_LOW_RECALL",
-    "DUPLICATE_PROOF_MISSING", "RIGHTS_UNCLEAR", "DOMAIN_POLICY_QUESTION",
+    "DUPLICATE_PROOF_MISSING", "RELATION_PROOF_MISSING", "RIGHTS_UNCLEAR", "DOMAIN_POLICY_QUESTION",
 }
 INDEX_CHECKS = {"NOT_CHECKED", "CHECKED_PRESENT", "CHECKED_MISSING", "CHECKED_INSUFFICIENT"}
 RAW_ACCESS = {"NOT_CHECKED", "ACCESSIBLE", "PARTIAL", "MISSING", "DENIED"}
 PRIVACY = {"PUBLIC", "AUTHORIZED_PRIVATE", "RESTRICTED"}
 PROOF_NEEDED = {"ORIGINAL_MISSING", "ACCESS_BLOCKED", "PRIMARY_PROVENANCE_MISSING", "VERSION_UNRESOLVED", "CONTRADICTORY_SOURCES", "COVERAGE_MISSING", "RIGHTS_UNCLEAR"}
-INDEX_FIRST = {"DETAIL_ANCHOR_MISSING", "CLASSIFICATION_AMBIGUOUS", "RETRIEVAL_LOW_RECALL", "DUPLICATE_PROOF_MISSING"}
+INDEX_FIRST = {"DETAIL_ANCHOR_MISSING", "CLASSIFICATION_AMBIGUOUS", "RETRIEVAL_LOW_RECALL", "DUPLICATE_PROOF_MISSING", "RELATION_PROOF_MISSING"}
 
 
 def _required(value: Any, label: str) -> str:
@@ -110,6 +110,75 @@ def deduplicate_proposals(gaps: list[dict[str, Any]]) -> list[dict[str, Any]]:
         proposal = build_gap_proposal(gap)
         by_id.setdefault(proposal["request_id"], proposal)
     return list(by_id.values())
+
+
+def proposals_from_relation_context(
+    context: dict[str, Any],
+    *,
+    scope_namespace: str,
+    privacy_class: str,
+    raw_access: str = "NOT_CHECKED",
+) -> dict[str, Any]:
+    """Translate INDEX relation evidence gaps into existing read-only reverse routing.
+
+    Never infer access/privacy from an INDEX row or silently dispatch Mining.
+    A target excluded by the caller's filter is held for authorized re-query;
+    it must not be disclosed or treated as a missing external original.
+    """
+    if not isinstance(context, dict) or context.get("schema") != "TAKY_INDEX_RELATION_CONTEXT_V1":
+        raise ValueError("RELATION_CONTEXT_SCHEMA_INVALID")
+    source_ref = context.get("root_source_ref") or {}
+    sid = _required(source_ref.get("source_id"), "ROOT_SOURCE_ID")
+    if privacy_class not in PRIVACY or raw_access not in RAW_ACCESS:
+        raise ValueError("RELATION_CONTEXT_BOUNDARY_INVALID")
+    if not isinstance(context.get("evidence_gaps"), list):
+        raise ValueError("RELATION_CONTEXT_GAPS_INVALID")
+    requests, local_holds = [], []
+    for entry in context["evidence_gaps"]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("reason"), str):
+            raise ValueError("RELATION_CONTEXT_GAP_INVALID")
+        reason = entry["reason"]
+        if reason == "TARGET_OUTSIDE_QUERY_FILTER":
+            local_holds.append({"reason": reason, "next_action": "AUTHORIZED_FILTER_REQUERY_ONLY",
+                                "target_metadata_returned": False})
+            continue
+        if reason == "EDGE_BUDGET_EXCEEDED":
+            local_holds.append({"reason": reason, "next_action": "EXPAND_BOUNDED_LOCAL_EDGE_REVIEW",
+                                "target_metadata_returned": False})
+            continue
+        if reason == "EXACT_DUPLICATE_PROOF_REQUIRED":
+            kind, index_check = "DUPLICATE_PROOF_MISSING", "CHECKED_INSUFFICIENT"
+        elif reason == "LOGICAL_NODE_NOT_MATERIALIZED":
+            kind, index_check = "CLASSIFICATION_AMBIGUOUS", "CHECKED_INSUFFICIENT"
+        elif reason == "SOURCE_ENDPOINT_NOT_IN_UNIVERSE":
+            # Missing from this limited view is not proof that RAW is missing.
+            kind, index_check = "COVERAGE_MISSING", "NOT_CHECKED"
+        else:
+            kind, index_check = "RELATION_PROOF_MISSING", "CHECKED_INSUFFICIENT"
+        typ = entry.get("type")
+        label = typ if isinstance(typ, str) and typ in {
+            "PART_OF", "CONTAINS", "FRAGMENT_OF", "EXTRACTED_FROM", "DERIVED_FROM",
+            "VERSION_OF", "SUPERSEDES", "EXACT_DUPLICATE_OF", "NEAR_DUPLICATE_OF",
+            "SAME_FAMILY_AS", "REFERENCES", "RELATED_TO"} else "UNCLASSIFIED_RELATION"
+        requests.append({
+            "scope_namespace": scope_namespace,
+            "gap_kind": kind, "source_refs": [sid],
+            "evidence_question": f"Resolve {label} relation evidence for source {sid}",
+            "desired_evidence": "Source-grounded relation proof or explicit unresolved-source record",
+            "why_index_insufficient": f"One-hop relation-context gap: {reason}",
+            "index_check": index_check, "raw_access": raw_access,
+            "attempted_checks": ["INDEX_RELATION_CONTEXT_ONE_HOP"],
+            "minimum_authority": "SOURCE_GROUNDED_INDEX_REVIEW",
+            "freshness_requirement": "CURRENT_POINTER_SCOPED",
+            "privacy_class": privacy_class, "rights_state": "UNKNOWN",
+        })
+    return {
+        "schema": "TAKY_INDEX_RELATION_GAP_ROUTING_V1",
+        "state": "DRAFT_ROUTING_NOT_DISPATCHED",
+        "root_source_id": sid, "proposals": deduplicate_proposals(requests),
+        "local_holds": local_holds,
+        "current_promoted": False, "mining_requests_dispatched": False,
+    }
 
 
 def validate_mining_return(receipt: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
