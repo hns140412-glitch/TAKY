@@ -202,7 +202,9 @@ class PendingActionTest(unittest.TestCase):
                 "critical_requirements": ["a", "b", "c"], "max_research_depth": "D1"}
         p = plan(task)
         ids = [x["id"] for x in p["search_frontier"]]
+        from mining_core import normalize_goal
         alleged = {"schema": "TAKY_MINING_CORE_CHECKPOINT_V1", "resume_key": "unverified",
+                   "goal": normalize_goal(task),
                    "frontier": [{"id": fid, "status": "CLOSED", "evidence_count": 1,
                                  "best_evidence_score": 0.925} for fid in ids],
                    "evidence": []}
