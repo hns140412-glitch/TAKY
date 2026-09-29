@@ -206,11 +206,14 @@ def main() -> int:
     parser.add_argument("--external-manifest-doc-id")
     parser.add_argument("--query", required=True)
     parser.add_argument("--context-source-id", help="Explicit read-only one-hop relationship context for an authorized source ID")
+    parser.add_argument("--require-relation-type", action="append", default=[], help="Relation type required for this context request; repeatable")
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--filter", action="append", default=[])
     args = parser.parse_args()
     if args.limit < 1:
         parser.error("limit must be positive")
+    if args.require_relation_type and not args.context_source_id:
+        parser.error("--require-relation-type requires --context-source-id")
     filters = {}
     for arg in args.filter:
         if "=" not in arg:
@@ -237,7 +240,8 @@ def main() -> int:
         eligible = {row["source_id"] for row in apply_filters(records, filters)}
         try:
             result["relation_context"] = assemble_relation_context(
-                records, args.context_source_id, eligible_ids=eligible)
+                records, args.context_source_id, eligible_ids=eligible,
+                required_types=set(args.require_relation_type))
         except ValueError as exc:
             parser.error(str(exc))
     result["overlay_provenance"] = info
