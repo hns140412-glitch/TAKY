@@ -144,9 +144,11 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         if not isinstance(artifact_contract, dict):
             detected.append("ARTIFACT_PRE_CONTRACT_MISSING")
         else:
-            artifact_gate_result = producer_artifact_preflight(artifact_contract, repo_root)
-            detected.extend(artifact_gate_result.get("detected", []))
-            if effective_record.get("artifact_phase") == "POST":
+            phase = effective_record.get("artifact_phase", "PRE")
+            if phase == "PRE":
+                artifact_gate_result = producer_artifact_preflight(artifact_contract, repo_root)
+                detected.extend(artifact_gate_result.get("detected", []))
+            elif phase == "POST":
                 evidence = effective_record.get("artifact_evidence")
                 receipt = effective_record.get("artifact_pre_receipt")
                 if not isinstance(evidence, dict) or not isinstance(receipt, dict):
@@ -156,7 +158,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
                         artifact_contract, receipt, evidence, repo_root
                     )
                     detected.extend(artifact_gate_result.get("detected", []))
-            elif effective_record.get("artifact_phase", "PRE") != "PRE":
+            else:
                 detected.append("ARTIFACT_PHASE_INVALID")
 
     context_firewall_result = None
