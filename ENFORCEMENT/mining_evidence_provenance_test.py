@@ -3,6 +3,7 @@
 import unittest
 from mining_evidence_provenance import enrich_from_index
 from mining_core import checkpoint, apply_external_receipts
+from mining_run_orchestrator import orchestrate, advance_provider_batch
 
 
 class EvidenceProvenanceTest(unittest.TestCase):
@@ -61,6 +62,53 @@ class EvidenceProvenanceTest(unittest.TestCase):
         self.assertEqual(checked["evidence"][0]["canonical_source_id"],
                          checked["evidence"][1]["canonical_source_id"])
         self.assertFalse(checked["evidence"][0]["provenance_group_reviewed"])
+
+    def test_full_orchestrator_receipt_uses_index_duplicate_group_without_provider_patch(self):
+        task={"task_family":"PUBLIC_DATA","goal":"verify published metadata",
+              "unknown":["official API published format"],"max_research_depth":"D1"}
+        index=[{"source_id":"HTML"},{"source_id":"CATALOG"}]
+        rel=[{"type":"EXACT_DUPLICATE_OF","from":"HTML","to":"CATALOG"}]
+        payload={"task":task,"memory":{},"index_rows":index,"index_relations":rel}
+        requests=orchestrate(payload)["plan"]["planned_provider_requests"]
+        self.assertTrue(requests)
+        req=requests[0]
+        result=advance_provider_batch(payload,{req["request_id"]:{
+            "state":"SUCCESS","response":{"results":[
+                {"source_id":"HTML","url":"https://example.gov/spec",
+                 "source_class":"OFFICIAL","claim":"metadata","direct_support":True,
+                 "excerpt_ref":"format listing","independent_support_count":2},
+                {"source_id":"CATALOG","url":"https://example.gov/catalog",
+                 "source_class":"OFFICIAL","claim":"metadata","direct_support":True,
+                 "excerpt_ref":"format listing","independent_support_count":2}]}
+        }})
+        self.assertEqual(result["state"],"RECONCILED")
+        evidence=result["checkpoint"]["evidence"]
+        self.assertEqual(len(evidence),2)
+        self.assertEqual(evidence[0]["canonical_source_id"],
+                         evidence[1]["canonical_source_id"])
+        self.assertEqual(result["checkpoint"]["frontier"][0]["independent_source_identity_count"],1)
+        self.assertEqual(result["checkpoint"]["frontier"][0]["best_evidence_score"],.925)
+        self.assertTrue(all(x["evidence_origin"]=="PROVIDER_RECEIPT" for x in evidence))
+
+    def test_full_adapter_can_count_two_only_when_index_groups_reviewed(self):
+        task={"task_family":"PUBLIC_DATA","goal":"verify independent notices",
+              "required_frontier_ids":["notice"]}
+        start=checkpoint(task,[{"id":"notice","question":"two notices"}],[])
+        rows=[{"source_id":"OFF-A","canonical_source_id":"PUBLISHER:A",
+               "source_group_reviewed":True},
+              {"source_id":"OFF-B","canonical_source_id":"PUBLISHER:B",
+               "source_group_reviewed":True}]
+        receipt=[{"frontier_id":"notice","query":"two notices","adapter":"WEB",
+                  "results":[{"source_id":"OFF-A","url":"https://a.example/notice",
+                              "source_class":"PRIMARY","claim":"statement",
+                              "direct_support":True,"independent_support_count":2},
+                             {"source_id":"OFF-B","url":"https://b.example/notice",
+                              "source_class":"PRIMARY","claim":"statement",
+                              "direct_support":True,"independent_support_count":2}]}]
+        result=apply_external_receipts(start,receipt,index_rows=rows)
+        self.assertEqual(result["frontier"][0]["independent_source_identity_count"],2)
+        self.assertEqual(result["frontier"][0]["best_evidence_score"],1.0)
+        self.assertTrue(result["frontier"][0]["canonical_grouping_confirmed"])
 
     def test_provider_success_with_separate_unreviewed_urls_not_independent(self):
         original=checkpoint({"goal":"review","task_family":"PUBLIC_DATA"},
