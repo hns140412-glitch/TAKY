@@ -74,7 +74,7 @@ with tempfile.TemporaryDirectory() as temp:
     all_items, info = load_explicit_overlay(index, pointer, bridge)
     assert len(all_items) == 3 and info["current_corpus_count"] == 1 and info["external_bridge_count"] == 2
     assert len(INDEX["source_entries"]) == 1
-    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT, "--context-source-id", STUDENT, "--require-relation-type", "RELATED_TO"]
+    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT, "--context-source-id", STUDENT, "--require-relation-type", "RELATED_TO", "--emit-context-gaps", "--context-scope-namespace", "DATA_TEST", "--context-privacy-class", "AUTHORIZED_PRIVATE"]
     result = subprocess.run(command, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     output = json.loads(result.stdout)
@@ -83,6 +83,9 @@ with tempfile.TemporaryDirectory() as temp:
     assert output["relation_context"]["index_owner_receipt_verified"] is False
     assert output["relation_context"]["relation_context_complete_for_request"] is True
     assert output["relation_context"]["domain_use_approved"] is False
+    assert output["index_gap_routing"]["schema"] == "TAKY_INDEX_RELATION_GAP_ROUTING_V1"
+    assert output["index_gap_routing"]["proposals"] == []
+    assert output["index_gap_routing"]["mining_requests_dispatched"] is False
     bad = copy.deepcopy(INDEX)
     bad["schema"] = "TAKY_DATA_UTILIZATION_INDEX_V25"
     dump("index.json", bad)
