@@ -74,13 +74,15 @@ with tempfile.TemporaryDirectory() as temp:
     all_items, info = load_explicit_overlay(index, pointer, bridge)
     assert len(all_items) == 3 and info["current_corpus_count"] == 1 and info["external_bridge_count"] == 2
     assert len(INDEX["source_entries"]) == 1
-    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT, "--context-source-id", STUDENT]
+    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT, "--context-source-id", STUDENT, "--require-relation-type", "RELATED_TO"]
     result = subprocess.run(command, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     output = json.loads(result.stdout)
     assert output["results"][0]["source_id"] == STUDENT and output["overlay_provenance"]["current_pointer_modified"] is False
     assert output["relation_context"]["edges"][0]["target_source_ref"]["source_id"] == TEACHER
     assert output["relation_context"]["index_owner_receipt_verified"] is False
+    assert output["relation_context"]["relation_context_complete_for_request"] is True
+    assert output["relation_context"]["domain_use_approved"] is False
     bad = copy.deepcopy(INDEX)
     bad["schema"] = "TAKY_DATA_UTILIZATION_INDEX_V25"
     dump("index.json", bad)
