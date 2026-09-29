@@ -21,6 +21,8 @@ on:
       - 'ENFORCEMENT/mining_pending_actions_test.py'
       - 'ENFORCEMENT/mining_evidence_provenance.py'
       - 'ENFORCEMENT/mining_evidence_provenance_test.py'
+      - 'ENFORCEMENT/mining_research_assurance.py'
+      - 'ENFORCEMENT/mining_research_assurance_test.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal_test.py'
       - 'ENFORCEMENT/mining_core.py'
@@ -99,6 +101,8 @@ on:
       - 'ENFORCEMENT/mining_pending_actions_test.py'
       - 'ENFORCEMENT/mining_evidence_provenance.py'
       - 'ENFORCEMENT/mining_evidence_provenance_test.py'
+      - 'ENFORCEMENT/mining_research_assurance.py'
+      - 'ENFORCEMENT/mining_research_assurance_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
       - 'ENFORCEMENT/mining_index_bridge_test.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
@@ -123,6 +127,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_engine_step12_unseen_goal.py
           python -m py_compile ENFORCEMENT/mining_core.py
           python -m py_compile ENFORCEMENT/mining_evidence_provenance.py
+          python -m py_compile ENFORCEMENT/mining_research_assurance.py
           python -m py_compile ENFORCEMENT/mining_source_strategy.py
           python -m py_compile ENFORCEMENT/mining_claim_relations.py
           python -m py_compile ENFORCEMENT/mining_goal_sufficiency.py
@@ -168,6 +173,8 @@ jobs:
         run: python ENFORCEMENT/mining_core_test.py
       - name: Test Index evidence provenance bridge
         run: python ENFORCEMENT/mining_evidence_provenance_test.py
+      - name: Test full-goal research source and claim assurance
+        run: python ENFORCEMENT/mining_research_assurance_test.py
       - name: Test Mining source strategy
         run: python ENFORCEMENT/mining_source_strategy_test.py
       - name: Test semantic claim relations
