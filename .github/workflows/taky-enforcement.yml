@@ -153,6 +153,7 @@ jobs:
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
           python -m py_compile ENFORCEMENT/data_index_bridge.py
+          python -m py_compile ENFORCEMENT/data_index_relation_context.py
           python -m py_compile ENFORCEMENT/data_index_source_composer.py
           python -m py_compile ENFORCEMENT/data_index_gap_router.py
           python -m py_compile ENFORCEMENT/data_index_detail_contract.py
@@ -405,6 +406,8 @@ jobs:
         run: python ENFORCEMENT/data_index_search_test.py
       - name: Staged external source bridge regression
         run: python ENFORCEMENT/data_index_bridge_test.py
+      - name: Evidence-labelled relation context and filtering regression
+        run: python ENFORCEMENT/data_index_relation_context_test.py
       - name: Source-grounded V6/V26 composer regression
         run: python ENFORCEMENT/data_index_source_composer_test.py
       - name: Index evidence-gap reverse handoff regression
