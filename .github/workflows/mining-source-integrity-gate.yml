@@ -1,0 +1,28 @@
+name: Mining Source Integrity Gate
+
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/mining_verified_archive_manifest.py'
+      - 'ENFORCEMENT/mining_verified_archive_manifest_test.py'
+      - '.github/workflows/mining-source-integrity-gate.yml'
+  push:
+    paths:
+      - 'ENFORCEMENT/mining_verified_archive_manifest.py'
+      - 'ENFORCEMENT/mining_verified_archive_manifest_test.py'
+      - '.github/workflows/mining-source-integrity-gate.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile standalone original archive gate
+        run: python -m py_compile ENFORCEMENT/mining_verified_archive_manifest.py ENFORCEMENT/mining_verified_archive_manifest_test.py
+      - name: Test original byte hash, exact duplicate/version split and negative cases
+        run: python ENFORCEMENT/mining_verified_archive_manifest_test.py
