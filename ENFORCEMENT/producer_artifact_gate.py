@@ -47,20 +47,36 @@ def preflight(contract: dict, root: Path) -> dict:
             errors.append("PRE_OUTPUT_ALREADY_EXISTS")
     except ValueError as exc:
         errors.append(str(exc))
+    baseline_hashes = {}
     for key in ("source_ref", "authority_ref"):
         try:
-            if not _rooted(root, contract.get(key)).is_file():
+            source = _rooted(root, contract.get(key))
+            if not source.is_file():
                 errors.append("PRE_" + key.upper() + "_NOT_FOUND")
+            else:
+                baseline_hashes[key] = _sha(source)
         except ValueError:
             errors.append("PRE_" + key.upper() + "_INVALID_PATH")
     if kind in VISUAL_KINDS and not _nonempty(contract.get("visual_witness_plan")):
         errors.append("PRE_VISUAL_WITNESS_PLAN_MISSING")
-    return {"pass": not errors, "detected": errors, "contract_sha256": _digest(contract)}
+    return {"pass": not errors, "detected": errors, "contract_sha256": _digest(contract),
+            "baseline_hashes": baseline_hashes if not errors else {}}
 
 def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dict:
     errors = []
     if not receipt.get("pass") or receipt.get("contract_sha256") != _digest(contract):
         errors.append("POST_PRE_RECEIPT_INVALID")
+    baselines = receipt.get("baseline_hashes")
+    if not isinstance(baselines, dict) or set(baselines) != {"source_ref", "authority_ref"}:
+        errors.append("POST_BASELINE_RECEIPT_MISSING")
+    else:
+        for key in ("source_ref", "authority_ref"):
+            try:
+                p = _rooted(root, contract.get(key))
+                if not p.is_file() or _sha(p) != baselines[key]:
+                    errors.append("POST_" + key.upper() + "_CHANGED")
+            except (ValueError, KeyError):
+                errors.append("POST_" + key.upper() + "_INVALID")
     if evidence.get("contract_sha256") != _digest(contract):
         errors.append("POST_CONTRACT_BINDING_MISSING")
     try:
@@ -76,6 +92,7 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
         required.append("visual_check")
     if contract.get("kind") in {"code", "ui", "pwa"}:
         required.append("runtime_check")
+    evidence_paths = set()
     for key in required:
         witness = evidence.get(key)
         if not isinstance(witness, dict) or witness.get("passed") is not True:
@@ -85,6 +102,10 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
             p = _rooted(root, witness.get("evidence_path"))
             if not p.is_file() or not p.stat().st_size:
                 errors.append("POST_" + key.upper() + "_EVIDENCE_MISSING")
+            elif p == output or p in evidence_paths:
+                errors.append("POST_" + key.upper() + "_EVIDENCE_NOT_DISTINCT")
+            else:
+                evidence_paths.add(p)
         except ValueError:
             errors.append("POST_" + key.upper() + "_EVIDENCE_INVALID")
     if evidence.get("user_as_debugger"):
