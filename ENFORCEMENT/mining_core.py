@@ -141,8 +141,20 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         relations=analyze(ev)
         conflict=relations["conflict"]
         unresolved=relations["unresolved_pairs"]
-        status="CONFLICT" if conflict else "CLOSED" if best>=threshold else "OPEN"
+        is_conflict_question=str(item.get("kind") or "").upper()=="CONFLICT"
+        # An originally disputed question cannot be settled by one polished
+        # publisher's statement. Require separate source identities AND an
+        # explicit/structured supporting claim relation; unrelated snippets
+        # or two surfaces of one issuer do not establish reconciliation.
+        supporting_relation=any(p.get("relation")=="SUPPORTS"
+                                for p in relations.get("pairs", []))
+        dispute_reconciled=(independently_identified>=2
+                            and supporting_relation and not unresolved)
+        status=("CONFLICT" if conflict else
+                "OPEN" if is_conflict_question and not dispute_reconciled else
+                "CLOSED" if best>=threshold else "OPEN")
         out.append({**item,"status":status,"best_evidence_score":best,
+                    "conflict_question_reconciled":dispute_reconciled if is_conflict_question else None,
                     "evidence_count":len(ev),
                     "independent_source_identity_count":independently_identified,
                     "canonical_grouping_confirmed": reviewed_provider_groups if provider_evidence else False,
@@ -155,7 +167,7 @@ def next_queries(assessed:list[dict])->list[dict]:
     q=[]
     for x in assessed:
         if x["status"]=="CLOSED": continue
-        q.append({"frontier_id":x["id"],"query":x.get("question") or x["id"],"purpose":"RESOLVE_CONFLICT" if x["status"]=="CONFLICT" else "FILL_EVIDENCE_GAP","prefer":["PRIMARY","OFFICIAL","ACADEMIC"]})
+        q.append({"frontier_id":x["id"],"query":x.get("question") or x["id"],"purpose":"RESOLVE_CONFLICT" if x["status"]=="CONFLICT" or str(x.get("kind") or "").upper()=="CONFLICT" else "FILL_EVIDENCE_GAP","prefer":["PRIMARY","OFFICIAL","ACADEMIC"]})
     return q
 
 def checkpoint(task:dict, frontier:list[dict], evidence:list[dict], previous:dict|None=None)->dict:
