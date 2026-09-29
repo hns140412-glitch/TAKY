@@ -28,6 +28,7 @@ def preflight(manifest: dict, root: Path) -> dict:
     if not isinstance(evidence, list):
         problems.append('EVIDENCE_LIST_REQUIRED'); evidence = []
     seen_roles = set()
+    seen_files = set()
     checked = []
     allowed_root = root.resolve()
     for e in evidence:
@@ -42,9 +43,15 @@ def preflight(manifest: dict, root: Path) -> dict:
         file = (allowed_root / filename).resolve()
         if not file.is_relative_to(allowed_root):
             problems.append('PATH_ESCAPE:' + role); continue
+        if file in seen_files:
+            problems.append('EVIDENCE_FILE_REUSED:' + str(role)); continue
+        seen_files.add(file)
         if not file.is_file():
             problems.append('FILE_MISSING:' + role); continue
-        actual = hashlib.sha256(file.read_bytes()).hexdigest()
+        content = file.read_bytes()
+        if not content:
+            problems.append('EVIDENCE_FILE_EMPTY:' + role); continue
+        actual = hashlib.sha256(content).hexdigest()
         if actual != expected.lower():
             problems.append('HASH_MISMATCH:' + role)
         else:
