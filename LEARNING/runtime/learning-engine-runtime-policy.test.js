@@ -3,6 +3,21 @@
 const assert=require('node:assert/strict');
 const Runtime=require('./learning-engine-runtime.js');
 
+const OWNER_ROWS={
+ 'SRC-OFFICIAL-1':{source_ref:'INDEX:SRC-OFFICIAL-1',
+  source_family:'OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS',source_type:'OFFICIAL_CURRICULUM',
+  authority_class:'OFFICIAL',provenance:['OFFICIAL_STANDARD_REF'],
+  detail_anchor:'DETAIL:SRC-OFFICIAL-1#standard'},
+ 'SRC-NIKL-1':{source_ref:'INDEX:SRC-NIKL-1',source_family:null,source_type:null,
+  authority_class:null,provenance:['NIKL_SOURCE_REF'],detail_anchor:null}
+};
+function testOnlyOwner(sid,ref){
+ const r=OWNER_ROWS[sid];
+ return r && r.source_ref===ref ? {...r,issuer:'INDEXING_OWNER',reviewed:true,
+  decision:'INDEXED',domain_use_authorized:true,source_id:sid,
+  index_version:'TEST_ONLY_1',review_evidence_refs:['TEST_ONLY:'+sid]}:null;
+}
+
 const scope={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'};
 const evidence=[{
   event_id:'policy-runtime-1',
@@ -66,7 +81,7 @@ const indexed=Runtime.derive({
       detail_anchor:'DETAIL:SRC-OFFICIAL-1#standard'
     }]
   }
-});
+},testOnlyOwner);
 assert.equal(indexed.ok,true);
 assert.deepEqual(indexed.trace.source_refs,['INDEX:SRC-OFFICIAL-1']);
 assert.equal(indexed.evidence_policy.results[0].decision,'ALLOW');
@@ -116,7 +131,7 @@ const missingProvenance=Runtime.derive({
       provenance:['NIKL_SOURCE_REF']
     }]
   }
-});
+},testOnlyOwner);
 assert.equal(missingProvenance.ok,false);
 assert.equal(missingProvenance.reason,'EVIDENCE_POLICY_DENIED');
 assert.equal(missingProvenance.evidence_policy.denied[0].reason,'DENY_PROVENANCE_REQUIRED');
@@ -138,5 +153,17 @@ const invalidHandoff=Runtime.derive({
 });
 assert.equal(invalidHandoff.ok,false);
 assert.equal(invalidHandoff.reason,'INDEXED_EVIDENCE_HANDOFF_INVALID');
+
+const untrustedOnly=Runtime.derive({
+  scope,evidence,indexed_evidence_handoff:{
+    query_context:{function_id:'LE-F01',consumer_app:'READY_SET',requested_behavior:'STANDARD_ALIGNMENT'},
+    candidates:[{source_id:'SRC-OFFICIAL-1',source_ref:'INDEX:SRC-OFFICIAL-1',
+      source_family:'OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS',source_type:'OFFICIAL_CURRICULUM',
+      authority_class:'OFFICIAL',provenance:['OFFICIAL_STANDARD_REF'],
+      detail_anchor:'DETAIL:SRC-OFFICIAL-1#standard',issuer:'INDEXING_OWNER',reviewed:true}]
+  }
+});
+assert.equal(untrustedOnly.ok,false);
+assert.equal(untrustedOnly.reason,'INDEXED_EVIDENCE_HANDOFF_INVALID');
 
 console.log('LEARNING_RUNTIME_POLICY_INTEGRATION_PASS');

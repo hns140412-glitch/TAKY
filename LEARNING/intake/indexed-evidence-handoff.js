@@ -4,7 +4,7 @@ const VERSION='TAKY_INDEX_TO_LEARNING_EVIDENCE_HANDOFF_V1';
 
 function clean(v){return String(v??'').trim();}
 
-function prepare(input={}){
+function prepare(input={}, independentIndexOwnerVerifier=null){
   const query=input.query_context||{};
   const consumerApp=clean(query.consumer_app);
   const functionId=clean(query.function_id);
@@ -17,6 +17,7 @@ function prepare(input={}){
   if(!functionId)issues.push('FUNCTION_ID_MISSING');
   if(!requestedBehavior)issues.push('REQUESTED_BEHAVIOR_MISSING');
   if(!candidates.length)issues.push('RETRIEVAL_CANDIDATES_EMPTY');
+  if(typeof independentIndexOwnerVerifier!=='function')issues.push('INDEX_OWNER_VERIFIER_NOT_CONFIGURED');
 
   const normalized=[];
   for(const [index,row] of candidates.entries()){
@@ -26,7 +27,29 @@ function prepare(input={}){
     }
     const sourceId=clean(row.source_id);
     const sourceRef=clean(row.source_ref);
-    const provenance=Array.isArray(row.provenance)?row.provenance.filter(Boolean):[];
+    // Input source and provenance are proposals, never independent approval.
+    // The caller cannot supply or select the owner verifier through input.
+    let owner=null;
+    if(typeof independentIndexOwnerVerifier==='function' && sourceId && sourceRef){
+      try { owner=independentIndexOwnerVerifier(sourceId,sourceRef); }
+      catch (_) { issues.push('INDEX_OWNER_REVIEW_UNAVAILABLE:'+index); }
+    }
+    const sourceFields=['source_family','source_type','authority_class','detail_anchor'];
+    const proposedProvenance=Array.isArray(row.provenance)?row.provenance.filter(Boolean):[];
+    const ownerProvenance=Array.isArray(owner?.provenance)?owner.provenance.filter(Boolean):[];
+    const ownerEvidence=owner?.review_evidence_refs;
+    const ownerValid=owner?.issuer==='INDEXING_OWNER'
+      && owner?.reviewed===true && owner?.decision==='INDEXED'
+      && owner?.domain_use_authorized===true
+      && owner?.source_id===sourceId && owner?.source_ref===sourceRef
+      && typeof owner?.index_version==='string' && !!owner.index_version.trim()
+      && Array.isArray(ownerEvidence) && !!ownerEvidence.length
+      && ownerEvidence.every(v=>typeof v==='string' && !!v.trim())
+      && sourceFields.every(field=>(row[field]??null)===(owner[field]??null))
+      && proposedProvenance.length===ownerProvenance.length
+      && proposedProvenance.every((v,i)=>v===ownerProvenance[i]);
+    if(!ownerValid)issues.push('INDEPENDENT_INDEX_OWNER_BINDING_INVALID:'+index);
+    const provenance=ownerValid?ownerProvenance:[];
     if(!sourceId)issues.push(`SOURCE_ID_MISSING:${index}`);
     if(!sourceRef)issues.push(`SOURCE_REF_MISSING:${index}`);
     if(!provenance.length)issues.push(`PROVENANCE_MISSING:${index}`);
