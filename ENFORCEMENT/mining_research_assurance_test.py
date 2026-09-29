@@ -77,6 +77,34 @@ class ResearchAssuranceTest(unittest.TestCase):
         self.assertEqual(out["next_actions"],[])
         self.assertNotIn("Exact fact",json.dumps(out))
 
+    def test_reviewed_low_quality_source_cannot_launder_unreviewed_high_score(self):
+        high=evidence("A")  # strong Core score, but no downloaded source/review
+        weak={**evidence("A"),"evidence_id":"e-A-weak",
+              "source_id":"s-A-weak","source_url":"https://official.test/A-weak",
+              "source_class":"COMMUNITY","excerpt_text":"weak reviewed fact"}
+        weak_raw="Page heading\\nweak reviewed fact\\nfooter"
+        weak_snapshot={**source("A"),"source_id":"s-A-weak",
+                       "source_locator":"https://official.test/A-weak",
+                       "source_text":weak_raw,"source_sha256":sha(weak_raw)}
+        weak_review={**review("A"),"evidence_id":"e-A-weak",
+                     "source_id":"s-A-weak","source_sha256":sha(weak_raw),
+                     "excerpt_sha256":sha("weak reviewed fact")}
+        cp=checkpoint(TASK,FRONTIER,[high,weak,evidence("B")])
+        self.assertEqual(cp["frontier"][0]["status"],"CLOSED")
+        out=audit_research(TASK,FRONTIER,cp,
+                           source_snapshots=[weak_snapshot,source("B")],
+                           claim_reviews=[weak_review,review("B")],
+                           trusted_reviewer_ids=["trusted-source-validator"])
+        self.assertEqual(out["items"][0]["state"],"GROUNDED_EVIDENCE_INSUFFICIENT")
+        self.assertEqual(out["items"][1]["state"],"SOURCE_GROUNDED")
+        self.assertFalse(out["operational_research_ready"])
+        repaired=audit_research(TASK,FRONTIER,cp,
+                                source_snapshots=[weak_snapshot,source("A"),source("B")],
+                                claim_reviews=[weak_review,review("A"),review("B")],
+                                trusted_reviewer_ids=["trusted-source-validator"])
+        self.assertEqual(repaired["items"][0]["state"],"SOURCE_GROUNDED")
+        self.assertTrue(repaired["operational_research_ready"])
+
     def test_reviewer_verdict_before_snapshot_and_invalid_time_cannot_pass(self):
         prior=review("A"); prior["reviewed_at"]="2026-09-28"
         current=review("B")
