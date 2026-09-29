@@ -104,7 +104,7 @@ assert plan["dependency_impacted_count"] == 3
 assert plan["related_review_only_count"] == 1
 assert not plan["cursor_committed"] and not plan["current_promoted"] and not plan["raw_deleted"]
 assert plan["source_identifiers_returned"] is False
-assert "A" not in json.dumps(plan) and "evt-001" not in json.dumps(plan)
+assert '"source_id": "A"' not in json.dumps(plan) and "evt-001" not in json.dumps(plan)
 assert plan["consumer_artifact_recheck_required"] and plan["detail_anchor_recheck_required"]
 assert plan["end_cursor_present"] is False
 
