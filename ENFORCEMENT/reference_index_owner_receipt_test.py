@@ -100,4 +100,26 @@ class OwnerBoundary(unittest.TestCase):
             self.assertIn("REFERENCE_AUTO_PROMOTION_FORBIDDEN",r["detected"])
             self.assertFalse((Path(td)/"CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json").exists())
 
+
+    def test_rejected_disposition_without_reason_never_writes_indexed_event(self):
+        record=json.loads(json.dumps(RECORD))
+        record["reference_intake_execution"]["requested_disposition"]="REJECTED"
+        with tempfile.TemporaryDirectory() as td:
+            out=execute(record,ROUTE,Path(td),independent_index_owner_verifier=reviewer)
+            self.assertFalse(out["pass"])
+            self.assertEqual(out["execution_status"],"REGISTERED_AWAITING_DISPOSITION")
+            ledger=json.loads((Path(td)/"CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json")
+                              .read_text(encoding="utf-8"))
+            self.assertEqual([x["state"] for x in ledger["entries"]],["REGISTERED"])
+            self.assertFalse(out["canonical_promotion"])
+
+    def test_issuer_claim_in_payload_does_not_replace_owner_verifier(self):
+        record=json.loads(json.dumps(RECORD))
+        record["reference_intake_execution"]["index_result"].update({
+            "issuer":"INDEXING_OWNER","reviewed":True,
+            "decision":"INDEXED","review_evidence_refs":["payload-fake"]})
+        out,ledger=run(record)
+        self.assertEqual(out["execution_status"],"REGISTERED_AWAITING_INDEX")
+        self.assertEqual([x["state"] for x in ledger["entries"]],["REGISTERED"])
+
 if __name__=="__main__":unittest.main(verbosity=2)
