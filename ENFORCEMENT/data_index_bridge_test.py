@@ -42,6 +42,13 @@ r = search(items, STUDENT, limit=10)
 assert r["results"][0]["source_id"] == STUDENT
 assert {v["source_id"] for v in r["results"]} == {STUDENT, TEACHER}
 assert r["results"][0]["detail_escalation"]["stage"] == "RAW_REQUIRED"
+# Bridge proof is metadata-scoped and must never become production/CURRENT authority.
+from data_index_relation_context import assemble_relation_context
+context = assemble_relation_context(items, STUDENT, required_types={"RELATED_TO"})
+assert context["relation_context_complete_for_request"]
+assert context["edges"][0]["status"] == "STAGED_METADATA_LINK_NOT_CANONICAL"
+assert context["edges"][0]["target_source_ref"]["source_id"] == TEACHER
+assert context["current_promoted"] is False and context["domain_use_approved"] is False
 assert not r["projection_authoritative"]
 assert {v["source_id"] for v in search(items, "일기", filters={"domain": "GRADE_1_2"})["results"]} == {STUDENT, TEACHER}
 rejects(lambda b: b["authority_boundaries"].update(current_utilization_index="historical-id"), "different CURRENT")
@@ -62,11 +69,13 @@ with tempfile.TemporaryDirectory() as temp:
     all_items, info = load_explicit_overlay(index, pointer, bridge)
     assert len(all_items) == 3 and info["current_corpus_count"] == 1 and info["external_bridge_count"] == 2
     assert len(INDEX["source_entries"]) == 1
-    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT]
+    command = [sys.executable, str(ROOT/"data_index_bridge.py"), "--current-index", str(index), "--current-pointer", str(pointer), "--bridge", str(bridge), "--query", STUDENT, "--context-source-id", STUDENT]
     result = subprocess.run(command, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     output = json.loads(result.stdout)
     assert output["results"][0]["source_id"] == STUDENT and output["overlay_provenance"]["current_pointer_modified"] is False
+    assert output["relation_context"]["edges"][0]["target_source_ref"]["source_id"] == TEACHER
+    assert output["relation_context"]["index_owner_receipt_verified"] is False
     bad = copy.deepcopy(INDEX)
     bad["schema"] = "TAKY_DATA_UTILIZATION_INDEX_V25"
     dump("index.json", bad)
