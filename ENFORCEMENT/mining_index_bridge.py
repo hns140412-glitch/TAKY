@@ -7,6 +7,31 @@ need external acquisition, while retrieved candidates still require verification
 """
 from __future__ import annotations
 from index_retrieval import retrieve
+from pathlib import PurePosixPath
+from urllib.parse import unquote, urlsplit
+import re
+import unicodedata
+
+
+def _filename(value):
+    """Normalize only presentation differences; never match by topic/snippet."""
+    v=unicodedata.normalize("NFKC",unquote(str(value or ""))).strip()
+    if not v: return ""
+    if "://" in v:
+        v=urlsplit(v).path
+    v=v.replace("\\","/").rsplit("/",1)[-1]
+    return re.sub(r"\\s+"," ",v).casefold().strip()
+
+
+def _exact_source_file(row, expected):
+    wanted=_filename(expected)
+    if not wanted: return False
+    identity=row.get("identity") if isinstance(row.get("identity"),dict) else {}
+    for value in (row.get("canonical_title"), row.get("title"),
+                  row.get("locator"), row.get("path"),
+                  identity.get("canonical_title"), identity.get("locator")):
+        if _filename(value)==wanted: return True
+    return False
 
 
 def _candidate_usable(row: dict) -> bool:
@@ -55,24 +80,39 @@ def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None
     for item in frontier or []:
         fid = str(item.get("id") or "")
         question = str(item.get("question") or fid)
+        expected_name = str(item.get("expected_source_filename") or "").strip()
+        pool = ([row for row in (index_rows or [])
+                 if _exact_source_file(row, expected_name)]
+                if expected_name else (index_rows or []))
         result = retrieve(
-            index_rows or [], question,
-            semantic_scores=semantic_scores,
+            pool, "" if expected_name else question,
+            semantic_scores=None if expected_name else semantic_scores,
             relations=relations,
             detail_rows=detail_rows,
             top_k=top_k,
             relation_hops=1,
         )
         primary = result.get("primary", [])
+        approximate = []
+        if expected_name and not primary:
+            near = retrieve(index_rows or [], question, top_k=top_k)
+            approximate = [
+                {"source_id": hit.get("source_id"), "reason": "SOURCE_IDENTITY_MISMATCH"}
+                for hit in near.get("primary", []) if
+                not _exact_source_file(hit.get("row") or {}, expected_name)
+            ]
         qualified = [x for x in primary if _candidate_usable(x.get("row") or {})]
         rejected = [
             {"source_id": x.get("source_id"), "reason": _excluded_candidate_reason(x.get("row") or {})}
             for x in primary if not _candidate_usable(x.get("row") or {})
-        ]
+        ] + approximate
         enough = len(qualified) >= required_count
         traces.append({
             "frontier_id": fid,
             "query": question,
+            "exact_source_filename": expected_name or None,
+            "exact_identity_match_required": bool(expected_name),
+            "approximate_candidate_rejected_count": len(approximate),
             "sufficient": enough,  # legacy: retrieval coverage ONLY, never evidence sufficiency
             "retrieval_sufficient": enough,
             "evidence_sufficient": False,
