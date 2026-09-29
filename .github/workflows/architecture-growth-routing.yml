@@ -7,6 +7,8 @@ on:
       - 'DOMAIN/test_architecture_growth_cycle.py'
       - 'DOMAIN/architecture_growth_event_replay.py'
       - 'DOMAIN/test_architecture_growth_event_replay.py'
+      - 'DOMAIN/architecture_spreadsheet_text.py'
+      - 'DOMAIN/test_architecture_spreadsheet_text.py'
       - 'DOMAIN/architecture_hwpx_text.py'
       - 'DOMAIN/test_architecture_hwpx_text.py'
       - 'DOMAIN/architecture_source_evidence.py'
