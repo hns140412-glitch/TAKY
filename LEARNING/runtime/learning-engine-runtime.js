@@ -11,7 +11,7 @@ const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
-function derive(input={}){
+function derive(input={}, independentIndexOwnerVerifier=null){
   const evidence=Array.isArray(input.evidence)?input.evidence:[];
   const scope=input.scope||{};
 
@@ -19,7 +19,7 @@ function derive(input={}){
   let policyRequests=Array.isArray(input.evidence_policy_requests)?[...input.evidence_policy_requests]:[];
 
   if(input.indexed_evidence_handoff){
-    indexedEvidence=IndexedEvidence.prepare(input.indexed_evidence_handoff);
+    indexedEvidence=IndexedEvidence.prepare(input.indexed_evidence_handoff, independentIndexOwnerVerifier);
     if(!indexedEvidence.ok){
       return {
         ok:false,
