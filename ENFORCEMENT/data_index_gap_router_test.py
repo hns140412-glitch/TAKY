@@ -81,6 +81,8 @@ denied = proposals_from_relation_context(relation_context, scope_namespace="DATA
 assert sum(x["route"] == "MINING_REQUEST_DRAFT" for x in denied["proposals"]) == 3
 assert all(x["mining_handoff"]["search_constraints"]["privacy_constraint"] == "NO_EXTERNAL_ACCOUNT_DISCLOSURE"
            for x in denied["proposals"] if x["route"] == "MINING_REQUEST_DRAFT")
+assert all("SRC-REL" not in x["mining_handoff"]["evidence_gap"]
+           for x in denied["proposals"] if x["route"] == "MINING_REQUEST_DRAFT")
 assert len(proposals_from_relation_context({"schema":"TAKY_INDEX_RELATION_CONTEXT_V1",
     "root_source_ref":{"source_id":"SRC-REL"},"evidence_gaps":[]},
     scope_namespace="DATA_TEST",privacy_class="PUBLIC")["proposals"]) == 0
