@@ -107,6 +107,29 @@ class OperationRunnerTest(unittest.TestCase):
         self.assertEqual({x["frontier_id"] for x in output["checkpoint"]["evidence"]},{"A","B"})
         self.assertEqual(output["invocations"],3)
 
+    def test_access_hold_one_child_does_not_erase_permitted_sibling_recovery(self):
+        calls=[]
+        def web(req):
+            calls.append(("WEB",req["frontier_id"]))
+            return ({"state":"FAILED","error":"AUTH_REQUIRED"}
+                    if req["frontier_id"]=="A"
+                    else {"state":"FAILED","error":"TIMEOUT"})
+        def public(req):
+            calls.append(("PUBLIC_DATA",req["frontier_id"]))
+            return found(req)
+        result=run_with_providers(payload("A","B"),{
+            "WEB":web,"PUBLIC_DATA":public,"GITHUB":lambda req:found(req)
+        })
+        self.assertEqual(calls,[("WEB","A"),("WEB","B"),("PUBLIC_DATA","B")])
+        self.assertEqual(result["state"],"HOLD_ACCESS")
+        self.assertEqual(result["invocations"],3)
+        self.assertEqual({row["frontier_id"] for row in result["checkpoint"]["evidence"]},
+                         {"B"})
+        self.assertEqual(result["next_run_input"]["provider_results"]["A"]["error"],
+                         "AUTH_REQUIRED")
+        self.assertEqual(result["plan"]["pending_actions"]["counts"]["held"],1)
+        self.assertFalse(result["operational_research_ready"])
+
     def test_access_hold_is_not_bypassed_by_third_provider(self):
         calls=[]
         def blocked(req):
