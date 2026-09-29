@@ -149,6 +149,12 @@ def assemble_relation_context(
             "current_relation": root.get("current_relation"),
         },
         "edge_count": len(edges), "edges": edges, "evidence_gaps": gaps,
-        "relation_context_complete_for_request": bool(required_types) and not gaps,
+        # Completeness of an explicitly requested relation type is distinct from
+        # whole-graph integrity: an unrelated PART_OF family-node gap must not
+        # invalidate a separately supported student/teacher RELATED_TO link.
+        "relation_context_complete_for_request": bool(required_types) and not any(
+            gap.get("type") in required_types for gap in gaps
+        ),
+        "visible_graph_integrity_complete": not gaps,
         "assessment_scope": "EXPLICIT_REQUESTED_ONE_HOP_RELATION_TYPES_ONLY",
     }
