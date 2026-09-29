@@ -86,7 +86,12 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 x.get("classification")=="ACCESS_HOLD" for x in
                 (plan.get("pending_actions") or {}).get("items",[])
             )
-            state=("HOLD_ACCESS" if access_still_held else
+            uncertain_still_held=any(
+                x.get("classification")=="IN_FLIGHT_HOLD" for x in
+                (plan.get("pending_actions") or {}).get("items",[])
+            )
+            state=("HOLD_IN_FLIGHT_UNCERTAIN" if uncertain_still_held else
+                   "HOLD_ACCESS" if access_still_held else
                    "RESOLVED_FOR_SOURCE_REVIEW" if
                    plan.get("operational_research_ready") else
                    "NEEDS_EVIDENCE_VERIFICATION" if
@@ -104,9 +109,13 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
         callable_requests=[r for r in requests if
                            str(r.get("provider") or "").upper() in provider_map]
         invoked=sum(1 for event in events if event.get("callback_invoked") is True)
-        # Do not abandon an available sibling merely because another branch
-        # has no registered adapter. Missing adapters are explicit noncalls.
-        if invoked+len(callable_requests)>max_calls:
+        # Receipt replay consumes zero provider calls. Reserve only genuinely
+        # new attempts; otherwise resuming with a small budget could fail even
+        # though every selected request is already safely cached.
+        new_calls=(sum(1 for request in callable_requests
+                       if journal.will_invoke(request))
+                   if journal is not None else len(callable_requests))
+        if invoked+new_calls>max_calls:
             return _result("HOLD_BUDGET",current=current,plan=plan,events=events,
                            reason="MAX_PROVIDER_CALLS_REACHED",last=last)
         runtime_results={}
@@ -157,7 +166,8 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                            reason=step.get("state"),last=last)
         current=step["next_run_input"]
         if any(str(x.get("error") or "").upper() in {
-                "IN_FLIGHT_UNCERTAIN","CORRUPT_ATTEMPT_JOURNAL"
+                "IN_FLIGHT_UNCERTAIN","CORRUPT_ATTEMPT_JOURNAL",
+                "SOURCE_RECEIPT_STALE"
             } for x in step["execution_batch"].get("results", [])):
             if not _selected_requests(step["plan"]):
                 return _result("HOLD_IN_FLIGHT_UNCERTAIN",current=current,plan=step["plan"],
