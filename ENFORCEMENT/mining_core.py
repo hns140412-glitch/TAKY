@@ -108,7 +108,7 @@ def assess_frontier(frontier:Iterable[dict], evidence:Iterable[dict], threshold=
         # An adapter normally uses a URL/title as source_identity. Different
         # URLs are not independent publishers. Only explicitly reviewed
         # canonical groups from Index can increase provider corroboration.
-        provider_evidence=any(row.get("adapter") for row in raw)
+        provider_evidence=any(row.get("evidence_origin")=="PROVIDER_RECEIPT" or row.get("adapter") for row in raw)
         reviewed_provider_groups=bool(raw) and all(
             row.get("provenance_group_reviewed") is True and
             row.get("canonical_source_id") for row in raw
