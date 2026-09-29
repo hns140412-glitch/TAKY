@@ -46,9 +46,36 @@ def _folder(root: Path, row: dict[str, Any]) -> Path:
 
 
 def _extract(blocks: list) -> tuple[list[dict[str, Any]], int, list[str]]:
+    """Extract only actually present Notion-authored text, with original block anchors.
+
+    This is NOT image/file OCR, linked-page expansion, rendered text inference,
+    public-web original acquisition, or semantic Mining. Unknown/unrepresented
+    content remains an explicit coverage flag even when other text is present.
+    """
     extracted: list[dict[str, Any]] = []
     flags: list[str] = []
     count = 0
+    text_types = {
+        "paragraph", "heading_1", "heading_2", "heading_3", "bulleted_list_item",
+        "numbered_list_item", "to_do", "toggle", "quote", "callout", "code",
+        "template",
+    }
+    structural = {
+        "table", "column_list", "column", "divider", "breadcrumb",
+        "table_of_contents", "synced_block",
+    }
+    media = {"file", "pdf", "image", "audio", "video"}
+    source_links = {"bookmark", "embed", "link_preview", "link_to_page"}
+    children_types = {"child_page", "child_database"}
+
+    def rich(items: object) -> str:
+        if not isinstance(items, list):
+            raise InputError("SNAPSHOT_RICH_TEXT_INVALID")
+        return "".join(str((x.get("plain_text")
+                            if x.get("plain_text") is not None
+                            else (x.get("text") or {}).get("content") or ""))
+                       for x in items if isinstance(x, dict)).strip()
+
     def visit(nodes: list, parents: tuple[str, ...], depth: int) -> None:
         nonlocal count
         if depth > 8:
@@ -66,18 +93,53 @@ def _extract(blocks: list) -> tuple[list[dict[str, Any]], int, list[str]]:
             value = block.get(kind) or {}
             if not isinstance(value, dict):
                 raise InputError("SNAPSHOT_CONTENT_SHAPE_INVALID")
-            rt = value.get("rich_text") or []
-            if not isinstance(rt, list):
-                raise InputError("SNAPSHOT_RICH_TEXT_INVALID")
-            text = "".join(str(x.get("plain_text", "")) for x in rt if isinstance(x, dict)).strip()
-            if text:
-                extracted.append({"block_id": ident, "block_path": list(parents + (ident,)),
-                                  "block_type": kind, "text": text,
-                                  "scope": "NOTION_BLOCK_TEXT_ONLY"})
-            if kind in {"file", "pdf", "image", "audio", "video"}:
+            current_path = list(parents + (ident,))
+
+            def add(value_text: str, field: str, *, cell: int | None = None,
+                    scope: str = "NOTION_BLOCK_TEXT_ONLY") -> None:
+                if not value_text:
+                    return
+                item: dict[str, Any] = {
+                    "block_id": ident, "block_path": current_path,
+                    "block_type": kind, "text": value_text,
+                    "field": field, "scope": scope,
+                }
+                if cell is not None:
+                    item["cell_index"] = cell
+                extracted.append(item)
+
+            if kind in text_types:
+                add(rich(value.get("rich_text") or []), "rich_text")
+            elif kind == "table_row":
+                cells = value.get("cells")
+                if not isinstance(cells, list):
+                    raise InputError("SNAPSHOT_TABLE_CELLS_INVALID")
+                for col, cell in enumerate(cells):
+                    add(rich(cell), "cells", cell=col)
+            elif kind == "equation":
+                expression = value.get("expression")
+                if not isinstance(expression, str):
+                    raise InputError("SNAPSHOT_EQUATION_INVALID")
+                add(expression.strip(), "expression")
+            elif kind in media:
+                add(rich(value.get("caption") or []), "caption")
                 flags.append("ATTACHMENT_BYTES_NOT_ACQUIRED")
-            if kind in {"child_page", "child_database"}:
+                if kind == "image":
+                    flags.append("IMAGE_CONTENT_NOT_OCR_EXTRACTED")
+            elif kind in children_types:
+                # A child-page title is locator metadata, not its page content.
+                add(str(value.get("title") or "").strip(), "title",
+                    scope="NOTION_CHILD_TITLE_METADATA_ONLY")
                 flags.append("CHILD_PAGE_NOT_RECURSIVELY_ACQUIRED")
+            elif kind in source_links:
+                add(rich(value.get("caption") or []), "caption")
+                flags.append("LINKED_OR_EMBEDDED_SOURCE_NOT_ACQUIRED")
+            elif kind == "synced_block":
+                if value.get("synced_from"):
+                    flags.append("SYNCED_BLOCK_ORIGINAL_NOT_ACQUIRED")
+            elif kind not in structural:
+                flags.append("UNSUPPORTED_NOTION_BLOCK_TYPE:" + kind)
+
             if block.get("_children_error"):
                 flags.append("CHILD_BLOCK_READ_ERROR")
             children = block.get("_children")
