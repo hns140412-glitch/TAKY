@@ -76,7 +76,12 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                            events=events,reason="FAILED_ROUTE_REQUIRES_NEW_METHOD",last=last)
         requests=_selected_requests(plan)
         if not requests:
-            state=("RESOLVED_FOR_SOURCE_REVIEW" if
+            access_still_held=any(
+                x.get("classification")=="ACCESS_HOLD" for x in
+                (plan.get("pending_actions") or {}).get("items",[])
+            )
+            state=("HOLD_ACCESS" if access_still_held else
+                   "RESOLVED_FOR_SOURCE_REVIEW" if
                    plan.get("operational_research_ready") else
                    "NEEDS_EVIDENCE_VERIFICATION" if
                    plan.get("research_complete_eligible") or
@@ -143,7 +148,10 @@ def run_with_providers(payload:dict, providers:dict[str,Callable],
                 "ACCESS_DENIED","AUTH_REQUIRED","LOGIN_REQUIRED","PERMISSION_DENIED",
                 "RESTRICTED","PAYWALL","ACCESS_HOLD",
             } for x in step["execution_batch"].get("results", [])):
-            return _result("HOLD_ACCESS",current=current,plan=step["plan"],
-                           events=events,reason="AUTHORIZED_ROUTE_REQUIRED",last=last)
+            # An access hold applies to that frontier, not unrelated branches.
+            # Continue only already permitted, independently ready requests.
+            if not _selected_requests(step["plan"]):
+                return _result("HOLD_ACCESS",current=current,plan=step["plan"],
+                               events=events,reason="AUTHORIZED_ROUTE_REQUIRED",last=last)
     return _result("HOLD_BUDGET",current=current,plan=orchestrate(current)["plan"],
                    events=events,reason="MAX_ROUNDS_REACHED",last=last)
