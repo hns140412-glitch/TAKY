@@ -28,6 +28,17 @@ class ExternalToLearningLoopTest(unittest.TestCase):
   self.assertEqual(lr["mining_request_candidate"]["query"],"decimal remediation")
   self.assertTrue(out["guards"]["staged_discovery_does_not_reenter_learning_as_evidence"])
 
+ def test_external_source_id_collision_cannot_shadow_index(self):
+  receipt={
+   "frontier_id":"F1","query":"new topic","adapter":"WEB",
+   "results":[{"source_id":"A","url":"https://elsewhere.example/new",
+               "title":"Different document","source_class":"OFFICIAL","claim":"new topic"}]
+  }
+  out=process_external_receipt(receipt,INDEX,LEARNING)
+  self.assertEqual(out["projection_added"],0)
+  self.assertEqual(out["projection_held"][0]["status"],"SOURCE_ID_COLLISION_HOLD")
+  self.assertEqual(out["updated_projection_count"],len(INDEX))
+
  def test_exact_duplicate_is_held_not_readded(self):
   receipt={
    "frontier_id":"F1","query":"guide","adapter":"WEB",
