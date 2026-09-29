@@ -68,6 +68,7 @@ on:
       - 'ENFORCEMENT/index_retrieval_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
       - 'ENFORCEMENT/mining_index_bridge_test.py'
+      - 'ENFORCEMENT/mining_index_learning_roundtrip_test.py'
       - 'ENFORCEMENT/learning_index_bridge.py'
       - 'ENFORCEMENT/learning_index_bridge_test.py'
       - 'ENFORCEMENT/learning_runtime.py'
@@ -165,6 +166,7 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_e2e_benchmark.py
           python -m py_compile ENFORCEMENT/index_retrieval.py
           python -m py_compile ENFORCEMENT/mining_index_bridge.py
+          python -m py_compile ENFORCEMENT/mining_index_learning_roundtrip_test.py
           python -m py_compile ENFORCEMENT/learning_index_bridge.py
           python -m py_compile ENFORCEMENT/learning_runtime.py
           python -m py_compile ENFORCEMENT/learning_orchestrator.py
@@ -253,6 +255,8 @@ jobs:
         run: python ENFORCEMENT/index_ingest_validator_test.py
       - name: Test external Mining to Index to Learning loop
         run: python ENFORCEMENT/external_to_learning_loop_test.py
+      - name: Test end-to-end Mining Index Learning candidate and owner-receipt round trip
+        run: python ENFORCEMENT/mining_index_learning_roundtrip_test.py
       - name: Test Ready Hide Snap Learning consumer adapters
         run: python ENFORCEMENT/learning_consumer_adapters_test.py
       - name: Test heterogeneous E2E benchmark
