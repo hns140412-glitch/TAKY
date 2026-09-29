@@ -46,7 +46,8 @@ def _public_url(row):
                 return ""
         except ValueError:
             pass
-        if any(any(k == bad or k.startswith(bad) for bad in SENSITIVE_QUERY)
+        if any(any(k == bad or k.startswith(bad) or k.endswith("_" + bad)
+                       for bad in SENSITIVE_QUERY)
                for k, _ in parse_qsl(url.query, keep_blank_values=True)):
             return ""
         return urlunsplit(("https", host, url.path or "/", url.query, ""))

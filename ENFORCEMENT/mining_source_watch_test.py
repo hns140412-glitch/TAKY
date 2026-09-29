@@ -18,7 +18,8 @@ def source(item="post/1", digest=A, **kwargs):
 
 def baseline(item="post/1", digest=A, **kwargs):
     row = source(item, digest, baseline_state="DEEP_VERIFIED",
-                 evidence_refs=["original:p1#claim"], **kwargs)
+                 evidence_refs=["original:p1#claim"])
+    row.update(kwargs)
     return row
 
 
