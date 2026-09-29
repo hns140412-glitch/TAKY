@@ -82,6 +82,9 @@ def assess(item):
     if not isinstance(indexed.get('sufficient'), bool):
         return {'pass': False, 'gap_id': item['gap_id'], 'detected': ['INDEX_SUFFICIENCY_MISSING']}
     if indexed['sufficient'] is False:
+        digest = indexed.get('index_payload_sha256')
+        if not isinstance(digest, str) or len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest.lower()) or not _str(indexed.get('insufficiency_evidence')):
+            return {'pass': False, 'gap_id': item['gap_id'], 'detected': ['INDEX_INSUFFICIENCY_PROOF_REQUIRED']}
         return {'pass': True, 'result': _route(item, 'MINING_GAP_REQUEST', 'MINING',
             'Acquire missing source evidence; record official/industry/case authority and date. Never grant rule authority.',
             'Source receipt indexed with provenance and explicit applicability/limitations.',
