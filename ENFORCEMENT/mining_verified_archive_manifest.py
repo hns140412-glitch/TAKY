@@ -1,21 +1,34 @@
 #!/usr/bin/env python3
 """Read-only physical ZIP/SOURCE_MANIFEST gate before owner Index classification."""
 from __future__ import annotations
-import hashlib, io, json, zipfile
+import hashlib, json, stat, zipfile
 from pathlib import Path
 from urllib.parse import urlsplit
 
 MAX_SOURCE_BYTES = 128 * 1024 * 1024
 MAX_FILES = 32
+MAX_TOTAL_BYTES = 256 * 1024 * 1024
+MAX_MANIFEST_BYTES = 256 * 1024
+MAX_COMPRESSION_RATIO = 200
 
 def review_original_archive(path: Path, existing_rows: list[dict] | None = None) -> dict:
     with zipfile.ZipFile(path) as z:
         names=z.namelist()
         if (len(names)>MAX_FILES or len(names)!=len(set(names))
             or any(n.startswith("/") or "\\" in n or ".." in Path(n).parts for n in names)
-            or "SOURCE_MANIFEST.json" not in names
-            or z.testzip() is not None):
-            raise ValueError("ARCHIVE_STRUCTURE_OR_CRC_INVALID")
+            or "SOURCE_MANIFEST.json" not in names):
+            raise ValueError("ARCHIVE_STRUCTURE_INVALID")
+        # Check ZIP central-directory limits *before* any CRC decompression.
+        infos=z.infolist()
+        if (sum(i.file_size for i in infos)>MAX_TOTAL_BYTES
+            or any(i.file_size > (MAX_MANIFEST_BYTES if i.filename=="SOURCE_MANIFEST.json" else MAX_SOURCE_BYTES)
+                   or (i.file_size and i.file_size/max(1,i.compress_size)>MAX_COMPRESSION_RATIO)
+                   or bool(i.flag_bits & 1)
+                   or stat.S_ISLNK(i.external_attr >> 16)
+                   or i.is_dir() for i in infos)):
+            raise ValueError("ARCHIVE_PREFLIGHT_RESOURCE_OR_ENTRY_INVALID")
+        if z.testzip() is not None:
+            raise ValueError("ARCHIVE_CRC_INVALID")
         manifest=json.loads(z.read("SOURCE_MANIFEST.json"))
         entries=manifest.get("source_entries")
         if not isinstance(entries,list) or len(entries)!=len(names)-1:

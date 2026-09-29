@@ -41,4 +41,26 @@ class VerifiedArchiveTest(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"proof.zip";archive(p,name="../science.pdf")
    with self.assertRaises(ValueError):review_original_archive(p)
+ def test_high_compression_ratio_rejected_before_crc_expansion(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/"bomb.zip"
+   body=b"0"*(1024*1024)
+   m={"publisher_post":"https://www.ice.go.kr/ice/post",
+      "source_entries":[{"name":"science.pdf","bytes":len(body),
+                         "sha256":hashlib.sha256(body).hexdigest(),"official_url":URL}]}
+   with zipfile.ZipFile(p,"w",compression=zipfile.ZIP_DEFLATED) as z:
+    z.writestr("science.pdf",body)
+    z.writestr("SOURCE_MANIFEST.json",json.dumps(m))
+   with self.assertRaisesRegex(ValueError,"ARCHIVE_PREFLIGHT_RESOURCE_OR_ENTRY_INVALID"):
+    review_original_archive(p)
+
+ def test_oversize_manifest_is_preflight_hold(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/"large-manifest.zip"
+   with zipfile.ZipFile(p,"w") as z:
+    z.writestr(NAME,DATA)
+    z.writestr("SOURCE_MANIFEST.json"," "* (257*1024))
+   with self.assertRaisesRegex(ValueError,"ARCHIVE_PREFLIGHT_RESOURCE_OR_ENTRY_INVALID"):
+    review_original_archive(p)
+
 if __name__=="__main__":unittest.main()
