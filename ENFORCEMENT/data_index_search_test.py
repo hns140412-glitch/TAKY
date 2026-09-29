@@ -137,7 +137,8 @@ assert all(not any(rel.get("type") == "EXACT_DUPLICATE_OF" for rel in row["relat
 assert not search(candidate, "Alpha", relation_depth=1)["results"][0]["channels"]["relation_expanded"]
 
 # 7. relation expansion can surface linked indexed source
-r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1)
+r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1,
+           trusted_relation_keys=frozenset({("SRC-001", "RELATED_TO", "SRC-002")}))
 ids = [x["source_id"] for x in r["results"]]
 assert "SRC-001" in ids and "SRC-002" in ids
 # An arbitrary relationship with no recorded evidence must not boost search results.
@@ -148,7 +149,11 @@ unproven = [
 ]
 assert [x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]] == ["REL-A"]
 unproven[0]["relations"][0].update(verification_state="VERIFIED", evidence_ref="TEST:RECORDED_EDGE")
-assert {x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]} == {"REL-A", "REL-B"}
+# Even forged "VERIFIED" and evidence_ref fields cannot assert a trusted edge.
+assert [x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]] == ["REL-A"]
+assert {x["source_id"] for x in search(
+    unproven, "Alpha", relation_depth=1,
+    trusted_relation_keys=frozenset({("REL-A", "RELATED_TO", "REL-B")}))["results"]} == {"REL-A", "REL-B"}
 
 # 8. sourceRef/provenance are surfaced without leaking domain decision metadata
 r = search(records, "서울 PHONICS 학생용")
