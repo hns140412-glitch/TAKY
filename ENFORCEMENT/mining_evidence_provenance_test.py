@@ -17,6 +17,15 @@ class EvidenceProvenanceTest(unittest.TestCase):
         self.assertFalse(out[0]["provenance_group_reviewed"])
         self.assertEqual(out[0]["provenance_match"],"INDEX_EXACT_SOURCE_ID")
 
+    def test_version_relation_keeps_distinct_revision_evidence(self):
+        rows=[{"source_id":"SPEC-V1","content_hash":"sha:older"},
+              {"source_id":"SPEC-V2","content_hash":"sha:newer"}]
+        out=enrich_from_index([{"source_id":"SPEC-V1"},{"source_id":"SPEC-V2"}],rows,
+                              [{"type":"VERSION_OF","from":"SPEC-V2","to":"SPEC-V1"}])
+        self.assertIsNone(out[0].get("canonical_source_id"))
+        self.assertIsNone(out[1].get("canonical_source_id"))
+        self.assertFalse(any(x["provenance_group_reviewed"] for x in out))
+
     def test_near_duplicate_and_same_family_do_not_assert_canonical_identity(self):
         rows=[{"source_id":"A"},{"source_id":"B"}]
         for typ in ("NEAR_DUPLICATE_OF","SAME_FAMILY_AS","RELATED_TO"):
