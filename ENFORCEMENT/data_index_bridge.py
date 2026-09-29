@@ -118,7 +118,13 @@ def validate_and_project_bridge(bridge: dict[str, Any], expected_current_id: str
             },
             # A section hint is not a verified PDF page anchor: no fabricated DETAIL_L2.
         }
-        projected.append(normalize_record(record))
+        normalized = normalize_record(record)
+        normalized["field_lineage"] = {
+            "source_family": "STAGED_MANIFEST_METADATA_NOT_CURRENT",
+            "short_summary": "STAGED_PAIR_METADATA_NOT_PDF_CONTENT_REVIEW",
+            "review_state": "STAGED_SOURCE_ENTRY",
+        }
+        projected.append(normalized)
     return projected
 
 
