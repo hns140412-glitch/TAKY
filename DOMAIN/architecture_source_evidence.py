@@ -49,6 +49,7 @@ def packet(index_payload: dict, source_id: str, file: Path, *, revision: str, qu
     terms = list(dict.fromkeys(x.lower() for x in re.findall(r'[가-힣]+|[a-zA-Z0-9]+', query) if len(x) >= 2))
     paragraphs = [x.strip() for x in content.splitlines() if x.strip()]
     scored = [(sum(1 for t in terms if t in line.lower()), i, line) for i, line in enumerate(paragraphs)]
+    all_terms_present = bool(terms) and all(any(t in line.lower() for line in paragraphs) for t in terms)
     matched = sorted((r for r in scored if r[0]), key=lambda r: (-r[0], r[1]))[:MAX_EXCERPTS]
     if not matched:
         excerpts = []
@@ -60,7 +61,8 @@ def packet(index_payload: dict, source_id: str, file: Path, *, revision: str, qu
         'authority_level': row.get('authority_level'), 'index_review_state': row.get('source_review_state'),
         'source_sha256': hashlib.sha256(file.read_bytes()).hexdigest(), 'extraction_method': method,
         'paragraph_count': len(paragraphs), 'query': query, 'excerpts': excerpts,
-        'source_text_retrieved': True, 'query_evidence_found': bool(excerpts),
+        'source_text_retrieved': True, 'query_evidence_found': bool(excerpts) and all_terms_present,
+        'query_coverage': 'ALL_TERMS_IN_SOURCE' if all_terms_present else ('PARTIAL_ONLY' if excerpts else 'NO_MATCH'),
         'project_applicability_verified': False, 'legal_currentness_verified': False,
         'method_adoption_authorized': False,
     }
