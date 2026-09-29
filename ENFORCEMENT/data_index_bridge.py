@@ -95,6 +95,18 @@ def validate_and_project_bridge(bridge: dict[str, Any], expected_current_id: str
     for entry in entries:
         pair = next(p for p in pairs if p["pair_id"] == entry["pair_id"])
         role = entry["source_role"]
+        other = pair["teacher_source_id"] if role == "student" else pair["student_source_id"]
+        relations = []
+        for edge in entry["relations"]:
+            if (edge.get("type") == "RELATED_TO" and edge.get("target") == other
+                    and edge.get("qualifier") == "STUDENT_TEACHER_PAIR"):
+                # The reciprocal pair was validated above, but neither PDF content
+                # nor independent owner approval is promoted by this annotation.
+                relations.append({**edge, "verification_state": "STAGED_MANIFEST_VALIDATED",
+                                  "evidence_ref": "BRIDGE_MANIFEST_PAIR:" + pair["pair_id"],
+                                  "verification_scope": "RECIPROCAL_METADATA_ONLY"})
+            else:
+                relations.append(dict(edge))
         record = {
             "index_l1": {
                 "identity": {"source_id": entry["source_id"], "canonical_title": entry["canonical_title"], "locator": entry["locator"], "media_type": entry["media_type"], "content_hash": None},
@@ -102,7 +114,7 @@ def validate_and_project_bridge(bridge: dict[str, Any], expected_current_id: str
                 "classification": {"source_family": family, "source_type": f"OFFICIAL_INSTRUCTIONAL_{role.upper()}_PDF", "authority_class": entry["authority_class"], "domain_facets": ["EDUCATION", "KOREAN_WRITING", f"GRADE_{entry['grade_band']}", f"GENRE_{entry['genre'].upper()}"]},
                 "discovery": {"short_summary": f"{pair['title']} ({'학생용' if role == 'student' else '교사용'})", "controlled_terms": [pair["title"], str(pair["printed_standard_code"])], "keywords": [str(x) for x in pair.get("keywords", [])] + ["학생용" if role == "student" else "교사용"], "entities": [(bridge.get("source_family") or {}).get("publisher")], "consumer_candidates": []},
                 "state": {"index_state": "BRIDGE_STAGED", "detail_available": False, "review_state": entry["review_state"], "current_relation": "EXTERNAL_BRIDGE_STAGED"},
-                "relations": entry["relations"],
+                "relations": relations,
             },
             # A section hint is not a verified PDF page anchor: no fabricated DETAIL_L2.
         }
@@ -187,6 +199,7 @@ def main() -> int:
     parser.add_argument("--external-evidence", type=Path)
     parser.add_argument("--external-manifest-doc-id")
     parser.add_argument("--query", required=True)
+    parser.add_argument("--context-source-id", help="Explicit read-only one-hop relationship context for an authorized source ID")
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--filter", action="append", default=[])
     args = parser.parse_args()
@@ -212,6 +225,15 @@ def main() -> int:
     except (ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
     result = search(records, args.query, filters=filters, limit=args.limit)
+    if args.context_source_id:
+        from data_index_relation_context import assemble_relation_context
+        from data_index_search import apply_filters
+        eligible = {row["source_id"] for row in apply_filters(records, filters)}
+        try:
+            result["relation_context"] = assemble_relation_context(
+                records, args.context_source_id, eligible_ids=eligible)
+        except ValueError as exc:
+            parser.error(str(exc))
     result["overlay_provenance"] = info
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
