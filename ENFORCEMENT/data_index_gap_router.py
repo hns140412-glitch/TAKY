@@ -163,7 +163,9 @@ def proposals_from_relation_context(
         requests.append({
             "scope_namespace": scope_namespace,
             "gap_kind": kind, "source_refs": [sid],
-            "evidence_question": f"Resolve {label} relation evidence for source {sid}",
+            "evidence_question": (f"Resolve {label} relation evidence for public source {sid}"
+                                  if privacy_class == "PUBLIC" else
+                                  f"Resolve {label} relation evidence for authorized local source"),
             "desired_evidence": "Source-grounded relation proof or explicit unresolved-source record",
             "why_index_insufficient": f"One-hop relation-context gap: {reason}",
             "index_check": index_check, "raw_access": raw_access,
