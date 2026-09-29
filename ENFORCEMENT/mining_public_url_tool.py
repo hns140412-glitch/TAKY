@@ -10,10 +10,9 @@ from __future__ import annotations
 from pathlib import Path
 from urllib.parse import urlsplit
 import hashlib
-from reference_acquisition_adapter import acquire
 
 
-def build_public_url_tool(destination_dir:Path, *, acquisition=acquire,
+def build_public_url_tool(destination_dir:Path, *, acquisition=None,
                           max_bytes:int=25*1024*1024):
     """Return a callable WEB provider that fetches an explicitly named source URL.
 
@@ -21,6 +20,14 @@ def build_public_url_tool(destination_dir:Path, *, acquisition=acquire,
     mining_operation_runner.run_with_providers. Returned source evidence
     remains unverified until independent source/claim review.
     """
+    # The read-only acquisition adapter exists on TAKY main but not in this
+    # isolated Mining V2 branch. Inject the authorized host adapter for draft
+    # tests; resolve the same module only after an explicit branch reconciliation.
+    if acquisition is None:
+        try:
+            from reference_acquisition_adapter import acquire as acquisition
+        except ImportError as exc:
+            raise RuntimeError("AUTHORIZED_REFERENCE_ACQUISITION_ADAPTER_UNAVAILABLE") from exc
     directory=Path(destination_dir)
     def handle(request:dict)->dict:
         query=str(request.get("query") or "").strip()
