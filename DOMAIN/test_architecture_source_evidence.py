@@ -38,6 +38,11 @@ class EvidenceTest(unittest.TestCase):
         self.assertTrue(r['source_text_retrieved'])
         self.assertFalse(r['query_evidence_found'])
 
+    def test_partial_query_cannot_be_claimed_as_supported(self):
+        r = packet(self.idx, 'exact-owner-file-id', self.txt, revision='owner-rev-1', query='방수 주차대수')
+        self.assertFalse(r['query_evidence_found'])
+        self.assertEqual(r['query_coverage'], 'PARTIAL_ONLY')
+
     def test_ole_hwp_not_misread_as_text(self):
         old = self.dir / 'old.hwp'
         old.write_bytes(b'old binary')
