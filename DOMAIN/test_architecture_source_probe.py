@@ -33,6 +33,12 @@ class ProbeTest(unittest.TestCase):
         self.assertFalse(res['results'][0]['may_emit_index_result'])
     def test_missing_engine_fails(self):
         with self.assertRaises(FileNotFoundError):run(BASE,self.file,Path(self.tmp.name)/'fake.py')
+    def test_existing_arbitrary_python_engine_rejected_before_import(self):
+        impostor=Path(self.tmp.name)/'impostor.py'
+        impostor.write_text("raise RuntimeError('arbitrary module execution')",encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,'UNTRUSTED_INDEX_ENGINE_PATH'):
+            run(BASE,self.file,impostor)
+
     def test_duplicate_gap_fails(self):
         sample={'schema':BASE['schema'],'gaps':[BASE['gaps'][0],BASE['gaps'][0]]}
         with self.assertRaisesRegex(ValueError,'DUPLICATE_GAP_ID'):run(sample,self.file,self.engine)
