@@ -22,7 +22,8 @@ class EvidenceProvenanceTest(unittest.TestCase):
             out=enrich_from_index([{"source_id":"A"},{"source_id":"B"}],rows,
                                   [{"type":typ,"from":"A","to":"B"}])
             self.assertFalse(any(x.get("provenance_group_reviewed") for x in out))
-            self.assertNotEqual(out[0].get("canonical_source_id"),out[1].get("canonical_source_id"))
+            self.assertIsNone(out[0].get("canonical_source_id"))
+            self.assertIsNone(out[1].get("canonical_source_id"))
 
     def test_provider_urls_and_unmatched_ids_do_not_fabricate_index_provenance(self):
         rows=[{"source_id":"A","locator":"https://example.gov/a"}]
