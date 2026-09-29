@@ -153,7 +153,17 @@ def orchestrate(payload: dict) -> dict:
     external_frontier = index_result["external_mining_frontier"]
     verification_frontier = index_result.get("verification_frontier", [])
     blocked = prior["next_action"] == "HOLD_FAILED_ROUTE"
-    verified_checkpoint = payload.get("verified_checkpoint")
+    checkpoint_candidate = payload.get("verified_checkpoint")
+    checkpoint_binding_valid = (
+        checkpoint_candidate is None or
+        (isinstance(checkpoint_candidate, dict)
+         and checkpoint_candidate.get("schema") == "TAKY_MINING_CORE_CHECKPOINT_V1"
+         and (checkpoint_candidate.get("goal") or {}).get("goal_id")
+             == normalize_goal(task)["goal_id"])
+    )
+    # An old run's CLOSED labels must not close this run, activate its next
+    # batch, or suppress fresh retrieval just because frontier IDs overlap.
+    verified_checkpoint = checkpoint_candidate if checkpoint_binding_valid else None
     provider_results = payload.get("provider_results")
     if provider_results is None and isinstance(payload.get("execution_batch"), dict):
         provider_results = payload["execution_batch"].get("results")
@@ -226,6 +236,11 @@ def orchestrate(payload: dict) -> dict:
         "selected_route_provider": route_provider,
         "selected_route_executable": bool(route_provider),
         "provider_attempt_history": list(payload.get("provider_attempts") or []),
+        "checkpoint_binding_state": (
+            "NOT_PROVIDED" if checkpoint_candidate is None else
+            "GOAL_MATCH" if checkpoint_binding_valid else
+            "REJECTED_GOAL_OR_SCHEMA_MISMATCH"
+        ),
         **depth,
         "search_frontier": frontier,
         "index_first": index_result,
