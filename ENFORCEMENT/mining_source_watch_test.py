@@ -104,6 +104,21 @@ class SourceWatchTest(unittest.TestCase):
         self.assertTrue(plan["planned_provider_requests"])
         self.assertFalse(plan["source_watch_plan"]["canonical_promotion"])
 
+    def test_changed_same_url_cannot_reuse_old_checkpoint_frontier_id(self):
+        task = {"goal": "monitor one known source", "task_family": "AI_RESEARCH",
+                "max_research_depth": "D2"}
+        first = orchestrate({"task": task,
+                             "source_watch": {"observations": [source(digest=A)]}})["plan"]
+        changed = orchestrate({"task": task,
+                               "source_watch": {"observations": [source(digest=B)]}})["plan"]
+        original_id = next(x["id"] for x in first["search_frontier"]
+                           if x["kind"] == "REQUIREMENT")
+        changed_id = next(x["id"] for x in changed["search_frontier"]
+                          if x["kind"] == "REQUIREMENT")
+        self.assertNotEqual(original_id, changed_id)
+        self.assertNotEqual(first["source_watch_plan"]["selected"][0]["selection_fingerprint"],
+                            changed["source_watch_plan"]["selected"][0]["selection_fingerprint"])
+
     def test_legacy_orchestrator_unchanged_when_no_watch(self):
         plan = orchestrate({"task": {"goal": "ordinary discovery",
                                      "task_family": "GENERAL_RESEARCH"}})["plan"]

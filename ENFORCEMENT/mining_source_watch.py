@@ -8,6 +8,7 @@ content to CURRENT. Only public, item-specific URLs become Mining requirements.
 from __future__ import annotations
 
 import ipaddress
+import hashlib
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 
 SENSITIVE_QUERY = ("token", "secret", "api_key", "apikey", "auth", "signature",
@@ -162,7 +163,16 @@ def plan_source_work(watch, *, limit=3):
             scope = ("establish an original-content deep baseline" if state == "BASELINE_DEEP_DIVE"
                      else "obtain original bytes and evidence to compare with baseline" if state == "SNAPSHOT_REQUIRED"
                      else "deeply compare changed original against previous baseline")
-            entry["question"] = (f"At the original public content {url}, {scope}; "
+            old_digest = _digest(base.get("content_sha256")) if base else None
+            old_version = _clean(base.get("source_version")) if base else ""
+            # Checkpoint frontier IDs use a truncated question slug. Put a
+            # revision-scoped token FIRST so changed bytes/version cannot reuse
+            # a prior source's CLOSED evidence at the same URL/goal.
+            witness = "|".join((key, state, current_sha or "", old_digest or "",
+                                current_version, old_version, _clean(row.get("observed_at"))))
+            token = hashlib.sha256(witness.encode("utf-8")).hexdigest()[:16]
+            entry["selection_fingerprint"] = token
+            entry["question"] = (f"WATCH_{token}: At original public content {url}, {scope}; "
                                  f"author={author}, title={title}. Verify original, dated version, "
                                  "specific claims/attachments/code, limitations and attributable responses; "
                                  "return source anchors, not an Index approval.")
