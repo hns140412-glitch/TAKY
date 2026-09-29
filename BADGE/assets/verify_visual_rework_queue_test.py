@@ -64,6 +64,47 @@ class BadgeReworkTruthTests(unittest.TestCase):
             return raw
         with patch.object(gate.Path,"read_text",changed):
             self.assertIn("REWORK_BATCH_SOURCE_DRIFT",self.check())
+    def test_witty_copy_is_mandatory_for_all_60(self):
+        self.assertEqual([], self.check())
+    def test_missing_core_detail_is_rejected(self):
+        from unittest.mock import patch
+        import verify_visual_rework_queue as gate
+        original=gate.Path.read_text
+        def changed(path,*args,**kwargs):
+            raw=original(path,*args,**kwargs)
+            if str(path).endswith("individual-art-direction-60.json"):
+                document=json.loads(raw)
+                document["items"][11]["core_detail_proposal"]=""
+                return json.dumps(document)
+            return raw
+        with patch.object(gate.Path,"read_text",changed):
+            self.assertIn("ART_DIRECTION_WITTY_COPY_DRIFT",self.check())
+    def test_invented_display_title_is_rejected(self):
+        from unittest.mock import patch
+        import verify_visual_rework_queue as gate
+        original=gate.Path.read_text
+        def changed(path,*args,**kwargs):
+            raw=original(path,*args,**kwargs)
+            if str(path).endswith("individual-art-direction-60.json"):
+                document=json.loads(raw)
+                document["items"][39]["display_title_proposal"]="임의 신규 제목"
+                return json.dumps(document)
+            return raw
+        with patch.object(gate.Path,"read_text",changed):
+            self.assertIn("ART_DIRECTION_WITTY_COPY_DRIFT",self.check())
+    def test_first_ten_cannot_drop_detail_or_toast(self):
+        from unittest.mock import patch
+        import verify_visual_rework_queue as gate
+        original=gate.Path.read_text
+        def changed(path,*args,**kwargs):
+            raw=original(path,*args,**kwargs)
+            if str(path).endswith("rework-batch-01-source-locked.json"):
+                document=json.loads(raw)
+                document["items"][0]["unlock_toast_proposal"]="invented"
+                return json.dumps(document)
+            return raw
+        with patch.object(gate.Path,"read_text",changed):
+            self.assertIn("REWORK_BATCH_WITTY_COPY_DRIFT",self.check())
     def test_netlify_hold(self):
         q=copy.deepcopy(self.q);q["netlify"]="READY"
         self.assertIn("RELEASE_HOLD_BYPASS",self.check(q=q))
