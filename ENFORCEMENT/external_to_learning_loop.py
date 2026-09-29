@@ -64,7 +64,10 @@ def process_external_receipt(receipt:dict,index_rows:list[dict],learning_payload
     updated=list(index_rows or [])+add
     learning=None
     if learning_payload is not None:
-        learning=requery_learning(learning_payload,updated)
+        # Newly discovered source candidates are not Index-owner receipts.
+        # Requery only against the unchanged reviewed Index, while retaining
+        # staged rows in updated_projection for a later owner review.
+        learning=requery_learning(learning_payload,list(index_rows or []))
     return {
         "schema":"TAKY_EXTERNAL_TO_LEARNING_LOOP_V1",
         "accepted":True,
@@ -81,5 +84,6 @@ def process_external_receipt(receipt:dict,index_rows:list[dict],learning_payload
             "exact_near_version_not_auto_added":True,
             "current_not_promoted":True,
             "learning_consumes_index_projection_not_raw_provider_output":True,
+            "staged_discovery_does_not_reenter_learning_as_evidence":True,
         },
     }
