@@ -26,5 +26,19 @@ class LearningIndexBridgeTest(unittest.TestCase):
   self.assertEqual(out["evidence_gap"]["query"],"decimal causal prerequisite")
   self.assertTrue(out["guards"]["gap_may_trigger_mining_only_after_index_check"])
 
+ def test_staged_candidate_cannot_satisfy_request_or_crowd_out_reviewed(self):
+  rows=[
+   {"source_id":"NEW","canonical_title":"fraction comparison fraction comparison",
+    "short_summary":"fraction comparison","index_state":"CANDIDATE","utilization_class":"REFERENCE_ONLY"},
+   {"source_id":"OLD","canonical_title":"fraction comparison","index_state":"INDEXED",
+    "authorization_class":"READY_WITH_GUARDS"},
+  ]
+  staged=retrieve_learning_evidence({"query":"fraction comparison","minimum_results":1},[rows[0]])
+  self.assertFalse(staged["evidence_sufficient_for_review"])
+  self.assertEqual(staged["evidence_gap"]["staged_candidate_count"],1)
+  mixed=retrieve_learning_evidence({"query":"fraction comparison","top_k":1,"minimum_results":1},rows)
+  self.assertTrue(mixed["evidence_sufficient_for_review"])
+  self.assertEqual(mixed["evidence_candidates"][0]["source_id"],"OLD")
+
 if __name__=="__main__":
  unittest.main()
