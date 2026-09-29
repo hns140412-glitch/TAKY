@@ -222,7 +222,7 @@ def execute(
     if requested in {"REJECTED", "SUPERSEDED", "NEEDS_MORE_EVIDENCE", "HOLD"} and not _clean(execution.get("reason")):
         # Reject *before* appending INDEXED into memory or writing any later
         # transition. A failed disposition is not an approved Index event.
-        ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         return {
             "pass": False,
             "detected": ["DISPOSITION_REASON_REQUIRED"],
