@@ -49,3 +49,65 @@ Asset mismatch classification:
 Legacy asset-integrity hashes mutable onboarding/index.html as source_file.
 Current mismatch is LEGACY_GATE_SCOPE_MISMATCH, not evidence that approved character/cutout bytes are corrupt.
 Approved asset hashes must not be rewritten or regenerated to silence this mismatch.
+
+
+## Runtime V2 cutover evidence — 2026-10-01
+
+Canonical V2:
+- TAKY Draft PR #193 remains Draft / unmerged / main HOLD.
+- Runtime V2 ownership is now enforced as `EXPLORER_CREW_SYSTEM_V2` + `runtime = CANONICAL_ONLY`.
+- App consumer ownership flags are all false for behavior / relation / memory / asset resolution / runtime ownership.
+- Central `Explorer Crew Canonical Correction` CI: SUCCESS.
+- Central `TAKY Enforcement Replay` CI: SUCCESS.
+
+Three-app candidate heads:
+- Snap-Pop Draft PR #17: `e928067cd8f79b954b4072bfabe13e891fb6d07e`
+  - base: `taky/companion-onboarding-candidate-2026-09-27`
+  - ahead 2 / behind 0 / mergeable
+  - `Validate Snap & Pop`: SUCCESS
+  - `Companion Onboarding Source/Asset Gate`: SUCCESS
+- Hide-Seek Draft PR #27: `fbec00eb9f0dc6a91111a8bcba6c5d35197d6e4d`
+  - base: `taky/hide-living-background-v5-bind-20260930`
+  - ahead 3 / behind 0 / mergeable
+  - `Validate Hide & Seek`: SUCCESS
+  - `Validate Hide Runtime V2`: SUCCESS
+  - local full browser regression: 102/102 PASS
+- Ready-Set Draft PR #135: `2d6ace779b697a7b52e4179d75252f9784c94443`
+  - rebased-by-reapplication onto latest main `bb0f109fb9983140622279c05d5847e863addac0`
+  - ahead 2 / behind 0 / mergeable
+  - Ready Integration CI: SUCCESS
+  - Ready Runtime E2E: SUCCESS
+  - Weekly / Daily Availability, Hide Memory Roundtrip, worker self-test: SUCCESS
+  - latest-main reapplication core contracts + actual browser V2 consumer: PASS
+
+Common-source lock:
+- scope: 34 shared runtime/contract files
+- algorithm: SHA-256
+- normalization: UTF-8 text with CRLF/LF normalized to LF before hashing
+- Snap / Hide / Ready normalized Source Lock verification: PASS
+- purpose: prevent cross-app common-runtime drift without making line-ending style or host OS part of semantic identity
+
+Cutover readiness:
+- canonical owner boundary: PASS
+- 24-person roster / Core6 first-encounter boundary: PASS
+- relation / affinity / memory preservation: PASS
+- Runtime Policy thin-owner boundary: PASS
+- approved static Visual ID/SHA preservation: PASS
+- common runtime content identity: PASS
+- project consumer integration: PASS
+- regression / CI: PASS
+
+Release authorization:
+- `CUTOVER_READINESS=PASS`
+- `MAIN_MERGE_AUTHORIZATION=HOLD`
+- `ROOT_ACTIVATION=HOLD`
+- `NETLIFY=HOLD`
+- `IMAGE_GENERATION=HOLD`
+- `COMPOSABLE_PRODUCTION_PROMOTION=HOLD`
+- `MOTION_RELEASE=HOLD`
+
+Promotion note:
+- Snap PR #17 targets the Snap candidate branch, not Snap main.
+- Hide PR #27 targets the verified Hide V5 branch, not Hide main.
+- Ready PR #135 targets Ready main directly but remains Draft/HOLD.
+- Therefore green Draft evidence is not itself production cutover and must not be interpreted as permission to merge or deploy.
