@@ -73,7 +73,7 @@ def build(root: Path, open_asset: bool):
         "screens":[{
             "id":"home",
             "authority_ref":"USER_APPROVED_TEST",
-            "golden":{"path":"design/golden/home.png","sha256":sha(golden),"use":"REFERENCE_ONLY"},
+            "golden":{"status":"BOUND","source_receipt":"TEST_APPROVAL","path":"design/golden/home.png","sha256":sha(golden),"use":"REFERENCE_ONLY"},
             "screen_contract":{"path":"design/contracts/home.screen.json","sha256":sha(screen_contract)},
             "layer_contract":{"path":"design/contracts/home.layers.json","sha256":sha(layer_contract)},
             "viewports":[{"id":"phone","width":390,"height":844,"dpr":2}],
@@ -111,7 +111,19 @@ def main():
         assert v["design_pass_ready"] is False
         assert any("ASSET_PRODUCTION_OPEN" in x for x in v["blockers"])
 
-        # 2) All bound layers -> ready for evidence.
+        # 2) Hash-pinned Golden may remain import-open: contract valid, Design blocked.
+        manifest, golden, _ = build(root, open_asset=False)
+        m=json.loads(manifest.read_text(encoding="utf-8"))
+        m["screens"][0]["golden"]["status"]="IMPORT_OPEN"
+        golden.unlink()
+        write_json(manifest, m)
+        validation_import=root/"validation-import-open.json"
+        run(VALIDATOR, manifest, "--root", root, "--out", validation_import)
+        vi=json.loads(validation_import.read_text())
+        assert vi["contract_valid"] is True and vi["design_pass_ready"] is False
+        assert any("GOLDEN_IMPORT_OPEN" in x for x in vi["blockers"])
+
+        # 3) All bound layers -> ready for evidence.
         manifest, golden, _ = build(root, open_asset=False)
         validation=root/"validation.json"
         run(VALIDATOR, manifest, "--root", root, "--out", validation)
@@ -139,12 +151,12 @@ def main():
         r=json.loads(receipt.read_text())
         assert r["pass"] is True and len(r["evidence"])==4
 
-        # 3) Golden tamper must fail closed.
+        # 4) Golden tamper must fail closed.
         golden.write_bytes(b"tampered")
         run(VALIDATOR, manifest, "--root", root, expect=1)
         golden.write_bytes(b"approved-golden-bytes")
 
-        # 4) Missing evidence coverage must block receipt.
+        # 5) Missing evidence coverage must block receipt.
         evidence(visual,"VISUAL",manifest,["home:INITIAL:phone"])
         cp=subprocess.run([
             sys.executable,str(RECEIPT),
