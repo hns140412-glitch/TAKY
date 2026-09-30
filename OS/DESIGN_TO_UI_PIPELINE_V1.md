@@ -152,6 +152,7 @@ VISUAL evidence는 중앙 Visual Compare가 생성한다.
 - `INTERACTION_BLOCKED`
 - `RESPONSIVE_BLOCKED`
 - `ASSET_BLOCKED`
+- `RECEIPT_BLOCKED`
 - `DESIGN_PASS`
 
 이 상태가 작업 위치다. 별도 중복 상태표를 만들 필요가 없다.
