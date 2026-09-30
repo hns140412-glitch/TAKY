@@ -50,7 +50,11 @@ def build(root: Path, open_asset: bool):
     layer_contract = root/"design/contracts/home.layers.json"
     layers=[]
     for role in ["BACKGROUND","FOREGROUND","OBJECT","CHARACTER_SLOT","FUNCTION_UI"]:
-        if open_asset and role=="BACKGROUND":
+        if role=="FUNCTION_UI":
+            layers.append({"role":role,"status":"LIVE_DOM","selector":"#app","owner":"TEST_UI"})
+        elif role=="CHARACTER_SLOT":
+            layers.append({"role":role,"status":"RUNTIME_SLOT","selector":"[data-character-slot]","owner":"TEST_CHARACTER","resolver_contract":"TEST_RESOLVER_V1"})
+        elif open_asset and role=="BACKGROUND":
             layers.append({"role":role,"status":"ASSET_PRODUCTION_OPEN"})
         else:
             layers.append({"role":role,"status":"BOUND","path":"assets/dummy.bin","sha256":sha(asset)})
