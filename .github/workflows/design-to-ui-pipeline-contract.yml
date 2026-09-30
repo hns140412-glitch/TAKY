@@ -9,6 +9,10 @@ on:
       - 'ENFORCEMENT/design_to_ui_pipeline_validate.py'
       - 'ENFORCEMENT/design_to_ui_receipt_issue.py'
       - 'ENFORCEMENT/design_to_ui_pipeline_validate_test.py'
+      - 'ENFORCEMENT/design_visual_compare_v2.py'
+      - 'ENFORCEMENT/design_visual_compare_v2_test.py'
+      - 'CONTRACTS/render-manifest.v1.schema.json'
+      - 'CONTRACTS/design-evidence.v1.schema.json'
       - '.github/workflows/design-to-ui-pipeline-contract.yml'
   push:
     branches:
@@ -32,5 +36,11 @@ jobs:
           python -m py_compile ENFORCEMENT/design_to_ui_pipeline_validate.py
           python -m py_compile ENFORCEMENT/design_to_ui_receipt_issue.py
           python -m py_compile ENFORCEMENT/design_to_ui_pipeline_validate_test.py
+          python -m py_compile ENFORCEMENT/design_visual_compare_v2.py
+          python -m py_compile ENFORCEMENT/design_visual_compare_v2_test.py
       - name: Design-to-UI regression
         run: python ENFORCEMENT/design_to_ui_pipeline_validate_test.py
+      - name: Install visual comparison dependency
+        run: python -m pip install --disable-pip-version-check pillow==11.3.0
+      - name: Visual Compare V2 regression
+        run: python ENFORCEMENT/design_visual_compare_v2_test.py
