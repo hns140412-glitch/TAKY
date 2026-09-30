@@ -1,0 +1,37 @@
+{
+  "schema": "TAKY_BADGE_DEPTH_PROFILE_V1",
+  "status": "DEFAULT_LIMITS_FOR_APPROVED_DETAIL_VIEW_ONLY",
+  "surface": "BADGE_DETAIL_VIEW_ONLY",
+  "enabled_ownership_states": [
+    "EARNED"
+  ],
+  "disabled_ownership_states": [
+    "UNEARNED",
+    "UNAPPROVED_ART"
+  ],
+  "layers": {
+    "base": {
+      "max_px": 0,
+      "direction": "STABLE"
+    },
+    "bg": {
+      "max_px": 3,
+      "direction": "WITH_TILT_SUBTLE"
+    },
+    "subject": {
+      "max_px": 7,
+      "direction": "WITH_TILT_SUBTLE",
+      "shadow": "SUBTLE",
+      "highlight_shift": "SUBTLE"
+    },
+    "fx": {
+      "max_px": 8,
+      "direction": "MAY_COUNTER_MOVE_SUBTLE"
+    }
+  },
+  "gyro": "OPTIONAL_ENHANCEMENT",
+  "pointer_fallback": "ALLOWED",
+  "reduced_motion": "STATIC_COMPOSITE",
+  "list_and_atlas": "STATIC_COMPOSITE",
+  "motion_must_not_change_badge_meaning": true
+}
