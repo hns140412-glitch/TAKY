@@ -192,6 +192,16 @@
         "Hide Crew Evidence Runtime",
         "Snap Crew Evidence Runtime"
       ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_HANDOFF_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "App Crew Evidence Runtime",
+      "consumers": [
+        "Central Crew Evidence Hub",
+        "Ready/Hide/Snap import bridges"
+      ]
     }
   ]
 }
