@@ -14,9 +14,16 @@ class T(unittest.TestCase):
   def test_ambient_is_silent(self):
     st=self.state();st["main_character_id"]=None
     x=cbe.run(st);self.assertEqual("MOCA",x["character_id"]);self.assertEqual("AMBIENT",x["presence_role"]);self.assertEqual("SILENT",x["dialogue_level"])
-  def test_chapter_owner_precedes_main(self):
+  def test_main_precedes_chapter_owner_without_owner_turn(self):
     st=self.state();st["chapter_owner"]="MOCA"
+    x=cbe.run(st);self.assertEqual("BELO",x["character_id"]);self.assertEqual("MAIN",x["presence_role"])
+  def test_chapter_owner_precedes_main_only_on_owner_turn(self):
+    st=self.state();st["chapter_owner"]="MOCA";st["owner_turn"]=True
     x=cbe.run(st);self.assertEqual("MOCA",x["character_id"]);self.assertEqual("CHAPTER_OWNER",x["presence_role"])
+  def test_canonical_ambient_actions_are_semantic_only(self):
+    for action in ("CHECK_COMPASS","ORGANIZE_BAG","USE_MAGNIFIER","REST"):
+      st=self.state();st["requested_action"]=action
+      x=cbe.run(st);self.assertEqual(action,x["action"]);self.assertIsNone(x["asset_path"]);self.assertFalse(x["generation_allowed"])
   def test_asset_leak_is_rejected(self):
     x=cbe.run(self.state());x["asset_path"]="assets/belo.png"
     self.assertIn("BEHAVIOR_ENGINE_SELECTED_ASSET",cbe.validate_command(x))
