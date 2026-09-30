@@ -115,11 +115,13 @@ Visual Compare:
 필수 선언:
 - `capture.command`: 실제 브라우저 캡처 테스트
 - `capture.artifacts[]`: 생성된 screenshot을 screen/state/viewport에 매핑
-- `checks.interaction.command`
-- `checks.responsive.command`
-- `checks.asset_integrity.command`
+- `checks.interaction.command` + 담당 `coverage[]`
+- `checks.responsive.command` + 담당 `coverage[]`
+- `checks.asset_integrity.command` + 담당 `coverage[]`
 
 명령은 shell string이 아니라 argv array다. 중앙 Runner는 `shell=False`로 실행한다.
+
+각 check의 `coverage[]`는 manifest가 요구하는 범위와 정확히 일치해야 한다. 누락/과잉 선언은 CONTRACT_BLOCKED다.
 
 앱이 직접 만들 필요가 없는 것:
 - render-manifest
