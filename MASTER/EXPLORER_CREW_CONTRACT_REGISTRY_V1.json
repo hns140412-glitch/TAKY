@@ -251,6 +251,17 @@
         "Crew Evidence Browser Provider",
         "Server Runtime"
       ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_BROWSER_PROVIDER_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Evidence Browser Provider",
+      "consumers": [
+        "Ready Browser Runtime",
+        "Hide Browser Runtime",
+        "Snap Browser Runtime"
+      ]
     }
   ]
 }
