@@ -37,6 +37,7 @@ Release / Deploy는 이 파이프라인 밖의 별도 Gate다.
 - layer/asset binding
 - viewport / safe area
 - state fixture
+- state별 `visual_policy / interaction_policy / responsive_policy`
 - interaction
 - responsive rule
 - accessibility / motion requirement
@@ -121,7 +122,7 @@ Visual Compare:
 
 명령은 shell string이 아니라 argv array다. 중앙 Runner는 `shell=False`로 실행한다.
 
-각 check의 `coverage[]`는 manifest가 요구하는 범위와 정확히 일치해야 한다. 누락/과잉 선언은 CONTRACT_BLOCKED다.
+각 check의 `coverage[]`는 manifest가 요구하는 범위와 정확히 일치해야 한다. 누락/과잉 선언은 CONTRACT_BLOCKED다. 해당 검증이 모든 state에서 `NOT_APPLICABLE`이면 빈 배열도 허용한다.
 
 앱이 직접 만들 필요가 없는 것:
 - render-manifest
