@@ -19,5 +19,5 @@
     if(safe.voice!==undefined&&safe.voice!==before.voice)history.push({kind:'GUIDE_VOICE_CHANGED',from:before.voice||null,to:safe.voice||null,at,authority_ref});
     return {...state,guide:after,crewIdentityHistory:history};
   }
-  return Object.freeze({apply,allowedFields:Object.freeze([...ALLOWED]),historyResetAllowed:false});
+  return Object.freeze({version:'TAKY_CREW_IDENTITY_CHANGE_V1',apply,allowedFields:Object.freeze([...ALLOWED]),historyResetAllowed:false});
 });
