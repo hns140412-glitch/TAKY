@@ -66,6 +66,7 @@ def main() -> int:
         "ASSET_INTEGRITY": args.asset,
     }
     evidence_rows = []
+    tested_revision = None
     for kind, path in evidence_paths.items():
         data = json.loads(path.read_text(encoding="utf-8"))
         if data.get("schema") != "TAKY_DESIGN_EVIDENCE_V1":
@@ -78,6 +79,15 @@ def main() -> int:
             raise SystemExit(f"{kind}_MANIFEST_SHA_MISMATCH")
         if data.get("source_commit") != source_commit:
             raise SystemExit(f"{kind}_SOURCE_COMMIT_MISMATCH")
+        revision = data.get("tested_revision")
+        if not isinstance(revision,str) or not SHA40.match(revision):
+            raise SystemExit(f"{kind}_TESTED_REVISION_INVALID")
+        if data.get("worktree_dirty") is not False:
+            raise SystemExit(f"{kind}_WORKTREE_NOT_CLEAN")
+        if tested_revision is None:
+            tested_revision = revision
+        elif revision != tested_revision:
+            raise SystemExit(f"{kind}_TESTED_REVISION_MISMATCH")
         got = set(data.get("coverage") or [])
         missing = sorted(expected_coverage(manifest, kind) - got)
         if missing:
@@ -93,6 +103,7 @@ def main() -> int:
         "schema": "TAKY_DESIGN_TO_UI_RECEIPT_V1",
         "project": manifest["project"],
         "source_commit": source_commit,
+        "tested_revision": tested_revision,
         "manifest_sha256": manifest_sha,
         "contract_validation_sha256": sha256(args.contract_validation),
         "evidence": evidence_rows,
