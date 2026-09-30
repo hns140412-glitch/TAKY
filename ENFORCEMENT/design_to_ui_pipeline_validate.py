@@ -209,6 +209,9 @@ def validate(cfg: dict, root: Path) -> dict:
                 if not stid or stid in state_ids:
                     errors.append(f"{sid}:STATE_ID_INVALID_OR_DUPLICATE")
                 state_ids.add(stid)
+                visual_policy = state.get("visual_policy","GOLDEN_PARITY")
+                if visual_policy not in ("GOLDEN_PARITY","LAYOUT_GUARD","NO_VISUAL_EVIDENCE"):
+                    errors.append(f"{sid}:{stid}:VISUAL_POLICY_INVALID")
                 fpath = str(state.get("fixture_path",""))
                 fsha = str(state.get("fixture_sha256",""))
                 fp = safe_file(root, fpath) if fpath else None
