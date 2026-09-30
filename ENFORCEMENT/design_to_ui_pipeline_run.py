@@ -9,6 +9,7 @@ App-specific work is delegated to argv-only adapters. shell=True is never used.
 from __future__ import annotations
 import argparse, hashlib, json, shutil, subprocess, sys
 from pathlib import Path
+from PIL import Image
 
 HERE=Path(__file__).resolve().parent
 VALIDATOR=HERE/"design_to_ui_pipeline_validate.py"
@@ -130,6 +131,10 @@ def validate_adapter(cfg: dict)->list[str]:
         argv=capture.get("command")
         if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
             errors.append("ADAPTER_CAPTURE_COMMAND_INVALID")
+        if capture.get("mode")!="viewport":
+            errors.append("ADAPTER_CAPTURE_MODE_INVALID")
+        if capture.get("scale")!="css":
+            errors.append("ADAPTER_CAPTURE_SCALE_INVALID")
         artifacts=capture.get("artifacts")
         if not isinstance(artifacts,list) or not artifacts:
             errors.append("ADAPTER_CAPTURE_ARTIFACTS_MISSING")
@@ -236,6 +241,18 @@ def build_render_manifest(root: Path, manifest: dict, manifest_sha: str, adapter
             return None,f"CAPTURE_ARTIFACT_PATH_INVALID:{key}"
         if not p.is_file():
             return None,f"CAPTURE_ARTIFACT_MISSING:{key}"
+        screen=next((s for s in manifest.get("screens",[]) if s.get("id")==sid),None)
+        viewport=next((v for v in (screen or {}).get("viewports",[]) if v.get("id")==vid),None)
+        if viewport is None:
+            return None,f"CAPTURE_VIEWPORT_UNKNOWN:{key}"
+        try:
+            with Image.open(p) as im:
+                actual_size=im.size
+        except Exception:
+            return None,f"CAPTURE_IMAGE_DECODE_FAILED:{key}"
+        expected_size=(int(viewport["width"]),int(viewport["height"]))
+        if actual_size!=expected_size:
+            return None,f"CAPTURE_PIXEL_SIZE_MISMATCH:{key}:{actual_size[0]}x{actual_size[1]}!={expected_size[0]}x{expected_size[1]}"
         entries.append({
             "screen_id":sid,
             "state_id":stid,
