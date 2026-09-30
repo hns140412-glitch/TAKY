@@ -1,6 +1,6 @@
 # TAKY GUIDE CHARACTER / RELATIONSHIP OS
 
-Status: REV_00 / PRE-CONFIRMATION RECOVERED DESIGN SOURCE
+Status: REV_01 / DRAFT CORRECTION CANDIDATE — ACTIVE REV_00 REMAINS MAIN AUTHORITY UNTIL MERGE
 Role: Shared GUIDE character, relationship, lifecycle and presence owner under `OS/GUIDE_FAMILY_LEARNING_OS.md`.
 Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > GUIDE CHARACTER / RELATIONSHIP OS + EXPLORATION CREW CANONICAL > PROJECT-specific Guide behavior.
 Runtime boundary: crew behavior-to-asset separation, composable crew asset groups, fallback and three-gate runtime rules are owned by `OS/EXPLORATION_CREW_CANONICAL.md`; this file continues to own relationship meaning.
@@ -23,6 +23,37 @@ Guide / name / voice changes SHALL NOT silently reset learning history, mission 
 `GUIDE IDENTITY ≠ VOICE ENGINE`
 Changing voice expression SHALL NOT silently create a different learning identity or erase relationship/history.
 
+## 1.1 CANONICAL 24-PERSON RELATIONSHIP LIFECYCLE — HARD LOCK
+
+- Total relationship/runtime roster = 24.
+- FIRST ENCOUNTER remains Core6 only.
+- Relation / memory / Main eligibility applies to all 24.
+- Legacy Core6-only stored state SHALL reconcile by adding missing members as `UNSEEN` without deleting existing relation, affinity, memory or Main history.
+- Canonical ID24 = `VIVI / 비비`; legacy board label `NOVA` for ID24 is lineage only and SHALL NOT replace Core6 NOVA.
+
+Verified lifecycle:
+`UNSEEN → FIRST_ENCOUNTER → KNOWN → AFFINITY_BUILDING → COMPANION_AVAILABLE → COMPANION → MAIN_COMPANION`
+
+Main change rules:
+- only relationship-eligible companions may become Main;
+- previous Main returns to `COMPANION`;
+- Main change SHALL NOT reset relation / affinity / memory;
+- asset readiness SHALL NOT decide relationship or Main eligibility.
+
+## 1.2 RELATION EVIDENCE / STORY GATE — HARD LOCK
+
+Meaningful verified evidence may include re-encounter, shared activity, completed help interaction, story event, chapter event or special event.
+`COMPANION_AVAILABLE` requires BOTH:
+- explicit affinity requirement satisfied;
+- explicit Story Gate unlock.
+
+Story Gate defaults to `LOCKED`.
+Unlock requires `character_id + story_gate_id + evidence_ref`.
+Affinity alone SHALL NOT fabricate story unlock.
+Story-gate evidence may cross app handoff.
+No automatic story threshold is authorized unless separately approved.
+
+
 ## 2. SHARED PERSONALITY / EXPRESSION
 
 Shared personality direction:
@@ -38,6 +69,18 @@ When Reduced Motion is requested or required, animation may be reduced or replac
 
 Guide presentation SHALL NOT visually overpower the child's task, problem, recording control, timer, primary action or learning artifact.
 Guide dialogue should remain visually attributable to the speaking Guide while preserving task clearance.
+
+## 2.1 PERSONALITY PROVENANCE BOUNDARY — HARD LOCK
+
+All 24 use one common Behavior Engine; character identity changes profile/bias, not reasoning quality or engine authority.
+
+Provenance classes:
+- Core6: approved personality board + recovered sourced scene lines;
+- 07–12 and 19–24: approved board keywords / signature / description / signature item;
+- 13–18: user-authorized derived profile from approved signature + species.
+
+Derived traits/dialogue SHALL carry explicit derived provenance and SHALL NOT be relabeled as literal approved-board text.
+Project-specific dialogue, comedy, timing, role skin and performance details remain project-owned unless separately promoted.
 
 ## 3. ONE GOOD REFLECTION — HARD LOCK
 
@@ -89,6 +132,6 @@ If `OS/GUIDE_FAMILY_LEARNING_OS.md` contains any superseded former-name label, t
 - Special Friend existence: INTEGRATED / DETAIL UNVERIFIED
 - project-specific ownership separation: PRESERVED
 - stale former-name label normalization inside the parent GUIDE file: RESOLVED
-- runtime realization: UNVERIFIED
+- runtime realization: VERIFIED IN INTEGRATED CANDIDATE / CENTRAL PROMOTION PENDING
 
 NO USER-AS-QA.
