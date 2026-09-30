@@ -21,6 +21,34 @@ const conditional=Bridge.evaluate({
 assert.equal(conditional.ok,true);
 assert.equal(conditional.decision,'ALLOW_CONDITIONAL');
 
+const governedActivity=Bridge.evaluate({
+  function_id:'LE-F07',
+  consumer_app:'READY_SET',
+  requested_behavior:'GOVERNED_DERIVED_ACTIVITY_REFERENCE',
+  provenance:['GOVERNED_DERIVED_ACTIVITY_REF','OFFICIAL_SOURCE_DERIVATION_REF']
+});
+assert.equal(governedActivity.ok,true);
+assert.equal(governedActivity.decision,'ALLOW');
+
+const governedMissingDerivation=Bridge.evaluate({
+  function_id:'LE-F07',
+  consumer_app:'READY_SET',
+  requested_behavior:'GOVERNED_DERIVED_ACTIVITY_REFERENCE',
+  provenance:['GOVERNED_DERIVED_ACTIVITY_REF']
+});
+assert.equal(governedMissingDerivation.ok,false);
+assert.equal(governedMissingDerivation.reason,'DENY_PROVENANCE_REQUIRED');
+
+const governedMasteryClaim=Bridge.evaluate({
+  function_id:'LE-F07',
+  consumer_app:'READY_SET',
+  requested_behavior:'GOVERNED_DERIVED_ACTIVITY_REFERENCE',
+  provenance:['GOVERNED_DERIVED_ACTIVITY_REF','OFFICIAL_SOURCE_DERIVATION_REF'],
+  requested_claims:['LEARNER_MASTERY_FROM_ACTIVITY_AVAILABILITY']
+});
+assert.equal(governedMasteryClaim.ok,false);
+assert.equal(governedMasteryClaim.reason,'DENY_CLAIM_BOUNDARY');
+
 const hold=Bridge.evaluate({
   function_id:'LE-H01',
   consumer_app:'READY_SET',
