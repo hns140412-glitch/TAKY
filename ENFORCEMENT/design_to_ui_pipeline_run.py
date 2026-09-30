@@ -99,31 +99,43 @@ def fail(root: Path, stage: str, detail: str, evidence: dict|None=None)->int:
 def run(argv: list[str], cwd: Path)->subprocess.CompletedProcess:
     return subprocess.run(argv,cwd=cwd,text=True,capture_output=True,shell=False)
 
-def validate_adapter(cfg: dict, root: Path)->list[str]:
+def validate_adapter(cfg: dict)->list[str]:
     errors=[]
     if cfg.get("schema")!="TAKY_DESIGN_UI_ADAPTER_V1":
         errors.append("ADAPTER_SCHEMA_INVALID")
-    commands=cfg.get("commands")
-    if not isinstance(commands,dict):
-        errors.append("ADAPTER_COMMANDS_MISSING")
-        return errors
-    for name in ("capture","interaction","responsive","asset_integrity"):
-        argv=commands.get(name)
-        if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
-            errors.append(f"ADAPTER_COMMAND_INVALID:{name}")
-    outputs=cfg.get("outputs")
-    if not isinstance(outputs,dict):
-        errors.append("ADAPTER_OUTPUTS_MISSING")
+
+    capture=cfg.get("capture")
+    if not isinstance(capture,dict):
+        errors.append("ADAPTER_CAPTURE_MISSING")
     else:
-        expected={
-            "render_manifest":"ui-audit/render-manifest.json",
-            "interaction":"ui-audit/interaction-result.json",
-            "responsive":"ui-audit/responsive-result.json",
-            "asset_integrity":"ui-audit/asset-result.json",
-        }
-        for key,value in expected.items():
-            if outputs.get(key)!=value:
-                errors.append(f"ADAPTER_OUTPUT_INVALID:{key}")
+        argv=capture.get("command")
+        if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
+            errors.append("ADAPTER_CAPTURE_COMMAND_INVALID")
+        artifacts=capture.get("artifacts")
+        if not isinstance(artifacts,list) or not artifacts:
+            errors.append("ADAPTER_CAPTURE_ARTIFACTS_MISSING")
+        else:
+            seen=set()
+            for item in artifacts:
+                if not isinstance(item,dict):
+                    errors.append("ADAPTER_CAPTURE_ARTIFACT_INVALID")
+                    continue
+                key=(item.get("screen_id"),item.get("state_id"),item.get("viewport_id"))
+                if any(not isinstance(x,str) or not x for x in key) or not isinstance(item.get("path"),str) or not item.get("path"):
+                    errors.append("ADAPTER_CAPTURE_ARTIFACT_INVALID")
+                if key in seen:
+                    errors.append("ADAPTER_CAPTURE_ARTIFACT_DUPLICATE")
+                seen.add(key)
+
+    checks=cfg.get("checks")
+    if not isinstance(checks,dict):
+        errors.append("ADAPTER_CHECKS_MISSING")
+    else:
+        for name in ("interaction","responsive","asset_integrity"):
+            check=checks.get(name)
+            argv=check.get("command") if isinstance(check,dict) else None
+            if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
+                errors.append(f"ADAPTER_CHECK_COMMAND_INVALID:{name}")
     return errors
 
 def expected_coverage(manifest: dict, kind: str)->set[str]:
@@ -132,7 +144,10 @@ def expected_coverage(manifest: dict, kind: str)->set[str]:
         sid=screen["id"]
         states=[s["id"] for s in screen.get("states",[])]
         views=[v["id"] for v in screen.get("viewports",[])]
-        if kind=="INTERACTION":
+        if kind=="VISUAL":
+            visual_states=[s["id"] for s in screen.get("states",[]) if s.get("visual_policy","GOLDEN_PARITY")=="GOLDEN_PARITY"]
+            rows |= {f"{sid}:{state}:{view}" for state in visual_states for view in views}
+        elif kind=="INTERACTION":
             rows |= {f"{sid}:{state}" for state in states}
         elif kind=="RESPONSIVE":
             rows |= {f"{sid}:{state}:{view}" for state in states for view in views}
@@ -140,30 +155,59 @@ def expected_coverage(manifest: dict, kind: str)->set[str]:
             rows.add(sid)
     return rows
 
-def evidence_check(path: Path, kind: str, manifest_sha: str, source_commit: str, manifest: dict)->str|None:
-    if not path.is_file():
-        return "EVIDENCE_MISSING"
-    try:
-        data=read_json(path)
-    except Exception:
-        return "EVIDENCE_JSON_INVALID"
-    if data.get("schema")!="TAKY_DESIGN_EVIDENCE_V1":
-        return "EVIDENCE_SCHEMA_INVALID"
-    if data.get("kind")!=kind:
-        return "EVIDENCE_KIND_MISMATCH"
-    if data.get("pass") is not True:
-        return "EVIDENCE_NOT_PASS"
-    if data.get("manifest_sha256")!=manifest_sha:
-        return "EVIDENCE_MANIFEST_SHA_MISMATCH"
-    if data.get("source_commit")!=source_commit:
-        return "EVIDENCE_SOURCE_COMMIT_MISMATCH"
-    if not isinstance(data.get("coverage"),list):
-        return "EVIDENCE_COVERAGE_INVALID"
-    got=set(data.get("coverage") or [])
-    missing=sorted(expected_coverage(manifest,kind)-got)
+def command_digest(value: str)->str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+def write_evidence(path: Path, kind: str, manifest: dict, manifest_sha: str, argv: list[str], cp: subprocess.CompletedProcess)->None:
+    payload={
+        "schema":"TAKY_DESIGN_EVIDENCE_V1",
+        "kind":kind,
+        "pass":cp.returncode==0,
+        "manifest_sha256":manifest_sha,
+        "source_commit":str(manifest.get("source_commit","")),
+        "coverage":sorted(expected_coverage(manifest,kind)),
+        "command_argv":argv,
+        "returncode":cp.returncode,
+        "stdout_sha256":command_digest(cp.stdout or ""),
+        "stderr_sha256":command_digest(cp.stderr or ""),
+    }
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+def build_render_manifest(root: Path, manifest: dict, manifest_sha: str, adapter: dict)->tuple[dict|None,str|None]:
+    expected=expected_coverage(manifest,"VISUAL")
+    entries=[]
+    got=set()
+    for item in adapter["capture"]["artifacts"]:
+        sid=item["screen_id"]; stid=item["state_id"]; vid=item["viewport_id"]
+        key=f"{sid}:{stid}:{vid}"
+        if key not in expected:
+            return None,f"CAPTURE_ARTIFACT_NOT_EXPECTED:{key}"
+        try:
+            p=safe(root,item["path"])
+        except Exception:
+            return None,f"CAPTURE_ARTIFACT_PATH_INVALID:{key}"
+        if not p.is_file():
+            return None,f"CAPTURE_ARTIFACT_MISSING:{key}"
+        entries.append({
+            "screen_id":sid,
+            "state_id":stid,
+            "viewport_id":vid,
+            "actual_path":str(p.relative_to(root)),
+            "actual_sha256":sha256(p),
+        })
+        got.add(key)
+    missing=sorted(expected-got)
     if missing:
-        return "EVIDENCE_COVERAGE_MISSING:"+",".join(missing)
-    return None
+        return None,"CAPTURE_COVERAGE_MISSING:"+",".join(missing)
+    payload={
+        "schema":"TAKY_RENDER_MANIFEST_V1",
+        "project":manifest.get("project"),
+        "manifest_sha256":manifest_sha,
+        "source_commit":manifest.get("source_commit"),
+        "entries":entries,
+    }
+    return payload,None
 
 def main()->int:
     ap=argparse.ArgumentParser()
@@ -190,7 +234,7 @@ def main()->int:
     except Exception as e:
         return fail(root,"contract","JSON_INVALID:"+type(e).__name__)
 
-    adapter_errors=validate_adapter(adapter,root)
+    adapter_errors=validate_adapter(adapter)
     if adapter_errors:
         return fail(root,"contract",";".join(adapter_errors))
 
@@ -208,13 +252,16 @@ def main()->int:
     manifest_sha=sha256(manifest_path)
     source_commit=str(manifest.get("source_commit",""))
 
-    # Capture first because central Visual Compare owns VISUAL evidence.
-    cp=run(adapter["commands"]["capture"],root)
+    # Capture first. App only produces screenshots; central runner owns render-manifest.
+    capture_argv=adapter["capture"]["command"]
+    cp=run(capture_argv,root)
     render_manifest=audit/"render-manifest.json"
     if cp.returncode!=0:
         return fail(root,"capture","ADAPTER_COMMAND_FAILED",{"stderr":cp.stderr[-2000:]})
-    if not render_manifest.is_file():
-        return fail(root,"capture","RENDER_MANIFEST_MISSING")
+    render_payload,render_problem=build_render_manifest(root,manifest,manifest_sha,adapter)
+    if render_problem:
+        return fail(root,"capture",render_problem)
+    render_manifest.write_text(json.dumps(render_payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
     visual_out=audit/"visual-result.json"
     visual_blocker_tokens=("GOLDEN_IMPORT_OPEN","ASSET_IMPORT_OPEN","ASSET_PRODUCTION_OPEN","IMPLEMENTATION_OPEN")
@@ -238,13 +285,16 @@ def main()->int:
         completed_checks.append("visual")
 
     for stage in ("interaction","responsive","asset_integrity"):
-        cp=run(adapter["commands"][stage],root)
-        if cp.returncode!=0:
-            return fail(root,stage,"ADAPTER_COMMAND_FAILED",{"stderr":cp.stderr[-2000:]})
+        argv=adapter["checks"][stage]["command"]
+        cp=run(argv,root)
         path=root/EXPECTED_OUTPUTS[stage]
-        problem=evidence_check(path,EXPECTED_KINDS[stage],manifest_sha,source_commit,manifest)
-        if problem:
-            return fail(root,stage,problem,{"result":EXPECTED_OUTPUTS[stage],"contract_blockers":contract_blockers})
+        write_evidence(path,EXPECTED_KINDS[stage],manifest,manifest_sha,argv,cp)
+        if cp.returncode!=0:
+            return fail(root,stage,"ADAPTER_COMMAND_FAILED",{
+                "stderr":cp.stderr[-2000:],
+                "result":EXPECTED_OUTPUTS[stage],
+                "contract_blockers":contract_blockers,
+            })
         completed_checks.append(stage)
 
     if contract_blockers:
