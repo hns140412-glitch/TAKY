@@ -22,7 +22,7 @@ STATUSES={
     "interaction":"INTERACTION_BLOCKED",
     "responsive":"RESPONSIVE_BLOCKED",
     "asset_integrity":"ASSET_BLOCKED",
-    "receipt":"DESIGN_PASS_BLOCKED",
+    "receipt":"RECEIPT_BLOCKED",
 }
 EXPECTED_OUTPUTS={
     "capture":"ui-audit/render-manifest.json",
