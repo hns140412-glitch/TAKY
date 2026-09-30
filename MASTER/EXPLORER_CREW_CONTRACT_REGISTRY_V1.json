@@ -170,6 +170,17 @@
         "Relation/Affinity Engine",
         "Shared Memory"
       ]
+    },
+    {
+      "id": "TAKY_EXPLORER_CREW_BROWSER_BEHAVIOR_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Shared Browser Explorer Crew Behavior Runtime",
+      "consumers": [
+        "Ready live Crew runtime",
+        "Hide live Crew runtime",
+        "Snap live Crew runtime"
+      ]
     }
   ]
 }
