@@ -33,6 +33,11 @@ def safe_file(root,rel,prefix,extensions):
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def slot_for_badge_id(badge_id):
+    m=re.search(r"(\\d+)$",str(badge_id))
+    if not m: return None
+    return str(int(m.group(1))).zfill(3)
+
 def exact_file(root,blob,prefix,extensions,errors,code):
     if not isinstance(blob,dict):
         errors.append(code+"_FILE_IDENTITY_REQUIRED")
@@ -105,7 +110,9 @@ def verify(root=ROOT,manifest=None):
             errors.append("INVALID_OR_DUPLICATE_BADGE_ID")
             continue
         seen.add(bid)
-        number=bid[-3:]
+        number=slot_for_badge_id(bid)
+        if not number:
+            errors.append("BADGE_ID_NUMERIC_SUFFIX_REQUIRED"); continue
         src,cp,art=source_by[bid],copy_by[bid],art_by[bid]
         expected={"canonical_title":src["stable_name"],"display_title_proposal":cp["display_title_proposal"],
                   "core_detail_proposal":cp["flavor_text_proposal"],"source_motif":src["motif"],
@@ -129,6 +136,27 @@ def verify(root=ROOT,manifest=None):
                 used_bytes.add(digest(path))
         if len(layer_hashes)==5 and len(set(layer_hashes))!=5:
             errors.append(number+"_FLATTENED_OR_DUPLICATED_LAYER")
+        profile=exact_file(root,item.get("depth_profile"),"BADGE/assets/individual/"+number+"/",
+                           (".json",),errors,number+"_DEPTH_PROFILE")
+        if profile:
+            try: dp=json.loads(profile.read_text(encoding="utf-8"))
+            except (ValueError,UnicodeDecodeError): dp={}
+            limits={"base":0,"bg":3,"subject":7,"fx":8}
+            layers_dp=dp.get("layers",{}) if isinstance(dp,dict) else {}
+            if dp.get("schema")!="TAKY_BADGE_DEPTH_PROFILE_V1" or dp.get("badge_id")!=bid or                dp.get("surface")!="BADGE_DETAIL_VIEW_ONLY" or dp.get("reduced_motion")!="STATIC_COMPOSITE" or                dp.get("enabled_ownership_states")!=["EARNED"] or                any(not isinstance(layers_dp.get(k,{}).get("max_px"),int) or
+                   layers_dp.get(k,{}).get("max_px")<0 or layers_dp.get(k,{}).get("max_px")>v
+                   for k,v in limits.items()):
+                errors.append(number+"_DEPTH_PROFILE_INVALID")
+        manifest_file=exact_file(root,item.get("individual_manifest"),"BADGE/assets/individual/"+number+"/",
+                                 (".json",),errors,number+"_INDIVIDUAL_MANIFEST")
+        if manifest_file:
+            try: mf=json.loads(manifest_file.read_text(encoding="utf-8"))
+            except (ValueError,UnicodeDecodeError): mf={}
+            required={"manifest.json","base.png","bg.png","subject.png","fx.png","composite.png",
+                      "preview-64.png","preview-120.png","preview-200.png","preview-320.png",
+                      "depth-profile.json","review.json"}
+            if mf.get("schema")!="TAKY_BADGE_INDIVIDUAL_MANIFEST_V2" or mf.get("badge_id")!=bid or                mf.get("asset_dir")!="BADGE/assets/individual/"+number or                set(mf.get("required_files",[]))!=required or                mf.get("detail_effect_scope")!="BADGE_DETAIL_VIEW_ONLY":
+                errors.append(number+"_INDIVIDUAL_MANIFEST_INVALID")
         previews=item.get("previews",{})
         if not isinstance(previews,dict): previews={}
         if set(previews)!={str(s) for s in SIZES}: errors.append(number+"_PREVIEW_SET_MISSING")
