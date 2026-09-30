@@ -63,7 +63,15 @@ Current confirmed state:
 TAKY and GUIDE SHALL NOT delete the concept merely because an older/current MASTER lacks its historical detailed rule.
 TAKY SHALL NOT invent the missing runtime contract from analogy alone.
 
-## 5. PROJECT OWNERSHIP BOUNDARY
+## 5. ASSET / BEHAVIOR ENGINE BOUNDARY — HARD LOCK
+
+`ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
+
+Guide/user character art production, Character Master creation, derivatives, SHA/versioning and registry promotion are owned by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md` and the central asset protocol. Relationship progression, scene response, dialogue intent, pose/expression/prop selection and animation cues are behavior concerns and SHALL consume approved registry assets rather than create new canonical art during runtime.
+
+A missing pose/expression is an asset gap, not permission for the behavior engine to redraw a character.
+
+## 6. PROJECT OWNERSHIP BOUNDARY
 
 The following remain PROJECT-owned unless separately promoted through evidence and approval:
 - Ready & Set: Main Guide + Random Guest simultaneous contract, Smart Random algorithm, Duo-specific comedy/intro
@@ -72,7 +80,7 @@ The following remain PROJECT-owned unless separately promoted through evidence a
 
 Shared Character/Relationship rules SHALL NOT erase project identity.
 
-## 6. CURRENT APP-FAMILY CORRECTION
+## 7. CURRENT APP-FAMILY CORRECTION
 
 Current user-facing vocabulary app name is `Hide & Seek`.
 The former product identity is lineage only; its police/capture child-facing world is SUPERSEDED.
@@ -81,7 +89,7 @@ Validated learning-core concepts such as Camera/Photo intake, OCR Review-before-
 
 If `OS/GUIDE_FAMILY_LEARNING_OS.md` contains any superseded former-name label, treat it as a stale cross-canonical reference to be normalized during the next app-family comparison; do not revive the superseded world/name.
 
-## 7. VALIDATION / STATUS
+## 8. VALIDATION / STATUS
 
 - relationship core recovery: INTEGRATED
 - One Good Reflection recovery: INTEGRATED
