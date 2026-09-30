@@ -10,9 +10,9 @@ from index_owner_use_gate import reviewed_learning_row
 def row(**kwargs):
     return {"source_id":"SYNTHETIC:TEST:1","canonical_title":"fraction reasoning",
             **kwargs}
-def cycle(item):
+def cycle(item, observations=None):
     return run_learning_cycle({"context":{"skill_id":"SYNTHETIC_TEST"},
-             "evidence_candidates":[item],"observations":[]},
+             "evidence_candidates":[item],"observations":list(observations or [])},
              owner_verified_source_ids={item["source_id"]})
 
 class IndexOwnerUseGuardTest(unittest.TestCase):
@@ -44,7 +44,11 @@ class IndexOwnerUseGuardTest(unittest.TestCase):
     for cls in ("READY_WITH_GUARDS","DIRECT_USE_READY"):
         with self.subTest(cls=cls):
             item=row(index_state="INDEXED",authorization_class=cls)
-            self.assertTrue(cycle(item)["next_learning_action"]["planner_allocation_allowed"])
+            no_observation=cycle(item)
+            self.assertEqual(no_observation["strategy_selection"]["reason"],"NO_LEARNER_OBSERVATION")
+            self.assertFalse(no_observation["next_learning_action"]["planner_allocation_allowed"])
+            observed=cycle(item,[{"correct":False,"assisted":False}])
+            self.assertTrue(observed["next_learning_action"]["planner_allocation_allowed"])
 
  def test_explicit_indexed_conditional_holds_for_review(self):
     item=row(index_state="INDEXED",authorization_class="CONDITIONAL")

@@ -49,8 +49,12 @@ class IndexOwnerIndependentTrust(unittest.TestCase):
     self.assertFalse(direct["next_learning_action"]["planner_allocation_allowed"])
     authorized=orchestrate_learning(payload,owner_verifier=VERIFIER)
     self.assertTrue(authorized["retrieval"]["evidence_sufficient_for_review"])
-    self.assertTrue(authorized["runtime"]["next_learning_action"]["planner_allocation_allowed"])
-    self.assertIsNone(authorized["runtime"]["next_learning_action"]["planner_date"])
+    self.assertEqual(authorized["runtime"]["strategy_selection"]["reason"],"NO_LEARNER_OBSERVATION")
+    self.assertFalse(authorized["runtime"]["next_learning_action"]["planner_allocation_allowed"])
+    observed=orchestrate_learning({**payload,"observations":[{"correct":False,"assisted":False}]},
+                                  owner_verifier=VERIFIER)
+    self.assertTrue(observed["runtime"]["next_learning_action"]["planner_allocation_allowed"])
+    self.assertIsNone(observed["runtime"]["next_learning_action"]["planner_date"])
 
  def test_independent_conditional_receipt_is_reviewable_not_action_ready(self):
     conditional=make_row("TEST_CONDITIONAL","fraction reasoning",

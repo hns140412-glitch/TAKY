@@ -44,6 +44,7 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
         "correct_count":correct,
         "incorrect_count":incorrect,
         "assisted_count":assisted,
+        "observation_count":len(obs),
         "repeated_error":repeated_error,
         "assistance_dependency":assistance_dependency,
         "confidence":confidence,
@@ -92,6 +93,14 @@ def select_strategy(context:dict, state:dict, evidence:list[dict])->dict:
             "intensity":"NONE",
             "requires_review":True,
             "evidence_refs":[x.get("source_id") for x in reviewable if x.get("source_id")],
+        }
+    if int(state.get("observation_count") or 0) < 1:
+        return {
+            "strategy":"HOLD_FOR_EVIDENCE",
+            "reason":"NO_LEARNER_OBSERVATION",
+            "intensity":"NONE",
+            "requires_review":True,
+            "evidence_refs":[x.get("source_id") for x in ready if x.get("source_id")],
         }
     if state.get("repeated_error"):
         strategy="TARGETED_REMEDIATION"
@@ -159,7 +168,7 @@ def run_learning_cycle(payload:dict, *, owner_verified_source_ids=None)->dict:
             "skill_id":context.get("skill_id"),
             "learning_context":context.get("learning_context"),
             "desired_evidence_type":context.get("desired_evidence_type") or "learning support evidence",
-            "what_existing_evidence_is_insufficient":"NO_REVIEWABLE_EVIDENCE_AFTER_POLICY_FILTER",
+            "what_existing_evidence_is_insufficient":strategy["reason"],
         }
     return {
         "schema":"TAKY_LEARNING_RUNTIME_V1",
