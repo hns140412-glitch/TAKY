@@ -100,33 +100,36 @@ Visual Compare:
 - 공통 schema / regression
 
 각 앱이 소유:
-- browser capture adapter
-- interaction adapter
-- responsive adapter
-- asset-integrity adapter
+- 실제 browser capture 명령
+- interaction test 명령
+- responsive test 명령
+- asset-integrity test 명령
+- capture 결과 파일과 screen/state/viewport의 매핑
 
-앱 adapter는 UI를 판정하지 않고 정해진 schema의 결과 파일만 만든다.
-최종 판정은 중앙 runner가 한다.
+앱은 PASS JSON을 만들지 않는다.
+중앙 Runner가 명령의 실제 종료코드와 manifest coverage를 근거로 render-manifest / evidence / Receipt를 생성한다.
 
 ## Adapter protocol
 각 앱은 `design-ui-adapter.json` 하나만 제공한다.
 
-필수 command:
-- `capture`
-- `interaction`
-- `responsive`
-- `asset_integrity`
+필수 선언:
+- `capture.command`: 실제 브라우저 캡처 테스트
+- `capture.artifacts[]`: 생성된 screenshot을 screen/state/viewport에 매핑
+- `checks.interaction.command`
+- `checks.responsive.command`
+- `checks.asset_integrity.command`
 
-명령은 shell string이 아니라 argv array로 선언한다.
-중앙 runner는 shell을 사용하지 않는다.
+명령은 shell string이 아니라 argv array다. 중앙 Runner는 `shell=False`로 실행한다.
 
-고정 출력:
-- `ui-audit/render-manifest.json`
-- `ui-audit/interaction-result.json`
-- `ui-audit/responsive-result.json`
-- `ui-audit/asset-result.json`
+앱이 직접 만들 필요가 없는 것:
+- render-manifest
+- VISUAL evidence
+- INTERACTION evidence
+- RESPONSIVE evidence
+- ASSET_INTEGRITY evidence
+- Design Receipt
 
-VISUAL evidence는 중앙 Visual Compare가 생성한다.
+이들은 모두 중앙 Runner가 생성한다. 따라서 기존처럼 실제 테스트 후 `--interaction-pass` 등을 다시 주입하는 이중 판정은 제거한다.
 
 ## 최소 파일
 필수:
