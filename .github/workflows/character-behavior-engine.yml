@@ -47,6 +47,10 @@ jobs:
       - run: python -m unittest ENFORCEMENT/contract_version_handshake_test.py
       - run: python -m unittest ENFORCEMENT/surface_scene_policy_contract_test.py
       - run: python -m unittest ENFORCEMENT/crew_evidence_event_contract_test.py
+      - run: node RUNTIME/crew-transport-auth-policy.test.js
+      - run: node RUNTIME/crew-durable-evidence-store-adapter.test.js
+      - run: node RUNTIME/authenticated-crew-evidence-transport.test.js
+      - run: node RUNTIME/crew-netlify-blobs-transport-adapter.test.js
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
