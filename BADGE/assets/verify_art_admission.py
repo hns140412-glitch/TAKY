@@ -34,7 +34,7 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def slot_for_badge_id(badge_id):
-    m=re.search(r"(\\d+)$",str(badge_id))
+    m=re.search(r"(\d+)$",str(badge_id))
     if not m: return None
     return str(int(m.group(1))).zfill(3)
 
