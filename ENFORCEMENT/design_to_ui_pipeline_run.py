@@ -146,7 +146,7 @@ def main()->int:
 
     cp=run([sys.executable,str(VALIDATOR),str(manifest_path),"--root",str(root),"--out",str(contract_out)],root)
     if cp.returncode!=0:
-        return fail(root,"contract","CONTRACT_VALIDATOR_FAILED",{"stderr":cp.stderr[-2000:]})
+        return fail(root,"contract","CONTRACT_VALIDATOR_FAILED",{"stdout":cp.stdout[-4000:],"stderr":cp.stderr[-2000:]})
     try:
         cv=read_json(contract_out)
     except Exception:
