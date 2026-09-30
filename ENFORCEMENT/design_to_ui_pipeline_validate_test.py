@@ -21,10 +21,10 @@ def run(*args, expect=0):
     return cp
 
 def build(root: Path, open_asset: bool):
-    (root/"design/golden").mkdir(parents=True)
-    (root/"design/contracts").mkdir(parents=True)
-    (root/"design/fixtures").mkdir(parents=True)
-    (root/"assets").mkdir(parents=True)
+    (root/"design/golden").mkdir(parents=True, exist_ok=True)
+    (root/"design/contracts").mkdir(parents=True, exist_ok=True)
+    (root/"design/fixtures").mkdir(parents=True, exist_ok=True)
+    (root/"assets").mkdir(parents=True, exist_ok=True)
 
     golden = root/"design/golden/home.png"
     golden.write_bytes(b"approved-golden-bytes")
