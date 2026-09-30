@@ -211,7 +211,7 @@ def main():
         golden.write_bytes(b"approved-golden-bytes")
 
         # 8) Missing evidence coverage must block receipt.
-        evidence(visual,"VISUAL",manifest,["home:INITIAL:phone"])
+        evidence(visual,"VISUAL",manifest,[])
         cp=subprocess.run([
             sys.executable,str(RECEIPT),
             "--manifest",str(manifest),
