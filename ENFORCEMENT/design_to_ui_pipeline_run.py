@@ -185,8 +185,7 @@ def main()->int:
         return fail(root,"contract","CONTRACT_VALIDATION_RESULT_INVALID")
     if cv.get("contract_valid") is not True:
         return fail(root,"contract","CONTRACT_INVALID")
-    if cv.get("design_pass_ready") is not True:
-        return fail(root,"contract","UNRESOLVED_CONTRACT_BLOCKERS",{"blockers":cv.get("blockers",[])})
+    contract_blockers=list(cv.get("blockers") or [])
 
     manifest_sha=sha256(manifest_path)
     source_commit=str(manifest.get("source_commit",""))
@@ -200,16 +199,25 @@ def main()->int:
         return fail(root,"capture","RENDER_MANIFEST_MISSING")
 
     visual_out=audit/"visual-result.json"
-    cp=run([
-        sys.executable,str(VISUAL),
-        "--manifest",str(manifest_path),
-        "--render-manifest",str(render_manifest),
-        "--root",str(root),
-        "--out","ui-audit/visual-result.json",
-        "--diff-dir","ui-audit/diff",
-    ],root)
-    if cp.returncode!=0:
-        return fail(root,"visual","VISUAL_COMPARE_FAILED",{"result":"ui-audit/visual-result.json"})
+    visual_blocker_tokens=("GOLDEN_IMPORT_OPEN","ASSET_IMPORT_OPEN","ASSET_PRODUCTION_OPEN","IMPLEMENTATION_OPEN")
+    visual_deferred=any(any(token in str(blocker) for token in visual_blocker_tokens) for blocker in contract_blockers)
+    completed_checks=["contract","capture"]
+    deferred_checks=[]
+
+    if visual_deferred:
+        deferred_checks.append("visual")
+    else:
+        cp=run([
+            sys.executable,str(VISUAL),
+            "--manifest",str(manifest_path),
+            "--render-manifest",str(render_manifest),
+            "--root",str(root),
+            "--out","ui-audit/visual-result.json",
+            "--diff-dir","ui-audit/diff",
+        ],root)
+        if cp.returncode!=0:
+            return fail(root,"visual","VISUAL_COMPARE_FAILED",{"result":"ui-audit/visual-result.json"})
+        completed_checks.append("visual")
 
     for stage in ("interaction","responsive","asset_integrity"):
         cp=run(adapter["commands"][stage],root)
@@ -218,7 +226,15 @@ def main()->int:
         path=root/EXPECTED_OUTPUTS[stage]
         problem=evidence_check(path,EXPECTED_KINDS[stage],manifest_sha,source_commit)
         if problem:
-            return fail(root,stage,problem,{"result":EXPECTED_OUTPUTS[stage]})
+            return fail(root,stage,problem,{"result":EXPECTED_OUTPUTS[stage],"contract_blockers":contract_blockers})
+        completed_checks.append(stage)
+
+    if contract_blockers:
+        return fail(root,"contract","UNRESOLVED_CONTRACT_BLOCKERS",{
+            "blockers":contract_blockers,
+            "completed_checks":completed_checks,
+            "deferred_checks":deferred_checks,
+        })
 
     receipt=audit/"design-receipt.json"
     cp=run([
