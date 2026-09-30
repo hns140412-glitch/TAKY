@@ -36,7 +36,7 @@ def setup(root: Path,fail_stage: str|None=None):
     })
     write(root/"design/contracts/home.layers.json",{
         "schema":"TAKY_LAYER_CONTRACT_V1","screen_id":"home","layers":[
-          {"role":"BACKGROUND","status":"BOUND","path":"assets/layer.bin","sha256":sha(root/"assets/layer.bin")},
+          ({"role":"BACKGROUND","status":"ASSET_PRODUCTION_OPEN"} if fail_stage=="contract" else {"role":"BACKGROUND","status":"BOUND","path":"assets/layer.bin","sha256":sha(root/"assets/layer.bin")}),
           {"role":"FOREGROUND","status":"BOUND","path":"assets/layer.bin","sha256":sha(root/"assets/layer.bin")},
           {"role":"OBJECT","status":"BOUND","path":"assets/layer.bin","sha256":sha(root/"assets/layer.bin")},
           {"role":"CHARACTER_SLOT","status":"RUNTIME_SLOT","selector":"#character","owner":"TEST","resolver_contract":"TEST"},
@@ -114,7 +114,18 @@ def main():
         assert cp.returncode!=0
         s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
         assert s["status"]=="INTERACTION_BLOCKED",s
+        assert s["routing"]["return_to_stage"]=="IMPLEMENT",s
+        assert s["routing"]["owner"]=="UI_IMPLEMENTATION",s
         assert not (root/"ui-audit/design-receipt.json").exists()
+
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);setup(root,"contract")
+        cp=run(root)
+        assert cp.returncode!=0
+        s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
+        assert s["status"]=="CONTRACT_BLOCKED",s
+        assert s["routing"]["return_to_stage"]=="UI_CONTRACT",s
+        assert s["routing"]["owner"]=="ASSET_CONTRACT",s
 
     print("DESIGN_TO_UI_PIPELINE_RUNNER_V1=PASS")
     return 0
