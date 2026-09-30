@@ -2,274 +2,188 @@
 
 Status: DRAFT / CENTRAL EXECUTION CONTRACT / NO MAIN MERGE / NO NETLIFY / NO IMAGE GENERATION
 
-## 0. Purpose
+## 목적
+사용자가 시안을 확정한 뒤 실제 UI가 그 시안과 기능 계약을 따라 완성될 때까지의 **한 줄 실행 파이프라인**이다.
 
-This contract closes the gap between an approved UI mockup and production UI.
+이 파이프라인은 디자인을 다시 만드는 절차가 아니다.
+승인된 시안을 잠그고, 구현하고, 실제 브라우저 결과를 검증하고, 차이가 있으면 구현으로 되돌린 뒤 Design PASS를 발급한다.
 
-It does not redesign approved screens. It converts already-approved visual authority into:
-1. frozen source evidence,
-2. machine-readable screen contracts,
-3. separately owned/bound asset layers,
-4. real DOM/CSS/runtime implementation,
-5. deterministic state fixtures,
-6. matched-viewport browser renders,
-7. visual + interaction + responsive + asset evidence,
-8. correction loops,
-9. a design receipt that can be consumed by a later release gate.
+USER != DEBUGGER.
 
-USER != DEBUGGER. A user-approved mockup is not implementation evidence, and successful code/tests are not visual approval.
+## 최종 5단계
+`1 APPROVAL LOCK → 2 UI CONTRACT → 3 IMPLEMENT → 4 VERIFY / CORRECT → 5 DESIGN PASS`
 
-## 1. Fixed execution chain
+Release / Deploy는 이 파이프라인 밖의 별도 Gate다.
 
-`APPROVED MOCKUP
--> SOURCE FREEZE
--> SCREEN CONTRACT
--> ASSET/LAYER CONTRACT
--> STATE FIXTURES
--> LIVE UI IMPLEMENTATION
--> MATCHED-VIEWPORT RENDER
--> VISUAL COMPARE
--> CORRECTION LOOP
--> INTERACTION/RESPONSIVE/ASSET REGRESSION
--> DESIGN RECEIPT
--> RELEASE AGGREGATOR`
+### 1) APPROVAL LOCK
+한 번만 확정한다.
+- 승인 시안 / authority
+- Golden 또는 승인 reference
+- SHA-256
+- 승인 화면 / viewport 범위
+- 승인 production asset / Visual ID
+- 제외 범위
 
-Stages cannot be silently skipped.
+금지:
+- runtime screenshot을 Golden으로 승격
+- 승인되지 않은 crop/재생성물을 Golden으로 대체
+- composite mockup을 production background로 사용
 
-## 2. Authority order
+### 2) UI CONTRACT
+구현 전에 필요한 계약을 **하나의 manifest 계보**로 잠근다.
 
-1. app CURRENT / explicit user-approved screen
-2. approved Golden Reference + exact SHA
-3. approved Visual ID / production asset authority
-4. screen interaction/state contract
-5. implementation
-6. external references as technique evidence only
+포함:
+- screen contract
+- layer/asset binding
+- viewport / safe area
+- state fixture
+- interaction
+- responsive rule
+- accessibility / motion requirement
+- stable selector / component owner
 
-A runtime screenshot can never promote itself to Golden.
+authority는 `design-to-ui.json` 하나가 가리킨다.
 
-## 3. Stage contracts
+### 3) IMPLEMENT
+실제 DOM/CSS/runtime을 작성한다.
 
-### S0 APPROVED MOCKUP FREEZE
-Required:
-- screen_id
-- authority_ref
-- source identity
-- exact source SHA-256
-- approved viewport/aspect scope
-- explicit approval scope
-- explicit exclusions
+원칙:
+- 기능 텍스트와 컨트롤은 live UI
+- 승인 에셋은 승인된 경로/Visual ID만 사용
+- missing art = `ASSET_PRODUCTION_OPEN`
+- 승인 에셋 미연결 = `ASSET_IMPORT_OPEN`
+- 코드/slot 미구현 = `IMPLEMENTATION_OPEN`
+- placeholder를 승인 결과로 취급하지 않음
 
-Output: immutable Golden pointer. A composite mockup stays REFERENCE_ONLY unless an individual layer is separately approved as a production asset.
+이미지 생성이 막혀 있어도 나머지 구현은 계속 가능하다.
 
-If approval identity + SHA are known but the binary has not yet been imported into the app repo, declare `golden.status=IMPORT_OPEN`. This is a valid contract blocker, not Design PASS. `BOUND` requires the local file to match the pinned SHA.
+### 4) VERIFY / CORRECT
+중앙 실행기 하나가 순서대로 수행한다.
 
-### S1 SCREEN CONTRACT
-Machine-readable per screen:
-- Golden identity
-- viewport(s) and safe areas
-- typography hierarchy
-- composition regions
-- z-order
-- responsive behavior
-- states
-- interactions
-- accessibility
-- component/code owners
-- required layers
-- motion/effect contract where applicable
+`contract validate
+→ app capture adapter
+→ matched-viewport Visual Compare
+→ interaction evidence
+→ responsive evidence
+→ asset-integrity evidence`
 
-No Markdown-only implementation authority. Human-readable docs may accompany JSON but cannot replace it.
+실패 시 자동 임의수정하지 않고 owner에 라우팅해 IMPLEMENT로 되돌린다.
 
-### S2 ASSET/LAYER CONTRACT
-Minimum layer roles:
-- BACKGROUND
-- FOREGROUND
-- OBJECT
-- CHARACTER_SLOT
-- FUNCTION_UI
+- source / asset mismatch → APPROVAL LOCK 또는 UI CONTRACT
+- layout / typography / z-order → IMPLEMENT
+- state / interaction mismatch → IMPLEMENT
+- responsive clipping → UI CONTRACT 또는 IMPLEMENT
+- missing evidence → 해당 adapter
 
-Each bound art asset must carry owner, source/provenance, immutable SHA or approved external SHA pointer, anchor/fit behavior and whether it is production art or reference-only.
+Visual Compare:
+- Golden과 실제 render 동일 pixel dimensions
+- implicit resize/crop 금지
+- full-frame + critical ROI
+- diff evidence 저장
+- global score 하나로 critical failure 은폐 금지
 
-Layer resolution states:
-- `BOUND`: local file asset with verified SHA.
-- `LIVE_DOM`: FUNCTION_UI implemented as live DOM/component with stable selector + owner.
-- `RUNTIME_SLOT`: CHARACTER_SLOT resolved dynamically through an approved resolver contract.
-- `ASSET_IMPORT_OPEN`: approved art already exists and is SHA-pinned, but app-repo import/binding is still open; no image generation required.
-- `ASSET_PRODUCTION_OPEN`: approved production art does not yet exist; contract work may continue, Design PASS stays blocked.
-- `IMPLEMENTATION_OPEN`: required DOM/component/slot behavior is not implemented yet; keep separate from missing art.
-- `NOT_APPLICABLE`: explicitly inapplicable role; omission is not allowed.
-
-Forbidden:
-- flattening the whole mockup and adding hotspots,
-- regenerating an approved background/character without explicit revision authority,
-- embedding sample schedule/task/result text in runtime art,
-- using a reference crop as a production background unless separately approved.
-
-### S3 STATE FIXTURES
-Every screen defines deterministic visual states needed for review, not just HOME idle.
-
-At minimum where applicable:
-- INITIAL/LOADED
-- EMPTY
-- SELECTED/ACTIVE
-- ERROR/RETRY
-- COMPLETED
-- OFFLINE
-
-Learning apps add their own canonical states, e.g. correct/incorrect/hint/listening/confirming. Fixtures must not fabricate real learner FACT, achievement or score.
-
-### S4 LIVE UI IMPLEMENTATION
-Functional text and controls are live DOM/UI. Approved illustration owns the world; UI code owns interactive information.
-
-Required:
-- stable selectors/semantic IDs for test capture,
-- no hidden Golden image overlay in production,
-- no current-render-to-Golden copy path,
-- real state/data binding,
-- deterministic fixture injection isolated from production state.
-
-### S5 MATCHED-VIEWPORT RENDER
-Capture exact contract viewport(s). The capture manifest records:
-- viewport width/height,
-- DPR,
-- browser/runtime version where available,
-- fixture/state id,
-- render SHA,
-- source commit SHA.
-
-No arbitrary resize to one universal comparison size.
-
-### S6 VISUAL COMPARE V2
-Compare reference and runtime at their declared matched viewport.
-
-Evidence must include:
-- full-frame distance,
-- structure/edge distance,
-- region-of-interest checks for critical UI areas,
-- generated diff/heatmap path where supported,
-- pass/fail per screen + state + viewport.
-
-A single global score cannot hide a failed critical region.
-
-### S7 CORRECTION LOOP
-FAIL routes back to the owning layer:
-- wrong source/asset -> S0/S2
-- layout/typography/z-order -> S1/S4
-- state mismatch -> S3/S4
-- responsive clipping -> S1/S4
-- interaction mismatch -> S4
-
-Re-render and re-test. The reference is not weakened to make the candidate pass.
-
-### S8 SUBGATES
-Design completion requires machine-produced evidence files for:
+### 5) DESIGN PASS
+다음 실제 evidence가 전부 PASS일 때만 Receipt 발급:
 - VISUAL
 - INTERACTION
 - RESPONSIVE
 - ASSET_INTEGRITY
 
-A CLI boolean such as `--interaction-pass` is not evidence.
+수동 `--pass` 플래그는 evidence가 아니다.
 
-### S9 DESIGN RECEIPT
-Receipt issuer reads and hashes the actual evidence files. It may issue PASS only if every required evidence file itself reports PASS and matches the manifest identity.
+## 실행 구조
+중앙 TAKY가 소유:
+- contract validator
+- Visual Compare
+- pipeline runner
+- Design Receipt issuer
+- 공통 schema / regression
 
-Receipt contains:
-- manifest SHA
-- Golden SHA(s)
-- render SHA(s)
-- evidence file SHA(s)
-- tested screen/state/viewport matrix
-- source commit
-- receipt SHA
+각 앱이 소유:
+- browser capture adapter
+- interaction adapter
+- responsive adapter
+- asset-integrity adapter
 
-### S10 RELEASE AGGREGATOR
-Design receipt is only one release input.
+앱 adapter는 UI를 판정하지 않고 정해진 schema의 결과 파일만 만든다.
+최종 판정은 중앙 runner가 한다.
 
-Keep separate receipts for app-specific runtime concerns such as:
-- Planner/Learning logic,
-- OCR,
-- IndexedDB/storage,
-- offline/PWA,
-- authentication,
-- Safari/real-device,
-- audio/BGM,
-- accessibility/performance where required.
+## Adapter protocol
+각 앱은 `design-ui-adapter.json` 하나만 제공한다.
 
-A failure in a non-design runtime gate must not be mislabeled as a visual-design failure, and a Design PASS must not imply Release PASS.
+필수 command:
+- `capture`
+- `interaction`
+- `responsive`
+- `asset_integrity`
 
-## 4. App adoption scope
+명령은 shell string이 아니라 argv array로 선언한다.
+중앙 runner는 shell을 사용하지 않는다.
 
-### Ready & Set
-Initial matrix:
-- HOME
-- WEEK
-- DAY
-- GOAL
-- TIMER (existing approved Timer preserved, no redesign)
+고정 출력:
+- `ui-audit/render-manifest.json`
+- `ui-audit/interaction-result.json`
+- `ui-audit/responsive-result.json`
+- `ui-audit/asset-result.json`
 
-Priority while image generation is unavailable:
-- import/hash-pin approved references already available,
-- complete Screen Contract JSON,
-- create deterministic Planner/Goal/Timer fixtures,
-- produce matched viewport capture jobs,
-- replace boolean design receipt inputs with evidence files.
+VISUAL evidence는 중앙 Visual Compare가 생성한다.
 
-### Hide & Seek
-Expand beyond HOME:
-- HOME
-- TRACE
-- LINK
-- CORE
-- RECALL
-- major listening/confirm/correct/incorrect/completed/error states
-
-Reuse approved Hide environment; no arbitrary new background generation.
-
-### Snap & Pop
-Expand beyond HOME using current approved screen lineage / 11-screen review scope where still authoritative.
-Keep specialist GUIDE/Visual-ID production state independent from app Design Gate.
-
-## 5. Image-generation HOLD behavior
-
-Image generation is NOT required to implement this pipeline.
-
-When a required production layer is missing:
-- mark `ASSET_PRODUCTION_OPEN`,
-- continue contracts, fixtures, DOM/runtime, comparison tooling and evidence wiring,
-- fail closed only at the layer-dependent Design PASS boundary,
-- do not fabricate placeholder art and call it approved.
-
-This lets implementation advance now and makes later image work a bounded asset-fill step.
-
-## 6. Required machine files for a consuming app
-
-Recommended:
+## 최소 파일
+필수:
 - `design-to-ui.json`
-- `design/screens/<screen-id>.json`
-- `design/layers/<screen-id>.json`
-- `design/fixtures/<screen-id>.json`
+- `design-ui-adapter.json`
+- manifest가 참조하는 screen/layer/fixture contracts
+
+자동 생성:
+- `ui-audit/contract-validation.json`
 - `ui-audit/render-manifest.json`
 - `ui-audit/visual-result.json`
 - `ui-audit/interaction-result.json`
 - `ui-audit/responsive-result.json`
 - `ui-audit/asset-result.json`
 - `ui-audit/design-receipt.json`
+- `ui-audit/pipeline-status.json`
 
-## 7. Hard failures
+## Pipeline status
+중앙 runner는 다음 중 하나만 기록한다.
+- `CONTRACT_BLOCKED`
+- `CAPTURE_BLOCKED`
+- `VISUAL_BLOCKED`
+- `INTERACTION_BLOCKED`
+- `RESPONSIVE_BLOCKED`
+- `ASSET_BLOCKED`
+- `DESIGN_PASS`
 
-- approved source missing or SHA mismatch
-- runtime render promoted to Golden
-- composite mockup used as interactive production UI
-- production asset has no owner/provenance/hash
-- required screen/state/viewport missing from capture
-- critical-region compare failure
-- evidence PASS supplied only as command-line flags/manual booleans
-- visual correction loop skipped after mismatch
-- app-specific function gate conflated with Design PASS
-- user asked to debug implementation discrepancy
+이 상태가 작업 위치다. 별도 중복 상태표를 만들 필요가 없다.
 
-## 8. Current rollout policy
+## 범위 밖
+Design-to-UI Pipeline이 판단하지 않는 것:
+- OCR 정확도
+- Planner/Learning 정책
+- IndexedDB/business data correctness
+- 인증
+- PWA/offline
+- Netlify
+- release/deployment
 
-This V1 is a central Draft contract first.
-No automatic app PR mutation, main merge, Netlify deployment or image generation is authorized by this document.
-Apps adopt it through their own Draft branches and keep existing app-specific approvals authoritative.
+이들은 Design Receipt 이후 별도 Release Gate가 소비한다.
+
+## Hard failures
+- 승인 source/SHA 불일치
+- runtime render의 Golden 승격
+- flattened mockup을 interactive production UI로 사용
+- production asset provenance/hash 없음
+- required state/viewport capture 누락
+- critical ROI 실패
+- evidence 파일 없이 수동 PASS
+- 앱 adapter 결과 schema 불충족
+- Design PASS를 Release PASS로 취급
+- 사용자를 구현 디버거로 사용
+
+## 현재 HOLD
+- image generation: HOLD
+- main merge: HOLD
+- Netlify/deployment: HOLD
+- release claim: HOLD
+
+이 HOLD들은 파이프라인 자체 구축과 검증을 막지 않는다.
