@@ -61,6 +61,9 @@ jobs:
         run: |
           python BADGE/production/badge_cli_preflight_v2.py --output /tmp/badge-cli-preflight.json
           python BADGE/production/badge_cli_preflight_v2_test.py
+          python BADGE/production/badge_cli_execution_plan_v2.py --output /tmp/badge-cli-plan.json
+          python BADGE/production/badge_cli_execution_plan_v2.py --validate /tmp/badge-cli-plan.json --resume-list
+          python BADGE/production/badge_cli_execution_plan_v2_test.py
           python - <<'PY'
           import json
           r=json.load(open('/tmp/badge-cli-preflight.json',encoding='utf-8'))
