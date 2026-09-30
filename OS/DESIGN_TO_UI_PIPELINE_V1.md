@@ -150,6 +150,19 @@ Visual Compare:
 - `ui-audit/design-receipt.json`
 - `ui-audit/pipeline-status.json`
 
+`ui-audit/`는 실행 시작 시 중앙 Runner가 **전체 삭제 후 재생성**한다. 이전 실행의 screenshot/evidence/receipt는 재사용하지 않는다. capture artifact 경로도 `ui-audit/` 아래만 허용한다.
+
+## Revision binding
+중앙 Runner는 실행 시 실제 Git HEAD와 worktree 상태를 기록한다.
+
+- 모든 Evidence에 `tested_revision` 저장
+- 모든 Evidence에 `worktree_dirty` 저장
+- 서로 다른 revision의 Evidence 혼합 금지
+- dirty worktree에서도 가능한 검증은 수행할 수 있으나 최종 Design Receipt는 발급 금지
+- Git revision을 확인할 수 없는 환경에서도 독립 검증은 가능하지만 Design PASS는 금지
+
+`source_commit`은 manifest가 가리키는 구현/authority 계보이고, `tested_revision`은 **이번 검증이 실제로 실행된 repository revision**이다. 둘을 같은 개념으로 취급하지 않는다.
+
 ## Pipeline status
 중앙 runner는 다음 중 하나만 기록한다.
 - `CONTRACT_BLOCKED`
@@ -201,6 +214,10 @@ Design-to-UI Pipeline이 판단하지 않는 것:
 - required state/viewport capture 누락
 - critical ROI 실패
 - evidence 파일 없이 수동 PASS
+- 이전 실행의 ui-audit/evidence 재사용
+- capture artifact가 ui-audit 밖에 존재
+- 최종 Receipt 발급 시 Git revision 미확인 또는 dirty worktree
+- 서로 다른 tested_revision evidence 혼합
 - 앱 adapter 결과 schema 불충족
 - Design PASS를 Release PASS로 취급
 - 사용자를 구현 디버거로 사용
