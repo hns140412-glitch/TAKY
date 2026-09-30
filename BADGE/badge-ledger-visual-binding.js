@@ -22,8 +22,9 @@ async function resolveBadgeDisplay({source,child_id,badge_id,tier_order,visualRe
     ownership_source:earned?'AWARD_LEDGER':null,
     award_status:earned?'AWARDED':null,
     tier:earned?projected.state.tier:null,
-    // Ledger keeps reaward count (0..5); visual presentation includes the initial award.
-    star_count:earned?Math.min(5,projected.state.star_count+1):0
+    // Ledger projection already includes the initial acquisition as one star.
+    // Visual presentation must not add a second star.
+    star_count:earned?projected.state.star_count:0
   };
   const result=buildRenderModel(visualRecord,award,profile);
   if(!result.ok)return {ok:false,reason:'VISUAL_REVIEW_OR_PROFILE_NOT_READY',details:result.issues};
