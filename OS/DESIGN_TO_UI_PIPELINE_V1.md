@@ -61,6 +61,8 @@ Required:
 
 Output: immutable Golden pointer. A composite mockup stays REFERENCE_ONLY unless an individual layer is separately approved as a production asset.
 
+If approval identity + SHA are known but the binary has not yet been imported into the app repo, declare `golden.status=IMPORT_OPEN`. This is a valid contract blocker, not Design PASS. `BOUND` requires the local file to match the pinned SHA.
+
 ### S1 SCREEN CONTRACT
 Machine-readable per screen:
 - Golden identity
