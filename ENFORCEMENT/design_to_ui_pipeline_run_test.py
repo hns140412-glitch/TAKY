@@ -53,8 +53,8 @@ def setup(root: Path,fail_stage: str|None=None):
     })
     screen=root/"design/contracts/home.screen.json"; layers=root/"design/contracts/home.layers.json"; fixture=root/"design/fixtures/home.json"
     manifest={
-      "schema":"TAKY_DESIGN_TO_UI_PIPELINE_V1","project":"RUNNER_TEST","source_commit":"3"*40,
-      "policy":{"runtime_must_not_auto_become_golden":True,"flattened_mockup_runtime_forbidden":True,"evidence_files_required":True,"image_generation_optional":True},
+      "schema":"TAKY_DESIGN_TO_UI_PIPELINE_V1","rule_ids":["TKY-ASSET-001"],"project":"RUNNER_TEST","source_commit":"3"*40,
+      "policy":{"runtime_must_not_auto_become_golden":True,"approved_reference_required":True,"hash_pin_required":True,"visual_diff_required":True,"flattened_mockup_runtime_forbidden":True,"evidence_files_required":True,"image_generation_optional":True},
       "screens":[{
         "id":"home","authority_ref":"TEST",
         "golden":{"status":"BOUND","source_receipt":"TEST","path":"design/golden/home.png","sha256":sha(root/"design/golden/home.png"),"use":"REFERENCE_ONLY"},
