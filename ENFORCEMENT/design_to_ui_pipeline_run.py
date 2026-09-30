@@ -136,6 +136,9 @@ def validate_adapter(cfg: dict)->list[str]:
             argv=check.get("command") if isinstance(check,dict) else None
             if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
                 errors.append(f"ADAPTER_CHECK_COMMAND_INVALID:{name}")
+            coverage=check.get("coverage") if isinstance(check,dict) else None
+            if not isinstance(coverage,list) or not coverage or any(not isinstance(x,str) or not x for x in coverage) or len(set(coverage))!=len(coverage):
+                errors.append(f"ADAPTER_CHECK_COVERAGE_INVALID:{name}")
     return errors
 
 def expected_coverage(manifest: dict, kind: str)->set[str]:
@@ -155,17 +158,35 @@ def expected_coverage(manifest: dict, kind: str)->set[str]:
             rows.add(sid)
     return rows
 
+def validate_declared_coverage(manifest: dict, adapter: dict)->list[str]:
+    errors=[]
+    kinds={
+        "interaction":"INTERACTION",
+        "responsive":"RESPONSIVE",
+        "asset_integrity":"ASSET_INTEGRITY",
+    }
+    for stage,kind in kinds.items():
+        expected=expected_coverage(manifest,kind)
+        declared=set(adapter["checks"][stage].get("coverage") or [])
+        missing=sorted(expected-declared)
+        extra=sorted(declared-expected)
+        if missing:
+            errors.append(f"ADAPTER_COVERAGE_MISSING:{stage}:"+",".join(missing))
+        if extra:
+            errors.append(f"ADAPTER_COVERAGE_EXTRA:{stage}:"+",".join(extra))
+    return errors
+
 def command_digest(value: str)->str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
-def write_evidence(path: Path, kind: str, manifest: dict, manifest_sha: str, argv: list[str], cp: subprocess.CompletedProcess)->None:
+def write_evidence(path: Path, kind: str, manifest: dict, manifest_sha: str, argv: list[str], coverage: list[str], cp: subprocess.CompletedProcess)->None:
     payload={
         "schema":"TAKY_DESIGN_EVIDENCE_V1",
         "kind":kind,
         "pass":cp.returncode==0,
         "manifest_sha256":manifest_sha,
         "source_commit":str(manifest.get("source_commit","")),
-        "coverage":sorted(expected_coverage(manifest,kind)),
+        "coverage":sorted(coverage),
         "command_argv":argv,
         "returncode":cp.returncode,
         "stdout_sha256":command_digest(cp.stdout or ""),
@@ -237,6 +258,9 @@ def main()->int:
     adapter_errors=validate_adapter(adapter)
     if adapter_errors:
         return fail(root,"contract",";".join(adapter_errors))
+    coverage_errors=validate_declared_coverage(manifest,adapter)
+    if coverage_errors:
+        return fail(root,"contract",";".join(coverage_errors))
 
     cp=run([sys.executable,str(VALIDATOR),str(manifest_path),"--root",str(root),"--out",str(contract_out)],root)
     if cp.returncode!=0:
@@ -288,7 +312,7 @@ def main()->int:
         argv=adapter["checks"][stage]["command"]
         cp=run(argv,root)
         path=root/EXPECTED_OUTPUTS[stage]
-        write_evidence(path,EXPECTED_KINDS[stage],manifest,manifest_sha,argv,cp)
+        write_evidence(path,EXPECTED_KINDS[stage],manifest,manifest_sha,argv,adapter["checks"][stage]["coverage"],cp)
         if cp.returncode!=0:
             return fail(root,stage,"ADAPTER_COMMAND_FAILED",{
                 "stderr":cp.stderr[-2000:],
