@@ -1,0 +1,152 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RUNTIME_CURRENT_V1",
+  "as_of": "2026-09-30",
+  "authority": {
+    "governance": "TAKY",
+    "rule_ids": [
+      "TKY-ASSET-001",
+      "TAKY_CHARACTER_BEHAVIOR_V1",
+      "TAKY_UI_BINDING_CONTRACT_V1"
+    ],
+    "user_intent": "LOGIC_ONLY_HOLD_WHILE_IMAGE_GENERATION_UNAVAILABLE"
+  },
+  "ownership": {
+    "specialist_pipeline": "Owns production stage/state, cutout/mask/art/QA, retry/recovery and stage receipts.",
+    "taky": "Owns shared contracts, routing, behavior, relation, scene orchestration, runtime eligibility, recovery decisions, receipts and gates.",
+    "taky_assets": "Owns approved results only: immutable SHA, Visual ID/logical asset ID, provenance, approved runtime pointer/export.",
+    "app_runtime": "Consumes verified approved pointers and binds only to existing approved UI slots."
+  },
+  "execution_mode": {
+    "mode": "LOGIC_ONLY_HOLD",
+    "image_generation_available": false,
+    "asset_generation_allowed": false,
+    "production_state_auto_advance": false,
+    "netlify_allowed": false,
+    "main_merge_authorized": false
+  },
+  "repositories": {
+    "TAKY": {
+      "branch": "taky/character-engine-v1",
+      "pr": 191,
+      "head": "c1778e5bbc087c74553d17d943ffd4c4f6960103",
+      "status": "OPEN_DRAFT",
+      "implemented": [
+        "Relation/Affinity evidence engine",
+        "Character Behavior Engine",
+        "Semantic Action contract",
+        "Scene Policy/Orchestrator",
+        "Cross-app router",
+        "Runtime Eligibility Gate",
+        "Approved Asset Composition contract",
+        "Runtime Renderer",
+        "Runtime Coordinator",
+        "Runtime Receipt",
+        "UI Binding contract/receipt",
+        "Approved Asset Pointer Resolver",
+        "Design Gate Receipt contract",
+        "Runtime Log",
+        "Registry version/migration",
+        "Rollback/recovery",
+        "Specialist Pipeline Resume",
+        "Stage Receipt/Chain",
+        "Recovery Decision",
+        "Owner Authorization",
+        "Specialist-to-TAKY-ASSETS Handoff",
+        "Cross-repo asset compatibility E2E"
+      ]
+    },
+    "TAKY_DESIGN_GATE": {
+      "branch": "taky/design-gate-v1",
+      "pr": 190,
+      "head": "0785ede394b8fbf465651713eb78024b165d9d2d",
+      "status": "OPEN_DRAFT"
+    },
+    "TAKY_ASSETS": {
+      "branch": "taky/asset-pipeline-v1",
+      "pr": 4,
+      "head": "319968689148ad898932ecd97b4f509bb30fd977",
+      "status": "OPEN_DRAFT",
+      "scope": "APPROVED_RESULTS_AND_POINTERS_ONLY",
+      "implemented": [
+        "Approved asset registry validator",
+        "Approved asset export",
+        "Specialist handoff acceptance"
+      ]
+    },
+    "READY_SET": {
+      "branch": "taky/design-gate-v1",
+      "pr": 127,
+      "head": "633ce81263de0c0c6f11e425e62526cf1e077b69",
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+    },
+    "HIDE_SEEK": {
+      "branch": "taky/design-gate-v1",
+      "pr": 26,
+      "head": "9eed998d7529965e469ef41d34e8b8c24a339aa9",
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+    },
+    "SNAP_POP_DESIGN": {
+      "branch": "taky/design-gate-v1",
+      "pr": 15,
+      "head": "a6df18c9e1f396958d4ad124f6bb9411ac29659e",
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+    },
+    "SNAP_POP_GUIDE_PIPELINE": {
+      "branch": "taky/companion-onboarding-candidate-2026-09-27",
+      "pr": 10,
+      "head": "747caf2592e888974b7a0eb4b400d2d3be683ac6",
+      "status": "OPEN_DRAFT_HOLD",
+      "resume_stage": "INDIVIDUAL_TRANSPARENT_CUTOUT",
+      "resume_reason": "IMAGE_GENERATION_UNAVAILABLE_LOGIC_ONLY_HOLD"
+    }
+  },
+  "app_runtime_chain": [
+    "App Scene Policy Adapter",
+    "Character Runtime Adapter",
+    "Scene Event Bridge",
+    "Binding Registry",
+    "Selector Integrity",
+    "UI Binding Planner",
+    "UI Binding Event Bridge",
+    "Fail-Closed DOM Binder",
+    "Approved Asset Resolver",
+    "Staged Registry Activation",
+    "Design Gate Authority"
+  ],
+  "app_runtime_ci_expected": {
+    "pre_design_gate": "PASS",
+    "design_gate_authority": "BLOCKED_PENDING_APPROVED_GOLDEN_BINARY",
+    "actual_dom_activation": false
+  },
+  "guide_visual_state": {
+    "core6": "SOURCE_LOCK_READY_EXISTING_APPROVED_ASSETS_PRESERVED",
+    "visual_ids_07_24": "AWAITING_INDEPENDENT_CUTOUT_SHA",
+    "independent_cutout_sha_ready": "0/18",
+    "arbitrary_regeneration_forbidden": true
+  },
+  "closed": [
+    "TAKY-ASSETS production-state ownership removed",
+    "Behavior engine cannot select asset paths",
+    "Cross-character fallback forbidden",
+    "Current runtime cannot self-promote to Golden UI",
+    "Cross-app scene contamination blocked",
+    "Registry downgrade and same-version drift blocked",
+    "Failed candidate keeps previous active pointer",
+    "Pipeline PASS stage cannot regress without explicit reopen",
+    "Specialist production state cannot leak into TAKY-ASSETS"
+  ],
+  "open_requires_images": [
+    "GUIDE 07-24 independent cutout binaries and SHA",
+    "Mask specs backed by real binaries",
+    "Body/prop/gear and reaction art",
+    "Approved Golden reference binary import",
+    "Actual visual comparison and Design Gate receipt",
+    "Real DOM activation with approved assets"
+  ],
+  "open_logic_only": [
+    "Optional deeper app-specific Scene Policy tuning",
+    "Long-run receipt/log persistence policy",
+    "Formal schema/version publication for all contracts",
+    "Release candidate aggregation gate"
+  ]
+}
