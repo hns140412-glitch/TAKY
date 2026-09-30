@@ -8,9 +8,11 @@
     "schema": {"const": "TAKY_DESIGN_UI_ADAPTER_V1"},
     "capture": {
       "type": "object",
-      "required": ["command", "artifacts"],
+      "required": ["command", "mode", "scale", "artifacts"],
       "properties": {
         "command": {"$ref": "#/$defs/argv"},
+        "mode": {"const": "viewport"},
+        "scale": {"const": "css"},
         "artifacts": {
           "type": "array",
           "minItems": 1,
