@@ -64,6 +64,10 @@ jobs:
           python BADGE/production/badge_cli_execution_plan_v2.py --output /tmp/badge-cli-plan.json
           python BADGE/production/badge_cli_execution_plan_v2.py --validate /tmp/badge-cli-plan.json --resume-list
           python BADGE/production/badge_cli_execution_plan_v2_test.py
+          python BADGE/production/badge_cli_master_plan_v3.py --output /tmp/badge-cli-master-plan.json
+          python BADGE/production/badge_cli_master_plan_v3.py --validate /tmp/badge-cli-master-plan.json
+          python BADGE/production/badge_cli_master_plan_v3_test.py
+          python BADGE/production/verify_badge_cli_executor_contract_v1.py
           python - <<'PY'
           import json
           r=json.load(open('/tmp/badge-cli-preflight.json',encoding='utf-8'))
