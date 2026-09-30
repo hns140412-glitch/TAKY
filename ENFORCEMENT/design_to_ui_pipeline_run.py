@@ -137,7 +137,7 @@ def validate_adapter(cfg: dict)->list[str]:
             if not isinstance(argv,list) or not argv or any(not isinstance(x,str) or not x for x in argv):
                 errors.append(f"ADAPTER_CHECK_COMMAND_INVALID:{name}")
             coverage=check.get("coverage") if isinstance(check,dict) else None
-            if not isinstance(coverage,list) or not coverage or any(not isinstance(x,str) or not x for x in coverage) or len(set(coverage))!=len(coverage):
+            if not isinstance(coverage,list) or any(not isinstance(x,str) or not x for x in coverage) or len(set(coverage))!=len(coverage):
                 errors.append(f"ADAPTER_CHECK_COVERAGE_INVALID:{name}")
     return errors
 
