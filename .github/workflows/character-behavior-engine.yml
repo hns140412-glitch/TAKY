@@ -39,6 +39,7 @@ jobs:
       - run: python -m unittest ENFORCEMENT/explorer_crew_release_gate_test.py
       - run: python -m unittest ENFORCEMENT/explorer_crew_current_release_status_test.py
       - run: python -m unittest ENFORCEMENT/explorer_crew_contract_registry_validate_test.py
+      - run: python -m unittest ENFORCEMENT/runtime_receipt_ledger_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
