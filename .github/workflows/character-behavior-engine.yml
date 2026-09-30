@@ -22,6 +22,7 @@ jobs:
       - run: python -m unittest ENFORCEMENT/character_runtime_coordinator_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_receipt_test.py
       - run: python -m unittest ENFORCEMENT/ui_binding_contract_test.py
+      - run: python -m unittest ENFORCEMENT/ui_binding_receipt_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
