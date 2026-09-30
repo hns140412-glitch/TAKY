@@ -21,8 +21,8 @@ def setup(root: Path,fail_stage: str|None=None):
     (root/"assets").mkdir(parents=True)
     (root/"tools").mkdir(parents=True)
 
-    ref=Image.new("RGB",(100,120),(240,230,210))
-    ImageDraw.Draw(ref).rectangle((20,30,80,90),fill=(70,100,80))
+    ref=Image.new("RGB",(240,320),(240,230,210))
+    ImageDraw.Draw(ref).rectangle((40,70,200,250),fill=(70,100,80))
     ref.save(root/"design/golden/home.png")
     (root/"assets/layer.bin").write_bytes(b"layer")
     write(root/"design/fixtures/home.json",{"fixture":"BASE"})
@@ -52,7 +52,7 @@ def setup(root: Path,fail_stage: str|None=None):
         "golden":{"status":"BOUND","source_receipt":"TEST","path":"design/golden/home.png","sha256":sha(root/"design/golden/home.png"),"use":"REFERENCE_ONLY"},
         "screen_contract":{"path":"design/contracts/home.screen.json","sha256":sha(screen)},
         "layer_contract":{"path":"design/contracts/home.layers.json","sha256":sha(layers)},
-        "viewports":[{"id":"phone","width":100,"height":120,"dpr":1}],
+        "viewports":[{"id":"phone","width":240,"height":320,"dpr":1}],
         "states":[{"id":"BASE","fixture_path":"design/fixtures/home.json","fixture_sha256":sha(fixture),"visual_policy":"GOLDEN_PARITY"}]
       }]
     }
