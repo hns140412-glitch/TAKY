@@ -48,9 +48,15 @@
     },
     "check": {
       "type": "object",
-      "required": ["command"],
+      "required": ["command", "coverage"],
       "properties": {
-        "command": {"$ref": "#/$defs/argv"}
+        "command": {"$ref": "#/$defs/argv"},
+        "coverage": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
       },
       "additionalProperties": false
     }
