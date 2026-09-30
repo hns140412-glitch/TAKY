@@ -95,6 +95,7 @@ Layer resolution states:
 - `LIVE_DOM`: FUNCTION_UI implemented as live DOM/component with stable selector + owner.
 - `RUNTIME_SLOT`: CHARACTER_SLOT resolved dynamically through an approved resolver contract.
 - `ASSET_PRODUCTION_OPEN`: art still missing; contract work may continue, Design PASS stays blocked.
+- `IMPLEMENTATION_OPEN`: required DOM/component/slot behavior is not implemented yet; keep separate from missing art.
 - `NOT_APPLICABLE`: explicitly inapplicable role; omission is not allowed.
 
 Forbidden:
