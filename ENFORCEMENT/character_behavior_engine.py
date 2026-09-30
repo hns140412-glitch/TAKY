@@ -51,10 +51,13 @@ def resolve_action(state:dict,character:dict,role:str)->str:
     if state.get("radio_input_active"):return "USE_RADIO"
     return "IDLE"
 
-def dialogue_level(state:dict,role:str)->str:
+def dialogue_level(state:dict,role:str,relation:str)->str:
     if role=="AMBIENT":return "SILENT"
     if state.get("just_completed"):return "CELEBRATE"
-    if state.get("needs_hint"):return "HINT"
+    if state.get("needs_hint"):
+        return "COACH" if relation=="TRUSTED" else "HINT"
+    if relation=="FIRST_ENCOUNTER":
+        return "SHORT"
     return "SHORT"
 
 def run(state:dict)->dict:
@@ -72,7 +75,7 @@ def run(state:dict)->dict:
       "presence_role":role,
       "relationship_state":relation,
       "action":action,
-      "dialogue_level":dialogue_level(state,role),
+      "dialogue_level":dialogue_level(state,role,relation),
       "required_roles":ACTION_PARTS[action],
       "asset_selection_forbidden":True,
       "asset_path":None,
