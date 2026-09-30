@@ -9,6 +9,7 @@
  */
 const Identity=require('./family-member-identity-resolver.js');
 const Authenticated=require('./authenticated-evidence-transport.js');
+const crypto=require('node:crypto');
 
 const VERSION='TAKY_CENTRAL_LEARNING_EVIDENCE_HTTP_V1';
 const ENDPOINT='/api/learning/evidence';
@@ -69,6 +70,12 @@ const shapeValid=p=>object(p)&&clean(p.packet_id)&&clean(p.source_app)&&
  object(p.context)&&clean(p.context.family_id)&&clean(p.context.member_id)&&
  object(p.event)&&clean(p.event.event_id)&&clean(p.event.occurred_at)&&
  p.event.source===p.source_app&&object(p.event.payload);
+// Replays are identified from the proof-stripped, client-owned event rather
+// than from a verifier's receipt, timestamp or generated assessment fields.
+const stable=v=>Array.isArray(v)?v.map(stable):
+  object(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;
+const replayFingerprint=p=>crypto.createHash('sha256')
+  .update(JSON.stringify(stable(p))).digest('hex');
 const sameScope=(a,b)=>a.packet_id===b.packet_id&&
  a.source_app===b.source_app&&a.context.family_id===b.context.family_id&&
  a.context.member_id===b.context.member_id&&
@@ -133,11 +140,15 @@ function create({
      }
    }
    let result;
-   try{result=await Authenticated.ingestAuthenticated(store,safe,identity)}
+   try{result=await Authenticated.ingestAuthenticated(store,safe,identity,{
+     replay_fingerprint:replayFingerprint(scrub(packet))
+   })}
    catch{return bad(503,'CENTRAL_DURABLE_INGEST_UNAVAILABLE')}
    if(!result?.ok){
      const denied=result?.reason==='TRANSPORT_NOT_AUTHORIZED';
-     return bad(denied?403:422,denied?'TRANSPORT_NOT_AUTHORIZED':
+     // CAS exhaustion is retryable; never classify it as a permanent evidence failure.
+     const retryable=result?.retryable===true;
+     return bad(denied?403:retryable?503:422,denied?'TRANSPORT_NOT_AUTHORIZED':
        clean(result?.reason)||'EVIDENCE_NOT_ACCEPTED');
    }
    if(!['REAL_EVIDENCE_RECEIPT','OBSERVATION_INGEST_RECEIPT'].includes(result.acknowledgement_kind)||
@@ -150,6 +161,8 @@ function create({
      duplicate:result.duplicate===true,
      receipt_scope:{family_id:identity.family_id,member_id:packet.context.member_id},
      source_app:packet.source_app,
+     packet_id:packet.packet_id,
+     event_id:packet.event.event_id,
      storage_confirmed:true,
      // Do not send complete state, other members' data, storage keys, tokens,
      // policy internal traces, or privileged family member lists to PWA.
