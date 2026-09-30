@@ -1,0 +1,34 @@
+name: Drawing Governance Surgery
+
+on:
+  push:
+    branches:
+      - taky/drawing-system-governance-surgery-2026-09-23
+    paths:
+      - 'MASTER/DRAWING_PRODUCTION_GOVERNANCE.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - 'ENFORCEMENT/work_os_productive_router.py'
+      - 'ENFORCEMENT/work_os_productive_router_drawing.test.py'
+      - '.github/workflows/drawing-governance-surgery.yml'
+  pull_request:
+    paths:
+      - 'MASTER/DRAWING_PRODUCTION_GOVERNANCE.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - 'ENFORCEMENT/work_os_productive_router.py'
+      - 'ENFORCEMENT/work_os_productive_router_drawing.test.py'
+      - '.github/workflows/drawing-governance-surgery.yml'
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test drawing production and surgery routing
+        run: python ENFORCEMENT/work_os_productive_router_drawing.test.py
+      - name: Validate action registry JSON
+        run: python -m json.tool OS/ACTION_SKILL_REGISTRY.json >/dev/null

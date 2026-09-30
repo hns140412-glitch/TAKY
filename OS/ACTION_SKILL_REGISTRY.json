@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-19.1",
+  "registry_version": "2026-09-23.2",
   "purpose": "Minimal executable Work OS routing for productive work. Validation is bounded support, not the primary output.",
   "pipeline": [
     "GOAL",
@@ -63,12 +63,52 @@
         "simple_explanation": "TEXT"
       },
       "default": "TEXT"
+    },
+    "drawing_production": {
+      "user_facing_path": [
+        "TASK",
+        "ROUTER",
+        "AUTHORIZED_ENGINE",
+        "L0_SOURCE",
+        "L1_GEOMETRY",
+        "L2_SEMANTIC",
+        "L3_PRESENTATION",
+        "L4_ENTOURAGE",
+        "L5_ANNOTATION",
+        "L6_AI_ATMOSPHERE",
+        "L7_FINAL_VALIDATION",
+        "L8_USER_EXPOSURE_GATE",
+        "OUTPUT"
+      ],
+      "user_facing_artifact_classes": [
+        "USER_PREVIEW",
+        "FINAL"
+      ],
+      "one_off_allowed_artifact_classes": [
+        "EXPERIMENT",
+        "DIAGNOSTIC"
+      ],
+      "required_gates": [
+        "SOURCE_GATE",
+        "GEOMETRY_GATE",
+        "FACT_GATE",
+        "SEMANTIC_GATE",
+        "REFERENCE_EFFECT_GATE",
+        "ARCHITECTURAL_READABILITY_GATE",
+        "A3_GATE",
+        "USER_EFFECT_GATE"
+      ],
+      "hard_lock": "NO_PASS_NO_SHOW"
     }
   },
   "hard_locks": [
     "VALIDATION_IS_BOUNDED_RAIL",
     "IDEA_TO_LAB_NOT_CANONICAL",
     "ROUTER_OUTPUT_IS_A_WORKING_CHOICE_NOT_AUTHORITY",
-    "USEFUL_OUTPUT_OVER_PROCESS_CEREMONY"
+    "USEFUL_OUTPUT_OVER_PROCESS_CEREMONY",
+    "ENGINE_AVAILABLE_BYPASS_USED_IS_GOVERNANCE_FAILURE",
+    "DRAWING_USER_FACING_REQUIRES_AUTHORIZED_ENGINE",
+    "NO_PASS_NO_SHOW",
+    "USER_IS_NOT_DEBUGGER"
   ]
 }

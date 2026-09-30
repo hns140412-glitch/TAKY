@@ -14,6 +14,9 @@ VIS={
     "simple_explanation":"TEXT",
 }
 EVIDENCE={"OBSERVED","INFERRED","EXPERIMENTAL","UNVERIFIED"}
+DRAWING_USER_FACING={"PREVIEW","FINAL","USER_FACING"}
+DRAWING_ONE_OFF={"PYTHON_ONE_OFF","REPORTLAB_ONE_OFF","GENERIC_HTML_ONE_OFF","UNREGISTERED_SCRIPT"}
+HANDOFF_MODES={"RESUME","RETROSPECTIVE","SURGERY"}
 
 def route(record: dict) -> dict:
     kind=str(record.get("kind","")).upper()
@@ -41,6 +44,28 @@ def route(record: dict) -> dict:
                 "evidence_state":str(record["evidence_state"]).upper()
             }
         }
+    if kind=="DRAWING_PRODUCTION":
+        artifact=str(record.get("artifact_class","EXPERIMENT")).upper()
+        producer=str(record.get("producer_type","")).upper()
+        engine_available=record.get("engine_available") is True
+        bypass_used=record.get("bypass_used") is True
+        if artifact in DRAWING_USER_FACING:
+            if engine_available and bypass_used:
+                return {"pass":False,"detected":["ENGINE_AVAILABLE_BYPASS_USED_GOVERNANCE_FAILURE"],"route":{"mode":"SURGERY"}}
+            if producer in DRAWING_ONE_OFF or record.get("registered_engine") is not True:
+                return {"pass":False,"detected":["USER_FACING_REQUIRES_AUTHORIZED_ENGINE"],"route":{"mode":"HOLD"}}
+            return {"pass":True,"route":{"destination":"AUTHORIZED_DRAWING_ENGINE","requires":"EVIDENCE_BACKED_L7_L8_ADMISSION","artifact_class":artifact}}
+        return {"pass":True,"route":{"destination":"INTERNAL_EXPERIMENT_OR_DIAGNOSTIC","user_facing":False,"artifact_class":artifact}}
+    if kind=="HANDOFF_MODE":
+        mode=str(record.get("mode","")).upper()
+        if mode not in HANDOFF_MODES:
+            return {"pass":False,"detected":["INVALID_HANDOFF_MODE"]}
+        failures=int(record.get("structural_failure_count",0) or 0)
+        engine_bypass=record.get("engine_bypass") is True
+        user_debugger=record.get("user_as_debugger") is True
+        if mode=="RESUME" and (failures>=3 or engine_bypass or user_debugger):
+            return {"pass":False,"detected":["RESUME_FORBIDDEN_SURGERY_REQUIRED"],"route":{"mode":"SURGERY"}}
+        return {"pass":True,"route":{"mode":mode}}
     if kind=="VISUALIZATION":
         relation=str(record.get("relation_type","")).strip().lower()
         return {"pass":True,"route":{"visualization":VIS.get(relation,"TEXT"),"relation_type":relation or "unspecified"}}
