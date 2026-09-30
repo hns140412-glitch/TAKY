@@ -14,7 +14,7 @@ LAYER_SCHEMA = "TAKY_LAYER_CONTRACT_V1"
 SHA64 = re.compile(r"^[0-9a-fA-F]{64}$")
 SHA40 = re.compile(r"^[0-9a-fA-F]{40}$")
 LAYER_ROLES = {"BACKGROUND","FOREGROUND","OBJECT","CHARACTER_SLOT","FUNCTION_UI"}
-LAYER_STATUSES = {"BOUND","ASSET_PRODUCTION_OPEN","NOT_APPLICABLE"}
+LAYER_STATUSES = {"BOUND","LIVE_DOM","RUNTIME_SLOT","ASSET_PRODUCTION_OPEN","NOT_APPLICABLE"}
 
 def sha256(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -152,6 +152,17 @@ def validate(cfg: dict, root: Path) -> dict:
                             errors.append(f"{sid}:BOUND_LAYER_SHA_MISSING:{role}")
                         elif sha256(p).lower() != expected.lower():
                             errors.append(f"{sid}:BOUND_LAYER_SHA_MISMATCH:{role}")
+                    elif status == "LIVE_DOM":
+                        if role != "FUNCTION_UI":
+                            errors.append(f"{sid}:LIVE_DOM_ROLE_INVALID:{role}")
+                        if not str(layer.get("selector","")).strip() or not str(layer.get("owner","")).strip():
+                            errors.append(f"{sid}:LIVE_DOM_BINDING_MISSING:{role}")
+                    elif status == "RUNTIME_SLOT":
+                        if role != "CHARACTER_SLOT":
+                            errors.append(f"{sid}:RUNTIME_SLOT_ROLE_INVALID:{role}")
+                        for key in ("selector","owner","resolver_contract"):
+                            if not str(layer.get(key,"")).strip():
+                                errors.append(f"{sid}:RUNTIME_SLOT_{key.upper()}_MISSING:{role}")
                     elif status == "ASSET_PRODUCTION_OPEN":
                         blockers.append(f"{sid}:ASSET_PRODUCTION_OPEN:{role}")
                 missing_roles = sorted(LAYER_ROLES - set(by_role))
