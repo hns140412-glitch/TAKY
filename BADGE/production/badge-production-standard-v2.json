@@ -39,7 +39,9 @@
       "SEPARATELY_AUTHORIZED_RUNTIME_BINDING"
     ],
     "new_badge_must_not_inherit_keep_status": true,
-    "new_badge_must_not_require_editing_a_fixed_count_constant": true
+    "new_badge_must_not_require_editing_a_fixed_count_constant": true,
+    "reviewed_baseline": "BADGE/production/badge-production-baseline-v2.json",
+    "current_packet_manifest": "BADGE/production/badge-production-packets-v2.json"
   },
   "production_packet_required_fields": [
     "badge_id",
@@ -67,6 +69,7 @@
       "fx"
     ],
     "required_delivery": [
+      "manifest.json",
       "base.png",
       "bg.png",
       "subject.png",
@@ -81,7 +84,9 @@
     ],
     "base_definition": "Per-badge recessed depth foundation only. Shared rim/star/tier/lock/text remain runtime-shared and outside this layer.",
     "subject_definition": "Primary badge motif or symbolic object. A character is never required for the badge base to make sense.",
-    "fx_definition": "Badge-local foreground light/particles/highlight only; shared award ornaments remain separate."
+    "fx_definition": "Badge-local foreground light/particles/highlight only; shared award ornaments remain separate.",
+    "individual_manifest_rule": "Each badge delivery includes manifest.json binding badge_id, asset_dir, required files, detail-only depth scope, and no runtime approval.",
+    "asset_slot_rule": "Trailing numeric badge ID suffix, integer-preserved and zero-padded to at least 3 digits; 1000 stays 1000."
   },
   "depth_detail_only": {
     "enabled_surface": "BADGE_DETAIL_VIEW_ONLY",
