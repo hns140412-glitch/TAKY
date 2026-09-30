@@ -1,0 +1,93 @@
+'use strict';
+
+const assert=require('node:assert/strict');
+const http=require('node:http');
+const fs=require('node:fs').promises;
+const os=require('node:os');
+const path=require('node:path');
+const Host=require('./central-learning-production-host.js');
+const {LocalJsonStrongStore}=require('./local-json-strong-store.js');
+
+const clientId='TAKY_PRODUCTION_HOST_TEST_CLIENT';
+const nowMs=Date.UTC(2026,8,30,9,0,0);
+const nowSec=Math.floor(nowMs/1000);
+const token='valid-parent-google-id-token-0001';
+const oauth2Client={verifyIdToken:async({idToken,audience})=>{
+  assert.equal(idToken,token);
+  assert.deepEqual(audience,[clientId]);
+  return {getPayload:()=>({
+    iss:'https://accounts.google.com',aud:clientId,
+    sub:'GOOGLE_PARENT_SUB',iat:nowSec-60,exp:nowSec+3600
+  })};
+}};
+const lookupMemberships=async({provider,subject})=>{
+  assert.equal(provider,'GOOGLE_OIDC');
+  assert.equal(subject,'GOOGLE_PARENT_SUB');
+  return [{status:'ACTIVE',family_id:'F1',self_member_id:'PARENT_A',role:'PARENT',
+    learning_evidence_submit_member_ids:['CHILD_A'],permissions:[]}];
+};
+const verifySpecialistEvidence=async()=>({ok:false});
+const resolveIndexedEvidence=async scope=>{
+  assert.equal(scope.family_id,'F1');
+  assert.equal(scope.member_id,'CHILD_A');
+  return null;
+};
+const independentIndexOwnerVerifier=()=>null;
+
+(async()=>{
+  assert.throws(()=>Host.create({}),/PRODUCTION_MEMBERSHIP_PROVIDER_REQUIRED/);
+  assert.throws(()=>Host.create({lookupMemberships}),/PRODUCTION_STRONG_STORE_REQUIRED/);
+  const root=await fs.mkdtemp(path.join(os.tmpdir(),'taky-production-host-'));
+  let server;
+  try{
+    const store=await new LocalJsonStrongStore(root).init();
+    const common={clientIds:[clientId],oauth2Client,lookupMemberships,store,
+      verifySpecialistEvidence,resolveIndexedEvidence,independentIndexOwnerVerifier,
+      allowedOrigins:['https://ready.example.test']};
+    assert.throws(()=>Host.create({...common,verifySpecialistEvidence:null}),
+      /PRODUCTION_SPECIALIST_VERIFIER_REQUIRED/);
+    assert.throws(()=>Host.create({...common,resolveIndexedEvidence:null}),
+      /PRODUCTION_INDEXED_EVIDENCE_RESOLVER_REQUIRED/);
+    assert.throws(()=>Host.create({...common,independentIndexOwnerVerifier:null}),
+      /PRODUCTION_INDEX_OWNER_VERIFIER_REQUIRED/);
+    assert.throws(()=>Host.create({...common,allowedOrigins:['http://ready.example.test']}),
+      /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
+
+    const host=Host.create({...common,now:()=>nowMs});
+    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision']);
+    assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
+    server=http.createServer(host.handler);
+    await new Promise((resolve,reject)=>{
+      server.once('error',reject);server.listen(0,'127.0.0.1',resolve);
+    });
+    const base='http://127.0.0.1:'+server.address().port;
+    const response=await fetch(base+'/api/learning/decision',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,
+        Origin:'https://ready.example.test'},
+      body:JSON.stringify({family_id:'F1',member_id:'CHILD_A',
+        subject:'math',concept_skill_target:'g5-math-equivalent-fraction-reasoning'})
+    });
+    const body=await response.json();
+    assert.equal(response.status,200,JSON.stringify(body));
+    assert.equal(body.ok,true);
+    assert.equal(body.authenticated_server_response,true);
+    assert.equal(body.runtime_result.decision.execution_status,
+      'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
+    assert.equal(body.runtime_result.trace.verified_evidence_count,0);
+    assert.equal(response.headers.get('Access-Control-Allow-Origin'),'https://ready.example.test');
+
+    const denied=await fetch(base+'/api/learning/decision',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,
+        Origin:'https://evil.example.test'},
+      body:'{}'
+    });
+    assert.equal(denied.status,403);
+
+    console.log('CENTRAL_PRODUCTION_HOST_PASS: strict provider wiring, Google ID token auth, CORS and dual endpoints');
+  }finally{
+    if(server)await new Promise(resolve=>server.close(resolve));
+    await fs.rm(root,{recursive:true,force:true});
+  }
+})().catch(e=>{console.error(e);process.exitCode=1});
