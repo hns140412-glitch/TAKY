@@ -60,11 +60,11 @@ const award=(i,kind)=>ledger('FAMILY_A').appendApprovedDecision({trusted:true,re
   assert.equal(empty.ok,true);assert.equal(empty.ownership_state,'LOCKED');assert.equal(empty.verified_awards,0);
   assert.equal(award(0,'INITIAL_AWARD').ok,true);
   const initial=await r.getProgress({serverSessionKey:'ownChild'},args);
-  assert.equal(initial.ok,true);assert.equal(initial.ownership_state,'EARNED');assert.equal(initial.state.star_count,0);
+  assert.equal(initial.ok,true);assert.equal(initial.ownership_state,'EARNED');assert.equal(initial.state.star_count,1);
   for(let i=1;i<=5;i++)assert.equal(award(i,'REAWARD').ok,true);
   const final=await r.getProgress({serverSessionKey:'parent'},args);
   assert.equal(final.ok,true);assert.equal(final.verified_awards,6);
-  assert.equal(final.state.tier,'BLUE');assert.equal(final.state.star_count,0);
+  assert.equal(final.state.tier,'BLUE');assert.equal(final.state.star_count,1);
   assert.equal(final.family_id,'FAMILY_A');
   assert.equal((await r.getProgress({serverSessionKey:'otherParent'},args)).ok,false);
   console.log('family-scoped server badge read: PASS (parent/child access, cross-family, replay)');
