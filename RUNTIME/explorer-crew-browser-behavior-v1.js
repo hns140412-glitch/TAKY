@@ -25,6 +25,11 @@
   }
   function dialogue(input={},role='MAIN',relation='KNOWN'){
     if(role==='AMBIENT')return 'SILENT';
+    const intervention=!!(
+      input.needs_hint||input.just_completed||input.transition||input.reflection_due||
+      input.user_requested||input.blocked_help||input.explicit_intervention
+    );
+    if((input.silence_by_default||input.child_working_well)&&!intervention)return 'SILENT';
     if(input.just_completed)return 'CELEBRATE';
     if(input.needs_hint)return relation==='TRUSTED'?'COACH':'HINT';
     if(DIALOGUE.has(input.requested_dialogue))return input.requested_dialogue;
@@ -36,7 +41,8 @@
     const resolvedAction=action({...scene,requested_action:c.action||scene.requested_action});
     const resolvedDialogue=dialogue({...scene,requested_dialogue:c.dialogue_level},role,relation);
     return Object.freeze({...c,presence_role:role,relationship_state:relation,action:resolvedAction,
-      dialogue_level:resolvedDialogue,required_roles:Object.freeze([...(ACTIONS[resolvedAction]||ACTIONS.IDLE)])});
+      dialogue_level:resolvedDialogue,voice_allowed:resolvedDialogue!=='SILENT',
+      required_roles:Object.freeze([...(ACTIONS[resolvedAction]||ACTIONS.IDLE)])});
   }
   function normalizePlan(plan={}){
     const chars=(Array.isArray(plan.characters)?plan.characters:[]).map(c=>normalizeCharacter(c,plan.behavior_state||{}));
