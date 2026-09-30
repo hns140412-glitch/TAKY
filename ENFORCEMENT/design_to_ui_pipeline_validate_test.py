@@ -66,10 +66,14 @@ def build(root: Path, open_asset: bool):
 
     manifest = {
         "schema":"TAKY_DESIGN_TO_UI_PIPELINE_V1",
+        "rule_ids":["TKY-ASSET-001"],
         "project":"TEST_APP",
         "source_commit":"1"*40,
         "policy":{
             "runtime_must_not_auto_become_golden":True,
+            "approved_reference_required":True,
+            "hash_pin_required":True,
+            "visual_diff_required":True,
             "flattened_mockup_runtime_forbidden":True,
             "evidence_files_required":True,
             "image_generation_optional":True
@@ -82,8 +86,8 @@ def build(root: Path, open_asset: bool):
             "layer_contract":{"path":"design/contracts/home.layers.json","sha256":sha(layer_contract)},
             "viewports":[{"id":"phone","width":390,"height":844,"dpr":2}],
             "states":[
-                {"id":"INITIAL","fixture_path":"design/fixtures/home-initial.json","fixture_sha256":sha(fixture_a)},
-                {"id":"EMPTY","fixture_path":"design/fixtures/home-empty.json","fixture_sha256":sha(fixture_b)}
+                {"id":"INITIAL","fixture_path":"design/fixtures/home-initial.json","fixture_sha256":sha(fixture_a),"visual_policy":"GOLDEN_PARITY"},
+                {"id":"EMPTY","fixture_path":"design/fixtures/home-empty.json","fixture_sha256":sha(fixture_b),"visual_policy":"LAYOUT_GUARD"}
             ]
         }]
     }
@@ -187,12 +191,26 @@ def main():
         r=json.loads(receipt.read_text())
         assert r["pass"] is True and len(r["evidence"])==4
 
-        # 6) Golden tamper must fail closed.
+        # 6) Canonical asset rule and at least one Golden-parity state are mandatory.
+        manifest_rule, _, _ = build(root, open_asset=False)
+        mr=json.loads(manifest_rule.read_text(encoding="utf-8"))
+        mr["rule_ids"]=[]
+        write_json(manifest_rule,mr)
+        run(VALIDATOR,manifest_rule,"--root",root,expect=1)
+        mr=json.loads(manifest_rule.read_text(encoding="utf-8"))
+        mr["rule_ids"]=["TKY-ASSET-001"]
+        for st in mr["screens"][0]["states"]:
+            st["visual_policy"]="LAYOUT_GUARD"
+        write_json(manifest_rule,mr)
+        cp=subprocess.run([sys.executable,str(VALIDATOR),str(manifest_rule),"--root",str(root)],text=True,capture_output=True)
+        assert cp.returncode != 0 and "GOLDEN_PARITY_STATE_REQUIRED" in cp.stdout
+
+        # 7) Golden tamper must fail closed.
         golden.write_bytes(b"tampered")
         run(VALIDATOR, manifest, "--root", root, expect=1)
         golden.write_bytes(b"approved-golden-bytes")
 
-        # 7) Missing evidence coverage must block receipt.
+        # 8) Missing evidence coverage must block receipt.
         evidence(visual,"VISUAL",manifest,["home:INITIAL:phone"])
         cp=subprocess.run([
             sys.executable,str(RECEIPT),
