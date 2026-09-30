@@ -8,6 +8,9 @@ class PipelineGateTests(unittest.TestCase):
         cls.base=load("BADGE/production/badge-production-pipeline.json")
     def test_current_pipeline(self):
         self.assertEqual([],verify(ROOT,self.base))
+    def test_legacy_cannot_be_reenabled(self):
+        p=copy.deepcopy(self.base);p["executable"]=True
+        self.assertIn("LEGACY_PIPELINE_MUST_BE_NON_EXECUTABLE",verify(ROOT,p))
     def test_display_item_drift_fails(self):
         p=copy.deepcopy(self.base);p["items"][0]["display_item"]="임의 제목"
         self.assertTrue(any("DISPLAY_ITEM" in e for e in verify(ROOT,p)))
