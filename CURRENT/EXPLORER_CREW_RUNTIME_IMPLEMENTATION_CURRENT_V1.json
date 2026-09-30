@@ -28,7 +28,6 @@
     "TAKY": {
       "branch": "taky/character-engine-v1",
       "pr": 191,
-      "head": "c1778e5bbc087c74553d17d943ffd4c4f6960103",
       "status": "OPEN_DRAFT",
       "implemented": [
         "Relation/Affinity evidence engine",
@@ -53,51 +52,52 @@
         "Owner Authorization",
         "Specialist-to-TAKY-ASSETS Handoff",
         "Cross-repo asset compatibility E2E"
-      ]
+      ],
+      "validated_through_commit": "c1778e5bbc087c74553d17d943ffd4c4f6960103"
     },
     "TAKY_DESIGN_GATE": {
       "branch": "taky/design-gate-v1",
       "pr": 190,
-      "head": "0785ede394b8fbf465651713eb78024b165d9d2d",
-      "status": "OPEN_DRAFT"
+      "status": "OPEN_DRAFT",
+      "validated_through_commit": "0785ede394b8fbf465651713eb78024b165d9d2d"
     },
     "TAKY_ASSETS": {
       "branch": "taky/asset-pipeline-v1",
       "pr": 4,
-      "head": "319968689148ad898932ecd97b4f509bb30fd977",
       "status": "OPEN_DRAFT",
       "scope": "APPROVED_RESULTS_AND_POINTERS_ONLY",
       "implemented": [
         "Approved asset registry validator",
         "Approved asset export",
         "Specialist handoff acceptance"
-      ]
+      ],
+      "validated_through_commit": "319968689148ad898932ecd97b4f509bb30fd977"
     },
     "READY_SET": {
       "branch": "taky/design-gate-v1",
       "pr": 127,
-      "head": "633ce81263de0c0c6f11e425e62526cf1e077b69",
-      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED",
+      "validated_through_commit": "633ce81263de0c0c6f11e425e62526cf1e077b69"
     },
     "HIDE_SEEK": {
       "branch": "taky/design-gate-v1",
       "pr": 26,
-      "head": "9eed998d7529965e469ef41d34e8b8c24a339aa9",
-      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED",
+      "validated_through_commit": "9eed998d7529965e469ef41d34e8b8c24a339aa9"
     },
     "SNAP_POP_DESIGN": {
       "branch": "taky/design-gate-v1",
       "pr": 15,
-      "head": "a6df18c9e1f396958d4ad124f6bb9411ac29659e",
-      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED"
+      "status": "OPEN_DRAFT_DESIGN_GATE_BLOCKED",
+      "validated_through_commit": "a6df18c9e1f396958d4ad124f6bb9411ac29659e"
     },
     "SNAP_POP_GUIDE_PIPELINE": {
       "branch": "taky/companion-onboarding-candidate-2026-09-27",
       "pr": 10,
-      "head": "747caf2592e888974b7a0eb4b400d2d3be683ac6",
       "status": "OPEN_DRAFT_HOLD",
       "resume_stage": "INDIVIDUAL_TRANSPARENT_CUTOUT",
-      "resume_reason": "IMAGE_GENERATION_UNAVAILABLE_LOGIC_ONLY_HOLD"
+      "resume_reason": "IMAGE_GENERATION_UNAVAILABLE_LOGIC_ONLY_HOLD",
+      "validated_through_commit": "747caf2592e888974b7a0eb4b400d2d3be683ac6"
     }
   },
   "app_runtime_chain": [
@@ -148,5 +148,10 @@
     "Long-run receipt/log persistence policy",
     "Formal schema/version publication for all contracts",
     "Release candidate aggregation gate"
-  ]
+  ],
+  "snapshot_semantics": {
+    "branch_ref_is_live_authority": true,
+    "commit_field_meaning": "validated_through_commit, not necessarily the current branch HEAD",
+    "do_not_treat_snapshot_commit_as_live_head": true
+  }
 }
