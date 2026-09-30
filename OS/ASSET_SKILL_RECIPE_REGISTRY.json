@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-20.1",
+  "registry_version": "2026-09-22.1",
   "purpose": "Evidence-backed reusable Work OS/TAKY-ASSETS recipes. A recipe exists only when a real recurring workflow has source evidence; registry presence does not make the recipe canonical authority.",
   "hard_locks": [
     "RECIPE_REQUIRES_REAL_RECURRING_EVIDENCE",
@@ -65,6 +65,263 @@
         "used_for": [
           "Notion-wide review V2 C2S closure",
           "review-result freshness patching"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    },
+    {
+      "recipe_id": "WO-BLOCKER-FIRST-RECOVERY-V1",
+      "name": "Blocker-first recovery with alternate corrective path",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "CANDIDATE",
+      "evidence_count": 4,
+      "source_pointers": [
+        "DATA/WORK_OS_FAILURE_SIGNATURE_BLOCKER_REGISTRY_2026-09-22",
+        "03_NETLIFY_COMMUNITY_SOURCE_CENSUS_2026-09-21",
+        "02_GITHUB_REPOSITORY_SOURCE_CENSUS_2026-09-21",
+        "OS/WORK_OS.md"
+      ],
+      "preserve": [
+        "original failure signature",
+        "blocker class",
+        "minimum evidence bundle",
+        "failed-attempt history",
+        "owner/external-resource gates"
+      ],
+      "allowed_change": [
+        "corrective path chosen for the classified blocker",
+        "project-specific evidence fields",
+        "bounded validation scope"
+      ],
+      "rights_or_consent": {
+        "required": false,
+        "note": "External accounts, secrets or connected-service actions require their own permission/approval gate."
+      },
+      "verification": {
+        "required": [
+          "same failure condition is not blindly retried",
+          "blocker class is evidence-backed",
+          "corrective path changes only the affected layer",
+          "regression check is bounded to material impact"
+        ],
+        "evidence": "Drive failure-signature registry + source census; executable router integration still pending"
+      },
+      "utilization": {
+        "state": "REFERENCE_READY",
+        "used_for": [
+          "deployment/runtime troubleshooting",
+          "source-recovery blockers",
+          "third-party integration failures"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    },
+    {
+      "recipe_id": "WO-CREATOR-TO-CANONICAL-SOURCE-V1",
+      "name": "Creator guide to canonical source verification",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "CANDIDATE",
+      "evidence_count": 4,
+      "source_pointers": [
+        "01_CREATOR_SOURCE_CENSUS_BORA_LAZY_YEONGIU_2026-09-21",
+        "02_GITHUB_REPOSITORY_SOURCE_CENSUS_2026-09-21",
+        "DATA/WORK_OS_CREATOR_GITHUB_NETLIFY_RECIPE_CORPUS_2026-09-22",
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+      ],
+      "preserve": [
+        "creator guide as secondary provenance",
+        "exact external link",
+        "canonical owner/repo identity",
+        "dynamic-claim separation",
+        "source-state history"
+      ],
+      "allowed_change": [
+        "current canonical documentation pointer",
+        "current repository/version evidence",
+        "localized owner route"
+      ],
+      "rights_or_consent": {
+        "required": false,
+        "note": "Reading public references does not authorize installation, account connection, code execution or copyrighted-content reuse."
+      },
+      "verification": {
+        "required": [
+          "creator source and canonical source remain separate provenance nodes",
+          "dynamic claims are revalidated before adoption",
+          "fork/mirror is not promoted without identity evidence"
+        ],
+        "evidence": "creator + GitHub source census and utilization corpus"
+      },
+      "utilization": {
+        "state": "REFERENCE_READY",
+        "used_for": [
+          "tool discovery",
+          "guide verification",
+          "source acquisition",
+          "capability intake"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    },
+    {
+      "recipe_id": "WO-FROZEN-DEPLOY-CANDIDATE-V1",
+      "name": "Frozen deploy candidate evidence gate",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "CANDIDATE",
+      "evidence_count": 3,
+      "source_pointers": [
+        "03_NETLIFY_COMMUNITY_SOURCE_CENSUS_2026-09-21",
+        "DATA/WORK_OS_FAILURE_SIGNATURE_BLOCKER_REGISTRY_2026-09-22",
+        "OS/WORK_OS.md"
+      ],
+      "preserve": [
+        "exact commit SHA",
+        "branch",
+        "build/base/publish configuration",
+        "deploy context",
+        "production-vs-preview distinction",
+        "external-resource gate"
+      ],
+      "allowed_change": [
+        "host-specific evidence fields",
+        "project build command",
+        "authorized deploy target"
+      ],
+      "rights_or_consent": {
+        "required": true,
+        "note": "External deployment is an external-state action and requires the applicable authorization/resource gate."
+      },
+      "verification": {
+        "required": [
+          "local/runtime candidate evidence exists before hosting",
+          "candidate SHA/config are frozen",
+          "hosting is not used as iterative debugger",
+          "post-deploy context is verified separately"
+        ],
+        "evidence": "Netlify support/source census + TAKY external-resource operating rule"
+      },
+      "utilization": {
+        "state": "REFERENCE_READY",
+        "used_for": [
+          "Netlify branch/preview/production deployment preparation"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    },
+    {
+      "recipe_id": "WO-THIRD-PARTY-TOOL-INTAKE-V1",
+      "name": "Third-party repository and tool intake",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "CANDIDATE",
+      "evidence_count": 3,
+      "source_pointers": [
+        "02_GITHUB_REPOSITORY_SOURCE_CENSUS_2026-09-21",
+        "DATA/WORK_OS_CREATOR_GITHUB_NETLIFY_RECIPE_CORPUS_2026-09-22",
+        "OS/WORK_OS.md"
+      ],
+      "preserve": [
+        "canonical repository identity",
+        "README/license",
+        "install/config instructions",
+        "maintenance/archive state",
+        "permission/security surface",
+        "dependency provenance"
+      ],
+      "allowed_change": [
+        "tool-specific sandbox strategy",
+        "project-local install path",
+        "bounded test fixture"
+      ],
+      "rights_or_consent": {
+        "required": true,
+        "note": "Installation, secrets, account access, browser automation and external permissions require explicit applicable approval/authorization."
+      },
+      "verification": {
+        "required": [
+          "canonical identity resolved",
+          "license and maintenance state inspected",
+          "install/permission/dependency surface reviewed",
+          "no automatic install from secondary guide text"
+        ],
+        "evidence": "GitHub source census; concrete tool adoption requires fresh repository review"
+      },
+      "utilization": {
+        "state": "REFERENCE_READY",
+        "used_for": [
+          "MCP/skill/plugin/repository intake",
+          "coding-tool evaluation"
+        ]
+      },
+      "deprecation": {
+        "status": "NOT_DEPRECATED",
+        "superseded_by": null,
+        "reason": null
+      }
+    },
+    {
+      "recipe_id": "WO-SOURCE-GAP-HANDLING-V1",
+      "name": "Explicit source-gap handling",
+      "owner": "WORK-OS/TAKY",
+      "version": "1.0.0",
+      "status": "CANDIDATE",
+      "evidence_count": 4,
+      "source_pointers": [
+        "C2S_YEONGIU_SPECIAL_GIFT_50_CLOSURE_2026-09-21",
+        "DATA/WORK_OS_FAILURE_SIGNATURE_BLOCKER_REGISTRY_2026-09-22",
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+        "OS/WORK_OS.md"
+      ],
+      "preserve": [
+        "missing-source identity",
+        "attempt history",
+        "UNVERIFIED_SOURCE_COVERAGE",
+        "supported claims from independent sources",
+        "No Silent Loss lineage"
+      ],
+      "allowed_change": [
+        "alternate acquisition route",
+        "independent evidence source",
+        "terminal HOLD reason"
+      ],
+      "rights_or_consent": {
+        "required": false,
+        "note": "Alternate acquisition must still respect access, privacy, copyright and permission boundaries."
+      },
+      "verification": {
+        "required": [
+          "missing accessory/content is not invented",
+          "gap remains explicit until independently resolved",
+          "supported claims are not conflated with unrecovered material"
+        ],
+        "evidence": "C2S source-gap closure + Work OS blocker registry"
+      },
+      "utilization": {
+        "state": "REFERENCE_READY",
+        "used_for": [
+          "missing attachments",
+          "blocked URLs",
+          "partial source graphs",
+          "archive recovery"
         ]
       },
       "deprecation": {
