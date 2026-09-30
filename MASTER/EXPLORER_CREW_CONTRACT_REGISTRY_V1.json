@@ -213,6 +213,34 @@
         "Hide onboarding/settings",
         "Snap future Guide settings"
       ]
+    },
+    {
+      "id": "TAKY_CREW_TRANSPORT_AUTH_POLICY_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Transport Auth Policy",
+      "consumers": [
+        "Authenticated Crew Evidence Transport"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_DURABLE_EVIDENCE_STORE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Durable Store Adapter",
+      "consumers": [
+        "Authenticated Crew Evidence Transport",
+        "Crew Evidence Hub"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_NETLIFY_BLOBS_TRANSPORT_ADAPTER_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Netlify Blobs Transport Adapter",
+      "consumers": [
+        "Crew Evidence Hub"
+      ]
     }
   ]
 }
