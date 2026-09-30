@@ -26,6 +26,8 @@ def verify(root=ROOT, pipeline=None):
     C={x["source_draft_id"]:x for x in copydoc["preset_copy"]}
     ids=queue["correction_ids"]
     if p.get("schema")!="TAKY_BADGE_PRODUCTION_PIPELINE_V1": errors.append("PIPELINE_SCHEMA")
+    if p.get("status")!="HISTORICAL_NON_EXECUTABLE_SUPERSEDED_BY_V2" or p.get("executable") is not False:
+        errors.append("LEGACY_PIPELINE_MUST_BE_NON_EXECUTABLE")
     if p.get("correction_count")!=len(ids) or len(p.get("items",[]))!=len(ids): errors.append("CORRECTION_COUNT")
     if [x.get("badge_id") for x in p.get("items",[])]!=ids: errors.append("CORRECTION_ORDER_OR_SET")
     inv=p.get("invariants",{})
@@ -88,4 +90,4 @@ if __name__=="__main__":
     problems=verify()
     if problems:
         raise SystemExit("BADGE PRODUCTION PIPELINE BLOCKED: "+", ".join(problems))
-    print("BADGE PRODUCTION PIPELINE PASS: correction inputs are locked; character/base/shared UI separation enforced; Netlify HOLD. This is not visual approval.")
+    print("BADGE LEGACY V1 INTEGRITY PASS: retained as historical correction evidence only; NON-EXECUTABLE. V2 preflight is the sole CLI gate.")
