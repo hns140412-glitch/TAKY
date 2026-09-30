@@ -241,6 +241,16 @@
       "consumers": [
         "Crew Evidence Hub"
       ]
+    },
+    {
+      "id": "TAKY_CENTRAL_CREW_EVIDENCE_HTTP_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Central Crew Evidence HTTP Boundary",
+      "consumers": [
+        "Crew Evidence Browser Provider",
+        "Server Runtime"
+      ]
     }
   ]
 }
