@@ -27,6 +27,8 @@ class BadgeArtAdmissionTests(unittest.TestCase):
         self.assertIn("001_fx_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_composite_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_REVIEW_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_DEPTH_PROFILE_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_INDIVIDUAL_MANIFEST_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_PREVIEW_SET_MISSING",problems)
         self.assertIn("ART_ADMISSION_SOURCE_OR_WIT_DRIFT_001",problems)
     def test_conditional_29_share_same_admission_route(self):
@@ -62,6 +64,9 @@ class BadgeArtAdmissionTests(unittest.TestCase):
                              "BADGE/assets/individual/001/",(".png",),issues,"001_base")
             self.assertIsNone(found)
             self.assertIn("001_base_MISSING_OR_HASH_MISMATCH",issues)
+    def test_four_digit_badge_slot_is_not_truncated(self):
+        from verify_art_admission import slot_for_badge_id
+        self.assertEqual("1000",slot_for_badge_id("BDG-DRAFT-1000"))
     def test_no_unknown_empty_items_shape(self):
         d=copy.deepcopy(self.empty);d["items"]=None
         self.assertEqual(["ART_ADMISSION_ITEMS_REQUIRED"],verify(ROOT,d))
