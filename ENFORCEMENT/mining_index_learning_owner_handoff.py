@@ -123,7 +123,7 @@ def bind_owner_reviewed_source(
     # A source/version is not renamed and a staged candidate is never treated
     # as a verified row. Only the actual owner-reviewed row is appended.
     updated = list(existing_index_rows or []) + [dict(row)]
-    result = requery_learning(learning_payload, updated)
+    result = requery_learning(learning_payload, updated, owner_verifier=owner_verifier)
     return {
         "schema": "TAKY_MINING_INDEX_LEARNING_OWNER_HANDOFF_V1",
         "state": "OWNER_REVIEWED_REQUERY",

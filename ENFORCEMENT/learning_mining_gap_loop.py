@@ -55,12 +55,12 @@ def plan_from_learning_gap(learning_result:dict, memory:dict|None=None, index_ro
         },
     }
 
-def requery_learning(original_payload:dict, updated_index_rows:list[dict])->dict:
+def requery_learning(original_payload:dict, updated_index_rows:list[dict], *, owner_verifier=None)->dict:
     payload=dict(original_payload)
     payload["index_rows"]=updated_index_rows
     return {
         "schema":"TAKY_LEARNING_REQUERY_RESULT_V1",
-        "learning_result":orchestrate_learning(payload),
+        "learning_result":orchestrate_learning(payload,owner_verifier=owner_verifier),
         "guards":{
             "requery_uses_indexed_evidence":True,
             "raw_external_result_not_consumed_directly":True,

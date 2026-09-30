@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 import unittest
 from learning_index_bridge import retrieve_learning_evidence
+from owner_test_fixture import make_row,verifier_for
 
 ROWS=[
- {"source_id":"S1","canonical_title":"Official curriculum standard","short_summary":"fraction comparison grade 5","authority_class":"OFFICIAL","source_family":"CURRICULUM"},
- {"source_id":"S2","canonical_title":"Community worksheet","short_summary":"fraction comparison practice","authority_class":"COMMUNITY","source_family":"PRACTICE"},
+ make_row("S1","Official curriculum standard",short_summary="fraction comparison grade 5",source_family="CURRICULUM"),
+ make_row("S2","Community worksheet",short_summary="fraction comparison practice",source_family="PRACTICE",authority_class="COMMUNITY",authorization_class="CONDITIONAL"),
 ]
 
 class LearningIndexBridgeTest(unittest.TestCase):
  def test_retrieves_candidates_without_authorizing_use(self):
-  out=retrieve_learning_evidence({"request_id":"R1","learning_context":"fraction comparison","query":"fraction comparison","minimum_results":1},ROWS)
+  out=retrieve_learning_evidence({"request_id":"R1","learning_context":"fraction comparison","query":"fraction comparison","minimum_results":1},ROWS,owner_verifier=verifier_for(*ROWS))
   self.assertTrue(out["evidence_sufficient_for_review"])
   self.assertTrue(out["guards"]["retrieval_is_not_pedagogical_authorization"])
   self.assertTrue(out["guards"]["learning_engine_retains_use_decision"])
 
  def test_authority_filter_can_create_gap(self):
-  out=retrieve_learning_evidence({"query":"fraction comparison","minimum_results":2,"minimum_authority":"OFFICIAL","desired_evidence_type":"remediation"},ROWS)
+  out=retrieve_learning_evidence({"query":"fraction comparison","minimum_results":2,"minimum_authority":"OFFICIAL","desired_evidence_type":"remediation"},ROWS,owner_verifier=verifier_for(*ROWS))
   self.assertFalse(out["evidence_sufficient_for_review"])
   self.assertEqual(out["evidence_gap"]["type"],"LEARNING_EVIDENCE_GAP")
   self.assertEqual(out["evidence_gap"]["existing_evidence_count"],1)
@@ -30,13 +31,12 @@ class LearningIndexBridgeTest(unittest.TestCase):
   rows=[
    {"source_id":"NEW","canonical_title":"fraction comparison fraction comparison",
     "short_summary":"fraction comparison","index_state":"CANDIDATE","utilization_class":"REFERENCE_ONLY"},
-   {"source_id":"OLD","canonical_title":"fraction comparison","index_state":"INDEXED",
-    "authorization_class":"READY_WITH_GUARDS"},
+   make_row("OLD","fraction comparison"),
   ]
   staged=retrieve_learning_evidence({"query":"fraction comparison","minimum_results":1},[rows[0]])
   self.assertFalse(staged["evidence_sufficient_for_review"])
   self.assertEqual(staged["evidence_gap"]["staged_candidate_count"],1)
-  mixed=retrieve_learning_evidence({"query":"fraction comparison","top_k":1,"minimum_results":1},rows)
+  mixed=retrieve_learning_evidence({"query":"fraction comparison","top_k":1,"minimum_results":1},rows,owner_verifier=verifier_for(rows[1]))
   self.assertTrue(mixed["evidence_sufficient_for_review"])
   self.assertEqual(mixed["evidence_candidates"][0]["source_id"],"OLD")
 

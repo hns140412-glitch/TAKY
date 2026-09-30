@@ -79,6 +79,10 @@ on:
       - 'ENFORCEMENT/mining_verified_archive_manifest_test.py'
       - 'ENFORCEMENT/learning_index_bridge.py'
       - 'ENFORCEMENT/learning_index_bridge_test.py'
+      - 'ENFORCEMENT/index_owner_use_gate.py'
+      - 'ENFORCEMENT/index_owner_use_gate_test.py'
+      - 'ENFORCEMENT/index_owner_use_guard_test.py'
+      - 'ENFORCEMENT/owner_test_fixture.py'
       - 'ENFORCEMENT/learning_runtime.py'
       - 'ENFORCEMENT/learning_runtime_test.py'
       - 'ENFORCEMENT/learning_orchestrator.py'
@@ -134,6 +138,21 @@ on:
       - 'ENFORCEMENT/mining_inline_attachment_discovery_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
       - 'ENFORCEMENT/mining_index_bridge_test.py'
+      - 'ENFORCEMENT/learning_index_bridge.py'
+      - 'ENFORCEMENT/learning_index_bridge_test.py'
+      - 'ENFORCEMENT/learning_runtime.py'
+      - 'ENFORCEMENT/learning_runtime_test.py'
+      - 'ENFORCEMENT/learning_orchestrator.py'
+      - 'ENFORCEMENT/learning_orchestrator_test.py'
+      - 'ENFORCEMENT/learning_mining_gap_loop.py'
+      - 'ENFORCEMENT/learning_mining_gap_loop_test.py'
+      - 'ENFORCEMENT/index_owner_use_gate.py'
+      - 'ENFORCEMENT/index_owner_use_gate_test.py'
+      - 'ENFORCEMENT/index_owner_use_guard_test.py'
+      - 'ENFORCEMENT/owner_test_fixture.py'
+      - 'ENFORCEMENT/index_actual_corpus_e2e_test.py'
+      - 'ENFORCEMENT/mining_index_learning_roundtrip_test.py'
+      - 'ENFORCEMENT/mining_index_learning_owner_handoff.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
 
 jobs:
@@ -184,6 +203,10 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_verified_archive_manifest.py
           python -m py_compile ENFORCEMENT/mining_verified_archive_manifest_test.py
           python -m py_compile ENFORCEMENT/learning_index_bridge.py
+          python -m py_compile ENFORCEMENT/index_owner_use_gate.py
+          python -m py_compile ENFORCEMENT/index_owner_use_gate_test.py
+          python -m py_compile ENFORCEMENT/index_owner_use_guard_test.py
+          python -m py_compile ENFORCEMENT/owner_test_fixture.py
           python -m py_compile ENFORCEMENT/learning_runtime.py
           python -m py_compile ENFORCEMENT/learning_orchestrator.py
           python -m py_compile ENFORCEMENT/learning_growth_memory.py
@@ -257,6 +280,10 @@ jobs:
         run: python ENFORCEMENT/mining_inline_attachment_discovery_test.py
       - name: Test Learning shared index bridge
         run: python ENFORCEMENT/learning_index_bridge_test.py
+      - name: Test independent Index owner trust boundary
+        run: python ENFORCEMENT/index_owner_use_gate_test.py
+      - name: Test Index owner runtime use guards
+        run: python ENFORCEMENT/index_owner_use_guard_test.py
       - name: Test central Learning Engine runtime
         run: python ENFORCEMENT/learning_runtime_test.py
       - name: Test Learning Engine orchestration
@@ -265,7 +292,7 @@ jobs:
         run: python ENFORCEMENT/learning_growth_memory_test.py
       - name: Test Learning-Mining evidence gap loop
         run: python ENFORCEMENT/learning_mining_gap_loop_test.py
-      - name: Test actual 666-source index corpus E2E
+      - name: Test guarded legacy 666-source index corpus E2E
         run: python ENFORCEMENT/index_actual_corpus_e2e_test.py
       - name: Test index ingest candidate adapter
         run: python ENFORCEMENT/index_ingest_candidate_test.py

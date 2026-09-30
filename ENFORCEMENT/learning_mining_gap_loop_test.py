@@ -2,6 +2,7 @@
 import unittest
 from learning_orchestrator import orchestrate_learning
 from learning_mining_gap_loop import plan_from_learning_gap,requery_learning
+from owner_test_fixture import make_row,verifier_for
 
 class LearningMiningGapLoopTest(unittest.TestCase):
  def test_gap_creates_mining_plan(self):
@@ -27,8 +28,8 @@ class LearningMiningGapLoopTest(unittest.TestCase):
    "context":{"skill_id":"FRACTION"},
    "observations":[{"correct":False},{"correct":False}],
   }
-  rows=[{"source_id":"S1","canonical_title":"Official fraction remediation","short_summary":"fraction remediation","keywords":["fraction","remediation"],"authorization_class":"READY_WITH_GUARDS","authority_class":"OFFICIAL"}]
-  out=requery_learning(original,rows)["learning_result"]
+  rows=[make_row("S1","Official fraction remediation",short_summary="fraction remediation",keywords=["fraction","remediation"])]
+  out=requery_learning(original,rows,owner_verifier=verifier_for(*rows))["learning_result"]
   self.assertIsNone(out["mining_request_candidate"])
   self.assertEqual(out["runtime"]["strategy_selection"]["strategy"],"TARGETED_REMEDIATION")
 

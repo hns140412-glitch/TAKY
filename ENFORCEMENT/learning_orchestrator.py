@@ -9,7 +9,7 @@ from learning_index_bridge import retrieve_learning_evidence
 from learning_runtime import run_learning_cycle,evaluate_outcome
 from learning_growth_memory import observe,aggregate
 
-def orchestrate_learning(payload:dict)->dict:
+def orchestrate_learning(payload:dict, *, owner_verifier=None)->dict:
     request=payload.get("evidence_request") or {}
     retrieval=retrieve_learning_evidence(
         request,
@@ -17,6 +17,7 @@ def orchestrate_learning(payload:dict)->dict:
         semantic_scores=payload.get("semantic_scores"),
         relations=payload.get("index_relations"),
         detail_rows=payload.get("detail_rows"),
+        owner_verifier=owner_verifier,
     )
     evidence=[]
     for x in retrieval.get("evidence_candidates",[]):
@@ -28,7 +29,9 @@ def orchestrate_learning(payload:dict)->dict:
         "evidence_candidates":evidence,
         "observations":payload.get("observations") or [],
     }
-    runtime=run_learning_cycle(runtime_payload)
+    runtime=run_learning_cycle(runtime_payload,
+        owner_verified_source_ids=frozenset(x["source_id"] for x in evidence
+                                            if x.get("source_id")))
     # A runtime policy gap must not erase the original Index search question.
     gap=(dict(retrieval.get("evidence_gap") or {}) | dict(runtime.get("evidence_gap") or {})) or None
     if gap and not gap.get("query"):

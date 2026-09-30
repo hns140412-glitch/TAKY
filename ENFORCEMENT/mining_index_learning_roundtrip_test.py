@@ -5,6 +5,7 @@ from external_to_learning_loop import process_external_receipt
 from learning_orchestrator import orchestrate_learning
 from learning_mining_gap_loop import plan_from_learning_gap,requery_learning
 from learning_consumer_adapters import to_ready_planner_request
+from owner_test_fixture import make_row,verifier_for
 
 QUERY="science reasoning"
 PAYLOAD={
@@ -39,11 +40,8 @@ class MiningIndexLearningRoundTrip(unittest.TestCase):
     def test_independently_supplied_owner_row_can_be_reviewed_without_schedule_write(self):
         # Represents a separate, pre-verified owner receipt. The discovery
         # adapter itself never creates or upgrades this authoritative row.
-        row={"source_id":"S-REVIEWED","canonical_title":"Official science reasoning",
-             "short_summary":QUERY,"authority_class":"OFFICIAL",
-             "index_state":"INDEXED","authorization_class":"READY_WITH_GUARDS",
-             "locator":"https://publisher.example/science"}
-        after=requery_learning(PAYLOAD,[row])["learning_result"]
+        row=make_row("S-REVIEWED","Official science reasoning",short_summary=QUERY)
+        after=requery_learning(PAYLOAD,[row],owner_verifier=verifier_for(row))["learning_result"]
         self.assertTrue(after["retrieval"]["evidence_sufficient_for_review"])
         self.assertEqual(after["runtime"]["strategy_selection"]["strategy"],"TARGETED_REMEDIATION")
         ready=to_ready_planner_request(after)

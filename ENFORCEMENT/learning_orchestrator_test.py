@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 import unittest
 from learning_orchestrator import orchestrate_learning
+from owner_test_fixture import make_row,verifier_for
 
-ROWS=[
- {"source_id":"S1","canonical_title":"Official fraction remediation","short_summary":"fraction remediation","keywords":["fraction","remediation"],"authorization_class":"READY_WITH_GUARDS","authority_class":"OFFICIAL"},
-]
+ROWS=[make_row("S1","Official fraction remediation",short_summary="fraction remediation",keywords=["fraction","remediation"])]
 
 class LearningOrchestratorTest(unittest.TestCase):
  def test_index_to_runtime_path(self):
@@ -13,7 +12,7 @@ class LearningOrchestratorTest(unittest.TestCase):
    "index_rows":ROWS,
    "context":{"learner_id":"C1","skill_id":"FRACTION"},
    "observations":[{"correct":False},{"correct":False}],
-  })
+  },owner_verifier=verifier_for(*ROWS))
   self.assertTrue(r["retrieval"]["evidence_sufficient_for_review"])
   self.assertEqual(r["runtime"]["strategy_selection"]["strategy"],"TARGETED_REMEDIATION")
   self.assertIsNone(r["runtime"]["next_learning_action"]["planner_date"])

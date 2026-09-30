@@ -7,9 +7,11 @@ It never authorizes pedagogical use and never mutates learner state.
 """
 from __future__ import annotations
 from index_retrieval import retrieve
+from index_owner_use_gate import reviewed_learning_row
 
 def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
-                               semantic_scores=None, relations=None, detail_rows=None)->dict:
+                               semantic_scores=None, relations=None, detail_rows=None,
+                               owner_verifier=None)->dict:
     query=str(request.get("query") or request.get("learning_context") or "").strip()
     filters=dict(request.get("filters") or {})
     if request.get("minimum_authority"):
@@ -28,9 +30,14 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
     primary=result.get("primary",[])
     # Discovery candidates remain visible for review, but do not satisfy a
     # Learning evidence request merely by entering a search projection.
-    reviewable=[x for x in primary if str((x.get("row") or {}).get("index_state") or "").upper()
-                not in {"CANDIDATE","STAGED","PENDING","HELD","REJECTED"}]
-    staged=[x for x in primary if x not in reviewable]
+    reviewable=[]; staged=[]
+    for hit in primary:
+        # The verifier is host-provisioned, never read from the request or row.
+        checked=reviewed_learning_row(hit.get("row") or {},owner_verifier)
+        if checked is None:
+            staged.append(hit)
+        else:
+            reviewable.append({**hit,"row":checked})
     reviewable=reviewable[:max(0,int(request.get("top_k",5) or 5))]
     sufficient=len(reviewable)>=minimum
     gap=None if sufficient else {

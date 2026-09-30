@@ -11,7 +11,7 @@ or automatic policy promotion.
 from __future__ import annotations
 import hashlib
 
-ALLOWED_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","REFERENCE_ONLY","DIRECT_USE_READY"}
+ALLOWED_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","DIRECT_USE_READY"}
 HOLD_CLASSES={"HOLD","REVIEW_REQUIRED","RESEARCH_CANDIDATE","NO_CURRENT_CONSUMER"}
 LEGACY_UTILIZATION_MAP={
     "CONDITIONAL_USE":"CONDITIONAL",
@@ -56,13 +56,11 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
 def _usable_evidence(evidence:list[dict])->list[dict]:
     out=[]
     for row in evidence or []:
-        # REFERENCE_ONLY applies to an established Index source, not a newly
-        # discovered external candidate. Candidate state always wins.
-        if str(row.get("index_state") or "").upper() in {
-            "CANDIDATE","STAGED","PENDING","HELD","REJECTED"
-        }:
+        # A legacy row without Index owner state is discovery-only. Even INDEXED
+        # is necessary, not proof that an independently trusted host verified it.
+        if str(row.get("index_state") or "").upper() != "INDEXED":
             continue
-        raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "REFERENCE_ONLY").upper()
+        raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "").upper()
         cls=LEGACY_UTILIZATION_MAP.get(raw_cls,raw_cls)
         if cls in HOLD_CLASSES:
             continue
@@ -128,9 +126,12 @@ def propose_learning_action(context:dict, state:dict, strategy:dict)->dict:
         },
     }
 
-def run_learning_cycle(payload:dict)->dict:
+def run_learning_cycle(payload:dict, *, owner_verified_source_ids=None)->dict:
     context=payload.get("context") or {}
-    evidence=payload.get("evidence_candidates") or []
+    # Host-provided verified IDs are not accepted from payload or source rows.
+    permitted=set(owner_verified_source_ids or ())
+    evidence=[x for x in (payload.get("evidence_candidates") or [])
+              if x.get("source_id") in permitted]
     observations=payload.get("observations") or []
     state=interpret_learner_state(context,evidence,observations)
     strategy=select_strategy(context,state,evidence)
