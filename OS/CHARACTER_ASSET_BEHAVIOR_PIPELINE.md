@@ -108,6 +108,21 @@ Ownership:
 
 Provider/transport remains adapter-driven. Until an authorized family-profile backend/provider is configured, cross-origin propagation is `NOT_RUNTIME_COMPLETE`; local app state alone SHALL NOT be reported as cross-app sync.
 
+### 6.2 Private Character Master Binary Transport
+
+The cross-app profile stores only a private Character Master pointer, not a public image URL and not the raw child photo.
+
+Canonical runtime shape:
+`READY MASTER -> AUTHENTICATED PRIVATE ASSET UPLOAD -> VERIFIED COMMIT/SHA -> OPAQUE master_asset_ref -> FAMILY CHARACTER PROFILE -> AUTHENTICATED SIGNED READ -> READY/HIDE/SNAP RENDER`.
+
+Rules:
+- raw source photo is never uploaded through the Character Master asset endpoint;
+- accepted Character Master binary formats are bounded image types only;
+- upload must be committed and hash-verified before profile promotion;
+- `master_asset_ref` is an opaque private reference, not a public deployment URL;
+- Hide/Snap resolve a short-lived read URL at runtime and must not treat that URL as identity authority;
+- missing object-store/provider binding remains fail-closed and must be reported as `PENDING_ASSET_STORAGE` or pointer-only, not as cross-app completion.
+
 ## 7. INTRO / ONBOARDING CONTRACT
 
 The approved intro flow may invoke the Asset Generation Engine during character creation, then persist the resulting Character Master before normal app entry.
