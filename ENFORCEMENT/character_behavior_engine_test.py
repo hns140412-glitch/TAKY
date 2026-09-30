@@ -24,6 +24,15 @@ class T(unittest.TestCase):
     for action in ("CHECK_COMPASS","ORGANIZE_BAG","USE_MAGNIFIER","REST"):
       st=self.state();st["requested_action"]=action
       x=cbe.run(st);self.assertEqual(action,x["action"]);self.assertIsNone(x["asset_path"]);self.assertFalse(x["generation_allowed"])
+  def test_silence_by_default(self):
+    st=self.state();st["child_working_well"]=True
+    x=cbe.run(st);self.assertEqual("SILENT",x["dialogue_level"]);self.assertFalse(x["voice_allowed"])
+  def test_hint_breaks_silence_only_when_needed(self):
+    st=self.state();st["child_working_well"]=True;st["needs_hint"]=True
+    x=cbe.run(st);self.assertEqual("HINT",x["dialogue_level"]);self.assertTrue(x["voice_allowed"])
+  def test_reflection_can_intervene(self):
+    st=self.state();st["silence_by_default"]=True;st["reflection_due"]=True
+    x=cbe.run(st);self.assertEqual("SHORT",x["dialogue_level"]);self.assertTrue(x["voice_allowed"])
   def test_asset_leak_is_rejected(self):
     x=cbe.run(self.state());x["asset_path"]="assets/belo.png"
     self.assertIn("BEHAVIOR_ENGINE_SELECTED_ASSET",cbe.validate_command(x))
