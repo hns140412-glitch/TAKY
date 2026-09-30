@@ -17,6 +17,14 @@ Release / Deploy는 이 파이프라인 밖의 별도 Gate다.
 
 ### 1) APPROVAL LOCK
 한 번만 확정한다.
+
+Canonical rule binding: `TKY-ASSET-001`.
+
+Hard policies inherited from the former standalone Design Gate:
+- `runtime_must_not_auto_become_golden=true`
+- `approved_reference_required=true`
+- `hash_pin_required=true`
+- `visual_diff_required=true`
 - 승인 시안 / authority
 - Golden 또는 승인 reference
 - SHA-256
@@ -84,6 +92,8 @@ Visual Compare:
 - global score 하나로 critical failure 은폐 금지
 
 ### 5) DESIGN PASS
+각 screen은 최소 1개 `GOLDEN_PARITY` state를 가져야 한다.
+
 다음 실제 evidence가 전부 PASS일 때만 Receipt 발급:
 - VISUAL
 - INTERACTION
@@ -233,3 +243,21 @@ Design-to-UI Pipeline이 판단하지 않는 것:
 - release claim: HOLD
 
 이 HOLD들은 파이프라인 자체 구축과 검증을 막지 않는다.
+
+
+## Standalone Design Gate consolidation
+Former Draft PR #190 is superseded by this pipeline after its authority rules are absorbed here.
+
+KEEP / MERGE:
+- TKY-ASSET-001 rule binding
+- runtime cannot auto-promote Golden
+- approved reference required at final pass
+- SHA pin required
+- visual diff required
+
+REMOVE AS DUPLICATE:
+- separate Design Gate validator/workflow
+- snapshot_name field; capture.artifacts[] is the executable replacement
+- consumer-app manual visual-pass handoff; central Runner owns comparison/evidence
+
+There is one Design Gate execution path: this five-stage pipeline.
