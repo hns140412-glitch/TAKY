@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-25.1",
+  "map_version": "2026-09-30.1",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -129,6 +129,24 @@
         "global platform/PWA mechanics beyond family-specific requirements"
       ]
     },
+    "EXPLORATION_CREW": {
+      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
+      "semantic_owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "shared crew behavior-to-semantic-command-to-asset-to-renderer separation",
+        "shared composable crew asset group semantics",
+        "shared same-character safe fallback contract",
+        "shared Behavior/Asset/Integration gates",
+        "shared crew runtime trace/version contract"
+      ],
+      "does_not_own": [
+        "project-specific scene presentation",
+        "project-specific dialogue or performance details",
+        "unapproved character art",
+        "project release or deployment authority"
+      ]
+    },
     "READY_SET": {
       "class": "PROJECT_APP",
       "semantic_owner": "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
@@ -143,7 +161,8 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY"
+        "LEARNING_APP_FAMILY",
+        "EXPLORATION_CREW"
       ]
     },
     "HIDE_SEEK": {
@@ -159,7 +178,8 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY"
+        "LEARNING_APP_FAMILY",
+        "EXPLORATION_CREW"
       ]
     },
     "SNAP_POP": {
@@ -175,7 +195,8 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY"
+        "LEARNING_APP_FAMILY",
+        "EXPLORATION_CREW"
       ]
     },
     "WORK_DOMAIN_PROJECT": {
@@ -459,6 +480,7 @@
     "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
     "OS/WORK_OS.md",
     "OS/GUIDE_FAMILY_LEARNING_OS.md",
+    "OS/EXPLORATION_CREW_CANONICAL.md",
     "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
     "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json",
     "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",

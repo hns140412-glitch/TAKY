@@ -2,7 +2,8 @@
 
 Status: REV_00 / PRE-CONFIRMATION RECOVERED DESIGN SOURCE
 Role: Shared GUIDE character, relationship, lifecycle and presence owner under `OS/GUIDE_FAMILY_LEARNING_OS.md`.
-Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > GUIDE CHARACTER / RELATIONSHIP OS > PROJECT-specific Guide behavior.
+Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > GUIDE CHARACTER / RELATIONSHIP OS + EXPLORATION CREW CANONICAL > PROJECT-specific Guide behavior.
+Runtime boundary: crew behavior-to-asset separation, composable crew asset groups, fallback and three-gate runtime rules are owned by `OS/EXPLORATION_CREW_CANONICAL.md`; this file continues to own relationship meaning.
 
 This file was recovered from prior GUIDE/Ready/Snap/Hide lineage and later user corrections. It exists so character/relationship rules are not silently lost when the learning-operation OS is compacted.
 
