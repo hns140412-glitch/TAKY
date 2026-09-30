@@ -54,6 +54,9 @@ def validate(cfg: dict, root: Path) -> dict:
 
     if cfg.get("schema") != SCHEMA:
         errors.append("SCHEMA_INVALID")
+    rule_ids=cfg.get("rule_ids")
+    if not isinstance(rule_ids,list) or "TKY-ASSET-001" not in rule_ids:
+        errors.append("RULE_TKY_ASSET_001_BINDING_MISSING")
     if not str(cfg.get("project","")).strip():
         errors.append("PROJECT_MISSING")
     if not SHA40.match(str(cfg.get("source_commit",""))):
@@ -62,6 +65,9 @@ def validate(cfg: dict, root: Path) -> dict:
     pol = cfg.get("policy", {})
     for key in (
         "runtime_must_not_auto_become_golden",
+        "approved_reference_required",
+        "hash_pin_required",
+        "visual_diff_required",
         "flattened_mockup_runtime_forbidden",
         "evidence_files_required",
         "image_generation_optional",
@@ -204,6 +210,7 @@ def validate(cfg: dict, root: Path) -> dict:
             errors.append(f"{sid}:STATES_MISSING")
         else:
             state_ids = set()
+            golden_parity_count = 0
             for state in states:
                 stid = str(state.get("id","")).strip()
                 if not stid or stid in state_ids:
@@ -212,6 +219,8 @@ def validate(cfg: dict, root: Path) -> dict:
                 visual_policy = state.get("visual_policy","GOLDEN_PARITY")
                 if visual_policy not in ("GOLDEN_PARITY","LAYOUT_GUARD","NO_VISUAL_EVIDENCE"):
                     errors.append(f"{sid}:{stid}:VISUAL_POLICY_INVALID")
+                if visual_policy == "GOLDEN_PARITY":
+                    golden_parity_count += 1
                 interaction_policy = state.get("interaction_policy","REQUIRED")
                 if interaction_policy not in ("REQUIRED","NOT_APPLICABLE"):
                     errors.append(f"{sid}:{stid}:INTERACTION_POLICY_INVALID")
@@ -227,6 +236,8 @@ def validate(cfg: dict, root: Path) -> dict:
                     errors.append(f"{sid}:{stid}:FIXTURE_SHA_MISSING")
                 elif sha256(fp).lower() != fsha.lower():
                     errors.append(f"{sid}:{stid}:FIXTURE_SHA_MISMATCH")
+            if golden_parity_count < 1:
+                errors.append(f"{sid}:GOLDEN_PARITY_STATE_REQUIRED")
 
     return {
         "schema": "TAKY_DESIGN_TO_UI_CONTRACT_VALIDATION_V1",
