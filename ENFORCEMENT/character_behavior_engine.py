@@ -62,6 +62,13 @@ def resolve_action(state:dict,character:dict,role:str)->str:
 
 def dialogue_level(state:dict,role:str,relation:str)->str:
     if role=="AMBIENT":return "SILENT"
+    intervention=bool(
+      state.get("needs_hint") or state.get("just_completed") or state.get("transition") or
+      state.get("reflection_due") or state.get("user_requested") or state.get("blocked_help") or
+      state.get("explicit_intervention")
+    )
+    if (state.get("silence_by_default") or state.get("child_working_well")) and not intervention:
+        return "SILENT"
     if state.get("just_completed"):return "CELEBRATE"
     if state.get("needs_hint"):
         return "COACH" if relation=="TRUSTED" else "HINT"
@@ -85,6 +92,7 @@ def run(state:dict)->dict:
       "relationship_state":relation,
       "action":action,
       "dialogue_level":dialogue_level(state,role,relation),
+      "voice_allowed":dialogue_level(state,role,relation)!="SILENT",
       "required_roles":ACTION_PARTS[action],
       "asset_selection_forbidden":True,
       "asset_path":None,
