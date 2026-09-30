@@ -134,7 +134,7 @@ def main():
         assert cp.returncode!=0
         s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
         assert s["status"]=="CONTRACT_BLOCKED",s
-        assert "ADAPTER_CHECK_COVERAGE_INVALID:interaction" in s["detail"],s
+        assert "ADAPTER_COVERAGE_MISSING:interaction:home:BASE" in s["detail"],s
 
     with tempfile.TemporaryDirectory() as td:
         root=Path(td);setup(root)
