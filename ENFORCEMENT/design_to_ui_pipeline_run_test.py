@@ -80,9 +80,9 @@ sys.exit(0 if passed else 1)
         ]
       },
       "checks":{
-        "interaction":{"command":[sys.executable,"tools/adapter.py","interaction",*fail_arg("interaction")]},
-        "responsive":{"command":[sys.executable,"tools/adapter.py","responsive",*fail_arg("responsive")]},
-        "asset_integrity":{"command":[sys.executable,"tools/adapter.py","asset",*fail_arg("asset_integrity")]}
+        "interaction":{"command":[sys.executable,"tools/adapter.py","interaction",*fail_arg("interaction")],"coverage":["home:BASE"]},
+        "responsive":{"command":[sys.executable,"tools/adapter.py","responsive",*fail_arg("responsive")],"coverage":["home:BASE:phone"]},
+        "asset_integrity":{"command":[sys.executable,"tools/adapter.py","asset",*fail_arg("asset_integrity")],"coverage":["home"]}
       }
     })
 
@@ -124,6 +124,17 @@ def main():
         assert (root/"ui-audit/responsive-result.json").is_file()
         assert (root/"ui-audit/asset-result.json").is_file()
         assert not (root/"ui-audit/design-receipt.json").exists()
+
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);setup(root)
+        a=json.loads((root/"design-ui-adapter.json").read_text())
+        a["checks"]["interaction"]["coverage"]=[]
+        write(root/"design-ui-adapter.json",a)
+        cp=run(root)
+        assert cp.returncode!=0
+        s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
+        assert s["status"]=="CONTRACT_BLOCKED",s
+        assert "ADAPTER_CHECK_COVERAGE_INVALID:interaction" in s["detail"],s
 
     print("DESIGN_TO_UI_PIPELINE_RUNNER_V1=PASS")
     return 0
