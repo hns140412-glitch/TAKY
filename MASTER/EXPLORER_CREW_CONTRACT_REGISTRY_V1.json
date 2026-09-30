@@ -202,6 +202,17 @@
         "Central Crew Evidence Hub",
         "Ready/Hide/Snap import bridges"
       ]
+    },
+    {
+      "id": "TAKY_CREW_IDENTITY_CHANGE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Identity Change Guard",
+      "consumers": [
+        "Ready Guide settings",
+        "Hide onboarding/settings",
+        "Snap future Guide settings"
+      ]
     }
   ]
 }
