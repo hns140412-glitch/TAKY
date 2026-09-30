@@ -51,6 +51,7 @@ jobs:
       - run: node RUNTIME/crew-durable-evidence-store-adapter.test.js
       - run: node RUNTIME/authenticated-crew-evidence-transport.test.js
       - run: node RUNTIME/crew-netlify-blobs-transport-adapter.test.js
+      - run: node RUNTIME/central-crew-evidence-http-endpoint.test.js
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
