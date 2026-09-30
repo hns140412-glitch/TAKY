@@ -1,0 +1,15 @@
+name: Character Behavior Engine Contract
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/character_behavior_engine.py'
+      - 'ENFORCEMENT/character_behavior_engine_test.py'
+      - '.github/workflows/character-behavior-engine.yml'
+  push:
+    branches: [main]
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m unittest ENFORCEMENT/character_behavior_engine_test.py
