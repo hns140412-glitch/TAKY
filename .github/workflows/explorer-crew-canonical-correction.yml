@@ -1,0 +1,31 @@
+name: Explorer Crew Canonical Correction
+
+on:
+  push:
+    paths:
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
+      - 'OS/GUIDE_CHARACTER_RELATIONSHIP.md'
+      - 'AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md'
+      - 'ENFORCEMENT/explorer_crew_canonical_correction_test.py'
+      - '.github/workflows/explorer-crew-canonical-correction.yml'
+  pull_request:
+    paths:
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
+      - 'OS/GUIDE_CHARACTER_RELATIONSHIP.md'
+      - 'AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md'
+      - 'ENFORCEMENT/explorer_crew_canonical_correction_test.py'
+      - '.github/workflows/explorer-crew-canonical-correction.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Explorer Crew canonical correction
+        run: python ENFORCEMENT/explorer_crew_canonical_correction_test.py

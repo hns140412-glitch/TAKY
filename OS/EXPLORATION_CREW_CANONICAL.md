@@ -1,32 +1,64 @@
 # TAKY EXPLORATION CREW CANONICAL
 
-Status: REV_00 / ACTIVE CANONICAL SHARED CREW CONTRACT
+Status: REV_02 / DRAFT RUNTIME V2 CUTOVER CANDIDATE — ACTIVE MAIN REMAINS AUTHORITY UNTIL MERGE
 Role: Shared Exploration Crew semantic/runtime contract for Ready & Set / Hide & Seek / Snap & Pop.
 Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > EXPLORATION CREW CANONICAL > project-specific crew presentation/behavior.
 
 Source verification:
-- Snap-Pop Draft PR #10 working implementation verified at commit `8ea7b985eaf792e866e4d21d174eaac824a23567`.
-- `Validate Snap & Pop` SUCCESS.
-- `Companion Onboarding Source/Asset Gate` SUCCESS.
-- Central promotion includes shared contract only; Snap-specific UI, art binaries, release state and onboarding flow are excluded.
+- Explorer Crew Runtime V2 is implemented as one shared runtime spine with project-thin consumers in Snap / Hide / Ready Draft branches.
+- Exact current candidate heads and CI evidence are recorded in `AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md`.
+- The shared common runtime is protected by a 34-file Source Lock.
+- Source Lock hashing is SHA-256 over UTF-8 text after CRLF/LF → LF normalization so content identity is OS-independent.
+- Central promotion includes shared contract only; project UI, art binaries, release state and deployment remain project-owned and separately gated.
 
 ## 1. Core architecture — HARD LOCK
 
 `EXPLORATION_CREW_CANONICAL_LOGIC`
 → `CHARACTER_BEHAVIOR_ENGINE`
 → `SEMANTIC_ACTION_COMMAND`
-→ `ASSET_ENGINE`
-→ `UI_RENDERER`
+→ `RUNTIME_POLICY` (thin arbitration only)
+→ `DIALOGUE / SCENE`
+→ `MANIFEST → ASSET_ENGINE`
+→ `UI_RENDER_PLAN`
+→ `INTERACTION / RELATION / MEMORY UPDATE`
+→ `UNIFIED_RUNTIME_TRACE`
 
 Responsibilities:
-- Behavior Engine decides character, role, relation state, behavior state, interaction mode and semantic intent only.
+- Behavior Engine decides character, role, relation state, behavior state, semantic interaction and semantic intent only.
 - Semantic Action Command carries meaning without asset paths or image identity mutation.
+- Runtime Policy is thin arbitration only: reaction budget, scene slot, recent-action repetition suppression, interruptibility, dialogue-intent rotation and cooldown/selection-reason trace. It SHALL NOT become Behavior Engine.
+- Dialogue / Scene consumes the arbitrated semantic result without redefining relationship or behavior meaning.
 - Asset Engine resolves only approved Visual ID / SHA / provenance / manifest compositions.
-- UI Renderer places approved composition without changing behavior, relation or affinity meaning.
+- UI Render Plan/UI Renderer places approved composition without changing behavior, relation or affinity meaning.
+- Interaction / relation / memory updates remain evidence-owned state transitions and are not asset or renderer side effects.
+- Unified Runtime Trace records the end-to-end decision and gate evidence.
 
 `BEHAVIOR MEANING != ASSET SELECTION`
 `ASSET AVAILABILITY != RELATIONSHIP STATE`
 `RENDERER != SEMANTIC OWNER`
+
+## 1.1 Semantic interaction and delivery axes — HARD LOCK
+
+Semantic interaction axis:
+- `SILENT`
+- `TALK`
+- `LISTEN`
+- `GUIDE`
+
+Delivery axis:
+- `NONE`
+- `TEXT`
+- `VOICE`
+- `TEXT_AND_VOICE`
+
+Rules:
+- semantic interaction and delivery are independent fields;
+- `SILENT` requires `NONE`;
+- active `TALK` / `GUIDE` requires explicit non-`NONE` delivery;
+- `LISTEN` may use `NONE`;
+- compatibility adapters may translate transport shape but SHALL NOT redefine semantic meaning;
+- unsupported behavior/action states fail closed and SHALL NOT be force-mapped.
+
 ## 2. Ambient behavior contract — HARD LOCK
 
 Minimum Ambient actions:
@@ -111,27 +143,61 @@ Integration Gate:
 
 `LOGIC PASS != RUNTIME PASS != INTEGRATION PASS != RELEASE PASS`
 
+Promotion separation:
+- `STATIC_APPROVED_ONLY`
+- `COMPOSABLE_ACTION_APPROVED`
+- `MOTION_RENDER_PLAN_READY`
+
+These are independent gates. `motionReady != releasePass != ROOT activation`.
+
 ## 6. Version contract — HARD LOCK
 
 Current shared contract pointers:
 - `contract_version = CREW_PIPELINE_V1`
 - `manifest_version = CREW_COMPOSABLE_MANIFEST_V1`
-- `runtime_schema_version = CREW_RUNTIME_TRACE_V1`
+- `runtime_schema_version = CREW_RUNTIME_TRACE_V2`
 
 Consumer implementation shall fail closed when required pointers disagree.
+
+## 6.1 Runtime V2 ownership and Source Lock — HARD LOCK
+
+Runtime V2 owner:
+- `EXPLORER_CREW_SYSTEM_V2` is the single canonical runtime owner.
+- canonical ownership state is `runtime = CANONICAL_ONLY`.
+- App consumers SHALL report `behaviorOwner=false`, `relationOwner=false`, `memoryOwner=false`, `assetResolver=false`, `runtimeOwner=false`.
+- Ready / Hide / Snap adapters are thin project edges only. They may project app context and render approved plans, but SHALL NOT recreate shared behavior, relation, memory, Runtime Policy or asset ownership.
+
+Shared-source identity:
+- Snap / Hide / Ready SHALL consume the same source-locked common Explorer Crew runtime bundle.
+- current Source Lock scope = 34 common runtime/contract files.
+- hash algorithm = SHA-256.
+- text normalization = UTF-8 with CRLF/LF normalized to LF before hashing.
+- missing locked file, changed normalized content, or unexpected common-runtime file = FAIL CLOSED.
+- Source Lock equality proves common runtime content identity only; it does not imply release approval, main merge, ROOT activation, composable promotion or motion promotion.
 
 ## 7. Runtime trace minimum — HARD LOCK
 
 Runtime trace shall be able to record:
+- behavior decision
 - semantic_action_command
+- semantic interaction mode
+- delivery mode
+- Runtime Policy decision / rejection reason
+- scene slot / interruptibility / cooldown / reaction budget
 - selected_asset_composition
-- fallback_reason when applicable
+- selected Visual ID / source SHA / asset status
+- fallback_reason and composition readiness when applicable
+- UI render-plan state
 - renderer_result
 - Behavior Gate verdict
 - Asset Gate verdict
 - Integration Gate verdict
-- relation_mutated = false
-- affinity_mutated = false
+- relation_changed / memory_changed / persistence status
+- embedded compatible legacy/PR trace when conversion is valid
+- relation_not_owned_by_asset = true
+- memory_not_owned_by_asset = true
+- runtime_policy_not_behavior_owner = true
+- motion_ready_does_not_imply_release = true
 ## 8. Legacy 3+6 contract
 
 Legacy slots:
@@ -191,7 +257,7 @@ This Canonical does not centralize:
 
 ## 11. Relationship with other canonical owners
 
-`OS/GUIDE_CHARACTER_RELATIONSHIP.md` owns shared character/relationship meaning.
+`OS/GUIDE_CHARACTER_RELATIONSHIP.md` owns shared character/relationship meaning, including the 24-person relationship/Main lifecycle, first-encounter boundary, evidence/Story Gate eligibility and personality provenance classes.
 This file owns crew behavior-to-asset runtime separation and shared crew composition gates.
 `OS/GUIDE_FAMILY_LEARNING_OS.md` remains the higher Learning OS owner.
 `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` owns cross-app family contract and inheritance.
@@ -202,6 +268,6 @@ higher authority and later explicit user correction prevail; project code shall 
 
 ## 12. Current release boundary
 
-Central semantic contract: ACTIVE.
-Verified Snap working implementation evidence: PASS at cited exact commit.
-Central promotion does not imply Snap main merge, ROOT activation, Netlify deployment, image generation or human visual approval.
+Central semantic contract: DRAFT V2 CUTOVER CANDIDATE.
+Verified Runtime V2 evidence spans Snap / Hide / Ready Draft consumers and the shared Source Lock; exact heads and CI status are recorded in the audit packet.
+Central promotion does not imply any project main merge, ROOT activation, Netlify deployment, image generation, composable production promotion, motion release or human visual approval.
