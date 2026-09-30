@@ -160,6 +160,16 @@
         "App UI Binding Planner",
         "Scene Orchestrator"
       ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_EVENT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Ready/Hide/Snap evidence runtimes",
+      "consumers": [
+        "Relation/Affinity Engine",
+        "Shared Memory"
+      ]
     }
   ]
 }
