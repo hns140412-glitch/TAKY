@@ -151,9 +151,11 @@ def expected_coverage(manifest: dict, kind: str)->set[str]:
             visual_states=[s["id"] for s in screen.get("states",[]) if s.get("visual_policy","GOLDEN_PARITY")=="GOLDEN_PARITY"]
             rows |= {f"{sid}:{state}:{view}" for state in visual_states for view in views}
         elif kind=="INTERACTION":
-            rows |= {f"{sid}:{state}" for state in states}
+            interaction_states=[s["id"] for s in screen.get("states",[]) if s.get("interaction_policy","REQUIRED")=="REQUIRED"]
+            rows |= {f"{sid}:{state}" for state in interaction_states}
         elif kind=="RESPONSIVE":
-            rows |= {f"{sid}:{state}:{view}" for state in states for view in views}
+            responsive_states=[s["id"] for s in screen.get("states",[]) if s.get("responsive_policy","REQUIRED")=="REQUIRED"]
+            rows |= {f"{sid}:{state}:{view}" for state in responsive_states for view in views}
         elif kind=="ASSET_INTEGRITY":
             rows.add(sid)
     return rows
