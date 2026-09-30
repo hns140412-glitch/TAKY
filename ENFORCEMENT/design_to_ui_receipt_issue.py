@@ -22,15 +22,16 @@ def expected_coverage(manifest: dict, kind: str) -> set[str]:
     for screen in manifest.get("screens", []):
         sid = screen["id"]
         state_rows = screen.get("states", [])
-        states = [s["id"] for s in state_rows]
         views = [v["id"] for v in screen.get("viewports", [])]
         if kind == "VISUAL":
             visual_states = [s["id"] for s in state_rows if s.get("visual_policy","GOLDEN_PARITY") == "GOLDEN_PARITY"]
             rows |= {f"{sid}:{state}:{view}" for state in visual_states for view in views}
         elif kind == "RESPONSIVE":
-            rows |= {f"{sid}:{state}:{view}" for state in states for view in views}
+            responsive_states = [s["id"] for s in state_rows if s.get("responsive_policy","REQUIRED") == "REQUIRED"]
+            rows |= {f"{sid}:{state}:{view}" for state in responsive_states for view in views}
         elif kind == "INTERACTION":
-            rows |= {f"{sid}:{state}" for state in states}
+            interaction_states = [s["id"] for s in state_rows if s.get("interaction_policy","REQUIRED") == "REQUIRED"]
+            rows |= {f"{sid}:{state}" for state in interaction_states}
         else:
             rows.add(sid)
     return rows
