@@ -126,7 +126,21 @@ def validate_adapter(cfg: dict, root: Path)->list[str]:
                 errors.append(f"ADAPTER_OUTPUT_INVALID:{key}")
     return errors
 
-def evidence_check(path: Path, kind: str, manifest_sha: str, source_commit: str)->str|None:
+def expected_coverage(manifest: dict, kind: str)->set[str]:
+    rows=set()
+    for screen in manifest.get("screens",[]):
+        sid=screen["id"]
+        states=[s["id"] for s in screen.get("states",[])]
+        views=[v["id"] for v in screen.get("viewports",[])]
+        if kind=="INTERACTION":
+            rows |= {f"{sid}:{state}" for state in states}
+        elif kind=="RESPONSIVE":
+            rows |= {f"{sid}:{state}:{view}" for state in states for view in views}
+        elif kind=="ASSET_INTEGRITY":
+            rows.add(sid)
+    return rows
+
+def evidence_check(path: Path, kind: str, manifest_sha: str, source_commit: str, manifest: dict)->str|None:
     if not path.is_file():
         return "EVIDENCE_MISSING"
     try:
@@ -145,6 +159,10 @@ def evidence_check(path: Path, kind: str, manifest_sha: str, source_commit: str)
         return "EVIDENCE_SOURCE_COMMIT_MISMATCH"
     if not isinstance(data.get("coverage"),list):
         return "EVIDENCE_COVERAGE_INVALID"
+    got=set(data.get("coverage") or [])
+    missing=sorted(expected_coverage(manifest,kind)-got)
+    if missing:
+        return "EVIDENCE_COVERAGE_MISSING:"+",".join(missing)
     return None
 
 def main()->int:
@@ -224,7 +242,7 @@ def main()->int:
         if cp.returncode!=0:
             return fail(root,stage,"ADAPTER_COMMAND_FAILED",{"stderr":cp.stderr[-2000:]})
         path=root/EXPECTED_OUTPUTS[stage]
-        problem=evidence_check(path,EXPECTED_KINDS[stage],manifest_sha,source_commit)
+        problem=evidence_check(path,EXPECTED_KINDS[stage],manifest_sha,source_commit,manifest)
         if problem:
             return fail(root,stage,problem,{"result":EXPECTED_OUTPUTS[stage],"contract_blockers":contract_blockers})
         completed_checks.append(stage)
