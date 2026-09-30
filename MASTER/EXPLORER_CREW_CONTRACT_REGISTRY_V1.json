@@ -150,6 +150,16 @@
       "consumers": [
         "Release Governance"
       ]
+    },
+    {
+      "id": "TAKY_SURFACE_SCENE_POLICY_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Binding Registry-derived Surface Policy",
+      "consumers": [
+        "App UI Binding Planner",
+        "Scene Orchestrator"
+      ]
     }
   ]
 }
