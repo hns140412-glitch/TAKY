@@ -16,6 +16,16 @@ required_crew=[
     "MOTION_RENDER_PLAN_READY",
     "CREW_RUNTIME_TRACE_V2",
     "runtime_policy_not_behavior_owner = true",
+    "Runtime V2 ownership and Source Lock",
+    "EXPLORER_CREW_SYSTEM_V2",
+    "runtime = CANONICAL_ONLY",
+    "behaviorOwner=false",
+    "relationOwner=false",
+    "memoryOwner=false",
+    "assetResolver=false",
+    "runtimeOwner=false",
+    "current Source Lock scope = 34",
+    "CRLF/LF normalized to LF",
 ]
 required_rel=[
     "CANONICAL 24-PERSON RELATIONSHIP LIFECYCLE",
