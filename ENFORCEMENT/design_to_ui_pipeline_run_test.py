@@ -61,38 +61,28 @@ def setup(root: Path,fail_stage: str|None=None):
 
     adapter_py=root/"tools/adapter.py"
     adapter_py.write_text("""from pathlib import Path
-import hashlib,json,shutil,sys
+import shutil,sys
 root=Path.cwd(); mode=sys.argv[1]
-manifest=root/'design-to-ui.json'
-m=json.loads(manifest.read_text())
-mh=hashlib.sha256(manifest.read_bytes()).hexdigest()
 out=root/'ui-audit';out.mkdir(exist_ok=True)
-def write(name,obj):(out/name).write_text(json.dumps(obj,indent=2)+'\\n')
 if mode=='capture':
     shutil.copyfile(root/'design/golden/home.png',out/'home.png')
-    write('render-manifest.json',{'schema':'TAKY_RENDER_MANIFEST_V1','project':m['project'],'manifest_sha256':mh,'source_commit':m['source_commit'],'entries':[{'screen_id':'home','state_id':'BASE','viewport_id':'phone','actual_path':'ui-audit/home.png','actual_sha256':hashlib.sha256((out/'home.png').read_bytes()).hexdigest()}]})
-else:
-    kind={'interaction':'INTERACTION','responsive':'RESPONSIVE','asset':'ASSET_INTEGRITY'}[mode]
-    coverage={'interaction':['home:BASE'],'responsive':['home:BASE:phone'],'asset':['home']}[mode]
-    passed=not (len(sys.argv)>2 and sys.argv[2]=='fail')
-    name={'interaction':'interaction-result.json','responsive':'responsive-result.json','asset':'asset-result.json'}[mode]
-    write(name,{'schema':'TAKY_DESIGN_EVIDENCE_V1','kind':kind,'pass':passed,'manifest_sha256':mh,'source_commit':m['source_commit'],'coverage':coverage})
-    sys.exit(0 if passed else 1)
+    sys.exit(0)
+passed=not (len(sys.argv)>2 and sys.argv[2]=='fail')
+sys.exit(0 if passed else 1)
 """,encoding="utf-8")
     fail_arg=lambda stage:["fail"] if fail_stage==stage else []
     write(root/"design-ui-adapter.json",{
       "schema":"TAKY_DESIGN_UI_ADAPTER_V1",
-      "commands":{
-        "capture":[sys.executable,"tools/adapter.py","capture"],
-        "interaction":[sys.executable,"tools/adapter.py","interaction",*fail_arg("interaction")],
-        "responsive":[sys.executable,"tools/adapter.py","responsive",*fail_arg("responsive")],
-        "asset_integrity":[sys.executable,"tools/adapter.py","asset",*fail_arg("asset_integrity")]
+      "capture":{
+        "command":[sys.executable,"tools/adapter.py","capture"],
+        "artifacts":[
+          {"screen_id":"home","state_id":"BASE","viewport_id":"phone","path":"ui-audit/home.png"}
+        ]
       },
-      "outputs":{
-        "render_manifest":"ui-audit/render-manifest.json",
-        "interaction":"ui-audit/interaction-result.json",
-        "responsive":"ui-audit/responsive-result.json",
-        "asset_integrity":"ui-audit/asset-result.json"
+      "checks":{
+        "interaction":{"command":[sys.executable,"tools/adapter.py","interaction",*fail_arg("interaction")]},
+        "responsive":{"command":[sys.executable,"tools/adapter.py","responsive",*fail_arg("responsive")]},
+        "asset_integrity":{"command":[sys.executable,"tools/adapter.py","asset",*fail_arg("asset_integrity")]}
       }
     })
 
