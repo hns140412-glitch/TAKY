@@ -23,12 +23,20 @@ def validate_chain(receipts:list[dict],expected_order:list[str])->list[str]:
     return e
 
 def resumable_prefix(receipts:list[dict],expected_order:list[str])->dict:
-    errors=validate_chain(receipts,expected_order[:len(receipts)])
-    if errors:return {"pass":False,"detected":errors}
+    by={}
+    duplicates=[]
+    for r in receipts or []:
+        if not isinstance(r,dict):continue
+        name=r.get("stage_name")
+        if name in by:duplicates.append(name)
+        else:by[name]=r
+    if duplicates:return {"pass":False,"detected":["DUPLICATE_STAGE:"+x for x in duplicates]}
     valid=[]
-    by={r.get("stage_name"):r for r in receipts if isinstance(r,dict)}
     for name in expected_order:
         r=by.get(name)
         if not r:break
+        sha=r.get("stage_receipt_sha256")
+        if not isinstance(sha,str) or len(sha)!=64:
+            return {"pass":False,"detected":["INVALID_STAGE_RECEIPT_SHA:"+name]}
         valid.append(name)
     return {"pass":True,"verified_prefix":valid,"resume_stage":expected_order[len(valid)] if len(valid)<len(expected_order) else "NONE"}
