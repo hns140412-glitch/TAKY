@@ -83,6 +83,8 @@ sys.exit(0 if passed else 1)
       "schema":"TAKY_DESIGN_UI_ADAPTER_V1",
       "capture":{
         "command":[sys.executable,"tools/adapter.py","capture"],
+        "mode":"viewport",
+        "scale":"css",
         "artifacts":[
           {"screen_id":"home","state_id":"BASE","viewport_id":"phone","path":"ui-audit/home.png"}
         ]
