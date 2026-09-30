@@ -88,7 +88,14 @@ Minimum layer roles:
 - CHARACTER_SLOT
 - FUNCTION_UI
 
-Each bound asset must carry owner, source/provenance, immutable SHA or approved external SHA pointer, anchor/fit behavior and whether it is production art or reference-only.
+Each bound art asset must carry owner, source/provenance, immutable SHA or approved external SHA pointer, anchor/fit behavior and whether it is production art or reference-only.
+
+Layer resolution states:
+- `BOUND`: local file asset with verified SHA.
+- `LIVE_DOM`: FUNCTION_UI implemented as live DOM/component with stable selector + owner.
+- `RUNTIME_SLOT`: CHARACTER_SLOT resolved dynamically through an approved resolver contract.
+- `ASSET_PRODUCTION_OPEN`: art still missing; contract work may continue, Design PASS stays blocked.
+- `NOT_APPLICABLE`: explicitly inapplicable role; omission is not allowed.
 
 Forbidden:
 - flattening the whole mockup and adding hotspots,
