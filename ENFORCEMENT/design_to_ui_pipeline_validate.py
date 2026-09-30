@@ -14,7 +14,7 @@ LAYER_SCHEMA = "TAKY_LAYER_CONTRACT_V1"
 SHA64 = re.compile(r"^[0-9a-fA-F]{64}$")
 SHA40 = re.compile(r"^[0-9a-fA-F]{40}$")
 LAYER_ROLES = {"BACKGROUND","FOREGROUND","OBJECT","CHARACTER_SLOT","FUNCTION_UI"}
-LAYER_STATUSES = {"BOUND","LIVE_DOM","RUNTIME_SLOT","ASSET_PRODUCTION_OPEN","NOT_APPLICABLE"}
+LAYER_STATUSES = {"BOUND","LIVE_DOM","RUNTIME_SLOT","ASSET_PRODUCTION_OPEN","IMPLEMENTATION_OPEN","NOT_APPLICABLE"}
 
 def sha256(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -165,6 +165,10 @@ def validate(cfg: dict, root: Path) -> dict:
                                 errors.append(f"{sid}:RUNTIME_SLOT_{key.upper()}_MISSING:{role}")
                     elif status == "ASSET_PRODUCTION_OPEN":
                         blockers.append(f"{sid}:ASSET_PRODUCTION_OPEN:{role}")
+                    elif status == "IMPLEMENTATION_OPEN":
+                        if not str(layer.get("issue","")).strip():
+                            errors.append(f"{sid}:IMPLEMENTATION_OPEN_ISSUE_MISSING:{role}")
+                        blockers.append(f"{sid}:IMPLEMENTATION_OPEN:{role}")
                 missing_roles = sorted(LAYER_ROLES - set(by_role))
                 for role in missing_roles:
                     errors.append(f"{sid}:LAYER_ROLE_UNDECLARED:{role}")
