@@ -18,6 +18,7 @@ jobs:
       - run: python -m unittest ENFORCEMENT/scene_orchestrator_test.py
       - run: python -m unittest ENFORCEMENT/scene_policy_contract_test.py
       - run: python -m unittest ENFORCEMENT/app_scene_policy_adapter_test.py
+      - run: python -m unittest ENFORCEMENT/character_scene_router_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
