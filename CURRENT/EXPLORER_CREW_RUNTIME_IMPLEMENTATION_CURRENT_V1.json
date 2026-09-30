@@ -51,7 +51,13 @@
         "Recovery Decision",
         "Owner Authorization",
         "Specialist-to-TAKY-ASSETS Handoff",
-        "Cross-repo asset compatibility E2E"
+        "Cross-repo asset compatibility E2E",
+        "Append-only runtime receipt ledger",
+        "Runtime ledger checkpoint/recovery policy",
+        "Machine-checkable runtime contract schemas",
+        "Contract version handshake",
+        "Adversarial release/ledger/registry regression suite",
+        "Current claim overstatement guard"
       ],
       "validated_through_commit": "c1778e5bbc087c74553d17d943ffd4c4f6960103"
     },
@@ -133,7 +139,10 @@
     "Registry downgrade and same-version drift blocked",
     "Failed candidate keeps previous active pointer",
     "Pipeline PASS stage cannot regress without explicit reopen",
-    "Specialist production state cannot leak into TAKY-ASSETS"
+    "Specialist production state cannot leak into TAKY-ASSETS",
+    "Runtime receipt history is append-only and checkpoint-verified",
+    "App runtime contract versions are explicitly declared and fail closed on drift",
+    "Current release claims are bounded by live blockers"
   ],
   "open_requires_images": [
     "GUIDE 07-24 independent cutout binaries and SHA",
@@ -144,10 +153,7 @@
     "Real DOM activation with approved assets"
   ],
   "open_logic_only": [
-    "Optional deeper app-specific Scene Policy tuning",
-    "Long-run receipt/log persistence policy",
-    "Formal schema/version publication for all contracts",
-    "Release candidate aggregation gate"
+    "Optional deeper app-specific Scene Policy tuning"
   ],
   "snapshot_semantics": {
     "branch_ref_is_live_authority": true,
