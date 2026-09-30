@@ -127,7 +127,37 @@ def main():
         assert vi["contract_valid"] is True and vi["design_pass_ready"] is False
         assert any("GOLDEN_IMPORT_OPEN" in x for x in vi["blockers"])
 
-        # 3) All bound layers -> ready for evidence.
+        # 3) Approved asset may be import-open without requiring new image generation.
+        manifest, golden, layer_contract = build(root, open_asset=False)
+        lc=json.loads(layer_contract.read_text(encoding="utf-8"))
+        bg=next(x for x in lc["layers"] if x["role"]=="BACKGROUND")
+        bg.clear(); bg.update({"role":"BACKGROUND","status":"ASSET_IMPORT_OPEN","sha256":"a"*64,"source_receipt":"APPROVED_ASSET_TEST","target_path":"assets/imported.png"})
+        write_json(layer_contract,lc)
+        m=json.loads(manifest.read_text(encoding="utf-8"))
+        m["screens"][0]["layer_contract"]["sha256"]=sha(layer_contract)
+        write_json(manifest,m)
+        validation_asset_import=root/"validation-asset-import-open.json"
+        run(VALIDATOR,manifest,"--root",root,"--out",validation_asset_import)
+        vai=json.loads(validation_asset_import.read_text())
+        assert vai["contract_valid"] is True and vai["design_pass_ready"] is False
+        assert "home:ASSET_IMPORT_OPEN:BACKGROUND" in vai["blockers"]
+
+        # 4) Missing implementation is a separate blocker from missing art.
+        manifest, golden, layer_contract = build(root, open_asset=False)
+        lc=json.loads(layer_contract.read_text(encoding="utf-8"))
+        obj=next(x for x in lc["layers"] if x["role"]=="OBJECT")
+        obj.clear(); obj.update({"role":"OBJECT","status":"IMPLEMENTATION_OPEN","issue":"TEST_COMPONENT_NOT_IMPLEMENTED"})
+        write_json(layer_contract,lc)
+        m=json.loads(manifest.read_text(encoding="utf-8"))
+        m["screens"][0]["layer_contract"]["sha256"]=sha(layer_contract)
+        write_json(manifest,m)
+        validation_impl=root/"validation-implementation-open.json"
+        run(VALIDATOR,manifest,"--root",root,"--out",validation_impl)
+        vii=json.loads(validation_impl.read_text())
+        assert vii["contract_valid"] is True and vii["design_pass_ready"] is False
+        assert "home:IMPLEMENTATION_OPEN:OBJECT" in vii["blockers"]
+
+        # 5) All bound layers -> ready for evidence.
         manifest, golden, _ = build(root, open_asset=False)
         validation=root/"validation.json"
         run(VALIDATOR, manifest, "--root", root, "--out", validation)
@@ -155,12 +185,12 @@ def main():
         r=json.loads(receipt.read_text())
         assert r["pass"] is True and len(r["evidence"])==4
 
-        # 4) Golden tamper must fail closed.
+        # 6) Golden tamper must fail closed.
         golden.write_bytes(b"tampered")
         run(VALIDATOR, manifest, "--root", root, expect=1)
         golden.write_bytes(b"approved-golden-bytes")
 
-        # 5) Missing evidence coverage must block receipt.
+        # 7) Missing evidence coverage must block receipt.
         evidence(visual,"VISUAL",manifest,["home:INITIAL:phone"])
         cp=subprocess.run([
             sys.executable,str(RECEIPT),
