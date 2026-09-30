@@ -21,7 +21,7 @@ const request=(action,body={})=>({method:'POST',path:P.ENDPOINT,headers:{'conten
 (async()=>{
  const store=memoryStore(),ep=P.create({verifyBearerToken:verify,store});
  let r=await ep.handle(request('GET'));let b=JSON.parse(r.body);assert.equal(r.status,200);assert.equal(b.found,false);
- const projection={member_id:'M1',character_id:'char_M1_v1',identity_version:1,master_asset_ref:'private://characters/M1/v1/master.webp',master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'};
+ const projection={member_id:'M1',character_id:'char_M1_v1',identity_version:1,master_asset_ref:'taky-character:F1:M1:char_M1_v1:v1',master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'};
  r=await ep.handle(request('PUBLISH',{projection}));b=JSON.parse(r.body);assert.equal(r.status,200);assert.equal(b.published,true);assert.ok(b.etag);
  r=await ep.handle(request('GET'));b=JSON.parse(r.body);assert.equal(b.projection.character_id,'char_M1_v1');assert.equal(b.projection.sourcePhoto,undefined);
  r=await ep.handle(request('PUBLISH',{projection:{...projection,identity_version:0,character_id:'old'}}));assert.equal(r.status,400);

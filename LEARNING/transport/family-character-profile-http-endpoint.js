@@ -1,6 +1,7 @@
 'use strict';
 
 const Identity=require('./family-member-identity-resolver.js');
+const CharacterAsset=require('./private-character-object-store-adapter.js');
 
 const VERSION='TAKY_FAMILY_CHARACTER_PROFILE_HTTP_V1';
 const ENDPOINT='/api/family/character-profile';
@@ -35,6 +36,7 @@ function normalizeProjection(input={}){
   };
   if(!p.member_id||!p.character_id||!Number.isInteger(p.identity_version)||p.identity_version<1||!p.master_asset_ref)
     return {ok:false,reason:'PROFILE_REQUIRED_FIELDS_MISSING'};
+  if(!CharacterAsset.validAssetRef(p.master_asset_ref))return {ok:false,reason:'PRIVATE_MASTER_ASSET_REF_REQUIRED'};
   if(p.master_sha256&&!SHA.test(p.master_sha256))return {ok:false,reason:'PROFILE_SHA256_INVALID'};
   if(p.status!=='CONFIRMED')return {ok:false,reason:'PROFILE_STATUS_NOT_CONFIRMED'};
   if(!Number.isFinite(Date.parse(p.updated_at)))return {ok:false,reason:'PROFILE_UPDATED_AT_INVALID'};

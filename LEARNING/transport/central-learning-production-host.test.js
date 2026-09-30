@@ -41,8 +41,15 @@ const independentIndexOwnerVerifier=()=>null;
   let server;
   try{
     const store=await new LocalJsonStrongStore(root).init();
+    const uploads=new Map();
+    const characterAssetObjectStore={
+      async createUploadTicket(meta){uploads.set('U1',{...meta,committed:false});return{upload_id:'U1',upload_url:'https://upload.example.test/U1',expires_at:'2026-09-30T09:05:00.000Z'}},
+      async commitUpload({asset_ref,upload_id,sha256}){const row=uploads.get(upload_id);if(!row||row.asset_ref!==asset_ref)return{ok:false};row.committed=true;row.sha256=sha256;return{ok:true,sha256,etag:'ASSET-E1'}},
+      async createReadTicket({asset_ref}){const row=[...uploads.values()].find(x=>x.asset_ref===asset_ref&&x.committed);return row?{read_url:'https://read.example.test/asset',expires_at:'2026-09-30T09:05:00.000Z'}:null}
+    };
     const common={clientIds:[clientId],oauth2Client,lookupMemberships,store,
       verifySpecialistEvidence,resolveIndexedEvidence,independentIndexOwnerVerifier,
+      characterAssetObjectStore,
       allowedOrigins:['https://ready.example.test']};
     assert.throws(()=>Host.create({...common,verifySpecialistEvidence:null}),
       /PRODUCTION_SPECIALIST_VERIFIER_REQUIRED/);
@@ -54,7 +61,7 @@ const independentIndexOwnerVerifier=()=>null;
       /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
 
     const host=Host.create({...common,now:()=>nowMs});
-    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile']);
+    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset']);
     assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
     server=http.createServer(host.handler);
     await new Promise((resolve,reject)=>{
@@ -77,9 +84,20 @@ const independentIndexOwnerVerifier=()=>null;
     assert.equal(body.runtime_result.trace.verified_evidence_count,0);
     assert.equal(response.headers.get('Access-Control-Allow-Origin'),'https://ready.example.test');
 
+    const assetCreate=await fetch(base+'/api/family/character-asset',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'CREATE_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',content_type:'image/webp',byte_size:2048,sha256:'a'.repeat(64),asset_version:'v1'})
+    });
+    const assetCreateBody=await assetCreate.json();assert.equal(assetCreate.status,200,JSON.stringify(assetCreateBody));assert.ok(assetCreateBody.asset_ref.startsWith('taky-character:'));
+    const assetCommit=await fetch(base+'/api/family/character-asset',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',asset_ref:assetCreateBody.asset_ref,upload_id:assetCreateBody.upload_id,sha256:'a'.repeat(64)})
+    });
+    assert.equal(assetCommit.status,200);
+
     const published=await fetch(base+'/api/family/character-profile',{
       method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
-      body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:'private://characters/CHILD_A/v1/master.webp',master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'}})
+      body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:assetCreateBody.asset_ref,master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'}})
     });
     const publishedBody=await published.json();assert.equal(published.status,200,JSON.stringify(publishedBody));assert.equal(publishedBody.published,true);
     const fetched=await fetch(base+'/api/family/character-profile',{
@@ -96,7 +114,7 @@ const independentIndexOwnerVerifier=()=>null;
     });
     assert.equal(denied.status,403);
 
-    console.log('CENTRAL_PRODUCTION_HOST_PASS: strict provider wiring, Google ID token auth, CORS and dual endpoints');
+    console.log('CENTRAL_PRODUCTION_HOST_PASS: identity auth, CORS, learning + character profile + private character asset endpoints');
   }finally{
     if(server)await new Promise(resolve=>server.close(resolve));
     await fs.rm(root,{recursive:true,force:true});
