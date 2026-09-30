@@ -46,6 +46,13 @@ def verify(root=ROOT, standard=None):
     artc=s.get("art_contract",{})
     if artc.get("required_depth_layers")!=["base","bg","subject","fx"]:
         errors.append("DEPTH_LAYER_CONTRACT_DRIFT")
+    required_delivery={"manifest.json","base.png","bg.png","subject.png","fx.png","composite.png",
+                       "preview-64.png","preview-120.png","preview-200.png","preview-320.png",
+                       "depth-profile.json","review.json"}
+    if set(artc.get("required_delivery",[]))!=required_delivery:
+        errors.append("DELIVERY_CONTRACT_DRIFT")
+    if not s.get("extensibility",{}).get("reviewed_baseline"):
+        errors.append("REVIEWED_BASELINE_REQUIRED")
     depth=s.get("depth_detail_only",{})
     if depth.get("enabled_surface")!="BADGE_DETAIL_VIEW_ONLY":
         errors.append("DEPTH_SCOPE_DRIFT")
