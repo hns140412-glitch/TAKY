@@ -126,6 +126,14 @@ def main():
         assert s["status"]=="CONTRACT_BLOCKED",s
         assert s["routing"]["return_to_stage"]=="UI_CONTRACT",s
         assert s["routing"]["owner"]=="ASSET_CONTRACT",s
+        assert "interaction" in s["evidence"]["completed_checks"],s
+        assert "responsive" in s["evidence"]["completed_checks"],s
+        assert "asset_integrity" in s["evidence"]["completed_checks"],s
+        assert "visual" in s["evidence"]["deferred_checks"],s
+        assert (root/"ui-audit/interaction-result.json").is_file()
+        assert (root/"ui-audit/responsive-result.json").is_file()
+        assert (root/"ui-audit/asset-result.json").is_file()
+        assert not (root/"ui-audit/design-receipt.json").exists()
 
     print("DESIGN_TO_UI_PIPELINE_RUNNER_V1=PASS")
     return 0
