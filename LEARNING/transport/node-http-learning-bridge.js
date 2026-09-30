@@ -5,6 +5,7 @@ const {MAX_BODY_BYTES,ENDPOINT}=require('./central-learning-http-endpoint.js');
 const Decision=require('./central-learning-decision-http-endpoint.js');
 const CharacterProfile=require('./family-character-profile-http-endpoint.js');
 const CharacterAsset=require('./family-character-asset-http-endpoint.js');
+const FamilySession=require('./family-session-http-endpoint.js');
 const VERSION='TAKY_NODE_HTTP_CENTRAL_LEARNING_BRIDGE_V1';
 const baseHeaders=Object.freeze({
  'Content-Type':'application/json; charset=utf-8',
@@ -25,7 +26,7 @@ const clean=v=>typeof v==='string'?v.trim():'';
  * Only the explicit Origin allowlist receives CORS approval. A cross-origin
  * browser needs Authorization: Bearer and application/json, never wildcard.
  */
-function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,characterAssetEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
+function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,characterAssetEndpoint=null,familySessionEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
  if(typeof endpoint?.handle!=='function')throw Error('CENTRAL_LEARNING_ENDPOINT_REQUIRED');
  if(decisionEndpoint!==null&&typeof decisionEndpoint?.handle!=='function')
    throw Error('CENTRAL_DECISION_ENDPOINT_INVALID');
@@ -33,6 +34,8 @@ function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=
    throw Error('FAMILY_CHARACTER_PROFILE_ENDPOINT_INVALID');
  if(characterAssetEndpoint!==null&&typeof characterAssetEndpoint?.handle!=='function')
    throw Error('FAMILY_CHARACTER_ASSET_ENDPOINT_INVALID');
+ if(familySessionEndpoint!==null&&typeof familySessionEndpoint?.handle!=='function')
+   throw Error('FAMILY_SESSION_ENDPOINT_INVALID');
  if(!Array.isArray(allowedOrigins)||new Set(allowedOrigins).size!==allowedOrigins.length||
     allowedOrigins.some(s=>!clean(s)||!/^https:\/\/[^/]+$/.test(s)))
    throw Error('EXPLICIT_HTTPS_ORIGIN_ALLOWLIST_REQUIRED');
@@ -53,11 +56,11 @@ function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=
    try{path=new URL(req.url,'http://127.0.0.1').pathname}
    catch{return fail(res,400,'REQUEST_PATH_INVALID',cors)}
    if(req.method==='OPTIONS'){
-     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[]),...(characterProfileEndpoint?[CharacterProfile.ENDPOINT]:[]),...(characterAssetEndpoint?[CharacterAsset.ENDPOINT]:[])].includes(path)||!origin)
+     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[]),...(characterProfileEndpoint?[CharacterProfile.ENDPOINT]:[]),...(characterAssetEndpoint?[CharacterAsset.ENDPOINT]:[]),...(familySessionEndpoint?[FamilySession.ENDPOINT]:[])].includes(path)||!origin)
       return fail(res,404,'PREFLIGHT_NOT_ALLOWED',cors);
      res.writeHead(204,{...baseHeaders,...cors});res.end();return;
    }
-   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT)&&(!characterProfileEndpoint||path!==CharacterProfile.ENDPOINT)&&(!characterAssetEndpoint||path!==CharacterAsset.ENDPOINT))
+   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT)&&(!characterProfileEndpoint||path!==CharacterProfile.ENDPOINT)&&(!characterAssetEndpoint||path!==CharacterAsset.ENDPOINT)&&(!familySessionEndpoint||path!==FamilySession.ENDPOINT))
      return fail(res,404,'CENTRAL_LEARNING_ENDPOINT_NOT_FOUND',cors);
    if(req.method!=='POST')return fail(res,405,'POST_REQUIRED',cors);
    const length=Number(req.headers?.['content-length']);
@@ -77,7 +80,7 @@ function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=
    }
    let result;
    try{
-     const target=path===Decision.ENDPOINT?decisionEndpoint:path===CharacterProfile.ENDPOINT?characterProfileEndpoint:path===CharacterAsset.ENDPOINT?characterAssetEndpoint:endpoint;
+     const target=path===Decision.ENDPOINT?decisionEndpoint:path===CharacterProfile.ENDPOINT?characterProfileEndpoint:path===CharacterAsset.ENDPOINT?characterAssetEndpoint:path===FamilySession.ENDPOINT?familySessionEndpoint:endpoint;
      result=await target.handle({
        method:req.method,path,headers:req.headers,
        body:Buffer.concat(chunks,size).toString('utf8')

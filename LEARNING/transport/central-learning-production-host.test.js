@@ -61,7 +61,7 @@ const independentIndexOwnerVerifier=()=>null;
       /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
 
     const host=Host.create({...common,now:()=>nowMs});
-    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset']);
+    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset','/api/family/session']);
     assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
     server=http.createServer(host.handler);
     await new Promise((resolve,reject)=>{
@@ -83,6 +83,9 @@ const independentIndexOwnerVerifier=()=>null;
       'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
     assert.equal(body.runtime_result.trace.verified_evidence_count,0);
     assert.equal(response.headers.get('Access-Control-Allow-Origin'),'https://ready.example.test');
+
+    const session=await fetch(base+'/api/family/session',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},body:'{}'});
+    const sessionBody=await session.json();assert.equal(session.status,200,JSON.stringify(sessionBody));assert.equal(sessionBody.session.families[0].family_id,'F1');assert.ok(sessionBody.session.families[0].authorized_member_ids.includes('CHILD_A'));
 
     const assetCreate=await fetch(base+'/api/family/character-asset',{
       method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
