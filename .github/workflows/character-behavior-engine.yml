@@ -37,6 +37,7 @@ jobs:
       - run: python -m unittest ENFORCEMENT/specialist_resume_authorization_test.py
       - run: python -m unittest ENFORCEMENT/cross_repo_asset_contract_test.py
       - run: python -m unittest ENFORCEMENT/explorer_crew_release_gate_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_current_release_status_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
