@@ -51,13 +51,20 @@ function create({
   });
   const characterProfileEndpoint=CharacterProfile.create({verifyBearerToken,store});
   const characterAssetEndpoint=characterAssetObjectStore?CharacterAsset.create({verifyBearerToken,objectStore:characterAssetObjectStore}):null;
-  const handler=NodeBridge.createHandler({
+  const apiHandler=NodeBridge.createHandler({
     endpoint:evidenceEndpoint,
     decisionEndpoint,
     characterProfileEndpoint,
     characterAssetEndpoint,
     allowedOrigins
   });
+  const handler=async(req,res)=>{
+    if(characterAssetObjectStore&&typeof characterAssetObjectStore.handleHttp==='function'){
+      const handled=await characterAssetObjectStore.handleHttp(req,res);
+      if(handled)return;
+    }
+    return apiHandler(req,res);
+  };
 
   return Object.freeze({
     version:VERSION,
