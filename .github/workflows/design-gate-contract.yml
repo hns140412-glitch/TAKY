@@ -1,0 +1,21 @@
+name: Design Gate Contract
+
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/design_gate_manifest_validate.py'
+      - 'ENFORCEMENT/design_gate_manifest_validate_test.py'
+      - '.github/workflows/design-gate-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'ENFORCEMENT/design_gate_manifest_validate.py'
+      - 'ENFORCEMENT/design_gate_manifest_validate_test.py'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Design Gate contract behavior
+        run: python -m unittest ENFORCEMENT/design_gate_manifest_validate_test.py
