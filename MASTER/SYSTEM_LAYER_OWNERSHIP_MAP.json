@@ -112,6 +112,56 @@
         "learning progress/history meaning"
       ]
     },
+    "LEARNING_DOMAIN_CORE": {
+      "class": "LEARNING_DOMAIN_SEMANTIC_GROUP",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "LEARNING_OS",
+      "state": "SUPPORT_MAP_REFLECTION_CANDIDATE__NO_RUNTIME_PROMOTION",
+      "owns": [
+        "independent Learning Engine, Planner and Assignment FACT service composition",
+        "learning evidence/history domain relations"
+      ],
+      "does_not_own": [
+        "Ready execution UI/session runtime",
+        "Work OS organization identity/authority",
+        "shared technical adapter semantics"
+      ]
+    },
+    "PLANNER_ENGINE": {
+      "class": "DOMAIN_PLANNING_PROGRESS_SERVICE",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "LEARNING_DOMAIN_CORE",
+      "state": "INDEPENDENT_SEMANTIC_OWNER_CANDIDATE__DEDICATED_CONTRACT_PENDING",
+      "owns": [
+        "life/academy/school commitments and availability/capacity interpretation",
+        "deadlines and recurrence",
+        "weekly/daily plan composition and DATED TODO authority",
+        "carry-over/reflow, plan-vs-actual, progress aggregation and next-plan forecast"
+      ],
+      "does_not_own": [
+        "Ready child-facing TODAY/Mission/Focus/Result UX",
+        "learner skill/retention interpretation",
+        "raw OCR intake or unconfirmed assignment FACT",
+        "Work OS organizational task meaning"
+      ],
+      "implementation_host_note": "Ready may host current planner code/projection temporarily; code location does not transfer semantic authority.",
+      "evidence_source": "C2S/TAKY_SYSTEM_ARCHITECTURE_REALIGNMENT_C2S_CLOSURE_2026-09-22.md §§5,6,11"
+    },
+    "ASSIGNMENT_FACT_DOMAIN": {
+      "class": "DOMAIN_CONFIRMED_FACT_SERVICE",
+      "semantic_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "parent": "LEARNING_DOMAIN_CORE",
+      "state": "SUPPORT_MAP_REFLECTION_CANDIDATE__FACT_RUNTIME_UNVERIFIED",
+      "owns": [
+        "reviewed and confirmed assignment/homework FACT lifecycle and provenance"
+      ],
+      "does_not_own": [
+        "Ready capture UI",
+        "raw OCR draft automatic commit",
+        "Planner dated allocation"
+      ],
+      "evidence_source": "C2S/MASTER_LOGIC_VERTICAL_HORIZONTAL_AUDIT_2026-09-22.md §9"
+    },
     "LEARNING_APP_FAMILY": {
       "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
       "semantic_owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
@@ -210,7 +260,7 @@
     "LEARNING_ENGINE_CORE": {
       "class": "DOMAIN_INTELLIGENCE_ENGINE",
       "semantic_owner": "OS/LEARNING_ENGINE_CORE.md",
-      "parent": "LEARNING_OS",
+      "parent": "LEARNING_DOMAIN_CORE",
       "owns": [
         "learner skill state schema",
         "learning evidence interpretation",
@@ -343,6 +393,18 @@
       "owner": "LEARNING_OS"
     },
     {
+      "item": "Planner dated allocation, carry-over and cross-app plan/progress meaning",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "PLANNER_ENGINE",
+      "state": "CANDIDATE_SUPPORT_MAP_REFLECTION"
+    },
+    {
+      "item": "Reviewed assignment/homework FACT semantics",
+      "class": "DOMAIN_OWNED_SEMANTIC",
+      "owner": "ASSIGNMENT_FACT_DOMAIN",
+      "state": "CANDIDATE_SUPPORT_MAP_REFLECTION"
+    },
+    {
       "item": "learner modeling and pedagogical adaptation semantics",
       "class": "DOMAIN_OWNED_SEMANTIC",
       "owner": "LEARNING_ENGINE_CORE",
@@ -380,6 +442,30 @@
       "to": "LEARNING_ENGINE_CORE",
       "allowed": "versioned evidence and confirmed learning-context input",
       "forbidden": "app-specific score semantics promoted to universal mastery without Core interpretation"
+    },
+    {
+      "from": "LEARNING_ENGINE_CORE",
+      "to": "PLANNER_ENGINE",
+      "allowed": "versioned learning-unit sizing, review-need and load recommendation",
+      "forbidden": "Learning Engine choosing calendar dates or mutating dated TODO authority"
+    },
+    {
+      "from": "ASSIGNMENT_FACT_DOMAIN",
+      "to": "PLANNER_ENGINE",
+      "allowed": "confirmed assignment/homework FACT projection with source provenance",
+      "forbidden": "unconfirmed OCR drafts or raw capture promoted as schedulable FACT"
+    },
+    {
+      "from": "PLANNER_ENGINE",
+      "to": "READY_SET",
+      "allowed": "versioned dated TODO/weekly-daily executable plan projection",
+      "forbidden": "Ready becoming global date/allocation/carry-over semantic owner"
+    },
+    {
+      "from": "READY_SET",
+      "to": "PLANNER_ENGINE",
+      "allowed": "actual execution result, duration, partial/blocked/deferred/completed evidence",
+      "forbidden": "Ready directly mutating Planner source state without owner contract"
     }
   ],
   "review_findings": [
