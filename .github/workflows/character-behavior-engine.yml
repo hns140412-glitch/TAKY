@@ -15,5 +15,6 @@ jobs:
       - run: python -m unittest ENFORCEMENT/character_behavior_engine_test.py
       - run: python -m unittest ENFORCEMENT/relation_affinity_engine_test.py
       - run: python -m unittest ENFORCEMENT/runtime_eligibility_gate_test.py
+      - run: python -m unittest ENFORCEMENT/scene_orchestrator_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
