@@ -16,7 +16,11 @@ ACTION_PARTS={
  "USE_RADIO":["BODY","FACE","HAND","EQUIPMENT"],
  "CHEER":["BODY","FACE","ARM"],
  "THINK":["BODY","FACE"],
- "POINT":["BODY","FACE","ARM","HAND"]
+ "POINT":["BODY","FACE","ARM","HAND"],
+ "CHECK_COMPASS":["BODY","FACE","HAND","EQUIPMENT"],
+ "ORGANIZE_BAG":["BODY","FACE","HAND","PROP"],
+ "USE_MAGNIFIER":["BODY","FACE","HAND","EQUIPMENT"],
+ "REST":["BODY","FACE"]
 }
 
 def select_character(state:dict)->dict:
@@ -26,7 +30,8 @@ def select_character(state:dict)->dict:
     if not eligible:return {"pass":False,"error":"NO_AVAILABLE_CHARACTER"}
 
     owner=state.get("chapter_owner")
-    if owner:
+    owner_turn=bool(state.get("owner_required") or state.get("owner_turn"))
+    if owner and owner_turn:
         c=next((x for x in eligible if x.get("character_id")==owner),None)
         if c:return {"character":c,"role":"CHAPTER_OWNER"}
 
@@ -34,6 +39,10 @@ def select_character(state:dict)->dict:
     if main:
         c=next((x for x in eligible if x.get("character_id")==main),None)
         if c:return {"character":c,"role":"MAIN"}
+
+    if owner:
+        c=next((x for x in eligible if x.get("character_id")==owner),None)
+        if c:return {"character":c,"role":"CHAPTER_OWNER"}
 
     eligible=sorted(eligible,key=lambda x:(x.get("recent_count",0),x.get("character_id","")))
     return {"character":eligible[0],"role":"AMBIENT"}
