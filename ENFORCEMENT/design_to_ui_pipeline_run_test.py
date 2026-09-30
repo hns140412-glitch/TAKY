@@ -14,6 +14,14 @@ def write(path: Path,obj):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
 
+def git_commit(root: Path,message: str):
+    if not (root/".git").exists():
+        subprocess.run(["git","init","-q"],cwd=root,check=True)
+        subprocess.run(["git","config","user.email","test@example.com"],cwd=root,check=True)
+        subprocess.run(["git","config","user.name","TAKY Test"],cwd=root,check=True)
+    subprocess.run(["git","add","-A"],cwd=root,check=True)
+    subprocess.run(["git","commit","-qm",message],cwd=root,check=True)
+
 def setup(root: Path,fail_stage: str|None=None):
     (root/"design/golden").mkdir(parents=True)
     (root/"design/contracts").mkdir(parents=True)
@@ -85,6 +93,7 @@ sys.exit(0 if passed else 1)
         "asset_integrity":{"command":[sys.executable,"tools/adapter.py","asset",*fail_arg("asset_integrity")],"coverage":["home"]}
       }
     })
+    git_commit(root,"fixture")
 
 def run(root: Path):
     return subprocess.run([sys.executable,str(RUNNER),"--root",str(root)],text=True,capture_output=True)
@@ -100,6 +109,7 @@ def main():
 
     with tempfile.TemporaryDirectory() as td:
         root=Path(td);setup(root,"interaction")
+        write(root/"ui-audit/design-receipt.json",{"stale":True})
         cp=run(root)
         assert cp.returncode!=0
         s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
@@ -130,6 +140,7 @@ def main():
         a=json.loads((root/"design-ui-adapter.json").read_text())
         a["checks"]["interaction"]["coverage"]=[]
         write(root/"design-ui-adapter.json",a)
+        git_commit(root,"coverage mutation")
         cp=run(root)
         assert cp.returncode!=0
         s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
@@ -144,6 +155,7 @@ def main():
         a=json.loads((root/"design-ui-adapter.json").read_text())
         a["checks"]["interaction"]["coverage"]=[]
         write(root/"design-ui-adapter.json",a)
+        git_commit(root,"not applicable mutation")
         cp=run(root)
         assert cp.returncode==0,(cp.stdout,cp.stderr)
         s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
