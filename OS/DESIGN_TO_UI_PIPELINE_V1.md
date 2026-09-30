@@ -164,6 +164,17 @@ VISUAL evidence는 중앙 Visual Compare가 생성한다.
 
 부분 재개 체크포인트는 만들지 않는다. 수정 후에는 항상 전체 Runner를 다시 실행한다. 앞 단계는 결정적 검증이므로 재실행 비용보다 상태 분기/중복을 줄이는 것을 우선한다.
 
+### OPEN 처리 원칙
+`ASSET_PRODUCTION_OPEN`, `ASSET_IMPORT_OPEN`, `IMPLEMENTATION_OPEN`, `GOLDEN_IMPORT_OPEN`은 **최종 Design PASS 차단 사유**이지, 무조건 전체 작업 중단 사유가 아니다.
+
+- contract 자체가 invalid하면 즉시 중단
+- contract는 valid하지만 OPEN blocker가 있으면 가능한 독립 검증은 계속 수행
+- blocker 때문에 의미 없는 Visual Compare는 `deferred` 처리
+- interaction / responsive / asset-integrity 등 독립 검증은 계속 수행
+- 최종 Receipt는 blocker가 0개일 때만 발급
+
+즉 이미지 생성이 제한되어도 나머지 파이프라인은 전진할 수 있다.
+
 ## 범위 밖
 Design-to-UI Pipeline이 판단하지 않는 것:
 - OCR 정확도
