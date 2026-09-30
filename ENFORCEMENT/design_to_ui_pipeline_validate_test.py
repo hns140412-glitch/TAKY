@@ -205,6 +205,19 @@ def main():
         cp=subprocess.run([sys.executable,str(VALIDATOR),str(manifest_rule),"--root",str(root)],text=True,capture_output=True)
         assert cp.returncode != 0 and "GOLDEN_PARITY_STATE_REQUIRED" in cp.stdout
 
+        # Restore an isolated valid fixture after the rule-negative cases above.
+        manifest, golden, _ = build(root, open_asset=False)
+        validation=root/"validation.json"
+        run(VALIDATOR, manifest, "--root", root, "--out", validation)
+        visual=audit/"visual-result.json"
+        interaction=audit/"interaction-result.json"
+        responsive=audit/"responsive-result.json"
+        asset=audit/"asset-result.json"
+        evidence(visual,"VISUAL",manifest,["home:INITIAL:phone"])
+        evidence(interaction,"INTERACTION",manifest,["home:INITIAL","home:EMPTY"])
+        evidence(responsive,"RESPONSIVE",manifest,["home:INITIAL:phone","home:EMPTY:phone"])
+        evidence(asset,"ASSET_INTEGRITY",manifest,["home"])
+
         # 7) Golden tamper must fail closed.
         golden.write_bytes(b"tampered")
         run(VALIDATOR, manifest, "--root", root, expect=1)
