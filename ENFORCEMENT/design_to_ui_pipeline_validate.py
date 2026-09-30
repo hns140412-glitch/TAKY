@@ -88,17 +88,25 @@ def validate(cfg: dict, root: Path) -> dict:
         golden = screen.get("golden", {})
         if golden.get("use") != "REFERENCE_ONLY":
             errors.append(f"{sid}:GOLDEN_USE_MUST_BE_REFERENCE_ONLY")
+        gstatus = str(golden.get("status",""))
+        if gstatus not in ("BOUND","IMPORT_OPEN"):
+            errors.append(f"{sid}:GOLDEN_STATUS_INVALID")
+        if not str(golden.get("source_receipt","")).strip():
+            errors.append(f"{sid}:GOLDEN_SOURCE_RECEIPT_MISSING")
         gpath = str(golden.get("path",""))
         gsha = str(golden.get("sha256",""))
+        if not SHA64.match(gsha):
+            errors.append(f"{sid}:GOLDEN_SHA_MISSING")
         gp = safe_file(root, gpath) if gpath else None
         if gp is None:
             errors.append(f"{sid}:GOLDEN_PATH_INVALID")
-        elif not gp.is_file():
-            errors.append(f"{sid}:GOLDEN_MISSING")
-        elif not SHA64.match(gsha):
-            errors.append(f"{sid}:GOLDEN_SHA_MISSING")
-        elif sha256(gp).lower() != gsha.lower():
-            errors.append(f"{sid}:GOLDEN_SHA_MISMATCH")
+        elif gstatus == "BOUND":
+            if not gp.is_file():
+                errors.append(f"{sid}:GOLDEN_MISSING")
+            elif SHA64.match(gsha) and sha256(gp).lower() != gsha.lower():
+                errors.append(f"{sid}:GOLDEN_SHA_MISMATCH")
+        elif gstatus == "IMPORT_OPEN":
+            blockers.append(f"{sid}:GOLDEN_IMPORT_OPEN")
 
         sc = screen.get("screen_contract", {})
         scfg = read_json_file(root, str(sc.get("path","")), str(sc.get("sha256","")), errors, f"{sid}:SCREEN_CONTRACT")
