@@ -1,0 +1,36 @@
+name: Design-to-UI Pipeline Contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'OS/DESIGN_TO_UI_PIPELINE_V1.md'
+      - 'CONTRACTS/design-to-ui-pipeline.v1.schema.json'
+      - 'ENFORCEMENT/design_to_ui_pipeline_validate.py'
+      - 'ENFORCEMENT/design_to_ui_receipt_issue.py'
+      - 'ENFORCEMENT/design_to_ui_pipeline_validate_test.py'
+      - '.github/workflows/design-to-ui-pipeline-contract.yml'
+  push:
+    branches:
+      - 'taky/design-to-ui-pipeline-v1-*'
+    paths:
+      - 'OS/DESIGN_TO_UI_PIPELINE_V1.md'
+      - 'CONTRACTS/design-to-ui-pipeline.v1.schema.json'
+      - 'ENFORCEMENT/design_to_ui_pipeline_validate.py'
+      - 'ENFORCEMENT/design_to_ui_receipt_issue.py'
+      - 'ENFORCEMENT/design_to_ui_pipeline_validate_test.py'
+      - '.github/workflows/design-to-ui-pipeline-contract.yml'
+
+jobs:
+  contract-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python syntax
+        run: |
+          python -m py_compile ENFORCEMENT/design_to_ui_pipeline_validate.py
+          python -m py_compile ENFORCEMENT/design_to_ui_receipt_issue.py
+          python -m py_compile ENFORCEMENT/design_to_ui_pipeline_validate_test.py
+      - name: Design-to-UI regression
+        run: python ENFORCEMENT/design_to_ui_pipeline_validate_test.py
