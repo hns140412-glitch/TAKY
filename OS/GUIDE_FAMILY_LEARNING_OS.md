@@ -404,6 +404,7 @@ Family platform candidates/capabilities include authentication, member identity,
 Identity separation:
 - authentication ≠ member identity ≠ role ≠ storage connection.
 - memberId is the internal stable identity; visible names/kinship labels are presentation/context.
+- Cross-app child Character Master reuse is a member-scoped family profile projection governed by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; raw child photos and private Character Masters are not public TAKY-ASSETS data.
 - do not require a separate Google account for each child.
 
 Storage:

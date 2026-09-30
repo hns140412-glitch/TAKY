@@ -77,6 +77,37 @@ Project apps may use different scene skins, poses and interaction cues, but SHAL
 Badge rendering may consume the same child-scoped character overlay reference.
 Base badge art and child character overlay remain separate assets/layers.
 
+### 6.1 Family Character Profile Projection — HARD LOCK
+
+User-generated child Character Masters are private family/member data, not public TAKY-ASSETS content.
+`TAKY-ASSETS` may contain schemas, static shared assets and release-safe shared metadata, but SHALL NOT become the public storage location for a child's raw photo or private Character Master merely because the character is reused across apps.
+
+Cross-app sharing uses a family/member-scoped runtime projection owned by the Learning/Family domain:
+
+`READY CHARACTER MASTER CONFIRMATION -> FAMILY CHARACTER PROFILE PROJECTION -> READY / HIDE / SNAP CONSUMERS`.
+
+Minimum projection fields:
+- `member_id`
+- `character_id`
+- `identity_version`
+- `master_asset_ref`
+- `master_sha256` when available
+- `asset_version`
+- `derivative_refs`
+- `status`
+- `updated_at`
+
+The projection SHALL NOT contain the raw source photo.
+Apps may cache the resolved release-safe Character Master locally for offline use, but the local cache is not a new identity authority.
+
+Ownership:
+- Ready onboarding may create and confirm the user's Character Master.
+- Family profile runtime/storage owns the cross-app pointer and member binding.
+- Hide & Seek and Snap & Pop consume the projection; they SHALL NOT independently regenerate the same child identity.
+- Character Behavior Engine consumes the confirmed `character_id` and approved asset refs only.
+
+Provider/transport remains adapter-driven. Until an authorized family-profile backend/provider is configured, cross-origin propagation is `NOT_RUNTIME_COMPLETE`; local app state alone SHALL NOT be reported as cross-app sync.
+
 ## 7. INTRO / ONBOARDING CONTRACT
 
 The approved intro flow may invoke the Asset Generation Engine during character creation, then persist the resulting Character Master before normal app entry.
