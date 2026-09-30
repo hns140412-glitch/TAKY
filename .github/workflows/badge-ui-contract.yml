@@ -39,6 +39,10 @@ jobs:
           python-version: '3.12'
       - name: Install isolated SVG raster QA dependencies
         run: python -m pip install cairosvg pillow
+      - name: Lock badge production inputs before generation
+        run: |
+          python BADGE/production/verify_badge_production_pipeline.py
+          python BADGE/production/verify_badge_production_pipeline_test.py
       - name: Hard-block invented or unreviewed production art bytes
         run: |
           python BADGE/assets/verify_art_admission.py
