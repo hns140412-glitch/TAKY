@@ -51,6 +51,11 @@ jobs:
         run: |
           python BADGE/production/verify_badge_production_standard_v2.py
           python BADGE/production/verify_badge_production_standard_v2_test.py
+      - name: Deterministic all-badge production packets and future-badge routing
+        run: |
+          python BADGE/production/build_badge_production_packets_v2.py --check
+          python BADGE/production/verify_badge_production_packets_v2.py
+          python BADGE/production/verify_badge_production_packets_v2_test.py
       - name: Hard-block invented or unreviewed production art bytes
         run: |
           python BADGE/assets/verify_art_admission.py
