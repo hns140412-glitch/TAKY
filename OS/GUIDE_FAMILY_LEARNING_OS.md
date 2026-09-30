@@ -590,6 +590,7 @@ Preferred security shape where applicable:
 - current GUIDE details are canonicalized here at OS level; detailed subject logic remains in Subject/PRACTICE Sub-Masters.
 - exact Ready & Set UI/timer/device behavior remains PROJECT-owned until migrated/validated; omission from this OS file is not deletion.
 - exact Core 6 visual-character state remains in `PROJECTS/GUIDE_CORE6_CHARACTER.md`; current image production remains HOLD there.
+- shared Exploration Crew behavior→semantic-command→asset→renderer separation, composable asset groups, fallback and three-gate rules are canonicalized in `OS/EXPLORATION_CREW_CANONICAL.md`; project-specific presentation remains project-owned.
 
 ### HOLD
 Retain intentionally without silent adoption:

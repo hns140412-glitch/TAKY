@@ -5,7 +5,7 @@
 > Date: 2026-09-06
 > Scope: Ready & Set / Hide & Seek / Snap & Pop shared world, session, app-routing, Guide and PWA update contracts
 > Authority: TAKY / GRAND MASTER > applicable GUIDE / Family Learning OS rules > this shared capability contract > project masters > implementation
-> Load OS/GUIDE_FAMILY_LEARNING_OS.md first, and OS/GUIDE_CHARACTER_RELATIONSHIP.md when applicable. No existing Guide authority or project behavior is redefined by this metadata correction.
+> Load OS/GUIDE_FAMILY_LEARNING_OS.md first, then OS/GUIDE_CHARACTER_RELATIONSHIP.md and OS/EXPLORATION_CREW_CANONICAL.md when character/crew behavior, asset composition, or cross-app crew inheritance is applicable. No project-specific UI, dialogue, or release authority is silently centralized.
 
 ## 1. PRODUCT FAMILY PRINCIPLE — HARD LOCK
 
