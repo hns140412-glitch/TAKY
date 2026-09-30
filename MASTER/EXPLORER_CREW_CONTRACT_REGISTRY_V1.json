@@ -181,6 +181,17 @@
         "Hide live Crew runtime",
         "Snap live Crew runtime"
       ]
+    },
+    {
+      "id": "TAKY_EXPLORER_CREW_BROWSER_RELATION_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Shared Browser Explorer Crew Relation Projection Runtime",
+      "consumers": [
+        "Ready Crew Evidence Runtime",
+        "Hide Crew Evidence Runtime",
+        "Snap Crew Evidence Runtime"
+      ]
     }
   ]
 }
