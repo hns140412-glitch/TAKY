@@ -54,7 +54,7 @@ const independentIndexOwnerVerifier=()=>null;
       /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
 
     const host=Host.create({...common,now:()=>nowMs});
-    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision']);
+    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile']);
     assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
     server=http.createServer(host.handler);
     await new Promise((resolve,reject)=>{
@@ -76,6 +76,17 @@ const independentIndexOwnerVerifier=()=>null;
       'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
     assert.equal(body.runtime_result.trace.verified_evidence_count,0);
     assert.equal(response.headers.get('Access-Control-Allow-Origin'),'https://ready.example.test');
+
+    const published=await fetch(base+'/api/family/character-profile',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:'private://characters/CHILD_A/v1/master.webp',master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'}})
+    });
+    const publishedBody=await published.json();assert.equal(published.status,200,JSON.stringify(publishedBody));assert.equal(publishedBody.published,true);
+    const fetched=await fetch(base+'/api/family/character-profile',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'GET',family_id:'F1',member_id:'CHILD_A'})
+    });
+    const fetchedBody=await fetched.json();assert.equal(fetched.status,200);assert.equal(fetchedBody.projection.character_id,'char_CHILD_A_v1');
 
     const denied=await fetch(base+'/api/learning/decision',{
       method:'POST',

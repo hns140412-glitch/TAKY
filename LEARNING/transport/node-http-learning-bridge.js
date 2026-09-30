@@ -3,6 +3,7 @@
 const {URL}=require('node:url');
 const {MAX_BODY_BYTES,ENDPOINT}=require('./central-learning-http-endpoint.js');
 const Decision=require('./central-learning-decision-http-endpoint.js');
+const CharacterProfile=require('./family-character-profile-http-endpoint.js');
 const VERSION='TAKY_NODE_HTTP_CENTRAL_LEARNING_BRIDGE_V1';
 const baseHeaders=Object.freeze({
  'Content-Type':'application/json; charset=utf-8',
@@ -23,10 +24,12 @@ const clean=v=>typeof v==='string'?v.trim():'';
  * Only the explicit Origin allowlist receives CORS approval. A cross-origin
  * browser needs Authorization: Bearer and application/json, never wildcard.
  */
-function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
+function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
  if(typeof endpoint?.handle!=='function')throw Error('CENTRAL_LEARNING_ENDPOINT_REQUIRED');
  if(decisionEndpoint!==null&&typeof decisionEndpoint?.handle!=='function')
    throw Error('CENTRAL_DECISION_ENDPOINT_INVALID');
+ if(characterProfileEndpoint!==null&&typeof characterProfileEndpoint?.handle!=='function')
+   throw Error('FAMILY_CHARACTER_PROFILE_ENDPOINT_INVALID');
  if(!Array.isArray(allowedOrigins)||new Set(allowedOrigins).size!==allowedOrigins.length||
     allowedOrigins.some(s=>!clean(s)||!/^https:\/\/[^/]+$/.test(s)))
    throw Error('EXPLICIT_HTTPS_ORIGIN_ALLOWLIST_REQUIRED');
@@ -47,11 +50,11 @@ function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBody
    try{path=new URL(req.url,'http://127.0.0.1').pathname}
    catch{return fail(res,400,'REQUEST_PATH_INVALID',cors)}
    if(req.method==='OPTIONS'){
-     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[])].includes(path)||!origin)
+     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[]),...(characterProfileEndpoint?[CharacterProfile.ENDPOINT]:[])].includes(path)||!origin)
       return fail(res,404,'PREFLIGHT_NOT_ALLOWED',cors);
      res.writeHead(204,{...baseHeaders,...cors});res.end();return;
    }
-   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT))
+   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT)&&(!characterProfileEndpoint||path!==CharacterProfile.ENDPOINT))
      return fail(res,404,'CENTRAL_LEARNING_ENDPOINT_NOT_FOUND',cors);
    if(req.method!=='POST')return fail(res,405,'POST_REQUIRED',cors);
    const length=Number(req.headers?.['content-length']);
@@ -71,7 +74,8 @@ function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBody
    }
    let result;
    try{
-     result=await (path===Decision.ENDPOINT?decisionEndpoint:endpoint).handle({
+     const target=path===Decision.ENDPOINT?decisionEndpoint:path===CharacterProfile.ENDPOINT?characterProfileEndpoint:endpoint;
+     result=await target.handle({
        method:req.method,path,headers:req.headers,
        body:Buffer.concat(chunks,size).toString('utf8')
      });

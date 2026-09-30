@@ -3,6 +3,7 @@
 const Evidence=require('./central-learning-http-endpoint.js');
 const Decision=require('./central-learning-decision-http-endpoint.js');
 const Google=require('./google-learning-principal.js');
+const CharacterProfile=require('./family-character-profile-http-endpoint.js');
 const NodeBridge=require('./node-http-learning-bridge.js');
 
 const VERSION='TAKY_CENTRAL_LEARNING_PRODUCTION_HOST_V1';
@@ -46,9 +47,11 @@ function create({
     verifyBearerToken,store,resolveIndexedEvidence,
     independentIndexOwnerVerifier
   });
+  const characterProfileEndpoint=CharacterProfile.create({verifyBearerToken,store});
   const handler=NodeBridge.createHandler({
     endpoint:evidenceEndpoint,
     decisionEndpoint,
+    characterProfileEndpoint,
     allowedOrigins
   });
 
@@ -57,8 +60,9 @@ function create({
     identity_version:principal.version,
     evidence_version:evidenceEndpoint.version,
     decision_version:decisionEndpoint.version,
+    character_profile_version:characterProfileEndpoint.version,
     bridge_version:NodeBridge.VERSION,
-    routes:Object.freeze([Evidence.ENDPOINT,Decision.ENDPOINT]),
+    routes:Object.freeze([Evidence.ENDPOINT,Decision.ENDPOINT,CharacterProfile.ENDPOINT]),
     allowed_origins:Object.freeze([...allowedOrigins]),
     handler
   });
