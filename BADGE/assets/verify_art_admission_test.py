@@ -21,16 +21,20 @@ class BadgeArtAdmissionTests(unittest.TestCase):
         d["items"]=[{"badge_id":"BDG-DRAFT-001","layers":{},"previews":{}}]
         problems=verify(ROOT,d)
         self.assertIn("001_REFERENCE_FILE_IDENTITY_REQUIRED",problems)
-        self.assertIn("001_background_FILE_IDENTITY_REQUIRED",problems)
-        self.assertIn("001_interior_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_base_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_bg_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_subject_FILE_IDENTITY_REQUIRED",problems)
+        self.assertIn("001_fx_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_composite_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_REVIEW_FILE_IDENTITY_REQUIRED",problems)
         self.assertIn("001_PREVIEW_SET_MISSING",problems)
         self.assertIn("ART_ADMISSION_SOURCE_OR_WIT_DRIFT_001",problems)
-    def test_conditional_29_not_mistaken_for_corrections(self):
+    def test_conditional_29_share_same_admission_route(self):
         d=copy.deepcopy(self.empty);d["status"]="REVIEWED_ART_UNBOUND"
         d["items"]=[{"badge_id":"BDG-DRAFT-002"}]
-        self.assertIn("INVALID_OR_DUPLICATE_REWORK_ID",verify(ROOT,d))
+        problems=verify(ROOT,d)
+        self.assertNotIn("INVALID_OR_DUPLICATE_BADGE_ID",problems)
+        self.assertIn("002_REFERENCE_FILE_IDENTITY_REQUIRED",problems)
     def test_declared_release_is_blocked(self):
         d=copy.deepcopy(self.empty);d["deployment"]="READY"
         self.assertIn("ART_ADMISSION_SCHEMA_OR_DEPLOY_HOLD",verify(ROOT,d))
@@ -50,14 +54,14 @@ class BadgeArtAdmissionTests(unittest.TestCase):
             self.assertIn("001_composite_SIZE_OR_RGBA",issues)
     def test_fake_hash_is_rejected_even_when_file_exists(self):
         with TemporaryDirectory() as tmp:
-            path=Path(tmp)/"BADGE/assets/individual/001/background.png"
+            path=Path(tmp)/"BADGE/assets/individual/001/base.png"
             path.parent.mkdir(parents=True)
             Image.new("RGBA",(1024,1024),(0,0,0,0)).save(path)
             issues=[]
-            found=exact_file(Path(tmp),{"path":"BADGE/assets/individual/001/background.png","sha256":"0"*64},
-                             "BADGE/assets/individual/001/",(".png",),issues,"001_background")
+            found=exact_file(Path(tmp),{"path":"BADGE/assets/individual/001/base.png","sha256":"0"*64},
+                             "BADGE/assets/individual/001/",(".png",),issues,"001_base")
             self.assertIsNone(found)
-            self.assertIn("001_background_MISSING_OR_HASH_MISMATCH",issues)
+            self.assertIn("001_base_MISSING_OR_HASH_MISMATCH",issues)
     def test_no_unknown_empty_items_shape(self):
         d=copy.deepcopy(self.empty);d["items"]=None
         self.assertEqual(["ART_ADMISSION_ITEMS_REQUIRED"],verify(ROOT,d))

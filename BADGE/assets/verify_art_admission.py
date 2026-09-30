@@ -15,7 +15,8 @@ ROOT=Path(__file__).resolve().parents[2]
 MANIFEST="BADGE/assets/production-art-admission.json"
 CHECKS=("reference_compared","original_motif","witty_core_detail_visible",
         "approved_painterly_style","no_character_or_crew","no_baked_rim_star_tier_lock_text",
-        "independent_background_interior","circular_alpha","legible_64_120_200_320")
+        "independent_depth_layers","circular_alpha","legible_64_120_200_320",
+        "detail_only_depth_ready")
 SIZES=(64,120,200,320)
 
 def read(root,rel):
@@ -43,14 +44,14 @@ def exact_file(root,blob,prefix,extensions,errors,code):
         return None
     return path
 
-def check_circle_png(path,size,errors,code):
+def check_layer_png(path,size,errors,code,require_center=False):
     try:
         with Image.open(path) as im:
             if im.format!="PNG" or im.mode!="RGBA" or im.size!=(size,size):
                 errors.append(code+"_SIZE_OR_RGBA")
                 return
             px=im.load()
-            if px[size//2,size//2][3]<8:
+            if require_center and px[size//2,size//2][3]<8:
                 errors.append(code+"_EMPTY_CENTER")
             for y in range(0,size,max(1,size//20)):
                 for x in range(0,size,max(1,size//20)):
@@ -63,6 +64,9 @@ def check_circle_png(path,size,errors,code):
                     return
     except (OSError,ValueError):
         errors.append(code+"_PNG_UNREADABLE")
+
+def check_circle_png(path,size,errors,code):
+    check_layer_png(path,size,errors,code,require_center=True)
 
 def verify(root=ROOT,manifest=None):
     root=Path(root)
@@ -89,13 +93,16 @@ def verify(root=ROOT,manifest=None):
     source_by={x["source_draft_id"]:x for x in source["presets"]}
     copy_by={x["source_draft_id"]:x for x in copy["preset_copy"]}
     art_by={x["badge_id"]:x for x in direction["items"]}
-    allowed=set(queue["correction_ids"])
+    # Admission is count-independent: every badge with aligned source/direction/copy
+    # may enter the same final route. The 31-item correction queue is work priority,
+    # not the definition of the production universe.
+    allowed=set(art_by).intersection(source_by).intersection(copy_by)
     seen=set()
     used_bytes=set()
     for item in items:
         bid=item.get("badge_id","")
         if bid in seen or bid not in allowed:
-            errors.append("INVALID_OR_DUPLICATE_REWORK_ID")
+            errors.append("INVALID_OR_DUPLICATE_BADGE_ID")
             continue
         seen.add(bid)
         number=bid[-3:]
@@ -111,16 +118,16 @@ def verify(root=ROOT,manifest=None):
         layers=item.get("layers",{})
         if not isinstance(layers,dict): layers={}
         layer_hashes=[]
-        for kind in ("background","interior","composite"):
+        for kind in ("base","bg","subject","fx","composite"):
             blob=layers.get(kind)
             path=exact_file(root,blob,"BADGE/assets/individual/"+number+"/",(".png",),errors,number+"_"+kind)
             if path:
                 if path.name!=kind+".png": errors.append(number+"_UNEXPECTED_LAYER_FILENAME")
-                check_circle_png(path,1024,errors,number+"_"+kind)
+                check_layer_png(path,1024,errors,number+"_"+kind,require_center=kind in ("base","composite"))
                 layer_hashes.append(digest(path))
                 if digest(path) in used_bytes: errors.append("REUSED_ART_BYTES_FOR_DIFFERENT_LAYER")
                 used_bytes.add(digest(path))
-        if len(layer_hashes)==3 and len(set(layer_hashes))!=3:
+        if len(layer_hashes)==5 and len(set(layer_hashes))!=5:
             errors.append(number+"_FLATTENED_OR_DUPLICATED_LAYER")
         previews=item.get("previews",{})
         if not isinstance(previews,dict): previews={}

@@ -20,10 +20,14 @@ jobs:
           node --check BADGE/ui/badge-atlas.test.cjs
           node --check BADGE/badge-visual-renderer.js
           node --check BADGE/badge-visual-renderer.test.js
+          node --check BADGE/badge-reaward-progress.js
+          node --check BADGE/badge-reaward-progress.test.js
       - name: Badge UI contract
         run: node BADGE/ui/badge-atlas.test.cjs
       - name: Badge renderer regression
         run: node BADGE/badge-visual-renderer.test.js
+      - name: Badge initial acquisition and reaward progression regression
+        run: node BADGE/badge-reaward-progress.test.js
       - name: Separate badge asset registry and overlay-slot guards
         run: python3 BADGE/assets/test_badge_assets.py
       - name: Enforce 60 badge art rework truth and negative fixtures
@@ -39,10 +43,14 @@ jobs:
           python-version: '3.12'
       - name: Install isolated SVG raster QA dependencies
         run: python -m pip install cairosvg pillow
-      - name: Lock badge production inputs before generation
+      - name: Lock current correction packets before generation
         run: |
           python BADGE/production/verify_badge_production_pipeline.py
           python BADGE/production/verify_badge_production_pipeline_test.py
+      - name: Enforce count-independent Badge Production Standard V2
+        run: |
+          python BADGE/production/verify_badge_production_standard_v2.py
+          python BADGE/production/verify_badge_production_standard_v2_test.py
       - name: Hard-block invented or unreviewed production art bytes
         run: |
           python BADGE/assets/verify_art_admission.py
