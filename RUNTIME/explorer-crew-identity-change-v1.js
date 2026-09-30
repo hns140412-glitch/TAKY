@@ -17,7 +17,7 @@
     const oldId=before.type??before.id, newId=safe.type??safe.id;
     if(newId!==undefined&&newId!==oldId)history.push({kind:'GUIDE_CHARACTER_CHANGED',from:oldId||null,to:newId||null,at,authority_ref});
     if(safe.voice!==undefined&&safe.voice!==before.voice)history.push({kind:'GUIDE_VOICE_CHANGED',from:before.voice||null,to:safe.voice||null,at,authority_ref});
-    return Object.freeze({...state,guide:Object.freeze(after),crewIdentityHistory:Object.freeze(history)});
+    return {...state,guide:after,crewIdentityHistory:history};
   }
   return Object.freeze({apply,allowedFields:Object.freeze([...ALLOWED]),historyResetAllowed:false});
 });
