@@ -2,14 +2,15 @@
   "$schema":"https://json-schema.org/draft/2020-12/schema",
   "$id":"TAKY_DESIGN_EVIDENCE_V1",
   "type":"object",
-  "required":["schema","kind","pass","manifest_sha256","source_commit","tested_revision","coverage"],
+  "required":["schema","kind","pass","manifest_sha256","source_commit","tested_revision","worktree_dirty","coverage"],
   "properties":{
     "schema":{"const":"TAKY_DESIGN_EVIDENCE_V1"},
     "kind":{"enum":["VISUAL","INTERACTION","RESPONSIVE","ASSET_INTEGRITY"]},
     "pass":{"type":"boolean"},
     "manifest_sha256":{"type":"string","pattern":"^[0-9a-fA-F]{64}$"},
     "source_commit":{"type":"string","pattern":"^[0-9a-fA-F]{40}$"},
-    "tested_revision":{"type":"string","pattern":"^[0-9a-fA-F]{40}$"},
+    "tested_revision":{"oneOf":[{"type":"string","pattern":"^[0-9a-fA-F]{40}$"},{"const":"UNAVAILABLE"}]},
+    "worktree_dirty":{"type":"boolean"},
     "coverage":{"type":"array","items":{"type":"string"},"uniqueItems":true}
   }
 }
