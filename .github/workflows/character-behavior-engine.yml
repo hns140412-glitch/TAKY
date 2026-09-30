@@ -46,6 +46,7 @@ jobs:
       - run: python -m unittest ENFORCEMENT/runtime_receipt_checkpoint_test.py
       - run: python -m unittest ENFORCEMENT/contract_version_handshake_test.py
       - run: python -m unittest ENFORCEMENT/surface_scene_policy_contract_test.py
+      - run: python -m unittest ENFORCEMENT/crew_evidence_event_contract_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
