@@ -212,6 +212,12 @@ def validate(cfg: dict, root: Path) -> dict:
                 visual_policy = state.get("visual_policy","GOLDEN_PARITY")
                 if visual_policy not in ("GOLDEN_PARITY","LAYOUT_GUARD","NO_VISUAL_EVIDENCE"):
                     errors.append(f"{sid}:{stid}:VISUAL_POLICY_INVALID")
+                interaction_policy = state.get("interaction_policy","REQUIRED")
+                if interaction_policy not in ("REQUIRED","NOT_APPLICABLE"):
+                    errors.append(f"{sid}:{stid}:INTERACTION_POLICY_INVALID")
+                responsive_policy = state.get("responsive_policy","REQUIRED")
+                if responsive_policy not in ("REQUIRED","NOT_APPLICABLE"):
+                    errors.append(f"{sid}:{stid}:RESPONSIVE_POLICY_INVALID")
                 fpath = str(state.get("fixture_path",""))
                 fsha = str(state.get("fixture_sha256",""))
                 fp = safe_file(root, fpath) if fpath else None
