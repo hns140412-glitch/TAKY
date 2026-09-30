@@ -29,6 +29,8 @@ jobs:
       - run: python -m unittest ENFORCEMENT/character_runtime_log_test.py
       - run: python -m unittest ENFORCEMENT/registry_version_contract_test.py
       - run: python -m unittest ENFORCEMENT/runtime_rollback_contract_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_pipeline_resume_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_asset_handoff_test.py
       - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
       - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
       - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
