@@ -136,6 +136,21 @@ def main():
         assert s["status"]=="CONTRACT_BLOCKED",s
         assert "ADAPTER_CHECK_COVERAGE_INVALID:interaction" in s["detail"],s
 
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);setup(root)
+        m=json.loads((root/"design-to-ui.json").read_text())
+        m["screens"][0]["states"][0]["interaction_policy"]="NOT_APPLICABLE"
+        write(root/"design-to-ui.json",m)
+        a=json.loads((root/"design-ui-adapter.json").read_text())
+        a["checks"]["interaction"]["coverage"]=[]
+        write(root/"design-ui-adapter.json",a)
+        cp=run(root)
+        assert cp.returncode==0,(cp.stdout,cp.stderr)
+        s=json.loads((root/"ui-audit/pipeline-status.json").read_text())
+        assert s["status"]=="DESIGN_PASS",s
+        evidence=json.loads((root/"ui-audit/interaction-result.json").read_text())
+        assert evidence["coverage"]==[],evidence
+
     print("DESIGN_TO_UI_PIPELINE_RUNNER_V1=PASS")
     return 0
 
