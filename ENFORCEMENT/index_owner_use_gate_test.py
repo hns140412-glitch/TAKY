@@ -52,4 +52,17 @@ class IndexOwnerIndependentTrust(unittest.TestCase):
     self.assertTrue(authorized["runtime"]["next_learning_action"]["planner_allocation_allowed"])
     self.assertIsNone(authorized["runtime"]["next_learning_action"]["planner_date"])
 
+ def test_independent_conditional_receipt_is_reviewable_not_action_ready(self):
+    conditional=make_row("TEST_CONDITIONAL","fraction reasoning",
+                         short_summary="fraction reasoning",
+                         authorization_class="CONDITIONAL")
+    output=orchestrate_learning(
+       {"evidence_request":REQUEST,"index_rows":[conditional],
+        "context":{"skill_id":"SYNTHETIC_TEST"},"observations":[]},
+       owner_verifier=verifier_for(conditional))
+    self.assertTrue(output["retrieval"]["evidence_sufficient_for_review"])
+    self.assertEqual(output["runtime"]["strategy_selection"]["strategy"],"HOLD_FOR_REVIEW")
+    self.assertFalse(output["runtime"]["next_learning_action"]["planner_allocation_allowed"])
+    self.assertIsNone(output["mining_request_candidate"])
+
 if __name__=="__main__":unittest.main()

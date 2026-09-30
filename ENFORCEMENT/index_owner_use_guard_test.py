@@ -33,18 +33,25 @@ class IndexOwnerUseGuardTest(unittest.TestCase):
     find=retrieve_learning_evidence({"query":"fraction reasoning"},[item])
     self.assertFalse(find["evidence_sufficient_for_review"])
     run=cycle(item)
-    self.assertEqual(run["strategy_selection"]["strategy"],"HOLD_FOR_EVIDENCE")
+    self.assertEqual(run["strategy_selection"]["strategy"],"HOLD_FOR_REVIEW")
     self.assertFalse(run["next_learning_action"]["planner_allocation_allowed"])
 
  def test_missing_domain_class_not_silent_reference_only(self):
     item=row(index_state="INDEXED")
     self.assertFalse(cycle(item)["next_learning_action"]["planner_allocation_allowed"])
 
- def test_explicit_indexed_authorized_classes_still_work(self):
-    for cls in ("READY_WITH_GUARDS","CONDITIONAL","DIRECT_USE_READY"):
+ def test_explicit_indexed_action_ready_classes_still_work(self):
+    for cls in ("READY_WITH_GUARDS","DIRECT_USE_READY"):
         with self.subTest(cls=cls):
             item=row(index_state="INDEXED",authorization_class=cls)
             self.assertTrue(cycle(item)["next_learning_action"]["planner_allocation_allowed"])
+
+ def test_explicit_indexed_conditional_holds_for_review(self):
+    item=row(index_state="INDEXED",authorization_class="CONDITIONAL")
+    run=cycle(item)
+    self.assertEqual(run["strategy_selection"]["strategy"],"HOLD_FOR_REVIEW")
+    self.assertFalse(run["next_learning_action"]["planner_allocation_allowed"])
+    self.assertIsNone(run["evidence_gap"])
 
  def test_orchestrator_propagates_missing_owner_gap_to_mining(self):
     output=orchestrate_learning({"evidence_request":{"query":"fraction reasoning","minimum_results":1},
