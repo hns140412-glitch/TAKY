@@ -14,7 +14,7 @@ LAYER_SCHEMA = "TAKY_LAYER_CONTRACT_V1"
 SHA64 = re.compile(r"^[0-9a-fA-F]{64}$")
 SHA40 = re.compile(r"^[0-9a-fA-F]{40}$")
 LAYER_ROLES = {"BACKGROUND","FOREGROUND","OBJECT","CHARACTER_SLOT","FUNCTION_UI"}
-LAYER_STATUSES = {"BOUND","LIVE_DOM","RUNTIME_SLOT","ASSET_PRODUCTION_OPEN","IMPLEMENTATION_OPEN","NOT_APPLICABLE"}
+LAYER_STATUSES = {"BOUND","LIVE_DOM","RUNTIME_SLOT","ASSET_IMPORT_OPEN","ASSET_PRODUCTION_OPEN","IMPLEMENTATION_OPEN","NOT_APPLICABLE"}
 
 def sha256(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -163,6 +163,14 @@ def validate(cfg: dict, root: Path) -> dict:
                         for key in ("selector","owner","resolver_contract"):
                             if not str(layer.get(key,"")).strip():
                                 errors.append(f"{sid}:RUNTIME_SLOT_{key.upper()}_MISSING:{role}")
+                    elif status == "ASSET_IMPORT_OPEN":
+                        if not SHA64.match(str(layer.get("sha256",""))):
+                            errors.append(f"{sid}:ASSET_IMPORT_SHA_MISSING:{role}")
+                        if not str(layer.get("source_receipt","")).strip():
+                            errors.append(f"{sid}:ASSET_IMPORT_SOURCE_RECEIPT_MISSING:{role}")
+                        if not str(layer.get("target_path","")).strip():
+                            errors.append(f"{sid}:ASSET_IMPORT_TARGET_PATH_MISSING:{role}")
+                        blockers.append(f"{sid}:ASSET_IMPORT_OPEN:{role}")
                     elif status == "ASSET_PRODUCTION_OPEN":
                         blockers.append(f"{sid}:ASSET_PRODUCTION_OPEN:{role}")
                     elif status == "IMPLEMENTATION_OPEN":
