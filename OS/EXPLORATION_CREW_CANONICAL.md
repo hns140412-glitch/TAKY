@@ -1,14 +1,15 @@
 # TAKY EXPLORATION CREW CANONICAL
 
-Status: REV_01 / DRAFT CORRECTION CANDIDATE — ACTIVE REV_00 REMAINS MAIN AUTHORITY UNTIL MERGE
+Status: REV_02 / DRAFT RUNTIME V2 CUTOVER CANDIDATE — ACTIVE MAIN REMAINS AUTHORITY UNTIL MERGE
 Role: Shared Exploration Crew semantic/runtime contract for Ready & Set / Hide & Seek / Snap & Pop.
 Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > EXPLORATION CREW CANONICAL > project-specific crew presentation/behavior.
 
 Source verification:
-- Snap-Pop Draft PR #10 working implementation verified at commit `8ea7b985eaf792e866e4d21d174eaac824a23567`.
-- `Validate Snap & Pop` SUCCESS.
-- `Companion Onboarding Source/Asset Gate` SUCCESS.
-- Central promotion includes shared contract only; Snap-specific UI, art binaries, release state and onboarding flow are excluded.
+- Explorer Crew Runtime V2 is implemented as one shared runtime spine with project-thin consumers in Snap / Hide / Ready Draft branches.
+- Exact current candidate heads and CI evidence are recorded in `AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md`.
+- The shared common runtime is protected by a 34-file Source Lock.
+- Source Lock hashing is SHA-256 over UTF-8 text after CRLF/LF → LF normalization so content identity is OS-independent.
+- Central promotion includes shared contract only; project UI, art binaries, release state and deployment remain project-owned and separately gated.
 
 ## 1. Core architecture — HARD LOCK
 
@@ -158,6 +159,22 @@ Current shared contract pointers:
 
 Consumer implementation shall fail closed when required pointers disagree.
 
+## 6.1 Runtime V2 ownership and Source Lock — HARD LOCK
+
+Runtime V2 owner:
+- `EXPLORER_CREW_SYSTEM_V2` is the single canonical runtime owner.
+- canonical ownership state is `runtime = CANONICAL_ONLY`.
+- App consumers SHALL report `behaviorOwner=false`, `relationOwner=false`, `memoryOwner=false`, `assetResolver=false`, `runtimeOwner=false`.
+- Ready / Hide / Snap adapters are thin project edges only. They may project app context and render approved plans, but SHALL NOT recreate shared behavior, relation, memory, Runtime Policy or asset ownership.
+
+Shared-source identity:
+- Snap / Hide / Ready SHALL consume the same source-locked common Explorer Crew runtime bundle.
+- current Source Lock scope = 34 common runtime/contract files.
+- hash algorithm = SHA-256.
+- text normalization = UTF-8 with CRLF/LF normalized to LF before hashing.
+- missing locked file, changed normalized content, or unexpected common-runtime file = FAIL CLOSED.
+- Source Lock equality proves common runtime content identity only; it does not imply release approval, main merge, ROOT activation, composable promotion or motion promotion.
+
 ## 7. Runtime trace minimum — HARD LOCK
 
 Runtime trace shall be able to record:
@@ -251,6 +268,6 @@ higher authority and later explicit user correction prevail; project code shall 
 
 ## 12. Current release boundary
 
-Central semantic contract: ACTIVE.
-Verified Snap working implementation evidence: PASS at cited exact commit.
-Central promotion does not imply Snap main merge, ROOT activation, Netlify deployment, image generation or human visual approval.
+Central semantic contract: DRAFT V2 CUTOVER CANDIDATE.
+Verified Runtime V2 evidence spans Snap / Hide / Ready Draft consumers and the shared Source Lock; exact heads and CI status are recorded in the audit packet.
+Central promotion does not imply any project main merge, ROOT activation, Netlify deployment, image generation, composable production promotion, motion release or human visual approval.
