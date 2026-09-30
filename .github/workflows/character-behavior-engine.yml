@@ -13,3 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m unittest ENFORCEMENT/character_behavior_engine_test.py
+      - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
