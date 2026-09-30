@@ -47,7 +47,37 @@ def safe(root: Path, rel: str)->Path:
     p.relative_to(root.resolve())
     return p
 
-def write_status(root: Path, status: str, stage: str, detail: str="", evidence: dict|None=None)->None:
+def route_failure(stage: str, detail: str, evidence: dict|None=None)->dict:
+    evidence=evidence or {}
+    blockers=evidence.get("blockers") or []
+    joined=";".join(str(x) for x in blockers)
+
+    if stage=="contract":
+        if "GOLDEN_" in joined or "SOURCE_" in detail or "SHA_" in detail:
+            return {"return_to_stage":"APPROVAL_LOCK","owner":"AUTHORITY","next_action":"resolve approved source / Golden authority and rerun full pipeline"}
+        if "ASSET_IMPORT_OPEN" in joined or "ASSET_PRODUCTION_OPEN" in joined:
+            return {"return_to_stage":"UI_CONTRACT","owner":"ASSET_CONTRACT","next_action":"resolve declared asset blocker without inventing replacement art, then rerun full pipeline"}
+        if "IMPLEMENTATION_OPEN" in joined:
+            return {"return_to_stage":"IMPLEMENT","owner":"UI_IMPLEMENTATION","next_action":"implement the declared missing DOM/component/slot, then rerun full pipeline"}
+        if detail.startswith("ADAPTER_"):
+            return {"return_to_stage":"VERIFY_CORRECT","owner":"APP_ADAPTER","next_action":"repair adapter contract and rerun full pipeline"}
+        return {"return_to_stage":"UI_CONTRACT","owner":"UI_CONTRACT","next_action":"repair manifest/screen/layer/state contract and rerun full pipeline"}
+
+    if stage=="capture":
+        return {"return_to_stage":"VERIFY_CORRECT","owner":"APP_ADAPTER","next_action":"repair deterministic browser capture adapter/output and rerun full pipeline"}
+    if stage=="visual":
+        return {"return_to_stage":"IMPLEMENT","owner":"UI_IMPLEMENTATION","next_action":"inspect visual diff/critical ROI, correct UI implementation, and rerun full pipeline"}
+    if stage=="interaction":
+        return {"return_to_stage":"IMPLEMENT","owner":"UI_IMPLEMENTATION","next_action":"correct interaction/state behavior and rerun full pipeline"}
+    if stage=="responsive":
+        return {"return_to_stage":"IMPLEMENT","owner":"UI_IMPLEMENTATION","next_action":"correct responsive layout/safe-area behavior; update contract only if approved rule was incomplete; rerun full pipeline"}
+    if stage=="asset_integrity":
+        return {"return_to_stage":"UI_CONTRACT","owner":"ASSET_CONTRACT","next_action":"repair approved asset binding/provenance/hash and rerun full pipeline"}
+    if stage=="receipt":
+        return {"return_to_stage":"VERIFY_CORRECT","owner":"PIPELINE","next_action":"repair evidence identity/coverage mismatch and rerun full pipeline"}
+    return {"return_to_stage":"VERIFY_CORRECT","owner":"PIPELINE","next_action":"inspect failure and rerun full pipeline"}
+
+def write_status(root: Path, status: str, stage: str, detail: str="", evidence: dict|None=None, routing: dict|None=None)->None:
     out=root/"ui-audit/pipeline-status.json"
     out.parent.mkdir(parents=True,exist_ok=True)
     payload={
@@ -56,12 +86,14 @@ def write_status(root: Path, status: str, stage: str, detail: str="", evidence: 
         "stage":stage,
         "detail":detail,
         "evidence":evidence or {},
+        "routing":routing,
     }
     out.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps(payload,ensure_ascii=False,indent=2))
 
 def fail(root: Path, stage: str, detail: str, evidence: dict|None=None)->int:
-    write_status(root,STATUSES.get(stage,"CONTRACT_BLOCKED"),stage,detail,evidence)
+    routing=route_failure(stage,detail,evidence)
+    write_status(root,STATUSES.get(stage,"CONTRACT_BLOCKED"),stage,detail,evidence,routing)
     return 1
 
 def run(argv: list[str], cwd: Path)->subprocess.CompletedProcess:
@@ -209,7 +241,7 @@ def main()->int:
         "responsive":"ui-audit/responsive-result.json",
         "asset_integrity":"ui-audit/asset-result.json",
         "receipt":"ui-audit/design-receipt.json",
-    })
+    },None)
     return 0
 
 if __name__=="__main__":
