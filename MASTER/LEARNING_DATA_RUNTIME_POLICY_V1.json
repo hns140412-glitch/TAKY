@@ -69,6 +69,13 @@
       "required_provenance":["WRITING_CORPUS_SOURCE_REF"],"requires_human_review":false
     },
     {
+      "policy_id":"P-F07-READY","function_id":"LE-F07","consumer_app":"READY_SET","authorization_class":"READY_WITH_GUARDS",
+      "allowed_behaviors":["GOVERNED_DERIVED_ACTIVITY_REFERENCE"],
+      "forbidden_behaviors":["MASTERY_INFERENCE_FROM_ACTIVITY_AVAILABILITY","AUTO_SCHEDULE_FROM_ACTIVITY_REFERENCE","SOURCE_AUTHORITY_PROMOTION_TO_DERIVED_ACTIVITY"],
+      "cannot_claim":["LEARNER_MASTERY_FROM_ACTIVITY_AVAILABILITY","OFFICIAL_PUBLISHER_ENDORSEMENT_OF_DERIVED_ACTIVITY","CAUSAL_PRESCRIPTION_FROM_ACTIVITY_REFERENCE"],
+      "required_provenance":["GOVERNED_DERIVED_ACTIVITY_REF","OFFICIAL_SOURCE_DERIVATION_REF"],"requires_human_review":false
+    },
+    {
       "policy_id":"P-H01-READY","function_id":"LE-H01","consumer_app":"READY_SET","authorization_class":"HOLD",
       "allowed_behaviors":[],"forbidden_behaviors":["AUTOMATIC_PREREQUISITE_ENFORCEMENT","LEARNER_PATH_BLOCKING","CAUSAL_MASTERY_PROGRESSION"],
       "cannot_claim":["CAUSAL_PREREQUISITE_NECESSITY"],"required_provenance":[],"requires_human_review":true

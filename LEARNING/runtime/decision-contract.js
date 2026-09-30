@@ -15,7 +15,8 @@ function normalizeIntent(x={}){
   };
 }
 
-function derive({learner_state={},feedback_intent={},prerequisite_readiness=null}={}){
+function derive({learner_state={},feedback_intent={},prerequisite_readiness=null,
+  observation_review_actionable=false}={}){
   if(!learner_state?.ok)return {ok:false,reason:'LEARNER_STATE_REQUIRED'};
   if(!feedback_intent?.ok)return {ok:false,reason:'FEEDBACK_INTENT_REQUIRED'};
 
@@ -24,8 +25,13 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
   const state=learner_state.inferred||{};
   const suff=state.evidence_sufficiency||'NONE';
 
-  if(suff==='NONE')blockers.push({code:'NO_EVIDENCE',priority:'HIGH'});
-  else if(suff==='SPARSE')advisories.push({code:'SPARSE_EVIDENCE',priority:'MEDIUM'});
+  const reviewOnly=observation_review_actionable===true&&
+    (feedback_intent.intents||[]).some(x=>x.intent==='RETRIEVAL_CHECKPOINT'&&
+      (Array.isArray(x.bases)?x.bases:[x.basis]).includes('HIDE_MEMORY_ADVISORY_ONLY'));
+  if(suff==='NONE'){
+    if(reviewOnly)advisories.push({code:'UNVERIFIED_ADVISORY_RECHECK',priority:'MEDIUM'});
+    else blockers.push({code:'NO_EVIDENCE',priority:'HIGH'});
+  }else if(suff==='SPARSE')advisories.push({code:'SPARSE_EVIDENCE',priority:'MEDIUM'});
 
   if(state.instrument_change_detected===true)blockers.push({code:'INSTRUMENT_CHANGE_HOLD',priority:'HIGH'});
   if(prerequisite_readiness?.readiness==='PREREQUISITE_RISK'){
