@@ -99,6 +99,8 @@ def evidence(path: Path, kind: str, manifest: Path, coverage: list[str]):
         "pass":True,
         "manifest_sha256":sha(manifest),
         "source_commit":m["source_commit"],
+        "tested_revision":"4"*40,
+        "worktree_dirty":False,
         "coverage":coverage
     })
 
