@@ -157,6 +157,13 @@ VISUAL evidence는 중앙 Visual Compare가 생성한다.
 
 이 상태가 작업 위치다. 별도 중복 상태표를 만들 필요가 없다.
 
+실패 상태에는 `routing`을 함께 기록한다:
+- `return_to_stage`: APPROVAL_LOCK / UI_CONTRACT / IMPLEMENT / VERIFY_CORRECT
+- `owner`: AUTHORITY / UI_CONTRACT / ASSET_CONTRACT / UI_IMPLEMENTATION / APP_ADAPTER / PIPELINE
+- `next_action`: 다음 수정 작업
+
+부분 재개 체크포인트는 만들지 않는다. 수정 후에는 항상 전체 Runner를 다시 실행한다. 앞 단계는 결정적 검증이므로 재실행 비용보다 상태 분기/중복을 줄이는 것을 우선한다.
+
 ## 범위 밖
 Design-to-UI Pipeline이 판단하지 않는 것:
 - OCR 정확도
