@@ -56,6 +56,7 @@ jobs:
           python BADGE/production/build_badge_production_packets_v2.py --check
           python BADGE/production/verify_badge_production_packets_v2.py
           python BADGE/production/verify_badge_production_packets_v2_test.py
+          python BADGE/production/prepare_badge_asset_scaffold_v2_test.py
       - name: Hard-block invented or unreviewed production art bytes
         run: |
           python BADGE/assets/verify_art_admission.py
