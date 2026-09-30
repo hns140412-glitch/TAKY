@@ -38,8 +38,10 @@
           "authority_ref": {"type": "string", "minLength": 1},
           "golden": {
             "type": "object",
-            "required": ["path", "sha256", "use"],
+            "required": ["status", "path", "sha256", "use", "source_receipt"],
             "properties": {
+              "status": {"enum": ["BOUND", "IMPORT_OPEN"]},
+              "source_receipt": {"type": "string", "minLength": 1},
               "path": {"type": "string", "minLength": 1},
               "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
               "use": {"const": "REFERENCE_ONLY"}
