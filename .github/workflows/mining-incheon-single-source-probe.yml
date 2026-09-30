@@ -1,0 +1,54 @@
+name: Mining Incheon Single Source Probe
+
+on:
+  push:
+    branches:
+      - taky/mining-evidence-frontier-regression-2026-09-29
+    paths:
+      - '.github/workflows/mining-incheon-single-source-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Fetch only the four published attachment entries from original publisher
+        shell: bash
+        run: |
+          python - <<'PY'
+          import html, json, re, urllib.request, urllib.error
+          from html.parser import HTMLParser
+          from urllib.parse import urlparse
+          URL='https://www.ice.go.kr/ice/na/ntt/selectNttInfo.do?bbsAllView=Y&bbsId=1630&mi=&nttSn=3383177'
+          NAMES=[
+              '[부록] 초등 수학과 서논술형 평가 문항.hwpx',
+              '[부록] 초등 과학과 서논술형 평가 문항.hwpx',
+              '초등 수학과 서논술형 평가 도움자료.pdf',
+              '초등 과학과 서논술형 평가 도움자료.pdf',
+          ]
+          req=urllib.request.Request(URL,headers={'User-Agent':'Mozilla/5.0 (compatible; TAKY-source-verification/1.0)','Accept':'text/html'})
+          try:
+              with urllib.request.urlopen(req,timeout=15) as r:
+                  body=r.read(2_000_001)
+                  info={'status':r.status,'final_url':r.url,'content_type':r.headers.get('Content-Type'),'bytes':len(body),'bounded':len(body)<=2_000_000}
+              if len(body)>2_000_000 or urlparse(info['final_url']).hostname not in ('ice.go.kr','www.ice.go.kr'):
+                  print('HOLD_UNEXPECTED_CONTENT_OR_REDIRECT',json.dumps(info,ensure_ascii=False));raise SystemExit(0)
+              # Public publisher page only; no downloaded link is assumed from a filename.
+              text=body.decode('utf-8','replace')
+              info['exact_names']={}
+              for name in NAMES:
+                  normalized=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',text)))
+                  found=name in normalized
+                  idx=text.find(name)
+                  # Most publisher pages attach a file-down function to an <a> tag.
+                  # Print bounded local context for human/agent inspection, never eval HTML/JS.
+                  context=html.unescape(text[max(0,idx-450):idx+450]) if idx>=0 else ''
+                  context=re.sub(r'\s+',' ',context)[:900]
+                  info['exact_names'][name]={'text_found':found,'raw_found':idx>=0,'nearby_markup':context}
+              print('OFFICIAL_PAGE_PROBE',json.dumps(info,ensure_ascii=False))
+          except (OSError,ValueError) as e:
+              print('OFFICIAL_PAGE_PROBE_BLOCKED',type(e).__name__,str(e)[:260])
+          PY

@@ -17,6 +17,23 @@ on:
       - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - 'ENFORCEMENT/mining_run_orchestrator.py'
       - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_pending_actions.py'
+      - 'ENFORCEMENT/mining_pending_actions_test.py'
+      - 'ENFORCEMENT/mining_source_watch.py'
+      - 'ENFORCEMENT/mining_source_watch_test.py'
+      - 'ENFORCEMENT/mining_evidence_provenance.py'
+      - 'ENFORCEMENT/mining_evidence_provenance_test.py'
+      - 'ENFORCEMENT/mining_research_assurance.py'
+      - 'ENFORCEMENT/mining_research_assurance_test.py'
+      - 'ENFORCEMENT/mining_exact_source_failure_test.py'
+      - 'ENFORCEMENT/mining_operation_runner.py'
+      - 'ENFORCEMENT/mining_operation_runner_test.py'
+      - 'ENFORCEMENT/mining_attempt_journal.py'
+      - 'ENFORCEMENT/mining_attempt_journal_test.py'
+      - 'ENFORCEMENT/mining_public_url_tool.py'
+      - 'ENFORCEMENT/mining_public_url_tool_test.py'
+      - 'ENFORCEMENT/mining_inline_attachment_discovery.py'
+      - 'ENFORCEMENT/mining_inline_attachment_discovery_test.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal.py'
       - 'ENFORCEMENT/mining_engine_step12_unseen_goal_test.py'
       - 'ENFORCEMENT/mining_core.py'
@@ -53,8 +70,19 @@ on:
       - 'ENFORCEMENT/index_retrieval_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
       - 'ENFORCEMENT/mining_index_bridge_test.py'
+      - 'ENFORCEMENT/mining_index_learning_roundtrip_test.py'
+      - 'ENFORCEMENT/mining_grade5_fraction_slice.py'
+      - 'ENFORCEMENT/mining_grade5_fraction_slice_test.py'
+      - 'ENFORCEMENT/mining_index_learning_owner_handoff.py'
+      - 'ENFORCEMENT/mining_index_learning_owner_handoff_test.py'
+      - 'ENFORCEMENT/mining_verified_archive_manifest.py'
+      - 'ENFORCEMENT/mining_verified_archive_manifest_test.py'
       - 'ENFORCEMENT/learning_index_bridge.py'
       - 'ENFORCEMENT/learning_index_bridge_test.py'
+      - 'ENFORCEMENT/index_owner_use_gate.py'
+      - 'ENFORCEMENT/index_owner_use_gate_test.py'
+      - 'ENFORCEMENT/index_owner_use_guard_test.py'
+      - 'ENFORCEMENT/owner_test_fixture.py'
       - 'ENFORCEMENT/learning_runtime.py'
       - 'ENFORCEMENT/learning_runtime_test.py'
       - 'ENFORCEMENT/learning_orchestrator.py'
@@ -89,6 +117,42 @@ on:
       - 'ENFORCEMENT/mining_engine_step10_adversarial_test.py'
       - 'ENFORCEMENT/index_retrieval.py'
       - 'ENFORCEMENT/index_retrieval_test.py'
+      - 'ENFORCEMENT/mining_run_orchestrator.py'
+      - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_pending_actions.py'
+      - 'ENFORCEMENT/mining_pending_actions_test.py'
+      - 'ENFORCEMENT/mining_source_watch.py'
+      - 'ENFORCEMENT/mining_source_watch_test.py'
+      - 'ENFORCEMENT/mining_evidence_provenance.py'
+      - 'ENFORCEMENT/mining_evidence_provenance_test.py'
+      - 'ENFORCEMENT/mining_research_assurance.py'
+      - 'ENFORCEMENT/mining_research_assurance_test.py'
+      - 'ENFORCEMENT/mining_exact_source_failure_test.py'
+      - 'ENFORCEMENT/mining_operation_runner.py'
+      - 'ENFORCEMENT/mining_operation_runner_test.py'
+      - 'ENFORCEMENT/mining_attempt_journal.py'
+      - 'ENFORCEMENT/mining_attempt_journal_test.py'
+      - 'ENFORCEMENT/mining_public_url_tool.py'
+      - 'ENFORCEMENT/mining_public_url_tool_test.py'
+      - 'ENFORCEMENT/mining_inline_attachment_discovery.py'
+      - 'ENFORCEMENT/mining_inline_attachment_discovery_test.py'
+      - 'ENFORCEMENT/mining_index_bridge.py'
+      - 'ENFORCEMENT/mining_index_bridge_test.py'
+      - 'ENFORCEMENT/learning_index_bridge.py'
+      - 'ENFORCEMENT/learning_index_bridge_test.py'
+      - 'ENFORCEMENT/learning_runtime.py'
+      - 'ENFORCEMENT/learning_runtime_test.py'
+      - 'ENFORCEMENT/learning_orchestrator.py'
+      - 'ENFORCEMENT/learning_orchestrator_test.py'
+      - 'ENFORCEMENT/learning_mining_gap_loop.py'
+      - 'ENFORCEMENT/learning_mining_gap_loop_test.py'
+      - 'ENFORCEMENT/index_owner_use_gate.py'
+      - 'ENFORCEMENT/index_owner_use_gate_test.py'
+      - 'ENFORCEMENT/index_owner_use_guard_test.py'
+      - 'ENFORCEMENT/owner_test_fixture.py'
+      - 'ENFORCEMENT/index_actual_corpus_e2e_test.py'
+      - 'ENFORCEMENT/mining_index_learning_roundtrip_test.py'
+      - 'ENFORCEMENT/mining_index_learning_owner_handoff.py'
       - '.github/workflows/mining-engine-v2-gate.yml'
 
 jobs:
@@ -107,8 +171,16 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_engine_step9_gate.py
           python -m py_compile ENFORCEMENT/mining_engine_step10_adversarial.py
           python -m py_compile ENFORCEMENT/mining_run_orchestrator.py
+          python -m py_compile ENFORCEMENT/mining_pending_actions.py
+          python -m py_compile ENFORCEMENT/mining_source_watch.py
           python -m py_compile ENFORCEMENT/mining_engine_step12_unseen_goal.py
           python -m py_compile ENFORCEMENT/mining_core.py
+          python -m py_compile ENFORCEMENT/mining_evidence_provenance.py
+          python -m py_compile ENFORCEMENT/mining_research_assurance.py
+          python -m py_compile ENFORCEMENT/mining_operation_runner.py
+          python -m py_compile ENFORCEMENT/mining_attempt_journal.py
+          python -m py_compile ENFORCEMENT/mining_public_url_tool.py
+          python -m py_compile ENFORCEMENT/mining_inline_attachment_discovery.py
           python -m py_compile ENFORCEMENT/mining_source_strategy.py
           python -m py_compile ENFORCEMENT/mining_claim_relations.py
           python -m py_compile ENFORCEMENT/mining_goal_sufficiency.py
@@ -124,7 +196,17 @@ jobs:
           python -m py_compile ENFORCEMENT/mining_e2e_benchmark.py
           python -m py_compile ENFORCEMENT/index_retrieval.py
           python -m py_compile ENFORCEMENT/mining_index_bridge.py
+          python -m py_compile ENFORCEMENT/mining_index_learning_roundtrip_test.py
+          python -m py_compile ENFORCEMENT/mining_index_learning_owner_handoff.py
+          python -m py_compile ENFORCEMENT/mining_grade5_fraction_slice.py
+          python -m py_compile ENFORCEMENT/mining_index_learning_owner_handoff_test.py
+          python -m py_compile ENFORCEMENT/mining_verified_archive_manifest.py
+          python -m py_compile ENFORCEMENT/mining_verified_archive_manifest_test.py
           python -m py_compile ENFORCEMENT/learning_index_bridge.py
+          python -m py_compile ENFORCEMENT/index_owner_use_gate.py
+          python -m py_compile ENFORCEMENT/index_owner_use_gate_test.py
+          python -m py_compile ENFORCEMENT/index_owner_use_guard_test.py
+          python -m py_compile ENFORCEMENT/owner_test_fixture.py
           python -m py_compile ENFORCEMENT/learning_runtime.py
           python -m py_compile ENFORCEMENT/learning_orchestrator.py
           python -m py_compile ENFORCEMENT/learning_growth_memory.py
@@ -146,10 +228,18 @@ jobs:
         run: python ENFORCEMENT/mining_engine_step10_adversarial_test.py
       - name: Test Step 11 mining run orchestrator
         run: python ENFORCEMENT/mining_run_orchestrator_test.py
+      - name: Test unprocessed mining next actions
+        run: python ENFORCEMENT/mining_pending_actions_test.py
+      - name: Deep baseline and delta intake regression
+        run: python ENFORCEMENT/mining_source_watch_test.py
       - name: Test Step 12 unseen-goal generalization
         run: python ENFORCEMENT/mining_engine_step12_unseen_goal_test.py
       - name: Test resumable Mining Core
         run: python ENFORCEMENT/mining_core_test.py
+      - name: Test Index evidence provenance bridge
+        run: python ENFORCEMENT/mining_evidence_provenance_test.py
+      - name: Test full-goal research source and claim assurance
+        run: python ENFORCEMENT/mining_research_assurance_test.py
       - name: Test Mining source strategy
         run: python ENFORCEMENT/mining_source_strategy_test.py
       - name: Test semantic claim relations
@@ -178,8 +268,22 @@ jobs:
         run: python ENFORCEMENT/index_retrieval_test.py
       - name: Test Mining index-first bridge
         run: python ENFORCEMENT/mining_index_bridge_test.py
+      - name: Test exact named-source acquisition false-positive recovery
+        run: python ENFORCEMENT/mining_exact_source_failure_test.py
+      - name: Test actual bounded provider invocation and fallback
+        run: python ENFORCEMENT/mining_operation_runner_test.py
+      - name: Test local durable provider attempt recovery
+        run: python ENFORCEMENT/mining_attempt_journal_test.py
+      - name: Test explicit public URL original source acquisition
+        run: python ENFORCEMENT/mining_public_url_tool_test.py
+      - name: Test original publisher inline attachment discovery
+        run: python ENFORCEMENT/mining_inline_attachment_discovery_test.py
       - name: Test Learning shared index bridge
         run: python ENFORCEMENT/learning_index_bridge_test.py
+      - name: Test independent Index owner trust boundary
+        run: python ENFORCEMENT/index_owner_use_gate_test.py
+      - name: Test Index owner runtime use guards
+        run: python ENFORCEMENT/index_owner_use_guard_test.py
       - name: Test central Learning Engine runtime
         run: python ENFORCEMENT/learning_runtime_test.py
       - name: Test Learning Engine orchestration
@@ -188,7 +292,7 @@ jobs:
         run: python ENFORCEMENT/learning_growth_memory_test.py
       - name: Test Learning-Mining evidence gap loop
         run: python ENFORCEMENT/learning_mining_gap_loop_test.py
-      - name: Test actual 666-source index corpus E2E
+      - name: Test guarded legacy 666-source index corpus E2E
         run: python ENFORCEMENT/index_actual_corpus_e2e_test.py
       - name: Test index ingest candidate adapter
         run: python ENFORCEMENT/index_ingest_candidate_test.py
@@ -196,6 +300,14 @@ jobs:
         run: python ENFORCEMENT/index_ingest_validator_test.py
       - name: Test external Mining to Index to Learning loop
         run: python ENFORCEMENT/external_to_learning_loop_test.py
+      - name: Test end-to-end Mining Index Learning candidate and owner-receipt round trip
+        run: python ENFORCEMENT/mining_index_learning_roundtrip_test.py
+      - name: Test host-reviewed Index owner receipt into Learning requery
+        run: python ENFORCEMENT/mining_index_learning_owner_handoff_test.py
+      - name: Test real-source Grade-5 fraction learning candidate and no premature use
+        run: python ENFORCEMENT/mining_grade5_fraction_slice_test.py
+      - name: Test physically verified source archive into noncanonical Index candidate
+        run: python ENFORCEMENT/mining_verified_archive_manifest_test.py
       - name: Test Ready Hide Snap Learning consumer adapters
         run: python ENFORCEMENT/learning_consumer_adapters_test.py
       - name: Test heterogeneous E2E benchmark

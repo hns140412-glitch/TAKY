@@ -11,7 +11,8 @@ or automatic policy promotion.
 from __future__ import annotations
 import hashlib
 
-ALLOWED_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","REFERENCE_ONLY","DIRECT_USE_READY"}
+ACTION_READY_EVIDENCE_CLASSES={"READY_WITH_GUARDS","DIRECT_USE_READY"}
+REVIEWABLE_EVIDENCE_CLASSES={"READY_WITH_GUARDS","CONDITIONAL","REFERENCE_ONLY","DIRECT_USE_READY"}
 HOLD_CLASSES={"HOLD","REVIEW_REQUIRED","RESEARCH_CANDIDATE","NO_CURRENT_CONSUMER"}
 LEGACY_UTILIZATION_MAP={
     "CONDITIONAL_USE":"CONDITIONAL",
@@ -43,6 +44,7 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
         "correct_count":correct,
         "incorrect_count":incorrect,
         "assisted_count":assisted,
+        "observation_count":len(obs),
         "repeated_error":repeated_error,
         "assistance_dependency":assistance_dependency,
         "confidence":confidence,
@@ -53,25 +55,52 @@ def interpret_learner_state(context:dict, evidence:list[dict], observations:list
         },
     }
 
-def _usable_evidence(evidence:list[dict])->list[dict]:
+def _classified_evidence(evidence:list[dict], allowed:set[str])->list[dict]:
     out=[]
     for row in evidence or []:
-        raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "REFERENCE_ONLY").upper()
+        # A legacy row without Index owner state is discovery-only. Even INDEXED
+        # is necessary, not proof that an independently trusted host verified it.
+        if str(row.get("index_state") or "").upper() != "INDEXED":
+            continue
+        raw_cls=str(row.get("authorization_class") or row.get("utilization_class") or "").upper()
         cls=LEGACY_UTILIZATION_MAP.get(raw_cls,raw_cls)
         if cls in HOLD_CLASSES:
             continue
-        if cls in ALLOWED_EVIDENCE_CLASSES or cls=="DIRECT_USE_READY":
+        if cls in allowed:
             out.append(row)
     return out
 
+def _reviewable_evidence(evidence:list[dict])->list[dict]:
+    return _classified_evidence(evidence,REVIEWABLE_EVIDENCE_CLASSES)
+
+def _action_ready_evidence(evidence:list[dict])->list[dict]:
+    return _classified_evidence(evidence,ACTION_READY_EVIDENCE_CLASSES)
+
 def select_strategy(context:dict, state:dict, evidence:list[dict])->dict:
-    usable=_usable_evidence(evidence)
-    if not usable:
+    reviewable=_reviewable_evidence(evidence)
+    ready=_action_ready_evidence(evidence)
+    if not reviewable:
         return {
             "strategy":"HOLD_FOR_EVIDENCE",
-            "reason":"NO_USABLE_EVIDENCE",
+            "reason":"NO_REVIEWABLE_EVIDENCE",
             "intensity":"NONE",
             "requires_review":True,
+        }
+    if not ready:
+        return {
+            "strategy":"HOLD_FOR_REVIEW",
+            "reason":"EVIDENCE_FOUND_BUT_NOT_ACTION_READY",
+            "intensity":"NONE",
+            "requires_review":True,
+            "evidence_refs":[x.get("source_id") for x in reviewable if x.get("source_id")],
+        }
+    if int(state.get("observation_count") or 0) < 1:
+        return {
+            "strategy":"HOLD_FOR_EVIDENCE",
+            "reason":"NO_LEARNER_OBSERVATION",
+            "intensity":"NONE",
+            "requires_review":True,
+            "evidence_refs":[x.get("source_id") for x in ready if x.get("source_id")],
         }
     if state.get("repeated_error"):
         strategy="TARGETED_REMEDIATION"
@@ -90,15 +119,15 @@ def select_strategy(context:dict, state:dict, evidence:list[dict])->dict:
         "intensity":intensity,
         "reason":"LEARNER_STATE_AND_AVAILABLE_EVIDENCE",
         "requires_review":bool(context.get("high_impact")),
-        "evidence_refs":[x.get("source_id") for x in usable if x.get("source_id")],
+        "evidence_refs":[x.get("source_id") for x in ready if x.get("source_id")],
     }
 
 def propose_learning_action(context:dict, state:dict, strategy:dict)->dict:
-    if strategy["strategy"]=="HOLD_FOR_EVIDENCE":
+    if strategy["strategy"] in {"HOLD_FOR_EVIDENCE","HOLD_FOR_REVIEW"}:
         return {
             "action":"NO_LEARNING_ACTION",
             "status":"HOLD",
-            "reason":"INSUFFICIENT_USABLE_EVIDENCE",
+            "reason":strategy["reason"],
             "planner_allocation_allowed":False,
         }
     action_type={
@@ -122,9 +151,12 @@ def propose_learning_action(context:dict, state:dict, strategy:dict)->dict:
         },
     }
 
-def run_learning_cycle(payload:dict)->dict:
+def run_learning_cycle(payload:dict, *, owner_verified_source_ids=None)->dict:
     context=payload.get("context") or {}
-    evidence=payload.get("evidence_candidates") or []
+    # Host-provided verified IDs are not accepted from payload or source rows.
+    permitted=set(owner_verified_source_ids or ())
+    evidence=[x for x in (payload.get("evidence_candidates") or [])
+              if x.get("source_id") in permitted]
     observations=payload.get("observations") or []
     state=interpret_learner_state(context,evidence,observations)
     strategy=select_strategy(context,state,evidence)
@@ -136,7 +168,7 @@ def run_learning_cycle(payload:dict)->dict:
             "skill_id":context.get("skill_id"),
             "learning_context":context.get("learning_context"),
             "desired_evidence_type":context.get("desired_evidence_type") or "learning support evidence",
-            "what_existing_evidence_is_insufficient":"NO_USABLE_EVIDENCE_AFTER_POLICY_FILTER",
+            "what_existing_evidence_is_insufficient":strategy["reason"],
         }
     return {
         "schema":"TAKY_LEARNING_RUNTIME_V1",

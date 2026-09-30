@@ -32,6 +32,8 @@ def synthesize(checkpoint:dict)->dict:
     grouped=_group_by_frontier(checkpoint)
     sections={"foundation":[],"advanced":[],"alternatives":[],"critical":[],"other":[]}
     unresolved=[]
+    sufficiency=checkpoint.get("goal_sufficiency")
+    required_missing=set((sufficiency or {}).get("missing_required") or []) if isinstance(sufficiency,dict) else set()
     for fid,item in fmap.items():
         status=item.get("status")
         if status!="CLOSED":
@@ -48,10 +50,23 @@ def synthesize(checkpoint:dict)->dict:
             "frontier_id":fid,
             "question":item.get("question"),
             "evidence_ids":[e.get("evidence_id") for e in evidence if e.get("evidence_id")],
+            "source_anchors":[{
+                "evidence_id":e.get("evidence_id"),
+                "source_id":e.get("source_id"),
+                "source_url":e.get("source_url"),
+                "excerpt_ref":e.get("excerpt_ref"),
+            } for e in evidence if e.get("evidence_id") or e.get("source_id")],
             "claims":[e.get("claim") for e in evidence if e.get("claim")],
             "best_quality_score":max([float(e.get("quality_score",0) or 0) for e in evidence] or [float(item.get("best_evidence_score",0) or 0)]),
         })
 
+    # A bounded active batch may be fully CLOSED while required questions
+    # were deferred; a polished report must not mask that missing scope.
+    unresolved.extend({"frontier_id":fid,"status":"MISSING_REQUIRED",
+                       "question":fid} for fid in sorted(required_missing)
+                      if fid not in fmap)
+    whole_goal_ok=(not isinstance(sufficiency,dict)
+                   or sufficiency.get("goal_sufficient") is True)
     candidates=[]
     for alt in sections["alternatives"]:
         candidates.append({
@@ -67,11 +82,14 @@ def synthesize(checkpoint:dict)->dict:
         "sections":sections,
         "recommendation_candidates":candidates,
         "unresolved":unresolved,
-        "ready_for_recommendation_review":not unresolved,
+        "ready_for_recommendation_review":not unresolved and whole_goal_ok,
+        "whole_goal_sufficient":whole_goal_ok,
+        "source_grounding_review_required":True,
         "guards":{
             "unresolved_conflict_not_collapsed":True,
             "candidate_is_not_recommendation":True,
             "no_auto_promotion":True,
             "source_trace_preserved":True,
+            "partial_batch_cannot_claim_full_report":True,
         },
     }

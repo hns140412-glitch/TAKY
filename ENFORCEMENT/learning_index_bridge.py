@@ -7,9 +7,11 @@ It never authorizes pedagogical use and never mutates learner state.
 """
 from __future__ import annotations
 from index_retrieval import retrieve
+from index_owner_use_gate import reviewed_learning_row
 
 def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
-                               semantic_scores=None, relations=None, detail_rows=None)->dict:
+                               semantic_scores=None, relations=None, detail_rows=None,
+                               owner_verifier=None)->dict:
     query=str(request.get("query") or request.get("learning_context") or "").strip()
     filters=dict(request.get("filters") or {})
     if request.get("minimum_authority"):
@@ -21,12 +23,23 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         semantic_scores=semantic_scores,
         relations=relations,
         detail_rows=detail_rows,
-        top_k=int(request.get("top_k",5) or 5),
+        top_k=max(int(request.get("top_k",5) or 5),len(index_rows or [])),
         relation_hops=int(request.get("relation_hops",1) or 1),
     )
     minimum=int(request.get("minimum_results",1) or 1)
     primary=result.get("primary",[])
-    sufficient=len(primary)>=minimum
+    # Discovery candidates remain visible for review, but do not satisfy a
+    # Learning evidence request merely by entering a search projection.
+    reviewable=[]; staged=[]
+    for hit in primary:
+        # The verifier is host-provisioned, never read from the request or row.
+        checked=reviewed_learning_row(hit.get("row") or {},owner_verifier)
+        if checked is None:
+            staged.append(hit)
+        else:
+            reviewable.append({**hit,"row":checked})
+    reviewable=reviewable[:max(0,int(request.get("top_k",5) or 5))]
+    sufficient=len(reviewable)>=minimum
     gap=None if sufficient else {
         "type":"LEARNING_EVIDENCE_GAP",
         "query":query,
@@ -35,14 +48,16 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         "constraints":request.get("constraints") or {},
         "minimum_authority":request.get("minimum_authority"),
         "minimum_freshness":request.get("minimum_freshness"),
-        "existing_evidence_count":len(primary),
-        "why_insufficient":f"MINIMUM_RESULTS_NOT_MET:{len(primary)}/{minimum}",
+        "existing_evidence_count":len(reviewable),
+        "staged_candidate_count":len(staged),
+        "why_insufficient":f"MINIMUM_REVIEWABLE_RESULTS_NOT_MET:{len(reviewable)}/{minimum}",
     }
     return {
         "schema":"TAKY_LEARNING_INDEX_RETRIEVAL_V1",
         "request_id":request.get("request_id"),
         "learning_context":request.get("learning_context"),
-        "evidence_candidates":primary,
+        "evidence_candidates":reviewable,
+        "staged_discovery_candidates":staged,
         "relation_expansion":result.get("expanded",[]),
         "details":result.get("details",[]),
         "retrieval_counts":result.get("counts",{}),
@@ -50,6 +65,7 @@ def retrieve_learning_evidence(request:dict, index_rows:list[dict], *,
         "evidence_gap":gap,
         "guards":{
             "retrieval_is_not_pedagogical_authorization":True,
+            "staged_candidates_do_not_satisfy_evidence":True,
             "retrieval_does_not_mutate_learner_state":True,
             "learning_engine_retains_use_decision":True,
             "search_projection_is_not_source_of_truth":True,

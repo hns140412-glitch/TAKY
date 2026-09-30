@@ -12,7 +12,7 @@ LEARNING={
 }
 
 class ExternalToLearningLoopTest(unittest.TestCase):
- def test_new_source_enters_projection_and_requeries(self):
+ def test_new_source_is_staged_and_requery_does_not_authorize_it(self):
   receipt={
    "frontier_id":"F1","query":"decimal remediation","adapter":"WEB",
    "results":[{"url":"https://new.org/decimal","title":"Decimal remediation","source_class":"OFFICIAL","claim":"decimal remediation"}]
@@ -23,7 +23,21 @@ class ExternalToLearningLoopTest(unittest.TestCase):
   self.assertEqual(out["updated_projection_count"],2)
   self.assertIsNotNone(out["learning_requery"])
   lr=out["learning_requery"]["learning_result"]
-  self.assertTrue(lr["retrieval"]["evidence_sufficient_for_review"])
+  self.assertFalse(lr["retrieval"]["evidence_sufficient_for_review"])
+  self.assertEqual(lr["runtime"]["next_learning_action"]["action"],"NO_LEARNING_ACTION")
+  self.assertEqual(lr["mining_request_candidate"]["query"],"decimal remediation")
+  self.assertTrue(out["guards"]["staged_discovery_does_not_reenter_learning_as_evidence"])
+
+ def test_external_source_id_collision_cannot_shadow_index(self):
+  receipt={
+   "frontier_id":"F1","query":"new topic","adapter":"WEB",
+   "results":[{"source_id":"A","url":"https://elsewhere.example/new",
+               "title":"Different document","source_class":"OFFICIAL","claim":"new topic"}]
+  }
+  out=process_external_receipt(receipt,INDEX,LEARNING)
+  self.assertEqual(out["projection_added"],0)
+  self.assertEqual(out["projection_held"][0]["status"],"SOURCE_ID_COLLISION_HOLD")
+  self.assertEqual(out["updated_projection_count"],len(INDEX))
 
  def test_exact_duplicate_is_held_not_readded(self):
   receipt={

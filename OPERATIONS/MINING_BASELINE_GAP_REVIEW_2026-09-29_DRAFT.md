@@ -1,0 +1,117 @@
+# TAKY Mining — baseline recovery, ecosystem comparison, and scoped improvement review
+Date: 2026-09-29 / Scope: operations and a bounded regression in Draft PR #176 / Status: WORKING_DRAFT_NOT_CANONICAL
+
+## Authority and separation
+Original slogans apply globally, verbatim:
+- Think Again, Keep Your Key.
+- Think Again, You’re The Key.
+- USER != DEBUGGER.
+
+Canonical governance owner: MASTER/MASTER_LOGIC.md and MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md.
+Mining V2 scoped implementation remains CLOSED in C2S/MINING_ENGINE_V2_CLOSURE_2026-09-25.md and CURRENT/MINING_ENGINE_CURRENT.json on its isolated V2 branch. Its verified historical implementation SHA is a historical proof, **not** current live HEAD. Operations target is 12 independently observed user-outcome runs across at least 4 families; ledger stays 0/12 until actual outcomes are recorded. A deterministic replay is not a real user result. Do not reopen ten steps, fabricate V3, rebase divergent branches, or merge/deploy without applicable review.
+
+Roles:
+- Mining: interpret user goal, recover sources, decompose questions, source/search strategy, acquire, compare, verify evidence, preserve gaps and propose changes.
+- Index: durable RAW/INDEX/DETAIL/CURRENT relations/identity/search projection and original provenance; a retrieved candidate is not verified evidence.
+- Domain/Learning/App/Work owner: decide applicability and utilization; Mining's research readiness is not product release approval.
+- Human: purpose/meaningful decision; system performs recoverable research and validation without shifting debugging to human.
+
+Baseline execution contract:
+HUMAN INTENT → CURRENT/OWNER/SOURCE RECOVERY → QUESTION/EXPECTED PROOF → INDEX-FIRST → TARGETED EXTERNAL SEARCH → SOURCE/EXACT-CLAIM TRACE → CONFLICT/INDEPENDENCE/FRESHNESS → GAP AND ALTERNATIVE ANALYSIS → FULL-GOAL ASSURANCE → OWNER ACTION/HANDOFF → REAL OUTCOME/REGRESSION. Search hit ≠ evidence; evidence score ≠ all requirements closed; current batch complete ≠ whole goal complete; candidate report ≠ operational decision.
+
+## Inspection and research evidence
+Internal: branch TAKY/taky/mining-evidence-frontier-regression-2026-09-29 (live SHA separately checked), MASTER/MASTER_LOGIC.md; MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md; CURRENT/MINING_ENGINE_CURRENT.json; C2S/MINING_ENGINE_V2_CLOSURE_2026-09-25.md; HANDOFF/MINING_ENGINE_OPERATIONS_NEW_CHAT_START_2026-09-25_LATEST.md; existing ENFORCEMENT modules for goal decomposition, depth, Index retrieval, provider receipts, Core, provenance, pending actions, benchmark and gate workflow.
+
+**Source-recovery result**: the operations handoff points to `C2S/MINING_INDEXING_LEARNING_ROLE_CONTRACT_2026-09-25_V1.json` and `C2S/DATA_INDEX_SCHEMA_CONTRACT_2026-09-25_V1.json`. Both exact paths returned NOT_FOUND in the checked GitHub feature branch and did not appear in its recursive tree. A separate *exact-title* search of the connected TAKY Google Drive found and fetched their full original JSON text:
+- [Mining / Indexing / Learning role contract, Drive document](https://docs.google.com/document/d/1CQbKPr4uKXvy8F3SCfIbdQ1FvuCcpeG7IDGSZq2MpR4/edit?usp=drivesdk), status `ACTIVE_CROSS_ENGINE_ROLE_CONTRACT`, 2026-09-25, 6,201 text characters.
+- [Data Index schema contract, Drive document](https://docs.google.com/document/d/1tGde9cw6lgnxlaC3Cnq0SfTFja_ta3R8cmavxdfmOCw/edit?usp=drivesdk), status `ACTIVE_CONTRACT`, 2026-09-25, 4,692 text characters.
+
+The missing GitHub pointers are therefore a **repository/mirror coverage gap**, not `SOURCE_NONEXISTENT`. Drive originals preserve the explicit role map and RAW/INDEX/DETAIL/CURRENT model, but as a working/mirror surface they are not promoted into the missing GitHub path without exact source/revision reconciliation and authorized canonical write. In particular, the Index schema separates `VERSION_OF` and `EXACT_DUPLICATE_OF`; version lineage alone is NOT evidence identity.
+
+External, classified **case/reference evidence** rather than TAKY authority:
+- LangChain open_deep_research, GitHub issue #284 (2026-06-25): reported partial section completion triggering whole-report completion. #283 (2026-06-23): reported child research exception can end the supervisor, masking missing sibling work. Repo archived/read-only 2026-08-21; treat incidents as design counterexamples, not proof the current main is unfixed.
+  https://github.com/langchain-ai/open_deep_research/issues/284
+  https://github.com/langchain-ai/open_deep_research/issues/283
+  https://github.com/langchain-ai/open_deep_research
+- Its #252 (2026-03-09) reports latest-context loss during compression; #296 (2026-07-26) proposes concept-diff ingestion/token savings, but is a proposal and not a validated universal zero-loss result.
+  https://github.com/langchain-ai/open_deep_research/issues/252
+  https://github.com/langchain-ai/open_deep_research/issues/296
+- GPT-Researcher issue #1893 (2026-07-13; later closed) documents source URL metadata loss causing fabricated placeholder citations. Its research tooling distinguishes snippet retrieval from full-source reading and tests citation grounding. Older issue state must not be presented as current unresolved behavior.
+  https://github.com/assafelovic/gpt-researcher/issues/1893
+  https://github.com/assafelovic/gpt-researcher/blob/main/deep_agents/BENCHMARK.md
+- Official OpenAI Agents SDK documentation documents separate tool/input/output validation and traceability; use this as a pattern comparison, not an instruction to add many agents or migrate the stack.
+  https://openai.github.io/openai-agents-python/guardrails/
+  https://openai.github.io/openai-agents-python/tracing/
+
+## Scoped gap / disposition / owner
+
+| ID | Evidence-backed missing or weak behavior | Disposition and owner | Exit proof |
+| --- | --- | --- | --- |
+| MG-01 | Handoff references two exact paths missing in GitHub, though originals recovered in connected Drive | SOURCE_RECOVERED_IN_DRIVE / GOVERNANCE provenance reconciliation HOLD; preserve semantic ownership | Verify Drive original content/revision against authorized canonical owner, then repair pointer explicitly without overwriting branch state |
+| MG-02 | Core candidate score can be high without fetched original/exact anchor/claim review | ADJUST / MINING operations assurance, implemented in Draft #176 `mining_research_assurance.py`; Core legacy candidate scoring retained | Required goal IDs all source-grounded in independent audit; missing proof yields next action |
+| MG-03 | Partial batch CLOSED may be mistaken for whole-goal CLOSED after resume | ADJUST / MINING Core in Draft #176, preserve original required inventory and queued depth overflow | 2-stage 3-critical-item regression; defer third until evidence and no premature STOP |
+| MG-04 | Provider/source URL or source group can vanish / be miscounted across adapters | ADJUST / Mining exact-ID read-only Index provenance bridge + operational snapshot digest/quote audit | Source identity, exact excerpt and citation trace survive normal receipt, checkpoint and planned report; URL alone not independent publisher proof |
+| MG-05 | Caller could nominate its own trusted reviewer through payload | ADJUST / MINING host boundary: orchestrator ignores caller-supplied reviewer allowlist; direct audit requires separate host-owned trusted list | Forged request allowlist and provider self-certification do not produce operational READY; authenticated host integration remains OPEN |
+| MG-06 | `fresh_enough=True` default does not prove current validity of changing rules/data | ADJUST / operational assurance requires explicit as-of and source-update date when freshness requested; domain owns acceptable window | Missing dates/threshold = FRESHNESS_UNVERIFIED; stale version = reacquisition action |
+| MG-07 | Same failed/empty route retry can turn into failure churn | ADJUST / existing failure memory and provider changed-route fallback; query-revision planner remains OPEN | Failure preserves successful siblings, yields changed permitted route or HOLD; no false full success |
+| MG-08 | Report/export citations may still lose references after compression or snapshots | OPEN / Mining synthesis + consuming report owner | Per-claim source-pointer round-trip at report/export; no placeholder citation or missing referenced IDs |
+| MG-09 | Repeated source content is costly yet can hide new conflicts | HOLD EXPERIMENT / Index/Mining candidate, inspired by #296 only | Immutable RAW pointer + compact claim diff; before/after comparison proves zero material omission/conflict loss, cost benefit |
+| MG-10 | Test fixtures/live-captured receipts might be mistaken for user outcomes | PRESERVE / OPERATIONS ledger strict, 0/12 | Independent recorded usable outcome, not a test run or source listing |
+| MG-11 | End-to-end publisher identity is uncertain when Index has no reviewed group; reviewed-group fields used in a test are not part of the recovered INDEX_L1 schema | HOLD OWNER CONTRACT EXTENSION / Index authority, Mining fail-closed corroboration | Index-owned reviewed group identity contract before any upstream write; no independent-source count inferred from URL count |
+
+**Recovered schema-specific correction:** `VERSION_OF` and `SUPERSEDES` describe version relations, not exact evidence duplication. Only `EXACT_DUPLICATE_OF` is used by the temporary Mining read-only bridge to group publication surfaces; even that cannot establish two independent reviewed publishers. The extra sample `canonical_source_id` and `source_group_reviewed` fields are working assumptions only, not claimed native fields in the recovered 2026-09-25 Index L1 schema.
+
+## Targeted standard (working draft, not adopted canonical)
+1. Each materially required frontier ID must survive depth caps, fallback, checkpoint/resume and synthesis with ID, question, owner, reason, next action, completion evidence and source pointer. Generic scaffolding is optional unless authorized into scope.
+2. A source record requires real locator, source/version or snapshot identity, retrieval/access outcome (FETCHED / ACCESS_HOLD / NOT_FOUND_UNVERIFIED), date/freshness scope and original authoritative class. `SEARCH MISS != SOURCE ABSENCE`; `ACCESS FAILURE != SOURCE ABSENCE`.
+3. A claim that can enter an operational result requires an actual fetched source snapshot (raw bytes/text checked), SHA-256, an exact passage and its location, separate claim-support review with reviewer identity issued by a **trusted host** (not user/provider request), and alignment to the same frontier/source/revision. A mere citation-shaped string, source hit, high score, or provider `direct_support` assertion is a candidate.
+4. Corroboration counts distinct verified source groups, not multiple URLs/pages of one publisher or provider-declared counts. Conflict/published-date/applicability gaps remain OPEN and cannot be collapsed by synthesis. A current official listing proves service description, not live authenticated endpoint success.
+5. Completion is whole-goal, not per-child/per-batch. Any missing required item, tool exception, access failure, unresolved contradiction, stale source, lost citation or unauthorized reviewer gives a classified HOLD/OPEN with next action. Preserve successful sibling receipts. Neither token compression nor handoff may delete immutable source pointers/revision or newer corrections.
+6. A valid operational synthesis has a claim → exact excerpt → verified source → frontier/goal → current authority → owning consumer path in both directions. Consumer acceptance and user outcome are separately recorded; no automatic promotion/merge/deploy.
+7. Source handling minimizes sensitive raw data, never treats page content as tool instructions, and avoids unauthorized access. User authority does not transfer operational debugging to user.
+
+## Exact implementation boundary
+The attached Draft #176 includes source/claim operational assurance, scoped input/output tests and explicit `operational_research_ready`. This is **not** a universal source reader, authenticated-review identity service, source-publisher cryptographic verification, new canonical Index contract, full report/export QA, or externally exercised real task. The caller-supplied `trusted_reviewer_ids` field is deliberately ignored by normal orchestrator; host-owned reviewer authentication/wiring stays OPEN. A passing CI fixture is not a real Operations outcome. Main, CURRENT and Netlify remain unchanged and PR stays Draft/HOLD.
+
+## Next bounded execution (no default V3)
+- Recover the exact owner location of MG-01 references without inventing lost material.
+- Wire a privileged reviewer identity and source-reader receipts to the standalone operational gate only when real hosting authorization exists; validate end-to-end source-claim-report citation trace.
+- Test injected child failure/partial parallel scope, empty or stale source, SOURCE_NOT_RETRIEVED, duplicate current/old sources and lossless compressed manifest.
+- Run actual 12-run operations campaign only with independently observed user outcomes (at least 4 task families; at least 3 for any family-specific strategy review), record measured useful results with timestamps and evidence pointers.
+- Reclassify after concrete new findings; no main merge or Netlify deployment by implication.
+
+End: COMPARE TO LEARN, NOT TO COPY; DEEP MEMORY — LIGHT EXECUTION; USER != DEBUGGER.
+
+## 2026-09-29 — logic-first external comparison: observed defects and corrected execution
+
+This entry supplements, rather than replaces, the original source-role contract. The inspected feature-branch source was compared to official LangGraph persistence/docs, open_deep_research's source-level failure reports, GPT-Researcher retriever/citation examples, OpenAI Agents SDK tracing/guardrails docs, and DeepResearch Bench's citation metrics. External cases are *patterns*, not automatic TAKY authority. There is still **no claim of 12 real user outcomes**.
+
+| Traceable observation | External case / reusable principle | Exact local defect | Applied scoped diff & evidence |
+| --- | --- | --- | --- |
+| Need-specific search strategy existed but never reached provider request planning | GPT-Researcher documents multiple/custom retrievers: https://github.com/assafelovic/gpt-researcher/blob/main/docs/docs/gpt-researcher/search-engines/search-engines.md ; open_deep_research search backend/domain configuration: https://github.com/langchain-ai/open_deep_research/blob/main/src/open_deep_research/configuration.py | `mining_source_strategy.infer_need/SOURCE_POLICIES` were implemented yet `mining_pending_actions._query_plan` emitted a uniform PRIMARY/OFFICIAL/ACADEMIC sequence. Thus practical code queries commonly began at generic WEB even though a GitHub implementation provider was available, and official rules did not prioritize PUBLIC_DATA. | `mining_pending_actions.py` now wires actual need class into the existing request builder. RULE/explicit original filename first OFFICIAL → PUBLIC_DATA; IMPLEMENTATION first IMPLEMENTATION → GITHUB; EXPERIENCE first COMMUNITY → WEB. Tests verify *dispatched* provider and different-provider fallback, not just advisory source-plan text. No new strategy engine or duplicate canonical owner. |
+| One absent adapter suppressed other independently runnable research | LangGraph checkpoint pending-writes keeps completed sibling writes after a parallel failure: https://reference.langchain.com/python/langgraph.checkpoint ; open_deep_research #283 describes false successful termination on child exception: https://github.com/langchain-ai/open_deep_research/issues/283 | `mining_operation_runner.run_with_providers` checked missing providers for the whole batch and returned before invoking any available sibling. `events` count was also incorrectly equivalent to actual callback invocations. | Process available branches; unavailable adapter becomes an explicit **non-call** result that can select an authorized next provider. Preserve independently successful sibling evidence and checkpoint. `invocations` now counts actual callbacks; `attempt_records` includes noncalls. Dedicated test checks a missing GitHub callback cannot suppress a valid WEB branch. **Durable cross-process persistence remains OPEN**; current runner is synchronous/in-memory. |
+| A contested question could close from one polished source | open_deep_research #284 highlights full-task completion must wait for whole fan-out: https://github.com/langchain-ai/open_deep_research/issues/284 ; DeepResearch Bench separates report evaluation from citation accuracy/effective citations: https://github.com/Ayanami0730/deep_research_bench | Mining Core's generic `best_score >= threshold` could mark an original `kind=CONFLICT` as CLOSED with only a single high-score citation, even though contradictory-source resolution was never investigated. | For original conflict frontier require at least two distinct source identities **and** an explicit/structured SUPPORTS relation with no unresolved related pair, while actual contradiction remains CONFLICT. Unverified provider URLs cannot count as two publishers. `next_queries` preserves RESOLVE_CONFLICT for still-OPEN disputed items. Targeted regression covers single citation, unrelated sources, verified supporting sources and two unreviewed URLs. Operational source authentication/claim review is still a separate fail-closed gate. |
+| Report polish can obscure missing citations | GPT-Researcher #1893 documents a historical fast-path URL field loss: https://github.com/assafelovic/gpt-researcher/issues/1893 ; OpenAI Agents SDK documents per-tool guardrails/traces: https://openai.github.io/openai-agents-python/guardrails/ and https://openai.github.io/openai-agents-python/tracing/ | Prior changes added source-anchor output and whole-goal synthesis check, but report/export citation roundtrip and host-integrated trace validation are still not implemented. | **OPEN**, no invented citation-accuracy metric. Exit is per-claim `source_id/URL + exact anchor + accessible original` roundtrip through final consumer output, with independent claims checked on real tasks. |
+
+Expected measurable change in supported regression cases: official/implementation/experience dispatch paths differ; missing provider adapter no longer blocks an independent callable sibling; single-source disputed frontier remains OPEN. This is **engineering fault correction**, not proof of real-world retrieval gain. The existing 12-run campaign still requires independently observed user outcomes, source-to-deliverable proof and fewer repeated failures to assert growth.
+
+Additional externally verified design consideration: OpenAI's official SDK testing guide states in-memory deterministic tests are for owned workflow orchestration; provider/network behavior needs actual integration environments: https://openai.github.io/openai-agents-python/testing/. Do not convert the new fixture regressions into real provider/field successes. No authority writes/main merge/Netlify.
+
+## 2026-09-29 — crash/replay and actual-original metric comparison
+
+External sources actually inspected, their specific failure mechanisms, and TAKY localization:
+- [LangGraph persistence/pending writes](https://github.com/langchain-ai/langgraphjs/blob/main/docs/docs/concepts/persistence.md) and [LangGraph's node-boundary/recovery guidance](https://docs.langchain.com/oss/javascript/langgraph/thinking-in-langgraph): preserve successful sibling work and avoid re-running a node's already observed external side effects on interrupted execution. Unlike LangGraph's full platform checkpointer, TAKY's existing runner was synchronous and held `next_run_input` only in memory; restarting it could repeat calls and waste provider/network side effects.
+- [open_deep_research #283](https://github.com/langchain-ai/open_deep_research/issues/283): a swallowed child exception must not become an apparently successful report. Explicitly preserve failure, receipt and HOLD.
+- [GPT-Researcher #1893](https://github.com/assafelovic/gpt-researcher/issues/1893): loss of source metadata on a shortcut path can produce fabricated final citations. In TAKY, a provider-generated `source_acquisition: ACQUIRED_AND_PRESERVED` likewise cannot be accepted as original-file proof unless locally re-read and checked.
+
+Confirmed TAKY gap: `mining_operation_runner` previously invoked provider callbacks with no write-ahead attempt record; its provider-result journal was only caller-supplied/in-memory. A crash after an externally successful callback but before Core reconciliation would allow another invocation on restart. Its source-file counter also counted **provider metadata assertions/events** without physically re-reading the claimed file; counting each event did not deduplicate byte-identical originals.
+
+Applied **scoped DRAFT implementation**:
+1. `mining_attempt_journal.py`: opt-in host-selected **local** directory; goal+request-keyed `INTENT` is created exclusively and fsynced **before** callback. A bounded allowlisted `RECEIPT` is written via temp file/fsync/atomic replace; actual receipt replay performs no callback and consumes no new provider-call budget. Existing INTENT with missing receipt, corrupt journal, or changed/missing acquired original results in an explicit reconcile HOLD, not guessed success or blind provider fallback. This is not a distributed transactional/host credential store. For hosts where directory fsync is unsupported, this does not assert universal crash-proof guarantees.
+2. `mining_operation_runner.py`: optional explicit journal hookup, replay-vs-callback event differentiation, independently verifies claimed source bytes/size/SHA and HTTP(S) locator before counting a locally preserved original, deduplicates by actual content SHA. Does **not** infer publisher authenticity, provenance of acquisition transport, INDEX identity or domain approval from a provider claim.
+3. `mining_pending_actions.py` and `mining_run_orchestrator.py`: unknown in-flight/corrupt/stale attempt cannot become automatic next-provider success; classified as `IN_FLIGHT_HOLD`, with exact reconciliation action.
+4. Regression tests: 7 journal cases (replay, changed-route failed receipt replay, simulated interruption between INTENT/RECEIPT, corruption, stale on-disk original, cross-goal rejection, secret/raw-content allowlist), and a fabricated provider acquisition receipt test. Mocked callbacks and local test bytes **are not real production transport**.
+
+Operations and real-source recovery still OPEN: connected remote PC `YKH-SangMinYang` was OFFLINE when checked; this sandbox's outbound DNS could not resolve either official publisher or GitHub; web search verified the Incheon Office of Education's [2026-09-01 publisher post](https://www.ice.go.kr/ice/na/ntt/selectNttInfo.do?mi=11633&nttSn=3383177), but direct open/cache did not expose real attachment href/binaries, and no alternate official direct download was confirmed. Incheon required originals remain **0/4 SHA-verified**; overall counted real outcomes remain **0/12**. Never treat a page's four labels, a fixture URL, or a mocked byte receipt as four recovered files. Host-specific live source transport, exact-attachment discovery, full source→claim→deliverable citation roundtrip, and real user outcome improvement remain separate OPEN gates.
+
+No main/CURRENT/Netlify mutation; do not merge Draft PR on a different parent branch merely because GitHub reports mergeability.

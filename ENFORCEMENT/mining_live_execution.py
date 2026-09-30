@@ -22,6 +22,10 @@ def normalize_runtime_result(request:dict,runtime_result:dict)->dict:
         "request_id":request.get("request_id"),
         "results":[],
     }
+    # A provider can report transport SUCCESS while yielding zero usable rows.
+    # This is an EMPTY research result, never a successful acquisition.
+    if state == "SUCCESS" and not receipt.get("results"):
+        state = "EMPTY"
     return {
         "schema":"TAKY_MINING_LIVE_EXECUTION_RESULT_V1",
         "request_id":request.get("request_id"),

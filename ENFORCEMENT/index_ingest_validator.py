@@ -26,7 +26,11 @@ def _candidate_fields(c):
 
 def classify_candidate(candidate:dict,index_rows:list[dict])->dict:
     c=_candidate_fields(candidate)
-    exact=[]; near=[]; version=[]
+    exact=[]; near=[]; version=[]; collision=[]
+    # An external candidate cannot take over a preexisting Index-owner ID.
+    for row in index_rows or []:
+        if c["id"] and str(row.get("source_id") or "")==str(c["id"]):
+            collision.append(str(c["id"]))
     for row in index_rows or []:
         rid=str(row.get("source_id") or "")
         if not rid: continue
@@ -40,7 +44,11 @@ def classify_candidate(candidate:dict,index_rows:list[dict])->dict:
             near.append(rid)
         elif same_title and same_domain:
             version.append(rid)
-    if exact:
+    if collision:
+        status="SOURCE_ID_COLLISION_HOLD"
+        review="INDEX_OWNER_REVIEW_REQUIRED"
+        hold="PROVIDER_CANDIDATE_REUSES_OWNER_SOURCE_ID"
+    elif exact:
         status="EXACT_DUPLICATE"
         review="AUTO_RELATION_CANDIDATE"
         hold=None
@@ -60,6 +68,7 @@ def classify_candidate(candidate:dict,index_rows:list[dict])->dict:
         "schema":"TAKY_INDEX_INGEST_VALIDATION_V1",
         "candidate_id":c["id"],
         "status":status,
+        "source_id_collision_with":collision,
         "exact_duplicate_of":exact,
         "near_duplicate_of":near,
         "possible_version_of":version,
@@ -75,9 +84,17 @@ def classify_candidate(candidate:dict,index_rows:list[dict])->dict:
 
 def validate_batch(candidates:list[dict],index_rows:list[dict])->dict:
     rows=[classify_candidate(c,index_rows) for c in candidates or []]
+    ids=[str(x.get("candidate_id") or "") for x in rows]
+    counts={sid:ids.count(sid) for sid in set(ids)}
+    for x in rows:
+        if not x.get("candidate_id") or counts.get(str(x["candidate_id"]),0)>1:
+            x["status"]="CANDIDATE_ID_COLLISION_HOLD"
+            x["review_state"]="INDEX_OWNER_REVIEW_REQUIRED"
+            x["hold_reason"]="MISSING_OR_REPEATED_CANDIDATE_ID_IN_BATCH"
+            x["promotion_allowed"]=False
     return {
         "schema":"TAKY_INDEX_INGEST_VALIDATION_BATCH_V1",
         "results":rows,
-        "counts":{k:sum(1 for x in rows if x["status"]==k) for k in ("EXACT_DUPLICATE","NEAR_DUPLICATE","POSSIBLE_VERSION","NEW_SOURCE_CANDIDATE")},
+        "counts":{k:sum(1 for x in rows if x["status"]==k) for k in ("EXACT_DUPLICATE","NEAR_DUPLICATE","POSSIBLE_VERSION","NEW_SOURCE_CANDIDATE","SOURCE_ID_COLLISION_HOLD","CANDIDATE_ID_COLLISION_HOLD")},
         "guards":{"batch_validation_does_not_mutate_index":True},
     }

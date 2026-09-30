@@ -25,16 +25,17 @@ class ActualIndexCorpusE2ETest(unittest.TestCase):
   self.assertTrue(out["primary"])
   self.assertEqual(out["primary"][0]["source_id"],"1etdoU35AIduFqjXUqPfidMiQAfqzLoVS")
 
- def test_learning_orchestrator_uses_actual_corpus(self):
+ def test_legacy_actual_corpus_requires_index_owner_review_for_learning_use(self):
   out=orchestrate_learning({
    "evidence_request":{"query":"한자 어휘","minimum_results":1},
    "index_rows":self.rows,
    "context":{"learner_id":"C1","skill_id":"HANJA","learning_context":"한자 어휘 복습"},
    "observations":[{"correct":False},{"correct":False}],
   })
-  self.assertTrue(out["retrieval"]["evidence_sufficient_for_review"])
-  self.assertEqual(out["runtime"]["strategy_selection"]["strategy"],"TARGETED_REMEDIATION")
-  self.assertIsNone(out["mining_request_candidate"])
+  self.assertFalse(out["retrieval"]["evidence_sufficient_for_review"])
+  self.assertEqual(out["runtime"]["strategy_selection"]["strategy"],"HOLD_FOR_EVIDENCE")
+  self.assertFalse(out["runtime"]["next_learning_action"]["planner_allocation_allowed"])
+  self.assertIsNotNone(out["mining_request_candidate"])
 
  def test_mining_index_first_uses_actual_corpus(self):
   out=orchestrate_mining({
