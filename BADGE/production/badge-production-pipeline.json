@@ -999,5 +999,9 @@
       "pre_generation_status": "LOCKED_READY_FOR_CANDIDATE_GENERATION",
       "approval_status": "NOT_APPROVED"
     }
-  ]
+  ],
+  "status": "HISTORICAL_NON_EXECUTABLE_SUPERSEDED_BY_V2",
+  "executable": false,
+  "superseded_by": "BADGE/production/badge-cli-preflight-v2.json",
+  "warning": "DO_NOT_USE_AS_CLI_ENTRYPOINT. Retained only as correction-history evidence."
 }
