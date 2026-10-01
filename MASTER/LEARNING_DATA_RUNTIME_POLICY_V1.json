@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_LEARNING_DATA_RUNTIME_POLICY_V1",
-  "policy_version": "2026-10-02.1",
+  "policy_version": "2026-10-02.2",
   "source_matrix": {
     "name": "LEARNING_DATA_COMPLETENESS_MATRIX_2026-09-23_V49.json",
     "id": "1lTS_yIxjlJdnxes-Rh0RkUe0gSTliVP54sM_0abiUOY"
@@ -307,12 +307,19 @@
         "LEARNER_UNDERSTANDING_FROM_STANDARD_MEMBERSHIP",
         "GLOBAL_LANGUAGE_ABILITY_FROM_SINGLE_EVENT",
         "COGNITIVE_LIMIT_FROM_AGE_OR_GRADE",
-        "OFFICIAL_ENDORSEMENT_OF_GENERATED_CHILD_ANSWER"
+        "OFFICIAL_ENDORSEMENT_OF_GENERATED_CHILD_ANSWER",
+        "CURRICULUM_AUTHORITY_FROM_LEXICAL_REFERENCE",
+        "LEXICAL_AUTHORITY_FROM_CURRICULUM_REFERENCE",
+        "USAGE_AUTHORITY_FROM_CURRICULUM_MEMBERSHIP"
       ],
-      "required_provenance": [
-        "OFFICIAL_EDUCATION_SOURCE"
-      ],
-      "requires_human_review": false
+      "required_provenance": [],
+      "requires_human_review": false,
+      "required_provenance_any_of": [
+        "OFFICIAL_EDUCATION_SOURCE",
+        "LEXICAL_REFERENCE_SOURCE",
+        "LANGUAGE_USAGE_SOURCE",
+        "PEDAGOGICAL_SOURCE_REF"
+      ]
     }
   ]
 }
