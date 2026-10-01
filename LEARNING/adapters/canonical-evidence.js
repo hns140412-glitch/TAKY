@@ -4,6 +4,31 @@ const Verification=require('../verification/verification-layer.js');
 const VERSION='TAKY_CANONICAL_LEARNING_EVIDENCE_V1';
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
+const GROWTH_DIMENSIONS=new Set(['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']);
+const GROWTH_OUTCOMES=new Set(['SUCCESS','PARTIAL','FAIL','UNKNOWN']);
+
+function normalizeGrowthSignals(payload={}){
+  const rows=Array.isArray(payload.growth_signals)?payload.growth_signals:
+    Array.isArray(payload.language_growth_signals)?payload.language_growth_signals:[];
+  return rows.slice(0,32).map(raw=>{
+    const x=raw&&typeof raw==='object'?raw:{};
+    const dimension=clean(x.dimension).toUpperCase();
+    const outcome=clean(x.outcome).toUpperCase()||'UNKNOWN';
+    if(!GROWTH_DIMENSIONS.has(dimension)||!GROWTH_OUTCOMES.has(outcome))return null;
+    const depth=finite(x.depth);
+    return {
+      dimension,
+      outcome,
+      assisted:x.assisted===true,
+      transfer:x.transfer===true,
+      direct_english:x.direct_english===true?true:x.direct_english===false?false:null,
+      kind:clean(x.kind).toUpperCase()||null,
+      target_id:clean(x.target_id||x.learning_target_id)||null,
+      depth:Number.isFinite(depth)?Math.max(0,Math.min(5,depth)):null,
+      evidence_ref:clean(x.evidence_ref)||null
+    };
+  }).filter(Boolean);
+}
 
 function baseFromEvent(event={},context={}){
   const payload=event.payload||{};
@@ -25,6 +50,7 @@ function baseFromEvent(event={},context={}){
     response_latency_ms:finite(payload.responseLatencyMs),
     verified_outcome:null,
     raw_app_signals:{},
+    language_growth_signals:normalizeGrowthSignals(payload),
     provenance:{
       authority:'CANONICAL_EVIDENCE_ADAPTER_ONLY',
       source_event_type:clean(event.event_type||event.type),
@@ -136,6 +162,11 @@ function validateCanonical(e={}){
   if(e.verified_outcome!==null&&e.verified_outcome!==0&&e.verified_outcome!==1)issues.push('VERIFIED_OUTCOME_INVALID');
   if((e.verified_outcome===0||e.verified_outcome===1)&&!e.verification?.receipt_id)issues.push('VERIFIED_OUTCOME_WITHOUT_RECEIPT');
   if(e.evidence_type==='CHILD_SELF_REPORT'&&e.verified_outcome!==null)issues.push('SELF_REPORT_CANNOT_BE_VERIFIED_TARGET');
+  if(!Array.isArray(e.language_growth_signals))issues.push('GROWTH_SIGNALS_INVALID');
+  for(const signal of (e.language_growth_signals||[])){
+    if(!GROWTH_DIMENSIONS.has(clean(signal.dimension).toUpperCase()))issues.push('GROWTH_DIMENSION_INVALID');
+    if(!GROWTH_OUTCOMES.has(clean(signal.outcome).toUpperCase()))issues.push('GROWTH_OUTCOME_INVALID');
+  }
   for(const k of ['schedule_date','planner_date','due_at','due_date']){
     if(Object.prototype.hasOwnProperty.call(e,k))issues.push('SCHEDULE_AUTHORITY_LEAK');
   }
