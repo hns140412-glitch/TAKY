@@ -87,7 +87,9 @@
     const performanceEvidence=accepted.filter(e=>![
       'CHILD_SELF_REPORT',
       'SELF_REFLECTION_EVIDENCE',
-      'READY_EXECUTION_FRICTION_OBSERVATION'
+      'READY_EXECUTION_FACT',
+      'READY_EXECUTION_FRICTION_OBSERVATION',
+      'LEARNING_SUPPORT_OBSERVATION'
     ].includes(clean(e.evidence_type)));
     const performanceSpacedDays=new Set(performanceEvidence.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const verifiedAccuracyEvidence=performanceEvidence.filter(e=>
@@ -169,8 +171,12 @@
         assisted_count:assisted,
         unassisted_count:unassisted,
         child_self_report_count:accepted.filter(e=>clean(e.evidence_type)==='CHILD_SELF_REPORT').length,
+        ready_execution_fact_count:accepted.filter(e=>
+          clean(e.evidence_type)==='READY_EXECUTION_FACT').length,
         ready_execution_friction_observation_count:accepted.filter(e=>
           clean(e.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION').length,
+        imagination_support_observation_count:accepted.filter(e=>
+          clean(e.evidence_type)==='LEARNING_SUPPORT_OBSERVATION').length,
         self_reflection_count:reflectionSummary.reflection_count,
         self_reflection:reflectionSummary,
         verified_performance_count:verifiedAccuracyEvidence.length,
@@ -219,7 +225,7 @@
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
-        mastery_basis:'not estimated until a calibrated estimator is bound; verified accuracy is descriptive evidence, not mastery; self-reflection and Ready execution friction are observation-only and excluded from performance targets',
+        mastery_basis:'not estimated until a calibrated estimator is bound; verified accuracy is descriptive evidence, not mastery; Ready execution facts, Ready friction, self-reflection and Imagination Cloud support observations are excluded from performance targets',
         accuracy_basis:'verified_outcome with LEARNING_VERIFICATION_RECEIPT only; unverified completion, app score and growth-rubric dimension outcomes do not enter accuracy',
         retention_basis:'retention-state baseline is advisory-only until real time-held-out promotion gates pass',
         recovery_basis:'recovery profile is observational and item-scoped; missing target identity is not inferred',
