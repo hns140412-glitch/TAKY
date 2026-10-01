@@ -157,14 +157,19 @@ function classifyWord(rows=[]){
 function currentSetSignal(wordPolicies=[]){
   const current=wordPolicies.filter(x=>x.origin==='CURRENT');
   if(!current.length)return {level:'UNKNOWN',reason:'NO_CURRENT_WORD_SIGNAL'};
-  const high=current.filter(x=>x.priority==='HIGH').length;
-  const stable=current.filter(x=>['SPACED_UNASSISTED_STABLE','RECENT_UNASSISTED_SUCCESS'].includes(x.memory_state)).length;
-  const traceWeak=current.filter(x=>x.memory_state==='TRACE_RECOGNITION_WEAK').length;
-  const strongRate=stable/current.length;
-  const highRate=high/current.length;
-  if(strongRate>=0.8&&highRate<=0.2)return {level:'STRONG',reason:'CURRENT_WORDS_RECALLING_WELL'};
-  if(highRate>=0.4||traceWeak/current.length>=0.3)return {level:'WEAK',reason:'CURRENT_WORDS_NEED_MORE_FOCUS'};
-  return {level:'BALANCED',reason:'CURRENT_WORDS_MIXED'};
+  const observed=current.filter(x=>x.memory_state!=='NEW_OR_UNOBSERVED');
+  if(!observed.length)return {level:'UNKNOWN',reason:'CURRENT_WORDS_NOT_OBSERVED_YET',observed_ratio:0};
+  const high=observed.filter(x=>x.priority==='HIGH').length;
+  const stable=observed.filter(x=>['SPACED_UNASSISTED_STABLE','RECENT_UNASSISTED_SUCCESS'].includes(x.memory_state)).length;
+  const traceWeak=observed.filter(x=>x.memory_state==='TRACE_RECOGNITION_WEAK').length;
+  const observedRatio=observed.length/current.length;
+  const strongRate=stable/observed.length;
+  const highRate=high/observed.length;
+  if(observedRatio>=0.5&&strongRate>=0.8&&highRate<=0.2)
+    return {level:'STRONG',reason:'CURRENT_WORDS_RECALLING_WELL',observed_ratio:observedRatio};
+  if(observedRatio>=0.25&&(highRate>=0.4||traceWeak/observed.length>=0.3))
+    return {level:'WEAK',reason:'CURRENT_WORDS_NEED_MORE_FOCUS',observed_ratio:observedRatio};
+  return {level:'BALANCED',reason:'CURRENT_WORDS_MIXED_OR_EARLY',observed_ratio:observedRatio};
 }
 
 function pastMix(signal){
