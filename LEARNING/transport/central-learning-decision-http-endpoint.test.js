@@ -50,7 +50,7 @@ const parse=r=>JSON.parse(r.body);
    observed_at:'2026-09-26T12:00:00.000Z',member_id:'CHILD_A',
    subject:'english',concept_skill_target:'vocabulary',
    evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',source_app:'hide-seek',
-   instrument_version:'HIDE_CODE_RED_V1',assisted:false,verified_outcome:1,
+   instrument_version:'HIDE_CODE_RED_V1',learning_target_id:'n1',assisted:false,verified_outcome:1,
    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',
     receipt_id:'server-receipt-1',verifier_type:'RETRIEVAL_EXACT_MATCH',
     verifier_version:'HIDE_CODE_RED_V1'}};
@@ -75,6 +75,21 @@ const parse=r=>JSON.parse(r.body);
   assert(!decided.body.includes('observation_only:'));
   assert(!decided.body.includes(token));
   assert(!decided.body.includes('authorized_member_ids'));
+
+  const hidePolicyResponse=await endpoint.handle(req({...scope,
+   hide_vocabulary_context:{current_word_ids:['n1'],past_word_ids:['p1','p2']}}));
+  const hidePolicy=parse(hidePolicyResponse);
+  assert.equal(hidePolicyResponse.status,200,JSON.stringify(hidePolicy));
+  assert.equal(hidePolicy.runtime_result.specialist_policy.hide_seek_vocabulary.authority,
+   'LEARNING_ENGINE_SPECIALIST_POLICY_INTENT_ONLY');
+  assert.equal(hidePolicy.runtime_result.specialist_policy.hide_seek_vocabulary
+   .word_policies.find(x=>x.learning_target_id==='n1').recommended_mode,'RECALL');
+  assert.equal(hidePolicy.runtime_result.specialist_policy.hide_seek_vocabulary
+   .past_word_mix.current_words_mandatory,true);
+  assert.equal(hidePolicy.runtime_result.specialist_policy.hide_seek_vocabulary
+   .guards.planner_owns_dated_allocation,true);
+  assert.equal((await endpoint.handle(req({...scope,
+   hide_vocabulary_context:'browser-precomputed-policy'}))).status,400);
 
   // Governed derived activities are resolved by a trusted server callback.
   // The browser cannot select a source or forge the independent Index owner receipt.
