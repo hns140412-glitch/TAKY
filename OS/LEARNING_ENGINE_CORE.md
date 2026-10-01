@@ -716,6 +716,57 @@ Validated candidate implementation:
 - no main merge / deployment authorized
 
 
+## 21A. Verified accuracy axis — CORE BASE AXIS
+
+Learning Engine base evidence is not only memory.
+
+Base evidence axes include:
+- MEMORY / retrieval / retention / recovery signals
+- VERIFIED ACCURACY
+- assistance / independence
+- confusion / error context
+- language-growth dimensions
+
+Verified accuracy is derived only from:
+- verified_outcome = 0 or 1
+- LEARNING_VERIFICATION_RECEIPT
+- permitted objective verifier / human binary review path
+
+The following do NOT enter verified accuracy:
+- app completion
+- app score / caseMastery
+- child self-report
+- Ready execution friction
+- HUMAN_GROWTH_RUBRIC dimension outcomes
+- unverified Snap production
+
+Accuracy output is descriptive evidence, not mastery:
+- NO_VERIFIED_ACCURACY_EVIDENCE
+- VERIFIED_ACCURACY_SPARSE
+- VERIFIED_ACCURACY_LOW
+- VERIFIED_ACCURACY_MIXED
+- VERIFIED_ACCURACY_HIGH
+
+The Core preserves:
+- verified correct / incorrect counts
+- verified accuracy rate
+- verified unassisted accuracy
+- accuracy instrument versions
+
+If accuracy instruments are mixed, Learning Engine must not trigger accuracy repair from the aggregate alone.
+
+Pedagogical mapping:
+- VERIFIED_ACCURACY_LOW -> ACCURACY_REPAIR candidate
+- VERIFIED_ACCURACY_MIXED -> ACCURACY_CHECKPOINT candidate
+- mixed instrument -> CONTINUE_OBSERVATION
+
+Hard locks:
+ACCURACY != MASTERY
+APP COMPLETION != ACCURACY
+GROWTH RUBRIC != BINARY ACCURACY
+EXECUTION FRICTION != ACCURACY
+REVIEW NEED != REVIEW DATE
+
 ## 22. Language Growth Engine direction — CORE DIRECTION CONFIRMED
 
 Learning Engine is expanded beyond correct/incorrect and review-need judgment.
