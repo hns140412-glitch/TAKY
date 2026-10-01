@@ -1,0 +1,115 @@
+{
+  "schema": "TAKY_ENGLISH_LEXICAL_USAGE_SOURCE_CANDIDATES_2026-10-02_V1",
+  "status": "SOURCE_CANDIDATES_ONLY__NO_RUNTIME_AUTHORITY",
+  "created_date": "2026-10-02",
+  "lexical_semantics": [
+    {
+      "candidate_id": "ENGLISH_LEXICAL_OEWN_2025",
+      "name": "Open English WordNet 2025",
+      "proposed_learning_evidence_role": "LEXICAL_SEMANTICS",
+      "authority_candidate": "OPEN_LEXICAL_DATABASE",
+      "source_url": "https://en-word.net/",
+      "download_url": "https://en-word.net/downloads",
+      "license": "CC-BY-4.0",
+      "current_release": "2025",
+      "strengths": [
+        "sense-level synsets",
+        "short glosses",
+        "synonyms and lexical-semantic relations",
+        "downloadable JSON/WN-LMF/RDF",
+        "open redistribution with attribution"
+      ],
+      "allowed_candidate_use": [
+        "sense disambiguation",
+        "lexical semantic relation grounding",
+        "source-grounded easy-English paraphrase input"
+      ],
+      "forbidden_candidate_use": [
+        "claim OEWN gloss is automatically child-level easy English",
+        "copy source wording as generated TAKY explanation without attribution policy",
+        "grade/curriculum authority",
+        "learner mastery inference"
+      ],
+      "proposed_runtime_pattern": "OEWN_SENSE -> LEARNING_INDEX_LEXICAL_SEMANTICS -> DERIVED_EASY_ENGLISH_PARAPHRASE_CANDIDATE",
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "ENGLISH_LEXICAL_PRINCETON_WORDNET_3",
+      "name": "Princeton WordNet 3.0",
+      "proposed_learning_evidence_role": "LEXICAL_SEMANTICS",
+      "authority_candidate": "LEXICAL_DATABASE_LINEAGE_FALLBACK",
+      "source_url": "https://wordnet.princeton.edu/",
+      "license": "WORDNET_3_0_LICENSE_FREE_USE_WITH_NOTICE",
+      "current_status": "NO_LONGER_DEVELOPED",
+      "disposition": "FALLBACK_LINEAGE_NOT_PRIMARY",
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "ENGLISH_LEXICAL_OXFORD_API",
+      "name": "Oxford Dictionaries API",
+      "proposed_learning_evidence_role": "LEXICAL_SEMANTICS",
+      "disposition": "HOLD_LICENSE_LEGAL_REVIEW",
+      "reason": "Paid/licensed API; current terms impose content and AI-use restrictions. Do not wire to TAKY AI runtime without explicit compatible licence.",
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "ENGLISH_LEXICAL_CAMBRIDGE_API",
+      "name": "Cambridge Dictionary API / licensed data",
+      "proposed_learning_evidence_role": "LEXICAL_SEMANTICS",
+      "disposition": "HOLD_COMMERCIAL_LICENSE_REVIEW",
+      "reason": "API/data licensing available but pricing/usage rights require agreement.",
+      "index_owner_review_required": true
+    }
+  ],
+  "language_usage": [
+    {
+      "candidate_id": "ENGLISH_USAGE_SKETCH_ENGINE",
+      "name": "Sketch Engine Word Sketch API",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "disposition": "HOLD_SUBSCRIPTION_AND_CORPUS_LICENSE_REVIEW",
+      "strengths": [
+        "collocations",
+        "grammatical relations",
+        "frequency",
+        "concordance",
+        "API"
+      ],
+      "note": "Technically strong for natural chunks/collocations; runtime rights depend on subscription and corpus-specific access.",
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_LEIPZIG_CORPORA",
+      "name": "Leipzig Corpora Collection",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "disposition": "SECONDARY_CANDIDATE__QUALITY_AND_TERMS_REVIEW",
+      "strengths": [
+        "large downloadable corpora",
+        "frequency statistics",
+        "multi-language coverage"
+      ],
+      "risks": [
+        "automatically collected web material",
+        "misspellings/noisy sentences",
+        "source-text copyright caveats"
+      ],
+      "forbidden_candidate_use": [
+        "single-source naturalness truth",
+        "child-facing example sentence passthrough without safety/quality review"
+      ],
+      "index_owner_review_required": true
+    }
+  ],
+  "decision": {
+    "preferred_lexical_precheck_candidate": "ENGLISH_LEXICAL_OEWN_2025",
+    "preferred_usage_candidate": null,
+    "lexical_gap_state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
+    "usage_gap_state": "OPEN__NO_UNCONDITIONAL_PROVIDER_SELECTED"
+  },
+  "guards": [
+    "SOURCE_CANDIDATE != INDEXED",
+    "INDEXED != CANONICAL",
+    "LEXICAL_SEMANTICS != CURRICULUM_ALIGNMENT",
+    "LANGUAGE_USAGE != LEXICAL_SEMANTICS",
+    "LICENSE_COMPATIBILITY_REQUIRED_BEFORE_RUNTIME_USE"
+  ]
+}
