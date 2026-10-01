@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V2_GAME_CODEX",
-  "version": "2026-10-02.4",
+  "version": "2026-10-02.5",
   "status": "CURRENT_GAME_CODEX_UI_CONTRACT",
   "authority": {
     "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
@@ -209,7 +209,9 @@
     "SECRET mystery masking is presentation-only and never changes stored metadata",
     "third-party game visual branding/assets are never copied",
     "view mode and sort are independent presentation state; neither mutates badge metadata or award state",
-    "nature progress counts and acquisition summary are derived from badge runtime ledger only; never invented"
+    "nature progress counts and acquisition summary are derived from badge runtime ledger only; never invented",
+    "tier halo / lock / selection / NEW marker are UI layers and must never be baked into canonical badge artwork",
+    "visual state animations are cosmetic and honor reduced-motion"
   ],
   "deployment": "HOLD",
   "design_direction": {
@@ -295,5 +297,51 @@
       "DETAIL_NATURE_CHIP"
     ],
     "invariant": "Changing nature classification never changes badge_id, visual_id, asset_slot_id, art SHA, ownership, tier, or award history"
+  },
+  "visual_state_contract": {
+    "LOCKED": {
+      "treatment": [
+        "DESATURATE",
+        "DIM",
+        "LOCK_OVERLAY"
+      ],
+      "rule": "Do not bake lock/grayscale into source art; presentation layer only."
+    },
+    "EARNED": {
+      "treatment": [
+        "FULL_ART",
+        "TIER_HALO",
+        "TITLE_VISIBLE"
+      ],
+      "rule": "Tier halo derives from runtime tier and remains separate from source art."
+    },
+    "SELECTED": {
+      "treatment": [
+        "FOCUS_RING",
+        "SUBTLE_LIFT"
+      ],
+      "rule": "Selection is local UI state only."
+    },
+    "RECENT": {
+      "treatment": [
+        "NEW_MARKER",
+        "GENTLE_PULSE"
+      ],
+      "window_hours": 72,
+      "rule": "Reduced-motion disables pulse."
+    },
+    "DETAIL_OPEN": {
+      "treatment": [
+        "BOTTOM_SHEET",
+        "BRIEF_REVEAL"
+      ],
+      "rule": "Reveal animation is cosmetic and reduced-motion aware."
+    }
+  },
+  "accessibility": {
+    "color_not_sole_signal": true,
+    "locked_state_has_lock_symbol": true,
+    "ownership_has_text": true,
+    "reduced_motion_supported": true
   }
 }
