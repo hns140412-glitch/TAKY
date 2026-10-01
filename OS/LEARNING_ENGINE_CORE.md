@@ -185,12 +185,14 @@ Planner/Main converts pedagogical need + family constraints into actual placemen
 ## 8. Adapter boundaries
 
 Ready Adapter:
-- sends confirmed assignment context and execution evidence to Core;
-- consumes learning-unit/pedagogical intent;
-- may own assignment decomposition and execution-load metadata only;
-- local review logic is fallback-only when central Learning Engine is unavailable;
-- central Learning Engine takes precedence for learner state, growth control and review policy;
-- Planner remains the only dated allocation owner;
+- sends confirmed assignment context and execution/friction evidence to Core;
+- consumes central pedagogical intent;
+- may own assignment decomposition and operational execution-load metadata only;
+- may preserve legacy local adaptive calculations as non-executable shadow candidates for compatibility/replay;
+- may normalize Hide specialist results for compatibility, but may not create a local review-policy decision or dated review TODO;
+- carry-over friction may be emitted as evidence, but may not trigger local reinterpretation, carry cancellation or learner-adaptive reallocation;
+- central TAKY Learning Engine is the sole learner-state, growth-control and review-policy authority;
+- Planner remains the only dated allocation owner after central pedagogical intent;
 - must not become learner-model or growth-control authority.
 
 Hide Adapter:
@@ -1048,22 +1050,57 @@ Hard locks:
 Ready Learning Master is not a second Learning Engine.
 
 Ready may own:
-- assignment decomposition;
+- confirmed assignment interpretation / decomposition;
 - operational execution-load metadata;
-- local-first fallback mechanics.
+- session/runtime continuity;
+- compatibility reading of historical Ready / Hide review artifacts.
 
-Ready may not own:
-- learner-state authority;
-- growth-control authority;
-- central review-policy authority while TAKY Learning Engine is available.
+Ready may compute legacy learner-adaptive calculations only as:
+LEGACY_READY_ADAPTIVE_REVIEW_CANDIDATE_ONLY
 
-Ready local memory review:
-- LOCAL_FALLBACK_ONLY;
-- central Learning Engine takes precedence;
-- Planner still owns any dated placement.
+Such candidates have:
+- execution_authorized = false;
+- learner_state_authority = false;
+- pedagogical_decision_authority = false;
+- planner_date_authority = false.
 
+Ready may NOT use local learner friction to:
+- shrink learning units;
+- inject learning checkpoints;
+- raise learner recovery intensity;
+- promote a local memory review policy;
+- create a dated memory-review TODO;
+- reinterpret an assignment as a learner-adaptive intervention;
+- cancel / resolve a carry-over because of a local learning judgment.
+
+Hide memory results inside Ready may be normalized or projected for compatibility.
+If review need exists, Ready returns:
+CENTRAL_LEARNING_ENGINE_REVIEW_REQUIRED
+
+Carry-over friction may become:
+READY_EXECUTION_FRICTION_OBSERVATION_ONLY
+
+The carry remains preserved until an authorized path resolves it.
+No local reinterpretation or Planner mutation is performed from that observation.
+
+Canonical authority route:
+
+READY ASSIGNMENT / EXECUTION / FRICTION EVIDENCE
+-> TAKY LEARNING ENGINE
+-> CENTRAL PEDAGOGICAL INTENT
+-> READY PLANNER
+-> DATED ALLOCATION
+
+Hard locks:
+
+READY ASSIGNMENT INTERPRETATION != LEARNER STATE
 READY EXECUTION LOAD != LEARNER GROWTH STATE
-LOCAL FALLBACK != CENTRAL AUTHORITY
+READY FRICTION OBSERVATION != PEDAGOGICAL DECISION
+LOCAL REVIEW ADVISORY != REVIEW POLICY
+REVIEW NEED != REVIEW DATE
+
+Validated reconciliation branch:
+- Ready & Set: taky/ready-learning-authority-reconcile-2026-10-02
 
 ### 22.16 Dimension-level Snap growth verification
 
@@ -1093,6 +1130,7 @@ The receipt:
 - LEARNING/adapters/canonical-evidence.js growth signal normalization
 - LEARNING/runtime/learning-engine-runtime.js growth integration
 - LEARNING/transport/central-learning-decision-http-endpoint.js trusted growth decision surface
+- Ready reconciliation branch: taky/ready-learning-authority-reconcile-2026-10-02
 - Hide candidate branch: taky/hide-memory-routing-learning-engine-2026-10-02
 - Snap candidate branch: taky/snap-growth-engine-handoff-2026-10-02
 
