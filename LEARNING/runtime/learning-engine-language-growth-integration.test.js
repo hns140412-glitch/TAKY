@@ -20,6 +20,7 @@ const owners=[
     source_id:'CORPUS-ACCEPT-1',source_ref:'INDEX:CORPUS-ACCEPT-1',
     source_family:'LANGUAGE_CORPUS',source_type:'LANGUAGE_USAGE_REFERENCE',
     authority_class:'REFERENCE',detail_anchor:'DETAIL:CORPUS-ACCEPT-1#usage',
+    learning_evidence_kind:'DEPENDENCY_PATTERN',
     provenance:['LANGUAGE_USAGE_SOURCE']
   },
   {
@@ -73,6 +74,7 @@ const out=Runtime.derive({
         source_id:owner.source_id,source_ref:owner.source_ref,
         source_family:owner.source_family,source_type:owner.source_type,
         authority_class:owner.authority_class,detail_anchor:owner.detail_anchor,
+        learning_evidence_kind:owner.learning_evidence_kind||null,
         provenance:[...owner.provenance]
       }))
     },
@@ -92,12 +94,12 @@ const out=Runtime.derive({
         },
         'CORPUS-ACCEPT-1':{
           term:'accept',
-          expression_chunks:['accept an idea','I can accept ...'],
           natural_collocations:['accept an idea','accept an invitation'],
           grammar_patterns:['can + base verb','accept + noun']
         },
         'PED-EN-1':{
           term:'accept',
+          expression_chunks:['accept an idea','I can accept ...'],
           english_thinking_support:['picture -> easy English meaning -> chunk -> own sentence']
         }
       }
@@ -123,7 +125,9 @@ assert.ok(out.growth_next_step.language_support.easy_english_definitions.length>
 assert.ok(out.growth_next_step.language_support.expression_chunks.length>0);
 assert.deepEqual(out.growth_next_step.curriculum_grounding.source_refs,['INDEX:EDU-ENG-G5-1']);
 assert.equal(out.growth_next_step.language_resource_provenance.easy_english_definitions[0].source_role,'LEXICAL_SEMANTICS');
-assert.equal(out.growth_next_step.language_resource_provenance.expression_chunks[0].source_role,'LANGUAGE_USAGE');
+assert.equal(out.growth_next_step.language_resource_provenance.expression_chunks[0].source_role,'PEDAGOGICAL_USAGE');
+assert.equal(out.growth_next_step.language_resource_provenance.natural_collocations[0].learning_evidence_kind,
+ 'DEPENDENCY_PATTERN');
 assert.equal(out.growth_next_step.language_resource_provenance.english_thinking_support[0].source_role,'PEDAGOGICAL_USAGE');
 assert.equal(out.growth_next_step.hide_to_snap_handoff.to_app,'snap-pop');
 assert.equal(out.growth_next_step.hide_to_snap_handoff.child_authorship_required,true);
