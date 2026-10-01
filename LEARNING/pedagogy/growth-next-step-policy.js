@@ -5,48 +5,101 @@ const AUTHORITY='LEARNING_ENGINE_GROWTH_INTENT_ONLY';
 const Profile=require('./language-growth-profile.js');
 const clean=v=>String(v??'').trim();
 
+function sourceRole(item={}){
+  const text=[
+    item.source_family,item.source_type,item.authority_class,
+    ...(Array.isArray(item.provenance)?item.provenance:[])
+  ].map(clean).join(' ').toUpperCase();
+  if(/OFFICIAL|CURRICULUM|EDUCATION|ACHIEVEMENT_STANDARD/.test(text))
+    return 'CURRICULUM_ALIGNMENT';
+  if(/DICTIONARY|LEXICAL|GLOSSARY|WORDNET|VOCAB_REFERENCE/.test(text))
+    return 'LEXICAL_SEMANTICS';
+  if(/CORPUS|COLLOCATION|USAGE|EXAMPLE_BANK|LANGUAGE_USAGE/.test(text))
+    return 'LANGUAGE_USAGE';
+  if(/PUBLISHER|TEXTBOOK|PEDAGOG|LEARNING_RESOURCE/.test(text))
+    return 'PEDAGOGICAL_USAGE';
+  return 'GENERAL_REFERENCE';
+}
+
 function officialItems(learningIndex={}){
   const rows=Array.isArray(learningIndex?.semantic_items)?learningIndex.semantic_items:[];
-  return rows.filter(x=>{
-    const a=clean(x.authority_class).toUpperCase();
-    const f=clean(x.source_family).toUpperCase();
-    return a.includes('OFFICIAL')||f.includes('OFFICIAL')||f.includes('CURRICULUM');
-  });
+  return rows.filter(x=>sourceRole(x)==='CURRICULUM_ALIGNMENT');
 }
 
 function growthResources(learningIndex={}){
   const rows=Array.isArray(learningIndex?.semantic_items)?learningIndex.semantic_items:[];
   const official=officialItems(learningIndex);
-  const preferred=official.length?official:rows;
-  const defs=[],chunks=[],collocations=[],grammar=[],moves=[],questions=[],production=[],englishThinking=[];
-  for(const item of preferred){
-    const g=item?.semantic_groups?.language_growth||{};
-    const push=(arr,value)=>{
-      if(Array.isArray(value))arr.push(...value);
-      else if(value!==undefined&&value!==null&&clean(value))arr.push(value);
-    };
-    push(defs,g.easy_english_definition);
-    push(chunks,g.expression_chunks);
-    push(collocations,g.natural_collocations);
-    push(grammar,g.grammar_patterns);
-    push(moves,g.thinking_moves);
-    push(questions,g.question_stems);
-    push(production,g.production_targets);
-    push(englishThinking,g.english_thinking_support);
-  }
+  const buckets={
+    easy_english_definitions:[],
+    expression_chunks:[],
+    natural_collocations:[],
+    grammar_patterns:[],
+    thinking_moves:[],
+    question_stems:[],
+    production_targets:[],
+    english_thinking_support:[]
+  };
+  const provenance=Object.fromEntries(Object.keys(buckets).map(k=>[k,[]]));
+
+  const allowed={
+    easy_english_definitions:new Set(['LEXICAL_SEMANTICS','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
+    expression_chunks:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
+    natural_collocations:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
+    grammar_patterns:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
+    thinking_moves:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
+    question_stems:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
+    production_targets:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
+    english_thinking_support:new Set(['PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE'])
+  };
+
+  const fieldMap={
+    easy_english_definitions:'easy_english_definition',
+    expression_chunks:'expression_chunks',
+    natural_collocations:'natural_collocations',
+    grammar_patterns:'grammar_patterns',
+    thinking_moves:'thinking_moves',
+    question_stems:'question_stems',
+    production_targets:'production_targets',
+    english_thinking_support:'english_thinking_support'
+  };
+
+  const push=(arr,value)=>{
+    if(Array.isArray(value))arr.push(...value);
+    else if(value!==undefined&&value!==null&&clean(value))arr.push(value);
+  };
   const uniq=xs=>[...new Set(xs.map(x=>typeof x==='string'?x.trim():JSON.stringify(x)).filter(Boolean))]
     .map(x=>{try{return x.startsWith('{')||x.startsWith('[')?JSON.parse(x):x}catch{return x}});
+
+  for(const item of rows){
+    const role=sourceRole(item);
+    const g=item?.semantic_groups?.language_growth||{};
+    for(const [bucket,field] of Object.entries(fieldMap)){
+      if(!allowed[bucket].has(role))continue;
+      const before=buckets[bucket].length;
+      push(buckets[bucket],g[field]);
+      if(buckets[bucket].length>before){
+        provenance[bucket].push({
+          source_ref:item.source_ref||null,
+          source_role:role,
+          source_family:item.source_family||null,
+          authority_class:item.authority_class||null
+        });
+      }
+    }
+  }
+
+  for(const key of Object.keys(buckets))buckets[key]=uniq(buckets[key]);
+
   return {
     curriculum_verified:official.length>0,
     curriculum_source_refs:[...new Set(official.map(x=>x.source_ref).filter(Boolean))],
-    easy_english_definitions:uniq(defs),
-    expression_chunks:uniq(chunks),
-    natural_collocations:uniq(collocations),
-    grammar_patterns:uniq(grammar),
-    thinking_moves:uniq(moves),
-    question_stems:uniq(questions),
-    production_targets:uniq(production),
-    english_thinking_support:uniq(englishThinking)
+    ...buckets,
+    resource_provenance:provenance,
+    source_role_guard:{
+      curriculum_alignment_does_not_certify_lexical_semantics:true,
+      lexical_semantics_does_not_certify_grade_alignment:true,
+      language_usage_does_not_certify_curriculum_alignment:true
+    }
   };
 }
 
@@ -246,6 +299,8 @@ function derive({growth_profile,learning_index=null}={}){
       source_refs:resources.curriculum_source_refs,
       achievement_or_grade_claim_allowed:resources.curriculum_verified
     },
+    language_resource_provenance:resources.resource_provenance,
+    source_role_guard:resources.source_role_guard,
     hide_to_snap_handoff:snapHandoff(growth_profile,resources,stance,depth,control),
     reference_gap_candidate:resources.curriculum_verified?null:{
       gap_type:'CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED',
@@ -261,7 +316,8 @@ function derive({growth_profile,learning_index=null}={}){
       hide_prepares_language_material_snap_owns_expression_execution:true,
       planner_owns_dates:true,
       growth_intensity_and_expression_level_are_engine_intent_only:true,
-      low_confidence_cannot_force_growth_upshift:true
+      low_confidence_cannot_force_growth_upshift:true,
+      curriculum_and_language_resource_authorities_are_separate:true
     },
     cannot_influence:['SCHEDULE_DATE','PLANNER_DATE','DUE_AT','DEADLINE','ASSIGNMENT_FACT','FINAL_CHILD_ANSWER']
   };
