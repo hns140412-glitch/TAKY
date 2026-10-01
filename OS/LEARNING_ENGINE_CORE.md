@@ -608,9 +608,19 @@ Validated candidate implementation:
 - integration regression run 36883758174: SUCCESS
 - enforcement replay run 36883758191: SUCCESS
 
-## 21. Hide & Seek word-memory adaptive routing
+## 21. Hide & Seek word-memory adaptive routing — PROPOSAL / NOT CORE AUTHORITY
 
-Hide & Seek remains the specialist executor. Learning Engine owns the adaptive decision.
+Authority correction — 2026-10-02:
+- per-word automatic branching,
+- adaptive past-word proportion,
+- delayed-recall automation
+
+remain PROPOSAL / CANDIDATE.
+The validated branch implementation is retained as an experiment and regression asset only.
+It SHALL NOT be treated as promoted CURRENT Learning Engine behavior until separately approved.
+
+Hide & Seek remains the specialist executor. If this proposal is later promoted,
+Learning Engine would own the adaptive decision.
 
 ### 21.1 Per-word automatic route
 
@@ -684,5 +694,210 @@ Validated candidate implementation:
 - central decision surface: LEARNING/transport/central-learning-decision-http-endpoint.js
 - Hide consumer branch: taky/hide-memory-routing-learning-engine-2026-10-02
 - no main merge / deployment authorized
+
+
+## 22. Language Growth Engine direction — CORE DIRECTION CONFIRMED
+
+Learning Engine is expanded beyond correct/incorrect and review-need judgment.
+
+Primary growth loop:
+
+OFFICIAL / EDUCATION MINING
+-> MINING INDEX
+-> LEARNING INDEX
+-> ACTUAL LEARNER EVIDENCE
+-> LANGUAGE GROWTH PROFILE
+-> NEXT ONE-STEP GROWTH INTENT
+-> HIDE / SNAP EXECUTION
+-> NEW LEARNER EVIDENCE
+-> GROWTH PROFILE UPDATE
+
+### 22.1 Growth dimensions
+
+Learning Engine may read and support growth across:
+
+- VOCABULARY — meaning, semantic network, word family, contextual use
+- GRAMMAR — noticing and using patterns naturally
+- EXPRESSION — chunks, collocations, sentence/speech expansion
+- THINKING — connect, compare, explain, infer, justify, create
+- ENGLISH_THINKING — direct English meaning/context processing instead of Korean word-by-word substitution
+
+Missing evidence = UNKNOWN, not failure.
+
+### 22.2 Evidence authority
+
+Growth decisions combine two evidence classes:
+
+1. DOMAIN / CURRICULUM EVIDENCE
+   - official curriculum / education authority source
+   - achievement-standard alignment
+   - grade / exposure context
+   - vocabulary / grammar / expression / thinking semantics
+   - easy-English definition candidates
+   - expression chunks / collocations
+   - representation / transfer links
+
+2. LEARNER EVIDENCE
+   - actual Hide retrieval and language-use evidence
+   - Snap child-authored production evidence
+   - assistance / independence
+   - transfer evidence
+   - question / explanation depth where legitimately observed
+   - direct-English vs translation-dependent signals only when actually evidenced
+
+Learning Index owns the derived domain semantic view.
+Learning Engine owns learner interpretation and next-step intent.
+
+CURRICULUM TERM MATCH != LEARNER UNDERSTANDING
+AGE / GRADE != THINKING CEILING
+CHILD PRODUCTION != AUTOMATIC QUALITY CLAIM
+
+### 22.3 Pull / draw / push growth support
+
+Canonical support progression:
+
+1. SCAFFOLD_LEAD — 끌어주기
+   - easier wording
+   - easy English definition
+   - concrete context
+   - useful expression chunk
+   - partial model
+   - ask the child to complete the final step
+
+2. ELICIT_PULL — 당겨주기
+   - short question
+   - retrieve a chunk / pattern
+   - connect meaning and structure
+   - child finishes the idea
+   - reduce direct explanation
+
+3. TRANSFER_PUSH — 밀어주기
+   - new context
+   - compare / explain / infer
+   - personalize
+   - create / justify
+   - minimal cue
+
+The engine may move backward or forward according to evidence.
+This is not a one-way level ladder.
+
+### 22.4 Age adaptation
+
+Age / grade adapts:
+- wording length,
+- vocabulary load,
+- abstraction wording,
+- number of simultaneous cues,
+- hint presentation.
+
+Age / grade SHALL NOT impose a hard ceiling on thinking depth.
+
+AGE CHANGES LANGUAGE LOAD, NOT COGNITIVE CEILING.
+
+Current coarse language-load output:
+- VERY_SIMPLE
+- SIMPLE
+- STANDARD
+
+Actual evidence may still support deeper questions with simpler language.
+
+### 22.5 Question depth
+
+Question depth is evidence-adaptive:
+
+1. NOTICE — notice / identify
+2. CONNECT — meaning / relation / chunk
+3. EXPLAIN — explain / compare
+4. APPLY_TRANSFER — use in a new situation
+5. CREATE_JUSTIFY — create / justify / extend
+
+Question count is not a score.
+Deeper question != always better.
+The engine chooses the next useful step.
+
+### 22.6 Hint strength
+
+Hint policy is separate from answer ownership.
+
+Strong support:
+EASY_MEANING_OR_MODEL
+-> EXPRESSION_CHUNK
+-> PARTIAL_FRAME
+-> CHILD COMPLETES
+
+Medium support:
+SHORT_QUESTION
+-> KEY_CHUNK_OR_PATTERN
+-> CHILD FINISHES
+
+Minimal support:
+WAIT
+-> SHORT_CUE
+-> ASK_FOR_REASON_OR_NEW_CONTEXT
+
+The engine SHALL NOT turn a hint into the child's final answer.
+
+### 22.7 Easy English / natural English thinking
+
+When grounded in Learning Index evidence, prefer:
+- easy English definition before Korean substitution,
+- semantic context before isolated translation,
+- expression chunk before word-by-word assembly,
+- collocation / pattern before abstract grammar explanation,
+- image / situation / action when useful,
+- Korean as fallback support, not mandatory first representation.
+
+Canonical direction:
+
+KOREAN TRANSLATION DEPENDENCY
+-> EASY ENGLISH MEANING
+-> CHUNK / PATTERN
+-> CONTEXT
+-> CHILD'S OWN SENTENCE / SPEECH
+-> NEW CONTEXT TRANSFER
+
+This does not prohibit Korean explanation when it materially helps comprehension.
+
+### 22.8 Hide -> Snap transfer
+
+Hide owns lexical / retrieval interaction.
+Snap owns child-authored expression execution.
+
+Growth handoff:
+
+HIDE WORD / MEANING / CHUNK EVIDENCE
+-> LEARNING ENGINE GROWTH DECISION
+-> SNAP RE-RESOLVES AUTHENTICATED CENTRAL DECISION
+-> CHILD SPEAKS / WRITES / EXPLAINS
+-> SNAP RETURNS PRODUCTION EVIDENCE
+-> LEARNING ENGINE UPDATES GROWTH PROFILE
+
+Hide does NOT send Learning Engine authority through mutable URL parameters.
+It sends only continuity scope + learning target / word material.
+Snap re-queries the authenticated central Learning Engine.
+
+### 22.9 Curriculum / Mining gap
+
+If official curriculum / education-index grounding is absent, Learning Engine may emit:
+CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED
+
+It SHALL NOT directly authorize Mining.
+The existing Index-first gap broker decides whether:
+- Learning Index rebuild is enough,
+- Mining Index already contains evidence,
+- or Mining Engine acquisition is actually required.
+
+### 22.10 Current candidate implementation
+
+- LEARNING/pedagogy/language-growth-profile.js
+- LEARNING/pedagogy/growth-next-step-policy.js
+- LEARNING/index/learning-index.js language_growth semantic group
+- LEARNING/adapters/canonical-evidence.js growth signal normalization
+- LEARNING/runtime/learning-engine-runtime.js growth integration
+- LEARNING/transport/central-learning-decision-http-endpoint.js trusted growth decision surface
+- Hide candidate branch: taky/hide-memory-routing-learning-engine-2026-10-02
+- Snap candidate branch: taky/snap-growth-engine-handoff-2026-10-02
+
+Main merge / deployment remain HOLD until branch regression passes and promotion is explicitly authorized.
 
 END
