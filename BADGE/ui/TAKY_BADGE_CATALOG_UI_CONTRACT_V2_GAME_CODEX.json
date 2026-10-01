@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V2_GAME_CODEX",
-  "version": "2026-10-02.2",
+  "version": "2026-10-02.3",
   "status": "CURRENT_GAME_CODEX_UI_CONTRACT",
   "authority": {
     "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
@@ -66,7 +66,14 @@
         "PLANNING_SELF_REGULATION",
         "PROBLEM_SOLVING",
         "EXTRA_GROWTH"
-      ]
+      ],
+      "view_modes": [
+        "GRID",
+        "NATURE",
+        "CATEGORY",
+        "OWNERSHIP"
+      ],
+      "interaction_rule": "보기(view mode)는 묶는 기준, 정렬(sort)은 묶음 내부/전체 순서 기준으로 분리한다."
     },
     {
       "id": "BADGE_DETAIL",
@@ -197,7 +204,8 @@
     "game-codex UI changes must not mutate badge award logic",
     "sort/filter state is presentation-only",
     "SECRET mystery masking is presentation-only and never changes stored metadata",
-    "third-party game visual branding/assets are never copied"
+    "third-party game visual branding/assets are never copied",
+    "view mode and sort are independent presentation state; neither mutates badge metadata or award state"
   ],
   "deployment": "HOLD",
   "design_direction": {
