@@ -64,3 +64,40 @@ const unresolvedRecovery=F.derive({
 });
 assert.equal(unresolvedRecovery.intents.some(x=>x.intent==='TARGETED_RECOVERY_PRACTICE'),true);
 assert.equal(F.validate(unresolvedRecovery).ok,true);
+
+
+const lowAccuracy=F.derive({
+  ok:true,
+  scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{},
+  inferred:{
+    accuracy_signal:'VERIFIED_ACCURACY_LOW',
+    accuracy_instrument_mixed:false
+  }
+});
+assert.equal(lowAccuracy.intents.some(x=>x.intent==='ACCURACY_REPAIR'),true);
+
+const mixedAccuracy=F.derive({
+  ok:true,
+  scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{},
+  inferred:{
+    accuracy_signal:'VERIFIED_ACCURACY_LOW',
+    accuracy_instrument_mixed:true
+  }
+});
+assert.equal(mixedAccuracy.intents.some(x=>x.intent==='ACCURACY_REPAIR'),false);
+assert.equal(mixedAccuracy.intents.some(x=>
+  x.intent==='CONTINUE_OBSERVATION'&&
+  (x.bases||[x.basis]).includes('ACCURACY_INSTRUMENT_MIXED')),true);
+
+const mediumAccuracy=F.derive({
+  ok:true,
+  scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{},
+  inferred:{
+    accuracy_signal:'VERIFIED_ACCURACY_MIXED',
+    accuracy_instrument_mixed:false
+  }
+});
+assert.equal(mediumAccuracy.intents.some(x=>x.intent==='ACCURACY_CHECKPOINT'),true);
