@@ -208,6 +208,29 @@ Learning Engine
 
 Learner-performance gap goes to specialist acquisition, not external Mining.
 
+## 4A. Ready execution-friction route
+
+Ready carry escalation is classified before Learning use.
+
+Schedule/deadline pressure:
+READY carry
+-> Planner + Parent resolution
+-> no Learning evidence
+
+Repeated execution friction:
+READY carry
+-> READY_EXECUTION_FRICTION_OBSERVATION_ONLY
+-> authenticated central evidence outbox
+-> canonical READY_EXECUTION_FRICTION_OBSERVATION
+-> excluded from learner performance evidence
+-> no direct pedagogical decision
+-> no direct Planner mutation
+
+Hard locks:
+- EXECUTION FRICTION != LEARNING FAILURE
+- DEADLINE PRESSURE != LEARNER STATE
+- OBSERVATION ACK != PEDAGOGICAL DECISION
+
 ## 5. Current branches
 
 TAKY:
@@ -234,17 +257,31 @@ TAKY explicit role-enforcement broker:
 - Enforcement 36899957119: RUNNING_AT_HANDOFF_UPDATE
 
 Ready authority reconciliation:
-- Integration 36899321027: SUCCESS
-- Learning Runtime Bridge 36899321183: SUCCESS
-- Runtime E2E 36899217250: SUCCESS on runtime-identical source
-- exact latest SHA c318c1e5e461acdb367749cf50dbff68e538d009 changes only .github/scripts/ready_learning_master_contract_test.js from the successful runtime SHA; latest rerun 36899321218 is still in Playwright installation, so this is CI-infrastructure pending rather than an observed runtime regression
+- local learner-adaptive review execution: DISABLED / shadow candidate only
+- local Hide-memory review -> Planner scheduling: FAIL-CLOSED behind central Learning Engine
+- carry escalation routing:
+  - DEADLINE_EXCEEDED / REPEATED_CARRY_NEAR_DEADLINE -> Planner + Parent
+  - REPEATED_CARRY_LIMIT -> central observation-only friction evidence
+- Ready friction observation is centrally ACKed but cannot directly mutate Planner or learner state
+- latest Integration 36901050524: SUCCESS
+- latest Learning Runtime Bridge 36901050677: SUCCESS
+- latest Runtime E2E 36901050649: RUNNING_AT_HANDOFF_UPDATE
 
 Hide and Snap prior growth-axis branch regressions remain PASS.
 
 ## 7. Remaining OPEN
 
-1. Complete the exact-latest Ready Runtime E2E rerun when the CI runner leaves Playwright installation.
-2. Keep memory-routing trio as Candidate until separate approval.
-3. Do not merge main / deploy yet.
-4. Before promotion, run one final cross-repository authority regression:
+1. Complete latest Ready Runtime E2E 36901050649.
+2. Target coverage guard:
+   - current growth profile tracks target_id but broad dimension promotion does not yet require explicit target diversity;
+   - repeated success on one target must not silently become broad vocabulary/expression growth;
+   - do not hard-code a minimum count yet because target-specific skills and verified transfer contexts need separate treatment;
+   - next design should distinguish TARGET_STABILITY from DIMENSION_GENERALIZATION.
+3. Ready friction interpretation:
+   - currently observation-only by design;
+   - repeated carry must not become learning failure automatically;
+   - any future diagnostic policy must separate workload/fatigue/context from learning difficulty.
+4. Keep memory-routing trio as Candidate until separate approval.
+5. Do not merge main / deploy yet.
+6. Before promotion, run one final cross-repository authority regression:
    Mining / Index / Learning / Ready / Hide / Snap / Planner.
