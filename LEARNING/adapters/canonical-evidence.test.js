@@ -89,10 +89,28 @@ assert.equal(A.validateCanonical(snap).ok,true);
 
 const ready=A.fromReady({
   event_id:'r1',source:'ready-set',occurred_at:'2026-09-25T09:00:00.000Z',
-  payload:{evidence_type:'CHILD_SELF_REPORT',self_report:{difficulty:'HARD'}}
+  payload:{
+    evidence_type:'CHILD_SELF_REPORT',
+    self_report:{difficulty:'HARD'},
+    planner_allocation:{
+      authority:'READY_SET_PLANNER_ALLOCATION',
+      date:'2026-09-25',quantity:4,date_and_quantity_owner:'READY_SET_PLANNER'
+    },
+    started_at:'2026-09-25T08:30:00.000Z',
+    ended_at:'2026-09-25T09:00:00.000Z',
+    actual_minutes:30,performed_quantity:3,
+    completion_state:'PARTIAL',parent_confirmation:false
+  }
 },{...ctx,evidence_type:'CHILD_SELF_REPORT'});
 assert.equal(ready.evidence_type,'CHILD_SELF_REPORT');
 assert.equal(ready.verified_outcome,null);
+assert.equal(ready.raw_app_signals.planner_allocation.authority,'READY_SET_PLANNER_ALLOCATION');
+assert.equal(ready.raw_app_signals.actual_minutes,30);
+assert.equal(ready.raw_app_signals.performed_quantity,3);
+assert.equal(ready.raw_app_signals.completion_state,'PARTIAL');
+assert.equal(ready.references.curriculum_refs[0],'CURR:ENG5:1');
+assert.equal(ready.references.lexical_refs[0],'OEWN:accept');
+assert.equal(ready.references.usage_refs[0],'USAGE:accept-an-idea');
 assert.equal(A.validateCanonical(ready).ok,true);
 
 
@@ -117,6 +135,7 @@ assert.equal(friction.verified_outcome,null);
 assert.equal(friction.execution_friction.authority,'READY_EXECUTION_FRICTION_OBSERVATION_ONLY');
 assert.equal(friction.execution_friction.learner_state_authority,false);
 assert.equal(friction.raw_app_signals.forwarded_ready_friction_observation,true);
+assert.equal(friction.identity.scope_kind,'AGGREGATED_EXECUTION');
 assert.equal(A.validateCanonical(friction).ok,true);
 
 const imagination=A.fromImaginationCloud({
