@@ -28,7 +28,7 @@ const itemSignal=A.fromHide({
 },ctx);
 assert.equal(itemSignal.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
 assert.equal(itemSignal.learning_target_id,'accept');
-assert.equal(itemSignal.interaction_mode,'UNKNOWN');
+assert.equal(itemSignal.interaction_mode,'TRACE');
 assert.equal(itemSignal.memory.item_signal.mode,'TRACE');
 assert.equal(itemSignal.memory.item_signal.word_origin,'CURRENT');
 assert.equal(itemSignal.memory.item_signal.correct,true);
