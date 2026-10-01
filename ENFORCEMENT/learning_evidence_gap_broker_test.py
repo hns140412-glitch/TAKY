@@ -13,6 +13,16 @@ REFERENCE_GAP={
  "acceptable_authority_classes":["OFFICIAL"],"required_provenance":["OFFICIAL_STANDARD_REF"],
  "query_terms":["영어","VOCABULARY","교육과정"],"existing_source_refs":[]
 }
+LEXICAL_GAP={
+ "gap_id":"A:english:vocabulary:LEXICAL_SEMANTICS_REFERENCE_REQUIRED:LE-GROWTH-01",
+ "owner":"LEARNING_ENGINE_CORE","gap_type":"LEXICAL_SEMANTICS_REFERENCE_REQUIRED","priority":"MEDIUM",
+ "scope":{"member_id":"A","subject":"english","concept_skill_target":"vocabulary"},
+ "index_check_required":True,"resolution_path":"INDEX_THEN_MINING_IF_INSUFFICIENT",
+ "mining_request_authorized":False,"requested_capability":"LEXICAL_SEMANTICS",
+ "required_learning_evidence_role":"LEXICAL_SEMANTICS",
+ "required_provenance_any_of":["LEXICAL_REFERENCE_SOURCE"],
+ "query_terms":["english","vocabulary","LEXICAL_SEMANTICS"],"existing_source_refs":[]
+}
 LEARNER_GAP={
  "gap_id":"A:영어:VOCABULARY:LEARNER_EVIDENCE_SPARSE","owner":"LEARNING_ENGINE_CORE",
  "gap_type":"LEARNER_EVIDENCE_SPARSE","priority":"MEDIUM",
@@ -26,12 +36,33 @@ def write_index(path,rows): path.write_text(json.dumps({"sources":rows},ensure_a
 class GapBrokerTest(unittest.TestCase):
  def test_reference_index_sufficient_blocks_mining(self):
   with tempfile.TemporaryDirectory() as td:
-   index=Path(td)/"index.json"; write_index(index,[{"source_id":"SRC-ENG-1","title":"영어 VOCABULARY 교육과정","source_family":"OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS","source_type":"OFFICIAL_CURRICULUM","authority_level":"OFFICIAL","keywords":["영어","VOCABULARY","교육과정"]}])
+   index=Path(td)/"index.json"; write_index(index,[{"source_id":"SRC-ENG-1","title":"영어 VOCABULARY 교육과정","source_family":"OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS","source_type":"OFFICIAL_CURRICULUM","authority_level":"OFFICIAL","keywords":["영어","VOCABULARY","교육과정"],"provenance":["OFFICIAL_STANDARD_REF"]}])
    r=route_gap(REFERENCE_GAP,index_path=index); self.assertEqual(r["decision"],"INDEX_REQUERY"); self.assertTrue(r["index_sufficient"])
  def test_wrong_family_does_not_satisfy_reference_gap(self):
   with tempfile.TemporaryDirectory() as td:
    index=Path(td)/"index.json"; write_index(index,[{"source_id":"SRC-BLOG-1","title":"영어 VOCABULARY 교육과정","source_family":"BLOG","authority_level":"SECONDARY","keywords":["영어","VOCABULARY","교육과정"]}])
    r=route_gap(REFERENCE_GAP,index_path=index); self.assertEqual(r["decision"],"MINING_REQUEST"); self.assertFalse(r["index_sufficient"]); self.assertEqual(r["mining_request"]["index_check"]["eligible_result_count"],0)
+ def test_role_specific_gap_ignores_wrong_provenance_then_accepts_dictionary(self):
+  with tempfile.TemporaryDirectory() as td:
+   index=Path(td)/"index.json"
+   write_index(index,[{
+    "source_id":"EDU1","title":"english vocabulary curriculum",
+    "source_family":"OFFICIAL_CURRICULUM","authority_level":"OFFICIAL",
+    "keywords":["english","vocabulary"],"provenance":["OFFICIAL_EDUCATION_SOURCE"]
+   }])
+   r=route_gap(LEXICAL_GAP,index_path=index)
+   self.assertEqual(r["decision"],"MINING_REQUEST")
+   self.assertEqual(r["mining_request"]["required_learning_evidence_role"],"LEXICAL_SEMANTICS")
+   write_index(index,[{
+    "source_id":"DICT1","title":"english vocabulary lexical reference",
+    "source_family":"LEXICAL_DICTIONARY","authority_level":"REFERENCE",
+    "keywords":["english","vocabulary","LEXICAL_SEMANTICS"],
+    "provenance":["LEXICAL_REFERENCE_SOURCE"]
+   }])
+   r=route_gap(LEXICAL_GAP,index_path=index)
+   self.assertEqual(r["decision"],"INDEX_REQUERY")
+   self.assertTrue(r["index_sufficient"])
+
  def test_learner_gap_routes_specialist_not_mining(self):
   with tempfile.TemporaryDirectory() as td:
    index=Path(td)/"index.json"; write_index(index,[])
