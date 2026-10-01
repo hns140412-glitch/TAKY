@@ -1,0 +1,54 @@
+{
+  "schema": "TAKY_OEWN_2025_LEXICAL_INDEX_OWNER_PRECHECK_V1",
+  "status": "SOURCE_LICENSE_PRECHECK_COMPLETE__FORMAL_PROMOTION_DECISION_OPEN",
+  "created_date": "2026-10-02",
+  "authority": "INDEX_OWNER_PRECHECK_ONLY",
+  "candidate_id": "ENGLISH_LEXICAL_OEWN_2025",
+  "source": {
+    "name": "Open English WordNet 2025",
+    "url": "https://en-word.net/",
+    "downloads": "https://en-word.net/downloads",
+    "release": "2025",
+    "release_date": "2025-12-31",
+    "license": "CC-BY-4.0",
+    "formats": [
+      "WNDB",
+      "WN-LMF_XML",
+      "RDF_TURTLE",
+      "JSON"
+    ]
+  },
+  "proposed_index_contract": {
+    "learning_evidence_role": "LEXICAL_SEMANTICS",
+    "provenance_tags": [
+      "LEXICAL_REFERENCE_SOURCE",
+      "OEWN_SOURCE_REF"
+    ],
+    "authority_class": "OPEN_LEXICAL_REFERENCE",
+    "central_index_authority": false,
+    "runtime_consumption_allowed": false,
+    "canonical_promotion": false
+  },
+  "derived_use_contract": {
+    "source_gloss_is_lexical_evidence": true,
+    "source_gloss_is_child_level_definition": false,
+    "easy_english_definition_must_be_derived_and_traceable": true,
+    "attribution_required": true,
+    "grade_alignment_authority": false,
+    "learner_state_authority": false
+  },
+  "decision": {
+    "source_and_license_precheck_complete": true,
+    "formal_index_owner_promotion_required": true,
+    "promotion_authorized": false,
+    "disposition": "READY_FOR_FORMAL_INDEX_OWNER_PROMOTION_DECISION"
+  },
+  "guards": [
+    "SOURCE_PRECHECK != INDEXED",
+    "INDEXED != CANONICAL",
+    "OEWN_GLOSS != CHILD_LEVEL_EASY_ENGLISH",
+    "LEXICAL_SEMANTICS != CURRICULUM_ALIGNMENT",
+    "ATTRIBUTION_REQUIRED",
+    "NO_RUNTIME_USE_BEFORE_FORMAL_PROMOTION"
+  ]
+}
