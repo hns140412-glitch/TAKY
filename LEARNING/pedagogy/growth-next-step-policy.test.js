@@ -52,11 +52,25 @@ const learningIndex={
    source_family:'LANGUAGE_CORPUS',
    authority_class:'REFERENCE',
    learning_evidence_role:'LANGUAGE_USAGE',
+   learning_evidence_kind:'DEPENDENCY_PATTERN',
    semantic_groups:{
     language_growth:{
-     expression_chunks:['I agree with ...','It means ...'],
+     expression_chunks:['THIS_MUST_NOT_BE_CONSUMED_AS_DEPENDENCY_CHUNK'],
      natural_collocations:['accept an idea'],
-     grammar_patterns:['It means + noun/clause']
+     grammar_patterns:['accept + noun']
+    }
+   }
+  },
+  {
+   source_ref:'usage:example',
+   source_family:'EXAMPLE_SENTENCE_CORPUS',
+   authority_class:'REFERENCE',
+   learning_evidence_role:'LANGUAGE_USAGE',
+   learning_evidence_kind:'EXAMPLE_SENTENCE',
+   semantic_groups:{
+    language_growth:{
+     usage_example_sentences:['I accept your idea.'],
+     natural_collocations:['THIS_MUST_NOT_CLOSE_COLLOCATION_GAP']
     }
    }
   },
@@ -67,6 +81,7 @@ const learningIndex={
    learning_evidence_role:'PEDAGOGICAL_USAGE',
    semantic_groups:{
     language_growth:{
+     expression_chunks:['I agree with ...','It means ...'],
      english_thinking_support:['picture -> meaning -> chunk -> sentence']
     }
    }
@@ -80,8 +95,15 @@ assert.deepEqual(p.curriculum_grounding.source_refs,['official:2022-eng-g5']);
 assert.ok(p.language_support.easy_english_definitions.includes('accept = to say yes to something'));
 assert.ok(p.language_support.expression_chunks.includes('I agree with ...'));
 assert.ok(p.language_support.natural_collocations.includes('accept an idea'));
+assert.ok(p.language_support.usage_example_sentences.includes('I accept your idea.'));
+assert.equal(p.language_support.natural_collocations.includes(
+ 'THIS_MUST_NOT_CLOSE_COLLOCATION_GAP'),false);
 assert.equal(p.language_resource_provenance.easy_english_definitions[0].source_role,'LEXICAL_SEMANTICS');
-assert.equal(p.language_resource_provenance.expression_chunks[0].source_role,'LANGUAGE_USAGE');
+assert.equal(p.language_resource_provenance.expression_chunks[0].source_role,'PEDAGOGICAL_USAGE');
+assert.equal(p.language_resource_provenance.natural_collocations[0].learning_evidence_kind,
+ 'DEPENDENCY_PATTERN');
+assert.equal(p.language_resource_provenance.usage_example_sentences[0].learning_evidence_kind,
+ 'EXAMPLE_SENTENCE');
 assert.equal(p.source_role_guard.curriculum_alignment_does_not_certify_lexical_semantics,true);
 assert.equal(p.language_load,'SIMPLE');
 assert.ok(['MEDIUM','HIGH'].includes(p.growth_control.evidence_confidence));
@@ -173,6 +195,33 @@ assert.deepEqual(curriculumCannotMasqueradeAsDictionary.thinking_moves,['EXPLAIN
 assert.equal(
  curriculumCannotMasqueradeAsDictionary.source_role_guard
   .curriculum_content_cannot_supply_lexical_or_usage_authority_by_presence_alone,
+ true
+);
+
+
+
+const exampleOnly=Policy.derive({
+ growth_profile:profile,
+ learning_index:{semantic_items:[
+  {
+   source_ref:'usage:example-only',source_family:'EXAMPLE_SENTENCE_CORPUS',
+   authority_class:'REFERENCE',learning_evidence_role:'LANGUAGE_USAGE',
+   learning_evidence_kind:'EXAMPLE_SENTENCE',
+   semantic_groups:{language_growth:{
+    usage_example_sentences:['I accept it.'],
+    natural_collocations:['accept an idea'],
+    grammar_patterns:['accept + noun']
+   }}
+  }
+ ]}
+});
+assert.deepEqual(exampleOnly.language_support.natural_collocations,[]);
+assert.deepEqual(exampleOnly.language_support.grammar_patterns,[]);
+assert.deepEqual(exampleOnly.language_support.usage_example_sentences,['I accept it.']);
+assert(exampleOnly.reference_gap_candidates.some(x=>
+ x.required_learning_evidence_role==='LANGUAGE_USAGE'));
+assert.equal(
+ exampleOnly.source_role_guard.example_sentence_does_not_close_collocation_or_grammar_gap,
  true
 );
 
