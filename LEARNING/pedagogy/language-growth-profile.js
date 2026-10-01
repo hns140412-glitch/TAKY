@@ -85,8 +85,8 @@ function classify(rows=[]){
     unassisted_count:0,transfer_count:rows.filter(x=>x.transfer===true).length,
     average_score:null,max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
-    minimal_hint_success_count:minimalHintSuccess,
-    max_success_expression_level:maxSuccessExpressionLevel
+    minimal_hint_success_count:0,
+    max_success_expression_level:null
   };
 
   const scored=evaluable.map(score);
@@ -137,7 +137,9 @@ function classify(rows=[]){
     transfer_count:transfer,
     average_score:Math.round(avg*100)/100,
     max_depth:depths.length?Math.max(...depths):null,
-    direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null
+    direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
+    minimal_hint_success_count:minimalHintSuccess,
+    max_success_expression_level:maxSuccessExpressionLevel
   };
 }
 function ageLanguageLoad(context={}){
