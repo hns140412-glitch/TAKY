@@ -16,6 +16,26 @@ assert.equal(hide.raw_app_signals.case_mastery,84);
 assert.equal(hide.verified_outcome,null,'app mastery score must not become verified outcome');
 assert.equal(A.validateCanonical(hide).ok,true);
 
+
+const itemSignal=A.fromHide({
+  event_id:'h-item-1',source:'hide-seek',event_type:'LEARNING_MEMORY_SIGNAL',
+  occurred_at:'2026-10-02T07:00:00.000Z',
+  payload:{
+    word:'accept',skill_id:'accept',correct:true,assisted:false,
+    mode:'TRACE',confusion:null,weakness:null,spacedEvidence:false,
+    nextReviewPriority:72,word_origin:'CURRENT',sourceSheetId:'sheet-current'
+  }
+},ctx);
+assert.equal(itemSignal.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
+assert.equal(itemSignal.learning_target_id,'accept');
+assert.equal(itemSignal.interaction_mode,'UNKNOWN');
+assert.equal(itemSignal.memory.item_signal.mode,'TRACE');
+assert.equal(itemSignal.memory.item_signal.word_origin,'CURRENT');
+assert.equal(itemSignal.memory.item_signal.correct,true);
+assert.equal(itemSignal.memory.review_advisories[0].nextReviewPriority,72);
+assert.equal(itemSignal.verified_outcome,null);
+assert.equal(A.validateCanonical(itemSignal).ok,true);
+
 const snap=A.fromSnap({
   event_id:'s1',source:'snap-pop',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T08:00:00.000Z',
   payload:{child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean'}
