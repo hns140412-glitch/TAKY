@@ -14,7 +14,7 @@ function baseFromEvent(event={},context={}){
     member_id:clean(context.member_id||event.member_id||event.child_id||payload.member_id),
     subject:clean(context.subject||payload.subject).toLowerCase(),
     concept_skill_target:clean(context.concept_skill_target||payload.concept_skill_target).toLowerCase(),
-    learning_target_id:clean(context.learning_target_id||payload.learning_target_id||payload.lexical_id||payload.word_id||payload.item_id)||null,
+    learning_target_id:clean(context.learning_target_id||payload.learning_target_id||payload.lexical_id||payload.word_id||payload.item_id||payload.skill_id||payload.word)||null,
     evidence_type:'SPECIALIST_OUTCOME_UNKNOWN',
     source_app:clean(event.source||event.app||context.source_app),
     instrument_version:clean(payload.instrumentVersion||payload.instrument_version||context.instrument_version)||'UNSPECIFIED',
@@ -38,11 +38,28 @@ function fromHide(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'hide-seek'});
   const p=event.payload||{};
   const memory=p.memorySummary||p.trailSummary?.memorySummary||null;
-  out.evidence_type=(memory||p.verification_candidate)?'MEMORY_RETRIEVAL_EVIDENCE':'SPECIALIST_OUTCOME_UNKNOWN';
-  out.memory=memory?{
-    average_strength:finite(memory.averageMemoryStrength),
-    review_advisories:Array.isArray(memory.reviewAdvisories)?memory.reviewAdvisories.slice(0,24):[],
-    next_review_semantics:clean(memory.prioritySemantics)||'ADVISORY_SIGNAL_NOT_DATE'
+  const itemSignal=(clean(event.event_type||event.type)==='LEARNING_MEMORY_SIGNAL'||p.word||p.item_id||p.skill_id)?{
+    item_id:clean(p.item_id||p.skill_id||p.word_id||p.lexical_id||p.word)||null,
+    word:clean(p.word)||null,
+    correct:typeof p.correct==='boolean'?p.correct:null,
+    confusion:p.confusion??null,
+    weakness:p.weakness??null,
+    spaced_evidence:p.spacedEvidence??p.spaced_evidence??null,
+    next_review_priority:finite(p.nextReviewPriority??p.next_review_priority),
+    mode:clean(p.mode||p.interactionMode||p.interaction_mode).toUpperCase()||null,
+    word_origin:clean(p.word_origin||p.wordOrigin).toUpperCase()||null,
+    source_sheet_id:clean(p.sourceSheetId||p.source_sheet_id)||null
+  }:null;
+  out.evidence_type=(memory||itemSignal||p.verification_candidate)?'MEMORY_RETRIEVAL_EVIDENCE':'SPECIALIST_OUTCOME_UNKNOWN';
+  out.memory=(memory||itemSignal)?{
+    average_strength:memory?finite(memory.averageMemoryStrength):finite(p.strength),
+    review_advisories:memory&&Array.isArray(memory.reviewAdvisories)
+      ?memory.reviewAdvisories.slice(0,24)
+      :(Number.isFinite(itemSignal?.next_review_priority)
+        ?[{learning_target_id:out.learning_target_id,nextReviewPriority:itemSignal.next_review_priority}]
+        :[]),
+    next_review_semantics:memory?clean(memory.prioritySemantics)||'ADVISORY_SIGNAL_NOT_DATE':'ADVISORY_SIGNAL_NOT_DATE',
+    item_signal:itemSignal
   }:null;
   out.raw_app_signals={
     case_mastery:finite(p.caseMastery),
