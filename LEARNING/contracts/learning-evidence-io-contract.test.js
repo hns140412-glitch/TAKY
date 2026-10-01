@@ -36,5 +36,9 @@ const output={
 assert.equal(C.validateLearningOutput(output).ok,true);
 assert.equal(C.validateLearningOutput({...output,schedule_date:'2026-10-03'}).ok,false);
 assert.equal(C.validateLearningOutput({...output,allocated_quantity:5}).ok,false);
+assert.equal(C.validateLearningOutput({...output,next_growth_intent:{planner_date:'2026-10-03'}}).ok,false);
+assert.equal(C.validateLearningOutput({...output,recommended_quantity:{
+ ...output.recommended_quantity,allocated_quantity:4
+}}).ok,false);
 
 console.log('learning-evidence-io-contract.test.js PASS');
