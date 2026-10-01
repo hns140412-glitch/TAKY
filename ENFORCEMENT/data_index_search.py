@@ -34,6 +34,7 @@ CORE_DISCOVERY_FIELDS = (
     "controlled_terms",
     "keywords",
     "entities",
+    "provenance_tags",
 )
 
 
@@ -86,6 +87,19 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
     )
     domain_facets = classification.get("domain_facets") or record.get("domain_facets") or []
     origin_type = provenance.get("origin_type") or record.get("origin_type")
+    raw_provenance_tags = (
+        provenance.get("evidence_tags")
+        or provenance.get("tags")
+        or record.get("provenance_tags")
+        or (record.get("provenance") if isinstance(record.get("provenance"), list) else [])
+        or []
+    )
+    provenance_tags = (
+        [str(x) for x in raw_provenance_tags if str(x).strip()]
+        if isinstance(raw_provenance_tags, list)
+        else [str(raw_provenance_tags)] if str(raw_provenance_tags or "").strip()
+        else []
+    )
     consumer_candidates = discovery.get("consumer_candidates") or record.get("consumers") or []
 
     # Legacy relation hints are retained as candidate relations only.
@@ -112,6 +126,7 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "origin_type": origin_type,
         "origin_locator": provenance.get("origin_locator") or record.get("origin_locator") or record.get("url"),
         "publisher_or_account": provenance.get("publisher_or_account") or record.get("publisher_or_account"),
+        "provenance_tags": provenance_tags,
         "short_summary": discovery.get("short_summary")
         or (record.get("value_statement") if isinstance(record.get("value_statement"), str) else None),
         "controlled_terms": discovery.get("controlled_terms") or record.get("controlled_terms") or [],
@@ -451,6 +466,7 @@ def search(
                     "origin_locator": r.get("origin_locator"),
                     "publisher_or_account": r.get("publisher_or_account"),
                 },
+                "provenance_tags": list(r.get("provenance_tags") or []),
                 "score": round(score, 8),
                 "channels": {
                     "exact": sid in exact,
