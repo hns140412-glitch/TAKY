@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_CROSS_REPO_AUTHORITY_MATRIX_2026-10-02_V1",
-  "status": "BRANCH_VALIDATED__PROMOTION_HOLD",
+  "status": "BRANCH_INDEXED_AND_IO_VALIDATED__CURRENT_CANONICAL_PROMOTION_HOLD",
   "created_date": "2026-10-02",
   "promotion_authorized": false,
   "main_merge_authorized": false,
@@ -9,7 +9,7 @@
     "MINING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
+      "branch_sha": "00101f68ce350954b35f0c3272fb8a19414fb892",
       "owns": [
         "discovery_strategy",
         "provider_routing",
@@ -26,7 +26,7 @@
     "MINING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
+      "branch_sha": "00101f68ce350954b35f0c3272fb8a19414fb892",
       "owns": [
         "RAW",
         "INDEX_L1",
@@ -46,7 +46,7 @@
     "LEARNING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
+      "branch_sha": "00101f68ce350954b35f0c3272fb8a19414fb892",
       "owns": [
         "derived_learning_semantic_view",
         "curriculum_alignment",
@@ -70,7 +70,7 @@
     "LEARNING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
+      "branch_sha": "00101f68ce350954b35f0c3272fb8a19414fb892",
       "owns": [
         "learner_state",
         "growth_profile",
@@ -79,46 +79,60 @@
         "hint_policy",
         "review_need",
         "role_specific_reference_gaps",
-        "growth_feedback_candidates"
+        "growth_feedback_candidates",
+        "learning_evidence_interpretation",
+        "recommended_quantity_intent",
+        "next_growth_intent",
+        "evidence_and_index_provenance_basis"
       ],
       "forbidden": [
         "external_acquisition",
         "source_canonicalization",
         "assignment_fact",
-        "calendar_date"
+        "calendar_date",
+        "allocated_quantity",
+        "planner_date",
+        "deadline",
+        "calendar_time"
       ]
     },
     "READY_SET": {
       "repository": "hns140412-glitch/Ready-Set",
       "branch": "taky/ready-learning-authority-reconcile-2026-10-02",
-      "branch_sha": "380a9b7a9b62947684e97f01c45ce12738fb6baf",
+      "branch_sha": "731b498fc56df8c1b9cc822c012000fe6a1062d8",
       "owns": [
         "confirmed_assignment_decomposition",
         "execution_load_metadata",
         "session_task_continuity",
+        "ready_execution_fact",
+        "planner_allocation_provenance_forwarding",
         "execution_friction_forwarding"
       ],
       "forbidden": [
         "learner_state",
         "growth_control",
         "central_review_policy",
-        "local_review_todo_creation_from_hide_advisory"
+        "local_review_todo_creation_from_hide_advisory",
+        "learning_quality_interpretation"
       ],
       "legacy_adaptive_execution_authorized": false
     },
     "HIDE_SEEK": {
       "repository": "hns140412-glitch/Hide-Seek",
       "branch": "taky/hide-memory-routing-learning-engine-2026-10-02",
-      "branch_sha": "985198506932d74026622619b9e00b2890107998",
+      "branch_sha": "706a12bd247d4fd6a0a8df7a94c6a17b218ecb00",
       "owns": [
         "vocabulary_retrieval_interaction",
         "memory_evidence",
-        "trace_link_objective_vocab_observation"
+        "trace_link_core_objective_observation",
+        "hint_assistance_latency_self_correction_raw_evidence",
+        "role_specific_reference_provenance_forwarding"
       ],
       "forbidden": [
         "long_term_learner_state",
         "dated_review_schedule",
-        "growth_control_authority"
+        "growth_control_authority",
+        "mastery_authority"
       ],
       "candidate_not_core": [
         "per_word_auto_routing",
@@ -129,63 +143,97 @@
     "SNAP_POP": {
       "repository": "hns140412-glitch/Snap-Pop",
       "branch": "taky/snap-growth-engine-handoff-2026-10-02",
-      "branch_sha": "6616956800e0106da3ab1d16fb1855b668e65360",
+      "branch_sha": "1250b8871f8d9ae7c460f183d65f849aabe10a3d",
       "owns": [
         "child_authored_expression_execution",
         "growth_control_execution",
         "applied_challenge_context",
-        "production_evidence",
-        "human_growth_rubric_request_surface"
+        "raw_production_evidence",
+        "growth_review_pending_surface",
+        "human_growth_rubric_request_surface",
+        "role_specific_reference_provenance_forwarding"
       ],
       "forbidden": [
         "completion_to_mastery",
         "global_growth_authority",
-        "learning_engine_authority"
+        "learning_engine_authority",
+        "local_language_quality_grading"
       ]
     },
     "PLANNER": {
       "repository": "hns140412-glitch/Ready-Set",
       "branch": "taky/ready-learning-authority-reconcile-2026-10-02",
-      "branch_sha": "380a9b7a9b62947684e97f01c45ce12738fb6baf",
+      "branch_sha": "731b498fc56df8c1b9cc822c012000fe6a1062d8",
       "owns": [
         "dates",
         "calendar_placement",
         "rescheduling",
-        "available_window_allocation"
+        "available_window_allocation",
+        "actual_quantity_materialization"
       ],
       "forbidden": [
         "learner_state",
         "pedagogical_meaning",
-        "growth_level"
+        "growth_level",
+        "source_authority"
+      ]
+    },
+    "IMAGINATION_CLOUD": {
+      "repository": "hns140412-glitch/TAKY",
+      "branch": "taky/learning-mining-runtime-integration-2026-10-01",
+      "contract": "LEARNING/contracts/imagination-cloud-evidence-contract.js",
+      "owns": [
+        "support_invocation_observation",
+        "target_concept_observation",
+        "visualization_and_explanation_observation",
+        "before_after_response_observation",
+        "additional_help_needed_observation",
+        "curiosity_only_observation"
+      ],
+      "forbidden": [
+        "learner_state",
+        "mastery",
+        "review_policy",
+        "schedule",
+        "pedagogical_decision"
       ]
     }
   },
   "source_authority_status": {
     "curriculum_177": {
-      "state": "SOURCE_CONTENT_PRECHECK_COMPLETE__FORMAL_INDEX_OWNER_PROMOTION_DECISION_OPEN",
-      "structural_record_count": 177,
-      "source_content_precheck_complete": true,
-      "central_index_authority": false,
-      "canonical_promotion": false,
-      "learning_index_consumption_allowed": false,
-      "blocking_item": null,
-      "guard": "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION"
+      "state": "INDEXED_V27__NOT_CURRENT__NOT_CANONICAL",
+      "index_state": "INDEXED",
+      "index_revision": "V27",
+      "record_count": 177,
+      "central_index_authority_in_revision": true,
+      "learning_index_consumption_allowed": true,
+      "current": false,
+      "canonical": false,
+      "approval_basis": "EXPLICIT_USER_APPROVAL_IN_CHAT"
     },
     "english_lexical": {
-      "state": "SOURCE_LICENSE_PRECHECK_COMPLETE__FORMAL_INDEX_OWNER_PROMOTION_DECISION_OPEN",
-      "preferred_candidate": "Open English WordNet 2025",
+      "state": "INDEXED_V27__NOT_CURRENT__NOT_CANONICAL",
+      "index_state": "INDEXED",
+      "index_revision": "V27",
+      "source_id": "LEXICAL_OEWN_2025",
+      "preferred_source": "Open English WordNet 2025",
       "license": "CC-BY-4.0",
-      "source_precheck_complete": true,
-      "runtime_authority": false,
-      "formal_index_owner_promotion_required": true,
+      "attribution_required": true,
+      "central_index_authority_in_revision": true,
+      "learning_index_consumption_allowed": true,
+      "current": false,
+      "canonical": false,
       "guard": "OEWN_GLOSS != CHILD_LEVEL_EASY_ENGLISH"
     },
     "english_language_usage": {
-      "state": "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN",
+      "state": "HOLD__NO_INDEXED_LANGUAGE_USAGE_SOURCE",
+      "index_state": "HOLD",
+      "indexed_count": 0,
       "preferred_precheck_candidate": "Universal Dependencies English EWT",
       "license": "CC-BY-SA-4.0",
-      "runtime_authority": false,
-      "formal_index_owner_promotion_required": true,
+      "learning_index_consumption_allowed": false,
+      "current": false,
+      "canonical": false,
       "guard": "CORPUS_USAGE_EVIDENCE != UNIVERSAL_NATURALNESS_TRUTH"
     }
   },
@@ -200,52 +248,77 @@
     "EXECUTION_FRICTION != LEARNING_FAILURE",
     "REVIEW_NEED != REVIEW_DATE",
     "AGE_GRADE != THINKING_CEILING",
-    "USER != DEBUGGER"
+    "USER != DEBUGGER",
+    "RAW_APP_EVIDENCE != LEARNER_STATE",
+    "LEARNING_ENGINE_RECOMMENDED_QUANTITY != PLANNER_ALLOCATED_QUANTITY",
+    "SPECIALIST_APP != MASTERY_OWNER",
+    "IMAGINATION_CLOUD_SUPPORT != MASTERY",
+    "INDEXED != CURRENT",
+    "INDEXED != CANONICAL"
   ],
   "validation_snapshot": {
     "TAKY_INTEGRATION": {
-      "run_id": 36930044297,
-      "conclusion": "SUCCESS"
+      "run_id": 36941613058,
+      "conclusion": "SUCCESS",
+      "sha": "00101f68ce350954b35f0c3272fb8a19414fb892"
     },
     "TAKY_ENFORCEMENT": {
-      "run_id": 36930044305,
-      "conclusion": "IN_PROGRESS_NO_FAILURE_AT_MATRIX_CREATION"
+      "run_id": 36941613099,
+      "conclusion": "SUCCESS",
+      "sha": "00101f68ce350954b35f0c3272fb8a19414fb892"
     },
     "READY_INTEGRATION": {
-      "run_id": 36929365763,
-      "conclusion": "SUCCESS"
+      "run_id": 36939086823,
+      "conclusion": "SUCCESS",
+      "sha": "731b498fc56df8c1b9cc822c012000fe6a1062d8"
     },
-    "READY_HIDE_REVIEW": {
-      "run_id": 36929365787,
-      "conclusion": "SUCCESS"
+    "READY_BRIDGE": {
+      "run_id": 36939086822,
+      "conclusion": "SUCCESS",
+      "sha": "731b498fc56df8c1b9cc822c012000fe6a1062d8"
     },
     "READY_RUNTIME_E2E": {
-      "run_id": 36929365810,
-      "conclusion": "SUCCESS"
+      "run_id": 36939086862,
+      "conclusion": "SUCCESS",
+      "sha": "731b498fc56df8c1b9cc822c012000fe6a1062d8"
     },
     "HIDE_BRIDGE": {
-      "run_id": 36890466371,
-      "conclusion": "SUCCESS"
+      "run_id": 36941552630,
+      "conclusion": "SUCCESS",
+      "sha": "706a12bd247d4fd6a0a8df7a94c6a17b218ecb00"
     },
     "HIDE_VALIDATE": {
-      "run_id": 36890466576,
-      "conclusion": "SUCCESS"
+      "run_id": 36941552685,
+      "conclusion": "SUCCESS",
+      "sha": "706a12bd247d4fd6a0a8df7a94c6a17b218ecb00"
     },
     "SNAP_BRIDGE": {
-      "run_id": 36894758970,
-      "conclusion": "SUCCESS"
+      "run_id": 36941557539,
+      "conclusion": "SUCCESS",
+      "sha": "1250b8871f8d9ae7c460f183d65f849aabe10a3d"
     },
     "SNAP_VALIDATE": {
-      "run_id": 36894758879,
-      "conclusion": "SUCCESS"
+      "run_id": 36941557533,
+      "conclusion": "SUCCESS",
+      "sha": "1250b8871f8d9ae7c460f183d65f849aabe10a3d"
     }
   },
   "next_gate": [
-    "TAKY_LATEST_INTEGRATION_AND_ENFORCEMENT_SUCCESS",
-    "FORMAL_INDEX_OWNER_PROMOTION_DECISION_FOR_CURRICULUM_177",
-    "FORMAL_INDEX_OWNER_PROMOTION_DECISION_FOR_OEWN_LEXICAL",
-    "UD_EWT_LICENSE_COMPATIBILITY_AND_INDEX_OWNER_REVIEW_OR_USAGE_GAP_RETAINED",
-    "FINAL_CROSS_REPO_AUTHORITY_REGRESSION",
-    "HUMAN_APPROVAL_BEFORE_ANY_MAIN_CURRENT_PROMOTION"
-  ]
+    "FINAL_MATRIX_ENFORCEMENT_SUCCESS",
+    "LANGUAGE_USAGE_PROVIDER_LICENSE_AND_INDEX_OWNER_REVIEW_OR_GAP_RETAINED",
+    "HUMAN_APPROVAL_BEFORE_ANY_CURRENT_CANONICAL_MAIN_PROMOTION",
+    "NO_DEPLOYMENT_BEFORE_SEPARATE_RELEASE_GATE"
+  ],
+  "index_revision": {
+    "version": "V27",
+    "status": "INDEXED_REVISION_CREATED__NOT_CURRENT__NOT_CANONICAL",
+    "total_records": 857,
+    "added_records": 178,
+    "curriculum_alignment": 177,
+    "lexical_semantics": 1,
+    "language_usage": 0,
+    "current": false,
+    "canonical": false,
+    "current_pointer_changed": false
+  }
 }
