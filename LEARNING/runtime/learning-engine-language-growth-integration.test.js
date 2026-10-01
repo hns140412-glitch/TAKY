@@ -126,6 +126,8 @@ assert.equal(out.growth_next_step.hide_to_snap_handoff.to_app,'snap-pop');
 assert.equal(out.growth_next_step.hide_to_snap_handoff.child_authorship_required,true);
 assert.equal(out.growth_next_step.hide_to_snap_handoff.final_answer_generation_forbidden,true);
 assert.equal(out.growth_next_step.reference_gap_candidate,null);
+assert.deepEqual(out.reference_gaps,[]);
+assert.equal(out.next_reference_gap,null);
 assert.equal(Runtime.validate(out).ok,true);
 
 console.log('learning-engine-language-growth-integration.test.js PASS');
