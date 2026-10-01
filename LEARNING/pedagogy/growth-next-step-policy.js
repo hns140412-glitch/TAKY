@@ -6,21 +6,10 @@ const Profile=require('./language-growth-profile.js');
 const clean=v=>String(v??'').trim();
 
 function sourceRole(item={}){
-  const text=[
-    item.source_family,item.source_type,item.authority_class,
-    ...(Array.isArray(item.provenance)?item.provenance:[])
-  ].map(clean).join(' ').toUpperCase();
-  if(/OFFICIAL|CURRICULUM|EDUCATION|ACHIEVEMENT_STANDARD/.test(text))
-    return 'CURRICULUM_ALIGNMENT';
-  if(/DICTIONARY|LEXICAL|GLOSSARY|WORDNET|VOCAB_REFERENCE/.test(text))
-    return 'LEXICAL_SEMANTICS';
-  if(/CORPUS|COLLOCATION|USAGE|EXAMPLE_BANK|LANGUAGE_USAGE/.test(text))
-    return 'LANGUAGE_USAGE';
-  if(/PUBLISHER|TEXTBOOK|PEDAGOG|LEARNING_RESOURCE/.test(text))
-    return 'PEDAGOGICAL_USAGE';
-  return 'GENERAL_REFERENCE';
+  const role=clean(item.learning_evidence_role).toUpperCase();
+  return ['CURRICULUM_ALIGNMENT','LEXICAL_SEMANTICS','LANGUAGE_USAGE','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']
+    .includes(role)?role:'GENERAL_REFERENCE';
 }
-
 function officialItems(learningIndex={}){
   const rows=Array.isArray(learningIndex?.semantic_items)?learningIndex.semantic_items:[];
   return rows.filter(x=>sourceRole(x)==='CURRICULUM_ALIGNMENT');
@@ -98,7 +87,9 @@ function growthResources(learningIndex={}){
     source_role_guard:{
       curriculum_alignment_does_not_certify_lexical_semantics:true,
       lexical_semantics_does_not_certify_grade_alignment:true,
-      language_usage_does_not_certify_curriculum_alignment:true
+      language_usage_does_not_certify_curriculum_alignment:true,
+      source_role_consumed_from_learning_index_contract:true,
+      filename_or_title_role_inference_forbidden:true
     }
   };
 }
