@@ -202,6 +202,24 @@ function fromSnap(event={},context={}){
   return out;
 }
 
+function readyRawSignals(p={}){
+  return {
+    ready_state:clean(p.ready_state||p.task_state||p.state)||null,
+    planner_allocation:p.planner_allocation&&typeof p.planner_allocation==='object'
+      ?JSON.parse(JSON.stringify(p.planner_allocation)):null,
+    started_at:clean(p.started_at||p.actual_started_at)||null,
+    ended_at:clean(p.ended_at||p.actual_ended_at)||null,
+    actual_minutes:finite(p.actual_minutes),
+    performed_quantity:finite(p.performed_quantity??p.actual_quantity),
+    completion_state:clean(p.completion_state||p.task_state||p.state).toUpperCase()||null,
+    blocked_reason:clean(p.blocked_reason)||null,
+    parent_confirmation:p.parent_confirmation??p.parent_confirmed??null,
+    self_report:p.self_report||null,
+    forwarded_hide_observation:p.forwarded_source_app==='hide-seek',
+    forwarded_ready_friction_observation:p.forwarded_ready_friction_observation===true
+  };
+}
+
 function fromReady(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'ready-set'});
   const p=event.payload||event;
@@ -229,28 +247,14 @@ function fromReady(event={},context={}){
   }
   if(context.verification_receipt){
     const applied=Verification.applyReceipt(out,context.verification_receipt);
-    if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};
+    if(applied.ok)return {...applied.evidence,raw_app_signals:readyRawSignals(p)};
     out.verification_error=applied;
   }else if(p.verification_candidate){
     const applied=Verification.issueFromCandidate(out,p.verification_candidate);
-    if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};
+    if(applied.ok)return {...applied.evidence,raw_app_signals:readyRawSignals(p)};
     out.verification_error=applied;
   }
-  out.raw_app_signals={
-    ready_state:clean(p.ready_state||p.task_state||p.state)||null,
-    planner_allocation:p.planner_allocation&&typeof p.planner_allocation==='object'
-      ?JSON.parse(JSON.stringify(p.planner_allocation)):null,
-    started_at:clean(p.started_at||p.actual_started_at)||null,
-    ended_at:clean(p.ended_at||p.actual_ended_at)||null,
-    actual_minutes:finite(p.actual_minutes),
-    performed_quantity:finite(p.performed_quantity??p.actual_quantity),
-    completion_state:clean(p.completion_state||p.task_state||p.state).toUpperCase()||null,
-    blocked_reason:clean(p.blocked_reason)||null,
-    parent_confirmation:p.parent_confirmation??p.parent_confirmed??null,
-    self_report:p.self_report||null,
-    forwarded_hide_observation:p.forwarded_source_app==='hide-seek',
-    forwarded_ready_friction_observation:p.forwarded_ready_friction_observation===true
-  };
+  out.raw_app_signals=readyRawSignals(p);
   return out;
 }
 
