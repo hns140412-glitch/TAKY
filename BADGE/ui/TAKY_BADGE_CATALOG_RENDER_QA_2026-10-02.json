@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_RENDER_QA_V1",
-  "version": "2026-10-02.1",
+  "version": "2026-10-02.2",
   "status": "PASS",
   "viewport": {
     "width_css_px": 390,
@@ -56,5 +56,36 @@
     "semantic nature is independent from ownership/tier/art-quality state",
     "source-art replacement changes bytes/SHA/revision, not identity"
   ],
-  "deployment": "HOLD"
+  "deployment": "HOLD",
+  "visual_state_qa": {
+    "viewport": {
+      "width_css_px": 390,
+      "height_css_px": 844,
+      "device_scale_factor": 2
+    },
+    "seeded_fixture_only": true,
+    "fixture": {
+      "earned": 11,
+      "in_progress": 1,
+      "unearned": 48,
+      "recent_earned": 11,
+      "tier_samples": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ]
+    },
+    "results": {
+      "earned_visual_state": "PASS",
+      "in_progress_visual_state": "PASS",
+      "locked_visual_state": "PASS",
+      "recent_marker": "PASS",
+      "tier_ring_variants": "PASS",
+      "selected_detail_state_contract": "PASS",
+      "horizontal_overflow": false
+    },
+    "note": "Fixture exists only in isolated QA browser storage and does not mutate production/user badge history."
+  }
 }
