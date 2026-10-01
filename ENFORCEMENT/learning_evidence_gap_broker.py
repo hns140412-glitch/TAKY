@@ -13,7 +13,15 @@ from pathlib import Path
 from typing import Any
 from data_index_search import load_index, search
 
-VERSION="TAKY_LEARNING_EVIDENCE_GAP_BROKER_V3"
+VERSION="TAKY_LEARNING_EVIDENCE_GAP_BROKER_V4"
+
+ROLE_PROVENANCE={
+    "CURRICULUM_ALIGNMENT":{"OFFICIAL_EDUCATION_SOURCE","OFFICIAL_STANDARD_REF"},
+    "LEXICAL_SEMANTICS":{"LEXICAL_REFERENCE_SOURCE","TERM_SOURCE_REF","NIKL_SOURCE_REF"},
+    "LANGUAGE_USAGE":{"LANGUAGE_USAGE_SOURCE","WRITING_CORPUS_SOURCE_REF"},
+    "PEDAGOGICAL_USAGE":{"PEDAGOGICAL_SOURCE_REF","GOVERNED_DERIVED_ACTIVITY_REF"},
+    "GENERAL_REFERENCE":set(),
+}
 
 def _clean(v): return str(v or "").strip()
 
@@ -41,12 +49,21 @@ def _eligible(hit,gap):
     any_of=set(gap.get("required_provenance_any_of") or [])
     if required and not required.issubset(provenance):return False
     if any_of and not provenance.intersection(any_of):return False
+
+    role=_clean(gap.get("required_learning_evidence_role")).upper()
+    if role:
+        allowed=ROLE_PROVENANCE.get(role)
+        if allowed is None:return False
+        if allowed and not provenance.intersection(allowed):return False
     return True
 
 def route_gap(gap:dict[str,Any],*,index_path:Path,min_results:int=1,consumer:str="LEARNING_ENGINE")->dict[str,Any]:
     if not isinstance(gap,dict): return {"pass":False,"detected":["EVIDENCE_GAP_REQUIRED"]}
     if gap.get("owner")!="LEARNING_ENGINE_CORE": return {"pass":False,"detected":["EVIDENCE_GAP_OWNER_INVALID"]}
     if gap.get("mining_request_authorized") is True: return {"pass":False,"detected":["LEARNING_MINING_AUTHORIZATION_FORBIDDEN"]}
+    required_role=_clean(gap.get("required_learning_evidence_role")).upper()
+    if required_role and required_role not in ROLE_PROVENANCE:
+        return {"pass":False,"detected":["LEARNING_EVIDENCE_ROLE_INVALID"]}
 
     path=gap.get("resolution_path")
     if path=="SPECIALIST_EVIDENCE_ACQUISITION":
