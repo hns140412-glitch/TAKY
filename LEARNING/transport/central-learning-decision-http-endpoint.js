@@ -178,6 +178,10 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
     signal_count:runtime.growth_profile.signal_count
    }:null,
    growth_next_step:runtime.growth_next_step||null,
+   reference_gaps:Array.isArray(runtime.reference_gaps)
+    ?runtime.reference_gaps.map(g=>({...g,mining_request_authorized:false})):[],
+   next_reference_gap:runtime.next_reference_gap
+    ?{...runtime.next_reference_gap,mining_request_authorized:false}:null,
    cannot_influence:runtime.cannot_influence,
    trace:{evidence_ids:runtime.trace.evidence_ids,
     decision_contract:runtime.trace.decision_contract,
@@ -187,6 +191,8 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
     observation_review_digest_sha256:runtime.trace.observation_review_digest_sha256,
     governed_activity_refs:governedActivityRefs,
     governed_activity_policy_ids:policyIds.filter(x=>x==='P-F07-READY'),
+    growth_reference_gap_ids:runtime.trace.growth_reference_gap_ids||[],
+    next_reference_gap_id:runtime.trace.next_reference_gap_id||null,
     basis_kind:receiptId?(advisoryUsed?'VERIFIED_WITH_OBSERVATION_ADVISORY':'VERIFIED_ONLY')
       :(advisoryUsed?'OBSERVATION_ADVISORY_ONLY':'NO_EVIDENCE')}
   };
