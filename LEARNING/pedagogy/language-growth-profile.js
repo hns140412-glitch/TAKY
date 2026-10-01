@@ -49,23 +49,31 @@ function score(signal){
 
 function classify(rows=[]){
   if(!rows.length)return {
-    state:'UNKNOWN',signal_count:0,unassisted_count:0,transfer_count:0,
+    state:'UNKNOWN',signal_count:0,evaluable_signal_count:0,unassisted_count:0,transfer_count:0,
     average_score:null,max_depth:null,direct_english_ratio:null
   };
-  const scored=rows.map(score);
-  const avg=scored.reduce((a,b)=>a+b,0)/scored.length;
-  const unassisted=rows.filter(x=>x.assisted!==true).length;
-  const transfer=rows.filter(x=>x.transfer===true).length;
+  const evaluable=rows.filter(x=>x.outcome!=='UNKNOWN');
   const depths=rows.map(x=>x.depth).filter(Number.isFinite);
   const english=rows.map(x=>x.direct_english).filter(x=>typeof x==='boolean');
   const directRatio=english.length?english.filter(Boolean).length/english.length:null;
+  if(!evaluable.length)return {
+    state:'UNKNOWN',signal_count:rows.length,evaluable_signal_count:0,
+    unassisted_count:0,transfer_count:rows.filter(x=>x.transfer===true).length,
+    average_score:null,max_depth:depths.length?Math.max(...depths):null,
+    direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null
+  };
+  const scored=evaluable.map(score);
+  const avg=scored.reduce((a,b)=>a+b,0)/scored.length;
+  const unassisted=evaluable.filter(x=>x.assisted!==true).length;
+  const transfer=evaluable.filter(x=>x.transfer===true).length;
   let state='DEVELOPING';
-  if(rows.length<2)state='EARLY_SIGNAL';
+  if(evaluable.length<2)state='EARLY_SIGNAL';
   else if(avg<0.40)state='NEEDS_SUPPORT';
   else if(avg>=0.80&&unassisted>=2)state='READY_TO_STRETCH';
   return {
     state,
     signal_count:rows.length,
+    evaluable_signal_count:evaluable.length,
     unassisted_count:unassisted,
     transfer_count:transfer,
     average_score:Math.round(avg*100)/100,
