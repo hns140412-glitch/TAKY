@@ -1,0 +1,81 @@
+{
+  "schema": "TAKY_CENTRAL_INDEX_OWNER_PRECHECK_2026-10-02_V1",
+  "status": "PRECHECK_COMPLETE__NO_PROMOTION",
+  "created_date": "2026-10-02",
+  "authority": "INDEX_OWNER_PRECHECK_ONLY",
+  "source_candidate": "MIGRATION/CURRICULUM/READY_OFFICIAL_STANDARD_REGISTRY_2026-10-02_V1.json",
+  "structural_checks": {
+    "record_count": 177,
+    "expected_record_count": 177,
+    "unique_standard_codes": 177,
+    "unique_proposed_source_ids": 177,
+    "duplicate_standard_codes": [],
+    "duplicate_proposed_source_ids": [],
+    "expected_by_subject": {
+      "국어": 34,
+      "수학": 45,
+      "사회": 27,
+      "과학": 51,
+      "영어": 20
+    },
+    "migration_guards_preserved": true
+  },
+  "source_family_checks": [
+    {
+      "source_key": "GOE_KOREAN_56",
+      "record_count": 34,
+      "source_domain": "goe.go.kr",
+      "external_verification": "PARTIAL",
+      "note": "Direct public fetch exceeded web fetch size limit; keep independent source-content review OPEN. Do not promote from lineage alone."
+    },
+    {
+      "source_key": "GOE_FRAMEWORK_56",
+      "record_count": 122,
+      "source_domain": "goe.go.kr",
+      "external_verification": "VERIFIED_REPRESENTATIVE_CODES",
+      "representative_codes": [
+        "6수04-01",
+        "6사09-02",
+        "6과16-02"
+      ],
+      "source_role": "CURRICULUM_ALIGNMENT"
+    },
+    {
+      "source_key": "GOE_2026_EVAL",
+      "record_count": 1,
+      "source_domain": "goe.go.kr",
+      "external_verification": "VERIFIED_EXACT_CODE",
+      "representative_codes": [
+        "6사09-02"
+      ],
+      "source_role": "CURRICULUM_ALIGNMENT"
+    },
+    {
+      "source_key": "GOE_ENGLISH_56",
+      "record_count": 20,
+      "source_domain": "goe.go.kr",
+      "external_verification": "VERIFIED_REPRESENTATIVE_CODES",
+      "representative_codes": [
+        "6영01-01",
+        "6영01-10"
+      ],
+      "source_role": "CURRICULUM_ALIGNMENT"
+    }
+  ],
+  "decision": {
+    "central_index_authority": false,
+    "canonical_promotion": false,
+    "learning_index_consumption_allowed": false,
+    "disposition": "HOLD_FOR_FINAL_INDEPENDENT_INDEX_OWNER_SOURCE_REVIEW",
+    "blocking_items": [
+      "GOE_KOREAN_56_EXTERNAL_SOURCE_CONTENT_REVIEW"
+    ]
+  },
+  "guards": [
+    "PRECHECK != INDEX_OWNER_APPROVAL",
+    "READY_VERIFIED_REGISTRY_LINEAGE != CENTRAL_INDEX_AUTHORITY",
+    "STRUCTURAL_VALIDATION != SOURCE_CONTENT_VERIFICATION",
+    "NO_MAIN_MERGE",
+    "NO_DEPLOYMENT"
+  ]
+}
