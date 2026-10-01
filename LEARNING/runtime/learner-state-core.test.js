@@ -111,6 +111,13 @@ const verifiedMemoryRows=[
 ];
 const retentionState=Core.deriveSkillState(verifiedMemoryRows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'},{now_ms:Date.parse('2026-10-20T07:00:00.000Z')});
 assert.equal(retentionState.inferred.retention_signal,'RETENTION_AT_RISK');
+assert.equal(retentionState.observed.verified_performance_count,3);
+assert.equal(retentionState.observed.verified_correct_count,2);
+assert.equal(retentionState.observed.verified_incorrect_count,1);
+assert.equal(retentionState.observed.verified_accuracy_rate,0.667);
+assert.equal(retentionState.inferred.accuracy_signal,'VERIFIED_ACCURACY_MIXED');
+assert.equal(retentionState.inferred.accuracy_instrument_mixed,false);
+assert.equal(retentionState.inferred.accuracy_is_descriptive_not_mastery,true);
 assert.equal(retentionState.inferred.retention_candidate.promoted,false);
 assert.equal(retentionState.model.retention_probability,null,'advisory retention candidate must not become promoted runtime probability');
 assert.equal(retentionState.model.scheduling_authority,false);
@@ -146,6 +153,11 @@ const recoveryRows=[
 ];
 const recoveryState=Core.deriveSkillState(recoveryRows,{member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
 assert.equal(recoveryState.inferred.recovery_signal,'UNRESOLVED_RECOVERY');
+assert.equal(recoveryState.observed.verified_performance_count,3);
+assert.equal(recoveryState.observed.verified_accuracy_rate,0.333);
+assert.equal(recoveryState.observed.verified_unassisted_accuracy_count,1);
+assert.equal(recoveryState.observed.verified_unassisted_accuracy_rate,1);
+assert.equal(recoveryState.inferred.accuracy_signal,'VERIFIED_ACCURACY_LOW');
 assert.equal(recoveryState.inferred.recovery_profile.recovered_episode_count,1);
 assert.equal(recoveryState.inferred.recovery_profile.unresolved_episode_count,1);
 assert.equal(recoveryState.model.mastery_estimate,null);
