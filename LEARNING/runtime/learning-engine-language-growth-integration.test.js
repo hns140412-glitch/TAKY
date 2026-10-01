@@ -101,6 +101,7 @@ const out=Runtime.derive({
           english_thinking_support:['picture -> easy English meaning -> chunk -> own sentence']
         }
       }
+    }
   }
 },verifier);
 
