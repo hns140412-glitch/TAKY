@@ -51,6 +51,10 @@ const parse=r=>JSON.parse(r.body);
    subject:'english',concept_skill_target:'vocabulary',
    evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',source_app:'hide-seek',
    instrument_version:'HIDE_CODE_RED_V1',learning_target_id:'n1',assisted:false,verified_outcome:1,
+   language_growth_signals:[
+    {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false,target_id:'n1'},
+    {dimension:'ENGLISH_THINKING',outcome:'PARTIAL',assisted:false,direct_english:true,target_id:'n1'}
+   ],
    verification:{authority:'LEARNING_VERIFICATION_RECEIPT',
     receipt_id:'server-receipt-1',verifier_type:'RETRIEVAL_EXACT_MATCH',
     verifier_version:'HIDE_CODE_RED_V1'}};
@@ -123,6 +127,68 @@ const parse=r=>JSON.parse(r.body);
     trusted_scope:trustedScope
    })
   });
+  const growthRow={
+   source_id:'EDU:ENG:G5:GROWTH:1',
+   source_ref:'taky:edu:EDU:ENG:G5:GROWTH:1',
+   source_family:'OFFICIAL_CURRICULUM',
+   source_type:'OFFICIAL_EDUCATION_STANDARD',
+   authority_class:'OFFICIAL',
+   detail_anchor:'DETAIL:EDU:ENG:G5:GROWTH:1',
+   provenance:['OFFICIAL_EDUCATION_SOURCE']
+  };
+  const growthOwner=(sid,ref)=>sid===growthRow.source_id&&ref===growthRow.source_ref?{
+   issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',
+   domain_use_authorized:true,source_id:sid,source_ref:ref,
+   index_version:'TEST_GROWTH_OWNER_V1',
+   review_evidence_refs:['TEST_GROWTH_OWNER_REVIEW'],
+   source_family:growthRow.source_family,source_type:growthRow.source_type,
+   authority_class:growthRow.authority_class,detail_anchor:growthRow.detail_anchor,
+   provenance:[...growthRow.provenance]
+  }:null;
+  const growthEndpoint=Decision.create({store,
+   verifyBearerToken:async t=>{if(t!==token)throw Error('INVALID');return principal;},
+   independentIndexOwnerVerifier:growthOwner,
+   resolveGrowthContext:async()=>({learner_context:{grade:5}}),
+   resolveIndexedEvidence:async()=>({
+    learning_index_handoff:{
+     indexed_evidence_handoff:{
+      query_context:{function_id:'LE-GROWTH-01',consumer_app:'LEARNING_ENGINE',
+       requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH'},
+      candidates:[growthRow]
+     },
+     learning_mapping:{by_source_id:{
+      'EDU:ENG:G5:GROWTH:1':{
+       curriculum_version:'2022',grade:5,subject:'english',
+       achievement_standard_refs:['ENG-G5-EXPR-01'],
+       term:'accept',
+       easy_english_definition:'to say yes to something or receive it',
+       expression_chunks:['accept an idea','I can accept ...'],
+       natural_collocations:['accept an invitation'],
+       grammar_patterns:['accept + noun'],
+       thinking_moves:['EXPLAIN','COMPARE','APPLY'],
+       question_stems:['Why would someone accept it?'],
+       production_targets:['USE_WORD_IN_OWN_SENTENCE'],
+       english_thinking_support:['easy English meaning -> chunk -> own sentence']
+      }
+     }}
+    }
+   })
+  });
+  const growthResponse=await growthEndpoint.handle(req());
+  const growthBody=parse(growthResponse);
+  assert.equal(growthResponse.status,200,JSON.stringify(growthBody));
+  assert.equal(growthBody.runtime_result.growth_profile.learner_context.grade,5);
+  assert.equal(growthBody.runtime_result.growth_profile.learner_context.language_load,'SIMPLE');
+  assert.equal(growthBody.runtime_result.growth_next_step.authority,'LEARNING_ENGINE_GROWTH_INTENT_ONLY');
+  assert.equal(growthBody.runtime_result.growth_next_step.curriculum_grounding.verified,true);
+  assert.deepEqual(growthBody.runtime_result.growth_next_step.curriculum_grounding.source_refs,
+   [growthRow.source_ref]);
+  assert.ok(growthBody.runtime_result.growth_next_step.language_support.easy_english_definitions.length>0);
+  assert.ok(growthBody.runtime_result.growth_next_step.language_support.expression_chunks.length>0);
+  assert.equal(growthBody.runtime_result.growth_next_step.hide_to_snap_handoff.child_authorship_required,true);
+  assert.equal(growthBody.runtime_result.growth_next_step.hide_to_snap_handoff.final_answer_generation_forbidden,true);
+  assert.equal((await growthEndpoint.handle(req({...scope,grade:5}))).status,400);
+
   const activityDecision=parse(await activityEndpoint.handle(req()));
   assert.equal(activityDecision.ok,true,JSON.stringify(activityDecision));
   assert.deepEqual(activityDecision.runtime_result.trace.governed_activity_refs,
