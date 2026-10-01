@@ -38,4 +38,54 @@ const enough=Gap.derive({
 });
 assert.equal(enough.gap,null);
 
+
+
+const lexicalMissing=Gap.derive({
+  scope:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'},
+  decision:{blockers:[],advisories:[],state_summary:{evidence_sufficiency:'EMERGING'}},
+  indexed_evidence:{
+    source_refs:['INDEX:EDU1'],
+    candidates:[{
+      source_id:'EDU1',source_ref:'INDEX:EDU1',
+      source_family:'OFFICIAL_CURRICULUM',authority_class:'OFFICIAL',
+      provenance:['OFFICIAL_EDUCATION_SOURCE']
+    }]
+  },
+  reference_requirement:{
+    gap_type:'LEXICAL_SEMANTICS_REFERENCE_REQUIRED',
+    function_id:'LE-GROWTH-01',consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH',
+    requested_capability:'LEXICAL_SEMANTICS',
+    required_learning_evidence_role:'LEXICAL_SEMANTICS',
+    required_provenance_any_of:['LEXICAL_REFERENCE_SOURCE'],
+    priority:'MEDIUM'
+  }
+});
+assert.equal(lexicalMissing.gap.gap_type,'LEXICAL_SEMANTICS_REFERENCE_REQUIRED');
+assert.deepEqual(lexicalMissing.gap.existing_source_refs,['INDEX:EDU1']);
+assert.deepEqual(lexicalMissing.gap.required_provenance_any_of,['LEXICAL_REFERENCE_SOURCE']);
+assert.equal(lexicalMissing.gap.mining_request_authorized,false);
+
+const lexicalPresent=Gap.derive({
+  scope:{member_id:'A',subject:'english',concept_skill_target:'vocabulary'},
+  decision:{blockers:[],advisories:[],state_summary:{evidence_sufficiency:'EMERGING'}},
+  indexed_evidence:{
+    source_refs:['INDEX:EDU1','INDEX:DICT1'],
+    candidates:[
+      {source_id:'EDU1',source_ref:'INDEX:EDU1',provenance:['OFFICIAL_EDUCATION_SOURCE']},
+      {source_id:'DICT1',source_ref:'INDEX:DICT1',provenance:['LEXICAL_REFERENCE_SOURCE']}
+    ]
+  },
+  reference_requirement:{
+    gap_type:'LEXICAL_SEMANTICS_REFERENCE_REQUIRED',
+    function_id:'LE-GROWTH-01',consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH',
+    requested_capability:'LEXICAL_SEMANTICS',
+    required_learning_evidence_role:'LEXICAL_SEMANTICS',
+    required_provenance_any_of:['LEXICAL_REFERENCE_SOURCE']
+  }
+});
+assert.equal(lexicalPresent.gap,null);
+assert.deepEqual(lexicalPresent.satisfied_reference_requirement.matching_source_refs,['INDEX:DICT1']);
+
 console.log('LEARNING_EVIDENCE_GAP_PASS');
