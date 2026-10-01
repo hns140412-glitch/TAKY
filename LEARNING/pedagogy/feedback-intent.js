@@ -20,6 +20,15 @@ function derive(state={}){
     intents.push({intent,priority,basis,...extra});
   };
 
+  if(inferred.accuracy_instrument_mixed===true&&
+     inferred.accuracy_signal!=='NO_VERIFIED_ACCURACY_EVIDENCE'){
+    addIntent('CONTINUE_OBSERVATION','MEDIUM','ACCURACY_INSTRUMENT_MIXED');
+  }else if(inferred.accuracy_signal==='VERIFIED_ACCURACY_LOW'){
+    addIntent('ACCURACY_REPAIR','HIGH','VERIFIED_ACCURACY_LOW');
+  }else if(inferred.accuracy_signal==='VERIFIED_ACCURACY_MIXED'){
+    addIntent('ACCURACY_CHECKPOINT','MEDIUM','VERIFIED_ACCURACY_MIXED');
+  }
+
   if(inferred.repeated_confusion_signal==='REPEATED_SELF_REPORTED_CONFUSION'){
     addIntent('DISAMBIGUATE_CONFUSION','HIGH','REPEATED_SELF_REPORTED_CONFUSION',{
       targets:(observed.self_reflection?.repeated_confusions||[]).map(x=>x.target)
