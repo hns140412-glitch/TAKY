@@ -95,3 +95,37 @@ assert.equal(curriculumItem.semantic_groups.language_growth.easy_english_definit
 assert.equal(lexicalItem.semantic_groups.language_growth.easy_english_definition,
   'to say yes to something or receive it');
 assert.equal(lexicalItem.semantic_groups.curriculum,undefined);
+
+
+const USAGE_OWNER={
+  source_id:'SRC_USAGE',source_ref:'INDEX:SRC_USAGE',
+  source_family:'TEST_USAGE',source_type:'LANGUAGE_USAGE_REFERENCE',
+  authority_class:'REFERENCE',detail_anchor:'DETAIL:SRC_USAGE#1',
+  learning_evidence_kind:'EXAMPLE_SENTENCE',
+  provenance:['LANGUAGE_USAGE_SOURCE'],
+  issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',
+  domain_use_authorized:true,index_version:'VTEST',
+  review_evidence_refs:['R-USAGE']
+};
+const usageView=LearningIndex.prepare({
+  indexed_evidence_handoff:{
+    query_context:{consumer_app:'LEARNING_ENGINE',function_id:'LE-GROWTH-01',
+      requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH'},
+    candidates:[{
+      source_id:'SRC_USAGE',source_ref:'INDEX:SRC_USAGE',
+      source_family:'TEST_USAGE',source_type:'LANGUAGE_USAGE_REFERENCE',
+      authority_class:'REFERENCE',detail_anchor:'DETAIL:SRC_USAGE#1',
+      learning_evidence_kind:'EXAMPLE_SENTENCE',
+      provenance:['LANGUAGE_USAGE_SOURCE']
+    }]
+  },
+  learning_mapping:{by_source_id:{
+    SRC_USAGE:{usage_example_sentences:['I accept it.']}
+  }}
+},(sid,ref)=>sid===USAGE_OWNER.source_id&&ref===USAGE_OWNER.source_ref?USAGE_OWNER:null);
+assert.equal(usageView.ok,true);
+assert.equal(usageView.semantic_items[0].learning_evidence_role,'LANGUAGE_USAGE');
+assert.equal(usageView.semantic_items[0].learning_evidence_kind,'EXAMPLE_SENTENCE');
+assert.deepEqual(usageView.semantic_items[0].semantic_groups.language_growth.usage_example_sentences,
+ ['I accept it.']);
+assert.equal(LearningIndex.validate(usageView).ok,true);
