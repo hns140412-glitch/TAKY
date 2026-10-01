@@ -84,7 +84,11 @@
     const reflectionSummary=SelfReflection?.summarize?SelfReflection.summarize(reflectionEvidence):{
       reflection_count:0,difficulty_counts:{},recall_state_counts:{},confidence_counts:{},hint_report_count:0,repeated_confusions:[],knew_but_could_not_recall_count:0
     };
-    const performanceEvidence=accepted.filter(e=>!['CHILD_SELF_REPORT','SELF_REFLECTION_EVIDENCE'].includes(clean(e.evidence_type)));
+    const performanceEvidence=accepted.filter(e=>![
+      'CHILD_SELF_REPORT',
+      'SELF_REFLECTION_EVIDENCE',
+      'READY_EXECUTION_FRICTION_OBSERVATION'
+    ].includes(clean(e.evidence_type)));
     const performanceSpacedDays=new Set(performanceEvidence.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
     const memoryEvidence=performanceEvidence.filter(e=>clean(e.evidence_type)==='MEMORY_RETRIEVAL_EVIDENCE');
     const memoryInstrumentVersions=[...new Set(memoryEvidence.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
@@ -138,6 +142,8 @@
         assisted_count:assisted,
         unassisted_count:unassisted,
         child_self_report_count:accepted.filter(e=>clean(e.evidence_type)==='CHILD_SELF_REPORT').length,
+        ready_execution_friction_observation_count:accepted.filter(e=>
+          clean(e.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION').length,
         self_reflection_count:reflectionSummary.reflection_count,
         self_reflection:reflectionSummary,
         verified_performance_count:performanceEvidence.filter(e=>e.verified_performance===true).length,
@@ -175,7 +181,7 @@
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
-        mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection is observation-only and excluded from performance targets',
+        mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection and Ready execution friction are observation-only and excluded from performance targets',
         retention_basis:'retention-state baseline is advisory-only until real time-held-out promotion gates pass',
         recovery_basis:'recovery profile is observational and item-scoped; missing target identity is not inferred',
         scheduling_basis:'Core emits no dated schedule'
