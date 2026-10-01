@@ -71,6 +71,14 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
       recovery_signal:state.recovery_signal||'INSUFFICIENT_TARGET_IDENTITY',
       assistance_dependency_signal:state.assistance_dependency_signal||'UNKNOWN',
       repeated_confusion_signal:state.repeated_confusion_signal||'NONE_OBSERVED',
+      accuracy_signal:state.accuracy_signal||'NO_VERIFIED_ACCURACY_EVIDENCE',
+      accuracy_instrument_mixed:state.accuracy_instrument_mixed===true,
+      verified_accuracy_rate:Number.isFinite(learner_state.observed?.verified_accuracy_rate)
+        ?learner_state.observed.verified_accuracy_rate:null,
+      verified_unassisted_accuracy_rate:Number.isFinite(
+        learner_state.observed?.verified_unassisted_accuracy_rate
+      )?learner_state.observed.verified_unassisted_accuracy_rate:null,
+      accuracy_is_descriptive_not_mastery:true,
       prerequisite_readiness:prerequisite_readiness?.readiness||'NOT_PROVIDED'
     },
     blockers,
