@@ -11,16 +11,19 @@ const projection=JSON.parse(fs.readFileSync(
 const curriculum=projection.learning_projection.find(x=>x.learning_evidence_role==='CURRICULUM_ALIGNMENT');
 const lexical=projection.learning_projection.find(x=>x.learning_evidence_role==='LEXICAL_SEMANTICS');
 
+assert.equal(Policy.sourceRole(curriculum),'CURRICULUM_ALIGNMENT');
+assert.equal(Policy.sourceRole(lexical),'LEXICAL_SEMANTICS');
+// Family/title/provenance alone must never invent a Learning evidence role.
 assert.equal(Policy.sourceRole({
  source_family:'OFFICIAL_CURRICULUM',
  authority_class:curriculum.authority_class,
- provenance:curriculum.provenance_tags
-}),'CURRICULUM_ALIGNMENT');
+ provenance_tags:curriculum.provenance_tags
+}),'GENERAL_REFERENCE');
 assert.equal(Policy.sourceRole({
  source_family:'OPEN_ENGLISH_WORDNET_2025',
  authority_class:lexical.authority_class,
- provenance:lexical.provenance_tags
-}),'LEXICAL_SEMANTICS');
+ provenance_tags:lexical.provenance_tags
+}),'GENERAL_REFERENCE');
 
 const gaps=Policy.languageResourceGaps({
  curriculum_verified:true,
