@@ -16,9 +16,9 @@ const store={
 const getStore=args=>{storeArgs=args;return store};
 const packet={
   packet_id:'hide-seek:h1',source_app:'hide-seek',
-  context:{family_id:'F1',member_id:'CHILD_A',subject:'영어',concept_skill_target:'vocabulary'},
+  context:{family_id:'F1',member_id:'CHILD_A',session_id:'S-h1',task_id:'T-h1',subject:'영어',concept_skill_target:'vocabulary'},
   event:{source:'hide-seek',event_id:'h1',occurred_at:'2026-09-25T12:00:00.000Z',event_type:'RETRIEVAL_RESULT',payload:{
-    member_id:'CHILD_A',subject:'영어',concept_skill_target:'vocabulary',instrument_version:'HIDE_CODE_RED_V1',
+    member_id:'CHILD_A',session_id:'S-h1',task_id:'T-h1',subject:'영어',concept_skill_target:'vocabulary',instrument_version:'HIDE_CODE_RED_V1',
     verification_candidate:{verifier_type:'RETRIEVAL_EXACT_MATCH',verifier_version:'HIDE_CODE_RED_V1',basis:'DETERMINISTIC_LOCAL_MATCH',outcome:1,reference_id:'word:h1'}
   }}
 };
