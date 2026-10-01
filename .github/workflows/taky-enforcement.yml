@@ -231,6 +231,9 @@ jobs:
       - name: Validate English lexical and usage source candidates
         working-directory: ENFORCEMENT
         run: python english_lexical_usage_source_candidates_test.py
+      - name: Validate English language usage precheck
+        working-directory: ENFORCEMENT
+        run: python english_language_usage_precheck_test.py
       - name: Validate OEWN lexical precheck
         working-directory: ENFORCEMENT
         run: python oewn_lexical_precheck_test.py
