@@ -14,6 +14,7 @@ const HideVocabularyPolicy=require('../pedagogy/hide-vocabulary-routing-policy.j
 const LanguageGrowthProfile=require('../pedagogy/language-growth-profile.js');
 const GrowthNextStep=require('../pedagogy/growth-next-step-policy.js');
 const GrowthOutcomeFeedback=require('../pedagogy/growth-outcome-feedback.js');
+const LearningOutput=require('../contracts/learning-engine-output-contract.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -138,6 +139,19 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     }
   }
 
+  const learningOutput=LearningOutput.derive({
+    decision,
+    growth_next_step:growthNextStep,
+    reference_gaps:[
+      ...(evidenceGap.gap?.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'
+        ?[evidenceGap.gap]:[]),
+      ...growthReferenceGaps
+    ]
+  });
+  if(!learningOutput.ok||!LearningOutput.validate(learningOutput).ok){
+    return {ok:false,reason:'LEARNING_OUTPUT_CONTRACT_INVALID',detail:learningOutput};
+  }
+
   let hideVocabularyPolicy=null;
   if(input.hide_vocabulary_context){
     hideVocabularyPolicy=HideVocabularyPolicy.derive({
@@ -178,6 +192,7 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     specialist_policy:hideVocabularyPolicy?{hide_seek_vocabulary:hideVocabularyPolicy}:null,
     growth_profile:growthProfile,
     growth_next_step:growthNextStep,
+    learning_output:learningOutput,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
       observation_review_policy:observationReview?.policy_version||null,
@@ -205,7 +220,8 @@ function derive(input={}, independentIndexOwnerVerifier=null){
       ),
       hide_vocabulary_policy_version:hideVocabularyPolicy?.version||null,
       language_growth_profile_version:growthProfile?.version||null,
-      growth_next_step_policy_version:growthNextStep?.version||null
+      growth_next_step_policy_version:growthNextStep?.version||null,
+      learning_output_contract_version:learningOutput?.version||null
     },
     cannot_influence:[
       'SCHEDULE_DATE',
@@ -279,6 +295,7 @@ function validate(result={}){
   if(result.specialist_policy?.hide_seek_vocabulary&&!HideVocabularyPolicy.validate(result.specialist_policy.hide_seek_vocabulary).ok)issues.push('HIDE_VOCABULARY_POLICY_INVALID');
   if(result.growth_profile&&!LanguageGrowthProfile.validate(result.growth_profile).ok)issues.push('LANGUAGE_GROWTH_PROFILE_INVALID');
   if(result.growth_next_step&&!GrowthNextStep.validate(result.growth_next_step).ok)issues.push('GROWTH_NEXT_STEP_POLICY_INVALID');
+  if(result.learning_output&&!LearningOutput.validate(result.learning_output).ok)issues.push('LEARNING_OUTPUT_CONTRACT_INVALID');
 
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
   const walk=v=>{
