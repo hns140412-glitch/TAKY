@@ -95,7 +95,42 @@ assert.equal(p.hide_to_snap_handoff.final_answer_generation_forbidden,true);
 assert.equal(p.reference_gap_candidate,null);
 assert.equal(Policy.validate(p).ok,true);
 
+
+const curriculumCannotMasqueradeAsDictionary=Policy.growthResources({
+ semantic_items:[{
+  source_ref:'official:curriculum-only',
+  source_family:'OFFICIAL_CURRICULUM',
+  authority_class:'OFFICIAL',
+  learning_evidence_role:'CURRICULUM_ALIGNMENT',
+  semantic_groups:{language_growth:{
+   easy_english_definition:['this must not be consumed as lexical authority'],
+   expression_chunks:['this must not be consumed as usage authority'],
+   natural_collocations:['accept an idea'],
+   thinking_moves:['EXPLAIN']
+  }}
+ }]
+});
+assert.equal(curriculumCannotMasqueradeAsDictionary.curriculum_verified,true);
+assert.deepEqual(curriculumCannotMasqueradeAsDictionary.easy_english_definitions,[]);
+assert.deepEqual(curriculumCannotMasqueradeAsDictionary.expression_chunks,[]);
+assert.deepEqual(curriculumCannotMasqueradeAsDictionary.natural_collocations,[]);
+assert.deepEqual(curriculumCannotMasqueradeAsDictionary.thinking_moves,['EXPLAIN']);
+assert.equal(
+ curriculumCannotMasqueradeAsDictionary.source_role_guard
+  .curriculum_content_cannot_supply_lexical_or_usage_authority_by_presence_alone,
+ true
+);
+
 const noIndex=Policy.derive({growth_profile:profile,learning_index:{semantic_items:[]}});
 assert.equal(noIndex.curriculum_grounding.verified,false);
 assert.equal(noIndex.reference_gap_candidate.mining_request_authorized,false);
+assert(noIndex.reference_gap_candidates.length>=2);
+assert(noIndex.reference_gap_candidates.every(x=>x.mining_request_authorized===false));
+assert(noIndex.reference_gap_candidates.every(x=>
+ x.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'));
+assert(noIndex.reference_gap_candidates.some(x=>
+ x.required_learning_evidence_role==='CURRICULUM_ALIGNMENT'));
+assert(noIndex.reference_gap_candidates.some(x=>
+ ['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','LEXICAL_SEMANTICS']
+  .includes(x.required_learning_evidence_role)));
 console.log('growth-next-step-policy.test.js PASS');
