@@ -178,6 +178,8 @@ function fromSnap(event={},context={}){
     child_authored:p.child_authored===true,
     landmark:clean(p.landmark||p.active_landmark)||null,
     step:finite(p.step),
+    production_texts:Array.isArray(p.production_texts)
+      ?p.production_texts.map(x=>String(x??'')).slice(0,8):[],
     vocabulary_used:Array.isArray(p.vocabulary_used)?p.vocabulary_used.slice(0,32):[],
     grammar_stability:p.grammar_stability??null,
     expression_expansion:p.expression_expansion??null,
@@ -187,7 +189,10 @@ function fromSnap(event={},context={}){
     direct_english:p.direct_english??null,
     expression_reuse:p.expression_reuse??null,
     self_correction:p.self_correction??null,
-    assistance_strength:p.assistance_strength??null
+    assistance_strength:p.assistance_strength??null,
+    raw_observation_only:true,
+    quality_interpretation_authority:false,
+    local_growth_grading_forbidden:true
   };
   out.growth_execution_context=normalizeGrowthExecutionContext(p);
   out.raw_app_signals={
