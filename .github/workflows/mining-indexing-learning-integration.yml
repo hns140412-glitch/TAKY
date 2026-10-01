@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - taky/mining-indexing-learning-integration-2026-09-25
+      - taky/learning-mining-runtime-integration-2026-10-01
   pull_request:
     paths:
       - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
@@ -11,6 +12,7 @@ on:
       - 'LEARNING/policy/**'
       - 'LEARNING/intake/indexed-evidence-handoff.js'
       - 'LEARNING/intake/indexed-evidence-handoff.test.js'
+      - 'LEARNING/index/**'
       - 'LEARNING/runtime/evidence-gap.js'
       - 'LEARNING/runtime/evidence-gap.test.js'
       - 'LEARNING/runtime/learning-engine-runtime.js'
@@ -21,6 +23,10 @@ on:
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
+      - 'ENFORCEMENT/mining_runtime_host.py'
+      - 'ENFORCEMENT/mining_runtime_host_test.py'
+      - 'ENFORCEMENT/learning_mining_closed_loop.py'
+      - 'ENFORCEMENT/learning_mining_closed_loop_test.py'
       - 'ENFORCEMENT/mining_run_orchestrator.py'
       - 'ENFORCEMENT/mining_run_orchestrator_test.py'
       - 'ENFORCEMENT/mining_index_bridge.py'
@@ -48,6 +54,8 @@ jobs:
         run: node LEARNING/policy/evidence-policy-bridge.test.js
       - name: Index to Learning evidence handoff
         run: node LEARNING/intake/indexed-evidence-handoff.test.js
+      - name: Learning Index derived-view contract
+        run: node LEARNING/index/learning-index.test.js
       - name: Learning evidence gap emitter
         run: node LEARNING/runtime/evidence-gap.test.js
       - name: Outcome growth feedback
@@ -67,6 +75,12 @@ jobs:
       - name: Learning gap to Mining runtime bridge
         working-directory: ENFORCEMENT
         run: python learning_mining_runtime_bridge_test.py
+      - name: Mining provider invocation host
+        working-directory: ENFORCEMENT
+        run: python mining_runtime_host_test.py
+      - name: Learning Mining closed loop host
+        working-directory: ENFORCEMENT
+        run: python learning_mining_closed_loop_test.py
       - name: Mining V2 index constraint regression
         working-directory: ENFORCEMENT
         run: python mining_index_bridge_test.py
