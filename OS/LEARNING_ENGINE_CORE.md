@@ -1267,4 +1267,116 @@ CURRICULUM AUTHORITY != LEXICAL AUTHORITY
 PEDAGOGICAL REFERENCE != LANGUAGE-USAGE FACT
 INDEX OWNER REVIEW REQUIRED BEFORE LEARNING INDEX CONSUMPTION
 
+
+## 22.18 Official learning evidence I/O contract
+
+Canonical input contract:
+
+COMMON IDENTITY
+- member / learner
+- family when available
+- session
+- assignment / task
+- lap / segment when available
+- subject
+- concept / skill target
+- learning target
+- source app / source event
+- observed time
+
+REFERENCE PROVENANCE stays role-separated:
+- curriculum_refs -> CURRICULUM_ALIGNMENT
+- lexical_refs -> LEXICAL_SEMANTICS
+- usage_refs -> LANGUAGE_USAGE
+- pedagogical_refs -> PEDAGOGICAL_USAGE
+- general_refs -> GENERAL_REFERENCE
+
+No app may borrow authority from another reference role.
+
+Ready raw evidence:
+- Planner allocation as received
+- actual task / lap start and end
+- actual minutes
+- performed quantity when explicitly observed
+- COMPLETED / PARTIAL / DEFERRED / BLOCKED / WAITING_FOR_PARENT
+- parent confirmation when explicitly observed
+- blocked reason / execution friction
+- assignment / execution facts only
+
+Hide raw evidence:
+- correct / incorrect where objectively observed
+- confusion
+- hint stage
+- helped / unassisted
+- response latency
+- self-correction
+- recall degree
+- meaning-link evidence
+- spelling evidence
+- memory / retrieval evidence only
+
+Snap & Pop raw evidence:
+- vocabulary used
+- grammar stability evidence
+- expression expansion
+- reason / evidence
+- perspective shift
+- story structure
+- direct-English processing evidence
+- expression reuse
+- self-correction
+- assistance strength
+- applied growth-control context
+- dimension review status
+- child production remains unverified until a permitted rubric / verifier reviews it
+
+Imagination Cloud raw evidence:
+- invocation reason
+- target concept
+- visualization used
+- explanation used
+- learner response before / after
+- additional-help-needed signal
+- curiosity-only signal
+
+Imagination Cloud is observation-only:
+IMAGINATION SUPPORT != MASTERY
+IMAGINATION SUPPORT != SCHEDULE DECISION
+
+Cross-session Ready friction may use:
+scope_kind = AGGREGATED_EXECUTION
+
+This is an explicit aggregate evidence scope and may not be disguised as a fabricated session.
+
+Learning Engine official output is intent-only:
+- review_need
+- learning_intensity
+- recommended_quantity
+- question_depth
+- hint_policy
+- next_growth_intent
+- reference_gaps
+
+Learning Engine recommended quantity is NOT an allocated quantity.
+
+Canonical output ownership:
+
+RAW EVIDENCE
+-> LEARNING ENGINE
+-> REVIEW NEED / INTENSITY / RECOMMENDED QUANTITY / NEXT GROWTH INTENT
+-> PLANNER
+-> ACTUAL DATE / ACTUAL QUANTITY ALLOCATION
+-> READY EXECUTION
+
+Hard locks:
+
+RAW APP EVIDENCE != LEARNER STATE AUTHORITY
+LEARNING ENGINE RECOMMENDED QUANTITY != PLANNER ALLOCATED QUANTITY
+LEARNING ENGINE REVIEW NEED != REVIEW DATE
+READY EXECUTION FACT != PEDAGOGICAL JUDGMENT
+HIDE MEMORY EVIDENCE != MASTERY
+SNAP COMPLETION != LANGUAGE GROWTH VERIFICATION
+IMAGINATION HELP USE != LEARNING FAILURE
+PLANNER ALLOCATION != LEARNING INTENT
+
 END
