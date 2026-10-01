@@ -79,6 +79,8 @@ jobs:
         run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
       - name: Learning evidence I/O contract
         run: node LEARNING/contracts/learning-evidence-io-contract.test.js
+      - name: Language usage evidence-kind contract
+        run: node LEARNING/contracts/language-usage-evidence-kind-contract.test.js
       - name: Learning Engine output contract
         run: node LEARNING/contracts/learning-engine-output-contract.test.js
       - name: Imagination Cloud evidence contract
