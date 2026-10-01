@@ -50,10 +50,15 @@ class TestCrossRepoAuthorityMatrix(unittest.TestCase):
         self.assertIsNone(src["curriculum_177"]["blocking_item"])
         self.assertEqual(src["curriculum_177"]["guard"],
                          "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION")
+        self.assertTrue(src["english_lexical"]["source_precheck_complete"])
         self.assertFalse(src["english_lexical"]["runtime_authority"])
+        self.assertTrue(src["english_lexical"]["formal_index_owner_promotion_required"])
+        self.assertEqual(src["english_lexical"]["license"],"CC-BY-4.0")
         self.assertFalse(src["english_language_usage"]["runtime_authority"])
+        self.assertTrue(src["english_language_usage"]["formal_index_owner_promotion_required"])
+        self.assertEqual(src["english_language_usage"]["license"],"CC-BY-SA-4.0")
         self.assertEqual(src["english_language_usage"]["state"],
-                         "OPEN__NO_UNCONDITIONAL_PROVIDER_SELECTED")
+                         "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN")
 
     def test_memory_routing_stays_candidate(self):
         c=set(self.d["systems"]["HIDE_SEEK"]["candidate_not_core"])
