@@ -105,7 +105,8 @@ function validateLearningOutput(output={}){
     if(!value||typeof value!=='object')return [];
     const found=[];
     for(const [key,nested] of Object.entries(value)){
-      if(forbiddenKeys.has(key))found.push(key);
+      if(forbiddenKeys.has(key)&&!(key==='allocated_quantity'&&nested===null))
+        found.push(key);
       found.push(...walkForbidden(nested));
     }
     return found;
