@@ -12,6 +12,7 @@ on:
       - 'CURRENT/LEARNING_ENGINE_*'
       - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
@@ -71,6 +72,7 @@ on:
       - 'CURRENT/LEARNING_ENGINE_*'
       - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
@@ -198,6 +200,14 @@ jobs:
         run: node LEARNING/pedagogy/feedback-intent.test.js
       - name: Validate adaptive learning plan intent
         run: node LEARNING/pedagogy/adaptive-plan-contract.test.js
+      - name: Validate language growth profile
+        run: node LEARNING/pedagogy/language-growth-profile.test.js
+      - name: Validate growth next-step policy
+        run: node LEARNING/pedagogy/growth-next-step-policy.test.js
+      - name: Validate curriculum-grounded language growth runtime
+        run: node LEARNING/runtime/learning-engine-language-growth-integration.test.js
+      - name: Validate central Learning growth decision surface
+        run: node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Validate Learning Engine estimator benchmark lane
         run: node LEARNING/benchmark/estimator-benchmark.test.js
       - name: Validate estimator promotion policy
