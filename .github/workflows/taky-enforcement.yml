@@ -26,6 +26,7 @@ on:
       - 'HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md'
       - 'HANDOFF/CROSS_REPO_AUTHORITY_MATRIX_2026-10-02_V1.json'
       - 'HANDOFF/INDEX_OWNER_PROMOTION_APPROVAL_PACKET_2026-10-02_V1.json'
+      - 'HANDOFF/LANGUAGE_USAGE_PARTIAL_INDEX_APPROVAL_PACKET_2026-10-02_V1.json'
       - 'SHARED/runtime/**'
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
@@ -251,6 +252,9 @@ jobs:
       - name: Validate Index Owner promotion approval packet is non-executing
         working-directory: ENFORCEMENT
         run: python index_owner_promotion_approval_packet_test.py
+      - name: Validate Tatoeba partial usage approval packet is non-executing
+        working-directory: ENFORCEMENT
+        run: python language_usage_partial_approval_packet_test.py
       - name: Validate central Learning growth decision surface
         run: node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Validate Learning Engine estimator benchmark lane
