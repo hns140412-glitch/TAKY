@@ -6,7 +6,7 @@ const Policy=require('./growth-next-step-policy.js');
 const profile=Profile.derive({
  learner_context:{grade:5},
  evidence:[
-  {event_id:'1',observed_at:'2026-10-01T00:00:00Z',source_app:'hide-seek',
+  {event_id:'1',observed_at:'2026-10-01T00:00:00Z',source_app:'hide-seek',verified_outcome:1,verification:{authority:'LEARNING_VERIFICATION_RECEIPT'},
    language_growth_signals:[
     {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false},
     {dimension:'GRAMMAR',outcome:'PARTIAL',assisted:true},
@@ -44,6 +44,10 @@ const p=Policy.derive({growth_profile:profile,learning_index:learningIndex});
 assert.equal(p.ok,true);
 assert.equal(p.curriculum_grounding.verified,true);
 assert.equal(p.language_load,'SIMPLE');
+assert.ok(['MEDIUM','HIGH'].includes(p.growth_control.evidence_confidence));
+assert.ok(['BUILD_CONNECT','STRETCH_TRANSFER'].includes(p.growth_control.learning_intensity));
+assert.ok(/^L[1-5]_/.test(p.growth_control.expression_level));
+assert.equal(p.growth_control.stability_guard.low_confidence_cannot_upshift_to_transfer,true);
 assert.ok(['ELICIT_PULL','TRANSFER_PUSH'].includes(p.support_phase));
 assert.ok(p.question_depth.level>=3);
 assert.equal(p.hide_to_snap_handoff.child_authorship_required,true);
