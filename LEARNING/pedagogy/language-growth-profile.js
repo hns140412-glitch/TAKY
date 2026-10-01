@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V2';
+const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V3';
 const DIMENSIONS=Object.freeze(['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']);
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
@@ -61,6 +61,34 @@ function expressionRank(level){
 function score(signal){
   const base=signal.outcome==='SUCCESS'?1:signal.outcome==='PARTIAL'?0.5:signal.outcome==='FAIL'?0:0.5;
   return signal.assisted?base*0.75:base;
+}
+
+function sortSignals(rows=[]){
+  return [...rows].sort((a,b)=>{
+    const at=Date.parse(a.observed_at||'');
+    const bt=Date.parse(b.observed_at||'');
+    if(Number.isFinite(at)&&Number.isFinite(bt)&&at!==bt)return at-bt;
+    return clean(a.event_id).localeCompare(clean(b.event_id));
+  });
+}
+
+function tail(rows=[],limit=8){
+  const xs=sortSignals(rows);
+  const n=Math.max(1,Math.floor(Number(limit)||1));
+  return xs.slice(-n);
+}
+
+function stabilitySignal(recent={},stable={}){
+  if(recent.state==='READY_TO_STRETCH'&&stable.state==='READY_TO_STRETCH')
+    return 'STRETCH_STABLE';
+  if(recent.state==='READY_TO_STRETCH'&&stable.state!=='READY_TO_STRETCH')
+    return 'PROMOTION_CANDIDATE_NOT_STABLE';
+  if(recent.state==='NEEDS_SUPPORT'&&stable.state==='READY_TO_STRETCH')
+    return 'TEMPORARY_SUPPORT_WITHOUT_LONG_TERM_DEMOTION';
+  if(recent.state==='NEEDS_SUPPORT'&&stable.state==='NEEDS_SUPPORT')
+    return 'SUPPORT_NEED_STABLE';
+  if(recent.state==='UNKNOWN')return 'RECENT_EVIDENCE_INSUFFICIENT';
+  return 'HOLD_OR_DEVELOP';
 }
 
 function classify(rows=[]){
@@ -164,18 +192,49 @@ function ageLanguageLoad(context={}){
   return 'SIMPLE';
 }
 
-function derive({evidence=[],learner_context={}}={}){
+function derive({evidence=[],learner_context={},window_policy={}}={}){
   const signals=signalsFromEvidence(evidence);
+  const recentLimit=Math.max(3,Math.min(24,Math.floor(Number(window_policy.recent_limit)||8)));
+  const stabilityLimit=Math.max(recentLimit,Math.min(72,Math.floor(Number(window_policy.stability_limit)||24)));
   const dimensions={};
+  const currentSignals=[];
+
   for(const dimension of DIMENSIONS){
-    dimensions[dimension]=classify(signals.filter(x=>x.dimension===dimension));
+    const all=signals.filter(x=>x.dimension===dimension);
+    const recentRows=tail(all,recentLimit);
+    const stabilityRows=tail(all,stabilityLimit);
+    const recent=classify(recentRows);
+    const stable=classify(stabilityRows);
+    dimensions[dimension]={
+      ...recent,
+      recent_state:recent.state,
+      stable_state:stable.state,
+      stable_confidence:stable.confidence,
+      stability_signal:stabilitySignal(recent,stable),
+      evidence_window:{
+        recent_limit:recentLimit,
+        stability_limit:stabilityLimit,
+        recent_signal_count:recentRows.length,
+        stability_signal_count:stabilityRows.length,
+        historical_signal_count:all.length
+      }
+    };
+    currentSignals.push(...recentRows);
   }
+
   const directDim=dimensions.ENGLISH_THINKING;
   const direct=directDim.direct_english_ratio;
   const directEvidence=directDim.signal_count||0;
-  const allSignals=Object.values(dimensions);
-  const crossAppDimensions=allSignals.filter(x=>(x.source_app_count||0)>=2).length;
-  const verifiedGrowthSignals=allSignals.reduce((n,x)=>n+(x.verified_count||0),0);
+  const allDims=Object.values(dimensions);
+  const crossAppDimensions=allDims.filter(x=>(x.source_app_count||0)>=2).length;
+  const verifiedGrowthSignals=allDims.reduce((n,x)=>n+(x.verified_count||0),0);
+  const currentUnique=new Map();
+  for(const x of currentSignals){
+    const key=[x.event_id,x.dimension,x.target_id,x.kind].map(clean).join('|');
+    if(!currentUnique.has(key))currentUnique.set(key,x);
+  }
+  const activeSignals=[...currentUnique.values()];
+
   return {
     ok:true,
     version:VERSION,
@@ -191,12 +250,20 @@ function derive({evidence=[],learner_context={}}={}){
         ?'UNKNOWN'
         :(direct<0.4?'LIKELY_TRANSLATION_DEPENDENT':direct>=0.7?'DIRECT_ENGLISH_EMERGING':'MIXED'),
       direct_english_evidence_count:directEvidence,
-      transfer_evidence_count:signals.filter(x=>x.transfer===true).length,
+      transfer_evidence_count:activeSignals.filter(x=>x.transfer===true).length,
       cross_app_dimension_count:crossAppDimensions,
       verified_growth_signal_count:verifiedGrowthSignals
     },
-    evidence_ids:[...new Set(signals.map(x=>x.event_id).filter(Boolean))],
-    signal_count:signals.length,
+    evidence_window_policy:{
+      authority:'TUNABLE_RUNTIME_POLICY_NOT_CURRICULUM',
+      recent_limit:recentLimit,
+      stability_limit:stabilityLimit,
+      current_signal_count:activeSignals.length,
+      historical_signal_count:signals.length
+    },
+    evidence_ids:[...new Set(activeSignals.map(x=>x.event_id).filter(Boolean))],
+    signal_count:activeSignals.length,
+    historical_signal_count:signals.length,
     guards:{
       age_changes_language_load_not_thinking_ceiling:true,
       one_success_is_not_growth_mastery:true,
@@ -206,16 +273,20 @@ function derive({evidence=[],learner_context={}}={}){
       cross_app_or_verified_evidence_required_for_stretch:true,
       sparse_direct_english_signal_does_not_create_translation_dependency:true,
       applied_challenge_context_is_evidence_not_authority:true,
-      scaffolded_success_does_not_auto_upshift_expression_level:true
+      scaffolded_success_does_not_auto_upshift_expression_level:true,
+      recent_window_drives_immediate_support:true,
+      stability_window_guards_promotion_and_demotion:true,
+      old_evidence_cannot_dominate_without_window_presence:true
     }
   };
 }
-
 function validate(profile={}){
   const issues=[];
   if(profile?.ok!==true)issues.push('PROFILE_NOT_OK');
   if(profile.authority!=='LEARNING_ENGINE_DERIVED_GROWTH_STATE')issues.push('AUTHORITY_INVALID');
   if(profile.guards?.age_changes_language_load_not_thinking_ceiling!==true)issues.push('AGE_GUARD_MISSING');
+  if(profile.guards?.stability_window_guards_promotion_and_demotion!==true)issues.push('STABILITY_WINDOW_GUARD_MISSING');
+  if(profile.evidence_window_policy?.authority!=='TUNABLE_RUNTIME_POLICY_NOT_CURRICULUM')issues.push('WINDOW_POLICY_AUTHORITY_INVALID');
   for(const d of DIMENSIONS){
     if(!profile.dimensions?.[d])issues.push('DIMENSION_MISSING:'+d);
   }
