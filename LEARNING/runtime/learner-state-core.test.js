@@ -95,6 +95,12 @@ assert.equal(withExecutionContext.observed.performance_evidence_count,
   a.observed.performance_evidence_count);
 assert.equal(withExecutionContext.observed.verified_performance_count,
   a.observed.verified_performance_count);
+assert.equal(withExecutionContext.inferred.retention_signal,
+  a.inferred.retention_signal,
+  'Ready execution and Imagination support must not alter retention interpretation');
+assert.equal(withExecutionContext.inferred.recovery_signal,
+  a.inferred.recovery_signal,
+  'Ready execution and Imagination support must not alter recovery interpretation');
 assert.equal(withExecutionContext.model.mastery_estimate,null);
 
 const frictionRow={
