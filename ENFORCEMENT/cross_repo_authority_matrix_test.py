@@ -43,8 +43,13 @@ class TestCrossRepoAuthorityMatrix(unittest.TestCase):
 
     def test_source_candidates_are_not_promoted(self):
         src=self.d["source_authority_status"]
+        self.assertTrue(src["curriculum_177"]["source_content_precheck_complete"])
         self.assertFalse(src["curriculum_177"]["central_index_authority"])
+        self.assertFalse(src["curriculum_177"]["canonical_promotion"])
         self.assertFalse(src["curriculum_177"]["learning_index_consumption_allowed"])
+        self.assertIsNone(src["curriculum_177"]["blocking_item"])
+        self.assertEqual(src["curriculum_177"]["guard"],
+                         "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION")
         self.assertFalse(src["english_lexical"]["runtime_authority"])
         self.assertFalse(src["english_language_usage"]["runtime_authority"])
         self.assertEqual(src["english_language_usage"]["state"],
