@@ -1,0 +1,136 @@
+{
+  "schema": "TAKY_MINING_MINING_INDEX_LEARNING_INDEX_LEARNING_ROLE_CONTRACT_V3",
+  "status": "CANDIDATE_BRANCH_VALIDATION_REQUIRED",
+  "effective_candidate_date": "2026-10-02",
+  "supersedes_after_promotion": "TAKY_MINING_INDEXING_LEARNING_ROLE_CONTRACT_V2",
+  "core_invariant": "MINING_ENGINE != MINING_INDEX != LEARNING_INDEX != LEARNING_ENGINE",
+  "roles": {
+    "mining_engine": {
+      "owns": [
+        "goal-aware discovery",
+        "research strategy",
+        "provider routing",
+        "external traversal",
+        "source acquisition",
+        "counter-evidence acquisition",
+        "acquisition provenance",
+        "search strategy memory and failure memory"
+      ],
+      "does_not_own": [
+        "persistent source classification",
+        "duplicate/version/fragment authority",
+        "learning semantic projection",
+        "learner state",
+        "pedagogical decision",
+        "schedule"
+      ]
+    },
+    "mining_index": {
+      "alias": "SHARED_SOURCE_INDEX_AND_EXISTING_INDEXING_AUTHORITY",
+      "owns": [
+        "RAW",
+        "INDEX_L1",
+        "DETAIL_L2",
+        "CURRENT source/index pointers",
+        "source identity",
+        "provenance",
+        "authority metadata",
+        "source family",
+        "duplicate/version/fragment relations",
+        "current/stale/review state",
+        "retrieval"
+      ],
+      "does_not_own": [
+        "search strategy",
+        "provider execution",
+        "learning meaning",
+        "learner state",
+        "pedagogical strategy",
+        "review date"
+      ]
+    },
+    "learning_index": {
+      "role": "DERIVED_REBUILDABLE_LEARNING_SEMANTIC_VIEW_OVER_MINING_INDEX",
+      "owns_no_independent_source_authority": true,
+      "owns": [
+        "curriculum alignment",
+        "term/morpheme/root mapping",
+        "subject-specific meaning",
+        "concept links",
+        "candidate prerequisite relation",
+        "related/contrast/confusion relations",
+        "misconception candidates",
+        "representation bridges",
+        "cross-subject links",
+        "transfer targets",
+        "learning-use provenance projection"
+      ],
+      "prohibited": [
+        "learner mastery",
+        "memory strength",
+        "review date",
+        "calendar slot",
+        "planner decision",
+        "automatic remediation"
+      ]
+    },
+    "learning_engine": {
+      "owns": [
+        "learning-context query",
+        "evidence selection",
+        "learner-state interpretation",
+        "strategy selection",
+        "review/diagnostic/remediation policy",
+        "outcome feedback",
+        "learning evidence-gap emission"
+      ],
+      "does_not_own": [
+        "general external search",
+        "provider execution",
+        "source catalog mutation",
+        "persistent source classification",
+        "dated planner allocation"
+      ]
+    }
+  },
+  "forward_runtime": [
+    "MINING_ENGINE",
+    "MINING_INDEX",
+    "LEARNING_INDEX",
+    "LEARNING_ENGINE",
+    "SPECIALIST_EXECUTION",
+    "LEARNER_EVIDENCE",
+    "LEARNING_ENGINE_FEEDBACK"
+  ],
+  "reverse_runtime": [
+    "LEARNING_ENGINE_EVIDENCE_GAP",
+    "LEARNING_INDEX_QUERY",
+    "MINING_INDEX_EXISTENCE_CHECK",
+    "IF_REFERENCE_EVIDENCE_INSUFFICIENT__MINING_ENGINE_REQUEST",
+    "MINING_PROVIDER_EXECUTION",
+    "MINING_ACQUISITION",
+    "MINING_INDEX_OWNER_REVIEW_AND_INDEX",
+    "LEARNING_INDEX_INCREMENTAL_REBUILD",
+    "LEARNING_ENGINE_REQUERY"
+  ],
+  "gap_split": {
+    "reference_evidence_gap": "LEARNING_INDEX -> MINING_INDEX -> MINING_ENGINE only if insufficient",
+    "learner_performance_gap": "LEARNING_ENGINE -> SPECIALIST_EVIDENCE_ACQUISITION; external Mining forbidden"
+  },
+  "call_contract": {
+    "learning_may_emit_gap": true,
+    "learning_may_authorize_mining_directly": false,
+    "index_broker_authorizes_mining_after_insufficiency": true,
+    "mining_may_write_index_authority_directly": false,
+    "mining_returns_candidates_to_index_owner": true,
+    "learning_index_rebuild_after_index_update": true,
+    "learning_engine_requery_after_learning_index_refresh": true
+  },
+  "no_regression": [
+    "RAW/INDEX/DETAIL/CURRENT preserved",
+    "Learning Projection V1 semantics preserved inside Learning Index",
+    "Planner remains sole dated allocation owner",
+    "Specialist apps do not own long-term schedule",
+    "No deployment or main merge authorized by this candidate"
+  ]
+}
