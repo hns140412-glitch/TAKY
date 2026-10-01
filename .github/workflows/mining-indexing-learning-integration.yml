@@ -27,6 +27,9 @@ on:
       - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
+      - 'ENFORCEMENT/ready_curriculum_registry_migration.py'
+      - 'ENFORCEMENT/ready_curriculum_registry_migration_test.py'
+      - 'MIGRATION/CURRICULUM/**'
       - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
       - 'ENFORCEMENT/mining_runtime_host.py'
@@ -96,6 +99,9 @@ jobs:
       - name: Index-first evidence gap broker
         working-directory: ENFORCEMENT
         run: python learning_evidence_gap_broker_test.py
+      - name: Ready curriculum migration candidate
+        working-directory: ENFORCEMENT
+        run: python ready_curriculum_registry_migration_test.py
       - name: Learning gap to Mining runtime bridge
         working-directory: ENFORCEMENT
         run: python learning_mining_runtime_bridge_test.py
