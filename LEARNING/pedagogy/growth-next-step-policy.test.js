@@ -27,6 +27,7 @@ const learningIndex={
    source_ref:'official:2022-eng-g5',
    source_family:'OFFICIAL_CURRICULUM',
    authority_class:'OFFICIAL',
+   learning_evidence_role:'CURRICULUM_ALIGNMENT',
    semantic_groups:{
     language_growth:{
      thinking_moves:['EXPLAIN','COMPARE'],
@@ -39,6 +40,7 @@ const learningIndex={
    source_ref:'dict:accept',
    source_family:'LEXICAL_DICTIONARY',
    authority_class:'REFERENCE',
+   learning_evidence_role:'LEXICAL_SEMANTICS',
    semantic_groups:{
     language_growth:{
      easy_english_definition:['accept = to say yes to something']
@@ -49,6 +51,7 @@ const learningIndex={
    source_ref:'corpus:accept',
    source_family:'LANGUAGE_CORPUS',
    authority_class:'REFERENCE',
+   learning_evidence_role:'LANGUAGE_USAGE',
    semantic_groups:{
     language_growth:{
      expression_chunks:['I agree with ...','It means ...'],
@@ -61,6 +64,7 @@ const learningIndex={
    source_ref:'pedagogy:english-thinking',
    source_family:'PEDAGOGICAL_LEARNING_RESOURCE',
    authority_class:'CURATED',
+   learning_evidence_role:'PEDAGOGICAL_USAGE',
    semantic_groups:{
     language_growth:{
      english_thinking_support:['picture -> meaning -> chunk -> sentence']
