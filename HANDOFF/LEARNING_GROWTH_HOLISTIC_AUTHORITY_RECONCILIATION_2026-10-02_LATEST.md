@@ -228,18 +228,23 @@ TAKY source-role separation:
 - Integration 36899264513: SUCCESS
 - Enforcement 36899264545: SUCCESS
 
+TAKY explicit role-enforcement broker:
+- Learning evidence-gap broker V4 directly validates required_learning_evidence_role against indexed provenance-role tags
+- Integration 36899956987: SUCCESS
+- Enforcement 36899957119: RUNNING_AT_HANDOFF_UPDATE
+
 Ready authority reconciliation:
 - Integration 36899321027: SUCCESS
 - Learning Runtime Bridge 36899321183: SUCCESS
-- Runtime E2E 36899321218: PENDING_AT_HANDOFF_WRITE
+- Runtime E2E 36899217250: SUCCESS on runtime-identical source
+- exact latest SHA c318c1e5e461acdb367749cf50dbff68e538d009 changes only .github/scripts/ready_learning_master_contract_test.js from the successful runtime SHA; latest rerun 36899321218 is still in Playwright installation, so this is CI-infrastructure pending rather than an observed runtime regression
 
 Hide and Snap prior growth-axis branch regressions remain PASS.
 
 ## 7. Remaining OPEN
 
-1. Finish Ready Runtime E2E result.
-2. If PASS, mark Ready authority reconciliation validated.
-3. Keep memory-routing trio as Candidate until separate approval.
-4. Do not merge main / deploy yet.
-5. Before promotion, run one final cross-repository authority regression:
+1. Complete the exact-latest Ready Runtime E2E rerun when the CI runner leaves Playwright installation.
+2. Keep memory-routing trio as Candidate until separate approval.
+3. Do not merge main / deploy yet.
+4. Before promotion, run one final cross-repository authority regression:
    Mining / Index / Learning / Ready / Hide / Snap / Planner.
