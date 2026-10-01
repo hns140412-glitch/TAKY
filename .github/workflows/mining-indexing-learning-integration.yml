@@ -30,9 +30,12 @@ on:
       - 'ENFORCEMENT/ready_curriculum_registry_migration.py'
       - 'ENFORCEMENT/ready_curriculum_registry_migration_test.py'
       - 'MIGRATION/CURRICULUM/**'
+      - 'MIGRATION/INDEX_OWNER/**'
       - 'MIGRATION/LEARNING_REFERENCE/**'
       - 'ENFORCEMENT/learning_reference_role_migration.py'
       - 'ENFORCEMENT/learning_reference_role_migration_test.py'
+      - 'ENFORCEMENT/english_lexical_usage_source_candidates_test.py'
+      - 'ENFORCEMENT/curriculum_index_owner_precheck_test.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
       - 'ENFORCEMENT/mining_runtime_host.py'
@@ -108,6 +111,12 @@ jobs:
       - name: Drive learning-reference role migration
         working-directory: ENFORCEMENT
         run: python learning_reference_role_migration_test.py
+      - name: Curriculum Index Owner precheck remains non-authoritative
+        working-directory: ENFORCEMENT
+        run: python curriculum_index_owner_precheck_test.py
+      - name: English lexical and usage source candidates remain guarded
+        working-directory: ENFORCEMENT
+        run: python english_lexical_usage_source_candidates_test.py
       - name: Learning gap to Mining runtime bridge
         working-directory: ENFORCEMENT
         run: python learning_mining_runtime_bridge_test.py
