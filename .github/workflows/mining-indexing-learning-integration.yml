@@ -77,6 +77,10 @@ jobs:
         run: node LEARNING/runtime/evidence-gap.test.js
       - name: Outcome growth feedback
         run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
+      - name: Learning evidence I/O contract
+        run: node LEARNING/contracts/learning-evidence-io-contract.test.js
+      - name: Learning Engine output contract
+        run: node LEARNING/contracts/learning-engine-output-contract.test.js
       - name: Canonical learning evidence adapter
         run: node LEARNING/adapters/canonical-evidence.test.js
       - name: Hide vocabulary routing policy
