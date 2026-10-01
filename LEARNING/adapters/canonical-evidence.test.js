@@ -36,6 +36,22 @@ assert.equal(itemSignal.memory.review_advisories[0].nextReviewPriority,72);
 assert.equal(itemSignal.verified_outcome,null);
 assert.equal(A.validateCanonical(itemSignal).ok,true);
 
+const hideGrowth=A.fromHide({
+  event_id:'hg1',source:'hide-seek',event_type:'LEARNING_MEMORY_SIGNAL',
+  occurred_at:'2026-10-02T08:00:00.000Z',
+  payload:{
+    word:'accept',learning_target_id:'accept',mode:'TRACE',
+    growth_signals:[
+      {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false,target_id:'accept'},
+      {dimension:'ENGLISH_THINKING',outcome:'PARTIAL',direct_english:true,target_id:'accept'}
+    ]
+  }
+},ctx);
+assert.equal(hideGrowth.language_growth_signals.length,2);
+assert.equal(hideGrowth.language_growth_signals[0].dimension,'VOCABULARY');
+assert.equal(hideGrowth.language_growth_signals[1].direct_english,true);
+assert.equal(A.validateCanonical(hideGrowth).ok,true);
+
 const snap=A.fromSnap({
   event_id:'s1',source:'snap-pop',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T08:00:00.000Z',
   payload:{child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean'}
