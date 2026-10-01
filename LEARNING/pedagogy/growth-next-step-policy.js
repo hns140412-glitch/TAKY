@@ -107,11 +107,15 @@ function stanceFor(profile={}){
   const dims=profile.dimensions||{};
   const rows=['VOCABULARY','GRAMMAR','EXPRESSION','THINKING'].map(k=>dims[k]||{});
   const needs=rows.filter(x=>x.state==='NEEDS_SUPPORT'&&x.confidence!=='LOW').length;
-  const stretch=rows.filter(x=>x.state==='READY_TO_STRETCH'&&x.confidence!=='LOW').length;
+  const stretchStable=rows.filter(x=>
+    x.state==='READY_TO_STRETCH' &&
+    x.stable_state==='READY_TO_STRETCH' &&
+    x.confidence!=='LOW'
+  ).length;
   const cross=profile.cross_dimension||{};
   const evidenceReady=(cross.verified_growth_signal_count||0)>0||(cross.cross_app_dimension_count||0)>0;
   if(needs>=2)return 'SCAFFOLD_LEAD';
-  if(stretch>=2&&evidenceReady)return 'TRANSFER_PUSH';
+  if(stretchStable>=2&&evidenceReady)return 'TRANSFER_PUSH';
   return 'ELICIT_PULL';
 }
 
@@ -204,11 +208,15 @@ function definitionLevel(profile={}){
 
 function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
   const confidence=overallConfidence(profile);
+  const dims=profile.dimensions||{};
+  const temporarySupport=Object.values(dims).some(x=>
+    x?.stability_signal==='TEMPORARY_SUPPORT_WITHOUT_LONG_TERM_DEMOTION');
+  const promotionHeld=Object.values(dims).some(x=>
+    x?.stability_signal==='PROMOTION_CANDIDATE_NOT_STABLE');
   let intensity=stance==='SCAFFOLD_LEAD'?'SUPPORT_BUILD':
     stance==='TRANSFER_PUSH'?'STRETCH_TRANSFER':'BUILD_CONNECT';
   if(confidence==='LOW'&&intensity==='STRETCH_TRANSFER')intensity='BUILD_CONNECT';
 
-  const dims=profile.dimensions||{};
   const targetDimensions=['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']
     .map(d=>({dimension:d,state:dims[d]?.state||'UNKNOWN',confidence:dims[d]?.confidence||'LOW'}))
     .sort((a,b)=>{
@@ -230,10 +238,17 @@ function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
     target_dimensions:targetDimensions,
     challenge_direction:stance==='SCAFFOLD_LEAD'?'STABILIZE':
       stance==='TRANSFER_PUSH'?'TRANSFER':'EXTEND',
+    longitudinal_stability:{
+      temporary_support_without_long_term_demotion:temporarySupport,
+      promotion_held_until_stable:promotionHeld,
+      recent_window_drives_support:true,
+      stability_window_required_for_transfer_push:true
+    },
     stability_guard:{
       low_confidence_cannot_upshift_to_transfer:true,
       one_event_cannot_raise_expression_level_by_itself:true,
-      verified_or_cross_app_evidence_required_for_stretch:true
+      verified_or_cross_app_evidence_required_for_stretch:true,
+      stability_window_required_for_transfer_push:true
     }
   };
 }
