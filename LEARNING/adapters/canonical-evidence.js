@@ -146,8 +146,28 @@ function fromReady(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'ready-set'});
   const p=event.payload||event;
   if(clean(context.evidence_type||p.evidence_type))out.evidence_type=clean(context.evidence_type||p.evidence_type);
-  if(clean(out.evidence_type)==='CHILD_SELF_REPORT')out.verified_outcome=null;
-  else if(context.verification_receipt){
+  out.observation_only=p.observation_only===true;
+  if(clean(out.evidence_type)==='CHILD_SELF_REPORT'||
+     clean(out.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION')
+    out.verified_outcome=null;
+  if(clean(out.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION'){
+    out.execution_friction={
+      authority:'READY_EXECUTION_FRICTION_OBSERVATION_ONLY',
+      assignment_id:clean(p.assignment_id)||null,
+      source_carry_over_id:clean(p.source_carry_over_id)||null,
+      carry_over_depth:finite(p.carry_over_depth),
+      carry_over_state:clean(p.carry_over_state)||null,
+      escalation_reason:clean(p.escalation_reason)||null,
+      observation_count:finite(p.observation_count),
+      friction_states:Array.isArray(p.friction_states)
+        ?p.friction_states.map(clean).filter(Boolean).slice(-12):[],
+      actual_minutes:Array.isArray(p.actual_minutes)
+        ?p.actual_minutes.map(finite).filter(Number.isFinite).slice(-12):[],
+      verified_performance:false,
+      learner_state_authority:false
+    };
+  }
+  if(context.verification_receipt){
     const applied=Verification.applyReceipt(out,context.verification_receipt);
     if(applied.ok)return {...applied.evidence,raw_app_signals:{ready_state:clean(p.ready_state||p.task_state||p.state)||null,actual_minutes:finite(p.actual_minutes),self_report:p.self_report||null}};
     out.verification_error=applied;
@@ -159,7 +179,9 @@ function fromReady(event={},context={}){
   out.raw_app_signals={
     ready_state:clean(p.ready_state||p.task_state||p.state)||null,
     actual_minutes:finite(p.actual_minutes),
-    self_report:p.self_report||null
+    self_report:p.self_report||null,
+    forwarded_hide_observation:p.forwarded_source_app==='hide-seek',
+    forwarded_ready_friction_observation:p.forwarded_ready_friction_observation===true
   };
   return out;
 }
@@ -183,6 +205,12 @@ function validateCanonical(e={}){
   if(e.verified_outcome!==null&&e.verified_outcome!==0&&e.verified_outcome!==1)issues.push('VERIFIED_OUTCOME_INVALID');
   if((e.verified_outcome===0||e.verified_outcome===1)&&!e.verification?.receipt_id)issues.push('VERIFIED_OUTCOME_WITHOUT_RECEIPT');
   if(e.evidence_type==='CHILD_SELF_REPORT'&&e.verified_outcome!==null)issues.push('SELF_REPORT_CANNOT_BE_VERIFIED_TARGET');
+  if(e.evidence_type==='READY_EXECUTION_FRICTION_OBSERVATION'){
+    if(e.verified_outcome!==null)issues.push('FRICTION_OBSERVATION_CANNOT_BE_VERIFIED_TARGET');
+    if(e.observation_only!==true)issues.push('FRICTION_OBSERVATION_MUST_BE_OBSERVATION_ONLY');
+    if(e.execution_friction?.learner_state_authority!==false)
+      issues.push('FRICTION_OBSERVATION_LEARNER_STATE_AUTHORITY_FORBIDDEN');
+  }
   if(!Array.isArray(e.language_growth_signals))issues.push('GROWTH_SIGNALS_INVALID');
   for(const signal of (e.language_growth_signals||[])){
     if(!GROWTH_DIMENSIONS.has(clean(signal.dimension).toUpperCase()))issues.push('GROWTH_DIMENSION_INVALID');
