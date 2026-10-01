@@ -3,9 +3,11 @@ const assert=require('node:assert/strict');
 const Durable=require('./durable-evidence-store-adapter.js');
 const Pipeline=require('../intake/specialist-event-pipeline.js');
 const packet={packet_id:'test:p1',source_app:'hide-seek',
-  context:{family_id:'F1',member_id:'A',subject:'영어',concept_skill_target:'words'},
+  context:{family_id:'F1',member_id:'A',session_id:'S-p1',task_id:'T-p1',
+    subject:'영어',concept_skill_target:'words'},
   event:{source:'hide-seek',event_id:'p1',occurred_at:'2026-09-26T13:00:00.000Z',
-    payload:{member_id:'A',subject:'영어',concept_skill_target:'words',instrument_version:'V1'}}};
+    payload:{member_id:'A',session_id:'S-p1',task_id:'T-p1',
+      subject:'영어',concept_skill_target:'words',instrument_version:'V1'}}};
 (async()=>{
   const noAck={async getWithMetadata(){return null},async setJSON(){return {}}};
   const missingAck=await Durable.ingestPacket(noAck,packet);
