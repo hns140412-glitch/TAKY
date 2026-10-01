@@ -102,6 +102,7 @@ function derive(input={}, independentIndexOwnerVerifier=null){
 
   let growthProfile=null;
   let growthNextStep=null;
+  let growthReferenceGaps=[];
   const growthEvidence=[...evidence,...(Array.isArray(input.observation_only)?input.observation_only:[])];
   const growthSignalPresent=growthEvidence.some(e=>Array.isArray(e?.language_growth_signals)&&e.language_growth_signals.length>0);
   const indexedGrowthPresent=Array.isArray(learningIndex?.semantic_items)&&
@@ -121,6 +122,19 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     });
     if(!growthNextStep.ok||!GrowthNextStep.validate(growthNextStep).ok){
       return {ok:false,reason:'GROWTH_NEXT_STEP_POLICY_INVALID',detail:growthNextStep};
+    }
+    for(const requirement of (Array.isArray(growthNextStep.reference_gap_candidates)
+      ?growthNextStep.reference_gap_candidates:[])){
+      const derivedGap=EvidenceGap.derive({
+        scope:learnerState.scope,
+        decision,
+        indexed_evidence:indexedEvidence,
+        reference_requirement:requirement
+      });
+      if(!derivedGap.ok){
+        return {ok:false,reason:'GROWTH_REFERENCE_GAP_DERIVATION_FAILED',detail:derivedGap};
+      }
+      if(derivedGap.gap)growthReferenceGaps.push(derivedGap.gap);
     }
   }
 
@@ -151,6 +165,16 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     evidence_policy:evidencePolicy,
     decision,
     evidence_gap:evidenceGap.gap,
+    reference_gaps:[
+      ...(evidenceGap.gap?.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'
+        ?[evidenceGap.gap]:[]),
+      ...growthReferenceGaps
+    ],
+    next_reference_gap:(
+      evidenceGap.gap?.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'
+        ?evidenceGap.gap
+        :(growthReferenceGaps[0]||null)
+    ),
     specialist_policy:hideVocabularyPolicy?{hide_seek_vocabulary:hideVocabularyPolicy}:null,
     growth_profile:growthProfile,
     growth_next_step:growthNextStep,
@@ -172,6 +196,13 @@ function derive(input={}, independentIndexOwnerVerifier=null){
       evidence_policy_ids:evidencePolicy.results.map(x=>x.policy_id).filter(Boolean),
       evidence_gap_version:evidenceGap.version||null,
       evidence_gap_id:evidenceGap.gap?.gap_id||null,
+      growth_reference_gap_ids:growthReferenceGaps.map(x=>x.gap_id),
+      growth_reference_gap_count:growthReferenceGaps.length,
+      next_reference_gap_id:(
+        evidenceGap.gap?.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'
+          ?evidenceGap.gap?.gap_id
+          :(growthReferenceGaps[0]?.gap_id||null)
+      ),
       hide_vocabulary_policy_version:hideVocabularyPolicy?.version||null,
       language_growth_profile_version:growthProfile?.version||null,
       growth_next_step_policy_version:growthNextStep?.version||null
@@ -241,6 +272,10 @@ function validate(result={}){
   if(result.evidence_policy&&result.evidence_policy.ok!==true)issues.push('EVIDENCE_POLICY_INVALID');
   if(result.decision&&!Decision.validate(result.decision).ok)issues.push('DECISION_INVALID');
   if(result.evidence_gap?.mining_request_authorized===true)issues.push('LEARNING_CANNOT_AUTHORIZE_MINING');
+  for(const gap of (Array.isArray(result.reference_gaps)?result.reference_gaps:[])){
+    if(gap.mining_request_authorized===true)issues.push('LEARNING_REFERENCE_GAP_CANNOT_AUTHORIZE_MINING');
+    if(gap.resolution_path!=='INDEX_THEN_MINING_IF_INSUFFICIENT')issues.push('REFERENCE_GAP_PATH_INVALID');
+  }
   if(result.specialist_policy?.hide_seek_vocabulary&&!HideVocabularyPolicy.validate(result.specialist_policy.hide_seek_vocabulary).ok)issues.push('HIDE_VOCABULARY_POLICY_INVALID');
   if(result.growth_profile&&!LanguageGrowthProfile.validate(result.growth_profile).ok)issues.push('LANGUAGE_GROWTH_PROFILE_INVALID');
   if(result.growth_next_step&&!GrowthNextStep.validate(result.growth_next_step).ok)issues.push('GROWTH_NEXT_STEP_POLICY_INVALID');
