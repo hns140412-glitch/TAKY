@@ -16,5 +16,10 @@
   "semantic_fields_bound": 60,
   "sha256_registered": 60,
   "stable_asset_slots": 60,
-  "source_spec": "TAKY_BADGE_60_PRODUCTION_SPEC_V3_0_SCENE_FIRST.md"
+  "source_spec": "TAKY_BADGE_60_PRODUCTION_SPEC_V3_0_SCENE_FIRST.md",
+  "revision_history": "BADGE/assets/TAKY_BADGE_ART_REVISION_HISTORY_V1.json",
+  "library_revision_history": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/TAKY_BADGE_ART_REVISION_HISTORY_V1.json",
+  "validator": "BADGE/assets/verify_badge_art_binding_v1.py",
+  "byte_verified_local": "PASS_60_OF_60",
+  "metadata_verified": "PASS_60_OF_60"
 }
