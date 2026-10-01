@@ -188,8 +188,13 @@ const parse=r=>JSON.parse(r.body);
   assert.equal(growthBody.runtime_result.growth_next_step.curriculum_grounding.verified,true);
   assert.deepEqual(growthBody.runtime_result.growth_next_step.curriculum_grounding.source_refs,
    [growthRow.source_ref]);
-  assert.ok(growthBody.runtime_result.growth_next_step.language_support.easy_english_definitions.length>0);
-  assert.ok(growthBody.runtime_result.growth_next_step.language_support.expression_chunks.length>0);
+  assert.equal(growthBody.runtime_result.growth_next_step.language_support.easy_english_definitions.length,0);
+  assert.equal(growthBody.runtime_result.growth_next_step.language_support.expression_chunks.length,0);
+  const growthGapTypes=new Set(growthBody.runtime_result.reference_gaps.map(x=>x.gap_type));
+  assert.equal(growthGapTypes.has('LEXICAL_SEMANTICS_REFERENCE_REQUIRED'),true);
+  assert.equal(growthGapTypes.has('PEDAGOGICAL_LANGUAGE_SUPPORT_REFERENCE_REQUIRED'),true);
+  assert.equal(growthBody.runtime_result.next_reference_gap.mining_request_authorized,false);
+  assert.equal(growthBody.runtime_result.trace.growth_reference_gap_ids.length>=2,true);
   assert.equal(growthBody.runtime_result.growth_next_step.hide_to_snap_handoff.child_authorship_required,true);
   assert.equal(growthBody.runtime_result.growth_next_step.hide_to_snap_handoff.final_answer_generation_forbidden,true);
   assert.equal((await growthEndpoint.handle(req({...scope,grade:5}))).status,400);
