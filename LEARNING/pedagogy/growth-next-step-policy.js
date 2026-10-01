@@ -138,6 +138,43 @@ function hintPolicy(stance){
   };
 }
 
+function languageResourceGaps(resources={}){
+  const gaps=[];
+  if(!resources.curriculum_verified){
+    gaps.push({
+      gap_type:'CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED',
+      source_role:'CURRICULUM_ALIGNMENT',
+      mining_request_authorized:false,
+      reason:'NO_OFFICIAL_CURRICULUM_OR_EDUCATION_INDEX_EVIDENCE'
+    });
+  }
+  if(!(resources.easy_english_definitions||[]).length){
+    gaps.push({
+      gap_type:'LEXICAL_SEMANTICS_REFERENCE_REQUIRED',
+      source_role:'LEXICAL_SEMANTICS',
+      mining_request_authorized:false,
+      reason:'NO_GROUNDED_EASY_ENGLISH_DEFINITION'
+    });
+  }
+  if(!(resources.expression_chunks||[]).length){
+    gaps.push({
+      gap_type:'EXPRESSION_CHUNK_REFERENCE_REQUIRED',
+      source_role:'PEDAGOGICAL_USAGE_OR_LANGUAGE_USAGE',
+      mining_request_authorized:false,
+      reason:'NO_GROUNDED_EXPRESSION_CHUNK'
+    });
+  }
+  if(!(resources.natural_collocations||[]).length){
+    gaps.push({
+      gap_type:'LANGUAGE_USAGE_REFERENCE_REQUIRED',
+      source_role:'LANGUAGE_USAGE',
+      mining_request_authorized:false,
+      reason:'NO_GROUNDED_COLLOCATION_OR_USAGE_REFERENCE'
+    });
+  }
+  return gaps;
+}
+
 function growthMoves(profile={},resources={}){
   const dims=profile.dimensions||{};
   const steps=[];
@@ -343,6 +380,7 @@ function derive({growth_profile,learning_index=null}={}){
   const hints=hintPolicy(stance);
   const moves=growthMoves(growth_profile,resources);
   const control=growthControl(growth_profile,stance,depth,hints);
+  const resourceGaps=languageResourceGaps(resources);
   const referenceGaps=referenceRequirements(control,resources);
 
   return {
@@ -413,4 +451,4 @@ function validate(policy={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,AUTHORITY,growthResources,derive,validate});
+module.exports=Object.freeze({VERSION,AUTHORITY,sourceRole,growthResources,languageResourceGaps,derive,validate});
