@@ -79,7 +79,11 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
     media_type = identity.get("media_type") or record.get("mime_type")
     source_family = classification.get("source_family") or record.get("source_family")
     source_type = classification.get("source_type") or record.get("source_type")
-    authority_class = classification.get("authority_class") or record.get("authority_level")
+    authority_class = (
+        classification.get("authority_class")
+        or record.get("authority_class")
+        or record.get("authority_level")
+    )
     domain_facets = classification.get("domain_facets") or record.get("domain_facets") or []
     origin_type = provenance.get("origin_type") or record.get("origin_type")
     consumer_candidates = discovery.get("consumer_candidates") or record.get("consumers") or []
