@@ -9,6 +9,8 @@ const hideEvent=(id,day,outcome)=>({
   event_type:'RETRIEVAL_RESULT',
   payload:{
     member_id:'A',
+    session_id:'S1',
+    task_id:'T-'+id,
     subject:'영어',
     concept_skill_target:'vocabulary',
     learning_target_id:'word:'+id,
@@ -31,6 +33,8 @@ const readyEvidence={
   event_id:'ready1',
   observed_at:'2026-09-22T08:00:00.000Z',
   member_id:'A',
+  session_id:'S1',
+  task_id:'T-ready1',
   subject:'영어',
   concept_skill_target:'vocabulary',
   learning_target_id:'word:ready1',
@@ -54,6 +58,8 @@ const snapEvent={
   event_type:'TASK_COMPLETED',
   payload:{
     member_id:'A',
+    session_id:'S1',
+    task_id:'T-snap1',
     subject:'영어',
     concept_skill_target:'sentence_production',
     learning_target_id:'sentence:snap1',
@@ -63,19 +69,46 @@ const snapEvent={
   }
 };
 
+const imaginationEvent={
+  source:'imagination-cloud',
+  event_id:'imagination1',
+  occurred_at:'2026-09-23T09:30:00.000Z',
+  event_type:'HELP_USED',
+  payload:{
+    member_id:'A',
+    session_id:'S1',
+    task_id:'T-imagination1',
+    subject:'영어',
+    concept_skill_target:'vocabulary',
+    instrument_version:'IMAGINATION_CLOUD_V1',
+    invocation_reason:'CONCEPT_NOT_CLEAR',
+    target_concept:'word meaning in context',
+    visualization_used:'CONTEXT_SCENE',
+    explanation_used:'EASY_ENGLISH',
+    response_before:{state:'UNSURE'},
+    response_after:{state:'PARTIAL_UNDERSTANDING'},
+    additional_help_needed:true,
+    curiosity_only:false
+  }
+};
+
 let state=P.emptyState();
 let r=P.ingest(state,[
   {source_app:'hide-seek',event:hideEvent('h1',20,1)},
   {source_app:'hide-seek',event:hideEvent('h2',21,0)},
   {source_app:'ready-set',evidence:readyEvidence},
-  {source_app:'snap-pop',event:snapEvent}
+  {source_app:'snap-pop',event:snapEvent},
+  {source_app:'imagination-cloud',event:imaginationEvent}
 ],{created_at:'2026-09-23T10:00:00.000Z'});
 
-assert.equal(r.ok,true);
-assert.equal(r.accepted_count,4);
+assert.equal(r.ok,true,JSON.stringify(r.rejected));
+assert.equal(r.accepted_count,5);
 assert.equal(r.verified_count,3);
-assert.equal(r.observation_only_count,1);
-assert.equal(r.state.observation_only.length,1);
+assert.equal(r.observation_only_count,2);
+assert.equal(r.state.observation_only.length,2);
+assert.equal(r.state.observation_only.some(x=>
+ x.source_app==='imagination-cloud'&&
+ x.support_observation?.authority==='IMAGINATION_CLOUD_SUPPORT_OBSERVATION_ONLY'),true);
 assert.equal(r.evaluations.length,1);
 assert.equal(r.evaluations[0].event_count,3);
 assert.equal(r.evaluations[0].data_readiness.scopes[0].verified_retrieval_target_count,2);
