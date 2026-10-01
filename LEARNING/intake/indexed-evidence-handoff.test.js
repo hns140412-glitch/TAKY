@@ -82,4 +82,49 @@ const exception=Handoff.prepare(rawInput,()=>{throw Error('secret token')});
 assert.equal(exception.ok,false);
 assert.equal(JSON.stringify(exception).includes('secret token'),false);
 
+
+
+const usageOwner=(sid,ref)=>({
+  issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',
+  domain_use_authorized:true,source_id:sid,source_ref:ref,
+  index_version:'TEST_USAGE_1',review_evidence_refs:['USAGE-REVIEW-1'],
+  source_family:'TEST_USAGE',source_type:'LANGUAGE_USAGE_REFERENCE',
+  authority_class:'REFERENCE',detail_anchor:'DETAIL:USAGE#1',
+  learning_evidence_kind:'DEPENDENCY_PATTERN',
+  provenance:['LANGUAGE_USAGE_SOURCE']
+});
+const usage=Handoff.prepare({
+  query_context:{
+    function_id:'LE-GROWTH-01',
+    consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH'
+  },
+  candidates:[{
+    source_id:'USAGE-01',source_ref:'INDEX:USAGE-01',
+    source_family:'TEST_USAGE',source_type:'LANGUAGE_USAGE_REFERENCE',
+    authority_class:'REFERENCE',detail_anchor:'DETAIL:USAGE#1',
+    learning_evidence_kind:'DEPENDENCY_PATTERN',
+    provenance:['LANGUAGE_USAGE_SOURCE']
+  }]
+},usageOwner);
+assert.equal(usage.ok,true);
+assert.equal(usage.candidates[0].learning_evidence_kind,'DEPENDENCY_PATTERN');
+assert.equal(usage.policy_requests[0].learning_evidence_kind,'DEPENDENCY_PATTERN');
+
+const forgedKind=Handoff.prepare({
+  query_context:{
+    function_id:'LE-GROWTH-01',consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH'
+  },
+  candidates:[{
+    source_id:'USAGE-01',source_ref:'INDEX:USAGE-01',
+    source_family:'TEST_USAGE',source_type:'LANGUAGE_USAGE_REFERENCE',
+    authority_class:'REFERENCE',detail_anchor:'DETAIL:USAGE#1',
+    learning_evidence_kind:'EXAMPLE_SENTENCE',
+    provenance:['LANGUAGE_USAGE_SOURCE']
+  }]
+},usageOwner);
+assert.equal(forgedKind.ok,false);
+assert.equal(forgedKind.issues.includes('INDEPENDENT_INDEX_OWNER_BINDING_INVALID:0'),true);
+
 console.log('INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS');
