@@ -88,6 +88,30 @@ assert.equal(ready.evidence_type,'CHILD_SELF_REPORT');
 assert.equal(ready.verified_outcome,null);
 assert.equal(A.validateCanonical(ready).ok,true);
 
+
+const friction=A.fromReady({
+  event_id:'rf1',source:'ready-set',occurred_at:'2026-10-02T10:00:00.000Z',
+  payload:{
+    member_id:'A',subject:'영어',concept_skill_target:'vocabulary',
+    evidence_type:'READY_EXECUTION_FRICTION_OBSERVATION',
+    instrument_version:'READY_CARRY_FRICTION_V1',
+    observation_only:true,global_mastery_claim:false,
+    forwarded_ready_friction_observation:true,
+    assignment_id:'assignment-1',source_carry_over_id:'carry-1',
+    carry_over_depth:4,carry_over_state:'OPEN',
+    escalation_reason:'REPEATED_CARRY_LIMIT',
+    observation_count:4,friction_states:['PARTIAL','DEFERRED','BLOCKED'],
+    actual_minutes:[20,22,25]
+  }
+},ctx);
+assert.equal(friction.evidence_type,'READY_EXECUTION_FRICTION_OBSERVATION');
+assert.equal(friction.observation_only,true);
+assert.equal(friction.verified_outcome,null);
+assert.equal(friction.execution_friction.authority,'READY_EXECUTION_FRICTION_OBSERVATION_ONLY');
+assert.equal(friction.execution_friction.learner_state_authority,false);
+assert.equal(friction.raw_app_signals.forwarded_ready_friction_observation,true);
+assert.equal(A.validateCanonical(friction).ok,true);
+
 const receipt=V.issueReceipt({
   receipt_id:'vr-h2',
   target_event_id:'h2',
