@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_ENGLISH_LEXICAL_USAGE_SOURCE_CANDIDATES_2026-10-02_V1",
-  "status": "SOURCE_CANDIDATES_ONLY__NO_RUNTIME_AUTHORITY",
+  "status": "SOURCE_CATALOG__OEWN_INDEXED_V27__LANGUAGE_USAGE_PRECHECK_ONLY",
   "created_date": "2026-10-02",
   "lexical_semantics": [
     {
@@ -253,7 +253,7 @@
   "decision": {
     "preferred_lexical_precheck_candidate": "ENGLISH_LEXICAL_OEWN_2025",
     "preferred_usage_candidate": null,
-    "lexical_gap_state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
+    "lexical_gap_state": "INDEXED_V27__NOT_CURRENT__NOT_CANONICAL",
     "usage_gap_state": "MULTI_SOURCE_PRECHECK_READY__INDEX_OWNER_AND_LICENSE_GATES_OPEN",
     "preferred_usage_precheck_candidate": "ENGLISH_USAGE_UD_EWT",
     "preferred_usage_example_precheck_candidate": "ENGLISH_USAGE_TATOEBA_TEXT",
