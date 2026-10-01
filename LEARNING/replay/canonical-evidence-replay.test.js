@@ -4,7 +4,7 @@ const A=require('../adapters/canonical-evidence.js');
 const R=require('./replay-dataset.js');
 const V=require('../verification/verification-layer.js');
 
-const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
+const ctx={member_id:'A',session_id:'S-REPLAY-1',task_id:'T-REPLAY-1',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
 const verifiedReceipt=V.issueReceipt({
   receipt_id:'vr-h2',
   target_event_id:'h2',
