@@ -136,7 +136,11 @@ function fromSnap(event={},context={}){
   out.raw_app_signals={
     child_authored:p.child_authored===true,
     used_handoff_word:clean(p.used_handoff_word)||null,
-    growth_intent_ref:clean(p.growth_intent_ref)||null
+    growth_intent_ref:clean(p.growth_intent_ref)||null,
+    growth_verification_status:clean(p.growth_verification_status).toUpperCase()||null,
+    growth_review_required:p.growth_review_required===true,
+    requested_growth_dimensions:Array.isArray(p.requested_growth_dimensions)
+      ?p.requested_growth_dimensions.map(x=>clean(x).toUpperCase()).filter(Boolean).slice(0,5):[]
   };
   if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return applied.evidence;out.verification_error=applied;}
   return out;
@@ -215,6 +219,14 @@ function validateCanonical(e={}){
   for(const signal of (e.language_growth_signals||[])){
     if(!GROWTH_DIMENSIONS.has(clean(signal.dimension).toUpperCase()))issues.push('GROWTH_DIMENSION_INVALID');
     if(!GROWTH_OUTCOMES.has(clean(signal.outcome).toUpperCase()))issues.push('GROWTH_OUTCOME_INVALID');
+  }
+  if(e.source_app==='snap-pop'&&e.raw_app_signals?.growth_verification_status){
+    const allowed=new Set(['PENDING_DIMENSION_REVIEW','UNVERIFIED_OBSERVATION','VERIFIED_DIMENSION_REVIEW']);
+    if(!allowed.has(e.raw_app_signals.growth_verification_status))
+      issues.push('GROWTH_VERIFICATION_STATUS_INVALID');
+    if(e.raw_app_signals.growth_verification_status==='PENDING_DIMENSION_REVIEW'&&
+       e.raw_app_signals.growth_review_required!==true)
+      issues.push('PENDING_GROWTH_REVIEW_FLAG_REQUIRED');
   }
   if(e.growth_execution_context){
     if(e.growth_execution_context.authority!=='SPECIALIST_EXECUTION_CONTEXT_ONLY')
