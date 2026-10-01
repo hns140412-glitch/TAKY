@@ -11,6 +11,8 @@ const EvidenceGap=require('./evidence-gap.js');
 const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
 const ObservationReview=require('./observation-review-intent.js');
 const HideVocabularyPolicy=require('../pedagogy/hide-vocabulary-routing-policy.js');
+const LanguageGrowthProfile=require('../pedagogy/language-growth-profile.js');
+const GrowthNextStep=require('../pedagogy/growth-next-step-policy.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -97,6 +99,30 @@ function derive(input={}, independentIndexOwnerVerifier=null){
   });
   if(!evidenceGap.ok)return {ok:false,reason:'EVIDENCE_GAP_DERIVATION_FAILED',detail:evidenceGap};
 
+  let growthProfile=null;
+  let growthNextStep=null;
+  const growthEvidence=[...evidence,...(Array.isArray(input.observation_only)?input.observation_only:[])];
+  const growthSignalPresent=growthEvidence.some(e=>Array.isArray(e?.language_growth_signals)&&e.language_growth_signals.length>0);
+  const indexedGrowthPresent=Array.isArray(learningIndex?.semantic_items)&&
+    learningIndex.semantic_items.some(x=>x?.semantic_groups?.language_growth);
+  const growthRequested=input.growth_context?.enabled===true||growthSignalPresent||indexedGrowthPresent;
+  if(growthRequested){
+    growthProfile=LanguageGrowthProfile.derive({
+      evidence:growthEvidence,
+      learner_context:input.growth_context?.learner_context||{}
+    });
+    if(!growthProfile.ok||!LanguageGrowthProfile.validate(growthProfile).ok){
+      return {ok:false,reason:'LANGUAGE_GROWTH_PROFILE_INVALID',detail:growthProfile};
+    }
+    growthNextStep=GrowthNextStep.derive({
+      growth_profile:growthProfile,
+      learning_index:learningIndex
+    });
+    if(!growthNextStep.ok||!GrowthNextStep.validate(growthNextStep).ok){
+      return {ok:false,reason:'GROWTH_NEXT_STEP_POLICY_INVALID',detail:growthNextStep};
+    }
+  }
+
   let hideVocabularyPolicy=null;
   if(input.hide_vocabulary_context){
     hideVocabularyPolicy=HideVocabularyPolicy.derive({
@@ -125,6 +151,8 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     decision,
     evidence_gap:evidenceGap.gap,
     specialist_policy:hideVocabularyPolicy?{hide_seek_vocabulary:hideVocabularyPolicy}:null,
+    growth_profile:growthProfile,
+    growth_next_step:growthNextStep,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
       observation_review_policy:observationReview?.policy_version||null,
@@ -143,7 +171,9 @@ function derive(input={}, independentIndexOwnerVerifier=null){
       evidence_policy_ids:evidencePolicy.results.map(x=>x.policy_id).filter(Boolean),
       evidence_gap_version:evidenceGap.version||null,
       evidence_gap_id:evidenceGap.gap?.gap_id||null,
-      hide_vocabulary_policy_version:hideVocabularyPolicy?.version||null
+      hide_vocabulary_policy_version:hideVocabularyPolicy?.version||null,
+      language_growth_profile_version:growthProfile?.version||null,
+      growth_next_step_policy_version:growthNextStep?.version||null
     },
     cannot_influence:[
       'SCHEDULE_DATE',
@@ -197,6 +227,8 @@ function validate(result={}){
   if(result.decision&&!Decision.validate(result.decision).ok)issues.push('DECISION_INVALID');
   if(result.evidence_gap?.mining_request_authorized===true)issues.push('LEARNING_CANNOT_AUTHORIZE_MINING');
   if(result.specialist_policy?.hide_seek_vocabulary&&!HideVocabularyPolicy.validate(result.specialist_policy.hide_seek_vocabulary).ok)issues.push('HIDE_VOCABULARY_POLICY_INVALID');
+  if(result.growth_profile&&!LanguageGrowthProfile.validate(result.growth_profile).ok)issues.push('LANGUAGE_GROWTH_PROFILE_INVALID');
+  if(result.growth_next_step&&!GrowthNextStep.validate(result.growth_next_step).ok)issues.push('GROWTH_NEXT_STEP_POLICY_INVALID');
 
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
   const walk=v=>{
