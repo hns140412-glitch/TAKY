@@ -17,6 +17,7 @@ on:
       - 'LEARNING/runtime/evidence-gap.test.js'
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
+      - 'LEARNING/runtime/learning-engine-learning-index-integration.test.js'
       - 'LEARNING/lifecycle/outcome-growth-feedback.js'
       - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
@@ -62,6 +63,8 @@ jobs:
         run: node LEARNING/lifecycle/outcome-growth-feedback.test.js
       - name: Learning runtime policy integration
         run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
+      - name: Learning runtime consumes Learning Index
+        run: node LEARNING/runtime/learning-engine-learning-index-integration.test.js
       - name: Existing learner state regression
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Existing decision contract regression
