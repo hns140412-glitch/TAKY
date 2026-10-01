@@ -11,7 +11,7 @@ const GROUP_FIELDS=Object.freeze({
   semantics:['everyday_meaning','subject_specific_meaning','semantic_transparency','morpheme_decomposition_validity','etymology_confidence'],
   concept:['concept_node','candidate_prerequisites','related_terms','contrast_terms','confusion_terms','misconception_candidates','context_examples','representation_bridge'],
   cross_domain:['cross_subject_links','transfer_targets','publisher_overlay_optional'],
-  language_growth:['easy_english_definition','expression_chunks','natural_collocations','grammar_patterns','thinking_moves','question_stems','production_targets','english_thinking_support'],
+  language_growth:['easy_english_definition','expression_chunks','natural_collocations','grammar_patterns','usage_example_sentences','thinking_moves','question_stems','production_targets','english_thinking_support'],
   exposure:['curriculum_grade','actual_exposure_difficulty']
 });
 
@@ -103,6 +103,7 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       learning_evidence_role:evidenceRole.role,
       learning_evidence_role_ambiguous:evidenceRole.ambiguous,
       learning_evidence_role_candidates:evidenceRole.candidates||[],
+      learning_evidence_kind:row.learning_evidence_kind||null,
       provenance:[...(row.provenance||[])],
       detail_anchor:row.detail_anchor||null,
       semantic_groups:groups
@@ -125,7 +126,8 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       learning_index_has_no_schedule_authority:true,
       term_match_is_not_learner_understanding:true,
       learning_evidence_role_derived_from_indexed_provenance:true,
-      source_role_is_not_inferred_from_filename_or_title:true
+      source_role_is_not_inferred_from_filename_or_title:true,
+      learning_evidence_kind_is_index_owner_verified_metadata:true
     }
   };
 }
