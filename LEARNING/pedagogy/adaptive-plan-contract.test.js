@@ -34,3 +34,22 @@ assert.equal(P.validate(leaked).ok,false);
 assert.equal(P.validate(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);
 
 console.log('ADAPTIVE_PLAN_CONTRACT_PASS');
+
+
+const accuracyRepair=P.derive({
+ ok:true,scope:feedback.scope,
+ intents:[{intent:'ACCURACY_REPAIR',priority:'HIGH',basis:'VERIFIED_ACCURACY_LOW'}]
+});
+assert.equal(accuracyRepair.unit_span_policy,'REDUCE');
+assert.equal(accuracyRepair.add_checkpoint,true);
+assert.equal(accuracyRepair.add_retrieval_checkpoint,true);
+assert.equal(accuracyRepair.recovery_floor,'HIGH');
+
+const accuracyCheckpoint=P.derive({
+ ok:true,scope:feedback.scope,
+ intents:[{intent:'ACCURACY_CHECKPOINT',priority:'MEDIUM',basis:'VERIFIED_ACCURACY_MIXED'}]
+});
+assert.equal(accuracyCheckpoint.unit_span_policy,'KEEP');
+assert.equal(accuracyCheckpoint.add_checkpoint,true);
+assert.equal(accuracyCheckpoint.add_retrieval_checkpoint,true);
+assert.equal(accuracyCheckpoint.recovery_floor,'MEDIUM');
