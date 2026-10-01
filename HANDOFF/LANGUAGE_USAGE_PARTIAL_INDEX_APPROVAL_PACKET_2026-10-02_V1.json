@@ -1,0 +1,63 @@
+{
+  "schema": "TAKY_LANGUAGE_USAGE_PARTIAL_INDEX_APPROVAL_PACKET_2026-10-02_V1",
+  "status": "READY_FOR_HUMAN_APPROVAL__NO_PROMOTION_EXECUTED",
+  "created_date": "2026-10-02",
+  "authority": "PROMOTION_APPROVAL_PACKET_ONLY",
+  "promotion_executed": false,
+  "role": "LANGUAGE_USAGE",
+  "proposal": {
+    "candidate_id": "ENGLISH_USAGE_TATOEBA_TEXT",
+    "source": "Tatoeba textual sentence corpus",
+    "source_url": "https://tatoeba.org/ko/terms_of_use",
+    "license": "CC-BY-2.0-FR",
+    "learning_evidence_kind": "EXAMPLE_SENTENCE",
+    "proposed_index_state": "INDEXED",
+    "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+    "canonical_promotion": false,
+    "current_promotion": false,
+    "runtime_authority_scope": "EXAMPLE_SENTENCE_ONLY",
+    "attribution_required": true
+  },
+  "closes_only": [
+    "EXAMPLE_SENTENCE_PRESENCE",
+    "CONTEXT_EXAMPLE_CANDIDATE",
+    "PHRASE_OCCURRENCE_CROSS_CHECK"
+  ],
+  "remains_open": [
+    "COLLOCATION_CANDIDATE",
+    "DEPENDENCY_PATTERN",
+    "GRAMMAR_PATTERN_FROM_CORPUS",
+    "FREQUENCY_AUTHORITY",
+    "UNIVERSAL_NATURALNESS"
+  ],
+  "blocked_candidates": [
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_EWT",
+      "reason": "CC-BY-SA-4.0 derived/runtime compatibility review still open"
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_CHILDES",
+      "reason": "CC-BY-SA-4.0 + age/context transfer policy still open"
+    }
+  ],
+  "guards": [
+    "APPROVAL_PACKET != APPROVAL",
+    "EXAMPLE_SENTENCE != COLLOCATION_AUTHORITY",
+    "EXAMPLE_SENTENCE != FREQUENCY_AUTHORITY",
+    "SOURCE_PRESENCE != UNIVERSAL_NATURALNESS",
+    "LANGUAGE_USAGE != LEXICAL_SEMANTICS",
+    "LANGUAGE_USAGE != CURRICULUM_ALIGNMENT",
+    "INDEXED != CURRENT",
+    "INDEXED != CANONICAL",
+    "NO_MAIN_MERGE",
+    "NO_DEPLOYMENT"
+  ],
+  "next_if_approved": [
+    "INDEX_OWNER_RECEIPT_FOR_TATOEBA_EXAMPLE_SENTENCE_KIND",
+    "ADD_NEW_INDEX_REVISION_WITH_LANGUAGE_USAGE_EXAMPLE_ONLY",
+    "REBUILD_LEARNING_INDEX",
+    "RUN_USAGE_EVIDENCE_KIND_REGRESSION",
+    "VERIFY_DEPENDENCY_PATTERN_GAP_REMAINS_OPEN",
+    "STOP_BEFORE_CURRENT_CANONICAL_MAIN_DEPLOYMENT"
+  ]
+}
