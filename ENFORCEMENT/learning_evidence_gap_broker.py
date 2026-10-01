@@ -30,7 +30,13 @@ def _eligible(hit,gap):
     auth=set(gap.get("acceptable_authority_classes") or [])
     if fam and hit.get("source_family") not in fam:return False
     if auth and hit.get("authority_class") not in auth:return False
-    provenance=set(hit.get("provenance") or [])
+    raw_tags=hit.get("provenance_tags")
+    if isinstance(raw_tags,list):
+        provenance=set(raw_tags)
+    elif isinstance(hit.get("provenance"),list):
+        provenance=set(hit.get("provenance") or [])
+    else:
+        provenance=set()
     required=set(gap.get("required_provenance") or [])
     any_of=set(gap.get("required_provenance_any_of") or [])
     if required and not required.issubset(provenance):return False
