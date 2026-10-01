@@ -1,0 +1,20 @@
+{
+  "schema": "TAKY_BADGE_ART_BINDING_CURRENT_V1",
+  "date": "2026-10-01",
+  "manifest": "BADGE/assets/TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
+  "library_manifest": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
+  "manifest_sha256": "fa1181f39e94879c1f22e0cc98b112a712340e974f705e89098a98a8af85648a",
+  "total": 60,
+  "bound": 60,
+  "missing": 0,
+  "approved_current": 7,
+  "candidate_current": 29,
+  "future_update_current": 24,
+  "replacement_rule": "KEEP badge_id + visual_id + asset_slot_id; replace only art bytes/SHA/revision",
+  "main_merge": "NOT_PERFORMED",
+  "netlify": "HOLD",
+  "semantic_fields_bound": 60,
+  "sha256_registered": 60,
+  "stable_asset_slots": 60,
+  "source_spec": "TAKY_BADGE_60_PRODUCTION_SPEC_V3_0_SCENE_FIRST.md"
+}
