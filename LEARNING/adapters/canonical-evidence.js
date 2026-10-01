@@ -30,6 +30,25 @@ function normalizeGrowthSignals(payload={}){
   }).filter(Boolean);
 }
 
+function normalizeGrowthExecutionContext(payload={}){
+  const x=payload.growth_control_applied;
+  if(!x||typeof x!=='object')return null;
+  const depth=finite(x.question_depth);
+  return {
+    authority:'SPECIALIST_EXECUTION_CONTEXT_ONLY',
+    growth_intent_ref:clean(payload.growth_intent_ref)||null,
+    evidence_confidence:clean(x.evidence_confidence).toUpperCase()||null,
+    learning_intensity:clean(x.learning_intensity).toUpperCase()||null,
+    expression_level:clean(x.expression_level).toUpperCase()||null,
+    question_depth:Number.isFinite(depth)?Math.max(1,Math.min(5,depth)):null,
+    hint_strength:clean(x.hint_strength).toUpperCase()||null,
+    hint_fade:clean(x.hint_fade).toUpperCase()||null,
+    challenge_direction:clean(x.challenge_direction).toUpperCase()||null,
+    engine_authority:false,
+    learner_state_authority:false
+  };
+}
+
 function baseFromEvent(event={},context={}){
   const payload=event.payload||{};
   return {
@@ -113,9 +132,11 @@ function fromSnap(event={},context={}){
     landmark:clean(p.landmark||p.active_landmark)||null,
     step:finite(p.step)
   };
+  out.growth_execution_context=normalizeGrowthExecutionContext(p);
   out.raw_app_signals={
     child_authored:p.child_authored===true,
-    used_handoff_word:clean(p.used_handoff_word)||null
+    used_handoff_word:clean(p.used_handoff_word)||null,
+    growth_intent_ref:clean(p.growth_intent_ref)||null
   };
   if(context.verification_receipt){const applied=Verification.applyReceipt(out,context.verification_receipt);if(applied.ok)return applied.evidence;out.verification_error=applied;}
   return out;
@@ -166,6 +187,14 @@ function validateCanonical(e={}){
   for(const signal of (e.language_growth_signals||[])){
     if(!GROWTH_DIMENSIONS.has(clean(signal.dimension).toUpperCase()))issues.push('GROWTH_DIMENSION_INVALID');
     if(!GROWTH_OUTCOMES.has(clean(signal.outcome).toUpperCase()))issues.push('GROWTH_OUTCOME_INVALID');
+  }
+  if(e.growth_execution_context){
+    if(e.growth_execution_context.authority!=='SPECIALIST_EXECUTION_CONTEXT_ONLY')
+      issues.push('GROWTH_EXECUTION_CONTEXT_AUTHORITY_INVALID');
+    if(e.growth_execution_context.engine_authority!==false)
+      issues.push('GROWTH_EXECUTION_CONTEXT_ENGINE_AUTHORITY_FORBIDDEN');
+    if(e.growth_execution_context.learner_state_authority!==false)
+      issues.push('GROWTH_EXECUTION_CONTEXT_LEARNER_STATE_AUTHORITY_FORBIDDEN');
   }
   for(const k of ['schedule_date','planner_date','due_at','due_date']){
     if(Object.prototype.hasOwnProperty.call(e,k))issues.push('SCHEDULE_AUTHORITY_LEAK');
