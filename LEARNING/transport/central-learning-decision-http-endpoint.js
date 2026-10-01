@@ -169,6 +169,7 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
   const safe={
    ok:true,authority:runtime.authority,engine_runtime:runtime.engine_runtime,
    scope:runtime.scope,decision:runtime.decision,
+   learning_output:runtime.learning_output||null,
    specialist_policy:runtime.specialist_policy||null,
    growth_profile:runtime.growth_profile?{
     version:runtime.growth_profile.version,
