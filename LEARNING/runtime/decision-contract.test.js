@@ -5,8 +5,14 @@ const D=require('./decision-contract.js');
 const learner={
   ok:true,
   scope:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'},
+  observed:{
+    verified_accuracy_rate:0.75,
+    verified_unassisted_accuracy_rate:0.8
+  },
   inferred:{
     evidence_sufficiency:'ESTABLISHED',
+    accuracy_signal:'VERIFIED_ACCURACY_MIXED',
+    accuracy_instrument_mixed:false,
     trend:'DECLINING',
     retention_signal:'RETENTION_AT_RISK',
     recovery_signal:'UNRESOLVED_RECOVERY',
@@ -39,6 +45,10 @@ assert.equal(out.adaptive_plan.authority,'LEARNING_ADAPTIVE_PLAN_INTENT_ONLY');
 assert.equal(out.adaptive_plan.unit_span_policy,'REDUCE');
 assert.equal(out.adaptive_plan.add_retrieval_checkpoint,true);
 assert.equal(out.adaptive_plan.recovery_floor,'HIGH');
+assert.equal(out.state_summary.accuracy_signal,'VERIFIED_ACCURACY_MIXED');
+assert.equal(out.state_summary.verified_accuracy_rate,0.75);
+assert.equal(out.state_summary.verified_unassisted_accuracy_rate,0.8);
+assert.equal(out.state_summary.accuracy_is_descriptive_not_mastery,true);
 assert.equal(D.validate(out).ok,true);
 
 const sparse=D.derive({
