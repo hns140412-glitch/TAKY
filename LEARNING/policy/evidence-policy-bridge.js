@@ -65,6 +65,14 @@ function evaluate(request={},registry=DEFAULT_POLICY){
   if(required.length){
     return {...base,ok:false,decision:'DENY',reason:'DENY_PROVENANCE_REQUIRED',missing_provenance:required};
   }
+  const anyOf=Array.isArray(row.required_provenance_any_of)
+    ?row.required_provenance_any_of.map(clean).filter(Boolean):[];
+  if(anyOf.length && !anyOf.some(x=>provided.has(x))){
+    return {
+      ...base,ok:false,decision:'DENY',reason:'DENY_PROVENANCE_ROLE_REQUIRED',
+      required_provenance_any_of:anyOf
+    };
+  }
 
   if(row.requires_human_review===true && request.human_review_evidence!==true){
     return {...base,ok:false,decision:'DENY',reason:'DENY_HUMAN_REVIEW_REQUIRED'};
