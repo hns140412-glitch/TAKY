@@ -234,6 +234,11 @@ jobs:
       - name: Validate OEWN lexical precheck
         working-directory: ENFORCEMENT
         run: python oewn_lexical_precheck_test.py
+      - name: Validate V27 branch-scoped projection
+        working-directory: ENFORCEMENT
+        run: python branch_search_learning_projection_v27_test.py
+      - name: Validate indexed reference role gaps
+        run: node LEARNING/pedagogy/indexed-reference-role-gap-regression.test.js
       - name: Validate V27 indexed-only promotion receipt
         working-directory: ENFORCEMENT
         run: python data_index_v27_index_owner_receipt_test.py
