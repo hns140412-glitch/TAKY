@@ -1,0 +1,60 @@
+{
+  "schema": "TAKY_BADGE_CATALOG_RENDER_QA_V1",
+  "version": "2026-10-02.1",
+  "status": "PASS",
+  "viewport": {
+    "width_css_px": 390,
+    "height_css_px": 844,
+    "device_scale_factor": 2
+  },
+  "catalog": {
+    "tiles": 60,
+    "loaded_images": 60,
+    "failed_images": 0,
+    "runtime_blob_urls": 60,
+    "horizontal_overflow": false
+  },
+  "semantic_nature": {
+    "filters": 9,
+    "primary_groups": 8,
+    "group_labels": [
+      "스스로",
+      "목표도달",
+      "집중·몰입",
+      "복귀·재도전",
+      "실수·교정",
+      "계획·조절",
+      "문제해결",
+      "추가도전·성장"
+    ],
+    "group_view_rendered": true,
+    "detail_nature_chip": true
+  },
+  "runtime": {
+    "full_browser_selftest": "PASS",
+    "indexeddb": "OPEN",
+    "pwa_reload_recovery": "PASS",
+    "pwa_offline_shell": "PASS",
+    "badge_visual_compositor": "PASS",
+    "dom_binding_integrity": "PASS",
+    "pwa_predeploy_precache": "PASS",
+    "snap_predeploy_readiness": "PASS"
+  },
+  "star_contract": {
+    "first_award": {
+      "tier": "GREEN",
+      "reacquire_stars": 0
+    },
+    "min": 0,
+    "max": 5,
+    "promote_after_reawards": 5,
+    "reset_after_promotion": 0
+  },
+  "invariants": [
+    "badge_id / visual_id / asset_slot_id remain stable",
+    "semantic nature is independent from POCKET/FIELD/EXPEDITION/SECRET",
+    "semantic nature is independent from ownership/tier/art-quality state",
+    "source-art replacement changes bytes/SHA/revision, not identity"
+  ],
+  "deployment": "HOLD"
+}
