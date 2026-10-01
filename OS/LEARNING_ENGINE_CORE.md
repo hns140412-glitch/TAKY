@@ -187,7 +187,11 @@ Planner/Main converts pedagogical need + family constraints into actual placemen
 Ready Adapter:
 - sends confirmed assignment context and execution evidence to Core;
 - consumes learning-unit/pedagogical intent;
-- must not become learner-model authority.
+- may own assignment decomposition and execution-load metadata only;
+- local review logic is fallback-only when central Learning Engine is unavailable;
+- central Learning Engine takes precedence for learner state, growth control and review policy;
+- Planner remains the only dated allocation owner;
+- must not become learner-model or growth-control authority.
 
 Hide Adapter:
 - sends retrieval evidence with interaction semantics and provenance;
@@ -374,10 +378,11 @@ APP / TASK EVIDENCE
 -> CANONICAL EVIDENCE
 -> REPLAY VERIFIED_TARGET
 
-Allowed verifier classes in V1:
+Allowed verifier classes:
 - Hide & Seek MEMORY_RETRIEVAL_EVIDENCE -> RETRIEVAL_EXACT_MATCH
 - Ready structured-practice evidence -> ANSWER_KEY_EXACT
 - Snap & Pop learner-production evidence -> HUMAN_RUBRIC_BINARY
+- Snap & Pop learner-production evidence -> HUMAN_GROWTH_RUBRIC for dimension-level growth evidence
 
 Generic verifier names exist, but app/evidence combinations are constrained by LEARNING/verification/verifier-policy.js.
 
@@ -402,6 +407,9 @@ Rules:
 - Human rubric verification requires an explicit rubric/reference and reviewer role.
 - A raw verified_outcome without receipt authority is OBSERVATION_ONLY.
 - Verification proves only the target event outcome; it does not prove global mastery.
+- HUMAN_GROWTH_RUBRIC has no global binary outcome.
+- HUMAN_GROWTH_RUBRIC may verify VOCABULARY / GRAMMAR / EXPRESSION / THINKING / ENGLISH_THINKING separately as SUCCESS / PARTIAL / FAIL.
+- Dimension-level rubric evidence must not become global correctness or mastery.
 
 Current implementation:
 - LEARNING/verification/verification-layer.js
@@ -565,7 +573,17 @@ described as Learning Projection. It is derived from Mining Index + verified dom
 
 It may contain curriculum alignment, term/morpheme/root links, subject meanings, concept links,
 candidate prerequisite relations, confusion/contrast relations, representation bridges,
-cross-subject links and transfer targets.
+cross-subject links, transfer targets and role-tagged language-growth resources.
+
+Learning evidence roles are derived from indexed provenance, not filenames/titles:
+- CURRICULUM_ALIGNMENT
+- LEXICAL_SEMANTICS
+- LANGUAGE_USAGE
+- PEDAGOGICAL_USAGE
+- GENERAL_REFERENCE
+
+Ambiguous role provenance fails closed.
+GENERAL_REFERENCE does not automatically gain language-growth authority.
 
 It may not contain learner mastery, memory strength, review dates, calendar slots, Planner
 decisions or automatic remediation authority.
@@ -728,14 +746,12 @@ Missing evidence = UNKNOWN, not failure.
 
 Growth decisions combine two evidence classes:
 
-1. DOMAIN / CURRICULUM EVIDENCE
-   - official curriculum / education authority source
-   - achievement-standard alignment
-   - grade / exposure context
-   - vocabulary / grammar / expression / thinking semantics
-   - easy-English definition candidates
-   - expression chunks / collocations
-   - representation / transfer links
+1. DOMAIN / REFERENCE EVIDENCE
+   - CURRICULUM_ALIGNMENT: official curriculum / education authority for achievement-standard, grade and exposure alignment
+   - LEXICAL_SEMANTICS: dictionary / lexical reference for easy-English meaning and lexical semantics
+   - LANGUAGE_USAGE: corpus / usage reference for chunks, collocations and natural usage patterns
+   - PEDAGOGICAL_USAGE: curated learning-resource evidence for scaffolds and English-thinking support
+   - each source role keeps separate provenance and may not borrow another role's authority
 
 2. LEARNER EVIDENCE
    - actual Hide retrieval and language-use evidence
@@ -876,16 +892,34 @@ Hide does NOT send Learning Engine authority through mutable URL parameters.
 It sends only continuity scope + learning target / word material.
 Snap re-queries the authenticated central Learning Engine.
 
-### 22.9 Curriculum / Mining gap
+### 22.9 Role-specific Index-first Mining gaps
 
-If official curriculum / education-index grounding is absent, Learning Engine may emit:
-CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED
+Learning Engine checks the required evidence role, not merely whether any indexed source exists.
 
-It SHALL NOT directly authorize Mining.
-The existing Index-first gap broker decides whether:
-- Learning Index rebuild is enough,
-- Mining Index already contains evidence,
-- or Mining Engine acquisition is actually required.
+Possible growth reference gaps:
+- CURRICULUM_ALIGNMENT_REFERENCE_REQUIRED
+- LEXICAL_SEMANTICS_REFERENCE_REQUIRED
+- LANGUAGE_USAGE_REFERENCE_REQUIRED
+- PEDAGOGICAL_LANGUAGE_SUPPORT_REFERENCE_REQUIRED
+
+Canonical route:
+
+LEARNING ENGINE ROLE-SPECIFIC GAP
+-> LEARNING INDEX ROLE CHECK
+-> MINING INDEX provenance-tag check
+-> if matching indexed source exists: INDEX_REQUERY
+-> only if matching role is insufficient: MINING_REQUEST
+-> acquisition
+-> Index owner review/classification
+-> provenance role preserved in search projection
+-> Learning Index rebuild
+-> Learning Engine requery
+
+Hard locks:
+- learner-performance gaps go to specialist evidence acquisition, never external Mining;
+- Learning Engine emits gaps but never authorizes Mining;
+- an unrelated indexed source cannot satisfy a role-specific gap;
+- curriculum evidence cannot satisfy lexical or corpus authority merely because it contains similar text.
 
 ### 22.10 Evidence confidence and anti-oscillation
 
@@ -982,7 +1016,75 @@ APPLIED GROWTH CONTROL
 CANDIDATE FEEDBACK != STATE MUTATION
 ONE RESULT != AUTOMATIC LEVEL CHANGE
 
-### 22.14 Current candidate implementation
+### 22.14 Longitudinal growth stability
+
+Growth Profile uses two evidence windows:
+
+RECENT WINDOW:
+- drives immediate support and question/hint adjustment;
+- default candidate size: recent 8 relevant signals.
+
+STABILITY WINDOW:
+- guards promotion/demotion;
+- default candidate size: recent 24 relevant signals.
+
+The counts are tunable runtime policy, not curriculum authority.
+
+Stability signals include:
+- STRETCH_STABLE
+- PROMOTION_CANDIDATE_NOT_STABLE
+- TEMPORARY_SUPPORT_WITHOUT_LONG_TERM_DEMOTION
+- SUPPORT_NEED_STABLE
+- RECENT_EVIDENCE_INSUFFICIENT
+- HOLD_OR_DEVELOP
+
+Hard locks:
+- recent weakness may increase support without erasing long-term growth;
+- recent strength alone cannot trigger TRANSFER_PUSH until the stability window supports it;
+- old evidence is preserved historically but cannot dominate current control merely by age/volume.
+
+### 22.15 Ready / Planner authority reconciliation
+
+Ready Learning Master is not a second Learning Engine.
+
+Ready may own:
+- assignment decomposition;
+- operational execution-load metadata;
+- local-first fallback mechanics.
+
+Ready may not own:
+- learner-state authority;
+- growth-control authority;
+- central review-policy authority while TAKY Learning Engine is available.
+
+Ready local memory review:
+- LOCAL_FALLBACK_ONLY;
+- central Learning Engine takes precedence;
+- Planner still owns any dated placement.
+
+READY EXECUTION LOAD != LEARNER GROWTH STATE
+LOCAL FALLBACK != CENTRAL AUTHORITY
+
+### 22.16 Dimension-level Snap growth verification
+
+Snap completion remains observation-only quality evidence.
+
+A permitted reviewer may issue HUMAN_GROWTH_RUBRIC evidence for separate dimensions:
+- VOCABULARY
+- GRAMMAR
+- EXPRESSION
+- THINKING
+- ENGLISH_THINKING
+
+Each dimension may be SUCCESS / PARTIAL / FAIL.
+
+The receipt:
+- has outcome = null at global level;
+- preserves reviewer/rubric provenance;
+- replaces matching UNKNOWN placeholders only for reviewed dimensions;
+- cannot create global correctness or mastery.
+
+### 22.17 Current candidate implementation
 
 - LEARNING/pedagogy/language-growth-profile.js
 - LEARNING/pedagogy/growth-next-step-policy.js
