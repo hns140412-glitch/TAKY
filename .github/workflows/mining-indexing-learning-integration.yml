@@ -30,6 +30,9 @@ on:
       - 'ENFORCEMENT/ready_curriculum_registry_migration.py'
       - 'ENFORCEMENT/ready_curriculum_registry_migration_test.py'
       - 'MIGRATION/CURRICULUM/**'
+      - 'MIGRATION/LEARNING_REFERENCE/**'
+      - 'ENFORCEMENT/learning_reference_role_migration.py'
+      - 'ENFORCEMENT/learning_reference_role_migration_test.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
       - 'ENFORCEMENT/mining_runtime_host.py'
@@ -102,6 +105,9 @@ jobs:
       - name: Ready curriculum migration candidate
         working-directory: ENFORCEMENT
         run: python ready_curriculum_registry_migration_test.py
+      - name: Drive learning-reference role migration
+        working-directory: ENFORCEMENT
+        run: python learning_reference_role_migration_test.py
       - name: Learning gap to Mining runtime bridge
         working-directory: ENFORCEMENT
         run: python learning_mining_runtime_bridge_test.py
