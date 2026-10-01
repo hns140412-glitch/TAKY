@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V2_GAME_CODEX",
-  "version": "2026-10-02.3",
+  "version": "2026-10-02.4",
   "status": "CURRENT_GAME_CODEX_UI_CONTRACT",
   "authority": {
     "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
@@ -73,7 +73,8 @@
         "CATEGORY",
         "OWNERSHIP"
       ],
-      "interaction_rule": "보기(view mode)는 묶는 기준, 정렬(sort)은 묶음 내부/전체 순서 기준으로 분리한다."
+      "interaction_rule": "보기(view mode)는 묶는 기준, 정렬(sort)은 묶음 내부/전체 순서 기준으로 분리한다.",
+      "nature_progress": "show earned/total inside each nature filter chip"
     },
     {
       "id": "BADGE_DETAIL",
@@ -89,7 +90,9 @@
         "OBTAIN_CONDITION",
         "OWNERSHIP",
         "TIER_REACQUIRE_STARS",
-        "ACQUISITION_HISTORY"
+        "ACQUISITION_HISTORY",
+        "ACQUISITION_COUNT",
+        "LAST_ACQUIRED_AT"
       ],
       "navigation": [
         "PREVIOUS_BADGE",
@@ -205,7 +208,8 @@
     "sort/filter state is presentation-only",
     "SECRET mystery masking is presentation-only and never changes stored metadata",
     "third-party game visual branding/assets are never copied",
-    "view mode and sort are independent presentation state; neither mutates badge metadata or award state"
+    "view mode and sort are independent presentation state; neither mutates badge metadata or award state",
+    "nature progress counts and acquisition summary are derived from badge runtime ledger only; never invented"
   ],
   "deployment": "HOLD",
   "design_direction": {
