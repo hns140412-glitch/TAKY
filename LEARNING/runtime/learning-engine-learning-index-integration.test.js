@@ -43,7 +43,7 @@ const out=Runtime.derive({
 assert.equal(out.ok,true);
 assert.equal(out.learning_index.ok,true);
 assert.equal(out.learning_index.authority,'DERIVED_NON_SOURCE_OF_TRUTH');
-assert.equal(out.trace.learning_index_version,'TAKY_LEARNING_INDEX_V1');
+assert.equal(out.trace.learning_index_version,'TAKY_LEARNING_INDEX_V2');
 assert.deepEqual(out.trace.source_refs,['INDEX:SRC-LI-1']);
 assert.equal(Runtime.validate(out).ok,true);
 
