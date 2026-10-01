@@ -53,6 +53,7 @@ function normalizeGrowthExecutionContext(payload={}){
 function baseFromEvent(event={},context={}){
   const payload=event.payload||{};
   const identity=IO.commonIdentity({
+    scope_kind:context.scope_kind||payload.evidence_scope_kind,
     member_id:context.member_id||event.member_id||event.child_id||payload.member_id,
     family_id:context.family_id||payload.family_id,
     session_id:context.session_id||payload.session_id||payload.taskContext?.session_id,
@@ -229,6 +230,7 @@ function fromReady(event={},context={}){
      clean(out.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION')
     out.verified_outcome=null;
   if(clean(out.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION'){
+    out.identity.scope_kind='AGGREGATED_EXECUTION';
     out.execution_friction={
       authority:'READY_EXECUTION_FRICTION_OBSERVATION_ONLY',
       assignment_id:clean(p.assignment_id)||null,
