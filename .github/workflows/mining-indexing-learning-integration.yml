@@ -125,6 +125,9 @@ jobs:
       - name: English lexical and usage source candidates remain guarded
         working-directory: ENFORCEMENT
         run: python english_lexical_usage_source_candidates_test.py
+      - name: English language usage precheck remains non-authoritative
+        working-directory: ENFORCEMENT
+        run: python english_language_usage_precheck_test.py
       - name: OEWN lexical precheck remains non-authoritative
         working-directory: ENFORCEMENT
         run: python oewn_lexical_precheck_test.py
