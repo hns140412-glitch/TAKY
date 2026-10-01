@@ -73,9 +73,12 @@ def _excluded_candidate_reason(row: dict) -> str | None:
 
 
 def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None,
-                   detail_rows=None, min_results=1, top_k=5):
+                   detail_rows=None, min_results=1, top_k=5,
+                   allowed_source_families=None, allowed_authority_classes=None):
     located, unresolved, verification, traces = [], [], [], []
     required_count = max(1, int(min_results))
+    allowed_families={str(x).strip() for x in (allowed_source_families or []) if str(x).strip()}
+    allowed_authorities={str(x).strip().upper() for x in (allowed_authority_classes or []) if str(x).strip()}
     for item in frontier or []:
         fid = str(item.get("id") or "")
         question = str(item.get("question") or fid)
@@ -100,10 +103,20 @@ def query_frontier(frontier, index_rows, *, semantic_scores=None, relations=None
                 for hit in near.get("primary", []) if
                 not _exact_source_file(hit.get("row") or {}, expected_name)
             ]
-        qualified = [x for x in primary if _candidate_usable(x.get("row") or {})]
+        def constraint_reason(hit):
+            row=hit.get("row") or {}
+            if not _candidate_usable(row):
+                return _excluded_candidate_reason(row)
+            if allowed_families and str(row.get("source_family") or "") not in allowed_families:
+                return "SOURCE_FAMILY_CONSTRAINT"
+            authority=str(row.get("authority_class") or (row.get("classification") or {}).get("authority_class") or "").upper()
+            if allowed_authorities and authority not in allowed_authorities:
+                return "AUTHORITY_CLASS_CONSTRAINT"
+            return None
+        qualified = [x for x in primary if constraint_reason(x) is None]
         rejected = [
-            {"source_id": x.get("source_id"), "reason": _excluded_candidate_reason(x.get("row") or {})}
-            for x in primary if not _candidate_usable(x.get("row") or {})
+            {"source_id": x.get("source_id"), "reason": constraint_reason(x)}
+            for x in primary if constraint_reason(x) is not None
         ] + approximate
         enough = len(qualified) >= required_count
         traces.append({
