@@ -13,6 +13,7 @@ const ObservationReview=require('./observation-review-intent.js');
 const HideVocabularyPolicy=require('../pedagogy/hide-vocabulary-routing-policy.js');
 const LanguageGrowthProfile=require('../pedagogy/language-growth-profile.js');
 const GrowthNextStep=require('../pedagogy/growth-next-step-policy.js');
+const GrowthOutcomeFeedback=require('../pedagogy/growth-outcome-feedback.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -200,16 +201,30 @@ function applyOutcome({runtime_result={},outcome={},index_gap_route=null}={}){
   if(!checked.ok){
     return {ok:false,reason:'OUTCOME_FEEDBACK_INVALID',issues:checked.issues,feedback};
   }
+
+  const growthFeedback=GrowthOutcomeFeedback.derive({
+    prior_growth_next_step:runtime_result.growth_next_step||null,
+    outcome_evidence:outcome
+  });
+  const growthChecked=GrowthOutcomeFeedback.validate(growthFeedback);
+  if(!growthChecked.ok){
+    return {ok:false,reason:'GROWTH_OUTCOME_FEEDBACK_INVALID',
+      issues:growthChecked.issues,growth_feedback:growthFeedback};
+  }
+
   return {
     ok:true,
     engine_runtime:VERSION,
     authority:'TAKY_LEARNING_ENGINE_CORE',
     scope:runtime_result.scope||null,
     outcome_feedback:feedback,
+    growth_outcome_feedback:growthFeedback,
     trace:{
       prior_evidence_gap_id:runtime_result.evidence_gap?.gap_id||null,
       index_gap_decision:index_gap_route?.decision||null,
-      mining_strategy_feedback_candidate:!!feedback.mining_strategy_feedback_candidate
+      mining_strategy_feedback_candidate:!!feedback.mining_strategy_feedback_candidate,
+      growth_adjustment_candidate:growthFeedback.adjustment||null,
+      growth_control_change_authorized:false
     }
   };
 }
