@@ -22,7 +22,8 @@ const evidence=[
     member_id:'A',subject:'english',concept_skill_target:'vocabulary',
     learning_target_id:'accept',evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',
     source_app:'hide-seek',instrument_version:'HIDE_TRACE_V2',
-    interaction_mode:'TRACE',assisted:false,verified_outcome:null,
+    interaction_mode:'TRACE',assisted:false,verified_outcome:1,
+    verification:{authority:'LEARNING_VERIFICATION_RECEIPT'},
     language_growth_signals:[
       {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false,target_id:'accept'},
       {dimension:'ENGLISH_THINKING',outcome:'PARTIAL',direct_english:false,target_id:'accept'}
@@ -82,6 +83,9 @@ assert.equal(out.growth_profile.ok,true);
 assert.equal(out.growth_profile.learner_context.language_load,'SIMPLE');
 assert.equal(out.growth_profile.dimensions.VOCABULARY.state,'READY_TO_STRETCH');
 assert.equal(out.growth_next_step.ok,true);
+assert.ok(['MEDIUM','HIGH'].includes(out.growth_next_step.growth_control.evidence_confidence));
+assert.ok(['BUILD_CONNECT','STRETCH_TRANSFER'].includes(out.growth_next_step.growth_control.learning_intensity));
+assert.ok(/^L[1-5]_/.test(out.growth_next_step.growth_control.expression_level));
 assert.equal(out.growth_next_step.curriculum_grounding.verified,true);
 assert.equal(out.growth_next_step.guards.engine_guides_growth_not_answers,true);
 assert.equal(out.growth_next_step.guards.korean_to_english_word_by_word_translation_is_not_default,true);
