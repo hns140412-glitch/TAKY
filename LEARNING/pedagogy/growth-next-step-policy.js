@@ -244,6 +244,60 @@ function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
   };
 }
 
+function referenceRequirements(control={},resources={}){
+  const dims=new Set(Array.isArray(control.target_dimensions)?control.target_dimensions:[]);
+  const out=[];
+  const add=(gap_type,priority,role,provenance,reason)=>out.push({
+    gap_type,
+    owner:'LEARNING_ENGINE_CORE',
+    priority,
+    function_id:'LE-GROWTH-01',
+    consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH',
+    requested_capability:role,
+    required_learning_evidence_role:role,
+    required_provenance_any_of:[...provenance],
+    index_check_required:true,
+    resolution_path:'INDEX_THEN_MINING_IF_INSUFFICIENT',
+    mining_request_authorized:false,
+    reason
+  });
+
+  if(!resources.curriculum_verified){
+    add(
+      'CURRICULUM_ALIGNMENT_REFERENCE_REQUIRED','HIGH','CURRICULUM_ALIGNMENT',
+      ['OFFICIAL_EDUCATION_SOURCE'],
+      'OFFICIAL_CURRICULUM_ALIGNMENT_MISSING'
+    );
+  }
+  if((dims.has('VOCABULARY')||dims.has('ENGLISH_THINKING')) &&
+     resources.easy_english_definitions.length===0){
+    add(
+      'LEXICAL_SEMANTICS_REFERENCE_REQUIRED','MEDIUM','LEXICAL_SEMANTICS',
+      ['LEXICAL_REFERENCE_SOURCE'],
+      'EASY_ENGLISH_LEXICAL_SEMANTICS_MISSING'
+    );
+  }
+  if((dims.has('GRAMMAR')||dims.has('EXPRESSION')) &&
+     resources.expression_chunks.length===0 &&
+     resources.grammar_patterns.length===0 &&
+     resources.natural_collocations.length===0){
+    add(
+      'LANGUAGE_USAGE_REFERENCE_REQUIRED','MEDIUM','LANGUAGE_USAGE',
+      ['LANGUAGE_USAGE_SOURCE','PEDAGOGICAL_SOURCE_REF'],
+      'EXPRESSION_CHUNK_OR_USAGE_SUPPORT_MISSING'
+    );
+  }
+  if(dims.has('ENGLISH_THINKING') && resources.english_thinking_support.length===0){
+    add(
+      'PEDAGOGICAL_LANGUAGE_SUPPORT_REFERENCE_REQUIRED','LOW','PEDAGOGICAL_USAGE',
+      ['PEDAGOGICAL_SOURCE_REF'],
+      'ENGLISH_THINKING_PEDAGOGICAL_SUPPORT_MISSING'
+    );
+  }
+  return out;
+}
+
 function snapHandoff(profile={},resources={},stance,depth,control=null){
   const vocab=profile.dimensions?.VOCABULARY?.state;
   const eligible=['DEVELOPING','READY_TO_STRETCH'].includes(vocab);
@@ -278,6 +332,7 @@ function derive({growth_profile,learning_index=null}={}){
   const hints=hintPolicy(stance);
   const moves=growthMoves(growth_profile,resources);
   const control=growthControl(growth_profile,stance,depth,hints);
+  const referenceGaps=referenceRequirements(control,resources);
 
   return {
     ok:true,
@@ -308,11 +363,8 @@ function derive({growth_profile,learning_index=null}={}){
     language_resource_provenance:resources.resource_provenance,
     source_role_guard:resources.source_role_guard,
     hide_to_snap_handoff:snapHandoff(growth_profile,resources,stance,depth,control),
-    reference_gap_candidate:resources.curriculum_verified?null:{
-      gap_type:'CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED',
-      mining_request_authorized:false,
-      reason:'NO_OFFICIAL_CURRICULUM_OR_EDUCATION_INDEX_EVIDENCE_IN_LEARNING_INDEX'
-    },
+    reference_gap_candidates:referenceGaps,
+    reference_gap_candidate:referenceGaps[0]||null,
     guards:{
       engine_guides_growth_not_answers:true,
       korean_to_english_word_by_word_translation_is_not_default:true,
@@ -323,7 +375,9 @@ function derive({growth_profile,learning_index=null}={}){
       planner_owns_dates:true,
       growth_intensity_and_expression_level_are_engine_intent_only:true,
       low_confidence_cannot_force_growth_upshift:true,
-      curriculum_and_language_resource_authorities_are_separate:true
+      curriculum_and_language_resource_authorities_are_separate:true,
+      missing_resource_role_emits_index_first_gap:true,
+      learning_engine_never_authorizes_mining:true
     },
     cannot_influence:['SCHEDULE_DATE','PLANNER_DATE','DUE_AT','DEADLINE','ASSIGNMENT_FACT','FINAL_CHILD_ANSWER']
   };
@@ -340,6 +394,10 @@ function validate(policy={}){
   if(!['SUPPORT_BUILD','BUILD_CONNECT','STRETCH_TRANSFER'].includes(policy?.growth_control?.learning_intensity))issues.push('LEARNING_INTENSITY_INVALID');
   if(!/^L[1-5]_/.test(String(policy?.growth_control?.expression_level||'')))issues.push('EXPRESSION_LEVEL_INVALID');
   if(policy.hide_to_snap_handoff?.final_answer_generation_forbidden!==true)issues.push('AUTHORSHIP_GUARD_MISSING');
+  for(const gap of (Array.isArray(policy.reference_gap_candidates)?policy.reference_gap_candidates:[])){
+    if(gap.mining_request_authorized!==false)issues.push('GROWTH_GAP_MINING_AUTHORIZATION_FORBIDDEN');
+    if(gap.resolution_path!=='INDEX_THEN_MINING_IF_INSUFFICIENT')issues.push('GROWTH_GAP_PATH_INVALID');
+  }
   return {ok:issues.length===0,issues};
 }
 
