@@ -1,0 +1,155 @@
+{
+  "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V1",
+  "version": "2026-10-01.1",
+  "status": "CURRENT_UI_CONTRACT_READY_FOR_RUNTIME_BINDING",
+  "authority": {
+    "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
+    "art_current": "TAKY_BADGE_ART_BINDING_CURRENT_2026-10-01.json",
+    "visual_refs": [
+      "타키 배지 탐험 도감 UI",
+      "파스텔 판타지 배지 도감 UI",
+      "성장 배지 별빛 도감"
+    ],
+    "rule": "approved existing UI work reconciled; visual art remains replaceable behind stable asset_slot_id"
+  },
+  "screens": [
+    {
+      "id": "BADGE_CATALOG",
+      "role": "도감",
+      "filters": [
+        "ALL",
+        "EARNED",
+        "IN_PROGRESS",
+        "UNEARNED"
+      ],
+      "category_tabs": [
+        "ALL",
+        "POCKET",
+        "FIELD",
+        "EXPEDITION",
+        "SECRET"
+      ],
+      "tile_action": "OPEN_BADGE_DETAIL"
+    },
+    {
+      "id": "BADGE_DETAIL",
+      "role": "상세",
+      "sections": [
+        "ART",
+        "TITLE",
+        "CATEGORY",
+        "STORY",
+        "OBTAIN_CONDITION",
+        "OWNERSHIP",
+        "TIER_REACQUIRE_STARS",
+        "ACQUISITION_HISTORY"
+      ],
+      "actions": [
+        "CLOSE",
+        "SHARE_IF_ENABLED"
+      ]
+    },
+    {
+      "id": "BADGE_HISTORY",
+      "role": "기록",
+      "views": [
+        "CALENDAR",
+        "RECENT_ACQUISITIONS",
+        "REACQUIRE_HISTORY"
+      ]
+    }
+  ],
+  "categories": {
+    "POCKET": {
+      "order": 1,
+      "label_ko": "POCKET",
+      "subtitle_ko": "일상 속 작은 발견",
+      "expected_count": 20
+    },
+    "FIELD": {
+      "order": 2,
+      "label_ko": "FIELD",
+      "subtitle_ko": "세상을 향한 탐험",
+      "expected_count": 20
+    },
+    "EXPEDITION": {
+      "order": 3,
+      "label_ko": "EXPEDITION",
+      "subtitle_ko": "한 걸음 더 특별한 도전",
+      "expected_count": 14
+    },
+    "SECRET": {
+      "order": 4,
+      "label_ko": "SECRET",
+      "subtitle_ko": "숨겨진 특별한 이야기",
+      "expected_count": 6
+    }
+  },
+  "tile_contract": {
+    "identity": [
+      "badge_id",
+      "visual_id",
+      "asset_slot_id"
+    ],
+    "art_resolution": "asset_slot_id -> binding manifest current_art; UI must not hardcode versioned file bytes",
+    "visible": [
+      "current_art",
+      "display_title",
+      "category",
+      "ownership_state",
+      "tier",
+      "reacquire_stars"
+    ],
+    "unearned_visual": "SILHOUETTE_OR_DESATURATED_CURRENT_ART_PLUS_LOCK_OVERLAY",
+    "progress_visual": "OPTIONAL_PROGRESS_RING_OR_TEXT_ONLY_WHEN_RULE_ENGINE_EXPOSES_PROGRESS",
+    "forbidden": [
+      "bake tier stars into artwork",
+      "bake lock into artwork",
+      "invent character inside badge art",
+      "infer earned state from art status"
+    ]
+  },
+  "detail_contract": {
+    "story_source": "core_detail + story_authority from art binding manifest; obtain condition comes from badge logic catalog, not image prompt",
+    "art_layers": [
+      "COMMON_BADGE_ART",
+      "OPTIONAL_APPROVED_PROFILE_CHARACTER_OVERLAY",
+      "TIER_RIM_LAYER",
+      "REACQUIRE_STAR_LAYER",
+      "LOCK_LAYER"
+    ],
+    "profile_character": "separate optional UI overlay; never becomes part of badge artwork identity"
+  },
+  "ownership_state": [
+    "UNEARNED",
+    "IN_PROGRESS",
+    "EARNED"
+  ],
+  "tier_contract": {
+    "tiers": [
+      "GREEN",
+      "BLUE",
+      "RED",
+      "GOLD",
+      "PLATINUM"
+    ],
+    "reacquire_stars": {
+      "min": 0,
+      "max": 5,
+      "source": "AWARD_LEDGER_ONLY",
+      "first_award": "EARNED_WITH_0_REACQUIRE_STARS",
+      "reaward": "PLUS_1_STAR",
+      "tier_up_at": 5,
+      "post_promotion": "RESET_TO_0_PENDING_TOP_TIER_POLICY"
+    },
+    "art_independence": "tier/rim/star changes never replace or mutate common badge art file"
+  },
+  "runtime_invariants": [
+    "60 badge identities remain stable",
+    "art replacement changes only current_art bytes + sha256 + revision/source lineage",
+    "badge logic/condition/history are independent from art quality status",
+    "CURRENT_APPROVED/CURRENT_CANDIDATE/CURRENT_FUTURE_UPDATE are asset-quality governance states, not learner ownership states",
+    "no missing image fallback may create new art automatically"
+  ],
+  "deployment": "HOLD"
+}
