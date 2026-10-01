@@ -81,6 +81,8 @@ jobs:
         run: node LEARNING/contracts/learning-evidence-io-contract.test.js
       - name: Learning Engine output contract
         run: node LEARNING/contracts/learning-engine-output-contract.test.js
+      - name: Imagination Cloud evidence contract
+        run: node LEARNING/contracts/imagination-cloud-evidence-contract.test.js
       - name: Canonical learning evidence adapter
         run: node LEARNING/adapters/canonical-evidence.test.js
       - name: Hide vocabulary routing policy
