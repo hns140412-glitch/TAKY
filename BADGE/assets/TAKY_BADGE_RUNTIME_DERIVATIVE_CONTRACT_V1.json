@@ -1,0 +1,29 @@
+{
+  "schema": "TAKY_BADGE_RUNTIME_DERIVATIVE_CONTRACT_V1",
+  "version": "2026-10-02.1",
+  "status": "CURRENT",
+  "canonical_source": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/BDG-DRAFT-001..060.png",
+  "runtime_profile": {
+    "format": "webp",
+    "width": 512,
+    "height": 512,
+    "quality": 82,
+    "stable_path": "assets/badges/current/TAKY_BADGE_ART_{NNN}.webp"
+  },
+  "rules": [
+    "Library PNG remains canonical artwork",
+    "runtime WebP is a derived delivery asset and does not change badge identity",
+    "badge_id / visual_id / asset_slot_id remain stable when artwork changes",
+    "source replacement updates source SHA + revision, then regenerates the same stable runtime path and runtime SHA",
+    "ownership / tier / stars / lock remain runtime UI layers and are never baked into derived artwork"
+  ],
+  "qa": {
+    "count_60": true,
+    "all_512_square": true,
+    "unique_runtime_sha": true,
+    "unique_asset_slots": true,
+    "binary_total_bytes": 3879972,
+    "status": "PASS"
+  },
+  "binary_sync": "PENDING"
+}
