@@ -234,6 +234,9 @@ jobs:
       - name: Validate OEWN lexical precheck
         working-directory: ENFORCEMENT
         run: python oewn_lexical_precheck_test.py
+      - name: Validate V27 indexed-only promotion receipt
+        working-directory: ENFORCEMENT
+        run: python data_index_v27_index_owner_receipt_test.py
       - name: Validate cross-repository Learning authority matrix
         working-directory: ENFORCEMENT
         run: python cross_repo_authority_matrix_test.py
