@@ -78,7 +78,8 @@ class TestClosedLoop(unittest.TestCase):
             index.write_text(json.dumps({"sources":[{
                 "source_id":"SRC-EXISTING","title":"science climate official",
                 "source_family":"OFFICIAL_STANDARDS","authority_class":"OFFICIAL",
-                "keywords":["science","climate","official"]
+                "keywords":["science","climate","official"],
+                "provenance":["OFFICIAL_SOURCE_REF"]
             }]}),encoding="utf-8")
             calls={"learning":0}
             def learning(route,rows):
