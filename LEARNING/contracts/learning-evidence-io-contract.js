@@ -100,6 +100,16 @@ function validateInput(record={}){
 
 function validateLearningOutput(output={}){
   const issues=[];
+  const forbiddenKeys=new Set(FORBIDDEN_ENGINE_OUTPUTS);
+  const walkForbidden=value=>{
+    if(!value||typeof value!=='object')return [];
+    const found=[];
+    for(const [key,nested] of Object.entries(value)){
+      if(forbiddenKeys.has(key))found.push(key);
+      found.push(...walkForbidden(nested));
+    }
+    return found;
+  };
   if(output.authority!=='TAKY_LEARNING_ENGINE_CORE')
     issues.push('LEARNING_OUTPUT_AUTHORITY_INVALID');
   if(output.date_authority!==false)
@@ -107,15 +117,15 @@ function validateLearningOutput(output={}){
   if(output.allocated_quantity_authority!==false)
     issues.push('LEARNING_ENGINE_ALLOCATED_QUANTITY_AUTHORITY_FORBIDDEN');
 
-  for(const key of FORBIDDEN_ENGINE_OUTPUTS){
-    if(Object.prototype.hasOwnProperty.call(output,key))
-      issues.push('LEARNING_ENGINE_OUTPUT_FORBIDDEN:'+key);
-  }
+  for(const key of [...new Set(walkForbidden(output))])
+    issues.push('LEARNING_ENGINE_OUTPUT_FORBIDDEN:'+key);
   if(output.recommended_quantity){
     if(output.recommended_quantity.authority!=='LEARNING_ENGINE_QUANTITY_INTENT_ONLY')
       issues.push('RECOMMENDED_QUANTITY_AUTHORITY_INVALID');
     if(output.recommended_quantity.planner_must_materialize!==true)
       issues.push('PLANNER_MATERIALIZATION_REQUIRED');
+    if(output.recommended_quantity.allocated_quantity!==null)
+      issues.push('ALLOCATED_QUANTITY_MUST_REMAIN_NULL');
   }
   return {ok:issues.length===0,issues};
 }
