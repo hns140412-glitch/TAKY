@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 from data_index_search import load_index, search
 
-VERSION="TAKY_LEARNING_EVIDENCE_GAP_BROKER_V2"
+VERSION="TAKY_LEARNING_EVIDENCE_GAP_BROKER_V3"
 
 def _clean(v): return str(v or "").strip()
 
@@ -30,6 +30,11 @@ def _eligible(hit,gap):
     auth=set(gap.get("acceptable_authority_classes") or [])
     if fam and hit.get("source_family") not in fam:return False
     if auth and hit.get("authority_class") not in auth:return False
+    provenance=set(hit.get("provenance") or [])
+    required=set(gap.get("required_provenance") or [])
+    any_of=set(gap.get("required_provenance_any_of") or [])
+    if required and not required.issubset(provenance):return False
+    if any_of and not provenance.intersection(any_of):return False
     return True
 
 def route_gap(gap:dict[str,Any],*,index_path:Path,min_results:int=1,consumer:str="LEARNING_ENGINE")->dict[str,Any]:
@@ -83,6 +88,8 @@ def route_gap(gap:dict[str,Any],*,index_path:Path,min_results:int=1,consumer:str
         "acceptable_source_families":gap.get("acceptable_source_families") or [],
         "acceptable_authority_classes":gap.get("acceptable_authority_classes") or [],
         "required_provenance":gap.get("required_provenance") or [],
+        "required_provenance_any_of":gap.get("required_provenance_any_of") or [],
+        "required_learning_evidence_role":gap.get("required_learning_evidence_role"),
         "index_check":{"performed":True,"result_count":len(result.get("results",[])),"eligible_result_count":len(eligible),"minimum_required":min_results,"semantic_mode":result.get("semantic_mode")},
         "constraints":["MINING_DISCOVERS_AND_ACQUIRES_ONLY","INDEXING_OWNS_PERSISTENT_CLASSIFICATION","LEARNING_OWNS_FINAL_EVIDENCE_USE_DECISION","NO_CANONICAL_PROMOTION"]
     }
