@@ -9,4 +9,16 @@ assert.equal(P.canVerify({source_app:'ready-set',evidence_type:'STRUCTURED_PRACT
 assert.equal(P.canVerify({source_app:'ready-set',evidence_type:'LEARNER_PRODUCTION_EVIDENCE',verifier_type:'ANSWER_KEY_EXACT',auto:true}).ok,false);
 assert.equal(P.canVerify({source_app:'hide-seek',evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',verifier_type:'HUMAN_RUBRIC_BINARY',auto:false}).ok,false);
 
+assert.equal(P.canVerify({
+  source_app:'snap-pop',evidence_type:'LEARNER_PRODUCTION_EVIDENCE',
+  verifier_type:'HUMAN_GROWTH_RUBRIC',auto:false
+}).ok,true);
+assert.equal(P.canVerify({
+  source_app:'snap-pop',evidence_type:'LEARNER_PRODUCTION_EVIDENCE',
+  verifier_type:'HUMAN_GROWTH_RUBRIC',auto:true
+}).reason,'AUTO_VERIFICATION_FORBIDDEN');
+assert.equal(P.canVerify({
+  source_app:'hide-seek',evidence_type:'MEMORY_RETRIEVAL_EVIDENCE',
+  verifier_type:'HUMAN_GROWTH_RUBRIC',auto:false
+}).ok,false);
 console.log('LEARNING_VERIFIER_POLICY_PASS');
