@@ -1,0 +1,56 @@
+{
+  "schema": "TAKY_DATA_INDEX_OWNER_INDEXING_RECEIPT_V1",
+  "status": "INDEXED_REVISION_CREATED__NOT_CURRENT__NOT_CANONICAL",
+  "indexed_at": "2026-10-02",
+  "approval_basis": "EXPLICIT_USER_APPROVAL_IN_CHAT",
+  "drive": {
+    "source_index": {
+      "name": "DATA_SOURCE_INDEX_2026-10-02_V7.json",
+      "id": "1nHgQWFtu7LEbxSA10oNQ5iE9DuhsZHGKeUIZ4Dz4Q60"
+    },
+    "utilization_index": {
+      "name": "DATA_UTILIZATION_INDEX_2026-10-02_V27.json",
+      "id": "1adL5ax9bV6RkTpBELUDqp2uDsgim2bdKOoRyN6aR3E4"
+    },
+    "receipt": {
+      "name": "C2S/DATA_INDEX_V27_INDEX_OWNER_RECEIPT_2026-10-02.json",
+      "id": "1-jKd24o1g6as4PcZEeNKvSgE3YFX3BoY8pihFHbhHrQ"
+    }
+  },
+  "counts": {
+    "base": 679,
+    "added": 178,
+    "total": 857,
+    "curriculum_alignment": 177,
+    "lexical_semantics": 1,
+    "language_usage": 0
+  },
+  "roles": {
+    "CURRICULUM_ALIGNMENT": {
+      "state": "INDEXED",
+      "count": 177,
+      "learning_index_consumption_allowed": true
+    },
+    "LEXICAL_SEMANTICS": {
+      "state": "INDEXED",
+      "count": 1,
+      "source_id": "LEXICAL_OEWN_2025",
+      "license": "CC-BY-4.0",
+      "attribution_required": true,
+      "learning_index_consumption_allowed": true
+    },
+    "LANGUAGE_USAGE": {
+      "state": "HOLD",
+      "count": 0
+    }
+  },
+  "guards": {
+    "canonical": false,
+    "current": false,
+    "current_pointer_changed": false,
+    "main_merge": false,
+    "deployment": false,
+    "oewn_gloss_is_child_level_easy_english": false,
+    "curriculum_alignment_is_lexical_semantics": false
+  }
+}
