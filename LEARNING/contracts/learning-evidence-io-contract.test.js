@@ -30,7 +30,8 @@ const output={
     authority:'LEARNING_ENGINE_QUANTITY_INTENT_ONLY',
     unit:'LEARNING_TARGET',
     min:3,max:5,
-    planner_must_materialize:true
+    planner_must_materialize:true,
+    allocated_quantity:null
   }
 };
 assert.equal(C.validateLearningOutput(output).ok,true);
