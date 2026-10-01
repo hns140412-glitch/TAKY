@@ -49,6 +49,7 @@ function normalizeRefs(input={}){
 
 function commonIdentity(input={}){
   return {
+    scope_kind:clean(input.scope_kind||input.evidence_scope_kind).toUpperCase()||'SESSION_TASK',
     member_id:clean(input.member_id||input.child_id)||null,
     family_id:clean(input.family_id)||null,
     session_id:clean(input.session_id)||null,
@@ -68,8 +69,14 @@ function commonIdentity(input={}){
 function validateInput(record={}){
   const issues=[];
   const id=record.identity||{};
-  for(const k of ['member_id','session_id','task_id','subject','source_app','observed_at']){
+  for(const k of ['member_id','subject','source_app','observed_at']){
     if(!clean(id[k]))issues.push('MISSING_'+k.toUpperCase());
+  }
+  if(id.scope_kind==='AGGREGATED_EXECUTION'){
+    if(!clean(id.assignment_id))issues.push('MISSING_ASSIGNMENT_ID');
+  }else{
+    if(!clean(id.session_id))issues.push('MISSING_SESSION_ID');
+    if(!clean(id.task_id)&&!clean(id.assignment_id))issues.push('MISSING_TASK_OR_ASSIGNMENT_ID');
   }
   if(id.source_app&&!SOURCE_APPS.includes(id.source_app))
     issues.push('SOURCE_APP_INVALID');
