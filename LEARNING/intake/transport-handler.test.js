@@ -13,6 +13,8 @@ const hidePacket={
     event_type:'RETRIEVAL_RESULT',
     payload:{
       member_id:'A',
+      session_id:'S-HIDE-1',
+      task_id:'T-HIDE-1',
       subject:'영어',
       concept_skill_target:'vocabulary',
       learning_target_id:'word:h1',
@@ -26,7 +28,8 @@ const hidePacket={
       }
     }
   },
-  context:{member_id:'A',subject:'영어',concept_skill_target:'vocabulary'}
+  context:{member_id:'A',session_id:'S-HIDE-1',task_id:'T-HIDE-1',
+   subject:'영어',concept_skill_target:'vocabulary'}
 };
 
 const snapPacket={
@@ -39,6 +42,8 @@ const snapPacket={
     event_type:'TASK_COMPLETED',
     payload:{
       member_id:'A',
+      session_id:'S-SNAP-1',
+      task_id:'T-SNAP-1',
       subject:'영어',
       concept_skill_target:'sentence_production',
       learning_target_id:'sentence:s1',
@@ -46,7 +51,8 @@ const snapPacket={
       child_authored:true
     }
   },
-  context:{member_id:'A',subject:'영어',concept_skill_target:'sentence_production'}
+  context:{member_id:'A',session_id:'S-SNAP-1',task_id:'T-SNAP-1',
+   subject:'영어',concept_skill_target:'sentence_production'}
 };
 
 let state=P.emptyState();
