@@ -32,6 +32,21 @@ const POLICIES=Object.freeze([
     requires_reference:true,
     allowed_when:['RUBRIC_EXPLICIT','REVIEWER_ROLE_ALLOWED'],
     forbidden_claims:['OBJECTIVE_RECALL_MASTERY','GLOBAL_MASTERY']
+  },
+  {
+    policy_id:'SNAP_HUMAN_GROWTH_RUBRIC',
+    source_app:'snap-pop',
+    evidence_type:'LEARNER_PRODUCTION_EVIDENCE',
+    verifier_type:'HUMAN_GROWTH_RUBRIC',
+    auto_verification:false,
+    requires_reference:true,
+    allowed_when:['DIMENSION_RUBRIC_EXPLICIT','REVIEWER_ROLE_ALLOWED'],
+    forbidden_claims:[
+      'GLOBAL_MASTERY',
+      'GLOBAL_CORRECTNESS_FROM_DIMENSION_RUBRIC',
+      'SCHEDULE_DATE',
+      'AGE_BASED_COGNITIVE_CEILING'
+    ]
   }
 ]);
 
