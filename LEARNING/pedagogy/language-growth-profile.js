@@ -33,18 +33,29 @@ function signalsFromEvidence(evidence=[]){
       if(signal){
         const verified=e.verified_outcome===0||e.verified_outcome===1||
           e?.verification?.authority==='LEARNING_VERIFICATION_RECEIPT';
+        const execution=e.growth_execution_context||{};
         out.push({
           ...signal,
           event_id:clean(e.event_id||e.evidence_id)||null,
           observed_at:clean(e.observed_at)||null,
           source_app:clean(e.source_app)||null,
           verified,
-          evidence_strength:verified?'VERIFIED':'OBSERVATION'
+          evidence_strength:verified?'VERIFIED':'OBSERVATION',
+          applied_learning_intensity:clean(execution.learning_intensity).toUpperCase()||null,
+          applied_expression_level:clean(execution.expression_level).toUpperCase()||null,
+          applied_question_depth:Number.isFinite(Number(execution.question_depth))
+            ?Number(execution.question_depth):null,
+          applied_hint_strength:clean(execution.hint_strength).toUpperCase()||null
         });
       }
     }
   }
   return out;
+}
+
+function expressionRank(level){
+  const m=String(level||'').match(/^L([1-5])_/);
+  return m?Number(m[1]):null;
 }
 
 function score(signal){
@@ -73,7 +84,9 @@ function classify(rows=[]){
     verified_count:0,observation_count:0,source_app_count:0,
     unassisted_count:0,transfer_count:rows.filter(x=>x.transfer===true).length,
     average_score:null,max_depth:depths.length?Math.max(...depths):null,
-    direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null
+    direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
+    minimal_hint_success_count:minimalHintSuccess,
+    max_success_expression_level:maxSuccessExpressionLevel
   };
 
   const scored=evaluable.map(score);
@@ -81,6 +94,12 @@ function classify(rows=[]){
   const unassisted=evaluable.filter(x=>x.assisted!==true).length;
   const transfer=evaluable.filter(x=>x.transfer===true).length;
   const crossApp=apps.length>=2;
+  const successfulChallenges=evaluable.filter(x=>x.outcome==='SUCCESS'&&x.assisted!==true);
+  const minimalHintSuccess=successfulChallenges.filter(x=>
+    x.applied_hint_strength==='MINIMAL_CUE'||!x.applied_hint_strength).length;
+  const expressionRanks=successfulChallenges.map(x=>expressionRank(x.applied_expression_level))
+    .filter(Number.isFinite);
+  const maxSuccessExpressionLevel=expressionRanks.length?Math.max(...expressionRanks):null;
 
   let confidence='LOW';
   if(verified.length>=2||(evaluable.length>=4&&crossApp))confidence='HIGH';
@@ -92,9 +111,14 @@ function classify(rows=[]){
     else state='DEVELOPING';
   }
 
+  const dimension=clean(rows[0]?.dimension).toUpperCase();
+  const challengeSensitive=['EXPRESSION','THINKING','ENGLISH_THINKING'].includes(dimension);
+  const challengeReady=!challengeSensitive||verified.length>=1||
+    minimalHintSuccess>=1||Number(maxSuccessExpressionLevel)>=2;
   const stretchEvidence=
     avg>=0.80 &&
     unassisted>=2 &&
+    challengeReady &&
     (
       verified.length>=1 ||
       (evaluable.length>=3&&crossApp&&transfer>=1)
@@ -172,7 +196,9 @@ function derive({evidence=[],learner_context={}}={}){
       app_score_is_not_growth_state:true,
       observation_only_cannot_self_promote_to_high_confidence:true,
       cross_app_or_verified_evidence_required_for_stretch:true,
-      sparse_direct_english_signal_does_not_create_translation_dependency:true
+      sparse_direct_english_signal_does_not_create_translation_dependency:true,
+      applied_challenge_context_is_evidence_not_authority:true,
+      scaffolded_success_does_not_auto_upshift_expression_level:true
     }
   };
 }
