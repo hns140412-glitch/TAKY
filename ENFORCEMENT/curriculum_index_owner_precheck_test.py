@@ -22,7 +22,9 @@ class TestCurriculumIndexOwnerPrecheck(unittest.TestCase):
         self.assertFalse(d["decision"]["central_index_authority"])
         self.assertFalse(d["decision"]["canonical_promotion"])
         self.assertFalse(d["decision"]["learning_index_consumption_allowed"])
-        self.assertIn("GOE_KOREAN_56_EXTERNAL_SOURCE_CONTENT_REVIEW",d["decision"]["blocking_items"])
+        self.assertEqual(d["decision"]["blocking_items"],[])
+        self.assertEqual(d["decision"]["disposition"],
+                         "SOURCE_CONTENT_PRECHECK_COMPLETE__AWAITING_FORMAL_INDEX_OWNER_PROMOTION_DECISION")
 
     def test_source_family_counts_cover_all_records(self):
         rows=self.data["source_family_checks"]
@@ -30,7 +32,12 @@ class TestCurriculumIndexOwnerPrecheck(unittest.TestCase):
         keys={x["source_key"] for x in rows}
         self.assertEqual(keys,{"GOE_KOREAN_56","GOE_FRAMEWORK_56","GOE_2026_EVAL","GOE_ENGLISH_56"})
         verified={x["source_key"]:x["external_verification"] for x in rows}
-        self.assertEqual(verified["GOE_KOREAN_56"],"PARTIAL")
+        self.assertEqual(verified["GOE_KOREAN_56"],
+                         "VERIFIED_FULL_TABLE_EXACT_OFFICIAL_SOURCE_INDEX_EXTRACTION")
+        korean=next(x for x in rows if x["source_key"]=="GOE_KOREAN_56")
+        self.assertEqual(korean["verified_total_count"],34)
+        self.assertEqual(sum(korean["verified_domain_counts"].values()),34)
+        self.assertIn("6국06-04",korean["representative_codes"])
         self.assertEqual(verified["GOE_FRAMEWORK_56"],"VERIFIED_REPRESENTATIVE_CODES")
         self.assertEqual(verified["GOE_2026_EVAL"],"VERIFIED_EXACT_CODE")
         self.assertEqual(verified["GOE_ENGLISH_56"],"VERIFIED_REPRESENTATIVE_CODES")
