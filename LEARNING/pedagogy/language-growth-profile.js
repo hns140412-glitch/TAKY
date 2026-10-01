@@ -86,6 +86,7 @@ function classify(rows=[]){
     average_score:null,max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
     minimal_hint_success_count:0,
+    explicit_challenge_success_count:0,
     max_success_expression_level:null
   };
 
@@ -96,10 +97,15 @@ function classify(rows=[]){
   const crossApp=apps.length>=2;
   const successfulChallenges=evaluable.filter(x=>x.outcome==='SUCCESS'&&x.assisted!==true);
   const minimalHintSuccess=successfulChallenges.filter(x=>
-    x.applied_hint_strength==='MINIMAL_CUE'||!x.applied_hint_strength).length;
+    x.applied_hint_strength==='MINIMAL_CUE').length;
   const expressionRanks=successfulChallenges.map(x=>expressionRank(x.applied_expression_level))
     .filter(Number.isFinite);
   const maxSuccessExpressionLevel=expressionRanks.length?Math.max(...expressionRanks):null;
+  const explicitChallengeSuccess=successfulChallenges.filter(x=>{
+    const rank=expressionRank(x.applied_expression_level);
+    return x.applied_hint_strength==='MINIMAL_CUE' ||
+      (Number.isFinite(rank)&&rank>=2&&x.applied_hint_strength!=='STRONG_SCAFFOLD');
+  }).length;
 
   let confidence='LOW';
   if(verified.length>=2||(evaluable.length>=4&&crossApp))confidence='HIGH';
@@ -113,8 +119,7 @@ function classify(rows=[]){
 
   const dimension=clean(rows[0]?.dimension).toUpperCase();
   const challengeSensitive=['EXPRESSION','THINKING','ENGLISH_THINKING'].includes(dimension);
-  const challengeReady=!challengeSensitive||verified.length>=1||
-    minimalHintSuccess>=1||Number(maxSuccessExpressionLevel)>=2;
+  const challengeReady=!challengeSensitive||explicitChallengeSuccess>=1;
   const stretchEvidence=
     avg>=0.80 &&
     unassisted>=2 &&
@@ -139,6 +144,7 @@ function classify(rows=[]){
     max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
     minimal_hint_success_count:minimalHintSuccess,
+    explicit_challenge_success_count:explicitChallengeSuccess,
     max_success_expression_level:maxSuccessExpressionLevel
   };
 }
