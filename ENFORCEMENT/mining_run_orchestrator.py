@@ -141,6 +141,7 @@ def orchestrate(payload: dict) -> dict:
     full_frontier = build_frontier(task, depth["research_depth_decision"], unbounded=True)
     frontier = build_frontier(task, depth["research_depth_decision"])
     index_rows = payload.get("index_rows") or []
+    source_constraints = task.get("source_constraints") or {}
     index_result = query_frontier(
         frontier,
         index_rows,
@@ -149,6 +150,8 @@ def orchestrate(payload: dict) -> dict:
         detail_rows=payload.get("detail_rows"),
         min_results=int(payload.get("index_min_results",1) or 1),
         top_k=int(payload.get("index_top_k",5) or 5),
+        allowed_source_families=source_constraints.get("acceptable_source_families"),
+        allowed_authority_classes=source_constraints.get("acceptable_authority_classes"),
     ) if frontier else {
         "schema":"TAKY_MINING_INDEX_FIRST_BRIDGE_V1",
         "resolved_from_index":[],
@@ -211,6 +214,8 @@ def orchestrate(payload: dict) -> dict:
             detail_rows=payload.get("detail_rows"),
             min_results=int(payload.get("index_min_results", 1) or 1),
             top_k=int(payload.get("index_top_k", 5) or 5),
+            allowed_source_families=source_constraints.get("acceptable_source_families"),
+            allowed_authority_classes=source_constraints.get("acceptable_authority_classes"),
         )
         next_pending = classify_pending(
             task, next_frontier, next_frontier, next_index,
