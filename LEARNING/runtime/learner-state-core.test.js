@@ -64,6 +64,29 @@ assert.equal(withReflection.inferred.repeated_confusion_signal,'REPEATED_SELF_RE
 assert.equal(withReflection.inferred.metacognitive_recall_signal,'KNEW_BUT_RECALL_FAILED_REPORTED');
 assert.equal(withReflection.model.mastery_estimate,null);
 
+
+const frictionRow={
+  event_id:'friction1',observed_at:'2026-09-28T09:00:00.000Z',
+  member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',
+  evidence_type:'READY_EXECUTION_FRICTION_OBSERVATION',
+  source_app:'ready-set',instrument_version:'READY_CARRY_FRICTION_V1',
+  observation_only:true,verified_outcome:null,
+  execution_friction:{
+    authority:'READY_EXECUTION_FRICTION_OBSERVATION_ONLY',
+    carry_over_depth:4,escalation_reason:'REPEATED_CARRY_LIMIT',
+    learner_state_authority:false
+  }
+};
+const withFriction=Core.deriveSkillState([...rows,frictionRow],
+  {member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'});
+assert.equal(withFriction.observed.ready_execution_friction_observation_count,1);
+assert.equal(withFriction.observed.performance_evidence_count,
+  a.observed.performance_evidence_count,
+  'Ready execution friction must not become learner performance evidence');
+assert.equal(withFriction.observed.verified_performance_count,
+  a.observed.verified_performance_count);
+assert.equal(withFriction.model.mastery_estimate,null);
+
 const math=Core.deriveSkillState(rows,{member_id:'A',subject:'수학',concept_skill_target:'FRACTION'});
 assert.equal(math.observed.unique_evidence_count,1);
 const childB=Core.deriveSkillState(rows,{member_id:'B',subject:'영어',concept_skill_target:'VOCABULARY'});
