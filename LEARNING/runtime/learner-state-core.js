@@ -8,7 +8,7 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(SelfReflection,RetentionBaseline,RecoveryProfile){
   'use strict';
 
-  const VERSION='TAKY_LEARNING_ENGINE_CORE_V2_0_2';
+  const VERSION='TAKY_LEARNING_ENGINE_CORE_V2_1_0';
   const clean=v=>String(v??'').trim();
   const finite=v=>Number.isFinite(Number(v))?Number(v):null;
 
@@ -90,6 +90,33 @@
       'READY_EXECUTION_FRICTION_OBSERVATION'
     ].includes(clean(e.evidence_type)));
     const performanceSpacedDays=new Set(performanceEvidence.map(e=>clean(e.observed_at).slice(0,10)).filter(Boolean));
+    const verifiedAccuracyEvidence=performanceEvidence.filter(e=>
+      (e.verified_outcome===0||e.verified_outcome===1)&&
+      e?.verification?.authority==='LEARNING_VERIFICATION_RECEIPT'&&
+      clean(e?.verification?.receipt_id)
+    );
+    const verifiedCorrectCount=verifiedAccuracyEvidence.filter(e=>e.verified_outcome===1).length;
+    const verifiedIncorrectCount=verifiedAccuracyEvidence.filter(e=>e.verified_outcome===0).length;
+    const verifiedAccuracyRate=verifiedAccuracyEvidence.length
+      ?verifiedCorrectCount/verifiedAccuracyEvidence.length:null;
+    const unassistedAccuracyEvidence=verifiedAccuracyEvidence.filter(e=>
+      e.assisted===false||clean(e.assistance)==='UNASSISTED');
+    const unassistedCorrectCount=unassistedAccuracyEvidence.filter(e=>e.verified_outcome===1).length;
+    const unassistedAccuracyRate=unassistedAccuracyEvidence.length
+      ?unassistedCorrectCount/unassistedAccuracyEvidence.length:null;
+    const accuracyInstruments=[...new Set(
+      verifiedAccuracyEvidence.map(e=>clean(e.instrument_version)).filter(Boolean)
+    )].sort();
+    const accuracyInstrumentMixed=accuracyInstruments.length>1;
+    const accuracySignal=verifiedAccuracyEvidence.length===0
+      ?'NO_VERIFIED_ACCURACY_EVIDENCE'
+      :verifiedAccuracyEvidence.length<3
+        ?'VERIFIED_ACCURACY_SPARSE'
+        :verifiedAccuracyRate<0.5
+          ?'VERIFIED_ACCURACY_LOW'
+          :verifiedAccuracyRate<0.8
+            ?'VERIFIED_ACCURACY_MIXED'
+            :'VERIFIED_ACCURACY_HIGH';
     const memoryEvidence=performanceEvidence.filter(e=>clean(e.evidence_type)==='MEMORY_RETRIEVAL_EVIDENCE');
     const memoryInstrumentVersions=[...new Set(memoryEvidence.map(e=>clean(e.instrument_version)).filter(Boolean))].sort();
     const instrumentChangeDetected=memoryInstrumentVersions.length>1;
@@ -146,7 +173,15 @@
           clean(e.evidence_type)==='READY_EXECUTION_FRICTION_OBSERVATION').length,
         self_reflection_count:reflectionSummary.reflection_count,
         self_reflection:reflectionSummary,
-        verified_performance_count:performanceEvidence.filter(e=>e.verified_performance===true).length,
+        verified_performance_count:verifiedAccuracyEvidence.length,
+        verified_correct_count:verifiedCorrectCount,
+        verified_incorrect_count:verifiedIncorrectCount,
+        verified_accuracy_rate:Number.isFinite(verifiedAccuracyRate)
+          ?Math.round(verifiedAccuracyRate*1000)/1000:null,
+        verified_unassisted_accuracy_count:unassistedAccuracyEvidence.length,
+        verified_unassisted_accuracy_rate:Number.isFinite(unassistedAccuracyRate)
+          ?Math.round(unassistedAccuracyRate*1000)/1000:null,
+        accuracy_instrument_versions:accuracyInstruments,
         memory_strength_values:memoryStrengths,
         max_review_priority:priorities.length?Math.max(...priorities):null,
         instrument_versions:instrumentVersions,
@@ -156,6 +191,9 @@
       },
       inferred:{
         evidence_sufficiency:evidenceSufficiency(performanceEvidence.length,performanceSpacedDays.size),
+        accuracy_signal:accuracySignal,
+        accuracy_instrument_mixed:accuracyInstrumentMixed,
+        accuracy_is_descriptive_not_mastery:true,
         memory_baseline_median:Number.isFinite(priorMedian)?Math.round(priorMedian*10)/10:null,
         latest_memory_strength:latestStrength,
         memory_delta:Number.isFinite(delta)?Math.round(delta*10)/10:null,
@@ -181,7 +219,8 @@
       },
       explanation:{
         trend_basis:'latest memory strength vs prior median; disabled across mixed instrument versions unless explicitly allowed',
-        mastery_basis:'not estimated until a calibrated estimator is bound; self-reflection and Ready execution friction are observation-only and excluded from performance targets',
+        mastery_basis:'not estimated until a calibrated estimator is bound; verified accuracy is descriptive evidence, not mastery; self-reflection and Ready execution friction are observation-only and excluded from performance targets',
+        accuracy_basis:'verified_outcome with LEARNING_VERIFICATION_RECEIPT only; unverified completion, app score and growth-rubric dimension outcomes do not enter accuracy',
         retention_basis:'retention-state baseline is advisory-only until real time-held-out promotion gates pass',
         recovery_basis:'recovery profile is observational and item-scoped; missing target identity is not inferred',
         scheduling_basis:'Core emits no dated schedule'
@@ -190,7 +229,8 @@
       invalid_evidence:invalid,
       policy_provenance:{
         trend_delta_threshold:trendThreshold,
-        allow_mixed_instruments:options.allow_mixed_instruments===true
+        allow_mixed_instruments:options.allow_mixed_instruments===true,
+        verified_accuracy_minimum_for_non_sparse_signal:3
       },
       cannot_influence:['SCHEDULE_DATE','PLANNER_DATE','DUE_AT','DEADLINE','ASSIGNMENT_FACT']
     };
