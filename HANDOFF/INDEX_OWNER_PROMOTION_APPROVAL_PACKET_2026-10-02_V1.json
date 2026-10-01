@@ -1,0 +1,109 @@
+{
+  "schema": "TAKY_INDEX_OWNER_PROMOTION_APPROVAL_PACKET_2026-10-02_V1",
+  "status": "READY_FOR_HUMAN_APPROVAL__NO_PROMOTION_EXECUTED",
+  "created_date": "2026-10-02",
+  "authority": "PROMOTION_APPROVAL_PACKET_ONLY",
+  "promotion_executed": false,
+  "decisions": [
+    {
+      "decision_id": "PROMOTE_CURRICULUM_177_TO_CENTRAL_INDEX",
+      "candidate": "MIGRATION/CURRICULUM/READY_OFFICIAL_STANDARD_REGISTRY_2026-10-02_V1.json",
+      "precheck": "MIGRATION/INDEX_OWNER/CURRICULUM_177_PRECHECK_2026-10-02_V1.json",
+      "readiness": "READY_FOR_FORMAL_INDEX_OWNER_PROMOTION_DECISION",
+      "evidence": {
+        "record_count": 177,
+        "unique_codes": 177,
+        "source_content_precheck_complete": true,
+        "subjects": {
+          "국어": 34,
+          "수학": 45,
+          "사회": 27,
+          "과학": 51,
+          "영어": 20
+        }
+      },
+      "proposed_promotion": {
+        "central_index_authority": true,
+        "canonical_promotion": false,
+        "index_state": "INDEXED",
+        "learning_evidence_role": "CURRICULUM_ALIGNMENT",
+        "learning_index_consumption_allowed_after_index_owner_receipt": true
+      },
+      "hard_guards": [
+        "INDEXED != CANONICAL",
+        "CURRICULUM_ALIGNMENT != LEXICAL_SEMANTICS",
+        "TERM_MATCH != LEARNER_UNDERSTANDING",
+        "NO_LEARNER_STATE_OR_SCHEDULE_FIELDS"
+      ],
+      "human_approval_required": true
+    },
+    {
+      "decision_id": "PROMOTE_OEWN_2025_TO_CENTRAL_INDEX",
+      "candidate": "ENGLISH_LEXICAL_OEWN_2025",
+      "precheck": "MIGRATION/INDEX_OWNER/OEWN_2025_LEXICAL_PRECHECK_2026-10-02_V1.json",
+      "readiness": "READY_FOR_FORMAL_INDEX_OWNER_PROMOTION_DECISION",
+      "evidence": {
+        "source": "Open English WordNet 2025",
+        "release_date": "2025-12-31",
+        "license": "CC-BY-4.0",
+        "source_and_license_precheck_complete": true
+      },
+      "proposed_promotion": {
+        "central_index_authority": true,
+        "canonical_promotion": false,
+        "index_state": "INDEXED",
+        "learning_evidence_role": "LEXICAL_SEMANTICS",
+        "runtime_use": "SOURCE_GLOSS_AS_TRACEABLE_LEXICAL_EVIDENCE_ONLY",
+        "easy_english_definition": "DERIVED_TRACEABLE_PARAPHRASE_ONLY",
+        "attribution_required": true
+      },
+      "hard_guards": [
+        "OEWN_GLOSS != CHILD_LEVEL_EASY_ENGLISH",
+        "LEXICAL_SEMANTICS != CURRICULUM_ALIGNMENT",
+        "NO_GRADE_AUTHORITY",
+        "NO_LEARNER_STATE_AUTHORITY",
+        "CC_BY_ATTRIBUTION_REQUIRED"
+      ],
+      "human_approval_required": true
+    },
+    {
+      "decision_id": "HOLD_UD_EWT_LANGUAGE_USAGE",
+      "candidate": "ENGLISH_USAGE_UD_EWT",
+      "readiness": "NOT_READY_FOR_RUNTIME_PROMOTION",
+      "evidence": {
+        "source": "Universal Dependencies English EWT",
+        "license": "CC-BY-SA-4.0",
+        "genres": [
+          "blog",
+          "social",
+          "reviews",
+          "email",
+          "web"
+        ]
+      },
+      "hold_reasons": [
+        "SHARE_ALIKE_COMPATIBILITY_REVIEW_OPEN",
+        "DOMAIN_COVERAGE_LIMITED",
+        "CORPUS_USAGE_EVIDENCE_CANNOT_BE_UNIVERSAL_NATURALNESS_TRUTH"
+      ],
+      "proposed_action": "KEEP_AS_PRECHECK_CANDIDATE",
+      "human_approval_required": false
+    }
+  ],
+  "execution_order_if_approved": [
+    "INDEX_OWNER_RECEIPT_FOR_CURRICULUM_177",
+    "INDEX_OWNER_RECEIPT_FOR_OEWN_2025",
+    "REBUILD_SEARCH_AND_LEARNING_PROJECTIONS",
+    "RUN_ROLE_SPECIFIC_REFERENCE_GAP_REGRESSION",
+    "RUN_CROSS_REPO_AUTHORITY_REGRESSION",
+    "STOP_BEFORE_MAIN_CURRENT_OR_DEPLOYMENT"
+  ],
+  "global_guards": [
+    "APPROVAL_PACKET != APPROVAL",
+    "INDEXED != CANONICAL",
+    "NO_MAIN_MERGE",
+    "NO_CURRENT_PROMOTION",
+    "NO_NETLIFY_DEPLOYMENT",
+    "HUMAN_APPROVAL_REQUIRED_FOR_INDEX_AUTHORITY_PROMOTION"
+  ]
+}
