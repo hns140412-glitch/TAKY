@@ -22,6 +22,7 @@ on:
       - 'LEARNING/runtime/learning-engine-runtime.js'
       - 'LEARNING/runtime/learning-engine-runtime-policy.test.js'
       - 'LEARNING/runtime/learning-engine-learning-index-integration.test.js'
+      - 'LEARNING/runtime/learning-engine-language-growth-integration.test.js'
       - 'LEARNING/lifecycle/outcome-growth-feedback.js'
       - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
@@ -69,10 +70,16 @@ jobs:
         run: node LEARNING/adapters/canonical-evidence.test.js
       - name: Hide vocabulary routing policy
         run: node LEARNING/pedagogy/hide-vocabulary-routing-policy.test.js
+      - name: Language growth profile
+        run: node LEARNING/pedagogy/language-growth-profile.test.js
+      - name: Growth next-step policy
+        run: node LEARNING/pedagogy/growth-next-step-policy.test.js
       - name: Learning runtime policy integration
         run: node LEARNING/runtime/learning-engine-runtime-policy.test.js
       - name: Learning runtime consumes Learning Index
         run: node LEARNING/runtime/learning-engine-learning-index-integration.test.js
+      - name: Learning runtime language growth integration
+        run: node LEARNING/runtime/learning-engine-language-growth-integration.test.js
       - name: Central decision API including Hide specialist policy
         run: node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Existing learner state regression
