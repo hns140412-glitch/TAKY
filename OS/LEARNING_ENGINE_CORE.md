@@ -1077,11 +1077,29 @@ Hide memory results inside Ready may be normalized or projected for compatibilit
 If review need exists, Ready returns:
 CENTRAL_LEARNING_ENGINE_REVIEW_REQUIRED
 
-Carry-over friction may become:
-READY_EXECUTION_FRICTION_OBSERVATION_ONLY
+Carry-over escalation is routed by cause before Learning Engine use:
+
+SCHEDULE / DEADLINE PRESSURE:
+- DEADLINE_EXCEEDED
+- REPEATED_CARRY_NEAR_DEADLINE
+-> READY_SET_PLANNER_AND_PARENT
+-> NOT Learning performance evidence
+
+REPEATED EXECUTION FRICTION:
+- REPEATED_CARRY_LIMIT
+-> READY_EXECUTION_FRICTION_OBSERVATION_ONLY
+-> authenticated central observation outbox
+-> canonical READY_EXECUTION_FRICTION_OBSERVATION
+-> excluded from learner performance counts
+-> no immediate pedagogical conclusion
+-> no direct Planner mutation
 
 The carry remains preserved until an authorized path resolves it.
 No local reinterpretation or Planner mutation is performed from that observation.
+
+Hard lock:
+EXECUTION FRICTION != LEARNING FAILURE
+DEADLINE PRESSURE != LEARNER STATE
 
 Canonical authority route:
 
