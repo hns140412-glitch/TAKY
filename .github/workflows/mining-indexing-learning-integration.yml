@@ -19,6 +19,16 @@ on:
       - 'LEARNING/lifecycle/outcome-growth-feedback.test.js'
       - 'ENFORCEMENT/learning_evidence_gap_broker.py'
       - 'ENFORCEMENT/learning_evidence_gap_broker_test.py'
+      - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
+      - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
+      - 'ENFORCEMENT/mining_run_orchestrator.py'
+      - 'ENFORCEMENT/mining_run_orchestrator_test.py'
+      - 'ENFORCEMENT/mining_index_bridge.py'
+      - 'ENFORCEMENT/mining_index_bridge_test.py'
+      - 'ENFORCEMENT/mining_core.py'
+      - 'ENFORCEMENT/mining_core_test.py'
+      - 'ENFORCEMENT/mining_provider_execution_loop.py'
+      - 'ENFORCEMENT/mining_provider_execution_loop_test.py'
       - 'ENFORCEMENT/reference_intake_executor.py'
       - 'ENFORCEMENT/reference_intake_executor_test.py'
       - 'ENFORCEMENT/runtime_orchestrator.py'
@@ -54,6 +64,21 @@ jobs:
       - name: Index-first evidence gap broker
         working-directory: ENFORCEMENT
         run: python learning_evidence_gap_broker_test.py
+      - name: Learning gap to Mining runtime bridge
+        working-directory: ENFORCEMENT
+        run: python learning_mining_runtime_bridge_test.py
+      - name: Mining V2 index constraint regression
+        working-directory: ENFORCEMENT
+        run: python mining_index_bridge_test.py
+      - name: Mining V2 runtime orchestrator regression
+        working-directory: ENFORCEMENT
+        run: python mining_run_orchestrator_test.py
+      - name: Mining V2 core regression
+        working-directory: ENFORCEMENT
+        run: python mining_core_test.py
+      - name: Mining V2 provider request regression
+        working-directory: ENFORCEMENT
+        run: python mining_provider_execution_loop_test.py
       - name: Full Mining Indexing Learning growth E2E
         working-directory: ENFORCEMENT
         run: python cross_engine_growth_e2e_test.py
