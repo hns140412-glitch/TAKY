@@ -54,11 +54,30 @@ assert.equal(A.validateCanonical(hideGrowth).ok,true);
 
 const snap=A.fromSnap({
   event_id:'s1',source:'snap-pop',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T08:00:00.000Z',
-  payload:{child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean'}
+  payload:{
+    child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean',
+    growth_intent_ref:'TAKY_GROWTH_NEXT_STEP_POLICY_V2',
+    growth_control_applied:{
+      evidence_confidence:'MEDIUM',
+      learning_intensity:'STRETCH_TRANSFER',
+      expression_level:'L4_REASONED_RESPONSE',
+      question_depth:4,
+      hint_strength:'MINIMAL_CUE',
+      hint_fade:'MINIMAL_CUE',
+      challenge_direction:'TRANSFER'
+    },
+    growth_signals:[
+      {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true,depth:4}
+    ]
+  }
 },ctx);
 assert.equal(snap.evidence_type,'LEARNER_PRODUCTION_EVIDENCE');
 assert.equal(snap.production.child_authored,true);
 assert.equal(snap.verified_outcome,null,'child authored completion is not objective mastery');
+assert.equal(snap.growth_execution_context.authority,'SPECIALIST_EXECUTION_CONTEXT_ONLY');
+assert.equal(snap.growth_execution_context.expression_level,'L4_REASONED_RESPONSE');
+assert.equal(snap.growth_execution_context.engine_authority,false);
+assert.equal(snap.raw_app_signals.growth_intent_ref,'TAKY_GROWTH_NEXT_STEP_POLICY_V2');
 assert.equal(A.validateCanonical(snap).ok,true);
 
 const ready=A.fromReady({
