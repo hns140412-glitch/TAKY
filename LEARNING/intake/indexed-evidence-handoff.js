@@ -34,7 +34,7 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       try { owner=independentIndexOwnerVerifier(sourceId,sourceRef); }
       catch (_) { issues.push('INDEX_OWNER_REVIEW_UNAVAILABLE:'+index); }
     }
-    const sourceFields=['source_family','source_type','authority_class','detail_anchor'];
+    const sourceFields=['source_family','source_type','authority_class','detail_anchor','learning_evidence_kind'];
     const proposedProvenance=Array.isArray(row.provenance)?row.provenance.filter(Boolean):[];
     const ownerProvenance=Array.isArray(owner?.provenance)?owner.provenance.filter(Boolean):[];
     const ownerEvidence=owner?.review_evidence_refs;
@@ -60,6 +60,7 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       source_type:row.source_type||null,
       authority_class:row.authority_class||null,
       detail_anchor:row.detail_anchor||null,
+      learning_evidence_kind:row.learning_evidence_kind||null,
       relations:Array.isArray(row.relations)?row.relations:[],
       provenance,
       retrieval_rank:Number.isFinite(row.retrieval_rank)?row.retrieval_rank:null,
@@ -78,7 +79,8 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
     requested_claims:[...requestedClaims],
     provenance:[...row.provenance],
     source_id:row.source_id,
-    source_ref:row.source_ref
+    source_ref:row.source_ref,
+    learning_evidence_kind:row.learning_evidence_kind||null
   }));
 
   return {
