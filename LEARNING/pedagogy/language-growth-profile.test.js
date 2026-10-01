@@ -100,7 +100,7 @@ const minimallyCued=P.derive({
         hint_strength:'MINIMAL_CUE'
       },
       language_growth_signals:[
-        {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true}
+        {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true,target_id:'prompt:a'}
       ]
     },
     {
@@ -120,8 +120,38 @@ const minimallyCued=P.derive({
 assert.equal(minimallyCued.dimensions.EXPRESSION.state,'READY_TO_STRETCH');
 assert.equal(minimallyCued.dimensions.EXPRESSION.minimal_hint_success_count,2);
 assert.equal(minimallyCued.dimensions.EXPRESSION.max_success_expression_level,3);
+assert.equal(minimallyCued.dimensions.EXPRESSION.distinct_target_count,1);
+assert.equal(minimallyCued.dimensions.EXPRESSION.target_scope_signal,'SINGLE_TARGET_ONLY');
+assert.equal(minimallyCued.dimensions.EXPRESSION.generalization_ready,false);
 
 
+
+
+
+const multiTarget=P.derive({
+  learner_context:{grade:5},
+  evidence:[
+    {
+      event_id:'mt1',observed_at:'2026-10-01T00:00:00Z',source_app:'hide-seek',
+      verified_outcome:1,verification:{authority:'LEARNING_VERIFICATION_RECEIPT'},
+      growth_execution_context:{expression_level:'L3_EXPANDED_SENTENCE',hint_strength:'MINIMAL_CUE'},
+      language_growth_signals:[
+        {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true,target_id:'prompt:a'}
+      ]
+    },
+    {
+      event_id:'mt2',observed_at:'2026-10-02T00:00:00Z',source_app:'snap-pop',
+      growth_execution_context:{expression_level:'L3_EXPANDED_SENTENCE',hint_strength:'MINIMAL_CUE'},
+      language_growth_signals:[
+        {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true,target_id:'prompt:b'}
+      ]
+    }
+  ]
+});
+assert.equal(multiTarget.dimensions.EXPRESSION.state,'READY_TO_STRETCH');
+assert.equal(multiTarget.dimensions.EXPRESSION.distinct_target_count,2);
+assert.equal(multiTarget.dimensions.EXPRESSION.target_scope_signal,'MULTI_TARGET_EVIDENCE');
+assert.equal(multiTarget.dimensions.EXPRESSION.generalization_ready,true);
 
 const oldStrongRecentWeak=[];
 for(let i=1;i<=10;i++){
