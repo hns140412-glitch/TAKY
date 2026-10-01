@@ -1,0 +1,124 @@
+{
+  "schema": "TAKY_LEARNING_REFERENCE_ROLE_MIGRATION_CANDIDATE_V1",
+  "status": "AWAITING_CENTRAL_INDEX_OWNER_REVIEW",
+  "created_date": "2026-10-02",
+  "purpose": "Map existing Drive learning references into explicit Learning Index evidence roles without promoting them to central source authority.",
+  "authority_guards": {
+    "central_index_authority": false,
+    "canonical_promotion": false,
+    "learning_index_runtime_consumption_before_index_owner_review": false,
+    "mined_reference_is_not_authority": true,
+    "source_role_does_not_expand_beyond_source_evidence": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "LRM-NIKL-CTX-V3",
+      "drive_file_id": "1ANxmf-PwVdWCrqeoh55qae0R8OhqrKFBogACjqzmB0c",
+      "title": "NIKL_CONTEXTUAL_LEXEME_EVIDENCE_2026-09-23_V3.json",
+      "source_state": "MINED_REFERENCE_ONLY",
+      "source_canonical": false,
+      "proposed_learning_evidence_role": "LEXICAL_SEMANTICS",
+      "proposed_scope": "CONTEXT_SPECIFIC_LEXEME_BINDING_ONLY",
+      "allowed_use": [
+        "context-specific lexeme/sense disambiguation",
+        "meaning evidence candidate with preserved source context",
+        "confusion/contrast support when the exact binding is evidenced"
+      ],
+      "forbidden_use": [
+        "global single-sense claim",
+        "grade membership as semantic authority",
+        "English easy-definition authority",
+        "automatic learner mastery inference"
+      ],
+      "required_guards": [
+        "GRADE_COMPATIBILITY != SEMANTIC_AUTHORITY",
+        "ONE_CONTEXT_BINDING != GLOBAL_SINGLE_SENSE",
+        "TOOL_TOKEN != LEXEME_UNTIL_CONTEXT_RESOLVED"
+      ],
+      "provenance_tags_candidate": [
+        "LEXICAL_REFERENCE_SOURCE",
+        "NIKL_SOURCE_REF",
+        "CONTEXT_SPECIFIC_LEXEME_BINDING"
+      ],
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "LRM-WRITING-CORPUS-2024",
+      "drive_file_id": "1OjH_zfDdyXduNSuCUfPbd5Eo8_Uci2ShIVqJoiZwGDs",
+      "title": "STRUCTURED_WRITING_CORPUS_MINING_2026-09-22_V1.json",
+      "source_state": "MINED_OFFICIAL_EDUCATION_CORPUS",
+      "source_canonical": false,
+      "stated_source_authority": "INCHEON_EDUCATION_2024_OFFICIAL",
+      "proposed_learning_evidence_role": "PEDAGOGICAL_USAGE",
+      "secondary_role_candidates": [
+        {
+          "role": "CURRICULUM_ALIGNMENT",
+          "condition": "Only for explicitly cited curriculum_links / official source pointers; do not inherit from the corpus globally."
+        }
+      ],
+      "allowed_use": [
+        "writing-process scaffolding candidate",
+        "genre-specific rubric dimensions",
+        "revision/feedback sequence",
+        "grade-band writing progression candidate"
+      ],
+      "forbidden_use": [
+        "generic English collocation authority",
+        "global writing ability inference",
+        "rubric score as mastery",
+        "genre performance generalized to all writing"
+      ],
+      "required_guards": [
+        "RUBRIC SCORE != GLOBAL WRITING ABILITY",
+        "GENRE PERFORMANCE != TRANSFER TO ALL WRITING",
+        "MODEL TEXT IMITATION != INDEPENDENT MASTERY"
+      ],
+      "provenance_tags_candidate": [
+        "PEDAGOGICAL_SOURCE_REF",
+        "OFFICIAL_EDUCATION_SOURCE",
+        "WRITING_CORPUS_SOURCE_REF"
+      ],
+      "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "LRM-ROON-REFERENCE-2026-09-25",
+      "drive_file_id": "1yRtFgTrWDH9mGWRvGqUddcxF_1a_PGQhPOPMzFM4Flo",
+      "title": "MINED_EXTERNAL_REFERENCE_INTEGRATION_GONGYSD_SDKKIM_ROON_2026-09-25_V1",
+      "source_state": "REFERENCE_ONLY_MINED_PATTERN_CANDIDATE",
+      "source_canonical": false,
+      "proposed_learning_evidence_role": "PEDAGOGICAL_USAGE",
+      "allowed_use": [
+        "picture/context -> comprehension -> response -> expression-use teaching pattern reference",
+        "question/response and child-authorship design reference"
+      ],
+      "forbidden_use": [
+        "lexical-definition authority",
+        "claim that Ro-on uses TAKY's exact meaning-to-writing sequence",
+        "exact English-definition teaching method attribution",
+        "automatic runtime promotion from mined reference"
+      ],
+      "holds": [
+        "ROON_EXACT_ENGLISH_DEFINITION_METHOD_SOURCE_NEEDED",
+        "TAKY_ENGLISH_MEANING_TO_WRITING_BRIDGE_IS_SYNTHESIS"
+      ],
+      "provenance_tags_candidate": [
+        "PEDAGOGICAL_SOURCE_REF",
+        "REFERENCE_ONLY"
+      ],
+      "index_owner_review_required": true
+    }
+  ],
+  "unresolved_reference_roles": [
+    {
+      "role": "ENGLISH_LEXICAL_SEMANTICS",
+      "need": "Verified English lexical source for easy-English definitions / sense distinctions.",
+      "state": "OPEN"
+    },
+    {
+      "role": "ENGLISH_LANGUAGE_USAGE",
+      "need": "Verified English corpus/usage source for collocations, natural chunks and usage patterns.",
+      "state": "OPEN"
+    }
+  ],
+  "next_handoff": "INDEPENDENT_INDEX_OWNER_REVIEW_AND_ROLE_SPECIFIC_SOURCE_ACQUISITION_IF_GAPS_REMAIN"
+}
