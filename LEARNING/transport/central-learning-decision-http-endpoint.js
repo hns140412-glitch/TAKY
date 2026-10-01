@@ -55,11 +55,26 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
    return fail(413,'BOUNDED_JSON_BODY_REQUIRED');
   let input;
   try{input=JSON.parse(req.body)}catch{return fail(400,'VALID_JSON_REQUIRED')}
-  const allowed=new Set(['family_id','member_id','subject','concept_skill_target']);
+  const allowed=new Set(['family_id','member_id','subject','concept_skill_target','hide_vocabulary_context']);
   if(!object(input)||Object.keys(input).some(k=>!allowed.has(k))||
      ['family_id','member_id','subject','concept_skill_target']
       .some(k=>!clean(input[k])||clean(input[k]).length>128))
    return fail(400,'EXPLICIT_DECISION_SCOPE_ONLY_REQUIRED');
+  let hideVocabularyContext=null;
+  if(input.hide_vocabulary_context!==undefined){
+   const hv=input.hide_vocabulary_context;
+   const keys=new Set(['current_word_ids','past_word_ids']);
+   if(!object(hv)||Object.keys(hv).some(k=>!keys.has(k)))
+    return fail(400,'HIDE_VOCABULARY_CONTEXT_INVALID');
+   const validateIds=value=>Array.isArray(value)&&value.length<=120&&
+    value.every(x=>typeof x==='string'&&!!clean(x)&&clean(x).length<=128);
+   if(!validateIds(hv.current_word_ids||[])||!validateIds(hv.past_word_ids||[]))
+    return fail(400,'HIDE_VOCABULARY_CONTEXT_INVALID');
+   const current=[...new Set((hv.current_word_ids||[]).map(clean))];
+   const past=[...new Set((hv.past_word_ids||[]).map(clean).filter(x=>!current.includes(x)))];
+   if(current.length+past.length>160)return fail(400,'HIDE_VOCABULARY_CONTEXT_TOO_LARGE');
+   hideVocabularyContext={current_word_ids:current,past_word_ids:past};
+  }
   let principal;
   try{principal=await verifyBearerToken(match[1])}
   catch{return fail(401,'BEARER_IDENTITY_VERIFICATION_FAILED')}
@@ -110,7 +125,8 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
   let runtime;
   try{runtime=Runtime.derive({scope,evidence,
     observation_only:stored?.data?.observation_only||[],
-    indexed_evidence_handoff:indexedEvidenceHandoff},independentIndexOwnerVerifier)}
+    indexed_evidence_handoff:indexedEvidenceHandoff,
+    hide_vocabulary_context:hideVocabularyContext},independentIndexOwnerVerifier)}
   catch{return fail(503,'CENTRAL_RUNTIME_UNAVAILABLE')}
   if(!runtime.ok||!Runtime.validate(runtime).ok)
    return fail(503,'CENTRAL_RUNTIME_INVALID');
@@ -125,6 +141,7 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
   const safe={
    ok:true,authority:runtime.authority,engine_runtime:runtime.engine_runtime,
    scope:runtime.scope,decision:runtime.decision,
+   specialist_policy:runtime.specialist_policy||null,
    cannot_influence:runtime.cannot_influence,
    trace:{evidence_ids:runtime.trace.evidence_ids,
     decision_contract:runtime.trace.decision_contract,
