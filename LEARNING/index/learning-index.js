@@ -11,6 +11,7 @@ const GROUP_FIELDS=Object.freeze({
   semantics:['everyday_meaning','subject_specific_meaning','semantic_transparency','morpheme_decomposition_validity','etymology_confidence'],
   concept:['concept_node','candidate_prerequisites','related_terms','contrast_terms','confusion_terms','misconception_candidates','context_examples','representation_bridge'],
   cross_domain:['cross_subject_links','transfer_targets','publisher_overlay_optional'],
+  language_growth:['easy_english_definition','expression_chunks','natural_collocations','grammar_patterns','thinking_moves','question_stems','production_targets','english_thinking_support'],
   exposure:['curriculum_grade','actual_exposure_difficulty']
 });
 
