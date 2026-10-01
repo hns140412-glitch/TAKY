@@ -5,7 +5,8 @@ const IO=require('./learning-evidence-io-contract.js');
 
 const clean=v=>String(v??'').trim();
 
-function derive({decision={},growth_next_step=null,reference_gaps=[]}={}){
+function derive({decision={},growth_next_step=null,reference_gaps=[],
+  evidence_ids=[],source_refs=[]}={}){
   if(decision?.ok!==true)return {ok:false,reason:'DECISION_REQUIRED'};
 
   const adaptive=decision.adaptive_plan||{};
@@ -57,6 +58,11 @@ function derive({decision={},growth_next_step=null,reference_gaps=[]}={}){
       question_depth:growth.question_depth?JSON.parse(JSON.stringify(growth.question_depth)):null,
       hint_policy:growth.hint_policy?JSON.parse(JSON.stringify(growth.hint_policy)):null
     }:null,
+    basis:{
+      evidence_ids:[...new Set((Array.isArray(evidence_ids)?evidence_ids:[]).map(clean).filter(Boolean))].slice(0,128),
+      source_refs:[...new Set((Array.isArray(source_refs)?source_refs:[]).map(clean).filter(Boolean))].slice(0,128),
+      provenance_required:true
+    },
     reference_gaps:Array.isArray(reference_gaps)
       ?reference_gaps.map(x=>({...x,mining_request_authorized:false})) : [],
     cannot_influence:[
