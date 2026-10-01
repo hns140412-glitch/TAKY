@@ -265,23 +265,88 @@ Ready authority reconciliation:
 - Ready friction observation is centrally ACKed but cannot directly mutate Planner or learner state
 - latest Integration 36901050524: SUCCESS
 - latest Learning Runtime Bridge 36901050677: SUCCESS
-- latest Runtime E2E 36901050649: RUNNING_AT_HANDOFF_UPDATE
+- latest Runtime E2E 36901050649: SUCCESS
 
 Hide and Snap prior growth-axis branch regressions remain PASS.
 
-## 7. Remaining OPEN
+## 7. Resolved in this reconciliation
 
-1. Complete latest Ready Runtime E2E 36901050649.
-2. Target coverage guard:
-   - current growth profile tracks target_id but broad dimension promotion does not yet require explicit target diversity;
-   - repeated success on one target must not silently become broad vocabulary/expression growth;
-   - do not hard-code a minimum count yet because target-specific skills and verified transfer contexts need separate treatment;
-   - next design should distinguish TARGET_STABILITY from DIMENSION_GENERALIZATION.
-3. Ready friction interpretation:
-   - currently observation-only by design;
-   - repeated carry must not become learning failure automatically;
-   - any future diagnostic policy must separate workload/fatigue/context from learning difficulty.
-4. Keep memory-routing trio as Candidate until separate approval.
-5. Do not merge main / deploy yet.
-6. Before promotion, run one final cross-repository authority regression:
+### Verified accuracy — RESOLVED / CORE
+- receipt-backed verified_outcome 0/1 is a distinct descriptive accuracy axis;
+- app completion, growth rubric dimensions, self-report and Ready friction are excluded;
+- ACCURACY != MASTERY;
+- mixed instruments cannot trigger repair from aggregate accuracy alone.
+
+### Target coverage — RESOLVED / CORE
+- target-scoped READY_TO_STRETCH is allowed;
+- broad dimension TRANSFER_PUSH requires multi-target generalization evidence;
+- SAME TARGET SUCCESS != DIMENSION GENERALIZATION.
+
+### Ready authority / friction — RESOLVED / BRANCH VALIDATED
+- Ready local learner-adaptive execution is disabled / shadow-only;
+- deadline pressure -> Planner + Parent;
+- repeated execution friction -> central observation-only evidence;
+- Ready Integration 36901050524: SUCCESS;
+- Learning Runtime Bridge 36901050677: SUCCESS;
+- Ready Runtime E2E 36901050649: SUCCESS.
+
+## 8. Central source migration status
+
+### Curriculum
+Ready verified 5-6 grade-band registry:
+- total 177
+- Korean 34
+- Math 45
+- Social 27
+- Science 51
+- English 20
+
+Staged centrally as:
+MIGRATION/CURRICULUM/READY_OFFICIAL_STANDARD_REGISTRY_2026-10-02_V1.json
+
+State:
+- AWAITING_CENTRAL_INDEX_OWNER_REVIEW
+- central_index_authority = false
+- canonical_promotion = false
+- Learning Index consumption before review = false
+
+Migration gate:
+- Integration 36902376027: SUCCESS
+- Enforcement 36902376272: SUCCESS
+
+### Existing Drive learning references
+
+NIKL contextual lexeme V3:
+- proposed role: LEXICAL_SEMANTICS candidate
+- context-specific only
+- MINED_REFERENCE_ONLY
+- not canonical / not runtime-authoritative
+
+Structured official writing corpus:
+- proposed role: PEDAGOGICAL_USAGE candidate
+- curriculum links may be separately reviewed as CURRICULUM_ALIGNMENT
+- not generic English collocation authority
+- implementation authorization was NOT_YET in source artifact
+
+Ro-on mined reference:
+- proposed role: PEDAGOGICAL_USAGE / reference pattern only
+- exact English-definition teaching method remains HOLD / source needed
+- forbidden as lexical-definition authority
+
+Central role migration:
+MIGRATION/LEARNING_REFERENCE/DRIVE_LEARNING_REFERENCE_ROLE_MIGRATION_2026-10-02_V1.json
+
+All remain non-authoritative until independent Index Owner review.
+
+## 9. Remaining true OPEN
+
+1. Independent central Index Owner review / promotion of:
+   - 177-record curriculum migration candidate;
+   - Drive learning-reference role migration candidates.
+2. Verified English lexical authority for easy-English definitions / sense distinctions.
+3. Verified English language-usage authority for collocations / natural chunks / usage patterns.
+4. Ready execution friction remains observation-only unless later evidence proves a safe diagnostic policy.
+5. Keep per-word memory auto-routing / adaptive past-word proportion / delayed recall as CANDIDATE until separate approval.
+6. No main merge / deployment / Netlify.
+7. Before promotion, run final cross-repository authority regression:
    Mining / Index / Learning / Ready / Hide / Snap / Planner.
