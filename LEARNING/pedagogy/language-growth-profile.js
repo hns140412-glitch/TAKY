@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V3';
+const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V4';
 const DIMENSIONS=Object.freeze(['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']);
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
@@ -103,6 +103,18 @@ function classify(rows=[]){
   const verified=evaluable.filter(x=>x.verified===true);
   const observed=evaluable.filter(x=>x.verified!==true);
   const apps=[...new Set(evaluable.map(x=>clean(x.source_app)).filter(Boolean))];
+  const identifiedTargets=evaluable.map(x=>clean(x.target_id)).filter(Boolean);
+  const distinctTargets=[...new Set(identifiedTargets)];
+  const transferTargets=[...new Set(
+    evaluable.filter(x=>x.transfer===true).map(x=>clean(x.target_id)).filter(Boolean)
+  )];
+  const targetIdentityCoverage=evaluable.length?identifiedTargets.length/evaluable.length:0;
+  const targetScopeSignal=distinctTargets.length===0
+    ?'TARGET_IDENTITY_MISSING'
+    :distinctTargets.length===1
+      ?'SINGLE_TARGET_ONLY'
+      :'MULTI_TARGET_EVIDENCE';
+  const generalizationReady=distinctTargets.length>=2;
   const depths=rows.map(x=>x.depth).filter(Number.isFinite);
   const english=rows.map(x=>x.direct_english).filter(x=>typeof x==='boolean');
   const directRatio=english.length?english.filter(Boolean).length/english.length:null;
@@ -113,6 +125,11 @@ function classify(rows=[]){
     unassisted_count:0,transfer_count:rows.filter(x=>x.transfer===true).length,
     average_score:null,max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
+    distinct_target_count:distinctTargets.length,
+    transfer_target_count:transferTargets.length,
+    target_identity_coverage_ratio:Math.round(targetIdentityCoverage*1000)/1000,
+    target_scope_signal:targetScopeSignal,
+    generalization_ready:generalizationReady,
     minimal_hint_success_count:0,
     explicit_challenge_success_count:0,
     max_success_expression_level:null
@@ -171,6 +188,11 @@ function classify(rows=[]){
     average_score:Math.round(avg*100)/100,
     max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null,
+    distinct_target_count:distinctTargets.length,
+    transfer_target_count:transferTargets.length,
+    target_identity_coverage_ratio:Math.round(targetIdentityCoverage*1000)/1000,
+    target_scope_signal:targetScopeSignal,
+    generalization_ready:generalizationReady,
     minimal_hint_success_count:minimalHintSuccess,
     explicit_challenge_success_count:explicitChallengeSuccess,
     max_success_expression_level:maxSuccessExpressionLevel
@@ -276,7 +298,9 @@ function derive({evidence=[],learner_context={},window_policy={}}={}){
       scaffolded_success_does_not_auto_upshift_expression_level:true,
       recent_window_drives_immediate_support:true,
       stability_window_guards_promotion_and_demotion:true,
-      old_evidence_cannot_dominate_without_window_presence:true
+      old_evidence_cannot_dominate_without_window_presence:true,
+      target_scoped_stretch_is_not_dimension_generalization:true,
+      multi_target_evidence_required_for_dimension_generalization:true
     }
   };
 }
