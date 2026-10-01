@@ -63,6 +63,31 @@ class GapBrokerTest(unittest.TestCase):
    self.assertEqual(r["decision"],"INDEX_REQUERY")
    self.assertTrue(r["index_sufficient"])
 
+
+ def test_role_contract_cannot_be_bypassed_by_mismatched_any_of_tag(self):
+  with tempfile.TemporaryDirectory() as td:
+   index=Path(td)/"index.json"
+   gap=dict(LEXICAL_GAP)
+   gap["required_provenance_any_of"]=["OFFICIAL_EDUCATION_SOURCE"]
+   write_index(index,[{
+    "source_id":"EDU-WITH-LEXICAL-TEXT",
+    "title":"english vocabulary lexical semantics curriculum",
+    "source_family":"OFFICIAL_CURRICULUM","authority_level":"OFFICIAL",
+    "keywords":["english","vocabulary","LEXICAL_SEMANTICS"],
+    "provenance":["OFFICIAL_EDUCATION_SOURCE"]
+   }])
+   r=route_gap(gap,index_path=index)
+   self.assertEqual(r["decision"],"MINING_REQUEST")
+   self.assertEqual(r["mining_request"]["index_check"]["eligible_result_count"],0)
+
+ def test_unknown_learning_evidence_role_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   index=Path(td)/"index.json"; write_index(index,[])
+   gap=dict(LEXICAL_GAP); gap["required_learning_evidence_role"]="MAGIC_ROLE"
+   r=route_gap(gap,index_path=index)
+   self.assertFalse(r["pass"])
+   self.assertIn("LEARNING_EVIDENCE_ROLE_INVALID",r["detected"])
+
  def test_learner_gap_routes_specialist_not_mining(self):
   with tempfile.TemporaryDirectory() as td:
    index=Path(td)/"index.json"; write_index(index,[])
