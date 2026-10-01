@@ -80,7 +80,8 @@ class CrossEngineE2E(unittest.TestCase):
             rows=[{
                 "source_id":"SRC-OFFICIAL-1","title":"영어 VOCABULARY 교육과정",
                 "source_family":"OFFICIAL_STANDARDS_ACHIEVEMENT_LEVELS","source_type":"OFFICIAL_CURRICULUM",
-                "authority_level":"OFFICIAL","keywords":["영어","VOCABULARY","교육과정"]
+                "authority_level":"OFFICIAL","keywords":["영어","VOCABULARY","교육과정"],
+                "provenance":["OFFICIAL_STANDARD_REF"]
             }]
             write_index(index,rows)
 
@@ -148,7 +149,8 @@ class CrossEngineE2E(unittest.TestCase):
             rows.append({
                 "source_id":"SRC-WRITING-1","title":"영어 writing rubric process",
                 "source_family":"STRUCTURED_WRITING_CORPUS","source_type":"OFFICIAL_WRITING_REFERENCE",
-                "authority_level":"OFFICIAL","keywords":["영어","writing","rubric","process"]
+                "authority_level":"OFFICIAL","keywords":["영어","writing","rubric","process"],
+                "provenance":["WRITING_CORPUS_SOURCE_REF"]
             })
             write_index(index,rows)
             reverse2=route_gap(gap,index_path=index,min_results=1)
