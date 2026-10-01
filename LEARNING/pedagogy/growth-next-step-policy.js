@@ -31,14 +31,14 @@ function growthResources(learningIndex={}){
   const provenance=Object.fromEntries(Object.keys(buckets).map(k=>[k,[]]));
 
   const allowed={
-    easy_english_definitions:new Set(['LEXICAL_SEMANTICS','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
-    expression_chunks:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
-    natural_collocations:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
-    grammar_patterns:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE']),
-    thinking_moves:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
-    question_stems:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
-    production_targets:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE','GENERAL_REFERENCE']),
-    english_thinking_support:new Set(['PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT','GENERAL_REFERENCE'])
+    easy_english_definitions:new Set(['LEXICAL_SEMANTICS','PEDAGOGICAL_USAGE']),
+    expression_chunks:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE']),
+    natural_collocations:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE']),
+    grammar_patterns:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT']),
+    thinking_moves:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
+    question_stems:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
+    production_targets:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
+    english_thinking_support:new Set(['PEDAGOGICAL_USAGE'])
   };
 
   const fieldMap={
@@ -89,7 +89,9 @@ function growthResources(learningIndex={}){
       lexical_semantics_does_not_certify_grade_alignment:true,
       language_usage_does_not_certify_curriculum_alignment:true,
       source_role_consumed_from_learning_index_contract:true,
-      filename_or_title_role_inference_forbidden:true
+      filename_or_title_role_inference_forbidden:true,
+      curriculum_content_cannot_supply_lexical_or_usage_authority_by_presence_alone:true,
+      unclassified_general_reference_not_used_for_language_growth_resources:true
     }
   };
 }
