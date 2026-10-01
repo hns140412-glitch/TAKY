@@ -32,6 +32,7 @@ RECORDS = [
                 "origin_type": "LOCAL_EDUCATION_AUTHORITY_PUBLICATION",
                 "origin_locator": "https://example.invalid/phonics",
                 "publisher_or_account": "SEOUL_EDU",
+                "evidence_tags": ["OFFICIAL_EDUCATION_SOURCE"],
             },
             "classification": {
                 "source_family": "SEOUL_PHONICS_STUDENT_BOOK",
@@ -139,6 +140,7 @@ assert r["results"][0]["source_ref"]["source_id"] == "SRC-001"
 assert r["results"][0]["source_ref"]["locator"] == "DATA/phonics.pdf"
 assert r["results"][0]["provenance"]["origin_type"] == "LOCAL_EDUCATION_AUTHORITY_PUBLICATION"
 assert r["results"][0]["provenance"]["publisher_or_account"] == "SEOUL_EDU"
+assert r["results"][0]["provenance_tags"] == ["OFFICIAL_EDUCATION_SOURCE"]
 
 # 9. search projection does not expose domain decision fields as core result data
 r = search(records, "학습도구어")
