@@ -65,6 +65,38 @@ assert.equal(withReflection.inferred.metacognitive_recall_signal,'KNEW_BUT_RECAL
 assert.equal(withReflection.model.mastery_estimate,null);
 
 
+const readyExecutionRow={
+  event_id:'ready-exec-1',observed_at:'2026-09-28T08:30:00.000Z',
+  member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',
+  evidence_type:'READY_EXECUTION_FACT',
+  source_app:'ready-set',instrument_version:'READY_EXECUTION_FACT_V1',
+  observation_only:true,verified_outcome:null,
+  raw_app_signals:{completion_state:'PARTIAL',actual_minutes:25,performed_quantity:3}
+};
+const imaginationRow={
+  event_id:'imagination-1',observed_at:'2026-09-28T08:45:00.000Z',
+  member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',
+  evidence_type:'LEARNING_SUPPORT_OBSERVATION',
+  source_app:'imagination-cloud',instrument_version:'IMAGINATION_CLOUD_V1',
+  observation_only:true,verified_outcome:null,
+  support_observation:{
+    authority:'IMAGINATION_CLOUD_SUPPORT_OBSERVATION_ONLY',
+    additional_help_needed:true,curiosity_only:false,
+    learner_state_authority:false,schedule_authority:false
+  }
+};
+const withExecutionContext=Core.deriveSkillState(
+  [...rows,readyExecutionRow,imaginationRow],
+  {member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY'}
+);
+assert.equal(withExecutionContext.observed.ready_execution_fact_count,1);
+assert.equal(withExecutionContext.observed.imagination_support_observation_count,1);
+assert.equal(withExecutionContext.observed.performance_evidence_count,
+  a.observed.performance_evidence_count);
+assert.equal(withExecutionContext.observed.verified_performance_count,
+  a.observed.verified_performance_count);
+assert.equal(withExecutionContext.model.mastery_estimate,null);
+
 const frictionRow={
   event_id:'friction1',observed_at:'2026-09-28T09:00:00.000Z',
   member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',
