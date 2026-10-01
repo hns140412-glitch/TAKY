@@ -73,6 +73,13 @@ const parse=r=>JSON.parse(r.body);
   assert.equal(d.runtime_result.authority,'TAKY_LEARNING_ENGINE_CORE');
   assert.equal(d.runtime_result.decision.authority,'LEARNING_DECISION_INTENT_ONLY');
   assert.equal(d.runtime_result.decision.consumer_contract.planner,'OWNS_DATED_ALLOCATION');
+  assert.equal(d.runtime_result.learning_output.authority,'TAKY_LEARNING_ENGINE_CORE');
+  assert.equal(d.runtime_result.learning_output.date_authority,false);
+  assert.equal(d.runtime_result.learning_output.allocated_quantity_authority,false);
+  assert.equal(d.runtime_result.learning_output.recommended_quantity.authority,
+   'LEARNING_ENGINE_QUANTITY_INTENT_ONLY');
+  assert.equal(d.runtime_result.learning_output.recommended_quantity.planner_must_materialize,true);
+  assert.equal(d.runtime_result.learning_output.recommended_quantity.allocated_quantity,null);
   assert.equal(d.runtime_result.trace.verified_evidence_count,1);
   assert.equal(d.runtime_result.trace.verified_receipt_id,issued.receipt.receipt_id);
   assert(!decided.body.includes('scope_receipts'));
@@ -180,6 +187,9 @@ const parse=r=>JSON.parse(r.body);
   assert.equal(growthBody.runtime_result.growth_profile.learner_context.grade,5);
   assert.equal(growthBody.runtime_result.growth_profile.learner_context.language_load,'SIMPLE');
   assert.equal(growthBody.runtime_result.growth_next_step.authority,'LEARNING_ENGINE_GROWTH_INTENT_ONLY');
+  assert.equal(growthBody.runtime_result.learning_output.next_growth_intent.authority,
+   'LEARNING_ENGINE_GROWTH_INTENT_ONLY');
+  assert.equal(growthBody.runtime_result.learning_output.date_authority,false);
   assert.equal(growthBody.runtime_result.growth_next_step.version,'TAKY_GROWTH_NEXT_STEP_POLICY_V2');
   assert.ok(['LOW','MEDIUM','HIGH'].includes(growthBody.runtime_result.growth_next_step.growth_control.evidence_confidence));
   assert.ok(['SUPPORT_BUILD','BUILD_CONNECT','STRETCH_TRANSFER'].includes(growthBody.runtime_result.growth_next_step.growth_control.learning_intensity));
