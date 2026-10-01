@@ -3,6 +3,7 @@
 const VERSION='TAKY_GROWTH_NEXT_STEP_POLICY_V2';
 const AUTHORITY='LEARNING_ENGINE_GROWTH_INTENT_ONLY';
 const Profile=require('./language-growth-profile.js');
+const UsageEvidence=require('../contracts/language-usage-evidence-kind-contract.js');
 const clean=v=>String(v??'').trim();
 
 function sourceRole(item={}){
@@ -23,6 +24,7 @@ function growthResources(learningIndex={}){
     expression_chunks:[],
     natural_collocations:[],
     grammar_patterns:[],
+    usage_example_sentences:[],
     thinking_moves:[],
     question_stems:[],
     production_targets:[],
@@ -35,6 +37,7 @@ function growthResources(learningIndex={}){
     expression_chunks:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE']),
     natural_collocations:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE']),
     grammar_patterns:new Set(['LANGUAGE_USAGE','PEDAGOGICAL_USAGE','CURRICULUM_ALIGNMENT']),
+    usage_example_sentences:new Set(['LANGUAGE_USAGE']),
     thinking_moves:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
     question_stems:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
     production_targets:new Set(['CURRICULUM_ALIGNMENT','PEDAGOGICAL_USAGE']),
@@ -46,6 +49,7 @@ function growthResources(learningIndex={}){
     expression_chunks:'expression_chunks',
     natural_collocations:'natural_collocations',
     grammar_patterns:'grammar_patterns',
+    usage_example_sentences:'usage_example_sentences',
     thinking_moves:'thinking_moves',
     question_stems:'question_stems',
     production_targets:'production_targets',
@@ -62,8 +66,23 @@ function growthResources(learningIndex={}){
   for(const item of rows){
     const role=sourceRole(item);
     const g=item?.semantic_groups?.language_growth||{};
+    const usageKind=UsageEvidence.normalize(item.learning_evidence_kind);
+    const languageUsageAllowed=bucket=>{
+      if(role!=='LANGUAGE_USAGE')return true;
+      if(!usageKind)return false;
+      if(bucket==='usage_example_sentences')
+        return UsageEvidence.permits(usageKind,'CONTEXT_EXAMPLE');
+      if(bucket==='natural_collocations')
+        return UsageEvidence.permits(usageKind,'COLLOCATION_CANDIDATE');
+      if(bucket==='grammar_patterns')
+        return UsageEvidence.permits(usageKind,'GRAMMAR_PATTERN')||
+          UsageEvidence.permits(usageKind,'SPOKEN_GRAMMAR_PATTERN');
+      if(bucket==='expression_chunks')
+        return UsageEvidence.permits(usageKind,'SPOKEN_CHUNK_CANDIDATE');
+      return false;
+    };
     for(const [bucket,field] of Object.entries(fieldMap)){
-      if(!allowed[bucket].has(role))continue;
+      if(!allowed[bucket].has(role)||!languageUsageAllowed(bucket))continue;
       const before=buckets[bucket].length;
       push(buckets[bucket],g[field]);
       if(buckets[bucket].length>before){
@@ -71,7 +90,8 @@ function growthResources(learningIndex={}){
           source_ref:item.source_ref||null,
           source_role:role,
           source_family:item.source_family||null,
-          authority_class:item.authority_class||null
+          authority_class:item.authority_class||null,
+          learning_evidence_kind:usageKind||null
         });
       }
     }
@@ -91,7 +111,10 @@ function growthResources(learningIndex={}){
       source_role_consumed_from_learning_index_contract:true,
       filename_or_title_role_inference_forbidden:true,
       curriculum_content_cannot_supply_lexical_or_usage_authority_by_presence_alone:true,
-      unclassified_general_reference_not_used_for_language_growth_resources:true
+      unclassified_general_reference_not_used_for_language_growth_resources:true,
+      language_usage_capability_is_evidence_kind_scoped:true,
+      example_sentence_does_not_close_collocation_or_grammar_gap:true,
+      dependency_pattern_does_not_claim_universal_naturalness:true
     }
   };
 }
@@ -402,6 +425,7 @@ function derive({growth_profile,learning_index=null}={}){
       expression_chunks:resources.expression_chunks.slice(0,6),
       natural_collocations:resources.natural_collocations.slice(0,6),
       grammar_patterns:resources.grammar_patterns.slice(0,4),
+      usage_example_sentences:resources.usage_example_sentences.slice(0,4),
       english_thinking_support:resources.english_thinking_support.slice(0,4)
     },
     curriculum_grounding:{
