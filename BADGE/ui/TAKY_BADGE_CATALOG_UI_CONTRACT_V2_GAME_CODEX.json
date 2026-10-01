@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V2_GAME_CODEX",
-  "version": "2026-10-02.1",
+  "version": "2026-10-02.2",
   "status": "CURRENT_GAME_CODEX_UI_CONTRACT",
   "authority": {
     "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
@@ -31,7 +31,8 @@
       "sort": [
         "NUMBER_ASC",
         "RECENT",
-        "TIER"
+        "TIER",
+        "NATURE"
       ],
       "category_tabs": [
         "ALL",
@@ -46,9 +47,26 @@
         "TITLE_OR_SECRET_UNKNOWN",
         "TIER",
         "REACQUIRE_STARS",
-        "NEW_MARKER_IF_RECENT"
+        "NEW_MARKER_IF_RECENT",
+        "PRIMARY_NATURE"
       ],
-      "tile_action": "OPEN_BADGE_DETAIL_SHEET"
+      "tile_action": "OPEN_BADGE_DETAIL_SHEET",
+      "group_view": [
+        "NONE",
+        "NATURE",
+        "CATEGORY"
+      ],
+      "nature_filter": [
+        "ALL",
+        "SELF_DIRECTED",
+        "GOAL_ACHIEVEMENT",
+        "FOCUS_IMMERSION",
+        "RECOVERY_RESILIENCE",
+        "ERROR_LEARNING",
+        "PLANNING_SELF_REGULATION",
+        "PROBLEM_SOLVING",
+        "EXTRA_GROWTH"
+      ]
     },
     {
       "id": "BADGE_DETAIL",
@@ -59,6 +77,7 @@
         "ART",
         "TITLE",
         "CATEGORY",
+        "PRIMARY_NATURE",
         "STORY",
         "OBTAIN_CONDITION",
         "OWNERSHIP",
@@ -210,5 +229,59 @@
     "category_progress_visible": true,
     "selected_state": "STRONG_FOCUS_RING",
     "new_marker_window_hours": 72
+  },
+  "nature_taxonomy": {
+    "SELF_DIRECTED": {
+      "label_ko": "스스로",
+      "order": 1,
+      "description": "먼저 시작·선택·행동한 경험"
+    },
+    "GOAL_ACHIEVEMENT": {
+      "label_ko": "목표도달",
+      "order": 2,
+      "description": "끝까지 완료하거나 목표 지점에 도달한 경험"
+    },
+    "FOCUS_IMMERSION": {
+      "label_ko": "집중·몰입",
+      "order": 3,
+      "description": "집중을 유지하거나 흐름에 깊게 들어간 경험"
+    },
+    "RECOVERY_RESILIENCE": {
+      "label_ko": "복귀·재도전",
+      "order": 4,
+      "description": "흐트러짐·실패·피로 뒤 다시 돌아온 경험"
+    },
+    "ERROR_LEARNING": {
+      "label_ko": "실수·교정",
+      "order": 5,
+      "description": "실수를 발견하고 다시 보고 고친 경험"
+    },
+    "PLANNING_SELF_REGULATION": {
+      "label_ko": "계획·조절",
+      "order": 6,
+      "description": "시간·순서·난이도·휴식·유혹을 스스로 조절한 경험"
+    },
+    "PROBLEM_SOLVING": {
+      "label_ko": "문제해결",
+      "order": 7,
+      "description": "막힘을 풀거나 도움·전략을 활용해 해결한 경험"
+    },
+    "EXTRA_GROWTH": {
+      "label_ko": "추가도전·성장",
+      "order": 8,
+      "description": "요구 이상으로 확장하거나 이해·설명·성장을 보여준 경험"
+    }
+  },
+  "nature_contract": {
+    "primary_nature": "exactly one primary classification per badge",
+    "nature_tags": "zero or more secondary behavior tags",
+    "source": "badge meaning/trigger semantics; independent from art category and tier",
+    "ui": [
+      "NATURE_FILTER",
+      "NATURE_SORT",
+      "NATURE_GROUPED_VIEW",
+      "DETAIL_NATURE_CHIP"
+    ],
+    "invariant": "Changing nature classification never changes badge_id, visual_id, asset_slot_id, art SHA, ownership, tier, or award history"
   }
 }
