@@ -96,6 +96,61 @@ assert.equal(p.reference_gap_candidate,null);
 assert.equal(Policy.validate(p).ok,true);
 
 
+
+
+const sameTargetEvidence=[];
+for(let i=1;i<=3;i++){
+ sameTargetEvidence.push({
+  event_id:'same-'+i,observed_at:'2026-10-0'+i+'T00:00:00Z',
+  source_app:i===1?'hide-seek':'snap-pop',
+  verified_outcome:i===1?1:null,
+  ...(i===1?{verification:{authority:'LEARNING_VERIFICATION_RECEIPT'}}:{}),
+  growth_execution_context:{
+   expression_level:'L3_EXPANDED_SENTENCE',question_depth:4,hint_strength:'MINIMAL_CUE'
+  },
+  language_growth_signals:[
+   {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false,transfer:true,target_id:'accept'},
+   {dimension:'THINKING',outcome:'SUCCESS',assisted:false,transfer:true,depth:4,target_id:'accept'}
+  ]
+ });
+}
+const sameTargetProfile=Profile.derive({learner_context:{grade:5},evidence:sameTargetEvidence});
+assert.equal(sameTargetProfile.dimensions.VOCABULARY.state,'READY_TO_STRETCH');
+assert.equal(sameTargetProfile.dimensions.THINKING.state,'READY_TO_STRETCH');
+assert.equal(sameTargetProfile.dimensions.VOCABULARY.generalization_ready,false);
+assert.equal(sameTargetProfile.dimensions.THINKING.generalization_ready,false);
+const sameTargetPolicy=Policy.derive({growth_profile:sameTargetProfile,learning_index:learningIndex});
+assert.notEqual(sameTargetPolicy.support_phase,'TRANSFER_PUSH');
+assert.notEqual(sameTargetPolicy.growth_control.learning_intensity,'STRETCH_TRANSFER');
+assert.equal(
+ sameTargetPolicy.growth_control.generalization_guard
+  .target_scoped_stretch_does_not_become_global_transfer_push,
+ true
+);
+
+const multiTargetEvidence=[];
+for(const [i,target] of [['1','accept'],['2','except'],['3','allow'],['4','receive']]){
+ multiTargetEvidence.push({
+  event_id:'multi-'+i,observed_at:'2026-10-0'+i+'T00:00:00Z',
+  source_app:i==='1'?'hide-seek':'snap-pop',
+  verified_outcome:i==='1'?1:null,
+  ...(i==='1'?{verification:{authority:'LEARNING_VERIFICATION_RECEIPT'}}:{}),
+  growth_execution_context:{
+   expression_level:'L3_EXPANDED_SENTENCE',question_depth:4,hint_strength:'MINIMAL_CUE'
+  },
+  language_growth_signals:[
+   {dimension:'VOCABULARY',outcome:'SUCCESS',assisted:false,transfer:true,target_id:target},
+   {dimension:'THINKING',outcome:'SUCCESS',assisted:false,transfer:true,depth:4,target_id:target}
+  ]
+ });
+}
+const multiTargetProfile=Profile.derive({learner_context:{grade:5},evidence:multiTargetEvidence});
+assert.equal(multiTargetProfile.dimensions.VOCABULARY.generalization_ready,true);
+assert.equal(multiTargetProfile.dimensions.THINKING.generalization_ready,true);
+const multiTargetPolicy=Policy.derive({growth_profile:multiTargetProfile,learning_index:learningIndex});
+assert.equal(multiTargetPolicy.support_phase,'TRANSFER_PUSH');
+assert.equal(multiTargetPolicy.growth_control.learning_intensity,'STRETCH_TRANSFER');
+
 const curriculumCannotMasqueradeAsDictionary=Policy.growthResources({
  semantic_items:[{
   source_ref:'official:curriculum-only',
