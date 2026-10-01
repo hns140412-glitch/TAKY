@@ -1,0 +1,133 @@
+{
+  "schema": "TAKY_ENGLISH_LANGUAGE_USAGE_INDEX_OWNER_PRECHECK_2026-10-02_V1",
+  "status": "MULTI_SOURCE_PRECHECK_COMPLETE__PARTIAL_PROMOTION_DECISION_READY",
+  "created_date": "2026-10-02",
+  "authority": "INDEX_OWNER_PRECHECK_ONLY",
+  "role": "LANGUAGE_USAGE",
+  "authority_model": "ONE_ROLE_MULTIPLE_EVIDENCE_KINDS",
+  "candidates": [
+    {
+      "candidate_id": "ENGLISH_USAGE_TATOEBA_TEXT",
+      "source": "Tatoeba textual sentence corpus",
+      "evidence_kind": "EXAMPLE_SENTENCE",
+      "source_url": "https://tatoeba.org/ko/terms_of_use",
+      "license": "CC-BY-2.0-FR",
+      "attribution_required": true,
+      "external_precheck": "SOURCE_AND_LICENSE_PRECHECK_COMPLETE",
+      "proposed_index_use": [
+        "example_sentence_presence",
+        "context_illustration_candidate",
+        "phrase_occurrence_cross_check"
+      ],
+      "forbidden_claims": [
+        "frequency_authority",
+        "universal_naturalness_truth",
+        "grade_level_authority",
+        "lexical_sense_authority"
+      ],
+      "quality_gate": [
+        "child_facing_sentence_requires_quality_and_safety_review",
+        "author_attribution_must_be_preserved_or_resolvable",
+        "example_presence_must_not_be_rewritten_as_frequency"
+      ],
+      "formal_index_owner_decision_ready": true,
+      "promotion_authorized": false,
+      "runtime_authority": false
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_EWT",
+      "source": "Universal Dependencies English EWT",
+      "evidence_kind": "DEPENDENCY_PATTERN",
+      "source_url": "https://universaldependencies.org/treebanks/en_ewt/index.html",
+      "release": "UD 2.18",
+      "license": "CC-BY-SA-4.0",
+      "external_precheck": "SOURCE_PRECHECK_COMPLETE__LICENSE_COMPATIBILITY_OPEN",
+      "proposed_index_use": [
+        "dependency_pattern_candidate",
+        "grammar_pattern_candidate",
+        "collocation_candidate_generation"
+      ],
+      "forbidden_claims": [
+        "universal_naturalness_truth",
+        "grade_level_authority",
+        "lexical_sense_authority"
+      ],
+      "blocking_items": [
+        "SHARE_ALIKE_COMPATIBILITY_REVIEW_FOR_DERIVED_RUNTIME_ARTIFACTS"
+      ],
+      "formal_index_owner_decision_ready": false,
+      "promotion_authorized": false,
+      "runtime_authority": false
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_CHILDES",
+      "source": "Universal Dependencies English CHILDES",
+      "evidence_kind": "CHILD_ADULT_SPOKEN_DEPENDENCY_PATTERN",
+      "source_url": "https://universaldependencies.org/treebanks/en_childes/index.html",
+      "release": "UD 2.18",
+      "license": "CC-BY-SA-4.0",
+      "corpus_scope": {
+        "genre": "spoken child-adult interaction",
+        "gold_sentences": 48000,
+        "tokens": 236000
+      },
+      "external_precheck": "SOURCE_PRECHECK_COMPLETE__LICENSE_AND_AGE_TRANSFER_REVIEW_OPEN",
+      "proposed_index_use": [
+        "child_adult_spoken_pattern_candidate",
+        "spoken_grammar_pattern_candidate",
+        "spoken_chunk_cross_check"
+      ],
+      "forbidden_claims": [
+        "grade5_prescription_from_younger_child_data",
+        "universal_naturalness_truth",
+        "curriculum_authority"
+      ],
+      "blocking_items": [
+        "SHARE_ALIKE_COMPATIBILITY_REVIEW_FOR_DERIVED_RUNTIME_ARTIFACTS",
+        "AGE_AND_CONTEXT_TRANSFER_POLICY_REQUIRED"
+      ],
+      "formal_index_owner_decision_ready": false,
+      "promotion_authorized": false,
+      "runtime_authority": false
+    }
+  ],
+  "excluded_or_secondary": [
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_GUM",
+      "disposition": "HOLD_NONCOMMERCIAL",
+      "reason": "UD English GUM is CC-BY-NC-SA-4.0 and underlying source licensing is mixed."
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_SKETCH_ENGINE",
+      "disposition": "HOLD_SUBSCRIPTION_AND_CORPUS_LICENSE_REVIEW"
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_LEIPZIG_CORPORA",
+      "disposition": "SECONDARY_QUALITY_AND_TERMS_REVIEW"
+    }
+  ],
+  "decision": {
+    "ready_for_human_index_decision": [
+      "ENGLISH_USAGE_TATOEBA_TEXT"
+    ],
+    "not_ready_for_index_decision": [
+      "ENGLISH_USAGE_UD_EWT",
+      "ENGLISH_USAGE_UD_CHILDES"
+    ],
+    "runtime_authority_granted": false,
+    "language_usage_gap_closed": false,
+    "partial_gap_possible_after_tatoeba_indexing": "EXAMPLE_SENTENCE_ONLY",
+    "dependency_pattern_gap_remains": true
+  },
+  "guards": [
+    "PRECHECK != INDEXED",
+    "SOURCE_PRESENCE != NATURALNESS_TRUTH",
+    "EXAMPLE_SENTENCE != FREQUENCY_AUTHORITY",
+    "DEPENDENCY_PATTERN != UNIVERSAL_NATURALNESS_TRUTH",
+    "CHILD_ADULT_SPOKEN_PATTERN != GRADE_LEVEL_PRESCRIPTION",
+    "LANGUAGE_USAGE != LEXICAL_SEMANTICS",
+    "LANGUAGE_USAGE != CURRICULUM_ALIGNMENT",
+    "NO_RUNTIME_AUTHORITY_BEFORE_INDEX_OWNER_RECEIPT",
+    "NO_MAIN_CURRENT_CANONICAL_OR_DEPLOYMENT_CHANGE"
+  ]
+}
