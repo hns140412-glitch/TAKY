@@ -126,6 +126,11 @@ jobs:
       - name: OEWN lexical precheck remains non-authoritative
         working-directory: ENFORCEMENT
         run: python oewn_lexical_precheck_test.py
+      - name: V27 branch-scoped Search and Learning projection
+        working-directory: ENFORCEMENT
+        run: python branch_search_learning_projection_v27_test.py
+      - name: Indexed reference role gap regression
+        run: node LEARNING/pedagogy/indexed-reference-role-gap-regression.test.js
       - name: V27 indexed-only promotion receipt
         working-directory: ENFORCEMENT
         run: python data_index_v27_index_owner_receipt_test.py
