@@ -14,6 +14,9 @@ on:
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
       - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'MIGRATION/CURRICULUM/**'
+      - 'MIGRATION/LEARNING_REFERENCE/**'
+      - 'ENFORCEMENT/learning_reference_role_migration.py'
+      - 'ENFORCEMENT/learning_reference_role_migration_test.py'
       - 'ENFORCEMENT/ready_curriculum_registry_migration.py'
       - 'ENFORCEMENT/ready_curriculum_registry_migration_test.py'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
@@ -216,6 +219,9 @@ jobs:
       - name: Validate Ready curriculum migration candidate
         working-directory: ENFORCEMENT
         run: python ready_curriculum_registry_migration_test.py
+      - name: Validate Drive learning-reference role migration
+        working-directory: ENFORCEMENT
+        run: python learning_reference_role_migration_test.py
       - name: Validate central Learning growth decision surface
         run: node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Validate Learning Engine estimator benchmark lane
