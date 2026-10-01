@@ -10,6 +10,7 @@ const LearningIndex=require('../index/learning-index.js');
 const EvidenceGap=require('./evidence-gap.js');
 const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
 const ObservationReview=require('./observation-review-intent.js');
+const HideVocabularyPolicy=require('../pedagogy/hide-vocabulary-routing-policy.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -96,6 +97,20 @@ function derive(input={}, independentIndexOwnerVerifier=null){
   });
   if(!evidenceGap.ok)return {ok:false,reason:'EVIDENCE_GAP_DERIVATION_FAILED',detail:evidenceGap};
 
+  let hideVocabularyPolicy=null;
+  if(input.hide_vocabulary_context){
+    hideVocabularyPolicy=HideVocabularyPolicy.derive({
+      evidence:[...evidence,...(Array.isArray(input.observation_only)?input.observation_only:[])],
+      current_word_ids:Array.isArray(input.hide_vocabulary_context.current_word_ids)
+        ?input.hide_vocabulary_context.current_word_ids:[],
+      past_word_ids:Array.isArray(input.hide_vocabulary_context.past_word_ids)
+        ?input.hide_vocabulary_context.past_word_ids:[]
+    });
+    if(!hideVocabularyPolicy.ok||!HideVocabularyPolicy.validate(hideVocabularyPolicy).ok){
+      return {ok:false,reason:'HIDE_VOCABULARY_POLICY_INVALID',detail:hideVocabularyPolicy};
+    }
+  }
+
   return {
     ok:true,
     engine_runtime:VERSION,
@@ -109,6 +124,7 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     evidence_policy:evidencePolicy,
     decision,
     evidence_gap:evidenceGap.gap,
+    specialist_policy:hideVocabularyPolicy?{hide_seek_vocabulary:hideVocabularyPolicy}:null,
     trace:{
       evidence_ids:learnerState.observed?.evidence_ids||[],
       observation_review_policy:observationReview?.policy_version||null,
@@ -126,7 +142,8 @@ function derive(input={}, independentIndexOwnerVerifier=null){
       evidence_policy_version:evidencePolicy.policy_version||null,
       evidence_policy_ids:evidencePolicy.results.map(x=>x.policy_id).filter(Boolean),
       evidence_gap_version:evidenceGap.version||null,
-      evidence_gap_id:evidenceGap.gap?.gap_id||null
+      evidence_gap_id:evidenceGap.gap?.gap_id||null,
+      hide_vocabulary_policy_version:hideVocabularyPolicy?.version||null
     },
     cannot_influence:[
       'SCHEDULE_DATE',
@@ -179,6 +196,7 @@ function validate(result={}){
   if(result.evidence_policy&&result.evidence_policy.ok!==true)issues.push('EVIDENCE_POLICY_INVALID');
   if(result.decision&&!Decision.validate(result.decision).ok)issues.push('DECISION_INVALID');
   if(result.evidence_gap?.mining_request_authorized===true)issues.push('LEARNING_CANNOT_AUTHORIZE_MINING');
+  if(result.specialist_policy?.hide_seek_vocabulary&&!HideVocabularyPolicy.validate(result.specialist_policy.hide_seek_vocabulary).ok)issues.push('HIDE_VOCABULARY_POLICY_INVALID');
 
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
   const walk=v=>{
