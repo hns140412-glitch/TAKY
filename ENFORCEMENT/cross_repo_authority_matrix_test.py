@@ -12,7 +12,8 @@ class TestCrossRepoAuthorityMatrix(unittest.TestCase):
 
     def test_global_promotion_is_hold(self):
         d=self.d
-        self.assertEqual(d["status"],"BRANCH_VALIDATED__PROMOTION_HOLD")
+        self.assertEqual(d["status"],
+                         "BRANCH_INDEXED_AND_IO_VALIDATED__CURRENT_CANONICAL_PROMOTION_HOLD")
         self.assertFalse(d["promotion_authorized"])
         self.assertFalse(d["main_merge_authorized"])
         self.assertFalse(d["deployment_authorized"])
@@ -30,6 +31,13 @@ class TestCrossRepoAuthorityMatrix(unittest.TestCase):
         self.assertIn("source_authority",s["MINING_ENGINE"]["forbidden"])
         self.assertIn("source_identity",s["MINING_INDEX"]["owns"])
         self.assertIn("pedagogical_decision",s["MINING_INDEX"]["forbidden"])
+        self.assertIn("recommended_quantity_intent",s["LEARNING_ENGINE"]["owns"])
+        self.assertIn("allocated_quantity",s["LEARNING_ENGINE"]["forbidden"])
+        self.assertIn("actual_quantity_materialization",s["PLANNER"]["owns"])
+        self.assertIn("local_language_quality_grading",s["SNAP_POP"]["forbidden"])
+        self.assertIn("mastery_authority",s["HIDE_SEEK"]["forbidden"])
+        self.assertIn("IMAGINATION_CLOUD",s)
+        self.assertIn("mastery",s["IMAGINATION_CLOUD"]["forbidden"])
 
     def test_learning_index_roles_are_separate(self):
         roles=self.d["systems"]["LEARNING_INDEX"]["evidence_roles"]
@@ -41,24 +49,34 @@ class TestCrossRepoAuthorityMatrix(unittest.TestCase):
         self.assertIn("CURRICULUM_ALIGNMENT != LEXICAL_SEMANTICS",inv)
         self.assertIn("LEXICAL_SEMANTICS != LANGUAGE_USAGE",inv)
 
-    def test_source_candidates_are_not_promoted(self):
+    def test_v27_indexed_sources_are_not_current_or_canonical(self):
         src=self.d["source_authority_status"]
-        self.assertTrue(src["curriculum_177"]["source_content_precheck_complete"])
-        self.assertFalse(src["curriculum_177"]["central_index_authority"])
-        self.assertFalse(src["curriculum_177"]["canonical_promotion"])
-        self.assertFalse(src["curriculum_177"]["learning_index_consumption_allowed"])
-        self.assertIsNone(src["curriculum_177"]["blocking_item"])
-        self.assertEqual(src["curriculum_177"]["guard"],
-                         "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION")
-        self.assertTrue(src["english_lexical"]["source_precheck_complete"])
-        self.assertFalse(src["english_lexical"]["runtime_authority"])
-        self.assertTrue(src["english_lexical"]["formal_index_owner_promotion_required"])
-        self.assertEqual(src["english_lexical"]["license"],"CC-BY-4.0")
-        self.assertFalse(src["english_language_usage"]["runtime_authority"])
-        self.assertTrue(src["english_language_usage"]["formal_index_owner_promotion_required"])
-        self.assertEqual(src["english_language_usage"]["license"],"CC-BY-SA-4.0")
-        self.assertEqual(src["english_language_usage"]["state"],
-                         "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN")
+        curriculum=src["curriculum_177"]
+        self.assertEqual(curriculum["index_state"],"INDEXED")
+        self.assertEqual(curriculum["index_revision"],"V27")
+        self.assertEqual(curriculum["record_count"],177)
+        self.assertTrue(curriculum["central_index_authority_in_revision"])
+        self.assertTrue(curriculum["learning_index_consumption_allowed"])
+        self.assertFalse(curriculum["current"])
+        self.assertFalse(curriculum["canonical"])
+
+        lexical=src["english_lexical"]
+        self.assertEqual(lexical["index_state"],"INDEXED")
+        self.assertEqual(lexical["index_revision"],"V27")
+        self.assertEqual(lexical["source_id"],"LEXICAL_OEWN_2025")
+        self.assertEqual(lexical["license"],"CC-BY-4.0")
+        self.assertTrue(lexical["attribution_required"])
+        self.assertTrue(lexical["learning_index_consumption_allowed"])
+        self.assertFalse(lexical["current"])
+        self.assertFalse(lexical["canonical"])
+
+        usage=src["english_language_usage"]
+        self.assertEqual(usage["index_state"],"HOLD")
+        self.assertEqual(usage["indexed_count"],0)
+        self.assertFalse(usage["learning_index_consumption_allowed"])
+        self.assertEqual(usage["license"],"CC-BY-SA-4.0")
+        self.assertFalse(usage["current"])
+        self.assertFalse(usage["canonical"])
 
     def test_memory_routing_stays_candidate(self):
         c=set(self.d["systems"]["HIDE_SEEK"]["candidate_not_core"])
