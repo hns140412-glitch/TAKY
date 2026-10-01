@@ -211,7 +211,10 @@
     "view mode and sort are independent presentation state; neither mutates badge metadata or award state",
     "nature progress counts and acquisition summary are derived from badge runtime ledger only; never invented",
     "tier halo / lock / selection / NEW marker are UI layers and must never be baked into canonical badge artwork",
-    "visual state animations are cosmetic and honor reduced-motion"
+    "visual state animations are cosmetic and honor reduced-motion",
+    "tier ring, lock treatment, selected focus and recent-acquisition glow are presentation-only",
+    "recent acquisition presentation derives only from last_at in the badge ledger",
+    "visual state effects never change badge award, tier, progress, nature, art SHA or identity"
   ],
   "deployment": "HOLD",
   "design_direction": {
@@ -299,44 +302,25 @@
     "invariant": "Changing nature classification never changes badge_id, visual_id, asset_slot_id, art SHA, ownership, tier, or award history"
   },
   "visual_state_contract": {
-    "LOCKED": {
-      "treatment": [
-        "DESATURATE",
-        "DIM",
-        "LOCK_OVERLAY"
-      ],
-      "rule": "Do not bake lock/grayscale into source art; presentation layer only."
+    "earned": {
+      "art": "full-color source art",
+      "frame": "tier-tinted outer ring",
+      "tier_label": "visible",
+      "reacquire_stars": "0..5",
+      "recent_acquisition": "subtle NEW marker + glow only"
     },
-    "EARNED": {
-      "treatment": [
-        "FULL_ART",
-        "TIER_HALO",
-        "TITLE_VISIBLE"
-      ],
-      "rule": "Tier halo derives from runtime tier and remains separate from source art."
+    "locked": {
+      "art": "desaturated/dimmed",
+      "frame": "neutral dashed/soft ring",
+      "lock": "center lock overlay",
+      "secret": "title/story masked as ??? / hidden"
     },
-    "SELECTED": {
-      "treatment": [
-        "FOCUS_RING",
-        "SUBTLE_LIFT"
-      ],
-      "rule": "Selection is local UI state only."
+    "selected": {
+      "focus": "strong double focus ring",
+      "movement": "2px lift max",
+      "purpose": "selection only; no game-power implication"
     },
-    "RECENT": {
-      "treatment": [
-        "NEW_MARKER",
-        "GENTLE_PULSE"
-      ],
-      "window_hours": 72,
-      "rule": "Reduced-motion disables pulse."
-    },
-    "DETAIL_OPEN": {
-      "treatment": [
-        "BOTTOM_SHEET",
-        "BRIEF_REVEAL"
-      ],
-      "rule": "Reveal animation is cosmetic and reduced-motion aware."
-    }
+    "reduced_motion": "all pulse/transition effects disabled"
   },
   "accessibility": {
     "color_not_sole_signal": true,
