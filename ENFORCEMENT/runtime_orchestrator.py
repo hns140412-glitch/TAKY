@@ -26,6 +26,8 @@ from reference_intake_router import route as route_reference_intake
 from reference_intake_executor import execute as execute_reference_intake
 from reference_acquisition_adapter import acquire as acquire_reference
 from learning_evidence_gap_broker import route_gap as route_learning_evidence_gap
+from learning_mining_runtime_bridge import plan as plan_learning_mining, advance as advance_learning_mining
+from data_index_search import load_index as load_learning_index_rows
 from behavioral_eval import evaluate as evaluate_behavior
 from trace_to_regression import build_case as build_regression_case
 from producer_artifact_gate import preflight as producer_artifact_preflight, postflight as producer_artifact_postflight
@@ -454,6 +456,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
                 detected.extend(reference_intake_execution.get("detected", []))
 
     learning_gap_result = None
+    learning_mining_result = None
     gap = effective_record.get("learning_evidence_gap")
     if isinstance(gap, dict):
         gap_index_path = _safe_repo_path(repo_root, effective_record.get("learning_evidence_index_path"))
@@ -470,6 +473,25 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
             )
             if not learning_gap_result.get("pass"):
                 detected.extend(learning_gap_result.get("detected", []))
+            elif learning_gap_result.get("decision") == "MINING_REQUEST":
+                learning_index_rows = load_learning_index_rows(gap_index_path)
+                mining_memory = effective_record.get("learning_mining_memory")
+                mining_runtime_results = effective_record.get("learning_mining_runtime_results")
+                if isinstance(mining_runtime_results, dict):
+                    learning_mining_result = advance_learning_mining(
+                        learning_gap_result,
+                        mining_runtime_results,
+                        index_rows=learning_index_rows,
+                        memory=mining_memory if isinstance(mining_memory, dict) else {},
+                    )
+                else:
+                    learning_mining_result = plan_learning_mining(
+                        learning_gap_result,
+                        index_rows=learning_index_rows,
+                        memory=mining_memory if isinstance(mining_memory, dict) else {},
+                    )
+                if not learning_mining_result.get("pass"):
+                    detected.append("LEARNING_MINING_RUNTIME_BRIDGE_FAILED")
 
     behavioral_eval_result = None
     behavioral_cfg = effective_record.get("behavioral_eval")
@@ -569,6 +591,7 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "reference_acquisition_result": reference_acquisition_result,
         "reference_intake_execution": reference_intake_execution,
         "learning_evidence_gap_route": learning_gap_result,
+        "learning_mining_runtime": learning_mining_result,
         "behavioral_eval": behavioral_eval_result,
         "regression_capture": regression_capture_result,
         "producer_artifact_gate": artifact_gate_result,
@@ -582,7 +605,10 @@ def run(record: dict, repo_root: Path, coverage_record: Path | None) -> dict:
         "learning_gap_index_check_verified": bool(
             learning_gap_result and learning_gap_result.get("index_checked")
         ),
-        "learning_direct_mining_verified": False,
+        "learning_direct_mining_verified": bool(
+            learning_mining_result and learning_mining_result.get("pass")
+            and learning_mining_result.get("mining_required")
+        ),
         "hosted_chatgpt_auto_invocation_verified": False,
         "external_executor_invocation_verified": False,
     }
