@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+import unittest
+from mining_run_orchestrator import orchestrate, advance_provider_batch
+from mining_core import checkpoint
+
+MEMORY={"strategies":[{"strategy_id":"S1","task_family":"LEARNING_ENGINE","goal_pattern":"adaptive mastery scheduling","status":"PROMOTED"}],"failures":[{"failure_id":"F1","task_family":"LEARNING_ENGINE","route_signature":"search:stale","state":"RESOLVED","new_evidence_required":True,"replacement_routes":["search:official"]}]}
+
+class OrchestratorTest(unittest.TestCase):
+    def test_d0_no_frontier(self):
+        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"use known approved state","max_research_depth":"D4","known_complete":True},"memory":MEMORY})
+        self.assertEqual(r["plan"]["research_depth_decision"],"D0")
+        self.assertEqual(r["plan"]["search_frontier"],[])
+        self.assertTrue(r["plan"]["execution_allowed"])
+
+    def test_auto_goal_decomposition_starts_research(self):
+        r=orchestrate({"task":{"task_family":"GENERAL_RESEARCH","goal":"compare implementation approaches"},"memory":MEMORY})
+        self.assertEqual(r["plan"]["research_depth_decision"],"D1")
+        self.assertTrue(r["plan"]["search_frontier"])
+        self.assertEqual(r["plan"]["search_frontier"][0]["origin"],"GENERIC_SCAFFOLD")
+
+    def test_index_first_resolves_and_reduces_external_frontier(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Official fraction standard","short_summary":"fraction standard","keywords":["fraction","standard"],"authority_class":"OFFICIAL"}]
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"check evidence","unknown":["fraction standard","decimal intervention"]},"memory":MEMORY,"index_rows":rows})
+        self.assertEqual(r["plan"]["index_first"]["counts"]["resolved_from_index"],1)
+        self.assertEqual(r["plan"]["index_first"]["counts"]["external_required"],1)
+        self.assertEqual(len(r["plan"]["external_search_frontier"]),1)
+        self.assertTrue(r["plan"]["external_search_required"])
+
+    def test_index_first_can_eliminate_external_search(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Fresh official evidence","short_summary":"fresh official evidence","keywords":["fresh","evidence"],"authority_class":"OFFICIAL"}]
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"verify","unknown":["fresh evidence"]},"memory":MEMORY,"index_rows":rows})
+        self.assertFalse(r["plan"]["external_search_required"])
+        self.assertEqual(r["plan"]["external_search_frontier"],[])
+
+    def test_failed_route_uses_replacement(self):
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:stale","unknown":["fresh evidence"]},"memory":MEMORY})
+        self.assertEqual(r["plan"]["next_action"],"USE_REPLACEMENT_ROUTE")
+        self.assertEqual(r["plan"]["selected_route"],"search:official")
+        self.assertTrue(r["plan"]["execution_allowed"])
+
+    def test_depth_and_frontier_bounded(self):
+        r=orchestrate({"task":{"task_family":"ARCHITECTURE_WORK","goal":"verify current rules","unknown":["u1","u2"],"conflict":["c1"],"advanced_requirements":["a1"],"freshness_required":True,"max_research_depth":"D2"},"memory":MEMORY})
+        self.assertEqual(r["plan"]["research_depth_decision"],"D2")
+        self.assertLessEqual(len(r["plan"]["search_frontier"]),4)
+
+    def test_explicit_critical_frontier_is_not_dropped_by_unknown(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"verify official source",
+              "unknown":["secondary background"],"critical_requirements":["verify original official evidence"],
+              "max_research_depth":"D2"}
+        result=orchestrate({"task":task,"memory":MEMORY})
+        frontier=result["plan"]["search_frontier"]
+        critical=result["plan"]["unplanned_critical_frontier_ids"]
+        self.assertEqual(critical,[])
+        self.assertEqual(frontier[0]["kind"],"CRITICAL")
+        self.assertIn("verify original official evidence",[x["question"] for x in frontier])
+
+    def test_depth_cap_must_report_unplanned_critical_items(self):
+        task={"task_family":"GENERAL_RESEARCH","goal":"audit four essential inputs",
+              "critical_requirements":["critical first","critical second","critical third"],
+              "max_research_depth":"D1"}
+        result=orchestrate({"task":task,"memory":MEMORY})
+        self.assertTrue(result["plan"]["unplanned_critical_frontier_ids"])
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+
+    def test_index_hit_is_not_automatically_evidence_verified(self):
+        rows=[{"source_id":"IDX-1","canonical_title":"Official fraction standard",
+               "short_summary":"fraction standard","keywords":["fraction","standard"],
+               "authority_class":"OFFICIAL"}]
+        result=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"verify",
+                                     "unknown":["fraction standard"]},"memory":MEMORY,"index_rows":rows})
+        self.assertFalse(result["plan"]["research_complete_eligible"])
+        self.assertTrue(result["plan"]["index_verification_required"])
+
+    def test_foreign_goal_checkpoint_cannot_close_or_skip_this_research(self):
+        question="shared source"
+        old_task={"task_family":"GENERAL_RESEARCH","goal":"old unrelated goal",
+                  "unknown":[question]}
+        current_task={**old_task,"goal":"new actual goal"}
+        frontier=[{"id":question,"question":question,"kind":"UNKNOWN"}]
+        old=checkpoint(old_task,frontier,[{
+            "frontier_id":question,"source_id":"OLD-SOURCE",
+            "source_class":"OFFICIAL","claim":"old strong finding",
+            "excerpt_ref":"page:1#p:1","direct_support":True,"fresh_enough":True,
+        }])
+        self.assertEqual(old["frontier"][0]["status"],"CLOSED")
+        out=orchestrate({"task":current_task,"memory":{},
+                         "verified_checkpoint":old})["plan"]
+        self.assertEqual(out["checkpoint_binding_state"],
+                         "REJECTED_GOAL_OR_SCHEMA_MISMATCH")
+        self.assertNotEqual(out["pending_actions"]["items"][0]["classification"],
+                            "EVIDENCE_VERIFIED")
+        self.assertFalse(out["research_complete_eligible"])
+        self.assertTrue(out["planned_provider_requests"],
+                        "New goal must retain its own evidence search.")
+        self.assertEqual(out["follow_up_activation"]["state"],"WAIT_VERIFIED_CHECKPOINT")
+        advance=advance_provider_batch({"task":current_task,"memory":{},
+                                        "verified_checkpoint":old},{})
+        self.assertEqual(advance["state"],"HOLD_CHECKPOINT_GOAL_MISMATCH")
+
+    def test_success_only_proposes_candidate(self):
+        r=orchestrate({"task":{"task_family":"LEARNING_ENGINE","goal":"adaptive mastery scheduling","route_signature":"search:official"},"memory":MEMORY,"execution_receipt":{"success":True,"route_signature":"search:official"}})
+        p=r["memory_learning_proposal"]
+        self.assertEqual(p["status"],"CANDIDATE")
+        self.assertFalse(p["promotion_allowed"])
+        self.assertFalse(r["authority_guard"]["memory_auto_promotion"])
+
+    def test_failure_proposal_does_not_auto_resolve(self):
+        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"find motion reference","route_signature":"search:x"},"memory":MEMORY,"execution_receipt":{"success":False,"failure_reason":"NO_EVIDENCE","route_signature":"search:x"}})
+        p=r["memory_learning_proposal"]
+        self.assertEqual(p["action"],"PROPOSE_FAILURE_OBSERVATION")
+        self.assertEqual(p["status"],"OPEN")
+        self.assertFalse(r["authority_guard"]["failure_auto_resolution"])
+
+    def test_outcome_growth_proposal_is_advisory(self):
+        r=orchestrate({"task":{"task_family":"PRODUCT_UI","goal":"find reference","route_signature":"search:web"},"memory":MEMORY,"outcome":{"success":True,"accuracy":1,"usefulness":1,"completeness":1,"efficiency":1,"user_correction_rate":0}})
+        g=r["growth_proposal"]
+        self.assertEqual(g["proposal"]["status"],"CANDIDATE")
+        self.assertFalse(g["proposal"]["promotion_allowed"])
+
+if __name__=="__main__": unittest.main()
