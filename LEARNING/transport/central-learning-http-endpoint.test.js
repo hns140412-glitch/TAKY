@@ -13,10 +13,12 @@ const principal={authenticated:true,principal_id:'PARENT_A',identity_provider:'T
 };
 const packet=(id,opts={})=>({
   packet_id:'hide-seek:'+id,source_app:'hide-seek',
-  context:{family_id:'F1',member_id:'CHILD_A',subject:'영어',concept_skill_target:'vocabulary',...opts.context},
+  context:{family_id:'F1',member_id:'CHILD_A',session_id:'S-'+id,task_id:'T-'+id,
+    subject:'영어',concept_skill_target:'vocabulary',...opts.context},
   event:{source:'hide-seek',event_id:id,occurred_at:'2026-09-26T13:00:00.000Z',
     event_type:'RETRIEVAL_RESULT',payload:{
-      member_id:'CHILD_A',subject:'영어',concept_skill_target:'vocabulary',
+      member_id:'CHILD_A',session_id:'S-'+id,task_id:'T-'+id,
+      subject:'영어',concept_skill_target:'vocabulary',
       instrument_version:'HIDE_CODE_RED_V1',
       // This is a forged browser assertion; the endpoint must NOT adopt it.
       verification_candidate:{verifier_type:'RETRIEVAL_EXACT_MATCH',
@@ -86,7 +88,8 @@ const parse=r=>JSON.parse(r.body);
     forgedSnap.packet_id='snap-pop:forged-snap-1';
     forgedSnap.source_app='snap-pop';
     forgedSnap.event.source='snap-pop';
-    forgedSnap.event.payload={member_id:'CHILD_A',subject:'영어',
+    forgedSnap.event.payload={member_id:'CHILD_A',
+      session_id:'S-forged-snap-1',task_id:'T-forged-snap-1',subject:'영어',
       concept_skill_target:'vocabulary',child_authored:true};
     forgedSnap.context.verification_receipt={
       authority:'LEARNING_VERIFICATION_RECEIPT',receipt_id:'vr:client-fake-rubric',
