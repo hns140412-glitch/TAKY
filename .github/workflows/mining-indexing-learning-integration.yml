@@ -35,6 +35,7 @@ on:
       - 'ENFORCEMENT/learning_reference_role_migration.py'
       - 'ENFORCEMENT/learning_reference_role_migration_test.py'
       - 'ENFORCEMENT/english_lexical_usage_source_candidates_test.py'
+      - 'ENFORCEMENT/oewn_lexical_precheck_test.py'
       - 'ENFORCEMENT/curriculum_index_owner_precheck_test.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge.py'
       - 'ENFORCEMENT/learning_mining_runtime_bridge_test.py'
@@ -117,6 +118,9 @@ jobs:
       - name: English lexical and usage source candidates remain guarded
         working-directory: ENFORCEMENT
         run: python english_lexical_usage_source_candidates_test.py
+      - name: OEWN lexical precheck remains non-authoritative
+        working-directory: ENFORCEMENT
+        run: python oewn_lexical_precheck_test.py
       - name: Learning gap to Mining runtime bridge
         working-directory: ENFORCEMENT
         run: python learning_mining_runtime_bridge_test.py
