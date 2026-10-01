@@ -9,7 +9,7 @@
     "MINING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7507eeaeccc225482a216aeb8f26f8451ac1f6bb",
+      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
       "owns": [
         "discovery_strategy",
         "provider_routing",
@@ -26,7 +26,7 @@
     "MINING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7507eeaeccc225482a216aeb8f26f8451ac1f6bb",
+      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
       "owns": [
         "RAW",
         "INDEX_L1",
@@ -46,7 +46,7 @@
     "LEARNING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7507eeaeccc225482a216aeb8f26f8451ac1f6bb",
+      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
       "owns": [
         "derived_learning_semantic_view",
         "curriculum_alignment",
@@ -70,7 +70,7 @@
     "LEARNING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7507eeaeccc225482a216aeb8f26f8451ac1f6bb",
+      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
       "owns": [
         "learner_state",
         "growth_profile",
@@ -162,10 +162,14 @@
   },
   "source_authority_status": {
     "curriculum_177": {
-      "state": "HOLD_FOR_FINAL_INDEPENDENT_INDEX_OWNER_SOURCE_REVIEW",
+      "state": "SOURCE_CONTENT_PRECHECK_COMPLETE__FORMAL_INDEX_OWNER_PROMOTION_DECISION_OPEN",
+      "structural_record_count": 177,
+      "source_content_precheck_complete": true,
       "central_index_authority": false,
+      "canonical_promotion": false,
       "learning_index_consumption_allowed": false,
-      "blocking_item": "GOE_KOREAN_56_EXTERNAL_SOURCE_CONTENT_REVIEW"
+      "blocking_item": null,
+      "guard": "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION"
     },
     "english_lexical": {
       "state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
@@ -229,8 +233,8 @@
     }
   },
   "next_gate": [
-    "TAKY_ENFORCEMENT_FINAL_SUCCESS",
-    "GOE_KOREAN_56_INDEPENDENT_SOURCE_CONTENT_REVIEW",
+    "TAKY_LATEST_INTEGRATION_AND_ENFORCEMENT_SUCCESS",
+    "FORMAL_INDEX_OWNER_PROMOTION_DECISION_FOR_CURRICULUM_177",
     "OEWN_INDEX_OWNER_REVIEW_AND_LICENSE_ATTRIBUTION_CONTRACT",
     "LANGUAGE_USAGE_PROVIDER_SELECTION_OR_GAP_RETAINED",
     "FINAL_CROSS_REPO_AUTHORITY_REGRESSION",
