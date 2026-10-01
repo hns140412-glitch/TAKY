@@ -1,21 +1,27 @@
 {
   "schema": "TAKY_BADGE_RUNTIME_DERIVATIVE_CONTRACT_V1",
-  "version": "2026-10-02.1",
-  "status": "CURRENT",
+  "version": "2026-10-02.2",
+  "status": "CURRENT_SYNCED",
   "canonical_source": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/BDG-DRAFT-001..060.png",
   "runtime_profile": {
     "format": "webp",
     "width": 512,
     "height": 512,
     "quality": 82,
-    "stable_path": "assets/badges/current/TAKY_BADGE_ART_{NNN}.webp"
+    "logical_asset_path": "assets/badges/current/TAKY_BADGE_ART_{NNN}.webp",
+    "physical_delivery": "10_BINARY_SHARDS",
+    "shard_manifest": "BADGE/assets/TAKY_BADGE_ART_SHARD_MANIFEST_V1.json",
+    "app_manifest": "data/badge-art-shard-manifest.json",
+    "resolver": "SnapPopBadgeArtPack"
   },
   "rules": [
     "Library PNG remains canonical artwork",
     "runtime WebP is a derived delivery asset and does not change badge identity",
     "badge_id / visual_id / asset_slot_id remain stable when artwork changes",
-    "source replacement updates source SHA + revision, then regenerates the same stable runtime path and runtime SHA",
-    "ownership / tier / stars / lock remain runtime UI layers and are never baked into derived artwork"
+    "source replacement updates source SHA + revision, regenerates WebP, and rewrites only the owning shard while logical asset identity stays fixed",
+    "ownership / tier / stars / lock remain runtime UI layers and are never baked into derived artwork",
+    "each shard and every extracted WebP is SHA-256 verified before rendering",
+    "missing or corrupt shard fails closed; runtime must not invent replacement art"
   ],
   "qa": {
     "count_60": true,
@@ -23,7 +29,16 @@
     "unique_runtime_sha": true,
     "unique_asset_slots": true,
     "binary_total_bytes": 3879972,
-    "status": "PASS"
+    "status": "PASS",
+    "shard_container_bytes": 3891414,
+    "shard_count": 10,
+    "all_shards_registered": true
   },
-  "binary_sync": "PENDING"
+  "binary_sync": "SYNCED_SHARDS",
+  "snap_pop": {
+    "branch": "taky/badge-catalog-ui-binding-20261001",
+    "pr": 20,
+    "delivery_manifest": "data/badge-art-shard-manifest.json",
+    "runtime": "badge-art-pack-runtime.js"
+  }
 }
