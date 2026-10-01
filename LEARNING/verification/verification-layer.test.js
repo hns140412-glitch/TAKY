@@ -60,6 +60,60 @@ const snap=V.applyReceipt({
 },snapReceipt.receipt);
 assert.equal(snap.ok,true);
 
+
+
+const production={
+  event_id:'snap-growth-1',observed_at:'2026-10-02T01:00:00.000Z',
+  member_id:'A',subject:'english',concept_skill_target:'writing',
+  learning_target_id:'writing:1',
+  evidence_type:'LEARNER_PRODUCTION_EVIDENCE',
+  source_app:'snap-pop',instrument_version:'SNAP_PRODUCTION_V1',
+  verified_outcome:null,
+  language_growth_signals:[
+    {dimension:'EXPRESSION',outcome:'UNKNOWN',assisted:false},
+    {dimension:'GRAMMAR',outcome:'UNKNOWN',assisted:false},
+    {dimension:'THINKING',outcome:'UNKNOWN',assisted:false}
+  ]
+};
+const growthReceipt=V.issueReceipt({
+  receipt_id:'vr-growth-1',
+  target_event_id:'snap-growth-1',
+  verified_at:'2026-10-02T01:05:00.000Z',
+  verifier_type:'HUMAN_GROWTH_RUBRIC',
+  verifier_version:'SNAP_GROWTH_RUBRIC_V1',
+  outcome:null,
+  member_id:'A',
+  subject:'english',
+  concept_skill_target:'writing',
+  reference_id:'rubric:snap-growth-v1',
+  reviewer_role:'TEACHER',
+  growth_dimensions:[
+    {dimension:'EXPRESSION',outcome:'SUCCESS',assisted:false,transfer:true,depth:4,target_id:'writing:1'},
+    {dimension:'GRAMMAR',outcome:'PARTIAL',assisted:false,target_id:'writing:1'},
+    {dimension:'THINKING',outcome:'SUCCESS',assisted:false,transfer:true,depth:4,target_id:'writing:1'}
+  ]
+});
+assert.equal(growthReceipt.ok,true,JSON.stringify(growthReceipt));
+const appliedGrowth=V.applyReceipt(production,growthReceipt.receipt);
+assert.equal(appliedGrowth.ok,true,JSON.stringify(appliedGrowth));
+assert.equal(appliedGrowth.evidence.verified_outcome,null,'dimension rubric must not create global correctness');
+assert.equal(appliedGrowth.evidence.verification.verifier_type,'HUMAN_GROWTH_RUBRIC');
+assert.deepEqual(appliedGrowth.evidence.language_growth_signals.map(x=>[x.dimension,x.outcome]),[
+  ['EXPRESSION','SUCCESS'],['GRAMMAR','PARTIAL'],['THINKING','SUCCESS']
+]);
+assert.equal(appliedGrowth.evidence.language_growth_signals[0].evidence_ref,'verification:vr-growth-1');
+
+const badGrowthOutcome=V.issueReceipt({
+  receipt_id:'vr-growth-bad',target_event_id:'snap-growth-1',
+  verified_at:'2026-10-02T01:05:00.000Z',
+  verifier_type:'HUMAN_GROWTH_RUBRIC',verifier_version:'V1',
+  outcome:1,member_id:'A',subject:'english',concept_skill_target:'writing',
+  reference_id:'rubric:snap-growth-v1',reviewer_role:'TEACHER',
+  growth_dimensions:[{dimension:'EXPRESSION',outcome:'SUCCESS'}]
+});
+assert.equal(badGrowthOutcome.ok,false);
+assert.ok(badGrowthOutcome.issues.includes('GROWTH_RUBRIC_GLOBAL_OUTCOME_FORBIDDEN'));
+
 console.log('LEARNING_VERIFICATION_LAYER_PASS');
 
 const candidateEvidence={
