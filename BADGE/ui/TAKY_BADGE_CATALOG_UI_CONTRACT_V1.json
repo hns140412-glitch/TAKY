@@ -1,37 +1,26 @@
 {
-  "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V2_GAME_CODEX",
-  "version": "2026-10-02.1",
-  "status": "CURRENT_GAME_CODEX_UI_CONTRACT",
+  "schema": "TAKY_BADGE_CATALOG_UI_CONTRACT_V1",
+  "version": "2026-10-01.1",
+  "status": "CURRENT_UI_CONTRACT_READY_FOR_RUNTIME_BINDING",
   "authority": {
     "art_binding": "TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
     "art_current": "TAKY_BADGE_ART_BINDING_CURRENT_2026-10-01.json",
     "visual_refs": [
-      "existing TAKY badge art + stable asset slots",
-      "game collection / codex interaction patterns only",
-      "official Pokédex: number-first browsing + multi-filter discovery",
-      "Genshin Archive/HoYoWiki: category archive + detail review"
+      "타키 배지 탐험 도감 UI",
+      "파스텔 판타지 배지 도감 UI",
+      "성장 배지 별빛 도감"
     ],
-    "rule": "Use game-codex information architecture and interaction patterns without copying another game's branded visual design. Existing TAKY artwork/IDs/SHA remain authoritative."
+    "rule": "approved existing UI work reconciled; visual art remains replaceable behind stable asset_slot_id"
   },
   "screens": [
     {
       "id": "BADGE_CATALOG",
-      "role": "게임 도감",
-      "header": [
-        "COLLECTION_PROGRESS",
-        "CATEGORY_PROGRESS",
-        "SORT"
-      ],
+      "role": "도감",
       "filters": [
         "ALL",
         "EARNED",
         "IN_PROGRESS",
         "UNEARNED"
-      ],
-      "sort": [
-        "NUMBER_ASC",
-        "RECENT",
-        "TIER"
       ],
       "category_tabs": [
         "ALL",
@@ -40,22 +29,12 @@
         "EXPEDITION",
         "SECRET"
       ],
-      "tile": [
-        "NUMBER",
-        "ART_OR_SILHOUETTE",
-        "TITLE_OR_SECRET_UNKNOWN",
-        "TIER",
-        "REACQUIRE_STARS",
-        "NEW_MARKER_IF_RECENT"
-      ],
-      "tile_action": "OPEN_BADGE_DETAIL_SHEET"
+      "tile_action": "OPEN_BADGE_DETAIL"
     },
     {
       "id": "BADGE_DETAIL",
-      "role": "도감 상세 시트",
-      "presentation": "BOTTOM_SHEET_OVER_CATALOG",
+      "role": "상세",
       "sections": [
-        "NUMBER",
         "ART",
         "TITLE",
         "CATEGORY",
@@ -65,18 +44,14 @@
         "TIER_REACQUIRE_STARS",
         "ACQUISITION_HISTORY"
       ],
-      "navigation": [
-        "PREVIOUS_BADGE",
-        "NEXT_BADGE",
-        "CLOSE"
-      ],
       "actions": [
+        "CLOSE",
         "SHARE_IF_ENABLED"
       ]
     },
     {
       "id": "BADGE_HISTORY",
-      "role": "획득 기록",
+      "role": "기록",
       "views": [
         "CALENDAR",
         "RECENT_ACQUISITIONS",
@@ -174,41 +149,7 @@
     "art replacement changes only current_art bytes + sha256 + revision/source lineage",
     "badge logic/condition/history are independent from art quality status",
     "CURRENT_APPROVED/CURRENT_CANDIDATE/CURRENT_FUTURE_UPDATE are asset-quality governance states, not learner ownership states",
-    "no missing image fallback may create new art automatically",
-    "game-codex UI changes must not mutate badge award logic",
-    "sort/filter state is presentation-only",
-    "SECRET mystery masking is presentation-only and never changes stored metadata",
-    "third-party game visual branding/assets are never copied"
+    "no missing image fallback may create new art automatically"
   ],
-  "deployment": "HOLD",
-  "design_direction": {
-    "mode": "GAME_CODEX_COLLECTION",
-    "goals": [
-      "COLLECTION_COMPLETION_IS_VISIBLE",
-      "FAST_SCAN_BY_NUMBER",
-      "CATEGORY_BROWSE",
-      "OWNED_UNOWNED_DISCOVERY",
-      "SELECTED_ITEM_DETAIL",
-      "REACQUIRE_TIER_HISTORY"
-    ],
-    "density": "HIGH",
-    "mobile_layout": "4_COLUMN_CODEX_GRID_WITH_BOTTOM_DETAIL_SHEET",
-    "copy_rule": "TAKY terminology only; no third-party branded visual imitation"
-  },
-  "mystery_policy": {
-    "uneared_default": "DESATURATED_OR_SILHOUETTE",
-    "secret_unearned_title": "???",
-    "secret_unearned_story": "HIDDEN",
-    "non_secret_unearned_title": "VISIBLE",
-    "no_fake_hint": true
-  },
-  "grid_contract": {
-    "columns_mobile": 4,
-    "primary_scan_key": "BADGE_NUMBER",
-    "tile_text_lines_max": 2,
-    "progress_header": "EARNED_COUNT / 60",
-    "category_progress_visible": true,
-    "selected_state": "STRONG_FOCUS_RING",
-    "new_marker_window_hours": 72
-  }
+  "deployment": "HOLD"
 }
