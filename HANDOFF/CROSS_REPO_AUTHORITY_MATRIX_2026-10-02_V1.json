@@ -9,7 +9,7 @@
     "MINING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
+      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
       "owns": [
         "discovery_strategy",
         "provider_routing",
@@ -26,7 +26,7 @@
     "MINING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
+      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
       "owns": [
         "RAW",
         "INDEX_L1",
@@ -46,7 +46,7 @@
     "LEARNING_INDEX": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
+      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
       "owns": [
         "derived_learning_semantic_view",
         "curriculum_alignment",
@@ -70,7 +70,7 @@
     "LEARNING_ENGINE": {
       "repository": "hns140412-glitch/TAKY",
       "branch": "taky/learning-mining-runtime-integration-2026-10-01",
-      "branch_sha": "7a9702b18a3cf2921146cc7e324a1fc144a91063",
+      "branch_sha": "4c9165af62ff63ea56c454b10e271654a914dfe8",
       "owns": [
         "learner_state",
         "growth_profile",
@@ -172,13 +172,21 @@
       "guard": "PRECHECK_COMPLETE != INDEX_OWNER_PROMOTION"
     },
     "english_lexical": {
-      "state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
+      "state": "SOURCE_LICENSE_PRECHECK_COMPLETE__FORMAL_INDEX_OWNER_PROMOTION_DECISION_OPEN",
       "preferred_candidate": "Open English WordNet 2025",
-      "runtime_authority": false
+      "license": "CC-BY-4.0",
+      "source_precheck_complete": true,
+      "runtime_authority": false,
+      "formal_index_owner_promotion_required": true,
+      "guard": "OEWN_GLOSS != CHILD_LEVEL_EASY_ENGLISH"
     },
     "english_language_usage": {
-      "state": "OPEN__NO_UNCONDITIONAL_PROVIDER_SELECTED",
-      "runtime_authority": false
+      "state": "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN",
+      "preferred_precheck_candidate": "Universal Dependencies English EWT",
+      "license": "CC-BY-SA-4.0",
+      "runtime_authority": false,
+      "formal_index_owner_promotion_required": true,
+      "guard": "CORPUS_USAGE_EVIDENCE != UNIVERSAL_NATURALNESS_TRUTH"
     }
   },
   "invariants": [
@@ -235,8 +243,8 @@
   "next_gate": [
     "TAKY_LATEST_INTEGRATION_AND_ENFORCEMENT_SUCCESS",
     "FORMAL_INDEX_OWNER_PROMOTION_DECISION_FOR_CURRICULUM_177",
-    "OEWN_INDEX_OWNER_REVIEW_AND_LICENSE_ATTRIBUTION_CONTRACT",
-    "LANGUAGE_USAGE_PROVIDER_SELECTION_OR_GAP_RETAINED",
+    "FORMAL_INDEX_OWNER_PROMOTION_DECISION_FOR_OEWN_LEXICAL",
+    "UD_EWT_LICENSE_COMPATIBILITY_AND_INDEX_OWNER_REVIEW_OR_USAGE_GAP_RETAINED",
     "FINAL_CROSS_REPO_AUTHORITY_REGRESSION",
     "HUMAN_APPROVAL_BEFORE_ANY_MAIN_CURRENT_PROMOTION"
   ]
