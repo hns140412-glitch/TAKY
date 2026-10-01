@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='TAKY_GROWTH_NEXT_STEP_POLICY_V1';
+const VERSION='TAKY_GROWTH_NEXT_STEP_POLICY_V2';
 const AUTHORITY='LEARNING_ENGINE_GROWTH_INTENT_ONLY';
 const Profile=require('./language-growth-profile.js');
 const clean=v=>String(v??'').trim();
@@ -52,11 +52,13 @@ function growthResources(learningIndex={}){
 
 function stanceFor(profile={}){
   const dims=profile.dimensions||{};
-  const vals=['VOCABULARY','GRAMMAR','EXPRESSION','THINKING'].map(k=>dims[k]?.state||'UNKNOWN');
-  const needs=vals.filter(x=>x==='NEEDS_SUPPORT').length;
-  const stretch=vals.filter(x=>x==='READY_TO_STRETCH').length;
+  const rows=['VOCABULARY','GRAMMAR','EXPRESSION','THINKING'].map(k=>dims[k]||{});
+  const needs=rows.filter(x=>x.state==='NEEDS_SUPPORT'&&x.confidence!=='LOW').length;
+  const stretch=rows.filter(x=>x.state==='READY_TO_STRETCH'&&x.confidence!=='LOW').length;
+  const cross=profile.cross_dimension||{};
+  const evidenceReady=(cross.verified_growth_signal_count||0)>0||(cross.cross_app_dimension_count||0)>0;
   if(needs>=2)return 'SCAFFOLD_LEAD';
-  if(stretch>=2)return 'TRANSFER_PUSH';
+  if(stretch>=2&&evidenceReady)return 'TRANSFER_PUSH';
   return 'ELICIT_PULL';
 }
 
@@ -116,7 +118,74 @@ function growthMoves(profile={},resources={}){
   return steps;
 }
 
-function snapHandoff(profile={},resources={},stance,depth){
+function overallConfidence(profile={}){
+  const rows=Object.values(profile.dimensions||{});
+  const high=rows.filter(x=>x?.confidence==='HIGH').length;
+  const medium=rows.filter(x=>x?.confidence==='MEDIUM').length;
+  const verified=Number(profile.cross_dimension?.verified_growth_signal_count||0);
+  const cross=Number(profile.cross_dimension?.cross_app_dimension_count||0);
+  if(verified>=2||high>=2||(cross>=2&&medium>=2))return 'HIGH';
+  if(verified>=1||high>=1||medium>=2||cross>=1)return 'MEDIUM';
+  return 'LOW';
+}
+
+function expressionLevel(profile={},depth=1){
+  const expression=profile.dimensions?.EXPRESSION||{};
+  const thinking=profile.dimensions?.THINKING||{};
+  if(depth>=5&&thinking.state==='READY_TO_STRETCH')return 'L5_TRANSFER_CREATION';
+  if(depth>=4)return 'L4_REASONED_RESPONSE';
+  if(depth>=3&&expression.state!=='NEEDS_SUPPORT')return 'L3_EXPANDED_SENTENCE';
+  if(depth>=2)return 'L2_SIMPLE_SENTENCE';
+  return 'L1_CHUNK_OR_PHRASE';
+}
+
+function definitionLevel(profile={}){
+  const load=profile.learner_context?.language_load||'SIMPLE';
+  const direct=profile.cross_dimension?.translation_dependency_signal||'UNKNOWN';
+  if(direct==='DIRECT_ENGLISH_EMERGING'&&load!=='VERY_SIMPLE')
+    return 'CONTEXTUAL_EASY_ENGLISH';
+  if(direct==='LIKELY_TRANSLATION_DEPENDENT')
+    return 'EASY_ENGLISH_WITH_KOREAN_FALLBACK';
+  return load==='VERY_SIMPLE'?'VERY_SIMPLE_ENGLISH_WITH_CONTEXT':'EASY_ENGLISH';
+}
+
+function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
+  const confidence=overallConfidence(profile);
+  let intensity=stance==='SCAFFOLD_LEAD'?'SUPPORT_BUILD':
+    stance==='TRANSFER_PUSH'?'STRETCH_TRANSFER':'BUILD_CONNECT';
+  if(confidence==='LOW'&&intensity==='STRETCH_TRANSFER')intensity='BUILD_CONNECT';
+
+  const dims=profile.dimensions||{};
+  const targetDimensions=['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']
+    .map(d=>({dimension:d,state:dims[d]?.state||'UNKNOWN',confidence:dims[d]?.confidence||'LOW'}))
+    .sort((a,b)=>{
+      const rank=s=>s==='NEEDS_SUPPORT'?0:s==='EARLY_SIGNAL'?1:s==='DEVELOPING'?2:s==='UNKNOWN'?3:4;
+      return rank(a.state)-rank(b.state);
+    })
+    .slice(0,3)
+    .map(x=>x.dimension);
+
+  return {
+    evidence_confidence:confidence,
+    learning_intensity:intensity,
+    expression_level:expressionLevel(profile,depth),
+    easy_english_level:definitionLevel(profile),
+    question_depth:depth,
+    hint_strength:hints.level||'PARTIAL_FRAME',
+    hint_fade:stance==='SCAFFOLD_LEAD'?'HOLD_AND_FADE_AFTER_SUCCESS':
+      stance==='TRANSFER_PUSH'?'MINIMAL_CUE':'FADE_ONE_STEP_WHEN_SUCCESSFUL',
+    target_dimensions:targetDimensions,
+    challenge_direction:stance==='SCAFFOLD_LEAD'?'STABILIZE':
+      stance==='TRANSFER_PUSH'?'TRANSFER':'EXTEND',
+    stability_guard:{
+      low_confidence_cannot_upshift_to_transfer:true,
+      one_event_cannot_raise_expression_level_by_itself:true,
+      verified_or_cross_app_evidence_required_for_stretch:true
+    }
+  };
+}
+
+function snapHandoff(profile={},resources={},stance,depth,control=null){
   const vocab=profile.dimensions?.VOCABULARY?.state;
   const eligible=['DEVELOPING','READY_TO_STRETCH'].includes(vocab);
   return {
@@ -127,6 +196,7 @@ function snapHandoff(profile={},resources={},stance,depth){
     task_intent:!eligible?'KEEP_BUILDING_LEXICAL_BASE':
       depth>=4?'USE_AND_EXPLAIN_IN_NEW_CONTEXT':'USE_IN_OWN_SHORT_SENTENCE_OR_SPEECH',
     support_phase:stance,
+    growth_control:control?JSON.parse(JSON.stringify(control)):null,
     prompt_language:'ENGLISH_FIRST_KOREAN_FALLBACK',
     material:{
       expression_chunks:resources.expression_chunks.slice(0,4),
@@ -148,6 +218,7 @@ function derive({growth_profile,learning_index=null}={}){
   const depth=questionDepth(growth_profile,stance);
   const hints=hintPolicy(stance);
   const moves=growthMoves(growth_profile,resources);
+  const control=growthControl(growth_profile,stance,depth,hints);
 
   return {
     ok:true,
@@ -160,6 +231,7 @@ function derive({growth_profile,learning_index=null}={}){
       age_rule:'AGE_ADJUSTS_WORDING_LOAD_NOT_COGNITIVE_CEILING'
     },
     hint_policy:hints,
+    growth_control:control,
     language_load:growth_profile.learner_context?.language_load||'SIMPLE',
     growth_moves:moves,
     language_support:{
@@ -174,7 +246,7 @@ function derive({growth_profile,learning_index=null}={}){
       source_refs:resources.curriculum_source_refs,
       achievement_or_grade_claim_allowed:resources.curriculum_verified
     },
-    hide_to_snap_handoff:snapHandoff(growth_profile,resources,stance,depth),
+    hide_to_snap_handoff:snapHandoff(growth_profile,resources,stance,depth,control),
     reference_gap_candidate:resources.curriculum_verified?null:{
       gap_type:'CURRICULUM_LANGUAGE_GROWTH_REFERENCE_REQUIRED',
       mining_request_authorized:false,
@@ -187,7 +259,9 @@ function derive({growth_profile,learning_index=null}={}){
       expression_chunks_preferred_over_isolated_translation:true,
       age_changes_language_load_not_thinking_ceiling:true,
       hide_prepares_language_material_snap_owns_expression_execution:true,
-      planner_owns_dates:true
+      planner_owns_dates:true,
+      growth_intensity_and_expression_level_are_engine_intent_only:true,
+      low_confidence_cannot_force_growth_upshift:true
     },
     cannot_influence:['SCHEDULE_DATE','PLANNER_DATE','DUE_AT','DEADLINE','ASSIGNMENT_FACT','FINAL_CHILD_ANSWER']
   };
@@ -200,6 +274,9 @@ function validate(policy={}){
   if(!['SCAFFOLD_LEAD','ELICIT_PULL','TRANSFER_PUSH'].includes(policy.support_phase))issues.push('SUPPORT_PHASE_INVALID');
   if(!Number.isInteger(policy?.question_depth?.level)||policy.question_depth.level<1||policy.question_depth.level>5)issues.push('QUESTION_DEPTH_INVALID');
   if(policy.guards?.engine_guides_growth_not_answers!==true)issues.push('GROWTH_GUARD_MISSING');
+  if(!['LOW','MEDIUM','HIGH'].includes(policy?.growth_control?.evidence_confidence))issues.push('GROWTH_CONFIDENCE_INVALID');
+  if(!['SUPPORT_BUILD','BUILD_CONNECT','STRETCH_TRANSFER'].includes(policy?.growth_control?.learning_intensity))issues.push('LEARNING_INTENSITY_INVALID');
+  if(!/^L[1-5]_/.test(String(policy?.growth_control?.expression_level||'')))issues.push('EXPRESSION_LEVEL_INVALID');
   if(policy.hide_to_snap_handoff?.final_answer_generation_forbidden!==true)issues.push('AUTHORSHIP_GUARD_MISSING');
   return {ok:issues.length===0,issues};
 }
