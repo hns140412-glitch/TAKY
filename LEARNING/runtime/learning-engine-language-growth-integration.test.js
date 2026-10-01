@@ -3,18 +3,36 @@
 const assert=require('assert');
 const Runtime=require('./learning-engine-runtime.js');
 
-const owner={
-  source_id:'EDU-ENG-G5-1',
-  source_ref:'INDEX:EDU-ENG-G5-1',
-  source_family:'OFFICIAL_CURRICULUM',
-  source_type:'OFFICIAL_EDUCATION_STANDARD',
-  authority_class:'OFFICIAL',
-  detail_anchor:'DETAIL:EDU-ENG-G5-1#language-growth',
-  provenance:['OFFICIAL_EDUCATION_SOURCE'],
-  issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',domain_use_authorized:true,
-  index_version:'V1',review_evidence_refs:['REVIEW:EDU-1']
-};
-const verifier=(sid,ref)=>sid===owner.source_id&&ref===owner.source_ref?owner:null;
+const owners=[
+  {
+    source_id:'EDU-ENG-G5-1',source_ref:'INDEX:EDU-ENG-G5-1',
+    source_family:'OFFICIAL_CURRICULUM',source_type:'OFFICIAL_EDUCATION_STANDARD',
+    authority_class:'OFFICIAL',detail_anchor:'DETAIL:EDU-ENG-G5-1#language-growth',
+    provenance:['OFFICIAL_EDUCATION_SOURCE']
+  },
+  {
+    source_id:'DICT-ACCEPT-1',source_ref:'INDEX:DICT-ACCEPT-1',
+    source_family:'LEXICAL_DICTIONARY',source_type:'LEXICAL_REFERENCE',
+    authority_class:'REFERENCE',detail_anchor:'DETAIL:DICT-ACCEPT-1#sense-1',
+    provenance:['LEXICAL_REFERENCE_SOURCE']
+  },
+  {
+    source_id:'CORPUS-ACCEPT-1',source_ref:'INDEX:CORPUS-ACCEPT-1',
+    source_family:'LANGUAGE_CORPUS',source_type:'LANGUAGE_USAGE_REFERENCE',
+    authority_class:'REFERENCE',detail_anchor:'DETAIL:CORPUS-ACCEPT-1#usage',
+    provenance:['LANGUAGE_USAGE_SOURCE']
+  },
+  {
+    source_id:'PED-EN-1',source_ref:'INDEX:PED-EN-1',
+    source_family:'PEDAGOGICAL_LEARNING_RESOURCE',source_type:'CURATED_PEDAGOGY',
+    authority_class:'CURATED',detail_anchor:'DETAIL:PED-EN-1#support',
+    provenance:['PEDAGOGICAL_SOURCE_REF']
+  }
+].map((x,i)=>({
+  ...x,issuer:'INDEXING_OWNER',reviewed:true,decision:'INDEXED',
+  domain_use_authorized:true,index_version:'V1',review_evidence_refs:['REVIEW:'+(i+1)]
+}));
+const verifier=(sid,ref)=>owners.find(x=>x.source_id===sid&&x.source_ref===ref)||null;
 
 const evidence=[
   {
@@ -51,12 +69,12 @@ const out=Runtime.derive({
   learning_index_handoff:{
     indexed_evidence_handoff:{
       query_context:{consumer_app:'LEARNING_ENGINE',function_id:'LE-GROWTH-01',requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH'},
-      candidates:[{
+      candidates:owners.map(owner=>({
         source_id:owner.source_id,source_ref:owner.source_ref,
         source_family:owner.source_family,source_type:owner.source_type,
         authority_class:owner.authority_class,detail_anchor:owner.detail_anchor,
         provenance:[...owner.provenance]
-      }]
+      }))
     },
     learning_mapping:{
       by_source_id:{
@@ -64,17 +82,25 @@ const out=Runtime.derive({
           curriculum_version:'2022',grade:5,subject:'english',
           achievement_standard_refs:['ENG-G5-EXPR-01'],
           term:'accept',
-          easy_english_definition:'to say yes to something or receive it',
-          expression_chunks:['accept an idea','I can accept ...'],
-          natural_collocations:['accept an idea','accept an invitation'],
-          grammar_patterns:['can + base verb','accept + noun'],
           thinking_moves:['EXPLAIN','COMPARE','APPLY'],
           question_stems:['Why would someone accept it?'],
-          production_targets:['USE_WORD_IN_OWN_SENTENCE'],
+          production_targets:['USE_WORD_IN_OWN_SENTENCE']
+        },
+        'DICT-ACCEPT-1':{
+          term:'accept',
+          easy_english_definition:'to say yes to something or receive it'
+        },
+        'CORPUS-ACCEPT-1':{
+          term:'accept',
+          expression_chunks:['accept an idea','I can accept ...'],
+          natural_collocations:['accept an idea','accept an invitation'],
+          grammar_patterns:['can + base verb','accept + noun']
+        },
+        'PED-EN-1':{
+          term:'accept',
           english_thinking_support:['picture -> easy English meaning -> chunk -> own sentence']
         }
       }
-    }
   }
 },verifier);
 
@@ -91,6 +117,10 @@ assert.equal(out.growth_next_step.guards.engine_guides_growth_not_answers,true);
 assert.equal(out.growth_next_step.guards.korean_to_english_word_by_word_translation_is_not_default,true);
 assert.ok(out.growth_next_step.language_support.easy_english_definitions.length>0);
 assert.ok(out.growth_next_step.language_support.expression_chunks.length>0);
+assert.deepEqual(out.growth_next_step.curriculum_grounding.source_refs,['INDEX:EDU-ENG-G5-1']);
+assert.equal(out.growth_next_step.language_resource_provenance.easy_english_definitions[0].source_role,'LEXICAL_SEMANTICS');
+assert.equal(out.growth_next_step.language_resource_provenance.expression_chunks[0].source_role,'LANGUAGE_USAGE');
+assert.equal(out.growth_next_step.language_resource_provenance.english_thinking_support[0].source_role,'PEDAGOGICAL_USAGE');
 assert.equal(out.growth_next_step.hide_to_snap_handoff.to_app,'snap-pop');
 assert.equal(out.growth_next_step.hide_to_snap_handoff.child_authorship_required,true);
 assert.equal(out.growth_next_step.hide_to_snap_handoff.final_answer_generation_forbidden,true);
