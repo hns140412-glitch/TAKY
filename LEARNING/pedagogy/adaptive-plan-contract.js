@@ -9,8 +9,10 @@ function derive(feedback_intent={}){
   const names=new Set(intents.map(x=>clean(x.intent)).filter(Boolean));
   const targetIds=[...new Set(intents.flatMap(x=>Array.isArray(x.targets)?x.targets:[]).map(clean).filter(Boolean))];
 
-  const targetedRecovery=names.has('TARGETED_RECOVERY_PRACTICE');
-  const retrieval=names.has('RETRIEVAL_CHECKPOINT')||names.has('SHORT_DELAY_RETRIEVAL');
+  const accuracyRepair=names.has('ACCURACY_REPAIR');
+  const accuracyCheckpoint=names.has('ACCURACY_CHECKPOINT');
+  const targetedRecovery=names.has('TARGETED_RECOVERY_PRACTICE')||accuracyRepair;
+  const retrieval=names.has('RETRIEVAL_CHECKPOINT')||names.has('SHORT_DELAY_RETRIEVAL')||accuracyCheckpoint;
   const confusion=names.has('DISAMBIGUATE_CONFUSION');
   const fadeAssistance=names.has('REDUCE_ASSISTANCE_GRADUALLY');
 
