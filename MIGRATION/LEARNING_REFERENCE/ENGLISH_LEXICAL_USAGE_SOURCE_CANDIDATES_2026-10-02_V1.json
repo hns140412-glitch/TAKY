@@ -46,7 +46,9 @@
         "attribution_required": true,
         "runtime_authority": false,
         "formal_index_owner_promotion_required": true
-      }
+      },
+      "index_state": "INDEXED_V27__NOT_CURRENT__NOT_CANONICAL",
+      "runtime_authority_scope": "BRANCH_INDEXED_REFERENCE_ONLY"
     },
     {
       "candidate_id": "ENGLISH_LEXICAL_PRINCETON_WORDNET_3",
@@ -77,6 +79,44 @@
     }
   ],
   "language_usage": [
+    {
+      "candidate_id": "ENGLISH_USAGE_TATOEBA_TEXT",
+      "name": "Tatoeba textual sentence corpus",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "usage_evidence_kind": "EXAMPLE_SENTENCE",
+      "authority_candidate": "OPEN_ATTRIBUTED_EXAMPLE_SENTENCE_SOURCE",
+      "source_url": "https://tatoeba.org/ko/terms_of_use",
+      "download_info_url": "https://en.wiki.tatoeba.org/articles/show/faq",
+      "license": "CC-BY-2.0-FR",
+      "attribution_required": true,
+      "commercial_use_permitted_by_license": true,
+      "strengths": [
+        "large multilingual example-sentence collection",
+        "text reuse permitted with attribution under the default textual-data license",
+        "downloadable sentence data",
+        "useful as an example-sentence candidate source rather than a frequency corpus"
+      ],
+      "risks": [
+        "crowd-sourced sentence quality varies",
+        "sentence presence does not establish population frequency or universal naturalness",
+        "author attribution must be preserved according to Tatoeba reuse requirements"
+      ],
+      "allowed_candidate_use": [
+        "example sentence candidate retrieval",
+        "context illustration candidate",
+        "cross-checking whether a phrase appears in contributed sentence data"
+      ],
+      "forbidden_candidate_use": [
+        "single-source naturalness truth",
+        "collocation frequency authority",
+        "curriculum authority",
+        "lexical sense authority",
+        "child-facing passthrough without attribution and quality/safety review"
+      ],
+      "disposition": "PREFERRED_USAGE_EXAMPLE_PRECHECK_CANDIDATE__INDEX_OWNER_REVIEW_OPEN",
+      "index_owner_review_required": true,
+      "runtime_authority": false
+    },
     {
       "candidate_id": "ENGLISH_USAGE_UD_EWT",
       "name": "Universal Dependencies English EWT",
@@ -115,7 +155,8 @@
       ],
       "disposition": "PREFERRED_USAGE_PRECHECK_CANDIDATE__LICENSE_COMPATIBILITY_REVIEW_OPEN",
       "index_owner_review_required": true,
-      "runtime_authority": false
+      "runtime_authority": false,
+      "usage_evidence_kind": "DEPENDENCY_PATTERN"
     },
     {
       "candidate_id": "ENGLISH_USAGE_SKETCH_ENGINE",
@@ -152,14 +193,73 @@
         "child-facing example sentence passthrough without safety/quality review"
       ],
       "index_owner_review_required": true
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_CHILDES",
+      "name": "Universal Dependencies English CHILDES",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "usage_evidence_kind": "CHILD_ADULT_SPOKEN_DEPENDENCY_PATTERN",
+      "authority_candidate": "OPEN_ANNOTATED_CHILD_ADULT_SPOKEN_CORPUS",
+      "source_url": "https://universaldependencies.org/treebanks/en_childes/index.html",
+      "current_ud_release": "2.18",
+      "license": "CC-BY-SA-4.0",
+      "genres": [
+        "spoken",
+        "child-adult interaction"
+      ],
+      "corpus_scope": {
+        "gold_sentences": 48000,
+        "tokens": 236000,
+        "note": "UD page describes a gold-standard treebank drawn from CHILDES child-adult spoken interactions."
+      },
+      "strengths": [
+        "child-adult spoken interaction evidence",
+        "manually corrected dependency relations",
+        "useful for spoken grammar and local pattern candidates"
+      ],
+      "risks": [
+        "child age and conversational setting differ from grade-5 classroom English",
+        "CC-BY-SA compatibility review required before runtime-derived artifact use",
+        "corpus patterns are contextual evidence, not universal naturalness truth"
+      ],
+      "allowed_candidate_use": [
+        "child-adult spoken usage pattern candidate",
+        "dependency-based grammar pattern candidate",
+        "spoken chunk cross-check candidate"
+      ],
+      "forbidden_candidate_use": [
+        "grade-level curriculum authority",
+        "single-source naturalness truth",
+        "lexical sense authority",
+        "automatic age-level prescription"
+      ],
+      "disposition": "PREFERRED_CHILD_SPOKEN_USAGE_PRECHECK_CANDIDATE__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN",
+      "index_owner_review_required": true,
+      "runtime_authority": false
+    },
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_GUM",
+      "name": "Universal Dependencies English GUM",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "usage_evidence_kind": "MULTIGENRE_DEPENDENCY_PATTERN",
+      "source_url": "https://universaldependencies.org/treebanks/en_gum/index.html",
+      "license": "CC-BY-NC-SA-4.0",
+      "disposition": "HOLD_NONCOMMERCIAL_AND_MIXED_SOURCE_LICENSE_RESTRICTIONS",
+      "reason": "UD English GUM is CC BY-NC-SA 4.0 and GUM source documents have mixed underlying licensing; do not select as default app runtime authority.",
+      "runtime_authority": false,
+      "index_owner_review_required": true
     }
   ],
   "decision": {
     "preferred_lexical_precheck_candidate": "ENGLISH_LEXICAL_OEWN_2025",
     "preferred_usage_candidate": null,
     "lexical_gap_state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
-    "usage_gap_state": "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN",
-    "preferred_usage_precheck_candidate": "ENGLISH_USAGE_UD_EWT"
+    "usage_gap_state": "MULTI_SOURCE_PRECHECK_READY__INDEX_OWNER_AND_LICENSE_GATES_OPEN",
+    "preferred_usage_precheck_candidate": "ENGLISH_USAGE_UD_EWT",
+    "preferred_usage_example_precheck_candidate": "ENGLISH_USAGE_TATOEBA_TEXT",
+    "preferred_usage_structural_precheck_candidate": "ENGLISH_USAGE_UD_EWT",
+    "preferred_usage_child_spoken_precheck_candidate": "ENGLISH_USAGE_UD_CHILDES",
+    "usage_authority_model": "LANGUAGE_USAGE_ROLE_WITH_SEPARATE_EVIDENCE_KINDS"
   },
   "guards": [
     "SOURCE_CANDIDATE != INDEXED",
@@ -168,6 +268,10 @@
     "LANGUAGE_USAGE != LEXICAL_SEMANTICS",
     "LICENSE_COMPATIBILITY_REQUIRED_BEFORE_RUNTIME_USE",
     "OPEN_LICENSE != AUTOMATIC_RUNTIME_COMPATIBILITY",
-    "CORPUS_USAGE_EVIDENCE != UNIVERSAL_NATURALNESS_TRUTH"
+    "CORPUS_USAGE_EVIDENCE != UNIVERSAL_NATURALNESS_TRUTH",
+    "EXAMPLE_SENTENCE != FREQUENCY_AUTHORITY",
+    "DEPENDENCY_PATTERN != UNIVERSAL_NATURALNESS_TRUTH",
+    "CHILD_ADULT_SPOKEN_PATTERN != GRADE_LEVEL_PRESCRIPTION",
+    "MULTI_SOURCE_CORROBORATION_PREFERRED_FOR_CHILD_FACING_USAGE"
   ]
 }
