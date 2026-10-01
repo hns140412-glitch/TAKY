@@ -101,4 +101,30 @@ assert.equal(batch.ok,false);
 assert.equal(batch.results[0].decision,'ALLOW_CONDITIONAL');
 assert.equal(batch.results[1].reason,'DENY_HOLD');
 
+
+
+for(const provenance of [
+  'OFFICIAL_EDUCATION_SOURCE',
+  'LEXICAL_REFERENCE_SOURCE',
+  'LANGUAGE_USAGE_SOURCE',
+  'PEDAGOGICAL_SOURCE_REF'
+]){
+  const growth=Bridge.evaluate({
+    function_id:'LE-GROWTH-01',
+    consumer_app:'LEARNING_ENGINE',
+    requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH',
+    provenance:[provenance]
+  });
+  assert.equal(growth.ok,true,provenance);
+  assert.equal(growth.decision,'ALLOW',provenance);
+}
+const growthUnknownSource=Bridge.evaluate({
+  function_id:'LE-GROWTH-01',
+  consumer_app:'LEARNING_ENGINE',
+  requested_behavior:'CURRICULUM_GROUNDED_LANGUAGE_GROWTH',
+  provenance:['UNCLASSIFIED_REFERENCE']
+});
+assert.equal(growthUnknownSource.ok,false);
+assert.equal(growthUnknownSource.reason,'DENY_PROVENANCE_ROLE_REQUIRED');
+
 console.log('LEARNING_EVIDENCE_POLICY_BRIDGE_PASS');
