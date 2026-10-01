@@ -204,6 +204,10 @@ jobs:
         run: node LEARNING/pedagogy/language-growth-profile.test.js
       - name: Validate growth next-step policy
         run: node LEARNING/pedagogy/growth-next-step-policy.test.js
+      - name: Validate growth outcome feedback candidate
+        run: node LEARNING/pedagogy/growth-outcome-feedback.test.js
+      - name: Validate Learning growth outcome runtime loop
+        run: node LEARNING/runtime/learning-engine-growth-outcome-integration.test.js
       - name: Validate curriculum-grounded language growth runtime
         run: node LEARNING/runtime/learning-engine-language-growth-integration.test.js
       - name: Validate central Learning growth decision surface
