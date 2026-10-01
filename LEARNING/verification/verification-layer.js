@@ -139,11 +139,15 @@ function applyReceipt(evidence={},receipt={}){
         ...evidence,
         verified_outcome:null,
         verification,
-        language_growth_signals:[
-          ...(Array.isArray(evidence.language_growth_signals)?evidence.language_growth_signals:[])
-            .filter(x=>clean(x?.outcome).toUpperCase()==='UNKNOWN'),
-          ...growthSignals
-        ]
+        language_growth_signals:(()=>{
+          const reviewed=new Set(growthSignals.map(x=>clean(x.dimension).toUpperCase()));
+          const prior=(Array.isArray(evidence.language_growth_signals)?evidence.language_growth_signals:[])
+            .filter(x=>!(
+              reviewed.has(clean(x?.dimension).toUpperCase()) &&
+              clean(x?.outcome).toUpperCase()==='UNKNOWN'
+            ));
+          return [...prior,...growthSignals];
+        })()
       }
     };
   }
