@@ -887,10 +887,106 @@ The existing Index-first gap broker decides whether:
 - Mining Index already contains evidence,
 - or Mining Engine acquisition is actually required.
 
-### 22.10 Current candidate implementation
+### 22.10 Evidence confidence and anti-oscillation
+
+Growth state SHALL distinguish:
+- OBSERVATION
+- VERIFIED / human- or deterministic-review-backed evidence
+- cross-app convergence
+- assisted vs unassisted evidence
+- transfer evidence
+- applied challenge context
+
+Confidence:
+- LOW
+- MEDIUM
+- HIGH
+
+Hard locks:
+- one success does not create a growth-level promotion;
+- app completion does not equal successful growth;
+- observation-only evidence cannot self-promote to HIGH confidence;
+- sparse direct-English evidence cannot label the child translation-dependent;
+- strong-scaffold success does not by itself justify an expression-level upshift;
+- verified or cross-app evidence is required before stretch promotion;
+- challenge context is evidence context, not learner-state authority.
+
+### 22.11 Growth control vector
+
+Learning Engine emits one explicit growth-control intent:
+
+- evidence_confidence: LOW / MEDIUM / HIGH
+- learning_intensity:
+  - SUPPORT_BUILD
+  - BUILD_CONNECT
+  - STRETCH_TRANSFER
+- expression_level:
+  - L1_CHUNK_OR_PHRASE
+  - L2_SIMPLE_SENTENCE
+  - L3_EXPANDED_SENTENCE
+  - L4_REASONED_RESPONSE
+  - L5_TRANSFER_CREATION
+- easy_english_level
+- question_depth: 1..5
+- hint_strength
+- hint_fade
+- target_dimensions
+- challenge_direction
+
+Growth control is pedagogical intent only.
+It cannot own dates, assignment facts or the child's final answer.
+
+### 22.12 Applied challenge evidence
+
+When Snap executes a growth-control intent, the result must preserve the execution context:
+
+- learning_intensity
+- expression_level
+- question_depth
+- hint_strength
+- hint_fade
+- challenge_direction
+- growth intent version
+
+This is stored as SPECIALIST_EXECUTION_CONTEXT_ONLY.
+
+It is used to interpret the next result:
+the same correct response under strong scaffolding and under minimal cues is not equivalent evidence.
+
+SPECIALIST EXECUTION CONTEXT != LEARNING ENGINE AUTHORITY
+APPLIED DIFFICULTY != LEARNER STATE
+
+### 22.13 Outcome feedback
+
+A single outcome may create only a growth adjustment candidate:
+
+- OBSERVE_MORE
+- HOLD_LEVEL
+- FADE_HINT_ONE_STEP_CANDIDATE
+- HOLD_LEVEL_ADJUST_HINT_CANDIDATE
+- INCREASE_SUPPORT_CANDIDATE
+- KEEP_SUPPORT_AND_RECHECK
+- PRESERVE_OR_STRETCH_CANDIDATE
+
+The outcome feedback layer SHALL NOT directly mutate learner state or authorize a growth-control change.
+
+Canonical loop:
+
+APPLIED GROWTH CONTROL
+-> SPECIALIST RESULT
+-> GROWTH OUTCOME FEEDBACK CANDIDATE
+-> CUMULATIVE EVIDENCE
+-> RE-DERIVE GROWTH PROFILE
+-> RE-DERIVE NEXT GROWTH CONTROL
+
+CANDIDATE FEEDBACK != STATE MUTATION
+ONE RESULT != AUTOMATIC LEVEL CHANGE
+
+### 22.14 Current candidate implementation
 
 - LEARNING/pedagogy/language-growth-profile.js
 - LEARNING/pedagogy/growth-next-step-policy.js
+- LEARNING/pedagogy/growth-outcome-feedback.js
 - LEARNING/index/learning-index.js language_growth semantic group
 - LEARNING/adapters/canonical-evidence.js growth signal normalization
 - LEARNING/runtime/learning-engine-runtime.js growth integration
