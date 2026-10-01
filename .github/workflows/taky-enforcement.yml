@@ -13,6 +13,9 @@ on:
       - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
       - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
+      - 'MIGRATION/CURRICULUM/**'
+      - 'ENFORCEMENT/ready_curriculum_registry_migration.py'
+      - 'ENFORCEMENT/ready_curriculum_registry_migration_test.py'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
       - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
@@ -210,6 +213,9 @@ jobs:
         run: node LEARNING/runtime/learning-engine-growth-outcome-integration.test.js
       - name: Validate curriculum-grounded language growth runtime
         run: node LEARNING/runtime/learning-engine-language-growth-integration.test.js
+      - name: Validate Ready curriculum migration candidate
+        working-directory: ENFORCEMENT
+        run: python ready_curriculum_registry_migration_test.py
       - name: Validate central Learning growth decision surface
         run: node LEARNING/transport/central-learning-decision-http-endpoint.test.js
       - name: Validate Learning Engine estimator benchmark lane
