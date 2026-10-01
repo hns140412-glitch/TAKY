@@ -15,7 +15,10 @@ class TestEnglishSourceCandidates(unittest.TestCase):
         self.assertIn("SOURCE_CANDIDATE != INDEXED",d["guards"])
         self.assertIn("INDEXED != CANONICAL",d["guards"])
         self.assertIsNone(d["decision"]["preferred_usage_candidate"])
-        self.assertEqual(d["decision"]["usage_gap_state"],"OPEN__NO_UNCONDITIONAL_PROVIDER_SELECTED")
+        self.assertEqual(d["decision"]["preferred_usage_precheck_candidate"],
+                         "ENGLISH_USAGE_UD_EWT")
+        self.assertEqual(d["decision"]["usage_gap_state"],
+                         "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN")
 
     def test_open_english_wordnet_is_lexical_candidate_only(self):
         row=next(x for x in self.data["lexical_semantics"]
@@ -31,6 +34,10 @@ class TestEnglishSourceCandidates(unittest.TestCase):
         self.assertTrue(rows["ENGLISH_LEXICAL_OXFORD_API"]["disposition"].startswith("HOLD_"))
         self.assertTrue(rows["ENGLISH_LEXICAL_CAMBRIDGE_API"]["disposition"].startswith("HOLD_"))
         usage={x["candidate_id"]:x for x in self.data["language_usage"]}
+        self.assertEqual(usage["ENGLISH_USAGE_UD_EWT"]["license"],"CC-BY-SA-4.0")
+        self.assertFalse(usage["ENGLISH_USAGE_UD_EWT"]["runtime_authority"])
+        self.assertIn("LICENSE_COMPATIBILITY_REVIEW_OPEN",
+                      usage["ENGLISH_USAGE_UD_EWT"]["disposition"])
         self.assertTrue(usage["ENGLISH_USAGE_SKETCH_ENGINE"]["disposition"].startswith("HOLD_"))
         self.assertIn("SECONDARY_CANDIDATE",usage["ENGLISH_USAGE_LEIPZIG_CORPORA"]["disposition"])
 
