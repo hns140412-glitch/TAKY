@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Individual art structural viewer — NOT LIVE</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff7e8;color:#4d4435;font:14px system-ui,'Noto Sans KR',sans-serif}
+main{max-width:660px;margin:24px auto;padding:16px}h1{font-size:1rem;font-weight:700}
+.scene{position:relative;width:min(88vw,512px);aspect-ratio:1;margin:20px auto;overflow:hidden;background:#fff7ea;border-radius:3px}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.controls{display:flex;gap:12px;justify-content:center;align-items:center}button{padding:10px 16px;border:1px solid #b6ab96;border-radius:12px;background:#fffef7;cursor:pointer}
+small{display:block;line-height:1.5;text-align:center;color:#756b5d;margin:12px}
+</style></head><body><main><h1>독립 원화 검증용 — 서비스 UI가 아닙니다</h1>
+<div class="scene" role="img" aria-label="선택한 개별 원화"><img id="background" alt=""><img id="interior" alt=""></div>
+<div class="controls"><button id="prev" type="button">이전</button><output id="number" aria-live="polite"></output><button id="next" type="button">다음</button></div>
+<small>배경과 내부 원화를 파일별로 합성하는 개발 검증 화면입니다. 실제 배지 성급·획득 여부·UI 승인·활성화와 무관합니다. 연락처 시트 또는 신규 UI 시안이 아닙니다.</small></main>
+<script>
+const params=new URLSearchParams(location.search);
+let id=Number(params.get('id')||1);if(!Number.isInteger(id)||id<1||id>60)id=1;
+function render(){const code=String(id).padStart(3,'0');document.getElementById('number').textContent=code+' / 060';
+for(const layer of ['background','interior'])document.getElementById(layer).src='./assets/individual/'+code+'/'+layer+'.svg';
+history.replaceState(null,'','?id='+code);
+}
+document.getElementById('prev').onclick=()=>{id=id===1?60:id-1;render()};
+document.getElementById('next').onclick=()=>{id=id===60?1:id+1;render()};render();
+</script></body></html>

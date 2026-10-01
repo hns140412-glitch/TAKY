@@ -82,7 +82,7 @@ const projection=(ledger)=>deriveFromLedger({
  assert.equal(earlier.row_count,1);
  assert.ok(earlier.rows[0].record.awarded_at!==earlier.rows[0].record.approved_at);
  state=await projection(create());
- assert.equal(state.ok,true);assert.equal(state.state.star_count,0);
+ assert.equal(state.ok,true);assert.equal(state.state.star_count,1);
  // Force two separate workers to read the SAME strong-consistency ETag.
  store.armSimultaneousPair();
  const parallel=await Promise.all([award(create(),2,'REAWARD'),award(create(),3,'REAWARD')]);
@@ -106,7 +106,7 @@ const projection=(ledger)=>deriveFromLedger({
  assert.equal((await original.source.loadCompleteHistory({child_id,badge_id})).row_count,4);
  state=await projection(original);
  assert.equal(state.ok,true);assert.equal(state.verified_awards,4);
- assert.equal(state.state.star_count,3);
+ assert.equal(state.state.star_count,4);
  assert.equal(state.history.length,4);
  const month=projectBadgeCalendar({family_id,child_id,month:'2026-09',history:state.history});
  assert.equal(month.ok,true);

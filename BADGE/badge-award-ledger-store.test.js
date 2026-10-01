@@ -43,7 +43,7 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   projected=await deriveFromLedger({...options,source:create().source});
   assert.equal(projected.ok,true);
   assert.equal(projected.ownership_state,'EARNED');
-  assert.equal(projected.state.star_count,0);
+  assert.equal(projected.state.star_count,1);
   const firstSnapshot=await store.source.loadCompleteHistory({child_id,badge_id});
   const ledgerFile=fs.readdirSync(directory).find(x=>x.endsWith('.json'));
   const lockFile=path.join(directory,ledgerFile+'.lock');
@@ -56,7 +56,7 @@ const options={child_id,badge_id,tier_order:['GREEN','BLUE','RED','GOLD','PLATIN
   assert.equal(projected.ok,true);
   assert.equal(projected.verified_awards,6);
   assert.equal(projected.state.tier,'BLUE');
-  assert.equal(projected.state.star_count,0);
+  assert.equal(projected.state.star_count,1);
   const snapshot=await store.source.loadCompleteHistory({child_id,badge_id});
   assert.equal((await store.source.verifyAwardRow(firstSnapshot.rows[0],{child_id,badge_id,checkpoint:firstSnapshot.checkpoint})).ok,false); // Stale snapshot after new awards.
   assert.equal(snapshot.complete,true);

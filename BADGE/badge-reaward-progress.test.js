@@ -7,31 +7,32 @@ function receipt(i,kind='REAWARD'){return {authority:'AWARD_LEDGER',decision_sta
 let result=project(null,receipt(0,'INITIAL_AWARD'),cfg);
 assert.equal(result.ok,true);
 assert.equal(result.state.owned,true);
-assert.equal(result.state.star_count,0); // Initial acquisition only unlocks the badge.
+assert.equal(result.state.star_count,1); // Latest user rule: initial acquisition starts at one star.
 let state=result.state;
 assert.equal(project(state,receipt(0,'INITIAL_AWARD'),cfg).reason,'DUPLICATE_AWARD_RECEIPT');
 assert.equal(project(state,{...receipt(1),authority:'ACTIVITY_TELEMETRY'},cfg).ok,false);
 assert.equal(project(state,{...receipt(1),child_id:'CHILD_B'},cfg).reason,'CROSS_MEMBER_OR_BADGE_STATE_FORBIDDEN');
 assert.equal(project(state,receipt(1,'INITIAL_AWARD'),cfg).ok,false);
-for(let i=1;i<=4;i++){
+for(let i=1;i<=3;i++){
   result=project(state,receipt(i),cfg);
   assert.equal(result.ok,true);
   assert.equal(result.tier_up,false);
-  assert.equal(result.state.star_count,i);
+  assert.equal(result.state.star_count,i+1);
   state=result.state;
 }
-result=project(state,receipt(5),cfg);
+result=project(state,receipt(4),cfg);
 assert.equal(result.ok,true);
 assert.equal(result.tier_up,true);
 assert.equal(result.stars_collected_before_promotion,5);
 assert.equal(result.state.tier,'BLUE');
-assert.equal(result.state.star_count,0);
-assert.equal(project(result.state,receipt(5),cfg).reason,'DUPLICATE_AWARD_RECEIPT');
+assert.equal(result.state.star_count,0,'next-tier reset remains existing provisional behavior, separate from the initial-one-star correction');
+assert.equal(project(result.state,receipt(4),cfg).reason,'DUPLICATE_AWARD_RECEIPT');
 let top=project(null,receipt(100,'INITIAL_AWARD'),{tier_order:['GREEN','BLUE']}).state;
-for(let i=101;i<=105;i++)top=project(top,receipt(i),{tier_order:['GREEN','BLUE']}).state;
+for(let i=101;i<=104;i++)top=project(top,receipt(i),{tier_order:['GREEN','BLUE']}).state;
 assert.equal(top.tier,'BLUE');
-for(let i=106;i<=110;i++)top=project(top,receipt(i),{tier_order:['GREEN','BLUE']}).state;
+assert.equal(top.star_count,0,'promotion reset is preserved as provisional existing behavior');
+for(let i=105;i<=109;i++)top=project(top,receipt(i),{tier_order:['GREEN','BLUE']}).state;
 assert.equal(top.star_count,5);
 assert.equal(top.top_tier_rule_pending,true);
-assert.equal(project(top,receipt(111),{tier_order:['GREEN','BLUE']}).reason,'TOP_TIER_RULE_PENDING');
+assert.equal(project(top,receipt(110),{tier_order:['GREEN','BLUE']}).reason,'TOP_TIER_RULE_PENDING');
 console.log('badge reaward progression: PASS');

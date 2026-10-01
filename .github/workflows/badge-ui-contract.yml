@@ -2,9 +2,8 @@ name: Badge UI contract checks
 on:
   pull_request:
     paths:
-      - 'BADGE/ui/**'
-      - 'BADGE/badge-visual-renderer.js'
-      - 'BADGE/badge-visual-renderer.test.js'
+      - 'BADGE/**'
+      - '.github/workflows/badge-ui-contract.yml'
   workflow_dispatch:
 jobs:
   badge-contract:
@@ -21,7 +20,79 @@ jobs:
           node --check BADGE/ui/badge-atlas.test.cjs
           node --check BADGE/badge-visual-renderer.js
           node --check BADGE/badge-visual-renderer.test.js
+          node --check BADGE/badge-reaward-progress.js
+          node --check BADGE/badge-reaward-progress.test.js
       - name: Badge UI contract
         run: node BADGE/ui/badge-atlas.test.cjs
       - name: Badge renderer regression
         run: node BADGE/badge-visual-renderer.test.js
+      - name: Badge initial acquisition and reaward progression regression
+        run: node BADGE/badge-reaward-progress.test.js
+      - name: Separate badge asset registry and overlay-slot guards
+        run: python3 BADGE/assets/test_badge_assets.py
+      - name: Enforce 60 badge art rework truth and negative fixtures
+        run: |
+          python3 BADGE/assets/verify_visual_rework_queue.py
+          python3 BADGE/assets/verify_visual_rework_queue_test.py
+      - name: 60 individual source-specific draft bindings and offline inspector
+        run: python3 BADGE/ui/test_dev_bindings_60.py
+      - name: Independently-authored 60 artwork structural QA
+        run: python3 BADGE/ui/test_individual_art_60.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated SVG raster QA dependencies
+        run: python -m pip install cairosvg pillow
+      - name: Preserve legacy V1 as non-executable history
+        run: |
+          python BADGE/production/verify_badge_production_pipeline.py
+          python BADGE/production/verify_badge_production_pipeline_test.py
+      - name: Enforce count-independent Badge Production Standard V2
+        run: |
+          python BADGE/production/verify_badge_production_standard_v2.py
+          python BADGE/production/verify_badge_production_standard_v2_test.py
+      - name: Deterministic all-badge production packets and future-badge routing
+        run: |
+          python BADGE/production/build_badge_production_packets_v2.py --check
+          python BADGE/production/verify_badge_production_packets_v2.py
+          python BADGE/production/verify_badge_production_packets_v2_test.py
+          python BADGE/production/prepare_badge_asset_scaffold_v2_test.py
+      - name: CLI preflight structural gate - generation remains disabled
+        run: |
+          python BADGE/production/badge_cli_preflight_v2.py --output /tmp/badge-cli-preflight.json
+          python BADGE/production/badge_cli_preflight_v2_test.py
+          python BADGE/production/badge_cli_execution_plan_v2.py --output /tmp/badge-cli-plan.json
+          python BADGE/production/badge_cli_execution_plan_v2.py --validate /tmp/badge-cli-plan.json --resume-list
+          python BADGE/production/badge_cli_execution_plan_v2_test.py
+          python BADGE/production/badge_cli_master_plan_v3.py --output /tmp/badge-cli-master-plan.json
+          python BADGE/production/badge_cli_master_plan_v3.py --validate /tmp/badge-cli-master-plan.json
+          python BADGE/production/badge_cli_master_plan_v3_test.py
+          python BADGE/production/verify_badge_cli_executor_contract_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/badge-cli-preflight.json',encoding='utf-8'))
+          assert r['structural_preflight_pass'] is True
+          assert r['cli_ready'] is False
+          assert r['generation_executed'] is False
+          assert 'EXECUTOR_ADAPTER_NOT_BOUND' in r['blockers']
+          PY
+      - name: Hard-block invented or unreviewed production art bytes
+        run: |
+          python BADGE/assets/verify_art_admission.py
+          python BADGE/assets/verify_art_admission_test.py
+      - name: Raster integration QA at 64/120/200/320 px
+        run: python BADGE/ui/render_individual_art_60.py
+      - name: Archive 60 separate illustration previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: badge-60-independent-scene-candidates
+          path: |
+            BADGE/ui/rendered-individual-candidates/*.png
+            BADGE/ui/assets/individual/**/*.svg
+            BADGE/ui/badge-individual-art-60-candidates.json
+            BADGE/assets/**
+            BADGE/badge-managed-asset-compositor.js
+            BADGE/ui/badge-dev-preview-bindings-60.json
+            BADGE/ui/badge-dev-binding-inspector.html
+            BADGE/ui/badge-atlas.css
+          retention-days: 14

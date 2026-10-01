@@ -1,0 +1,155 @@
+{
+  "schema": "TAKY_BADGE_PRODUCTION_STANDARD_V2",
+  "status": "DRAFT_PR_ONLY_NOT_RUNTIME_ACTIVATION",
+  "owner": "TAKY/BADGE",
+  "purpose": "Count-independent badge art production, detail-only depth behavior, and ownership-state rules for the current 60 badges and future badges.",
+  "authority_order": [
+    "BADGE source identity/story/motif",
+    "approved copy/direction",
+    "visual QA evidence",
+    "approved asset registry",
+    "signed Award Ledger for ownership/progress"
+  ],
+  "current_baseline": {
+    "badge_count": 60,
+    "rework_required": 31,
+    "keep_candidate": 29,
+    "final_approved_art": 0,
+    "runtime_active": 0
+  },
+  "extensibility": {
+    "badge_count_hardcoded_in_pipeline": false,
+    "production_universe_rule": "Use every badge ID present in source + art direction + copy authority. A later badge joins the same pipeline after those three authorities exist.",
+    "classification": {
+      "REWORK_REQUIRED": "Current reviewed badge ID present in visual-rework correction_ids.",
+      "KEEP_CANDIDATE": "Current reviewed baseline badge not present in correction_ids. KEEP is not approval.",
+      "NEW_UNREVIEWED": "Future badge with complete source/direction/copy but no completed visual review yet."
+    },
+    "same_final_route_for_all": [
+      "SOURCE_LOCK",
+      "PRODUCTION_PACKET",
+      "GENERATE_OR_KEEP_CANDIDATE",
+      "DEPTH_LAYER_PACK",
+      "TECHNICAL_QA",
+      "SEMANTIC_VISUAL_QA",
+      "SET_LEVEL_CROSS_VALIDATION",
+      "REVIEW_EVIDENCE",
+      "ART_ADMISSION",
+      "APPROVED_ASSET_REGISTRY",
+      "SEPARATELY_AUTHORIZED_RUNTIME_BINDING"
+    ],
+    "new_badge_must_not_inherit_keep_status": true,
+    "new_badge_must_not_require_editing_a_fixed_count_constant": true,
+    "reviewed_baseline": "BADGE/production/badge-production-baseline-v2.json",
+    "current_packet_manifest": "BADGE/production/badge-production-packets-v2.json"
+  },
+  "production_packet_required_fields": [
+    "badge_id",
+    "visual_id",
+    "source_canonical_title",
+    "display_item",
+    "core_detail",
+    "source_storyline",
+    "source_motif",
+    "scene_brief",
+    "witty_key_detail",
+    "allowed_delta",
+    "forbidden_elements"
+  ],
+  "art_contract": {
+    "one_badge_one_independent_file_set": true,
+    "no_character_or_crew_baked_into_base_art": true,
+    "no_text_baked_into_art": true,
+    "no_shared_rim_star_tier_lock_baked_into_art": true,
+    "circular_outside_transparent": true,
+    "required_depth_layers": [
+      "base",
+      "bg",
+      "subject",
+      "fx"
+    ],
+    "required_delivery": [
+      "manifest.json",
+      "base.png",
+      "bg.png",
+      "subject.png",
+      "fx.png",
+      "composite.png",
+      "preview-64.png",
+      "preview-120.png",
+      "preview-200.png",
+      "preview-320.png",
+      "depth-profile.json",
+      "review.json"
+    ],
+    "base_definition": "Per-badge recessed depth foundation only. Shared rim/star/tier/lock/text remain runtime-shared and outside this layer.",
+    "subject_definition": "Primary badge motif or symbolic object. A character is never required for the badge base to make sense.",
+    "fx_definition": "Badge-local foreground light/particles/highlight only; shared award ornaments remain separate.",
+    "individual_manifest_rule": "Each badge delivery includes manifest.json binding badge_id, asset_dir, required files, detail-only depth scope, and no runtime approval.",
+    "asset_slot_rule": "Trailing numeric badge ID suffix, integer-preserved and zero-padded to at least 3 digits; 1000 stays 1000."
+  },
+  "depth_detail_only": {
+    "enabled_surface": "BADGE_DETAIL_VIEW_ONLY",
+    "static_surfaces": [
+      "BADGE_ATLAS",
+      "BADGE_LIST",
+      "READY_WEEK",
+      "READY_DAY",
+      "CALENDAR",
+      "HISTORY_LIST",
+      "UNLOCK_SUMMARY"
+    ],
+    "static_surfaces_use": "approved composite only",
+    "detail_motion": {
+      "base_max_px": 0,
+      "bg_max_px": 3,
+      "subject_max_px": 7,
+      "fx_max_px": 8,
+      "subject_shadow": "SUBTLE",
+      "highlight_shift": "SUBTLE",
+      "fx_may_counter_move": true
+    },
+    "gyro_is_optional_enhancement": true,
+    "mouse_or_pointer_fallback_allowed": true,
+    "reduced_motion": "STATIC_COMPOSITE",
+    "motion_must_not_change_badge_meaning": true
+  },
+  "ownership_visual_states": {
+    "UNAPPROVED_ART": {
+      "render": false,
+      "reason": "An unapproved candidate cannot appear even as a locked silhouette."
+    },
+    "UNEARNED": {
+      "requires_approved_art": true,
+      "star_count": 0,
+      "character_overlay": false,
+      "tier_ornament": false,
+      "detail_depth": false,
+      "presentation": "LOCKED_DESATURATED_OR_MIST_FROM_APPROVED_ART_ONLY"
+    },
+    "FIRST_AWARD": {
+      "ownership_source": "SIGNED_AWARD_LEDGER",
+      "star_count": 1,
+      "detail_depth": true,
+      "character_overlay": "OPTIONAL_SEPARATELY_APPROVED_ONLY"
+    },
+    "REAWARD": {
+      "ownership_source": "SIGNED_AWARD_LEDGER",
+      "star_increment": 1,
+      "telemetry_cannot_increment": true
+    }
+  },
+  "progress_policy": {
+    "initial_acquisition_star_count": 1,
+    "reaward_star_increment": 1,
+    "tier_transition_and_top_tier": "PRESERVE_SEPARATE_EXISTING_POLICY; unresolved/provisional parts are not finalized by this visual-production standard"
+  },
+  "release_gates": {
+    "art_approval_does_not_activate_catalog": true,
+    "catalog_activation_does_not_award_child": true,
+    "award_receipt_does_not_approve_art": true,
+    "ci_pass_does_not_equal_visual_approval": true,
+    "main_merge": "HOLD",
+    "netlify": "HOLD"
+  }
+}

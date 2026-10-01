@@ -21,7 +21,7 @@ function project(state=null,receipt={},configuration={}){
     if(receipt.award_kind!=='INITIAL_AWARD')return blocked('INITIAL_AWARD_REQUIRED');
     return {ok:true,contract:CONTRACT,tier_up:false,
       state:{child_id:child,badge_id:badge,owned:true,tier:tiers[0],tier_index:0,
-        star_count:0,processed_award_ids:[...seen,id],top_tier_rule_pending:false}};
+        star_count:1,processed_award_ids:[...seen,id],top_tier_rule_pending:false}};
   }
   if(receipt.award_kind!=='REAWARD')return blocked('REAWARD_KIND_REQUIRED');
   if(state.top_tier_rule_pending===true)return blocked('TOP_TIER_RULE_PENDING');

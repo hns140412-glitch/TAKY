@@ -63,12 +63,7 @@
   clip-path: polygon(50% 0%,62% 34%,98% 35%,70% 57%,80% 92%,50% 72%,20% 92%,30% 57%,2% 35%,38% 34%);
   filter: drop-shadow(0 1px 1px rgba(72,48,35,.28));
 }
-.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(2),
-.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(3),
-.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(4),
-.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(5) {transform: translateY(25%);}
-.takyBadgeInsignia .takyBadgeReawardStar:last-child:not(:first-child) {transform: translateY(25%);}
-.takyBadgeInsignia .takyBadgeReawardStar:nth-child(3):nth-last-child(3) {transform: translateY(-8%);}
+/* Old flex-position star offsets removed; approved responsive data-stars arc owns positioning. */
 .takyBadgeInsignia figcaption {
   position: absolute;
   z-index: 4;
@@ -98,3 +93,38 @@
 .takyBadgeInsignia[data-badge-tier="PLATINUM"]{--star-fill:linear-gradient(120deg,#f6b4d3,#e6e0ff 28%,#a9d8f5 52%,#c3e8c5 75%,#fff2b7)}
 .takyBadgeInsignia .takyBadgeReawardStar{background:var(--star-fill)}
 .takyBadgeInsignia[data-badge-state="LOCKED"] .takyBadgeLayer{filter:grayscale(1);opacity:.5}
+
+/* Shared responsive ornament alignment with Badge Atlas (no per-badge tier/rim duplication). */
+.takyBadgeInsignia{container-type:inline-size}
+.takyBadgeInsignia::before{
+ inset:0;z-index:3;background:url('./assets/shared/rim.svg') center/contain no-repeat;
+ -webkit-mask:none;mask:none;filter:none;opacity:1;
+}
+.takyBadgeInsignia .takyBadgeReawardStars{
+ top:-9%;left:0;width:100%;height:28%;display:block;
+ align-items:initial;justify-content:initial;gap:0;
+}
+.takyBadgeInsignia .takyBadgeReawardStar{
+ position:absolute;display:block;flex:none;top:0;left:50%;
+ width:clamp(11px,18cqw,34px);height:auto;aspect-ratio:1;
+ transform:translateX(-50%);background:var(--star-fill);
+ clip-path:none;
+ -webkit-mask:url('./assets/shared/star-mask.svg') center/contain no-repeat;
+ mask:url('./assets/shared/star-mask.svg') center/contain no-repeat;
+ filter:drop-shadow(0 1px 1px rgba(72,48,35,.28));
+}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="1"] .takyBadgeReawardStar:nth-child(1){left:50%;top:0}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="2"] .takyBadgeReawardStar:nth-child(1){left:37%;top:17%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="2"] .takyBadgeReawardStar:nth-child(2){left:63%;top:17%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="3"] .takyBadgeReawardStar:nth-child(1){left:24%;top:32%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="3"] .takyBadgeReawardStar:nth-child(2){left:50%;top:0}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="3"] .takyBadgeReawardStar:nth-child(3){left:76%;top:32%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="4"] .takyBadgeReawardStar:nth-child(1){left:17%;top:42%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="4"] .takyBadgeReawardStar:nth-child(2){left:39%;top:12%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="4"] .takyBadgeReawardStar:nth-child(3){left:61%;top:12%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="4"] .takyBadgeReawardStar:nth-child(4){left:83%;top:42%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="5"] .takyBadgeReawardStar:nth-child(1){left:10%;top:48%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="5"] .takyBadgeReawardStar:nth-child(2){left:30%;top:14%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="5"] .takyBadgeReawardStar:nth-child(3){left:50%;top:0}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="5"] .takyBadgeReawardStar:nth-child(4){left:70%;top:14%}
+.takyBadgeInsignia .takyBadgeReawardStars[data-stars="5"] .takyBadgeReawardStar:nth-child(5){left:90%;top:48%}

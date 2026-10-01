@@ -1,0 +1,244 @@
+{
+  "schema": "TAKY_BADGE_INDIVIDUAL_ART_CURRENT_V1",
+  "date": "2026-09-27",
+  "authority": "DRAFT_BRANCH_PROJECTION_ONLY_MAIN_AND_OLDER_CURRENT_UNCHANGED",
+  "parent_pr": 160,
+  "art_pr": 163,
+  "base_parent_pr_head_at_branch": "6aac6fec05fb9c5fe29580165d4831cb963b9222",
+  "main_at_start": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+  "source": "HANDOFF/BADGE_INDIVIDUAL_ART_NEW_CHAT_START_2026-09-27_LATEST.md",
+  "approved_storyboard": "BADGE/ui/APPROVED_STORYBOARD_2026-09-27.md",
+  "assets": {
+    "independent_ids": 60,
+    "background_svg_files": 60,
+    "interior_svg_files": 60,
+    "rendered_png_previews": 60,
+    "final_illustration_approved": 0,
+    "asset_registry_bound": 0,
+    "catalog_activated": 0,
+    "award_issued": 0
+  },
+  "evidence": {
+    "structural_qa": "SUCCESS",
+    "raster_qa": "SUCCESS",
+    "last_visual_inspected": [
+      "001",
+      "026"
+    ],
+    "last_visual_verdict": "FAIL_HIGH_DENSITY_STORYBOARD_STYLE",
+    "tested_art_commit": "abd78c5175d708d76d1df0160f10fae7d142f334",
+    "ci_badge_ui_run": 36289956771,
+    "ci_visual_registry_run": 36289956704,
+    "qa_note": "BADGE/ui/ART_VISUAL_QA_2026-09-27.md",
+    "raster_artifact_id": 10921779029
+  },
+  "hard_locks": [
+    "USER != DEBUGGER",
+    "No 60 per-item user approval loop; execution owner performs batch self-QA",
+    "Never substitute asset existence or CI for visual match",
+    "No contact sheet, new UI concept board or sheet crop",
+    "Preserve original six screen image authority and 60 identities",
+    "No arbitrary child/Crew character",
+    "Keep common frame/rim/star/tier/lock separate from per-story artwork",
+    "Never auto-bind or approve rejected draft",
+    "No main merge, Netlify deployment, Work OS, real award or catalog activation"
+  ],
+  "next_open": [
+    "Correct exact 31 visual defects listed in badge QA evidence; do not reuse 001's sunrise/palette as theme for all badges",
+    "Recheck 29 conditional scene candidates and 31 replacements at 64/120/200/320 for exact source story, circle transparency, character/flag/grade separation",
+    "Verify separate management of inner-scene PNG and external shared rim, stars/tier/lock and optional approved Snap Crew/Profile overlay",
+    "Only then bind actual reviewed individual PNGs to source IDs, no old vector alias; verify runtime Ledger and same child-family authority",
+    "No automatic award, main merge, Netlify deployment, Work OS"
+  ],
+  "completion_scope": "60_STRUCTURAL_VECTOR_CANDIDATES_CREATED_BUT_ZERO_FINAL_ART",
+  "asset_management": {
+    "status": "60_SOURCE_SPECIFIC_DEV_BINDINGS_IMPLEMENTED_NOT_PRODUCTION_ACTIVATED",
+    "registry": "BADGE/assets/asset-registry-working.json",
+    "scene_sources_root": "BADGE/ui/assets/individual/001..060",
+    "shared_asset_root": "BADGE/assets/shared",
+    "shared_svg_sources": [
+      "rim.svg",
+      "shadow.svg",
+      "star-mask.svg",
+      "lock.svg"
+    ],
+    "separate_overlay_slots": "BADGE/assets/overlays/slots-working.json",
+    "overlay_slot_records": 60,
+    "approved_profile_asset_count": 0,
+    "approved_snap_crew_asset_count": 0,
+    "optional_character_free_base": true,
+    "optional_profile_and_crew_overlap": true,
+    "profile_gate": "SAME_VERIFIED_CHILD_AND_FAMILY_APPROVED_PROFILE_ONLY",
+    "crew_gate": "REVIEWED_SNAP_OWNED_APPROVED_INDIVIDUAL_CREW_ONLY",
+    "per_badge_geometry": "PROVISIONAL_UNTIL_FINAL_ART_LAYOUT_REVIEW",
+    "core_compositor": "BADGE/badge-managed-asset-compositor.js",
+    "ui_compositor": "BADGE/ui/badge-atlas.js",
+    "tests": [
+      "BADGE/ui/badge-atlas.test.cjs",
+      "BADGE/ui/badge-atlas.test.mjs",
+      "BADGE/badge-managed-asset-compositor.test.js",
+      "BADGE/assets/test_badge_assets.py"
+    ],
+    "shared_vs_individual_separated": true,
+    "draft_art_runtime_approved": 0,
+    "preview_auth_not_production_auth": true,
+    "parent_pr": 160,
+    "art_pr": 163,
+    "scope_status": "CENTRAL_ASSET_LAYOUT_IMPLEMENTED; VISUAL_ART_FINAL_AND_APP_PRODUCTION_BINDING_STILL_OPEN",
+    "shared_ornaments": {
+      "rim": "BADGE/assets/shared/rim.svg",
+      "star_shape": "BADGE/assets/shared/star-mask.svg",
+      "tier_palette": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ],
+      "star_arc_count": [
+        1,
+        5
+      ],
+      "source": "verified Award Ledger view only",
+      "size_contexts_px": [
+        64,
+        120,
+        200,
+        320
+      ],
+      "star_position": "responsive upper arc",
+      "rim_policy": "ONE_PASTEL_RIM_INDEPENDENT_OF_TIER",
+      "lock_policy": "shared greyed visual and mask; never invent earned stars",
+      "css": [
+        "BADGE/ui/badge-atlas.css",
+        "BADGE/badge-visual-presentation.css"
+      ],
+      "progress": "IMPLEMENTED_IN_DRAFT_CI_PENDING_EXACT_HEAD"
+    },
+    "dev_binding_manifest": "BADGE/ui/badge-dev-preview-bindings-60.json",
+    "creative_direction_manifest": "BADGE/assets/individual-art-direction-60.json",
+    "preview_bound_count": 60,
+    "final_approved_image_count": 0,
+    "runtime_bound_count": 0,
+    "art_qa_gate": "BLOCKED_PENDING_60_STORY_SPECIFIC_FINAL_ILLUSTRATIONS_AND_BROWSER_VISUAL_PARITY"
+  },
+  "visual_direction_001": {
+    "latest_user_feedback": "User positively received compact witty pastel hand-drawn blanket kingdom concept; asks for border and star/tier expression to be applied correctly.",
+    "design_direction": "COMPACT_WITTY_SYMBOLIC_HAND_DRAWN_PASTEL",
+    "motif": "blanket hill and pillow castle, dawn sun, small escape ladder and lantern",
+    "status": "DIRECTION_ACCEPTED_CONDITIONAL_NOT_FINAL_ASSET_APPROVAL",
+    "mandatory_revision": "source asset must be independently illustrated and separated from stars, rim, tier and optional characters; tiny-size QA against approved storyboard remains OPEN"
+  },
+  "latest_progress": {
+    "date": "2026-09-27",
+    "mode": "ALL_60_SOURCE_SPECIFIC_DRAFT_BINDING_AND_ILLUSTRATION_DIRECTIVES",
+    "user_instruction": "same witty pastel individual art direction for all 60 and bind; independent shared rim, stars, tier and optional approved character overlays",
+    "visual_direction_file": "BADGE/assets/individual-art-direction-60.json",
+    "creative_direction_count": 60,
+    "creative_direction_unique_count": 60,
+    "development_binding_manifest": "BADGE/ui/badge-dev-preview-bindings-60.json",
+    "single_scene_inspector": "BADGE/ui/badge-dev-binding-inspector.html",
+    "development_bindings": 60,
+    "physical_layer_files": 120,
+    "separate_raster_previews": 60,
+    "common_shared_svg_files": 4,
+    "final_painterly_originals_verified": 0,
+    "production_asset_bindings": 0,
+    "active_historical_badges": 0,
+    "verified_awards_issued": 0,
+    "notes": "The 60 currently bound candidate SVGs are prior visually rejected flat drafts; this is honest development wiring, not 60 final illustrations or release. New 60 art directions are story-unique, with compact witty 64px visual brief per original ID.",
+    "validated_code_head": "a72890dbb664e36f2a3cf6be0d04029f053c85cb",
+    "validated_workflows": [
+      {
+        "name": "Badge UI contract checks",
+        "run_id": 36297842391,
+        "conclusion": "success"
+      },
+      {
+        "name": "Badge Visual Registry Validation",
+        "run_id": 36297842399,
+        "conclusion": "success"
+      }
+    ],
+    "artifacts": {
+      "github_run_id": 36297842391,
+      "artifact_id": 10924288028,
+      "artifact_name": "badge-60-independent-scene-candidates"
+    }
+  },
+  "painting_candidate_qa_20260927": {
+    "authority_file": "BADGE/assets/BADGE_60_PAINTERLY_VISUAL_QA_2026-09-27.md",
+    "candidate_count": 60,
+    "source_mapping_count": 60,
+    "independent_file_hashes": 60,
+    "technical_size": "1254x1254 RGBA transparent corners",
+    "visual_screening_sizes": [
+      64,
+      120
+    ],
+    "visual_scene_candidate_conditional_pass": 29,
+    "revision_required": 31,
+    "revision_ids": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      21,
+      25,
+      28,
+      33,
+      34,
+      40,
+      42,
+      43,
+      44,
+      46,
+      53,
+      55,
+      58,
+      60
+    ],
+    "actual_art_approval_count": 0,
+    "actual_painterly_runtime_bindings": 0,
+    "autonomous_awards": 0,
+    "layered_source_evidence": "FLATTENED_PNG_ONLY_BACKGROUND_INTERIOR_FOREGROUND_NOT_VERIFIED",
+    "raw_png_delivery": "conversation file package; NOT checked into GitHub",
+    "legacy_svg_dev_binding_count": 60,
+    "legacy_svg_not_promoted": true
+  },
+  "latest_handoff_20260929": {
+    "date": "2026-09-29",
+    "kind": "RESUME_PREPARATION_ONLY_NO_ARTWORK_EXECUTION",
+    "handoff_path": "HANDOFF/BADGE_INDIVIDUAL_ART_NEW_CHAT_START_2026-09-29_LATEST.md",
+    "handoff_commit": "8527b72afeeedded1c4c62b663771da1112285ac",
+    "main_head_at_handoff": "09df3d4f011e815e56d41433139bc2fcc7e1a97e",
+    "pr_number": 163,
+    "pr_head_before_handoff": "2fa9eca237981ff801d5645719de321c7edca73a",
+    "source_queue": "BADGE/assets/visual-rework-queue-working.json",
+    "source_locked_batch": "BADGE/assets/rework-batch-01-source-locked.json",
+    "conditional_candidate_count": 29,
+    "correction_id_count": 31,
+    "special_state": {
+      "BDG-DRAFT-012": "USER_SELECTED_CANDIDATE_QA_OPEN_NOT_FINAL",
+      "BDG-DRAFT-040": "LATEST_REJECTED_REWORK_OPEN"
+    },
+    "final_approved": 0,
+    "painterly_production_png_bindings": 0,
+    "active_badges": 0,
+    "award_events": 0,
+    "note": "LATEST handoff and current pointer supersede historical prose counts; exact HEAD must be re-fetched on resume. User command 재개준비 only writes handoff/current and stops; no image generation."
+  }
+}

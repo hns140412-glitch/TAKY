@@ -1,0 +1,48 @@
+{
+  "schema": "TAKY_BADGE_CLI_PREFLIGHT_V2",
+  "status": "DRY_RUN_ONLY_UNTIL_EXECUTOR_ADAPTER_BOUND",
+  "executable_authority": "BADGE/production/badge-production-packets-v2.json",
+  "standard_authority": "BADGE/production/badge-production-standard-v2.json",
+  "reviewed_baseline": "BADGE/production/badge-production-baseline-v2.json",
+  "legacy_non_executable": [
+    "BADGE/production/badge-production-pipeline.json",
+    "BADGE/assets/rework-batch-01-source-locked.json"
+  ],
+  "batch_size": 5,
+  "execution": {
+    "generation_enabled": false,
+    "executor_adapter": null,
+    "require_explicit_adapter_binding": true,
+    "allow_shell_from_packet": false,
+    "allow_network_from_preflight": false,
+    "allow_overwrite": false,
+    "resume_required": true,
+    "checkpoint_required": true,
+    "per_badge_failure_isolation": true,
+    "continue_other_badges_after_isolated_failure": true
+  },
+  "ownership_rules": {
+    "unearned_star_count": 0,
+    "initial_award_star_count": 1
+  },
+  "detail_depth": {
+    "surface": "BADGE_DETAIL_VIEW_ONLY",
+    "earned_only": true,
+    "reduced_motion": "STATIC_COMPOSITE"
+  },
+  "gates": [
+    "AUTHORITY_SINGLETON",
+    "SOURCE_PACKET_DETERMINISM",
+    "CLASSIFICATION_BASELINE",
+    "FIVE_ITEM_BATCH_PLAN",
+    "NO_OVERWRITE",
+    "CHECKPOINT_RESUME_CONTRACT",
+    "GENERATOR_ADAPTER_BOUND_BEFORE_EXECUTION",
+    "OUTPUT_CONTRACT",
+    "ADMISSION_SEPARATION",
+    "INITIAL_AWARD_ONE_STAR",
+    "DETAIL_ONLY_DEPTH"
+  ],
+  "cli_ready_definition": "STRUCTURAL_PREFLIGHT_PASS && executor_adapter_bound && generation_enabled_explicitly",
+  "current_cli_ready": false
+}

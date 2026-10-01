@@ -1,0 +1,69 @@
+{
+  "schema": "TAKY_BADGE_ART_BINDING_CURRENT_V1",
+  "date": "2026-10-01",
+  "authority": "USER_CURRENT_LOCK_2026-10-01",
+  "total_badges": 60,
+  "bound_badges": 60,
+  "missing_badges": 0,
+  "stable_identity": {
+    "badge_id_pattern": "BDG-DRAFT-001..060",
+    "visual_id_pattern": "BADGE_VISUAL_DRAFT_001..060",
+    "asset_slot_id_pattern": "TAKY_BADGE_ART_001..060",
+    "immutable": [
+      "badge_id",
+      "visual_id",
+      "asset_slot_id"
+    ]
+  },
+  "current_asset_store": {
+    "library_root": "/TAKY/ASSETS/BADGES/CURRENT_60_V1",
+    "manifest": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/TAKY_BADGE_ART_BINDING_MANIFEST_V1.json",
+    "sha256_index": "/TAKY/ASSETS/BADGES/CURRENT_60_V1/TAKY_BADGE_ART_SHA256_60.csv",
+    "manifest_sha256": "cfaad23f129fba66573cfe014b7f33a92973b9131bea18ac267b54b73c37d7dc"
+  },
+  "groups": {
+    "current_approved": [
+      "BDG-DRAFT-001",
+      "BDG-DRAFT-004",
+      "BDG-DRAFT-005",
+      "BDG-DRAFT-006",
+      "BDG-DRAFT-007",
+      "BDG-DRAFT-008",
+      "BDG-DRAFT-009"
+    ],
+    "current_future_update": [
+      "BDG-DRAFT-010",
+      "BDG-DRAFT-011",
+      "BDG-DRAFT-012",
+      "BDG-DRAFT-013",
+      "BDG-DRAFT-014",
+      "BDG-DRAFT-015",
+      "BDG-DRAFT-016",
+      "BDG-DRAFT-017",
+      "BDG-DRAFT-018",
+      "BDG-DRAFT-020",
+      "BDG-DRAFT-021",
+      "BDG-DRAFT-025",
+      "BDG-DRAFT-028",
+      "BDG-DRAFT-033",
+      "BDG-DRAFT-034",
+      "BDG-DRAFT-040",
+      "BDG-DRAFT-042",
+      "BDG-DRAFT-043",
+      "BDG-DRAFT-044",
+      "BDG-DRAFT-046",
+      "BDG-DRAFT-053",
+      "BDG-DRAFT-055",
+      "BDG-DRAFT-058",
+      "BDG-DRAFT-060"
+    ],
+    "current_candidate_count": 29
+  },
+  "replacement_contract": {
+    "rule": "KEEP badge_id + visual_id + asset_slot_id; replace only artwork bytes, SHA256, asset revision and source lineage",
+    "ui_binding": "MUST_RESOLVE_BY_ASSET_SLOT_ID_NOT_BY_FILENAME",
+    "shared_layers": "rim/stars/tier/lock/shadow/profile/crew stay separate"
+  },
+  "deployment": "NOT_PERFORMED",
+  "netlify": "HOLD"
+}
