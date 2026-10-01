@@ -103,7 +103,8 @@ function stanceFor(profile={}){
   const stretchStable=rows.filter(x=>
     x.state==='READY_TO_STRETCH' &&
     x.stable_state==='READY_TO_STRETCH' &&
-    x.confidence!=='LOW'
+    x.confidence!=='LOW' &&
+    x.generalization_ready===true
   ).length;
   const cross=profile.cross_dimension||{};
   const evidenceReady=(cross.verified_growth_signal_count||0)>0||(cross.cross_app_dimension_count||0)>0;
@@ -206,6 +207,8 @@ function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
     x?.stability_signal==='TEMPORARY_SUPPORT_WITHOUT_LONG_TERM_DEMOTION');
   const promotionHeld=Object.values(dims).some(x=>
     x?.stability_signal==='PROMOTION_CANDIDATE_NOT_STABLE');
+  const targetScopedStretch=Object.values(dims).some(x=>
+    x?.state==='READY_TO_STRETCH'&&x?.generalization_ready!==true);
   let intensity=stance==='SCAFFOLD_LEAD'?'SUPPORT_BUILD':
     stance==='TRANSFER_PUSH'?'STRETCH_TRANSFER':'BUILD_CONNECT';
   if(confidence==='LOW'&&intensity==='STRETCH_TRANSFER')intensity='BUILD_CONNECT';
@@ -241,7 +244,13 @@ function growthControl(profile={},stance='ELICIT_PULL',depth=1,hints={}){
       low_confidence_cannot_upshift_to_transfer:true,
       one_event_cannot_raise_expression_level_by_itself:true,
       verified_or_cross_app_evidence_required_for_stretch:true,
-      stability_window_required_for_transfer_push:true
+      stability_window_required_for_transfer_push:true,
+      target_scoped_stretch_without_dimension_generalization:targetScopedStretch
+    },
+    generalization_guard:{
+      transfer_push_requires_multi_target_dimension_evidence:true,
+      target_scoped_stretch_may_still_receive_deeper_target_questions:true,
+      target_scoped_stretch_does_not_become_global_transfer_push:true
     }
   };
 }
@@ -378,6 +387,7 @@ function derive({growth_profile,learning_index=null}={}){
       growth_intensity_and_expression_level_are_engine_intent_only:true,
       low_confidence_cannot_force_growth_upshift:true,
       curriculum_and_language_resource_authorities_are_separate:true,
+      target_scoped_stretch_does_not_auto_generalize_dimension:true,
       missing_resource_role_emits_index_first_gap:true,
       learning_engine_never_authorizes_mining:true
     },
