@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const A=require('./canonical-evidence.js');
 const V=require('../verification/verification-layer.js');
 
-const ctx={member_id:'A',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1'};
+const ctx={member_id:'A',session_id:'S1',task_id:'T1',lap_id:'L1',subject:'영어',concept_skill_target:'VOCABULARY',instrument_version:'bridge-v1',curriculum_refs:['CURR:ENG5:1'],lexical_refs:['OEWN:accept'],usage_refs:['USAGE:accept-an-idea']};
 
 const hide=A.fromHide({
   event_id:'h1',source:'hide-seek',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T07:00:00.000Z',
@@ -118,6 +118,28 @@ assert.equal(friction.execution_friction.authority,'READY_EXECUTION_FRICTION_OBS
 assert.equal(friction.execution_friction.learner_state_authority,false);
 assert.equal(friction.raw_app_signals.forwarded_ready_friction_observation,true);
 assert.equal(A.validateCanonical(friction).ok,true);
+
+const imagination=A.fromImaginationCloud({
+  event_id:'i1',source:'imagination-cloud',event_type:'HELP_USED',
+  occurred_at:'2026-10-02T08:30:00.000Z',
+  payload:{
+    invocation_reason:'CONCEPT_NOT_CLEAR',
+    target_concept:'fraction equivalence',
+    visualization_used:'AREA_MODEL',
+    explanation_used:'STEP_BY_STEP',
+    response_before:{state:'UNSURE'},
+    response_after:{state:'CAN_EXPLAIN_PART'},
+    additional_help_needed:true,
+    curiosity_only:false
+  }
+},ctx);
+assert.equal(imagination.evidence_type,'LEARNING_SUPPORT_OBSERVATION');
+assert.equal(imagination.observation_only,true);
+assert.equal(imagination.verified_outcome,null);
+assert.equal(imagination.support_observation.authority,'IMAGINATION_CLOUD_SUPPORT_OBSERVATION_ONLY');
+assert.equal(imagination.support_observation.learner_state_authority,false);
+assert.equal(imagination.support_observation.schedule_authority,false);
+assert.equal(A.validateCanonical(imagination).ok,true);
 
 const receipt=V.issueReceipt({
   receipt_id:'vr-h2',
