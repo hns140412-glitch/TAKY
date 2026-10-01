@@ -23,7 +23,11 @@ const itemSignal=A.fromHide({
   payload:{
     word:'accept',skill_id:'accept',correct:true,assisted:false,
     mode:'TRACE',confusion:null,weakness:null,spacedEvidence:false,
-    nextReviewPriority:72,word_origin:'CURRENT',sourceSheetId:'sheet-current'
+    nextReviewPriority:72,word_origin:'CURRENT',sourceSheetId:'sheet-current',
+    hint_stage:1,helped:true,self_corrected:false,recall_degree:0.6,
+    responseLatencyMs:1450,
+    connection_evidence:{left_id:'accept',right_id:'accept',matched:true},
+    spelling_evidence:{instrument:'HIDE_CODE_RED_V1',result_type:'HINT_USED'}
   }
 },ctx);
 assert.equal(itemSignal.evidence_type,'MEMORY_RETRIEVAL_EVIDENCE');
@@ -33,6 +37,13 @@ assert.equal(itemSignal.memory.item_signal.mode,'TRACE');
 assert.equal(itemSignal.memory.item_signal.word_origin,'CURRENT');
 assert.equal(itemSignal.memory.item_signal.correct,true);
 assert.equal(itemSignal.memory.review_advisories[0].nextReviewPriority,72);
+assert.equal(itemSignal.memory.item_signal.hint_stage,1);
+assert.equal(itemSignal.memory.item_signal.helped,true);
+assert.equal(itemSignal.memory.item_signal.self_corrected,false);
+assert.equal(itemSignal.memory.item_signal.recall_degree,0.6);
+assert.equal(itemSignal.memory.item_signal.response_latency_ms,1450);
+assert.equal(itemSignal.memory.item_signal.connection_evidence.matched,true);
+assert.equal(itemSignal.memory.item_signal.spelling_evidence.result_type,'HINT_USED');
 assert.equal(itemSignal.verified_outcome,null);
 assert.equal(A.validateCanonical(itemSignal).ok,true);
 
@@ -56,6 +67,15 @@ const snap=A.fromSnap({
   event_id:'s1',source:'snap-pop',event_type:'TASK_COMPLETED',occurred_at:'2026-09-25T08:00:00.000Z',
   payload:{
     child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean',
+    production_texts:['I saw the ocean.','The ocean looked calm.','I liked it because it felt peaceful.'],
+    vocabulary_used:['ocean'],
+    expression_expansion:{step_lengths:[16,22,38],quality_judgment:'UNVERIFIED'},
+    reasoning_evidence:{raw_response_present:true,quality_judgment:'UNVERIFIED'},
+    story_structure:{completed_steps:3,expected_steps:3,quality_judgment:'UNVERIFIED'},
+    direct_english:null,
+    expression_reuse:{handoff_word_reused:true},
+    self_correction:null,
+    assistance_strength:null,
     growth_intent_ref:'TAKY_GROWTH_NEXT_STEP_POLICY_V2',
     growth_verification_status:'PENDING_DIMENSION_REVIEW',
     growth_review_required:true,
@@ -76,6 +96,15 @@ const snap=A.fromSnap({
 },ctx);
 assert.equal(snap.evidence_type,'LEARNER_PRODUCTION_EVIDENCE');
 assert.equal(snap.production.child_authored,true);
+assert.equal(snap.production.production_texts.length,3);
+assert.deepEqual(snap.production.vocabulary_used,['ocean']);
+assert.equal(snap.production.expression_expansion.quality_judgment,'UNVERIFIED');
+assert.equal(snap.production.reasoning_evidence.quality_judgment,'UNVERIFIED');
+assert.equal(snap.production.story_structure.completed_steps,3);
+assert.equal(snap.production.expression_reuse.handoff_word_reused,true);
+assert.equal(snap.production.raw_observation_only,true);
+assert.equal(snap.production.quality_interpretation_authority,false);
+assert.equal(snap.production.local_growth_grading_forbidden,true);
 assert.equal(snap.verified_outcome,null,'child authored completion is not objective mastery');
 assert.equal(snap.growth_execution_context.authority,'SPECIALIST_EXECUTION_CONTEXT_ONLY');
 assert.equal(snap.growth_execution_context.expression_level,'L4_REASONED_RESPONSE');
