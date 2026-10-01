@@ -31,7 +31,22 @@
         "learner mastery inference"
       ],
       "proposed_runtime_pattern": "OEWN_SENSE -> LEARNING_INDEX_LEXICAL_SEMANTICS -> DERIVED_EASY_ENGLISH_PARAPHRASE_CANDIDATE",
-      "index_owner_review_required": true
+      "index_owner_review_required": true,
+      "external_precheck": {
+        "status": "SOURCE_AND_LICENSE_PRECHECK_COMPLETE",
+        "verified_release": "Open English WordNet 2025",
+        "release_date": "2025-12-31",
+        "downloadable_formats": [
+          "WNDB",
+          "WN-LMF_XML",
+          "RDF_TURTLE",
+          "JSON"
+        ],
+        "license": "CC-BY-4.0",
+        "attribution_required": true,
+        "runtime_authority": false,
+        "formal_index_owner_promotion_required": true
+      }
     },
     {
       "candidate_id": "ENGLISH_LEXICAL_PRINCETON_WORDNET_3",
@@ -62,6 +77,46 @@
     }
   ],
   "language_usage": [
+    {
+      "candidate_id": "ENGLISH_USAGE_UD_EWT",
+      "name": "Universal Dependencies English EWT",
+      "proposed_learning_evidence_role": "LANGUAGE_USAGE",
+      "authority_candidate": "OPEN_ANNOTATED_USAGE_CORPUS",
+      "source_url": "https://universaldependencies.org/treebanks/en_ewt/index.html",
+      "current_ud_release": "2.18",
+      "license": "CC-BY-SA-4.0",
+      "genres": [
+        "blog",
+        "social",
+        "reviews",
+        "email",
+        "web"
+      ],
+      "strengths": [
+        "open downloadable annotated English corpus",
+        "dependency relations usable for grammar/collocation candidates",
+        "multiple informal and web usage genres"
+      ],
+      "risks": [
+        "domain coverage is not universal contemporary English",
+        "corpus frequency cannot become universal naturalness truth",
+        "CC-BY-SA obligations require attribution/share-alike compatibility review for derived/runtime artifacts"
+      ],
+      "allowed_candidate_use": [
+        "usage-pattern evidence candidate",
+        "dependency-based chunk/collocation candidate generation",
+        "grammar-pattern evidence candidate"
+      ],
+      "forbidden_candidate_use": [
+        "single-source naturalness truth",
+        "curriculum authority",
+        "lexical sense authority",
+        "child-facing sentence passthrough without quality review"
+      ],
+      "disposition": "PREFERRED_USAGE_PRECHECK_CANDIDATE__LICENSE_COMPATIBILITY_REVIEW_OPEN",
+      "index_owner_review_required": true,
+      "runtime_authority": false
+    },
     {
       "candidate_id": "ENGLISH_USAGE_SKETCH_ENGINE",
       "name": "Sketch Engine Word Sketch API",
@@ -103,13 +158,16 @@
     "preferred_lexical_precheck_candidate": "ENGLISH_LEXICAL_OEWN_2025",
     "preferred_usage_candidate": null,
     "lexical_gap_state": "CANDIDATE_FOUND__INDEX_OWNER_REVIEW_OPEN",
-    "usage_gap_state": "OPEN__NO_UNCONDITIONAL_PROVIDER_SELECTED"
+    "usage_gap_state": "CANDIDATE_FOUND__LICENSE_AND_INDEX_OWNER_REVIEW_OPEN",
+    "preferred_usage_precheck_candidate": "ENGLISH_USAGE_UD_EWT"
   },
   "guards": [
     "SOURCE_CANDIDATE != INDEXED",
     "INDEXED != CANONICAL",
     "LEXICAL_SEMANTICS != CURRICULUM_ALIGNMENT",
     "LANGUAGE_USAGE != LEXICAL_SEMANTICS",
-    "LICENSE_COMPATIBILITY_REQUIRED_BEFORE_RUNTIME_USE"
+    "LICENSE_COMPATIBILITY_REQUIRED_BEFORE_RUNTIME_USE",
+    "OPEN_LICENSE != AUTOMATIC_RUNTIME_COMPATIBILITY",
+    "CORPUS_USAGE_EVIDENCE != UNIVERSAL_NATURALNESS_TRUTH"
   ]
 }
