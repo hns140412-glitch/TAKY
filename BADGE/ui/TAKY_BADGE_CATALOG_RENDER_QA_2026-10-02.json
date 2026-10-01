@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_RENDER_QA_V1",
-  "version": "2026-10-02.2",
+  "version": "2026-10-02.3",
   "status": "PASS",
   "viewport": {
     "width_css_px": 390,
@@ -87,5 +87,58 @@
       "horizontal_overflow": false
     },
     "note": "Fixture exists only in isolated QA browser storage and does not mutate production/user badge history."
+  },
+  "acquisition_presentation_qa": {
+    "presentation_only": true,
+    "award_authority": false,
+    "economy_authority": false,
+    "viewport": {
+      "width_css_px": 390,
+      "height_css_px": 844,
+      "device_scale_factor": 2
+    },
+    "cases": {
+      "first_earn": {
+        "transition": "0→1",
+        "kind": "FIRST_EARN",
+        "tier": "GREEN",
+        "reacquire_stars": 0,
+        "result": "PASS"
+      },
+      "tier_up": {
+        "transition": "5→6",
+        "kind": "TIER_UP",
+        "from": "GREEN",
+        "to": "BLUE",
+        "reacquire_stars": 0,
+        "result": "PASS"
+      },
+      "reacquire": {
+        "transition": "6→7",
+        "kind": "REACQUIRE",
+        "tier": "BLUE",
+        "reacquire_stars": 1,
+        "result": "PASS"
+      },
+      "master_complete": {
+        "transition": "25→26",
+        "kind": "MASTER_COMPLETE",
+        "tier": "PLATINUM",
+        "reacquire_stars": 5,
+        "result": "PASS"
+      }
+    },
+    "open_in_codex": {
+      "same_badge_id": true,
+      "detail_opened": true,
+      "result": "PASS"
+    },
+    "motion": {
+      "default": "PASS",
+      "reduced_motion_contract": "PASS"
+    },
+    "queue_contract": "PASS",
+    "horizontal_overflow": false,
+    "note": "QA invoked the presentation runtime directly and did not grant badges or mutate production/user award history."
   }
 }
