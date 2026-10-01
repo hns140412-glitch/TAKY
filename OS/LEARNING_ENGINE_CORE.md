@@ -608,4 +608,81 @@ Validated candidate implementation:
 - integration regression run 36883758174: SUCCESS
 - enforcement replay run 36883758191: SUCCESS
 
+## 21. Hide & Seek word-memory adaptive routing
+
+Hide & Seek remains the specialist executor. Learning Engine owns the adaptive decision.
+
+### 21.1 Per-word automatic route
+
+Learning Engine may emit one recommended Hide mode per learning target:
+
+- NEW / unobserved -> TRACE
+- recognition failure -> TRACE
+- confusion / meaning-link weakness -> LINK
+- orthographic / spelling weakness -> CORE
+- assisted-only or retrieval weakness -> RECALL
+- recent unassisted success -> RECALL with delayed confirmation
+- multi-day unassisted stable -> low-priority RECALL maintenance
+
+This is a specialist routing intent, not a mastery claim and not a forced global stage order.
+The child-facing app may still expose direct mode choice.
+
+### 21.2 Current vs past-word mixture
+
+Established baseline:
+CURRENT 12 + PAST 24 = past exposure share 2/3.
+
+Adaptive bounds:
+- insufficient / early current-word evidence -> keep 2/3 baseline
+- current-word evidence weak -> past exposure share 0.50
+- current-word evidence strong -> past exposure share 0.75
+
+Hard locks:
+- all current assignment words remain mandatory
+- the ratio changes prompt exposure / distractor / review mixture only
+- current assignment facts are never mutated
+- unobserved new words are NOT classified as weak
+- stronger TRACE/recall evidence may increase past-word exposure
+
+### 21.3 Delayed recall
+
+Learning Engine may emit delayed-recall semantics:
+- AFTER_INTERVENING_ITEMS: generally after 3-5 other items
+- AFTER_RECOVERY: recover first, then recheck after intervening items
+- NEXT_SESSION_SPACED_RECALL: maintenance in a later session
+
+These are learning-sequence semantics, not calendar dates.
+
+Learning Engine may decide:
+- whether delayed recall is needed
+- target word
+- relative sequence / priority
+- recommended interaction mode
+
+Planner alone owns:
+- dated allocation
+- calendar time
+- deadline
+- rescheduling across days
+
+### 21.4 Runtime ownership
+
+HIDE WORD EVENT
+-> canonical item-level memory evidence
+-> LEARNING ENGINE Hide vocabulary policy
+-> authenticated decision response
+-> Hide policy consumer
+-> specialist interaction execution
+-> new learner evidence
+
+Hide may not fabricate or locally promote a Learning Engine policy.
+If authenticated central policy is unavailable or invalid, Hide keeps the existing safe learning flow.
+
+Validated candidate implementation:
+- Learning policy: LEARNING/pedagogy/hide-vocabulary-routing-policy.js
+- canonical item signal: LEARNING/adapters/canonical-evidence.js
+- central decision surface: LEARNING/transport/central-learning-decision-http-endpoint.js
+- Hide consumer branch: taky/hide-memory-routing-learning-engine-2026-10-02
+- no main merge / deployment authorized
+
 END
