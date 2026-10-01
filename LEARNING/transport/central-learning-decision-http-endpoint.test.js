@@ -180,6 +180,11 @@ const parse=r=>JSON.parse(r.body);
   assert.equal(growthBody.runtime_result.growth_profile.learner_context.grade,5);
   assert.equal(growthBody.runtime_result.growth_profile.learner_context.language_load,'SIMPLE');
   assert.equal(growthBody.runtime_result.growth_next_step.authority,'LEARNING_ENGINE_GROWTH_INTENT_ONLY');
+  assert.equal(growthBody.runtime_result.growth_next_step.version,'TAKY_GROWTH_NEXT_STEP_POLICY_V2');
+  assert.ok(['LOW','MEDIUM','HIGH'].includes(growthBody.runtime_result.growth_next_step.growth_control.evidence_confidence));
+  assert.ok(['SUPPORT_BUILD','BUILD_CONNECT','STRETCH_TRANSFER'].includes(growthBody.runtime_result.growth_next_step.growth_control.learning_intensity));
+  assert.ok(/^L[1-5]_/.test(growthBody.runtime_result.growth_next_step.growth_control.expression_level));
+  assert.equal(growthBody.runtime_result.growth_next_step.growth_control.stability_guard.low_confidence_cannot_upshift_to_transfer,true);
   assert.equal(growthBody.runtime_result.growth_next_step.curriculum_grounding.verified,true);
   assert.deepEqual(growthBody.runtime_result.growth_next_step.curriculum_grounding.source_refs,
    [growthRow.source_ref]);
