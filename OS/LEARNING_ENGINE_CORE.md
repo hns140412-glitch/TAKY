@@ -1205,4 +1205,66 @@ The receipt:
 
 Main merge / deployment remain HOLD until branch regression passes and promotion is explicitly authorized.
 
+
+### 22.16 Target-scoped growth versus dimension generalization
+
+A learner may be READY_TO_STRETCH on one observed target without proving broad growth across the whole dimension.
+
+Growth Profile preserves:
+- distinct_target_count
+- transfer_target_count
+- target_identity_coverage_ratio
+- target_scope_signal
+- generalization_ready
+
+Target scope:
+- TARGET_IDENTITY_MISSING
+- SINGLE_TARGET_ONLY
+- MULTI_TARGET_EVIDENCE
+
+Rules:
+- target-scoped stretch may receive deeper questions on that target;
+- stable success on one word / prompt / pattern does not become broad vocabulary, expression or thinking growth;
+- global TRANSFER_PUSH requires multi-target generalization evidence on the dimensions used to justify the push.
+
+Hard locks:
+TARGET STABILITY != DIMENSION GENERALIZATION
+SAME TARGET SUCCESS != BROAD GROWTH
+DEEPER TARGET QUESTION != GLOBAL LEVEL PROMOTION
+
+### 22.17 Central source migration authority
+
+Existing verified or mined app/Drive data may be staged centrally as a migration candidate.
+
+A migration candidate is NOT:
+- Mining Index authority;
+- Learning Index runtime evidence;
+- canonical promotion.
+
+Before central use it requires independent Index Owner review.
+
+Current staged candidates:
+1. Ready verified curriculum registry:
+   MIGRATION/CURRICULUM/READY_OFFICIAL_STANDARD_REGISTRY_2026-10-02_V1.json
+   - 177 grade-band 5-6 achievement-standard records
+   - central_index_authority = false
+   - canonical_promotion = false
+
+2. Drive learning-reference role mapping:
+   MIGRATION/LEARNING_REFERENCE/DRIVE_LEARNING_REFERENCE_ROLE_MIGRATION_2026-10-02_V1.json
+   - NIKL contextual lexeme evidence -> LEXICAL_SEMANTICS candidate, context-specific only
+   - official structured writing corpus -> PEDAGOGICAL_USAGE candidate
+   - Ro-on mined reference -> PEDAGOGICAL_USAGE reference candidate; NOT lexical-definition authority
+
+True remaining evidence gaps:
+- verified English lexical source for easy-English definitions / sense distinctions;
+- verified English language-usage source for collocations / natural chunks.
+
+Hard locks:
+MIGRATION CANDIDATE != INDEXED
+MINED REFERENCE != AUTHORITY
+CURRICULUM AUTHORITY != LEXICAL AUTHORITY
+PEDAGOGICAL REFERENCE != LANGUAGE-USAGE FACT
+INDEX OWNER REVIEW REQUIRED BEFORE LEARNING INDEX CONSUMPTION
+
 END
