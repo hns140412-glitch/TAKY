@@ -92,7 +92,8 @@
         "TIER_REACQUIRE_STARS",
         "ACQUISITION_HISTORY",
         "ACQUISITION_COUNT",
-        "LAST_ACQUIRED_AT"
+        "LAST_ACQUIRED_AT",
+        "TIER_TRANSITION_CONTEXT"
       ],
       "navigation": [
         "PREVIOUS_BADGE",
@@ -214,7 +215,9 @@
     "visual state animations are cosmetic and honor reduced-motion",
     "tier ring, lock treatment, selected focus and recent-acquisition glow are presentation-only",
     "recent acquisition presentation derives only from last_at in the badge ledger",
-    "visual state effects never change badge award, tier, progress, nature, art SHA or identity"
+    "visual state effects never change badge award, tier, progress, nature, art SHA or identity",
+    "badge acquisition presentation may run only after the existing authorized ledger write path",
+    "badge acquisition presentation is non-authoritative UI; award/economy mutation remains outside the presentation runtime"
   ],
   "deployment": "HOLD",
   "design_direction": {
@@ -327,5 +330,54 @@
     "locked_state_has_lock_symbol": true,
     "ownership_has_text": true,
     "reduced_motion_supported": true
+  },
+  "acquisition_presentation": {
+    "contract": "SNAP_POP_BADGE_ACQUISITION_PRESENTATION_V1",
+    "presentation_only": true,
+    "award_authority": false,
+    "economy_authority": false,
+    "triggers_after": "authorized badgeProgress ledger write only",
+    "states": [
+      {
+        "kind": "FIRST_EARN",
+        "meaning": "최초 획득",
+        "visual": "badge reveal + tier halo + 0 reacquire stars"
+      },
+      {
+        "kind": "REACQUIRE",
+        "meaning": "동일 배지 재획득",
+        "visual": "badge growth + next reacquire star"
+      },
+      {
+        "kind": "TIER_UP",
+        "meaning": "5회 재획득으로 다음 티어",
+        "visual": "old tier → new tier transition + star reset"
+      },
+      {
+        "kind": "MASTER_COMPLETE",
+        "meaning": "PLATINUM + 재획득 별 5",
+        "visual": "completion emphasis"
+      }
+    ],
+    "actions": [
+      "CONFIRM",
+      "OPEN_IN_CODEX"
+    ],
+    "motion": {
+      "default": [
+        "CARD_REVEAL",
+        "BADGE_SCALE_IN",
+        "TIER_HALO",
+        "STAR_FILL"
+      ],
+      "reduced_motion": "NO_ANIMATION"
+    },
+    "invariants": [
+      "presentation never awards a badge",
+      "presentation never writes economy state",
+      "presentation never changes badge identity, nature, category or art SHA",
+      "OPEN_IN_CODEX navigates to the same stable badge_id",
+      "multiple authorized awards are queued for presentation"
+    ]
   }
 }
