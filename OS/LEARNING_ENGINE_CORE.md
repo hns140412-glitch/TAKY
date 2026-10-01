@@ -537,4 +537,75 @@ Current lifecycle:
 - blocker: insufficient real verified retrieval targets + promotion policy not passed
 
 
+## 20. Mining / Learning Index runtime boundary
+
+The learning evidence supply path is split into four independent roles:
+
+MINING ENGINE
+-> MINING INDEX
+-> LEARNING INDEX
+-> LEARNING ENGINE
+
+### Mining Engine
+Owns discovery, research strategy, provider routing, external traversal, acquisition,
+counter-evidence acquisition and mining strategy/failure memory.
+
+It does not own persistent source classification, learner state or pedagogical decisions.
+
+### Mining Index
+This is the existing shared Indexing/source authority expressed as the Mining-facing index layer.
+It owns RAW / INDEX_L1 / DETAIL_L2 / CURRENT, source identity, provenance, authority metadata,
+source-family classification, duplicate/version/fragment relations and retrieval state.
+
+Mining Engine may return candidates to Mining Index but may not self-authorize INDEXED state.
+
+### Learning Index
+Learning Index is the explicit name for the rebuildable learning-semantic projection previously
+described as Learning Projection. It is derived from Mining Index + verified domain mappings.
+
+It may contain curriculum alignment, term/morpheme/root links, subject meanings, concept links,
+candidate prerequisite relations, confusion/contrast relations, representation bridges,
+cross-subject links and transfer targets.
+
+It may not contain learner mastery, memory strength, review dates, calendar slots, Planner
+decisions or automatic remediation authority.
+
+### Learning Engine
+Consumes Learning Index + learner evidence and owns learner-state interpretation,
+evidence selection, pedagogical strategy, review/diagnostic/remediation policy and outcome feedback.
+
+### Reverse evidence-gap call
+
+REFERENCE EVIDENCE GAP:
+LEARNING ENGINE
+-> LEARNING INDEX QUERY
+-> MINING INDEX EXISTENCE CHECK
+-> only if insufficient: MINING ENGINE REQUEST
+-> provider execution / acquisition
+-> MINING INDEX owner review + index
+-> LEARNING INDEX incremental rebuild
+-> LEARNING ENGINE requery
+
+LEARNER PERFORMANCE GAP:
+LEARNING ENGINE
+-> SPECIALIST EVIDENCE ACQUISITION
+
+External Mining is forbidden for learner-performance evidence gaps.
+
+Hard locks:
+- Learning Engine emits a gap; it does not directly authorize Mining.
+- Mining Engine discovers/acquires; it does not grant Index authority.
+- Mining Index preserves source truth; it does not make pedagogical decisions.
+- Learning Index is derived/rebuildable; it is not learner state.
+- Learning Engine decides learning use; it does not own dated scheduling.
+- REVIEW NEED != REVIEW DATE.
+
+Validated candidate implementation:
+- branch: taky/learning-mining-runtime-integration-2026-10-01
+- Learning Index: LEARNING/index/learning-index.js
+- provider invocation host: ENFORCEMENT/mining_runtime_host.py
+- cross-engine closed-loop host: ENFORCEMENT/learning_mining_closed_loop.py
+- integration regression run 36883758174: SUCCESS
+- enforcement replay run 36883758191: SUCCESS
+
 END
