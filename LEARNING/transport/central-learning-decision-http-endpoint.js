@@ -32,7 +32,7 @@ const header=(h,name)=>{
  return key?String(h[key]??''):'';
 };
 function create({verifyBearerToken,store,resolveIndexedEvidence=null,
- independentIndexOwnerVerifier=null}={}){
+ independentIndexOwnerVerifier=null,resolveGrowthContext=null}={}){
  if(typeof verifyBearerToken!=='function')
   throw Error('TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED');
  if(typeof store?.getWithMetadata!=='function')
@@ -43,6 +43,8 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
   throw Error('INDEPENDENT_INDEX_OWNER_VERIFIER_REQUIRED');
  if(resolveIndexedEvidence===null&&independentIndexOwnerVerifier!==null)
   throw Error('INDEX_OWNER_VERIFIER_WITHOUT_RESOLVER_FORBIDDEN');
+ if(resolveGrowthContext!==null&&typeof resolveGrowthContext!=='function')
+  throw Error('TRUSTED_GROWTH_CONTEXT_RESOLVER_INVALID');
  return Object.freeze({version:VERSION,async handle(req={}){
   if(req.path!==ENDPOINT)return fail(404,'CENTRAL_DECISION_ENDPOINT_NOT_FOUND');
   if(req.method!=='POST')return fail(405,'POST_REQUIRED');
@@ -88,17 +90,41 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
    subject:input.subject.toLowerCase(),
    concept_skill_target:input.concept_skill_target.toLowerCase()};
   let indexedEvidenceHandoff=null;
+  let learningIndexHandoff=null;
   if(resolveIndexedEvidence){
    let resolvedIndex;
    try{resolvedIndex=await resolveIndexedEvidence(Object.freeze({
     family_id:identity.family_id,member_id:scope.member_id,
     subject:scope.subject,concept_skill_target:scope.concept_skill_target
    }))}catch{return fail(503,'INDEXED_ACTIVITY_REFERENCE_UNAVAILABLE')}
-   if(resolvedIndex!==null&&(!object(resolvedIndex)||
-      !object(resolvedIndex.indexed_evidence_handoff)))
+   if(resolvedIndex!==null&&!object(resolvedIndex))
+    return fail(503,'INDEXED_ACTIVITY_REFERENCE_INVALID');
+   if(resolvedIndex!==null&&
+      !object(resolvedIndex.indexed_evidence_handoff)&&
+      !object(resolvedIndex.learning_index_handoff))
     return fail(503,'INDEXED_ACTIVITY_REFERENCE_INVALID');
    indexedEvidenceHandoff=resolvedIndex?.indexed_evidence_handoff||null;
+   learningIndexHandoff=resolvedIndex?.learning_index_handoff||null;
   }
+  let growthContext={enabled:true,learner_context:{}};
+  if(resolveGrowthContext){
+   let trustedGrowth;
+   try{trustedGrowth=await resolveGrowthContext(Object.freeze({
+    family_id:identity.family_id,member_id:scope.member_id,
+    subject:scope.subject,concept_skill_target:scope.concept_skill_target
+   }))}catch{return fail(503,'TRUSTED_GROWTH_CONTEXT_UNAVAILABLE')}
+   if(trustedGrowth!==null&&!object(trustedGrowth))
+    return fail(503,'TRUSTED_GROWTH_CONTEXT_INVALID');
+   const learner=trustedGrowth?.learner_context||{};
+   if(!object(learner))return fail(503,'TRUSTED_GROWTH_CONTEXT_INVALID');
+   const grade=learner.grade===undefined||learner.grade===null?null:Number(learner.grade);
+   const age=learner.age===undefined||learner.age===null?null:Number(learner.age);
+   if((grade!==null&&(!Number.isFinite(grade)||grade<1||grade>20))||
+      (age!==null&&(!Number.isFinite(age)||age<3||age>30)))
+    return fail(503,'TRUSTED_GROWTH_CONTEXT_INVALID');
+   growthContext={enabled:true,learner_context:{grade,age}};
+  }
+
   const key=Durable.stateKey({context:{family_id:identity.family_id,
    member_id:scope.member_id}});
   let stored;
@@ -125,8 +151,10 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
   let runtime;
   try{runtime=Runtime.derive({scope,evidence,
     observation_only:stored?.data?.observation_only||[],
-    indexed_evidence_handoff:indexedEvidenceHandoff,
-    hide_vocabulary_context:hideVocabularyContext},independentIndexOwnerVerifier)}
+    indexed_evidence_handoff:learningIndexHandoff?null:indexedEvidenceHandoff,
+    learning_index_handoff:learningIndexHandoff,
+    hide_vocabulary_context:hideVocabularyContext,
+    growth_context:growthContext},independentIndexOwnerVerifier)}
   catch{return fail(503,'CENTRAL_RUNTIME_UNAVAILABLE')}
   if(!runtime.ok||!Runtime.validate(runtime).ok)
    return fail(503,'CENTRAL_RUNTIME_INVALID');
@@ -142,6 +170,14 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
    ok:true,authority:runtime.authority,engine_runtime:runtime.engine_runtime,
    scope:runtime.scope,decision:runtime.decision,
    specialist_policy:runtime.specialist_policy||null,
+   growth_profile:runtime.growth_profile?{
+    version:runtime.growth_profile.version,
+    learner_context:runtime.growth_profile.learner_context,
+    dimensions:runtime.growth_profile.dimensions,
+    cross_dimension:runtime.growth_profile.cross_dimension,
+    signal_count:runtime.growth_profile.signal_count
+   }:null,
+   growth_next_step:runtime.growth_next_step||null,
    cannot_influence:runtime.cannot_influence,
    trace:{evidence_ids:runtime.trace.evidence_ids,
     decision_contract:runtime.trace.decision_contract,
