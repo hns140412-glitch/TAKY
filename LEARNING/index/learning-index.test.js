@@ -22,7 +22,7 @@ const base={
   },
   learning_mapping:{
     by_source_id:{
-      SRC1:{curriculum_version:'2022',subject:'science',term:'지층',concept_node:'GEO_LAYER'}
+      SRC1:{curriculum_version:'2022',subject:'science',term:'지층',concept_node:'GEO_LAYER',easy_english_definition:'a layer of rock or soil',expression_chunks:['It is made of ...'],grammar_patterns:['It is + adjective'],thinking_moves:['COMPARE']}
     }
   }
 };
@@ -33,6 +33,8 @@ assert.equal(view.authority,'DERIVED_NON_SOURCE_OF_TRUTH');
 assert.deepEqual(view.source_refs,['INDEX:SRC1']);
 assert.equal(view.semantic_items[0].semantic_groups.lexical.term,'지층');
 assert.equal(view.semantic_items[0].semantic_groups.concept.concept_node,'GEO_LAYER');
+assert.equal(view.semantic_items[0].semantic_groups.language_growth.easy_english_definition,'a layer of rock or soil');
+assert.deepEqual(view.semantic_items[0].semantic_groups.language_growth.expression_chunks,['It is made of ...']);
 assert.equal(LearningIndex.validate(view).ok,true);
 
 const bad=LearningIndex.prepare({...base,learning_mapping:{default:{mastery_estimate:0.9}}},verifier);
