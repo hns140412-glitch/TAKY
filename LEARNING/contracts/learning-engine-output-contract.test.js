@@ -18,7 +18,9 @@ const out=C.derive({
   support_phase:'ELICIT_PULL',
   growth_control:{learning_intensity:'BUILD_CONNECT',expression_level:'L3_EXPANDED_SENTENCE'}
  },
- reference_gaps:[{gap_id:'g1',resolution_path:'INDEX_THEN_MINING_IF_INSUFFICIENT'}]
+ reference_gaps:[{gap_id:'g1',resolution_path:'INDEX_THEN_MINING_IF_INSUFFICIENT'}],
+ evidence_ids:['e1','e2'],
+ source_refs:['CURR:ENG5:1','OEWN:accept']
 });
 assert.equal(out.ok,true);
 assert.equal(out.review_need.required,true);
@@ -30,6 +32,9 @@ assert.equal(out.recommended_quantity.planner_must_materialize,true);
 assert.equal(out.date_authority,false);
 assert.equal(out.allocated_quantity_authority,false);
 assert.equal(out.reference_gaps[0].mining_request_authorized,false);
+assert.deepEqual(out.basis.evidence_ids,['e1','e2']);
+assert.deepEqual(out.basis.source_refs,['CURR:ENG5:1','OEWN:accept']);
+assert.equal(out.basis.provenance_required,true);
 assert.equal(C.validate(out).ok,true);
 
 console.log('learning-engine-output-contract.test.js PASS');
