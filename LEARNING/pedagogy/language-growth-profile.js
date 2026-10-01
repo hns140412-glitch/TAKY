@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V1';
+const VERSION='TAKY_LANGUAGE_GROWTH_PROFILE_V2';
 const DIMENSIONS=Object.freeze(['VOCABULARY','GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']);
 const clean=v=>String(v??'').trim();
 const finite=v=>Number.isFinite(Number(v))?Number(v):null;
@@ -30,13 +30,18 @@ function signalsFromEvidence(evidence=[]){
     const rows=Array.isArray(e?.language_growth_signals)?e.language_growth_signals:[];
     for(const raw of rows){
       const signal=normalizeSignal(raw);
-      if(signal)out.push({
-        ...signal,
-        event_id:clean(e.event_id||e.evidence_id)||null,
-        observed_at:clean(e.observed_at)||null,
-        source_app:clean(e.source_app)||null,
-        verified:e.verified_outcome===0||e.verified_outcome===1
-      });
+      if(signal){
+        const verified=e.verified_outcome===0||e.verified_outcome===1||
+          e?.verification?.authority==='LEARNING_VERIFICATION_RECEIPT';
+        out.push({
+          ...signal,
+          event_id:clean(e.event_id||e.evidence_id)||null,
+          observed_at:clean(e.observed_at)||null,
+          source_app:clean(e.source_app)||null,
+          verified,
+          evidence_strength:verified?'VERIFIED':'OBSERVATION'
+        });
+      }
     }
   }
   return out;
@@ -49,31 +54,61 @@ function score(signal){
 
 function classify(rows=[]){
   if(!rows.length)return {
-    state:'UNKNOWN',signal_count:0,evaluable_signal_count:0,unassisted_count:0,transfer_count:0,
-    average_score:null,max_depth:null,direct_english_ratio:null
+    state:'UNKNOWN',confidence:'LOW',signal_count:0,evaluable_signal_count:0,
+    verified_count:0,observation_count:0,source_app_count:0,
+    unassisted_count:0,transfer_count:0,average_score:null,max_depth:null,
+    direct_english_ratio:null
   };
+
   const evaluable=rows.filter(x=>x.outcome!=='UNKNOWN');
+  const verified=evaluable.filter(x=>x.verified===true);
+  const observed=evaluable.filter(x=>x.verified!==true);
+  const apps=[...new Set(evaluable.map(x=>clean(x.source_app)).filter(Boolean))];
   const depths=rows.map(x=>x.depth).filter(Number.isFinite);
   const english=rows.map(x=>x.direct_english).filter(x=>typeof x==='boolean');
   const directRatio=english.length?english.filter(Boolean).length/english.length:null;
+
   if(!evaluable.length)return {
-    state:'UNKNOWN',signal_count:rows.length,evaluable_signal_count:0,
+    state:'UNKNOWN',confidence:'LOW',signal_count:rows.length,evaluable_signal_count:0,
+    verified_count:0,observation_count:0,source_app_count:0,
     unassisted_count:0,transfer_count:rows.filter(x=>x.transfer===true).length,
     average_score:null,max_depth:depths.length?Math.max(...depths):null,
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null
   };
+
   const scored=evaluable.map(score);
   const avg=scored.reduce((a,b)=>a+b,0)/scored.length;
   const unassisted=evaluable.filter(x=>x.assisted!==true).length;
   const transfer=evaluable.filter(x=>x.transfer===true).length;
-  let state='DEVELOPING';
-  if(evaluable.length<2)state='EARLY_SIGNAL';
-  else if(avg<0.40)state='NEEDS_SUPPORT';
-  else if(avg>=0.80&&unassisted>=2)state='READY_TO_STRETCH';
+  const crossApp=apps.length>=2;
+
+  let confidence='LOW';
+  if(verified.length>=2||(evaluable.length>=4&&crossApp))confidence='HIGH';
+  else if(verified.length>=1||evaluable.length>=2)confidence='MEDIUM';
+
+  let state='EARLY_SIGNAL';
+  if(evaluable.length>=2){
+    if(avg<0.40)state='NEEDS_SUPPORT';
+    else state='DEVELOPING';
+  }
+
+  const stretchEvidence=
+    avg>=0.80 &&
+    unassisted>=2 &&
+    (
+      verified.length>=1 ||
+      (evaluable.length>=3&&crossApp&&transfer>=1)
+    );
+  if(stretchEvidence)state='READY_TO_STRETCH';
+
   return {
     state,
+    confidence,
     signal_count:rows.length,
     evaluable_signal_count:evaluable.length,
+    verified_count:verified.length,
+    observation_count:observed.length,
+    source_app_count:apps.length,
     unassisted_count:unassisted,
     transfer_count:transfer,
     average_score:Math.round(avg*100)/100,
@@ -81,7 +116,6 @@ function classify(rows=[]){
     direct_english_ratio:Number.isFinite(directRatio)?Math.round(directRatio*100)/100:null
   };
 }
-
 function ageLanguageLoad(context={}){
   const grade=finite(context.grade);
   const age=finite(context.age);
@@ -104,7 +138,12 @@ function derive({evidence=[],learner_context={}}={}){
   for(const dimension of DIMENSIONS){
     dimensions[dimension]=classify(signals.filter(x=>x.dimension===dimension));
   }
-  const direct=dimensions.ENGLISH_THINKING.direct_english_ratio;
+  const directDim=dimensions.ENGLISH_THINKING;
+  const direct=directDim.direct_english_ratio;
+  const directEvidence=directDim.signal_count||0;
+  const allSignals=Object.values(dimensions);
+  const crossAppDimensions=allSignals.filter(x=>(x.source_app_count||0)>=2).length;
+  const verifiedGrowthSignals=allSignals.reduce((n,x)=>n+(x.verified_count||0),0);
   return {
     ok:true,
     version:VERSION,
@@ -116,10 +155,13 @@ function derive({evidence=[],learner_context={}}={}){
     },
     dimensions,
     cross_dimension:{
-      translation_dependency_signal:Number.isFinite(direct)
-        ?(direct<0.4?'LIKELY_TRANSLATION_DEPENDENT':direct>=0.7?'DIRECT_ENGLISH_EMERGING':'MIXED')
-        :'UNKNOWN',
-      transfer_evidence_count:signals.filter(x=>x.transfer===true).length
+      translation_dependency_signal:directEvidence<2||!Number.isFinite(direct)
+        ?'UNKNOWN'
+        :(direct<0.4?'LIKELY_TRANSLATION_DEPENDENT':direct>=0.7?'DIRECT_ENGLISH_EMERGING':'MIXED'),
+      direct_english_evidence_count:directEvidence,
+      transfer_evidence_count:signals.filter(x=>x.transfer===true).length,
+      cross_app_dimension_count:crossAppDimensions,
+      verified_growth_signal_count:verifiedGrowthSignals
     },
     evidence_ids:[...new Set(signals.map(x=>x.event_id).filter(Boolean))],
     signal_count:signals.length,
@@ -127,7 +169,10 @@ function derive({evidence=[],learner_context={}}={}){
       age_changes_language_load_not_thinking_ceiling:true,
       one_success_is_not_growth_mastery:true,
       missing_dimension_is_unknown_not_failure:true,
-      app_score_is_not_growth_state:true
+      app_score_is_not_growth_state:true,
+      observation_only_cannot_self_promote_to_high_confidence:true,
+      cross_app_or_verified_evidence_required_for_stretch:true,
+      sparse_direct_english_signal_does_not_create_translation_dependency:true
     }
   };
 }
