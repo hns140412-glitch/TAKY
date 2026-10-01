@@ -107,7 +107,7 @@ function applyReceipt(evidence={},receipt={}){
     source_app:clean(evidence.source_app),
     evidence_type:clean(evidence.evidence_type),
     verifier_type:clean(receipt.verifier_type),
-    auto:clean(receipt.verifier_type)!=='HUMAN_RUBRIC_BINARY'
+    auto:!['HUMAN_RUBRIC_BINARY','HUMAN_GROWTH_RUBRIC'].includes(clean(receipt.verifier_type))
   });
   if(!policy.ok)issues.push(policy.reason);
   if(issues.length)return {ok:false,reason:'VERIFICATION_SCOPE_MISMATCH',issues};
