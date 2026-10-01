@@ -142,6 +142,8 @@ function derive(input={}, independentIndexOwnerVerifier=null){
   const learningOutput=LearningOutput.derive({
     decision,
     growth_next_step:growthNextStep,
+    evidence_ids:learnerState.observed?.evidence_ids||[],
+    source_refs:indexedEvidence?.source_refs||[],
     reference_gaps:[
       ...(evidenceGap.gap?.resolution_path==='INDEX_THEN_MINING_IF_INSUFFICIENT'
         ?[evidenceGap.gap]:[]),
