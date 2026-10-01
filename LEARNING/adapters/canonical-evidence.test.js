@@ -57,6 +57,9 @@ const snap=A.fromSnap({
   payload:{
     child_authored:true,landmark:'forest',step:3,used_handoff_word:'ocean',
     growth_intent_ref:'TAKY_GROWTH_NEXT_STEP_POLICY_V2',
+    growth_verification_status:'PENDING_DIMENSION_REVIEW',
+    growth_review_required:true,
+    requested_growth_dimensions:['GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING'],
     growth_control_applied:{
       evidence_confidence:'MEDIUM',
       learning_intensity:'STRETCH_TRANSFER',
@@ -78,6 +81,10 @@ assert.equal(snap.growth_execution_context.authority,'SPECIALIST_EXECUTION_CONTE
 assert.equal(snap.growth_execution_context.expression_level,'L4_REASONED_RESPONSE');
 assert.equal(snap.growth_execution_context.engine_authority,false);
 assert.equal(snap.raw_app_signals.growth_intent_ref,'TAKY_GROWTH_NEXT_STEP_POLICY_V2');
+assert.equal(snap.raw_app_signals.growth_verification_status,'PENDING_DIMENSION_REVIEW');
+assert.equal(snap.raw_app_signals.growth_review_required,true);
+assert.deepEqual(snap.raw_app_signals.requested_growth_dimensions,
+ ['GRAMMAR','EXPRESSION','THINKING','ENGLISH_THINKING']);
 assert.equal(A.validateCanonical(snap).ok,true);
 
 const ready=A.fromReady({
