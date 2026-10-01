@@ -25,6 +25,7 @@ Do **not** rename or recreate badge IDs, visual IDs, asset slots, badge logic, a
 5. Increment `asset_revision_id`.
 6. Update the manifest and CURRENT manifest SHA.
 7. Run `verify_badge_art_binding_v1.py`.
-8. Keep previous SHA/revision in history before runtime/deployment changes.
+8. Append the old SHA/revision to `TAKY_BADGE_ART_REVISION_HISTORY_V1.json` before runtime/deployment changes.
+9. Never delete or rewrite earlier revision-history entries.
 
 This lets UI/runtime bind to stable IDs while only the original artwork bytes are swapped later.
