@@ -1,7 +1,7 @@
 {
   "projection_version": "TAKY_LEARNING_ENGINE_DATA_READINESS_CURRENT_V1",
   "authority": "LEARNING_ENGINE_CORE",
-  "generated_at": "2026-09-26T09:40:00+09:00",
+  "generated_at": "2026-10-02T11:30:00+09:00",
   "minimum_verified_retrieval_targets_for_promotion_review": 30,
   "code_path": {
     "specialist_event_pipeline": "IMPLEMENTED",
@@ -24,7 +24,12 @@
     "real_outcome_growth_e2e": "IMPLEMENTED_AND_CI_VERIFIED",
     "local_json_strong_store": "IMPLEMENTED_AND_CI_VERIFIED",
     "family_member_identity_resolver": "IMPLEMENTED_AND_CI_VERIFIED",
-    "local_learning_endpoint": "IMPLEMENTED_AND_CI_VERIFIED"
+    "local_learning_endpoint": "IMPLEMENTED_AND_CI_VERIFIED",
+    "tatoeba_read_only_transport": "IMPLEMENTED_AND_CI_VERIFIED",
+    "tatoeba_provider_item_adapter": "IMPLEMENTED_AND_CI_VERIFIED",
+    "tatoeba_item_fail_closed_filter": "IMPLEMENTED_AND_CI_VERIFIED",
+    "tatoeba_reference_curation_receipt": "IMPLEMENTED_AND_CI_VERIFIED",
+    "tatoeba_hide_snap_consumer_handoff": "IMPLEMENTED_AND_CI_VERIFIED"
   },
   "runtime_connection": {
     "hosted_central_transport": "ADAPTER_READY_NOT_BOUND",
@@ -37,7 +42,24 @@
     "local_controlled_persisted_receipt_store": "BOUND_AND_CI_VERIFIED",
     "local_controlled_growth_strategy_store": "BOUND_AND_CI_VERIFIED"
   },
-  "scopes": [],
+  "scopes": [
+    {
+      "scope_id": "TATOEBA_LANGUAGE_USAGE_EXAMPLE_SENTENCE_2026",
+      "source_id": "LANGUAGE_TATOEBA_TEXT_2026",
+      "source_ref": "INDEX:LANGUAGE_TATOEBA_TEXT_2026",
+      "authority": "EXTERNAL_INDEX_EVIDENCE_ONLY",
+      "consumers": [
+        "HIDE_SEEK",
+        "SNAP_POP"
+      ],
+      "state": "CLOSED",
+      "child_facing_use": "STRUCTURED_CURATION_RECEIPT_REQUIRED",
+      "learner_performance_credit": false,
+      "mastery_delta_allowed": false,
+      "memory_strength_delta_allowed": false,
+      "schedule_authority": false
+    }
+  ],
   "interpretation": [
     "Local-controlled receipt persistence is now materially bound to the durable evidence adapter through a file-backed strong-consistency store.",
     "Local-controlled growth strategy persistence is now materially bound through the same strong-consistency contract.",
@@ -46,7 +68,11 @@
     "Multi-family principals require explicit family selection.",
     "Google/OIDC or another upstream authentication provider remains a binding boundary; it is not hard-coded into TAKY.",
     "Hosted central transport and hosted endpoint remain unbound and production/Netlify deployment remain HOLD.",
-    "Raw learner evidence is referenced by immutable receipt and is not copied into the growth ledger; promotion_authority and strategy_change_authorized remain false."
+    "Raw learner evidence is referenced by immutable receipt and is not copied into the growth ledger; promotion_authority and strategy_change_authorized remain false.",
+    "Tatoeba example sentences are available only as external indexed reference evidence for LANGUAGE_USAGE / EXAMPLE_SENTENCE; they do not gain Index-owner, normative, frequency, mastery or scheduling authority.",
+    "Child-facing Tatoeba references require a structured curation receipt bound to exact sentence SHA-256 with naturalness/correctness, context/sense, safety/age and license/attribution all PASS.",
+    "Hide exposure is not recall evidence and Snap reference is not learner-authored output.",
+    "PR #197 and #198 are merged; post-merge main validation passed in Mining Indexing Learning Integration run #368 and Tatoeba Live Provider run #10."
   ],
   "invariants": [
     "HOLD != DROP",
@@ -55,7 +81,10 @@
     "PROMOTION_READINESS != ESTIMATOR_PROMOTION",
     "REAL_OUTCOME_FEEDBACK != AUTOMATIC_STRATEGY_PROMOTION",
     "MINING_STRATEGY_FEEDBACK_CANDIDATE != MINING_STRATEGY_CHANGE",
-    "RAW_EVIDENCE_IMMUTABLE_AND_REFERENCED_BY_RECEIPT"
+    "RAW_EVIDENCE_IMMUTABLE_AND_REFERENCED_BY_RECEIPT",
+    "TATOEBA_EXAMPLE_REFERENCE != LEARNER_PERFORMANCE",
+    "TATOEBA_OCCURRENCE != FREQUENCY",
+    "TATOEBA_EXAMPLE != NORMATIVE_USAGE"
   ],
   "local_controlled_binding_checkpoint": {
     "durable_receipt_store": "PASS",
@@ -76,5 +105,17 @@
       "github:hns140412-glitch/TAKY@042ab345a85ed3ce67a87602b3873f99322b5fdd",
       "github:hns140412-glitch/TAKY@dd13c4c3ada69796f2b22364032e0386218ef47a"
     ]
+  },
+  "tatoeba_external_evidence_checkpoint": {
+    "state": "PASS",
+    "pr_197": "MERGED",
+    "pr_198": "MERGED",
+    "main_head": "beb29320aebe459197f06a0bebe8c4875f47b0c0",
+    "integration_run_368": "SUCCESS",
+    "live_provider_run_10": "SUCCESS",
+    "current_or_canonical_source_promotion": false,
+    "external_index_evidence_only": true,
+    "netlify_deployment": "HOLD",
+    "production_deployment": "HOLD"
   }
 }
