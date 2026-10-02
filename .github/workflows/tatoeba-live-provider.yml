@@ -1,6 +1,17 @@
 name: TAKY Tatoeba Live Provider Validation
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'C2S/TATOEBA_LIVE_PROVIDER_TRANSPORT_TASK_2026-10-02.json'
+      - 'LEARNING/transport/tatoeba-provider.js'
+      - 'LEARNING/transport/tatoeba-provider.test.js'
+      - 'LEARNING/transport/tatoeba-live-smoke.js'
+      - 'LEARNING/adapters/tatoeba-provider-item.js'
+      - 'LEARNING/intake/tatoeba-item-filter.js'
+      - '.github/workflows/tatoeba-live-provider.yml'
   pull_request:
     paths:
       - 'C2S/TATOEBA_LIVE_PROVIDER_TRANSPORT_TASK_2026-10-02.json'
