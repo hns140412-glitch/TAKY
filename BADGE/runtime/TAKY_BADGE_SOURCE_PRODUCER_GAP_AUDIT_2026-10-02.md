@@ -2,8 +2,8 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 42/60
-- remaining: 18/60
+- source producer QA PASS: 43/60
+- remaining: 17/60
 - active: 0/60
 - deployment: HOLD
 - Ready validation cutoff: `d6ad1d918914870e8df4f72d1ed32afffe9d402c`
@@ -41,7 +41,7 @@ The following badges now have exact source tuples backed by Ready Runtime E2E. P
 056 CHILD_PLAN_ADAPTATION — READY_CHILD_REPLAN_AFTER_CHANGE_V1
 057 START_DESPITE_CONDITION — READY_START_DESPITE_CONDITION_V1
 
-## Remaining OPEN — 18
+## Remaining OPEN — 17
 
 ### A. Real-life / authority signal missing — 7
 001 EARLY_START
@@ -74,7 +74,7 @@ Decision:
 - do not derive from elapsed time, screen stillness, silence, app foreground duration, or AI attention inference.
 - require explicit child-authored or feature-declared immersion evidence with a distinct behavior code.
 
-### C. Strong learning/problem evidence needed — 8
+### C. Strong learning/problem evidence needed — 7
 030 ROOT_CAUSE_FOUND
 - current free-text root-cause note is not yet bound to a concrete error artifact.
 
@@ -93,11 +93,12 @@ Decision:
 039 BLOCK_RESOLVED
 - requires blocked-before + strategy/route change + solved-after evidence.
 
-041 MEANINGFUL_OVERRUN
-- current child-authored reason + overrun evidence exists, but exact badge matcher still needs semantic separation from persistence/accuracy badges before PASS.
-
 054 IMPROVEMENT
 - requires same-target prior/current evidence and Learning Engine/equivalent verified comparison; single score delta is forbidden.
+
+
+## Additional closure
+041 MEANINGFUL_OVERRUN is now QA PASS because the exact source contract requires all three: Planner estimate overrun + child-authored meaning artifact + completion. This remains distinct from generic persistence and accuracy producers.
 
 ## Global false-positive guard
 Never use as sufficient evidence:
