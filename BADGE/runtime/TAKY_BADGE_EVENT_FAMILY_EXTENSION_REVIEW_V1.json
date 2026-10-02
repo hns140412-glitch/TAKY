@@ -1,0 +1,198 @@
+{
+  "schema": "TAKY_BADGE_EVENT_FAMILY_EXTENSION_REVIEW_V1",
+  "version": "2026-10-02.1",
+  "status": "PENDING_HUMAN_APPROVAL",
+  "scope": "11 proposed event-family extensions required by 26 of 60 badges",
+  "activation_effect": "NONE_UNTIL_APPROVED_AND_SOURCE_PRODUCERS_TESTED",
+  "total_extension_badges": 26,
+  "definitions": [
+    {
+      "id": "GOAL_COMPLETE",
+      "badge_count": 8,
+      "definition": "Source feature explicitly records that the child completed the identified task/goal.",
+      "required": [
+        "task_or_goal_ref",
+        "source_event_id",
+        "explicit_completion_state",
+        "source_contract_id"
+      ],
+      "forbidden": [
+        "elapsed_time_only",
+        "score_only",
+        "parent_guess_only"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "SELF_CHOICE",
+      "badge_count": 1,
+      "definition": "Child explicitly selects what to do next from real alternatives or confirms a natural-language choice.",
+      "required": [
+        "choice_set_or_choice_ref",
+        "selected_value",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "parent_selected",
+        "default_selection",
+        "execution_order_inference"
+      ],
+      "risk": "LOW"
+    },
+    {
+      "id": "SELF_PLANNING",
+      "badge_count": 1,
+      "definition": "Child explicitly sets order/plan before execution.",
+      "required": [
+        "plan_ref",
+        "ordered_items",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "mere_actual_order",
+        "planner_auto_order"
+      ],
+      "risk": "LOW"
+    },
+    {
+      "id": "HELP_USE",
+      "badge_count": 2,
+      "definition": "Child explicitly uses received help/hint and then continues the task.",
+      "required": [
+        "help_event_ref",
+        "resume_or_followup_ref",
+        "explicit_child_action"
+      ],
+      "forbidden": [
+        "help_available_only",
+        "assistant_inference"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "ERROR_CORRECTION",
+      "badge_count": 4,
+      "definition": "Child explicitly changes an answer/artifact after identifying an issue.",
+      "required": [
+        "before_artifact_ref",
+        "after_artifact_ref",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "model_only_correction",
+        "score_delta_only"
+      ],
+      "risk": "LOW"
+    },
+    {
+      "id": "ERROR_ANALYSIS",
+      "badge_count": 1,
+      "definition": "Child explicitly identifies or records why an error occurred.",
+      "required": [
+        "error_ref",
+        "child_authored_cause_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "ai_inferred_cause",
+        "parent_guess"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "BREAKTHROUGH",
+      "badge_count": 2,
+      "definition": "A previously blocked identified task is explicitly resolved, with blocked-before and solved-after evidence.",
+      "required": [
+        "blocked_state_ref",
+        "resolution_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "duration_only",
+        "attempt_count_only"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "CONCEPT_UNDERSTANDING",
+      "badge_count": 1,
+      "definition": "Child explicitly reconstructs/explains a concept in own words or completes an equivalent verified artifact.",
+      "required": [
+        "concept_ref",
+        "child_authored_artifact_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "score_only",
+        "model_confidence_only",
+        "single_correct_answer_only"
+      ],
+      "risk": "HIGH"
+    },
+    {
+      "id": "SELF_REGULATION",
+      "badge_count": 4,
+      "definition": "Child explicitly chooses a regulating action such as stop, return, prioritize, or resist distraction.",
+      "required": [
+        "regulation_action_code",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "elapsed_time_only",
+        "silent_behavior_inference",
+        "parent_guess"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "STRATEGY_SWITCH",
+      "badge_count": 1,
+      "definition": "Child explicitly switches from one identified strategy to another after the first approach is not working.",
+      "required": [
+        "from_strategy_ref",
+        "to_strategy_ref",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "model_inferred_strategy",
+        "unobserved_change"
+      ],
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "IMPROVEMENT",
+      "badge_count": 1,
+      "definition": "Improvement is established from repeated evidence under the same learning target by the Learning Engine or an equivalent verified comparison, then emitted as an observation-only badge source event.",
+      "required": [
+        "learning_target_id",
+        "prior_evidence_ref",
+        "current_evidence_ref",
+        "verified_interpretation_ref"
+      ],
+      "forbidden": [
+        "single_score_delta",
+        "ability_label",
+        "ai_guess_only",
+        "cross_target_comparison"
+      ],
+      "risk": "HIGH"
+    }
+  ],
+  "decision_options": {
+    "approve_all": "Approve the 11 family semantics as observation-only contracts; badge activation remains separately gated.",
+    "approve_with_changes": "Approve selected families and return edits for the rest.",
+    "hold": "Keep all 26 dependent badges inactive."
+  },
+  "invariants": [
+    "Approval of a family does not activate any badge.",
+    "Every badge still requires its own behavior_code discriminator, source_contract_id, dedupe policy and false-positive tests.",
+    "POCKET/FIELD/EXPEDITION/SECRET and primary_nature are separate axes.",
+    "Art identity and SHA are untouched."
+  ]
+}
