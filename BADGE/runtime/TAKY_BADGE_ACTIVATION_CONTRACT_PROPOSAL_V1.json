@@ -1,0 +1,1513 @@
+{
+  "schema": "TAKY_BADGE_ACTIVATION_CONTRACT_PROPOSAL_V1",
+  "version": "2026-10-02.1",
+  "status": "REVIEW_REQUIRED_NOT_ACTIVE",
+  "matcher_shape": {
+    "event_family": "exact match",
+    "payload_behaviorCode": "exact match",
+    "source_event_id": "required",
+    "source_contract": "required before activation",
+    "explicit_source_action": "required",
+    "ai_inference_only": "forbidden",
+    "score_only": "forbidden",
+    "elapsed_time_only": "forbidden"
+  },
+  "activation_gate": [
+    "event family admitted by runtime",
+    "source producer contract exists",
+    "behaviorCode emitted explicitly by source feature",
+    "false-positive tests pass",
+    "dedupe/reaward tests pass",
+    "strong-evidence validator passes where required",
+    "human activation approval recorded",
+    "catalog item status promoted out of WORKING_DRAFT and active=true only after approval"
+  ],
+  "proposed_family_extensions": [
+    {
+      "id": "GOAL_COMPLETE",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "SELF_CHOICE",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "SELF_PLANNING",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "HELP_USE",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "ERROR_CORRECTION",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "ERROR_ANALYSIS",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "BREAKTHROUGH",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "CONCEPT_UNDERSTANDING",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "SELF_REGULATION",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "STRATEGY_SWITCH",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    },
+    {
+      "id": "IMPROVEMENT",
+      "status": "PROPOSED_EXTENSION_NOT_RUNTIME_ADMITTED"
+    }
+  ],
+  "items": [
+    {
+      "slot": 1,
+      "badge_id": "BDG-DRAFT-001",
+      "display_title": "이불 왕국 탈출기",
+      "historical_trigger": "평소보다 일찍 일어나 학습 시작",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "EARLY_START"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 2,
+      "badge_id": "BDG-DRAFT-002",
+      "display_title": "알람보다 한발 먼저",
+      "historical_trigger": "아침 알람 후 바로 일어남",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "ALARM_RESPONSE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 3,
+      "badge_id": "BDG-DRAFT-003",
+      "display_title": "한 입 먹고 한 칸",
+      "historical_trigger": "식사 전 짧은 과제 하나 수행",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "MICRO_START"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 4,
+      "badge_id": "BDG-DRAFT-004",
+      "display_title": "밥심으로 2라운드",
+      "historical_trigger": "아침식사 후 다시 학습으로 복귀",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "RESTART_AFTER_BREAK"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 5,
+      "badge_id": "BDG-DRAFT-005",
+      "display_title": "신발끈은 이미 출발했다",
+      "historical_trigger": "등교 준비까지 흐트러짐 없이 완료",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "PREPARATION_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 6,
+      "badge_id": "BDG-DRAFT-006",
+      "display_title": "잃어버린 분을 찾습니다",
+      "historical_trigger": "스스로 빈 시간을 찾아 과제 시작",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "TIME_CREATION",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "TIME_CREATION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 7,
+      "badge_id": "BDG-DRAFT-007",
+      "display_title": "시계의 비밀 주머니",
+      "historical_trigger": "원래 계획에 없던 시간을 만들어 추가 수행",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "TIME_CREATION",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "TIME_CREATION_EXTRA"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 8,
+      "badge_id": "BDG-DRAFT-008",
+      "display_title": "한 개는 덤입니다",
+      "historical_trigger": "할 일을 끝내고 스스로 하나 더 선택",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "EXTRA_TASK",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "EXTRA_TASK"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 9,
+      "badge_id": "BDG-DRAFT-009",
+      "display_title": "아무도 안 시켰는데요?",
+      "historical_trigger": "부모가 말하기 전에 스스로 시작",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "BEFORE_PROMPT"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 10,
+      "badge_id": "BDG-DRAFT-010",
+      "display_title": "말보다 빠른 발자국",
+      "historical_trigger": "안내 직후 지체 없이 시작",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "RESPONSIVE_START"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 11,
+      "badge_id": "BDG-DRAFT-011",
+      "display_title": "내 작전, 내가 결재",
+      "historical_trigger": "오늘 할 일을 스스로 선택",
+      "primary_nature": "SELF_DIRECTED",
+      "proposed_event_family": "SELF_CHOICE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_CHOICE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 12,
+      "badge_id": "BDG-DRAFT-012",
+      "display_title": "연필 참모총장",
+      "historical_trigger": "순서를 스스로 정해 실행",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "SELF_PLANNING",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_PLANNING_SEQUENCE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 13,
+      "badge_id": "BDG-DRAFT-013",
+      "display_title": "한 칸 집중 본부",
+      "historical_trigger": "한 과제에 흔들리지 않고 집중",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "FOCUS",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SINGLE_TASK_FOCUS"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 14,
+      "badge_id": "BDG-DRAFT-014",
+      "display_title": "번개도 검토했습니다",
+      "historical_trigger": "예상보다 훨씬 빠르게 제대로 완료",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "FAST_COMPLETE_CHECKED"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 15,
+      "badge_id": "BDG-DRAFT-015",
+      "display_title": "거북이의 정밀 탐험",
+      "historical_trigger": "오래 걸렸지만 꼼꼼하게 완료",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "ACCURATE_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 16,
+      "badge_id": "BDG-DRAFT-016",
+      "display_title": "한 칸의 반란",
+      "historical_trigger": "큰 과제를 차근차근 나눠 완료",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "CHUNKED_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 17,
+      "badge_id": "BDG-DRAFT-017",
+      "display_title": "끝판왕은 마지막 한 칸",
+      "historical_trigger": "예상보다 오래 걸렸어도 끝까지 완료",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "PERSIST_TO_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 18,
+      "badge_id": "BDG-DRAFT-018",
+      "display_title": "불꽃은 조용히 탄다",
+      "historical_trigger": "평소보다 긴 집중 구간 발생",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "FOCUS",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "LONG_FOCUS"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 19,
+      "badge_id": "BDG-DRAFT-019",
+      "display_title": "머릿속은 대원정 중",
+      "historical_trigger": "개입 없이 조용히 몰입",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "FOCUS",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "QUIET_IMMERSION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 20,
+      "badge_id": "BDG-DRAFT-020",
+      "display_title": "집중 급류 탑승",
+      "historical_trigger": "자연스럽게 다음 과제로 이어감",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "FOCUS",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "FLOW_CONTINUATION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 21,
+      "badge_id": "BDG-DRAFT-021",
+      "display_title": "집중이 귀가했습니다",
+      "historical_trigger": "쉬거나 흐트러진 뒤 스스로 복귀",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 22,
+      "badge_id": "BDG-DRAFT-022",
+      "display_title": "잠깐 외출한 집중 씨",
+      "historical_trigger": "집중 이탈 후 다시 제대로 집중",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "FOCUS_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 23,
+      "badge_id": "BDG-DRAFT-023",
+      "display_title": "흩어진 마음 수거함",
+      "historical_trigger": "딴짓하다 스스로 알아채고 돌아옴",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_NOTICE_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 24,
+      "badge_id": "BDG-DRAFT-024",
+      "display_title": "오늘 한 조각 구조 완료",
+      "historical_trigger": "막혔지만 도움을 활용해 다시 진행",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "HELP_USE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "HELP_USED_AND_RESUMED"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 25,
+      "badge_id": "BDG-DRAFT-025",
+      "display_title": "SOS도 기술이다",
+      "historical_trigger": "필요한 순간 스스로 도움 요청",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "HELP_REQUEST",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_HELP_REQUEST"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 26,
+      "badge_id": "BDG-DRAFT-026",
+      "display_title": "이상한 건 못 지나쳐",
+      "historical_trigger": "자기 실수를 스스로 발견",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_DISCOVERY",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_ERROR_DISCOVERY"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 27,
+      "badge_id": "BDG-DRAFT-027",
+      "display_title": "실수 청소부",
+      "historical_trigger": "틀린 문제를 찾아 정리",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_DISCOVERY",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "ERROR_REVIEW"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 28,
+      "badge_id": "BDG-DRAFT-028",
+      "display_title": "수정이 나를 키웠다",
+      "historical_trigger": "오답을 수정해 결국 해결",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_CORRECTION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "ERROR_CORRECTED_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 29,
+      "badge_id": "BDG-DRAFT-029",
+      "display_title": "다시 누르는 용기",
+      "historical_trigger": "실패 후 스스로 재도전",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETRY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_RETRY"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 30,
+      "badge_id": "BDG-DRAFT-030",
+      "display_title": "범인은 3번째 줄",
+      "historical_trigger": "왜 틀렸는지 원인을 찾아냄",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_ANALYSIS",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "ROOT_CAUSE_FOUND"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 31,
+      "badge_id": "BDG-DRAFT-031",
+      "display_title": "퍼즐은 마지막에 웃는다",
+      "historical_trigger": "오래 막혔던 문제를 결국 해결",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "BREAKTHROUGH",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "PERSISTENT_BREAKTHROUGH"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 32,
+      "badge_id": "BDG-DRAFT-032",
+      "display_title": "머릿속 전구 긴급 점등",
+      "historical_trigger": "모르던 개념을 이해한 순간",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "CONCEPT_UNDERSTANDING",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "CONCEPT_UNDERSTOOD"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 33,
+      "badge_id": "BDG-DRAFT-033",
+      "display_title": "잠깐! 생각 검문",
+      "historical_trigger": "성급히 답하지 않고 다시 생각",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "DEEP_THINKING",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "REFLECT_BEFORE_ANSWER"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 34,
+      "badge_id": "BDG-DRAFT-034",
+      "display_title": "두 번째 눈이 찾았다",
+      "historical_trigger": "조건/문제를 다시 읽어 실수 예방",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_CORRECTION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "REREAD_CHECK"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 35,
+      "badge_id": "BDG-DRAFT-035",
+      "display_title": "숫자의 알리바이",
+      "historical_trigger": "계산 실수를 스스로 찾아 수정",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_CORRECTION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "CALCULATION_CHECK"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 36,
+      "badge_id": "BDG-DRAFT-036",
+      "display_title": "지우개는 퇴각하지 않는다",
+      "historical_trigger": "틀리는 걸 두려워하지 않고 고쳐 씀",
+      "primary_nature": "ERROR_LEARNING",
+      "proposed_event_family": "ERROR_CORRECTION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "CORRECTION_COURAGE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 37,
+      "badge_id": "BDG-DRAFT-037",
+      "display_title": "장고 끝에 지도 한 장",
+      "historical_trigger": "한 문제를 오래 깊게 고민",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "DEEP_THINKING",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "DEEP_THINKING"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 38,
+      "badge_id": "BDG-DRAFT-038",
+      "display_title": "동굴에 답이 살고 있다",
+      "historical_trigger": "평소보다 해결 시간이 크게 길어진 문제를 끝까지 탐색",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "DEEP_THINKING",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "DEEP_THINKING_PERSISTENCE"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 39,
+      "badge_id": "BDG-DRAFT-039",
+      "display_title": "막다른 길의 뒷문",
+      "historical_trigger": "오래 막힌 구간을 해결",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "BREAKTHROUGH",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "BLOCK_RESOLVED"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 40,
+      "badge_id": "BDG-DRAFT-040",
+      "display_title": "멈춤도 실력입니다",
+      "historical_trigger": "무리하지 않고 적절한 시점에 멈춤",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "SELF_REGULATION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "STOP_AT_RIGHT_TIME"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 41,
+      "badge_id": "BDG-DRAFT-041",
+      "display_title": "지도 밖으로 한 발",
+      "historical_trigger": "예상시간을 넘겼지만 학습 의미가 있었음",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "ISSUE_DURATION",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "MEANINGFUL_OVERRUN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 42,
+      "badge_id": "BDG-DRAFT-042",
+      "display_title": "시계 실종 사건",
+      "historical_trigger": "몰입해서 예상보다 오래 수행",
+      "primary_nature": "FOCUS_IMMERSION",
+      "proposed_event_family": "FOCUS",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "FLOW_IMMERSION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 43,
+      "badge_id": "BDG-DRAFT-043",
+      "display_title": "휴식 후 재접속",
+      "historical_trigger": "휴식 후 제시간에 복귀",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "BREAK_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 44,
+      "badge_id": "BDG-DRAFT-044",
+      "display_title": "5분은 내가 지킨다",
+      "historical_trigger": "휴식 타이머 후 스스로 돌아옴",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "TIMER_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 45,
+      "badge_id": "BDG-DRAFT-045",
+      "display_title": "딴길은 다음에",
+      "historical_trigger": "놀거리/딴짓 유혹을 이기고 진행",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "SELF_REGULATION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "DISTRACTION_RESISTANCE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 46,
+      "badge_id": "BDG-DRAFT-046",
+      "display_title": "책상: 돌아온 주인",
+      "historical_trigger": "하기 싫었던 과제를 다시 꺼내 시작",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "TASK_RESTART"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 47,
+      "badge_id": "BDG-DRAFT-047",
+      "display_title": "배낭의 질서 회복",
+      "historical_trigger": "Carry-over 과제를 스스로 처리",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "CARRY_OVER_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 48,
+      "badge_id": "BDG-DRAFT-048",
+      "display_title": "내일의 나에게 휴가를",
+      "historical_trigger": "남은 일을 스스로 확인하고 마무리",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_CHECK_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 49,
+      "badge_id": "BDG-DRAFT-049",
+      "display_title": "마무리의 깃털",
+      "historical_trigger": "작은 과제를 빠르게 정리해 부담 제거",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "proposed_event_family": "GOAL_COMPLETE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "MICRO_TASK_COMPLETE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 50,
+      "badge_id": "BDG-DRAFT-050",
+      "display_title": "큰 문부터 노크",
+      "historical_trigger": "어려운 과제를 스스로 먼저 선택",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "SELF_REGULATION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "PRIORITIZE_HARD"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 51,
+      "badge_id": "BDG-DRAFT-051",
+      "display_title": "작은 문부터 똑똑",
+      "historical_trigger": "쉬운 과제로 시동을 걸어 결국 전체 진행",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "SELF_REGULATION",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "WARM_START"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 52,
+      "badge_id": "BDG-DRAFT-052",
+      "display_title": "열쇠는 하나가 아니지",
+      "historical_trigger": "안 풀리자 다른 방법으로 시도",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "STRATEGY_SWITCH",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "STRATEGY_SWITCH"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 53,
+      "badge_id": "BDG-DRAFT-053",
+      "display_title": "말풍선의 연금술",
+      "historical_trigger": "배운 것을 자기 말로 설명",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "SELF_EXPLANATION",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "SELF_EXPLANATION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 54,
+      "badge_id": "BDG-DRAFT-054",
+      "display_title": "어제의 나와 재회",
+      "historical_trigger": "이전에 어려웠던 활동이 수월해짐",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "IMPROVEMENT",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "IMPROVEMENT"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 55,
+      "badge_id": "BDG-DRAFT-055",
+      "display_title": "지도에 없던 보너스 스테이지",
+      "historical_trigger": "요구하지 않은 추가 학습을 자발적으로 함",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "EXTRA_TASK",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "VOLUNTARY_EXTRA"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 56,
+      "badge_id": "BDG-DRAFT-056",
+      "display_title": "계획표의 유연체조",
+      "historical_trigger": "갑작스러운 일정 변화에도 다시 계획해 수행",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "proposed_event_family": "PLAN_ADAPTATION",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "PLAN_ADAPTATION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 57,
+      "badge_id": "BDG-DRAFT-057",
+      "display_title": "준비 덜 됐어도 출항",
+      "historical_trigger": "컨디션이 좋지 않은 날에도 가능한 만큼 시작",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "SELF_START",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "START_DESPITE_CONDITION"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 58,
+      "badge_id": "BDG-DRAFT-058",
+      "display_title": "잠깐 쉬고, 다시 출항",
+      "historical_trigger": "피곤함을 인지하고 쉬었다가 다시 수행",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "proposed_event_family": "RETURN_RECOVERY",
+      "family_status": "EXISTING",
+      "proposed_matcher": {
+        "behaviorCode": "REST_AND_RETURN"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 59,
+      "badge_id": "BDG-DRAFT-059",
+      "display_title": "우리끼리 미니 원정대",
+      "historical_trigger": "탐험대의 힌트를 최소한으로 받고 스스로 해결",
+      "primary_nature": "PROBLEM_SOLVING",
+      "proposed_event_family": "HELP_USE",
+      "family_status": "EXTENSION_REQUIRED",
+      "proposed_matcher": {
+        "behaviorCode": "MINIMAL_HINT_SOLVE"
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    },
+    {
+      "slot": 60,
+      "badge_id": "BDG-DRAFT-060",
+      "display_title": "오늘의 별자리, 나만 알아",
+      "historical_trigger": "기존 조건에 없는 의미 있는 특별행동 발견",
+      "primary_nature": "EXTRA_GROWTH",
+      "proposed_event_family": "SPECIAL_BEHAVIOR",
+      "family_status": "EXISTING_STRONG_EVIDENCE",
+      "proposed_matcher": {
+        "behaviorCode": "SPECIAL_BEHAVIOR"
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "source_app_policy": "SOURCE_APP_MUST_DECLARE_AUTHENTIC_EVENT; NOT_ASSIGNED_BY_BADGE_RUNTIME",
+      "dedupe_policy": "DEDUP_BY_SOURCE_EVENT_ID",
+      "reaward_policy": "ONE_REAWARD_PER_DISTINCT_SOURCE_EVENT_AFTER_DEDUPE",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE"
+    }
+  ]
+}
