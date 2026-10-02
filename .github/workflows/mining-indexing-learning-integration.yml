@@ -3,9 +3,11 @@ name: TAKY Mining Indexing Learning Integration
 on:
   push:
     branches:
+      - main
       - taky/mining-indexing-learning-integration-2026-09-25
   pull_request:
     paths:
+      - '.github/workflows/mining-indexing-learning-integration.yml'
       - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
       - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'LEARNING/policy/**'
