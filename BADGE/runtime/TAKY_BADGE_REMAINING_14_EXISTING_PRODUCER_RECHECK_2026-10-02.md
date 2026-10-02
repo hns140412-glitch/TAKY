@@ -12,7 +12,10 @@ Status: NO_ADDITIONAL_SAFE_EXISTING_PRODUCER
 - Ready-Set branch `taky/badge-source-producers-20261002`
 - Hide-Seek branch `taky/badge-source-producers-20261002`
 - Snap-Pop branch `taky/badge-catalog-ui-binding-20261001`
+- Ready-Set validated head: `5203baf88c239de4c468785881245c8f0e6db522`
+- Hide-Seek validated head: `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3` — CI 2/2 PASS
 - Snap-Pop validated head: `9f8e970ea76d85e4ae04f292367524db184cc61a`
+- TAKY authority head at recheck start: `2df71c98f3f8c50bf6fb72ec225b0fe40063b7fe`
 - Snap static branch closure: 73/73 PASS
 
 ## Remaining behavior codes with no exact current producer
@@ -73,6 +76,13 @@ Explicit child/feature-declared flow evidence. Duration/silence/foreground infer
 
 ### 054 IMPROVEMENT
 Same-target prior verified evidence + same-target current verified evidence + Learning Engine/equivalent comparison. Single score delta forbidden.
+
+## Exhaustive current-runtime findings
+- Ready contains `READY_CHILD_ROOT_CAUSE_V1`, but it records a child root-cause note artifact, not a concrete verified error artifact. In addition, BDG-DRAFT-030 current allowed source apps are SNAP_POP/HIDE_SEEK, so Ready cannot be used without a separate authority change.
+- Ready contains `READY_PERSIST_TO_COMPLETE_V1` with blocked/continue/completion references and also persists BLOCKED outcomes plus explicit `READY_CHILD_STRATEGY_SWITCH_V1`. These are relevant design evidence, but BDG-DRAFT-031 and BDG-DRAFT-039 current allowed source apps are SNAP_POP/HIDE_SEEK, and reusing Ready would violate the current matcher authority.
+- Learning Engine `LEARNING/runtime/recovery-profile.js` already derives same-target verified failure→success recovery episodes only when `LEARNING_VERIFICATION_RECEIPT` authority is present. This satisfies the comparison logic direction for BDG-DRAFT-054, but there is no current badge-source bridge that returns such a verified comparison as `TAKY_BADGE_SOURCE_OBSERVATION_V1` from an allowed source app.
+- Exact-code scan across Ready-Set, Hide-Seek, Snap-Pop and TAKY found no additional current producer for the remaining 14 behavior codes. Catalog mentions, tests of fail-closed behavior and governance prose were not counted as producers.
+- Therefore current result remains 46/60 QA PASS, 14/60 OPEN, active 0/60.
 
 ## Decision boundary
 No remaining item may be implemented by inventing evidence from current telemetry.

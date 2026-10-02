@@ -275,5 +275,20 @@
     "source_only_award_boundary": "PASS",
     "full_branch_closure": "PASS_73_OF_73_LOCAL",
     "activation": "HOLD"
+  },
+  "remaining_14_existing_producer_recheck": {
+    "status": "NO_ADDITIONAL_SAFE_EXISTING_PRODUCER",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_14_EXISTING_PRODUCER_RECHECK_2026-10-02.md",
+    "ready_head": "5203baf88c239de4c468785881245c8f0e6db522",
+    "hide_head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+    "snap_pop_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+    "qa_pass": 46,
+    "open": 14,
+    "active": 0,
+    "key_blockers": [
+      "READY_SIMILAR_EVIDENCE_NOT_AUTHORIZED_FOR_030_031_039",
+      "054_LEARNING_ENGINE_RECOVERY_COMPARISON_EXISTS_BUT_BADGE_SOURCE_BRIDGE_MISSING",
+      "NO_WEAK_PROXY_PROMOTION"
+    ]
   }
 }
