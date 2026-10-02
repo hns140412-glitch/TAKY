@@ -161,6 +161,15 @@ jobs:
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
+          python -m py_compile ENFORCEMENT/data_index_bridge.py
+          python -m py_compile ENFORCEMENT/data_index_relation_context.py
+          python -m py_compile ENFORCEMENT/data_index_lifecycle_assurance.py
+          python -m py_compile ENFORCEMENT/data_index_asset_binding.py
+          python -m py_compile ENFORCEMENT/data_index_source_composer.py
+          python -m py_compile ENFORCEMENT/data_index_gap_router.py
+          python -m py_compile ENFORCEMENT/data_index_detail_contract.py
+          python -m py_compile ENFORCEMENT/data_index_external_intake.py
+          python -m py_compile ENFORCEMENT/data_index_evidence_overlay.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
@@ -414,6 +423,24 @@ jobs:
         run: python ENFORCEMENT/local_drive_workspace_test.py
       - name: Data index search projection regression
         run: python ENFORCEMENT/data_index_search_test.py
+      - name: Staged external source bridge regression
+        run: python ENFORCEMENT/data_index_bridge_test.py
+      - name: Evidence-labelled relation context and filtering regression
+        run: python ENFORCEMENT/data_index_relation_context_test.py
+      - name: Source conservation, graph integrity and delta impact regression
+        run: python ENFORCEMENT/data_index_lifecycle_assurance_test.py
+      - name: Approved asset source-to-binding evidence regression
+        run: python ENFORCEMENT/data_index_asset_binding_test.py
+      - name: Source-grounded V6/V26 composer regression
+        run: python ENFORCEMENT/data_index_source_composer_test.py
+      - name: Index evidence-gap reverse handoff regression
+        run: python ENFORCEMENT/data_index_gap_router_test.py
+      - name: Multimodal DETAIL coordinate regression
+        run: python ENFORCEMENT/data_index_detail_contract_test.py
+      - name: Multi-provider link-only intake regression
+        run: python ENFORCEMENT/data_index_external_intake_test.py
+      - name: Staged selected-source evidence provenance regression
+        run: python ENFORCEMENT/data_index_evidence_overlay_test.py
       - name: Validate generated Codex task contract
         run: |
           python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json

@@ -1,0 +1,144 @@
+{
+  "schema": "TAKY_INDEX_ASSET_CONSUMPTION_CASE_V1",
+  "date": "2026-09-30",
+  "state": "EVIDENCE_CASE_NOT_CURRENT_OR_CANONICAL_ASSET_REGISTRY",
+  "scope": "APPROVED_ENVIRONMENT_ONLY_NOT_CHARACTERS_OR_FULL_UI",
+  "governing_rule": "TKY-ASSET-001",
+  "source_registry": "ChatGPT Library: /TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/registry.visual-ids.json",
+  "reference_asset_id": "TAKY-LAF-UI-HOME-SNAP-HIDE-20260927-A",
+  "original_reference_sha256": "6cd65b6d82f3306bab6fa93064780c96a3e4849484a8cc8add1926108a6db6f2",
+  "reference_asset_binary_reverified_in_this_case": false,
+  "source_owner": "User-approved visual registry; INDEX stores projection only",
+  "measured_via": "Independently read original Library PNG bytes, SHA-256 and PNG IHDR dimensions in isolated working container, not registry assertion alone",
+  "entries": [
+    {
+      "visual_id": "TAKY-LAF-SNAP-HOME-COAST-20260927-A",
+      "consumer_app": "Snap & Pop",
+      "asset_basename": "snap_pop_beach_asset.png",
+      "source_library_scoped_path": "/TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/assets/snap_pop_beach_asset.png",
+      "declared_sha256": "f15af01680e2db44ef8af1dff749169f1082ddd15b3760a96da7ff2211eb8259",
+      "measured_sha256": "f15af01680e2db44ef8af1dff749169f1082ddd15b3760a96da7ff2211eb8259",
+      "dimensions_px": [
+        941,
+        1672
+      ],
+      "bytes": 2287028,
+      "hash_match": true,
+      "dimensions_match": true
+    },
+    {
+      "visual_id": "TAKY-LAF-HIDE-HOME-MOSSFALL-20260927-A",
+      "consumer_app": "Hide & Seek",
+      "asset_basename": "hide_seek_forest_asset.png",
+      "source_library_scoped_path": "/TAKY/LEARNING_APP_FAMILY_VISUAL_BINDINGS/assets/hide_seek_forest_asset.png",
+      "declared_sha256": "1f7aa500a177e25820649cc485355297cbc4fb89909df1f7f43e4ff7ddbe2419",
+      "measured_sha256": "1f7aa500a177e25820649cc485355297cbc4fb89909df1f7f43e4ff7ddbe2419",
+      "dimensions_px": [
+        941,
+        1672
+      ],
+      "bytes": 3137077,
+      "hash_match": true,
+      "dimensions_match": true
+    }
+  ],
+  "central_asset_repo": "hns140412-glitch/TAKY-ASSETS",
+  "observed_central_main_tree_sha": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
+  "observed_central_main_tree_truncated": false,
+  "exact_asset_basename_paths_in_observed_main": 0,
+  "central_binary_commit_verified": true,
+  "runtime_app_import_verified": false,
+  "actual_render_comparison_verified": false,
+  "permission_rights_to_publish_originals_not_assumed": true,
+  "approval_recorded_in_library_registry_not_independently_reapproved": true,
+  "claim_ceiling": "CENTRAL_DRAFT_BINARY_AND_APP_DRAFT_COPIES_VERIFIED_NOT_RUNTIME",
+  "open": [
+    "CENTRAL_STAGED_OWNER_APPROVAL_AND_MAIN_PROMOTION",
+    "APP_SCREEN_CONTRACT_AND_ACTUAL_RUNTIME_WIRING",
+    "RENDER_INTERACTION_AND_VISUAL_FIDELITY",
+    "INDEPENDENT_PRODUCER_GATE_AND_RELEASE"
+  ],
+  "no_source_bytes_stored_in_this_repo": true,
+  "no_current_write": true,
+  "no_main_merge": true,
+  "no_deployment": true,
+  "consumer_static_source_audit": {
+    "observed_at": "2026-09-30",
+    "status": "BOTH_APPROVED_ASSETS_ABSENT_FROM_INSPECTED_APP_MAIN_TREES_AND_MAIN_STATIC_REFERENCES",
+    "consumers": [
+      {
+        "visual_id": "TAKY-LAF-SNAP-HOME-COAST-20260927-A",
+        "repo": "hns140412-glitch/Snap-Pop",
+        "head": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+        "expected": "snap_pop_beach_asset.png",
+        "inspected_files": [
+          {
+            "path": "index.html",
+            "static_runtime_reference": "assets/world/golden_world_scene.jpg"
+          },
+          {
+            "path": "snap-reviewed-visual-binding-v1.js",
+            "static_runtime_reference": "assets/world/golden_world_scene.jpg"
+          }
+        ],
+        "actual_asset_in_main_tree": false
+      },
+      {
+        "visual_id": "TAKY-LAF-HIDE-HOME-MOSSFALL-20260927-A",
+        "repo": "hns140412-glitch/Hide-Seek",
+        "head": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+        "expected": "hide_seek_forest_asset.png",
+        "inspected_files": [
+          {
+            "path": "styles.css",
+            "static_runtime_reference": "./assets/backgrounds/park.png"
+          },
+          {
+            "path": "styles.css",
+            "static_runtime_reference": "./assets/backgrounds/academy.png"
+          }
+        ],
+        "actual_asset_in_main_tree": false
+      }
+    ],
+    "scope_limit": "EXACT_MAIN_TREE_AND_SELECTED_STATIC_FILES_ONLY; runtime could be dynamic; no device inspection performed",
+    "central_registration_upload_status": "OPEN_NO_BINARY_TRANSFER_ROUTE_VERIFIED",
+    "temporary_interaccount_transfer": "TEMPORARY_STAGING_COPIES_DELETED; NO_PRODUCTION_OR_CANONICAL_PATH_MODIFIED",
+    "no_changed_app_runtime": true,
+    "previous_baseline_note": "App main prior backgrounds unchanged; separate Draft branches now contain exact pinned source copies with no CSS/HTML runtime substitution"
+  },
+  "central_asset_staging": {
+    "repo": "hns140412-glitch/TAKY-ASSETS",
+    "pr": 3,
+    "branch": "stage/approved-learning-environments-2026-09-30",
+    "head": "a251775daac51236193bcbc951ac2f74b561a8a3",
+    "verified_source_binary_commit": "0a54c6004225a1917a5ef6d877acd725644e0f13",
+    "independent_fresh_clone_sha256_and_git_blob_readback": true,
+    "source_count": 2,
+    "main_merged": false
+  },
+  "app_pinned_copy_staging": [
+    {
+      "app": "Hide & Seek",
+      "repo": "hns140412-glitch/Hide-Seek",
+      "pr": 24,
+      "head": "ad84e6e97e09236dfc2b8bd8b8eb441c2e29d5cd",
+      "path": "assets/taky-approved/hide_seek_forest_asset.png",
+      "source_sha256_verified": true,
+      "runtime_import_verified": false,
+      "main_merged": false
+    },
+    {
+      "app": "Snap & Pop",
+      "repo": "hns140412-glitch/Snap-Pop",
+      "pr": 12,
+      "head": "3cdc94e71ec31f37fb30038e87e6f4dd5808bcb8",
+      "path": "assets/taky-approved/snap_pop_beach_asset.png",
+      "source_sha256_verified": true,
+      "runtime_import_verified": false,
+      "main_merged": false
+    }
+  ],
+  "central_binary_commit_scope": "EXACT_DRAFT_BRANCH_ONLY_NOT_MAIN",
+  "temporary_cross_account_transfer_status": "PENDING_EXACT_TEMP_STAGING_CLEANUP"
+}
