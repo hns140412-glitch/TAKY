@@ -6,7 +6,7 @@ Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 - remaining: 16/60
 - active: 0/60
 - deployment: HOLD
-- Ready validation cutoff: `d6ad1d918914870e8df4f72d1ed32afffe9d402c`
+- Ready validation cutoff: `5203baf88c239de4c468785881245c8f0e6db522`
 - Ready Runtime E2E: 100/100 PASS
 - Ready workflow gates: 10/10 PASS
 
