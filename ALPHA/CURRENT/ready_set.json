@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT",
+  "namespace": "ready_set",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "authority_transfer": false,
+  "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+  "state": "PROJECT_CURRENT_REQUIRES_LIVE_REVERIFY",
+  "frozen_verified_main": "daed2ebd072061b870bfd0d2f2472dd344661bad",
+  "open": [
+    "project-owned OPEN items must be resolved from current Ready canonical/live repo before execution"
+  ],
+  "hold": [
+    "deployment unless separately authorized"
+  ],
+  "invariants": [
+    "Planner owns dated allocation",
+    "Ready owns session execution",
+    "Learning Engine does not schedule dates"
+  ],
+  "freshness": {
+    "mode": "LIVE_REVERIFY_BEFORE_CURRENT_CLAIM",
+    "snapshot_is_not_perpetual_live_proof": true
+  },
+  "handoff_role": "RECOVERY_POINTER_ONLY",
+  "history_role": "EVIDENCE_ONLY"
+}
