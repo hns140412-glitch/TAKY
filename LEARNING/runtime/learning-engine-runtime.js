@@ -12,7 +12,7 @@ const ObservationReview=require('./observation-review-intent.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
-function derive(input={}, independentIndexOwnerVerifier=null){
+function derive(input={}, independentIndexOwnerVerifier=null, evidencePolicyRegistry=undefined){
   const evidence=Array.isArray(input.evidence)?input.evidence:[];
   const scope=input.scope||{};
   const observationReview=Array.isArray(input.observation_only)
@@ -35,7 +35,7 @@ function derive(input={}, independentIndexOwnerVerifier=null){
     policyRequests=[...policyRequests,...indexedEvidence.policy_requests];
   }
 
-  const evidencePolicy=EvidencePolicy.evaluateBatch(policyRequests);
+  const evidencePolicy=EvidencePolicy.evaluateBatch(policyRequests,evidencePolicyRegistry);
   if(policyRequests.length && !evidencePolicy.ok){
     return {
       ok:false,
