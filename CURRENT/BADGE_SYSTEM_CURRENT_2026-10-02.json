@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 47/60; remaining 13 require exact source evidence. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 48/60; remaining 12 require exact source evidence. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Remaining 13: keep first acquisition low-friction and explicit; only tier-promotion may use stronger repeat/independence evidence. active remains 0/60; deployment HOLD.",
+  "next_open": "Remaining 12: keep first acquisition low-friction and explicit; only tier-promotion may use stronger repeat/independence evidence. active remains 0/60; deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,8 +44,8 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 47,
-    "source_producer_required": 13,
+    "source_producer_qa_pass": 48,
+    "source_producer_required": 12,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-003",
@@ -58,6 +58,7 @@
       "BDG-DRAFT-015",
       "BDG-DRAFT-016",
       "BDG-DRAFT-017",
+      "BDG-DRAFT-018",
       "BDG-DRAFT-020",
       "BDG-DRAFT-021",
       "BDG-DRAFT-022",
@@ -94,7 +95,7 @@
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SOURCE_PRODUCER_QA_47_OF_60_ACTIVE_HOLD",
+    "status": "SOURCE_PRODUCER_QA_48_OF_60_ACTIVE_HOLD",
     "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
@@ -137,23 +138,24 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "629d1fa133293183ee3478d2a13083c7d0e844b1",
+    "head": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
     "producers": [
       "SELF_CHOICE",
       "SELF_RETURN",
       "CARRY_OVER_COMPLETE",
       "SELF_CHECK_COMPLETE",
       "REST_AND_RETURN",
-      "BLOCK_RESOLVED"
+      "BLOCK_RESOLVED",
+      "LONG_FOCUS"
     ],
     "runtime_e2e": "PASS",
-    "all_pr_checks": "PASS_10_OF_10_AT_RUNTIME_CUTOFF",
+    "all_pr_checks": "PASS_10_OF_10",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE",
-    "runtime_validation_cutoff": "7d0e257d2515581f8e851fc2302f76cd1ff7d7b1",
+    "runtime_validation_cutoff": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
     "latest_head_ci": "PASS_10_OF_10",
-    "producer_qa_pass_contribution": 28,
-    "runtime_e2e_run_id": 36979777480
+    "producer_qa_pass_contribution": 29,
+    "runtime_e2e_run_id": 36981505499
   },
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
@@ -169,13 +171,13 @@
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_13_OPEN_EASY_FIRST",
-    "source_producer_qa_pass": 47,
-    "remaining": 13,
+    "status": "PASS_RECLASSIFIED_12_OPEN_EASY_FIRST",
+    "source_producer_qa_pass": 48,
+    "remaining": 12,
     "real_life_or_authority_signal_missing": 6,
-    "focus_immersion_semantics_unsafe": 3,
+    "focus_immersion_semantics_unsafe": 2,
     "learning_problem_evidence_needed": 4,
-    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_13_V1.json",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_12_V1.json",
     "invariant": "First acquisition uses minimum direct explicit evidence; no weak passive inference."
   },
   "cross_app_transport": {
@@ -250,7 +252,7 @@
     "live_signed_post": false,
     "live_e2e_to_matcher": "OPEN"
   },
-  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_13_V1.json",
+  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_12_V1.json",
   "hide_source_verification": {
     "repo": "hns140412-glitch/Hide-Seek",
     "draft_pr": 29,
@@ -320,7 +322,7 @@
     "activation": "HOLD"
   },
   "remaining_13_owner_evidence_contract": {
-    "status": "12_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "status": "SUPERSEDED_BY_018_PASS_AND_REMAINING_12",
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_13_OWNER_EVIDENCE_CONTRACT_V1.json",
     "owner_assigned": 12,
     "human_source_scope_gate": 1,
@@ -335,6 +337,26 @@
     "hide_head": "038c8f0aa3b2bee1e3ee00b4acd1f320d2210a40",
     "ci": "PASS_TAKY_2_OF_2_HIDE_2_OF_2",
     "qa_pass_promoted": false,
+    "activation": "HOLD"
+  },
+  "remaining_12_owner_evidence_contract": {
+    "status": "11_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_12_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 11,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "ready_018_source_verification": {
+    "badge_id": "BDG-DRAFT-018",
+    "repo": "hns140412-glitch/Ready-Set",
+    "draft_pr": 143,
+    "source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+    "head": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
+    "runtime_e2e_run_id": 36981505499,
+    "workflow_gates": "PASS_10_OF_10",
+    "first_acquisition": "explicit SINGLE_TASK_FOCUS commitment + same-task completion; no elapsed-time qualification",
     "activation": "HOLD"
   }
 }
