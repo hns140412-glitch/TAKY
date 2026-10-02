@@ -290,5 +290,14 @@
       "054_LEARNING_ENGINE_RECOVERY_COMPARISON_EXISTS_BUT_BADGE_SOURCE_BRIDGE_MISSING",
       "NO_WEAK_PROXY_PROMOTION"
     ]
+  },
+  "remaining_14_owner_evidence_contract": {
+    "status": "13_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_14_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 13,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
   }
 }
