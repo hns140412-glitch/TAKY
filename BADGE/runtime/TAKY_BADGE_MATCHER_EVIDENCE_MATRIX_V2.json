@@ -1,12 +1,12 @@
 {
   "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2_2_READY_E2E",
-  "version": "2026-10-02.17",
+  "version": "2026-10-02.18",
   "status": "REVIEW_REQUIRED_NOT_ACTIVE",
   "source_observation_contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
   "summary": {
     "total": 60,
-    "source_producer_qa_pass": 51,
-    "source_producer_required": 9,
+    "source_producer_qa_pass": 52,
+    "source_producer_required": 8,
     "active": 0,
     "observation_only_family_count": 25,
     "source_producer_implemented_pending_ci": 0
@@ -74,6 +74,13 @@
       "eventFamily": "DEEP_THINKING",
       "behaviorCode": "DEEP_THINKING_PERSISTENCE",
       "sourceContractId": "SNAP_POP_REFLECTION_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "appId": "SNAP_POP",
+      "eventFamily": "FOCUS",
+      "behaviorCode": "FLOW_IMMERSION",
+      "sourceContractId": "SNAP_POP_CHILD_FLOW_IMMERSION_V1"
     }
   ],
   "qa": {
@@ -106,7 +113,7 @@
       36977546753,
       36977546746
     ],
-    "snap_pop_pr_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+    "snap_pop_pr_head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
     "snap_pop_deep_thinking_persistence": "PASS",
     "snap_pop_full_closure": "PASS_73_OF_73_LOCAL",
     "ready_runtime_validation_cutoff": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
@@ -122,7 +129,14 @@
     "hide_persistent_breakthrough_runs": [
       36986184979,
       36986185005
-    ]
+    ],
+    "snap_pop_flow_immersion": "PASS_LOCAL_BRANCH_CLOSURE_74_OF_74_BROWSER_PWA_PASS",
+    "snap_pop_flow_immersion_validation": {
+      "branch_closure": "PASS_74_OF_74",
+      "browser_runtime_cdp": "PASS",
+      "pwa_reload_recovery": "PASS",
+      "pwa_offline_shell": "PASS"
+    }
   },
   "invariants": [
     "No badge is activated by this matrix.",
@@ -1719,12 +1733,12 @@
         "SNAP_POP",
         "HIDE_SEEK"
       ],
-      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
-      "required_source_contract_id": null,
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
       "matcher_candidate": {
         "event_family": "FOCUS",
         "behavior_code": "FLOW_IMMERSION",
-        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
         "explicit_child_action": true
       },
       "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
@@ -1738,7 +1752,14 @@
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
       "activation_status": "HOLD_NOT_ACTIVE",
-      "source_matchers": []
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "FLOW_IMMERSION",
+          "sourceContractId": "SNAP_POP_CHILD_FLOW_IMMERSION_V1"
+        }
+      ]
     },
     {
       "slot": 43,
