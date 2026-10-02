@@ -194,6 +194,9 @@ Use Handoff/history only when CURRENT is insufficient, ownership changed, portab
 
 Read these first:
 
+0. `BETA_REVIEW/BETA_EXTERNAL_DEEP_RESEARCH_20261002.md`
+0A. `BETA_REVIEW/BETA_EXTERNAL_RESEARCH_VALIDATION_20261002.json`
+
 1. `BETA_REVIEW/BETA_FROZEN_MANIFEST_20261002.json`
 2. `BETA_REVIEW/BETA_ADVERSARIAL_AUDIT_20261002.json`
 3. `BETA_REVIEW/BETA_DECISION_DEFENSE_MATRIX_20261002.json`
@@ -206,6 +209,17 @@ Read these first:
 10. `MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md`
 11. `MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md`
 12. `MASTER/HANDOFF_PROTOCOL.md`
+
+
+### External deep-research additions that Alpha must inherit
+
+- defense-in-depth enforcement: managed permissions/settings + hooks + CI + canonical rule;
+- hook integrity/self-test because hooks/settings can fail or disappear;
+- least-privilege executor capability envelopes;
+- explicit source-trust quarantine before privileged writes;
+- provider-side deployment protection outside the agent;
+- decision-defense records for material choices;
+- regression cases for stale state, wrong approval target, prompt injection, hook loss, cross-repo authority leak, preview/production confusion, duplicate side effects and secret exposure.
 
 ## 8. Earlier Alpha warning
 
