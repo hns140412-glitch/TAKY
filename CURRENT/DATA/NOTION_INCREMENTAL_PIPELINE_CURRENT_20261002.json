@@ -1,0 +1,62 @@
+{
+  "schema": "TAKY_NOTION_INCREMENTAL_PIPELINE_CURRENT_V1",
+  "updated_at": "2026-10-02T13:30:00+09:00",
+  "authority_role": "namespace logical CURRENT for Notion incremental source intake",
+  "source_generation": "INCREMENTAL_QUEUE.20261002T040003612Z.json",
+  "source_rows": 161,
+  "unique_source_rows": 161,
+  "delta_against_prior_gate": {
+    "prior_gate_source_rows": 148,
+    "delta_rows": 13,
+    "unique_canonical_urls": 11,
+    "duplicate_url_rows": 2
+  },
+  "mining": {
+    "unique_sources_reviewed": 11,
+    "promote_candidates": 5,
+    "review": 3,
+    "hold": 3,
+    "evidence_files": [
+      "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_MINING_GATE_20261002.json",
+      "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_MINING_CLASSIFICATION_20261002.json"
+    ]
+  },
+  "indexing": {
+    "base_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "base_source_count": 679,
+    "delta_review_version": "V6+DELTA_20261002_R1",
+    "reviewed": 5,
+    "indexed_evidence_candidates": 5,
+    "exact_duplicate_evidence": 0,
+    "related_to_relations": 5,
+    "full_canonical_index_mutated": false,
+    "owner_receipt": "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_INDEX_OWNER_RECEIPTS_20261002.json"
+  },
+  "domain_handoff": {
+    "learning_candidates": 2,
+    "design_candidates": 3,
+    "learning_handoff_contract": "PASS",
+    "learning_policy_application": "DENIED_FAIL_CLOSED",
+    "learning_denial_reasons": {
+      "writing_scaffold": ["WRITING_CORPUS_SOURCE_REF"],
+      "reading_prompt": ["SOURCE_SPECIFIC_REF", "CONSTRUCT_SOURCE_LABEL"]
+    },
+    "design_status": "INDEXED_REFERENCE_ONLY__NOT_LEARNING_EVIDENCE"
+  },
+  "guards": [
+    "INDEXED != LEARNING_AUTHORIZED",
+    "COMMUNITY_REFERENCE != OFFICIAL_AUTHORITY",
+    "RELATED_TO != DUPLICATE",
+    "HOLD != DROP",
+    "NO_SILENT_CANONICAL_OVERWRITE",
+    "NO_LEARNER_PERFORMANCE_INFERENCE_FROM_REFERENCE_SOURCE"
+  ],
+  "deployment": "HOLD",
+  "netlify": "HOLD",
+  "next": [
+    "Resolve required provenance only from independently valid source evidence; do not synthesize provenance labels.",
+    "Keep learning candidates fail-closed until policy requirements are satisfied.",
+    "Route design references to design governance/reference retrieval only.",
+    "Review remaining 3 REVIEW and 3 HOLD sources when stronger source evidence or media acquisition becomes available."
+  ]
+}

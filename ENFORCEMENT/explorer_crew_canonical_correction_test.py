@@ -4,6 +4,12 @@ crew=Path("OS/EXPLORATION_CREW_CANONICAL.md").read_text(encoding="utf-8")
 rel=Path("OS/GUIDE_CHARACTER_RELATIONSHIP.md").read_text(encoding="utf-8")
 
 required_crew=[
+    "CANONICAL V2 / MAIN CLOSED",
+    "PR #193 MERGED",
+    "PR #191 remains Draft/Open",
+    "Ready consumer V2 is CLOSED on Ready main",
+    "Hide/Snap consumer promotion/reapplication remains OPEN",
+    "Old PR #10 onboarding lineage is LEGACY_REFERENCE_ONLY",
     "RUNTIME_POLICY",
     "thin arbitration only",
     "DIALOGUE / SCENE",
@@ -43,6 +49,9 @@ for token in required_rel:
     assert token in rel, token
 
 for forbidden in [
+    "DRAFT RUNTIME V2 CUTOVER CANDIDATE",
+    "ACTIVE MAIN REMAINS AUTHORITY UNTIL MERGE",
+    "Central semantic contract: DRAFT",
     "initial 5–6 selection requirement = REQUIRED",
     "Core6-only runtime roster = REQUIRED",
     "asset readiness determines relationship eligibility",

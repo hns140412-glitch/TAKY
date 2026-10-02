@@ -35,11 +35,22 @@ for key in ("READY_SET","SNAP_POP","HIDE_SEEK"):
         fail.append(f"SOURCE_CURRENT_MISSING:{key}")
     if not gh.get("repo") or not gh.get("main_head"):
         fail.append(f"GITHUB_IDENTITY_INCOMPLETE:{key}")
-    if not str(gh.get("head_evidence_state","")).startswith("LIVE_REFRESHED_"):
+    if not str(gh.get("head_evidence_state","")).startswith(("LIVE_REFRESHED_", "AUDITED_SNAPSHOT_")):
         fail.append(f"GITHUB_HEAD_FRESHNESS_MISSING:{key}")
     drv=app.get("drive") or {}
     if not drv.get("id") or drv.get("parent_role")!="10_PROJECTS":
         fail.append(f"DRIVE_PROJECT_ROUTE_INVALID:{key}")
+
+# Source-head-only audit updates must agree with the stable semantic snapshot.
+audit = fresh.get("source_head_audit") or {}
+if audit:
+    current = json.loads((ROOT / "CURRENT/SYSTEM_WIDE_REVIEW.json").read_text(encoding="utf-8"))
+    heads = current.get("source_heads", {})
+    for key, app in apps.items():
+        gh = app.get("github") or {}
+        repo = gh.get("repo", "").split("/")[-1]
+        if gh.get("main_head") != heads.get(repo) or gh.get("main_head") != audit.get("apps", {}).get(key):
+            fail.append(f"AUDITED_SOURCE_HEAD_DRIFT:{key}")
 
 # Exact current deploy claims must be proven by SHA equality.
 for key,app in apps.items():

@@ -10,6 +10,9 @@ on:
       - 'OS/LEARNING_ENGINE_CORE.md'
       - 'LEARNING/**'
       - 'CURRENT/LEARNING_ENGINE_*'
+      - 'CURRENT/SYSTEM_WIDE_REVIEW.json'
+      - 'STATE.md'
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
       - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
@@ -69,6 +72,9 @@ on:
       - 'OS/LEARNING_ENGINE_CORE.md'
       - 'LEARNING/**'
       - 'CURRENT/LEARNING_ENGINE_*'
+      - 'CURRENT/SYSTEM_WIDE_REVIEW.json'
+      - 'STATE.md'
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
       - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
       - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
       - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
@@ -172,6 +178,10 @@ jobs:
           python -m py_compile ENFORCEMENT/work_os_registry_validator.py
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
+      - name: Validate semantic CURRENT authority and fail-closed resolution
+        run: |
+          python ENFORCEMENT/semantic_current_resolver.py
+          python ENFORCEMENT/semantic_current_resolver_test.py
       - name: Validate MASTER file authority registry
         run: python ENFORCEMENT/master_file_registry_validator.py
       - name: Validate shared technical capability foundation

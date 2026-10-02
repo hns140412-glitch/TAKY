@@ -1,0 +1,251 @@
+{
+  "schema": "TAKY_REFERENCE_INTAKE_DISPOSITION_LEDGER_V1",
+  "append_only": true,
+  "entries": [
+    {
+      "event_id": "ri-928e742aaf406e9681f7",
+      "source_key": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:27:19.042282+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+        "source_url": "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+        "source_locator": "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+        "domain": "design",
+        "consumer": "TAKY_SHARED_DESIGN"
+      }
+    },
+    {
+      "event_id": "ri-c0b224781e9bd681fef5",
+      "source_key": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:27:19.044225+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+        "source_url": "https://m.blog.naver.com/PostView.naver?blogId=curatorn&logNo=224425708039",
+        "source_locator": "https://m.blog.naver.com/PostView.naver?blogId=curatorn&logNo=224425708039",
+        "domain": "learning",
+        "consumer": "LEARNING_ENGINE"
+      }
+    },
+    {
+      "event_id": "ri-f6d16d1ee963994ef1f2",
+      "source_key": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:27:19.045890+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+        "source_url": "https://app.notion.com/p/10-3de2612bfb90815d9035db3172e2b892",
+        "source_locator": "https://app.notion.com/p/10-3de2612bfb90815d9035db3172e2b892",
+        "domain": "learning",
+        "consumer": "LEARNING_ENGINE"
+      }
+    },
+    {
+      "event_id": "ri-ce2d64d48f83195d09b0",
+      "source_key": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:27:19.047543+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+        "source_url": "https://zircon-yard-378.notion.site/GPT-50-3ebeaba9e47c81fa8b2cc3d3bb940741",
+        "source_locator": "https://zircon-yard-378.notion.site/GPT-50-3ebeaba9e47c81fa8b2cc3d3bb940741",
+        "domain": "design",
+        "consumer": "TAKY_SHARED_DESIGN"
+      }
+    },
+    {
+      "event_id": "ri-3d7df9ecf06e065dfb53",
+      "source_key": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:27:19.049164+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+        "source_url": "https://0wonloop.com/resources/vibe-coding-design-sites",
+        "source_locator": "https://0wonloop.com/resources/vibe-coding-design-sites",
+        "domain": "design",
+        "consumer": "TAKY_SHARED_DESIGN"
+      }
+    },
+    {
+      "event_id": "ri-4a7cd48a347e04136d7d",
+      "source_key": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.901456+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+        "index_version": "V6+DELTA_20261002_R1",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:7c85aa3a1270d4577e66f1b91b9f78fd53e8e8b8284da972f1472b74eb521ea8",
+          "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+          "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-3a6920c9dbb7c42f6e44",
+      "source_key": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.901456+00:00",
+      "details": {
+        "consumer": "TAKY_SHARED_DESIGN",
+        "domain": "design",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9"
+      }
+    },
+    {
+      "event_id": "ri-d0c8c0072241f9520c07",
+      "source_key": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.903400+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+        "index_version": "V6+DELTA_20261002_R1",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:31831bd56ba61293e421ed276b78c7d8667fd894d46c7e88f78bbda468441307",
+          "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+          "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-2237b8fcee751d05d4e3",
+      "source_key": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.903400+00:00",
+      "details": {
+        "consumer": "LEARNING_ENGINE",
+        "domain": "learning",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74"
+      }
+    },
+    {
+      "event_id": "ri-0e704acab863767d0e5e",
+      "source_key": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.905152+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+        "index_version": "V6+DELTA_20261002_R1",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:ed3470e9bd6a14d1f9627e359db252e4d4979818cd55e420ae5d3e0ab5dbeff4",
+          "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+          "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-d5dfc01279ca1e3d985a",
+      "source_key": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.905152+00:00",
+      "details": {
+        "consumer": "LEARNING_ENGINE",
+        "domain": "learning",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22"
+      }
+    },
+    {
+      "event_id": "ri-59e57fa1521b5839ff25",
+      "source_key": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.906991+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+        "index_version": "V6+DELTA_20261002_R1",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:337a30859657f05493ce240a82536f50bbff0a4fb73e0a04889cf856ef6bd960",
+          "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+          "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-5bef4780aa242c07c951",
+      "source_key": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.906991+00:00",
+      "details": {
+        "consumer": "TAKY_SHARED_DESIGN",
+        "domain": "design",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-815e-8f96-e3887892b704"
+      }
+    },
+    {
+      "event_id": "ri-8bbacb538444a8a4b0be",
+      "source_key": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.908810+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+        "index_version": "V6+DELTA_20261002_R1",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472",
+          "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+          "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-a745e0ca2712fa89b90a",
+      "source_key": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:29:26.908810+00:00",
+      "details": {
+        "consumer": "TAKY_SHARED_DESIGN",
+        "domain": "design",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf"
+      }
+    }
+  ]
+}

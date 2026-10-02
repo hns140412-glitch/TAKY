@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "task_id": "TAKY-AUTHORITY-CURRENT-DELTA-20261002",
+  "role": "SEMANTIC_RESUME_POINTER",
+  "authority_transfer": false,
+  "audit_date": "2026-10-02",
+  "base_ref": "ccfb372ed10110121cec5be615c3e3e0c59f3601",
+  "source_heads": {
+    "TAKY": "ccfb372ed10110121cec5be615c3e3e0c59f3601",
+    "Ready-Set": "daed2ebd072061b870bfd0d2f2472dd344661bad",
+    "Hide-Seek": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
+    "Snap-Pop": "2b9c6941792269244f847b1b978125996a49b5f8",
+    "TAKY-MOBILE": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+    "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
+  },
+  "evidence_basis": "Read-only GitHub main/PR verification at the 2026-10-02 audit plus exact local TAKY base; refs are dated snapshots, not perpetual live proof.",
+  "live_head_comparison": "AUDITED_MATCH_2026-10-02__REQUERY_BEFORE_LATER_CURRENT_CLAIM",
+  "owner_registry": "MASTER/MASTER_FILE_REGISTRY.json",
+  "resolution_rule": "Explicit semantic_owners namespace + exact role/path only; DATA/Index CURRENT and Learning Engine CURRENT remain separate; never largest REV/V, newest filename or timestamp.",
+  "resume": {
+    "system": "system:current",
+    "learning": "learning_engine:current",
+    "learning_role": "OPERATIONAL_CURRENT",
+    "evidence_only": [
+      "learning_engine:change_ledger",
+      "learning_engine:verification_checkpoint"
+    ],
+    "next": "Resolve semantic owner and operational CURRENT, verify exact source evidence, then continue the first authorized OPEN gate. No draft/main or release inference.",
+    "data": "learning_data:current"
+  },
+  "scopes": [
+    {
+      "id": "tatoeba_language_usage_example_sentence",
+      "state": "MAIN/CLOSED",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "learning_engine",
+        "learning_data"
+      ],
+      "prs": [
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "evidence_paths": [
+        "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json",
+        "OS/LEARNING_ENGINE_CORE.md",
+        "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json",
+        "MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json"
+      ],
+      "evidence": "Audited main CURRENT/Canonical sync and main CI passed. LANGUAGE_USAGE / EXAMPLE_SENTENCE only; no learner-performance or scheduling authority."
+    },
+    {
+      "id": "mining_index_learning_core_loop",
+      "state": "MAIN/CLOSED",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "system",
+        "learning_engine",
+        "learning_data"
+      ],
+      "result": "PASS",
+      "boundary": "Preserved audited closure; individual engine ownership is unchanged."
+    },
+    {
+      "id": "learning_planner_ready_path",
+      "state": "MAIN/CLOSED",
+      "source_repo": "Ready-Set",
+      "owner_aliases": [
+        "learning_engine",
+        "ready_set"
+      ],
+      "result": "PASS",
+      "schedule_owner": "PLANNER",
+      "learning_schedule_authority": false
+    },
+    {
+      "id": "exploration_crew_canonical_v2",
+      "state": "MAIN/CLOSED",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "explorer_crew"
+      ],
+      "pr": 193,
+      "evidence_paths": [
+        "OS/EXPLORATION_CREW_CANONICAL.md"
+      ],
+      "boundary": "Merged canonical semantics only; PR #191 implementation is separate."
+    },
+    {
+      "id": "exploration_crew_central_runtime",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "explorer_crew"
+      ],
+      "pr": 191,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "d2eecf35ebb1f46de7b18589442b07d3e11919c6",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "main_authority": false
+    },
+    {
+      "id": "exploration_crew_ready_consumer_v2",
+      "state": "MAIN/CLOSED",
+      "source_repo": "Ready-Set",
+      "owner_aliases": [
+        "explorer_crew",
+        "ready_set"
+      ]
+    },
+    {
+      "id": "exploration_crew_hide_consumer_v2",
+      "state": "OPEN",
+      "source_repo": "Hide-Seek",
+      "owner_aliases": [
+        "explorer_crew"
+      ],
+      "next": "Promotion/reapplication remains OPEN.",
+      "pr": 28,
+      "head_ref": "c876a8167be28a2f30a69fd0a0f38f74987abb3c",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02"
+    },
+    {
+      "id": "exploration_crew_snap_consumer_v2",
+      "state": "OPEN",
+      "source_repo": "Snap-Pop",
+      "owner_aliases": [
+        "explorer_crew"
+      ],
+      "next": "Promotion/reapplication remains OPEN.",
+      "pr": 18,
+      "head_ref": "bceb6cc9b336447002a4c189fa1560efc3c4ae5e",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02"
+    },
+    {
+      "id": "badge_central",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "pr": 196,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "de9ca733168bdace6b114b147ffc95ec7c09f064",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "main_authority": false,
+      "producer_snapshot": {
+        "source_producers": 15,
+        "active_producers": 0,
+        "total": 60
+      },
+      "live_hosted_e2e": "OPEN",
+      "evidence_paths": [
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
+      ],
+      "evidence_boundary": "Historical recovery evidence does not override the supplied audit or promote PR #196.",
+      "candidate_refs": {
+        "TAKY-MOBILE": {
+          "pr": 2,
+          "head": "b42f7e2d0fdf220e552817c41629c5384034888b"
+        },
+        "Ready-Set": {
+          "pr": 143,
+          "head": "2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4"
+        },
+        "Hide-Seek": {
+          "pr": 29,
+          "head": "fca0a39cf27f75d141139e6e33b4be7f77fa799e"
+        },
+        "Snap-Pop": {
+          "pr": 20,
+          "head": "023b1cf2890ab2268dcfe6739e31001a26950606"
+        }
+      }
+    },
+    {
+      "id": "design_to_ui",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "design_ui_assets"
+      ],
+      "pr": 194,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "9ab5fc579ada0547d5bb7cc066a157c4912bc0f1",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "main_authority": false,
+      "boundary": "Contract code may remain candidate; PR #194 is not main canonical."
+    },
+    {
+      "id": "assets_approved_results_pointer_contract",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY-ASSETS",
+      "pr": 4,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "319968689148ad898932ecd97b4f509bb30fd977",
+      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "main_authority": false
+    },
+    {
+      "id": "snap_legacy_browser_closure",
+      "state": "UNVERIFIED",
+      "source_repo": "Snap-Pop",
+      "evidence": "Unresolved at audit cutoff; no PASS is inferred."
+    },
+    {
+      "id": "recent_family_profile_radio_ux",
+      "state": "OPEN",
+      "requirements": [
+        "family profile / family expansion",
+        "control-room character",
+        "radio / walkie-talkie input",
+        "letter / note",
+        "sealing wax",
+        "handwritten-photo correction",
+        "voice input"
+      ],
+      "canonical_reflection": "OPEN",
+      "implementation_claim": false,
+      "exact_radio_gesture": "OPEN__TAP_VS_HOLD_TO_TALK_UNRESOLVED",
+      "boundary": "Requirement decisions are preserved as OPEN; existing family auth/session or existing radio assets do not prove this newer UX expansion is canonically reflected or implemented."
+    },
+    {
+      "id": "deployment_netlify",
+      "state": "HOLD",
+      "evidence": "No deploy/provider calls authorized by this task."
+    },
+    {
+      "id": "hosted_runtime_interception",
+      "state": "UNVERIFIED",
+      "evidence": "Repository enforcement does not prove hosted automatic interception."
+    }
+  ],
+  "legacy_reference_only": [
+    {
+      "reference": "PR #10 onboarding lineage",
+      "role": "LEGACY_REFERENCE_ONLY",
+      "current_authority": false
+    },
+    {
+      "reference": "PR #162",
+      "role": "SEMANTIC_CURRENT_CONCEPT_ONLY",
+      "current_authority": false
+    }
+  ],
+  "invariants": [
+    "CURRENT != CANONICAL_OWNER",
+    "REGISTRY_SNAPSHOT != LIVE_CURRENT_STATE",
+    "CANONICAL_SEMANTICS_CLOSED != CENTRAL_RUNTIME_IMPLEMENTATION_CLOSED",
+    "CANDIDATE != MAIN_CANONICAL",
+    "CLOSED_CORE_LOOP != HOSTED_E2E_PASS",
+    "LEARNING != DATED_SCHEDULING_OWNER",
+    "MERGE_AND_DEPLOYMENT_REQUIRE_SEPARATE_AUTHORIZATION"
+  ]
+}

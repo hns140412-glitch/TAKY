@@ -148,5 +148,68 @@
     "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
     }
-  }
+  },
+  "semantic_owners": [
+    {
+      "namespace": "system",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "MASTER/MASTER_LOGIC.md",
+        "current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+      }
+    },
+    {
+      "namespace": "learning_engine",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "OS/LEARNING_ENGINE_CORE.md",
+        "current": "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json",
+        "change_ledger": "CURRENT/LEARNING_ENGINE_CHANGE_LEDGER_CURRENT.json",
+        "verification_checkpoint": "CURRENT/LEARNING_ENGINE_VERIFICATION_CURRENT_2026-09-25.md"
+      }
+    },
+    {
+      "namespace": "learning_family",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+      }
+    },
+    {
+      "namespace": "explorer_crew",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "OS/EXPLORATION_CREW_CANONICAL.md"
+      }
+    },
+    {
+      "namespace": "ready_set",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md"
+      }
+    },
+    {
+      "namespace": "mobile_registry",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+      }
+    },
+    {
+      "namespace": "design_ui_assets",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+      }
+    },
+    {
+      "namespace": "learning_data",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "OS/LEARNING_ENGINE_CORE.md",
+        "current": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+      }
+    }
+  ]
 }
