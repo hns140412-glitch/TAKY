@@ -63,5 +63,17 @@
     }
   ],
   "no_loss_gate": "NO_BETA_KEEP_ITEM_MAY_BE_DROPPED_WITHOUT_EXPLICIT_USER_AUTHORITY",
-  "status": "TRACEABILITY_BASELINE_CREATED"
+  "status": "TRACEABILITY_BASELINE_VALIDATED",
+  "migration_corrections": [
+    {
+      "id": "ALPHA-RULE-RECOVERY-001",
+      "status": "CLOSED",
+      "detail": "Recovered pre-existing TKY-CHECKPOINT-001 into Alpha registry."
+    },
+    {
+      "id": "ALPHA-OWNER-COVERAGE-001",
+      "status": "CLOSED",
+      "detail": "Added Work OS, Learning OS, shared technical, Hide and Snap namespaces/owners/CURRENT."
+    }
+  ]
 }
