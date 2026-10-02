@@ -4,8 +4,8 @@
   "status": "OPEN_STRONG_EVIDENCE_REQUIRED",
   "counts": {
     "total_catalog": 60,
-    "qa_pass": 52,
-    "open": 8,
+    "qa_pass": 54,
+    "open": 6,
     "active": 0
   },
   "global_guards": [
@@ -48,20 +48,6 @@
       "blocker": "no authoritative alarm event"
     },
     {
-      "badge_id": "BDG-DRAFT-005",
-      "behavior": "PREPARATION_COMPLETE",
-      "allowed_source_apps": [
-        "READY_SET",
-        "SNAP_POP",
-        "HIDE_SEEK"
-      ],
-      "required_evidence": [
-        "explicit preparation checklist completion",
-        "actual subsequent start"
-      ],
-      "blocker": "generic task start does not prove preparation"
-    },
-    {
       "badge_id": "BDG-DRAFT-007",
       "behavior": "TIME_CREATION_EXTRA",
       "allowed_source_apps": [
@@ -86,20 +72,6 @@
         "explicit child initiation"
       ],
       "blocker": "absence of parent log is not proof"
-    },
-    {
-      "badge_id": "BDG-DRAFT-010",
-      "behavior": "RESPONSIVE_START",
-      "allowed_source_apps": [
-        "READY_SET",
-        "SNAP_POP",
-        "HIDE_SEEK"
-      ],
-      "required_evidence": [
-        "named guidance/prompt event",
-        "feature-declared child response/start linked to prompt"
-      ],
-      "blocker": "elapsed response time is forbidden"
     },
     {
       "badge_id": "BDG-DRAFT-035",
@@ -218,6 +190,32 @@
       "snap_pr": 20,
       "snap_head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
       "validation": "PASS_74_OF_74_PLUS_BROWSER_PWA_RECOVERY",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "behavior": "PREPARATION_COMPLETE",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_PREPARATION_TO_START_V1",
+      "evidence": "explicit child preparation checklist confirmation followed by same-task start",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_head": "d8239a080dace45289e2b190dc9e8f96730281b2",
+      "runtime_e2e_run": 36988695052,
+      "validation": "PASS_10_OF_10_PLUS_RUNTIME_E2E",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "behavior": "RESPONSIVE_START",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_NAMED_PROMPT_RESPONSE_START_V1",
+      "evidence": "named mission briefing event explicitly linked to child start action",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_head": "d8239a080dace45289e2b190dc9e8f96730281b2",
+      "runtime_e2e_run": 36988695052,
+      "validation": "PASS_10_OF_10_PLUS_RUNTIME_E2E",
       "activation": "HOLD"
     }
   ]
