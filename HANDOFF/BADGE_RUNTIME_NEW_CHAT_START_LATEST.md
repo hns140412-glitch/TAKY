@@ -3,7 +3,7 @@ Date: 2026-10-02
 Status: RESUME_READY
 
 ## Resume phrase
-최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 45/60 PASS·15/60 OPEN·active 0/60을 상속해. 남은 15개만 강한 명시 증거로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
+최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 46/60 PASS·14/60 OPEN·active 0/60을 상속해. 남은 14개만 강한 명시 증거로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
 
 ## Authority
 1. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json
@@ -24,8 +24,8 @@ Status: RESUME_READY
 - Badge art/codex/nature metadata: 60/60 bound.
 - Catalog status: WORKING_DRAFT_NOT_ACTIVE.
 - Active badges: 0/60.
-- Source producer QA: 45/60 PASS.
-- Remaining producer OPEN: 15/60.
+- Source producer QA: 46/60 PASS.
+- Remaining producer OPEN: 14/60.
 - Event-family registry: 25 families; observation-only.
 - Exact matcher tuple: appId + eventFamily + behaviorCode + sourceContractId + explicit_child_action=true.
 - Legacy generic badge-event path remains non-awarding.
@@ -51,6 +51,17 @@ Status: RESUME_READY
 - Evidence requires explicit child RETRACE review between same-word WRONG and verified CORRECT.
 - Observation only; no award/activation/economy authority.
 
+## Snap 038 source verification
+- Repo: hns140412-glitch/Snap-Pop
+- Draft PR: #20
+- Validated head: `08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a`
+- BDG-DRAFT-038 DEEP_THINKING_PERSISTENCE: QA PASS.
+- Exact contract: `SNAP_POP_REFLECTION_TO_COMPLETION_V1`.
+- Requires explicit child reflection artifact + same-exploration verified completion record.
+- Targeted validator PASS and source-only award boundary PASS on connected workstation.
+- Full branch closure still has a pre-existing catalog activation guard failure; the same failure reproduces at pre-038 head `023b1cf...`, so it is not a 038 regression.
+- Observation only; activation remains HOLD.
+
 ## TAKY central badge branch
 - Repo: hns140412-glitch/TAKY
 - Branch: taky/badge-art-binding-current-20261001
@@ -65,9 +76,9 @@ Previously verified baseline 15:
 New Ready exact-evidence PASS 29:
 003, 004, 006, 008, 012, 014, 015, 016, 017, 020, 022, 023, 032, 033, 034, 040, 043, 044, 045, 046, 049, 050, 051, 052, 053, 056, 057, 041, 013.
 
-Total: 45/60 PASS.
+Total: 46/60 PASS.
 
-## Remaining OPEN — 15
+## Remaining OPEN — 14
 ### Real-life / authority signal missing
 001, 002, 005, 007, 009, 010
 
@@ -75,9 +86,9 @@ Total: 45/60 PASS.
 018, 019, 042
 
 ### Strong learning/problem evidence still needed
-030, 031, 035, 038, 039, 054
+030, 031, 035, 039, 054
 
-## Remaining evidence matrix\n- `BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_15_V1.json`\n\n## Critical guards for remaining 15
+## Remaining evidence matrix\n- `BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_14_V1.json`\n\n## Critical guards for remaining 14
 - Never infer focus/immersion from elapsed time, foreground duration, silence, screen stillness, score, attempt count, or AI attention inference.
 - 009 BEFORE_PROMPT needs an authoritative prompt/request boundary; missing parent logs are not proof.
 - 030 root cause must bind to a concrete error artifact.
@@ -112,7 +123,7 @@ HOLD.
 - Ready checks: 10/10 PASS including Runtime E2E.
 - TAKY PR #196 head at resume prep: `4f6a8cd0899cf9536d58e4ae459915bce20f9f67`
 - TAKY Badge Visual Registry Validation: PASS.
-- Source producer QA: 45/60 PASS, 15/60 OPEN.
+- Source producer QA: 46/60 PASS, 14/60 OPEN.
 - Remaining-16 evidence authority: `BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_16_V1.json`.
 - active: 0/60.
 - main merge / Netlify / deployment / badge activation: HOLD.
