@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 49/60; remaining 11 require exact source evidence. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 50/60; remaining 10 require exact source evidence. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Remaining 11: keep first acquisition low-friction and explicit; only tier-promotion may use stronger repeat/independence evidence. active remains 0/60; deployment HOLD.",
+  "next_open": "Remaining 10: keep first acquisition low-friction and explicit; only tier-promotion may use stronger repeat/independence evidence. active remains 0/60; deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,8 +44,8 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 49,
-    "source_producer_required": 11,
+    "source_producer_qa_pass": 50,
+    "source_producer_required": 10,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-003",
@@ -59,6 +59,7 @@
       "BDG-DRAFT-016",
       "BDG-DRAFT-017",
       "BDG-DRAFT-018",
+      "BDG-DRAFT-019",
       "BDG-DRAFT-020",
       "BDG-DRAFT-021",
       "BDG-DRAFT-022",
@@ -96,7 +97,7 @@
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SOURCE_PRODUCER_QA_49_OF_60_ACTIVE_HOLD",
+    "status": "SOURCE_PRODUCER_QA_50_OF_60_ACTIVE_HOLD",
     "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
@@ -139,7 +140,7 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
+    "head": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
     "producers": [
       "SELF_CHOICE",
       "SELF_RETURN",
@@ -147,16 +148,17 @@
       "SELF_CHECK_COMPLETE",
       "REST_AND_RETURN",
       "BLOCK_RESOLVED",
-      "LONG_FOCUS"
+      "LONG_FOCUS",
+      "QUIET_IMMERSION"
     ],
     "runtime_e2e": "PASS",
     "all_pr_checks": "PASS_10_OF_10",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE",
-    "runtime_validation_cutoff": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
+    "runtime_validation_cutoff": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
     "latest_head_ci": "PASS_10_OF_10",
-    "producer_qa_pass_contribution": 29,
-    "runtime_e2e_run_id": 36981505499
+    "producer_qa_pass_contribution": 30,
+    "runtime_e2e_run_id": 36985930301
   },
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
@@ -173,13 +175,13 @@
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_11_OPEN_EASY_FIRST",
-    "source_producer_qa_pass": 49,
-    "remaining": 11,
+    "status": "PASS_RECLASSIFIED_10_OPEN_EASY_FIRST",
+    "source_producer_qa_pass": 50,
+    "remaining": 10,
     "real_life_or_authority_signal_missing": 6,
-    "focus_immersion_semantics_unsafe": 2,
+    "focus_immersion_semantics_unsafe": 1,
     "learning_problem_evidence_needed": 3,
-    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_11_V1.json",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_10_V1.json",
     "invariant": "First acquisition uses minimum direct explicit evidence; no weak passive inference."
   },
   "cross_app_transport": {
@@ -254,7 +256,7 @@
     "live_signed_post": false,
     "live_e2e_to_matcher": "OPEN"
   },
-  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_11_V1.json",
+  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_10_V1.json",
   "hide_source_verification": {
     "repo": "hns140412-glitch/Hide-Seek",
     "draft_pr": 29,
@@ -362,7 +364,7 @@
     "activation": "HOLD"
   },
   "remaining_11_owner_evidence_contract": {
-    "status": "10_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "status": "SUPERSEDED_BY_019_PASS_AND_REMAINING_10",
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_11_OWNER_EVIDENCE_CONTRACT_V1.json",
     "owner_assigned": 10,
     "human_source_scope_gate": 1,
@@ -382,6 +384,26 @@
     ],
     "workflow_gates": "PASS_2_OF_2",
     "first_acquisition": "captured Code Red error artifact + explicit child root-cause explanation bound to the same error",
+    "activation": "HOLD"
+  },
+  "remaining_10_owner_evidence_contract": {
+    "status": "9_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_10_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 9,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "ready_019_source_verification": {
+    "badge_id": "BDG-DRAFT-019",
+    "repo": "hns140412-glitch/Ready-Set",
+    "draft_pr": 143,
+    "source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+    "head": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
+    "runtime_e2e_run_id": 36985930301,
+    "workflow_gates": "PASS_10_OF_10",
+    "first_acquisition": "explicit quiet-immersion selection + same-task session completion; no silence/duration qualification",
     "activation": "HOLD"
   }
 }
