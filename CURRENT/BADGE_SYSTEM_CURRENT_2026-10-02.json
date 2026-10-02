@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Classify and implement the remaining 52 explicit source producers by owning app/engine. Cross-app badges must add approved sourceMatchers tuples; active remains 0 until a separate activation approval.",
+  "next_open": "Implement and QA remaining 50 source producers. Prioritize deterministic child-authored evidence; central cross-app badge transport remains OPEN. active stays 0.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,15 +44,17 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 8,
-    "source_producer_required": 52,
+    "source_producer_qa_pass": 10,
+    "source_producer_required": 50,
     "active": 0,
     "verified_badges": [
+      "BDG-DRAFT-011",
       "BDG-DRAFT-024",
       "BDG-DRAFT-025",
       "BDG-DRAFT-026",
       "BDG-DRAFT-029",
       "BDG-DRAFT-037",
+      "BDG-DRAFT-047",
       "BDG-DRAFT-055",
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
@@ -95,5 +97,18 @@
     "explicit_child_action_required": true,
     "browser_runtime": "PASS",
     "static_validator": "PASS"
+  },
+  "ready_source_producers": {
+    "branch": "taky/badge-source-producers-20261002",
+    "draft_pr": 143,
+    "head": "9439e9fa62259247b46ffa30da1cda68945baee6",
+    "producers": [
+      "SELF_CHOICE",
+      "CARRY_OVER_COMPLETE"
+    ],
+    "runtime_e2e": "PASS",
+    "all_pr_checks": "PASS",
+    "transport_to_central_award_ledger": "OPEN",
+    "activation_effect": "NONE"
   }
 }
