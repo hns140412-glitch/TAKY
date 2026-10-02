@@ -1,0 +1,50 @@
+{
+  "schema": "TAKY_BADGE_REMAINING_1_OWNER_EVIDENCE_CONTRACT_V1",
+  "version": "2026-10-02.11",
+  "status": "AUDITED_1_TRANSPORT_HOLD",
+  "authority_inputs": [
+    "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_1_V1.json",
+    "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md"
+  ],
+  "counts": {
+    "total": 1,
+    "implementation_owner_assigned": 1,
+    "source_scope_gate": 0,
+    "qa_pass": 59,
+    "active": 0
+  },
+  "invariants": [
+    "FIRST_ACQUISITION_USES_MINIMUM_DIRECT_EVIDENCE",
+    "NO_WEAK_PROXY",
+    "NO_SOURCE_APP_SCOPE_CHANGE_WITHOUT_EXPLICIT_AUTHORITY",
+    "NO_BADGE_ACTIVATION",
+    "NO_NETLIFY_OR_DEPLOYMENT"
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "behavior": "IMPROVEMENT",
+      "owner": "LEARNING_ENGINE_COMPARATOR_PLUS_HIDE_ADAPTER",
+      "preferred_source_app": "HIDE_SEEK",
+      "proposed_source_contract_id": "HIDE_VERIFIED_SAME_TARGET_IMPROVEMENT_V1",
+      "minimum_evidence": [
+        "prior same-target verified failure evidence",
+        "current same-target verified success evidence",
+        "Learning Engine comparison/recovery receipt referencing both"
+      ],
+      "implementation_prerequisite": "Learning Engine recovery-profile/comparator output must be bridged to Hide as observation-only source; single score delta forbidden",
+      "ui_delta": "NONE",
+      "status": "BLOCKED_TRUSTED_TRANSPORT_HOLD",
+      "implementation_evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json",
+      "note": "Comparator and Hide bridge pass code/CI, but trusted live transport is not deployed/bound; deployment remains HOLD."
+    }
+  ],
+  "audit_summary": {
+    "feature_absent": 0,
+    "human_authority_gate": 0,
+    "trusted_transport_hold": 1,
+    "qa_pass": 59,
+    "active": 0
+  }
+}
