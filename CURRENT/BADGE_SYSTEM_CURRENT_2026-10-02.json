@@ -156,25 +156,26 @@
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 29,
-    "head": "940ffbd15aae2bca8d5592b47fbeeacc58301267",
+    "head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
     "producers": [
       "ERROR_REVIEW",
-      "ERROR_CORRECTED_COMPLETE"
+      "ERROR_CORRECTED_COMPLETE",
+      "CORRECTION_COURAGE"
     ],
     "validation": "PASS",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_16_OPEN",
-    "source_producer_qa_pass": 44,
-    "remaining": 16,
+    "status": "PASS_RECLASSIFIED_14_OPEN",
+    "source_producer_qa_pass": 46,
+    "remaining": 14,
     "real_life_or_authority_signal_missing": 6,
     "focus_immersion_semantics_unsafe": 3,
-    "strong_learning_problem_evidence_needed": 7,
+    "strong_learning_problem_evidence_needed": 5,
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md",
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage.",
-    "evidence_matrix_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_16_V1.json"
+    "evidence_matrix_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_14_V1.json"
   },
   "cross_app_transport": {
     "status": "CODE_READY_CI_PASS_LIVE_E2E_OPEN",
@@ -253,11 +254,11 @@
     "repo": "hns140412-glitch/Hide-Seek",
     "draft_pr": 29,
     "branch": "taky/badge-source-producers-20261002",
-    "head": "83ce768ba0111ee7fb0b5bd24841214ac5f83b28",
-    "validation": "PASS",
+    "head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+    "validation": "PASS_HARDENED_CI_2_OF_2",
     "validation_runs": [
-      36975984087,
-      36975984041
+      36977546753,
+      36977546746
     ],
     "newly_verified_badge": "BDG-DRAFT-036",
     "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
