@@ -12,6 +12,7 @@ assert.equal(u.searchParams.get('is_unapproved'),'no');
 assert.equal(u.searchParams.get('is_orphan'),'no');
 assert.equal(u.searchParams.get('license'),'!PROBLEM');
 assert.equal(u.searchParams.get('word_count'),'-8');
+assert.equal(u.searchParams.get('sort'),'relevance');
 assert.equal(u.searchParams.get('showtrans'),'none');
 
 assert.equal(Provider.mapLicense('CC BY 2.0 FR'),'CC-BY-2.0-FR');
