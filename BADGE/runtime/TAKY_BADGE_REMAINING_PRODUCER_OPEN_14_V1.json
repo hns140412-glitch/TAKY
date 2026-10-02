@@ -219,15 +219,29 @@
   ],
   "closed_since_previous": [
     {
+      "badge_id": "BDG-DRAFT-036",
+      "behavior": "CORRECTION_COURAGE",
+      "source_app": "HIDE_SEEK",
+      "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+      "evidence": "explicit RETRACE child action + same-word rejected-letter artifact + subsequent exact-match corrected artifact",
+      "hide_pr": 29,
+      "hide_head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+      "validation_runs": [
+        36977546753,
+        36977546746
+      ],
+      "validation": "PASS_HARDENED_CI_2_OF_2",
+      "activation": "HOLD"
+    },
+    {
       "badge_id": "BDG-DRAFT-038",
       "behavior": "DEEP_THINKING_PERSISTENCE",
       "source_app": "SNAP_POP",
       "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
       "evidence": "explicit child reflection artifact bound to same exploration plus verified completionEventId/recordId",
       "snap_pop_pr": 20,
-      "snap_pop_head": "08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a",
-      "validation": "PASS_TARGETED_LOCAL",
-      "regression_note": "full branch closure has pre-existing reviewed-active-item-can-pass failure reproduced at pre-038 head 023b1cf2890ab2268dcfe6739e31001a26950606",
+      "snap_pop_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+      "validation": "PASS_TARGETED_LOCAL_AND_CURRENT_AUTHORITY",
       "activation": "HOLD"
     }
   ]
