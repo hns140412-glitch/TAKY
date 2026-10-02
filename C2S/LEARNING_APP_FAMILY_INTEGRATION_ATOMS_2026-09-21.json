@@ -11,49 +11,64 @@
     "ready": {
       "repo": "hns140412-glitch/Ready-Set",
       "ref": "main",
-      "sha": "98df214a6078f16f2b6710016898a4d7798798db"
+      "sha": "current-main",
+      "note": "Latest Ready main contains central Learning Decision -> Planner TODO -> Ready execution runtime and HELP_NEEDED -> WAITING_FOR_PARENT normalization."
     },
     "hide": {
       "repo": "hns140412-glitch/Hide-Seek",
-      "ref": "implementation/hide-seek-capture-session-v02",
-      "sha": "7136c22b23e05b5f902a15f7e421d79aeb7a8574",
-      "relation": {
-        "ahead": 526,
-        "behind": 0
-      }
+      "ref": "main",
+      "sha": "current-main",
+      "note": "Latest Hide main consumes TAKY shared runtime primitives; learning memory signal keeps Learning Engine review-need and Planner dated-allocation authority."
     },
     "snap": {
       "repo": "hns140412-glitch/Snap-Pop",
-      "ref": "taky/snap-pop-implementation-2026-09-20",
-      "sha": "3af4d5076ed464b43c7f8e3fa60f7612539376fe",
+      "ref": "main",
+      "sha": "2b9c6941792269244f847b1b978125996a49b5f8",
+      "active_legacy_branch": "taky/snap-pop-implementation-2026-09-20",
       "relation": {
-        "ahead": 584,
-        "behind": 3,
+        "ahead": 1112,
+        "behind": 17,
         "status": "DIVERGED"
-      }
+      },
+      "note": "Original +584/-3 observation is stale; divergence conflict remains material."
     }
   },
   "atoms": [
     {
       "id": "LAF-INT-001",
       "type": "CONFLICT",
-      "state": "OPEN",
-      "summary": "READY_LEARNING_CONTEXT_V1 is documented/consumed by Snap but not produced by Ready and not consumed by Hide.",
-      "destination": "Learning App Family contract + Ready/Hide/Snap adapters"
+      "state": "SUPERSEDED",
+      "summary": "Legacy READY_LEARNING_CONTEXT_V1 gap is superseded by newer central Learning Decision / observation handoff contracts and shared runtime boundaries. Do not reintroduce READY_LEARNING_CONTEXT_V1 as a parallel authority.",
+      "destination": "Current central learning decision/observation contracts + app adapters",
+      "evidence": [
+        "Ready-Set:ready-central-learning-decision-intake-v01.js",
+        "Ready-Set:ready-central-intent-to-planner-v01.js",
+        "Ready-Set:tests/central-learning-roundtrip.test.js",
+        "Hide-Seek:tests/shared-runtime.spec.js",
+        "Snap-Pop:TAKY_SHARED_RUNTIME_PROVENANCE.json"
+      ]
     },
     {
       "id": "LAF-INT-002",
       "type": "CORRECTION",
-      "state": "OPEN",
-      "summary": "HELP_NEEDED must normalize to WAITING_FOR_PARENT, not BLOCKED.",
-      "destination": "Ready runtime inbound result normalization"
+      "state": "CLOSED",
+      "summary": "HELP_NEEDED is normalized to WAITING_FOR_PARENT while BLOCKED remains distinct in current Ready runtime.",
+      "destination": "Ready runtime inbound result normalization",
+      "evidence": [
+        "Ready-Set:ready-runtime-v07.js",
+        "Ready-Set main runtime validation"
+      ]
     },
     {
       "id": "LAF-INT-003",
       "type": "CONFLICT",
       "state": "OPEN",
-      "summary": "Snap active branch is 584 ahead and 3 behind main; shared release/PWA/event main changes must be capability-reconciled before next freeze.",
-      "destination": "Snap reconciliation branch"
+      "summary": "Snap legacy active branch remains diverged from main. Current relation is 1112 commits ahead and 17 behind main; capability reconciliation is still required before that branch can become a release/freeze candidate.",
+      "destination": "Snap reconciliation branch",
+      "evidence": [
+        "GitHub compare main...taky/snap-pop-implementation-2026-09-20 = diverged, ahead 1112, behind 17",
+        "Snap-Pop main consumes current shared release/PWA/event primitives"
+      ]
     },
     {
       "id": "LAF-INT-004",
