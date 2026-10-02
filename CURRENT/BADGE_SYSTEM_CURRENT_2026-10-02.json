@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 59/60; only BDG-DRAFT-054 remains blocked on trusted live transport/deployment binding. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 59/60. BDG-DRAFT-054 has predeploy comparator→Hide intake→ECDSA signed transport code/CI PASS; only live endpoint deployment, real Hide installation key registration, and signed live E2E remain. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Remaining 1: 054 trusted Learning Engine comparison transport into Hide runtime. active remains 0/60; deployment HOLD.",
+  "next_open": "Remaining 1: BDG-DRAFT-054 live trusted transport gate only. Required next actions: deploy central badge endpoint, register real Hide installation public key, prove signed live improvement observation reaches matcher input. active remains 0/60; deployment requires user approval.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -191,7 +191,7 @@
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_1_OPEN_TRANSPORT_ONLY",
+    "status": "PASS_RECLASSIFIED_1_OPEN_LIVE_DEPLOYMENT_GATE",
     "source_producer_qa_pass": 59,
     "remaining": 1,
     "real_life_or_authority_signal_missing": 0,
@@ -484,5 +484,21 @@
       "deployed": false
     }
   },
-  "final_open_badge": "BDG-DRAFT-054"
+  "final_open_badge": "BDG-DRAFT-054",
+  "final_open_detail": {
+    "state": "PREDEPLOY_BINDING_PASS_TRUSTED_LIVE_E2E_OPEN",
+    "hide_head": "0d8af51e8b47f561659135a18ed5c4a0e1304419",
+    "hide_ci_runs": [
+      36997876224,
+      36997876229
+    ],
+    "transport_head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+    "central_transport_ci_run": 36996083246,
+    "learning_comparator_head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
+    "live_endpoint_deployed": false,
+    "real_hide_key_registered": false,
+    "live_signed_e2e": false,
+    "activation": "HOLD",
+    "deployment": "HOLD_REQUIRES_USER_APPROVAL"
+  }
 }
