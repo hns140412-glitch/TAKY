@@ -99,3 +99,10 @@ HOLD. No main merge. No Netlify deployment.
 - Durable production ledger/auth/deployed endpoint/live E2E remain OPEN.
 - Latest head: `52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7`; previous implementation heads PASS, latest CI currently running.
 - source producer coverage remains 15/60; active 0/60; deployment HOLD.
+
+
+## 2026-10-02 Central Transport Core CI Closure
+- TAKY-MOBILE Draft PR #2 head `52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7`: Validate TAKY Mobile PASS.
+- Central transport core implementation scaffold is CLOSED/PASS for code+contract scope.
+- Production durable ledger, cross-app auth, deployed ingest, and live Ready/Hide/Snap E2E remain OPEN.
+- No main merge, no Netlify deployment, no badge activation.
