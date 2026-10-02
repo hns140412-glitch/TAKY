@@ -7,7 +7,7 @@ Authority: subordinate to `MASTER/MASTER_LOGIC.md`; authoritative for current op
 A new conversation/session SHALL NOT reconstruct current TAKY/project state from conversational memory, a user-written summary, or a handoff summary first.
 
 Required first recovery sequence:
-`READ STATE.md -> VERIFY state_revision/source refs -> READ required canonical/history refs -> VERIFY resume evidence -> CONTINUE`.
+`READ STATE.md -> RESOLVE system:current via MASTER/MASTER_FILE_REGISTRY.json -> READ CURRENT/SYSTEM_WIDE_REVIEW.json -> RESOLVE semantic owner/current -> VERIFY exact source refs and resume evidence -> CONTINUE`.
 
 If `STATE.md` cannot be read, current state is `STATE_REHYDRATION_BLOCKED`; do not assume remembered state is current.
 
@@ -86,12 +86,12 @@ Rules:
 ### Codex workspace bootstrap policy
 A Codex implementation contract SHOULD identify repository, canonical work branch, and task-contract path before dispatch. Codex SHALL bootstrap/fetch the named repository/branch when it has repository access instead of asking the user to manually discover task-file paths. User intervention is reserved for genuine authentication, permission, network, or filesystem boundaries that Codex cannot resolve itself.
 
-Current resource condition — 2026-09-14:
+Historical resource condition - 2026-09-14 (not current task lifecycle):
 - user-visible Codex 5-hour allowance reached 0% during `RNS-P0-DAILY-LOOP-001` after approximately 16m30s of implementation/Chrome/runtime/test activity;
 - user reported approximately three hours until Codex can be used again;
 - visible weekly allowance remained available, but exact future consumption is not predictable from TAKY;
 - observed interrupted evidence: 17 related checks, 12 passing and 5 failing; Codex was attempting start-HEAD baseline comparison when usage stopped; Chrome/mobile-width PARTIAL and parent/replanning behavior had already been exercised;
-- authoritative lifecycle remains `CODEX_INTERRUPTED_BY_USAGE_LIMIT / WORK_PRESERVED / TAKY_REVIEW_NOT_READY` until repository evidence is inspected and the unfinished implementation/validation is resumed;
+- at that checkpoint, lifecycle was `CODEX_INTERRUPTED_BY_USAGE_LIMIT / WORK_PRESERVED / TAKY_REVIEW_NOT_READY`; it does not define the current task lifecycle;
 - during the cooldown, TAKY SHALL continue orchestration, GitHub inspection, acceptance refinement, evidence classification, contract decomposition, and non-product-code governance work using ordinary Chat/connectors. TAKY SHALL NOT take over product implementation code.
 
 Claim boundary:
@@ -104,41 +104,22 @@ Claim boundary:
 `BROWSER E2E AVAILABLE != BROWSER E2E REQUIRED EVERY TURN`
 `USAGE LIMIT INTERRUPTION != RESTART FROM ZERO`
 
-## Ready learning-engine current main — 2026-09-20
-- repository: `hns140412-glitch/Ready-Set`
-- merged PR: #68
-- current reflected main SHA: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`
-- state: `READY_MAIN_CURRENT / CODED / CI_VERIFIED / RUNTIME_VERIFIED`
-- exact-main evidence: Integration CI #119 PASS; TAKY Codex Worker Self-Test #322 PASS; Ready Runtime E2E #205 PASS
-- learning versions: Subject Master 0.2.1 / Unit Map 0.2.2 / Standard Matcher 0.4.1 / Learning Master 0.5.1
-- canonical reflection: `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md §6.1–6.2`
-- review evidence: `HISTORY/2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68.json`
-- device verification: NOT_RUN
-- production verification: NOT_VERIFIED; Netlify current deploy still points to pre-merge Ready main evidence and must be verified after deployment refresh.
-- hard boundary: `RUNTIME_VERIFIED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`.
+## Semantic CURRENT - audited 2026-10-02
+- state_revision: `2026-10-02-authority-current-delta`.
+- Stable system resume pointer: `CURRENT/SYSTEM_WIDE_REVIEW.json`; explicit aliases: `MASTER/MASTER_FILE_REGISTRY.json`; resolver: `ENFORCEMENT/semantic_current_resolver.py`.
+- TAKY audited base: `ccfb372ed10110121cec5be615c3e3e0c59f3601`; Ready audited main: `daed2ebd072061b870bfd0d2f2472dd344661bad`. Other exact audited main and Draft candidate heads live in system CURRENT. Read-only GitHub comparison matched at this audit; requery before any later live-current claim.
+- Learning operational CURRENT: `learning_engine:current` -> `CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json`. The change ledger is immutable change evidence; the dated verification file is a checkpoint. Neither is the resume pointer. Planner retains dated scheduling authority.
+- Learning Data / Index operational CURRENT: `learning_data:current` -> `CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json`; external indexed evidence (including Tatoeba) does not transfer Index-owner, mastery, or scheduling authority to Learning.
+- Tatoeba LANGUAGE_USAGE / EXAMPLE_SENTENCE: main/CLOSED after PR #197-#201, CURRENT/Canonical sync and main CI passed at audit. Mining-Index-Learning core loop and Learning-Planner-Ready path remain CLOSED/PASS.
+- Explorer canonical V2: main/CLOSED after PR #193. Central runtime PR #191: Draft/Open. Ready V2 consumer: main/CLOSED; Hide/Snap promotion/reapplication: OPEN.
+- Badge PR #196: Draft/Open, latest audited producers 15/60 source and 0/60 active; live hosted E2E OPEN. Design-to-UI PR #194 and TAKY-ASSETS PR #4 remain Draft/Open candidates, not main canonical.
+- Snap legacy browser closure remains UNVERIFIED. Deployment/Netlify remain HOLD. Recent family-profile/radio/letter/sealing-wax/handwriting/control-room/voice UX is preserved as OPEN in system CURRENT; canonical reflection and implementation remain separate, and the exact radio tap-vs-hold gesture remains unresolved.
+- Resume by explicit semantic owner and verified evidence. Never choose largest REV/V or newest filename, and never reopen valid CLOSED work merely because historical files remain.
 
-## Ready renewal candidate — 2026-09-20
-- Ready main remains `6142cfeb5599a625d61ffa1faca866b2b6817cc8` and remains current implementation truth.
-- renewal branch: `taky/ready-renewal-v01`
-- Draft PR: #73
-- candidate scope: refresh exact-main validation/version truth; rebuild decision ledger; align runtime/product authority; add PRE-ACTION/branch-first workflow; define P0→P7 renewal implementation order.
-- TAKY Ready owner updated: `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md §22 / §25`
-- promotion state: CANDIDATE / NOT_MERGED
-- hard boundary: `RENEWAL_CANDIDATE != READY_MAIN_CURRENT`.
-- next implementation after renewal promotion: P1 Planner reality engine, then P2 Child FACT confirmation, P3 cross-app continuity, P4 UI/product-language consolidation, P5 legacy cleanup, P6 device, P7 production.
+## Historical Ready snapshots - 2026-09-20, not resume authority
+The former PR #68 main `6142cfeb5599a625d61ffa1faca866b2b6817cc8` and PR #73 renewal candidate `450caf84b23788b40a93e070742d86edc0165baa` are historical checkpoints. Their then-valid CI/runtime evidence is preserved in repository history and `HISTORY/2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68.json`; they do not route current resume or establish current open gates. No history/checkpoint file is renamed or deleted by this repair.
 
-## Ready renewal C2S closure — 2026-09-20
-- continuity evidence read first: Google Drive `READY_SET_HANDOFF_2026-09-20_LATEST`.
-- Ready main reverified: `6142cfeb5599a625d61ffa1faca866b2b6817cc8`.
-- renewal branch: `taky/ready-renewal-v01`, Draft PR #73.
-- reviewed implementation snapshot: `450caf84b23788b40a93e070742d86edc0165baa`.
-- branch evidence at reviewed snapshot: Ready Integration CI #130 PASS / Worker Self-Test #331 PASS / Runtime E2E #216 PASS, 45/45.
-- P1 Planner reality engine: CODED + CI_VERIFIED + RUNTIME_VERIFIED on candidate; main promotion pending.
-- P1 semantics: confirmed availability profiles + commitments + travel/prep/meal/rest-compatible blocking + before/after buffers; zero-executable-window dates excluded; availability is an executability gate, never study-volume authority.
-- next unresolved implementation gate: P2 generic `CHILD INPUT → PARENT REVIEW/CONFIRM → FACT → LEARNING MASTER → PLANNER → TODAY`.
-- external hosting was not used for this review/C2S closure.
-- deployment candidate remains NOT_FROZEN; Netlify/external deployment remains blocked until exact frozen candidate + TAKY external-resource gate.
-- `REVIEW_SNAPSHOT_CLOSED != MAIN_MERGED != DEVICE_VERIFIED != PRODUCTION_VERIFIED`.
+Detailed 2026-09-20 Ready state remains in Git history and `HISTORY/2026-09-20_READY_LEARNING_ENGINE_FINAL_REVIEW_PR68.json`; it is not repeated on the active STATE surface.
 
 ## State mutation rule
 Material state changes SHALL update this file or a referenced canonical state owner in the same work episode.
@@ -171,6 +152,6 @@ No resume evidence -> no verified resume.
 - conversation inventory: HISTORY/2026-09-14_SOURCE_INVENTORY_01.json
 - 24 original share exports extracted; full semantic reading and attachment recovery are incomplete. Extraction is not full review.
 - source TAKY main inspected at 995805ec2d38fcac7911f9b2316554d0d2b58868; this is a pre-backfill snapshot, not an evergreen latest SHA.
-- Ready work branch runtime-session-bridge-2026-09-10 observed at a098ffac8b5d6f0aeb22b5e61250f70330d555c7. Historical checkpoint said READY_FOR_CODEX / NOT_DISPATCHED; this is superseded for current execution by the interrupted Codex state above.
+- Ready work branch runtime-session-bridge-2026-09-10 observed at a098ffac8b5d6f0aeb22b5e61250f70330d555c7. Historical checkpoint said READY_FOR_CODEX / NOT_DISPATCHED; neither that snapshot nor the interrupted Codex snapshot above routes current resume.
 - Repository handoff resume evidence binding is implemented at aee98e436c815f638f7b9bb2a98a200c2282f9ae; hosted automatic state read, semantic rehydration, and trusted routing remain UNVERIFIED.
 - Full-review completion gate: NOT_PASSED. No product-progress advancement or deployment is implied.

@@ -1,12 +1,15 @@
 # TAKY EXPLORATION CREW CANONICAL
 
-Status: REV_02 / DRAFT RUNTIME V2 CUTOVER CANDIDATE — ACTIVE MAIN REMAINS AUTHORITY UNTIL MERGE
+Status: REV_02 / CANONICAL V2 / MAIN CLOSED - PR #193 MERGED
 Role: Shared Exploration Crew semantic/runtime contract for Ready & Set / Hide & Seek / Snap & Pop.
 Authority: TAKY / GRAND MASTER > GUIDE FAMILY LEARNING OS > EXPLORATION CREW CANONICAL > project-specific crew presentation/behavior.
 
 Source verification:
-- Explorer Crew Runtime V2 is implemented as one shared runtime spine with project-thin consumers in Snap / Hide / Ready Draft branches.
-- Exact current candidate heads and CI evidence are recorded in `AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md`.
+- Canonical V2 authority is CLOSED on TAKY main after PR #193; audited main snapshot: `ccfb372ed10110121cec5be615c3e3e0c59f3601`.
+- Central runtime implementation PR #191 remains Draft/Open; canonical merge is not main runtime implementation proof.
+- Ready consumer V2 is CLOSED on Ready main `daed2ebd072061b870bfd0d2f2472dd344661bad`; Hide/Snap consumer promotion/reapplication remains OPEN.
+- `AUDIT/EXPLORER_CREW_CENTRAL_CORRECTION_PACKET_20261001.md` preserves historical candidate heads and CI evidence; current semantic routing is `CURRENT/SYSTEM_WIDE_REVIEW.json`.
+- Old PR #10 onboarding lineage is LEGACY_REFERENCE_ONLY, never current authority.
 - The shared common runtime is protected by a 34-file Source Lock.
 - Source Lock hashing is SHA-256 over UTF-8 text after CRLF/LF → LF normalization so content identity is OS-independent.
 - Central promotion includes shared contract only; project UI, art binaries, release state and deployment remain project-owned and separately gated.
@@ -268,6 +271,8 @@ higher authority and later explicit user correction prevail; project code shall 
 
 ## 12. Current release boundary
 
-Central semantic contract: DRAFT V2 CUTOVER CANDIDATE.
-Verified Runtime V2 evidence spans Snap / Hide / Ready Draft consumers and the shared Source Lock; exact heads and CI status are recorded in the audit packet.
+Central semantic contract: CANONICAL V2 / MAIN CLOSED - PR #193 MERGED.
+Central runtime implementation: PR #191 Draft/Open, not main runtime implementation.
+Ready consumer V2: main/CLOSED. Hide/Snap consumer V2: promotion/reapplication OPEN.
+The historical audit packet retains candidate Source Lock/CI evidence; use `CURRENT/SYSTEM_WIDE_REVIEW.json` for the audited exact-main refs and current status separation.
 Central promotion does not imply any project main merge, ROOT activation, Netlify deployment, image generation, composable production promotion, motion release or human visual approval.
