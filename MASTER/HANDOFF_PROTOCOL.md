@@ -3,6 +3,8 @@
 Status: REV_00 / PRE-CONFIRMATION EVOLVING DESIGN SOURCE
 Role: Operational protocol under TAKY GRAND MASTER for loss-resistant state transfer and verified resume.
 
+Default TAKY `/재개` routing remains governed by STATE / applicable semantic owner / verified CURRENT. This document's Section 6 boot chain applies only when a Handoff package is materially required or CURRENT is insufficient; it does not override the default CURRENT-first resume route.
+
 ## 1. Core Contract
 
 HANDOFF ≠ SUMMARY.
