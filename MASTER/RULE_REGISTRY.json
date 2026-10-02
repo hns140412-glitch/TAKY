@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-22.1",
+  "registry_version": "2026-10-02.beta-hardening-candidate",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -101,6 +101,11 @@
       "rule_id": "TKY-ASSET-001",
       "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
       "scope": "global default for approved/reusable visual asset originals and separate layers in TAKY-ASSETS, exact-revision app pointers and verified PWA build copies, design-to-UI source/visual/runtime delivery gate across chats"
+    },
+    {
+      "rule_id": "TKY-CHECKPOINT-001",
+      "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+      "scope": "atomic CURRENT checkpoint persistence, lightweight resume, CURRENT/HISTORY separation and checkpoint-before-next-unit execution"
     }
   ]
 }

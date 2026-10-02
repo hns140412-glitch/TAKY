@@ -109,15 +109,56 @@ class ExecutionStateApprovalBindingTest(unittest.TestCase):
             result["detected"],
         )
 
-    def test_explicit_no_approval_requirement_preserves_transition(self):
+    def test_merge_approval_bypass_is_forbidden(self):
         record = {
             "current_state": "HUMAN_APPROVAL",
             "requested_state": "MERGED",
             "merge_approval_required": False,
         }
         result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("MERGE_APPROVAL_BYPASS_FORBIDDEN", result["detected"])
+
+    def test_canonical_promotion_cannot_request_approval_before_prerequisites_pass(self):
+        record = {
+            "task_id": "TAKY-ALPHA-PROMOTION",
+            "current_state": "TAKY_REVIEW",
+            "requested_state": "HUMAN_APPROVAL",
+            "canonical_promotion": True,
+            "source_boundary_ref": "beta:4af88d",
+            "decision_lineage_ref": "BETA_AUDIT",
+            "promotion_target_ref": "pr:208/head:abc",
+            "promotion_prerequisites": [
+                {"id": "BETA_FULL_AUDIT", "status": "PASS", "evidence_ref": "AUDIT"},
+                {"id": "BETA_DEFENSE_HARDENING", "status": "OPEN", "evidence_ref": "HARDENING"},
+            ],
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "PROMOTION_PREREQUISITE_NOT_PASS:BETA_DEFENSE_HARDENING",
+            result["detected"],
+        )
+
+    def test_canonical_promotion_can_reach_approval_only_after_prerequisites_pass(self):
+        record = {
+            "task_id": "TAKY-ALPHA-PROMOTION",
+            "current_state": "TAKY_REVIEW",
+            "requested_state": "HUMAN_APPROVAL",
+            "canonical_promotion": True,
+            "source_boundary_ref": "beta:4af88d",
+            "decision_lineage_ref": "BETA_AUDIT",
+            "promotion_target_ref": "pr:208/head:abc",
+            "transition_target_ref": "pr:208/head:abc",
+            "promotion_prerequisites": [
+                {"id": "BETA_FULL_AUDIT", "status": "PASS", "evidence_ref": "AUDIT"},
+                {"id": "BETA_ADVERSARIAL_VALIDATION", "status": "PASS", "evidence_ref": "REDTEAM"},
+                {"id": "BETA_DEFENSE_HARDENING", "status": "PASS", "evidence_ref": "HARDENING"},
+                {"id": "BETA_FREEZE", "status": "PASS", "evidence_ref": "FREEZE"},
+            ],
+        }
+        result = transition(record)
         self.assertTrue(result["pass"], result)
-        self.assertIsNone(result["approval_verified"])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_FROZEN_CANDIDATE",
+  "date": "2026-10-02",
+  "canonical_main_content_baseline": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "current_main_restore_commit": "4c7b4215765562b0e6d9228798e9cc8123df3cee",
+  "hardening_branch": "taky-beta-hardening-20261002",
+  "hardening_pr": 209,
+  "status": "PENDING_FINAL_CI",
+  "gates": [
+    {
+      "id": "BETA_FULL_AUDIT",
+      "status": "PASS",
+      "evidence_ref": "BETA_REVIEW/BETA_ADVERSARIAL_AUDIT_20261002.json"
+    },
+    {
+      "id": "BETA_ADVERSARIAL_VALIDATION",
+      "status": "PASS",
+      "evidence_ref": "BETA_REVIEW/BETA_DECISION_DEFENSE_MATRIX_20261002.json"
+    },
+    {
+      "id": "BETA_DEFENSE_HARDENING",
+      "status": "PASS_CANDIDATE",
+      "evidence_ref": "PR#209"
+    },
+    {
+      "id": "BETA_HARDENING_CI",
+      "status": "PENDING",
+      "evidence_ref": "latest PR#209 enforcement replay"
+    },
+    {
+      "id": "BETA_FREEZE",
+      "status": "BLOCKED_BY_CI",
+      "evidence_ref": null
+    }
+  ],
+  "hardening_delta": [
+    "MERGED/DEPLOYED approval bypass flags fail closed",
+    "canonical promotion cannot enter HUMAN_APPROVAL until evidence-backed prerequisites PASS",
+    "promotion approval context binds source boundary, decision lineage and exact target",
+    "TKY-CHECKPOINT-001 restored to RULE_REGISTRY",
+    "owner-declared Rule ID consistency gate",
+    "CURRENT-first resume authority consistency gate",
+    "snapshot/live and repository/hosted claim-boundary gate",
+    "Handoff Section 6 explicitly scoped below default CURRENT-first resume"
+  ],
+  "contained_open": [
+    {
+      "id": "HOSTED_RUNTIME_INTERCEPTION",
+      "state": "UNVERIFIED_CONTAINED",
+      "condition": "Repository enforcement must not be described as hosted automatic interception; canonical promotion remains human-approved; deployment HOLD."
+    }
+  ],
+  "alpha_entry": "PROHIBITED_UNTIL_BETA_FREEZE_PASS",
+  "deployment": "HOLD"
+}
