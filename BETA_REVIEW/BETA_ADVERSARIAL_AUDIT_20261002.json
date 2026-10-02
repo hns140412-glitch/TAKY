@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-10-02",
+  "beta_content_baseline": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "restored_main_commit": "4c7b4215765562b0e6d9228798e9cc8123df3cee",
+  "purpose": "Attack decision pathways, not only final states; convert each exploitable decision path into a defensive control before Beta freeze.",
+  "findings": [
+    {
+      "id": "BETA-ADV-001",
+      "severity": "P0",
+      "class": "RESUME_AUTHORITY_DIVERGENCE",
+      "evidence": [
+        "TAKY.md /재개 = STATE -> owner -> verified CURRENT",
+        "CONVERSATION_CONTINUITY_PROTOCOL = CURRENT-first",
+        "EXECUTION_CHECKPOINT_PROTOCOL = CURRENT-first",
+        "HANDOFF_PROTOCOL §6 still states LATEST CANONICAL -> HANDOFF -> ..."
+      ],
+      "attack_path": "Enter through Handoff protocol and let recovery prose precede verified CURRENT.",
+      "consequence": "stale Handoff may steer resume before authoritative operational state is resolved.",
+      "defense": "single CURRENT-first resume order; Handoff only conditional recovery evidence.",
+      "automation": "STATIC_CONSISTENCY_GATE",
+      "state": "OPEN_TOOL_WRITE_BLOCKED"
+    },
+    {
+      "id": "BETA-ADV-002",
+      "severity": "P0",
+      "class": "APPROVAL_BYPASS",
+      "evidence": [
+        "execution_state_engine accepted merge_approval_required=false / production_approval_required=false"
+      ],
+      "attack_path": "caller disables a hard governance approval by record flag.",
+      "consequence": "MERGED/DEPLOYED transition can bypass human approval despite ENFORCEMENT hard lock.",
+      "defense": "MERGED/DEPLOYED approval cannot be disabled per call.",
+      "automation": "IMPLEMENTED_AND_TESTED_CANDIDATE",
+      "state": "FIXED_ON_HARDENING_BRANCH"
+    },
+    {
+      "id": "BETA-ADV-003",
+      "severity": "P0",
+      "class": "PREMATURE_CANONICAL_PROMOTION",
+      "evidence": [
+        "exact target approval binding existed, but no generic prerequisite-integrity gate proved that the system had reached the right stage before asking for approval"
+      ],
+      "attack_path": "misframe current stage, ask user to approve a technically exact target, then merge.",
+      "consequence": "valid approval token can authorize the wrong lifecycle moment.",
+      "defense": "canonical_promotion requires source boundary + decision lineage + exact promotion target + all named prerequisites PASS with evidence before HUMAN_APPROVAL can even be requested.",
+      "automation": "IMPLEMENTED_AND_TESTED_CANDIDATE",
+      "state": "FIXED_ON_HARDENING_BRANCH"
+    },
+    {
+      "id": "BETA-ADV-004",
+      "severity": "P1",
+      "class": "RULE_REGISTRY_COVERAGE_GAP",
+      "evidence": [
+        "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md declares TKY-CHECKPOINT-001; Beta RULE_REGISTRY omitted it"
+      ],
+      "attack_path": "owner semantics exist but registry-driven routing/lint cannot discover the declared rule.",
+      "consequence": "rule can be skipped without registry lint failing.",
+      "defense": "recover existing declared ID; never invent IDs during audit.",
+      "automation": "FIXED_ON_HARDENING_BRANCH",
+      "state": "FIXED_ON_HARDENING_BRANCH"
+    },
+    {
+      "id": "BETA-ADV-005",
+      "severity": "P1",
+      "class": "LINT_FALSE_CONFIDENCE",
+      "evidence": [
+        "rule_registry_lint required only TKY-ENFORCEMENT-001 and owner-file existence"
+      ],
+      "attack_path": "an ACTIVE_OWNER declares a Rule ID that is absent/misowned in registry while lint stays green.",
+      "consequence": "green CI overstates rule ownership integrity.",
+      "defense": "cross-check every Rule ID explicitly declared by ACTIVE_OWNER against RULE_REGISTRY; preserve intentional LEGACY_OPTIONAL owners.",
+      "automation": "IMPLEMENTED_CI_GATE",
+      "state": "FIXED_ON_HARDENING_BRANCH"
+    },
+    {
+      "id": "BETA-ADV-006",
+      "severity": "P1",
+      "class": "SNAPSHOT_FRESHNESS_FALSE_COMFORT",
+      "evidence": [
+        "semantic_current_resolver validates snapshot shape while semantic_current_resolver_test hardcodes dated refs; CURRENT itself correctly declares snapshot-not-live ceiling"
+      ],
+      "attack_path": "downstream consumer interprets shape PASS or hardcoded test PASS as live freshness.",
+      "consequence": "dated source/PR heads may be mistaken for live state.",
+      "defense": "retain snapshot role but prohibit live-current claims without external requery; do not use hardcoded ref tests as freshness evidence.",
+      "automation": "PARTIAL_EXISTING_CLAIM_CEILING",
+      "state": "REVIEW_REQUIRED"
+    },
+    {
+      "id": "BETA-ADV-007",
+      "severity": "P0",
+      "class": "HOSTED_RUNTIME_ENFORCEMENT_GAP",
+      "evidence": [
+        "STATE already states hosted mandatory preflight/interception unverified",
+        "actual direct connector merge bypassed repository-controlled execution_state_engine"
+      ],
+      "attack_path": "hosted assistant performs GitHub mutation directly instead of through controlled runtime gate.",
+      "consequence": "repository hardening exists but is not automatically applied to hosted connector actions.",
+      "defense": "treat hosted mutation interception as mandatory Alpha prerequisite or explicit human-gated operational convention until platform enforcement exists.",
+      "automation": "NOT_CURRENTLY_PROVEN",
+      "state": "OPEN"
+    }
+  ],
+  "freeze_gate": {
+    "required_before_beta_frozen": [
+      "P0/P1 findings resolved or explicitly HOLD with non-bypassable containment",
+      "hardening branch CI PASS",
+      "resume authority divergence resolved",
+      "snapshot freshness claim boundary regression checked",
+      "hosted enforcement gap explicitly contained",
+      "decision-path replay demonstrates premature Alpha promotion is blocked"
+    ],
+    "beta_frozen": false
+  }
+}
