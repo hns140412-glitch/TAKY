@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_EXTERNAL_RESEARCH_VALIDATION",
+  "date": "2026-10-02",
+  "frozen_beta_sha": "64ba56274d2f12f6745db4fa77eac792f4c41ab4",
+  "research_ref": "BETA_REVIEW/BETA_EXTERNAL_DEEP_RESEARCH_20261002.md",
+  "objective": "Validate external comparative research without reopening Frozen Beta unless contradictory evidence requires it.",
+  "source_classes": {
+    "official_primary": [
+      "GitHub deployment environments / protection rules",
+      "Netlify deploy contexts / previews / protection",
+      "Anthropic claude-code repository settings examples",
+      "Anthropic claude-code-action security/configuration",
+      "LangGraph human-in-the-loop checkpointing",
+      "Microsoft AutoGen human-in-the-loop persistence sample"
+    ],
+    "community_secondary": [
+      "Anthropic public issue reports about hook/settings durability",
+      "Lazy Builder implementation guides"
+    ]
+  },
+  "self_checks": [
+    {
+      "id": "SRC-001",
+      "check": "Official claims separated from community observations",
+      "result": "PASS"
+    },
+    {
+      "id": "SRC-002",
+      "check": "Community guidance not promoted to canonical authority",
+      "result": "PASS"
+    },
+    {
+      "id": "CMP-001",
+      "check": "Each external pattern compared against a TAKY Beta invariant",
+      "result": "PASS"
+    },
+    {
+      "id": "CMP-002",
+      "check": "No external framework copied wholesale",
+      "result": "PASS"
+    },
+    {
+      "id": "ERR-001",
+      "check": "Hook-only enforcement rejected as single point of trust",
+      "result": "PASS"
+    },
+    {
+      "id": "ERR-002",
+      "check": "CI PASS not treated as live/hosted PASS",
+      "result": "PASS"
+    },
+    {
+      "id": "ERR-003",
+      "check": "Preview deploy not treated as production deploy",
+      "result": "PASS"
+    },
+    {
+      "id": "ERR-004",
+      "check": "Human approval does not replace prerequisite validation",
+      "result": "PASS"
+    },
+    {
+      "id": "REG-001",
+      "check": "Existing Beta CURRENT-first resume remains intact",
+      "result": "PASS"
+    },
+    {
+      "id": "REG-002",
+      "check": "Existing merge/deploy separation remains intact",
+      "result": "PASS"
+    },
+    {
+      "id": "REG-003",
+      "check": "Existing hosted-interception UNVERIFIED boundary remains intact",
+      "result": "PASS"
+    },
+    {
+      "id": "REG-004",
+      "check": "Netlify/deployment HOLD remains intact",
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-001",
+      "check": "Attack case: hook disappears after permission/settings mutation",
+      "result": "COVERED_BY_ALPHA_REQUIREMENT"
+    },
+    {
+      "id": "ADV-002",
+      "check": "Attack case: untrusted PR/community content steers privileged action",
+      "result": "COVERED_BY_ALPHA_REQUIREMENT"
+    },
+    {
+      "id": "ADV-003",
+      "check": "Attack case: wrong/stale approval target",
+      "result": "ALREADY_BETA_HARDENED"
+    },
+    {
+      "id": "ADV-004",
+      "check": "Attack case: production deploy follows merge without separate gate",
+      "result": "ALREADY_BETA_HARDENED_PLUS_PROVIDER_GATE_PROPOSED"
+    },
+    {
+      "id": "ADV-005",
+      "check": "Attack case: broad cross-repository credentials leak authority",
+      "result": "COVERED_BY_ALPHA_REQUIREMENT"
+    }
+  ],
+  "rejected_imports": [
+    {
+      "proposal": "Hooks as root authority",
+      "reason": "Runtime/settings durability issues and limited scope make this a brittle single point of failure."
+    },
+    {
+      "proposal": "Automatic all-branch Netlify deploys",
+      "reason": "Unnecessary execution/cost/noise and weakens deployment HOLD."
+    },
+    {
+      "proposal": "Full multi-agent swarm by default",
+      "reason": "Complexity and coordination cost without proven task-specific gain."
+    },
+    {
+      "proposal": "Community prompt recipes as governance",
+      "reason": "Reference value only; insufficient authority and environment specificity."
+    }
+  ],
+  "optimized_alpha_additions": [
+    "Defense-in-depth interception: managed settings + hook + CI + canonical rule",
+    "Executor capability envelope with repo/path/tool/action/side-effect limits",
+    "Source trust firewall and quarantine before privileged action",
+    "Provider-side production deployment gate outside the agent",
+    "Hook integrity self-test and repair detection",
+    "Decision Defense Record for material decisions",
+    "20-case regression family listed in external research"
+  ],
+  "beta_reopen_required": false,
+  "beta_frozen_still_valid": true,
+  "alpha_handoff_update_required": true,
+  "conclusion": "PASS__EXTERNAL_RESEARCH_SUPPORTS_FROZEN_BETA_AND_ADDS_ALPHA_DEFENSE_REQUIREMENTS"
+}
