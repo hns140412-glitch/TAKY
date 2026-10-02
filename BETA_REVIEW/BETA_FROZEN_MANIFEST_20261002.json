@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_FROZEN_MANIFEST",
+  "frozen_at": "2026-10-02",
+  "beta_frozen": true,
+  "canonical_repository": "hns140412-glitch/TAKY",
+  "frozen_main_sha": "64ba56274d2f12f6745db4fa77eac792f4c41ab4",
+  "frozen_main_message": "TAKY Beta hardening baseline (#209)",
+  "source_beta_pre_hardening_sha": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "hardening_pr": 209,
+  "validation": {
+    "main_checks": [
+      {
+        "name": "TAKY Enforcement Replay",
+        "conclusion": "success",
+        "job_id": 110809378067
+      },
+      {
+        "name": "integration-regression",
+        "conclusion": "success",
+        "job_id": 110809378190
+      },
+      {
+        "name": "engineering-profile",
+        "conclusion": "success",
+        "job_id": 110809377632
+      },
+      {
+        "name": "test",
+        "conclusion": "success",
+        "job_id": 110809378548
+      }
+    ],
+    "explicit_beta_gates": [
+      "ENFORCEMENT/beta_owner_rule_consistency_validator.py",
+      "ENFORCEMENT/beta_resume_authority_consistency_validator.py",
+      "ENFORCEMENT/beta_claim_boundary_validator.py",
+      "ENFORCEMENT/execution_state_approval_binding_test.py"
+    ],
+    "result": "PASS"
+  },
+  "adversarial_findings": {
+    "closed_or_hardened": [
+      "resume authority divergence",
+      "merge/deploy approval bypass",
+      "premature canonical promotion before prerequisite completion",
+      "declared Rule ID / RULE_REGISTRY drift",
+      "false-confidence owner lint",
+      "dated CURRENT mistaken for live state"
+    ],
+    "contained_open": [
+      {
+        "id": "HOSTED_RUNTIME_INTERCEPTION",
+        "state": "UNVERIFIED_CONTAINED",
+        "meaning": "Repository-controlled enforcement does not prove hosted ChatGPT/Claude connector actions are automatically intercepted.",
+        "required_containment": [
+          "never claim automatic hosted interception without evidence",
+          "canonical promotion stays explicit human-approved",
+          "exact target/context approval binding remains mandatory",
+          "deployment and Netlify remain HOLD unless separately authorized"
+        ]
+      }
+    ]
+  },
+  "protected_invariants": [
+    "HUMAN INTENT -> THINK AGAIN -> KEEP YOUR KEY -> FIND A WAY/SOLVE -> YOU'RE THE KEY -> VERIFY/CORRECT/CONTINUE",
+    "USER != DEBUGGER",
+    "CURRENT != CANONICAL_OWNER",
+    "HANDOFF = RECOVERY EVIDENCE, NOT AUTOMATIC AUTHORITY",
+    "HISTORY = EVIDENCE, NOT DEFAULT RESUME SURFACE",
+    "DEFAULT RESUME = STATE -> APPLICABLE OWNER -> VERIFIED CURRENT -> OPEN/NEXT -> LIVE REVERIFY",
+    "REGISTRY_SNAPSHOT != LIVE_CURRENT_STATE",
+    "CANDIDATE != MAIN_CANONICAL",
+    "CANONICAL_SEMANTICS_CLOSED != RUNTIME_IMPLEMENTATION_CLOSED",
+    "LEARNING != DATED_SCHEDULING_OWNER",
+    "MERGED / DEPLOYED REQUIRE HUMAN APPROVAL",
+    "CANONICAL PROMOTION CANNOT ENTER HUMAN APPROVAL BEFORE EVIDENCE-BACKED PREREQUISITES PASS"
+  ],
+  "beta_review_evidence": [
+    "BETA_REVIEW/BETA_ADVERSARIAL_AUDIT_20261002.json",
+    "BETA_REVIEW/BETA_DECISION_DEFENSE_MATRIX_20261002.json",
+    "BETA_REVIEW/BETA_FROZEN_CANDIDATE_20261002.json"
+  ],
+  "historical_non_authoritative": [
+    {
+      "reference": "PR #208 / earlier ALPHA bootstrap",
+      "state": "HISTORICAL_NON_AUTHORITATIVE",
+      "reason": "Premature Alpha promotion path was rejected by user intent and Beta was restored before hardening.",
+      "reuse_rule": "Do not cherry-pick or treat as Alpha baseline without fresh comparison against Frozen Beta and explicit decision."
+    }
+  ],
+  "alpha": {
+    "started": false,
+    "owner": "Claude / future executor per user plan",
+    "required_base_sha": "64ba56274d2f12f6745db4fa77eac792f4c41ab4",
+    "rule": "Alpha must be authored separately from Frozen Beta. Do not mutate Beta semantics in place.",
+    "promotion": "HOLD_UNTIL_SEPARATE_HUMAN_APPROVAL"
+  },
+  "deployment": {
+    "netlify": "HOLD",
+    "deployment": "HOLD"
+  }
+}
