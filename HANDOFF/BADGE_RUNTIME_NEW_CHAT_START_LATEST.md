@@ -94,3 +94,14 @@ HOLD.
 - no Netlify
 - no production deployment
 - no paid API path without explicit approval
+
+
+## Latest validation snapshot — 2026-10-02
+- Ready-Set PR #143 head: `5203baf88c239de4c468785881245c8f0e6db522`
+- Ready checks: 10/10 PASS including Runtime E2E.
+- TAKY PR #196 head at resume prep: `4f6a8cd0899cf9536d58e4ae459915bce20f9f67`
+- TAKY Badge Visual Registry Validation: PASS.
+- Source producer QA: 44/60 PASS, 16/60 OPEN.
+- Remaining-16 evidence authority: `BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_16_V1.json`.
+- active: 0/60.
+- main merge / Netlify / deployment / badge activation: HOLD.
