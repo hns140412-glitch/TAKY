@@ -1,0 +1,152 @@
+{
+  "schema": "TAKY_BADGE_MASTER_CURRENT_V1",
+  "date": "2026-09-27",
+  "state": "DRAFT_BRANCH_AUDIT_WITH_TARGETED_RENDERER_DELTA_NOT_MAIN_AUTHORITY",
+  "authority": {
+    "source_drive": "https://drive.google.com/file/d/1tnAL8C6seD7ZWk7zH-zc8uv98roJRqpM/view",
+    "source_filename": "TAKY_BADGE_MASTER_NEW_CHAT_START_2026-09-27.md",
+    "base_main": {
+      "TAKY": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+      "Hide-Seek": "1156c559bbc3da239b30606912ab0ae0548af0a3",
+      "Snap-Pop": "3de97be0d12dd6244a942b0c137c2efe578a43b6",
+      "Ready-Set": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae"
+    },
+    "draft_branch": "taky/badge-optional-child-overlay-20260927",
+    "rule": "Current main plus latest CURRENT and complete HANDOFF take priority; draft branch does not supersede main."
+  },
+  "inventory": {
+    "presets": 60,
+    "history_templates": 20,
+    "copy_proposals": 80,
+    "scene_ranks": {
+      "POCKET": 20,
+      "FIELD": 20,
+      "EXPEDITION": 14,
+      "SECRET": 6
+    },
+    "id_title_registry_mismatches": 0,
+    "all_presets_inactive": true,
+    "all_copy_proposals_unapproved": true
+  },
+  "no_loss_matrix": {
+    "A": {
+      "status": "CLOSED_CONTRACT",
+      "source": "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md",
+      "note": "TAKY cross-app child exploration; Snap world rules; Hide bounded evidence; Learning Engine interprets; Planner schedules; Ready retrospective."
+    },
+    "B": {
+      "status": "WORKING_NOT_ACTIVE",
+      "source": "BADGE/badge-visual-registry-working.json",
+      "note": "60 preserved exact IDs/name/order, active=false, unbound."
+    },
+    "C": {
+      "status": "WORKING_PROPOSAL",
+      "source": "BADGE/badge-60-story-20-history-working.json",
+      "note": "20/20/14/6 scenes; tone independent; not value or reaward tier."
+    },
+    "D": {
+      "status": "WORKING_PROPOSAL_AND_ADAPTER_OPEN",
+      "source": "BADGE/badge-story-discovery.js",
+      "note": "20 verified child-scoped paired-evidence templates; no live Learning Engine adapter or automatic award."
+    },
+    "E": {
+      "status": "WORKING_COPY_PROPOSAL",
+      "source": "BADGE/badge-wow-inspired-copyworking.json",
+      "note": "80 matching original identity; earned-only toast; approval and app binding OPEN."
+    },
+    "F": {
+      "status": "CENTRAL_CLOSED_CROSS_APP_MERGED",
+      "source": "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
+      "note": "Hide #17, Snap #8, Ready #105 merged; actual reviewed Crew content HOLD."
+    },
+    "G": {
+      "status": "CORE_CLOSED_FINAL_POLICY_OPEN",
+      "source": "BADGE/badge-reaward-progress.js",
+      "note": "first=0; distinct signed reaward +1; five promotes; new-tier zero display and top-tier terminal provisional."
+    },
+    "H": {
+      "status": "TARGETED_CONTRADICTION_FIXED_ON_DRAFT_NOT_MAIN",
+      "source": "BADGE/badge-visual-renderer.js",
+      "note": "Main required profile for EARNED although overlay independent; branch permits base-only EARNED, rejects incomplete/foreign supplied profile. No approved visual assets."
+    },
+    "I": {
+      "status": "SPEC_DEFINED_NOT_LIVE",
+      "source": "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md",
+      "note": "single-screen 60/personal discoveries/history, filtering and reduced motion; runtime content+art OPEN."
+    },
+    "J": {
+      "status": "CENTRAL_MERGED_APP_DRAFT_NOT_LIVE",
+      "source": "BADGE/BADGE_ACQUISITION_HISTORY_CALENDAR_2026-09-26.md",
+      "note": "signed awarded_at not approved_at; KST; undated legacy; gift lane separate; TAKY #153 merged; Ready #112/Snap #9 drafts."
+    },
+    "K": {
+      "status": "V2_MERGED_LIVE_INTEGRATION_OPEN",
+      "source": "BADGE/FAMILY_PRAISE_GIFT_V2_CONTRACT_2026-09-26.md",
+      "note": "family != parent; explicit gift grant; 1..5 gems per gift; V1 historical; journal != wallet/achievement; PR149 merged."
+    },
+    "L": {
+      "status": "TESTED_CORE_PRODUCTION_OPEN",
+      "source": "BADGE/BADGE_AWARD_CAS_MULTIDEVICE_CONTRACT_2026-09-26.md",
+      "note": "TAKY #155 merged; real atomic backend, signing key, Decision, active catalog, server reader, external rollback anchor OPEN."
+    },
+    "M": {
+      "status": "DRAFT_UNMERGED_UNDEPLOYED",
+      "source": "HANDOFF/BADGE_VISUAL_BINDING_NEW_CHAT_START_2026-09-26_LATEST.md",
+      "note": "Ready combined #112 head 6d29015bf84893877ff47dcc6d9b8d5376ddea09; Snap #9 head 7652c3fb0ec99796768f3993b05cf7c0946dcd9e."
+    },
+    "N": {
+      "status": "FOUR_DISTINCT_APPROVAL_AUTHORITIES",
+      "source": "BADGE/BADGE_VISUAL_APPROVAL_PACKET_2026-09-26.md",
+      "note": "visual vs Crew vs catalog activation vs signed awards; reference boards not approved assets."
+    },
+    "O": {
+      "status": "HARD_LOCKS_PRESERVED",
+      "source": "TAKY_BADGE_MASTER_NEW_CHAT_START_2026-09-27.md in Google Drive",
+      "note": "no invented tier/category/trigger/date/deployment claim."
+    }
+  },
+  "code_delta": {
+    "files": [
+      "BADGE/badge-visual-renderer.js",
+      "BADGE/badge-visual-renderer.test.js",
+      "BADGE/badge-ledger-visual-binding.test.js"
+    ],
+    "scope": "optional earned child overlay only; base art still requires approved/active registry and real Award Ledger ownership; provided profile must be authentic same-child and complete",
+    "tests": "DRAFT_PR_CI_PENDING",
+    "main_changed": false,
+    "activation_changed": false,
+    "live_awards": false,
+    "deploy": false
+  },
+  "verified_prs": {
+    "TAKY_149": "MERGED",
+    "TAKY_153": "MERGED",
+    "TAKY_155": "MERGED",
+    "Hide_17": "MERGED",
+    "Snap_8": "MERGED",
+    "Ready_105": "MERGED",
+    "Ready_112": "OPEN_DRAFT",
+    "Ready_110": "OPEN_DRAFT_LINEAGE",
+    "Ready_111": "OPEN_DRAFT_LINEAGE",
+    "Snap_9": "OPEN_DRAFT"
+  },
+  "remaining_open": [
+    "80 copy editorial approval; 60+20 scene and evidence criteria review",
+    "new coherent visual master with individually approved per-badge assets, not A/B/C auto-promotion",
+    "20-template real verified Learning Engine evidence adapter and child-scoped candidate UI",
+    "five-star transition appearance and top-tier policy",
+    "server-owned decision, approved active catalog, authenticated reader, shared CAS store/keys/external rollback anchor",
+    "family V2 verified permission management, recipient lookup, journal/wallet/gift-collection idempotent bridge",
+    "Ready #112 and Snap #9 real read integrations and no-auto-deploy release gate",
+    "Snap-owned individual Crew art review remains content HOLD"
+  ],
+  "hard_locks": [
+    "USER != DEBUGGER",
+    "No main merge/Netlify/deployment",
+    "No 60 canonicalization/activation or real awards",
+    "No gift wallet credit",
+    "No telemetry inference of ERROR_DISCOVERY DEEP_THINKING SPECIAL_BEHAVIOR",
+    "PR #159 Learning Engine expansion HOLD",
+    "No reference-board/Crew/visual approval conflation"
+  ]
+}
