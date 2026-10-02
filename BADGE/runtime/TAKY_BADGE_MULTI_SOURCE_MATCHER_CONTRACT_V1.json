@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_MULTI_SOURCE_MATCHER_CONTRACT_V1",
-  "version": "2026-10-02.2",
+  "version": "2026-10-02.3",
   "status": "CURRENT_FAIL_CLOSED",
   "purpose": "Allow the same badge identity to accept explicitly approved source producers from Ready & Set, Hide & Seek, Snap & Pop, or another approved app without weakening badge-specific evidence requirements.",
   "source_matcher_shape": {
@@ -112,8 +112,29 @@
       "eventFamily": "SPECIAL_BEHAVIOR",
       "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
       "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-021",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "SELF_RETURN",
+      "sourceContractId": "READY_EXPLICIT_PAUSE_RETURN_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-027",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "ERROR_REVIEW",
+      "sourceContractId": "HIDE_EXPLICIT_RETRACE_REVIEW_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-058",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "REST_AND_RETURN",
+      "sourceContractId": "READY_CONDITION_PAUSE_RETURN_V1"
     }
   ],
   "current_active_badges": 0,
-  "current_verified_badge_count": 12
+  "current_verified_badge_count": 15
 }
