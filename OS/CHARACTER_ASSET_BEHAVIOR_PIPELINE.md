@@ -23,7 +23,29 @@ Responsibilities:
 - calculate SHA/version and register the approved derivative;
 - write canonical reusable binaries to `TAKY-ASSETS` and provide exact consumer pointers.
 
-The engine SHALL NOT decide story behavior, relationship progression, dialogue intent, reward logic or live scene selection.## 3. USER CHARACTER PIPELINE
+The engine SHALL NOT decide story behavior, relationship progression, dialogue intent, reward logic or live scene selection.
+
+### 2.1 Core companion production package — HARD LOCK
+
+For a user-confirmed companion Visual ID, the canonical **production source package is three sheets per character**:
+
+1. `TURNAROUND_SHEET` — one sheet containing the approved multi-view turnaround used for directional crop sources.
+2. `EXPRESSION_SHEET` — one sheet containing the approved expression set.
+3. `ACTION_SHEET` — one sheet containing the approved action/pose set.
+
+All three sheets SHALL derive from the same current user-confirmed Visual ID / approved source identity. They are production-source sheets, not three unrelated redesigns.
+
+The three-sheet package and runtime composable groups are different layers:
+`3-SHEET PRODUCTION PACKAGE -> APPROVED CROPS/DERIVATIVES -> MASTER_FULL / PROFILE / PUPPET_BODY / FACE_STATES / ACTION_PARTS / PEEK_MASK / DEPTH_SHADOW`.
+
+Therefore a valid turnaround sheet SHALL NOT be rejected merely because an older derivative plan expected a single `FIELD_NEUTRAL` output. For Core companion production, the current three-sheet contract is the review authority; `FIELD_NEUTRAL` and other runtime pieces may be cropped/derived from approved sheets after sheet-level validation.
+
+Review order:
+`CONFIRMED VISUAL ID -> 3-SHEET PACKAGE -> SHEET-LEVEL IDENTITY QA -> CROP/DERIVE -> RUNTIME GROUP QA -> REGISTRY PROMOTION`.
+
+A review rule that compares a three-sheet result against an obsolete single-asset requirement is a specification-drift failure and must be corrected before judging the image.
+
+## 3. USER CHARACTER PIPELINE
 
 For an intro/onboarding user character:
 
