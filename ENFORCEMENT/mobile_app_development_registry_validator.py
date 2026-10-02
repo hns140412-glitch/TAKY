@@ -38,7 +38,7 @@ for key in ("READY_SET","SNAP_POP","HIDE_SEEK"):
     if not str(gh.get("head_evidence_state","")).startswith(("LIVE_REFRESHED_", "AUDITED_SNAPSHOT_")):
         fail.append(f"GITHUB_HEAD_FRESHNESS_MISSING:{key}")
     drv=app.get("drive") or {}
-    if not drv.get("id") or drv.get("parent_role")!="10_PROJECTS":
+    if not drv.get("id") or drv.get("parent_role")!="01_LEARNING/05_ASSETS":
         fail.append(f"DRIVE_PROJECT_ROUTE_INVALID:{key}")
 
 # Source-head-only audit updates must agree with the stable semantic snapshot.
