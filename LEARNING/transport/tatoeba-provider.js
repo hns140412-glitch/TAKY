@@ -34,6 +34,7 @@ function buildSearchUrl({
   if(require_owned)url.searchParams.set('is_orphan','no');
   if(exclude_unapproved)url.searchParams.set('is_unapproved','no');
   if(exclude_license_problem)url.searchParams.set('license','!PROBLEM');
+  url.searchParams.set('sort','relevance');
   url.searchParams.set('showtrans','none');
   return url.toString();
 }
@@ -55,7 +56,12 @@ async function requestJson(url,{fetch_impl=globalThis.fetch,timeout_ms=10000}={}
       signal:controller?.signal
     });
     if(!res||res.ok!==true){
-      return {ok:false,state:'PROVIDER_HTTP_ERROR',status:res?.status??null,url};
+      let providerError=null;
+      try{
+        const raw=typeof res?.text==='function'?await res.text():null;
+        providerError=raw?raw.slice(0,2000):null;
+      }catch(_){}
+      return {ok:false,state:'PROVIDER_HTTP_ERROR',status:res?.status??null,url,provider_error:providerError};
     }
     const body=await res.json();
     return {ok:true,state:'PROVIDER_RESPONSE_OK',body,url,status:res.status};
