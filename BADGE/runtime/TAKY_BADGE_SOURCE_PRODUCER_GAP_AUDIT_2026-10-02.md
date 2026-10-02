@@ -2,11 +2,11 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 47/60
-- remaining: 13/60
+- source producer QA PASS: 48/60
+- remaining: 12/60
 - active: 0/60
 - deployment: HOLD
-- Ready validation cutoff: `629d1fa133293183ee3478d2a13083c7d0e844b1`
+- Ready validation cutoff: `d78aca9609805bd1f5a0ea455ec1a6f5795d3711`
 - Ready Runtime E2E: PASS / workflow gates 10/10
 - Hide validation cutoff: `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3`
 - Hide CI: 2/2 PASS — runs 36977546753, 36977546746
@@ -25,9 +25,11 @@ Additional exact-evidence closure:
 - 038 DEEP_THINKING_PERSISTENCE — `SNAP_POP_REFLECTION_TO_COMPLETION_V1`; explicit child reflection artifact bound to the same exploration completionEventId/recordId. Verified at Snap-Pop head `9f8e970ea76d85e4ae04f292367524db184cc61a`.
 - 039 BLOCK_RESOLVED — `READY_CHILD_STRATEGY_TO_COMPLETION_V1`; explicit child strategy switch + same-task completion. Ready #143 latest head `629d1fa133293183ee3478d2a13083c7d0e844b1`, latest workflow gates 10/10 PASS.
 
+- 018 LONG_FOCUS — `READY_CHILD_SUSTAINED_FOCUS_V1`; explicit SINGLE_TASK_FOCUS commitment followed by same-task completion. Ready #143 head `d78aca9609805bd1f5a0ea455ec1a6f5795d3711`, Runtime E2E run 36981505499, 10/10 workflows PASS. Duration alone is not evidence.
+
 Producer QA PASS does not activate any badge.
 
-## Remaining OPEN — 13
+## Remaining OPEN — 12
 
 ### A. Real-life / authority signal missing — 6
 - 001 EARLY_START — trusted wake/start boundary + explicit child start required.
@@ -37,8 +39,7 @@ Producer QA PASS does not activate any badge.
 - 009 BEFORE_PROMPT — authoritative prompt/request ledger boundary + explicit child initiation required.
 - 010 RESPONSIVE_START — named prompt event + feature-declared child response/start linkage required.
 
-### B. Focus / immersion semantics unsafe from passive telemetry — 3
-- 018 LONG_FOCUS
+### B. Focus / immersion semantics unsafe from passive telemetry — 2
 - 019 QUIET_IMMERSION
 - 042 FLOW_IMMERSION
 
