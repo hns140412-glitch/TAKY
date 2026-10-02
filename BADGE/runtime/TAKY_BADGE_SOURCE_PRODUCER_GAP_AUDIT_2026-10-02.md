@@ -2,8 +2,8 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 43/60
-- remaining: 17/60
+- source producer QA PASS: 44/60
+- remaining: 16/60
 - active: 0/60
 - deployment: HOLD
 - Ready validation cutoff: `d6ad1d918914870e8df4f72d1ed32afffe9d402c`
@@ -41,9 +41,9 @@ The following badges now have exact source tuples backed by Ready Runtime E2E. P
 056 CHILD_PLAN_ADAPTATION — READY_CHILD_REPLAN_AFTER_CHANGE_V1
 057 START_DESPITE_CONDITION — READY_START_DESPITE_CONDITION_V1
 
-## Remaining OPEN — 17
+## Remaining OPEN — 16
 
-### A. Real-life / authority signal missing — 7
+### A. Real-life / authority signal missing — 6
 001 EARLY_START
 - needs real wake/start evidence; schedule or clock alone is insufficient.
 
@@ -61,9 +61,6 @@ The following badges now have exact source tuples backed by Ready Runtime E2E. P
 
 010 RESPONSIVE_START
 - cannot use elapsed-time threshold; needs feature-declared response to a named prompt.
-
-013 SINGLE_TASK_FOCUS
-- needs an explicit one-task focus commitment/interaction; silence or duration is invalid.
 
 ### B. Focus / immersion semantics still unsafe — 3
 018 LONG_FOCUS
@@ -98,6 +95,8 @@ Decision:
 
 
 ## Additional closure
+013 SINGLE_TASK_FOCUS is QA PASS via explicit child focus commitment (`READY_EXPLICIT_SINGLE_TASK_FOCUS_V1`); passive duration/silence remains invalid.
+
 041 MEANINGFUL_OVERRUN is now QA PASS because the exact source contract requires all three: Planner estimate overrun + child-authored meaning artifact + completion. This remains distinct from generic persistence and accuracy producers.
 
 ## Global false-positive guard
