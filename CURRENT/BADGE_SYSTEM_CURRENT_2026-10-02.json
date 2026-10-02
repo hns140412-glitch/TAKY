@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Implement source installation key generation/pairing and signed transport wiring without activating awards; then prove Ready/Hide/Snap live E2E. Netlify deployment and active=true remain HOLD pending separate approval.",
+  "next_open": "Verify latest Ready/Hide/Snap helper heads, resolve Snap validation evidence, then implement trusted-device pairing flow without enabling network transport. After explicit authorization, prove signed live E2E. active remains 0/60; deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -177,5 +177,42 @@
     "live_ready_hide_snap_e2e_to_matcher": "OPEN",
     "activation_effect": "NONE",
     "deployment": "HOLD"
+  },
+  "source_identity_transport_preparation": {
+    "status": "PREPARED_NOT_LIVE",
+    "ready_set": {
+      "branch": "taky/badge-source-producers-20261002",
+      "latest_helper_commit": "2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false
+    },
+    "hide_seek": {
+      "branch": "taky/badge-source-producers-20261002",
+      "latest_helper_commit": "fca0a39cf27f75d141139e6e33b4be7f77fa799e",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false
+    },
+    "snap_pop": {
+      "branch": "taky/badge-catalog-ui-binding-20261001",
+      "latest_helper_commit": "023b1cf2890ab2268dcfe6739e31001a26950606",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false,
+      "ci_status": "VERIFY_REQUIRED"
+    },
+    "real_source_keys_registered": false,
+    "live_signed_post": false,
+    "live_e2e_to_matcher": "OPEN"
   }
 }
