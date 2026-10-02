@@ -54,12 +54,12 @@ Status: RESUME_READY
 ## Snap 038 source verification
 - Repo: hns140412-glitch/Snap-Pop
 - Draft PR: #20
-- Validated head: `08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a`
+- Validated head: `9f8e970ea76d85e4ae04f292367524db184cc61a`
 - BDG-DRAFT-038 DEEP_THINKING_PERSISTENCE: QA PASS.
 - Exact contract: `SNAP_POP_REFLECTION_TO_COMPLETION_V1`.
 - Requires explicit child reflection artifact + same-exploration verified completion record.
 - Targeted validator PASS and source-only award boundary PASS on connected workstation.
-- Full branch closure still has a pre-existing catalog activation guard failure; the same failure reproduces at pre-038 head `023b1cf...`, so it is not a 038 regression.
+- Full Snap static branch closure: `73/73 PASS` at the validated head.
 - Observation only; activation remains HOLD.
 
 ## TAKY central badge branch
