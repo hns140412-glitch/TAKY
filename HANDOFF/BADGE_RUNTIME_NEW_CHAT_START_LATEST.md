@@ -90,3 +90,12 @@ HOLD. No main merge. No Netlify deployment.
 - Central transport runtime stays OPEN/UNASSIGNED rather than being arbitrarily attached to an app.
 - Required implementation order is locked: owner -> schema validator -> immutable ledger -> dedupe/conflict fail-closed -> exact matcher adapter -> Ready/Hide/Snap E2E -> separate activation review.
 - active 0/60 and deployment HOLD unchanged.
+
+
+## 2026-10-02 TAKY-MOBILE Central Transport Core
+- Owner candidate: TAKY-MOBILE server runtime (draft only, no main merge/deploy).
+- Branch: `taky/badge-central-transport-core-20261002`; Draft PR #2.
+- Implemented: exact source-observation validation, allowed app gate, observation-only authority guard, app_id+event_id dedupe core, duplicate-conflict fail-closed, exact matcher tuple projection, fail-closed ingest endpoint scaffold, durable-ledger adapter contract, cross-app auth boundary, Ready/Hide/Snap producer compatibility tests.
+- Durable production ledger/auth/deployed endpoint/live E2E remain OPEN.
+- Latest head: `52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7`; previous implementation heads PASS, latest CI currently running.
+- source producer coverage remains 15/60; active 0/60; deployment HOLD.
