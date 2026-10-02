@@ -106,3 +106,12 @@ HOLD. No main merge. No Netlify deployment.
 - Central transport core implementation scaffold is CLOSED/PASS for code+contract scope.
 - Production durable ledger, cross-app auth, deployed ingest, and live Ready/Hide/Snap E2E remain OPEN.
 - No main merge, no Netlify deployment, no badge activation.
+
+
+## 2026-10-02 Durable Transport + Source Auth CI Closure
+- TAKY-MOBILE Draft PR #2 head `b42f7e2d0fdf220e552817c41629c5384034888b`: Validate TAKY Mobile PASS.
+- Netlify Blobs durable-ledger adapter code/test PASS. Production uses strong consistency; non-production uses deploy-scoped Blobs. No live data written.
+- Asymmetric source identity verifier (ECDSA P-256/SHA-256), public-key registry adapter, trusted-device authenticated key-registration endpoint, and signed ingest gate all code/test PASS.
+- Ready-Set dormant signer CI PASS; Hide-Seek dormant signer CI PASS; Snap-Pop signer helper committed but workflow did not fire.
+- OPEN reduced to: source installation key generation/pairing, real public-key registration, signed POST wiring, live Ready/Hide/Snap E2E into matcher.
+- source producer QA remains 15/60; active 0/60; main merge and deployment HOLD.
