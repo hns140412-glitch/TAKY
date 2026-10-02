@@ -48,3 +48,21 @@ Do not restore deprecated READY_LEARNING_CONTEXT_V1 as a parallel authority.
 1. Reconcile LAF-INT-003 Snap legacy branch against current main capabilities without history rewrite.
 2. Keep hosted transport and estimator promotions as explicit HOLDs; do not confuse them with missing implementation.
 3. Device/production/deployment validation remains separate and HOLD unless authorized.
+
+
+## 2026-10-02 reconciliation closure checkpoint
+- PR #200 merged to main at 715089eebec799fd7fb42964c1d09e8448b9fb58.
+- Post-merge main validation:
+  - TAKY Mining Indexing Learning Integration run #373 = SUCCESS
+  - TAKY Enforcement Replay run #2933 = SUCCESS
+- LAF-INT-001 = SUPERSEDED
+- LAF-INT-002 = CLOSED
+- LAF-INT-003 = OPEN
+- Snap legacy branch latest verified relation to main: +1112 / -17 / DIVERGED.
+- The legacy Snap branch does not contain current shared runtime provenance/release/PWA/event vendored files that exist on Snap main; therefore the reconciliation need is still real and must not be marked CLOSED merely because main is current.
+- Learning Evidence implementation OPENs outside LAF-INT-003: none newly identified.
+- Explicit HOLDs remain:
+  - hosted central evidence transport production binding
+  - retention estimator promotion
+  - calibrated BKT promotion
+  - device/production/Netlify deployment
