@@ -115,3 +115,63 @@ HOLD. No main merge. No Netlify deployment.
 - Ready-Set dormant signer CI PASS; Hide-Seek dormant signer CI PASS; Snap-Pop signer helper committed but workflow did not fire.
 - OPEN reduced to: source installation key generation/pairing, real public-key registration, signed POST wiring, live Ready/Hide/Snap E2E into matcher.
 - source producer QA remains 15/60; active 0/60; main merge and deployment HOLD.
+
+
+## 2026-10-02 Resume Preparation — Durable Transport/Auth + Source Identity
+### CLOSED / PASS
+- Badge source producer QA remains 15/60 PASS; 45/60 remain OPEN by design.
+- TAKY-MOBILE central transport owner candidate selected and implemented on Draft PR #2.
+- TAKY-MOBILE head `b42f7e2d0fdf220e552817c41629c5384034888b`: CI PASS.
+- Netlify Blobs durable ledger adapter: code/test PASS.
+  - production store uses strong consistency.
+  - non-production uses deploy-scoped store.
+  - event records use append-only fingerprint keys; conflicting event_id payloads fail closed.
+- Asymmetric source auth: ECDSA P-256 / SHA-256 verifier PASS.
+- Source public-key registry adapter PASS.
+- Trusted-device authenticated source-key registration endpoint PASS.
+- Signed ingest gate PASS: key-id + signature required before ledger write.
+- Ready-Set dormant signer helper + identity helper + signed transport descriptor helper added.
+- Hide-Seek dormant signer helper + identity helper + signed transport descriptor helper added.
+- Snap-Pop dormant signer helper + identity helper + signed transport descriptor helper added.
+- Ready signer CI previously PASS; Hide signer CI previously PASS.
+- No live observation data written, no badge activation, no economy mutation.
+
+### CURRENT SOURCE APP HEADS
+- Ready-Set branch: `taky/badge-source-producers-20261002`
+  - latest source-helper commit in this sequence: `2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4`
+- Hide-Seek branch: `taky/badge-source-producers-20261002`
+  - latest source-helper commit: `fca0a39cf27f75d141139e6e33b4be7f77fa799e`
+- Snap-Pop branch: `taky/badge-catalog-ui-binding-20261001`
+  - latest source-helper commit: `023b1cf2890ab2268dcfe6739e31001a26950606`
+- TAKY-MOBILE branch: `taky/badge-central-transport-core-20261002`
+  - central code baseline CI PASS at `b42f7e2d0fdf220e552817c41629c5384034888b`
+- TAKY authority branch: `taky/badge-art-binding-current-20261001`
+
+### OPEN — resume here
+1. Verify latest Ready/Hide helper heads after identity/transport-helper additions; signer/identity syntax CI must remain PASS.
+2. Snap-Pop badge-source helper workflow did not fire in prior checks; resolve/verify validation without claiming PASS until evidence exists.
+3. Implement source-side pairing flow only after preserving current dormant/no-network behavior:
+   - generate non-extractable installation key
+   - export public JWK only
+   - register through TAKY-MOBILE trusted-device admin endpoint
+   - store returned key_id in IndexedDB
+4. Keep `TakyBadgeSourceTransportV1.prepareSignedObservation` network-free until live transport authorization.
+5. After pairing is proven, wire signed POST from one producer per app and prove Ready/Hide/Snap -> TAKY-MOBILE signed ingest -> durable ledger -> exact matcher input E2E.
+6. Do NOT activate badges; active remains 0/60.
+7. Do NOT merge main or deploy Netlify without separate approval.
+8. Continue remaining 45 source producers only from explicit child-authored/feature-declared evidence; weak proxy rules unchanged.
+
+### STATE
+- source producer QA: 15/60 PASS
+- remaining producers: 45/60 OPEN
+- central transport core: PASS (code/test)
+- durable ledger adapter: PASS (code/test, not live)
+- asymmetric source auth: PASS (code/test, not live)
+- real source keys registered: NO
+- signed live POST: NO
+- Ready/Hide/Snap live E2E to matcher: OPEN
+- active badges: 0/60
+- deployment: HOLD
+
+### NEW CHAT ENTRY
+`최신 TAKY 기준으로 배지 런타임 재개. BADGE_RUNTIME_NEW_CHAT_START_LATEST.md의 2026-10-02 Resume Preparation을 authority로 사용하고, CLOSED는 상속한 뒤 source identity/pairing + signed transport E2E OPEN부터 이어가. active 0/60, main merge/Netlify 배포 HOLD 유지.`
