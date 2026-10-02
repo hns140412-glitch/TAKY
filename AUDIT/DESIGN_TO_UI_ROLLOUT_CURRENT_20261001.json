@@ -1,0 +1,116 @@
+{
+  "schema": "TAKY_DESIGN_TO_UI_ROLLOUT_V1",
+  "as_of": "2026-10-01",
+  "central": {
+    "repository": "hns140412-glitch/TAKY",
+    "pull_request": 194,
+    "branch": "taky/design-to-ui-pipeline-v1-20261001",
+    "state": "DRAFT",
+    "design_to_ui_contract": "IMPLEMENTED",
+    "visual_compare_v2": "IMPLEMENTED",
+    "evidence_receipt": "IMPLEMENTED_NO_MANUAL_PASS_FLAGS"
+  },
+  "apps": [
+    {
+      "app": "Ready-Set",
+      "repository": "hns140412-glitch/Ready-Set",
+      "pull_request": 127,
+      "head": "c85d30b46f809eae44592d55e20ab177e5422fad",
+      "scope": [
+        "planner_week",
+        "planner_day",
+        "goal",
+        "focus"
+      ],
+      "contract_ci": {
+        "run_id": 36767002121,
+        "conclusion": "success"
+      },
+      "design_pass": "BLOCKED",
+      "blocker_classes": [
+        "GOLDEN_IMPORT_OPEN",
+        "ASSET_PRODUCTION_OPEN",
+        "IMPLEMENTATION_OPEN"
+      ],
+      "note": "HOME remains separate authority work. Week/Day companion blocker now points to verified PR #118 implementation source; BASE_REVIEW uses Golden parity."
+    },
+    {
+      "app": "Hide-Seek",
+      "repository": "hns140412-glitch/Hide-Seek",
+      "pull_request": 26,
+      "head": "2adaeb9c609f900d985972f780f2cf1667a0f08c",
+      "scope": [
+        "home"
+      ],
+      "authority_freeze_open": [
+        "word_input",
+        "mode_select",
+        "trace",
+        "link",
+        "core",
+        "recall"
+      ],
+      "contract_ci": {
+        "run_id": 36766152987,
+        "conclusion": "success"
+      },
+      "design_pass": "BLOCKED",
+      "blocker_classes": [
+        "GOLDEN_IMPORT_OPEN",
+        "ASSET_IMPORT_OPEN",
+        "IMPLEMENTATION_OPEN"
+      ],
+      "note": "Approved HOME background already exists; import/binding requires no image generation."
+    },
+    {
+      "app": "Snap-Pop",
+      "repository": "hns140412-glitch/Snap-Pop",
+      "pull_request": 15,
+      "head": "c7d8bd54a66b6d065706f4fb72c4ddc5a8b77d63",
+      "scope": [
+        "home"
+      ],
+      "authority_freeze_open": [
+        "landmark_selected",
+        "three_step_exploration",
+        "completion_gem",
+        "gem_chest",
+        "wish_blessing",
+        "growth_tree",
+        "records_calendar",
+        "special_invitation",
+        "guide",
+        "settings"
+      ],
+      "contract_ci": {
+        "run_id": 36766816610,
+        "conclusion": "success"
+      },
+      "design_pass": "BLOCKED",
+      "blocker_classes": [
+        "GOLDEN_IMPORT_OPEN",
+        "IMPLEMENTATION_OPEN"
+      ],
+      "note": "Approved coastal background blob reused from PR #10 and bound to HOME runtime source. PR #10 specialist GUIDE production remains separate.",
+      "approved_background_runtime_bound": true
+    }
+  ],
+  "holds": {
+    "image_generation": true,
+    "main_merge": true,
+    "netlify": true,
+    "release_claim": true
+  },
+  "next_without_image_generation": [
+    "Import approved Golden/reference binaries with exact SHA and deterministic matched-viewport derivation receipts.",
+    "Import already-approved Hide/Snap production backgrounds and bind exact paths.",
+    "Implement Ready Week/Day chosen-companion slots and approved Goal DOM composition.",
+    "Correct Hide and Snap HOME live DOM structure against approved screen contracts.",
+    "Produce deterministic browser render manifests and VISUAL/INTERACTION/RESPONSIVE/ASSET evidence."
+  ],
+  "golden_crop_reproduction": {
+    "status": "FAIL_CLOSED",
+    "audit": "AUDIT/DESIGN_GOLDEN_CROP_REPRO_20261001.json",
+    "source_bytes_match": true
+  }
+}
