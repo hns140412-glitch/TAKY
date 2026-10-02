@@ -96,15 +96,15 @@
     "hide_draft_pr": 29,
     "hide_validation": "PASS",
     "ready_self_check": "PASS",
-    "hide_pr_head": "83ce768ba0111ee7fb0b5bd24841214ac5f83b28",
+    "hide_pr_head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
     "ready_pause_return": "PASS",
     "ready_condition_rest_return": "PASS",
     "hide_error_review": "PASS",
     "ready_runtime_e2e_run_id": 36972348832,
-    "hide_correction_courage": "PASS",
+    "hide_correction_courage": "PASS_HARDENED",
     "hide_correction_courage_runs": [
-      36975984087,
-      36975984041
+      36977546753,
+      36977546746
     ],
     "snap_pop_pr_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
     "snap_pop_deep_thinking_persistence": "PASS",
