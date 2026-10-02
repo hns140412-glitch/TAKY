@@ -2,122 +2,108 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 15/60
-- remaining: 45/60
+- source producer QA PASS: 42/60
+- remaining: 18/60
 - active: 0/60
 - deployment: HOLD
+- Ready validation cutoff: `d6ad1d918914870e8df4f72d1ed32afffe9d402c`
+- Ready Runtime E2E: 100/100 PASS
+- Ready workflow gates: 10/10 PASS
 
-## Classification
-### A. CURRENT_SIGNAL_INSUFFICIENT — 29
-These badges cannot be safely produced from current runtime signals without relying on elapsed time, score, silence, attempt count, inferred attention, parent behavior, or other weak proxies.
+## Newly closed by exact source evidence
+The following badges now have exact source tuples backed by Ready Runtime E2E. Producer QA PASS does **not** activate a badge.
 
-Slots:
+003 MICRO_TASK_COMPLETE — READY_PRE_MEAL_MICRO_COMPLETE_V1
+004 POST_MEAL_RESTART — READY_POST_MEAL_RESTART_V1
+006 SELF_START_IN_FREE_WINDOW — READY_FREE_WINDOW_SELF_START_V1
+008 VOLUNTARY_EXTRA_AFTER_REQUIRED_COMPLETE — READY_VOLUNTARY_EXTRA_CHOICE_V1
+012 SELF_PLANNED_SEQUENCE — READY_CHILD_SEQUENCE_PLAN_V1
+014 FAST_COMPLETE_WITH_CHECK — READY_FAST_COMPLETE_WITH_CHECK_V1
+015 ACCURACY_COMPLETE — READY_CAREFUL_OVERRUN_COMPLETE_V1
+016 CHILD_CHUNKED_TASK_COMPLETE — READY_CHILD_CHUNKED_TASK_V1
+017 PERSIST_TO_COMPLETE — READY_PERSIST_TO_COMPLETE_V1
+020 VOLUNTARY_NEXT_TASK_CONTINUE — READY_VOLUNTARY_FLOW_CONTINUATION_V1
+022 FOCUS_RETURN — READY_EXPLICIT_FOCUS_RETURN_V1
+023 SELF_NOTICE_RETURN — READY_EXPLICIT_SELF_NOTICE_RETURN_V1
+032 CONCEPT_UNDERSTANDING — READY_CHILD_CONCEPT_EXPLANATION_V1
+033 REFLECT_BEFORE_PROCEED — READY_EXPLICIT_REFLECTION_V1
+034 REREAD_CHECK — READY_EXPLICIT_REREAD_CHECK_V1
+040 STOP_AT_RIGHT_TIME — READY_EXPLICIT_STOP_AT_RIGHT_TIME_V1
+043 BREAK_RETURN — READY_SCHEDULED_BREAK_RETURN_V1
+044 TIMER_RETURN — READY_BREAK_TIMER_RETURN_V1
+045 DISTRACTION_RESISTANCE — READY_EXPLICIT_DISTRACTION_RESISTANCE_V1
+046 TASK_RESTART — READY_EXPLICIT_TASK_RESTART_V1
+049 MICRO_TASK_COMPLETE — READY_EXPLICIT_MICRO_TASK_COMPLETE_V1
+050 PRIORITIZE_HARD — READY_CHILD_PRIORITY_CHOICE_V1
+051 WARM_START — READY_CHILD_PRIORITY_CHOICE_V1
+052 STRATEGY_SWITCH — READY_CHILD_STRATEGY_SWITCH_V1
+053 SELF_EXPLANATION — READY_CHILD_SELF_EXPLANATION_V1
+056 CHILD_PLAN_ADAPTATION — READY_CHILD_REPLAN_AFTER_CHANGE_V1
+057 START_DESPITE_CONDITION — READY_START_DESPITE_CONDITION_V1
+
+## Remaining OPEN — 18
+
+### A. Real-life / authority signal missing — 7
 001 EARLY_START
+- needs real wake/start evidence; schedule or clock alone is insufficient.
+
 002 ALARM_RESPONSE
-003 MICRO_START
-004 RESTART_AFTER_BREAK
+- needs actual alarm-fired vs child-before-alarm evidence.
+
 005 PREPARATION_COMPLETE
-013 SINGLE_TASK_FOCUS
-014 FAST_COMPLETE_CHECKED
-015 ACCURATE_COMPLETE
-017 PERSIST_TO_COMPLETE
-018 LONG_FOCUS
-019 QUIET_IMMERSION
-020 FLOW_CONTINUATION
-022 FOCUS_RETURN
-023 SELF_NOTICE_RETURN
-031 PERSISTENT_BREAKTHROUGH
-032 CONCEPT_UNDERSTOOD
-033 REFLECT_BEFORE_ANSWER
-038 DEEP_THINKING_PERSISTENCE
-039 BLOCK_RESOLVED
-040 STOP_AT_RIGHT_TIME
-041 MEANINGFUL_OVERRUN
-042 FLOW_IMMERSION
-043 BREAK_RETURN
-044 TIMER_RETURN
-045 DISTRACTION_RESISTANCE
-046 TASK_RESTART
-049 MICRO_TASK_COMPLETE
-054 IMPROVEMENT
-057 START_DESPITE_CONDITION
-
-Decision:
-- keep SOURCE_PRODUCER_REQUIRED
-- do not synthesize observations from weak proxies
-- require stronger child-authored or feature-declared evidence before implementation
-
-### B. EXPLICIT_UI_OR_SOURCE_EVENT_NEEDED — 13
-The semantic can be made safe, but current UI/runtime does not expose the explicit child action needed to prove it.
-
-006 TIME_CREATION
-- need explicit child action selecting a real free schedule slot and starting the task from that selected slot
+- needs explicit preparation checklist completion plus actual start.
 
 007 TIME_CREATION_EXTRA
-- need explicit child action creating/selecting extra time outside the existing plan plus extra task execution
-
-012 SELF_PLANNING_SEQUENCE
-- need child-authored reorder/sequence action, not passive Planner order
-
-016 CHUNKED_COMPLETE
-- need explicit child-created or child-accepted chunk plan plus completion of those chunks
-
-030 ROOT_CAUSE_FOUND
-- need child-authored root-cause explanation/selection tied to a concrete error artifact
-
-034 REREAD_CHECK
-- need explicit reread/check action before corrected submission
-
-035 CALCULATION_CHECK
-- need explicit calculation-check action tied to before/after correction evidence
-
-036 CORRECTION_COURAGE
-- need explicit child correction action whose intent is independent of generic retry/correction badges
-
-050 PRIORITIZE_HARD
-- need child choice explicitly marking/selecting a harder task first from comparable available tasks
-
-051 WARM_START
-- need explicit child strategy choice to start with an easier task, then evidence of continuing the full plan
-
-052 STRATEGY_SWITCH
-- need explicit child-selected strategy change after a specific blocked attempt; AI suggestion alone is insufficient
-
-053 SELF_EXPLANATION
-- need child-authored explanation action tied to the learned concept/material; generic writing does not prove self-explanation
-
-056 PLAN_ADAPTATION
-- need unexpected-change provenance + child-authored replan + execution of revised plan
-
-Decision:
-- keep SOURCE_PRODUCER_REQUIRED
-- add producer only when the app feature emits an exact declared event with evidence_ref
-
-### C. EXISTING_ACTION_REVIEW_NEEDED — 3
-These have superficially similar existing actions but are not safe to bind yet because of semantic overlap/collision risk.
-
-008 EXTRA_TASK
-- Snap bonus exercise already produces BDG-DRAFT-055 VOLUNTARY_EXTRA.
-- Reusing the same bonus action would risk multi-award collision.
-- Need a distinct source action meaning “after finishing planned work, child independently selects one additional task.”
+- needs child-created/selected extra time outside the existing plan plus execution.
 
 009 BEFORE_PROMPT
-- current app can observe task start but cannot prove no parent prompt occurred.
-- Requires an authoritative prompt/request ledger or explicit parent-free initiation boundary.
+- cannot infer absence of a parent prompt from missing logs; needs authoritative prompt/request boundary.
 
 010 RESPONSIVE_START
-- “immediately after guidance” cannot be inferred from elapsed time.
-- Requires a feature-declared response action whose semantics explicitly encode response to a named prompt, not timing threshold.
+- cannot use elapsed-time threshold; needs feature-declared response to a named prompt.
+
+013 SINGLE_TASK_FOCUS
+- needs an explicit one-task focus commitment/interaction; silence or duration is invalid.
+
+### B. Focus / immersion semantics still unsafe — 3
+018 LONG_FOCUS
+019 QUIET_IMMERSION
+042 FLOW_IMMERSION
 
 Decision:
-- keep SOURCE_PRODUCER_REQUIRED
-- do not bind to existing producer until collision/authority gap is resolved
+- do not derive from elapsed time, screen stillness, silence, app foreground duration, or AI attention inference.
+- require explicit child-authored or feature-declared immersion evidence with a distinct behavior code.
+
+### C. Strong learning/problem evidence needed — 8
+030 ROOT_CAUSE_FOUND
+- current free-text root-cause note is not yet bound to a concrete error artifact.
+
+031 PERSISTENT_BREAKTHROUGH
+- requires identifiable blocked-before + solved-after evidence.
+
+035 CALCULATION_CHECK
+- requires domain-specific calculation error/check + corrected result linkage.
+
+036 CORRECTION_COURAGE
+- requires explicit child correction action distinguishable from generic retry/error correction.
+
+038 DEEP_THINKING_PERSISTENCE
+- requires child-authored reasoning artifact plus verified outcome/connection.
+
+039 BLOCK_RESOLVED
+- requires blocked-before + strategy/route change + solved-after evidence.
+
+041 MEANINGFUL_OVERRUN
+- current child-authored reason + overrun evidence exists, but exact badge matcher still needs semantic separation from persistence/accuracy badges before PASS.
+
+054 IMPROVEMENT
+- requires same-target prior/current evidence and Learning Engine/equivalent verified comparison; single score delta is forbidden.
 
 ## Global false-positive guard
 Never use as sufficient evidence:
 - elapsed or focus duration
-- score/grade/mastery
-- silence
+- score/grade/mastery alone
+- silence or screen stillness
 - attempt count
 - AI/model inference
 - parent guess
@@ -130,6 +116,7 @@ Never use as sufficient evidence:
 - 60 badge IDs/names/core descriptions/nature taxonomy/Visual IDs/Asset Slot IDs/SHA unchanged
 - historical trigger prose remains descriptive, not executable
 - source-only award boundary unchanged
+- producer QA PASS != activation approval
 - active remains 0/60
 - no main merge
 - no Netlify deployment
