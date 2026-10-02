@@ -125,7 +125,7 @@ Additional routing:
 - For explicit full historical/global forensic recovery, load and execute `MASTER/RECOVERY_FORENSICS_PROTOCOL.md`. Do NOT auto-run exhaustive historical reconstruction for ordinary tasks.
 - For a material negative-existence claim during ordinary work, use targeted recovery gates without automatically expanding into full account-history forensics.
 - For false-missing, user-forced recovery, post-correction recurrence, command-meaning shrinkage, substitute-result delivery, non-recoverable Handoff, reference-authority contamination, premature stop, or validation blocking material execution, load applicable regression fixtures and run deterministic replay/equivalent checks before recurrence-prevention PASS.
-- For PWA/web deployment, load `OS/DEPLOYMENT_OPS.md` plus applicable project repository/master.
+- For PWA/web deployment, load `OS/DEPLOYMENT_OPS.md` plus applicable project repository/master. When storage, offline data, package distribution, Drive routing or synchronization is material, also load `OS/PWA_STORAGE_SYNC_POLICY.md` and `OS/DRIVE_STORAGE_MAP.json`; deployment authorization remains separate.
 - For architecture / urban-planning / CAD-Excel review, load `DOMAIN/ARCHITECTURE_WORK_OS.md` plus applicable project sources.
 
 Canonical owner presence gate:
