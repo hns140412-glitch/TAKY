@@ -152,12 +152,9 @@
       },
       "live_hosted_e2e": "REPOSITORY_RUNTIME_E2E_PASS__PRODUCTION_HOST_STILL_HOLD",
       "evidence_paths": [
-        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
-        "CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json",
-        "BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json",
-        "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_16_V1.json"
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
       ],
-      "evidence_boundary": "44/60 source-producer QA is repository/runtime evidence only; active remains 0/60 and no merge, deployment, economy mutation, or real award is authorized.",
+      "evidence_boundary": "44/60 source-producer QA is verified on Draft candidate refs (TAKY PR #196 + Ready PR #143) and is not main badge authority; active remains 0/60 and no merge, deployment, economy mutation, or real award is authorized.",
       "candidate_refs": {
         "TAKY-MOBILE": {
           "pr": 2,
