@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 45/60; remaining 15 require stronger exact evidence. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 46/60; remaining 14 require stronger exact evidence. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Remaining 15 are evidence-specified. Implement only when their exact source authority exists; do not duplicate existing producers. Image production/replacement is a separate axis after 16:00. active remains 0/60; deployment HOLD.",
+  "next_open": "Remaining 14 are evidence-specified. Implement only when their exact source authority exists; do not duplicate existing producers. Image production/replacement is a separate axis. active remains 0/60; deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,8 +44,8 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 45,
-    "source_producer_required": 15,
+    "source_producer_qa_pass": 46,
+    "source_producer_required": 14,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-003",
@@ -73,6 +73,7 @@
       "BDG-DRAFT-034",
       "BDG-DRAFT-036",
       "BDG-DRAFT-037",
+      "BDG-DRAFT-038",
       "BDG-DRAFT-040",
       "BDG-DRAFT-043",
       "BDG-DRAFT-044",
@@ -92,7 +93,7 @@
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SOURCE_PRODUCER_QA_45_OF_60_ACTIVE_HOLD",
+    "status": "SOURCE_PRODUCER_QA_46_OF_60_ACTIVE_HOLD",
     "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
@@ -247,7 +248,7 @@
     "live_signed_post": false,
     "live_e2e_to_matcher": "OPEN"
   },
-  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_15_V1.json",
+  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_14_V1.json",
   "hide_source_verification": {
     "repo": "hns140412-glitch/Hide-Seek",
     "draft_pr": 29,
@@ -260,6 +261,19 @@
     ],
     "newly_verified_badge": "BDG-DRAFT-036",
     "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+    "activation": "HOLD"
+  },
+  "snap_pop_source_verification": {
+    "repo": "hns140412-glitch/Snap-Pop",
+    "draft_pr": 20,
+    "branch": "taky/badge-catalog-ui-binding-20261001",
+    "head": "08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a",
+    "newly_verified_badge": "BDG-DRAFT-038",
+    "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
+    "targeted_validation": "PASS",
+    "source_only_award_boundary": "PASS",
+    "full_branch_closure": "BLOCKED_BY_PREEXISTING_CATALOG_ACTIVATION_GUARD",
+    "preexisting_failure_reproduced_at": "023b1cf2890ab2268dcfe6739e31001a26950606",
     "activation": "HOLD"
   }
 }
