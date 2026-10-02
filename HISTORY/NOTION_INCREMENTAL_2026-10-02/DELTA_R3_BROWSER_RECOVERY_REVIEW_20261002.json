@@ -1,0 +1,97 @@
+{
+  "schema": "TAKY_DELTA_R3_BROWSER_RECOVERY_REVIEW_V1",
+  "generated_at": "2026-10-02T06:32:47.382295+00:00",
+  "items": [
+    {
+      "source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "canonical_url": "https://juniper-clef-bf9.notion.site/AI-15-3e4fa2be260d81c594e0ee4eecd9bbae",
+      "observed_title": "아무도 모르는 구글 무료 AI 15개 — 링크·사용법·지금 쓸 수 있는지까지 총정리",
+      "browser_recovery": "PARTIAL_SUCCESS_THEN_INTERMITTENT_CHALLENGE",
+      "recovered_evidence": {
+        "observed_text_topics": [
+          "Google AI tools 15-item overview",
+          "Pomelli",
+          "Stitch",
+          "Opal",
+          "NotebookLM",
+          "Flow Music",
+          "Learn Your Way",
+          "Mixboard",
+          "Google AI Studio",
+          "Antigravity",
+          "Jules",
+          "Code Wiki",
+          "Disco",
+          "Gemini CLI",
+          "Gemini Code Assist",
+          "Firebase Studio"
+        ],
+        "observed_links": [
+          "https://labs.google.com/pomelli/",
+          "https://stitch.withgoogle.com/",
+          "https://opal.google/",
+          "https://notebooklm.google/",
+          "https://aistudio.google.com/",
+          "https://antigravity.google/",
+          "https://jules.google/",
+          "https://codewiki.google/"
+        ],
+        "source_claim_date": "2026-09-23"
+      },
+      "mining_decision": "REVIEW",
+      "index_candidate": true,
+      "proposed_domain": "REFERENCE_TOOL_DISCOVERY",
+      "authority_class": "COMMUNITY_CURATED_TIME_SENSITIVE_REFERENCE",
+      "learning_use_authorized": false,
+      "promotion_blockers": [
+        "V6_EXACT_DUPLICATE_VERSION_RECHECK_REQUIRED",
+        "BROWSER_RECOVERY_NOT_STABLY_REPRODUCIBLE"
+      ],
+      "guards": [
+        "COMMUNITY_CURATED != OFFICIAL_TOOL_STATUS",
+        "REFERENCE_ONLY",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    },
+    {
+      "source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "canonical_url": "https://navig.notion.site/TOP-5-3d86d83666b3805194a9fc37c42e5283",
+      "observed_title": "무료 도메인 사이트 TOP 5",
+      "browser_recovery": "SUCCESS_ON_INITIAL_RENDER_THEN_INTERMITTENT_CHALLENGE",
+      "recovered_evidence": {
+        "observed_entries": [
+          "is-a.dev",
+          "thedev.id",
+          "Open Domains",
+          "eu.org",
+          "js.org"
+        ],
+        "observed_links": [
+          "https://is-a.dev/",
+          "https://upset.dev/thedev.id",
+          "https://nic.eu.org/arf/en/login/?next=/arf/en/",
+          "https://js.org/index.html"
+        ]
+      },
+      "mining_decision": "REVIEW",
+      "index_candidate": true,
+      "proposed_domain": "DEV_INFRA_REFERENCE",
+      "authority_class": "COMMUNITY_CURATED_REFERENCE",
+      "learning_use_authorized": false,
+      "promotion_blockers": [
+        "V6_EXACT_DUPLICATE_VERSION_RECHECK_REQUIRED"
+      ],
+      "guards": [
+        "REFERENCE_ONLY",
+        "NO_DEPLOYMENT_AUTHORIZATION",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    }
+  ],
+  "counts": {
+    "REVIEW": 2,
+    "INDEX_CANDIDATE": 2
+  },
+  "canonical_index_mutated": false,
+  "learning_applied": false
+}
