@@ -1,55 +1,84 @@
 {
-  "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2",
-  "version": "2026-10-02.1",
+  "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2_1_MULTI_SOURCE",
+  "version": "2026-10-02.2",
   "status": "REVIEW_REQUIRED_NOT_ACTIVE",
   "source_observation_contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
   "summary": {
     "total": 60,
-    "source_producer_qa_pass": 6,
-    "source_producer_required": 54,
+    "source_producer_qa_pass": 8,
+    "source_producer_required": 52,
     "active": 0,
     "observation_only_family_count": 25
   },
   "verified_snap_pop_producers": [
     {
+      "badge_id": "BDG-DRAFT-024",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "HELP_USED_AND_RESUMED",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
       "badge_id": "BDG-DRAFT-025",
-      "behavior_code": "SELF_HELP_REQUEST",
-      "source_contract_id": "SNAP_POP_HINT_REQUEST_V1"
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_REQUEST",
+      "behaviorCode": "SELF_HELP_REQUEST",
+      "sourceContractId": "SNAP_POP_HINT_REQUEST_V1"
     },
     {
       "badge_id": "BDG-DRAFT-026",
-      "behavior_code": "SELF_ERROR_DISCOVERY",
-      "source_contract_id": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
-    },
-    {
-      "badge_id": "BDG-DRAFT-037",
-      "behavior_code": "DEEP_THINKING",
-      "source_contract_id": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
-    },
-    {
-      "badge_id": "BDG-DRAFT-055",
-      "behavior_code": "VOLUNTARY_EXTRA",
-      "source_contract_id": "SNAP_POP_BONUS_EXERCISE_V1"
-    },
-    {
-      "badge_id": "BDG-DRAFT-060",
-      "behavior_code": "SPECIAL_EXPLORATION_COMPLETED",
-      "source_contract_id": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+      "appId": "SNAP_POP",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "SELF_ERROR_DISCOVERY",
+      "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
     },
     {
       "badge_id": "BDG-DRAFT-029",
-      "behavior_code": "SELF_RETRY",
-      "source_contract_id": "SNAP_POP_CHILD_REVISION_V1"
+      "appId": "SNAP_POP",
+      "eventFamily": "RETRY",
+      "behaviorCode": "SELF_RETRY",
+      "sourceContractId": "SNAP_POP_CHILD_REVISION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-037",
+      "appId": "SNAP_POP",
+      "eventFamily": "DEEP_THINKING",
+      "behaviorCode": "DEEP_THINKING",
+      "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-055",
+      "appId": "SNAP_POP",
+      "eventFamily": "EXTRA_TASK",
+      "behaviorCode": "VOLUNTARY_EXTRA",
+      "sourceContractId": "SNAP_POP_BONUS_EXERCISE_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-059",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "MINIMAL_HINT_SOLVE",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-060",
+      "appId": "SNAP_POP",
+      "eventFamily": "SPECIAL_BEHAVIOR",
+      "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
+      "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
     }
   ],
   "qa": {
-    "producer_observations_created": 6,
+    "producer_observations_created": 8,
     "all_observation_only": true,
     "badge_award_authorized": false,
     "economy_mutation_authorized": false,
     "browser_runtime": "PASS",
     "pwa_recovery": "PASS",
-    "retry_source_producer": "PASS"
+    "retry_source_producer": "PASS",
+    "help_use_two_hint": "PASS",
+    "minimal_hint_one_hint": "PASS",
+    "multi_source_matcher": "PASS"
   },
   "invariants": [
     "No badge is activated by this matrix.",
@@ -90,7 +119,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 2,
@@ -122,7 +152,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 3,
@@ -154,7 +185,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 4,
@@ -186,7 +218,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 5,
@@ -218,7 +251,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 6,
@@ -248,7 +282,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 7,
@@ -278,7 +313,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 8,
@@ -310,7 +346,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 9,
@@ -342,7 +379,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 10,
@@ -374,7 +412,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 11,
@@ -406,7 +445,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 12,
@@ -436,7 +476,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 13,
@@ -468,7 +509,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 14,
@@ -500,7 +542,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 15,
@@ -532,7 +575,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 16,
@@ -564,7 +608,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 17,
@@ -596,7 +641,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 18,
@@ -628,7 +674,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 19,
@@ -660,7 +707,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 20,
@@ -692,7 +740,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 21,
@@ -724,7 +773,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 22,
@@ -756,7 +806,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 23,
@@ -788,7 +839,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 24,
@@ -802,12 +854,12 @@
         "HIDE_SEEK",
         "READY_SET"
       ],
-      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
-      "required_source_contract_id": null,
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
       "matcher_candidate": {
         "event_family": "HELP_USE",
         "behavior_code": "HELP_USED_AND_RESUMED",
-        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
         "explicit_child_action": true
       },
       "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
@@ -820,7 +872,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_USE",
+          "behaviorCode": "HELP_USED_AND_RESUMED",
+          "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+        }
+      ]
     },
     {
       "slot": 25,
@@ -852,7 +912,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_REQUEST",
+          "behaviorCode": "SELF_HELP_REQUEST",
+          "sourceContractId": "SNAP_POP_HINT_REQUEST_V1"
+        }
+      ]
     },
     {
       "slot": 26,
@@ -883,7 +951,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "ERROR_DISCOVERY",
+          "behaviorCode": "SELF_ERROR_DISCOVERY",
+          "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
+        }
+      ]
     },
     {
       "slot": 27,
@@ -914,7 +990,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 28,
@@ -945,7 +1022,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 29,
@@ -977,7 +1055,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "RETRY",
+          "behaviorCode": "SELF_RETRY",
+          "sourceContractId": "SNAP_POP_CHILD_REVISION_V1"
+        }
+      ]
     },
     {
       "slot": 30,
@@ -1008,7 +1094,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 31,
@@ -1039,7 +1126,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 32,
@@ -1070,7 +1158,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 33,
@@ -1101,7 +1190,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 34,
@@ -1132,7 +1222,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 35,
@@ -1163,7 +1254,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 36,
@@ -1194,7 +1286,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 37,
@@ -1225,7 +1318,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "DEEP_THINKING",
+          "behaviorCode": "DEEP_THINKING",
+          "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+        }
+      ]
     },
     {
       "slot": 38,
@@ -1256,7 +1357,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 39,
@@ -1287,7 +1389,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 40,
@@ -1319,7 +1422,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 41,
@@ -1349,7 +1453,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 42,
@@ -1381,7 +1486,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 43,
@@ -1413,7 +1519,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 44,
@@ -1445,7 +1552,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 45,
@@ -1477,7 +1585,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 46,
@@ -1509,7 +1618,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 47,
@@ -1541,7 +1651,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 48,
@@ -1573,7 +1684,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 49,
@@ -1605,7 +1717,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 50,
@@ -1637,7 +1750,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 51,
@@ -1669,7 +1783,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 52,
@@ -1701,7 +1816,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 53,
@@ -1732,7 +1848,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 54,
@@ -1764,7 +1881,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 55,
@@ -1796,7 +1914,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "EXTRA_TASK",
+          "behaviorCode": "VOLUNTARY_EXTRA",
+          "sourceContractId": "SNAP_POP_BONUS_EXERCISE_V1"
+        }
+      ]
     },
     {
       "slot": 56,
@@ -1826,7 +1952,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 57,
@@ -1858,7 +1985,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 58,
@@ -1890,7 +2018,8 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
     },
     {
       "slot": 59,
@@ -1904,12 +2033,12 @@
         "HIDE_SEEK",
         "READY_SET"
       ],
-      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
-      "required_source_contract_id": null,
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
       "matcher_candidate": {
         "event_family": "HELP_USE",
         "behavior_code": "MINIMAL_HINT_SOLVE",
-        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
         "explicit_child_action": true
       },
       "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
@@ -1922,7 +2051,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_USE",
+          "behaviorCode": "MINIMAL_HINT_SOLVE",
+          "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+        }
+      ]
     },
     {
       "slot": 60,
@@ -1954,7 +2091,15 @@
         "NO_PARENT_GUESS_ONLY",
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
-      "activation_status": "HOLD_NOT_ACTIVE"
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "SPECIAL_BEHAVIOR",
+          "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
+          "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+        }
+      ]
     }
   ]
 }
