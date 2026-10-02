@@ -138,6 +138,7 @@ jobs:
           python -m py_compile ENFORCEMENT/taky_gate.py
           python -m py_compile ENFORCEMENT/rule_registry_lint.py
           python -m py_compile ENFORCEMENT/beta_owner_rule_consistency_validator.py
+          python -m py_compile ENFORCEMENT/beta_resume_authority_consistency_validator.py
           python -m py_compile ENFORCEMENT/handoff_bundle_validator.py
           python -m py_compile ENFORCEMENT/evidence_ref_validator.py
           python -m py_compile ENFORCEMENT/preflight_bridge.py
@@ -181,6 +182,7 @@ jobs:
         run: |
           python ENFORCEMENT/rule_registry_lint.py
           python ENFORCEMENT/beta_owner_rule_consistency_validator.py
+          python ENFORCEMENT/beta_resume_authority_consistency_validator.py
       - name: Validate semantic CURRENT authority and fail-closed resolution
         run: |
           python ENFORCEMENT/semantic_current_resolver.py
