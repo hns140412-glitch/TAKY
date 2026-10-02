@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT",
+  "namespace": "system",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "authority_transfer": false,
+  "owner": "MASTER/MASTER_LOGIC.md",
+  "state": "ALPHA_MIGRATION",
+  "open": [
+    "trusted routing authority independent from executor",
+    "hosted ChatGPT mandatory repository preflight interception",
+    "hosted automatic C2S interception",
+    "role/action/owner classification trust source"
+  ],
+  "hold": [
+    "canonical promotion",
+    "Netlify/deployment"
+  ],
+  "evidence": [
+    "ALPHA/BETA_FROZEN_MANIFEST_20261002.json",
+    "ALPHA/TRACE/BETA_TO_ALPHA_TRACEABILITY.json"
+  ],
+  "live_verify": [
+    "TAKY main head",
+    "exact candidate PR head/state when material",
+    "runtime/CI evidence when claim level requires it"
+  ],
+  "freshness": {
+    "mode": "LIVE_REVERIFY_BEFORE_CURRENT_CLAIM",
+    "snapshot_is_not_perpetual_live_proof": true
+  },
+  "handoff_role": "RECOVERY_POINTER_ONLY",
+  "history_role": "EVIDENCE_ONLY"
+}
