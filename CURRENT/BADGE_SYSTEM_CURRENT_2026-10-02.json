@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 items are still WORKING_DRAFT_NOT_ACTIVE; eventFamilies=0/60; matcher contracts=0/60.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer contracts are being verified separately; no badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Implement and QA remaining 48 source producers. Prioritize deterministic child-authored evidence; central cross-app badge transport remains OPEN. active stays 0.",
+  "next_open": "Continue explicit source-producer implementation/QA for remaining 45 badges. Preserve fail-closed source-only award boundary; active stays 0/60.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,20 +44,23 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 12,
-    "source_producer_required": 48,
+    "source_producer_qa_pass": 15,
+    "source_producer_required": 45,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-011",
+      "BDG-DRAFT-021",
       "BDG-DRAFT-024",
       "BDG-DRAFT-025",
       "BDG-DRAFT-026",
+      "BDG-DRAFT-027",
       "BDG-DRAFT-028",
       "BDG-DRAFT-029",
       "BDG-DRAFT-037",
       "BDG-DRAFT-047",
       "BDG-DRAFT-048",
       "BDG-DRAFT-055",
+      "BDG-DRAFT-058",
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
@@ -104,11 +107,13 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "dba2ee57eac78fcf1be9b8ffed4a39141c8df5f6",
+    "head": "88e06a1deb4d121187b123a9528af50808c597e5",
     "producers": [
       "SELF_CHOICE",
+      "SELF_RETURN",
       "CARRY_OVER_COMPLETE",
-      "SELF_CHECK_COMPLETE"
+      "SELF_CHECK_COMPLETE",
+      "REST_AND_RETURN"
     ],
     "runtime_e2e": "PASS",
     "all_pr_checks": "PASS",
@@ -118,8 +123,9 @@
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 29,
-    "head": "ade10bada2dc626d515b58bb9bbc046754ffa68d",
+    "head": "940ffbd15aae2bca8d5592b47fbeeacc58301267",
     "producers": [
+      "ERROR_REVIEW",
       "ERROR_CORRECTED_COMPLETE"
     ],
     "validation": "PASS",
