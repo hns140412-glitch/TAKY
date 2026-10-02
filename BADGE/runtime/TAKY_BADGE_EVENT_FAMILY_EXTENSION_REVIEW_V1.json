@@ -1,7 +1,7 @@
 {
   "schema": "TAKY_BADGE_EVENT_FAMILY_EXTENSION_REVIEW_V1",
   "version": "2026-10-02.1",
-  "status": "PENDING_HUMAN_APPROVAL",
+  "status": "HUMAN_APPROVED_SEMANTICS_ONLY",
   "scope": "11 proposed event-family extensions required by 26 of 60 badges",
   "activation_effect": "NONE_UNTIL_APPROVED_AND_SOURCE_PRODUCERS_TESTED",
   "total_extension_badges": 26,
@@ -21,7 +21,9 @@
         "score_only",
         "parent_guess_only"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "SELF_CHOICE",
@@ -38,7 +40,9 @@
         "default_selection",
         "execution_order_inference"
       ],
-      "risk": "LOW"
+      "risk": "LOW",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "SELF_PLANNING",
@@ -54,7 +58,9 @@
         "mere_actual_order",
         "planner_auto_order"
       ],
-      "risk": "LOW"
+      "risk": "LOW",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "HELP_USE",
@@ -69,7 +75,9 @@
         "help_available_only",
         "assistant_inference"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "ERROR_CORRECTION",
@@ -85,7 +93,9 @@
         "model_only_correction",
         "score_delta_only"
       ],
-      "risk": "LOW"
+      "risk": "LOW",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "ERROR_ANALYSIS",
@@ -100,7 +110,9 @@
         "ai_inferred_cause",
         "parent_guess"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "BREAKTHROUGH",
@@ -115,7 +127,9 @@
         "duration_only",
         "attempt_count_only"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "CONCEPT_UNDERSTANDING",
@@ -131,7 +145,9 @@
         "model_confidence_only",
         "single_correct_answer_only"
       ],
-      "risk": "HIGH"
+      "risk": "HIGH",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "SELF_REGULATION",
@@ -147,7 +163,9 @@
         "silent_behavior_inference",
         "parent_guess"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "STRATEGY_SWITCH",
@@ -163,7 +181,9 @@
         "model_inferred_strategy",
         "unobserved_change"
       ],
-      "risk": "MEDIUM"
+      "risk": "MEDIUM",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     },
     {
       "id": "IMPROVEMENT",
@@ -181,7 +201,9 @@
         "ai_guess_only",
         "cross_target_comparison"
       ],
-      "risk": "HIGH"
+      "risk": "HIGH",
+      "semantic_status": "APPROVED_OBSERVATION_FAMILY",
+      "runtime_activation_status": "NOT_ACTIVE"
     }
   ],
   "decision_options": {
@@ -194,5 +216,14 @@
     "Every badge still requires its own behavior_code discriminator, source_contract_id, dedupe policy and false-positive tests.",
     "POCKET/FIELD/EXPEDITION/SECRET and primary_nature are separate axes.",
     "Art identity and SHA are untouched."
-  ]
+  ],
+  "approved_at": "2026-10-02",
+  "approval_scope": {
+    "event_family_semantics_only": true,
+    "badge_activation": false,
+    "source_producer_implementation": false,
+    "catalog_status_change": false,
+    "art_or_identity_change": false
+  },
+  "approval_note": "The user approved continuing past the event-family semantics gate. Approval does not activate any badge."
 }
