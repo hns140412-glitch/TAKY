@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Resolve remaining 45 by adding or locating explicit child-authored source events only; prioritize feature-backed producers, then false-positive + dedupe/reaward QA. Keep active 0/60 and deployment HOLD.",
+  "next_open": "Select a real runtime owner for central badge observation transport, then implement immutable receipt/dedupe validation and prove one E2E observation from Ready-Set, Hide-Seek, and Snap-Pop into matcher input. Keep active 0/60 and deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -142,5 +142,15 @@
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md",
     "audit_commit": "fbfbba9e17c6854d206eba3afb59a0faf6fa0b97",
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
+  },
+  "cross_app_transport": {
+    "status": "CONTRACT_DEFINED_RUNTIME_NOT_IMPLEMENTED",
+    "contract_ref": "BADGE/runtime/TAKY_BADGE_CROSS_APP_TRANSPORT_BOUNDARY_V1.md",
+    "runtime_owner": "UNASSIGNED",
+    "immutable_observation_ledger": "NOT_IMPLEMENTED",
+    "exact_schema_validator": "NOT_IMPLEMENTED",
+    "dedupe_conflict_runtime": "NOT_IMPLEMENTED",
+    "e2e_ready_hide_snap_to_matcher": "OPEN",
+    "activation_effect": "NONE"
   }
 }
