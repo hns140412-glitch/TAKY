@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_DECISION_DEFENSE_MATRIX",
+  "date": "2026-10-02",
+  "governing_pr": 209,
+  "principle": "ATTACK_DECISION_PATH__DEFEND_BEFORE_ALPHA",
+  "rows": [
+    {
+      "decision_id": "DEC-RESUME-001",
+      "intended_decision": "Default resume uses STATE -> semantic owner -> verified CURRENT -> OPEN/NEXT; Handoff is conditional recovery evidence.",
+      "attack": [
+        "enter through Handoff-first wording",
+        "trust stale recovery prose before CURRENT"
+      ],
+      "defenses": [
+        "Handoff scope clarification",
+        "resume-authority CI validator",
+        "CURRENT-first rules in TAKY/Continuity/Checkpoint"
+      ],
+      "automated": true,
+      "residual": "Hosted model can still ignore repository rules unless it loads/applies them.",
+      "state": "HARDENED"
+    },
+    {
+      "decision_id": "DEC-APPROVAL-001",
+      "intended_decision": "MERGED and DEPLOYED always require human approval.",
+      "attack": [
+        "set merge_approval_required=false",
+        "set production_approval_required=false"
+      ],
+      "defenses": [
+        "execution_state_engine rejects bypass flags",
+        "approval binding regression tests"
+      ],
+      "automated": true,
+      "residual": "Direct hosted connector mutation is not automatically intercepted.",
+      "state": "HARDENED"
+    },
+    {
+      "decision_id": "DEC-PROMOTION-001",
+      "intended_decision": "Canonical promotion may request approval only after ordered prerequisite gates are evidenced PASS.",
+      "attack": [
+        "misstate project stage",
+        "ask approval before Beta review/hardening/freeze",
+        "bind approval to exact target but wrong lifecycle moment"
+      ],
+      "defenses": [
+        "canonical_promotion readiness gate",
+        "source boundary binding",
+        "decision lineage binding",
+        "exact promotion target",
+        "per-prerequisite PASS + evidence_ref",
+        "approval context hash includes promotion context"
+      ],
+      "automated": true,
+      "residual": "Callers must route canonical promotion through controlled engine; hosted automatic interception unverified.",
+      "state": "HARDENED"
+    },
+    {
+      "decision_id": "DEC-RULE-001",
+      "intended_decision": "Declared Rule ID and machine registry ownership cannot diverge silently.",
+      "attack": [
+        "declare Rule ID only in owner file",
+        "registry lint checks only selected IDs"
+      ],
+      "defenses": [
+        "TKY-CHECKPOINT-001 restored to registry",
+        "owner-rule consistency validator",
+        "intentional LEGACY_OPTIONAL preserved explicitly"
+      ],
+      "automated": true,
+      "residual": "ACTIVE_OWNER contracts without a declared Rule ID remain valid owner contracts and are not auto-assigned IDs.",
+      "state": "HARDENED"
+    },
+    {
+      "decision_id": "DEC-FRESHNESS-001",
+      "intended_decision": "Dated CURRENT snapshot is a resume pointer, not live-head or deploy proof.",
+      "attack": [
+        "treat shape PASS as freshness PASS",
+        "treat hardcoded audited SHA as current live state"
+      ],
+      "defenses": [
+        "snapshot claim ceiling",
+        "mandatory requery marker",
+        "claim-boundary CI validator"
+      ],
+      "automated": true,
+      "residual": "Actual live requery remains external/runtime evidence, not derivable offline.",
+      "state": "HARDENED_BOUNDARY"
+    },
+    {
+      "decision_id": "DEC-HOSTED-001",
+      "intended_decision": "Repository enforcement availability must never imply hosted ChatGPT automatic enforcement.",
+      "attack": [
+        "direct connector mutation bypasses runtime_orchestrator",
+        "assistant claims repository gate automatically intercepted hosted action"
+      ],
+      "defenses": [
+        "claim-boundary validator preserves UNVERIFIED status",
+        "runtime_orchestrator explicit no-auto-invocation statement",
+        "canonical promotion approval/prerequisite gate for controlled runtimes"
+      ],
+      "automated": false,
+      "residual": "Platform-level interception is not proven; operational containment remains required.",
+      "state": "OPEN_CONTAINED"
+    }
+  ],
+  "freeze_policy": {
+    "p0_open_uncontained_allowed": false,
+    "p1_open_uncontained_allowed": false,
+    "hosted_unverified_allowed_only_if": [
+      "explicitly labeled UNVERIFIED",
+      "no automatic-enforcement claim",
+      "canonical promotion requires human approval",
+      "deployment remains HOLD"
+    ],
+    "alpha_entry_requires": [
+      "all automated hardening CI PASS",
+      "Beta audit manifest frozen",
+      "human confirmation only after freeze result is shown"
+    ]
+  }
+}
