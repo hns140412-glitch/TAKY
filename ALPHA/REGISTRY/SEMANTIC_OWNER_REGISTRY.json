@@ -65,6 +65,29 @@
     "design_ui_assets": {
       "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
       "current": "ALPHA/CURRENT/design_ui_assets.json"
+    },
+    "work_os": {
+      "owner": "OS/WORK_OS.md",
+      "current": "ALPHA/CURRENT/work_os.json"
+    },
+    "learning_os": {
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "current": "ALPHA/CURRENT/learning_os.json"
+    },
+    "shared_technical": {
+      "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "current": "ALPHA/CURRENT/shared_technical.json",
+      "boundary": "mechanism-only; no domain authority"
+    },
+    "hide_seek": {
+      "owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "current": "ALPHA/CURRENT/hide_seek.json",
+      "external_owner": true
+    },
+    "snap_pop": {
+      "owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "current": "ALPHA/CURRENT/snap_pop.json",
+      "external_owner": true
     }
   },
   "support_only": [
@@ -78,5 +101,11 @@
     "LATEST_FILENAME_AUTHORITY",
     "CURRENT_AS_SEMANTIC_OWNER",
     "LIVE_PR_HEAD_IN_OWNER_REGISTRY"
+  ],
+  "migration_corrections": [
+    {
+      "id": "ALPHA-OWNER-COVERAGE-001",
+      "detail": "Added Work OS, Learning OS, shared technical, Hide and Snap owners omitted from initial Alpha namespace seed."
+    }
   ]
 }
