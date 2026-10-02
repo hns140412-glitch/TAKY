@@ -1,0 +1,33 @@
+{
+  "schema": "TAKY_IMPLEMENTATION_TASK_CONTRACT_V1",
+  "task_id": "TAKY-TATOEBA-CONSUMER-HANDOFF-2026-10-02",
+  "repository": "hns140412-glitch/TAKY",
+  "target_branch": "taky/tatoeba-runtime-filter-20261002",
+  "parent_pr": 197,
+  "objective": "Validate structured child-facing curation and produce bounded Hide/Snap reference handoffs without learner-performance, mastery, memory-strength, authorship, schedule, CURRENT, Canonical, merge, or deployment authority.",
+  "allowed_change_scope": [
+    "LEARNING/verification/reference-curation-receipt.js",
+    "LEARNING/verification/reference-curation-receipt.test.js",
+    "LEARNING/intake/tatoeba-item-filter.js",
+    "LEARNING/intake/tatoeba-item-filter.test.js",
+    "LEARNING/intake/tatoeba-consumer-handoff.js",
+    "LEARNING/intake/tatoeba-consumer-handoff.test.js",
+    ".github/workflows/mining-indexing-learning-integration.yml",
+    "C2S/TATOEBA_CONSUMER_HANDOFF_TASK_2026-10-02.json"
+  ],
+  "required_guards": [
+    "plain string curation receipt cannot approve child-facing use",
+    "curation receipt binds exact sentence text SHA-256",
+    "naturalness/correctness PASS required",
+    "context/sense fit PASS required",
+    "safety/age fit PASS required",
+    "license/attribution PASS required",
+    "Hide exposure cannot become recall or memory-strength evidence",
+    "Snap reference cannot become learner-authored output or auto-completed answer",
+    "example reference cannot change mastery",
+    "no app repository writes",
+    "no CURRENT/Canonical/main/deployment changes"
+  ],
+  "human_approval": "GRANTED_IN_CHAT_2026-10-02",
+  "release_policy": "DRAFT_PR_ONLY__CENTRAL_HANDOFF_CONTRACT__NO_APP_WRITE__NO_MERGE__NO_DEPLOYMENT"
+}

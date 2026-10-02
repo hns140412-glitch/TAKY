@@ -1,0 +1,28 @@
+name: TAKY Tatoeba Live Provider Validation
+
+on:
+  pull_request:
+    paths:
+      - 'C2S/TATOEBA_LIVE_PROVIDER_TRANSPORT_TASK_2026-10-02.json'
+      - 'LEARNING/transport/tatoeba-provider.js'
+      - 'LEARNING/transport/tatoeba-provider.test.js'
+      - 'LEARNING/transport/tatoeba-live-smoke.js'
+      - 'LEARNING/adapters/tatoeba-provider-item.js'
+      - 'LEARNING/intake/tatoeba-item-filter.js'
+      - '.github/workflows/tatoeba-live-provider.yml'
+
+jobs:
+  validate-live-readonly-provider:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tatoeba transport deterministic unit test
+        run: node LEARNING/transport/tatoeba-provider.test.js
+      - name: Tatoeba live read-only provider smoke
+        run: node LEARNING/transport/tatoeba-live-smoke.js
