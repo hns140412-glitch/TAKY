@@ -1,0 +1,46 @@
+name: SOURCE VAULT Handoff Bridge
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/source_vault_handoff_bridge.py'
+      - 'ENFORCEMENT/source_vault_handoff_bridge_test.py'
+      - 'ENFORCEMENT/source_vault_snapshot_evidence.py'
+      - 'ENFORCEMENT/source_vault_snapshot_evidence_test.py'
+      - 'ENFORCEMENT/source_vault_external_acquisition.py'
+      - 'ENFORCEMENT/source_vault_external_acquisition_test.py'
+      - 'ENFORCEMENT/source_vault_mining_evidence_bridge.py'
+      - 'ENFORCEMENT/source_vault_mining_evidence_bridge_test.py'
+      - 'ENFORCEMENT/source_vault_mining_v2_contract_test.py'
+      - '.github/workflows/source-vault-handoff.yml'
+  push:
+    branches:
+      - 'feat/source-vault-handoff-bridge-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-routing-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fail-closed router bridge regressions (no credentials or network)
+        run: |
+          python -m unittest discover -s ENFORCEMENT -p 'source_vault_handoff_bridge_test.py' -v
+          python -m unittest discover -s ENFORCEMENT -p 'source_vault_snapshot_evidence_test.py' -v
+          python -m unittest discover -s ENFORCEMENT -p 'source_vault_external_acquisition_test.py' -v
+          python -m unittest discover -s ENFORCEMENT -p 'source_vault_mining_evidence_bridge_test.py' -v
+
+      - name: Verify SOURCE VAULT input contract against pinned Mining V2 draft (synthetic only)
+        uses: actions/checkout@v4
+        with:
+          ref: 224d573b3334299629f4b39ca6379fd945dc006f
+          path: mining-v2
+          persist-credentials: false
+      - name: Enforce independent claim review on actual Mining V2 core
+        env:
+          PYTHONPATH: ENFORCEMENT:mining-v2/ENFORCEMENT
+        run: python -m unittest discover -s ENFORCEMENT -p 'source_vault_mining_v2_contract_test.py' -v

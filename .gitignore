@@ -1,0 +1,23 @@
+# TAKY Git is governance/implementation, not a data vault.
+# At any nesting level, avoid tracking originals and captured/private data.
+**/SOURCE_ARCHIVE/
+**/RAW_SOURCE_ARCHIVE/
+**/90_RAW_SOURCE_ARCHIVE/
+**/SOURCE_VAULT/
+**/TAKY-SOURCE-VAULT/
+**/WORK_OS_SOURCE_CACHE/
+**/captures_v04/
+**/acquired_external/
+**/data/notion_incremental/
+**/SOURCE_REFERENCE/runtime/
+
+# User-linked/host-specific state and credentials.
+*.local.json
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.key
+
+# Do not blanket-ignore app source/assets or PWA runtime configurations.
