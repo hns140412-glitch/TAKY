@@ -8,7 +8,7 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 43/60; remaining 17 require stronger exact evidence. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 44/60; remaining 16 require stronger exact evidence. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
@@ -44,8 +44,8 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 43,
-    "source_producer_required": 17,
+    "source_producer_qa_pass": 44,
+    "source_producer_required": 16,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-003",
@@ -91,7 +91,7 @@
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SOURCE_PRODUCER_QA_43_OF_60_ACTIVE_HOLD",
+    "status": "SOURCE_PRODUCER_QA_44_OF_60_ACTIVE_HOLD",
     "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
@@ -134,7 +134,7 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "e54c73a3aebd52836318fad0a6332a139c854938",
+    "head": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
     "producers": [
       "SELF_CHOICE",
       "SELF_RETURN",
@@ -142,14 +142,14 @@
       "SELF_CHECK_COMPLETE",
       "REST_AND_RETURN"
     ],
-    "runtime_e2e": "PASS_100_OF_100",
+    "runtime_e2e": "PASS",
     "all_pr_checks": "PASS_10_OF_10",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE",
-    "runtime_validation_cutoff": "e54c73a3aebd52836318fad0a6332a139c854938",
+    "runtime_validation_cutoff": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
     "latest_head_ci": "PASS_10_OF_10",
     "producer_qa_pass_contribution": 27,
-    "runtime_e2e_run_id": 36967122339
+    "runtime_e2e_run_id": 36968446580
   },
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
@@ -164,10 +164,10 @@
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_17_OPEN",
-    "source_producer_qa_pass": 43,
-    "remaining": 17,
-    "real_life_or_authority_signal_missing": 7,
+    "status": "PASS_RECLASSIFIED_16_OPEN",
+    "source_producer_qa_pass": 44,
+    "remaining": 16,
+    "real_life_or_authority_signal_missing": 6,
     "focus_immersion_semantics_unsafe": 3,
     "strong_learning_problem_evidence_needed": 7,
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md",
