@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT",
+  "namespace": "shared_technical",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "authority_transfer": false,
+  "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+  "state": "SEMANTIC_LIGHT_MECHANISM_LAYER",
+  "open": [
+    "extract only proven reusable mechanisms"
+  ],
+  "hold": [
+    "authentication transport extraction until real multi-consumer need",
+    "domain semantic ownership transfer"
+  ],
+  "invariants": [
+    "SHARED_ENGINE != SHARED_DATA != SHARED_SEMANTICS != SHARED_AUTHORITY"
+  ],
+  "freshness": {
+    "mode": "LIVE_REVERIFY_BEFORE_CURRENT_CLAIM",
+    "snapshot_is_not_perpetual_live_proof": true
+  },
+  "handoff_role": "RECOVERY_POINTER_ONLY",
+  "history_role": "EVIDENCE_ONLY"
+}
