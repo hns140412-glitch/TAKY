@@ -104,6 +104,11 @@
       "rule_id": "TKY-ASSET-001",
       "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
       "scope": "global default for approved/reusable visual asset originals and separate layers in TAKY-ASSETS, exact-revision app pointers and verified PWA build copies, design-to-UI source/visual/runtime delivery gate across chats"
+    },
+    {
+      "rule_id": "TKY-CHECKPOINT-001",
+      "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+      "scope": "atomic CURRENT checkpoint persistence, lightweight resume, CURRENT/HISTORY separation and checkpoint-before-next-unit execution"
     }
   ],
   "owner_contracts_without_beta_rule_id": [
@@ -126,11 +131,6 @@
       "owner": "MASTER/TRACEABILITY_PROTOCOL.md",
       "status": "PRESERVED_OWNER_CONTRACT",
       "alpha_rule_id": null
-    },
-    {
-      "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
-      "status": "PRESERVED_OWNER_CONTRACT",
-      "alpha_rule_id": null
     }
   ],
   "invariants": [
@@ -139,5 +139,12 @@
     "RULE_REGISTRY_DOES_NOT_OVERRIDE_SEMANTIC_OWNER",
     "NEW_RULE_ID_ASSIGNMENT_REQUIRES_SEPARATE_VALIDATED_MIGRATION"
   ],
-  "status": "ALPHA_RULE_MIGRATION_BASELINE"
+  "status": "ALPHA_RULE_MIGRATION_BASELINE",
+  "migration_corrections": [
+    {
+      "id": "ALPHA-RULE-RECOVERY-001",
+      "finding": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md already declares Rule ID TKY-CHECKPOINT-001; Beta RULE_REGISTRY omitted it.",
+      "action": "Recovered existing declared ID into Alpha registry; no new semantic ID invented."
+    }
+  ]
 }
