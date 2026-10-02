@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT",
+  "namespace": "explorer_crew",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "authority_transfer": false,
+  "owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+  "state": "CANONICAL_V2_CLOSED_RUNTIME_INCOMPLETE",
+  "closed": [
+    "canonical V2 semantics on main",
+    "Ready V2 consumer on Ready main"
+  ],
+  "open": [
+    "central runtime PR #191",
+    "Hide consumer promotion/reapplication",
+    "Snap consumer promotion/reapplication"
+  ],
+  "hold": [
+    "deployment",
+    "unapproved character art production authority"
+  ],
+  "invariants": [
+    "behavior != asset resolver",
+    "asset availability != relationship state",
+    "project presentation remains project-owned"
+  ],
+  "freshness": {
+    "mode": "LIVE_REVERIFY_BEFORE_CURRENT_CLAIM",
+    "snapshot_is_not_perpetual_live_proof": true
+  },
+  "handoff_role": "RECOVERY_POINTER_ONLY",
+  "history_role": "EVIDENCE_ONLY"
+}
