@@ -66,3 +66,26 @@ Do not restore deprecated READY_LEARNING_CONTEXT_V1 as a parallel authority.
   - retention estimator promotion
   - calibrated BKT promotion
   - device/production/Netlify deployment
+
+
+## 2026-10-02 Snap LAF-INT-003 resume checkpoint
+- LAF-INT-003 remains OPEN. Do not close until browser runtime + rewrite closure both PASS on the reconciled legacy Snap branch.
+- Legacy branch: `taky/snap-pop-implementation-2026-09-20`.
+- Shared release/PWA/event reconciliation completed through Snap-Pop PRs #21-#34.
+- Static branch closure currently passes `BRANCH_CLOSURE_VALIDATOR_PASS 73/73`.
+- Browser smoke has progressed to:
+  - initial CDP connection = PASS
+  - DOM runtime self-test = PASS
+  - failure only after recovery navigation, at transient `Runtime.evaluate` during document-context replacement.
+- Latest corrective PR: Snap-Pop #35
+  - title: Bound transient recovery Runtime.evaluate retries
+  - head: `b9ad62d583e22398a3666336e4aaf2b263cc02a2`
+  - CI: Snap Shared Runtime Reconciliation #27 currently in progress at checkpoint time.
+  - change: allow at most 3 bounded retries only for post-navigation transient `Runtime.evaluate` timeout; all other CDP/socket failures remain fail-fast.
+- Next action:
+  1. Check PR #35 CI.
+  2. If PASS, mark ready and merge into `taky/snap-pop-implementation-2026-09-20`.
+  3. Verify latest Snap Pop Branch Closure and Rewrite Closure.
+  4. If both PASS, update TAKY C2S `LAF-INT-003` to CLOSED and set downstream integration closure accordingly.
+  5. If browser smoke still fails, inspect the new `CDP_STAGE` marker/fatal message and correct only that failing recovery step.
+- Deployment/Netlify remains HOLD.
