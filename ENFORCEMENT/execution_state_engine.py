@@ -33,6 +33,54 @@ def _canonical_bytes(value: dict) -> bytes:
     ).encode("utf-8")
 
 
+def promotion_readiness(record: dict) -> tuple[dict | None, list[str]]:
+    if record.get("canonical_promotion") is not True:
+        return None, []
+
+    failures: list[str] = []
+    source_boundary_ref = str(record.get("source_boundary_ref", "")).strip()
+    decision_lineage_ref = str(record.get("decision_lineage_ref", "")).strip()
+    promotion_target_ref = str(record.get("promotion_target_ref", "")).strip()
+    prerequisites = record.get("promotion_prerequisites")
+
+    if not source_boundary_ref:
+        failures.append("PROMOTION_SOURCE_BOUNDARY_MISSING")
+    if not decision_lineage_ref:
+        failures.append("PROMOTION_DECISION_LINEAGE_MISSING")
+    if not promotion_target_ref:
+        failures.append("PROMOTION_TARGET_REF_MISSING")
+    if not isinstance(prerequisites, list) or not prerequisites:
+        failures.append("PROMOTION_PREREQUISITES_MISSING")
+        normalized_prerequisites = []
+    else:
+        normalized_prerequisites = []
+        for item in prerequisites:
+            if not isinstance(item, dict):
+                failures.append("PROMOTION_PREREQUISITE_INVALID")
+                continue
+            pid = str(item.get("id", "")).strip()
+            status = str(item.get("status", "")).strip().upper()
+            evidence_ref = str(item.get("evidence_ref", "")).strip()
+            if not pid:
+                failures.append("PROMOTION_PREREQUISITE_ID_MISSING")
+            if status != "PASS":
+                failures.append(f"PROMOTION_PREREQUISITE_NOT_PASS:{pid or 'UNKNOWN'}")
+            if not evidence_ref:
+                failures.append(f"PROMOTION_PREREQUISITE_EVIDENCE_MISSING:{pid or 'UNKNOWN'}")
+            normalized_prerequisites.append({
+                "id": pid,
+                "status": status,
+                "evidence_ref": evidence_ref,
+            })
+
+    return {
+        "source_boundary_ref": source_boundary_ref,
+        "decision_lineage_ref": decision_lineage_ref,
+        "promotion_target_ref": promotion_target_ref,
+        "promotion_prerequisites": normalized_prerequisites,
+    }, failures
+
+
 def approval_context(record: dict, current: str, requested: str) -> tuple[dict, list[str]]:
     failures: list[str] = []
     task_id = str(record.get("task_id", "")).strip()
@@ -49,6 +97,10 @@ def approval_context(record: dict, current: str, requested: str) -> tuple[dict, 
         "to_state": requested,
         "target_ref": target_ref,
     }
+    promotion, promotion_failures = promotion_readiness(record)
+    failures.extend(promotion_failures)
+    if promotion is not None:
+        context["canonical_promotion"] = promotion
     context["approval_context_hash"] = (
         "sha256:" + hashlib.sha256(_canonical_bytes(context)).hexdigest()
     )
@@ -121,14 +173,32 @@ def transition(record: dict) -> dict:
                 "current_state": current,
             }
 
+    if record.get("canonical_promotion") is True and requested in {"HUMAN_APPROVAL", "MERGED"}:
+        promotion, promotion_failures = promotion_readiness(record)
+        if promotion_failures:
+            return {
+                "pass": False,
+                "detected": promotion_failures,
+                "current_state": current,
+                "promotion_readiness": promotion,
+            }
+
     approval_verified = None
-    approval_required = (
-        (requested == "MERGED" and record.get("merge_approval_required", True))
-        or (
-            requested == "DEPLOYED"
-            and record.get("production_approval_required", True)
-        )
-    )
+    # MERGED/DEPLOYED are always human-approved lifecycle transitions.
+    # Per-call booleans may not weaken this governance boundary.
+    if requested == "MERGED" and record.get("merge_approval_required") is False:
+        return {
+            "pass": False,
+            "detected": ["MERGE_APPROVAL_BYPASS_FORBIDDEN"],
+            "current_state": current,
+        }
+    if requested == "DEPLOYED" and record.get("production_approval_required") is False:
+        return {
+            "pass": False,
+            "detected": ["DEPLOY_APPROVAL_BYPASS_FORBIDDEN"],
+            "current_state": current,
+        }
+    approval_required = requested in {"MERGED", "DEPLOYED"}
     if approval_required:
         missing_code = (
             "HUMAN_APPROVAL_MISSING:merge"
