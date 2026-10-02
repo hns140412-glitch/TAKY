@@ -34,10 +34,10 @@ Status: RESUME_READY
 - Repo: hns140412-glitch/Ready-Set
 - Branch: taky/badge-source-producers-20261002
 - Draft PR: #143
-- Latest head observed: `e54c73a3aebd52836318fad0a6332a139c854938`
-- Runtime validation cutoff: `e54c73a3aebd52836318fad0a6332a139c854938`
+- Latest head observed: `5203baf88c239de4c468785881245c8f0e6db522`
+- Runtime validation cutoff: `5203baf88c239de4c468785881245c8f0e6db522`
 - Latest evidence: Runtime E2E 100/100 PASS, workflow gates 10/10 PASS.
-- Runtime E2E run: `36967122339`.
+- Runtime E2E run: `36972348832`.
 - No deployment/network activation was enabled.
 
 ## TAKY central badge branch
