@@ -12,5 +12,27 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Define explicit eventFamily + matcher/evidence contracts per badge, test false positives, then request human activation approval."
+  "next_open": "Review/approve proposed event-family extensions and per-badge matcher/evidence contracts; then implement source producer contracts and false-positive tests before any activation.",
+  "activation_contract_analysis": {
+    "total_badges": 60,
+    "existing_family_direct": 28,
+    "existing_family_strong_evidence": 6,
+    "family_extension_required": 26,
+    "proposed_extensions": [
+      "GOAL_COMPLETE",
+      "SELF_CHOICE",
+      "SELF_PLANNING",
+      "HELP_USE",
+      "ERROR_CORRECTION",
+      "ERROR_ANALYSIS",
+      "BREAKTHROUGH",
+      "CONCEPT_UNDERSTANDING",
+      "SELF_REGULATION",
+      "STRATEGY_SWITCH",
+      "IMPROVEMENT"
+    ],
+    "proposal_status": "REVIEW_REQUIRED_NOT_ACTIVE",
+    "guard_status": "FAIL_CLOSED_ENFORCED",
+    "runtime_test": "PASS"
+  }
 }
