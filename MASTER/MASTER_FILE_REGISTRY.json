@@ -147,6 +147,11 @@
     },
     "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
+    },
+    "MASTER/STORAGE_NAMESPACE_REGISTRY.json": {
+      "class": "ACTIVE_SUPPORT",
+      "authority_owner": "TAKY_STORAGE_NAMESPACE",
+      "runtime_role": "CROSS_SURFACE_NAMESPACE_ALIGNMENT"
     }
   },
   "semantic_owners": [
@@ -209,6 +214,14 @@
       "paths": {
         "owner": "OS/LEARNING_ENGINE_CORE.md",
         "current": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+      }
+    },
+    {
+      "namespace": "storage_distribution_sync",
+      "state": "ACTIVE_OWNER",
+      "paths": {
+        "owner": "OS/PWA_STORAGE_SYNC_POLICY.md",
+        "current": "OS/DRIVE_STORAGE_MAP.json"
       }
     }
   ]

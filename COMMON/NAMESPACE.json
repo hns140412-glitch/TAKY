@@ -1,0 +1,8 @@
+{
+  "namespace":"TAKY/COMMON",
+  "registry":"MASTER/STORAGE_NAMESPACE_REGISTRY.json",
+  "physical_role":"POINTER_NAMESPACE_ONLY",
+  "canonical_owner_paths":["MASTER","OS","SHARED","CURRENT","C2S","HANDOFF","HISTORY"],
+  "drive_master":"TAKY/03_COMMON",
+  "drive_distribution":"TAKY/03_UPDATES"
+}

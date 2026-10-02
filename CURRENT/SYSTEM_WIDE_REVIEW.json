@@ -10,7 +10,7 @@
     "Ready-Set": "daed2ebd072061b870bfd0d2f2472dd344661bad",
     "Hide-Seek": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
     "Snap-Pop": "2b9c6941792269244f847b1b978125996a49b5f8",
-    "TAKY-MOBILE": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+    "TAKY-MOBILE": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
     "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
   },
   "evidence_basis": "Read-only GitHub main/PR verification at the 2026-10-02 audit plus exact local TAKY base; refs are dated snapshots, not perpetual live proof.",

@@ -37,7 +37,7 @@
       "drive": {
         "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
         "name": "READY_SET",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "01_LEARNING/05_ASSETS"
       },
       "open_prs": [
         {
@@ -295,7 +295,7 @@
       "drive": {
         "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
         "name": "SNAP_POP",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "01_LEARNING/05_ASSETS"
       },
       "open_prs": [
         {
@@ -343,7 +343,7 @@
       "drive": {
         "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
         "name": "HIDE_SEEK",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "01_LEARNING/05_ASSETS"
       },
       "open_prs": [
         {
@@ -401,7 +401,7 @@
       "drive": {
         "id": "1AybZa2Q3ISkIxMzfA9koMzfaVOwRqSBd",
         "name": "SHARED_ASSETS",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "01_LEARNING/05_ASSETS"
       }
     },
     "MOBILE_CATALOG": {
@@ -410,7 +410,7 @@
       "github": {
         "repo": "hns140412-glitch/TAKY-MOBILE",
         "default_branch": "main",
-        "main_head": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+        "main_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
         "state": "CATALOG_OR_SHARED_INFRA",
         "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
         "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
@@ -418,7 +418,7 @@
       "drive": {
         "id": "1ZrA0uOOvtA6rohLDiFK4WZEycHbeto0m",
         "name": "MOBILE_CATALOG",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "01_LEARNING/05_ASSETS"
       },
       "netlify": [
         {
@@ -477,7 +477,7 @@
         "SNAP_POP": "2b9c6941792269244f847b1b978125996a49b5f8",
         "HIDE_SEEK": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
         "SHARED_ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
-        "MOBILE_CATALOG": "9bcb7d9660834818457704db2c0a5b16c9964c95"
+        "MOBILE_CATALOG": "6c90045d1bc1f957325b7daef0c6079b29338f1e"
       }
     },
     "preserved_evidence_boundary": "last_manual_live_refresh, open_prs, work and deploy details retain their original historical evidence dates; this source-head-only refresh does not reverify those surfaces."
