@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Implement and QA the remaining 54 explicit source producers against the approved 25-family registry; activation remains separately gated and requires human approval.",
+  "next_open": "Classify and implement the remaining 52 explicit source producers by owning app/engine. Cross-app badges must add approved sourceMatchers tuples; active remains 0 until a separate activation approval.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,15 +44,17 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 6,
-    "source_producer_required": 54,
+    "source_producer_qa_pass": 8,
+    "source_producer_required": 52,
     "active": 0,
     "verified_badges": [
+      "BDG-DRAFT-024",
       "BDG-DRAFT-025",
       "BDG-DRAFT-026",
       "BDG-DRAFT-029",
       "BDG-DRAFT-037",
       "BDG-DRAFT-055",
+      "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
     "status": "SEMANTICS_APPROVED_PRODUCERS_REQUIRED"
@@ -68,7 +70,8 @@
       "explicit_child_action"
     ],
     "browser_runtime": "PASS",
-    "pwa_recovery": "PASS"
+    "pwa_recovery": "PASS",
+    "multi_source_supported": true
   },
   "event_family_registry": {
     "contract": "TAKY_BADGE_EVENT_FAMILY_REGISTRY_V1",
@@ -79,5 +82,18 @@
     "observation_only": true,
     "activation_effect": "NONE",
     "validator": "PASS"
+  },
+  "multi_source_matcher": {
+    "contract": "TAKY_BADGE_MULTI_SOURCE_MATCHER_CONTRACT_V1",
+    "status": "PASS_FAIL_CLOSED",
+    "exact_tuple": [
+      "appId",
+      "eventFamily",
+      "behaviorCode",
+      "sourceContractId"
+    ],
+    "explicit_child_action_required": true,
+    "browser_runtime": "PASS",
+    "static_validator": "PASS"
   }
 }
