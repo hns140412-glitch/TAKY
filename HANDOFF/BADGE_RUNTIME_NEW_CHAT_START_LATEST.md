@@ -3,7 +3,7 @@ Date: 2026-10-02
 Status: RESUME_READY
 
 ## Resume phrase
-최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 47/60 PASS·13/60 OPEN·active 0/60을 상속해. 남은 14개만 강한 명시 증거로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
+최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 47/60 PASS·13/60 OPEN·active 0/60을 상속해. 남은 13개는 초회 획득 easy-first(최소 명시행동) 기준으로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
 
 ## Authority
 1. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json
@@ -34,10 +34,10 @@ Status: RESUME_READY
 - Repo: hns140412-glitch/Ready-Set
 - Branch: taky/badge-source-producers-20261002
 - Draft PR: #143
-- Latest head observed: `5203baf88c239de4c468785881245c8f0e6db522`
-- Runtime validation cutoff: `5203baf88c239de4c468785881245c8f0e6db522`
-- Latest evidence: Runtime E2E 100/100 PASS, workflow gates 10/10 PASS.
-- Runtime E2E run: `36972348832`.
+- Latest head observed: `629d1fa133293183ee3478d2a13083c7d0e844b1`
+- Runtime validation cutoff: `7d0e257d2515581f8e851fc2302f76cd1ff7d7b1`
+- Latest evidence: Runtime E2E PASS, workflow gates 10/10 PASS.
+- Runtime E2E run: `36979777480`.
 - No deployment/network activation was enabled.
 
 ## Hide source verification
