@@ -246,6 +246,165 @@
         "domain": "design",
         "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf"
       }
+    },
+    {
+      "event_id": "ri-7e1b5372b7bdcd0ec0cd",
+      "source_key": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.138036+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+        "source_url": "https://m.blog.naver.com/PostView.naver?blogId=twinklkorea&logNo=224427618746",
+        "source_locator": "https://m.blog.naver.com/PostView.naver?blogId=twinklkorea&logNo=224427618746",
+        "domain": "learning_reference",
+        "consumer": "REFERENCE_DISCOVERY"
+      }
+    },
+    {
+      "event_id": "ri-d53b45eeb2bb2d25a04f",
+      "source_key": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.138036+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+        "index_version": "V6+DELTA_20261002_R2",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:a430e63e243a432008fe617077df686d162664998a17e8bd9a1264e5d08d447c"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-514a12e994d9f47ec088",
+      "source_key": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.138036+00:00",
+      "details": {
+        "consumer": "REFERENCE_DISCOVERY",
+        "domain": "learning_reference",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8198-86c0-d759888511cb"
+      }
+    },
+    {
+      "event_id": "ri-9c7674044a9799b67e35",
+      "source_key": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.140392+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+        "source_url": "https://www.redrawai.co.kr/",
+        "source_locator": "https://www.redrawai.co.kr/",
+        "domain": "design",
+        "consumer": "WORK_OS_DESIGN_REFERENCE"
+      }
+    },
+    {
+      "event_id": "ri-c8a4ddca49c95a75684a",
+      "source_key": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.140392+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+        "index_version": "V6+DELTA_20261002_R2",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:3220d9c31eb3876158c5e4ea83f44c4715cabe970f599f22e08c93af3ea8af6c"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-66bb216407df350a9197",
+      "source_key": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.140392+00:00",
+      "details": {
+        "consumer": "WORK_OS_DESIGN_REFERENCE",
+        "domain": "design",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81ae-b814-f35eec010547"
+      }
+    },
+    {
+      "event_id": "ri-70c1946f1ac989b793a8",
+      "source_key": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.142864+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+        "source_url": "https://www.spectrumhub.kr/ko/resources/library",
+        "source_locator": "https://www.spectrumhub.kr/ko/resources/library",
+        "domain": "learning_reference",
+        "consumer": "REFERENCE_DISCOVERY"
+      }
+    },
+    {
+      "event_id": "ri-38b8ad3d18aeea112d0b",
+      "source_key": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.142864+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+        "index_version": "V6+DELTA_20261002_R2",
+        "duplicate_relation": {
+          "type": "NEAR_DUPLICATE_PAGE_CAPTURE",
+          "target": "NOTION:3edfa868-dc2a-8166-980f-f3a83b5fcdc9"
+        },
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "SOURCE_SNAPSHOT_SHA256:57c9aa8d68c271bb8478107afed2562b87a94e6cf183436ecdd33c20006b8330",
+          "EXTERNAL_VALIDATION:https://qababoard.com/pages/qba-forms/",
+          "EXTERNAL_VALIDATION:https://qababoard.com/pages/qualified-behavior-analyst-credential/"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-1a64aba9b225ddad244c",
+      "source_key": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:03.142864+00:00",
+      "details": {
+        "consumer": "REFERENCE_DISCOVERY",
+        "domain": "learning_reference",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5"
+      }
+    },
+    {
+      "event_id": "ri-a755b192f3b26bb92394",
+      "source_key": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "state": "NEEDS_MORE_EVIDENCE",
+      "previous_state": "EVIDENCE_CANDIDATE",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T04:38:27.755993+00:00",
+      "details": {
+        "reason": "R1_PROMOTION_CANDIDATE_CORRECTION__INLINE_CONTENT_INSUFFICIENT_LOGIN_SHELL",
+        "evidence": "DELTA_MINING_CLASSIFICATION_20261002 + snapshot ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472",
+        "active_reference": false
+      }
     }
   ]
 }

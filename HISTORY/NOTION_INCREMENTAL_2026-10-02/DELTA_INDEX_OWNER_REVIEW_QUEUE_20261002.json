@@ -1,0 +1,112 @@
+{
+  "schema": "TAKY_DELTA_INDEX_OWNER_REVIEW_QUEUE_V1",
+  "generated_at": "2026-10-02T04:25:59.104665+00:00",
+  "base_index": "DATA_SOURCE_INDEX_2026-09-25_V6 / 679",
+  "candidate_count": 5,
+  "items": [
+    {
+      "provisional_source_id": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "source_ref_proposal": "INDEX:NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "title": "Claude 웹디자인 퀄리티를 확 올리는 전체 셋업 가이드 | 낭만빌더 김스듴",
+      "canonical_url": "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+      "snapshot_sha256": "7c85aa3a1270d4577e66f1b91b9f78fd53e8e8b8284da972f1472b74eb521ea8",
+      "relations_proposed": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "PPT_HUNTER_DESIGN_MD_AI_WORKFLOW_CAROUSEL",
+          "basis": "design rules + implementation + browser review loop"
+        }
+      ],
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "review_state": "REQUIRES_INDEXING_OWNER_VALIDATION",
+      "index_decision": "NOT_INDEXED",
+      "learning_use_authorized": false
+    },
+    {
+      "provisional_source_id": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "source_ref_proposal": "INDEX:NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "title": "[오픈] 글쓰기, 어렵게 생각하지 말고 일단 이거부터 해 보세요!! : 네이버 블로그",
+      "canonical_url": "https://m.blog.naver.com/PostView.naver?blogId=curatorn&logNo=224425708039",
+      "snapshot_sha256": "31831bd56ba61293e421ed276b78c7d8667fd894d46c7e88f78bbda468441307",
+      "relations_proposed": [
+        {
+          "type": "RELATED_TO",
+          "target_source_id": "1l-aFFOuDS0ECThDcgx8QDL0aswMw4Q6d",
+          "target_family": "SNAP_MIND_DIARY",
+          "basis": "guided self-expression/writing scaffold; not duplicate"
+        }
+      ],
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "review_state": "REQUIRES_INDEXING_OWNER_VALIDATION",
+      "index_decision": "NOT_INDEXED",
+      "learning_use_authorized": false
+    },
+    {
+      "provisional_source_id": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "source_ref_proposal": "INDEX:NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "title": "@또서맘 10월 생각을 키우는 책질문 | Notion",
+      "canonical_url": "https://app.notion.com/p/10-3de2612bfb90815d9035db3172e2b892",
+      "snapshot_sha256": "ed3470e9bd6a14d1f9627e359db252e4d4979818cd55e420ae5d3e0ab5dbeff4",
+      "relations_proposed": [
+        {
+          "type": "RELATED_TO",
+          "target_source_id": "1axQn-UqC6S1bfhH5YCzP5RqEvQwp0bfP",
+          "target_family": "SNAP_SECRET_NOTE",
+          "basis": "open-ended prompt supports thought expression; not duplicate"
+        }
+      ],
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "review_state": "REQUIRES_INDEXING_OWNER_VALIDATION",
+      "index_decision": "NOT_INDEXED",
+      "learning_use_authorized": false
+    },
+    {
+      "provisional_source_id": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "source_ref_proposal": "INDEX:NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "title": "Notion",
+      "canonical_url": "https://zircon-yard-378.notion.site/GPT-50-3ebeaba9e47c81fa8b2cc3d3bb940741",
+      "snapshot_sha256": "337a30859657f05493ce240a82536f50bbff0a4fb73e0a04889cf856ef6bd960",
+      "relations_proposed": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+          "basis": "same broad image-prompt workflow class; content differs (50 prompt set vs existing edit carousel)"
+        }
+      ],
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "review_state": "REQUIRES_INDEXING_OWNER_VALIDATION",
+      "index_decision": "NOT_INDEXED",
+      "learning_use_authorized": false
+    },
+    {
+      "provisional_source_id": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "source_ref_proposal": "INDEX:NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "title": "바이브 코딩 디자인 사이트 5곳 | 0원 루프",
+      "canonical_url": "https://0wonloop.com/resources/vibe-coding-design-sites",
+      "snapshot_sha256": "ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472",
+      "relations_proposed": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "PPT_HUNTER_DESIGN_MD_AI_WORKFLOW_CAROUSEL",
+          "basis": "design-reference/component-site workflow; not duplicate"
+        }
+      ],
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "review_state": "REQUIRES_INDEXING_OWNER_VALIDATION",
+      "index_decision": "NOT_INDEXED",
+      "learning_use_authorized": false
+    }
+  ],
+  "guards": {
+    "silent_overwrite_forbidden": true,
+    "canonical_promotion_requires_independent_index_owner": true,
+    "learning_requires_indexed_owner_receipt": true
+  },
+  "index_promoted": false,
+  "learning_applied": false
+}
