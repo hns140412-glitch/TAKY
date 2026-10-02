@@ -1,0 +1,256 @@
+{
+  "snapshot_kind": "OWNER_EVIDENCE_SNAPSHOT_NOT_AUTOMATIC_MONITOR",
+  "captured_for": "TKY-GROWTH-001 / GROWTH-OUTCOME-LEARNING-001",
+  "date": "2026-09-28",
+  "source_classification": "GitHub CI runs verified via owning repository tools; ARCHI GROW status taken from user-owned handoff; no live user, device or external provider claim. Added exact Library-read source PDF observations; GitHub CI does not validate Library bytes, so provenance is a recorded observation, not runtime validation of external files. Separate Library fact-lock, revised design-study PDF and raw-DWG receipt distinguish instructed text revision from actual DWG geometry. Direct 20p vs 38p P02 visual check and AG-014/015 exact sheet readback correct the source identity formerly recorded in existing V02; historic asset remains unchanged.",
+  "only_exact_head_and_scope": true,
+  "main_untouched": true,
+  "observations": [
+    {
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "evidence_kind": "REAL_GITHUB_CI_SNAPSHOT",
+      "record": {
+        "observation_id": "OBS-HIDE-V2-FIXTURE-RECOVERY-20260928",
+        "owner": "HIDE_SEEK_V2",
+        "target_ref": "https://github.com/hns140412-glitch/Hide-Seek/pull/20",
+        "human_outcome": "Restore the scoped Hide V2 browser regression suite after evidence-provenance tightening without claiming provider or device readiness.",
+        "change_ref": "Hide PR #20 draft initial HEAD 14ebe496b12c7935865ec695f2a079d833d61a0c -> final HEAD 0367e57fdd7526d0d6ee4404ef87584e02812c8c",
+        "required_evidence_scope": "CI_BROWSER",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360281450",
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360281358"
+          ],
+          "facts": "Initial runs: Validate Hide & Seek 8 failed/85 passed; Validate Hide Runtime V2 5 failed/75 passed. These were browser fixture/contract regressions, NOT field/provider failures."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI_BROWSER",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360595434",
+            "https://github.com/hns140412-glitch/Hide-Seek/actions/runs/36360595384"
+          ],
+          "facts": "Final exact head: Validate Hide & Seek 93 passed; Validate Hide Runtime V2 80 passed. All jobs succeeded on this scoped draft."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "EXACT_HEAD_AT_SNAPSHOT_ONLY",
+          "checked_head": "0367e57fdd7526d0d6ee4404ef87584e02812c8c",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Hide-Seek/pull/20"
+          ],
+          "note": "No later HEAD is asserted; reevaluate if owner source/CI changes."
+        },
+        "claim_boundary": "This is actual CI before/after evidence. It does not establish external OCR, approved implementation, installed PWA, family auth, or end-user learning improvement."
+      }
+    },
+    {
+      "expected_status": "EVIDENCE_SCOPE_GAP",
+      "evidence_kind": "REAL_GITHUB_CI_SNAPSHOT",
+      "record": {
+        "observation_id": "OBS-READY-OCR-CONTRACT-DEVICE-GAP-20260928",
+        "owner": "READY_SET",
+        "target_ref": "https://github.com/hns140412-glitch/Ready-Set/pull/113",
+        "human_outcome": "Keep capture request/source review contract working in a real deployed device/provider flow.",
+        "change_ref": "Ready Draft PR #113 exact HEAD 177294ca48bc796ba01d986b66cf1f97c40255a3",
+        "required_evidence_scope": "DEVICE_AND_LIVE_PROVIDER",
+        "before": {
+          "state": "UNVERIFIED",
+          "evidence_refs": [],
+          "facts": "No observed before/after on installed device or real provider was obtained."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "CI_BROWSER",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36360498752",
+            "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36360498841"
+          ],
+          "facts": "Ready Integration CI and Runtime E2E both succeeded at the Draft HEAD with fixture tests."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "EXACT_HEAD_AT_SNAPSHOT_ONLY",
+          "checked_head": "177294ca48bc796ba01d986b66cf1f97c40255a3",
+          "evidence_refs": [
+            "https://github.com/hns140412-glitch/Ready-Set/pull/113"
+          ],
+          "note": "No later head considered."
+        },
+        "claim_boundary": "CI is not equivalent to verified device, privacy/price, operating server or actual provider invocation."
+      }
+    },
+    {
+      "expected_status": "AWAITING_OUTCOME",
+      "evidence_kind": "OWNER_HANDOFF_SOURCE_STATUS",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-HANNAM-M027-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "https://docs.google.com/document/d/1YsDtrbQHWCVNuU82siO9-upcQFVyaxGo6bH0BHiVrkE/edit",
+        "human_outcome": "Use source-locked site evidence and design questions to produce a concrete ALT-01 versus ALT-02 architectural comparison that improves the actual submission without altering approved geometry or facts.",
+        "change_ref": "M-027 / AG-014 candidate registered in ARCHIGROW_NEW_CHAT_START_2026-09-26_LATEST; no verified application result.",
+        "required_evidence_scope": "SOURCE_LOCKED_WORK_ARTIFACT",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97"
+          ],
+          "facts": "Existing 2-page ARCHIGROW_HANNAM_AG014_SOURCE_CHECK_V02_2026-09-26.pdf includes submitted-plan comparison and source-QA register, not an owner-approved project implementation."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "UNKNOWN",
+          "evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "facts": "A 2-page V5 source-grounded comparison board exists and visually preserves YKH original ALT-01 p9/10 and ALT-02 p20/21 excerpts and the p5/p15 submitted area-table values. Whether the board is accepted into a current Work deliverable is NOT observed."
+        },
+        "trigger": {
+          "state": "UNKNOWN",
+          "note": "Actual latest approved Work geometry, project/level version and architect/client approval remain unverified; cannot infer no material revision."
+        },
+        "claim_boundary": "Original previous snapshot's statement that no ARCHI GROW source-grounded artifact was observed is corrected by the recovered existing V02 and V5 PDFs. Preview existence is observed; original Work DWG geometry proof, user approval, report insertion and statutory checking remain OPEN."
+      },
+      "correction": {
+        "previous_error": "EARLIER_SNAPSHOT_MISTOOK_HANDOFF_FOR_COMPLETE_ARTIFACT_INVENTORY",
+        "new_sources": [
+          "library:file_00000000a320820695e93e424d918a97",
+          "library:file_0000000031a88206a1c2ced13d68da92",
+          "https://docs.google.com/spreadsheets/d/1NXr40dDVG1pzLDJmesaXJ2svd-5oJSx3yQLRM1MAcCw/edit#gid=1201175768"
+        ],
+        "disposition": "ADJUST_IN_PLACE_KEEP_SAME_OBSERVATION_ID"
+      }
+    },
+    {
+      "evidence_kind": "SOURCE_PDF_V02_TO_V5_ARTIFACT_EXISTS_NOT_USER_OUTCOME",
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-AG014-SOURCE_BOARD-PREVIEW-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "AG-014 / M-027 / YKH 38-page submitted proposal",
+        "human_outcome": "Produce a comparison preview that retains ALT identities, identifies each drawing/source and keeps design inferences separate from submission facts.",
+        "change_ref": "Existing V02 source-linked two-page source/QA board -> existing V5 two-page layout revision, NOT a new design proposal or final Work deliverable.",
+        "required_evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97"
+          ],
+          "facts": "V02 p1 already had original ALT p10/p21 excerpts and ALT area differences; p2 independently documented location/level/source discrepancies."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "SOURCE_LINKED_COMPARISON_PREVIEW",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "facts": "V5 p1 includes original YKH ALT-01 p9/10, ALT-02 p20/21 excerpt panels and observable narrative; p2 compares 585.39 vs 729.69m2 footprint; 1170.77 vs 1105.50m2 aboveground; 907.99 vs 982.50m2 basement; 2078.76 vs 2088.00m2 total. Scope means a comparison preview exists, not proven presentation quality improvement or Work acceptance."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "STORED_YKH_V02_V5_ARTIFACT_CONTENT_ONLY",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_0000000031a88206a1c2ced13d68da92"
+          ],
+          "note": "These stored artifact contents were read. This does NOT claim that live Work DWG/level authority has no new revisions."
+        },
+        "claim_boundary": "Preview-specific candidate only; not an architect-approved presentation, full Work source reconciliation, independent legal/area calculation or objectively measured user benefit."
+      }
+    },
+    {
+      "evidence_kind": "SOURCE_PDF_CROSS_ARTIFACT_QA_VISIBILITY",
+      "expected_status": "RECHECK_REQUIRED",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-AG014-V5-QA-CARRYFORWARD-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "AG-014 / ARCHIGROW_APPLICATION row 15",
+        "human_outcome": "Do not release the comparison as a standalone approved client/work artifact while earlier source QA is unresolved or hidden.",
+        "change_ref": "Existing V02 p2 explicit discrepancy register -> existing V5 two-page comparison viewed as standalone potential report component.",
+        "required_evidence_scope": "SOURCE_QA_RELEASE_RECONCILIATION",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_00000000664082069be012dbfca81cdb",
+            "library:file_0000000084ec8230aaeb65f68597bbff",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "facts": "V02 p2 records P02 location mismatch (Bundang/Seohyeon labels), Work P04 1F +88.00 / 2F +91.80 versus later instructed +88.65 / +92.15, road vs site weighted mean and unverified CAD overlay. Historical HANNAM_737-21_FACT_LOCK_2026-09-23.md records original verified PDF page levels +88.00/+91.80, and original DWG signature not semantic parsing. SOURCE-IDENTITY CORRECTION (2026-09-28): V02 previously attributed the location-label error to YKH '38p P02'; direct comparison proves the error is in a different 20p PDF P02, while the 38p TalkFile-YKH P02 shows Hannam/Itaewon."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "UNKNOWN",
+          "evidence_scope": "COMPARISON_PREVIEW_ONLY",
+          "evidence_refs": [
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_0000000005fc82099b51cbc6905a08bb",
+            "library:file_000000009e00820683c5e8c41ceee5c0"
+          ],
+          "facts": "V5 p1/2 shows source and general HOLD statements but does not visibly reproduce the explicit P02 map and floor-level discrepancy register from V02. Whether the original appendix is attached wherever V5 is used remains unknown. Separate 6-page 한남동_737-21_고급주택_규모검토_설계기획보고서_TAKY_REV01.pdf was recovered; its TEXT records later user revision B1 +84.00 / 1F +88.65 / 2F +92.15 / road average +82.88 / AB 10,000mm. This is documented revision/report evidence, NOT demonstrated that the older Work PDF or DWG graphic was updated. DWG source receipt says RAW_DWG_ACQUIRED__SEMANTIC_GEOMETRY_NOT_YET_EXTRACTED. Connected Work folder direct-child listing currently shows only 2026-0923 DWG modified 02:41:39 UTC, older 4-page PDF modified 02:27:40 UTC, and derived PNGs; no separate newer level-revision DWG/export present in that listed folder. This does not prove no source exists elsewhere."
+        },
+        "trigger": {
+          "state": "MATERIAL_CHANGE",
+          "change_kind": "EXISTING_SOURCE_QA_NOT_VISIBLE_IN_STANDALONE_PREVIEW",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "library:file_0000000031a88206a1c2ced13d68da92",
+            "library:file_0000000005fc82099b51cbc6905a08bb",
+            "library:file_00000000664082069be012dbfca81cdb",
+            "https://drive.google.com/drive/folders/1rlRjh4gZbsp0DIcIBiRYXAc6MRXcPI0k"
+          ],
+          "note": "Owner should preserve/attach V02 QA appendix or carry forward specific status before optional use; do not pretend omission proves a legal or design error. Revised design-study PDF exists, but its revised text must not be cited as validated current DWG entities or proof an older Work section graphic already matches."
+        },
+        "claim_boundary": "Presentation/source-visibility QA only; neither hidden geometry failure nor legal noncompliance is inferred; original PDF/DWG and prior approved decisions unchanged. Keep later user level correction authoritative for that instructed revision without rewriting older source representation; latest approved drawing reconciliation is still OPEN. The 38p YKH original map is NOT identified as contaminated; only separately indexed 20p P02 carries the wrong place annotations. Historical V02 itself is unchanged, but owner AG-014/015 index and this observation supersede its incorrect source attribution."
+      }
+    },
+    {
+      "evidence_kind": "DIRECT_TWO_PDF_PAGE_VISUAL_COMPARE_PLUS_OWNER_INDEX_READBACK",
+      "expected_status": "OBSERVED_TARGET_MET_CANDIDATE",
+      "record": {
+        "observation_id": "OBS-ARCHIGROW-AG015-20P-38P-LOCATION-SOURCE-CORRECTION-20260928",
+        "owner": "ARCHI_GROW_PROJECT",
+        "target_ref": "ARCHIGROW_APPLICATION AG-014 AG-015 / V02 source QA",
+        "human_outcome": "Correctly isolate the wrong-label location panel to its own 20-page file instead of falsely quarantining the independent 38-page original used for ALT comparison.",
+        "change_ref": "Original AG-014/015 sheet/V02 called the source 'YKH 38p P02' -> AG-014/015 metadata corrected to distinct 20p P02 and 38p P02; historic QA PDF untouched.",
+        "required_evidence_scope": "SOURCE_VERSION_ATTRIBUTION_REVIEW",
+        "before": {
+          "state": "OBSERVED",
+          "evidence_refs": [
+            "library:file_00000000a320820695e93e424d918a97",
+            "https://docs.google.com/spreadsheets/d/1NXr40dDVG1pzLDJmesaXJ2svd-5oJSx3yQLRM1MAcCw/edit"
+          ],
+          "facts": "Historical V02 p2 and owner AG-014/015 source QA said 38p P02 includes Bundang/Seohyeon map labels; file identity not separated."
+        },
+        "after": {
+          "state": "OBSERVED",
+          "outcome": "MET",
+          "evidence_scope": "SOURCE_VERSION_ATTRIBUTION_REVIEW",
+          "evidence_refs": [
+            "library:file_0000000084ec8230aaeb65f68597bbff",
+            "library:file_00000000a578820795ead1a5619d7e17",
+            "https://docs.google.com/spreadsheets/d/1NXr40dDVG1pzLDJmesaXJ2svd-5oJSx3yQLRM1MAcCw/edit"
+          ],
+          "facts": "Direct PDF page 2 visual/text comparison: 20-page 2026-0923_한남동 고급빌라 규모검토.pdf displays Bundang/Seohyeon/Tancheon labels over its location graphic; separate 38-page TalkFile_...-YKH.pdf P02 depicts Hannam/Itaewon map. AG-014 and AG-015 cells corrected/read back with original status unchanged. Does not establish independent authoritative geo-coordinate verification or revision approval."
+        },
+        "trigger": {
+          "state": "NO_MATERIAL_CHANGE",
+          "checked_scope": "STORED_20P_38P_DOCUMENT_CONTENT_AND_INDEX_READBACK_ONLY",
+          "evidence_refs": [
+            "library:file_0000000084ec8230aaeb65f68597bbff",
+            "library:file_00000000a578820795ead1a5619d7e17"
+          ],
+          "note": "No change to either source PDF asserted; any updated project map/Work revision must be separately compared."
+        },
+        "claim_boundary": "Source-attribution/correction outcome only; no approved map substitution, actual user/client outcome, geometry correction, legal compliance or report release."
+      }
+    }
+  ]
+}
