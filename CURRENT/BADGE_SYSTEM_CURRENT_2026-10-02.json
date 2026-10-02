@@ -142,13 +142,14 @@
       "SELF_CHECK_COMPLETE",
       "REST_AND_RETURN"
     ],
-    "runtime_e2e": "PASS_100_OF_100_AT_VALIDATION_CUTOFF",
-    "all_pr_checks": "PASS_10_OF_10_AT_VALIDATION_CUTOFF",
+    "runtime_e2e": "PASS_100_OF_100",
+    "all_pr_checks": "PASS_10_OF_10",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE",
-    "runtime_validation_cutoff": "d6ad1d918914870e8df4f72d1ed32afffe9d402c",
-    "latest_head_ci": "RERUN_IN_PROGRESS_MANIFEST_ONLY_DELTA",
-    "producer_qa_pass_contribution": 27
+    "runtime_validation_cutoff": "e54c73a3aebd52836318fad0a6332a139c854938",
+    "latest_head_ci": "PASS_10_OF_10",
+    "producer_qa_pass_contribution": 27,
+    "runtime_e2e_run_id": 36967122339
   },
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
