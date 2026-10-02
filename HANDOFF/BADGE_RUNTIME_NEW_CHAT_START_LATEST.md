@@ -44,7 +44,7 @@ Status: RESUME_READY
 - Repo: hns140412-glitch/TAKY
 - Branch: taky/badge-art-binding-current-20261001
 - Draft PR: #196
-- Current head at this handoff sequence: `f78731a494f8a5540645503262d435ba95567094`
+- Exact TAKY PR #196 head is moving; re-fetch before any write. CURRENT and matrix above are the semantic authority.
 - Matcher/evidence matrix synchronized to exact Ready source contracts for the newly verified producers.
 
 ## Producer QA composition
