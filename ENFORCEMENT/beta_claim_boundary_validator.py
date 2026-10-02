@@ -23,6 +23,7 @@ def main() -> int:
     state = state_path.read_text(encoding="utf-8")
     resolver = resolver_path.read_text(encoding="utf-8")
     orchestrator = orchestrator_path.read_text(encoding="utf-8")
+    orchestrator_flat = " ".join(orchestrator.split())
 
     if current.get("role") != "SEMANTIC_RESUME_POINTER":
         failures.append("SYSTEM_CURRENT_ROLE_NOT_RESUME_POINTER")
@@ -49,7 +50,7 @@ def main() -> int:
         failures,
     )
     require(
-        orchestrator,
+        orchestrator_flat,
         "does not invoke hosted ChatGPT automatically",
         "HOSTED_AUTO_INVOCATION_BOUNDARY_MISSING",
         failures,
