@@ -1,79 +1,50 @@
-# LEARNING APP FAMILY — INTEGRATION HANDOFF — 2026-09-21 LATEST
+# LEARNING APP FAMILY — INTEGRATION HANDOFF — 2026-10-02 CURRENT
 
 ## Resume command
-
 최신 TAKY 기준으로 Learning App Family 통합 작업을 재개해.
 
-FIRST READ:
-1. TAKY `C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md`
-2. TAKY `C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json`
-3. this handoff
-4. each app's latest own C2S/handoff before editing.
+## Authority note
+This handoff supersedes the stale 2026-09-21 live-baseline assumptions while preserving their history.
+Do not restore deprecated READY_LEARNING_CONTEXT_V1 as a parallel authority.
 
-## Live baseline at handoff
+## Reconciled status
 
-Ready & Set
-- repo: hns140412-glitch/Ready-Set
-- main: `98df214a6078f16f2b6710016898a4d7798798db`
-- R1/R4/R5/R6 merged and targeted verified.
-- latest state must be live-refreshed before edit.
+### CLOSED
+- LAF-INT-002: Ready runtime maps HELP_NEEDED -> WAITING_FOR_PARENT and keeps BLOCKED distinct.
+- Core Decision -> Planner dated TODO -> Ready execution path is implemented and regression-tested.
+- Ready legacy embedded learner logic extraction is APPLIED; compatibility-only logic is quarantined and is not default authority.
 
-Hide & Seek
-- repo: hns140412-glitch/Hide-Seek
-- branch: `implementation/hide-seek-capture-session-v02`
-- head: `7136c22b23e05b5f902a15f7e421d79aeb7a8574`
-- PR #4 DRAFT / HOLD / DO NOT MERGE
-- relation to main: +526 / -0
-- no deploy/Netlify.
+### SUPERSEDED
+- LAF-INT-001: READY_LEARNING_CONTEXT_V1 gap.
+  - Replaced by current central Learning Decision / observation handoff contracts plus shared runtime boundaries.
+  - Current Ready evidence includes ready-central-learning-decision-intake-v01.js, ready-central-intent-to-planner-v01.js and central-learning-roundtrip tests.
+  - Hide preserves Learning Engine review-need and Planner dated-allocation ownership.
+  - Do not create a duplicate READY_LEARNING_CONTEXT_V1 contract.
 
-Snap & Pop
-- repo: hns140412-glitch/Snap-Pop
-- branch: `taky/snap-pop-implementation-2026-09-20`
-- head: `3af4d5076ed464b43c7f8e3fa60f7612539376fe`
-- relation to main: +584 / -3 / DIVERGED
-- current active work must not be treated as main.
-- no blind rebase.
-- no deploy/Netlify without a new frozen candidate + TAKY external gate.
+### OPEN
+- LAF-INT-003: Snap legacy active branch reconciliation.
+  - branch: taky/snap-pop-implementation-2026-09-20
+  - latest verified relation to main: +1112 / -17 / DIVERGED
+  - original +584 / -3 numbers are stale.
+  - do not broad-rebase or blindly merge.
+  - reconcile only capabilities/evidence needed for the intended release candidate.
 
-## Integration priority
+## Current Learning Evidence OPEN/HOLD outside these stale atoms
+- Hosted central evidence transport production binding: HOLD.
+- Retention estimator promotion: HOLD pending enough real verified retrieval targets and promotion gates.
+- Calibrated BKT promotion: HOLD pending enough real verified targets/calibration/promotion review.
+- Netlify/production deployment: HOLD.
 
-P1 Ready:
-- fix HELP_NEEDED → WAITING_FOR_PARENT.
-- preserve BLOCKED separately.
+## Cross-app hard locks
+- Learning Engine owns learner-state/pedagogical intent, not calendar dates.
+- Planner owns dated allocation.
+- Ready executes Planner sessions; it is not learner-model authority.
+- Hide memory signals do not independently schedule long-term review.
+- Snap references do not automatically become learner-authored evidence.
+- shared mechanisms != shared domain semantics.
+- user != tester/debugger.
 
-P2 Ready:
-- implement central READY_LEARNING_CONTEXT_V1 producer in specialist launch.
-
-P3 Hide:
-- consume READY_LEARNING_CONTEXT_V1.
-- no independent Hanja grade inference.
-- Language Memory remains Hide-owned.
-
-P4 Snap:
-- align existing learning-context decoder to central contract.
-- preserve vocabulary sourceOwner / expression-material-only rule.
-
-P5 Snap:
-- capability-reconcile the 3 missing main commits (README authority + shared release/PWA + shared event envelope) into the active branch.
-- do not rewrite 584-commit history.
-
-P6 cross-app:
-- Ready→Hide→Ready
-- Ready→Snap→Ready
-- Ready→Hide→Snap→Ready
-- exactly one Ready Planner task IN_PROGRESS.
-- session_id/goal_id/task_id/lap_id/return_target preserved.
-- specialist cannot end Ready session.
-
-## Hard locks
-- Work/Learning authority is not commonized.
-- Family/child identity/role/permission is not shared technical authority.
-- shared mechanisms != shared semantics.
-- user is not tester/debugger.
-- CODED / CI / RUNTIME / DEVICE / PRODUCTION remain separate.
-- no Netlify/deploy until frozen candidate + external-resource gate.
-- blocked path => classify cause; do not repeat identical failing attempt.
-
-## New chat start prompt
-
-“최신 TAKY 기준으로 Learning App Family 통합 작업을 재개해. 먼저 TAKY의 `C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md`, `C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json`, `HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md`를 읽고 Ready/Hide/Snap 최신 live HEAD를 다시 확인해. Ready의 HELP_NEEDED→WAITING_FOR_PARENT 정정부터 시작하고, READY_LEARNING_CONTEXT_V1을 Ready→Hide/Snap 공통 계약으로 실제 연결한 뒤 Snap active branch의 main-behind 3개 shared-foundation capability를 broad rebase 없이 reconcile해. 각 앱의 현재 개발을 덮어쓰지 말고 통합계약만 연결해. 사용자 테스트 금지, Netlify/배포 금지, CODED/CI/RUNTIME/DEVICE/PRODUCTION 분리.” 
+## Next OPEN
+1. Reconcile LAF-INT-003 Snap legacy branch against current main capabilities without history rewrite.
+2. Keep hosted transport and estimator promotions as explicit HOLDs; do not confuse them with missing implementation.
+3. Device/production/deployment validation remains separate and HOLD unless authorized.
