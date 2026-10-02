@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT",
+  "namespace": "learning_os",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "authority_transfer": false,
+  "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+  "state": "SEMANTICS_PRESERVED",
+  "open": [
+    "learning/family OPEN items remain owner-scoped"
+  ],
+  "hold": [
+    "implicit Work↔Learning identity/authority federation"
+  ],
+  "invariants": [
+    "family/child/parent learning authority remains Learning-owned",
+    "Learning Engine and apps remain subordinate/specialized owners"
+  ],
+  "freshness": {
+    "mode": "LIVE_REVERIFY_BEFORE_CURRENT_CLAIM",
+    "snapshot_is_not_perpetual_live_proof": true
+  },
+  "handoff_role": "RECOVERY_POINTER_ONLY",
+  "history_role": "EVIDENCE_ONLY"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_STATE_INDEX",
+  "status": "ALPHA_VALIDATION",
+  "canonical": false,
+  "beta_frozen_boundary": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "root": "ALPHA/TAKY_ALPHA_DRAFT_00.md",
+  "owner_registry": "ALPHA/REGISTRY/SEMANTIC_OWNER_REGISTRY.json",
+  "rule_registry": "ALPHA/REGISTRY/RULE_REGISTRY_ALPHA.json",
+  "current_index": "ALPHA/CURRENT/NAMESPACE_CURRENT_INDEX.json",
+  "traceability": "ALPHA/TRACE/BETA_TO_ALPHA_TRACEABILITY.json",
+  "resume_order": [
+    "read this state index",
+    "resolve namespace in semantic owner registry",
+    "read exact namespace CURRENT",
+    "read semantic owner",
+    "live-reverify volatile evidence required by claim",
+    "continue first authorized OPEN gate"
+  ],
+  "first_open_gate": "Alpha bootstrap validation: no-loss + owner/current uniqueness + boundary regression",
+  "blocked_until_human_approval": [
+    "canonical promotion",
+    "replacement of Beta authority",
+    "merge to main if promotion semantics are asserted"
+  ],
+  "forbidden_resume_sources": [
+    "LATEST filename ordering",
+    "HANDOFF prose as authority",
+    "HISTORY as CURRENT",
+    "memory-only state"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_BETA_TO_ALPHA_TRACEABILITY",
+  "beta_boundary": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "keep": [
+    {
+      "beta": "TAKY dual slogan + execution cycle",
+      "alpha": "TAKY_ALPHA_DRAFT_00 §0",
+      "status": "PRESERVED"
+    },
+    {
+      "beta": "single semantic owner",
+      "alpha": "SEMANTIC_OWNER_REGISTRY",
+      "status": "PRESERVED_STRENGTHENED"
+    },
+    {
+      "beta": "namespace logical CURRENT",
+      "alpha": "NAMESPACE_CURRENT_INDEX",
+      "status": "PRESERVED_STRENGTHENED"
+    },
+    {
+      "beta": "HANDOFF recovery only",
+      "alpha": "TAKY_ALPHA_DRAFT_00 §1D",
+      "status": "PRESERVED"
+    },
+    {
+      "beta": "HISTORY evidence only",
+      "alpha": "TAKY_ALPHA_DRAFT_00 §1C",
+      "status": "PRESERVED"
+    },
+    {
+      "beta": "CURRENT != OWNER",
+      "alpha": "TAKY_ALPHA_DRAFT_00 hard locks",
+      "status": "PRESERVED"
+    },
+    {
+      "beta": "CANDIDATE != MAIN",
+      "alpha": "TAKY_ALPHA_DRAFT_00 hard locks",
+      "status": "PRESERVED"
+    },
+    {
+      "beta": "claim levels separated",
+      "alpha": "TAKY_ALPHA_DRAFT_00 §6",
+      "status": "PRESERVED_STRENGTHENED"
+    }
+  ],
+  "fixes": [
+    {
+      "beta_defect": "volatile live state in durable owners",
+      "alpha_control": "OWNER registry forbids live PR/head state"
+    },
+    {
+      "beta_defect": "dated snapshots look live",
+      "alpha_control": "CURRENT freshness/reverify contract"
+    },
+    {
+      "beta_defect": "handoff/live mismatch",
+      "alpha_control": "HANDOFF recovery-only"
+    },
+    {
+      "beta_defect": "duplicate current narration",
+      "alpha_control": "one logical CURRENT per namespace"
+    }
+  ],
+  "no_loss_gate": "NO_BETA_KEEP_ITEM_MAY_BE_DROPPED_WITHOUT_EXPLICIT_USER_AUTHORITY",
+  "status": "TRACEABILITY_BASELINE_VALIDATED",
+  "migration_corrections": [
+    {
+      "id": "ALPHA-RULE-RECOVERY-001",
+      "status": "CLOSED",
+      "detail": "Recovered pre-existing TKY-CHECKPOINT-001 into Alpha registry."
+    },
+    {
+      "id": "ALPHA-OWNER-COVERAGE-001",
+      "status": "CLOSED",
+      "detail": "Added Work OS, Learning OS, shared technical, Hide and Snap namespaces/owners/CURRENT."
+    }
+  ]
+}

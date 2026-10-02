@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_NAMESPACE_CURRENT_INDEX",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "freshness_rule": "CURRENT must be reverified before live-state claims; stale CURRENT changes state confidence, not semantic ownership",
+  "unique_current_required": true,
+  "namespaces": {
+    "system": {
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "state": "ALPHA_MIGRATION",
+      "open": [
+        "trusted routing authority",
+        "hosted mandatory preflight interception",
+        "hosted automatic C2S interception",
+        "role/action/owner trust source"
+      ],
+      "hold": [
+        "canonical promotion",
+        "deployment"
+      ],
+      "live_verify": "TAKY main + exact PR/runtime evidence"
+    },
+    "learning_engine": {
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "state": "PRESERVE_BETA_CURRENT",
+      "open": [
+        "upstream auth provider binding",
+        "hosted endpoint binding"
+      ],
+      "hold": [
+        "retention estimator promotion",
+        "BKT promotion",
+        "production/deployment"
+      ],
+      "schedule_authority": false
+    },
+    "learning_data": {
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "state": "PRESERVE_BETA_CURRENT",
+      "open": [
+        "approved pretrained/local embedding artifact binding"
+      ],
+      "hold": [
+        "unapproved neural model promotion"
+      ],
+      "authority_transfer": false
+    },
+    "learning_family": {
+      "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "state": "PRESERVE_SEMANTICS",
+      "open": [
+        "Snap legacy LAF-INT-003 reconciliation"
+      ],
+      "hold": [
+        "device/production/deployment where unevidenced"
+      ]
+    },
+    "explorer_crew": {
+      "owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "state": "CANONICAL_SEMANTICS_CLOSED_RUNTIME_OPEN",
+      "open": [
+        "central runtime PR #191",
+        "Hide consumer promotion/reapplication",
+        "Snap consumer promotion/reapplication"
+      ],
+      "hold": [
+        "deployment"
+      ]
+    },
+    "ready_set": {
+      "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+      "state": "LIVE_MAIN_REVERIFY_REQUIRED_FOR_CURRENT_CLAIM",
+      "verified_main_at_freeze": "daed2ebd072061b870bfd0d2f2472dd344661bad",
+      "open": [
+        "project-owner OPEN items remain project-owned"
+      ],
+      "hold": [
+        "deployment unless separately authorized"
+      ]
+    },
+    "mobile_registry": {
+      "owner": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",
+      "state": "VOLATILE_SOURCE_INDEX",
+      "live_verify": "all app main heads + deploy evidence separately",
+      "hold": [
+        "deploy inference"
+      ]
+    },
+    "design_ui_assets": {
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "state": "GLOBAL_RULE_ACTIVE",
+      "open": [
+        "hosted cross-chat automatic loading remains unverified"
+      ],
+      "hold": [
+        "release inference without binding/render/device evidence"
+      ]
+    },
+    "work_os": {
+      "owner": "OS/WORK_OS.md",
+      "state": "SEMANTICS_PRESERVED",
+      "current": "ALPHA/CURRENT/work_os.json"
+    },
+    "learning_os": {
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "state": "SEMANTICS_PRESERVED",
+      "current": "ALPHA/CURRENT/learning_os.json"
+    },
+    "shared_technical": {
+      "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "state": "SEMANTIC_LIGHT_MECHANISM_LAYER",
+      "current": "ALPHA/CURRENT/shared_technical.json"
+    },
+    "hide_seek": {
+      "owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "state": "PROJECT_CURRENT_REQUIRES_LIVE_REVERIFY",
+      "current": "ALPHA/CURRENT/hide_seek.json"
+    },
+    "snap_pop": {
+      "owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "state": "PROJECT_CURRENT_REQUIRES_LIVE_REVERIFY",
+      "current": "ALPHA/CURRENT/snap_pop.json"
+    }
+  }
+}
