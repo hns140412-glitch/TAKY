@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_MULTI_SOURCE_MATCHER_CONTRACT_V1",
-  "version": "2026-10-02.1",
+  "version": "2026-10-02.2",
   "status": "CURRENT_FAIL_CLOSED",
   "purpose": "Allow the same badge identity to accept explicitly approved source producers from Ready & Set, Hide & Seek, Snap & Pop, or another approved app without weakening badge-specific evidence requirements.",
   "source_matcher_shape": {
@@ -30,6 +30,13 @@
   ],
   "current_verified_source_matchers": [
     {
+      "badge_id": "BDG-DRAFT-011",
+      "appId": "READY_SET",
+      "eventFamily": "SELF_CHOICE",
+      "behaviorCode": "SELF_CHOICE",
+      "sourceContractId": "READY_EXPLICIT_TASK_SWITCH_V1"
+    },
+    {
       "badge_id": "BDG-DRAFT-024",
       "appId": "SNAP_POP",
       "eventFamily": "HELP_USE",
@@ -51,6 +58,13 @@
       "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
     },
     {
+      "badge_id": "BDG-DRAFT-028",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_CORRECTION",
+      "behaviorCode": "ERROR_CORRECTED_COMPLETE",
+      "sourceContractId": "HIDE_RETRACE_CORRECTION_V1"
+    },
+    {
       "badge_id": "BDG-DRAFT-029",
       "appId": "SNAP_POP",
       "eventFamily": "RETRY",
@@ -63,6 +77,20 @@
       "eventFamily": "DEEP_THINKING",
       "behaviorCode": "DEEP_THINKING",
       "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-047",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "CARRY_OVER_COMPLETE",
+      "sourceContractId": "READY_CARRY_OVER_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-048",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "SELF_CHECK_COMPLETE",
+      "sourceContractId": "READY_WRAP_UP_SELF_CHECK_V1"
     },
     {
       "badge_id": "BDG-DRAFT-055",
@@ -86,5 +114,6 @@
       "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
     }
   ],
-  "current_active_badges": 0
+  "current_active_badges": 0,
+  "current_verified_badge_count": 12
 }
