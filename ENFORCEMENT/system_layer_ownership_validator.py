@@ -10,7 +10,8 @@ fail = []
 layers = data.get("layers") or {}
 required_layers = {
     "TAKY_CORE","SHARED_TECHNICAL_CAPABILITY","WORK_OS","LEARNING_OS",
-    "LEARNING_ENGINE_CORE","LEARNING_APP_FAMILY","READY_SET","HIDE_SEEK","SNAP_POP",
+    "LEARNING_DOMAIN_CORE","LEARNING_ENGINE_CORE","PLANNER_ENGINE","ASSIGNMENT_FACT_DOMAIN",
+    "LEARNING_APP_FAMILY","READY_SET","HIDE_SEEK","SNAP_POP",
     "WORK_DOMAIN_PROJECT","PLATFORM_ADAPTER"
 }
 if not required_layers.issubset(layers):
@@ -24,12 +25,28 @@ if "LEARNING_OS" not in ((layers.get("WORK_OS") or {}).get("sibling_of") or []):
     fail.append("WORK_LEARNING_SIBLING_LINK_MISSING")
 if "WORK_OS" not in ((layers.get("LEARNING_OS") or {}).get("sibling_of") or []):
     fail.append("LEARNING_WORK_SIBLING_LINK_MISSING")
-if (layers.get("LEARNING_ENGINE_CORE") or {}).get("parent") != "LEARNING_OS":
+if (layers.get("LEARNING_DOMAIN_CORE") or {}).get("parent") != "LEARNING_OS":
+    fail.append("LEARNING_DOMAIN_CORE_PARENT_INVALID")
+if (layers.get("PLANNER_ENGINE") or {}).get("parent") != "LEARNING_DOMAIN_CORE":
+    fail.append("PLANNER_ENGINE_PARENT_INVALID")
+if (layers.get("ASSIGNMENT_FACT_DOMAIN") or {}).get("parent") != "LEARNING_DOMAIN_CORE":
+    fail.append("ASSIGNMENT_FACT_DOMAIN_PARENT_INVALID")
+if (layers.get("LEARNING_ENGINE_CORE") or {}).get("parent") != "LEARNING_DOMAIN_CORE":
     fail.append("LEARNING_ENGINE_CORE_PARENT_INVALID")
 engine=layers.get("LEARNING_ENGINE_CORE") or {}
 for forbidden in ("dated scheduling or calendar placement","Ready session runtime","specialist app UI/interaction"):
     if forbidden not in (engine.get("does_not_own") or []):
         fail.append("LEARNING_ENGINE_CORE_BOUNDARY_MISSING:" + forbidden)
+planner=layers.get("PLANNER_ENGINE") or {}
+for owned in ("weekly/daily plan composition and DATED TODO authority","carry-over/reflow, plan-vs-actual, progress aggregation and next-plan forecast"):
+    if owned not in (planner.get("owns") or []):
+        fail.append("PLANNER_AUTHORITY_MISSING:" + owned)
+for excluded in ("Ready child-facing TODAY/Mission/Focus/Result UX","learner skill/retention interpretation"):
+    if excluded not in (planner.get("does_not_own") or []):
+        fail.append("PLANNER_BOUNDARY_MISSING:" + excluded)
+if (layers.get("READY_SET") or {}).get("parent") == "PLANNER_ENGINE":
+    fail.append("READY_MUST_NOT_BE_PLANNER_CHILD")
+
 if (layers.get("LEARNING_APP_FAMILY") or {}).get("parent") != "LEARNING_OS":
     fail.append("LEARNING_APP_FAMILY_PARENT_INVALID")
 
@@ -62,6 +79,8 @@ required_exact={
     "Work scheduling/task semantics":("DOMAIN_OWNED_SEMANTIC","WORK_OS"),
     "Learning schedule/planner/assignment semantics":("DOMAIN_OWNED_SEMANTIC","LEARNING_OS"),
     "learner modeling and pedagogical adaptation semantics":("DOMAIN_OWNED_SEMANTIC","LEARNING_ENGINE_CORE"),
+    "Planner dated allocation, carry-over and cross-app plan/progress meaning":("DOMAIN_OWNED_SEMANTIC","PLANNER_ENGINE"),
+    "Reviewed assignment/homework FACT semantics":("DOMAIN_OWNED_SEMANTIC","ASSIGNMENT_FACT_DOMAIN"),
 }
 for item,(cls,owner) in required_exact.items():
     x=by_item.get(item)
