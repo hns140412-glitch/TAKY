@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Review 11 proposed family semantics and the remaining 54 source-producer contracts. No badge activation before explicit approval and false-positive QA.",
+  "next_open": "Implement and QA the remaining 54 explicit source producers against the approved 25-family registry; activation remains separately gated and requires human approval.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -55,7 +55,7 @@
       "BDG-DRAFT-055",
       "BDG-DRAFT-060"
     ],
-    "status": "REVIEW_REQUIRED_NOT_ACTIVE"
+    "status": "SEMANTICS_APPROVED_PRODUCERS_REQUIRED"
   },
   "source_only_award_boundary": {
     "status": "PASS",
@@ -69,5 +69,15 @@
     ],
     "browser_runtime": "PASS",
     "pwa_recovery": "PASS"
+  },
+  "event_family_registry": {
+    "contract": "TAKY_BADGE_EVENT_FAMILY_REGISTRY_V1",
+    "family_count": 25,
+    "original_family_count": 14,
+    "approved_extension_count": 11,
+    "semantic_status": "HUMAN_APPROVED",
+    "observation_only": true,
+    "activation_effect": "NONE",
+    "validator": "PASS"
   }
 }
