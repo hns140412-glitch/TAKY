@@ -144,7 +144,7 @@
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
   },
   "cross_app_transport": {
-    "status": "OWNER_CANDIDATE_SELECTED_CORE_IMPLEMENTED_CI_PARTIAL_PASS",
+    "status": "OWNER_CANDIDATE_SELECTED_CORE_CI_PASS",
     "owner_candidate": "TAKY-MOBILE_SERVER_RUNTIME",
     "implementation_branch": "taky/badge-central-transport-core-20261002",
     "draft_pr": 2,
@@ -157,7 +157,7 @@
       "d929255ca7903e6ba6dcf67d4e380a380f4bd3e5",
       "0ba93b0e825f70a3ec4f466871886fab842a8df4"
     ],
-    "latest_ci": "IN_PROGRESS",
+    "latest_ci": "PASS",
     "implemented": [
       "EXACT_SOURCE_OBSERVATION_SCHEMA_VALIDATION",
       "ALLOWED_APP_VALIDATION",
@@ -175,6 +175,7 @@
     "production_ingest_endpoint_deployed": "NO",
     "live_ready_hide_snap_e2e_to_matcher": "OPEN",
     "activation_effect": "NONE",
-    "deployment": "HOLD"
+    "deployment": "HOLD",
+    "latest_ci_head": "52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7"
   }
 }
