@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "artifact": "TAKY_ALPHA_SEMANTIC_OWNER_REGISTRY",
+  "source_beta": "4af88d609d5b09fc673f342c77b7b6df33b9cf02",
+  "rule": "ONE_SEMANTIC_CONCERN_ONE_OWNER__OWNER_REGISTRY_DOES_NOT_EMBED_LIVE_STATE",
+  "classes": {
+    "OWNER": "durable semantic authority",
+    "SUPPORT": "machine-readable support; cannot create independent semantics",
+    "CURRENT": "namespace operational state; not semantic authority",
+    "EVIDENCE": "immutable/datetime proof; not semantic authority",
+    "HANDOFF": "recovery pointer only"
+  },
+  "system_owners": [
+    "MASTER/MASTER_LOGIC.md",
+    "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+    "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+    "MASTER/RECOVERY_FORENSICS_PROTOCOL.md",
+    "MASTER/HANDOFF_PROTOCOL.md",
+    "MASTER/FAILURE_TAXONOMY.md",
+    "MASTER/ENFORCEMENT_PROTOCOL.md",
+    "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
+    "MASTER/VALIDATION_RULES.md",
+    "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+    "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md",
+    "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md",
+    "MASTER/UI_REFERENCE_PROTOCOL.md",
+    "MASTER/CODEX_TASK_CONTRACT.md",
+    "MASTER/REVISION_GOVERNANCE.md",
+    "MASTER/TRACEABILITY_PROTOCOL.md",
+    "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md",
+    "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
+    "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+    "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+  ],
+  "namespaces": {
+    "system": {
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "current": "ALPHA/CURRENT/system.json"
+    },
+    "learning_engine": {
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "current": "ALPHA/CURRENT/learning_engine.json"
+    },
+    "learning_data": {
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "current": "ALPHA/CURRENT/learning_data.json",
+      "boundary": "DATA/INDEX operational state is separate from learner-model semantics"
+    },
+    "learning_family": {
+      "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "current": "ALPHA/CURRENT/learning_family.json"
+    },
+    "explorer_crew": {
+      "owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "current": "ALPHA/CURRENT/explorer_crew.json"
+    },
+    "ready_set": {
+      "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+      "current": "ALPHA/CURRENT/ready_set.json"
+    },
+    "mobile_registry": {
+      "owner": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",
+      "current": "ALPHA/CURRENT/mobile_registry.json"
+    },
+    "design_ui_assets": {
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "current": "ALPHA/CURRENT/design_ui_assets.json"
+    }
+  },
+  "support_only": [
+    "MASTER/MASTER_FILE_REGISTRY.json",
+    "MASTER/RULE_REGISTRY.json",
+    "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json"
+  ],
+  "forbidden": [
+    "HANDOFF_AS_OWNER",
+    "HISTORY_AS_OWNER",
+    "LATEST_FILENAME_AUTHORITY",
+    "CURRENT_AS_SEMANTIC_OWNER",
+    "LIVE_PR_HEAD_IN_OWNER_REGISTRY"
+  ]
+}
