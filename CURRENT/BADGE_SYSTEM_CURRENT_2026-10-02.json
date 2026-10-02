@@ -201,7 +201,7 @@
     "owner": "TAKY-MOBILE_SERVER_RUNTIME_CANDIDATE",
     "implementation_branch": "taky/badge-central-transport-core-20261002",
     "draft_pr": 2,
-    "head": "b42f7e2d0fdf220e552817c41629c5384034888b",
+    "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
     "latest_ci": "PASS",
     "storage": {
       "technology": "NETLIFY_BLOBS",
@@ -229,7 +229,8 @@
     },
     "live_ready_hide_snap_e2e_to_matcher": "OPEN",
     "activation_effect": "NONE",
-    "deployment": "HOLD"
+    "deployment": "HOLD",
+    "learning_engine_core_observation_support": "PASS_CODE_AND_CI_NOT_DEPLOYED"
   },
   "source_identity_transport_preparation": {
     "status": "PREPARED_NOT_LIVE",
@@ -468,6 +469,15 @@
     "source_contract_id": "LEARNING_VERIFIED_CALCULATION_CHECK_V1",
     "head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
     "enforcement_run_id": 36995170201,
-    "status": "PASS_OBSERVATION_ONLY_ACTIVE_HOLD"
+    "status": "PASS_OBSERVATION_ONLY_ACTIVE_HOLD",
+    "transport": {
+      "repository": "hns140412-glitch/TAKY-MOBILE",
+      "branch": "taky/badge-central-transport-core-20261002",
+      "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+      "ci_run_id": 36996083246,
+      "ci": "PASS",
+      "app_gate": "LEARNING_ENGINE_CORE_ALLOWED_FAIL_CLOSED",
+      "deployed": false
+    }
   }
 }
