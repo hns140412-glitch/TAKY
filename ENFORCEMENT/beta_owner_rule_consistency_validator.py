@@ -53,9 +53,11 @@ def main() -> int:
 
     for rid, owner in rule_owner.items():
         if owner.startswith("MASTER/"):
-            cls = files.get("files", {}).get(owner, {}).get("class")
-            if cls != "ACTIVE_OWNER":
-                failures.append(f"RULE_POINTS_TO_NON_ACTIVE_MASTER_OWNER:{rid}:{owner}:{cls}")
+            meta = files.get("files", {}).get(owner, {})
+            cls = meta.get("class")
+            allowed_legacy = cls == "LEGACY_OPTIONAL" and meta.get("default_activation") is False
+            if cls != "ACTIVE_OWNER" and not allowed_legacy:
+                failures.append(f"RULE_POINTS_TO_INVALID_MASTER_OWNER:{rid}:{owner}:{cls}")
 
     result = {
         "pass": not failures,
