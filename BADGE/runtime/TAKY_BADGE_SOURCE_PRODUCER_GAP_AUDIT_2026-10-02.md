@@ -125,6 +125,13 @@ Decision:
 
 Classification is implementation planning only. Counts remain 44/60 QA PASS, 16/60 OPEN, active 0/60.
 
+## Pending implementation validation
+- BDG-DRAFT-038 DEEP_THINKING_PERSISTENCE: implemented on Snap-Pop draft branch `taky/badge-catalog-ui-binding-20261001`.
+- Snap-Pop validation cutoff: `a0dcf10349a3bac6a1fd1d42aa5889ea55ac7b4f`.
+- Syntax parse: PASS for `interaction-support-controller.js` and `writing-flow-controller.js`.
+- Runtime/CI evidence: PENDING; therefore producer QA remains OPEN and counts remain 44/60 PASS, 16/60 OPEN.
+- No activation, merge, Netlify, or deployment effect.
+
 ## Global false-positive guard
 Never use as sufficient evidence:
 - elapsed or focus duration
