@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_V1",
+  "as_of": "2026-10-02",
+  "badge_id": "BDG-DRAFT-054",
+  "behavior": "IMPROVEMENT",
+  "state": "CODE_READY_TRUSTED_TRANSPORT_OPEN",
+  "qa_pass_promoted": false,
+  "source_contract_id": "HIDE_VERIFIED_SAME_TARGET_IMPROVEMENT_V1",
+  "learning_comparison_contract": "TAKY_LEARNING_BADGE_IMPROVEMENT_COMPARISON_V1",
+  "taky_head": "b6fc510100915b44b655dc60bcc55855d97abc1e",
+  "hide_head": "038c8f0aa3b2bee1e3ee00b4acd1f320d2210a40",
+  "validation": {
+    "local_learning_comparator": "PASS",
+    "local_hide_contract": "PASS",
+    "hide_ci_runs": [
+      36980461379,
+      36980461374
+    ],
+    "hide_ci": "PASS_2_OF_2",
+    "taky_ci_runs": [
+      36980466851,
+      36980466824
+    ],
+    "taky_ci": "PASS_2_OF_2"
+  },
+  "verified_requirements": [
+    "same-target prior verified failure",
+    "same-target current verified success",
+    "verification receipt references",
+    "explicit child action refs"
+  ],
+  "remaining_blocker": "trusted live transport from Learning Engine comparison authority into Hide source runtime is not deployed/bound",
+  "forbidden": [
+    "browser self-asserted comparison",
+    "single score delta",
+    "unsigned comparison object",
+    "activation before trusted transport"
+  ],
+  "activation": "HOLD",
+  "deployment": "HOLD"
+}

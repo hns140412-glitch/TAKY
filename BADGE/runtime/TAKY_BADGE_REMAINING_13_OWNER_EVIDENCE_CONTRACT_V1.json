@@ -205,7 +205,8 @@
       ],
       "implementation_prerequisite": "Learning Engine recovery-profile/comparator output must be bridged to Hide as observation-only source; single score delta forbidden",
       "ui_delta": "NONE",
-      "status": "READY_FOR_BRIDGE_CONTRACT"
+      "status": "CODE_READY_TRUSTED_TRANSPORT_OPEN",
+      "implementation_evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json"
     }
   ]
 }

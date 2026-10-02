@@ -327,5 +327,14 @@
     "human_gate_badge": "BDG-DRAFT-035",
     "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
     "activation_effect": "NONE"
+  },
+  "badge_054_improvement_bridge": {
+    "status": "CODE_READY_TRUSTED_TRANSPORT_OPEN",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json",
+    "taky_head": "b6fc510100915b44b655dc60bcc55855d97abc1e",
+    "hide_head": "038c8f0aa3b2bee1e3ee00b4acd1f320d2210a40",
+    "ci": "PASS_TAKY_2_OF_2_HIDE_2_OF_2",
+    "qa_pass_promoted": false,
+    "activation": "HOLD"
   }
 }
