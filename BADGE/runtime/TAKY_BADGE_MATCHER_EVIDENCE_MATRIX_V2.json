@@ -106,9 +106,9 @@
       36975984087,
       36975984041
     ],
-    "snap_pop_pr_head": "08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a",
-    "snap_pop_deep_thinking_persistence": "PASS_TARGETED_LOCAL",
-    "snap_pop_full_closure": "BLOCKED_PREEXISTING_CATALOG_ACTIVATION_GUARD"
+    "snap_pop_pr_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+    "snap_pop_deep_thinking_persistence": "PASS",
+    "snap_pop_full_closure": "PASS_73_OF_73_LOCAL"
   },
   "invariants": [
     "No badge is activated by this matrix.",
