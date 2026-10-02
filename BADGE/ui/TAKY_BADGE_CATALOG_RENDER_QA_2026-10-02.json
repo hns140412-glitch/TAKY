@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_BADGE_CATALOG_RENDER_QA_V1",
-  "version": "2026-10-02.3",
+  "version": "2026-10-02.4",
   "status": "PASS",
   "viewport": {
     "width_css_px": 390,
@@ -139,6 +139,58 @@
     },
     "queue_contract": "PASS",
     "horizontal_overflow": false,
-    "note": "QA invoked the presentation runtime directly and did not grant badges or mutate production/user award history."
+    "note": "QA invoked the presentation runtime directly and did not grant badges or mutate production/user award history.",
+    "responsive": {
+      "320x568": {
+        "card_width": 284,
+        "card_height": 523,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "390x844": {
+        "card_width": 354,
+        "card_height": 550,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "430x932": {
+        "card_width": 390,
+        "card_height": 550,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "result": "PASS"
+    },
+    "queue": {
+      "tested_sequence": [
+        "BDG-DRAFT-001",
+        "BDG-DRAFT-002",
+        "BDG-DRAFT-003"
+      ],
+      "observed_queue_depth": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "order_preserved": true,
+      "final_state_closed": true,
+      "result": "PASS"
+    },
+    "mutation_guard": {
+      "qa_storage_before_equals_after": true,
+      "award_or_economy_write_from_presentation": false,
+      "result": "PASS"
+    },
+    "reduced_motion": {
+      "emulated_prefers_reduced_motion": "reduce",
+      "card_animation": "none",
+      "art_animation": "none",
+      "halo_animation": "none",
+      "result": "PASS"
+    }
   }
 }
