@@ -8,11 +8,11 @@
   "acquisition_presentation": "PASS",
   "working_catalog_metadata_sync": "PASS_60_OF_60",
   "award_runtime_activation": "HOLD",
-  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 56/60; remaining 4 require exact source evidence or explicit authority. No badge is active.",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 57/60; remaining 3 require exact source evidence or trusted transport. No badge is active.",
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Remaining 4: 002 alarm authority event, 009 before-prompt ledger path, 035 source-scope authority gate, 054 trusted transport HOLD. active remains 0/60; deployment HOLD.",
+  "next_open": "Remaining 3: 002 alarm authority event, 009 before-prompt ledger path, 054 trusted transport HOLD. active remains 0/60; deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,8 +44,8 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 56,
-    "source_producer_required": 4,
+    "source_producer_qa_pass": 57,
+    "source_producer_required": 3,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-001",
@@ -79,6 +79,7 @@
       "BDG-DRAFT-032",
       "BDG-DRAFT-033",
       "BDG-DRAFT-034",
+      "BDG-DRAFT-035",
       "BDG-DRAFT-036",
       "BDG-DRAFT-037",
       "BDG-DRAFT-038",
@@ -103,7 +104,7 @@
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SOURCE_PRODUCER_QA_56_OF_60_ACTIVE_HOLD",
+    "status": "SOURCE_PRODUCER_QA_57_OF_60_ACTIVE_HOLD",
     "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
@@ -186,13 +187,13 @@
     "activation_effect": "NONE"
   },
   "remaining_producer_gap_audit": {
-    "status": "PASS_RECLASSIFIED_4_OPEN_EASY_FIRST",
-    "source_producer_qa_pass": 56,
-    "remaining": 4,
+    "status": "PASS_RECLASSIFIED_3_OPEN_EASY_FIRST",
+    "source_producer_qa_pass": 57,
+    "remaining": 3,
     "real_life_or_authority_signal_missing": 2,
     "focus_immersion_semantics_unsafe": 0,
-    "learning_problem_evidence_needed": 2,
-    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_4_V1.json",
+    "learning_problem_evidence_needed": 1,
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_3_V1.json",
     "invariant": "First acquisition uses minimum direct explicit evidence; no weak passive inference."
   },
   "cross_app_transport": {
@@ -461,5 +462,12 @@
     "pwa_offline_shell": "PASS",
     "first_acquisition": "explicit child writing continuation + same-exploration verified completion; no duration/silence qualification",
     "activation": "HOLD"
+  },
+  "learning_calculation_check": {
+    "owner": "LEARNING_ENGINE_CORE",
+    "source_contract_id": "LEARNING_VERIFIED_CALCULATION_CHECK_V1",
+    "head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
+    "enforcement_run_id": 36995170201,
+    "status": "PASS_OBSERVATION_ONLY_ACTIVE_HOLD"
   }
 }
