@@ -11,6 +11,9 @@
 - SOURCE_ID: LANGUAGE_TATOEBA_TEXT_2026
 - SOURCE_REF: INDEX:LANGUAGE_TATOEBA_TEXT_2026
 - AXIS_STATE: CLOSED
+- CURRENT_SYNC: CLOSED
+- CANONICAL_RUNTIME_POLICY_SYNC: CLOSED
+- FINAL_MAIN_HEAD: 6258b0a6c803381e7466d09fe05b26a64d6e62fb
 
 ## CLOSED
 1. Tatoeba v1 read-only transport implemented.
@@ -35,6 +38,12 @@
    - TAKY Mining Indexing Learning Integration run #368 = SUCCESS
    - TAKY Tatoeba Live Provider Validation run #10 = SUCCESS
 15. Post-merge validation evidence gap is CLOSED.
+16. PR #199 synchronized Tatoeba state into CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json and CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json without changing the promoted 679-source authority counts.
+17. PR #199 updated MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json with source-specific Tatoeba Hide/Snap permissions, provenance requirements and fail-closed authority guards.
+18. OS/LEARNING_ENGINE_CORE.md was intentionally not changed because Learning Engine Core ownership and planner/app boundaries did not change.
+19. PR #199 merged to main at 6258b0a6c803381e7466d09fe05b26a64d6e62fb.
+20. Main-push validation after PR #199: TAKY Mining Indexing Learning Integration run #371 = SUCCESS; TAKY Enforcement Replay run #2929 = SUCCESS.
+21. Tatoeba CURRENT/Canonical synchronization is CLOSED.
 
 ## INVARIANTS / AUTHORITY GUARDS
 - Tatoeba example sentence != normative usage authority.
@@ -62,7 +71,7 @@
 - Any interpretation of Tatoeba as curriculum membership, grade alignment, frequency authority, normative authority, learner mastery, or causal learning-effectiveness evidence.
 
 ## NEXT OPEN
-- NONE for this Tatoeba learning-evidence axis.
+- NONE for this Tatoeba learning-evidence axis or its CURRENT/Canonical synchronization.
 - Reopen only if scope changes, a regression fails, authority boundaries change, or CURRENT/Canonical/app integration/deployment is separately approved.
 
 ## RESUME COMMAND
