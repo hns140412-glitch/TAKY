@@ -81,3 +81,12 @@ HOLD. No main merge. No Netlify deployment.
 - Remaining-producer gap audit is CLOSED as classification/evidence work.
 - Runtime producer coverage itself remains OPEN: 15/60 PASS, 45/60 remaining.
 - active remains 0/60; deployment remains HOLD.
+
+
+## 2026-10-02 Central Transport Owner Audit
+- Added `BADGE/runtime/TAKY_BADGE_CROSS_APP_TRANSPORT_BOUNDARY_V1.md` and `BADGE/runtime/TAKY_BADGE_CENTRAL_TRANSPORT_OWNER_AUDIT_2026-10-02.md`.
+- Repository audit result: no existing repo is currently proven as the central badge observation transport runtime owner.
+- TAKY remains governance/contracts; Ready/Hide/Snap remain source producers; TAKY-MOBILE remains command/handoff MVP; WORK-OS remains routing governance.
+- Central transport runtime stays OPEN/UNASSIGNED rather than being arbitrarily attached to an app.
+- Required implementation order is locked: owner -> schema validator -> immutable ledger -> dedupe/conflict fail-closed -> exact matcher adapter -> Ready/Hide/Snap E2E -> separate activation review.
+- active 0/60 and deployment HOLD unchanged.
