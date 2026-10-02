@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Continue explicit source-producer implementation/QA for remaining 45 badges. Preserve fail-closed source-only award boundary; active stays 0/60.",
+  "next_open": "Resolve remaining 45 by adding or locating explicit child-authored source events only; prioritize feature-backed producers, then false-positive + dedupe/reaward QA. Keep active 0/60 and deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -131,5 +131,16 @@
     "validation": "PASS",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE"
+  },
+  "remaining_producer_gap_audit": {
+    "status": "PASS_CLASSIFIED_NO_NEW_PRODUCER",
+    "source_producer_qa_pass": 15,
+    "remaining": 45,
+    "current_signal_insufficient": 29,
+    "explicit_ui_or_source_event_needed": 13,
+    "existing_action_review_needed": 3,
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md",
+    "audit_commit": "fbfbba9e17c6854d206eba3afb59a0faf6fa0b97",
+    "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
   }
 }
