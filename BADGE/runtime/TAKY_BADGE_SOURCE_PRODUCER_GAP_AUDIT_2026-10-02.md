@@ -2,154 +2,79 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 44/60
-- remaining: 16/60
+- source producer QA PASS: 46/60
+- remaining: 14/60
 - active: 0/60
 - deployment: HOLD
 - Ready validation cutoff: `5203baf88c239de4c468785881245c8f0e6db522`
-- Ready Runtime E2E: 100/100 PASS
-- Ready workflow gates: 10/10 PASS
+- Ready Runtime E2E: PASS / workflow gates 10/10
+- Hide validation cutoff: `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3`
+- Hide CI: 2/2 PASS — runs 36977546753, 36977546746
+- Snap-Pop validation cutoff: `9f8e970ea76d85e4ae04f292367524db184cc61a`
+- Snap-Pop BDG-DRAFT-038 targeted validation: PASS
+- badge activation / economy authority: NONE
 
-## Newly closed by exact source evidence
-The following badges now have exact source tuples backed by Ready Runtime E2E. Producer QA PASS does **not** activate a badge.
+## Closed by exact source evidence
+Ready exact-evidence PASS:
+003, 004, 006, 008, 012, 014, 015, 016, 017, 020, 022, 023, 032, 033, 034, 040, 043, 044, 045, 046, 049, 050, 051, 052, 053, 056, 057.
 
-003 MICRO_TASK_COMPLETE — READY_PRE_MEAL_MICRO_COMPLETE_V1
-004 POST_MEAL_RESTART — READY_POST_MEAL_RESTART_V1
-006 SELF_START_IN_FREE_WINDOW — READY_FREE_WINDOW_SELF_START_V1
-008 VOLUNTARY_EXTRA_AFTER_REQUIRED_COMPLETE — READY_VOLUNTARY_EXTRA_CHOICE_V1
-012 SELF_PLANNED_SEQUENCE — READY_CHILD_SEQUENCE_PLAN_V1
-014 FAST_COMPLETE_WITH_CHECK — READY_FAST_COMPLETE_WITH_CHECK_V1
-015 ACCURACY_COMPLETE — READY_CAREFUL_OVERRUN_COMPLETE_V1
-016 CHILD_CHUNKED_TASK_COMPLETE — READY_CHILD_CHUNKED_TASK_V1
-017 PERSIST_TO_COMPLETE — READY_PERSIST_TO_COMPLETE_V1
-020 VOLUNTARY_NEXT_TASK_CONTINUE — READY_VOLUNTARY_FLOW_CONTINUATION_V1
-022 FOCUS_RETURN — READY_EXPLICIT_FOCUS_RETURN_V1
-023 SELF_NOTICE_RETURN — READY_EXPLICIT_SELF_NOTICE_RETURN_V1
-032 CONCEPT_UNDERSTANDING — READY_CHILD_CONCEPT_EXPLANATION_V1
-033 REFLECT_BEFORE_PROCEED — READY_EXPLICIT_REFLECTION_V1
-034 REREAD_CHECK — READY_EXPLICIT_REREAD_CHECK_V1
-040 STOP_AT_RIGHT_TIME — READY_EXPLICIT_STOP_AT_RIGHT_TIME_V1
-043 BREAK_RETURN — READY_SCHEDULED_BREAK_RETURN_V1
-044 TIMER_RETURN — READY_BREAK_TIMER_RETURN_V1
-045 DISTRACTION_RESISTANCE — READY_EXPLICIT_DISTRACTION_RESISTANCE_V1
-046 TASK_RESTART — READY_EXPLICIT_TASK_RESTART_V1
-049 MICRO_TASK_COMPLETE — READY_EXPLICIT_MICRO_TASK_COMPLETE_V1
-050 PRIORITIZE_HARD — READY_CHILD_PRIORITY_CHOICE_V1
-051 WARM_START — READY_CHILD_PRIORITY_CHOICE_V1
-052 STRATEGY_SWITCH — READY_CHILD_STRATEGY_SWITCH_V1
-053 SELF_EXPLANATION — READY_CHILD_SELF_EXPLANATION_V1
-056 CHILD_PLAN_ADAPTATION — READY_CHILD_REPLAN_AFTER_CHANGE_V1
-057 START_DESPITE_CONDITION — READY_START_DESPITE_CONDITION_V1
+Additional exact-evidence closure:
+- 013 SINGLE_TASK_FOCUS — `READY_EXPLICIT_SINGLE_TASK_FOCUS_V1`; explicit child focus commitment only.
+- 041 MEANINGFUL_OVERRUN — Planner estimate overrun + child-authored meaning artifact + completion.
+- 036 CORRECTION_COURAGE — `HIDE_RETRACE_CORRECTION_COURAGE_V1`; explicit RETRACE action + same-word rejected-letter artifact + subsequent exact-match corrected artifact. Hardened at Hide head `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3`, CI 2/2 PASS.
+- 038 DEEP_THINKING_PERSISTENCE — `SNAP_POP_REFLECTION_TO_COMPLETION_V1`; explicit child reflection artifact bound to the same exploration completionEventId/recordId. Verified at Snap-Pop head `9f8e970ea76d85e4ae04f292367524db184cc61a`.
 
-## Remaining OPEN — 16
+Producer QA PASS does not activate any badge.
+
+## Remaining OPEN — 14
 
 ### A. Real-life / authority signal missing — 6
-001 EARLY_START
-- needs real wake/start evidence; schedule or clock alone is insufficient.
+- 001 EARLY_START — trusted wake/start boundary + explicit child start required.
+- 002 ALARM_RESPONSE — actual alarm-fired/before-alarm boundary + explicit child action required.
+- 005 PREPARATION_COMPLETE — explicit preparation checklist completion + actual subsequent start required.
+- 007 TIME_CREATION_EXTRA — child-created/selected extra time outside plan + execution required.
+- 009 BEFORE_PROMPT — authoritative prompt/request ledger boundary + explicit child initiation required.
+- 010 RESPONSIVE_START — named prompt event + feature-declared child response/start linkage required.
 
-002 ALARM_RESPONSE
-- needs actual alarm-fired vs child-before-alarm evidence.
-
-005 PREPARATION_COMPLETE
-- needs explicit preparation checklist completion plus actual start.
-
-007 TIME_CREATION_EXTRA
-- needs child-created/selected extra time outside the existing plan plus execution.
-
-009 BEFORE_PROMPT
-- cannot infer absence of a parent prompt from missing logs; needs authoritative prompt/request boundary.
-
-010 RESPONSIVE_START
-- cannot use elapsed-time threshold; needs feature-declared response to a named prompt.
-
-### B. Focus / immersion semantics still unsafe — 3
-018 LONG_FOCUS
-019 QUIET_IMMERSION
-042 FLOW_IMMERSION
-
-Decision:
-- do not derive from elapsed time, screen stillness, silence, app foreground duration, or AI attention inference.
-- require explicit child-authored or feature-declared immersion evidence with a distinct behavior code.
-
-### C. Strong learning/problem evidence needed — 7
-030 ROOT_CAUSE_FOUND
-- current free-text root-cause note is not yet bound to a concrete error artifact.
-
-031 PERSISTENT_BREAKTHROUGH
-- requires identifiable blocked-before + solved-after evidence.
-
-035 CALCULATION_CHECK
-- requires domain-specific calculation error/check + corrected result linkage.
-
-036 CORRECTION_COURAGE
-- requires explicit child correction action distinguishable from generic retry/error correction.
-
-038 DEEP_THINKING_PERSISTENCE
-- requires child-authored reasoning artifact plus verified outcome/connection.
-
-039 BLOCK_RESOLVED
-- requires blocked-before + strategy/route change + solved-after evidence.
-
-054 IMPROVEMENT
-- requires same-target prior/current evidence and Learning Engine/equivalent verified comparison; single score delta is forbidden.
-
-
-## Additional closure
-013 SINGLE_TASK_FOCUS is QA PASS via explicit child focus commitment (`READY_EXPLICIT_SINGLE_TASK_FOCUS_V1`); passive duration/silence remains invalid.
-
-041 MEANINGFUL_OVERRUN is now QA PASS because the exact source contract requires all three: Planner estimate overrun + child-authored meaning artifact + completion. This remains distinct from generic persistence and accuracy producers.
-
-## Implementation classification — no status promotion
-
-### Existing runtime/data extension candidate — no new child UI required
-- 038 DEEP_THINKING_PERSISTENCE: reuse Snap `SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1` reflectionArtifactRef; add verified outcome/connection binding before a distinct producer can exist.
-- 054 IMPROVEMENT: reuse same-target evidence plus Learning Engine/equivalent comparison; requires cross-source comparison producer, not a new child-facing interaction.
-
-### Existing interaction can be extended, but stronger explicit binding/action is still required
-- 030 ROOT_CAUSE_FOUND: bind child-authored cause to a concrete error artifact; current free-text/root-cause semantics alone are insufficient.
-- 031 PERSISTENT_BREAKTHROUGH: existing before/after learning artifacts can contribute, but an explicit blocked-before state and continued reasoning link are still missing.
-- 035 CALCULATION_CHECK: existing correction artifacts can contribute, but calculation-domain identity + explicit check must be added.
-- 036 CORRECTION_COURAGE: existing self-correction can contribute, but a distinct child correction intent/action is required to avoid duplicating retry/error-correction badges.
-- 039 BLOCK_RESOLVED: existing strategy/correction evidence can contribute, but explicit blocked-before + resolution linkage is required.
-
-### New explicit real-world / child-declared signal required
-- 001 EARLY_START
-- 002 ALARM_RESPONSE
-- 005 PREPARATION_COMPLETE
-- 007 TIME_CREATION_EXTRA
-- 009 BEFORE_PROMPT
-- 010 RESPONSIVE_START
+### B. Focus / immersion semantics unsafe from passive telemetry — 3
 - 018 LONG_FOCUS
 - 019 QUIET_IMMERSION
 - 042 FLOW_IMMERSION
 
-Classification is implementation planning only. Counts remain 44/60 QA PASS, 16/60 OPEN, active 0/60.
+These must not be derived from elapsed time, foreground duration, silence, screen stillness, attempt count, score, or AI attention inference. Explicit child-authored or feature-declared evidence is required.
 
-## Pending implementation validation
-- BDG-DRAFT-038 DEEP_THINKING_PERSISTENCE: implemented on Snap-Pop draft branch `taky/badge-catalog-ui-binding-20261001`.
-- Snap-Pop validation cutoff: `a0dcf10349a3bac6a1fd1d42aa5889ea55ac7b4f`.
-- Syntax parse: PASS for `interaction-support-controller.js` and `writing-flow-controller.js`.
-- Runtime/CI evidence: PENDING; therefore producer QA remains OPEN and counts remain 44/60 PASS, 16/60 OPEN.
-- No activation, merge, Netlify, or deployment effect.
+### C. Strong learning/problem evidence still needed — 5
+- 030 ROOT_CAUSE_FOUND — concrete error artifact + child-authored root-cause explanation/selection required.
+- 031 PERSISTENT_BREAKTHROUGH — explicit blocked-before artifact + continued reasoning/action + verified solved-after artifact required.
+- 035 CALCULATION_CHECK — calculation-domain before/after correction artifact + explicit child check required.
+- 039 BLOCK_RESOLVED — blocked-before artifact + explicit strategy/route change + solved-after artifact required.
+- 054 IMPROVEMENT — same-target prior/current evidence + Learning Engine/equivalent verified comparison required; single score delta forbidden.
+
+## Implementation classification
+- Existing data/runtime extension candidate without new child UI: 054, but exact comparison provenance is still missing.
+- Existing interaction may be extended but stronger binding/action is required: 030, 031, 035, 039.
+- New explicit real-world or child-declared signal required: 001, 002, 005, 007, 009, 010, 018, 019, 042.
+- 036 and 038 are CLOSED/PASS and must not be re-opened without contradictory new evidence.
 
 ## Global false-positive guard
 Never use as sufficient evidence:
-- elapsed or focus duration
-- score/grade/mastery alone
+- elapsed/focus duration
+- score, grade, mastery alone
 - silence or screen stillness
 - attempt count
 - AI/model inference
 - parent guess
-- lack of recorded parent interaction
+- missing parent interaction logs
 - generic completion
 - generic task selection
 - generic writing text
 
 ## Invariants
-- 60 badge IDs/names/core descriptions/nature taxonomy/Visual IDs/Asset Slot IDs/SHA unchanged
-- historical trigger prose remains descriptive, not executable
-- source-only award boundary unchanged
-- producer QA PASS != activation approval
-- active remains 0/60
-- no main merge
-- no Netlify deployment
+- 60 badge IDs/names/core descriptions/nature taxonomy/Visual IDs/Asset Slot IDs/SHA unchanged.
+- Historical trigger prose remains descriptive, not executable.
+- Source-only award boundary unchanged.
+- Producer QA PASS != activation approval.
+- active remains 0/60.
+- no main merge.
+- no Netlify.
+- no production deployment.
