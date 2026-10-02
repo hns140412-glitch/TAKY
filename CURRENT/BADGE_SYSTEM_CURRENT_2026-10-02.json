@@ -267,13 +267,12 @@
     "repo": "hns140412-glitch/Snap-Pop",
     "draft_pr": 20,
     "branch": "taky/badge-catalog-ui-binding-20261001",
-    "head": "08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a",
+    "head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
     "newly_verified_badge": "BDG-DRAFT-038",
     "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
     "targeted_validation": "PASS",
     "source_only_award_boundary": "PASS",
-    "full_branch_closure": "BLOCKED_BY_PREEXISTING_CATALOG_ACTIVATION_GUARD",
-    "preexisting_failure_reproduced_at": "023b1cf2890ab2268dcfe6739e31001a26950606",
+    "full_branch_closure": "PASS_73_OF_73_LOCAL",
     "activation": "HOLD"
   }
 }
