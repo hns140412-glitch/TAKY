@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Review/approve proposed event-family extensions and per-badge matcher/evidence contracts; then implement source producer contracts and false-positive tests before any activation.",
+  "next_open": "Human review of matcher/evidence semantics for remaining 55 source producers; then implement explicit feature-declared source producers without activating awards.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -34,5 +34,26 @@
     "proposal_status": "REVIEW_REQUIRED_NOT_ACTIVE",
     "guard_status": "FAIL_CLOSED_ENFORCED",
     "runtime_test": "PASS"
+  },
+  "source_observation_contract": {
+    "contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
+    "family_count": 25,
+    "status": "PASS_OBSERVATION_ONLY",
+    "award_authority": false,
+    "economy_authority": false
+  },
+  "matcher_evidence_matrix": {
+    "total": 60,
+    "source_producer_qa_pass": 5,
+    "source_producer_required": 55,
+    "active": 0,
+    "verified_badges": [
+      "BDG-DRAFT-025",
+      "BDG-DRAFT-026",
+      "BDG-DRAFT-037",
+      "BDG-DRAFT-055",
+      "BDG-DRAFT-060"
+    ],
+    "status": "REVIEW_REQUIRED_NOT_ACTIVE"
   }
 }
