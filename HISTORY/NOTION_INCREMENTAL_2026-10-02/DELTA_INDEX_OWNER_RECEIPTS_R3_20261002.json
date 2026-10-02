@@ -1,0 +1,74 @@
+{
+  "schema": "TAKY_INDEX_OWNER_DELTA_RECEIPTS_R3_V1",
+  "generated_at": "2026-10-02T06:35:00.593799+00:00",
+  "base_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+  "base_index_drive_id": "13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+  "delta_version": "V6+DELTA_20261002_R3",
+  "reviewed_count": 2,
+  "receipts": [
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "index_version": "V6+DELTA_20261002_R3",
+      "source_family": "GOOGLE_AI_TOOLS_15_COMMUNITY_ROUNDUP",
+      "source_type": "TIME_SENSITIVE_TOOL_DISCOVERY_REFERENCE",
+      "authority_class": "COMMUNITY_CURATED_TIME_SENSITIVE_REFERENCE",
+      "domain": "reference",
+      "consumer": "REFERENCE_DISCOVERY",
+      "domain_use_authorized": true,
+      "learning_use_authorized": false,
+      "canonical_url": "https://juniper-clef-bf9.notion.site/AI-15-3e4fa2be260d81c594e0ee4eecd9bbae",
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "related_relations": [
+        "RELATED_TO:AI_TOOLING_AND_DESIGN_WORKFLOW_REFERENCES"
+      ],
+      "review_evidence_refs": [
+        "DRIVE_V6_ID:13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+        "V6_TERM_CHECK:SOURCE_URL_TITLE_CORE_SERVICE_NAMES_NOT_FOUND",
+        "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json"
+      ],
+      "guards": [
+        "REFERENCE_ONLY",
+        "TIME_SENSITIVE_STATUS_MUST_BE_REVERIFIED_AT_USE",
+        "COMMUNITY_CURATED != OFFICIAL_TOOL_STATUS",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "index_version": "V6+DELTA_20261002_R3",
+      "source_family": "FREE_DOMAIN_PROVIDER_ROUNDUP",
+      "source_type": "DEV_INFRA_REFERENCE",
+      "authority_class": "COMMUNITY_CURATED_REFERENCE",
+      "domain": "reference",
+      "consumer": "DEV_INFRA_REFERENCE",
+      "domain_use_authorized": true,
+      "learning_use_authorized": false,
+      "canonical_url": "https://navig.notion.site/TOP-5-3d86d83666b3805194a9fc37c42e5283",
+      "duplicate_decision": "NO_EXACT_DUPLICATE_EVIDENCE",
+      "version_decision": "NO_VERSION_EVIDENCE",
+      "related_relations": [],
+      "review_evidence_refs": [
+        "DRIVE_V6_ID:13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+        "V6_TERM_CHECK:SOURCE_URL_TITLE_PROVIDER_NAMES_NOT_FOUND",
+        "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json"
+      ],
+      "guards": [
+        "REFERENCE_ONLY",
+        "NO_DEPLOYMENT_AUTHORIZATION",
+        "PROVIDER_TERMS_AVAILABILITY_MUST_BE_REVERIFIED_AT_USE",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    }
+  ],
+  "canonical_full_index_mutated": false,
+  "learning_applied": false
+}

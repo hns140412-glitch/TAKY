@@ -30,10 +30,32 @@
 ## Open
 - Do not invent missing Learning provenance. Re-open only when independent evidence satisfies the policy registry.
 - REVIEW queue is closed for this delta.
-- HOLD: 2 media-only sources require reacquisition; 1 vehicle-maintenance source remains out-of-scope HOLD.
-- Acquire/inspect the 2 media-only sources only when fresh source media becomes available.
+- Former media-only HOLD 2 were browser-recovered into R3 REVIEW; 1 vehicle-maintenance source remains out-of-scope HOLD.
+- R3 REVIEW 2 resolved against canonical V6: no exact duplicate evidence; both are now INDEXED reference-only under V6+DELTA_20261002_R3.
 - Full canonical Source Index promotion remains separate; no silent overwrite of V6.
 - Deployment and Netlify remain HOLD.
+
+## R3 recovery update
+- Browser render recovered substantive content for both former media-only HOLD sources.
+- AI-15 page -> REFERENCE_TOOL_DISCOVERY, community-curated/time-sensitive reference only; Learning use disabled.
+- Free-domain TOP 5 page -> DEV_INFRA_REFERENCE, community-curated reference only; deployment authorization disabled.
+- Notion later returned intermittent challenge pages, so evidence is marked partial/non-stable where applicable.
+- Canonical Source Index V6 was read directly from connected Google Drive; source URL/title/core names were absent, so no exact duplicate evidence was found. Both are INDEXED reference-only under V6+DELTA_20261002_R3.
+- Durable evidence: HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json and DELTA_INDEX_OWNER_RECEIPTS_R3_20261002.json.
+
+## Latest operational state
+- PR #203 merged to main: `a6703e1e6935fe8d1e7f8d2f717dd6a7ed8de9b5`.
+- PR #204 merged to main: `4af88d609d5b09fc673f342c77b7b6df33b9cf02`.
+- Daily 08:00 KST automation enabled: deep-mine all TAKY reference sites for only new/materially changed content.
+- Automation scope: new posts + new categories + linked docs + resource libraries + guides + attachments/subpages; dedupe by URL/hash/title/body similarity; then Mining -> duplicate/version decision -> Indexing candidate -> domain routing.
+- Existing/previously reviewed material must not be reprocessed or re-reported.
+- Paid API / usage-billed path prohibited without separate user approval. Netlify/deployment remain HOLD.
+
+## Next OPEN sequence
+1. Keep the vehicle-maintenance source as out-of-scope HOLD.
+2. Keep the two Learning references fail-closed until independent provenance satisfies policy.
+3. Reverify time-sensitive tool/provider status against first-party sources only when these references are actually used.
+4. Continue only with new/materially changed reference-site discoveries; do not repeat previously mined evidence.
 
 ## Resume command
 `최신 TAKY 기준으로 신규자료 파이프라인 재개`
