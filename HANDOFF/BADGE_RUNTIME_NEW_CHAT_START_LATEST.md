@@ -3,7 +3,7 @@ Date: 2026-10-02
 Status: RESUME_READY
 
 ## Resume phrase
-최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 44/60 PASS·16/60 OPEN·active 0/60을 상속해. 남은 18개만 강한 명시 증거로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
+최신 TAKY 기준으로 배지 런타임 재개. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json과 BADGE/runtime/TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2.json을 먼저 고정하고, source producer QA 44/60 PASS·16/60 OPEN·active 0/60을 상속해. 남은 16개만 강한 명시 증거로 진행하고, 이미지 제작/교체는 별도 축으로 16시 이후 재개. main merge·Netlify·배포·badge activation은 HOLD.
 
 ## Authority
 1. CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json
@@ -56,7 +56,7 @@ New Ready exact-evidence PASS 29:
 
 Total: 44/60 PASS.
 
-## Remaining OPEN — 17
+## Remaining OPEN — 16
 ### Real-life / authority signal missing
 001, 002, 005, 007, 009, 010
 
@@ -66,7 +66,7 @@ Total: 44/60 PASS.
 ### Strong learning/problem evidence still needed
 030, 031, 035, 036, 038, 039, 054
 
-## Critical guards for remaining 18
+## Critical guards for remaining 16
 - Never infer focus/immersion from elapsed time, foreground duration, silence, screen stillness, score, attempt count, or AI attention inference.
 - 009 BEFORE_PROMPT needs an authoritative prompt/request boundary; missing parent logs are not proof.
 - 030 root cause must bind to a concrete error artifact.
