@@ -1,0 +1,40 @@
+name: TAKY Local Bridge continuity candidate
+on:
+  pull_request:
+    paths:
+      - 'TOOLS/LOCAL_BRIDGE/**'
+      - '.github/workflows/local-bridge-continuity.yml'
+  workflow_dispatch:
+jobs:
+  continuity-python:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only integrity and boundary regressions
+        run: python -m unittest discover -s TOOLS/LOCAL_BRIDGE -p "continuity_resume_test.py" -v
+      - name: Python syntax verification
+        run: python -m py_compile TOOLS/LOCAL_BRIDGE/continuity_resume.py
+  console-parser:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse and smoke help only
+        shell: powershell
+        run: |
+          foreach ($name in @('TAKY-CONSOLE.ps1','TAKY-LOCAL-BRIDGE.ps1','TAKY-NOTION-STATUS.ps1','TAKY-NOTION-STATUS-SMOKE.ps1')) {
+            $file = Join-Path 'TOOLS/LOCAL_BRIDGE' $name
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($file,[ref]$tokens,[ref]$parseErrors) | Out-Null
+            if ($parseErrors.Count) { throw "$name parse failed: $parseErrors" }
+          }
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File TOOLS/LOCAL_BRIDGE/TAKY-CONSOLE.ps1 help
+      - name: Synthetic Notion receipt freshness vs stale comparison (PowerShell 5.1)
+        shell: powershell
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File TOOLS/LOCAL_BRIDGE/TAKY-NOTION-STATUS-SMOKE.ps1
