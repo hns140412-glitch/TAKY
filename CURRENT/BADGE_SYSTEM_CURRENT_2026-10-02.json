@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Human review of matcher/evidence semantics for remaining 55 source producers; then implement explicit feature-declared source producers without activating awards.",
+  "next_open": "Review 11 proposed family semantics and the remaining 54 source-producer contracts. No badge activation before explicit approval and false-positive QA.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,16 +44,30 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 5,
-    "source_producer_required": 55,
+    "source_producer_qa_pass": 6,
+    "source_producer_required": 54,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-025",
       "BDG-DRAFT-026",
+      "BDG-DRAFT-029",
       "BDG-DRAFT-037",
       "BDG-DRAFT-055",
       "BDG-DRAFT-060"
     ],
     "status": "REVIEW_REQUIRED_NOT_ACTIVE"
+  },
+  "source_only_award_boundary": {
+    "status": "PASS",
+    "rule": "Only normalized TAKY_BADGE_SOURCE_OBSERVATION_V1 may enter badge award matching.",
+    "legacy_event_award_authority": false,
+    "matcher_exact_fields": [
+      "event_family",
+      "behavior_code",
+      "source_contract_id",
+      "explicit_child_action"
+    ],
+    "browser_runtime": "PASS",
+    "pwa_recovery": "PASS"
   }
 }
