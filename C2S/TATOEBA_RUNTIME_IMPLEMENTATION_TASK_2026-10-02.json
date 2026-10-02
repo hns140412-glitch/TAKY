@@ -1,0 +1,40 @@
+{
+  "schema": "TAKY_IMPLEMENTATION_TASK_CONTRACT_V1",
+  "task_id": "TAKY-TATOEBA-RUNTIME-FILTER-2026-10-02",
+  "repository": "hns140412-glitch/TAKY",
+  "base_branch": "main",
+  "base_head": "fa19fa78d933d59833a727a05d9c18f4e7b18920",
+  "target_branch": "taky/tatoeba-runtime-filter-20261002",
+  "objective": "Implement the already-approved Tatoeba provider-item adapter and item-level fail-closed selection filter as pure runtime modules with regressions, without live provider transport or app integration.",
+  "allowed_change_scope": [
+    "LEARNING/adapters/tatoeba-provider-item.js",
+    "LEARNING/adapters/tatoeba-provider-item.test.js",
+    "LEARNING/intake/tatoeba-item-filter.js",
+    "LEARNING/intake/tatoeba-item-filter.test.js",
+    ".github/workflows/mining-indexing-learning-integration.yml",
+    "C2S/TATOEBA_RUNTIME_IMPLEMENTATION_TASK_2026-10-02.json"
+  ],
+  "forbidden": [
+    "live api.tatoeba.org calls",
+    "bulk corpus ingest",
+    "Hide/Seek or Snap/Pop runtime integration",
+    "CURRENT pointer mutation",
+    "Canonical promotion",
+    "main merge",
+    "Netlify or production deployment",
+    "learner mastery/frequency/normative authority from example sentences"
+  ],
+  "acceptance_tests": [
+    "provider adapter synthetic contract cases pass",
+    "item-level selection filter boundary cases pass",
+    "source_id/source_ref remain fixed",
+    "unknown license and missing attribution fail closed",
+    "unapproved/orphan/context/safety boundaries fail closed",
+    "no adapter path grants Index authority or direct child approval",
+    "child-facing approval requires curation receipt",
+    "mastery/frequency/normative claims remain blocked",
+    "existing Learning integration regression remains enabled"
+  ],
+  "human_approval": "GRANTED_IN_CHAT_2026-10-02",
+  "release_policy": "DRAFT_PR_ONLY__NO_MERGE__NO_DEPLOYMENT"
+}
