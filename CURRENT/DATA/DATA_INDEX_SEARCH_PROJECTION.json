@@ -1,8 +1,8 @@
 {
-  "checkpoint_version": "1.6",
+  "checkpoint_version": "1.7",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
-  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__DETAIL_L2_VERIFIED__LOCAL_RUNTIME_BINDINGS_CLOSED__APPROVED_NEURAL_MODEL_BINDING_OPEN",
+  "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__DETAIL_L2_VERIFIED__LOCAL_RUNTIME_BINDINGS_CLOSED__TATOEBA_EXTERNAL_INDEX_EVIDENCE_CLOSED__APPROVED_NEURAL_MODEL_BINDING_OPEN",
   "status": "OPERATIONS",
   "authority_current": {
     "source_index": {
@@ -56,7 +56,9 @@
     "Oversize held videos were not retried; existing streaming/local-sync retry policy remains intact",
     "Local-controlled durable receipt and growth store binding closed in Learning runtime without deployment",
     "Provider-neutral family/member identity resolver and local learning endpoint binding closed with cross-family/member denial",
-    "PR #121 merged at 042ab345a85ed3ce67a87602b3873f99322b5fdd and PR #123 merged at dd13c4c3ada69796f2b22364032e0386218ef47a"
+    "PR #121 merged at 042ab345a85ed3ce67a87602b3873f99322b5fdd and PR #123 merged at dd13c4c3ada69796f2b22364032e0386218ef47a",
+    "Tatoeba LANGUAGE_USAGE / EXAMPLE_SENTENCE external-index evidence path closed with fail-closed provenance, curation and Hide/Snap reference guards",
+    "PR #197 merged bounded Tatoeba runtime path; PR #198 merged post-merge main validation triggers; main-push Integration #368 and Live Provider #10 SUCCESS"
   ],
   "open": [
     "Bind a durable approved pretrained/local embedding artifact for V26; current experimental corpus-local model is REJECTED_NOT_PROMOTED",
@@ -83,9 +85,15 @@
     "C2S/DATA_UTILIZATION_INDEX_V26_PROMOTION_RECEIPT_2026-09-25.json",
     "github:hns140412-glitch/TAKY@7975f3b3dd8d36646f4f49e02bc89941b6258fdc",
     "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3",
-    "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9"
+    "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9",
+    "C2S/TATOEBA_RUNTIME_IMPLEMENTATION_TASK_2026-10-02.json",
+    "C2S/TATOEBA_LIVE_PROVIDER_TRANSPORT_TASK_2026-10-02.json",
+    "C2S/TATOEBA_CONSUMER_HANDOFF_TASK_2026-10-02.json",
+    "HANDOFF/TATOEBA_HIDE_SNAP_NEW_CHAT_START_2026-10-02_LATEST.md",
+    "github:hns140412-glitch/TAKY@598ebbafd1854ed951a79915924662058ad7e94d",
+    "github:hns140412-glitch/TAKY@beb29320aebe459197f06a0bebe8c4875f47b0c0"
   ],
-  "updated_at": "2026-09-26T09:40:00+09:00",
+  "updated_at": "2026-10-02T11:30:00+09:00",
   "real_v26_regression": {
     "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
@@ -143,5 +151,36 @@
     "full_corpus_raw_load": false,
     "held_video_retry": false,
     "interpretation": "DETAIL_ANCHOR_FIRST__RAW_ONLY_IF_NEEDED__VERIFIED"
+  },
+  "external_index_evidence": {
+    "tatoeba": {
+      "state": "CLOSED",
+      "scope": [
+        "LANGUAGE_USAGE",
+        "EXAMPLE_SENTENCE"
+      ],
+      "source_id": "LANGUAGE_TATOEBA_TEXT_2026",
+      "source_ref": "INDEX:LANGUAGE_TATOEBA_TEXT_2026",
+      "authority": "EXTERNAL_INDEX_EVIDENCE_ONLY",
+      "provider_transport": "READ_ONLY_V1_IMPLEMENTED",
+      "item_level_fail_closed_filter": "PASS",
+      "provenance_license_owner_validation": "PASS",
+      "child_facing_structured_curation_receipt": "PASS",
+      "hide_snap_reference_handoff": "PASS",
+      "index_owner_authority": false,
+      "normative_usage_authority": false,
+      "frequency_authority": false,
+      "learner_mastery_authority": false,
+      "main_merge_prs": [
+        197,
+        198
+      ],
+      "main_validation": {
+        "merge_head": "beb29320aebe459197f06a0bebe8c4875f47b0c0",
+        "mining_indexing_learning_run": 368,
+        "tatoeba_live_provider_run": 10,
+        "result": "PASS"
+      }
+    }
   }
 }
