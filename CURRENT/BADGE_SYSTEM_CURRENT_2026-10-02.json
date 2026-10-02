@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Implement a production persistence adapter and ingest endpoint only after selecting a no-surprise storage/auth path; then prove one Ready, Hide, and Snap observation E2E into exact matcher input. No activation or deployment.",
+  "next_open": "After latest transport-core CI passes, select a production durable storage/auth path with explicit cost/authority review before implementation. Then prove live Ready/Hide/Snap observation E2E into matcher. Keep active 0/60 and deployment HOLD.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -144,25 +144,36 @@
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
   },
   "cross_app_transport": {
-    "status": "OWNER_CANDIDATE_SELECTED_CORE_CI_PASS",
+    "status": "OWNER_CANDIDATE_SELECTED_CORE_IMPLEMENTED_CI_PARTIAL_PASS",
     "owner_candidate": "TAKY-MOBILE_SERVER_RUNTIME",
-    "owner_candidate_reason": "TAKY-MOBILE is the existing runtime/orchestration projection with authenticated server-side gateway; no other repository has a proven central runtime boundary.",
     "implementation_branch": "taky/badge-central-transport-core-20261002",
     "draft_pr": 2,
-    "head": "90c206dbea2b10a0aec217d6893584828442f4b5",
-    "core_validation": "PASS",
-    "core_capabilities": [
+    "head": "52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7",
+    "passed_heads": [
+      "90c206dbea2b10a0aec217d6893584828442f4b5",
+      "2344011157f915011747b8ec0f8786862ddb6ccc",
+      "f9e0cd0f99f594d0999905ecc18f2d6d3102a3e3",
+      "50e6acd83524ced6f16ab3d5d569ab0df0ffe84b",
+      "d929255ca7903e6ba6dcf67d4e380a380f4bd3e5",
+      "0ba93b0e825f70a3ec4f466871886fab842a8df4"
+    ],
+    "latest_ci": "IN_PROGRESS",
+    "implemented": [
       "EXACT_SOURCE_OBSERVATION_SCHEMA_VALIDATION",
       "ALLOWED_APP_VALIDATION",
       "OBSERVATION_ONLY_AUTHORITY_ENFORCEMENT",
-      "APP_ID_EVENT_ID_DEDUPE",
+      "APP_ID_EVENT_ID_DEDUPE_CORE",
       "CONFLICT_FAIL_CLOSED",
-      "EXACT_MATCHER_TUPLE_PROJECTION"
+      "EXACT_MATCHER_TUPLE_PROJECTION",
+      "FAIL_CLOSED_INGEST_ENDPOINT_SCAFFOLD",
+      "DURABLE_LEDGER_ADAPTER_CONTRACT",
+      "CROSS_APP_AUTH_BOUNDARY_CONTRACT",
+      "READY_HIDE_SNAP_PRODUCER_COMPATIBILITY_TESTS"
     ],
     "production_immutable_observation_ledger": "OPEN",
-    "production_ingest_endpoint": "OPEN",
-    "cross_app_auth": "OPEN",
-    "ready_hide_snap_e2e_to_matcher": "OPEN",
+    "production_cross_app_auth": "OPEN",
+    "production_ingest_endpoint_deployed": "NO",
+    "live_ready_hide_snap_e2e_to_matcher": "OPEN",
     "activation_effect": "NONE",
     "deployment": "HOLD"
   }
