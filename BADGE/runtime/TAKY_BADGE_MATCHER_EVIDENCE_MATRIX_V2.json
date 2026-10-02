@@ -1,12 +1,12 @@
 {
   "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2_2_READY_E2E",
-  "version": "2026-10-02.12",
+  "version": "2026-10-02.13",
   "status": "REVIEW_REQUIRED_NOT_ACTIVE",
   "source_observation_contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
   "summary": {
     "total": 60,
-    "source_producer_qa_pass": 43,
-    "source_producer_required": 17,
+    "source_producer_qa_pass": 44,
+    "source_producer_required": 16,
     "active": 0,
     "observation_only_family_count": 25,
     "source_producer_implemented_pending_ci": 0
@@ -82,9 +82,9 @@
     "multi_source_matcher": "PASS",
     "ready_source_branch": "taky/badge-source-producers-20261002",
     "ready_draft_pr": 143,
-    "ready_runtime_e2e": "PASS_100_OF_100",
-    "ready_all_pr_checks": "PASS_10_OF_10",
-    "ready_pr_head": "d6ad1d918914870e8df4f72d1ed32afffe9d402c",
+    "ready_runtime_e2e": "PASS",
+    "ready_all_pr_checks": "PASS",
+    "ready_pr_head": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
     "hide_source_branch": "taky/badge-source-producers-20261002",
     "hide_draft_pr": 29,
     "hide_validation": "PASS",
@@ -550,12 +550,12 @@
         "SNAP_POP",
         "HIDE_SEEK"
       ],
-      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
-      "required_source_contract_id": null,
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1",
       "matcher_candidate": {
         "event_family": "FOCUS",
         "behavior_code": "SINGLE_TASK_FOCUS",
-        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "source_contract_id": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1",
         "explicit_child_action": true
       },
       "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
@@ -569,7 +569,14 @@
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
       "activation_status": "HOLD_NOT_ACTIVE",
-      "source_matchers": []
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "SINGLE_TASK_FOCUS",
+          "sourceContractId": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1"
+        }
+      ]
     },
     {
       "slot": 14,
