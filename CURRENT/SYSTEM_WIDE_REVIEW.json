@@ -14,7 +14,7 @@
     "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
   },
   "evidence_basis": "Read-only GitHub main/PR verification at the 2026-10-02 audit plus exact local TAKY base; refs are dated snapshots, not perpetual live proof.",
-  "live_head_comparison": "AUDITED_MATCH_2026-10-02__REQUERY_BEFORE_LATER_CURRENT_CLAIM",
+  "live_head_comparison": "AUDITED_MATCH_2026-10-02__READY_BADGE_CANDIDATE_REFRESHED__REQUERY_BEFORE_LATER_CURRENT_CLAIM",
   "owner_registry": "MASTER/MASTER_FILE_REGISTRY.json",
   "resolution_rule": "Explicit semantic_owners namespace + exact role/path only; DATA/Index CURRENT and Learning Engine CURRENT remain separate; never largest REV/V, newest filename or timestamp.",
   "resume": {
@@ -153,7 +153,7 @@
       "evidence_paths": [
         "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
       ],
-      "evidence_boundary": "Historical recovery evidence does not override the supplied audit or promote PR #196.",
+      "evidence_boundary": "Historical recovery evidence does not override current semantic authority. Ready-Set PR #143 candidate source-runtime E2E is PASS at b49ff5f..., but candidate PASS does not promote PR #143, activate badge awards/economy, merge to main, deploy, or close central hosted E2E.",
       "candidate_refs": {
         "TAKY-MOBILE": {
           "pr": 2,
@@ -161,7 +161,18 @@
         },
         "Ready-Set": {
           "pr": 143,
-          "head": "2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4"
+          "head": "b49ff5fbb76cdeece132264e91c2324d7d034b92",
+          "state": "DRAFT/OPEN",
+          "main_authority": false,
+          "ready_runtime_e2e": {
+            "state": "PASS",
+            "workflow": "Ready Runtime E2E",
+            "run_number": 1848,
+            "run_id": 36966387336,
+            "head": "b49ff5fbb76cdeece132264e91c2324d7d034b92",
+            "local_focused_badge_spec": "32/32 PASS",
+            "boundary": "Candidate runtime evidence only; does not activate badges, mutate economy, merge to main, or prove hosted production."
+          }
         },
         "Hide-Seek": {
           "pr": 29,
