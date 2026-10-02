@@ -1,15 +1,15 @@
 {
   "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2_1_MULTI_SOURCE",
-  "version": "2026-10-02.4",
+  "version": "2026-10-02.5",
   "status": "REVIEW_REQUIRED_NOT_ACTIVE",
   "source_observation_contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
   "summary": {
     "total": 60,
     "source_producer_qa_pass": 10,
-    "source_producer_required": 50,
+    "source_producer_required": 49,
     "active": 0,
     "observation_only_family_count": 25,
-    "source_producer_implemented_pending_ci": 0
+    "source_producer_implemented_pending_ci": 1
   },
   "verified_snap_pop_producers": [
     {
@@ -84,7 +84,10 @@
     "ready_draft_pr": 143,
     "ready_runtime_e2e": "PASS",
     "ready_all_pr_checks": "PASS",
-    "ready_pr_head": "9439e9fa62259247b46ffa30da1cda68945baee6"
+    "ready_pr_head": "9439e9fa62259247b46ffa30da1cda68945baee6",
+    "hide_source_branch": "taky/badge-source-producers-20261002",
+    "hide_draft_pr": 29,
+    "hide_validation": "IN_PROGRESS"
   },
   "invariants": [
     "No badge is activated by this matrix.",
@@ -1017,12 +1020,12 @@
         "SNAP_POP",
         "HIDE_SEEK"
       ],
-      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
-      "required_source_contract_id": null,
+      "source_producer_status": "SOURCE_PRODUCER_IMPLEMENTED_PENDING_CI",
+      "required_source_contract_id": "HIDE_RETRACE_CORRECTION_V1",
       "matcher_candidate": {
         "event_family": "ERROR_CORRECTION",
         "behavior_code": "ERROR_CORRECTED_COMPLETE",
-        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "source_contract_id": "HIDE_RETRACE_CORRECTION_V1",
         "explicit_child_action": true
       },
       "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
@@ -1036,7 +1039,14 @@
         "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
       ],
       "activation_status": "HOLD_NOT_ACTIVE",
-      "source_matchers": []
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "ERROR_CORRECTION",
+          "behaviorCode": "ERROR_CORRECTED_COMPLETE",
+          "sourceContractId": "HIDE_RETRACE_CORRECTION_V1"
+        }
+      ]
     },
     {
       "slot": 29,
