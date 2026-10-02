@@ -1,0 +1,45 @@
+{
+  "schema": "TAKY_DRIVE_STORAGE_ROUTING_V1",
+  "updated_at": "2026-10-02T21:27:00+09:00",
+  "rules": {
+    "path_charset": "ASCII_ENGLISH_NUMERIC_UNDERSCORE",
+    "taky_all_under_taky_root": true,
+    "savey_separate_top_level": true,
+    "inbox_first": true,
+    "delete_requires_human_approval": true,
+    "netlify_storage_owner": false,
+    "github_large_data_owner": false
+  },
+  "hns_main": {
+    "account": "hns140412@gmail.com",
+    "taky_root": {"id":"1WjH-Q2tWFvVNCiBy9r-D9U72Ac7DH61d","path":"TAKY"},
+    "learning": {"id":"17_9ZFdN0vov8ZhC4g9cYnMakHC5u-OKr","path":"TAKY/01_LEARNING","raw":"TAKY/01_LEARNING/02_RAW_MINING","index":"TAKY/01_LEARNING/03_INDEX","engine":"TAKY/01_LEARNING/04_LEARNING_ENGINE"},
+    "archigrow": {"id":"1Ji_DA74nRjRwwy5vUJYrkMtl9y-at0zr","path":"TAKY/02_ARCHIGROW","raw":"TAKY/02_ARCHIGROW/02_RAW","index":"TAKY/02_ARCHIGROW/03_INDEX","project_data":"TAKY/02_ARCHIGROW/04_PROJECT_DATA"},
+    "common": {"id":"1UXAb5u1sraxvvIW0gHkPCS6Y-K3YMDnz","path":"TAKY/03_COMMON"},
+    "temp": {"id":"1qCLjK20Wenh7TLrYHTWJsojSEiDpXuzi","path":"TAKY/90_TEMP"},
+    "delete_pending": {"id":"1r9RmuhkJWL_mHcx-o3B17NnfKOgNgnXe","path":"TAKY/99_DELETE_PENDING"},
+    "savey_root": {"id":"1rtDGieS8L5kTqmwD6oATEIlh9vLqXIRe","path":"SAVEY"}
+  },  "siezeall_shared": {
+    "account": "siezeall@gmail.com",
+    "taky_root": {"id":"1A9Mq171etYULKLgD4Wk1AHOFozW76Ulh","path":"TAKY"},
+    "learning_share": {"id":"1pgWTQS6Ondk6D3SYbJXGQ4y0COu0oleb","path":"TAKY/01_LEARNING_SHARE"},
+    "archigrow_share": {"id":"1hSkV9J_ycMdZChU1a2YEsApiRP8Oi2wa","path":"TAKY/02_ARCHIGROW_SHARE"},
+    "updates": {"id":"111nmMqJvFfwKYoxaKBGmJWWMoqvCck0s","path":"TAKY/03_UPDATES"},
+    "user_data": {"id":"1basjn1lv8YTyo0MMMRHBKCmRv5jWyqUf","path":"TAKY/04_USER_DATA"},
+    "temp": {"id":"1xZ3a6bYt1uYyiUkctu_b8xrh2c6NFvtK","path":"TAKY/90_TEMP"},
+    "savey_root": {"id":"1Fko0wlhMm8RfcrbHq2OJuS0KLv3d0TFl","path":"SAVEY"}
+  },
+  "local": {
+    "root": "C:/TAKY_LOCAL",
+    "inbox": "C:/TAKY_LOCAL/01_INBOX",
+    "notion_inbox": "C:/TAKY_LOCAL/01_INBOX/NOTION",
+    "web_inbox": "C:/TAKY_LOCAL/01_INBOX/WEB",
+    "files_inbox": "C:/TAKY_LOCAL/01_INBOX/FILES",
+    "learning": "C:/TAKY_LOCAL/02_LEARNING",
+    "archigrow": "C:/TAKY_LOCAL/03_ARCHIGROW",
+    "common": "C:/TAKY_LOCAL/04_COMMON",
+    "temp": "C:/TAKY_LOCAL/90_TEMP"
+  },
+  "routing": ["INGEST->LOCAL_INBOX","CLASSIFY->TAKY_LEARNING|TAKY_ARCHIGROW|TAKY_COMMON","INDEX->DOMAIN_INDEX","PROMOTE->ENGINE_OR_PROJECT_DATA","SHARE->SIEZEALL_TAKY","ARCHIVE->DOMAIN_ARCHIVE","DELETE_CANDIDATE->TAKY_99_DELETE_PENDING"],
+  "savey_boundary": "SAVEY != TAKY; no implicit cross-route. Explicit export/import contract required."
+}

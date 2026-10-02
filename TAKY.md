@@ -186,6 +186,14 @@ Normative rule ownership is machine-indexed by `MASTER/RULE_REGISTRY.json`. One 
 ## Work OS storage boundary
 TAKY-WORK-OS GitHub stores workflow definitions, automation logic, validation rules, schemas, scripts, integrations, and operating policies. Actual business/project source files and generated deliverables belong in governed Google Drive workspace, not canonical TAKY repository.
 
+Drive routing is owned by `MASTER/DRIVE_STORAGE_ROUTING_V1.json`.
+- All TAKY-owned Drive material SHALL live under the account's top-level `TAKY/` root.
+- `SAVEY/` is a separate top-level system root and SHALL NOT be nested under or implicitly routed through TAKY.
+- HNS is the internal/master data account; SIEZEALL is the shared/runtime distribution account.
+- New collection enters through local `C:/TAKY_LOCAL/01_INBOX` and is classified before promotion.
+- LEARNING and ARCHIGROW are separate storage/data domains; cross-domain movement requires an explicit routing decision.
+- Deletion candidates move to `TAKY/99_DELETE_PENDING`; destructive deletion still requires human approval.
+
 The user-facing Work OS shall prefer conversational simplicity over exposing internal lifecycle complexity. Internal validation/state gates remain mandatory even when visible Drive structure is simplified.
 
 Default Drive work-item pattern:

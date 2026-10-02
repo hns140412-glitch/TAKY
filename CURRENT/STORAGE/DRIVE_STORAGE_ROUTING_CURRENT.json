@@ -1,0 +1,21 @@
+{
+  "schema": "TAKY_STORAGE_CURRENT_V1",
+  "status": "CURRENT",
+  "owner": "MASTER/DRIVE_STORAGE_ROUTING_V1.json",
+  "hns": {
+    "TAKY": "1WjH-Q2tWFvVNCiBy9r-D9U72Ac7DH61d",
+    "SAVEY": "1rtDGieS8L5kTqmwD6oATEIlh9vLqXIRe"
+  },
+  "siezeall": {
+    "TAKY": "1A9Mq171etYULKLgD4Wk1AHOFozW76Ulh",
+    "SAVEY": "1Fko0wlhMm8RfcrbHq2OJuS0KLv3d0TFl"
+  },
+  "local_inbox": "C:/TAKY_LOCAL/01_INBOX",
+  "hard_locks": [
+    "TAKY_DATA_UNDER_TAKY_ROOT",
+    "SAVEY_SEPARATE_TOP_LEVEL",
+    "LEARNING_NE_ARCHIGROW",
+    "DELETE_REQUIRES_HUMAN_APPROVAL"
+  ],
+  "updated_at": "2026-10-02T21:27:00+09:00"
+}

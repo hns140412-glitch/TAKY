@@ -147,6 +147,11 @@
     },
     "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
+    },
+    "MASTER/DRIVE_STORAGE_ROUTING_V1.json": {
+      "class": "ACTIVE_SUPPORT",
+      "authority_owner": "TAKY_STORAGE_ROUTING",
+      "runtime_role": "DRIVE_AND_LOCAL_PATH_REGISTRY"
     }
   },
   "semantic_owners": [

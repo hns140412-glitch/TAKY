@@ -3,11 +3,16 @@
   "policy_version": "2026-10-02.1",
   "source_matrix": {
     "name": "LEARNING_DATA_COMPLETENESS_MATRIX_2026-09-23_V49.json",
-    "id": "1lTS_yIxjlJdnxes-Rh0RkUe0gSTliVP54sM_0abiUOY"
+    "id": "1lTS_yIxjlJdnxes-Rh0RkUe0gSTliVP54sM_0abiUOY",
+    "storage_path": "TAKY/01_LEARNING/04_LEARNING_ENGINE"
   },
   "index_authority": {
-    "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
-    "utilization_index": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json"
+    "semantic_baseline_source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
+    "semantic_baseline_utilization_index": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
+    "latest_storage_source_index": {"name":"DATA_SOURCE_INDEX_2026-10-02_V10.json","id":"1WYVMTtjFlNVnLn2P7IicIGq7srWvhUfG7U0H55GbCxg"},
+    "latest_storage_utilization_index": {"name":"DATA_UTILIZATION_INDEX_2026-10-02_V30.json","id":"1pql5d8HgyyQ1ngGXlp_q52LU0nDx8h8bdFlunlX6_3A"},
+    "storage_path": "TAKY/01_LEARNING/03_INDEX",
+    "promotion_rule": "LATEST_STORAGE_FILE != SEMANTIC_CURRENT_UNTIL_VALIDATED"
   },
   "owner": "LEARNING_ENGINE_CORE",
   "fail_closed_on_unknown": true,
