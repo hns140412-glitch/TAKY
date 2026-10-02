@@ -221,8 +221,7 @@
       "state": "ACTIVE_OWNER",
       "paths": {
         "owner": "OS/PWA_STORAGE_SYNC_POLICY.md",
-        "routing_map": "OS/DRIVE_STORAGE_MAP.json",
-        "runtime_policy": "SHARED/runtime/distribution-sync-policy.js"
+        "current": "OS/DRIVE_STORAGE_MAP.json"
       }
     }
   ]
