@@ -95,6 +95,31 @@
       "hold": [
         "release inference without binding/render/device evidence"
       ]
+    },
+    "work_os": {
+      "owner": "OS/WORK_OS.md",
+      "state": "SEMANTICS_PRESERVED",
+      "current": "ALPHA/CURRENT/work_os.json"
+    },
+    "learning_os": {
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "state": "SEMANTICS_PRESERVED",
+      "current": "ALPHA/CURRENT/learning_os.json"
+    },
+    "shared_technical": {
+      "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "state": "SEMANTIC_LIGHT_MECHANISM_LAYER",
+      "current": "ALPHA/CURRENT/shared_technical.json"
+    },
+    "hide_seek": {
+      "owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "state": "PROJECT_CURRENT_REQUIRES_LIVE_REVERIFY",
+      "current": "ALPHA/CURRENT/hide_seek.json"
+    },
+    "snap_pop": {
+      "owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "state": "PROJECT_CURRENT_REQUIRES_LIVE_REVERIFY",
+      "current": "ALPHA/CURRENT/snap_pop.json"
     }
   }
 }
