@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "After latest transport-core CI passes, select a production durable storage/auth path with explicit cost/authority review before implementation. Then prove live Ready/Hide/Snap observation E2E into matcher. Keep active 0/60 and deployment HOLD.",
+  "next_open": "Implement source installation key generation/pairing and signed transport wiring without activating awards; then prove Ready/Hide/Snap live E2E. Netlify deployment and active=true remain HOLD pending separate approval.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -144,38 +144,38 @@
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
   },
   "cross_app_transport": {
-    "status": "OWNER_CANDIDATE_SELECTED_CORE_CI_PASS",
-    "owner_candidate": "TAKY-MOBILE_SERVER_RUNTIME",
+    "status": "CODE_READY_CI_PASS_LIVE_E2E_OPEN",
+    "owner": "TAKY-MOBILE_SERVER_RUNTIME_CANDIDATE",
     "implementation_branch": "taky/badge-central-transport-core-20261002",
     "draft_pr": 2,
-    "head": "52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7",
-    "passed_heads": [
-      "90c206dbea2b10a0aec217d6893584828442f4b5",
-      "2344011157f915011747b8ec0f8786862ddb6ccc",
-      "f9e0cd0f99f594d0999905ecc18f2d6d3102a3e3",
-      "50e6acd83524ced6f16ab3d5d569ab0df0ffe84b",
-      "d929255ca7903e6ba6dcf67d4e380a380f4bd3e5",
-      "0ba93b0e825f70a3ec4f466871886fab842a8df4"
-    ],
+    "head": "b42f7e2d0fdf220e552817c41629c5384034888b",
     "latest_ci": "PASS",
-    "implemented": [
-      "EXACT_SOURCE_OBSERVATION_SCHEMA_VALIDATION",
-      "ALLOWED_APP_VALIDATION",
-      "OBSERVATION_ONLY_AUTHORITY_ENFORCEMENT",
-      "APP_ID_EVENT_ID_DEDUPE_CORE",
-      "CONFLICT_FAIL_CLOSED",
-      "EXACT_MATCHER_TUPLE_PROJECTION",
-      "FAIL_CLOSED_INGEST_ENDPOINT_SCAFFOLD",
-      "DURABLE_LEDGER_ADAPTER_CONTRACT",
-      "CROSS_APP_AUTH_BOUNDARY_CONTRACT",
-      "READY_HIDE_SNAP_PRODUCER_COMPATIBILITY_TESTS"
-    ],
-    "production_immutable_observation_ledger": "OPEN",
-    "production_cross_app_auth": "OPEN",
-    "production_ingest_endpoint_deployed": "NO",
+    "storage": {
+      "technology": "NETLIFY_BLOBS",
+      "adapter": "PASS_CODE_TEST",
+      "production_consistency": "STRONG",
+      "non_production_scope": "DEPLOY_SCOPED",
+      "live_data_written": false
+    },
+    "source_auth": {
+      "scheme": "ECDSA_P256_SHA256",
+      "verifier": "PASS_CODE_TEST",
+      "public_key_registry": "PASS_CODE_TEST",
+      "trusted_device_key_registration": "PASS_CODE_TEST",
+      "real_keys_registered": false
+    },
+    "endpoint": {
+      "signed_ingest_gate": "PASS_CODE_TEST",
+      "requires_key_id_and_signature": true,
+      "deployed": false
+    },
+    "source_signers": {
+      "READY_SET": "DORMANT_HELPER_CI_PASS",
+      "HIDE_SEEK": "DORMANT_HELPER_CI_PASS",
+      "SNAP_POP": "DORMANT_HELPER_COMMITTED_CI_NOT_FIRED"
+    },
     "live_ready_hide_snap_e2e_to_matcher": "OPEN",
     "activation_effect": "NONE",
-    "deployment": "HOLD",
-    "latest_ci_head": "52760e1f1e12ae4abbdc6dcf25d8d6b9a70684a7"
+    "deployment": "HOLD"
   }
 }
