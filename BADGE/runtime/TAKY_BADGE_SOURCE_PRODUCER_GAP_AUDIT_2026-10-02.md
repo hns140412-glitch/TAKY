@@ -99,6 +99,32 @@ Decision:
 
 041 MEANINGFUL_OVERRUN is now QA PASS because the exact source contract requires all three: Planner estimate overrun + child-authored meaning artifact + completion. This remains distinct from generic persistence and accuracy producers.
 
+## Implementation classification — no status promotion
+
+### Existing runtime/data extension candidate — no new child UI required
+- 038 DEEP_THINKING_PERSISTENCE: reuse Snap `SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1` reflectionArtifactRef; add verified outcome/connection binding before a distinct producer can exist.
+- 054 IMPROVEMENT: reuse same-target evidence plus Learning Engine/equivalent comparison; requires cross-source comparison producer, not a new child-facing interaction.
+
+### Existing interaction can be extended, but stronger explicit binding/action is still required
+- 030 ROOT_CAUSE_FOUND: bind child-authored cause to a concrete error artifact; current free-text/root-cause semantics alone are insufficient.
+- 031 PERSISTENT_BREAKTHROUGH: existing before/after learning artifacts can contribute, but an explicit blocked-before state and continued reasoning link are still missing.
+- 035 CALCULATION_CHECK: existing correction artifacts can contribute, but calculation-domain identity + explicit check must be added.
+- 036 CORRECTION_COURAGE: existing self-correction can contribute, but a distinct child correction intent/action is required to avoid duplicating retry/error-correction badges.
+- 039 BLOCK_RESOLVED: existing strategy/correction evidence can contribute, but explicit blocked-before + resolution linkage is required.
+
+### New explicit real-world / child-declared signal required
+- 001 EARLY_START
+- 002 ALARM_RESPONSE
+- 005 PREPARATION_COMPLETE
+- 007 TIME_CREATION_EXTRA
+- 009 BEFORE_PROMPT
+- 010 RESPONSIVE_START
+- 018 LONG_FOCUS
+- 019 QUIET_IMMERSION
+- 042 FLOW_IMMERSION
+
+Classification is implementation planning only. Counts remain 44/60 QA PASS, 16/60 OPEN, active 0/60.
+
 ## Global false-positive guard
 Never use as sufficient evidence:
 - elapsed or focus duration
