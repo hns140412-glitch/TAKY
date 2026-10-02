@@ -10,7 +10,7 @@ Status: PASS / OBSERVATION ONLY / ACTIVATION HOLD
 
 ## Exact source evidence
 - Snap-Pop PR #20 branch: taky/badge-catalog-ui-binding-20261001
-- validated head: 08ef927eb10cc0fb87b9164ecec8f4a9e0209f1a
+- validated head: 9f8e970ea76d85e4ae04f292367524db184cc61a
 - explicit child reflection is stored as CHILD_EXPLICIT_REFLECTION and bound into active badgeEvidence.deepThinkingRefs.
 - source event is emitted only after the same exploration reaches explicit completion with a completionEventId and recordId.
 - event tuple: SNAP_POP + DEEP_THINKING + DEEP_THINKING_PERSISTENCE + SNAP_POP_REFLECTION_TO_COMPLETION_V1.
@@ -24,10 +24,11 @@ Local no-paid-API validation on connected workstation:
 - node --check writing-flow-controller.js => PASS
 - node --check interaction-support-controller.js => PASS
 
-Full branch closure currently stops on pre-existing badge catalog activation guard:
-- FAIL reviewed-active-item-can-pass
-- The same failure was reproduced at pre-038 head 023b1cf2890ab2268dcfe6739e31001a26950606.
-- Therefore this failure is not introduced by the 038 producer changes and is tracked separately.
+Full branch closure:
+- stale activation-guard and controller-boundary validator fixtures were aligned to the current stricter runtime contracts.
+- thin-orchestrator size heuristic was minimally adjusted while all owner-logic/delegation gates stayed intact.
+- node scripts/validate-branch-closure.mjs => BRANCH_CLOSURE_VALIDATOR_PASS 73/73.
+- Exact validated Snap-Pop head: 9f8e970ea76d85e4ae04f292367524db184cc61a.
 
 ## Guards
 No elapsed-time, silence, attempt-count, score/mastery, or AI-inference evidence is accepted for 038.
