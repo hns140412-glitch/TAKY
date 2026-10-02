@@ -1,0 +1,55 @@
+{
+  "schema": "TAKY_DELTA_HOLD_REVIEW_V1",
+  "generated_at": "2026-10-02T04:38:46.140848+00:00",
+  "items": [
+    {
+      "source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "title": "Notion",
+      "canonical_url": "https://juniper-clef-bf9.notion.site/AI-15-3e4fa2be260d81c594e0ee4eecd9bbae",
+      "decision": "HOLD_REACQUISITION_REQUIRED",
+      "reason": "No inline text; only media/material nodes are present and captured signed file URLs are time-limited/expired. Reacquire source media before mining.",
+      "block_type_counts": {
+        "image": 2,
+        "page_id": 2,
+        "external": 2
+      },
+      "captured_url_count": 2,
+      "learning_use_authorized": false,
+      "index_active": false
+    },
+    {
+      "source_id": "NOTION:3edfa868-dc2a-8172-be45-e77f189dbccb",
+      "title": "네이버 플레이스",
+      "canonical_url": "https://m.place.naver.com/place/1497826913/home",
+      "decision": "HOLD_OUT_OF_SCOPE",
+      "reason": "Vehicle maintenance/local business content is unrelated to current TAKY governed domains.",
+      "block_type_counts": {
+        "paragraph": 3,
+        "page_id": 3,
+        "text": 3
+      },
+      "captured_url_count": 0,
+      "learning_use_authorized": false,
+      "index_active": false
+    },
+    {
+      "source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "title": "무료 도메인 사이트 TOP 5",
+      "canonical_url": "https://navig.notion.site/TOP-5-3d86d83666b3805194a9fc37c42e5283",
+      "decision": "HOLD_REACQUISITION_REQUIRED",
+      "reason": "No inline text; only media/material nodes are present and captured signed file URLs are time-limited/expired. Reacquire source media before mining.",
+      "block_type_counts": {
+        "image": 2,
+        "page_id": 2,
+        "external": 2
+      },
+      "captured_url_count": 2,
+      "learning_use_authorized": false,
+      "index_active": false
+    }
+  ],
+  "counts": {
+    "HOLD_OUT_OF_SCOPE": 1,
+    "HOLD_REACQUISITION_REQUIRED": 2
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_NOTION_INCREMENTAL_PIPELINE_CURRENT_V1",
-  "updated_at": "2026-10-02T13:30:00+09:00",
+  "updated_at": "2026-10-02T13:39:00+09:00",
   "authority_role": "namespace logical CURRENT for Notion incremental source intake",
   "source_generation": "INCREMENTAL_QUEUE.20261002T040003612Z.json",
   "source_rows": 161,
@@ -14,12 +14,13 @@
   "mining": {
     "unique_sources_reviewed": 11,
     "promote_candidates": 5,
-    "review": 3,
+    "review": 0,
     "hold": 3,
     "evidence_files": [
-      "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_MINING_GATE_20261002.json",
-      "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_MINING_CLASSIFICATION_20261002.json"
-    ]
+      "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_MINING_GATE_20261002.json",
+      "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_MINING_CLASSIFICATION_20261002.json"
+    ],
+    "review_resolved_to_index_reference": 3
   },
   "indexing": {
     "base_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",
@@ -30,7 +31,22 @@
     "exact_duplicate_evidence": 0,
     "related_to_relations": 5,
     "full_canonical_index_mutated": false,
-    "owner_receipt": "D:/Git PWA/TAKY-SOURCE-VAULT/reports/DELTA_INDEX_OWNER_RECEIPTS_20261002.json"
+    "owner_receipt": "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_INDEX_OWNER_RECEIPTS_20261002.json",
+    "delta_review_versions": [
+      "V6+DELTA_20261002_R1",
+      "V6+DELTA_20261002_R2"
+    ],
+    "r1_reviewed": 5,
+    "r2_reviewed": 3,
+    "total_delta_indexed_evidence_candidates": 8,
+    "active_reference_candidates": 7,
+    "corrected_needs_more_evidence": 1,
+    "correction": {
+      "source_id": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "reason": "INLINE_CONTENT_INSUFFICIENT_LOGIN_SHELL",
+      "state": "NEEDS_MORE_EVIDENCE"
+    },
+    "r2_owner_receipt": "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_INDEX_OWNER_RECEIPTS_R2_20261002.json"
   },
   "domain_handoff": {
     "learning_candidates": 2,
@@ -38,10 +54,29 @@
     "learning_handoff_contract": "PASS",
     "learning_policy_application": "DENIED_FAIL_CLOSED",
     "learning_denial_reasons": {
-      "writing_scaffold": ["WRITING_CORPUS_SOURCE_REF"],
-      "reading_prompt": ["SOURCE_SPECIFIC_REF", "CONSTRUCT_SOURCE_LABEL"]
+      "writing_scaffold": [
+        "WRITING_CORPUS_SOURCE_REF"
+      ],
+      "reading_prompt": [
+        "SOURCE_SPECIFIC_REF",
+        "CONSTRUCT_SOURCE_LABEL"
+      ]
     },
-    "design_status": "INDEXED_REFERENCE_ONLY__NOT_LEARNING_EVIDENCE"
+    "design_status": "INDEXED_REFERENCE_ONLY__NOT_LEARNING_EVIDENCE",
+    "r2_reference_candidates": {
+      "twinkl_free_day": "INDEXED_TIME_SENSITIVE_REFERENCE_ONLY",
+      "redrawai": "INDEXED_DESIGN_TOOL_REFERENCE",
+      "spectrumhub": "INDEXED_SECONDARY_RESOURCE_HUB__OFFICIAL_QABA_LINKS_EXTERNALLY_VALIDATED"
+    },
+    "remaining_hold": {
+      "media_reacquisition_required": 2,
+      "out_of_scope": 1
+    },
+    "evidence_files": [
+      "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_DOMAIN_REQUERY_HANDOFF_20261002.json",
+      "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_LEARNING_POLICY_CHECK_20261002.json",
+      "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_HOLD_REVIEW_20261002.json"
+    ]
   },
   "guards": [
     "INDEXED != LEARNING_AUTHORIZED",
@@ -49,14 +84,18 @@
     "RELATED_TO != DUPLICATE",
     "HOLD != DROP",
     "NO_SILENT_CANONICAL_OVERWRITE",
-    "NO_LEARNER_PERFORMANCE_INFERENCE_FROM_REFERENCE_SOURCE"
+    "NO_LEARNER_PERFORMANCE_INFERENCE_FROM_REFERENCE_SOURCE",
+    "TIME_SENSITIVE_REFERENCE != DURABLE_AUTHORITY",
+    "SECONDARY_OFFICIAL_LINK_HUB != OFFICIAL_SOURCE",
+    "INSUFFICIENT_INLINE_CONTENT => NEEDS_MORE_EVIDENCE"
   ],
   "deployment": "HOLD",
   "netlify": "HOLD",
   "next": [
-    "Resolve required provenance only from independently valid source evidence; do not synthesize provenance labels.",
-    "Keep learning candidates fail-closed until policy requirements are satisfied.",
-    "Route design references to design governance/reference retrieval only.",
-    "Review remaining 3 REVIEW and 3 HOLD sources when stronger source evidence or media acquisition becomes available."
+    "Reacquire media for 2 HOLD_REACQUISITION_REQUIRED sources before mining/indexing.",
+    "Keep out-of-scope vehicle source on HOLD; do not drop raw provenance.",
+    "Keep writing/reading learning candidates fail-closed until independent provenance satisfies policy.",
+    "Treat 0wonloop as NEEDS_MORE_EVIDENCE until actual body content is acquired.",
+    "Full canonical Source Index promotion remains separate; no silent overwrite of V6."
   ]
 }

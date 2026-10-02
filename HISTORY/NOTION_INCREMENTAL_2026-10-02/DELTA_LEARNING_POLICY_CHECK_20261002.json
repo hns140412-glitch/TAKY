@@ -1,0 +1,115 @@
+{
+  "schema": "TAKY_DELTA_LEARNING_POLICY_CHECK_V1",
+  "tests": [
+    {
+      "source_id": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "title": null,
+      "context": {
+        "function_id": "LE-F06",
+        "consumer_app": "SNAP_POP",
+        "requested_behavior": "WRITING_PROCESS_SCAFFOLD",
+        "requested_claims": []
+      },
+      "handoff_ok": true,
+      "handoff_issues": [],
+      "policy_ok": false,
+      "policy_results": [
+        {
+          "ok": false,
+          "bridge_version": "TAKY_LEARNING_EVIDENCE_POLICY_BRIDGE_V1",
+          "policy_version": "2026-10-02.1",
+          "policy_id": "P-F06-SNAP",
+          "function_id": "LE-F06",
+          "consumer_app": "SNAP_POP",
+          "authorization_class": "CONDITIONAL",
+          "requested_behavior": "WRITING_PROCESS_SCAFFOLD",
+          "cannot_claim": [
+            "VALIDATED_CAUSAL_ERROR_MODEL",
+            "GLOBAL_WRITING_ABILITY"
+          ],
+          "decision": "DENY",
+          "reason": "DENY_PROVENANCE_REQUIRED",
+          "missing_provenance": [
+            "WRITING_CORPUS_SOURCE_REF"
+          ]
+        }
+      ],
+      "policy_denied": [
+        {
+          "ok": false,
+          "bridge_version": "TAKY_LEARNING_EVIDENCE_POLICY_BRIDGE_V1",
+          "policy_version": "2026-10-02.1",
+          "policy_id": "P-F06-SNAP",
+          "function_id": "LE-F06",
+          "consumer_app": "SNAP_POP",
+          "authorization_class": "CONDITIONAL",
+          "requested_behavior": "WRITING_PROCESS_SCAFFOLD",
+          "cannot_claim": [
+            "VALIDATED_CAUSAL_ERROR_MODEL",
+            "GLOBAL_WRITING_ABILITY"
+          ],
+          "decision": "DENY",
+          "reason": "DENY_PROVENANCE_REQUIRED",
+          "missing_provenance": [
+            "WRITING_CORPUS_SOURCE_REF"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "title": null,
+      "context": {
+        "function_id": "LE-F04",
+        "consumer_app": "READY_SET",
+        "requested_behavior": "CROSS_SOURCE_LITERACY_SUPPORT",
+        "requested_claims": []
+      },
+      "handoff_ok": true,
+      "handoff_issues": [],
+      "policy_ok": false,
+      "policy_results": [
+        {
+          "ok": false,
+          "bridge_version": "TAKY_LEARNING_EVIDENCE_POLICY_BRIDGE_V1",
+          "policy_version": "2026-10-02.1",
+          "policy_id": "P-F04-READY",
+          "function_id": "LE-F04",
+          "consumer_app": "READY_SET",
+          "authorization_class": "CONDITIONAL",
+          "requested_behavior": "CROSS_SOURCE_LITERACY_SUPPORT",
+          "cannot_claim": [
+            "ALMAENGI_PRODUCT_CRITICAL_EVALUATION_COVERAGE_FROM_KICE"
+          ],
+          "decision": "DENY",
+          "reason": "DENY_PROVENANCE_REQUIRED",
+          "missing_provenance": [
+            "SOURCE_SPECIFIC_REF",
+            "CONSTRUCT_SOURCE_LABEL"
+          ]
+        }
+      ],
+      "policy_denied": [
+        {
+          "ok": false,
+          "bridge_version": "TAKY_LEARNING_EVIDENCE_POLICY_BRIDGE_V1",
+          "policy_version": "2026-10-02.1",
+          "policy_id": "P-F04-READY",
+          "function_id": "LE-F04",
+          "consumer_app": "READY_SET",
+          "authorization_class": "CONDITIONAL",
+          "requested_behavior": "CROSS_SOURCE_LITERACY_SUPPORT",
+          "cannot_claim": [
+            "ALMAENGI_PRODUCT_CRITICAL_EVALUATION_COVERAGE_FROM_KICE"
+          ],
+          "decision": "DENY",
+          "reason": "DENY_PROVENANCE_REQUIRED",
+          "missing_provenance": [
+            "SOURCE_SPECIFIC_REF",
+            "CONSTRUCT_SOURCE_LABEL"
+          ]
+        }
+      ]
+    }
+  ]
+}

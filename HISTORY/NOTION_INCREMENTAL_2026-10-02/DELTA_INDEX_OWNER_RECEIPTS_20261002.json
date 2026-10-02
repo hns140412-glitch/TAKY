@@ -1,0 +1,174 @@
+{
+  "schema": "TAKY_INDEX_OWNER_DELTA_RECEIPTS_V1",
+  "generated_at": "2026-10-02T04:29:12.614940+00:00",
+  "base_index_version": "V6",
+  "delta_version": "V6+DELTA_20261002_R1",
+  "candidate_count": 5,
+  "reviewed_count": 5,
+  "receipts": [
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-81a7-8e78-f89e14586ba9",
+      "index_version": "V6+DELTA_20261002_R1",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:7c85aa3a1270d4577e66f1b91b9f78fd53e8e8b8284da972f1472b74eb521ea8",
+        "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+        "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "PPT_HUNTER_DESIGN_MD_AI_WORKFLOW_CAROUSEL",
+          "basis": "design rules + implementation + browser review loop"
+        }
+      ],
+      "source_family": "TAKY_DESIGN_QA_BROWSER_REVIEW_GUIDE",
+      "source_type": "COMMUNITY_PRACTICE_REFERENCE",
+      "authority_class": "COMMUNITY_OR_PRACTICE_LAYER",
+      "domain_use_authorized": true,
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+        "SHA256:7c85aa3a1270d4577e66f1b91b9f78fd53e8e8b8284da972f1472b74eb521ea8"
+      ],
+      "detail_anchor": "SNAPSHOT_SHA256:7c85aa3a1270d4577e66f1b91b9f78fd53e8e8b8284da972f1472b74eb521ea8"
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-817f-a51d-cc4c578f0e74",
+      "index_version": "V6+DELTA_20261002_R1",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:31831bd56ba61293e421ed276b78c7d8667fd894d46c7e88f78bbda468441307",
+        "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+        "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "target_source_id": "1l-aFFOuDS0ECThDcgx8QDL0aswMw4Q6d",
+          "target_family": "SNAP_MIND_DIARY",
+          "basis": "guided self-expression/writing scaffold; not duplicate"
+        }
+      ],
+      "source_family": "CHILD_WRITING_PROMPT_SCAFFOLD",
+      "source_type": "COMMUNITY_EDUCATION_REFERENCE",
+      "authority_class": "COMMUNITY_OR_PRACTICE_LAYER",
+      "domain_use_authorized": true,
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://m.blog.naver.com/PostView.naver?blogId=curatorn&logNo=224425708039",
+        "SHA256:31831bd56ba61293e421ed276b78c7d8667fd894d46c7e88f78bbda468441307"
+      ],
+      "detail_anchor": "SNAPSHOT_SHA256:31831bd56ba61293e421ed276b78c7d8667fd894d46c7e88f78bbda468441307"
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-8110-8a65-e71c92106b22",
+      "index_version": "V6+DELTA_20261002_R1",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:ed3470e9bd6a14d1f9627e359db252e4d4979818cd55e420ae5d3e0ab5dbeff4",
+        "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+        "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "target_source_id": "1axQn-UqC6S1bfhH5YCzP5RqEvQwp0bfP",
+          "target_family": "SNAP_SECRET_NOTE",
+          "basis": "open-ended prompt supports thought expression; not duplicate"
+        }
+      ],
+      "source_family": "CHILD_READING_OPEN_QUESTION_PROMPTS",
+      "source_type": "COMMUNITY_EDUCATION_REFERENCE",
+      "authority_class": "COMMUNITY_OR_PRACTICE_LAYER",
+      "domain_use_authorized": true,
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://app.notion.com/p/10-3de2612bfb90815d9035db3172e2b892",
+        "SHA256:ed3470e9bd6a14d1f9627e359db252e4d4979818cd55e420ae5d3e0ab5dbeff4"
+      ],
+      "detail_anchor": "SNAPSHOT_SHA256:ed3470e9bd6a14d1f9627e359db252e4d4979818cd55e420ae5d3e0ab5dbeff4"
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-815e-8f96-e3887892b704",
+      "index_version": "V6+DELTA_20261002_R1",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:337a30859657f05493ce240a82536f50bbff0a4fb73e0a04889cf856ef6bd960",
+        "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+        "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "LAZY_OWEN_CHATGPT_IMAGE_EDIT_PROMPT_CAROUSEL",
+          "basis": "same broad image-prompt workflow class; content differs (50 prompt set vs existing edit carousel)"
+        }
+      ],
+      "source_family": "GPT_IMAGE_PROMPT_WORKFLOW_REFERENCE",
+      "source_type": "COMMUNITY_AI_WORKFLOW_REFERENCE",
+      "authority_class": "COMMUNITY_OR_PRACTICE_LAYER",
+      "domain_use_authorized": true,
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://zircon-yard-378.notion.site/GPT-50-3ebeaba9e47c81fa8b2cc3d3bb940741",
+        "SHA256:337a30859657f05493ce240a82536f50bbff0a4fb73e0a04889cf856ef6bd960"
+      ],
+      "detail_anchor": "SNAPSHOT_SHA256:337a30859657f05493ce240a82536f50bbff0a4fb73e0a04889cf856ef6bd960"
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e6-84a7-cb1657c7a6cf",
+      "index_version": "V6+DELTA_20261002_R1",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472",
+        "BASE_INDEX:DATA_SOURCE_INDEX_2026-09-25_V6:679",
+        "DELTA_REVIEW:DELTA_INDEX_OWNER_REVIEW_QUEUE_20261002.json"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "target_family": "PPT_HUNTER_DESIGN_MD_AI_WORKFLOW_CAROUSEL",
+          "basis": "design-reference/component-site workflow; not duplicate"
+        }
+      ],
+      "source_family": "VIBE_CODING_DESIGN_RESOURCE_REFERENCE",
+      "source_type": "COMMUNITY_DESIGN_REFERENCE",
+      "authority_class": "COMMUNITY_OR_PRACTICE_LAYER",
+      "domain_use_authorized": true,
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://0wonloop.com/resources/vibe-coding-design-sites",
+        "SHA256:ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472"
+      ],
+      "detail_anchor": "SNAPSHOT_SHA256:ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472"
+    }
+  ],
+  "canonical_full_index_mutated": false,
+  "delta_only": true
+}

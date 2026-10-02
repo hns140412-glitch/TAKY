@@ -1,0 +1,111 @@
+{
+  "schema": "TAKY_INDEX_OWNER_DELTA_RECEIPTS_R2_V1",
+  "generated_at": "2026-10-02T04:37:36.261493+00:00",
+  "delta_version": "V6+DELTA_20261002_R2",
+  "reviewed_count": 3,
+  "receipts": [
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-8198-86c0-d759888511cb",
+      "index_version": "V6+DELTA_20261002_R2",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:a430e63e243a432008fe617077df686d162664998a17e8bd9a1264e5d08d447c"
+      ],
+      "source_family": "TWINKL_KOREA_FREE_DAY_20261006",
+      "source_type": "TIME_SENSITIVE_EDU_RESOURCE_DISCOVERY",
+      "authority_class": "COMMERCIAL_EDUCATION_RESOURCE",
+      "domain": "learning_reference",
+      "consumer": "REFERENCE_DISCOVERY",
+      "domain_use_authorized": false,
+      "stale_after": "2026-10-07",
+      "learning_use_authorized": false,
+      "canonical_url": "https://m.blog.naver.com/PostView.naver?blogId=twinklkorea&logNo=224427618746",
+      "title": "💡 10월 6일 (화) 트윙클 코리아 Free Day를 200% 활용할 수 있는 가이드북 : 네이버 블로그",
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://m.blog.naver.com/PostView.naver?blogId=twinklkorea&logNo=224427618746",
+        "SHA256:a430e63e243a432008fe617077df686d162664998a17e8bd9a1264e5d08d447c"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "guards": [
+        "REFERENCE_ONLY",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-81ae-b814-f35eec010547",
+      "index_version": "V6+DELTA_20261002_R2",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:3220d9c31eb3876158c5e4ea83f44c4715cabe970f599f22e08c93af3ea8af6c"
+      ],
+      "source_family": "REDRAWAI_ARCH_INTERIOR_AI_TOOL",
+      "source_type": "DESIGN_AI_TOOL_REFERENCE",
+      "authority_class": "FIRST_PARTY_PRODUCT_SOURCE",
+      "domain": "design",
+      "consumer": "WORK_OS_DESIGN_REFERENCE",
+      "domain_use_authorized": true,
+      "stale_after": null,
+      "learning_use_authorized": false,
+      "canonical_url": "https://www.redrawai.co.kr/",
+      "title": "인테리어 디자이너를 위한 리드로우AI",
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://www.redrawai.co.kr/",
+        "SHA256:3220d9c31eb3876158c5e4ea83f44c4715cabe970f599f22e08c93af3ea8af6c"
+      ],
+      "duplicate_relation": null,
+      "version_relation": null,
+      "guards": [
+        "DESIGN_REFERENCE_ONLY",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    },
+    {
+      "issuer": "INDEXING_OWNER",
+      "reviewed": true,
+      "decision": "INDEXED",
+      "source_id": "NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+      "source_ref": "INDEX:NOTION:3edfa868-dc2a-8186-9030-c60a4ba2d1f5",
+      "index_version": "V6+DELTA_20261002_R2",
+      "review_evidence_refs": [
+        "SOURCE_SNAPSHOT_SHA256:57c9aa8d68c271bb8478107afed2562b87a94e6cf183436ecdd33c20006b8330",
+        "EXTERNAL_VALIDATION:https://qababoard.com/pages/qba-forms/",
+        "EXTERNAL_VALIDATION:https://qababoard.com/pages/qualified-behavior-analyst-credential/"
+      ],
+      "source_family": "SPECTRUMHUB_QABA_RESOURCE_HUB",
+      "source_type": "SECONDARY_OFFICIAL_RESOURCE_LINK_HUB",
+      "authority_class": "SECONDARY_RESOURCE_HUB_VERIFIED_LINKS",
+      "domain": "learning_reference",
+      "consumer": "REFERENCE_DISCOVERY",
+      "domain_use_authorized": false,
+      "stale_after": null,
+      "learning_use_authorized": false,
+      "canonical_url": "https://www.spectrumhub.kr/ko/resources/library",
+      "title": "자료실 — 행동중재 매뉴얼 · QABA 자격별 공식 양식 | SpectrumHub",
+      "provenance": [
+        "NOTION_INCREMENTAL_20261002",
+        "https://www.spectrumhub.kr/ko/resources/library",
+        "SHA256:57c9aa8d68c271bb8478107afed2562b87a94e6cf183436ecdd33c20006b8330"
+      ],
+      "duplicate_relation": {
+        "type": "NEAR_DUPLICATE_PAGE_CAPTURE",
+        "target": "NOTION:3edfa868-dc2a-8166-980f-f3a83b5fcdc9"
+      },
+      "version_relation": null,
+      "guards": [
+        "REFERENCE_ONLY",
+        "NO_LEARNER_PERFORMANCE_INFERENCE"
+      ]
+    }
+  ],
+  "learning_applied": false,
+  "canonical_full_index_mutated": false
+}
