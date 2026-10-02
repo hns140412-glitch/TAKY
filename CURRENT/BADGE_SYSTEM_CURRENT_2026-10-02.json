@@ -1,0 +1,16 @@
+{
+  "schema": "TAKY_BADGE_SYSTEM_CURRENT_V1",
+  "as_of": "2026-10-02",
+  "art_binding": "PASS_60_OF_60",
+  "codex_ui": "PASS",
+  "nature_taxonomy": "PASS_60_OF_60",
+  "runtime_art_delivery": "PASS_60_OF_60",
+  "acquisition_presentation": "PASS",
+  "working_catalog_metadata_sync": "PASS_60_OF_60",
+  "award_runtime_activation": "HOLD",
+  "activation_reason": "60/60 items are still WORKING_DRAFT_NOT_ACTIVE; eventFamilies=0/60; matcher contracts=0/60.",
+  "deployment": "HOLD",
+  "snap_pop_pr": 20,
+  "taky_pr": 196,
+  "next_open": "Define explicit eventFamily + matcher/evidence contracts per badge, test false positives, then request human activation approval."
+}
