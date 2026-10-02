@@ -134,7 +134,7 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
+    "head": "5203baf88c239de4c468785881245c8f0e6db522",
     "producers": [
       "SELF_CHOICE",
       "SELF_RETURN",
@@ -146,10 +146,10 @@
     "all_pr_checks": "PASS_10_OF_10",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE",
-    "runtime_validation_cutoff": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
+    "runtime_validation_cutoff": "5203baf88c239de4c468785881245c8f0e6db522",
     "latest_head_ci": "PASS_10_OF_10",
     "producer_qa_pass_contribution": 27,
-    "runtime_e2e_run_id": 36968446580
+    "runtime_e2e_run_id": 36972348832
   },
   "hide_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
