@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Select a real runtime owner for central badge observation transport, then implement immutable receipt/dedupe validation and prove one E2E observation from Ready-Set, Hide-Seek, and Snap-Pop into matcher input. Keep active 0/60 and deployment HOLD.",
+  "next_open": "Implement a production persistence adapter and ingest endpoint only after selecting a no-surprise storage/auth path; then prove one Ready, Hide, and Snap observation E2E into exact matcher input. No activation or deployment.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -144,13 +144,26 @@
     "invariant": "No weak-proxy producer may be promoted merely to increase coverage."
   },
   "cross_app_transport": {
-    "status": "CONTRACT_DEFINED_RUNTIME_NOT_IMPLEMENTED",
-    "contract_ref": "BADGE/runtime/TAKY_BADGE_CROSS_APP_TRANSPORT_BOUNDARY_V1.md",
-    "runtime_owner": "UNASSIGNED",
-    "immutable_observation_ledger": "NOT_IMPLEMENTED",
-    "exact_schema_validator": "NOT_IMPLEMENTED",
-    "dedupe_conflict_runtime": "NOT_IMPLEMENTED",
-    "e2e_ready_hide_snap_to_matcher": "OPEN",
-    "activation_effect": "NONE"
+    "status": "OWNER_CANDIDATE_SELECTED_CORE_CI_PASS",
+    "owner_candidate": "TAKY-MOBILE_SERVER_RUNTIME",
+    "owner_candidate_reason": "TAKY-MOBILE is the existing runtime/orchestration projection with authenticated server-side gateway; no other repository has a proven central runtime boundary.",
+    "implementation_branch": "taky/badge-central-transport-core-20261002",
+    "draft_pr": 2,
+    "head": "90c206dbea2b10a0aec217d6893584828442f4b5",
+    "core_validation": "PASS",
+    "core_capabilities": [
+      "EXACT_SOURCE_OBSERVATION_SCHEMA_VALIDATION",
+      "ALLOWED_APP_VALIDATION",
+      "OBSERVATION_ONLY_AUTHORITY_ENFORCEMENT",
+      "APP_ID_EVENT_ID_DEDUPE",
+      "CONFLICT_FAIL_CLOSED",
+      "EXACT_MATCHER_TUPLE_PROJECTION"
+    ],
+    "production_immutable_observation_ledger": "OPEN",
+    "production_ingest_endpoint": "OPEN",
+    "cross_app_auth": "OPEN",
+    "ready_hide_snap_e2e_to_matcher": "OPEN",
+    "activation_effect": "NONE",
+    "deployment": "HOLD"
   }
 }
