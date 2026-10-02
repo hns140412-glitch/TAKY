@@ -84,7 +84,7 @@
     "ready_draft_pr": 143,
     "ready_runtime_e2e": "PASS",
     "ready_all_pr_checks": "PASS",
-    "ready_pr_head": "e3b3be5a644b69d70caaffb2f0b28f1e0ef5efb9",
+    "ready_pr_head": "5203baf88c239de4c468785881245c8f0e6db522",
     "hide_source_branch": "taky/badge-source-producers-20261002",
     "hide_draft_pr": 29,
     "hide_validation": "PASS",
@@ -93,7 +93,7 @@
     "ready_pause_return": "PASS",
     "ready_condition_rest_return": "PASS",
     "hide_error_review": "PASS",
-    "ready_runtime_e2e_run_id": 36966865172
+    "ready_runtime_e2e_run_id": 36972348832
   },
   "invariants": [
     "No badge is activated by this matrix.",
