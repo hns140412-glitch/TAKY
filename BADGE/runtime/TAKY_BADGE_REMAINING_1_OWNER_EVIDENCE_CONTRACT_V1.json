@@ -1,7 +1,7 @@
 {
   "schema": "TAKY_BADGE_REMAINING_1_OWNER_EVIDENCE_CONTRACT_V1",
-  "version": "2026-10-02.11",
-  "status": "AUDITED_1_TRANSPORT_HOLD",
+  "version": "2026-10-02.12",
+  "status": "AUDITED_1_LIVE_DEPLOYMENT_GATE",
   "authority_inputs": [
     "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_1_V1.json",
     "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
@@ -33,11 +33,11 @@
         "current same-target verified success evidence",
         "Learning Engine comparison/recovery receipt referencing both"
       ],
-      "implementation_prerequisite": "Learning Engine recovery-profile/comparator output must be bridged to Hide as observation-only source; single score delta forbidden",
+      "implementation_prerequisite": "Predeploy comparator→Hide intake→ECDSA signed transport is code/CI PASS. Remaining: deployed central endpoint + real Hide installation key registration + signed live E2E into matcher.",
       "ui_delta": "NONE",
-      "status": "BLOCKED_TRUSTED_TRANSPORT_HOLD",
+      "status": "BLOCKED_LIVE_DEPLOYMENT_AND_KEY_REGISTRATION",
       "implementation_evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json",
-      "note": "Comparator and Hide bridge pass code/CI, but trusted live transport is not deployed/bound; deployment remains HOLD."
+      "note": "No further source-code blocker remains before live deployment; activation stays HOLD until live trusted E2E."
     }
   ],
   "audit_summary": {
