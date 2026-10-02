@@ -188,6 +188,61 @@
         "Research does not collapse into generic policy accumulation."
       ],
       "owner_destination": "TAKY growth intelligence"
+    },
+    {
+      "gap_id": "GROWTH-OCR-LIVE-PROVIDER-001",
+      "priority": "P1",
+      "title": "Verify actual Google OCR provider against approved family intake and review draft",
+      "applies_to": [
+        "Ready-Set",
+        "Hide-Seek"
+      ],
+      "state": "OPEN",
+      "evidence": [
+        "User clarification 2026-09-28: Google API OCR was researched but an actual provider call/application was not trialed.",
+        "TAKY CAP-OCR-INGEST-001 is a shared reference ingestion mechanism, not a live Google OCR test.",
+        "Hide PR #12 includes fixture-based family OCR adapter/browser flow and explicitly holds live OCR provider verification.",
+        "Ready product capture contract requires originals -> review draft -> Parent correction -> confirmed FACT.",
+        "Hide PR #12 hide-family-ocr-adapter.js constructs normalizedEvidence.request_id from its own outgoing ingest.request.request_id; the observed response processing does not independently establish a server-echoed trusted request id. TAKY validateForRequest on this locally rewrapped object alone is not proof of server/provider roundtrip correlation.",
+        "Owner draft routes for actual app-side use: Ready PR #113 and Hide V2 stacked PR #20; their CI outcomes must be checked per exact HEAD. These drafts do not establish a real Google provider call or deployed server echo."
+      ],
+      "improvement_direction": "Do not rebuild the existing family capture transport or Hide vocabulary adapter. Compare Google Cloud Vision OCR/Gemini image input using synthetic nonpersonal ground-truth print/handwriting samples; keep source_id, per-field uncertainty, review-before-FACT, partial page retry and cost/privacy evidence. NVIDIA models remain optional independent research baseline, not automatic provider substitution.",
+      "exit_conditions": [
+        "Real authorized provider invocation and exact model/API SKU are evidenced; fixture-only success remains separately labeled.",
+        "Field-level ground truth, printed/new-vs-review vocabulary/handwriting errors, latency and actual billed units are recorded.",
+        "No child/customer personal data is used during a trial by default; provider-specific terms and spend cap are verified before calls.",
+        "Ready owns family capture transport and Parent FACT confirmation; Hide only owns vocabulary pairing and interaction semantics.",
+        "Negative regression proves no OCR draft can become confirmed FACT or verified mastery without owning review/verification.",
+        "No production claim, paid auto-escalation, main merge or Netlify deployment from this candidate.",
+        "Authorized Ready /api/capture/analyze response correlation is independently checked: server echoes or securely binds exact request_id and allowed source ids; Hide compares returned binding before constructing a normalized result, rather than treating its own request id as provider proof.",
+        "Consumer adoption of validateForRequest is proven on exact owner branch/HEAD with multi-capture, excluded-answer-reference, retry and cross-batch negative regressions; central helper CI alone is not consumer migration."
+      ],
+      "owner_destination": "Ready-Set family capture/OCR owner; Hide-Seek V2 vocabulary adapter consumer; TAKY shared CAP-OCR-INGEST-001 for generic mechanism only",
+      "cross_domain_reuse": "Eunha Farm and ARCHI GROW may reuse only technical mechanism after separate Work-domain evidence, not child/Parent semantics.",
+      "research_sources": [
+        "https://cloud.google.com/vision/pricing",
+        "https://cloud.google.com/vision/docs/data-usage",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "integration_candidates": [
+        {
+          "owner": "Ready-Set",
+          "pr": "https://github.com/hns140412-glitch/Ready-Set/pull/113",
+          "head_sha": "177294ca48bc796ba01d986b66cf1f97c40255a3",
+          "base_sha": "1d672d862cc8329a5f19ca91c9ed6a338752f5ae",
+          "state": "DRAFT_FRONTEND_AND_SERVER_CONTRACT_CI_VERIFIED_NOT_DEPLOYED",
+          "scope": "Ready adapter plus existing server endpoint and pure metadata/evidence regression; server echoes exact request id, rejects excluded answer reference, invalid upload/source; no provider-live claim."
+        },
+        {
+          "owner": "Hide-Seek V2",
+          "pr": "https://github.com/hns140412-glitch/Hide-Seek/pull/20",
+          "head_sha": "0367e57fdd7526d0d6ee4404ef87584e02812c8c",
+          "base_sha": "1ccbd372890ba079accadb86e7610cd3fdad240a",
+          "state": "DRAFT_STACKED_ON_PR12_TESTS_TO_VERIFY_EXACT_HEAD",
+          "scope": "Hide V2 shared adapter exact response echo plus explicit per-row provenance; browser fixtures now independently echo multipart request/page; no real family Hide server handler exists."
+        }
+      ],
+      "source_recovery_correction": "Existing Ready main netlify/functions/capture-analyze.mjs was recovered from merged Ready PR #41. Its coded provider is OPENAI_RESPONSES_VISION with server-only OPENAI_API_KEY, not Google OCR. Google API remains researched, without actual provider-call or operating-cost proof. Current shared Ready route authorizes PARENT only and does not implement HIDE_VOCABULARY output; staged Ready PR #113 explicitly returns 422 HIDE_VOCABULARY_UNSUPPORTED until an Owner-authorized real domain provider and CHILD grant are implemented."
     }
   ]
 }
