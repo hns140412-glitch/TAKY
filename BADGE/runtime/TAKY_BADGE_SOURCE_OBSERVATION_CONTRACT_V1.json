@@ -1,0 +1,236 @@
+{
+  "schema": "TAKY_BADGE_SOURCE_OBSERVATION_CONTRACT_V1",
+  "version": "2026-10-02.1",
+  "status": "OBSERVATION_ONLY_FAIL_CLOSED",
+  "purpose": "Normalize explicit badge-relevant source observations before any award matcher. This contract never awards badges.",
+  "allowed_apps": [
+    "READY_SET",
+    "SNAP_POP",
+    "HIDE_SEEK",
+    "EXTERNAL_APP"
+  ],
+  "required_fields": [
+    "event_id",
+    "app_id",
+    "event_family",
+    "behavior_code",
+    "occurred_at",
+    "source_contract_id",
+    "evidence_ref",
+    "explicit_child_action"
+  ],
+  "optional_scope_fields": [
+    "session_id",
+    "task_id",
+    "lap_id",
+    "learning_target_id",
+    "planner_todo_id",
+    "record_id",
+    "artifact_refs"
+  ],
+  "family_registry": {
+    "SELF_START": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "TIME_CREATION": {
+      "apps": [
+        "READY_SET"
+      ],
+      "existing_runtime_family": true
+    },
+    "EXTRA_TASK": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "FOCUS": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "RETURN_RECOVERY": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "HELP_REQUEST": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "existing_runtime_family": true
+    },
+    "ERROR_DISCOVERY": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true,
+      "strong_evidence": true
+    },
+    "RETRY": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "DEEP_THINKING": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true,
+      "strong_evidence": true
+    },
+    "ISSUE_DURATION": {
+      "apps": [
+        "READY_SET"
+      ],
+      "existing_runtime_family": true
+    },
+    "SELF_EXPLANATION": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true
+    },
+    "PLAN_ADAPTATION": {
+      "apps": [
+        "READY_SET"
+      ],
+      "existing_runtime_family": true
+    },
+    "SPECIAL_BEHAVIOR": {
+      "apps": [
+        "SNAP_POP",
+        "READY_SET",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": true,
+      "strong_evidence": true
+    },
+    "WRITING_EXPLORATION": {
+      "apps": [
+        "SNAP_POP"
+      ],
+      "existing_runtime_family": true
+    },
+    "GOAL_COMPLETE": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "SELF_CHOICE": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "SELF_PLANNING": {
+      "apps": [
+        "READY_SET"
+      ],
+      "existing_runtime_family": false
+    },
+    "HELP_USE": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "existing_runtime_family": false
+    },
+    "ERROR_CORRECTION": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "ERROR_ANALYSIS": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "BREAKTHROUGH": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "CONCEPT_UNDERSTANDING": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "SELF_REGULATION": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    },
+    "STRATEGY_SWITCH": {
+      "apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "existing_runtime_family": false
+    },
+    "IMPROVEMENT": {
+      "apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "existing_runtime_family": false
+    }
+  },
+  "prohibited_as_sufficient_evidence": [
+    "ELAPSED_TIME_ONLY",
+    "SCORE_ONLY",
+    "AI_INFERENCE_ONLY",
+    "MODEL_CONFIDENCE_ONLY",
+    "PARENT_GUESS_ONLY",
+    "SILENCE_ONLY",
+    "ATTEMPT_COUNT_ONLY"
+  ],
+  "output": {
+    "disposition": "OBSERVATION_ONLY",
+    "badge_award_authorized": false,
+    "economy_mutation_authorized": false,
+    "catalog_activation_allowed": false
+  },
+  "dedupe": "event_id",
+  "activation_boundary": "A separate approved badge matcher contract must consume a normalized observation; this source contract cannot activate catalog items."
+}

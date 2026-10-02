@@ -1,0 +1,682 @@
+{
+  "schema": "TAKY_BADGE_NATURE_CLASSIFICATION_V1",
+  "version": "2026-10-02.1",
+  "status": "CURRENT",
+  "purpose": "Semantic badge nature used by codex filter/sort/grouping; independent from artwork category, ownership, tier and award state.",
+  "taxonomy": {
+    "SELF_DIRECTED": {
+      "label_ko": "스스로",
+      "order": 1,
+      "description": "먼저 시작·선택·행동한 경험"
+    },
+    "GOAL_ACHIEVEMENT": {
+      "label_ko": "목표도달",
+      "order": 2,
+      "description": "끝까지 완료하거나 목표 지점에 도달한 경험"
+    },
+    "FOCUS_IMMERSION": {
+      "label_ko": "집중·몰입",
+      "order": 3,
+      "description": "집중을 유지하거나 흐름에 깊게 들어간 경험"
+    },
+    "RECOVERY_RESILIENCE": {
+      "label_ko": "복귀·재도전",
+      "order": 4,
+      "description": "흐트러짐·실패·피로 뒤 다시 돌아온 경험"
+    },
+    "ERROR_LEARNING": {
+      "label_ko": "실수·교정",
+      "order": 5,
+      "description": "실수를 발견하고 다시 보고 고친 경험"
+    },
+    "PLANNING_SELF_REGULATION": {
+      "label_ko": "계획·조절",
+      "order": 6,
+      "description": "시간·순서·난이도·휴식·유혹을 스스로 조절한 경험"
+    },
+    "PROBLEM_SOLVING": {
+      "label_ko": "문제해결",
+      "order": 7,
+      "description": "막힘을 풀거나 도움·전략을 활용해 해결한 경험"
+    },
+    "EXTRA_GROWTH": {
+      "label_ko": "추가도전·성장",
+      "order": 8,
+      "description": "요구 이상으로 확장하거나 이해·설명·성장을 보여준 경험"
+    }
+  },
+  "counts_by_nature": {
+    "SELF_DIRECTED": 6,
+    "RECOVERY_RESILIENCE": 10,
+    "GOAL_ACHIEVEMENT": 8,
+    "PLANNING_SELF_REGULATION": 8,
+    "EXTRA_GROWTH": 6,
+    "FOCUS_IMMERSION": 8,
+    "PROBLEM_SOLVING": 6,
+    "ERROR_LEARNING": 8
+  },
+  "invariants": [
+    "exactly one primary_nature per badge",
+    "nature_tags may be multiple",
+    "classification changes do not change badge_id, visual_id, asset_slot_id, art bytes, art sha256, ownership, tier or award history",
+    "POCKET/FIELD/EXPEDITION/SECRET remains a separate presentation/rank axis",
+    "nature is derived from badge meaning/trigger semantics, not from visual motif"
+  ],
+  "items": [
+    {
+      "slot": 1,
+      "badge_id": "BDG-DRAFT-001",
+      "display_title": "이불 왕국 탈출기",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "EARLY_START",
+        "SELF_START"
+      ]
+    },
+    {
+      "slot": 2,
+      "badge_id": "BDG-DRAFT-002",
+      "display_title": "알람보다 한발 먼저",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "ALARM_RESPONSE",
+        "SELF_START"
+      ]
+    },
+    {
+      "slot": 3,
+      "badge_id": "BDG-DRAFT-003",
+      "display_title": "한 입 먹고 한 칸",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "MICRO_START"
+      ]
+    },
+    {
+      "slot": 4,
+      "badge_id": "BDG-DRAFT-004",
+      "display_title": "밥심으로 2라운드",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "RESTART_AFTER_BREAK"
+      ]
+    },
+    {
+      "slot": 5,
+      "badge_id": "BDG-DRAFT-005",
+      "display_title": "신발끈은 이미 출발했다",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "PREPARATION_COMPLETE"
+      ]
+    },
+    {
+      "slot": 6,
+      "badge_id": "BDG-DRAFT-006",
+      "display_title": "잃어버린 분을 찾습니다",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "TIME_CREATION",
+        "SELF_START"
+      ]
+    },
+    {
+      "slot": 7,
+      "badge_id": "BDG-DRAFT-007",
+      "display_title": "시계의 비밀 주머니",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "TIME_CREATION",
+        "EXTRA_TASK"
+      ]
+    },
+    {
+      "slot": 8,
+      "badge_id": "BDG-DRAFT-008",
+      "display_title": "한 개는 덤입니다",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "EXTRA_TASK",
+        "SELF_CHOICE"
+      ]
+    },
+    {
+      "slot": 9,
+      "badge_id": "BDG-DRAFT-009",
+      "display_title": "아무도 안 시켰는데요?",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "SELF_START",
+        "BEFORE_PROMPT"
+      ]
+    },
+    {
+      "slot": 10,
+      "badge_id": "BDG-DRAFT-010",
+      "display_title": "말보다 빠른 발자국",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "RESPONSIVE_START"
+      ]
+    },
+    {
+      "slot": 11,
+      "badge_id": "BDG-DRAFT-011",
+      "display_title": "내 작전, 내가 결재",
+      "primary_nature": "SELF_DIRECTED",
+      "nature_label_ko": "스스로",
+      "nature_tags": [
+        "SELF_CHOICE"
+      ]
+    },
+    {
+      "slot": 12,
+      "badge_id": "BDG-DRAFT-012",
+      "display_title": "연필 참모총장",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "SELF_PLANNING",
+        "SEQUENCE"
+      ]
+    },
+    {
+      "slot": 13,
+      "badge_id": "BDG-DRAFT-013",
+      "display_title": "한 칸 집중 본부",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "SINGLE_TASK_FOCUS"
+      ]
+    },
+    {
+      "slot": 14,
+      "badge_id": "BDG-DRAFT-014",
+      "display_title": "번개도 검토했습니다",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "FAST_COMPLETE",
+        "CHECK"
+      ]
+    },
+    {
+      "slot": 15,
+      "badge_id": "BDG-DRAFT-015",
+      "display_title": "거북이의 정밀 탐험",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "ACCURACY",
+        "COMPLETE"
+      ]
+    },
+    {
+      "slot": 16,
+      "badge_id": "BDG-DRAFT-016",
+      "display_title": "한 칸의 반란",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "CHUNKING",
+        "COMPLETE"
+      ]
+    },
+    {
+      "slot": 17,
+      "badge_id": "BDG-DRAFT-017",
+      "display_title": "끝판왕은 마지막 한 칸",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "PERSIST_TO_COMPLETE"
+      ]
+    },
+    {
+      "slot": 18,
+      "badge_id": "BDG-DRAFT-018",
+      "display_title": "불꽃은 조용히 탄다",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "LONG_FOCUS"
+      ]
+    },
+    {
+      "slot": 19,
+      "badge_id": "BDG-DRAFT-019",
+      "display_title": "머릿속은 대원정 중",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "QUIET_IMMERSION"
+      ]
+    },
+    {
+      "slot": 20,
+      "badge_id": "BDG-DRAFT-020",
+      "display_title": "집중 급류 탑승",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "FLOW_CONTINUATION"
+      ]
+    },
+    {
+      "slot": 21,
+      "badge_id": "BDG-DRAFT-021",
+      "display_title": "집중이 귀가했습니다",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "SELF_RETURN"
+      ]
+    },
+    {
+      "slot": 22,
+      "badge_id": "BDG-DRAFT-022",
+      "display_title": "잠깐 외출한 집중 씨",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "FOCUS_RETURN"
+      ]
+    },
+    {
+      "slot": 23,
+      "badge_id": "BDG-DRAFT-023",
+      "display_title": "흩어진 마음 수거함",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "SELF_NOTICE_RETURN"
+      ]
+    },
+    {
+      "slot": 24,
+      "badge_id": "BDG-DRAFT-024",
+      "display_title": "오늘 한 조각 구조 완료",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "HELP_USE",
+        "RECOVERY"
+      ]
+    },
+    {
+      "slot": 25,
+      "badge_id": "BDG-DRAFT-025",
+      "display_title": "SOS도 기술이다",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "HELP_REQUEST"
+      ]
+    },
+    {
+      "slot": 26,
+      "badge_id": "BDG-DRAFT-026",
+      "display_title": "이상한 건 못 지나쳐",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "ERROR_DISCOVERY"
+      ]
+    },
+    {
+      "slot": 27,
+      "badge_id": "BDG-DRAFT-027",
+      "display_title": "실수 청소부",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "ERROR_REVIEW"
+      ]
+    },
+    {
+      "slot": 28,
+      "badge_id": "BDG-DRAFT-028",
+      "display_title": "수정이 나를 키웠다",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "ERROR_CORRECTION",
+        "COMPLETE"
+      ]
+    },
+    {
+      "slot": 29,
+      "badge_id": "BDG-DRAFT-029",
+      "display_title": "다시 누르는 용기",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "RETRY"
+      ]
+    },
+    {
+      "slot": 30,
+      "badge_id": "BDG-DRAFT-030",
+      "display_title": "범인은 3번째 줄",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "ROOT_CAUSE"
+      ]
+    },
+    {
+      "slot": 31,
+      "badge_id": "BDG-DRAFT-031",
+      "display_title": "퍼즐은 마지막에 웃는다",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "BREAKTHROUGH",
+        "PERSISTENCE"
+      ]
+    },
+    {
+      "slot": 32,
+      "badge_id": "BDG-DRAFT-032",
+      "display_title": "머릿속 전구 긴급 점등",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "CONCEPT_UNDERSTANDING"
+      ]
+    },
+    {
+      "slot": 33,
+      "badge_id": "BDG-DRAFT-033",
+      "display_title": "잠깐! 생각 검문",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "REFLECTION",
+        "SLOW_DOWN"
+      ]
+    },
+    {
+      "slot": 34,
+      "badge_id": "BDG-DRAFT-034",
+      "display_title": "두 번째 눈이 찾았다",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "REREAD_CHECK"
+      ]
+    },
+    {
+      "slot": 35,
+      "badge_id": "BDG-DRAFT-035",
+      "display_title": "숫자의 알리바이",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "CALCULATION_CHECK"
+      ]
+    },
+    {
+      "slot": 36,
+      "badge_id": "BDG-DRAFT-036",
+      "display_title": "지우개는 퇴각하지 않는다",
+      "primary_nature": "ERROR_LEARNING",
+      "nature_label_ko": "실수·교정",
+      "nature_tags": [
+        "CORRECTION_COURAGE"
+      ]
+    },
+    {
+      "slot": 37,
+      "badge_id": "BDG-DRAFT-037",
+      "display_title": "장고 끝에 지도 한 장",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "DEEP_THINKING"
+      ]
+    },
+    {
+      "slot": 38,
+      "badge_id": "BDG-DRAFT-038",
+      "display_title": "동굴에 답이 살고 있다",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "DEEP_THINKING",
+        "PERSISTENCE"
+      ]
+    },
+    {
+      "slot": 39,
+      "badge_id": "BDG-DRAFT-039",
+      "display_title": "막다른 길의 뒷문",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "BREAKTHROUGH"
+      ]
+    },
+    {
+      "slot": 40,
+      "badge_id": "BDG-DRAFT-040",
+      "display_title": "멈춤도 실력입니다",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "STOP_AT_RIGHT_TIME"
+      ]
+    },
+    {
+      "slot": 41,
+      "badge_id": "BDG-DRAFT-041",
+      "display_title": "지도 밖으로 한 발",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "MEANINGFUL_OVERRUN"
+      ]
+    },
+    {
+      "slot": 42,
+      "badge_id": "BDG-DRAFT-042",
+      "display_title": "시계 실종 사건",
+      "primary_nature": "FOCUS_IMMERSION",
+      "nature_label_ko": "집중·몰입",
+      "nature_tags": [
+        "FLOW_IMMERSION"
+      ]
+    },
+    {
+      "slot": 43,
+      "badge_id": "BDG-DRAFT-043",
+      "display_title": "휴식 후 재접속",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "BREAK_RETURN"
+      ]
+    },
+    {
+      "slot": 44,
+      "badge_id": "BDG-DRAFT-044",
+      "display_title": "5분은 내가 지킨다",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "TIMER_RETURN"
+      ]
+    },
+    {
+      "slot": 45,
+      "badge_id": "BDG-DRAFT-045",
+      "display_title": "딴길은 다음에",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "DISTRACTION_RESISTANCE"
+      ]
+    },
+    {
+      "slot": 46,
+      "badge_id": "BDG-DRAFT-046",
+      "display_title": "책상: 돌아온 주인",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "TASK_RESTART"
+      ]
+    },
+    {
+      "slot": 47,
+      "badge_id": "BDG-DRAFT-047",
+      "display_title": "배낭의 질서 회복",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "CARRY_OVER_COMPLETE"
+      ]
+    },
+    {
+      "slot": 48,
+      "badge_id": "BDG-DRAFT-048",
+      "display_title": "내일의 나에게 휴가를",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "SELF_CHECK_COMPLETE"
+      ]
+    },
+    {
+      "slot": 49,
+      "badge_id": "BDG-DRAFT-049",
+      "display_title": "마무리의 깃털",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "nature_label_ko": "목표도달",
+      "nature_tags": [
+        "MICRO_TASK_COMPLETE"
+      ]
+    },
+    {
+      "slot": 50,
+      "badge_id": "BDG-DRAFT-050",
+      "display_title": "큰 문부터 노크",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "PRIORITIZE_HARD"
+      ]
+    },
+    {
+      "slot": 51,
+      "badge_id": "BDG-DRAFT-051",
+      "display_title": "작은 문부터 똑똑",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "WARM_START"
+      ]
+    },
+    {
+      "slot": 52,
+      "badge_id": "BDG-DRAFT-052",
+      "display_title": "열쇠는 하나가 아니지",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "STRATEGY_SWITCH"
+      ]
+    },
+    {
+      "slot": 53,
+      "badge_id": "BDG-DRAFT-053",
+      "display_title": "말풍선의 연금술",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "SELF_EXPLANATION"
+      ]
+    },
+    {
+      "slot": 54,
+      "badge_id": "BDG-DRAFT-054",
+      "display_title": "어제의 나와 재회",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "IMPROVEMENT"
+      ]
+    },
+    {
+      "slot": 55,
+      "badge_id": "BDG-DRAFT-055",
+      "display_title": "지도에 없던 보너스 스테이지",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "VOLUNTARY_EXTRA"
+      ]
+    },
+    {
+      "slot": 56,
+      "badge_id": "BDG-DRAFT-056",
+      "display_title": "계획표의 유연체조",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "nature_label_ko": "계획·조절",
+      "nature_tags": [
+        "PLAN_ADAPTATION"
+      ]
+    },
+    {
+      "slot": 57,
+      "badge_id": "BDG-DRAFT-057",
+      "display_title": "준비 덜 됐어도 출항",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "START_DESPITE_CONDITION"
+      ]
+    },
+    {
+      "slot": 58,
+      "badge_id": "BDG-DRAFT-058",
+      "display_title": "잠깐 쉬고, 다시 출항",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "nature_label_ko": "복귀·재도전",
+      "nature_tags": [
+        "REST_AND_RETURN"
+      ]
+    },
+    {
+      "slot": 59,
+      "badge_id": "BDG-DRAFT-059",
+      "display_title": "우리끼리 미니 원정대",
+      "primary_nature": "PROBLEM_SOLVING",
+      "nature_label_ko": "문제해결",
+      "nature_tags": [
+        "MINIMAL_HINT_SOLVE"
+      ]
+    },
+    {
+      "slot": 60,
+      "badge_id": "BDG-DRAFT-060",
+      "display_title": "오늘의 별자리, 나만 알아",
+      "primary_nature": "EXTRA_GROWTH",
+      "nature_label_ko": "추가도전·성장",
+      "nature_tags": [
+        "SPECIAL_BEHAVIOR"
+      ]
+    }
+  ]
+}

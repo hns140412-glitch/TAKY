@@ -1,0 +1,504 @@
+{
+  "schema": "TAKY_BADGE_SYSTEM_CURRENT_V1",
+  "as_of": "2026-10-02",
+  "art_binding": "PASS_60_OF_60",
+  "codex_ui": "PASS",
+  "nature_taxonomy": "PASS_60_OF_60",
+  "runtime_art_delivery": "PASS_60_OF_60",
+  "acquisition_presentation": "PASS",
+  "working_catalog_metadata_sync": "PASS_60_OF_60",
+  "award_runtime_activation": "HOLD",
+  "activation_reason": "60/60 catalog items remain WORKING_DRAFT_NOT_ACTIVE. Source producer QA is 59/60. BDG-DRAFT-054 has predeploy comparator→Hide intake→ECDSA signed transport code/CI PASS; only live endpoint deployment, real Hide installation key registration, and signed live E2E remain. No badge is active.",
+  "deployment": "HOLD",
+  "snap_pop_pr": 20,
+  "taky_pr": 196,
+  "next_open": "Remaining 1: BDG-DRAFT-054 live trusted transport gate only. Required next actions: deploy central badge endpoint, register real Hide installation public key, prove signed live improvement observation reaches matcher input. active remains 0/60; deployment requires user approval.",
+  "activation_contract_analysis": {
+    "total_badges": 60,
+    "existing_family_direct": 28,
+    "existing_family_strong_evidence": 6,
+    "family_extension_required": 26,
+    "proposed_extensions": [
+      "GOAL_COMPLETE",
+      "SELF_CHOICE",
+      "SELF_PLANNING",
+      "HELP_USE",
+      "ERROR_CORRECTION",
+      "ERROR_ANALYSIS",
+      "BREAKTHROUGH",
+      "CONCEPT_UNDERSTANDING",
+      "SELF_REGULATION",
+      "STRATEGY_SWITCH",
+      "IMPROVEMENT"
+    ],
+    "proposal_status": "REVIEW_REQUIRED_NOT_ACTIVE",
+    "guard_status": "FAIL_CLOSED_ENFORCED",
+    "runtime_test": "PASS"
+  },
+  "source_observation_contract": {
+    "contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
+    "family_count": 25,
+    "status": "PASS_OBSERVATION_ONLY",
+    "award_authority": false,
+    "economy_authority": false
+  },
+  "matcher_evidence_matrix": {
+    "total": 60,
+    "source_producer_qa_pass": 59,
+    "source_producer_required": 1,
+    "active": 0,
+    "verified_badges": [
+      "BDG-DRAFT-001",
+      "BDG-DRAFT-002",
+      "BDG-DRAFT-003",
+      "BDG-DRAFT-004",
+      "BDG-DRAFT-005",
+      "BDG-DRAFT-006",
+      "BDG-DRAFT-007",
+      "BDG-DRAFT-008",
+      "BDG-DRAFT-009",
+      "BDG-DRAFT-010",
+      "BDG-DRAFT-011",
+      "BDG-DRAFT-012",
+      "BDG-DRAFT-014",
+      "BDG-DRAFT-015",
+      "BDG-DRAFT-016",
+      "BDG-DRAFT-017",
+      "BDG-DRAFT-018",
+      "BDG-DRAFT-019",
+      "BDG-DRAFT-020",
+      "BDG-DRAFT-021",
+      "BDG-DRAFT-022",
+      "BDG-DRAFT-023",
+      "BDG-DRAFT-024",
+      "BDG-DRAFT-025",
+      "BDG-DRAFT-026",
+      "BDG-DRAFT-027",
+      "BDG-DRAFT-028",
+      "BDG-DRAFT-029",
+      "BDG-DRAFT-030",
+      "BDG-DRAFT-031",
+      "BDG-DRAFT-032",
+      "BDG-DRAFT-033",
+      "BDG-DRAFT-034",
+      "BDG-DRAFT-035",
+      "BDG-DRAFT-036",
+      "BDG-DRAFT-037",
+      "BDG-DRAFT-038",
+      "BDG-DRAFT-039",
+      "BDG-DRAFT-040",
+      "BDG-DRAFT-042",
+      "BDG-DRAFT-043",
+      "BDG-DRAFT-044",
+      "BDG-DRAFT-045",
+      "BDG-DRAFT-046",
+      "BDG-DRAFT-047",
+      "BDG-DRAFT-048",
+      "BDG-DRAFT-049",
+      "BDG-DRAFT-050",
+      "BDG-DRAFT-051",
+      "BDG-DRAFT-052",
+      "BDG-DRAFT-053",
+      "BDG-DRAFT-055",
+      "BDG-DRAFT-056",
+      "BDG-DRAFT-057",
+      "BDG-DRAFT-058",
+      "BDG-DRAFT-059",
+      "BDG-DRAFT-060"
+    ],
+    "status": "SOURCE_PRODUCER_QA_59_OF_60_ACTIVE_HOLD",
+    "source_producer_implemented_pending_ci": 0
+  },
+  "source_only_award_boundary": {
+    "status": "PASS",
+    "rule": "Only normalized TAKY_BADGE_SOURCE_OBSERVATION_V1 may enter badge award matching.",
+    "legacy_event_award_authority": false,
+    "matcher_exact_fields": [
+      "event_family",
+      "behavior_code",
+      "source_contract_id",
+      "explicit_child_action"
+    ],
+    "browser_runtime": "PASS",
+    "pwa_recovery": "PASS",
+    "multi_source_supported": true
+  },
+  "event_family_registry": {
+    "contract": "TAKY_BADGE_EVENT_FAMILY_REGISTRY_V1",
+    "family_count": 25,
+    "original_family_count": 14,
+    "approved_extension_count": 11,
+    "semantic_status": "HUMAN_APPROVED",
+    "observation_only": true,
+    "activation_effect": "NONE",
+    "validator": "PASS"
+  },
+  "multi_source_matcher": {
+    "contract": "TAKY_BADGE_MULTI_SOURCE_MATCHER_CONTRACT_V1",
+    "status": "PASS_FAIL_CLOSED",
+    "exact_tuple": [
+      "appId",
+      "eventFamily",
+      "behaviorCode",
+      "sourceContractId"
+    ],
+    "explicit_child_action_required": true,
+    "browser_runtime": "PASS",
+    "static_validator": "PASS"
+  },
+  "ready_source_producers": {
+    "branch": "taky/badge-source-producers-20261002",
+    "draft_pr": 143,
+    "head": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+    "producers": [
+      "SELF_CHOICE",
+      "SELF_RETURN",
+      "CARRY_OVER_COMPLETE",
+      "SELF_CHECK_COMPLETE",
+      "REST_AND_RETURN",
+      "BLOCK_RESOLVED",
+      "LONG_FOCUS",
+      "QUIET_IMMERSION",
+      "PREPARATION_COMPLETE",
+      "RESPONSIVE_START",
+      "EARLY_START",
+      "TIME_CREATION_EXTRA",
+      "ALARM_RESPONSE",
+      "BEFORE_PROMPT"
+    ],
+    "runtime_e2e": "PASS",
+    "all_pr_checks": "PASS_10_OF_10",
+    "transport_to_central_award_ledger": "OPEN",
+    "activation_effect": "NONE",
+    "runtime_validation_cutoff": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+    "latest_head_ci": "PASS_10_OF_10",
+    "producer_qa_pass_contribution": 36,
+    "runtime_e2e_run_id": 36997249758
+  },
+  "hide_source_producers": {
+    "branch": "taky/badge-source-producers-20261002",
+    "draft_pr": 29,
+    "head": "c2b08b6b2dc9f2fc1deed5c498fd01de4a50eeba",
+    "producers": [
+      "ERROR_REVIEW",
+      "ERROR_CORRECTED_COMPLETE",
+      "CORRECTION_COURAGE",
+      "ROOT_CAUSE_FOUND",
+      "PERSISTENT_BREAKTHROUGH"
+    ],
+    "validation": "PASS_2_OF_2",
+    "transport_to_central_award_ledger": "OPEN",
+    "activation_effect": "NONE"
+  },
+  "remaining_producer_gap_audit": {
+    "status": "PASS_RECLASSIFIED_1_OPEN_LIVE_DEPLOYMENT_GATE",
+    "source_producer_qa_pass": 59,
+    "remaining": 1,
+    "real_life_or_authority_signal_missing": 0,
+    "focus_immersion_semantics_unsafe": 0,
+    "learning_problem_evidence_needed": 1,
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_1_V1.json",
+    "invariant": "First acquisition uses minimum direct explicit evidence; no weak passive inference."
+  },
+  "cross_app_transport": {
+    "status": "CODE_READY_CI_PASS_LIVE_E2E_OPEN",
+    "owner": "TAKY-MOBILE_SERVER_RUNTIME_CANDIDATE",
+    "implementation_branch": "taky/badge-central-transport-core-20261002",
+    "draft_pr": 2,
+    "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+    "latest_ci": "PASS",
+    "storage": {
+      "technology": "NETLIFY_BLOBS",
+      "adapter": "PASS_CODE_TEST",
+      "production_consistency": "STRONG",
+      "non_production_scope": "DEPLOY_SCOPED",
+      "live_data_written": false
+    },
+    "source_auth": {
+      "scheme": "ECDSA_P256_SHA256",
+      "verifier": "PASS_CODE_TEST",
+      "public_key_registry": "PASS_CODE_TEST",
+      "trusted_device_key_registration": "PASS_CODE_TEST",
+      "real_keys_registered": false
+    },
+    "endpoint": {
+      "signed_ingest_gate": "PASS_CODE_TEST",
+      "requires_key_id_and_signature": true,
+      "deployed": false
+    },
+    "source_signers": {
+      "READY_SET": "DORMANT_HELPER_CI_PASS",
+      "HIDE_SEEK": "DORMANT_HELPER_CI_PASS",
+      "SNAP_POP": "DORMANT_HELPER_COMMITTED_CI_NOT_FIRED"
+    },
+    "live_ready_hide_snap_e2e_to_matcher": "OPEN",
+    "activation_effect": "NONE",
+    "deployment": "HOLD",
+    "learning_engine_core_observation_support": "PASS_CODE_AND_CI_NOT_DEPLOYED"
+  },
+  "source_identity_transport_preparation": {
+    "status": "PREPARED_NOT_LIVE",
+    "ready_set": {
+      "branch": "taky/badge-source-producers-20261002",
+      "latest_helper_commit": "2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false
+    },
+    "hide_seek": {
+      "branch": "taky/badge-source-producers-20261002",
+      "latest_helper_commit": "fca0a39cf27f75d141139e6e33b4be7f77fa799e",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false
+    },
+    "snap_pop": {
+      "branch": "taky/badge-catalog-ui-binding-20261001",
+      "latest_helper_commit": "023b1cf2890ab2268dcfe6739e31001a26950606",
+      "helpers": [
+        "SIGNER",
+        "NON_EXTRACTABLE_IDENTITY",
+        "SIGNED_REQUEST_DESCRIPTOR"
+      ],
+      "network_enabled": false,
+      "ci_status": "VERIFY_REQUIRED"
+    },
+    "real_source_keys_registered": false,
+    "live_signed_post": false,
+    "live_e2e_to_matcher": "OPEN"
+  },
+  "remaining_producer_evidence_matrix": "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_8_V1.json",
+  "hide_source_verification": {
+    "repo": "hns140412-glitch/Hide-Seek",
+    "draft_pr": 29,
+    "branch": "taky/badge-source-producers-20261002",
+    "head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+    "validation": "PASS_HARDENED_CI_2_OF_2",
+    "validation_runs": [
+      36977546753,
+      36977546746
+    ],
+    "newly_verified_badge": "BDG-DRAFT-036",
+    "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+    "activation": "HOLD"
+  },
+  "snap_pop_source_verification": {
+    "repo": "hns140412-glitch/Snap-Pop",
+    "draft_pr": 20,
+    "branch": "taky/badge-catalog-ui-binding-20261001",
+    "head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+    "newly_verified_badge": "BDG-DRAFT-038",
+    "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
+    "targeted_validation": "PASS",
+    "source_only_award_boundary": "PASS",
+    "full_branch_closure": "PASS_73_OF_73_LOCAL",
+    "activation": "HOLD"
+  },
+  "remaining_14_existing_producer_recheck": {
+    "status": "SUPERSEDED_BY_EASY_FIRST_POLICY_AND_039_PASS",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_14_EXISTING_PRODUCER_RECHECK_2026-10-02.md",
+    "ready_head": "5203baf88c239de4c468785881245c8f0e6db522",
+    "hide_head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+    "snap_pop_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+    "qa_pass": 47,
+    "open": 13,
+    "active": 0,
+    "key_blockers": [
+      "READY_SIMILAR_EVIDENCE_NOT_AUTHORIZED_FOR_030_031_039",
+      "054_LEARNING_ENGINE_RECOVERY_COMPARISON_EXISTS_BUT_BADGE_SOURCE_BRIDGE_MISSING",
+      "NO_WEAK_PROXY_PROMOTION"
+    ]
+  },
+  "remaining_14_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_039_PASS_AND_REMAINING_13",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_14_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 13,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "acquisition_difficulty_policy": {
+    "ref": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "first_acquisition": "LOW_FRICTION_MINIMUM_EXPLICIT_EVIDENCE",
+    "per_star_difficulty_increase": "NONE_REQUIRED",
+    "tier_promotion_strengthening": "ALLOWED_SEPARATE_POLICY",
+    "activation_effect": "NONE"
+  },
+  "ready_039_source_verification": {
+    "badge_id": "BDG-DRAFT-039",
+    "repo": "hns140412-glitch/Ready-Set",
+    "draft_pr": 143,
+    "source_contract_id": "READY_CHILD_STRATEGY_TO_COMPLETION_V1",
+    "runtime_validation_cutoff": "7d0e257d2515581f8e851fc2302f76cd1ff7d7b1",
+    "runtime_e2e_run_id": 36979777480,
+    "workflow_gates": "PASS_10_OF_10",
+    "first_acquisition": "explicit strategy switch + same-task completion",
+    "activation": "HOLD"
+  },
+  "remaining_13_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_018_PASS_AND_REMAINING_12",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_13_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 12,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "badge_054_improvement_bridge": {
+    "status": "CODE_READY_TRUSTED_TRANSPORT_OPEN",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json",
+    "taky_head": "b6fc510100915b44b655dc60bcc55855d97abc1e",
+    "hide_head": "038c8f0aa3b2bee1e3ee00b4acd1f320d2210a40",
+    "ci": "PASS_TAKY_2_OF_2_HIDE_2_OF_2",
+    "qa_pass_promoted": false,
+    "activation": "HOLD"
+  },
+  "remaining_12_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_030_PASS_AND_REMAINING_11",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_12_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 11,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "ready_018_source_verification": {
+    "badge_id": "BDG-DRAFT-018",
+    "repo": "hns140412-glitch/Ready-Set",
+    "draft_pr": 143,
+    "source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+    "head": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
+    "runtime_e2e_run_id": 36981505499,
+    "workflow_gates": "PASS_10_OF_10",
+    "first_acquisition": "explicit SINGLE_TASK_FOCUS commitment + same-task completion; no elapsed-time qualification",
+    "activation": "HOLD"
+  },
+  "remaining_11_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_019_PASS_AND_REMAINING_10",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_11_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 10,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "hide_030_source_verification": {
+    "badge_id": "BDG-DRAFT-030",
+    "repo": "hns140412-glitch/Hide-Seek",
+    "draft_pr": 29,
+    "source_contract_id": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1",
+    "head": "6ef74c4a02a961dc3504826ce13009b4312a3f59",
+    "validation_runs": [
+      36985756330,
+      36985756346
+    ],
+    "workflow_gates": "PASS_2_OF_2",
+    "first_acquisition": "captured Code Red error artifact + explicit child root-cause explanation bound to the same error",
+    "activation": "HOLD"
+  },
+  "remaining_10_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_031_PASS_AND_REMAINING_9",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_10_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 9,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "ready_019_source_verification": {
+    "badge_id": "BDG-DRAFT-019",
+    "repo": "hns140412-glitch/Ready-Set",
+    "draft_pr": 143,
+    "source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+    "head": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
+    "runtime_e2e_run_id": 36985930301,
+    "workflow_gates": "PASS_10_OF_10",
+    "first_acquisition": "explicit quiet-immersion selection + same-task session completion; no silence/duration qualification",
+    "activation": "HOLD"
+  },
+  "remaining_9_owner_evidence_contract": {
+    "status": "SUPERSEDED_BY_042_PASS_AND_REMAINING_8",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_9_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 8,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "hide_031_source_verification": {
+    "badge_id": "BDG-DRAFT-031",
+    "repo": "hns140412-glitch/Hide-Seek",
+    "draft_pr": 29,
+    "source_contract_id": "HIDE_BLOCKED_CONTINUE_SOLVE_V1",
+    "head": "c2b08b6b2dc9f2fc1deed5c498fd01de4a50eeba",
+    "validation_runs": [
+      36986184979,
+      36986185005
+    ],
+    "workflow_gates": "PASS_2_OF_2",
+    "first_acquisition": "captured wrong artifact + explicit retrace continue + same-word exact solve",
+    "activation": "HOLD"
+  },
+  "remaining_8_owner_evidence_contract": {
+    "status": "7_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_8_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 7,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
+  },
+  "snap_pop_042_source_verification": {
+    "badge_id": "BDG-DRAFT-042",
+    "repo": "hns140412-glitch/Snap-Pop",
+    "draft_pr": 20,
+    "source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
+    "head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+    "branch_closure": "PASS_74_OF_74",
+    "browser_runtime_cdp": "PASS",
+    "pwa_reload_recovery": "PASS",
+    "pwa_offline_shell": "PASS",
+    "first_acquisition": "explicit child writing continuation + same-exploration verified completion; no duration/silence qualification",
+    "activation": "HOLD"
+  },
+  "learning_calculation_check": {
+    "owner": "LEARNING_ENGINE_CORE",
+    "source_contract_id": "LEARNING_VERIFIED_CALCULATION_CHECK_V1",
+    "head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
+    "enforcement_run_id": 36995170201,
+    "status": "PASS_OBSERVATION_ONLY_ACTIVE_HOLD",
+    "transport": {
+      "repository": "hns140412-glitch/TAKY-MOBILE",
+      "branch": "taky/badge-central-transport-core-20261002",
+      "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+      "ci_run_id": 36996083246,
+      "ci": "PASS",
+      "app_gate": "LEARNING_ENGINE_CORE_ALLOWED_FAIL_CLOSED",
+      "deployed": false
+    }
+  },
+  "final_open_badge": "BDG-DRAFT-054",
+  "final_open_detail": {
+    "state": "PREDEPLOY_BINDING_PASS_TRUSTED_LIVE_E2E_OPEN",
+    "hide_head": "0d8af51e8b47f561659135a18ed5c4a0e1304419",
+    "hide_ci_runs": [
+      36997876224,
+      36997876229
+    ],
+    "transport_head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+    "central_transport_ci_run": 36996083246,
+    "learning_comparator_head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
+    "live_endpoint_deployed": false,
+    "real_hide_key_registered": false,
+    "live_signed_e2e": false,
+    "activation": "HOLD",
+    "deployment": "HOLD_REQUIRES_USER_APPROVAL"
+  }
+}

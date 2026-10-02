@@ -1,0 +1,140 @@
+{
+  "schema": "TAKY_BADGE_MULTI_SOURCE_MATCHER_CONTRACT_V1",
+  "version": "2026-10-02.3",
+  "status": "CURRENT_FAIL_CLOSED",
+  "purpose": "Allow the same badge identity to accept explicitly approved source producers from Ready & Set, Hide & Seek, Snap & Pop, or another approved app without weakening badge-specific evidence requirements.",
+  "source_matcher_shape": {
+    "appId": "exact source app",
+    "eventFamily": "exact approved event family",
+    "behaviorCode": "exact badge-specific discriminator",
+    "sourceContractId": "exact producer/evidence contract"
+  },
+  "matching_rule": "A normalized TAKY_BADGE_SOURCE_OBSERVATION_V1 must match one complete sourceMatchers tuple exactly and explicit_child_action must be true.",
+  "activation_requirements": [
+    "active=true",
+    "activationApproved=true",
+    "activationEvidenceRef present",
+    "at least one complete sourceMatchers tuple, or temporary legacy single-source fields",
+    "dedupePolicy present",
+    "reawardPolicy present"
+  ],
+  "invariants": [
+    "Adding a new app producer does not change badge_id, visual_id, asset_slot_id, title, nature taxonomy, or artwork SHA.",
+    "One badge may have multiple approved source producer tuples.",
+    "A source family alone is never sufficient.",
+    "A behavior code alone is never sufficient.",
+    "Source app and source contract must match exactly.",
+    "Historical trigger prose is not executable logic.",
+    "Legacy recordBadgeEvent is non-awarding.",
+    "Catalog remains fail-closed until separate human activation approval."
+  ],
+  "current_verified_source_matchers": [
+    {
+      "badge_id": "BDG-DRAFT-011",
+      "appId": "READY_SET",
+      "eventFamily": "SELF_CHOICE",
+      "behaviorCode": "SELF_CHOICE",
+      "sourceContractId": "READY_EXPLICIT_TASK_SWITCH_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-024",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "HELP_USED_AND_RESUMED",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-025",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_REQUEST",
+      "behaviorCode": "SELF_HELP_REQUEST",
+      "sourceContractId": "SNAP_POP_HINT_REQUEST_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-026",
+      "appId": "SNAP_POP",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "SELF_ERROR_DISCOVERY",
+      "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-028",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_CORRECTION",
+      "behaviorCode": "ERROR_CORRECTED_COMPLETE",
+      "sourceContractId": "HIDE_RETRACE_CORRECTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-029",
+      "appId": "SNAP_POP",
+      "eventFamily": "RETRY",
+      "behaviorCode": "SELF_RETRY",
+      "sourceContractId": "SNAP_POP_CHILD_REVISION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-037",
+      "appId": "SNAP_POP",
+      "eventFamily": "DEEP_THINKING",
+      "behaviorCode": "DEEP_THINKING",
+      "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-047",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "CARRY_OVER_COMPLETE",
+      "sourceContractId": "READY_CARRY_OVER_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-048",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "SELF_CHECK_COMPLETE",
+      "sourceContractId": "READY_WRAP_UP_SELF_CHECK_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-055",
+      "appId": "SNAP_POP",
+      "eventFamily": "EXTRA_TASK",
+      "behaviorCode": "VOLUNTARY_EXTRA",
+      "sourceContractId": "SNAP_POP_BONUS_EXERCISE_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-059",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "MINIMAL_HINT_SOLVE",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-060",
+      "appId": "SNAP_POP",
+      "eventFamily": "SPECIAL_BEHAVIOR",
+      "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
+      "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-021",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "SELF_RETURN",
+      "sourceContractId": "READY_EXPLICIT_PAUSE_RETURN_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-027",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "ERROR_REVIEW",
+      "sourceContractId": "HIDE_EXPLICIT_RETRACE_REVIEW_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-058",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "REST_AND_RETURN",
+      "sourceContractId": "READY_CONDITION_PAUSE_RETURN_V1"
+    }
+  ],
+  "current_active_badges": 0,
+  "current_verified_badge_count": 15
+}

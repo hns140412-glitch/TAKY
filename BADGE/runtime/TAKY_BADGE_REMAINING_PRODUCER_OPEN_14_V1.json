@@ -1,0 +1,248 @@
+{
+  "schema": "TAKY_BADGE_REMAINING_PRODUCER_OPEN_V1",
+  "as_of": "2026-10-02",
+  "status": "OPEN_STRONG_EVIDENCE_REQUIRED",
+  "counts": {
+    "total_catalog": 60,
+    "qa_pass": 46,
+    "open": 14,
+    "active": 0
+  },
+  "global_guards": [
+    "NO_ELAPSED_TIME_ONLY",
+    "NO_SCORE_OR_MASTERY_ONLY",
+    "NO_SILENCE_OR_SCREEN_STILLNESS",
+    "NO_ATTEMPT_COUNT_ONLY",
+    "NO_AI_INFERENCE",
+    "NO_PARENT_GUESS",
+    "NO_MISSING_LOG_AS_PROOF",
+    "SOURCE_EVENT_MUST_BE_EXPLICIT_AND_FEATURE_DECLARED"
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "behavior": "EARLY_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "trusted wake/start boundary",
+        "explicit child start"
+      ],
+      "blocker": "schedule/clock alone cannot prove self-start"
+    },
+    {
+      "badge_id": "BDG-DRAFT-002",
+      "behavior": "ALARM_RESPONSE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "actual alarm-fired or before-alarm boundary",
+        "explicit child action"
+      ],
+      "blocker": "no authoritative alarm event"
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "behavior": "PREPARATION_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit preparation checklist completion",
+        "actual subsequent start"
+      ],
+      "blocker": "generic task start does not prove preparation"
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "behavior": "TIME_CREATION_EXTRA",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "required_evidence": [
+        "child-authored extra-time creation/selection outside existing plan",
+        "task execution in that extra time"
+      ],
+      "blocker": "existing free-window producer would collide with 006"
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "behavior": "BEFORE_PROMPT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "authoritative prompt/request ledger boundary",
+        "explicit child initiation"
+      ],
+      "blocker": "absence of parent log is not proof"
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "behavior": "RESPONSIVE_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "named guidance/prompt event",
+        "feature-declared child response/start linked to prompt"
+      ],
+      "blocker": "elapsed response time is forbidden"
+    },
+    {
+      "badge_id": "BDG-DRAFT-018",
+      "behavior": "LONG_FOCUS",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit child-authored/feature-declared sustained-focus evidence"
+      ],
+      "blocker": "duration alone is forbidden"
+    },
+    {
+      "badge_id": "BDG-DRAFT-019",
+      "behavior": "QUIET_IMMERSION",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit immersion artifact/action distinct from silence"
+      ],
+      "blocker": "silence/foreground time cannot prove immersion"
+    },
+    {
+      "badge_id": "BDG-DRAFT-030",
+      "behavior": "ROOT_CAUSE_FOUND",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "concrete error artifact reference",
+        "child-authored root-cause explanation/selection"
+      ],
+      "blocker": "generic root-cause note is not bound to a verified error artifact"
+    },
+    {
+      "badge_id": "BDG-DRAFT-031",
+      "behavior": "PERSISTENT_BREAKTHROUGH",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit blocked-before artifact",
+        "continued reasoning/action",
+        "verified solved-after artifact"
+      ],
+      "blocker": "attempt count or elapsed blockage is forbidden"
+    },
+    {
+      "badge_id": "BDG-DRAFT-035",
+      "behavior": "CALCULATION_CHECK",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "calculation-domain artifact",
+        "before/after correction evidence",
+        "explicit child check"
+      ],
+      "blocker": "generic correction is not calculation-specific"
+    },
+    {
+      "badge_id": "BDG-DRAFT-039",
+      "behavior": "BLOCK_RESOLVED",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit blocked-before artifact",
+        "strategy/route change or concrete resolution action",
+        "verified solved-after artifact"
+      ],
+      "blocker": "no exact source event currently proves all stages"
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "behavior": "FLOW_IMMERSION",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "explicit child/feature-declared flow evidence"
+      ],
+      "blocker": "foreground duration and silence are forbidden"
+    },
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "behavior": "IMPROVEMENT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "same-target prior evidence",
+        "same-target current evidence",
+        "verified comparison from Learning Engine or equivalent"
+      ],
+      "blocker": "single score delta is forbidden"
+    }
+  ],
+  "invariants": [
+    "NO_ACTIVATION_EFFECT",
+    "NO_MAIN_MERGE",
+    "NO_NETLIFY",
+    "NO_PRODUCTION_DEPLOYMENT"
+  ],
+  "closed_since_previous": [
+    {
+      "badge_id": "BDG-DRAFT-036",
+      "behavior": "CORRECTION_COURAGE",
+      "source_app": "HIDE_SEEK",
+      "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+      "evidence": "explicit RETRACE child action + same-word rejected-letter artifact + subsequent exact-match corrected artifact",
+      "hide_pr": 29,
+      "hide_head": "a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3",
+      "validation_runs": [
+        36977546753,
+        36977546746
+      ],
+      "validation": "PASS_HARDENED_CI_2_OF_2",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-038",
+      "behavior": "DEEP_THINKING_PERSISTENCE",
+      "source_app": "SNAP_POP",
+      "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
+      "evidence": "explicit child reflection artifact bound to same exploration plus verified completionEventId/recordId",
+      "snap_pop_pr": 20,
+      "snap_pop_head": "9f8e970ea76d85e4ae04f292367524db184cc61a",
+      "validation": "PASS_TARGETED_LOCAL_AND_CURRENT_AUTHORITY",
+      "activation": "HOLD"
+    }
+  ]
+}

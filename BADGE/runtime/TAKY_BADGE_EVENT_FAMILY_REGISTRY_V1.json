@@ -1,0 +1,335 @@
+{
+  "schema": "TAKY_BADGE_EVENT_FAMILY_REGISTRY_V1",
+  "version": "2026-10-02.1",
+  "status": "CURRENT_SEMANTICS_APPROVED_OBSERVATION_ONLY",
+  "family_count": 25,
+  "activation_authority": false,
+  "economy_authority": false,
+  "families": [
+    {
+      "id": "SELF_START",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "TIME_CREATION",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "EXTRA_TASK",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "FOCUS",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "RETURN_RECOVERY",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "HELP_REQUEST",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "ERROR_DISCOVERY",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "RETRY",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "DEEP_THINKING",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "ISSUE_DURATION",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "SELF_EXPLANATION",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "PLAN_ADAPTATION",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "SPECIAL_BEHAVIOR",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "WRITING_EXPLORATION",
+      "origin": "EXISTING",
+      "semantic_status": "CURRENT",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED"
+    },
+    {
+      "id": "GOAL_COMPLETE",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 8,
+      "definition": "Source feature explicitly records that the child completed the identified task/goal.",
+      "required": [
+        "task_or_goal_ref",
+        "source_event_id",
+        "explicit_completion_state",
+        "source_contract_id"
+      ],
+      "forbidden": [
+        "elapsed_time_only",
+        "score_only",
+        "parent_guess_only"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "SELF_CHOICE",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Child explicitly selects what to do next from real alternatives or confirms a natural-language choice.",
+      "required": [
+        "choice_set_or_choice_ref",
+        "selected_value",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "parent_selected",
+        "default_selection",
+        "execution_order_inference"
+      ],
+      "review_risk": "LOW"
+    },
+    {
+      "id": "SELF_PLANNING",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Child explicitly sets order/plan before execution.",
+      "required": [
+        "plan_ref",
+        "ordered_items",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "mere_actual_order",
+        "planner_auto_order"
+      ],
+      "review_risk": "LOW"
+    },
+    {
+      "id": "HELP_USE",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 2,
+      "definition": "Child explicitly uses received help/hint and then continues the task.",
+      "required": [
+        "help_event_ref",
+        "resume_or_followup_ref",
+        "explicit_child_action"
+      ],
+      "forbidden": [
+        "help_available_only",
+        "assistant_inference"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "ERROR_CORRECTION",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 4,
+      "definition": "Child explicitly changes an answer/artifact after identifying an issue.",
+      "required": [
+        "before_artifact_ref",
+        "after_artifact_ref",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "model_only_correction",
+        "score_delta_only"
+      ],
+      "review_risk": "LOW"
+    },
+    {
+      "id": "ERROR_ANALYSIS",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Child explicitly identifies or records why an error occurred.",
+      "required": [
+        "error_ref",
+        "child_authored_cause_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "ai_inferred_cause",
+        "parent_guess"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "BREAKTHROUGH",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 2,
+      "definition": "A previously blocked identified task is explicitly resolved, with blocked-before and solved-after evidence.",
+      "required": [
+        "blocked_state_ref",
+        "resolution_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "duration_only",
+        "attempt_count_only"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "CONCEPT_UNDERSTANDING",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Child explicitly reconstructs/explains a concept in own words or completes an equivalent verified artifact.",
+      "required": [
+        "concept_ref",
+        "child_authored_artifact_ref",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "score_only",
+        "model_confidence_only",
+        "single_correct_answer_only"
+      ],
+      "review_risk": "HIGH"
+    },
+    {
+      "id": "SELF_REGULATION",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 4,
+      "definition": "Child explicitly chooses a regulating action such as stop, return, prioritize, or resist distraction.",
+      "required": [
+        "regulation_action_code",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "elapsed_time_only",
+        "silent_behavior_inference",
+        "parent_guess"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "STRATEGY_SWITCH",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Child explicitly switches from one identified strategy to another after the first approach is not working.",
+      "required": [
+        "from_strategy_ref",
+        "to_strategy_ref",
+        "explicit_child_action",
+        "source_event_id"
+      ],
+      "forbidden": [
+        "model_inferred_strategy",
+        "unobserved_change"
+      ],
+      "review_risk": "MEDIUM"
+    },
+    {
+      "id": "IMPROVEMENT",
+      "origin": "2026-10-02_EXTENSION",
+      "semantic_status": "HUMAN_APPROVED",
+      "observation_only": true,
+      "activation_status": "SEPARATE_GATE_REQUIRED",
+      "badge_count": 1,
+      "definition": "Improvement is established from repeated evidence under the same learning target by the Learning Engine or an equivalent verified comparison, then emitted as an observation-only badge source event.",
+      "required": [
+        "learning_target_id",
+        "prior_evidence_ref",
+        "current_evidence_ref",
+        "verified_interpretation_ref"
+      ],
+      "forbidden": [
+        "single_score_delta",
+        "ability_label",
+        "ai_guess_only",
+        "cross_target_comparison"
+      ],
+      "review_risk": "HIGH"
+    }
+  ],
+  "invariants": [
+    "Family approval never activates a badge.",
+    "Badge award matching additionally requires badge-specific behavior_code and source_contract_id.",
+    "Source observations remain non-economic and non-awarding until an approved active badge contract consumes them.",
+    "Historical trigger prose is not executable matching logic."
+  ]
+}

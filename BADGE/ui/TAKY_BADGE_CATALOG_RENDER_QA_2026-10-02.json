@@ -1,0 +1,196 @@
+{
+  "schema": "TAKY_BADGE_CATALOG_RENDER_QA_V1",
+  "version": "2026-10-02.4",
+  "status": "PASS",
+  "viewport": {
+    "width_css_px": 390,
+    "height_css_px": 844,
+    "device_scale_factor": 2
+  },
+  "catalog": {
+    "tiles": 60,
+    "loaded_images": 60,
+    "failed_images": 0,
+    "runtime_blob_urls": 60,
+    "horizontal_overflow": false
+  },
+  "semantic_nature": {
+    "filters": 9,
+    "primary_groups": 8,
+    "group_labels": [
+      "스스로",
+      "목표도달",
+      "집중·몰입",
+      "복귀·재도전",
+      "실수·교정",
+      "계획·조절",
+      "문제해결",
+      "추가도전·성장"
+    ],
+    "group_view_rendered": true,
+    "detail_nature_chip": true
+  },
+  "runtime": {
+    "full_browser_selftest": "PASS",
+    "indexeddb": "OPEN",
+    "pwa_reload_recovery": "PASS",
+    "pwa_offline_shell": "PASS",
+    "badge_visual_compositor": "PASS",
+    "dom_binding_integrity": "PASS",
+    "pwa_predeploy_precache": "PASS",
+    "snap_predeploy_readiness": "PASS"
+  },
+  "star_contract": {
+    "first_award": {
+      "tier": "GREEN",
+      "reacquire_stars": 0
+    },
+    "min": 0,
+    "max": 5,
+    "promote_after_reawards": 5,
+    "reset_after_promotion": 0
+  },
+  "invariants": [
+    "badge_id / visual_id / asset_slot_id remain stable",
+    "semantic nature is independent from POCKET/FIELD/EXPEDITION/SECRET",
+    "semantic nature is independent from ownership/tier/art-quality state",
+    "source-art replacement changes bytes/SHA/revision, not identity"
+  ],
+  "deployment": "HOLD",
+  "visual_state_qa": {
+    "viewport": {
+      "width_css_px": 390,
+      "height_css_px": 844,
+      "device_scale_factor": 2
+    },
+    "seeded_fixture_only": true,
+    "fixture": {
+      "earned": 11,
+      "in_progress": 1,
+      "unearned": 48,
+      "recent_earned": 11,
+      "tier_samples": [
+        "GREEN",
+        "BLUE",
+        "RED",
+        "GOLD",
+        "PLATINUM"
+      ]
+    },
+    "results": {
+      "earned_visual_state": "PASS",
+      "in_progress_visual_state": "PASS",
+      "locked_visual_state": "PASS",
+      "recent_marker": "PASS",
+      "tier_ring_variants": "PASS",
+      "selected_detail_state_contract": "PASS",
+      "horizontal_overflow": false
+    },
+    "note": "Fixture exists only in isolated QA browser storage and does not mutate production/user badge history."
+  },
+  "acquisition_presentation_qa": {
+    "presentation_only": true,
+    "award_authority": false,
+    "economy_authority": false,
+    "viewport": {
+      "width_css_px": 390,
+      "height_css_px": 844,
+      "device_scale_factor": 2
+    },
+    "cases": {
+      "first_earn": {
+        "transition": "0→1",
+        "kind": "FIRST_EARN",
+        "tier": "GREEN",
+        "reacquire_stars": 0,
+        "result": "PASS"
+      },
+      "tier_up": {
+        "transition": "5→6",
+        "kind": "TIER_UP",
+        "from": "GREEN",
+        "to": "BLUE",
+        "reacquire_stars": 0,
+        "result": "PASS"
+      },
+      "reacquire": {
+        "transition": "6→7",
+        "kind": "REACQUIRE",
+        "tier": "BLUE",
+        "reacquire_stars": 1,
+        "result": "PASS"
+      },
+      "master_complete": {
+        "transition": "25→26",
+        "kind": "MASTER_COMPLETE",
+        "tier": "PLATINUM",
+        "reacquire_stars": 5,
+        "result": "PASS"
+      }
+    },
+    "open_in_codex": {
+      "same_badge_id": true,
+      "detail_opened": true,
+      "result": "PASS"
+    },
+    "motion": {
+      "default": "PASS",
+      "reduced_motion_contract": "PASS"
+    },
+    "queue_contract": "PASS",
+    "horizontal_overflow": false,
+    "note": "QA invoked the presentation runtime directly and did not grant badges or mutate production/user award history.",
+    "responsive": {
+      "320x568": {
+        "card_width": 284,
+        "card_height": 523,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "390x844": {
+        "card_width": 354,
+        "card_height": 550,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "430x932": {
+        "card_width": 390,
+        "card_height": 550,
+        "fits_height": true,
+        "horizontal_overflow": false,
+        "min_action_height": 47
+      },
+      "result": "PASS"
+    },
+    "queue": {
+      "tested_sequence": [
+        "BDG-DRAFT-001",
+        "BDG-DRAFT-002",
+        "BDG-DRAFT-003"
+      ],
+      "observed_queue_depth": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "order_preserved": true,
+      "final_state_closed": true,
+      "result": "PASS"
+    },
+    "mutation_guard": {
+      "qa_storage_before_equals_after": true,
+      "award_or_economy_write_from_presentation": false,
+      "result": "PASS"
+    },
+    "reduced_motion": {
+      "emulated_prefers_reduced_motion": "reduce",
+      "card_animation": "none",
+      "art_animation": "none",
+      "halo_animation": "none",
+      "result": "PASS"
+    }
+  }
+}
