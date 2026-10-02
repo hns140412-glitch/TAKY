@@ -293,7 +293,7 @@
     ]
   },
   "remaining_14_owner_evidence_contract": {
-    "status": "13_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "status": "SUPERSEDED_BY_039_PASS_AND_REMAINING_13",
     "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_14_OWNER_EVIDENCE_CONTRACT_V1.json",
     "owner_assigned": 13,
     "human_source_scope_gate": 1,
@@ -318,5 +318,14 @@
     "workflow_gates": "PASS_10_OF_10",
     "first_acquisition": "explicit strategy switch + same-task completion",
     "activation": "HOLD"
+  },
+  "remaining_13_owner_evidence_contract": {
+    "status": "12_IMPLEMENTATION_READY__1_HUMAN_SOURCE_SCOPE_GATE",
+    "evidence_ref": "BADGE/runtime/TAKY_BADGE_REMAINING_13_OWNER_EVIDENCE_CONTRACT_V1.json",
+    "owner_assigned": 12,
+    "human_source_scope_gate": 1,
+    "human_gate_badge": "BDG-DRAFT-035",
+    "first_acquisition_policy": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "activation_effect": "NONE"
   }
 }

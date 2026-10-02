@@ -1,0 +1,211 @@
+{
+  "schema": "TAKY_BADGE_REMAINING_13_OWNER_EVIDENCE_CONTRACT_V1",
+  "version": "2026-10-02.2",
+  "status": "IMPLEMENTATION_READY_EXCEPT_EXPLICIT_GATES",
+  "authority_inputs": [
+    "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_13_V1.json",
+    "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md"
+  ],
+  "counts": {
+    "total": 13,
+    "implementation_owner_assigned": 12,
+    "source_scope_gate": 1,
+    "qa_pass": 47,
+    "active": 0
+  },
+  "invariants": [
+    "FIRST_ACQUISITION_USES_MINIMUM_DIRECT_EVIDENCE",
+    "NO_WEAK_PROXY",
+    "NO_SOURCE_APP_SCOPE_CHANGE_WITHOUT_EXPLICIT_AUTHORITY",
+    "NO_BADGE_ACTIVATION",
+    "NO_NETLIFY_OR_DEPLOYMENT"
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "behavior": "EARLY_START",
+      "owner": "READY_EXECUTION_START_BOUNDARY",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_EARLY_START_BOUNDARY_V1",
+      "minimum_evidence": [
+        "trusted start/wake boundary known by feature",
+        "explicit child start action"
+      ],
+      "implementation_prerequisite": "Ready start boundary feature binds authoritative boundary to actual start",
+      "ui_delta": "MINIMAL_OR_NONE_IF_BOUNDARY_ALREADY_AVAILABLE",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-002",
+      "behavior": "ALARM_RESPONSE",
+      "owner": "READY_ALARM_EVENT",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_ALARM_RESPONSE_V1",
+      "minimum_evidence": [
+        "authoritative alarm-fired or before-alarm event",
+        "explicit child response/start action"
+      ],
+      "implementation_prerequisite": "alarm event identity must be authoritative, not inferred from clock",
+      "ui_delta": "NONE_IF_ALARM_EVENT_ALREADY_FEATURE_OWNED",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "behavior": "PREPARATION_COMPLETE",
+      "owner": "READY_PREPARATION_CHECKLIST",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_PREPARATION_TO_START_V1",
+      "minimum_evidence": [
+        "explicit child preparation completion",
+        "subsequent actual start of same task/session"
+      ],
+      "implementation_prerequisite": "preparation items must be feature-owned checklist evidence",
+      "ui_delta": "SMALL_CHECKLIST_ACTION",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "behavior": "TIME_CREATION_EXTRA",
+      "owner": "READY_PLANNER_EXTRA_TIME",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_EXTRA_TIME_EXECUTION_V1",
+      "minimum_evidence": [
+        "child creates/selects extra-time slot outside current plan",
+        "executes task in that exact slot"
+      ],
+      "implementation_prerequisite": "Planner marks slot as child-created extra time distinct from free-window 006",
+      "ui_delta": "REUSE_PARENT_CHILD_PLANNER_TIME_SELECTION_WHERE_POSSIBLE",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "behavior": "BEFORE_PROMPT",
+      "owner": "READY_PROMPT_LEDGER",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_BEFORE_PROMPT_V1",
+      "minimum_evidence": [
+        "authoritative prompt/request cycle boundary",
+        "explicit child initiation before first prompt in same cycle"
+      ],
+      "implementation_prerequisite": "prompt ledger must record actual prompts; absence of logs never qualifies",
+      "ui_delta": "NO_NEW_CHILD_UI_IF_PROMPT_LEDGER_EXISTS",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "behavior": "RESPONSIVE_START",
+      "owner": "READY_GUIDANCE_PROMPT_RESPONSE",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_NAMED_PROMPT_RESPONSE_START_V1",
+      "minimum_evidence": [
+        "named guidance/prompt event",
+        "explicit child response/start linked to that event"
+      ],
+      "implementation_prerequisite": "feature relation must link prompt id to child action; elapsed threshold forbidden",
+      "ui_delta": "NO_NEW_UI_IF_EXISTING_PROMPT_ACTION_CAN_BE_LINKED",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-018",
+      "behavior": "LONG_FOCUS",
+      "owner": "READY_FOCUS_SESSION",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+      "minimum_evidence": [
+        "explicit child focus commitment or feature-declared focus mode",
+        "same-session explicit completion/exit evidence"
+      ],
+      "implementation_prerequisite": "duration may be context only and can never be sufficient by itself",
+      "ui_delta": "REUSE_SINGLE_FOCUS_OR_RADIO_PATTERN_WITH_DISTINCT_ACTION",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-019",
+      "behavior": "QUIET_IMMERSION",
+      "owner": "READY_QUIET_FOCUS_MODE",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+      "minimum_evidence": [
+        "explicit child selection/declaration of quiet immersion mode",
+        "same-session explicit completion/exit evidence"
+      ],
+      "implementation_prerequisite": "must be semantically distinct from LONG_FOCUS and passive silence",
+      "ui_delta": "REUSE_RADIO_OR_FOCUS_MODE_PATTERN",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-030",
+      "behavior": "ROOT_CAUSE_FOUND",
+      "owner": "HIDE_CODE_RED_ERROR_ANALYSIS",
+      "preferred_source_app": "HIDE_SEEK",
+      "proposed_source_contract_id": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1",
+      "minimum_evidence": [
+        "concrete rejected/error artifact already captured",
+        "child-authored cause explanation/selection bound to that artifact"
+      ],
+      "implementation_prerequisite": "cause action references exact error artifact id; generic free text fails closed",
+      "ui_delta": "SMALL_POST_ERROR_CAUSE_ACTION_USING_EXISTING_HIDE_INTERACTION_STYLE",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-031",
+      "behavior": "PERSISTENT_BREAKTHROUGH",
+      "owner": "HIDE_CODE_RED_PERSISTENCE",
+      "preferred_source_app": "HIDE_SEEK",
+      "proposed_source_contract_id": "HIDE_BLOCKED_CONTINUE_SOLVE_V1",
+      "minimum_evidence": [
+        "explicit child blocked declaration/artifact",
+        "explicit continue/reasoning action",
+        "verified solved-after artifact"
+      ],
+      "implementation_prerequisite": "blocked state must be child/feature declared; attempt count and elapsed time forbidden",
+      "ui_delta": "SMALL_BLOCKED_CONTINUE_ACTION",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-035",
+      "behavior": "CALCULATION_CHECK",
+      "owner": "UNRESOLVED_SOURCE_SCOPE",
+      "preferred_source_app": null,
+      "proposed_source_contract_id": null,
+      "minimum_evidence": [
+        "calculation-domain before artifact",
+        "explicit child check/correction action",
+        "verified after artifact"
+      ],
+      "implementation_prerequisite": "current allowed sources SNAP_POP/HIDE_SEEK do not own calculation semantics",
+      "ui_delta": "UNKNOWN_UNTIL_SOURCE_OWNER_DECIDED",
+      "status": "HUMAN_AUTHORITY_GATE_SOURCE_SCOPE"
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "behavior": "FLOW_IMMERSION",
+      "owner": "SNAP_WRITING_FLOW",
+      "preferred_source_app": "SNAP_POP",
+      "proposed_source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
+      "minimum_evidence": [
+        "explicit child flow/continue declaration within writing exploration",
+        "same-exploration verified completion"
+      ],
+      "implementation_prerequisite": "must remain distinct from LONG_FOCUS/QUIET_IMMERSION and duration/silence",
+      "ui_delta": "REUSE_WRITING_FLOW_REFLECTION_OR_CONTINUE_PATTERN",
+      "status": "READY_FOR_FEATURE_CONTRACT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "behavior": "IMPROVEMENT",
+      "owner": "LEARNING_ENGINE_COMPARATOR_PLUS_HIDE_ADAPTER",
+      "preferred_source_app": "HIDE_SEEK",
+      "proposed_source_contract_id": "HIDE_VERIFIED_SAME_TARGET_IMPROVEMENT_V1",
+      "minimum_evidence": [
+        "prior same-target verified failure evidence",
+        "current same-target verified success evidence",
+        "Learning Engine comparison/recovery receipt referencing both"
+      ],
+      "implementation_prerequisite": "Learning Engine recovery-profile/comparator output must be bridged to Hide as observation-only source; single score delta forbidden",
+      "ui_delta": "NONE",
+      "status": "READY_FOR_BRIDGE_CONTRACT"
+    }
+  ]
+}

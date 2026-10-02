@@ -2,11 +2,11 @@
 Status: QA_EVIDENCE_ONLY_NOT_ACTIVE
 
 ## Current
-- source producer QA PASS: 46/60
-- remaining: 14/60
+- source producer QA PASS: 47/60
+- remaining: 13/60
 - active: 0/60
 - deployment: HOLD
-- Ready validation cutoff: `5203baf88c239de4c468785881245c8f0e6db522`
+- Ready validation cutoff: `629d1fa133293183ee3478d2a13083c7d0e844b1`
 - Ready Runtime E2E: PASS / workflow gates 10/10
 - Hide validation cutoff: `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3`
 - Hide CI: 2/2 PASS — runs 36977546753, 36977546746
@@ -23,10 +23,11 @@ Additional exact-evidence closure:
 - 041 MEANINGFUL_OVERRUN — Planner estimate overrun + child-authored meaning artifact + completion.
 - 036 CORRECTION_COURAGE — `HIDE_RETRACE_CORRECTION_COURAGE_V1`; explicit RETRACE action + same-word rejected-letter artifact + subsequent exact-match corrected artifact. Hardened at Hide head `a9a52a1b9a3566805a8dabd7f2b7a9d0e53929a3`, CI 2/2 PASS.
 - 038 DEEP_THINKING_PERSISTENCE — `SNAP_POP_REFLECTION_TO_COMPLETION_V1`; explicit child reflection artifact bound to the same exploration completionEventId/recordId. Verified at Snap-Pop head `9f8e970ea76d85e4ae04f292367524db184cc61a`.
+- 039 BLOCK_RESOLVED — `READY_CHILD_STRATEGY_TO_COMPLETION_V1`; explicit child strategy switch + same-task completion. Ready #143 latest head `629d1fa133293183ee3478d2a13083c7d0e844b1`, latest workflow gates 10/10 PASS.
 
 Producer QA PASS does not activate any badge.
 
-## Remaining OPEN — 14
+## Remaining OPEN — 13
 
 ### A. Real-life / authority signal missing — 6
 - 001 EARLY_START — trusted wake/start boundary + explicit child start required.
@@ -43,16 +44,15 @@ Producer QA PASS does not activate any badge.
 
 These must not be derived from elapsed time, foreground duration, silence, screen stillness, attempt count, score, or AI attention inference. Explicit child-authored or feature-declared evidence is required.
 
-### C. Strong learning/problem evidence still needed — 5
+### C. Strong learning/problem evidence still needed — 4
 - 030 ROOT_CAUSE_FOUND — concrete error artifact + child-authored root-cause explanation/selection required.
 - 031 PERSISTENT_BREAKTHROUGH — explicit blocked-before artifact + continued reasoning/action + verified solved-after artifact required.
 - 035 CALCULATION_CHECK — calculation-domain before/after correction artifact + explicit child check required.
-- 039 BLOCK_RESOLVED — blocked-before artifact + explicit strategy/route change + solved-after artifact required.
 - 054 IMPROVEMENT — same-target prior/current evidence + Learning Engine/equivalent verified comparison required; single score delta forbidden.
 
 ## Implementation classification
 - Existing data/runtime extension candidate without new child UI: 054, but exact comparison provenance is still missing.
-- Existing interaction may be extended but stronger binding/action is required: 030, 031, 035, 039.
+- Existing interaction may be extended but stronger binding/action is required: 030, 031, 035.
 - New explicit real-world or child-declared signal required: 001, 002, 005, 007, 009, 010, 018, 019, 042.
 - 036 and 038 are CLOSED/PASS and must not be re-opened without contradictory new evidence.
 
