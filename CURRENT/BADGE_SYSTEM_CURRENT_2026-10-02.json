@@ -12,7 +12,7 @@
   "deployment": "HOLD",
   "snap_pop_pr": 20,
   "taky_pr": 196,
-  "next_open": "Implement and QA remaining 50 source producers. Prioritize deterministic child-authored evidence; central cross-app badge transport remains OPEN. active stays 0.",
+  "next_open": "Implement and QA remaining 48 source producers. Prioritize deterministic child-authored evidence; central cross-app badge transport remains OPEN. active stays 0.",
   "activation_contract_analysis": {
     "total_badges": 60,
     "existing_family_direct": 28,
@@ -44,22 +44,25 @@
   },
   "matcher_evidence_matrix": {
     "total": 60,
-    "source_producer_qa_pass": 10,
-    "source_producer_required": 50,
+    "source_producer_qa_pass": 12,
+    "source_producer_required": 48,
     "active": 0,
     "verified_badges": [
       "BDG-DRAFT-011",
       "BDG-DRAFT-024",
       "BDG-DRAFT-025",
       "BDG-DRAFT-026",
+      "BDG-DRAFT-028",
       "BDG-DRAFT-029",
       "BDG-DRAFT-037",
       "BDG-DRAFT-047",
+      "BDG-DRAFT-048",
       "BDG-DRAFT-055",
       "BDG-DRAFT-059",
       "BDG-DRAFT-060"
     ],
-    "status": "SEMANTICS_APPROVED_PRODUCERS_REQUIRED"
+    "status": "SEMANTICS_APPROVED_PRODUCERS_REQUIRED",
+    "source_producer_implemented_pending_ci": 0
   },
   "source_only_award_boundary": {
     "status": "PASS",
@@ -101,13 +104,25 @@
   "ready_source_producers": {
     "branch": "taky/badge-source-producers-20261002",
     "draft_pr": 143,
-    "head": "9439e9fa62259247b46ffa30da1cda68945baee6",
+    "head": "dba2ee57eac78fcf1be9b8ffed4a39141c8df5f6",
     "producers": [
       "SELF_CHOICE",
-      "CARRY_OVER_COMPLETE"
+      "CARRY_OVER_COMPLETE",
+      "SELF_CHECK_COMPLETE"
     ],
     "runtime_e2e": "PASS",
     "all_pr_checks": "PASS",
+    "transport_to_central_award_ledger": "OPEN",
+    "activation_effect": "NONE"
+  },
+  "hide_source_producers": {
+    "branch": "taky/badge-source-producers-20261002",
+    "draft_pr": 29,
+    "head": "ade10bada2dc626d515b58bb9bbc046754ffa68d",
+    "producers": [
+      "ERROR_CORRECTED_COMPLETE"
+    ],
+    "validation": "PASS",
     "transport_to_central_award_ledger": "OPEN",
     "activation_effect": "NONE"
   }
