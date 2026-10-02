@@ -1,0 +1,81 @@
+{
+  "schema": "TAKY_STORAGE_NAMESPACE_REGISTRY_V1",
+  "version": "2026-10-02.1",
+  "purpose": "Keep GitHub, HNS Drive, SIEZEALL Drive and local runtime aligned by logical namespace without duplicating physical storage roles.",
+  "rules": [
+    "LOGICAL_NAMESPACE_ALIGNMENT != PHYSICAL_FOLDER_CLONING",
+    "GITHUB_OWNS_CODE_SCHEMA_CONTRACT_MANIFEST",
+    "HNS_DRIVE_OWNS_INTERNAL_MASTER_DATA",
+    "SIEZEALL_DRIVE_OWNS_APPROVED_DISTRIBUTION_AND_USER_SYNC",
+    "DEVICE_OWNS_LOCAL_RUNTIME_STATE_AND_CACHE",
+    "SAVEY_IS_SEPARATE_TOP_LEVEL_SYSTEM",
+    "TEMP_IS_NOT_GITHUB_DURABLE_CONTENT"
+  ],
+  "TAKY": {
+    "LEARNING": {
+      "github": {
+        "repository": "hns140412-glitch/TAKY",
+        "namespace_path": "LEARNING",
+        "owner_paths": [
+          "OS/GUIDE_FAMILY_LEARNING_OS.md",
+          "OS/LEARNING_ENGINE_CORE.md",
+          "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+        ]
+      },
+      "hns_drive": "TAKY/01_LEARNING",
+      "siezeall_drive": "TAKY/01_LEARNING_SHARE",
+      "local": "C:/TAKY_LOCAL/02_LEARNING"
+    },
+    "ARCHIGROW": {
+      "github": {
+        "repository": "hns140412-glitch/TAKY",
+        "namespace_path": "ARCHIGROW",
+        "owner_paths": [
+          "DOMAIN/ARCHITECTURE_WORK_OS.md",
+          "DOMAIN/ARCHITECTURE_GROWTH_MAP.md"
+        ]
+      },
+      "hns_drive": "TAKY/02_ARCHIGROW",
+      "siezeall_drive": "TAKY/02_ARCHIGROW_SHARE",
+      "local": "C:/TAKY_LOCAL/03_ARCHIGROW"
+    },
+    "COMMON": {
+      "github": {
+        "repository": "hns140412-glitch/TAKY",
+        "namespace_path": "COMMON",
+        "owner_paths": [
+          "MASTER",
+          "OS",
+          "SHARED",
+          "CURRENT",
+          "C2S",
+          "HANDOFF",
+          "HISTORY"
+        ]
+      },
+      "hns_drive": "TAKY/03_COMMON",
+      "siezeall_drive": "TAKY/03_UPDATES",
+      "local": "C:/TAKY_LOCAL/04_COMMON"
+    },
+    "TEMP": {
+      "github": {
+        "repository": "hns140412-glitch/TAKY",
+        "namespace_path": "TEMP",
+        "tracked": false
+      },
+      "hns_drive": "TAKY/90_TEMP",
+      "siezeall_drive": "TAKY/90_TEMP",
+      "local": "C:/TAKY_LOCAL/90_TEMP"
+    }
+  },
+  "SAVEY": {
+    "separate_top_level": true,
+    "github": {
+      "repository": null,
+      "state": "SEPARATE_REPOSITORY_NOT_CREATED"
+    },
+    "hns_drive": "SAVEY",
+    "siezeall_drive": "SAVEY",
+    "implicit_taky_route": false
+  }
+}

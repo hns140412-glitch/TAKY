@@ -1,0 +1,7 @@
+{
+  "namespace":"TAKY/LEARNING",
+  "registry":"MASTER/STORAGE_NAMESPACE_REGISTRY.json",
+  "physical_role":"CODE_AND_RUNTIME_CONTRACTS",
+  "drive_master":"TAKY/01_LEARNING",
+  "drive_distribution":"TAKY/01_LEARNING_SHARE"
+}

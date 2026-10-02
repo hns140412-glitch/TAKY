@@ -1,0 +1,8 @@
+{
+  "namespace":"TAKY/ARCHIGROW",
+  "registry":"MASTER/STORAGE_NAMESPACE_REGISTRY.json",
+  "physical_role":"POINTER_NAMESPACE_ONLY",
+  "canonical_owner_paths":["DOMAIN/ARCHITECTURE_WORK_OS.md","DOMAIN/ARCHITECTURE_GROWTH_MAP.md"],
+  "drive_master":"TAKY/02_ARCHIGROW",
+  "drive_distribution":"TAKY/02_ARCHIGROW_SHARE"
+}

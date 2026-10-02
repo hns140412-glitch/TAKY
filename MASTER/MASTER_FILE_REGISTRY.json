@@ -147,6 +147,11 @@
     },
     "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
+    },
+    "MASTER/STORAGE_NAMESPACE_REGISTRY.json": {
+      "class": "ACTIVE_SUPPORT",
+      "authority_owner": "TAKY_STORAGE_NAMESPACE",
+      "runtime_role": "CROSS_SURFACE_NAMESPACE_ALIGNMENT"
     }
   },
   "semantic_owners": [
