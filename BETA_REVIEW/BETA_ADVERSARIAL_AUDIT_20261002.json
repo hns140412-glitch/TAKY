@@ -19,8 +19,8 @@
       "attack_path": "Enter through Handoff protocol and let recovery prose precede verified CURRENT.",
       "consequence": "stale Handoff may steer resume before authoritative operational state is resolved.",
       "defense": "single CURRENT-first resume order; Handoff only conditional recovery evidence.",
-      "automation": "STATIC_CONSISTENCY_GATE",
-      "state": "OPEN_TOOL_WRITE_BLOCKED"
+      "automation": "IMPLEMENTED_CI_GATE",
+      "state": "FIXED_ON_HARDENING_BRANCH"
     },
     {
       "id": "BETA-ADV-002",
@@ -84,8 +84,8 @@
       "attack_path": "downstream consumer interprets shape PASS or hardcoded test PASS as live freshness.",
       "consequence": "dated source/PR heads may be mistaken for live state.",
       "defense": "retain snapshot role but prohibit live-current claims without external requery; do not use hardcoded ref tests as freshness evidence.",
-      "automation": "PARTIAL_EXISTING_CLAIM_CEILING",
-      "state": "REVIEW_REQUIRED"
+      "automation": "IMPLEMENTED_CI_GATE",
+      "state": "HARDENED_BOUNDARY"
     },
     {
       "id": "BETA-ADV-007",
@@ -98,8 +98,8 @@
       "attack_path": "hosted assistant performs GitHub mutation directly instead of through controlled runtime gate.",
       "consequence": "repository hardening exists but is not automatically applied to hosted connector actions.",
       "defense": "treat hosted mutation interception as mandatory Alpha prerequisite or explicit human-gated operational convention until platform enforcement exists.",
-      "automation": "NOT_CURRENTLY_PROVEN",
-      "state": "OPEN"
+      "automation": "NOT_PLATFORM_ENFORCEABLE__CLAIM_BOUNDARY_GATED",
+      "state": "OPEN_CONTAINED"
     }
   ],
   "freeze_gate": {
@@ -111,6 +111,16 @@
       "hosted enforcement gap explicitly contained",
       "decision-path replay demonstrates premature Alpha promotion is blocked"
     ],
-    "beta_frozen": false
+    "beta_frozen": false,
+    "hardening_ci": {
+      "status": "PASS",
+      "validated_commit": "f1993cb032ef8ddc0b30a5d6260f59c0442e4446",
+      "checks": [
+        "TAKY Enforcement Replay PASS",
+        "TAKY Engineering Profile Gate PASS",
+        "TAKY Artifact Exposure Gate test PASS"
+      ]
+    },
+    "next": "HUMAN_APPROVAL_TO_MERGE_PR_209_AND_DECLARE_BETA_FROZEN"
   }
 }
