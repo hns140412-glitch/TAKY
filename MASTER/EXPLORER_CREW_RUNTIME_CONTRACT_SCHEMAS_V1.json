@@ -1,0 +1,115 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RUNTIME_CONTRACT_SCHEMAS_V1",
+  "version": 1,
+  "purpose": "Machine-checkable structural contracts for Explorer Crew runtime receipts, handoffs and release status.",
+  "schemas": {
+    "TAKY_CHARACTER_RUNTIME_LOG_V1": {
+      "required": [
+        "schema",
+        "app_id",
+        "scene_id",
+        "runtime_receipt_sha256",
+        "binding_receipt_sha256",
+        "design_gate_state",
+        "activation_allowed",
+        "generation_allowed",
+        "log_sha256"
+      ],
+      "constants": {
+        "schema": "TAKY_CHARACTER_RUNTIME_LOG_V1",
+        "generation_allowed": false,
+        "production_state_mutation_allowed": false
+      },
+      "sha256_fields": [
+        "runtime_receipt_sha256",
+        "binding_receipt_sha256",
+        "log_sha256"
+      ],
+      "enum_fields": {
+        "design_gate_state": [
+          "PASS",
+          "BLOCKED"
+        ]
+      }
+    },
+    "TAKY_UI_BINDING_RECEIPT_V1": {
+      "required": [
+        "schema",
+        "app_id",
+        "scene_id",
+        "assignments",
+        "dom_mutation_allowed",
+        "asset_generation_allowed",
+        "receipt_sha256"
+      ],
+      "constants": {
+        "schema": "TAKY_UI_BINDING_RECEIPT_V1",
+        "dom_mutation_allowed": false,
+        "asset_generation_allowed": false,
+        "design_gate_required": true
+      },
+      "sha256_fields": [
+        "receipt_sha256"
+      ]
+    },
+    "TAKY_SPECIALIST_TO_ASSET_REGISTRY_HANDOFF_V1": {
+      "required": [
+        "schema",
+        "pipeline_owner",
+        "pipeline_receipt_ref",
+        "asset_id",
+        "visual_id",
+        "approval_status",
+        "binary_sha256",
+        "runtime_url",
+        "handoff_sha256"
+      ],
+      "constants": {
+        "schema": "TAKY_SPECIALIST_TO_ASSET_REGISTRY_HANDOFF_V1",
+        "approval_status": "APPROVED"
+      },
+      "sha256_fields": [
+        "binary_sha256",
+        "handoff_sha256"
+      ],
+      "forbidden_fields": [
+        "pipeline_state",
+        "retry_count",
+        "generation_prompt",
+        "qa_queue",
+        "next_action"
+      ]
+    },
+    "TAKY_EXPLORER_CREW_RELEASE_GATE_V1": {
+      "required": [
+        "schema",
+        "gates",
+        "image_generation_hold",
+        "main_merge_authorized",
+        "release_approval_authorized"
+      ],
+      "constants": {
+        "schema": "TAKY_EXPLORER_CREW_RELEASE_GATE_V1"
+      },
+      "gate_names": [
+        "asset_registry_gate",
+        "runtime_contract_gate",
+        "relation_behavior_gate",
+        "scene_orchestration_gate",
+        "ui_binding_gate",
+        "design_gate",
+        "interaction_gate",
+        "responsive_gate",
+        "device_gate",
+        "recovery_gate"
+      ],
+      "gate_states": [
+        "PASS",
+        "BLOCKED",
+        "HOLD",
+        "OPEN",
+        "FAIL"
+      ]
+    }
+  }
+}

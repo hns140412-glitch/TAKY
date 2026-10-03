@@ -1,0 +1,63 @@
+name: Character Behavior Engine Contract
+on:
+  pull_request:
+    paths:
+      - 'ENFORCEMENT/character_behavior_engine.py'
+      - 'ENFORCEMENT/character_behavior_engine_test.py'
+      - '.github/workflows/character-behavior-engine.yml'
+      - 'RUNTIME/explorer-crew-browser-provider-v1.js'
+      - 'RUNTIME/explorer-crew-browser-provider-v1.test.js'
+      - 'MASTER/EXPLORER_CREW_CONTRACT_REGISTRY_V1.json'
+  push:
+    branches: [main]
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m unittest ENFORCEMENT/character_behavior_engine_test.py
+      - run: python -m unittest ENFORCEMENT/relation_affinity_engine_test.py
+      - run: python -m unittest ENFORCEMENT/runtime_eligibility_gate_test.py
+      - run: python -m unittest ENFORCEMENT/scene_orchestrator_test.py
+      - run: python -m unittest ENFORCEMENT/scene_policy_contract_test.py
+      - run: python -m unittest ENFORCEMENT/app_scene_policy_adapter_test.py
+      - run: python -m unittest ENFORCEMENT/character_scene_router_test.py
+      - run: python -m unittest ENFORCEMENT/character_runtime_coordinator_test.py
+      - run: python -m unittest ENFORCEMENT/character_runtime_receipt_test.py
+      - run: python -m unittest ENFORCEMENT/ui_binding_contract_test.py
+      - run: python -m unittest ENFORCEMENT/ui_binding_receipt_test.py
+      - run: python -m unittest ENFORCEMENT/approved_asset_pointer_resolver_test.py
+      - run: python -m unittest ENFORCEMENT/design_gate_receipt_test.py
+      - run: python -m unittest ENFORCEMENT/asset_to_design_gate_integration_test.py
+      - run: python -m unittest ENFORCEMENT/character_runtime_log_test.py
+      - run: python -m unittest ENFORCEMENT/registry_version_contract_test.py
+      - run: python -m unittest ENFORCEMENT/runtime_rollback_contract_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_pipeline_resume_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_asset_handoff_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_stage_receipt_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_stage_chain_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_recovery_decision_test.py
+      - run: python -m unittest ENFORCEMENT/specialist_resume_authorization_test.py
+      - run: python -m unittest ENFORCEMENT/cross_repo_asset_contract_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_release_gate_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_current_release_status_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_contract_registry_validate_test.py
+      - run: python -m unittest ENFORCEMENT/runtime_receipt_ledger_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_adversarial_regression_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_current_claim_guard_test.py
+      - run: python -m unittest ENFORCEMENT/explorer_crew_runtime_schema_validate_test.py
+      - run: python -m unittest ENFORCEMENT/runtime_receipt_checkpoint_test.py
+      - run: python -m unittest ENFORCEMENT/contract_version_handshake_test.py
+      - run: python -m unittest ENFORCEMENT/surface_scene_policy_contract_test.py
+      - run: python -m unittest ENFORCEMENT/crew_evidence_event_contract_test.py
+      - run: node RUNTIME/crew-transport-auth-policy.test.js
+      - run: node RUNTIME/crew-durable-evidence-store-adapter.test.js
+      - run: node RUNTIME/authenticated-crew-evidence-transport.test.js
+      - run: node RUNTIME/crew-netlify-blobs-transport-adapter.test.js
+      - run: node RUNTIME/central-crew-evidence-http-endpoint.test.js
+      - run: node RUNTIME/explorer-crew-browser-provider-v1.test.js
+      - run: python -m unittest ENFORCEMENT/multi_character_scene_runtime_test.py
+      - run: python -m unittest ENFORCEMENT/character_engine_integration_test.py
+      - run: python -m unittest ENFORCEMENT/character_runtime_full_loop_test.py
+
+

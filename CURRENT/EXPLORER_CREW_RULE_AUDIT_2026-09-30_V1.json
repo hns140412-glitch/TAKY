@@ -1,0 +1,268 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RULE_AUDIT_V1",
+  "audited_at": "2026-09-30",
+  "scope": [
+    "TAKY central Explorer Crew runtime",
+    "Ready & Set live runtime",
+    "Hide & Seek live runtime",
+    "Snap & Pop root runtime",
+    "Snap specialist onboarding crew runtime"
+  ],
+  "authority_refs": [
+    "OS/GUIDE_CHARACTER_RELATIONSHIP.md",
+    "OS/GUIDE_FAMILY_LEARNING_OS.md",
+    "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+    "onboarding/TAKY_EXPLORATION_CREW_CANONICAL_MIGRATION_MATRIX_2026-09-30.md"
+  ],
+  "summary": {
+    "p0_critical": 6,
+    "p1_major": 7,
+    "p2_partial_or_hold": 6,
+    "pass_or_preserved": 10,
+    "overall": "CENTRAL_CONTRACTS_STRONG__APP_RUNTIME_REALIZATION_INCOMPLETE"
+  },
+  "findings": [
+    {
+      "id": "CREW-AUDIT-P0-001",
+      "severity": "P0",
+      "status": "MISSING_RUNTIME_WIRING",
+      "title": "No live scene-plan producer in Ready/Hide/Snap root",
+      "evidence": [
+        "Ready app.js emits no taky:character-scene-plan",
+        "Hide app.js/hide-runtime.js emit no taky:character-scene-plan",
+        "Snap root app.js emits no taky:character-scene-plan",
+        "Only *-character-scene-bridge-v1.js listens for the event"
+      ],
+      "impact": "TAKY Character Behavior/Scene engine does not actually govern live app behavior."
+    },
+    {
+      "id": "CREW-AUDIT-P0-002",
+      "severity": "P0",
+      "status": "MISSING_RUNTIME_WIRING",
+      "title": "No live activation consumer from UI binding plan to gated DOM binder",
+      "evidence": [
+        "App code does not consume taky:character-ui-binding-plan",
+        "DOM binder modules exist but are not invoked by live app flow"
+      ],
+      "impact": "Binding/DOM contracts are validated but not operational."
+    },
+    {
+      "id": "CREW-AUDIT-P0-003",
+      "severity": "P0",
+      "status": "LEGACY_LOCAL_BEHAVIOR_ACTIVE",
+      "title": "Ready live Guide behavior bypasses TAKY behavior engine",
+      "evidence": [
+        "Ready app.js GUIDE_TYPES = lumi/pico/mori local personalities",
+        "Home/recording/result copy is written directly in app.js",
+        "finishRecording() writes fixed duo dialogue"
+      ],
+      "impact": "Explorer Crew canonical behavior is not the source of truth on Ready screens."
+    },
+    {
+      "id": "CREW-AUDIT-P0-004",
+      "severity": "P0",
+      "status": "LEGACY_LOCAL_BEHAVIOR_ACTIVE",
+      "title": "Hide live partner behavior bypasses TAKY behavior engine",
+      "evidence": [
+        "Hide app.js GUIDE_OPTIONS = fox/rabbit/raccoon/cat",
+        "setPartner() directly writes message/mood/avatar",
+        "many learning states call setPartner() with hard-coded dialogue"
+      ],
+      "impact": "Central relationship/behavior semantics do not control Hide partner behavior."
+    },
+    {
+      "id": "CREW-AUDIT-P0-005",
+      "severity": "P0",
+      "status": "ROOT_NOT_MIGRATED",
+      "title": "Snap root runtime is not using specialist Crew runtime",
+      "evidence": [
+        "Snap root app.js uses fixed guideLine text",
+        "guideBtn reports crew/guide linkage is HOLD",
+        "Specialist crew-state/behavior/interaction runtime remains isolated under onboarding/"
+      ],
+      "impact": "Snap is nominal crew owner but root production runtime is not yet migrated."
+    },
+    {
+      "id": "CREW-AUDIT-P0-006",
+      "severity": "P0",
+      "status": "RELATION_RUNTIME_NOT_CONNECTED",
+      "title": "Verified relationship/shared-memory state is not fed into live apps",
+      "evidence": [
+        "TAKY relation_affinity_engine exists",
+        "Snap onboarding stores only LOCAL_CANDIDATE_NOT_CROSS_APP_VERIFIED events",
+        "Ready/Hide live runtimes do not commit central relationship state"
+      ],
+      "impact": "KNOWN/FAMILIAR/TRUSTED does not materially affect current live Guide behavior."
+    },
+    {
+      "id": "CREW-AUDIT-P1-001",
+      "severity": "P1",
+      "status": "PARTIAL",
+      "title": "Ready Random Guest is implemented, but Smart Random is minimal",
+      "evidence": [
+        "chooseGuest() excludes only the immediately recent guest then randomizes",
+        "Ready project contract calls for Smart Random with controlled-flex weights"
+      ],
+      "impact": "Core random-guest concept is correct, but contextual weighting/history depth is incomplete."
+    },
+    {
+      "id": "CREW-AUDIT-P1-002",
+      "severity": "P1",
+      "status": "MISSING",
+      "title": "Ready recording feedback is not evidence-based Crew feedback",
+      "evidence": [
+        "finishRecording() says automatic evaluation is not being done",
+        "No transcript/reference comparison or pronunciation evidence reaches Behavior Engine",
+        "Duo feedback is fixed text"
+      ],
+      "impact": "Praise + one useful hint cannot yet be grounded in actual recording."
+    },
+    {
+      "id": "CREW-AUDIT-P1-003",
+      "severity": "P1",
+      "status": "MISSING",
+      "title": "One Good Reflection is not realized as Crew behavior in Ready live result flow",
+      "evidence": [
+        "Family Learning OS requires one meaningful context-aware reflection",
+        "Ready resultSceneFor() produces result copy but no actual reflection question"
+      ],
+      "impact": "Session closure does not yet return initiative through reflection."
+    },
+    {
+      "id": "CREW-AUDIT-P1-004",
+      "severity": "P1",
+      "status": "PARTIAL",
+      "title": "Silence by Default is central-only, not consistently enforced in live apps",
+      "evidence": [
+        "Central Behavior Engine makes AMBIENT silent",
+        "Ready Focus mostly reduces Guide presence but home/recording copy is direct",
+        "Hide setPartner() updates partner text across many screens"
+      ],
+      "impact": "Live intervention frequency is project hard-coded rather than centrally arbitrated."
+    },
+    {
+      "id": "CREW-AUDIT-P1-005",
+      "severity": "P1",
+      "status": "ROSTER_MISMATCH",
+      "title": "Live Ready/Hide Guide identities are not aligned to canonical Explorer Crew roster",
+      "evidence": [
+        "Canonical Core6/Visual-ID crew is separate",
+        "Ready uses lumi/pico/mori local guide types",
+        "Hide uses fox/rabbit/raccoon/cat local guide options"
+      ],
+      "impact": "Identity/relationship continuity across Ready/Hide/Snap cannot be guaranteed."
+    },
+    {
+      "id": "CREW-AUDIT-P1-006",
+      "severity": "P1",
+      "status": "MISSING",
+      "title": "Cross-app continuing companion continuity is not operational",
+      "evidence": [
+        "App runtimes maintain independent local Guide state",
+        "No shared character_id relationship/session handoff producer-consumer path is active"
+      ],
+      "impact": "Same companion cannot reliably carry identity/history between apps."
+    },
+    {
+      "id": "CREW-AUDIT-P1-007",
+      "severity": "P1",
+      "status": "PROJECT_RULE_GAP",
+      "title": "Snap root reward/blessing path is not aligned with current badge-conditioned blessing policy",
+      "evidence": [
+        "Snap root blessing spends gems directly",
+        "Current project rule requires certain blessings to unlock via self-directed-action badges"
+      ],
+      "impact": "Not strictly a Crew behavior bug, but Crew/world reward semantics are inconsistent."
+    },
+    {
+      "id": "CREW-AUDIT-P2-001",
+      "severity": "P2",
+      "status": "HOLD_BY_AUTHORITY",
+      "title": "Special Friend exists canonically but detailed runtime contract remains unverified",
+      "evidence": [
+        "GUIDE_CHARACTER_RELATIONSHIP explicitly says SPECIAL FRIEND ≠ RANDOM GUEST and details RECOVERY_REQUIRED"
+      ],
+      "impact": "Do not implement by analogy; preserve as OPEN."
+    },
+    {
+      "id": "CREW-AUDIT-P2-002",
+      "severity": "P2",
+      "status": "PARTIAL",
+      "title": "Ready Duo intro comedy has only one hard-coded variant",
+      "evidence": [
+        "Current dialogue is 잡아왔다 + fixed guest line"
+      ],
+      "impact": "Concept is valid, but character-specific wit/variation is not implemented."
+    },
+    {
+      "id": "CREW-AUDIT-P2-003",
+      "severity": "P2",
+      "status": "PARTIAL",
+      "title": "Behavior Engine action vocabulary is narrower than canonical ambient contract",
+      "evidence": [
+        "Central action set mainly IDLE/READ_BOOK/READ_MAP/WRITE_NOTE/USE_RADIO/CHEER/THINK/POINT",
+        "Canonical ambient contract also names CHECK_COMPASS/ORGANIZE_BAG/USE_MAGNIFIER/REST"
+      ],
+      "impact": "Some semantic ambient actions cannot yet be represented centrally."
+    },
+    {
+      "id": "CREW-AUDIT-P2-004",
+      "severity": "P2",
+      "status": "PARTIAL",
+      "title": "Chapter-owner precedence may overrule MAIN too broadly",
+      "evidence": [
+        "character_behavior_engine selects chapter_owner before main whenever present"
+      ],
+      "impact": "Needs scene-scoped owner_turn/owner_required semantics to avoid accidental Main displacement."
+    },
+    {
+      "id": "CREW-AUDIT-P2-005",
+      "severity": "P2",
+      "status": "PARTIAL",
+      "title": "Hide Guide visual mood system is local asset-state logic",
+      "evidence": [
+        "guideAsset(mood) directly selects guide_default/smile/think/etc"
+      ],
+      "impact": "Semantic action-to-approved-composition separation is bypassed in live Hide runtime."
+    },
+    {
+      "id": "CREW-AUDIT-P2-006",
+      "severity": "P2",
+      "status": "PARTIAL",
+      "title": "Ready recording filename/type semantics are hard-coded",
+      "evidence": [
+        "filename always uses grammar recording; Bricks/Spelling Bee not represented"
+      ],
+      "impact": "Not Crew logic itself, but recording context cannot yet drive contextual Crew feedback correctly."
+    }
+  ],
+  "preserved_or_pass": [
+    "Child is protagonist / Guide is helper in canonical OS",
+    "Character identity must not change AI quality or functional ability",
+    "Relation engine reward/power/ability deltas are zero",
+    "Owner commit required before relationship promotion",
+    "Snap onboarding automatic affinity/reward/grade/answer are disabled",
+    "Ready Main Guide + exactly one Random Guest concept is preserved",
+    "Random Guest is not treated as Special Friend",
+    "Ready guest appears in result/share only after an actual recording guest event",
+    "Duo comedy currently does not target the child or a mistake",
+    "Voice/name changes in Ready do not explicitly reset task/recording/history state"
+  ],
+  "recommended_order": [
+    "P0-001 + P0-002: activate real event producer/consumer path without bypassing Design Gate",
+    "P0-003/P0-004/P0-005: route live app Guide behavior through TAKY semantic runtime; preserve project-specific presentation",
+    "P0-006: wire verified episode/relation state and shared character_id continuity",
+    "P1-005/P1-006: migrate live app local Guide IDs to canonical Explorer Crew IDs via compatibility mapping, not destructive reset",
+    "P1-002: add recording evidence adapter -> praise + one hint contract",
+    "P1-003/P1-004: One Good Reflection + Silence-by-Default runtime arbitration",
+    "P1-001/P2-002: upgrade Ready Smart Random and Duo intro variation",
+    "P2-003/P2-004/P2-005: ambient action coverage, chapter-owner scope, live visual composition boundary"
+  ],
+  "constraints": [
+    "Do not generate new art while LOGIC_ONLY_HOLD",
+    "Do not conflate Special Friend and Random Guest",
+    "Do not reset child history during identity migration",
+    "Do not auto-promote runtime screenshots to Golden",
+    "No main merge / Netlify release from this audit"
+  ]
+}
