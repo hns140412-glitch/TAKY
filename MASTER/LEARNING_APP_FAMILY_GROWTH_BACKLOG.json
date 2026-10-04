@@ -155,17 +155,83 @@
         "Work OS",
         "all apps"
       ],
-      "state": "OPEN",
+      "state": "PARTIAL",
       "evidence": [
-        "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden."
+        "Current TAKY is strong in rule/validation evidence but has less explicit measurement of whether new rules and patterns reduce rework, regressions or user-debugging burden.",
+        "TAKY draft-only ENFORCEMENT/growth_outcome_observation.py plus 10 synthetic replay cases: explicit before/after evidence, material source changes and missing real-outcome scope are deterministically differentiated. Does not perform monitoring or confer owner/approval/release authority.",
+        "2026-09-28 first owner evidence snapshot records source-scoped CI before/after for Hide, bounded Ready CI-versus-device gap, and ARCHI GROW unobserved Work artifact. Replayed in existing TAKY CI. These are historical scoped observations, not live watches or app-level runtime consumers.",
+        "Recovered AG-014 original YKH 38p, existing V02 source+QA board and V5 two-page preview: previous handoff-only 'not observed' inference corrected. Preview existence is observed, while actual Work result/architect acceptance and concrete V02 QA carry-forward remain OPEN. 5 owner observations in HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json.",
+        "AG-014 source-role correction: separate six-page Hannam REV01 design-study report reflects user-specified latest 1F +88.65 / 2F +92.15 and road average +82.88, while earlier Work section/FACT_LOCK still depicts +88.00 / +91.80; original DWG acquired but semantic entity parsing not proven. V5 comparison board does not supersede V02 QA or canonical Work geometry. Owner ARCHIGROW_APPLICATION AG-014 review/result cell updated without status promotion.",
+        "Direct 2026-09-28 PDF p2 cross-check found the historical AG-014/015/V02 QA source label wrong: Bundang/Seohyeon/Tancheon is on separate 20-page 2026-0923_한남동 고급빌라 규모검토.pdf, not independent 38-page TalkFile-YKH P02. Original 38p is not quarantined on this basis; historical V02 kept, existing two owner Sheet rows corrected in place and source correction observed in history snapshot (6 cases). Work folder direct-child listing shows 2026-0923 DWG later than 4-page PDF, no separately proven revised-level drawing; no semantic DWG verification or report deployment."
       ],
-      "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion.",
+      "improvement_direction": "Record fit-for-purpose before/change/after evidence for recurring failure, recovery, rework, external calls and implementation completion. Connect intended result to before/after evidence, owner-declared material-change triggers, the next relevant review and actual outcome; report the evidence-level gap instead of calling fixture/CI activity real-world improvement.",
       "exit_conditions": [
         "Material adopted growth changes have at least one relevant outcome signal where measurable.",
         "Rules that add cost without demonstrated value can be adjusted or retired.",
-        "CURRENT_BEST updates cite outcome/regression evidence."
+        "CURRENT_BEST updates cite outcome/regression evidence.",
+        "Representative owning project feeds a genuinely observed outcome and a materially changed source/action through this read-only path, and proves its own follow-up reduced a relevant failure/rework or improved the user result.",
+        "A CI-only or reference-only outcome cannot satisfy a separately required device, live-provider or operational evidence scope, and no observation alone promotes CURRENT_BEST or reopens CLOSED without new evidence.",
+        "A project-owned, source-locked actual work or learning outcome must be measured before any USER_OUTCOME_VERIFIED claim; a real CI observation alone does not satisfy this."
       ],
-      "owner_destination": "TKY-GROWTH-001 + Outcome Optimization"
+      "owner_destination": "TKY-GROWTH-001 + Outcome Optimization",
+      "implementation_candidate": {
+        "phase": "DRAFT_REVIEW_ONLY",
+        "path": "ENFORCEMENT/growth_outcome_observation.py",
+        "fixtures": "ENFORCEMENT/fixtures/growth_outcome_observation_cases.json",
+        "role": "Deterministically classify owner-submitted observation evidence; no new AI, watch service, workflow scheduler or global semantic authority.",
+        "reference_origin": "User-supplied eight-frame social carousel about a '24-hour trader'; method analogy only, NOT proof of the pictured author's system, trading outcome, safety or TAKY runtime.",
+        "outcomes_not_yet_proven": [
+          "real owner-consumer integration",
+          "operational before/after effect",
+          "continuous monitoring",
+          "domain-specific risk thresholds",
+          "actual live result"
+        ],
+        "downstream_owner_routes": [
+          {
+            "owner": "ARCHI_GROW_PROJECT",
+            "candidate": "Changed public-data or design-condition evidence -> inspect only affected alternatives; architecture rules/decisions remain project owned.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "LEARNING_ENGINE_CORE_AND_READY_PLANNER",
+            "candidate": "New validated learning outcome -> re-evaluate pedagogical intent in Core, while Planner alone places dates.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "EUNHA_FARM_WORK_PROJECT",
+            "candidate": "Order/address/shipping exception and correction outcome -> reassess only affected order; Parent retains confirmation.",
+            "state": "REFERENCE_ONLY_NOT_IMPLEMENTED"
+          },
+          {
+            "owner": "TAKY_GROWTH",
+            "candidate": "Material source revision, repeated defect, or post-change outcome delta -> owner-scoped follow-up using actual evidence, no auto re-open of CLOSED.",
+            "state": "DRAFT_HELPER_ONLY"
+          }
+        ],
+        "owner_observation_snapshot": {
+          "path": "HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json",
+          "scope": "READ_ONLY_EXACT_HEAD_CAPTURED_SOURCE_SNAPSHOT_NOT_LIVE_MONITOR",
+          "examples": [
+            {
+              "owner": "HIDE_SEEK_V2",
+              "state": "OBSERVED_TARGET_MET_CANDIDATE",
+              "evidence": "Draft PR #20: initial browser CI 8/5 failures on two suites; final exact HEAD 93/80 passed; limited to CI_BROWSER; no provider, device, or user-result claim."
+            },
+            {
+              "owner": "READY_SET",
+              "state": "EVIDENCE_SCOPE_GAP",
+              "evidence": "Draft PR #113: integration+runtime browser CI success, required DEVICE_AND_LIVE_PROVIDER not fulfilled."
+            },
+            {
+              "owner": "ARCHI_GROW_PROJECT",
+              "state": "PREVIEW_OBSERVED__USER_OUTCOME_OPEN__QA_RECHECK_REQUIRED",
+              "evidence": "Recovered V02 source/QA and V5 two-page original 38p ALT comparison remain preview only. Direct source cross-check isolates misannotated Bundang/Seohyeon map to different 20p PDF P02; 38p TalkFile-YKH P02 visually shows Hannam/Itaewon. Owner AG-014/015 source attribution corrected and read back. Actual revised Work DWG/entity geometry and end-user/client acceptance OPEN; V02 QA appendix needs additive correction/attachment."
+            }
+          ],
+          "exit_status": "PARTIAL__CI_OBSERVATIONS_PLUS_ARCHI_SOURCE_VERSION_CORRECTION_AND_PREVIEW__WORK_USER_OUTCOME_OPEN"
+        }
+      }
     },
     {
       "gap_id": "GROWTH-GITHUB-INTEL-001",
