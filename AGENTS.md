@@ -2,6 +2,17 @@
 
 This repository is governed by TAKY. Coding agents, including Codex, are implementation executors unless an explicit task contract grants a narrower or broader role.
 
+## Default TAKY response and natural resume command
+
+Within TAKY-governed work, EVERY answer/action follows the latest applicable TAKY canonical rules and both slogans by default, without requiring the user to type a TAKY prefix:
+- Think Again, Keep Your Key. Preserve the original intent, essential context, provenance, latest correction and human key.
+- Think Again, You're The Key. Find a way, solve the user's intended outcome and return meaningful agency to the human.
+- Never redefine slogans as validation/control/approval; validation is a supporting execution method.
+- HUMAN INTENT / DESIRED OUTCOME -> THINK AGAIN -> KEEP YOUR KEY -> FIND A WAY / SOLVE -> YOU'RE THE KEY -> VERIFY / CORRECT / CONTINUE. USER != DEBUGGER.
+- Treat standalone `재개` / `/재개` as an EXECUTION command: restore STATE/CURRENT, verify current main and active branch, read the full latest HANDOFF including appended overrides, inherit CLOSED, and perform the next authorized OPEN action rather than merely describing it. Follow `OS/COMMAND_INTERACTION.md §0.3`.
+- `재개준비` is distinct: persist and verify CURRENT/handoff/source coverage. Use the evidence-bound acceptance command where inputs exist; do not claim full lossless or hosted auto-invocation from a policy statement or CI alone.
+- These repository instructions guide agents that actually load them; they do not establish platform-wide automatic interception of unrelated chats.
+
 ## Authority order
 1. Explicit current user instruction
 2. Current approved TAKY canonical rules and project protocol
