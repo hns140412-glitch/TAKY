@@ -96,6 +96,12 @@ class OrchestratorTests(unittest.TestCase):
         fourth = preflight(plan(method="d", task_id="t-d"), t)
         self.assertFalse(fourth["allowed"])
         self.assertEqual(fourth["blocked_by"], "ROUTE")
+        packet = fourth["escalation_packet"]
+        self.assertIn("cause", packet)
+        self.assertIn("attempts", packet)
+        self.assertIn("remaining_options", packet)
+        self.assertIn("recommendation", packet)
+        self.assertIn("user_decision_or_info", packet)
 
     def test_route_budget_is_scoped_by_action_execution_scope(self):
         t = trusted()
@@ -202,8 +208,8 @@ class OrchestratorTests(unittest.TestCase):
             "call_digest": receipt["call_digest"],
             "key_match": True,
             "critical_gaps": [],
-            "required_verifications": ["technical"],
-            "passed_verifications": ["technical"],
+            "required_verifications": ["technical", "intent"],
+            "passed_verifications": ["technical", "intent"],
             "user_confirmation_ref": None,
         }
         t["evidence_registry"]["ev"] = {

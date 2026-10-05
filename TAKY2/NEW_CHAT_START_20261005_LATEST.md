@@ -8,7 +8,7 @@
 - Resume baseline commit: `2ca535dd7cddbe90995af5d7d293dc7f8f0633fe`
 - Current HEAD: authoritative; verify with git at resume
 - Push / merge / deploy: NOT DONE / NOT AUTHORIZED
-- TAKY2 regression: 55/55 PASS
+- TAKY2 regression: 60/60 PASS
 - py_compile: PASS
 - git diff --check: PASS
 - Implementation status: `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
@@ -45,6 +45,11 @@ Closed protections include:
 - executor actual invocation wrapper cannot self-assert SUCCESS
 - verifier failure feeds route anti-repeat ledger
 - USER confirmation requires verified receipt-bound event
+- versioned Key fields + explicit KEY_AMEND + signed old/new diff
+- changed Key source_ref must resolve to trusted USER evidence
+- risk-based verification tier; STRONG = structural + technical + intent + independent
+- explicit verified USER stop → ABANDONED
+- route/transient exhaustion → structured Escalation Packet
 
 ## CLOSED ON THIS DELTA
 1. AUTHORITY REBIND ADAPTER — CLOSED
@@ -76,6 +81,7 @@ Closed protections include:
 Read only if needed:
 - `TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md`
 - `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
+- `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
 
 ## NEXT EXECUTION ORDER
 `ACCOUNT TARGET BINDING only → targeted E2E with real attestation → final regression`

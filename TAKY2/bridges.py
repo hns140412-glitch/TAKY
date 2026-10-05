@@ -5,7 +5,7 @@ from pathlib import Path
 import subprocess
 from typing import Any, Callable, Mapping
 
-from .enforcement import VALID_EVIDENCE_TYPES, record_failure, stable_hash
+from .enforcement import VALID_EVIDENCE_TYPES, record_failure, required_verifications_for_tier, stable_hash
 
 
 class BridgeViolation(RuntimeError):
@@ -246,6 +246,11 @@ def verify_execution(
     gaps = verdict.get("critical_gaps", [])
     if not isinstance(required, list) or not isinstance(passed, list) or not isinstance(gaps, list):
         raise BridgeViolation("verification lists are malformed")
+    minimum = required_verifications_for_tier(
+        receipt.get("verification_tier", "STANDARD")
+    )
+    if not minimum.issubset(set(required)):
+        raise BridgeViolation("verifier under-specifies required verification tier")
     if verdict.get("key_match") is not True:
         raise BridgeViolation("verifier did not confirm Key match")
     if gaps:
@@ -322,4 +327,57 @@ def record_user_confirmation(
         "verified_by": verifier_id.strip(),
     }
     updated["completion_registry"][receipt_id]["user_confirmation_ref"] = event_ref
+    return updated
+
+
+def record_user_stop(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    event: Mapping[str, Any],
+    *,
+    verifier: Callable[[Mapping[str, Any]], bool],
+    verifier_id: str,
+) -> dict[str, Any]:
+    receipt = _receipt(runtime, receipt_id)
+    if not callable(verifier):
+        raise BridgeViolation("USER stop verifier required")
+    if not isinstance(verifier_id, str) or not verifier_id.strip():
+        raise BridgeViolation("USER stop verifier_id required")
+    if verifier(event) is not True:
+        raise BridgeViolation("USER stop verification failed")
+    if (
+        event.get("actor") != "USER"
+        or event.get("kind") != "stop"
+        or event.get("explicit") is not True
+        or event.get("receipt_id") != receipt_id
+    ):
+        raise BridgeViolation("explicit receipt-bound USER stop required")
+
+    event_ref = event.get("event_ref")
+    if not isinstance(event_ref, str) or not event_ref.strip():
+        raise BridgeViolation("event_ref required")
+
+    updated = deepcopy(dict(runtime))
+    events = updated.setdefault("user_events", {})
+    if event_ref in events:
+        raise BridgeViolation("user event_ref already exists")
+    events[event_ref] = {
+        "actor": "USER",
+        "kind": "stop",
+        "receipt_id": receipt_id,
+        "explicit": True,
+        "verified_by": verifier_id.strip(),
+    }
+
+    updated.setdefault("execution_outcomes", {})[receipt_id] = "ABANDONED"
+    execution_key = receipt.get("execution_key")
+    if execution_key:
+        updated.setdefault("active_attempts", {}).pop(execution_key, None)
+    stored_receipt = updated.setdefault("preflight_receipts", {}).get(receipt_id)
+    if isinstance(stored_receipt, dict):
+        stored_receipt["consumed"] = True
+        stored_receipt["abandoned_by"] = event_ref
+    completion = updated.setdefault("completion_registry", {}).get(receipt_id)
+    if isinstance(completion, dict):
+        completion["abandoned_by"] = event_ref
     return updated

@@ -19,6 +19,7 @@ from .enforcement import (
     route_fingerprint,
     route_gate,
     stable_hash,
+    verification_tier,
 )
 from .bridges import BridgeViolation, execute_with_receipt
 from .state_store import initialize_runtime, load_bundle, save_runtime
@@ -53,6 +54,47 @@ def _scoped_trusted(
     ledger = ledgers.get(execution_scope) if isinstance(ledgers, Mapping) else None
     scoped["route_ledger"] = ledger if isinstance(ledger, Mapping) else _empty_ledger()
     return scoped
+
+
+def _escalation_packet(
+    scoped: Mapping[str, Any],
+    attempt: Mapping[str, Any],
+    *,
+    cause: str,
+) -> Dict[str, Any]:
+    ledger = scoped.get("route_ledger", {})
+    failure_by_route = ledger.get("last_failure_by_route", {}) if isinstance(ledger, Mapping) else {}
+    attempts = []
+    if isinstance(failure_by_route, Mapping):
+        for route_fp, item in failure_by_route.items():
+            if not isinstance(item, Mapping):
+                continue
+            attempts.append({
+                "route_fp": route_fp,
+                "target": item.get("target"),
+                "method_or_tool": item.get("method_or_tool"),
+                "failure_class": item.get("class"),
+            })
+    budget = ledger.get("route_budget", 3) if isinstance(ledger, Mapping) else 3
+    seen = ledger.get("seen_routes", []) if isinstance(ledger, Mapping) else []
+    return {
+        "cause": cause,
+        "attempts": attempts,
+        "remaining_options": [
+            "provide materially new input that changes the route/signature",
+            "explicitly approve an additional route when budget is exhausted",
+        ],
+        "recommendation": "prefer materially different evidence-backed route; do not repeat failed path",
+        "user_decision_or_info": (
+            "approve one additional route or provide materially new information"
+            if isinstance(seen, list) and len(seen) >= budget
+            else "provide only the missing decision/information required to unblock"
+        ),
+        "blocked_attempt": {
+            "target": attempt.get("target"),
+            "method_or_tool": attempt.get("method_or_tool"),
+        },
+    }
 
 
 def _execution_identity(
@@ -135,10 +177,18 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, 
         if name == "COST" and result.state == "SKIP_CALL":
             call_allowed = False
         if not result.allowed:
-            return {
+            blocked = {
                 "allowed": False, "blocked_by": name, "results": results,
                 "receipt_id": None, "call_allowed": False, "mode": "BLOCKED",
+                "reason": result.reason,
             }
+            if name == "ROUTE" and result.state == "USER_DECISION_REQUIRED":
+                blocked["escalation_packet"] = _escalation_packet(
+                    scoped,
+                    plan["attempt"],
+                    cause=result.reason,
+                )
+            return blocked
 
     approval_keys = []
     for item in results:
@@ -168,6 +218,7 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, 
         "call_digest": call_digest,
         "action_id": plan.get("action_id"),
         "action_digest": action_digest(action),
+        "verification_tier": verification_tier(action),
         "execution_scope": execution_scope,
         "execution_key": execution_key,
         "route_fp": route_fp,
@@ -192,6 +243,7 @@ def persist_preflight(runtime: Mapping[str, Any], out: Mapping[str, Any]) -> Dic
         "call_digest": out.get("call_digest"),
         "action_id": out.get("action_id"),
         "action_digest": out.get("action_digest"),
+        "verification_tier": out.get("verification_tier", "STANDARD"),
         "execution_scope": out.get("execution_scope"),
         "execution_key": out.get("execution_key"),
         "route_fp": out.get("route_fp"),

@@ -30,6 +30,12 @@ Implemented explicit staged migration:
 - USER event must pass an event verifier
 - staged request is HMAC/anchor protected before authority change
 - rebind history records old/new digest, event_ref, verifier
+- shared-Drive Claude comparison strengthened KEY handling:
+  - binding Key fields require scope + version
+  - Key changes require explicit USER KEY_AMEND
+  - existing Key version must increment exactly +1
+  - changed source_ref must resolve to trusted USER evidence
+  - signed old/new Key diff is retained in rebind history
 
 ### 2. ACCOUNT ATTESTATION — BRIDGE CLOSED / PRODUCTION TARGET BINDING OPEN
 Implemented:
@@ -66,6 +72,9 @@ Implemented:
 - evidence and completion are bound to receipt/plan/action/call/result
 - failed verification records VALIDATION in route ledger
 - same failed route cannot silently repeat
+- risk-based verification tier is receipt-bound
+- external/irreversible or authority/meaning-changing actions require STRONG verification
+- STRONG minimum = structural + technical + intent + independent
 
 ### 5. USER EVENT BRIDGE — CLOSED
 Implemented:
@@ -74,15 +83,18 @@ Implemented:
 - event verifier is mandatory
 - silence/implicit state never confirms
 - DONE accepts USER confirmation only with verified bridge marker
+- explicit verified USER stop transitions a receipt to ABANDONED
+- route exhaustion/transient exhaustion returns a structured Escalation Packet rather than asking USER to debug
 
 ### 6. INTEGRATION E2E — CLOSED FOR KERNEL PATH
 Verified chain:
 `attestation → preflight → persisted receipt → executor wrapper → independent verifier → DELIVERED_UNCONFIRMED → verified USER event → USER_CONFIRMED`
 
-Regression:
-- 55/55 PASS
+Regression after shared-Drive Claude comparison patch:
+- 60/60 PASS
 - py_compile PASS
 - git diff --check PASS
+- comparison evidence: `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
 
 ### 7. ORIGINAL USER INTENT COMPARISON
 Intent: simple, efficient, enforceable TAKY2 kernel; avoid semantic mega-framework; keep USER != DEBUGGER; minimize Claude/Codex/Remote; no unauthorized push/merge/deploy.

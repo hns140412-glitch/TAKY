@@ -31,16 +31,22 @@ def trusted():
                 "value": "deliver result",
                 "provenance": "USER_STATED",
                 "source_ref": "u:intent",
+                "scope": "task",
+                "version": 1,
             },
             "AUTHORIZED_TARGET": {
                 "value": "HNS",
                 "provenance": "USER_STATED",
                 "source_ref": "u:target",
+                "scope": "branch",
+                "version": 1,
             },
             "AUTHORIZED_ACTION_CLASSES": {
                 "value": ["doc_write"],
                 "provenance": "USER_STATED",
                 "source_ref": "u:class",
+                "scope": "branch",
+                "version": 1,
             },
         },
         "source_registry": {
@@ -226,7 +232,7 @@ class RouteGateTests(unittest.TestCase):
         t["route_ledger"] = record_failure(t["route_ledger"], a, "TIMEOUT")
         self.assertTrue(route_gate(t, a).allowed)
         t["route_ledger"] = record_failure(t["route_ledger"], a, "RATE_LIMIT")
-        self.assertEqual(route_gate(t, a).state, "BLOCKED")
+        self.assertEqual(route_gate(t, a).state, "USER_DECISION_REQUIRED")
 
     def test_budget_counts_distinct_seen_routes(self):
         t = trusted()
@@ -236,7 +242,7 @@ class RouteGateTests(unittest.TestCase):
         ]
         self.assertEqual(
             route_gate(t, self.attempt("d")).state,
-            "BLOCKED",
+            "USER_DECISION_REQUIRED",
         )
 
     def test_user_not_debugger(self):

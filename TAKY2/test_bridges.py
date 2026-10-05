@@ -8,6 +8,7 @@ from TAKY2.bridges import (
     bind_account_attestation,
     execute_with_receipt,
     record_user_confirmation,
+    record_user_stop,
     verify_execution,
 )
 from TAKY2.orchestrator import finalize, persist_preflight, preflight
@@ -272,8 +273,12 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "evidence_ref": "ev:e2e",
                 "evidence_type": "runtime_test",
                 "key_match": True,
-                "required_verifications": ["technical", "intent"],
-                "passed_verifications": ["technical", "intent"],
+                "required_verifications": [
+                    "structural", "technical", "intent", "independent"
+                ],
+                "passed_verifications": [
+                    "structural", "technical", "intent", "independent"
+                ],
                 "critical_gaps": [],
             },
             verifier_id="verifier-1",
@@ -306,11 +311,62 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
         self.assertEqual(confirmed["state"], "USER_CONFIRMED")
 
 
+    def test_strong_tier_rejects_under_specified_verification(self):
+        base, runtime, out = self.prepared()
+        self.assertEqual(out["verification_tier"], "STRONG")
+        runtime, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaises(BridgeViolation):
+            verify_execution(
+                runtime,
+                out["receipt_id"],
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:weak",
+                    "evidence_type": "runtime_test",
+                    "key_match": True,
+                    "required_verifications": ["technical", "intent"],
+                    "passed_verifications": ["technical", "intent"],
+                    "critical_gaps": [],
+                },
+                verifier_id="verifier-1",
+            )
+
+    def test_explicit_user_stop_marks_receipt_abandoned(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime = record_user_stop(
+            runtime,
+            rid,
+            {
+                "actor": "USER",
+                "kind": "stop",
+                "receipt_id": rid,
+                "event_ref": "user:stop:1",
+                "explicit": True,
+            },
+            verifier=lambda event: event.get("explicit") is True,
+            verifier_id="ui-bridge",
+        )
+        self.assertEqual(runtime["execution_outcomes"][rid], "ABANDONED")
+        self.assertTrue(runtime["preflight_receipts"][rid]["consumed"])
+        result = finalize(
+            {"preflight_receipt": rid, "evidence_refs": ["none"]},
+            overlay_runtime(base, runtime),
+        )
+        self.assertEqual(result["state"], "ABANDONED")
+
+
 class AuthorityRebindTests(unittest.TestCase):
-    def make_state(self):
+    def make_state(self, old_authority=None):
         tmp = tempfile.TemporaryDirectory()
         root = Path(tmp.name)
-        old_authority = {"key": {"generation": 1}}
+        old_authority = old_authority or {"key": {"generation": 1}}
         example = {
             "runtime_version": 1,
             "authority_digest": "",
@@ -361,6 +417,7 @@ class AuthorityRebindTests(unittest.TestCase):
             new_digest = authority_digest(new_authority)
             staged = stage_authority_rebind(
                 runtime,
+                current_authority=old,
                 new_authority=new_authority,
                 user_event={
                     "actor": "USER",
@@ -402,6 +459,173 @@ class AuthorityRebindTests(unittest.TestCase):
                 ap, rp, runtime_key=KEY, anchor_path=anchor
             )
             self.assertEqual(digest, new_digest)
+        finally:
+            tmp.cleanup()
+
+
+    def test_key_amend_requires_explicit_flag_and_version_increment(self):
+        old_authority = {
+            "key": {
+                "USER_INTENT": {
+                    "value": "old",
+                    "provenance": "USER_STATED",
+                    "source_ref": "u:intent:1",
+                    "scope": "task",
+                    "version": 1,
+                }
+            },
+            "source_registry": {
+                "u:intent:1": {"actor": "USER", "kind": "statement"},
+                "u:intent:2": {"actor": "USER", "kind": "statement"},
+            },
+        }
+        tmp, ap, ep, rp, anchor, lock, old, runtime = self.make_state(old_authority)
+        try:
+            new_authority = {
+                **old_authority,
+                "key": {
+                    "USER_INTENT": {
+                        "value": "new",
+                        "provenance": "USER_STATED",
+                        "source_ref": "u:intent:2",
+                        "scope": "task",
+                        "version": 2,
+                    }
+                },
+            }
+            new_digest = authority_digest(new_authority)
+            event = {
+                "actor": "USER",
+                "kind": "authority_rebind",
+                "explicit": True,
+                "event_ref": "user:key-amend:1",
+                "authorized_new_digest": new_digest,
+            }
+            with self.assertRaises(StateIntegrityError):
+                stage_authority_rebind(
+                    runtime,
+                    current_authority=old_authority,
+                    new_authority=new_authority,
+                    user_event=event,
+                    event_verifier=lambda e: True,
+                    verifier_id="ui-bridge",
+                )
+
+            event["key_amend"] = True
+            staged = stage_authority_rebind(
+                runtime,
+                current_authority=old_authority,
+                new_authority=new_authority,
+                user_event=event,
+                event_verifier=lambda e: True,
+                verifier_id="ui-bridge",
+            )
+            diff = staged["authority_rebind_request"]["key_diff"]
+            self.assertEqual(diff[0]["field"], "USER_INTENT")
+            self.assertEqual(diff[0]["old_version"], 1)
+            self.assertEqual(diff[0]["new_version"], 2)
+        finally:
+            tmp.cleanup()
+
+    def test_key_amend_rejects_untrusted_source_ref(self):
+        old_authority = {
+            "key": {
+                "USER_INTENT": {
+                    "value": "old",
+                    "provenance": "USER_STATED",
+                    "source_ref": "u:intent:1",
+                    "scope": "task",
+                    "version": 1,
+                }
+            },
+            "source_registry": {
+                "u:intent:1": {"actor": "USER", "kind": "statement"},
+            },
+        }
+        tmp, ap, ep, rp, anchor, lock, old, runtime = self.make_state(old_authority)
+        try:
+            new_authority = {
+                "key": {
+                    "USER_INTENT": {
+                        "value": "new",
+                        "provenance": "USER_CONFIRMED",
+                        "source_ref": "ai:fake",
+                        "scope": "task",
+                        "version": 2,
+                    }
+                },
+                "source_registry": {
+                    "ai:fake": {"actor": "AI", "kind": "statement"},
+                },
+            }
+            new_digest = authority_digest(new_authority)
+            with self.assertRaises(StateIntegrityError):
+                stage_authority_rebind(
+                    runtime,
+                    current_authority=old_authority,
+                    new_authority=new_authority,
+                    user_event={
+                        "actor": "USER",
+                        "kind": "authority_rebind",
+                        "explicit": True,
+                        "key_amend": True,
+                        "event_ref": "user:key-amend:fake",
+                        "authorized_new_digest": new_digest,
+                    },
+                    event_verifier=lambda e: True,
+                    verifier_id="ui-bridge",
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_key_amend_rejects_version_jump(self):
+        old_authority = {
+            "key": {
+                "USER_INTENT": {
+                    "value": "old",
+                    "provenance": "USER_STATED",
+                    "source_ref": "u:intent:1",
+                    "scope": "task",
+                    "version": 1,
+                }
+            },
+            "source_registry": {
+                "u:intent:1": {"actor": "USER", "kind": "statement"},
+            },
+        }
+        tmp, ap, ep, rp, anchor, lock, old, runtime = self.make_state(old_authority)
+        try:
+            new_authority = {
+                "key": {
+                    "USER_INTENT": {
+                        "value": "new",
+                        "provenance": "USER_CONFIRMED",
+                        "source_ref": "u:intent:2",
+                        "scope": "task",
+                        "version": 3,
+                    }
+                },
+                "source_registry": {
+                    "u:intent:2": {"actor": "USER", "kind": "confirmation"},
+                },
+            }
+            new_digest = authority_digest(new_authority)
+            with self.assertRaises(StateIntegrityError):
+                stage_authority_rebind(
+                    runtime,
+                    current_authority=old_authority,
+                    new_authority=new_authority,
+                    user_event={
+                        "actor": "USER",
+                        "kind": "authority_rebind",
+                        "explicit": True,
+                        "key_amend": True,
+                        "event_ref": "user:key-amend:jump",
+                        "authorized_new_digest": new_digest,
+                    },
+                    event_verifier=lambda e: True,
+                    verifier_id="ui-bridge",
+                )
         finally:
             tmp.cleanup()
 

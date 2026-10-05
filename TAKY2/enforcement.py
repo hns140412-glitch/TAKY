@@ -95,6 +95,24 @@ def action_digest(action: Mapping[str, Any]) -> str:
     return stable_hash(dict(action))
 
 
+def verification_tier(action: Mapping[str, Any]) -> str:
+    kind = action.get("kind")
+    if (
+        kind in EXTERNAL_ACTIONS
+        or kind in IRREVERSIBLE_ACTIONS
+        or action.get("external_facing") is True
+        or action.get("meaning_or_authority_changing") is True
+    ):
+        return "STRONG"
+    return "STANDARD"
+
+
+def required_verifications_for_tier(tier: Any) -> set[str]:
+    if tier == "STRONG":
+        return {"structural", "technical", "intent", "independent"}
+    return {"technical", "intent"}
+
+
 def _norm_token(value: Any) -> str:
     return str(value or "").strip().lower()
 
@@ -120,10 +138,16 @@ def validate_key(trusted: Mapping[str, Any]) -> GateResult | None:
             return GateResult(False, "BLOCKED", f"{name} must be structured")
         provenance = field.get("provenance")
         ref = field.get("source_ref")
+        scope = field.get("scope")
+        version = field.get("version")
         if provenance == "AI_INFERRED":
             return GateResult(False, "USER_DECISION_REQUIRED", f"{name} cannot bind from AI_INFERRED")
         if provenance not in USER_PROVENANCE or not trusted_user_ref(trusted, ref):
             return GateResult(False, "BLOCKED", f"{name} lacks trusted USER provenance")
+        if not isinstance(scope, str) or not scope.strip():
+            return GateResult(False, "BLOCKED", f"{name} trusted scope missing")
+        if not isinstance(version, int) or version < 1:
+            return GateResult(False, "BLOCKED", f"{name} trusted version missing")
     return None
 
 
@@ -252,7 +276,7 @@ def route_gate(trusted: Mapping[str, Any], attempt: Mapping[str, Any]) -> GateRe
     if route_fp not in seen_routes and len(seen_routes) >= budget:
         approval_key = "route_budget:" + route_fp
         if not trusted_approval(trusted, approval_key):
-            return GateResult(False, "BLOCKED", "different-route budget exhausted")
+            return GateResult(False, "USER_DECISION_REQUIRED", "different-route budget exhausted")
         approval_evidence.append("approval-key:" + approval_key)
 
     failure_by_route = ledger.get("last_failure_by_route", {})
@@ -268,7 +292,7 @@ def route_gate(trusted: Mapping[str, Any], attempt: Mapping[str, Any]) -> GateRe
         if not isinstance(count, int):
             return GateResult(False, "BLOCKED", "invalid transient counter")
         if count >= TRANSIENT_LIMIT:
-            return GateResult(False, "BLOCKED", "transient retry cap reached")
+            return GateResult(False, "USER_DECISION_REQUIRED", "transient retry cap reached")
         return GateResult(
             True,
             "ROUTE_OK",
@@ -307,7 +331,11 @@ def record_failure(ledger: Mapping[str, Any], attempt: Mapping[str, Any],
     if failure_class not in TRANSIENT_FAILURES and sig not in out["failed_signatures"]:
         out["failed_signatures"].append(sig)
 
-    out["last_failure_by_route"][route_fp] = {"class": failure_class}
+    out["last_failure_by_route"][route_fp] = {
+        "class": failure_class,
+        "target": attempt.get("target"),
+        "method_or_tool": attempt.get("method_or_tool"),
+    }
 
     if failure_class in TRANSIENT_FAILURES:
         out["transient_failures"][route_fp] = int(
@@ -405,12 +433,15 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
     receipt = receipts.get(receipt_id) if isinstance(receipt_id, str) else None
     if not isinstance(receipt, Mapping) or receipt.get("allowed") is not True:
         return GateResult(False, "NOT_DONE", "valid preflight receipt required")
+    outcome = trusted.get("execution_outcomes", {}).get(receipt_id)
+    if outcome == "ABANDONED":
+        return GateResult(False, "ABANDONED", "explicit USER stop abandoned this receipt")
     if receipt.get("consumed"):
         return GateResult(False, "NOT_DONE", "preflight receipt already consumed")
     if receipt.get("authority_digest") != trusted.get("_authority_digest"):
         return GateResult(False, "NOT_DONE", "preflight receipt authority is stale")
 
-    if trusted.get("execution_outcomes", {}).get(receipt_id) != "SUCCESS":
+    if outcome != "SUCCESS":
         return GateResult(False, "NOT_DONE", "execution SUCCESS is not recorded")
 
     completion_registry = trusted.get("completion_registry", {})
@@ -431,6 +462,9 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
 
     required = set(completion.get("required_verifications", []))
     passed = set(completion.get("passed_verifications", []))
+    minimum = required_verifications_for_tier(receipt.get("verification_tier", "STANDARD"))
+    if not minimum.issubset(required):
+        return GateResult(False, "BLOCKED", "required verification tier is under-specified")
     missing = sorted(required - passed)
     if missing:
         return GateResult(False, "PARTIAL", "missing verifications: " + ",".join(missing))

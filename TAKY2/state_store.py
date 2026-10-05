@@ -10,7 +10,7 @@ import time
 import uuid
 from typing import Any, Callable, Dict, Tuple
 
-from .enforcement import stable_hash
+from .enforcement import BINDING_FIELDS, stable_hash
 
 
 STATE_DIR = Path(__file__).with_name("state")
@@ -268,18 +268,96 @@ def save_runtime(
             pass
 
 
+def _key_amend_diff(
+    current_authority: Dict[str, Any],
+    new_authority: Dict[str, Any],
+    user_event: Dict[str, Any],
+) -> list[Dict[str, Any]]:
+    current_key = current_authority.get("key", {})
+    new_key = new_authority.get("key", {})
+    if not isinstance(current_key, dict) or not isinstance(new_key, dict):
+        raise StateIntegrityError("authority key must be an object")
+
+    diffs: list[Dict[str, Any]] = []
+    authorized_deletions = user_event.get("authorized_key_deletions", [])
+    if not isinstance(authorized_deletions, list):
+        raise StateIntegrityError("authorized_key_deletions must be a list")
+
+    for name in sorted(BINDING_FIELDS):
+        old_field = current_key.get(name)
+        new_field = new_key.get(name)
+        if stable_hash(old_field) == stable_hash(new_field):
+            continue
+
+        if new_field is None:
+            if name not in authorized_deletions:
+                raise StateIntegrityError(f"KEY_AMEND deletion not authorized: {name}")
+            diffs.append({
+                "field": name,
+                "change": "DELETE",
+                "old_version": old_field.get("version") if isinstance(old_field, dict) else None,
+                "new_version": None,
+            })
+            continue
+
+        if not isinstance(new_field, dict):
+            raise StateIntegrityError(f"KEY_AMEND field must be structured: {name}")
+        new_version = new_field.get("version")
+        new_scope = new_field.get("scope")
+        provenance = new_field.get("provenance")
+        source_ref = new_field.get("source_ref")
+        if provenance not in {"USER_STATED", "USER_CONFIRMED"}:
+            raise StateIntegrityError(f"KEY_AMEND USER provenance required: {name}")
+        if not isinstance(source_ref, str) or not source_ref.strip():
+            raise StateIntegrityError(f"KEY_AMEND source_ref missing: {name}")
+        source_registry = new_authority.get("source_registry", {})
+        source = source_registry.get(source_ref) if isinstance(source_registry, dict) else None
+        if not isinstance(source, dict) or source.get("actor") != "USER":
+            raise StateIntegrityError(f"KEY_AMEND source_ref is not trusted USER evidence: {name}")
+        if not isinstance(new_version, int) or new_version < 1:
+            raise StateIntegrityError(f"KEY_AMEND version missing: {name}")
+        if not isinstance(new_scope, str) or not new_scope.strip():
+            raise StateIntegrityError(f"KEY_AMEND scope missing: {name}")
+
+        old_version = old_field.get("version") if isinstance(old_field, dict) else None
+        if isinstance(old_version, int):
+            if new_version != old_version + 1:
+                raise StateIntegrityError(f"KEY_AMEND version must increment exactly once: {name}")
+        elif new_version != 1:
+            raise StateIntegrityError(f"new KEY_AMEND field must start at version 1: {name}")
+
+        diffs.append({
+            "field": name,
+            "change": "UPDATE" if old_field is not None else "ADD",
+            "old_version": old_version,
+            "new_version": new_version,
+            "old_scope": old_field.get("scope") if isinstance(old_field, dict) else None,
+            "new_scope": new_scope,
+            "old_hash": stable_hash(old_field),
+            "new_hash": stable_hash(new_field),
+        })
+
+    if diffs and user_event.get("key_amend") is not True:
+        raise StateIntegrityError("explicit KEY_AMEND authorization required")
+    return diffs
+
+
 def stage_authority_rebind(
     runtime: Dict[str, Any],
     *,
+    current_authority: Dict[str, Any],
     new_authority: Dict[str, Any],
     user_event: Dict[str, Any],
     event_verifier: Callable[[Dict[str, Any]], bool],
     verifier_id: str,
 ) -> Dict[str, Any]:
     old_digest = runtime.get("authority_digest")
+    current_digest = authority_digest(current_authority)
     new_digest = authority_digest(new_authority)
     if not isinstance(old_digest, str) or not old_digest:
         raise StateIntegrityError("current authority digest missing")
+    if old_digest != current_digest:
+        raise StateIntegrityError("current authority does not match bound digest")
     if old_digest == new_digest:
         raise StateConflictError("authority digest is unchanged")
     if not callable(event_verifier) or event_verifier(user_event) is not True:
@@ -296,6 +374,7 @@ def stage_authority_rebind(
     event_ref = user_event.get("event_ref")
     if not isinstance(event_ref, str) or not event_ref.strip():
         raise StateIntegrityError("authority rebind event_ref required")
+    key_diff = _key_amend_diff(current_authority, new_authority, user_event)
 
     updated = dict(runtime)
     if updated.get("authority_rebind_request"):
@@ -307,6 +386,8 @@ def stage_authority_rebind(
         "actor": "USER",
         "explicit": True,
         "verified_by": verifier_id.strip(),
+        "key_amend": bool(key_diff),
+        "key_diff": key_diff,
     }
     return updated
 
@@ -340,6 +421,7 @@ def rebind_authority(
         or request.get("explicit") is not True
         or not isinstance(request.get("verified_by"), str)
         or not request.get("verified_by")
+        or not isinstance(request.get("key_diff", []), list)
     ):
         raise StateIntegrityError("authority rebind request does not match authority change")
 
@@ -352,6 +434,8 @@ def rebind_authority(
         "new_digest": new_digest,
         "event_ref": request.get("event_ref"),
         "verified_by": request.get("verified_by"),
+        "key_amend": bool(request.get("key_amend")),
+        "key_diff": list(request.get("key_diff", [])),
     })
     updated["authority_rebind_history"] = history
 
