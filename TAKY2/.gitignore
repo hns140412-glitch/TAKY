@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+state/*.lock
+state/*.tmp
+state/runtime.json

@@ -1,0 +1,55 @@
+{
+  "key": {
+    "USER_INTENT": {
+      "value": "TAKY 2.0 separate branch: simple, efficient, enforced rules",
+      "provenance": "USER_STATED",
+      "source_ref": "user:intent:taky2",
+      "scope": "branch",
+      "version": 1
+    },
+    "AUTHORIZED_TARGET": {
+      "value": "HNS",
+      "provenance": "USER_STATED",
+      "source_ref": "user:target:hns",
+      "scope": "branch",
+      "version": 1
+    },
+    "AUTHORIZED_ACTION_CLASSES": {
+      "value": ["doc_write"],
+      "provenance": "USER_STATED",
+      "source_ref": "user:action:doc_write",
+      "scope": "branch",
+      "version": 1
+    }
+  },
+  "source_registry": {
+    "user:intent:taky2": {"actor": "USER", "kind": "statement"},
+    "user:target:hns": {"actor": "USER", "kind": "statement"},
+    "user:action:doc_write": {"actor": "USER", "kind": "authorization"}
+  },
+  "approvals": {},
+  "action_registry": {
+    "read:q002": {
+      "kind": "READ",
+      "execution_scope": "q002-read",
+      "call_policy": {
+        "mode": "LOCAL_ONLY"
+      }
+    },
+    "write:q002-doc": {
+      "kind": "EXTERNAL_WRITE",
+      "target_account": "HNS",
+      "action_class": "doc_write",
+      "execution_scope": "q002-doc-write",
+      "call_policy": {
+        "mode": "LOCAL_ONLY"
+      }
+    }
+  },
+  "capabilities": ["shell", "local_python"],
+  "local_capabilities": ["local_validation"],
+  "cost_policy": {
+    "high_cost_models": ["opus", "claude-opus-5-5"],
+    "max_calls_without_approval": 1
+  }
+}

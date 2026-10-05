@@ -1,0 +1,243 @@
+import unittest
+
+from TAKY2.enforcement import action_digest, route_fingerprint
+from TAKY2.orchestrator import (
+    consume_receipt,
+    finalize,
+    persist_preflight,
+    preflight,
+    record_outcome,
+)
+from TAKY2.test_enforcement import trusted
+
+
+def runtime_state():
+    return {
+        "runtime_version": 1,
+        "authority_digest": "auth1",
+        "runtime": {
+            "account_attestation": {
+                "account": "HNS",
+                "verified": True,
+                "source": "connector-test",
+            }
+        },
+        "context": {
+            "premise_loaded": True,
+            "snapshot_verified": True,
+            "full_reread_authorized": False,
+        },
+        "route_ledgers": {},
+        "preflight_receipts": {},
+        "active_attempts": {},
+        "execution_outcomes": {},
+        "evidence_registry": {},
+        "completion_registry": {},
+        "consumed_approvals": {},
+        "user_events": {},
+    }
+
+
+def plan(method="python", task_id="task-q002", action_id="read"):
+    return {
+        "task_id": task_id,
+        "action_id": action_id,
+        "context": {"mode": "delta"},
+        "attempt": {
+            "target": "Q002",
+            "method_or_tool": method,
+        },
+        "call": {
+            "model": "local",
+            "effort": "low",
+            "context": "delta",
+            "expected_calls": 1,
+        },
+    }
+
+
+class OrchestratorTests(unittest.TestCase):
+    def test_preflight_has_unique_receipt_and_local_only_mode(self):
+        t = trusted()
+        a = preflight(plan(), t)
+        b = preflight(plan(), t)
+        self.assertTrue(a["allowed"])
+        self.assertFalse(a["call_allowed"])
+        self.assertEqual(a["mode"], "LOCAL_ONLY")
+        self.assertNotEqual(a["receipt_id"], b["receipt_id"])
+
+    def test_task_id_change_cannot_bypass_same_route_lock(self):
+        t = trusted()
+        first = preflight(plan(task_id="task-a"), t)
+        runtime = persist_preflight(runtime_state(), first)
+
+        t["active_attempts"] = runtime["active_attempts"]
+        t["route_ledgers"] = runtime["route_ledgers"]
+
+        second = preflight(plan(task_id="task-b"), t)
+        self.assertFalse(second["allowed"])
+        self.assertEqual(second["blocked_by"], "ROUTE")
+
+    def test_different_routes_are_counted_within_trusted_scope(self):
+        t = trusted()
+        runtime = runtime_state()
+        for method in ["a", "b", "c"]:
+            t["route_ledgers"] = runtime["route_ledgers"]
+            out = preflight(plan(method=method, task_id="t-" + method), t)
+            self.assertTrue(out["allowed"])
+            runtime = persist_preflight(runtime, out)
+            runtime["active_attempts"].pop(out["execution_key"], None)
+
+        t["route_ledgers"] = runtime["route_ledgers"]
+        t["active_attempts"] = runtime["active_attempts"]
+        fourth = preflight(plan(method="d", task_id="t-d"), t)
+        self.assertFalse(fourth["allowed"])
+        self.assertEqual(fourth["blocked_by"], "ROUTE")
+
+    def test_route_budget_is_scoped_by_action_execution_scope(self):
+        t = trusted()
+        runtime = runtime_state()
+        for method in ["a", "b", "c"]:
+            t["route_ledgers"] = runtime["route_ledgers"]
+            out = preflight(plan(method=method, task_id="t-" + method), t)
+            runtime = persist_preflight(runtime, out)
+            runtime["active_attempts"].pop(out["execution_key"], None)
+
+        t["route_ledgers"] = runtime["route_ledgers"]
+        review_plan = {
+            "task_id": "review-1",
+            "action_id": "review",
+            "context": {"mode": "delta"},
+            "attempt": {"target": "Q002", "method_or_tool": "claude"},
+            "call": {
+                "model": "sonnet",
+                "effort": "medium",
+                "context": "delta",
+                "expected_calls": 1,
+            },
+        }
+        out = preflight(review_plan, t)
+        self.assertTrue(out["allowed"])
+        self.assertTrue(out["call_allowed"])
+
+    def test_plan_cannot_supply_fake_action(self):
+        p = plan()
+        p["action_id"] = "missing"
+        p["action"] = {"kind": "EXTERNAL_WRITE"}
+        out = preflight(p, trusted())
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "KEY")
+
+    def test_receipt_binds_action_call_and_execution_identity(self):
+        out = preflight(plan(), trusted())
+        runtime = persist_preflight(runtime_state(), out)
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        self.assertEqual(receipt["authority_digest"], "auth1")
+        self.assertEqual(receipt["plan_digest"], out["plan_digest"])
+        self.assertEqual(receipt["call_digest"], out["call_digest"])
+        self.assertEqual(receipt["action_id"], "read")
+        self.assertEqual(receipt["execution_key"], out["execution_key"])
+        self.assertFalse(receipt["call_allowed"])
+
+    def test_bound_approval_consumes_specific_ref_only(self):
+        t = trusted()
+        action = t["action_registry"]["delete"]
+        approval_key = "action:" + action_digest(action)
+        t["approvals"][approval_key] = "u:approve"
+
+        first = preflight(plan(task_id="delete-1", action_id="delete"), t)
+        self.assertTrue(first["allowed"])
+        runtime = persist_preflight(runtime_state(), first)
+        self.assertEqual(
+            runtime["consumed_approvals"][approval_key],
+            "u:approve",
+        )
+
+        t["consumed_approvals"] = runtime["consumed_approvals"]
+        blocked = preflight(
+            plan(task_id="delete-2", action_id="delete"),
+            t,
+        )
+        self.assertFalse(blocked["allowed"])
+
+        t["approvals"][approval_key] = "u:approve2"
+        reapproved = preflight(
+            plan(task_id="delete-3", action_id="delete"),
+            t,
+        )
+        self.assertTrue(reapproved["allowed"])
+
+    def test_failure_outcome_updates_only_its_execution_scope(self):
+        t = trusted()
+        out = preflight(plan(), t)
+        runtime = persist_preflight(runtime_state(), out)
+        updated = record_outcome(runtime, out["receipt_id"], "VALIDATION")
+
+        self.assertEqual(
+            updated["execution_outcomes"][out["receipt_id"]],
+            "VALIDATION",
+        )
+        self.assertNotIn(out["execution_key"], updated["active_attempts"])
+        scope = out["execution_scope"]
+        self.assertTrue(
+            updated["route_ledgers"][scope]["failed_signatures"]
+        )
+
+    def test_success_outcome_is_required_for_done(self):
+        t = trusted()
+        out = preflight(plan(), t)
+        rid = out["receipt_id"]
+        runtime = persist_preflight(runtime_state(), out)
+        runtime = record_outcome(runtime, rid, "SUCCESS")
+
+        t["preflight_receipts"] = runtime["preflight_receipts"]
+        t["execution_outcomes"] = runtime["execution_outcomes"]
+        receipt = runtime["preflight_receipts"][rid]
+        t["completion_registry"][rid] = {
+            "plan_digest": receipt["plan_digest"],
+            "action_digest": receipt["action_digest"],
+            "call_digest": receipt["call_digest"],
+            "key_match": True,
+            "critical_gaps": [],
+            "required_verifications": ["technical"],
+            "passed_verifications": ["technical"],
+            "user_confirmation_ref": None,
+        }
+        t["evidence_registry"]["ev"] = {
+            "type": "runtime_test",
+            "verified": True,
+            "receipt_id": rid,
+            "plan_digest": receipt["plan_digest"],
+            "action_digest": receipt["action_digest"],
+            "call_digest": receipt["call_digest"],
+        }
+
+        result = finalize(
+            {"preflight_receipt": rid, "evidence_refs": ["ev"]},
+            t,
+        )
+        self.assertEqual(result["state"], "DELIVERED_UNCONFIRMED")
+
+    def test_consumed_receipt_removes_execution_lock(self):
+        runtime = runtime_state()
+        runtime["preflight_receipts"]["pf:x"] = {
+            "consumed": False,
+            "execution_key": "ek",
+        }
+        runtime["active_attempts"]["ek"] = {
+            "receipt_id": "pf:x",
+            "status": "SUCCESS",
+        }
+        updated = consume_receipt(runtime, "pf:x")
+        self.assertTrue(updated["preflight_receipts"]["pf:x"]["consumed"])
+        self.assertNotIn("ek", updated["active_attempts"])
+
+    def test_route_fingerprint_normalization_prevents_alias_budget_bypass(self):
+        self.assertEqual(
+            route_fingerprint({"target": "Q002", "method_or_tool": "Python"}),
+            route_fingerprint({"target": " q002 ", "method_or_tool": "python "}),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

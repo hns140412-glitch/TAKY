@@ -1,0 +1,18 @@
+{
+  "runtime_version": 1,
+  "authority_digest": "",
+  "runtime": {"account_attestation": null},
+  "context": {
+    "premise_loaded": true,
+    "snapshot_verified": true,
+    "full_reread_authorized": false
+  },
+  "route_ledgers": {},
+  "preflight_receipts": {},
+  "active_attempts": {},
+  "execution_outcomes": {},
+  "evidence_registry": {},
+  "completion_registry": {},
+  "consumed_approvals": {},
+  "user_events": {}
+}
