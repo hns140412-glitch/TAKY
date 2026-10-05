@@ -6,6 +6,23 @@
 - Current HEAD is authoritative after this implementation commit.
 - Push / merge / deploy: NOT AUTHORIZED / NOT DONE.
 
+## BORDER COLLIE ORCHESTRATION — AUTHORITY BOUND
+Parent slogans:
+- Think Again, Keep Your Key.
+- Think Again, You're The Key.
+
+Execution definition:
+- ChatGPT / TAKY = BORDER COLLIE ORCHESTRATOR
+- CODE_WRITER = implementation
+- Codex = verification
+- Claude = independent review
+- USER = Key Owner / Final Authority
+- Purpose = GUIDE_TO_RESULT
+- Default failure behavior = REDIRECT_BEFORE_ESCALATE
+- Gate exists to detect wrong direction and guide toward the correct result, not to stop work as an end in itself.
+- Runtime authority digest rebound after contract registration.
+- Definition: `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
+
 ## ROLE SPLIT — UNCHANGED
 - Beta = evidence freeze
 - Alpha = whole-system semantic + structural map
@@ -90,8 +107,8 @@ Implemented:
 Verified chain:
 `attestation → preflight → persisted receipt → executor wrapper → independent verifier → DELIVERED_UNCONFIRMED → verified USER event → USER_CONFIRMED`
 
-Regression after shared-Drive Claude comparison patch:
-- 60/60 PASS
+Regression after Border Collie orchestration enforcement:
+- 63/63 PASS
 - py_compile PASS
 - git diff --check PASS
 - comparison evidence: `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`

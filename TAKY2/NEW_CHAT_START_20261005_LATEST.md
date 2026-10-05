@@ -8,12 +8,26 @@
 - Resume baseline commit: `2ca535dd7cddbe90995af5d7d293dc7f8f0633fe`
 - Current HEAD: authoritative; verify with git at resume
 - Push / merge / deploy: NOT DONE / NOT AUTHORIZED
-- TAKY2 regression: 60/60 PASS
+- TAKY2 regression: 63/63 PASS
 - py_compile: PASS
 - git diff --check: PASS
 - Implementation status: `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
 - Claude/Codex on this delta: SKIPPED by Necessity Gate
 - TAKY2 is separate from existing Alpha/Beta.
+
+## BORDER COLLIE ORCHESTRATION — KEEP
+This is the execution definition directly under the TAKY slogans.
+- ChatGPT / TAKY = `CHATGPT_TAKY_BORDER_COLLIE` orchestrator
+- implementation = `CODE_WRITER`
+- verification = `CODEX`
+- independent review = `CLAUDE`
+- USER = Key Owner / Final Authority
+- purpose = `GUIDE_TO_RESULT`
+- loop = `DETECT → CLASSIFY → REDIRECT → GUIDE → VERIFY → DELIVER`
+- default Gate behavior = `REDIRECT_BEFORE_ESCALATE`
+- Gate is not designed to stop work; it detects wrong direction and guides the collaboration group toward the correct result.
+- USER != DEBUGGER.
+- Canonical local definition: `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
 
 ## ROLE SPLIT — KEEP
 - Beta = evidence freeze / forensic baseline
@@ -50,6 +64,11 @@ Closed protections include:
 - risk-based verification tier; STRONG = structural + technical + intent + independent
 - explicit verified USER stop → ABANDONED
 - route/transient exhaustion → structured Escalation Packet
+- orchestration contract is required by KEY gate
+- every successful preflight binds Border Collie/CODE_WRITER/CODEX/CLAUDE/USER roles into the receipt
+- recoverable Gate failures return REDIRECT + guidance.next_action
+- verification SUCCESS requires receipt-bound CODEX role
+- STRONG independent verification requires receipt-bound CLAUDE reviewer role
 
 ## CLOSED ON THIS DELTA
 1. AUTHORITY REBIND ADAPTER — CLOSED
@@ -82,6 +101,7 @@ Read only if needed:
 - `TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md`
 - `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
 - `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
+- `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
 
 ## NEXT EXECUTION ORDER
 `ACCOUNT TARGET BINDING only → targeted E2E with real attestation → final regression`

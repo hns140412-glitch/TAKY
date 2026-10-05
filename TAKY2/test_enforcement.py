@@ -26,6 +26,24 @@ def ledger():
 def trusted():
     return {
         "_authority_digest": "auth1",
+        "orchestration_contract": {
+            "name": "BORDER_COLLIE_ORCHESTRATION",
+            "purpose": "GUIDE_TO_RESULT",
+            "roles": {
+                "orchestrator": "CHATGPT_TAKY_BORDER_COLLIE",
+                "implementer": "CODE_WRITER",
+                "verifier": "CODEX",
+                "independent_reviewer": "CLAUDE",
+                "final_authority": "USER"
+            },
+            "guidance_loop": [
+                "DETECT", "CLASSIFY", "REDIRECT", "GUIDE", "VERIFY", "DELIVER"
+            ],
+            "gate_policy": {
+                "default": "REDIRECT_BEFORE_ESCALATE",
+                "user_not_debugger": True
+            }
+        },
         "key": {
             "USER_INTENT": {
                 "value": "deliver result",
@@ -130,6 +148,14 @@ def trusted():
 
 
 class KeyGateTests(unittest.TestCase):
+    def test_border_collie_contract_is_required(self):
+        t = trusted()
+        t.pop("orchestration_contract")
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertEqual(result.state, "BLOCKED")
+        self.assertIn("Border Collie", result.reason)
+
     def test_plan_cannot_self_describe_unregistered_action(self):
         self.assertEqual(
             key_gate(trusted(), {"action_id": "missing"}).state,

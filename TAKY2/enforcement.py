@@ -6,6 +6,8 @@ from hashlib import sha256
 import json
 from typing import Any, Mapping
 
+from .orchestration import validate_orchestration_contract
+
 
 USER_PROVENANCE = {"USER_STATED", "USER_CONFIRMED"}
 BINDING_FIELDS = {
@@ -152,6 +154,10 @@ def validate_key(trusted: Mapping[str, Any]) -> GateResult | None:
 
 
 def key_gate(trusted: Mapping[str, Any], plan: Mapping[str, Any]) -> GateResult:
+    contract_ok, contract_reason = validate_orchestration_contract(trusted)
+    if not contract_ok:
+        return GateResult(False, "BLOCKED", contract_reason)
+
     invalid = validate_key(trusted)
     if invalid:
         return invalid

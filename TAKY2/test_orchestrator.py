@@ -67,6 +67,12 @@ class OrchestratorTests(unittest.TestCase):
         self.assertTrue(a["allowed"])
         self.assertFalse(a["call_allowed"])
         self.assertEqual(a["mode"], "LOCAL_ONLY")
+        self.assertEqual(
+            a["orchestration"]["orchestrator"],
+            "CHATGPT_TAKY_BORDER_COLLIE",
+        )
+        self.assertEqual(a["orchestration"]["verifier"], "CODEX")
+        self.assertEqual(a["orchestration"]["independent_reviewer"], "CLAUDE")
         self.assertNotEqual(a["receipt_id"], b["receipt_id"])
 
     def test_task_id_change_cannot_bypass_same_route_lock(self):
@@ -136,6 +142,12 @@ class OrchestratorTests(unittest.TestCase):
         out = preflight(p, trusted())
         self.assertFalse(out["allowed"])
         self.assertEqual(out["blocked_by"], "KEY")
+        self.assertEqual(out["mode"], "REDIRECT")
+        self.assertEqual(
+            out["guidance"]["owner"],
+            "CHATGPT_TAKY_BORDER_COLLIE",
+        )
+        self.assertIn("registered action", out["guidance"]["next_action"])
 
     def test_receipt_binds_action_call_and_execution_identity(self):
         out = preflight(plan(), trusted())
@@ -146,6 +158,15 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(receipt["call_digest"], out["call_digest"])
         self.assertEqual(receipt["action_id"], "read")
         self.assertEqual(receipt["execution_key"], out["execution_key"])
+        self.assertEqual(
+            receipt["orchestration"]["orchestrator"],
+            "CHATGPT_TAKY_BORDER_COLLIE",
+        )
+        self.assertEqual(receipt["orchestration"]["verifier"], "CODEX")
+        self.assertEqual(
+            receipt["orchestration"]["independent_reviewer"],
+            "CLAUDE",
+        )
         self.assertFalse(receipt["call_allowed"])
 
     def test_bound_approval_consumes_specific_ref_only(self):

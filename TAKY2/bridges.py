@@ -213,6 +213,13 @@ def verify_execution(
     if not isinstance(verdict, Mapping):
         raise BridgeViolation("verifier verdict must be an object")
 
+    orchestration = receipt.get("orchestration", {})
+    if not isinstance(orchestration, Mapping):
+        raise BridgeViolation("receipt orchestration binding missing")
+    expected_verifier_role = orchestration.get("verifier")
+    if verdict.get("verifier_role") != expected_verifier_role:
+        raise BridgeViolation("verification must be owned by receipt-bound CODEX role")
+
     evidence_ref = verdict.get("evidence_ref")
     evidence_type = verdict.get("evidence_type")
     if not isinstance(evidence_ref, str) or not evidence_ref:
@@ -251,6 +258,12 @@ def verify_execution(
     )
     if not minimum.issubset(set(required)):
         raise BridgeViolation("verifier under-specifies required verification tier")
+    if "independent" in set(required):
+        expected_reviewer = orchestration.get("independent_reviewer")
+        if verdict.get("independent_reviewer") != expected_reviewer:
+            raise BridgeViolation(
+                "independent verification must be owned by receipt-bound CLAUDE role"
+            )
     if verdict.get("key_match") is not True:
         raise BridgeViolation("verifier did not confirm Key match")
     if gaps:
@@ -266,6 +279,8 @@ def verify_execution(
         "type": evidence_type,
         "verified": True,
         "verified_by": verifier_id.strip(),
+        "verifier_role": verdict.get("verifier_role"),
+        "independent_reviewer": verdict.get("independent_reviewer"),
         "receipt_id": receipt_id,
         "plan_digest": receipt.get("plan_digest"),
         "action_digest": receipt.get("action_digest"),
@@ -280,6 +295,8 @@ def verify_execution(
         "critical_gaps": [],
         "required_verifications": list(required),
         "passed_verifications": list(passed),
+        "verifier_role": verdict.get("verifier_role"),
+        "independent_reviewer": verdict.get("independent_reviewer"),
         "user_confirmation_ref": None,
         "verified_by": verifier_id.strip(),
     }

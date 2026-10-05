@@ -15,7 +15,9 @@
       "version": 1
     },
     "AUTHORIZED_ACTION_CLASSES": {
-      "value": ["doc_write"],
+      "value": [
+        "doc_write"
+      ],
       "provenance": "USER_STATED",
       "source_ref": "user:action:doc_write",
       "scope": "branch",
@@ -23,9 +25,22 @@
     }
   },
   "source_registry": {
-    "user:intent:taky2": {"actor": "USER", "kind": "statement"},
-    "user:target:hns": {"actor": "USER", "kind": "statement"},
-    "user:action:doc_write": {"actor": "USER", "kind": "authorization"}
+    "user:intent:taky2": {
+      "actor": "USER",
+      "kind": "statement"
+    },
+    "user:target:hns": {
+      "actor": "USER",
+      "kind": "statement"
+    },
+    "user:action:doc_write": {
+      "actor": "USER",
+      "kind": "authorization"
+    },
+    "user:orchestration:border-collie-v1": {
+      "actor": "USER",
+      "kind": "statement"
+    }
   },
   "approvals": {},
   "action_registry": {
@@ -46,10 +61,52 @@
       }
     }
   },
-  "capabilities": ["shell", "local_python"],
-  "local_capabilities": ["local_validation"],
+  "capabilities": [
+    "shell",
+    "local_python"
+  ],
+  "local_capabilities": [
+    "local_validation"
+  ],
   "cost_policy": {
-    "high_cost_models": ["opus", "claude-opus-5-5"],
+    "high_cost_models": [
+      "opus",
+      "claude-opus-5-5"
+    ],
     "max_calls_without_approval": 1
+  },
+  "orchestration_contract": {
+    "name": "BORDER_COLLIE_ORCHESTRATION",
+    "source_ref": "user:orchestration:border-collie-v1",
+    "slogan_parent": [
+      "Think Again, Keep Your Key.",
+      "Think Again, You're The Key."
+    ],
+    "definition": "TAKY guides the collaboration group like a Border Collie: detect a wrong path, redirect it, coordinate roles, verify, and deliver the correct result.",
+    "purpose": "GUIDE_TO_RESULT",
+    "roles": {
+      "orchestrator": "CHATGPT_TAKY_BORDER_COLLIE",
+      "implementer": "CODE_WRITER",
+      "verifier": "CODEX",
+      "independent_reviewer": "CLAUDE",
+      "final_authority": "USER"
+    },
+    "guidance_loop": [
+      "DETECT",
+      "CLASSIFY",
+      "REDIRECT",
+      "GUIDE",
+      "VERIFY",
+      "DELIVER"
+    ],
+    "gate_policy": {
+      "default": "REDIRECT_BEFORE_ESCALATE",
+      "user_not_debugger": true,
+      "block_is_not_goal": true,
+      "goal": "CORRECT_RESULT"
+    },
+    "call_policy": {
+      "claude_codex_remote": "NECESSITY_GATE_ONLY"
+    }
   }
 }

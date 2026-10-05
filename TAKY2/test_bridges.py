@@ -196,6 +196,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:1",
                     "evidence_type": "runtime_test",
+                    "verifier_role": "CODEX",
                     "key_match": True,
                     "required_verifications": ["technical"],
                     "passed_verifications": ["technical"],
@@ -220,6 +221,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "passed": False,
                 "evidence_ref": "ev:failed",
                 "evidence_type": "runtime_test",
+                "verifier_role": "CODEX",
             },
             verifier_id="verifier-1",
         )
@@ -272,6 +274,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "passed": call["result"]["returncode"] == 0,
                 "evidence_ref": "ev:e2e",
                 "evidence_type": "runtime_test",
+                "verifier_role": "CODEX",
+                "independent_reviewer": "CLAUDE",
                 "key_match": True,
                 "required_verifications": [
                     "structural", "technical", "intent", "independent"
@@ -311,6 +315,68 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
         self.assertEqual(confirmed["state"], "USER_CONFIRMED")
 
 
+    def test_verification_requires_codex_role(self):
+        base, runtime, out = self.prepared()
+        runtime, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaises(BridgeViolation):
+            verify_execution(
+                runtime,
+                out["receipt_id"],
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:wrong-role",
+                    "evidence_type": "runtime_test",
+                    "verifier_role": "CLAUDE",
+                    "key_match": True,
+                    "required_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "passed_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "independent_reviewer": "CLAUDE",
+                    "critical_gaps": [],
+                },
+                verifier_id="verifier-1",
+            )
+
+    def test_strong_independent_review_requires_claude_role(self):
+        base, runtime, out = self.prepared()
+        runtime, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaises(BridgeViolation):
+            verify_execution(
+                runtime,
+                out["receipt_id"],
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:wrong-reviewer",
+                    "evidence_type": "runtime_test",
+                    "verifier_role": "CODEX",
+                    "independent_reviewer": "OTHER",
+                    "key_match": True,
+                    "required_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "passed_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "critical_gaps": [],
+                },
+                verifier_id="verifier-1",
+            )
+
     def test_strong_tier_rejects_under_specified_verification(self):
         base, runtime, out = self.prepared()
         self.assertEqual(out["verification_tier"], "STRONG")
@@ -329,6 +395,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:weak",
                     "evidence_type": "runtime_test",
+                    "verifier_role": "CODEX",
                     "key_match": True,
                     "required_verifications": ["technical", "intent"],
                     "passed_verifications": ["technical", "intent"],

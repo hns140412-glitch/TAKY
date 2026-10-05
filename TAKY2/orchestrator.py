@@ -22,6 +22,7 @@ from .enforcement import (
     verification_tier,
 )
 from .bridges import BridgeViolation, execute_with_receipt
+from .orchestration import guidance_for_failure, role_assignment
 from .state_store import initialize_runtime, load_bundle, save_runtime
 
 
@@ -137,28 +138,63 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, 
 
     action = resolve_action(trusted, plan)
     if action is None:
+        guidance = guidance_for_failure(
+            "KEY",
+            "BLOCKED",
+            "unregistered action_id",
+        )
         return {
-            "allowed": False, "blocked_by": "KEY", "results": [],
-            "receipt_id": None, "call_allowed": False,
-            "mode": "BLOCKED", "reason": "unregistered action_id",
+            "allowed": False,
+            "blocked_by": "KEY",
+            "results": [],
+            "receipt_id": None,
+            "call_allowed": False,
+            "mode": guidance["mode"],
+            "reason": "unregistered action_id",
+            "guidance": guidance,
+            "orchestration": role_assignment({}, verification_tier="STANDARD"),
         }
 
     identity = _execution_identity(action, plan["attempt"])
     if identity is None:
+        guidance = guidance_for_failure(
+            "KEY",
+            "BLOCKED",
+            "trusted execution_scope missing",
+        )
         return {
-            "allowed": False, "blocked_by": "KEY", "results": [],
-            "receipt_id": None, "call_allowed": False,
-            "mode": "BLOCKED", "reason": "trusted execution_scope missing",
+            "allowed": False,
+            "blocked_by": "KEY",
+            "results": [],
+            "receipt_id": None,
+            "call_allowed": False,
+            "mode": guidance["mode"],
+            "reason": "trusted execution_scope missing",
+            "guidance": guidance,
+            "orchestration": role_assignment(
+                action,
+                verification_tier=verification_tier(action),
+            ),
         }
     execution_scope, route_fp, execution_key = identity
 
     active = trusted.get("active_attempts", {}).get(execution_key)
     if isinstance(active, Mapping) and active.get("status") in {"PENDING", "SUCCESS"}:
+        reason = "unresolved attempt already owns this trusted route"
+        guidance = guidance_for_failure("ROUTE", "BLOCKED", reason)
         return {
-            "allowed": False, "blocked_by": "ROUTE", "results": [],
-            "receipt_id": None, "call_allowed": False,
-            "mode": "BLOCKED",
-            "reason": "unresolved attempt already owns this trusted route",
+            "allowed": False,
+            "blocked_by": "ROUTE",
+            "results": [],
+            "receipt_id": None,
+            "call_allowed": False,
+            "mode": guidance["mode"],
+            "reason": reason,
+            "guidance": guidance,
+            "orchestration": role_assignment(
+                action,
+                verification_tier=verification_tier(action),
+            ),
         }
 
     scoped = _scoped_trusted(trusted, execution_scope)
@@ -177,10 +213,21 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, 
         if name == "COST" and result.state == "SKIP_CALL":
             call_allowed = False
         if not result.allowed:
+            tier = verification_tier(action)
+            guidance = guidance_for_failure(name, result.state, result.reason)
             blocked = {
-                "allowed": False, "blocked_by": name, "results": results,
-                "receipt_id": None, "call_allowed": False, "mode": "BLOCKED",
+                "allowed": False,
+                "blocked_by": name,
+                "results": results,
+                "receipt_id": None,
+                "call_allowed": False,
+                "mode": guidance["mode"],
                 "reason": result.reason,
+                "guidance": guidance,
+                "orchestration": role_assignment(
+                    action,
+                    verification_tier=tier,
+                ),
             }
             if name == "ROUTE" and result.state == "USER_DECISION_REQUIRED":
                 blocked["escalation_packet"] = _escalation_packet(
@@ -219,6 +266,10 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, 
         "action_id": plan.get("action_id"),
         "action_digest": action_digest(action),
         "verification_tier": verification_tier(action),
+        "orchestration": role_assignment(
+            action,
+            verification_tier=verification_tier(action),
+        ),
         "execution_scope": execution_scope,
         "execution_key": execution_key,
         "route_fp": route_fp,
@@ -244,6 +295,7 @@ def persist_preflight(runtime: Mapping[str, Any], out: Mapping[str, Any]) -> Dic
         "action_id": out.get("action_id"),
         "action_digest": out.get("action_digest"),
         "verification_tier": out.get("verification_tier", "STANDARD"),
+        "orchestration": dict(out.get("orchestration", {})),
         "execution_scope": out.get("execution_scope"),
         "execution_key": out.get("execution_key"),
         "route_fp": out.get("route_fp"),
