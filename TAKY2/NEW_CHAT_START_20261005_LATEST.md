@@ -1,111 +1,84 @@
-# TAKY 2.0 — NEW CHAT START / 2026-10-05 LATEST
+# TAKY 2.0 — NEW CHAT START / BORDER COLLIE LATEST
 
-## RESUME COMMAND
-`최신 TAKY 2.0 별도 브랜치 기준으로 재개. 전체 재감사하지 말고 이 파일과 현재 HEAD만 확인한 뒤 OPEN만 진행해.`
+## COPY / RESUME
+최신 TAKY 2.0 별도 브랜치 기준으로 재개해.
 
-## FIXED STATE
-- Branch: `taky-2.0-orchestrator-2026-10-05`
-- Resume baseline commit: `2ca535dd7cddbe90995af5d7d293dc7f8f0633fe`
-- Current HEAD: authoritative; verify with git at resume
-- Push / merge / deploy: NOT DONE / NOT AUTHORIZED
-- TAKY2 regression: 63/63 PASS
+먼저 `TAKY2/NEW_CHAT_START_20261005_LATEST.md`와 현재 HEAD만 확인하고, CLOSED는 그대로 상속해. 전체 Beta/Alpha 재감사·전제문서 반복 재독·이미 끝난 Gate 재구현은 하지 말고 OPEN만 진행해.
+
+현재 로컬 authority:
+- repo: `D:\Git PWA\TAKY-2.0-ORCH`
+- branch: `taky-2.0-orchestrator-2026-10-05`
+- checkpoint: `f911a989e3f15baa664f66ccae10f5441134576e`
+- authority digest: `3a3eff76549ad5262f46`
+- regression: `63/63 PASS`
 - py_compile: PASS
 - git diff --check: PASS
-- Implementation status: `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
-- Claude/Codex on this delta: SKIPPED by Necessity Gate
-- TAKY2 is separate from existing Alpha/Beta.
+- push / merge / deploy: 금지, 사용자 명시 승인 전 실행하지 말 것.
 
-## BORDER COLLIE ORCHESTRATION — KEEP
-This is the execution definition directly under the TAKY slogans.
-- ChatGPT / TAKY = `CHATGPT_TAKY_BORDER_COLLIE` orchestrator
-- implementation = `CODE_WRITER`
-- verification = `CODEX`
-- independent review = `CLAUDE`
+### 슬로건 하위 실행정의 — BORDER COLLIE ORCHESTRATION
+이 정의는 선택적 비유가 아니라 TAKY2 실행계약이다.
+
+- ChatGPT / TAKY = `CHATGPT_TAKY_BORDER_COLLIE` — 오케스트레이터
+- 구현 = `CODE_WRITER`
+- 검증 = `CODEX`
+- 독립검토 = `CLAUDE`
 - USER = Key Owner / Final Authority
-- purpose = `GUIDE_TO_RESULT`
-- loop = `DETECT → CLASSIFY → REDIRECT → GUIDE → VERIFY → DELIVER`
-- default Gate behavior = `REDIRECT_BEFORE_ESCALATE`
-- Gate is not designed to stop work; it detects wrong direction and guides the collaboration group toward the correct result.
-- USER != DEBUGGER.
-- Canonical local definition: `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
 
-## ROLE SPLIT — KEEP
-- Beta = evidence freeze / forensic baseline
-- Alpha = whole-system semantic + ownership map
+목적:
+`GUIDE_TO_RESULT`
+
+실행 루프:
+`DETECT → CLASSIFY → REDIRECT → GUIDE → VERIFY → DELIVER`
+
+Gate의 목적은 차단 자체가 아니다.
+잘못된 길을 감지한 뒤 올바른 길로 재유도하여 검증된 결과물에 도달하게 하는 것이다.
+기본 정책은 `REDIRECT_BEFORE_ESCALATE`.
+USER에게 디버깅을 떠넘기지 않는다. `USER != DEBUGGER`.
+
+런타임 강제상태:
+- orchestration contract가 없으면 KEY Gate fail-closed
+- 성공 preflight는 Border Collie / CODE_WRITER / CODEX / CLAUDE / USER 역할을 receipt에 바인딩
+- recoverable Gate 실패는 가능하면 `REDIRECT + guidance.next_action`
+- CODEX 역할 증명 없는 SUCCESS 검증 금지
+- STRONG 검증의 independent review는 CLAUDE 역할 증명 필요
+- Claude/Codex/Remote 실제 호출은 역할이 있다고 자동 실행하지 말고 Necessity Gate 통과 시에만 최소 호출
+
+### 기존 구조 — 그대로 상속
+- Beta = evidence freeze
+- Alpha = whole-system semantic / ownership map
 - TAKY2 = executable enforcement kernel
-- Domain/Project owners = detailed semantics and product rules
+- 5 HARD GATE = KEY / CONTEXT / ROUTE / COST / DONE
+- versioned Key + explicit KEY_AMEND
+- receipt-bound executor / verifier / evidence / completion
+- HMAC runtime + rollback anchor + CAS
+- USER stop → ABANDONED
+- route/transient exhaustion → Escalation Packet
 
-Target composition:
-`BETA EVIDENCE → ALPHA SEMANTIC MAP → TAKY2 ENFORCEMENT → DOMAIN/PROJECT OWNER → EXECUTION → VERIFIED RESULT`
+### CLOSED — 재작업 금지
+- AUTHORITY REBIND
+- ACCOUNT ATTESTATION bridge contract
+- EXECUTOR WRAPPER
+- VERIFIER BRIDGE
+- USER EVENT BRIDGE
+- integration E2E kernel path
+- Claude 공유문서 비교보완
+- Border Collie orchestration authority binding + runtime role enforcement
 
-## TAKY2 HARD GATES — CLOSED
-1. KEY
-2. CONTEXT
-3. ROUTE
-4. COST
-5. DONE
+### OPEN — 이것만 다음
+`ACCOUNT TARGET BINDING`
+- USER_STATED target = `HNS`
+- 실제 central Google/family auth session evidence는 존재
+- 하지만 `HNS ↔ authenticated family/session identity`의 authority-owned 명시 매핑은 아직 없음
+- 임의 alias 추정 금지
+- 외부 write는 매핑 전까지 fail-closed
 
-Closed protections include:
-- USER-grounded Key / registered action authority
-- repeated full-context reread block
-- task_id-change retry bypass block
-- normalized route identity + per-scope route budget
-- transient retry cap
-- trusted action call_policy / LOCAL_ONLY
-- approval replay control
-- HMAC runtime + external rollback anchor + CAS
-- verified account attestation evidence required for external writes
-- receipt-bound plan/action/call + evidence/completion
-- executor actual invocation wrapper cannot self-assert SUCCESS
-- verifier failure feeds route anti-repeat ledger
-- USER confirmation requires verified receipt-bound event
-- versioned Key fields + explicit KEY_AMEND + signed old/new diff
-- changed Key source_ref must resolve to trusted USER evidence
-- risk-based verification tier; STRONG = structural + technical + intent + independent
-- explicit verified USER stop → ABANDONED
-- route/transient exhaustion → structured Escalation Packet
-- orchestration contract is required by KEY gate
-- every successful preflight binds Border Collie/CODE_WRITER/CODEX/CLAUDE/USER roles into the receipt
-- recoverable Gate failures return REDIRECT + guidance.next_action
-- verification SUCCESS requires receipt-bound CODEX role
-- STRONG independent verification requires receipt-bound CLAUDE reviewer role
+다음 순서:
+`ACCOUNT TARGET BINDING authority evidence 탐색 → 실제 attestation targeted E2E → 최종 회귀`
 
-## CLOSED ON THIS DELTA
-1. AUTHORITY REBIND ADAPTER — CLOSED
-2. ACCOUNT ATTESTATION BRIDGE CONTRACT — CLOSED
-3. EXECUTOR WRAPPER — CLOSED
-4. VERIFIER BRIDGE — CLOSED
-5. USER EVENT BRIDGE — CLOSED
-6. integration E2E kernel path — CLOSED
-7. original USER intent comparison — DONE
-
-## OPEN — ONLY THIS NEXT
-1. ACCOUNT TARGET BINDING
-   - authority-owned mapping from `HNS` to authenticated central family/session identity
-   - existing Google/family auth runtime can provide real session evidence
-   - do not invent alias mapping
-   - external write remains fail-closed until binding exists
-
-## DO NOT DO
-- Do not restart Beta full audit without new contradictory evidence.
-- Do not rewrite Alpha from zero.
-- Do not expand TAKY2 into another semantic mega-framework.
-- Do not duplicate lower-owner app/domain rules inside the kernel.
-- Do not reread all premise/history every turn; use DELTA after this resume.
-- Do not call Claude/Codex/Remote unless Necessity Gate passes.
-- Do not invent `HNS` ↔ family/session identity mapping.
-- Do not push/merge/deploy without explicit USER authorization.
-
-## COMPARISON AUTHORITY
-Read only if needed:
-- `TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md`
+관련 기준:
+- `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
 - `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
 - `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
-- `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
 
-## NEXT EXECUTION ORDER
-`ACCOUNT TARGET BINDING only → targeted E2E with real attestation → final regression`
-
-USER != DEBUGGER.
-Think Again, Keep Your Key!
-Think Again, You’re The Key!
+Claude/Codex/Remote는 Necessity Check가 YES일 때만 최소 사용해.
+같은 실패를 반복하지 말고, Border Collie처럼 잘못된 경로를 감지하면 스스로 다른 안전한 경로로 재유도해.
