@@ -100,6 +100,9 @@ def trusted():
                 "account": "HNS",
                 "verified": True,
                 "source": "connector-test",
+                "evidence_ref": "auth:test",
+                "session_id": "session-test",
+                "verified_by": "auth-bridge",
             }
         },
         "context": {
@@ -374,6 +377,7 @@ class DoneGateTests(unittest.TestCase):
             "actor": "USER",
             "kind": "confirmation",
             "receipt_id": rid,
+            "verified_by": "ui-bridge",
         }
         t["completion_registry"][rid]["user_confirmation_ref"] = "u:confirm"
         self.assertTrue(

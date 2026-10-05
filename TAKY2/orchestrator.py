@@ -20,6 +20,7 @@ from .enforcement import (
     route_gate,
     stable_hash,
 )
+from .bridges import BridgeViolation, execute_with_receipt
 from .state_store import initialize_runtime, load_bundle, save_runtime
 
 
@@ -297,6 +298,11 @@ def main() -> int:
     p_pre = sub.add_parser("preflight")
     p_pre.add_argument("plan_json")
 
+    p_exec = sub.add_parser("execute")
+    p_exec.add_argument("receipt_id")
+    p_exec.add_argument("invocation_json")
+    p_exec.add_argument("--executor-id", default="TAKY2_EXECUTOR_WRAPPER")
+
     p_fail = sub.add_parser("record-failure")
     p_fail.add_argument("receipt_id")
     p_fail.add_argument("failure_class")
@@ -327,6 +333,35 @@ def main() -> int:
         if not out.get("allowed"):
             return 2
         return 0 if out.get("call_allowed") else 3
+
+    if args.cmd == "execute":
+        invocation = _load_json(args.invocation_json)
+        try:
+            updated, result = execute_with_receipt(
+                runtime,
+                args.receipt_id,
+                invocation,
+                executor_id=args.executor_id,
+            )
+        except BridgeViolation as exc:
+            print(json.dumps({
+                "allowed": False,
+                "state": "BLOCKED",
+                "reason": str(exc),
+            }, ensure_ascii=False))
+            return 2
+        save_runtime(
+            updated,
+            expected_version=runtime["runtime_version"],
+            authority_digest_value=auth_digest,
+        )
+        print(json.dumps({
+            "allowed": True,
+            "state": "EXECUTOR_RETURNED_UNVERIFIED",
+            "receipt_id": args.receipt_id,
+            "result": result,
+        }, ensure_ascii=False, indent=2))
+        return 0
 
     if args.cmd == "record-failure":
         if args.failure_class not in FAILURE_CLASSES:

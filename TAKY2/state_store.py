@@ -8,7 +8,7 @@ from pathlib import Path
 import secrets
 import time
 import uuid
-from typing import Any, Dict, Tuple
+from typing import Any, Callable, Dict, Tuple
 
 from .enforcement import stable_hash
 
@@ -167,8 +167,10 @@ def load_bundle(
         "completion_registry": runtime.get("completion_registry", {}),
         "active_attempts": runtime.get("active_attempts", {}),
         "execution_outcomes": runtime.get("execution_outcomes", {}),
+        "execution_calls": runtime.get("execution_calls", {}),
         "consumed_approvals": runtime.get("consumed_approvals", {}),
         "user_events": runtime.get("user_events", {}),
+        "authority_rebind_history": runtime.get("authority_rebind_history", []),
         "_runtime_version": runtime.get("runtime_version"),
         "_authority_digest": digest,
     })
@@ -264,3 +266,101 @@ def save_runtime(
             os.unlink(lock_path)
         except FileNotFoundError:
             pass
+
+
+def stage_authority_rebind(
+    runtime: Dict[str, Any],
+    *,
+    new_authority: Dict[str, Any],
+    user_event: Dict[str, Any],
+    event_verifier: Callable[[Dict[str, Any]], bool],
+    verifier_id: str,
+) -> Dict[str, Any]:
+    old_digest = runtime.get("authority_digest")
+    new_digest = authority_digest(new_authority)
+    if not isinstance(old_digest, str) or not old_digest:
+        raise StateIntegrityError("current authority digest missing")
+    if old_digest == new_digest:
+        raise StateConflictError("authority digest is unchanged")
+    if not callable(event_verifier) or event_verifier(user_event) is not True:
+        raise StateIntegrityError("authority rebind USER event verification failed")
+    if not isinstance(verifier_id, str) or not verifier_id.strip():
+        raise StateIntegrityError("authority rebind verifier_id required")
+    if (
+        user_event.get("actor") != "USER"
+        or user_event.get("kind") != "authority_rebind"
+        or user_event.get("explicit") is not True
+        or user_event.get("authorized_new_digest") != new_digest
+    ):
+        raise StateIntegrityError("explicit USER authority rebind authorization required")
+    event_ref = user_event.get("event_ref")
+    if not isinstance(event_ref, str) or not event_ref.strip():
+        raise StateIntegrityError("authority rebind event_ref required")
+
+    updated = dict(runtime)
+    if updated.get("authority_rebind_request"):
+        raise StateConflictError("authority rebind request already staged")
+    updated["authority_rebind_request"] = {
+        "old_digest": old_digest,
+        "new_digest": new_digest,
+        "event_ref": event_ref.strip(),
+        "actor": "USER",
+        "explicit": True,
+        "verified_by": verifier_id.strip(),
+    }
+    return updated
+
+
+def rebind_authority(
+    authority_path: Path = AUTHORITY_PATH,
+    runtime_path: Path = RUNTIME_PATH,
+    *,
+    lock_path: Path = LOCK_PATH,
+    runtime_key: bytes | None = None,
+    anchor_path: Path = ANCHOR_PATH,
+) -> Dict[str, Any]:
+    key = runtime_key or load_or_create_runtime_key()
+    runtime = _load_json(runtime_path)
+    verify_runtime(runtime, key)
+    _verify_anchor_pair(runtime, key, anchor_path)
+
+    old_digest = runtime.get("authority_digest")
+    new_authority = _load_json(authority_path)
+    new_digest = authority_digest(new_authority)
+    if old_digest == new_digest:
+        raise StateConflictError("authority already bound")
+
+    request = runtime.get("authority_rebind_request")
+    if not isinstance(request, dict):
+        raise StateIntegrityError("staged authority rebind request missing")
+    if (
+        request.get("old_digest") != old_digest
+        or request.get("new_digest") != new_digest
+        or request.get("actor") != "USER"
+        or request.get("explicit") is not True
+        or not isinstance(request.get("verified_by"), str)
+        or not request.get("verified_by")
+    ):
+        raise StateIntegrityError("authority rebind request does not match authority change")
+
+    updated = dict(runtime)
+    updated.pop("runtime_mac", None)
+    updated.pop("authority_rebind_request", None)
+    history = list(updated.get("authority_rebind_history", []))
+    history.append({
+        "old_digest": old_digest,
+        "new_digest": new_digest,
+        "event_ref": request.get("event_ref"),
+        "verified_by": request.get("verified_by"),
+    })
+    updated["authority_rebind_history"] = history
+
+    return save_runtime(
+        updated,
+        expected_version=runtime["runtime_version"],
+        authority_digest_value=new_digest,
+        runtime_path=runtime_path,
+        lock_path=lock_path,
+        runtime_key=key,
+        anchor_path=anchor_path,
+    )

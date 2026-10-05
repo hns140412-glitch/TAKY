@@ -11,8 +11,10 @@
   "preflight_receipts": {},
   "active_attempts": {},
   "execution_outcomes": {},
+  "execution_calls": {},
   "evidence_registry": {},
   "completion_registry": {},
   "consumed_approvals": {},
-  "user_events": {}
+  "user_events": {},
+  "authority_rebind_history": []
 }

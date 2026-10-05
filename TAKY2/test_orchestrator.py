@@ -20,6 +20,9 @@ def runtime_state():
                 "account": "HNS",
                 "verified": True,
                 "source": "connector-test",
+                "evidence_ref": "auth:test",
+                "session_id": "session-test",
+                "verified_by": "auth-bridge",
             }
         },
         "context": {

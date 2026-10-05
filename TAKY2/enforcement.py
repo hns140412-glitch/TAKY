@@ -70,6 +70,8 @@ def trusted_user_event(
         and event.get("actor") == "USER"
         and event.get("kind") == kind
         and event.get("receipt_id") == receipt_id
+        and isinstance(event.get("verified_by"), str)
+        and bool(event.get("verified_by"))
     )
 
 
@@ -160,6 +162,15 @@ def key_gate(trusted: Mapping[str, Any], plan: Mapping[str, Any]) -> GateResult:
             if isinstance(attestation, Mapping) and attestation.get("verified") is True
             else None
         )
+        if isinstance(attestation, Mapping):
+            attestation_evidence = (
+                attestation.get("source"),
+                attestation.get("evidence_ref"),
+                attestation.get("session_id"),
+                attestation.get("verified_by"),
+            )
+        else:
+            attestation_evidence = ()
         requested = action.get("target_account")
         action_class = action.get("action_class")
 
@@ -167,6 +178,11 @@ def key_gate(trusted: Mapping[str, Any], plan: Mapping[str, Any]) -> GateResult:
             return GateResult(False, "BLOCKED", "authorized target missing")
         if not actual or target["value"] != actual:
             return GateResult(False, "BLOCKED", "verified account attestation mismatch")
+        if (
+            len(attestation_evidence) != 4
+            or not all(isinstance(v, str) and v.strip() for v in attestation_evidence)
+        ):
+            return GateResult(False, "BLOCKED", "verified account attestation evidence missing")
         if not requested or target["value"] != requested:
             return GateResult(False, "BLOCKED", "registered target mismatch")
 

@@ -1,16 +1,18 @@
 # TAKY 2.0 — NEW CHAT START / 2026-10-05 LATEST
 
 ## RESUME COMMAND
-`최신 TAKY 2.0 별도 브랜치 기준으로 재개. 전체 재감사하지 말고 이 파일과 현재 HEAD만 확인한 뒤 OPEN 통합 어댑터부터 진행해.`
+`최신 TAKY 2.0 별도 브랜치 기준으로 재개. 전체 재감사하지 말고 이 파일과 현재 HEAD만 확인한 뒤 OPEN만 진행해.`
 
 ## FIXED STATE
 - Branch: `taky-2.0-orchestrator-2026-10-05`
-- Local checkpoint commit: `a02e778d5907db00c7955b36d00b0d1e4a6a28b8`
+- Resume baseline commit: `2ca535dd7cddbe90995af5d7d293dc7f8f0633fe`
+- Current HEAD: authoritative; verify with git at resume
 - Push / merge / deploy: NOT DONE / NOT AUTHORIZED
-- TAKY2 regression: 43/43 PASS
+- TAKY2 regression: 55/55 PASS
 - py_compile: PASS
 - git diff --check: PASS
-- Claude final adversarial review: CRITICAL 0
+- Implementation status: `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
+- Claude/Codex on this delta: SKIPPED by Necessity Gate
 - TAKY2 is separate from existing Alpha/Beta.
 
 ## ROLE SPLIT — KEEP
@@ -38,30 +40,27 @@ Closed protections include:
 - trusted action call_policy / LOCAL_ONLY
 - approval replay control
 - HMAC runtime + external rollback anchor + CAS
-- verified account attestation required for external writes
+- verified account attestation evidence required for external writes
 - receipt-bound plan/action/call + evidence/completion
-- executor CLI cannot self-assert SUCCESS or USER confirmation
+- executor actual invocation wrapper cannot self-assert SUCCESS
+- verifier failure feeds route anti-repeat ledger
+- USER confirmation requires verified receipt-bound event
 
-## OPEN — ONLY THESE NEXT
-1. AUTHORITY REBIND ADAPTER
-   - explicit authorized migration when authority.json changes
-   - never automatic digest acceptance
+## CLOSED ON THIS DELTA
+1. AUTHORITY REBIND ADAPTER — CLOSED
+2. ACCOUNT ATTESTATION BRIDGE CONTRACT — CLOSED
+3. EXECUTOR WRAPPER — CLOSED
+4. VERIFIER BRIDGE — CLOSED
+5. USER EVENT BRIDGE — CLOSED
+6. integration E2E kernel path — CLOSED
+7. original USER intent comparison — DONE
 
-2. ACCOUNT ATTESTATION BRIDGE
-   - connect actual authenticated account evidence to runtime
-   - fail closed when absent
-
-3. EXECUTOR WRAPPER
-   - must enforce BLOCKED / LOCAL_ONLY / CALL_ALLOWED at actual invocation
-   - bind actual provider/model/call count to receipt
-
-4. VERIFIER BRIDGE
-   - independent/runtime verifier writes SUCCESS + evidence + completion
-   - executor must not self-certify
-
-5. USER EVENT BRIDGE
-   - explicit USER confirmation becomes receipt-bound trusted event
-   - silence never confirms
+## OPEN — ONLY THIS NEXT
+1. ACCOUNT TARGET BINDING
+   - authority-owned mapping from `HNS` to authenticated central family/session identity
+   - existing Google/family auth runtime can provide real session evidence
+   - do not invent alias mapping
+   - external write remains fail-closed until binding exists
 
 ## DO NOT DO
 - Do not restart Beta full audit without new contradictory evidence.
@@ -70,14 +69,16 @@ Closed protections include:
 - Do not duplicate lower-owner app/domain rules inside the kernel.
 - Do not reread all premise/history every turn; use DELTA after this resume.
 - Do not call Claude/Codex/Remote unless Necessity Gate passes.
+- Do not invent `HNS` ↔ family/session identity mapping.
 - Do not push/merge/deploy without explicit USER authorization.
 
 ## COMPARISON AUTHORITY
 Read only if needed:
 - `TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md`
+- `TAKY2/IMPLEMENTATION_STATUS_20261005.md`
 
 ## NEXT EXECUTION ORDER
-`AUTHORITY REBIND → ACCOUNT ATTESTATION → EXECUTOR WRAPPER → VERIFIER BRIDGE → USER EVENT BRIDGE → integration E2E → compare against original USER intent`
+`ACCOUNT TARGET BINDING only → targeted E2E with real attestation → final regression`
 
 USER != DEBUGGER.
 Think Again, Keep Your Key!
