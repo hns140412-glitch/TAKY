@@ -72,8 +72,18 @@ USER에게 디버깅을 떠넘기지 않는다. `USER != DEBUGGER`.
 - 임의 alias 추정 금지
 - 외부 write는 매핑 전까지 fail-closed
 
+2026-10-06 evidence update:
+- provider-authenticated HNS Google Drive profile = `hns140412@gmail.com` / profile id `102814704779691664323`
+- HNS Drive authority documents confirmed
+- no explicit `HNS → GOOGLE_OIDC_VERIFIED principal_id → family_id → self_member_id` authority mapping found
+- `TAKY2/state/runtime.json` still has `account_attestation: null`
+- Drive profile id must NOT be inferred as Google OIDC principal_id
+- evidence: `TAKY2/ACCOUNT_TARGET_BINDING_EVIDENCE_20261006.md`
+
 다음 순서:
-`ACCOUNT TARGET BINDING authority evidence 탐색 → 실제 attestation targeted E2E → 최종 회귀`
+`direct HNS /api/family/session authority evidence 확보 → ACCOUNT TARGET BINDING → 실제 attestation targeted E2E → 최종 회귀`
+
+현재는 실제 session identity가 없어 external write fail-closed를 유지한다. USER에게 token/ID 복사나 디버깅을 요구하지 않는다.
 
 관련 기준:
 - `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`

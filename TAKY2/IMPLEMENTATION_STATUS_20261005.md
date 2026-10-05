@@ -124,8 +124,10 @@ Verdict:
 - PASS: Remote used only for current local branch inspection/edit/test
 - PASS: push/merge/deploy untouched
 - PARTIAL: production ACCOUNT target binding cannot be completed without an authority mapping for `HNS`; fail-closed is preserved rather than guessing
+- 2026-10-06 evidence update: provider-authenticated HNS Google Drive profile = `hns140412@gmail.com` / profile id `102814704779691664323`; HNS Drive authority documents are confirmed, but no explicit `HNS -> GOOGLE_OIDC_VERIFIED principal_id -> family_id -> self_member_id` mapping exists
+- evidence: `TAKY2/ACCOUNT_TARGET_BINDING_EVIDENCE_20261006.md`
 
 ## NEXT OPEN — ONLY
 `ACCOUNT TARGET BINDING: HNS alias ↔ authenticated central family/session identity authority`
 
-Do not ask USER to debug. Resolve from an authority/source artifact when available; otherwise remain fail-closed.
+Actual attestation targeted E2E must wait for directly observed HNS `/api/family/session` identity evidence. Do not infer Google OIDC principal from the Drive profile id. Do not ask USER to debug; remain fail-closed until TAKY can observe authority evidence itself.
