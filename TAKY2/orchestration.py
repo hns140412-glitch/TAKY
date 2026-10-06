@@ -37,6 +37,51 @@ REQUIRED_ROLES = {
     "final_authority": "USER",
 }
 IMPLEMENTER_ASSIGNMENT_POLICY = "TASK_FIT_NECESSITY"
+GATE_VALIDATOR_OWNERSHIP = {
+    "KEY": {
+        "trigger": "PRE_EXECUTION_OR_KEY_CHANGE",
+        "primary": "AUTO",
+        "semantic": "AI_SEMANTIC",
+        "human_authority_condition": "KEY_AMEND_OR_CANONICAL_AUTHORITY_CHANGE",
+        "receipt_custodian": "GUARDIAN",
+    },
+    "CONTEXT": {
+        "trigger": "START_OR_CONTEXT_DELTA_CHANGE",
+        "primary": "AUTO",
+        "semantic": "AI_SEMANTIC",
+        "human_authority_condition": "CONTEXT_CONFLICT_CHANGES_KEY_OR_AUTHORITY",
+        "receipt_custodian": "GUARDIAN",
+    },
+    "ROUTE": {
+        "trigger": "FAILURE_OR_REROUTE",
+        "primary": "AUTO",
+        "semantic": "AI_SEMANTIC",
+        "human_authority_condition": "ROUTE_BUDGET_EXTENSION_OR_PROTECTED_SCOPE_CHANGE",
+        "receipt_custodian": "GUARDIAN",
+    },
+    "COST": {
+        "trigger": "BEFORE_EXTERNAL_OR_METERED_CALL",
+        "primary": "AUTO",
+        "semantic": "AI_SEMANTIC",
+        "human_authority_condition": "EXPLICITLY_GATED_HIGH_COST_OR_FORBIDDEN_COST_PATH",
+        "receipt_custodian": "DRIVER",
+    },
+    "DONE": {
+        "trigger": "BEFORE_PASS_DONE_OR_USER_CONFIRMED",
+        "primary": "AUTO",
+        "semantic": "AI_SEMANTIC",
+        "human_authority_condition": "USER_RESERVED_CONFIRMATION_OR_AUTHORITY_DECISION",
+        "receipt_custodian": "GUARDIAN",
+    },
+}
+
+
+def validator_profile(gate: str) -> dict[str, str]:
+    key = str(gate or "").upper()
+    profile = GATE_VALIDATOR_OWNERSHIP.get(key)
+    if profile is None:
+        raise ValueError(f"unknown gate validator profile: {gate}")
+    return dict(profile)
 
 
 def _trusted_user_statement(trusted: Mapping[str, Any], ref: Any) -> bool:

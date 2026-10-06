@@ -27,8 +27,10 @@ FAILURE_CLASSES = TRANSIENT_FAILURES | {
 }
 VALID_EVIDENCE_TYPES = {
     "tool_output", "artifact", "diff", "runtime_test",
-    "source_ref", "independent_review",
+    "source_ref", "independent_review", "user_decision", "state_snapshot",
 }
+ACCEPTED_EVIDENCE_STATE = "ACCEPTED"
+REJECTED_EVIDENCE_STATES = {"REJECTED", "PARTIAL", "STALE", "UNKNOWN"}
 TRANSIENT_LIMIT = 2
 
 
@@ -494,6 +496,10 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
         return GateResult(False, "NOT_DONE", "completion action_digest mismatch")
     if completion.get("call_digest") != receipt.get("call_digest"):
         return GateResult(False, "NOT_DONE", "completion call_digest mismatch")
+    if completion.get("authority_digest") != receipt.get("authority_digest"):
+        return GateResult(False, "NOT_DONE", "completion authority_digest mismatch")
+    if completion.get("verification_tier") != receipt.get("verification_tier", "STANDARD"):
+        return GateResult(False, "NOT_DONE", "completion verification_tier mismatch")
 
     if completion.get("critical_gaps"):
         return GateResult(False, "REWORK", "trusted critical gaps remain")
@@ -527,8 +533,46 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
             return GateResult(False, "NOT_DONE", f"evidence action_digest mismatch: {ref}")
         if item.get("call_digest") != receipt.get("call_digest"):
             return GateResult(False, "NOT_DONE", f"evidence call_digest mismatch: {ref}")
-        if item.get("verified") is not True or item.get("type") not in VALID_EVIDENCE_TYPES:
+
+        evidence_type = item.get("evidence_type", item.get("type"))
+        if item.get("verified") is not True or evidence_type not in VALID_EVIDENCE_TYPES:
             return GateResult(False, "NOT_DONE", f"evidence not verified: {ref}")
+        if item.get("acceptance_state") != ACCEPTED_EVIDENCE_STATE:
+            state = item.get("acceptance_state")
+            if state in REJECTED_EVIDENCE_STATES:
+                return GateResult(False, "NOT_DONE", f"evidence acceptance rejected: {ref}:{state}")
+            return GateResult(False, "NOT_DONE", f"evidence acceptance state missing: {ref}")
+        if item.get("authority_digest_or_key_version") != receipt.get("authority_digest"):
+            return GateResult(False, "NOT_DONE", f"evidence authority mismatch: {ref}")
+        receipt_scope = receipt.get("execution_scope")
+        if isinstance(receipt_scope, str) and receipt_scope:
+            if item.get("scope") != receipt_scope:
+                return GateResult(False, "NOT_DONE", f"evidence scope mismatch: {ref}")
+        if item.get("verification_tier") != receipt.get("verification_tier", "STANDARD"):
+            return GateResult(False, "NOT_DONE", f"evidence verification tier mismatch: {ref}")
+        if item.get("source_status") in {"SUPERSEDED", "STALE"}:
+            return GateResult(False, "NOT_DONE", f"stale/superseded evidence cannot prove current claim: {ref}")
+        if not isinstance(item.get("claim_supported"), str) or not item.get("claim_supported").strip():
+            return GateResult(False, "NOT_DONE", f"evidence claim binding missing: {ref}")
+        if not isinstance(item.get("source_or_artifact_ref"), str) or not item.get("source_or_artifact_ref").strip():
+            return GateResult(False, "NOT_DONE", f"evidence artifact/source ref missing: {ref}")
+        producer = item.get("producer")
+        validator = item.get("validator")
+        if not isinstance(producer, str) or not producer.strip():
+            return GateResult(False, "NOT_DONE", f"evidence producer missing: {ref}")
+        if not isinstance(validator, str) or not validator.strip():
+            return GateResult(False, "NOT_DONE", f"evidence validator missing: {ref}")
+        if receipt.get("verification_tier") == "STRONG":
+            if producer.strip() == validator.strip():
+                return GateResult(False, "PARTIAL", f"STRONG evidence lacks independent validator: {ref}")
+            orchestration = receipt.get("orchestration", {})
+            expected_review = (
+                orchestration.get("independent_reviewer")
+                if isinstance(orchestration, Mapping)
+                else None
+            )
+            if expected_review and item.get("independent_reviewer") != expected_review:
+                return GateResult(False, "PARTIAL", f"STRONG independent review boundary missing: {ref}")
         verified_refs.append(str(ref))
 
     confirm_ref = completion.get("user_confirmation_ref")

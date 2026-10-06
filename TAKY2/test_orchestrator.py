@@ -233,6 +233,16 @@ class OrchestratorTests(unittest.TestCase):
             "CLAUDE",
         )
         self.assertFalse(receipt["call_allowed"])
+        self.assertEqual(
+            [item["gate"] for item in receipt["gate_receipts"]],
+            ["KEY", "CONTEXT", "ROUTE", "COST"],
+        )
+        for item in receipt["gate_receipts"]:
+            profile = item["validator_profile"]
+            self.assertIn(profile["primary"], {"AUTO", "AI_SEMANTIC", "HUMAN_AUTHORITY"})
+            self.assertIn("trigger", profile)
+            self.assertIn("human_authority_condition", profile)
+            self.assertIn(profile["receipt_custodian"], {"GUARDIAN", "DRIVER"})
 
     def test_bound_approval_consumes_specific_ref_only(self):
         t = trusted()
@@ -292,6 +302,8 @@ class OrchestratorTests(unittest.TestCase):
             "plan_digest": receipt["plan_digest"],
             "action_digest": receipt["action_digest"],
             "call_digest": receipt["call_digest"],
+            "authority_digest": receipt["authority_digest"],
+            "verification_tier": receipt["verification_tier"],
             "key_match": True,
             "critical_gaps": [],
             "required_verifications": ["technical", "intent"],
@@ -300,7 +312,17 @@ class OrchestratorTests(unittest.TestCase):
         }
         t["evidence_registry"]["ev"] = {
             "type": "runtime_test",
+            "evidence_type": "runtime_test",
             "verified": True,
+            "acceptance_state": "ACCEPTED",
+            "claim_supported": "execution_verification",
+            "scope": receipt["execution_scope"],
+            "producer": "executor-1",
+            "validator": "verifier-1",
+            "source_or_artifact_ref": "ev",
+            "authority_digest_or_key_version": receipt["authority_digest"],
+            "verification_tier": receipt["verification_tier"],
+            "source_status": "CURRENT",
             "receipt_id": rid,
             "plan_digest": receipt["plan_digest"],
             "action_digest": receipt["action_digest"],

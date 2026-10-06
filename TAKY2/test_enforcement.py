@@ -552,6 +552,8 @@ class DoneGateTests(unittest.TestCase):
             "plan_digest": "p1",
             "action_digest": "a1",
             "call_digest": "c1",
+            "authority_digest": "auth1",
+            "verification_tier": "STANDARD",
             "key_match": True,
             "critical_gaps": [],
             "required_verifications": ["technical", "intent"],
@@ -560,7 +562,16 @@ class DoneGateTests(unittest.TestCase):
         }
         t["evidence_registry"]["ev1"] = {
             "type": "runtime_test",
+            "evidence_type": "runtime_test",
             "verified": True,
+            "acceptance_state": "ACCEPTED",
+            "claim_supported": "execution_verification",
+            "producer": "executor-1",
+            "validator": "verifier-1",
+            "source_or_artifact_ref": "ev1",
+            "authority_digest_or_key_version": "auth1",
+            "verification_tier": "STANDARD",
+            "source_status": "CURRENT",
             "receipt_id": rid,
             "plan_digest": "p1",
             "action_digest": "a1",
@@ -603,6 +614,49 @@ class DoneGateTests(unittest.TestCase):
             done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]}).state,
             "NOT_DONE",
         )
+
+    def test_stale_evidence_cannot_satisfy_done(self):
+        t, rid = self.ready()
+        t["evidence_registry"]["ev1"]["acceptance_state"] = "STALE"
+        self.assertEqual(
+            done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]}).state,
+            "NOT_DONE",
+        )
+
+    def test_superseded_evidence_cannot_prove_current_claim(self):
+        t, rid = self.ready()
+        t["evidence_registry"]["ev1"]["source_status"] = "SUPERSEDED"
+        result = done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]})
+        self.assertEqual(result.state, "NOT_DONE")
+        self.assertIn("superseded", result.reason)
+
+    def test_evidence_authority_must_match_receipt(self):
+        t, rid = self.ready()
+        t["evidence_registry"]["ev1"]["authority_digest_or_key_version"] = "old-auth"
+        result = done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]})
+        self.assertEqual(result.state, "NOT_DONE")
+        self.assertIn("authority mismatch", result.reason)
+
+    def test_strong_evidence_rejects_self_validation(self):
+        t, rid = self.ready()
+        t["preflight_receipts"][rid]["verification_tier"] = "STRONG"
+        t["preflight_receipts"][rid]["orchestration"] = {
+            "independent_reviewer": "CLAUDE",
+        }
+        t["completion_registry"][rid]["verification_tier"] = "STRONG"
+        t["completion_registry"][rid]["required_verifications"] = [
+            "structural", "technical", "intent", "independent"
+        ]
+        t["completion_registry"][rid]["passed_verifications"] = [
+            "structural", "technical", "intent", "independent"
+        ]
+        t["evidence_registry"]["ev1"]["verification_tier"] = "STRONG"
+        t["evidence_registry"]["ev1"]["producer"] = "same-actor"
+        t["evidence_registry"]["ev1"]["validator"] = "same-actor"
+        t["evidence_registry"]["ev1"]["independent_reviewer"] = "CLAUDE"
+        result = done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]})
+        self.assertEqual(result.state, "PARTIAL")
+        self.assertIn("independent validator", result.reason)
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ from .enforcement import (
     verification_tier,
 )
 from .bridges import BridgeViolation, execute_with_receipt
-from .orchestration import guidance_for_failure, role_assignment
+from .orchestration import guidance_for_failure, role_assignment, validator_profile
 from .state_store import initialize_runtime, load_bundle, save_runtime
 
 
@@ -33,6 +33,7 @@ def _gate_item(name: str, result) -> Dict[str, Any]:
         "state": result.state,
         "reason": result.reason,
         "evidence": list(result.evidence),
+        "validator_profile": validator_profile(name),
     }
 
 
@@ -302,6 +303,7 @@ def persist_preflight(runtime: Mapping[str, Any], out: Mapping[str, Any]) -> Dic
         "authority_digest": out.get("authority_digest"),
         "call_allowed": bool(out.get("call_allowed")),
         "approval_uses": dict(out.get("approval_uses", {})),
+        "gate_receipts": deepcopy(list(out.get("results", []))),
         "consumed": False,
     }
     updated.setdefault("preflight_receipts", {})[receipt_id] = receipt
