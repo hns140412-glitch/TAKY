@@ -107,6 +107,21 @@ for plane in ("BETA_EVIDENCE","ALPHA_SEMANTIC_MAP","TAKY2_ENFORCEMENT_KERNEL","S
         fail.append("PLANE_AUTHORITY_REF_MISSING:" + plane)
     if "owns" in p:
         fail.append("PLANE_CLAIMS_SEMANTIC_OWNERSHIP:" + plane)
+# Plane refs must point at the active Drive-restored V2 numbering (§1-§10), not the older local numbering.
+V2_DOC="TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md"
+EXPECTED_PLANE_REFS={
+    "BETA_EVIDENCE":{"authority_ref":"#2"},
+    "ALPHA_SEMANTIC_MAP":{"authority_ref":"#2"},
+    "TAKY2_ENFORCEMENT_KERNEL":{"authority_ref":"#2","gate_ref":"#6"},
+    "SHEPHERDING_CONTROL_PLANE":{"authority_ref":"#3","control_roles_ref":"#4"},
+}
+for plane,refs in EXPECTED_PLANE_REFS.items():
+    p=planes.get(plane)
+    if not isinstance(p,dict):
+        continue
+    for field,anchor in refs.items():
+        if p.get(field) != V2_DOC + anchor:
+            fail.append("PLANE_V2_REF_STALE:" + plane + "." + field)
 # Malformed (non-dict) planes are already reported above; treat them as empty so checks fail structurally.
 def plane_obj(name):
     p=planes.get(name)
@@ -127,7 +142,7 @@ if shepherd.get("control_roles") != ["NAVIGATOR","GUARDIAN","DRIVER+SAVEY_AI_ECO
 if shepherd.get("role_is_agent") is not False or shepherd.get("mandatory_agent_spawn") is not False:
     fail.append("CONTROL_ROLE_BOUND_TO_AGENT")
 
-# Whole-system systems named by V2 must be a registered layer or an explicit OWNER_GAP, never silently absent.
+# Whole-system systems (owner coverage inherited from MASTER §1.2 / Alpha integration) must be a registered layer or an explicit OWNER_GAP, never silently absent.
 # A system promoted out of owner_gaps must carry verifiable authority_ref + semantic_owner_ref pointers;
 # presence of a layer key alone is not registration. Ordinary layers keep their existing schema.
 # A local ref must exist. A cross-repo owner/repo:path ref cannot be checked here, so it is accepted only
@@ -185,6 +200,9 @@ for system,gap in gaps.items():
         fail.append("OWNER_GAP_STATE_INVALID:" + str(system))
     if not str(gap.get("authority_ref","")).strip():
         fail.append("OWNER_GAP_AUTHORITY_REF_MISSING:" + str(system))
+    # Active V2 registers no owners for these systems; gap authority is MASTER §1.2, not V2 provenance.
+    if str(gap.get("authority_ref","")).startswith(V2_DOC):
+        fail.append("OWNER_GAP_AUTHORITY_MISATTRIBUTED_TO_V2:" + str(system))
     if any(k in gap for k in ("owns","owner","semantic_owner","semantic_owner_ref")):
         fail.append("OWNER_GAP_GUESSES_OWNERSHIP:" + str(system))
 

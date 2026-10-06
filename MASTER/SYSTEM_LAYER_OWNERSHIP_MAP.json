@@ -246,7 +246,7 @@
     "BETA_EVIDENCE": {
       "role": "evidence / defense / frozen reality",
       "semantic_owner": "NONE__EVIDENCE_ONLY",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#11",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
       "must_not_become": [
         "live execution authority",
         "semantic owner",
@@ -257,7 +257,7 @@
     "ALPHA_SEMANTIC_MAP": {
       "role": "semantic owner / namespace resolution map",
       "semantic_owner": "RESOLVES_TO_DECLARED_OWNERS",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#11",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
       "must_not_become": [
         "CURRENT as owner",
         "HANDOFF as authority",
@@ -268,7 +268,8 @@
     "TAKY2_ENFORCEMENT_KERNEL": {
       "role": "compact cross-cutting enforcement kernel",
       "semantic_owner": "MASTER/MASTER_LOGIC.md#0.2",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#3",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
+      "gate_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#6",
       "implementation": "TAKY2/enforcement.py",
       "hard_gates": [
         "KEY",
@@ -286,7 +287,8 @@
     "SHEPHERDING_CONTROL_PLANE": {
       "role": "subordinate dynamic control model under TAKY",
       "semantic_owner": "TAKY2/SHEPHERDING_COOPERATIVE_EXECUTION_MODEL_V1.md",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#4",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#3",
+      "control_roles_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#4",
       "parent": "TAKY_CORE",
       "control_roles": [
         "NAVIGATOR",
@@ -305,46 +307,46 @@
       "system": "SAVEY_FAMILY_FINANCE",
       "state": "OWNER_GAP",
       "expected_parent": "UNRESOLVED",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#12"
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
     },
     {
       "system": "TAKY_MOBILE",
       "state": "OWNER_GAP",
       "expected_parent": "UNRESOLVED",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
       "boundary": "projection/runtime shell only; must not become a second semantic owner or universal auth authority"
     },
     {
       "system": "PLANNER",
       "state": "OWNER_GAP",
       "expected_parent": "LEARNING_OS",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
       "boundary": "semantic class already owned by LEARNING_OS; gap is the dedicated owner artifact only"
     },
     {
       "system": "PIANO_PRACTICE",
       "state": "OWNER_GAP",
       "expected_parent": "LEARNING_OS",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10"
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
     },
     {
       "system": "EXPLORER_CREW",
       "state": "OWNER_GAP",
       "expected_parent": "UNRESOLVED",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
       "boundary": "child-facing character roles must not be conflated with TAKY control roles"
     },
     {
       "system": "BADGE_REWARD",
       "state": "OWNER_GAP",
       "expected_parent": "UNRESOLVED",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10"
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
     },
     {
       "system": "EUNHA_FARM",
       "state": "OWNER_GAP",
       "expected_parent": "UNRESOLVED",
-      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#10",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
       "boundary": "project semantics must not be absorbed into the global kernel"
     }
   ],
@@ -570,10 +572,10 @@
       "gap_id": "LAYER-GAP-007",
       "priority": "P0",
       "state": "OPEN",
-      "finding": "Whole-system owner coverage is incomplete; systems named by V2 Canonical without a registered owner artifact are recorded in owner_gaps instead of being guessed.",
+      "finding": "Whole-system owner coverage is incomplete; whole-system owner coverage is inherited from MASTER/Alpha integration (MASTER §1.2); systems without a registered owner artifact are recorded in owner_gaps instead of being guessed.",
       "direction": "register each system as a layer with a verified owner pointer when formalized, then remove it from owner_gaps; never copy app/domain semantics into TAKY_CORE.",
       "evidence": [
-        "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#12"
+        "MASTER/MASTER_LOGIC.md#1.2"
       ]
     }
   ],

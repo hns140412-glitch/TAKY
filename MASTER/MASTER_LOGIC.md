@@ -126,7 +126,7 @@ Hosted ChatGPT automatic repository-gate invocation remains a separate runtime c
 
 Canonical design authority for this basis: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md` (V2, USER approved 2026-10-06). This section preserves the master-level invariants of that authority; it does not redefine V2 detail, and it does not promote any later candidate. Implementation-reconciliation candidates (including the V3 candidate) remain CANDIDATE until a verified, USER-authorized promotion.
 
-V2 is the later USER-approved systemwide design basis reflected into this MASTER. Earlier MASTER protections remain active and are reconciled with it, not deleted. Precedence between authorities is decided by explicit authority + USER decision + semantic owner, not by storage location or a `CANONICAL` header string (§2). `CANONICAL DESIGN != IMPLEMENTATION PASS`: runtime realization of this basis remains OPEN until code + evidence + regression close it (V2 §0.1).
+V2 is the later USER-approved systemwide design basis reflected into this MASTER. Earlier MASTER protections remain active and are reconciled with it, not deleted. Precedence between authorities is decided by explicit authority + USER decision + semantic owner, not by storage location or a `CANONICAL` header string (§2). `CANONICAL DESIGN != IMPLEMENTATION PASS`: runtime realization of this basis remains OPEN until code + evidence + regression close it (V2 §8). `V2 §n` citations in this MASTER use the active Drive-restored V2 numbering (§1–§10); MASTER-only execution protections are labeled as such and are not V2 verbatim.
 
 ### 0.2A Identity
 - `USER = KEY OWNER / FINAL AUTHORITY`.
@@ -143,21 +143,21 @@ Canonical control roles: `NAVIGATOR` (direction / scope / owner alignment), `GUA
 - role = required responsibility; actor/agent/tool = who/what performs it; semantic owner = who owns the meaning; authority = who may approve/change it.
 - Current default actor bindings are inherited from V2 until a verified promotion changes them. Default bindings are replaceable routes; vendor/model names SHALL NOT define role ontology.
 - Where independent verification is required, the executor SHALL NOT self-certify the same claim.
-- Conflict precedence (V2 §14) is precedence, not call sequence; DRIVER SHALL NOT override GUARDIAN/NAVIGATOR integrity to gain speed or reduce cost.
+- Conflict precedence (V2 §9) is precedence, not call sequence; DRIVER SHALL NOT override GUARDIAN/NAVIGATOR integrity to gain speed or reduce cost.
 
 ### 0.2C Five hard gates — exact
 The hard gates are exactly `KEY / CONTEXT / ROUTE / COST / DONE`.
 
 - `NECESSITY` is a decision step inside `COST` / DRIVER+SAVEY_AI_ECONOMY. It SHALL NOT become a sixth hard gate.
-- DRIVER (planning/routing) and the COST gate (enforcement) consume one shared economy policy (`SAVEY_AI_ECONOMY_POLICY`); two diverging economy policies are a defect. The single runtime evaluator remains implementation-OPEN (V2 §0.1); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.
+- DRIVER (planning/routing) and the COST gate (enforcement) consume one shared economy policy (`SAVEY_AI_ECONOMY_POLICY`); two diverging economy policies are a defect. The single runtime evaluator remains implementation-OPEN (V2 §8); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.
 
 ### 0.2D DRIVER + SAVEY_AI_ECONOMY
-Canonical policy order (V2 §4): `NECESSITY -> REUSE / CACHE -> LOCAL / DETERMINISTIC WHEN SUFFICIENT -> EXISTING SUBSCRIPTION / AUTH SESSION -> BATCH / CONTEXT REUSE -> LOWEST SUFFICIENT CAPABILITY -> METERED / PAID / EXTERNAL SIDE EFFECT ONLY IF JUSTIFIED + AUTHORIZED -> EXECUTE -> VERIFY -> ACCOUNT FOR RESOURCE COST`.
+Canonical policy order (V2 §4): `NECESSITY -> REUSE / CACHE -> LOCAL / DETERMINISTIC -> EXISTING SUBSCRIPTION / AUTH -> BATCH / CONTEXT REUSE -> LOWEST SUFFICIENT CAPABILITY -> PAID / EXTERNAL ROUTE`.
 
+- MASTER execution protection (not V2 verbatim): the paid/external route is taken only if justified + authorized, and is followed by `EXECUTE -> VERIFY -> ACCOUNT FOR RESOURCE COST`. Resource cost includes human attention, duplicate work and rework, not only money/tokens.
 - Candidate reorderings of this sequence (e.g. in the V3 candidate) remain CANDIDATE until promoted.
-- Acceptance-quality floor: `CHEAPEST != CHEAPEST_SUFFICIENT`. Cost saving SHALL NOT lower acceptance criteria, authority, safety or evidence quality.
-- Resource cost includes human attention, duplicate work and rework, not only money/tokens.
-- `SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE`. A shared brand string SHALL NOT imply shared semantic ownership.
+- Acceptance-quality floor (V2 §4 meaning; MASTER wording): `CHEAPEST != CHEAPEST_SUFFICIENT`. Cost saving SHALL NOT lower acceptance criteria, authority, safety or evidence quality.
+- `SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE` (V2 §7). A shared brand string SHALL NOT imply shared semantic ownership.
 
 ### 0.2E Beta / Alpha / TAKY2 division
 - `BETA = EVIDENCE / DEFENSE / FROZEN REALITY`; not live execution authority, not semantic owner.
@@ -180,7 +180,7 @@ Canonical policy order (V2 §4): `NECESSITY -> REUSE / CACHE -> LOCAL / DETERMIN
 - Startup readback: before material mutation, read back the designated canonical and CURRENT surfaces (§2) and verify the live repository ref. Memory or an old chat is not sufficient startup authority; an unverified readback blocks material mutation.
 
 ### 0.2H Completion-state semantics
-`RULE WRITTEN != RULE ENFORCED != FEATURE IMPLEMENTED != TECHNICALLY VERIFIED != USER CONFIRMED`.
+`RULE WRITTEN != RULE ENFORCED != FEATURE IMPLEMENTED != TECHNICALLY VERIFIED != USER INTENT VERIFIED != USER CONFIRMED` (V2 §8).
 
 - `TECHNICALLY_DELIVERED` (implementation + required evidence/verification) and `USER_CONFIRMED` (explicit USER confirmation) are distinct state semantics; one SHALL NOT be reported as the other. These are distinction/compatibility labels only; any two-stage completion policy built on them remains CANDIDATE until promoted.
 - This distinction does not weaken §6 approval levels or any applicable approval policy, and does not change current DONE gate semantics; USER confirmation is required where authority/policy requires it.
@@ -540,7 +540,7 @@ Operational details remain governed by `MASTER/HANDOFF_PROTOCOL.md`.
 ## 13. State, Lifecycle, Memory, History & Revision
 Lifecycle:
 `DRAFT → CANDIDATE → VALIDATED → APPROVED → COMMITTED → RELEASED → SUPERSEDED`.
-This artifact-revision lifecycle is distinct from the CURRENT item lifecycle (V2 §19) and the execution task lifecycle (`AGENTS.md`); shared tokens such as `CANDIDATE` / `SUPERSEDED` SHALL NOT be mapped across them.
+This artifact-revision lifecycle is distinct from the CURRENT item lifecycle (designated CURRENT semantics, §0.2G) and the execution task lifecycle (`AGENTS.md`); shared tokens such as `CANDIDATE` / `SUPERSEDED` SHALL NOT be mapped across them.
 
 Memory levels remain L0 TURN / L1 TASK / L2 PROJECT / L3 APPROVED PROJECT KNOWLEDGE / L4 DOMAIN / L5 MASTER GOVERNANCE.
 MEMORY = ROUTING/RECOVERY AID ≠ CANONICAL AUTHORITY. Do not store the entire TAKY system in conversational memory; retrieve canonical rules/evidence on demand.

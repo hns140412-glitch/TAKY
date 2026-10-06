@@ -98,7 +98,7 @@ class MasterLogicBasisTest(unittest.TestCase):
         self.assertTrue(any("two diverging economy policies" in x for x in basis.validate(text)))
 
     def test_economy_evaluator_claimed_enforced_rejected(self):
-        text = mutate("The single runtime evaluator remains implementation-OPEN (V2 §0.1); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.", "The single runtime evaluator is mechanically enforced.")
+        text = mutate("The single runtime evaluator remains implementation-OPEN (V2 §8); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.", "The single runtime evaluator is mechanically enforced.")
         fail = basis.validate(text)
         self.assertIn("ECONOMY_POLICY_CLAIMED_ENFORCED", fail)
         self.assertTrue(any("implementation-OPEN" in x for x in fail))
@@ -128,6 +128,22 @@ class MasterLogicBasisTest(unittest.TestCase):
     def test_pipeline_specific_text_rejected(self):
         text = mutate("SHALL NOT be globalized by recurrence (§1.1, §22.1).", "SHALL NOT be globalized by recurrence (§1.1, §22.1).\n- `HTTP 200 / TITLE / SHELL-ONLY CONTENT != SUBSTANTIVE LEARNING EVIDENCE`.")
         self.assertIn("PIPELINE_SPECIFIC_TEXT_IN_MASTER_BASIS:HTTP\\s*200", basis.validate(text))
+
+    def test_stale_v2_section_refs_rejected(self):
+        for old, new, token in (
+            ("regression close it (V2 §8).", "regression close it (V2 §0.1).", "STALE_V2_SECTION_REF:§0.1"),
+            ("Conflict precedence (V2 §9)", "Conflict precedence (V2 §14)", "STALE_V2_SECTION_REF:§14"),
+            ("(designated CURRENT semantics, §0.2G)", "(V2 §19)", "STALE_V2_SECTION_REF:§19"),
+        ):
+            self.assertIn(token, basis.validate(mutate(old, new)))
+
+    def test_user_intent_verified_loss_rejected(self):
+        text = mutate("TECHNICALLY VERIFIED != USER INTENT VERIFIED != USER CONFIRMED", "TECHNICALLY VERIFIED != USER CONFIRMED")
+        self.assertTrue(any("USER INTENT VERIFIED" in x for x in basis.validate(text)))
+
+    def test_master_protection_presented_as_v2_rejected(self):
+        text = mutate("LOWEST SUFFICIENT CAPABILITY -> PAID / EXTERNAL ROUTE`.", "LOWEST SUFFICIENT CAPABILITY -> PAID / EXTERNAL ROUTE -> EXECUTE -> VERIFY`.")
+        self.assertIn("MASTER_PROTECTION_PRESENTED_AS_V2", basis.validate(text))
 
     def test_missing_section_rejected(self):
         text = MASTER_TEXT.replace("## 0.2 ", "## 0.9 ", 1)
@@ -308,6 +324,23 @@ class OwnershipMapBasisTest(unittest.TestCase):
             self.assertNotIn("Traceback", result.stderr)
             self.assertIn("SHEPHERDING_CONTROL_PLANE", result.stdout)
             self.assertIn("CONTROL_ROLES_INVALID", result.stdout)
+
+    def test_stale_plane_v2_refs_rejected(self):
+        old = "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#"
+        for plane, field, anchor in (
+            ("BETA_EVIDENCE", "authority_ref", "11"),
+            ("ALPHA_SEMANTIC_MAP", "authority_ref", "11"),
+            ("TAKY2_ENFORCEMENT_KERNEL", "authority_ref", "3"),
+            ("SHEPHERDING_CONTROL_PLANE", "authority_ref", "4"),
+        ):
+            data = copy.deepcopy(MAP_DATA)
+            data["cross_cutting_planes"][plane][field] = old + anchor
+            self.assertMapFails(data, "PLANE_V2_REF_STALE:" + plane + "." + field)
+
+    def test_owner_gap_attributed_to_v2_rejected(self):
+        data = copy.deepcopy(MAP_DATA)
+        data["owner_gaps"][1]["authority_ref"] = self.V2_REF
+        self.assertMapFails(data, "OWNER_GAP_AUTHORITY_MISATTRIBUTED_TO_V2:" + data["owner_gaps"][1]["system"])
 
     def test_malformed_planes_container_fails_structurally(self):
         data = copy.deepcopy(MAP_DATA)

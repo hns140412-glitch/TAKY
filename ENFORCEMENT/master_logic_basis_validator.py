@@ -40,9 +40,12 @@ REQUIRED = (
     "It SHALL NOT become a sixth hard gate.",
     # one shared Driver/COST economy policy; single evaluator stays implementation-OPEN, not claimed enforced
     "consume one shared economy policy (`SAVEY_AI_ECONOMY_POLICY`); two diverging economy policies are a defect.",
-    "The single runtime evaluator remains implementation-OPEN (V2 §0.1); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.",
-    # Driver economy with acceptance-quality floor
-    "`NECESSITY -> REUSE / CACHE -> LOCAL / DETERMINISTIC WHEN SUFFICIENT -> EXISTING SUBSCRIPTION / AUTH SESSION -> BATCH / CONTEXT REUSE -> LOWEST SUFFICIENT CAPABILITY -> METERED / PAID / EXTERNAL SIDE EFFECT ONLY IF JUSTIFIED + AUTHORIZED -> EXECUTE -> VERIFY -> ACCOUNT FOR RESOURCE COST`",
+    "The single runtime evaluator remains implementation-OPEN (V2 §8); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.",
+    "runtime realization of this basis remains OPEN until code + evidence + regression close it (V2 §8).",
+    "Conflict precedence (V2 §9)",
+    # Driver economy (active V2 §4 order) with MASTER execution protection labeled as such, and acceptance-quality floor
+    "Canonical policy order (V2 §4): `NECESSITY -> REUSE / CACHE -> LOCAL / DETERMINISTIC -> EXISTING SUBSCRIPTION / AUTH -> BATCH / CONTEXT REUSE -> LOWEST SUFFICIENT CAPABILITY -> PAID / EXTERNAL ROUTE`.",
+    "MASTER execution protection (not V2 verbatim): the paid/external route is taken only if justified + authorized, and is followed by `EXECUTE -> VERIFY -> ACCOUNT FOR RESOURCE COST`.",
     "`CHEAPEST != CHEAPEST_SUFFICIENT`",
     "Cost saving SHALL NOT lower acceptance criteria, authority, safety or evidence quality.",
     "`SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE`",
@@ -60,6 +63,7 @@ REQUIRED = (
     "Canonical wins and the conflict is recorded as a CURRENT CONFLICT item",
     "proceed OPEN-only",
     # technical delivery vs USER confirmation, without weakening approval
+    "`RULE WRITTEN != RULE ENFORCED != FEATURE IMPLEMENTED != TECHNICALLY VERIFIED != USER INTENT VERIFIED != USER CONFIRMED`",
     "`TECHNICALLY_DELIVERED`",
     "`USER_CONFIRMED`",
     "any two-stage completion policy built on them remains CANDIDATE until promoted.",
@@ -77,6 +81,8 @@ PIPELINE_SPECIFIC = (r"HTTP\s*200", r"SHELL-ONLY", r"learning\s+queue")
 
 FIVE_GATES = ("KEY", "CONTEXT", "ROUTE", "COST", "DONE")
 VENDOR_NAMES = ("ChatGPT", "Codex", "Claude", "Gemini", "OpenAI", "Anthropic")
+# Active Drive-restored V2 has sections 1-10 only; older local numbering (e.g. §0.1, §14, §19) is stale.
+V2_SECTIONS = {str(n) for n in range(1, 11)}
 
 
 def section_02(text):
@@ -115,6 +121,13 @@ def validate(text):
     ids = re.findall(r"^#{2,3}\s+([0-9]+(?:\.[0-9]+)?[A-Z]?)\b", text, re.M)
     for dup in sorted({x for x in ids if ids.count(x) > 1}):
         fail.append("DUPLICATE_SECTION_ID:" + dup)
+    # `V2 §n` citations must use the active V2 numbering.
+    for ref in re.findall(r"\bV2\s*§\s*([0-9]+(?:\.[0-9]+)?)", text):
+        if ref not in V2_SECTIONS:
+            fail.append("STALE_V2_SECTION_REF:§" + ref)
+    # The MASTER-only execution tail must not be presented as part of the V2 §4 order.
+    if re.search(r"V2 §4\)?:[^\n]*EXECUTE\s*->\s*VERIFY", sec):
+        fail.append("MASTER_PROTECTION_PRESENTED_AS_V2")
     # Role ontology (§0.2B) must not be bound to vendor/model names; references outside it are not role ontology.
     roles = subsection(sec, "0.2B")
     if not roles:
