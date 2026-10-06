@@ -1,35 +1,114 @@
-# TAKY SYSTEMWIDE LOGIC RECONCILIATION V3 — CANDIDATE / 2026-10-06
+# TAKY 2.0 SYSTEMWIDE LOGIC RECONCILIATION V3 — FINAL INTEGRATED CANDIDATE
 
-Status: REVIEWED CANDIDATE / NOT CANONICAL / NO PUSH / NO MERGE / NO DEPLOY
-Purpose: Beta -> Alpha -> TAKY 2.0 -> MASTER/OS/DOMAIN/PROJECT/app logic을 한 구조로 정합화하고, Shepherding + Driver/SAVEY_AI_ECONOMY + reusable worker roles를 기존 5 HARD GATE 안에서 구현 가능한 형태로 정리한다.
-Final authority: USER
+Status: REVIEWED CANDIDATE / IMPLEMENTATION RECONCILIATION / NOT CANONICAL
+Date: 2026-10-06
+Final Authority: USER
+Baseline Authority: TAKY 2.0 Systemwide V2 Canonical remains active until a verified successor is explicitly promoted.
+Push / merge / deploy: NOT AUTHORIZED / NOT DONE
 
-## 0. Review truth
+## 0. Purpose
 
-This candidate was built from:
-- Google Drive Premise / Canonical / Systemwide V2 / CURRENT
-- Frozen Beta manifest and Beta comparison evidence
-- Alpha draft + semantic-owner registry lineage
-- current TAKY2 runtime contracts/code
-- GRAND MASTER / Work OS / Learning OS / Learning Engine / Learning App Family
-- Ready & Set / Hide & Seek / Snap & Pop current project contracts
-- Badge / Growth / Mobile / SAVEY family-finance boundaries
-- latest available Claude shared-drive comparison artifact
-- fresh Codex read-only verification pass on the current local TAKY2 branch
+V3 is not a new TAKY architecture.
 
-Fresh Claude CLI independent pass was attempted but did not complete and is NOT counted as fresh verification.
-No push / merge / deploy was performed.
+V3 reconciles:
+- Frozen Beta evidence/defense,
+- Alpha semantic-owner/resolution model,
+- TAKY2 five-gate enforcement,
+- GRAND MASTER / OS / DOMAIN / PROJECT logic,
+- Shepherding control roles,
+- reusable worker roles,
+- Driver + SAVEY_AI_ECONOMY,
+- and the 2026-10-05~06 AI Mining -> Index -> Learning -> Test/Growth results.
 
-## 1. System identity — unchanged
+Target composition:
 
-TAKY is the top-level governance/orchestration system.
-TAKY is not ChatGPT, Claude, Codex, Border Collie, a specific model, or a single app.
+BETA EVIDENCE
+-> ALPHA SEMANTIC / OWNER RESOLUTION
+-> TAKY2 ENFORCEMENT
+-> APPLICABLE MASTER / OS / DOMAIN / PROJECT OWNER
+-> CONTROL ROLE
+-> MINIMUM-SUFFICIENT WORK ROLE
+-> ACTOR / TOOL
+-> EXECUTION
+-> EVIDENCE / VERIFY
+-> RESULT / REDIRECT
+-> CURRENT / HISTORY
+-> USER DECISION / CONTINUE
 
-Top slogans remain:
+The goal is:
+THE INTENDED, VERIFIED RESULT
+WITH MINIMUM UNNECESSARY COST, REWORK, CONTEXT LOSS AND USER DEBUGGING BURDEN.
+
+## 1. Evidence truth
+
+Reviewed for this integration:
+- Drive [START HERE] working premise
+- Drive [CANONICAL] unified standards
+- Drive Systemwide V2 Canonical
+- Drive CURRENT
+- both V3 candidate drafts created during parallel review
+- TAKY2 local runtime code/contracts
+- Beta/Alpha comparison and Frozen Beta/Alpha lineage material
+- MASTER/MASTER_LOGIC.md
+- MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json
+- OS/WORK_OS.md
+- OS/GUIDE_FAMILY_LEARNING_OS.md
+- OS/LEARNING_ENGINE_CORE.md
+- MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md
+- Ready & Set / Hide & Seek / Snap & Pop active project contracts
+- Badge / Growth / Piano / TAKY Mobile / SAVEY finance evidence
+- current local AI re-mining/index/learning outputs
+- existing completed Claude shared-Drive review
+- fresh Codex read-only V3 verification from the current TAKY2 branch
+
+Fresh Claude CLI review was attempted earlier but did not complete and is NOT counted as fresh verification.
+
+AI pipeline current-integrity reconciliation was performed locally in this pass:
+- AI_Q3_CURRENT lagged later adopted Q3 evidence.
+- it was corrected from 9 apparent PASS / 6 apparent open IDs to 11 PASS / 3 true OPEN IDs.
+- receipt: C2S/AI_Q3_CURRENT_RECONCILIATION_2026-10-06.json
+
+No Canonical promotion, push, merge or deployment is claimed.
+
+## 1.1 Canonical baseline inherited — not re-proposed
+
+The following are already Canonical Design Authority in the live V2 / Unified Standards and are not waiting for V3 approval:
+- NAVIGATOR / GUARDIAN / DRIVER+SAVEY_AI_ECONOMY / SCOUT
+- ROLE != AGENT
+- 5 HARD GATE = KEY / CONTEXT / ROUTE / COST / DONE
+- Necessity stays inside Driver/COST rather than becoming a sixth hard gate
+- SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE
+
+V3 Candidate scope is the implementation reconciliation of those decisions:
+- machine-readable control-role/runtime schema
+- role_registry / default_actor_bindings separation
+- first-class semantic_owner binding
+- reusable worker-role schema
+- one shared SAVEY_AI_ECONOMY evaluator
+- owner-map/startup/completion-state implementation gaps
+
+Until a later verified promotion changes them, current V2 actor defaults remain inherited.
+V3 must not silently replace Canonical actor/default bindings merely because ROLE != AGENT is being implemented more cleanly.
+
+## 2. Top-level identity — preserve
+
+TAKY is the top-level governance and orchestration system.
+
+TAKY is NOT:
+- ChatGPT
+- Claude
+- Codex
+- Border Collie
+- a specific model
+- a specific app
+- a specific tool
+
+Top slogans:
 - Think Again, Keep Your Key.
 - Think Again, You're The Key.
 
-Execution meaning:
+Execution cycle:
+
 HUMAN INTENT
 -> THINK AGAIN
 -> KEEP YOUR KEY
@@ -38,128 +117,149 @@ HUMAN INTENT
 -> VERIFY / CORRECT / CONTINUE
 
 USER = Key Owner / Final Authority.
+
 USER != DEBUGGER.
 HUMAN AUTHORITY != HUMAN OPERATIONAL BURDEN.
 
-## 2. Three generations are complementary, not replacements
+## 3. Beta / Alpha / TAKY2 division
 
-### 2.1 Beta = EVIDENCE / DEFENSE / FORENSIC FREEZE
+### 3.1 Beta — trust / evidence / defense
 
-Beta must remain the answer to:
-“Why can this state be trusted, and what exactly was observed?”
+Beta answers:
+“Why can the observed state be trusted?”
 
-Beta owns:
-- frozen source boundaries
-- immutable/datetime evidence
-- validation/adversarial results
-- known drift and open/hold/unverified lists
-- attack/defense history
-- source and state reconstruction evidence
+Beta preserves:
+- exact source/snapshot boundaries,
+- validation/regression proof,
+- adversarial evidence,
+- recovery evidence,
+- OPEN/HOLD/UNVERIFIED state at the frozen boundary,
+- attack/defense history.
 
-Beta must NOT become:
-- live current
-- semantic owner
-- orchestration kernel
-- deployment/device/runtime truth without exact fresh evidence
+Beta SHALL NOT become:
+- live CURRENT,
+- semantic owner,
+- live orchestration logic,
+- runtime/device/deployment truth without exact fresh evidence.
 
-Important lineage rule:
-Different Beta commits/snapshots found in later comparison artifacts are distinct lineage nodes until their derivation is explicitly mapped.
-Do not collapse “Beta frozen manifest boundary”, later hardened Beta candidate, and later comparison snapshot into one guessed identity.
+Lineage caution:
+multiple Beta snapshot/commit references exist across later comparison artifacts.
+Do not collapse distinct frozen/hardened/comparison nodes into one identity without an explicit lineage map.
 
-### 2.2 Alpha = SEMANTIC / OWNER / RESOLUTION MAP
+### 3.2 Alpha — meaning / ownership / resolution
 
-Alpha must remain the answer to:
-“What does each thing mean, who owns that meaning, and where is the live state resolved?”
+Alpha answers:
+- WHAT does a rule/system mean?
+- WHO owns that meaning?
+- WHERE is current state resolved?
 
-Alpha owns:
-- semantic owner registry
-- namespace separation
-- OWNER / CURRENT / EVIDENCE / HANDOFF distinction
-- owner-to-current resolution
-- cross-layer ownership boundaries
-- claim ladder
-- exact OPEN/HOLD/UNVERIFIED location
-- whole-system semantic map
+Alpha preserves:
+- semantic owner registry,
+- namespace separation,
+- OWNER / CURRENT / EVIDENCE / HANDOFF distinction,
+- owner -> current resolution,
+- cross-layer ownership boundaries,
+- claim ladder,
+- whole-system map,
+- OPEN/HOLD/CONFLICT lineage.
 
 Core Alpha rule:
-TAKY governs flow; semantic owners keep meaning.
+TAKY governs flow; owners keep meaning.
 
-Alpha must NOT:
-- embed live PR/HEAD/deploy state as durable meaning
-- let CURRENT become semantic owner
-- let HANDOFF become authority
-- let implementation host become owner merely because it hosts code
+Alpha SHALL NOT:
+- make CURRENT the owner,
+- make HANDOFF authority,
+- make implementation host semantic owner,
+- embed volatile live HEAD/deploy state as durable meaning.
 
-Important lineage rule:
-The old remote alpha branch and the later “integrated Alpha” comparison artifact must not be treated as the same object unless exact provenance is verified.
-The current review could verify the old branch draft/registry, but the later named integrated artifact was not independently located in current Git/Drive lookup.
-Therefore exact integrated-Alpha lineage remains a reference-resolution item, not a reason to discard Alpha semantics.
+Lineage caution:
+origin/taky/alpha-20261002 is not automatically identical to later “integrated Alpha” naming in comparison records.
+Exact integrated-Alpha artifact lineage remains a resolution item.
 
-### 2.3 TAKY 2.0 = EXECUTABLE ENFORCEMENT KERNEL
+### 3.3 TAKY2 — compact executable enforcement
 
-TAKY2 must remain the answer to:
+TAKY2 answers:
 “What may proceed, by which trusted route, and what may be accepted as done?”
 
-TAKY2 owns cross-cutting enforcement only:
-1. KEY
-2. CONTEXT
-3. ROUTE
-4. COST
-5. DONE
+Keep exactly five hard gates:
+KEY / CONTEXT / ROUTE / COST / DONE
 
-TAKY2 must NOT absorb:
-- Ready session semantics
-- Planner scheduling semantics
-- Hide vocabulary semantics
-- Snap expression semantics
-- Learning Engine mastery/memory semantics
-- Badge reward semantics
-- Explorer Crew identity semantics
-- Work/Architecture domain meaning
-- SAVEY family-finance meaning
+TAKY2 enforces cross-cutting invariants only:
+- USER Key / authority provenance,
+- context economy,
+- route/retry control,
+- call/resource economy,
+- semantic-owner boundary where material,
+- evidence-backed DONE,
+- receipt/state integrity.
 
-The correct composition is:
+TAKY2 SHALL NOT absorb:
+- Ready session meaning,
+- Planner scheduling meaning,
+- Hide vocabulary semantics,
+- Snap expression semantics,
+- Learning Engine pedagogy,
+- Badge reward semantics,
+- Explorer Crew identity,
+- architecture-domain knowledge,
+- SAVEY family-finance meaning.
 
-BETA evidence
--> ALPHA semantic/owner map
--> TAKY2 enforcement kernel
--> applicable MASTER/OS/DOMAIN/PROJECT owner
--> execution
--> verification
--> evidence
--> CURRENT/HISTORY update
+## 4. Source / state lifecycle
 
-## 3. Final layered architecture
+Preserve the information lifecycle:
+
+SOURCE
+-> REVIEW / CANDIDATE
+-> COMPARE / CLASSIFY
+-> CANONICAL
+-> ENFORCEMENT
+-> RUNTIME CURRENT
+-> EVIDENCE / HISTORY
+
+Canonical meaning hierarchy may still use:
+PRINCIPLE -> STANDARD -> RULE -> CONTRACT -> ENFORCEMENT
+
+These two views are orthogonal:
+- lifecycle = how information moves,
+- hierarchy = what a rule means.
+
+CURRENT is a runtime/operational view, not semantic authority.
+
+HANDOFF is a recovery pointer, not authority.
+
+HISTORY/EVIDENCE proves lineage, not present ownership.
+
+DEEP MEMORY — LIGHT EXECUTION.
+
+## 5. Final layered architecture
 
 ### L0 — HUMAN / KEY OWNER
 Owns:
 - intended outcome
 - protected constraints
-- authority
-- final meaningful decision
+- meaningful authority
+- final decision
 
 ### L1 — TAKY GOVERNANCE
 Owns:
 - global invariants
-- slogans
 - authority model
 - evidence/traceability
-- orchestration rules
+- orchestration principles
+- promotion/evolution rules
 - cross-layer boundaries
-- evolution/promotion rules
 
 ### L2 — SHEPHERDING CONTROL PLANE
-Subordinate to TAKY.
-Control functions:
+Dynamic control functions:
 - NAVIGATOR
 - GUARDIAN
 - DRIVER + SAVEY_AI_ECONOMY
 - SCOUT
 
-These are control functions, not permanently separate agents.
+These are not mandatory separate agents.
 
 ### L3 — WORK ROLE PLANE
-Reusable work-role profiles:
+Reusable profiles:
 - SCOPE
 - EXPERIENCE / UX
 - DATA
@@ -169,30 +269,29 @@ Reusable work-role profiles:
 - RELEASE
 - DOCUMENT / HANDOFF
 
-These are selected by task fit.
-They are NOT a mandatory 8-stage pipeline.
+Select only the minimum sufficient subset.
 
 ### L4 — SEMANTIC OWNER PLANE
-The applicable owner keeps meaning:
+Applicable owner:
 - GRAND MASTER
-- Work OS
-- Learning OS
-- Domain / engine
-- Learning App Family
-- Project/app master
+- OS
+- DOMAIN
+- ENGINE
+- FAMILY
+- PROJECT / APP
 - specialized shared owner
 
 ### L5 — ACTOR / TOOL PLANE
-Examples:
+Replaceable execution routes:
 - ChatGPT
 - Codex
 - Claude
-- local scripts
-- collector
+- deterministic local tools
+- collectors
 - Remote
-- MCP
-- deterministic validators
+- MCP/connectors
 - provider APIs
+- specialized agents
 
 ROLE != AGENT.
 OWNER != ROUTER.
@@ -205,132 +304,132 @@ TOOL != AUTHORITY.
 - HANDOFF = recovery pointer
 - CANONICAL = promoted meaning/rules
 
-## 4. Shepherding control roles
+## 6. Shepherding control roles
 
-### 4.1 NAVIGATOR — trajectory / scope / owner alignment
+### 6.1 NAVIGATOR — direction / scope / owner alignment
 
-Primary question:
-“Are we still moving toward the USER-intended result under the correct semantic owner?”
+Question:
+“Are we still moving toward the USER-intended result under the correct owner?”
 
 Detects:
 - scope drift
 - owner drift
-- order/dependency mistakes
+- dependency/order errors
 - accidental feature growth
-- route that solves the wrong problem
-- lower-layer rule trying to redefine higher meaning
+- wrong-problem optimization
+- lower layer redefining higher meaning
 
 Actions:
 OBSERVE -> COMPARE -> REDIRECT -> REPLAN -> RESUME
 
 Navigator does not become semantic owner.
 
-### 4.2 GUARDIAN — integrity / evidence / authority / reversibility
+### 6.2 GUARDIAN — integrity / authority / evidence
 
-Primary question:
-“Did anything break, escape, become untrusted, or cross a protected boundary?”
+Question:
+“Did anything become missing, corrupted, unsafe, contradictory or falsely accepted?”
 
 Protects:
-- USER Key
+- Key
 - authority
 - privacy
 - provenance
-- state integrity
-- data integrity
-- evidence integrity
+- state/data integrity
+- evidence truth
 - irreversibility boundary
 - semantic-owner boundary
-- truthful PASS/DONE claims
+- truthful PASS/DONE
 
 Outlier classification:
-ERROR / NOVEL_EVIDENCE / INTENTIONAL_EXCEPTION
+ERROR / NOVEL_EVIDENCE / INTENTIONAL_EXCEPTION / UNKNOWN
 
 Action:
 DETECT -> CLASSIFY -> RECOVER / HOLD / ESCALATE
 
-Guardian blocks only when required for integrity.
 CONTROL != STOP.
 Default remains REDIRECT_BEFORE_ESCALATE.
 
-### 4.3 DRIVER + SAVEY_AI_ECONOMY — momentum + resource efficiency
+### 6.3 DRIVER + SAVEY_AI_ECONOMY — momentum + total-cost efficiency
 
-Primary question:
+Question:
 “What is the least costly sufficient way to keep verified progress moving?”
 
-Driver is not a simple throughput pusher.
-Driver = MOMENTUM + SAVEY_AI_ECONOMY.
+DRIVER = MOMENTUM + SAVEY_AI_ECONOMY.
 
-Required decision order:
-1. NECESSITY — does this action/call need to happen?
-2. REUSE — can existing evidence/result/cache satisfy it?
-3. LOCAL / DETERMINISTIC FIRST — can a non-model/local path reliably solve it?
-4. LOWEST SUFFICIENT CAPABILITY — choose the cheapest route that still meets acceptance quality.
-5. BATCH / PARALLEL FIT — combine independent work when it reduces cost without contaminating evidence.
-6. THROTTLE — cap repeated/excessive calls, retries, scans, re-reads and parallel fan-out.
+Required order:
+1. NECESSITY
+2. REUSE
+3. LOCAL / DETERMINISTIC FIRST WHEN SUFFICIENT
+4. LOWEST SUFFICIENT CAPABILITY
+5. BATCH / CACHE / DUPLICATE-READ REDUCTION
+6. THROTTLE / HOLD / RESUME
 7. EXECUTE
 8. VERIFY
-9. RESUME / STOP WHEN SUFFICIENT
+9. STOP WHEN SUFFICIENT / RESUME WHEN NEEDED
 
 Driver states:
-PUSH / HOLD / THROTTLE / RESUME.
+PUSH / HOLD / THROTTLE / RESUME
 
-Driver KPI:
+KPI:
 VERIFIED PROGRESS / TOTAL RESOURCE COST
 
-Resource cost includes:
-- money/API cost
-- model quota
+Total cost includes:
+- paid/API/model cost
+- subscription quota
 - tokens
-- Remote/tool calls
+- tool/Remote calls
 - latency
 - CPU/network
 - repeated scans
 - human confirmation burden
-- rework cost
+- rework
 
 Hard floor:
 CHEAPEST != BEST.
-CHEAPEST-SUFFICIENT = minimum cost route that does NOT reduce acceptance quality.
+CHEAPEST-SUFFICIENT means minimum cost without reducing acceptance quality.
 
-SAVEY_AI_ECONOMY is a TAKY execution-economy policy.
-It must remain distinct from SAVEY_FAMILY_FINANCE, the family finance product.
+SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE.
 
-### 4.4 SCOUT — unknowns / evidence acquisition / alternatives
+### 6.4 SCOUT — relevant unknowns / evidence / alternatives
 
-Primary question:
-“What material unknown could change the decision or result?”
+Question:
+“What material unknown could change the result or route?”
 
-Scout performs only fit-for-purpose discovery:
-- repository/source recovery
-- external evidence
-- mining
-- alternative route discovery
+Owns:
+- targeted discovery
+- source recovery
+- external pattern mining
+- alternate-route discovery
 - missing premise detection
 - owner/pointer recovery
 
-Scout output is:
+Output:
 DISCOVERY / EVIDENCE / CANDIDATE
 
-Scout findings do not automatically become Canonical:
-DISCOVER -> COMPARE -> VERIFY -> LOCALIZE -> ADOPT / HOLD / REJECT
+Never:
+DISCOVERY -> AUTO CANONICAL
 
-## 5. Control roles are not new gates
+Use:
+DISCOVER -> COMPARE -> VERIFY -> LOCALIZE -> ADOPT / ADJUST / HOLD / REJECT
 
-Keep exactly five hard gates:
+## 7. Five gates and control mapping
+
+Keep exactly:
 KEY / CONTEXT / ROUTE / COST / DONE
 
 Mapping:
-- KEY: Guardian + Navigator support
+- KEY: Guardian + Navigator
 - CONTEXT: Navigator + Scout
 - ROUTE: Navigator + Guardian
 - COST: Driver + SAVEY_AI_ECONOMY
 - DONE: Guardian + verifier/evidence boundary
 
-Necessity is an internal COST decision, not a sixth gate.
+Necessity is internal to COST/economy.
+Do NOT create a sixth hard gate.
 
-## 6. Conflict precedence
+## 8. Conflict precedence
 
-P0 — explicit USER STOP / CHANGE / APPROVE / REJECT
+P0 — USER STOP / CHANGE / APPROVE / REJECT
 P1 — KEY / AUTHORITY / PRIVACY / IRREVERSIBILITY
 P2 — DATA / EVIDENCE / STATE INTEGRITY
 P3 — TRAJECTORY / SCOPE / SEMANTIC OWNER
@@ -338,18 +437,18 @@ P4 — FUNCTION / QUALITY
 P5 — FLOW / MOMENTUM
 P6 — OPTIMIZATION / COST
 
-Important:
-This is conflict precedence, not execution order.
-Necessity still runs before optional expensive calls.
-Driver may not reduce integrity or acceptance quality to improve cost or speed.
+This is conflict precedence, not call sequence.
 
-## 7. Reusable Worker Role Contract
+Driver may not override Guardian/Navigator integrity to increase speed or reduce cost.
 
-Every material work role should use one common contract shape:
+## 9. Reusable Worker Role Contract
+
+Common shape:
 
 ROLE
 MISSION
 INTENT_REF
+AUTHORITY
 SEMANTIC_OWNER_REF
 OWNER_SCOPE
 INPUT
@@ -369,328 +468,454 @@ COST_DECISION
 REUSE_REF
 ROUTE_REF
 
-### Worker profiles
-
-SCOPE
-- reduce to minimum useful/verifiable scope
+### SCOPE
+- minimum useful/verifiable increment
 - preserve protected requirements
 - explicit non-scope
-- definition of done
-- “3 features” is a heuristic, never a right to delete authority
+- observable done
+- “3 core features” is a heuristic, not deletion authority
 
-EXPERIENCE / UX
+### EXPERIENCE / UX
 - screens/interactions
-- success/empty/loading/error/retry states
 - navigation
+- normal/empty/loading/error/retry states
 - user-visible acceptance behavior
+- explicit design reference/taste constraints when material
 
-DATA
+### DATA
 - fields/types/validation
 - source-of-truth
+- ownership/privacy
 - CRUD/event semantics
-- privacy/ownership
-- migration
+- migration/provenance
 
-BUILD
-- implement only authorized scope
-- return actual diff/artifact/evidence
+### BUILD
+- authorized scope only
+- actual diff/artifact/evidence
 - no self-certification
 
-TEST
-- run executable tests
-- never claim unexecuted PASS
-- validate acceptance, not only syntax
+### TEST
+- executable test where possible
+- unexecuted != PASS
+- test acceptance, not syntax only
 
-FIX
+### FIX
 - reproduce first
-- smallest safe fix
+- smallest safe correction
 - preserve unrelated behavior
 - regression after repair
 
-RELEASE
+### RELEASE
 - environment/runtime/update/device/deploy checks proportional to claim
 - CODED != RELEASED
 - DEPLOYED != DEVICE_VERIFIED
+- production authority remains separate
 
-DOCUMENT / HANDOFF
+### DOCUMENT / HANDOFF
 - current truth
-- known limitations
+- known limits
 - exact next OPEN
-- no false completion
-- handoff remains pointer, not authority
+- no invented PASS
+- pointer, not authority
 
-## 8. Role vs actor binding — required correction
+## 10. Role vs actor separation
 
-Current TAKY2 correctly says ROLE != AGENT in prose but still binds:
-- orchestrator -> CHATGPT
-- verifier -> CODEX
-- independent reviewer -> CLAUDE
-
-This is acceptable only as DEFAULT ACTOR BINDING, not role ontology.
-
-Target split:
+Target:
 
 role_registry:
 - ORCHESTRATOR
 - IMPLEMENTER
 - VERIFIER
 - INDEPENDENT_REVIEWER
-- CONTROL_ROLES
-- WORK_ROLES
+- NAVIGATOR / GUARDIAN / DRIVER / SCOUT
+- SCOPE / UX / DATA / BUILD / TEST / FIX / RELEASE / DOC
 
 default_actor_bindings:
-- ORCHESTRATOR -> ChatGPT
-- VERIFIER -> Codex
-- INDEPENDENT_REVIEWER -> Claude
-- IMPLEMENTER -> selected by task fit
+- ORCHESTRATOR -> current preferred ChatGPT route
+- VERIFIER -> current preferred Codex route where applicable
+- INDEPENDENT_REVIEWER -> current preferred Claude route where applicable
+- IMPLEMENTER -> selected by task fit / capability / necessity
 
-A future actor replacement must not require changing role meaning.
+A qualified actor replacement must not change role meaning.
 
-Independent verification rule must remain:
+Independent verification rule:
 executor cannot self-certify.
 
-## 9. Semantic owner must become first-class runtime data
+### Current conflict found
 
-Alpha already establishes semantic ownership.
-TAKY2 currently validates the principle but does not bind owner semantics to each material action.
+Local D:\Git PWA\TAKY\MASTER\AI_COLLABORATION_PROTOCOL.md is currently untracked in the checked workspace but declares itself CANONICAL OWNER and assigns Codex as default coder.
 
-Required action/receipt fields:
+It cannot override USER-authorized V2 merely by its header.
+
+Disposition:
+CONFLICT / CANDIDATE SOURCE ONLY.
+
+Resolve by implementing role_registry + default_actor_bindings and then reconciling the collaboration projection to the actual active authority.
+
+## 11. Semantic owner must become first-class runtime data
+
+Alpha already provides ownership semantics.
+TAKY2 currently validates the principle but does not fully bind it to material action/receipt/DONE.
+
+Target fields:
 - semantic_owner_ref
 - owner_scope
-- owner_version or authority digest
+- owner_version / authority_digest
 - inherited_boundaries
 - mutation_allowed
 - routing_does_not_transfer_owner = true
 
-Preflight must fail or redirect when:
-- owner is missing for a material semantic action
+Preflight redirects/blocks when:
+- material action lacks owner
 - owner is stale where freshness matters
-- lower layer attempts to redefine higher meaning
-- router/host/tool is treated as owner
+- lower layer attempts higher-meaning mutation
+- tool/router/host is treated as owner
 
-DONE must re-check the same owner binding.
+DONE rechecks the same binding.
 
-## 10. Master-to-subsystem semantic map
+## 12. Master-to-subsystem map
 
-### 10.1 GRAND MASTER
+### 12.1 GRAND MASTER
 Owns:
-- universal governance
-- authority / approval
-- evidence
-- recovery
-- orchestration/routing
-- validation
-- history/evolution
-- source-of-truth boundaries
+global governance / authority / evidence / recovery / orchestration / validation / history / source-of-truth boundaries.
 
-Does not own every app behavior.
+Does not own every product feature.
 
-### 10.2 WORK OS
+### 12.2 WORK OS
 Sibling of Learning OS.
+
 Owns:
-- cross-project productive work rhythm
+- cross-project productive workflow
 - operational workspace
-- project continuity
-- mail/Notion operations where applicable
-- reusable work recipes
+- continuity
+- work routing
+- reusable recipes
 - volatile capability routing
 
 Default productive rhythm:
 GOAL -> DISCOVER -> BUILD -> VERIFY -> SHIP -> LEARN
 
-TAKY2 should gate Work OS actions; it should not duplicate Work OS workflow semantics.
+TAKY2 gates Work OS actions; it does not duplicate Work OS meaning.
 
-### 10.3 LEARNING OS / GUIDE FAMILY
+### 12.3 LEARNING OS / GUIDE FAMILY
 Sibling of Work OS.
+
 Owns:
-- child/family learning management meaning
+- family/child learning-management meaning
 - schedule/capacity framework
 - Planner authority
 - child/parent learning-role boundaries
 - Guide intervention principles
 - cross-app learning journey
 
-Hard owner rule:
-SUBJECT INTERPRETS; MAIN/PLANNER ALLOCATES.
+Rule:
+SUBJECT INTERPRETS; MAIN / PLANNER ALLOCATES.
 
-### 10.4 LEARNING ENGINE CORE
+### 12.4 LEARNING ENGINE CORE
 Owns:
 - skill state
 - mastery/memory interpretation
 - uncertainty
 - pedagogical intent
-- next-review priority signal
+- review-priority signal
 
 Does NOT own:
-- calendar date
+- date
 - time slot
 - family capacity
 - Ready session
 - Hide/Snap UI
+- deploy/platform mechanics
 
-Learning Engine produces intent/signals.
-Planner schedules.
-Apps execute.
+REVIEW NEED != REVIEW DATE.
 
-### 10.5 PLANNER / Ready & Set
+### 12.5 PLANNER
+Owns:
+dated allocation under confirmed schedule/capacity/deadline constraints.
 
-Planner:
-- sole dated allocation authority inside the learning management scope
-- uses real-life schedule, constraints, load, deadline, evidence
+Planner does not redefine subject meaning.
 
-Ready & Set:
-- BASE CAMP
-- TODAY execution surface
-- session owner
+### 12.6 READY & SET
+Owns:
+- BASE CAMP execution
+- TODAY projection consumption
+- one active session
+- task/lap runtime
 - timestamp-derived timer
-- task/lap transitions
-- carry-over/result routing
+- per-task result/carry-over routing
 
-Ready must not become:
-- Learning Engine
-- subject mastery owner
-- vocabulary owner
-- expression owner
+Ready does not create authoritative DATED TODO.
 
-### 10.6 Hide & Seek
+### 12.7 HIDE & SEEK
 Owns:
-- vocabulary discovery/retrieval experience
-- OCR/capture review semantics for vocabulary
+- vocabulary discovery/retrieval
+- vocab OCR/review semantics
 - recognition vs unaided recall evidence
-- weak/missed word signals
-- task-level vocabulary result
+- weak/missed-word task signals
+- vocabulary task result
 
-Does NOT own:
-- dated scheduling
-- entire session
+Hide does not own:
+- long-term dated schedule
+- entire Ready session
 - universal mastery interpretation
-- Snap expression result
 
-Hide sends memory/evidence signals upward; Learning Engine interprets them; Planner schedules if needed.
-
-### 10.7 Snap & Pop
+### 12.8 SNAP & POP
 Owns:
-- thought-to-expression execution
-- writing/speaking/sentence expansion
+- thought-to-expression
+- writing/speaking
+- sentence expansion/revision
 - child-authored expression result
-- its project reward/world semantics
+- project-specific reward/world surfaces
 
-Does NOT own:
+Snap does not own:
 - Ready session
-- long-term vocabulary authority
 - Planner
-- Learning Engine mastery semantics
+- long-term vocabulary authority
 
-### 10.8 Badge / reward/history layer
-Current logic has substantial ledger/history/visual mechanisms, but whole-system owner registration remains incomplete.
+### 12.9 BADGE / REWARD / HISTORY
+Requires one explicit semantic owner for:
+- award meaning
+- acquisition history
+- re-award/insignia semantics
 
-Target:
-- one explicit semantic owner for badge award meaning/history
-- apps consume or project badge state
-- reward UI must not redefine learning/session truth
-- award ledger/history remains evidence-backed
+Apps consume/project badge state.
+Visual renderer != badge semantic authority.
 
-Badge visual rendering != badge semantic authority.
+### 12.10 EXPLORER CREW / CHARACTER RELATIONSHIP
+Shared character identity/relationship remains centrally owned.
 
-### 10.9 Explorer Crew / character relationship
-Shared crew identity/relationship must remain centrally owned.
-Apps receive projections and local presentation compatibility only.
-
-Ready/Hide/Snap must not silently mutate:
+Apps may consume projections but must not silently mutate:
 - character_id
 - affinity
 - relationship history
 - canonical crew identity
 - shared asset ownership
 
-Current checkout references an Exploration Crew canonical owner from lower contracts, but the expected owner file is not present in this checkout path.
-Treat as pointer/coverage gap until exact owner artifact is recovered; do not guess.
+Current lower contracts point to an Exploration Crew canonical owner, but the expected owner file was not found in the checked TAKY2 checkout.
+Keep OWNER_GAP until exact artifact is recovered.
 
-### 10.10 Piano Practice
-Remains project/sub-master owned for piano-specific practice semantics.
-Planner may allocate time; Piano owner interprets practice unit/method/evidence.
-Do not promote piano-specific pedagogy into global Learning Engine or Planner rules.
+### 12.11 PIANO PRACTICE
+Piano-specific unit/method/evidence remains project/sub-master owned.
+Planner may allocate time but does not absorb piano pedagogy.
 
-### 10.11 GROW / Growth Intelligence
-Owns the reusable improvement loop:
+### 12.12 GROW / Growth Intelligence
+Owns the improvement loop:
+
 CURRENT REALITY
--> external/ecosystem evidence
--> pattern
--> localized candidate
--> experiment/implementation
--> outcome/regression
+-> SOURCE / ECOSYSTEM EVIDENCE
+-> PATTERN
+-> LOCALIZED CANDIDATE
+-> EXPERIMENT / IMPLEMENTATION
+-> OUTCOME / REGRESSION
 -> CURRENT_BEST / FRONTIER
 
-Growth discoveries do not auto-promote to MASTER.
-GAP DISCOVERED + NO OWNER/ROUTE = SILENT LOSS CANDIDATE.
+Growth finding != automatic MASTER promotion.
 
-### 10.12 Architecture / ArchiGrow
-Architecture-domain knowledge remains domain-owned.
-TAKY governs evidence/traceability and Work OS execution.
-Architecture rules, regulatory interpretation, design methods, drawing/PPT/UI output rules should not become global TAKY semantics merely because they are reused.
+### 12.13 ARCHITECTURE / ARCHIGROW
+Architecture rules, regulation evidence, competition outputs, drawing/PPT/UI production logic remain domain-owned.
 
-### 10.13 SAVEY_FAMILY_FINANCE
-SAVEY family finance is a separate product/domain.
+TAKY governs provenance, routing, verification and promotion.
+It does not flatten architecture expertise into the kernel.
 
-Owns family-finance semantics such as:
-- canonical Google Sheet base
+### 12.14 SAVEY_FAMILY_FINANCE
+Owns:
+- family-finance semantics
+- Google Sheet base/human direct-edit precedence
 - append-only mutation journal
-- user direct-edit precedence
 - finance record interpretation
-- family finance UI/coach behavior
+- finance UI/coach behavior
 
-It must not be confused with SAVEY_AI_ECONOMY.
+SAVEY_FAMILY_FINANCE != SAVEY_AI_ECONOMY.
 
-Namespace hard split:
-SAVEY_AI_ECONOMY = TAKY execution resource policy.
-SAVEY_FAMILY_FINANCE = family finance app/domain.
-
-### 10.14 TAKY Mobile
-TAKY Mobile is a runtime/admin/projection shell.
-It is NOT canonical authority.
+### 12.15 TAKY MOBILE
+TAKY Mobile is runtime/admin/projection only.
 
 It may:
-- load/cache canonical sources
-- provide UI/runtime/trace
+- load/cache canonical
+- provide UI/trace
 - route authorized actions
 
 It may not:
-- redefine MASTER semantics
+- redefine MASTER
 - turn local app state into Canonical
-- treat deployment evidence as Release PASS
+- turn deployment evidence into Release PASS
 
-## 11. App-family cross-flow — preserved
+### 12.16 EUNHA FARM / OTHER PROJECTS
+Where a verified owner exists, point to it.
+Where not, preserve OWNER_GAP / UNKNOWN.
 
-One island / one connected journey / specialist owners.
+Do not guess to make the map look complete.
 
-Core path:
-SOURCE / ASSIGNMENT
--> LEARNING MASTER / SUBJECT INTERPRETATION
--> LEARNING UNIT
--> PLANNER
--> DATED TODO
--> READY TODAY
--> CHILD SELECT
+## 13. Learning app family flow
+
+CHILD LIFE SCHEDULE
++ CONFIRMED ASSIGNMENT FACT
+-> SUBJECT / LEARNING MASTER
+-> LEARNING ENGINE INTERPRETATION WHEN APPLICABLE
+-> PLANNER DATED ALLOCATION
+-> TODAY
 -> READY SESSION
--> SPECIALIST APP WHEN NEEDED
--> TASK RESULT / EVIDENCE
--> LEARNING ENGINE INTERPRETATION
--> HISTORY
--> NEXT PLAN
+   -> VOCABULARY -> HIDE
+   -> EXPRESSION -> SNAP
+-> PER-TASK RESULT
+-> UNIFIED LEARNING HISTORY
+-> LEARNING ENGINE OBSERVATION
+-> MAIN SUMMARY / NEXT PLAN
 
-Specialist routing:
-- vocabulary/retrieval -> Hide & Seek
-- thought/expression/writing/speaking -> Snap & Pop
-- planning/session -> Ready & Set
-
-Cross-app invariant:
+Cross-app invariants:
 APP_SWITCH != PAUSE
 APP_SWITCH != LAP_END
 SPECIALIST_TASK_COMPLETE != SESSION_COMPLETE
 
-## 12. Evidence and completion model
+Hide -> Snap:
+FOUND WORD / CONTEXT
+-> EXPRESSION MATERIAL
+-> CHILD WRITES / SPEAKS
+-> RESULT RETURN
 
-Keep these distinctions:
+Material transfer does not transfer semantic ownership.
+
+## 14. AI Mining / Index / Learning final integration
+
+Detailed evidence:
+TAKY2/AI_MINING_INDEX_LEARNING_FINAL_INTEGRATION_20261006.md
+
+### 14.1 Current local pipeline snapshot
+
+Latest reconciled local evidence records:
+- 63 mining backlog items received a disposition
+- 51 indexed as new
+- 10 merged into existing source identity
+- 2 closed terminal holds / 0 active hold
+- 81 AI index sources
+- 56 AI learning rules
+- 44 adopted/tested under current local evidence
+- 12 remain open
+
+Current OPEN:
+- Q3 representative experiments: 3
+- Q4 learning-domain tests: 4
+- Q5 verify-on-operational-need: 5
+
+No automatic Canonical promotion.
+
+### 14.2 Acquisition truth
+
+Validated durable runbook principles:
+- bounded timeout
+- failure isolation
+- partial-result preservation
+- public/private separation
+- no auth bypass
+- hash/provenance before Index/Learning
+- retry only failed/thin items
+- no title/shell-only learning
+
+Representative acquisition benchmark preserved 8/8 terminal outcomes and materially reduced elapsed time with bounded parallelism.
+
+Important:
+HTTP 200 / terminal acquisition SUCCESS != SUBSTANTIVE LEARNING EVIDENCE.
+
+### 14.3 V3 system-level learnings
+
+Adopt into V3 candidate logic:
+- NECESSITY BEFORE ADOPTION
+- SECURITY BEFORE CREDENTIAL
+- CONTEXT CLAIMS NEED MEASUREMENT
+- CROSS-MODEL REVIEW INDEPENDENCE
+- MEMORY = CAPTURE -> STORE -> RETRIEVE
+- FAILURE SHOULD UPDATE DURABLE RUNBOOK
+- TOOL OVERHEAD CAN NEGATE SAVINGS
+- PRUNE STALE SCAFFOLDING WITH SECURITY REVIEW
+- INTERFACE / REASONING SEPARATION
+- OBSERVABLE SUCCESS OVER SELF-REPORT
+- UPSTREAM VERIFICATION FOR TIME-SENSITIVE TOOL CLAIMS
+
+These strengthen:
+Navigator / Guardian / Driver / Scout,
+the 5 gates,
+and role/actor/owner separation.
+
+### 14.4 Artifact / design learnings
+
+Adopt into applicable Worker/Domain candidate contracts:
+- staged artifact workflow
+- editable output
+- transform approved source before recreate
+- local edit before full regeneration for bounded corrections
+- explicit design taste/reference constraints
+- source-asset quality sets output ceiling
+- rendered/observable visual review
+
+These do not make subjective aesthetics a TAKY global rule.
+They route to design/artifact owners and task contracts.
+
+### 14.5 Prompt / contract learnings
+
+Support:
+- compact role
+- explicit intent/context
+- constraints/non-scope
+- observable success
+- evidence requirements
+- narrow triggers
+- avoid overlapping always-on skills
+
+This strengthens the reusable Worker Role Contract.
+
+### 14.6 Q3 still OPEN
+
+Do not promote without representative evidence:
+- BUDGET_AWARE_MODEL_TIERING
+- INTENT_CONSTRAINTS_SUCCESS_OVER_UNNEEDED_STEPS
+- SURFACE_SELECTION_BY_JOB_DIMENSION
+
+They are direct future tests for Driver/SAVEY and routing.
+
+### 14.7 Q4 still Learning-owned
+
+Remain bounded Learning-domain experiments:
+- fluency includes discernment/responsibility
+- literacy before tool speed
+- mental model of capabilities/limits
+- multiple representations
+
+Do not globalize them into TAKY core without owner-level evidence.
+
+### 14.8 Q5 verify only on need
+
+Keep reference-only until a real decision requires current primary verification:
+- prompt macro native/support status
+- memory need vs specific memory tool
+- MCP vs API relationship
+- memory pattern vs memory product
+- persona library vs autonomous agent
+
+Do not spend calls merely to close the queue.
+
+## 15. SAVEY_AI_ECONOMY source integration
+
+Local OS/SAVEY_AI_ECONOMY.md is useful candidate source but is not independently promoted merely by its local header/state.
+
+Reuse these principles in ONE shared evaluator:
+- deterministic/local first
+- existing paid subscription capacity before metered API
+- reuse active context
+- batch related work
+- lower sufficient tier
+- paid API only when necessary and authorized
+- acceptance quality never reduced
+- targeted reads/diffs before broad scans
+- stop redundant validation when evidence is sufficient
+
+Target:
+DRIVER and COST must call the same economy logic.
+Do not implement two policy engines.
+
+## 16. Evidence and completion
+
+Keep distinctions:
+
 RULE WRITTEN
 != RULE ENFORCED
 != FEATURE IMPLEMENTED
@@ -698,239 +923,185 @@ RULE WRITTEN
 != USER INTENT VERIFIED
 != USER CONFIRMED
 
-Add explicit two-stage completion semantics:
+Recommended two-stage result semantics:
 
 TECHNICALLY_DELIVERED
-= implementation + required verification + evidence pass
+= implementation + required evidence/verification
 
 USER_CONFIRMED
-= explicit USER confirmation when the action/policy requires human confirmation
+= explicit USER confirmation when applicable authority/policy requires it
 
-Do not force every low-risk internal action to require a separate USER confirmation if the trusted action policy does not require it.
-Do require USER authority where the governing approval policy says it is required.
+Do not silently require repetitive confirmation for every low-risk internal step.
+Do not weaken approval requirements for high-impact/external/meaning-changing actions.
 
-This point needs implementation-policy clarification before changing current DONE behavior.
+This needs policy-level implementation reconciliation before current DONE semantics are changed.
 
-## 13. CURRENT / CANDIDATE lifecycle
+## 17. CURRENT / Candidate lifecycle
 
-Use existing lifecycle:
 CANDIDATE
 -> ACCEPTED_FOR_IMPLEMENTATION
 -> IMPLEMENTING
 -> VERIFYING
 -> PROMOTED / REJECTED / SUPERSEDED / HOLD
 
-CURRENT remains light.
-Promotion/removal from Active does not delete history.
+CURRENT contains live work only.
 
-Cross-chat/new research rule:
-new finding -> CURRENT/CANDIDATE first
-not directly into Canonical.
+PROMOTED/REJECTED/SUPERSEDED/CLOSED leaves Active CURRENT but retains a minimal immutable receipt.
 
-## 14. What current TAKY2 already does well
+New mining/chat findings:
+-> CURRENT/CANDIDATE first
+-> never directly into Canonical.
 
-Verified in current design/code review:
-- TAKY top-level identity preserved
-- Shepherding subordinate
-- 5 hard gates preserved
-- trusted USER Key provenance
-- route fingerprint / same-failure protection
-- external call policy and call-count/model/effort restrictions
-- receipt-bound execution/evidence
-- executor cannot self-certify
-- verification tiering
-- explicit USER stop
-- rollback/tamper protection
-- USER != DEBUGGER guidance
-- CURRENT/Candidate operational surface
+## 18. Startup / resume gate
 
-These must not be weakened while adding V3 implementation deltas.
+New material work should read:
+1. [START HERE] Premise
+2. [CANONICAL] Unified Standards
+3. Systemwide V2 Canonical
+4. [CURRENT] Candidate Progress
+5. final integrated V3 Candidate when working on current OPEN implementation reconciliation
 
-## 15. Material gaps found
+For AI-related work additionally read:
+6. AI_MINING_INDEX_LEARNING_FINAL_INTEGRATION_20261006
+7. AI_CURRENT_QUEST_RESUME
+8. AI_OPEN_QUEST_CURRENT
+9. only task-matched detail/evidence
 
-### P0-1 ROLE != AGENT is not fully enforced
-Runtime still hard-binds verifier/reviewer role labels to CODEX/CLAUDE.
+Do not reread all mining/history by default.
 
-### P0-2 semantic_owner is not first-class in material action/receipt/DONE
-Alpha meaning exists, runtime binding is missing.
+Machine-readable startup readback receipt / mutation enforcement remains OPEN.
 
-### P0-3 Driver/SAVEY_AI_ECONOMY is still mostly policy text
-COST enforces trusted call constraints but does not yet evaluate:
-Necessity -> Reuse -> lowest sufficient capability -> throttle/resume.
+## 19. Material implementation gaps
 
-### P1-1 control roles are labels, not structured runtime functions/traces
-Do not solve this by creating four mandatory AI calls.
+### P0-1 ROLE != AGENT not fully enforced
+Current TAKY2 still uses actor-specific verifier/reviewer labels.
 
-### P1-2 worker-role profiles are not structured reusable contracts
-Do not solve this by forcing an 8-stage pipeline.
+### P0-2 SEMANTIC_OWNER not first-class
+Need owner_ref/scope/version binding through action -> receipt -> DONE.
 
-### P1-3 whole-system owner registry is incomplete
-Explicit owner/pointer treatment is still needed for:
+### P0-3 DRIVER/SAVEY is not yet one runtime evaluator
+COST constraints exist, but Necessity/Reuse/Lowest-Sufficient/Throttle must share one implementation.
+
+### P0-4 AI collaboration projection conflict
+Untracked local collaboration protocol contains role bindings that can conflict with V2 if treated as authority.
+Reconcile as projection/default bindings, not ontology.
+
+### P1-1 CONTROL ROLE schema/trace
+Need machine-readable lightweight control decisions.
+Do not spawn one AI per role.
+
+### P1-2 WORKER ROLE profiles
+Need reusable profiles.
+Do not force an 8-stage pipeline.
+
+### P1-3 OWNER MAP completeness
+Register or explicitly gap:
 - SAVEY_FAMILY_FINANCE
 - TAKY Mobile
 - Badge
-- Explorer Crew exact current owner artifact
-- Piano Practice
+- Explorer Crew exact owner
+- Planner
+- Piano
+- Eunha Farm
 - other formalized downstream systems
 
-Unknown owner must remain UNKNOWN / OWNER_GAP.
+### P1-4 Beta/Alpha lineage manifest
+Do not guess equivalence among historical refs/snapshots.
 
-### P1-4 Alpha/Beta exact lineage requires a manifest
-Multiple references exist across frozen manifest, later comparison, old alpha branch and later integrated-alpha naming.
-Do not collapse by filename/date/branch guess.
+### P1-5 startup readback receipt
+Drive Premise/Canonical/CURRENT check remains operationally required; machine mutation-block receipt is still open.
 
-### P1-5 control incidents need minimal durable evidence
-For material redirect:
-cause / observed evidence / control function / route chosen / result / remaining unknown
+### P1-6 control incident evidence
+For material redirects record:
+cause / evidence / role decision / route / result / remaining unknown.
 
-### P1-6 startup readback gate is still not fully machine-enforced
-Drive Premise + Canonical + CURRENT readback is operationally required; mutation-block receipt enforcement remains open.
+### P1-7 completion-state reconciliation
+Technical delivery vs USER-confirmed state needs explicit policy.
 
-## 16. Minimal V3 implementation delta
 
-V3 is NOT a redesign of V2.
-V2 remains conceptual authority.
-V3 is an implementation reconciliation layer.
+## 20. Minimal implementation order
 
-Implement in this order:
+1. role_registry + default_actor_bindings separation
+2. semantic_owner first-class binding
+3. one SAVEY_AI_ECONOMY evaluator consumed by Driver and COST
+4. lightweight control-role / incident trace
+5. reusable Worker Role schema
+6. whole-system owner registry completion / explicit OWNER_GAP
+7. startup readback receipt
+8. technical-delivery vs user-confirmation reconciliation
+9. targeted negative tests
+10. full regression / compile / diff check
+11. independent review of concrete diff
+12. only then promotion / authority rebind if required
 
-1. ROLE REGISTRY / ACTOR BINDING SPLIT
-   - role ontology separate from default actors
-   - preserve backward compatibility
+Do NOT reopen already-closed TAKY2 authority/account/executor/verifier/user-event work unless a concrete regression proves it necessary.
 
-2. SEMANTIC OWNER BINDING
-   - owner_ref/scope/version in action + receipt + DONE
-   - negative tests for lower-layer meaning mutation
+## 21. Required tests
 
-3. ONE SAVEY_AI_ECONOMY EVALUATOR
-   - shared by Driver and COST
-   - Necessity / Reuse / Lowest-Sufficient / Batch / Throttle / Resume
-   - acceptance-quality floor
-
-4. CONTROL FUNCTION TRACE
-   - lightweight structured decisions
-   - no mandatory AI spawn per role
-
-5. WORKER ROLE PROFILES
-   - Scope/UX/Data/Build/Test/Fix/Release/Doc
-   - selected only when task-fit
-
-6. OWNER REGISTRY COMPLETION
-   - explicit owner or explicit OWNER_GAP
-   - include finance/mobile/badge/crew/piano and formalized downstreams
-
-7. STARTUP READBACK RECEIPT
-   - Premise / Canonical / CURRENT exact doc/revision evidence before material mutation
-
-8. COMPLETION-STATE RECONCILIATION
-   - technical delivery vs USER-confirmed state
-   - preserve approval policy, do not weaken human authority
-
-9. REGRESSION / INDEPENDENT REVIEW
-   - targeted + full regression
-   - diff check
-   - independent review on concrete diff
-
-10. PROMOTION
-   - only verified implementation items move from CURRENT to Canonical/implemented state
-
-## 17. Required regression fixtures
-
-- role != actor with alternate valid actor binding
+- alternate actor binding without role semantic change
 - executor != verifier
-- independent-review binding by role, not vendor name
-- missing semantic_owner -> block/redirect
-- stale/mismatched owner -> block/redirect
-- lower-layer owner takeover attempt -> fail
-- unnecessary external call -> skipped
-- reusable evidence available -> reuse
-- cheapest route below quality floor -> rejected
-- batch/parallel only when independent and evidence-safe
+- reviewer independence by role, not vendor name
+- missing/stale/mismatched semantic owner
+- lower-layer owner takeover attempt
+- unnecessary external call skipped
+- reusable evidence/context reused
+- lowest-cost route rejected when below acceptance quality
+- batch/parallel only when safe/independent
 - throttle repeated calls/retries
-- no sixth gate introduced
-- control role does not cause four extra model calls
-- worker roles are optional/task-fit
-- same-failure retry protection preserved
+- no sixth hard gate
+- control role does not imply four AI calls
+- worker roles selected task-fit only
+- same-failure retry protection remains
 - DONE remains evidence-bound
-- technical delivery / user confirmation states do not collapse
+- technical delivery != USER confirmation
 - old authority/receipt compatibility
-- whole-system owner coverage checker
-- Explorer Crew pointer recovery check
-- SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE namespace check
+- whole-system owner coverage
+- Explorer Crew owner recovery
+- SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE
+- AI Q3/Q4/Q5 current counts consistency
+- HTTP terminal success != substantive evidence
 - startup Drive readback mutation-block test
 - git diff --check
-- no false deploy/device/runtime claims
+- no false deployment/device/production claim
 
-## 18. What must NOT be done
+## 22. What must not happen
 
 - do not rewrite Beta
 - do not rebuild Alpha from scratch
 - do not make TAKY2 a semantic mega-framework
-- do not convert every control role into a permanent agent
+- do not convert control roles into permanent agents
 - do not add a sixth Necessity gate
-- do not let Driver optimize away acceptance quality
-- do not let Scout findings auto-promote
+- do not optimize away acceptance quality
+- do not auto-promote Scout/mining findings
 - do not let shared technical mechanisms take domain authority
-- do not let app implementation host become semantic owner
+- do not let implementation host become semantic owner
 - do not confuse SAVEY economy with SAVEY finance
+- do not treat HTTP 200/title/shell as learning evidence
+- do not treat local untracked “CANONICAL” labels as active authority
 - do not turn USER into debugger
-- do not re-run broad historical audits on every resume
-- do not push/merge/deploy without applicable explicit authorization
+- do not broad-reread history on every resume
+- do not push/merge/deploy without explicit applicable authority
 
-## 19. Recommended target architecture
+## 23. Final integrated statement
 
-HUMAN / KEY OWNER
-    |
-    v
-TAKY / GOVERNANCE
-    |
-    +-- ALPHA semantic owner resolution
-    |
-    +-- SHEPHERDING CONTROL PLANE
-    |     NAVIGATOR
-    |     GUARDIAN
-    |     DRIVER + SAVEY_AI_ECONOMY
-    |     SCOUT
-    |
-    +-- TAKY2 FIVE-GATE ENFORCEMENT
-    |     KEY / CONTEXT / ROUTE / COST / DONE
-    |
-    +-- WORK ROLE SELECTION
-    |     SCOPE / UX / DATA / BUILD / TEST / FIX / RELEASE / DOC
-    |
-    +-- SEMANTIC OWNER
-    |     MASTER / OS / DOMAIN / PROJECT / APP
-    |
-    +-- ACTOR / TOOL ROUTE
-    |     task-fit / necessity / lowest-sufficient capability
-    |
-    +-- EXECUTION
-    |
-    +-- EVIDENCE / VERIFICATION
-    |
-    +-- RESULT / REDIRECT / DELIVER
-    |
-    +-- CURRENT / HISTORY
-    |
-    v
-USER DECISION / CONTINUE
-
-## 20. Final candidate statement
-
-The optimal TAKY architecture is not Beta, Alpha or TAKY2 alone.
+TAKY is the top-level governance and orchestration system that preserves the human Key, authority, context, semantic ownership and evidence while coordinating specialized actors and tools.
 
 Beta preserves trust.
 Alpha preserves meaning and ownership.
 TAKY2 enforces cross-cutting invariants.
-MASTER/OS/DOMAIN/PROJECT owners preserve specialized logic.
-The Shepherding control plane keeps the collective on-course.
-Driver + SAVEY_AI_ECONOMY keeps progress efficient without lowering acceptance quality.
-Worker roles structure execution without hard-coding specific models.
-Actors and tools remain replaceable routes.
-Evidence and USER authority remain the final completion boundary.
 
-The objective is:
-THE INTENDED, VERIFIED RESULT
-WITH MINIMUM UNNECESSARY COST, REWORK, CONTEXT LOSS AND USER DEBUGGING BURDEN.
+The Shepherding Control Plane continuously manages:
+- Navigator = direction
+- Guardian = integrity
+- Driver + SAVEY_AI_ECONOMY = momentum and total-cost efficiency
+- Scout = relevant unknowns and evidence
+
+The Work Role Plane structures execution without hard-coding models.
+
+MASTER / OS / DOMAIN / PROJECT owners retain specialized meaning.
+
+AI Mining -> Index -> Learning contributes evidence and validated operating improvements, but does not bypass semantic ownership or Canonical promotion.
+
+The system should choose the minimum-sufficient role, actor, tool and evidence path, redirect recoverable drift before escalation, and accept completion only when evidence, semantic-owner boundaries and applicable USER authority align.
 
 END
