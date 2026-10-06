@@ -12,6 +12,10 @@ Mandatory Drive startup set:
 4. [CURRENT] TAKY_2.0_CURRENT_CANDIDATE_PROGRESS
    - document_id: 1Cb_nJ55KyKui1sAoc_yOgkTsQ-7vVNqM6Hr19LoNd1c
 
+Disposition history (not part of routine startup):
+- [HISTORY] TAKY_2.0_CURRENT_DISPOSITION_RECEIPTS
+  - document_id: 1X3gn2wK2Qb0hyOqEO-SLUYypvzMh2FEjSAlAxe-5iQ4
+
 Startup rule:
 - Read all four before implementation/mutation in a new chat.
 - Check PREMISE / CANONICAL / CURRENT / OPEN-ONLY.
