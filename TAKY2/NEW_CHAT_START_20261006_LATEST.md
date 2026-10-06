@@ -188,3 +188,12 @@ AI 관련 작업이면 AI_CURRENT_QUEST_RESUME + AI_OPEN_QUEST_CURRENT만 먼저
 USER!=DEBUGGER, 동일 실패 반복 금지, acceptance quality 하향 금지.
 push/merge/deploy는 별도 명시 승인 전 금지.
 DEEP MEMORY — LIGHT EXECUTION.
+
+## Claude implementation source gate
+
+Before Claude/Claude Code performs implementation/review that depends on inherited system meaning, read:
+- TAKY2/CLAUDE_BETA_ALPHA_SOURCE_GATE_20261006.md
+
+This gate provides exact Frozen Beta and Alpha source locations plus SAVEY task-matched read routing.
+It is an acceleration gate, not a new audit phase: read the lock/CURRENT first, then only task-relevant detail, and proceed to usable implementation.
+Netlify deploy/publish remains prohibited without explicit USER approval.
