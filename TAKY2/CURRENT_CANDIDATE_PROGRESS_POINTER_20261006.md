@@ -34,5 +34,6 @@ Current accepted OPEN categories include:
 - real HNS first-auth runtime E2E
 - cross-chat/source completeness audit
 - automatic startup-context gate
+- CUR-009 systemwide V3 implementation reconciliation candidate (two non-identical Drive candidate artifacts; V2 remains Canonical)
 
 Do not treat this local pointer as a substitute for Google Drive readback.

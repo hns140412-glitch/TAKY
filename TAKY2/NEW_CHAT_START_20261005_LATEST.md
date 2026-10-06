@@ -94,10 +94,34 @@ ACCOUNT TARGET BINDING 확정 방식:
 - Google Drive profile id를 OIDC principal로 추정 금지
 - 첫 인증 전 external write는 fail-closed
 
-### OPEN — RUNTIME ONLY
-`REAL HNS FIRST-AUTH SESSION / DEVICE E2E`
+### ACTIVE CURRENT — GOOGLE DRIVE CURRENT가 운영 권위
 
-이 항목은 실제 사용/로그인 시 자연스럽게 수행한다. USER에게 token/ID 복사나 디버깅을 요구하지 않는다.
+새 대화의 OPEN은 로컬 문서의 고정 목록보다 Google Drive
+`[CURRENT] TAKY_2.0_CURRENT_CANDIDATE_PROGRESS`를 우선한다.
+
+현재 재개 체크포인트:
+- CUR-001 CONTROL ROLE RUNTIME SCHEMA
+- CUR-002 SEMANTIC OWNER FIRST-CLASS BINDING
+- CUR-003 WORKER ROLE CONTRACTS
+- CUR-004 SAVEY_AI_ECONOMY SHARED POLICY
+- CUR-005 WHOLE-SYSTEM OWNER MAP COMPLETENESS
+- CUR-006 REAL HNS FIRST-AUTH SESSION / DEVICE E2E — actual login/use 시에만
+- CUR-007 CROSS-CHAT / SOURCE COMPLETENESS AUDIT
+- CUR-008 NEW-CHAT STARTUP CONTEXT GATE — 문서 Gate 적용됨, machine-readable receipt/mutation block OPEN
+- CUR-009 SYSTEMWIDE V3 IMPLEMENTATION RECONCILIATION — CANDIDATE / NOT CANONICAL
+
+V3 candidate evidence는 2개이며 exact duplicate가 아니다:
+- Drive A: `1FJkxaNOn_i9hEnS2UQzPFjbA7983ieXpdE7kPiMLj5U`
+- Drive B: `1Y7Nc-j0UI2380sBvyB5AWHoKBSp3rH9porh-787oSRw`
+- Local mirror: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V3_CANDIDATE_20261006.md`
+
+V2 Systemwide Canonical은 계속 authority다.
+V3는 구현 delta를 정합화하는 Candidate이며 구현·회귀·독립검토·USER 승격 전 Canonical로 취급하지 않는다.
+
+현재 미커밋 계정바인딩/브리지 작업과 V3 local candidate를 diff 확인 없이 reset/checkout/discard 하지 않는다.
+
+REAL HNS FIRST-AUTH는 실제 사용/로그인 시 자연스럽게 수행한다.
+USER에게 token/ID 복사나 디버깅을 요구하지 않는다.
 실제 첫 인증 시:
 `verified /api/family/session → FIRST_AUTH_RUNTIME bind → targeted preflight → runtime evidence → final regression`
 
