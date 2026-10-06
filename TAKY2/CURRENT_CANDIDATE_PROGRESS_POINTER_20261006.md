@@ -73,3 +73,27 @@ There is one active V3 candidate pointer now.
 - CUR-009 SYSTEMWIDE V3 IMPLEMENTATION RECONCILIATION — final integrated candidate / NOT CANONICAL
 
 Do not treat this local pointer as a substitute for Drive readback.
+
+## MASTER CLOSURE POINTER — CLOSED
+
+MASTER semantic reconciliation is CLOSED.
+
+Authority snapshot:
+- branch: `taky/master-logic-20261006-claude`
+- semantic commit: `1d0afb9b6b1ed8a04cbe44478f6d56bc29d01fce`
+- closure receipt commit: `ca33ec956bbc26380af7e85178eae194379b9724`
+- Claude Code final read-only decision: `CLOSE_WITH_NOTE`
+- blocking findings: `NONE`
+- master_logic_basis tests: `60/60 PASS`
+
+This supersedes any earlier local pointer that described MASTER as `VERIFYING` or `CODEX_REVERIFY_PENDING`.
+Codex is optional defense-in-depth after closure, not a blocker.
+
+MASTER semantic scope is not an Active OPEN category anymore.
+Keep V2 §8 runtime implementation work in CUR-001/002/003/004/005/008/009 as applicable without reopening MASTER meaning.
+
+Implementation priority after this pointer:
+actual usable webapp result, measured as
+`SCREEN -> INTERACTION -> DATA/STATE -> END-TO-END RESULT -> EVIDENCE`.
+
+No merge/push/deploy/Netlify publish is authorized by this pointer.

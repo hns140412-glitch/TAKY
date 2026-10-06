@@ -197,3 +197,29 @@ Before Claude/Claude Code performs implementation/review that depends on inherit
 This gate provides exact Frozen Beta and Alpha source locations plus SAVEY task-matched read routing.
 It is an acceleration gate, not a new audit phase: read the lock/CURRENT first, then only task-relevant detail, and proceed to usable implementation.
 Netlify deploy/publish remains prohibited without explicit USER approval.
+
+## MASTER semantic closure — CLOSED / 2026-10-06
+
+MASTER semantic/design reconciliation is CLOSED and SHALL NOT be reopened during normal webapp implementation.
+
+Closed semantic snapshot:
+- review branch: `taky/master-logic-20261006-claude`
+- semantic snapshot commit: `1d0afb9b6b1ed8a04cbe44478f6d56bc29d01fce`
+- closure receipt commit: `ca33ec956bbc26380af7e85178eae194379b9724`
+- receipt path in review branch: `HISTORY/2026-10-06_MASTER_LOGIC_V2_SEMANTIC_CLOSURE_RECEIPT.md`
+- Claude Code final closure review: `CLOSE_WITH_NOTE / BLOCKING FINDINGS NONE`
+- MASTER basis tests: `60/60 PASS`
+
+Important:
+- V2 remains Canonical Design Authority.
+- V3 remains Candidate.
+- MASTER closure is semantic/design closure, not a claim that V2 §8 runtime backlog is implemented.
+- validator adversarial hardening and existing TAKY2 runtime failures are separate follow-up and do not reopen MASTER meaning.
+- Codex re-verification is optional defense-in-depth, not a closure prerequisite.
+- no merge/push/deploy was performed.
+
+Next default:
+`MASTER CLOSED -> Alpha semantic owner -> relevant Frozen Beta defenses -> usable webapp vertical slice -> local browser/runtime/data-flow evidence -> proportional review`.
+
+Do not return to broad MASTER/Beta/Alpha re-audit without concrete contradictory evidence or explicit USER change.
+Netlify deploy/publish remains HARD STOP until explicit USER approval.
