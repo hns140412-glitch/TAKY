@@ -558,6 +558,11 @@ class DoneGateTests(unittest.TestCase):
             "critical_gaps": [],
             "required_verifications": ["technical", "intent"],
             "passed_verifications": ["technical", "intent"],
+            "evidence_refs": ["ev1"],
+            "verification_evidence": {
+                "technical": "ev1",
+                "intent": "ev1",
+            },
             "user_confirmation_ref": None,
         }
         t["evidence_registry"]["ev1"] = {
@@ -600,12 +605,40 @@ class DoneGateTests(unittest.TestCase):
             "actor": "USER",
             "kind": "confirmation",
             "receipt_id": rid,
+            "explicit": True,
             "verified_by": "ui-bridge",
         }
         t["completion_registry"][rid]["user_confirmation_ref"] = "u:confirm"
         self.assertTrue(
             done_gate(t, {"preflight_receipt": rid, "evidence_refs": ["ev1"]}).allowed
         )
+
+    def test_non_explicit_confirmation_event_cannot_confirm(self):
+        t, rid = self.ready()
+        t["user_events"]["u:implicit"] = {
+            "actor": "USER",
+            "kind": "confirmation",
+            "receipt_id": rid,
+            "explicit": False,
+            "verified_by": "ui-bridge",
+        }
+        t["completion_registry"][rid]["user_confirmation_ref"] = "u:implicit"
+        result = done_gate(
+            t,
+            {"preflight_receipt": rid, "evidence_refs": ["ev1"]},
+        )
+        self.assertFalse(result.allowed)
+        self.assertEqual(result.state, "DELIVERED_UNCONFIRMED")
+
+    def test_done_requires_predicate_to_evidence_binding(self):
+        t, rid = self.ready()
+        t["completion_registry"][rid]["verification_evidence"].pop("intent")
+        result = done_gate(
+            t,
+            {"preflight_receipt": rid, "evidence_refs": ["ev1"]},
+        )
+        self.assertEqual(result.state, "BLOCKED")
+        self.assertIn("predicates lack evidence bindings", result.reason)
 
     def test_consumed_receipt_cannot_be_reused(self):
         t, rid = self.ready()
@@ -650,6 +683,12 @@ class DoneGateTests(unittest.TestCase):
         t["completion_registry"][rid]["passed_verifications"] = [
             "structural", "technical", "intent", "independent"
         ]
+        t["completion_registry"][rid]["verification_evidence"] = {
+            "structural": "ev1",
+            "technical": "ev1",
+            "intent": "ev1",
+            "independent": "ev1",
+        }
         t["evidence_registry"]["ev1"]["verification_tier"] = "STRONG"
         t["evidence_registry"]["ev1"]["producer"] = "same-actor"
         t["evidence_registry"]["ev1"]["validator"] = "same-actor"

@@ -1,10 +1,11 @@
 import unittest
 
-from TAKY2.enforcement import action_digest, route_fingerprint
+from TAKY2.enforcement import action_digest, route_fingerprint, stable_hash
 from TAKY2.orchestration import guidance_for_failure, role_assignment
 from TAKY2.orchestrator import (
     consume_receipt,
     finalize,
+    persist_done_gate_receipt,
     persist_preflight,
     preflight,
     record_outcome,
@@ -44,6 +45,8 @@ def runtime_state():
         "execution_outcomes": {},
         "evidence_registry": {},
         "completion_registry": {},
+        "independent_review_registry": {},
+        "done_gate_receipts": {},
         "consumed_approvals": {},
         "user_events": {},
     }
@@ -308,6 +311,11 @@ class OrchestratorTests(unittest.TestCase):
             "critical_gaps": [],
             "required_verifications": ["technical", "intent"],
             "passed_verifications": ["technical", "intent"],
+            "evidence_refs": ["ev"],
+            "verification_evidence": {
+                "technical": "ev",
+                "intent": "ev",
+            },
             "user_confirmation_ref": None,
         }
         t["evidence_registry"]["ev"] = {
@@ -334,6 +342,29 @@ class OrchestratorTests(unittest.TestCase):
             t,
         )
         self.assertEqual(result["state"], "DELIVERED_UNCONFIRMED")
+
+    def test_done_gate_decision_is_persisted_with_validator_profile(self):
+        runtime = runtime_state()
+        out = {
+            "allowed": False,
+            "state": "NOT_DONE",
+            "reason": "missing evidence",
+            "evidence": [],
+            "validator_profile": {
+                "trigger": "BEFORE_PASS_DONE_OR_USER_CONFIRMED",
+                "primary": "AUTO",
+                "semantic": "AI_SEMANTIC",
+                "human_authority_condition": "USER_RESERVED_CONFIRMATION_OR_AUTHORITY_DECISION",
+                "receipt_custodian": "GUARDIAN",
+            },
+        }
+        report = {"preflight_receipt": "pf:missing", "evidence_refs": []}
+        updated = persist_done_gate_receipt(runtime, report, out)
+        self.assertEqual(len(updated["done_gate_receipts"]), 1)
+        stored = next(iter(updated["done_gate_receipts"].values()))
+        self.assertEqual(stored["state"], "NOT_DONE")
+        self.assertEqual(stored["validator_profile"]["primary"], "AUTO")
+        self.assertEqual(stored["report_digest"], stable_hash(report))
 
     def test_consumed_receipt_removes_execution_lock(self):
         runtime = runtime_state()

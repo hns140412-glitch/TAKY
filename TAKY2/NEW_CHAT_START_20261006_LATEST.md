@@ -223,3 +223,16 @@ Next default:
 
 Do not return to broad MASTER/Beta/Alpha re-audit without concrete contradictory evidence or explicit USER change.
 Netlify deploy/publish remains HARD STOP until explicit USER approval.
+
+## 공방검토 operational standard — 2026-10-06
+
+USER naming: **공방검토**.
+Definition/closure rules: `TAKY2/GONGBANG_REVIEW_PROTOCOL_V1.md`.
+Use when material work requires compare -> research/improve -> error/self/regression -> attack -> decision -> defense -> reattack -> CLOSE/HOLD.
+It is not a sixth Gate. For STRONG work, a real independent-review receipt is required; reviewer quota/runtime failure must be recorded as HOLD/PARTIAL rather than converted into PASS.
+
+## Latest Gongbang Review checkpoint
+
+- Receipt: `TAKY2/GONGBANG_REVIEW_RECEIPT_20261006.md`
+- INTERNAL/BASIC: CLOSE after defense + reattack + 110 passed / 51 subtests, py_compile PASS, diff-check PASS.
+- STRONG external-independent: HOLD because no actual attested external-review receipt was obtained; never convert reviewer unavailability into PASS.

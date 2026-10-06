@@ -62,6 +62,8 @@ class StateStoreTests(unittest.TestCase):
             "execution_outcomes": {},
             "evidence_registry": {},
             "completion_registry": {},
+            "independent_review_registry": {},
+            "done_gate_receipts": {},
             "consumed_approvals": {},
             "user_events": {},
         }

@@ -173,6 +173,8 @@ def load_bundle(
         "active_attempts": runtime.get("active_attempts", {}),
         "execution_outcomes": runtime.get("execution_outcomes", {}),
         "execution_calls": runtime.get("execution_calls", {}),
+        "independent_review_registry": runtime.get("independent_review_registry", {}),
+        "done_gate_receipts": runtime.get("done_gate_receipts", {}),
         "consumed_approvals": runtime.get("consumed_approvals", {}),
         "user_events": runtime.get("user_events", {}),
         "authority_rebind_history": runtime.get("authority_rebind_history", []),

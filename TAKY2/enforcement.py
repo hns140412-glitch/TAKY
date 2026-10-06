@@ -76,6 +76,7 @@ def trusted_user_event(
         and event.get("actor") == "USER"
         and event.get("kind") == kind
         and event.get("receipt_id") == receipt_id
+        and event.get("explicit") is True
         and isinstance(event.get("verified_by"), str)
         and bool(event.get("verified_by"))
     )
@@ -519,6 +520,23 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
     if not isinstance(refs, list) or not refs:
         return GateResult(False, "NOT_DONE", "NO EVIDENCE, NO DONE")
 
+    completion_refs = completion.get("evidence_refs", [])
+    if not isinstance(completion_refs, list) or not completion_refs:
+        return GateResult(False, "NOT_DONE", "completion evidence bindings missing")
+    if not set(completion_refs).issubset(set(refs)):
+        return GateResult(False, "NOT_DONE", "report omits completion-bound evidence")
+
+    verification_evidence = completion.get("verification_evidence", {})
+    if not isinstance(verification_evidence, Mapping):
+        return GateResult(False, "BLOCKED", "verification predicate bindings missing")
+    missing_predicates = sorted(required - set(verification_evidence))
+    if missing_predicates:
+        return GateResult(
+            False,
+            "BLOCKED",
+            "verification predicates lack evidence bindings: " + ",".join(missing_predicates),
+        )
+
     registry = trusted.get("evidence_registry", {})
     verified_refs = []
     for ref in refs:
@@ -574,6 +592,36 @@ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResu
             if expected_review and item.get("independent_reviewer") != expected_review:
                 return GateResult(False, "PARTIAL", f"STRONG independent review boundary missing: {ref}")
         verified_refs.append(str(ref))
+
+    verified_ref_set = set(verified_refs)
+    for predicate in required:
+        bound_ref = verification_evidence.get(predicate)
+        if not isinstance(bound_ref, str) or bound_ref not in verified_ref_set:
+            return GateResult(
+                False,
+                "NOT_DONE",
+                f"verification predicate evidence not accepted: {predicate}",
+            )
+        if predicate == "independent":
+            independent_item = registry.get(bound_ref)
+            if not isinstance(independent_item, Mapping):
+                return GateResult(False, "PARTIAL", "independent review evidence missing")
+            independent_type = independent_item.get("evidence_type", independent_item.get("type"))
+            if independent_type != "independent_review":
+                return GateResult(False, "PARTIAL", "independent predicate lacks independent review artifact")
+            review_registry = trusted.get("independent_review_registry", {})
+            review = (
+                review_registry.get(bound_ref)
+                if isinstance(review_registry, Mapping)
+                else None
+            )
+            if (
+                not isinstance(review, Mapping)
+                or review.get("acceptance_state") != ACCEPTED_EVIDENCE_STATE
+                or review.get("receipt_id") != receipt_id
+                or review.get("authority_digest") != receipt.get("authority_digest")
+            ):
+                return GateResult(False, "PARTIAL", "independent review receipt not accepted/bound")
 
     confirm_ref = completion.get("user_confirmation_ref")
     if confirm_ref:

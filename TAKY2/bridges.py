@@ -19,6 +19,11 @@ class BridgeViolation(RuntimeError):
     pass
 
 
+EXECUTION_EVIDENCE_TYPES = {
+    "tool_output", "artifact", "diff", "runtime_test", "state_snapshot",
+}
+
+
 def _empty_ledger() -> dict[str, Any]:
     return {
         "route_budget": 3,
@@ -285,6 +290,114 @@ def execute_with_receipt(
     return updated, result
 
 
+def record_independent_review(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    review: Mapping[str, Any],
+    *,
+    reviewer_id: str,
+    review_verifier: Callable[
+        [Mapping[str, Any], Mapping[str, Any], Mapping[str, Any]], bool
+    ],
+    review_verifier_id: str,
+) -> dict[str, Any]:
+    receipt = _receipt(runtime, receipt_id)
+    call_record = runtime.get("execution_calls", {}).get(receipt_id)
+    if not isinstance(call_record, Mapping):
+        raise BridgeViolation("executor result missing before independent review")
+    if not isinstance(review, Mapping):
+        raise BridgeViolation("independent review must be an object")
+    if not isinstance(reviewer_id, str) or not reviewer_id.strip():
+        raise BridgeViolation("independent reviewer_id required")
+    if not callable(review_verifier):
+        raise BridgeViolation("independent review attestation verifier required")
+    if not isinstance(review_verifier_id, str) or not review_verifier_id.strip():
+        raise BridgeViolation("independent review verifier_id required")
+    if review_verifier(review, receipt, call_record) is not True:
+        raise BridgeViolation("independent review attestation verification failed")
+
+    orchestration = receipt.get("orchestration", {})
+    if not isinstance(orchestration, Mapping):
+        raise BridgeViolation("receipt orchestration binding missing")
+    expected_role = orchestration.get("independent_reviewer")
+    if review.get("reviewer_role") != expected_role:
+        raise BridgeViolation("independent review must use receipt-bound reviewer role")
+
+    reviewer_id = reviewer_id.strip()
+    review_verifier_id = review_verifier_id.strip()
+    if reviewer_id == call_record.get("executor_id"):
+        raise BridgeViolation("executor cannot act as independent reviewer")
+    if review_verifier_id in {reviewer_id, call_record.get("executor_id")}:
+        raise BridgeViolation("independent review attestation verifier must be separate")
+
+    evidence_ref = review.get("evidence_ref")
+    source_ref = review.get("source_or_artifact_ref")
+    if not isinstance(evidence_ref, str) or not evidence_ref.strip():
+        raise BridgeViolation("independent review evidence_ref required")
+    evidence_ref = evidence_ref.strip()
+    if not isinstance(source_ref, str) or not source_ref.strip():
+        raise BridgeViolation("independent review source/artifact ref required")
+    if review.get("receipt_id") != receipt_id:
+        raise BridgeViolation("independent review is not receipt-bound")
+    if review.get("target_result_digest") != call_record.get("result_digest"):
+        raise BridgeViolation("independent review target result mismatch")
+    if review.get("authority_digest") != receipt.get("authority_digest"):
+        raise BridgeViolation("independent review authority mismatch")
+
+    critical_gaps = review.get("critical_gaps", [])
+    if not isinstance(critical_gaps, list):
+        raise BridgeViolation("independent review critical_gaps must be a list")
+    passed = review.get("passed") is True and not critical_gaps
+    acceptance_state = "ACCEPTED" if passed else "REJECTED"
+    review_digest = stable_hash(dict(review))
+
+    updated = deepcopy(dict(runtime))
+    review_registry = updated.setdefault("independent_review_registry", {})
+    evidence_registry = updated.setdefault("evidence_registry", {})
+    if evidence_ref in review_registry or evidence_ref in evidence_registry:
+        raise BridgeViolation("independent review evidence_ref already exists")
+
+    review_entry = {
+        "receipt_id": receipt_id,
+        "reviewer_role": expected_role,
+        "reviewer_id": reviewer_id,
+        "bridge_id": review_verifier_id,
+        "acceptance_state": acceptance_state,
+        "critical_gaps": list(critical_gaps),
+        "target_result_digest": call_record.get("result_digest"),
+        "authority_digest": receipt.get("authority_digest"),
+        "execution_scope": receipt.get("execution_scope"),
+        "source_or_artifact_ref": source_ref.strip(),
+        "review_digest": review_digest,
+    }
+    review_registry[evidence_ref] = review_entry
+    evidence_registry[evidence_ref] = {
+        "type": "independent_review",
+        "evidence_type": "independent_review",
+        "verified": True,
+        "acceptance_state": acceptance_state,
+        "claim_supported": "independent_review",
+        "scope": receipt.get("execution_scope"),
+        "producer": reviewer_id,
+        "validator": review_verifier_id,
+        "verified_by": review_verifier_id,
+        "verifier_role": expected_role,
+        "independent_reviewer": expected_role,
+        "independent_reviewer_id": reviewer_id,
+        "source_or_artifact_ref": source_ref.strip(),
+        "revision_or_hash": review_digest,
+        "authority_digest_or_key_version": receipt.get("authority_digest"),
+        "verification_tier": receipt.get("verification_tier", "STANDARD"),
+        "source_status": "CURRENT",
+        "receipt_id": receipt_id,
+        "plan_digest": receipt.get("plan_digest"),
+        "action_digest": receipt.get("action_digest"),
+        "call_digest": receipt.get("call_digest"),
+        "result_digest": call_record.get("result_digest"),
+    }
+    return updated
+
+
 def verify_execution(
     runtime: Mapping[str, Any],
     receipt_id: str,
@@ -320,6 +433,8 @@ def verify_execution(
         raise BridgeViolation("verifier evidence_ref required")
     if evidence_type not in VALID_EVIDENCE_TYPES:
         raise BridgeViolation("unsupported verifier evidence type")
+    if evidence_type not in EXECUTION_EVIDENCE_TYPES:
+        raise BridgeViolation("execution verifier cannot launder non-execution evidence type")
 
     updated = deepcopy(dict(runtime))
     outcomes = updated.setdefault("execution_outcomes", {})
@@ -352,12 +467,47 @@ def verify_execution(
     )
     if not minimum.issubset(set(required)):
         raise BridgeViolation("verifier under-specifies required verification tier")
+
+    independent_review_ref = None
+    independent_review = None
     if "independent" in set(required):
         expected_reviewer = orchestration.get("independent_reviewer")
         if verdict.get("independent_reviewer") != expected_reviewer:
             raise BridgeViolation(
                 "independent verification must be owned by receipt-bound CLAUDE role"
             )
+        independent_review_ref = verdict.get("independent_review_ref")
+        if not isinstance(independent_review_ref, str) or not independent_review_ref.strip():
+            raise BridgeViolation("STRONG verification requires independent review receipt")
+        independent_review_ref = independent_review_ref.strip()
+        review_registry = runtime.get("independent_review_registry", {})
+        independent_review = (
+            review_registry.get(independent_review_ref)
+            if isinstance(review_registry, Mapping)
+            else None
+        )
+        if not isinstance(independent_review, Mapping):
+            raise BridgeViolation("independent review receipt missing")
+        if independent_review.get("receipt_id") != receipt_id:
+            raise BridgeViolation("independent review receipt mismatch")
+        if independent_review.get("reviewer_role") != expected_reviewer:
+            raise BridgeViolation("independent reviewer role mismatch")
+        if independent_review.get("acceptance_state") != "ACCEPTED":
+            raise BridgeViolation("independent review is not accepted")
+        if independent_review.get("target_result_digest") != call_record.get("result_digest"):
+            raise BridgeViolation("independent review target result mismatch")
+        if independent_review.get("authority_digest") != receipt.get("authority_digest"):
+            raise BridgeViolation("independent review authority mismatch")
+        if independent_review.get("execution_scope") != receipt.get("execution_scope"):
+            raise BridgeViolation("independent review scope mismatch")
+        independent_reviewer_id = independent_review.get("reviewer_id")
+        if not isinstance(independent_reviewer_id, str) or not independent_reviewer_id.strip():
+            raise BridgeViolation("independent reviewer identity missing")
+        if independent_reviewer_id.strip() == call_record.get("executor_id"):
+            raise BridgeViolation("executor cannot act as independent reviewer")
+        if independent_reviewer_id.strip() == verifier_id.strip():
+            raise BridgeViolation("primary verifier cannot also be independent reviewer")
+
     if verdict.get("key_match") is not True:
         raise BridgeViolation("verifier did not confirm Key match")
     if gaps:
@@ -368,6 +518,13 @@ def verify_execution(
     outcomes[receipt_id] = "SUCCESS"
     if execution_key in active:
         active[execution_key]["status"] = "SUCCESS"
+
+    evidence_refs = [evidence_ref]
+    verification_evidence = {name: evidence_ref for name in passed}
+    if independent_review_ref is not None:
+        if independent_review_ref not in evidence_refs:
+            evidence_refs.append(independent_review_ref)
+        verification_evidence["independent"] = independent_review_ref
 
     updated.setdefault("evidence_registry", {})[evidence_ref] = {
         "type": evidence_type,
@@ -381,11 +538,12 @@ def verify_execution(
         "verified_by": verifier_id.strip(),
         "verifier_role": verdict.get("verifier_role"),
         "independent_reviewer": verdict.get("independent_reviewer"),
+        "independent_review_ref": independent_review_ref,
         "source_or_artifact_ref": evidence_ref,
         "revision_or_hash": call_record.get("result_digest"),
         "authority_digest_or_key_version": receipt.get("authority_digest"),
         "verification_tier": receipt.get("verification_tier", "STANDARD"),
-        "source_status": str(verdict.get("source_status") or "CURRENT"),
+        "source_status": "CURRENT",
         "receipt_id": receipt_id,
         "plan_digest": receipt.get("plan_digest"),
         "action_digest": receipt.get("action_digest"),
@@ -398,13 +556,15 @@ def verify_execution(
         "call_digest": receipt.get("call_digest"),
         "authority_digest": receipt.get("authority_digest"),
         "verification_tier": receipt.get("verification_tier", "STANDARD"),
-        "evidence_refs": [evidence_ref],
+        "evidence_refs": evidence_refs,
+        "verification_evidence": verification_evidence,
         "key_match": True,
         "critical_gaps": [],
         "required_verifications": list(required),
         "passed_verifications": list(passed),
         "verifier_role": verdict.get("verifier_role"),
         "independent_reviewer": verdict.get("independent_reviewer"),
+        "independent_review_ref": independent_review_ref,
         "user_confirmation_ref": None,
         "verified_by": verifier_id.strip(),
     }

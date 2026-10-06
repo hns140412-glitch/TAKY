@@ -377,7 +377,41 @@ def finalize(report: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str,
         "state": result.state,
         "reason": result.reason,
         "evidence": list(result.evidence),
+        "validator_profile": validator_profile("DONE"),
     }
+
+
+def persist_done_gate_receipt(
+    runtime: Mapping[str, Any],
+    report: Mapping[str, Any],
+    out: Mapping[str, Any],
+) -> Dict[str, Any]:
+    updated = deepcopy(dict(runtime))
+    receipt_id = report.get("preflight_receipt")
+    receipt = updated.get("preflight_receipts", {}).get(receipt_id)
+    authority_digest = (
+        receipt.get("authority_digest")
+        if isinstance(receipt, Mapping)
+        else updated.get("authority_digest")
+    )
+    decision_id = "done:" + stable_hash({
+        "receipt_id": receipt_id,
+        "report": dict(report),
+        "state": out.get("state"),
+        "authority_digest": authority_digest,
+    })
+    updated.setdefault("done_gate_receipts", {})[decision_id] = {
+        "decision_id": decision_id,
+        "receipt_id": receipt_id,
+        "allowed": bool(out.get("allowed")),
+        "state": out.get("state"),
+        "reason": out.get("reason"),
+        "evidence": list(out.get("evidence", [])),
+        "validator_profile": deepcopy(dict(out.get("validator_profile", {}))),
+        "authority_digest": authority_digest,
+        "report_digest": stable_hash(dict(report)),
+    }
+    return updated
 
 
 def consume_receipt(runtime: Mapping[str, Any], receipt_id: str) -> Dict[str, Any]:
@@ -492,14 +526,15 @@ def main() -> int:
 
     report = _load_json(args.report_json)
     out = finalize(report, trusted)
+    updated = persist_done_gate_receipt(runtime, report, out)
     if out.get("state") == "USER_CONFIRMED":
         rid = report.get("preflight_receipt")
-        updated = consume_receipt(runtime, rid)
-        save_runtime(
-            updated,
-            expected_version=runtime["runtime_version"],
-            authority_digest_value=auth_digest,
-        )
+        updated = consume_receipt(updated, rid)
+    save_runtime(
+        updated,
+        expected_version=runtime["runtime_version"],
+        authority_digest_value=auth_digest,
+    )
     print(json.dumps(out, ensure_ascii=False, indent=2))
     return 0 if out.get("allowed") else 2
 

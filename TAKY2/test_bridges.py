@@ -7,6 +7,7 @@ from TAKY2.bridges import (
     BridgeViolation,
     bind_account_attestation,
     execute_with_receipt,
+    record_independent_review,
     record_user_confirmation,
     record_user_stop,
     verify_execution,
@@ -40,6 +41,8 @@ def overlay_runtime(base, runtime):
         "execution_calls",
         "evidence_registry",
         "completion_registry",
+        "independent_review_registry",
+        "done_gate_receipts",
         "consumed_approvals",
         "user_events",
     ):
@@ -490,6 +493,183 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 verifier_id="ui-bridge",
             )
 
+    def test_strong_verification_rejects_string_only_independent_reviewer(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime, _ = execute_with_receipt(
+            runtime,
+            rid,
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaisesRegex(
+            BridgeViolation,
+            "independent review receipt",
+        ):
+            verify_execution(
+                runtime,
+                rid,
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:string-only",
+                    "evidence_type": "runtime_test",
+                    "verifier_role": "CODEX",
+                    "independent_reviewer": "CLAUDE",
+                    "key_match": True,
+                    "required_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "passed_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "critical_gaps": [],
+                },
+                verifier_id="verifier-1",
+            )
+
+    def test_independent_review_requires_verified_attestation(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime, _ = execute_with_receipt(
+            runtime,
+            rid,
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        review = {
+            "reviewer_role": "CLAUDE",
+            "receipt_id": rid,
+            "evidence_ref": "review:unverified",
+            "source_or_artifact_ref": "claude:review:unverified",
+            "target_result_digest": runtime["execution_calls"][rid]["result_digest"],
+            "authority_digest": runtime["preflight_receipts"][rid]["authority_digest"],
+            "passed": True,
+            "critical_gaps": [],
+        }
+        with self.assertRaisesRegex(
+            BridgeViolation,
+            "attestation verification failed",
+        ):
+            record_independent_review(
+                runtime,
+                rid,
+                review,
+                reviewer_id="claude-session-1",
+                review_verifier=lambda review, receipt, call: False,
+                review_verifier_id="claude-review-bridge",
+            )
+
+    def test_independent_review_rejects_wrong_target_digest(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime, _ = execute_with_receipt(
+            runtime,
+            rid,
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaisesRegex(BridgeViolation, "target result mismatch"):
+            record_independent_review(
+                runtime,
+                rid,
+                {
+                    "reviewer_role": "CLAUDE",
+                    "receipt_id": rid,
+                    "evidence_ref": "review:wrong-digest",
+                    "source_or_artifact_ref": "claude:review:wrong-digest",
+                    "target_result_digest": "wrong",
+                    "authority_digest": runtime["preflight_receipts"][rid]["authority_digest"],
+                    "passed": True,
+                    "critical_gaps": [],
+                },
+                reviewer_id="claude-session-1",
+                review_verifier=lambda review, receipt, call: True,
+                review_verifier_id="claude-review-bridge",
+            )
+
+    def test_primary_verifier_cannot_also_be_independent_reviewer(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime, _ = execute_with_receipt(
+            runtime,
+            rid,
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        runtime = record_independent_review(
+            runtime,
+            rid,
+            {
+                "reviewer_role": "CLAUDE",
+                "receipt_id": rid,
+                "evidence_ref": "review:same-verifier",
+                "source_or_artifact_ref": "claude:review:same-verifier",
+                "target_result_digest": runtime["execution_calls"][rid]["result_digest"],
+                "authority_digest": runtime["preflight_receipts"][rid]["authority_digest"],
+                "passed": True,
+                "critical_gaps": [],
+            },
+            reviewer_id="same-verifier",
+            review_verifier=lambda review, receipt, call: True,
+            review_verifier_id="claude-review-bridge",
+        )
+        with self.assertRaisesRegex(
+            BridgeViolation,
+            "primary verifier cannot also be independent reviewer",
+        ):
+            verify_execution(
+                runtime,
+                rid,
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:same-verifier",
+                    "evidence_type": "runtime_test",
+                    "verifier_role": "CODEX",
+                    "independent_reviewer": "CLAUDE",
+                    "independent_review_ref": "review:same-verifier",
+                    "key_match": True,
+                    "required_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "passed_verifications": [
+                        "structural", "technical", "intent", "independent"
+                    ],
+                    "critical_gaps": [],
+                },
+                verifier_id="same-verifier",
+            )
+
+    def test_execution_verifier_cannot_launder_independent_review_type(self):
+        base, runtime, out = self.prepared()
+        rid = out["receipt_id"]
+        runtime, _ = execute_with_receipt(
+            runtime,
+            rid,
+            self.invocation(),
+            runner=lambda invocation: {"returncode": 0},
+            executor_id="executor-1",
+        )
+        with self.assertRaisesRegex(BridgeViolation, "cannot launder"):
+            verify_execution(
+                runtime,
+                rid,
+                verifier=lambda call, receipt: {
+                    "passed": True,
+                    "evidence_ref": "ev:laundered",
+                    "evidence_type": "independent_review",
+                    "verifier_role": "CODEX",
+                    "key_match": True,
+                    "required_verifications": ["technical", "intent"],
+                    "passed_verifications": ["technical", "intent"],
+                    "critical_gaps": [],
+                },
+                verifier_id="verifier-1",
+            )
+
     def test_full_integration_e2e_reaches_user_confirmed(self):
         base, runtime, out = self.prepared()
         rid = out["receipt_id"]
@@ -507,6 +687,24 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
         )
         self.assertNotIn(rid, runtime["execution_outcomes"])
 
+        runtime = record_independent_review(
+            runtime,
+            rid,
+            {
+                "reviewer_role": "CLAUDE",
+                "receipt_id": rid,
+                "evidence_ref": "review:e2e",
+                "source_or_artifact_ref": "claude:review:e2e",
+                "target_result_digest": runtime["execution_calls"][rid]["result_digest"],
+                "authority_digest": runtime["preflight_receipts"][rid]["authority_digest"],
+                "passed": True,
+                "critical_gaps": [],
+            },
+            reviewer_id="claude-session-1",
+            review_verifier=lambda review, receipt, call: True,
+            review_verifier_id="claude-review-bridge",
+        )
+
         runtime = verify_execution(
             runtime,
             rid,
@@ -516,6 +714,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "evidence_type": "runtime_test",
                 "verifier_role": "CODEX",
                 "independent_reviewer": "CLAUDE",
+                "independent_review_ref": "review:e2e",
                 "key_match": True,
                 "required_verifications": [
                     "structural", "technical", "intent", "independent"
@@ -529,7 +728,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
         )
 
         delivered = finalize(
-            {"preflight_receipt": rid, "evidence_refs": ["ev:e2e"]},
+            {"preflight_receipt": rid, "evidence_refs": ["ev:e2e", "review:e2e"]},
             overlay_runtime(base, runtime),
         )
         self.assertEqual(delivered["state"], "DELIVERED_UNCONFIRMED")
@@ -548,7 +747,7 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
             verifier_id="ui-bridge",
         )
         confirmed = finalize(
-            {"preflight_receipt": rid, "evidence_refs": ["ev:e2e"]},
+            {"preflight_receipt": rid, "evidence_refs": ["ev:e2e", "review:e2e"]},
             overlay_runtime(base, runtime),
         )
         self.assertTrue(confirmed["allowed"])
