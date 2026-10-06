@@ -1,6 +1,21 @@
 # TAKY 2.0 — NEW CHAT START / SHEPHERDING COOPERATIVE LATEST
 
 ## COPY / RESUME
+
+### MANDATORY GOOGLE DRIVE STARTUP GATE
+
+Before any implementation, document mutation, code change, or external call in a new chat, read back these Google Drive shared-folder documents in order:
+
+1. `[START HERE] TAKY_2.0_NEW_CHAT_START_AND_WORKING_PREMISE`
+2. `[CANONICAL] TAKY_2.0_UNIFIED_STANDARDS_AND_RULES`
+3. `TAKY_2.0_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006`
+4. `[CURRENT] TAKY_2.0_CURRENT_CANDIDATE_PROGRESS`
+
+Required checks: `PREMISE / CANONICAL / CURRENT / OPEN-ONLY`.
+
+If Drive readback is unavailable, do not start implementation/mutation from memory alone. Safe inspection/recovery only until CURRENT is confirmed.
+CLOSED/PROMOTED items removed from CURRENT must not be silently reopened.
+
 최신 TAKY 2.0 별도 브랜치 기준으로 재개해.
 
 먼저 `TAKY2/NEW_CHAT_START_20261005_LATEST.md`와 현재 HEAD만 확인하고, CLOSED는 그대로 상속해. 전체 Beta/Alpha 재감사·전제문서 반복 재독·이미 끝난 Gate 재구현은 하지 말고 OPEN만 진행해.

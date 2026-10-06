@@ -666,4 +666,25 @@ Domain/OS/project owners retain their own meaning.
 The objective is not maximum control activity.
 The objective is the intended, verified result with minimum unnecessary cost, rework and user-debugging burden.
 
+## 19. CURRENT / CANDIDATE operational surface
+
+TAKY keeps confirmed authority and unresolved work separate.
+
+Google Drive operational source:
+`[CURRENT] TAKY_2.0_CURRENT_CANDIDATE_PROGRESS`
+
+Lifecycle:
+`CANDIDATE -> ACCEPTED_FOR_IMPLEMENTATION -> IMPLEMENTING -> VERIFYING -> PROMOTED / REJECTED / SUPERSEDED / HOLD`
+
+Rules:
+- New ideas, cross-chat findings, mining results, and proposed corrections enter CURRENT/CANDIDATE before Canonical.
+- PROMOTED / REJECTED / SUPERSEDED / CLOSED entries are removed from Active CURRENT.
+- Removal from Active is not history deletion. Retain minimal immutable receipt: ID / disposition / date / destination / evidence pointer / authority reference.
+- CURRENT contains only live work and must stay lightweight.
+- New chats must read Google Drive Premise + Canonical + CURRENT before implementation and proceed OPEN-only.
+- Memory or an old chat is not sufficient startup authority when Drive CURRENT is available.
+- If CURRENT conflicts with Canonical, Canonical wins and the conflict is recorded as a CURRENT CONFLICT item.
+
+`DEEP MEMORY — LIGHT EXECUTION`.
+
 END
