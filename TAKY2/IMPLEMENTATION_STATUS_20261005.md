@@ -2,18 +2,19 @@
 
 ## AUTHORITY
 - Branch: `taky-2.0-orchestrator-2026-10-05`
-- Resume baseline: `2ca535dd7cddbe90995af5d7d293dc7f8f0633fe`
-- Current HEAD is authoritative after this implementation commit.
+- Canonical promotion is intended to be locally committed on this branch; current SHA is verified with `git rev-parse HEAD`.
+- Additional unrelated/ongoing worktree changes may remain. Do not reset/discard them without diff review. Push/merge remain separately gated.
 - Push / merge / deploy: NOT AUTHORIZED / NOT DONE.
 
-## BORDER COLLIE ORCHESTRATION — AUTHORITY BOUND
-Parent slogans:
+## SHEPHERDING COOPERATIVE EXECUTION MODEL — AUTHORITY BOUND
+TAKY parent slogans:
 - Think Again, Keep Your Key.
 - Think Again, You're The Key.
 
 Execution definition:
-- ChatGPT / TAKY = BORDER COLLIE ORCHESTRATOR
-- CODE_WRITER = implementation
+- TAKY = TOP-LEVEL SYSTEM / GOVERNANCE FRAMEWORK
+- ChatGPT = LEAD ORCHESTRATOR inside the subordinate shepherding cooperative execution model
+- CODE_WRITER = implementation role category; actual implementer actor is assigned per task by TASK_FIT_NECESSITY
 - Codex = verification
 - Claude = independent review
 - USER = Key Owner / Final Authority
@@ -21,7 +22,7 @@ Execution definition:
 - Default failure behavior = REDIRECT_BEFORE_ESCALATE
 - Gate exists to detect wrong direction and guide toward the correct result, not to stop work as an end in itself.
 - Runtime authority digest rebound after contract registration.
-- Definition: `TAKY2/BORDER_COLLIE_ORCHESTRATION_V1.md`
+- Definition: `TAKY2/SHEPHERDING_COOPERATIVE_EXECUTION_MODEL_V1.md`
 
 ## ROLE SPLIT — UNCHANGED
 - Beta = evidence freeze
@@ -54,20 +55,30 @@ Implemented explicit staged migration:
   - changed source_ref must resolve to trusted USER evidence
   - signed old/new Key diff is retained in rebind history
 
-### 2. ACCOUNT ATTESTATION — BRIDGE CLOSED / PRODUCTION TARGET BINDING OPEN
+### 2. ACCOUNT ATTESTATION + FIRST-AUTH TARGET BINDING — IMPLEMENTATION CLOSED
 Implemented:
 - authenticated account evidence verifier callback is mandatory
-- account must match AUTHORIZED_TARGET
-- source/evidence_ref/session_id/verified_by are mandatory
+- account alias must match USER-authorized `AUTHORIZED_TARGET`
+- first verified central family session binds the target at runtime; no static alias/family pre-map is required
+- required stable identity = `identity_provider + principal_id + family_id + self_member_id`
+- binding records `binding_mode=FIRST_AUTH_RUNTIME`
+- first binding evidence/session refs are preserved as the anchor
+- later login may refresh session/evidence only when the stable identity is unchanged
+- principal/family/member identity drift fails closed instead of silently rebinding
+- KEY gate rejects external writes unless the verified first-auth runtime binding and stable identity fields are present
+- source/evidence_ref/session_id/verified_by remain mandatory
 - KEY gate refuses minimal `verified:true` spoofing
 
-Production source review:
-- existing Ready & Set auth verifies Google ID token through central `/api/family/session`
-- it yields authenticated family/session identity
-- no repository authority mapping from `HNS` to a concrete family/session identity exists
-- global local search for literal `HNS` outside TAKY2 returned 0 matches
+Authority rule:
+- `HNS` remains the USER-stated logical target alias
+- actual Google/family/member identity is learned only from a verifier-approved `/api/family/session` response during real use
+- Google Drive profile id is never inferred to be the OIDC principal
+- before first authentication, external write remains fail-closed; after verified first authentication, the bound identity is reused
 
-Therefore no alias/family mapping was invented. External write remains fail-closed until an authority-owned binding exists.
+Runtime status:
+- implementation and fixture targeted E2E are complete
+- real HNS account login/device E2E is intentionally deferred until the user actually uses the auth flow
+- no token/ID copy or debugging action is required from USER
 
 ### 3. EXECUTOR WRAPPER — CLOSED
 Implemented:
@@ -107,8 +118,11 @@ Implemented:
 Verified chain:
 `attestation → preflight → persisted receipt → executor wrapper → independent verifier → DELIVERED_UNCONFIRMED → verified USER event → USER_CONFIRMED`
 
-Regression after Border Collie orchestration enforcement:
-- 63/63 PASS
+Regression after TAKY SYSTEMWIDE V2 CANONICAL authority promotion:
+- authority digest: `e92831fc4e23ff21c979`
+- runtime version: `9`
+- pytest: 93 passed + 36 subtests
+- canonical: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md`
 - py_compile PASS
 - git diff --check PASS
 - comparison evidence: `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
@@ -120,14 +134,14 @@ Verdict:
 - PASS: hard gates remain compact and executable
 - PASS: execution/verifier/user-event boundaries are now receipt-enforced
 - PASS: no Beta re-audit / Alpha rewrite
-- PASS: Claude/Codex calls = 0 because Necessity Gate did not justify them
-- PASS: Remote used only for current local branch inspection/edit/test
+- PASS: Remote used only for scoped local inspection/edit/test
 - PASS: push/merge/deploy untouched
-- PARTIAL: production ACCOUNT target binding cannot be completed without an authority mapping for `HNS`; fail-closed is preserved rather than guessing
-- 2026-10-06 evidence update: provider-authenticated HNS Google Drive profile = `hns140412@gmail.com` / profile id `102814704779691664323`; HNS Drive authority documents are confirmed, but no explicit `HNS -> GOOGLE_OIDC_VERIFIED principal_id -> family_id -> self_member_id` mapping exists
+- PASS: ACCOUNT TARGET BINDING no longer requires a static HNS-to-family pre-map; first verified auth session performs the binding
+- PASS: identity drift is fail-closed and same-identity session refresh is allowed
+- PASS: fixture targeted E2E `null attestation → first-auth bind → external-write preflight`
 - evidence: `TAKY2/ACCOUNT_TARGET_BINDING_EVIDENCE_20261006.md`
 
-## NEXT OPEN — ONLY
-`ACCOUNT TARGET BINDING: HNS alias ↔ authenticated central family/session identity authority`
+## NEXT OPEN — RUNTIME ONLY
+`REAL HNS FIRST-AUTH SESSION / DEVICE E2E`
 
-Actual attestation targeted E2E must wait for directly observed HNS `/api/family/session` identity evidence. Do not infer Google OIDC principal from the Drive profile id. Do not ask USER to debug; remain fail-closed until TAKY can observe authority evidence itself.
+This is intentionally deferred until actual use/login. Before first verified authentication, external write remains fail-closed. On first verified `/api/family/session` response, TAKY binds the stable identity and continues. Do not infer the Google OIDC principal from Drive profile metadata and do not ask USER to copy tokens/IDs or debug the session.

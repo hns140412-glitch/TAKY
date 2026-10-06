@@ -26,22 +26,61 @@ def ledger():
 def trusted():
     return {
         "_authority_digest": "auth1",
+        "system_identity": {
+            "name": "TAKY",
+            "identity_name": "TAKY_SYSTEM_IDENTITY",
+            "version": 1,
+            "source_ref": "u:taky-identity",
+            "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+            "slogans": [
+                "Think Again, Keep Your Key.",
+                "Think Again, You're The Key.",
+            ],
+            "key_owner": "USER",
+            "final_authority": "USER",
+            "user_not_debugger": True,
+            "execution_duty": "AI_COLLABORATION_GROUP",
+        },
         "orchestration_contract": {
-            "name": "BORDER_COLLIE_ORCHESTRATION",
+            "name": "TAKY_SHEPHERDING_COOPERATIVE_EXECUTION",
+            "version": 3,
+            "source_ref": "u:shepherding-model",
+            "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
+            "execution_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
+            "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+            "canonical_source_ref": "u:systemwide-canonical",
+            "control_roles": ["NAVIGATOR", "GUARDIAN", "DRIVER", "SCOUT"],
+            "economy_policy": "SAVEY_AI_ECONOMY",
             "purpose": "GUIDE_TO_RESULT",
             "roles": {
-                "orchestrator": "CHATGPT_TAKY_BORDER_COLLIE",
+                "orchestrator": "CHATGPT_LEAD_ORCHESTRATOR",
                 "implementer": "CODE_WRITER",
                 "verifier": "CODEX",
                 "independent_reviewer": "CLAUDE",
                 "final_authority": "USER"
             },
+            "role_policy": {
+                "implementer_assignment": "TASK_FIT_NECESSITY",
+                "role_labels_do_not_authorize_calls": True,
+                "implementer_is_role_category_not_fixed_model": True,
+                "role_not_agent": True,
+                "routing_does_not_transfer_semantic_ownership": True,
+                "semantic_owner_remains_domain_owner": True,
+            },
+            "implementation_status": {
+                "control_role_schema": "OPEN",
+                "semantic_owner_binding": "OPEN",
+                "worker_role_contracts": "OPEN",
+                "shared_savey_economy_policy": "OPEN",
+            },
             "guidance_loop": [
-                "DETECT", "CLASSIFY", "REDIRECT", "GUIDE", "VERIFY", "DELIVER"
+                "OBSERVE", "CLASSIFY", "ASSIGN", "EXECUTE",
+                "CROSS_CHECK", "REDIRECT", "VERIFY", "DELIVER"
             ],
             "gate_policy": {
                 "default": "REDIRECT_BEFORE_ESCALATE",
-                "user_not_debugger": True
+                "user_not_debugger": True,
+                "block_is_not_goal": True
             }
         },
         "key": {
@@ -73,6 +112,19 @@ def trusted():
             "u:class": {"actor": "USER", "kind": "authorization"},
             "u:approve": {"actor": "USER", "kind": "approval"},
             "u:approve2": {"actor": "USER", "kind": "approval"},
+            "u:taky-identity": {"actor": "USER", "kind": "statement"},
+            "u:shepherding-model": {"actor": "USER", "kind": "statement"},
+            "u:systemwide-canonical": {
+                "actor": "USER",
+                "kind": "statement",
+                "status": "CANONICAL",
+            },
+            "u:legacy-border-collie": {
+                "actor": "USER",
+                "kind": "statement",
+                "status": "SUPERSEDED",
+                "superseded_by": "u:shepherding-model",
+            },
         },
         "approvals": {},
         "action_registry": {
@@ -123,9 +175,16 @@ def trusted():
             "account_attestation": {
                 "account": "HNS",
                 "verified": True,
+                "binding_mode": "FIRST_AUTH_RUNTIME",
+                "identity_provider": "GOOGLE_OIDC_VERIFIED",
+                "principal_id": "google:sub-hns",
+                "family_id": "family-hns",
+                "self_member_id": "member-hns",
                 "source": "connector-test",
                 "evidence_ref": "auth:test",
                 "session_id": "session-test",
+                "first_bound_evidence_ref": "auth:test",
+                "first_bound_session_id": "session-test",
                 "verified_by": "auth-bridge",
             }
         },
@@ -148,13 +207,72 @@ def trusted():
 
 
 class KeyGateTests(unittest.TestCase):
-    def test_border_collie_contract_is_required(self):
+    def test_shepherding_cooperative_contract_is_required(self):
         t = trusted()
         t.pop("orchestration_contract")
         result = key_gate(t, {"action_id": "read"})
         self.assertFalse(result.allowed)
         self.assertEqual(result.state, "BLOCKED")
-        self.assertIn("Border Collie", result.reason)
+        self.assertIn("shepherding cooperative", result.reason)
+
+    def test_taky_system_identity_is_top_level_required(self):
+        t = trusted()
+        t.pop("system_identity")
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("top-level system identity", result.reason)
+
+    def test_parent_slogans_belong_to_taky_not_subordinate_contract(self):
+        t = trusted()
+        t["orchestration_contract"]["slogan_parent"] = [
+            "Think Again, Keep Your Key.",
+            "Think Again, You're The Key.",
+        ]
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("belong to TAKY system identity", result.reason)
+
+    def test_execution_model_must_reference_taky_system_identity(self):
+        t = trusted()
+        t["orchestration_contract"]["parent_system_ref"] = "OTHER_SYSTEM@1"
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("subordinate to TAKY", result.reason)
+
+    def test_systemwide_canonical_promotion_is_required(self):
+        t = trusted()
+        t["orchestration_contract"]["canonical_source_ref"] = "u:legacy-border-collie"
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("canonical reconciliation", result.reason)
+
+    def test_canonical_control_roles_are_not_agent_bindings(self):
+        t = trusted()
+        t["orchestration_contract"]["control_roles"] = [
+            "CHATGPT",
+            "CODEX",
+            "CLAUDE",
+            "SCOUT",
+        ]
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("control roles mismatch", result.reason)
+
+    def test_semantic_owner_must_remain_with_domain_owner(self):
+        t = trusted()
+        t["orchestration_contract"]["role_policy"][
+            "semantic_owner_remains_domain_owner"
+        ] = False
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("semantic owner boundary", result.reason)
+
+    def test_superseded_border_collie_source_cannot_be_live_contract_authority(self):
+        t = trusted()
+        t["orchestration_contract"]["source_ref"] = "u:legacy-border-collie"
+        result = key_gate(t, {"action_id": "read"})
+        self.assertFalse(result.allowed)
+        self.assertIn("trusted USER provenance", result.reason)
 
     def test_plan_cannot_self_describe_unregistered_action(self):
         self.assertEqual(
@@ -174,6 +292,45 @@ class KeyGateTests(unittest.TestCase):
             key_gate(t, {"action_id": "write"}).state,
             "BLOCKED",
         )
+
+    def test_external_write_requires_first_auth_runtime_binding_mode(self):
+        t = trusted()
+        t["runtime"]["account_attestation"]["binding_mode"] = "LEGACY"
+        result = key_gate(t, {"action_id": "write"})
+        self.assertEqual(result.state, "BLOCKED")
+        self.assertIn("first-auth", result.reason)
+
+    def test_external_write_requires_each_stable_binding_field(self):
+        for field in (
+            "identity_provider",
+            "principal_id",
+            "family_id",
+            "self_member_id",
+            "first_bound_evidence_ref",
+            "first_bound_session_id",
+        ):
+            with self.subTest(field=field):
+                t = trusted()
+                t["runtime"]["account_attestation"].pop(field)
+                result = key_gate(t, {"action_id": "write"})
+                self.assertEqual(result.state, "BLOCKED")
+                self.assertIn("runtime identity binding", result.reason)
+
+    def test_external_write_rejects_self_verified_binding(self):
+        for verifier_id in (
+            "HNS",
+            " HNS ",
+            "google:sub-hns",
+            " google:sub-hns ",
+            "member-hns",
+            " member-hns ",
+        ):
+            with self.subTest(verifier_id=verifier_id):
+                t = trusted()
+                t["runtime"]["account_attestation"]["verified_by"] = verifier_id
+                result = key_gate(t, {"action_id": "write"})
+                self.assertEqual(result.state, "BLOCKED")
+                self.assertIn("self-verify", result.reason)
 
     def test_authorized_write_does_not_burn_irrelevant_approval(self):
         t = trusted()

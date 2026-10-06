@@ -1,6 +1,7 @@
 import unittest
 
 from TAKY2.enforcement import action_digest, route_fingerprint
+from TAKY2.orchestration import guidance_for_failure, role_assignment
 from TAKY2.orchestrator import (
     consume_receipt,
     finalize,
@@ -19,9 +20,16 @@ def runtime_state():
             "account_attestation": {
                 "account": "HNS",
                 "verified": True,
+                "binding_mode": "FIRST_AUTH_RUNTIME",
+                "identity_provider": "GOOGLE_OIDC_VERIFIED",
+                "principal_id": "google:sub-hns",
+                "family_id": "family-hns",
+                "self_member_id": "member-hns",
                 "source": "connector-test",
                 "evidence_ref": "auth:test",
                 "session_id": "session-test",
+                "first_bound_evidence_ref": "auth:test",
+                "first_bound_session_id": "session-test",
                 "verified_by": "auth-bridge",
             }
         },
@@ -60,6 +68,63 @@ def plan(method="python", task_id="task-q002", action_id="read"):
 
 
 class OrchestratorTests(unittest.TestCase):
+    def test_role_category_is_stable_but_implementer_actor_is_task_assigned(self):
+        claude = role_assignment(
+            {"kind": "LOCAL_WRITE", "assigned_implementer": "CLAUDE_CODE"},
+            verification_tier="STANDARD",
+        )
+        local = role_assignment(
+            {"kind": "LOCAL_WRITE", "assigned_implementer": "LOCAL_CODE_WRITER"},
+            verification_tier="STANDARD",
+        )
+        self.assertEqual(claude["implementer_role"], "CODE_WRITER")
+        self.assertEqual(local["implementer_role"], "CODE_WRITER")
+        self.assertEqual(claude["implementer_actor"], "CLAUDE_CODE")
+        self.assertEqual(local["implementer_actor"], "LOCAL_CODE_WRITER")
+        self.assertNotEqual(claude["implementer_actor"], local["implementer_actor"])
+        self.assertEqual(
+            claude["implementer_assignment_policy"],
+            "TASK_FIT_NECESSITY",
+        )
+        self.assertEqual(
+            claude["available_control_roles"],
+            ["NAVIGATOR", "GUARDIAN", "DRIVER", "SCOUT"],
+        )
+        self.assertEqual(claude["economy_policy"], "SAVEY_AI_ECONOMY")
+        self.assertEqual(
+            claude["canonical_systemwide_ref"],
+            "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+        )
+
+    def test_recoverable_gate_state_redirects_instead_of_terminal_block(self):
+        guidance = guidance_for_failure(
+            "KEY",
+            "KEY_NOT_LOCKED",
+            "user-grounded intent missing",
+        )
+        self.assertEqual(guidance["mode"], "REDIRECT")
+        self.assertFalse(guidance["terminal"])
+        self.assertIn("trusted USER intent", guidance["next_action"])
+
+    def test_explicit_user_stop_is_terminal(self):
+        guidance = guidance_for_failure(
+            "DONE",
+            "ABANDONED",
+            "explicit USER stop",
+        )
+        self.assertEqual(guidance["mode"], "BLOCKED")
+        self.assertTrue(guidance["terminal"])
+        self.assertIn("USER stop", guidance["next_action"])
+
+    def test_preflight_key_not_locked_returns_redirect_guidance(self):
+        t = trusted()
+        t["key"].pop("USER_INTENT")
+        out = preflight(plan(), t)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "KEY")
+        self.assertEqual(out["mode"], "REDIRECT")
+        self.assertFalse(out["guidance"]["terminal"])
+
     def test_preflight_has_unique_receipt_and_local_only_mode(self):
         t = trusted()
         a = preflight(plan(), t)
@@ -69,7 +134,7 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(a["mode"], "LOCAL_ONLY")
         self.assertEqual(
             a["orchestration"]["orchestrator"],
-            "CHATGPT_TAKY_BORDER_COLLIE",
+            "CHATGPT_LEAD_ORCHESTRATOR",
         )
         self.assertEqual(a["orchestration"]["verifier"], "CODEX")
         self.assertEqual(a["orchestration"]["independent_reviewer"], "CLAUDE")
@@ -145,7 +210,7 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(out["mode"], "REDIRECT")
         self.assertEqual(
             out["guidance"]["owner"],
-            "CHATGPT_TAKY_BORDER_COLLIE",
+            "CHATGPT_LEAD_ORCHESTRATOR",
         )
         self.assertIn("registered action", out["guidance"]["next_action"])
 
@@ -160,7 +225,7 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(receipt["execution_key"], out["execution_key"])
         self.assertEqual(
             receipt["orchestration"]["orchestrator"],
-            "CHATGPT_TAKY_BORDER_COLLIE",
+            "CHATGPT_LEAD_ORCHESTRATOR",
         )
         self.assertEqual(receipt["orchestration"]["verifier"], "CODEX")
         self.assertEqual(

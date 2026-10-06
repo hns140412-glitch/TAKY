@@ -4,6 +4,9 @@ Branch: `taky-2.0-orchestrator-2026-10-05`
 
 This branch is intentionally separate from existing Alpha/Beta work.
 
+Systemwide canonical design authority: `TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md`.
+Canonical Control Roles: `NAVIGATOR / GUARDIAN / DRIVER / SCOUT`; their machine-readable runtime schema remains implementation OPEN until separately verified.
+
 ## Slogans
 
 - **Think Again, Keep Your Key!** — 핵심을 놓치지 말고 생각해라.
@@ -31,6 +34,9 @@ USER != DEBUGGER.
 - Deleting runtime does not permit reinitialization while the external anchor exists.
 - Runtime writes use lock + CAS version + fsync + atomic replace.
 - External writes require a verified account attestation; the template starts with none.
+- The USER-stated target alias is bound on the first verified runtime authentication, not through a static family/member pre-map.
+- First-auth binding stores stable identity_provider/principal_id/family_id/self_member_id and preserves the first evidence/session anchor.
+- Later sessions may refresh only if the stable identity is unchanged; identity drift fails closed.
 - Plans cannot define their own Key, action, account, approval, ledger, evidence, or completion authority.
 
 ## Route enforcement

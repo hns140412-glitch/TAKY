@@ -37,10 +37,40 @@
       "actor": "USER",
       "kind": "authorization"
     },
-    "user:orchestration:border-collie-v1": {
+    "user:taky:identity-slogans-v1": {
       "actor": "USER",
       "kind": "statement"
+    },
+    "user:execution-model:shepherding-cooperative-v1": {
+      "actor": "USER",
+      "kind": "statement"
+    },
+    "user:orchestration:border-collie-v1": {
+      "actor": "USER",
+      "kind": "statement",
+      "status": "SUPERSEDED",
+      "superseded_by": "user:execution-model:shepherding-cooperative-v1"
+    },
+    "user:systemwide-canonical-v2:2026-10-06": {
+      "actor": "USER",
+      "kind": "statement",
+      "status": "CANONICAL"
     }
+  },
+  "system_identity": {
+    "name": "TAKY",
+    "identity_name": "TAKY_SYSTEM_IDENTITY",
+    "version": 1,
+    "source_ref": "user:taky:identity-slogans-v1",
+    "slogans": [
+      "Think Again, Keep Your Key.",
+      "Think Again, You're The Key."
+    ],
+    "key_owner": "USER",
+    "final_authority": "USER",
+    "user_not_debugger": true,
+    "execution_duty": "AI_COLLABORATION_GROUP",
+    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06"
   },
   "approvals": {},
   "action_registry": {
@@ -76,26 +106,35 @@
     "max_calls_without_approval": 1
   },
   "orchestration_contract": {
-    "name": "BORDER_COLLIE_ORCHESTRATION",
-    "source_ref": "user:orchestration:border-collie-v1",
-    "slogan_parent": [
-      "Think Again, Keep Your Key.",
-      "Think Again, You're The Key."
-    ],
-    "definition": "TAKY guides the collaboration group like a Border Collie: detect a wrong path, redirect it, coordinate roles, verify, and deliver the correct result.",
+    "name": "TAKY_SHEPHERDING_COOPERATIVE_EXECUTION",
+    "version": 3,
+    "source_ref": "user:execution-model:shepherding-cooperative-v1",
+    "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
+    "execution_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
+    "definition": "Subordinate TAKY execution model for specialized role assignment, collaboration, rerouting, verification, and delivery toward the USER-intended result.",
     "purpose": "GUIDE_TO_RESULT",
     "roles": {
-      "orchestrator": "CHATGPT_TAKY_BORDER_COLLIE",
+      "orchestrator": "CHATGPT_LEAD_ORCHESTRATOR",
       "implementer": "CODE_WRITER",
       "verifier": "CODEX",
       "independent_reviewer": "CLAUDE",
       "final_authority": "USER"
     },
+    "role_policy": {
+      "implementer_assignment": "TASK_FIT_NECESSITY",
+      "role_labels_do_not_authorize_calls": true,
+      "implementer_is_role_category_not_fixed_model": true,
+      "role_not_agent": true,
+      "routing_does_not_transfer_semantic_ownership": true,
+      "semantic_owner_remains_domain_owner": true
+    },
     "guidance_loop": [
-      "DETECT",
+      "OBSERVE",
       "CLASSIFY",
+      "ASSIGN",
+      "EXECUTE",
+      "CROSS_CHECK",
       "REDIRECT",
-      "GUIDE",
       "VERIFY",
       "DELIVER"
     ],
@@ -103,10 +142,26 @@
       "default": "REDIRECT_BEFORE_ESCALATE",
       "user_not_debugger": true,
       "block_is_not_goal": true,
-      "goal": "CORRECT_RESULT"
+      "goal": "CORRECT_RESULT",
+      "terminal_block_only_for_explicit_user_stop_or_integrity_hard_stop": true
     },
     "call_policy": {
       "claude_codex_remote": "NECESSITY_GATE_ONLY"
+    },
+    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+    "canonical_source_ref": "user:systemwide-canonical-v2:2026-10-06",
+    "control_roles": [
+      "NAVIGATOR",
+      "GUARDIAN",
+      "DRIVER",
+      "SCOUT"
+    ],
+    "economy_policy": "SAVEY_AI_ECONOMY",
+    "implementation_status": {
+      "control_role_schema": "OPEN",
+      "semantic_owner_binding": "OPEN",
+      "worker_role_contracts": "OPEN",
+      "shared_savey_economy_policy": "OPEN"
     }
   }
 }
