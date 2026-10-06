@@ -60,13 +60,18 @@ Implemented:
 - authenticated account evidence verifier callback is mandatory
 - account alias must match USER-authorized `AUTHORIZED_TARGET`
 - first verified central family session binds the target at runtime; no static alias/family pre-map is required
+- trusted auth source is pinned to `central-family-session`
+- trusted identity provider is pinned to `GOOGLE_OIDC_VERIFIED`
 - required stable identity = `identity_provider + principal_id + family_id + self_member_id`
 - binding records `binding_mode=FIRST_AUTH_RUNTIME`
-- first binding evidence/session refs are preserved as the anchor
-- later login may refresh session/evidence only when the stable identity is unchanged
-- principal/family/member identity drift fails closed instead of silently rebinding
-- KEY gate rejects external writes unless the verified first-auth runtime binding and stable identity fields are present
-- source/evidence_ref/session_id/verified_by remain mandatory
+- identity/source/verifier/first-binding anchor values are canonicalized or rejected
+- first binding evidence/session refs are preserved as immutable anchors
+- later login may refresh only current `session_id/evidence_ref` when the stable identity is unchanged
+- principal/family/member/provider/source/verifier drift fails closed instead of silently rebinding
+- account/principal/member cannot self-verify, including case/whitespace variants
+- state-store enforces monotonic first-auth binding: a persisted binding cannot be cleared or silently replaced
+- state-store HMAC + external anchor + lock/CAS remain in force; concurrent stale writers fail closed
+- KEY gate independently rechecks binding mode, trusted source/provider, canonical evidence, stable identity, anchors, and self-verification before external writes
 - KEY gate refuses minimal `verified:true` spoofing
 
 Authority rule:
@@ -74,6 +79,8 @@ Authority rule:
 - actual Google/family/member identity is learned only from a verifier-approved `/api/family/session` response during real use
 - Google Drive profile id is never inferred to be the OIDC principal
 - before first authentication, external write remains fail-closed; after verified first authentication, the bound identity is reused
+- legacy/noncanonical non-null bindings are never auto-promoted; explicit migration authority would be required
+- current persisted runtime has `account_attestation: null`, so no legacy migration is required now
 
 Runtime status:
 - implementation and fixture targeted E2E are complete
@@ -118,14 +125,18 @@ Implemented:
 Verified chain:
 `attestation → preflight → persisted receipt → executor wrapper → independent verifier → DELIVERED_UNCONFIRMED → verified USER event → USER_CONFIRMED`
 
-Regression after TAKY SYSTEMWIDE V2 CANONICAL authority promotion:
+Regression after FIRST_AUTH_RUNTIME hardening:
 - authority digest: `e92831fc4e23ff21c979`
-- runtime version: `9`
-- pytest: 93 passed + 36 subtests
-- canonical: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md`
+- persisted runtime version: `9`
+- persisted `account_attestation: null` until real first login
+- unittest discover: `98/98 PASS`
 - py_compile PASS
 - git diff --check PASS
-- comparison evidence: `TAKY2/CLAUDE_DRIVE_COMPARISON_PATCH_20261005.md`
+- Codex material findings discovered during review were remediated: legacy/incomplete silent promotion, persistence self-verification bypass, whitespace self-verification bypass
+- Claude material risks were remediated: reset/rebind monotonicity, source/verifier immutability, source/provider pinning, negative-path specificity
+- final post-hardening Codex/Claude re-run was unavailable only because both CLI usage/session quotas were reached; no failed code verdict was returned
+- canonical: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md`
+- account-binding evidence: `TAKY2/ACCOUNT_TARGET_BINDING_EVIDENCE_20261006.md`
 
 ### 7. ORIGINAL USER INTENT COMPARISON
 Intent: simple, efficient, enforceable TAKY2 kernel; avoid semantic mega-framework; keep USER != DEBUGGER; minimize Claude/Codex/Remote; no unauthorized push/merge/deploy.

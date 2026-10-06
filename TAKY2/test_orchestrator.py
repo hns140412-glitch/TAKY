@@ -25,7 +25,7 @@ def runtime_state():
                 "principal_id": "google:sub-hns",
                 "family_id": "family-hns",
                 "self_member_id": "member-hns",
-                "source": "connector-test",
+                "source": "central-family-session",
                 "evidence_ref": "auth:test",
                 "session_id": "session-test",
                 "first_bound_evidence_ref": "auth:test",

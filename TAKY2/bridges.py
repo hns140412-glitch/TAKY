@@ -5,7 +5,14 @@ from pathlib import Path
 import subprocess
 from typing import Any, Callable, Mapping
 
-from .enforcement import VALID_EVIDENCE_TYPES, record_failure, required_verifications_for_tier, stable_hash
+from .enforcement import (
+    ACCOUNT_AUTH_SOURCE,
+    ACCOUNT_IDENTITY_PROVIDER,
+    VALID_EVIDENCE_TYPES,
+    record_failure,
+    required_verifications_for_tier,
+    stable_hash,
+)
 
 
 class BridgeViolation(RuntimeError):
@@ -53,6 +60,7 @@ def bind_account_attestation(
         raise BridgeViolation("account evidence verifier required")
     if not isinstance(verifier_id, str) or not verifier_id.strip():
         raise BridgeViolation("verifier_id required")
+    verifier_name = verifier_id.strip()
     if verifier(evidence) is not True:
         raise BridgeViolation("account evidence verification failed")
 
@@ -62,22 +70,108 @@ def bind_account_attestation(
     source = evidence.get("source")
     evidence_ref = evidence.get("evidence_ref")
     session_id = evidence.get("session_id")
+    identity_provider = evidence.get("identity_provider")
+    principal_id = evidence.get("principal_id")
+    family_id = evidence.get("family_id")
+    self_member_id = evidence.get("self_member_id")
 
-    if not all(isinstance(v, str) and v.strip() for v in (expected_account, account, source, evidence_ref, session_id)):
-        raise BridgeViolation("authenticated account evidence is incomplete")
+    required = (
+        expected_account,
+        account,
+        source,
+        evidence_ref,
+        session_id,
+        identity_provider,
+        principal_id,
+        family_id,
+        self_member_id,
+    )
+    if not all(isinstance(v, str) and v.strip() for v in required):
+        raise BridgeViolation("authenticated account identity evidence is incomplete")
+
+    expected_account = expected_account.strip()
+    account = account.strip()
+    source = source.strip()
+    evidence_ref = evidence_ref.strip()
+    session_id = session_id.strip()
+    identity_provider = identity_provider.strip()
+    principal_id = principal_id.strip()
+    family_id = family_id.strip()
+    self_member_id = self_member_id.strip()
+
     if account != expected_account:
         raise BridgeViolation("authenticated account does not match authorized target")
     if evidence.get("authenticated") is not True:
         raise BridgeViolation("authenticated session evidence required")
+    if source != ACCOUNT_AUTH_SOURCE:
+        raise BridgeViolation("account attestation source is not the trusted central family session")
+    if identity_provider != ACCOUNT_IDENTITY_PROVIDER:
+        raise BridgeViolation("account identity provider is not trusted")
+    verifier_token = verifier_name.casefold()
+    if verifier_token in {
+        account.casefold(),
+        principal_id.casefold(),
+        self_member_id.casefold(),
+    }:
+        raise BridgeViolation("authenticated account principal/member cannot self-verify")
 
     updated = deepcopy(dict(runtime))
-    updated.setdefault("runtime", {})["account_attestation"] = {
+    runtime_section = updated.setdefault("runtime", {})
+    existing = runtime_section.get("account_attestation")
+    stable_identity = {
         "account": account,
+        "identity_provider": identity_provider,
+        "principal_id": principal_id,
+        "family_id": family_id,
+        "self_member_id": self_member_id,
+    }
+
+    if existing is None:
+        first_bound_evidence_ref = evidence_ref
+        first_bound_session_id = session_id
+    else:
+        if not isinstance(existing, Mapping):
+            raise BridgeViolation("existing account attestation is malformed")
+        required_existing = (
+            existing.get("account"),
+            existing.get("identity_provider"),
+            existing.get("principal_id"),
+            existing.get("family_id"),
+            existing.get("self_member_id"),
+            existing.get("source"),
+            existing.get("verified_by"),
+            existing.get("first_bound_evidence_ref"),
+            existing.get("first_bound_session_id"),
+        )
+        if existing.get("verified") is not True:
+            raise BridgeViolation("existing account attestation is not verified")
+        if existing.get("binding_mode") != "FIRST_AUTH_RUNTIME":
+            raise BridgeViolation("existing account attestation requires explicit migration")
+        if not all(isinstance(v, str) and v.strip() for v in required_existing):
+            raise BridgeViolation("existing runtime identity binding is incomplete")
+        if existing.get("account") != account:
+            raise BridgeViolation("authorized target is already bound to another account")
+
+        existing_identity = {
+            key: existing.get(key)
+            for key in ("account", "identity_provider", "principal_id", "family_id", "self_member_id")
+        }
+        if existing_identity != stable_identity:
+            raise BridgeViolation("authenticated identity changed for bound target")
+        if existing.get("source") != source or existing.get("verified_by") != verifier_name:
+            raise BridgeViolation("account attestation source/verifier changed; explicit migration required")
+        first_bound_evidence_ref = existing["first_bound_evidence_ref"]
+        first_bound_session_id = existing["first_bound_session_id"]
+    runtime_section["account_attestation"] = {
+        **stable_identity,
         "verified": True,
+        "binding_mode": "FIRST_AUTH_RUNTIME",
         "source": source,
         "evidence_ref": evidence_ref,
         "session_id": session_id,
-        "verified_by": verifier_id.strip(),
+        "first_bound_evidence_ref": first_bound_evidence_ref,
+        "first_bound_session_id": first_bound_session_id,
+        "verified_by": verifier_name,
     }
     return updated
 

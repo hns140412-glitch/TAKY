@@ -180,7 +180,7 @@ def trusted():
                 "principal_id": "google:sub-hns",
                 "family_id": "family-hns",
                 "self_member_id": "member-hns",
-                "source": "connector-test",
+                "source": "central-family-session",
                 "evidence_ref": "auth:test",
                 "session_id": "session-test",
                 "first_bound_evidence_ref": "auth:test",
@@ -319,11 +319,11 @@ class KeyGateTests(unittest.TestCase):
     def test_external_write_rejects_self_verified_binding(self):
         for verifier_id in (
             "HNS",
-            " HNS ",
+            "hns",
             "google:sub-hns",
-            " google:sub-hns ",
+            "GOOGLE:SUB-HNS",
             "member-hns",
-            " member-hns ",
+            "MEMBER-HNS",
         ):
             with self.subTest(verifier_id=verifier_id):
                 t = trusted()
@@ -331,6 +331,29 @@ class KeyGateTests(unittest.TestCase):
                 result = key_gate(t, {"action_id": "write"})
                 self.assertEqual(result.state, "BLOCKED")
                 self.assertIn("self-verify", result.reason)
+
+    def test_external_write_requires_trusted_auth_source_and_provider(self):
+        for field, value, expected in (
+            ("source", "other-session", "source is not trusted"),
+            ("identity_provider", "OTHER_PROVIDER", "identity provider is not trusted"),
+        ):
+            with self.subTest(field=field):
+                t = trusted()
+                t["runtime"]["account_attestation"][field] = value
+                result = key_gate(t, {"action_id": "write"})
+                self.assertEqual(result.state, "BLOCKED")
+                self.assertIn(expected, result.reason)
+
+    def test_external_write_requires_canonical_session_evidence(self):
+        for field in ("evidence_ref", "session_id", "verified_by"):
+            with self.subTest(field=field):
+                t = trusted()
+                t["runtime"]["account_attestation"][field] = (
+                    " " + t["runtime"]["account_attestation"][field] + " "
+                )
+                result = key_gate(t, {"action_id": "write"})
+                self.assertEqual(result.state, "BLOCKED")
+                self.assertIn("not canonical", result.reason)
 
     def test_authorized_write_does_not_burn_irrelevant_approval(self):
         t = trusted()

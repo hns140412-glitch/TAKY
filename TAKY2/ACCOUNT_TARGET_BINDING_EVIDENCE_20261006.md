@@ -1,57 +1,126 @@
 # TAKY2 — ACCOUNT TARGET BINDING EVIDENCE — 2026-10-06
 
-Status: OPEN / FAIL-CLOSED
-Scope: HNS alias -> authenticated central family/session identity
+Status: IMPLEMENTATION CLOSED / REAL FIRST-LOGIN RUNTIME E2E OPEN
+Scope: HNS logical target alias -> first verified central family/session identity
 
-## VERIFIED EVIDENCE
+## VERIFIED AUTHORITY EVIDENCE
 
-1. Google Drive connector authenticated profile
+1. Google Drive connector authenticated HNS profile
 - profile email: hns140412@gmail.com
 - profile id: 102814704779691664323
 - profile name: soma “Taky”
-- evidence source: provider-authenticated Google Drive connector read on 2026-10-06
+- this proves the connected HNS Google Drive account only
+- Drive profile id MUST NOT be inferred as the Google OIDC principal_id
 
-2. HNS storage authority documents in the authenticated HNS Drive
+2. HNS storage authority documents
 - FINAL_STORAGE_NAMESPACE_REGISTRY
   - Drive file id: 1r1Cx9hdFqMTxPgYtCmIP0p6N4pNdfhTjsnPEgML3hqE
-  - states HNS Drive owns internal master data
-  - repository pointer: hns140412-glitch/TAKY
+  - HNS Drive owns internal master data
 - FINAL_DRIVE_STORAGE_MAP
   - Drive file id: 1pW6tp46AZKNrA8zlenZrw1S04tS7uKSLZFQb9qcDh1M
-  - states HNS Drive = INTERNAL_MASTER_DATA_AND_LONG_TERM_SOURCE
+  - HNS Drive = INTERNAL_MASTER_DATA_AND_LONG_TERM_SOURCE
 
-3. Central family-auth runtime implementation exists in Ready & Set
-- Ready local HEAD observed: 16026f4
+3. Existing Ready & Set authentication path
+- observed Ready local HEAD: 16026f4
 - taky-google-account-auth-v1.js obtains Google ID token and POSTs /api/family/session
-- taky-family-auth-runtime-v1.js selects family_id and exposes self_member_id / authorized_member_ids from the server session
-- public config does not statically bind preferredFamilyId
-- family/session identity is therefore runtime-derived, not inferable from HNS naming
+- taky-family-auth-runtime-v1.js receives server-authorized family_id, self_member_id and authorized_member_ids
+- family/session identity is runtime-derived rather than safely inferable from the HNS label
 
-4. TAKY2 current runtime
-- runtime.account_attestation = null
-- authority digest remains 3a3eff76549ad5262f46
+## DECISION
 
-## GAP
+A static pre-registration table such as:
+HNS -> hard-coded family_id/member_id
+is NOT required.
 
-No authority-owned explicit mapping was found that binds:
-HNS
--> GOOGLE_OIDC_VERIFIED principal_id
--> family_id
--> self_member_id
+The correct authority path is:
+USER_STATED target alias HNS
+-> actual Google sign-in during use
+-> verifier-approved /api/family/session response
+-> FIRST_AUTH_RUNTIME binding
+-> reuse the stable bound identity on later sessions
 
-The Google Drive profile proves the HNS Google account connection, but it does NOT by itself prove the central family/session subject or membership identity. The connector profile id MUST NOT be silently treated as Google OIDC principal_id.
+## IMPLEMENTED ENFORCEMENT
 
-## ENFORCEMENT RESULT
+bind_account_attestation now requires:
+- account
+- authenticated=true
+- source
+- evidence_ref
+- session_id
+- identity_provider
+- principal_id
+- family_id
+- self_member_id
+- trusted verifier callback + verifier_id
 
-- Do not invent alias equivalence.
-- Do not write an executable ACCOUNT TARGET BINDING yet.
-- External writes that require HNS account attestation remain fail-closed.
-- Actual attestation targeted E2E is NOT truthfully runnable until a real /api/family/session response for the HNS account is available to TAKY.
-- Claude/Codex calls are not necessary at this stage because no executable binding/code change is authorized by the evidence.
+On first verified authentication:
+- account must equal USER-authorized HNS
+- source must equal `central-family-session`
+- identity_provider must equal `GOOGLE_OIDC_VERIFIED`
+- account/identity/source/evidence/session values are canonicalized before storage
+- account/principal/member cannot self-verify, including case/whitespace variants
+- stable identity is stored in runtime
+- binding_mode = FIRST_AUTH_RUNTIME
+- first_bound_evidence_ref and first_bound_session_id are anchored
 
-## NEXT SAFE ROUTE
+On later authentication:
+- same stable identity may refresh only evidence_ref/session_id
+- first-binding anchors remain unchanged
+- source and verifier remain unchanged
+- different principal_id, family_id, self_member_id, provider, source or verifier fails closed
+- legacy/incomplete/unverified existing bindings are never silently promoted
+- logical account alias cannot silently change
 
-When TAKY can directly observe an authenticated HNS /api/family/session response, bind the stable provider principal and selected family/member identity to HNS, then run:
-actual attestation targeted E2E -> CODEX verification if SUCCESS is claimed -> CLAUDE independent review if STRONG tier -> final regression.
+State-store persistence additionally enforces:
+- persisted first-auth binding cannot be cleared
+- identity/source/verifier/first anchors are immutable
+- evidence_ref/session_id may refresh only on the same bound identity
+- malformed/noncanonical/self-verified bindings are rejected before save
+- lock + CAS + HMAC + external anchor remain active
 
-USER != DEBUGGER. Do not ask the user to copy tokens, IDs, or debug the auth session.
+KEY Gate external-write enforcement independently requires:
+- FIRST_AUTH_RUNTIME binding mode
+- trusted central-family-session source
+- GOOGLE_OIDC_VERIFIED identity provider
+- principal_id + family_id + self_member_id
+- first binding evidence/session anchors
+- canonical ordinary account attestation evidence fields
+- no account/principal/member self-verification
+
+Before the first verified login, external write remains fail-closed.
+Current persisted runtime remains `account_attestation: null`, so no legacy migration is required before the real first login.
+
+## TEST EVIDENCE
+
+Regression: 98/98 PASS
+
+Coverage includes:
+- stable identity fields are mandatory
+- exact trusted source/provider are mandatory
+- first verified auth binds HNS runtime identity
+- same identity can refresh evidence/session without rebinding
+- identity/provider/source/verifier drift cannot silently replace the bound identity
+- legacy/incomplete/unverified records cannot silently promote
+- persisted binding cannot be cleared or reset through save_runtime
+- direct persistence cannot bypass self-verification checks
+- whitespace and case variants cannot bypass self-verification
+- noncanonical evidence/session fields fail closed
+- KEY external-write denial paths cover missing binding metadata, wrong source/provider, self-verification and noncanonical evidence
+- targeted E2E: null attestation -> first-auth runtime bind -> authorized external-write preflight
+
+py_compile: PASS
+git diff --check: PASS
+
+Review history:
+- Codex identified legacy/incomplete promotion, persistence self-verification and whitespace bypass risks; each was remediated and regression-tested.
+- Claude identified reset/rebind monotonicity, source/verifier immutability and source/provider pinning risks; each was remediated and regression-tested.
+- final post-hardening CLI re-runs were blocked only by Codex/Claude usage-session limits, not by a code/test failure; no retry was made under the cost/necessity policy.
+
+## REMAINING OPEN — RUNTIME ONLY
+
+REAL HNS FIRST-AUTH SESSION / DEVICE E2E
+
+This is intentionally deferred until actual use. No user debugging step is needed.
+When the user signs in normally, TAKY should consume the verified /api/family/session response, create the first runtime binding, run the targeted preflight/runtime evidence check, and then perform final regression.
+
+USER != DEBUGGER.

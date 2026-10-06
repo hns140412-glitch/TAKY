@@ -10,7 +10,12 @@ import time
 import uuid
 from typing import Any, Callable, Dict, Tuple
 
-from .enforcement import BINDING_FIELDS, stable_hash
+from .enforcement import (
+    ACCOUNT_AUTH_SOURCE,
+    ACCOUNT_IDENTITY_PROVIDER,
+    BINDING_FIELDS,
+    stable_hash,
+)
 
 
 STATE_DIR = Path(__file__).with_name("state")
@@ -227,6 +232,74 @@ def _acquire_lock(path: Path, timeout_s: float = 3.0, stale_s: float = 30.0) -> 
             time.sleep(0.05)
 
 
+_ACCOUNT_BINDING_IMMUTABLE_FIELDS = (
+    "account",
+    "identity_provider",
+    "principal_id",
+    "family_id",
+    "self_member_id",
+    "source",
+    "verified_by",
+    "first_bound_evidence_ref",
+    "first_bound_session_id",
+)
+
+
+def _validated_account_binding(runtime: Dict[str, Any]) -> Dict[str, Any] | None:
+    section = runtime.get("runtime", {})
+    if not isinstance(section, dict):
+        raise StateIntegrityError("runtime section must be an object")
+    binding = section.get("account_attestation")
+    if binding is None:
+        return None
+    if not isinstance(binding, dict):
+        raise StateIntegrityError("account binding must be an object")
+    if binding.get("verified") is not True:
+        raise StateIntegrityError("account binding must be verified")
+    if binding.get("binding_mode") != "FIRST_AUTH_RUNTIME":
+        raise StateIntegrityError("account binding mode is invalid")
+    required = tuple(binding.get(field) for field in _ACCOUNT_BINDING_IMMUTABLE_FIELDS)
+    if not all(isinstance(value, str) and value.strip() for value in required):
+        raise StateIntegrityError("account binding is incomplete")
+    if any(value != value.strip() for value in required):
+        raise StateIntegrityError("account binding immutable fields must be canonical")
+    if not isinstance(binding.get("evidence_ref"), str) or not binding.get("evidence_ref").strip():
+        raise StateIntegrityError("account binding evidence_ref missing")
+    if not isinstance(binding.get("session_id"), str) or not binding.get("session_id").strip():
+        raise StateIntegrityError("account binding session_id missing")
+    if binding["evidence_ref"] != binding["evidence_ref"].strip():
+        raise StateIntegrityError("account binding evidence_ref must be canonical")
+    if binding["session_id"] != binding["session_id"].strip():
+        raise StateIntegrityError("account binding session_id must be canonical")
+    if binding.get("source") != ACCOUNT_AUTH_SOURCE:
+        raise StateIntegrityError("account binding source is not trusted")
+    if binding.get("identity_provider") != ACCOUNT_IDENTITY_PROVIDER:
+        raise StateIntegrityError("account binding identity provider is not trusted")
+    verifier_token = binding["verified_by"].casefold()
+    if verifier_token in {
+        binding["account"].casefold(),
+        binding["principal_id"].casefold(),
+        binding["self_member_id"].casefold(),
+    }:
+        raise StateIntegrityError("account principal/member cannot self-verify binding")
+    return binding
+
+
+def _validate_account_binding_transition(
+    current: Dict[str, Any],
+    candidate: Dict[str, Any],
+) -> None:
+    existing = _validated_account_binding(current)
+    proposed = _validated_account_binding(candidate)
+    if existing is None:
+        return
+    if proposed is None:
+        raise StateIntegrityError("account binding cannot be cleared after first authentication")
+    for field in _ACCOUNT_BINDING_IMMUTABLE_FIELDS:
+        if proposed.get(field) != existing.get(field):
+            raise StateIntegrityError(f"account binding immutable field changed: {field}")
+
+
 def save_runtime(
     runtime: Dict[str, Any],
     *,
@@ -245,6 +318,8 @@ def save_runtime(
         _verify_anchor_pair(current, key, anchor_path)
         if current.get("runtime_version") != expected_version:
             raise StateConflictError("runtime version changed")
+
+        _validate_account_binding_transition(current, runtime)
 
         updated = dict(runtime)
         updated["runtime_version"] = expected_version + 1

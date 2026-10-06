@@ -67,7 +67,7 @@ There is one active V3 candidate pointer now.
 - CUR-003 WORKER ROLE CONTRACTS
 - CUR-004 SAVEY_AI_ECONOMY SHARED POLICY
 - CUR-005 WHOLE-SYSTEM OWNER MAP COMPLETENESS
-- CUR-006 REAL HNS FIRST-AUTH SESSION / DEVICE E2E — actual login/use only
+- CUR-006 REAL HNS FIRST-AUTH SESSION / DEVICE E2E — account-binding implementation CLOSED; actual login/use runtime E2E only
 - CUR-007 CROSS-CHAT / SOURCE COMPLETENESS AUDIT — Delta only
 - CUR-008 NEW-CHAT STARTUP CONTEXT GATE — machine-readable receipt/mutation block OPEN
 - CUR-009 SYSTEMWIDE V3 IMPLEMENTATION RECONCILIATION — final integrated candidate / NOT CANONICAL

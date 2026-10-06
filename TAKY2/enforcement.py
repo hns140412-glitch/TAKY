@@ -10,6 +10,8 @@ from .orchestration import validate_orchestration_contract
 
 
 USER_PROVENANCE = {"USER_STATED", "USER_CONFIRMED"}
+ACCOUNT_AUTH_SOURCE = "central-family-session"
+ACCOUNT_IDENTITY_PROVIDER = "GOOGLE_OIDC_VERIFIED"
 BINDING_FIELDS = {
     "USER_INTENT", "DESIRED_OUTCOME", "NON_NEGOTIABLE",
     "FORBIDDEN", "ACCEPTANCE", "AUTHORIZED_TARGET",
@@ -199,8 +201,19 @@ def key_gate(trusted: Mapping[str, Any], plan: Mapping[str, Any]) -> GateResult:
                 attestation.get("session_id"),
                 attestation.get("verified_by"),
             )
+            identity_binding = (
+                attestation.get("identity_provider"),
+                attestation.get("principal_id"),
+                attestation.get("family_id"),
+                attestation.get("self_member_id"),
+                attestation.get("first_bound_evidence_ref"),
+                attestation.get("first_bound_session_id"),
+            )
+            binding_mode = attestation.get("binding_mode")
         else:
             attestation_evidence = ()
+            identity_binding = ()
+            binding_mode = None
         requested = action.get("target_account")
         action_class = action.get("action_class")
 
@@ -213,6 +226,27 @@ def key_gate(trusted: Mapping[str, Any], plan: Mapping[str, Any]) -> GateResult:
             or not all(isinstance(v, str) and v.strip() for v in attestation_evidence)
         ):
             return GateResult(False, "BLOCKED", "verified account attestation evidence missing")
+        if any(v != v.strip() for v in attestation_evidence):
+            return GateResult(False, "BLOCKED", "verified account attestation evidence is not canonical")
+        if attestation.get("source") != ACCOUNT_AUTH_SOURCE:
+            return GateResult(False, "BLOCKED", "account attestation source is not trusted")
+        if binding_mode != "FIRST_AUTH_RUNTIME":
+            return GateResult(False, "BLOCKED", "runtime first-auth target binding missing")
+        if (
+            len(identity_binding) != 6
+            or not all(isinstance(v, str) and v.strip() for v in identity_binding)
+        ):
+            return GateResult(False, "BLOCKED", "verified runtime identity binding missing")
+        if attestation.get("identity_provider") != ACCOUNT_IDENTITY_PROVIDER:
+            return GateResult(False, "BLOCKED", "account identity provider is not trusted")
+        verifier_name = str(attestation.get("verified_by") or "").strip().casefold()
+        self_identity = {
+            str(attestation.get("account") or "").strip().casefold(),
+            str(attestation.get("principal_id") or "").strip().casefold(),
+            str(attestation.get("self_member_id") or "").strip().casefold(),
+        }
+        if verifier_name in self_identity:
+            return GateResult(False, "BLOCKED", "account principal/member cannot self-verify binding")
         if not requested or target["value"] != requested:
             return GateResult(False, "BLOCKED", "registered target mismatch")
 

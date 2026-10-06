@@ -18,6 +18,24 @@ from TAKY2.state_store import (
 KEY = b"k" * 32
 
 
+def account_binding():
+    return {
+        "account": "HNS",
+        "verified": True,
+        "binding_mode": "FIRST_AUTH_RUNTIME",
+        "identity_provider": "GOOGLE_OIDC_VERIFIED",
+        "principal_id": "google:sub-hns",
+        "family_id": "family-hns",
+        "self_member_id": "member-hns",
+        "source": "central-family-session",
+        "evidence_ref": "auth:e1",
+        "session_id": "session-1",
+        "first_bound_evidence_ref": "auth:e1",
+        "first_bound_session_id": "session-1",
+        "verified_by": "auth-bridge",
+    }
+
+
 class StateStoreTests(unittest.TestCase):
     def test_runtime_key_is_written_byte_exact_on_windows(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -119,6 +137,218 @@ class StateStoreTests(unittest.TestCase):
                 ap, rp, runtime_key=KEY, anchor_path=anchor
             )
             self.assertEqual(loaded["runtime_version"], 2)
+        finally:
+            tmp.cleanup()
+
+    def test_first_auth_binding_persists_and_session_refresh_is_allowed(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["runtime"]["account_attestation"] = account_binding()
+            bound = save_runtime(
+                runtime,
+                expected_version=1,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            refreshed = json.loads(json.dumps(bound))
+            refreshed["runtime"]["account_attestation"]["session_id"] = "session-2"
+            refreshed["runtime"]["account_attestation"]["evidence_ref"] = "auth:e2"
+            saved = save_runtime(
+                refreshed,
+                expected_version=2,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            attestation = saved["runtime"]["account_attestation"]
+            self.assertEqual(attestation["session_id"], "session-2")
+            self.assertEqual(attestation["evidence_ref"], "auth:e2")
+            self.assertEqual(attestation["first_bound_session_id"], "session-1")
+        finally:
+            tmp.cleanup()
+
+    def test_bound_account_cannot_be_cleared(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["runtime"]["account_attestation"] = account_binding()
+            bound = save_runtime(
+                runtime,
+                expected_version=1,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            candidate = json.loads(json.dumps(bound))
+            candidate["runtime"]["account_attestation"] = None
+            with self.assertRaises(StateIntegrityError):
+                save_runtime(
+                    candidate,
+                    expected_version=2,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_bound_account_immutable_fields_cannot_change(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["runtime"]["account_attestation"] = account_binding()
+            bound = save_runtime(
+                runtime,
+                expected_version=1,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            mutations = {
+                "principal_id": "google:other",
+                "family_id": "family-other",
+                "source": "weaker-source",
+                "verified_by": "other-verifier",
+                "first_bound_evidence_ref": "auth:replacement",
+                "first_bound_session_id": "session-replacement",
+            }
+            for field, value in mutations.items():
+                with self.subTest(field=field):
+                    candidate = json.loads(json.dumps(bound))
+                    candidate["runtime"]["account_attestation"][field] = value
+                    with self.assertRaises(StateIntegrityError):
+                        save_runtime(
+                            candidate,
+                            expected_version=2,
+                            authority_digest_value=digest,
+                            runtime_path=rp,
+                            lock_path=lock,
+                            runtime_key=KEY,
+                            anchor_path=anchor,
+                        )
+        finally:
+            tmp.cleanup()
+
+    def test_first_auth_candidate_must_be_complete(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["runtime"]["account_attestation"] = account_binding()
+            runtime["runtime"]["account_attestation"].pop("family_id")
+            with self.assertRaises(StateIntegrityError):
+                save_runtime(
+                    runtime,
+                    expected_version=1,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_first_auth_candidate_cannot_self_verify(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            for verifier_id in (
+                "HNS",
+                " HNS ",
+                "hns",
+                "google:sub-hns",
+                " google:sub-hns ",
+                "GOOGLE:SUB-HNS",
+                "member-hns",
+                " member-hns ",
+                "MEMBER-HNS",
+            ):
+                with self.subTest(verifier_id=verifier_id):
+                    _, runtime, _ = load_bundle(
+                        ap, rp, runtime_key=KEY, anchor_path=anchor
+                    )
+                    runtime["runtime"]["account_attestation"] = account_binding()
+                    runtime["runtime"]["account_attestation"]["verified_by"] = verifier_id
+                    with self.assertRaises(StateIntegrityError):
+                        save_runtime(
+                            runtime,
+                            expected_version=1,
+                            authority_digest_value=digest,
+                            runtime_path=rp,
+                            lock_path=lock,
+                            runtime_key=KEY,
+                            anchor_path=anchor,
+                        )
+        finally:
+            tmp.cleanup()
+
+    def test_first_auth_candidate_requires_trusted_source_and_provider(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            for field, value, pattern in (
+                ("source", "other-session", "source is not trusted"),
+                ("identity_provider", "OTHER_PROVIDER", "identity provider is not trusted"),
+            ):
+                with self.subTest(field=field):
+                    _, runtime, _ = load_bundle(
+                        ap, rp, runtime_key=KEY, anchor_path=anchor
+                    )
+                    runtime["runtime"]["account_attestation"] = account_binding()
+                    runtime["runtime"]["account_attestation"][field] = value
+                    with self.assertRaisesRegex(StateIntegrityError, pattern):
+                        save_runtime(
+                            runtime,
+                            expected_version=1,
+                            authority_digest_value=digest,
+                            runtime_path=rp,
+                            lock_path=lock,
+                            runtime_key=KEY,
+                            anchor_path=anchor,
+                        )
+        finally:
+            tmp.cleanup()
+
+    def test_first_auth_candidate_requires_canonical_session_evidence(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            for field in ("evidence_ref", "session_id"):
+                with self.subTest(field=field):
+                    _, runtime, _ = load_bundle(
+                        ap, rp, runtime_key=KEY, anchor_path=anchor
+                    )
+                    runtime["runtime"]["account_attestation"] = account_binding()
+                    runtime["runtime"]["account_attestation"][field] = (
+                        " " + runtime["runtime"]["account_attestation"][field] + " "
+                    )
+                    with self.assertRaisesRegex(StateIntegrityError, "canonical"):
+                        save_runtime(
+                            runtime,
+                            expected_version=1,
+                            authority_digest_value=digest,
+                            runtime_path=rp,
+                            lock_path=lock,
+                            runtime_key=KEY,
+                            anchor_path=anchor,
+                        )
         finally:
             tmp.cleanup()
 

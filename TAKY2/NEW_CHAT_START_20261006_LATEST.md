@@ -166,6 +166,18 @@ HEAD: resume 시 `git rev-parse HEAD`로 확인; 문서에 적힌 과거 SHA를 
 Preserve existing dirty work. Never reset/checkout/discard without diff review.
 No push / merge / deploy authorized.
 
+Latest account-binding checkpoint:
+- `FIRST_AUTH_RUNTIME` implementation = CLOSED
+- logical target remains `HNS`; no static family/member pre-map
+- exact auth source/provider pinned: `central-family-session` / `GOOGLE_OIDC_VERIFIED`
+- persisted first binding is monotonic: identity/source/verifier/first anchors cannot clear or silently rebind
+- same stable identity may refresh only current `session_id/evidence_ref`
+- case/whitespace self-verification bypasses are blocked
+- persisted runtime currently has `account_attestation: null`
+- local regression: `98/98 PASS`, py_compile PASS, git diff --check PASS
+- Codex/Claude review findings were incorporated; their final post-hardening CLI re-runs were quota-limited, so no redundant retry was made
+- therefore CUR-006 remains runtime-on-use only: real HNS first-auth session/device E2E at actual login
+
 ## Resume command
 
 최신 TAKY 2.0 기준으로 재개.

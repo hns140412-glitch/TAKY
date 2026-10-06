@@ -35,8 +35,11 @@ USER != DEBUGGER.
 - Runtime writes use lock + CAS version + fsync + atomic replace.
 - External writes require a verified account attestation; the template starts with none.
 - The USER-stated target alias is bound on the first verified runtime authentication, not through a static family/member pre-map.
-- First-auth binding stores stable identity_provider/principal_id/family_id/self_member_id and preserves the first evidence/session anchor.
-- Later sessions may refresh only if the stable identity is unchanged; identity drift fails closed.
+- First-auth binding accepts only the trusted `central-family-session` source and `GOOGLE_OIDC_VERIFIED` provider.
+- First-auth binding stores stable identity_provider/principal_id/family_id/self_member_id and immutable source/verifier/first evidence-session anchors.
+- Identity/evidence values are canonicalized or rejected; account/principal/member cannot self-verify, including case/whitespace variants.
+- Later sessions may refresh only current session/evidence on the same stable identity; identity/provider/source/verifier drift fails closed.
+- Once persisted, the first-auth binding cannot be cleared or silently replaced through the state store; lock/CAS/HMAC/external-anchor protections remain active.
 - Plans cannot define their own Key, action, account, approval, ledger, evidence, or completion authority.
 
 ## Route enforcement

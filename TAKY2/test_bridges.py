@@ -71,9 +71,13 @@ class AccountAttestationBridgeTests(unittest.TestCase):
         return {
             "account": account,
             "authenticated": True,
-            "source": "oauth-session",
+            "source": "central-family-session",
             "evidence_ref": "auth:e1",
             "session_id": "session-1",
+            "identity_provider": "GOOGLE_OIDC_VERIFIED",
+            "principal_id": "google:sub-hns",
+            "family_id": "family-hns",
+            "self_member_id": "member-hns",
         }
 
     def test_attestation_requires_real_verifier_callback(self):
@@ -97,8 +101,10 @@ class AccountAttestationBridgeTests(unittest.TestCase):
             )
 
     def test_attestation_binds_verified_account(self):
+        initial = runtime_state()
+        initial["runtime"]["account_attestation"] = None
         runtime = bind_account_attestation(
-            runtime_state(),
+            initial,
             trusted(),
             self.evidence(),
             verifier=lambda evidence: evidence["authenticated"] is True,
@@ -107,7 +113,237 @@ class AccountAttestationBridgeTests(unittest.TestCase):
         attestation = runtime["runtime"]["account_attestation"]
         self.assertTrue(attestation["verified"])
         self.assertEqual(attestation["account"], "HNS")
+        self.assertEqual(attestation["binding_mode"], "FIRST_AUTH_RUNTIME")
+        self.assertEqual(attestation["principal_id"], "google:sub-hns")
+        self.assertEqual(attestation["family_id"], "family-hns")
+        self.assertEqual(attestation["self_member_id"], "member-hns")
+        self.assertEqual(attestation["first_bound_session_id"], "session-1")
         self.assertEqual(attestation["verified_by"], "auth-bridge")
+
+    def test_attestation_requires_stable_runtime_identity_fields(self):
+        evidence = self.evidence()
+        evidence.pop("family_id")
+        with self.assertRaises(BridgeViolation):
+            bind_account_attestation(
+                runtime_state(),
+                trusted(),
+                evidence,
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+
+    def test_first_binding_requires_trusted_source_and_identity_provider(self):
+        for field, value, pattern in (
+            ("source", "other-session", "trusted central family session"),
+            ("identity_provider", "OTHER_PROVIDER", "identity provider is not trusted"),
+        ):
+            with self.subTest(field=field):
+                initial = runtime_state()
+                initial["runtime"]["account_attestation"] = None
+                evidence = self.evidence()
+                evidence[field] = value
+                with self.assertRaisesRegex(BridgeViolation, pattern):
+                    bind_account_attestation(
+                        initial,
+                        trusted(),
+                        evidence,
+                        verifier=lambda evidence: True,
+                        verifier_id="auth-bridge",
+                    )
+
+    def test_same_identity_can_refresh_session_without_rebinding(self):
+        first = runtime_state()
+        first["runtime"]["account_attestation"] = None
+        first = bind_account_attestation(
+            first,
+            trusted(),
+            self.evidence(),
+            verifier=lambda evidence: True,
+            verifier_id="auth-bridge",
+        )
+        refreshed = self.evidence()
+        refreshed["evidence_ref"] = "auth:e2"
+        refreshed["session_id"] = "session-2"
+        second = bind_account_attestation(
+            first,
+            trusted(),
+            refreshed,
+            verifier=lambda evidence: True,
+            verifier_id="auth-bridge",
+        )
+        attestation = second["runtime"]["account_attestation"]
+        self.assertEqual(attestation["session_id"], "session-2")
+        self.assertEqual(attestation["evidence_ref"], "auth:e2")
+        self.assertEqual(attestation["first_bound_session_id"], "session-1")
+        self.assertEqual(attestation["first_bound_evidence_ref"], "auth:e1")
+
+    def test_bound_identity_cannot_silently_change(self):
+        first = runtime_state()
+        first["runtime"]["account_attestation"] = None
+        first = bind_account_attestation(
+            first,
+            trusted(),
+            self.evidence(),
+            verifier=lambda evidence: True,
+            verifier_id="auth-bridge",
+        )
+        mutations = {
+            "identity_provider": "OTHER_PROVIDER",
+            "principal_id": "google:other",
+            "family_id": "family-other",
+            "self_member_id": "member-other",
+        }
+        for field, value in mutations.items():
+            with self.subTest(field=field):
+                changed = self.evidence()
+                changed[field] = value
+                with self.assertRaises(BridgeViolation):
+                    bind_account_attestation(
+                        first,
+                        trusted(),
+                        changed,
+                        verifier=lambda evidence: True,
+                        verifier_id="auth-bridge",
+                    )
+
+    def test_legacy_verified_attestation_requires_explicit_migration(self):
+        runtime = runtime_state()
+        runtime["runtime"]["account_attestation"] = {
+            "account": "HNS",
+            "verified": True,
+            "source": "legacy-oauth-session",
+            "evidence_ref": "legacy:e1",
+            "session_id": "legacy-session",
+            "verified_by": "legacy-auth-bridge",
+        }
+        with self.assertRaisesRegex(BridgeViolation, "explicit migration"):
+            bind_account_attestation(
+                runtime,
+                trusted(),
+                self.evidence(),
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+
+    def test_incomplete_existing_binding_cannot_be_repaired_silently(self):
+        runtime = runtime_state()
+        runtime["runtime"]["account_attestation"].pop("family_id")
+        with self.assertRaisesRegex(BridgeViolation, "identity binding is incomplete"):
+            bind_account_attestation(
+                runtime,
+                trusted(),
+                self.evidence(),
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+
+    def test_unverified_existing_attestation_cannot_be_promoted_silently(self):
+        runtime = runtime_state()
+        runtime["runtime"]["account_attestation"]["verified"] = False
+        with self.assertRaisesRegex(BridgeViolation, "not verified"):
+            bind_account_attestation(
+                runtime,
+                trusted(),
+                self.evidence(),
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+
+    def test_non_mapping_existing_attestation_fails_closed(self):
+        runtime = runtime_state()
+        runtime["runtime"]["account_attestation"] = "corrupt"
+        with self.assertRaisesRegex(BridgeViolation, "malformed"):
+            bind_account_attestation(
+                runtime,
+                trusted(),
+                self.evidence(),
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+
+    def test_existing_binding_missing_anchor_fails_closed(self):
+        for field in ("first_bound_evidence_ref", "first_bound_session_id"):
+            with self.subTest(field=field):
+                runtime = runtime_state()
+                runtime["runtime"]["account_attestation"].pop(field)
+                with self.assertRaisesRegex(BridgeViolation, "identity binding is incomplete"):
+                    bind_account_attestation(
+                        runtime,
+                        trusted(),
+                        self.evidence(),
+                        verifier=lambda evidence: True,
+                        verifier_id="auth-bridge",
+                    )
+
+    def test_account_principal_or_member_cannot_self_verify(self):
+        evidence = self.evidence()
+        for verifier_id in (
+            "HNS",
+            " HNS ",
+            "hns",
+            evidence["principal_id"],
+            " " + evidence["principal_id"] + " ",
+            evidence["self_member_id"],
+            " " + evidence["self_member_id"] + " ",
+        ):
+            with self.subTest(verifier_id=verifier_id):
+                initial = runtime_state()
+                initial["runtime"]["account_attestation"] = None
+                with self.assertRaises(BridgeViolation):
+                    bind_account_attestation(
+                        initial,
+                        trusted(),
+                        evidence,
+                        verifier=lambda evidence: True,
+                        verifier_id=verifier_id,
+                    )
+
+    def test_refresh_cannot_change_source_or_verifier(self):
+        first = runtime_state()
+        first["runtime"]["account_attestation"] = None
+        first = bind_account_attestation(
+            first,
+            trusted(),
+            self.evidence(),
+            verifier=lambda evidence: True,
+            verifier_id="auth-bridge",
+        )
+        changed_source = self.evidence()
+        changed_source["source"] = "weaker-source"
+        with self.assertRaises(BridgeViolation):
+            bind_account_attestation(
+                first,
+                trusted(),
+                changed_source,
+                verifier=lambda evidence: True,
+                verifier_id="auth-bridge",
+            )
+        with self.assertRaises(BridgeViolation):
+            bind_account_attestation(
+                first,
+                trusted(),
+                self.evidence(),
+                verifier=lambda evidence: True,
+                verifier_id="different-auth-bridge",
+            )
+
+    def test_first_auth_runtime_binding_unlocks_targeted_write_preflight(self):
+        base = trusted()
+        runtime = runtime_state()
+        runtime["runtime"]["account_attestation"] = None
+        bound = bind_account_attestation(
+            runtime,
+            base,
+            self.evidence(),
+            verifier=lambda evidence: True,
+            verifier_id="central-family-session-verifier",
+        )
+        out = preflight(write_plan(), overlay_runtime(base, bound))
+        self.assertTrue(out["allowed"])
+        self.assertEqual(
+            bound["runtime"]["account_attestation"]["binding_mode"],
+            "FIRST_AUTH_RUNTIME",
+        )
 
 
 class ExecutorVerifierUserBridgeTests(unittest.TestCase):
@@ -121,9 +357,13 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
             {
                 "account": "HNS",
                 "authenticated": True,
-                "source": "oauth-session",
+                "source": "central-family-session",
                 "evidence_ref": "auth:e1",
                 "session_id": "session-1",
+                "identity_provider": "GOOGLE_OIDC_VERIFIED",
+                "principal_id": "google:sub-hns",
+                "family_id": "family-hns",
+                "self_member_id": "member-hns",
             },
             verifier=lambda evidence: True,
             verifier_id="auth-bridge",
