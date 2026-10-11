@@ -41,6 +41,34 @@ ROLE_ACTION_ALLOWLIST = {
     "HUMAN_APPROVER": HUMAN_APPROVER_ALLOWED_ACTIONS,
 }
 
+DEVELOPMENT_AUTHORIZATION_SCOPE = "external_development_calls"
+
+def trusted_development_authorization(ref: Any) -> bool:
+    """True only for a USER authorization in the signature-verified TAKY2 authority.
+
+    Reads the runtime key without creating one; any missing key, integrity
+    error or non-matching source_registry entry fails closed.
+    """
+    if not isinstance(ref, str) or not ref.strip():
+        return False
+    try:
+        repo_root = Path(__file__).resolve().parent.parent
+        if str(repo_root) not in sys.path:
+            sys.path.insert(0, str(repo_root))
+        from TAKY2 import state_store
+        key_path = Path(state_store.RUNTIME_KEY_PATH)
+        if not key_path.exists():
+            return False
+        trusted, _runtime, _digest = state_store.load_bundle(runtime_key=key_path.read_bytes())
+    except Exception:
+        return False
+    src = trusted.get("source_registry", {}).get(ref)
+    return (isinstance(src, dict)
+        and src.get("actor") == "USER"
+        and src.get("kind") == "authorization"
+        and src.get("scope") == DEVELOPMENT_AUTHORIZATION_SCOPE
+        and src.get("status") not in {"SUPERSEDED", "REVOKED"})
+
 def b(r: Dict[str, Any], k: str, d: bool=False)->bool: return bool(r.get(k,d))
 def i(r: Dict[str, Any], k: str, d: int=0)->int:
     try: return int(r.get(k,d))
@@ -190,7 +218,10 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
     if b(r,"external_resource_action"):
         # Authorized development iterations are not single-use calls. Restrict
         # bulk/repeated waste, not normal implementation and verification.
+        # The flag alone is self-declared; the raised budget also requires a
+        # trusted USER authorization ref from the signed TAKY2 authority.
         approved_dev = (b(r,"user_authorized_development")
+            and trusted_development_authorization(r.get("user_authorization_ref"))
             and not b(r,"paid_api_call") and not b(r,"deployment_attempted")
             and not b(r,"destructive_action"))
         default_budget = 8 if approved_dev else 1
