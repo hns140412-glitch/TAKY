@@ -153,3 +153,7 @@ Supersedes the digest/runtime figures above (85474…/v11 are historical).
 - ENFORCEMENT authorized-development budget now bound to trusted USER authorization
   (scope=external_development_calls in signed TAKY2 authority); none registered => OFF (commit 956e8f10)
 - pushed: origin/taky-2.0-orchestrator-2026-10-05 = 968a9940; later local commits not pushed
+- HISTORY disposition receipts written (Drive [HISTORY] TAKY_2.0_CURRENT_DISPOSITION_RECEIPTS, 2026-10-11 V3 PROMOTION);
+  CUR-001/002/003/004/008/009 removed from Drive Active CURRENT
+- Active CURRENT now: CUR-005 / CUR-006 / CUR-007 / CUR-010 / CUR-011
+- pending: V3 Drive title rename [CANDIDATE] -> [CANONICAL]; fresh startup readback receipt next session
