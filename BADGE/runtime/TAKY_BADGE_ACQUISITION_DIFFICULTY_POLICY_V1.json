@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1",
+  "version": "2026-10-02.1",
+  "status": "HUMAN_APPROVED_CURRENT",
+  "principle": "BADGES_SHOULD_BE_EASY_TO_EARN_AT_FIRST; DIFFICULTY MAY INCREASE AT TIER PROMOTION, NOT BY MAKING FIRST ACQUISITION RARE.",
+  "first_acquisition": {
+    "goal": "LOW_FRICTION_EXPLICIT_SUCCESS",
+    "rule": "Use the minimum direct evidence needed to prove the badge behavior without guessing.",
+    "preferred_evidence": [
+      "ONE_EXPLICIT_CHILD_ACTION",
+      "OR_MINIMAL_LINKED_TWO_STEP_FLOW_WHEN_OUTCOME_IS_ESSENTIAL"
+    ],
+    "forbidden": [
+      "AI_INFERENCE_ONLY",
+      "MISSING_LOG_AS_PROOF",
+      "PASSIVE_DURATION_ONLY_WHEN_ACTION_MEANING_IS_UNKNOWN",
+      "SCORE_ONLY_WHEN_BEHAVIOR_MEANING_IS_UNKNOWN"
+    ],
+    "compound_evidence": "DO_NOT_REQUIRE_EXTRA_STEPS_ONLY_TO_MAKE_A_BADGE_HARDER"
+  },
+  "reaward_and_stars": {
+    "rule": "Distinct qualifying events may reaward the same badge under the existing star progression.",
+    "difficulty_increase": "NONE_REQUIRED_PER_STAR",
+    "dedupe": "DISTINCT_SOURCE_EVENT"
+  },
+  "tier_promotion": {
+    "rule": "If difficulty is increased, do it at tier-promotion boundaries rather than first acquisition.",
+    "exact_thresholds": "OPEN_SEPARATE_DESIGN",
+    "allowed_strengthening_examples": [
+      "REPEAT_ACROSS_DISTINCT_SESSIONS",
+      "MORE_INDEPENDENT_EXECUTION",
+      "MORE_COMPLETE_EVIDENCE_CHAIN"
+    ],
+    "invariant": "Tier strengthening must not retroactively block the initial badge identity."
+  },
+  "source_scope": {
+    "rule": "This policy does not automatically authorize a new source app for a badge. App-source scope changes remain explicit authority decisions."
+  },
+  "activation_effect": "NONE",
+  "deployment": "HOLD"
+}

@@ -1,0 +1,222 @@
+{
+  "schema": "TAKY_BADGE_REMAINING_PRODUCER_OPEN_V1",
+  "as_of": "2026-10-02",
+  "status": "OPEN_STRONG_EVIDENCE_REQUIRED",
+  "counts": {
+    "total_catalog": 60,
+    "qa_pass": 54,
+    "open": 6,
+    "active": 0
+  },
+  "global_guards": [
+    "NO_ELAPSED_TIME_ONLY",
+    "NO_SCORE_OR_MASTERY_ONLY",
+    "NO_SILENCE_OR_SCREEN_STILLNESS",
+    "NO_ATTEMPT_COUNT_ONLY",
+    "NO_AI_INFERENCE",
+    "NO_PARENT_GUESS",
+    "NO_MISSING_LOG_AS_PROOF",
+    "SOURCE_EVENT_MUST_BE_EXPLICIT_AND_FEATURE_DECLARED"
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "behavior": "EARLY_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "trusted wake/start boundary",
+        "explicit child start"
+      ],
+      "blocker": "schedule/clock alone cannot prove self-start"
+    },
+    {
+      "badge_id": "BDG-DRAFT-002",
+      "behavior": "ALARM_RESPONSE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "actual alarm-fired or before-alarm boundary",
+        "explicit child action"
+      ],
+      "blocker": "no authoritative alarm event"
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "behavior": "TIME_CREATION_EXTRA",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "required_evidence": [
+        "child-authored extra-time creation/selection outside existing plan",
+        "task execution in that extra time"
+      ],
+      "blocker": "existing free-window producer would collide with 006"
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "behavior": "BEFORE_PROMPT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "authoritative prompt/request ledger boundary",
+        "explicit child initiation"
+      ],
+      "blocker": "absence of parent log is not proof"
+    },
+    {
+      "badge_id": "BDG-DRAFT-035",
+      "behavior": "CALCULATION_CHECK",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "calculation-domain artifact",
+        "before/after correction evidence",
+        "explicit child check"
+      ],
+      "blocker": "generic correction is not calculation-specific"
+    },
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "behavior": "IMPROVEMENT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "required_evidence": [
+        "same-target prior evidence",
+        "same-target current evidence",
+        "verified comparison from Learning Engine or equivalent"
+      ],
+      "blocker": "single score delta is forbidden"
+    }
+  ],
+  "invariants": [
+    "NO_ACTIVATION_EFFECT",
+    "NO_MAIN_MERGE",
+    "NO_NETLIFY",
+    "NO_PRODUCTION_DEPLOYMENT"
+  ],
+  "closed_since_previous": [
+    {
+      "badge_id": "BDG-DRAFT-039",
+      "behavior": "BLOCK_RESOLVED",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_CHILD_STRATEGY_TO_COMPLETION_V1",
+      "evidence": "explicit child strategy switch followed by same-task completion",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_runtime_validation_cutoff": "7d0e257d2515581f8e851fc2302f76cd1ff7d7b1",
+      "runtime_e2e_run": 36979777480,
+      "validation": "PASS_10_OF_10",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-018",
+      "behavior": "LONG_FOCUS",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+      "evidence": "explicit child SINGLE_TASK_FOCUS commitment followed by same-task completion; duration alone is not evidence",
+      "ready_pr": 143,
+      "ready_head": "d78aca9609805bd1f5a0ea455ec1a6f5795d3711",
+      "runtime_e2e_run": 36981505499,
+      "validation": "PASS_10_OF_10",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-030",
+      "behavior": "ROOT_CAUSE_FOUND",
+      "source_app": "HIDE_SEEK",
+      "source_contract_id": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1",
+      "evidence": "captured Code Red rejected-selection artifact + explicit child root-cause explanation bound to the same word/sheet/error",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "hide_pr": 29,
+      "hide_head": "6ef74c4a02a961dc3504826ce13009b4312a3f59",
+      "validation_runs": [
+        36985756330,
+        36985756346
+      ],
+      "validation": "PASS_2_OF_2",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-019",
+      "behavior": "QUIET_IMMERSION",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+      "evidence": "explicit child quiet-immersion selection followed by same-task session completion; no silence or duration proxy",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_head": "49c690e5561b1c561e8b35fe4ba78a80fcca3590",
+      "runtime_e2e_run": 36985930301,
+      "validation": "PASS_10_OF_10",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-031",
+      "behavior": "PERSISTENT_BREAKTHROUGH",
+      "source_app": "HIDE_SEEK",
+      "source_contract_id": "HIDE_BLOCKED_CONTINUE_SOLVE_V1",
+      "evidence": "captured wrong artifact + explicit RETRACE continue action + same-word exact verified solve",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "hide_pr": 29,
+      "hide_head": "c2b08b6b2dc9f2fc1deed5c498fd01de4a50eeba",
+      "validation_runs": [
+        36986184979,
+        36986185005
+      ],
+      "validation": "PASS_2_OF_2",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "behavior": "FLOW_IMMERSION",
+      "source_app": "SNAP_POP",
+      "source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
+      "evidence": "explicit child 'continue to next thought' action in writing exploration + same-exploration verified completion",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "snap_pr": 20,
+      "snap_head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+      "validation": "PASS_74_OF_74_PLUS_BROWSER_PWA_RECOVERY",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "behavior": "PREPARATION_COMPLETE",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_PREPARATION_TO_START_V1",
+      "evidence": "explicit child preparation checklist confirmation followed by same-task start",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_head": "d8239a080dace45289e2b190dc9e8f96730281b2",
+      "runtime_e2e_run": 36988695052,
+      "validation": "PASS_10_OF_10_PLUS_RUNTIME_E2E",
+      "activation": "HOLD"
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "behavior": "RESPONSIVE_START",
+      "source_app": "READY_SET",
+      "source_contract_id": "READY_NAMED_PROMPT_RESPONSE_START_V1",
+      "evidence": "named mission briefing event explicitly linked to child start action",
+      "first_acquisition_policy": "EASY_FIRST_MINIMUM_EXPLICIT_EVIDENCE",
+      "ready_pr": 143,
+      "ready_head": "d8239a080dace45289e2b190dc9e8f96730281b2",
+      "runtime_e2e_run": 36988695052,
+      "validation": "PASS_10_OF_10_PLUS_RUNTIME_E2E",
+      "activation": "HOLD"
+    }
+  ]
+}

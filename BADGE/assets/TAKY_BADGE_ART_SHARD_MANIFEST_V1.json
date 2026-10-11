@@ -1,0 +1,94 @@
+{
+  "schema": "TAKY_BADGE_ART_SHARD_MANIFEST_V1",
+  "version": "2026-10-02.1",
+  "status": "SYNCED",
+  "profile": "512x512_WEBP_Q82",
+  "magic": "TKYSHD01",
+  "total": 60,
+  "shard_count": 10,
+  "binary_total_bytes": 3891414,
+  "target_repo": "hns140412-glitch/Snap-Pop",
+  "target_branch": "taky/badge-catalog-ui-binding-20261001",
+  "shards": [
+    {
+      "shard": 1,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-01.bin",
+      "sha256": "f2920142b489e33d8f3e07d7c6b6a7674448e5eb873977f5a6fd6435a5015eb2",
+      "slot_start": 1,
+      "slot_end": 6,
+      "bytes": 374323
+    },
+    {
+      "shard": 2,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-02.bin",
+      "sha256": "de006e0a848d6b775bf0ac3909efc02e626592fb47853bc8c788cd156e87c4b5",
+      "slot_start": 7,
+      "slot_end": 12,
+      "bytes": 405420
+    },
+    {
+      "shard": 3,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-03.bin",
+      "sha256": "e46ba95535d84f0c4c5a97956018999ede41dfff3811cb598ab04e266941abfd",
+      "slot_start": 13,
+      "slot_end": 18,
+      "bytes": 424647
+    },
+    {
+      "shard": 4,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-04.bin",
+      "sha256": "8bc210200e724542e00c42c0b49ab5e6d0dd471961d7781adacd0ea641a42f3f",
+      "slot_start": 19,
+      "slot_end": 24,
+      "bytes": 407889
+    },
+    {
+      "shard": 5,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-05.bin",
+      "sha256": "55867cc171d8c155ae639ddcad0a6599bc5e31e8c22db9a081a5690ff7817c1a",
+      "slot_start": 25,
+      "slot_end": 30,
+      "bytes": 406719
+    },
+    {
+      "shard": 6,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-06.bin",
+      "sha256": "c048c11a910f24311817f4fa046313530931cf7550bc9dce705caf31b44978a8",
+      "slot_start": 31,
+      "slot_end": 36,
+      "bytes": 428669
+    },
+    {
+      "shard": 7,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-07.bin",
+      "sha256": "33206eed33c8d25403c7a907515f01826d491c0a88331db8204ca218e8730b18",
+      "slot_start": 37,
+      "slot_end": 42,
+      "bytes": 413769
+    },
+    {
+      "shard": 8,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-08.bin",
+      "sha256": "b320a5f674fd4fd20e76cbd0b6f352f82da0ef63fc079bc4f65d171840176970",
+      "slot_start": 43,
+      "slot_end": 48,
+      "bytes": 361493
+    },
+    {
+      "shard": 9,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-09.bin",
+      "sha256": "5abfd29dc587ee1280117f46e47de16af7e8acebbc71d0cf89e8fbc1de11284c",
+      "slot_start": 49,
+      "slot_end": 54,
+      "bytes": 330547
+    },
+    {
+      "shard": 10,
+      "path": "assets/badges/current/shards/taky-badge-art-shard-10.bin",
+      "sha256": "e6c9117d38df489f08c298ece778224a8dcb27570d457dce8b4c56b43865833a",
+      "slot_start": 55,
+      "slot_end": 60,
+      "bytes": 337938
+    }
+  ]
+}

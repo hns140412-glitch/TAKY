@@ -1,0 +1,2623 @@
+{
+  "schema": "TAKY_BADGE_MATCHER_EVIDENCE_MATRIX_V2_2_READY_E2E",
+  "version": "2026-10-02.22",
+  "status": "REVIEW_REQUIRED_NOT_ACTIVE",
+  "source_observation_contract": "TAKY_BADGE_SOURCE_OBSERVATION_V1",
+  "summary": {
+    "total": 60,
+    "source_producer_qa_pass": 59,
+    "source_producer_required": 1,
+    "active": 0,
+    "observation_only_family_count": 25,
+    "source_producer_implemented_pending_ci": 0
+  },
+  "verified_snap_pop_producers": [
+    {
+      "badge_id": "BDG-DRAFT-024",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "HELP_USED_AND_RESUMED",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-025",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_REQUEST",
+      "behaviorCode": "SELF_HELP_REQUEST",
+      "sourceContractId": "SNAP_POP_HINT_REQUEST_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-026",
+      "appId": "SNAP_POP",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "SELF_ERROR_DISCOVERY",
+      "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-029",
+      "appId": "SNAP_POP",
+      "eventFamily": "RETRY",
+      "behaviorCode": "SELF_RETRY",
+      "sourceContractId": "SNAP_POP_CHILD_REVISION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-037",
+      "appId": "SNAP_POP",
+      "eventFamily": "DEEP_THINKING",
+      "behaviorCode": "DEEP_THINKING",
+      "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-055",
+      "appId": "SNAP_POP",
+      "eventFamily": "EXTRA_TASK",
+      "behaviorCode": "VOLUNTARY_EXTRA",
+      "sourceContractId": "SNAP_POP_BONUS_EXERCISE_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-059",
+      "appId": "SNAP_POP",
+      "eventFamily": "HELP_USE",
+      "behaviorCode": "MINIMAL_HINT_SOLVE",
+      "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-060",
+      "appId": "SNAP_POP",
+      "eventFamily": "SPECIAL_BEHAVIOR",
+      "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
+      "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-038",
+      "appId": "SNAP_POP",
+      "eventFamily": "DEEP_THINKING",
+      "behaviorCode": "DEEP_THINKING_PERSISTENCE",
+      "sourceContractId": "SNAP_POP_REFLECTION_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-042",
+      "appId": "SNAP_POP",
+      "eventFamily": "FOCUS",
+      "behaviorCode": "FLOW_IMMERSION",
+      "sourceContractId": "SNAP_POP_CHILD_FLOW_IMMERSION_V1"
+    }
+  ],
+  "qa": {
+    "producer_observations_created": 8,
+    "all_observation_only": true,
+    "badge_award_authorized": false,
+    "economy_mutation_authorized": false,
+    "browser_runtime": "PASS",
+    "pwa_recovery": "PASS",
+    "retry_source_producer": "PASS",
+    "help_use_two_hint": "PASS",
+    "minimal_hint_one_hint": "PASS",
+    "multi_source_matcher": "PASS",
+    "ready_source_branch": "taky/badge-source-producers-20261002",
+    "ready_draft_pr": 143,
+    "ready_runtime_e2e": "PASS",
+    "ready_all_pr_checks": "PASS_10_OF_10",
+    "ready_pr_head": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+    "hide_source_branch": "taky/badge-source-producers-20261002",
+    "hide_draft_pr": 29,
+    "hide_validation": "PASS_2_OF_2",
+    "ready_self_check": "PASS",
+    "hide_pr_head": "c2b08b6b2dc9f2fc1deed5c498fd01de4a50eeba",
+    "ready_pause_return": "PASS",
+    "ready_condition_rest_return": "PASS",
+    "hide_error_review": "PASS",
+    "ready_runtime_e2e_run_id": 36997249758,
+    "hide_correction_courage": "PASS_HARDENED",
+    "hide_correction_courage_runs": [
+      36977546753,
+      36977546746
+    ],
+    "snap_pop_pr_head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+    "snap_pop_deep_thinking_persistence": "PASS",
+    "snap_pop_full_closure": "PASS_73_OF_73_LOCAL",
+    "ready_runtime_validation_cutoff": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+    "ready_block_resolved": "PASS",
+    "ready_long_focus": "PASS",
+    "hide_root_cause": "PASS",
+    "hide_root_cause_runs": [
+      36985756330,
+      36985756346
+    ],
+    "ready_quiet_immersion": "PASS",
+    "hide_persistent_breakthrough": "PASS",
+    "hide_persistent_breakthrough_runs": [
+      36986184979,
+      36986185005
+    ],
+    "snap_pop_flow_immersion": "PASS_LOCAL_BRANCH_CLOSURE_74_OF_74_BROWSER_PWA_PASS",
+    "snap_pop_flow_immersion_validation": {
+      "branch_closure": "PASS_74_OF_74",
+      "browser_runtime_cdp": "PASS",
+      "pwa_reload_recovery": "PASS",
+      "pwa_offline_shell": "PASS"
+    },
+    "ready_preparation_complete": "PASS",
+    "ready_responsive_start": "PASS",
+    "ready_early_start": "PASS",
+    "ready_child_extra_time": "PASS",
+    "learning_calculation_check": "PASS",
+    "learning_calculation_check_head": "0050bc3265e5ec625b398d545b336a01c8ce5564",
+    "learning_calculation_check_enforcement_run_id": 36995170201,
+    "ready_alarm_response": "PASS",
+    "ready_before_prompt": "PASS"
+  },
+  "invariants": [
+    "No badge is activated by this matrix.",
+    "A family existing in taxonomy does not mean its badge matcher is safe.",
+    "Each badge requires an explicit discriminator behavior_code to avoid multi-award collisions.",
+    "A historical trigger description is never executable matching logic.",
+    "Strong-evidence source contracts remain mandatory for error discovery, deep thinking, and special behavior.",
+    "badge_id, visual_id, asset_slot_id and art SHA stay unchanged.",
+    "Source-producer QA PASS is evidence availability only; catalog activation remains 0/60.",
+    "Distinct source_contract_id discriminates semantically different badges that share a behavior code.",
+    "First acquisition uses minimum explicit evidence; tier-promotion strengthening is a separate axis."
+  ],
+  "items": [
+    {
+      "slot": 1,
+      "badge_id": "BDG-DRAFT-001",
+      "display_title": "이불 왕국 탈출기",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "SELF_START",
+      "behavior_code": "EARLY_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EARLY_START_BOUNDARY_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_START",
+        "behavior_code": "EARLY_START",
+        "source_contract_id": "READY_EARLY_START_BOUNDARY_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_START",
+          "behaviorCode": "EARLY_START",
+          "sourceContractId": "READY_EARLY_START_BOUNDARY_V1"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "badge_id": "BDG-DRAFT-002",
+      "display_title": "알람보다 한발 먼저",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "SELF_START",
+      "behavior_code": "ALARM_RESPONSE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_AUTHORITATIVE_ALARM_RESPONSE_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_START",
+        "behavior_code": "ALARM_RESPONSE",
+        "source_contract_id": "READY_AUTHORITATIVE_ALARM_RESPONSE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_START",
+          "behaviorCode": "ALARM_RESPONSE",
+          "sourceContractId": "READY_AUTHORITATIVE_ALARM_RESPONSE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "badge_id": "BDG-DRAFT-003",
+      "display_title": "한 입 먹고 한 칸",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "MICRO_TASK_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_PRE_MEAL_MICRO_COMPLETE_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "MICRO_TASK_COMPLETE",
+        "source_contract_id": "READY_PRE_MEAL_MICRO_COMPLETE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "MICRO_TASK_COMPLETE",
+          "sourceContractId": "READY_PRE_MEAL_MICRO_COMPLETE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "badge_id": "BDG-DRAFT-004",
+      "display_title": "밥심으로 2라운드",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "POST_MEAL_RESTART",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_POST_MEAL_RESTART_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "POST_MEAL_RESTART",
+        "source_contract_id": "READY_POST_MEAL_RESTART_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "POST_MEAL_RESTART",
+          "sourceContractId": "READY_POST_MEAL_RESTART_V1"
+        }
+      ]
+    },
+    {
+      "slot": 5,
+      "badge_id": "BDG-DRAFT-005",
+      "display_title": "신발끈은 이미 출발했다",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "PREPARATION_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_PREPARATION_TO_START_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "PREPARATION_COMPLETE",
+        "source_contract_id": "READY_PREPARATION_TO_START_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "PREPARATION_COMPLETE",
+          "sourceContractId": "READY_PREPARATION_TO_START_V1"
+        }
+      ]
+    },
+    {
+      "slot": 6,
+      "badge_id": "BDG-DRAFT-006",
+      "display_title": "잃어버린 분을 찾습니다",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "TIME_CREATION",
+      "behavior_code": "SELF_START_IN_FREE_WINDOW",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_FREE_WINDOW_SELF_START_V1",
+      "matcher_candidate": {
+        "event_family": "TIME_CREATION",
+        "behavior_code": "SELF_START_IN_FREE_WINDOW",
+        "source_contract_id": "READY_FREE_WINDOW_SELF_START_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "TIME_CREATION",
+          "behaviorCode": "SELF_START_IN_FREE_WINDOW",
+          "sourceContractId": "READY_FREE_WINDOW_SELF_START_V1"
+        }
+      ]
+    },
+    {
+      "slot": 7,
+      "badge_id": "BDG-DRAFT-007",
+      "display_title": "시계의 비밀 주머니",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "TIME_CREATION",
+      "behavior_code": "TIME_CREATION_EXTRA",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_EXTRA_TIME_EXECUTION_V1",
+      "matcher_candidate": {
+        "event_family": "TIME_CREATION",
+        "behavior_code": "TIME_CREATION_EXTRA",
+        "source_contract_id": "READY_CHILD_EXTRA_TIME_EXECUTION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "TIME_CREATION",
+          "behaviorCode": "TIME_CREATION_EXTRA",
+          "sourceContractId": "READY_CHILD_EXTRA_TIME_EXECUTION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 8,
+      "badge_id": "BDG-DRAFT-008",
+      "display_title": "한 개는 덤입니다",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "EXTRA_TASK",
+      "behavior_code": "VOLUNTARY_EXTRA_AFTER_REQUIRED_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_VOLUNTARY_EXTRA_CHOICE_V1",
+      "matcher_candidate": {
+        "event_family": "EXTRA_TASK",
+        "behavior_code": "VOLUNTARY_EXTRA_AFTER_REQUIRED_COMPLETE",
+        "source_contract_id": "READY_VOLUNTARY_EXTRA_CHOICE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "EXTRA_TASK",
+          "behaviorCode": "VOLUNTARY_EXTRA_AFTER_REQUIRED_COMPLETE",
+          "sourceContractId": "READY_VOLUNTARY_EXTRA_CHOICE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 9,
+      "badge_id": "BDG-DRAFT-009",
+      "display_title": "아무도 안 시켰는데요?",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "SELF_START",
+      "behavior_code": "BEFORE_PROMPT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_AUTHORITATIVE_PROMPT_LEDGER_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_START",
+        "behavior_code": "BEFORE_PROMPT",
+        "source_contract_id": "READY_AUTHORITATIVE_PROMPT_LEDGER_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_START",
+          "behaviorCode": "BEFORE_PROMPT",
+          "sourceContractId": "READY_AUTHORITATIVE_PROMPT_LEDGER_V1"
+        }
+      ]
+    },
+    {
+      "slot": 10,
+      "badge_id": "BDG-DRAFT-010",
+      "display_title": "말보다 빠른 발자국",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "SELF_START",
+      "behavior_code": "RESPONSIVE_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_NAMED_PROMPT_RESPONSE_START_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_START",
+        "behavior_code": "RESPONSIVE_START",
+        "source_contract_id": "READY_NAMED_PROMPT_RESPONSE_START_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_START",
+          "behaviorCode": "RESPONSIVE_START",
+          "sourceContractId": "READY_NAMED_PROMPT_RESPONSE_START_V1"
+        }
+      ]
+    },
+    {
+      "slot": 11,
+      "badge_id": "BDG-DRAFT-011",
+      "display_title": "내 작전, 내가 결재",
+      "primary_nature": "SELF_DIRECTED",
+      "event_family": "SELF_CHOICE",
+      "behavior_code": "SELF_CHOICE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_TASK_SWITCH_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_CHOICE",
+        "behavior_code": "SELF_CHOICE",
+        "source_contract_id": "READY_EXPLICIT_TASK_SWITCH_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_CHOICE",
+          "behaviorCode": "SELF_CHOICE",
+          "sourceContractId": "READY_EXPLICIT_TASK_SWITCH_V1"
+        }
+      ]
+    },
+    {
+      "slot": 12,
+      "badge_id": "BDG-DRAFT-012",
+      "display_title": "연필 참모총장",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "SELF_PLANNING",
+      "behavior_code": "SELF_PLANNED_SEQUENCE",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_SEQUENCE_PLAN_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_PLANNING",
+        "behavior_code": "SELF_PLANNED_SEQUENCE",
+        "source_contract_id": "READY_CHILD_SEQUENCE_PLAN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_PLANNING",
+          "behaviorCode": "SELF_PLANNED_SEQUENCE",
+          "sourceContractId": "READY_CHILD_SEQUENCE_PLAN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 13,
+      "badge_id": "BDG-DRAFT-013",
+      "display_title": "한 칸 집중 본부",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "FOCUS",
+      "behavior_code": "SINGLE_TASK_FOCUS",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1",
+      "matcher_candidate": {
+        "event_family": "FOCUS",
+        "behavior_code": "SINGLE_TASK_FOCUS",
+        "source_contract_id": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "SINGLE_TASK_FOCUS",
+          "sourceContractId": "READY_EXPLICIT_SINGLE_TASK_FOCUS_V1"
+        }
+      ]
+    },
+    {
+      "slot": 14,
+      "badge_id": "BDG-DRAFT-014",
+      "display_title": "번개도 검토했습니다",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "FAST_COMPLETE_WITH_CHECK",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_FAST_COMPLETE_WITH_CHECK_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "FAST_COMPLETE_WITH_CHECK",
+        "source_contract_id": "READY_FAST_COMPLETE_WITH_CHECK_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "FAST_COMPLETE_WITH_CHECK",
+          "sourceContractId": "READY_FAST_COMPLETE_WITH_CHECK_V1"
+        }
+      ]
+    },
+    {
+      "slot": 15,
+      "badge_id": "BDG-DRAFT-015",
+      "display_title": "거북이의 정밀 탐험",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "ACCURACY_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CAREFUL_OVERRUN_COMPLETE_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "ACCURACY_COMPLETE",
+        "source_contract_id": "READY_CAREFUL_OVERRUN_COMPLETE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "ACCURACY_COMPLETE",
+          "sourceContractId": "READY_CAREFUL_OVERRUN_COMPLETE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 16,
+      "badge_id": "BDG-DRAFT-016",
+      "display_title": "한 칸의 반란",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "CHILD_CHUNKED_TASK_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_CHUNKED_TASK_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "CHILD_CHUNKED_TASK_COMPLETE",
+        "source_contract_id": "READY_CHILD_CHUNKED_TASK_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "CHILD_CHUNKED_TASK_COMPLETE",
+          "sourceContractId": "READY_CHILD_CHUNKED_TASK_V1"
+        }
+      ]
+    },
+    {
+      "slot": 17,
+      "badge_id": "BDG-DRAFT-017",
+      "display_title": "끝판왕은 마지막 한 칸",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "PERSIST_TO_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_PERSIST_TO_COMPLETE_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "PERSIST_TO_COMPLETE",
+        "source_contract_id": "READY_PERSIST_TO_COMPLETE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "PERSIST_TO_COMPLETE",
+          "sourceContractId": "READY_PERSIST_TO_COMPLETE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 18,
+      "badge_id": "BDG-DRAFT-018",
+      "display_title": "불꽃은 조용히 탄다",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "FOCUS",
+      "behavior_code": "LONG_FOCUS",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+      "matcher_candidate": {
+        "event_family": "FOCUS",
+        "behavior_code": "LONG_FOCUS",
+        "source_contract_id": "READY_CHILD_SUSTAINED_FOCUS_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "LONG_FOCUS",
+          "sourceContractId": "READY_CHILD_SUSTAINED_FOCUS_V1"
+        }
+      ]
+    },
+    {
+      "slot": 19,
+      "badge_id": "BDG-DRAFT-019",
+      "display_title": "머릿속은 대원정 중",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "FOCUS",
+      "behavior_code": "QUIET_IMMERSION",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+      "matcher_candidate": {
+        "event_family": "FOCUS",
+        "behavior_code": "QUIET_IMMERSION",
+        "source_contract_id": "READY_CHILD_QUIET_IMMERSION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "QUIET_IMMERSION",
+          "sourceContractId": "READY_CHILD_QUIET_IMMERSION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 20,
+      "badge_id": "BDG-DRAFT-020",
+      "display_title": "집중 급류 탑승",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "SELF_CHOICE",
+      "behavior_code": "VOLUNTARY_NEXT_TASK_CONTINUE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_VOLUNTARY_FLOW_CONTINUATION_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_CHOICE",
+        "behavior_code": "VOLUNTARY_NEXT_TASK_CONTINUE",
+        "source_contract_id": "READY_VOLUNTARY_FLOW_CONTINUATION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_CHOICE",
+          "behaviorCode": "VOLUNTARY_NEXT_TASK_CONTINUE",
+          "sourceContractId": "READY_VOLUNTARY_FLOW_CONTINUATION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 21,
+      "badge_id": "BDG-DRAFT-021",
+      "display_title": "집중이 귀가했습니다",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "SELF_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_PAUSE_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "SELF_RETURN",
+        "source_contract_id": "READY_EXPLICIT_PAUSE_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "SELF_RETURN",
+          "sourceContractId": "READY_EXPLICIT_PAUSE_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 22,
+      "badge_id": "BDG-DRAFT-022",
+      "display_title": "잠깐 외출한 집중 씨",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "FOCUS_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_FOCUS_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "FOCUS_RETURN",
+        "source_contract_id": "READY_EXPLICIT_FOCUS_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "FOCUS_RETURN",
+          "sourceContractId": "READY_EXPLICIT_FOCUS_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 23,
+      "badge_id": "BDG-DRAFT-023",
+      "display_title": "흩어진 마음 수거함",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "SELF_NOTICE_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_SELF_NOTICE_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "SELF_NOTICE_RETURN",
+        "source_contract_id": "READY_EXPLICIT_SELF_NOTICE_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "SELF_NOTICE_RETURN",
+          "sourceContractId": "READY_EXPLICIT_SELF_NOTICE_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 24,
+      "badge_id": "BDG-DRAFT-024",
+      "display_title": "오늘 한 조각 구조 완료",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "HELP_USE",
+      "behavior_code": "HELP_USED_AND_RESUMED",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
+      "matcher_candidate": {
+        "event_family": "HELP_USE",
+        "behavior_code": "HELP_USED_AND_RESUMED",
+        "source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_USE",
+          "behaviorCode": "HELP_USED_AND_RESUMED",
+          "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 25,
+      "badge_id": "BDG-DRAFT-025",
+      "display_title": "SOS도 기술이다",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "HELP_REQUEST",
+      "behavior_code": "SELF_HELP_REQUEST",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_HINT_REQUEST_V1",
+      "matcher_candidate": {
+        "event_family": "HELP_REQUEST",
+        "behavior_code": "SELF_HELP_REQUEST",
+        "source_contract_id": "SNAP_POP_HINT_REQUEST_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_REQUEST",
+          "behaviorCode": "SELF_HELP_REQUEST",
+          "sourceContractId": "SNAP_POP_HINT_REQUEST_V1"
+        }
+      ]
+    },
+    {
+      "slot": 26,
+      "badge_id": "BDG-DRAFT-026",
+      "display_title": "이상한 건 못 지나쳐",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_DISCOVERY",
+      "behavior_code": "SELF_ERROR_DISCOVERY",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_CHILD_SELF_CORRECTION_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_DISCOVERY",
+        "behavior_code": "SELF_ERROR_DISCOVERY",
+        "source_contract_id": "SNAP_POP_CHILD_SELF_CORRECTION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "ERROR_DISCOVERY",
+          "behaviorCode": "SELF_ERROR_DISCOVERY",
+          "sourceContractId": "SNAP_POP_CHILD_SELF_CORRECTION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 27,
+      "badge_id": "BDG-DRAFT-027",
+      "display_title": "실수 청소부",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_DISCOVERY",
+      "behavior_code": "ERROR_REVIEW",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "HIDE_EXPLICIT_RETRACE_REVIEW_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_DISCOVERY",
+        "behavior_code": "ERROR_REVIEW",
+        "source_contract_id": "HIDE_EXPLICIT_RETRACE_REVIEW_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "ERROR_DISCOVERY",
+          "behaviorCode": "ERROR_REVIEW",
+          "sourceContractId": "HIDE_EXPLICIT_RETRACE_REVIEW_V1"
+        }
+      ]
+    },
+    {
+      "slot": 28,
+      "badge_id": "BDG-DRAFT-028",
+      "display_title": "수정이 나를 키웠다",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_CORRECTION",
+      "behavior_code": "ERROR_CORRECTED_COMPLETE",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "HIDE_RETRACE_CORRECTION_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_CORRECTION",
+        "behavior_code": "ERROR_CORRECTED_COMPLETE",
+        "source_contract_id": "HIDE_RETRACE_CORRECTION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "ERROR_CORRECTION",
+          "behaviorCode": "ERROR_CORRECTED_COMPLETE",
+          "sourceContractId": "HIDE_RETRACE_CORRECTION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 29,
+      "badge_id": "BDG-DRAFT-029",
+      "display_title": "다시 누르는 용기",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETRY",
+      "behavior_code": "SELF_RETRY",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_CHILD_REVISION_V1",
+      "matcher_candidate": {
+        "event_family": "RETRY",
+        "behavior_code": "SELF_RETRY",
+        "source_contract_id": "SNAP_POP_CHILD_REVISION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "RETRY",
+          "behaviorCode": "SELF_RETRY",
+          "sourceContractId": "SNAP_POP_CHILD_REVISION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 30,
+      "badge_id": "BDG-DRAFT-030",
+      "display_title": "범인은 3번째 줄",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_ANALYSIS",
+      "behavior_code": "ROOT_CAUSE_FOUND",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_ANALYSIS",
+        "behavior_code": "ROOT_CAUSE_FOUND",
+        "source_contract_id": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "ERROR_ANALYSIS",
+          "behaviorCode": "ROOT_CAUSE_FOUND",
+          "sourceContractId": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 31,
+      "badge_id": "BDG-DRAFT-031",
+      "display_title": "퍼즐은 마지막에 웃는다",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "BREAKTHROUGH",
+      "behavior_code": "PERSISTENT_BREAKTHROUGH",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "HIDE_BLOCKED_CONTINUE_SOLVE_V1",
+      "matcher_candidate": {
+        "event_family": "BREAKTHROUGH",
+        "behavior_code": "PERSISTENT_BREAKTHROUGH",
+        "source_contract_id": "HIDE_BLOCKED_CONTINUE_SOLVE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "BREAKTHROUGH",
+          "behaviorCode": "PERSISTENT_BREAKTHROUGH",
+          "sourceContractId": "HIDE_BLOCKED_CONTINUE_SOLVE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 32,
+      "badge_id": "BDG-DRAFT-032",
+      "display_title": "머릿속 전구 긴급 점등",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "CONCEPT_UNDERSTANDING",
+      "behavior_code": "CONCEPT_UNDERSTANDING",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_CONCEPT_EXPLANATION_V1",
+      "matcher_candidate": {
+        "event_family": "CONCEPT_UNDERSTANDING",
+        "behavior_code": "CONCEPT_UNDERSTANDING",
+        "source_contract_id": "READY_CHILD_CONCEPT_EXPLANATION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "CONCEPT_UNDERSTANDING",
+          "behaviorCode": "CONCEPT_UNDERSTANDING",
+          "sourceContractId": "READY_CHILD_CONCEPT_EXPLANATION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 33,
+      "badge_id": "BDG-DRAFT-033",
+      "display_title": "잠깐! 생각 검문",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "DEEP_THINKING",
+      "behavior_code": "REFLECT_BEFORE_PROCEED",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_REFLECTION_V1",
+      "matcher_candidate": {
+        "event_family": "DEEP_THINKING",
+        "behavior_code": "REFLECT_BEFORE_PROCEED",
+        "source_contract_id": "READY_EXPLICIT_REFLECTION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "DEEP_THINKING",
+          "behaviorCode": "REFLECT_BEFORE_PROCEED",
+          "sourceContractId": "READY_EXPLICIT_REFLECTION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 34,
+      "badge_id": "BDG-DRAFT-034",
+      "display_title": "두 번째 눈이 찾았다",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_CORRECTION",
+      "behavior_code": "REREAD_CHECK",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_REREAD_CHECK_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_CORRECTION",
+        "behavior_code": "REREAD_CHECK",
+        "source_contract_id": "READY_EXPLICIT_REREAD_CHECK_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "ERROR_CORRECTION",
+          "behaviorCode": "REREAD_CHECK",
+          "sourceContractId": "READY_EXPLICIT_REREAD_CHECK_V1"
+        }
+      ]
+    },
+    {
+      "slot": 35,
+      "badge_id": "BDG-DRAFT-035",
+      "display_title": "숫자의 알리바이",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_CORRECTION",
+      "behavior_code": "CALCULATION_CHECK",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "LEARNING_ENGINE_CORE"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "LEARNING_VERIFIED_CALCULATION_CHECK_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_CORRECTION",
+        "behavior_code": "CALCULATION_CHECK",
+        "source_contract_id": "LEARNING_VERIFIED_CALCULATION_CHECK_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "LEARNING_ENGINE_CORE",
+          "eventFamily": "ERROR_CORRECTION",
+          "behaviorCode": "CALCULATION_CHECK",
+          "sourceContractId": "LEARNING_VERIFIED_CALCULATION_CHECK_V1"
+        }
+      ]
+    },
+    {
+      "slot": 36,
+      "badge_id": "BDG-DRAFT-036",
+      "display_title": "지우개는 퇴각하지 않는다",
+      "primary_nature": "ERROR_LEARNING",
+      "event_family": "ERROR_CORRECTION",
+      "behavior_code": "CORRECTION_COURAGE",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+      "matcher_candidate": {
+        "event_family": "ERROR_CORRECTION",
+        "behavior_code": "CORRECTION_COURAGE",
+        "source_contract_id": "HIDE_RETRACE_CORRECTION_COURAGE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "HIDE_SEEK",
+          "eventFamily": "ERROR_CORRECTION",
+          "behaviorCode": "CORRECTION_COURAGE",
+          "sourceContractId": "HIDE_RETRACE_CORRECTION_COURAGE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 37,
+      "badge_id": "BDG-DRAFT-037",
+      "display_title": "장고 끝에 지도 한 장",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "DEEP_THINKING",
+      "behavior_code": "DEEP_THINKING",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1",
+      "matcher_candidate": {
+        "event_family": "DEEP_THINKING",
+        "behavior_code": "DEEP_THINKING",
+        "source_contract_id": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "DEEP_THINKING",
+          "behaviorCode": "DEEP_THINKING",
+          "sourceContractId": "SNAP_POP_CHILD_REFLECTION_ARTIFACT_V1"
+        }
+      ]
+    },
+    {
+      "slot": 38,
+      "badge_id": "BDG-DRAFT-038",
+      "display_title": "동굴에 답이 살고 있다",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "DEEP_THINKING",
+      "behavior_code": "DEEP_THINKING_PERSISTENCE",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
+      "matcher_candidate": {
+        "event_family": "DEEP_THINKING",
+        "behavior_code": "DEEP_THINKING_PERSISTENCE",
+        "source_contract_id": "SNAP_POP_REFLECTION_TO_COMPLETION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "DEEP_THINKING",
+          "behaviorCode": "DEEP_THINKING_PERSISTENCE",
+          "sourceContractId": "SNAP_POP_REFLECTION_TO_COMPLETION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 39,
+      "badge_id": "BDG-DRAFT-039",
+      "display_title": "막다른 길의 뒷문",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "BREAKTHROUGH",
+      "behavior_code": "BLOCK_RESOLVED",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_STRATEGY_TO_COMPLETION_V1",
+      "matcher_candidate": {
+        "event_family": "BREAKTHROUGH",
+        "behavior_code": "BLOCK_RESOLVED",
+        "source_contract_id": "READY_CHILD_STRATEGY_TO_COMPLETION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "FIRST_ACQUISITION_MINIMUM_EXPLICIT_ACTION_PLUS_VERIFIED_OUTCOME",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "BREAKTHROUGH",
+          "behaviorCode": "BLOCK_RESOLVED",
+          "sourceContractId": "READY_CHILD_STRATEGY_TO_COMPLETION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 40,
+      "badge_id": "BDG-DRAFT-040",
+      "display_title": "멈춤도 실력입니다",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "SELF_REGULATION",
+      "behavior_code": "STOP_AT_RIGHT_TIME",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_STOP_AT_RIGHT_TIME_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_REGULATION",
+        "behavior_code": "STOP_AT_RIGHT_TIME",
+        "source_contract_id": "READY_EXPLICIT_STOP_AT_RIGHT_TIME_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_REGULATION",
+          "behaviorCode": "STOP_AT_RIGHT_TIME",
+          "sourceContractId": "READY_EXPLICIT_STOP_AT_RIGHT_TIME_V1"
+        }
+      ]
+    },
+    {
+      "slot": 41,
+      "badge_id": "BDG-DRAFT-041",
+      "display_title": "지도 밖으로 한 발",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "SELF_REGULATION",
+      "behavior_code": "MEANINGFUL_OVERRUN",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_MEANINGFUL_OVERRUN_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_REGULATION",
+        "behavior_code": "MEANINGFUL_OVERRUN",
+        "source_contract_id": "READY_CHILD_MEANINGFUL_OVERRUN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_REGULATION",
+          "behaviorCode": "MEANINGFUL_OVERRUN",
+          "sourceContractId": "READY_CHILD_MEANINGFUL_OVERRUN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 42,
+      "badge_id": "BDG-DRAFT-042",
+      "display_title": "시계 실종 사건",
+      "primary_nature": "FOCUS_IMMERSION",
+      "event_family": "FOCUS",
+      "behavior_code": "FLOW_IMMERSION",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
+      "matcher_candidate": {
+        "event_family": "FOCUS",
+        "behavior_code": "FLOW_IMMERSION",
+        "source_contract_id": "SNAP_POP_CHILD_FLOW_IMMERSION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "FOCUS",
+          "behaviorCode": "FLOW_IMMERSION",
+          "sourceContractId": "SNAP_POP_CHILD_FLOW_IMMERSION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 43,
+      "badge_id": "BDG-DRAFT-043",
+      "display_title": "휴식 후 재접속",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "BREAK_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_SCHEDULED_BREAK_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "BREAK_RETURN",
+        "source_contract_id": "READY_SCHEDULED_BREAK_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "BREAK_RETURN",
+          "sourceContractId": "READY_SCHEDULED_BREAK_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 44,
+      "badge_id": "BDG-DRAFT-044",
+      "display_title": "5분은 내가 지킨다",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "TIMER_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_BREAK_TIMER_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "TIMER_RETURN",
+        "source_contract_id": "READY_BREAK_TIMER_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "TIMER_RETURN",
+          "sourceContractId": "READY_BREAK_TIMER_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 45,
+      "badge_id": "BDG-DRAFT-045",
+      "display_title": "딴길은 다음에",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "SELF_REGULATION",
+      "behavior_code": "DISTRACTION_RESISTANCE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_DISTRACTION_RESISTANCE_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_REGULATION",
+        "behavior_code": "DISTRACTION_RESISTANCE",
+        "source_contract_id": "READY_EXPLICIT_DISTRACTION_RESISTANCE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_REGULATION",
+          "behaviorCode": "DISTRACTION_RESISTANCE",
+          "sourceContractId": "READY_EXPLICIT_DISTRACTION_RESISTANCE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 46,
+      "badge_id": "BDG-DRAFT-046",
+      "display_title": "책상: 돌아온 주인",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "TASK_RESTART",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_TASK_RESTART_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "TASK_RESTART",
+        "source_contract_id": "READY_EXPLICIT_TASK_RESTART_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "TASK_RESTART",
+          "sourceContractId": "READY_EXPLICIT_TASK_RESTART_V1"
+        }
+      ]
+    },
+    {
+      "slot": 47,
+      "badge_id": "BDG-DRAFT-047",
+      "display_title": "배낭의 질서 회복",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "CARRY_OVER_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CARRY_OVER_COMPLETION_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "CARRY_OVER_COMPLETE",
+        "source_contract_id": "READY_CARRY_OVER_COMPLETION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "CARRY_OVER_COMPLETE",
+          "sourceContractId": "READY_CARRY_OVER_COMPLETION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 48,
+      "badge_id": "BDG-DRAFT-048",
+      "display_title": "내일의 나에게 휴가를",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "SELF_CHECK_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_WRAP_UP_SELF_CHECK_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "SELF_CHECK_COMPLETE",
+        "source_contract_id": "READY_WRAP_UP_SELF_CHECK_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "SELF_CHECK_COMPLETE",
+          "sourceContractId": "READY_WRAP_UP_SELF_CHECK_V1"
+        }
+      ]
+    },
+    {
+      "slot": 49,
+      "badge_id": "BDG-DRAFT-049",
+      "display_title": "마무리의 깃털",
+      "primary_nature": "GOAL_ACHIEVEMENT",
+      "event_family": "GOAL_COMPLETE",
+      "behavior_code": "MICRO_TASK_COMPLETE",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_EXPLICIT_MICRO_TASK_COMPLETE_V1",
+      "matcher_candidate": {
+        "event_family": "GOAL_COMPLETE",
+        "behavior_code": "MICRO_TASK_COMPLETE",
+        "source_contract_id": "READY_EXPLICIT_MICRO_TASK_COMPLETE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "GOAL_COMPLETE",
+          "behaviorCode": "MICRO_TASK_COMPLETE",
+          "sourceContractId": "READY_EXPLICIT_MICRO_TASK_COMPLETE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 50,
+      "badge_id": "BDG-DRAFT-050",
+      "display_title": "큰 문부터 노크",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "SELF_CHOICE",
+      "behavior_code": "PRIORITIZE_HARD",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_PRIORITY_CHOICE_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_CHOICE",
+        "behavior_code": "PRIORITIZE_HARD",
+        "source_contract_id": "READY_CHILD_PRIORITY_CHOICE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_CHOICE",
+          "behaviorCode": "PRIORITIZE_HARD",
+          "sourceContractId": "READY_CHILD_PRIORITY_CHOICE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 51,
+      "badge_id": "BDG-DRAFT-051",
+      "display_title": "작은 문부터 똑똑",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "SELF_CHOICE",
+      "behavior_code": "WARM_START",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_PRIORITY_CHOICE_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_CHOICE",
+        "behavior_code": "WARM_START",
+        "source_contract_id": "READY_CHILD_PRIORITY_CHOICE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_CHOICE",
+          "behaviorCode": "WARM_START",
+          "sourceContractId": "READY_CHILD_PRIORITY_CHOICE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 52,
+      "badge_id": "BDG-DRAFT-052",
+      "display_title": "열쇠는 하나가 아니지",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "STRATEGY_SWITCH",
+      "behavior_code": "STRATEGY_SWITCH",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_STRATEGY_SWITCH_V1",
+      "matcher_candidate": {
+        "event_family": "STRATEGY_SWITCH",
+        "behavior_code": "STRATEGY_SWITCH",
+        "source_contract_id": "READY_CHILD_STRATEGY_SWITCH_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "STRATEGY_SWITCH",
+          "behaviorCode": "STRATEGY_SWITCH",
+          "sourceContractId": "READY_CHILD_STRATEGY_SWITCH_V1"
+        }
+      ]
+    },
+    {
+      "slot": 53,
+      "badge_id": "BDG-DRAFT-053",
+      "display_title": "말풍선의 연금술",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "SELF_EXPLANATION",
+      "behavior_code": "SELF_EXPLANATION",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_SELF_EXPLANATION_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_EXPLANATION",
+        "behavior_code": "SELF_EXPLANATION",
+        "source_contract_id": "READY_CHILD_SELF_EXPLANATION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_EXPLANATION",
+          "behaviorCode": "SELF_EXPLANATION",
+          "sourceContractId": "READY_CHILD_SELF_EXPLANATION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 54,
+      "badge_id": "BDG-DRAFT-054",
+      "display_title": "어제의 나와 재회",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "IMPROVEMENT",
+      "behavior_code": "IMPROVEMENT",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_REQUIRED",
+      "required_source_contract_id": null,
+      "matcher_candidate": {
+        "event_family": "IMPROVEMENT",
+        "behavior_code": "IMPROVEMENT",
+        "source_contract_id": "REQUIRED_BEFORE_ACTIVATION",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": []
+    },
+    {
+      "slot": 55,
+      "badge_id": "BDG-DRAFT-055",
+      "display_title": "지도에 없던 보너스 스테이지",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "EXTRA_TASK",
+      "behavior_code": "VOLUNTARY_EXTRA",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_BONUS_EXERCISE_V1",
+      "matcher_candidate": {
+        "event_family": "EXTRA_TASK",
+        "behavior_code": "VOLUNTARY_EXTRA",
+        "source_contract_id": "SNAP_POP_BONUS_EXERCISE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "EXTRA_TASK",
+          "behaviorCode": "VOLUNTARY_EXTRA",
+          "sourceContractId": "SNAP_POP_BONUS_EXERCISE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 56,
+      "badge_id": "BDG-DRAFT-056",
+      "display_title": "계획표의 유연체조",
+      "primary_nature": "PLANNING_SELF_REGULATION",
+      "event_family": "PLAN_ADAPTATION",
+      "behavior_code": "CHILD_PLAN_ADAPTATION",
+      "allowed_source_apps": [
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CHILD_REPLAN_AFTER_CHANGE_V1",
+      "matcher_candidate": {
+        "event_family": "PLAN_ADAPTATION",
+        "behavior_code": "CHILD_PLAN_ADAPTATION",
+        "source_contract_id": "READY_CHILD_REPLAN_AFTER_CHANGE_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "PLAN_ADAPTATION",
+          "behaviorCode": "CHILD_PLAN_ADAPTATION",
+          "sourceContractId": "READY_CHILD_REPLAN_AFTER_CHANGE_V1"
+        }
+      ]
+    },
+    {
+      "slot": 57,
+      "badge_id": "BDG-DRAFT-057",
+      "display_title": "준비 덜 됐어도 출항",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "SELF_START",
+      "behavior_code": "START_DESPITE_CONDITION",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_START_DESPITE_CONDITION_V1",
+      "matcher_candidate": {
+        "event_family": "SELF_START",
+        "behavior_code": "START_DESPITE_CONDITION",
+        "source_contract_id": "READY_START_DESPITE_CONDITION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "SELF_START",
+          "behaviorCode": "START_DESPITE_CONDITION",
+          "sourceContractId": "READY_START_DESPITE_CONDITION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 58,
+      "badge_id": "BDG-DRAFT-058",
+      "display_title": "잠깐 쉬고, 다시 출항",
+      "primary_nature": "RECOVERY_RESILIENCE",
+      "event_family": "RETURN_RECOVERY",
+      "behavior_code": "REST_AND_RETURN",
+      "allowed_source_apps": [
+        "READY_SET",
+        "SNAP_POP",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "READY_CONDITION_PAUSE_RETURN_V1",
+      "matcher_candidate": {
+        "event_family": "RETURN_RECOVERY",
+        "behavior_code": "REST_AND_RETURN",
+        "source_contract_id": "READY_CONDITION_PAUSE_RETURN_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "READY_SET",
+          "eventFamily": "RETURN_RECOVERY",
+          "behaviorCode": "REST_AND_RETURN",
+          "sourceContractId": "READY_CONDITION_PAUSE_RETURN_V1"
+        }
+      ]
+    },
+    {
+      "slot": 59,
+      "badge_id": "BDG-DRAFT-059",
+      "display_title": "우리끼리 미니 원정대",
+      "primary_nature": "PROBLEM_SOLVING",
+      "event_family": "HELP_USE",
+      "behavior_code": "MINIMAL_HINT_SOLVE",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "HIDE_SEEK",
+        "READY_SET"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
+      "matcher_candidate": {
+        "event_family": "HELP_USE",
+        "behavior_code": "MINIMAL_HINT_SOLVE",
+        "source_contract_id": "SNAP_POP_HINT_TO_COMPLETION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_SOURCE_EVENT_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "HELP_USE",
+          "behaviorCode": "MINIMAL_HINT_SOLVE",
+          "sourceContractId": "SNAP_POP_HINT_TO_COMPLETION_V1"
+        }
+      ]
+    },
+    {
+      "slot": 60,
+      "badge_id": "BDG-DRAFT-060",
+      "display_title": "오늘의 별자리, 나만 알아",
+      "primary_nature": "EXTRA_GROWTH",
+      "event_family": "SPECIAL_BEHAVIOR",
+      "behavior_code": "SPECIAL_EXPLORATION_COMPLETED",
+      "allowed_source_apps": [
+        "SNAP_POP",
+        "READY_SET",
+        "HIDE_SEEK"
+      ],
+      "source_producer_status": "SOURCE_PRODUCER_QA_PASS",
+      "required_source_contract_id": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1",
+      "matcher_candidate": {
+        "event_family": "SPECIAL_BEHAVIOR",
+        "behavior_code": "SPECIAL_EXPLORATION_COMPLETED",
+        "source_contract_id": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1",
+        "explicit_child_action": true
+      },
+      "evidence_policy": "EXPLICIT_STRONG_EVIDENCE_REQUIRED",
+      "dedupe_policy": "SOURCE_EVENT_ID",
+      "reaward_policy": "DISTINCT_SOURCE_EVENT_ONLY",
+      "false_positive_guard": [
+        "NO_ELAPSED_TIME_ONLY",
+        "NO_SCORE_ONLY",
+        "NO_AI_INFERENCE_ONLY",
+        "NO_PARENT_GUESS_ONLY",
+        "BEHAVIOR_CODE_MUST_BE_EXPLICITLY_EMITTED_BY_SOURCE_FEATURE"
+      ],
+      "activation_status": "HOLD_NOT_ACTIVE",
+      "source_matchers": [
+        {
+          "appId": "SNAP_POP",
+          "eventFamily": "SPECIAL_BEHAVIOR",
+          "behaviorCode": "SPECIAL_EXPLORATION_COMPLETED",
+          "sourceContractId": "SNAP_POP_DECLARED_SPECIAL_ACTION_V1"
+        }
+      ]
+    }
+  ],
+  "verified_ready_producers": [
+    {
+      "badge_id": "BDG-DRAFT-011",
+      "appId": "READY_SET",
+      "eventFamily": "SELF_CHOICE",
+      "behaviorCode": "SELF_CHOICE",
+      "sourceContractId": "READY_EXPLICIT_TASK_SWITCH_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-021",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "SELF_RETURN",
+      "sourceContractId": "READY_EXPLICIT_PAUSE_RETURN_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-047",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "CARRY_OVER_COMPLETE",
+      "sourceContractId": "READY_CARRY_OVER_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-048",
+      "appId": "READY_SET",
+      "eventFamily": "GOAL_COMPLETE",
+      "behaviorCode": "SELF_CHECK_COMPLETE",
+      "sourceContractId": "READY_WRAP_UP_SELF_CHECK_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-058",
+      "appId": "READY_SET",
+      "eventFamily": "RETURN_RECOVERY",
+      "behaviorCode": "REST_AND_RETURN",
+      "sourceContractId": "READY_CONDITION_PAUSE_RETURN_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-039",
+      "appId": "READY_SET",
+      "eventFamily": "BREAKTHROUGH",
+      "behaviorCode": "BLOCK_RESOLVED",
+      "sourceContractId": "READY_CHILD_STRATEGY_TO_COMPLETION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-019",
+      "appId": "READY_SET",
+      "eventFamily": "FOCUS",
+      "behaviorCode": "QUIET_IMMERSION",
+      "sourceContractId": "READY_CHILD_QUIET_IMMERSION_V1"
+    }
+  ],
+  "verified_hide_producers": [
+    {
+      "badge_id": "BDG-DRAFT-027",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_DISCOVERY",
+      "behaviorCode": "ERROR_REVIEW",
+      "sourceContractId": "HIDE_EXPLICIT_RETRACE_REVIEW_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-028",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_CORRECTION",
+      "behaviorCode": "ERROR_CORRECTED_COMPLETE",
+      "sourceContractId": "HIDE_RETRACE_CORRECTION_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-036",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_CORRECTION",
+      "behaviorCode": "CORRECTION_COURAGE",
+      "sourceContractId": "HIDE_RETRACE_CORRECTION_COURAGE_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-030",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "ERROR_ANALYSIS",
+      "behaviorCode": "ROOT_CAUSE_FOUND",
+      "sourceContractId": "HIDE_ERROR_ARTIFACT_ROOT_CAUSE_V1"
+    },
+    {
+      "badge_id": "BDG-DRAFT-031",
+      "appId": "HIDE_SEEK",
+      "eventFamily": "BREAKTHROUGH",
+      "behaviorCode": "PERSISTENT_BREAKTHROUGH",
+      "sourceContractId": "HIDE_BLOCKED_CONTINUE_SOLVE_V1"
+    }
+  ],
+  "acquisition_difficulty_policy_ref": "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json"
+}

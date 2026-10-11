@@ -1,0 +1,308 @@
+{
+  "schema": "TAKY_BADGE_RUNTIME_WEBP_SHA256_60_V1",
+  "version": "2026-10-02.1",
+  "profile": "512x512_WEBP_Q82",
+  "total": 60,
+  "items": [
+    {
+      "slot": 1,
+      "asset_slot_id": "TAKY_BADGE_ART_001",
+      "runtime_sha256": "38a56509518ab8c3e82fd6dd89a5f37fe9a318139418302f30f670c224dec711"
+    },
+    {
+      "slot": 2,
+      "asset_slot_id": "TAKY_BADGE_ART_002",
+      "runtime_sha256": "ebeeedc9138d553c437a1ec6afd8c934afaf0f30290cd715ef17958386479ebb"
+    },
+    {
+      "slot": 3,
+      "asset_slot_id": "TAKY_BADGE_ART_003",
+      "runtime_sha256": "50bc69bdccb0c640d0ec75da77defbe021f33ed8f0f17780c4ed43a740e08900"
+    },
+    {
+      "slot": 4,
+      "asset_slot_id": "TAKY_BADGE_ART_004",
+      "runtime_sha256": "41f867301ba3a7f15c0c223891754ffd1032b1aad13589fa4b429f361a26ab8b"
+    },
+    {
+      "slot": 5,
+      "asset_slot_id": "TAKY_BADGE_ART_005",
+      "runtime_sha256": "ac86fa7fc3f5153520f4dd0baf18fe6156647207cf9808543e5ebbf1a2a39242"
+    },
+    {
+      "slot": 6,
+      "asset_slot_id": "TAKY_BADGE_ART_006",
+      "runtime_sha256": "a1820fa5313369255ab8303c1f8517e20af3ffc6d5ef5e02819ca436601ddac3"
+    },
+    {
+      "slot": 7,
+      "asset_slot_id": "TAKY_BADGE_ART_007",
+      "runtime_sha256": "c0f3a844b85c7fbb7b031b03b291f841781bf7b63e45f5de60a6cc040ff16e2a"
+    },
+    {
+      "slot": 8,
+      "asset_slot_id": "TAKY_BADGE_ART_008",
+      "runtime_sha256": "78fde23e8a2bb380b25677de2627d7471779962670402ac72f0b91a95d00fed1"
+    },
+    {
+      "slot": 9,
+      "asset_slot_id": "TAKY_BADGE_ART_009",
+      "runtime_sha256": "f1e5a1a9328efe83ae4660a032dd5961eea9e9b7981d266b887a6c9f2d324c9a"
+    },
+    {
+      "slot": 10,
+      "asset_slot_id": "TAKY_BADGE_ART_010",
+      "runtime_sha256": "f3c1f2a37238f989e351d30ff9267756f27360ecb920fc9ec23d29fa30e70da2"
+    },
+    {
+      "slot": 11,
+      "asset_slot_id": "TAKY_BADGE_ART_011",
+      "runtime_sha256": "828ce06cb4e6a7ea4b5864a387a27338396b4c61872210a88e0cba13723f28b2"
+    },
+    {
+      "slot": 12,
+      "asset_slot_id": "TAKY_BADGE_ART_012",
+      "runtime_sha256": "979f009a56601529592c94ebb05e478399777fe41e3edd9f0206cd1c7f1705a2"
+    },
+    {
+      "slot": 13,
+      "asset_slot_id": "TAKY_BADGE_ART_013",
+      "runtime_sha256": "474eed1496dfea35106cff42c75df1ac0edf1a57a3fd75678fa58dd2c71547ba"
+    },
+    {
+      "slot": 14,
+      "asset_slot_id": "TAKY_BADGE_ART_014",
+      "runtime_sha256": "70828a8ba809fcc7aeb68a44e805d229764a3db77afcd5740981f7ba1d8660ba"
+    },
+    {
+      "slot": 15,
+      "asset_slot_id": "TAKY_BADGE_ART_015",
+      "runtime_sha256": "5148616551104ddf02c72e2c6bb219b0bfec96f5be58f5c884c41c059ee259a7"
+    },
+    {
+      "slot": 16,
+      "asset_slot_id": "TAKY_BADGE_ART_016",
+      "runtime_sha256": "72acd38c42de28f173d7798fd12dd2680662022bb7402228fc59808062d2dfce"
+    },
+    {
+      "slot": 17,
+      "asset_slot_id": "TAKY_BADGE_ART_017",
+      "runtime_sha256": "96427f5f0620f455e10cd347533115fe70eaff7fc2e0be92fb2b4dc034ebe034"
+    },
+    {
+      "slot": 18,
+      "asset_slot_id": "TAKY_BADGE_ART_018",
+      "runtime_sha256": "cc1e9af1d49c69a38259d7d8b0c005667487c5471afad3eda4f500b5420a59c4"
+    },
+    {
+      "slot": 19,
+      "asset_slot_id": "TAKY_BADGE_ART_019",
+      "runtime_sha256": "a5202b36e6f9927e231a96e4c51020688c043a859c996ae40ed9e302c8c0f0db"
+    },
+    {
+      "slot": 20,
+      "asset_slot_id": "TAKY_BADGE_ART_020",
+      "runtime_sha256": "941e2e77de1800497600613ce86e04f28aa196b101c719a4f4f5a51ff7916c3f"
+    },
+    {
+      "slot": 21,
+      "asset_slot_id": "TAKY_BADGE_ART_021",
+      "runtime_sha256": "555cc8d74dd8cb40a90c1f301ca64384b07f89d82f5313d9a75ed5198f926603"
+    },
+    {
+      "slot": 22,
+      "asset_slot_id": "TAKY_BADGE_ART_022",
+      "runtime_sha256": "5667c96d6fcd12fd3b2890327571fdfc3922dbee828ffbe51ec3c61979deabc3"
+    },
+    {
+      "slot": 23,
+      "asset_slot_id": "TAKY_BADGE_ART_023",
+      "runtime_sha256": "a6d9974759b6fca83d870e12ee7e440391a5ff0dc2ae6073ef646160f968ef30"
+    },
+    {
+      "slot": 24,
+      "asset_slot_id": "TAKY_BADGE_ART_024",
+      "runtime_sha256": "eb3d2d771e53d927f190384c011c3082cd42cdf43751f2d3dbb409c9f999eba2"
+    },
+    {
+      "slot": 25,
+      "asset_slot_id": "TAKY_BADGE_ART_025",
+      "runtime_sha256": "128cb80c773972815ab14018fe40b121041b9f9d5cc923ca9eb354ef8cc8c566"
+    },
+    {
+      "slot": 26,
+      "asset_slot_id": "TAKY_BADGE_ART_026",
+      "runtime_sha256": "e98d3505a94ac11a0f5dca48abff3c6314be3c612c8e7283f6a006ad2c9a5c43"
+    },
+    {
+      "slot": 27,
+      "asset_slot_id": "TAKY_BADGE_ART_027",
+      "runtime_sha256": "ca7b649319645c4083fa0ee85723624fe3080f806f6dfa5705a8882bec7dd2ed"
+    },
+    {
+      "slot": 28,
+      "asset_slot_id": "TAKY_BADGE_ART_028",
+      "runtime_sha256": "691f4c3cccd2544db0a23d423af10f581a5cb8d70f0d4886f0fe415acc157065"
+    },
+    {
+      "slot": 29,
+      "asset_slot_id": "TAKY_BADGE_ART_029",
+      "runtime_sha256": "cf234edd4f4c7f9d6aefc038bbcca4968f92cecd766763316a37ae53b549cb0d"
+    },
+    {
+      "slot": 30,
+      "asset_slot_id": "TAKY_BADGE_ART_030",
+      "runtime_sha256": "95ef4edc8db0ca7e68354ce3712c8205455ac9dacf8f47377fd823e752bd654c"
+    },
+    {
+      "slot": 31,
+      "asset_slot_id": "TAKY_BADGE_ART_031",
+      "runtime_sha256": "2858289bd120aff2b6b053302540b34303c7e0e6e7de18404c80c7c3068c6993"
+    },
+    {
+      "slot": 32,
+      "asset_slot_id": "TAKY_BADGE_ART_032",
+      "runtime_sha256": "216fb2352aa13f63ecd996bb9ac7fc8299b430d6a90da1bf8aade1c98c34f26e"
+    },
+    {
+      "slot": 33,
+      "asset_slot_id": "TAKY_BADGE_ART_033",
+      "runtime_sha256": "1559294cd5690de320bff207a04f1692feafb2aa2eb542a0968280df0d83c5b8"
+    },
+    {
+      "slot": 34,
+      "asset_slot_id": "TAKY_BADGE_ART_034",
+      "runtime_sha256": "6656dd3093eed602dc98be4b460d5fd816c2df048eb82fb88edd2a04b46688dc"
+    },
+    {
+      "slot": 35,
+      "asset_slot_id": "TAKY_BADGE_ART_035",
+      "runtime_sha256": "1e2741e36ad66e6fef44c31034c8c7a12141fdee87620b9a41ddbcfd6f3f46ae"
+    },
+    {
+      "slot": 36,
+      "asset_slot_id": "TAKY_BADGE_ART_036",
+      "runtime_sha256": "6d816519d38fcfdec35a222ebb3c27776cf28c38d47a1ae5053dd460b5646685"
+    },
+    {
+      "slot": 37,
+      "asset_slot_id": "TAKY_BADGE_ART_037",
+      "runtime_sha256": "dba1c5c34964f14beb6787c21d43ffa796f761f8cbb24fc9acfbc236a8fc6692"
+    },
+    {
+      "slot": 38,
+      "asset_slot_id": "TAKY_BADGE_ART_038",
+      "runtime_sha256": "b398d00fb925ad2dab2bfbf44d37e775dc7c02c18c57d5a34fe79feb636eea2e"
+    },
+    {
+      "slot": 39,
+      "asset_slot_id": "TAKY_BADGE_ART_039",
+      "runtime_sha256": "f4c0925c7b516cdefb9406bf363714fa633f8767831c16eb093208894413bb59"
+    },
+    {
+      "slot": 40,
+      "asset_slot_id": "TAKY_BADGE_ART_040",
+      "runtime_sha256": "6c5c86f47078a577ce28ab23dd1df6d03f6bf9d73ce5dc249148f440f5400d7a"
+    },
+    {
+      "slot": 41,
+      "asset_slot_id": "TAKY_BADGE_ART_041",
+      "runtime_sha256": "fbec031029234009db344b1353b57b2745abd8cb21f6ff9a8929f30e2c07e967"
+    },
+    {
+      "slot": 42,
+      "asset_slot_id": "TAKY_BADGE_ART_042",
+      "runtime_sha256": "a93c3ab87f5d855aec92c67d550e3c4197411cf27e66a77a914dfc528f0fb4d2"
+    },
+    {
+      "slot": 43,
+      "asset_slot_id": "TAKY_BADGE_ART_043",
+      "runtime_sha256": "7fb9bc652f6a620b1b4407aad0cf36322cb6d0eae1dccf0c0594df6f271bfd2e"
+    },
+    {
+      "slot": 44,
+      "asset_slot_id": "TAKY_BADGE_ART_044",
+      "runtime_sha256": "47d721ae716d678e19ff47fd203c5931595b87d388c8878881e9e626ede74dfa"
+    },
+    {
+      "slot": 45,
+      "asset_slot_id": "TAKY_BADGE_ART_045",
+      "runtime_sha256": "90b674cce3340b71e92dcb8fd475b4fe8a418819acfe3f4282bfe72b9ce36799"
+    },
+    {
+      "slot": 46,
+      "asset_slot_id": "TAKY_BADGE_ART_046",
+      "runtime_sha256": "c1bc9119eeec0d8c823638974eb80c05a45160069b2a7321932bb51989c946d1"
+    },
+    {
+      "slot": 47,
+      "asset_slot_id": "TAKY_BADGE_ART_047",
+      "runtime_sha256": "81349e35d6199751ff53b39ae7dcb0b7503bcfc07dbf60b7f71acc3e08673d6f"
+    },
+    {
+      "slot": 48,
+      "asset_slot_id": "TAKY_BADGE_ART_048",
+      "runtime_sha256": "0897916130c667d2ccfd3f49b63e9f963f844cd06a68dffc3f168195b04e2ee2"
+    },
+    {
+      "slot": 49,
+      "asset_slot_id": "TAKY_BADGE_ART_049",
+      "runtime_sha256": "486a218646e1432461ee9d9d170220e1676b3410a29a094427de5900b4605a55"
+    },
+    {
+      "slot": 50,
+      "asset_slot_id": "TAKY_BADGE_ART_050",
+      "runtime_sha256": "f4fc2871c476c175128daf3268bca06e0cf43c95320377465b79b50f8adb7ddf"
+    },
+    {
+      "slot": 51,
+      "asset_slot_id": "TAKY_BADGE_ART_051",
+      "runtime_sha256": "93d41655a2d05fca8ff3a7d699404aa7d812cad161d52773c0e21ad3f9fd9089"
+    },
+    {
+      "slot": 52,
+      "asset_slot_id": "TAKY_BADGE_ART_052",
+      "runtime_sha256": "a5b37787696027d99504adaf0510b38a4e38a289c8d3b304c3ebce2f3fcaa26e"
+    },
+    {
+      "slot": 53,
+      "asset_slot_id": "TAKY_BADGE_ART_053",
+      "runtime_sha256": "6eef082287f59399f2578b4497266422c8c65c9069a72622d309cfa87fa31394"
+    },
+    {
+      "slot": 54,
+      "asset_slot_id": "TAKY_BADGE_ART_054",
+      "runtime_sha256": "0eefefb4fce433243700c742eb49cd6a471bee860b64c0bc53c167b81cc3c457"
+    },
+    {
+      "slot": 55,
+      "asset_slot_id": "TAKY_BADGE_ART_055",
+      "runtime_sha256": "9ed351c336284ebb9c92a6c9433fbf31ba4051f59d7bb21b6dc3b12e9a33267c"
+    },
+    {
+      "slot": 56,
+      "asset_slot_id": "TAKY_BADGE_ART_056",
+      "runtime_sha256": "82dc4ddf55495b6b31f1f0063f329ac53203bfcc412d8811f7919ed8bfff7558"
+    },
+    {
+      "slot": 57,
+      "asset_slot_id": "TAKY_BADGE_ART_057",
+      "runtime_sha256": "39ded3e7d4cbc7ea262174eca2bdcdfe4af41bfe761006511dc6850a70bb0c36"
+    },
+    {
+      "slot": 58,
+      "asset_slot_id": "TAKY_BADGE_ART_058",
+      "runtime_sha256": "33f3cbe74dc821c96e874d05fdb1eba4a9fbf41c258c78cc68b36cf68a8160cd"
+    },
+    {
+      "slot": 59,
+      "asset_slot_id": "TAKY_BADGE_ART_059",
+      "runtime_sha256": "0e93e9320c2dafc1f1e809c26ce2e9b0a5f457bfe35f78a0f0b868bf96efabfb"
+    },
+    {
+      "slot": 60,
+      "asset_slot_id": "TAKY_BADGE_ART_060",
+      "runtime_sha256": "43176e8ca5d968bdae5bf35b70cf19e5ba59798c4fb49bc9f448627282638b54"
+    }
+  ]
+}
