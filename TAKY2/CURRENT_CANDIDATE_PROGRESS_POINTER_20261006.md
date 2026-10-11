@@ -47,30 +47,33 @@ Already Canonical Design Authority:
 - 5 HARD GATE only
 - SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE
 
-V3 remains Candidate for implementation reconciliation, including:
-- machine-readable control-role/runtime schema
-- role_registry / default_actor_bindings
-- semantic_owner first-class binding
-- reusable worker-role schema
-- one shared SAVEY_AI_ECONOMY evaluator for Driver + COST
-- whole-system owner coverage
-- startup readback receipt/mutation block
-- technical delivery vs USER confirmation state reconciliation
+V3 remains Candidate for promotion, but the runtime implementation reconciliation is locally implemented for:
+- machine-readable control-role/runtime schema + Control Incident Trace
+- role_registry / default_actor_bindings separation
+- semantic_owner first-class action -> receipt -> evidence/completion -> DONE binding
+- reusable task-fit worker-role schema
+- one shared SAVEY_AI_ECONOMY evaluator consumed by Driver + COST
+- whole-system owner registry with explicit OWNER_GAP preservation
+- startup readback receipt / mutation block
+- technical delivery vs explicit USER confirmation state split
 
 The previous second V3 draft is SUPERSEDED-DRAFT in Drive ARCHIVE_REFERENCE.
 There is one active V3 candidate pointer now.
 
 ## Active OPEN categories
 
+Locally IMPLEMENTED / awaiting final independent closure evidence:
 - CUR-001 CONTROL ROLE RUNTIME SCHEMA
 - CUR-002 SEMANTIC OWNER FIRST-CLASS BINDING
 - CUR-003 WORKER ROLE CONTRACTS
 - CUR-004 SAVEY_AI_ECONOMY SHARED POLICY
-- CUR-005 WHOLE-SYSTEM OWNER MAP COMPLETENESS
+- CUR-008 NEW-CHAT STARTUP CONTEXT GATE
+
+Still OPEN:
+- CUR-005 WHOLE-SYSTEM OWNER MAP COMPLETENESS — registry implemented; unresolved domains remain explicit OWNER_GAP, not guessed
 - CUR-006 REAL HNS FIRST-AUTH SESSION / DEVICE E2E — account-binding implementation CLOSED; actual login/use runtime E2E only
 - CUR-007 CROSS-CHAT / SOURCE COMPLETENESS AUDIT — Delta only
-- CUR-008 NEW-CHAT STARTUP CONTEXT GATE — machine-readable receipt/mutation block OPEN
-- CUR-009 SYSTEMWIDE V3 IMPLEMENTATION RECONCILIATION — final integrated candidate / NOT CANONICAL
+- CUR-009 SYSTEMWIDE V3 IMPLEMENTATION RECONCILIATION — implementation delta complete locally; promotion/Canonical decision still OPEN
 
 Do not treat this local pointer as a substitute for Drive readback.
 
@@ -97,3 +100,47 @@ actual usable webapp result, measured as
 `SCREEN -> INTERACTION -> DATA/STATE -> END-TO-END RESULT -> EVIDENCE`.
 
 No merge/push/deploy/Netlify publish is authorized by this pointer.
+
+## Local runtime reconciliation checkpoint — 2026-10-07
+
+Implemented in TAKY2 runtime:
+- formal structure name: ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE
+- Shepherding / Border Collie language retained as explanatory metaphor only
+- ROLE != AGENT enforced by role_registry + default_actor_bindings
+- semantic owner registry + OWNER_GAP fail-closed behavior
+- task-fit Worker Role profiles
+- shared SAVEY_AI_ECONOMY evaluator; Necessity remains inside COST/Driver, never a sixth Gate
+- Control Incident Trace with cause/evidence/control-role/decision/route/result/remaining-unknown
+- startup readback receipt validator/bridge
+- technical delivery != USER confirmation
+- verifier/reviewer role IDs separated from default actor IDs
+
+Runtime authority rebind:
+- old digest: e92831fc4e23ff21c979
+- new digest: 85474e09166708960f60
+- signed runtime: v9 -> staged v10 -> rebound v11
+- KEY_AMEND: false
+- event: chat:user:continue:2026-10-07
+
+Latest local verification before external reattack:
+- full TAKY2: 127 passed + 51 subtests
+- py_compile: PASS
+- git diff --check: PASS
+- post-rebind state/bridge: 53 passed + 34 subtests
+- worker blocked-path negative test added after self-reattack
+
+No push / merge / deploy / Netlify publish performed.
+
+## Local reconciliation delta — 2026-10-11
+
+Supersedes the digest/runtime figures above (85474…/v11 are historical).
+- authority digest: e48ca039a387299fb3ea / runtime v178
+- TAKY2: 213 passed + 54 subtests; ENFORCEMENT: 120 passed + 3 subtests
+- Codex FINAL MICRO RECHECK: VERDICT PASS / FINDINGS NONE
+  receipt pf:taky2-v3-final-micro-codex-20261011:3dad5028561f0e7d
+  result TAKY2/TAKY2_V3_FINAL_MICRO_CODEX_RESULT_20261011.json
+- subprocess_runner UTF-8 decoding fix (cp949 locale dropped CLI evidence) + regression test; internal verification only
+- V3 PROMOTION: NOT PROMOTED — awaiting USER decision
+- Drive CURRENT §22 records this delta; header figures refreshed; duplicate 15/16 labels renumbered 18-21
+- Known gap: ENFORCEMENT user_authorized_development has no live caller
+- No push / merge / deploy / Netlify publish.

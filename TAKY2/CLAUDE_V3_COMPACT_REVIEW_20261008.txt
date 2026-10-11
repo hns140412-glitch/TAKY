@@ -1,0 +1,57 @@
+VERDICT: HOLD
+
+FINDINGS:
+- [HIGH] TAKY2/bridges.py `execute_with_receipt` (PACKET_ONLY block) - Tool-less enforcement runs only when `actual_tool == "claude"`. The `review:external-model` action also allows `codex`, `gemini` and `sonnet` under PACKET_ONLY, and those get only the stdin digest check, with no argv, sandbox or cwd validation. The Claude branch also leaves the following open:
+  - Only built-in tools are disabled. MCP servers, hooks and settings from the invoking cwd and user config are not constrained: there is no `--strict-mcp-config`, no cwd isolation, no env scrub, and no rejection of `--add-dir`, `--mcp-config` or `--allowedTools`.
+  - It depends on how `actual_tool` is derived. A wrapper or `node cli.js` invocation may not resolve to `"claude"` and would skip the block entirely.
+
+  This is material because the "no tools / no repo" guarantee holds for one provider and one flag set, so a PACKET_ONLY call can still explore the repo or call remote tools. Minimal fix:
+  - Make PACKET_ONLY fail closed for any tool without an exact argv allowlist.
+  - Require an empty temp cwd and a scrubbed env.
+  - Require an MCP-disabled flag set for Claude and a read-only sandbox for the other tools.
+  - Derive `actual_tool` from the resolved executable, not from argv text.
+  - Confirm `--permission-prompts` exists in the pinned CLI version. An unknown flag is either rejected or silently ignored.
+
+- [HIGH] TAKY2/enforcement.py `evaluate_savey_ai_economy` (billing_class) and TAKY2/state/authority.json `review:external-model` - Two problems affect paid spend:
+  - A missing `billing_class` defaults to `SUBSCRIPTION_QUOTA`, which is fail-open on the spend axis.
+  - `billing_class` is set per action, not per model or provider. The same action lists `codex`, `gemini` and `sonnet` under one `SUBSCRIPTION_QUOTA` label, and nothing in the bridge checks that the actual route is subscription-auth rather than an API key.
+
+  Any metered route in that list therefore runs with no `USER_DECISION_REQUIRED`. Minimal fix:
+  - Make `billing_class` explicit and required for external modes.
+  - Declare it per model (a `model_billing` map).
+  - Have the bridge refuse SUBSCRIPTION or UNMETERED execution when API-key env vars are present in the invocation.
+
+- [MEDIUM] TAKY2/enforcement.py `evaluate_savey_ai_economy` (CAPABILITY_REQUIRED, skip claims) and TAKY2/orchestrator.py `_lowest_sufficient_model` - Capability is only checked as a non-empty string. Nothing ties the chosen model or route to `required_capability`, and `_lowest_sufficient_model` ranks by the quality score alone. A correction can therefore swap to a model that lacks the capability, such as image or TTS generation.
+  A trusted `LOCAL_SUFFICIENT` or `REUSE_SUFFICIENT` decision can also return `SKIP_CALL` for a CAPABILITY_REQUIRED action. The decision is bound to the action digest and semantic owner, but not to the requirement class, the capability or an acceptance ref. Minimal fix:
+  - Require a per-model `capabilities` list and filter on it in both the gate and `_lowest_sufficient_model`.
+  - For CAPABILITY_REQUIRED, require that a skip decision carries and matches `required_capability` plus an acceptance ref, and reject `LOCAL_SUFFICIENT` unless the local route declares that capability.
+
+- [MEDIUM] TAKY2/enforcement.py `route_gate` - The soft budget removes the only cumulative cap on distinct routes. With subscription calls now needing no per-call approval, nothing visible in this diff bounds the total number of external invocations across routes. `max_calls` is a per-call count, not cumulative.
+  "Materially different" means only `route_fp not in seen_routes`. If the fingerprint includes cosmetic fields such as effort or batch, trivial variants churn quota indefinitely. The transient cap now returns `REROUTE_REQUIRED`, but `_safe_correction_for_failure` has no ROUTE handler, so that state has no consumer. Minimal fix:
+  - Add a hard ceiling (for example 2x budget, or a fixed N) that returns `USER_DECISION_REQUIRED`.
+  - Restrict the fingerprint to material dimensions (provider, model family, mode).
+  - Reject a new route whose failure class equals one already seen.
+  - Add a ROUTE branch to the correction handler.
+
+- [MEDIUM] TAKY2/enforcement.py `dry_run_gate` vs TAKY2/bridges.py `execute_with_receipt` - `dry_run_gate` defaults `expected_calls` to 1 when it is absent, but the bridge requires `call.get("expected_calls") == 1` explicitly. This holds unless preflight writes the normalized value back into the receipt call, which the packet does not show. If it does not, the live no-dry_run_plan smoke passes preflight but fails at execution.
+  The orchestrator correction can also set `expected_calls = max_calls`, which the bridge rejects whenever `max_calls > 1`. If `policy.max_calls` is missing or non-int, the `dry_run_gate` cap check is silently skipped. Minimal fix:
+  - Normalize `expected_calls` into the persisted call.
+  - Have the bridge use `call.get("expected_calls", 1)`.
+  - Cap corrections at `min(max_calls, 1)` while the bridge is single-call.
+  - Treat a malformed `max_calls` as BLOCKED.
+
+- [MEDIUM] TAKY2/bridges.py `record_economy_decision` and `_external_dry_run_receipt_ok` - These use inconsistent or weak digest binding:
+  - `record_economy_decision` stores `stable_hash(dict(action))`, while `_trusted_economy_decision` compares it to `action_digest(action)`. If the two functions differ, every recorded decision either never matches or matches against the wrong thing. This cannot be verified from the packet.
+  - `_external_dry_run_receipt_ok` accepts any receipt containing `DRY_RUN_OK` and a string with prefix `dry-run:`. It does not recompute the digest or bind it to the call, action or packet. If receipts are not independently integrity-checked, this check is vacuous.
+
+  Minimal fix: use one digest function in both places, and have the bridge recompute the dry-run digest from the receipt call and action and compare it.
+
+REATTACK:
+- Missing `dry_run_plan`, then supply conflicting `paid_api` or `expected_calls`: auto-derivation fills only redundant fields, and explicit conflicts return `DRY_RUN_MISMATCH`. The digest includes the action digest, billing class, mode and packet digest. Auto-derivation itself creates no bypass.
+- Omit `billing_class`, or hide a metered model inside a SUBSCRIPTION_QUOTA action: both bypass the PAID_API approval. See finding 2.
+- Self-asserted `necessary=False`, `reuse_available` or `local_sufficient`: BLOCKED as an integrity violation. Good.
+- Forged `*_decision_ref`: it must exist in the registry and match kind, verified state, authority digest, action digest and owner. A scope mismatch is rejected. The remaining gap is that the registry lives in runtime state and the verifier callable is caller-supplied, so trust depends on runtime integrity.
+- Same route replay: not shown in this diff; the soft budget applies only to routes not yet seen. Cross-route same-failure churn is not capped (finding 4).
+- PACKET_ONLY with `codex` or `gemini`, or a wrapped Claude binary: no bridge restriction (finding 1).
+- Correction downgrades a CAPABILITY_REQUIRED model to the lowest-quality model: possible without a capability match (finding 3).
+- Authority.json: the ECONOMY_CONTRACT equality check and the role/actor consistency check are sound. The diff is reordered and partly garbled, so I could not confirm that nothing dropped from the identity key (`key_owner`, `final_authority`, `execution_duty`). Confirm those are carried in the new `source_ref`/`version` shape or elsewhere.

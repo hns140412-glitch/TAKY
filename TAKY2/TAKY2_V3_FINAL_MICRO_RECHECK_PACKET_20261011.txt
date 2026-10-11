@@ -1,0 +1,106 @@
+TAKY 2.0 V3 — FINAL MICRO INDEPENDENT RECHECK
+READ ONLY. USE ONLY THIS PACKET. NO REPOSITORY/TOOLS/WEB/SHELL.
+
+This packet contains ONLY the final delta after the prior Codex HOLD.
+
+PRIOR MATERIAL FINDING
+[HIGH] subprocess_runner / execute_with_receipt:
+A nonzero external model-CLI exit could be persisted as ordinary FAILED even when provider invocation could not be ruled out.
+Consequence: an uncertain external side effect/spend could later be treated as retryable.
+
+FINAL FIX
+- For any external invocation with nonzero result:
+  - if provider_call_confirmed_absent is NOT true => outcome_unknown=true => OUTCOME_UNKNOWN.
+  - only an explicitly attested no-provider-call result may remain ordinary FAILED.
+- No USER escalation was added.
+- No paid API/deploy/push/merge action was performed.
+
+LOCAL EVIDENCE AFTER THIS FIX
+- full TAKY2 (re-run 2026-10-11 on current tree): 212 passed + 54 subtests
+- compileall: PASS
+- git diff --check: PASS (existing LF->CRLF warning only)
+- runtime version: 174
+- patch and both regression tests verified byte-identical in current TAKY2/bridges.py and TAKY2/test_bridges.py
+- authority digest: e48ca039a387299fb3ea
+- Claude calls after quota warning: 0
+- Codex calls after quota warning: exactly 1; this delta exists because that call found the HIGH above.
+
+RECHECK QUESTION
+Does the supplied delta fully close that HIGH without creating a new BLOCKER/HIGH/MEDIUM issue?
+Do not reopen unrelated architecture. Do not ask for USER approval merely for route count.
+
+OUTPUT EXACTLY:
+VERDICT: PASS | HOLD
+FINDINGS:
+- [SEVERITY] concrete issue - material consequence - minimal fix
+If no BLOCKER/HIGH/MEDIUM: FINDINGS: NONE
+CHECKED:
+- concise scenarios
+
+PATCH:
+    returncode = result.get("returncode")
+    if (
+        external_invocation
+        and returncode not in {None, 0}
+        and result.get("provider_call_confirmed_absent") is not True
+    ):
+        # A nonzero model-CLI exit does not prove the provider was never invoked.
+        # Treat uncertain external side effects/spend as unknown so the receipt
+        # cannot be silently retried as an ordinary failure.
+        result["outcome_unknown"] = True
+
+    result_digest = stable_hash(result)
+    status = (
+        "OUTCOME_UNKNOWN"
+        if result.get("outcome_unknown") is True
+        else ("RETURNED" if returncode in {None, 0} else "FAILED")
+    )
+    calls[receipt_id].update({
+        "result_digest": result_digest,
+        "result": result,
+        "status": status,
+    })
+    updated_active["status"] = status
+    # Executor is intentionally forbidden from writing SUCCESS/completion/evidence.
+    return updated, result
+
+REGRESSION TEST 1:
+    def test_external_nonzero_exit_is_unknown_without_confirmed_no_provider_call(self):
+        runtime, out, invocation = self._prepared_external_review()
+        updated, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            invocation,
+            executor_id="claude-test",
+            runner=lambda _: {
+                "returncode": 1,
+                "stdout": "",
+                "stderr": "model cli exited nonzero",
+            },
+        )
+        self.assertTrue(result["outcome_unknown"])
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+
+REGRESSION TEST 2:
+    def test_external_nonzero_can_be_failed_when_no_provider_call_is_attested(self):
+        runtime, out, invocation = self._prepared_external_review()
+        updated, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            invocation,
+            executor_id="claude-test",
+            runner=lambda _: {
+                "returncode": 2,
+                "stdout": "",
+                "stderr": "local argument validation failed",
+                "provider_call_confirmed_absent": True,
+            },
+        )
+        self.assertNotIn("outcome_unknown", result)
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "FAILED",
+        )

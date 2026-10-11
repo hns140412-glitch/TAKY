@@ -1,0 +1,1382 @@
+TAKY 2.0 INDEPENDENT CONCRETE-DIFF REVIEW PACKET
+Review mode: READ-ONLY / PACKET-ONLY / NO TOOLS / NO REPO ACCESS
+Repo HEAD: a5f992ec1fd2f0768c9feef72c5c94d732d51cad
+Authority contract version: 5
+Economy mode: CORRECTIVE_ROUTER_OPTIMIZER
+Priority: ACCEPTANCE_BEFORE_COST
+
+USER INTENT / REQUIRED SEMANTICS
+- TAKY/SAVEY guides to a correct result; blocking is not the goal.
+- Preserve acceptance quality before optimizing cost.
+- CAPABILITY_REQUIRED (e.g. UI image generation, TTS audio generation) must not be suppressed just to save usage.
+- QUALITY_REQUIRED may be optimized but must preserve the quality floor.
+- OPTIONAL_CONVENIENCE may be reused/shrunk/skipped if acceptance remains satisfied.
+- Remote/local is unmetered for cost policy.
+- Claude/Codex subscription quota is scarce but bounded useful calls are allowed.
+- Real PAID_API incremental spend remains user-authority gated.
+- Same failed route/failure-class must not repeat, but a materially different route should continue with a soft budget warning.
+- dry_run_plan should not be repetitive ritual: redundant fields auto-derive; explicit conflicting values are rejected/corrected.
+- PACKET_ONLY retains packet binding/digest and tool-less execution integrity.
+
+CURRENT VERIFIED EVIDENCE
+- full TAKY2 regression: 178 passed + 54 subtests
+- compileall: PASS
+- git diff --check: PASS
+- signed authority digest: 29ffb90e216cb1b0bb55
+- runtime v56, KEY_AMEND=false
+- live no-dry_run_plan smoke: CALL_ALLOWED / COST_OK / DRY_RUN_OK / AUTO_DERIVED
+- prior 4-route history now yields ROUTE_SOFT_BUDGET_EXCEEDED rather than USER_DECISION_REQUIRED.
+
+REVIEW QUESTIONS
+1. Does any selected change permit paid/untrusted/irreversible work to bypass necessary authority?
+2. Can CAPABILITY_REQUIRED or QUALITY_REQUIRED still be silently downgraded/skipped incorrectly?
+3. Does automatic dry-run derivation create a real safety/integrity bypass?
+4. Does soft route budget accidentally allow same-failure repetition or unsafe route churn?
+5. Is PACKET_ONLY still materially bounded against agentic tool/repo exploration?
+6. Are authority/runtime semantics internally inconsistent?
+7. Identify only MATERIAL findings (BLOCKER/HIGH/MEDIUM). Do not invent style nits.
+
+OUTPUT EXACTLY:
+VERDICT: PASS | HOLD
+FINDINGS:
+- [SEVERITY] file/function - concrete issue - why material - minimal fix
+REATTACK:
+- short adversarial scenarios checked
+If no material findings, write: FINDINGS: NONE
+
+GIT STATUS (for inherited dirty-worktree awareness; do not treat unrelated dirty files as review findings)
+## taky-2.0-orchestrator-2026-10-05
+ M ENFORCEMENT/execution_outcome_state_test.py
+ M ENFORCEMENT/executor_transport.py
+ M ENFORCEMENT/replay_engineering_profiles_v1.json
+ M ENFORCEMENT/taky_gate.py
+ M TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md
+ M TAKY2/CURRENT_CANDIDATE_PROGRESS_POINTER_20261006.md
+ M TAKY2/NEW_CHAT_START_20261006_LATEST.md
+ M TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V3_CANDIDATE_20261006.md
+ M TAKY2/bridges.py
+ M TAKY2/enforcement.py
+ M TAKY2/orchestration.py
+ M TAKY2/orchestrator.py
+ M TAKY2/state/authority.json
+ M TAKY2/state/runtime.example.json
+ M TAKY2/state_store.py
+ M TAKY2/test_bridges.py
+ M TAKY2/test_enforcement.py
+ M TAKY2/test_orchestrator.py
+ M TAKY2/test_state_store.py
+?? ENFORCEMENT/__pycache__/
+?? TAKY2/ROLE_ACTOR_BINDING_CHECKPOINT_20261007.md
+?? TAKY2/RUNTIME_RECONCILIATION_CHECKPOINT_20261007.md
+?? TAKY2/SAVEY_AI_ECONOMY_BALANCE_CHECKPOINT_20261008.md
+?? TAKY2/TAKY2_V3_COMPACT_REVIEW_PACKET_20261008.txt
+?? TAKY2/test_verify_from_review_receipt.py
+?? TAKY2/verify_from_review_receipt.py
+?? claude_adversarial_prompt.txt
+?? claude_adversarial_review_20261007.txt
+
+
+SELECTED CONCRETE DIFF HUNKS
+--- a/TAKY2/bridges.py
++++ b/TAKY2/bridges.py
+@@ -212,2 +255,63 @@ def subprocess_runner(invocation: Mapping[str, Any]) -> dict[str, Any]:
+ 
++def record_startup_readback(
++    runtime: Mapping[str, Any],
++    receipt: Mapping[str, Any],
++    *,
++    verifier: Callable[[Mapping[str, Any]], bool],
++    verifier_id: str,
++) -> dict[str, Any]:
++    if not isinstance(receipt, Mapping):
++        raise BridgeViolation("startup readback receipt must be an object")
++    if not callable(verifier):
++        raise BridgeViolation("startup readback verifier required")
++    if not isinstance(verifier_id, str) or not verifier_id.strip():
++        raise BridgeViolation("startup readback verifier_id required")
++    if verifier(receipt) is not True:
++        raise BridgeViolation("startup readback verification failed")
++    if receipt.get("authority_digest") != runtime.get("authority_digest"):
++        raise BridgeViolation("startup readback authority mismatch")
++    normalized, error = canonical_startup_readback_sources(receipt.get("sources"))
++    if error or normalized is None:
++        raise BridgeViolation(error or "startup readback sources invalid")
++    receipt_id = startup_readback_receipt_id(
++        str(runtime.get("authority_digest") or ""),
++        normalized,
++    )
++    if not receipt_id:
++        raise BridgeViolation("startup readback receipt id could not be derived")
++    updated = deepcopy(dict(runtime))
++    context = updated.setdefault("context", {})
++    context["startup_readback_receipt"] = {
++        "receipt_id": receipt_id,
++        "authority_digest": runtime.get("authority_digest"),
++        "sources": normalized,
++        "verified": True,
++        "verified_by": verifier_id.strip(),
++    }
++    return updated
++
++
++
++def _external_dry_run_receipt_ok(receipt: Mapping[str, Any]) -> bool:
++    """Defense-in-depth: execution bridge revalidates persisted DRY_RUN evidence."""
++    economy = receipt.get("economy_evaluation")
++    if not isinstance(economy, Mapping):
++        return False
++    dry = economy.get("dry_run")
++    if not isinstance(dry, Mapping) or dry.get("state") != "DRY_RUN_OK":
++        return False
++    gates = receipt.get("gate_receipts")
++    if not isinstance(gates, list):
++        return False
++    for item in gates:
++        if not isinstance(item, Mapping) or item.get("gate") != "COST":
++            continue
++        evidence = item.get("evidence")
++        if isinstance(evidence, list) and any(
++            isinstance(x, str) and x.startswith("dry-run:") for x in evidence
++        ):
++            return True
++    return False
++
++
+ def execute_with_receipt(
+--- a/TAKY2/bridges.py
++++ b/TAKY2/bridges.py
+@@ -240,2 +344,12 @@ def execute_with_receipt(
+             raise BridgeViolation("LOCAL_ONLY receipt cannot invoke external provider")
++    else:
++        if provider != "local" or model != "local":
++            if not _external_dry_run_receipt_ok(receipt):
++                raise BridgeViolation("external execution requires persisted DRY_RUN_OK evidence")
++            expected_calls = call.get("expected_calls")
++            if expected_calls != 1:
++                raise BridgeViolation(
++                    "current receipt executor supports exactly one external invocation; "
++                    "batch workload inside one invocation instead of multi-call receipt"
++                )
+ 
+--- a/TAKY2/bridges.py
++++ b/TAKY2/bridges.py
+@@ -271,2 +389,28 @@ def execute_with_receipt(
+ 
++    execution_mode = str(call.get("execution_mode") or "").strip().upper()
++    if execution_mode == "PACKET_ONLY":
++        packet = invocation.get("stdin_text")
++        if not isinstance(packet, str) or not packet:
++            raise BridgeViolation("PACKET_ONLY execution requires stdin_text packet")
++        if stable_hash(packet) != call.get("packet_digest"):
++            raise BridgeViolation("PACKET_ONLY stdin packet digest mismatch")
++
++        argv = invocation.get("argv")
++        if not isinstance(argv, list):
++            raise BridgeViolation("PACKET_ONLY execution requires argv")
++        if actual_tool == "claude":
++            if not any(arg in {"-p", "--print"} for arg in argv):
++                raise BridgeViolation("PACKET_ONLY Claude execution requires --print")
++            if "--no-session-persistence" not in argv:
++                raise BridgeViolation("PACKET_ONLY Claude execution requires no session persistence")
++            try:
++                tools_index = argv.index("--tools")
++                permission_index = argv.index("--permission-prompts")
++            except ValueError as exc:
++                raise BridgeViolation("PACKET_ONLY Claude execution must disable tools and permission prompts") from exc
++            if tools_index + 1 >= len(argv) or argv[tools_index + 1] != "":
++                raise BridgeViolation("PACKET_ONLY Claude execution requires empty --tools")
++            if permission_index + 1 >= len(argv) or argv[permission_index + 1] != "none":
++                raise BridgeViolation("PACKET_ONLY Claude execution requires --permission-prompts none")
++
+     result = dict(runner(invocation))
+--- a/TAKY2/bridges.py
++++ b/TAKY2/bridges.py
+@@ -668 +842,78 @@ def record_user_stop(
+     return updated
++
++
++ECONOMY_BRIDGE_DECISION_KINDS = {
++    "EXTERNAL_NOT_NECESSARY",
++    "REUSE_SUFFICIENT",
++    "LOCAL_SUFFICIENT",
++}
++
++
++def record_economy_decision(
++    runtime: Mapping[str, Any],
++    action: Mapping[str, Any],
++    decision: Mapping[str, Any],
++    *,
++    verifier: Callable[
++        [Mapping[str, Any], Mapping[str, Any], Mapping[str, Any]], bool
++    ],
++    verifier_id: str,
++) -> dict[str, Any]:
++    """Record a verifier-attested SAVEY_AI_ECONOMY decision into runtime state."""
++    if not isinstance(action, Mapping):
++        raise BridgeViolation("economy action must be an object")
++    if not isinstance(decision, Mapping):
++        raise BridgeViolation("economy decision must be an object")
++    if not callable(verifier):
++        raise BridgeViolation("economy decision verifier required")
++    if not isinstance(verifier_id, str) or not verifier_id.strip():
++        raise BridgeViolation("economy decision verifier_id required")
++
++    authority_digest = runtime.get("authority_digest")
++    if not isinstance(authority_digest, str) or not authority_digest.strip():
++        raise BridgeViolation("economy decision requires current authority digest")
++
++    decision_kind = decision.get("decision_kind")
++    if decision_kind not in ECONOMY_BRIDGE_DECISION_KINDS:
++        raise BridgeViolation("unsupported economy decision kind")
++
++    evidence_ref = decision.get("evidence_ref")
++    source_ref = decision.get("source_or_artifact_ref")
++    if not isinstance(evidence_ref, str) or not evidence_ref.strip():
++        raise BridgeViolation("economy decision evidence_ref required")
++    if not isinstance(source_ref, str) or not source_ref.strip():
++        raise BridgeViolation("economy decision source/artifact ref required")
++
++    owner_ref = action.get("semantic_owner_ref")
++    owner_scope = action.get("semantic_owner_scope")
++    if not isinstance(owner_ref, str) or not owner_ref.strip():
++        raise BridgeViolation("economy action semantic_owner_ref required")
++    if not isinstance(owner_scope, str) or not owner_scope.strip():
++        raise BridgeViolation("economy action semantic_owner_scope required")
++
++    if verifier(decision, action, runtime) is not True:
++        raise BridgeViolation("economy decision verification failed")
++
++    evidence_ref = evidence_ref.strip()
++    updated = deepcopy(dict(runtime))
++    registry = updated.setdefault("economy_evidence_registry", {})
++    if evidence_ref in registry:
++        raise BridgeViolation("economy decision evidence_ref already exists")
++
++    registry[evidence_ref] = {
++        "decision_kind": decision_kind,
++        "verified": True,
++        "acceptance_state": "ACCEPTED",
++        "source_status": "CURRENT",
++        "authority_digest": authority_digest.strip(),
++        "action_digest": stable_hash(dict(action)),
++        "semantic_owner_ref": owner_ref.strip(),
++        "semantic_owner_scope": owner_scope.strip(),
++        "source_or_artifact_ref": source_ref.strip(),
++        "revision_or_hash": str(
++            decision.get("revision_or_hash") or stable_hash(dict(decision))
++        ),
++        "verified_by": verifier_id.strip(),
++        "decision_digest": stable_hash(dict(decision)),
++    }
++    return updated
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -318,7 +466,8 @@ def route_gate(trusted: Mapping[str, Any], attempt: Mapping[str, Any]) -> GateRe
+     approval_evidence = []
+-    if route_fp not in seen_routes and len(seen_routes) >= budget:
+-        approval_key = "route_budget:" + route_fp
+-        if not trusted_approval(trusted, approval_key):
+-            return GateResult(False, "USER_DECISION_REQUIRED", "different-route budget exhausted")
+-        approval_evidence.append("approval-key:" + approval_key)
++    soft_budget_exceeded = route_fp not in seen_routes and len(seen_routes) >= budget
++    if soft_budget_exceeded:
++        # Route budget is an optimization signal, not an authority wall.
++        # A materially different route may continue; downstream COST/KEY controls
++        # still govern spend, privilege, and irreversible actions.
++        approval_evidence.append("route-budget-soft-exceeded:" + str(len(seen_routes)))
+ 
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -337,3 +486,7 @@ def route_gate(trusted: Mapping[str, Any], attempt: Mapping[str, Any]) -> GateRe
+         if count >= TRANSIENT_LIMIT:
+-            return GateResult(False, "USER_DECISION_REQUIRED", "transient retry cap reached")
++            return GateResult(
++                False,
++                "REROUTE_REQUIRED",
++                "transient retry cap reached; choose a materially different route internally",
++            )
+         return GateResult(
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -354,4 +507,8 @@ def route_gate(trusted: Mapping[str, Any], attempt: Mapping[str, Any]) -> GateRe
+         True,
+-        "ROUTE_OK",
+-        "route available",
++        "ROUTE_SOFT_BUDGET_EXCEEDED" if soft_budget_exceeded else "ROUTE_OK",
++        (
++            "materially different route allowed; soft optimization budget exceeded"
++            if soft_budget_exceeded
++            else "route available"
++        ),
+         tuple([sig, route_fp] + approval_evidence),
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -390,3 +547,161 @@ def record_failure(ledger: Mapping[str, Any], attempt: Mapping[str, Any],
+ 
+-def cost_gate(
++ECONOMY_DECISION_KINDS = {
++    "EXTERNAL_NOT_NECESSARY",
++    "REUSE_SUFFICIENT",
++    "LOCAL_SUFFICIENT",
++}
++
++
++def _trusted_economy_decision(
++    trusted: Mapping[str, Any],
++    action: Mapping[str, Any],
++    ref: Any,
++    *,
++    expected_kind: str,
++) -> tuple[bool, str]:
++    if expected_kind not in ECONOMY_DECISION_KINDS:
++        return False, "unknown economy decision kind"
++    if not isinstance(ref, str) or not ref.strip():
++        return False, "trusted economy decision ref missing"
++    registry = trusted.get("economy_evidence_registry", {})
++    item = registry.get(ref) if isinstance(registry, Mapping) else None
++    if not isinstance(item, Mapping):
++        return False, "economy decision is not trusted"
++    if item.get("decision_kind") != expected_kind:
++        return False, "economy decision kind mismatch"
++    if item.get("verified") is not True:
++        return False, "economy decision is not verified"
++    if item.get("acceptance_state") != ACCEPTED_EVIDENCE_STATE:
++        return False, "economy decision is not accepted"
++    if item.get("source_status") in REJECTED_EVIDENCE_STATES:
++        return False, "economy decision is stale/rejected"
++    if item.get("authority_digest") != trusted.get("_authority_digest"):
++        return False, "economy decision authority is stale"
++    if item.get("action_digest") != action_digest(action):
++        return False, "economy decision action binding mismatch"
++    if item.get("semantic_owner_ref") != action.get("semantic_owner_ref"):
++        return False, "economy decision semantic owner mismatch"
++    if item.get("semantic_owner_scope") != action.get("semantic_owner_scope"):
++        return False, "economy decision semantic owner scope mismatch"
++    return True, ref
++
++
++
++def dry_run_gate(
++    trusted: Mapping[str, Any],
++    action: Mapping[str, Any],
++    call: Mapping[str, Any],
++) -> GateResult:
++    """Require a bounded execution plan before any real external call."""
++    policy = action.get("call_policy")
++    if not isinstance(policy, Mapping):
++        return GateResult(False, "BLOCKED", "trusted action call_policy missing")
++
++    mode = policy.get("mode")
++    if mode == "LOCAL_ONLY":
++        return GateResult(True, "DRY_RUN_LOCAL", "local-only action needs no external dry run")
++    if mode not in {"EXTERNAL_REQUIRED", "EXTERNAL_OPTIONAL"}:
++        return GateResult(False, "BLOCKED", "unknown trusted call policy mode")
++
++    raw_plan = call.get("dry_run_plan")
++    if raw_plan is None:
++        plan = {}
++    elif isinstance(raw_plan, Mapping):
++        plan = dict(raw_plan)
++    else:
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run_plan must be an object when provided")
++
++    expected_calls = call.get("expected_calls", 1)
++    if not isinstance(expected_calls, int) or expected_calls < 1:
++        return GateResult(False, "BLOCKED", "external call expected_calls must be a positive integer")
++
++    planned_calls = plan.get("expected_calls", expected_calls)
++    if not isinstance(planned_calls, int) or planned_calls < 1:
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run expected_calls must be a positive integer")
++    if "expected_calls" in plan and planned_calls != expected_calls:
++        return GateResult(False, "DRY_RUN_MISMATCH", "explicit dry_run expected_calls conflicts with call expected_calls")
++
++    max_calls = policy.get("max_calls", planned_calls)
++    if isinstance(max_calls, int) and max_calls >= 1 and planned_calls > max_calls:
++        return GateResult(
++            False,
++            "REROUTE_LOWEST_SUFFICIENT",
++            "dry-run call count exceeds trusted action max_calls; shrink and rerun",
++        )
++
++    derived_fields = []
++    operations = plan.get("operations")
++    if operations is None:
++        operation_hint = call.get("operation_hint")
++        if isinstance(operation_hint, str) and operation_hint.strip():
++            operations = [operation_hint.strip()]
++        else:
++            scope = str(action.get("execution_scope") or action.get("kind") or "external-action").strip()
++            operations = [f"execute trusted action within {scope}"]
++        derived_fields.append("operations")
++    if not isinstance(operations, list) or not operations or not all(isinstance(x, str) and x.strip() for x in operations):
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run operations must be a non-empty string list")
++
++    batch_strategy = plan.get("batch_strategy")
++    if batch_strategy is None:
++        batch_strategy = "single-call" if planned_calls == 1 else "bounded-batch"
++        derived_fields.append("batch_strategy")
++    if not isinstance(batch_strategy, str) or not batch_strategy.strip():
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run batch_strategy must be a string")
++
++    fallback = plan.get("fallback", "REROUTE")
++    if "fallback" not in plan:
++        derived_fields.append("fallback")
++    if fallback not in {"HOLD", "REROUTE", "LOCAL", "STOP"}:
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run fallback must be HOLD/REROUTE/LOCAL/STOP")
++
++    billing_class = str(policy.get("billing_class") or "SUBSCRIPTION_QUOTA").strip().upper()
++    if billing_class not in {"UNMETERED", "SUBSCRIPTION_QUOTA", "PAID_API"}:
++        return GateResult(False, "BLOCKED", "unknown trusted billing_class")
++    declared_paid = plan.get("paid_api", billing_class == "PAID_API")
++    if "paid_api" not in plan:
++        derived_fields.append("paid_api")
++    if not isinstance(declared_paid, bool):
++        return GateResult(False, "DRY_RUN_INVALID", "dry_run paid_api must be boolean")
++    if declared_paid != (billing_class == "PAID_API"):
++        return GateResult(False, "DRY_RUN_MISMATCH", "explicit dry_run paid_api conflicts with trusted billing_class")
++
++    execution_mode = str(policy.get("execution_mode") or "BOUNDED").strip().upper()
++    if execution_mode not in {"BOUNDED", "PACKET_ONLY"}:
++        return GateResult(False, "BLOCKED", "unknown trusted execution_mode")
++    packet_digest = None
++    if execution_mode == "PACKET_ONLY":
++        if str(call.get("execution_mode") or "").strip().upper() != "PACKET_ONLY":
++            return GateResult(False, "DRY_RUN_MISMATCH", "packet-only action requires PACKET_ONLY call binding")
++        packet_digest = call.get("packet_digest")
++        if not isinstance(packet_digest, str) or not packet_digest.strip():
++            return GateResult(False, "DRY_RUN_INVALID", "packet-only action requires packet_digest")
++
++    digest = stable_hash({
++        "action_digest": action_digest(action),
++        "expected_calls": planned_calls,
++        "operations": operations,
++        "batch_strategy": batch_strategy,
++        "fallback": fallback,
++        "billing_class": billing_class,
++        "paid_api": declared_paid,
++        "execution_mode": execution_mode,
++        "packet_digest": packet_digest,
++    })
++    evidence = ["dry-run:" + digest]
++    if raw_plan is None:
++        evidence.append("dry-run-source:AUTO_DERIVED")
++    elif derived_fields:
++        evidence.append("dry-run-source:NORMALIZED")
++    if derived_fields:
++        evidence.append("dry-run-derived:" + ",".join(sorted(derived_fields)))
++    return GateResult(
++        True,
++        "DRY_RUN_OK",
++        "bounded external execution plan accepted",
++        tuple(evidence),
++    )
++
++
++def evaluate_savey_ai_economy(
+     trusted: Mapping[str, Any],
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -405,2 +722,60 @@ def cost_gate(
+ 
++    requirement_class = str(
++        policy.get("requirement_class")
++        or ("QUALITY_REQUIRED" if mode == "EXTERNAL_REQUIRED" else "OPTIONAL_CONVENIENCE")
++    ).strip().upper()
++    if requirement_class not in {
++        "CAPABILITY_REQUIRED",
++        "QUALITY_REQUIRED",
++        "OPTIONAL_CONVENIENCE",
++    }:
++        return GateResult(False, "BLOCKED", "unknown trusted requirement_class")
++
++    required_capability = None
++    if requirement_class == "CAPABILITY_REQUIRED":
++        required_capability = policy.get("required_capability")
++        if not isinstance(required_capability, str) or not required_capability.strip():
++            return GateResult(
++                False,
++                "REROUTE_REQUIRED",
++                "capability-required action must resolve required_capability from acceptance",
++            )
++        required_capability = required_capability.strip().upper()
++
++    # Driver Necessity/Re-use/Local decisions may only reduce external work
++    # when backed by a current trusted economy decision bound to this action/owner.
++    skip_claims = (
++        ("necessity_decision_ref", "EXTERNAL_NOT_NECESSARY", "external call is unnecessary"),
++        ("reuse_decision_ref", "REUSE_SUFFICIENT", "reusable evidence/context satisfies acceptance"),
++        ("local_decision_ref", "LOCAL_SUFFICIENT", "local deterministic route satisfies acceptance"),
++    )
++    for field, decision_kind, reason in skip_claims:
++        if field in call:
++            ok, detail = _trusted_economy_decision(
++                trusted,
++                action,
++                call.get(field),
++                expected_kind=decision_kind,
++            )
++            if not ok:
++                return GateResult(False, "BLOCKED", detail)
++            skip_evidence = ["requirement-class:" + requirement_class]
++            if required_capability:
++                skip_evidence.append("required-capability:" + required_capability)
++            skip_evidence.append("economy-decision:" + detail)
++            return GateResult(
++                True,
++                "SKIP_CALL",
++                reason,
++                tuple(skip_evidence),
++            )
++
++    # Legacy/self-asserted skip booleans are an integrity violation, not evidence.
++    if call.get("necessary") is False:
++        return GateResult(False, "BLOCKED", "untrusted economy necessity claim")
++    if call.get("reuse_available") is True or call.get("reuse_satisfies_acceptance") is True:
++        return GateResult(False, "BLOCKED", "untrusted economy reuse claim")
++    if call.get("local_sufficient") is True or call.get("local_meets_acceptance") is True:
++        return GateResult(False, "BLOCKED", "untrusted economy local-sufficiency claim")
++
+     if call.get("context") == "full" and trusted.get("context", {}).get("premise_loaded"):
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -426,9 +821,32 @@ def cost_gate(
+ 
++    billing_class = str(policy.get("billing_class") or "SUBSCRIPTION_QUOTA").strip().upper()
++    if billing_class not in {"UNMETERED", "SUBSCRIPTION_QUOTA", "PAID_API"}:
++        return GateResult(False, "BLOCKED", "unknown trusted billing_class")
++
+     call_key = "cost:" + stable_hash(dict(call))
+     approval = trusted_approval(trusted, call_key)
+-    approval_evidence = []
+-
+-    if mode == "EXTERNAL_OPTIONAL":
++    approval_evidence = ["requirement-class:" + requirement_class]
++    if required_capability:
++        approval_evidence.append("required-capability:" + required_capability)
++    approval_evidence.append("billing-class:" + billing_class)
++
++    # SAVEY optimizes route cost after acceptance quality is protected.
++    # A bounded subscription-quota call may proceed without per-call USER approval.
++    # Real paid API spend, or an authority policy that explicitly demands approval,
++    # still requires a trusted approval bound to this exact call.
++    approval_required = (
++        billing_class == "PAID_API"
++        or (
++            mode == "EXTERNAL_OPTIONAL"
++            and policy.get("require_optional_approval") is True
++        )
++    )
++    if approval_required:
+         if not approval:
+-            return GateResult(False, "REROUTE_CHEAPER", "optional external call needs trusted approval")
++            reason = (
++                "paid API call needs trusted approval"
++                if billing_class == "PAID_API"
++                else "optional external call policy requires trusted approval"
++            )
++            return GateResult(False, "USER_DECISION_REQUIRED", reason)
+         approval_evidence.append("approval-key:" + call_key)
+--- a/TAKY2/enforcement.py
++++ b/TAKY2/enforcement.py
+@@ -472,2 +922,15 @@ def cost_gate(
+ 
++def cost_gate(
++    trusted: Mapping[str, Any],
++    action: Mapping[str, Any],
++    call: Mapping[str, Any],
++    *,
++    evaluation: GateResult | None = None,
++    route_fp: str | None = None,
++) -> GateResult:
++    return evaluation if isinstance(evaluation, GateResult) else evaluate_savey_ai_economy(
++        trusted, action, call, route_fp=route_fp
++    )
++
++
+ def done_gate(trusted: Mapping[str, Any], report: Mapping[str, Any]) -> GateResult:
+--- a/TAKY2/orchestration.py
++++ b/TAKY2/orchestration.py
+@@ -21,2 +22,97 @@ CONTROL_ROLES = ["NAVIGATOR", "GUARDIAN", "DRIVER", "SCOUT"]
+ ECONOMY_POLICY = "SAVEY_AI_ECONOMY"
++ECONOMY_CONTRACT = {
++    "operating_mode": "CORRECTIVE_ROUTER_OPTIMIZER",
++    "priority": "ACCEPTANCE_BEFORE_COST",
++    "normal_flow": [
++        "ALLOW",
++        "CORRECT_AND_RUN",
++        "SHRINK_AND_RUN",
++        "REROUTE_AND_RUN",
++        "VERIFY",
++    ],
++    "requirement_classes": [
++        "CAPABILITY_REQUIRED",
++        "QUALITY_REQUIRED",
++        "OPTIONAL_CONVENIENCE",
++    ],
++    "resource_classes": {
++        "REMOTE_LOCAL": "UNMETERED",
++        "SUBSCRIPTION_MODELS": "SUBSCRIPTION_QUOTA",
++        "PAID_API": "PAID_API",
++    },
++    "capability_examples": [
++        "UI_IMAGE_GENERATION",
++        "TTS_AUDIO_GENERATION",
++    ],
++    "dry_run_policy": {
++        "mode": "AUTO_DERIVE_REDUNDANT_FIELDS",
++        "derive": [
++            "EXPECTED_CALLS",
++            "OPERATIONS_DEFAULT",
++            "BATCH_STRATEGY",
++            "FALLBACK",
++            "PAID_API_FROM_BILLING_CLASS",
++        ],
++        "explicit_conflict": "CORRECT_OR_REJECT",
++        "packet_only_requires": [
++            "PACKET_ONLY_BINDING",
++            "PACKET_DIGEST",
++        ],
++    },
++    "same_failure_repeat_forbidden": True,
++    "user_decision_reserved_for": [
++        "REAL_INCREMENTAL_PAID_SPEND",
++        "PROTECTED_AUTHORITY_OR_SCOPE_CHANGE",
++        "IRREVERSIBLE_ACTION",
++        "EXPLICIT_USER_STOP",
++    ],
++}
++ROLE_REGISTRY = {
++    "orchestrator": "LEAD_ORCHESTRATOR",
++    "implementer": "CODE_WRITER",
++    "verifier": "VERIFIER",
++    "independent_reviewer": "INDEPENDENT_REVIEWER",
++    "final_authority": "FINAL_AUTHORITY",
++}
++DEFAULT_ACTOR_BINDINGS = {
++    "orchestrator": "CHATGPT",
++    "implementer": None,
++    "verifier": "CODEX",
++    "independent_reviewer": "CLAUDE",
++    "final_authority": "USER",
++}
++WORKER_ROLE_REGISTRY = {
++    "SCOPE_PLANNER": {
++        "mission": "define bounded task scope, acceptance and non-scope",
++        "evidence_required": "scope/acceptance trace",
++    },
++    "SCREEN_EXPERIENCE_DESIGNER": {
++        "mission": "define user-facing screen/interaction behavior when applicable",
++        "evidence_required": "experience artifact or interaction evidence",
++    },
++    "DATA_STATE_ARCHITECT": {
++        "mission": "define data/state ownership, transitions and invariants",
++        "evidence_required": "state/data contract evidence",
++    },
++    "BUILDER": {
++        "mission": "implement the selected bounded change",
++        "evidence_required": "diff/artifact/runtime evidence",
++    },
++    "TEST_ENGINEER": {
++        "mission": "verify expected and negative behavior",
++        "evidence_required": "targeted/regression test evidence",
++    },
++    "BUG_FIXER": {
++        "mission": "repair a reproduced defect without scope inflation",
++        "evidence_required": "reproduction plus fix regression",
++    },
++    "RELEASE_CHECKER": {
++        "mission": "verify release readiness without granting deploy authority",
++        "evidence_required": "release-readiness evidence",
++    },
++    "DOCUMENTATION_HANDOFF_WRITER": {
++        "mission": "preserve current authority, state and resume handoff",
++        "evidence_required": "read-back verified handoff artifact",
++    },
++}
+ GUIDANCE_LOOP = [
+--- a/TAKY2/orchestration.py
++++ b/TAKY2/orchestration.py
+@@ -143,12 +234,20 @@ def validate_orchestration_contract(
+     if control_roles != CONTROL_ROLES:
+-        return False, "canonical shepherding control roles mismatch"
++        return False, "canonical control roles mismatch"
+     if contract.get("economy_policy") != ECONOMY_POLICY:
+         return False, "canonical SAVEY AI economy policy mismatch"
++    if contract.get("economy_contract") != ECONOMY_CONTRACT:
++        return False, "SAVEY corrective-router economy contract mismatch"
+ 
+-    roles = contract.get("roles")
+-    if not isinstance(roles, Mapping):
+-        return False, "orchestration roles missing"
+-    for role, expected in REQUIRED_ROLES.items():
+-        if roles.get(role) != expected:
+-            return False, f"orchestration role mismatch: {role}"
++    role_registry = contract.get("role_registry")
++    if role_registry != ROLE_REGISTRY:
++        return False, "role_registry mismatch"
++    actor_bindings = contract.get("default_actor_bindings")
++    if actor_bindings != DEFAULT_ACTOR_BINDINGS:
++        return False, "default_actor_bindings mismatch"
++    if actor_bindings.get("implementer") is not None:
++        return False, "implementer actor must remain task-fit, not fixed"
++    for role_name, role_id in role_registry.items():
++        actor_id = actor_bindings.get(role_name)
++        if actor_id is not None and role_id == actor_id:
++            return False, f"role must not equal actor binding: {role_name}"
+ 
+--- a/TAKY2/orchestration.py
++++ b/TAKY2/orchestration.py
+@@ -176,2 +277,5 @@ def validate_orchestration_contract(
+         "shared_savey_economy_policy",
++        "owner_map_registry",
++        "startup_readback_receipt",
++        "delivery_confirmation_split",
+     ):
+--- a/TAKY2/orchestrator.py
++++ b/TAKY2/orchestrator.py
+@@ -15,2 +16,4 @@ from .enforcement import (
+     done_gate,
++    dry_run_gate,
++    evaluate_savey_ai_economy,
+     key_gate,
+--- a/TAKY2/orchestrator.py
++++ b/TAKY2/orchestrator.py
+@@ -114,3 +118,116 @@ def _execution_identity(
+ 
+-def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str, Any]:
++
++def _lowest_sufficient_model(action: Mapping[str, Any]) -> str | None:
++    policy = action.get("call_policy", {})
++    if not isinstance(policy, Mapping):
++        return None
++    allowed = policy.get("allowed_models")
++    quality = policy.get("model_quality")
++    minimum = policy.get("minimum_quality")
++    if not isinstance(allowed, list) or not allowed:
++        return None
++    if isinstance(quality, Mapping) and isinstance(minimum, int):
++        ranked = []
++        for name in allowed:
++            if isinstance(name, str) and isinstance(quality.get(name), int):
++                score = quality[name]
++                if score >= minimum:
++                    ranked.append((score, name))
++        if ranked:
++            ranked.sort(key=lambda x: (x[0], x[1]))
++            return ranked[0][1]
++    return next((v for v in allowed if isinstance(v, str) and v.strip()), None)
++
++
++def _safe_correction_for_failure(
++    plan: Mapping[str, Any],
++    action: Mapping[str, Any],
++    gate: str,
++    state: str,
++    reason: str,
++) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
++    """Correct only execution mechanics; never amend USER intent or authority."""
++    gate = str(gate or "").upper()
++    state = str(state or "").upper()
++    reason_l = str(reason or "").lower()
++    corrected = deepcopy(dict(plan))
++    context = corrected.get("context")
++    attempt = corrected.get("attempt")
++    call = corrected.get("call")
++    if not isinstance(context, dict) or not isinstance(attempt, dict) or not isinstance(call, dict):
++        return None, None
++
++    before = deepcopy({"context": context, "attempt": attempt, "call": call})
++    policy = action.get("call_policy", {})
++    if not isinstance(policy, Mapping):
++        policy = {}
++
++    if gate == "COST":
++        if state == "SKIP_FULL_REREAD":
++            call["context"] = "delta"
++        elif state in {"REROUTE_LOWEST_SUFFICIENT", "REROUTE_QUALITY_FLOOR"}:
++            changed = False
++            if "model" in reason_l or "quality" in reason_l:
++                model = _lowest_sufficient_model(action)
++                if model and call.get("model") != model:
++                    call["model"] = model
++                    changed = True
++            if "call count" in reason_l or "expected_calls" in reason_l:
++                max_calls = policy.get("max_calls", 1)
++                if isinstance(max_calls, int) and max_calls >= 1:
++                    call["expected_calls"] = max_calls
++                    dr = call.get("dry_run_plan")
++                    if isinstance(dr, dict):
++                        dr["expected_calls"] = max_calls
++                    changed = True
++            if "effort" in reason_l:
++                max_effort = policy.get("max_effort", "medium")
++                if isinstance(max_effort, str):
++                    call["effort"] = max_effort
++                    changed = True
++            if "batching" in reason_l:
++                call["batch_size"] = 1
++                changed = True
++            if "parallel" in reason_l:
++                call["parallel"] = False
++                changed = True
++            if "subagents" in reason_l:
++                call["subagents"] = False
++                changed = True
++            # Do not force a local substitute merely because an external route is
++            # constrained. Capability/quality-required work must preserve acceptance;
++            # only explicit trusted sufficiency evidence may justify reuse/local skip.
++            if not changed:
++                return None, None
++        elif state == "THROTTLE_HOLD":
++            return None, {
++                "status": "HOLD_FOR_REROUTE",
++                "terminal": False,
++                "reason": reason,
++                "next_action": "choose a materially different route; do not repeat the throttled route",
++            }
++        else:
++            return None, None
++    elif gate == "CONTEXT" and "full" in reason_l:
++        context["mode"] = "delta"
++    else:
++        return None, None
++
++    after = {"context": context, "attempt": attempt, "call": call}
++    if before == after:
++        return None, None
++    correction = {
++        "status": "CORRECTED",
++        "terminal": False,
++        "gate": gate,
++        "state": state,
++        "reason": reason,
++        "before": before,
++        "after": deepcopy(after),
++        "principle": "preserve USER intent; correct execution mechanics only",
++    }
++    return corrected, correction
++
++
++def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any], *, _correction_depth: int = 0) -> Dict[str, Any]:
+     if not isinstance(plan, Mapping):
+--- a/TAKY2/orchestrator.py
++++ b/TAKY2/orchestrator.py
+@@ -201,2 +318,47 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any]) -> Dict[str,
+     scoped = _scoped_trusted(trusted, execution_scope)
++    economy_result = evaluate_savey_ai_economy(
++        scoped,
++        action,
++        plan["call"],
++        route_fp=route_fp,
++    )
++    dry_run_result = None
++    if economy_result.allowed and economy_result.state != "SKIP_CALL":
++        dry_run_result = dry_run_gate(scoped, action, plan["call"])
++        if not dry_run_result.allowed:
++            economy_result = dry_run_result
++        else:
++            economy_result = GateResult(
++                True,
++                economy_result.state,
++                economy_result.reason,
++                tuple(economy_result.evidence) + tuple(dry_run_result.evidence),
++            )
++    economy_evaluation = {
++        "policy": "SAVEY_AI_ECONOMY",
++        "owner": "DRIVER",
++        "decision_sequence": [
++            "NECESSITY",
++            "REUSE_CACHE",
++            "LOCAL_DETERMINISTIC",
++            "LOWEST_SUFFICIENT_CAPABILITY",
++            "DRY_RUN_PLAN",
++            "BATCH_CONTEXT_REUSE",
++            "THROTTLE",
++            "EXECUTE",
++            "VERIFY",
++        ],
++        "state": economy_result.state,
++        "reason": economy_result.reason,
++        "evidence": list(economy_result.evidence),
++        "dry_run": (
++            {
++                "state": dry_run_result.state,
++                "reason": dry_run_result.reason,
++                "evidence": list(dry_run_result.evidence),
++            }
++            if dry_run_result is not None
++            else None
++        ),
++    }
+     checks = [
+--- a/TAKY2/state/authority.json
++++ b/TAKY2/state/authority.json
+@@ -1,8 +1,88 @@
+ {
++  "action_registry": {
++    "read:q002": {
++      "call_policy": {
++        "mode": "LOCAL_ONLY"
++      },
++      "execution_scope": "q002-read",
++      "kind": "READ",
++      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
++      "semantic_owner_scope": "TAKY2/Q002",
++      "worker_roles": [
++        "SCOPE_PLANNER",
++        "TEST_ENGINEER"
++      ]
++    },
++    "review:external-model": {
++      "call_policy": {
++        "allow_batch": true,
++        "allow_parallel": false,
++        "allow_subagents": false,
++        "allowed_efforts": [
++          "medium"
++        ],
++        "allowed_models": [
++          "codex",
++          "gemini",
++          "sonnet"
++        ],
++        "batch_safe": true,
++        "billing_class": "SUBSCRIPTION_QUOTA",
++        "execution_mode": "PACKET_ONLY",
++        "max_calls": 1,
++        "max_effort": "medium",
++        "max_retries": 0,
++        "minimum_quality": 2,
++        "mode": "EXTERNAL_REQUIRED",
++        "model_quality": {
++          "codex": 2,
++          "gemini": 2,
++          "sonnet": 2
++        }
++      },
++      "execution_scope": "external-model-review",
++      "kind": "READ",
++      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
++      "semantic_owner_scope": "TAKY2",
++      "worker_roles": [
++        "TEST_ENGINEER"
++      ]
++    },
++    "write:q002-doc": {
++      "action_class": "doc_write",
++      "call_policy": {
++        "mode": "LOCAL_ONLY"
++      },
++      "execution_scope": "q002-doc-write",
++      "kind": "EXTERNAL_WRITE",
++      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
++      "semantic_owner_scope": "TAKY2/Q002",
++      "target_account": "HNS",
++      "worker_roles": [
++        "BUILDER",
++        "TEST_ENGINEER",
++        "DOCUMENTATION_HANDOFF_WRITER"
++      ]
++    }
++  },
++  "approvals": {},
++  "capabilities": [
++    "shell",
++    "local_python"
++  ],
++  "cost_policy": {
++    "high_cost_models": [
++      "opus",
++      "claude-opus-5-5"
++    ],
++    "max_calls_without_approval": 1
++  },
+   "key": {
+-    "USER_INTENT": {
+-      "value": "TAKY 2.0 separate branch: simple, efficient, enforced rules",
++    "AUTHORIZED_ACTION_CLASSES": {
+       "provenance": "USER_STATED",
+-      "source_ref": "user:intent:taky2",
+       "scope": "branch",
++      "source_ref": "user:action:doc_write",
++      "value": [
++        "doc_write"
++      ],
+       "version": 1
+--- a/TAKY2/state/authority.json
++++ b/TAKY2/state/authority.json
+@@ -26,11 +104,262 @@
+   },
+-  "source_registry": {
+-    "user:intent:taky2": {
+-      "actor": "USER",
+-      "kind": "statement"
++  "local_capabilities": [
++    "local_validation"
++  ],
++  "orchestration_contract": {
++    "call_policy": {
++      "claude_codex_remote": "NECESSITY_CHECK_WITHIN_COST"
+     },
+-    "user:target:hns": {
+-      "actor": "USER",
+-      "kind": "statement"
++    "canonical_source_ref": "user:systemwide-canonical-v2:2026-10-06",
++    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
++    "control_roles": [
++      "NAVIGATOR",
++      "GUARDIAN",
++      "DRIVER",
++      "SCOUT"
++    ],
++    "default_actor_bindings": {
++      "final_authority": "USER",
++      "implementer": null,
++      "independent_reviewer": "CLAUDE",
++      "orchestrator": "CHATGPT",
++      "verifier": "CODEX"
++    },
++    "definition": "Subordinate TAKY role-based collaborative execution structure. Shepherding/Border Collie language is explanatory metaphor, not the formal structure name.",
++    "economy_policy": "SAVEY_AI_ECONOMY",
++    "execution_model": "ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE",
++    "gate_policy": {
++      "block_is_not_goal": true,
++      "default": "REDIRECT_BEFORE_ESCALATE",
++      "goal": "CORRECT_RESULT",
++      "terminal_block_only_for_explicit_user_stop_or_integrity_hard_stop": true,
++      "user_not_debugger": true
++    },
++    "guidance_loop": [
++      "OBSERVE",
++      "CLASSIFY",
++      "ASSIGN",
++      "EXECUTE",
++      "CROSS_CHECK",
++      "REDIRECT",
++      "VERIFY",
++      "DELIVER"
++    ],
++    "implementation_status": {
++      "control_role_schema": "IMPLEMENTED",
++      "delivery_confirmation_split": "IMPLEMENTED",
++      "owner_map_registry": "IMPLEMENTED",
++      "role_actor_binding": "IMPLEMENTED",
++      "semantic_owner_binding": "IMPLEMENTED",
++      "shared_savey_economy_policy": "IMPLEMENTED",
++      "startup_readback_receipt": "IMPLEMENTED",
++      "worker_role_contracts": "IMPLEMENTED"
++    },
++    "metaphor_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
++    "name": "TAKY_ROLE_BASED_COLLABORATIVE_EXECUTION",
++    "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
++    "purpose": "GUIDE_TO_RESULT",
++    "role_policy": {
++      "implementer_assignment": "TASK_FIT_NECESSITY",
++      "implementer_is_role_category_not_fixed_model": true,
++      "role_labels_do_not_authorize_calls": true,
++      "role_not_agent": true,
++      "routing_does_not_transfer_semantic_ownership": true,
++      "semantic_owner_remains_domain_owner": true
++    },
++    "role_registry": {
++      "final_authority": "FINAL_AUTHORITY",
++      "implementer": "CODE_WRITER",
++      "independent_reviewer": "INDEPENDENT_REVIEWER",
++      "orchestrator": "LEAD_ORCHESTRATOR",
++      "verifier": "VERIFIER"
++    },
++    "source_ref": "user:execution-structure:role-based-collaboration-v1",
++    "version": 5,
++    "economy_contract": {
++      "operating_mode": "CORRECTIVE_ROUTER_OPTIMIZER",
++      "priority": "ACCEPTANCE_BEFORE_COST",
++      "normal_flow": [
++        "ALLOW",
++        "CORRECT_AND_RUN",
++        "SHRINK_AND_RUN",
++        "REROUTE_AND_RUN",
++        "VERIFY"
++      ],
++      "requirement_classes": [
++        "CAPABILITY_REQUIRED",
++        "QUALITY_REQUIRED",
++        "OPTIONAL_CONVENIENCE"
++      ],
++      "resource_classes": {
++        "REMOTE_LOCAL": "UNMETERED",
++        "SUBSCRIPTION_MODELS": "SUBSCRIPTION_QUOTA",
++        "PAID_API": "PAID_API"
++      },
++      "capability_examples": [
++        "UI_IMAGE_GENERATION",
++        "TTS_AUDIO_GENERATION"
++      ],
++      "dry_run_policy": {
++        "mode": "AUTO_DERIVE_REDUNDANT_FIELDS",
++        "derive": [
++          "EXPECTED_CALLS",
++          "OPERATIONS_DEFAULT",
++          "BATCH_STRATEGY",
++          "FALLBACK",
++          "PAID_API_FROM_BILLING_CLASS"
++        ],
++        "explicit_conflict": "CORRECT_OR_REJECT",
++        "packet_only_requires": [
++          "PACKET_ONLY_BINDING",
++          "PACKET_DIGEST"
++        ]
++      },
++      "same_failure_repeat_forbidden": true,
++      "user_decision_reserved_for": [
++        "REAL_INCREMENTAL_PAID_SPEND",
++        "PROTECTED_AUTHORITY_OR_SCOPE_CHANGE",
++        "IRREVERSIBLE_ACTION",
++        "EXPLICIT_USER_STOP"
++      ]
++    }
++  },
++  "semantic_owner_registry": {
++    "ARCHITECTURE_ARCHIGROW": {
++      "can_own_semantics": true,
++      "owner_type": "DOMAIN",
++      "scopes": [
++        "ARCHITECTURE"
++      ],
++      "status": "RESOLVED"
++    },
++    "BADGE_REWARD": {
++      "can_own_semantics": false,
++      "owner_type": "UNRESOLVED",
++      "scopes": [
++        "BADGE_REWARD"
++      ],
++      "status": "OWNER_GAP"
++    },
++    "EUNHA_FARM": {
++      "can_own_semantics": false,
++      "owner_type": "UNRESOLVED",
++      "scopes": [
++        "EUNHA_FARM"
++      ],
++      "status": "OWNER_GAP"
++    },
++    "EXPLORER_CREW": {
++      "can_own_semantics": false,
++      "owner_type": "UNRESOLVED",
++      "scopes": [
++        "EXPLORER_CREW"
++      ],
++      "status": "OWNER_GAP"
++    },
++    "GROW": {
++      "can_own_semantics": true,
++      "owner_type": "GROWTH",
++      "scopes": [
++        "GROW"
++      ],
++      "status": "RESOLVED"
++    },
++    "HIDE_SEEK": {
++      "can_own_semantics": true,
++      "owner_type": "APP",
++      "scopes": [
++        "HIDE"
++      ],
++      "status": "RESOLVED"
++    },
++    "LEARNING_ENGINE_CORE": {
++      "can_own_semantics": true,
++      "owner_type": "ENGINE",
++      "scopes": [
++        "LEARNING_ENGINE"
++      ],
++      "status": "RESOLVED"
++    },
++    "LEARNING_OS": {
++      "can_own_semantics": true,
++      "owner_type": "OS",
++      "scopes": [
++        "LEARNING_OS"
++      ],
++      "status": "RESOLVED"
+     },
++    "PIANO_PRACTICE": {
++      "can_own_semantics": true,
++      "owner_type": "PROJECT",
++      "scopes": [
++        "PIANO"
++      ],
++      "status": "RESOLVED"
++    },
++    "PLANNER": {
++      "can_own_semantics": true,
++      "owner_type": "ENGINE",
++      "scopes": [
++        "PLANNER"
++      ],
++      "status": "RESOLVED"
++    },
++    "READY_SET": {
++      "can_own_semantics": true,
++      "owner_type": "APP",
++      "scopes": [
++        "READY"
++      ],
++      "status": "RESOLVED"
++    },
++    "SAVEY_FAMILY_FINANCE": {
++      "can_own_semantics": true,
++      "owner_type": "APP",
++      "scopes": [
++        "SAVEY_FAMILY_FINANCE"
++      ],
++      "status": "RESOLVED"
++    },
++    "SNAP_POP": {
++      "can_own_semantics": true,
++      "owner_type": "APP",
++      "scopes": [
++        "SNAP"
++      ],
++      "status": "RESOLVED"
++    },
++    "TAKY2_ORCHESTRATION_KERNEL": {
++      "can_own_semantics": true,
++      "owner_type": "KERNEL",
++      "scopes": [
++        "TAKY2"
++      ],
++      "status": "RESOLVED"
++    },
++    "TAKY_GRAND_MASTER": {
++      "can_own_semantics": true,
++      "owner_type": "MASTER",
++      "scopes": [
++        "GLOBAL"
++      ],
++      "status": "RESOLVED"
++    },
++    "TAKY_MOBILE": {
++      "can_own_semantics": false,
++      "owner_type": "PROJECTION",
++      "scopes": [
++        "TAKY_MOBILE"
++      ],
++      "status": "RESOLVED"
++    },
++    "WORK_OS": {
++      "can_own_semantics": true,
++      "owner_type": "OS",
++      "scopes": [
++        "WORK_OS"
++      ],
++      "status": "RESOLVED"
++    }
++  },
++  "source_registry": {
+     "user:action:doc_write": {
+--- a/TAKY2/state/authority.json
++++ b/TAKY2/state/authority.json
+@@ -68,99 +413,5 @@
+     ],
+-    "key_owner": "USER",
+-    "final_authority": "USER",
++    "source_ref": "user:taky:identity-slogans-v1",
+     "user_not_debugger": true,
+-    "execution_duty": "AI_COLLABORATION_GROUP",
+-    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06"
+-  },
+-  "approvals": {},
+-  "action_registry": {
+-    "read:q002": {
+-      "kind": "READ",
+-      "execution_scope": "q002-read",
+-      "call_policy": {
+-        "mode": "LOCAL_ONLY"
+-      }
+-    },
+-    "write:q002-doc": {
+-      "kind": "EXTERNAL_WRITE",
+-      "target_account": "HNS",
+-      "action_class": "doc_write",
+-      "execution_scope": "q002-doc-write",
+-      "call_policy": {
+-        "mode": "LOCAL_ONLY"
+-      }
+-    }
+-  },
+-  "capabilities": [
+-    "shell",
+-    "local_python"
+-  ],
+-  "local_capabilities": [
+-    "local_validation"
+-  ],
+-  "cost_policy": {
+-    "high_cost_models": [
+-      "opus",
+-      "claude-opus-5-5"
+-    ],
+-    "max_calls_without_approval": 1
+-  },
+-  "orchestration_contract": {
+-    "name": "TAKY_SHEPHERDING_COOPERATIVE_EXECUTION",
+-    "version": 3,
+-    "source_ref": "user:execution-model:shepherding-cooperative-v1",
+-    "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
+-    "execution_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
+-    "definition": "Subordinate TAKY execution model for specialized role assignment, collaboration, rerouting, verification, and delivery toward the USER-intended result.",
+-    "purpose": "GUIDE_TO_RESULT",
+-    "roles": {
+-      "orchestrator": "CHATGPT_LEAD_ORCHESTRATOR",
+-      "implementer": "CODE_WRITER",
+-      "verifier": "CODEX",
+-      "independent_reviewer": "CLAUDE",
+-      "final_authority": "USER"
+-    },
+-    "role_policy": {
+-      "implementer_assignment": "TASK_FIT_NECESSITY",
+-      "role_labels_do_not_authorize_calls": true,
+-      "implementer_is_role_category_not_fixed_model": true,
+-      "role_not_agent": true,
+-      "routing_does_not_transfer_semantic_ownership": true,
+-      "semantic_owner_remains_domain_owner": true
+-    },
+-    "guidance_loop": [
+-      "OBSERVE",
+-      "CLASSIFY",
+-      "ASSIGN",
+-      "EXECUTE",
+-      "CROSS_CHECK",
+-      "REDIRECT",
+-      "VERIFY",
+-      "DELIVER"
+-    ],
+-    "gate_policy": {
+-      "default": "REDIRECT_BEFORE_ESCALATE",
+-      "user_not_debugger": true,
+-      "block_is_not_goal": true,
+-      "goal": "CORRECT_RESULT",
+-      "terminal_block_only_for_explicit_user_stop_or_integrity_hard_stop": true
+-    },
+-    "call_policy": {
+-      "claude_codex_remote": "NECESSITY_GATE_ONLY"
+-    },
+-    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+-    "canonical_source_ref": "user:systemwide-canonical-v2:2026-10-06",
+-    "control_roles": [
+-      "NAVIGATOR",
+-      "GUARDIAN",
+-      "DRIVER",
+-      "SCOUT"
+-    ],
+-    "economy_policy": "SAVEY_AI_ECONOMY",
+-    "implementation_status": {
+-      "control_role_schema": "OPEN",
+-      "semantic_owner_binding": "OPEN",
+-      "worker_role_contracts": "OPEN",
+-      "shared_savey_economy_policy": "OPEN"
+-    }
++    "version": 1
+   }

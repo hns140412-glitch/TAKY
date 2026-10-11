@@ -1,0 +1,1419 @@
+TAKY 2.0 V3 FINAL CODEX VERIFIER PACKET
+READ ONLY. PACKET ONLY. NO REPOSITORY EXPLORATION. NO WEB. NO SHELL.
+Review the supplied code excerpts only. Find MATERIAL runtime correctness/security/authority issues.
+
+CANONICAL USER INTENT
+- SAVEY is a corrective router/optimizer, not a blanket blocker.
+- Acceptance quality precedes cost optimization.
+- Capability/quality-required work must not be silently downgraded.
+- Route-count alone does not require USER involvement.
+- Real incremental paid spend, protected authority/scope changes, irreversible action, or explicit USER stop remain USER-authority cases.
+- Same failure repetition is prohibited; materially different safe routes may continue.
+- USER is not the debugger.
+
+CURRENT VERIFIED EVIDENCE
+- full TAKY2: 203 passed + 54 subtests.
+- compileall: PASS.
+- git diff --check: PASS (line-ending warning only).
+- current runtime version: 132.
+- Codex action: one medium SUBSCRIPTION_QUOTA call, CODEX_VERIFY_ONLY.
+- Claude will NOT be called again due quota.
+
+PRIOR CLAUDE MATERIAL FINDINGS AND CURRENT REMEDIATION TO VERIFY
+1. QUALITY_REQUIRED skip decisions previously lacked acceptance binding.
+   Current: requirement_class must match and acceptance_ref is mandatory for QUALITY_REQUIRED/CAPABILITY_REQUIRED in both record and verify paths.
+2. QUALITY_REQUIRED could lack a quality floor.
+   Current: model_quality mapping + integer minimum_quality are mandatory for QUALITY_REQUIRED; chosen model must meet floor.
+3. External call crash could be retried after uncertain outcome.
+   Current: signed CLAIMED reservation is persisted first; CALLING checkpoint is durably persisted immediately before runner; claim token binds executor; interrupted CALLING reconciles to OUTCOME_UNKNOWN, not retry-eligible ordinary failure.
+4. PACKET isolation/billing.
+   Current: explicit model billing, minimal env strips risky provider/API variables, exact hardened Claude/Codex templates, pinned executable, single call.
+5. Persisted result conflict.
+   Current: CAS conflict reconciles current CALLING/CLAIMED state to unknown outcome rather than silently replaying.
+6. CLI external failure returns nonzero; returned result remains unverified until verification.
+
+CODEX REVIEW QUESTIONS
+A. Is QUALITY_REQUIRED now protected from evidence-free skip and quality-floor downgrade?
+B. Can SUBSCRIPTION_QUOTA still accidentally use a paid API credential through the shown environment construction?
+C. Can the same external receipt execute twice through the production CLI path?
+D. Can a crash after possible invocation become an ordinary retryable failure rather than OUTCOME_UNKNOWN?
+E. Does any correction path bypass billing/capability/quality/receipt binding?
+F. Any BLOCKER/HIGH/MEDIUM issue directly evidenced by these excerpts?
+
+Do not require USER approval merely because a soft route-count budget was exceeded.
+Do not report style, naming, or speculative issues outside supplied evidence.
+
+OUTPUT EXACTLY:
+VERDICT: PASS | HOLD
+FINDINGS:
+- [SEVERITY] function - concrete issue - material consequence - minimal fix
+CHECKED:
+- concise scenarios
+If no BLOCKER/HIGH/MEDIUM finding: FINDINGS: NONE
+
+CODEX AUTHORITY POLICY
+{
+  "allow_batch": true,
+  "allow_parallel": false,
+  "allow_subagents": false,
+  "allowed_efforts": [
+    "medium"
+  ],
+  "allowed_models": [
+    "codex"
+  ],
+  "batch_safe": true,
+  "execution_mode": "CODEX_VERIFY_ONLY",
+  "max_calls": 1,
+  "max_effort": "medium",
+  "max_retries": 0,
+  "minimum_quality": 2,
+  "mode": "EXTERNAL_REQUIRED",
+  "model_quality": {
+    "codex": 2
+  },
+  "model_billing": {
+    "codex": "SUBSCRIPTION_QUOTA"
+  },
+  "requirement_class": "QUALITY_REQUIRED"
+}
+
+RELEVANT CODE
+
+### TAKY2\enforcement.py:_resolve_billing_class
+def _resolve_billing_class(
+    policy: Mapping[str, Any],
+    model: Any,
+) -> tuple[str | None, str | None]:
+    normalized_model = _norm_token(model)
+    model_billing = policy.get("model_billing")
+    if model_billing is not None:
+        if not isinstance(model_billing, Mapping):
+            return None, "trusted model_billing must be a mapping"
+        normalized = {
+            _norm_token(name): str(value or "").strip().upper()
+            for name, value in model_billing.items()
+            if isinstance(name, str)
+        }
+        billing = normalized.get(normalized_model)
+        if billing is None:
+            return None, "trusted model billing class missing for requested model"
+    else:
+        raw = policy.get("billing_class")
+        if not isinstance(raw, str) or not raw.strip():
+            return None, "trusted billing_class required for external action"
+        billing = raw.strip().upper()
+    if billing not in BILLING_CLASSES:
+        return None, "unknown trusted billing_class"
+    return billing, None
+
+### TAKY2\enforcement.py:_model_has_capability
+def _model_has_capability(
+    policy: Mapping[str, Any],
+    model: Any,
+    capability: str,
+) -> bool:
+    mapping = policy.get("model_capabilities")
+    if not isinstance(mapping, Mapping):
+        return False
+    caps = mapping.get(_norm_token(model))
+    if caps is None:
+        # accept original-case keys while normalizing lookup
+        for name, values in mapping.items():
+            if _norm_token(name) == _norm_token(model):
+                caps = values
+                break
+    if not isinstance(caps, list):
+        return False
+    normalized = {str(v or "").strip().upper() for v in caps if isinstance(v, str)}
+    return capability.strip().upper() in normalized
+
+### TAKY2\enforcement.py:_trusted_economy_decision
+def _trusted_economy_decision(
+    trusted: Mapping[str, Any],
+    action: Mapping[str, Any],
+    ref: Any,
+    *,
+    expected_kind: str,
+    requirement_class: str | None = None,
+    required_capability: str | None = None,
+) -> tuple[bool, str]:
+    if expected_kind not in ECONOMY_DECISION_KINDS:
+        return False, "unknown economy decision kind"
+    if not isinstance(ref, str) or not ref.strip():
+        return False, "trusted economy decision ref missing"
+    registry = trusted.get("economy_evidence_registry", {})
+    item = registry.get(ref) if isinstance(registry, Mapping) else None
+    if not isinstance(item, Mapping):
+        return False, "economy decision is not trusted"
+    if item.get("decision_kind") != expected_kind:
+        return False, "economy decision kind mismatch"
+    if item.get("verified") is not True:
+        return False, "economy decision is not verified"
+    if item.get("acceptance_state") != ACCEPTED_EVIDENCE_STATE:
+        return False, "economy decision is not accepted"
+    if item.get("source_status") in REJECTED_EVIDENCE_STATES:
+        return False, "economy decision is stale/rejected"
+    if item.get("authority_digest") != trusted.get("_authority_digest"):
+        return False, "economy decision authority is stale"
+    if item.get("action_digest") != action_digest(action):
+        return False, "economy decision action binding mismatch"
+    if item.get("semantic_owner_ref") != action.get("semantic_owner_ref"):
+        return False, "economy decision semantic owner mismatch"
+    if item.get("semantic_owner_scope") != action.get("semantic_owner_scope"):
+        return False, "economy decision semantic owner scope mismatch"
+    if requirement_class in {"CAPABILITY_REQUIRED", "QUALITY_REQUIRED"}:
+        if item.get("requirement_class") != requirement_class:
+            return False, "economy decision requirement class mismatch"
+        acceptance_ref = item.get("acceptance_ref")
+        if not isinstance(acceptance_ref, str) or not acceptance_ref.strip():
+            return False, "required economy decision acceptance_ref missing"
+    if requirement_class == "CAPABILITY_REQUIRED":
+        expected_capability = str(required_capability or "").strip().upper()
+        if not expected_capability:
+            return False, "capability-required economy decision lacks required capability"
+        if str(item.get("required_capability") or "").strip().upper() != expected_capability:
+            return False, "economy decision required capability mismatch"
+    return True, ref
+
+### TAKY2\enforcement.py:evaluate_savey_ai_economy
+def evaluate_savey_ai_economy(
+    trusted: Mapping[str, Any],
+    action: Mapping[str, Any],
+    call: Mapping[str, Any],
+    *,
+    route_fp: str | None = None,
+) -> GateResult:
+    policy = action.get("call_policy")
+    if not isinstance(policy, Mapping):
+        return GateResult(False, "BLOCKED", "trusted action call_policy missing")
+
+    mode = policy.get("mode")
+    if mode == "LOCAL_ONLY":
+        return GateResult(True, "SKIP_CALL", "trusted action policy is local-only")
+    if mode not in {"EXTERNAL_REQUIRED", "EXTERNAL_OPTIONAL"}:
+        return GateResult(False, "BLOCKED", "unknown trusted call policy mode")
+
+    requirement_class = str(
+        policy.get("requirement_class")
+        or ("QUALITY_REQUIRED" if mode == "EXTERNAL_REQUIRED" else "OPTIONAL_CONVENIENCE")
+    ).strip().upper()
+    if requirement_class not in {
+        "CAPABILITY_REQUIRED",
+        "QUALITY_REQUIRED",
+        "OPTIONAL_CONVENIENCE",
+    }:
+        return GateResult(False, "BLOCKED", "unknown trusted requirement_class")
+
+    required_capability = None
+    if requirement_class == "CAPABILITY_REQUIRED":
+        required_capability = policy.get("required_capability")
+        if not isinstance(required_capability, str) or not required_capability.strip():
+            return GateResult(
+                False,
+                "REROUTE_REQUIRED",
+                "capability-required action must resolve required_capability from acceptance",
+            )
+        required_capability = required_capability.strip().upper()
+
+    # Driver Necessity/Re-use/Local decisions may only reduce external work
+    # when backed by a current trusted economy decision bound to this action/owner.
+    skip_claims = (
+        ("necessity_decision_ref", "EXTERNAL_NOT_NECESSARY", "external call is unnecessary"),
+        ("reuse_decision_ref", "REUSE_SUFFICIENT", "reusable evidence/context satisfies acceptance"),
+        ("local_decision_ref", "LOCAL_SUFFICIENT", "local deterministic route satisfies acceptance"),
+    )
+    for field, decision_kind, reason in skip_claims:
+        if field in call:
+            ok, detail = _trusted_economy_decision(
+                trusted,
+                action,
+                call.get(field),
+                expected_kind=decision_kind,
+                requirement_class=requirement_class,
+                required_capability=required_capability,
+            )
+            if not ok:
+                return GateResult(False, "BLOCKED", detail)
+            skip_evidence = ["requirement-class:" + requirement_class]
+            if required_capability:
+                skip_evidence.append("required-capability:" + required_capability)
+            skip_evidence.append("economy-decision:" + detail)
+            return GateResult(
+                True,
+                "SKIP_CALL",
+                reason,
+                tuple(skip_evidence),
+            )
+
+    # Legacy/self-asserted skip booleans are an integrity violation, not evidence.
+    if call.get("necessary") is False:
+        return GateResult(False, "BLOCKED", "untrusted economy necessity claim")
+    if call.get("reuse_available") is True or call.get("reuse_satisfies_acceptance") is True:
+        return GateResult(False, "BLOCKED", "untrusted economy reuse claim")
+    if call.get("local_sufficient") is True or call.get("local_meets_acceptance") is True:
+        return GateResult(False, "BLOCKED", "untrusted economy local-sufficiency claim")
+
+    if call.get("context") == "full" and trusted.get("context", {}).get("premise_loaded"):
+        if not trusted.get("context", {}).get("full_reread_authorized"):
+            return GateResult(False, "SKIP_FULL_REREAD", "full context reread blocked")
+
+    if requirement_class == "QUALITY_REQUIRED":
+        model_quality = policy.get("model_quality")
+        minimum_quality = policy.get("minimum_quality")
+        if not isinstance(model_quality, Mapping) or not isinstance(minimum_quality, int):
+            return GateResult(False, "BLOCKED", "quality-required action needs a trusted quality floor")
+
+    allowed_models = policy.get("allowed_models")
+    if not isinstance(allowed_models, list) or not allowed_models:
+        return GateResult(False, "BLOCKED", "trusted allowed_models missing")
+    allowed_models = {_norm_token(v) for v in allowed_models if isinstance(v, str)}
+
+    model = _norm_token(call.get("model"))
+    if not model or model not in allowed_models:
+        return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "requested model is not trusted for this action")
+    if required_capability and not _model_has_capability(policy, model, required_capability):
+        return GateResult(
+            False,
+            "REROUTE_LOWEST_SUFFICIENT",
+            "requested model does not provide the trusted required capability",
+        )
+
+    model_quality = policy.get("model_quality")
+    minimum_quality = policy.get("minimum_quality")
+    if model_quality is not None or minimum_quality is not None:
+        if not isinstance(model_quality, Mapping) or not isinstance(minimum_quality, int):
+            return GateResult(False, "BLOCKED", "trusted acceptance-quality policy is malformed")
+        normalized_quality = {
+            _norm_token(name): score
+            for name, score in model_quality.items()
+            if isinstance(name, str) and isinstance(score, int)
+        }
+        selected_quality = normalized_quality.get(model)
+        if selected_quality is None:
+            return GateResult(False, "BLOCKED", "trusted quality score missing for requested model")
+        if selected_quality < minimum_quality:
+            return GateResult(
+                False,
+                "REROUTE_QUALITY_FLOOR",
+                "lowest-cost route is below trusted acceptance quality floor",
+            )
+
+    expected_calls = call.get("expected_calls", 1)
+    if not isinstance(expected_calls, int) or expected_calls < 1:
+        return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "invalid expected_calls")
+
+    max_calls = policy.get("max_calls", 1)
+    if not isinstance(max_calls, int) or max_calls < 1:
+        return GateResult(False, "BLOCKED", "trusted max_calls must be >= 1")
+
+    billing_class, billing_error = _resolve_billing_class(policy, model)
+    if billing_error:
+        return GateResult(False, "BLOCKED", billing_error)
+    assert billing_class is not None
+
+    call_key = "cost:" + stable_hash(dict(call))
+    approval = trusted_approval(trusted, call_key)
+    approval_evidence = ["requirement-class:" + requirement_class]
+    if required_capability:
+        approval_evidence.append("required-capability:" + required_capability)
+    approval_evidence.append("billing-class:" + billing_class)
+
+    # SAVEY optimizes route cost after acceptance quality is protected.
+    # A bounded subscription-quota call may proceed without per-call USER approval.
+    # Real paid API spend, or an authority policy that explicitly demands approval,
+    # still requires a trusted approval bound to this exact call.
+    approval_required = (
+        billing_class == "PAID_API"
+        or (
+            mode == "EXTERNAL_OPTIONAL"
+            and policy.get("require_optional_approval") is True
+        )
+    )
+    if approval_required:
+        if not approval:
+            reason = (
+                "paid API call needs trusted approval"
+                if billing_class == "PAID_API"
+                else "optional external call policy requires trusted approval"
+            )
+            return GateResult(False, "USER_DECISION_REQUIRED", reason)
+        approval_evidence.append("approval-key:" + call_key)
+
+    if expected_calls > 1:
+        return GateResult(
+            False,
+            "REROUTE_LOWEST_SUFFICIENT",
+            "requested call count exceeds current single-invocation executor; batch workload and rerun",
+        )
+
+    effort = _norm_token(call.get("effort"))
+    max_effort = _norm_token(policy.get("max_effort", "medium"))
+    effort_rank = {"low": 1, "medium": 2, "high": 3, "xhigh": 4, "max": 5}
+    if effort not in effort_rank or max_effort not in effort_rank:
+        return GateResult(False, "BLOCKED", "invalid trusted/requested effort")
+
+    allowed_efforts = policy.get("allowed_efforts")
+    if allowed_efforts is not None:
+        if not isinstance(allowed_efforts, list) or not allowed_efforts:
+            return GateResult(False, "BLOCKED", "trusted allowed_efforts is malformed")
+        normalized_efforts = {
+            _norm_token(value)
+            for value in allowed_efforts
+            if isinstance(value, str)
+        }
+        if not normalized_efforts or any(value not in effort_rank for value in normalized_efforts):
+            return GateResult(False, "BLOCKED", "trusted allowed_efforts contains invalid values")
+        if effort not in normalized_efforts:
+            return GateResult(
+                False,
+                "REROUTE_LOWEST_SUFFICIENT",
+                "requested effort is not allowed for this action",
+            )
+    if effort_rank[effort] > effort_rank[max_effort]:
+        if not approval:
+            return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "requested effort exceeds trusted action policy")
+        if "approval-key:" + call_key not in approval_evidence:
+            approval_evidence.append("approval-key:" + call_key)
+
+    batch_size = call.get("batch_size", 1)
+    if not isinstance(batch_size, int) or batch_size < 1:
+        return GateResult(False, "BLOCKED", "invalid batch_size")
+    if batch_size > 1:
+        if policy.get("allow_batch") is not True or policy.get("batch_safe") is not True:
+            return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "batching is not trusted safe for this action")
+
+    if call.get("parallel"):
+        if policy.get("allow_parallel") is not True:
+            key = "parallel:" + stable_hash(dict(call))
+            if not trusted_approval(trusted, key):
+                return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "parallel calls are not trusted for this action")
+            approval_evidence.append("approval-key:" + key)
+        elif policy.get("parallel_safe") is not True or policy.get("independent_items") is not True:
+            return GateResult(False, "BLOCKED", "parallel execution lacks trusted safety/independence")
+
+    if "retry_count" in call:
+        return GateResult(False, "BLOCKED", "retry_count must come from trusted route ledger")
+    max_retries = policy.get("max_retries", TRANSIENT_LIMIT - 1)
+    if (
+        not isinstance(max_retries, int)
+        or max_retries < 0
+        or max_retries >= TRANSIENT_LIMIT
+    ):
+        return GateResult(
+            False,
+            "BLOCKED",
+            "trusted max_retries must stay below the hard transient retry limit",
+        )
+    if route_fp is not None:
+        ledger = trusted.get("route_ledger", {})
+        transient = ledger.get("transient_failures", {}) if isinstance(ledger, Mapping) else {}
+        retry_count = transient.get(route_fp, 0) if isinstance(transient, Mapping) else 0
+        if not isinstance(retry_count, int) or retry_count < 0:
+            return GateResult(False, "BLOCKED", "trusted transient retry ledger is invalid")
+        if retry_count > max_retries:
+            return GateResult(False, "THROTTLE_HOLD", "retry count exceeds trusted throttle policy")
+
+    if call.get("subagents") and policy.get("allow_subagents") is not True:
+        key = "subagents:" + stable_hash(dict(call))
+        if not trusted_approval(trusted, key):
+            return GateResult(False, "REROUTE_LOWEST_SUFFICIENT", "subagents are not trusted for this action")
+        approval_evidence.append("approval-key:" + key)
+
+    return GateResult(
+        True,
+        "COST_OK",
+        "trusted action call policy satisfied",
+        tuple(approval_evidence),
+    )
+
+### TAKY2\bridges.py:_minimal_packet_env
+def _minimal_packet_env() -> dict[str, str]:
+    env = {
+        key: value
+        for key, value in os.environ.items()
+        if (
+            key.upper() in PACKET_ENV_ALLOWLIST
+            and not _is_risky_external_env_name(key)
+        )
+    }
+    system_root = next(
+        (
+            value
+            for key, value in os.environ.items()
+            if key.upper() in {"SYSTEMROOT", "WINDIR"} and value
+        ),
+        r"C:\Windows",
+    )
+    env["PATH"] = os.pathsep.join([
+        str(Path(system_root) / "System32"),
+        str(Path(system_root)),
+    ])
+    return env
+
+### TAKY2\bridges.py:subprocess_runner
+def subprocess_runner(invocation: Mapping[str, Any]) -> dict[str, Any]:
+    argv = invocation.get("argv")
+    if (
+        not isinstance(argv, list)
+        or not argv
+        or not isinstance(argv[0], str)
+        or not argv[0]
+        or not all(isinstance(x, str) for x in argv)
+    ):
+        raise BridgeViolation("argv must be a string list with a non-empty executable")
+
+    stdin_text = invocation.get("stdin_text")
+    if stdin_text is not None and not isinstance(stdin_text, str):
+        raise BridgeViolation("stdin_text must be a string when provided")
+
+    timeout_raw = invocation.get("timeout_sec", NONINTERACTIVE_TIMEOUT_SEC)
+    if not isinstance(timeout_raw, (int, float)) or isinstance(timeout_raw, bool):
+        raise BridgeViolation("timeout_sec must be numeric")
+    timeout_sec = float(timeout_raw)
+    if timeout_sec <= 0 or timeout_sec > NONINTERACTIVE_TIMEOUT_MAX_SEC:
+        raise BridgeViolation("timeout_sec must be > 0 and <= 300")
+
+    cwd = invocation.get("cwd")
+    if cwd is not None and (not isinstance(cwd, str) or not cwd.strip()):
+        raise BridgeViolation("cwd must be a non-empty string when provided")
+
+    bridge_last_message_path = invocation.get("_bridge_last_message_path")
+    if bridge_last_message_path is not None:
+        if not isinstance(bridge_last_message_path, str) or not bridge_last_message_path.strip():
+            raise BridgeViolation("bridge last-message path must be a non-empty string")
+        if not isinstance(cwd, str) or not cwd.strip():
+            raise BridgeViolation("bridge last-message capture requires bridge-owned cwd")
+        try:
+            capture_path = Path(bridge_last_message_path).resolve()
+            capture_root = Path(cwd).resolve()
+            capture_path.relative_to(capture_root)
+        except (OSError, ValueError) as exc:
+            raise BridgeViolation("bridge last-message path must stay inside cwd") from exc
+
+    env_override = invocation.get("env")
+    if env_override is not None:
+        if not isinstance(env_override, Mapping) or not all(
+            isinstance(k, str) and isinstance(v, str) for k, v in env_override.items()
+        ):
+            raise BridgeViolation("env must be a string mapping when provided")
+
+    stdin_file = None
+    try:
+        run_kwargs = {
+            "shell": False,
+            "text": True,
+            "capture_output": True,
+            "check": False,
+            "timeout": timeout_sec,
+        }
+        if cwd is not None:
+            run_kwargs["cwd"] = cwd
+
+        minimal_env_mode = invocation.get("minimal_env")
+        if minimal_env_mode in {True, "packet", "codex"}:
+            if env_override is not None:
+                raise BridgeViolation("minimal_env execution does not allow env overrides")
+            run_kwargs["env"] = (
+                _minimal_codex_env()
+                if minimal_env_mode == "codex"
+                else _minimal_packet_env()
+            )
+        elif minimal_env_mode not in {None, False}:
+            raise BridgeViolation("unknown minimal_env mode")
+        elif invocation.get("scrub_api_keys") is True or env_override is not None:
+            child_env = (
+                _scrubbed_external_env()
+                if invocation.get("scrub_api_keys") is True
+                else os.environ.copy()
+            )
+            if env_override is not None:
+                child_env.update(dict(env_override))
+            run_kwargs["env"] = child_env
+
+        if stdin_text is None:
+            run_kwargs["stdin"] = subprocess.DEVNULL
+        elif invocation.get("stdin_transport") == "tempfile":
+            # Some Windows model CLIs do not reliably consume a Python PIPE.
+            # Use a seekable temporary file as stdin without exposing packet text
+            # in argv or persisting it in the target repository.
+            stdin_file = tempfile.TemporaryFile(
+                mode="w+t",
+                encoding="utf-8",
+                newline="",
+            )
+            stdin_file.write(stdin_text)
+            stdin_file.seek(0)
+            run_kwargs["stdin"] = stdin_file
+        else:
+            run_kwargs["input"] = stdin_text
+        completed = subprocess.run(argv, **run_kwargs)
+    except subprocess.TimeoutExpired as exc:
+        stdout = exc.stdout or ""
+        stderr = exc.stderr or ""
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode("utf-8", errors="replace")
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode("utf-8", errors="replace")
+        timeout_note = f"TAKY_NONINTERACTIVE_TIMEOUT after {timeout_sec:g}s"
+        stderr = (str(stderr).rstrip() + "\n" + timeout_note).lstrip("\n")
+        return {
+            "returncode": 124,
+            "stdout": str(stdout),
+            "stderr": stderr,
+            "timed_out": True,
+            "outcome_unknown": True,
+            "timeout_sec": timeout_sec,
+        }
+    finally:
+        if stdin_file is not None:
+            stdin_file.close()
+
+    captured_stdout = completed.stdout if isinstance(completed.stdout, str) else ""
+    captured_stderr = completed.stderr if isinstance(completed.stderr, str) else ""
+    if bridge_last_message_path is not None:
+        try:
+            final_message = Path(bridge_last_message_path).read_text(
+                encoding="utf-8",
+                errors="replace",
+            )
+        except FileNotFoundError:
+            final_message = ""
+        if final_message.strip():
+            captured_stdout = final_message
+
+    return {
+        "returncode": completed.returncode,
+        "stdout": captured_stdout,
+        "stderr": captured_stderr,
+    }
+
+### TAKY2\bridges.py:claim_execution_receipt
+def claim_execution_receipt(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    *,
+    executor_id: str,
+) -> tuple[dict[str, Any], str]:
+    """Atomically claim intent in runtime before an external/local runner is invoked."""
+    receipt = _receipt(runtime, receipt_id)
+    if not isinstance(executor_id, str) or not executor_id.strip():
+        raise BridgeViolation("executor_id required")
+    calls = runtime.get("execution_calls", {})
+    if isinstance(calls, Mapping) and receipt_id in calls:
+        raise BridgeViolation("receipt already has an executor call")
+
+    execution_key = receipt.get("execution_key")
+    active = runtime.get("active_attempts", {}).get(execution_key)
+    if not isinstance(active, Mapping) or active.get("receipt_id") != receipt_id:
+        raise BridgeViolation("receipt has no matching active attempt")
+    if active.get("status") != "PENDING":
+        raise BridgeViolation("active attempt is not pending")
+
+    token = secrets.token_hex(24)
+    token_hash = stable_hash(token)
+    updated = deepcopy(dict(runtime))
+    updated_active = updated.setdefault("active_attempts", {}).get(execution_key)
+    if not isinstance(updated_active, dict):
+        raise BridgeViolation("active attempt state is not mutable")
+    updated_active.update({
+        "status": "RESERVED",
+        "claimed_by": executor_id.strip(),
+        "claim_token_hash": token_hash,
+        "claim_runtime_version": runtime.get("runtime_version"),
+    })
+    updated.setdefault("execution_calls", {})[receipt_id] = {
+        "executor_id": executor_id.strip(),
+        "provider": None,
+        "model": None,
+        "actual_calls": 0,
+        "method_or_tool": None,
+        "result_digest": None,
+        "result": None,
+        "status": "CLAIMED",
+        "claim_token_hash": token_hash,
+    }
+    return updated, token
+
+### TAKY2\bridges.py:reconcile_execution_claim
+def reconcile_execution_claim(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    *,
+    reconciler_id: str,
+    reason: str,
+) -> dict[str, Any]:
+    """Terminalize a persisted CLAIMED/CALLING receipt after an interrupted/blocked runner path."""
+    receipt = _receipt(runtime, receipt_id)
+    if not isinstance(reconciler_id, str) or not reconciler_id.strip():
+        raise BridgeViolation("reconciler_id required")
+    if not isinstance(reason, str) or not reason.strip():
+        raise BridgeViolation("reconcile reason required")
+
+    call_record = runtime.get("execution_calls", {}).get(receipt_id)
+    if not isinstance(call_record, Mapping):
+        raise BridgeViolation("execution claim missing")
+    if call_record.get("status") not in {"CLAIMED", "CALLING"}:
+        raise BridgeViolation("execution claim is already terminal")
+
+    updated = deepcopy(dict(runtime))
+    calls = updated.setdefault("execution_calls", {})
+    execution_key = receipt.get("execution_key")
+    active = updated.setdefault("active_attempts", {}).get(execution_key)
+    possibly_invoked = (
+        call_record.get("status") == "CALLING"
+        or (isinstance(active, Mapping) and active.get("status") == "CALLING")
+    )
+    terminal_status = "OUTCOME_UNKNOWN" if possibly_invoked else "FAILED"
+    failed_result = {
+        "returncode": 125 if possibly_invoked else 127,
+        "stdout": "",
+        "stderr": (
+            "TAKY_EXECUTION_OUTCOME_UNKNOWN:"
+            if possibly_invoked
+            else "TAKY_EXECUTION_RECONCILED:"
+        ) + reason.strip(),
+    }
+    calls[receipt_id].update({
+        "result_digest": stable_hash(failed_result),
+        "result": failed_result,
+        "status": terminal_status,
+        "reconciled_by": reconciler_id.strip(),
+    })
+    if isinstance(active, dict):
+        active.update({
+            "status": terminal_status,
+            "reconciled_by": reconciler_id.strip(),
+        })
+    return updated
+
+### TAKY2\bridges.py:execute_with_receipt
+def execute_with_receipt(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    invocation: Mapping[str, Any],
+    *,
+    runner: Callable[[Mapping[str, Any]], Mapping[str, Any]] = subprocess_runner,
+    executor_id: str,
+    preclaimed: bool = False,
+    claim_token: str | None = None,
+    pre_run_checkpoint: Callable[[dict[str, Any]], Mapping[str, Any]] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    receipt = _receipt(runtime, receipt_id)
+    if not isinstance(executor_id, str) or not executor_id.strip():
+        raise BridgeViolation("executor_id required")
+    if not isinstance(invocation, Mapping):
+        raise BridgeViolation("invocation must be an object")
+
+    existing_calls = runtime.get("execution_calls", {})
+    existing_call = (
+        existing_calls.get(receipt_id)
+        if isinstance(existing_calls, Mapping)
+        else None
+    )
+    if preclaimed:
+        if not isinstance(existing_call, Mapping):
+            raise BridgeViolation("persisted execution claim missing")
+        if existing_call.get("status") != "CLAIMED":
+            raise BridgeViolation("persisted execution claim is not active")
+        if existing_call.get("executor_id") != executor_id.strip():
+            raise BridgeViolation("persisted execution claim executor mismatch")
+        if not isinstance(claim_token, str) or not claim_token:
+            raise BridgeViolation("persisted execution claim token required")
+        if existing_call.get("claim_token_hash") != stable_hash(claim_token):
+            raise BridgeViolation("persisted execution claim token mismatch")
+    elif existing_call is not None:
+        raise BridgeViolation("receipt already has an executor call")
+
+    call = invocation.get("call")
+    if not isinstance(call, Mapping):
+        raise BridgeViolation("invocation call binding required")
+    if stable_hash(dict(call)) != receipt.get("call_digest"):
+        raise BridgeViolation("actual invocation call does not match receipt")
+
+    provider = str(invocation.get("provider") or "").strip().lower()
+    model = str(call.get("model") or "").strip().lower()
+    if not provider or not model:
+        raise BridgeViolation("actual provider/model required")
+    if model != "local" and runner is subprocess_runner and not preclaimed:
+        raise BridgeViolation("external subprocess execution requires persisted receipt claim")
+
+    billing_class = None
+    if receipt.get("call_allowed") is not True:
+        if provider != "local" or model != "local":
+            raise BridgeViolation("LOCAL_ONLY receipt cannot invoke external provider")
+    else:
+        if provider != "local" or model != "local":
+            if not _external_dry_run_receipt_ok(receipt):
+                raise BridgeViolation("external execution requires persisted DRY_RUN_OK evidence")
+            billing_class = _receipt_billing_class(receipt)
+            if billing_class is None:
+                raise BridgeViolation("external execution requires one trusted billing-class receipt")
+            expected_calls = call.get("expected_calls", 1)
+            if expected_calls != 1:
+                raise BridgeViolation(
+                    "current receipt executor supports exactly one external invocation; "
+                    "batch workload inside one invocation instead of multi-call receipt"
+                )
+
+    external_invocation = (
+        receipt.get("call_allowed") is True
+        and (provider != "local" or model != "local")
+    )
+    if preclaimed and external_invocation and pre_run_checkpoint is None:
+        raise BridgeViolation(
+            "external preclaimed execution requires durable pre-run checkpoint"
+        )
+
+    execution_key = receipt.get("execution_key")
+    active = runtime.get("active_attempts", {}).get(execution_key)
+    if not isinstance(active, Mapping) or active.get("receipt_id") != receipt_id:
+        raise BridgeViolation("receipt has no matching active attempt")
+    if preclaimed:
+        if active.get("status") != "RESERVED":
+            raise BridgeViolation("preclaimed active attempt is not reserved")
+        if active.get("claimed_by") != executor_id.strip():
+            raise BridgeViolation("preclaimed active attempt executor mismatch")
+    elif active.get("status") != "PENDING":
+        raise BridgeViolation("active attempt is not pending")
+
+    expected_tool = str(active.get("attempt", {}).get("method_or_tool") or "").strip().lower()
+    actual_tool = str(invocation.get("method_or_tool") or "").strip().lower()
+    if expected_tool and actual_tool != expected_tool:
+        raise BridgeViolation("actual executor route does not match receipt")
+
+    argv_tool = _argv_identity(invocation)
+    aliases = {
+        "python": {"python", "python3", "py"},
+        "python3": {"python", "python3", "py"},
+        "py": {"python", "python3", "py"},
+        "powershell": {"powershell", "pwsh"},
+        "pwsh": {"powershell", "pwsh"},
+        "git": {"git"},
+        "claude": {"claude"},
+        "codex": {"codex"},
+        "codex-ephemeral": {"codex"},
+        "codex-app-ephemeral": {"codex"},
+        "codex-app-devnull": {"codex"},
+        "gemini": {"gemini"},
+    }
+    if actual_tool in aliases and argv_tool and argv_tool not in aliases[actual_tool]:
+        raise BridgeViolation("argv executable does not match receipt-bound route")
+    if receipt.get("call_allowed") is not True and argv_tool in {"claude", "codex", "openai"}:
+        raise BridgeViolation("LOCAL_ONLY receipt cannot invoke external model CLI")
+    if receipt.get("call_allowed") is True and model != "local" and provider == "local":
+        raise BridgeViolation("external-model receipt requires non-local provider")
+
+    execution_mode = str(call.get("execution_mode") or "").strip().upper()
+    runner_invocation = dict(invocation)
+    if billing_class in {"UNMETERED", "SUBSCRIPTION_QUOTA"}:
+        if invocation.get("env") is not None:
+            raise BridgeViolation("subscription/unmetered route does not allow env overrides")
+        runner_invocation["scrub_api_keys"] = True
+
+    argv = invocation.get("argv")
+    if model != "local" and actual_tool == "claude":
+        if provider not in {"anthropic", "claude"}:
+            raise BridgeViolation("Claude external route requires Anthropic provider")
+        if not isinstance(argv, list) or not argv:
+            raise BridgeViolation("Claude external route requires argv")
+        argv_model = _argv_option_value(argv, "--model", "-m")
+        if str(argv_model or "").strip().lower() != model:
+            raise BridgeViolation("Claude argv model must match receipt-bound model")
+        expected_effort = str(call.get("effort") or "").strip().lower()
+        argv_effort = _argv_option_value(argv, "--effort")
+        if expected_effort and str(argv_effort or "").strip().lower() != expected_effort:
+            raise BridgeViolation("Claude argv effort must match receipt-bound effort")
+    elif model != "local" and actual_tool == "codex":
+        if execution_mode != "CODEX_VERIFY_ONLY":
+            raise BridgeViolation("Codex external execution requires a dedicated hardened verifier contract")
+        if model != "codex":
+            raise BridgeViolation("Codex verifier receipt model must be codex")
+        if provider not in {"openai", "codex"}:
+            raise BridgeViolation("Codex verifier route requires OpenAI provider")
+
+    packet_temp_dir = None
+    if execution_mode == "PACKET_ONLY":
+        packet = invocation.get("stdin_text")
+        if not isinstance(packet, str) or not packet:
+            raise BridgeViolation("PACKET_ONLY execution requires stdin_text packet")
+        if stable_hash(packet) != call.get("packet_digest"):
+            raise BridgeViolation("PACKET_ONLY stdin packet digest mismatch")
+
+        argv = invocation.get("argv")
+        if not isinstance(argv, list) or not argv:
+            raise BridgeViolation("PACKET_ONLY execution requires argv")
+
+        # PACKET_ONLY is fail-closed: only explicitly hardened executors may run.
+        if actual_tool != "claude" or argv_tool != "claude":
+            raise BridgeViolation("PACKET_ONLY executor is not hardened/allowed")
+
+        if provider not in {"anthropic", "claude"}:
+            raise BridgeViolation("PACKET_ONLY Claude route requires Anthropic provider")
+
+        argv_model = _argv_option_value(argv, "--model", "-m")
+        if str(argv_model or "").strip().lower() != model:
+            raise BridgeViolation("PACKET_ONLY Claude argv model must match receipt-bound model")
+        expected_effort = str(call.get("effort") or "").strip().lower()
+        argv_effort = _argv_option_value(argv, "--effort")
+        if expected_effort and str(argv_effort or "").strip().lower() != expected_effort:
+            raise BridgeViolation("PACKET_ONLY Claude argv effort must match receipt-bound effort")
+
+        if invocation.get("cwd") is not None:
+            raise BridgeViolation("PACKET_ONLY cwd is bridge-owned and must not be supplied")
+
+        required_flags = {
+            "--no-session-persistence",
+            "--strict-mcp-config",
+        }
+        if not required_flags.issubset(set(argv)):
+            raise BridgeViolation("PACKET_ONLY Claude execution missing hardened isolation flags")
+        if not any(arg in {"-p", "--print"} for arg in argv):
+            raise BridgeViolation("PACKET_ONLY Claude execution requires --print")
+
+        forbidden_flags = {
+            "--add-dir",
+            "--mcp-config",
+            "--allowedTools",
+            "--allowed-tools",
+            "--plugin-dir",
+            "--plugin-url",
+            "--agents",
+        }
+        for arg in argv:
+            if arg in forbidden_flags or any(
+                arg.startswith(flag + "=") for flag in forbidden_flags
+            ):
+                raise BridgeViolation("PACKET_ONLY Claude execution contains forbidden expansion flag")
+
+        try:
+            tools_index = argv.index("--tools")
+            permission_index = argv.index("--permission-prompts")
+            setting_sources_index = argv.index("--setting-sources")
+            settings_index = argv.index("--settings")
+            output_format_index = argv.index("--output-format")
+        except ValueError as exc:
+            raise BridgeViolation(
+                "PACKET_ONLY Claude execution must disable tools/prompts and isolate settings"
+            ) from exc
+        if tools_index + 1 >= len(argv) or argv[tools_index + 1] != "":
+            raise BridgeViolation("PACKET_ONLY Claude execution requires empty --tools")
+        if permission_index + 1 >= len(argv) or argv[permission_index + 1] != "none":
+            raise BridgeViolation("PACKET_ONLY Claude execution requires --permission-prompts none")
+        if setting_sources_index + 1 >= len(argv) or argv[setting_sources_index + 1] != "":
+            raise BridgeViolation("PACKET_ONLY Claude execution requires empty --setting-sources")
+        if settings_index + 1 >= len(argv) or argv[settings_index + 1] != "{}":
+            raise BridgeViolation("PACKET_ONLY Claude execution requires empty --settings object")
+        if output_format_index + 1 >= len(argv) or argv[output_format_index + 1] != "json":
+            raise BridgeViolation("PACKET_ONLY Claude execution requires --output-format json")
+
+        expected_exe = (Path.home() / ".local" / "bin" / "claude.exe").resolve()
+        try:
+            actual_exe = Path(argv[0]).resolve()
+        except OSError as exc:
+            raise BridgeViolation("PACKET_ONLY Claude executable could not be resolved") from exc
+        if actual_exe != expected_exe:
+            raise BridgeViolation("PACKET_ONLY Claude executable path is not pinned")
+        expected_tail = [
+            "-p",
+            "--input-format", "text",
+            "--output-format", "json",
+            "--model", model,
+            "--effort", expected_effort,
+            "--tools", "",
+            "--permission-prompts", "none",
+            "--no-session-persistence",
+            "--strict-mcp-config",
+            "--setting-sources", "",
+            "--settings", "{}",
+        ]
+        if argv[1:] != expected_tail:
+            raise BridgeViolation("PACKET_ONLY Claude argv must match the exact hardened template")
+
+        packet_temp_dir = tempfile.mkdtemp(prefix="TAKY2_PACKET_ONLY_")
+        runner_invocation["cwd"] = packet_temp_dir
+        runner_invocation["argv"] = [str(expected_exe), *argv[1:]]
+        runner_invocation["stdin_transport"] = "tempfile"
+        runner_invocation["minimal_env"] = True
+
+    elif execution_mode == "CODEX_VERIFY_ONLY":
+        packet = invocation.get("stdin_text")
+        if not isinstance(packet, str) or not packet:
+            raise BridgeViolation("CODEX_VERIFY_ONLY requires stdin_text packet")
+        if stable_hash(packet) != call.get("packet_digest"):
+            raise BridgeViolation("CODEX_VERIFY_ONLY stdin packet digest mismatch")
+
+        argv = invocation.get("argv")
+        if not isinstance(argv, list) or not argv:
+            raise BridgeViolation("CODEX_VERIFY_ONLY requires argv")
+        if actual_tool != "codex" or argv_tool != "codex":
+            raise BridgeViolation("CODEX_VERIFY_ONLY executor is not Codex")
+        if invocation.get("cwd") is not None:
+            raise BridgeViolation("CODEX_VERIFY_ONLY cwd is bridge-owned and must not be supplied")
+
+        expected_exe = (
+            Path.home() / "AppData" / "Roaming" / "npm" / "codex.cmd"
+        ).resolve()
+        try:
+            actual_exe = Path(argv[0]).resolve()
+        except OSError as exc:
+            raise BridgeViolation("CODEX_VERIFY_ONLY executable could not be resolved") from exc
+        if actual_exe != expected_exe:
+            raise BridgeViolation("CODEX_VERIFY_ONLY executable path is not pinned")
+
+        expected_effort = str(call.get("effort") or "").strip().lower()
+        if expected_effort not in {"low", "medium", "high"}:
+            raise BridgeViolation("CODEX_VERIFY_ONLY requires low/medium/high receipt effort")
+        effort_config = f'model_reasoning_effort="{expected_effort}"'
+        disabled_features = [
+            "shell_tool",
+            "unified_exec",
+            "shell_snapshot",
+            "multi_agent",
+            "apps",
+            "hooks",
+            "remote_plugin",
+        ]
+        tool_disable_args = [
+            token
+            for feature in disabled_features
+            for token in ("--disable", feature)
+        ]
+        expected_tail = [
+            "exec",
+            "--sandbox", "read-only",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--ignore-user-config",
+            "--ignore-rules",
+            "--strict-config",
+            "-c", effort_config,
+            "-c", 'web_search="disabled"',
+            *tool_disable_args,
+            "-",
+        ]
+        if argv[1:] != expected_tail:
+            raise BridgeViolation("CODEX_VERIFY_ONLY argv must match the exact hardened template")
+
+        packet_temp_dir = tempfile.mkdtemp(prefix="TAKY2_CODEX_VERIFY_")
+        last_message_path = str(Path(packet_temp_dir) / "codex-last-message.txt")
+        runner_invocation["cwd"] = packet_temp_dir
+        runner_invocation["argv"] = [
+            str(expected_exe),
+            "exec",
+            "--sandbox", "read-only",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--ignore-user-config",
+            "--ignore-rules",
+            "--strict-config",
+            "-c", effort_config,
+            "-c", 'web_search="disabled"',
+            *tool_disable_args,
+            "-C", packet_temp_dir,
+            "--output-last-message", last_message_path,
+            "-",
+        ]
+        runner_invocation["stdin_transport"] = "tempfile"
+        runner_invocation["minimal_env"] = "codex"
+        runner_invocation["_bridge_last_message_path"] = last_message_path
+
+    updated = deepcopy(dict(runtime))
+    calls = updated.setdefault("execution_calls", {})
+    if receipt_id in calls and not preclaimed:
+        raise BridgeViolation("receipt already has an executor call")
+    if receipt_id not in calls:
+        calls[receipt_id] = {
+            "executor_id": executor_id.strip(),
+            "provider": provider,
+            "model": model,
+            "actual_calls": 1,
+            "method_or_tool": actual_tool,
+            "result_digest": None,
+            "result": None,
+            "status": "CALLING",
+        }
+    calls[receipt_id].update({
+        "provider": provider,
+        "model": model,
+        "actual_calls": 1,
+        "method_or_tool": actual_tool,
+        "status": "CALLING",
+    })
+    updated_active = updated.setdefault("active_attempts", {}).get(execution_key)
+    if not isinstance(updated_active, dict):
+        raise BridgeViolation("active attempt state is not mutable")
+    updated_active["status"] = "CALLING"
+
+    if pre_run_checkpoint is not None:
+        checkpointed = pre_run_checkpoint(updated)
+        if not isinstance(checkpointed, Mapping):
+            raise BridgeViolation("pre-run checkpoint must return runtime state")
+        updated = deepcopy(dict(checkpointed))
+        calls = updated.setdefault("execution_calls", {})
+        call_record = calls.get(receipt_id)
+        updated_active = updated.setdefault("active_attempts", {}).get(execution_key)
+        if not isinstance(call_record, dict) or call_record.get("status") != "CALLING":
+            raise BridgeViolation("pre-run checkpoint did not persist CALLING receipt")
+        if not isinstance(updated_active, dict) or updated_active.get("status") != "CALLING":
+            raise BridgeViolation("pre-run checkpoint did not persist CALLING attempt")
+
+    try:
+        try:
+            result = dict(runner(runner_invocation))
+        except Exception as exc:
+            result = {
+                "returncode": 125,
+                "stdout": "",
+                "stderr": f"TAKY_EXECUTOR_EXCEPTION:{type(exc).__name__}:{exc}",
+                "outcome_unknown": True,
+            }
+    finally:
+        if packet_temp_dir is not None:
+            shutil.rmtree(packet_temp_dir, ignore_errors=True)
+
+    result_digest = stable_hash(result)
+    returncode = result.get("returncode")
+    status = (
+        "OUTCOME_UNKNOWN"
+        if result.get("outcome_unknown") is True
+        else ("RETURNED" if returncode in {None, 0} else "FAILED")
+    )
+    calls[receipt_id].update({
+        "result_digest": result_digest,
+        "result": result,
+        "status": status,
+    })
+    updated_active["status"] = status
+    # Executor is intentionally forbidden from writing SUCCESS/completion/evidence.
+    return updated, result
+
+### TAKY2\bridges.py:record_economy_decision
+def record_economy_decision(
+    runtime: Mapping[str, Any],
+    action: Mapping[str, Any],
+    decision: Mapping[str, Any],
+    *,
+    verifier: Callable[
+        [Mapping[str, Any], Mapping[str, Any], Mapping[str, Any]], bool
+    ],
+    verifier_id: str,
+) -> dict[str, Any]:
+    """Record a verifier-attested SAVEY_AI_ECONOMY decision into runtime state."""
+    if not isinstance(action, Mapping):
+        raise BridgeViolation("economy action must be an object")
+    if not isinstance(decision, Mapping):
+        raise BridgeViolation("economy decision must be an object")
+    if not callable(verifier):
+        raise BridgeViolation("economy decision verifier required")
+    if not isinstance(verifier_id, str) or not verifier_id.strip():
+        raise BridgeViolation("economy decision verifier_id required")
+
+    authority_digest = runtime.get("authority_digest")
+    if not isinstance(authority_digest, str) or not authority_digest.strip():
+        raise BridgeViolation("economy decision requires current authority digest")
+
+    decision_kind = decision.get("decision_kind")
+    if decision_kind not in ECONOMY_BRIDGE_DECISION_KINDS:
+        raise BridgeViolation("unsupported economy decision kind")
+
+    evidence_ref = decision.get("evidence_ref")
+    source_ref = decision.get("source_or_artifact_ref")
+    if not isinstance(evidence_ref, str) or not evidence_ref.strip():
+        raise BridgeViolation("economy decision evidence_ref required")
+    if not isinstance(source_ref, str) or not source_ref.strip():
+        raise BridgeViolation("economy decision source/artifact ref required")
+
+    owner_ref = action.get("semantic_owner_ref")
+    owner_scope = action.get("semantic_owner_scope")
+    if not isinstance(owner_ref, str) or not owner_ref.strip():
+        raise BridgeViolation("economy action semantic_owner_ref required")
+    if not isinstance(owner_scope, str) or not owner_scope.strip():
+        raise BridgeViolation("economy action semantic_owner_scope required")
+
+    policy = action.get("call_policy", {})
+    if not isinstance(policy, Mapping):
+        raise BridgeViolation("economy action call_policy required")
+    mode = policy.get("mode")
+    requirement_class = str(
+        policy.get("requirement_class")
+        or ("QUALITY_REQUIRED" if mode == "EXTERNAL_REQUIRED" else "OPTIONAL_CONVENIENCE")
+    ).strip().upper()
+    required_capability = None
+    acceptance_ref = decision.get("acceptance_ref")
+    if requirement_class in {"CAPABILITY_REQUIRED", "QUALITY_REQUIRED"}:
+        if not isinstance(acceptance_ref, str) or not acceptance_ref.strip():
+            raise BridgeViolation("required economy decision acceptance_ref required")
+    if requirement_class == "CAPABILITY_REQUIRED":
+        required_capability = str(policy.get("required_capability") or "").strip().upper()
+        if not required_capability:
+            raise BridgeViolation("capability-required economy action missing required_capability")
+
+    if verifier(decision, action, runtime) is not True:
+        raise BridgeViolation("economy decision verification failed")
+
+    evidence_ref = evidence_ref.strip()
+    updated = deepcopy(dict(runtime))
+    registry = updated.setdefault("economy_evidence_registry", {})
+    if evidence_ref in registry:
+        raise BridgeViolation("economy decision evidence_ref already exists")
+
+    registry[evidence_ref] = {
+        "decision_kind": decision_kind,
+        "verified": True,
+        "acceptance_state": "ACCEPTED",
+        "source_status": "CURRENT",
+        "authority_digest": authority_digest.strip(),
+        "action_digest": stable_hash(dict(action)),
+        "semantic_owner_ref": owner_ref.strip(),
+        "semantic_owner_scope": owner_scope.strip(),
+        "requirement_class": requirement_class,
+        "required_capability": required_capability,
+        "acceptance_ref": acceptance_ref.strip() if isinstance(acceptance_ref, str) else None,
+        "source_or_artifact_ref": source_ref.strip(),
+        "revision_or_hash": str(
+            decision.get("revision_or_hash") or stable_hash(dict(decision))
+        ),
+        "verified_by": verifier_id.strip(),
+        "decision_digest": stable_hash(dict(decision)),
+    }
+    return updated
+
+### TAKY2\orchestrator.py:_lowest_sufficient_model
+def _lowest_sufficient_model(action: Mapping[str, Any]) -> str | None:
+    policy = action.get("call_policy", {})
+    if not isinstance(policy, Mapping):
+        return None
+    allowed = policy.get("allowed_models")
+    quality = policy.get("model_quality")
+    minimum = policy.get("minimum_quality")
+    if not isinstance(allowed, list) or not allowed:
+        return None
+    requirement_class = str(policy.get("requirement_class") or "").strip().upper()
+    required_capability = str(policy.get("required_capability") or "").strip().upper()
+    model_capabilities = policy.get("model_capabilities", {})
+    if requirement_class == "CAPABILITY_REQUIRED" and not required_capability:
+        return None
+    if requirement_class == "QUALITY_REQUIRED":
+        if not isinstance(quality, Mapping) or not isinstance(minimum, int):
+            return None
+
+    def capability_ok(name: str) -> bool:
+        if requirement_class != "CAPABILITY_REQUIRED":
+            return True
+        if not isinstance(model_capabilities, Mapping):
+            return False
+        values = None
+        for key, candidate in model_capabilities.items():
+            if str(key or "").strip().lower() == name.strip().lower():
+                values = candidate
+                break
+        if not isinstance(values, list):
+            return False
+        return required_capability in {
+            str(v or "").strip().upper() for v in values if isinstance(v, str)
+        }
+
+    if isinstance(quality, Mapping) and isinstance(minimum, int):
+        ranked = []
+        for name in allowed:
+            if isinstance(name, str) and isinstance(quality.get(name), int) and capability_ok(name):
+                score = quality[name]
+                if score >= minimum:
+                    ranked.append((score, name))
+        if ranked:
+            ranked.sort(key=lambda x: (x[0], x[1]))
+            return ranked[0][1]
+    return next(
+        (v for v in allowed if isinstance(v, str) and v.strip() and capability_ok(v)),
+        None,
+    )
+
+### TAKY2\orchestrator.py:_safe_correction_for_failure
+def _safe_correction_for_failure(
+    plan: Mapping[str, Any],
+    action: Mapping[str, Any],
+    gate: str,
+    state: str,
+    reason: str,
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    """Correct only execution mechanics; never amend USER intent or authority."""
+    gate = str(gate or "").upper()
+    state = str(state or "").upper()
+    reason_l = str(reason or "").lower()
+    corrected = deepcopy(dict(plan))
+    context = corrected.get("context")
+    attempt = corrected.get("attempt")
+    call = corrected.get("call")
+    if not isinstance(context, dict) or not isinstance(attempt, dict) or not isinstance(call, dict):
+        return None, None
+
+    before = deepcopy({"context": context, "attempt": attempt, "call": call})
+    policy = action.get("call_policy", {})
+    if not isinstance(policy, Mapping):
+        policy = {}
+
+    if gate == "COST":
+        if state == "SKIP_FULL_REREAD":
+            call["context"] = "delta"
+        elif state in {"REROUTE_LOWEST_SUFFICIENT", "REROUTE_QUALITY_FLOOR"}:
+            changed = False
+            if "model" in reason_l or "quality" in reason_l:
+                model = _lowest_sufficient_model(action)
+                if model and call.get("model") != model:
+                    call["model"] = model
+                    changed = True
+            if "call count" in reason_l or "expected_calls" in reason_l:
+                max_calls = policy.get("max_calls", 1)
+                if isinstance(max_calls, int) and max_calls >= 1:
+                    # Current receipt executor performs exactly one external invocation.
+                    # Batch work inside that invocation instead of emitting a multi-call receipt.
+                    corrected_calls = 1
+                    call["expected_calls"] = corrected_calls
+                    dr = call.get("dry_run_plan")
+                    if isinstance(dr, dict):
+                        dr["expected_calls"] = corrected_calls
+                    changed = True
+            if "effort" in reason_l:
+                max_effort = policy.get("max_effort", "medium")
+                if isinstance(max_effort, str):
+                    call["effort"] = max_effort
+                    changed = True
+            if "batching" in reason_l:
+                call["batch_size"] = 1
+                changed = True
+            if "parallel" in reason_l:
+                call["parallel"] = False
+                changed = True
+            if "subagents" in reason_l:
+                call["subagents"] = False
+                changed = True
+            # Do not force a local substitute merely because an external route is
+            # constrained. Capability/quality-required work must preserve acceptance;
+            # only explicit trusted sufficiency evidence may justify reuse/local skip.
+            if not changed:
+                return None, None
+        elif state == "THROTTLE_HOLD":
+            return None, {
+                "status": "HOLD_FOR_REROUTE",
+                "terminal": False,
+                "reason": reason,
+                "next_action": "choose a materially different route; do not repeat the throttled route",
+            }
+        else:
+            return None, None
+    elif gate == "CONTEXT" and "full" in reason_l:
+        context["mode"] = "delta"
+    else:
+        return None, None
+
+    after = {"context": context, "attempt": attempt, "call": call}
+    if before == after:
+        return None, None
+    correction = {
+        "status": "CORRECTED",
+        "terminal": False,
+        "gate": gate,
+        "state": state,
+        "reason": reason,
+        "before": before,
+        "after": deepcopy(after),
+        "principle": "preserve USER intent; correct execution mechanics only",
+    }
+    return corrected, correction
+
+### TAKY2\orchestrator.py:CLI_EXECUTE_PATH
+    if args.cmd == "execute":
+        invocation = _load_json(args.invocation_json)
+        reserved_runtime = None
+        checkpoint_box = {}
+        try:
+            reserved_candidate, claim_token = claim_execution_receipt(
+                runtime,
+                args.receipt_id,
+                executor_id=args.executor_id,
+            )
+            reserved_runtime = save_runtime(
+                reserved_candidate,
+                expected_version=runtime["runtime_version"],
+                authority_digest_value=auth_digest,
+            )
+
+            def persist_calling(candidate):
+                saved = save_runtime(
+                    candidate,
+                    expected_version=reserved_runtime["runtime_version"],
+                    authority_digest_value=auth_digest,
+                )
+                checkpoint_box["runtime"] = saved
+                return saved
+
+            updated, result = execute_with_receipt(
+                reserved_runtime,
+                args.receipt_id,
+                invocation,
+                executor_id=args.executor_id,
+                preclaimed=True,
+                claim_token=claim_token,
+                pre_run_checkpoint=persist_calling,
+            )
+        except Exception as exc:
+            reconcile_base = checkpoint_box.get("runtime") or reserved_runtime
+            if isinstance(reconcile_base, dict):
+                try:
+                    reconciled = reconcile_execution_claim(
+                        reconcile_base,
+                        args.receipt_id,
+                        reconciler_id="TAKY_EXECUTE_CLI",
+                        reason=str(exc),
+                    )
+                    save_runtime(
+                        reconciled,
+                        expected_version=reconcile_base["runtime_version"],
+                        authority_digest_value=auth_digest,
+                    )
+                except Exception:
+                    pass
+            print(json.dumps({
+                "allowed": False,
+                "state": "BLOCKED",
+                "reason": str(exc),
+            }, ensure_ascii=False))
+            return 2
+        try:
+            save_runtime(
+                updated,
+                expected_version=updated["runtime_version"],
+                authority_digest_value=auth_digest,
+            )
+        except StateConflictError as exc:
+            _, latest_runtime, latest_digest = load_bundle()
+            latest_call = latest_runtime.get("execution_calls", {}).get(args.receipt_id)
+            if isinstance(latest_call, Mapping) and latest_call.get("status") in {"CLAIMED", "CALLING"}:
+                reconciled = reconcile_execution_claim(
+                    latest_runtime,
+                    args.receipt_id,
+                    reconciler_id="TAKY_EXECUTE_CAS_RECONCILER",
+                    reason="result persistence conflict: " + str(exc),
+                )
+                save_runtime(
+                    reconciled,
+                    expected_version=latest_runtime["runtime_version"],
+                    authority_digest_value=latest_digest,
+                )
+            print(json.dumps({
+                "allowed": False,
+                "state": "EXECUTION_OUTCOME_UNKNOWN",
+                "receipt_id": args.receipt_id,
+                "reason": "runtime changed before external result could be durably persisted",
+            }, ensure_ascii=False))
+            return 2
+        execution_ok = result.get("returncode") in {None, 0}
+        print(json.dumps({
+            "allowed": execution_ok,
+            "state": "EXECUTOR_RETURNED_UNVERIFIED" if execution_ok else "EXECUTOR_FAILED",
+            "receipt_id": args.receipt_id,
+            "result": result,
+        }, ensure_ascii=False, indent=2))
+        return 0 if execution_ok else 2
+

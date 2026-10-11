@@ -1,0 +1,20 @@
+{
+  "task_id": "taky2-v3-claude-reattack-r3-20261008",
+  "action_id": "review:external-model",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "TAKY2_V3_REMEDIATION_R3",
+    "method_or_tool": "claude",
+    "transport_profile": "packet-json-capture-v4"
+  },
+  "call": {
+    "model": "sonnet",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "PACKET_ONLY",
+    "packet_digest": "5436c474419a20ff305c"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "taky2-v3-codex-verifier-r4-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "TAKY2_V3_CODEX_VERIFIER_FINAL_R4",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "7a042dcee59c6a236eeb"
+  }
+}

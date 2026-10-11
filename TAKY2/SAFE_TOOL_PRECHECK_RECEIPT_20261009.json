@@ -1,0 +1,33 @@
+{
+  "schema": "TAKY2_SAFE_TOOL_PRECHECK_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "PASS_ENFORCED",
+  "scope": "PRE_TOOL_EXECUTION_ONLY",
+  "behavior": {
+    "safe_tool_is_precheck": true,
+    "hard_gates_unchanged": [
+      "KEY",
+      "CONTEXT",
+      "ROUTE",
+      "COST",
+      "DONE"
+    ],
+    "google_drive_connector_id_route_preferred": true,
+    "broad_drivefs_reverse_lookup_blocked": true,
+    "broad_environment_dump_blocked": true,
+    "repeated_blocked_signature_blocked": true
+  },
+  "verification": {
+    "unittest": "203/203 PASS",
+    "py_compile": "PASS",
+    "git_diff_check": "PASS_WITH_EXISTING_LF_CRLF_WARNING_ONLY"
+  },
+  "non_scope": [
+    "MINING",
+    "INDEXING",
+    "LEARNING",
+    "DEPLOY",
+    "PUSH",
+    "MERGE"
+  ]
+}

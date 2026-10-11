@@ -1,0 +1,11 @@
+{
+  "allowed": true,
+  "state": "EXECUTOR_RETURNED_UNVERIFIED",
+  "receipt_id": "pf:taky2-v3-claude-reattack-20261008:e6e450b93352076b",
+  "verification_state": "UNVERIFIED",
+  "result": {
+    "returncode": 1,
+    "stdout": "Not logged in · Please run /login\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "explorer-crew-main-e56-script-lock-review-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "EXPLORER_CREW_MAIN_E56_SCRIPT_LOCK",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "9c6dfa40ec8bf3d8fdf5"
+  }
+}

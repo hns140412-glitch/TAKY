@@ -1,0 +1,19 @@
+{
+  "task_id": "explorer-crew-r9-final-targeted-recheck-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "EXPLORER_CREW_R9_FINAL_TARGETED_RECHECK",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "6f4593795eec45aba731"
+  }
+}

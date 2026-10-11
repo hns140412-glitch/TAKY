@@ -1,0 +1,11 @@
+{
+  "allowed": true,
+  "state": "EXECUTOR_RETURNED_UNVERIFIED",
+  "receipt_id": "pf:taky2-v3-final-micro-codex-20261011:3dad5028561f0e7d",
+  "result": {
+    "returncode": 0,
+    "stdout": "VERDICT: PASS\nFINDINGS: NONE\nCHECKED:\n- External nonzero exit without explicit True absence attestation becomes OUTCOME_UNKNOWN, closing the supplied HIGH.\n- Explicit True absence attestation permits FAILED unless outcome_unknown is already True.\n- Missing, false, or non-boolean absence attestation cannot bypass the guard.\n- Result digest includes the uncertainty flag; receipt and active statuses agree.\n- Zero/None return codes and non-external invocations retain prior behavior.\n- Both supplied regression tests cover the principal branches; assessment is limited to this packet.",
+    "stderr": ""
+  },
+  "_capture_note": "CLI stdout captured; a cp949 UnicodeDecodeError in subprocess stderr reader thread was printed before this JSON and stripped. stderr=\"\" here is NOT proof of empty stderr."
+}

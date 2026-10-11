@@ -1,0 +1,841 @@
+EXPLORER CREW R9 — FINAL TARGETED CODEX RECHECK
+READ ONLY. PACKET ONLY. NO WEB. NO REPOSITORY EXPLORATION. NO SHELL. NO SUBAGENTS.
+OUTPUT ENGLISH ONLY except ids and short Korean line references when essential.
+
+PURPOSE
+Independently recheck the current R9 Explorer Crew candidate after prior line-local remediation.
+This is a NEW R9 target, not a retry of the old OUTCOME_UNKNOWN receipt.
+
+SCOPE A — MAIN_CREW E5/E6
+- 24 characters
+- ASK/HINT/ACKNOWLEDGE × 2 = 144 lines
+- current source chars: 5,022
+- 144/144 unique
+- prior Codex HOLD found MEDIUM line-local issues
+- 30 candidate lines were remediated line-locally
+- no full rewrite requested
+- MAIN_CREW remains upper-elementary focus
+
+SCOPE B — PLAY_CAMP Core6 common bank
+- DUBI/LORI/INK/NOVA/TAKE/ZERO only
+- 36 lines = ASK/HINT/ACKNOWLEDGE × 2
+- 36/36 unique
+- current chars: 994
+- TAKY content review changed only 6 overly abstract phrases for EARLY_EXPLORER readability
+- presentationBand consumer contract:
+  EARLY_EXPLORER / LOWER_PRIMARY -> PLAY_CAMP
+  UPPER_PRIMARY -> MAIN_CREW
+  SECONDARY -> MIDDLE
+- PLAY_CAMP bank is NOT SCRIPT_LOCKED and NOT runtime-enabled yet
+
+RUNTIME BOUNDARY DELTA
+R9 specifically closes sourced-Core6-scene leakage:
+- PLAY_CAMP production group must NOT consume MAIN sourced scene lines
+- sourced scene lines require valid stage + locked production group
+- E5 MAIN sourced scene still resolves
+- ASK/HINT/ACK without required locked group fails closed
+- GREET/RECONNECT approved signature behavior is intentionally separate
+
+QUALITY RULES
+- Preserve character-specific wit/sense; no voice homogenization.
+- No repetitive baby-talk, generic praise, inflated ability praise, patronizing tone.
+- No Teacher/Coach/Maker pronunciation, teaching, or mission-authority takeover.
+- No fabricated Shared Memory detail. Memory callback requires evidence gate elsewhere; review only wording for false implied specifics.
+- PLAY_CAMP common wording must remain understandable for EARLY_EXPLORER/LOWER_PRIMARY without becoming baby-talk.
+- MAIN_CREW should not be simplified down to PLAY_CAMP tone.
+- Only BLOCKER/HIGH/MEDIUM findings block lock. LOW suggestions are non-blocking and should not cause HOLD.
+- Do not request a full rewrite if a local correction is enough.
+
+VERIFIED LOCAL EVIDENCE
+- Explorer Crew R9 full suite: 6/6 PASS
+- source-lock normalized hashes: PASS
+- git diff --check: PASS (only LF->CRLF warning on lock JSON)
+- Play Camp tests: 85/85 PASS
+- Play Camp build: PASS
+- targeted tablet browser smoke: 1024x768 PASS and 1180x820 PASS
+- browser Crew context: EARLY_EXPLORER -> PLAY_CAMP, no invented school_stage
+
+REVIEW QUESTIONS
+1. Did MAIN_CREW remediation close all material quality/role/memory wording blockers?
+2. Is PLAY_CAMP Core6 bank acceptable as a common identity/action bank for EARLY_EXPLORER/LOWER_PRIMARY?
+3. Does R9 runtime boundary fail closed correctly, especially for sourced Core6 scene lines?
+4. Is there any remaining BLOCKER/HIGH/MEDIUM reason not to SCRIPT LOCK MAIN_CREW and/or PLAY_CAMP Core6?
+5. If one scope can lock and another cannot, separate them explicitly.
+
+OUTPUT EXACTLY
+VERDICT: PASS_FOR_SCRIPT_LOCK | HOLD
+MAIN_CREW: PASS | HOLD
+PLAY_CAMP_CORE6: PASS | HOLD
+RUNTIME_BOUNDARY: PASS | HOLD
+FINDINGS:
+- [SEVERITY] scope / id / intent / variant - concrete issue - minimal fix
+MEMORY_FINDINGS:
+- [SEVERITY] id / event - concrete issue
+LOCK_SCOPE:
+- exact scope recommendation
+If no material findings, write FINDINGS: NONE.
+If no material memory findings, write MEMORY_FINDINGS: NONE.
+
+CURRENT MAIN_CREW LINES + MEMORY CALLBACKS
+[
+  {
+    "id": "dubi",
+    "name": "두비",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어디부터 건드려볼까? 가만히 있으면 단서가 먼저 나오진 않더라.",
+        "제일 수상한 데 하나 찍어봐. 궁금한 건 가까이 가야 말이 많아져."
+      ],
+      "HINT": [
+        "큰 건 잠깐 잊고, 이상하게 튀는 한 군데만 봐.",
+        "단서가 얌전한 척하네. 아까랑 다른 데 하나만 잡아보자."
+      ],
+      "ACKNOWLEDGE": [
+        "잡았다. 먼저 움직이니까 숨어 있던 게 따라 나왔네.",
+        "오, 반응했네. 이제 이 단서가 다음 문을 가리키는지 보자."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "lori",
+    "name": "로리",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "네가 걸리는 지점이 어디야? 답보다 그 이유부터 들어볼래.",
+        "뭔가 찜찜한 부분 있어? 그런 느낌이 의외로 좋은 단서야."
+      ],
+      "HINT": [
+        "정답 찾기 전에 네가 왜 그렇게 봤는지 한 문장만 꺼내봐.",
+        "헷갈리는 두 개를 나란히 두면 생각도 좀 덜 엉켜."
+      ],
+      "ACKNOWLEDGE": [
+        "그렇게 본 이유가 있었네. 이제 다른 관점이랑 나란히 놓아보자.",
+        "네 생각의 방향이 보인다. 반대쪽 관점도 놓아보면 더 또렷해지겠어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "ink",
+    "name": "잉크",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "가장 조용한 차이가 뭐야? 큰 차이는 대개 너무 쉽게 들키거든.",
+        "둘이 비슷할수록 작은 예외가 더 말이 많아. 어디가 다르지?"
+      ],
+      "HINT": [
+        "전체 말고 예외 하나만 좁혀봐. 구조가 거기서 새어 나올 수 있어.",
+        "같은 규칙을 적용해보고 혼자 벗어나는 쪽을 찾아봐."
+      ],
+      "ACKNOWLEDGE": [
+        "그 차이, 꽤 말이 많네. 이제 왜 생겼는지 보자.",
+        "작은 예외가 전체 설명을 흔드네. 조용한 애가 제일 말이 많다니까."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "nova",
+    "name": "노바",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어떤 걸 먼저 시험해볼래? 생각만 굴리면 바퀴 자국은 안 남아.",
+        "목표 하나 찍고 바로 움직이자. 예상과 다르면 거기서 다음 발판이 생겨."
+      ],
+      "HINT": [
+        "먼저 한 번 움직여봐. 예상이 빗나가면 거기서 실험이 시작돼.",
+        "안 되면 힘을 더 쓰지 말고 방법을 바꿔. 실험은 고집 대회가 아니니까."
+      ],
+      "ACKNOWLEDGE": [
+        "반응이 달라졌네. 여기서 멈추면 아깝지. 다음 반응도 확인하자.",
+        "한 번 해보니 예상과 다른 데가 보였어. 다음 시도는 그쪽부터 치고 가자."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "take",
+    "name": "테이크",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "지금 섞여 있는 것부터 분리하자. 먼저 정리할 기준 하나만 정해봐.",
+        "순서가 꼬였으면 기준부터 세우면 돼. 무엇을 먼저 판단해야 하지?"
+      ],
+      "HINT": [
+        "해야 할 일과 확인할 일을 나눠보자. 둘을 한 줄에 세우면 복잡해져.",
+        "첫 단계가 애매하면 뒤도 흔들려. 시작 조건부터 다시 보자."
+      ],
+      "ACKNOWLEDGE": [
+        "순서가 잡혔네. 이제 뒤 단계는 훨씬 덜 시끄러울 거야.",
+        "정리되니 핵심만 남았네. 다음 단계는 줄 서서 들어오겠어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "zero",
+    "name": "제로",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "이 문제의 박자는 어디서 끊겨? 흐름이 어색한 데가 단서일 수 있어.",
+        "처음부터 끝까지 보지 말고, 리듬이 바뀌는 지점부터 들어보자."
+      ],
+      "HINT": [
+        "반복되는 패턴 하나를 잡고, 박자가 깨지는 곳을 찾아봐.",
+        "속도를 조금 늦춰봐. 빨리 지나가면 작은 변화가 박자 사이로 숨거든."
+      ],
+      "ACKNOWLEDGE": [
+        "박자가 맞아 들어갔네. 이제 마지막 한 칸은 네가 채워.",
+        "흐름이 이어졌어. 아까 끊기던 데가 왜 그랬는지도 보이네."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-07",
+    "name": "솔라",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "눈에 띄는 것보다 덜 드러나는 신호가 있나 봐. 어디가 살짝 달라?",
+        "큰 표지판 말고 작은 흔적부터 볼까? 길은 가끔 조용한 쪽에 있어."
+      ],
+      "HINT": [
+        "색, 방향, 위치 중 아주 조금 달라진 걸 찾아봐.",
+        "가장 밝은 쪽이 답이라고 서두르지 말자. 그 옆에서 조용히 달라진 곳은 어디야?"
+      ],
+      "ACKNOWLEDGE": [
+        "작은 신호가 길을 열었네. 이제 그 방향이 이어지는지 보자.",
+        "작은 신호가 먼저 손들었네. 이제 그 신호가 이어지는 쪽만 조용히 따라가자."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-08",
+    "name": "벨로",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "지도 없이도 첫 발은 뗄 수 있어. 어디부터 직접 확인할래?",
+        "길이 셋이면 제일 정보가 많이 나오는 곳부터 가자. 어디가 좋을까?"
+      ],
+      "HINT": [
+        "가까운 지점 하나만 확인해. 지도도 현장한테는 못 우기거든.",
+        "멀리 예측하지 말고 한 칸 전진해서 새 정보를 얻자."
+      ],
+      "ACKNOWLEDGE": [
+        "경로 하나 검증했네. 이제 지도에 진짜 길만 남기자.",
+        "직접 보니 예상이 하나 지워졌어. 이게 탐험의 이득이지."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-09",
+    "name": "모카",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "관찰한 것과 추측한 걸 나눠볼까? 지금 확실히 본 건 뭐야?",
+        "증거로 남길 만한 변화가 하나 있나? 느낌 말고 관찰부터."
+      ],
+      "HINT": [
+        "한 번 본 걸 결론으로 만들긴 아까워. 같은 기준으로 한 번 더 확인해봐.",
+        "위치와 모양 중 하나만 기준으로 잡고 기록해보자."
+      ],
+      "ACKNOWLEDGE": [
+        "이제 관찰과 추측이 분리됐네. 기록이 훨씬 믿을 만해졌어.",
+        "증거 하나 확보. 결론은 아직 대기석이야. 같은 기준으로 한 번 더 보자."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-10",
+    "name": "니아",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "따로 보던 두 정보가 어디서 만날까? 연결점 하나만 찾아보자.",
+        "이 둘 사이에 다리 하나 놓는다면 무엇이 공통일까?"
+      ],
+      "HINT": [
+        "공통점 하나와 차이점 하나를 같이 보면 연결 방향이 보여.",
+        "둘 사이에 같은 말, 같은 원인, 같은 방향 중 하나가 있나 찾아봐. 연결선은 그다음이야."
+      ],
+      "ACKNOWLEDGE": [
+        "연결이 생기니까 정보가 길처럼 이어지네.",
+        "따로 있던 조각들이 서로 설명하기 시작했네. 연결선이 말문을 텄어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-11",
+    "name": "키로",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "이 구조에서 가장 먼저 버텨야 하는 부분이 어디지? 거기부터 손보자.",
+        "도구를 고르기 전에 문제를 고정하자. 지금 정확히 뭐가 안 맞아?"
+      ],
+      "HINT": [
+        "힘을 더 주기 전에 맞물리는 지점을 봐. 구조는 억지로 맞추면 티가 나.",
+        "한 조각씩 분리해서 어디서 어긋나는지 확인하자."
+      ],
+      "ACKNOWLEDGE": [
+        "맞물렸네. 이제 구조가 스스로 버티는지 확인해보자.",
+        "맞물린 건 확인했네. 손을 떼도 모양이 버티는지 잠깐 지켜보자."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-12",
+    "name": "피치",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어디서 흐름이 굳었어? 문제를 밀기보다 그 매듭부터 풀어보자.",
+        "지금 답이 안 보이면 시선을 한번 바꿔볼래? 막힌 건 문제보다 방식일 수도 있어."
+      ],
+      "HINT": [
+        "힘으로 밀지 말고, 가장 덜 복잡한 부분부터 풀어봐.",
+        "두 선택지가 싸우고 있으면 공통점 하나를 먼저 찾자."
+      ],
+      "ACKNOWLEDGE": [
+        "흐름이 다시 이어졌네. 억지로 밀지 않아도 풀릴 때가 있지.",
+        "복잡함이 한 단계 내려갔네. 문제도 이제 목소리가 좀 작아졌어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-13",
+    "name": "민트",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "급할 건 없어. 지금 가진 정보만으로 한 걸음 정한다면 어디야?",
+        "길이 많아도 다 볼 필요는 없지. 지금 확인된 정보가 붙어 있는 쪽부터 고를까?"
+      ],
+      "HINT": [
+        "속도 말고 방향을 먼저 잡자. 한 칸 덜 가도 맞게 가는 게 낫지.",
+        "지금 안 정해도 되는 건 옆 칸에 두자. 판단 순서를 줄이면 길도 덜 시끄러워."
+      ],
+      "ACKNOWLEDGE": [
+        "방향은 맞았네. 조용히 가도 제대로 가면 충분해.",
+        "덜 급해지니 길이 선명하네. 길은 재촉한다고 빨리 대답하진 않거든."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-14",
+    "name": "토토",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "정석대로 해봤지? 그럼 이번엔 살짝 비틀어볼 차례 아닌가?",
+        "하나 골라서 바로 시험해보자. 실패하면 재미있는 정보가 하나 늘어나는 거고."
+      ],
+      "HINT": [
+        "같은 방법을 반복하지 말고 순서 하나만 뒤집어봐.",
+        "이번엔 반대로 가보자. 가끔 문제도 뒤에서 보면 당황하더라."
+      ],
+      "ACKNOWLEDGE": [
+        "방법을 비틀어보니 반응이 왔네. 문제도 예상 밖 손님은 싫어하나 봐.",
+        "이번 시도에서 쓸 정보 하나는 건졌네. 빈손은 아니야."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-15",
+    "name": "루네",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "상황이 달라졌네. 같은 목표로 가려면 방법을 어디서 꺾어볼까?",
+        "조건 하나가 달라졌다면 전략도 한 칸 움직여야 해. 어디를 바꿀래?"
+      ],
+      "HINT": [
+        "상황이 바뀐 지점 하나를 고르고, 그 지점에 맞춰 방법만 살짝 돌려봐.",
+        "같은 목표라도 길은 바꿀 수 있어. 지금 막힌 부분만 우회해보자."
+      ],
+      "ACKNOWLEDGE": [
+        "방법을 바꾸니까 다시 흐르네. 유연한 쪽이 오래 버티지.",
+        "목표는 그대로, 방법만 바뀌었네. 상황 쪽이 먼저 당황했겠다."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-16",
+    "name": "포포",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "이건 혼자 풀기보다 둘을 묶어보는 게 빠르겠는데? 어떤 조합이 좋을까?",
+        "각자 잘하는 걸 하나씩 맡긴다면 어떻게 나눌래?"
+      ],
+      "HINT": [
+        "따로 움직이는 두 조각의 공통 타이밍을 찾아봐.",
+        "역할이 겹치면 꼬여. 누가 뭘 맡는지 한 번 나눠보자."
+      ],
+      "ACKNOWLEDGE": [
+        "합이 맞았네. 따로 할 때보다 정보가 더 빨리 모였어.",
+        "둘이 움직이니 빈칸이 줄었네. 합이 맞으면 일도 눈치껏 줄어들지."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-17",
+    "name": "마루",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "겉에 안 보인다고 없는 건 아니지. 숨기기 좋은 곳부터 볼까?",
+        "단서가 숨었다면 어디가 제일 안전할까? 거기부터 의심해보자."
+      ],
+      "HINT": [
+        "눈에 띄는 곳을 봤다면, 이제 구석·경계·빈칸 쪽도 확인해봐.",
+        "없는 것처럼 보이는 자리도 확인해. 빈칸이 단서일 때가 있어."
+      ],
+      "ACKNOWLEDGE": [
+        "결국 나왔네. 잘 숨었는데 완벽하진 않았어.",
+        "찾았다. 끝까지 본 사람이 마지막 단서를 가져가는 법이지."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-18",
+    "name": "보리",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "새 장면 안에서도 익숙한 패턴이 반복될 수 있어. 닮아 보이는 구조가 있나?",
+        "새로운 것 같아도 기억 속 패턴이 겹칠 수 있어. 닮은 점이 뭐야?"
+      ],
+      "HINT": [
+        "지금 보이는 흐름에서 반복되는 부분과 달라지는 부분을 하나씩 나눠봐.",
+        "기억을 통째로 꺼내지 말고 핵심 하나만 비교해보자."
+      ],
+      "ACKNOWLEDGE": [
+        "연결됐네. 기억은 쌓아두는 것보다 다시 꺼낼 때 더 쓸모 있어.",
+        "반복되는 부분이 길 하나를 줄였네. 다음 패턴도 같은 기준으로 볼까?"
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-19",
+    "name": "린",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "목표가 분명하면 길 선택은 쉬워져. 지금 도착해야 할 곳부터 정해봐.",
+        "도착점을 먼저 찍자. 거꾸로 따라오면 다음 판단 지점이 어디인지 보일 거야."
+      ],
+      "HINT": [
+        "갈림길이 많으면 목표에서 거꾸로 보자. 필요한 경로만 남겨.",
+        "지금 중요한 건 속도가 아니라 다음 판단 지점을 확보하는 거야."
+      ],
+      "ACKNOWLEDGE": [
+        "경로가 잡혔네. 이제 팀이 따라올 수 있게 다음 지점만 표시하자.",
+        "길이 한 줄로 모였네. 지도도 이제 덜 복잡하겠다."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-20",
+    "name": "루미",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "처음 봤을 때와 지금, 무엇이 달라졌어? 그 차이가 꽤 중요할지도 몰라.",
+        "같은 장면인데 느낌이 달라졌다면 이유가 있어. 무엇이 바뀌었지?"
+      ],
+      "HINT": [
+        "같은 기준으로 두 장면을 놓고 가장 크게 벌어진 차이 하나만 골라봐.",
+        "숫자만 보지 말고 모양, 간격, 방향 중 튀는 변화가 실제로 있는지 확인해."
+      ],
+      "ACKNOWLEDGE": [
+        "차이가 보이니까 흐름도 읽히네. 기록할 가치가 있겠어.",
+        "변화가 숫자보다 먼저 이야기했네. 조용한 패턴이 먼저 손들었어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-21",
+    "name": "테스",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "이번 판의 목표부터 잡자. 뭐를 해내면 클리어라고 볼 수 있을까?",
+        "지금 할 일을 게임판처럼 나눠보면 어떨까? 먼저 확인할 칸 하나만 정해보자."
+      ],
+      "HINT": [
+        "한 번에 올클리어 말고, 다음 체크포인트 하나만 넘자.",
+        "막혔으면 룰을 다시 봐. 게임도 조건을 놓치면 괜히 어렵거든."
+      ],
+      "ACKNOWLEDGE": [
+        "체크포인트 통과. 이제 다음 판은 정보 하나 더 들고 시작하네.",
+        "이번 행동이 다음 수를 열었어. 콤보는 운보다 연결이더라."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-22",
+    "name": "셀",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "한쪽의 변화가 다른 쪽에 닿은 흔적이 있어? 반응이 이어지는 지점을 찾아보자.",
+        "따로 보면 조용한데, 같이 놓으면 반응이 생기는 둘이 있을까?"
+      ],
+      "HINT": [
+        "하나만 보지 말고 앞뒤 반응을 같이 봐. 변화는 관계 사이에서 생기기도 해.",
+        "한쪽이 움직였을 때 다른 쪽이 어떻게 달라졌는지 앞뒤 반응을 붙여봐."
+      ],
+      "ACKNOWLEDGE": [
+        "관계가 보이니까 변화 이유도 따라오네.",
+        "서로 영향을 주기 시작했네. 따로 볼 땐 숨어 있던 관계가 이제 손들었어."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-23",
+    "name": "제이크",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "조건이 몇 개인지부터 세자. 다 중요해 보이면 오히려 하나도 안 보이거든.",
+        "목표와 제약을 분리해봐. 무엇을 지켜야 하고, 무엇을 바꿀 수 있지?"
+      ],
+      "HINT": [
+        "조건을 전부 건드리지 말고, 먼저 고정할 조건과 시험할 조건을 나눠봐.",
+        "빼도 되는 조건인지 바로 결론내리지 말고, 결과가 어떻게 달라지는지 한 번 더 확인해."
+      ],
+      "ACKNOWLEDGE": [
+        "조건이 하나 정리됐네. 이제 비교할 선택지가 눈에 들어오는 크기로 줄었어.",
+        "전략이 생겼네. 다음 수는 감보다 근거가 먼저 움직이겠다."
+      ]
+    },
+    "memory_callbacks": {}
+  },
+  {
+    "id": "guide-24",
+    "name": "비비",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "이 조각들 순서만 한번 흔들어볼래? 같은 재료도 배치가 바뀌면 이야기가 달라져.",
+        "같은 재료로 분위기를 바꿀 방법이 있을까? 구도부터 흔들어보자."
+      ],
+      "HINT": [
+        "하나를 더 넣기보다 위치를 바꿔봐. 새로움은 추가보다 편집에서 나올 때도 있어.",
+        "네가 제일 좋아하는 한 장면을 중심에 두고 나머지를 다시 배치해봐."
+      ],
+      "ACKNOWLEDGE": [
+        "오, 조합이 달라지니 의미도 바뀌네. 이건 기억할 만한 장면이다.",
+        "같은 재료인데 이야기가 완전히 달라졌네. 편집이 새 재료 하나 만든 셈이야."
+      ]
+    },
+    "memory_callbacks": {}
+  }
+]
+
+CURRENT PLAY_CAMP CORE6 BANK
+[
+  {
+    "id": "dubi",
+    "name": "두비",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어디부터 콕 볼까? 제일 수상한 곳 하나 골라봐.",
+        "뭐가 먼저 눈에 걸려? 가까이 보면 단서가 튀어나올지도 몰라."
+      ],
+      "HINT": [
+        "다 보지 말고, 딱 하나 다른 곳만 찾아봐.",
+        "색·모양·자리 중 달라진 것 하나만 잡아봐."
+      ],
+      "ACKNOWLEDGE": [
+        "숨어 있던 단서가 나왔네. 다음 건 어디 숨었을까?",
+        "하나 찾았네. 이 단서가 어디로 이어지는지 보자."
+      ]
+    }
+  },
+  {
+    "id": "lori",
+    "name": "로리",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어디가 조금 이상하게 느껴져? 그 느낌부터 말해볼래?",
+        "둘 중 마음에 걸리는 쪽이 있어? 왜 그런지도 궁금해."
+      ],
+      "HINT": [
+        "네 눈에 먼저 들어온 걸 하나 말해줄래? 왜 거기였는지도 궁금해.",
+        "헷갈리면 둘을 나란히 놓고, 마음에 걸리는 쪽부터 보자."
+      ],
+      "ACKNOWLEDGE": [
+        "네가 본 이유가 있네. 다른 쪽은 어떻게 보일까?",
+        "생각의 방향이 보이네. 이번엔 반대쪽도 한번 볼까?"
+      ]
+    }
+  },
+  {
+    "id": "ink",
+    "name": "잉크",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "둘이 거의 같아 보여? 그럼 작은 차이가 숨어 있겠네.",
+        "조용히 다른 곳 하나 있어. 어디일까?"
+      ],
+      "HINT": [
+        "전체 말고, 혼자 다른 것 하나만 찾아봐.",
+        "한 가지씩 비교해봐. 혼자 다른 모양이나 자리가 있나?"
+      ],
+      "ACKNOWLEDGE": [
+        "작은 차이가 꽤 큰 단서였네. 왜 다른지 볼까?",
+        "조용한 차이가 먼저 말했네. 다음 단서도 작을지 몰라."
+      ]
+    }
+  },
+  {
+    "id": "nova",
+    "name": "노바",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "먼저 뭐 하나 해볼래? 움직여야 반응이 나오지.",
+        "하나 골라서 바로 해보자. 예상과 달라도 새 단서는 남아."
+      ],
+      "HINT": [
+        "한 번 해보고 뭐가 바뀌는지 보자.",
+        "안 되면 힘 말고 방법을 바꿔보자. 실험은 다시 해보는 거니까."
+      ],
+      "ACKNOWLEDGE": [
+        "반응이 바뀌었네. 다음엔 어디를 건드려볼까?",
+        "한 번 해보니 새 길이 보이네. 바로 다음 실험 가자."
+      ]
+    }
+  },
+  {
+    "id": "take",
+    "name": "테이크",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "섞여 있네. 비슷한 것끼리 먼저 모아볼까?",
+        "뭐부터 해야 덜 꼬일까? 첫 순서를 골라봐."
+      ],
+      "HINT": [
+        "할 일과 확인할 일을 따로 놓아보자.",
+        "어디서 시작할지 헷갈리면, 맨 앞에 할 일 하나만 골라봐."
+      ],
+      "ACKNOWLEDGE": [
+        "순서가 보이네. 이제 다음 칸만 보면 돼.",
+        "정리하니 다음에 볼 게 또렷해졌네. 줄이 좀 얌전해졌어."
+      ]
+    }
+  },
+  {
+    "id": "zero",
+    "name": "제로",
+    "wit_tags": [],
+    "lines": {
+      "ASK": [
+        "어디서 흐름이 툭 끊겨? 그 자리가 단서일 수 있어.",
+        "반복되는 박자 속에 다른 소리 하나 있나 찾아볼래?"
+      ],
+      "HINT": [
+        "같이 반복되는 걸 듣고, 딱 한 번 달라지는 곳을 찾아봐.",
+        "조금 느리게 보자. 작은 변화는 빨리 지나가면 숨거든."
+      ],
+      "ACKNOWLEDGE": [
+        "박자가 다시 이어졌네. 끊기던 자리가 단서였어.",
+        "흐름이 맞았네. 마지막 한 칸은 네가 이어봐."
+      ]
+    }
+  }
+]
+
+CURRENT CORE6 SOURCED SCENES (must remain MAIN-gated)
+[
+  {
+    "id": "dubi",
+    "scenes": {
+      "idea": "어? 이거 더 파보면 뭐 하나 나올 것 같은데?",
+      "emotion": "마음도 궁금한 게 많네. 하나만 먼저 볼까?",
+      "description": "잠깐, 저건 뭐지? 하나 더 자세히 보자.",
+      "viewpoint": "그렇게 볼 수도 있네. 다른 쪽은 어떨까?",
+      "final": "좋아, 마지막에 뭐 하나 놓친 건 없는지 같이 보자."
+    }
+  },
+  {
+    "id": "lori",
+    "scenes": {
+      "idea": "그 생각, 조금 더 들여다봐도 괜찮을 것 같아.",
+      "emotion": "그 마음이 있었구나. 이유가 하나 떠오를까?",
+      "description": "네가 느낀 걸 그대로 말해도 좋아.",
+      "viewpoint": "다른 사람 마음에서는 어떻게 보일까?",
+      "final": "네 느낌이 남는 쪽으로 끝내면 좋겠어."
+    }
+  },
+  {
+    "id": "ink",
+    "scenes": {
+      "idea": "여기 작은 단서 하나 보이는데. 네 생각엔 뭘 뜻할까?",
+      "emotion": "말보다 먼저 보이는 표정 같은 게 있을지도.",
+      "description": "빛, 소리, 모양 중 하나만 더 잡아보자.",
+      "viewpoint": "같은 장면도 위치가 바뀌면 다르게 보여.",
+      "final": "핵심 단서만 남기고 정리해보자."
+    }
+  },
+  {
+    "id": "nova",
+    "scenes": {
+      "idea": "좋아, 그거 한 단계만 더 가보자.",
+      "emotion": "그 마음을 말로 붙잡는 것도 꽤 멋진 도전이야.",
+      "description": "한 장면만 더 선명하게 만들어볼까?",
+      "viewpoint": "반대편으로 한 걸음만 옮겨보자.",
+      "final": "마지막 한 번. 네 방식대로 딱 끝내자."
+    }
+  },
+  {
+    "id": "take",
+    "scenes": {
+      "idea": "생각이 몇 개 있네. 먼저 하나만 잡자.",
+      "emotion": "마음과 이유를 따로 놓고 보면 좀 편해질 수도 있어.",
+      "description": "보이는 것부터 순서대로 챙겨보자.",
+      "viewpoint": "두 생각을 나란히 놓으면 차이가 보여.",
+      "final": "핵심은 남기고 순서만 한번 정리해보자."
+    }
+  },
+  {
+    "id": "zero",
+    "scenes": {
+      "idea": "생각 하나가 들어왔네. 다음 박자는 뭐지?",
+      "emotion": "그 마음에도 리듬이 있나 봐. 조금 더 들어볼까?",
+      "description": "소리나 느낌 하나 넣으면 장면이 살아날지도.",
+      "viewpoint": "박자를 바꾸듯 시선도 한번 바꿔볼까?",
+      "final": "좋아. 마지막 박자는 네가 정해."
+    }
+  }
+]
+
+PRODUCTION GROUP LOGIC
+  function productionGroup({app_id,presentation_band,school_stage}={}){
+    const app=clean(app_id).toUpperCase().replace(/[\s-]+/g,'_');
+    const presentation=clean(presentation_band).toUpperCase();
+    const band=stageBand(school_stage);
+    if(app==='PLAY_CAMP'||app==='HANGUL_PLAY'||app==='HANGUL_PLAY_20261007')return 'PLAY_CAMP';
+    if(['EARLY_EXPLORER','LOWER_PRIMARY'].includes(presentation))return 'PLAY_CAMP';
+    if(presentation==='UPPER_PRIMARY')return 'MAIN_CREW';
+    if(presentation==='SECONDARY')return 'MIDDLE';
+    if(band==='E5_6')return 'MAIN_CREW';
+    if(band==='MIDDLE')return 'MIDDLE';
+    if(['FOUNDATION','E1_2','E3_4'].includes(band))return 'PLAY_CAMP';
+    return null;
+  }
+
+
+
+DIALOGUE RESOLVER LOGIC
+  function resolve({character_id,intent,scene_id,interaction_mode,app_id,presentation_band,school_stage,relation_state,affinity=0,memoryCue,recent_line_keys=[]}={}){
+    const p=registry?.get?.(character_id);
+    if(!p)return Object.freeze({text:null,reason:'PERSONALITY_PROFILE_MISSING'});
+    if(interaction_mode==='SILENT')return Object.freeze({text:null,reason:'SILENT_MODE'});
+    if(intent==='GREET'||intent==='RECONNECT'){
+      return Object.freeze({text:p.signature||null,source:'APPROVED_BOARD_SIGNATURE',profile_status:p.status});
+    }
+    const band=school_stage&&scriptAuthority?.stageBand
+      ? scriptAuthority.stageBand(school_stage)
+      : null;
+    if(school_stage&&!band){
+      return Object.freeze({text:null,reason:'LEARNER_STAGE_INVALID',production_ready:false,profile_status:p.status});
+    }
+    const production_group=scriptAuthority?.productionGroup?.({app_id,presentation_band,school_stage})||null;
+    if(production_group&&!scriptAuthority.LOCKED_PRODUCTION_GROUPS?.includes?.(production_group)){
+      return Object.freeze({
+        text:null,
+        reason:'SCRIPT_BAND_NOT_LOCKED',
+        authority_status:'PRODUCTION_GROUP_NOT_LOCKED',
+        production_group,
+        band,
+        production_ready:false,
+        profile_status:p.status
+      });
+    }
+    if(band&&!scriptAuthority.SUPPORTED_BANDS?.includes?.(band)){
+      return Object.freeze({
+        text:null,
+        reason:'SCRIPT_BAND_NOT_LOCKED',
+        authority_status:'SCRIPT_BAND_NOT_LOCKED',
+        production_group,
+        band,
+        production_ready:false,
+        profile_status:p.status
+      });
+    }
+    const coreKey=CORE_SCENE[String(scene_id||'').toUpperCase()]||null;
+    if(coreKey&&p.scenes?.[coreKey]){
+      if(!band||!production_group){
+        return Object.freeze({
+          text:null,
+          reason:'LEARNER_STAGE_REQUIRED',
+          production_group,
+          production_ready:false,
+          profile_status:p.status
+        });
+      }
+      return Object.freeze({
+        text:p.scenes[coreKey],
+        source:'SOURCED_CORE6_SCENE_LINE',
+        band,
+        production_group,
+        profile_status:p.status
+      });
+    }
+    const key=['ASK','HINT','ACKNOWLEDGE'].includes(intent)?intent:null;
+    if(key){
+      if(!String(school_stage||'').trim()){
+        return Object.freeze({text:null,reason:'LEARNER_STAGE_REQUIRED',production_ready:false,profile_status:p.status});
+      }
+      if(!scriptAuthority?.resolve){
+        return Object.freeze({text:null,reason:'SCRIPT_AUTHORITY_UNAVAILABLE',production_ready:false,profile_status:p.status});
+      }
+      const scripted=scriptAuthority.resolve({
+        character_id,intent:key,app_id,presentation_band,school_stage,relation_state,affinity,memoryCue,recent_line_keys
+      });
+      return Object.freeze({...scripted,profile_status:p.status});
+    }
+    return Object.freeze({
+      text:null,
+      source:null,
+      style_group:styleGroup(p),
+      reason:'NO_LINE_FOR_INTENT',
+      profile_status:p.status,
+      production_ready:false
+    });
+  }
+
+

@@ -1,0 +1,19 @@
+{
+  "task_id": "taky2-v3-codex-final-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "TAKY2_V3_CODEX_FINAL_20261008",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "4545d9e78ee3cef0991c"
+  }
+}

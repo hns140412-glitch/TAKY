@@ -1,0 +1,19 @@
+{
+  "task_id": "taky2-v3-third-review-20261008",
+  "action_id": "review:external-model",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "TAKY2_V3_THIRD_REVIEW_FINAL",
+    "method_or_tool": "claude"
+  },
+  "call": {
+    "model": "sonnet",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "PACKET_ONLY",
+    "packet_digest": "e3532612715adb83f650"
+  }
+}

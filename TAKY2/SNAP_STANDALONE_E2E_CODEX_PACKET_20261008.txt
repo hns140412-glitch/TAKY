@@ -1,0 +1,456 @@
+SNAP & POP STANDALONE BROWSER E2E — CODEX TARGETED DIAGNOSIS
+READ ONLY. PACKET ONLY. NO WEB. NO REPOSITORY EXPLORATION.
+
+CONTEXT
+- TAKY systemwide Stage 3 is verifying owner-to-consumer integration.
+- Snap syntax checks PASS.
+- Shared Snap runtime contract PASS.
+- Simple browser boot smoke PASS:
+  - SnapPopBridge exists
+  - bridge.validate().ok = true
+  - session/goal/task/lap/return_target preserved
+  - Base Camp chip present
+  - handoff word chip present
+  - active view = map
+- A fuller Playwright E2E intended to:
+  landmark click -> start -> 3 authored answers -> growth view -> IndexedDB record -> TASK_COMPLETED bridge event
+  hung with no output and was stopped.
+- User authorized Codex if local diagnosis takes long.
+- Do not redesign Snap or alter product semantics.
+
+GOAL
+Diagnose the likely hang from the supplied source and test.
+Return the smallest corrected Playwright test or exact local test fix.
+If the app itself has a concrete runtime bug exposed by this test, identify it separately.
+Do not propose broad refactors.
+
+IMPORTANT AUTHORITY
+- Snap project semantic owner = Snap_Pop_UI_MASTER_LOGIC_REV_12.
+- Ready owns cross-app session/timer.
+- Snap must preserve session_id / goal_id / task_id / lap_id and return task-level results.
+- APP_SWITCH != PAUSE / LAP_END.
+- Child authorship remains final.
+- Do not change those semantics.
+
+OUTPUT EXACTLY:
+VERDICT: TEST_BUG | APP_BUG | BOTH | INSUFFICIENT
+FINDINGS:
+- [SEVERITY] concrete cause
+MINIMAL_FIX:
+- exact test/app change
+EXPECTED_E2E_ASSERTIONS:
+- concise assertions
+
+=== index.html ===
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#072f2b"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+<title>Snap & Pop · 아이디어 탐험대</title></head><body>
+<div id="app">
+<header class="safeHead">
+ <div class="brand"><b>SNAP & POP</b><span>아이디어 탐험대</span></div>
+ <div class="status"><span id="levelChip">Lv.1</span><span id="gemChip">보석 0</span></div>
+ <button class="round" id="settingsBtn" aria-label="설정"><img src="assets/icons/gear.svg" alt=""></button>
+</header>
+<main>
+<section id="map" class="view active">
+ <div class="mapWorld">
+  <img class="scene" src="assets/world/golden_world_scene.jpg" alt="">
+  <div class="atmo"></div>
+  <div id="landmarks" class="landmarks"></div>
+  <button class="radioFab" id="homeRadio"><img src="assets/icons/radio.svg" alt=""><span>무전</span></button>
+  <div class="selection" id="selection" hidden>
+   <span class="kicker">선택한 탐험지</span><h2 id="selTitle"></h2><p id="selDesc"></p>
+   <div class="meta"><span id="selProgress">진행 0 / 3</span><span id="selShard">보석 조각 0 / 6</span></div>
+   <button class="primary" id="startBtn">탐험 시작</button>
+  </div>
+ </div>
+</section>
+<section id="records" class="view parchment">
+ <header class="pageTitle"><span>나의 탐험 기록</span><h1>기록</h1><p>완료한 탐험과 기억이 한 권의 탐험일지처럼 쌓여요.</p></header>
+ <div id="recordList" class="cards"></div>
+</section>
+<section id="explore" class="view parchment">
+ <header class="pageTitle"><span>3단계 탐험</span><h1 id="exploreTitle">탐험 진행</h1></header>
+ <div id="steps" class="steps"></div>
+ <article class="paper">
+  <div class="guideLine"><b>길잡이 모카</b><span id="guideLine">한 조각씩 찾아보자.</span></div>
+  <h2 id="question"></h2><p id="hint"></p>
+  <textarea id="answer" placeholder="여기에 직접 써도 좋아요."></textarea>
+  <div class="tools">
+   <button class="soft" id="listenBtn"><img src="assets/icons/speaker.svg" alt="">다시 듣기</button>
+   <button class="voice" id="voiceBtn"><img src="assets/icons/radio.svg" alt="">말해서 쓰기</button>
+  </div>
+ </article>
+ <button class="primary wide" id="nextBtn">다음 단계</button>
+</section>
+<section id="gems" class="view parchment">
+ <header class="pageTitle"><span>탐험의 흔적</span><h1>보석함</h1><p>승인된 MASTER GEM ASSET은 원본 연결 전까지 새 디자인으로 대체하지 않아요.</p></header>
+ <div class="gemHold"><div class="gemVoid"></div><div><b>MASTER GEM ASSET</b><span>기존 승인 원본 연결 대기</span></div></div>
+ <div id="gemRows" class="cards"></div>
+ <button class="primary wide" id="shopBtn">탐험가의 소원 상점</button>
+</section>
+<section id="growth" class="view parchment">
+ <header class="pageTitle"><span>한 그루가 계속 자라요</span><h1>성장</h1></header>
+ <div class="growthCard">
+  <div class="growthTop"><b id="growthLv">Lv.1</b><strong id="growthName">발아</strong></div>
+  <div class="treeStage"><img id="treeImage" src="assets/growth/stage_01.png" alt="현재 성장나무"></div>
+  <div class="exp"><i id="expBar"></i></div><p id="expText">EXP 0</p>
+ </div>
+ <button class="soft wide" id="historyBtn">성장 기록 보기</button>
+</section>
+<section id="shop" class="view parchment subflow">
+ <button class="back" data-back="gems">← 보석함으로</button>
+ <header class="pageTitle"><span>나의 바람</span><h1>탐험가의 소원 상점</h1></header>
+ <article class="wish"><div><b>가족과 주말 영화 보기</b><span>완성 보석 2개</span></div><button id="useWish" class="soft">소원 사용하기</button></article>
+ <article id="blessing" class="paper" hidden><span class="kicker">마지막 확인</span><h2>축복 사용하기</h2><p>완성 보석 2개를 사용해 이 소원을 확정할까요?</p><button class="primary wide" id="confirmBlessing">축복 사용하기</button></article>
+</section>
+<section id="settings" class="view parchment subflow">
+ <button class="back" id="settingsBack">← 돌아가기</button>
+ <header class="pageTitle"><span>탐험 준비</span><h1>설정</h1></header>
+ <div class="setting"><div><b>내 캐릭터</b><span>Character Master 기록 보존</span></div><button class="soft" id="characterBtn">관리</button></div>
+ <div class="setting"><div><b>나의 길잡이</b><span>말티푸 · 모카</span></div><button class="soft" id="guideBtn">이름 바꾸기</button></div>
+ <div class="setting"><div><b>질문 읽어주기</b><span>6세 음성 접근성</span></div><label class="toggle"><input id="autoRead" type="checkbox"><i></i></label></div>
+ <div class="setting"><div><b>움직임 줄이기</b><span>화면 효과 최소화</span></div><label class="toggle"><input id="reduceMotion" type="checkbox"><i></i></label></div>
+</section>
+</main>
+<nav id="nav" class="nav">
+ <button data-view="map" class="on"><img src="assets/icons/map.svg" alt=""><span>지도</span></button>
+ <button data-view="records"><img src="assets/icons/records.svg" alt=""><span>기록</span></button>
+ <button data-view="explore"><img src="assets/icons/explore.svg" alt=""><span>탐험</span></button>
+ <button data-view="gems"><img src="assets/icons/gems.svg" alt=""><span>보석함</span></button>
+ <button data-view="growth"><img src="assets/icons/growth.svg" alt=""><span>성장</span></button>
+</nav>
+<div id="toast" role="status" aria-live="polite"></div>
+</div><script src="app.js"></script><script src="snap-family-character-profile-adapter-v1.js?v=20260930-charprofile1"></script><script src="snap-character-asset-read-adapter-v1.js?v=20260930-charasset1"></script><script src="taky-family-auth-runtime-v1.js?v=20260930-familyauth1"></script><script src="taky-account-auth-config-v1.js?v=20260930-accountauthcfg1"></script><script src="taky-google-account-auth-v1.js?v=20260930-accountauth2"></script><script src="snap-family-runtime-bootstrap-v1.js?v=20260930-accountauth1"></script><script src="snap-bridge.js"></script><script src="snap-literacy-adapter-v1.js?v=20261007-cne1"></script><script src="taky-learning-evidence-client-v1.js?v=20261004-grow1"></script></body></html>
+
+=== app.js ===
+
+const $=q=>document.querySelector(q), $$=q=>[...document.querySelectorAll(q)];
+let db, marks=[], selected=null, lastMain="map";
+const STEPS=[["생각 꺼내기","무엇이 먼저 떠올랐어?","완벽한 문장이 아니어도 좋아. 작은 조각 하나만 잡아보자."],["생각 넓히기","그 생각 옆에는 뭐가 더 있을까?","이유, 느낌, 장면 중 하나를 더 붙여보자."],["표현 완성하기","이제 네 문장으로 마무리해볼까?","앞의 생각을 이어서 네 말로 정리해보자."]];
+function openDB(){return new Promise((ok,no)=>{const r=indexedDB.open("snap_pop_rev10",1);r.onupgradeneeded=()=>r.result.createObjectStore("state");r.onsuccess=()=>{db=r.result;ok()};r.onerror=()=>no(r.error)})}
+function get(k){return new Promise(ok=>{const r=db.transaction("state").objectStore("state").get(k);r.onsuccess=()=>ok(r.result)})}
+function set(k,v){return new Promise((ok,no)=>{const r=db.transaction("state","readwrite").objectStore("state").put(v,k);r.onsuccess=()=>ok();r.onerror=()=>no(r.error)})}
+function toast(t){$("#toast").textContent=t;$("#toast").classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>$("#toast").classList.remove("show"),1800)}
+function show(id){$$(".view").forEach(v=>v.classList.remove("active"));$("#"+id).classList.add("active");const sub=["settings","shop"].includes(id);$("#nav").hidden=sub;if(!sub)lastMain=id;$$(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.view===id));scrollTo(0,0);if(id==="records")renderRecords();if(id==="gems")renderGems();if(id==="growth")renderGrowth()}
+function html(s){return (s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+async function init(){await openDB();marks=await fetch("data/landmarks.json").then(r=>r.json());renderLandmarks();await updateStatus();renderRecords();renderGems();renderGrowth();const active=await get("active");if(active)renderExplore(active)}
+function renderLandmarks(){const host=$("#landmarks");host.innerHTML="";marks.forEach(m=>{const b=document.createElement("button");b.className="landmark";b.textContent=m.title;b.style.left=m.x+"%";b.style.top=m.y+"%";b.onclick=async()=>{selected=m;$$(".landmark").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");const a=await get("active"),g=await get("gems")||{};$("#selTitle").textContent=m.title;$("#selDesc").textContent=m.desc;$("#selProgress").textContent="진행 "+(a?.landmark===m.id?(a.step||0):0)+" / 3";$("#selShard").textContent="보석 조각 "+((g[m.id]||0)%6)+" / 6";$("#selection").hidden=false};host.appendChild(b)})}
+$("#startBtn").onclick=async()=>{if(!selected)return;let s=await get("active");if(!s||s.landmark!==selected.id)s={landmark:selected.id,step:0,answers:["","",""]};await set("active",s);renderExplore(s);show("explore");if($("#autoRead").checked)speak(STEPS[s.step][1]+" "+STEPS[s.step][2])}
+function renderExplore(s){const m=marks.find(x=>x.id===s.landmark)||marks[0],i=Math.min(2,s.step||0);$("#exploreTitle").textContent="탐험 진행 · "+m.title;$("#question").textContent=STEPS[i][1];$("#hint").textContent=STEPS[i][2];$("#answer").value=s.answers[i]||"";$("#guideLine").textContent=["처음엔 작은 조각 하나면 충분해.","오, 그 생각 옆에 뭐가 더 숨어 있을까?","이제 네 문장으로 딱 묶어보자."][i];$("#nextBtn").textContent=i===2?"탐험 완료":"다음 단계";$("#steps").innerHTML=STEPS.map((x,n)=>`<span class="${n===i?"on":n<i?"done":""}">${n+1}. ${x[0]}</span>`).join("")}
+$("#nextBtn").onclick=async()=>{let s=await get("active");if(!s){toast("지도에서 탐험지를 먼저 골라줘.");show("map");return}const i=s.step||0;s.answers[i]=$("#answer").value.trim();if(!s.answers[i])return toast("한 줄이라도 남겨볼까?");if(i<2){s.step=i+1;await set("active",s);renderExplore(s);return}const r=await get("records")||[];r.unshift({id:Date.now(),landmark:s.landmark,answers:s.answers,date:new Date().toISOString()});await set("records",r);const g=await get("gems")||{};g[s.landmark]=(g[s.landmark]||0)+1;await set("gems",g);await set("exp",(await get("exp")||0)+55);await set("active",null);await updateStatus();toast("탐험 완료! 보석 조각과 성장이 기록됐어.");show("growth")}
+function speak(t){if(!("speechSynthesis"in window))return toast("이 브라우저에서는 읽어주기를 지원하지 않아요.");speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";speechSynthesis.speak(u)}
+$("#listenBtn").onclick=async()=>{const s=await get("active");speak(STEPS[s?.step||0][1]+" "+STEPS[s?.step||0][2])}
+$("#voiceBtn").onclick=()=>{const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return toast("이 브라우저에서는 음성 인식을 지원하지 않아요.");const r=new R();r.lang="ko-KR";r.interimResults=false;$("#voiceBtn").textContent="듣고 있어요";r.onresult=e=>$("#answer").value+=(($("#answer").value?" ":"")+e.results[0][0].transcript);r.onend=()=>$("#voiceBtn").innerHTML='<img src="assets/icons/radio.svg" alt="">말해서 쓰기';r.start()}
+async function renderRecords(){if(!db)return;const r=await get("records")||[];$("#recordList").innerHTML=r.length?r.map(x=>{const m=marks.find(z=>z.id===x.landmark);return `<article class="card"><b>${m?.title||"탐험"}</b><p>${x.answers.map(html).join(" ")}</p><span class="kicker">${new Date(x.date).toLocaleDateString("ko-KR")}</span></article>`}).join(""):'<article class="card"><b>첫 기록을 기다리고 있어요.</b><p>지도에서 탐험지를 골라 시작해봐요.</p></article>'}
+async function renderGems(){if(!db)return;const g=await get("gems")||{};$("#gemRows").innerHTML=marks.map(m=>{const n=g[m.id]||0;return `<article class="gemRow"><div><b>${m.title}</b><span>보석 조각 ${n%6}/6</span></div><strong>완성 ${Math.floor(n/6)}</strong></article>`}).join("")}
+async function renderGrowth(){if(!db)return;const cfg=await fetch("data/growth.json").then(r=>r.json()),exp=await get("exp")||0,lv=Math.floor(exp/120)+1;let s=cfg[0];cfg.forEach(x=>{if(lv>=x.min)s=x});$("#growthLv").textContent="Lv."+lv;$("#growthName").textContent=s.name;$("#treeImage").src="assets/growth/"+s.image;$("#expBar").style.width=((exp%120)/120*100)+"%";$("#expText").textContent="EXP "+exp+" · 다음 성장까지 "+(120-exp%120)+" EXP"}
+async function updateStatus(){const exp=await get("exp")||0,g=await get("gems")||{},lv=Math.floor(exp/120)+1,complete=Object.values(g).reduce((a,n)=>a+Math.floor(n/6),0);$("#levelChip").textContent="Lv."+lv;$("#gemChip").textContent="보석 "+complete}
+$("#shopBtn").onclick=()=>show("shop");$("#useWish").onclick=()=>$("#blessing").hidden=false;
+$("#confirmBlessing").onclick=async()=>{const g=await get("gems")||{};let need=12;for(const k of Object.keys(g)){const use=Math.min(Math.floor(g[k]/6)*6,need);g[k]-=use;need-=use;if(!need)break}if(need)return toast("완성 보석 2개가 필요해요.");await set("gems",g);await updateStatus();renderGems();$("#blessing").hidden=true;toast("축복을 사용했어요. 소원이 기록됐어요.")}
+$("#historyBtn").onclick=()=>toast("성장 기록 타임라인은 기능 검토 후 연결하는 HOLD 항목이에요.");
+$("#settingsBtn").onclick=()=>show("settings");$("#settingsBack").onclick=()=>show(lastMain);$$("[data-back]").forEach(b=>b.onclick=()=>show(b.dataset.back));
+$("#characterBtn").onclick=()=>toast("사진 기반 Character Master 재생성은 원본 파이프라인 연결 전 HOLD예요.");
+$("#guideBtn").onclick=()=>toast("현재 길잡이 디자인 계보는 유지하고 이름 변경만 연결할 예정이에요.");
+$("#homeRadio").onclick=()=>{const event=window.SnapPopBridge?.requestGuideRadio?.("home_radio",{view:"map"});if(!event)toast("무전 연결을 준비하고 있어요.");};
+$("#autoRead").onchange=$("#reduceMotion").onchange=async()=>{await set("settings",{autoRead:$("#autoRead").checked,reduceMotion:$("#reduceMotion").checked})}
+$("#nav").onclick=e=>{const b=e.target.closest("button[data-view]");if(b)show(b.dataset.view)}
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
+init().catch(e=>{console.error(e);toast("앱 데이터를 준비하지 못했어요.")});
+
+
+=== snap-bridge.js ===
+(() => {
+  'use strict';
+
+  const BRIDGE_VERSION = '2026.09.10-c';
+  const CONTEXT_KEY = 'snap_pop_shared_context_v1';
+  const OUTBOX_KEY = 'snap_pop_shared_outbox_v1';
+  const PARAMS = ['session_id','goal_id','task_id','lap_id','return_target','from_app','word','word_context','child_id','school_stage','subject','concept_skill_target','learning_target_id','literacy_flow','academic_vocab_term','academic_vocab_level','reading_material_ondok','target_time_ms','session_start_at','paused_at','issue_ms'];
+
+  const iso = () => new Date().toISOString();
+  const eventId = () => `snap_event_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  function readStoredContext() {
+    try { return JSON.parse(sessionStorage.getItem(CONTEXT_KEY) || '{}') || {}; }
+    catch { return {}; }
+  }
+
+  function persistContext(context) {
+    sessionStorage.setItem(CONTEXT_KEY, JSON.stringify(context || {}));
+  }
+
+  function readIncomingContext() {
+    const p = new URLSearchParams(location.search);
+    const incoming = {};
+    PARAMS.forEach(key => {
+      const value = p.get(key);
+      if (value) incoming[key] = value;
+    });
+    return incoming;
+  }
+
+  let context = readStoredContext();
+
+  function bootContext() {
+    const incoming = readIncomingContext();
+    if (incoming.session_id || incoming.task_id || incoming.word) {
+      context = { ...context, ...incoming, received_at: iso(), task_completed: false };
+      persistContext(context);
+    }
+  }
+
+  function emit(type, payload = {}) {
+    const event = {
+      event_id: eventId(),
+      type,
+      app: 'snap-pop',
+      at: iso(),
+      session_id: context.session_id || null,
+      goal_id: context.goal_id || null,
+      task_id: context.task_id || null,
+      lap_id: context.lap_id || null,
+      child_id: context.child_id || null,
+      payload: {
+        ...payload,
+        ...((context.subject || context.concept_skill_target || context.learning_target_id) ? { learning_scope: {
+          ...(context.subject ? { subject:context.subject } : {}),
+          ...(context.concept_skill_target ? { concept_skill_target:context.concept_skill_target } : {}),
+          ...(context.learning_target_id ? { learning_target_id:context.learning_target_id } : {})
+        }} : {})
+      }
+    };
+    let outbox = [];
+    try { outbox = JSON.parse(sessionStorage.getItem(OUTBOX_KEY) || '[]') || []; } catch {}
+    sessionStorage.setItem(OUTBOX_KEY, JSON.stringify([...outbox, event].slice(-120)));
+    try {
+      if (window.opener && !window.opener.closed && context.return_target) {
+        window.opener.postMessage({ type:'TAKY_LEARNING_EVENT', event }, new URL(context.return_target).origin);
+      }
+    } catch {}
+    return event;
+  }
+
+  function safeReturnUrl(taskState = 'PARTIAL', eventIdValue = null) {
+    if (!context.return_target) return null;
+    try {
+      const url = new URL(context.return_target, location.href);
+      if (!['http:','https:'].includes(url.protocol)) return null;
+      if (context.session_id) url.searchParams.set('session_id', context.session_id);
+      if (context.goal_id) url.searchParams.set('goal_id', context.goal_id);
+      if (context.task_id) url.searchParams.set('task_id', context.task_id);
+      if (context.lap_id) url.searchParams.set('lap_id', context.lap_id);
+      if (eventIdValue) url.searchParams.set('event_id', eventIdValue);
+      url.searchParams.set('task_state', taskState);
+      url.searchParams.set('from_app', 'snap-pop');
+      return url.href;
+    } catch {
+      return null;
+    }
+  }
+
+  function returnToBase(taskState = 'PARTIAL', payload = {}) {
+    const normalized = ['COMPLETED','PARTIAL','BLOCKED','HELP_NEEDED'].includes(taskState) ? taskState : 'PARTIAL';
+    const event = emit(
+      normalized === 'COMPLETED' ? 'TASK_COMPLETED' :
+      normalized === 'BLOCKED' ? 'TASK_BLOCKED' :
+      normalized === 'HELP_NEEDED' ? 'HELP_NEEDED' : 'TASK_PARTIAL',
+      payload
+    );
+    const url = safeReturnUrl(normalized, event.event_id);
+    if (url) location.assign(url);
+    else toast('베이스캠프 연결 주소가 없어요. 현재 표현 기록은 이 기기에 남아 있어요.');
+  }
+
+  function requestGuideRadio(reason = 'guide_support', payload = {}) {
+    return emit('GUIDE_RADIO_REQUEST', { reason, ...payload });
+  }
+
+  function requestImaginationCloud(reason = 'concept_support', payload = {}) {
+    return emit('IMAGINATION_CLOUD_REQUEST', { reason, ...payload });
+  }
+
+  async function waitForDB() {
+    for (let i = 0; i < 80; i++) {
+      if (db) return true;
+      await sleep(50);
+    }
+    return false;
+  }
+
+  async function activeExploration() {
+    try {
+      if (!await waitForDB()) return null;
+      return await get('active');
+    } catch {
+      return null;
+    }
+  }
+
+  function injectStyles() {
+    if (document.getElementById('snapBridgeStyle')) return;
+    const style = document.createElement('style');
+    style.id = 'snapBridgeStyle';
+    style.textContent = `
+      .snap-bridge-chip{position:fixed;right:14px;z-index:9998;border:0;border-radius:999px;padding:11px 15px;font-weight:900;box-shadow:0 10px 28px rgba(0,0,0,.22)}
+      #snapBaseCampChip{bottom:calc(82px + env(safe-area-inset-bottom));background:#fff6df;color:#173d38}
+      #snapWordChip{left:14px;right:auto;bottom:calc(132px + env(safe-area-inset-bottom));background:#173d38;color:#fff;max-width:calc(100vw - 28px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}`;
+    document.head.appendChild(style);
+  }
+
+  function ensureBaseCampChip() {
+    const linked = !!(context.session_id && context.task_id && context.return_target);
+    let chip = document.getElementById('snapBaseCampChip');
+    if (!linked) { chip?.remove(); return; }
+    if (!chip) {
+      chip = document.createElement('button');
+      chip.id = 'snapBaseCampChip';
+      chip.className = 'snap-bridge-chip';
+      chip.type = 'button';
+      chip.textContent = 'Ready & Set으로';
+      chip.onclick = async () => {
+        const active = await activeExploration();
+        const state = context.task_completed ? 'COMPLETED' : active ? 'PARTIAL' : 'PARTIAL';
+        returnToBase(state, { active_landmark: active?.landmark || null, step: active?.step ?? null });
+      };
+      document.body.appendChild(chip);
+    }
+  }
+
+  function ensureWordChip() {
+    let chip = document.getElementById('snapWordChip');
+    if (!context.word) { chip?.remove(); return; }
+    if (!chip) {
+      chip = document.createElement('div');
+      chip.id = 'snapWordChip';
+      chip.className = 'snap-bridge-chip';
+      document.body.appendChild(chip);
+    }
+    chip.textContent = `표현할 단어 · ${context.word}`;
+    chip.title = context.word_context || context.word;
+  }
+
+  function wrapCompletion() {
+    const button = document.getElementById('nextBtn');
+    const original = button?.onclick;
+    if (!button || !original || button.dataset.snapBridgeWrapped) return;
+    button.dataset.snapBridgeWrapped = 'true';
+    button.onclick = async function bridgedNext(event) {
+      const before = await activeExploration();
+      await original.call(this, event);
+      const after = await activeExploration();
+      const completedNow = before && Number(before.step || 0) >= 2 && !after;
+      if (completedNow && context.session_id && context.task_id) {
+        context.task_completed = true;
+        context.completed_at = iso();
+        persistContext(context);
+        emit('TASK_COMPLETED', {
+          landmark: before.landmark || null,
+          used_handoff_word: context.word || null,
+          child_authored: true
+        });
+        ensureBaseCampChip();
+      }
+    };
+  }
+
+  function cleanIncomingQuery() {
+    const p = new URLSearchParams(location.search);
+    if (!PARAMS.some(key => p.has(key))) return;
+    PARAMS.forEach(key => p.delete(key));
+    const clean = `${location.pathname}${p.toString() ? `?${p}` : ''}${location.hash}`;
+    history.replaceState(null, '', clean);
+  }
+
+  function validate() {
+    const checks = {
+      noLocalTimer: true,
+      sessionIdPresentWhenLinked: !context.return_target || !!context.session_id,
+      goalIdPresentWhenLinked: !context.return_target || !!context.goal_id,
+      taskIdPresentWhenLinked: !context.return_target || !!context.task_id,
+      lapIdPresentWhenLinked: !context.return_target || !!context.lap_id,
+      safeReturnTarget: !context.return_target || (() => { try { return ['http:','https:'].includes(new URL(context.return_target).protocol); } catch { return false; } })()
+    };
+    return { ok:Object.values(checks).every(Boolean), checks };
+  }
+
+  async function syncFamilyCharacterProfile() {
+    const memberId = context.child_id || null;
+    const adapter = window.SnapFamilyCharacterProfileAdapterV1;
+    if (!memberId || !adapter) return { state:'NO_BINDING' };
+    try {
+      const resolved = await adapter.resolve(memberId);
+      const p = resolved?.projection;
+      if (!p) return { state:'NO_PROFILE' };
+      let runtimeRef = null, assetSource = 'POINTER_ONLY';
+      const assetAdapter = window.SnapCharacterAssetReadAdapterV1;
+      if (assetAdapter?.status?.().available) {
+        try {
+          const read = await assetAdapter.resolveRead({ member_id:p.member_id, character_id:p.character_id, asset_ref:p.master_asset_ref });
+          runtimeRef = read?.read_url || null;
+          if (runtimeRef) assetSource = 'SIGNED_READ';
+        } catch {}
+      }
+      const runtimeProjection = { ...p, master_private_ref:p.master_asset_ref, master_asset_ref:runtimeRef, asset_resolution:assetSource };
+      try { await set('familyCharacterProfile', runtimeProjection); } catch {}
+      window.SnapFamilyCharacterProfile = Object.freeze(runtimeProjection);
+      try { window.dispatchEvent(new CustomEvent('taky-family-character-profile', { detail:{ ...runtimeProjection } })); } catch {}
+      return { state:runtimeRef?'BOUND':'BOUND_POINTER_ONLY', source:resolved.source, character_id:p.character_id };
+    } catch (error) {
+      return { state:'FAILED', error:String(error?.message || error) };
+    }
+  }
+
+  function boot() {
+    document.documentElement.dataset.snapBridge = BRIDGE_VERSION;
+    bootContext();
+    void syncFamilyCharacterProfile();
+    injectStyles();
+    ensureBaseCampChip();
+    ensureWordChip();
+    wrapCompletion();
+    cleanIncomingQuery();
+    if (context.session_id && context.task_id) emit('APP_ENTERED', { from_app: context.from_app || null, word: context.word || null });
+    window.SnapPopBridge = Object.freeze({
+      version: BRIDGE_VERSION,
+      context: () => ({ ...context }),
+      emit,
+      returnToBase,
+      requestGuideRadio,
+      requestImaginationCloud,
+      syncFamilyCharacterProfile,
+      validate
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once:true });
+  else boot();
+})();
+
+
+=== attempted Playwright E2E ===
+import { chromium } from 'playwright-core';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const page=await browser.newPage({viewport:{width:390,height:844}});
+const pageErrors=[]; page.on('pageerror',e=>pageErrors.push(String(e)));
+const url='http://127.0.0.1:4174/index.html?session_id=s2&goal_id=g2&task_id=t2&lap_id=l2&return_target=https%3A%2F%2Fexample.com%2Fready&from_app=ready-set&word=apple&child_id=c2';
+await page.goto(url,{waitUntil:'load'}); await page.waitForTimeout(500);
+await page.locator('.landmark').first().click();
+await page.locator('#startBtn').click();
+for (let i=0;i<3;i++){ await page.locator('#answer').fill('아이 생각 '+(i+1)); await page.locator('#nextBtn').click(); await page.waitForTimeout(120); }
+const out=await page.evaluate(async()=>{
+ const active=[...document.querySelectorAll('.view.active')].map(x=>x.id);
+ const tx=window.db.transaction('state').objectStore('state');
+ const read=(k)=>new Promise(ok=>{const r=tx.get(k);r.onsuccess=()=>ok(r.result)});
+ const records=await read('records');
+ const activeState=await read('active');
+ const exp=await read('exp');
+ let outbox=[]; try{outbox=JSON.parse(sessionStorage.getItem('snap_pop_shared_outbox_v1')||'[]')}catch{}
+ return {active,recordsCount:records?.length||0,activeState,exp,events:outbox.map(x=>x.type),completed:outbox.filter(x=>x.type==='TASK_COMPLETED').length,bridge:window.SnapPopBridge?.validate?.()};
+});
+const ok=out.active.includes('growth')&&out.recordsCount>=1&&out.activeState==null&&out.exp>=55&&out.completed>=1&&out.bridge?.ok&&pageErrors.length===0;
+console.log(JSON.stringify({ok,out,pageErrors},null,2));
+await browser.close();

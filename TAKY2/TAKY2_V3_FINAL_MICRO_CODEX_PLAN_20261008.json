@@ -1,0 +1,19 @@
+{
+  "task_id": "taky2-v3-final-micro-codex-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "TAKY2_V3_FINAL_MICRO_RECHECK",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "0a1f089c1dc88aa816d7"
+  }
+}

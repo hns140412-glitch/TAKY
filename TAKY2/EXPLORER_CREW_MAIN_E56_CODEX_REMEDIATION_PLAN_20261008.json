@@ -1,0 +1,19 @@
+{
+  "task_id": "explorer-crew-main-e56-remediation-recheck-20261008",
+  "action_id": "verify:codex-packet",
+  "context": {
+    "mode": "delta"
+  },
+  "attempt": {
+    "target": "EXPLORER_CREW_MAIN_E56_REMEDIATION",
+    "method_or_tool": "codex"
+  },
+  "call": {
+    "model": "codex",
+    "effort": "medium",
+    "context": "delta",
+    "expected_calls": 1,
+    "execution_mode": "CODEX_VERIFY_ONLY",
+    "packet_digest": "cef94e2b870021e166b6"
+  }
+}

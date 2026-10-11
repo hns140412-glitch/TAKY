@@ -1,0 +1,367 @@
+EXPLORER CREW MAIN_CREW E5/E6 — CODEX REMEDIATION MICRO RECHECK
+READ ONLY. PACKET ONLY. NO WEB. NO REPOSITORY EXPLORATION.
+OUTPUT ENGLISH ONLY. Do not quote Korean text unless necessary; refer to id/intent/variant.
+
+PRIOR RESULT
+- Previous Codex review: HOLD with MEDIUM line-local findings only.
+- No full rewrite requested.
+- Findings were semantic collisions, generic phrasing, accusatory/over-directive tone, false implication of prior state, role-boundary overreach, or overconfident causal wording.
+
+REMEDIATION
+- Exactly 30 candidate strings were changed line-locally; intent/variant counts unchanged.
+- Missing school_stage ASK/HINT/ACK now fails closed as LEARNER_STAGE_REQUIRED; no generic fallback.
+- Memory callback PROMISE_OR_PLAN was generalized to the evidence-backed plan event.
+- 144/144 unique remains true.
+- Crew suite after changes: 6/6 PASS.
+- Source lock: EXPLORER_CREW_V2_SOURCE_LOCK_20261008_DIALOGUE_CANDIDATE_R3.
+- dialogue personality hash and script-authority hash are locked in R3.
+
+QUALITY RULES
+- Character-specific wit/sense must remain recognizable.
+- No baby-talk, generic praise, inflated ability praise.
+- No fabricated Shared Memory detail.
+- No Teacher/Coach/Maker pronunciation/teaching/mission authority takeover.
+- MAIN_CREW = upper-elementary.
+- MIDDLE deferred.
+- Only material BLOCKER/HIGH/MEDIUM issues should block SCRIPT LOCK.
+
+QUESTION
+Did these remediated lines close the prior material findings without introducing a new BLOCKER/HIGH/MEDIUM issue?
+
+OUTPUT EXACTLY:
+VERDICT: PASS_FOR_SCRIPT_LOCK | HOLD
+FINDINGS:
+- [SEVERITY] id / intent / variant - issue
+MEMORY_FINDINGS:
+- [SEVERITY] id / event - issue
+If no material findings: FINDINGS: NONE
+If no material memory findings: MEMORY_FINDINGS: NONE
+
+REMEDIATED_LINES:
+[
+  {
+    "id": "nova",
+    "name": "노바",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "먼저 한 번 움직여봐. 예상이 빗나가면 거기서 실험이 시작돼.",
+    "wit_tags": [
+      "EXPERIMENT_BANTER",
+      "FORWARD_MOTION"
+    ]
+  },
+  {
+    "id": "nova",
+    "name": "노바",
+    "intent": "ACKNOWLEDGE",
+    "variant": 1,
+    "text": "반응이 달라졌네. 여기서 멈추면 아깝지. 다음 반응도 확인하자.",
+    "wit_tags": [
+      "EXPERIMENT_BANTER",
+      "FORWARD_MOTION"
+    ]
+  },
+  {
+    "id": "nova",
+    "name": "노바",
+    "intent": "ACKNOWLEDGE",
+    "variant": 2,
+    "text": "한 번 해보니 예상과 다른 데가 보였어. 다음 시도는 그쪽부터 치고 가자.",
+    "wit_tags": [
+      "EXPERIMENT_BANTER",
+      "FORWARD_MOTION"
+    ]
+  },
+  {
+    "id": "guide-07",
+    "name": "솔라",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "가장 밝은 쪽이 답이라고 서두르지 말자. 그 옆에서 조용히 달라진 곳은 어디야?",
+    "wit_tags": [
+      "QUIET_SIGNAL",
+      "TRAIL_METAPHOR"
+    ]
+  },
+  {
+    "id": "guide-07",
+    "name": "솔라",
+    "intent": "ACKNOWLEDGE",
+    "variant": 2,
+    "text": "작은 신호가 먼저 손들었네. 이제 그 신호가 이어지는 쪽만 조용히 따라가자.",
+    "wit_tags": [
+      "QUIET_SIGNAL",
+      "TRAIL_METAPHOR"
+    ]
+  },
+  {
+    "id": "guide-13",
+    "name": "민트",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "지금 안 정해도 되는 건 옆 칸에 두자. 판단 순서를 줄이면 길도 덜 시끄러워.",
+    "wit_tags": [
+      "DRY_CALM",
+      "ROUTE_JUDGMENT"
+    ]
+  },
+  {
+    "id": "guide-13",
+    "name": "민트",
+    "intent": "ASK",
+    "variant": 1,
+    "text": "급할 건 없어. 지금 가진 정보만으로 한 걸음 정한다면 어디야?",
+    "wit_tags": [
+      "DRY_CALM",
+      "ROUTE_JUDGMENT"
+    ]
+  },
+  {
+    "id": "guide-13",
+    "name": "민트",
+    "intent": "ASK",
+    "variant": 2,
+    "text": "길이 많아도 다 볼 필요는 없지. 지금 확인된 정보가 붙어 있는 쪽부터 고를까?",
+    "wit_tags": [
+      "DRY_CALM",
+      "ROUTE_JUDGMENT"
+    ]
+  },
+  {
+    "id": "guide-10",
+    "name": "니아",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "둘 사이에 같은 말, 같은 원인, 같은 방향 중 하나가 있나 찾아봐. 연결선은 그다음이야.",
+    "wit_tags": [
+      "CONNECTION_MAP",
+      "RELAY"
+    ]
+  },
+  {
+    "id": "guide-22",
+    "name": "셀",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "한쪽이 움직였을 때 다른 쪽이 어떻게 달라졌는지 앞뒤 반응을 붙여봐.",
+    "wit_tags": [
+      "RELATIONAL_SENSING",
+      "SYSTEM_CHANGE"
+    ]
+  },
+  {
+    "id": "guide-22",
+    "name": "셀",
+    "intent": "ASK",
+    "variant": 1,
+    "text": "한쪽의 변화가 다른 쪽에 닿은 흔적이 있어? 반응이 이어지는 지점을 찾아보자.",
+    "wit_tags": [
+      "RELATIONAL_SENSING",
+      "SYSTEM_CHANGE"
+    ]
+  },
+  {
+    "id": "guide-22",
+    "name": "셀",
+    "intent": "ASK",
+    "variant": 2,
+    "text": "따로 보면 조용한데, 같이 놓으면 반응이 생기는 둘이 있을까?",
+    "wit_tags": [
+      "RELATIONAL_SENSING",
+      "SYSTEM_CHANGE"
+    ]
+  },
+  {
+    "id": "guide-15",
+    "name": "루네",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "상황이 바뀐 지점 하나를 고르고, 그 지점에 맞춰 방법만 살짝 돌려봐.",
+    "wit_tags": [
+      "ADAPTIVE_REFRAME",
+      "VARIABLE_SHIFT"
+    ]
+  },
+  {
+    "id": "guide-15",
+    "name": "루네",
+    "intent": "ASK",
+    "variant": 1,
+    "text": "상황이 달라졌네. 같은 목표로 가려면 방법을 어디서 꺾어볼까?",
+    "wit_tags": [
+      "ADAPTIVE_REFRAME",
+      "VARIABLE_SHIFT"
+    ]
+  },
+  {
+    "id": "guide-23",
+    "name": "제이크",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "조건을 전부 건드리지 말고, 먼저 고정할 조건과 시험할 조건을 나눠봐.",
+    "wit_tags": [
+      "DRY_STRATEGY",
+      "CONSTRAINT_SPOTTING"
+    ]
+  },
+  {
+    "id": "guide-23",
+    "name": "제이크",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "빼도 되는 조건인지 바로 결론내리지 말고, 결과가 어떻게 달라지는지 한 번 더 확인해.",
+    "wit_tags": [
+      "DRY_STRATEGY",
+      "CONSTRAINT_SPOTTING"
+    ]
+  },
+  {
+    "id": "guide-23",
+    "name": "제이크",
+    "intent": "ACKNOWLEDGE",
+    "variant": 1,
+    "text": "조건이 하나 정리됐네. 이제 비교할 선택지가 눈에 들어오는 크기로 줄었어.",
+    "wit_tags": [
+      "DRY_STRATEGY",
+      "CONSTRAINT_SPOTTING"
+    ]
+  },
+  {
+    "id": "guide-19",
+    "name": "린",
+    "intent": "ASK",
+    "variant": 2,
+    "text": "도착점을 먼저 찍자. 거꾸로 따라오면 다음 판단 지점이 어디인지 보일 거야.",
+    "wit_tags": [
+      "TACTICAL_ROUTE",
+      "DECISIVE_CALM"
+    ]
+  },
+  {
+    "id": "guide-18",
+    "name": "보리",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "지금 보이는 흐름에서 반복되는 부분과 달라지는 부분을 하나씩 나눠봐.",
+    "wit_tags": [
+      "MEMORY_PATTERN",
+      "CALLBACK"
+    ]
+  },
+  {
+    "id": "guide-18",
+    "name": "보리",
+    "intent": "ASK",
+    "variant": 1,
+    "text": "새 장면 안에서도 익숙한 패턴이 반복될 수 있어. 닮아 보이는 구조가 있나?",
+    "wit_tags": [
+      "MEMORY_PATTERN",
+      "CALLBACK"
+    ]
+  },
+  {
+    "id": "guide-18",
+    "name": "보리",
+    "intent": "ACKNOWLEDGE",
+    "variant": 2,
+    "text": "반복되는 부분이 길 하나를 줄였네. 다음 패턴도 같은 기준으로 볼까?",
+    "wit_tags": [
+      "MEMORY_PATTERN",
+      "CALLBACK"
+    ]
+  },
+  {
+    "id": "guide-20",
+    "name": "루미",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "같은 기준으로 두 장면을 놓고 가장 크게 벌어진 차이 하나만 골라봐.",
+    "wit_tags": [
+      "CONTRAST",
+      "REFLECTIVE_PATTERN"
+    ]
+  },
+  {
+    "id": "guide-20",
+    "name": "루미",
+    "intent": "HINT",
+    "variant": 2,
+    "text": "숫자만 보지 말고 모양, 간격, 방향 중 튀는 변화가 실제로 있는지 확인해.",
+    "wit_tags": [
+      "CONTRAST",
+      "REFLECTIVE_PATTERN"
+    ]
+  },
+  {
+    "id": "guide-14",
+    "name": "토토",
+    "intent": "ACKNOWLEDGE",
+    "variant": 1,
+    "text": "방법을 비틀어보니 반응이 왔네. 문제도 예상 밖 손님은 싫어하나 봐.",
+    "wit_tags": [
+      "CONTROLLED_MISCHIEF",
+      "REVERSE_TEST"
+    ]
+  },
+  {
+    "id": "guide-14",
+    "name": "토토",
+    "intent": "ACKNOWLEDGE",
+    "variant": 2,
+    "text": "이번 시도에서 쓸 정보 하나는 건졌네. 빈손은 아니야.",
+    "wit_tags": [
+      "CONTROLLED_MISCHIEF",
+      "REVERSE_TEST"
+    ]
+  },
+  {
+    "id": "guide-24",
+    "name": "비비",
+    "intent": "ASK",
+    "variant": 1,
+    "text": "이 조각들 순서만 한번 흔들어볼래? 같은 재료도 배치가 바뀌면 이야기가 달라져.",
+    "wit_tags": [
+      "REMIX",
+      "CREATIVE_EDIT"
+    ]
+  },
+  {
+    "id": "guide-21",
+    "name": "테스",
+    "intent": "ASK",
+    "variant": 2,
+    "text": "지금 할 일을 게임판처럼 나눠보면 어떨까? 먼저 확인할 칸 하나만 정해보자.",
+    "wit_tags": [
+      "GAME_STATE",
+      "TEAM_TEMPO"
+    ]
+  },
+  {
+    "id": "guide-11",
+    "name": "키로",
+    "intent": "ACKNOWLEDGE",
+    "variant": 2,
+    "text": "맞물린 건 확인했네. 손을 떼도 모양이 버티는지 잠깐 지켜보자.",
+    "wit_tags": [
+      "ENGINEERING_UNDERSTATEMENT",
+      "FIT_TEST"
+    ]
+  },
+  {
+    "id": "guide-17",
+    "name": "마루",
+    "intent": "HINT",
+    "variant": 1,
+    "text": "눈에 띄는 곳을 봤다면, 이제 구석·경계·빈칸 쪽도 확인해봐.",
+    "wit_tags": [
+      "QUIET_DEADPAN",
+      "HIDDEN_CLUE"
+    ]
+  },
+  {
+    "id": "guide-23",
+    "event": "PROMISE_OR_PLAN",
+    "text": "아까 세운 계획 기억나? 그 계획에서 먼저 확인하기로 한 지점부터 이어가자.",
+    "memory_callback": true
+  }
+]
