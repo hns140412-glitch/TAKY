@@ -1,5 +1,5 @@
 {
-  "map_version": "2026-09-30.1",
+  "map_version": "2026-10-11.1",
   "status": "ACTIVE_SUPPORT_OWNER_MAP",
   "purpose": "Machine-readable architecture ownership/support map for TAKY, Work OS, Learning OS, shared technical capabilities, Learning App Family and current mobile-web apps. This map does not create a second semantic authority; each semantic rule remains owned by its referenced canonical owner.",
   "invariants": [
@@ -11,7 +11,11 @@
     "ACCOUNT_LINK != AUTHORITY_LINK.",
     "LEARNING_APP_FAMILY is subordinate to LEARNING_OS and owns cross-app learning-family contracts, not global technical authority.",
     "PROJECT_APP owns product-specific behavior and SHALL NOT redefine higher shared/domain contracts.",
-    "ADAPTER/PLATFORM owns platform integration mechanics only and SHALL NOT become product/domain authority."
+    "ADAPTER/PLATFORM owns platform integration mechanics only and SHALL NOT become product/domain authority.",
+    "ROLE != AGENT. OWNER != ROUTER. TOOL != AUTHORITY.",
+    "Routing, hosting or delegation does not transfer semantic ownership; an unknown owner remains OWNER_GAP, never a guess.",
+    "SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE; a shared brand string does not imply shared semantic ownership.",
+    "Cross-cutting planes are pointers to their owners and SHALL NOT absorb OS/DOMAIN/PROJECT semantics."
   ],
   "layers": {
     "TAKY_CORE": {
@@ -24,7 +28,10 @@
         "evidence and validation",
         "C2S/recovery/handoff",
         "growth intelligence",
-        "cross-system execution truthfulness"
+        "cross-system execution truthfulness",
+        "Key/context/provenance invariants",
+        "economy/cost invariant (SAVEY_AI_ECONOMY)",
+        "cross-domain hard boundaries"
       ],
       "does_not_own": [
         "Work-domain operational semantics",
@@ -129,24 +136,6 @@
         "global platform/PWA mechanics beyond family-specific requirements"
       ]
     },
-    "EXPLORATION_CREW": {
-      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
-      "semantic_owner": "OS/EXPLORATION_CREW_CANONICAL.md",
-      "parent": "LEARNING_APP_FAMILY",
-      "owns": [
-        "shared crew behavior-to-semantic-command-to-asset-to-renderer separation",
-        "shared composable crew asset group semantics",
-        "shared same-character safe fallback contract",
-        "shared Behavior/Asset/Integration gates",
-        "shared crew runtime trace/version contract"
-      ],
-      "does_not_own": [
-        "project-specific scene presentation",
-        "project-specific dialogue or performance details",
-        "unapproved character art",
-        "project release or deployment authority"
-      ]
-    },
     "READY_SET": {
       "class": "PROJECT_APP",
       "semantic_owner": "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
@@ -161,8 +150,7 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY",
-        "EXPLORATION_CREW"
+        "LEARNING_APP_FAMILY"
       ]
     },
     "HIDE_SEEK": {
@@ -178,8 +166,7 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY",
-        "EXPLORATION_CREW"
+        "LEARNING_APP_FAMILY"
       ]
     },
     "SNAP_POP": {
@@ -195,8 +182,7 @@
       "must_inherit": [
         "TAKY_CORE",
         "LEARNING_OS",
-        "LEARNING_APP_FAMILY",
-        "EXPLORATION_CREW"
+        "LEARNING_APP_FAMILY"
       ]
     },
     "WORK_DOMAIN_PROJECT": {
@@ -254,8 +240,134 @@
         "REVIEW_NEED != REVIEW_DATE",
         "SUBJECT/LEARNING INTERPRETS; MAIN/PLANNER ALLOCATES"
       ]
+    },
+    "EXPLORATION_CREW": {
+      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
+      "semantic_owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "parent": "LEARNING_APP_FAMILY",
+      "owns": [
+        "shared crew behavior-to-semantic-command-to-asset-to-renderer separation",
+        "shared composable crew asset group semantics",
+        "shared same-character safe fallback contract",
+        "shared Behavior/Asset/Integration gates",
+        "shared crew runtime trace/version contract"
+      ],
+      "does_not_own": [
+        "project-specific scene presentation",
+        "project-specific dialogue or performance details",
+        "unapproved character art",
+        "project release or deployment authority"
+      ]
     }
   },
+  "cross_cutting_planes": {
+    "BETA_EVIDENCE": {
+      "role": "evidence / defense / frozen reality",
+      "semantic_owner": "NONE__EVIDENCE_ONLY",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
+      "must_not_become": [
+        "live execution authority",
+        "semantic owner",
+        "live CURRENT"
+      ],
+      "lineage_state": "EXACT_ARTIFACT_LINEAGE_OPEN"
+    },
+    "ALPHA_SEMANTIC_MAP": {
+      "role": "semantic owner / namespace resolution map",
+      "semantic_owner": "RESOLVES_TO_DECLARED_OWNERS",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
+      "must_not_become": [
+        "CURRENT as owner",
+        "HANDOFF as authority",
+        "implementation host as semantic owner"
+      ],
+      "lineage_state": "EXACT_ARTIFACT_LINEAGE_OPEN"
+    },
+    "TAKY2_ENFORCEMENT_KERNEL": {
+      "role": "compact cross-cutting enforcement kernel",
+      "semantic_owner": "MASTER/MASTER_LOGIC.md#0.2",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#2",
+      "gate_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#6",
+      "implementation": "TAKY2/enforcement.py",
+      "hard_gates": [
+        "KEY",
+        "CONTEXT",
+        "ROUTE",
+        "COST",
+        "DONE"
+      ],
+      "necessity_location": "COST",
+      "must_not_become": [
+        "OS/DOMAIN/PROJECT semantic owner",
+        "semantic mega-framework"
+      ]
+    },
+    "SHEPHERDING_CONTROL_PLANE": {
+      "role": "subordinate dynamic control model under TAKY",
+      "semantic_owner": "TAKY2/SHEPHERDING_COOPERATIVE_EXECUTION_MODEL_V1.md",
+      "authority_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#3",
+      "control_roles_ref": "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md#4",
+      "parent": "TAKY_CORE",
+      "control_roles": [
+        "NAVIGATOR",
+        "GUARDIAN",
+        "DRIVER+SAVEY_AI_ECONOMY",
+        "SCOUT"
+      ],
+      "role_is_agent": false,
+      "mandatory_agent_spawn": false,
+      "default_actor_bindings": "INHERITED_FROM_V2__NOT_ROLE_ONTOLOGY",
+      "runtime_schema_state": "OPEN"
+    }
+  },
+  "owner_gaps": [
+    {
+      "system": "SAVEY_FAMILY_FINANCE",
+      "state": "OWNER_GAP",
+      "expected_parent": "UNRESOLVED",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
+    },
+    {
+      "system": "TAKY_MOBILE",
+      "state": "OWNER_GAP",
+      "expected_parent": "UNRESOLVED",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
+      "boundary": "projection/runtime shell only; must not become a second semantic owner or universal auth authority"
+    },
+    {
+      "system": "PLANNER",
+      "state": "OWNER_GAP",
+      "expected_parent": "LEARNING_OS",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
+      "boundary": "semantic class already owned by LEARNING_OS; gap is the dedicated owner artifact only"
+    },
+    {
+      "system": "PIANO_PRACTICE",
+      "state": "OWNER_GAP",
+      "expected_parent": "LEARNING_OS",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
+    },
+    {
+      "system": "EXPLORER_CREW",
+      "state": "OWNER_GAP",
+      "expected_parent": "UNRESOLVED",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
+      "boundary": "child-facing character roles must not be conflated with TAKY control roles"
+    },
+    {
+      "system": "BADGE_REWARD",
+      "state": "OWNER_GAP",
+      "expected_parent": "UNRESOLVED",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2"
+    },
+    {
+      "system": "EUNHA_FARM",
+      "state": "OWNER_GAP",
+      "expected_parent": "UNRESOLVED",
+      "authority_ref": "MASTER/MASTER_LOGIC.md#1.2",
+      "boundary": "project semantics must not be absorbed into the global kernel"
+    }
+  ],
   "capability_classification": [
     {
       "item": "authentication/session transport",
@@ -473,21 +585,33 @@
       "state": "HOLD",
       "finding": "No active cross-domain Work↔Learning identity federation contract exists.",
       "direction": "remain unimplemented until a real use case requires cross-domain linkage; default is isolation"
+    },
+    {
+      "gap_id": "LAYER-GAP-007",
+      "priority": "P0",
+      "state": "OPEN",
+      "finding": "Whole-system owner coverage is incomplete; whole-system owner coverage is inherited from MASTER/Alpha integration (MASTER §1.2); systems without a registered owner artifact are recorded in owner_gaps instead of being guessed.",
+      "direction": "register each system as a layer with a verified owner pointer when formalized, then remove it from owner_gaps; never copy app/domain semantics into TAKY_CORE.",
+      "evidence": [
+        "MASTER/MASTER_LOGIC.md#1.2"
+      ]
     }
   ],
   "source_evidence": [
     "MASTER/MASTER_LOGIC.md",
+    "TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md",
+    "TAKY2/SHEPHERDING_COOPERATIVE_EXECUTION_MODEL_V1.md",
     "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
     "OS/WORK_OS.md",
     "OS/GUIDE_FAMILY_LEARNING_OS.md",
-    "OS/EXPLORATION_CREW_CANONICAL.md",
     "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
     "MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json",
     "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",
     "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
     "hns140412-glitch/Ready-Set:READY_SET_RUNTIME_STATE_MODEL.md",
     "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
-    "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md"
+    "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+    "OS/EXPLORATION_CREW_CANONICAL.md"
   ],
   "claim_boundary": "This map now records verified shared reference implementations and documented consumer migrations where evidence exists. It does not imply DEVICE_VERIFIED, PRODUCTION_VERIFIED, implicit Work↔Learning identity federation, or shared domain authority."
 }
