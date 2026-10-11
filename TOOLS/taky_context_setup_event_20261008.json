@@ -1,0 +1,12 @@
+{
+  "event_id": "setup-20261008-001",
+  "session_id": "taky-drive-continuity-20261008",
+  "captured_at": "2026-10-08T20:40:00+09:00",
+  "actor": "ChatGPT",
+  "project_namespace": "TAKY_SYSTEMWIDE",
+  "intent": "Define reusable conversation context in Google Drive for ChatGPT, Antigravity Claude Code and Codex",
+  "action": "Create candidate conversation contract, derived resume snapshot, append-only event recorder",
+  "outcome": "FILES_WRITTEN_TEST_PENDING",
+  "provenance": "Current user chat; remote Desktop Commander file write",
+  "status": "IN_PROGRESS"
+}

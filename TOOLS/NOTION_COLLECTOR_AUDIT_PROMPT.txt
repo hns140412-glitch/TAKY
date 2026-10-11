@@ -1,0 +1,23 @@
+TAKY local Notion collector audit. READ-ONLY only. Inspect D:\Git PWA\TAKY-SOURCE-VAULT comprehensively, especially RUN_NOTION_INCREMENTAL_SCHEDULED.ps1, RUN_NOTION_DISCOVERY_SCHEDULED.ps1, REGISTER_NOTION_SCHEDULE.ps1, SWITCH_NOTION_SCHEDULE.ps1, TAKY_INCREMENTAL.js, source_vault.js, runtime_config.js, preflight.js, recover_hold_pages.js, sync_drive_notion_verified.js, README files, validation artifacts, and scheduler assumptions.
+
+Goal: determine whether the current collector is safe/correct for mining -> indexing -> learning.
+
+Check all of these:
+1. Missed changed/new/deleted/moved Notion pages.
+2. Duplicate prevention, idempotency, cursor/watermark/checkpoint logic.
+3. Retry/backoff/rate-limit handling.
+4. Crash recovery, partial-write safety, atomicity.
+5. Permission/access failure vs actual source absence.
+6. Secrets/API-key handling and any usage-based paid path.
+7. Scheduler registration/switch correctness, duplicate scheduled tasks, overlap/locking.
+8. Whether collection actually continues into indexing and learning, not just raw capture.
+9. HOLD/recovery/stale-state logic and regression risks.
+10. Prioritized concrete fixes.
+
+Do not modify files. Return concise sections:
+PASS
+CRITICAL/HIGH/MEDIUM/LOW FINDINGS
+EVIDENCE with exact filenames and logic
+REQUIRED FIXES in priority order
+SAFE TO RUN? with conditions
+State uncertainty explicitly where evidence is incomplete.

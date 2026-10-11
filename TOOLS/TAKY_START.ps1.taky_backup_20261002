@@ -1,0 +1,28 @@
+$ErrorActionPreference = 'Stop'
+$repo = 'D:\Git PWA\TAKY'
+Set-Location $repo
+
+# SAVEY guard: subscription/OAuth only inside the TAKY shell.
+$env:ANTHROPIC_API_KEY = $null
+$env:OPENAI_API_KEY = $null
+$env:GEMINI_API_KEY = $null
+$env:GOOGLE_API_KEY = $null
+
+# Keep GitHub CLI available in this shell even if Windows Terminal started before PATH refresh.
+$ghDir = 'C:\Program Files\GitHub CLI'
+if ((Test-Path $ghDir) -and (($env:Path -split ';') -notcontains $ghDir)) {
+  $env:Path += ';' + $ghDir
+}
+
+$host.UI.RawUI.WindowTitle = 'TAKY | LOCAL BRIDGE'
+Write-Host 'TAKY LOCAL BRIDGE — subscription/OAuth only; paid API fallback disabled.'
+Write-Host 'Natural language in Claude is the default interface.'
+
+$remoteCheck = (& cmd.exe /d /c "claude remote-control --help 2>&1" | Out-String)
+if ($remoteCheck -match 'must be logged in to use Remote Control') {
+  Write-Warning 'SAVEY BLOCK: Claude Code is not verified on the claude.ai subscription path. API-billing execution is paused.'
+  Write-Host 'Account login will be fixed later with: claude auth login'
+  return
+}
+
+& claude

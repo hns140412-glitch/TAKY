@@ -1,0 +1,52 @@
+param(
+ [ValidateSet('Inspect','Stage','Submit')][string]$Mode='Inspect',
+ [string]$PromptFile,
+ [string]$ExpectedWindow='TAKY-2.0-ORCH',
+ [switch]$AllowSend
+)
+$ErrorActionPreference='Stop'
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
+public class TakyWin {
+ [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+ [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd,int nCmdShow);
+ [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+}
+'@
+$targets = @(Get-Process 'Antigravity IDE' -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -like "*$ExpectedWindow*" })
+if($targets.Count -ne 1) { throw "Expected exactly one Antigravity window matching $ExpectedWindow; found $($targets.Count)." }
+$target=$targets[0]
+if($Mode -eq 'Inspect') { Write-Output "PREFLIGHT_OK PID=$($target.Id) HWND=$($target.MainWindowHandle) TITLE=$($target.MainWindowTitle)"; Write-Output 'STAGE_UNTESTED: requires foreground GUI session; Submit requires -AllowSend'; exit 0 }
+if(-not $PromptFile -or -not (Test-Path -LiteralPath $PromptFile -PathType Leaf)) { throw 'PromptFile is required and must exist' }
+$prompt=Get-Content -LiteralPath $PromptFile -Encoding UTF8 -Raw
+if([string]::IsNullOrWhiteSpace($prompt) -or $prompt.Length -gt 3000){ throw 'Invalid prompt length: expected 1-3000 chars' }
+if($Mode -eq 'Submit' -and -not $AllowSend) { throw 'Submitting to Claude requires explicit -AllowSend' }
+if([TakyWin]::GetForegroundWindow() -ne [IntPtr]$target.MainWindowHandle) { if (-not [TakyWin]::SetForegroundWindow([IntPtr]$target.MainWindowHandle)) {throw 'Cannot activate target Antigravity window'}; Start-Sleep -Milliseconds 450 }
+Start-Sleep -Milliseconds 400
+if([TakyWin]::GetForegroundWindow() -ne [IntPtr]$target.MainWindowHandle) { throw 'Antigravity is not foreground; aborting before typing' }
+# Uses command palette to focus the installed Claude Code extension panel.
+[System.Windows.Forms.SendKeys]::SendWait('^+p')
+Start-Sleep -Milliseconds 250
+[System.Windows.Forms.SendKeys]::SendWait('Claude Code: Focus input')
+Start-Sleep -Milliseconds 350
+[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')
+Start-Sleep -Milliseconds 450
+if([TakyWin]::GetForegroundWindow() -ne [IntPtr]$target.MainWindowHandle) { throw 'Focus changed during command: aborting' }
+# Preserve previous clipboard.
+$oldClip=$null
+try { if([System.Windows.Forms.Clipboard]::ContainsText()) { $oldClip=[System.Windows.Forms.Clipboard]::GetText() } } catch {}
+try {
+ [System.Windows.Forms.Clipboard]::SetText($prompt)
+ [System.Windows.Forms.SendKeys]::SendWait('^v')
+ Start-Sleep -Milliseconds 250
+ if($Mode -eq 'Submit') {
+   if([TakyWin]::GetForegroundWindow() -ne [IntPtr]$target.MainWindowHandle){throw 'Focus lost before submit'}
+   [System.Windows.Forms.SendKeys]::SendWait('{ENTER}')
+   Write-Output 'SUBMIT_SENT_UNVERIFIED: confirm input/response in Claude panel'
+ } else { Write-Output 'STAGED_UNVERIFIED: visually confirm draft appears in Claude composer; nothing submitted' }
+} finally {
+ if($null -ne $oldClip){ try {[System.Windows.Forms.Clipboard]::SetText($oldClip)} catch {} }
+}

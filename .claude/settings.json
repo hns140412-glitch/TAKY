@@ -1,0 +1,137 @@
+{
+  "env": {
+    "CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY": "4"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_hook.py\""
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_hook.py\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell|Read|Grep|Edit|Write|MultiEdit|NotebookEdit|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_hook.py\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|Read|Grep|Edit|Write|MultiEdit|NotebookEdit|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Read|Grep|Bash|PowerShell|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Read|Grep|Bash|PowerShell|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"D:/Git PWA/TAKY/.claude/hooks/taky_outcome_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:/Git PWA/TAKY/TOOLS/TAKY_STATUSLINE.ps1\"",
+    "padding": 1
+  },
+  "model": "claude-sonnet-5-5",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git fetch:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}
