@@ -36,6 +36,19 @@ class VectorSearchTest(unittest.TestCase):
         self.assertTrue(result["results"][0]["channels"]["verified_neural_vector"])
         self.assertEqual(result["results"][0]["source_id"],"B")
 
+    def test_raw_scores_cannot_claim_verified_neural_channel(self):
+        records=[{"source_id":"A","canonical_title":"alpha","keywords":["ordinary"]}]
+        with self.assertRaisesRegex(ValueError,"VECTOR_METADATA_NOT_VERIFIED"):
+            search(records,"unrelated",semantic_vector_scores={"A":0.95})
+        with self.assertRaisesRegex(ValueError,"VECTOR_METADATA_NOT_VERIFIED"):
+            search(records,"unrelated",semantic_vector_scores={"A":0.95},
+                   semantic_metadata={"neural_embedding_verified":False,"model_id":"m","dimension":3})
+        meta={"semantic_mode":"NEURAL_EMBEDDING_VECTOR_VERIFIED",
+              "neural_embedding_verified":True,"model_id":"fixture-model","dimension":3}
+        for invalid in [float("inf"), float("nan"), True, -0.3, 1.2]:
+            with self.assertRaisesRegex(ValueError,"VECTOR_SCORE_INVALID"):
+                search(records,"unrelated",semantic_vector_scores={"A":invalid},semantic_metadata=meta)
+
     def test_no_vector_keeps_token_fallback(self):
         records=[{"source_id":"A","canonical_title":"hello","keywords":["hello"]}]
         result=search(records,"hello")

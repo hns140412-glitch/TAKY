@@ -52,7 +52,7 @@ RECORDS = [
                 "review_state": "REVIEWED",
                 "current_relation": "CURRENT_INDEX_ENTRY",
             },
-            "relations": [{"type": "RELATED_TO", "target": "SRC-002"}],
+            "relations": [{"type": "RELATED_TO", "target": "SRC-002", "verification_state": "VERIFIED", "evidence_ref": "TEST:REVIEWED_SOURCE_PAIR"}],
         },
         "detail_l2": {"pdf": {"page_count": 57, "reviewed_pages": [1, 2, 30, 57], "anchors": ["cover", "practice page"]}},
     },
@@ -125,13 +125,35 @@ a = next(x for x in records if x["source_id"] == "SRC-003")
 b = next(x for x in records if x["source_id"] == "SRC-004")
 assert a["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
 assert b["legacy_relation_hints"][0]["type"] == "LEGACY_DUPLICATE_GROUP"
-assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-004" for x in a["relations"])
-assert any(x.get("type") == "NEAR_DUPLICATE_OF" and x.get("target") == "SRC-003" for x in b["relations"])
+assert any(x.get("type") == "RELATED_TO" and x.get("target") == "SRC-004" and x.get("qualifier") == "LEGACY_DUPLICATE_GROUP_UNVERIFIED" for x in a["relations"])
+assert any(x.get("type") == "RELATED_TO" and x.get("target") == "SRC-003" and x.get("qualifier") == "LEGACY_DUPLICATE_GROUP_UNVERIFIED" for x in b["relations"])
+assert not any(x.get("type") in ("EXACT_DUPLICATE_OF", "NEAR_DUPLICATE_OF") for x in a["relations"] + b["relations"])
+# A legacy SHA256/BINARY_EXACT name is not verified digest equality.
+candidate = materialize_legacy_relations([normalize_record(x) for x in [
+    {"source_id": "A", "title": "Alpha", "duplicate_group": "SHA256_BUT_NOT_VALIDATED"},
+    {"source_id": "B", "title": "Beta", "duplicate_group": "SHA256_BUT_NOT_VALIDATED"},
+]])
+assert all(not any(rel.get("type") == "EXACT_DUPLICATE_OF" for rel in row["relations"]) for row in candidate)
+assert not search(candidate, "Alpha", relation_depth=1)["results"][0]["channels"]["relation_expanded"]
 
 # 7. relation expansion can surface linked indexed source
-r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1)
+r = search(records, "서울 PHONICS 학생용", limit=10, relation_depth=1,
+           trusted_relation_keys=frozenset({("SRC-001", "RELATED_TO", "SRC-002")}))
 ids = [x["source_id"] for x in r["results"]]
 assert "SRC-001" in ids and "SRC-002" in ids
+# An arbitrary relationship with no recorded evidence must not boost search results.
+unproven = [
+    normalize_record({"source_id": "REL-A", "title": "Alpha",
+                      "index_l1": {"relations": [{"type": "RELATED_TO", "target": "REL-B"}]}}),
+    normalize_record({"source_id": "REL-B", "title": "Distant unrelated item"}),
+]
+assert [x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]] == ["REL-A"]
+unproven[0]["relations"][0].update(verification_state="VERIFIED", evidence_ref="TEST:RECORDED_EDGE")
+# Even forged "VERIFIED" and evidence_ref fields cannot assert a trusted edge.
+assert [x["source_id"] for x in search(unproven, "Alpha", relation_depth=1)["results"]] == ["REL-A"]
+assert {x["source_id"] for x in search(
+    unproven, "Alpha", relation_depth=1,
+    trusted_relation_keys=frozenset({("REL-A", "RELATED_TO", "REL-B")}))["results"]} == {"REL-A", "REL-B"}
 
 # 8. sourceRef/provenance are surfaced without leaking domain decision metadata
 r = search(records, "서울 PHONICS 학생용")
@@ -187,5 +209,47 @@ with tempfile.TemporaryDirectory() as tmp:
     assert cli.returncode == 0, (cli.stdout, cli.stderr)
     data = json.loads(cli.stdout)
     assert data["results"][0]["source_id"] == "SRC-001"
+
+
+# 14. Exported native Docs may include a BOM; CURRENT remains loadable.
+from data_index_search import load_index
+with tempfile.TemporaryDirectory() as tmp:
+    exported = Path(tmp) / "drive-current-export.json"
+    exported.write_text("\ufeff" + json.dumps({"source_entries": RECORDS}, ensure_ascii=False), encoding="utf-8")
+    assert len(load_index(exported)) == len(RECORDS)
+
+# 15. Exact controlled terms (e.g. achievement codes) must beat incidental tokens.
+standard_fixture = [
+    normalize_record({
+        "source_id": "WR-STANDARD",
+        "title": "일기 글쓰기 교사용",
+        "index_l1": {"discovery": {"controlled_terms": ["2국03-04"]}}
+    }),
+    normalize_record({
+        "source_id": "UNRELATED",
+        "title": "나라 국 어휘맵 2 03 04",
+        "index_l1": {"discovery": {"controlled_terms": ["어휘맵"]}}
+    }),
+]
+code_result = search(standard_fixture, "2국03-04")
+assert [x["source_id"] for x in code_result["results"]] == ["WR-STANDARD"]
+assert "EXACT_SHORT_CIRCUIT" in code_result["pipeline"]
+
+# 16. Shared discovery must not silently inherit Learning/utilization decisions.
+legacy_with_decision = normalize_record({
+    "source_id": "DECISION_BOUNDARY",
+    "title": "중립적 원본 제목",
+    "value_statement": "DIRECT_USE_READY SENSITIVE_DOMAIN_RECOMMENDATION",
+    "utilization_class": "DIRECT_USE_READY",
+})
+assert legacy_with_decision["short_summary"] is None
+assert not search([legacy_with_decision], "SENSITIVE_DOMAIN_RECOMMENDATION")["results"]
+explicit_discovery = normalize_record({
+    "source_id": "EXPLICIT_DISCOVERY",
+    "title": "중립적 원본 제목",
+    "value_statement": "SENSITIVE_DOMAIN_RECOMMENDATION",
+    "index_l1": {"discovery": {"short_summary": "원본 근거와 위치를 찾아가는 자료"}},
+})
+assert explicit_discovery["short_summary"] == "원본 근거와 위치를 찾아가는 자료"
 
 print("data_index_search: PASS")
