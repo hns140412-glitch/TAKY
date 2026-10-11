@@ -1,0 +1,33 @@
+# Python bytecode caches
+__pycache__/
+*.pyc
+
+# Local CLI/test logs and captured stderr
+*.log
+*.err
+
+# Pre-edit snapshots and local backups
+# (archived to Drive TAKY/90_MAINTENANCE/90_ARCHIVE/TAKY_DIRTY_ARCHIVE_20261012)
+*.bak
+*.before
+*.before.*
+backup/
+
+# One-off staging scripts and generated previews
+staging/
+
+# Workstation-private admin/registry backups
+TAKY_AUDIT_LOCAL/
+
+# Local Claude Code artifacts; project agents/skills/hooks/settings stay tracked
+.claude/*
+!.claude/agents/
+!.claude/skills/
+!.claude/hooks/
+!.claude/settings.json
+
+# Reference store (Drive is the durable copy)
+REFERENCE/
+
+# Raw spreadsheet sources (Drive is the durable copy)
+LEARNING/data/sources/*.xlsx
