@@ -7,6 +7,7 @@ on:
       - 'TAKY.md'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'MASTER/MASTER_LOGIC.md'
       - 'OS/LEARNING_ENGINE_CORE.md'
       - 'LEARNING/**'
       - 'CURRENT/LEARNING_ENGINE_*'
@@ -69,6 +70,7 @@ on:
       - 'TAKY.md'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'MASTER/MASTER_LOGIC.md'
       - 'OS/LEARNING_ENGINE_CORE.md'
       - 'LEARNING/**'
       - 'CURRENT/LEARNING_ENGINE_*'
@@ -153,6 +155,7 @@ jobs:
           python -m py_compile ENFORCEMENT/drive_storage_map_validator.py
           python -m py_compile ENFORCEMENT/mobile_app_development_registry_validator.py
           python -m py_compile ENFORCEMENT/system_layer_ownership_validator.py
+          python -m py_compile ENFORCEMENT/master_logic_basis_validator.py
           python -m py_compile ENFORCEMENT/shared_technical_capability_validator.py
           python -m py_compile ENFORCEMENT/current_product_identity_validator.py
           python -m py_compile ENFORCEMENT/runtime_orchestrator.py
@@ -195,6 +198,10 @@ jobs:
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
         run: python ENFORCEMENT/system_layer_ownership_validator.py
+      - name: Validate MASTER_LOGIC systemwide basis
+        run: |
+          python ENFORCEMENT/master_logic_basis_validator.py
+          python ENFORCEMENT/master_logic_basis_validator_test.py
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate

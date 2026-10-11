@@ -122,6 +122,74 @@ Universal basis does NOT mean loading every rule or running maximum validation o
 
 Hosted ChatGPT automatic repository-gate invocation remains a separate runtime capability claim. Canonical intent/application requirements SHALL NOT be described as mechanically enforced in hosted chat unless that interception is directly verified.
 
+## 0.2 TAKY 2.0 Systemwide Basis Preservation — HARD LOCK
+
+Canonical design authority for this basis: `TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL_20261006.md` (V2, USER approved 2026-10-06). This section preserves the master-level invariants of that authority; it does not redefine V2 detail, and it does not promote any later candidate. Implementation-reconciliation candidates (including the V3 candidate) remain CANDIDATE until a verified, USER-authorized promotion.
+
+V2 is the later USER-approved systemwide design basis reflected into this MASTER. Earlier MASTER protections remain active and are reconciled with it, not deleted. Precedence between authorities is decided by explicit authority + USER decision + semantic owner, not by storage location or a `CANONICAL` header string (§2). `CANONICAL DESIGN != IMPLEMENTATION PASS`: runtime realization of this basis remains OPEN until code + evidence + regression close it (V2 §8). `V2 §n` citations in this MASTER use the active Drive-restored V2 numbering (§1–§10); MASTER-only execution protections are labeled as such and are not V2 verbatim.
+
+### 0.2A Identity
+- `USER = KEY OWNER / FINAL AUTHORITY`.
+- TAKY = the top-level governance and orchestration system that preserves the human Key, authority, context, semantic ownership and evidence while coordinating specialized actors and tools.
+- TAKY is not a specific model, vendor, agent, app or tool. The dual slogans in §0.0 are TAKY's parent principles.
+- The Shepherding Cooperative Execution Model (`TAKY2/SHEPHERDING_COOPERATIVE_EXECUTION_MODEL_V1.md`) is a subordinate control/execution model under TAKY; it SHALL NOT replace TAKY identity, the USER Key or the parent slogans.
+- The Guiding Cycle (§0.0A), AI5 (§5), the five hard gates (§0.2C) and the control roles (§0.2B) are distinct models; none replaces another.
+
+### 0.2B Shepherding Control Plane / ROLE != AGENT
+Canonical control roles: `NAVIGATOR` (direction / scope / owner alignment), `GUARDIAN` (integrity / authority / evidence / boundary), `DRIVER + SAVEY_AI_ECONOMY` (momentum + total-cost efficiency), `SCOUT` (material unknowns / evidence / alternatives).
+
+- Control roles are control functions, not permanent agents. Invoking them SHALL NOT require spawning one agent or AI call per role.
+- `ROLE != AGENT`. `OWNER != ROUTER`. `TOOL != AUTHORITY`.
+- role = required responsibility; actor/agent/tool = who/what performs it; semantic owner = who owns the meaning; authority = who may approve/change it.
+- Current default actor bindings are inherited from V2 until a verified promotion changes them. Default bindings are replaceable routes; vendor/model names SHALL NOT define role ontology.
+- Where independent verification is required, the executor SHALL NOT self-certify the same claim.
+- Conflict precedence (V2 §9) is precedence, not call sequence; DRIVER SHALL NOT override GUARDIAN/NAVIGATOR integrity to gain speed or reduce cost.
+
+### 0.2C Five hard gates — exact
+The hard gates are exactly `KEY / CONTEXT / ROUTE / COST / DONE`.
+
+- `NECESSITY` is a decision step inside `COST` / DRIVER+SAVEY_AI_ECONOMY. It SHALL NOT become a sixth hard gate.
+- DRIVER (planning/routing) and the COST gate (enforcement) consume one shared economy policy (`SAVEY_AI_ECONOMY_POLICY`); two diverging economy policies are a defect. The single runtime evaluator remains implementation-OPEN (V2 §8); this rule SHALL NOT be reported as mechanically enforced until implemented and verified.
+
+### 0.2D DRIVER + SAVEY_AI_ECONOMY
+Canonical policy order (V2 §4): `NECESSITY -> REUSE / CACHE -> LOCAL / DETERMINISTIC -> EXISTING SUBSCRIPTION / AUTH -> BATCH / CONTEXT REUSE -> LOWEST SUFFICIENT CAPABILITY -> PAID / EXTERNAL ROUTE`.
+
+- MASTER execution protection (not V2 verbatim): the paid/external route is taken only if justified + authorized, and is followed by `EXECUTE -> VERIFY -> ACCOUNT FOR RESOURCE COST`. Resource cost includes human attention, duplicate work and rework, not only money/tokens.
+- Candidate reorderings of this sequence (e.g. in the V3 candidate) remain CANDIDATE until promoted.
+- Acceptance-quality floor (V2 §4 meaning; MASTER wording): `CHEAPEST != CHEAPEST_SUFFICIENT`. Cost saving SHALL NOT lower acceptance criteria, authority, safety or evidence quality.
+- `SAVEY_AI_ECONOMY != SAVEY_FAMILY_FINANCE` (V2 §7). A shared brand string SHALL NOT imply shared semantic ownership.
+
+### 0.2E Beta / Alpha / TAKY2 division
+- `BETA = EVIDENCE / DEFENSE / FROZEN REALITY`; not live execution authority, not semantic owner.
+- `ALPHA = SEMANTIC OWNER / WHOLE-SYSTEM OWNERSHIP MAP`; resolves meaning and owner, does not make CURRENT or HANDOFF the owner.
+- `TAKY2 = COMPACT CROSS-CUTTING ENFORCEMENT KERNEL`; SHALL NOT absorb OS/DOMAIN/PROJECT semantics or become a semantic mega-framework.
+- GRAND MASTER / OS / DOMAIN / PROJECT owners retain their specialized meaning.
+
+### 0.2F Semantic owner first
+- Resolve the applicable semantic owner before material domain/app action; unknown owner remains an explicit `OWNER_GAP`, never a guess.
+- Routing, hosting, delegation or material transfer SHALL NOT transfer semantic ownership.
+- A lower layer, router, implementation host or tool SHALL NOT silently redefine a higher owner's meaning.
+
+### 0.2G CURRENT / HISTORY / HANDOFF / CANONICAL
+- `CANONICAL` = promoted meaning/rules.
+- `CURRENT` = live OPEN work only; operational view, not semantic authority.
+- `HISTORY / EVIDENCE` = immutable disposition and lineage; proves lineage, not present ownership. Leaving Active CURRENT is not history deletion.
+- `HANDOFF` = recovery pointer, not authority (§12).
+- New findings enter CURRENT/CANDIDATE before Canonical. If CURRENT conflicts with Canonical, Canonical wins and the conflict is recorded as a CURRENT CONFLICT item.
+- Resume principle: read back Canonical + CURRENT first, inherit CLOSED/PROMOTED dispositions, and proceed OPEN-only; do not re-audit closed scope without concrete regression evidence.
+- Startup readback: before material mutation, read back the designated canonical and CURRENT surfaces (§2) and verify the live repository ref. Memory or an old chat is not sufficient startup authority; an unverified readback blocks material mutation.
+
+### 0.2H Completion-state semantics
+`RULE WRITTEN != RULE ENFORCED != FEATURE IMPLEMENTED != TECHNICALLY VERIFIED != USER INTENT VERIFIED != USER CONFIRMED` (V2 §8).
+
+- `TECHNICALLY_DELIVERED` (implementation + required evidence/verification) and `USER_CONFIRMED` (explicit USER confirmation) are distinct state semantics; one SHALL NOT be reported as the other. These are distinction/compatibility labels only; any two-stage completion policy built on them remains CANDIDATE until promoted.
+- This distinction does not weaken §6 approval levels or any applicable approval policy, and does not change current DONE gate semantics; USER confirmation is required where authority/policy requires it.
+- `USER != DEBUGGER`: routine verification, recovery and diagnosis remain system-side (§0.0A, §7.2).
+
+### 0.2I No automatic promotion of discovery / mining / index / learning outputs
+- Discovery, mining, index and learning outputs are EVIDENCE/CANDIDATE. They SHALL NOT be automatically promoted to Canonical, MASTER or a global rule.
+- Domain-owned learning stays with its domain owner and SHALL NOT be globalized by recurrence (§1.1, §22.1).
+
 ## 1. Architecture, Scope & Authority
 GRAND MASTER governs cross-system authority, scope, evidence, validation, approval, privacy, revision, traceability, recovery, evolution and source-of-truth rules. Lower layers specialize execution but SHALL NOT silently weaken higher authority.
 
@@ -145,7 +213,8 @@ Current structural baseline:
 - a shared technical capability layer may own semantic-light mechanisms only;
 - Learning App Family is subordinate to Learning OS and owns cross-app learning-family semantics;
 - Ready & Set / Hide & Seek / Snap & Pop remain project owners of their specialized product behavior;
-- platform adapters do not become domain/product authority.
+- platform adapters do not become domain/product authority;
+- cross-cutting planes (§0.2: Beta evidence, Alpha semantic map, TAKY2 enforcement kernel, Shepherding control plane) are recorded as pointers to their owners, and unregistered whole-system owners are recorded as explicit `OWNER_GAP` entries rather than guessed.
 
 `OWNER MAP != NEW MASTER AUTHORITY`.
 `SHARED TECHNICAL PRIMITIVE != SHARED DOMAIN SEMANTIC`.
@@ -153,6 +222,8 @@ Current structural baseline:
 ## 2. Source of Truth & Storage Authority
 GitHub TAKY = CANONICAL MASTER SOURCE.
 Google Drive = WORKING / MIRROR / REFERENCE SURFACE.
+Designated Drive `START HERE` / `CANONICAL` / `CURRENT` documents are mandatory USER-approved collaboration/operational readback surfaces (§0.2G). Their designation does not make arbitrary Drive files canonical and does not transfer the canonical MASTER source.
+If designated Drive and GitHub canonical artifacts materially disagree at resume, record a `CONFLICT` and block material mutation until authority is reconciled; do not guess which one wins.
 ChatGPT = WORKING INTERFACE.
 Mobile/Web/runtime systems consume approved canonical governance according to implementation policy.
 
@@ -469,6 +540,7 @@ Operational details remain governed by `MASTER/HANDOFF_PROTOCOL.md`.
 ## 13. State, Lifecycle, Memory, History & Revision
 Lifecycle:
 `DRAFT → CANDIDATE → VALIDATED → APPROVED → COMMITTED → RELEASED → SUPERSEDED`.
+This artifact-revision lifecycle is distinct from the CURRENT item lifecycle (designated CURRENT semantics, §0.2G) and the execution task lifecycle (`AGENTS.md`); shared tokens such as `CANDIDATE` / `SUPERSEDED` SHALL NOT be mapped across them.
 
 Memory levels remain L0 TURN / L1 TASK / L2 PROJECT / L3 APPROVED PROJECT KNOWLEDGE / L4 DOMAIN / L5 MASTER GOVERNANCE.
 MEMORY = ROUTING/RECOVERY AID ≠ CANONICAL AUTHORITY. Do not store the entire TAKY system in conversational memory; retrieve canonical rules/evidence on demand.
