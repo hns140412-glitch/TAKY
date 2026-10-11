@@ -144,3 +144,7 @@ Supersedes the digest/runtime figures above (85474…/v11 are historical).
 - Drive CURRENT §22 records this delta; header figures refreshed; duplicate 15/16 labels renumbered 18-21
 - Known gap: ENFORCEMENT user_authorized_development has no live caller
 - No push / merge / deploy / Netlify publish.
+- Codex UTF-8 CAPTURE RECHECK: VERDICT PASS / FINDINGS NONE
+  receipt pf:taky2-v3-utf8-capture-codex-20261011:f3c55cb07097b782
+  result TAKY2/TAKY2_V3_UTF8_CAPTURE_CODEX_RESULT_20261011.json (full stderr captured post-fix)
+- all V3 implementation deltas now have independent PASS; promotion still awaits explicit USER decision

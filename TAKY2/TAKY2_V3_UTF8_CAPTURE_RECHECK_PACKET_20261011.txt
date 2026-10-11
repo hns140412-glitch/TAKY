@@ -1,0 +1,130 @@
+TAKY 2.0 V3 — UTF-8 CAPTURE FIX MICRO INDEPENDENT RECHECK
+READ ONLY. USE ONLY THIS PACKET. NO REPOSITORY/TOOLS/WEB/SHELL.
+
+CONTEXT
+The prior final micro recheck (receipt pf:taky2-v3-final-micro-codex-20261011:3dad5028561f0e7d) returned PASS.
+During that run, Python's subprocess reader thread raised UnicodeDecodeError (Windows cp949 locale) on the Codex CLI's UTF-8 stderr.
+With text=True and no encoding, a decode failure leaves completed.stdout/stderr as None, which subprocess_runner then maps to "".
+Consequence: an external review verdict could be silently lost while returncode=0 is persisted as RETURNED (evidence loss).
+The Codex path survived only because it reads a bridge-owned last-message file; the Claude PACKET_ONLY path has no such fallback.
+
+FIX (only change): run_kwargs gains encoding="utf-8", errors="replace".
+This also makes stdin `input=` text encode as UTF-8 instead of the locale codec; the tempfile stdin path already used UTF-8.
+
+LOCAL EVIDENCE
+- new regression test failed before the fix and passes after it
+- full TAKY2: 213 passed + 54 subtests; py_compile PASS; git diff --check PASS
+- committed locally as part of 4547e276 (no push/merge/deploy)
+
+RECHECK QUESTION
+Does this fix close the evidence-loss defect without creating a new BLOCKER/HIGH/MEDIUM issue
+(e.g. replacement characters altering a verdict, digest/receipt semantics, stdin encoding regressions)?
+Do not reopen unrelated architecture.
+
+OUTPUT EXACTLY:
+VERDICT: PASS | HOLD
+FINDINGS:
+- [SEVERITY] concrete issue - material consequence - minimal fix
+If no BLOCKER/HIGH/MEDIUM: FINDINGS: NONE
+CHECKED:
+- concise scenarios
+
+CURRENT CODE (subprocess_runner excerpt):
+    stdin_file = None
+    try:
+        run_kwargs = {
+            "shell": False,
+            "text": True,
+            # Model CLIs emit UTF-8; a locale codec (e.g. cp949) would crash the
+            # reader thread and silently drop stdout/stderr evidence.
+            "encoding": "utf-8",
+            "errors": "replace",
+            "capture_output": True,
+            "check": False,
+            "timeout": timeout_sec,
+        }
+        if cwd is not None:
+            run_kwargs["cwd"] = cwd
+
+        minimal_env_mode = invocation.get("minimal_env")
+        if minimal_env_mode in {True, "packet", "codex"}:
+            if env_override is not None:
+                raise BridgeViolation("minimal_env execution does not allow env overrides")
+            run_kwargs["env"] = (
+                _minimal_codex_env()
+                if minimal_env_mode == "codex"
+                else _minimal_packet_env()
+            )
+        elif minimal_env_mode not in {None, False}:
+            raise BridgeViolation("unknown minimal_env mode")
+        elif invocation.get("scrub_api_keys") is True or env_override is not None:
+            child_env = (
+                _scrubbed_external_env()
+                if invocation.get("scrub_api_keys") is True
+                else os.environ.copy()
+            )
+            if env_override is not None:
+                child_env.update(dict(env_override))
+            run_kwargs["env"] = child_env
+
+        if stdin_text is None:
+            run_kwargs["stdin"] = subprocess.DEVNULL
+        elif invocation.get("stdin_transport") == "tempfile":
+            # Some Windows model CLIs do not reliably consume a Python PIPE.
+            # Use a seekable temporary file as stdin without exposing packet text
+            # in argv or persisting it in the target repository.
+            stdin_file = tempfile.TemporaryFile(
+                mode="w+t",
+                encoding="utf-8",
+                newline="",
+            )
+            stdin_file.write(stdin_text)
+            stdin_file.seek(0)
+            run_kwargs["stdin"] = stdin_file
+        else:
+            run_kwargs["input"] = stdin_text
+        completed = subprocess.run(argv, **run_kwargs)
+
+    ... (timeout handling unchanged) ...
+
+    captured_stdout = completed.stdout if isinstance(completed.stdout, str) else ""
+    captured_stderr = completed.stderr if isinstance(completed.stderr, str) else ""
+    if bridge_last_message_path is not None:
+        try:
+            final_message = Path(bridge_last_message_path).read_text(
+                encoding="utf-8",
+                errors="replace",
+            )
+        except FileNotFoundError:
+            final_message = ""
+        if final_message.strip():
+            captured_stdout = final_message
+
+    return {
+        "returncode": completed.returncode,
+        "stdout": captured_stdout,
+        "stderr": captured_stderr,
+    }
+
+REGRESSION TEST:
+def test_subprocess_runner_decodes_utf8_output_independent_of_locale():
+    import sys
+    from TAKY2.bridges import subprocess_runner
+
+    # Model CLIs emit UTF-8 (e.g. em dash); a locale codec such as cp949 must
+    # not silently drop stdout/stderr evidence.
+    result = subprocess_runner({
+        "argv": [
+            sys.executable,
+            "-c",
+            (
+                "import sys; "
+                "sys.stdout.buffer.write('VERDICT: PASS \\u2014 ok\\n'.encode('utf-8')); "
+                "sys.stderr.buffer.write('banner \\u2014 \\u2713\\n'.encode('utf-8'))"
+            ),
+        ],
+        "timeout_sec": 5,
+    })
+    assert result["returncode"] == 0
+    assert result["stdout"] == "VERDICT: PASS — ok\n"
+    assert result["stderr"] == "banner — ✓\n"
