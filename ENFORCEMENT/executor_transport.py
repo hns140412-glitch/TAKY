@@ -217,6 +217,15 @@ def validate_retry(envelope: dict, previous_receipt: dict, retry_request: dict) 
 
     retry_attempt = retry_request.get("retry_attempt")
     retry_budget = effect_policy.get("retry_budget")
+
+    previous_failure_signature = str(previous_receipt.get("failure_signature", "")).strip()
+    retry_failure_signature = str(retry_request.get("failure_signature", "")).strip()
+    new_evidence_refs = retry_request.get("new_evidence_refs")
+    strategy_changed = retry_request.get("strategy_changed") is True
+    if previous_failure_signature and retry_failure_signature == previous_failure_signature:
+        has_new_evidence = isinstance(new_evidence_refs, list) and any(str(x).strip() for x in new_evidence_refs)
+        if not has_new_evidence and not strategy_changed:
+            detected.append("RETRY_BLOCKED_SAME_FAILURE_NO_NEW_EVIDENCE")
     if (
         not isinstance(retry_attempt, int)
         or isinstance(retry_attempt, bool)

@@ -188,7 +188,13 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
     # Prevents hosted validation/deploy/status APIs from being used as a substitute for
     # branch/local/CI closure and blocks repeated external calls without new evidence.
     if b(r,"external_resource_action"):
-        budget=max(1,i(r,"external_call_budget",1))
+        # Authorized development iterations are not single-use calls. Restrict
+        # bulk/repeated waste, not normal implementation and verification.
+        approved_dev = (b(r,"user_authorized_development")
+            and not b(r,"paid_api_call") and not b(r,"deployment_attempted")
+            and not b(r,"destructive_action"))
+        default_budget = 8 if approved_dev else 1
+        budget=max(1,i(r,"external_call_budget",default_budget))
         used=i(r,"external_call_count_for_same_goal")
         if used > budget and not b(r,"explicit_override_approved"):
             f.append("RULE_NOT_APPLIED")
@@ -403,13 +409,44 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
                     f.append("STATE_CLAIM_MISMATCH")
 
             elif profile=="UI_IMPLEMENTATION":
-                for key in ["project_reference_checked","responsive_states_defined","accessibility_check_defined"]:
+                for key in [
+                    "project_reference_checked",
+                    "responsive_states_defined",
+                    "accessibility_check_defined",
+                    "browser_render_check_defined",
+                    "reference_visual_compare_defined",
+                    "responsive_visual_matrix_defined",
+                    "core_flow_e2e_defined",
+                    "console_error_check_defined",
+                    "predeploy_visual_gate_defined",
+                    "deployed_url_revalidation_defined",
+                    "device_final_gate_defined",
+                ]:
                     if ec.get(key) is not True:
                         f.append("RULE_NOT_APPLIED")
                 if not str(ec.get("design_contract_ref","")).strip():
                     f.append("RULE_NOT_APPLIED")
+                if not str(ec.get("browser_validation_tool","")).strip():
+                    f.append("RULE_NOT_APPLIED")
+                if not has_refs(ec,"visual_evidence_refs"):
+                    f.append("RULE_NOT_APPLIED")
                 if b(ec,"external_style_as_project_authority"):
                     f.append("AUTHORITY_BOUNDARY_VIOLATION")
+                if b(ec,"deployment_performed"):
+                    if ec.get("predeploy_visual_gate_passed") is not True:
+                        f.append("RULE_NOT_APPLIED")
+                    if ec.get("deployment_human_approval_present") is not True:
+                        f.append("HUMAN_APPROVAL_MISSING")
+                if b(ec,"claims_deploy_pass"):
+                    if ec.get("deployed_url_revalidation_passed") is not True:
+                        f.append("STATE_CLAIM_MISMATCH")
+                    if not has_refs(ec,"deploy_evidence_refs"):
+                        f.append("STATE_CLAIM_MISMATCH")
+                if b(ec,"claims_device_verified"):
+                    if ec.get("device_final_gate_passed") is not True:
+                        f.append("STATE_CLAIM_MISMATCH")
+                    if not has_refs(ec,"device_evidence_refs"):
+                        f.append("STATE_CLAIM_MISMATCH")
 
     # Outcome-first gate: validation may not displace available result improvement.
     if b(r,"outcome_optimization_required"):
@@ -442,7 +479,24 @@ def validate_record(r: Dict[str, Any]) -> List[str]:
 
     if b(r,"user_had_to_recover") and b(r,"source_recoverable_by_taky",True):
         f += ["USER_FORCED_RECOVERY","USER_AS_QA"]
-    if b(r,"post_correction_reoccurrence"): f.append("POST_CORRECTION_REOCCURRENCE")
+
+    # User-correction recurrence gate.
+    # Once the user has explicitly corrected a material behavior, repeating the
+    # same mistake class is a hard recurrence violation, not an ordinary retry.
+    if b(r,"user_correction_applies"):
+        correction_id = str(r.get("user_correction_id","")).strip()
+        mistake_class = str(r.get("corrected_mistake_class","")).strip()
+        if not correction_id or not mistake_class:
+            f.append("RULE_NOT_APPLIED")
+        if b(r,"same_corrected_mistake_reoccurred"):
+            f.append("POST_CORRECTION_REOCCURRENCE")
+        if b(r,"correction_loaded_but_not_applied"):
+            f.append("WRONG_REFLECTION")
+        if b(r,"user_had_to_repeat_same_correction"):
+            f += ["POST_CORRECTION_REOCCURRENCE","USER_AS_QA"]
+
+    if b(r,"post_correction_reoccurrence"):
+        f.append("POST_CORRECTION_REOCCURRENCE")
 
     if b(r,"explicit_full_global_scan"):
         if not b(r,"source_family_inventory_complete"): f.append("OMISSION")
