@@ -141,3 +141,44 @@ Repository implementation can:
 Google Drive desktop authentication, local folder selection and OS-level sync status remain platform/client responsibilities.
 
 END
+
+
+## 10. Current Drive presentation layout — 2026-10-07
+
+The current physical TAKY root is intentionally shallow:
+
+```text
+TAKY/
+├─ 00_CONTEXT/
+├─ 10_DOMAINS/
+├─ 20_PLATFORM/
+└─ 90_MAINTENANCE/
+```
+
+Do not recreate the historical flat root. Current semantic routes are resolved through `OS/DRIVE_STORAGE_MAP.json`; use `ENFORCEMENT/drive_route_resolver.py` when a tool needs a current Drive path or folder ID.
+
+Examples:
+- HNS Learning → `TAKY/10_DOMAINS/01_LEARNING`
+- HNS UI source authority → `TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY`
+- SIEZEALL updates/distribution → `TAKY/20_PLATFORM/03_UPDATES`
+- temporary/legacy HOLD → `TAKY/90_MAINTENANCE/90_TEMP`
+
+`00_CONTEXT` remains directly under TAKY by user decision. Stable leaf folder IDs are preserved even when their physical parent changes.
+
+## 11. Durable local work product default — user direction 2026-10-10
+
+**Default:** all material outputs produced on the local PC for TAKY-governed tasks SHALL be written directly into an **existing Google Drive for desktop synchronized role folder**, or copied there and hash-verified immediately as part of the same task. A file left only on `D:\Git PWA\...` is a local working change, **not** a complete durable work-product handoff.
+
+For this HNS workstation, currently verified existing synchronized role locations:
+- `F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\02_CURRENT`: task CURRENT / status / pointers (one writer).
+- `F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\03_HANDOFF`: user-facing handoff notes / review artifacts.
+- `F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\04_HISTORY`: evidence / test receipts / immutable reports.
+- `F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\01_INBOX\AI_TASKS`: existing prepared executor requests; prepared != executed.
+
+Use the logical semantic role and `OS/DRIVE_STORAGE_MAP.json` for other source/asset/domain destinations. HNS approved original assets still go to the mapped HNS `UI_SOURCE_AUTHORITY` role; user-provided SIEZEALL reference inbox keeps its **own Drive folder ID** and MUST NOT be mapped to HNS F: as a shortcut. No duplicate TAKY root or cross-account authority drift.
+
+**Exceptions (existing contract retained):** Git source working trees, `.git`, package caches, temporary browser profiles, ephemeral build files and high-churn rendering intermediates remain outside Drive sync. Changes to Git source must additionally produce a hash-checked Drive-synced manifest/result receipt with exact repo path/HEAD and explicitly distinguish `LOCAL_EDIT_ONLY` from remote GitHub push. Never claim GitHub and Drive were synchronized merely because a local receipt was written.
+
+**Write/verification contract:** choose role folder first → write durable content or publish a completed working file → compare local/destination SHA-256 → record source/role/path/time/sha in receipt → for cloud-sync completion claim, verify remote Google Drive file ID and readback (local DriveFS existence alone proves only local mounted writing). If sync fails, mark `LOCAL_DURABLE_WRITE_OK / CLOUD_READBACK_OPEN`; do not quietly promote to FULL SYNC PASS.
+
+Never overwrite a different artifact sharing the same name; use task-unique names or version conflict resolution. Never relocate an active dirty worktree or rewrite any previously approved master while adopting this default.

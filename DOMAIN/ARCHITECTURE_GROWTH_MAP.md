@@ -58,16 +58,23 @@ Missing flesh:
 Target:
 `SELECTED PURSUIT OPTION -> BIM/CAD -> AREA/LAW QA -> DETAIL -> QTO/COST -> REVIEW/PERMIT -> FIELD/RFI -> AS-BUILT/LESSON`.
 
-Current maturity: **SKELETON**.
+Current maturity: **PRODUCTION TRACE MVP IMPLEMENTED / LIVE TOOL & PROJECT BINDING OPEN**.
 
-Missing flesh:
-- pursuit-to-BIM object continuity;
-- drawing/area cross-check;
-- Detail Brain;
-- Cost Brain;
-- review/permit response trace;
-- RFI/field-change capture;
-- completion/outcome feedback.
+Implemented foundation:
+- seven-stage production trace from BIM/CAD through as-built/lesson;
+- project/selected-option/object lineage and explicit change evidence;
+- deterministic chain/order/failure guards;
+- cost/QTO source requirements;
+- permit authority-evidence requirements;
+- RFI/field-change evidence capture contract;
+- completed trace -> CASE-only learning candidate.
+
+Remaining:
+- live pursuit-to-CAD/BIM object continuity;
+- real drawing/area reverse-check across project sheets;
+- Detail Brain/library;
+- Cost/QTO/VE data adapters;
+- live review/permit and RFI/field/as-built ingestion.
 
 ## 4. Data and source fabric
 
@@ -102,15 +109,23 @@ Required:
 - cost/VE outcomes;
 - client/pursuit outcomes.
 
-Current maturity: **PARTIAL CONCEPT**.
+Current maturity: **SCHEMA / COLLECTOR IMPLEMENTED — REAL PROJECT INGEST OPEN**.
 
-Missing:
-- Golden Project selection;
-- intake schema;
-- evidence grading;
-- anonymization/access policy;
-- case similarity features;
-- strategy extraction.
+Implemented locally:
+- `DOMAIN/ARCHITECTURE_COMPANY_EVIDENCE_SCHEMA.json`;
+- `TOOLS/ARCHIGROW_PROJECT_LEARN.py` append-only/idempotent intake;
+- evidence grading and confidentiality/anonymization guards;
+- candidate-only Golden Project gate;
+- `RULE/CRITERION -> INTERPRETATION -> DESIGN DECISION -> IMPLEMENTATION MOVE -> RESULT EVIDENCE` trace capture;
+- RAW + LEARNING GROW lineage materialization;
+- deterministic enforcement regression.
+
+Still missing:
+- owner-approved Golden Project selection;
+- initial 20–30 real company/public project pilot ingestion;
+- operational access/anonymization policy on actual confidential sources;
+- populated case-similarity features from real projects;
+- verified project/reviewer/client/permit/cost/field outcome evidence sufficient for strategy promotion review.
 
 ## 5. Law / possibility intelligence
 
@@ -122,15 +137,21 @@ Rule classes:
 - `CONDITIONAL_CONSTRAINT`;
 - `OPPORTUNITY_RULE`.
 
-Current maturity: **DOMAIN PRINCIPLE PRESENT / RUNTIME NOT IMPLEMENTED**.
+Current maturity: **FOUNDATION RUNTIME IMPLEMENTED / LIVE AUTHORITY BINDING PARTIAL**.
 
-Missing:
-- legal source resolver;
-- effective-date/applicability resolver;
-- exception/relaxation/incentive relation graph;
-- project-specific rule set compiler;
-- precedent/official-response evidence binding;
-- design-variable mapping.
+Implemented foundation:
+- governed official-source registry and target-project fact qualification gate;
+- project-specific regulatory rule compiler;
+- evidence-bound applicability receipt contract;
+- explicit-only exception/relaxation/incentive relation graph;
+- design-variable mapping on compiled rules;
+- automatic FEASIBLE claim prohibition.
+
+Remaining:
+- live official-source adapters and effective-date/applicability providers;
+- real target-project regulatory evidence ingestion;
+- precedent/official-response evidence binding where material;
+- project/legal-administrative review remains final authority.
 
 ## 6. Layout / plan intelligence
 
@@ -142,16 +163,21 @@ Target:
 - multi-objective option generation;
 - deterministic geometry and calculation checks.
 
-Current maturity: **SKELETON**.
+Current maturity: **DETERMINISTIC GEOMETRY/KPI MVP IMPLEMENTED / SEARCH & OPTIMIZATION OPEN**.
 
-Missing:
-- Unit/Core/Parking/Program object schemas;
-- geometry kernel/representation;
-- search operators;
-- multi-objective optimization;
-- overlap/boundary/circulation validation;
-- strategy library;
-- option comparison output.
+Implemented foundation:
+- Unit/Core/Parking/Program object schema;
+- deterministic simple-polygon geometry/KPI kernel;
+- self-intersection, site-boundary and overlap HOLD gates;
+- site/GFA/footprint/parking KPI derivation;
+- geometry/KPI PASS explicitly does not authorize legal feasibility.
+
+Remaining:
+- domain-specific circulation/parking/unit/core geometric rules;
+- search operators and multi-objective option generation;
+- strategy/case library;
+- option comparison output;
+- real CAD/BIM geometry binding and reverse validation.
 
 ## 7. Visual context
 
@@ -159,7 +185,7 @@ Goal: persuasive visuals must remain anchored to verified design geometry.
 
 `VERIFIED GEOMETRY -> 3D CONTEXT -> CAMERA/MATERIAL/LANDSCAPE -> AI/RENDER ENHANCEMENT`.
 
-Current maturity: **SKELETON**.
+Current maturity: **GEOMETRY-DRIFT GUARD IMPLEMENTED / REAL 3D-RENDER PIPELINE OPEN**.
 
 Frontier:
 - VWorld/context 3D;
@@ -168,7 +194,51 @@ Frontier:
 - Twinmotion/D5/Enscape/other render;
 - AI enhancement with geometry-drift detection.
 
-## 8. Evidence and benchmarking
+## 8. Result-to-Implementation Growth Loop
+
+ArchiGrow must learn not only from completed outputs, but from how the governing criteria, constraints and rules were interpreted and transformed into the implemented result.
+
+Primary loop:
+`DESIRED RESULT -> QUALITY CRITERIA -> RULE/CONSTRAINT INTERPRETATION -> DESIGN MOVES -> IMPLEMENTATION PATH -> ACTUAL RESULT -> GAP ANALYSIS -> WHY IT WORKED/FAILED -> STRATEGY/RULE UPDATE -> NEXT RESULT`.
+
+Required review dimensions when materially relevant:
+- target/result fit;
+- design logic and narrative coherence;
+- rule/law/constraint resolution method;
+- area/FAR/parking/KPI consequences;
+- spatial/form quality;
+- buildability / structure / material implications;
+- environmental/passive-performance implications;
+- visual communication and diagram quality;
+- implementation efficiency / rework avoided;
+- client/user/reviewer response;
+- failure cause and missed assumptions.
+
+The system should preserve the relationship:
+`RULE/CRITERION -> INTERPRETATION -> DESIGN DECISION -> IMPLEMENTATION MOVE -> RESULT EVIDENCE`.
+
+This trace is a growth asset. Do not store only the final image, drawing, model or report.
+
+Promotion vocabulary and semantic meaning are owned by `DOMAIN/ARCHITECTURE_WORK_OS.md` §7. This growth map only tracks maturity/evidence and candidate routing:
+- repeated evidence-backed success -> `CURRENT_BEST` candidate, still requiring the owner-defined approval path;
+- promising but insufficiently validated method -> `FRONTIER` candidate;
+- reusable reasoning method with context/trade-offs -> `STRATEGY` candidate;
+- failed or degraded result with diagnosed cause -> `FAILURE/LESSON`;
+- one-off project observation -> `CASE`.
+
+Quality improvement behavior:
+- compare the actual output against the intended result, not merely against checklist completion;
+- identify the highest-value gap first;
+- record which rule interpretation or design move caused the gain/loss;
+- update the smallest reusable strategy or skill that would improve the next project;
+- preserve counterexamples and failure conditions so CURRENT_BEST does not become dogma;
+- favor measurable/reviewable evidence over aesthetic assertion alone.
+
+For diagrams/UI/visual deliverables, use:
+`DESIGN INTENT -> VISUAL/INTERACTION CRITERIA -> IMPLEMENT -> SEE ACTUAL RESULT -> COMPARE -> FIX -> PROVE -> LEARN`.
+The visual layer should make `WHY THIS DESIGN?` and `HOW THIS RESULT WAS ACHIEVED?` legible, not merely decorative.
+
+## 9. Evidence and benchmarking
 
 Use:
 - company projects;
@@ -196,6 +266,16 @@ Hosted conversation runtime:
 
 This boundary must remain explicit.
 
+### Design/output execution contract — current maturity
+
+- Cross-format DESIGN_GATE DG-00..DG-10: IMPLEMENTED CONTRACT.
+- DESIGN_PRODUCTION_SPEC PS-00..PS-23: IMPLEMENTED CONTRACT.
+- Architecture output-profile thresholds / actual-size checks: INTEGRATED AS EVIDENCE-DRIVEN PROFILE RULES.
+- Actual automated A3/PPT/XLSX/web generation across all project types: PARTIAL / RUNTIME-SPECIFIC OPEN.
+- Recipient-machine PPT font fidelity, physical-device/browser UI verification and project-specific source closure remain separate runtime evidence; contract completion SHALL NOT be reported as runtime completion.
+
+Next growth should prioritize representative real-output application/validation and source closure before adding more generic design rules.
+
 ## 10. Next build priorities
 
 ### P0 — Company evidence foundation
@@ -219,10 +299,17 @@ This boundary must remain explicit.
 5. KPI comparison.
 
 ### P1 — Pursuit output
-1. context 3D;
-2. visual pipeline;
-3. A3/PPT/web option comparison;
-4. client-change iteration loop.
+1. sketch/reference image -> 2D drawing/CAD reconstruction pipeline;
+2. 2D drawing -> 3D mass/model pipeline;
+3. verified model -> exterior CG/render pipeline with geometry-drift guard;
+4. plan/model -> interior perspective pipeline;
+5. CAD/DXF/DWG -> canonical SVG -> A3/PPT/web vector-delivery pipeline;
+6. architecture-competition brief -> design argument -> drawing representation -> report/panel package pipeline;
+7. context 3D and visual pipeline;
+8. A3/PPT/web option comparison;
+9. client-change iteration loop.
+
+Competition-representation capability now has an ACTIVE registry/playbook/recommender plus result-specific A1/A3/PPT/PDF builder, source binder, renderer, visual-quality registry/gate, mechanical page/size/hash validation, Korean presentation typography/copy hierarchy, and one-shot runner. These execution paths are mechanically verified with test fixtures, but project-specific visual/source fidelity remains evidence-bound and must be reviewed on each real project. Next maturity step is to ingest real company/public competition outcomes and reviewer feedback as artifact-granular CASE/STRATEGY/FAILURE evidence before any technique is promoted to CURRENT_BEST.
 
 ### P1 — Learning loop
 1. project outcome capture;

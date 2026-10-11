@@ -65,6 +65,20 @@ Do not claim `A3 PASS` merely because worksheet/page-style metadata was written.
 
 If a generated spreadsheet/report claims both compact one-page summary sheets and multi-page detail sheets, validate those output classes separately.
 
+## 2.2 DESIGN GATE / PRODUCTION SPEC BINDING
+
+For material architecture outputs such as editable PPTX, XLSX, A3/PDF report sheets or equivalent publishable artifacts, use the applicable current REFERENCE_MINING_INDEX / DESIGN_GATE / DESIGN_PRODUCTION_SPEC contract as an execution/QA overlay.
+
+Domain boundary:
+- source geometry, project facts, calculations and official/legal authority remain owned here and by their actual source;
+- result-specific layout/output rules remain format-specific (A3 != PPTX != XLSX != mobile UI);
+- the owning output profile may supply quantitative thresholds such as grid, drawing/text ratio, raster minimum or readable type size; those thresholds SHALL NOT be generalized outside that profile;
+- actual delivery-size/surface review remains required where physical/page output is material;
+- source/spec/artifact hashes and revision dependencies invalidate stale output receipts after a material change;
+- mechanical file-open/print-setting PASS does not replace source-to-output and final visual/readability checks.
+
+Current deterministic UI_IMPLEMENTATION enforcement does not imply a PPTX/XLSX runtime enforcement profile. Architecture document outputs remain Work OS + DS-QA contract-governed unless a future separately authorized enforcement change is made.
+
 ## 3. ARCHITECTURE PROCESS MODEL — CANDIDATE
 `SITE / PLANNING FACT → MASS / PROGRAM → AREA / PARKING / FAR → INCENTIVE → DESIGN → LEGAL / ADMINISTRATIVE ROUTING → REVIEW / APPROVAL → CHANGE IMPACT`
 
@@ -124,6 +138,12 @@ The current architecture skeleton-to-flesh status, maturity gaps and build prior
 
 The conversation-derived source ledger for the 2026-09-19 architecture-system design episode is:
 - `HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json`.
+
+Subordinate execution routes (load when architecture production is material; they do not own domain semantics):
+- `DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md` — result -> toolchain -> quality-gate routes;
+- `DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md` — stage contract / receipt / restart-from-last-PASS;
+- `DOMAIN/ARCHITECTURE_COMPETITION_REPORT_PLAYBOOK.md` + `DOMAIN/ARCHITECTURE_COMPETITION_REPRESENTATION_REGISTRY.json` + `DOMAIN/ARCHITECTURE_COMPETITION_ARTIFACT_SCHEMA.json` — competition report/panel drawing representation execution knowledge and artifact-granularity learning contract;
+- `OS/WORKSTATION_CONTROL.md` + `OS/WORKSTATION_CAPABILITY_REGISTRY.md` — PC/CAD/Excel/HWP action authority and verified tools.
 
 These files do not override this domain owner. The Growth Map directs unfinished capability development; the C2S ledger preserves requirement/correction/frontier lineage and coverage evidence.
 

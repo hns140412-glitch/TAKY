@@ -1,0 +1,121 @@
+{
+  "registry_id": "TAKY_GROW_DOMAIN_REGISTRY_V1",
+  "status": "ACTIVE_LOCAL_VERIFIED",
+  "owner": "TAKY_GROW_CORE",
+  "shared_core": {
+    "contract": "DOMAIN/TAKY_GROWTH_LINEAGE_CONTRACT.md",
+    "engine": "ENFORCEMENT/growth_lineage_engine.py",
+    "current_index": "CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+    "canonical_loop": [
+      "RAW",
+      "INDEX",
+      "LEARNING",
+      "RELATION",
+      "EXECUTION",
+      "OUTCOME",
+      "GROWTH"
+    ],
+    "owns": [
+      "lineage_integrity",
+      "typed_relation_contract",
+      "growth_promotion_gate",
+      "failure_to_regression_bridge",
+      "cross_domain_growth_routing"
+    ],
+    "does_not_own": [
+      "domain_truth",
+      "project_geometry",
+      "learner_strategy_decision",
+      "project_specific_quality_thresholds"
+    ]
+  },
+  "domains": {
+    "ARCHI_GROW": {
+      "display_name": "ArchiGrow",
+      "scope": [
+        "architecture",
+        "design_competition",
+        "drawing",
+        "report",
+        "presentation",
+        "bim",
+        "rhino",
+        "grasshopper",
+        "workflow"
+      ],
+      "domain_owner": "ARCHITECTURE_WORK_OS",
+      "growth_map": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+      "skill": ".claude/skills/archi-grow/SKILL.md",
+      "outcome_classes": [
+        "artifact_quality",
+        "drawing_accuracy",
+        "workflow_efficiency",
+        "review_feedback",
+        "competition_result"
+      ],
+      "promotion_boundary": "Project/source truth remains architecture-owned; GROW only evaluates growth eligibility."
+    },
+    "LEARNING_GROW": {
+      "display_name": "Learning Grow",
+      "scope": [
+        "learning_engine",
+        "ready_set",
+        "hide_seek",
+        "snap_pop",
+        "review_policy",
+        "memory_signal",
+        "planner_feedback"
+      ],
+      "domain_owner": "LEARNING_ENGINE_CORE",
+      "family_owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "growth_ledger": "LEARNING/lifecycle/growth-strategy-ledger.js",
+      "outcome_feedback": "LEARNING/lifecycle/outcome-growth-feedback.js",
+      "outcome_classes": [
+        "verified_learning_outcome",
+        "assistance_change",
+        "retrieval_success",
+        "persistent_gap",
+        "strategy_feedback"
+      ],
+      "sub_layers": {
+        "LEARNER_GROWTH": "Learner evidence changes review/support/challenge candidates.",
+        "LEARNING_SYSTEM_GROWTH": "Repeated verified outcomes may justify engine strategy review."
+      },
+      "promotion_boundary": "Learner success/failure never directly promotes system policy; strategy changes remain review-gated."
+    },
+    "SYSTEM_GROW": {
+      "display_name": "System Grow",
+      "scope": [
+        "ai_orchestration",
+        "source_acquisition",
+        "mining",
+        "indexing",
+        "governance",
+        "automation",
+        "toolchain",
+        "reference_intake",
+        "cost_gate",
+        "necessity_gate"
+      ],
+      "domain_owner": "TAKY_SYSTEM_CORE",
+      "outcome_classes": [
+        "source_coverage",
+        "routing_accuracy",
+        "verification_quality",
+        "automation_reliability",
+        "cost_efficiency",
+        "toolchain_quality"
+      ],
+      "promotion_boundary": "System/tool evidence may improve orchestration and acquisition candidates; it does not transfer authority into architecture or learner policy."
+    }
+  },
+  "routing_rules": [
+    "Architecture evidence routes to ARCHI_GROW.",
+    "Learning-app/learner evidence routes to LEARNING_GROW.",
+    "TAKY system/orchestration/mining/indexing evidence routes to SYSTEM_GROW.",
+    "Cross-domain evidence may create typed relations but may not transfer domain authority.",
+    "A domain may emit GROWTH candidates; only GROW CORE applies shared promotion gates.",
+    "CURRENT_BEST is scope-specific, never a single global winner across unrelated domains."
+  ],
+  "future_domain_rule": "New Grow domains register here and reuse shared lineage/growth gates instead of creating a second promotion engine."
+}

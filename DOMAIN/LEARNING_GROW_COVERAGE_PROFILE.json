@@ -1,0 +1,63 @@
+{
+  "schema": "LEARNING_GROW_COVERAGE_PROFILE_V1",
+  "authority": "OS/GUIDE_FAMILY_LEARNING_OS.md + MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md + current subject-owner lineage",
+  "purpose": "Measure verified learning-evidence breadth without pretending that generic engine support equals real subject/stage coverage.",
+  "subjects": [
+    {
+      "subject_id": "english",
+      "aliases": [
+        "english",
+        "영어"
+      ]
+    },
+    {
+      "subject_id": "korean",
+      "aliases": [
+        "korean",
+        "국어"
+      ]
+    },
+    {
+      "subject_id": "hanja",
+      "aliases": [
+        "hanja",
+        "한자"
+      ]
+    },
+    {
+      "subject_id": "math",
+      "aliases": [
+        "math",
+        "수학"
+      ]
+    },
+    {
+      "subject_id": "science",
+      "aliases": [
+        "science",
+        "과학"
+      ]
+    },
+    {
+      "subject_id": "social",
+      "aliases": [
+        "social",
+        "사회"
+      ]
+    }
+  ],
+  "learner_stages": [
+    "EARLY_LEARNER",
+    "SCHOOL_AGE",
+    "ADOLESCENT",
+    "ADULT"
+  ],
+  "minimum_verified_outcomes_per_subject": 2,
+  "minimum_distinct_stages_per_subject": 1,
+  "rules": [
+    "ENGINE_SUPPORT != VERIFIED_SUBJECT_COVERAGE",
+    "SYNTHETIC_FIXTURE != REAL_HUMAN_COVERAGE",
+    "UNOBSERVED_SUBJECT_OR_STAGE REMAINS OPEN",
+    "AGE/STAGE TAG MAY ADAPT EXPLANATION DEPTH BUT MUST NOT CHANGE EVIDENCE AUTHORITY"
+  ]
+}

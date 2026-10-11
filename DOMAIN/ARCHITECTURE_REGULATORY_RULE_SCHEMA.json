@@ -1,0 +1,62 @@
+{
+  "schema": "ARCHIGROW_REGULATORY_RULE_SCHEMA_V1",
+  "authority": "DOMAIN/ARCHITECTURE_WORK_OS.md §6 + ARCHITECTURE_SOURCE_REGISTRY_V1",
+  "rule_classes": [
+    "ABSOLUTE_CONSTRAINT",
+    "CONDITIONAL_CONSTRAINT",
+    "OPPORTUNITY_RULE"
+  ],
+  "applicability_status": [
+    "UNKNOWN",
+    "UNVERIFIED",
+    "APPLICABLE",
+    "NOT_APPLICABLE",
+    "CONFLICT_REQUIRES_REVIEW"
+  ],
+  "path_status": [
+    "UNKNOWN",
+    "UNVERIFIED",
+    "CONDITIONAL",
+    "PROMISING",
+    "CURRENTLY_INFEASIBLE",
+    "EXHAUSTED_WITHIN_DEFINED_SEARCH_SPACE"
+  ],
+  "required_rule_fields": [
+    "rule_id",
+    "rule_class",
+    "source_id",
+    "evidence_ref",
+    "source_as_of",
+    "applicability_status",
+    "criterion",
+    "interpretation",
+    "design_variables"
+  ],
+  "hard_guards": {
+    "automatic_feasible_status_forbidden": true,
+    "source_evidence_required": true,
+    "effective_or_observed_date_required": true,
+    "opportunity_rule_requires_approval_route": true,
+    "unverified_rule_never_design_fact": true,
+    "legal_conclusion_authority_transfer": false,
+    "applicable_claim_requires_bound_evidence": true,
+    "applicability_evidence_scope_must_match_rule_project_source": true,
+    "opportunity_relation_targets_required": true,
+    "relation_edges_must_be_explicit_not_inferred": true
+  },
+  "applicability_evidence_authorities": [
+    "OFFICIAL_SOURCE_EFFECTIVE_DATE_MATCH",
+    "OFFICIAL_INTERPRETATION",
+    "PROJECT_REGULATORY_REVIEW"
+  ],
+  "applicability_evidence_required_when": [
+    "APPLICABLE",
+    "NOT_APPLICABLE",
+    "CONFLICT_REQUIRES_REVIEW"
+  ],
+  "relation_types": [
+    "OPPORTUNITY_RELATES_TO",
+    "CONFLICTS_WITH",
+    "DEPENDS_ON"
+  ]
+}

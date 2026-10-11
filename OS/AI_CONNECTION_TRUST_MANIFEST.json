@@ -1,0 +1,134 @@
+{
+  "schema_version": "2026-10-03.1",
+  "owner": "OS/AI_CONNECTION_SECURITY.md",
+  "projection_role": "NON_SEMANTIC_TRUST_PROJECTION",
+  "source_inventory": "OS/AI_CONNECTION_AUDIT.json",
+  "connections": [
+    {
+      "server_id": "playwright-mcp",
+      "purpose": "local browser/runtime inspection and controlled UI automation",
+      "transport": "stdio",
+      "protocol_revision": null,
+      "version": "0.0.83",
+      "version_verification_state": "PINNED_CONFIG",
+      "source_trust": "SOURCE_EXTERNAL_UNTRUSTED_RUNTIME_CONTENT",
+      "allowed_tools": [
+        "browser/runtime inspection",
+        "reversible UI automation within task scope"
+      ],
+      "denied_tools": [
+        "unapproved high-impact/public/account actions",
+        "secret exfiltration"
+      ],
+      "action_scope": "READ_AND_REVERSIBLE_UI_ACTIONS_WITH_HIGH_IMPACT_GATE",
+      "auth_method": "local process/browser context",
+      "issuer": null,
+      "audience": null,
+      "scopes": [],
+      "credential_binding": "LOCAL_PROCESS",
+      "token_passthrough": false,
+      "data_sensitivity": "DATA_INTERNAL_BY_TASK",
+      "cost_class": "COST_INCLUDED_OR_LOCAL",
+      "approval_class": "HIGH_IMPACT_REQUIRES_EXPLICIT_APPROVAL",
+      "timeout_seconds": null,
+      "rate_or_budget_ceiling": null,
+      "last_verify": "2026-10-03",
+      "reverify_after": null,
+      "trust_state": "TRUSTED_BOUNDED"
+    },
+    {
+      "server_id": "chrome-devtools-mcp",
+      "purpose": "local browser inspection/debugging",
+      "transport": "stdio",
+      "protocol_revision": null,
+      "version": "1.10.1",
+      "version_verification_state": "PINNED_CONFIG",
+      "source_trust": "SOURCE_EXTERNAL_UNTRUSTED_RUNTIME_CONTENT",
+      "allowed_tools": [
+        "browser inspection",
+        "scoped browser control within task scope"
+      ],
+      "denied_tools": [
+        "unapproved high-impact/public/account actions",
+        "secret exfiltration"
+      ],
+      "action_scope": "BROWSER_INSPECTION_AND_CONTROL_WITH_HIGH_IMPACT_GATE",
+      "auth_method": "local process/browser context",
+      "issuer": null,
+      "audience": null,
+      "scopes": [],
+      "credential_binding": "LOCAL_PROCESS",
+      "token_passthrough": false,
+      "data_sensitivity": "DATA_INTERNAL_BY_TASK",
+      "cost_class": "COST_INCLUDED_OR_LOCAL",
+      "approval_class": "HIGH_IMPACT_REQUIRES_EXPLICIT_APPROVAL",
+      "timeout_seconds": null,
+      "rate_or_budget_ceiling": null,
+      "last_verify": "2026-10-03",
+      "reverify_after": null,
+      "trust_state": "TRUSTED_BOUNDED"
+    },
+    {
+      "server_id": "netlify-mcp",
+      "purpose": "Netlify inspection and explicitly approved deployment operations",
+      "transport": "http",
+      "protocol_revision": null,
+      "version": null,
+      "version_verification_state": "UNKNOWN",
+      "source_trust": "SOURCE_AUTHENTICATED_EXTERNAL_UNVERIFIED_SERVER_IDENTITY",
+      "allowed_tools": [
+        "inspection/read-only operations when authenticated and task-scoped"
+      ],
+      "denied_tools": [
+        "production deploy/publish without explicit approval",
+        "permission/account/security mutation without explicit approval"
+      ],
+      "action_scope": "REMOTE_STATE",
+      "auth_method": null,
+      "issuer": null,
+      "audience": null,
+      "scopes": [],
+      "credential_binding": "UNKNOWN",
+      "token_passthrough": "UNKNOWN",
+      "data_sensitivity": "DATA_INTERNAL_OR_DEPLOYMENT_STATE",
+      "cost_class": "SERVICE_DEPENDENT",
+      "approval_class": "PRODUCTION_DEPLOY_ALWAYS_REQUIRES_EXPLICIT_APPROVAL",
+      "timeout_seconds": null,
+      "rate_or_budget_ceiling": null,
+      "last_verify": "2026-10-03",
+      "reverify_after": null,
+      "trust_state": "UNVERIFIED_REMOTE"
+    },
+    {
+      "server_id": "scenario-mcp",
+      "purpose": "optional image/generation workflow capability",
+      "transport": "http",
+      "protocol_revision": null,
+      "version": null,
+      "version_verification_state": "UNKNOWN",
+      "source_trust": "SOURCE_AUTHENTICATED_EXTERNAL_UNVERIFIED_SERVER_IDENTITY",
+      "allowed_tools": [
+        "non-cost-bearing inspection when available and task-scoped"
+      ],
+      "denied_tools": [
+        "model/workflow/write/delete actions without explicit approval",
+        "metered generation without explicit approval"
+      ],
+      "action_scope": "GENERATION_WORKFLOW_AND_ACCOUNT_STATE",
+      "auth_method": null,
+      "issuer": null,
+      "audience": null,
+      "scopes": [],
+      "credential_binding": "UNKNOWN",
+      "token_passthrough": "UNKNOWN",
+      "data_sensitivity": "DATA_INTERNAL_BY_TASK",
+      "cost_class": "COST_METERED_OR_CREDIT",
+      "approval_class": "COST_OR_WRITE_REQUIRES_EXPLICIT_APPROVAL",
+      "timeout_seconds": null,
+      "rate_or_budget_ceiling": null,
+      "last_verify": "2026-10-03",
+      "reverify_after": null,
+      "trust_state": "UNVERIFIED_REMOTE"
+    }
+  ]
+}

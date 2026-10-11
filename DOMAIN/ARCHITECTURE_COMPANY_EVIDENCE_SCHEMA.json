@@ -1,0 +1,72 @@
+{
+  "schema": "ARCHIGROW_COMPANY_EVIDENCE_SCHEMA_V1",
+  "authority": "DOMAIN/ARCHITECTURE_WORK_OS.md §7 + DOMAIN/ARCHITECTURE_GROWTH_MAP.md §8",
+  "purpose": "Company/public architecture case evidence with result-to-implementation trace; candidate evidence only.",
+  "source_roles": [
+    "COMPANY_PROJECT",
+    "PUBLIC_REFERENCE_CASE"
+  ],
+  "states": [
+    "CASE",
+    "STRATEGY",
+    "FRONTIER",
+    "FAILURE_LESSON"
+  ],
+  "outcomes": [
+    "SUCCESS",
+    "PARTIAL",
+    "FAILURE",
+    "OBSERVATION_ONLY"
+  ],
+  "evidence_grades": {
+    "A_PRIMARY_VERIFIED": "Primary project/approval/issued artifact or directly verified outcome.",
+    "B_DERIVED_VERIFIED": "Deterministic checked derivative/calculation tied to primary evidence.",
+    "C_CORROBORATED": "Corroborated secondary evidence with source trace.",
+    "D_OBSERVATION": "Unverified or subjective observation; never sufficient alone for promotion."
+  },
+  "access_classes": [
+    "INTERNAL",
+    "SHAREABLE_ANONYMIZED",
+    "PUBLIC_SOURCE"
+  ],
+  "required_identity": [
+    "project_id",
+    "case_id",
+    "project_source_role",
+    "project_type",
+    "stage"
+  ],
+  "required_trace": [
+    "quality_criterion",
+    "interpretation",
+    "design_decision",
+    "implementation_move",
+    "result_evidence"
+  ],
+  "trace_chain": "RULE/CRITERION -> INTERPRETATION -> DESIGN DECISION -> IMPLEMENTATION MOVE -> RESULT EVIDENCE",
+  "required_evidence": [
+    "source_refs_or_artifact_refs",
+    "evidence_grade",
+    "access_class"
+  ],
+  "promotion": {
+    "intake_may_create_current_best": false,
+    "intake_promotion_authorized": false,
+    "human_review_required": true,
+    "repeated_verified_real_outcomes_required": true,
+    "d_observation_never_sufficient_alone": true
+  },
+  "golden_project_candidate": {
+    "selection_authorized_by_intake": false,
+    "allowed_source_role": "COMPANY_PROJECT",
+    "minimum_evidence_grade": [
+      "A_PRIMARY_VERIFIED",
+      "B_DERIVED_VERIFIED"
+    ]
+  },
+  "confidentiality": {
+    "public_source_must_not_be_client_confidential": true,
+    "shareable_anonymized_requires_anonymized": true,
+    "raw_evidence_copy_default": false
+  }
+}

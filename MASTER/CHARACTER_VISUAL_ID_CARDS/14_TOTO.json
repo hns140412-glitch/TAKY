@@ -1,0 +1,214 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "14",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "토토",
+  "display_name_en": "TOTO",
+  "character_class": "ANIMAL",
+  "species_or_body_type": "MONKEY_BIPED",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png"
+    ],
+    "source_digests": [
+      "94d6fb0e9f51a5602586bb86c8c7aa3deee78c0ea2435a56341ffed083b30d68"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/TAKY_EXPLORER_CREW_14_TOTO_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "round monkey face with pale peach facial field",
+      "eyes": {
+        "shape": "very large rounded",
+        "size": "large",
+        "spacing": "wide",
+        "angle": "soft",
+        "iris_color": "amber-brown",
+        "distinctive": "large glossy highlights and dark upper lash line"
+      },
+      "brows": {
+        "shape": "soft medium arch",
+        "weight": "medium"
+      },
+      "nose_muzzle_beak": {
+        "structure": "small subtle monkey nose centered on pale face",
+        "distinctive": "low-profile nose"
+      },
+      "mouth_lips": {
+        "shape": "wide open cheerful smile",
+        "distinctive": "small visible upper teeth/fangs in source pose"
+      },
+      "ears_horns_antennae": {
+        "structure": "very large round protruding ears with pink inner ear"
+      },
+      "hair_fur_feather": {
+        "silhouette": "layered medium-brown crown hair/fur with soft side tufts",
+        "texture": "soft dense fur/hair",
+        "hairline_or_pattern": "brown crown around pale peach facial field"
+      },
+      "base_tone": "medium brown + pale peach",
+      "unique_marks": [
+        "very large round ears",
+        "long curled prehensile tail"
+      ],
+      "resting_expression": "energetic cheerful smile"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "HANDLIKE_PAW",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "long_tail"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "TAIL_OCCLUSION",
+        "PREHENSILE_TAIL_CLEARANCE"
+      ],
+      "morphology_class": "MONKEY_BIPED",
+      "grip_limb_type": "HANDLIKE_PAW"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "blue-white cap",
+        "yellow hoodie",
+        "cream-blue explorer jacket",
+        "dark shorts",
+        "blue-yellow sneakers",
+        "navy backpack"
+      ],
+      "signature_accessories": [
+        "gold star hardware",
+        "dark fingerless handlike paw glove"
+      ],
+      "signature_equipment": [
+        "backpack"
+      ],
+      "materials": [
+        "soft fur",
+        "woven cap/hoodie/jacket",
+        "shorts textile",
+        "leather-like straps",
+        "metallic gold hardware",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "SHORTS",
+      "identity_features": [
+        "long_tail"
+      ],
+      "compatibility_flags": [
+        "TAIL_OCCLUSION",
+        "PREHENSILE_TAIL_CLEARANCE"
+      ]
+    },
+    "color_material_palette": [
+      "medium brown",
+      "pale peach",
+      "sunny yellow",
+      "royal blue",
+      "off-white",
+      "charcoal",
+      "gold"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "6f75f338631761e680c1a9c6a5dcc67010973a2699abafd3de92a4148ef24e8c",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "94d6fb0e9f51a5602586bb86c8c7aa3deee78c0ea2435a56341ffed083b30d68"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-14",
+  "roster_class": "EXPANSION",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

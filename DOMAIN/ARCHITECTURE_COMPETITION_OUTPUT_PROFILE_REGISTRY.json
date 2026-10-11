@@ -1,0 +1,122 @@
+{
+  "registry_id": "ARCHCOMP-OUTPUT-PROFILES-V1",
+  "status": "ACTIVE_IMPLEMENTATION",
+  "authority_boundary": "Competition brief and verified project sources override all defaults.",
+  "profiles": {
+    "A1_BOARD": {
+      "artifact": "HTML/SVG -> PDF/print derivative",
+      "canvas_mm": [594, 841],
+      "features": [
+        "distance_reading_hierarchy",
+        "hero_visual_region",
+        "major_drawing_grid",
+        "supporting_diagram_cluster",
+        "board_number_and_anonymous_header",
+        "source_bound_caption",
+        "actual_size_print_check"
+      ],
+      "layout": {
+        "grid_columns": 12,
+        "outer_margin_mm": 18,
+        "gutter_mm": 8,
+        "hero_ratio_target": 0.26,
+        "text_density": "low"
+      },
+      "validation": [
+        "brief_panel_size_count",
+        "first_read_5s",
+        "drawing_legibility_at_print_scale",
+        "source_binding_complete",
+        "geometry_drift",
+        "anonymity",
+        "final_pdf_page_size"
+      ]
+    },
+    "A3_REPORT": {
+      "artifact": "HTML page set -> PDF; optional PPT/Word derivative",
+      "canvas_mm": [297, 420],
+      "features": [
+        "chapter_question_header",
+        "one_primary_drawing_answer",
+        "supporting_evidence_slots",
+        "short_caption",
+        "page_sequence_navigation",
+        "cross_page_color_lineweight_consistency",
+        "source_trace_footer"
+      ],
+      "layout": {
+        "grid_columns": 12,
+        "outer_margin_mm": 15,
+        "gutter_mm": 6,
+        "text_density": "medium",
+        "default_spread_logic": "question -> drawing answer -> evidence"
+      },
+      "validation": [
+        "brief_page_size_count",
+        "story_sequence",
+        "drawing_legibility_at_print_scale",
+        "caption_source_trace",
+        "source_binding_complete",
+        "geometry_drift",
+        "final_pdf_page_size"
+      ]
+    },
+    "PPT": {
+      "artifact": "editable PPTX -> PDF optional",
+      "features": [
+        "one_claim_per_slide",
+        "single_primary_visual",
+        "minimal_support",
+        "speaker_note_evidence",
+        "presentation_time_budget",
+        "source_bound_visual",
+        "slide_sequence"
+      ],
+      "layout": {
+        "aspect_ratio": "16:9",
+        "text_density": "low",
+        "default_seconds_per_slide": 45
+      },
+      "validation": [
+        "brief_presentation_minutes",
+        "one_claim_per_slide",
+        "visual_legibility",
+        "source_binding_complete",
+        "slide_count_time_budget",
+        "pptx_open_render"
+      ]
+    },
+    "PDF_DRAWING_BOOK": {
+      "artifact": "vector drawing sheets -> PDF",
+      "features": [
+        "sheet_index",
+        "drawing_number",
+        "drawing_title",
+        "scale",
+        "north_level_reference",
+        "cross_reference",
+        "revision_tag",
+        "vector_first_embedding"
+      ],
+      "layout": {
+        "text_density": "low",
+        "drawing_priority": "scale_and_legibility"
+      },
+      "validation": [
+        "sheet_index_matches_pages",
+        "scale_metadata",
+        "drawing_number_uniqueness",
+        "vector_preservation",
+        "source_binding_complete",
+        "final_pdf_page_size"
+      ]
+    }
+  },
+  "common_invariants": [
+    "NO_FAKE_PROJECT_FACTS",
+    "MISSING_SOURCE_IS_VISIBLE_NOT_FILLED_WITH_INVENTED_CONTENT",
+    "PRESENTATION_DERIVATIVE_NEVER_REPLACES_SOURCE_GEOMETRY",
+    "POST_VERIFICATION_EDIT_INVALIDATES_PASS",
+    "BRIEF_FREEZE_RULE_OVERRIDES_ENHANCEMENT"
+  ]
+}

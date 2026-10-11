@@ -1,0 +1,53 @@
+{
+  "audit_version": "2026-10-03.1",
+  "owner": "OS/AI_CONNECTION_SECURITY.md",
+  "connections": [
+    {
+      "id": "playwright-mcp",
+      "purpose": "local browser/runtime inspection and controlled UI automation",
+      "transport": "stdio",
+      "package": "@playwright/mcp",
+      "version": "0.0.83",
+      "source_trust": "SOURCE_EXTERNAL_UNTRUSTED_RUNTIME_CONTENT",
+      "action_scope": "READ_AND_REVERSIBLE_UI_ACTIONS_WITH_HIGH_IMPACT_GATE",
+      "auth_method": "local process/browser context",
+      "cost": "COST_INCLUDED_OR_LOCAL",
+      "approval_gate": "high-impact actions via TAKY PreToolUse; no blanket allow-list",
+      "last_verify": "2026-10-03"
+    },
+    {
+      "id": "chrome-devtools-mcp",
+      "purpose": "local browser inspection/debugging",
+      "transport": "stdio",
+      "package": "chrome-devtools-mcp",
+      "version": "1.10.1",
+      "source_trust": "SOURCE_EXTERNAL_UNTRUSTED_RUNTIME_CONTENT",
+      "action_scope": "BROWSER_INSPECTION_AND_CONTROL_WITH_HIGH_IMPACT_GATE",
+      "auth_method": "local process/browser context",
+      "cost": "COST_INCLUDED_OR_LOCAL",
+      "approval_gate": "high-impact actions via TAKY PreToolUse; no blanket allow-list",
+      "last_verify": "2026-10-03"
+    },
+    {
+      "id": "netlify-mcp",
+      "purpose": "Netlify inspection and explicitly approved deployment operations",
+      "transport": "http",
+      "endpoint": "https://netlify-mcp.netlify.app/mcp",
+      "action_scope": "REMOTE_STATE",
+      "cost": "SERVICE_DEPENDENT",
+      "approval_gate": "production deploy/publish always requires explicit approval",
+      "last_verify": "2026-10-03"
+    },
+    {
+      "id": "scenario-mcp",
+      "purpose": "optional image/generation workflow capability",
+      "transport": "http",
+      "endpoint": "https://mcp.scenario.com/mcp",
+      "action_scope": "GENERATION_WORKFLOW_AND_ACCOUNT_STATE",
+      "cost": "COST_METERED_OR_CREDIT",
+      "approval_gate": "model/workflow/write/delete actions require explicit approval",
+      "verification_state": "CONNECTED_CONFIG_PRESENT__ACCOUNT_COST_DETAILS_UNVERIFIED",
+      "last_verify": "2026-10-03"
+    }
+  ]
+}

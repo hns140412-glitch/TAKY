@@ -78,6 +78,10 @@ jobs:
         run: node --check BADGE/family-praise-gift-journal.js
       - name: Authorized family giver and V2 journal regression
         run: node BADGE/family-praise-gift.test.js
+      - name: Windows directory fsync durability regression syntax
+        run: node --check BADGE/windows-directory-fsync-regression.test.js
+      - name: Windows directory fsync durability regression
+        run: node BADGE/windows-directory-fsync-regression.test.js
       - name: 60 preset and 20 history discovery syntax
         run: node --check BADGE/badge-story-discovery.js
       - name: Story hierarchy and history discovery regression

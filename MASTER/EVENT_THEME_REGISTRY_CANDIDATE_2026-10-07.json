@@ -1,0 +1,231 @@
+{
+  "schema_version": "TAKY_EVENT_THEME_REGISTRY_V0_CANDIDATE",
+  "status": "CANDIDATE_NOT_PROMOTED",
+  "rule_id": "TKY-EVENT-THEME-001",
+  "invariant": "EVENT_MAY_DECORATE_BUT_MUST_NOT_REWRITE_EXPERIENCE",
+  "max_global_themes": 1,
+  "max_personal_overlays": 1,
+  "immutable": [
+    "layout",
+    "navigation_model",
+    "learning_logic",
+    "primary_action_hierarchy",
+    "touch_targets",
+    "character_visual_id",
+    "timer_semantics",
+    "planner_semantics"
+  ],
+  "triggers": [
+    "FIXED_DATE",
+    "LUNAR_RESOLVER",
+    "USER_DATE",
+    "MANUAL_OVERRIDE"
+  ],
+  "tones": {
+    "CELEBRATION": {
+      "default_intensity": "STANDARD",
+      "allow_special": true
+    },
+    "SEASONAL": {
+      "default_intensity": "STANDARD",
+      "allow_special": true
+    },
+    "TRADITIONAL": {
+      "default_intensity": "STANDARD",
+      "allow_special": true
+    },
+    "NATIONAL_COMMEMORATION": {
+      "default_intensity": "SUBTLE",
+      "allow_special": false
+    },
+    "MEMORIAL": {
+      "default_intensity": "SUBTLE",
+      "allow_special": false,
+      "forbid": [
+        "confetti",
+        "fireworks",
+        "fanfare",
+        "reward_multiplier",
+        "high_energy_motion"
+      ]
+    }
+  },
+  "events": [
+    {
+      "id": "birthday",
+      "name_ko": "생일",
+      "tone": "CELEBRATION",
+      "trigger": {
+        "kind": "USER_DATE"
+      },
+      "prelude_days": 0,
+      "postlude_days": 0,
+      "personal": true
+    },
+    {
+      "id": "seollal",
+      "name_ko": "설날",
+      "tone": "TRADITIONAL",
+      "trigger": {
+        "kind": "LUNAR_RESOLVER",
+        "calendar": "KOREAN_LUNAR",
+        "month": 1,
+        "day": 1
+      },
+      "window_policy": "OFFICIAL_HOLIDAY_WINDOW"
+    },
+    {
+      "id": "samiljeol",
+      "name_ko": "삼일절",
+      "tone": "NATIONAL_COMMEMORATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 3,
+        "day": 1
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "childrens_day",
+      "name_ko": "어린이날",
+      "tone": "CELEBRATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 5,
+        "day": 5
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "memorial_day",
+      "name_ko": "현충일",
+      "tone": "MEMORIAL",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 6,
+        "day": 6
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "constitution_day",
+      "name_ko": "제헌절",
+      "tone": "NATIONAL_COMMEMORATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 7,
+        "day": 17
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "liberation_day",
+      "name_ko": "광복절",
+      "tone": "NATIONAL_COMMEMORATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 8,
+        "day": 15
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "chuseok",
+      "name_ko": "추석",
+      "tone": "TRADITIONAL",
+      "trigger": {
+        "kind": "LUNAR_RESOLVER",
+        "calendar": "KOREAN_LUNAR",
+        "month": 8,
+        "day": 15
+      },
+      "window_policy": "OFFICIAL_HOLIDAY_WINDOW"
+    },
+    {
+      "id": "gaecheonjeol",
+      "name_ko": "개천절",
+      "tone": "NATIONAL_COMMEMORATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 10,
+        "day": 3
+      },
+      "prelude_days": 0,
+      "postlude_days": 0
+    },
+    {
+      "id": "hangeul_day",
+      "name_ko": "한글날",
+      "tone": "NATIONAL_COMMEMORATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 10,
+        "day": 9
+      },
+      "prelude_days": 0,
+      "postlude_days": 0,
+      "optional_learning_surface": "HANGEUL_DISCOVERY"
+    },
+    {
+      "id": "halloween",
+      "name_ko": "할로윈",
+      "tone": "SEASONAL",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 10,
+        "day": 31
+      },
+      "prelude_days": 6,
+      "postlude_days": 0,
+      "default_enabled": true
+    },
+    {
+      "id": "christmas",
+      "name_ko": "크리스마스",
+      "tone": "CELEBRATION",
+      "trigger": {
+        "kind": "FIXED_DATE",
+        "month": 12,
+        "day": 25
+      },
+      "prelude_days": 10,
+      "postlude_days": 0
+    }
+  ],
+  "render_contract": {
+    "allowed_layers": [
+      "environment_overlay",
+      "accent_tokens",
+      "decorative_props",
+      "ambient_motion",
+      "short_copy",
+      "sound_cue",
+      "character_accessory",
+      "reward_skin"
+    ],
+    "prohibited": [
+      "layout_rewrite",
+      "navigation_rewrite",
+      "learning_rule_change",
+      "character_identity_change",
+      "baked_live_text",
+      "baked_user_data",
+      "baked_controls"
+    ]
+  },
+  "precedence": {
+    "global_tone_order": [
+      "MEMORIAL",
+      "NATIONAL_COMMEMORATION",
+      "TRADITIONAL",
+      "CELEBRATION",
+      "SEASONAL"
+    ],
+    "personal_overlay_rule": "MAY_COEXIST_BUT_MUST_RESPECT_GLOBAL_RESTRAINT"
+  }
+}

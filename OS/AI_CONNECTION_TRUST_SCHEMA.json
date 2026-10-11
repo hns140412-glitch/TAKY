@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY AI Connection Trust Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "owner",
+    "projection_role",
+    "connections"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2026-10-03.1"
+    },
+    "owner": {
+      "const": "OS/AI_CONNECTION_SECURITY.md"
+    },
+    "projection_role": {
+      "const": "NON_SEMANTIC_TRUST_PROJECTION"
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "server_id",
+          "purpose",
+          "transport",
+          "protocol_revision",
+          "version",
+          "version_verification_state",
+          "source_trust",
+          "allowed_tools",
+          "denied_tools",
+          "action_scope",
+          "auth_method",
+          "issuer",
+          "audience",
+          "scopes",
+          "credential_binding",
+          "token_passthrough",
+          "data_sensitivity",
+          "cost_class",
+          "approval_class",
+          "timeout_seconds",
+          "rate_or_budget_ceiling",
+          "last_verify",
+          "reverify_after",
+          "trust_state"
+        ],
+        "properties": {
+          "server_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "transport": {
+            "enum": [
+              "stdio",
+              "http",
+              "sse",
+              "other"
+            ]
+          },
+          "protocol_revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version_verification_state": {
+            "enum": [
+              "PINNED_CONFIG",
+              "VERIFIED_RUNTIME",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "source_trust": {
+            "type": "string",
+            "minLength": 1
+          },
+          "allowed_tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "denied_tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "action_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "auth_method": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issuer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "audience": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "credential_binding": {
+            "enum": [
+              "LOCAL_PROCESS",
+              "HOST_MANAGED",
+              "ACCOUNT_SESSION",
+              "UNKNOWN",
+              "NONE"
+            ]
+          },
+          "token_passthrough": {
+            "enum": [
+              false,
+              "UNKNOWN"
+            ]
+          },
+          "data_sensitivity": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cost_class": {
+            "type": "string",
+            "minLength": 1
+          },
+          "approval_class": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timeout_seconds": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "rate_or_budget_ceiling": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "last_verify": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reverify_after": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "trust_state": {
+            "enum": [
+              "TRUSTED_BOUNDED",
+              "CONDITIONAL",
+              "UNVERIFIED_REMOTE",
+              "DISABLED"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

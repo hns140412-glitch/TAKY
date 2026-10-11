@@ -1,0 +1,84 @@
+{
+  "registry_id": "ARCHCOMP-VISUAL-QUALITY-V1",
+  "status": "ACTIVE_IMPLEMENTATION",
+  "principles": [
+    "ONE_PAGE_OR_BOARD_HAS_ONE_PRIMARY_ARGUMENT",
+    "DRAWING_FIRST_TEXT_SECOND",
+    "WHITE_SPACE_IS_ACTIVE_HIERARCHY",
+    "COLOR_HAS_SEMANTIC_MEANING",
+    "SOURCE_GEOMETRY_NEVER_BEAUTIFIED_INTO_FALSE_GEOMETRY",
+    "VECTOR_FIRST_FOR_MEASURED_DRAWINGS",
+    "RASTER_ONLY_WHEN_EXPERIENTIAL_OR_SOURCE_LIMITED",
+    "CAPTION_EXPLAINS_WHY_NOT_WHAT"
+  ],
+  "tokens": {
+    "font_stack": "Arial, Noto Sans KR, Pretendard, sans-serif",
+    "ink": "#151515",
+    "ink_secondary": "#555555",
+    "ink_muted": "#8A8A8A",
+    "paper": "#F8F7F2",
+    "surface": "#FFFFFF",
+    "line": "#D7D4CB",
+    "line_strong": "#B6B1A6",
+    "accent_default": "#C86435",
+    "accent_soft": "#E7D4C8",
+    "missing": "#9B4B42",
+    "missing_bg": "#F4E8E4"
+  },
+  "A1_BOARD": {
+    "grid_columns": 12,
+    "outer_margin_mm": 16,
+    "gutter_mm": 7,
+    "header_height_mm": 42,
+    "footer_height_mm": 12,
+    "type_mm": {"eyebrow": 3.0, "title": 8.5, "subtitle": 4.2, "caption": 2.8, "meta": 2.4},
+    "hierarchy": {"hero_area_ratio_min": 0.28, "major_drawing_ratio_min": 0.45, "support_ratio_max": 0.25},
+    "density": {"max_primary_blocks": 6, "max_support_blocks": 6},
+    "raster_min_px": {"hero_width": 3000, "standard_width": 1800},
+    "caption_max_chars": 120,
+    "quality_target": "distance read at 2-3m, close read at 0.5-1m"
+  },
+  "A3_REPORT": {
+    "grid_columns": 12,
+    "outer_margin_mm": 14,
+    "gutter_mm": 5,
+    "type_mm": {"eyebrow": 2.6, "title": 6.8, "subtitle": 3.7, "caption": 2.8, "body": 2.7, "meta": 2.2},
+    "drawing_area_ratio_min": 0.60,
+    "text_area_ratio_max": 0.28,
+    "raster_min_px": {"primary_width": 1800, "support_width": 1000},
+    "caption_max_chars": 160,
+    "quality_target": "page sequence reads without oral explanation"
+  },
+  "PPT": {
+    "aspect": "16:9",
+    "safe_margin_px": 46,
+    "type_pt": {"eyebrow": 11, "title": 26, "caption": 13, "meta": 9},
+    "visual_area_ratio_min": 0.68,
+    "text_area_ratio_max": 0.24,
+    "raster_min_px": {"primary_width": 1600, "primary_height": 900},
+    "claim_max_chars": 80,
+    "quality_target": "one claim per slide, readable at meeting-room distance"
+  },
+  "PDF_DRAWING_BOOK": {
+    "grid_columns": 12,
+    "outer_margin_mm": 12,
+    "title_block_height_mm": 18,
+    "type_mm": {"sheet_title": 4.6, "drawing_title": 3.1, "meta": 2.3},
+    "drawing_area_ratio_min": 0.78,
+    "vector_preferred": true,
+    "quality_target": "technical drawing remains primary; title block never dominates"
+  },
+  "mode_emphasis": {
+    "CONTEXT": "WIDE",
+    "CONCEPT": "HERO",
+    "PROGRAM": "DIAGRAM",
+    "CIRCULATION": "DIAGRAM",
+    "PLAN": "TECHNICAL_LARGE",
+    "SECTION": "TECHNICAL_LARGE",
+    "ELEVATION": "WIDE",
+    "AXONOMETRIC": "HERO",
+    "PERFORMANCE": "DIAGRAM",
+    "EXPERIENCE": "HERO",
+    "TECHNICAL": "TECHNICAL"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "ARCHIGROW_LAYOUT_OBJECT_SCHEMA_V1",
+  "authority": "DOMAIN/ARCHITECTURE_WORK_OS.md §1-2, §6 + DOMAIN/ARCHITECTURE_GROWTH_MAP.md §6",
+  "object_types": [
+    "UNIT",
+    "CORE",
+    "PARKING",
+    "PROGRAM"
+  ],
+  "area_scopes": [
+    "GFA",
+    "FOOTPRINT",
+    "NONE"
+  ],
+  "required": [
+    "object_id",
+    "object_type",
+    "level",
+    "polygon",
+    "area_scope"
+  ],
+  "rule": "GEOMETRY/KPI RESULT IS A DETERMINISTIC DERIVATIVE; SOURCE/LAW AUTHORITY REMAINS EXTERNAL."
+}

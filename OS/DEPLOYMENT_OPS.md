@@ -65,11 +65,25 @@ A generated image containing Korean/English text, numbers, buttons, progress, ta
 Validate required HTML/JS/CSS/manifest/service-worker/assets/paths/configuration as applicable.
 Validation failure blocks Production apply.
 
+For a material user-visible release, the deployable candidate SHALL be frozen to a result revision and pass the revision-bound Result Preview gate before Production apply:
+`CANDIDATE REVISION -> PREVIEW EVIDENCE -> ACCEPTANCE PASS -> RELEASE BINDING -> PRODUCTION APPLY`.
+
+The release binding SHALL reference the same:
+- result revision hash;
+- preview receipt hash;
+- release target;
+- release payload hash.
+
+Changing code/assets/build output after Preview PASS invalidates that preview for release. Changing deployment target or payload invalidates the release binding. A hosting-provider deploy response does not substitute for preview/acceptance evidence.
+
 Deployment validation also checks, when applicable:
 - actual filenames comply with the active naming contract;
 - live text/buttons/status are not accidentally baked into background/mockup images;
 - background/world imagery does not replace required interactive UI;
 - generated-image text is not relied on as authoritative functional content.
+
+Deterministic generic gate: `ENFORCEMENT/result_preview_gate.py`.
+Controlled runtime release intent requires `result_preview_guard`; missing guard fails closed.
 
 ## 6. REPORTING
 Report separately:

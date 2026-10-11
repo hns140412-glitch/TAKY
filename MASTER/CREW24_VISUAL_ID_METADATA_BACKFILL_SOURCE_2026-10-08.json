@@ -1,0 +1,857 @@
+{
+  "schema": "TAKY_CREW24_VISUAL_ID_METADATA_BACKFILL_SOURCE_V1",
+  "date": "2026-10-08",
+  "authority": {
+    "morphology_outfit_status": "LOCKED_FOR_ASSET_PRODUCTION",
+    "face_states_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "source_lock_status": "ALL_24_SOURCE_LOCKED_NO_IMAGE_GENERATION",
+    "action_parts_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "morphology_outfit_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_MORPHOLOGY_OUTFIT_BINDING_24_LATEST.json",
+    "face_states_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "action_parts_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json",
+    "source_lock_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_SOURCE_LOCK_REGISTRY_24_LATEST.json",
+    "turnaround_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json"
+  },
+  "members": [
+    {
+      "visual_id": "01",
+      "canonical_code": "DUBI",
+      "canonical_name_ko": "두비",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/01-DUBI",
+      "morphology_class": "CANINE_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "TAIL_OCCLUSION_ON_SEATED"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/01-DUBI/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "7e23f2bb76069dbd8ac3e925c9a947f3fb5f12bf8d8b565ffdc321beca1fe5b4",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/01-DUBI/TAKY_EXPLORER_CREW_01_DUBI_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "02",
+      "canonical_code": "LORI",
+      "canonical_name_ko": "로리",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/02-LORI",
+      "morphology_class": "RABBIT_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "long_ears",
+        "short_tail"
+      ],
+      "lower_outfit_class": "PLEATED_SKIRT",
+      "compatibility_flags": [
+        "LONG_EAR_SILHOUETTE",
+        "SEATED_SKIRT_GEOMETRY",
+        "IDENTITY_COLLISION_PAIR_12_PEACH"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_ears",
+        "short_tail"
+      ],
+      "face_qa_flags": [
+        "IDENTITY_COLLISION_12_PEACH"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/02-LORI/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "82ee28d7643278af65022648976130c0ed094eb977dce3fc40c3a5a9ff5b64bb",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/02-LORI/TAKY_EXPLORER_CREW_02_LORI_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "03",
+      "canonical_code": "INK",
+      "canonical_name_ko": "잉크",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/03-INK",
+      "morphology_class": "FELINE_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "long_tail"
+      ],
+      "lower_outfit_class": "CARGO_PANTS",
+      "compatibility_flags": [
+        "TAIL_OCCLUSION_ON_SEATED"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/03-INK/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "9e5de65fd89e509a278b2f1bfd4a858961f512d6484a914b615e0dd2571fecb0",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/03-INK/TAKY_EXPLORER_CREW_03_INK_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "04",
+      "canonical_code": "NOVA",
+      "canonical_name_ko": "노바",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA",
+      "morphology_class": "RODENT_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "fluffy_tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "FLUFFY_TAIL_OCCLUSION"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "fluffy_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "7e8fdf183cd7fbeca683855e0328d364f923c6888633e9c317ffd6a7b1838ddd",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/TAKY_EXPLORER_CREW_04_NOVA_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "05",
+      "canonical_code": "TAKE",
+      "canonical_name_ko": "테이크",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/05-TAKE",
+      "morphology_class": "PANDA_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [],
+      "lower_outfit_class": "CARGO_PANTS",
+      "compatibility_flags": [],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/05-TAKE/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "4203be14d8e41bb9583e59fc3c29a5af207245d19d6ff34164b1b4fc0df09081",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/05-TAKE/TAKY_EXPLORER_CREW_05_TAKE_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "06",
+      "canonical_code": "ZERO",
+      "canonical_name_ko": "제로",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/06-ZERO",
+      "morphology_class": "AVIAN_PENGUIN_BIPED",
+      "grip_limb_type": "FLIPPER_WING",
+      "appendages": [
+        "wing_arms"
+      ],
+      "lower_outfit_class": "SOURCE_LOCKED_LOWER_OUTFIT",
+      "compatibility_flags": [
+        "NO_HUMAN_HAND_INVENTION",
+        "WING_GRIP_REQUIRED"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "wing_arms"
+      ],
+      "face_qa_flags": [
+        "BEAK_FACE",
+        "NO_HUMAN_FACE_ANATOMY"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/06-ZERO/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "9e27d14c55962178074d9d07a31560dc857088d9ada6fafeb824f2aa03878bdc",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/06-ZERO/TAKY_EXPLORER_CREW_06_ZERO_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "07",
+      "canonical_code": "SOLA",
+      "canonical_name_ko": "솔라",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/07-SOLA",
+      "morphology_class": "FOX_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "large_ears",
+        "fluffy_tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "EAR_SILHOUETTE",
+        "TAIL_OCCLUSION"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "large_ears",
+        "fluffy_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/07-SOLA/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "d9ce35998777bd8bcfa850ed2d85325f02cab77c9c9c42d18ba731b588a786d8",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/07-SOLA/TAKY_EXPLORER_CREW_07_SOLA_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "08",
+      "canonical_code": "BELO",
+      "canonical_name_ko": "벨로",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/08-BELO",
+      "morphology_class": "FOX_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "large_ears",
+        "fluffy_tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "EAR_SILHOUETTE",
+        "TAIL_OCCLUSION"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "large_ears",
+        "fluffy_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/08-BELO/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "35c469c5e7073648a78c9aec8d85b7b55b1e76e8e127aacd60b481d92ae77ac1",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/08-BELO/TAKY_EXPLORER_CREW_08_BELO_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "09",
+      "canonical_code": "MOCA",
+      "canonical_name_ko": "모카",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/09-MOCA",
+      "morphology_class": "DEER_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "antlers",
+        "tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "ANTLER_CLEARANCE",
+        "TAIL_OCCLUSION"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "antlers",
+        "tail"
+      ],
+      "face_qa_flags": [
+        "ANTLER_CLEARANCE"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/09-MOCA/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "3d8782cfa52dac35b1f126513336ea9ded3e426eb91bf40316646760355137e8",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/09-MOCA/TAKY_EXPLORER_CREW_09_MOCA_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "10",
+      "canonical_code": "NIA",
+      "canonical_name_ko": "니아",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/10-NIA",
+      "morphology_class": "AVIAN_BIPED",
+      "grip_limb_type": "WING",
+      "appendages": [
+        "large_wings",
+        "tail_feathers"
+      ],
+      "lower_outfit_class": "SOURCE_LOCKED_AVIAN_LOWER_BODY",
+      "compatibility_flags": [
+        "NO_HUMAN_HAND_INVENTION",
+        "WING_GRIP_REQUIRED",
+        "WING_CLEARANCE"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "large_wings",
+        "tail_feathers"
+      ],
+      "face_qa_flags": [
+        "BEAK_FACE",
+        "NO_HUMAN_FACE_ANATOMY"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/10-NIA/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "10ee74381f40924bd55344fb83eb589fe1690bbd5399842ca6e1683f8f805086",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/10-NIA/TAKY_EXPLORER_CREW_10_NIA_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "11",
+      "canonical_code": "KIRO",
+      "canonical_name_ko": "키로",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/11-KIRO",
+      "morphology_class": "RAM_BIPED",
+      "grip_limb_type": "PAW_HOOF_HAND",
+      "appendages": [
+        "large_horns",
+        "tail"
+      ],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "compatibility_flags": [
+        "HORN_CLEARANCE",
+        "TAIL_OCCLUSION"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "large_horns",
+        "tail"
+      ],
+      "face_qa_flags": [
+        "HORN_CLEARANCE"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/11-KIRO/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "190d02810394a1550559e62d61587c32adb4cdf149990438cdd9595410c692b8",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/11-KIRO/TAKY_EXPLORER_CREW_11_KIRO_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "12",
+      "canonical_code": "PEACH",
+      "canonical_name_ko": "피치",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH",
+      "morphology_class": "RABBIT_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "long_ears",
+        "short_tail"
+      ],
+      "lower_outfit_class": "PLEATED_SKIRT",
+      "compatibility_flags": [
+        "LONG_EAR_SILHOUETTE",
+        "SEATED_SKIRT_GEOMETRY",
+        "IDENTITY_COLLISION_PAIR_02_LORI"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_ears",
+        "short_tail"
+      ],
+      "face_qa_flags": [
+        "IDENTITY_COLLISION_02_LORI"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+      "approved_source_sha256": "243ad29472471a630f7098cda915baf6796beeea7694af6dff92e590924f3a5c",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/TAKY_EXPLORER_CREW_12_PEACH_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "13",
+      "canonical_code": "MINT",
+      "canonical_name_ko": "민트",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/13-MINT",
+      "morphology_class": "CAPYBARA_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "short_tail"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "short_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/13-MINT/master/master_full.png",
+      "approved_source_sha256": "d55b116ad629195b9d70610e2d0db46fb3db0396d11299ae6bf80760989da58c",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/13-MINT/TAKY_EXPLORER_CREW_13_MINT_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "14",
+      "canonical_code": "TOTO",
+      "canonical_name_ko": "토토",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO",
+      "morphology_class": "MONKEY_BIPED",
+      "grip_limb_type": "HANDLIKE_PAW",
+      "appendages": [
+        "long_tail"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "TAIL_OCCLUSION",
+        "PREHENSILE_TAIL_CLEARANCE"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/master/master_full.png",
+      "approved_source_sha256": "94d6fb0e9f51a5602586bb86c8c7aa3deee78c0ea2435a56341ffed083b30d68",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/14-TOTO/TAKY_EXPLORER_CREW_14_TOTO_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "15",
+      "canonical_code": "RUNE",
+      "canonical_name_ko": "루네",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/15-RUNE",
+      "morphology_class": "CHAMELEON_BIPED",
+      "grip_limb_type": "CLAW_HAND",
+      "appendages": [
+        "curled_tail"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "CURLED_TAIL_CLEARANCE"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "curled_tail"
+      ],
+      "face_qa_flags": [
+        "EYE_DIRECTION_FIDELITY"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/15-RUNE/master/master_full.png",
+      "approved_source_sha256": "efd8e1a3d4adcd681de92ab4758be0c8805e10d7b72c69d26eeb8181b0fca51a",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/15-RUNE/TAKY_EXPLORER_CREW_15_RUNE_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "16",
+      "canonical_code": "POPO",
+      "canonical_name_ko": "포포",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO",
+      "morphology_class": "DUCK_BIPED",
+      "grip_limb_type": "WING",
+      "appendages": [
+        "wing_arms",
+        "tail_feathers"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "NO_HUMAN_HAND_INVENTION",
+        "WING_GRIP_REQUIRED"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "wing_arms",
+        "tail_feathers"
+      ],
+      "face_qa_flags": [
+        "BEAK_FACE",
+        "NO_HUMAN_FACE_ANATOMY"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+      "approved_source_sha256": "938cf86c2758191a0b9acf15d543d970ea3420954bcb61c0e505745c964310fe",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/TAKY_EXPLORER_CREW_16_POPO_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "17",
+      "canonical_code": "MARU",
+      "canonical_name_ko": "마루",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU",
+      "morphology_class": "MOLE_BIPED",
+      "grip_limb_type": "CLAW_PAW_HAND",
+      "appendages": [
+        "short_tail"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "CLAW_GRIP_FIDELITY"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "short_tail"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+      "approved_source_sha256": "c64f5677eeef050dc8800262f8d388a6f562cccaa7d8666799b6ba0649afe4c0",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/TAKY_EXPLORER_CREW_17_MARU_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "18",
+      "canonical_code": "BORI",
+      "canonical_name_ko": "보리",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/18-BORI",
+      "morphology_class": "KOALA_BIPED",
+      "grip_limb_type": "PAW_HAND",
+      "appendages": [
+        "round_ears"
+      ],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "EAR_CLEARANCE"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "round_ears"
+      ],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/18-BORI/master/master_full.png",
+      "approved_source_sha256": "45ed87f801823c7da88aedeea3f9433d80ad8f3938a92bc1987e4ea9b77eb8de",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/18-BORI/TAKY_EXPLORER_CREW_18_BORI_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "19",
+      "canonical_code": "RIN",
+      "canonical_name_ko": "린",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/19-RIN",
+      "morphology_class": "HUMAN",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [],
+      "lower_outfit_class": "SOURCE_LOCKED_CROPPED_PANTS",
+      "compatibility_flags": [],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [],
+      "face_qa_flags": [],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/19-RIN/master_full.png",
+      "approved_source_sha256": "01549fe7b457adde969c49f724046797931b0854043c83787bb79a38ab1da13d",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/19-RIN/TAKY_EXPLORER_CREW_19_RIN_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "20",
+      "canonical_code": "LUMI",
+      "canonical_name_ko": "루미",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI",
+      "morphology_class": "HUMAN",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [
+        "long_hair"
+      ],
+      "lower_outfit_class": "SKIRT",
+      "compatibility_flags": [
+        "LONG_HAIR_OCCLUSION",
+        "SEATED_SKIRT_GEOMETRY"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_hair"
+      ],
+      "face_qa_flags": [
+        "LONG_HAIR_OCCLUSION"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+      "approved_source_sha256": "a0bec323dba56f5b56b36cf37197404e302cf3ee4c1130c82468cd4ffb637c95",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/TAKY_EXPLORER_CREW_20_LUMI_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "21",
+      "canonical_code": "TESS",
+      "canonical_name_ko": "테스",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/21-TESS",
+      "morphology_class": "HUMAN",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [],
+      "lower_outfit_class": "SHORTS",
+      "compatibility_flags": [
+        "LEFT_HAND_SOURCE_FIDELITY_CHECK"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [],
+      "face_qa_flags": [
+        "LEFT_HAND_FLAG_NOT_FACE_RELEVANT"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/21-TESS/master_full.png",
+      "approved_source_sha256": "4637ce8bbcf89a8899d131105b91ff2af02f7ebce8707f094b1e2bb209503515",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/21-TESS/TAKY_EXPLORER_CREW_21_TESS_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "22",
+      "canonical_code": "SEL",
+      "canonical_name_ko": "셀",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/22-SEL",
+      "morphology_class": "SPECIAL_HUMANOID",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [
+        "source_pointed_ears",
+        "long_hair"
+      ],
+      "lower_outfit_class": "SKIRT_OR_SHORT_LOWER_SOURCE_LOCKED",
+      "compatibility_flags": [
+        "EAR_CLEARANCE",
+        "LONG_HAIR_OCCLUSION",
+        "SEATED_LOWER_OUTFIT_SOURCE_CHECK"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "source_pointed_ears",
+        "long_hair"
+      ],
+      "face_qa_flags": [
+        "POINTED_EAR_IDENTITY",
+        "LONG_HAIR_OCCLUSION"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/22-SEL/master_full.png",
+      "approved_source_sha256": "c4370543af795747d03c84fad78cf7a4c740c2c184fb5c696991e869bf93b744",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/22-SEL/TAKY_EXPLORER_CREW_22_SEL_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "23",
+      "canonical_code": "ZEKE",
+      "canonical_name_ko": "제이크",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE",
+      "morphology_class": "SPECIAL_HUMANOID",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [
+        "source_pointed_ears"
+      ],
+      "lower_outfit_class": "LONG_PANTS",
+      "compatibility_flags": [
+        "EAR_CLEARANCE",
+        "LOWER_BODY_LEG_PROPORTION_CHECK"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "source_pointed_ears"
+      ],
+      "face_qa_flags": [
+        "POINTED_EAR_IDENTITY"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+      "approved_source_sha256": "a4f3663f8ca25a313e13c5644751953e0ddb3bd15b464e4b12a0d52be8c15879",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/TAKY_EXPLORER_CREW_23_ZEKE_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    },
+    {
+      "visual_id": "24",
+      "canonical_code": "VIVI",
+      "canonical_name_ko": "비비",
+      "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/24-VIVI",
+      "morphology_class": "HUMAN",
+      "grip_limb_type": "HUMAN_HAND",
+      "appendages": [
+        "long_twin_tail_hair"
+      ],
+      "lower_outfit_class": "PLEATED_SKIRT",
+      "compatibility_flags": [
+        "LONG_HAIR_OCCLUSION",
+        "SEATED_SKIRT_GEOMETRY"
+      ],
+      "source_visual_authority_only": true,
+      "cross_character_part_reuse": false,
+      "morphology_status": "MORPHOLOGY_OUTFIT_BOUND",
+      "face_identity_features": [
+        "long_twin_tail_hair"
+      ],
+      "face_qa_flags": [
+        "LONG_HAIR_OCCLUSION"
+      ],
+      "face_expected_files": [
+        "face_neutral.png",
+        "face_listen.png",
+        "face_think.png",
+        "face_happy.png",
+        "face_concerned.png"
+      ],
+      "approved_source_path": "/TAKY/ASSETS/EXPLORER_CREW/24-VIVI/master_full.png",
+      "approved_source_sha256": "a1ef960abb35d084f16baa1e0e7b5fdcc889aa5810abbd9df2621ee1ced477e1",
+      "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/24-VIVI/TAKY_EXPLORER_CREW_24_VIVI_SOURCE_LOCK_2026-10-02.md",
+      "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+    }
+  ]
+}

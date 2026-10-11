@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Architecture Competition Representation Artifact",
+  "type": "object",
+  "required": ["agency", "competition_id", "entry_id", "artifact_id", "artifact_type"],
+  "properties": {
+    "agency": {"type": "string"},
+    "competition_id": {"type": "string"},
+    "competition_title": {"type": "string"},
+    "project_site": {"type": ["string", "null"]},
+    "entry_id": {"type": "string"},
+    "entry_rank": {"type": ["string", "null"]},
+    "designer": {"type": ["string", "null"]},
+    "submission_stage": {"type": ["string", "null"]},
+    "submission_revision": {"type": ["string", "null"]},
+    "artifact_id": {"type": "string"},
+    "artifact_type": {
+      "enum": ["BOARD", "REPORT_PAGE", "PPT_SLIDE", "DRAWING", "RENDER", "MODEL_PHOTO", "VIDEO_FRAME", "JURY_MATERIAL"]
+    },
+    "board_no": {"type": ["string", "null"]},
+    "page_no": {"type": ["integer", "null"]},
+    "drawing_mode": {
+      "type": ["string", "null"],
+      "enum": [null, "CONTEXT", "CONCEPT", "PROGRAM", "CIRCULATION", "PLAN", "SECTION", "ELEVATION", "AXONOMETRIC", "PERFORMANCE", "EXPERIENCE", "TECHNICAL"]
+    },
+    "drawing_name": {"type": ["string", "null"]},
+    "scale": {"type": ["string", "null"]},
+    "representation_technique": {"type": ["string", "null"]},
+    "visual_style": {"type": ["string", "null"]},
+    "source_url": {"type": ["string", "null"]},
+    "source_file": {"type": ["string", "null"]},
+    "source_hash": {"type": ["string", "null"]},
+    "jury_signal": {"type": ["string", "null"]},
+    "notes": {"type": ["string", "null"]},
+    "authority": {
+      "const": "PUBLIC_COMPETITION_REFERENCE_ONLY"
+    }
+  }
+}

@@ -4,7 +4,28 @@ on:
   push:
     paths:
       - 'AGENTS.md'
+      - 'CLAUDE.md'
       - 'TAKY.md'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/settings.local.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/AI_CONNECTION_TRUST_SCHEMA.json'
+      - 'OS/AI_CONNECTION_TRUST_MANIFEST.json'
+      - 'OS/DEPLOYMENT_OPS.md'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/LEARNING_ENGINE_CORE.md'
@@ -20,6 +41,7 @@ on:
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
+      - 'CURRENT/DATA/CHARACTER_ASSET_REFERENCE_PROJECTION_CURRENT.json'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
@@ -63,7 +85,28 @@ on:
   pull_request:
     paths:
       - 'AGENTS.md'
+      - 'CLAUDE.md'
       - 'TAKY.md'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/settings.local.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/AI_CONNECTION_TRUST_SCHEMA.json'
+      - 'OS/AI_CONNECTION_TRUST_MANIFEST.json'
+      - 'OS/DEPLOYMENT_OPS.md'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/LEARNING_ENGINE_CORE.md'
@@ -79,6 +122,7 @@ on:
       - 'OS/DRIVE_STORAGE_MAP.json'
       - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
       - 'ENFORCEMENT/**'
+      - 'CURRENT/DATA/CHARACTER_ASSET_REFERENCE_PROJECTION_CURRENT.json'
       - 'MASTER/CODEX_TASK_CONTRACT.md'
       - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
       - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
@@ -135,6 +179,7 @@ jobs:
           python -m py_compile ENFORCEMENT/evidence_ref_validator.py
           python -m py_compile ENFORCEMENT/preflight_bridge.py
           python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
+          python -m py_compile ENFORCEMENT/evidence_history_boundary_test.py
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
@@ -150,10 +195,20 @@ jobs:
           python -m py_compile ENFORCEMENT/behavioral_eval.py
           python -m py_compile ENFORCEMENT/trace_to_regression.py
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint_identity_test.py
+          python -m py_compile ENFORCEMENT/side_effect_ledger.py
+          python -m py_compile ENFORCEMENT/result_preview_gate.py
+          python -m py_compile ENFORCEMENT/ai_connection_trust_validator.py
+          python -m py_compile ENFORCEMENT/active_rule_profile_freshness_validator.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
+          python -m py_compile .claude/hooks/taky_hook.py
+          python -m py_compile .claude/hooks/taky_outcome_hook.py
+          python -m py_compile ENFORCEMENT/claude_hook_regression.py
+          python -m py_compile ENFORCEMENT/outcome_hook_regression.py
+          python -m py_compile ENFORCEMENT/alpha_manifest_validator.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
           python -m py_compile ENFORCEMENT/executor_transport.py
           python -m py_compile ENFORCEMENT/executor_adapter_registry.py
@@ -170,6 +225,12 @@ jobs:
           python -m py_compile ENFORCEMENT/work_os_productive_router.py
           python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
           python -m py_compile ENFORCEMENT/work_os_registry_validator.py
+      - name: Replay Claude hook security regression
+        run: python ENFORCEMENT/claude_hook_regression.py
+      - name: Replay TAKY outcome hook regression
+        run: python ENFORCEMENT/outcome_hook_regression.py
+      - name: Validate TAKY Alpha local manifest
+        run: python ENFORCEMENT/alpha_manifest_validator.py HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json
       - name: Lint rule ownership registry
         run: python ENFORCEMENT/rule_registry_lint.py
       - name: Validate MASTER file authority registry
@@ -268,6 +329,10 @@ jobs:
         run: node LEARNING/data/evidence-normalizer.test.js
       - name: Validate MASTER structural integrity and active projection
         run: python ENFORCEMENT/master_surface_integrity_validator.py
+      - name: Validate AI connection trust projection
+        run: python ENFORCEMENT/ai_connection_trust_validator.py --manifest OS/AI_CONNECTION_TRUST_MANIFEST.json --audit OS/AI_CONNECTION_AUDIT.json
+      - name: Validate active-rule projection freshness
+        run: python ENFORCEMENT/active_rule_profile_freshness_validator.py --repo-root . --profile PROJECTIONS/ACTIVE_RULE_PROFILE.md
       - name: Validate Drive storage role map
         run: python ENFORCEMENT/drive_storage_map_validator.py
       - name: Validate mobile app development registry
@@ -383,6 +448,10 @@ jobs:
           python execution_outcome_state_test.py
           python approval_checkpoint_resume_test.py
           python execution_state_approval_binding_test.py
+          python side_effect_ledger_test.py
+          python result_preview_gate_test.py
+          python ai_connection_trust_validator_test.py
+          python active_rule_profile_freshness_validator_test.py
           python untrusted_reader_quarantine_test.py
           python context_firewall_test.py
           python synthesis_barrier_test.py
@@ -392,6 +461,8 @@ jobs:
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
+      - name: Checkpoint identity binding regression
+        run: python ENFORCEMENT/execution_checkpoint_identity_test.py
 
       - name: Local Google Drive workspace regression
         run: python ENFORCEMENT/local_drive_workspace_test.py
@@ -645,8 +716,14 @@ jobs:
             exit 1
           fi
           echo "Expected forbidden transition failure observed"
+      - name: Replay revision-bound Result Preview / Release binding gate
+        run: python ENFORCEMENT/result_preview_gate_test.py
       - name: Replay AI-producer artifact PRE/POST negative and recovery cases
         run: python ENFORCEMENT/producer_artifact_gate_test.py
+      - name: Validate character derivative asset package identity gate
+        run: python ENFORCEMENT/character_derivative_asset_package_validator_test.py
+      - name: Validate character derivative package integration with common producer gate
+        run: python ENFORCEMENT/character_derivative_asset_producer_integration_test.py
       - name: Reject runtime without operational assimilation
         run: |
           if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
@@ -656,6 +733,8 @@ jobs:
           echo "Expected runtime working-model failure observed"
       - name: Replay evidence integrity failures
         run: python ENFORCEMENT/evidence_bridge_regression.py
+      - name: Replay canonical history boundary regression
+        run: python ENFORCEMENT/evidence_history_boundary_test.py
       - name: Validate Codex task contract fixture
         run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
       - name: Validate self-contained handoff fixture

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY Voice Asset Manifest V1",
+  "type": "object",
+  "required": ["schema_version","asset_id","layer","status","text","voice"],
+  "properties": {
+    "schema_version": {"const":"TAKY_VOICE_ASSET_MANIFEST_V1"},
+    "asset_id": {"type":"string"},
+    "layer": {"enum":["CHARACTER_VOICE","LEARNING_VOICE","COACH_VOICE"]},
+    "app_scope": {"type":"array","items":{"type":"string"}},
+    "character": {
+      "type":["object","null"],
+      "properties":{
+        "visual_id":{"type":"string"},
+        "code":{"type":"string"},
+        "voice_family":{"enum":["VF01_ADVENTURE","VF02_CARE","VF03_OBSERVE","VF04_LEADER","VF05_CONNECT","VF06_CALM_DISCOVERY"]},
+        "intent":{"type":"string"},
+        "acting_tags":{"type":"array","items":{"type":"string"}}
+      }
+    },
+    "hangul": {
+      "type":["object","null"],
+      "properties":{
+        "asset_kind":{"enum":["LETTER_NAME","ONSET_PHONEME","CODA_PHONEME","VOWEL","BLEND","SYLLABLE","WORD","INSTRUCTION","GAME_FEEDBACK","STORY"]},
+        "jamo":{"type":["string","null"]},
+        "position":{"enum":["NONE","ONSET","CODA","VOWEL"]},
+        "ipa_reference":{"type":["string","null"]},
+        "syllable":{"type":["string","null"]},
+        "learning_stage":{"type":["string","null"]}
+      }
+    },
+    "text": {"type":"string"},
+    "voice": {
+      "type":"object",
+      "required":["provider","voice_id","model"],
+      "properties":{
+        "provider":{"const":"ELEVENLABS"},
+        "voice_id":{"type":"string"},
+        "model":{"type":"string"},
+        "settings":{"type":"object"},
+        "generation_date":{"type":["string","null"]},
+        "generation_cost":{"type":["number","null"]}
+      }
+    },
+    "file": {
+      "type":"object",
+      "properties":{
+        "path":{"type":"string"},
+        "format":{"enum":["wav","mp3","opus"]},
+        "sha256":{"type":["string","null"]}
+      }
+    },
+    "qa": {
+      "type":"object",
+      "properties":{
+        "phonetic_correctness":{"type":["boolean","null"]},
+        "no_added_vowel":{"type":["boolean","null"]},
+        "no_letter_name_leak":{"type":["boolean","null"]},
+        "position_correctness":{"type":["boolean","null"]},
+        "child_clarity":{"type":["boolean","null"]},
+        "naturalness":{"type":["boolean","null"]},
+        "consistent_voice":{"type":["boolean","null"]},
+        "notes":{"type":"array","items":{"type":"string"}}
+      }
+    },
+    "status":{"enum":["CANDIDATE","QA_PASS","USER_APPROVED","LOCKED","REJECTED"]},
+    "approved_by":{"type":["string","null"]},
+    "locked":{"type":"boolean"},
+    "version":{"type":"integer","minimum":1}
+  }
+}

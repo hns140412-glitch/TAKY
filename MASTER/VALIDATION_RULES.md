@@ -118,6 +118,69 @@ When separately produced parts are assembled, inspect final output for applicabl
 
 Planned overlap may PASS when intentional and task-supporting. Unplanned overlap, excessive separation, broken alignment/anchoring or alternate-state composition failure = FAIL when it harms intended relation/usability.
 
+## Derived execution projection review-attestation gate — HARD LOCK
+
+A non-semantic execution projection such as `PROJECTIONS/ACTIVE_RULE_PROFILE.md` SHALL NOT prove semantic freshness merely by carrying a current owner-file fingerprint or a caller-editable body checksum.
+
+For material rule guidance, freshness requires one reviewed binding over the exact tuple:
+`PROFILE PATH + SOURCE OWNER FINGERPRINT + PROJECTION BODY HASH + SOURCE CANONICAL HEAD`.
+
+The reviewed binding SHALL be represented by a content-addressed review-attestation receipt under immutable HISTORY evidence and referenced by exact file hash from the existing `MASTER/RULE_REGISTRY.json` projection binding. The receipt SHALL state the bounded review basis, reviewer role, review result and review time. Inline fingerprint/body-hash metadata may describe the projection but SHALL NOT substitute for the review receipt.
+
+Changing an owner, projection body, source head, review basis/result or receipt bytes invalidates the previous attestation. Updating only `SOURCE_OWNER_FINGERPRINT`, `projection_body_hash`, or their registry copies without a new matching review receipt SHALL fail closed.
+
+Deterministic execution: `ENFORCEMENT/active_rule_profile_freshness_validator.py`.
+
+`OWNER HASH CURRENT != PROJECTION SEMANTICALLY REVIEWED`.
+`BODY HASH SELF-CONSISTENT != OWNER-TO-PROJECTION BINDING APPROVED`.
+`INLINE METADATA REFRESH != NEW REVIEW ATTESTATION`.
+
+## Result preview / release binding gate — HARD LOCK
+
+For material result-producing work where a user-visible, externally released, deployed, published, delivered, or otherwise consequential result is about to be claimed or released, validation SHALL be bound to the exact result revision.
+
+Execution form:
+`BUILD / PRODUCE -> RESULT REVISION HASH -> PREVIEW / OBSERVE -> ACCEPTANCE -> RELEASE BINDING -> RELEASE`.
+
+Applicability:
+- low-risk internal bookkeeping or non-result work may record `preview_required=false` with an explicit not-applicable reason;
+- a material release/deploy/publish path SHALL NOT use the not-applicable route;
+- visual preview is not mandatory for every data/code result, but the chosen preview surface must materially inspect the actual produced result at the requested claim level.
+
+A valid preview record binds:
+- task id;
+- concrete in-repository/result-root `result_path`;
+- exact `result_revision_hash` verified against that result file;
+- preview surface;
+- one or more preview evidence artifacts;
+- acceptance result;
+- acceptance method;
+- reviewer/evidence-path reference.
+
+A release binding additionally binds:
+- task id;
+- the same `result_revision_hash`;
+- exact `preview_receipt_hash`;
+- release target;
+- exact `release_payload_hash`.
+
+The preview receipt hash SHALL be recomputed from its canonical receipt core before release; missing/tampered/fabricated receipt metadata fails closed. Release validation SHALL independently rerun the preview requirements against the receipt core/evidence rather than trusting caller-supplied PASS/release-eligible flags.
+Release validation SHALL re-read the bound result path and confirm that its bytes still match the previewed revision.
+Producer/runtime use SHALL bind the preview task id to the current task; a valid preview from another task is not portable.
+Any result change after preview invalidates the previous Preview PASS.
+Any release target/payload change invalidates the previous release binding.
+High-impact approval and side-effect identity SHALL bind the same final release target/payload when those gates are active.
+
+Deterministic execution:
+- `ENFORCEMENT/result_preview_gate.py`;
+- producer COMPLETE / RELEASE_READY claims route through `ENFORCEMENT/producer_artifact_gate.py`;
+- controlled release lanes may use `runtime_orchestrator.result_preview_guard`.
+
+`PREVIEWED REVISION A != REVISION B VERIFIED`.
+`OPENED PAGE != PREVIEW PASS`.
+`PREVIEW PASS != RELEASED`.
+`DEPLOY RESPONSE != RESULT ACCEPTED`.
+
 ## End-to-end realization / traceability gate — HARD LOCK
 
 A material source decision/requirement shall be traceable forward through every applicable downstream stage and the actual result shall be traceable backward to authoritative source/decision.

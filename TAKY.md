@@ -71,6 +71,15 @@ TAKY ≠ chatbot persona only.
 TAKY ≠ a new authority layer above GRAND MASTER.
 GRAND MASTER LOGIC = TAKY's highest internal governance logic.
 
+## AI connection / security boundary
+External AI, MCP, plugin, connector and knowledge-source connectivity is governed by `OS/AI_CONNECTION_SECURITY.md`.
+TAKY remains open to new knowledge/tools while preserving least privilege, provenance, prompt-injection boundaries, human approval for high-impact/cost actions, and portable authority.
+
+## Economic operation boundary — SAVEY
+AI usage/cost routing is owned by `OS/SAVEY_AI_ECONOMY.md` under TAKY governance.
+SAVEY manages subscription utilization, model-call economy, and paid-API avoidance; it is not product or authority ownership.
+`TAKY AUTHORITY > SAVEY ECONOMY` and cost optimization SHALL NOT lower acceptance criteria, validation quality, or human approval boundaries.
+
 ## Primary execution priority — HARD LOCK
 
 For material result-producing work:
@@ -139,6 +148,7 @@ A workspace/dashboard/database/reference that displays, suggests, or coordinates
 ## Natural commands
 - 타키 불러와 / 최신 타키 기준으로 재개 / 타키 기준으로 진행 → boot + outcome/intent recovery + applicable-rule extraction + material traceability recovery
 - 타키 검토 / 타키 기준으로 검토 → read-only comparison; no canonical write
+- 외부/첨부 자료·링크·교재·사이트를 주고 `검토/봐봐/확인해/참고해` → `MASTER/REVIEW_DEFAULT_MINING_PROTOCOL.md` 적용: RAW 보존 → hash/source metadata → Mining → INDEX/DETAIL → Domain/Learning Projection → 적용성 검토. 사용자가 `보기만/마이닝하지 마/저장하지 마`라고 명시한 경우만 이 기본값을 우회한다.
 - 타키 반영 / 타키 업데이트 반영 → source/full-available-conversation/attachment recovery → outcome/intent contract → compare → execute/improve → proportionate validation → impact/regression → authorized canonical write → post-write verification → history
 - `/저장반영` → current material result/source → Google Drive durable save → Drive pointer verification → direct read → C2S when durable system/canonical delta exists → owner/canonical reflection → post-write verification; NotebookLM is not part of this default path
 - `/노션검토` → default `📚 나의 링크` content/link-intelligence review: original/root source → material attachments/child URLs/referenced sites → source-graph closure → analysis/compare/improve → disposition/owner/next action; canonical write remains separate
@@ -260,3 +270,7 @@ Do not claim "전부 반영" merely because a compact summary or MASTER rewrite 
 C2S compile closure remains independent from owner reflection and downstream realization:
 `C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
 A pending implementation/runtime/deployment/device action does not reopen C2S unless it reveals a knowledge-compilation defect; conversely C2S closure does not satisfy a user request that separately requires canonical reflection or implementation.
+
+## Shared-log shortcut
+
+"로그" activates shared-context resume under MASTER/AI_COLLABORATION_PROTOCOL.md §5–§6 (TKY-AICOLLAB-001).

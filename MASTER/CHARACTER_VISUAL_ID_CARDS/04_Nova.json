@@ -1,0 +1,213 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "04",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "노바",
+  "display_name_en": "Nova",
+  "character_class": "ANIMAL",
+  "species_or_body_type": "RODENT_BIPED",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg"
+    ],
+    "source_digests": [
+      "7e8fdf183cd7fbeca683855e0328d364f923c6888633e9c317ffd6a7b1838ddd"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/TAKY_EXPLORER_CREW_04_NOVA_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "round compact rodent head with broad cream muzzle/cheeks",
+      "eyes": {
+        "shape": "very large rounded",
+        "size": "large",
+        "spacing": "wide",
+        "angle": "soft",
+        "iris_color": "warm amber-brown",
+        "distinctive": "large glossy highlights; one-eye wink in source pose"
+      },
+      "brows": {
+        "shape": "short dark arch",
+        "weight": "medium"
+      },
+      "nose_muzzle_beak": {
+        "structure": "small rounded dark-brown nose on short muzzle",
+        "distinctive": "centered compact nose"
+      },
+      "mouth_lips": {
+        "shape": "wide open cheerful smile",
+        "distinctive": "small visible front teeth/fangs in smiling pose"
+      },
+      "ears_horns_antennae": {
+        "structure": "small rounded ears with pink inner ear"
+      },
+      "hair_fur_feather": {
+        "silhouette": "short warm-brown plush fur with small crown tuft",
+        "texture": "soft dense plush fur",
+        "hairline_or_pattern": "cream face/muzzle mask against warm-brown crown"
+      },
+      "base_tone": "warm brown + cream",
+      "unique_marks": [
+        "small rounded ears",
+        "cream facial mask",
+        "fluffy warm-brown tail"
+      ],
+      "resting_expression": "energetic cheerful smile"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "PAW_HAND",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "fluffy_tail"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "FLUFFY_TAIL_OCCLUSION"
+      ],
+      "morphology_class": "RODENT_BIPED",
+      "grip_limb_type": "PAW_HAND"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "gold-rim goggles",
+        "cream jacket",
+        "blue hoodie",
+        "dark cargo pants",
+        "dark backpack",
+        "blue-white sneakers"
+      ],
+      "signature_accessories": [
+        "gold star charms",
+        "dark paw gloves"
+      ],
+      "signature_equipment": [
+        "explorer goggles",
+        "backpack"
+      ],
+      "materials": [
+        "plush fur",
+        "woven jacket/hoodie",
+        "cargo textile",
+        "leather-like straps",
+        "metallic gold hardware",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "CROPPED_PANTS",
+      "identity_features": [
+        "fluffy_tail"
+      ],
+      "compatibility_flags": [
+        "FLUFFY_TAIL_OCCLUSION"
+      ]
+    },
+    "color_material_palette": [
+      "warm brown",
+      "cream",
+      "royal blue",
+      "charcoal",
+      "off-white",
+      "gold"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "e2e16983523bfe818dea57d9e9771cc1663e88f265feff0985026115f1f33e6f",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "7e8fdf183cd7fbeca683855e0328d364f923c6888633e9c317ffd6a7b1838ddd"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA/visual_id_reference_primary.jpeg"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/04-NOVA",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "nova",
+  "roster_class": "CORE6",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

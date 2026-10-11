@@ -1,0 +1,216 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "23",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "제이크",
+  "display_name_en": "ZEKE",
+  "character_class": "HYBRID",
+  "species_or_body_type": "SPECIAL_HUMANOID",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png"
+    ],
+    "source_digests": [
+      "a4f3663f8ca25a313e13c5644751953e0ddb3bd15b464e4b12a0d52be8c15879"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/TAKY_EXPLORER_CREW_23_ZEKE_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "slender oval humanoid face with sharper jaw/chin",
+      "eyes": {
+        "shape": "narrow almond",
+        "size": "medium-large",
+        "spacing": "medium",
+        "angle": "focused/slightly downturned",
+        "iris_color": "amber-gold",
+        "distinctive": "sharp dark upper line and serious gaze"
+      },
+      "brows": {
+        "shape": "straight slightly angled brow",
+        "weight": "medium"
+      },
+      "nose_muzzle_beak": {
+        "structure": "small straight human-like nose",
+        "distinctive": "defined stylized bridge/tip"
+      },
+      "mouth_lips": {
+        "shape": "small closed neutral mouth",
+        "distinctive": "thin serious lip contour"
+      },
+      "ears_horns_antennae": {
+        "structure": "large pointed source-locked ears with dark outer tips"
+      },
+      "hair_fur_feather": {
+        "silhouette": "short tousled white/silver hair with high irregular spikes",
+        "texture": "soft layered spiky hair",
+        "hairline_or_pattern": "long front fringe and lifted crown tufts"
+      },
+      "base_tone": "light skin + white/silver hair",
+      "unique_marks": [
+        "pointed dark-tipped ears",
+        "white tousled hair",
+        "amber eyes"
+      ],
+      "resting_expression": "serious observant-neutral"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "HUMAN_HAND",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "source_pointed_ears"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "EAR_CLEARANCE",
+        "LOWER_BODY_LEG_PROPORTION_CHECK"
+      ],
+      "morphology_class": "SPECIAL_HUMANOID",
+      "grip_limb_type": "HUMAN_HAND"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "black/charcoal tactical hoodie with grey-white panels and blue accents",
+        "black cargo pants",
+        "black-white chunky sneakers",
+        "black tactical backpack"
+      ],
+      "signature_accessories": [
+        "blue strap/buckle accents"
+      ],
+      "signature_equipment": [
+        "tablet",
+        "tactical backpack"
+      ],
+      "materials": [
+        "layered hair",
+        "technical shell fabric",
+        "cargo textile",
+        "plastic/metal buckles",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "LONG_PANTS",
+      "identity_features": [
+        "source_pointed_ears"
+      ],
+      "compatibility_flags": [
+        "EAR_CLEARANCE",
+        "LOWER_BODY_LEG_PROPORTION_CHECK"
+      ]
+    },
+    "color_material_palette": [
+      "white/silver hair",
+      "light skin",
+      "black",
+      "charcoal",
+      "grey-white",
+      "electric blue accent",
+      "amber eyes"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [
+      "POINTED_EAR_IDENTITY"
+    ],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "869f80b33d452af9f9a65e8f6af6904ca53a8d4e14427caa7515f1de8d58013d",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "a4f3663f8ca25a313e13c5644751953e0ddb3bd15b464e4b12a0d52be8c15879"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE/master_full.png"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/23-ZEKE",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-23",
+  "roster_class": "HUMAN_SPECIAL",
+  "qa_flags": [
+    "LOWER_LEG_FOOT_DERIVATIVE_HISTORY_INVALID"
+  ],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

@@ -37,7 +37,10 @@
       "drive": {
         "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
         "name": "READY_SET",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "LEARNING_ASSET_PROJECT_SURFACE",
+        "parent_id": "1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA",
+        "parent_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS",
+        "current_physical_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/READY_SET"
       },
       "open_prs": [
         {
@@ -295,7 +298,10 @@
       "drive": {
         "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
         "name": "SNAP_POP",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "LEARNING_ASSET_PROJECT_SURFACE",
+        "parent_id": "1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA",
+        "parent_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS",
+        "current_physical_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/SNAP_POP"
       },
       "open_prs": [
         {
@@ -343,7 +349,10 @@
       "drive": {
         "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
         "name": "HIDE_SEEK",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "LEARNING_ASSET_PROJECT_SURFACE",
+        "parent_id": "1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA",
+        "parent_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS",
+        "current_physical_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/HIDE_SEEK"
       },
       "open_prs": [
         {
@@ -401,7 +410,10 @@
       "drive": {
         "id": "1AybZa2Q3ISkIxMzfA9koMzfaVOwRqSBd",
         "name": "SHARED_ASSETS",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "LEARNING_ASSET_PROJECT_SURFACE",
+        "parent_id": "1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA",
+        "parent_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS",
+        "current_physical_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/SHARED_ASSETS"
       }
     },
     "MOBILE_CATALOG": {
@@ -418,7 +430,10 @@
       "drive": {
         "id": "1ZrA0uOOvtA6rohLDiFK4WZEycHbeto0m",
         "name": "MOBILE_CATALOG",
-        "parent_role": "10_PROJECTS"
+        "parent_role": "LEARNING_ASSET_PROJECT_SURFACE",
+        "parent_id": "1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA",
+        "parent_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS",
+        "current_physical_path": "TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/MOBILE_CATALOG"
       },
       "netlify": [
         {
@@ -434,11 +449,12 @@
   },
   "routing": {
     "new_app_source": "Create/use one GitHub product repository; register here before production deployment.",
-    "app_documents": "Use TAKY/10_PROJECTS/<APP> for design/assets/review/QA/release-handoff/reference material; do not maintain a competing current source-code tree in Drive.",
-    "shared_assets": "Use TAKY-ASSETS + TAKY/10_PROJECTS/SHARED_ASSETS.",
-    "app_catalog": "Use TAKY-MOBILE + TAKY/10_PROJECTS/MOBILE_CATALOG.",
+    "app_documents": "Use TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/<APP> for app design/assets/review/QA/release-handoff/reference material; do not maintain a competing current source-code tree in Drive.",
+    "shared_assets": "Current Drive surface: HNS TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/SHARED_ASSETS plus HNS TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY for approved UI master sources; release-safe distribution goes through SIEZEALL TAKY/20_PLATFORM/03_UPDATES. GitHub remains code/schema/manifest and legacy catalog, not binary runtime authority.",
+    "app_catalog": "Use TAKY-MOBILE code plus Drive TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/MOBILE_CATALOG.",
     "validation_pr": "Label/classify as VALIDATION_ONLY; never infer merge intent from open state.",
-    "release_claim": "Require exact Git commit ↔ deploy ID provenance and separate device evidence."
+    "release_claim": "Require exact code commit/deploy provenance for shell changes and separate asset manifest/hash/device evidence for asset changes; Netlify cannot establish asset identity.",
+    "drive_path_authority": "OS/DRIVE_STORAGE_MAP.json"
   },
   "freshness_policy": {
     "class": "VOLATILE_OPERATIONAL_SNAPSHOT",
@@ -468,6 +484,8 @@
       "behavior": "Read-only drift detection against configured GitHub default branches. Does not mutate registry or infer deploy freshness.",
       "fail_on_source_head_drift": true,
       "deploy_check": "NOT_INCLUDED_WITHOUT_EXPLICIT_DEPLOY_PROVIDER_EVIDENCE"
-    }
+    },
+    "asset_storage_route_updated_at": "2026-10-07",
+    "drive_physical_layout_updated_at": "2026-10-07"
   }
 }

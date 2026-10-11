@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TAKY Voice Asset Manifest V2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "asset_id",
+    "semantic_asset_key",
+    "layer",
+    "role",
+    "locale",
+    "status",
+    "text",
+    "voice",
+    "generation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "TAKY_VOICE_ASSET_MANIFEST_V2"
+    },
+    "asset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semantic_asset_key": {
+      "type": "string",
+      "minLength": 3
+    },
+    "layer": {
+      "enum": [
+        "CHARACTER_VOICE",
+        "LEARNING_VOICE",
+        "COACH_VOICE",
+        "MAKER_VOICE"
+      ]
+    },
+    "role": {
+      "enum": [
+        "PLAY_CAMP_TEACHER_KO",
+        "PLAY_CAMP_TEACHER_EN",
+        "PLAY_CAMP_COACH",
+        "PLAY_CAMP_MAKER",
+        "EXPLORER_CREW"
+      ]
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "app_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "intent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meaning": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "character": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "visual_id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "voice_family": {
+          "enum": [
+            "VF01_ADVENTURE",
+            "VF02_CARE",
+            "VF03_OBSERVE",
+            "VF04_LEADER",
+            "VF05_CONNECT",
+            "VF06_CALM_DISCOVERY"
+          ]
+        },
+        "acting_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "wit_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "learning": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "asset_kind": {
+          "enum": [
+            "LETTER_NAME",
+            "ONSET_PHONEME",
+            "CODA_PHONEME",
+            "VOWEL",
+            "BLEND",
+            "SYLLABLE",
+            "WORD",
+            "INSTRUCTION",
+            "GAME_FEEDBACK",
+            "STORY",
+            "PHONICS",
+            "CVC",
+            "MAKER_STEP"
+          ]
+        },
+        "symbol": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "position": {
+          "enum": [
+            "NONE",
+            "ONSET",
+            "CODA",
+            "VOWEL"
+          ]
+        },
+        "ipa_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "learning_stage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "required": [
+        "provider",
+        "voice_id",
+        "model"
+      ],
+      "properties": {
+        "provider": {
+          "const": "ELEVENLABS"
+        },
+        "voice_id": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "object"
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "required": [
+        "generation_reason",
+        "credit_delta"
+      ],
+      "properties": {
+        "generation_reason": {
+          "enum": [
+            "NEW_SEMANTIC_GAP",
+            "REJECTED_PREDECESSOR",
+            "VOICE_DESIGN_PREVIEW",
+            "TECHNICAL_DRY_RUN"
+          ]
+        },
+        "predecessor_asset_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rejection_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "generated_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "credit_delta": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "operation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "file": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "wav",
+            "mp3",
+            "opus"
+          ]
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "qa": {
+      "type": "object",
+      "properties": {
+        "phonetic_correctness": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "no_added_vowel": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "no_letter_name_leak": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "position_correctness": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "child_clarity": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "naturalness": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "consistent_voice": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "wit_fit": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "ui_timing_fit": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "CANDIDATE",
+        "QA_PASS",
+        "USER_APPROVED",
+        "LOCKED",
+        "REJECTED"
+      ]
+    },
+    "approved_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locked": {
+      "type": "boolean"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

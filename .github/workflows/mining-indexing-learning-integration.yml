@@ -7,6 +7,16 @@ on:
   pull_request:
     paths:
       - 'CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json'
+      - 'CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json'
+      - 'LEARNING/data/mining-learning-pattern-registry-template-v1.json'
+      - 'LEARNING/data/learning-reference-pattern-projection-rules-v1.json'
+      - 'LEARNING/projection/build-mining-learning-pattern-registry.js'
+      - 'LEARNING/projection/build-mining-learning-pattern-registry.test.js'
+      - 'LEARNING/projection/refresh-mining-learning-projection.js'
+      - 'LEARNING/projection/mining-learning-pattern-router.js'
+      - 'LEARNING/projection/mining-learning-pattern-router.test.js'
+      - 'LEARNING/pedagogy/grade-aware-term-selector.js'
+      - 'LEARNING/pedagogy/grade-aware-term-selector.test.js'
       - 'MASTER/LEARNING_DATA_RUNTIME_POLICY_V1.json'
       - 'LEARNING/policy/**'
       - 'LEARNING/intake/indexed-evidence-handoff.js'
@@ -34,6 +44,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Project indexed learning-reference patterns
+        run: node LEARNING/projection/build-mining-learning-pattern-registry.js
+      - name: Verify indexed learning-reference projection
+        run: node LEARNING/projection/build-mining-learning-pattern-registry.test.js
+      - name: Mining learning-pattern router
+        run: node LEARNING/projection/mining-learning-pattern-router.test.js
+      - name: Grade-aware term selector with mined pattern routing
+        run: node LEARNING/pedagogy/grade-aware-term-selector.test.js
       - name: Evidence policy bridge
         run: node LEARNING/policy/evidence-policy-bridge.test.js
       - name: Index to Learning evidence handoff

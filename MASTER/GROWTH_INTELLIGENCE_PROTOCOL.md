@@ -4,7 +4,9 @@ Status: REV_00 / CANONICAL OPERATIONAL PROTOCOL
 Rule ID: TKY-GROWTH-001
 Role: Turn external engineering ecosystems and internal execution evidence into localized, testable, reusable growth without bloating GRAND MASTER or copying external systems.
 Authority: TAKY / GRAND MASTER > this protocol > lower-layer growth backlogs / project experiments.
-Related: `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md`, `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md`, `MASTER/UI_REFERENCE_PROTOCOL.md`.
+Related: `MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md`, `MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md`, `MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md`, `MASTER/UI_REFERENCE_PROTOCOL.md`, `DOMAIN/TAKY_GROWTH_LINEAGE_CONTRACT.md`, `DOMAIN/GROW_DOMAIN_REGISTRY.json`.
+
+GROW is the shared growth layer. `ARCHI_GROW` (ArchiGrow) and `LEARNING_GROW` (Learning Grow) are registered child domains that reuse the same lineage/promotion gates while preserving their own domain authority. Future Grow domains must register through `DOMAIN/GROW_DOMAIN_REGISTRY.json`; they must not create a competing promotion owner.
 
 ## 0. Core principle — HARD LOCK
 

@@ -112,6 +112,7 @@ Per-app use:
 ## 8. DATA OWNERSHIP — HARD LOCK
 
 Shared Learning Domain owns long-term source/task/session/history meaning.
+Learning growth evidence routes through `LEARNING_GROW` in `DOMAIN/GROW_DOMAIN_REGISTRY.json`. `LEARNER_GROWTH` (changes in an individual learner's review/support/challenge evidence) and `LEARNING_SYSTEM_GROWTH` (candidate changes to shared engine strategy) are separate layers. Learner success/failure must not directly promote shared system policy; the existing outcome-feedback/growth-strategy ledger remains candidate-only and shared GROW promotion gates apply before system growth review.
 
 Apps are projections/capture/execution experiences, not isolated long-term learning silos.
 

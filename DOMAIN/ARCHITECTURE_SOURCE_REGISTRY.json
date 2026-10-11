@@ -1,0 +1,109 @@
+{
+  "schema": "ARCHIGROW_SOURCE_REGISTRY_V1",
+  "authority": "DOMAIN/ARCHITECTURE_WORK_OS.md §1, §4, §6 + DOMAIN/ARCHITECTURE_GROWTH_MAP.md §4.1/§5",
+  "updated_on": "2026-10-04",
+  "rule": "OFFICIAL SOURCE != TARGET PROJECT FACT until project identity, applicability/effective date and evidence reference are bound.",
+  "secret_policy": "Registry stores no API keys, tokens or credentials.",
+  "sources": [
+    {
+      "source_id": "LAW_OPEN_DATA",
+      "name": "국가법령정보 공동활용 LAW OPEN DATA",
+      "provider": "법제처",
+      "authority_status": "VERIFIED_OFFICIAL",
+      "authority_url": "https://open.law.go.kr/LSO/main.do",
+      "guide_url": "https://open.law.go.kr/LSO/openApi/guideList.do",
+      "purpose": [
+        "LAW_TEXT",
+        "LAW_HISTORY",
+        "ADMIN_RULE",
+        "LOCAL_ORDINANCE_LINKAGE"
+      ],
+      "transport": "OPEN_API",
+      "credential_requirement": "APPLICATION_API_AUTH_VALUE_REQUIRED",
+      "credential_storage": "EXTERNAL_SECRET_ONLY",
+      "cost_status": "NO_PAID_PATH_IDENTIFIED",
+      "adapter_status": "CONTRACT_READY_NOT_CONFIGURED",
+      "effective_date_required": true,
+      "target_fact_eligible": true,
+      "limitations": [
+        "API use/application required",
+        "legal applicability must be resolved per project and effective date",
+        "source attribution required"
+      ]
+    },
+    {
+      "source_id": "BUILDING_HUB_LEDGER",
+      "name": "국토교통부 건축HUB 건축물대장정보 서비스",
+      "provider": "국토교통부",
+      "authority_status": "VERIFIED_OFFICIAL",
+      "authority_url": "https://www.data.go.kr/data/15134735/openapi.do",
+      "purpose": [
+        "BUILDING_LEDGER",
+        "BUILDING_SUMMARY",
+        "FLOOR",
+        "AREA",
+        "REGION_ZONE_ATTRIBUTE"
+      ],
+      "transport": "REST_OPEN_API",
+      "credential_requirement": "PUBLIC_DATA_PORTAL_SERVICE_KEY_REQUIRED",
+      "credential_storage": "EXTERNAL_SECRET_ONLY",
+      "cost_status": "FREE",
+      "adapter_status": "CONTRACT_READY_NOT_CONFIGURED",
+      "effective_date_required": true,
+      "target_fact_eligible": true,
+      "limitations": [
+        "buildingHUB PK migration must be respected",
+        "project parcel/building identity must match",
+        "service key not stored in repository"
+      ]
+    },
+    {
+      "source_id": "LAND_USE_EUM",
+      "name": "토지이음 토지이용계획",
+      "provider": "국토교통부 토지이음",
+      "authority_status": "VERIFIED_OFFICIAL_WEB_VIEW",
+      "authority_url": "https://eum.go.kr/web/ar/lu/luLandDet.jsp",
+      "purpose": [
+        "LAND_USE_PLAN",
+        "ZONE_DISTRICT",
+        "ACT_RESTRICTION",
+        "FAR_BCR_HEIGHT_ROAD_CONTEXT"
+      ],
+      "transport": "OFFICIAL_WEB_VIEW",
+      "credential_requirement": "NONE_FOR_VIEW",
+      "credential_storage": "NONE",
+      "cost_status": "NO_PAID_PATH_IDENTIFIED",
+      "adapter_status": "MANUAL_OR_BROWSER_EVIDENCE_ONLY",
+      "effective_date_required": true,
+      "target_fact_eligible": true,
+      "limitations": [
+        "no automated API contract is asserted here",
+        "capture parcel/PNU and viewed-as-of evidence",
+        "linked legal text still requires law-source applicability review"
+      ]
+    },
+    {
+      "source_id": "VWORLD_SPATIAL",
+      "name": "VWorld national spatial information service",
+      "provider": "국토교통부 공간정보 서비스",
+      "authority_status": "OFFICIAL_PUBLIC_DATA_PORTAL_CONFIRMED__PROVIDER_SPEC_RECHECK_REQUIRED",
+      "authority_url": "https://www.data.go.kr/data/15140369/openapi.do",
+      "purpose": [
+        "BASE_MAP",
+        "SPATIAL_LAYER",
+        "CONTEXT_GEOMETRY"
+      ],
+      "transport": "OPEN_API_OR_MAP_SERVICE",
+      "credential_requirement": "PROVIDER_SPEC_RECHECK_REQUIRED",
+      "credential_storage": "EXTERNAL_SECRET_ONLY_IF_REQUIRED",
+      "cost_status": "FREE_PUBLIC_DATA_PORTAL_LISTING",
+      "adapter_status": "HOLD_UNTIL_DIRECT_PROVIDER_SPEC_RECHECK",
+      "effective_date_required": true,
+      "target_fact_eligible": false,
+      "limitations": [
+        "direct current VWorld provider specification must be rechecked before adapter implementation",
+        "visual context is not cadastral/legal authority by itself"
+      ]
+    }
+  ]
+}

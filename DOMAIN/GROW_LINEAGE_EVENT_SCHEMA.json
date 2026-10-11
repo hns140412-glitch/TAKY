@@ -1,0 +1,33 @@
+{
+  "schema_id": "GROW_LINEAGE_EVENT_V1",
+  "required": [
+    "event_id",
+    "grow_domain",
+    "stage",
+    "producer",
+    "source_ref",
+    "parent_refs",
+    "authority",
+    "promotion_authorized"
+  ],
+  "grow_domains": [
+    "ARCHI_GROW",
+    "LEARNING_GROW",
+    "UNROUTED"
+  ],
+  "stages": [
+    "RAW",
+    "INDEX",
+    "LEARNING",
+    "RELATION",
+    "EXECUTION",
+    "OUTCOME",
+    "GROWTH"
+  ],
+  "invariants": [
+    "promotion_authorized must be false at producer emission",
+    "producer emission is evidence transport, not domain authority transfer",
+    "parent_refs required from LEARNING stage onward",
+    "event_id is content-stable and supports idempotent materialization"
+  ]
+}

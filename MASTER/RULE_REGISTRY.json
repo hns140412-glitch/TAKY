@@ -100,7 +100,46 @@
     {
       "rule_id": "TKY-ASSET-001",
       "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
-      "scope": "global default for approved/reusable visual asset originals and separate layers in TAKY-ASSETS, exact-revision app pointers and verified PWA build copies, design-to-UI source/visual/runtime delivery gate across chats"
+      "scope": "global default for approved/reusable visual source registration, stable asset/slot/Visual-ID binding, HNS approved binary master, SIEZEALL release-safe distribution, device hash-verified activation, and GitHub/Netlify authority boundaries; current physical paths resolve through OS/DRIVE_STORAGE_MAP.json"
+    },
+    {
+      "rule_id": "TKY-CONNECTION-001",
+      "owner": "OS/AI_CONNECTION_SECURITY.md",
+      "scope": "AI/connector/plugin/MCP trust, prompt-injection, least-privilege and external-action security boundary"
+    },
+    {
+      "rule_id": "TKY-SAVEY-001",
+      "owner": "OS/SAVEY_AI_ECONOMY.md",
+      "scope": "subscription/local-first AI execution routing and cost-aware provider selection without lowering acceptance criteria"
+    },
+    {
+      "rule_id": "TKY-WORKSTATION-001",
+      "owner": "OS/WORKSTATION_CONTROL.md",
+      "scope": "controlled PC-side project execution, workspace/action boundaries, source preservation and application/result verification"
+    },
+    {
+      "rule_id": "TKY-ARCHIPIPE-001",
+      "owner": "DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md",
+      "scope": "architecture strong-pipeline stage contracts, receipts, recovery, cross-format integrity and delivery-surface validation"
+    },
+    {
+      "rule_id": "TKY-AICOLLAB-001",
+      "owner": "MASTER/AI_COLLABORATION_PROTOCOL.md",
+      "scope": "AI role matrix, executor routing, delegated-agent discipline, shared-context resume ('로그'), and shared-log policy; excludes economic routing owned by TKY-SAVEY-001"
+    },
+    {
+      "rule_id": "TKY-SAFEEXEC-001",
+      "owner": "MASTER/SAFE_TOOL_EXECUTION_PROTOCOL.md",
+      "scope": "pre-tool deterministic execution safety: exact-target-first, connector-before-local reverse-engineering, one-call-one-purpose, auth-adjacent enumeration restraint, file-tool-before-shell, and blocked-signature no-retry"
     }
-  ]
+  ],
+  "projection_bindings": {
+    "PROJECTIONS/ACTIVE_RULE_PROFILE.md": {
+      "source_owner_fingerprint": "sha256:09ab81823c2307958549b938a8901ec13f4d483645e828a1643aa3a3f06fcfa6",
+      "projection_body_hash": "sha256:eb4983db4084fd581aa7db728b8a66ace2fda7e21d9b3ef12d84249e4c19f171",
+      "binding_role": "CANONICAL_REVIEW_ATTESTATION",
+      "review_attestation_ref": "HISTORY/PROJECTION_ATTESTATIONS/ACTIVE_RULE_PROFILE_b8e64013393e21aff6efb43d0f56fbecd3b18fa6d5d2462651f953fc2123d3fa.json",
+      "review_attestation_sha256": "sha256:70c7eeead9fec2d6929f261234ace7aa5beeccc06dc1bbe6cdd78ce1533e5de7"
+    }
+  }
 }

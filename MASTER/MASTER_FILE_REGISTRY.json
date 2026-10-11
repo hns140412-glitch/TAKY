@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-09-25.1",
+  "registry_version": "2026-10-08.1",
   "purpose": "Classify every MASTER root artifact so location does not imply authority. Paths remain stable until a separately validated migration proves references will not break.",
   "authority_rule": "MASTER_DIRECTORY_PRESENCE != ACTIVE_CANONICAL_AUTHORITY",
   "classes": {
@@ -147,6 +147,53 @@
     },
     "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
+    },
+    "MASTER/AI_COLLABORATION_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
+    "MASTER/ASSET_DISTRIBUTION_MANIFEST_SCHEMA.json": {
+      "class": "ACTIVE_SUPPORT",
+      "authority_owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+    },
+    "MASTER/CHARACTER_VISUAL_ID_BACKFILL_REGISTRY_24_CANDIDATE_2026-10-08.json": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/CHARACTER_VISUAL_ID_REGISTRATION_STANDARD_CANDIDATE_2026-10-08.md": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/CHARACTER_VISUAL_ID_REGISTRATION_TEMPLATE_V1_CANDIDATE.json": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/CREW24_VISUAL_ID_METADATA_BACKFILL_SOURCE_2026-10-08.json": {
+      "class": "CANDIDATE",
+      "canonical": false,
+      "note": "support source for candidate Visual ID backfill; classification is conservative until promotion"
+    },
+    "MASTER/EVENT_THEME_PROTOCOL_CANDIDATE_2026-10-07.md": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/EVENT_THEME_REGISTRY_CANDIDATE_2026-10-07.json": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/REJECTED_GENERATED_CHARACTER_REFERENCE_SHEET_2026-10-08.md": {
+      "class": "HISTORICAL_EVIDENCE",
+      "status": "REJECTED_NOT_AUTHORITY"
+    },
+    "MASTER/REVIEW_DEFAULT_MINING_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
+    "MASTER/TAKY_MOBILE_DESIGN_AUTHORITY_CANDIDATE_2026-10-07.md": {
+      "class": "CANDIDATE",
+      "canonical": false
+    },
+    "MASTER/TAKY_MOBILE_DESIGN_AUTHORITY_REGISTRY_CANDIDATE_2026-10-07.json": {
+      "class": "CANDIDATE",
+      "canonical": false
     }
   }
 }

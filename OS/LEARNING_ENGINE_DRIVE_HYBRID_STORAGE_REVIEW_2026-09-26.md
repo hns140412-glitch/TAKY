@@ -48,7 +48,7 @@ Drive's version history, folder rename or copied JSON file does not provide a tr
 
 ## Existing Drive mapping — NO new folder created in this review
 
-- Governed TAKY root: `OS/DRIVE_STORAGE_MAP.json` already identifies 00_ACTIVE / 10_PROJECTS / 20_REVIEWS_C2S / 80_HANDOFF / 90_ARCHIVE. Reuse destinations according to those roles; don't create a second TAKY root.
+- Governed TAKY root: current physical presentation is locked by `OS/DRIVE_STORAGE_MAP.json` to `00_CONTEXT / 10_DOMAINS / 20_PLATFORM / 90_MAINTENANCE`. Historical roles such as `00_ACTIVE / 10_PROJECTS / 20_REVIEWS_C2S / 80_HANDOFF / 90_ARCHIVE` are preserved only as semantic/legacy leaves or maintenance evidence and must not be reconstructed as TAKY-root siblings. Resolve current destinations through the storage map; don't create a second TAKY root.
 - Independently indexed Data corpus has an existing `Data` folder and `Data/INBOX`. Use the *current* Index pointer, not name matching or a full corpus reread.
 - The already synchronized PC Google Drive Computer folder may host `TAKY_WORKSPACE` for durable local workspace snapshots, not Git repositories or high-churn private live transaction stores.
 - Sensitive child's raw history needs a restricted/encrypted export lane, not a broadly shared Data or family-readable folder. Never place access/refresh tokens, signing keys, passwords or raw family identifiers in manifest filenames.

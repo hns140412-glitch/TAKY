@@ -1,0 +1,23 @@
+{
+  "schema": "ARCHIGROW_VISUAL_GEOMETRY_GUARD_V1",
+  "authority": "DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md §D/E + DOMAIN/ARCHITECTURE_GROWTH_MAP.md §7",
+  "locked_geometry_fields": [
+    "object_id",
+    "object_type",
+    "level",
+    "polygon",
+    "height",
+    "openings",
+    "floor_count"
+  ],
+  "allowed_visual_fields": [
+    "camera",
+    "material",
+    "lighting",
+    "landscape",
+    "atmosphere",
+    "render_engine",
+    "postprocess"
+  ],
+  "rule": "AI/RENDER ENHANCEMENT MAY CHANGE VISUAL FIELDS, NEVER SILENTLY CHANGE LOCKED GEOMETRY."
+}

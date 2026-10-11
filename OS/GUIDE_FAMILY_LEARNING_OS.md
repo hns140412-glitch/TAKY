@@ -404,7 +404,7 @@ Family platform candidates/capabilities include authentication, member identity,
 Identity separation:
 - authentication ≠ member identity ≠ role ≠ storage connection.
 - memberId is the internal stable identity; visible names/kinship labels are presentation/context.
-- Cross-app child Character Master reuse is a member-scoped family profile projection governed by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; raw child photos and private Character Masters are not public TAKY-ASSETS data.
+- Cross-app child Character Master reuse is a member-scoped family profile projection governed by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; raw child photos and private Character Masters stay on the restricted HNS/family master route and are not SIEZEALL shared-distribution content.
 - User-facing authentication is an account sign-in flow. Google Sign-In may return an ID token internally, but the token is an implementation credential, not the user interaction model and not a family/member authority by itself.
 - The browser SHALL NOT decode a Google ID token to invent family, role or child scope. TAKY central verification resolves the Google subject to server-owned family membership before `TAKY_FAMILY_RUNTIME` is bound.
 - Browser ID tokens SHALL remain memory-only by default; do not persist them to localStorage, IndexedDB, Drive or public asset/config files.

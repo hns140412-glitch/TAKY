@@ -21,7 +21,7 @@ Responsibilities:
 - generate only required derivatives such as pose, expression, prop, alpha and optimized WebP/PNG variants;
 - validate anatomy, silhouette, identity consistency, dimensions, alpha and rights/consent boundaries;
 - calculate SHA/version and register the approved derivative;
-- write canonical reusable binaries to `TAKY-ASSETS` and provide exact consumer pointers.
+- write canonical reusable binaries to the HNS Drive approved asset master, then publish only approved release-safe distribution packages to SIEZEALL Drive through the asset manifest gate.
 
 The engine SHALL NOT decide story behavior, relationship progression, dialogue intent, reward logic or live scene selection.
 
@@ -101,8 +101,8 @@ Base badge art and child character overlay remain separate assets/layers.
 
 ### 6.1 Family Character Profile Projection — HARD LOCK
 
-User-generated child Character Masters are private family/member data, not public TAKY-ASSETS content.
-`TAKY-ASSETS` may contain schemas, static shared assets and release-safe shared metadata, but SHALL NOT become the public storage location for a child's raw photo or private Character Master merely because the character is reused across apps.
+User-generated child Character Masters are private family/member data, not SIEZEALL shared-distribution content.
+GitHub may contain schemas/contracts and release logic, while HNS Drive owns the private approved master route. SIEZEALL Drive receives only explicitly release-safe shared derivatives/packages and SHALL NOT become the storage location for a child's raw photo or private Character Master merely because the character is reused across apps.
 
 Cross-app sharing uses a family/member-scoped runtime projection owned by the Learning/Family domain:
 

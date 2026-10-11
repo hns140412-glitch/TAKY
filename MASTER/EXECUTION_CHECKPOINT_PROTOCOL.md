@@ -60,7 +60,11 @@ Contains only the state needed to continue safely:
 - material corrections;
 - source/evidence pointers;
 - update timestamp;
-- optional parent checkpoint hash/reference.
+- optional parent checkpoint hash/reference;
+- for material pipeline stages: input/output revision or hash, applied contract/version, checks/evidence, dependency/failure class, next route, side effects/rollback and approval scope when relevant.
+- when the checkpoint represents a human-approval boundary, `approval_binding` SHALL bind the requested action to `action_kind + action_payload_hash`; resume/consumption evidence must match that exact stored binding and the current task/action request.
+- checkpoint CURRENT mutation SHALL be serialized; approval completion uses compare-and-swap against the guarded checkpoint hash so a stale consumer cannot overwrite a newer CURRENT.
+- HISTORY append uses create-once immutable writes; a concurrent conflicting history identity fails closed before CURRENT advances.
 
 ### HISTORY
 Immutable minimal checkpoint evidence.
@@ -73,11 +77,50 @@ History is append-only evidence, not the default resume surface.
 `CURRENT = WHERE TO CONTINUE`
 `HISTORY = HOW WE GOT HERE WHEN NEEDED`
 
+## 2.1 Durable side-effect ledger — HARD LOCK
+
+Checkpoint progress and external side effects are related but not interchangeable.
+
+For a material action that can create remote/public/irreversible or otherwise non-idempotent effects (for example send, publish, delete, merge, deploy, permission/account mutation, external write), maintain a side-effect ledger record before resume/retry decisions.
+
+Deterministic implementation:
+`ENFORCEMENT/side_effect_ledger.py`.
+
+Minimum identity:
+- `effect_id`;
+- `task_id / namespace`;
+- `action_kind`;
+- exact `action_payload_hash`;
+- `idempotency_key`;
+- `state_schema_version`;
+- `target_ref`;
+- `execution_status`;
+- `replay_policy`;
+- before/after state evidence or external receipt when available;
+- approval reference when required.
+
+Replay policies:
+- `FORBID` — a recorded applied/verified effect blocks duplicate execution;
+- `IDEMPOTENT_RETRY` — retry is allowed only for the exact same effect identity/payload;
+- `VERIFY_THEN_RETRY` — an ambiguous/applied effect must be verified before retry;
+- `COMPENSATE` — compensation/rollback is required before retry.
+
+`APPLYING` is an indeterminate state and fails closed until verified.
+A changed payload/idempotency key/action kind/target is not a retry of the same effect and cannot reuse the old ledger identity.
+Side-effect lifecycle/replay policy is monotonic: an applied/verified effect cannot be rewritten back to PLANNED or relaxed to a weaker replay policy. COMPENSATED requires the COMPENSATE policy plus concrete compensation evidence.
+CURRENT corruption or missing CURRENT with surviving HISTORY fails closed; it SHALL NOT be treated as first execution.
+Every final execution-allowing decision is protected by an exclusive durable claim so concurrent callers cannot both receive authorization for the same effect attempt. A controlled runtime may perform an earlier non-reserving side-effect eligibility check, but it SHALL create the durable claim only after all non-mutating admission/validation gates pass. If a later approval-finalization conflict prevents authorization, a just-created reservation must be explicitly released or otherwise reconciled before retry.
+
+Controlled runtimes may bind `side_effect_guard` in `runtime_orchestrator.py`; eligibility checking SHALL precede execution and final reservation SHALL precede the material side effect.
+
+`CHECKPOINT SAVED != SIDE EFFECT SAFE TO REPLAY`.
+`RESUME != REPEAT EXTERNAL ACTION`.
+
 ## 3. Required execution loop
 
 For material multi-step work:
 
-`LOAD CURRENT -> EXECUTE ATOMIC UNIT -> VERIFY DELTA -> WRITE CURRENT -> APPEND MINIMAL HISTORY -> CONTINUE`
+`LOAD CURRENT -> CHECK SIDE-EFFECT LEDGER WHEN APPLICABLE -> EXECUTE ATOMIC UNIT -> VERIFY DELTA -> WRITE CURRENT -> APPEND MINIMAL HISTORY -> CONTINUE`
 
 The write occurs before the next unit.
 

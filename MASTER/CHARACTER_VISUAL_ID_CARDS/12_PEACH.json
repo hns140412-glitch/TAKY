@@ -1,0 +1,221 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "12",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "피치",
+  "display_name_en": "PEACH",
+  "character_class": "ANIMAL",
+  "species_or_body_type": "RABBIT_BIPED",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg"
+    ],
+    "source_digests": [
+      "243ad29472471a630f7098cda915baf6796beeea7694af6dff92e590924f3a5c"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/TAKY_EXPLORER_CREW_12_PEACH_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "round rabbit face with soft pale muzzle",
+      "eyes": {
+        "shape": "very large rounded",
+        "size": "large",
+        "spacing": "wide",
+        "angle": "soft",
+        "iris_color": "coral-red / deep pink",
+        "distinctive": "dark upper lashes with glossy highlights; one-eye wink in source pose"
+      },
+      "brows": {
+        "shape": "soft pale-pink arch",
+        "weight": "light"
+      },
+      "nose_muzzle_beak": {
+        "structure": "tiny pale-pink rabbit nose on short muzzle",
+        "distinctive": "small centered nose"
+      },
+      "mouth_lips": {
+        "shape": "wide open cheerful smile",
+        "distinctive": "small visible rabbit/fang-like tooth detail"
+      },
+      "ears_horns_antennae": {
+        "structure": "very long pale rabbit ears with vivid pink inner panels"
+      },
+      "hair_fur_feather": {
+        "silhouette": "very long voluminous pastel-pink wavy hair with curled side locks",
+        "texture": "silky layered hair over soft fur",
+        "hairline_or_pattern": "full layered pink fringe and long cascading curls"
+      },
+      "base_tone": "pale cream + saturated pastel pink hair",
+      "unique_marks": [
+        "orange-gold flower hair clip",
+        "very long pink hair",
+        "long pink-lined ears",
+        "fluffy pale-pink tail"
+      ],
+      "resting_expression": "playful cheerful smile"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "PAW_HAND",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "long_ears",
+        "short_tail"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "LONG_EAR_SILHOUETTE",
+        "SEATED_SKIRT_GEOMETRY",
+        "IDENTITY_COLLISION_PAIR_02_LORI"
+      ],
+      "morphology_class": "RABBIT_BIPED",
+      "grip_limb_type": "PAW_HAND"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "pink-white hoodie/jacket with floral motifs",
+        "navy pleated skirt",
+        "dark backpack",
+        "pink-white sneakers",
+        "white/pink socks"
+      ],
+      "signature_accessories": [
+        "orange-gold flower hair clip",
+        "floral patches/charms"
+      ],
+      "signature_equipment": [
+        "backpack"
+      ],
+      "materials": [
+        "soft fur",
+        "silky hair",
+        "woven hoodie/jacket",
+        "pleated fabric",
+        "leather-like straps",
+        "metallic gold hardware",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "PLEATED_SKIRT",
+      "identity_features": [
+        "long_ears",
+        "short_tail"
+      ],
+      "compatibility_flags": [
+        "LONG_EAR_SILHOUETTE",
+        "SEATED_SKIRT_GEOMETRY",
+        "IDENTITY_COLLISION_PAIR_02_LORI"
+      ]
+    },
+    "color_material_palette": [
+      "pale cream",
+      "pastel pink",
+      "coral pink",
+      "navy",
+      "white",
+      "gold/orange flower accent"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [
+      "IDENTITY_COLLISION_02_LORI"
+    ],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "b2a4b6ca7421a437a17f5042585c033d9444c1b7382126ff47cb42a50e03a55a",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "243ad29472471a630f7098cda915baf6796beeea7694af6dff92e590924f3a5c"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH/visual_id_reference_primary.jpeg"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/12-PEACH",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-12",
+  "roster_class": "EXPANSION",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

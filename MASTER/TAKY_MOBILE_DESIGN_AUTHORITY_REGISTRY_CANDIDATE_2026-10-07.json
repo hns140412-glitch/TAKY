@@ -1,0 +1,142 @@
+{
+  "schema_version": "TAKY_MOBILE_DESIGN_AUTHORITY_REGISTRY_V0_CANDIDATE",
+  "status": "CANDIDATE_NOT_PROMOTED",
+  "authority_id": "TAKY-MOBILE-DESIGN-AUTHORITY-V1-CANDIDATE",
+  "authority_doc": "MASTER/TAKY_MOBILE_DESIGN_AUTHORITY_CANDIDATE_2026-10-07.md",
+  "authority_order": [
+    "PROJECT_MASTER_AND_EXPLICIT_USER_RULES",
+    "APPROVED_GOLDEN_AND_VISUAL_ID",
+    "GOLDEN_JOURNEY_OR_STRONG_CANDIDATE",
+    "TAKY_FAMILY_UI_PRINCIPLES",
+    "STRUCTURE_ONLY_REFERENCES",
+    "EXTERNAL_REFERENCE_PRINCIPLES"
+  ],
+  "device_strategy": {
+    "dedicated_tablet_ui": [
+      "Play-Camp"
+    ],
+    "responsive_single_ui": [
+      "Ready-Set",
+      "Hide-Seek",
+      "Snap-Pop"
+    ],
+    "rule": "ONLY_PLAY_CAMP_HAS_DEDICATED_TABLET_UI__OTHERS_INHERIT_APP_MASTER_RESPONSIVE_CONTRACT",
+    "primary_device_mode": {
+      "Play-Camp": "TABLET",
+      "Ready-Set": "MOBILE",
+      "Hide-Seek": "MOBILE",
+      "Snap-Pop": "MOBILE"
+    },
+    "play_camp_tablet_policy": "SEPARATE_PRIMARY_TABLET_UI__NOT_MOBILE_DERIVATIVE"
+  },
+  "apps": {
+    "Ready-Set": {
+      "protected": [
+        "PROJECT_MASTER",
+        "YELLOW_PHONE_TABLET_TIMER_GOLDEN"
+      ],
+      "candidate": [
+        "WEEK_DAY_PLANNER_VISUAL_DIRECTION"
+      ],
+      "structure": [
+        "TODAY",
+        "MISSION",
+        "FOCUS",
+        "WRAP_UP",
+        "RESULT",
+        "CARRY_OVER"
+      ],
+      "device_policy": "RESPONSIVE_SINGLE_UI_INHERIT_APP_MASTER"
+    },
+    "Hide-Seek": {
+      "protected": [
+        "APPROVED_FOREST_MOSS_STEPPED_WATERFALL_VISUAL_ID",
+        "TRACE",
+        "LINK",
+        "CORE",
+        "RECALL"
+      ],
+      "refine": [
+        "MODE_AS_PLACE_AND_ACTION",
+        "LEARNING_OBJECT_PRIMARY",
+        "CHARACTER_HINT_PARTICIPATION"
+      ],
+      "device_policy": "RESPONSIVE_SINGLE_UI_INHERIT_APP_MASTER"
+    },
+    "Snap-Pop": {
+      "protected": [
+        "APPROVED_COASTAL_BEACH_PIER_VISUAL_ID",
+        "ULTRA_DENSITY_ILLUSTRATION",
+        "LIVE_UI_OVER_ART"
+      ],
+      "refine": [
+        "SPATIAL_THINKING_METAPHOR",
+        "USER_EXPRESSION_PRIMARY"
+      ],
+      "device_policy": "RESPONSIVE_SINGLE_UI_INHERIT_APP_MASTER"
+    },
+    "Play-Camp": {
+      "source_authority": "D:/Git PWA/Play Camp/TAKY_CURRENT.md",
+      "protected": [
+        "TABLET_FIRST_CONCEPT_PLAY",
+        "TABLET_LANDSCAPE_FIRST",
+        "NO_SCROLL_CORE_SCENES",
+        "ONE_BOUNDARY_GROWTH_MODEL"
+      ],
+      "verified_viewports": [
+        "1024x768",
+        "1180x820"
+      ],
+      "device_policy": "DEDICATED_TABLET_UI",
+      "display_name_ko": "수련 캠프",
+      "display_name_en": "Play Camp",
+      "runtime_id": "PLAY_CAMP",
+      "legacy_names": [
+        "Foundation Explorer"
+      ],
+      "primary_device_mode": "TABLET",
+      "tablet_ui_authority": "SEPARATE_PRIMARY_UI_STANDARD",
+      "mobile_role": "SECONDARY_FALLBACK_PRESENTATION",
+      "tablet_ui_standard": "D:/Git PWA/Play Camp/PLAY_CAMP_TABLET_UI_STANDARD_CANDIDATE_2026-10-07.md",
+      "tablet_design_gate_review": "D:/Git PWA/Play Camp/PLAY_CAMP_TABLET_DESIGN_GATE_REVIEW_2026-10-08.md",
+      "tablet_design_gate_status": "CANDIDATE_VISUAL_REVIEW_PASS__GOLDEN_NOT_PROMOTED",
+      "tablet_design_gate_drive_document_id": "1bH_Lp_XzvssHtxmxqn0I1Kzr1j3N4_uEHixbwJxhg98",
+      "tablet_design_gate_drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+      "visual_binding_contract": "D:/Git PWA/Play Camp/PLAY_CAMP_VISUAL_BINDING_CONTRACT_CANDIDATE_2026-10-08.md",
+      "visual_binding_drive_document_id": "1rN0qg4WhcA6numNR1tdSROKT0n5Ix_SrxZ6pIi5gD1s",
+      "crew_binding_status": "BASE_ASSET_INHERITED__EXTRA_PROGRESSIVE",
+      "world_art_status": "CANDIDATE_CSS_ENVIRONMENT_FINAL_ILLUSTRATION_OPEN",
+      "crew_additional_asset_standard": "D:/Git PWA/Play Camp/PLAY_CAMP_CREW_ADDITIONAL_ASSET_STANDARD_CANDIDATE_2026-10-08.md",
+      "crew_additional_asset_contract": "D:/Git PWA/Play Camp/src/data/crew-additional-asset-contract.v1.json",
+      "crew_additional_asset_drive_document_id": "1yPpMVQa1llm0qOZvaZgn915P3UQbxIDVF14HONamtdU"
+    }
+  },
+  "event_theme": {
+    "protocol": "MASTER/EVENT_THEME_PROTOCOL_CANDIDATE_2026-10-07.md",
+    "registry": "MASTER/EVENT_THEME_REGISTRY_CANDIDATE_2026-10-07.json",
+    "invariant": "EVENT_MAY_DECORATE_BUT_MUST_NOT_REWRITE_EXPERIENCE"
+  },
+  "external_reference_role": "VALIDATION_AND_REFINEMENT_ONLY",
+  "storage": {
+    "human_authority_route": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "human_authority_document_id": "1yQmMFMNukS_8lEObaYBsZFdy1bNhPX4aehl0JRTiQU4",
+    "human_authority_document_url": "https://docs.google.com/document/d/1yQmMFMNukS_8lEObaYBsZFdy1bNhPX4aehl0JRTiQU4/edit",
+    "machine_contract_route": "TAKY_GIT_MASTER_AND_ENFORCEMENT",
+    "app_consumption": "PINNED_AUTHORITY_AND_ASSET_REVISIONS"
+  },
+  "promotion_requires": [
+    "IMPACT_REVIEW",
+    "TARGETED_RENDER_REVIEW",
+    "REGRESSION_PASS",
+    "USER_APPROVAL"
+  ],
+  "character_visual_id": {
+    "registration_standard": "MASTER/CHARACTER_VISUAL_ID_REGISTRATION_STANDARD_CANDIDATE_2026-10-08.md",
+    "registration_template": "MASTER/CHARACTER_VISUAL_ID_REGISTRATION_TEMPLATE_V1_CANDIDATE.json",
+    "crew24_backfill_registry": "MASTER/CHARACTER_VISUAL_ID_BACKFILL_REGISTRY_24_CANDIDATE_2026-10-08.json",
+    "crew24_cards_dir": "MASTER/CHARACTER_VISUAL_ID_CARDS",
+    "drive_standard_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_backfill_status_document_id": "1dJ22_yVUeiI1UiXYV1rsab-002X6YRWfH-z4pY7IyiI",
+    "invariant": "BASE_IDENTITY_INHERITED__DERIVATIVES_PROGRESSIVE__NO_GUESSING"
+  }
+}

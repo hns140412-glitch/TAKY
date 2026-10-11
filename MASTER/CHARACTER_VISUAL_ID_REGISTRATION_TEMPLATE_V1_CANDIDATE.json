@@ -1,0 +1,118 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "TEMPLATE",
+  "visual_id": "",
+  "revision": "",
+  "display_name_ko": "",
+  "display_name_en": "",
+  "character_class": "ANIMAL|HUMAN_SPECIAL|HYBRID",
+  "species_or_body_type": "",
+  "authority": {
+    "approved_source_refs": [],
+    "source_digests": [],
+    "approval_ref": "",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "",
+      "eyes": {
+        "shape": "",
+        "size": "",
+        "spacing": "",
+        "angle": "",
+        "iris_color": "",
+        "distinctive": ""
+      },
+      "brows": {
+        "shape": "",
+        "weight": ""
+      },
+      "nose_muzzle_beak": {
+        "structure": "",
+        "distinctive": ""
+      },
+      "mouth_lips": {
+        "shape": "",
+        "distinctive": ""
+      },
+      "ears_horns_antennae": {
+        "structure": ""
+      },
+      "hair_fur_feather": {
+        "silhouette": "",
+        "texture": "",
+        "hairline_or_pattern": ""
+      },
+      "base_tone": "",
+      "unique_marks": [],
+      "resting_expression": ""
+    },
+    "body": {
+      "scale_class": "",
+      "head_body_ratio": "",
+      "torso_shoulders": "",
+      "limbs": "",
+      "hand_paw_wing_flipper": "",
+      "foot_leg": "",
+      "tail_appendages": "",
+      "posture_center_of_gravity": "",
+      "silhouette": "",
+      "species_motion_constraints": []
+    },
+    "costume_equipment": {
+      "identity_critical": [],
+      "signature_accessories": [],
+      "signature_equipment": [],
+      "materials": [],
+      "scene_variable_allowed": []
+    },
+    "color_material_palette": []
+  },
+  "detail_anchors": {
+    "front_face": null,
+    "three_quarter_face": null,
+    "profile_face": null,
+    "eyes": null,
+    "nose_muzzle_beak": null,
+    "mouth": null,
+    "hair_fur_feather": null,
+    "skin_fur_texture": null,
+    "limb_detail": null,
+    "signature_prop_grip": null
+  },
+  "turnaround_views": {
+    "front": null,
+    "three_quarter": null,
+    "side": null,
+    "back": null
+  },
+  "variable_derivatives": {
+    "expression_states": [],
+    "phoneme_mouth_states": [],
+    "gaze_states": [],
+    "action_states": [],
+    "tool_states": [],
+    "event_accessories": []
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": null
+  },
+  "runtime": {
+    "base_asset_refs": [],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": []
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  }
+}

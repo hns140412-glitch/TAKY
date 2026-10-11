@@ -1,0 +1,212 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "17",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "마루",
+  "display_name_en": "MARU",
+  "character_class": "ANIMAL",
+  "species_or_body_type": "MOLE_BIPED",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png"
+    ],
+    "source_digests": [
+      "c64f5677eeef050dc8800262f8d388a6f562cccaa7d8666799b6ba0649afe4c0"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/TAKY_EXPLORER_CREW_17_MARU_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "round compact mole-like head with broad pale muzzle and cheek field",
+      "eyes": {
+        "shape": "large rounded",
+        "size": "large",
+        "spacing": "wide",
+        "angle": "soft",
+        "iris_color": "warm brown/amber",
+        "distinctive": "glossy highlights under cap brim"
+      },
+      "brows": {
+        "shape": "short soft dark arch",
+        "weight": "medium"
+      },
+      "nose_muzzle_beak": {
+        "structure": "small pink rounded nose centered on pale muzzle",
+        "distinctive": "prominent whiskers extend laterally"
+      },
+      "mouth_lips": {
+        "shape": "wide open cheerful smile",
+        "distinctive": "small visible upper teeth in source pose"
+      },
+      "ears_horns_antennae": {
+        "structure": "small low round ears largely blending into fur silhouette"
+      },
+      "hair_fur_feather": {
+        "silhouette": "short smooth medium-brown fur",
+        "texture": "soft dense plush fur",
+        "hairline_or_pattern": "brown crown with pale cream muzzle/cheek field"
+      },
+      "base_tone": "medium brown + pale cream",
+      "unique_marks": [
+        "long white whiskers",
+        "pink nose",
+        "compact short-tail body"
+      ],
+      "resting_expression": "cheerful open smile"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "CLAW_PAW_HAND",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "short_tail"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "CLAW_GRIP_FIDELITY"
+      ],
+      "morphology_class": "MOLE_BIPED",
+      "grip_limb_type": "CLAW_PAW_HAND"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "blue-white cap",
+        "grey hoodie",
+        "cream-blue explorer jacket",
+        "dark shorts",
+        "blue-white sneakers",
+        "navy backpack"
+      ],
+      "signature_accessories": [
+        "gold star hardware"
+      ],
+      "signature_equipment": [
+        "backpack with rolled mat"
+      ],
+      "materials": [
+        "short plush fur",
+        "woven cap/hoodie/jacket",
+        "shorts textile",
+        "leather-like straps",
+        "metallic gold hardware",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "SHORTS",
+      "identity_features": [
+        "short_tail"
+      ],
+      "compatibility_flags": [
+        "CLAW_GRIP_FIDELITY"
+      ]
+    },
+    "color_material_palette": [
+      "medium brown",
+      "pale cream",
+      "grey",
+      "royal blue",
+      "off-white",
+      "charcoal",
+      "gold"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "2c35ce2e5b1c0a2b0923b3e0f25eb8a7bf355d908c29d54c4311306238fb84fb",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "c64f5677eeef050dc8800262f8d388a6f562cccaa7d8666799b6ba0649afe4c0"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/17-MARU/master/master_full.png"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/17-MARU",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-17",
+  "roster_class": "EXPANSION",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

@@ -12,10 +12,10 @@ This repository is governed by TAKY. Coding agents, including Codex, are impleme
 Handoff SHA, prior completion claims, and narrative summaries are evidence, not automatic authority. Verify current repository state before implementation.
 
 ## Role lock
-- TAKY/ChatGPT acts as ORCHESTRATOR and REVIEWER.
-- Codex acts as IMPLEMENTATION EXECUTOR.
-- Codex MUST NOT silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
-- If implementation discovers a requirement conflict, stop the conflicting change and report the conflict; do not invent a product decision.
+Activation only. Semantic owner: MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001). Do not redefine role/routing semantics here.
+- Apply the executor role assigned by TAKY under TKY-AICOLLAB-001.
+- Economic routing is owned by OS/SAVEY_AI_ECONOMY.md (TKY-SAVEY-001).
+- Executor guardrails: follow MASTER/AI_COLLABORATION_PROTOCOL.md §4 (TKY-AICOLLAB-001).
 
 ## Mandatory preflight before implementation
 For every implementation task, record or verify:
@@ -55,8 +55,10 @@ A Codex self-report is evidence only. `CODEX_DONE` is not `TAKY_PASS`.
 ## State machine
 In a TAKY-controlled repository runtime, lifecycle transitions SHOULD be executed/checked through `ENFORCEMENT/execution_state_engine.py` rather than inferred from narration.
 
-Allowed lifecycle:
-`READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`
+Canonical lifecycle semantics are executor-neutral:
+`READY -> ASSIGNED_TO_EXECUTOR -> IN_PROGRESS -> EXECUTOR_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`.
+
+For backward compatibility, controlled runtime currently accepts `ASSIGNED_TO_CODEX` as the internal alias of `ASSIGNED_TO_EXECUTOR` and `CODEX_DONE` as the internal alias of `EXECUTOR_DONE`. Executor identity (Claude/Codex/etc.) is recorded separately and must not redefine lifecycle semantics.
 
 Rules:
 - `CODEX_DONE -> MERGED` is forbidden.
@@ -77,3 +79,6 @@ Every implementation completion report MUST include:
 - requested next transition
 
 Do not claim `PASS`, `MERGED`, `DEPLOYED`, or `recurrence prevented` without evidence for the corresponding gate.
+
+## Shared-log shortcut
+Activation only: follow MASTER/AI_COLLABORATION_PROTOCOL.md §5–§6 (TKY-AICOLLAB-001). Do not redefine resume/log semantics here.

@@ -185,6 +185,18 @@ Required behavior:
 
 `COMPARE TO LEARN, NOT TO COPY`.
 
+### 7.1 UI design-contract binding
+
+When UI_IMPLEMENTATION is material and the current TAKY design gate applies:
+- design_contract_ref identifies the frozen applicable DG/PS instance;
+- baseline evidence includes the approved visual/reference revision and, when material, its hash;
+- responsive_states_defined covers the applicable viewport/context matrix rather than device-name hardcoding;
+- accessibility_check_defined includes the applicable keyboard/focus/reflow/text-spacing/target-size checks;
+- acceptance conditions keep HARNESS_HEALTH / TARGET_RENDER / INTERACTION / A11Y / DEVICE_OR_RUNTIME evidence separate where applicable;
+- stale spec/artifact-bound receipts are not reused after a material revision.
+
+This reuses the existing UI_IMPLEMENTATION profile. It does not add a PPTX/XLSX engineering profile and does not make external design/test tools project authority.
+
 ## 8. Validation depth and report compression — HARD LOCK
 
 Profile-driven execution SHALL use proportionate validation.

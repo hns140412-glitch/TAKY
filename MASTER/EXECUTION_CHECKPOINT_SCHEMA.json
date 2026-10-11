@@ -28,6 +28,32 @@
     "source_refs": {"type": "array", "items": {"type": "string"}},
     "updated_at": {"type": "string", "format": "date-time"},
     "parent_checkpoint": {"type": ["string", "null"]},
+    "input_refs": {"type": "array", "items": {"type": "string"}},
+    "input_hashes": {"type": "array", "items": {"type": "string"}},
+    "output_refs": {"type": "array", "items": {"type": "string"}},
+    "output_hashes": {"type": "array", "items": {"type": "string"}},
+    "contract_version": {"type": ["string", "null"]},
+    "checks": {"type": "array", "items": {"type": "string"}},
+    "failure_class": {"type": ["string", "null"]},
+    "next_route": {"type": ["string", "null"]},
+    "rollback": {"type": ["string", "null"]},
+    "approval_scope": {"type": ["string", "null"]},
+    "side_effect_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "approval_binding": {
+      "type": "object",
+      "required": ["action_kind", "action_payload_hash"],
+      "properties": {
+        "action_kind": {"type": "string", "minLength": 1},
+        "action_payload_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-fA-F]{64}$"
+        }
+      },
+      "additionalProperties": true
+    },
     "notes": {"type": "string"}
   },
   "additionalProperties": true

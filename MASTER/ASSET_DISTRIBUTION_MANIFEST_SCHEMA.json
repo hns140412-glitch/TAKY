@@ -1,0 +1,48 @@
+{
+  "schema": "TAKY_ASSET_DISTRIBUTION_MANIFEST_SCHEMA_V1",
+  "version": "2026-10-07.1",
+  "authority": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+  "required_top_level": [
+    "schema",
+    "package_id",
+    "package_version",
+    "generated_at",
+    "source_authority",
+    "distribution_authority",
+    "assets"
+  ],
+  "source_authority": "HNS_DRIVE_APPROVED_ASSET_MASTER",
+  "distribution_authority": "SIEZEALL_DRIVE_APPROVED_PACKAGE",
+  "runtime_consumer": "DEVICE_VERIFIED_CACHE",
+  "asset_required_fields": [
+    "slot_id",
+    "asset_id",
+    "master_ref",
+    "master_revision",
+    "source_sha256",
+    "distribution_ref",
+    "distribution_sha256",
+    "mime_type",
+    "release_scope",
+    "consumer_apps",
+    "status"
+  ],
+  "allowed_status": [
+    "APPROVED_FOR_DISTRIBUTION"
+  ],
+  "allowed_release_scope": [
+    "PUBLIC_RELEASE_SAFE",
+    "FAMILY_PRIVATE_AUTHENTICATED",
+    "INTERNAL_ONLY"
+  ],
+  "rules": [
+    "slot_id unique within a package",
+    "asset_id unique within a package unless explicit multi-slot alias is defined in a future schema revision",
+    "source_sha256 and distribution_sha256 are lowercase or uppercase 64-hex digests",
+    "PUBLIC_RELEASE_SAFE may be placed on SIEZEALL shared distribution",
+    "FAMILY_PRIVATE_AUTHENTICATED must not be placed on a broadly shared/public package",
+    "INTERNAL_ONLY remains HNS/internal and cannot be distributed",
+    "Netlify filename/path is never asset identity authority",
+    "missing required slot fails closed"
+  ]
+}

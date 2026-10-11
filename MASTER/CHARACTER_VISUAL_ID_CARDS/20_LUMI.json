@@ -1,0 +1,218 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "20",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "루미",
+  "display_name_en": "LUMI",
+  "character_class": "HUMAN_SPECIAL",
+  "species_or_body_type": "HUMAN",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png"
+    ],
+    "source_digests": [
+      "a0bec323dba56f5b56b36cf37197404e302cf3ee4c1130c82468cd4ffb637c95"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/TAKY_EXPLORER_CREW_20_LUMI_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "soft oval human face with small tapered chin",
+      "eyes": {
+        "shape": "large almond",
+        "size": "large",
+        "spacing": "medium",
+        "angle": "soft slightly lifted outer corners",
+        "iris_color": "violet-purple",
+        "distinctive": "lavender highlights and dark lashes"
+      },
+      "brows": {
+        "shape": "slim soft arch",
+        "weight": "light"
+      },
+      "nose_muzzle_beak": {
+        "structure": "small straight human nose",
+        "distinctive": "minimal stylized bridge/tip"
+      },
+      "mouth_lips": {
+        "shape": "small neutral closed lips",
+        "distinctive": "subtle pale lip contour"
+      },
+      "ears_horns_antennae": {
+        "structure": "human ears mostly covered by long hair"
+      },
+      "hair_fur_feather": {
+        "silhouette": "very long voluminous wavy dark-purple/black hair",
+        "texture": "silky layered waves",
+        "hairline_or_pattern": "center/soft-side fringe with violet highlights and small lavender hair clips"
+      },
+      "base_tone": "light skin + deep purple-black hair",
+      "unique_marks": [
+        "very long wavy hair",
+        "violet eyes",
+        "small lavender hair clips"
+      ],
+      "resting_expression": "quiet thoughtful-neutral"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "HUMAN_HAND",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "long_hair"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "LONG_HAIR_OCCLUSION",
+        "SEATED_SKIRT_GEOMETRY"
+      ],
+      "morphology_class": "HUMAN",
+      "grip_limb_type": "HUMAN_HAND"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "lavender-white oversized jacket",
+        "black inner top",
+        "black skirt",
+        "lavender-white chunky sneakers",
+        "black backpack"
+      ],
+      "signature_accessories": [
+        "large lavender-white headphones around neck",
+        "purple bear motifs",
+        "hair clips"
+      ],
+      "signature_equipment": [
+        "headphones",
+        "notebook",
+        "backpack"
+      ],
+      "materials": [
+        "silky hair",
+        "woven technical jacket",
+        "skirt textile",
+        "plastic/metal headphones",
+        "synthetic backpack",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "SKIRT",
+      "identity_features": [
+        "long_hair"
+      ],
+      "compatibility_flags": [
+        "LONG_HAIR_OCCLUSION",
+        "SEATED_SKIRT_GEOMETRY"
+      ]
+    },
+    "color_material_palette": [
+      "deep purple-black",
+      "violet",
+      "lavender",
+      "white",
+      "black",
+      "soft pink accent"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [
+      "LONG_HAIR_OCCLUSION"
+    ],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "047fa70227188735b0b3b7faa1a52d50ef90b14b16545f51cd515361740432bc",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "a0bec323dba56f5b56b36cf37197404e302cf3ee4c1130c82468cd4ffb637c95"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI/master_full.png"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/20-LUMI",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-20",
+  "roster_class": "HUMAN_SPECIAL",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

@@ -338,6 +338,36 @@ Reference replay:
 `SHORT REPORT != SHORT VALIDATION`.
 `TEMPLATE BEST PRACTICE != PROJECT-SAFE EXECUTION`.
 
+## 4.7 Delegation inheritance gate — HARD LOCK
+
+A delegated worker/subagent context SHALL inherit a bounded subset of the parent execution authority. A child may narrow scope; it SHALL NOT widen it.
+
+When a controlled runtime supplies `worker_context`, it SHALL also supply a parent-bound delegation contract containing:
+- `parent_task_id`;
+- deterministic `parent_contract_hash` over the parent task/rule/change/forbidden/approval/connection/cost snapshot;
+- `child_id`;
+- `inherited_rule_refs`;
+- `inherited_change_scope`;
+- `inherited_forbidden_actions`;
+- `inherited_approval_scope`;
+- `inherited_connection_scope`;
+- `inherited_cost_ceiling` when cost is bounded;
+- `return_contract`.
+
+Execution rules:
+- inherited rule/change/approval/connection scope MUST be subsets of the parent scope;
+- every parent forbidden action MUST remain forbidden for the child;
+- when the parent has a finite cost ceiling, the child MUST inherit an explicit finite ceiling that does not exceed it; omitted/null/non-finite ceilings fail closed;
+- malformed/non-object worker context SHALL NOT disable delegation enforcement;
+- the declared return contract MUST match the worker-context return fields;
+- a changed parent authority snapshot invalidates the prior child contract hash;
+- provider/session behavior or subagent defaults SHALL NOT substitute for this inheritance proof.
+
+Violation is fail-closed with a `DELEGATION_*` detection. The deterministic implementation is owned by `ENFORCEMENT/runtime_orchestrator.py`.
+
+`PARENT AUTHORITY != CHILD AUTHORITY EXPANSION`.
+`SUBAGENT SPAWNED != GOVERNANCE INHERITED`.
+
 ## 5. Human-approval gate — HARD LOCK
 
 For promotions/actions whose governance requires human approval, the transition SHALL carry a recoverable approval record/token.
@@ -347,9 +377,15 @@ For lifecycle transitions into `MERGED` or `DEPLOYED`, approval evidence SHALL b
 - source state;
 - requested destination state;
 - concrete target reference (for example the reviewed commit/PR head or the deployment artifact/environment target);
+- `action_kind`;
+- deterministic `action_payload_hash` over the final canonical action payload;
 - deterministic approval-context hash.
 
-An approval for one target SHALL NOT be portable to a changed commit, changed merge target, changed deployment artifact, or different transition. A changed target requires fresh approval evidence.
+For approval checkpoints/resume, the stored approval binding SHALL likewise carry `action_kind + action_payload_hash`; approval consumption compares the submitted evidence against that exact stored payload binding. Resume SHALL also bind to the current task id, current route fields, and current requested action payload; another task/action/route cannot consume an otherwise valid checkpoint approval. Checkpoint persistence and approval consumption SHALL occur only after non-mutating admission/validation gates pass, so a rejected request does not consume approval state.
+
+High-impact lifecycle transition approval is single-use for the exact `task + approval_id + approval_context_hash`; a consumed merge/deploy approval receipt cannot authorize the same transition again.
+
+An approval for one target or payload SHALL NOT be portable to a changed commit, changed merge target, changed deployment artifact, changed action arguments, or different transition. A changed target/payload requires fresh approval evidence.
 
 Repository-side evidence such as `approver_ref` is a recoverable evidence reference unless the provider/runtime independently proves authenticated reviewer identity. TAKY SHALL NOT overclaim identity authentication from a string field alone.
 

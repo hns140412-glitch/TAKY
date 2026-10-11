@@ -1,0 +1,220 @@
+{
+  "schema_version": "TAKY_CHARACTER_VISUAL_ID_REGISTRATION_V1_CANDIDATE",
+  "status": "BACKFILL_CANDIDATE",
+  "visual_id": "16",
+  "revision": "BACKFILL_2026-10-08",
+  "display_name_ko": "포포",
+  "display_name_en": "POPO",
+  "character_class": "ANIMAL",
+  "species_or_body_type": "DUCK_BIPED",
+  "authority": {
+    "approved_source_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png"
+    ],
+    "source_digests": [
+      "938cf86c2758191a0b9acf15d543d970ea3420954bcb61c0e505745c964310fe"
+    ],
+    "approval_ref": "INHERITED_EXISTING_APPROVED_SOURCE",
+    "prior_visual_id": null,
+    "drive_document_id": "1147YLCEYO3jI6iAYGgyZszZwhF8risUldnTJQJz-y0M",
+    "drive_folder": "HNS_DRIVE_TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "base_asset_policy": "INHERIT_EXISTING_APPROVED_ASSET__DO_NOT_REGENERATE",
+    "exact_runtime_asset_pointer_status": "BOUND_BY_EXISTING_ASSET_REGISTRY",
+    "source_lock_path": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/TAKY_EXPLORER_CREW_16_POPO_SOURCE_LOCK_2026-10-02.md",
+    "source_lock_status": "SOURCE_LOCKED_NO_IMAGE_GENERATION"
+  },
+  "identity_lock": {
+    "head_face": {
+      "shape": "round duck head with fluffy white feather cheeks",
+      "eyes": {
+        "shape": "very large rounded",
+        "size": "large",
+        "spacing": "wide",
+        "angle": "soft",
+        "iris_color": "bright blue",
+        "distinctive": "dark upper lashes with strong glossy highlights"
+      },
+      "brows": {
+        "shape": "small pale feather-brow marks",
+        "weight": "light"
+      },
+      "nose_muzzle_beak": {
+        "structure": "broad orange-yellow duck beak",
+        "distinctive": "wide rounded beak with pronounced upper bill"
+      },
+      "mouth_lips": {
+        "shape": "wide open cheerful beak-mouth",
+        "distinctive": "pink mouth interior visible"
+      },
+      "ears_horns_antennae": {
+        "structure": "no external ears; feather silhouette only"
+      },
+      "hair_fur_feather": {
+        "silhouette": "soft white feather crown/cheeks with layered wing feathers",
+        "texture": "soft layered white feathers",
+        "hairline_or_pattern": "all-white plumage with slight cream warmth"
+      },
+      "base_tone": "white/cream plumage + orange-yellow beak/legs",
+      "unique_marks": [
+        "large layered white wings",
+        "blue flower/daisy cap accessory",
+        "orange legs"
+      ],
+      "resting_expression": "bright joyful smile"
+    },
+    "body": {
+      "scale_class": "OPEN_FROM_APPROVED_SOURCE",
+      "head_body_ratio": "OPEN_FROM_APPROVED_SOURCE",
+      "torso_shoulders": "OPEN_FROM_APPROVED_SOURCE",
+      "limbs": "OPEN_FROM_APPROVED_SOURCE",
+      "hand_paw_wing_flipper": "WING",
+      "foot_leg": "OPEN_FROM_APPROVED_SOURCE",
+      "tail_appendages": [
+        "wing_arms",
+        "tail_feathers"
+      ],
+      "posture_center_of_gravity": "OPEN_FROM_APPROVED_SOURCE",
+      "silhouette": "OPEN_FROM_APPROVED_SOURCE",
+      "species_motion_constraints": [
+        "NO_HUMAN_HAND_INVENTION",
+        "WING_GRIP_REQUIRED"
+      ],
+      "morphology_class": "DUCK_BIPED",
+      "grip_limb_type": "WING"
+    },
+    "costume_equipment": {
+      "identity_critical": [
+        "blue-white cap",
+        "blue hoodie",
+        "cream-blue explorer jacket",
+        "dark shorts",
+        "blue-white sneakers",
+        "navy backpack"
+      ],
+      "signature_accessories": [
+        "blue-white daisy cap ornament",
+        "gold star hardware"
+      ],
+      "signature_equipment": [
+        "backpack with rolled mat"
+      ],
+      "materials": [
+        "layered feathers",
+        "woven cap/hoodie/jacket",
+        "shorts textile",
+        "leather-like straps",
+        "metallic gold hardware",
+        "rubber sneaker sole"
+      ],
+      "scene_variable_allowed": [],
+      "lower_outfit_class": "SHORTS",
+      "identity_features": [
+        "wing_arms",
+        "tail_feathers"
+      ],
+      "compatibility_flags": [
+        "NO_HUMAN_HAND_INVENTION",
+        "WING_GRIP_REQUIRED"
+      ]
+    },
+    "color_material_palette": [
+      "white",
+      "cream",
+      "bright blue",
+      "navy",
+      "orange-yellow",
+      "charcoal",
+      "gold"
+    ]
+  },
+  "detail_anchors": {
+    "front_face": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "three_quarter_face": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "profile_face": "OPEN_FROM_APPROVED_SOURCE",
+    "eyes": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "nose_muzzle_beak": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "mouth": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "hair_fur_feather": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "skin_fur_texture": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png",
+    "limb_detail": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "signature_prop_grip": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png"
+  },
+  "turnaround_views": {
+    "status": "APPROVED_BOUND",
+    "authority_registry": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_TURNAROUND_BINDING_24_LATEST.json",
+    "manifest_authority": "PER_MEMBER_MANIFEST_AUTHORITY",
+    "detail": "CLOSED__DO_NOT_REBUILD_OR_REBIND"
+  },
+  "variable_derivatives": {
+    "expression_states": [
+      "face_neutral.png",
+      "face_listen.png",
+      "face_think.png",
+      "face_happy.png",
+      "face_concerned.png"
+    ],
+    "phoneme_mouth_states": [
+      "OPEN_IF_NEEDED"
+    ],
+    "gaze_states": [
+      "OPEN"
+    ],
+    "action_states": [
+      "OPEN"
+    ],
+    "tool_states": [
+      "OPEN"
+    ],
+    "event_accessories": [
+      "OPEN_OPTIONAL"
+    ],
+    "face_state_contract_status": "READY_AFTER_FIELD_NEUTRAL_QA",
+    "face_state_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_FACE_STATES_24_LATEST.json",
+    "face_state_qa_flags": [
+      "BEAK_FACE",
+      "NO_HUMAN_FACE_ANATOMY"
+    ],
+    "action_parts_contract_status": "LOCKED_FOR_IMAGE_PRODUCTION",
+    "action_parts_authority": "/TAKY/ASSETS/EXPLORER_CREW/TAKY_EXPLORER_CREW_ACTION_PARTS_24_LATEST.json"
+  },
+  "identity_fingerprint": {
+    "algorithm": "SOURCE_DIGEST_PLUS_CANONICAL_LOCK_FIELDS",
+    "digest": "2c5e13c779732775f61e79583054dcacfca775cb6dc5da0e92db118c53dd3e91",
+    "status": "CORE_IDENTITY_FINGERPRINT_READY",
+    "source_sha256": "938cf86c2758191a0b9acf15d543d970ea3420954bcb61c0e505745c964310fe"
+  },
+  "runtime": {
+    "base_asset_status": "INHERITED_EXISTS",
+    "base_asset_refs": [
+      "/TAKY/ASSETS/EXPLORER_CREW/16-POPO/master/master_full.png"
+    ],
+    "face_sheet_refs": [],
+    "action_sheet_refs": [],
+    "derived_part_refs": [],
+    "fallback": "BASE_BODY_NEUTRAL_POSE",
+    "asset_folder": "/TAKY/ASSETS/EXPLORER_CREW/16-POPO",
+    "derivative_production_status": "CONTRACT_LOCKED__IMAGE_PRODUCTION_QA_OPEN"
+  },
+  "gate": {
+    "actual_image_review_required": true,
+    "identity_drift_forbidden": true,
+    "app_may_reinterpret_identity": false,
+    "registration_image_generation_forbidden": true,
+    "registration_outputs": "METADATA_POINTERS_HASHES_EXISTING_APPROVED_PIXELS_ONLY",
+    "generated_reference_sheet_is_asset": false
+  },
+  "runtime_key": "guide-16",
+  "roster_class": "EXPANSION",
+  "qa_flags": [],
+  "forbidden_aliases": [],
+  "backfill_rule": "NO_GUESSING__ONLY_APPROVED_SOURCE_EVIDENCE",
+  "backfill_status": {
+    "turnaround": "CLOSED_APPROVED_BOUND",
+    "source_lineage": "BACKFILLED",
+    "morphology_outfit": "BACKFILLED",
+    "face_contract": "BACKFILLED_CONTRACT_ONLY",
+    "action_contract": "BACKFILLED_CONTRACT_ONLY",
+    "fine_face_detail": "BACKFILLED_FROM_APPROVED_SOURCE",
+    "color_material": "BACKFILLED_SEMANTIC_FROM_APPROVED_SOURCE"
+  }
+}

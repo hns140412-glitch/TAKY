@@ -1,0 +1,45 @@
+{
+  "schema": "ARCHIGROW_PRODUCTION_TRACE_SCHEMA_V1",
+  "authority": "DOMAIN/ARCHITECTURE_WORK_OS.md + DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md + DOMAIN/ARCHITECTURE_GROWTH_MAP.md §3",
+  "stages": [
+    "BIM_CAD",
+    "AREA_LAW_QA",
+    "DETAIL",
+    "QTO_COST",
+    "REVIEW_PERMIT",
+    "FIELD_RFI",
+    "AS_BUILT_LESSON"
+  ],
+  "statuses": [
+    "PASS",
+    "HOLD",
+    "FAIL",
+    "BLOCKED",
+    "NEEDS_HUMAN"
+  ],
+  "required_stage_fields": [
+    "stage",
+    "status",
+    "tool",
+    "tool_version",
+    "recorded_at",
+    "input_refs",
+    "output_refs",
+    "checks",
+    "object_ids"
+  ],
+  "hard_guards": {
+    "project_identity_stable": true,
+    "selected_option_stable": true,
+    "stage_order_monotonic": true,
+    "pass_requires_checks": true,
+    "downstream_after_fail_forbidden": true,
+    "object_lineage_must_be_explicit": true,
+    "new_object_requires_change_evidence": true,
+    "cost_requires_quantity_and_cost_source": true,
+    "permit_requires_authority_evidence": true,
+    "field_change_requires_rfi_or_change_ref": true,
+    "final_lesson_requires_result_evidence": true,
+    "production_trace_never_authorizes_legal_or_cost_truth_by_itself": true
+  }
+}
