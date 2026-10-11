@@ -1,0 +1,11261 @@
+{
+  "schema": "TAKY_OFFICIAL_TERM_CANDIDATES_56_V1",
+  "count": 493,
+  "terms": [
+    {
+      "subject": "과학",
+      "term": "거울",
+      "standards": [
+        "6과02-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "건강",
+      "standards": [
+        "6과04-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "계절",
+      "standards": [
+        "6과12-03",
+        "6과13-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지구의 운동",
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "계절 변화",
+      "standards": [
+        "6과13-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "고기압",
+      "standards": [
+        "6과06-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "고체",
+      "standards": [
+        "6과05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "고체 혼합물",
+      "standards": [
+        "6과05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "공유",
+      "standards": [
+        "6과05-03",
+        "6과03-03",
+        "6과09-04",
+        "6과11-03",
+        "6과08-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리",
+        "용해와 용액",
+        "산과 염기",
+        "식물의 구조와 기능",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회",
+        "물질",
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "공전",
+      "standards": [
+        "6과12-03",
+        "6과13-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지구의 운동",
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "과거 생물",
+      "standards": [
+        "6과01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "과학",
+      "standards": [
+        "6과16-01",
+        "6과16-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "과학기술",
+      "standards": [
+        "6과05-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "관계",
+      "standards": [
+        "6과13-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "관련",
+      "standards": [
+        "6과16-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "관찰",
+      "standards": [
+        "6과14-02",
+        "6과06-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소",
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "물질",
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "교통안전",
+      "standards": [
+        "6과10-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "구름",
+      "standards": [
+        "6과06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "구조",
+      "standards": [
+        "6과11-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "굴절",
+      "standards": [
+        "6과02-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "규칙",
+      "standards": [
+        "6과12-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구의 운동"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "그림자",
+      "standards": [
+        "6과13-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "근육",
+      "standards": [
+        "6과04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "기관",
+      "standards": [
+        "6과04-02",
+        "6과04-03",
+        "6과11-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능",
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "기능",
+      "standards": [
+        "6과11-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "기상 요소",
+      "standards": [
+        "6과06-01",
+        "6과06-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "기여",
+      "standards": [
+        "6과16-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "기온",
+      "standards": [
+        "6과13-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "날씨",
+      "standards": [
+        "6과06-01",
+        "6과06-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "남중 고도",
+      "standards": [
+        "6과13-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "낮 길이",
+      "standards": [
+        "6과13-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "녹는 양",
+      "standards": [
+        "6과03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "단열",
+      "standards": [
+        "6과07-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "렌즈",
+      "standards": [
+        "6과02-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "모형",
+      "standards": [
+        "6과01-01",
+        "6과04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석",
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "지구와 우주",
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "문제",
+      "standards": [
+        "6과16-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "물 온도",
+      "standards": [
+        "6과03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "물질",
+      "standards": [
+        "6과14-01",
+        "6과14-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "물체",
+      "standards": [
+        "6과02-01",
+        "6과07-02",
+        "6과10-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "빛의 성질",
+        "열과 우리 생활",
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "미래 사회",
+      "standards": [
+        "6과16-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "반사",
+      "standards": [
+        "6과02-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "방식",
+      "standards": [
+        "6과07-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "배설",
+      "standards": [
+        "6과04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "변화",
+      "standards": [
+        "6과14-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "별자리",
+      "standards": [
+        "6과12-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구의 운동"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "보기",
+      "standards": [
+        "6과02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "분류",
+      "standards": [
+        "6과01-02",
+        "6과09-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석",
+        "산과 염기"
+      ],
+      "domains": [
+        "지구와 우주",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "분리",
+      "standards": [
+        "6과05-03",
+        "6과05-01",
+        "6과05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "과학과 사회",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "분석",
+      "standards": [
+        "6과14-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "비교",
+      "standards": [
+        "6과15-02",
+        "6과14-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용",
+        "물질의 연소"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "빠르기",
+      "standards": [
+        "6과10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "사례",
+      "standards": [
+        "6과03-03",
+        "6과09-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액",
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "사암",
+      "standards": [
+        "6과01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "산성",
+      "standards": [
+        "6과09-01",
+        "6과09-02",
+        "6과09-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "산성화",
+      "standards": [
+        "6과09-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "생물",
+      "standards": [
+        "6과11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "생성",
+      "standards": [
+        "6과01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "생태계",
+      "standards": [
+        "6과14-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "생활",
+      "standards": [
+        "6과06-01",
+        "6과08-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "지구와 우주",
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "생활 방식",
+      "standards": [
+        "6과04-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "설명",
+      "standards": [
+        "6과16-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "성질",
+      "standards": [
+        "6과02-01",
+        "6과15-03",
+        "6과14-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "빛의 성질",
+        "전기의 이용",
+        "물질의 연소"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "성질 변화",
+      "standards": [
+        "6과14-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "세포",
+      "standards": [
+        "6과11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "소화",
+      "standards": [
+        "6과04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "속력",
+      "standards": [
+        "6과10-02",
+        "6과10-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "순환",
+      "standards": [
+        "6과04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "시간",
+      "standards": [
+        "6과10-01",
+        "6과10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "식물",
+      "standards": [
+        "6과11-02",
+        "6과11-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "실천",
+      "standards": [
+        "6과15-04",
+        "6과08-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "실험",
+      "standards": [
+        "6과09-02",
+        "6과11-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기",
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "물질",
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "쓰임",
+      "standards": [
+        "6과02-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "안개",
+      "standards": [
+        "6과06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "안전",
+      "standards": [
+        "6과15-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "안전 수칙",
+      "standards": [
+        "6과10-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "안전장치",
+      "standards": [
+        "6과10-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "액체",
+      "standards": [
+        "6과05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "에너지",
+      "standards": [
+        "6과08-02",
+        "6과08-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "역암",
+      "standards": [
+        "6과01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "연소",
+      "standards": [
+        "6과14-02",
+        "6과14-03",
+        "6과14-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "염기성",
+      "standards": [
+        "6과09-01",
+        "6과09-02",
+        "6과09-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "영향",
+      "standards": [
+        "6과06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "온도",
+      "standards": [
+        "6과07-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "온도 변화",
+      "standards": [
+        "6과07-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "온도 유지",
+      "standards": [
+        "6과07-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "온도계",
+      "standards": [
+        "6과07-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "용매",
+      "standards": [
+        "6과03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "용액",
+      "standards": [
+        "6과03-02",
+        "6과03-03",
+        "6과09-01",
+        "6과09-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액",
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "용질",
+      "standards": [
+        "6과03-01",
+        "6과03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "용해",
+      "standards": [
+        "6과03-01",
+        "6과05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "용해와 용액",
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "운동",
+      "standards": [
+        "6과10-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "움직임",
+      "standards": [
+        "6과04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "위치 변화",
+      "standards": [
+        "6과10-01",
+        "6과12-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동",
+        "지구의 운동"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "유한",
+      "standards": [
+        "6과08-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "이동",
+      "standards": [
+        "6과07-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "이동 거리",
+      "standards": [
+        "6과10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "물체의 운동"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "이슬",
+      "standards": [
+        "6과06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "이암",
+      "standards": [
+        "6과01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "이용",
+      "standards": [
+        "6과09-03",
+        "6과08-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "산과 염기",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "물질",
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "일상생활",
+      "standards": [
+        "6과03-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "자료",
+      "standards": [
+        "6과03-03",
+        "6과09-04",
+        "6과11-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액",
+        "산과 염기",
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "물질",
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "자원",
+      "standards": [
+        "6과08-01",
+        "6과08-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "자전",
+      "standards": [
+        "6과12-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구의 운동"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "자전축",
+      "standards": [
+        "6과13-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "장치",
+      "standards": [
+        "6과05-03",
+        "6과02-03",
+        "6과07-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리",
+        "빛의 성질",
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "과학과 사회",
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "재생에너지",
+      "standards": [
+        "6과08-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "저기압",
+      "standards": [
+        "6과06-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전구",
+      "standards": [
+        "6과15-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전기",
+      "standards": [
+        "6과15-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전기 회로",
+      "standards": [
+        "6과15-01",
+        "6과15-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전선",
+      "standards": [
+        "6과15-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전자석",
+      "standards": [
+        "6과15-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전지",
+      "standards": [
+        "6과15-01",
+        "6과15-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "전후",
+      "standards": [
+        "6과14-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "접촉",
+      "standards": [
+        "6과07-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "조건",
+      "standards": [
+        "6과14-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "조사",
+      "standards": [
+        "6과05-03",
+        "6과07-04",
+        "6과15-03",
+        "6과08-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리",
+        "열과 우리 생활",
+        "전기의 이용",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회",
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "증발",
+      "standards": [
+        "6과05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "지구",
+      "standards": [
+        "6과12-02",
+        "6과12-03",
+        "6과13-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지구의 운동",
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "지속가능",
+      "standards": [
+        "6과05-03",
+        "6과08-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "지시약",
+      "standards": [
+        "6과09-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "지질",
+      "standards": [
+        "6과01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "지층",
+      "standards": [
+        "6과01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "직렬연결",
+      "standards": [
+        "6과15-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "직진",
+      "standards": [
+        "6과02-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빛의 성질"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "진로",
+      "standards": [
+        "6과16-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "진하기",
+      "standards": [
+        "6과03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "용해와 용액"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "질병",
+      "standards": [
+        "6과04-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "차이",
+      "standards": [
+        "6과06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "날씨와 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "추리",
+      "standards": [
+        "6과01-03",
+        "6과07-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지층과 화석",
+        "열과 우리 생활"
+      ],
+      "domains": [
+        "지구와 우주",
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "측정",
+      "standards": [
+        "6과07-01",
+        "6과13-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활",
+        "계절의 변화"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "태양",
+      "standards": [
+        "6과12-01",
+        "6과13-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지구의 운동",
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "태양 고도",
+      "standards": [
+        "6과13-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "계절의 변화"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "토의",
+      "standards": [
+        "6과16-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "과학과 나의 진로"
+      ],
+      "domains": [
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "퇴적암",
+      "standards": [
+        "6과01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "특징",
+      "standards": [
+        "6과11-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "피해",
+      "standards": [
+        "6과09-04",
+        "6과14-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "산과 염기",
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "해결책",
+      "standards": [
+        "6과14-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "물질의 연소"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "현미경",
+      "standards": [
+        "6과11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "식물의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "현상",
+      "standards": [
+        "6과07-03",
+        "6과14-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "열과 우리 생활",
+        "물질의 연소"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "형성",
+      "standards": [
+        "6과01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "호흡",
+      "standards": [
+        "6과04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리 몸의 구조와 기능"
+      ],
+      "domains": [
+        "생명"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "혼합",
+      "standards": [
+        "6과09-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "산과 염기"
+      ],
+      "domains": [
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "혼합물",
+      "standards": [
+        "6과05-03",
+        "6과05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "혼합물의 분리"
+      ],
+      "domains": [
+        "과학과 사회",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "화석",
+      "standards": [
+        "6과01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석"
+      ],
+      "domains": [
+        "지구와 우주"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "환경",
+      "standards": [
+        "6과01-03",
+        "6과09-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지층과 화석",
+        "산과 염기"
+      ],
+      "domains": [
+        "지구와 우주",
+        "물질"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "활용",
+      "standards": [
+        "6과15-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용"
+      ],
+      "domains": [
+        "운동과 에너지"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "과학",
+      "term": "효율",
+      "standards": [
+        "6과15-04",
+        "6과08-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "전기의 이용",
+        "자원과 에너지"
+      ],
+      "domains": [
+        "운동과 에너지",
+        "과학과 사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "감상",
+      "standards": [
+        "6국03-03",
+        "6국05-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "체험한 일을 써요",
+        "관용 표현을 이해하고 생각을 표현해요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요",
+        "빗대어 표현해요"
+      ],
+      "domains": [
+        "쓰기",
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "검색 도구",
+      "standards": [
+        "6국06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "경험",
+      "standards": [
+        "6국05-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요",
+        "시와 이야기로 표현해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "고유어",
+      "standards": [
+        "6국04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "관용 표현을 이해하고 생각을 표현해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "고쳐쓰기",
+      "standards": [
+        "6국03-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "고치기",
+      "standards": [
+        "6국04-06"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "바르게 고쳐 써요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "공유",
+      "standards": [
+        "6국03-06",
+        "6국06-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "바르게 고쳐 써요",
+        "시와 이야기로 표현해요",
+        "매체 단원. 나를 돌아봐요",
+        "매체 단원. 매체 자료를 만들어요"
+      ],
+      "domains": [
+        "쓰기",
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "관용 표현",
+      "standards": [
+        "6국04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "관용 표현을 이해하고 생각을 표현해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "관점",
+      "standards": [
+        "6국02-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "비판적으로 읽어요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "구성",
+      "standards": [
+        "6국04-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "바르게 고쳐 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "국어생활",
+      "standards": [
+        "6국04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "궁금",
+      "standards": [
+        "6국01-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "매체로 발표해요",
+        "성찰하며 읽어요",
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "규칙",
+      "standards": [
+        "6국01-07"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "절차를 지키며 토론해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "근거",
+      "standards": [
+        "6국01-02",
+        "6국03-02",
+        "6국01-07"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "절차를 지키며 토론해요",
+        "보거나 듣고 판단해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "글 구조",
+      "standards": [
+        "6국02-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "대상을 설명해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "추론하며 읽어요",
+        "작가의 의도를 파악해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "글쓰기",
+      "standards": [
+        "6국03-02",
+        "6국03-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체 단원. 필요한 정보를 찾아요",
+        "자신의 글쓰기 과정을 살펴봐요",
+        "대상을 설명해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "나누기",
+      "standards": [
+        "6국05-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "빗대어 표현해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "작품에 대한 생각을 나누어요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "내용 생성",
+      "standards": [
+        "6국03-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "언어의 특성과 독자를 고려하여 소통해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "뉴스",
+      "standards": [
+        "6국06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "단어",
+      "standards": [
+        "6국04-06"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "바르게 고쳐 써요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "담화",
+      "standards": [
+        "6국04-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "체험한 일을 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "대상",
+      "standards": [
+        "6국03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "대상을 설명해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "대화",
+      "standards": [
+        "6국01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "의견을 조정하며 문제를 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "독자",
+      "standards": [
+        "6국03-04",
+        "6국03-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "언어의 특성과 독자를 고려하여 소통해요",
+        "바르게 고쳐 써요",
+        "시와 이야기로 표현해요",
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "듣기",
+      "standards": [
+        "6국01-02",
+        "6국01-01",
+        "6국01-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "절차를 지키며 토론해요",
+        "보거나 듣고 판단해요",
+        "짐작하며 대화해요",
+        "의견을 조정하며 문제를 해결해요",
+        "매체로 발표해요",
+        "성찰하며 읽어요",
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "띄어쓰기",
+      "standards": [
+        "6국04-06"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "바르게 고쳐 써요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "말하기",
+      "standards": [
+        "6국01-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "매체로 발표해요",
+        "성찰하며 읽어요",
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "매체",
+      "standards": [
+        "6국01-05",
+        "6국06-02",
+        "6국01-04",
+        "6국03-04",
+        "6국04-01",
+        "6국06-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 평가하며 이용해요",
+        "궁금한 점을 해결해요",
+        "올바른 문장으로 글을 써요",
+        "언어의 특성과 독자를 고려하여 소통해요",
+        "매체 단원. 매체 자료를 만들어요",
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "매체",
+        "쓰기",
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "매체 이용",
+      "standards": [
+        "6국06-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "매체 자료",
+      "standards": [
+        "6국06-01",
+        "6국06-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요",
+        "매체 단원. 매체 자료를 만들어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "면담",
+      "standards": [
+        "6국01-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "목적",
+      "standards": [
+        "6국06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문맥",
+      "standards": [
+        "6국02-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "추론하며 읽어요",
+        "작품을 감상해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문자 언어",
+      "standards": [
+        "6국04-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요",
+        "언어의 특성과 독자를 고려하여 소통해요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문장",
+      "standards": [
+        "6국04-04",
+        "6국04-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "바르게 고쳐 써요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문장 성분",
+      "standards": [
+        "6국04-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "바르게 고쳐 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문제 상황",
+      "standards": [
+        "6국02-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "비판적으로 읽어요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "문제 해결",
+      "standards": [
+        "6국02-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "비판적으로 읽어요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "발표",
+      "standards": [
+        "6국01-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체로 발표해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "방언",
+      "standards": [
+        "6국04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "배경",
+      "standards": [
+        "6국05-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "복합양식",
+      "standards": [
+        "6국06-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "비교",
+      "standards": [
+        "6국01-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "작품에 대한 생각을 나누어요",
+        "의견을 조정하며 문제를 해결해요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "비유",
+      "standards": [
+        "6국05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "빗대어 표현해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "사건",
+      "standards": [
+        "6국05-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "상대",
+      "standards": [
+        "6국01-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "상황",
+      "standards": [
+        "6국04-03",
+        "6국04-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "관용 표현을 이해하고 생각을 표현해요",
+        "우리말의 아름다움을 느껴요",
+        "체험한 일을 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "생략",
+      "standards": [
+        "6국01-01",
+        "6국02-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "의견을 조정하며 문제를 해결해요",
+        "추론하며 읽어요",
+        "작품을 감상해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "설명",
+      "standards": [
+        "6국03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "대상을 설명해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "성찰",
+      "standards": [
+        "6국05-06",
+        "6국06-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요",
+        "성찰하며 읽어요",
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "문학",
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "소설",
+      "standards": [
+        "6국05-03",
+        "6국05-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요",
+        "시와 이야기로 표현해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "수용자",
+      "standards": [
+        "6국06-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "수필",
+      "standards": [
+        "6국05-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요",
+        "시와 이야기로 표현해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "시간 표현",
+      "standards": [
+        "6국04-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "체험한 일을 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "신뢰성",
+      "standards": [
+        "6국06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "쓰기",
+      "standards": [
+        "6국03-02",
+        "6국03-05",
+        "6국03-01",
+        "6국03-03",
+        "6국03-04",
+        "6국03-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 필요한 정보를 찾아요",
+        "자신의 글쓰기 과정을 살펴봐요",
+        "대상을 설명해요",
+        "체험한 일을 써요",
+        "관용 표현을 이해하고 생각을 표현해요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요",
+        "올바른 문장으로 글을 써요",
+        "언어의 특성과 독자를 고려하여 소통해요",
+        "바르게 고쳐 써요",
+        "시와 이야기로 표현해요",
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "언어 공동체",
+      "standards": [
+        "6국04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "연결",
+      "standards": [
+        "6국05-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요",
+        "성찰하며 읽어요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "요약",
+      "standards": [
+        "6국02-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "대상을 설명해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "추론하며 읽어요",
+        "작가의 의도를 파악해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "음성 언어",
+      "standards": [
+        "6국04-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요",
+        "언어의 특성과 독자를 고려하여 소통해요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "의견",
+      "standards": [
+        "6국01-06",
+        "6국05-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "작품에 대한 생각을 나누어요",
+        "의견을 조정하며 문제를 해결해요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요",
+        "빗대어 표현해요",
+        "독서 단원. 책을 읽고 함께 이야기해요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "의도",
+      "standards": [
+        "6국05-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작가의 의도를 파악해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "이유",
+      "standards": [
+        "6국01-02",
+        "6국01-07"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "절차를 지키며 토론해요",
+        "보거나 듣고 판단해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "인물",
+      "standards": [
+        "6국05-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작품을 감상해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "인상",
+      "standards": [
+        "6국05-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "빗대어 표현해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "작품에 대한 생각을 나누어요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "읽기",
+      "standards": [
+        "6국02-01",
+        "6국02-02",
+        "6국02-05",
+        "6국05-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "대상을 설명해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "추론하며 읽어요",
+        "작가의 의도를 파악해요",
+        "작품을 감상해요",
+        "우리말의 아름다움을 느껴요",
+        "표준어와 방언을 알아봐요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요",
+        "성찰하며 읽어요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "읽기",
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "읽기 동기",
+      "standards": [
+        "6국02-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "표준어와 방언을 알아봐요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요",
+        "성찰하며 읽어요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "자료",
+      "standards": [
+        "6국01-05",
+        "6국02-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 평가하며 이용해요",
+        "비판적으로 읽어요",
+        "보거나 듣고 판단해요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "작가",
+      "standards": [
+        "6국05-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "작가의 의도를 파악해요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "작품",
+      "standards": [
+        "6국05-01",
+        "6국05-02",
+        "6국05-04",
+        "6국05-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "작가의 의도를 파악해요",
+        "빗대어 표현해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "작품에 대한 생각을 나누어요",
+        "표준어와 방언을 알아봐요",
+        "성찰하며 읽어요"
+      ],
+      "domains": [
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "적극적",
+      "standards": [
+        "6국02-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "표준어와 방언을 알아봐요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요",
+        "성찰하며 읽어요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "절차",
+      "standards": [
+        "6국01-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "점검",
+      "standards": [
+        "6국03-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "정보",
+      "standards": [
+        "6국06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "정보 검색",
+      "standards": [
+        "6국06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체로 발표해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "제작",
+      "standards": [
+        "6국06-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요"
+      ],
+      "domains": [
+        "매체"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "조정",
+      "standards": [
+        "6국03-05",
+        "6국01-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "자신의 글쓰기 과정을 살펴봐요",
+        "의논하며 토의해요",
+        "작품에 대한 생각을 나누어요",
+        "의견을 조정하며 문제를 해결해요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "쓰기",
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "주장",
+      "standards": [
+        "6국01-02",
+        "6국02-01",
+        "6국03-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "절차를 지키며 토론해요",
+        "보거나 듣고 판단해요",
+        "대상을 설명해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "추론하며 읽어요",
+        "작가의 의도를 파악해요",
+        "매체 단원. 필요한 정보를 찾아요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "읽기",
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "주제",
+      "standards": [
+        "6국02-01",
+        "6국01-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "대상을 설명해요",
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "추론하며 읽어요",
+        "작가의 의도를 파악해요",
+        "짐작하며 대화해요",
+        "매체로 발표해요",
+        "성찰하며 읽어요",
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "읽기",
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "질문",
+      "standards": [
+        "6국01-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "매체로 발표해요",
+        "성찰하며 읽어요",
+        "궁금한 점을 해결해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "참여",
+      "standards": [
+        "6국03-06"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "바르게 고쳐 써요",
+        "시와 이야기로 표현해요",
+        "매체 단원. 나를 돌아봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "체험",
+      "standards": [
+        "6국03-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "체험한 일을 써요",
+        "관용 표현을 이해하고 생각을 표현해요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "추론",
+      "standards": [
+        "6국01-01",
+        "6국02-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "짐작하며 대화해요",
+        "의견을 조정하며 문제를 해결해요",
+        "추론하며 읽어요",
+        "작품을 감상해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "듣기·말하기",
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "출처",
+      "standards": [
+        "6국03-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체 단원. 필요한 정보를 찾아요",
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "타당",
+      "standards": [
+        "6국01-02",
+        "6국01-07"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "절차를 지키며 토론해요",
+        "보거나 듣고 판단해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "타당성",
+      "standards": [
+        "6국02-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요",
+        "비판적으로 읽어요",
+        "보거나 듣고 판단해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "태도",
+      "standards": [
+        "6국02-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "독서 단원. 책을 읽고 함께 이야기해요",
+        "표준어와 방언을 알아봐요",
+        "독서 단원. 여러 가지 형태의 책을 읽어요",
+        "성찰하며 읽어요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "토론",
+      "standards": [
+        "6국01-07"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "절차를 지키며 토론해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "토의",
+      "standards": [
+        "6국01-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "작품에 대한 생각을 나누어요",
+        "의견을 조정하며 문제를 해결해요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "통일성",
+      "standards": [
+        "6국03-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자신의 글쓰기 과정을 살펴봐요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "특성",
+      "standards": [
+        "6국03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "대상을 설명해요"
+      ],
+      "domains": [
+        "쓰기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "평가",
+      "standards": [
+        "6국02-03",
+        "6국06-02",
+        "6국04-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요",
+        "비판적으로 읽어요",
+        "보거나 듣고 판단해요",
+        "매체 단원. 매체 자료를 만들어요",
+        "언어의 특성과 독자를 고려하여 소통해요"
+      ],
+      "domains": [
+        "읽기",
+        "매체",
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "표준어",
+      "standards": [
+        "6국04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "표준어와 방언을 알아봐요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "표현",
+      "standards": [
+        "6국02-03",
+        "6국03-03",
+        "6국03-04",
+        "6국04-03",
+        "6국05-05"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 평가하며 이용해요",
+        "비판적으로 읽어요",
+        "보거나 듣고 판단해요",
+        "체험한 일을 써요",
+        "관용 표현을 이해하고 생각을 표현해요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요",
+        "올바른 문장으로 글을 써요",
+        "언어의 특성과 독자를 고려하여 소통해요",
+        "우리말의 아름다움을 느껴요",
+        "작품을 감상해요",
+        "시와 이야기로 표현해요"
+      ],
+      "domains": [
+        "읽기",
+        "쓰기",
+        "문법",
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "표현 효과",
+      "standards": [
+        "6국04-01",
+        "6국05-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "매체 단원. 매체 자료를 만들어요",
+        "언어의 특성과 독자를 고려하여 소통해요",
+        "빗대어 표현해요"
+      ],
+      "domains": [
+        "문법",
+        "문학"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "함축",
+      "standards": [
+        "6국02-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "추론하며 읽어요",
+        "작품을 감상해요",
+        "우리말의 아름다움을 느껴요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "핵심 정보",
+      "standards": [
+        "6국01-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "매체로 발표해요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "협력",
+      "standards": [
+        "6국01-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "작품에 대한 생각을 나누어요",
+        "의견을 조정하며 문제를 해결해요",
+        "독서 단원. 같은 주제에 대한 책을 읽고 생각을 나누어요"
+      ],
+      "domains": [
+        "듣기·말하기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "호응 관계",
+      "standards": [
+        "6국04-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "올바른 문장으로 글을 써요",
+        "바르게 고쳐 써요"
+      ],
+      "domains": [
+        "문법"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "국어",
+      "term": "활용",
+      "standards": [
+        "6국02-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "의논하며 토의해요",
+        "비판적으로 읽어요",
+        "독서 단원. 다양한 책을 읽고 문제를 해결해요"
+      ],
+      "domains": [
+        "읽기"
+      ],
+      "source_refs": [
+        "GOE_KOREAN_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "6·25",
+      "standards": [
+        "6사06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "가계",
+      "standards": [
+        "6사11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "개항기",
+      "standards": [
+        "6사05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "거래",
+      "standards": [
+        "6사11-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "경제성장",
+      "standards": [
+        "6사11-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "계절",
+      "standards": [
+        "6사02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 지리탐구"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "고대",
+      "standards": [
+        "6사04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "고려",
+      "standards": [
+        "6사04-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "고조선",
+      "standards": [
+        "6사04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "공간 자료",
+      "standards": [
+        "6사09-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "관계",
+      "standards": [
+        "6사10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "광복",
+      "standards": [
+        "6사06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "국가",
+      "standards": [
+        "6사09-02",
+        "6사11-03",
+        "6사12-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들",
+        "시장경제와 국가 간 거래",
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리",
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_2026_EVAL",
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "국회",
+      "standards": [
+        "6사08-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "권력 분립",
+      "standards": [
+        "6사08-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "근대 문물",
+      "standards": [
+        "6사05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "근로자",
+      "standards": [
+        "6사11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "기업",
+      "standards": [
+        "6사11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "기후",
+      "standards": [
+        "6사02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 지리탐구"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "기후 환경",
+      "standards": [
+        "6사10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "기후변화",
+      "standards": [
+        "6사02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 지리탐구"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "노력",
+      "standards": [
+        "6사07-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "대륙",
+      "standards": [
+        "6사09-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_2026_EVAL"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "대양",
+      "standards": [
+        "6사09-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_2026_EVAL"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "독도",
+      "standards": [
+        "6사01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "무역",
+      "standards": [
+        "6사11-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "문제",
+      "standards": [
+        "6사02-02",
+        "6사11-02",
+        "6사12-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "우리나라 지리탐구",
+        "시장경제와 국가 간 거래",
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리",
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "문화",
+      "standards": [
+        "6사05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "미디어",
+      "standards": [
+        "6사08-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "미래",
+      "standards": [
+        "6사12-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "민주주의",
+      "standards": [
+        "6사08-01",
+        "6사08-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "민주화",
+      "standards": [
+        "6사07-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "법원",
+      "standards": [
+        "6사08-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "분단",
+      "standards": [
+        "6사07-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "분포",
+      "standards": [
+        "6사01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "비판적 분석",
+      "standards": [
+        "6사08-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "사례",
+      "standards": [
+        "6사03-01",
+        "6사07-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "법과 인권의 보장",
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "일반사회",
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "사회",
+      "standards": [
+        "6사04-03",
+        "6사06-01",
+        "6사06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활",
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "사회적 책임",
+      "standards": [
+        "6사11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "산업화",
+      "standards": [
+        "6사07-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "산지",
+      "standards": [
+        "6사01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "생활",
+      "standards": [
+        "6사04-01",
+        "6사04-02",
+        "6사04-03",
+        "6사05-01",
+        "6사06-01",
+        "6사06-02",
+        "6사11-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활",
+        "달라지는 시대, 변화하는 생활 모습",
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활",
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "역사",
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "생활 문화",
+      "standards": [
+        "6사07-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "생활 변화",
+      "standards": [
+        "6사05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "선거",
+      "standards": [
+        "6사08-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "선사 시대",
+      "standards": [
+        "6사04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "세계",
+      "standards": [
+        "6사10-01",
+        "6사12-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경",
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "세계 기후",
+      "standards": [
+        "6사10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "세계지도",
+      "standards": [
+        "6사09-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "시민",
+      "standards": [
+        "6사08-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "시장경제",
+      "standards": [
+        "6사11-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "식민 통치",
+      "standards": [
+        "6사06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "역사 기록",
+      "standards": [
+        "6사01-02",
+        "6사04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "우리나라 국토여행",
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "지리",
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "역사 자료",
+      "standards": [
+        "6사04-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "영토",
+      "standards": [
+        "6사01-02",
+        "6사09-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행",
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56",
+        "GOE_2026_EVAL"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "우리나라",
+      "standards": [
+        "6사02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 지리탐구"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "위치",
+      "standards": [
+        "6사09-01",
+        "6사09-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56",
+        "GOE_2026_EVAL"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "유교",
+      "standards": [
+        "6사05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "유물",
+      "standards": [
+        "6사04-01",
+        "6사04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "유적",
+      "standards": [
+        "6사04-01",
+        "6사04-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "유적과 유물로 살펴본 옛 사람들의 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "이용",
+      "standards": [
+        "6사08-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "이유",
+      "standards": [
+        "6사11-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "시장경제와 국가 간 거래"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인간생활",
+      "standards": [
+        "6사10-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인구 분포",
+      "standards": [
+        "6사02-02",
+        "6사12-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "우리나라 지리탐구",
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인구 특징",
+      "standards": [
+        "6사12-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인권",
+      "standards": [
+        "6사03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "법과 인권의 보장"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인권 보호",
+      "standards": [
+        "6사03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "법과 인권의 보장"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "인권 침해",
+      "standards": [
+        "6사03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "법과 인권의 보장"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "일제",
+      "standards": [
+        "6사06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "자연재해",
+      "standards": [
+        "6사02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 지리탐구"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "장소",
+      "standards": [
+        "6사07-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "저항",
+      "standards": [
+        "6사06-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "전쟁",
+      "standards": [
+        "6사06-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "조선",
+      "standards": [
+        "6사05-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "조선 후기",
+      "standards": [
+        "6사05-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "달라지는 시대, 변화하는 생활 모습"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "주권",
+      "standards": [
+        "6사08-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지구본",
+      "standards": [
+        "6사09-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "지구, 대륙 그리고 국가들"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지구촌",
+      "standards": [
+        "6사12-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지리",
+      "standards": [
+        "6사01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지속가능",
+      "standards": [
+        "6사12-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지역",
+      "standards": [
+        "6사02-02",
+        "6사10-01"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "우리나라 지리탐구",
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지형",
+      "standards": [
+        "6사01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "지형 경관",
+      "standards": [
+        "6사10-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "세계의 자연환경"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "참여",
+      "standards": [
+        "6사08-01",
+        "6사03-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여",
+        "법과 인권의 보장"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "통일",
+      "standards": [
+        "6사07-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "평화",
+      "standards": [
+        "6사07-01"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "평화 통일을 위한 노력, 민주화와 산업화"
+      ],
+      "domains": [
+        "역사"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "하천",
+      "standards": [
+        "6사01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "해결 방안",
+      "standards": [
+        "6사02-02",
+        "6사03-02",
+        "6사11-02",
+        "6사12-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "우리나라 지리탐구",
+        "법과 인권의 보장",
+        "시장경제와 국가 간 거래",
+        "지구촌 사람들"
+      ],
+      "domains": [
+        "지리",
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "해안",
+      "standards": [
+        "6사01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "우리나라 국토여행"
+      ],
+      "domains": [
+        "지리"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "행정부",
+      "standards": [
+        "6사08-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "민주주의와 시민 참여"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "사회",
+      "term": "헌법",
+      "standards": [
+        "6사03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "법과 인권의 보장"
+      ],
+      "domains": [
+        "일반사회"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "가능성",
+      "standards": [
+        "6수04-04",
+        "6수04-05",
+        "6수04-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "각기둥",
+      "standards": [
+        "6수03-05",
+        "6수03-06"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "각기둥과 각뿔"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "각뿔",
+      "standards": [
+        "6수03-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "각기둥과 각뿔"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "개수",
+      "standards": [
+        "6수03-09"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "공간과 입체"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "겉넓이",
+      "standards": [
+        "6수03-17"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "겨냥도",
+      "standards": [
+        "6수03-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "직육면체와 정육면체"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "계산 순서",
+      "standards": [
+        "6수01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자연수의 혼합 계산"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "계산 원리",
+      "standards": [
+        "6수01-09",
+        "6수01-11",
+        "6수01-13",
+        "6수01-15"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "분수의 곱셈",
+        "분수의 나눗셈",
+        "소수의 곱셈",
+        "소수의 나눗셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "곱셈",
+      "standards": [
+        "6수01-01",
+        "6수01-09",
+        "6수01-13"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "자연수의 혼합 계산",
+        "분수의 곱셈",
+        "소수의 곱셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "공배수",
+      "standards": [
+        "6수01-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "공약수",
+      "standards": [
+        "6수01-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "관계",
+      "standards": [
+        "6수01-12",
+        "6수02-02"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분",
+        "비와 비율"
+      ],
+      "domains": [
+        "수와 연산",
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "구성 요소",
+      "standards": [
+        "6수03-03",
+        "6수03-05",
+        "6수03-07"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "직육면체와 정육면체",
+        "각기둥과 각뿔",
+        "원기둥, 원뿔, 구"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "구하기",
+      "standards": [
+        "6수04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "규칙",
+      "standards": [
+        "6수02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "대응 관계"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "그래프",
+      "standards": [
+        "6수04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "근거",
+      "standards": [
+        "6수04-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "근삿값",
+      "standards": [
+        "6수03-15"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "나눗셈",
+      "standards": [
+        "6수01-01",
+        "6수01-10",
+        "6수01-11",
+        "6수01-14",
+        "6수01-15"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "자연수의 혼합 계산",
+        "분수의 나눗셈",
+        "소수의 나눗셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "넓이",
+      "standards": [
+        "6수03-12",
+        "6수03-13",
+        "6수03-14"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "단위",
+      "standards": [
+        "6수03-12",
+        "6수03-18"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이",
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "대응 관계",
+      "standards": [
+        "6수02-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "대응 관계"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "대칭도형",
+      "standards": [
+        "6수03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "합동과 대칭"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "덧셈",
+      "standards": [
+        "6수01-01",
+        "6수01-08"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자연수의 혼합 계산",
+        "분수의 덧셈과 뺄셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "도형",
+      "standards": [
+        "6수03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "합동과 대칭"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "두 양",
+      "standards": [
+        "6수02-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "비와 비율"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "둘레",
+      "standards": [
+        "6수03-11"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "띠그래프",
+      "standards": [
+        "6수04-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "마름모",
+      "standards": [
+        "6수03-14"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "모양",
+      "standards": [
+        "6수03-10"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "공간과 입체"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "미만",
+      "standards": [
+        "6수01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "반올림",
+      "standards": [
+        "6수01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "배분",
+      "standards": [
+        "6수02-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "비례식과 비례배분"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "배수",
+      "standards": [
+        "6수01-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "백분율",
+      "standards": [
+        "6수02-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "비와 비율"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "버림",
+      "standards": [
+        "6수01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "부피",
+      "standards": [
+        "6수03-18",
+        "6수03-19"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "분모",
+      "standards": [
+        "6수01-07",
+        "6수01-08"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분",
+        "분수의 덧셈과 뺄셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "분수",
+      "standards": [
+        "6수01-06",
+        "6수01-07",
+        "6수01-08",
+        "6수01-09",
+        "6수01-10",
+        "6수01-11",
+        "6수01-12",
+        "6수01-14",
+        "6수02-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "약분과 통분",
+        "분수의 덧셈과 뺄셈",
+        "분수의 곱셈",
+        "분수의 나눗셈",
+        "소수의 나눗셈",
+        "비와 비율"
+      ],
+      "domains": [
+        "수와 연산",
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "비교",
+      "standards": [
+        "6수02-02",
+        "6수04-04"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "비와 비율",
+        "평균과 가능성"
+      ],
+      "domains": [
+        "변화와 관계",
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "비례",
+      "standards": [
+        "6수02-04",
+        "6수02-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "비례식과 비례배분"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "비례배분",
+      "standards": [
+        "6수02-05"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "비례식과 비례배분"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "비례식",
+      "standards": [
+        "6수02-04"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "비례식과 비례배분"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "비율",
+      "standards": [
+        "6수02-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "비와 비율"
+      ],
+      "domains": [
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "뺄셈",
+      "standards": [
+        "6수01-01",
+        "6수01-08"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자연수의 혼합 계산",
+        "분수의 덧셈과 뺄셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "사건",
+      "standards": [
+        "6수04-04",
+        "6수04-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "사다리꼴",
+      "standards": [
+        "6수03-14"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "삼각형",
+      "standards": [
+        "6수03-14"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "선대칭",
+      "standards": [
+        "6수03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "합동과 대칭"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "성질",
+      "standards": [
+        "6수02-04",
+        "6수03-01",
+        "6수03-03",
+        "6수03-05",
+        "6수03-07"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "비례식과 비례배분",
+        "합동과 대칭",
+        "직육면체와 정육면체",
+        "각기둥과 각뿔",
+        "원기둥, 원뿔, 구"
+      ],
+      "domains": [
+        "변화와 관계",
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "세제곱미터",
+      "standards": [
+        "6수03-18"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "세제곱센티미터",
+      "standards": [
+        "6수03-18"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "소수",
+      "standards": [
+        "6수01-12",
+        "6수01-13",
+        "6수01-15",
+        "6수02-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "약분과 통분",
+        "소수의 곱셈",
+        "소수의 나눗셈",
+        "비와 비율"
+      ],
+      "domains": [
+        "수와 연산",
+        "변화와 관계"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "수의 범위",
+      "standards": [
+        "6수01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "쌓기나무",
+      "standards": [
+        "6수03-09",
+        "6수03-10"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "공간과 입체"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "약분",
+      "standards": [
+        "6수01-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "약수",
+      "standards": [
+        "6수01-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "어림",
+      "standards": [
+        "6수01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "예상",
+      "standards": [
+        "6수04-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "올림",
+      "standards": [
+        "6수01-03"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원그래프",
+      "standards": [
+        "6수04-02"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원기둥",
+      "standards": [
+        "6수03-07",
+        "6수03-08"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원기둥, 원뿔, 구"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원뿔",
+      "standards": [
+        "6수03-07"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원기둥, 원뿔, 구"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원의 넓이",
+      "standards": [
+        "6수03-16"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원주",
+      "standards": [
+        "6수03-15",
+        "6수03-16"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "원주율",
+      "standards": [
+        "6수03-15"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "이상",
+      "standards": [
+        "6수01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "이하",
+      "standards": [
+        "6수01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "입체도형",
+      "standards": [
+        "6수03-09",
+        "6수03-10"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "공간과 입체"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "자료",
+      "standards": [
+        "6수04-01",
+        "6수04-02",
+        "6수04-06"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "평균과 가능성",
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "자료 수집",
+      "standards": [
+        "6수04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "자연수",
+      "standards": [
+        "6수01-10",
+        "6수01-14"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "분수의 나눗셈",
+        "소수의 나눗셈"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "전개도",
+      "standards": [
+        "6수03-06",
+        "6수03-08"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "각기둥과 각뿔",
+        "원기둥, 원뿔, 구"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "점대칭",
+      "standards": [
+        "6수03-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "합동과 대칭"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "정리",
+      "standards": [
+        "6수04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "정사각형",
+      "standards": [
+        "6수03-13"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "정육면체",
+      "standards": [
+        "6수03-03",
+        "6수03-04",
+        "6수03-17",
+        "6수03-19"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "직육면체와 정육면체",
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "제곱미터",
+      "standards": [
+        "6수03-12"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "제곱센티미터",
+      "standards": [
+        "6수03-12"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "제곱킬로미터",
+      "standards": [
+        "6수03-12"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "지름",
+      "standards": [
+        "6수03-15"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "원의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "직사각형",
+      "standards": [
+        "6수03-13"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "직육면체",
+      "standards": [
+        "6수03-03",
+        "6수03-04",
+        "6수03-17",
+        "6수03-19"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "직육면체와 정육면체",
+        "직육면체의 겉넓이와 부피"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "초과",
+      "standards": [
+        "6수01-02"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "수의 범위와 올림, 버림, 반올림"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "최대공약수",
+      "standards": [
+        "6수01-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "최소공배수",
+      "standards": [
+        "6수01-05"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약수와 배수"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "크기 비교",
+      "standards": [
+        "6수01-07",
+        "6수01-12"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "크기가 같은 분수",
+      "standards": [
+        "6수01-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "탐구 문제",
+      "standards": [
+        "6수04-03"
+      ],
+      "grades": [
+        6
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "통분",
+      "standards": [
+        "6수01-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "약분과 통분"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "판단",
+      "standards": [
+        "6수04-06"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "평균",
+      "standards": [
+        "6수04-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "평면도형",
+      "standards": [
+        "6수03-11"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "평행사변형",
+      "standards": [
+        "6수03-14"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "다각형의 둘레와 넓이"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "표현",
+      "standards": [
+        "6수04-04"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "평균과 가능성"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "합동",
+      "standards": [
+        "6수03-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "2"
+      ],
+      "units": [
+        "합동과 대칭"
+      ],
+      "domains": [
+        "도형과 측정"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "해석",
+      "standards": [
+        "6수04-01",
+        "6수04-02",
+        "6수04-03"
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "semesters": [
+        "1",
+        "2"
+      ],
+      "units": [
+        "평균과 가능성",
+        "여러 가지 그래프"
+      ],
+      "domains": [
+        "자료와 가능성"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "수학",
+      "term": "혼합 계산",
+      "standards": [
+        "6수01-01"
+      ],
+      "grades": [
+        5
+      ],
+      "semesters": [
+        "1"
+      ],
+      "units": [
+        "자연수의 혼합 계산"
+      ],
+      "domains": [
+        "수와 연산"
+      ],
+      "source_refs": [
+        "GOE_FRAMEWORK_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "감정",
+      "standards": [
+        "6영02-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "강세",
+      "standards": [
+        "6영01-01",
+        "6영01-02",
+        "6영02-01"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "경험",
+      "standards": [
+        "6영02-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "계획",
+      "standards": [
+        "6영02-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "공감",
+      "standards": [
+        "6영01-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "그림",
+      "standards": [
+        "6영02-02"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "글쓰기",
+      "standards": [
+        "6영02-08"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "노래",
+      "standards": [
+        "6영01-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "단어",
+      "standards": [
+        "6영01-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "담화",
+      "standards": [
+        "6영01-04",
+        "6영01-05",
+        "6영01-07",
+        "6영01-06",
+        "6영01-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "답하기",
+      "standards": [
+        "6영02-07"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "대소문자",
+      "standards": [
+        "6영02-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "동작",
+      "standards": [
+        "6영02-02"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "듣기",
+      "standards": [
+        "6영01-01",
+        "6영01-07",
+        "6영01-08",
+        "6영01-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "리듬",
+      "standards": [
+        "6영01-01",
+        "6영01-02",
+        "6영02-01"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "말하기",
+      "standards": [
+        "6영02-01",
+        "6영02-02"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "매체",
+      "standards": [
+        "6영01-08",
+        "6영02-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "목적",
+      "standards": [
+        "6영02-08"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "묘사",
+      "standards": [
+        "6영02-04"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "문장",
+      "standards": [
+        "6영01-03",
+        "6영02-03",
+        "6영02-04",
+        "6영02-07"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "문장 부호",
+      "standards": [
+        "6영02-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "문화",
+      "standards": [
+        "6영01-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "묻기",
+      "standards": [
+        "6영02-07"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "방법",
+      "standards": [
+        "6영02-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "사건",
+      "standards": [
+        "6영01-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "사람",
+      "standards": [
+        "6영02-04"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "사물",
+      "standards": [
+        "6영02-04"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "설명",
+      "standards": [
+        "6영02-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "세부 정보",
+      "standards": [
+        "6영01-04",
+        "6영02-07"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "소개",
+      "standards": [
+        "6영02-04"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "소리 내어 읽기",
+      "standards": [
+        "6영01-02"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "순서",
+      "standards": [
+        "6영01-06",
+        "6영02-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "실물",
+      "standards": [
+        "6영02-02"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "쓰기",
+      "standards": [
+        "6영02-02",
+        "6영02-08"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "알파벳",
+      "standards": [
+        "6영02-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "어구",
+      "standards": [
+        "6영01-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "억양",
+      "standards": [
+        "6영01-01",
+        "6영01-02",
+        "6영02-01"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "예시문",
+      "standards": [
+        "6영02-08"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "위치",
+      "standards": [
+        "6영02-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "의견",
+      "standards": [
+        "6영02-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "의미",
+      "standards": [
+        "6영01-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "의사소통",
+      "standards": [
+        "6영02-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "이야기",
+      "standards": [
+        "6영01-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "이해",
+      "standards": [
+        "6영01-03"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "일상생활",
+      "standards": [
+        "6영01-04",
+        "6영01-05",
+        "6영01-10",
+        "6영02-07"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "읽기",
+      "standards": [
+        "6영01-07",
+        "6영01-08",
+        "6영01-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "자신감",
+      "standards": [
+        "6영01-08",
+        "6영02-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "장소",
+      "standards": [
+        "6영02-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "전략",
+      "standards": [
+        "6영01-07",
+        "6영02-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "중심 내용",
+      "standards": [
+        "6영01-05"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "참여",
+      "standards": [
+        "6영02-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "창의",
+      "standards": [
+        "6영02-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "파악",
+      "standards": [
+        "6영01-06"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "포용",
+      "standards": [
+        "6영01-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "표현",
+      "standards": [
+        "6영02-06",
+        "6영02-09"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "협력",
+      "standards": [
+        "6영02-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    },
+    {
+      "subject": "영어",
+      "term": "흥미",
+      "standards": [
+        "6영01-08",
+        "6영02-10"
+      ],
+      "grades": [],
+      "semesters": [],
+      "units": [],
+      "domains": [
+        "이해",
+        "표현"
+      ],
+      "source_refs": [
+        "GOE_ENGLISH_56"
+      ]
+    }
+  ]
+}

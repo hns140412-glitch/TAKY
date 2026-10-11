@@ -1,0 +1,3258 @@
+{
+  "schema": "TAKY_ACADEMIC_VOCAB_ELEMENTARY_PROJECTION_V1",
+  "authority": "DERIVED_FROM_CNE_PRIMARY_SUPPLEMENT",
+  "source_ref": "CNE:ACADEMIC_VOCAB_1387_FULL_ORIGINAL",
+  "source_sha256": "b3da6a46f6f6505d3c5a92c594a477d96145f4139ef614f760e89e98bcd07b88",
+  "count": 336,
+  "level_policy": {
+    "E1-E4": {
+      "primary": [
+        1
+      ],
+      "secondary": [
+        2
+      ]
+    },
+    "E5-E6": {
+      "primary": [
+        2
+      ],
+      "foundation": [
+        1
+      ]
+    }
+  },
+  "selection_boundary": "TEXT_MATCH_IS_CANDIDATE_SIGNAL_NOT_MASTERY_OR_CURRICULUM_FACT",
+  "terms": [
+    {
+      "term": "검사",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "검사",
+        "검사하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "결과",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "결과",
+        "결과적"
+      ]
+    },
+    {
+      "term": "결정",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "결정",
+        "결정적",
+        "결정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "경험",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "경험",
+        "경험적"
+      ]
+    },
+    {
+      "term": "계획",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "계획",
+        "계획성",
+        "계획적",
+        "계획하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "관계",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "관계",
+        "관계있다",
+        "없다",
+        "관계적",
+        "관계하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "교환",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "교환",
+        "교환하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "규칙",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "규칙",
+        "규칙성",
+        "규칙적",
+        "규칙화",
+        "규칙화하다"
+      ]
+    },
+    {
+      "term": "내용",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "내용",
+        "내용상",
+        "내용적"
+      ]
+    },
+    {
+      "term": "능력",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "능력"
+      ]
+    },
+    {
+      "term": "단순",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "단순",
+        "단순성",
+        "단순하다",
+        "단순화"
+      ]
+    },
+    {
+      "term": "목적",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "목적"
+      ]
+    },
+    {
+      "term": "문제",
+      "level": 1,
+      "source_page": 1,
+      "variants": [
+        "문제",
+        "문제성",
+        "문제적",
+        "문제점",
+        "문제화",
+        "문제화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "반대",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "반대",
+        "반대하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "방법",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "방법",
+        "방법적"
+      ]
+    },
+    {
+      "term": "방향",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "방향",
+        "방향성"
+      ]
+    },
+    {
+      "term": "복잡",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "복잡",
+        "복잡하다"
+      ]
+    },
+    {
+      "term": "부분",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "부분",
+        "부분적"
+      ]
+    },
+    {
+      "term": "비교",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "비교",
+        "비교적",
+        "비교하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "사실",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "사실",
+        "사실적"
+      ]
+    },
+    {
+      "term": "선택",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "선택",
+        "선택적",
+        "선택하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "설명",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "설명",
+        "설명하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "성격",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "성격"
+      ]
+    },
+    {
+      "term": "소개",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "소개",
+        "소개하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "안내",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "안내",
+        "안내하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "연결",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "연결",
+        "연결성",
+        "연결하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "의미",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "의미",
+        "의미적",
+        "의미화"
+      ]
+    },
+    {
+      "term": "이상",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "이상"
+      ]
+    },
+    {
+      "term": "이용",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "이용",
+        "이용하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "이해",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "이해",
+        "이해도",
+        "이해력",
+        "이해하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "재료",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "재료"
+      ]
+    },
+    {
+      "term": "정리",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "정리",
+        "정리하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "정확",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "정확",
+        "정확도",
+        "정확성",
+        "정확하다"
+      ]
+    },
+    {
+      "term": "종류",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "종류"
+      ]
+    },
+    {
+      "term": "주변",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "주변",
+        "주변부",
+        "주변적",
+        "주변화"
+      ]
+    },
+    {
+      "term": "준비",
+      "level": 1,
+      "source_page": 2,
+      "variants": [
+        "준비",
+        "준비하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "중심",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "중심"
+      ]
+    },
+    {
+      "term": "중요",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "중요",
+        "중요도",
+        "중요성",
+        "중요하다"
+      ]
+    },
+    {
+      "term": "지도",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "지도",
+        "지도적",
+        "지도하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "직접",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "직접",
+        "직접적"
+      ]
+    },
+    {
+      "term": "취소",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "취소",
+        "취소하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "프로그램",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "프로그램"
+      ]
+    },
+    {
+      "term": "행동",
+      "level": 1,
+      "source_page": 3,
+      "variants": [
+        "행동",
+        "행동하다"
+      ]
+    },
+    {
+      "term": "가능",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "가능",
+        "가능성",
+        "가능하다"
+      ]
+    },
+    {
+      "term": "간결",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "간결",
+        "간결성",
+        "간결하다"
+      ]
+    },
+    {
+      "term": "간략",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "간략",
+        "간략하다",
+        "간략화"
+      ]
+    },
+    {
+      "term": "간접",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "간접",
+        "간접적"
+      ]
+    },
+    {
+      "term": "감각",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "감각",
+        "감각적"
+      ]
+    },
+    {
+      "term": "강력",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "강력",
+        "강력하다"
+      ]
+    },
+    {
+      "term": "강제",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "강제",
+        "강제적",
+        "강제하다"
+      ]
+    },
+    {
+      "term": "강조",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "강조",
+        "강조하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "개혁",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "개혁",
+        "개혁적",
+        "개혁하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "거부",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "거부",
+        "거부하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "검색",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "검색",
+        "검색하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "견해",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "견해",
+        "견해차"
+      ]
+    },
+    {
+      "term": "결론",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "결론",
+        "결론적",
+        "결론짓다"
+      ]
+    },
+    {
+      "term": "경쟁",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "경쟁",
+        "경쟁적",
+        "경쟁하다"
+      ]
+    },
+    {
+      "term": "고려",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "고려",
+        "고려하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "고정",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "고정",
+        "고정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "공개",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "공개",
+        "공개성",
+        "공개적",
+        "공개하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "공동",
+      "level": 2,
+      "source_page": 4,
+      "variants": [
+        "공동"
+      ]
+    },
+    {
+      "term": "공통",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "공통",
+        "공통적"
+      ]
+    },
+    {
+      "term": "공평",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "공평",
+        "공평하다"
+      ]
+    },
+    {
+      "term": "과장",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "과장",
+        "과장하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "과정",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "과정",
+        "과정적"
+      ]
+    },
+    {
+      "term": "관련",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "관련",
+        "관련성",
+        "관련있다",
+        "없다"
+      ]
+    },
+    {
+      "term": "관리",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "관리",
+        "관리하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "관찰",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "관찰",
+        "관찰하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "관측",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "관측",
+        "관측적",
+        "관측하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "구별",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "구별",
+        "구별하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "구분",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "구분",
+        "구분하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "권장",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "권장",
+        "권장하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "균형",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "균형",
+        "균형성",
+        "균형적",
+        "균형점"
+      ]
+    },
+    {
+      "term": "극복",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "극복",
+        "극복하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "근거",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "근거"
+      ]
+    },
+    {
+      "term": "급격하다",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "급격하다"
+      ]
+    },
+    {
+      "term": "긍정",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "긍정",
+        "긍정적"
+      ]
+    },
+    {
+      "term": "기능",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기능"
+      ]
+    },
+    {
+      "term": "기능",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기능",
+        "기능적",
+        "기능하다"
+      ]
+    },
+    {
+      "term": "기법",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기법"
+      ]
+    },
+    {
+      "term": "기본",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기본",
+        "기본적"
+      ]
+    },
+    {
+      "term": "기술",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기술"
+      ]
+    },
+    {
+      "term": "기준",
+      "level": 2,
+      "source_page": 5,
+      "variants": [
+        "기준",
+        "기준점"
+      ]
+    },
+    {
+      "term": "기초",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "기초",
+        "기초적"
+      ]
+    },
+    {
+      "term": "기호",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "기호",
+        "기호적"
+      ]
+    },
+    {
+      "term": "나열",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "나열",
+        "나열하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "내부",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "내부"
+      ]
+    },
+    {
+      "term": "다양",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "다양",
+        "다양성",
+        "다양하다",
+        "다양화"
+      ]
+    },
+    {
+      "term": "단계",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "단계",
+        "단계성",
+        "단계적",
+        "단계화"
+      ]
+    },
+    {
+      "term": "단정",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "단정",
+        "단정적",
+        "단정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "대강",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대강"
+      ]
+    },
+    {
+      "term": "대비",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대비",
+        "대비적",
+        "대비하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "대조",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대조",
+        "대조적",
+        "대조하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "대책",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대책"
+      ]
+    },
+    {
+      "term": "대칭",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대칭",
+        "대칭적"
+      ]
+    },
+    {
+      "term": "대표",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대표",
+        "대표성",
+        "대표적",
+        "대표하다"
+      ]
+    },
+    {
+      "term": "대항",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "대항",
+        "대항하다"
+      ]
+    },
+    {
+      "term": "도구",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "도구",
+        "도구적"
+      ]
+    },
+    {
+      "term": "도달",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "도달",
+        "도달하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "독립",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "독립",
+        "독립하다",
+        "되다",
+        "독립적"
+      ]
+    },
+    {
+      "term": "독창",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "독창",
+        "독창적"
+      ]
+    },
+    {
+      "term": "동등",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "동등",
+        "동등하다"
+      ]
+    },
+    {
+      "term": "동력",
+      "level": 2,
+      "source_page": 6,
+      "variants": [
+        "동력"
+      ]
+    },
+    {
+      "term": "동의",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "동의",
+        "동의하다"
+      ]
+    },
+    {
+      "term": "등장",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "등장",
+        "등장하다"
+      ]
+    },
+    {
+      "term": "모방",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "모방",
+        "모방하다",
+        "모방적"
+      ]
+    },
+    {
+      "term": "목표",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "목표",
+        "목표량"
+      ]
+    },
+    {
+      "term": "무시",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "무시",
+        "무시하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "미만",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "미만"
+      ]
+    },
+    {
+      "term": "미세",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "미세",
+        "미세하다"
+      ]
+    },
+    {
+      "term": "밀접",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "밀접",
+        "밀접하다"
+      ]
+    },
+    {
+      "term": "반복",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "반복",
+        "반복하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "발견",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "발견",
+        "발견하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "발달",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "발달",
+        "발달하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "발명",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "발명",
+        "발명하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "발생",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "발생",
+        "발생적",
+        "발생하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "발전",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "발전",
+        "발전상",
+        "발전성",
+        "발전적",
+        "발전하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "방대하다",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "방대하다"
+      ]
+    },
+    {
+      "term": "방식",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "방식"
+      ]
+    },
+    {
+      "term": "방안",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "방안"
+      ]
+    },
+    {
+      "term": "방지",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "방지",
+        "방지하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "배경",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "배경"
+      ]
+    },
+    {
+      "term": "배열",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "배열",
+        "배열하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "배출",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "배출",
+        "배출하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "범위",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "범위"
+      ]
+    },
+    {
+      "term": "법칙",
+      "level": 2,
+      "source_page": 7,
+      "variants": [
+        "법칙"
+      ]
+    },
+    {
+      "term": "변경",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "변경",
+        "변경하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "변천",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "변천",
+        "변천하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "변화",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "변화",
+        "변화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보관",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보관",
+        "보관하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보안",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보안",
+        "보완하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보완",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보완",
+        "보완하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보장",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보장",
+        "보장하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보충",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보충",
+        "보충하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "보호",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "보호",
+        "보호하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "복사",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "복사",
+        "복사하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "부정",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "부정",
+        "부정적"
+      ]
+    },
+    {
+      "term": "분류",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "분류",
+        "분류법",
+        "분류하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "분리",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "분리",
+        "분리하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "비율",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "비율"
+      ]
+    },
+    {
+      "term": "비판",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "비판",
+        "비판적",
+        "비판하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "사고",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "사고",
+        "사고력",
+        "사고하다"
+      ]
+    },
+    {
+      "term": "사례",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "사례"
+      ]
+    },
+    {
+      "term": "삭제",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "삭제",
+        "삭제하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "상대",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "상대",
+        "상대적"
+      ]
+    },
+    {
+      "term": "상상",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "상상",
+        "상상력",
+        "상상하다"
+      ]
+    },
+    {
+      "term": "상태",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "상태"
+      ]
+    },
+    {
+      "term": "상황",
+      "level": 2,
+      "source_page": 8,
+      "variants": [
+        "상황"
+      ]
+    },
+    {
+      "term": "생략",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "생략",
+        "생략하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "생산",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "생산",
+        "생산적",
+        "생산하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "설득",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "설득",
+        "설득력",
+        "설득적",
+        "설득하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "성과",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "성과"
+      ]
+    },
+    {
+      "term": "성능",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "성능"
+      ]
+    },
+    {
+      "term": "성장",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "성장",
+        "성장세",
+        "성장하다"
+      ]
+    },
+    {
+      "term": "성질",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "성질"
+      ]
+    },
+    {
+      "term": "세계적",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "세계적"
+      ]
+    },
+    {
+      "term": "세기",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "세기"
+      ]
+    },
+    {
+      "term": "소극적",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소극적"
+      ]
+    },
+    {
+      "term": "소비",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소비",
+        "소비적",
+        "소비하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "소용",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소용",
+        "소용되다",
+        "없다"
+      ]
+    },
+    {
+      "term": "소유",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소유",
+        "소유하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "소재",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소재"
+      ]
+    },
+    {
+      "term": "소통",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "소통",
+        "소통하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "수거",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수거",
+        "수거하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "수단",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수단",
+        "수단적",
+        "수단화",
+        "수단화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "수립",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수립",
+        "수립하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "수용",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수용",
+        "수용하다",
+        "수용적"
+      ]
+    },
+    {
+      "term": "수정",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수정",
+        "수정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "수준",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수준"
+      ]
+    },
+    {
+      "term": "수집",
+      "level": 2,
+      "source_page": 9,
+      "variants": [
+        "수집",
+        "수집하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "습득",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "습득",
+        "습득하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "시도",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "시도",
+        "시도하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "실시",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "실시",
+        "실시하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "실천",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "실천",
+        "실천력",
+        "실천적",
+        "실천하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "실행",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "실행",
+        "실행하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "실험",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "실험",
+        "실험적",
+        "실험하다"
+      ]
+    },
+    {
+      "term": "심각",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "심각",
+        "심각성",
+        "심각하다"
+      ]
+    },
+    {
+      "term": "심사",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "심사",
+        "심사하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "아이디어",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "아이디어"
+      ]
+    },
+    {
+      "term": "안정",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "안정",
+        "안정기",
+        "안정성",
+        "안정적",
+        "안정하다",
+        "되다",
+        "안정화"
+      ]
+    },
+    {
+      "term": "연구",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "연구",
+        "연구하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "영향",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "영향",
+        "영향력"
+      ]
+    },
+    {
+      "term": "예상",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "예상",
+        "예상하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "예시",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "예시"
+      ]
+    },
+    {
+      "term": "예외",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "예외",
+        "예외적"
+      ]
+    },
+    {
+      "term": "예정",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "예정",
+        "예정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "예측",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "예측",
+        "예측하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "오프라인",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "오프라인"
+      ]
+    },
+    {
+      "term": "온라인",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "온라인"
+      ]
+    },
+    {
+      "term": "온전",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "온전",
+        "온전성",
+        "온전하다"
+      ]
+    },
+    {
+      "term": "완벽",
+      "level": 2,
+      "source_page": 10,
+      "variants": [
+        "완벽",
+        "완벽성",
+        "완벽하다"
+      ]
+    },
+    {
+      "term": "완성",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "완성",
+        "완성도",
+        "완성하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "완전",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "완전",
+        "완전하다"
+      ]
+    },
+    {
+      "term": "외부",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "외부"
+      ]
+    },
+    {
+      "term": "요구",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "요구",
+        "요구하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "요약",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "요약",
+        "요약적",
+        "요약하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "요점",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "요점"
+      ]
+    },
+    {
+      "term": "요청",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "요청",
+        "요청하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "용도",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "용도"
+      ]
+    },
+    {
+      "term": "우수",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "우수",
+        "우수성"
+      ]
+    },
+    {
+      "term": "운영",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "운영",
+        "운영하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "원격",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "원격"
+      ]
+    },
+    {
+      "term": "원인",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "원인"
+      ]
+    },
+    {
+      "term": "유래",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유래"
+      ]
+    },
+    {
+      "term": "유사",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유사",
+        "유사성",
+        "유사하다",
+        "유연성"
+      ]
+    },
+    {
+      "term": "유용",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유용",
+        "유용성",
+        "유용하다"
+      ]
+    },
+    {
+      "term": "유의",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유의",
+        "유의하다"
+      ]
+    },
+    {
+      "term": "유익",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유익",
+        "유익하다"
+      ]
+    },
+    {
+      "term": "유지",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유지",
+        "유지하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "유형",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "유형",
+        "유형적"
+      ]
+    },
+    {
+      "term": "의견",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "의견"
+      ]
+    },
+    {
+      "term": "의도",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "의도",
+        "의도적"
+      ]
+    },
+    {
+      "term": "의사소통",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "의사소통",
+        "의사소통적",
+        "의사소통하다"
+      ]
+    },
+    {
+      "term": "의의",
+      "level": 2,
+      "source_page": 11,
+      "variants": [
+        "의의"
+      ]
+    },
+    {
+      "term": "의존",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "의존",
+        "의존성",
+        "의존적",
+        "의존하다"
+      ]
+    },
+    {
+      "term": "의지",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "의지",
+        "의지력"
+      ]
+    },
+    {
+      "term": "이동",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "이동",
+        "이동하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "이하",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "이하"
+      ]
+    },
+    {
+      "term": "인정",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "인정",
+        "인정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "자극",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "자극",
+        "자극적",
+        "자극하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "자동적",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "자동적"
+      ]
+    },
+    {
+      "term": "자료",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "자료"
+      ]
+    },
+    {
+      "term": "자주",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "자주",
+        "자주성",
+        "자주적"
+      ]
+    },
+    {
+      "term": "작동",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "작동",
+        "작동하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "적극",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "적극",
+        "적극성",
+        "적극적"
+      ]
+    },
+    {
+      "term": "전달",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "전달",
+        "전달적",
+        "전달하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "절차",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "절차",
+        "절차적",
+        "절차화",
+        "절차화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "접수",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "접수",
+        "접수하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "접촉",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "접촉",
+        "접촉하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "정교하다",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "정교하다",
+        "정교성",
+        "정교화",
+        "정교화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "정당",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "정당",
+        "정당성",
+        "정당하다",
+        "정당화",
+        "정당화하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "정보",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "정보",
+        "정보량",
+        "정보성"
+      ]
+    },
+    {
+      "term": "정상",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "정상"
+      ]
+    },
+    {
+      "term": "정지",
+      "level": 2,
+      "source_page": 12,
+      "variants": [
+        "정지",
+        "정지하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "제도",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "제도",
+        "제도적"
+      ]
+    },
+    {
+      "term": "제안",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "제안",
+        "제안하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "조건",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "조건",
+        "조건부",
+        "조건적"
+      ]
+    },
+    {
+      "term": "조사",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "조사",
+        "조사하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "종료",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "종료",
+        "종료하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "주의",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "주의",
+        "주의하다"
+      ]
+    },
+    {
+      "term": "주장",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "주장",
+        "주장하다"
+      ]
+    },
+    {
+      "term": "주제",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "주제"
+      ]
+    },
+    {
+      "term": "준수",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "준수",
+        "준수하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "중립",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "중립",
+        "중립적"
+      ]
+    },
+    {
+      "term": "중복",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "중복",
+        "중복하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "중시",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "중시",
+        "중시하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "증거",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "증거"
+      ]
+    },
+    {
+      "term": "증명",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "증명",
+        "증명하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지속",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지속",
+        "지속성",
+        "지속적",
+        "지속하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지시",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지시",
+        "지시적",
+        "지시하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지식",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지식"
+      ]
+    },
+    {
+      "term": "지원",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지원",
+        "지원하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지적",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지적",
+        "지적하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지점",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지점"
+      ]
+    },
+    {
+      "term": "지정",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지정",
+        "지정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지지",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지지",
+        "지지하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "지표",
+      "level": 2,
+      "source_page": 13,
+      "variants": [
+        "지표"
+      ]
+    },
+    {
+      "term": "진출",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "진출",
+        "진출하다"
+      ]
+    },
+    {
+      "term": "집중",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "집중",
+        "집중적",
+        "집중하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "차단",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "차단",
+        "차단하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "참가",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "참가",
+        "참가하다"
+      ]
+    },
+    {
+      "term": "참여",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "참여",
+        "참여적",
+        "참여하다"
+      ]
+    },
+    {
+      "term": "창의",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "창의",
+        "창의력",
+        "창의성",
+        "창의적"
+      ]
+    },
+    {
+      "term": "창조",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "창조",
+        "창조력",
+        "창조성",
+        "창조적",
+        "창조하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "처리",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "처리",
+        "처리하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "체험",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "체험",
+        "체험적",
+        "체험하다"
+      ]
+    },
+    {
+      "term": "초과",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "초과",
+        "초과하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "총합",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "총합"
+      ]
+    },
+    {
+      "term": "추리",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "추리",
+        "추리하다"
+      ]
+    },
+    {
+      "term": "추측",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "추측",
+        "추측하다"
+      ]
+    },
+    {
+      "term": "출처",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "출처"
+      ]
+    },
+    {
+      "term": "충돌",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "충돌",
+        "충돌하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "충족",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "충족",
+        "충족하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "측정",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "측정",
+        "측정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "타당",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "타당",
+        "타당성",
+        "타당하다"
+      ]
+    },
+    {
+      "term": "타협",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "타협",
+        "타협하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "탁월하다",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "탁월하다"
+      ]
+    },
+    {
+      "term": "탐구",
+      "level": 2,
+      "source_page": 14,
+      "variants": [
+        "탐구",
+        "탐구하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "탐색",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "탐색",
+        "탐색하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "토대",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "토대"
+      ]
+    },
+    {
+      "term": "통과",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "통과",
+        "통과하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "통일",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "통일",
+        "통일성",
+        "통일하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "통제",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "통제",
+        "통제하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "특색",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "특색"
+      ]
+    },
+    {
+      "term": "특성",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "특성"
+      ]
+    },
+    {
+      "term": "특징",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "특징",
+        "특징적",
+        "특징짓다"
+      ]
+    },
+    {
+      "term": "파괴",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "파괴",
+        "파괴하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "파악",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "파악",
+        "파악하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "판단",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "판단",
+        "판단력",
+        "판단하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "판명",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "판명",
+        "판명하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "판별",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "판별",
+        "판별하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "판정",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "판정",
+        "판정하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "편의",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "편의"
+      ]
+    },
+    {
+      "term": "평가",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "평가",
+        "평가하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "평이",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "평이",
+        "평이하다"
+      ]
+    },
+    {
+      "term": "폐기",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "폐기",
+        "폐기하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "폐지",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "폐지",
+        "폐지하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "포기",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "포기",
+        "포기하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "포함",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "포함",
+        "포함하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "표본",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "표본"
+      ]
+    },
+    {
+      "term": "표시",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "표시",
+        "표시하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "표준",
+      "level": 2,
+      "source_page": 15,
+      "variants": [
+        "표준"
+      ]
+    },
+    {
+      "term": "표현",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "표현",
+        "표현하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "필수",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "필수",
+        "필수적"
+      ]
+    },
+    {
+      "term": "학습",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "학습",
+        "학습하다"
+      ]
+    },
+    {
+      "term": "합동",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "합동"
+      ]
+    },
+    {
+      "term": "해결",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해결",
+        "해결력",
+        "해결책",
+        "해결하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "해답",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해답"
+      ]
+    },
+    {
+      "term": "해당",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해당",
+        "해당하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "해법",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해법"
+      ]
+    },
+    {
+      "term": "해석",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해석",
+        "해석적",
+        "해석하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "해설",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "해설",
+        "해설하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "핵심",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "핵심",
+        "핵심적"
+      ]
+    },
+    {
+      "term": "행위",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "행위"
+      ]
+    },
+    {
+      "term": "향상",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "향상",
+        "향상하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "허가",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "허가",
+        "허가하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "현실",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "현실",
+        "현실적"
+      ]
+    },
+    {
+      "term": "현장",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "현장"
+      ]
+    },
+    {
+      "term": "협동",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "협동",
+        "협동하다"
+      ]
+    },
+    {
+      "term": "협력",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "협력",
+        "협력적",
+        "협력하다"
+      ]
+    },
+    {
+      "term": "협의",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "협의",
+        "협의하다"
+      ]
+    },
+    {
+      "term": "협조",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "협조",
+        "협조적",
+        "협조하다"
+      ]
+    },
+    {
+      "term": "형태",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "형태",
+        "형태적"
+      ]
+    },
+    {
+      "term": "혼동",
+      "level": 2,
+      "source_page": 16,
+      "variants": [
+        "혼동",
+        "혼동하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "혼란",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "혼란",
+        "혼란스럽다"
+      ]
+    },
+    {
+      "term": "혼잡",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "혼잡",
+        "혼잡하다"
+      ]
+    },
+    {
+      "term": "확고하다",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "확고하다"
+      ]
+    },
+    {
+      "term": "확실",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "확실",
+        "확실성",
+        "확실하다"
+      ]
+    },
+    {
+      "term": "확인",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "확인",
+        "확인하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "활동",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "활동",
+        "활동적",
+        "활동하다"
+      ]
+    },
+    {
+      "term": "활약",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "활약",
+        "활약하다"
+      ]
+    },
+    {
+      "term": "활용",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "활용",
+        "활용도",
+        "활용성",
+        "활용하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "효과",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "효과",
+        "효과적"
+      ]
+    },
+    {
+      "term": "흡수",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "흡수",
+        "흡수하다",
+        "되다"
+      ]
+    },
+    {
+      "term": "희귀",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "희귀",
+        "희귀하다"
+      ]
+    },
+    {
+      "term": "희박하다",
+      "level": 2,
+      "source_page": 17,
+      "variants": [
+        "희박하다"
+      ]
+    }
+  ]
+}

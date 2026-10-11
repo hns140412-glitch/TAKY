@@ -9,6 +9,8 @@ const IndexedEvidence=require('../intake/indexed-evidence-handoff.js');
 const EvidenceGap=require('./evidence-gap.js');
 const OutcomeFeedback=require('../lifecycle/outcome-growth-feedback.js');
 const ObservationReview=require('./observation-review-intent.js');
+const TermRecommendation=require('./term-recommendation-runtime.js');
+const AcademicVocabUnit=require('../pedagogy/academic-vocab-unit-selector.js');
 
 const VERSION='TAKY_LEARNING_ENGINE_RUNTIME_V1';
 
@@ -151,6 +153,20 @@ function applyOutcome({runtime_result={},outcome={},index_gap_route=null}={}){
   };
 }
 
+function deriveTermRecommendations(input={}){
+  const result=TermRecommendation.derive(input);
+  if(!result.ok)return result;
+  const checked=TermRecommendation.validate(result);
+  return checked.ok?result:{ok:false,reason:'TERM_RECOMMENDATION_INVALID',issues:checked.issues,detail:result};
+}
+
+function deriveAcademicVocabularyTargets(input={}){
+  const result=AcademicVocabUnit.select(input);
+  if(!result.ok)return result;
+  const checked=AcademicVocabUnit.validate(result);
+  return checked.ok?result:{ok:false,reason:'ACADEMIC_VOCAB_TARGETS_INVALID',issues:checked.issues,detail:result};
+}
+
 function validate(result={}){
   const issues=[];
   if(result?.ok!==true)issues.push('RUNTIME_NOT_OK');
@@ -177,4 +193,4 @@ function validate(result={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,derive,applyOutcome,validate});
+module.exports=Object.freeze({VERSION,derive,deriveTermRecommendations,deriveAcademicVocabularyTargets,applyOutcome,validate});

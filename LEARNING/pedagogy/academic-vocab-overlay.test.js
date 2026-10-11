@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('assert');
+const A=require('./academic-vocab-overlay.js');
+assert.equal(A.classify('검사','E5').role,'FOUNDATION');
+assert.equal(A.classify('가능','E5').role,'PRIMARY');
+assert.equal(A.classify('없는말','E5').role,'UNLISTED');
+assert.deepEqual(A.stagePolicy('E5'),{primary:2,foundation:[1],contextual:[3,4]});
+const d=A.decorate([{term_id:'x',term:'가능'}],[{id:'x',term:'가능'}],'E5');
+assert.equal(d.recommendations[0].academic_vocabulary.role,'PRIMARY');
+assert.equal(d.cards[0].academicVocabulary.primary_level,2);
+console.log('academic-vocab-overlay.test.js PASS');

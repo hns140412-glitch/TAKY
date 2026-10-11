@@ -55,6 +55,16 @@ const none=D.derive({
 assert.equal(none.execution_status,'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');
 assert.equal(none.blockers.some(x=>x.code==='NO_EVIDENCE'),true);
 
+const playOnly=D.derive({
+  learner_state:{...learner,inferred:{...learner.inferred,evidence_sufficiency:'NONE'}},
+  feedback_intent:{ok:true,intents:[{intent:'OFFER_ADJACENT_VARIATION',priority:'MEDIUM',basis:'PLAY_CAMP_OBSERVATION_ONLY',targets:['number-bond:7-3']}]},
+  observation_review_actionable:true
+});
+assert.equal(playOnly.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
+assert.equal(playOnly.blockers.some(x=>x.code==='NO_EVIDENCE'),false);
+assert.equal(playOnly.advisories.some(x=>x.code==='UNVERIFIED_ACTIVITY_OBSERVATION'),true);
+assert.equal(playOnly.adaptive_plan.activity_sequence_policy,'ADJACENT_VARIATION');
+
 const drift=D.derive({
   learner_state:{...learner,inferred:{...learner.inferred,instrument_change_detected:true}},
   feedback_intent:feedback

@@ -96,6 +96,7 @@ function selfValidate(result={}){
   if(result.ok&&result.durable_store?.consistency!=='strong')issues.push('STRONG_CONSISTENCY_REQUIRED');
   if(result.entry?.promotion_authority!==false)issues.push('PROMOTION_AUTHORITY_FORBIDDEN');
   if(result.entry?.raw_evidence_copied!==false)issues.push('RAW_EVIDENCE_COPY_FORBIDDEN');
+  if(result.entry&&(!Array.isArray(result.entry.grow_lineage_events)||result.entry.grow_lineage_events.length<2))issues.push('GROW_LINEAGE_NOT_DURABLY_INCLUDED');
   return {ok:issues.length===0,issues};
 }
 

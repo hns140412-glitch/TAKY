@@ -103,8 +103,8 @@ function create({verifyBearerToken,store,resolveIndexedEvidence=null,
    evidence=group.canonical_evidence;
    receiptId=group.receipt.receipt_id;
   }
-  // Only scoped durable Ready-forwarded Hide advisories enter the observation
-  // intent lane. The runtime sanitizes them; they never enter verified receipts.
+  // Only scoped durable observation rows enter the observation intent lane.
+  // The runtime sanitizes each source-specific lane; they never enter verified receipts.
   if(stored&& !Array.isArray(stored.data.observation_only))
    return fail(503,'CENTRAL_OBSERVATION_STATE_INVALID');
   let runtime;

@@ -1,0 +1,1815 @@
+{
+  "schema": "TAKY_TERM_DECODER_REFERENCE_CATALOG_V1",
+  "version": "2026-10-07.1",
+  "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+  "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+  "raw_library_path": "/TAKY/MINING/RAW/2026-10-07/TERM_DECODER_REFERENCE",
+  "terms": [
+    {
+      "term_id": "kor-juje",
+      "subject": "KOREAN",
+      "term": "주제",
+      "hanja": "主題",
+      "reading": "주제",
+      "meaning": "글이나 말에서 중심이 되는 생각",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "主",
+          "meaning": "주인·중심"
+        },
+        {
+          "text": "題",
+          "meaning": "제목·문제"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "主",
+          "words": [
+            "주장",
+            "주요"
+          ]
+        },
+        {
+          "anchor": "題",
+          "words": [
+            "제목",
+            "과제"
+          ]
+        }
+      ],
+      "concept_links": [
+        "중심 생각",
+        "글의 내용"
+      ],
+      "concept": {},
+      "example": "글의 내용을 살펴보고 중심이 되는 주제를 찾아보자.",
+      "unit_tags": [
+        "중심 생각",
+        "글의 내용"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "kor-biyu",
+      "subject": "KOREAN",
+      "term": "비유",
+      "hanja": "比喩",
+      "reading": "비유",
+      "meaning": "어떤 대상을 다른 대상에 빗대어 표현하는 방법",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "比",
+          "meaning": "견주다·비교하다"
+        },
+        {
+          "text": "喩",
+          "meaning": "깨우쳐 알리다·빗대다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "比",
+          "words": [
+            "비교",
+            "대비"
+          ]
+        },
+        {
+          "anchor": "喩",
+          "words": [
+            "비유적",
+            "은유"
+          ]
+        }
+      ],
+      "concept_links": [
+        "직유",
+        "은유",
+        "표현"
+      ],
+      "concept": {},
+      "example": "“마음이 바다처럼 넓다”에는 비유 표현이 쓰였다.",
+      "unit_tags": [
+        "직유",
+        "은유",
+        "표현"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "soc-sahoe",
+      "subject": "SOCIAL",
+      "term": "사회",
+      "hanja": "社會",
+      "reading": "사회",
+      "meaning": "사람들이 함께 살아가며 관계를 맺는 공동체",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "社",
+          "meaning": "모임·공동체"
+        },
+        {
+          "text": "會",
+          "meaning": "모이다·만나다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "社",
+          "words": [
+            "사원",
+            "입사"
+          ]
+        },
+        {
+          "anchor": "會",
+          "words": [
+            "회사",
+            "회의"
+          ]
+        }
+      ],
+      "concept_links": [
+        "공동체",
+        "구성원",
+        "관계"
+      ],
+      "concept": {},
+      "example": "지역 사회의 구성원들은 서로 도움을 주고받는다.",
+      "unit_tags": [
+        "공동체",
+        "구성원",
+        "관계"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-jeungbal",
+      "subject": "SCIENCE",
+      "term": "증발",
+      "hanja": "蒸發",
+      "reading": "증발",
+      "meaning": "액체의 표면에서 액체가 기체로 변하는 현상",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "蒸",
+          "meaning": "찌다·수증기가 되다"
+        },
+        {
+          "text": "發",
+          "meaning": "나다·나오다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "蒸",
+          "words": [
+            "수증기",
+            "증기"
+          ]
+        },
+        {
+          "anchor": "發",
+          "words": [
+            "발생",
+            "출발"
+          ]
+        }
+      ],
+      "concept_links": [
+        "액체",
+        "기체",
+        "상태 변화"
+      ],
+      "concept": {},
+      "example": "젖은 빨래의 물이 공기 중으로 사라지는 데에는 증발이 일어난다.",
+      "unit_tags": [
+        "액체",
+        "기체",
+        "상태 변화"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-yeonso",
+      "subject": "SCIENCE",
+      "term": "연소",
+      "hanja": "燃燒",
+      "reading": "연소",
+      "meaning": "물질이 산소와 빠르게 반응하면서 빛과 열을 내는 현상",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "燃",
+          "meaning": "타다·불붙다"
+        },
+        {
+          "text": "燒",
+          "meaning": "사르다·태우다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "燃",
+          "words": [
+            "연료",
+            "가연성"
+          ]
+        },
+        {
+          "anchor": "燒",
+          "words": [
+            "소각",
+            "연소"
+          ]
+        }
+      ],
+      "concept_links": [
+        "산소",
+        "발화점",
+        "연료"
+      ],
+      "concept": {
+        "summary": "연소가 계속되려면 탈 물질, 산소, 발화점 이상의 온도가 필요하다.",
+        "clues": [
+          "탈 물질",
+          "산소",
+          "발화점 이상의 온도"
+        ],
+        "relations": [
+          "연소 → 빛과 열",
+          "산소와 반응"
+        ],
+        "contrast": [
+          "세 조건 중 하나라도 부족하면 연소가 계속되기 어렵다."
+        ]
+      },
+      "example": "촛불이 타면서 빛과 열을 내는 것은 연소의 한 예이다.",
+      "unit_tags": [
+        "산소",
+        "발화점",
+        "연료",
+        "탈 물질",
+        "발화점 이상의 온도"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-yonghae",
+      "subject": "SCIENCE",
+      "term": "용해",
+      "hanja": "溶解",
+      "reading": "용해",
+      "meaning": "어떤 물질이 다른 물질에 녹아 고르게 섞이는 현상",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "溶",
+          "meaning": "녹다·녹이다"
+        },
+        {
+          "text": "解",
+          "meaning": "풀다·풀리다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "溶",
+          "words": [
+            "용액",
+            "용질"
+          ]
+        },
+        {
+          "anchor": "解",
+          "words": [
+            "분해",
+            "해결"
+          ]
+        }
+      ],
+      "concept_links": [
+        "용질",
+        "용매",
+        "용액"
+      ],
+      "concept": {
+        "summary": "용질이 용매에 녹아 고르게 섞이면 용액이 된다.",
+        "clues": [
+          "녹는 물질=용질",
+          "녹이는 물질=용매"
+        ],
+        "relations": [
+          "용질 + 용매 → 용액"
+        ],
+        "contrast": [
+          "단순히 가라앉거나 떠 있는 것은 용해와 다르다."
+        ]
+      },
+      "example": "설탕이 물에 녹아 눈에 보이지 않게 고르게 섞이는 것은 용해이다.",
+      "unit_tags": [
+        "용질",
+        "용매",
+        "용액",
+        "녹는 물질=용질",
+        "녹이는 물질=용매"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "math-bunsu",
+      "subject": "MATH",
+      "term": "분수",
+      "hanja": "分數",
+      "reading": "분수",
+      "meaning": "전체를 똑같이 나눈 것 중 일부를 나타내는 수",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "分",
+          "meaning": "나누다·가르다"
+        },
+        {
+          "text": "數",
+          "meaning": "수·셈"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "分",
+          "words": [
+            "분모",
+            "분자"
+          ]
+        },
+        {
+          "anchor": "數",
+          "words": [
+            "소수",
+            "수학"
+          ]
+        }
+      ],
+      "concept_links": [
+        "분모",
+        "분자",
+        "나눗셈"
+      ],
+      "concept": {},
+      "example": "전체를 4등분한 것 중 3부분은 분수 3/4로 나타낼 수 있다.",
+      "unit_tags": [
+        "분모",
+        "분자",
+        "나눗셈"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "math-yakbun",
+      "subject": "MATH",
+      "term": "약분",
+      "hanja": "約分",
+      "reading": "약분",
+      "meaning": "분자와 분모를 같은 수로 나누어 더 간단한 분수로 만드는 것",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "約",
+          "meaning": "줄이다·간단히 하다"
+        },
+        {
+          "text": "分",
+          "meaning": "나누다·분수"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "約",
+          "words": [
+            "절약",
+            "약속"
+          ]
+        },
+        {
+          "anchor": "分",
+          "words": [
+            "분수",
+            "구분"
+          ]
+        }
+      ],
+      "concept_links": [
+        "공약수",
+        "기약분수",
+        "분자·분모"
+      ],
+      "concept": {},
+      "example": "6/8의 분자와 분모를 2로 나누어 3/4로 만드는 것은 약분이다.",
+      "unit_tags": [
+        "공약수",
+        "기약분수",
+        "분자·분모"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "math-tongbun",
+      "subject": "MATH",
+      "term": "통분",
+      "hanja": "通分",
+      "reading": "통분",
+      "meaning": "둘 이상의 분수에서 분모를 같게 만드는 것",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "通",
+          "meaning": "통하다·같게 맞추다"
+        },
+        {
+          "text": "分",
+          "meaning": "나누다·분수"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "通",
+          "words": [
+            "공통",
+            "통과"
+          ]
+        },
+        {
+          "anchor": "分",
+          "words": [
+            "분모",
+            "분자"
+          ]
+        }
+      ],
+      "concept_links": [
+        "공배수",
+        "분모",
+        "분수의 크기 비교"
+      ],
+      "concept": {},
+      "example": "분모가 다른 두 분수의 크기를 비교하려고 분모를 같게 통분했다.",
+      "unit_tags": [
+        "공배수",
+        "분모",
+        "분수의 크기 비교"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "kor-mundan",
+      "subject": "KOREAN",
+      "term": "문단",
+      "hanja": "文段",
+      "reading": "문단",
+      "meaning": "여러 문장이 모여 하나의 중심 내용을 이루는 글의 단위",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "文",
+          "meaning": "글·문장"
+        },
+        {
+          "text": "段",
+          "meaning": "단계·구분"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "文",
+          "words": [
+            "문장",
+            "문학"
+          ]
+        },
+        {
+          "anchor": "段",
+          "words": [
+            "단계",
+            "단락"
+          ]
+        }
+      ],
+      "concept_links": [
+        "중심 문장",
+        "글의 짜임"
+      ],
+      "concept": {},
+      "example": "각 문단의 중심 문장을 찾으면 글의 짜임을 이해하기 쉽다.",
+      "unit_tags": [
+        "중심 문장",
+        "글의 짜임"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "soc-saengsanja",
+      "subject": "SOCIAL",
+      "term": "생산자",
+      "hanja": "生産者",
+      "reading": "생산자",
+      "meaning": "물건이나 서비스를 만들어 내는 사람이나 기업",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "生",
+          "meaning": "나다·생기다"
+        },
+        {
+          "text": "産",
+          "meaning": "낳다·생산하다"
+        },
+        {
+          "text": "者",
+          "meaning": "사람"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "生",
+          "words": [
+            "학생",
+            "생물"
+          ]
+        },
+        {
+          "anchor": "産",
+          "words": [
+            "생산량",
+            "산업"
+          ]
+        },
+        {
+          "anchor": "者",
+          "words": [
+            "소비자",
+            "기자"
+          ]
+        }
+      ],
+      "concept_links": [
+        "생산",
+        "소비",
+        "경제 활동"
+      ],
+      "concept": {},
+      "example": "생산자는 사람들이 필요로 하는 물건이나 서비스를 만든다.",
+      "unit_tags": [
+        "생산",
+        "소비",
+        "경제 활동"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "soc-sobija",
+      "subject": "SOCIAL",
+      "term": "소비자",
+      "hanja": "消費者",
+      "reading": "소비자",
+      "meaning": "물건이나 서비스를 사서 사용하는 사람",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "消",
+          "meaning": "없애다·사라지다"
+        },
+        {
+          "text": "費",
+          "meaning": "쓰다·비용"
+        },
+        {
+          "text": "者",
+          "meaning": "사람"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "消",
+          "words": [
+            "소멸",
+            "소화"
+          ]
+        },
+        {
+          "anchor": "費",
+          "words": [
+            "비용",
+            "학비"
+          ]
+        },
+        {
+          "anchor": "者",
+          "words": [
+            "생산자",
+            "독자"
+          ]
+        }
+      ],
+      "concept_links": [
+        "소비",
+        "생산자",
+        "선택"
+      ],
+      "concept": {},
+      "example": "소비자는 필요와 가격을 생각하며 물건을 선택한다.",
+      "unit_tags": [
+        "소비",
+        "생산자",
+        "선택"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-giche",
+      "subject": "SCIENCE",
+      "term": "기체",
+      "hanja": "氣體",
+      "reading": "기체",
+      "meaning": "일정한 모양과 부피가 없고 공간을 채우며 퍼지는 물질의 상태",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "氣",
+          "meaning": "기운·공기"
+        },
+        {
+          "text": "體",
+          "meaning": "몸·형태"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "氣",
+          "words": [
+            "기온",
+            "공기"
+          ]
+        },
+        {
+          "anchor": "體",
+          "words": [
+            "고체",
+            "액체"
+          ]
+        }
+      ],
+      "concept_links": [
+        "고체",
+        "액체",
+        "물질의 상태"
+      ],
+      "concept": {},
+      "example": "공기는 눈에 잘 보이지 않지만 공간을 차지하는 기체이다.",
+      "unit_tags": [
+        "고체",
+        "액체",
+        "물질의 상태"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-eunggyeol",
+      "subject": "SCIENCE",
+      "term": "응결",
+      "hanja": "凝結",
+      "reading": "응결",
+      "meaning": "기체가 액체로 변하는 현상",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "凝",
+          "meaning": "엉기다·굳다"
+        },
+        {
+          "text": "結",
+          "meaning": "맺다·모이다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "凝",
+          "words": [
+            "응고",
+            "응집"
+          ]
+        },
+        {
+          "anchor": "結",
+          "words": [
+            "연결",
+            "결합"
+          ]
+        }
+      ],
+      "concept_links": [
+        "기체",
+        "액체",
+        "상태 변화"
+      ],
+      "concept": {},
+      "example": "차가운 컵 겉면에 물방울이 맺히는 것은 응결과 관련 있다.",
+      "unit_tags": [
+        "기체",
+        "액체",
+        "상태 변화"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-gwanghapseong",
+      "subject": "SCIENCE",
+      "term": "광합성",
+      "hanja": "光合成",
+      "reading": "광합성",
+      "meaning": "식물이 빛에너지를 이용해 이산화탄소와 물로 양분을 만드는 과정",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "光",
+          "meaning": "빛"
+        },
+        {
+          "text": "合",
+          "meaning": "합하다·모으다"
+        },
+        {
+          "text": "成",
+          "meaning": "이루다·만들다"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "光",
+          "words": [
+            "광선",
+            "일광"
+          ]
+        },
+        {
+          "anchor": "合",
+          "words": [
+            "합성",
+            "결합"
+          ]
+        },
+        {
+          "anchor": "成",
+          "words": [
+            "성장",
+            "형성"
+          ]
+        }
+      ],
+      "concept_links": [
+        "빛",
+        "이산화탄소",
+        "물",
+        "양분",
+        "산소"
+      ],
+      "concept": {
+        "summary": "식물은 빛에너지를 이용하여 이산화탄소와 물로 양분을 만들고 산소를 내보낸다.",
+        "clues": [
+          "빛에너지",
+          "이산화탄소",
+          "물"
+        ],
+        "relations": [
+          "빛 + 이산화탄소 + 물 → 양분",
+          "산소가 함께 방출됨"
+        ],
+        "contrast": [
+          "광합성은 식물이 빛에너지를 이용해 물질을 만드는 과정이다."
+        ]
+      },
+      "example": "잎은 빛을 받아 광합성을 하며 식물에 필요한 양분을 만든다.",
+      "unit_tags": [
+        "빛",
+        "이산화탄소",
+        "물",
+        "양분",
+        "산소",
+        "빛에너지"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-hanraengjeonseon",
+      "subject": "SCIENCE",
+      "term": "한랭전선",
+      "hanja": "寒冷前線",
+      "reading": "한랭전선",
+      "meaning": "차가운 공기가 따뜻한 공기 아래로 파고들며 만들어지는 전선",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "寒",
+          "meaning": "차갑다"
+        },
+        {
+          "text": "冷",
+          "meaning": "차다·서늘하다"
+        },
+        {
+          "text": "前",
+          "meaning": "앞"
+        },
+        {
+          "text": "線",
+          "meaning": "선·경계"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "寒",
+          "words": [
+            "한기",
+            "한파"
+          ]
+        },
+        {
+          "anchor": "冷",
+          "words": [
+            "냉기",
+            "냉각"
+          ]
+        },
+        {
+          "anchor": "線",
+          "words": [
+            "전선",
+            "경계선"
+          ]
+        }
+      ],
+      "concept_links": [
+        "찬 공기",
+        "따뜻한 공기",
+        "전선",
+        "날씨 변화"
+      ],
+      "concept": {
+        "summary": "찬 공기가 빠르게 밀고 들어가 따뜻한 공기를 위로 밀어 올리는 경계이다.",
+        "clues": [
+          "찬 공기",
+          "따뜻한 공기",
+          "경계"
+        ],
+        "relations": [
+          "찬 공기 → 따뜻한 공기 아래로 이동",
+          "공기가 상승하며 구름과 비가 생길 수 있음"
+        ],
+        "contrast": [
+          "온난전선은 따뜻한 공기가 찬 공기 위로 완만하게 올라간다."
+        ],
+        "compare": [
+          "한랭전선=찬 공기가 전진",
+          "온난전선=따뜻한 공기가 전진"
+        ]
+      },
+      "example": "찬 공기가 따뜻한 공기를 빠르게 밀어 올리는 경계에서는 한랭전선이 형성될 수 있다.",
+      "unit_tags": [
+        "찬 공기",
+        "따뜻한 공기",
+        "전선",
+        "날씨 변화",
+        "경계"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-onnanjeonseon",
+      "subject": "SCIENCE",
+      "term": "온난전선",
+      "hanja": "溫暖前線",
+      "reading": "온난전선",
+      "meaning": "따뜻한 공기가 차가운 공기 위로 올라가며 만들어지는 전선",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "溫",
+          "meaning": "따뜻하다"
+        },
+        {
+          "text": "暖",
+          "meaning": "따뜻하다"
+        },
+        {
+          "text": "前",
+          "meaning": "앞"
+        },
+        {
+          "text": "線",
+          "meaning": "선·경계"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "溫",
+          "words": [
+            "온도",
+            "온천"
+          ]
+        },
+        {
+          "anchor": "暖",
+          "words": [
+            "난방",
+            "난류"
+          ]
+        },
+        {
+          "anchor": "線",
+          "words": [
+            "전선",
+            "경계선"
+          ]
+        }
+      ],
+      "concept_links": [
+        "따뜻한 공기",
+        "찬 공기",
+        "전선",
+        "날씨 변화"
+      ],
+      "concept": {
+        "summary": "따뜻한 공기가 찬 공기 위를 타고 완만하게 올라가는 경계이다.",
+        "clues": [
+          "따뜻한 공기",
+          "찬 공기",
+          "경계"
+        ],
+        "relations": [
+          "따뜻한 공기 → 찬 공기 위로 상승",
+          "넓은 범위에 구름과 비가 생길 수 있음"
+        ],
+        "contrast": [
+          "한랭전선은 찬 공기가 따뜻한 공기 아래로 빠르게 파고든다."
+        ],
+        "compare": [
+          "온난전선=따뜻한 공기가 전진",
+          "한랭전선=찬 공기가 전진"
+        ]
+      },
+      "example": "따뜻한 공기가 차가운 공기 위로 천천히 올라가는 경계에는 온난전선이 형성될 수 있다.",
+      "unit_tags": [
+        "따뜻한 공기",
+        "찬 공기",
+        "전선",
+        "날씨 변화",
+        "경계"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-bukbangu",
+      "subject": "SCIENCE",
+      "term": "북반구",
+      "hanja": "北半球",
+      "reading": "북반구",
+      "meaning": "적도를 기준으로 지구의 북쪽 절반",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "北",
+          "meaning": "북쪽"
+        },
+        {
+          "text": "半",
+          "meaning": "절반"
+        },
+        {
+          "text": "球",
+          "meaning": "둥근 공·구"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "北",
+          "words": [
+            "북극",
+            "북쪽"
+          ]
+        },
+        {
+          "anchor": "半",
+          "words": [
+            "절반",
+            "반구"
+          ]
+        },
+        {
+          "anchor": "球",
+          "words": [
+            "지구",
+            "구형"
+          ]
+        }
+      ],
+      "concept_links": [
+        "적도",
+        "남반구",
+        "지구"
+      ],
+      "concept": {
+        "summary": "적도를 기준으로 나눈 지구의 두 반구 가운데 북쪽 부분이다.",
+        "clues": [
+          "적도",
+          "북쪽",
+          "지구의 절반"
+        ],
+        "relations": [
+          "지구 → 적도 기준 → 북반구/남반구"
+        ],
+        "contrast": [
+          "남반구는 적도 남쪽의 절반이다."
+        ],
+        "hierarchy": [
+          "지구",
+          "반구",
+          "북반구"
+        ],
+        "compare": [
+          "북반구=적도 북쪽",
+          "남반구=적도 남쪽"
+        ]
+      },
+      "example": "대한민국은 적도보다 북쪽에 있어 북반구에 속한다.",
+      "unit_tags": [
+        "적도",
+        "남반구",
+        "지구",
+        "북쪽",
+        "지구의 절반"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-nambangu",
+      "subject": "SCIENCE",
+      "term": "남반구",
+      "hanja": "南半球",
+      "reading": "남반구",
+      "meaning": "적도를 기준으로 지구의 남쪽 절반",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "南",
+          "meaning": "남쪽"
+        },
+        {
+          "text": "半",
+          "meaning": "절반"
+        },
+        {
+          "text": "球",
+          "meaning": "둥근 공·구"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "南",
+          "words": [
+            "남극",
+            "남쪽"
+          ]
+        },
+        {
+          "anchor": "半",
+          "words": [
+            "절반",
+            "반구"
+          ]
+        },
+        {
+          "anchor": "球",
+          "words": [
+            "지구",
+            "구형"
+          ]
+        }
+      ],
+      "concept_links": [
+        "적도",
+        "북반구",
+        "지구"
+      ],
+      "concept": {
+        "summary": "적도를 기준으로 나눈 지구의 두 반구 가운데 남쪽 부분이다.",
+        "clues": [
+          "적도",
+          "남쪽",
+          "지구의 절반"
+        ],
+        "relations": [
+          "지구 → 적도 기준 → 북반구/남반구"
+        ],
+        "contrast": [
+          "북반구는 적도 북쪽의 절반이다."
+        ],
+        "hierarchy": [
+          "지구",
+          "반구",
+          "남반구"
+        ],
+        "compare": [
+          "남반구=적도 남쪽",
+          "북반구=적도 북쪽"
+        ]
+      },
+      "example": "오스트레일리아의 대부분은 적도보다 남쪽에 있어 남반구에 속한다.",
+      "unit_tags": [
+        "적도",
+        "북반구",
+        "지구",
+        "남쪽",
+        "지구의 절반"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-bukgeuk",
+      "subject": "SCIENCE",
+      "term": "북극",
+      "hanja": "北極",
+      "reading": "북극",
+      "meaning": "지구의 자전축 북쪽 끝과 그 주변 지역",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "北",
+          "meaning": "북쪽"
+        },
+        {
+          "text": "極",
+          "meaning": "끝·극점"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "北",
+          "words": [
+            "북반구",
+            "북쪽"
+          ]
+        },
+        {
+          "anchor": "極",
+          "words": [
+            "남극",
+            "극지방"
+          ]
+        }
+      ],
+      "concept_links": [
+        "남극",
+        "적도",
+        "위도"
+      ],
+      "concept": {
+        "summary": "지구의 북쪽 끝에 가까운 극지방이다.",
+        "clues": [
+          "지구 북쪽 끝",
+          "극지방"
+        ],
+        "relations": [
+          "북극 ↔ 적도 ↔ 남극"
+        ],
+        "contrast": [
+          "남극은 지구의 남쪽 끝에 가까운 극지방이다."
+        ],
+        "hierarchy": [
+          "지구",
+          "극지방",
+          "북극"
+        ],
+        "compare": [
+          "북극=북쪽 끝",
+          "남극=남쪽 끝",
+          "적도=가운데 기준선"
+        ]
+      },
+      "example": "지구의 북쪽 끝에 가까운 지역을 북극이라고 한다.",
+      "unit_tags": [
+        "남극",
+        "적도",
+        "위도",
+        "지구 북쪽 끝",
+        "극지방"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-namgeuk",
+      "subject": "SCIENCE",
+      "term": "남극",
+      "hanja": "南極",
+      "reading": "남극",
+      "meaning": "지구의 자전축 남쪽 끝과 그 주변 지역",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "南",
+          "meaning": "남쪽"
+        },
+        {
+          "text": "極",
+          "meaning": "끝·극점"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "南",
+          "words": [
+            "남반구",
+            "남쪽"
+          ]
+        },
+        {
+          "anchor": "極",
+          "words": [
+            "북극",
+            "극지방"
+          ]
+        }
+      ],
+      "concept_links": [
+        "북극",
+        "적도",
+        "위도"
+      ],
+      "concept": {
+        "summary": "지구의 남쪽 끝에 가까운 극지방이다.",
+        "clues": [
+          "지구 남쪽 끝",
+          "극지방"
+        ],
+        "relations": [
+          "북극 ↔ 적도 ↔ 남극"
+        ],
+        "contrast": [
+          "북극은 지구의 북쪽 끝에 가까운 극지방이다."
+        ],
+        "hierarchy": [
+          "지구",
+          "극지방",
+          "남극"
+        ],
+        "compare": [
+          "남극=남쪽 끝",
+          "북극=북쪽 끝",
+          "적도=가운데 기준선"
+        ]
+      },
+      "example": "지구의 남쪽 끝에 가까운 지역을 남극이라고 한다.",
+      "unit_tags": [
+        "북극",
+        "적도",
+        "위도",
+        "지구 남쪽 끝",
+        "극지방"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-jeokdo",
+      "subject": "SCIENCE",
+      "term": "적도",
+      "hanja": "赤道",
+      "reading": "적도",
+      "meaning": "지구의 중심을 지나며 북반구와 남반구를 나누는 위도 0도의 가상선",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "赤",
+          "meaning": "붉다"
+        },
+        {
+          "text": "道",
+          "meaning": "길·선"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "道",
+          "words": [
+            "궤도",
+            "경도"
+          ]
+        },
+        {
+          "anchor": "赤",
+          "words": [
+            "적색",
+            "적외선"
+          ]
+        }
+      ],
+      "concept_links": [
+        "북반구",
+        "남반구",
+        "위도"
+      ],
+      "concept": {
+        "summary": "지구를 북반구와 남반구로 나누는 기준선이다.",
+        "clues": [
+          "지구 중심",
+          "위도 0도",
+          "기준선"
+        ],
+        "relations": [
+          "적도 → 북반구/남반구 구분"
+        ],
+        "contrast": [
+          "북극과 남극은 양끝의 극점이고, 적도는 가운데를 두르는 기준선이다."
+        ],
+        "hierarchy": [
+          "지구",
+          "위도 기준",
+          "적도"
+        ],
+        "compare": [
+          "북극=북쪽 끝",
+          "적도=가운데",
+          "남극=남쪽 끝"
+        ]
+      },
+      "example": "적도를 기준으로 지구를 북반구와 남반구로 나눌 수 있다.",
+      "unit_tags": [
+        "북반구",
+        "남반구",
+        "위도",
+        "지구 중심",
+        "위도 0도",
+        "기준선"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-cheonche",
+      "subject": "SCIENCE",
+      "term": "천체",
+      "hanja": "天體",
+      "reading": "천체",
+      "meaning": "우주 공간에 있는 별, 행성, 위성, 혜성 같은 여러 물체를 통틀어 이르는 말",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "天",
+          "meaning": "하늘"
+        },
+        {
+          "text": "體",
+          "meaning": "몸·물체"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "天",
+          "words": [
+            "천문",
+            "천문학"
+          ]
+        },
+        {
+          "anchor": "體",
+          "words": [
+            "물체",
+            "기체"
+          ]
+        }
+      ],
+      "concept_links": [
+        "별",
+        "행성",
+        "위성",
+        "혜성",
+        "우주"
+      ],
+      "concept": {
+        "summary": "우주에 있는 여러 물체를 묶어 부르는 상위 개념이다.",
+        "clues": [
+          "우주 공간",
+          "별",
+          "행성"
+        ],
+        "relations": [
+          "천체 → 별/행성/위성/혜성"
+        ],
+        "hierarchy": [
+          "우주",
+          "천체",
+          "별·행성·위성·혜성"
+        ],
+        "compare": [
+          "천체=개별 우주 물체의 통칭",
+          "태양계=태양과 그 주변 천체의 체계",
+          "은하계=수많은 별과 천체가 모인 은하"
+        ]
+      },
+      "example": "별과 행성, 위성, 혜성은 모두 우주 공간에 있는 천체이다.",
+      "unit_tags": [
+        "별",
+        "행성",
+        "위성",
+        "혜성",
+        "우주",
+        "우주 공간"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-taeyanggye",
+      "subject": "SCIENCE",
+      "term": "태양계",
+      "hanja": "太陽系",
+      "reading": "태양계",
+      "meaning": "태양과 태양의 중력에 이끌려 움직이는 여러 천체로 이루어진 체계",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "太",
+          "meaning": "크다"
+        },
+        {
+          "text": "陽",
+          "meaning": "볕·태양"
+        },
+        {
+          "text": "系",
+          "meaning": "이어진 체계"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "陽",
+          "words": [
+            "태양",
+            "양지"
+          ]
+        },
+        {
+          "anchor": "系",
+          "words": [
+            "은하계",
+            "생태계"
+          ]
+        }
+      ],
+      "concept_links": [
+        "태양",
+        "행성",
+        "위성",
+        "소행성",
+        "혜성"
+      ],
+      "concept": {
+        "summary": "태양을 중심으로 행성과 위성 등 여러 천체가 중력으로 연결된 체계이다.",
+        "clues": [
+          "태양",
+          "중력",
+          "행성"
+        ],
+        "relations": [
+          "태양 → 행성/위성/소행성/혜성"
+        ],
+        "hierarchy": [
+          "우주",
+          "은하계",
+          "태양계",
+          "지구"
+        ],
+        "compare": [
+          "태양계=태양 중심의 천체 체계",
+          "은하계=수많은 별과 천체가 모인 훨씬 큰 체계"
+        ]
+      },
+      "example": "지구는 태양의 둘레를 도는 행성으로 태양계에 속한다.",
+      "unit_tags": [
+        "태양",
+        "행성",
+        "위성",
+        "소행성",
+        "혜성",
+        "중력"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-eunhagye",
+      "subject": "SCIENCE",
+      "term": "은하계",
+      "hanja": "銀河系",
+      "reading": "은하계",
+      "meaning": "수많은 별과 가스, 먼지 등이 중력으로 모여 이루어진 거대한 천체 집단",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "銀",
+          "meaning": "은·은빛"
+        },
+        {
+          "text": "河",
+          "meaning": "강"
+        },
+        {
+          "text": "系",
+          "meaning": "이어진 체계"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "河",
+          "words": [
+            "은하",
+            "강하"
+          ]
+        },
+        {
+          "anchor": "系",
+          "words": [
+            "태양계",
+            "생태계"
+          ]
+        }
+      ],
+      "concept_links": [
+        "별",
+        "가스",
+        "먼지",
+        "태양계"
+      ],
+      "concept": {
+        "summary": "수많은 별과 성간 물질이 모인 거대한 천체 집단이며 태양계도 한 은하 안에 속한다.",
+        "clues": [
+          "수많은 별",
+          "가스와 먼지",
+          "거대한 집단"
+        ],
+        "relations": [
+          "은하계 → 수많은 별과 천체",
+          "우리 태양계 → 우리 은하에 속함"
+        ],
+        "hierarchy": [
+          "우주",
+          "은하계",
+          "태양계",
+          "지구"
+        ],
+        "compare": [
+          "천체=개별 물체",
+          "태양계=태양 중심 체계",
+          "은하계=수많은 별이 모인 거대 체계"
+        ]
+      },
+      "example": "우리 태양계는 수많은 별이 모인 은하계 안에 속한다.",
+      "unit_tags": [
+        "별",
+        "가스",
+        "먼지",
+        "태양계",
+        "수많은 별",
+        "가스와 먼지",
+        "거대한 집단"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    },
+    {
+      "term_id": "sci-jipyo",
+      "subject": "SCIENCE",
+      "term": "지표",
+      "hanja": "地表",
+      "reading": "지표",
+      "meaning": "땅의 겉면, 곧 지구의 표면",
+      "grade_band": "5-6",
+      "components": [
+        {
+          "text": "地",
+          "meaning": "땅"
+        },
+        {
+          "text": "表",
+          "meaning": "겉·표면"
+        }
+      ],
+      "families": [
+        {
+          "anchor": "地",
+          "words": [
+            "지구",
+            "육지"
+          ]
+        },
+        {
+          "anchor": "表",
+          "words": [
+            "표면",
+            "지표"
+          ]
+        }
+      ],
+      "concept_links": [
+        "지구",
+        "육지",
+        "바다",
+        "표면"
+      ],
+      "concept": {
+        "summary": "지구의 겉면을 가리키며 육지와 바다를 포함해 볼 수 있다.",
+        "clues": [
+          "지구",
+          "겉면",
+          "육지와 바다"
+        ],
+        "relations": [
+          "지구 → 지표 → 육지/바다"
+        ],
+        "hierarchy": [
+          "지구",
+          "지표",
+          "육지·바다"
+        ],
+        "compare": [
+          "지표=지구의 겉면",
+          "지구=행성 전체"
+        ]
+      },
+      "example": "산과 들, 바다처럼 우리가 관찰할 수 있는 지구의 겉면을 지표라고 한다.",
+      "unit_tags": [
+        "지구",
+        "육지",
+        "바다",
+        "표면",
+        "겉면",
+        "육지와 바다"
+      ],
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "grade_alignment": {
+        "state": "PROVISIONAL",
+        "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+        "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "reviewed": true
+      }
+    }
+  ]
+}

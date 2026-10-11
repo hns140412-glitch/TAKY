@@ -1,0 +1,90 @@
+{
+  "schema": "TOOL_LANGUAGE_LEXEME_RESOLUTION_POLICY_V1",
+  "governance": "TAKY",
+  "phase": "DATA_COMPLETENESS_PRE_IMPLEMENTATION",
+  "principle": "A grade-banded learning-tool-language surface token is not guaranteed to denote one globally fixed dictionary lexeme.",
+  "node_model": {
+    "TOOL_TOKEN": {
+      "identity": [
+        "grade_band",
+        "source_token",
+        "source_occurrence_index"
+      ],
+      "authority": "KOREAN_TOOL_VOCAB_VERIFIED_TOKEN_V1"
+    },
+    "LEXEME_CANDIDATE_SET": {
+      "authority": "NIKL_BASIC_VOCAB_40000_OBJECTS_V1",
+      "identity": "lexeme_key_v1"
+    },
+    "RESOLUTION_CONTEXT": {
+      "fields": [
+        "learning_event_context",
+        "standard_context",
+        "subject_context",
+        "explicit_parenthetical",
+        "explicit_homonym_suffix",
+        "collocation",
+        "POS_evidence"
+      ]
+    },
+    "RESOLVED_LEXEME_BINDING": {
+      "scope": "contextual, not global unless source explicitly disambiguates"
+    }
+  },
+  "rules": [
+    "Do not force a one-to-one global TOOL_TOKEN to NIKL lexeme mapping for bare ambiguous surface forms.",
+    "Grade compatibility is candidate pruning only, never semantic confirmation.",
+    "Explicit homonym suffixes such as 01/03 may bind directly when they match NIKL standard_homonym_no.",
+    "Parenthetical usage/collocation may bind only when candidate meanings exclude alternatives.",
+    "Bare ambiguous tokens preserve all plausible lexeme candidates until actual learning/standard context is available.",
+    "NIKL-unmatched multiword classroom/tool expressions remain first-class TOOL_TOKEN nodes and are not deleted.",
+    "LEXICAL_PREREQUISITE edges attach to a resolved lexeme or explicit phrase-in-context, never blindly to an ambiguous surface string."
+  ],
+  "evidence": {
+    "tool_vocab_source": "DATA/KOREAN_TOOL_VOCAB_VERIFIED_TOKEN_2026-09-22",
+    "nikl_objects": "DATA/NIKL_BASIC_VOCAB_40000_OBJECTS_2026-09-22_V1.json",
+    "ambiguity_classification": "DATA/NIKL_TOOL_VOCAB_AMBIGUITY_CLASSIFICATION_2026-09-22_V1.json",
+    "heuristic_resolution": "DATA/NIKL_TOOL_VOCAB_HEURISTIC_SEMANTIC_RESOLUTION_2026-09-22_V1.json"
+  },
+  "reconciliation": {
+    "tool_token_occurrences": 1364,
+    "exact_surface_matches": 1271,
+    "exact_unique_surface_candidate_occurrences": 1062,
+    "exact_ambiguous_surface_occurrences": 209,
+    "heuristic_occurrences": 14,
+    "heuristic_semantically_resolved_occurrences": 14,
+    "nikl_no_surface_match_occurrences": 79,
+    "global_single_lexeme_required_for_exact_ambiguous": false,
+    "ambiguity_structure_status": "COVERED_CONTEXTUAL_RESOLUTION_MODEL",
+    "semantic_runtime_application_status": "APPLICABILITY_GAP_PRE_IMPLEMENTATION"
+  },
+  "counterexample_notes": [
+    {
+      "token": "시각",
+      "observation": "curriculum prose uses 시각적인 단서, while NIKL also has 時刻/視角/視覺 candidates; grade alone can select the wrong sense"
+    },
+    {
+      "token": "고려",
+      "observation": "curriculum prose uses 고려하여 (=考慮), while grade pruning can leave 高麗"
+    },
+    {
+      "token": "과정",
+      "observation": "교육과정 context requires 課程 while other contexts can use 過程"
+    },
+    {
+      "token": "기술",
+      "observation": "기술하기 in language-function context denotes 記述, distinct from 技術"
+    },
+    {
+      "token": "보고",
+      "observation": "surface occurrence in 보고 따라 is a connective/verb-derived form, showing surface matching alone is unsafe"
+    }
+  ],
+  "closure": {
+    "NIKL_AMBIGUITY_STRUCTURE": "CLOSED_V1",
+    "GLOBAL_209_SINGLE_SENSE_RESOLUTION": "REJECTED_AS_WRONG_MODEL",
+    "CONTEXTUAL_SEMANTIC_RESOLUTION": "DESIGNED_NOT_IMPLEMENTED",
+    "LEXICAL_PREREQUISITE": "VALIDATION_GAP",
+    "IMPLEMENTATION_AUTHORIZATION": "NOT_YET"
+  }
+}

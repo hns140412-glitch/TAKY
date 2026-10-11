@@ -1,0 +1,15 @@
+{
+  "schema": "TAKY_REFERENCE_SOURCE_RECEIPT_V1",
+  "source_id": "DAEGU_EDU_SCIENCE_MATH_HANJA_REFERENCE",
+  "title": "과학수학 한자어휘.pdf",
+  "drive_id": "1gPB8TL7OAKH2_xipW0melrUShR545IxQ",
+  "source_scope": "2015 revised curriculum middle-school science/math Hanja vocabulary reference",
+  "authority_class": "REFERENCE_SEMANTIC_MORPHOLOGY_ONLY_NOT_ELEMENTARY_CURRICULUM_AUTHORITY",
+  "local_extracted_text": "science-math-hanja-vocab.drive-extracted.txt",
+  "integration_policy": [
+    "May enrich Hanja form/component/literal-meaning evidence.",
+    "Must not set E5/E6 grade alignment.",
+    "Exact surface term is insufficient when lexeme/Hanja sense is ambiguous.",
+    "Term-level binding requires Hanja match to a trusted lexical candidate or an existing reference seed."
+  ]
+}

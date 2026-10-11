@@ -1,0 +1,3233 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<title>교과서 기반 등급별 사고도구어 목록 개발 연구</title>
+		
+
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=1.0,user-scalable=no">
+	<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/kciportal/resources/landing/v2/img/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/kciportal/resources/landing/v2/img/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32"    href="/kciportal/resources/landing/v2/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96"    href="/kciportal/resources/landing/v2/img/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16"    href="/kciportal/resources/landing/v2/img/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/kciportal/resources/landing/v2/img/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/kciportal/resources/landing/v2/img/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/common/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/common/fontawesome-all.min.css">
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/common/swiper-bundle.min.css">
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/theme-setting.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/sub.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/modal.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/keyboard.css" />
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/koaj.css" />
+	<script src="/kciportal/resources/landing/v2/js/common/jquery-3.3.1.min.js"></script>
+	<script src="/kciportal/resources/landing/v2/js/common/jquery-ui.min.js"></script>
+	<script src="/kciportal/resources/landing/v2/js/common/jquery.easing.1.3.js"></script>
+	<script src="/kciportal/resources/landing/v2/js/common/swiper-bundle.min.js"></script>
+	<script src="/kciportal/resources/newkci/js/bootstrap.min.js"></script>
+	<script src="/kciportal/resources/landing/v2/js/common.js"></script>
+		
+
+	
+	<meta name="description" content="본고는 교과서 말뭉치를 기반으로 등급별 사고도구어 목록을 개발하는 데에 목적을 두었다. 첫째로 초중고 교과서 말뭉치 기반 형태 분석 말뭉치를 구축하고, 둘째로 사고도구어 목록을 개발하며, 셋째로는 선정된 사고도구어를 등급화하였다. 본고에서는 361권의 초중고 교과서를 대상으로 교과서 텍스트의 특성을 고려하여 국어과, 인문 교과군, 사회 교과군, 과학 교과군..."/>
+	
+
+	<meta name="citation_title" content="교과서 기반 등급별 사고도구어 목록 개발 연구"/>
+	<meta property="citation_author" content="신명선"/>
+	<meta property="citation_author" content="강지영"/>
+	<meta property="citation_author" content="나상수"/>
+	<meta property="citation_author" content="이경남"/>
+	<meta property="citation_author" content="정지호"/>
+	<meta property="citation_author" content="홍경화"/>
+	<meta property="citation_author" content="최소영"/>
+	<meta name="citation_abstract" content="본고는 교과서 말뭉치를 기반으로 등급별 사고도구어 목록을 개발하는 데에 목적을 두었다. 첫째로 초중고 교과서 말뭉치 기반 형태 분석 말뭉치를 구축하고, 둘째로 사고도구어 목록을 개발하며, 셋째로는 선정된 사고도구어를 등급화하였다. 본고에서는 361권의 초중고 교과서를 대상으로 교과서 텍스트의 특성을 고려하여 국어과, 인문 교과군, 사회 교과군, 과학 교과군의 네 분야로 균형 말뭉치(총 16,406,663어절)를 구축한 뒤 양적 방법과 질적 방법을 모두 사용하여 1,387개 단어족의 사고도구어를 선정하였다. 그리고 교과서 텍스트의 특성과 통계학적 원리를 이용한 새로운 방법론을 도입하여 사고도구어를 4개의 등급으로 구분하였다. 본고는 충실한 기초 자료 구축과 다양한 방법론의 적용을 통해 사고도구어 등급화의 타당성을 제고하였다는 의의가 있다. 또한 사고도구어 교육의 중요성과 필요성에도 불구하고 현 시점에서 유용하게 이용할 수 없는 최신의 등급별 사고도구어 목록이 부재하는 교육 현실을 개선하는 데 기여할 수 있다."/>
+	<meta name="citation_journal_title" content="국어교육학연구"/>
+	<meta name="citation_keywords" content="사고도구어, 기초어휘, 전문어, 어휘 목록, 어휘 등급, 어휘 교육, 교과서 말뭉치"/>
+	<meta name="citation_publisher" content="국어교육학회"/>
+	<meta name="citation_publication_date" content="2024/03"/>
+	<meta name="citation_issn" content="1225-8571"/>
+	<meta name="citation_volume" content="59"/>
+	<meta name="citation_issue" content="1"/>
+	<meta name="citation_firstpage" content="97"/>
+	<meta name="citation_lastpage" content="140"/>
+	<meta name="citation_doi" content="10.20880/kler.2024.59.1.97"/>
+	<meta name="citation_abstract_html_url" content="https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003066294"/>
+
+	<link rel="canonical" href="https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003066294" />
+
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Korea Open Access Journals(KOAJ)">
+	<meta property="og:title" content="교과서 기반 등급별 사고도구어 목록 개발 연구" />
+	<meta property="og:article:author" content="신명선"/>
+	<meta property="og:article:author" content="강지영"/>
+	<meta property="og:article:author" content="나상수"/>
+	<meta property="og:article:author" content="이경남"/>
+	<meta property="og:article:author" content="정지호"/>
+	<meta property="og:article:author" content="홍경화"/>
+	<meta property="og:article:author" content="최소영"/>
+	<meta property="og:article:tag" content="사고도구어, 기초어휘, 전문어, 어휘 목록, 어휘 등급, 어휘 교육, 교과서 말뭉치"/>
+	<meta property="og:description" content='국어교육학연구, 2024, 59(1), 97' >
+	<meta property="og:url" content="https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003066294" >
+	<meta property="og:image" content="https://www.kci.go.kr/kciportal/resources/landing/img/kci_facebook_2.png" > 
+	<link rel="stylesheet" type="text/css" href="/kciportal/resources/landing/v2/css/fulltext.css" />
+	<script type="text/javascript">
+		
+		function openSereView(id1,id2){
+			window.open("","winPopResiHist","width=1000, height=500, scrollbars=1");
+			ciSereInfo.elements["insiSereBean.insiId"].value = id1;
+			ciSereInfo.elements["insiSereBean.sereId"].value = id2;
+			ciSereInfo.target = "winPopResiHist";
+			ciSereInfo.action = "/kciportal/sr/insiPeriInfo/insiSere/srSoceSereListViewPopup.kci";
+			ciSereInfo.submit();
+		}
+		
+		function openSoceView(id1,divCd){
+			if(id1 != "") {
+				if(divCd == '02'){
+					window.open('/kciportal/po/search/poInsiSearReinView.kci?insiGeneInfoBean.insiId='+id1 , '_blank');
+				}else{
+					window.open('/kciportal/po/search/poInsiSearSoceView.kci?insiGeneInfoBean.insiId='+id1 , '_blank');
+				}
+			}
+		}
+		
+		
+		
+		function printArticle() {
+			fnSaveArticleStatistics(0,1);
+			var targetWindow = window.open('about:blank', 'win', 'left=10, top=10, width=800, height=800, scrollbars=yes, resizable');
+			targetWindow.document.open();
+			targetWindow.document.write("<!DOCTYPE html>");
+			targetWindow.document.write("<html><head><title>교과서 기반 등급별 사고도구어 목록 개발 연구</title></head>");
+			targetWindow.document.write("<link rel=\"stylesheet\" href=\"/kciportal/resources/landing/v2/css/theme-setting.css\">");
+			targetWindow.document.write("<link rel=\"stylesheet\" href=\"/kciportal/resources/landing/v2/css/base.css\">");
+			targetWindow.document.write("<link rel=\"stylesheet\" href=\"/kciportal/resources/landing/v2/css/common.css\">");
+			targetWindow.document.write("<link rel=\"stylesheet\" href=\"/kciportal/resources/landing/v2/css/sub.css\">");
+			targetWindow.document.write("<link rel=\"stylesheet\" href=\"/kciportal/resources/landing/v2/css/koaj.css\">");
+			targetWindow.document.write("<style type=\"text/css\">.icon-list button{display: none}</style>");
+			targetWindow.document.write("</head>");
+			targetWindow.document.write("<body onload='setTimeout(function(){window.print();window.close();},500)'>");
+			targetWindow.document.write("<section class='articles-view'>");
+			targetWindow.document.write($(".articles-view").html());
+			targetWindow.document.write("</section>");
+			targetWindow.document.write("<section class='articles-detail-content'>");
+			targetWindow.document.write($(".articles-detail-content").html());
+			targetWindow.document.write("</section>");
+			targetWindow.document.write("</body></html>");
+			targetWindow.document.close();
+		}
+		function fnSaveArticleStatistics(pdfCnt,printCnt){
+			document.querySelector("#articleLogForm input[name='landingLogBean.pdfCnt']").value = pdfCnt;
+			document.querySelector("#articleLogForm input[name='landingLogBean.printCnt']").value = printCnt;
+			$.ajax({
+				url:  "/kciportal/landing/updateArticleStatistics.kci",
+				async: false,
+				type: "post",
+				data: $("#articleLogForm").serialize(),
+				success: function(data){
+				},
+				error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+		
+		function fncDown(arti_id, orteFileId) {
+			fnSaveArticleStatistics(1,0);
+			orteDownFrame.location.href="/kciportal/ci/sereArticleSearch/ciSereArtiOrteServHistIFrame.kci?sereArticleSearchBean.artiId="+arti_id+"&sereArticleSearchBean.orteFileId="+orteFileId;
+		}
+		
+		
+		function sendSNS(type, url){
+			var www = "";
+			var sendUrl = '';
+		
+			var artiNm = $("#artiNm").val();
+			
+			if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)){
+				 www = "m.";
+			}
+		
+			if(type == 'twitter'){
+				sendUrl = "https://"+www+"twitter.com/?status="+encodeURIComponent(artiNm)+" \n"+encodeURIComponent(url);
+			}else if(type == 'facebook'){
+				sendUrl = "https://"+www+"facebook.com/sharer.php?u="+encodeURIComponent(url);
+				
+			}
+			if((typeof sendUrl != "undefined") && sendUrl !=""){
+				window.open(sendUrl,"winPopSNS","width=1000, height=500, scrollbars=1");
+			}
+		}
+		
+		
+		function fncTextDown() {
+			var selectedType = document.querySelector("#exportType").value;
+			var content = document.querySelectorAll("#citationLayer .quote-txt")[selectedType].innerText;
+			var blob = new Blob([content],{type : 'text/plain'});
+			var downloadLink = document.createElement('a');
+			downloadLink.download = 'Export_Citation.txt'
+			downloadLink.href = window.URL.createObjectURL(blob);
+			downloadLink.click();
+		}
+		
+		function funcCitedList (){
+			var htmlCited = "";
+			var arti_id = $("#artiId").val();
+			var citationCnt = $("#kciCitedIdx").val();
+			var locale = 'ko_KR';
+			if(citationCnt.lenght > 0 || citationCnt != null){
+				$.ajax({
+					url:  "/kciportal/landing/articleCitedList.kci",
+					async: false,
+					dataType: "html",
+					type: "post",
+					data: $("#articleDetailForm").serialize(),
+					success: function(data){
+						$('#citationTable').html(data);
+					},
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				});
+				
+			}
+		}
+		function fnArticleCitedListMove(condtion, tagetSelector , listOneSelector){
+			$(tagetSelector+" "+listOneSelector).hide();
+			var dataListSize = parseInt(document.querySelector(tagetSelector).getAttribute("data-list-size"));
+			var dataListPageIndex = parseInt(document.querySelector(tagetSelector).getAttribute("data-list-pageIndex"));
+			var dataListRowPerPage = parseInt(document.querySelector(tagetSelector).getAttribute("data-list-rowPerPage"));
+			var dataLastPage = Math.ceil(dataListSize/dataListRowPerPage);
+			if(condtion == 'prev'){
+				dataListPageIndex = dataListPageIndex - 1
+				if(dataListPageIndex < 1){
+					dataListPageIndex = 1;
+				}
+			}else if(condtion == 'next'){
+				dataListPageIndex = dataListPageIndex + 1
+				if(dataListPageIndex > dataLastPage){
+					dataListPageIndex = dataLastPage;
+				}
+			}
+			
+			var list = document.querySelectorAll(tagetSelector+" "+listOneSelector);
+			var startIndex = (dataListPageIndex -1) * dataListRowPerPage
+			var endIndex = startIndex +dataListRowPerPage - 1
+			
+			if(endIndex > dataListSize-1){
+				endIndex = dataListSize-1
+			}
+			
+			var showList = Array.from(list).slice(startIndex,endIndex+1);
+			$(showList).show();
+			document.querySelector(tagetSelector).setAttribute("data-list-pageIndex",dataListPageIndex);
+			
+			window.scrollTo(0,0);
+		}
+		function fncView(artiId){
+			if(artiId != "") {
+				window.open("","winPopResiHist","width=1000, height=500, scrollbars=1");
+				ciSereArtiList.elements["sereArticleSearchBean.artiId"].value = artiId;
+				ciSereArtiList.target = "winPopResiHist";
+				ciSereArtiList.action = "/kciportal/ci/sereArticleSearch/ciSereArtiView.kci";
+				ciSereArtiList.submit();
+			}
+		}
+		
+		function gotoTargetPatentIndex(targetRid) {
+			var target = $("#"+targetRid);
+			if(targetRid != "container"){
+				if(!target.hasClass("slide-open")){
+					target.closest(".adc-area").find(".adc-onoff-btn").addClass("on")
+					target.addClass("slide-open");
+					target.show();
+				}
+			}
+			$("html, body").animate({ scrollTop: "+="+(target.offset().top - $(window).scrollTop() - 100) }, 500);
+		}
+		
+		//키워드 클라우드 dropdown 메뉴 액션
+		function fncKeywordSearch(gubun, kwd){
+			var winHandle = window.open("" ,"newPage","");
+			if(winHandle != null){
+				if(gubun == 1){
+					if($("#kwdSrchForm1").length  == 0){
+						var htmlString = "<form id='kwdSrchForm1' method='post' action='/kciportal/po/search/poArtiSearList.kci' target='newPage'>";
+						htmlString += "<input type='hidden' name='poSearchBean.searType' value='thesis'/>";
+						htmlString += "<input type='hidden' name='poSearchBean.conditionList' value='KEYWORD'/>";
+						htmlString += "<input type='hidden' name='poSearchBean.operationList' value=''/>";
+						htmlString += "<input type='hidden' name='poSearchBean.keywordList' value='"+kwd+"'/>";
+						htmlString += "</form>";
+						$("body").append(htmlString);
+					}else{
+						$("#kwdSrchForm1 input[name='poSearchBean.keywordList']").val(kwd);
+					}
+					$("#kwdSrchForm1").submit();
+				}else{
+					if($("#kwdSrchForm2").length  == 0){
+						var htmlString = "<form id='kwdSrchForm2' method='post' action='/kciportal/po/search/poLateRelaKwdList.kci' target='newPage'>";
+						htmlString += "<input type='hidden' name='poLateRelaKwdBean.keyword' value='"+kwd+"'/>";
+						htmlString += "</form>";
+						$("body").append(htmlString);
+					}else{
+						$("#kwdSrchForm2 input[name='poLateRelaKwdBean.keyword']").val(kwd);
+					}
+					$("#kwdSrchForm2").submit();
+				}
+			} 
+			if(winHandle != null) winHandle.focus();
+		}
+		
+		
+		$(function(){
+			
+			
+			
+			// citation select type
+			$("#citationLayer #exportType").change(function() {
+				var val = parseInt($(this).val());
+				$("#citationLayer .quote-txt").hide();
+				$("#citationLayer .quote-txt").eq(val).show();
+			});
+			// citation 레이어 닫기
+			$("#citationLayer .type .close").click(function() {
+				$("#citationLayer").fadeOut(200);
+			});
+			
+			// ESC 누를 시 논문상세 내 팝업 닫기
+			$("body").keydown(function(e) {
+				if(e.which==27 || e.keyCode==27) {
+					$(".fullTextPopup").remove();
+					$("#citationLayer").fadeOut(200);
+				}
+			});
+			
+		})
+	</script>
+	
+	<style type="text/css">
+		#btnPrint{display: none}
+		@media screen and (min-width: 979px) {
+			#btnPrint{display: block;}
+		}
+	</style>
+
+	</head>
+	<body class="">
+		<div class="skip_navigation">
+			<a href="#container" class="skip_navi sn_sub">본문 바로가기</a>
+		</div>
+		<div id="wrapper">
+			
+			<header id="header">
+				<div class="max-width">
+					<h1><a href="/kciportal/landing"><em>KOAJ</em><span>Korea<br />Open Access Journals</span></a></h1>
+					<nav class="gnb">
+						<ul>
+							<li>
+								<a href="/kciportal/landing/about.kci">
+									KOAJ 소개
+								</a>
+							</li>
+							<li>
+								<a href="/kciportal/landing/journalList.kci">
+									학술지
+								</a>
+							</li>
+							<li>
+								<a href="/kciportal/landing/articleSearch.kci">
+									논문
+								</a>
+							</li>
+							<li>
+								<a href="/kciportal/landing/insiStatistics.kci">
+									통계
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<dl class="lang-box">
+						<dt><button type="button" class="lang-choice-btn"><i class="fal fa-globe"></i></button></dt>
+						<dd style="display: none">
+							<ul>
+								<li class="select">
+									<a href="javascript:;" onclick="fncChangeLocale('ko')">
+										
+											<i class="far fa-check"></i>
+										
+										한국어
+									</a>
+								</li>
+								<li >
+									<a href="javascript:;"  onclick="fncChangeLocale('en')">
+										
+										English
+									</a>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<div class="mnubtn">
+						<button id="menu-icon" class="c-hamburger c-hamburger--htx">
+							<span>toggle menu</span>
+						</button>
+					</div>
+				</div>
+			</header>
+			<div id="container" class="all-padding">
+				<div class="max-width">
+					
+
+
+
+
+
+
+
+
+
+<form method="post" name="articleDetailForm" id="articleDetailForm">
+	<input type="hidden" name="landingSearchBean.artiId" id="artiId" value='ART003066294' />
+	<input type="hidden" name="landingSearchBean.kciCitedIdx" id="kciCitedIdx" value='17'/>
+	
+	
+		<input type="hidden" name="landingSearchBean.artiNm" id="artiNm" value="교과서 기반 등급별 사고도구어 목록 개발 연구"/>
+	
+</form>
+<form method="poat" name="articleLogForm" id="articleLogForm">
+	<input type="hidden" name="landingLogBean.artiId" id="artiId" value='ART003066294' />
+	<input type="hidden" name="landingLogBean.pdfCnt" id="pdfCnt" value='0' />
+	<input type="hidden" name="landingLogBean.printCnt" id="printCnt" value='0' />
+</form>
+<form name="ciSereArtiList" method="post">
+	<input type="hidden" id="sereArticleSearchBean_artiId" name="sereArticleSearchBean.artiId" />
+</form>
+<!-- Articles View Top { -->
+<section class="articles-view">
+	<div class="articles-journals-top">
+		<div class="icon-list">	
+			
+				
+					
+						
+							<div class="s-state-type-ico type-ico1 ico">KCI 등재</div>
+						
+						
+						
+					
+				
+				
+			
+			
+			
+		</div>
+		<h2>
+			
+			
+			
+				교과서 기반 등급별 사고도구어 목록 개발 연구
+				
+					<p class="small">A Study on Developing a Textbook-Based Academic Vocabulary List by Grade</p>
+				
+			
+		</h2>
+		<div class="articles-top-info">
+			<div class="ati-left">
+				<b class="semi">
+					
+					
+						국어교육학연구
+					
+				</b><br />
+				
+				약어 : 
+				
+				
+					국어교육학연구
+				<br />
+				<b class="semi">
+					
+					2024
+					
+					
+						vol.59,
+					
+					
+					
+						no.1,
+					
+					
+					
+						
+						
+							pp.97 - 140
+						
+					
+				</b><br />
+				
+				DOI : 10.20880/kler.2024.59.1.97<br />
+				
+				발행기관 :
+				<a href="javascript:;" class="color-blue" onclick="openSoceView('INS000001358','01');">
+					<b class="semi">
+						
+						
+							 국어교육학회 
+						
+					</b>
+				</a><br />
+				연구분야 :
+				
+				한국어와문학<br />
+				Copyright &copy;
+				
+				
+					 국어교육학회 
+				
+			</div>
+		</div>
+	</div>
+	<div class="articles-top">
+		<div class="name-list">
+			
+			<div class="article-author-name">
+				
+				
+					신명선
+					
+					<sup class="num">1</sup>
+				
+				
+				
+					,&nbsp;
+					
+					강지영
+					
+					
+					<sup class="num">2</sup>
+				
+					,&nbsp;
+					
+					나상수
+					
+					
+					<sup class="num">3</sup>
+				
+					,&nbsp;
+					
+					이경남
+					
+					
+					<sup class="num">4</sup>
+				
+					,&nbsp;
+					
+					정지호
+					
+					
+					<sup class="num">5</sup>
+				
+					,&nbsp;
+					
+					홍경화
+					
+					
+					<sup class="num">6</sup>
+				
+					,&nbsp;
+					
+					최소영
+					
+					
+					<sup class="num">7</sup>
+				
+			</div>
+			
+			<div class="article-author-affiliation mgt20px">
+				
+					<p>
+						<sup class="num">1</sup>인하대학교
+					</p>
+				
+				
+					<p>
+						<sup class="num">2</sup>서울대학교
+					</p>
+				
+					<p>
+						<sup class="num">3</sup>서울대학교
+					</p>
+				
+					<p>
+						<sup class="num">4</sup>광주교육대학교
+					</p>
+				
+					<p>
+						<sup class="num">5</sup>인하대학교
+					</p>
+				
+					<p>
+						<sup class="num">6</sup>한국교원대학교
+					</p>
+				
+					<p>
+						<sup class="num">7</sup>부산대학교
+					</p>
+				
+			</div>
+		</div>
+		<div class="icon-list bottom-list">
+			
+				
+					<button type="button"  class="popCitationTable btns btn-green-line hover-btn-green modal-open-close" data-nrf-modal="#citationTableMaster">인용한 논문 수 : <span>17</span></button>
+				
+				
+			
+			<div class="btns btn-gray color-blue">
+				<fmt:formatNumber pattern="#,###">574</fmt:formatNumber> 회 열람
+			</div>
+			<button type="button" id="btnPrint" onclick="printArticle();" class="btns btn-green-line hover-btn-green"><i class="fal fa-print"></i> 현재 페이지 인쇄</button>
+			
+				
+					<button type="button" onclick="fncDown('ART003066294', 'KCI_FI003066294');" class="btns btn-green-line hover-btn-green">
+						<i class="fal fa-file-pdf"></i> PDF 다운로드
+					</button>
+				
+			
+			<button type="button" class="btns btn-green-line hover-btn-green modal-open-close" data-nrf-modal="#citationLayer">
+				<i class="fal fa-link"></i> 인용보기
+			</button>
+			<div class="tooltipbox" style="--tooltip-size: 120px">
+				<button class="btns btn-green-line tooltip-onoff-btn"><i class="fal fa-external-link-alt"></i> 공유</button>
+				<div class="tooltip-con t-right share-tooltip">
+					<a href="javascript:;" onclick="sendSNS('facebook', 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003066294')" class="share-btn">
+						<span class="ico">
+							<img src="/kciportal/resources/landing/v2/img/common/ico_social_facebook.png" alt="facebook"/>
+						</span>
+						<em>Facebook</em>
+					</a>
+					<a href="javascript:;" onclick="sendSNS('twitter', 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003066294')" class="share-btn">
+						<span class="ico"><img src="/kciportal/resources/landing/v2/img/common/ico_social_x.png" alt="twitter"/></span>
+						<em>Twitter</em>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- } Articles View Top -->
+<!-- Article Detail Content { -->
+<section class="articles-detail-content">
+	<!-- 초록 { -->
+	<article class="adc-area">
+		<h3><button type="button" class="adc-onoff-btn slide-open-close on" data-nrf-slide="#articleAbstract"><em>초록</em><span class="arrow"><i class="fal fa-chevron-down"></i></span></button></h3>
+		<div id="articleAbstract" class="adc-box slide-open">
+			
+				
+					
+					
+						본고는 교과서 말뭉치를 기반으로 등급별 사고도구어 목록을 개발하는 데에 목적을 두었다. 첫째로 초중고 교과서 말뭉치 기반 형태 분석 말뭉치를 구축하고, 둘째로 사고도구어 목록을 개발하며, 셋째로는 선정된 사고도구어를 등급화하였다. 본고에서는 361권의 초중고 교과서를 대상으로 교과서 텍스트의 특성을 고려하여 국어과, 인문 교과군, 사회 교과군, 과학 교과군의 네 분야로 균형 말뭉치(총 16,406,663어절)를 구축한 뒤 양적 방법과 질적 방법을 모두 사용하여 1,387개 단어족의 사고도구어를 선정하였다. 그리고 교과서 텍스트의 특성과 통계학적 원리를 이용한 새로운 방법론을 도입하여 사고도구어를 4개의 등급으로 구분하였다. 본고는 충실한 기초 자료 구축과 다양한 방법론의 적용을 통해 사고도구어 등급화의 타당성을 제고하였다는 의의가 있다. 또한 사고도구어 교육의 중요성과 필요성에도 불구하고 현 시점에서 유용하게 이용할 수 없는 최신의 등급별 사고도구어 목록이 부재하는 교육 현실을 개선하는 데 기여할 수 있다.
+						
+							<br/>
+							<br/>
+							This study aimed to develop an academic vocabulary list based on a textbook corpus. First, a corpus-based form analysis of elementary, middle, and high school textbooks was established. Second, a list of thought phrases was developed. Third, the selected academic vocabulary was graded. In this study, a balanced corpus (comprising 16,406,663 words) was constructed over four subjects: Korean language, humanities, social studies, and science from 361 elementary, middle, and high school textbooks in consideration of the unique characteristics of the textbook texts. From these, 1,387 monolingual academic vocabularies were selected using quantitative and qualitative methods. Additionally, by introducing a new methodology based on textbook characteristics and statistical principles, the academic vocabulary was classified into four grades.
+						
+					
+				
+				
+			
+		</div>
+	</article>
+	<!-- } 초록 -->
+
+	<!-- 키워드 { -->
+	
+	<article class="adc-area">
+		<h3><button type="button" class="adc-onoff-btn slide-open-close on" data-nrf-slide="#articleKeyword"><em>키워드</em><span class="arrow"><i class="fal fa-chevron-down"></i></span></button></h3>
+		<div id="articleKeyword" class="adc-box keyword-list slide-open">
+			
+				
+					
+					
+						사고도구어, 기초어휘, 전문어, 어휘 목록, 어휘 등급, 어휘 교육, 교과서 말뭉치
+						
+							<br/>
+							Academic Vocabulary, Basic Vocabulary, Technical Vocabulary (Term), Vocabulary List, Vocabulary Grade (Level), Vocabulary Education, Textbook Corpus
+						
+					
+				
+				
+			
+		</div>
+	</article>
+	<!-- } 키워드 -->
+	
+	
+	
+	<article class="adc-area">
+		<h3><button type="button" class="adc-onoff-btn slide-open-close on" data-nrf-slide="#articleReferences2"><em>참고문헌(42)</em><span class="arrow"><i class="fal fa-chevron-down"></i></span></button></h3>
+		<div id="articleReferences2" class="adc-box con-list slide-open">
+			
+				
+					<ul>
+						
+							<li class="ref">
+								1.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									강현화
+								
+								
+								
+									/ 2012
+								
+								
+								
+								
+									
+									
+										/ 한국어 교육 어휘 내용 개발(1단계)[국립국어원 2012-01-30]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								2.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									강현화
+								
+								
+								
+									/ 2013
+								
+								
+								
+								
+									
+									
+										/ 한국어 교육 어휘 내용 개발(2단계)[국립국어원 2013-01-30]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								3.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									강현화
+								
+								
+								
+									/ 2014
+								
+								
+								
+								
+									
+									
+										/ 한국어 교육 어휘 내용 개발(3단계)[국립국어원 2014-01-63]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								4.
+								
+								
+									
+									
+									
+									
+									
+									
+									[기타]
+								
+								
+								
+									교육부
+								
+								
+								
+									/ 2022
+								
+								
+								
+								
+									
+									
+										/ 국어과 교육과정(교육부 고시 제2022-33호 [별책 5])
+									
+								
+								
+								
+								
+									/ 교육부
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								5.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									김광해
+								
+								
+								
+									/ 1997
+								
+								
+								
+								
+									
+									
+										/ 어휘력과 어휘력의 평가
+									
+								
+								
+								
+								
+									/ 선청어문
+								
+								
+								
+									/ 25
+								
+								
+								
+								
+								
+									: 1 ~ 
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								6.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									김광해
+								
+								
+								
+									/ 2003
+								
+								
+								
+								
+									
+									
+										/ 등급별 국어교육용 어휘
+									
+								
+								
+								
+								
+									/ 박이정
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								7.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									김미소
+								
+								
+								
+									/ 2010
+								
+								
+								
+								
+									
+									
+										/ 한국어 학습자를 위한 사고도구어 등급 표준화 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								8.
+								
+								
+									
+									
+									
+									
+									
+									[인터넷자료]
+									
+								
+								
+								
+									김소연
+								
+								
+								
+								
+								
+								
+									
+									
+										/ 충남교육청, 문해력 향상 자기주도학습 시스템 ‘온생각’ 개발
+									
+								
+								
+								
+								
+									/ 연합뉴스
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								9.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									김한샘
+								
+								
+								
+									/ 2021
+								
+								
+								
+								
+									
+									
+										/ 초등 교육용 어휘 목록 개발 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								10.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									김한샘
+								
+								
+								
+									/ 2022
+								
+								
+								
+								
+									
+									
+										/ 초등학교와 중학교 교육용 어휘 등급화 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								11.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									박영순
+								
+								
+								
+									/ 1998
+								
+								
+								
+								
+									
+									
+										/ 한국어 문법 교육론
+									
+								
+								
+								
+								
+									/ 박이정
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								12.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									박태준
+								
+								
+								
+									/ 2022
+								
+								
+								
+								
+									
+									
+										/ KICE 이독성 지수(KICE Readability Index) 자동측정 프로그램 설계 및 개발 연구(Ⅰ)
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								13.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									박현주
+								
+								
+								
+									/ 2015
+								
+								
+								
+								
+									
+									
+										/ 학문 목적 한국어 학습자를 위한 학습어 선정 및 교육 방안 연구–한국어 교재에 제시된 학습어의 말뭉치 구축을 통하여-
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								14.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									서상규
+								
+								
+								
+									/ 2021
+								
+								
+								
+								
+									
+									
+										/ 2021년 국어 기초 어휘 선정 및 어휘 등급화 연구[국립국어원 2021-01-44]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								15.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									서상규
+								
+								
+								
+									/ 2022
+								
+								
+								
+								
+									
+									
+										/ 2022년 국어 기초 어휘 선정 및 어휘 등급화 연구[국립국어원 2022-01-24]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								16.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									서혁
+								
+								
+								
+									/ 2014
+								
+								
+								
+								
+									
+									
+										/ 문식성 향상을 위한 어휘 능력 신장 연구[국립국어원 2014-01-24]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								17.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									신명선
+								
+								
+								
+									/ 2003
+								
+								
+								
+								
+									
+										<a href="/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART000992930" class="color-blue" target="_blank" rel="noopener">
+											/ 지적사고처리어(Academic Vocabulary)의 특성과 그 국어교육적 필요성에 대한 고찰
+										</a>
+									
+									
+								
+								
+								
+								
+									/ 어문학
+								
+								
+								
+									/ 81
+								
+								
+								
+								
+								
+									: 25 ~ 
+								
+								
+								
+								
+									<img src="/kciportal/resources/newkci/image/kor/icon/icon_kci.png" alt="kci" align="absmiddle" />
+								
+							</li>
+						
+							<li class="ref">
+								18.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									신명선
+								
+								
+								
+									/ 2004
+								
+								
+								
+								
+									
+									
+										/ 국어 사고도구어 교육 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								19.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									신명선
+								
+								
+								
+									/ 2023
+								
+								
+								
+								
+									
+										<a href="/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002939222" class="color-blue" target="_blank" rel="noopener">
+											/ 교과 학습의 트리거(trigger)혹은 문지방(threshold)으로서의 어휘-‘사고도구어 및 영역 일반 개념어’ 학습이 갖는 의의-
+										</a>
+									
+									
+								
+								
+								
+								
+									/ 국어교육
+								
+								
+								
+									/ 180
+								
+								
+								
+								
+								
+									: 107 ~ 
+								
+								
+								
+								
+									<img src="/kciportal/resources/newkci/image/kor/icon/icon_kci.png" alt="kci" align="absmiddle" />
+								
+							</li>
+						
+							<li class="ref">
+								20.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									신명선
+								
+								
+								
+									/ 2020
+								
+								
+								
+								
+									
+										<a href="/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002663946" class="color-blue" target="_blank" rel="noopener">
+											/ 국어 사고도구어 능력과 교과서 읽기 능력의 관계에 대한 연구
+										</a>
+									
+									
+								
+								
+								
+								
+									/ 국어교육학연구
+								
+								
+								
+									/ 55
+								
+								
+								
+									(4)
+								
+								
+								
+									: 79 ~ 4
+								
+								
+								
+								
+									<img src="/kciportal/resources/newkci/image/kor/icon/icon_kci.png" alt="kci" align="absmiddle" />
+								
+							</li>
+						
+							<li class="ref">
+								21.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									유양
+								
+								
+								
+									/ 2022
+								
+								
+								
+								
+									
+									
+										/ 학문 목적 중국인 학습자를 위한 한국어 사고도구어 교육 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								22.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									윤새롬
+								
+								
+								
+									/ 2017
+								
+								
+								
+								
+									
+										<a href="/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002268472" class="color-blue" target="_blank" rel="noopener">
+											/ 한국어 학술어 목록의 학술 텍스트 점유율에 관한 연구
+										</a>
+									
+									
+								
+								
+								
+								
+									/ 외국어로서의 한국어교육
+								
+								
+								
+									/ 47
+								
+								
+								
+								
+								
+									: 193 ~ 
+								
+								
+								
+								
+									<img src="/kciportal/resources/newkci/image/kor/icon/icon_kci.png" alt="kci" align="absmiddle" />
+								
+							</li>
+						
+							<li class="ref">
+								23.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									이경남
+								
+								
+								
+									/ 2023
+								
+								
+								
+								
+									
+									
+										/ 2022 문해력 진단 도구 및 교수학습 자료 개발
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								24.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									이세나
+								
+								
+								
+									/ 2023
+								
+								
+								
+								
+									
+									
+										/ 중학생의 독서 능력 평가를 위한 기본 어휘 구성에 대한 연구
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								25.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									이연진
+								
+								
+								
+									/ 2016
+								
+								
+								
+								
+									
+									
+										/ 초등학생의 사회교과서 역사용어 이해 양상
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								26.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									조남호
+								
+								
+								
+									/ 2003
+								
+								
+								
+								
+									
+									
+										/ 한국어 학습용 어휘 선정 결과 보고서[국립국어연구원 2003-1-4]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								27.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									최소영
+								
+								
+								
+									/ 2023
+								
+								
+								
+								
+									
+										<a href="/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002962080" class="color-blue" target="_blank" rel="noopener">
+											/ 어휘 등급의 검증 방안 연구
+										</a>
+									
+									
+								
+								
+								
+								
+									/ 형태론
+								
+								
+								
+									/ 25
+								
+								
+								
+									(1)
+								
+								
+								
+									: 57 ~ 1
+								
+								
+								
+								
+									<img src="/kciportal/resources/newkci/image/kor/icon/icon_kci.png" alt="kci" align="absmiddle" />
+								
+							</li>
+						
+							<li class="ref">
+								28.
+								
+								
+									
+									
+									
+									
+									
+									[인터넷자료]
+									
+								
+								
+								
+									충청남도교육청
+								
+								
+								
+								
+								
+								
+									
+									
+										/ 충남 온(On)시스템, 기초·기본학력 분야 새 지평 연다
+									
+								
+								
+								
+								
+									/ 충남에듀있슈
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								29.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									한송화
+								
+								
+								
+									/ 2015
+								
+								
+								
+								
+									
+									
+										/ 한국어 교육 어휘 내용 개발(4단계)[국립국어원 2015-01-40]
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								30.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Corson, D.
+								
+								
+								
+									/ 1997
+								
+								
+								
+								
+									
+									
+										/ The Learning and Use of Academic English Words
+									
+								
+								
+								
+								
+									/ Language Learning
+								
+								
+								
+									/ 47
+								
+								
+								
+									(4)
+								
+								
+								
+									: 671 ~ 4
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								31.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Cowan, J. R.
+								
+								
+								
+									/ 1974
+								
+								
+								
+								
+									
+									
+										/ Lexical and syntactic research for the design of EFL reading materials
+									
+								
+								
+								
+								
+									/ TESOL Quarterly
+								
+								
+								
+									/ 8
+								
+								
+								
+									(4)
+								
+								
+								
+									: 389 ~ 4
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								32.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Coxhead, A.
+								
+								
+								
+									/ 2000
+								
+								
+								
+								
+									
+									
+										/ A new academic word list
+									
+								
+								
+								
+								
+									/ TESOL Quarterly
+								
+								
+								
+									/ 34
+								
+								
+								
+									(2)
+								
+								
+								
+									: 213 ~ 2
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								33.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									Cummins, J.
+								
+								
+								
+									/ 2008
+								
+								
+								
+								
+									
+									
+										/ Encyclopedia of Language and Education Volume 2: Literacy
+									
+								
+								
+								
+								
+									/ Springer
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								34.
+								
+								
+									
+									
+									
+									[보고서]
+									
+									
+									
+								
+								
+								
+									Farrell, P.
+								
+								
+								
+									/ 1990
+								
+								
+								
+								
+									
+									
+										/ Vocabulary in ESP : A Lexical Analysis of the English of Electornics and a Study of Emi-technical Vocabulary
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+									: 1 ~ 
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								35.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									Flavell, J. H.
+								
+								
+								
+									/ 1963
+								
+								
+								
+								
+									
+									
+										/ The Developmental Psychology of Jean Piaget
+									
+								
+								
+								
+								
+									/ Van Nostrand
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								36.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Gardner, D.
+								
+								
+								
+									/ 2014
+								
+								
+								
+								
+									
+									
+										/ A new academic vocabulary list
+									
+								
+								
+								
+								
+									/ Applied Linguistics
+								
+								
+								
+									/ 35
+								
+								
+								
+									(3)
+								
+								
+								
+									: 305 ~ 3
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								37.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Higgins, J. J.
+								
+								
+								
+									/ 1966
+								
+								
+								
+								
+									
+									
+										/ Hard facts
+									
+								
+								
+								
+								
+									/ ELT Journal
+								
+								
+								
+									/ 21
+								
+								
+								
+									(1)
+								
+								
+								
+									: 55 ~ 1
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								38.
+								
+								
+									
+									
+									
+									
+									[학위논문]
+									
+									
+								
+								
+								
+									Hwang, K.
+								
+								
+								
+									/ 1989
+								
+								
+								
+								
+									
+									
+										/ Reading newspapers for the improvement of vocabulary and reading skills
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								39.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Nagy, W.
+								
+								
+								
+									/ 2012
+								
+								
+								
+								
+									
+									
+										/ Words as tools : Learning academic vocabulary as language acquisition
+									
+								
+								
+								
+								
+									/ Reading research quarterly
+								
+								
+								
+									/ 47
+								
+								
+								
+									(1)
+								
+								
+								
+									: 91 ~ 1
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								40.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									Nation, I. S. P.
+								
+								
+								
+									/ 2001
+								
+								
+								
+								
+									
+									
+										/ Learning Vocabulary in Another Language
+									
+								
+								
+								
+								
+									/ Cambridge University Press
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								41.
+								
+								
+									
+									
+									[단행본]
+									
+									
+									
+									
+								
+								
+								
+									Snow, C. E.
+								
+								
+								
+									/ 2007
+								
+								
+								
+								
+									
+									
+										/ Vocabulary acquisition: Implications for reading comprehension
+									
+								
+								
+								
+								
+									/ The Guilford Press
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</li>
+						
+							<li class="ref">
+								42.
+								
+								
+									[학술지]
+									
+									
+									
+									
+									
+									
+								
+								
+								
+									Xue, G.
+								
+								
+								
+									/ 1984
+								
+								
+								
+								
+									
+									
+										/ A university word list
+									
+								
+								
+								
+								
+									/ Language Learning and Communication
+								
+								
+								
+									/ 3
+								
+								
+								
+									(2)
+								
+								
+								
+									: 215 ~ 2
+								
+								
+								
+								
+							</li>
+						
+					</ul>
+				
+				
+			
+			
+		</div>
+	</article>
+	<!-- oa, cc by nc -->
+	
+	<article class="adc-area">
+		<h3><button type="button" class="adc-onoff-btn slide-open-close on" data-nrf-slide="#articleCCL"><em>학술지 저작권 정책</em><span class="arrow"><i class="fal fa-chevron-down"></i></span></button></h3>
+		<div id="articleCCL" class="adc-box con-list slide-open">
+			<ul class="ati-right">
+				<li>
+					
+						
+						
+						
+						
+						
+						
+						
+							<p>CCL 정보가 제공되지 않았습니다.</p>  <!-- CCL 없음 -->
+						
+					
+				</li>
+			</ul>
+		</div>
+	</article>
+	
+</section>
+
+<!-- } Article Detail Content -->
+<aside class="article-side-mnu">
+	<div class="as-mnulist" style="--pc-width: 300px;">
+		<ul>
+			<li><button type="button" class="asm-btn" onclick="gotoTargetPatentIndex('container')">TOP</button></li>
+			<li><button type="button" class="asm-btn" onclick="gotoTargetPatentIndex('articleAbstract')">초록</button></li>
+			<li><button type="button" class="asm-btn" onclick="gotoTargetPatentIndex('articleKeyword')">키워드</button></li>
+			
+				<li><button type="button" class="asm-btn" onclick="gotoTargetPatentIndex('articleReferences')">참고문헌</button></li>
+		</ul>
+	</div>
+	<button type="type" class="as-onoff-btn c-hamburger c-hamburger--htx"><span>toggle menu</span></button>
+	<script>
+		$('.article-side-mnu .as-onoff-btn').click(function() {
+			if ($('.article-side-mnu').hasClass('open')) {
+				$('.article-side-mnu').removeClass('open');
+				$('.article-side-mnu .as-mnulist').fadeOut('fast');
+			} else {
+				$('.article-side-mnu').addClass('open');
+				$('.article-side-mnu .as-mnulist').fadeIn('fast');
+			}
+		});
+	</script>
+</aside>
+
+
+<form name="ciSereInfo" method="post">
+	<input type="hidden" id="insiSereBean_insiId" name="insiSereBean.insiId"  />
+	<input type="hidden" id="insiSereBean_sereId" name="insiSereBean.sereId" />
+</form>
+<iframe name="orteDownFrame" src="" style="display:none;" title="파일 다운로드 프레임"></iframe>
+
+
+
+
+
+<div id="citationLayer" class="modal size-small quote-modal" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-head flex-spacebetween">
+			<h2 class="modal-tit flex-start" style="gap: 10px;">
+				<em><label for="exportType">타입을 선택하세요</label></em>
+				<select name="exportType" id="exportType"  class="basic-select" title="인용스타일 선택">
+					<option value="0">BibTex</option>
+					<option value="1">RIS</option>
+					<option value="2" selected="selected">APA</option>
+					<option value="3">Harvard</option>
+					<option value="4">MLA</option>
+					<option value="5">Vancouver</option>
+					<option value="6">Chicago</option>
+				</select>
+			</h2>
+			<button type="button" class="modal-close-btn modal-open-close" data-nrf-modal="#citationLayer"><i class="fal fa-times"></i></button>
+		</div>
+		<div class="modal-content">
+			<h2>
+				
+				
+					교과서 기반 등급별 사고도구어 목록 개발 연구
+				
+				
+			</h2>
+			<div class="citationBody"><!-- citationBody -->
+				<div class="quote-txt" style="display: none;">
+					<p id="BibTex">
+						@article{ART003066294},<br/>
+						author={
+							
+							
+								신명선
+							
+							
+								and
+								
+								
+									
+									강지영
+									 and 
+								
+									
+									나상수
+									 and 
+								
+									
+									이경남
+									 and 
+								
+									
+									정지호
+									 and 
+								
+									
+									홍경화
+									 and 
+								
+									
+									최소영
+									
+								
+							
+						},
+						<br/>
+						
+						title={
+							
+							
+								교과서 기반 등급별 사고도구어 목록 개발 연구
+							
+						},<br/>
+						
+						journal={
+							
+							
+								국어교육학연구
+							
+						},<br/>
+						
+						issn={1225-8571},<br/>
+						
+						year={2024},<br/
+						
+						
+							volume={59},<br/>
+						
+						
+						
+							number={1},<br/>
+						
+						pages={97 - 140},<br/>
+						
+						
+							doi={10.20880/kler.2024.59.1.97},<br/>
+							url={http://dx.doi.org/10.20880/kler.2024.59.1.97}
+						
+					</p>
+				</div>
+				<div class="quote-txt"  style="display: none;">
+					<p id="RIS">
+						TY - JOUR<br>
+						
+						
+							AU - 신명선
+						
+						
+							
+							
+								
+								AU - 강지영<br/>
+							
+								
+								AU - 나상수<br/>
+							
+								
+								AU - 이경남<br/>
+							
+								
+								AU - 정지호<br/>
+							
+								
+								AU - 홍경화<br/>
+							
+								
+								AU - 최소영<br/>
+							
+						
+						
+						
+						
+							TI - 교과서 기반 등급별 사고도구어 목록 개발 연구<br/>
+						
+						
+						
+						
+							T2 - 국어교육학연구<br/>
+						
+						
+						PY - 2024<br/>
+						
+						
+							VL - 59<br/>
+						
+						
+						
+							IS - 1<br/>
+						
+						
+						
+						
+							PB -  국어교육학회<br/> 
+						
+						
+						SP - 97 - 140<br/>
+						
+						SN - 1225-8571<br/>
+						
+						
+						
+							
+								
+									AB - 본고는 교과서 말뭉치를 기반으로 등급별 사고도구어 목록을 개발하는 데에 목적을 두었다. 첫째로 초중고 교과서 말뭉치 기반 형태 분석 말뭉치를 구축하고, 둘째로 사고도구어 목록을 개발하며, 셋째로는 선정된 사고도구어를 등급화하였다. 본고에서는 361권의 초중고 교과서를 대상으로 교과서 텍스트의 특성을 고려하여 국어과, 인문 교과군, 사회 교과군, 과학 교과군의 네 분야로 균형 말뭉치(총 16,406,663어절)를 구축한 뒤 양적 방법과 질적 방법을 모두 사용하여 1,387개 단어족의 사고도구어를 선정하였다. 그리고 교과서 텍스트의 특성과 통계학적 원리를 이용한 새로운 방법론을 도입하여 사고도구어를 4개의 등급으로 구분하였다. 본고는 충실한 기초 자료 구축과 다양한 방법론의 적용을 통해 사고도구어 등급화의 타당성을 제고하였다는 의의가 있다. 또한 사고도구어 교육의 중요성과 필요성에도 불구하고 현 시점에서 유용하게 이용할 수 없는 최신의 등급별 사고도구어 목록이 부재하는 교육 현실을 개선하는 데 기여할 수 있다.<br/>
+								
+								
+							
+						
+						
+						
+						
+							KW - 사고도구어, 기초어휘, 전문어, 어휘 목록, 어휘 등급, 어휘 교육, 교과서 말뭉치<br/>
+						
+						
+						
+							
+								DO - 10.20880/kler.2024.59.1.97<br/>
+								UR - http://dx.doi.org/10.20880/kler.2024.59.1.97<br/>
+							
+							
+						
+						ER - 
+					</p>
+				</div>
+				<div class="quote-txt">
+					<p id="APA">
+						
+						
+							신명선
+						
+						
+							, 
+							
+							
+								
+								강지영
+								
+									
+									 , 
+								
+							
+								
+								나상수
+								
+									
+									 , 
+								
+							
+								
+								이경남
+								
+									
+									 , 
+								
+							
+								
+								정지호
+								
+									
+									 , 
+								
+							
+								
+								홍경화
+								
+									 and 
+									
+								
+							
+								
+								최소영
+								
+									
+									
+								
+							
+						
+						
+						(2024).
+						
+						
+						
+							교과서 기반 등급별 사고도구어 목록 개발 연구.
+						
+						
+						
+						
+							국어교육학연구,
+						
+						
+						
+							
+								59(1),
+							
+							
+							
+						
+						
+						97 - 140.
+					</p>
+				</div>
+				<div class="quote-txt" style="display: none;">
+					<p id="Harvard">
+						
+						
+							신명선
+						
+						
+							, 
+							
+							
+								
+								강지영
+								
+									
+									 , 
+								
+							
+								
+								나상수
+								
+									
+									 , 
+								
+							
+								
+								이경남
+								
+									
+									 , 
+								
+							
+								
+								정지호
+								
+									
+									 , 
+								
+							
+								
+								홍경화
+								
+									 and 
+									
+								
+							
+								
+								최소영
+								
+									
+									
+								
+							
+						
+						
+						. 2024,
+						
+						“교과서 기반 등급별 사고도구어 목록 개발 연구”,
+						
+						
+							vol.59,
+						
+						
+						
+							no.1,
+						
+						
+						pp. 97 - 140.
+						Available from: doi:10.20880/kler.2024.59.1.97
+					</p>
+				</div>
+				<div class="quote-txt"  style="display: none;">
+					<p id="MLA">
+						
+						
+							신명선
+						
+						
+							
+								
+								
+									
+									외.
+								
+							
+						
+						
+						“교과서 기반 등급별 사고도구어 목록 개발 연구“
+						
+						
+						
+							국어교육학연구
+						
+						
+						
+							
+								59.1
+							
+							
+							
+						
+						
+						pp. 97 - 140.
+						
+						(2024): 97.
+					</p>
+				</div>
+				<div class="quote-txt"  style="display: none;">
+					<p id="Vancouver">
+						
+							신명선
+						
+						
+							, 
+							
+								
+								강지영
+								 , 
+							
+								
+								나상수
+								 , 
+							
+								
+								이경남
+								 , 
+							
+								
+								정지호
+								 , 
+							
+								
+								홍경화
+								 , 
+							
+								
+								최소영
+								
+							
+						
+						.
+						교과서 기반 등급별 사고도구어 목록 개발 연구
+						
+						
+						
+							국어교육학연구
+						
+						[Internet].
+						2024;
+						
+						
+							
+								59(1),
+							
+							
+							
+						:
+						97 - 140.
+						Available from: doi:10.20880/kler.2024.59.1.97
+					</p>
+				</div>
+				<div class="quote-txt"  style="display: none;">
+					<p id="Chicago">
+						
+						
+							신명선
+						
+						
+							, 
+							
+							
+								
+								강지영
+								
+									
+									 , 
+								
+							
+								
+								나상수
+								
+									
+									 , 
+								
+							
+								
+								이경남
+								
+									
+									 , 
+								
+							
+								
+								정지호
+								
+									
+									 , 
+								
+							
+								
+								홍경화
+								
+									 and 
+									
+								
+							
+								
+								최소영
+								
+									
+									
+								
+							
+						
+						. “교과서 기반 등급별 사고도구어 목록 개발 연구“
+						
+						국어교육학연구
+						
+						
+							
+								59, no.1,
+							
+							
+							
+						
+						(2024): 97 - 140. doi: :10.20880/kler.2024.59.1.97
+					</p>
+				</div>
+			</div> <!-- citationBody END-->
+			<div class="btn-area flex-center mgt30px">
+				<button type="button" class="btns btn-point" onclick="fncTextDown()">텍스트 파일로 저장</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 피인용 논문 테이블 팝업 박스 -->
+<div id="citationTableMaster"  class="modal size-small">
+	<div class="modal-dialog">
+		<div class="modal-head flex-spacebetween">
+			<h2 class="modal-tit"><em>피인용 논문</em></h2>
+			<button type="button" class="modal-close-btn modal-open-close" data-nrf-modal="#citationTableMaster"><i class="fal fa-times"></i></button>
+		</div>
+		<div id="citationTable" class="modal-content">
+		</div>
+	</div>
+</div> <!-- citationTable -->
+<script type="text/javascript">
+	$(function(){
+		funcCitedList();
+	});
+</script>
+				</div>
+			</div>
+			
+
+
+<footer id="footer">
+	<h1><img src="/kciportal/resources/landing/v2/img/common/logo_nrf.png" alt="한국연구재단 로고"/></h1>
+	<div class="foot-info">
+			
+			<ul class="mgt10px">
+			<li>
+				
+				
+					(우)305-754 대전광역시 유성구 가정로 201 한국연구재단
+				
+			</li>
+			<li>TEL: 042-869-6674, 1544-6118</li>
+			<li>E-mail: <a href="mailto:kciadmin@nrf.re.kr">kciadmin@nrf.re.kr</a></li>
+		</ul>
+		<p class="copyright">COPYRIGHT BY 2024 NRF. ALL RIGHTS RESERVED.</p>
+	</div>
+</footer>
+		</div>
+		
+
+
+<div class="mobile-modal">
+	<nav id="mGnb" class="m-gnb">
+		<ul class="gnb-1ul">
+			<li class="gnb-1li">
+				<button type="button" class="gnb-1a subgnb-open-close" data-gnb-slide="#gnbSub01"><em>About KOAJ</em><span class="ico plus-minus"><i class="fal fa-plus"></i></span></button>
+				<ul id="gnbSub01" class="gnb-2ul" style="display: none;">
+					<li class="gnb-2li">
+						<a href="/kciportal/landing/about.kci?landingSearchBean.aboutDiv=0" class="gnb-2a">KOAJ 안내</a>
+					</li>
+					<li class="gnb-2li">
+						<a href="/kciportal/landing/about.kci?landingSearchBean.aboutDiv=1" class="gnb-2a">KCI DOI 사업 개요</a>
+					</li>
+					<li class="gnb-2li">
+						<a href="/kciportal/landing/about.kci?landingSearchBean.aboutDiv=2" class="gnb-2a">KCI DOI 가입신청 안내</a>
+					</li>
+					<li class="gnb-2li">
+						<a href="/kciportal/landing/about.kci?landingSearchBean.aboutDiv=3" class="gnb-2a">DOAJ 가입 신청서 작성 안내</a>
+					</li>
+				</ul>
+			</li>
+			<li class="gnb-1li"><a href="/kciportal/landing/journalList.kci" class="gnb-1a"><em>Journals</em><span class="ico"><i class="fal fa-chevron-right"></i></span></a></li>
+			<li class="gnb-1li"><a href="/kciportal/landing/articleSearch.kci" class="gnb-1a"><em>Articles</em><span class="ico"><i class="fal fa-chevron-right"></i></span></a></li>
+			<li class="gnb-1li">
+				<button type="button" class="gnb-1a subgnb-open-close" data-gnb-slide="#gnbSub04"><em>Statistics</em><span class="ico plus-minus"><i class="fal fa-plus"></i></span></button>
+				<ul id="gnbSub04" class="gnb-2ul" style="display: none;">
+					<li class="gnb-2li"><a href="/kciportal/landing/insiStatistics.kci" class="gnb-2a">기관·학술지 통계</a></li>
+					<li class="gnb-2li"><a href="/kciportal/landing/dataStatistics.kci" class="gnb-2a">Data 구축 통계</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>
+	</body>
+</html>

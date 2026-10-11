@@ -1,0 +1,185 @@
+{
+  "schema": "TAKY_LEARNING_REFERENCE_PATTERN_REGISTRY_TEMPLATE_V1",
+  "version": "2026-10-07.3",
+  "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+  "policy": {
+    "domain_relevance_required": true,
+    "pattern_may_shape_activity": true,
+    "pattern_may_not_set_grade": true,
+    "pattern_may_not_override_official_meaning": true,
+    "source_layout_and_wording_not_copied": true,
+    "learner_evidence_required_for_recovery_patterns": true,
+    "indexed_reference_requires_explicit_signal_mapping": true
+  },
+  "static_sources": [
+    {
+      "source_id": "MINED:EDU_NAVI:TERM_DECODER_INTRO",
+      "source_ref": "chat://2026-10-07/edu_navi/term-decoder-intro",
+      "domain": "LEARNING/HIDE_SEEK/TERM_DECODER",
+      "patterns": [
+        "P_MORPHEME_FAMILY",
+        "P_WHOLE_MEANING_INFERENCE"
+      ]
+    },
+    {
+      "source_id": "MINED:EDU_NAVI:SCIENCE_TERM_DECODER",
+      "source_ref": "chat://2026-10-07/edu_navi/science-term-decoder",
+      "domain": "LEARNING/HIDE_SEEK/TERM_DECODER",
+      "patterns": [
+        "P_MORPHEME_FAMILY",
+        "P_CONCEPT_RELATION",
+        "P_CONTEXT_TRANSFER",
+        "P_VISUAL_CONCEPT_CARD"
+      ]
+    },
+    {
+      "source_id": "MINED:KIDBOOKQMOM:SCIENCE_LITERACY",
+      "source_ref": "chat://2026-10-07/kidbookqmom/science-literacy-term-decoder",
+      "domain": "LEARNING/HIDE_SEEK/TERM_DECODER",
+      "patterns": [
+        "P_CONCEPT_RELATION",
+        "P_COMPARE_CONTRAST",
+        "P_CONTEXT_TRANSFER",
+        "P_VISUAL_CONCEPT_CARD"
+      ]
+    },
+    {
+      "source_id": "REF:DAEGU_EDU:SUBJECT_HANJA",
+      "source_ref": "LEARNING/data/prelearned/hanja-reference-mining-v1.json",
+      "domain": "LEARNING/HIDE_SEEK/TERM_DECODER",
+      "patterns": [
+        "P_LITERAL_TO_SUBJECT_MEANING",
+        "P_CONTEXT_TRANSFER"
+      ]
+    }
+  ],
+  "patterns": {
+    "P_MORPHEME_FAMILY": {
+      "intent": "decode a term from semantic components and connect reusable word-family clues",
+      "mode_affinity": [
+        "TRACE",
+        "LINK",
+        "CORE"
+      ],
+      "requires_any": [
+        "components",
+        "hanja"
+      ],
+      "never_infers_missing_components": true
+    },
+    "P_WHOLE_MEANING_INFERENCE": {
+      "intent": "infer the whole term meaning before answer reveal",
+      "mode_affinity": [
+        "CORE"
+      ],
+      "requires_any": [
+        "meaning"
+      ]
+    },
+    "P_CONCEPT_RELATION": {
+      "intent": "connect the term to hierarchy, relation, cause/process or neighboring curriculum concepts",
+      "mode_affinity": [
+        "LINK",
+        "CORE"
+      ],
+      "requires_any": [
+        "concept_relations",
+        "concept_hierarchy",
+        "concept_links"
+      ]
+    },
+    "P_COMPARE_CONTRAST": {
+      "intent": "compare or contrast adjacent concepts instead of memorizing one isolated definition",
+      "mode_affinity": [
+        "LINK",
+        "CORE"
+      ],
+      "requires_any": [
+        "compare_contrast"
+      ]
+    },
+    "P_CONTEXT_TRANSFER": {
+      "intent": "retrieve the term from curriculum context after decoding and concept linking",
+      "mode_affinity": [
+        "RECALL"
+      ],
+      "requires_any": [
+        "example",
+        "concept_summary",
+        "unit_context"
+      ]
+    },
+    "P_LITERAL_TO_SUBJECT_MEANING": {
+      "intent": "separate literal Hanja reading from subject-specific concept meaning",
+      "mode_affinity": [
+        "TRACE",
+        "CORE"
+      ],
+      "requires_any": [
+        "decoder_reference"
+      ],
+      "never_treat_literal_as_subject_definition": true
+    },
+    "P_ERROR_TO_CONCEPT_GAP": {
+      "intent": "when repeated wrong attempts occur, treat them as a concept-gap signal and route to targeted concept review",
+      "mode_affinity": [
+        "LINK",
+        "CORE"
+      ],
+      "requires_all": [
+        "evidence_wrong_repeat"
+      ],
+      "evidence_gate": true,
+      "one_mistake_is_not_concept_gap": true
+    },
+    "P_VISUAL_CONCEPT_CARD": {
+      "intent": "organize term, semantic clue, concept relation and curriculum context as one compact visual explanation unit",
+      "mode_affinity": [
+        "TRACE",
+        "LINK",
+        "CORE"
+      ],
+      "requires_any": [
+        "components",
+        "concept_relations",
+        "concept_hierarchy",
+        "concept_links",
+        "concept_summary"
+      ],
+      "layout_copy_forbidden": true
+    },
+    "P_CONCEPT_GRAPH": {
+      "intent": "surface prerequisite/neighbor/sequence relations as a concept graph rather than an isolated fact",
+      "mode_affinity": [
+        "LINK",
+        "CORE"
+      ],
+      "requires_any": [
+        "concept_relations",
+        "concept_hierarchy",
+        "concept_links",
+        "compare_contrast"
+      ]
+    },
+    "P_BLANK_RECALL": {
+      "intent": "use masked-term or blank recall only after concept/context evidence is available",
+      "mode_affinity": [
+        "RECALL"
+      ],
+      "requires_any": [
+        "example",
+        "concept_summary",
+        "unit_context"
+      ],
+      "answer_mask_required": true
+    }
+  },
+  "canonical_sequence": [
+    "TERM_OR_PHENOMENON_CONTEXT",
+    "FORM_OR_MORPHEME_DECODING",
+    "WORD_FAMILY_OR_CONCEPT_RELATION_LINK",
+    "WHOLE_MEANING_INFERENCE",
+    "CONCEPT_HIERARCHY_RELATION_COMPARE_CONTRAST",
+    "CURRICULUM_CONTEXT_RECALL"
+  ]
+}

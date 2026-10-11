@@ -22,7 +22,7 @@ function authorize(packet={},identity={}){
   );
   if(memberId&&!authorizedMembers.has(memberId))issues.push('MEMBER_SCOPE_NOT_AUTHORIZED');
 
-  if(!['hide-seek','snap-pop','ready-set'].includes(sourceApp))issues.push('SOURCE_APP_NOT_ALLOWED');
+  if(!['hide-seek','snap-pop','ready-set','play-camp'].includes(sourceApp))issues.push('SOURCE_APP_NOT_ALLOWED');
 
   return {
     ok:issues.length===0,

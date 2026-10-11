@@ -28,6 +28,11 @@ assert.equal(calm.add_checkpoint,false);
 assert.equal(calm.add_retrieval_checkpoint,false);
 assert.equal(calm.recovery_floor,null);
 assert.equal(calm.assistance_policy,'UNCHANGED');
+assert.equal(calm.activity_sequence_policy,'UNCHANGED');
+const play=P.derive({ok:true,scope:feedback.scope,intents:[{intent:'OFFER_ADJACENT_VARIATION',priority:'MEDIUM',basis:'PLAY_CAMP_OBSERVATION_ONLY',targets:['number-bond:7-3']}]});
+assert.equal(play.activity_sequence_policy,'ADJACENT_VARIATION');
+assert.deepEqual(play.target_learning_ids,['number-bond:7-3']);
+assert.equal(P.validate(play).ok,true);
 
 const leaked={...out,schedule_date:'2026-10-01'};
 assert.equal(P.validate(leaked).ok,false);

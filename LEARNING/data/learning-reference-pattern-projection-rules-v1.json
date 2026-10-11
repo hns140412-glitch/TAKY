@@ -1,0 +1,51 @@
+{
+  "schema": "TAKY_LEARNING_REFERENCE_PATTERN_PROJECTION_RULES_V1",
+  "version": "2026-10-07.1",
+  "input_contract": "REFERENCE_INTAKE_DISPOSITION_LEDGER",
+  "eligibility": {
+    "domain": "education",
+    "consumer": "LEARNING_ENGINE",
+    "state": "EVIDENCE_CANDIDATE"
+  },
+  "signal_to_patterns": {
+    "ERROR_TO_CONCEPT_GAP": [
+      "P_ERROR_TO_CONCEPT_GAP"
+    ],
+    "VISUAL_CONCEPT_CARD": [
+      "P_VISUAL_CONCEPT_CARD"
+    ],
+    "CONCEPT_GRAPH": [
+      "P_CONCEPT_GRAPH"
+    ],
+    "BLANK_RECALL_TEST": [
+      "P_BLANK_RECALL"
+    ]
+  },
+  "scope_to_patterns": {
+    "ERROR_TO_CONCEPT_GAP_CANDIDATE": [
+      "P_ERROR_TO_CONCEPT_GAP"
+    ],
+    "VISUAL_EXPLANATION_PATTERN": [
+      "P_VISUAL_CONCEPT_CARD"
+    ],
+    "MATH_CONCEPT_RELATION_HYPOTHESIS": [
+      "P_CONCEPT_GRAPH"
+    ],
+    "BLANK_RECALL_WORKFLOW_CANDIDATE": [
+      "P_BLANK_RECALL"
+    ],
+    "LEARNING_VISUALIZATION_PATTERN": [
+      "P_VISUAL_CONCEPT_CARD"
+    ]
+  },
+  "no_runtime_pattern_scopes": [
+    "OFFICIAL_SOURCE_DISCOVERY",
+    "LEARNING_REFERENCE_DISCOVERY"
+  ],
+  "guards": [
+    "UNKNOWN_SIGNAL_DOES_NOT_PROJECT",
+    "DISCOVERY_ONLY_SOURCE_DOES_NOT_BECOME_PEDAGOGY",
+    "REFERENCE_AUTHORITY_CEILING_PRESERVED",
+    "NO_GRADE_AUTHORITY_FROM_REFERENCE_PATTERN"
+  ]
+}

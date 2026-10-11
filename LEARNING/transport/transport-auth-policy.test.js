@@ -36,6 +36,13 @@ const wrongMember=A.authorize(packet,{
 });
 assert.equal(wrongMember.issues.includes('MEMBER_SCOPE_NOT_AUTHORIZED'),true);
 
+const playCamp=A.authorize({...packet,source_app:'play-camp'},{
+  authenticated:true,
+  family_id:'F1',
+  authorized_member_ids:['CHILD_A']
+});
+assert.equal(playCamp.ok,true);
+
 const badApp=A.authorize({...packet,source_app:'unknown-app'},{
   authenticated:true,
   family_id:'F1',

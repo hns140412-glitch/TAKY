@@ -56,6 +56,21 @@ const forged={...hide,verified_outcome:1};
 assert.equal(A.validateCanonical(forged).ok,false);
 assert.equal(A.validateCanonical(forged).issues.includes('VERIFIED_OUTCOME_WITHOUT_RECEIPT'),true);
 
+const play=A.fromPlayCamp({
+  event_id:'p1',source:'play-camp',event_type:'PLAY_ACTIVITY_OBSERVATION',occurred_at:'2026-10-08T00:00:00.000Z',
+  payload:{activity_id:'math-bond-10',concept_ids:['math.quantity-10','math.number-bond'],loop_step:'CONNECT',completion_state:'COMPLETED',interaction_count:3,creation_saved:false}
+},{member_id:'A',subject:'수학',concept_skill_target:'number_bond_10',learning_target_id:'bond-7-3',instrument_version:'PLAY_CAMP_ACTIVITY_V1'});
+assert.equal(play.evidence_type,'PLAY_ACTIVITY_OBSERVATION');
+assert.equal(play.source_app,'play-camp');
+assert.equal(play.verified_outcome,null,'Play Camp must not self-verify mastery');
+assert.equal(play.raw_app_signals.activity_id,'math-bond-10');
+assert.equal(play.raw_app_signals.explanation_observed,null);
+const witnessed=A.fromPlayCamp({event_id:'p2',source:'play-camp',occurred_at:'2026-10-08T00:01:00.000Z',payload:{hint_level_observed:'TARGETED',explanation_observed:true,transfer_observed:true,same_concept_confirmed:true,verified_outcome:1}},{...ctx});
+assert.equal(witnessed.raw_app_signals.hint_level_observed,'TARGETED');
+assert.equal(witnessed.raw_app_signals.transfer_observed,true);
+assert.equal(witnessed.verified_outcome,null);
+assert.equal(A.validateCanonical(play).ok,true);
+
 const leaked={...hide,due_at:'2026-09-30T07:00:00.000Z'};
 assert.equal(A.validateCanonical(leaked).ok,false);
 assert.equal(A.validateCanonical(leaked).issues.includes('SCHEDULE_AUTHORITY_LEAK'),true);

@@ -103,7 +103,11 @@ function createFamilyGiftJournal({directory,family_id,signingKey,now}={}){
       finally{fs.closeSync(tmpFd)}
       fs.renameSync(temp,file);temp=null;
       const dirFd=fs.openSync(directory,'r');
-      try{fs.fsyncSync(dirFd)}finally{fs.closeSync(dirFd)}
+      try{
+        try{fs.fsyncSync(dirFd)}catch(error){
+          if(!(process.platform==='win32'&&error?.code==='EPERM'))throw error;
+        }
+      }finally{fs.closeSync(dirFd)}
       return {ok:true,persisted:true,idempotent:false,gift_id,family_id:family,
         receiver_child_id:record.receiver_child_id,idempotency_key:record.idempotency_key,
         kind:record.kind,

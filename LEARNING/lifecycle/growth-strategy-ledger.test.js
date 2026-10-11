@@ -41,6 +41,12 @@ assert.equal(first.idempotent,false);
 assert.equal(first.entry.promotion_authority,false);
 assert.equal(first.entry.raw_evidence_copied,false);
 assert.equal(first.entry.source_evidence.receipt_id,'real-evidence:r1');
+assert.equal(first.entry.grow_lineage_events.length,2);
+assert.deepEqual(first.entry.grow_lineage_events.map(x=>x.stage),['OUTCOME','GROWTH']);
+assert.equal(first.entry.grow_lineage_events[0].grow_domain,'LEARNING_GROW');
+assert.equal(first.entry.grow_lineage_events[1].promotion_authorized,false);
+assert.equal(first.entry.grow_lineage_events[0].payload.scope_kind,'LEARNER_SCOPED');
+assert.equal(Object.hasOwn(first.entry.grow_lineage_events[0].payload,'scope_key'),false);
 assert.equal(Ledger.selfValidate(first.ledger).ok,true);
 
 const again=Ledger.append(first.ledger,{

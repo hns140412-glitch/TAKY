@@ -1,0 +1,1349 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta property="og:image" content="/images/default/main/myimage.jpg" /><!-- 이미지 FULL URL 주소 -->
+		
+		<meta name="description" content="국가교육과정정보센터(NCIC)는 국가교육위원회와 한국교육과정평가원에서 공동 운영하고 있는 국내외 교육과정의 정보 공유 시스템입니다.">
+	
+<meta property="og:title" content="NCIC 국가교육과정정보센터">
+<meta property="og:type" content="website"> 
+<meta property="og:url" content="https://ncic.re.kr">
+<meta property="og:description" content="국가교육과정정보센터(NCIC)는 국가교육위원회와 한국교육과정평가원에서 공동 운영하고 있는 국내외 교육과정의 정보 공유 시스템입니다.">
+		
+		<meta name="_csrf" content="4e804ecf-a0d6-4633-a4bd-71f648c83248"/>
+		<meta name="_csrf_header" content="X-CSRF-TOKEN"/>
+		
+		<title>우리나라 교육과정 - NCIC 국가교육과정정보센터</title>
+		
+		<link rel="shortcut icon" href="/images/default/main/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/board.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/calendar.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/member.css?v=0.1" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/xeicon.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/remixicon.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/krds/common.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/krds/component.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/krds/krds_tokens.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/default/layout.css?v=0.6" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/default/layout_content.css?v=0.3" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/default/content.css?v=0.3" media="screen" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="/css/plugin/jquery-ui-timepicker-addon.css" media="screen">
+		<link rel="stylesheet" href="/css/plugin/swiper.min.css"/>
+		<link rel="stylesheet" href="/css/plugin/font-awesome.min.css" />
+		<link rel="stylesheet" href="/js/plugin/lightbox/jquery.magnify.min.css" />
+		<link rel="stylesheet" href="/js/plugin/modal/jquery.modal.min.css" />
+		<link rel="stylesheet" href="/css/plugin/preloader.css">
+		<link rel="stylesheet" href="/js/plugin/tree/skin-win8/ui.fancytree.min.css" />
+		
+		<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/js/jquery_ui-1.12.1.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script> 
+		<script type="text/javascript" src="/js/content.js"></script>
+		<script type="text/javascript" src="/js/plugin/jquery-ui-timepicker-addon.js"></script>	
+		<script type="text/javascript" src="/js/menu/menu.js"></script>
+		<script type="text/javascript" src="/js/plugin/jquery.bxslider.min.js"></script>
+		
+		<script type="text/javascript" src="/js/core/dc_ajax.js"></script>
+		
+		<script src="/js/plugin/swiper.min.js"></script>
+		<script src="/js/plugin/lightbox/jquery.magnify.min.js"></script>
+		<script src="/js/plugin/modal/jquery.modal.min.js"></script>
+		<script src="/js/plugin/jquery.preloader.min.js"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script type="text/javascript" src="/js/krds/ui-script.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+		<script src="/js/plugin/tree/jquery.fancytree-all-deps.min.js"></script>
+		<script type="text/javascript" src="/js/ncic/search.js"></script>
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JDL5M35V3P"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-JDL5M35V3P');
+		</script>
+		
+		
+		
+		<script>
+			var sub = ''
+			var csTkn = $("meta[name='_csrf']").attr("content")
+			var csTknH = $("meta[name='_csrf_header']").attr("content");
+			
+			//메뉴관련
+			var menuCode = 'org_list';
+			var leftMenuUse = '1';
+			var tapMenuUse = '0';
+			
+			const ST = {
+		        
+		            SUCCESS: 'success',
+		        
+		            NODATA: 'NoData',
+		        
+		            ERROR: 'fail',
+		        
+		            ERROR_MSG: '정상적인 접근이 아닙니다.'
+		        
+		    };
+			
+			$(document).ready(function(){
+				
+				//이용약관 등의 회원 서비스일 경우 로그인 했을 때 로그인 등의 메뉴를 지우기 위한 함수
+				if($('.left_title').text() == '회원서비스'){
+					var userLevelNum = '0';
+					removeLeftMenu($('ul.left_menu_ul li'), userLevelNum);
+				}
+				
+				if('N' != 'Y'){
+					$('.krds-side-navigation').hide();
+				}
+		        
+		        /* START : 임시비밀번호 발급 여부 확인 */
+	            let isTempPw = '';      // 임시 비밀번호 발급 여부, 1: 발급
+	            let currPath = $(location).attr('pathname');
+	            let returnPath = "/mbr/edit_account_confirm.do";
+	            let exceptPaths = [
+	                
+	                    "/mbr/edit_account_confirm.do",
+	                
+	                    "/mbr/edit_account.do",
+	                
+	                    "/mbr/mypage.do"
+	                
+	            ];        // 비밀번호 변경 시 수행되는 api는 제외 
+	            
+	            if(isTempPw == '1' && exceptPaths.indexOf(currPath) < 0){
+	                openAlertPopup('임시 비밀번호를 발급받으신 경우 [회원정보 수정] 페이지에서 비밀번호를 변경하셔야 합니다.', function() {
+	                    location.href = returnPath;
+	                });
+	            } 
+	            /* END */
+				
+				//모바일 탭메뉴
+				$('.left_menu > ul').addClass('tab_ul');
+				var ts = 0;
+				$('.tab_view').click(function(){
+					if(ts == 0){
+						$(this).addClass('on');
+						$('.tab_ul').slideDown(300);
+						ts = 1;
+					}else{
+						$(this).removeClass('on');
+						$('.tab_ul').slideUp(300);
+						ts = 0;
+					}
+				});
+				$(window).resize(function(){
+					if($(window).width() > 1030){
+					  $('.tab_ul').css('display','flex');
+					}else{
+					  $('.tab_ul').css('display','');
+					  $('.tab_view').removeClass('on');
+					  ts = 0;
+					}
+				});
+				
+				//alert 팝업 닫기버튼
+				$('#alert .ico-popup-close').click(function(){
+					$(this).parent().parent().parent().hide();
+				});
+				
+				//최근 검색어
+				renderRecentSearchesTop();
+				getPplrWord();		//인기검색어
+			})
+			
+			function total_search(){
+				var searchTxt = $.trim($('input[id="search"]').val());
+				if(searchTxt == ''){
+					openAlertPopup('검색어를 입력해주세요');
+					$('input[id="search"]').focus()
+					return false;
+				} else {
+					$('form[id="search-form"]').submit();
+				}
+			}
+		</script>
+	</head>
+	<body>
+	
+	   <!-- 2) 커스텀 셀렉트 -->
+		<div id="skipNavi">
+		    <h1><a href="#container">본문 바로가기</a></h1>
+		    <h1><a href="#nav">주메뉴 바로가기</a></h1>
+		    <h1><a href="#footer">하단메뉴 바로가기</a></h1>
+		</div>
+		
+		<div id="wrap">
+			<!-- header -->
+			<header id="krds-header">
+				<!-- 헤더 컨텐츠 영역  -->
+				<div class="header-in">
+					<!-- 헤더 상단 기타메뉴 -->
+					<div class="header-container">
+						<div class="inner">
+							<div class="header-utility">
+								<ul class="utility-list">
+									<li class="lang_select krds-drop-wrap">
+										<i class="svg-icon ico-global"></i>
+										<!-- <label for="langSelect" class="sr-only">언어 선택</label>
+ 										 <select id="langSelect" aria-label="언어 선택">
+										  <option value="ko">한국어</option>
+										  <option value="en">English</option>
+										</select> -->
+										
+										<button type="button" class="krds-btn small text drop-btn">언어변경 <i class="svg-icon ico-toggle"></i></button>
+										<div class="drop-menu">
+											<div class="drop-in">
+												<ul class="drop-list" id="langSelect" aria-label="언어 선택">
+													<li><button class="item-link" type="button" value="ko">한국어</button></li>
+													<li><button class="item-link" type="button" value="en">English</button></li>
+												</ul>
+											</div>
+										</div>
+					                </li>
+									<li><a class="krds-btn small text"  href="/cntnt/sitemap.do">누리집안내지도</a></li>
+									<!-- resize -->
+									<li class="krds-drop-wrap krds-resize" data-adjust="scale">
+									  <button type="button" class="krds-btn small text drop-btn">화면크기 <i class="svg-icon ico-toggle"></i></button>
+									  <div class="drop-menu">
+									    <div class="drop-in">
+									      <ul class="drop-list">
+									        <li><button type="button" class="item-link sm" data-adjust-scale="sm">작게</button></li>
+									        <li><button type="button" class="item-link md active" data-adjust-scale="md">보통</button></li>
+									        <li><button type="button" class="item-link lg" data-adjust-scale="lg">조금 크게</button></li>
+									        <li><button type="button" class="item-link xlg" data-adjust-scale="xlg">크게</button></li>
+									        <li><button type="button" class="item-link xxlg" data-adjust-scale="xxlg">가장크게</button></li>
+									      </ul>
+									      <div class="drop-bottom">
+									        <button type="button" class="krds-btn medium text" data-adjust-scale="md"><i class="svg-icon ico-reset"></i> 초기화</button>
+									      </div>
+									    </div>
+									  </div>
+									</li>
+									<!-- //resize -->
+								</ul>
+							</div>
+							<div class="header-branding">
+								<h2 class="logo">
+									<a href="/index.do">
+										<img src="/images/default/main/logo.svg" alt="NCIC 국가교육과정정보센터" />
+									</a>
+								</h2>
+								<div class="header-actions">
+									<button type="button" class="btn-navi navi-row sch open-modal" title="통합검색 레이어" data-target="popTotalSch" tabindex="0">통합검색</button>
+									
+										
+											<a href="/login.do" class="btn-navi  navi-row login">로그인</a>
+											<a href="/mbr/signup/1.do" class="btn-navi navi-row join">회원가입</a>
+										
+										
+									
+									<button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- //헤더 상단 기타메뉴 -->
+					
+				    <!-- 메인메뉴 : 데스크탑 -->
+				    <nav class="krds-main-menu">
+				      <div class="inner">
+				      	<html>
+ <head></head>
+ <body>
+  <ul class="gnb-menu">
+   <li><a href="/inv/org/list.do" class="gnb-main-trigger is-link first content109 org_list onMenu" data-trigger="gnb">우리나라 교육과정</a></li>
+   <li><a href="/inv/wldorg/list.do" class="gnb-main-trigger is-link first content121 " data-trigger="gnb">세계 교육과정</a></li>
+   <li><a href="/edu/localCurriculum/list.do" class="gnb-main-trigger is-link first content135 localCurriculum" data-trigger="gnb">지역 교육과정</a></li>
+   <li><button type="button" class="gnb-main-trigger content144 " data-trigger="gnb">교육과정 자료실</button>
+    <div class="gnb-toggle-wrap">
+     <div class="gnb-main-list">
+      <div class="gnb-sub-list single-list between">
+       <div class="gnb-sub-content">
+        <ul>
+         <li><a href="/bbs/report/list.do">국가교육과정 조사ㆍ분석ㆍ점검 결과 보고서</a></li>
+         <li><a href="/cntnt/198.do">2022 개정 교육과정 자료</a></li>
+         <li><a href="/cntnt/199.do">2015 개정 교육과정 자료</a></li>
+         <li><a href="/bbs/standard/list.do">성취수준</a></li>
+         <li><a href="/cntnt/147.do">정책 자료</a></li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div></li>
+   <li><a href="javascript:openBlank(&quot;https://ncic.re.kr/ncrc/index.do&quot;)" class="gnb-main-trigger is-link first content213  blank" data-trigger="gnb">국가교육과정연구센터</a></li>
+   <li><button type="button" class="gnb-main-trigger content152 " data-trigger="gnb">NCIC 소개</button>
+    <div class="gnb-toggle-wrap">
+     <div class="gnb-main-list">
+      <div class="gnb-sub-list single-list between">
+       <div class="gnb-sub-content">
+        <ul>
+         <li><a href="/cntnt/153.do">NCIC란?</a></li>
+         <li><a href="/cntnt/154.do">원문&amp;표준 인벤토리란?</a></li>
+         <li><a href="/bbs/site/list.do">유용한 사이트</a></li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div></li>
+   <li><button type="button" class="gnb-main-trigger content148 " data-trigger="gnb">안내</button>
+    <div class="gnb-toggle-wrap">
+     <div class="gnb-main-list">
+      <div class="gnb-sub-list single-list between">
+       <div class="gnb-sub-content">
+        <ul>
+         <li><a href="/bbs/ncicnotice/list.do">공지사항</a></li>
+         <li><a href="/bbs/faq/list.do">FAQ</a></li>
+         <li><a href="/cntnt/151.do">Q&amp;A</a></li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div></li>
+  </ul>
+ </body>
+</html>
+				      </div>
+				    </nav>
+				    <!-- //메인메뉴 : 데스크탑 -->
+				</div>
+				<!-- //헤더 컨텐츠 영역  -->
+					
+	
+				<!-- 메인메뉴 : 모바일 -->
+				<div id="mobile-nav" class="krds-main-menu-mobile">
+					<div class="gnb-wrap">
+						<!-- gnb-header -->
+						<div class="gnb-header">
+							<!-- gnb-utils -->
+							<div class="gnb-utils">
+								<ul class="utility-list">
+									<li class="lang_select krds-drop-wrap">
+										<!-- 2) 커스텀 셀렉트 -->
+										<i class="svg-icon ico-global"></i>
+	 									<!-- <label for="langSelect" class="sr-only">언어 선택</label>
+										<select id="langSelect" aria-label="언어 선택">
+										  <option value="ko">한국어</option>
+										  <option value="en">English</option>
+										</select>  -->
+										
+										<button type="button" class="krds-btn small text drop-btn">언어변경<i class="svg-icon ico-toggle"></i></button>
+										<div class="drop-menu">
+											<div class="drop-in">
+												<ul class="drop-list" id="langSelect" aria-label="언어 선택">
+													<li><button class="item-link" type="button" value="ko">한국어</button></li>
+													<li><button class="item-link" type="button" value="en">English</button></li>
+												</ul>
+											</div>
+										</div>
+					                </li>
+									<li><a class="krds-btn xsmall text"  href="/cntnt/sitemap.do">누리집안내지도</a></li>
+									<!-- resize -->
+									<li class="krds-drop-wrap krds-resize" data-adjust="scale">
+									  <button type="button" class="krds-btn xsmall text drop-btn">화면크기 <i class="svg-icon ico-toggle"></i></button>
+									  <div class="drop-menu">
+									    <div class="drop-in">
+									      <ul class="drop-list">
+									        <li><button type="button" class="item-link sm" data-adjust-scale="sm">작게</button></li>
+									        <li><button type="button" class="item-link md active" data-adjust-scale="md">보통</button></li>
+									        <li><button type="button" class="item-link lg" data-adjust-scale="lg">조금 크게</button></li>
+									        <li><button type="button" class="item-link xlg" data-adjust-scale="xlg">크게</button></li>
+									        <li><button type="button" class="item-link xxlg" data-adjust-scale="xxlg">가장크게</button></li>
+									      </ul>
+									      <div class="drop-bottom">
+									        <button type="button" class="krds-btn medium text" data-adjust-scale="md"><i class="svg-icon ico-reset"></i> 초기화</button>
+									      </div>
+									    </div>
+									  </div>
+									</li>
+									<!-- //resize -->
+								</ul>
+							</div>
+							<!-- //gnb-utils -->
+							<!-- gnb-login -->
+							<div class="gnb-login">
+								
+									
+										<a href="/login.do" class="krds-btn large text"><i class="svg-icon ico-log"></i> 로그인을 해주세요</a>
+									
+									
+								
+							</div>
+							<!-- //gnb-login -->
+						</div>
+						<!-- //gnb-header -->
+						
+						<!-- gnb-body -->
+						<div class="gnb-body">
+							<html>
+ <head></head>
+ <body>
+  <div class="gnb-menu">
+   <div class="menu-wrap">
+    <ul>
+     <li><a href="#mGnb-anchor1" class="gnb-main-trigger">우리나라 교육과정</a></li>
+     <li><a href="#mGnb-anchor2" class="gnb-main-trigger">세계 교육과정</a></li>
+     <li><a href="#mGnb-anchor3" class="gnb-main-trigger">지역 교육과정</a></li>
+     <li><a href="#mGnb-anchor4" class="gnb-main-trigger">교육과정 자료실</a></li>
+     <li><a href="#mGnb-anchor5" class="gnb-main-trigger">국가교육과정연구센터</a></li>
+     <li><a href="#mGnb-anchor6" class="gnb-main-trigger">NCIC 소개</a></li>
+     <li><a href="#mGnb-anchor7" class="gnb-main-trigger">안내</a></li>
+    </ul>
+   </div>
+   <div class="submenu-wrap">
+    <div class="gnb-sub-list is-open" id="mGnb-anchor1">
+     <h2 class="sub-title"><a href="/inv/org/list.do" class="content109 org_list active">우리나라 교육과정</a></h2>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor2">
+     <h2 class="sub-title"><a href="/inv/wldorg/list.do" class="content121 ">세계 교육과정</a></h2>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor3">
+     <h2 class="sub-title"><a href="/edu/localCurriculum/list.do" class="content135 localCurriculum">지역 교육과정</a></h2>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor4">
+     <h2 class="sub-title">교육과정 자료실</h2>
+     <ul>
+      <li><a href="/bbs/report/list.do" class="gnb-sub-trigger content220 ">국가교육과정 조사ㆍ분석ㆍ점검 결과 보고서</a></li>
+      <li><a href="#" class="gnb-sub-trigger has-depth3 content198 ">2022 개정 교육과정 자료</a>
+       <div class="depth3-wrap">
+        <ul>
+         <li><a href="/bbs/eduNotice2022/list.do" class="depth3-trigger content219 ">공지사항</a></li>
+         <li><a href="/bbs/eduSian2022/list.do" class="depth3-trigger content201 ">개정시안</a></li>
+         <li><a href="/bbs/eduRef2022/list.do" class="depth3-trigger content202 ">홍보물</a></li>
+        </ul>
+       </div></li>
+      <li><a href="#" class="gnb-sub-trigger has-depth3 content199 ">2015 개정 교육과정 자료</a>
+       <div class="depth3-wrap">
+        <ul>
+         <li><a href="/bbs/eduNotice2015/list.do" class="depth3-trigger content203 ">공지사항</a></li>
+         <li><a href="/bbs/eduSian2015/list.do" class="depth3-trigger content204 ">개정시안</a></li>
+         <li><a href="/bbs/eduRef2015/list.do" class="depth3-trigger content205 ">관련자료</a></li>
+        </ul>
+       </div></li>
+      <li><a href="/bbs/standard/list.do" class="gnb-sub-trigger content146 ">성취수준</a></li>
+      <li><a href="#" class="gnb-sub-trigger has-depth3 content147 ">정책 자료</a>
+       <div class="depth3-wrap">
+        <ul>
+         <li><a href="/bbs/raw/list.do" class="depth3-trigger content160 ">관련 법령</a></li>
+         <li><a href="/bbs/etc/list.do" class="depth3-trigger content161 ">기타 자료</a></li>
+        </ul>
+       </div></li>
+     </ul>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor5">
+     <h2 class="sub-title"><a href="javascript:openBlank(&quot;https://ncic.re.kr/ncrc/index.do&quot;)" class="content213  blank">국가교육과정연구센터</a></h2>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor6">
+     <h2 class="sub-title">NCIC 소개</h2>
+     <ul>
+      <li><a href="/cntnt/153.do" class="gnb-sub-trigger content153 ">NCIC란?</a></li>
+      <li><a href="/cntnt/154.do" class="gnb-sub-trigger content154 ">원문&amp;표준 인벤토리란?</a></li>
+      <li><a href="/bbs/site/list.do" class="gnb-sub-trigger content155 ">유용한 사이트</a></li>
+     </ul>
+    </div>
+    <div class="gnb-sub-list" id="mGnb-anchor7">
+     <h2 class="sub-title">안내</h2>
+     <ul>
+      <li><a href="/bbs/ncicnotice/list.do" class="gnb-sub-trigger content149 ">공지사항</a></li>
+      <li><a href="/bbs/faq/list.do" class="gnb-sub-trigger content150 ">FAQ</a></li>
+      <li><a href="/cntnt/151.do" class="gnb-sub-trigger content151 ">Q&amp;A</a></li>
+     </ul>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+						</div>
+						<!-- //gnb-body -->
+						
+						<!-- gnb-close -->
+						<button type="button" class="krds-btn medium icon" id="close-nav">
+							<span class="sr-only">전체메뉴 닫기</span>
+							<i class="svg-icon ico-popup-close"></i>
+						</button>
+						<!-- //gnb-close -->
+					</div>
+				</div>
+				<!-- //메인메뉴 : 모바일 -->
+				
+				<!-- 통합검색 팝업 -->
+				<div id="popTotalSch" class="krds-modal fade" data-type="full" aria-labelledby="tit_total_sch_type1" role="dialog">
+			      <!-- modal-dialog -->
+			      <div class="modal-dialog">
+			        <div class="modal-content">
+			          <!-- modal title -->
+			          <div class="modal-header sr-only">
+			            <h2 id="tit_total_sch_type1" class="modal-title">통합검색</h2>
+			          </div>
+			          <!-- //modal title -->
+			          <!-- modal contents -->
+			          <div class="modal-conts">
+			            <!-- 통합검색 -->
+			            <div class="pop-total-serch-wrap">
+			              <!-- 통합검색 정보입력 영역 -->
+			              <div class="search-total-top">
+			                <!-- 검색어 타이틀 -->
+			                <div class="search-tit">
+			                  <label for="search-total-input-id-type1">검색어를 입력해주세요</label>
+			                </div>
+			                <!-- //검색어 타이틀 -->
+			
+			                <!-- 검색어 입력 폼 -->
+			                <div class="sch-form-wrap vert">
+			                  <form class="sch-form-wrap vert" id="search-form" action="/srch/total_search.do" method="get" accept-charset="utf-8">
+			                  <div class="sch-input">
+			                    <input type="text" class="krds-input xlarge" name="search" id="search" placeholder="검색어 입력" >
+			                    <button type="button" onclick="total_search()" class="krds-btn icon xlarge ico-search">
+			                      <span class="sr-only">검색</span>
+			                      <i class="svg-icon ico-sch"></i>
+			                    </button>
+			                  </div>
+			                  </form>
+			                </div>
+			                <!-- //검색어 입력 폼 -->
+			              </div>
+			              <!-- //통합검색 정보입력 영역 -->
+			
+			              <!-- 검색어 리스트 -->
+			              <div class="search-text">
+			              	<ul class="sch-info-list">
+			              		<li class="li1">
+			              			<h3 class="subject">인기검색어</h3>
+			              			<div class="tab-area">
+			              				<div class="tab line full">
+	                                         <ul role="tablist">
+	                                            
+	                                             <li id="tab_search_02" role="tab" aria-selected="false" aria-controls="panel_search_01" class="active"><button type="button" class="btn-tab" onclick="click_rrpl_tabs($(this))">주간<i class="sr-only created"> 선택됨</i></button></li>
+	                                             <li id="tab_search_03" role="tab" aria-selected="false" aria-controls="panel_search_02" class=""><button type="button" class="btn-tab" onclick="click_rrpl_tabs($(this))">월간</button></li>
+	                                         </ul>
+	                                     </div>
+	                                     <div class="tab-conts-wrap">
+	                                     	<section id="panel_search_01" role="tabpanel"  class="tab-conts active">
+	                                     		<ol class="list">
+									                <li>
+									                    <a href="/srch/total_search.do?search=교육과정정보">
+									                        <span class="ranking-txt">교육과정정보</span>
+									                        <span class="ranking-state new">
+									                            <em class="sr-only">신규</em>NEW
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=학교교육개선">
+									                        <span class="ranking-txt">학교교육개선</span>
+									                        <span class="ranking-state up">
+									                            <em class="sr-only">상승</em>1
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=교육정책">
+									                        <span class="ranking-txt">교육정책</span>
+									                        <span class="ranking-state down">
+									                            <em class="sr-only">하락</em>1
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=학습자료공유">
+									                        <span class="ranking-txt">학습자료공유</span>
+									                        <span class="ranking-state same">
+									                            <em class="sr-only">동일</em>
+									                        </span>
+									                    </a>
+									                </li>
+									            </ol>
+	                                     	</section>
+	                                     	<section id="panel_search_02" role="tabpanel" aria-labelledby="tab_search_02" class="tab-conts ">
+	                                     		<ol class="list">
+									                <li>
+									                    <a href="/srch/total_search.do?search=성취기준">
+									                        <span class="ranking-txt">성취기준</span>
+									                        <span class="ranking-state new">
+									                            <em class="sr-only">신규</em>NEW
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=한국어 표준 교육과정 ksl 차이">
+									                        <span class="ranking-txt">한국어 표준 교육과정 ksl 차이</span>
+									                        <span class="ranking-state up">
+									                            <em class="sr-only">상승</em>1
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=수상안전 교육자료">
+									                        <span class="ranking-txt">수상안전 교육자료</span>
+									                        <span class="ranking-state down">
+									                            <em class="sr-only">하락</em>1
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=학교 설명회 중학교 교육연구부 발표자료">
+									                        <span class="ranking-txt">학교 설명회 중학교 교육연구부 발표자료</span>
+									                        <span class="ranking-state same">
+									                            <em class="sr-only">동일</em>
+									                        </span>
+									                    </a>
+									                </li>
+									                <li>
+									                    <a href="/srch/total_search.do?search=교육시설안전성평가">
+									                        <span class="ranking-txt">교육시설안전성평가</span>
+									                        <span class="ranking-state same">
+									                            <em class="sr-only">동일</em>
+									                        </span>
+									                    </a>
+									                </li>
+									            </ol>
+	                                     	</section>
+	                                     </div>
+			              			</div>
+			              		</li>
+			              		<li class="li2">
+			              			<h3 class="subject">최근검색어</h3>
+			              			<ol class="list" id="recentSearchWord">
+			              				<li><a href="/srch/total_search.do?search=호수"><span class="word-txt">호수</span></a>
+			              					<button class="btn svg-icon ico-delete-fill small" data-index="0"><span class="sr-only">삭제</span></button>
+			              				</li>
+			              			</ol>
+			              			<button type="button" class="btn btn-txt ico-delete-fill sm" id="delete-all" onclick="clearSearches()">최근검색어 전체 삭제</button>
+			              		</li>
+			              	</ul>   
+			              </div>
+			              <!-- //검색어 리스트 -->
+			            </div>
+			            <!-- //통합검색 -->
+			          </div>
+			          <!-- //modal contents -->
+			          <!-- close button -->
+			          <button type="button" class="krds-btn xlarge icon btn-close close-modal">
+			            <span class="sr-only">닫기</span>
+			            <i class="svg-icon ico-popup-close"></i>
+			          </button>
+			          <!-- //close button -->
+			        </div>
+			      </div>
+			      <!-- //modal-dialog -->
+			      <div class="modal-back in"></div>
+			    </div>
+			    <!-- //통합검색 팝업 -->
+			</header>
+			<!-- //header -->
+			
+			
+			<div class="org_list" id="sepration" style="background: url('/images/default/content/sub_visual05.webp') 50% 0px no-repeat;" >
+				<h2>
+	 				우리나라 교육과정
+				</h2>
+			</div>
+			
+			<div id="container">
+				<!-- side navigation -->
+				<nav class="krds-side-navigation">
+				  <h2 class="lnb-tit">우리나라 교육과정</h2>
+				  <!-- lnb-list -->
+				  <ul class="lnb-list" role="menubar">
+				  	
+				  </ul>
+				  <!-- //lnb-list -->
+				</nav>
+				<!-- //side navigation -->
+	
+				
+				<div class="contents">
+					<div id="sub_menu_title">
+						<!-- breadcrumb -->
+						<!--  <nav class="krds-breadcrumb-wrap" aria-label="현재 경로" id="breadcrumb">
+						  <ol class="breadcrumb">
+						    <li class="home"><a href="/" class="txt">홈</a></li><li><a href="/inv/org/list.do"><strong>우리나라 교육과정</strong></a></li>
+						  </ol>
+						</nav> -->
+						<!-- breadcrumb -->
+
+						<div class="page-title-wrap" data-type="responsive">
+							<h1 class="h-tit">우리나라 교육과정</h1>
+							<div class="krds-drop-wrap h-tit-drop">
+							  <button type="button" class="h-tit drop-btn" aria-expanded="false">우리나라 교육과정</button>
+							  <div class="drop-menu" style="display: none;">
+								<div class="drop-in">
+								  <ul class="drop-list">
+								  	
+								  </ul>
+								</div>
+							  </div>
+							</div>
+						</div>
+					</div>
+					<ul class="tab_ul"></ul>	<!-- 탭메뉴 미사용시 삭제 -->
+					<div class="content_body">
+						
+
+
+    
+<script>
+    $(document).ready(function(){
+    	// 즐겨찾기
+        $(document).on('click' , '.wishBtn' , function(){
+        	const $btn = $(this);
+        	const $srText = $btn.find('i.sr-only.created');
+        	
+        	var rootIdx = '';
+            var year = '';
+            var orgType = 'ogi4';
+        	var tblType = 'org';
+        	
+        	if(tblType === 'org') {
+        		rootIdx = '10069460';
+                year = '2022';
+                
+        	} else if(tblType === 'std') {
+        		rootIdx = '';
+                year = '';
+        	}
+            
+            
+            if(rootIdx != ''){
+                $.ajax({
+                    url:'/api/inv/bookmark_change.do',
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        'rootIdx': rootIdx,
+                        'orgType': orgType,
+                        'openYear': year,
+                        'tblType': tblType
+                    },
+                    success : function(rst) {
+                        const result = rst.data;
+                        if(result.code == 'success'){
+                        	if(result.status == 'on') {
+                        		$btn.addClass('on');
+                                $btn.append('<i class="sr-only created"> 선택됨</i>');
+                        	} else if(result.status == 'off') {
+                        		$btn.removeClass('on');
+                                $srText.remove(); 
+                        	}
+                        	
+                        } else {
+                        	openAlertPopup(result.msg);
+                        }
+                    },
+                    error : function(e){
+                        handleAjaxError(e);
+                    }
+                });
+            }
+        })
+    })
+    
+    // 전체다운로드
+	function total_down(){
+		// window.open('', 'downView');
+		
+		var year = '2022';
+		var degree = '1014';
+		var cls = '1003';
+		var subject = '1713';
+		var mon = '12';
+		var orgType = 'ogi4';
+		
+		$('form[name="down_form"]').find('input[name="year"]').val(year);
+		$('form[name="down_form"]').find('input[name="degree"]').val(degree);
+		$('form[name="down_form"]').find('input[name="cls"]').val(cls);
+		$('form[name="down_form"]').find('input[name="subject"]').val(subject);
+		$('form[name="down_form"]').find('input[name="mon"]').val(mon);
+		$('form[name="down_form"]').find('input[name="orgType"]').val(orgType);
+		
+		$('form[name="down_form"]').submit();
+		
+		// window.open('/inv/org/total_download.do?year=2022&degree=1014&cls=1003&subject=1713&mon=12');
+	}
+</script>
+<div class="con invView" id="eduClass">
+	<div class="community-page-title ">
+		<h3 class="tit">
+	        
+	            <span>나. 성취기준</span>
+	        
+	    </h3>
+	
+		<button class="wishBtn "><i class="sr-only">찜하기</i></button>
+    
+    
+		<nav class="eduClass_location">
+		  <ol>
+		  	<li>2022 개정 시기 > 중학교(2022.12) > 국어 > 2. 내용 체계 및 성취기준</li>
+		  </ol>
+		</nav>
+	</div>
+	<div class="community-page-area">
+
+    
+    
+        
+            <div class="boardViewContent"><p class="1" style="line-height: 180%; margin-left: 0px; text-indent: 10pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 10.5pt;">(1) </span><span style="font-family: 굴림; font-size: 10.5pt;">듣기</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="font-family: 굴림; font-size: 10.5pt;">말하기</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;">
+<p class="2" style="margin-left: 67px; text-indent: -50.6pt; margin-top: 0px;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">화자의 의도와 관점을 추론하며 듣는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">설득 전략을 비판적으로 분석하며 듣는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-03] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">담화 공동체에 따른 듣기</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">말하기 방식의 다양성을 고려하여 듣고 말한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">상대의 말을 경청하고 상대의 감정과 입장에 공감하는 반응을 보이며 대화한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">면담의 다양한 목적과 상대를 고려하여 질문을 점검하고 효과적으로 면담한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">다양한 자료를 재구성하여 내용을 체계적으로 조직하고 청중이 이해하기 쉽게 발표한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-07] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">토의에서 다양한 의견을 교환하여 대안을 마련하고 문제를 해결한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-08] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">토론에서 반론을 고려하여 타당한 논증을 구성하고 논리적으로 반박한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-09] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">서로의 감정이나 바라는 바를 진솔하게 표현하면서 갈등을 조정한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-10] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">언어폭력의 문제점을 성찰하고</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">서로를 존중하는 표현을 사용하여 말한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">01-11] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">듣기</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">말하기 과정을 점검하고 듣기</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">말하기의 어려움을 효과적으로 조정한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-01] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 담화의 맥락을 고려하여 담화에서 표면적으로 드러나지 않는 숨겨진 요소를 추론하며 들음으로써 담화의 내용을 깊이 이해하는 능력을 기르기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">일상의 대화 상황에서 상대의 발화 의도 추론하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">정보 전달이나 설득 등 다양한 목적의 담화에서 여러 가지 정보와 상황 맥락을 고려하여 화자의 숨겨진 의도와 관점</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가치관 추론하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-03] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 개인이 속해 있는 담화 공동체의 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식이 가진 다</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">양성을 고려하여 구어 의사소통에 참여함으로써 사회</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">문화적 맥락에 맞는 의사소통 능력을</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;"> </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">기르기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">듣기</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">말하기 방식에 영향을 미치는 요인으로 세대</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">성</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">직업</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">지</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">역</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">공동체의 관심사나 이해관계</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">공동체의 언어문화와 관습 등이 있음을 이해하기</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">개인이 속</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">한 집단이나 공동체에 따라 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식이 다양할 수 있음을 이해하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식의 다양성에 대한 존중이 긍정적인 관계 형성과 유지에 기여함을 이해하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">서로 다른 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식을 이해하고 존중하는 태도 형성하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식이 상황 맥락이나 자신이 속한 공동체에 적절한지를 지속적으로 점검하여 개선하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-05] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 효과적으로 면담을 수행함으로써 목적과 상대를 고려하는 의사소통 능력을 기르기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기나 글쓰기를 위한 자료 수집</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">의사 결정</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">상담</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">선발 등 다양한 면담 목적과 상대를 고려하여 질문 마련하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">구조화 면담 또는 반구조화 면담 등 면담 유형에 적절한 면담 수행 계획 세우기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">면담 대상자의 입장이나 반응 등에 따라 면담 질문의 내용이나 순서</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">진행 방법 등을 조정하여 면담하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">면담 중에 추가 질문하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">면담 후 면담 계획이나 목적에 따라 면담이 원만하게 진행되었는지를 점검하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">질문의 의도와 답변자의 의도를 고려하여 면담 내용을 정리하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-06] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 말할 내용을 체계적으로 조직하여 청중이 이해하기 쉽게 발표하는 능력을 함양하기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 자료를 청자가 이해하기 쉬운 방향으로 재구성하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">발표 내용을 도입부</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">전개부</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">정리부로 나누어 체계적으로 구성하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">발표 목적이나 대상의 특성에 적절한 설명 방법 활용하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">청중이 이해하기 쉽게 발표하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">발표 준비와 실행 과정을 되돌아보고 수행의 적절성 점검하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-08] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 합리적이고 민주적인 의사 결정을 위한 토론 능력을 기르기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">토론 논제에 대한 찬성과 반대 입장별로 각 입장을 뒷받침하는 이유와 근거 마련하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">상대방이 제기할 수 있는 반론을 고려하여 논증 구성하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">주장</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이유</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">근거</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">반론에 대한 고려 등 논증 구성 요소들이 타당한지 비판적으로 분석하여 반박하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">논증의 논리적 전개 과정에서 논리적 허점이나 오류가 없는지 분석하여 반박하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-09] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 갈등을 조정할 수 있는 대화 방법을 배움으로써 상대방과의 관계를 원만하게 유지할 수 있는 능력을 기르기 위해 설정하였다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 생각과 감정을 진솔하게 표현하는 것이 왜 중요한지 이해하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">자신과 상대의 생각과 감정</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">욕구 등을 정확히 파악하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">어떠한 차이로 인해 갈등이 발생하게 되었는지 분석하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">사건에 대한 주관적 해석을 배제하고 객관적으로 전달하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">상황이나 사건에 대한 자신의 감정과 욕구를 진솔하게 표현하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">자신이 상대에게 바라는 것이 무엇인지 구체적으로 요청하기 방법을 활용하여 갈등 조정하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">갈등을 악화시킬 수 있는 표현 경계하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">상대의 의견과 감정을 존중하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">01-11] </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 전</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">중</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">후 과정을 점검하고 구어 의사소통 과정에서 발생하는 다양한 어려움을 효과적으로 조정하는 상위 인지 능력을 기르기 위해 설정</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">하였다</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">듣기</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">말하기 활동 후에 자신의 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">말하기 과정이 적절했는지 성찰하기</span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.6pt; font-size: 10.5pt;">듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 과정에서 부딪히는 어려움 분석하기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">향후의 듣기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기를 효과적으로 수행하기 위해 조정해야 할 점을 찾아 개선 계획 세워보기</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 불안을 느끼는 상황에서 이를 완화할 수 있는 방법을 연습하고 적용하기 등을 학습한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">구어 의사소통을 효과적으로 수행하는 데 필요한 능력과 태도를 바탕으로</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">교과 학습을 효과적으로 수행하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">원만한 대인 관계를 형성</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">유지하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회적 소통에 적극적으로 참여</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">할 수 있는 능력을 갖출 수 있도록 한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">일상의 친숙한 주제를 포함하여 지역사회 공동체</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">와 관련된 주제를 다루는 상황</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사적이고 비격식적 담화를 포함하여 공적이고 격식적인 담화 상황에 필요한 듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 과정과 전략</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">태도를 학습하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 과정을 지속적으로 점검하고 조정하는 상위 인지 활동도 수행하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">전형적인 구어 담화 자료 이외에 학습자들이 일상에서 접할 수 있는 다양한 매체를 활용하여 디지털 소통 공간에서 필요한 능력과 태도를 기르도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">휴대전화의 문자 메시지나 사회 관계망 서비스</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">(SNS)</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">에서 차별적 표현이나 폭력적인 언어를 사용하지 않았는지 스스로 성찰하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">서로를 존중하는 표현을 사용하도록 하여 디지털 기반의 소통 공간에서도 타인을 배려하고 공감하는 언어를 사용하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기의 상호 교섭성을 고려하여 듣기와 말하기를 효과적으로 통합하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">읽기 및 쓰기 영역과도 상호 연계하여 국어 활동의 총체성을 구현하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공감하며 듣기는 자신의 감정을 진솔하게 표현하며 갈등 조정하기와 연계하여 지도할 수 있으며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">설득 전략을 분석하며 듣기는 토론에서 논리적으로 반박하기와 연계하여 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 방식의 다양성을 고려하여 듣고 말하기는 공감적 대화하기와 연계하여 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">논설문을 읽고 설득 전략을 비판적으로 분석하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">면담 후 면담 보고서 작성하기 등과 같이 타 영역과 연계하여 지도할 수도 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">경청하기</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">질문하기</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">체계적으로 내용 구성하기</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">문제 해결을 위한 대안 탐색하기</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">논리적으로 반박하기 등의 기능은 대화</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">면담</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">발표</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">토의</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">토론 담화뿐만 아니라 다양한 담화를 듣고 말하는 데 두루 필요하므로</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">일반적인 구어 의사소통 상황으로의 전이 가능성을 고려하여 지도한다</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">설득 전략을 비판적으로 분석하며 듣기를 지도할 때는 연설을 비롯하여 일상에서 접할 수 있는 다양한 강연</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">광고 등 생활 속 담화 자료를 활용함으로써</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">비판적으로 사고하고 합리적으로 의사 결정 할 수 있는 능력을 갖추도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공감적 대화하기를 지도할 때는 공감적 대화가 원만한 대인 관계를 형성하고 유지하는 데 </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">필요할 뿐만 아니라</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">듣기</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">말하기 활동에 협력적으로 참여하는 토대가 된다는 점을 안내한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">나아가 다양한 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 배경을 가진 상대의 상황과 처지에서 문제를 바라보고 상대의 생각과 감정을 보다 깊이 이해하기 위해 노력하는 포용적 태도를 함양할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">면담하기를 지도할 때는 진로연계교육 차원에서 자신의 진로와 관련된 전문가와의 면담을 통해 학습자의 진로 탐색을 지원할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 관심 진로 분야를 결정하거나 다양한 진로를 모색하기 위한 목적으로 관련 전문가와의 면담을 준비하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">온라인상에서의 면담도 가능하므로 면담 대상자를 다각적으로 찾아보도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로에 대한 관심 분야가 유사한 동료 학습자들과 모둠을 이루어 면담을 수행하도록 지도할 수도 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">토론하기를 지도할 때는 반론이나 반박이 사람을 대상으로 하는 것이 아니라 상대의 논증을 대상으로 하는 것임을 안내한다</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">상대를 존중하는 태도와 감정적으로 대응하지 않고 논리적으로 판단하고 대응하는 자세를 갖추도록 하여 민주시민으로서의 기초 소양을 함양하도록 한다</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 태도의 내면화를 위해서 학습자 스스로 듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 활동의 다양성을 존중하고 있는지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">상대를 존중하는 표현을 사용하고 공감적 대화를 실천하고 있는지 등을 지속적으로 점검하는 성찰 일지 작성하기 활동을 활용할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">성찰 전</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">후에 어떤 차이가 있었는지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또 어떤 점을 개선해 나갈 것인지도 생각해 보도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">듣기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말하기 활동의 적절성과 효과성에 대해 피드백을 나눌 때는 교사나 동료 학습자의 피드백을 열린 마음으로 수용하되 자신의 목표를 고려하여 타인의 피드백을 현명하게 받아들이는 방법에 대해서도 생각해 보도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(2) </span><span style="text-indent: 10pt; font-size: 10.5pt;">읽기</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;"><span style="font-family: 굴림;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.6pt; margin-top: 0px;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">읽기는 사회</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">문화적 맥락에서 의미를 구성하는 과정임을 이해하며 사회적 독서에 참여하고 사회적 독서 문화 형성에 기여한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">읽기 목적과 글의 구조를 고려하며 글을 효과적으로 요약한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.6pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-03] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">독자의 배경지식과 글에 나타난 정보 등을 활용하여 글에 드러나지 않은 의도나 관점을 추론하며 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.8pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">복합양식으로 구성된 글이나 자료의 내용 타당성과 신뢰성</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">표현 방법의 적절성을 평가하며 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.6pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">글에 사용된 다양한 설명 방법과 논증 방법을 파악하고</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">그 타당성을 평가하며 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">동일한 화제를 다룬 여러 글이나 자료를 주제 통합적으로 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-07] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">진로나 관심 분야에 대한 다양한 책이나 자료를 스스로 찾아 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">02-08] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">자신의 독서 상황과 수준에 맞는 글을 선정하고 읽기 과정을 점검</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">조정하며 읽는다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">02-01] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 읽기가 다양한 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락에 속한 공동체 구성원들이 상호 작용하며 의미를 구성하는 과정임을 이해하고 사회적 독서 문화 형성에 기여하도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">독자는 자신이 처한 상황이나 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">역사적 배경에 따라 의미를 형성해 간다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 공동체 구성원들이 구성한 의미를 협력적으로 소통함에 따라 타인의 삶에 대한 이해나 공동체가 지향해야 할 가치를 발견할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적으로 가치 있는 주제의 글을 선정하여 읽기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락을 고려하여 필자의 의도 파악하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">독서 토론을 통해 구성원 간의 다양한 의미 교환하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락에서 새로운 의미 발견하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회적 독서 문화 형성하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">02-04] </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">이 성취기준은 복합양식으로 구성된 글이나 자료를 내용과 형식의 측면에서 비판적으로 평가하며 읽을 수 있는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">다양한 매체 환경에서는 문자 언어로만 이루어진 단일양식뿐만 아니라 문자</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">소리</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">그림</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">사진</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">동영상 등 다양한 기호가 함께 어우러진 복합양식의 글이나 자료를 비판적으로 읽을 수 있어야 한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">단일양식과 복합양식의 글이나 자료 비교하기</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">복합양식의 글이나 자료가 작성된 맥락 파악하기</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">복합양식으로 구성된 글이나 자료의 내용 타당성과 신뢰성</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">표현 방법의 적절성을 평가하며 읽기 등을 학습한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">02-06] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 동일한 화제를 다룬 여러 글이나 자료를 비판적으로 읽고 자신의 관점에 따라 의미를 재구성할 수 있는 주제 통합적 읽기 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">동일한 화제에 대해 서로 다른 관점을 지닌 글을 대조하며 읽거나 비슷한 주제를 담은 다양한 형식을 비교하며 읽으면서</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">독자는 편견이나 선입견을 배제하고 합리적으로 판단할 수 있게 된다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">여러 글이나 자료를 비교하며 읽는 과정에서 독자는 화제와 관련된 쟁점에 대한 충분한 이해를 바탕으로 자신의 관점을 세울 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">관점이나 형식이 다른 다양한 글이나 자료를 비교</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">분석하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">대상 화제에 대한 자신의 관점 수립하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">서로 다른 관점과 형식의 글을 자신의 관점을 토대로 통합하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 관점에 따라 의미를 구성하고 표현하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">02-07] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 자신의 진로나 관심 분야에 대한 책이나 자료 등을 스스로 탐색하고 선정하여 읽는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 다양한 글이나 자료를 자기 선택적으로 읽으며 주체적으로 자신의 진로나 관심 분야를 탐색할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 관심을 가지고 있는 진로나 관심 분야를 파악하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">도서관이나 인터넷 등에서 자신의 진로 탐색이나 관심 분야에 대한 깊이 있는 이해를 위해 적합한 책이나 자료를 탐색하고 선정하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">필요한 정보를 선별하며 읽기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로나 관심 분야가 유사한 학습자 간에 읽기 결과를 공유하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">전통적인 문어 자료인 책이나 글 이외에도 학습자들이 일상에서 접할 수 있는 다양한 매체 자료를 대상으로 읽기 능력을 기르도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글이나 자료의 내용 타당성 평가를 지도할 때는 내용의 신뢰성이나 타당성에 대한 평가를 중심으로 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">표현의 적절성을 평가할 때는 글의 의도나 목적에 따른 재현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">복합양식성 등의 요소에 대한 평가를 중심으로 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">예를 들어 신문의 경우는 표제나 기사 본문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사진 등을 통해서</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">광고의 경우는 배경</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이미지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">광고 문구</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">구도나 배치 등을 통해서 필자의 의도나 목적이 드러나는데</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이를 바탕으로 필자의 의도나 관점이 지나치게 편향되지 않았는지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">전달 효과가 잘 드러나는지 등을 평가할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이때 특정한 성</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">지역</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">연령</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">가정 배경</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인종</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">장애 등에 대한 고정 </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">관념이나 차별 등의 문제와 연계하여 글이나 자료를 비판적으로 살펴볼 수 있도록 지도한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">주제 통합적 읽기를 지도할 때는 동일한 화제에 대해 서로 다른 관점을 지닌 글이나 자료를 단순히 비교</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">대조하며 읽는 활동에 머무르지 않고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">편견이나 선입견을 배제하고 합리적으로 비판하며 자신의 관점을 설정하고 이에 따라 종합하고 재구성하며 읽을 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 매체를 통해 접하게 되는 복합양식 글이나 자료에 대해 내용의 타당성과 신뢰성을 비판적으로 평가하며 읽는 활동</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글에 사용된 논증의 타당성을 평가하며 읽는 활동 등을 통해 무비판적으로 정보를 수용하지 않고 평가하는 자세</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">편향되지 않은 관점으로 여러 자료를 참조하며 균형 있게 정보를 수용하는 자세 등을 지도하여 민주시민으로서의 소양을 함양할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">읽기 목적과 글의 구조를 고려하여 요약하기를 지도할 때는 선택</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">삭제</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">일반화</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">재구성 같은 요약의 규칙을 기계적으로 적용하여 중심 내용을 도출하기보다는 학습자의 읽기 목적을 고려하여 필요한 정보가 무엇인지를 확인한 후 이에 부합하는 중심 내용을 요약할 수 있도록 한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">이때 글의 구조를 고려하여 중심 내용을 요약하도록 안내하면 효과적이다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">글 전체에 대한 요약인 경우 글의 거시적 구조를 고려한 요약이 이루어질 수 있고</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">글 일부에 대한 요약인 경우 글의 미시적 구조 혹은 내용 전개 방식을 고려한 요약이 이루어질 수 있다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">글의 구조를 시각화하여 제시한 도해 조직자를 활용할 수 있고</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">짝이나 모둠 활동을 연계하여 요약하기 과정과 결과를 공유하며 효과적으로 전략을 내면화할 수 있도록 지도한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">해당 성취기준은 타 교과 학습을 위한 교과서 읽기</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">학습 자료 읽기 등의 상황과 연계하여 지도함으로써 교과 학습 능력과 읽기 능력이 균형 있게 발달할 수 있도록 지도한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">설명 방법과 논증 방법을 파악하고 타당성을 평가하며 읽기를 지도할 때는 정의</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">예시</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">비</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">교와 대조</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">분류와 구분</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">인과</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">분석 등의 설명 방법이나 연역과 귀납 등의 논증 방법에 대</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">한 개념을 단순히 파악하는 데 머무르지 않고 설명 방법이나 논증 방법의 타당성을 평가하며 글을 읽을 수 있도록 지도한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">설명 방법의 경우에는 이 글에서 사용한 설명 방법이 설명하려는 대상이나 개념에 적합한 것인지 판단한 후</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">그 효과와 적절성을 평가하도록 한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">논증 방법의 경우에는 주장과 주장을 뒷받침하는 주관적 요인인 이유</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">객관적 자료인 근거</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">예상되는 반론이나 이에 대한 반박 등의 논증 요소와 논증 요소 간의 관계</span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.7pt; font-size: 10.5pt;">글에 제시된 연</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">역이나 귀납 등의 논증 방법이 타당한지를 판단한 후</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">그 효과나 적절성을 평가하도록 한다</span><span style="text-indent: 0pt; letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자들이 글을 읽으면서 모르는 단어가 있는 경우 단어 자체의 요소나 문맥을 고려하여 단어의 의미를 추론하거나 국어사전을 활용하여 모르는 단어의 의미를 찾도록 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 단어의 의미 관계를 중심으로 유의어나 반의어를 찾거나 연관 어휘를 익혀 어휘를 확장해 갈 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자들이 글을 읽는 과정에서 새롭게 알게 된 단어나 교과 학습을 위한 목적으로 글을 읽으면서 새롭게 알게 된 개념어 등을 중심으로 나만의 단어 사전이나 단어 기록장 등을 만들어 학습자가 읽기 활동과 연계하여 자기주도적으로 어휘 학습을 하도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이때 단순히 국어사전 등의 의미를 그대로 옮기기보다 본래의 의미가 드러나되 이를 자신의 말로 풀어 쓰거나 용례 등을 새롭게 떠올려 써보는 등의 활동을 통해 단어의 의미를 학습자가 내면화할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">교육 기술의 발달에 따라 교육 현장의 여건과 학습자의 수준에 적절한 매체를 선정하여 학습 공간을 연결하고 확장하여 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">수업 상황에서는 학습관리시스템</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">(LMS), </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">교육 기술 수업 도구</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">실시간 쌍방향 수업 플랫폼</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">메타버스 등을 활용하여 실시간과 비실시간으로 독서 토론</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">대화</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">발표</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">질의응답 등을 수행하고 독서 과정과 결과에 대한 피드백을 나눌 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 독서 과정과 결과를 인터넷 게시판</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">누리집 등을 통해 공유할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">독서 감상문이나 서평 쓰기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">책 쓰기 등의 독서 활동 이외에도 카드 뉴스 만들기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">책 소개 영상 등을 제작하고 공유하는 활동 등 매체를 활용하여 다채로운 독서 활동을 수행할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로나 관심 분야에 관한 자기 선택적 읽기를 지도할 때는 진로나 관심 분야에 대한 다양한 독서 경험을 통해 관심 분야에 대해 더 깊이 이해하고 자신의 진로를 개발하고 탐색할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 진로 탐색 및 진로 개발</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">관심 분야에 대한 깊이 있는 이해 등의 읽기 목적을 설정하여 읽을거리를 스스로 찾아 한 학기 동안 적어도 한 편의 완결된 글을 </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">읽을 수 있도록 독려한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">자기 선택적 읽기는 학습자가 자신의 관심사나 흥미</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">수준을 고려</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">하여 스스로 책을 선정할 수 있도록 안내하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">교사가 제공하거나 안내한 책들을 바탕으로 책 선정하기 전략을 실제 적용하여 책을 스스로 고를 수 있도록 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 책 선정 과정과 결과를 공유하도록 하여 책 선정 시의 어려움을 진단하고 이를 해결하기 위한 방법 등을 피드백한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로나 관심 분야가 유사한 학습자들 간에 모둠을 구성하여 자기 선택적 읽기를 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">가정</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학교 도서관이나 지역 도서관</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">서점</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인터넷 등에서 책 선정하기 전략을 적용하여 책을 선정하도록 하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">독서 상황과 학습자의 수준 등에 따라 짧지만 완결된 한 편의 글을 읽을 수 있고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">한 권의 책을 긴 호흡으로 읽을 수도 있으며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">여러 권의 책이나 자료에서 필요한 정보를 선별하여 읽을 수도 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">한 학기 동안 여러 차시에 걸친 읽기 수업을 두고 설정한 성취기준임을 고려하여 지나치게 짧은 글이나 자료는 지양한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(3) </span><span style="text-indent: 10pt; font-size: 10.5pt;">쓰기</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;">
+<p class="2" style="margin-left: 99px; text-indent: -74.4pt; margin-top: 0px;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">대상의 특성에 적합한 설명 방법을 활용하여 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">복수의 자료를 활용하여 다양한 형식으로 정보를 전달하는 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-03] </span><span style="font-family: 굴림; letter-spacing: -0.8pt; font-size: 11pt;">주장을 뒷받침할 수 있는 타당한 근거를 들고 적절한 표현을 사용하여 주장하는 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.8pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 66px; text-indent: -50.2pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">의견 차이가 있는 사안에 대해 자료를 수집하고 사회</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">문화적 맥락을 고려하며 주장하는 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">자신의 삶과 경험을 바탕으로 정서를 진솔하게 표현하는 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">다양한 표현을 활용하여 자신의 생각과 느낌이 드러나는 글을 쓰고 독자와 공유한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-07] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">복합양식 자료를 활용하여 내용을 생성하고 글의 유형을 고려하여 내용을 조직하며 글을 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-08] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">쓰기 과정과 전략을 점검</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">조정하며 글을 쓰고</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">독자를 고려하여 글을 고쳐 쓴다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 66px; text-indent: -50.2pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">03-09] </span><span style="font-family: 굴림; letter-spacing: -0.3pt; font-size: 11pt;">언어 공동체의 구성원인 필자로서 자신에 대해 성찰하며</span><span style="font-family: 굴림; letter-spacing: -0.3pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.3pt; font-size: 11pt;">윤리적 소통 문화를 형성하는 </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">데에 기여한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">03-01] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 대상의 특성에 적합한 설명 방법을 활용하여 독자가 이해하기 </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">쉬운 글을 쓰는 데에 필요한 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">대상과 관련한 독자의 배경지식</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;"> </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">및 관심 고려하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정의</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인과</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">분석</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">분류 등 다양한 설명 방법을 익히고 전달하고자 하는 </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">정보의 특성을 고려하여 설명 방법 활용하기</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">대상의 특성을 효과적으로 전달하기 위한 글</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의 구조 및 표현 방법 이해하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">03-02] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 둘 이상의 자료를 활용하여 다양한 형식으로 보고서나 설명문을 쓰는 데에 필요한 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">객관적인 정보의 공유와 소통을 위해 </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">다양한 정보를 담고 있는 복수의 자료 활용하기</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">정보를 전달하는 글의 내용을 생성하는 과정</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">에서 책</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">신문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인터넷 등 다양한 매체에서 정보 수집하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">수집한 정보의 중요도 분석하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">수집한 정보 통합하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">쓰기 윤리를 지키며 자료 활용하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문자 언어와 함께 도표</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그림</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사진 등을 활용하여 정보를 전달하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">03-04] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 의견 차이가 있는 사안이 발생한 상황을 이해하고 쟁점을 분석하여 자신의 주장을 제시하는 글을 쓰는 데에 필요한 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의견 차이가 있는 사안 찾기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">쟁점을 분석하고 쟁점에 대한 다양한 의견과 자료를 수집하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">쟁점에 대한 자신의 관점을 수립하여 주장을 논리적으로 전개하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 주장이 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락 내에서 수용될 수 있도록 제시하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">03-07] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 글을 쓸 때 복합양식 자료를 활용하여 내용을 생성하고 글의 유형을 고려하여 내용을 조직하는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문자</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">소리</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그림</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사진</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">동영상 등이 결합된 복합양식 자료의 특징 및 유형 이해하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">복합양식 자료를 활용하여 내용 생성하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글의 유형을 고려하여 내용 조직하기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">03-08] </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">이 성취기준은 쓰기 과정과 전략을 점검</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">조정하며 글을 쓰고 독자를 고려하여 </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">글을 고쳐 쓰는 데에 필요한 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.9pt; font-size: 10.5pt;">독자를 고려하여 글을 고쳐 쓰는</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;"> </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">것은 글의 내용 차원</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">조직 차원</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">표현 차원에서 두루 이루어질 필요가 있다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">쓰기 과정과 전략을 점검</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">조정하기</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">독자의 지식</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">기대나 요구</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">태도를 분석하기</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">독자 분석의 결과를 반영하여 글을 고쳐쓰기 등을 학습한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">03-09] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 필자가 자신과 자신의 쓰기 과정 및 결과를 성찰하여 언어 공</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">동체의 구성원으로 성장하는 데에 필요한 능력과 태도를 기르기 위해 설정하였다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">필자로서</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;"> </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자기 자신이 어떤 사람인지 필자 정체성 성찰하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">언어 공동체의 개념 이해하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">윤리적 소통 문화의 특성과 필요성 이해하기</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">책임감 있게 글을 쓰는 태도 기르기 등을 학습한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정보 전달을 목적으로 하는 글을 쓸 때는 설명 대상의 특성을 분석하여 내용을 구성하고 이를 독자가 이해하기 쉽게 표현해야 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정보 전달이라는 목적에 부합하는 정보를 선별하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정보를 체계적으로 구조화하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">명료하게 표현해야 독자가 이해하기 쉬운 글을 쓸 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">설명문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">보고서</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">안내문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">보도 기사문 등 정보 전달을 목적으로 하는 다양한 유형의 글을 쓰는 기회를 제공하여 학습자가 쓰기 경험을 확장할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">설득을 목적으로 글을 쓸 때는 논리적 추론의 과정을 통해 자신의 주장을 독자에게 입증해야 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">주장을 명료하게 제시하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">타당한 근거로 주장을 뒷받침하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">논리적인 추론의 과정이 수반되어야 독자에게 설득력 있는 글을 쓸 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">논설문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">비평문</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">연설문 등 설득을 목적으로 하는 다양한 유형의 글을 쓰는 기회를 제공하여 학습자가 논리적이고 비판적으로 사고하는 경험을 확장할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">설득을 목적으로 하는 글을 지도할 때는 타당하고 신뢰할 만한 근거를 구체적으로 마련하고 적절한 표현을 사용하여 자신의 주장을 설득력 있게 펼치는 데에 중점을 둔다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이를 바탕으로 의견 차이가 있는 사안들을 분석하여 자신의 관점을 확립하고 이에 따른 의견을 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락 안에서 수용 가능한 글로 제시하도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 경험을 토대로 진솔하게 정서를 글로 표현하는 과정이 필자에게는 건강한 자아를 형성하게 도와주고 그 글을 읽은 독자에게는 감동과 즐거움을 줄 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정서를 표현하는 글을 지도할 때는 수필</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">편지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">영상</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">만화 등 다양한 유형을 활용하여 글을 쓸 수 있도록 지도하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 자신의 정서를 진솔하게 표현하도록 하는 데에 중점을 둔다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 표현을 활용하여 쓴 글을 독자와 공유하고 독자의 반응을 확인하는 경험을 통해 쓰기 능력의 향상을 도모하고 필자로서 성장할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">필자의 경험에 바탕을 둔 글 쓰기를 지도할 때는 학습자가 타인에게 드러내고 싶어 하지 않는 개인적인 내용이 노출되지 않도록 유의하여 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문자 언어로 된 전통적인 단일양식의 글뿐만 아니라 사진</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">소리</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">영상 등이 포함된 복합양식의 글을 쓸 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">복합양식의 특성을 고려하여 다양한 양식으로 표현할 수 있게 하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">활용하려는 자료에서 적절한 내용을 선정하고 조직할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 </span><span style="letter-spacing: -0.8pt; font-size: 10.5pt;">영역 성취기준과 통합하여 다양한 매체에서 내용을 수집하여 글을 쓰는 과정은 디지털 기술</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">을 </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">이해하고 활용하는 디지털 소양의 함양과 밀접한 관련이 있음을 인식할 수 있도록 지도한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">글을 쓰는 것은 상황 맥락과 사회</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">문화적 맥락 안에서 독자를 고려하여 문제를 해결하는 의미 구성 행위임을 이해하도록 지도한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">이에 따라 필자가 독자의 이해를 돕고 독자의 기대나 요구에 부합하기 위해 단어</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">문장</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">글 전체 수준에서 다양한 방법으로 자신의 글을 고쳐 쓸 수 있도록 지도한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">또한</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">학습자가 언어 공동체의 구성원인 필자로서 자신을 성찰하며 글을 쓰고 이를 언어 공동체와 공유하는 과정에서 준수해야 하는 윤리적인 태도를 갖추도록 지도한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로연계교육과 관련하여 자신의 관심과 진로를 탐색하는 글을 쓰고 이러한 경험을 성장의 계기로 삼도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 관심과 진로를 소개하고 이를 독자와 공유하는 과정을 통해 자신과 타인의 다양한 관심사와 세계를 이해할 수 있는 경험을 제공한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글의 유형에 따라 글을 쓸 때 특정한 글의 특성이나 쓰기 전략을 암기하도록 지도하는 것은 지양한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">쓰기에 대한 지식을 갖추는 것만으로는 쓰기를 원활하게 수행하기가 어렵다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글을 잘 쓰기 위해서는 상위 인지를 활성화하는 것이 필요하므로 학습자가 글을 썼던 경험을 바탕으로 자신이 특히 어려움을 겪었던 문제를 해결하고 자신의 쓰기 과정을 조정하며 글을 쓸 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자의 수준과 관심을 고려한 쓰기 과제를 제시하여 학습자가 한 편의 글을 온전하게 쓸 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 한 편의 글을 쓸 수 있는 시간을 보장하여 필자로서 성공 경험을 획득할 수 있도록 지도하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 쓴 글을 가능한 방법을 활용하여 발표하거나 출판하고 타인과 공유하여 그들의 반응을 접함으로써 필자로 성장할 수 있는 경험을 제공한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(4) </span><span style="text-indent: 10pt; font-size: 10.5pt;">문법</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;">
+<p class="2" style="margin-left: 99px; text-indent: -74.4pt; margin-top: 0px;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국어의 음운 체계와 문자 체계를 이해하고 국어생활에 활용한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">단어의 짜임을 분석하여 새말 형성의 원리를 이해한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-03] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">품사의 종류와 특성을 이해하고 국어 자료를 분석한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">문장의 짜임을 이해하고 표현 효과를 고려하여 문장을 구성한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">피동 표현과 인용 표현의 의도와 효과를 분석하고 상황에 맞게 활용한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">한글 맞춤법의 기본 원리와 내용을 이해하고 국어생활에 적용한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.6pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-07] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">세대</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">분야</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">매체에 따른 어휘의 양상과 쓰임을 분석하고 다양한 집단과 사회의 언어에 관용적 태도를 지닌다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">. </span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 66px; text-indent: -50.2pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">04-08] </span><span style="font-family: 굴림; letter-spacing: -0.7pt; font-size: 11pt;">자신과 주변의 다양한 국어 실천 양상을 비판적으로 분석하여 언어와 자아 및 세계 사이의 </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">관계를 인식한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(가<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-01] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 국어의 음운 체계와 문자 체계를 종합적으로 탐구함으로써</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말소리와 문자의 관련성을 체계적으로 이해하도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">말소리와 음운의 </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">관계</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">음운 체계에 대한 이해를 바탕으로 발음 및 표기를 정확하게 할 수 있도록 한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">이와</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;"> </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">관련지어 훈민정음 창제 정신과 원리를 중심으로 국어의 문자 체계를 탐구하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">디지털</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정보화 시대에 한글이 지니는 가치 및 발전 방향을 다각도로 탐색하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-03] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 품사의 종류와 특성을 이해하고 이를 바탕으로 다양한 국어 자료를 분석할 수 있는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">품사 분류를 통해 우리말에 대한 이해의 폭을 넓힘은 물론 품사의 특성을 고려해 정확하고 적절하게 단어를 사용할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문장을 단어별로 나누어 문장 안에서의 쓰임을 분석하거나</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">글이나 담화에 쓰인 단어의 정확성</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">적절성을 평가하거나</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">단어 부류의 빈도나 분포에 따라 글이나 담화의 특성을 간략히 기술하는 등</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">품사 지식을 활용해 국어 자료의 특성을 간단히 분석해 봄으로써 품사가 국어 탐구를 위한 기초적이고 유용한 도구임을 이해하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-05] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 피동 표현과 인용 표현을 활용해 의도를 정확하고 적절하게 표현하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그 효과를 분석하는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">피동 표현과 인용 표현의 형식적 특성과 기능</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">표현 효과를 학습하는 데 중점을 둔다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">피동 표현과 인용 표현의 사용을 표현 의도와 관련지어 이해하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그 효과를 분석하여 실제 국어생활에서 상황 맥락에 맞게 적절하게 활용할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-06] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 한글 맞춤법의 기본 원리를 이해하여 정확하고 교양 있는 국어생활을 영위하도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. &lsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공통국어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">2&rsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의 한글 맞춤법 관련 성취기준에서 내용이 심화</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">연계됨을 고려하여</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, &lsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">소리대로 적되 어법에 맞도록 함을 원칙으로 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.&rsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">라는 한글 맞춤법 총칙을 중심으로 한글 맞춤법의 기본 원리를 탐구하는 데 중점을 두고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">음운 변동에 대한 지식을 필요로 하는 한글 맞춤법 조항 등은 다루지 않는다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-07] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 세대</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">분야</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체에 따라 어휘가 변이되고 팽창하는 양상을 다양한 국어 자료를 바탕으로 탐구하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이를 바탕으로 다양한 집단과 사회의 언어에 대해 관용적 태도를 지니도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">어휘는 언어 사용의 구체적인 맥락과 세대</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">분야</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 등의 요인에 따라 다양한 양상으로 나타난다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">청소년어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">노인어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">전문어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인터넷 언어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">새말 등을 대상으로 어휘의 특성과 쓰임</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">변이와 생성 과정에 대한 탐구를 통해</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">들 어휘를 중심으로 한 언어 실천이 상황 맥락 및 사회</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">문화적 맥락을 고려한 사회적 행</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">위임을 이해하고 다양한 집단과 사회의 언어에 대해 관용적 태도를 견지할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">04-08] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 다양한 국어 자료에 대한 분석과 성찰을 통해 언어의 본질과 힘을 인식하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">언어 주체로서 능동적인 국어생활을 영위하도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">욕설이나 부정적 표현 및 말투 등이 개인의 정체성 형성에 미치는 영향을 분석하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의도를 제대로 전달하지 못하는 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">편견 및 고정 관념을 유발하거나 사실을 왜곡하는 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">갈등을 조장하거나 강화하는 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">규범과 관습에 적절하지 않은 표현 등이 개인 간 관계 형성 및 언어 공동체에 미치는 영향을 성찰하고 비판하여</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">언어가 자아 및 세계를 구성하는 핵심 자원임을 이해하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 국어 자료를 활용하여 국어의 구조와 작용을 다각도로 분석하고 탐구할 수 있도록 학습 활동을 설계하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">엄격한 절차 준수를 강조하기보다 문제를 포착하고 관련 자료를 능동적으로 수집</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">탐색하여 원리나 규칙을 발견하는 과정을 체험하는 데 중점을 둔다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 집단과 사회의 언어를 포함해 우리 주변의 다양한 국어 실천 양상을 다룰 때는</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">특정 지식을 전달하는 데 치중하기보다 우리 주변의 다양한 국어 자료를 풍부하게 수집하고 비판적으로 분석하는 등 언어의 힘을 다각도로 탐색해 보는 활동에 중점을 둠으로써</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">언어 주체로서 정체성을 형성해 나갈 수 있도록 이끈다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자들의 다양한 언어적 배경과 교실 맥락을 고려하여 특정 집단이나 사회의 언어에 편견을 가지지 않는 관용적인 태도도 함께 갖출 수 있도록 학습 활동을 유연하고 균형적으로 설계한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">피동 표현과 인용 표현을 지도할 때는</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이전 학교급에서 다룬 높임 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">지시</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">접속 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">시간 표현 등 문법 요소의 학습과 연계하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">형식적 특성에만 주목하기보다는 다양한 매체 자료 및 담화 유형에 나타난 피동 표현과 인용 표현의 표현 효과를 비판적으로 평가하는 활동을 통해</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">정보의 원천을 따져 사실과 의견을 구분하고 사태에 대한 필자의 입장과 태도를 읽어 내는 비판적 문식성과 민주시민 의식을 기를 수 있도록 안내한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">단어의 짜임을 지도할 때는</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">오늘날 국어 환경이 다변화됨에 따라 기존의 단어의 짜임에 부합하지 않는 새말들이 다양하게 만들어지고 있음을 이해하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국어 환경의 변화에 따라 단어의 형성 방법과 그에 따른 단어의 짜임이 달라질 수 있음을 함께 탐색해 볼 수 있도록 안내한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">외국어에서 차용된 새말의 적절성을 평가하고 이를 단어의 짜임을 고려해 우리말로 다듬어 보는 등의 활동을 통해</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">고유어의 가치를 탐색해 볼 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">한편</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">품사를 지도할 때는 초등학교 </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">3~4</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학년에서 학습한 지식을 심화</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">확장하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">품사가 우리 주변의 국어 자료를 분석하는 기초적이고 유용한 도구라는 점에 주목하여 그 실용성을 인식할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습한 지식과 원리를 활용하여 자신과 주변의 국어생활을 민감하게 살필 수 있도록 구조화된 점검표나 관찰 기록표</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">성찰 일지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자기 보고서 등 다양한 평가 도구를 학습자에게 제공하여 일상의 국어생활을 개선하고 이러한 성찰을 생활화할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(5) </span><span style="text-indent: 10pt; font-size: 10.5pt;">문학</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;"><span style="font-family: 굴림;"> </span>
+<p class="2" style="margin-left: 99px; text-indent: -74.4pt; margin-top: 0px;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">운율</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">비유</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">상징의 특성과 효과에 유의하며 작품을 감상하고 창작한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">갈등의 진행과 해결 과정을 파악하며 작품을 감상한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-03] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">인간의 성장을 다룬 작품을 읽으며 문학의 가치를 내면화한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">보는 이나 말하는 이의 특성과 효과를 파악하며 작품을 감상한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">작품에 반영된 사회</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">문화적 상황을 이해하며 작품을 감상한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">자신의 경험을 개성적인 발상과 표현으로 형상화한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-07] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">연관성이 있는 다른 작품들과의 관계를 파악하며 작품을 감상한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-08] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">근거를 바탕으로 작품을 해석하고</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">다른 해석들과 비교하여 자신의 해석을 평가한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p><span style="font-family: 굴림; font-size: 11pt;"> </span>
+<p class="2" style="margin-left: 67px; text-indent: -50.3pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">05-09] </span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">문학을 통해 타자를 이해하고 공동체의 문제에 참여하는 태도를 지닌다</span><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 11pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">05-04] </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">이 성취기준은 시의 화자 또는 소설의 시점 및 서술자에 주목하여 작품을 깊이</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;"> </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">있게 감상하는 능력을 기르게 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문학 작품에서 누가 보는가</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">누가 말하는가에 따라 전달하는 내용이나 작품의 분위기가 크게 달라진다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">보는 이나 말하는 이가 누구인지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">어떤 특성을 가지고 있는지를 파악하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">보는 이나 말하는 이의 특성이 작품 전체의 주제나 분위기에 어떤 효과를 미치는가에 주목하며 작품을 감상하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">05-06] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 학습자가 문학을 수용하는 데에 그치지 않고 자신의 삶의 경험을 창의적으로 표현하며 문학 문화를 향유할 수 있도록 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자로 하여금 여러 작품들의 개성적 발상과 표현을 참고하면서 반어</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">역설</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">풍자 등 다양한 문학적 표현 방식을 활용하여 자신의 경험을 개성적으로 형상화하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 과정에서 학습자가 자신의 경험을 성찰하고 새롭게 의미를 부여하며 가치를 찾도록 하는 한편</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">실제 작품 생산의 경험을 통해 개성적인 발상 및 표현에 대한 이해를 심화할 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">05-07] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 작품들 간의 관계에 주목하며 작품을 감상할 수 있게 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다른 문학 작품들과의 관계 속에서 작품을 다각도로 살핀다면 독자는 작품에 대해 더 다양하고 깊이 있는 감상이 가능해진다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">통시적</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공시적으로 유사한 주제나 형식을 가진 작품들</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">서로 영향을 주고받은 작품들을 찾아보고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품 간의 공통점 및 차이점</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">상호 간의 연관 관계를 파악하며 작품을 감상하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 학습자가 스스로 여러 작품 간의 관계를 찾아 새로운 의미 연관성의 맥락을 만들어 볼 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">05-08] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 주체적인 관점에서 작품을 해석하며 평가할 수 있는 능력을 기르게 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품을 해석할 때는 작품 속의 내용적</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">형식적 근거나 작품 밖의 맥락적 근거 등을 토대로 하여 작품을 해석하는 것이 필요하다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품 해석은 독자의 지식</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">경험</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">가치관 등을 바탕으로 이루어지는 과정이기 때문에 독자에 따라 얼마든지 달라질 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다만 이때 작품을 잘못 이해하는 오독을 범하지 않으려면 작품 안과 밖의 여러 근거를 바탕으로 작품을 해석해야 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">적절한 근거를 들어 작품을 해석하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이를 다른 사람들의 해석과 비교하면서 자기 해석의 적절성을 검토하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">05-09] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 내가 아닌 다른 사람들</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그리고 다른 존재들을 이해하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그들에 공감하는 능력을 기르며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그들과 어떻게 함께 살아갈 것인가를 공동체의 관점에서 고려하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공동체의 현안에 참여하는 태도를 가지게 하기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">타자를 이해하는 능력은 평화로운 공존과 협력적 연대를 위한 핵심적 요인이다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품 속 인물들의 생각과 마음을 이해하고 다양한 삶을 간접적으로 체험하도록 함으로써 타자에 대한 이해와 공감의 폭을 넓힐 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 가정</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학교</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이웃 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">생태환경 등 다양한 공동체의 문제와 그 해결 과정을 담은 작품을 읽고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자가 속한 공동체의 문제에 대한 인식 능력과 실천적 참여 능력을 함양하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문학에 사용되는 다양한 장치나 요소들을 이해하고 그 효과에 유의하여 작품을 해석하고 감상하는 능력을 갖출 수 있게 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">또한 개별 작품에 대한 이해에 그치지 않고 문학과 사회의 영향 관계나 다른 작품들과의 관계 등 작품을 둘러싼 다양한 맥락을 고려하며 작품을 수용하고 생산하는 능력을 기르도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문학 작품으로 형상화된 다양한 세계를 접하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품 속 인물들의 생각과 행위를 만나는 과정에서 여러 형태의 간접 경험을 하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그 과정에서 세계에 대한 이해의 폭을 넓힘으로써 다양성을 존중하고 포용력 있는 사람으로 성장할 수 있게 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">자신의 경험을 개성적인 발상과 표현으로 형상화하고 이를 공유하는 활동을 할 때 문자 언어는 물론 그림이나 음악</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">영상</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">디지털 텍스트 등 다양한 형식 및 매체를 적극적으로 활용할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준별로 강조되는 요소</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">예를 들어 </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&lsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">운율</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">비유</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">상징의 특성과 효과</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&rsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">나 </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&lsquo;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">개성적인 발상과 표현</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&rsquo; </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">등의 요소를 포함하여 창작을 하고자 할 경우</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의도한 요소가 충분히 반영되었는지 확인하며 창작을 수행할 수 있도록 적절한 단계에 점검과 조정 과정을 마련한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">작품을 해석할 때는 작품의 안과 밖에서 적절한 근거를 찾아 해석하기 위해 노력하도록 하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">여러 해석들을 비교하거나 평가할 때에도 적절한 근거에 기반하여 해석하고 있는지에 중점을 두어 활동할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">창작 활동에 대한 평가의 경우 최종 결과물의 완성도만으로 평가하기보다 학습자가 단계별</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">과정별로 나타내는 성취 정도를 평가할 수 있도록 하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">평가의 과정이 학습자에게 환류되면서 창작을 수행하는 데 도움이 될 수 있도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">무분별한 개발과 자원 남용으로 인해 파괴되어 온 지구에 대한 이야기를 담은 작품들을 통해 생태 위기의 심각성을 인식하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">공동체의 지속가능한 발전에 참여하는 태도를 기를 수 있게 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인간이 누려야 할 기본적인 권리에 대해 함께 생각하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">차별이나 불평등의 문제를 인식할 수 있는 작품들을 함께 읽는 가운데 민주적이고 평등한 사회를 만들어 가려는 적극적인 태도를 함양할 수 있도록 지도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">진로연계교육과 관련하여 학습자 자신의 적성과 미래 사회에 필요한 역량 등에 대해 생각하며 진로에 대한 고민을 담은 작품을 함께 읽고 미래 사회의 여러 진로들을 다양하게 탐색할 수 있게 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">읽기 영역의 진로 탐색을 목적으로 한 독서</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">([9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">02-07])</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">와 연계하여 지도할 수 있다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 10pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(6) </span><span style="text-indent: 10pt; font-size: 10.5pt;">매체</span></p>
+<table style="border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial;"> 
+<tbody> 
+<tr> 
+<td style="width: 551px; height: 22px; padding: 11px; border-width: 1px; border-style: dotted; border-color: rgb(0, 0, 0); vertical-align: middle;"><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 99px; text-indent: -74.4pt;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-01] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">대중매체와 개인 인터넷 방송의 특성과 영향력을 비교한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 67px; text-indent: -50.3pt; margin-top: 2px;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-02] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">소통 맥락과 수용자 참여 양상을 고려하여 상호 작용적 매체를 분석한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 67px; text-indent: -50.3pt; margin-top: 2px;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-03] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">복합양식성을 고려하여 영상 매체 자료를 제작하고 공유한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 67px; text-indent: -50.8pt; margin-top: 2px;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-04] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">매체 소통에서의 권리와 책임을 이해하고</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">, </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">수용자의 반응을 고려하며 매체 자료의 제작 과정을 성찰한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 67px; text-indent: -50.3pt; margin-top: 2px;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-05] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">매체 자료의 재현 방식을 이해하고 광고나 홍보물을 분석한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p><span style="font-family: 굴림;"> </span>
+<p class="0" style="margin-left: 67px; text-indent: -50.3pt; margin-top: 2px;"><span style="font-family: 굴림; letter-spacing: -0.5pt;">[9</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">국</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">06-06] </span><span style="font-family: 굴림; letter-spacing: -0.5pt;">사회</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">&sdot;</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">문화적 맥락을 고려하여 매체 자료의 공정성을 평가한다</span><span style="font-family: 굴림; letter-spacing: -0.5pt;">.</span></p></td> 
+</tr> 
+</tbody> 
+</table>
+<p><br></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(<span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">가</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 해설</span></span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">06-02] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 상호 작용적 매체의 특성을 이해하고 상황 맥락과 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락에 맞게 소통하는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">예를 들어 사회 관계망 서비스</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">(SNS)</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">는 생각</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">의견</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">관점 등을 비교적 자유롭게 공유할 수 있는 개방적인 공간이며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학교나 학급의 누리집은 공적인 정보를 공유하는 데 초점을 둔 공간이다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이처럼 소통 목적</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">소통 공간의 특성에 따라 참여자들이 소통하는 방식이 어떻게 달라지는지 다양한 각도에서 분석해 보고 자신의 소통 방식의 적절성에 대해서도 점검해 보도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">06-05] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 매체 텍스트가 현실을 재현하는 방식을 이해하는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 자료는 제작자의 의도와 관점이 반영된 재현물이라는 것에 대한 이해를 바탕으로 다양한 광고나 홍보물을 살펴보며 사건</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">쟁점</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">인물 등을 표현하기 위해 어떤 문구나 이미지가 선택되거나 배제되었는지를 탐구하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">사회상이나 특정 집단에 대해 어떤 고정 관념이 반영되어 있는지 분석하도록 한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">[9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">06-06] </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이 성취기준은 매체 자료를 공정성의 측면에서 비판적으로 이해하는 능력을 기르기 위해 설정하였다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">타당하고 신뢰성 있는 정보라 하더라도 그것이 의도에 따라 과도하게 반복</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">과장</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">축소되어 전달되는 경우에는 공정한 매체 자료라고 보기 어렵다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">특정 사건이나 쟁점을 다루는 매체 자료를 비교하고</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그 매체 자료가 제작된 사회</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">&sdot;</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">문화적 맥락이 어떠한지 파악한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">그리고 매체 자료가 특정 제품이나 업체를 홍보하고 있지는 않은지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">다양한 주장을 전달하지 않고 특정 입장을 지닌 주장을 전달하면서 한쪽으로 치우쳐 있지는 않은지</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">피상적인 사실 전달에 그쳐 특정한 쟁점이나 사건에 대한 진실을 간과하거나 호도하고 있지는 않은지 등을 점검한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;"><br></span></p>
+<p style="line-height: 180%;"><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">(</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">나</span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">) </span><span style="text-indent: 15pt; letter-spacing: -0.5pt; font-size: 10.5pt;">성취기준 적용 시 고려 사항</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 자료 활용 시 학습자들의 관심사와 또래 문화를 적극적으로 반영하되</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">흥미나 오락 위주의 자료</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">특정 양식이나 장르의 자료</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">특정 사회 구성원에 관한 자료 등에 국한되지 않도록 하며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">우리 사회의 여러 의제에도 적극적인 관심을 갖도록 안내한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 자료 제작을 위해 프로그램을 활용할 경우 학습자 간 프로그램 활용 수준을 고려하여 모둠 활동 형태의 수업을 운영할 수 있으며</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">이때 각기 다른 역할을 분담하여 모든 학습자들이 주도적으로 제작 활동에 참여할 수 있도록 유도한다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">학습자 개인의 매체 소통 태도 및 우리 사회의 매체 소통 문화를 점검하거나 성찰할 때는 학습자 스스로 바람직한 매체 소통 태도 및 소통 문화의 필요성에 대해 탐구하고 개선의 방향을 제안해 보도록 안내하는 것도 가능하다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">영상 매체 자료를 제작하는 활동은 문학 영역에서 자신의 경험을 개성적인 발상과 표현으로 형상화하는 활동</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">([9</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">05-06])</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">과 연계하여 지도할 수도 있다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">카메라의 거리와 각도</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">자막 등 시각적 요소와 배경 음악이나 효과음 등 청각적 요소의 특성을 이해하고</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">내용에 맞게 장면을 구성하며</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">주제와 목적에 맞게 편집하여 영상 매체 자료를 제작하도록 한다</span><span style="letter-spacing: -0.7pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">매체 소통 태도에 대한 학습에서</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">소통 참여자는 자신의 생각을 표현하고 존중받을 권리가 있다는 점</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">디지털 텍스트의 항존성</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">(</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">디지털 발자국</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">), </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">디지털 공간에서 매체 자료가 청중에게 미치는 영향 등을 고려해야 함을 이해하도록 한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">. </span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">또한 매체 자료를 공유한 이후에도 수용자의 반응을 살펴 자신의 매체 자료 제작 및 공유 과정을 성찰하도록 한다</span><span style="letter-spacing: -0.6pt; font-size: 10.5pt;">.</span></p>
+<p style="line-height: 180%;"><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">매체 자료의 공정성을 평가하는 활동은 읽기 영역에서 복합양식으로 구성된 글이나 자료의 내용 타당성과 신뢰성</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">, </span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">표현 방법의 적절성을 평가하며 읽는 활동</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">([9</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">국</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">02-04])</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">과 연계 가능하다</span><span style="letter-spacing: -0.5pt; font-size: 10.5pt;">.</span></p>
+<p class="3" style="margin-left: 26px; vertical-align: baseline;"><span style="font-family: 굴림; letter-spacing: -0.5pt; font-size: 10.5pt;"></span></p></div>
+        
+    
+
+		
+			
+				<div class="community-file-wrap only_invView_file">
+					<h4 class="con-tit on">다운로드 <i class="xi-angle-up"></i></h4>
+					<div class="oif_flip active">
+						<ul class="box-group-area">
+							
+								<li>
+								    <i class="svg-icon file_pdf"></i>
+									<p class="tit">[별책5] 국어과 교육과정.pdf [pdf]</p>
+									<div class="btn-wrap">
+								      <a href="/inv/org/download.do?seq=10003584&year=2022&orgType=ogi4" class="download krds-btn medium text noLoad">다운로드 <i class="svg-icon ico-down"></i></a>
+								    </div>
+								</li>
+							
+								<li>
+								    <i class="svg-icon file_hwp"></i>
+									<p class="tit">[별책5] 국어과 교육과정.hwp [hwp]</p>
+									<div class="btn-wrap">
+								      <a href="/inv/org/download.do?seq=10003585&year=2022&orgType=ogi4" class="download krds-btn medium text noLoad">다운로드 <i class="svg-icon ico-down"></i></a>
+								    </div>
+								</li>
+							
+						</ul>
+						<div class="down-link">
+							<button type="button" class="krds-btn medium" onclick="total_down()"><i class="svg-icon ico-down"></i> 전체 압축파일 받기</button>
+						</div>
+					</div>
+				</div>
+			
+		
+	</div>
+</div>
+
+<form name="down_form" action="/inv/org/total_download.do" method="get">
+    <input type="hidden" name="year" value="" />
+    <input type="hidden" name="degree" value="" />
+    <input type="hidden" name="cls" value="" />
+    <input type="hidden" name="subject" value="" />
+    <input type="hidden" name="mon" value="" />
+    <input type="hidden" name="orgType" value="" />
+</form>
+			
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- footer -->
+			<footer id="krds-footer">
+			  <div class="foot-quick">
+			    <div class="inner">
+			      <button type="button" class="link" onclick="window.open('https://www.ne.go.kr/index.do')" title="새창으로 열림">국가교육위원회</button>
+			      <button type="button" class="link" onclick="window.open('https://www.kice.re.kr/main.do?s=kice')" title="새창으로 열림">한국교육과정평가원</button>
+			    </div>
+			  </div>
+			  <div class="inner">
+			    <div class="f-logo">
+			    	<div class="logo1">
+			    		<img src="/images/default/main/f_logo1.svg" alt="대통령 소속 국가교육위원회">
+			    	</div>
+			    	<div class="logo2">
+			    		<img src="/images/default/main/f_logo2.svg" alt="한국교육과정평가원">
+			    	</div>
+			    </div>
+			    <div class="f-cnt">
+			      <div class="f-info">
+			        <p class="info-addr">(우) 27873 충청북도 진천군 덕산읍 교학로 8 한국교육과정평가원</p>
+			      </div>
+			    </div>
+			
+			    <div class="f-btm">
+			      <div class="f-btm-text">
+			        <div class="f-menu">
+			          <a href="/mbr/terms.do" class="">이용약관 </a>
+			          <a class="f-pri-quick" href="/mbr/privacy.do" class="">개인정보처리방침</a>
+			          <a href="/mbr/policy.do" class="">저작권 정책</a>
+			        </div>
+				    <p class="f-copy">
+				        
+						Copyright(C) 2026 by NCIC. ALL RIGHTS RESERVED. 
+					</p>
+			      </div>
+			    </div>
+			  </div>
+			</footer>
+			<!-- //footer -->
+		</div>
+		
+		<!-- 2023-11-22 웹 접근성 전용 confirm 레이어 팝업 추가 bk -->
+		<div class="layer_pop">
+			<div class="pop_con" tabindex="0">
+				<h4>팝업 제목이 나타납니다.</h4>
+				<p>팝업의 내용이 나타납니다.</p>
+				<div class="pop_btn">
+					<button type="button" class="pop_cancel"> 취소</button>
+					<button type="button" class="pop_confirm"> 확인</button>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 자동로그아웃 팝업 -->
+		<div id="autoLogout_comp" class="con_pop" style="display:none;">
+			<div class="popin alert">
+				<h3>자동로그아웃</h3>
+				<p class="close"><a href="javascript:close_comp();"><span>닫기</span><i class="xi-close-thin"></i></a></p>
+				<div class="txt">
+					<img src="/images/default/content/img_alert.png"  alt="" style="width:7rem;">
+					<h4>연장되었습니다.</h4>
+					<p class="logo"><img src="/images/default/main/logo_b.svg"  alt=""></p>
+				</div>
+			</div>
+		</div>
+		<!-- //자동로그아웃 팝업 -->
+	
+		<!-- 자동로그아웃 팝업 -->
+		<div id="autoLogout" class="con_pop" style="display:none;">
+			<div class="popin">
+				<h3>자동로그아웃</h3>
+				<p class="close"><a href="javascript:closeLogPop()"><span>닫기</span><i class="xi-close-thin"></i></a></p>
+				<div class="txt ac">
+					로그아웃까지 남은 시간
+					<h4 class="time">60초</h4>
+					장시간 활동이 없어 자동으로 로그아웃 됩니다.<br/>
+					계속 이용 하시려면 로그인 시간을 연장해주세요.
+				</div>
+				<div class="bottom_button">
+					<a href="/logout">로그아웃</a>
+					<a href="javascript:saveTime()" class="confirm">로그인시간 연장</a>
+				</div>
+			</div>
+		</div>
+		<!-- //자동로그아웃 팝업 -->
+		
+		<!-- 로딩 팝업 -->
+		<div class="con_pop" id="loading" style="display:none;">
+			<div class="popin">
+			<svg class="loading_spinner" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 100 100" style="filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 4px 16px);">
+				<circle cx="50" cy="50" r="30" fill="none" stroke="#D6DBE0" stroke-width="8"></circle>
+				<circle cx="50" cy="50" r="30" fill="none" stroke="var(--main)" stroke-width="8" stroke-linecap="butt" transform="rotate(-90 50 50)">
+				<animate attributeName="stroke-dasharray" values="0,188.4;188.4,0;188.4,188.4" dur="3s" repeatCount="indefinite"></animate>
+				<animate attributeName="stroke-dashoffset" values="0;0;-188.4" dur="3s" repeatCount="indefinite"></animate></circle>
+			</svg>
+			<p>잠시만 기다려주십시오</p>
+			</div>
+		</div>
+		<!-- //로딩 팝업 -->
+		
+		<!-- common alert 팝업 -->
+        <section id="commonAlert" class="notice_pop krds-modal fade shown" role="dialog" aria-labelledby="commonAlert">
+          <div class="modal-dialog">
+            <div class="modal-content">
+             <div class="modal_inn"> 
+                  <!-- modal title -->
+                  <div class="modal-header">
+                    <div class="pop_icon cmAlert">
+                        <span></span>
+                    </div>
+                    <h2 id="tit_modal_sample_01" class="modal-title">
+                      정상적인 접근이 아닙니다.
+                    </h2>
+                  </div>
+                  <!-- //modal title -->
+                  <!-- modal contents (별다른 내용이 없으면 안나오게 처리하셔도 무방합니다.) -->
+                  <div class="modal-conts" style="display: none;">
+                    <div class="conts-area">
+                     비교할 항목을 선택한 뒤 다시 시도해주세요
+                    </div>
+                  </div>
+               </div>
+              <!-- //modal contents (별다른 내용이 없으면 안나오게 처리하셔도 무방합니다.) -->
+              <!-- modal btn -->
+              <div class="modal-btn btn-wrap">
+                <button type="button" class="krds-btn medium primary close-modal">확인</button>
+              </div>
+              <!-- //modal btn -->
+              <!-- close button -->
+              <button type="button" class="krds-btn medium icon btn-close close-modal" style="display: none;">
+                <span class="sr-only">닫기</span>
+                <i class="svg-icon ico-popup-close"></i>
+              </button>
+              <!-- //close button -->
+            </div>
+          </div>
+          <div class="modal-back in"></div>
+        </section>
+        <!-- //common alert 팝업 -->
+        
+        <!-- 언어 번역 -->
+        <div id="gtranslate_wrapper"></div>
+    
+	    <script>
+	        window.gtranslateSettings = {
+	            default_language: "ko", // 원본 언어
+	            languages: ["ko", "en"],  // 표시할 언어만 지정
+	            wrapper_selector: "#gtranslate_wrapper",
+	            detect_browser_language: false // 자동 감지 비활성화
+	        };
+	    </script>
+	    
+	    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+	    <!-- // 언어 번역 -->
+	    
+
+<script>
+$(function () {
+  var SRC = "ko"; // 원본 언어
+
+  // --- 쿠키 유틸 ---
+  function setCookie(name, value, opts) {
+    opts = opts || {};
+    var c = name + "=" + value + "; path=/";
+    if (opts["max-age"]) c += "; max-age=" + opts["max-age"];
+    if (opts.domain)     c += "; domain=" + opts.domain;
+    document.cookie = c;
+  }
+  function clearGoogTrans() {
+    var past = "Thu, 01 Jan 1970 00:00:00 GMT";
+    var host = location.hostname.replace(/^www\./, "");
+    var domains = [location.hostname, "." + host];
+    $.each(domains, function(_, d){
+      document.cookie = "googtrans=; expires=" + past + "; path=/; domain=" + d;
+    });
+    document.cookie = "googtrans=; expires=" + past + "; path=/";
+    // 해시 제거(구버전 호환)
+    if (location.hash.indexOf("#googtrans/") === 0) {
+      try { history.replaceState(null, "", location.pathname + location.search); } catch(e){}
+    }
+  }
+  function setGoogTransCookie(src, tgt) {
+    var val = "/" + src + "/" + tgt;
+    var host = location.hostname.replace(/^www\./, "");
+    var domains = [location.hostname, "." + host];
+    $.each(domains, function(_, d){
+      setCookie("googtrans", val, {"max-age": 60*60*24*365, domain: d});
+    });
+    setCookie("googtrans", val, {"max-age": 60*60*24*365});
+    try { window.location.hash = "#googtrans/" + src + "/" + tgt; } catch(e){}
+  }
+
+  $('#langSelect .item-link').on('click', function(){
+    // 버튼 value가 'en' 또는 'kr' (혹은 'ko') 라고 하셨으니 정규화
+    var selVal = $(this).val();
+    var tgt = (selVal === 'kr') ? 'ko' : selVal;  // 'kr' -> 'ko'로 통일
+
+    if (selVal === SRC) {
+      // [한국어 복귀 시] GTranslate 설정을 원본(ko)으로 맞추고 캐시 우회 새로고침
+      try {
+        localStorage.setItem('__GT_TRANSLATE_LANGS', JSON.stringify({ srcLang: SRC, tgtLang: 'ko' })); // 로컬스토리지 값을 'ko'로 변경
+        if (typeof window.doGTranslate === 'function') {
+          window.doGTranslate('ko|ko');
+        }
+      } catch(e) {}
+      // 한국어 복귀: 쿠키/해시 삭제 후 리로드
+      clearGoogTrans();
+      window.location.reload();
+      return;
+    }
+
+    // 영어 등 타 언어: 쿠키 설정 후 리로드
+    clearGoogTrans();               // 이전 흔적 정리
+    setGoogTransCookie(SRC, tgt);   // 예: /ko/en
+    window.location.reload();
+  });
+});
+</script>
+	    
+	    <!-- 구글 번역 소스 백업
+	    <div id="google_translate_element" style="display:none;"></div>     // 숨김처리
+	        
+	    // 구글 번역 초기화 - 시작
+	    <script>
+	        function googleTranslateElementInit() {
+	            new google.translate.TranslateElement({
+	                pageLanguage: 'ko',
+	                includedLanguages: 'ko,en',
+	                autoDisplay: false
+	            }, 'google_translate_element');
+	        }
+	        
+	        document.addEventListener('DOMContentLoaded', function() {
+	            const select = document.getElementById('customTranslateSelect');
+	            
+	            select.addEventListener('change', function() {
+	                const lang = this.value;
+	                const googleCombo = document.querySelector('.goog-te-combo');
+	              
+	                if (!googleCombo) return;
+	
+	                if (lang === 'en') {
+	                    googleCombo.value = 'en';
+	                    googleCombo.dispatchEvent(new Event('change'));
+	                    
+	                } else if (lang === 'ko') {
+	                    // 원본 복원 - cookie 삭제 후 페이지 리로드
+	                    const domain = window.location.hostname;
+	                    document.cookie = 'googtrans=/ko/ko; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+	                    document.cookie = `googtrans=/ko/ko; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=; path=/;`;
+	                    location.reload();
+	                }
+	            });
+	        });
+	    </script>
+	    // 구글 번역 초기화 - 종료
+	     
+	    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>  // 스크립트 로드
+	    -->
+	    <script type="text/javascript">var _TRK_LID = "114470";var _L_TD = "ssl.logger.co.kr";var _TRK_CDMN = ".ncic.re.kr";</script>
+		<script type="text/javascript">var _CDN_DOMAIN = location.protocol == "https:" ? "https://fs.bizspring.net" : "http://fs.bizspring.net"; 
+		(function (b, s) { var f = b.getElementsByTagName(s)[0], j = b.createElement(s); j.async = true; j.src = "//fs.bizspring.net/fs4/bstrk.1.js"; f.parentNode.insertBefore(j, f); })(document, "script");
+		</script>
+		<noscript><img alt="Logger Script" width="1" height="1" src="https://ssl.logger.co.kr/tracker.1.tsp?u=114470&amp;js=N"/></noscript>
+		
+		
+		<!-- AceCounter Log Gathering Script V.8.0.AMZ2019080601 -->
+		<script language='javascript'>
+			var _AceGID=(function(){var Inf=['gtt6.acecounter.com','8080','AH6A35709843245','AW','0','NaPm,Ncisy','ALL','0']; var _CI=(!_AceGID)?[]:_AceGID.val;var _N=0;var _T=new Image(0,0);if(_CI.join('.').indexOf(Inf[3])<0){ _T.src ="https://"+ Inf[0] +'/?cookie'; _CI.push(Inf);  _N=_CI.length; } return {o: _N,val:_CI}; })();
+			var _AceCounter=(function(){var G=_AceGID;var _sc=document.createElement('script');var _sm=document.getElementsByTagName('script')[0];if(G.o!=0){var _A=G.val[G.o-1];var _G=(_A[0]).substr(0,_A[0].indexOf('.'));var _C=(_A[7]!='0')?(_A[2]):_A[3];var _U=(_A[5]).replace(/\,/g,'_');_sc.src='https:'+'//cr.acecounter.com/Web/AceCounter_'+_C+'.js?gc='+_A[2]+'&py='+_A[4]+'&gd='+_G+'&gp='+_A[1]+'&up='+_U+'&rd='+(new Date().getTime());_sm.parentNode.insertBefore(_sc,_sm);return _sc.src;}})();
+		</script>
+		<!-- AceCounter Log Gathering Script End -->
+		
+		
+		<script>
+(function () {
+	try {
+		var u   = (location.pathname + location.search).slice(0, 512);
+		var ref = (document.referrer || '').slice(0, 1000);
+		fetch('/api/stat/hit.do?u=' + encodeURIComponent(u) + '&ref=' + encodeURIComponent(ref),
+		      { credentials: 'same-origin' }).catch(function () {});
+	} catch (e) {}
+})();
+</script>
+
+		
+		
+	</body>
+</html>

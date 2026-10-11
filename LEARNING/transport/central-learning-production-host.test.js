@@ -7,6 +7,7 @@ const os=require('node:os');
 const path=require('node:path');
 const Host=require('./central-learning-production-host.js');
 const {LocalJsonStrongStore}=require('./local-json-strong-store.js');
+const TermCatalogResolver=require('../intake/term-catalog-source-resolver.js');
 
 const clientId='TAKY_PRODUCTION_HOST_TEST_CLIENT';
 const nowMs=Date.UTC(2026,8,30,9,0,0);
@@ -47,9 +48,13 @@ const independentIndexOwnerVerifier=()=>null;
       async commitUpload({asset_ref,upload_id,sha256}){const row=uploads.get(upload_id);if(!row||row.asset_ref!==asset_ref)return{ok:false};row.committed=true;row.sha256=sha256;return{ok:true,sha256,etag:'ASSET-E1'}},
       async createReadTicket({asset_ref}){const row=[...uploads.values()].find(x=>x.asset_ref===asset_ref&&x.committed);return row?{read_url:'https://read.example.test/asset',expires_at:'2026-09-30T09:05:00.000Z'}:null}
     };
+    const resolveCurriculumTerms=TermCatalogResolver.create({catalogPath:path.resolve(__dirname,'..','data','prelearned','subject-term-universe-elementary-v1.json'),allowProvisional:false});
     const common={clientIds:[clientId],oauth2Client,lookupMemberships,store,
       verifySpecialistEvidence,resolveIndexedEvidence,independentIndexOwnerVerifier,
       characterAssetObjectStore,
+      resolveLearnerProfile:async({member_id})=>{assert.equal(member_id,'CHILD_A');return{school_stage:'E5'}},
+      resolveCurriculumTerms,
+      resolveTermEvidence:async()=>[],
       allowedOrigins:['https://ready.example.test']};
     assert.throws(()=>Host.create({...common,verifySpecialistEvidence:null}),
       /PRODUCTION_SPECIALIST_VERIFIER_REQUIRED/);
@@ -61,7 +66,7 @@ const independentIndexOwnerVerifier=()=>null;
       /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
 
     const host=Host.create({...common,now:()=>nowMs});
-    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset','/api/family/session']);
+    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset','/api/family/session','/api/family/member-profile','/api/learning/term-recommendations','/api/family/user-data']);
     assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
     server=http.createServer(host.handler);
     await new Promise((resolve,reject)=>{
@@ -86,6 +91,38 @@ const independentIndexOwnerVerifier=()=>null;
 
     const session=await fetch(base+'/api/family/session',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},body:'{}'});
     const sessionBody=await session.json();assert.equal(session.status,200,JSON.stringify(sessionBody));assert.equal(sessionBody.session.families[0].family_id,'F1');assert.ok(sessionBody.session.families[0].authorized_member_ids.includes('CHILD_A'));
+
+    const memberProfileWrite=await fetch(base+'/api/family/member-profile',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{
+        member_id:'CHILD_A',profile_version:1,display_name:'지우',legal_name:'김지우',nickname:'지우',
+        family_role:'CHILD',birth_date:'2015-03-14',school_stage:'E5',share_name_mode:'NAME_NICKNAME',
+        status:'CONFIRMED',updated_at:'2026-10-09T00:30:00.000Z'
+      }})
+    });
+    const memberProfileWriteBody=await memberProfileWrite.json();
+    assert.equal(memberProfileWrite.status,200,JSON.stringify(memberProfileWriteBody));
+    assert.equal(memberProfileWriteBody.projection.school_stage,'E5');
+    const memberProfileRead=await fetch(base+'/api/family/member-profile',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({action:'GET',family_id:'F1',member_id:'CHILD_A'})
+    });
+    const memberProfileReadBody=await memberProfileRead.json();
+    assert.equal(memberProfileRead.status,200,JSON.stringify(memberProfileReadBody));
+    assert.equal(memberProfileReadBody.projection.nickname,'지우');
+
+    const userDataWrite=await fetch(base+'/api/family/user-data',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
+      body:JSON.stringify({record:{family_id:'F1',member_id:'CHILD_A',record_type:'ASSIGNMENT',record_id:'HOST-HW-1',source_app:'family-main',status:'CONFIRMED',recorded_at:'2026-09-30T09:00:00.000Z',due_at:'2026-10-01T09:00:00.000Z',payload:{title:'Host homework',subject:'Math',task_id:'HOST-T1'}}})
+    });
+    const userDataWriteBody=await userDataWrite.json();assert.equal(userDataWrite.status,200,JSON.stringify(userDataWriteBody));assert.equal(userDataWriteBody.storage_confirmed,true);assert.equal(userDataWriteBody.learning_context_queued,true);
+    const userDataRead=await fetch(base+'/api/family/user-data?family_id=F1&member_id=CHILD_A&record_type=ASSIGNMENT&record_id=HOST-HW-1',{
+      method:'GET',headers:{'Authorization':'Bearer '+token,Origin:'https://ready.example.test'}
+    });
+    const userDataReadBody=await userDataRead.json();assert.equal(userDataRead.status,200,JSON.stringify(userDataReadBody));assert.equal(userDataReadBody.record.member_id,'CHILD_A');assert.equal(userDataReadBody.record.status,'CONFIRMED');
+
+    const terms=await fetch(base+'/api/learning/term-recommendations',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},body:JSON.stringify({family_id:'F1',member_id:'CHILD_A',subject:'SCIENCE',unit_context:['용해'],limit:6})});
+    const termsBody=await terms.json();assert.equal(terms.status,200,JSON.stringify(termsBody));assert.equal(termsBody.ok,true);assert.equal(termsBody.learner_context.school_stage,'E5');assert.equal(termsBody.cards.length,6);assert.ok(termsBody.cards.every(x=>x.subject==='SCIENCE'));
 
     const assetCreate=await fetch(base+'/api/family/character-asset',{
       method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
@@ -117,7 +154,7 @@ const independentIndexOwnerVerifier=()=>null;
     });
     assert.equal(denied.status,403);
 
-    console.log('CENTRAL_PRODUCTION_HOST_PASS: identity auth, CORS, learning + character profile + private character asset endpoints');
+    console.log('CENTRAL_PRODUCTION_HOST_PASS: identity auth, CORS, learning + shared member profile + character profile + private character asset endpoints');
   }finally{
     if(server)await new Promise(resolve=>server.close(resolve));
     await fs.rm(root,{recursive:true,force:true});

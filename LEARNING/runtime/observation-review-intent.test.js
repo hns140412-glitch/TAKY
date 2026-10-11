@@ -72,6 +72,56 @@ assert.equal(mostRecent.decision.adaptive_plan.target_learning_ids.length,24);
 assert.equal(mostRecent.decision.adaptive_plan.target_learning_ids[0],'word-26');
 assert(!mostRecent.decision.adaptive_plan.target_learning_ids.includes('word-0'));
 assert.equal(mostRecent.learner_state.observed.performance_evidence_count,0);
+
+const playScope={member_id:'CHILD_A',subject:'수학',concept_skill_target:'number_bond_10'};
+const playObservation={event_id:'play-1',observed_at:'2026-10-08T01:00:00Z',
+ ...playScope,evidence_type:'PLAY_ACTIVITY_OBSERVATION',source_app:'play-camp',
+ instrument_version:'PLAY_CAMP_ACTIVITY_V1',learning_target_id:'number-bond:7-3',
+ verified_outcome:null,verified_performance:false,attempt_count:1,assisted:null,
+ raw_app_signals:{activity_id:'math-bond-10',loop_step:'CONNECT',
+  completion_state:'TEN_BOND_COMPLETED',interaction_count:3,creation_saved:false}};
+const playPrepared=Review.prepare([playObservation],playScope);
+assert.equal(playPrepared.ok,true);
+assert.equal(playPrepared.actionable,true);
+assert.equal(playPrepared.lane_counts.play_activity,1);
+assert.equal(playPrepared.play_observation_focus,'OBSERVE_EXPLANATION');
+assert.equal(Review.prepare([{...playObservation,attempt_count:2}],playScope).play_observation_focus,'OBSERVE_ERROR_REASON');
+assert.equal(Review.prepare([{...playObservation,raw_app_signals:{...playObservation.raw_app_signals,response_correct:false}}],playScope).play_observation_focus,'OBSERVE_ERROR_REASON');
+const withExplanation={...playObservation,event_id:'play-explain',raw_app_signals:{...playObservation.raw_app_signals,explanation_observed:true}};
+assert.equal(Review.prepare([withExplanation],playScope).play_observation_focus,'OBSERVE_SAME_CONCEPT_IN_ANOTHER_CONTEXT');
+const withTransfer={...withExplanation,event_id:'play-transfer',raw_app_signals:{...withExplanation.raw_app_signals,transfer_observed:true,same_concept_confirmed:true}};
+assert.equal(Review.prepare([withTransfer],playScope).play_observation_focus,'CONTINUE_OBSERVATION');
+assert.equal(Runtime.derive({scope:playScope,evidence:[],observation_only:[withTransfer]}).learner_state.model.mastery_estimate,null);
+assert.equal(playPrepared.evidence[0].verified_outcome,null);
+assert.equal(playPrepared.evidence[0].play.explanation_observed,null);
+const playDerived=Runtime.derive({scope:playScope,evidence:[],observation_only:[playObservation]});
+assert.equal(playDerived.ok,true,JSON.stringify(playDerived));
+assert.equal(playDerived.learner_state.observed.unique_evidence_count,0);
+assert.equal(playDerived.learner_state.model.mastery_estimate,null);
+assert.equal(playDerived.decision.execution_status,'PEDAGOGICAL_ACTION_AVAILABLE');
+assert.equal(playDerived.decision.observation_focus,'OBSERVE_EXPLANATION');
+assert(playDerived.decision.advisories.some(x=>x.code==='UNVERIFIED_ACTIVITY_OBSERVATION'));
+assert(playDerived.decision.pedagogical_actions.some(x=>
+ x.intent==='CONTINUE_OBSERVATION'&&x.basis.includes('PLAY_CAMP_OBSERVATION_ONLY')));
+assert.equal(playDerived.decision.adaptive_plan.activity_sequence_policy,'UNCHANGED');
+assert.deepEqual(playDerived.decision.adaptive_plan.target_learning_ids,['number-bond:7-3']);
+assert.equal(Runtime.validate(playDerived).ok,true);
+
+const secondPlayObservation={...playObservation,event_id:'play-2',
+ observed_at:'2026-10-08T01:05:00Z',learning_target_id:'number-bond:6-4',
+ attempt_count:1,assisted:false};
+const repeatedPlay=Runtime.derive({scope:playScope,evidence:[],
+ observation_only:[{...playObservation,attempt_count:1,assisted:false},secondPlayObservation]});
+assert.equal(repeatedPlay.ok,true,JSON.stringify(repeatedPlay));
+assert(repeatedPlay.decision.pedagogical_actions.some(x=>
+ x.intent==='CONTINUE_OBSERVATION'&&x.basis.includes('PLAY_CAMP_OBSERVATION_ONLY')));
+assert.equal(repeatedPlay.decision.pedagogical_actions.some(x=>
+ x.intent==='OFFER_ADJACENT_VARIATION'),false);
+assert.equal(repeatedPlay.decision.adaptive_plan.activity_sequence_policy,'UNCHANGED');
+assert.deepEqual(new Set(repeatedPlay.decision.adaptive_plan.target_learning_ids),
+ new Set(['number-bond:7-3','number-bond:6-4']));
+assert.equal(Review.prepare([playObservation,playObservation],playScope).evidence.length,1);
+
 const empty=Runtime.derive({scope,evidence:[],observation_only:[]});
 assert.equal(empty.ok,true);
 assert.equal(empty.decision.execution_status,'HOLD_FOR_MORE_RELIABLE_INTERPRETATION');

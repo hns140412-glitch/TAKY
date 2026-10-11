@@ -13,6 +13,7 @@ function derive(feedback_intent={}){
   const retrieval=names.has('RETRIEVAL_CHECKPOINT')||names.has('SHORT_DELAY_RETRIEVAL');
   const confusion=names.has('DISAMBIGUATE_CONFUSION');
   const fadeAssistance=names.has('REDUCE_ASSISTANCE_GRADUALLY');
+  const adjacentVariation=names.has('OFFER_ADJACENT_VARIATION');
 
   return {
     ok:true,
@@ -24,6 +25,7 @@ function derive(feedback_intent={}){
     add_retrieval_checkpoint:retrieval||targetedRecovery,
     recovery_floor:targetedRecovery?'HIGH':retrieval?'MEDIUM':null,
     assistance_policy:fadeAssistance?'FADE_GRADUALLY':'UNCHANGED',
+    activity_sequence_policy:adjacentVariation?'ADJACENT_VARIATION':'UNCHANGED',
     target_learning_ids:targetIds,
     rationale:intents.map(x=>({
       intent:clean(x.intent),
@@ -53,6 +55,7 @@ function validate(plan={}){
   if(plan?.ok!==true)issues.push('PLAN_NOT_OK');
   if(plan.authority!=='LEARNING_ADAPTIVE_PLAN_INTENT_ONLY')issues.push('AUTHORITY_INVALID');
   if(!['REDUCE','KEEP'].includes(plan.unit_span_policy))issues.push('UNIT_SPAN_POLICY_INVALID');
+  if(!['ADJACENT_VARIATION','UNCHANGED'].includes(plan.activity_sequence_policy))issues.push('ACTIVITY_SEQUENCE_POLICY_INVALID');
   const forbidden=['schedule_date','planner_date','due_at','due_date','deadline'];
   const walk=v=>{
     if(!v||typeof v!=='object')return false;

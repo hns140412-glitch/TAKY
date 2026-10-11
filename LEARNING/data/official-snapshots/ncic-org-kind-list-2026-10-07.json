@@ -1,0 +1,421 @@
+{
+  "status": "OK",
+  "data": {
+    "result": "success",
+    "kindList": [
+      {
+        "kindIdx": "1",
+        "kindNm": "총론",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_24"
+      },
+      {
+        "kindIdx": "59",
+        "kindNm": "총론",
+        "kindGrp": "4",
+        "kindKgrp": "특수학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_21&step3=_24"
+      },
+      {
+        "kindIdx": "37",
+        "kindNm": "총론",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_24"
+      },
+      {
+        "kindIdx": "17",
+        "kindNm": "총론",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_24"
+      },
+      {
+        "kindIdx": "2",
+        "kindNm": "국어",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_25"
+      },
+      {
+        "kindIdx": "60",
+        "kindNm": "특수교육 교과",
+        "kindGrp": "4",
+        "kindKgrp": "특수학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_21&step3=_25"
+      },
+      {
+        "kindIdx": "38",
+        "kindNm": "국어",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_25"
+      },
+      {
+        "kindIdx": "18",
+        "kindNm": "국어",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_25"
+      },
+      {
+        "kindIdx": "3",
+        "kindNm": "수학",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_26"
+      },
+      {
+        "kindIdx": "39",
+        "kindNm": "수학",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_26"
+      },
+      {
+        "kindIdx": "19",
+        "kindNm": "수학",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_26"
+      },
+      {
+        "kindIdx": "4",
+        "kindNm": "영어",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_27"
+      },
+      {
+        "kindIdx": "40",
+        "kindNm": "영어",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_27"
+      },
+      {
+        "kindIdx": "20",
+        "kindNm": "영어",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_27"
+      },
+      {
+        "kindIdx": "5",
+        "kindNm": "사회",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_28"
+      },
+      {
+        "kindIdx": "41",
+        "kindNm": "사회",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_28"
+      },
+      {
+        "kindIdx": "21",
+        "kindNm": "사회",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_28"
+      },
+      {
+        "kindIdx": "6",
+        "kindNm": "도덕",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_29"
+      },
+      {
+        "kindIdx": "42",
+        "kindNm": "도덕",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_29"
+      },
+      {
+        "kindIdx": "23",
+        "kindNm": "도덕",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_29"
+      },
+      {
+        "kindIdx": "7",
+        "kindNm": "과학",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_30"
+      },
+      {
+        "kindIdx": "24",
+        "kindNm": "과학",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_30"
+      },
+      {
+        "kindIdx": "43",
+        "kindNm": "과학",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_30"
+      },
+      {
+        "kindIdx": "8",
+        "kindNm": "체육",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_31"
+      },
+      {
+        "kindIdx": "25",
+        "kindNm": "체육",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_31"
+      },
+      {
+        "kindIdx": "44",
+        "kindNm": "체육",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_31"
+      },
+      {
+        "kindIdx": "26",
+        "kindNm": "음악",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_32"
+      },
+      {
+        "kindIdx": "45",
+        "kindNm": "음악",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_32"
+      },
+      {
+        "kindIdx": "9",
+        "kindNm": "음악",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_32"
+      },
+      {
+        "kindIdx": "46",
+        "kindNm": "미술",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_33"
+      },
+      {
+        "kindIdx": "10",
+        "kindNm": "미술",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_33"
+      },
+      {
+        "kindIdx": "27",
+        "kindNm": "미술",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_33"
+      },
+      {
+        "kindIdx": "11",
+        "kindNm": "실과(기술·가정)/정보과",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_34"
+      },
+      {
+        "kindIdx": "47",
+        "kindNm": "기술·가정",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_34"
+      },
+      {
+        "kindIdx": "28",
+        "kindNm": "기술·가정",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_34"
+      },
+      {
+        "kindIdx": "12",
+        "kindNm": "바른생활",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_35&step4=_35"
+      },
+      {
+        "kindIdx": "48",
+        "kindNm": "정보",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_35"
+      },
+      {
+        "kindIdx": "29",
+        "kindNm": "정보",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_35"
+      },
+      {
+        "kindIdx": "13",
+        "kindNm": "슬기로운 생활",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_35&step4=_35"
+      },
+      {
+        "kindIdx": "14",
+        "kindNm": "즐거운 생활",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_35&step4=_35"
+      },
+      {
+        "kindIdx": "49",
+        "kindNm": "제2외국어",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_36"
+      },
+      {
+        "kindIdx": "30",
+        "kindNm": "생활 외국어",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_36"
+      },
+      {
+        "kindIdx": "15",
+        "kindNm": "한국어 교육과정",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_36"
+      },
+      {
+        "kindIdx": "31",
+        "kindNm": "한문",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_37"
+      },
+      {
+        "kindIdx": "50",
+        "kindNm": "한문",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_37"
+      },
+      {
+        "kindIdx": "16",
+        "kindNm": "창의적 체험활동",
+        "kindGrp": "1",
+        "kindKgrp": "초등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_13&step3=_37"
+      },
+      {
+        "kindIdx": "51",
+        "kindNm": "교양",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_38"
+      },
+      {
+        "kindIdx": "32",
+        "kindNm": "환경",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_38"
+      },
+      {
+        "kindIdx": "53",
+        "kindNm": "과학 계열 선택 과목",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_39"
+      },
+      {
+        "kindIdx": "54",
+        "kindNm": "체육 계열 선택 과목",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_40"
+      },
+      {
+        "kindIdx": "55",
+        "kindNm": "예술 계열 선택 과목",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_41"
+      },
+      {
+        "kindIdx": "33",
+        "kindNm": "보건",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_39"
+      },
+      {
+        "kindIdx": "34",
+        "kindNm": "진로와직업",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_40"
+      },
+      {
+        "kindIdx": "56",
+        "kindNm": "전문 교과",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_42"
+      },
+      {
+        "kindIdx": "57",
+        "kindNm": "한국어 교육과정",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_43"
+      },
+      {
+        "kindIdx": "35",
+        "kindNm": "한국어 교육과정",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_41"
+      },
+      {
+        "kindIdx": "36",
+        "kindNm": "창의적 체험활동",
+        "kindGrp": "2",
+        "kindKgrp": "중학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_15&step3=_42"
+      },
+      {
+        "kindIdx": "58",
+        "kindNm": "창의적 체험활동",
+        "kindGrp": "3",
+        "kindKgrp": "고등학교",
+        "kindLink": "/inv/org/list.do?step1=_1&step2=_17&step3=_44"
+      }
+    ],
+    "kindGroup": [
+      "초등학교",
+      "중학교",
+      "고등학교",
+      "특수학교"
+    ]
+  },
+  "error": null
+}

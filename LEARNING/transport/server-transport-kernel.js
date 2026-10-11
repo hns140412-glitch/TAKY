@@ -81,6 +81,10 @@ function canonicalize(packet={}){
         reference_id:clean(candidate.reference_id)
       };
     }
+  }else if(source==='play-camp'){
+    e.evidence_type='PLAY_ACTIVITY_OBSERVATION';
+    e.verified_outcome=null;
+    e.verification=null;
   }else if(source==='snap-pop'){
     e.evidence_type='LEARNER_PRODUCTION_EVIDENCE';
     if(verificationInput?.verifier_type==='HUMAN_RUBRIC_BINARY'&&(verificationInput.outcome===0||verificationInput.outcome===1)&&
@@ -107,7 +111,7 @@ function canonicalize(packet={}){
     if(!clean(e[k]))issues.push('MISSING_'+k.toUpperCase());
   }
   if(!Number.isFinite(Date.parse(e.observed_at||'')))issues.push('INVALID_TIME');
-  if(!['hide-seek','ready-set','snap-pop'].includes(e.source_app))issues.push('SOURCE_APP_NOT_ALLOWED');
+  if(!['hide-seek','ready-set','snap-pop','play-camp'].includes(e.source_app))issues.push('SOURCE_APP_NOT_ALLOWED');
   return issues.length?{ok:false,reason:'CANONICAL_INVALID',issues}:{ok:true,evidence:e};
 }
 function verifiedReceipt(scopeRows=[]){

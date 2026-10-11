@@ -25,11 +25,13 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
   const state=learner_state.inferred||{};
   const suff=state.evidence_sufficiency||'NONE';
 
-  const reviewOnly=observation_review_actionable===true&&
-    (feedback_intent.intents||[]).some(x=>x.intent==='RETRIEVAL_CHECKPOINT'&&
-      (Array.isArray(x.bases)?x.bases:[x.basis]).includes('HIDE_MEMORY_ADVISORY_ONLY'));
+  const reviewBases=new Set((feedback_intent.intents||[]).flatMap(x=>
+    Array.isArray(x.bases)?x.bases:[x.basis].filter(Boolean)));
+  const hideReview=reviewBases.has('HIDE_MEMORY_ADVISORY_ONLY');
+  const playReview=reviewBases.has('PLAY_CAMP_OBSERVATION_ONLY');
+  const reviewOnly=observation_review_actionable===true&&(hideReview||playReview);
   if(suff==='NONE'){
-    if(reviewOnly)advisories.push({code:'UNVERIFIED_ADVISORY_RECHECK',priority:'MEDIUM'});
+    if(reviewOnly)advisories.push({code:playReview?'UNVERIFIED_ACTIVITY_OBSERVATION':'UNVERIFIED_ADVISORY_RECHECK',priority:'MEDIUM'});
     else blockers.push({code:'NO_EVIDENCE',priority:'HIGH'});
   }else if(suff==='SPARSE')advisories.push({code:'SPARSE_EVIDENCE',priority:'MEDIUM'});
 
@@ -75,6 +77,7 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
     },
     blockers,
     advisories,
+    observation_focus:feedback_intent.play_observation_focus||null,
     pedagogical_actions:actions,
     adaptive_plan:adaptivePlan,
     execution_status:hold?'HOLD_FOR_MORE_RELIABLE_INTERPRETATION':'PEDAGOGICAL_ACTION_AVAILABLE',

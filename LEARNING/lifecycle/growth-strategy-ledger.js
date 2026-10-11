@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto=require('node:crypto');
+const GrowLineage=require('./grow-lineage-packet.js');
 
 const VERSION='TAKY_GROWTH_STRATEGY_LEDGER_V1';
 const clean=v=>String(v??'').trim();
@@ -79,6 +80,36 @@ function append(ledgerInput={},packet={}){
     index_gap_decision:packet.index_gap_decision||null
   };
   const feedbackDigest=digest(content);
+  const recordedAt=clean(packet.recorded_at)||new Date(0).toISOString();
+  const outcomeEvent=GrowLineage.makeEvent({
+    grow_domain:'LEARNING_GROW',
+    stage:'OUTCOME',
+    producer:'growth-strategy-ledger',
+    source_ref:'LEARNING_RECEIPT:'+receipt.receipt_id,
+    parent_refs:[receipt.receipt_id],
+    authority:'REAL_LEARNING_EVIDENCE_RECEIPT',
+    recorded_at:recordedAt,
+    payload:{
+      scope_kind:'LEARNER_SCOPED',
+      verified_target:feedback.learning_strategy_feedback?.verified_target===true,
+      outcome:feedback.learning_strategy_feedback?.outcome??null,
+      observation_only:feedback.learning_strategy_feedback?.observation_only===true
+    }
+  });
+  const growthEvent=GrowLineage.makeEvent({
+    grow_domain:'LEARNING_GROW',
+    stage:'GROWTH',
+    producer:'growth-strategy-ledger',
+    source_ref:'LEARNING_GROWTH_CANDIDATE:'+feedbackDigest.slice(0,24),
+    parent_refs:[outcomeEvent.event_id],
+    authority:'LEARNING_STRATEGY_CANDIDATE_ONLY',
+    recorded_at:recordedAt,
+    payload:{
+      promotion_state:'CANDIDATE_ONLY',
+      mining_candidate:!!feedback.mining_strategy_feedback_candidate,
+      strategy_change_authorized:false
+    }
+  });
   const existing=ledger.receipt_bindings[receipt.receipt_id];
   if(existing){
     if(existing.feedback_digest_sha256!==feedbackDigest){
@@ -95,7 +126,7 @@ function append(ledgerInput={},packet={}){
   const entry={
     entry_id:'growth:'+feedbackDigest.slice(0,24),
     ledger_version:VERSION,
-    recorded_at:clean(packet.recorded_at)||new Date(0).toISOString(),
+    recorded_at:recordedAt,
     scope:{
       member_id:clean(scope.member_id),
       subject:clean(scope.subject).toLowerCase(),
@@ -115,7 +146,8 @@ function append(ledgerInput={},packet={}){
     index_gap_decision:packet.index_gap_decision||null,
     promotion_state:'CANDIDATE_ONLY',
     promotion_authority:false,
-    raw_evidence_copied:false
+    raw_evidence_copied:false,
+    grow_lineage_events:[outcomeEvent,growthEvent]
   };
 
   ledger.entries.push(entry);
@@ -170,6 +202,11 @@ function selfValidate(ledger={}){
     if(e.promotion_authority!==false)issues.push('PROMOTION_AUTHORITY_FORBIDDEN:'+i);
     if(e.raw_evidence_copied!==false)issues.push('RAW_EVIDENCE_COPY_FORBIDDEN:'+i);
     if(e.source_evidence?.raw_evidence_immutable!==true)issues.push('RAW_IMMUTABILITY_REQUIRED:'+i);
+    if(!Array.isArray(e.grow_lineage_events)||e.grow_lineage_events.length<2)issues.push('GROW_LINEAGE_EVENTS_REQUIRED:'+i);
+    for(const [j,event] of (e.grow_lineage_events||[]).entries()){
+      const checked=GrowLineage.validateEvent(event);
+      if(!checked.ok)issues.push(...checked.issues.map(x=>'GROW_LINEAGE_INVALID:'+i+':'+j+':'+x));
+    }
   }
   return {ok:issues.length===0,issues};
 }

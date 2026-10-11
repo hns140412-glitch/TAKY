@@ -1,0 +1,8 @@
+{
+  "schema": "TAKY_DATA_INDEX_OUTCOME_UTILITY_V1",
+  "authoritative": false,
+  "ranking_role": "SECONDARY_ONLY",
+  "precedence": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE",
+  "source_count": 0,
+  "by_source_id": {}
+}

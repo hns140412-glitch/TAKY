@@ -1,0 +1,3535 @@
+{
+  "schema": "TAKY_HANJA_CHAR_GLOSS_SEED_V1",
+  "chars": [
+    {
+      "char": "干",
+      "meanings": [
+        "막을"
+      ],
+      "readings": [
+        "간"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "葛",
+      "meanings": [
+        "칡"
+      ],
+      "readings": [
+        "갈"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "感",
+      "meanings": [
+        "느낄"
+      ],
+      "readings": [
+        "감"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "減",
+      "meanings": [
+        "줄일"
+      ],
+      "readings": [
+        "감"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "降",
+      "meanings": [
+        "떨어질"
+      ],
+      "readings": [
+        "강"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "改",
+      "meanings": [
+        "고칠"
+      ],
+      "readings": [
+        "개"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "槪",
+      "meanings": [
+        "대개"
+      ],
+      "readings": [
+        "개"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "開",
+      "meanings": [
+        "열"
+      ],
+      "readings": [
+        "개"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "擧",
+      "meanings": [
+        "들"
+      ],
+      "readings": [
+        "거"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "建",
+      "meanings": [
+        "아뢸"
+      ],
+      "readings": [
+        "건"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "結",
+      "meanings": [
+        "맺다·모이다",
+        "맺을"
+      ],
+      "readings": [
+        "결"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "耕",
+      "meanings": [
+        "밭갈"
+      ],
+      "readings": [
+        "경"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "系",
+      "meanings": [
+        "이어진 체계"
+      ],
+      "readings": [
+        "계"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "固",
+      "meanings": [
+        "응"
+      ],
+      "readings": [
+        "고"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "高",
+      "meanings": [
+        "높을"
+      ],
+      "readings": [
+        "고"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "困",
+      "meanings": [
+        "부족할"
+      ],
+      "readings": [
+        "곤"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "公",
+      "meanings": [
+        "공적"
+      ],
+      "readings": [
+        "공"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "共",
+      "meanings": [
+        "함께"
+      ],
+      "readings": [
+        "공"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "孔",
+      "meanings": [
+        "구멍"
+      ],
+      "readings": [
+        "공"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "恐",
+      "meanings": [
+        "두려울"
+      ],
+      "readings": [
+        "공"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "空",
+      "meanings": [
+        "빌"
+      ],
+      "readings": [
+        "공"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "果",
+      "meanings": [
+        "결과"
+      ],
+      "readings": [
+        "과"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "科",
+      "meanings": [
+        "과목"
+      ],
+      "readings": [
+        "과"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "官",
+      "meanings": [
+        "벼슬"
+      ],
+      "readings": [
+        "관"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "寬",
+      "meanings": [
+        "너그러운"
+      ],
+      "readings": [
+        "관"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "管",
+      "meanings": [
+        "대롱"
+      ],
+      "readings": [
+        "관"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "觀",
+      "meanings": [
+        "볼"
+      ],
+      "readings": [
+        "관"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "關",
+      "meanings": [
+        "관계할"
+      ],
+      "readings": [
+        "관"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "光",
+      "meanings": [
+        "빛"
+      ],
+      "readings": [
+        "광"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "鑛",
+      "meanings": [
+        "쇳돌"
+      ],
+      "readings": [
+        "광"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "怪",
+      "meanings": [
+        "기이할"
+      ],
+      "readings": [
+        "괴"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "交",
+      "meanings": [
+        "엇갈릴"
+      ],
+      "readings": [
+        "교"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "救",
+      "meanings": [
+        "구원할"
+      ],
+      "readings": [
+        "구"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "球",
+      "meanings": [
+        "둥근 공·구"
+      ],
+      "readings": [
+        "구"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "國",
+      "meanings": [
+        "국가"
+      ],
+      "readings": [
+        "국"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "局",
+      "meanings": [
+        "판"
+      ],
+      "readings": [
+        "국"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "歸",
+      "meanings": [
+        "돌아올"
+      ],
+      "readings": [
+        "귀"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "劇",
+      "meanings": [
+        "연극"
+      ],
+      "readings": [
+        "극"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "極",
+      "meanings": [
+        "끝·극점"
+      ],
+      "readings": [
+        "극"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "根",
+      "meanings": [
+        "뿌리"
+      ],
+      "readings": [
+        "근"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "奇",
+      "meanings": [
+        "뛰어날"
+      ],
+      "readings": [
+        "기"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "期",
+      "meanings": [
+        "기약할"
+      ],
+      "readings": [
+        "기"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "棄",
+      "meanings": [
+        "버릴"
+      ],
+      "readings": [
+        "기"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "氣",
+      "meanings": [
+        "기운·공기",
+        "기운"
+      ],
+      "readings": [
+        "기"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "暖",
+      "meanings": [
+        "따뜻하다"
+      ],
+      "readings": [
+        "난"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "難",
+      "meanings": [
+        "어려울"
+      ],
+      "readings": [
+        "난"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "南",
+      "meanings": [
+        "남쪽"
+      ],
+      "readings": [
+        "남"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "納",
+      "meanings": [
+        "들일"
+      ],
+      "readings": [
+        "납"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "內",
+      "meanings": [
+        "안"
+      ],
+      "readings": [
+        "내"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "團",
+      "meanings": [
+        "모일"
+      ],
+      "readings": [
+        "단"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "斷",
+      "meanings": [
+        "끝을"
+      ],
+      "readings": [
+        "단"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "段",
+      "meanings": [
+        "단계·구분"
+      ],
+      "readings": [
+        "단"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "端",
+      "meanings": [
+        "처음"
+      ],
+      "readings": [
+        "단"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "淡",
+      "meanings": [
+        "물맑을"
+      ],
+      "readings": [
+        "담"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "談",
+      "meanings": [
+        "말씀"
+      ],
+      "readings": [
+        "담"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "黨",
+      "meanings": [
+        "무리"
+      ],
+      "readings": [
+        "당"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "代",
+      "meanings": [
+        "대신할"
+      ],
+      "readings": [
+        "대"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "大",
+      "meanings": [
+        "큰"
+      ],
+      "readings": [
+        "대"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "圖",
+      "meanings": [
+        "그림"
+      ],
+      "readings": [
+        "도"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "導",
+      "meanings": [
+        "이끌"
+      ],
+      "readings": [
+        "도"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "道",
+      "meanings": [
+        "길·선"
+      ],
+      "readings": [
+        "도"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "動",
+      "meanings": [
+        "움직일"
+      ],
+      "readings": [
+        "동"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "同",
+      "meanings": [
+        "같을"
+      ],
+      "readings": [
+        "동"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "得",
+      "meanings": [
+        "얻을"
+      ],
+      "readings": [
+        "득"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "藤",
+      "meanings": [
+        "등나무"
+      ],
+      "readings": [
+        "등"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "絡",
+      "meanings": [
+        "이을"
+      ],
+      "readings": [
+        "락"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "冷",
+      "meanings": [
+        "차다·서늘하다",
+        "찰"
+      ],
+      "readings": [
+        "랭"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "略",
+      "meanings": [
+        "다스릴"
+      ],
+      "readings": [
+        "략"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "量",
+      "meanings": [
+        "헤아릴"
+      ],
+      "readings": [
+        "량"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "力",
+      "meanings": [
+        "힘"
+      ],
+      "readings": [
+        "력"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "聯",
+      "meanings": [
+        "잇닿을"
+      ],
+      "readings": [
+        "연"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "裂",
+      "meanings": [
+        "찢어질"
+      ],
+      "readings": [
+        "열"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "勞",
+      "meanings": [
+        "일할"
+      ],
+      "readings": [
+        "노"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "論",
+      "meanings": [
+        "말할"
+      ],
+      "readings": [
+        "론"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "僚",
+      "meanings": [
+        "관리"
+      ],
+      "readings": [
+        "료"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "類",
+      "meanings": [
+        "무리"
+      ],
+      "readings": [
+        "류"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "立",
+      "meanings": [
+        "설사"
+      ],
+      "readings": [
+        "립"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "摩",
+      "meanings": [
+        "문지를"
+      ],
+      "readings": [
+        "마"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "埋",
+      "meanings": [
+        "묻을"
+      ],
+      "readings": [
+        "매"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "媒",
+      "meanings": [
+        "중매"
+      ],
+      "readings": [
+        "매"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "脈",
+      "meanings": [
+        "줄기"
+      ],
+      "readings": [
+        "맥"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "名",
+      "meanings": [
+        "이름"
+      ],
+      "readings": [
+        "명"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "毛",
+      "meanings": [
+        "털"
+      ],
+      "readings": [
+        "모"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "牧",
+      "meanings": [
+        "기를"
+      ],
+      "readings": [
+        "목"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "描",
+      "meanings": [
+        "그릴"
+      ],
+      "readings": [
+        "묘"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "無",
+      "meanings": [
+        "없을"
+      ],
+      "readings": [
+        "무"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "文",
+      "meanings": [
+        "글·문장"
+      ],
+      "readings": [
+        "문"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "密",
+      "meanings": [
+        "빽빽할"
+      ],
+      "readings": [
+        "밀"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "伴",
+      "meanings": [
+        "따를"
+      ],
+      "readings": [
+        "반"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "半",
+      "meanings": [
+        "절반"
+      ],
+      "readings": [
+        "반"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "發",
+      "meanings": [
+        "나다·나오다"
+      ],
+      "readings": [
+        "발"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "方",
+      "meanings": [
+        "모"
+      ],
+      "readings": [
+        "방"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "排",
+      "meanings": [
+        "물리칠"
+      ],
+      "readings": [
+        "배"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "法",
+      "meanings": [
+        "법칙"
+      ],
+      "readings": [
+        "법"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "變",
+      "meanings": [
+        "변할"
+      ],
+      "readings": [
+        "변"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "伏",
+      "meanings": [
+        "엎드릴"
+      ],
+      "readings": [
+        "복"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "輻",
+      "meanings": [
+        "바퀴살"
+      ],
+      "readings": [
+        "복"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "本",
+      "meanings": [
+        "근본"
+      ],
+      "readings": [
+        "본"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "副",
+      "meanings": [
+        "도울"
+      ],
+      "readings": [
+        "부"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "北",
+      "meanings": [
+        "북쪽"
+      ],
+      "readings": [
+        "북"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "分",
+      "meanings": [
+        "나누다·가르다",
+        "나누다·분수",
+        "나눌"
+      ],
+      "readings": [
+        "분"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "朋",
+      "meanings": [
+        "벗"
+      ],
+      "readings": [
+        "붕"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "比",
+      "meanings": [
+        "견주다·비교하다",
+        "견줄"
+      ],
+      "readings": [
+        "비"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "費",
+      "meanings": [
+        "쓰다·비용"
+      ],
+      "readings": [
+        "비"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "貧",
+      "meanings": [
+        "가난할"
+      ],
+      "readings": [
+        "빈"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "使",
+      "meanings": [
+        "시킬"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "四",
+      "meanings": [
+        "넉"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "士",
+      "meanings": [
+        "선비"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "寫",
+      "meanings": [
+        "베낄"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "射",
+      "meanings": [
+        "쏠"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "社",
+      "meanings": [
+        "모임·공동체"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "絲",
+      "meanings": [
+        "실"
+      ],
+      "readings": [
+        "사"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "産",
+      "meanings": [
+        "낳다·생산하다",
+        "낳을"
+      ],
+      "readings": [
+        "산"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "常",
+      "meanings": [
+        "항상"
+      ],
+      "readings": [
+        "상"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "想",
+      "meanings": [
+        "생각"
+      ],
+      "readings": [
+        "상"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "相",
+      "meanings": [
+        "서로"
+      ],
+      "readings": [
+        "상"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "象",
+      "meanings": [
+        "모양"
+      ],
+      "readings": [
+        "상"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "色",
+      "meanings": [
+        "빛"
+      ],
+      "readings": [
+        "색"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "生",
+      "meanings": [
+        "나다·생기다",
+        "날"
+      ],
+      "readings": [
+        "생"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "敍",
+      "meanings": [
+        "펼"
+      ],
+      "readings": [
+        "서"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "析",
+      "meanings": [
+        "나눌"
+      ],
+      "readings": [
+        "석"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "石",
+      "meanings": [
+        "돌"
+      ],
+      "readings": [
+        "석"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "線",
+      "meanings": [
+        "선·경계",
+        "줄"
+      ],
+      "readings": [
+        "선"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "選",
+      "meanings": [
+        "가릴"
+      ],
+      "readings": [
+        "선"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "說",
+      "meanings": [
+        "말씀"
+      ],
+      "readings": [
+        "설"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "成",
+      "meanings": [
+        "이루다·만들다",
+        "이룰"
+      ],
+      "readings": [
+        "성"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "星",
+      "meanings": [
+        "별"
+      ],
+      "readings": [
+        "성"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "省",
+      "meanings": [
+        "살필"
+      ],
+      "readings": [
+        "성"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "聖",
+      "meanings": [
+        "성스러울"
+      ],
+      "readings": [
+        "성"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "稅",
+      "meanings": [
+        "세금"
+      ],
+      "readings": [
+        "세"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "細",
+      "meanings": [
+        "가늘"
+      ],
+      "readings": [
+        "세"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "小",
+      "meanings": [
+        "작을"
+      ],
+      "readings": [
+        "소"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "消",
+      "meanings": [
+        "없애다·사라지다"
+      ],
+      "readings": [
+        "소"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "燒",
+      "meanings": [
+        "사르다·태우다"
+      ],
+      "readings": [
+        "소"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "素",
+      "meanings": [
+        "바탕"
+      ],
+      "readings": [
+        "소"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "訴",
+      "meanings": [
+        "알릴"
+      ],
+      "readings": [
+        "소"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "束",
+      "meanings": [
+        "묶을"
+      ],
+      "readings": [
+        "속"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "速",
+      "meanings": [
+        "빠를"
+      ],
+      "readings": [
+        "속"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "率",
+      "meanings": [
+        "비율"
+      ],
+      "readings": [
+        "률"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "數",
+      "meanings": [
+        "수·셈"
+      ],
+      "readings": [
+        "수"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "水",
+      "meanings": [
+        "물"
+      ],
+      "readings": [
+        "수"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "循",
+      "meanings": [
+        "돌"
+      ],
+      "readings": [
+        "순"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "述",
+      "meanings": [
+        "펼"
+      ],
+      "readings": [
+        "술"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "視",
+      "meanings": [
+        "볼"
+      ],
+      "readings": [
+        "시"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "式",
+      "meanings": [
+        "법"
+      ],
+      "readings": [
+        "식"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "植",
+      "meanings": [
+        "심을"
+      ],
+      "readings": [
+        "식"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "殖",
+      "meanings": [
+        "번식할"
+      ],
+      "readings": [
+        "식"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "神",
+      "meanings": [
+        "귀신"
+      ],
+      "readings": [
+        "신"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "失",
+      "meanings": [
+        "잃을"
+      ],
+      "readings": [
+        "실"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "心",
+      "meanings": [
+        "마음"
+      ],
+      "readings": [
+        "심"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "巖",
+      "meanings": [
+        "바위"
+      ],
+      "readings": [
+        "암"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "壓",
+      "meanings": [
+        "누를"
+      ],
+      "readings": [
+        "압"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "約",
+      "meanings": [
+        "줄이다·간단히 하다",
+        "간략하게할"
+      ],
+      "readings": [
+        "약"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "陽",
+      "meanings": [
+        "볕·태양"
+      ],
+      "readings": [
+        "양"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "養",
+      "meanings": [
+        "기를"
+      ],
+      "readings": [
+        "양"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "語",
+      "meanings": [
+        "말씀"
+      ],
+      "readings": [
+        "어"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "役",
+      "meanings": [
+        "부릴"
+      ],
+      "readings": [
+        "역"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "繹",
+      "meanings": [
+        "끌어낼"
+      ],
+      "readings": [
+        "역"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "演",
+      "meanings": [
+        "펼"
+      ],
+      "readings": [
+        "연"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "燃",
+      "meanings": [
+        "타다·불붙다"
+      ],
+      "readings": [
+        "연"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "染",
+      "meanings": [
+        "물들일"
+      ],
+      "readings": [
+        "염"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "映",
+      "meanings": [
+        "비출"
+      ],
+      "readings": [
+        "영"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "豫",
+      "meanings": [
+        "미리"
+      ],
+      "readings": [
+        "예"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "溫",
+      "meanings": [
+        "따뜻하다"
+      ],
+      "readings": [
+        "온"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "王",
+      "meanings": [
+        "임금"
+      ],
+      "readings": [
+        "왕"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "歪",
+      "meanings": [
+        "비뚤어질"
+      ],
+      "readings": [
+        "왜"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "外",
+      "meanings": [
+        "바깥"
+      ],
+      "readings": [
+        "외"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "要",
+      "meanings": [
+        "중요할"
+      ],
+      "readings": [
+        "요"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "容",
+      "meanings": [
+        "용서"
+      ],
+      "readings": [
+        "용"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "溶",
+      "meanings": [
+        "녹다·녹이다",
+        "녹을"
+      ],
+      "readings": [
+        "용"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "用",
+      "meanings": [
+        "쓸"
+      ],
+      "readings": [
+        "용"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "運",
+      "meanings": [
+        "운전할"
+      ],
+      "readings": [
+        "운"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "雲",
+      "meanings": [
+        "구름"
+      ],
+      "readings": [
+        "운"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "韻",
+      "meanings": [
+        "소리"
+      ],
+      "readings": [
+        "운"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "元",
+      "meanings": [
+        "근본"
+      ],
+      "readings": [
+        "원"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "圓",
+      "meanings": [
+        "둥글"
+      ],
+      "readings": [
+        "원"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "園",
+      "meanings": [
+        "동산"
+      ],
+      "readings": [
+        "원"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "願",
+      "meanings": [
+        "원할"
+      ],
+      "readings": [
+        "원"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "位",
+      "meanings": [
+        "자리"
+      ],
+      "readings": [
+        "위"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "衛",
+      "meanings": [
+        "지킬"
+      ],
+      "readings": [
+        "위"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "喩",
+      "meanings": [
+        "깨우쳐 알리다·빗대다"
+      ],
+      "readings": [
+        "유"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "有",
+      "meanings": [
+        "있을"
+      ],
+      "readings": [
+        "유"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "遊",
+      "meanings": [
+        "떠돌"
+      ],
+      "readings": [
+        "유"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "遺",
+      "meanings": [
+        "끼칠"
+      ],
+      "readings": [
+        "유"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "育",
+      "meanings": [
+        "기를"
+      ],
+      "readings": [
+        "육"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "融",
+      "meanings": [
+        "녹을"
+      ],
+      "readings": [
+        "융"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "銀",
+      "meanings": [
+        "은·은빛"
+      ],
+      "readings": [
+        "은"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "音",
+      "meanings": [
+        "소리"
+      ],
+      "readings": [
+        "음"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "凝",
+      "meanings": [
+        "엉기다·굳다",
+        "엉길"
+      ],
+      "readings": [
+        "응"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "二",
+      "meanings": [
+        "두"
+      ],
+      "readings": [
+        "이"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "移",
+      "meanings": [
+        "다닐"
+      ],
+      "readings": [
+        "행"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "益",
+      "meanings": [
+        "더할"
+      ],
+      "readings": [
+        "익"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "日",
+      "meanings": [
+        "날"
+      ],
+      "readings": [
+        "일"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "入",
+      "meanings": [
+        "들"
+      ],
+      "readings": [
+        "입"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "刺",
+      "meanings": [
+        "나무랄"
+      ],
+      "readings": [
+        "자"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "子",
+      "meanings": [
+        "아들"
+      ],
+      "readings": [
+        "자"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "者",
+      "meanings": [
+        "사람"
+      ],
+      "readings": [
+        "자"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "資",
+      "meanings": [
+        "재물"
+      ],
+      "readings": [
+        "자"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "莊",
+      "meanings": [
+        "영지"
+      ],
+      "readings": [
+        "장"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "藏",
+      "meanings": [
+        "감출"
+      ],
+      "readings": [
+        "장"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "財",
+      "meanings": [
+        "재물"
+      ],
+      "readings": [
+        "재"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "爭",
+      "meanings": [
+        "다툴"
+      ],
+      "readings": [
+        "쟁"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "抵",
+      "meanings": [
+        "막을"
+      ],
+      "readings": [
+        "저"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "積",
+      "meanings": [
+        "쌓을"
+      ],
+      "readings": [
+        "적"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "赤",
+      "meanings": [
+        "붉다"
+      ],
+      "readings": [
+        "적"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "傳",
+      "meanings": [
+        "전할"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "前",
+      "meanings": [
+        "앞"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "展",
+      "meanings": [
+        "펼"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "戰",
+      "meanings": [
+        "싸움"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "轉",
+      "meanings": [
+        "돌"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "電",
+      "meanings": [
+        "번개"
+      ],
+      "readings": [
+        "전"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "截",
+      "meanings": [
+        "끊을"
+      ],
+      "readings": [
+        "절"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "點",
+      "meanings": [
+        "측면"
+      ],
+      "readings": [
+        "점"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "定",
+      "meanings": [
+        "정할"
+      ],
+      "readings": [
+        "정"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "程",
+      "meanings": [
+        "헤아릴"
+      ],
+      "readings": [
+        "정"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "靜",
+      "meanings": [
+        "고요할"
+      ],
+      "readings": [
+        "정"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "制",
+      "meanings": [
+        "제도"
+      ],
+      "readings": [
+        "제"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "帝",
+      "meanings": [
+        "황제"
+      ],
+      "readings": [
+        "제"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "濟",
+      "meanings": [
+        "건널"
+      ],
+      "readings": [
+        "제"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "題",
+      "meanings": [
+        "제목·문제",
+        "제목"
+      ],
+      "readings": [
+        "제"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "潮",
+      "meanings": [
+        "밀물"
+      ],
+      "readings": [
+        "조"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "照",
+      "meanings": [
+        "견줄"
+      ],
+      "readings": [
+        "조"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "造",
+      "meanings": [
+        "만들"
+      ],
+      "readings": [
+        "조"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "存",
+      "meanings": [
+        "있을"
+      ],
+      "readings": [
+        "존"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "主",
+      "meanings": [
+        "주인·중심"
+      ],
+      "readings": [
+        "주"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "周",
+      "meanings": [
+        "둘레"
+      ],
+      "readings": [
+        "주"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "週",
+      "meanings": [
+        "돌"
+      ],
+      "readings": [
+        "주"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "衆",
+      "meanings": [
+        "무리"
+      ],
+      "readings": [
+        "중"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "重",
+      "meanings": [
+        "무거울"
+      ],
+      "readings": [
+        "중"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "蒸",
+      "meanings": [
+        "찌다·수증기가 되다"
+      ],
+      "readings": [
+        "증"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "地",
+      "meanings": [
+        "땅"
+      ],
+      "readings": [
+        "지"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "指",
+      "meanings": [
+        "손가락"
+      ],
+      "readings": [
+        "지"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "直",
+      "meanings": [
+        "곧을"
+      ],
+      "readings": [
+        "직"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "質",
+      "meanings": [
+        "바탕"
+      ],
+      "readings": [
+        "질"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "察",
+      "meanings": [
+        "살필"
+      ],
+      "readings": [
+        "찰"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "擦",
+      "meanings": [
+        "비빌"
+      ],
+      "readings": [
+        "찰"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "拓",
+      "meanings": [
+        "넓힐"
+      ],
+      "readings": [
+        "척"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "天",
+      "meanings": [
+        "하늘"
+      ],
+      "readings": [
+        "천"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "聽",
+      "meanings": [
+        "들을"
+      ],
+      "readings": [
+        "청"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "請",
+      "meanings": [
+        "청할"
+      ],
+      "readings": [
+        "청"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "滯",
+      "meanings": [
+        "막힐"
+      ],
+      "readings": [
+        "체"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "體",
+      "meanings": [
+        "몸·형태",
+        "몸·물체"
+      ],
+      "readings": [
+        "체"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "軸",
+      "meanings": [
+        "굴대"
+      ],
+      "readings": [
+        "축"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "測",
+      "meanings": [
+        "헤아릴"
+      ],
+      "readings": [
+        "측"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "則",
+      "meanings": [
+        "법칙"
+      ],
+      "readings": [
+        "칙"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "侵",
+      "meanings": [
+        "습격할"
+      ],
+      "readings": [
+        "침"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "沈",
+      "meanings": [
+        "잠길"
+      ],
+      "readings": [
+        "침"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "稱",
+      "meanings": [
+        "저울대"
+      ],
+      "readings": [
+        "칭"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "他",
+      "meanings": [
+        "다를"
+      ],
+      "readings": [
+        "타"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "彈",
+      "meanings": [
+        "튀길"
+      ],
+      "readings": [
+        "탄"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "太",
+      "meanings": [
+        "크다"
+      ],
+      "readings": [
+        "태"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "通",
+      "meanings": [
+        "통하다·같게 맞추다"
+      ],
+      "readings": [
+        "통"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "堆",
+      "meanings": [
+        "쌓을"
+      ],
+      "readings": [
+        "퇴"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "波",
+      "meanings": [
+        "물결"
+      ],
+      "readings": [
+        "파"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "便",
+      "meanings": [
+        "편할"
+      ],
+      "readings": [
+        "편"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "偏",
+      "meanings": [
+        "치우칠"
+      ],
+      "readings": [
+        "편"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "片",
+      "meanings": [
+        "조각"
+      ],
+      "readings": [
+        "편"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "廢",
+      "meanings": [
+        "폐할"
+      ],
+      "readings": [
+        "폐"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "布",
+      "meanings": [
+        "펼"
+      ],
+      "readings": [
+        "포"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "抛",
+      "meanings": [
+        "던질"
+      ],
+      "readings": [
+        "포"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "胞",
+      "meanings": [
+        "세포"
+      ],
+      "readings": [
+        "포"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "表",
+      "meanings": [
+        "겉·표면"
+      ],
+      "readings": [
+        "표"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "諷",
+      "meanings": [
+        "비유할"
+      ],
+      "readings": [
+        "풍"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "下",
+      "meanings": [
+        "내릴"
+      ],
+      "readings": [
+        "하"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "河",
+      "meanings": [
+        "강"
+      ],
+      "readings": [
+        "하"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "寒",
+      "meanings": [
+        "차갑다"
+      ],
+      "readings": [
+        "한"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "限",
+      "meanings": [
+        "한정할"
+      ],
+      "readings": [
+        "한"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "合",
+      "meanings": [
+        "합하다·모으다",
+        "합할"
+      ],
+      "readings": [
+        "합"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "恒",
+      "meanings": [
+        "항상"
+      ],
+      "readings": [
+        "항"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "抗",
+      "meanings": [
+        "막을"
+      ],
+      "readings": [
+        "항"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "項",
+      "meanings": [
+        "무리의"
+      ],
+      "readings": [
+        "항"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "害",
+      "meanings": [
+        "해칠"
+      ],
+      "readings": [
+        "해"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "解",
+      "meanings": [
+        "풀다·풀리다"
+      ],
+      "readings": [
+        "해"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED"
+      ]
+    },
+    {
+      "char": "享",
+      "meanings": [
+        "누릴"
+      ],
+      "readings": [
+        "향"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "鄕",
+      "meanings": [
+        "고향"
+      ],
+      "readings": [
+        "향"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "憲",
+      "meanings": [
+        "법"
+      ],
+      "readings": [
+        "헌"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "血",
+      "meanings": [
+        "피"
+      ],
+      "readings": [
+        "혈"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "協",
+      "meanings": [
+        "화합할"
+      ],
+      "readings": [
+        "협"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "衡",
+      "meanings": [
+        "저울대"
+      ],
+      "readings": [
+        "형"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "好",
+      "meanings": [
+        "좋을"
+      ],
+      "readings": [
+        "호"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "號",
+      "meanings": [
+        "부르짖을"
+      ],
+      "readings": [
+        "호"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "火",
+      "meanings": [
+        "불"
+      ],
+      "readings": [
+        "화"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "禍",
+      "meanings": [
+        "재앙"
+      ],
+      "readings": [
+        "화"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "話",
+      "meanings": [
+        "말씀"
+      ],
+      "readings": [
+        "화"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "擴",
+      "meanings": [
+        "넓힐"
+      ],
+      "readings": [
+        "확"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "確",
+      "meanings": [
+        "굳을"
+      ],
+      "readings": [
+        "확"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "換",
+      "meanings": [
+        "바뀔"
+      ],
+      "readings": [
+        "환"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "環",
+      "meanings": [
+        "고리"
+      ],
+      "readings": [
+        "환"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "回",
+      "meanings": [
+        "돌"
+      ],
+      "readings": [
+        "회"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "會",
+      "meanings": [
+        "모이다·만나다",
+        "모일"
+      ],
+      "readings": [
+        "회"
+      ],
+      "sources": [
+        "TERM_DECODER_REFERENCE_SEED",
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    },
+    {
+      "char": "戱",
+      "meanings": [
+        "놀이"
+      ],
+      "readings": [
+        "희"
+      ],
+      "sources": [
+        "EDUCATION_OFFICE_HANJA_REFERENCE"
+      ]
+    }
+  ]
+}

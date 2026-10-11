@@ -26,6 +26,19 @@ assert.equal(b.ok,true);
 assert.equal(b.readiness.verified_retrieval_target_count,2);
 state=b.state;
 
+const play=K.ingest(state,{
+  packet_id:'play-camp:p1',
+  source_app:'play-camp',
+  context:{family_id:'F1',member_id:'A',subject:'수학',concept_skill_target:'number_bond_10'},
+  event:{source:'play-camp',event_id:'p1',occurred_at:'2026-10-08T00:00:00.000Z',event_type:'PLAY_ACTIVITY_OBSERVATION',payload:{
+    member_id:'A',subject:'수학',concept_skill_target:'number_bond_10',
+    learning_target_id:'bond-7-3',instrument_version:'PLAY_CAMP_ACTIVITY_V1'
+  }}
+});
+assert.equal(play.ok,true);
+assert.equal(play.acknowledgement_kind,'OBSERVATION_INGEST_RECEIPT');
+assert.equal(play.receipt.event_id,'p1');
+
 const rec=R.reconcile(state,{created_at:'2026-09-25T12:05:00.000Z'});
 assert.equal(rec.ok,true);
 assert.equal(rec.results.length,1);

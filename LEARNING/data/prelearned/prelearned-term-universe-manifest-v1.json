@@ -1,0 +1,73 @@
+{
+  "schema": "TAKY_PRELEARNED_TERM_UNIVERSE_MANIFEST_V1",
+  "generated_at": "2026-10-07T08:49:53.395Z",
+  "policy": "PREBUILD_BEFORE_RUNTIME_SELECTION",
+  "counts": {
+    "official_subject_terms_56": 436,
+    "official_by_subject": {
+      "KOREAN": 100,
+      "SOCIAL": 91,
+      "SCIENCE": 147,
+      "MATH": 98
+    },
+    "official_decoder_full": 59,
+    "official_hanja_form": 252,
+    "official_reference_candidates": 7,
+    "official_reference_bound": 2,
+    "official_reference_held": 5,
+    "official_unique_lexical": 289,
+    "official_ambiguous": 39,
+    "official_no_nikl_match": 108,
+    "tool_language_total": 1364,
+    "tool_language_56": 880,
+    "nikl_general_vocab_56": 10000,
+    "nikl_total": 40000,
+    "academic_vocab_entries": 1387,
+    "academic_vocab_families": 1382,
+    "academic_vocab_by_level": {
+      "1": 43,
+      "2": 292,
+      "3": 585,
+      "4": 466
+    },
+    "char_gloss_seed_count": 291
+  },
+  "source_hashes": {
+    "official_terms": "49922ab1812e2228fd40a4b37dcd2cb26903fe7e7f48b4b515d5a1cb77bf51cc",
+    "nikl_objects": "3e7bdc4c4a9754457f4ddf22748e7749a0a13a0fa33d5b6811021760deeb6344",
+    "nikl_surface": "11803f3f4cc93e775639a175747e9ba8307cd438bbb61331574072bdb59f64be",
+    "tool_vocab": "5689ae26aa7fa007b08e6cc6ba4e66a5e14c4fb408c26f8370077d58d06d8392",
+    "ambiguity": "0ae034e1be87bb002a3abb01ceeb608dd9a333ec20058ee13d8f1a5300c52903",
+    "lexeme_policy": "503097be3cdc6d69b59d59bae4e13f4e661bed26def1797c28860e77450c77f0",
+    "reference_seed": "7ccf67ed0c3974c356e4e498e5ab2e2131d0a2a3c0d7597f5d51993cab124f19",
+    "hanja_reference_mining": "d6d99bff2db32a0640f48a42276f0affda52e8b80662a4278b6c2aa048494a2b",
+    "science_math_hanja_reference": "7dbfac2c0b07ce2c7755009060bbf6969f88939abc39139b906061864926aada",
+    "official_registry": "cd7a862a42380ee09a813f58a606da444acb3dd8439e3ea03b1daf2681abea08",
+    "official_unit_map": "e5e57f1bbc692e8c31258335ad825a91e1a8237eda437ff5a89b70c62ff4a71f",
+    "academic_vocab_1387_map": "607e1865d1bbaea6fc2382e396f3cb7b514f65bed743ae32bcb6514e6b4e51f3"
+  },
+  "source_authority": {
+    "subject_terms": "OFFICIAL_STANDARD_REGISTRY + OFFICIAL_GRADE_UNIT_MAPPING",
+    "general_vocab": "NIKL_BASIC_VOCAB_40000_OBJECTS_V1",
+    "tool_language": "KOREAN_TOOL_VOCAB_VERIFIED_TOKEN_V1",
+    "ambiguity_policy": "TOOL_LANGUAGE_LEXEME_RESOLUTION_POLICY_V1",
+    "thinking_tool_words_1387": "TAKY_ACADEMIC_VOCAB_1387_LEVEL_MAP_V1_ENGINE_READY"
+  },
+  "coverage": {
+    "hanja_form_terms": 252,
+    "decoder_full_terms": 59,
+    "decoder_form_only_terms": 193,
+    "lexical_ambiguous_terms": 39,
+    "lexical_no_nikl_match_terms": 108
+  },
+  "runtime_guards": [
+    "RUNTIME_SELECTS_FROM_PREBUILT_PROJECTION_ONLY",
+    "LEARNER_SCHOOL_STAGE_FILTER_REQUIRED",
+    "UNVERIFIED_COMPONENT_GLOSS_DOES_NOT_ENABLE_FULL_DECOMPOSITION",
+    "FORM_ONLY_HANJA_SUPPRESSES_COMPONENT_FAMILY_TRANSFER",
+    "MIDDLE_SCHOOL_REFERENCE_NEVER_SETS_ELEMENTARY_GRADE_AUTHORITY",
+    "TERM_REFERENCE_REQUIRES_HANJA_MATCH_TO_TRUSTED_LEXEME_OR_SEED",
+    "AMBIGUOUS_SURFACE_LEXEME_REQUIRES_CONTEXTUAL_RESOLUTION"
+  ],
+  "runtime_rule": "Runtime selects from prebuilt projections; runtime does not mine or invent curriculum terms."
+}

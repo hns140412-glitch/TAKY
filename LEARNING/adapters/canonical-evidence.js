@@ -78,6 +78,33 @@ function fromSnap(event={},context={}){
   return out;
 }
 
+function fromPlayCamp(event={},context={}){
+  const out=baseFromEvent(event,{...context,source_app:'play-camp'});
+  const p=event.payload||{};
+  out.evidence_type='PLAY_ACTIVITY_OBSERVATION';
+  out.raw_app_signals={
+    activity_id:clean(p.activity_id)||null,
+    loop_step:clean(p.loop_step)||null,
+    completion_state:clean(p.completion_state)||null,
+    concept_ids:Array.isArray(p.concept_ids)?p.concept_ids.map(clean).filter(Boolean).slice(0,24):[],
+    interaction_count:finite(p.interaction_count),
+    response_correct:typeof p.response_correct==='boolean'?p.response_correct:null,
+    response_class:typeof p.response_class==='string'?p.response_class.slice(0,64):null,
+    creation_saved:p.creation_saved===true,
+    hint_level_observed:['GENERAL','TARGETED','STEP_BY_STEP'].includes(p.hint_level_observed)?p.hint_level_observed:null,
+    explanation_observed:typeof p.explanation_observed==='boolean'?p.explanation_observed:null,
+    transfer_observed:typeof p.transfer_observed==='boolean'?p.transfer_observed:null,
+    same_concept_confirmed:typeof p.same_concept_confirmed==='boolean'?p.same_concept_confirmed:null,
+    response_value:typeof p.response_value==='string'
+      ?p.response_value.slice(0,128)
+      :(typeof p.response_value==='number'&&Number.isFinite(p.response_value))||typeof p.response_value==='boolean'
+        ?p.response_value:null
+  };
+  // Play Camp reports observations only. It cannot self-verify mastery.
+  out.verified_outcome=null;
+  return out;
+}
+
 function fromReady(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'ready-set'});
   const p=event.payload||event;
@@ -105,6 +132,7 @@ function normalize(event={},context={}){
   if(source==='hide-seek')return fromHide(event,context);
   if(source==='snap-pop')return fromSnap(event,context);
   if(source==='ready-set')return fromReady(event,context);
+  if(source==='play-camp')return fromPlayCamp(event,context);
   const out=baseFromEvent(event,context);
   out.provenance.unsupported_source=true;
   return out;
@@ -125,4 +153,4 @@ function validateCanonical(e={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,normalize,fromHide,fromSnap,fromReady,validateCanonical});
+module.exports=Object.freeze({VERSION,normalize,fromHide,fromSnap,fromReady,fromPlayCamp,validateCanonical});
