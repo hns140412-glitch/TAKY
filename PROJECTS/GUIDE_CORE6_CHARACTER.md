@@ -1,6 +1,6 @@
 # GUIDE / Ready & Set — Core 6 Character State
 
-Status: REV_00 / current user-confirmed Core 6 Visual ID set / Golden Reference authority released / production validation not finalized
+Status: REV_01 / current user-confirmed Core 6 Visual ID set / 3-sheet production package locked / production validation not finalized
 Scope: character production only; implementation validation not performed.
 
 ## Production state
@@ -29,6 +29,24 @@ Exact name/species/reference lineage conflicts SHALL be resolved by source-level
 - Zero: penguin identity; polar-bear drift is rejected. No foreign fur/tail/object contamination may appear behind or on Zero in composites.
 - Dooby: preserve the latest user-confirmed Visual ID; older wrong-species/generic reinterpretations from interim group images are not canonical. Exact species/reference lineage must follow the latest user correction and source-level audit.
 
+## Core 6 production contract — HARD LOCK
+
+Each confirmed Core 6 Visual ID is produced as exactly **three source sheets** before runtime cropping/derivation:
+
+1. `TURNAROUND_SHEET` — multi-view turnaround in one sheet, crop-safe spacing, no decorative background.
+2. `EXPRESSION_SHEET` — expression source sheet locked to the same Visual ID.
+3. `ACTION_SHEET` — action/pose source sheet locked to the same Visual ID.
+
+The approved Visual ID is the identity authority for all three sheets. Do not reinterpret species, face, silhouette, proportions, colors, outfit, equipment or other protected identity elements unless the user explicitly changes that Visual ID.
+
+The three sheets are the **production source package**. Runtime assets remain composable and may be cropped/derived into `MASTER_FULL / PROFILE / PUPPET_BODY / FACE_STATES / ACTION_PARTS / PEEK_MASK / DEPTH_SHADOW` as needed.
+
+Accordingly:
+- do not reject a valid turnaround sheet because an older spec requested only `FIELD_NEUTRAL`;
+- do not require the original approved illustration itself to be used at runtime once the user approves the new three-sheet package as the working source;
+- once a sheet is approved, downstream expression/action generation and crops must stay locked to the same approved package lineage;
+- sheet approval and runtime-crop approval are separate gates.
+
 ## Group direction
 Characters are GUIDE companions/friends from the same world, not six unrelated mascots. Clothing and equipment may express individuality but must share enough world/Guide visual DNA to work with the same product UI. Older-brother/sister/friend/younger-companion chemistry is desirable; access is not age-locked.
 
@@ -45,8 +63,10 @@ Character production was explicitly put on HOLD for TAKY work.
 On resume:
 1. recover the latest user correction and source-level Core 6 identity table before generating;
 2. preserve corrected Ink Visual ID in Core 6;
-3. produce individual white-background high-resolution turnaround sheets using the current user-confirmed references;
-4. validate each sheet 1:1 against its applicable current Visual ID;
-5. only after all individual PASS, validate group chemistry/composite without identity drift.
+3. for each character, produce the locked 3-sheet package: TURNAROUND_SHEET -> EXPRESSION_SHEET -> ACTION_SHEET;
+4. use crop-safe composition and no decorative background for production sheets; transparency is preferred where the generation path supports it;
+5. validate each sheet 1:1 against its applicable current Visual ID and the already-approved preceding sheet lineage;
+6. crop/derive runtime asset groups only from PASS sheets;
+7. only after all individual PASS, validate group chemistry/composite without identity drift.
 
 No UI redesign is implied by this file.

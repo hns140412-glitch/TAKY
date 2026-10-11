@@ -37,6 +37,11 @@ The host refuses to initialize unless all of these are supplied by the authorize
 - Missing provider configuration prevents host creation.
 - No real OAuth credential, secret, production membership database, production durable store, or deployment is included in this slice.
 
+## Current account-auth public configuration
+The approved browser-side Google OAuth Web Client ID and browser origins are kept in `SHARED/runtime/taky-account-auth-public-config-v1.js` and copied byte-identically into Ready/Hide/Snap as `taky-account-auth-config-v1.js`. The Google client secret is not used by the browser runtime and SHALL NOT be committed to TAKY or specialist repositories. The central deployment must use the same Web Client ID in its `clientIds` allowlist and an explicit HTTPS origin allowlist.
+
+The central API base URL is intentionally not fabricated in the static PWA configuration. `TAKY_CENTRAL_API_BASE_URL` remains an external deployment binding and account sign-in stays fail-closed until a real central HTTPS host exists.
+
 ## Ready contract
 Ready's production bootstrap must provide:
 - `ReadyCentralAuthHost.currentSession()`: independently verified central session metadata.
