@@ -50,6 +50,9 @@ def route(record: dict) -> dict:
     pipeline = [
         "SOURCE_OR_LOCATOR",
         "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+        "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+        "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+        "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
         "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
         "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
         consumer,
@@ -73,6 +76,9 @@ def route(record: dict) -> dict:
             "REFERENCE_INTAKE != CANONICAL_PROMOTION",
             "INDEXED != APPROVED_POLICY",
             "DUPLICATE != NEW_EVIDENCE",
+            "AUTHOR != AUTHORITY",
+            "DIRECTION != APPLICABILITY_SCOPE",
+            "SOURCE_TRUST != CANONICAL_AUTHORITY",
         ],
     }
 

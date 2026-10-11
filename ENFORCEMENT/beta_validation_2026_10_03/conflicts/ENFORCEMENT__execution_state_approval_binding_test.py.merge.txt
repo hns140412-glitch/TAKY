@@ -1,0 +1,309 @@
+<<<<<<< LOCAL_WORKTREE
+#!/usr/bin/env python3
+import unittest
+
+from execution_state_engine import approval_context, transition
+
+
+def approval_for(record):
+    current = str(record["current_state"]).upper()
+    requested = str(record["requested_state"]).upper()
+    context, failures = approval_context(record, current, requested)
+    assert not failures, failures
+    return {
+        "approval_id": "approval-transition-001",
+        "approver_ref": "USER",
+        "decision": "APPROVE",
+        **context,
+    }
+
+
+class ExecutionStateApprovalBindingTest(unittest.TestCase):
+    def test_merge_approval_is_bound_to_exact_target(self):
+        record = {
+            "task_id": "TASK-1",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+        }
+        record["human_approval_evidence"] = approval_for(record)
+        result = transition(record)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(
+            result["approval_verified"]["target_ref"],
+            "commit:abc123",
+        )
+        self.assertEqual(
+            result["approval_verified"]["evidence_level"],
+            "BOUND_RECORD_ONLY",
+        )
+        self.assertFalse(result["approval_verified"]["identity_authenticated"])
+
+    def test_stale_merge_approval_cannot_authorize_new_target(self):
+        record = {
+            "task_id": "TASK-1",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+        }
+        evidence = approval_for(record)
+        record["transition_target_ref"] = "commit:def456"
+        record["human_approval_evidence"] = evidence
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "APPROVAL_EVIDENCE_TARGET_REF_MISMATCH",
+            result["detected"],
+        )
+        self.assertIn(
+            "APPROVAL_EVIDENCE_CONTEXT_HASH_MISMATCH",
+            result["detected"],
+        )
+
+    def test_deploy_approval_is_bound_to_deploy_target(self):
+        record = {
+            "task_id": "TASK-2",
+            "current_state": "MERGED",
+            "requested_state": "DEPLOYED",
+            "transition_target_ref": "production:artifact-sha256:123",
+        }
+        record["human_approval_evidence"] = approval_for(record)
+        result = transition(record)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(
+            result["approval_verified"]["to_state"],
+            "DEPLOYED",
+        )
+
+    def test_unstructured_approval_evidence_is_rejected(self):
+        record = {
+            "task_id": "TASK-3",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+            "human_approval_evidence": "yes",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("HUMAN_APPROVAL_EVIDENCE_INVALID", result["detected"])
+
+    def test_missing_approval_returns_required_context(self):
+        record = {
+            "task_id": "TASK-4",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "pr:133/head:abc123",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("HUMAN_APPROVAL_MISSING:merge", result["detected"])
+        context = result["required_approval_context"]
+        self.assertEqual(context["task_id"], "TASK-4")
+        self.assertEqual(context["target_ref"], "pr:133/head:abc123")
+        self.assertTrue(context["approval_context_hash"].startswith("sha256:"))
+
+    def test_missing_target_ref_fails_closed(self):
+        record = {
+            "task_id": "TASK-5",
+            "current_state": "MERGED",
+            "requested_state": "DEPLOYED",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "APPROVAL_CONTEXT_TARGET_REF_MISSING",
+            result["detected"],
+        )
+
+    def test_caller_cannot_disable_merge_approval_requirement(self):
+        record = {
+            "task_id": "TASK-6",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+            "merge_approval_required": False,
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"], result)
+        self.assertIn("HUMAN_APPROVAL_MISSING:merge", result["detected"])
+
+    def test_executor_neutral_assignment_alias_is_accepted(self):
+        result = transition({
+            "task_id": "TASK-7",
+            "current_state": "READY",
+            "requested_state": "ASSIGNED_TO_EXECUTOR",
+            "transition_target_ref": "local-only",
+        })
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(result["current_state"], "ASSIGNED_TO_CODEX")
+
+
+if __name__ == "__main__":
+    unittest.main()
+=======
+#!/usr/bin/env python3
+import unittest
+
+from execution_state_engine import approval_context, transition
+
+
+def approval_for(record):
+    current = str(record["current_state"]).upper()
+    requested = str(record["requested_state"]).upper()
+    context, failures = approval_context(record, current, requested)
+    assert not failures, failures
+    return {
+        "approval_id": "approval-transition-001",
+        "approver_ref": "USER",
+        "decision": "APPROVE",
+        **context,
+    }
+
+
+class ExecutionStateApprovalBindingTest(unittest.TestCase):
+    def test_merge_approval_is_bound_to_exact_target(self):
+        record = {
+            "task_id": "TASK-1",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+        }
+        record["human_approval_evidence"] = approval_for(record)
+        result = transition(record)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(
+            result["approval_verified"]["target_ref"],
+            "commit:abc123",
+        )
+
+    def test_stale_merge_approval_cannot_authorize_new_target(self):
+        record = {
+            "task_id": "TASK-1",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+        }
+        evidence = approval_for(record)
+        record["transition_target_ref"] = "commit:def456"
+        record["human_approval_evidence"] = evidence
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "APPROVAL_EVIDENCE_TARGET_REF_MISMATCH",
+            result["detected"],
+        )
+        self.assertIn(
+            "APPROVAL_EVIDENCE_CONTEXT_HASH_MISMATCH",
+            result["detected"],
+        )
+
+    def test_deploy_approval_is_bound_to_deploy_target(self):
+        record = {
+            "task_id": "TASK-2",
+            "current_state": "MERGED",
+            "requested_state": "DEPLOYED",
+            "transition_target_ref": "production:artifact-sha256:123",
+        }
+        record["human_approval_evidence"] = approval_for(record)
+        result = transition(record)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(
+            result["approval_verified"]["to_state"],
+            "DEPLOYED",
+        )
+
+    def test_unstructured_approval_evidence_is_rejected(self):
+        record = {
+            "task_id": "TASK-3",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "commit:abc123",
+            "human_approval_evidence": "yes",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("HUMAN_APPROVAL_EVIDENCE_INVALID", result["detected"])
+
+    def test_missing_approval_returns_required_context(self):
+        record = {
+            "task_id": "TASK-4",
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "transition_target_ref": "pr:133/head:abc123",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("HUMAN_APPROVAL_MISSING:merge", result["detected"])
+        context = result["required_approval_context"]
+        self.assertEqual(context["task_id"], "TASK-4")
+        self.assertEqual(context["target_ref"], "pr:133/head:abc123")
+        self.assertTrue(context["approval_context_hash"].startswith("sha256:"))
+
+    def test_missing_target_ref_fails_closed(self):
+        record = {
+            "task_id": "TASK-5",
+            "current_state": "MERGED",
+            "requested_state": "DEPLOYED",
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "APPROVAL_CONTEXT_TARGET_REF_MISSING",
+            result["detected"],
+        )
+
+    def test_merge_approval_bypass_is_forbidden(self):
+        record = {
+            "current_state": "HUMAN_APPROVAL",
+            "requested_state": "MERGED",
+            "merge_approval_required": False,
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("MERGE_APPROVAL_BYPASS_FORBIDDEN", result["detected"])
+
+    def test_canonical_promotion_cannot_request_approval_before_prerequisites_pass(self):
+        record = {
+            "task_id": "TAKY-ALPHA-PROMOTION",
+            "current_state": "TAKY_REVIEW",
+            "requested_state": "HUMAN_APPROVAL",
+            "canonical_promotion": True,
+            "source_boundary_ref": "beta:4af88d",
+            "decision_lineage_ref": "BETA_AUDIT",
+            "promotion_target_ref": "pr:208/head:abc",
+            "promotion_prerequisites": [
+                {"id": "BETA_FULL_AUDIT", "status": "PASS", "evidence_ref": "AUDIT"},
+                {"id": "BETA_DEFENSE_HARDENING", "status": "OPEN", "evidence_ref": "HARDENING"},
+            ],
+        }
+        result = transition(record)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "PROMOTION_PREREQUISITE_NOT_PASS:BETA_DEFENSE_HARDENING",
+            result["detected"],
+        )
+
+    def test_canonical_promotion_can_reach_approval_only_after_prerequisites_pass(self):
+        record = {
+            "task_id": "TAKY-ALPHA-PROMOTION",
+            "current_state": "TAKY_REVIEW",
+            "requested_state": "HUMAN_APPROVAL",
+            "canonical_promotion": True,
+            "source_boundary_ref": "beta:4af88d",
+            "decision_lineage_ref": "BETA_AUDIT",
+            "promotion_target_ref": "pr:208/head:abc",
+            "transition_target_ref": "pr:208/head:abc",
+            "promotion_prerequisites": [
+                {"id": "BETA_FULL_AUDIT", "status": "PASS", "evidence_ref": "AUDIT"},
+                {"id": "BETA_ADVERSARIAL_VALIDATION", "status": "PASS", "evidence_ref": "REDTEAM"},
+                {"id": "BETA_DEFENSE_HARDENING", "status": "PASS", "evidence_ref": "HARDENING"},
+                {"id": "BETA_FREEZE", "status": "PASS", "evidence_ref": "FREEZE"},
+            ],
+        }
+        result = transition(record)
+        self.assertTrue(result["pass"], result)
+
+
+if __name__ == "__main__":
+    unittest.main()
+>>>>>>> LIVE_MAIN

@@ -1,0 +1,4 @@
+{"agency": "LH", "competition": "SAME-PROJECT", "entry_id": "E1", "artifact_id": "B1-P1", "board_no": "1", "representation_mode": "PLAN", "technique": "clean_vector_plan", "drawing_name": "1층 평면도", "outcome": "SUCCESS"}
+{"agency": "LH", "competition": "SAME-PROJECT", "entry_id": "E1", "artifact_id": "B1-S1", "board_no": "1", "representation_mode": "SECTION", "technique": "rendered_section", "drawing_name": "주요 단면도", "outcome": "SUCCESS"}
+{"agency": "LH", "competition": "SAME-PROJECT", "entry_id": "E2", "artifact_id": "B1-P2", "board_no": "1", "representation_mode": "PLAN", "technique": "rendered_plan", "drawing_name": "1층 평면도", "outcome": "PARTIAL"}
+{"agency": "LH", "competition": "SAME-PROJECT", "entry_id": "E2", "artifact_id": "B2-S2", "board_no": "2", "representation_mode": "SECTION", "technique": "sectional_perspective", "drawing_name": "주요 단면도", "outcome": "SUCCESS"}

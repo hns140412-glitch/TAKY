@@ -1,0 +1,1569 @@
+<<<<<<< LOCAL_WORKTREE
+name: TAKY Enforcement Replay
+
+on:
+  push:
+    paths:
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'TAKY.md'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/settings.local.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'OS/LEARNING_ENGINE_CORE.md'
+      - 'LEARNING/**'
+      - 'CURRENT/LEARNING_ENGINE_*'
+      - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
+      - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
+      - 'HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md'
+      - 'SHARED/runtime/**'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
+      - 'ENFORCEMENT/**'
+      - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
+      - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'MASTER/HANDOFF_PROTOCOL.md'
+      - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
+      - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
+      - 'MASTER/UI_REFERENCE_PROTOCOL.md'
+      - 'MASTER/UI_REFERENCE_REGISTRY.json'
+      - 'MASTER/UI_REFERENCE_COMPARISON_MATRIX.json'
+      - 'PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md'
+      - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json'
+      - 'HISTORY/2026-09-21_MASTER_LOGIC_REALIZATION_CLOSURE.md'
+      - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - 'OS/ASSET_SKILL_RECIPE_REGISTRY.json'
+      - 'OS/VOLATILE_CAPABILITY_REGISTRY.json'
+      - '.github/workflows/taky-enforcement.yml'
+  pull_request:
+    paths:
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'TAKY.md'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/settings.local.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'OS/LEARNING_ENGINE_CORE.md'
+      - 'LEARNING/**'
+      - 'CURRENT/LEARNING_ENGINE_*'
+      - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
+      - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
+      - 'HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md'
+      - 'SHARED/runtime/**'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
+      - 'ENFORCEMENT/**'
+      - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
+      - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'MASTER/HANDOFF_PROTOCOL.md'
+      - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
+      - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
+      - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
+      - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - '.github/workflows/taky-enforcement.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compile enforcement tools
+        run: |
+          python -m py_compile ENFORCEMENT/taky_gate.py
+          python -m py_compile ENFORCEMENT/rule_registry_lint.py
+          python -m py_compile ENFORCEMENT/handoff_bundle_validator.py
+          python -m py_compile ENFORCEMENT/evidence_ref_validator.py
+          python -m py_compile ENFORCEMENT/preflight_bridge.py
+          python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
+          python -m py_compile ENFORCEMENT/evidence_history_boundary_test.py
+          python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
+          python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
+          python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
+          python -m py_compile ENFORCEMENT/c2s_semantic_boundary_regression.py
+          python -m py_compile ENFORCEMENT/master_file_registry_validator.py
+          python -m py_compile ENFORCEMENT/master_surface_integrity_validator.py
+          python -m py_compile ENFORCEMENT/drive_storage_map_validator.py
+          python -m py_compile ENFORCEMENT/mobile_app_development_registry_validator.py
+          python -m py_compile ENFORCEMENT/system_layer_ownership_validator.py
+          python -m py_compile ENFORCEMENT/shared_technical_capability_validator.py
+          python -m py_compile ENFORCEMENT/current_product_identity_validator.py
+          python -m py_compile ENFORCEMENT/runtime_orchestrator.py
+          python -m py_compile ENFORCEMENT/behavioral_eval.py
+          python -m py_compile ENFORCEMENT/trace_to_regression.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint_identity_test.py
+          python -m py_compile ENFORCEMENT/local_drive_workspace.py
+          python -m py_compile ENFORCEMENT/data_index_search.py
+          python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
+          python -m py_compile ENFORCEMENT/execution_state_engine.py
+          python -m py_compile .claude/hooks/taky_hook.py
+          python -m py_compile .claude/hooks/taky_outcome_hook.py
+          python -m py_compile ENFORCEMENT/claude_hook_regression.py
+          python -m py_compile ENFORCEMENT/outcome_hook_regression.py
+          python -m py_compile ENFORCEMENT/alpha_manifest_validator.py
+          python -m py_compile ENFORCEMENT/executor_review_loop.py
+          python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_adapter_registry.py
+          python -m py_compile ENFORCEMENT/executor_result_ingest.py
+          python -m py_compile ENFORCEMENT/executor_cycle.py
+          python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
+          python -m py_compile ENFORCEMENT/github_queue_consumer.py
+          python -m py_compile ENFORCEMENT/github_queue_poll_plan.py
+          python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
+          python -m py_compile ENFORCEMENT/notion_review_fresh_context_validator.py
+          python -m py_compile ENFORCEMENT/drive_c2s_intake_validator.py
+          python -m py_compile ENFORCEMENT/work_os_productive_router.py
+          python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
+          python -m py_compile ENFORCEMENT/work_os_registry_validator.py
+      - name: Replay Claude hook security regression
+        run: python ENFORCEMENT/claude_hook_regression.py
+      - name: Replay TAKY outcome hook regression
+        run: python ENFORCEMENT/outcome_hook_regression.py
+      - name: Validate TAKY Alpha local manifest
+        run: python ENFORCEMENT/alpha_manifest_validator.py HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json
+      - name: Lint rule ownership registry
+        run: python ENFORCEMENT/rule_registry_lint.py
+      - name: Validate MASTER file authority registry
+        run: python ENFORCEMENT/master_file_registry_validator.py
+      - name: Validate shared technical capability foundation
+        run: python ENFORCEMENT/shared_technical_capability_validator.py
+      - name: Validate system layer ownership map
+        run: python ENFORCEMENT/system_layer_ownership_validator.py
+      - name: Validate independent Learning Engine Core V2
+        run: node LEARNING/runtime/learner-state-core.test.js
+      - name: Validate retention state baseline candidate
+        run: node LEARNING/estimators/retention-state-baseline.test.js
+      - name: Validate declared concept dependency graph
+        run: node LEARNING/domain-model/concept-dependency-graph.test.js
+      - name: Validate data-derived relation promotion policy
+        run: node LEARNING/domain-model/relation-promotion-policy.test.js
+      - name: Validate calibrated BKT candidate
+        run: node LEARNING/estimators/bkt-calibration-candidate.test.js
+      - name: Validate metacognitive self-reflection evidence
+        run: node LEARNING/evidence/self-reflection-evidence.test.js
+      - name: Validate item-scoped learning recovery profile
+        run: node LEARNING/runtime/recovery-profile.test.js
+      - name: Validate unified Learning Engine runtime decision contract
+        run: node LEARNING/runtime/decision-contract.test.js
+      - name: Validate pedagogical feedback intent
+        run: node LEARNING/pedagogy/feedback-intent.test.js
+      - name: Validate adaptive learning plan intent
+        run: node LEARNING/pedagogy/adaptive-plan-contract.test.js
+      - name: Validate Learning Engine estimator benchmark lane
+        run: node LEARNING/benchmark/estimator-benchmark.test.js
+      - name: Validate estimator promotion policy
+        run: node LEARNING/benchmark/promotion-policy.test.js
+      - name: Validate estimator promotion report
+        run: node LEARNING/benchmark/promotion-report.test.js
+      - name: Validate lossless Learning Engine evaluation ledger
+        run: node LEARNING/lifecycle/evaluation-ledger.test.js
+      - name: Validate Learning Engine reevaluation orchestrator
+        run: node LEARNING/lifecycle/evaluation-orchestrator.test.js
+      - name: Validate automatic real-evidence evaluation trigger
+        run: node LEARNING/lifecycle/real-evidence-evaluation-trigger.test.js
+      - name: Validate estimator data readiness snapshot
+        run: node LEARNING/lifecycle/estimator-data-readiness.test.js
+      - name: Validate Learning Engine data readiness current
+        run: node LEARNING/lifecycle/data-readiness-current.test.js
+      - name: Validate no-loss Learning Engine change ledger
+        run: node LEARNING/lifecycle/change-ledger.test.js
+      - name: Validate retained Learning Engine change ledger CURRENT
+        run: node LEARNING/lifecycle/change-ledger-current.test.js
+      - name: Validate Learning Engine replay dataset contract
+        run: node LEARNING/replay/replay-dataset.test.js
+      - name: Validate Learning Engine replay benchmark bridge
+        run: node LEARNING/replay/replay-benchmark.test.js
+      - name: Validate real learning evidence receipt pipeline
+        run: node LEARNING/receipts/real-evidence-receipt.test.js
+      - name: Validate skill-scoped real evidence intake
+        run: node LEARNING/intake/real-evidence-intake.test.js
+      - name: Validate cumulative specialist evidence intake pipeline
+        run: node LEARNING/intake/specialist-event-pipeline.test.js
+      - name: Validate central evidence transport ingest handler
+        run: node LEARNING/intake/transport-handler.test.js
+      - name: Validate durable evidence store adapter
+        run: node LEARNING/transport/durable-evidence-store-adapter.test.js
+      - name: Validate central authenticated evidence HTTP boundary and committed receipt ACK
+        run: |
+          node --check LEARNING/transport/central-learning-http-endpoint.js
+          node LEARNING/transport/central-learning-http-endpoint.test.js
+          node LEARNING/transport/durable-evidence-commit-ack.test.js
+      - name: Validate Google subject and server membership + real Node central learning HTTP bridge
+        run: |
+          node --check LEARNING/transport/google-learning-principal.js
+          node --check LEARNING/transport/node-http-learning-bridge.js
+          node LEARNING/transport/google-node-central-integration.test.js
+      - name: Validate learning transport auth policy
+        run: node LEARNING/transport/transport-auth-policy.test.js
+      - name: Validate authenticated evidence transport
+        run: node LEARNING/transport/authenticated-evidence-transport.test.js
+      - name: Validate Netlify Blobs transport adapter
+        run: node LEARNING/transport/netlify-blobs-transport-adapter.test.js
+      - name: Validate central Learning versus Drive archive routing
+        run: |
+          node --check LEARNING/transport/drive-archive-route.js
+          node LEARNING/transport/drive-archive-route.test.js
+      - name: Validate server transport kernel reconciliation
+        run: node LEARNING/transport/server-transport-kernel.test.js
+      - name: Validate Learning Engine verification layer
+        run: node LEARNING/verification/verification-layer.test.js
+      - name: Validate app-specific verifier policy
+        run: node LEARNING/verification/verifier-policy.test.js
+      - name: Validate canonical Learning Evidence adapters
+        run: node LEARNING/adapters/canonical-evidence.test.js
+      - name: Validate canonical evidence into replay labels
+        run: node LEARNING/replay/canonical-evidence-replay.test.js
+      - name: Validate Learning Engine replay dataset contract
+        run: node LEARNING/data/replay-dataset-builder.test.js
+      - name: Validate Learning Engine evidence normalizer
+        run: node LEARNING/data/evidence-normalizer.test.js
+      - name: Validate MASTER structural integrity and active projection
+        run: python ENFORCEMENT/master_surface_integrity_validator.py
+      - name: Validate Drive storage role map
+        run: python ENFORCEMENT/drive_storage_map_validator.py
+      - name: Validate mobile app development registry
+        run: python ENFORCEMENT/mobile_app_development_registry_validator.py
+      - name: Validate current product identity
+        run: python ENFORCEMENT/current_product_identity_validator.py
+      - name: Validate Notion review V2.1 freshness ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json')
+          d=json.loads(p.read_text())
+          s=d['summary']
+          assert s['material_item_count']==39
+          assert s['mapped_material_item_count']==39
+          assert s['unmapped_material_item_count']==0
+          assert s['silent_loss_count']==0
+          assert s['review_result_without_owner']==0
+          assert s['review_result_without_action']==0
+          assert s['review_result_without_utilization_state']==0
+          ids={x['id'] for x in d['freshness_patch']}
+          assert ids=={'C2S-NWR2-018','C2S-NWR2-019','C2S-NWR2-039'}
+          for x in d['freshness_patch']:
+            for k in ('owner','disposition','utilization_state','action_ref','next_action','verification_status'):
+              assert str(x.get(k,'')).strip(), (x['id'],k)
+          assert d['live_baseline']['ready_device_verified'] is False
+          assert d['live_baseline']['ready_production_verified'] is False
+          PY
+      - name: Validate live Notion timetable structure inspection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json').read_text())
+          assert d['atom_id']=='C2S-NWR2-037'
+          assert d['target_database']['active_row_count']==12
+          assert d['confirmed_defect']['row_count']==0
+          assert d['confirmed_defect']['classification']=='CONFIRMED_EMPTY_DUPLICATE_DATA_SOURCE'
+          assert d['cleanup_attempt']['result']=='TOOL_BLOCKED'
+          assert d['cleanup_attempt']['active_source_modified'] is False
+          assert d['c2s_result']['reflection_gap_closed'] is True
+          assert d['c2s_result']['cleanup_complete'] is False
+          assert d['coverage']['unmapped_material']==0
+          assert d['coverage']['silent_loss']==0
+          PY
+      - name: Validate direct Drive C2S intake
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Validate direct Drive C2S compile closure with reflection still open
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_compile_closed_pass.json
+      - name: Validate Work OS reusable and volatile registries
+        run: |
+          python ENFORCEMENT/work_os_registry_validator.py \
+            --recipe OS/ASSET_SKILL_RECIPE_REGISTRY.json \
+            --capability OS/VOLATILE_CAPABILITY_REGISTRY.json
+      - name: Validate Work OS productive routing
+        run: |
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_pipeline.json > /tmp/work-pipeline.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_idea.json > /tmp/work-idea.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_visual.json > /tmp/work-visual.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/work-pipeline.json').read_text())['route']['next_stage']=='VERIFY'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['destination']=='_LAB'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['canonical'] is False
+          assert json.loads(Path('/tmp/work-visual.json').read_text())['route']['visualization']=='FLOW_DIAGRAM'
+          PY
+      - name: Reject incomplete Work OS idea routing
+        run: |
+          if python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_fail.json; then
+            echo "Expected incomplete idea record to fail"
+            exit 1
+          fi
+          echo "Expected Work OS router failure observed"
+      - name: Reject NotebookLM-dependent direct C2S intake
+        run: |
+          if python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_fail.json; then
+            echo "Expected NotebookLM-dependent intake to be rejected"
+            exit 1
+          fi
+          echo "Expected direct Drive C2S dependency failure observed"
+      - name: Replay baseline fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases.json
+      - name: Replay enforcement v2 fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v2.json
+      - name: Replay outcome optimization fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
+      - name: Replay evidence-backed orchestration fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
+      - name: Replay generic pre-action rule-application fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
+      - name: Replay production authority and no-pass-no-show fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v6.json
+      - name: Validate fresh-context Notion review routing
+        run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
+      - name: Reject fresh-context Notion structure-substitution regression
+        run: |
+          if python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_fail.json --repo-root .; then
+            echo "Expected fresh-context Notion regression fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected fresh-context Notion routing failure observed"
+      - name: Validate structured preflight evidence
+        run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
+      - name: Validate controlled runtime orchestrator
+        run: python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+
+      - name: Runtime hardening focused regressions
+        working-directory: ENFORCEMENT
+        run: |
+          python change_preserve_contract_test.py
+          python execution_outcome_state_test.py
+          python approval_checkpoint_resume_test.py
+          python execution_state_approval_binding_test.py
+          python untrusted_reader_quarantine_test.py
+          python context_firewall_test.py
+          python synthesis_barrier_test.py
+          python behavioral_eval_test.py
+          python trace_to_regression_test.py
+          python runtime_hardening_integration_test.py
+
+      - name: Atomic CURRENT checkpoint regression
+        run: python ENFORCEMENT/execution_checkpoint_test.py
+      - name: Checkpoint identity binding regression
+        run: python ENFORCEMENT/execution_checkpoint_identity_test.py
+
+      - name: Local Google Drive workspace regression
+        run: python ENFORCEMENT/local_drive_workspace_test.py
+      - name: Data index search projection regression
+        run: python ENFORCEMENT/data_index_search_test.py
+      - name: Validate generated Codex task contract
+        run: |
+          python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          contract=data.get('task_contract')
+          assert contract, 'task_contract missing'
+          Path('/tmp/generated_contract.json').write_text(json.dumps(contract, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/codex_task_contract_validator.py /tmp/generated_contract.json
+      - name: Validate Ready target-local executor adapter routing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          adapter=data.get('executor_adapter') or {}
+          envelope=data.get('dispatch_envelope') or {}
+          assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
+          assert adapter.get('implementation_commit') == '1d672d862cc8329a5f19ca91c9ed6a338752f5ae', adapter
+          liveness=adapter.get('liveness_recovery') or {}
+          assert liveness.get('state') == 'ACTIVE_IN_READY_SET_MAIN', liveness
+          assert liveness.get('provider_binding') == 'GITHUB_ACTIONS_RUN_AND_JOB_STATE', liveness
+          assert liveness.get('side_effect_retry_contract_bypass') is False, liveness
+          source=adapter.get('queue_source_provenance') or {}
+          assert source.get('state') == 'ACTIVE_IN_READY_SET_MAIN', source
+          assert source.get('public_untrusted_issue_execution_blocked') is True, source
+          bridge=adapter.get('cross_repo_queue_bridge') or {}
+          assert bridge.get('queue_repository') == 'hns140412-glitch/Ready-Set', bridge
+          assert bridge.get('consumer_repository') == 'hns140412-glitch/TAKY', bridge
+          assert bridge.get('state') == 'CROSS_REPO_CREDENTIAL_ABSENT', bridge
+          assert bridge.get('builtin_github_token_cross_repo_write_capable') is False, bridge
+          assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
+          assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
+          assert envelope.get('external_executor_invocation_verified') is False
+          PY
+      - name: Validate REWORK state transition
+        run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
+      - name: Validate successful executor review
+        run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Validate GitHub Issue queue formatter/parser
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --transport GITHUB_ISSUE_QUEUE --output /tmp/github-envelope.json
+          python ENFORCEMENT/github_issue_executor_queue.py issue --envelope /tmp/github-envelope.json --output /tmp/github-issue.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          assert issue['title'].startswith('[TAKY EXECUTOR QUEUE]')
+          assert 'TAKY_EXECUTOR_DISPATCH_JSON_BEGIN' in issue['body']
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->\n'
+          Path('/tmp/github-comment.txt').write_text(comment)
+          PY
+          python ENFORCEMENT/github_issue_executor_queue.py parse-comment --comment /tmp/github-comment.txt > /tmp/parsed-comment.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          parsed=json.loads(Path('/tmp/parsed-comment.json').read_text())
+          assert parsed['receipt']['task_id']==env['task_id']
+          Path('/tmp/receipt.json').write_text(json.dumps(parsed['receipt'], indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_transport.py verify-receipt --envelope /tmp/github-envelope.json --receipt /tmp/receipt.json
+      - name: Validate GitHub queue consumer lifecycle
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          trusted_issue={'number': 101, 'title': issue['title'], 'body': issue['body'], 'author': {'login':'hns140412-glitch'}, 'authorAssociation':'OWNER'}
+          open_event={'issue': trusted_issue}
+          Path('/tmp/queue-open-event.json').write_text(json.dumps(open_event))
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          receipt_comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->'
+          receipt_event={'issue': trusted_issue, 'comment': {'body': receipt_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-receipt-event.json').write_text(json.dumps(receipt_event))
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'completion_report':report
+          }
+          result_comment='<!-- TAKY_EXECUTOR_RESULT_JSON_BEGIN -->\n'+json.dumps(result)+'\n<!-- TAKY_EXECUTOR_RESULT_JSON_END -->'
+          result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-result-event.json').write_text(json.dumps(result_event))
+          forged_result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'untrusted-user'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-forged-result-event.json').write_text(json.dumps(forged_result_event))
+          PY
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-open-event.json --event-name issues --output /tmp/queue-open-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-receipt-event.json --event-name issue_comment --output /tmp/queue-receipt-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-result-event.json --event-name issue_comment --output /tmp/queue-result-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-forged-result-event.json --event-name issue_comment --output /tmp/queue-forged-result-plan.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
+          assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
+          assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          forged=json.loads(Path('/tmp/queue-forged-result-plan.json').read_text())
+          assert forged['action']=='REJECT_UNTRUSTED_MACHINE_COMMENT', forged
+          assert forged['pass'] is False, forged
+          PY
+      - name: Validate scheduled queue poller idempotency
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          receipt_event=json.loads(Path('/tmp/queue-receipt-event.json').read_text())
+          result_event=json.loads(Path('/tmp/queue-result-event.json').read_text())
+          snapshot={
+            'number':101,
+            'title':issue['title'],
+            'body':issue['body'],
+            'author':{'login':'hns140412-glitch'},
+            'authorAssociation':'OWNER',
+            'comments':[
+              {'id':201,'body':receipt_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
+              {'id':202,'body':result_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
+            ]
+          }
+          Path('/tmp/poll-snapshot.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          plan=json.loads(Path('/tmp/poll-plan-1.json').read_text())
+          assert len(plan['comments_to_publish']) == 3, plan
+          for i, body in enumerate(plan['comments_to_publish'], start=301):
+            snapshot['comments'].append({'id':i,'body':body,'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'})
+          Path('/tmp/poll-snapshot-acked.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-acked.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-2.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-2.json').read_text())
+          assert plan['comments_to_publish'] == [], plan
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          snapshot['author']={'login':'untrusted-user'}
+          snapshot['authorAssociation']='NONE'
+          Path('/tmp/poll-snapshot-forged.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-forged.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-forged.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-forged.json').read_text())
+          assert plan['pass'] is False, plan
+          assert plan['comments_to_publish'] == [], plan
+          assert plan['processed'][0]['action'] == 'REJECT_UNTRUSTED_QUEUE_ISSUE', plan
+          PY
+      - name: Validate executor transport and closed review cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          bad=dict(result)
+          bad["task_contract_sha256"]="0"*64
+          Path('/tmp/executor_result_bad.json').write_text(json.dumps(bad, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          if python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result_bad.json; then
+            echo "Expected mismatched executor result hash to be rejected"
+            exit 1
+          fi
+          echo "Expected executor-result integrity failure observed"
+      - name: Validate failed executor result returns to REWORK through cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope-fail.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_fail.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result_fail.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope-fail.json --result /tmp/executor_result_fail.json > /tmp/cycle-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/cycle-fail.json').read_text())
+          assert data["review"]["review_decision"] == "REWORK"
+          assert data["transition"]["current_state"] == "REWORK"
+          assert data["next_action"] == "RETURN_REWORK_TO_EXECUTOR"
+          PY
+      - name: Route failed executor review to REWORK
+        run: |
+          if python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json; then
+            echo "Expected failed executor evidence to require REWORK"
+            exit 1
+          fi
+          python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json > /tmp/review.json || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/review.json').read_text())
+          assert data.get('review_decision') == 'REWORK'
+          transition=data.get('state_transition') or {}
+          transition['defects']=data.get('defects', [])
+          transition['acceptance_delta']=data.get('acceptance_delta', [])
+          Path('/tmp/rework_transition.json').write_text(json.dumps(transition, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/execution_state_engine.py /tmp/rework_transition.json
+      - name: Reject forbidden state shortcut
+        run: |
+          if python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_shortcut_fail.json; then
+            echo "Expected forbidden state shortcut to be rejected"
+            exit 1
+          fi
+          echo "Expected forbidden transition failure observed"
+      - name: Replay AI-producer artifact PRE/POST negative and recovery cases
+        run: python ENFORCEMENT/producer_artifact_gate_test.py
+      - name: Reject runtime without operational assimilation
+        run: |
+          if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
+            echo "Expected runtime orchestrator to block missing working model"
+            exit 1
+          fi
+          echo "Expected runtime working-model failure observed"
+      - name: Replay evidence integrity failures
+        run: python ENFORCEMENT/evidence_bridge_regression.py
+      - name: Replay canonical history boundary regression
+        run: python ENFORCEMENT/evidence_history_boundary_test.py
+      - name: Validate Codex task contract fixture
+        run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
+      - name: Validate self-contained handoff fixture
+        run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
+      - name: Validate conversation-to-system coverage fixture
+        run: python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_pass.json
+      - name: Guard C2S semantic core and stale residue
+        run: python ENFORCEMENT/c2s_semantic_boundary_regression.py
+      - name: Reject lossy conversation-to-system fixture
+        run: |
+          if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_fail.json; then
+            echo "Expected failure fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected failure observed"
+      - name: Reject C2S downstream-state conflation
+        run: |
+          if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_downstream_conflation_fail.json; then
+            echo "Expected downstream-conflated C2S closure to be rejected"
+            exit 1
+          fi
+          echo "Expected C2S/downstream separation failure observed"
+      - name: Validate C2S runtime bridge
+        run: |
+          python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_pass.json \
+            --repo-root .
+      - name: Reject C2S runtime bridge without coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject missing coverage"
+            exit 1
+          fi
+          echo "Expected missing-coverage failure observed"
+      - name: Reject C2S runtime bridge with lossy coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_fail.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject lossy coverage"
+            exit 1
+          fi
+          echo "Expected lossy-coverage failure observed"
+      - name: Validate architecture conversation C2S ledger
+        run: python ENFORCEMENT/conversation_coverage_validator.py HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json
+      - name: Validate review-result C2S utilization closure
+        run: |
+          python ENFORCEMENT/review_result_c2s_validator.py ENFORCEMENT/fixtures/review_result_c2s_pass.json
+          python ENFORCEMENT/review_result_c2s_validator.py HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json
+      - name: Reject record-only review-result regression
+        run: |
+          if python ENFORCEMENT/review_result_c2s_validator.py ENFORCEMENT/fixtures/review_result_c2s_fail.json; then
+            echo "Expected review-result utilization failure"
+            exit 1
+          fi
+          echo "Expected review-result C2S failure observed"
+      - name: Validate lightweight conversation continuity
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_pass.json
+      - name: Validate targeted historical recovery
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_targeted_pass.json
+      - name: Reject recoverable-context re-ask
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_reask_fail.json; then
+            echo "Expected ASK LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected recoverable-context re-ask failure observed"
+      - name: Reject unnecessary full-history load
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_heavy_fail.json; then
+            echo "Expected FULL SCAN LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected unnecessary full-scan failure observed"
+      - name: Validate saved-share transcript sanitization
+        run: |
+          python ENFORCEMENT/chatgpt_share_transcript_sanitizer.py ENFORCEMENT/fixtures/chatgpt_share_fixture.html -o /tmp/share.md
+          python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/share.md
+          diff -u ENFORCEMENT/fixtures/chatgpt_share_expected.md /tmp/share.md
+      - name: Reject unsafe sanitized transcript
+        run: |
+          if python ENFORCEMENT/chatgpt_share_transcript_validator.py ENFORCEMENT/fixtures/chatgpt_share_unsafe.md; then
+            echo "Expected unsafe transcript to be rejected"
+            exit 1
+          fi
+          echo "Expected unsafe transcript failure observed"
+=======
+name: TAKY Enforcement Replay
+
+on:
+  push:
+    paths:
+      - 'AGENTS.md'
+      - 'TAKY.md'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'OS/LEARNING_ENGINE_CORE.md'
+      - 'LEARNING/**'
+      - 'CURRENT/LEARNING_ENGINE_*'
+      - 'CURRENT/SYSTEM_WIDE_REVIEW.json'
+      - 'STATE.md'
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
+      - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
+      - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
+      - 'HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md'
+      - 'SHARED/runtime/**'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
+      - 'ENFORCEMENT/**'
+      - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
+      - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'MASTER/HANDOFF_PROTOCOL.md'
+      - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
+      - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
+      - 'MASTER/UI_REFERENCE_PROTOCOL.md'
+      - 'MASTER/UI_REFERENCE_REGISTRY.json'
+      - 'MASTER/UI_REFERENCE_COMPARISON_MATRIX.json'
+      - 'PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md'
+      - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json'
+      - 'HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json'
+      - 'HISTORY/2026-09-21_MASTER_LOGIC_REALIZATION_CLOSURE.md'
+      - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - 'OS/ASSET_SKILL_RECIPE_REGISTRY.json'
+      - 'OS/VOLATILE_CAPABILITY_REGISTRY.json'
+      - '.github/workflows/taky-enforcement.yml'
+  pull_request:
+    paths:
+      - 'AGENTS.md'
+      - 'TAKY.md'
+      - 'MASTER/MASTER_FILE_REGISTRY.json'
+      - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
+      - 'OS/LEARNING_ENGINE_CORE.md'
+      - 'LEARNING/**'
+      - 'CURRENT/LEARNING_ENGINE_*'
+      - 'CURRENT/SYSTEM_WIDE_REVIEW.json'
+      - 'STATE.md'
+      - 'OS/EXPLORATION_CREW_CANONICAL.md'
+      - 'MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json'
+      - 'MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md'
+      - 'MASTER/LEARNING_APP_FAMILY_GROWTH_BACKLOG.json'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_C2S_2026-09-21.md'
+      - 'C2S/LEARNING_APP_FAMILY_INTEGRATION_ATOMS_2026-09-21.json'
+      - 'HANDOFF/LEARNING_APP_FAMILY_INTEGRATION_HANDOFF_2026-09-21_LATEST.md'
+      - 'SHARED/runtime/**'
+      - 'OS/DRIVE_STORAGE_MAP.json'
+      - 'OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json'
+      - 'ENFORCEMENT/**'
+      - 'MASTER/CODEX_TASK_CONTRACT.md'
+      - 'MASTER/EXECUTOR_TRANSPORT_SCHEMA.json'
+      - 'MASTER/EXECUTOR_ADAPTER_REGISTRY.json'
+      - 'OS/GITHUB_EXECUTOR_QUEUE.md'
+      - '.github/workflows/taky-executor-queue-consumer.yml'
+      - '.github/workflows/taky-executor-queue-poller.yml'
+      - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
+      - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
+      - 'MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md'
+      - 'MASTER/CONVERSATION_ATOM_SCHEMA.json'
+      - 'MASTER/INTENT_EXECUTION_PROTOCOL.md'
+      - 'MASTER/ENFORCEMENT_PROTOCOL.md'
+      - 'MASTER/FAILURE_TAXONOMY.md'
+      - 'MASTER/RULE_REGISTRY.json'
+      - 'MASTER/HANDOFF_PROTOCOL.md'
+      - 'MASTER/RECOVERY_FORENSICS_PROTOCOL.md'
+      - 'MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md'
+      - 'MASTER/VALIDATION_RULES.md'
+      - 'OS/NOTION_OPS.md'
+      - 'OS/C2S_RUNTIME_ACTIVATION.md'
+      - 'OS/DRIVE_C2S_DIRECT.md'
+      - 'DOMAIN/ARCHITECTURE_WORK_OS.md'
+      - 'DOMAIN/ARCHITECTURE_GROWTH_MAP.md'
+      - 'HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json'
+      - 'HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json'
+      - 'OS/COMMAND_INTERACTION.md'
+      - 'OS/WORK_OS.md'
+      - 'OS/ACTION_SKILL_REGISTRY.json'
+      - '.github/workflows/taky-enforcement.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compile enforcement tools
+        run: |
+          python -m py_compile ENFORCEMENT/taky_gate.py
+          python -m py_compile ENFORCEMENT/rule_registry_lint.py
+          python -m py_compile ENFORCEMENT/beta_owner_rule_consistency_validator.py
+          python -m py_compile ENFORCEMENT/beta_resume_authority_consistency_validator.py
+          python -m py_compile ENFORCEMENT/beta_claim_boundary_validator.py
+          python -m py_compile ENFORCEMENT/handoff_bundle_validator.py
+          python -m py_compile ENFORCEMENT/evidence_ref_validator.py
+          python -m py_compile ENFORCEMENT/preflight_bridge.py
+          python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
+          python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
+          python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
+          python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
+          python -m py_compile ENFORCEMENT/c2s_semantic_boundary_regression.py
+          python -m py_compile ENFORCEMENT/master_file_registry_validator.py
+          python -m py_compile ENFORCEMENT/master_surface_integrity_validator.py
+          python -m py_compile ENFORCEMENT/drive_storage_map_validator.py
+          python -m py_compile ENFORCEMENT/mobile_app_development_registry_validator.py
+          python -m py_compile ENFORCEMENT/system_layer_ownership_validator.py
+          python -m py_compile ENFORCEMENT/shared_technical_capability_validator.py
+          python -m py_compile ENFORCEMENT/current_product_identity_validator.py
+          python -m py_compile ENFORCEMENT/runtime_orchestrator.py
+          python -m py_compile ENFORCEMENT/behavioral_eval.py
+          python -m py_compile ENFORCEMENT/trace_to_regression.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/local_drive_workspace.py
+          python -m py_compile ENFORCEMENT/data_index_search.py
+          python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
+          python -m py_compile ENFORCEMENT/execution_state_engine.py
+          python -m py_compile ENFORCEMENT/executor_review_loop.py
+          python -m py_compile ENFORCEMENT/executor_transport.py
+          python -m py_compile ENFORCEMENT/executor_adapter_registry.py
+          python -m py_compile ENFORCEMENT/executor_result_ingest.py
+          python -m py_compile ENFORCEMENT/executor_cycle.py
+          python -m py_compile ENFORCEMENT/github_issue_executor_queue.py
+          python -m py_compile ENFORCEMENT/github_queue_consumer.py
+          python -m py_compile ENFORCEMENT/github_queue_poll_plan.py
+          python -m py_compile ENFORCEMENT/conversation_continuity_validator.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_sanitizer.py
+          python -m py_compile ENFORCEMENT/chatgpt_share_transcript_validator.py
+          python -m py_compile ENFORCEMENT/notion_review_fresh_context_validator.py
+          python -m py_compile ENFORCEMENT/drive_c2s_intake_validator.py
+          python -m py_compile ENFORCEMENT/work_os_productive_router.py
+          python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
+          python -m py_compile ENFORCEMENT/work_os_registry_validator.py
+      - name: Lint rule ownership registry
+        run: |
+          python ENFORCEMENT/rule_registry_lint.py
+          python ENFORCEMENT/beta_owner_rule_consistency_validator.py
+          python ENFORCEMENT/beta_resume_authority_consistency_validator.py
+          python ENFORCEMENT/beta_claim_boundary_validator.py
+      - name: Validate semantic CURRENT authority and fail-closed resolution
+        run: |
+          python ENFORCEMENT/semantic_current_resolver.py
+          python ENFORCEMENT/semantic_current_resolver_test.py
+      - name: Validate MASTER file authority registry
+        run: python ENFORCEMENT/master_file_registry_validator.py
+      - name: Validate shared technical capability foundation
+        run: python ENFORCEMENT/shared_technical_capability_validator.py
+      - name: Validate system layer ownership map
+        run: python ENFORCEMENT/system_layer_ownership_validator.py
+      - name: Validate independent Learning Engine Core V2
+        run: node LEARNING/runtime/learner-state-core.test.js
+      - name: Validate retention state baseline candidate
+        run: node LEARNING/estimators/retention-state-baseline.test.js
+      - name: Validate declared concept dependency graph
+        run: node LEARNING/domain-model/concept-dependency-graph.test.js
+      - name: Validate data-derived relation promotion policy
+        run: node LEARNING/domain-model/relation-promotion-policy.test.js
+      - name: Validate calibrated BKT candidate
+        run: node LEARNING/estimators/bkt-calibration-candidate.test.js
+      - name: Validate metacognitive self-reflection evidence
+        run: node LEARNING/evidence/self-reflection-evidence.test.js
+      - name: Validate item-scoped learning recovery profile
+        run: node LEARNING/runtime/recovery-profile.test.js
+      - name: Validate unified Learning Engine runtime decision contract
+        run: node LEARNING/runtime/decision-contract.test.js
+      - name: Validate pedagogical feedback intent
+        run: node LEARNING/pedagogy/feedback-intent.test.js
+      - name: Validate adaptive learning plan intent
+        run: node LEARNING/pedagogy/adaptive-plan-contract.test.js
+      - name: Validate Learning Engine estimator benchmark lane
+        run: node LEARNING/benchmark/estimator-benchmark.test.js
+      - name: Validate estimator promotion policy
+        run: node LEARNING/benchmark/promotion-policy.test.js
+      - name: Validate estimator promotion report
+        run: node LEARNING/benchmark/promotion-report.test.js
+      - name: Validate lossless Learning Engine evaluation ledger
+        run: node LEARNING/lifecycle/evaluation-ledger.test.js
+      - name: Validate Learning Engine reevaluation orchestrator
+        run: node LEARNING/lifecycle/evaluation-orchestrator.test.js
+      - name: Validate automatic real-evidence evaluation trigger
+        run: node LEARNING/lifecycle/real-evidence-evaluation-trigger.test.js
+      - name: Validate estimator data readiness snapshot
+        run: node LEARNING/lifecycle/estimator-data-readiness.test.js
+      - name: Validate Learning Engine data readiness current
+        run: node LEARNING/lifecycle/data-readiness-current.test.js
+      - name: Validate no-loss Learning Engine change ledger
+        run: node LEARNING/lifecycle/change-ledger.test.js
+      - name: Validate retained Learning Engine change ledger CURRENT
+        run: node LEARNING/lifecycle/change-ledger-current.test.js
+      - name: Validate Learning Engine replay dataset contract
+        run: node LEARNING/replay/replay-dataset.test.js
+      - name: Validate Learning Engine replay benchmark bridge
+        run: node LEARNING/replay/replay-benchmark.test.js
+      - name: Validate real learning evidence receipt pipeline
+        run: node LEARNING/receipts/real-evidence-receipt.test.js
+      - name: Validate skill-scoped real evidence intake
+        run: node LEARNING/intake/real-evidence-intake.test.js
+      - name: Validate cumulative specialist evidence intake pipeline
+        run: node LEARNING/intake/specialist-event-pipeline.test.js
+      - name: Validate central evidence transport ingest handler
+        run: node LEARNING/intake/transport-handler.test.js
+      - name: Validate durable evidence store adapter
+        run: node LEARNING/transport/durable-evidence-store-adapter.test.js
+      - name: Validate central authenticated evidence HTTP boundary and committed receipt ACK
+        run: |
+          node --check LEARNING/transport/central-learning-http-endpoint.js
+          node LEARNING/transport/central-learning-http-endpoint.test.js
+          node LEARNING/transport/durable-evidence-commit-ack.test.js
+      - name: Validate Google subject and server membership + real Node central learning HTTP bridge
+        run: |
+          node --check LEARNING/transport/google-learning-principal.js
+          node --check LEARNING/transport/node-http-learning-bridge.js
+          node LEARNING/transport/google-node-central-integration.test.js
+      - name: Validate learning transport auth policy
+        run: node LEARNING/transport/transport-auth-policy.test.js
+      - name: Validate authenticated evidence transport
+        run: node LEARNING/transport/authenticated-evidence-transport.test.js
+      - name: Validate Netlify Blobs transport adapter
+        run: node LEARNING/transport/netlify-blobs-transport-adapter.test.js
+      - name: Validate central Learning versus Drive archive routing
+        run: |
+          node --check LEARNING/transport/drive-archive-route.js
+          node LEARNING/transport/drive-archive-route.test.js
+      - name: Validate server transport kernel reconciliation
+        run: node LEARNING/transport/server-transport-kernel.test.js
+      - name: Validate Learning Engine verification layer
+        run: node LEARNING/verification/verification-layer.test.js
+      - name: Validate app-specific verifier policy
+        run: node LEARNING/verification/verifier-policy.test.js
+      - name: Validate canonical Learning Evidence adapters
+        run: node LEARNING/adapters/canonical-evidence.test.js
+      - name: Validate canonical evidence into replay labels
+        run: node LEARNING/replay/canonical-evidence-replay.test.js
+      - name: Validate Learning Engine replay dataset contract
+        run: node LEARNING/data/replay-dataset-builder.test.js
+      - name: Validate Learning Engine evidence normalizer
+        run: node LEARNING/data/evidence-normalizer.test.js
+      - name: Validate MASTER structural integrity and active projection
+        run: python ENFORCEMENT/master_surface_integrity_validator.py
+      - name: Validate Drive storage role map
+        run: python ENFORCEMENT/drive_storage_map_validator.py
+      - name: Validate mobile app development registry
+        run: python ENFORCEMENT/mobile_app_development_registry_validator.py
+      - name: Validate current product identity
+        run: python ENFORCEMENT/current_product_identity_validator.py
+      - name: Validate Notion review V2.1 freshness ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('HISTORY/2026-09-20_NOTION_REVIEW_C2S_V2_1_LEDGER.json')
+          d=json.loads(p.read_text())
+          s=d['summary']
+          assert s['material_item_count']==39
+          assert s['mapped_material_item_count']==39
+          assert s['unmapped_material_item_count']==0
+          assert s['silent_loss_count']==0
+          assert s['review_result_without_owner']==0
+          assert s['review_result_without_action']==0
+          assert s['review_result_without_utilization_state']==0
+          ids={x['id'] for x in d['freshness_patch']}
+          assert ids=={'C2S-NWR2-018','C2S-NWR2-019','C2S-NWR2-039'}
+          for x in d['freshness_patch']:
+            for k in ('owner','disposition','utilization_state','action_ref','next_action','verification_status'):
+              assert str(x.get(k,'')).strip(), (x['id'],k)
+          assert d['live_baseline']['ready_device_verified'] is False
+          assert d['live_baseline']['ready_production_verified'] is False
+          PY
+      - name: Validate live Notion timetable structure inspection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('HISTORY/2026-09-20_NOTION_TIMETABLE_STRUCTURE_INSPECTION.json').read_text())
+          assert d['atom_id']=='C2S-NWR2-037'
+          assert d['target_database']['active_row_count']==12
+          assert d['confirmed_defect']['row_count']==0
+          assert d['confirmed_defect']['classification']=='CONFIRMED_EMPTY_DUPLICATE_DATA_SOURCE'
+          assert d['cleanup_attempt']['result']=='TOOL_BLOCKED'
+          assert d['cleanup_attempt']['active_source_modified'] is False
+          assert d['c2s_result']['reflection_gap_closed'] is True
+          assert d['c2s_result']['cleanup_complete'] is False
+          assert d['coverage']['unmapped_material']==0
+          assert d['coverage']['silent_loss']==0
+          PY
+      - name: Validate direct Drive C2S intake
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_pass.json
+      - name: Validate direct Drive C2S compile closure with reflection still open
+        run: python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_compile_closed_pass.json
+      - name: Validate Work OS reusable and volatile registries
+        run: |
+          python ENFORCEMENT/work_os_registry_validator.py \
+            --recipe OS/ASSET_SKILL_RECIPE_REGISTRY.json \
+            --capability OS/VOLATILE_CAPABILITY_REGISTRY.json
+      - name: Validate Work OS productive routing
+        run: |
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_pipeline.json > /tmp/work-pipeline.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_idea.json > /tmp/work-idea.json
+          python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_visual.json > /tmp/work-visual.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/work-pipeline.json').read_text())['route']['next_stage']=='VERIFY'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['destination']=='_LAB'
+          assert json.loads(Path('/tmp/work-idea.json').read_text())['route']['canonical'] is False
+          assert json.loads(Path('/tmp/work-visual.json').read_text())['route']['visualization']=='FLOW_DIAGRAM'
+          PY
+      - name: Reject incomplete Work OS idea routing
+        run: |
+          if python ENFORCEMENT/work_os_productive_router.py ENFORCEMENT/fixtures/work_os_router_fail.json; then
+            echo "Expected incomplete idea record to fail"
+            exit 1
+          fi
+          echo "Expected Work OS router failure observed"
+      - name: Reject NotebookLM-dependent direct C2S intake
+        run: |
+          if python ENFORCEMENT/drive_c2s_intake_validator.py ENFORCEMENT/fixtures/drive_c2s_intake_fail.json; then
+            echo "Expected NotebookLM-dependent intake to be rejected"
+            exit 1
+          fi
+          echo "Expected direct Drive C2S dependency failure observed"
+      - name: Replay baseline fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases.json
+      - name: Replay enforcement v2 fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v2.json
+      - name: Replay outcome optimization fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v3.json
+      - name: Replay evidence-backed orchestration fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v4.json
+      - name: Replay generic pre-action rule-application fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
+      - name: Replay production authority and no-pass-no-show fixtures
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v6.json
+      - name: Validate fresh-context Notion review routing
+        run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
+      - name: Reject fresh-context Notion structure-substitution regression
+        run: |
+          if python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_fail.json --repo-root .; then
+            echo "Expected fresh-context Notion regression fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected fresh-context Notion routing failure observed"
+      - name: Validate structured preflight evidence
+        run: python ENFORCEMENT/preflight_bridge.py --record ENFORCEMENT/fixtures/preflight_evidence_pass.json --repo-root .
+      - name: Validate controlled runtime orchestrator
+        run: python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+
+      - name: Runtime hardening focused regressions
+        working-directory: ENFORCEMENT
+        run: |
+          python change_preserve_contract_test.py
+          python execution_outcome_state_test.py
+          python approval_checkpoint_resume_test.py
+          python execution_state_approval_binding_test.py
+          python untrusted_reader_quarantine_test.py
+          python context_firewall_test.py
+          python synthesis_barrier_test.py
+          python behavioral_eval_test.py
+          python trace_to_regression_test.py
+          python runtime_hardening_integration_test.py
+
+      - name: Atomic CURRENT checkpoint regression
+        run: python ENFORCEMENT/execution_checkpoint_test.py
+
+      - name: Local Google Drive workspace regression
+        run: python ENFORCEMENT/local_drive_workspace_test.py
+      - name: Data index search projection regression
+        run: python ENFORCEMENT/data_index_search_test.py
+      - name: Validate generated Codex task contract
+        run: |
+          python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          contract=data.get('task_contract')
+          assert contract, 'task_contract missing'
+          Path('/tmp/generated_contract.json').write_text(json.dumps(contract, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/codex_task_contract_validator.py /tmp/generated_contract.json
+      - name: Validate Ready target-local executor adapter routing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/runtime.json').read_text())
+          adapter=data.get('executor_adapter') or {}
+          envelope=data.get('dispatch_envelope') or {}
+          assert adapter.get('adapter_id') == 'READY_SET_GITHUB_CODEX_V1', adapter
+          assert adapter.get('implementation_commit') == '1d672d862cc8329a5f19ca91c9ed6a338752f5ae', adapter
+          liveness=adapter.get('liveness_recovery') or {}
+          assert liveness.get('state') == 'ACTIVE_IN_READY_SET_MAIN', liveness
+          assert liveness.get('provider_binding') == 'GITHUB_ACTIONS_RUN_AND_JOB_STATE', liveness
+          assert liveness.get('side_effect_retry_contract_bypass') is False, liveness
+          source=adapter.get('queue_source_provenance') or {}
+          assert source.get('state') == 'ACTIVE_IN_READY_SET_MAIN', source
+          assert source.get('public_untrusted_issue_execution_blocked') is True, source
+          bridge=adapter.get('cross_repo_queue_bridge') or {}
+          assert bridge.get('queue_repository') == 'hns140412-glitch/Ready-Set', bridge
+          assert bridge.get('consumer_repository') == 'hns140412-glitch/TAKY', bridge
+          assert bridge.get('state') == 'CROSS_REPO_CREDENTIAL_ABSENT', bridge
+          assert bridge.get('builtin_github_token_cross_repo_write_capable') is False, bridge
+          assert envelope.get('transport') == 'GITHUB_ISSUE_QUEUE', envelope
+          assert envelope.get('dispatch_target_repository') == 'hns140412-glitch/Ready-Set', envelope
+          assert envelope.get('external_executor_invocation_verified') is False
+          PY
+      - name: Validate REWORK state transition
+        run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
+      - name: Validate successful executor review
+        run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Validate GitHub Issue queue formatter/parser
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --transport GITHUB_ISSUE_QUEUE --output /tmp/github-envelope.json
+          python ENFORCEMENT/github_issue_executor_queue.py issue --envelope /tmp/github-envelope.json --output /tmp/github-issue.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          assert issue['title'].startswith('[TAKY EXECUTOR QUEUE]')
+          assert 'TAKY_EXECUTOR_DISPATCH_JSON_BEGIN' in issue['body']
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->\n'
+          Path('/tmp/github-comment.txt').write_text(comment)
+          PY
+          python ENFORCEMENT/github_issue_executor_queue.py parse-comment --comment /tmp/github-comment.txt > /tmp/parsed-comment.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          parsed=json.loads(Path('/tmp/parsed-comment.json').read_text())
+          assert parsed['receipt']['task_id']==env['task_id']
+          Path('/tmp/receipt.json').write_text(json.dumps(parsed['receipt'], indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_transport.py verify-receipt --envelope /tmp/github-envelope.json --receipt /tmp/receipt.json
+      - name: Validate GitHub queue consumer lifecycle
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          env=json.loads(Path('/tmp/github-envelope.json').read_text())
+          trusted_issue={'number': 101, 'title': issue['title'], 'body': issue['body'], 'author': {'login':'hns140412-glitch'}, 'authorAssociation':'OWNER'}
+          open_event={'issue': trusted_issue}
+          Path('/tmp/queue-open-event.json').write_text(json.dumps(open_event))
+          receipt={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'executor_run_id':'fixture-run-001',
+            'status':'ACCEPTED'
+          }
+          receipt_comment='<!-- TAKY_EXECUTOR_RECEIPT_JSON_BEGIN -->\n'+json.dumps(receipt)+'\n<!-- TAKY_EXECUTOR_RECEIPT_JSON_END -->'
+          receipt_event={'issue': trusted_issue, 'comment': {'body': receipt_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-receipt-event.json').write_text(json.dumps(receipt_event))
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            'task_id':env['task_id'],
+            'provider':env['provider'],
+            'task_contract_sha256':env['task_contract_sha256'],
+            'completion_report':report
+          }
+          result_comment='<!-- TAKY_EXECUTOR_RESULT_JSON_BEGIN -->\n'+json.dumps(result)+'\n<!-- TAKY_EXECUTOR_RESULT_JSON_END -->'
+          result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'github-actions[bot]'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-result-event.json').write_text(json.dumps(result_event))
+          forged_result_event={'issue': trusted_issue, 'comment': {'body': result_comment, 'author': {'login':'untrusted-user'}, 'authorAssociation':'NONE'}}
+          Path('/tmp/queue-forged-result-event.json').write_text(json.dumps(forged_result_event))
+          PY
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-open-event.json --event-name issues --output /tmp/queue-open-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-receipt-event.json --event-name issue_comment --output /tmp/queue-receipt-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-result-event.json --event-name issue_comment --output /tmp/queue-result-plan.json
+          python ENFORCEMENT/github_queue_consumer.py --event /tmp/queue-forged-result-event.json --event-name issue_comment --output /tmp/queue-forged-result-plan.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
+          assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
+          assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          forged=json.loads(Path('/tmp/queue-forged-result-plan.json').read_text())
+          assert forged['action']=='REJECT_UNTRUSTED_MACHINE_COMMENT', forged
+          assert forged['pass'] is False, forged
+          PY
+      - name: Validate scheduled queue poller idempotency
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          issue=json.loads(Path('/tmp/github-issue.json').read_text())
+          receipt_event=json.loads(Path('/tmp/queue-receipt-event.json').read_text())
+          result_event=json.loads(Path('/tmp/queue-result-event.json').read_text())
+          snapshot={
+            'number':101,
+            'title':issue['title'],
+            'body':issue['body'],
+            'author':{'login':'hns140412-glitch'},
+            'authorAssociation':'OWNER',
+            'comments':[
+              {'id':201,'body':receipt_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
+              {'id':202,'body':result_event['comment']['body'],'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'},
+            ]
+          }
+          Path('/tmp/poll-snapshot.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          plan=json.loads(Path('/tmp/poll-plan-1.json').read_text())
+          assert len(plan['comments_to_publish']) == 3, plan
+          for i, body in enumerate(plan['comments_to_publish'], start=301):
+            snapshot['comments'].append({'id':i,'body':body,'author':{'login':'github-actions[bot]'},'authorAssociation':'NONE'})
+          Path('/tmp/poll-snapshot-acked.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-acked.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-2.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-2.json').read_text())
+          assert plan['comments_to_publish'] == [], plan
+          snapshot=json.loads(Path('/tmp/poll-snapshot.json').read_text())
+          snapshot['author']={'login':'untrusted-user'}
+          snapshot['authorAssociation']='NONE'
+          Path('/tmp/poll-snapshot-forged.json').write_text(json.dumps(snapshot))
+          PY
+          python ENFORCEMENT/github_queue_poll_plan.py --snapshot /tmp/poll-snapshot-forged.json --queue-repository hns140412-glitch/Ready-Set --output /tmp/poll-plan-forged.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('/tmp/poll-plan-forged.json').read_text())
+          assert plan['pass'] is False, plan
+          assert plan['comments_to_publish'] == [], plan
+          assert plan['processed'][0]['action'] == 'REJECT_UNTRUSTED_QUEUE_ISSUE', plan
+          PY
+      - name: Validate executor transport and closed review cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_pass.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          bad=dict(result)
+          bad["task_contract_sha256"]="0"*64
+          Path('/tmp/executor_result_bad.json').write_text(json.dumps(bad, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          if python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result_bad.json; then
+            echo "Expected mismatched executor result hash to be rejected"
+            exit 1
+          fi
+          echo "Expected executor-result integrity failure observed"
+      - name: Validate failed executor result returns to REWORK through cycle
+        run: |
+          python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          env=json.loads(Path('/tmp/envelope-fail.json').read_text())
+          report=json.loads(Path('ENFORCEMENT/fixtures/executor_review_fail.json').read_text())
+          result={
+            "task_id": env["task_id"],
+            "provider": env["provider"],
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": report,
+          }
+          Path('/tmp/executor_result_fail.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope-fail.json --result /tmp/executor_result_fail.json > /tmp/cycle-fail.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/cycle-fail.json').read_text())
+          assert data["review"]["review_decision"] == "REWORK"
+          assert data["transition"]["current_state"] == "REWORK"
+          assert data["next_action"] == "RETURN_REWORK_TO_EXECUTOR"
+          PY
+      - name: Route failed executor review to REWORK
+        run: |
+          if python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json; then
+            echo "Expected failed executor evidence to require REWORK"
+            exit 1
+          fi
+          python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_fail.json > /tmp/review.json || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/review.json').read_text())
+          assert data.get('review_decision') == 'REWORK'
+          transition=data.get('state_transition') or {}
+          transition['defects']=data.get('defects', [])
+          transition['acceptance_delta']=data.get('acceptance_delta', [])
+          Path('/tmp/rework_transition.json').write_text(json.dumps(transition, ensure_ascii=False, indent=2)+'\n')
+          PY
+          python ENFORCEMENT/execution_state_engine.py /tmp/rework_transition.json
+      - name: Reject forbidden state shortcut
+        run: |
+          if python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_shortcut_fail.json; then
+            echo "Expected forbidden state shortcut to be rejected"
+            exit 1
+          fi
+          echo "Expected forbidden transition failure observed"
+      - name: Replay AI-producer artifact PRE/POST negative and recovery cases
+        run: python ENFORCEMENT/producer_artifact_gate_test.py
+      - name: Reject runtime without operational assimilation
+        run: |
+          if python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_fail.json --repo-root .; then
+            echo "Expected runtime orchestrator to block missing working model"
+            exit 1
+          fi
+          echo "Expected runtime working-model failure observed"
+      - name: Replay evidence integrity failures
+        run: python ENFORCEMENT/evidence_bridge_regression.py
+      - name: Validate Codex task contract fixture
+        run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
+      - name: Validate self-contained handoff fixture
+        run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
+      - name: Validate conversation-to-system coverage fixture
+        run: python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_pass.json
+      - name: Guard C2S semantic core and stale residue
+        run: python ENFORCEMENT/c2s_semantic_boundary_regression.py
+      - name: Reject lossy conversation-to-system fixture
+        run: |
+          if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_fail.json; then
+            echo "Expected failure fixture to be rejected"
+            exit 1
+          fi
+          echo "Expected failure observed"
+      - name: Reject C2S downstream-state conflation
+        run: |
+          if python ENFORCEMENT/conversation_coverage_validator.py ENFORCEMENT/fixtures/conversation_coverage_downstream_conflation_fail.json; then
+            echo "Expected downstream-conflated C2S closure to be rejected"
+            exit 1
+          fi
+          echo "Expected C2S/downstream separation failure observed"
+      - name: Validate C2S runtime bridge
+        run: |
+          python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_pass.json \
+            --repo-root .
+      - name: Reject C2S runtime bridge without coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject missing coverage"
+            exit 1
+          fi
+          echo "Expected missing-coverage failure observed"
+      - name: Reject C2S runtime bridge with lossy coverage
+        run: |
+          if python ENFORCEMENT/c2s_preflight_bridge.py \
+            --record ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json \
+            --coverage-record ENFORCEMENT/fixtures/conversation_coverage_fail.json \
+            --repo-root .; then
+            echo "Expected C2S runtime bridge to reject lossy coverage"
+            exit 1
+          fi
+          echo "Expected lossy-coverage failure observed"
+      - name: Validate architecture conversation C2S ledger
+        run: python ENFORCEMENT/conversation_coverage_validator.py HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json
+      - name: Validate review-result C2S utilization closure
+        run: |
+          python ENFORCEMENT/review_result_c2s_validator.py ENFORCEMENT/fixtures/review_result_c2s_pass.json
+          python ENFORCEMENT/review_result_c2s_validator.py HISTORY/2026-09-19_NOTION_REVIEW_RESULT_C2S_LEDGER.json
+      - name: Reject record-only review-result regression
+        run: |
+          if python ENFORCEMENT/review_result_c2s_validator.py ENFORCEMENT/fixtures/review_result_c2s_fail.json; then
+            echo "Expected review-result utilization failure"
+            exit 1
+          fi
+          echo "Expected review-result C2S failure observed"
+      - name: Validate lightweight conversation continuity
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_pass.json
+      - name: Validate targeted historical recovery
+        run: python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_targeted_pass.json
+      - name: Reject recoverable-context re-ask
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_reask_fail.json; then
+            echo "Expected ASK LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected recoverable-context re-ask failure observed"
+      - name: Reject unnecessary full-history load
+        run: |
+          if python ENFORCEMENT/conversation_continuity_validator.py ENFORCEMENT/fixtures/conversation_continuity_heavy_fail.json; then
+            echo "Expected FULL SCAN LAST violation to be rejected"
+            exit 1
+          fi
+          echo "Expected unnecessary full-scan failure observed"
+      - name: Validate saved-share transcript sanitization
+        run: |
+          python ENFORCEMENT/chatgpt_share_transcript_sanitizer.py ENFORCEMENT/fixtures/chatgpt_share_fixture.html -o /tmp/share.md
+          python ENFORCEMENT/chatgpt_share_transcript_validator.py /tmp/share.md
+          diff -u ENFORCEMENT/fixtures/chatgpt_share_expected.md /tmp/share.md
+      - name: Reject unsafe sanitized transcript
+        run: |
+          if python ENFORCEMENT/chatgpt_share_transcript_validator.py ENFORCEMENT/fixtures/chatgpt_share_unsafe.md; then
+            echo "Expected unsafe transcript to be rejected"
+            exit 1
+          fi
+          echo "Expected unsafe transcript failure observed"
+>>>>>>> LIVE_MAIN

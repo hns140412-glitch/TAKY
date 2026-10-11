@@ -17,10 +17,17 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_OUTCOME_UTILITY = Path(
+    os.environ.get("TAKY_DATA_INDEX_OUTCOME_UTILITY")
+    or (ROOT / "LEARNING" / "evidence" / "data-index-outcome-utility.json")
+)
 
 TOKEN_RE = re.compile(r"[0-9A-Za-z_\-\.]+|[가-힣]+")
 RRF_K = 60.0
@@ -34,6 +41,7 @@ CORE_DISCOVERY_FIELDS = (
     "controlled_terms",
     "keywords",
     "entities",
+    "ai_categories",
 )
 
 
@@ -114,6 +122,7 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "keywords": discovery.get("keywords") or record.get("keywords") or [],
         "entities": discovery.get("entities") or record.get("entities") or [],
         "consumer_candidates": consumer_candidates if isinstance(consumer_candidates, list) else [consumer_candidates],
+        "ai_categories": record.get("ai_categories") if isinstance(record.get("ai_categories"), list) else [],
         "relations": relations,
         "legacy_relation_hints": legacy_relation_hints,
         "index_state": state.get("index_state") or record.get("source_review_state"),
@@ -126,6 +135,11 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "legacy_duplicate_group": record.get("duplicate_group"),
         "legacy_fragment_group": record.get("fragment_group"),
         "legacy_version_relation": record.get("version_relation"),
+        "outcome_utility": (
+            state.get("outcome_utility")
+            if isinstance(state.get("outcome_utility"), dict)
+            else (record.get("outcome_utility") if isinstance(record.get("outcome_utility"), dict) else {})
+        ),
     }
     return normalized
 
@@ -226,6 +240,7 @@ def _matches_filter(record: dict[str, Any], key: str, expected: str) -> bool:
         "origin": "origin_type",
         "current": "current_relation",
         "media": "media_type",
+        "ai_category": "ai_categories",
     }
     key = aliases.get(key, key)
     actual = record.get(key)
@@ -233,6 +248,19 @@ def _matches_filter(record: dict[str, Any], key: str, expected: str) -> bool:
     if isinstance(actual, list):
         return any(str(v).lower() == expected_l for v in actual)
     return str(actual).lower() == expected_l if actual is not None else False
+
+
+def attach_outcome_utility(records: list[dict[str, Any]], utility_by_source: dict[str, Any] | None) -> list[dict[str, Any]]:
+    utility_by_source = utility_by_source or {}
+    out = []
+    for record in records:
+        copy = dict(record)
+        sid = str(copy.get("source_id") or "")
+        utility = utility_by_source.get(sid)
+        if isinstance(utility, dict):
+            copy["outcome_utility"] = dict(utility)
+        out.append(copy)
+    return out
 
 
 def apply_filters(records: Iterable[dict[str, Any]], filters: dict[str, str]) -> list[dict[str, Any]]:
@@ -328,6 +356,27 @@ def _rank(scores: dict[str, float]) -> list[str]:
     return [sid for sid, _ in sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))]
 
 
+def outcome_utility_score(record: dict[str, Any]) -> float:
+    """Bounded secondary utility signal. Never outranks exact/CURRENT authority tiers."""
+    u = record.get("outcome_utility")
+    if not isinstance(u, dict):
+        return 0.0
+    success = float(u.get("verified_success", 0) or 0)
+    failure = float(u.get("verified_failure", 0) or 0)
+    recovery = float(u.get("recovery_success", 0) or 0)
+    regression_fail = float(u.get("regression_failure", 0) or 0)
+    reuse = float(u.get("verified_reuse", 0) or 0)
+    raw = success + 0.75 * recovery + 0.25 * reuse - 1.25 * failure - 1.5 * regression_fail
+    return math.tanh(raw / 4.0)
+
+
+def authority_rank_key(sid: str, record: dict[str, Any], fused_score: float, exact: dict[str, float]):
+    exact_tier = 0 if sid in exact else 1
+    current_tier = 0 if str(record.get("current_relation") or "").upper() == "CURRENT_INDEX_ENTRY" else 1
+    utility = outcome_utility_score(record)
+    return (exact_tier, current_tier, -utility, -fused_score, sid)
+
+
 def rrf_fuse(channels: list[dict[str, float]]) -> dict[str, float]:
     fused: defaultdict[str, float] = defaultdict(float)
     for scores in channels:
@@ -403,8 +452,10 @@ def search(
     relation_depth: int = 1,
     semantic_vector_scores: dict[str, float] | None = None,
     semantic_metadata: dict[str, Any] | None = None,
+    outcome_utility_by_source: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     filters = filters or {}
+    records = attach_outcome_utility(records, outcome_utility_by_source)
     candidates = apply_filters(records, filters)
     by_id = {r["source_id"]: r for r in candidates}
 
@@ -422,7 +473,10 @@ def search(
     fused = rrf_fuse(channels_for_fusion)
     pre_relation = _rank(fused)
     fused = relation_expand(pre_relation, by_id, fused, relation_depth)
-    ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
+    ranked = sorted(
+        fused.items(),
+        key=lambda kv: authority_rank_key(kv[0], by_id[kv[0]], kv[1], exact),
+    )
 
     results = []
     for sid, score in ranked[:limit]:
@@ -448,6 +502,12 @@ def search(
                     "publisher_or_account": r.get("publisher_or_account"),
                 },
                 "score": round(score, 8),
+                "ranking": {
+                    "exact_authority_tier": 0 if sid in exact else 1,
+                    "current_authority_tier": 0 if str(r.get("current_relation") or "").upper() == "CURRENT_INDEX_ENTRY" else 1,
+                    "outcome_utility": round(outcome_utility_score(r), 6),
+                    "rule": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE"
+                },
                 "channels": {
                     "exact": sid in exact,
                     "lexical": sid in lexical,
@@ -467,7 +527,7 @@ def search(
     ]
     if vector_enabled:
         pipeline.append("VERIFIED_NEURAL_VECTOR")
-    pipeline.extend(["RRF", "RELATION_EXPANSION"])
+    pipeline.extend(["RRF", "RELATION_EXPANSION", "AUTHORITY_PRESERVING_OUTCOME_UTILITY_RERANK"])
 
     return {
         "projection_authoritative": False,
@@ -508,6 +568,7 @@ def main() -> int:
     ap.add_argument("--relation-depth", type=int, default=1)
     ap.add_argument("--vector-index", type=Path)
     ap.add_argument("--query-vector", type=Path)
+    ap.add_argument("--outcome-utility", type=Path, help="Optional TAKY_DATA_INDEX_OUTCOME_UTILITY_V1 sidecar")
     args = ap.parse_args()
 
     if args.limit < 1:
@@ -536,6 +597,20 @@ def main() -> int:
         )
         vector_meta = vector_metadata(vector_index)
 
+    utility_by_source = None
+    utility_path = args.outcome_utility
+    utility_auto_discovered = False
+    if utility_path is None and DEFAULT_OUTCOME_UTILITY.exists():
+        utility_path = DEFAULT_OUTCOME_UTILITY
+        utility_auto_discovered = True
+    if utility_path:
+        utility_payload = json.loads(utility_path.read_text(encoding="utf-8"))
+        if utility_payload.get("schema") != "TAKY_DATA_INDEX_OUTCOME_UTILITY_V1":
+            ap.error("--outcome-utility schema must be TAKY_DATA_INDEX_OUTCOME_UTILITY_V1")
+        if utility_payload.get("authoritative") is not False:
+            ap.error("--outcome-utility must remain non-authoritative")
+        utility_by_source = utility_payload.get("by_source_id") or {}
+
     result = search(
         load_index(args.index),
         args.query,
@@ -544,7 +619,14 @@ def main() -> int:
         relation_depth=args.relation_depth,
         semantic_vector_scores=vector_scores_input,
         semantic_metadata=vector_meta,
+        outcome_utility_by_source=utility_by_source,
     )
+    result["outcome_utility_projection"] = {
+        "applied": bool(utility_by_source),
+        "auto_discovered": utility_auto_discovered,
+        "path": str(utility_path) if utility_path else None,
+        "authoritative": False,
+    }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 

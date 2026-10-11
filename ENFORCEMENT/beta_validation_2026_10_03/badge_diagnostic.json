@@ -1,0 +1,10 @@
+{
+  "command": [
+    "node",
+    "-e",
+    "const fs=require('node:fs');for(const op of ['openSync','fsyncSync','renameSync','writeFileSync']){const original=fs[op];fs[op]=function(...args){try{return original.apply(this,args)}catch(e){console.error(JSON.stringify({operation:op,target:args[0],code:e.code,message:e.message}));throw e}}}require('./BADGE/badge-award-calendar.test.js');"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "{\"operation\":\"fsyncSync\",\"target\":4,\"code\":\"EPERM\",\"message\":\"EPERM: operation not permitted, fsync\"}\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at D:\\Git PWA\\TAKY\\BADGE\\badge-award-calendar.test.js:61:10 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n"
+}

@@ -1,0 +1,19 @@
+{
+  "pass": true,
+  "detected": [],
+  "current_path": "D:\\Git PWA\\TAKY\\CURRENT\\EXPECTED_OWNER\\EXPECTED_TASK.json",
+  "checkpoint": {
+    "checkpoint_version": "1.0",
+    "task_id": "OTHER_TASK",
+    "namespace": "OTHER_OWNER",
+    "atomic_unit": "unit",
+    "status": "RUNNING",
+    "done": [],
+    "open": [],
+    "next": "continue",
+    "corrections": [],
+    "source_refs": [],
+    "updated_at": "2026-10-03T00:00:00Z",
+    "checkpoint_hash": "sha256:c2f8e6cfad123cb3a61cb55e121b6ab0b11368d285e54b6c23d84a1a34044ac5"
+  }
+}

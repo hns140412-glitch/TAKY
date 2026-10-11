@@ -38,8 +38,29 @@ for key in ("READY_SET","SNAP_POP","HIDE_SEEK"):
     if not str(gh.get("head_evidence_state","")).startswith("LIVE_REFRESHED_"):
         fail.append(f"GITHUB_HEAD_FRESHNESS_MISSING:{key}")
     drv=app.get("drive") or {}
-    if not drv.get("id") or drv.get("parent_role")!="10_PROJECTS":
-        fail.append(f"DRIVE_PROJECT_ROUTE_INVALID:{key}")
+    if not drv.get("id"):
+        fail.append(f"DRIVE_PROJECT_ID_MISSING:{key}")
+    if drv.get("parent_role")!="LEARNING_ASSET_PROJECT_SURFACE":
+        fail.append(f"DRIVE_PROJECT_PARENT_ROLE_INVALID:{key}")
+    if drv.get("parent_id")!="1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA":
+        fail.append(f"DRIVE_PROJECT_PARENT_ID_INVALID:{key}")
+    if drv.get("parent_path")!="TAKY/10_DOMAINS/01_LEARNING/05_ASSETS":
+        fail.append(f"DRIVE_PROJECT_PARENT_PATH_INVALID:{key}")
+    if drv.get("current_physical_path")!="TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/"+str(drv.get("name") or ""):
+        fail.append(f"DRIVE_PROJECT_CURRENT_PATH_INVALID:{key}")
+
+for key in ("SHARED_ASSETS","MOBILE_CATALOG"):
+    drv=(apps.get(key,{}) or {}).get("drive") or {}
+    if not drv.get("id"):
+        fail.append(f"DRIVE_PROJECT_ID_MISSING:{key}")
+    if drv.get("parent_role")!="LEARNING_ASSET_PROJECT_SURFACE":
+        fail.append(f"DRIVE_PROJECT_PARENT_ROLE_INVALID:{key}")
+    if drv.get("parent_id")!="1UHnAPWfJ04dIzNl8INgjXy9Xh4WylTVA":
+        fail.append(f"DRIVE_PROJECT_PARENT_ID_INVALID:{key}")
+    if drv.get("parent_path")!="TAKY/10_DOMAINS/01_LEARNING/05_ASSETS":
+        fail.append(f"DRIVE_PROJECT_PARENT_PATH_INVALID:{key}")
+    if drv.get("current_physical_path")!="TAKY/10_DOMAINS/01_LEARNING/05_ASSETS/"+str(drv.get("name") or ""):
+        fail.append(f"DRIVE_PROJECT_CURRENT_PATH_INVALID:{key}")
 
 # Exact current deploy claims must be proven by SHA equality.
 for key,app in apps.items():

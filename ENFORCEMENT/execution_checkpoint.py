@@ -80,6 +80,16 @@ def checkpoint_hash(record: dict[str, Any]) -> str:
     return "sha256:" + hashlib.sha256(canonical_bytes(record)).hexdigest()
 
 
+def object_hash(value: object) -> str:
+    payload = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
 def paths(repo_root: Path, record: dict[str, Any]) -> tuple[Path, Path]:
     namespace = _slug(str(record["namespace"]))
     task_id = _slug(str(record["task_id"]))
@@ -104,7 +114,50 @@ def _atomic_write(path: Path, payload: bytes) -> None:
             os.unlink(temp_name)
 
 
-def persist(record: dict[str, Any], state_root: Path, append_history: bool = True) -> dict[str, Any]:
+def _write_immutable(path: Path, payload: bytes) -> tuple[bool, str | None]:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        fd = os.open(str(path), os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    except FileExistsError:
+        try:
+            return (path.read_bytes() == payload, "HISTORY_IMMUTABILITY_CONFLICT")
+        except OSError:
+            return (False, "HISTORY_UNREADABLE")
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except Exception:
+        try:
+            path.unlink()
+        except OSError:
+            pass
+        raise
+    return True, None
+
+
+def _acquire_current_lock(current: Path) -> tuple[Path | None, str | None]:
+    current.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = current.with_name(current.name + ".lock")
+    try:
+        fd = os.open(str(lock_path), os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    except FileExistsError:
+        return None, "CHECKPOINT_CONCURRENT_WRITE"
+    with os.fdopen(fd, "wb") as handle:
+        handle.write(f"pid={os.getpid()}\n".encode("utf-8"))
+        handle.flush()
+        os.fsync(handle.fileno())
+    return lock_path, None
+
+
+def persist(
+    record: dict[str, Any],
+    state_root: Path,
+    append_history: bool = True,
+    *,
+    expected_current_hash: str | None = None,
+) -> dict[str, Any]:
     failures = validate(record)
     if failures:
         return {"pass": False, "detected": failures}
@@ -114,29 +167,64 @@ def persist(record: dict[str, Any], state_root: Path, append_history: bool = Tru
     enriched["checkpoint_hash"] = checkpoint_hash(record)
     payload = canonical_bytes(enriched)
 
-    # Check immutable history before mutating CURRENT. A conflicting history
-    # identity must never advance the active resume pointer.
-    if append_history and history.exists():
-        existing = history.read_bytes()
-        if existing != payload:
-            return {
-                "pass": False,
-                "detected": ["HISTORY_IMMUTABILITY_CONFLICT"],
-                "current_path": str(current),
-                "history_path": str(history),
-            }
+    lock_path, lock_error = _acquire_current_lock(current)
+    if lock_error:
+        return {
+            "pass": False,
+            "detected": [lock_error],
+            "current_path": str(current),
+        }
 
-    _atomic_write(current, payload)
-    if append_history and not history.exists():
-        _atomic_write(history, payload)
+    try:
+        if expected_current_hash is not None:
+            if not current.exists():
+                return {
+                    "pass": False,
+                    "detected": ["CURRENT_CHECKPOINT_MISSING_DURING_COMPARE_AND_SWAP"],
+                    "current_path": str(current),
+                }
+            try:
+                active = json.loads(current.read_text(encoding="utf-8"))
+            except Exception:
+                return {
+                    "pass": False,
+                    "detected": ["CURRENT_CHECKPOINT_UNREADABLE_DURING_COMPARE_AND_SWAP"],
+                    "current_path": str(current),
+                }
+            if active.get("checkpoint_hash") != expected_current_hash:
+                return {
+                    "pass": False,
+                    "detected": ["CURRENT_CHECKPOINT_CHANGED_DURING_OPERATION"],
+                    "current_path": str(current),
+                    "actual_checkpoint_hash": active.get("checkpoint_hash"),
+                }
 
-    return {
-        "pass": True,
-        "detected": [],
-        "current_path": str(current),
-        "history_path": str(history) if append_history else None,
-        "checkpoint_hash": enriched["checkpoint_hash"],
-    }
+        # Immutable HISTORY wins before CURRENT is advanced. O_EXCL closes the
+        # check-then-write race between concurrent writers.
+        if append_history:
+            history_ok, history_error = _write_immutable(history, payload)
+            if not history_ok:
+                return {
+                    "pass": False,
+                    "detected": [history_error or "HISTORY_IMMUTABILITY_CONFLICT"],
+                    "current_path": str(current),
+                    "history_path": str(history),
+                }
+
+        _atomic_write(current, payload)
+        return {
+            "pass": True,
+            "detected": [],
+            "current_path": str(current),
+            "history_path": str(history) if append_history else None,
+            "checkpoint_hash": enriched["checkpoint_hash"],
+        }
+    finally:
+        if lock_path is not None:
+            try:
+                lock_path.unlink()
+            except OSError:
+                pass
 
 
 def guard(
@@ -155,6 +243,13 @@ def guard(
         return {"pass": False, "detected": ["CURRENT_CHECKPOINT_UNREADABLE"], "current_path": str(current)}
 
     failures = validate(record)
+
+    # The filename and content hash do not bind the record to the caller's
+    # requested identity (including distinct identities with the same slug).
+    if record.get("task_id") != task_id:
+        failures.append("CURRENT_CHECKPOINT_TASK_ID_MISMATCH")
+    if record.get("namespace") != namespace:
+        failures.append("CURRENT_CHECKPOINT_NAMESPACE_MISMATCH")
 
     stored_hash = record.get("checkpoint_hash")
     unhashed = dict(record)
@@ -183,6 +278,7 @@ def validate_approval_evidence(
     task_id: str,
     checkpoint_hash_value: str,
     atomic_unit: str,
+    approval_binding: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any] | None, list[str]]:
     failures: list[str] = []
     if not isinstance(evidence, dict):
@@ -207,6 +303,26 @@ def validate_approval_evidence(
     if evidence.get("atomic_unit") != atomic_unit:
         failures.append("APPROVAL_EVIDENCE_ATOMIC_UNIT_MISMATCH")
 
+    expected_action_kind = None
+    expected_action_payload_hash = None
+    if approval_binding is not None:
+        if not isinstance(approval_binding, dict):
+            failures.append("APPROVAL_BINDING_INVALID")
+        else:
+            expected_action_kind = approval_binding.get("action_kind")
+            expected_action_payload_hash = approval_binding.get("action_payload_hash")
+            if not isinstance(expected_action_kind, str) or not expected_action_kind.strip():
+                failures.append("APPROVAL_BINDING_ACTION_KIND_MISSING")
+            if (
+                not isinstance(expected_action_payload_hash, str)
+                or not expected_action_payload_hash.startswith("sha256:")
+            ):
+                failures.append("APPROVAL_BINDING_ACTION_PAYLOAD_HASH_MISSING")
+            if evidence.get("action_kind") != expected_action_kind:
+                failures.append("APPROVAL_EVIDENCE_ACTION_KIND_MISMATCH")
+            if evidence.get("action_payload_hash") != expected_action_payload_hash:
+                failures.append("APPROVAL_EVIDENCE_ACTION_PAYLOAD_HASH_MISMATCH")
+
     normalized = {
         "approval_id": approval_id.strip() if isinstance(approval_id, str) else None,
         "approver_ref": approver_ref.strip() if isinstance(approver_ref, str) else None,
@@ -215,6 +331,8 @@ def validate_approval_evidence(
         "task_id": task_id,
         "checkpoint_hash": checkpoint_hash_value,
         "atomic_unit": atomic_unit,
+        "action_kind": expected_action_kind,
+        "action_payload_hash": expected_action_payload_hash,
     }
     return normalized, failures
 
@@ -226,6 +344,8 @@ def consume_approval(
     task_id: str,
     expected_atomic_unit: str,
     expected_checkpoint_hash: str,
+    expected_action_kind: str,
+    expected_action_payload_hash: str,
     evidence: object,
 ) -> dict[str, Any]:
     guarded = guard(
@@ -247,8 +367,21 @@ def consume_approval(
     failures: list[str] = []
     if checkpoint.get("status") != "BLOCKED":
         failures.append("APPROVAL_CHECKPOINT_NOT_BLOCKED")
-    if not isinstance(checkpoint.get("approval_binding"), dict):
+    binding = checkpoint.get("approval_binding")
+    if not isinstance(binding, dict):
         failures.append("APPROVAL_BINDING_MISSING")
+        binding = {}
+    if not isinstance(expected_action_kind, str) or not expected_action_kind.strip():
+        failures.append("APPROVAL_EXPECTED_ACTION_KIND_MISSING")
+    if (
+        not isinstance(expected_action_payload_hash, str)
+        or not re.fullmatch(r"sha256:[0-9a-fA-F]{64}", expected_action_payload_hash)
+    ):
+        failures.append("APPROVAL_EXPECTED_ACTION_PAYLOAD_HASH_INVALID")
+    if binding.get("action_kind") != expected_action_kind:
+        failures.append("APPROVAL_CURRENT_ACTION_KIND_MISMATCH")
+    if binding.get("action_payload_hash") != expected_action_payload_hash:
+        failures.append("APPROVAL_CURRENT_ACTION_PAYLOAD_HASH_MISMATCH")
 
     normalized, evidence_failures = validate_approval_evidence(
         evidence,
@@ -256,6 +389,7 @@ def consume_approval(
         task_id=task_id,
         checkpoint_hash_value=expected_checkpoint_hash,
         atomic_unit=expected_atomic_unit,
+        approval_binding=checkpoint.get("approval_binding"),
     )
     failures.extend(evidence_failures)
     if failures:
@@ -282,6 +416,8 @@ def consume_approval(
         "task_id": task_id,
         "atomic_unit": expected_atomic_unit,
         "source_checkpoint_hash": expected_checkpoint_hash,
+        "action_kind": normalized.get("action_kind"),
+        "action_payload_hash": normalized.get("action_payload_hash"),
         "consumed_at": datetime.now(timezone.utc).isoformat(),
     }
     claim_payload = canonical_bytes(claim)
@@ -319,13 +455,28 @@ def consume_approval(
     consumed_record["updated_at"] = claim["consumed_at"]
     consumed_record["approval_consumption"] = claim
 
-    persisted = persist(consumed_record, state_root, append_history=True)
+    persisted = persist(
+        consumed_record,
+        state_root,
+        append_history=True,
+        expected_current_hash=expected_checkpoint_hash,
+    )
     if not persisted.get("pass"):
+        claim_rolled_back = False
+        try:
+            claim_path.unlink()
+            claim_rolled_back = True
+        except OSError:
+            pass
         return {
             "pass": False,
             "detected": list(persisted.get("detected", []))
-            + ["APPROVAL_CLAIMED_BUT_CHECKPOINT_COMPLETION_FAILED"],
-            "approval_consumed": True,
+            + [
+                "APPROVAL_CLAIM_ROLLED_BACK_AFTER_CHECKPOINT_CONFLICT"
+                if claim_rolled_back
+                else "APPROVAL_CLAIMED_BUT_CHECKPOINT_COMPLETION_FAILED"
+            ],
+            "approval_consumed": not claim_rolled_back,
             "claim_path": str(claim_path),
             "checkpoint_guard": guarded,
         }

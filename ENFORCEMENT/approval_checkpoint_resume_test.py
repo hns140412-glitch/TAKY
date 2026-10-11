@@ -4,7 +4,19 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from execution_checkpoint import consume_approval, guard, persist, validate_approval_evidence
+from execution_checkpoint import (
+    consume_approval,
+    guard,
+    object_hash,
+    persist,
+    validate_approval_evidence,
+)
+
+
+ACTION_PAYLOAD = {
+    "action": "merge",
+    "target_ref": "commit:abc123",
+}
 
 
 def checkpoint_record():
@@ -23,6 +35,8 @@ def checkpoint_record():
         "approval_binding": {
             "action_class": "HUMAN_APPROVAL",
             "execution_owner": "USER",
+            "action_kind": "MERGE",
+            "action_payload_hash": object_hash(ACTION_PAYLOAD),
         },
     }
 
@@ -36,6 +50,8 @@ def approval_evidence(checkpoint_hash):
         "task_id": "approval-resume-test",
         "checkpoint_hash": checkpoint_hash,
         "atomic_unit": "approval-boundary",
+        "action_kind": "MERGE",
+        "action_payload_hash": object_hash(ACTION_PAYLOAD),
     }
 
 
@@ -108,6 +124,8 @@ class ApprovalCheckpointResumeTest(unittest.TestCase):
                 task_id="approval-resume-test",
                 expected_atomic_unit="approval-boundary",
                 expected_checkpoint_hash=saved["checkpoint_hash"],
+                expected_action_kind="MERGE",
+                expected_action_payload_hash=object_hash(ACTION_PAYLOAD),
                 evidence=approval_evidence(saved["checkpoint_hash"]),
             )
             self.assertTrue(first["pass"], first)
@@ -128,6 +146,8 @@ class ApprovalCheckpointResumeTest(unittest.TestCase):
                 task_id="approval-resume-test",
                 expected_atomic_unit="approval-boundary",
                 expected_checkpoint_hash=saved["checkpoint_hash"],
+                expected_action_kind="MERGE",
+                expected_action_payload_hash=object_hash(ACTION_PAYLOAD),
                 evidence=approval_evidence(saved["checkpoint_hash"]),
             )
             self.assertFalse(replay["pass"])
@@ -160,6 +180,54 @@ class ApprovalCheckpointResumeTest(unittest.TestCase):
             atomic_unit="approval-boundary",
         )
         self.assertIn("APPROVAL_DECISION_NOT_APPROVED", failures)
+
+    def test_mutated_action_payload_hash_cannot_resume(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            saved = persist(checkpoint_record(), root)
+            self.assertTrue(saved["pass"], saved["detected"])
+            evidence = approval_evidence(saved["checkpoint_hash"])
+            evidence["action_payload_hash"] = object_hash(
+                {"action": "merge", "target_ref": "commit:changed"}
+            )
+            result = consume_approval(
+                root,
+                namespace="RUNTIME",
+                task_id="approval-resume-test",
+                expected_atomic_unit="approval-boundary",
+                expected_checkpoint_hash=saved["checkpoint_hash"],
+                expected_action_kind="MERGE",
+                expected_action_payload_hash=object_hash(ACTION_PAYLOAD),
+                evidence=evidence,
+            )
+            self.assertFalse(result["pass"])
+            self.assertIn(
+                "APPROVAL_EVIDENCE_ACTION_PAYLOAD_HASH_MISMATCH",
+                result["detected"],
+            )
+
+    def test_current_action_payload_cannot_change_after_approval(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            saved = persist(checkpoint_record(), root)
+            self.assertTrue(saved["pass"], saved["detected"])
+            result = consume_approval(
+                root,
+                namespace="RUNTIME",
+                task_id="approval-resume-test",
+                expected_atomic_unit="approval-boundary",
+                expected_checkpoint_hash=saved["checkpoint_hash"],
+                expected_action_kind="MERGE",
+                expected_action_payload_hash=object_hash(
+                    {"action": "merge", "target_ref": "commit:changed"}
+                ),
+                evidence=approval_evidence(saved["checkpoint_hash"]),
+            )
+            self.assertFalse(result["pass"])
+            self.assertIn(
+                "APPROVAL_CURRENT_ACTION_PAYLOAD_HASH_MISMATCH",
+                result["detected"],
+            )
 
     def test_approval_evidence_must_match_task_and_unit(self):
         evidence = approval_evidence("sha256:approved-state")

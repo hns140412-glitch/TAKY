@@ -1,0 +1,7 @@
+﻿{
+  "task_id": "alpha-test",
+  "current_state": "HUMAN_APPROVAL",
+  "requested_state": "MERGED",
+  "transition_target_ref": "local-only",
+  "merge_approval_required": false
+}

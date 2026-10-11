@@ -11,7 +11,10 @@ import hashlib
 import json
 from pathlib import Path
 
-VISUAL_KINDS = {"spreadsheet", "document", "pdf", "presentation", "image", "asset", "ui", "pwa"}
+from result_preview_gate import validate_preview
+from character_derivative_asset_package_validator import validate_package as validate_character_package, load_projection as load_character_projection
+
+VISUAL_KINDS = {"spreadsheet", "document", "pdf", "presentation", "image", "asset", "ui", "pwa", "character_derivative_asset"}
 KINDS = VISUAL_KINDS | {"code", "structured_data", "handoff", "research"}
 
 def _rooted(root: Path, value: str) -> Path:
@@ -100,6 +103,14 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
             errors.append("POST_OUTPUT_HASH_MISMATCH")
     except ValueError:
         errors.append("POST_OUTPUT_PATH_INVALID")
+    if contract.get("kind") == "character_derivative_asset" and output is not None and output.is_file():
+        try:
+            package = json.loads(output.read_text(encoding="utf-8-sig"))
+            package_result = validate_character_package(package, root, load_character_projection())
+            if package_result.get("pass") is not True:
+                errors.extend("CHARACTER_PACKAGE_" + str(code) for code in package_result.get("errors", []))
+        except Exception:
+            errors.append("CHARACTER_PACKAGE_VALIDATION_ERROR")
     required = ["source_trace", "semantic_check", "regression_check", "delivery_check"]
     if contract.get("kind") in VISUAL_KINDS:
         required.append("visual_check")
@@ -127,13 +138,49 @@ def postflight(contract: dict, receipt: dict, evidence: dict, root: Path) -> dic
             errors.append("POST_" + key.upper() + "_EVIDENCE_INVALID")
     if evidence.get("user_as_debugger"):
         errors.append("USER_AS_QA")
+    independent_preview_pass = False
     if evidence.get("claim") in {"COMPLETE", "RELEASE_READY"}:
         if not evidence.get("human_approval_ref"):
             errors.append("HUMAN_APPROVAL_MISSING")
-        # This gate checks receipts and signatures, not the actual fidelity of a
-        # rendered design. An approval string must never elevate it to PASS.
-        errors.append("INDEPENDENT_RESULT_VALIDATION_NOT_IMPLEMENTED")
-    return {"pass": not errors, "detected": errors, "claim_ceiling": "EVIDENCE_RECORDED_NOT_INDEPENDENTLY_VERIFIED" if not errors else "UNVERIFIED"}
+        preview_record = evidence.get("result_preview")
+        if not isinstance(preview_record, dict):
+            errors.append("INDEPENDENT_RESULT_VALIDATION_NOT_IMPLEMENTED")
+        else:
+            preview_result = validate_preview(preview_record, root)
+            if output is not None and output.is_file():
+                expected_revision = "sha256:" + _sha(output)
+                if preview_record.get("result_revision_hash") != expected_revision:
+                    errors.append("RESULT_PREVIEW_OUTPUT_REVISION_MISMATCH")
+                try:
+                    preview_output = _rooted(root, preview_record.get("result_path"))
+                except ValueError:
+                    errors.append("RESULT_PREVIEW_OUTPUT_PATH_INVALID")
+                else:
+                    if preview_output != output:
+                        errors.append("RESULT_PREVIEW_OUTPUT_PATH_MISMATCH")
+            if preview_result.get("pass") is not True:
+                errors.extend(
+                    str(code)
+                    for code in preview_result.get("detected", [])
+                )
+            else:
+                if preview_result.get("preview_required") is not True:
+                    errors.append("RESULT_PREVIEW_REQUIRED_FOR_MATERIAL_CLAIM")
+                if preview_result.get("acceptance_result") != "PASS":
+                    errors.append("RESULT_PREVIEW_ACCEPTANCE_REQUIRED_FOR_MATERIAL_CLAIM")
+                if preview_result.get("release_eligible") is not True:
+                    errors.append("RESULT_PREVIEW_NOT_RELEASE_ELIGIBLE_FOR_MATERIAL_CLAIM")
+                if preview_result.get("task_id") != contract.get("task_id"):
+                    errors.append("RESULT_PREVIEW_TASK_ID_MISMATCH")
+                if not errors:
+                    independent_preview_pass = True
+    if errors:
+        claim_ceiling = "UNVERIFIED"
+    elif independent_preview_pass:
+        claim_ceiling = "REVISION_BOUND_PREVIEW_ACCEPTED"
+    else:
+        claim_ceiling = "EVIDENCE_RECORDED_NOT_INDEPENDENTLY_VERIFIED"
+    return {"pass": not errors, "detected": list(dict.fromkeys(errors)), "claim_ceiling": claim_ceiling}
 
 def main() -> int:
     p = argparse.ArgumentParser()

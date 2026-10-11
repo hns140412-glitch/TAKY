@@ -1,0 +1,27 @@
+{
+  "design_intent": true,
+  "material_intent": true,
+  "interaction_expected": false,
+  "prompt_excerpt": "확정 시안 기준으로 UI 구현하고 결과물까지 검증해",
+  "touched_ui": [
+    "src/App.tsx"
+  ],
+  "touched_asset": [],
+  "touched_artifact": [],
+  "touched_code": [
+    "src/App.tsx"
+  ],
+  "browser_verified": true,
+  "browser_render_verified": true,
+  "browser_interaction_verified": false,
+  "code_verified": true,
+  "asset_verified": false,
+  "artifact_observed": false,
+  "stop_blocks": 0,
+  "failure_counts": {},
+  "last_failure": "",
+  "last_failed_sig": "",
+  "last_failure_cause": "",
+  "route_switch_required": false,
+  "last_verified_at": "2026-10-03T11:55:02.162937+00:00"
+}

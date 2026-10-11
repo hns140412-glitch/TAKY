@@ -1,0 +1,92 @@
+[
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT\\beta_validation_2026_10_03\\integration_probe.py"
+    ],
+    "expected_exit": 0,
+    "exit_code": 0,
+    "matched": true,
+    "stdout": "{\n  \"preflight_control\": {\n    \"pass\": true,\n    \"detected\": [],\n    \"runtime_claim_ceiling\": \"REPOSITORY_EXECUTABLE_CI_ENFORCED\",\n    \"live_runtime_auto_invocation_verified\": false\n  },\n  \"preflight_traversal\": {\n    \"pass\": false,\n    \"detected\": [\n      \"history_query_refs[0]:HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY\"\n    ],\n    \"runtime_claim_ceiling\": \"REPOSITORY_EXECUTABLE_CI_ENFORCED\",\n    \"live_runtime_auto_invocation_verified\": false\n  },\n  \"persist\": {\n    \"pass\": true,\n    \"detected\": [],\n    \"current_path\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\checkpoint_probe\\\\CURRENT\\\\TEST\\\\BETA_PROBE.json\",\n    \"history_path\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\checkpoint_probe\\\\HISTORY\\\\CHECKPOINTS\\\\TEST\\\\BETA_PROBE\\\\2026-10-03T000000Z__probe.json\",\n    \"checkpoint_hash\": \"sha256:d31edf3a5b202ce59f46099d312beb3b82fa5a46a31d85c62a5cc08f760b9fa9\"\n  },\n  \"guard_control\": {\n    \"pass\": true,\n    \"detected\": [],\n    \"current_path\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\checkpoint_probe\\\\CURRENT\\\\TEST\\\\BETA_PROBE.json\",\n    \"checkpoint\": {\n      \"atomic_unit\": \"probe\",\n      \"checkpoint_hash\": \"sha256:d31edf3a5b202ce59f46099d312beb3b82fa5a46a31d85c62a5cc08f760b9fa9\",\n      \"checkpoint_version\": \"1.0\",\n      \"corrections\": [],\n      \"done\": [],\n      \"namespace\": \"TEST\",\n      \"next\": \"review\",\n      \"open\": [],\n      \"source_refs\": [\n        \"local-probe\"\n      ],\n      \"status\": \"RUNNING\",\n      \"task_id\": \"BETA_PROBE\",\n      \"updated_at\": \"2026-10-03T00:00:00Z\"\n    }\n  },\n  \"guard_wrong_identity\": {\n    \"pass\": false,\n    \"detected\": [\n      \"CURRENT_CHECKPOINT_TASK_ID_MISMATCH\",\n      \"CURRENT_CHECKPOINT_NAMESPACE_MISMATCH\"\n    ],\n    \"current_path\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\checkpoint_probe\\\\CURRENT\\\\TEST\\\\BETA_PROBE.json\",\n    \"checkpoint\": {\n      \"checkpoint_version\": \"1.0\",\n      \"task_id\": \"OTHER_TASK\",\n      \"namespace\": \"OTHER_OWNER\",\n      \"atomic_unit\": \"probe\",\n      \"status\": \"RUNNING\",\n      \"done\": [],\n      \"open\": [],\n      \"next\": \"review\",\n      \"corrections\": [],\n      \"source_refs\": [\n        \"local-probe\"\n      ],\n      \"updated_at\": \"2026-10-03T00:00:00Z\",\n      \"checkpoint_hash\": \"sha256:9ae18dd277f580b26f5e8798827045fe7f30f8d7aa5e4bbfd67e8621d6dfd237\"\n    }\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/conversation_coverage_validator.py",
+      "ENFORCEMENT/fixtures/conversation_coverage_pass.json"
+    ],
+    "expected_exit": 0,
+    "exit_code": 0,
+    "matched": true,
+    "stdout": "PASS: FIXTURE-C2S-PASS-001 material=3 mapped=3 source_coverage=RECOVERED_SCOPE_COMPLETE\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/conversation_coverage_validator.py",
+      "ENFORCEMENT/fixtures/conversation_coverage_downstream_conflation_fail.json"
+    ],
+    "expected_exit": 1,
+    "exit_code": 1,
+    "matched": true,
+    "stdout": "FAIL: downstream execution must not be required for C2S closure\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/drive_c2s_intake_validator.py",
+      "ENFORCEMENT/fixtures/drive_c2s_compile_closed_pass.json"
+    ],
+    "expected_exit": 0,
+    "exit_code": 0,
+    "matched": true,
+    "stdout": "{\n  \"pass\": true,\n  \"detected\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/review_result_c2s_validator.py",
+      "ENFORCEMENT/fixtures/review_result_c2s_fail.json"
+    ],
+    "expected_exit": 1,
+    "exit_code": 1,
+    "matched": true,
+    "stdout": "{\n  \"pass\": false,\n  \"detected\": [\n    \"REVIEW_RESULT_NOT_C2S_SOURCE\",\n    \"RECORD_ONLY_PATH_NOT_BLOCKED\",\n    \"R-001:MISSING:utilization_state\",\n    \"R-001:MISSING:action_ref\",\n    \"R-001:MISSING:next_action\",\n    \"R-001:INVALID_UTILIZATION_STATE:MISSING\",\n    \"COVERAGE_MAPPED_COUNT_MISMATCH\",\n    \"UNMAPPED_MATERIAL_NONZERO\",\n    \"SILENT_LOSS_NONZERO\"\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/execution_state_engine.py",
+      "ENFORCEMENT/fixtures/execution_state_shortcut_fail.json"
+    ],
+    "expected_exit": 1,
+    "exit_code": 1,
+    "matched": true,
+    "stdout": "{\n  \"pass\": false,\n  \"detected\": [\n    \"FORBIDDEN_STATE_TRANSITION:CODEX_DONE->MERGED\"\n  ],\n  \"current_state\": \"CODEX_DONE\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "ENFORCEMENT/handoff_bundle_validator.py",
+      "ENFORCEMENT/fixtures/handoff_bundle_pass"
+    ],
+    "expected_exit": 0,
+    "exit_code": 1,
+    "matched": false,
+    "stdout": "{\n  \"bundle\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\fixtures\\\\handoff_bundle_pass\",\n  \"artifact_count\": 3,\n  \"required_owner_count\": 2,\n  \"resume_state_artifact_id\": \"canonical-fixture\",\n  \"resume_evidence_artifact_id\": \"resume-evidence\",\n  \"errors\": [\n    \"sha256 mismatch: handoff\",\n    \"sha256 mismatch: canonical-fixture\",\n    \"sha256 mismatch: resume-evidence\",\n    \"resume evidence state_sha256 does not match actual state artifact\"\n  ],\n  \"pass\": false,\n  \"claim_boundary\": \"EVIDENCE_BOUND_OFFLINE_RESUME_PASS != HOSTED_SESSION_AUTO_READ != LIVE_STATE_CURRENT\"\n}\n",
+    "stderr": ""
+  }
+]

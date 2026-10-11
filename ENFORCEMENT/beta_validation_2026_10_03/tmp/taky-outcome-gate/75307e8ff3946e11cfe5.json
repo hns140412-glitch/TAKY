@@ -1,0 +1,27 @@
+{
+  "design_intent": true,
+  "material_intent": true,
+  "interaction_expected": false,
+  "prompt_excerpt": "UI 구현하고 실제 결과까지 검증해",
+  "touched_ui": [
+    "src/App.tsx"
+  ],
+  "touched_asset": [],
+  "touched_artifact": [],
+  "touched_code": [
+    "src/App.tsx"
+  ],
+  "browser_verified": false,
+  "browser_render_verified": false,
+  "browser_interaction_verified": false,
+  "code_verified": false,
+  "asset_verified": false,
+  "artifact_observed": false,
+  "stop_blocks": 1,
+  "failure_counts": {},
+  "last_failure": "",
+  "last_failed_sig": "",
+  "last_failure_cause": "",
+  "route_switch_required": false,
+  "last_verified_at": "2026-10-03T11:55:04.011894+00:00"
+}

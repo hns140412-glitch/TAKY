@@ -1,0 +1,60 @@
+{
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Python314\\python.exe",
+  "cases": [
+    {
+      "case": "mkdir_default",
+      "path": "D:\\Git PWA\\TAKY\\ENFORCEMENT\\beta_validation_2026_10_03\\ci_followup_mkdir_default_9cecd648",
+      "create": "ok",
+      "write_read": "ok",
+      "mkdir_child": "ok",
+      "list": "ok"
+    },
+    {
+      "case": "mkdir_0700",
+      "path": "D:\\Git PWA\\TAKY\\ENFORCEMENT\\beta_validation_2026_10_03\\ci_followup_mkdir_0700_20a2db7c",
+      "create": "ok",
+      "write_read": {
+        "type": "PermissionError",
+        "winerror": null,
+        "errno": 13,
+        "message": "[Errno 13] Permission denied: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_mkdir_0700_20a2db7c\\\\probe.txt'"
+      },
+      "mkdir_child": {
+        "type": "PermissionError",
+        "winerror": 5,
+        "errno": 13,
+        "message": "[WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_mkdir_0700_20a2db7c\\\\child'"
+      },
+      "list": {
+        "type": "PermissionError",
+        "winerror": 5,
+        "errno": 13,
+        "message": "[WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_mkdir_0700_20a2db7c'"
+      }
+    },
+    {
+      "case": "TemporaryDirectory",
+      "path": "D:\\Git PWA\\TAKY\\ENFORCEMENT\\beta_validation_2026_10_03\\ci_followup_14vil66j",
+      "create": "ok",
+      "write_read": {
+        "type": "PermissionError",
+        "winerror": null,
+        "errno": 13,
+        "message": "[Errno 13] Permission denied: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_14vil66j\\\\probe.txt'"
+      },
+      "mkdir_child": {
+        "type": "PermissionError",
+        "winerror": 5,
+        "errno": 13,
+        "message": "[WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_14vil66j\\\\child'"
+      },
+      "list": {
+        "type": "PermissionError",
+        "winerror": 5,
+        "errno": 13,
+        "message": "[WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\beta_validation_2026_10_03\\\\ci_followup_14vil66j'"
+      }
+    }
+  ]
+}

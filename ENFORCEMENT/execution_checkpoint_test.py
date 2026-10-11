@@ -56,4 +56,23 @@ with tempfile.TemporaryDirectory() as tmp:
     assert advanced["pass"], advanced
     assert guard(repo, "TEST", "TEST_TASK", "UNIT-002")["pass"]
 
+    # A stale compare-and-swap writer cannot overwrite a newer CURRENT.
+    third = record("UNIT-003", "2026-09-24T14:10:00+09:00")
+    stale_cas = persist(
+        third,
+        repo,
+        expected_current_hash=result["checkpoint_hash"],
+    )
+    assert not stale_cas["pass"], stale_cas
+    assert "CURRENT_CHECKPOINT_CHANGED_DURING_OPERATION" in stale_cas["detected"]
+    assert guard(repo, "TEST", "TEST_TASK", "UNIT-002")["pass"]
+
+    # All checkpoint writers share the same exclusive CURRENT lock.
+    lock_path = current.with_name(current.name + ".lock")
+    lock_path.write_text("held", encoding="utf-8")
+    blocked_concurrent = persist(third, repo)
+    assert not blocked_concurrent["pass"], blocked_concurrent
+    assert "CHECKPOINT_CONCURRENT_WRITE" in blocked_concurrent["detected"]
+    lock_path.unlink()
+
 print("execution_checkpoint: PASS")

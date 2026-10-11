@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from reference_index_owner_receipt import bind_verified_index_result
+from grow_lineage_packet import make_event, materialize
 
 ACQUISITION_STATES = {
     "ACQUIRED_AND_PRESERVED",
@@ -36,11 +37,105 @@ DISPOSITIONS = {
     "HOLD",
 }
 LEDGER_RELATIVE_PATH = Path("CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json")
+GROW_LINEAGE_RELATIVE_PATH = Path("LEARNING/evidence/grow-lineage.jsonl")
 
 
 def _clean(value: object) -> str:
     return str(value or "").strip()
 
+
+def _grow_domain(route_result: dict[str, Any]) -> str:
+    domain = _clean(route_result.get("domain")).lower()
+    consumer = _clean(route_result.get("consumer")).lower()
+    try:
+        from grow_domain_router import route as route_grow_domain
+        routed = route_grow_domain({"domain": domain, "owner": consumer})
+        if routed.get("ok") and routed.get("grow_domain"):
+            return str(routed["grow_domain"])
+    except Exception:
+        pass
+    if "learn" in domain or "learn" in consumer:
+        return "LEARNING_GROW"
+    if "arch" in domain or "arch" in consumer:
+        return "ARCHI_GROW"
+    return "UNROUTED"
+
+
+def _materialize_reference_lineage(
+    repo_root: Path,
+    route_result: dict[str, Any],
+    source_key: str,
+    emitted: list[dict[str, Any]],
+    at: str,
+) -> list[dict[str, Any]]:
+    ledger_path = repo_root / GROW_LINEAGE_RELATIVE_PATH
+    receipts: list[dict[str, Any]] = []
+    grow_domain = _grow_domain(route_result)
+    raw = make_event(
+        grow_domain=grow_domain,
+        stage="RAW",
+        producer="reference_intake_executor",
+        source_ref=f"REFERENCE:{source_key}",
+        authority="REFERENCE_INTAKE_EVIDENCE_ONLY",
+        payload={"states": [x.get("state") for x in emitted], "consumer": route_result.get("consumer")},
+        recorded_at=at,
+    )
+    receipts.append(materialize(raw, ledger_path))
+    parent = raw["event_id"]
+
+    indexed = next((x for x in emitted if x.get("state") == "INDEXED"), None)
+    if indexed:
+        index_ref = _clean((indexed.get("details") or {}).get("source_ref")) or f"REFERENCE:{source_key}"
+        index_event = make_event(
+            grow_domain=grow_domain,
+            stage="INDEX",
+            producer="reference_intake_executor",
+            source_ref=index_ref,
+            parent_refs=[parent],
+            authority="INDEXING_OWNER_REVIEWED_EVIDENCE",
+            payload={"source_key": source_key},
+            recorded_at=at,
+        )
+        receipts.append(materialize(index_event, ledger_path))
+        parent = index_event["event_id"]
+
+    if any(x.get("state") == "EVIDENCE_CANDIDATE" for x in emitted):
+        learning_event = make_event(
+            grow_domain=grow_domain,
+            stage="LEARNING",
+            producer="reference_intake_executor",
+            source_ref=f"REFERENCE_CANDIDATE:{source_key}",
+            parent_refs=[parent],
+            authority="DOMAIN_EVIDENCE_CANDIDATE_ONLY",
+            payload={"canonical_promotion": False},
+            recorded_at=at,
+        )
+        receipts.append(materialize(learning_event, ledger_path))
+    return receipts
+
+
+def _refresh_ai_projection_best_effort(
+    repo_root: Path,
+    record: dict[str, Any],
+    index_result: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    try:
+        from ai_reference_projection import refresh_from_repo
+        projected = dict(record)
+        if isinstance(index_result, dict):
+            projected["source_ref"] = index_result.get("source_ref") or projected.get("source_ref")
+            projected["source_review_state"] = "INDEXED"
+            projected["current_relation"] = projected.get("current_relation") or "REFERENCE_ONLY"
+            projected["version_relation"] = index_result.get("version_relation") or projected.get("version_relation")
+        result = refresh_from_repo(repo_root, additional_records=[projected])
+        return {"attempted": True, **result}
+    except Exception as exc:
+        return {
+            "attempted": True,
+            "ok": False,
+            "non_blocking": True,
+            "error_type": type(exc).__name__,
+        }
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -160,6 +255,13 @@ def execute(
             "source_locator": record.get("source_locator"),
             "domain": route_result.get("domain"),
             "consumer": route_result.get("consumer"),
+            "source_actor": record.get("source_actor"),
+            "source_actor_class": record.get("source_actor_class"),
+            "source_author_identity_state": record.get("source_author_identity_state"),
+            "source_direction": record.get("source_direction"),
+            "source_direction_signals": record.get("source_direction_signals"),
+            "applicability_scope": record.get("applicability_scope"),
+            "authority_ceiling": record.get("authority_ceiling"),
         },
     ))
 
@@ -173,9 +275,11 @@ def execute(
             details={"reason": execution.get("reason") or acquisition_state},
         ))
         ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        lineage = _materialize_reference_lineage(repo_root, route_result, source_key, emitted, at)
         return {
             "pass": True,
             "execution_status": "PERSISTED_HOLD",
+            "grow_lineage": lineage,
             "emitted": emitted,
             "ledger_path": str(LEDGER_RELATIVE_PATH),
             "next_handoff": "WAIT_FOR_NEW_ACCESS_EVIDENCE",
@@ -192,9 +296,11 @@ def execute(
             details={"reason": execution.get("reason") or "BINARY_URL_UNRESOLVED"},
         ))
         ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        lineage = _materialize_reference_lineage(repo_root, route_result, source_key, emitted, at)
         return {
             "pass": True,
             "execution_status": "PERSISTED_NEEDS_MORE_EVIDENCE",
+            "grow_lineage": lineage,
             "emitted": emitted,
             "ledger_path": str(LEDGER_RELATIVE_PATH),
             "next_handoff": "MINING_ACQUISITION_REQUIRED",
@@ -207,9 +313,11 @@ def execute(
     )
     if not index_binding.get("ok"):
         ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        lineage = _materialize_reference_lineage(repo_root, route_result, source_key, emitted, at)
         return {
             "pass": True,
             "execution_status": "REGISTERED_AWAITING_INDEX",
+            "grow_lineage": lineage,
             "emitted": emitted,
             "ledger_path": str(LEDGER_RELATIVE_PATH),
             "next_handoff": "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
@@ -271,14 +379,20 @@ def execute(
                 "consumer": route_result.get("consumer"),
                 "domain": route_result.get("domain"),
                 "source_ref": index_result.get("source_ref"),
+                "source_actor_class": record.get("source_actor_class"),
+                "source_direction": record.get("source_direction"),
+                "applicability_scope": record.get("applicability_scope"),
+                "authority_ceiling": record.get("authority_ceiling"),
             },
         ))
         next_handoff = "DOMAIN_CONSUMER_REQUERY"
 
     ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    lineage = _materialize_reference_lineage(repo_root, route_result, source_key, emitted, at)
     return {
         "pass": True,
         "execution_status": "PERSISTED",
+        "grow_lineage": lineage,
         "emitted": emitted,
         "ledger_path": str(LEDGER_RELATIVE_PATH),
         "next_handoff": next_handoff,

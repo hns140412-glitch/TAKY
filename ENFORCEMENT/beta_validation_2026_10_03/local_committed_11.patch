@@ -1,0 +1,1225 @@
+diff --git a/LEARNING/transport/CENTRAL_PRODUCTION_HOST_WIRING_2026-09-30.md b/LEARNING/transport/CENTRAL_PRODUCTION_HOST_WIRING_2026-09-30.md
+index 8bb0f13..1ba8078 100644
+--- a/LEARNING/transport/CENTRAL_PRODUCTION_HOST_WIRING_2026-09-30.md
++++ b/LEARNING/transport/CENTRAL_PRODUCTION_HOST_WIRING_2026-09-30.md
+@@ -37,6 +37,11 @@ The host refuses to initialize unless all of these are supplied by the authorize
+ - Missing provider configuration prevents host creation.
+ - No real OAuth credential, secret, production membership database, production durable store, or deployment is included in this slice.
+ 
++## Current account-auth public configuration
++The approved browser-side Google OAuth Web Client ID and browser origins are kept in `SHARED/runtime/taky-account-auth-public-config-v1.js` and copied byte-identically into Ready/Hide/Snap as `taky-account-auth-config-v1.js`. The Google client secret is not used by the browser runtime and SHALL NOT be committed to TAKY or specialist repositories. The central deployment must use the same Web Client ID in its `clientIds` allowlist and an explicit HTTPS origin allowlist.
++
++The central API base URL is intentionally not fabricated in the static PWA configuration. `TAKY_CENTRAL_API_BASE_URL` remains an external deployment binding and account sign-in stays fail-closed until a real central HTTPS host exists.
++
+ ## Ready contract
+ Ready's production bootstrap must provide:
+ - `ReadyCentralAuthHost.currentSession()`: independently verified central session metadata.
+diff --git a/LEARNING/transport/central-character-local-pilot.test.js b/LEARNING/transport/central-character-local-pilot.test.js
+new file mode 100644
+index 0000000..005c741
+--- /dev/null
++++ b/LEARNING/transport/central-character-local-pilot.test.js
+@@ -0,0 +1,33 @@
++﻿'use strict';
++const assert=require('node:assert/strict');
++const http=require('node:http');
++const fs=require('node:fs').promises;
++const os=require('node:os');
++const path=require('node:path');
++const crypto=require('node:crypto');
++const Host=require('./central-learning-production-host.js');
++const {LocalJsonStrongStore}=require('./local-json-strong-store.js');
++const {LocalCharacterObjectStore}=require('./local-character-object-store.js');
++const clientId='TAKY_CHARACTER_PILOT_TEST_CLIENT';
++const nowMs=Date.UTC(2026,8,30,10,0,0),nowSec=Math.floor(nowMs/1000),token='pilot-parent-google-id-token-0001';
++const oauth2Client={verifyIdToken:async()=>({getPayload:()=>({iss:'https://accounts.google.com',aud:clientId,sub:'PARENT_SUB',iat:nowSec-60,exp:nowSec+3600})})};
++const lookupMemberships=async()=>[{status:'ACTIVE',family_id:'F1',self_member_id:'PARENT_A',role:'PARENT',learning_evidence_submit_member_ids:['CHILD_A'],permissions:[]}];
++(async()=>{
++ const root=await fs.mkdtemp(path.join(os.tmpdir(),'taky-char-pilot-'));let server;
++ try{
++  const store=await new LocalJsonStrongStore(path.join(root,'state')).init();
++  const objectStore=await new LocalCharacterObjectStore(path.join(root,'assets'),{publicBaseUrl:'http://127.0.0.1:0'}).init();
++  const host=Host.create({clientIds:[clientId],oauth2Client,lookupMemberships,store,characterAssetObjectStore:objectStore,verifySpecialistEvidence:async()=>({ok:false}),resolveIndexedEvidence:async()=>null,independentIndexOwnerVerifier:()=>null,allowedOrigins:['https://ready.example.test'],now:()=>nowMs});
++  server=http.createServer(host.handler);await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)});const base='http://127.0.0.1:'+server.address().port;objectStore.publicBaseUrl=base;
++  const auth={'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'};
++  const bytes=Buffer.from('realistic-character-master-webp-payload'),sha=crypto.createHash('sha256').update(bytes).digest('hex');
++  let resp=await fetch(base+'/api/family/character-asset',{method:'POST',headers:auth,body:JSON.stringify({action:'CREATE_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',content_type:'image/webp',byte_size:bytes.length,sha256:sha,asset_version:'v1'})});let body=await resp.json();assert.equal(resp.status,200,JSON.stringify(body));
++  resp=await fetch(body.upload_url,{method:'PUT',headers:{'Content-Type':'image/webp'},body:bytes});assert.equal(resp.status,204);
++  const assetRef=body.asset_ref,uploadId=body.upload_id;
++  resp=await fetch(base+'/api/family/character-asset',{method:'POST',headers:auth,body:JSON.stringify({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',asset_ref:assetRef,upload_id:uploadId,sha256:sha})});assert.equal(resp.status,200);
++  resp=await fetch(base+'/api/family/character-profile',{method:'POST',headers:auth,body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:assetRef,master_sha256:sha,asset_version:'v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'}})});body=await resp.json();assert.equal(resp.status,200,JSON.stringify(body));
++  resp=await fetch(base+'/api/family/character-asset',{method:'POST',headers:auth,body:JSON.stringify({action:'RESOLVE_READ',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',asset_ref:assetRef})});body=await resp.json();assert.equal(resp.status,200,JSON.stringify(body));
++  resp=await fetch(body.read_url);assert.equal(resp.status,200);assert.deepEqual(Buffer.from(await resp.arrayBuffer()),bytes);
++  console.log('CENTRAL_CHARACTER_LOCAL_PILOT_PASS: Ready-style upload -> verified commit -> profile publish -> signed read works end-to-end locally');
++ }finally{if(server)await new Promise(r=>server.close(r));await fs.rm(root,{recursive:true,force:true})}
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/LEARNING/transport/central-learning-production-host.js b/LEARNING/transport/central-learning-production-host.js
+index 2765d13..1b4eaf0 100644
+--- a/LEARNING/transport/central-learning-production-host.js
++++ b/LEARNING/transport/central-learning-production-host.js
+@@ -3,6 +3,9 @@
+ const Evidence=require('./central-learning-http-endpoint.js');
+ const Decision=require('./central-learning-decision-http-endpoint.js');
+ const Google=require('./google-learning-principal.js');
++const CharacterProfile=require('./family-character-profile-http-endpoint.js');
++const CharacterAsset=require('./family-character-asset-http-endpoint.js');
++const FamilySession=require('./family-session-http-endpoint.js');
+ const NodeBridge=require('./node-http-learning-bridge.js');
+ 
+ const VERSION='TAKY_CENTRAL_LEARNING_PRODUCTION_HOST_V1';
+@@ -17,6 +20,7 @@ function create({
+   verifySpecialistEvidence,
+   resolveIndexedEvidence,
+   independentIndexOwnerVerifier,
++  characterAssetObjectStore=null,
+   allowedOrigins,
+   now=Date.now
+ }={}){
+@@ -46,19 +50,35 @@ function create({
+     verifyBearerToken,store,resolveIndexedEvidence,
+     independentIndexOwnerVerifier
+   });
+-  const handler=NodeBridge.createHandler({
++  const characterProfileEndpoint=CharacterProfile.create({verifyBearerToken,store});
++  const characterAssetEndpoint=characterAssetObjectStore?CharacterAsset.create({verifyBearerToken,objectStore:characterAssetObjectStore}):null;
++  const familySessionEndpoint=FamilySession.create({verifyBearerToken});
++  const apiHandler=NodeBridge.createHandler({
+     endpoint:evidenceEndpoint,
+     decisionEndpoint,
++    characterProfileEndpoint,
++    characterAssetEndpoint,
++    familySessionEndpoint,
+     allowedOrigins
+   });
++  const handler=async(req,res)=>{
++    if(characterAssetObjectStore&&typeof characterAssetObjectStore.handleHttp==='function'){
++      const handled=await characterAssetObjectStore.handleHttp(req,res);
++      if(handled)return;
++    }
++    return apiHandler(req,res);
++  };
+ 
+   return Object.freeze({
+     version:VERSION,
+     identity_version:principal.version,
+     evidence_version:evidenceEndpoint.version,
+     decision_version:decisionEndpoint.version,
++    character_profile_version:characterProfileEndpoint.version,
++    character_asset_version:characterAssetEndpoint?.version||null,
++    family_session_version:familySessionEndpoint.version,
+     bridge_version:NodeBridge.VERSION,
+-    routes:Object.freeze([Evidence.ENDPOINT,Decision.ENDPOINT]),
++    routes:Object.freeze([Evidence.ENDPOINT,Decision.ENDPOINT,CharacterProfile.ENDPOINT,...(characterAssetEndpoint?[CharacterAsset.ENDPOINT]:[]),FamilySession.ENDPOINT]),
+     allowed_origins:Object.freeze([...allowedOrigins]),
+     handler
+   });
+diff --git a/LEARNING/transport/central-learning-production-host.test.js b/LEARNING/transport/central-learning-production-host.test.js
+index 1aee674..3b58867 100644
+--- a/LEARNING/transport/central-learning-production-host.test.js
++++ b/LEARNING/transport/central-learning-production-host.test.js
+@@ -41,8 +41,15 @@ const independentIndexOwnerVerifier=()=>null;
+   let server;
+   try{
+     const store=await new LocalJsonStrongStore(root).init();
++    const uploads=new Map();
++    const characterAssetObjectStore={
++      async createUploadTicket(meta){uploads.set('U1',{...meta,committed:false});return{upload_id:'U1',upload_url:'https://upload.example.test/U1',expires_at:'2026-09-30T09:05:00.000Z'}},
++      async commitUpload({asset_ref,upload_id,sha256}){const row=uploads.get(upload_id);if(!row||row.asset_ref!==asset_ref)return{ok:false};row.committed=true;row.sha256=sha256;return{ok:true,sha256,etag:'ASSET-E1'}},
++      async createReadTicket({asset_ref}){const row=[...uploads.values()].find(x=>x.asset_ref===asset_ref&&x.committed);return row?{read_url:'https://read.example.test/asset',expires_at:'2026-09-30T09:05:00.000Z'}:null}
++    };
+     const common={clientIds:[clientId],oauth2Client,lookupMemberships,store,
+       verifySpecialistEvidence,resolveIndexedEvidence,independentIndexOwnerVerifier,
++      characterAssetObjectStore,
+       allowedOrigins:['https://ready.example.test']};
+     assert.throws(()=>Host.create({...common,verifySpecialistEvidence:null}),
+       /PRODUCTION_SPECIALIST_VERIFIER_REQUIRED/);
+@@ -54,7 +61,7 @@ const independentIndexOwnerVerifier=()=>null;
+       /PRODUCTION_HTTPS_ORIGIN_ALLOWLIST_REQUIRED/);
+ 
+     const host=Host.create({...common,now:()=>nowMs});
+-    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision']);
++    assert.deepEqual([...host.routes],['/api/learning/evidence','/api/learning/decision','/api/family/character-profile','/api/family/character-asset','/api/family/session']);
+     assert.deepEqual([...host.allowed_origins],['https://ready.example.test']);
+     server=http.createServer(host.handler);
+     await new Promise((resolve,reject)=>{
+@@ -77,6 +84,31 @@ const independentIndexOwnerVerifier=()=>null;
+     assert.equal(body.runtime_result.trace.verified_evidence_count,0);
+     assert.equal(response.headers.get('Access-Control-Allow-Origin'),'https://ready.example.test');
+ 
++    const session=await fetch(base+'/api/family/session',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},body:'{}'});
++    const sessionBody=await session.json();assert.equal(session.status,200,JSON.stringify(sessionBody));assert.equal(sessionBody.session.families[0].family_id,'F1');assert.ok(sessionBody.session.families[0].authorized_member_ids.includes('CHILD_A'));
++
++    const assetCreate=await fetch(base+'/api/family/character-asset',{
++      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
++      body:JSON.stringify({action:'CREATE_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',content_type:'image/webp',byte_size:2048,sha256:'a'.repeat(64),asset_version:'v1'})
++    });
++    const assetCreateBody=await assetCreate.json();assert.equal(assetCreate.status,200,JSON.stringify(assetCreateBody));assert.ok(assetCreateBody.asset_ref.startsWith('taky-character:'));
++    const assetCommit=await fetch(base+'/api/family/character-asset',{
++      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
++      body:JSON.stringify({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'CHILD_A',character_id:'char_CHILD_A_v1',asset_ref:assetCreateBody.asset_ref,upload_id:assetCreateBody.upload_id,sha256:'a'.repeat(64)})
++    });
++    assert.equal(assetCommit.status,200);
++
++    const published=await fetch(base+'/api/family/character-profile',{
++      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
++      body:JSON.stringify({action:'PUBLISH',family_id:'F1',member_id:'CHILD_A',projection:{member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:assetCreateBody.asset_ref,master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'}})
++    });
++    const publishedBody=await published.json();assert.equal(published.status,200,JSON.stringify(publishedBody));assert.equal(publishedBody.published,true);
++    const fetched=await fetch(base+'/api/family/character-profile',{
++      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,Origin:'https://ready.example.test'},
++      body:JSON.stringify({action:'GET',family_id:'F1',member_id:'CHILD_A'})
++    });
++    const fetchedBody=await fetched.json();assert.equal(fetched.status,200);assert.equal(fetchedBody.projection.character_id,'char_CHILD_A_v1');
++
+     const denied=await fetch(base+'/api/learning/decision',{
+       method:'POST',
+       headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,
+@@ -85,7 +117,7 @@ const independentIndexOwnerVerifier=()=>null;
+     });
+     assert.equal(denied.status,403);
+ 
+-    console.log('CENTRAL_PRODUCTION_HOST_PASS: strict provider wiring, Google ID token auth, CORS and dual endpoints');
++    console.log('CENTRAL_PRODUCTION_HOST_PASS: identity auth, CORS, learning + character profile + private character asset endpoints');
+   }finally{
+     if(server)await new Promise(resolve=>server.close(resolve));
+     await fs.rm(root,{recursive:true,force:true});
+diff --git a/LEARNING/transport/family-character-asset-http-endpoint.js b/LEARNING/transport/family-character-asset-http-endpoint.js
+new file mode 100644
+index 0000000..fee182f
+--- /dev/null
++++ b/LEARNING/transport/family-character-asset-http-endpoint.js
+@@ -0,0 +1,47 @@
++﻿'use strict';
++const Identity=require('./family-member-identity-resolver.js');
++const Store=require('./private-character-object-store-adapter.js');
++const VERSION='TAKY_FAMILY_CHARACTER_ASSET_HTTP_V1';
++const ENDPOINT='/api/family/character-asset';
++const MAX_BODY_BYTES=64*1024;
++const clean=v=>typeof v==='string'?v.trim():'';
++const object=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
++const SHA=/^[a-f0-9]{64}$/;
++const response=(status,body)=>({status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, no-store, max-age=0','X-Content-Type-Options':'nosniff'},body:JSON.stringify({...body,asset_response_version:VERSION})});
++const fail=(s,r,x={})=>response(s,{ok:false,reason:r,...x});
++function create({verifyBearerToken,objectStore}={}){
++ if(typeof verifyBearerToken!=='function')throw Error('TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED');
++ Store.assertStore(objectStore);
++ async function handle(req={}){
++  if(req.method!=='POST')return fail(405,'POST_REQUIRED');
++  if(clean(req.path)&&clean(req.path)!==ENDPOINT)return fail(404,'ASSET_ENDPOINT_NOT_FOUND');
++  const ct=clean(req.headers?.['content-type']||req.headers?.['Content-Type']).toLowerCase();if(!ct.startsWith('application/json'))return fail(415,'JSON_CONTENT_TYPE_REQUIRED');
++  const auth=clean(req.headers?.authorization||req.headers?.Authorization),m=auth.match(/^Bearer ([A-Za-z0-9._~+/-]{16,4096}=*)$/);if(!m)return fail(401,'VERIFIED_BEARER_REQUIRED');
++  if(typeof req.body!=='string'||Buffer.byteLength(req.body,'utf8')>MAX_BODY_BYTES)return fail(413,'BOUNDED_JSON_BODY_REQUIRED');
++  let input;try{input=JSON.parse(req.body)}catch{return fail(400,'VALID_JSON_REQUIRED')}
++  if(!object(input)||!['CREATE_UPLOAD','COMMIT_UPLOAD','RESOLVE_READ'].includes(input.action))return fail(400,'ASSET_ACTION_REQUIRED');
++  const family_id=clean(input.family_id),member_id=clean(input.member_id),character_id=clean(input.character_id);if(!family_id||!member_id||!character_id)return fail(400,'EXPLICIT_ASSET_SCOPE_REQUIRED');
++  let principal;try{principal=await verifyBearerToken(m[1])}catch{return fail(401,'BEARER_IDENTITY_VERIFICATION_FAILED')}
++  const resolved=Identity.resolve(principal,{requested_family_id:family_id});if(!resolved.ok)return fail(403,'VERIFIED_FAMILY_MEMBERSHIP_REQUIRED');if(!resolved.identity.authorized_member_ids.includes(member_id))return fail(403,'AUTHORIZED_MEMBER_REQUIRED');
++  if(input.action==='CREATE_UPLOAD'){
++   const content_type=clean(input.content_type).toLowerCase(),byte_size=Number(input.byte_size),sha256=clean(input.sha256).toLowerCase(),asset_version=clean(input.asset_version);
++   if(!['image/png','image/webp','image/jpeg'].includes(content_type)||!Number.isInteger(byte_size)||byte_size<1||byte_size>8*1024*1024||!SHA.test(sha256)||!asset_version)return fail(400,'ASSET_UPLOAD_METADATA_INVALID');
++   const asset_ref=Store.assetRef({scope_id:family_id,member_id,character_id,version:asset_version});
++   let ticket;try{ticket=await objectStore.createUploadTicket({asset_ref,content_type,byte_size,sha256,expires_in_seconds:300})}catch{return fail(503,'ASSET_UPLOAD_TICKET_UNAVAILABLE')}
++   if(!ticket?.upload_id||!ticket?.upload_url)return fail(503,'ASSET_UPLOAD_TICKET_INVALID');
++   return response(200,{ok:true,asset_ref,upload_id:String(ticket.upload_id),upload_url:String(ticket.upload_url),expires_at:ticket.expires_at||null});
++  }
++  const asset_ref=clean(input.asset_ref);if(!Store.validAssetRef(asset_ref))return fail(400,'PRIVATE_ASSET_REF_REQUIRED');
++  if(input.action==='COMMIT_UPLOAD'){
++   const upload_id=clean(input.upload_id),sha256=clean(input.sha256).toLowerCase();if(!upload_id||!SHA.test(sha256))return fail(400,'ASSET_COMMIT_METADATA_INVALID');
++   let committed;try{committed=await objectStore.commitUpload({asset_ref,upload_id,sha256})}catch{return fail(503,'ASSET_COMMIT_UNAVAILABLE')}
++   if(!committed?.ok||!clean(committed.sha256)||committed.sha256!==sha256)return fail(409,'ASSET_COMMIT_VERIFICATION_FAILED');
++   return response(200,{ok:true,committed:true,asset_ref,sha256,etag:committed.etag||null});
++  }
++  let read;try{read=await objectStore.createReadTicket({asset_ref,expires_in_seconds:300})}catch{return fail(503,'ASSET_READ_TICKET_UNAVAILABLE')}
++  if(!read?.read_url)return fail(404,'ASSET_NOT_AVAILABLE');
++  return response(200,{ok:true,asset_ref,read_url:String(read.read_url),expires_at:read.expires_at||null});
++ }
++ return Object.freeze({version:VERSION,endpoint:ENDPOINT,handle});
++}
++module.exports=Object.freeze({VERSION,ENDPOINT,MAX_BODY_BYTES,create});
+diff --git a/LEARNING/transport/family-character-asset-http-endpoint.test.js b/LEARNING/transport/family-character-asset-http-endpoint.test.js
+new file mode 100644
+index 0000000..ea7d09a
+--- /dev/null
++++ b/LEARNING/transport/family-character-asset-http-endpoint.test.js
+@@ -0,0 +1,21 @@
++﻿'use strict';
++const assert=require('node:assert/strict');
++const A=require('./family-character-asset-http-endpoint.js');
++const token='abcdefghijklmnop';
++const verify=async t=>{assert.equal(t,token);return{authenticated:true,principal_id:'P1',families:[{family_id:'F1',authorized_member_ids:['M1']}]}};
++const uploads=new Map();
++const objectStore={
++ async createUploadTicket(x){uploads.set('U1',{...x,committed:false});return{upload_id:'U1',upload_url:'https://upload.example.test/U1',expires_at:'2026-09-30T10:05:00Z'}},
++ async commitUpload({asset_ref,upload_id,sha256}){const row=uploads.get(upload_id);assert.equal(row.asset_ref,asset_ref);row.committed=true;row.sha256=sha256;return{ok:true,sha256,etag:'E1'}},
++ async createReadTicket({asset_ref}){const row=[...uploads.values()].find(x=>x.asset_ref===asset_ref&&x.committed);return row?{read_url:'https://read.example.test/r',expires_at:'2026-09-30T10:05:00Z'}:null}
++};
++const req=body=>({method:'POST',path:A.ENDPOINT,headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(body)});
++(async()=>{
++ const ep=A.create({verifyBearerToken:verify,objectStore});
++ const meta={action:'CREATE_UPLOAD',family_id:'F1',member_id:'M1',character_id:'C1',content_type:'image/webp',byte_size:1024,sha256:'a'.repeat(64),asset_version:'v1'};
++ let r=await ep.handle(req(meta)),b=JSON.parse(r.body);assert.equal(r.status,200);assert.ok(b.asset_ref.startsWith('taky-character:'));assert.equal(b.upload_id,'U1');
++ r=await ep.handle(req({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:b.asset_ref,upload_id:'U1',sha256:'a'.repeat(64)}));assert.equal(r.status,200);
++ r=await ep.handle(req({action:'RESOLVE_READ',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:b.asset_ref}));b=JSON.parse(r.body);assert.equal(r.status,200);assert.ok(b.read_url.startsWith('https://read.example.test/'));
++ r=await ep.handle(req({...meta,member_id:'OTHER'}));assert.equal(r.status,403);
++ console.log('FAMILY_CHARACTER_ASSET_HTTP_PASS: authenticated scope, bounded image upload, commit verification, signed read');
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/LEARNING/transport/family-character-profile-http-endpoint.js b/LEARNING/transport/family-character-profile-http-endpoint.js
+new file mode 100644
+index 0000000..77f8550
+--- /dev/null
++++ b/LEARNING/transport/family-character-profile-http-endpoint.js
+@@ -0,0 +1,115 @@
++'use strict';
++
++const Identity=require('./family-member-identity-resolver.js');
++const CharacterAsset=require('./private-character-object-store-adapter.js');
++
++const VERSION='TAKY_FAMILY_CHARACTER_PROFILE_HTTP_V1';
++const ENDPOINT='/api/family/character-profile';
++const MAX_BODY_BYTES=96*1024;
++const clean=v=>typeof v==='string'?v.trim():'';
++const object=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
++const SHA=/^[a-f0-9]{64}$/;
++const headers=Object.freeze({
++  'Content-Type':'application/json; charset=utf-8',
++  'Cache-Control':'private, no-store, max-age=0',
++  Pragma:'no-cache','X-Content-Type-Options':'nosniff'
++});
++const response=(status,body)=>({status,headers:{...headers},body:JSON.stringify({...body,profile_response_version:VERSION})});
++const fail=(status,reason,extra={})=>response(status,{ok:false,reason,...extra});
++const key=(familyId,memberId)=>'families/'+encodeURIComponent(familyId)+'/members/'+encodeURIComponent(memberId)+'/profile/character-v1';
++
++function normalizeProjection(input={}){
++  const allowed=new Set(['member_id','character_id','identity_version','master_asset_ref','master_sha256','asset_version','derivative_refs','status','updated_at']);
++  if(!object(input)||Object.keys(input).some(k=>!allowed.has(k)))return {ok:false,reason:'PROFILE_FIELDS_INVALID'};
++  if(['sourcePhoto','source_photo','raw_photo','original_photo','photo','access_token','refresh_token'].some(k=>Object.hasOwn(input,k)))
++    return {ok:false,reason:'RAW_OR_SECRET_FIELD_FORBIDDEN'};
++  const p={
++    member_id:clean(input.member_id),
++    character_id:clean(input.character_id),
++    identity_version:Number(input.identity_version),
++    master_asset_ref:clean(input.master_asset_ref),
++    master_sha256:input.master_sha256==null?null:clean(input.master_sha256).toLowerCase(),
++    asset_version:input.asset_version==null?null:clean(input.asset_version),
++    derivative_refs:object(input.derivative_refs)?input.derivative_refs:{},
++    status:clean(input.status)||'CONFIRMED',
++    updated_at:clean(input.updated_at)
++  };
++  if(!p.member_id||!p.character_id||!Number.isInteger(p.identity_version)||p.identity_version<1||!p.master_asset_ref)
++    return {ok:false,reason:'PROFILE_REQUIRED_FIELDS_MISSING'};
++  if(!CharacterAsset.validAssetRef(p.master_asset_ref))return {ok:false,reason:'PRIVATE_MASTER_ASSET_REF_REQUIRED'};
++  if(p.master_sha256&&!SHA.test(p.master_sha256))return {ok:false,reason:'PROFILE_SHA256_INVALID'};
++  if(p.status!=='CONFIRMED')return {ok:false,reason:'PROFILE_STATUS_NOT_CONFIRMED'};
++  if(!Number.isFinite(Date.parse(p.updated_at)))return {ok:false,reason:'PROFILE_UPDATED_AT_INVALID'};
++  const json=JSON.stringify(p);
++  if(/sourcePhoto|source_photo|raw_photo|original_photo|access_token|refresh_token/i.test(json))
++    return {ok:false,reason:'PROFILE_PRIVATE_SOURCE_LEAK'};
++  return {ok:true,projection:p};
++}
++
++function create({verifyBearerToken,store}={}){
++  if(typeof verifyBearerToken!=='function')throw Error('TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED');
++  if(typeof store?.getWithMetadata!=='function'||typeof store?.setJSON!=='function')
++    throw Error('STRONG_DURABLE_PROFILE_STORE_REQUIRED');
++
++  async function handle(req={}){
++    if(req.method!=='POST')return fail(405,'POST_REQUIRED');
++    if(clean(req.path)&&clean(req.path)!==ENDPOINT)return fail(404,'PROFILE_ENDPOINT_NOT_FOUND');
++    const contentType=clean(req.headers?.['content-type']||req.headers?.['Content-Type']).toLowerCase();
++    if(!contentType.startsWith('application/json'))return fail(415,'JSON_CONTENT_TYPE_REQUIRED');
++    const auth=clean(req.headers?.authorization||req.headers?.Authorization);
++    const match=auth.match(/^Bearer ([A-Za-z0-9._~+/-]{16,4096}=*)$/);
++    if(!match)return fail(401,'VERIFIED_BEARER_REQUIRED');
++    if(typeof req.body!=='string'||Buffer.byteLength(req.body,'utf8')>MAX_BODY_BYTES)
++      return fail(413,'BOUNDED_JSON_BODY_REQUIRED');
++    let input;try{input=JSON.parse(req.body)}catch{return fail(400,'VALID_JSON_REQUIRED')}
++    if(!object(input)||!['GET','PUBLISH'].includes(input.action))return fail(400,'PROFILE_ACTION_REQUIRED');
++    const familyId=clean(input.family_id),memberId=clean(input.member_id);
++    if(!familyId||!memberId)return fail(400,'EXPLICIT_FAMILY_MEMBER_SCOPE_REQUIRED');
++
++    let principal;try{principal=await verifyBearerToken(match[1])}catch{return fail(401,'BEARER_IDENTITY_VERIFICATION_FAILED')}
++    const resolved=Identity.resolve(principal,{requested_family_id:familyId});
++    if(!resolved.ok)return fail(403,'VERIFIED_FAMILY_MEMBERSHIP_REQUIRED');
++    if(!resolved.identity.authorized_member_ids.includes(memberId))return fail(403,'AUTHORIZED_MEMBER_REQUIRED');
++
++    const storeKey=key(familyId,memberId);
++    if(input.action==='GET'){
++      let stored;try{stored=await store.getWithMetadata(storeKey,{type:'json',consistency:'strong'})}
++      catch{return fail(503,'CHARACTER_PROFILE_READ_UNAVAILABLE')}
++      if(!stored)return response(200,{ok:true,found:false,projection:null});
++      if(!clean(stored.etag)||stored.consistency!=='strong'||!object(stored.data))
++        return fail(503,'CHARACTER_PROFILE_STORE_INVALID');
++      const normalized=normalizeProjection(stored.data);
++      if(!normalized.ok||normalized.projection.member_id!==memberId)
++        return fail(503,'CHARACTER_PROFILE_DATA_INVALID');
++      return response(200,{ok:true,found:true,projection:normalized.projection,etag:stored.etag});
++    }
++
++    const normalized=normalizeProjection(input.projection);
++    if(!normalized.ok)return fail(400,normalized.reason);
++    const p=normalized.projection;
++    if(p.member_id!==memberId)return fail(400,'PROFILE_MEMBER_SCOPE_MISMATCH');
++
++    let existing;try{existing=await store.getWithMetadata(storeKey,{type:'json',consistency:'strong'})}
++    catch{return fail(503,'CHARACTER_PROFILE_READ_UNAVAILABLE')}
++    if(existing){
++      if(!clean(existing.etag)||existing.consistency!=='strong'||!object(existing.data))
++        return fail(503,'CHARACTER_PROFILE_STORE_INVALID');
++      const old=normalizeProjection(existing.data);
++      if(!old.ok)return fail(503,'CHARACTER_PROFILE_DATA_INVALID');
++      if(p.identity_version<old.projection.identity_version)
++        return fail(409,'CHARACTER_PROFILE_VERSION_REGRESSION',{current_identity_version:old.projection.identity_version});
++      if(p.identity_version===old.projection.identity_version&&p.character_id!==old.projection.character_id)
++        return fail(409,'CHARACTER_PROFILE_VERSION_COLLISION');
++    }
++    let write;try{
++      write=await store.setJSON(storeKey,p,existing?{onlyIfMatch:existing.etag}:{onlyIfNew:true});
++    }catch{return fail(503,'CHARACTER_PROFILE_WRITE_UNAVAILABLE')}
++    if(!write?.modified||!clean(write.etag))
++      return fail(409,'CHARACTER_PROFILE_WRITE_CONFLICT');
++    return response(200,{ok:true,published:true,projection:p,etag:write.etag});
++  }
++
++  return Object.freeze({version:VERSION,endpoint:ENDPOINT,handle});
++}
++
++module.exports=Object.freeze({VERSION,ENDPOINT,MAX_BODY_BYTES,key,normalizeProjection,create});
+diff --git a/LEARNING/transport/family-character-profile-http-endpoint.test.js b/LEARNING/transport/family-character-profile-http-endpoint.test.js
+new file mode 100644
+index 0000000..0670872
+--- /dev/null
++++ b/LEARNING/transport/family-character-profile-http-endpoint.test.js
+@@ -0,0 +1,31 @@
++'use strict';
++const assert=require('node:assert/strict');
++const P=require('./family-character-profile-http-endpoint.js');
++
++function memoryStore(){
++  let row=null,seq=0;
++  return {
++    async getWithMetadata(){return row?{data:structuredClone(row.data),etag:row.etag,consistency:'strong'}:null},
++    async setJSON(key,value,opts={}){
++      if(opts.onlyIfNew&&row)return {modified:false,etag:row.etag};
++      if(opts.onlyIfMatch&&(!row||opts.onlyIfMatch!==row.etag))return {modified:false,etag:row?.etag||null};
++      row={key,data:structuredClone(value),etag:'e'+(++seq)};
++      return {modified:true,etag:row.etag};
++    }
++  };
++}
++const principal={authenticated:true,principal_id:'P1',families:[{family_id:'F1',authorized_member_ids:['M1']}]};
++const verify=async token=>{assert.equal(token,'abcdefghijklmnop');return principal};
++const request=(action,body={})=>({method:'POST',path:P.ENDPOINT,headers:{'content-type':'application/json',authorization:'Bearer abcdefghijklmnop'},body:JSON.stringify({action,family_id:'F1',member_id:'M1',...body})});
++
++(async()=>{
++ const store=memoryStore(),ep=P.create({verifyBearerToken:verify,store});
++ let r=await ep.handle(request('GET'));let b=JSON.parse(r.body);assert.equal(r.status,200);assert.equal(b.found,false);
++ const projection={member_id:'M1',character_id:'char_M1_v1',identity_version:1,master_asset_ref:'taky-character:F1:M1:char_M1_v1:v1',master_sha256:'a'.repeat(64),asset_version:'gen-v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T10:00:00.000Z'};
++ r=await ep.handle(request('PUBLISH',{projection}));b=JSON.parse(r.body);assert.equal(r.status,200);assert.equal(b.published,true);assert.ok(b.etag);
++ r=await ep.handle(request('GET'));b=JSON.parse(r.body);assert.equal(b.projection.character_id,'char_M1_v1');assert.equal(b.projection.sourcePhoto,undefined);
++ r=await ep.handle(request('PUBLISH',{projection:{...projection,identity_version:0,character_id:'old'}}));assert.equal(r.status,400);
++ r=await ep.handle(request('PUBLISH',{projection:{...projection,identity_version:1,character_id:'collision'}}));assert.equal(r.status,409);
++ r=await ep.handle({...request('GET'),body:JSON.stringify({action:'GET',family_id:'F1',member_id:'OTHER'})});assert.equal(r.status,403);
++ console.log('FAMILY_CHARACTER_PROFILE_HTTP_PASS: authenticated member scope, strong store, no raw photo, monotonic identity version');
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/LEARNING/transport/family-session-http-endpoint.js b/LEARNING/transport/family-session-http-endpoint.js
+new file mode 100644
+index 0000000..56c1ec5
+--- /dev/null
++++ b/LEARNING/transport/family-session-http-endpoint.js
+@@ -0,0 +1,22 @@
++﻿'use strict';
++const VERSION='TAKY_FAMILY_SESSION_HTTP_V1';
++const ENDPOINT='/api/family/session';
++const clean=v=>typeof v==='string'?v.trim():'';
++const response=(status,body)=>({status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, no-store, max-age=0','Pragma':'no-cache','X-Content-Type-Options':'nosniff'},body:JSON.stringify({...body,session_response_version:VERSION})});
++const fail=(s,r)=>response(s,{ok:false,reason:r});
++function create({verifyBearerToken}={}){
++ if(typeof verifyBearerToken!=='function')throw Error('TRUSTED_BEARER_IDENTITY_VERIFIER_REQUIRED');
++ async function handle(req={}){
++  if(req.method!=='POST')return fail(405,'POST_REQUIRED');
++  if(clean(req.path)&&clean(req.path)!==ENDPOINT)return fail(404,'SESSION_ENDPOINT_NOT_FOUND');
++  const ct=clean(req.headers?.['content-type']||req.headers?.['Content-Type']).toLowerCase();if(!ct.startsWith('application/json'))return fail(415,'JSON_CONTENT_TYPE_REQUIRED');
++  const auth=clean(req.headers?.authorization||req.headers?.Authorization),m=auth.match(/^Bearer ([A-Za-z0-9._~+/-]{16,4096}=*)$/);if(!m)return fail(401,'VERIFIED_BEARER_REQUIRED');
++  let principal;try{principal=await verifyBearerToken(m[1])}catch{return fail(401,'BEARER_IDENTITY_VERIFICATION_FAILED')}
++  if(!principal?.authenticated||!Array.isArray(principal.families)||!principal.families.length)return fail(403,'ACTIVE_FAMILY_SESSION_REQUIRED');
++  const families=principal.families.map(f=>({family_id:clean(f.family_id),self_member_id:clean(f.self_member_id),authorized_member_ids:Array.isArray(f.authorized_member_ids)?f.authorized_member_ids.map(clean).filter(Boolean):[]}));
++  if(families.some(f=>!f.family_id||!f.self_member_id))return fail(503,'SERVER_FAMILY_SESSION_INVALID');
++  return response(200,{ok:true,session:{principal_id:clean(principal.principal_id),identity_provider:clean(principal.identity_provider),families}});
++ }
++ return Object.freeze({version:VERSION,endpoint:ENDPOINT,handle});
++}
++module.exports=Object.freeze({VERSION,ENDPOINT,create});
+diff --git a/LEARNING/transport/family-session-http-endpoint.test.js b/LEARNING/transport/family-session-http-endpoint.test.js
+new file mode 100644
+index 0000000..c30b250
+--- /dev/null
++++ b/LEARNING/transport/family-session-http-endpoint.test.js
+@@ -0,0 +1,7 @@
++﻿'use strict';
++const assert=require('node:assert/strict');
++const S=require('./family-session-http-endpoint.js');
++const token='verified-family-session-token-0001';
++const verify=async t=>{assert.equal(t,token);return{authenticated:true,principal_id:'google:sub1',identity_provider:'GOOGLE_OIDC_VERIFIED',families:[{family_id:'F1',self_member_id:'P1',authorized_member_ids:['C1','P1']}]}};
++const req=()=>({method:'POST',path:S.ENDPOINT,headers:{'content-type':'application/json',authorization:'Bearer '+token},body:'{}'});
++(async()=>{const ep=S.create({verifyBearerToken:verify});const r=await ep.handle(req()),b=JSON.parse(r.body);assert.equal(r.status,200);assert.equal(b.session.families[0].family_id,'F1');assert.deepEqual(b.session.families[0].authorized_member_ids,['C1','P1']);assert.equal(b.session.email,undefined);console.log('FAMILY_SESSION_HTTP_PASS: verified bearer -> server family scope projection only')})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/LEARNING/transport/local-character-object-store.js b/LEARNING/transport/local-character-object-store.js
+new file mode 100644
+index 0000000..30d7164
+--- /dev/null
++++ b/LEARNING/transport/local-character-object-store.js
+@@ -0,0 +1,53 @@
++﻿'use strict';
++const fs=require('node:fs').promises;
++const path=require('node:path');
++const crypto=require('node:crypto');
++const VERSION='TAKY_LOCAL_CHARACTER_OBJECT_STORE_V1';
++const clean=v=>typeof v==='string'?v.trim():'';
++const nowIso=()=>new Date().toISOString();
++const safeName=s=>Buffer.from(String(s),'utf8').toString('base64url');
++class LocalCharacterObjectStore{
++ constructor(root,{publicBaseUrl='http://127.0.0.1:8787',now=Date.now}={}){this.root=path.resolve(root);this.publicBaseUrl=String(publicBaseUrl).replace(/\/$/,'');this.now=now;this.uploads=new Map();this.reads=new Map()}
++ async init(){await fs.mkdir(this.root,{recursive:true});return this}
++ _token(){return crypto.randomBytes(24).toString('base64url')}
++ _assetPath(assetRef){return path.join(this.root,safeName(assetRef)+'.bin')}
++ async createUploadTicket({asset_ref,content_type,byte_size,sha256,expires_in_seconds=300}={}){
++  if(!clean(asset_ref)||!clean(content_type)||!Number.isInteger(byte_size)||byte_size<1||!clean(sha256))throw Error('UPLOAD_TICKET_METADATA_REQUIRED');
++  const token=this._token(),expires=this.now()+Math.max(30,Math.min(900,Number(expires_in_seconds)||300))*1000;
++  this.uploads.set(token,{asset_ref,content_type,byte_size,sha256,expires,uploaded:false});
++  return {upload_id:token,upload_url:this.publicBaseUrl+'/_character-assets/upload/'+token,expires_at:new Date(expires).toISOString()};
++ }
++ async commitUpload({asset_ref,upload_id,sha256}={}){
++  const row=this.uploads.get(clean(upload_id));if(!row||row.expires<this.now()||row.asset_ref!==asset_ref||row.sha256!==sha256||!row.uploaded)return{ok:false};
++  const file=this._assetPath(asset_ref);let bytes;try{bytes=await fs.readFile(file)}catch{return{ok:false}};
++  const actual=crypto.createHash('sha256').update(bytes).digest('hex');if(actual!==sha256)return{ok:false};
++  row.committed=true;row.etag=actual;return{ok:true,sha256:actual,etag:actual};
++ }
++ async createReadTicket({asset_ref,expires_in_seconds=300}={}){
++  const committed=[...this.uploads.values()].find(x=>x.asset_ref===asset_ref&&x.committed);if(!committed)return null;
++  const token=this._token(),expires=this.now()+Math.max(30,Math.min(900,Number(expires_in_seconds)||300))*1000;
++  this.reads.set(token,{asset_ref,content_type:committed.content_type,expires});
++  return {read_url:this.publicBaseUrl+'/_character-assets/read/'+token,expires_at:new Date(expires).toISOString()};
++ }
++ async handleHttp(req,res){
++  const url=new URL(req.url,'http://127.0.0.1');
++  const upload=url.pathname.match(/^\/_character-assets\/upload\/([A-Za-z0-9_-]{16,128})$/);
++  if(upload){
++   if(req.method!=='PUT'){res.writeHead(405);res.end();return true}
++   const row=this.uploads.get(upload[1]);if(!row||row.expires<this.now()){res.writeHead(410);res.end();return true}
++   const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>row.byte_size){res.writeHead(413);res.end();return true}chunks.push(chunk)}
++   if(size!==row.byte_size){res.writeHead(400);res.end();return true}
++   const bytes=Buffer.concat(chunks,size),actual=crypto.createHash('sha256').update(bytes).digest('hex');if(actual!==row.sha256){res.writeHead(409);res.end();return true}
++   await fs.writeFile(this._assetPath(row.asset_ref),bytes,{flag:'w'});row.uploaded=true;row.uploaded_at=nowIso();res.writeHead(204,{'Cache-Control':'no-store'});res.end();return true;
++  }
++  const read=url.pathname.match(/^\/_character-assets\/read\/([A-Za-z0-9_-]{16,128})$/);
++  if(read){
++   if(req.method!=='GET'){res.writeHead(405);res.end();return true}
++   const row=this.reads.get(read[1]);if(!row||row.expires<this.now()){res.writeHead(410);res.end();return true}
++   let bytes;try{bytes=await fs.readFile(this._assetPath(row.asset_ref))}catch{res.writeHead(404);res.end();return true}
++   res.writeHead(200,{'Content-Type':row.content_type,'Content-Length':String(bytes.length),'Cache-Control':'private, no-store, max-age=0','X-Content-Type-Options':'nosniff'});res.end(bytes);return true;
++  }
++  return false;
++ }
++}
++module.exports=Object.freeze({VERSION,LocalCharacterObjectStore});
+diff --git a/LEARNING/transport/local-character-object-store.test.js b/LEARNING/transport/local-character-object-store.test.js
+new file mode 100644
+index 0000000..9dfd2f9
+--- /dev/null
++++ b/LEARNING/transport/local-character-object-store.test.js
+@@ -0,0 +1,23 @@
++﻿'use strict';
++const assert=require('node:assert/strict');
++const http=require('node:http');
++const fs=require('node:fs').promises;
++const os=require('node:os');
++const path=require('node:path');
++const crypto=require('node:crypto');
++const {LocalCharacterObjectStore}=require('./local-character-object-store.js');
++(async()=>{
++ const root=await fs.mkdtemp(path.join(os.tmpdir(),'taky-char-store-'));let server;
++ try{
++  const store=await new LocalCharacterObjectStore(root,{publicBaseUrl:'http://127.0.0.1:0'}).init();
++  server=http.createServer(async(req,res)=>{if(await store.handleHttp(req,res))return;res.writeHead(404);res.end()});
++  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)});
++  store.publicBaseUrl='http://127.0.0.1:'+server.address().port;
++  const bytes=Buffer.from('character-master-binary');const sha=crypto.createHash('sha256').update(bytes).digest('hex');
++  const ticket=await store.createUploadTicket({asset_ref:'taky-character:F1:M1:C1:v1',content_type:'image/webp',byte_size:bytes.length,sha256:sha});
++  let resp=await fetch(ticket.upload_url,{method:'PUT',body:bytes});assert.equal(resp.status,204);
++  const commit=await store.commitUpload({asset_ref:'taky-character:F1:M1:C1:v1',upload_id:ticket.upload_id,sha256:sha});assert.equal(commit.ok,true);
++  const read=await store.createReadTicket({asset_ref:'taky-character:F1:M1:C1:v1'});resp=await fetch(read.read_url);assert.equal(resp.status,200);assert.deepEqual(Buffer.from(await resp.arrayBuffer()),bytes);
++  console.log('LOCAL_CHARACTER_OBJECT_STORE_PASS: expiring upload/read tickets, SHA verified commit, private no-store read');
++ }finally{if(server)await new Promise(r=>server.close(r));await fs.rm(root,{recursive:true,force:true})}
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/LEARNING/transport/node-http-learning-bridge.js b/LEARNING/transport/node-http-learning-bridge.js
+index 9efcc83..f50ecd5 100644
+--- a/LEARNING/transport/node-http-learning-bridge.js
++++ b/LEARNING/transport/node-http-learning-bridge.js
+@@ -3,6 +3,9 @@
+ const {URL}=require('node:url');
+ const {MAX_BODY_BYTES,ENDPOINT}=require('./central-learning-http-endpoint.js');
+ const Decision=require('./central-learning-decision-http-endpoint.js');
++const CharacterProfile=require('./family-character-profile-http-endpoint.js');
++const CharacterAsset=require('./family-character-asset-http-endpoint.js');
++const FamilySession=require('./family-session-http-endpoint.js');
+ const VERSION='TAKY_NODE_HTTP_CENTRAL_LEARNING_BRIDGE_V1';
+ const baseHeaders=Object.freeze({
+  'Content-Type':'application/json; charset=utf-8',
+@@ -23,10 +26,16 @@ const clean=v=>typeof v==='string'?v.trim():'';
+  * Only the explicit Origin allowlist receives CORS approval. A cross-origin
+  * browser needs Authorization: Bearer and application/json, never wildcard.
+  */
+-function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
++function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,characterAssetEndpoint=null,familySessionEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
+  if(typeof endpoint?.handle!=='function')throw Error('CENTRAL_LEARNING_ENDPOINT_REQUIRED');
+  if(decisionEndpoint!==null&&typeof decisionEndpoint?.handle!=='function')
+    throw Error('CENTRAL_DECISION_ENDPOINT_INVALID');
++ if(characterProfileEndpoint!==null&&typeof characterProfileEndpoint?.handle!=='function')
++   throw Error('FAMILY_CHARACTER_PROFILE_ENDPOINT_INVALID');
++ if(characterAssetEndpoint!==null&&typeof characterAssetEndpoint?.handle!=='function')
++   throw Error('FAMILY_CHARACTER_ASSET_ENDPOINT_INVALID');
++ if(familySessionEndpoint!==null&&typeof familySessionEndpoint?.handle!=='function')
++   throw Error('FAMILY_SESSION_ENDPOINT_INVALID');
+  if(!Array.isArray(allowedOrigins)||new Set(allowedOrigins).size!==allowedOrigins.length||
+     allowedOrigins.some(s=>!clean(s)||!/^https:\/\/[^/]+$/.test(s)))
+    throw Error('EXPLICIT_HTTPS_ORIGIN_ALLOWLIST_REQUIRED');
+@@ -47,11 +56,11 @@ function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBody
+    try{path=new URL(req.url,'http://127.0.0.1').pathname}
+    catch{return fail(res,400,'REQUEST_PATH_INVALID',cors)}
+    if(req.method==='OPTIONS'){
+-     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[])].includes(path)||!origin)
++     if(![ENDPOINT,...(decisionEndpoint?[Decision.ENDPOINT]:[]),...(characterProfileEndpoint?[CharacterProfile.ENDPOINT]:[]),...(characterAssetEndpoint?[CharacterAsset.ENDPOINT]:[]),...(familySessionEndpoint?[FamilySession.ENDPOINT]:[])].includes(path)||!origin)
+       return fail(res,404,'PREFLIGHT_NOT_ALLOWED',cors);
+      res.writeHead(204,{...baseHeaders,...cors});res.end();return;
+    }
+-   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT))
++   if(path!==ENDPOINT&&(!decisionEndpoint||path!==Decision.ENDPOINT)&&(!characterProfileEndpoint||path!==CharacterProfile.ENDPOINT)&&(!characterAssetEndpoint||path!==CharacterAsset.ENDPOINT)&&(!familySessionEndpoint||path!==FamilySession.ENDPOINT))
+      return fail(res,404,'CENTRAL_LEARNING_ENDPOINT_NOT_FOUND',cors);
+    if(req.method!=='POST')return fail(res,405,'POST_REQUIRED',cors);
+    const length=Number(req.headers?.['content-length']);
+@@ -71,7 +80,8 @@ function createHandler({endpoint,decisionEndpoint=null,allowedOrigins=[],maxBody
+    }
+    let result;
+    try{
+-     result=await (path===Decision.ENDPOINT?decisionEndpoint:endpoint).handle({
++     const target=path===Decision.ENDPOINT?decisionEndpoint:path===CharacterProfile.ENDPOINT?characterProfileEndpoint:path===CharacterAsset.ENDPOINT?characterAssetEndpoint:path===FamilySession.ENDPOINT?familySessionEndpoint:endpoint;
++     result=await target.handle({
+        method:req.method,path,headers:req.headers,
+        body:Buffer.concat(chunks,size).toString('utf8')
+      });
+diff --git a/LEARNING/transport/private-character-object-store-adapter.js b/LEARNING/transport/private-character-object-store-adapter.js
+new file mode 100644
+index 0000000..9378f96
+--- /dev/null
++++ b/LEARNING/transport/private-character-object-store-adapter.js
+@@ -0,0 +1,7 @@
++﻿'use strict';
++const VERSION='TAKY_CHARACTER_OBJECT_STORE_V1';
++const clean=v=>typeof v==='string'?v.trim():'';
++function assertStore(store){if(!store||typeof store.createUploadTicket!=='function'||typeof store.commitUpload!=='function'||typeof store.createReadTicket!=='function')throw Error('CHARACTER_OBJECT_STORE_REQUIRED');return store}
++function assetRef({scope_id,member_id,character_id,version}={}){const a=[scope_id,member_id,character_id,version].map(clean);if(a.some(x=>!x))throw Error('CHARACTER_ASSET_SCOPE_REQUIRED');return 'taky-character:'+a.map(encodeURIComponent).join(':')}
++function validAssetRef(ref){return /^taky-character:[^:]+:[^:]+:[^:]+:[^:]+$/.test(clean(ref))}
++module.exports=Object.freeze({VERSION,assertStore,assetRef,validAssetRef});
+diff --git a/LEARNING/transport/three-app-character-runtime-integration.test.js b/LEARNING/transport/three-app-character-runtime-integration.test.js
+new file mode 100644
+index 0000000..453760e
+--- /dev/null
++++ b/LEARNING/transport/three-app-character-runtime-integration.test.js
+@@ -0,0 +1,52 @@
++﻿'use strict';
++const assert=require('node:assert/strict');
++const http=require('node:http');
++const fs=require('node:fs').promises;
++const os=require('node:os');
++const path=require('node:path');
++const vm=require('node:vm');
++const Host=require('./central-learning-production-host.js');
++const {LocalJsonStrongStore}=require('./local-json-strong-store.js');
++const {LocalCharacterObjectStore}=require('./local-character-object-store.js');
++
++async function loadBrowserAdapter(file,exportName){
++ const code=await fs.readFile(file,'utf8');
++ const localStorage={m:new Map(),setItem(k,v){this.m.set(k,String(v))},getItem(k){return this.m.has(k)?this.m.get(k):null},removeItem(k){this.m.delete(k)}};
++ const ctx={window:{},globalThis:null,localStorage,location:{href:'http://localhost/'},URL,Blob,fetch,crypto:globalThis.crypto,console,setTimeout,clearTimeout};
++ ctx.globalThis=ctx;ctx.window=ctx;
++ vm.createContext(ctx);vm.runInContext(code,ctx,{filename:file});
++ const adapter=ctx[exportName];assert.ok(adapter,exportName+' missing');return {ctx,adapter};
++}
++
++(async()=>{
++ const root=await fs.mkdtemp(path.join(os.tmpdir(),'taky-three-app-'));let server;
++ try{
++  const clientId='TAKY_THREE_APP_TEST_CLIENT',token='three-app-parent-id-token-0001',nowMs=Date.UTC(2026,8,30,11,0,0),nowSec=Math.floor(nowMs/1000);
++  const oauth2Client={verifyIdToken:async({idToken})=>{assert.equal(idToken,token);return{getPayload:()=>({iss:'https://accounts.google.com',aud:clientId,sub:'PARENT_SUB',iat:nowSec-60,exp:nowSec+3600})}}};
++  const lookupMemberships=async()=>[{status:'ACTIVE',family_id:'F1',self_member_id:'PARENT_A',role:'PARENT',learning_evidence_submit_member_ids:['CHILD_A'],permissions:[]}];
++  const store=await new LocalJsonStrongStore(path.join(root,'state')).init();
++  const objectStore=await new LocalCharacterObjectStore(path.join(root,'assets'),{publicBaseUrl:'http://127.0.0.1:0'}).init();
++  const host=Host.create({clientIds:[clientId],oauth2Client,lookupMemberships,store,characterAssetObjectStore:objectStore,verifySpecialistEvidence:async()=>({ok:false}),resolveIndexedEvidence:async()=>null,independentIndexOwnerVerifier:()=>null,allowedOrigins:['https://ready.example.test','https://hide.example.test','https://snap.example.test'],now:()=>nowMs});
++  server=http.createServer(host.handler);await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)});const base='http://127.0.0.1:'+server.address().port;objectStore.publicBaseUrl=base;
++  const getToken=async()=>token,getFamilyId=async()=> 'F1';
++  const readyProfile=await loadBrowserAdapter('D:/Git PWA/Ready & Set/ready-family-character-profile-adapter-v1.js','ReadyFamilyCharacterProfileAdapterV1');
++  const readyAsset=await loadBrowserAdapter('D:/Git PWA/Ready & Set/ready-character-asset-storage-adapter-v1.js','ReadyCharacterAssetStorageAdapterV1');
++  const hideProfile=await loadBrowserAdapter('D:/Git PWA/Hide & Seek/hide-family-character-profile-adapter-v1.js','HideFamilyCharacterProfileAdapterV1');
++  const hideAsset=await loadBrowserAdapter('D:/Git PWA/Hide & Seek/hide-character-asset-read-adapter-v1.js','HideCharacterAssetReadAdapterV1');
++  const snapProfile=await loadBrowserAdapter('D:/Git PWA/Snap & Pop/snap-family-character-profile-adapter-v1.js','SnapFamilyCharacterProfileAdapterV1');
++  const snapAsset=await loadBrowserAdapter('D:/Git PWA/Snap & Pop/snap-character-asset-read-adapter-v1.js','SnapCharacterAssetReadAdapterV1');
++  for(const a of [readyProfile.adapter,readyAsset.adapter,hideProfile.adapter,hideAsset.adapter,snapProfile.adapter,snapAsset.adapter])a.registerHttpProvider({baseUrl:base,getToken,getFamilyId,fetchImpl:fetch});
++  const bytes=new Blob(['same-character-master-across-three-apps'],{type:'image/webp'});
++  const stored=await readyAsset.adapter.storeMaster({member_id:'CHILD_A',character_id:'char_CHILD_A_v1',asset_version:'v1',source_ref:bytes});
++  assert.ok(stored.asset_ref.startsWith('taky-character:'));
++  const projection={member_id:'CHILD_A',character_id:'char_CHILD_A_v1',identity_version:1,master_asset_ref:stored.asset_ref,master_sha256:stored.sha256,asset_version:'v1',derivative_refs:{},status:'CONFIRMED',updated_at:'2026-09-30T11:00:00.000Z'};
++  const pub=await readyProfile.adapter.publish(projection);assert.equal(pub.state,'PUBLISHED');
++  const h=await hideProfile.adapter.resolve('CHILD_A'),s=await snapProfile.adapter.resolve('CHILD_A');
++  assert.equal(h.projection.character_id,projection.character_id);assert.equal(s.projection.character_id,projection.character_id);assert.equal(h.projection.master_asset_ref,stored.asset_ref);assert.equal(s.projection.master_asset_ref,stored.asset_ref);
++  const hr=await hideAsset.adapter.resolveRead({member_id:'CHILD_A',character_id:projection.character_id,asset_ref:stored.asset_ref});
++  const sr=await snapAsset.adapter.resolveRead({member_id:'CHILD_A',character_id:projection.character_id,asset_ref:stored.asset_ref});
++  const hb=Buffer.from(await (await fetch(hr.read_url)).arrayBuffer()),sb=Buffer.from(await (await fetch(sr.read_url)).arrayBuffer());
++  assert.deepEqual(hb,sb);assert.deepEqual(hb,Buffer.from(await bytes.arrayBuffer()));
++  console.log('THREE_APP_CHARACTER_RUNTIME_PASS: Ready published one Character Master; Hide and Snap resolved same character_id, private pointer, and identical signed-read bytes');
++ }finally{if(server)await new Promise(r=>server.close(r));await fs.rm(root,{recursive:true,force:true})}
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md b/MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md
+index 4632065..90c8120 100644
+--- a/MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md
++++ b/MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md
+@@ -30,14 +30,22 @@ This obligation applies to new chat conversations, old chat continuations, imple
+ 5. If any upload/credential/tool barrier remains, pursue another authorized route and explicitly report `ASSET_UPLOAD_OPEN`, with exact files, verified staging result and next viable step. Never report `UI_DONE`, `ASSET_REGISTERED` or `PWA_READY` because a ZIP or illustration was generated alone.
+ 6. Do not require the user to be the routine debugger/uploader unless a genuine user credential/permission or local-system boundary cannot be crossed by available authorized tools. `USER != DEBUGGER`.
+ 
+-## 3. Scope, conflicts and exclusion boundaries
++## 3. Asset-generation / runtime-behavior boundary — HARD LOCK
++
++`ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
++
++Canonical visual creation, derivative production, checksum/versioning and registry promotion belong to the asset-production side. Runtime character state, relationship, dialogue intent, pose/expression/prop selection and animation cues belong to the behavior side. Runtime behavior SHALL reference approved registry assets and SHALL NOT silently invoke image generation to satisfy ordinary scene changes.
++
++The detailed shared contract is `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`.
++
++## 4. Scope, conflicts and exclusion boundaries
+ - This is an **asset management and design-to-code delivery standard**, not a universal demand that every text document or planning answer create visual files. It does not collapse document/A3 print output rules, browser business UI rules or mobile-app UI visual contracts into one layout rule.
+ - Existing approved visual sources and their Visual IDs are preserved; centralization does not authorize redrawing, forced migration, overwriting, flattening, re-licensing, public release or choosing new characters.
+ - Read-only/library/connected-app access limitations do not prove an original is absent. Record source pointers and recover it when possible.
+ - Explicit owner-approved exceptions (licensed resources that prohibit redistribution, private/child photo sources, temporary diagnostics, third-party-hosted assets) must be classified; store permission-safe derivatives or a metadata pointer only when appropriate. `CENTRAL DEFAULT != PUBLIC RAW UPLOAD`.
+ - No Netlify deployment, main merge of app runtime, public exposure, or asset promotion solely due to this governance decision. Honor project-specific gates and human approval.
+ 
+-## 4. Status reporting and handoff — HARD LOCK
++## 5. Status reporting and handoff — HARD LOCK
+ Every material image/UI task reports these separately:
+ `DESIGN_REFERENCE_CONFIRMED | SOURCE_LAYER_READY | CENTRAL_ASSET_COMMITTED | ASSET_HASH_VERIFIED | RUNTIME_BOUND | UI_VISUAL_MATCH_VERIFIED | INTERACTION_VERIFIED | DEVICE_VERIFIED | RELEASED`.
+ Never convert a prior PASS in one dimension into another.
+diff --git a/OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md b/OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md
+new file mode 100644
+index 0000000..42bfdb6
+--- /dev/null
++++ b/OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md
+@@ -0,0 +1,162 @@
++# TAKY CHARACTER ASSET / BEHAVIOR PIPELINE
++
++Status: REV_00 / IMPLEMENTATION CONTRACT
++Authority: TAKY > GUIDE FAMILY LEARNING OS > this pipeline > project-specific runtime.
++Related: `OS/GUIDE_CHARACTER_RELATIONSHIP.md`, `MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md`.
++
++## 1. HARD SEPARATION
++
++`ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
++
++The Asset Generation Engine creates, validates, versions and registers reusable visual assets.
++The Character Behavior Engine never generates canonical art at runtime. It selects and composes already-approved assets according to relationship, scene and interaction state.
++
++This separation exists to preserve character identity, reduce image-generation cost/latency, keep PWA behavior deterministic and prevent visual drift.
++
++## 2. ASSET GENERATION ENGINE
++
++Responsibilities:
++- create or transform Character Master, approved companion/Guide assets, badge motifs, backgrounds and UI illustration assets;
++- preserve approved Visual ID / Character Master identity;
++- generate only required derivatives such as pose, expression, prop, alpha and optimized WebP/PNG variants;
++- validate anatomy, silhouette, identity consistency, dimensions, alpha and rights/consent boundaries;
++- calculate SHA/version and register the approved derivative;
++- write canonical reusable binaries to `TAKY-ASSETS` and provide exact consumer pointers.
++
++The engine SHALL NOT decide story behavior, relationship progression, dialogue intent, reward logic or live scene selection.
++
++### 2.1 Core companion production package — HARD LOCK
++
++For a user-confirmed companion Visual ID, the canonical **production source package is three sheets per character**:
++
++1. `TURNAROUND_SHEET` — one sheet containing the approved multi-view turnaround used for directional crop sources.
++2. `EXPRESSION_SHEET` — one sheet containing the approved expression set.
++3. `ACTION_SHEET` — one sheet containing the approved action/pose set.
++
++All three sheets SHALL derive from the same current user-confirmed Visual ID / approved source identity. They are production-source sheets, not three unrelated redesigns.
++
++The three-sheet package and runtime composable groups are different layers:
++`3-SHEET PRODUCTION PACKAGE -> APPROVED CROPS/DERIVATIVES -> MASTER_FULL / PROFILE / PUPPET_BODY / FACE_STATES / ACTION_PARTS / PEEK_MASK / DEPTH_SHADOW`.
++
++Therefore a valid turnaround sheet SHALL NOT be rejected merely because an older derivative plan expected a single `FIELD_NEUTRAL` output. For Core companion production, the current three-sheet contract is the review authority; `FIELD_NEUTRAL` and other runtime pieces may be cropped/derived from approved sheets after sheet-level validation.
++
++Review order:
++`CONFIRMED VISUAL ID -> 3-SHEET PACKAGE -> SHEET-LEVEL IDENTITY QA -> CROP/DERIVE -> RUNTIME GROUP QA -> REGISTRY PROMOTION`.
++
++A review rule that compares a three-sheet result against an obsolete single-asset requirement is a specification-drift failure and must be corrected before judging the image.
++
++## 3. USER CHARACTER PIPELINE
++
++For an intro/onboarding user character:
++
++`CAPTURE -> INPUT VALIDATION -> GENERATE CANDIDATES -> REVIEW/SELECT -> CHARACTER MASTER -> DERIVATIVES -> SHA/VERSION -> CHARACTER REGISTRY -> APP BINDING`.
++
++The original child photo is private input and SHALL NOT be published to a public PWA or central public asset repository.
++Only consented, release-safe derived character assets may be distributed to app deployment copies.
++
++A Character Master is the identity authority for later derivatives.
++Later poses/expressions SHALL derive from that authority instead of independently redrawing the child on every event.
++
++Minimum registry fields:
++- `character_id`
++- `member_id` or child scope
++- `master_asset_ref`
++- `visual_version`
++- `sha256`
++- `derivative_refs`
++- `consent/release_scope`
++- `status`
++
++## 4. CHARACTER BEHAVIOR ENGINE
++
++Responsibilities:
++- consume relationship/lifecycle state;
++- consume app/scene state;
++- decide dialogue intent and timing;
++- select pose/expression/prop/animation cues;
++- select companion presence and spatial role;
++- return a render contract referencing approved registry assets.
++
++Example render contract fields:
++`character_id, relationship_state, action_id, pose_id, expression_id, prop_id, animation_cue, dialogue_intent, asset_refs`.
++
++The Behavior Engine SHALL NOT call image generation as a normal response to `ACTION`, `EXPRESSION` or `SCENE` changes.## 5. RUNTIME RULE
++
++Normal runtime:
++`STATE -> BEHAVIOR ENGINE -> CHARACTER REGISTRY -> UI RENDERER`.
++
++Asset production:
++`MISSING REQUIRED ASSET -> ASSET GENERATION ENGINE -> VALIDATION -> REGISTRY PROMOTION -> RUNTIME AVAILABLE`.
++
++If a required visual variant is absent, runtime uses an approved fallback or marks the asset gap.
++It SHALL NOT silently generate a new canonical character variant in the live child session.
++
++## 6. CROSS-APP BINDING
++
++A single approved user `character_id` is shared across Ready & Set, Hide & Seek and Snap & Pop where permitted.
++Project apps may use different scene skins, poses and interaction cues, but SHALL NOT fork the underlying child identity.
++
++Badge rendering may consume the same child-scoped character overlay reference.
++Base badge art and child character overlay remain separate assets/layers.
++
++### 6.1 Family Character Profile Projection — HARD LOCK
++
++User-generated child Character Masters are private family/member data, not public TAKY-ASSETS content.
++`TAKY-ASSETS` may contain schemas, static shared assets and release-safe shared metadata, but SHALL NOT become the public storage location for a child's raw photo or private Character Master merely because the character is reused across apps.
++
++Cross-app sharing uses a family/member-scoped runtime projection owned by the Learning/Family domain:
++
++`READY CHARACTER MASTER CONFIRMATION -> FAMILY CHARACTER PROFILE PROJECTION -> READY / HIDE / SNAP CONSUMERS`.
++
++Minimum projection fields:
++- `member_id`
++- `character_id`
++- `identity_version`
++- `master_asset_ref`
++- `master_sha256` when available
++- `asset_version`
++- `derivative_refs`
++- `status`
++- `updated_at`
++
++The projection SHALL NOT contain the raw source photo.
++Apps may cache the resolved release-safe Character Master locally for offline use, but the local cache is not a new identity authority.
++
++Ownership:
++- Ready onboarding may create and confirm the user's Character Master.
++- Family profile runtime/storage owns the cross-app pointer and member binding.
++- Hide & Seek and Snap & Pop consume the projection; they SHALL NOT independently regenerate the same child identity.
++- Character Behavior Engine consumes the confirmed `character_id` and approved asset refs only.
++
++Provider/transport remains adapter-driven. Until an authorized family-profile backend/provider is configured, cross-origin propagation is `NOT_RUNTIME_COMPLETE`; local app state alone SHALL NOT be reported as cross-app sync.
++
++### 6.2 Private Character Master Binary Transport
++
++The cross-app profile stores only a private Character Master pointer, not a public image URL and not the raw child photo.
++
++Canonical runtime shape:
++`READY MASTER -> AUTHENTICATED PRIVATE ASSET UPLOAD -> VERIFIED COMMIT/SHA -> OPAQUE master_asset_ref -> FAMILY CHARACTER PROFILE -> AUTHENTICATED SIGNED READ -> READY/HIDE/SNAP RENDER`.
++
++Rules:
++- raw source photo is never uploaded through the Character Master asset endpoint;
++- accepted Character Master binary formats are bounded image types only;
++- upload must be committed and hash-verified before profile promotion;
++- `master_asset_ref` is an opaque private reference, not a public deployment URL;
++- Hide/Snap resolve a short-lived read URL at runtime and must not treat that URL as identity authority;
++- missing object-store/provider binding remains fail-closed and must be reported as `PENDING_ASSET_STORAGE` or pointer-only, not as cross-app completion.
++
++## 7. INTRO / ONBOARDING CONTRACT
++
++The approved intro flow may invoke the Asset Generation Engine during character creation, then persist the resulting Character Master before normal app entry.
++After confirmation, the intro stores the selected `character_id`; subsequent app launches resolve that identity through the registry rather than re-running character generation.
++
++Character creation is therefore an onboarding production flow, not a per-screen render behavior.
++
++## 8. COMPLETION STATES
++
++Report separately:
++`CAPTURE_READY | GENERATOR_ADAPTER_READY | CHARACTER_MASTER_CONFIRMED | DERIVATIVES_READY | REGISTRY_BOUND | READY_BOUND | HIDE_BOUND | SNAP_BOUND | BADGE_OVERLAY_BOUND | RUNTIME_VERIFIED`.
++
++Do not call the character pipeline complete when only camera capture or photo display exists.
++
++END
+\ No newline at end of file
+diff --git a/OS/GUIDE_CHARACTER_RELATIONSHIP.md b/OS/GUIDE_CHARACTER_RELATIONSHIP.md
+index 0a39fa2..58ffc0f 100644
+--- a/OS/GUIDE_CHARACTER_RELATIONSHIP.md
++++ b/OS/GUIDE_CHARACTER_RELATIONSHIP.md
+@@ -63,7 +63,15 @@ Current confirmed state:
+ TAKY and GUIDE SHALL NOT delete the concept merely because an older/current MASTER lacks its historical detailed rule.
+ TAKY SHALL NOT invent the missing runtime contract from analogy alone.
+ 
+-## 5. PROJECT OWNERSHIP BOUNDARY
++## 5. ASSET / BEHAVIOR ENGINE BOUNDARY — HARD LOCK
++
++`ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
++
++Guide/user character art production, Character Master creation, derivatives, SHA/versioning and registry promotion are owned by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md` and the central asset protocol. Relationship progression, scene response, dialogue intent, pose/expression/prop selection and animation cues are behavior concerns and SHALL consume approved registry assets rather than create new canonical art during runtime.
++
++A missing pose/expression is an asset gap, not permission for the behavior engine to redraw a character.
++
++## 6. PROJECT OWNERSHIP BOUNDARY
+ 
+ The following remain PROJECT-owned unless separately promoted through evidence and approval:
+ - Ready & Set: Main Guide + Random Guest simultaneous contract, Smart Random algorithm, Duo-specific comedy/intro
+@@ -72,7 +80,7 @@ The following remain PROJECT-owned unless separately promoted through evidence a
+ 
+ Shared Character/Relationship rules SHALL NOT erase project identity.
+ 
+-## 6. CURRENT APP-FAMILY CORRECTION
++## 7. CURRENT APP-FAMILY CORRECTION
+ 
+ Current user-facing vocabulary app name is `Hide & Seek`.
+ The former product identity is lineage only; its police/capture child-facing world is SUPERSEDED.
+@@ -81,7 +89,7 @@ Validated learning-core concepts such as Camera/Photo intake, OCR Review-before-
+ 
+ If `OS/GUIDE_FAMILY_LEARNING_OS.md` contains any superseded former-name label, treat it as a stale cross-canonical reference to be normalized during the next app-family comparison; do not revive the superseded world/name.
+ 
+-## 7. VALIDATION / STATUS
++## 8. VALIDATION / STATUS
+ 
+ - relationship core recovery: INTEGRATED
+ - One Good Reflection recovery: INTEGRATED
+diff --git a/OS/GUIDE_FAMILY_LEARNING_OS.md b/OS/GUIDE_FAMILY_LEARNING_OS.md
+index 23647fc..ae19e15 100644
+--- a/OS/GUIDE_FAMILY_LEARNING_OS.md
++++ b/OS/GUIDE_FAMILY_LEARNING_OS.md
+@@ -404,6 +404,10 @@ Family platform candidates/capabilities include authentication, member identity,
+ Identity separation:
+ - authentication ≠ member identity ≠ role ≠ storage connection.
+ - memberId is the internal stable identity; visible names/kinship labels are presentation/context.
++- Cross-app child Character Master reuse is a member-scoped family profile projection governed by `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; raw child photos and private Character Masters are not public TAKY-ASSETS data.
++- User-facing authentication is an account sign-in flow. Google Sign-In may return an ID token internally, but the token is an implementation credential, not the user interaction model and not a family/member authority by itself.
++- The browser SHALL NOT decode a Google ID token to invent family, role or child scope. TAKY central verification resolves the Google subject to server-owned family membership before `TAKY_FAMILY_RUNTIME` is bound.
++- Browser ID tokens SHALL remain memory-only by default; do not persist them to localStorage, IndexedDB, Drive or public asset/config files.
+ - do not require a separate Google account for each child.
+ 
+ Storage:
+diff --git a/PROJECTS/GUIDE_CORE6_CHARACTER.md b/PROJECTS/GUIDE_CORE6_CHARACTER.md
+index 4aeacc8..e5aa010 100644
+--- a/PROJECTS/GUIDE_CORE6_CHARACTER.md
++++ b/PROJECTS/GUIDE_CORE6_CHARACTER.md
+@@ -1,6 +1,6 @@
+ # GUIDE / Ready & Set — Core 6 Character State
+ 
+-Status: REV_00 / current user-confirmed Core 6 Visual ID set / Golden Reference authority released / production validation not finalized
++Status: REV_01 / current user-confirmed Core 6 Visual ID set / 3-sheet production package locked / production validation not finalized
+ Scope: character production only; implementation validation not performed.
+ 
+ ## Production state
+@@ -29,6 +29,24 @@ Exact name/species/reference lineage conflicts SHALL be resolved by source-level
+ - Zero: penguin identity; polar-bear drift is rejected. No foreign fur/tail/object contamination may appear behind or on Zero in composites.
+ - Dooby: preserve the latest user-confirmed Visual ID; older wrong-species/generic reinterpretations from interim group images are not canonical. Exact species/reference lineage must follow the latest user correction and source-level audit.
+ 
++## Core 6 production contract — HARD LOCK
++
++Each confirmed Core 6 Visual ID is produced as exactly **three source sheets** before runtime cropping/derivation:
++
++1. `TURNAROUND_SHEET` — multi-view turnaround in one sheet, crop-safe spacing, no decorative background.
++2. `EXPRESSION_SHEET` — expression source sheet locked to the same Visual ID.
++3. `ACTION_SHEET` — action/pose source sheet locked to the same Visual ID.
++
++The approved Visual ID is the identity authority for all three sheets. Do not reinterpret species, face, silhouette, proportions, colors, outfit, equipment or other protected identity elements unless the user explicitly changes that Visual ID.
++
++The three sheets are the **production source package**. Runtime assets remain composable and may be cropped/derived into `MASTER_FULL / PROFILE / PUPPET_BODY / FACE_STATES / ACTION_PARTS / PEEK_MASK / DEPTH_SHADOW` as needed.
++
++Accordingly:
++- do not reject a valid turnaround sheet because an older spec requested only `FIELD_NEUTRAL`;
++- do not require the original approved illustration itself to be used at runtime once the user approves the new three-sheet package as the working source;
++- once a sheet is approved, downstream expression/action generation and crops must stay locked to the same approved package lineage;
++- sheet approval and runtime-crop approval are separate gates.
++
+ ## Group direction
+ Characters are GUIDE companions/friends from the same world, not six unrelated mascots. Clothing and equipment may express individuality but must share enough world/Guide visual DNA to work with the same product UI. Older-brother/sister/friend/younger-companion chemistry is desirable; access is not age-locked.
+ 
+@@ -45,8 +63,10 @@ Character production was explicitly put on HOLD for TAKY work.
+ On resume:
+ 1. recover the latest user correction and source-level Core 6 identity table before generating;
+ 2. preserve corrected Ink Visual ID in Core 6;
+-3. produce individual white-background high-resolution turnaround sheets using the current user-confirmed references;
+-4. validate each sheet 1:1 against its applicable current Visual ID;
+-5. only after all individual PASS, validate group chemistry/composite without identity drift.
++3. for each character, produce the locked 3-sheet package: TURNAROUND_SHEET -> EXPRESSION_SHEET -> ACTION_SHEET;
++4. use crop-safe composition and no decorative background for production sheets; transparency is preferred where the generation path supports it;
++5. validate each sheet 1:1 against its applicable current Visual ID and the already-approved preceding sheet lineage;
++6. crop/derive runtime asset groups only from PASS sheets;
++7. only after all individual PASS, validate group chemistry/composite without identity drift.
+ 
+ No UI redesign is implied by this file.
+diff --git a/SHARED/runtime/taky-account-auth-public-config-v1.js b/SHARED/runtime/taky-account-auth-public-config-v1.js
+new file mode 100644
+index 0000000..3cdba55
+--- /dev/null
++++ b/SHARED/runtime/taky-account-auth-public-config-v1.js
+@@ -0,0 +1,12 @@
++(() => {
++'use strict';
++const VERSION='2026.09.30-account-auth-public-config-v1';
++const GOOGLE_WEB_CLIENT_ID='15791067602-lvao9ohkbj3l5s3clbfb9n106uqssaol.apps.googleusercontent.com';
++const APPROVED_ORIGINS=Object.freeze([
++  'https://profound-ganache-902032.netlify.app',
++  'https://hide-seek-taky.netlify.app',
++  'https://cheerful-pothos-d1c3ee.netlify.app'
++]);
++const apiBaseUrl=typeof window.TAKY_CENTRAL_API_BASE_URL==='string'?window.TAKY_CENTRAL_API_BASE_URL.trim():'';
++window.TAKY_ACCOUNT_AUTH_CONFIG=Object.freeze({version:VERSION,googleClientId:GOOGLE_WEB_CLIENT_ID,approvedOrigins:APPROVED_ORIGINS,apiBaseUrl});
++})();
+\ No newline at end of file
+diff --git a/SHARED/runtime/taky-google-account-auth-v1.js b/SHARED/runtime/taky-google-account-auth-v1.js
+new file mode 100644
+index 0000000..6488db0
+--- /dev/null
++++ b/SHARED/runtime/taky-google-account-auth-v1.js
+@@ -0,0 +1,150 @@
++(() => {
++'use strict';
++if (window.TakyGoogleAccountAuthV1) return;
++
++const VERSION='2026.09.30-google-account-auth-v1';
++const GIS_SRC='https://accounts.google.com/gsi/client';
++let config=null;
++let idToken=null;
++let initialized=false;
++let familySelection=null;
++
++const clean=v=>typeof v==='string'?v.trim():'';
++
++function setState(state,detail=''){
++  document.documentElement.dataset.takyAccountAuth=state;
++  const status=document.getElementById('takyAccountAuthStatus');
++  if(status) status.textContent=detail||({
++    UNCONFIGURED:'계정 인증 설정이 필요해요.',
++    LOADING:'Google 계정 연결을 준비하고 있어요.',
++    SIGN_IN_REQUIRED:'Google 계정으로 로그인해 주세요.',
++    VERIFYING:'계정을 확인하고 있어요.',
++    FAMILY_REQUIRED:'사용할 가족을 선택해 주세요.',
++    AUTHENTICATED:'계정 연결이 완료됐어요.',
++    FAILED:'계정 연결을 완료하지 못했어요.'
++  }[state]||state);
++}
++
++function injectUi(){
++  if(document.getElementById('takyAccountAuthHost')) return document.getElementById('takyAccountAuthHost');
++  const host=document.createElement('section');
++  host.id='takyAccountAuthHost';
++  host.hidden=true;
++  host.setAttribute('aria-live','polite');
++  host.innerHTML='<div class="takyAuthCard"><div class="takyAuthCopy"><b>TAKY 계정 연결</b><span id="takyAccountAuthStatus">Google 계정으로 로그인해 주세요.</span></div><div id="takyGoogleButton"></div><div id="takyFamilyChoices"></div><button type="button" id="takyAccountSignOut" hidden>계정 연결 해제</button></div>';
++  const style=document.createElement('style');
++  style.textContent='#takyAccountAuthHost{position:fixed;z-index:3500;inset:auto 14px max(14px,env(safe-area-inset-bottom)) 14px;display:flex;justify-content:center;pointer-events:none}#takyAccountAuthHost[hidden]{display:none}.takyAuthCard{pointer-events:auto;width:min(420px,100%);box-sizing:border-box;padding:16px;border-radius:22px;background:rgba(255,255,255,.96);box-shadow:0 18px 50px rgba(18,56,77,.22);font-family:system-ui,-apple-system,sans-serif;color:#173c53}.takyAuthCopy{display:grid;gap:4px;margin-bottom:12px}.takyAuthCopy b{font-size:15px}.takyAuthCopy span{font-size:12px;opacity:.72}#takyGoogleButton{min-height:40px}#takyFamilyChoices{display:grid;gap:8px;margin-top:10px}#takyFamilyChoices button,#takyAccountSignOut{border:0;border-radius:14px;padding:11px 13px;font-weight:800}#takyFamilyChoices button{background:#eaf5ff;color:#154f73}#takyAccountSignOut{margin-top:10px;background:transparent;color:#6c7880;width:100%}';
++  document.head.appendChild(style);
++  document.body.appendChild(host);
++  document.getElementById('takyAccountSignOut')?.addEventListener('click',signOut);
++  return host;
++}
++
++function show(){const h=injectUi();h.hidden=false}
++function hide(){const h=document.getElementById('takyAccountAuthHost');if(h)h.hidden=true}
++
++function validateConfig(next){
++  if(!next||typeof next!=='object') throw new Error('TAKY_ACCOUNT_AUTH_CONFIG_REQUIRED');
++  const googleClientId=clean(next.googleClientId),apiBaseUrl=clean(next.apiBaseUrl);
++  if(!googleClientId||!apiBaseUrl) throw new Error('TAKY_ACCOUNT_AUTH_CONFIG_INCOMPLETE');
++  const u=new URL(apiBaseUrl,location.href);
++  const local=['localhost','127.0.0.1'].includes(u.hostname);
++  if(!local&&u.protocol!=='https:') throw new Error('TAKY_ACCOUNT_AUTH_HTTPS_REQUIRED');
++  return {googleClientId,apiBaseUrl:u.href,preferredFamilyId:clean(next.preferredFamilyId)||null};
++}
++
++function loadGis(){
++  if(window.google?.accounts?.id) return Promise.resolve();
++  return new Promise((resolve,reject)=>{
++    const existing=document.querySelector('script[data-taky-gis="1"]');
++    if(existing){existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',()=>reject(new Error('GOOGLE_IDENTITY_SCRIPT_FAILED')),{once:true});return}
++    const s=document.createElement('script');
++    s.src=GIS_SRC;s.async=true;s.defer=true;s.dataset.takyGis='1';
++    s.onload=()=>resolve();s.onerror=()=>reject(new Error('GOOGLE_IDENTITY_SCRIPT_FAILED'));
++    document.head.appendChild(s);
++  });
++}
++
++async function fetchSession(token){
++  const endpoint=new URL('/api/family/session',config.apiBaseUrl).href;
++  const res=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+token},body:'{}',cache:'no-store'});
++  const body=await res.json().catch(()=>({ok:false,reason:'INVALID_FAMILY_SESSION_RESPONSE'}));
++  if(!res.ok||body.ok===false) throw Object.assign(new Error(body.reason||('FAMILY_SESSION_HTTP_'+res.status)),{status:res.status,body});
++  const families=Array.isArray(body.session?.families)?body.session.families:[];
++  if(!families.length) throw new Error('ACTIVE_FAMILY_SESSION_REQUIRED');
++  return {session:body.session,families};
++}
++
++function renderFamilyChoices(families){
++  const root=document.getElementById('takyFamilyChoices');if(!root)return;
++  root.innerHTML='';
++  for(const f of families){
++    const b=document.createElement('button');
++    b.type='button';b.textContent='가족 계정 선택 · '+String(f.family_id);
++    b.addEventListener('click',()=>void finishAuthentication(f.family_id));
++    root.appendChild(b);
++  }
++}
++
++async function finishAuthentication(preferredFamilyId){
++  if(!idToken) throw new Error('GOOGLE_ID_TOKEN_REQUIRED');
++  setState('VERIFYING');
++  const sessionResult=await fetchSession(idToken);
++  const families=sessionResult.families;
++  let familyId=clean(preferredFamilyId)||config.preferredFamilyId;
++  if(familyId&&!families.some(f=>clean(f.family_id)===familyId)) throw new Error('PREFERRED_FAMILY_NOT_AUTHORIZED');
++  if(!familyId&&families.length===1) familyId=clean(families[0].family_id);
++  if(!familyId){
++    familySelection=sessionResult;
++    renderFamilyChoices(families);
++    setState('FAMILY_REQUIRED');
++    return {state:'FAMILY_REQUIRED',families:families.map(f=>({family_id:f.family_id,self_member_id:f.self_member_id}))};
++  }
++  const auth=window.TakyFamilyAuthRuntimeV1;
++  if(!auth?.registerCentralBearerProvider||!auth?.installFamilyRuntime) throw new Error('TAKY_FAMILY_AUTH_RUNTIME_REQUIRED');
++  auth.registerCentralBearerProvider({apiBaseUrl:config.apiBaseUrl,getIdToken:async()=>idToken,preferredFamilyId:familyId});
++  const installed=await auth.installFamilyRuntime();
++  setState('AUTHENTICATED');
++  const signOut=document.getElementById('takyAccountSignOut');if(signOut)signOut.hidden=false;
++  setTimeout(hide,700);
++  return {state:'AUTHENTICATED',family_id:installed.family_id};
++}
++
++async function onCredential(response){
++  try{
++    idToken=clean(response?.credential);
++    if(idToken.length<16) throw new Error('GOOGLE_ID_TOKEN_REQUIRED');
++    await finishAuthentication(config.preferredFamilyId);
++  }catch(error){
++    idToken=null;setState('FAILED',String(error?.message||error));show();
++  }
++}
++
++async function start(nextConfig=window.TAKY_ACCOUNT_AUTH_CONFIG){
++  try{config=validateConfig(nextConfig)}catch(error){setState('UNCONFIGURED');hide();return {state:'UNCONFIGURED',error:String(error?.message||error)}}
++  show();
++  setState('LOADING');
++  await loadGis();
++  if(!window.google?.accounts?.id) throw new Error('GOOGLE_IDENTITY_API_UNAVAILABLE');
++  if(!initialized){
++    window.google.accounts.id.initialize({client_id:config.googleClientId,callback:onCredential,auto_select:false,cancel_on_tap_outside:true});
++    initialized=true;
++  }
++  const target=document.getElementById('takyGoogleButton');
++  target.innerHTML='';
++  window.google.accounts.id.renderButton(target,{type:'standard',theme:'outline',size:'large',text:'signin_with',shape:'pill',logo_alignment:'left',width:Math.min(360,Math.max(240,target.clientWidth||320))});
++  setState('SIGN_IN_REQUIRED');
++  return {state:'SIGN_IN_REQUIRED'};
++}
++
++function signOut(){
++  idToken=null;familySelection=null;
++  try{window.google?.accounts?.id?.disableAutoSelect?.()}catch{}
++  try{window.TakyFamilyAuthRuntimeV1?.clear?.()}catch{}
++  setState(config?'SIGN_IN_REQUIRED':'UNCONFIGURED');
++  show();
++}
++
++window.TakyGoogleAccountAuthV1={version:VERSION,start,signOut,status:()=>({state:document.documentElement.dataset.takyAccountAuth||'NOT_STARTED',configured:!!config,authenticated:!!idToken})};
++if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>void start(),{once:true});else void start();
++})();
+\ No newline at end of file
+diff --git a/SHARED/runtime/taky-google-account-auth-v1.test.js b/SHARED/runtime/taky-google-account-auth-v1.test.js
+new file mode 100644
+index 0000000..85523e2
+--- /dev/null
++++ b/SHARED/runtime/taky-google-account-auth-v1.test.js
+@@ -0,0 +1,49 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const vm=require('node:vm');
++
++(async()=>{
++  const elements=new Map();
++  const make=(id)=>({id,hidden:false,textContent:'',innerHTML:'',clientWidth:320,addEventListener(){},appendChild(){},setAttribute(){}});
++  for(const id of ['takyAccountAuthHost','takyAccountAuthStatus','takyGoogleButton','takyFamilyChoices','takyAccountSignOut'])elements.set(id,make(id));
++  const document={
++    readyState:'complete',
++    documentElement:{dataset:{}},
++    getElementById:id=>elements.get(id)||null,
++    querySelector:()=>null,
++    createElement:tag=>make(tag),
++    head:{appendChild(){}},
++    body:{appendChild(){}}
++  };
++  let credentialCallback=null,rendered=false,boundFamily=null;
++  const ctx={
++    window:null,globalThis:null,document,location:{href:'https://ready.example.test/'},URL,console,setTimeout,clearTimeout,
++    CustomEvent:function(type,opts){this.type=type;this.detail=opts?.detail},
++    fetch:async(url,opts)=>{
++      assert.equal(String(url),'https://central.example.test/api/family/session');
++      assert.equal(opts.headers.authorization,'Bearer google-id-token-demo-0000001');
++      return {ok:true,status:200,json:async()=>({ok:true,session:{principal_id:'google:sub1',identity_provider:'GOOGLE_OIDC_VERIFIED',families:[{family_id:'F1',self_member_id:'P1',authorized_member_ids:['P1','C1']}]}})};
++    },
++    TAKY_ACCOUNT_AUTH_CONFIG:{googleClientId:'1234567890-demo.apps.googleusercontent.com',apiBaseUrl:'https://central.example.test/'},
++    TakyFamilyAuthRuntimeV1:{
++      registerCentralBearerProvider({preferredFamilyId,getIdToken}){boundFamily=preferredFamilyId;this.getIdToken=getIdToken},
++      async installFamilyRuntime(){assert.equal(await this.getIdToken(),'google-id-token-demo-0000001');return{state:'BOUND',family_id:boundFamily}}
++    },
++    google:{accounts:{id:{
++      initialize(cfg){credentialCallback=cfg.callback},
++      renderButton(){rendered=true;setTimeout(()=>credentialCallback({credential:'google-id-token-demo-0000001'}),0)},
++      disableAutoSelect(){}
++    }}},
++    dispatchEvent(){}
++  };
++  ctx.window=ctx;ctx.globalThis=ctx;
++  vm.createContext(ctx);
++  vm.runInContext(fs.readFileSync(__dirname+'/taky-google-account-auth-v1.js','utf8'),ctx,{filename:'taky-google-account-auth-v1.js'});
++  await new Promise(r=>setTimeout(r,30));
++  assert.equal(rendered,true);
++  assert.equal(boundFamily,'F1');
++  assert.equal(document.documentElement.dataset.takyAccountAuth,'AUTHENTICATED');
++  assert.equal(ctx.TakyGoogleAccountAuthV1.status().authenticated,true);
++  console.log('GOOGLE_ACCOUNT_AUTH_RUNTIME_PASS: account button credential -> verified family session -> TAKY family runtime bind; token remains memory-only');
++})().catch(e=>{console.error(e);process.exit(1)});
+diff --git a/TAKY.md b/TAKY.md
+index e1c8313..57997b5 100644
+--- a/TAKY.md
++++ b/TAKY.md
+@@ -119,6 +119,7 @@ Additional routing:
+ - For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then project master/inherited detailed baseline. Historical Handoff provides recovery pointers, not authority or proof of current implementation.
+ - For Ready & Set product/design/runtime work, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` after shared GUIDE/Family layers. Actual GitHub branch/runtime evidence outranks stale implementation snapshots.
+ - For GUIDE character identity/relationship/lifecycle/personality/Special Friend/shared Guide presence, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
++- For character creation, Character Master, Visual ID derivatives, asset generation, character behavior, pose/expression/prop runtime selection, or cross-app character binding, also load `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; preserve the hard boundary `ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
+ - For learning-session wrap-up/reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character request.
+ - For command-discovery, Handoff/compact/resume interaction, archive/close commands, `/저장반영`, or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`. For `/저장반영` also load `OS/DRIVE_C2S_DIRECT.md`.
+ - For Notion reference/link review, load `OS/COMMAND_INTERACTION.md` and `OS/NOTION_OPS.md` plus the relevant unresolved Review Pending Register after canonical owners. `노션검토` / `노션 검토` / `/노션검토` defaults to the governed `📚 나의 링크` content/link-intelligence review unless the user explicitly names another Notion content collection; `/노션링크검토` is the explicit alias for the same workflow; `/노션구조검토` alone targets database/schema/view/automation structure. Generic `노션검토` SHALL NOT be reinterpreted as schema cleanup.

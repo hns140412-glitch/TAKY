@@ -1,0 +1,1273 @@
+{
+  "total": 122,
+  "failures": 1,
+  "seconds": 47.234,
+  "results": [
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\approval_checkpoint_resume_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.451,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.143s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\architecture_competition_compare_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.128,
+      "stdout": "PASS: same-competition multi-entry representation comparison\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\architecture_competition_learning_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.151,
+      "stdout": "PASS: architecture competition append-only learning evidence\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\architecture_competition_output_pipeline_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.316,
+      "stdout": "PASS: architecture competition result-specific output pipeline\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\architecture_competition_representation_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.131,
+      "stdout": "PASS: architecture competition representation registry/recommender\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\architecture_competition_visual_quality_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.148,
+      "stdout": "PASS: architecture competition visual quality gate\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\artifact_exposure_contract_validator_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.476,
+      "stdout": "artifact_exposure_contract_validator: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\behavioral_eval_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.204,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\change_preserve_contract_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.261,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\context_firewall_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.372,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\cross_engine_growth_e2e_test.py"
+      ],
+      "exit": 0,
+      "seconds": 1.107,
+      "stdout": "",
+      "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.800s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_local_embedding_provider_bom_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.079,
+      "stdout": "V26_BOM_PAYLOAD_REGRESSION_SUCCESS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_local_embedding_provider_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.107,
+      "stdout": "LOCAL_EMBEDDING_PROVIDER_CONTRACT_SUCCESS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_local_query_provider_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.125,
+      "stdout": "data_index_local_query_provider: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_search_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.313,
+      "stdout": "data_index_search: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_vector_materialization_validate_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.491,
+      "stdout": "data_index_vector_materialization_validate: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\data_index_vector_search_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.239,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.016s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\evidence_history_boundary_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.495,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\execution_checkpoint_identity_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.581,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\execution_checkpoint_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.246,
+      "stdout": "execution_checkpoint: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\execution_outcome_state_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.281,
+      "stdout": "",
+      "stderr": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\execution_state_approval_binding_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.291,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\learning_evidence_gap_broker_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.289,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.041s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\local_drive_workspace_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.941,
+      "stdout": "local_drive_workspace: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\materialize_v26_neural_local_cmd_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.089,
+      "stdout": "V26_WINDOWS_WRAPPER_REGRESSION_SUCCESS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\materialize_v26_neural_local_v2_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.142,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\mining_verified_archive_manifest_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.325,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.046s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\producer_artifact_gate_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.781,
+      "stdout": "",
+      "stderr": "..................\n----------------------------------------------------------------------\nRan 18 tests in 0.544s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_acquisition_adapter_test.py"
+      ],
+      "exit": 0,
+      "seconds": 2.034,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 1.502s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_acquisition_runtime_binding_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.246,
+      "stdout": "",
+      "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_index_owner_receipt_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.421,
+      "stdout": "",
+      "stderr": "test_independent_owner_receipt_requires_matching_identity_and_evidence (__main__.OwnerBoundary.test_independent_owner_receipt_requires_matching_identity_and_evidence) ... ok\ntest_independent_test_review_allows_index_candidate_but_not_promotion (__main__.OwnerBoundary.test_independent_test_review_allows_index_candidate_but_not_promotion) ... ok\ntest_issuer_claim_in_payload_does_not_replace_owner_verifier (__main__.OwnerBoundary.test_issuer_claim_in_payload_does_not_replace_owner_verifier) ... ok\ntest_no_accepted_disposition_can_trigger_promotion (__main__.OwnerBoundary.test_no_accepted_disposition_can_trigger_promotion) ... ok\ntest_payload_owner_receipt_flag_cannot_be_sole_proof (__main__.OwnerBoundary.test_payload_owner_receipt_flag_cannot_be_sole_proof) ... ok\ntest_proposed_source_b_does_not_index_source_a (__main__.OwnerBoundary.test_proposed_source_b_does_not_index_source_a) ... ok\ntest_rejected_disposition_without_reason_never_writes_indexed_event (__main__.OwnerBoundary.test_rejected_disposition_without_reason_never_writes_indexed_event) ... ok\ntest_source_url_only_requires_indexing_owned_id (__main__.OwnerBoundary.test_source_url_only_requires_indexing_owned_id) ... ok\ntest_unconfigured_verifier_cannot_be_replaced_by_payload_verified (__main__.OwnerBoundary.test_unconfigured_verifier_cannot_be_replaced_by_payload_verified) ... ok\ntest_verifier_exception_preserves_registered (__main__.OwnerBoundary.test_verifier_exception_preserves_registered) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.146s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_intake_executor_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.333,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.047s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_intake_router_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.106,
+      "stdout": "6/6 PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\runtime_hardening_integration_test.py"
+      ],
+      "exit": 0,
+      "seconds": 2.523,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 2.124s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\synthesis_barrier_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.384,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\trace_to_regression_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.225,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\untrusted_reader_quarantine_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.36,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\v26_neural_retrieval_regression_test.py"
+      ],
+      "exit": 0,
+      "seconds": 0.151,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/claude_hook_regression.py"
+      ],
+      "exit": 0,
+      "seconds": 2.046,
+      "stdout": "PASS: Claude hook regression 20/20\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/outcome_hook_regression.py"
+      ],
+      "exit": 0,
+      "seconds": 6.153,
+      "stdout": "PASS: TAKY outcome hook UI/asset/non-material regression\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/evidence_bridge_regression.py"
+      ],
+      "exit": 0,
+      "seconds": 3.4,
+      "stdout": "PASS evidence-backed preflight bridge regression\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/rule_registry_lint.py"
+      ],
+      "exit": 0,
+      "seconds": 0.081,
+      "stdout": "{\n  \"registry_version\": \"2026-09-22.1\",\n  \"rule_count\": 24,\n  \"required_owner_bindings\": {\n    \"TKY-ENFORCEMENT-001\": \"MASTER/ENFORCEMENT_PROTOCOL.md\"\n  },\n  \"errors\": [],\n  \"pass\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/alpha_manifest_validator.py",
+        "HANDOFF/TAKY_ALPHA_LOCAL_MANIFEST_2026-10-03.json"
+      ],
+      "exit": 1,
+      "seconds": 0.192,
+      "stdout": "FAIL: Alpha manifest validation\nSIZE_MISMATCH:.github/workflows/taky-enforcement.yml:45961!=46373\nHASH_MISMATCH:.github/workflows/taky-enforcement.yml\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/handoff_bundle_validator.py",
+        "ENFORCEMENT/fixtures/handoff_bundle_pass"
+      ],
+      "exit": 0,
+      "seconds": 0.191,
+      "stdout": "{\n  \"bundle\": \"D:\\\\Git PWA\\\\TAKY\\\\ENFORCEMENT\\\\fixtures\\\\handoff_bundle_pass\",\n  \"artifact_count\": 3,\n  \"required_owner_count\": 2,\n  \"resume_state_artifact_id\": \"canonical-fixture\",\n  \"resume_evidence_artifact_id\": \"resume-evidence\",\n  \"errors\": [],\n  \"pass\": true,\n  \"claim_boundary\": \"EVIDENCE_BOUND_OFFLINE_RESUME_PASS != HOSTED_SESSION_AUTO_READ != LIVE_STATE_CURRENT\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-award-calendar.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.337,
+      "stdout": "BADGE_HISTORY_CALENDAR_PASS: signed actual award timestamps, KST boundary, first/reaward/promotion, legacy undated, family permissions, tamper/dedupe\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-award-ledger-cas-store.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.268,
+      "stdout": "BADGE_CAS_LEDGER_PASS: signed source replay, strong reads, real ETag CAS conflicts, two concurrent awards retained, duplicate idempotency, key rotation failure, family tamper denial, KST month\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-award-ledger-store.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.3,
+      "stdout": "durable badge Award Ledger + real persisted replay: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-family-gift-calendar.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.226,
+      "stdout": "CHILD_FAMILY_GIFT_CALENDAR_PASS: signed journal, separate achievement/praise/gem lanes, Korean midnight, sibling privacy, tamper denial\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-family-read-access.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.318,
+      "stdout": "family-scoped server badge read: PASS (parent/child access, cross-family, replay)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-ledger-projection-bridge.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.201,
+      "stdout": "badge ledger bridge: PASS (complete-history, 0+5 stars, dedupe, scope, failure gates)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-ledger-visual-binding.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.252,
+      "stdout": "persisted ledger to verified silhouette/earned layered render model: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-reaward-progress.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.173,
+      "stdout": "badge reaward progression: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-story-discovery.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.228,
+      "stdout": "BADGE_60_PRESET_AND_20_HISTORY_DISCOVERY_PASS: fixed names, rank vs stars, gated child evidence, no automatic award\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-visual-registry.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.188,
+      "stdout": "badge visual registry guards: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-visual-renderer.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.191,
+      "stdout": "badge visual renderer reaward and layered states: PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\badge-wow-inspired-copy-validator.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.187,
+      "stdout": "WOW_INSPIRED_ORIGINAL_BADGE_COPY_PASS: 60 + 20, canonical stable, unique original Korean titles, no award/art activation\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\family-praise-gift.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.293,
+      "stdout": "FAMILY_PRAISE_V2_PASS: parent/grandparent/guardian/sibling by permission, non-granted relative denied, 1..5 gems, journal integrity\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\parent-praise-gift-journal.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.35,
+      "stdout": "PARENT_PRAISE_JOURNAL_PASS: persisted 5-gem cap, reboot, dedupe, conflict, family scope, tamper, no auto balance\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\parent-praise-gift.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.247,
+      "stdout": "PARENT_PRAISE_GIFT_PASS: verified parent/child, no parent locked atlas, 1..5 gems per gift, approved gift-only badge, dedup/failure gates\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "BADGE\\windows-directory-fsync-regression.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.255,
+      "stdout": "WINDOWS_DIRECTORY_FSYNC_REGRESSION_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "SHARED\\runtime\\shared-runtime-foundation.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.225,
+      "stdout": "PASS: shared runtime foundation release compatibility and safe PWA state transitions\nPASS: shared immutable event envelope identity is distinct from payload digest\nPASS: shared local queue bounded retry, dead-letter and ack lifecycle\nPASS: shared vision ingest keeps transport/evidence mechanics separate from domain semantics\nPASS: shared HTTP transport normalizes request/status/rate-limit mechanics without domain authority\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "SHARED\\runtime\\taky-google-account-auth-v1.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.912,
+      "stdout": "GOOGLE_ACCOUNT_AUTH_RUNTIME_PASS: account button credential -> verified family session -> TAKY family runtime bind; token remains memory-only\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\adapters\\canonical-evidence.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.249,
+      "stdout": "CANONICAL_LEARNING_EVIDENCE_ADAPTER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\benchmark\\estimator-benchmark.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.23,
+      "stdout": "LEARNING_ESTIMATOR_BENCHMARK_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\benchmark\\promotion-policy.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.212,
+      "stdout": "ESTIMATOR_PROMOTION_POLICY_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\benchmark\\promotion-report.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.206,
+      "stdout": "ESTIMATOR_PROMOTION_REPORT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\data\\evidence-normalizer.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.21,
+      "stdout": "LEARNING_EVIDENCE_NORMALIZER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\data\\replay-dataset-builder.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.247,
+      "stdout": "LEARNING_REPLAY_DATASET_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\domain-model\\concept-dependency-graph.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.179,
+      "stdout": "CONCEPT_DEPENDENCY_GRAPH_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\domain-model\\relation-promotion-policy.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.202,
+      "stdout": "RELATION_PROMOTION_POLICY_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\estimators\\bkt-calibration-candidate.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.237,
+      "stdout": "BKT_CALIBRATION_CANDIDATE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\estimators\\retention-state-baseline.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.197,
+      "stdout": "RETENTION_STATE_BASELINE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\evidence\\self-reflection-evidence.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.211,
+      "stdout": "SELF_REFLECTION_EVIDENCE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\intake\\indexed-evidence-handoff.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.186,
+      "stdout": "INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\intake\\real-evidence-intake.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.223,
+      "stdout": "REAL_EVIDENCE_INTAKE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\intake\\specialist-event-pipeline.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.206,
+      "stdout": "SPECIALIST_EVENT_PIPELINE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\intake\\transport-handler.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.212,
+      "stdout": "LEARNING_EVIDENCE_TRANSPORT_HANDLER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\change-ledger-current.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.182,
+      "stdout": "LEARNING_CHANGE_LEDGER_CURRENT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\change-ledger.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.17,
+      "stdout": "LEARNING_CHANGE_LEDGER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\data-readiness-current.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.157,
+      "stdout": "LEARNING_ENGINE_DATA_READINESS_CURRENT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\estimator-data-readiness.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.189,
+      "stdout": "ESTIMATOR_DATA_READINESS_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\evaluation-ledger.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.181,
+      "stdout": "LEARNING_EVALUATION_LEDGER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\evaluation-orchestrator.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.199,
+      "stdout": "LEARNING_EVALUATION_ORCHESTRATOR_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\growth-strategy-ledger.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.219,
+      "stdout": "GROWTH_STRATEGY_LEDGER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\outcome-growth-feedback.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.223,
+      "stdout": "OUTCOME_GROWTH_FEEDBACK_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\real-evidence-evaluation-trigger.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.191,
+      "stdout": "REAL_EVIDENCE_EVALUATION_TRIGGER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\lifecycle\\real-outcome-growth-e2e.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.183,
+      "stdout": "REAL_OUTCOME_GROWTH_E2E_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\pedagogy\\adaptive-plan-contract.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.197,
+      "stdout": "ADAPTIVE_PLAN_CONTRACT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\pedagogy\\feedback-intent.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.18,
+      "stdout": "PEDAGOGICAL_FEEDBACK_INTENT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\policy\\evidence-policy-bridge.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.188,
+      "stdout": "LEARNING_EVIDENCE_POLICY_BRIDGE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\receipts\\real-evidence-receipt.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.185,
+      "stdout": "REAL_LEARNING_EVIDENCE_RECEIPT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\replay\\canonical-evidence-replay.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.175,
+      "stdout": "CANONICAL_EVIDENCE_TO_REPLAY_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\replay\\replay-benchmark.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.178,
+      "stdout": "LEARNING_REPLAY_BENCHMARK_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\replay\\replay-dataset.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.204,
+      "stdout": "LEARNING_REPLAY_DATASET_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\decision-contract.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.197,
+      "stdout": "LEARNING_RUNTIME_DECISION_CONTRACT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\evidence-gap.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.197,
+      "stdout": "LEARNING_EVIDENCE_GAP_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\learner-state-core.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.186,
+      "stdout": "LEARNING_ENGINE_CORE_V2_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\learning-engine-runtime-policy.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.186,
+      "stdout": "LEARNING_RUNTIME_POLICY_INTEGRATION_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\observation-review-intent.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.188,
+      "stdout": "OBSERVATION_REVIEW_INTENT_PASS: durable child-scoped Hide signals influence central checkpoint only; zero verified mastery/receipt and no date\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\runtime\\recovery-profile.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.168,
+      "stdout": "LEARNING_RECOVERY_PROFILE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\authenticated-evidence-transport.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.185,
+      "stdout": "AUTHENTICATED_EVIDENCE_TRANSPORT_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\central-character-local-pilot.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.461,
+      "stdout": "CENTRAL_CHARACTER_LOCAL_PILOT_PASS: Ready-style upload -> verified commit -> profile publish -> signed read works end-to-end locally\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\central-learning-decision-http-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.326,
+      "stdout": "CENTRAL_DECISION_HTTP_PASS: authenticated scoped runtime, observation-only hold, verified receipt validation, browser input exclusion, no-store family isolation and corrupt state denial\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\central-learning-http-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.361,
+      "stdout": "CENTRAL_LEARNING_HTTP_ENDPOINT_PASS: real local durable receipts; forged browser verifier downgraded; trusted server-only promotion; bearer/family/member isolation; idempotent no-store ACK; outage denial\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\central-learning-production-host.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.45,
+      "stdout": "CENTRAL_PRODUCTION_HOST_PASS: identity auth, CORS, learning + character profile + private character asset endpoints\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\drive-archive-route.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.216,
+      "stdout": "LEARNING_DRIVE_ARCHIVE_BOUNDARY_PASS: central Core not PWA; Drive export only; private encryption; immutable hash/readback gate; no live award/wallet\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\durable-evidence-commit-ack.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.201,
+      "stdout": "DURABLE_LEARNING_RECEIPT_ACK_PASS: no false ACK without ETag; no unconditional existing-state writes; conflict retry fail closed\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\durable-evidence-store-adapter.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.224,
+      "stdout": "DURABLE_EVIDENCE_STORE_ADAPTER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\durable-growth-strategy-store-adapter.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.197,
+      "stdout": "DURABLE_GROWTH_STRATEGY_STORE_ADAPTER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\family-character-asset-http-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.202,
+      "stdout": "FAMILY_CHARACTER_ASSET_HTTP_PASS: authenticated scope, bounded image upload, commit verification, signed read\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\family-character-profile-http-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.173,
+      "stdout": "FAMILY_CHARACTER_PROFILE_HTTP_PASS: authenticated member scope, strong store, no raw photo, monotonic identity version\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\family-member-identity-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.262,
+      "stdout": "FAMILY_MEMBER_IDENTITY_ENDPOINT_BINDING_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\family-session-http-endpoint.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.156,
+      "stdout": "FAMILY_SESSION_HTTP_PASS: verified bearer -> server family scope projection only\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\google-node-central-integration.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.505,
+      "stdout": "GOOGLE_NODE_CENTRAL_LEARNING_PASS: actual loopback HTTP, Google sub not email, server membership grants, sibling and family isolation, gift-only adult denied, forged origin/size fail, no-store observation ACK\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\local-character-object-store.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.353,
+      "stdout": "LOCAL_CHARACTER_OBJECT_STORE_PASS: expiring upload/read tickets, SHA verified commit, private no-store read\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\local-durable-store-binding.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.242,
+      "stdout": "LOCAL_CONTROLLED_DURABLE_STORE_BINDING_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\netlify-blobs-transport-adapter.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.224,
+      "stdout": "NETLIFY_BLOBS_TRANSPORT_ADAPTER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\server-transport-kernel.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.237,
+      "stdout": "SERVER_TRANSPORT_KERNEL_RECONCILE_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\three-app-character-runtime-integration.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.496,
+      "stdout": "THREE_APP_CHARACTER_RUNTIME_PASS: Ready published one Character Master; Hide and Snap resolved same character_id, private pointer, and identical signed-read bytes\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\transport\\transport-auth-policy.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.242,
+      "stdout": "LEARNING_TRANSPORT_AUTH_POLICY_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\verification\\verification-layer.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.211,
+      "stdout": "LEARNING_VERIFICATION_LAYER_PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "LEARNING\\verification\\verifier-policy.test.js"
+      ],
+      "exit": 0,
+      "seconds": 0.226,
+      "stdout": "LEARNING_VERIFIER_POLICY_PASS\n",
+      "stderr": ""
+    }
+  ]
+}

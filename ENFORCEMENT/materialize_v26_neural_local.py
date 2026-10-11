@@ -11,7 +11,8 @@ from pathlib import Path
 from data_index_local_embedding_provider import (
     EXPECTED_DIMENSION, MODEL_ID, build_index, build_query
 )
-from data_index_vector_search import load_query_vector, load_vector_index, vector_scores\nfrom data_index_search import load_index, search
+from data_index_vector_search import load_query_vector, load_vector_index, vector_scores
+from data_index_search import load_index, search
 
 def main() -> None:
     p=argparse.ArgumentParser()

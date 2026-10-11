@@ -1,0 +1,18 @@
+{
+  "baseline_files_checked": 851,
+  "changed_existing_files": [
+    "ENFORCEMENT/evidence_ref_validator.py",
+    "ENFORCEMENT/execution_checkpoint.py"
+  ],
+  "missing_existing_files": [],
+  "all_other_preexisting_file_bytes_preserved": true,
+  "syntax_compile_pass": [
+    "ENFORCEMENT/evidence_ref_validator.py",
+    "ENFORCEMENT/execution_checkpoint.py",
+    "ENFORCEMENT/evidence_history_boundary_test.py",
+    "ENFORCEMENT/execution_checkpoint_identity_test.py",
+    "ENFORCEMENT/beta_validation_2026_10_03/integration_probe.py"
+  ],
+  "head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+  "branch": "character-asset-behavior-separation-2026-09-30"
+}

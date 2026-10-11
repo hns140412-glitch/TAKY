@@ -1,0 +1,1 @@
+{"checkpoint_version": "1.0", "task_id": "OTHER_TASK", "namespace": "OTHER_OWNER", "atomic_unit": "probe", "status": "RUNNING", "done": [], "open": [], "next": "review", "corrections": [], "source_refs": ["local-probe"], "updated_at": "2026-10-03T00:00:00Z", "checkpoint_hash": "sha256:9ae18dd277f580b26f5e8798827045fe7f30f8d7aa5e4bbfd67e8621d6dfd237"}

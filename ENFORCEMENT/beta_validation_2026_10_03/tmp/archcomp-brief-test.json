@@ -1,0 +1,1 @@
+{"competition_name": "TEST", "verified": true, "delivery": "A1_BOARD", "mandatory_modes": ["PLAN", "SECTION", "ELEVATION"], "content_frozen": true, "mandatory_drawings": [{"name": "배치도", "mode": "CONTEXT", "scale": "1:500"}]}

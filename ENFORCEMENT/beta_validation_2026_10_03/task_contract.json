@@ -1,0 +1,66 @@
+{
+  "task_id": "TAKY-BETA-CODE-2026-10-03",
+  "repository": "D:\\Git PWA\\TAKY",
+  "branch": "character-asset-behavior-separation-2026-09-30",
+  "verified_base_head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+  "objective": "Local validation and minimal evidenced validator fixes with regression coverage",
+  "working_model": {
+    "primary_outcome": "Reviewable fixes and exact validation evidence",
+    "priority_order": [
+      "preserve existing state",
+      "reproduce defects",
+      "minimal fixes",
+      "regression validation"
+    ],
+    "protected_state": [
+      "all baseline files and edits",
+      "CURRENT/MASTER/HANDOFF authority documents"
+    ],
+    "rule_to_execution": [
+      {
+        "rule_ref": "AGENTS.md and current user instruction",
+        "effect": "CONSTRAINT",
+        "implication": "No remote operations, commits, branch switching, authority edits, policy decisions or unrelated cleanup"
+      },
+      {
+        "rule_ref": "MASTER/ENFORCEMENT_PROTOCOL.md",
+        "effect": "ACCEPTANCE",
+        "implication": "Reproduce malformed evidence acceptance and retain compliant controls; no runtime or approval overclaims"
+      }
+    ],
+    "next_action": "Run local test scripts, replay fixtures, repository lint and validators",
+    "stop_conditions": [
+      "authority conflict: leave OPEN",
+      "fix lacks evidence: do not implement",
+      "local validation and report complete"
+    ]
+  },
+  "allowed_scope": [
+    "ENFORCEMENT validators/tests/local evidence",
+    "TOOLS code if defect evidenced"
+  ],
+  "forbidden": [
+    "authority document edits",
+    "unrelated changes",
+    "commit/push/merge/deploy",
+    "paid API/remote service mutations"
+  ],
+  "acceptance_tests": [
+    "reproduce each code defect before fix",
+    "regression rejects invalid and retains valid inputs",
+    "run existing local tests and record failures without changing authority"
+  ],
+  "validation_commands": [
+    "python ENFORCEMENT/*_test.py (individual scripts)",
+    "python ENFORCEMENT/*regression.py (safe local harnesses)",
+    "python ENFORCEMENT/taky_gate.py --replay <each replay JSON>",
+    "local CI validator commands",
+    "node <each local *.test.js>",
+    "git diff --check"
+  ],
+  "human_approval": {
+    "local_changes": "authorized by user",
+    "merge_deploy": "forbidden in this task"
+  },
+  "mobile_runtime_required": false
+}

@@ -4,7 +4,7 @@ import unittest
 
 class AcquisitionRuntimeBindingTest(unittest.TestCase):
     def test_orchestrator_binding_contract(self):
-        text=pathlib.Path("runtime_orchestrator.py").read_text(encoding="utf-8")
+        text=(pathlib.Path(__file__).resolve().parent / "runtime_orchestrator.py").read_text(encoding="utf-8")
         required=[
             "from reference_acquisition_adapter import acquire as acquire_reference",
             'reference_acquisition_execute") is True',

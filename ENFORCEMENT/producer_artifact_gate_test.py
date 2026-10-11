@@ -28,6 +28,26 @@ class ProducerArtifactGateTests(unittest.TestCase):
         import producer_artifact_gate as gate
         return dict(contract_sha256=gate._digest(self.contract), output_sha256=hashlib.sha256(output.read_bytes()).hexdigest(), **checks)
 
+    def result_preview(self):
+        output = self.root / "output.xlsx"
+        preview = self.root / "independent_preview.png"
+        preview.write_bytes(b"preview review witness")
+        return {
+            "preview_version": "1.0",
+            "task_id": self.contract["task_id"],
+            "preview_required": True,
+            "result_path": self.contract["output_path"],
+            "result_revision_hash": "sha256:" + hashlib.sha256(output.read_bytes()).hexdigest(),
+            "preview_surface": "rendered-workbook",
+            "preview_evidence": [{
+                "evidence_path": preview.name,
+                "evidence_sha256": "sha256:" + hashlib.sha256(preview.read_bytes()).hexdigest(),
+            }],
+            "acceptance_result": "PASS",
+            "acceptance_method": "CROSS_VALIDATION",
+            "reviewer_ref": "validator:test",
+        }
+
     def test_missing_pre_blocks(self):
         del self.contract["acceptance_plan"]
         self.assertIn("PRE_ACCEPTANCE_PLAN_MISSING", preflight(self.contract, self.root)["detected"])
@@ -117,6 +137,76 @@ class ProducerArtifactGateTests(unittest.TestCase):
         evidence["claim"] = "COMPLETE"
         evidence["human_approval_ref"] = "self-reported"
         self.assertIn("INDEPENDENT_RESULT_VALIDATION_NOT_IMPLEMENTED", postflight(self.contract, receipt, evidence, self.root)["detected"])
+
+    def test_revision_bound_preview_can_raise_complete_claim(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "COMPLETE"
+        evidence["human_approval_ref"] = "approval:test"
+        evidence["result_preview"] = self.result_preview()
+        result = postflight(self.contract, receipt, evidence, self.root)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(result["claim_ceiling"], "REVISION_BOUND_PREVIEW_ACCEPTED")
+
+    def test_old_preview_cannot_follow_changed_output(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "COMPLETE"
+        evidence["human_approval_ref"] = "approval:test"
+        evidence["result_preview"] = self.result_preview()
+        (self.root / "output.xlsx").write_bytes(b"changed after preview")
+        result = postflight(self.contract, receipt, evidence, self.root)
+        self.assertFalse(result["pass"])
+        self.assertIn("RESULT_PREVIEW_OUTPUT_REVISION_MISMATCH", result["detected"])
+
+    def test_not_applicable_preview_cannot_raise_material_claim(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "RELEASE_READY"
+        evidence["human_approval_ref"] = "approval:test"
+        evidence["result_preview"] = {
+            "preview_version": "1.0",
+            "task_id": self.contract["task_id"],
+            "preview_required": False,
+            "not_applicable_reason": "bookkeeping",
+            "acceptance_result": "NOT_APPLICABLE",
+            "result_revision_hash": "sha256:" + hashlib.sha256(
+                (self.root / "output.xlsx").read_bytes()
+            ).hexdigest(),
+        }
+        result = postflight(self.contract, receipt, evidence, self.root)
+        self.assertFalse(result["pass"])
+        self.assertIn(
+            "RESULT_PREVIEW_REQUIRED_FOR_MATERIAL_CLAIM",
+            result["detected"],
+        )
+
+    def test_other_task_preview_cannot_raise_material_claim(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "COMPLETE"
+        evidence["human_approval_ref"] = "approval:test"
+        preview = self.result_preview()
+        preview["task_id"] = "OTHER-TASK"
+        evidence["result_preview"] = preview
+        result = postflight(self.contract, receipt, evidence, self.root)
+        self.assertFalse(result["pass"])
+        self.assertIn("RESULT_PREVIEW_TASK_ID_MISMATCH", result["detected"])
+
+    def test_identical_bytes_at_other_path_cannot_substitute_output(self):
+        receipt = preflight(self.contract, self.root)
+        evidence = self.evidence()
+        evidence["claim"] = "COMPLETE"
+        evidence["human_approval_ref"] = "approval:test"
+        copy_path = self.root / "copy.xlsx"
+        copy_path.write_bytes((self.root / "output.xlsx").read_bytes())
+        preview = self.result_preview()
+        preview["result_path"] = "copy.xlsx"
+        evidence["result_preview"] = preview
+        result = postflight(self.contract, receipt, evidence, self.root)
+        self.assertFalse(result["pass"])
+        self.assertIn("RESULT_PREVIEW_OUTPUT_PATH_MISMATCH", result["detected"])
+
     def test_path_escape_blocks(self):
         self.contract["output_path"] = "../escape.xlsx"
         self.assertIn("PATH_ESCAPES_ROOT", preflight(self.contract, self.root)["detected"])

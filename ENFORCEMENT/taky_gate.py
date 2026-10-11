@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
 from typing import Any, Dict, List
+from ai_execution_guard import validate_ai_execution
 
 HARD_FAILURE_CLASSES = {
     "INTENT_DRIFT","SCOPE_SHRINKAGE","SUBSTITUTE_RESULT","OUTPUT_FORM_MISMATCH","OMISSION",
@@ -19,6 +20,8 @@ HARD_FAILURE_CLASSES = {
     "ROLE_OWNER_VIOLATION","KNOWN_CONTEXT_EVIDENCE_MISSING","HISTORY_EVIDENCE_MISSING",
     "VALIDATION_AS_PRODUCT_PROGRESS","ROLE_MISSING","ACTION_CLASS_MISSING","EXECUTION_OWNER_MISSING",
     "UNKNOWN_ROLE","UNKNOWN_ACTION_CLASS","ROLE_ACTION_NOT_ALLOWED",
+    "AI_ADOPTION_GATE_MISSING","AI_OBSERVABLE_SUCCESS_EVIDENCE_MISSING",
+    "AI_COST_GUARD_MISSING","AI_REVIEW_PASS_UNJUSTIFIED","AI_COMPUTER_USE_GUARD_MISSING",
 }
 
 VALID_ROLES = {"ORCHESTRATOR","IMPLEMENTER","VALIDATOR","HUMAN_APPROVER"}
@@ -56,6 +59,7 @@ def has_refs(r: Dict[str, Any], k: str)->bool:
 
 def validate_record(r: Dict[str, Any]) -> List[str]:
     f: List[str]=[]
+    f.extend(validate_ai_execution(r))
     for key, token in [
         ("intent_drift","INTENT_DRIFT"),("scope_shrunk_without_authority","SCOPE_SHRINKAGE"),
         ("substitute_result","SUBSTITUTE_RESULT"),("output_form_mismatch","OUTPUT_FORM_MISMATCH"),

@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -166,7 +167,44 @@ assert esc["stage"] == "RAW_REQUIRED"
 assert esc["reason"] == "DETAIL_UNAVAILABLE"
 assert esc["raw_required"] is True
 
-# 13. CLI smoke test against a V24-like container
+# 13. authority-preserving outcome utility rerank
+utility_records = materialize_legacy_relations([normalize_record(r) for r in [
+    {
+        "source_id":"UTIL-CURRENT-LOW",
+        "title":"공통 전략 자료",
+        "source_family":"UTILITY_TEST",
+        "current_relation":"CURRENT_INDEX_ENTRY",
+        "outcome_utility":{"verified_success":0,"verified_failure":3}
+    },
+    {
+        "source_id":"UTIL-OLD-HIGH",
+        "title":"공통 전략 자료",
+        "source_family":"UTILITY_TEST",
+        "current_relation":"SUPERSEDED",
+        "outcome_utility":{"verified_success":9,"verified_failure":0}
+    },
+    {
+        "source_id":"UTIL-CURRENT-HIGH",
+        "title":"공통 전략 자료",
+        "source_family":"UTILITY_TEST",
+        "current_relation":"CURRENT_INDEX_ENTRY",
+        "outcome_utility":{"verified_success":5,"verified_failure":0}
+    }
+]])
+r = search(utility_records, "공통 전략 자료", relation_depth=0)
+ids = [x["source_id"] for x in r["results"]]
+assert ids[0] == "UTIL-CURRENT-HIGH"
+assert ids[1] == "UTIL-CURRENT-LOW"
+assert ids[2] == "UTIL-OLD-HIGH"
+assert r["results"][0]["ranking"]["outcome_utility"] > r["results"][1]["ranking"]["outcome_utility"]
+assert r["results"][0]["ranking"]["rule"] == "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE"
+
+# 14. exact source-id authority outranks CURRENT and utility
+r = search(utility_records, "UTIL-OLD-HIGH", relation_depth=0)
+assert r["results"][0]["source_id"] == "UTIL-OLD-HIGH"
+assert r["results"][0]["ranking"]["exact_authority_tier"] == 0
+
+# 15. CLI smoke test against a V24-like container
 with tempfile.TemporaryDirectory() as tmp:
     p = Path(tmp) / "index.json"
     p.write_text(json.dumps({"source_entries": RECORDS}, ensure_ascii=False), encoding="utf-8")
@@ -187,5 +225,35 @@ with tempfile.TemporaryDirectory() as tmp:
     assert cli.returncode == 0, (cli.stdout, cli.stderr)
     data = json.loads(cli.stdout)
     assert data["results"][0]["source_id"] == "SRC-001"
+
+# 16. auto-discover outcome utility sidecar through environment override
+with tempfile.TemporaryDirectory() as tmp:
+    tmp = Path(tmp)
+    p = tmp / "index.json"
+    u = tmp / "utility.json"
+    p.write_text(json.dumps({"source_entries": [
+        {"source_id":"AUTO-A","title":"동일 제목","current_relation":"CURRENT_INDEX_ENTRY"},
+        {"source_id":"AUTO-B","title":"동일 제목","current_relation":"CURRENT_INDEX_ENTRY"}
+    ]}, ensure_ascii=False), encoding="utf-8")
+    u.write_text(json.dumps({
+        "schema":"TAKY_DATA_INDEX_OUTCOME_UTILITY_V1",
+        "authoritative":False,
+        "by_source_id":{
+            "AUTO-A":{"verified_success":0,"verified_failure":2},
+            "AUTO-B":{"verified_success":4,"verified_failure":0}
+        }
+    }, ensure_ascii=False), encoding="utf-8")
+    env = os.environ.copy()
+    env["TAKY_DATA_INDEX_OUTCOME_UTILITY"] = str(u)
+    cli = subprocess.run(
+        [sys.executable, str(SCRIPT), "--index", str(p), "--query", "동일 제목", "--relation-depth", "0"],
+        capture_output=True, text=True, env=env
+    )
+    assert cli.returncode == 0, (cli.stdout, cli.stderr)
+    data = json.loads(cli.stdout)
+    assert data["results"][0]["source_id"] == "AUTO-B"
+    assert data["outcome_utility_projection"]["applied"] is True
+    assert data["outcome_utility_projection"]["auto_discovered"] is True
+    assert data["outcome_utility_projection"]["authoritative"] is False
 
 print("data_index_search: PASS")

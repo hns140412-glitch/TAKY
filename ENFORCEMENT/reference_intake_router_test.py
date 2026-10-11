@@ -28,6 +28,10 @@ def main():
     assert out["full_corpus_reindex"] is False
     assert out["canonical_promotion_authorized"] is False
     assert "INDEXED != APPROVED_POLICY" in out["guards"]
+    assert "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY" in out["pipeline"]
+    assert "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY" in out["pipeline"]
+    assert "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY" in out["pipeline"]
+    assert "AUTHOR != AUTHORITY" in out["guards"]
     print("6/6 PASS")
 
 if __name__ == "__main__":

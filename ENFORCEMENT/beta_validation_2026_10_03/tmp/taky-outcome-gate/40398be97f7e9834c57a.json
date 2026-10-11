@@ -1,0 +1,25 @@
+{
+  "design_intent": true,
+  "material_intent": true,
+  "interaction_expected": false,
+  "prompt_excerpt": "승인 원화 기준으로 이미지 에셋 제작해",
+  "touched_ui": [],
+  "touched_asset": [
+    "asset.png"
+  ],
+  "touched_artifact": [],
+  "touched_code": [],
+  "browser_verified": false,
+  "browser_render_verified": false,
+  "browser_interaction_verified": false,
+  "code_verified": false,
+  "asset_verified": true,
+  "artifact_observed": false,
+  "stop_blocks": 0,
+  "failure_counts": {},
+  "last_failure": "",
+  "last_failed_sig": "",
+  "last_failure_cause": "",
+  "route_switch_required": false,
+  "last_verified_at": "2026-10-03T11:55:05.094476+00:00"
+}

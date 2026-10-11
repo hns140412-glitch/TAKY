@@ -12,7 +12,7 @@
     {
       "source_kind": "repo_file",
       "source_id": "fixture-rule-seed",
-      "path": "ENFORCEMENT/fixtures/evidence_seed.txt",
+      "path": "ENFORCEMENT/fixtures/evidence_seed.bin",
       "sha256": "d8e0e35dd505bed4ff6cc4fdfe04ba698b840ce2c39aa9c0d75ccad18d11f5c1"
     }
   ],

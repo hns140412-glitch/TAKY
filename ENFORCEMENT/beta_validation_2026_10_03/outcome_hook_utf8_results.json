@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "ENFORCEMENT/outcome_hook_regression.py"
+  ],
+  "environment": {
+    "PYTHONUTF8": "1"
+  },
+  "exit_code": 0,
+  "stdout": "PASS: TAKY outcome hook UI/asset/non-material regression\n",
+  "stderr": ""
+}

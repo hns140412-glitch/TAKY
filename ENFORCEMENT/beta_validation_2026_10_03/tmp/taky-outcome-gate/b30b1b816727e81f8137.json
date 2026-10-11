@@ -1,0 +1,22 @@
+{
+  "design_intent": false,
+  "material_intent": false,
+  "interaction_expected": false,
+  "prompt_excerpt": "git status 보여줘",
+  "touched_ui": [],
+  "touched_asset": [],
+  "touched_artifact": [],
+  "touched_code": [],
+  "browser_verified": false,
+  "browser_render_verified": false,
+  "browser_interaction_verified": false,
+  "code_verified": false,
+  "asset_verified": false,
+  "artifact_observed": false,
+  "stop_blocks": 0,
+  "failure_counts": {},
+  "last_failure": "",
+  "last_failed_sig": "",
+  "last_failure_cause": "",
+  "route_switch_required": false
+}

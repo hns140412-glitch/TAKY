@@ -1,0 +1,9 @@
+{
+  "ref": {
+    "source_kind": "repo_file",
+    "source_id": "history-probe",
+    "path": "HISTORY/../TAKY.md",
+    "sha256": "249dac9f0e12521c62a426240e86989a09f40cde17c4ab9acdbe7132497de140"
+  },
+  "failures": []
+}

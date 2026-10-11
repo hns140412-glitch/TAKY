@@ -25,6 +25,13 @@ class ReferenceIntakeExecutorTest(unittest.TestCase):
             result=execute({
                 "source_id":"SRC-1",
                 "source_url":"https://example.test/source",
+                "source_actor":"Example Author",
+                "source_actor_class":"INDEPENDENT_PRACTITIONER",
+                "source_author_identity_state":"SELF_IDENTIFIED_NOT_INDEPENDENTLY_VERIFIED",
+                "source_direction":"PRACTICAL_WORKFLOW_GUIDANCE",
+                "source_direction_signals":["HOW_TO","TOOL_RECOMMENDATION"],
+                "applicability_scope":["WORKFLOW_CANDIDATE"],
+                "authority_ceiling":"REFERENCE_ONLY",
                 "reference_intake_execution":{
                     "acquisition_state":"ACQUIRED_AND_PRESERVED",
                     "recorded_at":"2026-09-25T14:00:00+00:00",
@@ -41,6 +48,16 @@ class ReferenceIntakeExecutorTest(unittest.TestCase):
             self.assertEqual(result["next_handoff"],"DOMAIN_CONSUMER_REQUERY")
             ledger=json.loads((root/"CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json").read_text(encoding="utf-8"))
             self.assertEqual(len(ledger["entries"]),3)
+            self.assertEqual(ledger["entries"][0]["details"]["source_actor_class"],"INDEPENDENT_PRACTITIONER")
+            self.assertEqual(ledger["entries"][0]["details"]["authority_ceiling"],"REFERENCE_ONLY")
+            self.assertEqual(ledger["entries"][2]["details"]["applicability_scope"],["WORKFLOW_CANDIDATE"])
+            lineage_path=root/"LEARNING/evidence/grow-lineage.jsonl"
+            self.assertTrue(lineage_path.exists())
+            lineage=[json.loads(x) for x in lineage_path.read_text(encoding="utf-8").splitlines() if x.strip()]
+            self.assertEqual([x["stage"] for x in lineage],["RAW","INDEX","LEARNING"])
+            self.assertTrue(all(x["grow_domain"]=="LEARNING_GROW" for x in lineage))
+            self.assertTrue(all(x["promotion_authorized"] is False for x in lineage))
+            self.assertEqual(len(result["grow_lineage"]),3)
 
     def test_unresolved_binary_is_preserved_not_dropped(self):
         with tempfile.TemporaryDirectory() as td:
