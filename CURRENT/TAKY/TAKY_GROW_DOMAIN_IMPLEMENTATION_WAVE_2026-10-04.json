@@ -1,0 +1,36 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_DOMAIN_IMPLEMENTATION_WAVE_2026-10-04",
+  "status": "LOCAL_FOUNDATION_WAVE_VERIFIED__REAL_WORLD_BINDINGS_REMAIN",
+  "shared_core": "FINAL_PASS_FROZEN",
+  "verified_local_progress": {
+    "ARCHI_D1a": "5/5 source-registry/fact-gate PASS",
+    "ARCHI_D1b": "12/12 regulatory compiler/relation PASS",
+    "ARCHI_D2": "6/6 deterministic geometry/KPI MVP PASS",
+    "ARCHI_D3": "9/9 production trace MVP PASS",
+    "ARCHI_D4": "8/8 company evidence foundation PASS; real ledger 0 records",
+    "ARCHI_D5": "6/6 geometry-drift guard PASS",
+    "LEARN_D1a": "owner binding/static+client PASS",
+    "LEARN_D1b": "server verifier + central E2E PASS",
+    "LEARN_D2": "Hide/Snap verified owner E2E; Ready observation-only PASS",
+    "LEARN_D3": "3-member/6-receipt durable aggregate->review PASS",
+    "LEARN_D4": "coverage auditor + subject-agnostic core PASS",
+    "LEARN_D5": "Ready/Hide/Snap cross-app owner runtime continuity PASS"
+  },
+  "remaining_classes": [
+    "REAL_PROVIDER_BINDING",
+    "REAL_PROJECT_OR_HUMAN_EVIDENCE",
+    "REAL_CAD_BIM_DETAIL_COST_PERMIT_RFI_ADAPTERS",
+    "REAL_3D_RENDER_ENGINE",
+    "READY_VERIFIABLE_PRACTICE_PRODUCER",
+    "REAL_MULTI_SUBJECT_AND_LEARNER_STAGE_EVIDENCE",
+    "REAL_INSTALLED_PWA_DEVICE_BACKGROUND_OFFLINE_VERIFICATION"
+  ],
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

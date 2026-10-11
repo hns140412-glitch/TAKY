@@ -1,0 +1,40 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R6_FINAL_CLOSURE_2026-10-04",
+  "status": "FINAL_PASS_FROZEN",
+  "source_audit": {
+    "round": 6,
+    "verdict": "PASS",
+    "required_findings": [],
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R6_FINAL.log"
+  },
+  "closed_findings": [
+    "R3-B1",
+    "R3-B2",
+    "R3-B3",
+    "R4-1",
+    "R4-2",
+    "R5-1"
+  ],
+  "verification": {
+    "python": "285/285 PASS",
+    "grow_node": "6/6 PASS",
+    "settings_json": "PASS",
+    "git_diff_check": "PASS",
+    "python_log": "ENFORCEMENT/grow_r5_full_python_latest.log"
+  },
+  "current_best": {
+    "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "status": "CURRENT_BEST_SCOPE_LIMITED",
+    "automatic_promotion": false
+  },
+  "active_open": [],
+  "reopen_rule": "Only new contradictory real outcome, relevant regression failure, or newly scoped GROW requirement may reopen.",
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

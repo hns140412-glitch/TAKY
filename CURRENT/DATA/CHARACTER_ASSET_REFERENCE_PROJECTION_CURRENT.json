@@ -1,0 +1,99 @@
+{
+  "schema": "TAKY_CHARACTER_ASSET_REFERENCE_PROJECTION_V1",
+  "generated_at": "2026-10-08T15:31:32.356681+00:00",
+  "state": "PASS",
+  "source_refs": [
+    "INDEX:REF-097"
+  ],
+  "authority": "SUPPLEMENTAL_REFERENCE_PATTERN_ONLY",
+  "canonical_visual_authority": "EXISTING_APPROVED_SOURCE_AND_VISUAL_ID_ONLY",
+  "patterns": [
+    {
+      "id": "SOURCE_IMAGE_CLARITY",
+      "signal": "Clear face, hair, costume and uncluttered single-character input improves stability.",
+      "use": "PREPRODUCTION_INPUT_QA"
+    },
+    {
+      "id": "FOUR_VIEW_TURNAROUND",
+      "signal": [
+        "FRONT",
+        "3/4 VIEW",
+        "SIDE",
+        "BACK"
+      ],
+      "use": "DERIVATIVE_PACKAGE_COVERAGE"
+    },
+    {
+      "id": "FACE_IDENTITY_DETAILS",
+      "signal": [
+        "FRONT",
+        "PROFILE",
+        "3/4 VIEW",
+        "EYES",
+        "NOSE",
+        "LIPS",
+        "HAIR",
+        "SKIN"
+      ],
+      "use": "IDENTITY_DRIFT_QA"
+    },
+    {
+      "id": "EXPRESSION_COVERAGE",
+      "signal": [
+        "NEUTRAL",
+        "HAPPY",
+        "ANGRY",
+        "SAD",
+        "SURPRISED",
+        "WORRIED",
+        "CONFIDENT",
+        "DETERMINED"
+      ],
+      "use": "EXPRESSION_DERIVATIVE_QA"
+    },
+    {
+      "id": "POSE_BODY_LANGUAGE",
+      "signal": [
+        "NEUTRAL STANDING",
+        "WALKING",
+        "SITTING",
+        "RELAXED",
+        "TENSE",
+        "ACTION-READY"
+      ],
+      "use": "ACTION_DERIVATIVE_COVERAGE"
+    },
+    {
+      "id": "COSTUME_DETAIL",
+      "signal": "Record identity-critical clothing, footwear, accessories and material details.",
+      "use": "COSTUME_IDENTITY_QA"
+    },
+    {
+      "id": "COLOR_MATERIAL_PALETTE",
+      "signal": "Record representative colors and materials.",
+      "use": "COLOR_MATERIAL_DRIFT_QA"
+    },
+    {
+      "id": "CONSISTENCY_CAVEAT",
+      "signal": "Reference sheets improve consistency but do not guarantee 100% identical output.",
+      "use": "NO_FALSE_GUARANTEE"
+    }
+  ],
+  "claims_to_exclude": [
+    "Do not infer canonical age, height, personality or role from generated profile text.",
+    "Do not use the external prompt as TAKY production authority.",
+    "Do not treat a generated reference sheet as Visual ID registration evidence.",
+    "Do not claim a character sheet guarantees identical identity across generations."
+  ],
+  "consumer_contract": {
+    "consumers": [
+      "ASSET_ENGINE",
+      "EXPLORER_CREW_ASSET_QA"
+    ],
+    "may_add_qa_fields": true,
+    "may_replace_visual_id": false,
+    "may_generate_registration_sheet": false,
+    "actual_image_review_required": true
+  },
+  "canonical_promotion": false
+}

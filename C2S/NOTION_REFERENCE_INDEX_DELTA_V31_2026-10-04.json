@@ -1,0 +1,227 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V31",
+  "date": "2026-10-04",
+  "authoritative": false,
+  "source_entries": [
+    {
+      "source_id": "REF-081",
+      "title": "티처스3 재수전쟁 순공 14시간?! ... 시각화 카드",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=happysong4u&logNo=224426880073",
+      "source_family": "INDEPENDENT_EDUCATION_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "REFERENCE_ONLY_UNTIL_CURRICULUM_AND_PEDAGOGY_VERIFIED",
+      "domain_facets": [
+        "education"
+      ],
+      "consumers": [
+        "LEARNING_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "happysong4u (Naver blog handle; real-name identity not independently verified)",
+      "value_statement": "Treat repeated 'mistakes' as possible concept-gap evidence and route to targeted concept review; visual concept-card pattern is useful, product claims are not authority.",
+      "controlled_terms": [
+        "EDUCATION_GUIDANCE_WITH_PRODUCT_PROMOTION",
+        "STUDY_ADVICE",
+        "ERROR_TO_CONCEPT_GAP",
+        "VISUAL_CONCEPT_CARD",
+        "PRODUCT_PROMOTION"
+      ],
+      "keywords": [
+        "LEARNING_METHOD_HYPOTHESIS",
+        "VISUAL_EXPLANATION_PATTERN",
+        "ERROR_TO_CONCEPT_GAP_CANDIDATE",
+        "ADJUST"
+      ],
+      "entities": [
+        "happysong4u (Naver blog handle; real-name identity not independently verified)"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    },
+    {
+      "source_id": "REF-082",
+      "title": "AI PPT 압도적 1황이 클로드인 이유",
+      "url": "https://ppthunter.sos33377.workers.dev/tips/claude-ai-ppt-no1/",
+      "source_family": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "PPT 사냥꾼",
+      "value_statement": "Preserve content-first -> design rules -> sample slides -> full build as a workflow hypothesis; do not inherit vendor rankings/pricing as authority.",
+      "controlled_terms": [
+        "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+        "TOOL_COMPARISON",
+        "WORKFLOW_GUIDANCE",
+        "CLAUDE_ADVOCACY",
+        "PRODUCT_FACTS_TIME_SENSITIVE"
+      ],
+      "keywords": [
+        "WORK_OS_ARTIFACT_WORKFLOW_CANDIDATE",
+        "ARCHIGROW_PRESENTATION_PROCESS_CANDIDATE",
+        "ADJUST"
+      ],
+      "entities": [
+        "PPT 사냥꾼"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    },
+    {
+      "source_id": "REF-083",
+      "title": "클로드 코드를 쓰기 전에 깔아야 하는 플러그인 5개",
+      "url": "https://app.notion.com/p/5-3d0fa868dc2a81848a74d61f3d9a1706",
+      "source_family": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED",
+      "domain_facets": [
+        "taky_ops"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "게으른 빌더 / Lazy Builder",
+      "value_statement": "Do not auto-install the five recommended tools; compare each against existing TAKY capabilities, overlap policy, credential exposure, supply-chain risk, and measurable gap first.",
+      "controlled_terms": [
+        "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+        "HOW_TO",
+        "TOOL_RECOMMENDATION",
+        "COST_SAVING_CLAIM",
+        "COMMERCIAL_CHALLENGE_FUNNEL"
+      ],
+      "keywords": [
+        "TAKY_TOOL_DISCOVERY_ONLY",
+        "SAVEY_USAGE_OPTIMIZATION_HYPOTHESIS",
+        "SECURITY_REVIEW_QUEUE",
+        "HOLD",
+        "third party plugin",
+        "plugin security",
+        "supply chain",
+        "cost saving",
+        "Claude Code plugin",
+        "context memory",
+        "model routing"
+      ],
+      "entities": [
+        "게으른 빌더 / Lazy Builder"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    },
+    {
+      "source_id": "REF-084",
+      "title": "애니키즈 | 전 국민의 평생학교 EBS",
+      "url": "https://www.ebs.co.kr/",
+      "source_family": "OFFICIAL_PUBLIC_EDUCATION_PROVIDER",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "OFFICIAL_WITHIN_EBS_OWN_PUBLISHED_FACTS__NO_CROSS_DOMAIN_AUTHORITY",
+      "domain_facets": [
+        "education"
+      ],
+      "consumers": [
+        "LEARNING_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "EBS / 한국교육방송공사",
+      "value_statement": "Use as a source-discovery hub only; respect the captured prohibition on unauthorized redistribution/AI training and do not treat the portal shell as learning evidence itself.",
+      "controlled_terms": [
+        "OFFICIAL_EDUCATION_PORTAL_AND_SOURCE_DIRECTORY",
+        "OFFICIAL_PROVIDER",
+        "EDUCATION_SOURCE_DIRECTORY",
+        "AI_TRAINING_PROHIBITION_NOTICE"
+      ],
+      "keywords": [
+        "OFFICIAL_SOURCE_DISCOVERY",
+        "LEARNING_REFERENCE_DISCOVERY",
+        "PRESERVE"
+      ],
+      "entities": [
+        "EBS / 한국교육방송공사"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    },
+    {
+      "source_id": "REF-085",
+      "title": "비와 비율,백분율 문제 비법정리",
+      "url": "https://m.blog.naver.com/momtschool/224404546077",
+      "source_family": "INDEPENDENT_EDUCATION_CONTENT_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "REFERENCE_ONLY_UNTIL_MATH_CURRICULUM_AND_CONTENT_ACCURACY_VERIFIED",
+      "domain_facets": [
+        "education"
+      ],
+      "consumers": [
+        "LEARNING_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "제이맘랩 / momtschool",
+      "value_statement": "The useful principle is concept linking (ratio -> percent -> speed/rate -> concentration) plus blank recall; exact teaching sequence and formulas require curriculum/math verification.",
+      "controlled_terms": [
+        "MATH_CONCEPT_INTEGRATION_WITH_PRODUCT_PROMOTION",
+        "CONCEPT_GRAPH",
+        "BLANK_RECALL_TEST",
+        "MATH_WORKSHEET",
+        "PRODUCT_PROMOTION"
+      ],
+      "keywords": [
+        "MATH_CONCEPT_RELATION_HYPOTHESIS",
+        "BLANK_RECALL_WORKFLOW_CANDIDATE",
+        "LEARNING_VISUALIZATION_PATTERN",
+        "ADJUST"
+      ],
+      "entities": [
+        "제이맘랩 / momtschool"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    },
+    {
+      "source_id": "REF-086",
+      "title": "open-slide 2.0 시작 가이드, 설치부터 PPTX까지",
+      "url": "https://app.notion.com/p/open-slide-2-0-PPTX-3e9fd99f0e5f81f88bcde2b78c657980",
+      "source_family": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION",
+      "domain_facets": [
+        "architecture"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "Secondary guide + open-slide project (Yiwei Ho and contributors)",
+      "value_statement": "Strong complement to TAKY's editable PPTX goal: agent draft + human visual edit + native PPTX export; evaluate as optional implementation lane, not a replacement for existing verified PowerPoint pipeline.",
+      "controlled_terms": [
+        "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+        "EDITABLE_PPTX",
+        "VISUAL_EDITOR",
+        "AGENT_NATIVE",
+        "OPEN_SOURCE_MIT"
+      ],
+      "keywords": [
+        "WORK_OS_PRESENTATION_EXPERIMENT",
+        "ARCHIGROW_EDITABLE_PPTX_EXPERIMENT",
+        "ARTIFACT_PIPELINE_TOOL_EVALUATION",
+        "ADOPT_AS_EXPERIMENT_CANDIDATE"
+      ],
+      "entities": [
+        "Secondary guide + open-slide project (Yiwei Ho and contributors)"
+      ],
+      "source_review_state": "INDEXED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE"
+    }
+  ]
+}

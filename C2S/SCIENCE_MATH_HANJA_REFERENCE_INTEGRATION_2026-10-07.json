@@ -1,0 +1,73 @@
+{
+  "schema": "TAKY_SCIENCE_MATH_HANJA_REFERENCE_INTEGRATION_V1",
+  "date": "2026-10-07",
+  "trigger": "USER_REVIEW_AND_INTEGRATE_LATEST_INPUT",
+  "source": {
+    "title": "과학수학 한자어휘.pdf",
+    "drive_id": "1gPB8TL7OAKH2_xipW0melrUShR545IxQ",
+    "local_extracted_text": "LEARNING/data/sources/science-math-hanja-vocab.drive-extracted.txt",
+    "authority_class": "REFERENCE_SEMANTIC_MORPHOLOGY_ONLY_NOT_ELEMENTARY_CURRICULUM_AUTHORITY"
+  },
+  "review_findings": {
+    "useful_pattern": [
+      "한자 구성요소/훈음",
+      "한자 뜻 그대로의 직역",
+      "교과 개념 정의",
+      "교과 문맥 사용"
+    ],
+    "critical_risk": "동일 표면어가 학년/과목에 따라 다른 한자·개념을 가질 수 있음",
+    "critical_example": {
+      "surface": "소수",
+      "middle_school_reference": "素數 (prime number)",
+      "elementary_current_context": "분수와 소수, 소수의 곱셈/나눗셈 문맥",
+      "decision": "REFERENCE_HELD_NOT_BOUND"
+    }
+  },
+  "mining_result": {
+    "total_reference_entries": 276,
+    "science_math_parsed_reference_entries": 120,
+    "aligned_entries": 184,
+    "char_evidence": 438,
+    "unique_chars": 297,
+    "conflict_chars": 36
+  },
+  "prelearned_result": {
+    "official_subject_terms_56": 436,
+    "decoder_full_before": 37,
+    "decoder_full_after": 59,
+    "hanja_form_terms": 252,
+    "reference_candidates_exact_surface": 7,
+    "reference_bound_safe": 2,
+    "reference_held": 5,
+    "bound_examples": [
+      "SCIENCE:퇴적암",
+      "MATH:합동"
+    ],
+    "held_examples": [
+      "MATH:소수",
+      "SCIENCE:전선"
+    ]
+  },
+  "runtime_policy": [
+    "중학교 참고자료는 초등 학년 배정 권한을 갖지 않음",
+    "초등 E5/E6 용어 후보는 현재 공식 교육과정/단원 매핑에서만 결정",
+    "중학교 참고자료는 한자 형태·뜻조각·직역 의미 보강에만 사용",
+    "term-level reference binding requires Hanja match to trusted lexeme or existing seed",
+    "ambiguous surface forms remain held until curriculum context resolves the lexeme"
+  ],
+  "implementation": [
+    "LEARNING/projection/mine-hanja-reference-sources.js -> science/math 120-page source-aware parser + reference semantics",
+    "LEARNING/projection/build-prelearned-term-universe.js -> safe term-reference binding + global char glossary enrichment",
+    "LEARNING/pedagogy/grade-aware-term-selector.js -> decoderReference/referenceCandidate preservation",
+    "Hide & Seek/hide-term-decoder-v1.js -> reference lineage preserved on normalized engine cards",
+    "LEARNING/verification/science-math-hanja-reference.integration.test.js -> ambiguity and safe-binding regression"
+  ],
+  "verification": [
+    "SCIENCE_MATH_HANJA_REFERENCE_INTEGRATION_TEST: PASS",
+    "GRADE_AWARE_TERM_SELECTOR_TEST: PASS",
+    "TERM_RECOMMENDATION_HTTP_ENDPOINT_TEST: PASS",
+    "HIDE_LEARNING_TERM_LOADER_V1_TEST: PASS",
+    "TERM_DECODER_V1_SMOKE: PASS"
+  ],
+  "state": "LOCAL_INTEGRATED_TESTED_NOT_COMMITTED_NOT_DEPLOYED"
+}

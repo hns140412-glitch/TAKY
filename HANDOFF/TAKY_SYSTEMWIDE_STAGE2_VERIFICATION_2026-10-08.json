@@ -1,0 +1,66 @@
+{
+  "schema": "TAKY_SYSTEMWIDE_STAGE2_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_WITH_SCOPE_LIMIT",
+  "global_fix": {
+    "issue": "MASTER_FILE_REGISTRY drift: 12 root MASTER artifacts were unclassified",
+    "action": "classified by actual file status/owner without promoting candidate semantics",
+    "registry_version": "2026-10-08.1",
+    "validation": "PASS: 56 files covered; no unclassified root artifacts"
+  },
+  "evidence": {
+    "TAKY_CORE": [
+      "master_file_registry_validator PASS after registry fix",
+      "master_surface_integrity_validator PASS",
+      "system_layer_ownership_validator PASS",
+      "shared_technical_capability_validator PASS",
+      "git diff --check PASS for systemwide map/matrix/registry"
+    ],
+    "TAKY2": [
+      "full pytest: 205 passed + 54 subtests",
+      "latest known compile PASS / diff-check PASS from quota-safe checkpoint",
+      "V3 remains NOT PROMOTED pending final independent micro recheck"
+    ],
+    "READY": [
+      "profile learning context route PASS",
+      "VS-001 contract PASS",
+      "VS-002 contract PASS",
+      "VS-003 contract PASS",
+      "VS-004 contract PASS",
+      "VS-004 gongbang partial/remainder attack PASS"
+    ],
+    "HIDE": [
+      "TERM_DECODER_V1_SMOKE PASS",
+      "HIDE_LEARNING_TERM_LOADER_V1_TEST PASS"
+    ],
+    "SNAP": [
+      "app.js syntax PASS",
+      "snap-bridge.js syntax PASS",
+      "family profile/runtime/evidence client syntax PASS",
+      "shared Snap runtime contract PASS via snap-crew test suite",
+      "standalone full browser/runtime regression not available in current repo: move to Stage 3"
+    ],
+    "EXPLORER_CREW": [
+      "node --test tests/*.test.js: 6/6 PASS",
+      "dialogue canonical cycle PASS",
+      "144 candidate uniqueness/personality/memory gates PASS",
+      "source lock/runtime authority tests PASS"
+    ],
+    "SAVEY": [
+      "npm test: 132/132 PASS",
+      "typecheck PASS",
+      "build PASS"
+    ],
+    "PLAY_CAMP": [
+      "same-session npm run check: 68/68 tests PASS",
+      "voice preview preflight intentionally PREFLIGHT_INCOMPLETE_NOT_AUTHORIZED",
+      "build PASS",
+      "Claude Design V1 render audit: 28/30 PASS; two CAPTURE overlap defects remain Stage 4"
+    ]
+  },
+  "limits": [
+    "Stage 2 does not claim real-device, provider, deploy, voice-production, or final UI approval.",
+    "Snap standalone runtime/browser integration requires Stage 3 evidence.",
+    "Play Camp voice/design production gates remain open by design."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "TAKY_INSTALLATION_GUIDE_CONTRACT_V1",
+  "guide_id": "GENERIC_AI_TOOL_INSTALL_GUIDE_V1",
+  "tool_name": "<tool>",
+  "execution_surface": "TERMINAL",
+  "primary_action": "Use the exact current upstream installation action only after identity/version review.",
+  "fallbacks": [
+    "Use the upstream-documented manual installation path when the primary package path is unavailable.",
+    "HOLD instead of inventing a command when upstream documentation is ambiguous."
+  ],
+  "observable_verification": [
+    "Confirm the installed identity/version from the installed tool itself.",
+    "Run one harmless representative capability check and retain its output."
+  ],
+  "prohibited_actions": [
+    "Do not execute a similarly named package without upstream identity verification.",
+    "Do not bypass authentication or permission boundaries.",
+    "Do not log or paste secrets into receipts."
+  ],
+  "provenance_refs": [
+    "canonical upstream repository or vendor documentation",
+    "current license source"
+  ],
+  "license": {
+    "status": "MUST_VERIFY_AT_SOURCE",
+    "source_ref": "canonical upstream license"
+  },
+  "credentials_required": false,
+  "success_claim": "READY_TO_VERIFY",
+  "canonical_promotion": false
+}

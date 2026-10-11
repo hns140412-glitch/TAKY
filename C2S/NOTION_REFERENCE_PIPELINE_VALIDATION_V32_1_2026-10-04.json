@@ -1,0 +1,38 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_PIPELINE_VALIDATION_V32_1",
+  "date": "2026-10-04",
+  "status": "LOCAL_INCREMENTAL_E2E_PASS__OPEN_VERIFICATION_REDUCED_TO_3",
+  "parent": "C2S/NOTION_REFERENCE_PIPELINE_VALIDATION_V32_2026-10-04.json",
+  "refs": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-090",
+    "REF-091",
+    "REF-092"
+  ],
+  "tests": {
+    "claude_mining": "PASS_6_OF_6",
+    "indexing": "PASS_5_INDEXED_PLUS_1_HOLD",
+    "search_projection": "PASS_14_OF_14",
+    "domain_handoff": "PASS_5_OF_5_PLUS_1_HOLD",
+    "learning_runtime": "NOT_APPLICABLE_0_OF_6",
+    "ref087_public_recheck": "PASS_EPISODE_TITLE_MAPPING",
+    "ref090_static_security_review": "PASS_WITH_CAVEAT__NO_OBVIOUS_EXTERNAL_IO",
+    "ref091_reacquisition": "HOLD__NOTION_JS_SHELL_ONLY",
+    "ref092_official_spot_check": "PASS_4_SYSTEMS__LIVE_COUNT_276"
+  },
+  "remaining_open": [
+    "REF-091 accessible body reacquisition",
+    "REF-090 synthetic disposable-deck functional regression",
+    "REF-088 selected child-post primary review (HTML PPT / DESIGN.md / staged generation / image-slot prompting)"
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "deployment": false,
+    "paid_api_used": false
+  }
+}

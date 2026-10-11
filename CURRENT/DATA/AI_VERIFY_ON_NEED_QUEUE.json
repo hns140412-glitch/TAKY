@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_AI_VERIFY_ON_NEED_QUEUE_V1",
+  "generated_at": "2026-10-05T23:45:02.867124+00:00",
+  "count": 5,
+  "items": [
+    {
+      "learning_id": "AI-LRN-PROMPT-MACRO-NOT-NATIVE",
+      "state": "VERIFY_ON_OPERATIONAL_NEED",
+      "rule": "Do not spend calls merely to prove a reference; verify current primary/upstream facts when a real task depends on it."
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-NEED-DOES-NOT-VALIDATE-TOOL",
+      "state": "VERIFY_ON_OPERATIONAL_NEED",
+      "rule": "Do not spend calls merely to prove a reference; verify current primary/upstream facts when a real task depends on it."
+    },
+    {
+      "learning_id": "AI-LRN-MCP-DOES-NOT-REPLACE-API",
+      "state": "VERIFY_ON_OPERATIONAL_NEED",
+      "rule": "Do not spend calls merely to prove a reference; verify current primary/upstream facts when a real task depends on it."
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-TOOL-IS-SEPARATE-FROM-MEMORY-PATTERN",
+      "state": "VERIFY_ON_OPERATIONAL_NEED",
+      "rule": "Do not spend calls merely to prove a reference; verify current primary/upstream facts when a real task depends on it."
+    },
+    {
+      "learning_id": "AI-LRN-PERSONA-LIBRARY-IS-NOT-AUTONOMOUS-AGENT",
+      "state": "VERIFY_ON_OPERATIONAL_NEED",
+      "rule": "Do not spend calls merely to prove a reference; verify current primary/upstream facts when a real task depends on it."
+    }
+  ]
+}

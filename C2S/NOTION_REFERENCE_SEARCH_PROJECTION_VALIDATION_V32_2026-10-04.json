@@ -1,0 +1,139 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_SEARCH_PROJECTION_VALIDATION_V32",
+  "date": "2026-10-04",
+  "index": "C2S/NOTION_REFERENCE_INDEX_DELTA_V32_2026-10-04.json",
+  "source_count": 6,
+  "all_pass": true,
+  "cases": [
+    {
+      "query": "REF-087",
+      "expected_top1": "REF-087",
+      "actual_top1": "REF-087",
+      "pass": true,
+      "result_count": 11,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-088",
+      "expected_top1": "REF-088",
+      "actual_top1": "REF-088",
+      "pass": true,
+      "result_count": 11,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-089",
+      "expected_top1": "REF-089",
+      "actual_top1": "REF-089",
+      "pass": true,
+      "result_count": 11,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-090",
+      "expected_top1": "REF-090",
+      "actual_top1": "REF-090",
+      "pass": true,
+      "result_count": 11,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-092",
+      "expected_top1": "REF-092",
+      "actual_top1": "REF-092",
+      "pass": true,
+      "result_count": 11,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "PREVIEW_ONLY hue tolerance neutral recolor",
+      "expected_top1": "REF-090",
+      "actual_top1": "REF-090",
+      "pass": true,
+      "result_count": 5,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "upstream integration breakage changelog edge cases",
+      "expected_top1": "REF-089",
+      "actual_top1": "REF-089",
+      "pass": true,
+      "result_count": 2,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "PPT tips index child posts copy paste prompts",
+      "expected_top1": "REF-088",
+      "actual_top1": "REF-088",
+      "pass": true,
+      "result_count": 4,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "design system accent radius inspiration",
+      "expected_top1": "REF-092",
+      "actual_top1": "REF-092",
+      "pass": true,
+      "result_count": 3,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "google sheets apps script automation",
+      "expected_top1": "REF-087",
+      "actual_top1": "REF-087",
+      "pass": true,
+      "result_count": 2,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "editable pptx visual editor",
+      "expected_top1": "REF-086",
+      "actual_top1": "REF-086",
+      "pass": true,
+      "result_count": 3,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "비율 백분율",
+      "expected_top1": "REF-085",
+      "actual_top1": "REF-085",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "concept gap visual concept card",
+      "expected_top1": "REF-081",
+      "actual_top1": "REF-081",
+      "pass": true,
+      "result_count": 4,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "tool recommendation cost saving",
+      "expected_top1": "REF-083",
+      "actual_top1": "REF-083",
+      "pass": true,
+      "result_count": 7,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    }
+  ],
+  "guards": [
+    "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+    "REFERENCE_ONLY_REMAINS_REFERENCE_ONLY"
+  ]
+}

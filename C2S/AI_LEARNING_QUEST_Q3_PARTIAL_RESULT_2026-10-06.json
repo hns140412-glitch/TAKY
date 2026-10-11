@@ -1,0 +1,78 @@
+{
+  "schema": "TAKY_AI_Q3_BOUNDED_EXPERIMENT_RESULT_V1",
+  "generated_at": "2026-10-06T03:08:34.808948+00:00",
+  "status": "PASS_PARTIAL_REPRESENTATIVE_EVIDENCE",
+  "tested_count": 5,
+  "pass_count": 3,
+  "inconclusive_count": 2,
+  "untested_count": 9,
+  "outcomes": [
+    {
+      "learning_id": "AI-LRN-COST-BOTTLENECK-BEFORE-OPTIMIZATION",
+      "outcome": "PASS",
+      "finding": "On the representative public-source acquisition task, elapsed waiting/serialization was a demonstrated bottleneck: bounded 4-worker acquisition preserved 8/8 success while reducing elapsed time from 3136.4 ms to 785.3 ms (3.994x).",
+      "adoption": "ADOPT_MEASURE_FIRST_FOR_SOURCE_ACQUISITION",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-FAILURE-UPDATES-OPERATING-MANUAL",
+      "outcome": "PASS",
+      "finding": "The first broad P1 capture path stalled on slow sources. The recovery changed the procedure to per-item bounded execution/failure isolation, documented it in a durable runbook, and the comparable replay completed with terminal results for all 8 sampled sources.",
+      "adoption": "ADOPT_RUNBOOK_FOR_PUBLIC_AI_SOURCE_ACQUISITION",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json",
+        "D:\\Git PWA\\TAKY\\RUNBOOK\\AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\capture_ai_p1_remining_20261005.js",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\capture_ai_p1_remining_v2_20261005.py"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-TOOL-OVERHEAD-CAN-NEGATE-SAVINGS",
+      "outcome": "PASS",
+      "finding": "Net utility was measured instead of assumed. For this acquisition path, the bounded-parallel implementation had positive net utility (same 8/8 success, about 3.994x lower elapsed wall time). This supports measurement-before-default, not a universal claim about all tools.",
+      "adoption": "ADOPT_BOUNDED_PARALLEL_PROFILE_FOR_THIS_PATH",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json",
+        "D:\\Git PWA\\TAKY\\RUNBOOK\\AI_SOURCE_ACQUISITION_RUNBOOK_V1.md"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+      "outcome": "INCONCLUSIVE",
+      "finding": "A stale-looking Claude subscription-auth condition was observed against current non-secret auth metadata, but changing an authentication boundary was intentionally not performed through the blocked tool path. The candidate rule is not adopted or removed.",
+      "adoption": "HOLD_AUTH_BOUNDARY",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\RUN_TAKY_POST_COLLECT_PIPELINE.ps1",
+        "OBSERVED_AUTH_METADATA:loggedIn=true, firstParty subscription session"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-DURABLE-MANUAL-OVER-EPHEMERAL-AGENT",
+      "outcome": "INCONCLUSIVE",
+      "finding": "A durable acquisition runbook now exists and one comparable replay passed. This is insufficient to establish repeatability across a fresh independent executor/session, so the learning remains open for a second real continuation.",
+      "adoption": "HOLD_NEEDS_INDEPENDENT_REPEAT",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\RUNBOOK\\AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json"
+      ]
+    }
+  ],
+  "benchmark": {
+    "sample_count": 8,
+    "sequential_ms": 3136.4,
+    "bounded_parallel_ms": 785.3,
+    "speedup_ratio": 3.994,
+    "success_parity": "8/8 == 8/8"
+  },
+  "guards": {
+    "representative_task_only": true,
+    "inconclusive_not_adopted": true,
+    "canonical_promotion": false,
+    "paid_api_used": false,
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

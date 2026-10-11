@@ -1,0 +1,240 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_REVIEW_E2E_V1",
+  "date": "2026-10-04",
+  "status": "E2E_CLOSED_PASS_WITH_DRIVE_PERSISTENT_SYNC",
+  "source_generation": "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json",
+  "collector": {
+    "notion_total": 167,
+    "notion_blocks_read": 6,
+    "notion_blocks_new_or_changed": 6,
+    "block_errors": 0,
+    "collector_exit_code": 0,
+    "fixed_manifest_refresh": "DEFERRED_EPERM",
+    "generation_manifest_preserved": true
+  },
+  "review_contract": {
+    "axes": [
+      "source_actor_author_provenance",
+      "source_direction_intent_bias",
+      "applicability_scope_authority_ceiling"
+    ],
+    "guards": [
+      "AUTHOR != AUTHORITY",
+      "DIRECTION != APPLICABILITY_SCOPE",
+      "SOURCE_TRUST != CANONICAL_AUTHORITY"
+    ]
+  },
+  "items": [
+    {
+      "source_id": "REF-081",
+      "notion_page_id": "3eefa868-dc2a-8117-847f-ff3cd346e38e",
+      "title": "티처스3 재수전쟁 순공 14시간?! ... 시각화 카드",
+      "source_url": "https://m.blog.naver.com/PostView.naver?blogId=happysong4u&logNo=224426880073",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "happysong4u (Naver blog handle; real-name identity not independently verified)",
+      "source_actor_class": "INDEPENDENT_EDUCATION_CREATOR",
+      "source_author_identity_state": "HANDLE_AND_SOURCE_CAPTURE_VERIFIED__REAL_ID_UNVERIFIED",
+      "source_direction": "EDUCATION_GUIDANCE_WITH_PRODUCT_PROMOTION",
+      "source_direction_signals": [
+        "STUDY_ADVICE",
+        "ERROR_TO_CONCEPT_GAP",
+        "VISUAL_CONCEPT_CARD",
+        "PRODUCT_PROMOTION"
+      ],
+      "applicability_scope": [
+        "LEARNING_METHOD_HYPOTHESIS",
+        "VISUAL_EXPLANATION_PATTERN",
+        "ERROR_TO_CONCEPT_GAP_CANDIDATE"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_UNTIL_CURRICULUM_AND_PEDAGOGY_VERIFIED",
+      "domain": "education",
+      "consumer": "LEARNING_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "ADJUST",
+      "key_delta": "Treat repeated 'mistakes' as possible concept-gap evidence and route to targeted concept review; visual concept-card pattern is useful, product claims are not authority."
+    },
+    {
+      "source_id": "REF-082",
+      "notion_page_id": "3eefa868-dc2a-812c-876d-c77c2a300e04",
+      "title": "AI PPT 압도적 1황이 클로드인 이유",
+      "source_url": "https://ppthunter.sos33377.workers.dev/tips/claude-ai-ppt-no1/",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "PPT 사냥꾼",
+      "source_actor_class": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+      "source_author_identity_state": "BRAND_SOURCE_VERIFIED__PERSON_ID_NOT_REQUIRED_FOR_SCOPE",
+      "source_direction": "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+      "source_direction_signals": [
+        "TOOL_COMPARISON",
+        "WORKFLOW_GUIDANCE",
+        "CLAUDE_ADVOCACY",
+        "PRODUCT_FACTS_TIME_SENSITIVE"
+      ],
+      "applicability_scope": [
+        "WORK_OS_ARTIFACT_WORKFLOW_CANDIDATE",
+        "ARCHIGROW_PRESENTATION_PROCESS_CANDIDATE"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS",
+      "domain": "work",
+      "consumer": "DOMAIN_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "ADJUST",
+      "key_delta": "Preserve content-first -> design rules -> sample slides -> full build as a workflow hypothesis; do not inherit vendor rankings/pricing as authority."
+    },
+    {
+      "source_id": "REF-083",
+      "notion_page_id": "3eefa868-dc2a-8130-9b50-cd81021f2c3b",
+      "title": "클로드 코드를 쓰기 전에 깔아야 하는 플러그인 5개",
+      "source_url": "https://app.notion.com/p/5-3d0fa868dc2a81848a74d61f3d9a1706",
+      "recovered_root_url": "https://lazyowen.com/guides/claude-skills-top5-0815",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "게으른 빌더 / Lazy Builder",
+      "source_actor_class": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+      "source_author_identity_state": "PUBLISHER_SITE_VERIFIED",
+      "source_direction": "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+      "source_direction_signals": [
+        "HOW_TO",
+        "TOOL_RECOMMENDATION",
+        "COST_SAVING_CLAIM",
+        "COMMERCIAL_CHALLENGE_FUNNEL"
+      ],
+      "applicability_scope": [
+        "TAKY_TOOL_DISCOVERY_ONLY",
+        "SAVEY_USAGE_OPTIMIZATION_HYPOTHESIS",
+        "SECURITY_REVIEW_QUEUE"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED",
+      "domain": "taky_ops",
+      "consumer": "DOMAIN_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "HOLD",
+      "key_delta": "Do not auto-install the five recommended tools; compare each against existing TAKY capabilities, overlap policy, credential exposure, supply-chain risk, and measurable gap first."
+    },
+    {
+      "source_id": "REF-084",
+      "notion_page_id": "3eefa868-dc2a-8193-b3c4-d3d04d46355b",
+      "title": "애니키즈 | 전 국민의 평생학교 EBS",
+      "source_url": "https://www.ebs.co.kr/",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "EBS / 한국교육방송공사",
+      "source_actor_class": "OFFICIAL_PUBLIC_EDUCATION_PROVIDER",
+      "source_author_identity_state": "ORGANIZATION_IDENTIFIED_FROM_OFFICIAL_CAPTURE",
+      "source_direction": "OFFICIAL_EDUCATION_PORTAL_AND_SOURCE_DIRECTORY",
+      "source_direction_signals": [
+        "OFFICIAL_PROVIDER",
+        "EDUCATION_SOURCE_DIRECTORY",
+        "AI_TRAINING_PROHIBITION_NOTICE"
+      ],
+      "applicability_scope": [
+        "OFFICIAL_SOURCE_DISCOVERY",
+        "LEARNING_REFERENCE_DISCOVERY"
+      ],
+      "authority_ceiling": "OFFICIAL_WITHIN_EBS_OWN_PUBLISHED_FACTS__NO_CROSS_DOMAIN_AUTHORITY",
+      "domain": "education",
+      "consumer": "LEARNING_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "PRESERVE",
+      "key_delta": "Use as a source-discovery hub only; respect the captured prohibition on unauthorized redistribution/AI training and do not treat the portal shell as learning evidence itself."
+    },
+    {
+      "source_id": "REF-085",
+      "notion_page_id": "3eefa868-dc2a-81ae-bef9-f6cf952959f7",
+      "title": "비와 비율,백분율 문제 비법정리",
+      "source_url": "https://m.blog.naver.com/momtschool/224404546077",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "제이맘랩 / momtschool",
+      "source_actor_class": "INDEPENDENT_EDUCATION_CONTENT_CREATOR",
+      "source_author_identity_state": "BRAND_HANDLE_AND_SOURCE_CAPTURE_VERIFIED",
+      "source_direction": "MATH_CONCEPT_INTEGRATION_WITH_PRODUCT_PROMOTION",
+      "source_direction_signals": [
+        "CONCEPT_GRAPH",
+        "BLANK_RECALL_TEST",
+        "MATH_WORKSHEET",
+        "PRODUCT_PROMOTION"
+      ],
+      "applicability_scope": [
+        "MATH_CONCEPT_RELATION_HYPOTHESIS",
+        "BLANK_RECALL_WORKFLOW_CANDIDATE",
+        "LEARNING_VISUALIZATION_PATTERN"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_UNTIL_MATH_CURRICULUM_AND_CONTENT_ACCURACY_VERIFIED",
+      "domain": "education",
+      "consumer": "LEARNING_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "ADJUST",
+      "key_delta": "The useful principle is concept linking (ratio -> percent -> speed/rate -> concentration) plus blank recall; exact teaching sequence and formulas require curriculum/math verification."
+    },
+    {
+      "source_id": "REF-086",
+      "notion_page_id": "3eefa868-dc2a-81c7-9ffe-d16e084fe6c8",
+      "title": "open-slide 2.0 시작 가이드, 설치부터 PPTX까지",
+      "source_url": "https://app.notion.com/p/open-slide-2-0-PPTX-3e9fd99f0e5f81f88bcde2b78c657980",
+      "recovered_root_url": "https://open-slide.dev/",
+      "primary_project_url": "https://github.com/open-slide/open-slide",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "source_actor": "Secondary guide + open-slide project (Yiwei Ho and contributors)",
+      "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+      "source_author_identity_state": "PRIMARY_REPO_AUTHORSHIP_VERIFIED_FOR_PROJECT_FACTS",
+      "source_direction": "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+      "source_direction_signals": [
+        "EDITABLE_PPTX",
+        "VISUAL_EDITOR",
+        "AGENT_NATIVE",
+        "OPEN_SOURCE_MIT"
+      ],
+      "applicability_scope": [
+        "WORK_OS_PRESENTATION_EXPERIMENT",
+        "ARCHIGROW_EDITABLE_PPTX_EXPERIMENT",
+        "ARTIFACT_PIPELINE_TOOL_EVALUATION"
+      ],
+      "authority_ceiling": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION",
+      "domain": "architecture",
+      "consumer": "DOMAIN_ENGINE",
+      "duplicate_relation": "NONE_LOCAL_EXACT_URL",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "mining_disposition": "ADOPT_AS_EXPERIMENT_CANDIDATE",
+      "key_delta": "Strong complement to TAKY's editable PPTX goal: agent draft + human visual edit + native PPTX export; evaluate as optional implementation lane, not a replacement for existing verified PowerPoint pipeline."
+    }
+  ],
+  "pipeline_state": {
+    "COLLECT": "PASS",
+    "MINING": "PASS_6_NEW_OR_CHANGED",
+    "ACTOR_DIRECTION_SCOPE_CLASSIFICATION": "PASS_6_OF_6",
+    "LOCAL_EXACT_URL_DUPLICATE_CHECK": "PASS_6_OF_6",
+    "INDEX_OWNER_REVIEW": "PASS_V31_NOTION_DELTA",
+    "INDEX_LEDGER": "PASS_6_OF_6_REGISTERED_INDEXED_EVIDENCE_CANDIDATE",
+    "SEARCH_PROJECTION": "PASS_10_OF_10_AFTER_RETRIEVAL_TERM_CORRECTION",
+    "LEARNING_RUNTIME": "PASS_3_OF_3_BRANCH_SCOPED",
+    "DOMAIN_HANDOFF": "PASS_3_OF_3",
+    "REGRESSION": "PASS",
+    "PERSISTENT_EXTERNAL_INDEX_SYNC": "PASS_V11_V31_DRIVE_READBACK",
+    "CANONICAL_PROMOTION": false,
+    "CURRENT_POINTER_CHANGE": false,
+    "MAIN_MERGE": false,
+    "DEPLOYMENT": false,
+    "DRIVE_SOURCE_INDEX": "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+    "DRIVE_UTILIZATION_INDEX": "1433bd2YC0SGVrCWQuP-f3MIz6vtZ95fRkBlJmHre4BY",
+    "PERSISTENT_DRIVE_SEARCH_PROJECTION": "PASS_10_OF_10",
+    "ACTOR_DIRECTION_SCOPE_FULL_FIELDS": "PASS_6_OF_6__7_FIELDS_EACH"
+  },
+  "corrections": [
+    "REF-083 natural-language search initially failed because only code-like scope tags were indexed; plain-language retrieval terms were added and the same search regression then passed.",
+    "Drive readback found source_actor omitted while source_actor_class was present; exact source_actor was added to V11/V31 and the 6x7 review-field contract revalidated PASS."
+  ],
+  "drive_index_sync": {
+    "source_index": "DATA_SOURCE_INDEX_2026-10-04_V11.json",
+    "source_index_id": "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+    "utilization_index": "DATA_UTILIZATION_INDEX_2026-10-04_V31.json",
+    "utilization_index_id": "1433bd2YC0SGVrCWQuP-f3MIz6vtZ95fRkBlJmHre4BY",
+    "total_sources": 877,
+    "unique_source_ids": 877,
+    "source_revision_id": "ANLCKQkM1zJhV8CfguK28PuvYNAvx_FwfcJRCs83S7KMfptz4cPac3T2JCFh_qIhjZYs1dkkv6GQk-UdO00QK1Hw5h9DcxP7hPwEaWuPrzw",
+    "utilization_revision_id": "AHj4eMTJXjyVxIs4PiOP0q9x0NGK6fmxZ7DXoBxavT7r3MET3CeZZlcEQHaxh8hO_Cex5CYLYXWQOfAkEbQ1FbX4C8VH4do-7lCEIJ7FXpY",
+    "required_review_fields_missing": 0
+  },
+  "drive_sync_receipt": "C2S/NOTION_REFERENCE_DRIVE_SYNC_RECEIPT_2026-10-04.json"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "TAKY_INDEX_OWNER_RECEIPT_V1",
+  "date": "2026-10-04",
+  "issuer": "INDEXING_OWNER",
+  "index_version": "V31-NOTION-DELTA",
+  "base_source_index": "DATA_SOURCE_INDEX_2026-10-02_V10.json",
+  "base_utilization_index": "DATA_UTILIZATION_INDEX_2026-10-02_V30.json",
+  "reviewed": true,
+  "decision": "INDEXED",
+  "source_ids": [
+    "REF-081",
+    "REF-082",
+    "REF-083",
+    "REF-084",
+    "REF-085",
+    "REF-086"
+  ],
+  "duplicate_check": "LOCAL_REPO_EXACT_URL_NONE__NOTION_QUEUE_DISTINCT",
+  "version_relation": "NEW_SOURCE_OR_REFERENCE",
+  "review_evidence_refs": [
+    "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+    "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json",
+    "C2S/NOTION_REFERENCE_DRIVE_SYNC_RECEIPT_2026-10-04.json"
+  ],
+  "author_direction_scope_required": true,
+  "persistent_external_index_sync": "PASS",
+  "canonical_promotion": false,
+  "current_pointer_changed": false,
+  "main_merge": false,
+  "deployment": false,
+  "source_index": "DATA_SOURCE_INDEX_2026-10-04_V11.json",
+  "source_index_id": "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+  "utilization_index": "DATA_UTILIZATION_INDEX_2026-10-04_V31.json",
+  "utilization_index_id": "1433bd2YC0SGVrCWQuP-f3MIz6vtZ95fRkBlJmHre4BY",
+  "total_sources": 877,
+  "persistent_external_index_sync_receipt": "C2S/NOTION_REFERENCE_DRIVE_SYNC_RECEIPT_2026-10-04.json",
+  "total_sources_after": 877
+}

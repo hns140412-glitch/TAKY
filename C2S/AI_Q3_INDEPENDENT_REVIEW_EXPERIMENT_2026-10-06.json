@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_AI_Q3_INDEPENDENT_REVIEW_EXPERIMENT_V1",
+  "generated_at": "2026-10-06T00:15:47.244526+00:00",
+  "learning_id": "AI-LRN-CROSS-MODEL-REVIEW-INDEPENDENCE",
+  "representative_case": "TAKY Alpha completion -> independent Beta consolidation audit, 2026-10-03",
+  "baseline": {
+    "source": "HANDOFF/TAKY_ALPHA_FINAL_2026-10-03.md",
+    "claimed_local_complete": true,
+    "claimed_unittest": "110/110 PASS"
+  },
+  "independent_review": {
+    "source": "HANDOFF/CLAUDE_REVIEW_LOGS/BETA_CONSOLIDATION_AUDIT_2026-10-03.md",
+    "core_summary_present": true,
+    "beta_blocker_count": 6,
+    "examples": [
+      "single-revision validation result absent/contradictory",
+      "canonical artifacts uncommitted",
+      "manifest/version/path drift",
+      "regression tests not wired into CI",
+      "handoff integrity PASS path unproven",
+      "state/session surfaces stale"
+    ]
+  },
+  "outcome": "PASS_HISTORICAL_MATERIAL_DEFECT_GAIN",
+  "claim_ceiling": "ONE_HISTORICAL_MATERIAL_CASE; DOES_NOT PROVE EVERY CROSS-MODEL REVIEW IS BETTER",
+  "adoption_rule": "Use independent review for material/high-risk decisions behind Necessity Gate; bind review to artifact identity/version.",
+  "guards": {
+    "no_new_model_call": true,
+    "no_paid_api": true,
+    "canonical_promotion": false
+  }
+}

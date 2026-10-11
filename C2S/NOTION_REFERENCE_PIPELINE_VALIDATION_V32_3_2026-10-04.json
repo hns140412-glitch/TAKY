@@ -1,0 +1,30 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_PIPELINE_VALIDATION_V32_3",
+  "date": "2026-10-04",
+  "status": "LOCAL_INCREMENTAL_E2E_PASS__2_EXTERNAL_GATES_REMAIN",
+  "parent": "C2S/NOTION_REFERENCE_PIPELINE_VALIDATION_V32_2_2026-10-04.json",
+  "tests": {
+    "indexing": "PASS_5_INDEXED_PLUS_1_HOLD",
+    "search_projection": "PASS_14_OF_14",
+    "domain_handoff": "PASS_5_OF_5_PLUS_1_HOLD",
+    "ref088_primary_child_review": "PASS_4_OF_4_CLOSED",
+    "ref090_static_security": "PASS_WITH_CAVEAT",
+    "ref090_synthetic_deck": "PASS_CREATED",
+    "ref090_ui_macro_runtime": "HOLD_NOT_EXECUTED",
+    "ref091_reacquisition": "HOLD_NO_PUBLIC_BODY"
+  },
+  "remaining_open": [
+    "REF-090 explicit approval gate for temporary Office AccessVBOM enable -> isolated macro runtime -> immediate restore",
+    "REF-091 accessible body/source availability"
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false,
+    "paid_api_used": false,
+    "office_security_setting_changed": false
+  }
+}

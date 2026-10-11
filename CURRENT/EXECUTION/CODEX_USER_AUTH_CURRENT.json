@@ -1,0 +1,22 @@
+{
+  "schema_version": "TAKY_USER_EXPLICIT_EXECUTION_RECEIPT_V1",
+  "executor": "CODEX",
+  "authorization": "USER_EXPLICIT",
+  "route": "DIRECT_CODEX_CLI",
+  "user_intent": "User authorized portable TAKY AI implementation",
+  "arguments": [
+    "exec",
+    "-C",
+    "D:\\Git PWA\\TAKY-2.0-ORCH",
+    "--sandbox",
+    "workspace-write",
+    "--ephemeral",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "-"
+  ],
+  "started_at": "2026-10-11T23:30:53.1759866+09:00",
+  "status": "FAILED",
+  "exit_code": -1,
+  "finished_at": "2026-10-11T23:36:13.7623243+09:00"
+}

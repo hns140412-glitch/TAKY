@@ -1,0 +1,127 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_VOICE_PRODUCTION_PREFLIGHT_V1",
+  "source_lock": {
+    "version": "EXPLORER_CREW_V2_SOURCE_LOCK_20261009_SCRIPT_LOCK_R10",
+    "count": 35,
+    "bad": []
+  },
+  "script_lock": {
+    "main": "SCRIPT_LOCKED_MAIN_CREW_E5_6_2026-10-09",
+    "play_camp": "SCRIPT_LOCKED_PLAY_CAMP_CORE6_2026-10-09",
+    "play_camp_scope": "COMMON_NEUTRAL_BANK__SCRIPT_LOCKED__RUNTIME_ENABLED",
+    "locked_production_groups": [
+      "PLAY_CAMP",
+      "MAIN_CREW"
+    ]
+  },
+  "route_policy": "ROUTE_BEFORE_CREATE",
+  "registry_asset_count": 0,
+  "route_summary": {
+    "CREATE_NEW": 180
+  },
+  "exact_text_duplicate_count": 0,
+  "production_lines": {
+    "total_clips": 180,
+    "total_chars": 6016,
+    "play_camp_core6": {
+      "clips": 36,
+      "chars": 994
+    },
+    "main_core6": {
+      "clips": 36,
+      "chars": 1222
+    },
+    "main_later18": {
+      "clips": 108,
+      "chars": 3800
+    }
+  },
+  "casting": {
+    "families": [
+      {
+        "voice_family": "VF01_ADVENTURE",
+        "anchor_character_id": "dubi",
+        "signature_chars": 7,
+        "signature_sha256": "d462fbb0edfa10f1694212dd955e39e45146c99f5a592b6d0a24525451b31964",
+        "candidate_count": 3
+      },
+      {
+        "voice_family": "VF02_CARE",
+        "anchor_character_id": "lori",
+        "signature_chars": 14,
+        "signature_sha256": "110f5e44c4f0b477b76ad9be30581aa661368a91a8bef621fd589b8e4d129f1e",
+        "candidate_count": 3
+      },
+      {
+        "voice_family": "VF03_OBSERVE",
+        "anchor_character_id": "ink",
+        "signature_chars": 15,
+        "signature_sha256": "815bc0704991f3d6c1c54acb78a03c0bbb9e36d9cdda640d099ddf4d1e86a763",
+        "candidate_count": 3
+      },
+      {
+        "voice_family": "VF04_LEADER",
+        "anchor_character_id": "take",
+        "signature_chars": 12,
+        "signature_sha256": "35e75e886fdc214ef9a54b578fccac969e4d5a65176bae21a5603fd15488a74c",
+        "candidate_count": 3
+      },
+      {
+        "voice_family": "VF05_CONNECT",
+        "anchor_character_id": "nova",
+        "signature_chars": 11,
+        "signature_sha256": "53b863585011c4fd289c4dabe4062f8820be3f54c253dc282722d26b7c0316f0",
+        "candidate_count": 3
+      },
+      {
+        "voice_family": "VF06_CALM_DISCOVERY",
+        "anchor_character_id": "zero",
+        "signature_chars": 16,
+        "signature_sha256": "0f10c7f65242a62adeff3a266b7c21e5fddc80ab9cf9febfbc5c94aac6f617d6",
+        "candidate_count": 3
+      }
+    ],
+    "calls": 18,
+    "chars": 225,
+    "selected_signature_assets_reusable": 6
+  },
+  "stages": [
+    {
+      "id": "P2_VOICE_FAMILY_CASTING",
+      "calls": 18,
+      "chars": 225,
+      "planning_cap_10pct": 248
+    },
+    {
+      "id": "P3_PLAY_CAMP_CORE6",
+      "calls": 36,
+      "chars": 994,
+      "planning_cap_10pct": 1094
+    },
+    {
+      "id": "P4_MAIN_CORE6",
+      "calls": 36,
+      "chars": 1222,
+      "planning_cap_10pct": 1345
+    },
+    {
+      "id": "P5_MAIN_LATER18",
+      "calls": 108,
+      "chars": 3800,
+      "planning_cap_10pct": 4180
+    }
+  ],
+  "planning_assumption": "Approx. 1 credit/input character based on prior observed technical probes; provider/account billing not yet re-verified.",
+  "planning_total": {
+    "calls": 198,
+    "chars": 6241,
+    "sum_stage_caps_10pct": 6867
+  },
+  "voice_configuration_ready": false,
+  "generation_authorized": false,
+  "blocking_reasons": [
+    "VOICE_IDS_MODEL_OUTPUT_FORMAT_NOT_LOCKED",
+    "EXPLICIT_USER_PAID_GENERATION_APPROVAL_REQUIRED"
+  ],
+  "status": "HOLD_PREPRODUCTION_CONFIGURATION"
+}

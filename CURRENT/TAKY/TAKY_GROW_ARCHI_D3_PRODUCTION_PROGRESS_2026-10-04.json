@@ -1,0 +1,39 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_ARCHI_D3_PRODUCTION_PROGRESS_2026-10-04",
+  "status": "PRODUCTION_TRACE_MVP_VERIFIED__LIVE_TOOL_ADAPTERS_OPEN",
+  "domain_item": "ARCHI-D3",
+  "completed": [
+    "BIM/CAD -> QA -> Detail -> QTO/Cost -> Review/Permit -> Field/RFI -> As-built/Lesson stage contract",
+    "project/selected-option continuity",
+    "explicit object lineage and change evidence",
+    "downstream-after-fail prohibition",
+    "cost quantity/source/as-of gate",
+    "permit authority-evidence gate",
+    "RFI/field-change evidence gate",
+    "final result evidence -> CASE-only learning candidate"
+  ],
+  "verification": [
+    "ENFORCEMENT/architecture_production_trace_test.py 9/9 PASS",
+    "ENFORCEMENT/architecture_layout_kpi_test.py 6/6 PASS",
+    "ENFORCEMENT/architecture_company_evidence_test.py 8/8 PASS"
+  ],
+  "remaining": [
+    "real pursuit-option -> CAD/BIM object binding",
+    "real Detail Brain/library",
+    "real QTO/cost/VE adapters and sources",
+    "drawing QA against real project sheets",
+    "real permit/review response ingestion",
+    "real RFI/field/as-built evidence ingestion"
+  ],
+  "guards": {
+    "legal_feasibility_authorized": false,
+    "cost_truth_authorized": false,
+    "promotion_authorized": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "commands": [
+    {
+      "command": "python ENFORCEMENT/reference_index_owner_receipt_test.py",
+      "exit_code": 1,
+      "log": "reference_index_owner_receipt_test.py.log",
+      "tail": "^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 283, in _resetperms\n    _dont_follow_symlinks(_os.chmod, path, 0o700)\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 272, in _dont_follow_symlinks\n    func(path, *args, follow_symlinks=False)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'C:\\\\Users\\\\YKH_15~1\\\\AppData\\\\Local\\\\Temp\\\\tmpbto70a6w'\n\n----------------------------------------------------------------------\nRan 10 tests in 0.083s\n\nFAILED (errors=10)\n"
+    },
+    {
+      "command": "python ENFORCEMENT/reference_intake_executor_test.py",
+      "exit_code": 1,
+      "log": "reference_intake_executor_test.py.log",
+      "tail": "~^^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 283, in _resetperms\n    _dont_follow_symlinks(_os.chmod, path, 0o700)\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 272, in _dont_follow_symlinks\n    func(path, *args, follow_symlinks=False)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'C:\\\\Users\\\\YKH_15~1\\\\AppData\\\\Local\\\\Temp\\\\tmp943m35kb'\n\n----------------------------------------------------------------------\nRan 5 tests in 0.037s\n\nFAILED (errors=5)\n"
+    },
+    {
+      "command": "python ENFORCEMENT/reference_intake_router_test.py",
+      "exit_code": 0,
+      "log": "reference_intake_router_test.py.log",
+      "tail": "6/6 PASS\n"
+    },
+    {
+      "command": "python ENFORCEMENT/cross_engine_growth_e2e_test.py",
+      "exit_code": 1,
+      "log": "cross_engine_growth_e2e_test.py.log",
+      "tail": "~~^^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 283, in _resetperms\n    _dont_follow_symlinks(_os.chmod, path, 0o700)\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\tempfile.py\", line 272, in _dont_follow_symlinks\n    func(path, *args, follow_symlinks=False)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] \uc561\uc138\uc2a4\uac00 \uac70\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4: 'C:\\\\Users\\\\YKH_15~1\\\\AppData\\\\Local\\\\Temp\\\\tmp345gobgh'\n\n----------------------------------------------------------------------\nRan 1 test in 0.015s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "command": "git diff --check -- C2S/NOTION_POST_COLLECTOR_20261003T225323235Z",
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "protected_files_changed": [
+    "CURRENT\\TAKY\\TAKY_GROW_CLAUDE_R4_FIX_CLOSURE_2026-10-04.json",
+    "CURRENT\\TAKY\\TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json"
+  ],
+  "classification_fields_missing": [],
+  "six_unique_candidates": true,
+  "pipeline_pass": false,
+  "scope": "Local fail-closed boundary regressions; not candidate runtime acceptance",
+  "lint_typecheck_build": "No application code changed; JSON parse and field validation performed",
+  "receipt_sha256": "642e43ed8057275dbd7c28de11a0f3282254e5ba1edee19fb58730a1ed010e74"
+}

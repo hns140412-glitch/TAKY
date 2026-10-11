@@ -1,0 +1,101 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_V1",
+  "review_date_kst": "2026-10-10",
+  "authority": "NONCANONICAL_CANDIDATE_ONLY",
+  "scope": {
+    "day": "SATURDAY",
+    "daily_only": true,
+    "registered_sites": 10,
+    "full_fresh_scan": false,
+    "reason": "Respect existing 180-240 minute global gate and per-site revisit; no forced crawl",
+    "latest_receipt": "D:/Git PWA/TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261009T180749133Z.json",
+    "global_next_due_utc": "2026-10-09T21:26:49.107Z"
+  },
+  "baseline": [
+    "C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-09_CANDIDATE.json",
+    "C2S/DIGIT_PUBLIC_DELTA_REVIEW_2026-10-05.json",
+    "REF-077",
+    "REF-078",
+    "REF-079",
+    "REF-080"
+  ],
+  "digit": {
+    "public_listing_url": "https://litt.ly/digit",
+    "registered_watch_host": "digittv.notion.site",
+    "status": "NO_VERIFIED_NEW_OR_SUBSTANTIVE_CHANGED_TOPIC",
+    "notion_home_sha_previous": "654f1e3c39c9cb716631d5858683f1abea11fb186dba85b0a6516f43e6d62643",
+    "notion_home_sha_latest": "0720ce738b6cfebfe9589eb38823da93d5253f267d6640d19b9a33404833df1f",
+    "notion_sitemap_sha_both": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "interpretation": "Root HTML hash changed but sitemap hash unchanged and 0 new URLs in local receipt; shell change not proof of content delta. Public litt.ly listings match earlier NanoBanana2/interior/facade/sequence/diagram/concept/Archi-Trace/masterclass baseline.",
+    "new_raw": false
+  },
+  "registered_watch": {
+    "latest_receipt_hosts": [
+      "sdk-kim-builds.com",
+      "rebornlabs.kr",
+      "digittv.notion.site",
+      "lazyowen.com"
+    ],
+    "newly_selected_but_not_verified_as_new_publications": [
+      {
+        "url": "https://sdk-kim-builds.com/guides",
+        "status": "INDEX_PAGE_ONLY",
+        "route": "NO_NEW_DOMAIN_DELTA"
+      },
+      {
+        "url": "https://sdk-kim-builds.com/challenge",
+        "status": "COMING_SOON_LANDING_PAGE_ONLY",
+        "route": "NO_NEW_DOMAIN_DELTA"
+      },
+      {
+        "url": "https://lazyowen.com/guides/9router-free-fallback",
+        "published_or_updated": "2026-08-19",
+        "status": "OLD_PUBLICATION_SEMANTIC_OVERLAP_REVIEW",
+        "overlap": "2026-10-09 9router prior candidate",
+        "route": "AI_ORCHESTRATION_COST_GOVERNANCE_HOLD"
+      },
+      {
+        "url": "https://lazyowen.com/guides/agency-agents-7seats",
+        "published": "2026-09-13",
+        "status": "OLD_PUBLICATION_CROSS_SITE_SEMANTIC_OVERLAP_REVIEW",
+        "overlap": "Agency Agents topic already present in registered Kim site",
+        "route": "TAKY_COLLABORATION_HOLD"
+      },
+      {
+        "url": "https://sdk-kim-builds.com/guides/scrapling-cloudflare-scraper-claude-code-mcp",
+        "published": "2026-10-02",
+        "status": "OLD_PUBLICATION_NO_NEW_DELTA",
+        "route": "NO_AUTOMATED_BYPASS"
+      },
+      {
+        "url": "https://rebornlabs.kr/about",
+        "status": "ABOUT_PAGE_ONLY_NOT_NEW_PUBLICATION",
+        "route": "NO_NEW_DOMAIN_DELTA"
+      }
+    ],
+    "kim_home_same_sha_two_runs": "0f9dd6195371f173806a0c7915dc8859e8cce24f3128cf687b762e4353eb7947",
+    "new_confirmed": 0,
+    "changed_confirmed": 0,
+    "duplicate_method": "Canonical URL + preserved site-watch SHA + published dates + qualitative title/body topic comparison against local candidate review; no corpus-wide similarity score attestation"
+  },
+  "pipeline": {
+    "raw": "REUSE_EXISTING_SNAPSHOTS_NO_NEW_VERIFIED_RAW",
+    "mining": "NO_NEW_DISPATCH_BY_THIS_REVIEW",
+    "indexing": "NO_NEW_CANDIDATE_PROMOTION",
+    "learning": "NONE",
+    "domain": "NONE",
+    "existing_dispatches": "PRESERVED_AS_IS"
+  },
+  "guards": [
+    "NO_PAID_API",
+    "NO_PAID_CONTENT_CAPTURE",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_CHANGE",
+    "NO_MASTER_OR_CANONICAL_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_REMOTE_PUSH",
+    "NO_DEPLOY"
+  ],
+  "review_status": "NO_VERIFIED_SUBSTANTIVE_DELTA__STAGGERED_WATCH_CONTINUES"
+}

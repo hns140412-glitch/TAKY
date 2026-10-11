@@ -1,0 +1,103 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_SEARCH_PROJECTION_VALIDATION_V1",
+  "date": "2026-10-04",
+  "index": "C2S/NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+  "source_count": 6,
+  "all_pass": true,
+  "cases": [
+    {
+      "query": "REF-081",
+      "expected_top1": "REF-081",
+      "actual_top1": "REF-081",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-082",
+      "expected_top1": "REF-082",
+      "actual_top1": "REF-082",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-083",
+      "expected_top1": "REF-083",
+      "actual_top1": "REF-083",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-084",
+      "expected_top1": "REF-084",
+      "actual_top1": "REF-084",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-085",
+      "expected_top1": "REF-085",
+      "actual_top1": "REF-085",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "REF-086",
+      "expected_top1": "REF-086",
+      "actual_top1": "REF-086",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "editable pptx visual editor",
+      "expected_top1": "REF-086",
+      "actual_top1": "REF-086",
+      "pass": true,
+      "result_count": 2,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "비율 백분율",
+      "expected_top1": "REF-085",
+      "actual_top1": "REF-085",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "concept gap visual concept card",
+      "expected_top1": "REF-081",
+      "actual_top1": "REF-081",
+      "pass": true,
+      "result_count": 3,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    },
+    {
+      "query": "tool recommendation cost saving",
+      "expected_top1": "REF-083",
+      "actual_top1": "REF-083",
+      "pass": true,
+      "result_count": 1,
+      "projection_authoritative": false,
+      "semantic_mode": "TOKEN_COSINE_FALLBACK__NOT_EMBEDDING_SEMANTIC"
+    }
+  ],
+  "guards": [
+    "SEARCH_PROJECTION != SOURCE_OF_TRUTH",
+    "REFERENCE_ONLY_REMAINS_REFERENCE_ONLY"
+  ]
+}

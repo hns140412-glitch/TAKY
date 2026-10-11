@@ -1,0 +1,46 @@
+{
+  "schema": "TAKY_FAMILY_USER_DATA_RUNTIME_CURRENT_V1",
+  "updated_at": "2026-10-07T22:00:00+09:00",
+  "scope": "FAMILY_LEARNING_USER_DATA",
+  "principle": "USER_WRITABLE_VIA_AUTHENTICATED_APP_BOUNDARY__NOT_PUBLIC_MULTI_WRITER_DRIVE",
+  "runtime": {
+    "record_endpoint": "/api/family/user-data",
+    "stable_scope": "family_id/member_id",
+    "record_types": [
+      "ASSIGNMENT",
+      "LEARNING_ARTIFACT",
+      "SELF_REPORT",
+      "HELP_EVENT",
+      "CHECK_EVENT",
+      "CURIOSITY_RECORD",
+      "SUBJECT_OBSERVATION"
+    ],
+    "optimistic_concurrency": true,
+    "cross_member_denial": true,
+    "confirmed_record_learning_context_queue": true,
+    "drive_is_live_runtime_authority": false
+  },
+  "backup": {
+    "target_role": "TAKY/20_PLATFORM/04_USER_DATA",
+    "encryption": "AES-256-GCM",
+    "opaque_scope_digest": true,
+    "versioned_archive_manifest": true,
+    "completion_rule": "UPLOAD_PLUS_HASH_READBACK_PLUS_RECEIPT",
+    "live_upload": "HOLD",
+    "hold_reason": "04_USER_DATA_CURRENTLY_HAS_ANYONE_WRITER_PERMISSION"
+  },
+  "ux_dependent": {
+    "assignment_camera_ocr": "STATE_MACHINE_PASS__REAL_DEVICE_UX_EVIDENCE_PENDING",
+    "parent_capture_flow": "CONTINUOUS_CAPTURE_TARGETED_RETAKE_REVIEW_BEFORE_COMMIT_PASS",
+    "visual_copy_and_interaction_tuning": "DEFER_EXECUTION_SCORE_UNTIL_REAL_USER_USE"
+  },
+  "execution_evidence": {
+    "family_user_data_learning_engine_e2e": "PASS",
+    "central_production_host_user_data_route": "PASS",
+    "private_backup_envelope_e2e": "PASS",
+    "assignment_intake_state_machine": "PASS",
+    "ready_verifiable_practice_central_e2e": "PASS",
+    "three_app_verified_learning_owner_e2e": "PASS",
+    "learning_evidence_concurrent_flush_queue_loss": "CLOSED"
+  }
+}

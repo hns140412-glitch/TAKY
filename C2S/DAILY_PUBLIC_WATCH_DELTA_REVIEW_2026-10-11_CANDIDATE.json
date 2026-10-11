@@ -1,0 +1,136 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_V1",
+  "review_date_kst": "2026-10-11",
+  "authority": "NONCANONICAL_CANDIDATE_ONLY",
+  "scope": {
+    "day": "SUNDAY",
+    "daily_only": true,
+    "registered_sites": 10,
+    "completed_full_registry_fresh_scan": false,
+    "source": "SITE_WATCH_REGISTRY.json + latest state generation + 2026-10-10 receipts",
+    "last_receipt": "SITE_WATCH_RUN.20261010T190616623Z.json",
+    "last_receipt_utc": "2026-10-10T19:06:16.622Z",
+    "sites_due_at_last_receipt": 0,
+    "global_next_due_utc": "2026-10-10T22:59:16.621Z",
+    "reason": "Respect existing 180-240 minute global gate and per-site revisit; no forced recrawl"
+  },
+  "baseline": [
+    "C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-10_CANDIDATE.json",
+    "C2S/DIGIT_PUBLIC_DELTA_REVIEW_2026-10-05.json",
+    "REF-077..080",
+    "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+    "C2S/AI_MINING_INDEX_OWNER_RECEIPT_2026-10-05.json",
+    "Drive DATA_SOURCE_INDEX_2026-10-04_V11.json (877 source entries)"
+  ],
+  "digit": {
+    "url": "https://litt.ly/digit",
+    "host": "digittv.notion.site",
+    "last_checked_utc": "2026-10-10T15:36:17.159Z",
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "discovered_new": 0,
+    "selected": 0,
+    "disposition": "NO_VERIFIED_NEW_OR_SUBSTANTIVE_CHANGED",
+    "analysis": "Sitemap unchanged; root HTML changes alone do not establish content change. Existing REF-077..080 and prior NanoBanana2/masterclass candidates inherited."
+  },
+  "new_or_recently_captured_review": [
+    {
+      "source": "김스듴",
+      "title": "AI가 짠 코드, 다 읽지 않고 확인하는 법",
+      "published": "2026-10-10",
+      "url": "https://sdk-kim-builds.com/guides/ai-code-evidence-check/",
+      "source_id": "SITEWATCH:2ea5f21513d51291f393",
+      "raw_state": "RAW_CAPTURED",
+      "raw_sha256": "8ba17f74eb0d45d14e97e03a7569178b06a6cb9168f2c4bf4835581b839cafe3",
+      "rendered_text_sha256": "91716eeb6e5cef6a2c50a7d064cc4b8957feadf9ca7497f9250b3e00777f93f2",
+      "mining_result": "COMPLETED_INITIAL_MINING__NOT_FULL",
+      "relation": "NEW_PUBLICATION__OVERLAPS_EXISTING_QA_AND_VERIFICATION_GATES",
+      "analysis": "Six false-evidence patterns and deliberate break-test question offer a useful verification checklist; independent source is practitioner guidance, not official authority. Existing TAKY QA/COST/DONE gates already cover verification; no new master rule justified.",
+      "indexing": "CANDIDATE_HOLD_PENDING_CORPUS_SEMANTIC_ATTESTATION",
+      "learning": "NONE",
+      "domain": [
+        "TAKY_VERIFICATION_QA_CANDIDATE"
+      ]
+    },
+    {
+      "source": "게으른 빌더",
+      "title": "챗GPT 쓸 때 모르면 손해인 코드 100개",
+      "published": "2026-10-09",
+      "url": "https://lazyowen.com/guides/chatgpt-prompt-codes-100",
+      "source_id": "SITEWATCH:203173d68d673b27d8e9",
+      "raw_state": "RAW_CAPTURED_PUBLIC_ONLY",
+      "raw_sha256": "8b1435fd9f44c18022524301353882cc7175e5088ef03effbe0166a9f2bac28e",
+      "rendered_text_sha256": "9ccdc13e3cddb56fbe0b550d4e5fbd4a2c17883362dd9ad944fe7b46940feed6",
+      "mining_result": "COMPLETED_INITIAL_MINING__NOT_FULL",
+      "relation": "NEW_PUBLICATION__SEMANTIC_OVERLAP_REVIEW",
+      "overlap": "Existing prompt macro references REF-076/077 and prompt technique index; article explicitly says labels are not built-in commands.",
+      "analysis": "Mostly reusable prompt labels and presentation examples, not novel model capability; avoid treating 100 labels as 100 independent concepts. Email-gated sections excluded.",
+      "indexing": "CANDIDATE_HOLD_PENDING_CORPUS_SEMANTIC_ATTESTATION",
+      "learning": "NONE",
+      "domain": [
+        "AI_PROMPT_REFERENCE_LOW_PRIORITY"
+      ]
+    },
+    {
+      "source": "게으른 빌더",
+      "title": "2주 만에 팔로워 7천 명, ChatGPT로 SNS 관리하는 법",
+      "published_or_updated": "2026-10-05",
+      "url": "https://lazyowen.com/guides/chatgpt-metricool-social-manager",
+      "source_id": "SITEWATCH:c7d765cb38319ae497c3",
+      "raw_state": "RAW_CAPTURED_PUBLIC_ONLY",
+      "raw_sha256": "740c7e26b84a54b159d4de5180c1ca54c53c33cadad22b56a0d282b1c7386aeb",
+      "rendered_text_sha256": "a0f117f34478190225a5506bde678382a0db1915afc38128d00391ca16939471",
+      "mining_result": "COMPLETED_INITIAL_MINING__NOT_FULL",
+      "relation": "EXISTING_DISCOVERY_RAW_ENRICHMENT__NOT_NEW_REF",
+      "existing_source_id": "DISCOVERY:WEB:LAZYOWEN:CHATGPT_METRICOOL_SOCIAL_MANAGER",
+      "existing_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+      "existing_authority": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "analysis": "Exact canonical URL already indexed Oct 5 as discovery-only; Oct 10 capture adds body evidence but not a new source. Social publishing workflow outside priority learning; account connection/paid feature use forbidden.",
+      "indexing": "EXISTING_REF_EVIDENCE_ENRICHMENT_CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": [
+        "WORK_OS_SOCIAL_MEDIA_OPTIONAL_HOLD"
+      ]
+    },
+    {
+      "source": "김스듴",
+      "url": "https://sdk-kim-builds.com/site.webmanifest",
+      "source_id": "SITEWATCH:df999ef69a49b18dfc81",
+      "raw_state": "RAW_CAPTURED",
+      "raw_sha256": "822f2c88517c0708c1af2455720f42b07a5a10dd19aef009e1476067bd0df1fc",
+      "relation": "NONCONTENT_FALSE_POSITIVE",
+      "analysis": "462-byte PWA manifest with icons/theme/start URL; not AI practice or workflow source. Mining dispatch already happened but no new REF or downstream routing.",
+      "indexing": "EXCLUDE",
+      "learning": "NONE",
+      "domain": "NONE"
+    }
+  ],
+  "duplicate_attestation": {
+    "canonical_url": "DONE_FOR_FOUR",
+    "raw_and_rendered_hash": "RECEIPT_HASHES_PRESENT_NOT_INDEPENDENTLY_RECOMPUTED",
+    "title_body_semantics": "QUALITATIVE_REVIEW_AND_V11_INDEX_SEARCH",
+    "index_overlap": "EXACT_EXISTING_METRICOOL_DISCOVERY_FOUND; REF-076/077 TOPIC OVERLAP",
+    "prior_candidate_history": "CHECKED_2026-10-09_AND_10-10",
+    "full_corpus_semantic_similarity": "OPEN__NO_PROMOTION",
+    "new_refs_created": 0
+  },
+  "pipeline": {
+    "raw": "REUSE_2026-10-10_EXISTING_CAPTURE_BUNDLES_NO_RECrawl",
+    "mining": "FOUR_INITIAL_MINING_RECEIPTS_ALREADY_EXIST; NO_NEW_DISPATCH",
+    "indexing": "REVIEW_CANDIDATES_ONLY__NO_INDEX_WRITE",
+    "learning": "NONE",
+    "domain": "ROUTING_PROPOSALS_ONLY"
+  },
+  "update_analysis": "One Oct 10 new Kim QA article, one Oct 9 LazyOwen prompt article, one previously indexed Metricool URL now with raw evidence, and one irrelevant manifest. The critical duplicate missed by URL-only WATCH is Metricool, already present in AI_REFERENCE_INDEX; preserve its existing identity. Kim's verification examples are useful but not grounds to redefine TAKY gates.",
+  "guards": [
+    "NO_PAID_API",
+    "NO_PAID_CONTENT_CAPTURE",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_CHANGE",
+    "NO_MASTER_OR_CANONICAL_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_REMOTE_PUSH",
+    "NO_DEPLOY"
+  ],
+  "review_status": "CANDIDATE_REVIEW_RECORDED__CORPUS_SEMANTIC_ATTESTATION_OPEN__NO_PROMOTION"
+}

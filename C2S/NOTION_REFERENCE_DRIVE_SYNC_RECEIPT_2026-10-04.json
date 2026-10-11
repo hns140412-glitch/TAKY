@@ -1,0 +1,98 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_DRIVE_SYNC_RECEIPT_V1",
+  "date": "2026-10-04",
+  "status": "PASS",
+  "drive_folder": {
+    "title": "03_INDEX",
+    "id": "1eagg3n7vq0jzLmKK5bs-FsOtuPffYhrk"
+  },
+  "source_index": {
+    "name": "DATA_SOURCE_INDEX_2026-10-04_V11.json",
+    "id": "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+    "schema": "TAKY_DATA_SOURCE_INDEX_V11",
+    "total_entries": 877,
+    "previous_index": "DATA_SOURCE_INDEX_2026-10-02_V10.json",
+    "added_refs": [
+      "REF-081",
+      "REF-082",
+      "REF-083",
+      "REF-084",
+      "REF-085",
+      "REF-086"
+    ],
+    "actor_axis_storage": [
+      "source_actor",
+      "source_actor_class",
+      "source_author_identity_state",
+      "publisher_or_account"
+    ],
+    "direction_scope_storage": [
+      "source_direction",
+      "source_direction_signals",
+      "applicability_scope",
+      "authority_ceiling"
+    ],
+    "revision_id": "ANLCKQkM1zJhV8CfguK28PuvYNAvx_FwfcJRCs83S7KMfptz4cPac3T2JCFh_qIhjZYs1dkkv6GQk-UdO00QK1Hw5h9DcxP7hPwEaWuPrzw"
+  },
+  "utilization_index": {
+    "name": "DATA_UTILIZATION_INDEX_2026-10-04_V31.json",
+    "id": "1433bd2YC0SGVrCWQuP-f3MIz6vtZ95fRkBlJmHre4BY",
+    "schema": "TAKY_DATA_UTILIZATION_INDEX_V31",
+    "total_entries": 877,
+    "supersedes": "DATA_UTILIZATION_INDEX_2026-10-02_V30.json",
+    "source_index_id": "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+    "utilization_class_counts": {
+      "REFERENCE_ONLY": 835,
+      "CONDITIONAL_USE": 25,
+      "DIRECT_USE_READY": 2,
+      "RESEARCH_CANDIDATE": 1,
+      "REVIEW_REQUIRED": 2,
+      "NO_CURRENT_CONSUMER": 8,
+      "VOLATILE_REFERENCE_ONLY": 4
+    },
+    "revision_id": "AHj4eMTJXjyVxIs4PiOP0q9x0NGK6fmxZ7DXoBxavT7r3MET3CeZZlcEQHaxh8hO_Cex5CYLYXWQOfAkEbQ1FbX4C8VH4do-7lCEIJ7FXpY"
+  },
+  "validation": {
+    "json_parse": "PASS_BOTH",
+    "source_id_unique": "PASS_6_OF_6",
+    "exact_url_unique": "PASS_6_OF_6",
+    "source_ref": "PASS_6_OF_6",
+    "author_provenance_axis": "PASS_6_OF_6",
+    "direction_scope_authority_axis": "PASS_6_OF_6",
+    "learning_refs": [
+      "REF-081",
+      "REF-084",
+      "REF-085"
+    ],
+    "domain_refs": [
+      "REF-082",
+      "REF-083",
+      "REF-086"
+    ],
+    "source_utilization_cross_link": "PASS",
+    "total_alignment": "PASS_877_877",
+    "full_source_id_unique": "PASS_877_OF_877",
+    "source_utilization_alignment": "PASS_877_OF_877",
+    "source_actor_exact_field": "PASS_6_OF_6",
+    "required_review_fields": "PASS_6_OF_6__7_FIELDS_EACH",
+    "persistent_drive_search_projection": "PASS_10_OF_10"
+  },
+  "partial_copies_quarantined": [
+    {
+      "id": "17ylFuagjCZDfLBba52gKt_vj8dqwcn_CCCfHOjAMsjI",
+      "name": "DATA_SOURCE_INDEX_2026-10-04_V11__INVALID_PARTIAL_DO_NOT_USE"
+    },
+    {
+      "id": "1eH9683pY0RwZs8m4jwXto3NA0WOTd6LLFVfegK2DHy4",
+      "name": "DATA_UTILIZATION_INDEX_2026-10-04_V31__SUPERSEDED_PARTIAL_DO_NOT_USE"
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "current_pointer_changed": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false,
+    "paid_api_used": false
+  }
+}

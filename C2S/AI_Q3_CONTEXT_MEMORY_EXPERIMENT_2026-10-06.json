@@ -1,0 +1,28 @@
+{
+  "schema": "TAKY_AI_Q3_CONTEXT_MEMORY_EXPERIMENT_V1",
+  "generated_at": "2026-10-06T00:12:52.358316+00:00",
+  "representative_task": "resume current AI learning quest without reloading full learning/index detail",
+  "baseline": {
+    "file_count": 6,
+    "bytes": 75104
+  },
+  "targeted_resume": {
+    "path": "CURRENT/DATA/AI_CURRENT_QUEST_RESUME.json",
+    "bytes": 1305
+  },
+  "metrics": {
+    "compression_ratio": 57.551,
+    "byte_reduction_percent": 98.26,
+    "required_fact_count": 8,
+    "missing_or_mismatched_required_facts": 0,
+    "missing_keys": []
+  },
+  "context_outcome": "PASS",
+  "memory_outcome": "PASS",
+  "claim_ceiling": "REPOSITORY_CONTINUATION_STATE_ONLY",
+  "guards": {
+    "no_new_memory_product": true,
+    "no_external_call": true,
+    "canonical_promotion": false
+  }
+}

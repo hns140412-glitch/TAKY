@@ -1,0 +1,280 @@
+{
+  "schema": "TAKY_GROW_DOMAIN_COVERAGE_AUDIT_V1",
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_DOMAIN_COVERAGE_AUDIT_2026-10-04",
+  "status": "DOMAIN_COVERAGE_PARTIAL_OPEN",
+  "shared_core": {
+    "status": "FINAL_PASS_FROZEN",
+    "closure": "CURRENT/TAKY/TAKY_GROW_CLAUDE_R6_FINAL_CLOSURE_2026-10-04.json",
+    "verification": "Python 285/285 PASS + GROW Node 6/6 PASS + settings JSON PASS + git diff --check PASS",
+    "note": "Shared GROW lineage/routing/promotion/regression core is closed. This audit does not reopen shared-core findings."
+  },
+  "conclusion": "Shared GROW Core remains FINAL_PASS_FROZEN. Domain maturity is PARTIAL_OPEN with 12 dependency-resolved items; no domain item is closed merely by central engine existence or synthetic fixtures.",
+  "domains": {
+    "ARCHI_GROW": {
+      "domain_owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+      "growth_map": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+      "overall_maturity": "PARTIAL__COMPETITION_PATH_STRONG__GENERAL_ARCHITECTURE_RUNTIME_INCOMPLETE",
+      "verified_closed": [
+        {
+          "capability": "architecture competition representation/report output path",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "ENFORCEMENT/architecture_competition_compare_test.py PASS",
+            "ENFORCEMENT/architecture_competition_learning_test.py PASS",
+            "ENFORCEMENT/architecture_competition_output_pipeline_test.py PASS",
+            "ENFORCEMENT/architecture_competition_representation_test.py PASS",
+            "ENFORCEMENT/architecture_competition_visual_quality_test.py PASS",
+            "ENFORCEMENT/grow_producer_lineage_integration_test.py PASS"
+          ]
+        },
+        {
+          "capability": "competition representation learning evidence",
+          "state": "IMPLEMENTED_VERIFIED_CANDIDATE_ONLY",
+          "evidence": [
+            "TOOLS/ARCHIGROW_COMPETITION_LEARN.py",
+            "ENFORCEMENT/architecture_competition_learning_test.py"
+          ]
+        }
+      ],
+      "partial_or_missing": [
+        {
+          "id": "ARCHI-D1a",
+          "capability": "official/public source registry + adapters + normalized parcel/building/planning/law data model",
+          "state": "SOURCE_REGISTRY_AND_TARGET_FACT_GATE_IMPLEMENTED_VERIFIED__LIVE_ADAPTER_BINDING_PARTIAL",
+          "basis": "official-source registry, secret-free contracts and target-project fact qualification gate are 5/5 PASS; live provider adapters/credentials remain external bindings",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D1A_SOURCE_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "ARCHI-D1b",
+          "capability": "project law/applicability/opportunity runtime + pursuit/site rule compilation",
+          "state": "RULE_COMPILER_AND_EXPLICIT_RELATION_GRAPH_IMPLEMENTED_VERIFIED__LIVE_APPLICABILITY_PROVIDER_PARTIAL",
+          "basis": "evidence-bound applicability receipt, source fact qualification, opportunity approval route, explicit-only relation graph and automatic FEASIBLE prohibition are 12/12 PASS; live authoritative applicability provider/review evidence remains runtime input",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D1B_REGULATORY_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "ARCHI-D2",
+          "capability": "layout/plan intelligence and deterministic geometry/KPI runtime",
+          "state": "DETERMINISTIC_GEOMETRY_KPI_MVP_VERIFIED__SEARCH_OPTIMIZATION_OPEN",
+          "basis": "Unit/Core/Parking/Program object schema, polygon integrity, site-boundary/overlap HOLD and deterministic KPI derivation are 6/6 PASS; search operators, optimization, strategy library, domain-specific geometry and CAD/BIM binding remain OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D2_LAYOUT_KPI_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "ARCHI-D3",
+          "capability": "production BIM/CAD/detail/cost/drawing-QA/permit/RFI/field learning",
+          "state": "PRODUCTION_TRACE_MVP_VERIFIED__LIVE_TOOL_ADAPTERS_OPEN",
+          "basis": "seven-stage production trace runtime, object/change lineage, cost/permit/RFI evidence guards and CASE-only outcome candidate are 9/9 PASS; live CAD/BIM/detail/cost/permit/RFI adapters and real project evidence remain OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D3_PRODUCTION_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "ARCHI-D4",
+          "capability": "company evidence foundation + project outcome ingestion + result-to-implementation trace",
+          "state": "FOUNDATION_IMPLEMENTED_VERIFIED__REAL_PROJECT_EVIDENCE_STARTED",
+          "basis": "company evidence runtime remains regression-verified; real ledger now has 5 records across 3 projects including primary drawing/review-response evidence, but pilot breadth and outcome recurrence remain OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D4_COMPANY_EVIDENCE_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "ARCHI-D5",
+          "capability": "general verified 3D/context/render/AI enhancement with geometry-drift guard",
+          "state": "GEOMETRY_DRIFT_GUARD_VERIFIED__REAL_3D_RENDER_PIPELINE_OPEN",
+          "basis": "locked-geometry snapshot/hash guard and drift detection are 6/6 PASS; no verified local 3D/render engine is currently bound, so real 2D/CAD->3D->render pipeline remains OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_ARCHI_D5_VISUAL_PROGRESS_2026-10-04.json"
+        }
+      ],
+      "domain_active_items": [
+        "ARCHI-D1a",
+        "ARCHI-D1b",
+        "ARCHI-D2",
+        "ARCHI-D3",
+        "ARCHI-D4",
+        "ARCHI-D5"
+      ]
+    },
+    "LEARNING_GROW": {
+      "domain_owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "family_owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "overall_maturity": "ENGINE_AND_REVIEW_PIPELINE_IMPLEMENTED__OWNER_APP_REAL_OUTCOME_COVERAGE_PARTIAL",
+      "verified_closed": [
+        {
+          "capability": "canonical evidence adapters for Ready/Hide/Snap event classes",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "LEARNING/adapters/canonical-evidence.js",
+            "LEARNING/adapters/canonical-evidence.test.js PASS"
+          ]
+        },
+        {
+          "capability": "learner outcome -> growth feedback -> append-only strategy ledger",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "LEARNING/lifecycle/outcome-growth-feedback.js",
+            "LEARNING/lifecycle/growth-strategy-ledger.js",
+            "LEARNING/lifecycle/real-outcome-growth-e2e.test.js PASS"
+          ]
+        },
+        {
+          "capability": "privacy-safe learning-system aggregate candidate",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "LEARNING/lifecycle/learning-system-growth-aggregate.js",
+            "LEARNING/lifecycle/learning-system-growth-aggregate.test.js PASS"
+          ]
+        },
+        {
+          "capability": "durable system-growth store and common review pipeline",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "LEARNING/transport/durable-learning-system-growth-store-adapter.test.js PASS",
+            "CURRENT/TAKY/TAKY_GROW_REVIEW_PIPELINE_2026-10-03.json"
+          ]
+        },
+        {
+          "capability": "authenticated central evidence transport kernel",
+          "state": "IMPLEMENTED_VERIFIED",
+          "evidence": [
+            "LEARNING/transport/central-learning-http-endpoint.test.js PASS",
+            "LEARNING/transport/authenticated-evidence-transport.test.js PASS"
+          ]
+        }
+      ],
+      "owner_repo_snapshot": {
+        "READY_SET": {
+          "head": "16026f4",
+          "observed": "task/session learning events exist; owner must emit authorized raw/observation packets where real scope exists. Client verification receipt emission is intentionally forbidden."
+        },
+        "HIDE_SEEK": {
+          "head": "5b29db8",
+          "observed": "task-level bridge and Code Red/retrieval results exist; owner may emit raw retrieval evidence, while canonical verification authority remains server-owned."
+        },
+        "SNAP_POP": {
+          "head": "94d5485",
+          "observed": "child-authored production bridge events exist; owner may emit production observations, while HUMAN_RUBRIC_BINARY verification requires an authorized server/reviewer workflow."
+        }
+      },
+      "partial_or_missing": [
+        {
+          "id": "LEARN-D1a",
+          "capability": "Ready/Hide/Snap owner runtime -> authenticated /api/learning/evidence raw/observation packet emission with real family/member/subject/target scope",
+          "state": "MECHANICAL_BINDING_VERIFIED__REAL_RUNTIME_OUTCOME_OPEN",
+          "basis": "owner bindings, proof stripping, fail-closed scope, non-blocking bounded queue, no silent eviction, ACK replay suppression, live-only ambient scope, Hide raw retrieval source and three-app vendor parity are mechanically PASS; real installed-runtime outcome proof remains D2/D5 and verified outcomes require D1b real providers",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D1A_OWNER_BINDING_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "LEARN-D1b",
+          "capability": "trusted server-side specialist verifier + authoritative reference/reviewer sources + hosted auth wiring",
+          "state": "PARTIAL_VERIFIED__REAL_PROVIDER_BINDING_OPEN",
+          "basis": "trusted server verifier module and central E2E are PASS; real Hide/Ready reference providers, Snap reviewer source, and hosted production auth/store binding remain OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D1B_VERIFIER_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "LEARN-D2",
+          "capability": "real owner-runtime verified-outcome E2E breadth across Ready, Hide and Snap",
+          "state": "PARTIAL_VERIFIED__READY_VERIFIABLE_PRACTICE_OPEN",
+          "basis": "actual owner-code E2E verifies Hide and Snap through REAL_EVIDENCE verified outcomes; Ready owner task-state evidence reaches central observation ACK but correctly remains unverified because no raw answer/practice producer exists",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D2_OWNER_RUNTIME_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "LEARN-D3",
+          "capability": "actual multi-learner aggregate -> review using real durable receipts",
+          "state": "DURABLE_MULTI_MEMBER_AGGREGATE_E2E_VERIFIED__REAL_HUMAN_DATA_OPEN",
+          "basis": "central REAL_EVIDENCE durable receipts for 3 members/6 outcomes were read back and aggregated into strong system-growth store + review queue with privacy/no-auto-promotion PASS; real human production evidence remains OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D3_AGGREGATE_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "LEARN-D4",
+          "capability": "multi-subject and all-age growth evidence coverage",
+          "state": "COVERAGE_AUDITOR_VERIFIED__REAL_SUBJECT_STAGE_EVIDENCE_SPARSE",
+          "basis": "coverage auditor distinguishes real vs synthetic evidence and reports per-subject/per-stage gaps; current repository evidence remains English-heavy with Math core/synthetic coverage and no systematic real proof yet for Korean/Hanja/Science/Social or broad learner stages",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D4_COVERAGE_PROGRESS_2026-10-04.json"
+        },
+        {
+          "id": "LEARN-D5",
+          "capability": "real PWA/device app-switch/session continuity through central growth receipt path",
+          "state": "OWNER_RUNTIME_CROSS_APP_CONTINUITY_VERIFIED__REAL_INSTALLED_DEVICE_OPEN",
+          "basis": "actual Ready/Hide/Snap owner-code round trip proves session/goal/lap/scope continuity, APP_SWITCH != PAUSE/LAP_END, partial/completed semantics and duplicate blocking; installed iPhone/Safari/background/offline evidence remains OPEN",
+          "progress_ref": "CURRENT/TAKY/TAKY_GROW_LEARN_D5_CONTINUITY_PROGRESS_2026-10-04.json"
+        }
+      ],
+      "domain_active_items": [
+        "LEARN-D1a",
+        "LEARN-D1b",
+        "LEARN-D2",
+        "LEARN-D3",
+        "LEARN-D4",
+        "LEARN-D5"
+      ]
+    }
+  },
+  "verification_observed": {
+    "architecture_selected_regressions": [
+      "architecture_competition_compare PASS",
+      "architecture_competition_learning PASS",
+      "architecture_competition_output_pipeline PASS",
+      "architecture_competition_representation PASS",
+      "architecture_competition_visual_quality PASS",
+      "grow_producer_lineage_integration PASS",
+      "cross_engine_growth_e2e PASS"
+    ],
+    "learning_selected_regressions": [
+      "canonical-learning-evidence-adapter PASS",
+      "real-outcome-growth-e2e PASS",
+      "learning-system-growth-aggregate PASS",
+      "durable-learning-system-growth-store PASS",
+      "central-learning-http-endpoint PASS",
+      "authenticated-evidence-transport PASS"
+    ]
+  },
+  "domain_active_count": 12,
+  "next_execution_order": [
+    "LEARN-D1b trusted server verifier/reference sources + hosted auth wiring",
+    "LEARN-D1a owner raw/observation packet emission (Hide -> Ready -> Snap)",
+    "LEARN-D2 real per-app owner-runtime verified-outcome E2E",
+    "ARCHI-D4 company evidence schema + result-to-implementation trace",
+    "ARCHI-D1a official source registry + normalized project data model",
+    "ARCHI-D1b law/applicability/opportunity runtime + project rule compiler",
+    "LEARN-D3 real multi-learner aggregate review evidence",
+    "ARCHI-D2 layout/geometry/KPI MVP",
+    "LEARN-D4 multi-subject/all-age evidence breadth",
+    "ARCHI-D3 production BIM/CAD/detail/cost/RFI loop",
+    "ARCHI-D5 general visual/3D loop",
+    "LEARN-D5 real device/session growth-path verification"
+  ],
+  "guards": {
+    "shared_core_reopen": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL",
+    "user_not_debugger": true
+  },
+  "independent_audit": {
+    "auditor": "CLAUDE_SONNET_LOCAL_SUBSCRIPTION_CLI",
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_DOMAIN_COVERAGE_CLAUDE_AUDIT_FINAL.log",
+    "shared_core": "CLOSED",
+    "required_fixes_applied": [
+      "ARCHI-D1 split source/data foundation from law/pursuit runtime",
+      "ARCHI-D4 expanded with result-to-implementation trace",
+      "LEARN-D1 split owner packet emission from server trusted verifier/reference sources",
+      "LEARN-D2 relabeled synthetic engine fixture rather than real runtime proof",
+      "LEARN-D3 dependency and real-receipt limitation made explicit",
+      "LEARN-D5 cross-referenced device/handshake/local-first dependencies"
+    ],
+    "limitation": "Claude could not directly inspect the three owner repos in this audit invocation; owner-repo observations are retained from TAKY-side direct inspection and must not be attributed to Claude."
+  },
+  "followup_audit": {
+    "auditor": "CLAUDE_SONNET_LOCAL_SUBSCRIPTION_CLI",
+    "log": ".claude/TAKY_GROW_DOMAIN_FIX_CLOSURE_AUDIT_FINAL.log",
+    "verdict": "PASS_WITH_FIXES",
+    "required_findings": {
+      "queue_lifecycle": "CLOSED",
+      "replay_scope_attribution": "CLOSED",
+      "archi_source_role_validation": "CLOSED",
+      "archi_lineage_before_evidence": "CLOSED"
+    },
+    "new_required_findings": [],
+    "shared_core": "CLOSED",
+    "owner_repos_inspected": true
+  }
+}

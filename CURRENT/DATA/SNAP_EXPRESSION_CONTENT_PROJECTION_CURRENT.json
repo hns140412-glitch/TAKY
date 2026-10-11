@@ -1,0 +1,61 @@
+{
+  "schema": "TAKY_SNAP_EXPRESSION_CONTENT_PROJECTION_V1",
+  "state": "RUNTIME_ENABLED",
+  "generated_at": "2026-10-10",
+  "master_logic_changed": false,
+  "consumer": "SNAP_POP",
+  "purpose": "Activate reviewed user-owned Snap expression expansion packs without changing the canonical 3-step exploration engine.",
+  "sources": [
+    {
+      "source_id": "1l-aFFOuDS0ECThDcgx8QDL0aswMw4Q6d",
+      "title": "초5_마음일기_B5_양식.pdf",
+      "source_family": "SNAP_MIND_DIARY",
+      "expansion_pack": "MIND_DIARY",
+      "authority_level": "USER_PRODUCT_SOURCE",
+      "prior_state": "SNAP_EXPANSION_LOCKED",
+      "direct_review_state": "PASS_2026-10-10",
+      "sha256": "74e68d2e0de124b284c5bfbfb52505f5499c8b49ada706bf82ae04624dfbccd6",
+      "runtime_landmark": "mind-diary",
+      "projection_pattern": [
+        "emotion_label",
+        "scene_detail",
+        "inner_thought",
+        "short_caption"
+      ]
+    },
+    {
+      "source_id": "1axQn-UqC6S1bfhH5YCzP5RqEvQwp0bfP",
+      "title": "양희원_비밀노트.png",
+      "source_family": "SNAP_SECRET_NOTE",
+      "expansion_pack": "SECRET_NOTE",
+      "authority_level": "USER_PRODUCT_SOURCE",
+      "prior_state": "SNAP_EXPANSION_LOCKED",
+      "direct_review_state": "PASS_2026-10-10",
+      "sha256": "e8fc4b6540bb6833d72653c1790afe5d77734a4882da360548fb9c33fa235a16",
+      "runtime_landmark": "secret-note",
+      "projection_pattern": [
+        "memory_fragment",
+        "radio_guided_detail",
+        "place_visual_sound",
+        "self_authored_short_text"
+      ]
+    }
+  ],
+  "runtime_contract": {
+    "engine": "EXISTING_SNAP_THREE_STEP_EXPLORATION",
+    "new_engine_created": false,
+    "existing_landmarks_preserved": 5,
+    "expansion_landmarks_added": 2,
+    "total_landmarks": 7,
+    "records_include_source_provenance": true,
+    "feeds_existing_snap_completion_and_ready_return": true
+  },
+  "guards": [
+    "SELF_EXPRESSION_EVIDENCE_IS_NOT_MASTERY_BY_DEFAULT",
+    "SOURCE_PROMPTS_ARE_PARAPHRASED_AS_RUNTIME_SCAFFOLDS",
+    "NO_AUTOMATIC_SCHEDULING_OWNERSHIP",
+    "NO_EXTERNAL_NAVER_INCOMPLETE_SOURCE_USED",
+    "NO_PAID_API",
+    "NO_DEPLOYMENT"
+  ]
+}

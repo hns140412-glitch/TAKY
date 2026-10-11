@@ -1,0 +1,20 @@
+{
+  "schema": "TAKY_AI_Q3_STALE_SCAFFOLD_DIAGNOSTIC_V1",
+  "generated_at": "2026-10-06T00:13:47.515084+00:00",
+  "actual_status_metadata": {
+    "loggedIn": true,
+    "authMethod": "claude.ai",
+    "apiProvider": "firstParty",
+    "subscriptionType": "pro"
+  },
+  "old_rule_accepts_actual": false,
+  "candidate_rule_accepts_actual": true,
+  "negative_fixture_rejections": [
+    true,
+    true,
+    true
+  ],
+  "experiment_outcome": "PASS_STALE_CONDITION_CONFIRMED",
+  "adoption_state": "HOLD_SECURITY_REVIEW",
+  "guard": "Diagnostic only; no authentication gate was modified."
+}

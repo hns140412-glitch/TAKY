@@ -1,5 +1,5 @@
 {
-  "checkpoint_version": "1.6",
+  "checkpoint_version": "1.8",
   "task_id": "DATA_INDEX_SEARCH_PROJECTION",
   "namespace": "DATA",
   "atomic_unit": "SEARCH_PROJECTION_V1__REAL_V26_679_REGRESSION_CLOSED__DETAIL_L2_VERIFIED__LOCAL_RUNTIME_BINDINGS_CLOSED__APPROVED_NEURAL_MODEL_BINDING_OPEN",
@@ -32,7 +32,12 @@
     "verified_neural_vector_channel": "IMPLEMENTED",
     "materialized_v26_neural_vector_index": "LOCAL_CONTROLLED_RUNTIME_MATERIALIZED_679_OF_679__DURABLE_ARTIFACT_BINDING_OPEN",
     "query_embedding_provider": "GENERIC_LOCAL_PROVIDER_IMPLEMENTED__APPROVED_MODEL_NOT_BOUND",
-    "vector_activation_rule": "DEFAULT_FAIL_CLOSED_UNLESS_QUALITY_STATUS_APPROVED_AND_MODEL_ID_DIMENSION_MATCH"
+    "vector_activation_rule": "DEFAULT_FAIL_CLOSED_UNLESS_QUALITY_STATUS_APPROVED_AND_MODEL_ID_DIMENSION_MATCH",
+    "authority_preserving_outcome_utility_rerank": "IMPLEMENTED_LOCAL_VERIFIED",
+    "outcome_utility_precedence": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE",
+    "outcome_utility_sidecar_materializer": "IMPLEMENTED_LOCAL_VERIFIED",
+    "outcome_utility_sidecar_schema": "TAKY_DATA_INDEX_OUTCOME_UTILITY_V1",
+    "outcome_utility_sidecar_authority": "NON_AUTHORITATIVE_SECONDARY_ONLY"
   },
   "done": [
     "Executable search projection implemented in ENFORCEMENT/data_index_search.py",
@@ -56,7 +61,13 @@
     "Oversize held videos were not retried; existing streaming/local-sync retry policy remains intact",
     "Local-controlled durable receipt and growth store binding closed in Learning runtime without deployment",
     "Provider-neutral family/member identity resolver and local learning endpoint binding closed with cross-family/member denial",
-    "PR #121 merged at 042ab345a85ed3ce67a87602b3873f99322b5fdd and PR #123 merged at dd13c4c3ada69796f2b22364032e0386218ef47a"
+    "PR #121 merged at 042ab345a85ed3ce67a87602b3873f99322b5fdd and PR #123 merged at dd13c4c3ada69796f2b22364032e0386218ef47a",
+    "Authority-preserving outcome utility reranking implemented in ENFORCEMENT/data_index_search.py",
+    "Outcome utility is bounded secondary evidence and cannot outrank exact identifier or CURRENT_INDEX_ENTRY authority tiers",
+    "Search result cards expose rerank tier/utility evidence without exposing domain decision metadata",
+    "GROW lineage -> source-scoped DATA outcome utility materializer implemented in ENFORCEMENT/data_index_outcome_utility.py",
+    "Search CLI can optionally consume TAKY_DATA_INDEX_OUTCOME_UTILITY_V1 via --outcome-utility",
+    "Learner-private receipt references are excluded from DATA source utility materialization"
   ],
   "open": [
     "Bind a durable approved pretrained/local embedding artifact for V26; current experimental corpus-local model is REJECTED_NOT_PROMOTED",
@@ -72,7 +83,10 @@
     "VERIFIED_VECTOR_CHANNEL_IMPLEMENTED != LIVE_VECTOR_INDEX_MATERIALIZED",
     "INDEXING != DOMAIN_DECISION_ENGINE",
     "V24_666_POINTER_SUPERSEDED_BY_V26_679",
-    "DERIVED_CURRENT_AUTHORITY != CANONICAL_SOURCE_TRUTH"
+    "DERIVED_CURRENT_AUTHORITY != CANONICAL_SOURCE_TRUTH",
+    "OUTCOME_UTILITY != AUTHORITY",
+    "OUTCOME_UTILITY_CANNOT_OVERRIDE_EXACT_OR_CURRENT",
+    "MISSING_OUTCOME_UTILITY = NEUTRAL_ZERO"
   ],
   "source_refs": [
     "C2S/DATA_INDEX_SCHEMA_CONTRACT_2026-09-25_V1.json",
@@ -85,7 +99,7 @@
     "github:hns140412-glitch/TAKY@a32b5e6f17123b7de70c2fc91f522cbce7b8a5d3",
     "github:hns140412-glitch/TAKY@e170a9a51f66dbe97fe1675df737b7608d362be9"
   ],
-  "updated_at": "2026-09-26T09:40:00+09:00",
+  "updated_at": "2026-10-03T21:20:00+09:00",
   "real_v26_regression": {
     "payload": "DATA_UTILIZATION_INDEX_2026-09-25_V26.json",
     "source_index": "DATA_SOURCE_INDEX_2026-09-25_V6.json",

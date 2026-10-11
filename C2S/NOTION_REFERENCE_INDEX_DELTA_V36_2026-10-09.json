@@ -1,0 +1,103 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V36",
+  "generated_at": "2026-10-08T15:31:32.255340+00:00",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+  "parent_sha256": "c96c6e1b1f7844e784b96af9348c634fd16df059e7b91bbd6114188c23c6b74c",
+  "input_mining_receipt": "TAKY-SOURCE-VAULT/reports/INBOX_REF097_CHARACTER_SHEET_MINING_20261009.json",
+  "input_mining_sha256": "5dce6fa5cd478424432d651469e80fbecfd169fc8090162e22ddeddb16bba1bb",
+  "items": [
+    {
+      "source_id": "REF-097",
+      "title": "Character Reference Sheet Workflow — Visual Consistency / Asset QA Reference",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=ai_newceo&logNo=224433971131",
+      "source_family": "CHARACTER_REFERENCE_SHEET_VISUAL_CONSISTENCY",
+      "source_type": "SIEZEALL_USER_INBOX_NEW_SOURCE_WITH_LOCAL_RAW_PRESERVATION",
+      "authority_level": "SECONDARY_PRACTITIONER_REFERENCE_ONLY__NOT_TAKY_VISUAL_AUTHORITY",
+      "domain_facets": [
+        "ai_image_workflow",
+        "character_asset_pipeline",
+        "visual_identity_qa",
+        "asset_preproduction"
+      ],
+      "consumers": [
+        "ASSET_ENGINE",
+        "EXPLORER_CREW_ASSET_QA",
+        "AI_REFERENCE_PROJECTION"
+      ],
+      "origin_type": "SIEZEALL_00_INBOX_USER_VIA_NOTION_COLLECTOR",
+      "publisher_or_account": "AI 신사장(뉴피디) / Naver Blog",
+      "value_statement": "Useful secondary structure reference for character derivative QA: four-view turnaround, identity close-ups, expression/action coverage, costume detail and color/material consistency.",
+      "controlled_terms": [
+        "CHARACTER_REFERENCE_SHEET",
+        "FOUR_VIEW_TURNAROUND",
+        "FACE_IDENTITY_DETAILS",
+        "EXPRESSION_SHEET",
+        "POSE_BODY_LANGUAGE",
+        "COSTUME_DETAILS",
+        "COLOR_MATERIAL_PALETTE",
+        "NO_IDENTITY_GUARANTEE"
+      ],
+      "keywords": [
+        "character sheet",
+        "turnaround",
+        "face identity",
+        "expression sheet",
+        "pose",
+        "costume details",
+        "color palette",
+        "AI image consistency"
+      ],
+      "entities": [
+        "Naver Blog",
+        "Character Reference Sheet"
+      ],
+      "source_review_state": "INDEX_OWNER_REVIEW_PENDING",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "NONE",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "verification_needed": [
+        "Use only as supplemental workflow evidence.",
+        "Keep all approved pixels and Visual ID authority in TAKY canonical sources.",
+        "Actual-image QA remains mandatory."
+      ],
+      "claims_to_exclude": [
+        "Do not infer canonical age, height, personality or role from generated profile text.",
+        "Do not use the external prompt as TAKY production authority.",
+        "Do not treat a generated reference sheet as Visual ID registration evidence.",
+        "Do not claim a character sheet guarantees identical identity across generations."
+      ],
+      "source_actor": "AI 신사장(뉴피디) / Naver Blog",
+      "source_actor_class": "INDEPENDENT_AI_IMAGE_WORKFLOW_PRACTITIONER_BLOG",
+      "source_author_identity_state": "PUBLIC_ACCOUNT_ATTRIBUTION_ONLY__NO_INDEPENDENT_REAL_ID_VERIFICATION",
+      "source_direction": "CHARACTER_REFERENCE_SHEET_WORKFLOW_FOR_VISUAL_CONSISTENCY",
+      "source_direction_signals": [
+        "REFERENCE_SHEET_STRUCTURE",
+        "IDENTITY_CONSISTENCY",
+        "INPUT_IMAGE_QUALITY",
+        "TURNAROUND",
+        "FACE_DETAIL",
+        "EXPRESSION",
+        "POSE",
+        "COSTUME",
+        "COLOR_MATERIAL"
+      ],
+      "applicability_scope": [
+        "EXPLORER_CREW_ASSET_QA",
+        "CHARACTER_DERIVATIVE_PACKAGE_VALIDATION",
+        "VISUAL_ID_PRODUCTION_SUPPORT"
+      ],
+      "authority_ceiling": "REFERENCE_PATTERN_ONLY__MAY_INFORM_LAYOUT_AND_QA_FIELDS__NEVER_VISUAL_ID_OR_APPROVED_PIXEL_AUTHORITY",
+      "source_ref": "INDEX:REF-097",
+      "canonical_promotion": false
+    }
+  ],
+  "guards": [
+    "AUTHOR != AUTHORITY",
+    "REFERENCE_ONLY",
+    "EXTERNAL_REFERENCE != VISUAL_ID_AUTHORITY",
+    "GENERATED_REFERENCE_SHEET != REGISTRATION_ASSET",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DEPLOYMENT",
+    "NO_PAID_API"
+  ]
+}

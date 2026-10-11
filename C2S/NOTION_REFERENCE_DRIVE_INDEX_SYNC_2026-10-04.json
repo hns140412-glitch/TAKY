@@ -1,0 +1,54 @@
+﻿{
+    "schema":  "TAKY_NOTION_REFERENCE_DRIVE_INDEX_SYNC_V1",
+    "date":  "2026-10-04",
+    "status":  "CLOSED_PASS",
+    "source_index":  {
+                         "name":  "DATA_SOURCE_INDEX_2026-10-04_V11.json",
+                         "drive_id":  "11Kjlaruj79gfPJZglfOAF5qH97hS-NxbpWqDtThUZt0",
+                         "total":  877,
+                         "unique_source_ids":  877,
+                         "json_parse":  "PASS",
+                         "delta_refs":  [
+                                            "REF-081",
+                                            "REF-082",
+                                            "REF-083",
+                                            "REF-084",
+                                            "REF-085",
+                                            "REF-086"
+                                        ]
+                     },
+    "utilization_index":  {
+                              "name":  "DATA_UTILIZATION_INDEX_2026-10-04_V31.json",
+                              "drive_id":  "1433bd2YC0SGVrCWQuP-f3MIz6vtZ95fRkBlJmHre4BY",
+                              "total":  877,
+                              "unique_source_ids":  877,
+                              "json_parse":  "PASS",
+                              "utilization_class_counts":  {
+                                                               "REFERENCE_ONLY":  835,
+                                                               "CONDITIONAL_USE":  25,
+                                                               "DIRECT_USE_READY":  2,
+                                                               "RESEARCH_CANDIDATE":  1,
+                                                               "REVIEW_REQUIRED":  2,
+                                                               "NO_CURRENT_CONSUMER":  8,
+                                                               "VOLATILE_REFERENCE_ONLY":  4
+                                                           }
+                          },
+    "source_ref_cross_artifact_missing":  0,
+    "author_direction_scope_fields_persisted":  true,
+    "original_v10_v30_preserved":  true,
+    "canonical_promotion":  false,
+    "current_pointer_changed":  false,
+    "master_policy_changed":  false,
+    "main_merge":  false,
+    "remote_push":  false,
+    "deployment":  false,
+    "paid_api_used":  false,
+    "evidence":  [
+                     "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                     "C2S/DATA_INDEX_V31_NOTION_INDEX_OWNER_RECEIPT_2026-10-04.json",
+                     "C2S/NOTION_REFERENCE_INTAKE_EXECUTION_2026-10-04.json",
+                     "C2S/NOTION_REFERENCE_SEARCH_PROJECTION_VALIDATION_2026-10-04.json",
+                     "C2S/REFERENCE_INTAKE_V31_NOTION_LEARNING_RUNTIME_VALIDATION_2026-10-04.json",
+                     "C2S/NOTION_REFERENCE_DOMAIN_HANDOFF_2026-10-04.json"
+                 ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "TAKY_AI_REMINING_FINAL_RECEIPT_R2",
+  "generated_at": "2026-10-05T22:47:59.246616+00:00",
+  "status": "PASS_LOCAL_ALL_BACKLOG_RESOLVED",
+  "counts": {
+    "backlog_total": 63,
+    "closed_total": 63,
+    "indexed_total": 51,
+    "merged_total": 10,
+    "terminal_hold_total": 2,
+    "active_hold_total": 0,
+    "ai_index_sources": 81,
+    "ai_learning_rules": 56
+  },
+  "terminal_holds": [
+    {
+      "title": "AI 직원 생성하기 | BrandyAction EDU",
+      "processing_state": "CLOSED_TERMINAL_SOURCE_UNAVAILABLE",
+      "learning_state": "BLOCKED_NO_BODY_EVIDENCE",
+      "terminal_reason": "Original dynamic class route returned only shell metadata; public /api/platform catalog does not contain the target slug and public courses query returned no matching row.",
+      "reopen_condition": "A new public body/source or explicitly authorized authenticated source becomes available."
+    },
+    {
+      "title": "GPT프롬프트 - OneDrive",
+      "processing_state": "CLOSED_TERMINAL_AUTH_REQUIRED",
+      "learning_state": "BLOCKED_NO_BODY_EVIDENCE",
+      "terminal_reason": "Public share shell was reachable, but direct-download variants redirected to Microsoft login and public share REST endpoints required authentication.",
+      "reopen_condition": "User supplies an accessible file/body or explicitly authorized connected-source access."
+    }
+  ],
+  "terminal_hold_policy": "Closed without indexing/learning. Reopen only when a source body becomes accessible through a public or explicitly authorized path.",
+  "guards": [
+    "TITLE_ONLY != LEARNING",
+    "AUTH_BYPASS_FORBIDDEN",
+    "NO_CANONICAL_PROMOTION",
+    "NO_PUSH_MERGE_DEPLOY"
+  ]
+}

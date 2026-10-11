@@ -1,0 +1,74 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_REVIEW_PIPELINE_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "authority_scope": "GROW review pipeline execution/current state only",
+  "pipeline": [
+    "LEARNING_SYSTEM_GROWTH_AGGREGATE",
+    "FAMILY_SCOPED_STRONG_STORE",
+    "COMMON_GROW_REVIEW_QUEUE",
+    "TOOLS/GROW_REVIEW_RUN.py",
+    "ENFORCEMENT/grow_review_gate.py",
+    "NON_AUTHORITATIVE_REVIEW_REPORT"
+  ],
+  "implementation": {
+    "aggregate": "LEARNING/lifecycle/learning-system-growth-aggregate.js",
+    "strong_store_adapter": "LEARNING/transport/durable-learning-system-growth-store-adapter.js",
+    "review_queue_adapter": "LEARNING/transport/grow-review-queue-adapter.js",
+    "review_runner": "TOOLS/GROW_REVIEW_RUN.py",
+    "review_gate": "ENFORCEMENT/grow_review_gate.py",
+    "e2e_regression": "ENFORCEMENT/grow_review_queue_e2e_test.py",
+    "full_regression_log": "ENFORCEMENT/grow_review_pipeline_full_regression_2026-10-03.log"
+  },
+  "verified_behavior": {
+    "member_identifiers_leak": false,
+    "per_member_hashed_parent_refs": false,
+    "aggregate_evidence_ref_only": true,
+    "family_source_evidence_persisted_before_review_enqueue": true,
+    "queue_idempotent": true,
+    "aggregate_only_review_state": "STRATEGY_EXPERIMENT_READY",
+    "aggregate_only_promotion_gate_invoked": false,
+    "automatic_promotion": false,
+    "authority_transfer": false,
+    "review_report_authoritative": false,
+    "review_report_writes_promotion_state": false,
+    "queue_failure_rolls_back_source_evidence": false
+  },
+  "promotion": {
+    "current_best_auto_promote": false,
+    "human_review_required_for_promotion": true,
+    "aggregate_only_candidate_can_promote": false,
+    "strategy_experiment_and_verified_system_outcomes_required_before_promotion_review": true
+  },
+  "verification": {
+    "grow_review_queue_e2e": "2/2 PASS",
+    "full_python_enforcement": "152/152 PASS",
+    "grow_related_node_regressions": {
+      "learning_system_growth_aggregate": "PASS",
+      "durable_learning_system_growth_store": "PASS",
+      "growth_strategy_ledger": "PASS",
+      "durable_growth_strategy_store": "PASS",
+      "outcome_growth_feedback": "PASS",
+      "real_outcome_growth_e2e": "PASS"
+    },
+    "git_diff_check": "PASS"
+  },
+  "supersedes_for_review_pipeline": [
+    "CURRENT/TAKY/TAKY_GROW_REVIEWQUEUE_AUTODISCOVERY_2026-10-03.json"
+  ],
+  "preserves": [
+    "CURRENT/TAKY/TAKY_GROW_UMBRELLA_2026-10-03.json",
+    "CURRENT/TAKY/TAKY_GROW_PRODUCER_LINEAGE_2026-10-03.json",
+    "CURRENT/TAKY/TAKY_GROW_SYSTEM_AGGREGATE_UTILITY_2026-10-03.json",
+    "CURRENT/TAKY/TAKY_GROW_RERANK_ANTILOOP_2026-10-03.json"
+  ],
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "next_status": "SUPERSEDED_BY_CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+  "next": "Continue remaining OPEN only after this review-pipeline CURRENT; do not reopen CLOSED/PASS without contradictory evidence."
+}

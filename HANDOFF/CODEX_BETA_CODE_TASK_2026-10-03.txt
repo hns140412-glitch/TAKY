@@ -1,0 +1,13 @@
+TAKY Beta CODE TRACK — local implementation and validation support only.
+Repository: D:\Git PWA\TAKY.
+Do not commit, push, merge, deploy, call paid APIs, or alter remote services.
+Before editing, inspect git status/diff and preserve all pre-existing user/agent changes; never revert unrelated changes.
+Do not rewrite CURRENT/MASTER/HANDOFF authority documents in this code track.
+Purpose: support the user's required pipeline before Beta consolidation and later Alpha rewrite.
+1) Run the existing local validation/test suite and identify concrete code-level failures or bypasses.
+2) Focus on ENFORCEMENT/TOOLS/runtime validators, source-of-truth checks, stale/current pointer checks, owner/path ambiguity, CLOSED-without-evidence detection, runtime/UI/data/asset linkage validation, regression gates, cost/deploy safety gates.
+3) Fix only issues that are directly evidenced by repository state/tests and do not require product-policy decisions.
+4) Add or strengthen regression tests for every code fix.
+5) Re-run relevant tests; report exact files changed, tests run, pass/fail, unresolved OPEN items.
+6) If a change would alter canonical product behavior or requires choosing between conflicting authorities, do NOT decide it; leave it OPEN with evidence.
+No deployment. No branch switching. No destructive cleanup.

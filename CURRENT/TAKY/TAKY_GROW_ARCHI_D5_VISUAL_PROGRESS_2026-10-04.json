@@ -1,0 +1,32 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_ARCHI_D5_VISUAL_PROGRESS_2026-10-04",
+  "status": "GEOMETRY_DRIFT_GUARD_VERIFIED__REAL_3D_RENDER_PIPELINE_OPEN",
+  "domain_item": "ARCHI-D5",
+  "completed": [
+    "canonical locked-geometry snapshot",
+    "visual-only field allowance",
+    "object-set/mass/polygon/height/opening/floor-count drift HOLD",
+    "project identity drift HOLD",
+    "base/candidate geometry SHA comparison"
+  ],
+  "verification": [
+    "ENFORCEMENT/architecture_visual_geometry_guard_test.py 6/6 PASS"
+  ],
+  "remaining": [
+    "verified local 3D engine binding",
+    "2D/CAD -> 3D model pipeline",
+    "context 3D binding",
+    "render engine representative-task verification",
+    "actual rendered-output geometry read-back/cross-check",
+    "AI enhancement geometry-drift comparison on real project outputs"
+  ],
+  "guards": {
+    "geometry_change_authorized": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

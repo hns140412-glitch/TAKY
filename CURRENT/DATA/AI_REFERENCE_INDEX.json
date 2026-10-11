@@ -1,0 +1,4414 @@
+{
+  "schema": "TAKY_AI_REFERENCE_INDEX_V1",
+  "authoritative": false,
+  "projection_role": "AI_REFERENCE_DISCOVERY_AND_SYSTEM_GROW_INPUT",
+  "owner": "SYSTEM_GROW",
+  "generated_at": "2026-10-08T15:31:32.347356+00:00",
+  "source_count": 84,
+  "record_kind_counts": {
+    "source_reference": 11,
+    "validated_mining_atom": 15,
+    "discovery_reference": 7,
+    "remined_source_reference": 51
+  },
+  "outcome_evidence_counts": {
+    "verified_success": 0,
+    "verified_failure_or_regression": 0,
+    "no_verified_outcome_yet": 84
+  },
+  "category_counts": {
+    "MODEL": 14,
+    "TOOL": 48,
+    "AGENT": 9,
+    "ORCHESTRATION": 48,
+    "PROMPT": 15,
+    "SOURCE_ACQUISITION": 4,
+    "COST": 8,
+    "SECURITY": 12,
+    "WORKFLOW": 49
+  },
+  "categories": [
+    "MODEL",
+    "TOOL",
+    "AGENT",
+    "ORCHESTRATION",
+    "PROMPT",
+    "SOURCE_ACQUISITION",
+    "COST",
+    "SECURITY",
+    "WORKFLOW"
+  ],
+  "records": [
+    {
+      "source_id": "AIATOM:VID-20261003-001",
+      "title": "VID-20261003-001 — AI orchestration / 검증 절차",
+      "source_ref": "VID-20261003-001",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "AI orchestration / 검증 절차",
+        "Claude/Codex 작업 지시서 작성자"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "AI orchestration / 검증 절차"
+      ],
+      "controlled_terms": [
+        "STRATEGY",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "harness checkpoint 후보",
+        "Claude/Codex 작업 지시서 작성자"
+      ],
+      "verification_needed": [
+        "단독 확인 후 결합하는 절차는 본문에서 지지된다. 접속 주소 변경은 외부 설명이며, version/doctor 표시만으로 도구 간 통합 정상 동작이 입증되지는 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "서로 영향을 주는 도구 2개(둘 다 Claude Code의 접속 주소를 바꾸는 프록시류)는 하나씩 켜서 `--version`/`doctor`로 확인한 뒤 결합한다.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "MEDIUM",
+      "evidence": "V2 P03.r1c3 (3:50), P02.r4c2 (3:50)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-003",
+      "title": "VID-20261003-003 — AI orchestration / prompt pack",
+      "source_ref": "VID-20261003-003",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "AI orchestration / prompt pack",
+        "프롬프트 템플릿 관리"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "AI orchestration / prompt pack"
+      ],
+      "controlled_terms": [
+        "STRATEGY",
+        "BORROW_CHANGE",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration",
+        "프롬프트 템플릿 관리"
+      ],
+      "verification_needed": [
+        "필드 구조는 부분 판독으로 지지된다. V2 P01은 글1 구간이므로 글2 필드의 주 근거는 P02.r3c1~r4c1로 한정하고 설치 지시는 분리한다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "복사형 구조화 프롬프트 템플릿: 역할/목적/입력/작업(번호 단계)/지침/출력/검증 필드.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "MEDIUM",
+      "evidence": "V2 P01.r1c2 (3:48), P02.r3c1 (3:49)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-014",
+      "title": "VID-20261003-014 — 토큰/컨텍스트",
+      "source_ref": "VID-20261003-014",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "토큰/컨텍스트",
+        "AI orchestration"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "COST"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "토큰/컨텍스트"
+      ],
+      "controlled_terms": [
+        "IDEA",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration",
+        "AI orchestration"
+      ],
+      "verification_needed": [
+        "필터 은유와 Headroom 라벨은 지지된다. 실제 압축 동작, 효과 수치, 해당 은유의 독점적인 제품 귀속은 입증되지 않았다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "필요한 부분만 모델로 통과시키는 컨텍스트 압축 은유와 그 도구 라벨(Headroom). 효과 수치는 미확인.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "MEDIUM",
+      "evidence": "V1 P01.r3c3~r4c2 (3:36), V2 P03.r1c2~r1c3 (3:50)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-015",
+      "title": "VID-20261003-015 — 오케스트레이션",
+      "source_ref": "VID-20261003-015",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "오케스트레이션",
+        "체크포인트 프로토콜 대조"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "오케스트레이션"
+      ],
+      "controlled_terms": [
+        "IDEA",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration",
+        "체크포인트 프로토콜 대조"
+      ],
+      "verification_needed": [
+        "기억 보존과 반복 작업 탐지는 외부 문제 설정·기능 주장이다. V4의 ③=claude-mem은 미확정이며 ④는 frontend-design, ⑤는 task-observer다. V2의 claude-mem 표기를 V4의 이름 확인으로 전용하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "세션 간 기억 보존 필요성 / 반복 작업 탐지·스킬화(claude-mem, task-observer 계열). 도구명은 ④⑤만 표기.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "MEDIUM",
+      "evidence": "V4 P01.r3c2, r4c1~r4c2 (3:58), V2 P03.r1c3~r2c3 (3:50)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-016",
+      "title": "VID-20261003-016 — 자기 점검",
+      "source_ref": "VID-20261003-016",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "자기 점검",
+        "검증 루프 설계자"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "자기 점검"
+      ],
+      "controlled_terms": [
+        "EVIDENCE",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration",
+        "검증 루프 설계자"
+      ],
+      "verification_needed": [
+        "외부 크리에이터의 자기 점검 루프 주장으로 지지된다. 에이전트 실행 자기보고나 브라우저 자동화 런타임 증거가 아니며 도구 이름도 미확정이다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "AI가 스스로 브라우저를 열어 눌러보고 결함을 찾아 고친다는 **주장**. 영상에 실제 동작은 없다(표시된 주장은 런타임 증거가 아님).",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "MEDIUM",
+      "evidence": "V4 P01.r1c2~r2c2 (3:58)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-017",
+      "title": "VID-20261003-017 — 레퍼런스 색인",
+      "source_ref": "VID-20261003-017",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "레퍼런스 색인",
+        "reference intake 중복 판정"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "레퍼런스 색인"
+      ],
+      "controlled_terms": [
+        "EVIDENCE",
+        "REFERENCE_ONLY",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "reference intake",
+        "reference intake 중복 판정"
+      ],
+      "verification_needed": [
+        "V2의 명시된 세트와 V4의 frontend-design 표기는 별도 출처 노드 유지에 충분하다. V4 전체 매핑이나 범위 밖 V5 세트까지 확정한 것으로 확대하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "외부 가이드 세트 구성 차이: 글2(V2)=OmniRoute+Headroom+claude-mem+claude-code-setup+task-observer, V4 캐러셀=④frontend-design 등. 병합 금지.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "HIGH",
+      "evidence": "V2 P02.r4c2 (3:50), V4 P01.r3c3 (3:58)",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-018",
+      "title": "VID-20261003-018 — 증거 등급",
+      "source_ref": "VID-20261003-018",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "증거 등급",
+        "증거 등급 판정"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "증거 등급"
+      ],
+      "controlled_terms": [
+        "EVIDENCE",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "reference intake",
+        "증거 등급 판정"
+      ],
+      "verification_needed": [
+        "V1이 제작된 그래픽 중심의 여러 릴이라는 보고서 설명과 일치한다. 출처의 증거 한계로 보존하며 개별 릴 경계와 정확한 수는 확정하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "크리에이터 모션그래픽은 실제 제품 UI가 아니라 연출물이고, 같은 구성의 릴 다수가 연속된다.",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_1_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "HIGH",
+      "evidence": "V1 P01~P04",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-019",
+      "title": "VID-20261003-019 — EXTERNAL_TOOLING_REFERENCE",
+      "source_ref": "VID-20261003-019",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "EXTERNAL_TOOLING_REFERENCE",
+        "AI orchestration 도구 평가"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "EXTERNAL_TOOLING_REFERENCE"
+      ],
+      "controlled_terms": [
+        "FACT",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration reference",
+        "AI orchestration 도구 평가"
+      ],
+      "verification_needed": [
+        "가이드의 주장으로 확인된다. 플랫폼·요금제 지원 사실은 독립 검증되지 않았다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "Claude Code 플러그인 4개는 Claude Code 전용이고, 웹/데스크탑/모바일·무료 요금제에서 되는 것은 스킬(Task Observer) 1개뿐이라고 가이드가 주장",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "HIGH",
+      "evidence": "03-59-30 P1-F2~F3, P1-F6",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-020",
+      "title": "VID-20261003-020 — WORK_TOOLING_DOC_FORMAT",
+      "source_ref": "VID-20261003-020",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "WORK_TOOLING_DOC_FORMAT",
+        "TAKY 운영·온보딩 문서"
+      ],
+      "ai_categories": [
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "WORK_TOOLING_DOC_FORMAT"
+      ],
+      "controlled_terms": [
+        "STRATEGY",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "work tooling docs",
+        "TAKY 운영·온보딩 문서"
+      ],
+      "verification_needed": [
+        "문서 구성 패턴만 차용 후보로 유지한다. 슬래시 구분은 해당 가이드의 실행 환경에 한정하며 일반 규칙으로 승격하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "설치 문서 구조: `/`=앱 안·무`/`=터미널 선설명 → 한 줄 명령 → 안 먹힐 때 폴백 → 확인하는 법 → 하지 말 것 → 출처·라이선스",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "HIGH",
+      "evidence": "P1-F8, P2-F3~F12, P3-F4",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-021",
+      "title": "VID-20261003-021 — VERIFICATION_PROTOCOL",
+      "source_ref": "VID-20261003-021",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "VERIFICATION_PROTOCOL",
+        "TAKY 검증 프로토콜"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "VERIFICATION_PROTOCOL"
+      ],
+      "controlled_terms": [
+        "STRATEGY",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "harness / verification",
+        "TAKY 검증 프로토콜"
+      ],
+      "verification_needed": [
+        "관찰 가능한 확인 절차를 문서화하는 패턴이다. 영상 내 도구 실행이나 설치 성공 증거는 없다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "설치 성공 판정을 관찰 가능한 행동으로 정의: 브라우저 대시보드 접속, 재시작 후 직전 작업 인식, `/plugin` 목록 확인",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "HIGH",
+      "evidence": "P1-F11~F12, P2-F5, P2-F12, P3-F4",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-022",
+      "title": "VID-20261003-022 — SUPPLY_CHAIN_CHECK",
+      "source_ref": "VID-20261003-022",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "SUPPLY_CHAIN_CHECK",
+        "하네스 공급망 점검"
+      ],
+      "ai_categories": [
+        "SECURITY",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "SUPPLY_CHAIN_CHECK"
+      ],
+      "controlled_terms": [
+        "STRATEGY",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "harness",
+        "하네스 공급망 점검"
+      ],
+      "verification_needed": [
+        "공식 주소·명칭 확인이라는 검토 패턴만 유지한다. 실제 사칭 패키지 존재나 특정 패키지의 안전성은 입증되지 않았다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "동명 다른 패키지에 대비해 공식 주소·정식 명칭을 확인하라는 원칙",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "HIGH",
+      "evidence": "P2-F12, P3-F1",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-023",
+      "title": "VID-20261003-023 — EXTERNAL_TOOLING_REFERENCE",
+      "source_ref": "VID-20261003-023",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "EXTERNAL_TOOLING_REFERENCE",
+        "라이선스·attribution 검토"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "EXTERNAL_TOOLING_REFERENCE"
+      ],
+      "controlled_terms": [
+        "EVIDENCE",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration reference",
+        "라이선스·attribution 검토"
+      ],
+      "verification_needed": [
+        "라이선스·제작자·목록 등재는 가이드 표시 내용이다. 공식 원문이나 적용 버전 확인 없이 준수 판단 근거로 사용하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "출처·라이선스: OmniRoute MIT, claude-mem Apache-2.0, Task Observer CC BY 4.0, Frontend Design=Anthropic, Playwright=Microsoft(공식 목록 등재)",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "HIGH",
+      "evidence": "P1-F12, P2-F5~F6, P3-F8, P3-F12",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-024",
+      "title": "VID-20261003-024 — EXTERNAL_TOOLING_REFERENCE",
+      "source_ref": "VID-20261003-024",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "REFERENCE_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "EXTERNAL_TOOLING_REFERENCE",
+        "연구 색인 전용(실행 금지)"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "EXTERNAL_TOOLING_REFERENCE"
+      ],
+      "controlled_terms": [
+        "EVIDENCE",
+        "REFERENCE_ONLY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "keywords": [
+        "AI orchestration reference",
+        "연구 색인 전용(실행 금지)"
+      ],
+      "verification_needed": [
+        "판독된 명령의 연구 기록만 허용한다. Playwright 접미사는 해소되었고, 다른 marketplace·Frontend 명령의 잘림은 남아 있다. 실행 검증은 없다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "판독 명령: `npm install -g omniroute`, `omniroute launch`, `localhost:20128`, `npx claude-mem install`, 금지 `npm install -g claude-mem`, `/plugin install playwright@claude-plugins-official` (일부 접미사는 잘림)",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "REFERENCE_ONLY",
+      "mining_confidence": "HIGH",
+      "evidence": "P1-F9~F11, P2-F2~F4, P3-F6~F7",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-052",
+      "title": "VID-20261003-052 — VERIFICATION_LOOP",
+      "source_ref": "VID-20261003-052",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "VERIFICATION_LOOP",
+        "TAKY 검증·체크포인트"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "VERIFICATION_LOOP"
+      ],
+      "controlled_terms": [
+        "PROCESS",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "AI orchestration",
+        "TAKY 검증·체크포인트"
+      ],
+      "verification_needed": [
+        "확인 기준 제시 후 기기 관측 자료를 모으는 검증 패턴만 차용한다. 녹화가 실제 회신되었다는 전달 이력은 입증되지 않으며 한 글자 답변을 승인으로 취급하지 않는다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "에이전트가 배포 성공과 짧은 해시를 보고하고 확인 포인트를 지정하면, 사용자가 실기기에서 링크를 열고 녹화로 회신(사용자 답은 `ㄱ`으로 보임). 3개 영상에서 반복",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "MEDIUM",
+      "evidence": "09-11-03 P1-F1; 09-55-40 P1-F1; 12-11-57 P1-F1",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-053",
+      "title": "VID-20261003-053 — VERIFICATION_LOOP",
+      "source_ref": "VID-20261003-053",
+      "url": null,
+      "source_family": "VALIDATED_VIDEO_REMINING",
+      "source_type": "VALIDATED_MINING_ATOM",
+      "authority_level": "INDEX_ONLY",
+      "current_relation": "INDEX_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "VERIFICATION_LOOP",
+        "증거 등급 표기"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "VERIFICATION_LOOP"
+      ],
+      "controlled_terms": [
+        "EVIDENCE_GRADE",
+        "BORROW_CHANGE",
+        "DERIVED_INTERPRETATION"
+      ],
+      "keywords": [
+        "TAKY 검증",
+        "증거 등급 표기"
+      ],
+      "verification_needed": [
+        "배포 성공 자기보고와 프리뷰 관측을 분리하는 증거 등급 원칙이다. 해시·URL·관측 런타임의 대응은 확보되지 않았다."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "\"SUCCESS\"와 해시는 에이전트 자기보고다. 프리뷰 렌더는 관측되나 URL과 해시의 대응 근거는 없다 (세 영상 호스트 접미사 동일, 앞부분 잘림)",
+      "publisher_or_account": "CLAUDE_DENSE_SECOND_PASS_2_RESULT.md",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/VIDEO_REMINING_VALIDATED_INDEX_20261003.json",
+      "record_kind": "VALIDATED_MINING_ATOM",
+      "mining_validation_status": "CODEX_AUDITED",
+      "mining_disposition": "BORROW_CHANGE",
+      "mining_confidence": "HIGH",
+      "evidence": "위 3개 영상 P1-F1 및 인앱 주소창",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:001",
+      "title": "클로덱스 루프: 짠 모델이 자기 계획을 검수하지 못하게 막기 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/claudex-loop-cross-model-plan-review/",
+      "final_url": "https://sdk-kim-builds.com/guides/claudex-loop-cross-model-plan-review/",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_GUIDE__UPSTREAM_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "MODEL",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Independent cross-provider plan review, bounded review outcomes, artifact-identity binding, and fresh-session final inspection are useful orchestration patterns. Current repository statistics and implementation details remain secondary claims.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-CROSS-MODEL-REVIEW-INDEPENDENCE",
+          "insight": "The model that creates a plan should not be the only model that judges it; use an independent reviewer when the decision is material."
+        },
+        {
+          "learning_id": "AI-LRN-APPROVAL-BOUND-TO-ARTIFACT",
+          "insight": "Bind approval to the reviewed plan or artifact identity so later changes cannot silently inherit an earlier approval."
+        },
+        {
+          "learning_id": "AI-LRN-REVIEW-BUDGET-DOES-NOT-FORCE-PASS",
+          "insight": "A bounded review loop must end in HOLD/BLOCKED when unresolved; exhausting the review budget is not approval."
+        }
+      ],
+      "content_hash": "1f47567c72112bbb0bcaf25b709396e50e0b41d849f834227f3236a656718b15",
+      "evidence": {
+        "capture_sha256": "1f47567c72112bbb0bcaf25b709396e50e0b41d849f834227f3236a656718b15",
+        "block_fingerprint": null,
+        "text_chars": 6130,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\02_클로덱스 루프_ 짠 모델이 자기 계획을 검수하지 못하게 막기 _ 낭만빌더 김스듴.txt",
+        "http_status": 200,
+        "final_url": "https://sdk-kim-builds.com/guides/claudex-loop-cross-model-plan-review/"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:002",
+      "title": "AI 위임 루프: 에이전트 대신 매뉴얼으로 일 넘기기 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/ai-delegation-loop-playbook/",
+      "final_url": "https://sdk-kim-builds.com/guides/ai-delegation-loop-playbook/",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_WORKFLOW_GUIDE__ORGANIZATION_CLAIMS_UNVERIFIED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "For recurring work, a durable manual can separate process, toolbox and proof criteria so failures improve the operating manual instead of spawning another brittle agent.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-DURABLE-MANUAL-OVER-EPHEMERAL-AGENT",
+          "insight": "For recurring work, preserve process/tool/proof knowledge in a durable manual or repository rather than only inside an ephemeral agent session."
+        },
+        {
+          "learning_id": "AI-LRN-FAILURE-UPDATES-OPERATING-MANUAL",
+          "insight": "When execution fails, update the reusable procedure, tool boundary or proof checklist so the same failure is less likely to recur."
+        }
+      ],
+      "content_hash": "9989e8a6ee9b01f51e9269e53ec2d363cf40cf778ed51f57bf40c7d6399aa958",
+      "evidence": {
+        "capture_sha256": "9989e8a6ee9b01f51e9269e53ec2d363cf40cf778ed51f57bf40c7d6399aa958",
+        "block_fingerprint": null,
+        "text_chars": 10710,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\03_AI 위임 루프_ 에이전트 대신 매뉴얼으로 일 넘기기 _ 낭만빌더 김스듴.txt",
+        "http_status": 200,
+        "final_url": "https://sdk-kim-builds.com/guides/ai-delegation-loop-playbook/"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:003",
+      "title": "API · MCP 정리본 + AI별 연결 방법 | Notion",
+      "url": "https://app.notion.com/p/API-MCP-AI-3de063ed09fd8087a794d521a161d1fa",
+      "final_url": "https://app.notion.com/p/API-MCP-AI-3de063ed09fd8087a794d521a161d1fa",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PERSONAL_SUMMARY__PRODUCT_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "ORCHESTRATION",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "MCP is an integration layer and does not replace underlying APIs; connector use remains permission-bound. Product-plan details require official re-verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-MCP-DOES-NOT-REPLACE-API",
+          "insight": "Treat MCP and connectors as an integration layer over capabilities and APIs, not as a replacement for the underlying API or authorization model."
+        },
+        {
+          "learning_id": "AI-LRN-CONNECTOR-PERMISSION-BOUNDARY",
+          "insight": "Connector capability must stay bound to explicit authentication, permissions and workspace policy; connection does not imply unrestricted authority."
+        }
+      ],
+      "content_hash": "f76d59583bbada82adfae31d487e878e11ab5bc5dc20f33dfe4cf24bc2cde1fd",
+      "evidence": {
+        "capture_sha256": "e001e08c18803c95a6eb026df584f7111eee9486ee1fa06b5256399b1ef12273",
+        "block_fingerprint": "f76d59583bbada82adfae31d487e878e11ab5bc5dc20f33dfe4cf24bc2cde1fd",
+        "text_chars": 772,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\notion_02.txt",
+        "http_status": 200,
+        "final_url": "https://app.notion.com/p/API-MCP-AI-3de063ed09fd8087a794d521a161d1fa"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:004",
+      "title": "AI 에이전트에 기억·자료·손 붙이기: 오픈소스 7개 설치 가이드 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/agent-github-repos-7/",
+      "final_url": "https://sdk-kim-builds.com/guides/agent-github-repos-7/",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_TOOL_GUIDE__UPSTREAM_LICENSE_VERSION_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "TOOL",
+        "ORCHESTRATION",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Decompose an agent's missing capability into memory, information/context and action gaps, then add only the needed component; verify upstream identity, license, requirements and overlap first.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-CAPABILITY-GAP-BEFORE-TOOL",
+          "insight": "Identify the missing capability—such as memory, source access, or action—before selecting an AI tool; do not adopt a bundle simply because it is recommended."
+        }
+      ],
+      "content_hash": "07f65240212296dda56fc14fb4b0500d8073fade389b5176206b861cb8a0cea1",
+      "evidence": {
+        "capture_sha256": "07f65240212296dda56fc14fb4b0500d8073fade389b5176206b861cb8a0cea1",
+        "block_fingerprint": null,
+        "text_chars": 7969,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\05_AI 에이전트에 기억·자료·손 붙이기_ 오픈소스 7개 설치 가이드 _ 낭만빌더 김스듴.txt",
+        "http_status": 200,
+        "final_url": "https://sdk-kim-builds.com/guides/agent-github-repos-7/"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:005",
+      "title": "잔고가 0이 되면 스스로 멈추는 AI 에이전트 오토마톤 설치법 · 게으른 빌더",
+      "url": "https://lazyowen.com/guides/automaton-self-funding-ai-agent",
+      "final_url": "https://lazyowen.com/guides/automaton-self-funding-ai-agent",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_GUIDE__COST_AND_RUNTIME_CLAIMS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "COST",
+        "ORCHESTRATION",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Reusable budget-governance pattern: record spend, enforce daily/task limits and maximum iterations, ask before crossing the boundary, and route cheaper work only where quality gates allow.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-COST-GUARD-AS-CODE",
+          "insight": "For autonomous AI execution, encode cost limits, iteration limits and stop/approval conditions in enforceable state or code rather than relying on a vague prompt to spend less."
+        },
+        {
+          "learning_id": "AI-LRN-BUDGET-AWARE-MODEL-TIERING",
+          "insight": "Use expensive models for judgment-heavy stages and cheaper paths for mechanical work only when quality gates allow it; approaching budget is a routing signal, not permission to skip verification."
+        },
+        {
+          "learning_id": "AI-LRN-SENSITIVE-AGENT-ISOLATION",
+          "insight": "High-risk autonomous agents and credential-bearing flows should be tested in isolated scope with irreversible actions excluded until explicitly approved."
+        }
+      ],
+      "content_hash": "7252911313517436863060702d6d534d7f41ecb30199da7ee39d0d3340558fe3",
+      "evidence": {
+        "capture_sha256": "7252911313517436863060702d6d534d7f41ecb30199da7ee39d0d3340558fe3",
+        "block_fingerprint": null,
+        "text_chars": 11585,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\07_잔고가 0이 되면 스스로 멈추는 AI 에이전트 오토마톤 설치법 · 게으른 빌더.txt",
+        "http_status": 200,
+        "final_url": "https://lazyowen.com/guides/automaton-self-funding-ai-agent"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:006",
+      "title": "바이브코딩으로 거덜나기 싫으면 주목! 내 토큰을 지켜줄 5가지",
+      "url": "https://maily.so/halinote/posts/8mo56yg1r9p",
+      "final_url": "https://maily.so/halinote/posts/8mo56yg1r9p",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_USAGE_GUIDE__SAVINGS_CLAIMS_REQUIRE_MEASUREMENT",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "COST",
+        "ORCHESTRATION",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Cost waste has multiple causes: oversized input, excess generated output, broad retrieval and repeated context reconstruction. Choose interventions by the measured bottleneck and include tool overhead.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-COST-BOTTLENECK-BEFORE-OPTIMIZATION",
+          "insight": "Measure whether cost is dominated by input size, output volume, broad retrieval or repeated context reconstruction before choosing an optimization tool."
+        },
+        {
+          "learning_id": "AI-LRN-TOOL-OVERHEAD-CAN-NEGATE-SAVINGS",
+          "insight": "A cost-saving AI tool can add its own processing overhead; validate net savings on representative tasks before making it a default."
+        }
+      ],
+      "content_hash": "9a369f282bc383ea65def74e430839f00ce6cc4962a5f524b6dca3195211a484",
+      "evidence": {
+        "capture_sha256": "9a369f282bc383ea65def74e430839f00ce6cc4962a5f524b6dca3195211a484",
+        "block_fingerprint": null,
+        "text_chars": 14142,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\08_바이브코딩으로 거덜나기 싫으면 주목! 내 토큰을 지켜줄 5가지.txt",
+        "http_status": 200,
+        "final_url": "https://maily.so/halinote/posts/8mo56yg1r9p"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:007",
+      "title": "딸깍으로 시작하는 Codex PC 실전 명령어 25선",
+      "url": "https://codex-pc-guide.inhouseai.chatgpt.site/",
+      "final_url": "https://codex-pc-guide.inhouseai.chatgpt.site/",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_OPERATION_GUIDE__OFFICIAL_CAPABILITY_FACTS_REQUIRE_FRESH_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "ORCHESTRATION",
+        "SECURITY",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Safe computer-use pattern: read-only diagnosis, explicit change plan, approval for destructive or sensitive operations, bounded execution, before/after verification and rollback evidence; prefer metadata-first inspection.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-SAFE-COMPUTER-USE-SEQUENCE",
+          "insight": "For computer-use work, default to read-only diagnosis, proposed changes, explicit approval for sensitive actions, bounded execution, observable verification and rollback record."
+        },
+        {
+          "learning_id": "AI-LRN-METADATA-FIRST-FILE-DIAGNOSIS",
+          "insight": "When diagnosing file or storage problems, use path, size, dates and hashes before opening private content unless content inspection is necessary."
+        }
+      ],
+      "content_hash": "25287d06fb32dd7f668e80f96ceed1e6d0cca43d3eb33c0c364d818e73158827",
+      "evidence": {
+        "capture_sha256": "25287d06fb32dd7f668e80f96ceed1e6d0cca43d3eb33c0c364d818e73158827",
+        "block_fingerprint": null,
+        "text_chars": 8944,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\09_딸깍으로 시작하는 Codex PC 실전 명령어 25선.txt",
+        "http_status": 200,
+        "final_url": "https://codex-pc-guide.inhouseai.chatgpt.site/"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:008",
+      "title": "에이전트 스킬, 이 15개는 챙겨두세요 | Notion",
+      "url": "https://app.notion.com/p/15-3d71061c8a638033a4a0cbdc7a55e8de",
+      "final_url": "https://app.notion.com/p/15-3d71061c8a638033a4a0cbdc7a55e8de",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PARTIAL_SECONDARY_CATALOG__UPSTREAM_REPO_VERIFICATION_REQUIRED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Partial catalog of reusable agent skills and repositories. Useful as discovery only; each skill's behavior, safety, license, dependencies and overlap require upstream review.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "f62c43bb161d3c91993fe47e2d3c521f3361df4fdeeda2e584ef1237598d3367",
+      "evidence": {
+        "capture_sha256": "af148e35706e58dd87c5b6e2aa9217bd8429c6bccd04b3ccbaa15908e14c5652",
+        "block_fingerprint": "f62c43bb161d3c91993fe47e2d3c521f3361df4fdeeda2e584ef1237598d3367",
+        "text_chars": 715,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\notion_04.txt",
+        "http_status": 200,
+        "final_url": "https://app.notion.com/p/15-3d71061c8a638033a4a0cbdc7a55e8de"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:009",
+      "title": "Higgsfield MCP | AI Image & Video Generation for Any Agent",
+      "url": "https://higgsfield.ai/mcp",
+      "final_url": "https://higgsfield.ai/mcp",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PRIMARY_VENDOR_AUTHORITY_FOR_OWN_CATALOG_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Vendor-primary evidence that creative capabilities can be packaged as task-level MCP/plugin workflows with editable target applications. It is not independent evidence of quality or suitability.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "df70e44b6fda97a2597df517d33e02aad4f1397fee733631f1d7abed4036e060",
+      "evidence": {
+        "capture_sha256": "df70e44b6fda97a2597df517d33e02aad4f1397fee733631f1d7abed4036e060",
+        "block_fingerprint": null,
+        "text_chars": 8457,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\12_Higgsfield MCP _ AI Image & Video Generation for Any Agent.txt",
+        "http_status": 200,
+        "final_url": "https://higgsfield.ai/mcp"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:010",
+      "title": "chat gpt 챗 / 프로젝트 / 예약 / 플러그인 / GPTs / 워크 차이 알아보기. [초보자용 가이드] : 스스로마케팅연구소 칼럼모음 l 온라인마케팅자료 · 온라인마케팅교육 · 온라인마케팅공부",
+      "url": "https://selfmarketinglab.com/marketing-column/?bmode=view&idx=173206237",
+      "final_url": "https://selfmarketinglab.com/marketing-column/?bmode=view&idx=173206237",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PRODUCT_GUIDE__ALL_PRODUCT_FACTS_REQUIRE_FRESH_OFFICIAL_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "Useful conceptual routing model: distinguish immediate conversation, persistent context, scheduled or monitoring work, external capability connections, reusable role configuration and multi-step execution.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-SURFACE-SELECTION-BY-JOB-DIMENSION",
+          "insight": "Route AI work by job dimension—immediacy, persistent context, future recurrence or monitoring, external capabilities, reusable role configuration and multi-step execution—instead of forcing every task through one surface."
+        }
+      ],
+      "content_hash": "0338748896947dee7f0ae3b8b0caeeb6616dd6a2b37ef77fa183b95de37efb12",
+      "evidence": {
+        "capture_sha256": "0338748896947dee7f0ae3b8b0caeeb6616dd6a2b37ef77fa183b95de37efb12",
+        "block_fingerprint": null,
+        "text_chars": 9677,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\13_chat gpt 챗 _ 프로젝트 _ 예약 _ 플러그인 _ GPTs _ 워크 차이 알아보기. [초보자용 가이드] _ 스스로마케팅연구소 칼럼모음 l.txt",
+        "http_status": 200,
+        "final_url": "https://selfmarketinglab.com/marketing-column/?bmode=view&idx=173206237"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P0:011",
+      "title": "바이브코딩 5탄 — 토큰 없이 슬라이드 고치는 법 | 보라쌤",
+      "url": "https://bora-promo.web.app/promo/guide/vibe5.html",
+      "final_url": "https://bora-promo.web.app/promo/guide/vibe5.html",
+      "source_family": "AI_P0_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_IMPLEMENTATION_PATTERN__LOCAL_BROWSER_BEHAVIOR_REQUIRES_TESTING",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "COST",
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "ai_orchestration"
+      ],
+      "controlled_terms": [
+        "P0_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against upstream or official sources before execution or policy use."
+      ],
+      "claims_to_exclude": [
+        "Do not treat creator performance claims, current pricing, popularity counts or plan availability as canonical without fresh verification."
+      ],
+      "value_statement": "For small post-generation edits, a local edit layer can avoid repeated model calls while preserving undo, reversibility and local persistence; local overlay state must be clearly distinguished from canonical source.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-LOCAL-EDIT-BEFORE-REGENERATION",
+          "insight": "For small artifact corrections, prefer a bounded local edit and undo layer over regenerating the whole artifact when fidelity and cost benefit; distinguish local overlay state from canonical source."
+        }
+      ],
+      "content_hash": "c6b1a41c2efff7d433229a6d0f36ffbc944cabf138fbee7a012966f104f157d8",
+      "evidence": {
+        "capture_sha256": "c6b1a41c2efff7d433229a6d0f36ffbc944cabf138fbee7a012966f104f157d8",
+        "block_fingerprint": null,
+        "text_chars": 2444,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p0\\14_바이브코딩 5탄 — 토큰 없이 슬라이드 고치는 법 _ 보라쌤.txt",
+        "http_status": 200,
+        "final_url": "https://bora-promo.web.app/promo/guide/vibe5.html"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:001",
+      "title": "우리 아이 AI교육 뭐부터? EBS 무료강의 로드맵 자료나눔 : 네이버 블로그",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=mongglee17&logNo=224416500124",
+      "final_url": "https://m.blog.naver.com/PostView.naver?blogId=mongglee17&logNo=224416500124",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_EDUCATION_GUIDE__EBS_COURSE_FACTS_REQUIRE_PRIMARY_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "AI_EDUCATION",
+        "LEARNING"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "AI literacy should include understanding what AI is, checking whether an answer is correct, and using it to form one's own thinking; progression should be adapted to learner level rather than teaching tools first.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+          "insight": "AI education should prioritize understanding, answer-checking and independent thought before speed with tools."
+        },
+        {
+          "learning_id": "AI-LRN-LEVEL-ADAPTIVE-AI-LEARNING",
+          "insight": "AI learning sequences should adapt concepts, practice and tools to learner level rather than expose every learner to the same path."
+        }
+      ],
+      "content_hash": "8645af57137f880b47e932101a503b424cc94adb44874391c44577483a722eba",
+      "evidence": {
+        "text_chars": 2238,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\02_우리 아이 AI교육 뭐부터_ EBS 무료강의 로드맵 자료나눔 _ 네이버 블로그.txt",
+        "capture_sha256": "8645af57137f880b47e932101a503b424cc94adb44874391c44577483a722eba",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:002",
+      "title": "클로드가 만든 화면에서 'AI 티' 걷어내는 무료 레포 5개 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/claude-design-free-repos-5/",
+      "final_url": "https://sdk-kim-builds.com/guides/claude-design-free-repos-5/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_DESIGN_TOOL_GUIDE__UPSTREAM_TOOL_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "DESIGN",
+        "DESIGN_GATE"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Generic 'make it pretty' instructions tend to produce common patterns; explicit taste constraints, references, design rules and visual review create a stronger design control surface.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-DESIGN-TASTE-AS-EXPLICIT-CONSTRAINT",
+          "insight": "For AI-generated UI, encode taste, references, forbidden clichés and design rules explicitly instead of relying on vague aesthetic adjectives."
+        },
+        {
+          "learning_id": "AI-LRN-DESIGN-REFERENCE-PLUS-REVIEW",
+          "insight": "Design generation should pair an explicit reference/design source with visual inspection; a design skill alone is not final proof of fidelity."
+        }
+      ],
+      "content_hash": "dcac2703e893fe506ee2b657a8981c7f502a06fad8e18477dbb6a9be92336969",
+      "evidence": {
+        "text_chars": 6313,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\03_클로드가 만든 화면에서 'AI 티' 걷어내는 무료 레포 5개 _ 낭만빌더 김스듴.txt",
+        "capture_sha256": "dcac2703e893fe506ee2b657a8981c7f502a06fad8e18477dbb6a9be92336969",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:003",
+      "title": "클로드에게 절대 안 잊는 두 번째 뇌 붙이기 · 게으른 빌더",
+      "url": "https://lazyowen.com/guides/claude-notebooklm-second-brain",
+      "final_url": "https://lazyowen.com/guides/claude-notebooklm-second-brain",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_MEMORY_GUIDE__NOTEBOOKLM_ADOPTION_NOT_AUTHORIZED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "MEMORY",
+        "CONTEXT"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "The reusable memory pattern is capture at a deliberate boundary, store outside the ephemeral chat, and retrieve only relevant context next time. This does not authorize NotebookLM adoption.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-MEMORY-CAPTURE-STORE-RETRIEVE",
+          "insight": "Long-running AI work benefits from an explicit memory lifecycle: capture important state at a boundary, store it durably, and retrieve only relevant context later."
+        },
+        {
+          "learning_id": "AI-LRN-MEMORY-TOOL-IS-SEPARATE-FROM-MEMORY-PATTERN",
+          "insight": "A useful memory pattern does not justify a specific memory product; tool adoption remains a separate necessity, privacy and overlap decision."
+        }
+      ],
+      "content_hash": "e1fe2e6612187fbd12c0dcf3365da6108b5f625d9e7ba4084f634b353f04e85c",
+      "evidence": {
+        "text_chars": 8419,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\07_클로드에게 절대 안 잊는 두 번째 뇌 붙이기 · 게으른 빌더.txt",
+        "capture_sha256": "e1fe2e6612187fbd12c0dcf3365da6108b5f625d9e7ba4084f634b353f04e85c",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:004",
+      "title": "엔비디아가 무료로 푼 AI 100개, 어디서 어떻게 시작하나 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/nvidia-free-ai-models-100/",
+      "final_url": "https://sdk-kim-builds.com/guides/nvidia-free-ai-models-100/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_MODEL_CATALOG__AVAILABILITY_AND_FREE_TIER_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "MODEL",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "MODEL_CATALOG"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Model catalogs are discovery material only. Model availability, free tiers, quotas, licenses and task suitability require fresh primary-source verification before routing or adoption.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "e4e17bbb936b19a62a26d41e5ce47d1e8d2b855ac62a5e179e43008ef5bd027a",
+      "evidence": {
+        "text_chars": 4656,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\08_엔비디아가 무료로 푼 AI 100개, 어디서 어떻게 시작하나 _ 낭만빌더 김스듴.txt",
+        "capture_sha256": "e4e17bbb936b19a62a26d41e5ce47d1e8d2b855ac62a5e179e43008ef5bd027a",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:005",
+      "title": "Claude 웹디자인 퀄리티를 확 올리는 전체 셋업 가이드 | 낭만빌더 김스듴",
+      "url": "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+      "final_url": "https://sdk-kim-builds.com/guides/claude-web-design-skills-setup/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_DESIGN_PIPELINE_GUIDE__UPSTREAM_TOOL_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "DESIGN",
+        "DESIGN_GATE"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "High-fidelity AI web design is a pipeline problem: encode design intent, connect the design source when relevant, render the actual page, inspect the result, then correct visible mismatch.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-DESIGN-PIPELINE-NOT-PROMPT-ONLY",
+          "insight": "High-fidelity UI generation should be treated as a pipeline of design intent/source → implementation → rendered inspection → correction, not as a one-prompt task."
+        }
+      ],
+      "content_hash": "13e33893c443df57f6fee5221494477c127c3dbc777fdb3ab8888988310bbabc",
+      "evidence": {
+        "text_chars": 10589,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\09_Claude 웹디자인 퀄리티를 확 올리는 전체 셋업 가이드 _ 낭만빌더 김스듴.txt",
+        "capture_sha256": "13e33893c443df57f6fee5221494477c127c3dbc777fdb3ab8888988310bbabc",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:006",
+      "title": "GPT-6 Astra 프롬프트 작성법 — BAD vs GOOD | Notion",
+      "url": "https://app.notion.com/p/GPT-6-Astra-BAD-vs-GOOD-3d9bdeae366f814d8378e33c4bc6e181",
+      "final_url": "https://app.notion.com/p/GPT-6-Astra-BAD-vs-GOOD-3d9bdeae366f814d8378e33c4bc6e181",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PROMPT_GUIDE__MODEL_SPECIFIC_CLAIMS_REQUIRE_OFFICIAL_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Skill and prompt descriptions should keep the role compact, make trigger/use conditions specific, and avoid broad or overlapping triggers that can summon irrelevant behavior.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-SPECIFIC-TRIGGERS-OVER-BROAD-SKILLS",
+          "insight": "Reusable skills and prompt rules should have narrow, explicit trigger conditions; broad or overlapping triggers increase irrelevant tool/skill activation."
+        },
+        {
+          "learning_id": "AI-LRN-PROMPT-ROLE-SHORT-CONTEXT-SPECIFIC",
+          "insight": "Keep reusable role descriptions compact and put specificity into task context, constraints and success criteria rather than verbose background."
+        }
+      ],
+      "content_hash": "86ca536a971851cedae554d45a75ff3fda3089a0f085a14cf177577f03196c8f",
+      "evidence": {
+        "text_chars": 3308,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_05.txt",
+        "capture_sha256": "c7aff2021401d91d0fe05e934fa578b6c9449e7a4f0fc2c198caad87ddde9be8",
+        "block_fingerprint": "86ca536a971851cedae554d45a75ff3fda3089a0f085a14cf177577f03196c8f"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:007",
+      "title": "바이브코딩 필수 용어사전 — 완전판",
+      "url": "https://vibev.netlify.app/",
+      "final_url": "https://vibev.netlify.app/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_GLOSSARY__TERM_DEFINITIONS_REQUIRE_UPSTREAM_CHECK_WHEN_OPERATIONAL",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "GLOSSARY",
+        "VIBE_CODING"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Broad glossary and discovery reference for AI tooling, web technology, MCP, agents, deployment and Git. Use for terminology discovery, not as operational authority.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "a4938c28da7bfa67b0f4c825eb06df1b2edb4172d8d6cb7627fb28314985b8d0",
+      "evidence": {
+        "text_chars": 67869,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\12_바이브코딩 필수 용어사전 — 완전판.txt",
+        "capture_sha256": "a4938c28da7bfa67b0f4c825eb06df1b2edb4172d8d6cb7627fb28314985b8d0",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:008",
+      "title": "GPT, 클로드 답변 퀄리티 10배 높이는 방법",
+      "url": "https://morning-yellowhorn-4d1.notion.site/GPT-10-3d20ad91d3c5804fa0e9eafde65f0d86",
+      "final_url": "https://morning-yellowhorn-4d1.notion.site/GPT-10-3d20ad91d3c5804fa0e9eafde65f0d86",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PROMPT_GUIDE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Prompt quality improves when the user, evaluation dimensions, bounded length, excluded jargon and desired action are explicit rather than expressed as vague tone words.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-PROMPT-EVALUATION-DIMENSIONS",
+          "insight": "Replace vague requests such as 'improve this' with explicit evaluation dimensions and success criteria."
+        },
+        {
+          "learning_id": "AI-LRN-PROMPT-AUDIENCE-AND-BOUNDS",
+          "insight": "Specify audience and bounded output constraints when they materially affect what should be preserved or prioritized."
+        }
+      ],
+      "content_hash": "9cf6a3091c8ccf049253bf2b5d190f68eac6d4f881d4ccc939aa7b9660f85629",
+      "evidence": {
+        "text_chars": 2864,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_06.txt",
+        "capture_sha256": "9827b410ed685957a928587e9ddfa08fe21faaf735a9c923022cf70c1985e291",
+        "block_fingerprint": "9cf6a3091c8ccf049253bf2b5d190f68eac6d4f881d4ccc939aa7b9660f85629"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:009",
+      "title": "사진 한 장으로 만드는 말랑콩떡 피규어 프롬프트 공유 : 네이버 블로그",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=ai_newceo&logNo=224398368377",
+      "final_url": "https://m.blog.naver.com/PostView.naver?blogId=ai_newceo&logNo=224398368377",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_IMAGE_PROMPT_EXAMPLE__MODEL_BEHAVIOR_NOT_GENERALIZED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "IMAGE_GENERATION"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Single-use image prompt example. Preserve as a domain reference; do not promote stylistic/model behavior claims to general policy.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "84d3d7f6b98facaea38c81666d69e945b1a1bd04abb1fd77bf51390c74b2833c",
+      "evidence": {
+        "text_chars": 2396,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\17_사진 한 장으로 만드는 말랑콩떡 피규어 프롬프트 공유 _ 네이버 블로그.txt",
+        "capture_sha256": "84d3d7f6b98facaea38c81666d69e945b1a1bd04abb1fd77bf51390c74b2833c",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:010",
+      "title": "클로드 업무 사례 3편 — 개인·교육·비영리편 36개 | ADU",
+      "url": "https://adu-usecases-3.vercel.app/",
+      "final_url": "https://adu-usecases-3.vercel.app/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_USE_CASE_CATALOG__PRODUCT_SURFACE_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "EDUCATION"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Use-case catalog for personal, education and nonprofit workflows. Examples are discovery material; product-surface availability requires fresh verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "edfbf86b46f8c53b02dabeb7d051224057bf3e0e0668ccebfa35af60fb6133ae",
+      "evidence": {
+        "text_chars": 8533,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\18_클로드 업무 사례 3편 — 개인·교육·비영리편 36개 _ ADU.txt",
+        "capture_sha256": "edfbf86b46f8c53b02dabeb7d051224057bf3e0e0668ccebfa35af60fb6133ae",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:011",
+      "title": "클로드 업무 사례 2편 — 직무 실무편 64개 | ADU",
+      "url": "https://adu-usecases-2.vercel.app/",
+      "final_url": "https://adu-usecases-2.vercel.app/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_USE_CASE_CATALOG__PRODUCT_SURFACE_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "WORK"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Use-case catalog for professional workflows. Examples are discovery material; product-surface availability requires fresh verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "634f9ae31d10c9e498019975bb23d4a195d76338f4b7f9e75691ca72b9c179df",
+      "evidence": {
+        "text_chars": 14380,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\19_클로드 업무 사례 2편 — 직무 실무편 64개 _ ADU.txt",
+        "capture_sha256": "634f9ae31d10c9e498019975bb23d4a195d76338f4b7f9e75691ca72b9c179df",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:012",
+      "title": "클로드 업무 사례 1편 — 사무직 공통편 48개 | ADU",
+      "url": "https://adu-usecases-1.vercel.app/",
+      "final_url": "https://adu-usecases-1.vercel.app/",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_USE_CASE_CATALOG__PRODUCT_SURFACE_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "WORK"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Use-case catalog for common office workflows. Examples are discovery material; product-surface availability requires fresh verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "387480382995e7660f71160a67e5e911bbbefdc5fa0ab019662964c53846b1d4",
+      "evidence": {
+        "text_chars": 12325,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\20_클로드 업무 사례 1편 — 사무직 공통편 48개 _ ADU.txt",
+        "capture_sha256": "387480382995e7660f71160a67e5e911bbbefdc5fa0ab019662964c53846b1d4",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:013",
+      "title": "바이브코딩 3탄 — 제가 겪은 시행착오 | 보라쌤",
+      "url": "https://bora-promo.web.app/promo/guide/vibe3.html",
+      "final_url": "https://bora-promo.web.app/promo/guide/vibe3.html",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_EXPERIENCE_REPORT",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "VIBE_CODING",
+        "UI"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Delegating a bounded goal can reduce conversational overhead, but the human still needs to inspect the result; explicit scope-freeze language helps prevent unrelated changes.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-BOUNDED-GOAL-PLUS-SCOPE-FREEZE",
+          "insight": "When delegating a broad repair, define the target outcome and explicitly freeze unrelated areas; inspect the rendered result rather than assuming one-pass success."
+        }
+      ],
+      "content_hash": "1b03912f7465ea9ab7bae311435891a03e275eed6456f8d9cc8327bb3acd54d0",
+      "evidence": {
+        "text_chars": 1104,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\25_바이브코딩 3탄 — 제가 겪은 시행착오 _ 보라쌤.txt",
+        "capture_sha256": "1b03912f7465ea9ab7bae311435891a03e275eed6456f8d9cc8327bb3acd54d0",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:014",
+      "title": "AI로 만든 사이트, 진짜 주소로 올리기 — 보라쌤",
+      "url": "https://bora-promo.web.app/promo/guide/deploy.html",
+      "final_url": "https://bora-promo.web.app/promo/guide/deploy.html",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_BEGINNER_DEPLOY_GUIDE__CURRENT_PLATFORM_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "DEPLOYMENT",
+        "VIBE_CODING"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Beginner deployment workflow reference. Platform steps and free-tier claims are time-sensitive and must not override TAKY deployment gates.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "cdb86af2f1ea430c847dbd030d704c93e63b9113948d7d40760e6a3b9a328544",
+      "evidence": {
+        "text_chars": 2280,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\26_AI로 만든 사이트, 진짜 주소로 올리기 — 보라쌤.txt",
+        "capture_sha256": "cdb86af2f1ea430c847dbd030d704c93e63b9113948d7d40760e6a3b9a328544",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:015",
+      "title": "바이브코딩 4탄 — 저처럼 수업 자료 만드는 법 | 보라쌤",
+      "url": "https://bora-promo.web.app/promo/guide/vibe4.html",
+      "final_url": "https://bora-promo.web.app/promo/guide/vibe4.html",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_ARTIFACT_WORKFLOW_GUIDE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "ARTIFACT_TRANSFORMATION",
+        "EDUCATION"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "When transforming an existing artifact, preserving the user's source material and moving it into a better execution format can outperform regenerating the content from scratch.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE",
+          "insight": "For artifact migration, prefer transforming approved existing content/assets into the target format before recreating them; preserve source fidelity unless change is requested."
+        }
+      ],
+      "content_hash": "bf8b2c24ced218db18e47e2d177ccacdf75998fc9510458db2e8c3fdbc400cfa",
+      "evidence": {
+        "text_chars": 1821,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\27_바이브코딩 4탄 — 저처럼 수업 자료 만드는 법 _ 보라쌤.txt",
+        "capture_sha256": "bf8b2c24ced218db18e47e2d177ccacdf75998fc9510458db2e8c3fdbc400cfa",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:016",
+      "title": "Chat GPT 10 배 더 잘 쓰는 방법",
+      "url": "https://waiting-drug-536.notion.site/Chat-GPT-10-3abd86104de28094953cf9dccbaedae9",
+      "final_url": "https://waiting-drug-536.notion.site/Chat-GPT-10-3abd86104de28094953cf9dccbaedae9",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_AI_GUIDE__MODEL_NAMES_ROUTING_AND_PRODUCT_FACTS_UNVERIFIED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "MODEL",
+        "COST",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Contains mixed generic advice and time-sensitive model/product claims. Keep as reference-only until model names, capabilities and routing guidance are verified from current primary sources.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "438f265409d63d2b89d8cc05a8ca3dd8d26b929f0fed0c06a09cab2f1c569bb8",
+      "evidence": {
+        "text_chars": 1368,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_14.txt",
+        "capture_sha256": "e945340f01c1b8a9c42eaf06f0bf95b41563ee9a9e6c03e4155d0129b7c0f6a6",
+        "block_fingerprint": "438f265409d63d2b89d8cc05a8ca3dd8d26b929f0fed0c06a09cab2f1c569bb8"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:017",
+      "title": "ChatGPT 공부 명령어 4개: 요약부터 퀴즈까지 25분 · 게으른 빌더",
+      "url": "https://lazyowen.com/guides/chagpt-4commands-study",
+      "final_url": "https://lazyowen.com/guides/chagpt-4commands-study",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "THIRD_PARTY_STUDY_WORKFLOW_GUIDE__PRODUCT_SURFACE_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "PROMPT",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "LEARNING",
+        "STUDY"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "A learning workflow should move from passive representations toward active retrieval: concise summary, structural map, recall cards/questions and integrated mental model, then spaced reuse.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-STUDY-PASSIVE-TO-ACTIVE-RETRIEVAL",
+          "insight": "AI study support should not stop at explanation; add retrieval practice and learner response so understanding is tested rather than merely displayed."
+        },
+        {
+          "learning_id": "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING",
+          "insight": "Use complementary representations—summary, structure map, recall questions/cards and integrated overview—when they serve distinct learning functions, not as decorative duplication."
+        }
+      ],
+      "content_hash": "244ebff074445ca0a1237a044522fb6a3128c1da049ea0483e652a493a892aa8",
+      "evidence": {
+        "text_chars": 8031,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\31_ChatGPT 공부 명령어 4개_ 요약부터 퀴즈까지 25분 · 게으른 빌더.txt",
+        "capture_sha256": "244ebff074445ca0a1237a044522fb6a3128c1da049ea0483e652a493a892aa8",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:018",
+      "title": "인공지능으로 To Do List 만들기 성공 :D _feat. Cursor AI (커서 AI) : 네이버 블로그",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=lunaele&logNo=223855588003",
+      "final_url": "https://m.blog.naver.com/PostView.naver?blogId=lunaele&logNo=223855588003",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PERSONAL_EXPERIENCE_REPORT",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "VIBE_CODING",
+        "PERSONAL_PRODUCTIVITY"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Personal experience report about building a small tool with AI. Preserve as anecdotal discovery evidence only.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "9dc63beb384c2594ed90289a99ace976f0624413d9e59b6da579323127f9dcf7",
+      "evidence": {
+        "text_chars": 2108,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\32_인공지능으로 To Do List 만들기 성공 _D _feat. Cursor AI (커서 AI) _ 네이버 블로그.txt",
+        "capture_sha256": "9dc63beb384c2594ed90289a99ace976f0624413d9e59b6da579323127f9dcf7",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:019",
+      "title": "투두리와 AI. 퍼스널 랜반 투두리(toodoori)를 AI와 함께 만드는 과정을… | 작성자: 이문기 | 중간",
+      "url": "https://medium.com/@junep/toodoori%EC%99%80-ai-42d951fcb034",
+      "final_url": "https://medium.com/@junep/toodoori%EC%99%80-ai-42d951fcb034",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PERSONAL_PRODUCT_BUILD_LOG",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PRODUCT_DESIGN",
+        "PERSONAL_PRODUCTIVITY"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Product-build narrative showing iterative AI-assisted development around a concrete personal workflow. Useful as a case study, not authority for TAKY architecture.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "814e0483e0ad6c7673ca4ac15f664d148b487fb8e7f8685e3431b54c2598fb61",
+      "evidence": {
+        "text_chars": 7019,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_17.txt",
+        "capture_sha256": "9de4c4ebaec7ef46909f17c13aec763ea7f9ec871dba177c7f6bb04e975b72e1",
+        "block_fingerprint": "814e0483e0ad6c7673ca4ac15f664d148b487fb8e7f8685e3431b54c2598fb61"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:020",
+      "title": "나만의 AI 직원 200명을 만들어보기!",
+      "url": "https://neat-product-c0f.notion.site/AI-200-35f19ffaaaf180b0a7fcfcca6ccaf264",
+      "final_url": "https://neat-product-c0f.notion.site/AI-200-35f19ffaaaf180b0a7fcfcca6ccaf264",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_AGENT_PERSONA_GUIDE__UPSTREAM_REPOSITORY_REQUIRED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "PROMPT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "PERSONA_LIBRARY",
+        "AGENT_CATALOG"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "The referenced 'AI employees' are primarily reusable role/persona instruction files, not proof of autonomous employees. Treat persona libraries separately from agent autonomy.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-PERSONA-LIBRARY-IS-NOT-AUTONOMOUS-AGENT",
+          "insight": "A library of role/persona instruction files is not evidence of autonomous agents; distinguish prompt personas from tools, memory, planning, actions and runtime autonomy."
+        }
+      ],
+      "content_hash": "d91a66b18b563d9c409ca3443aa42faa99b76a4e64efb0cecd63f3f8fd71a73a",
+      "evidence": {
+        "text_chars": 2756,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_21.txt",
+        "capture_sha256": "02a495ca6bf89b6bc3a56a3fc624baee8d60c051e67a1d135258593e2215eded",
+        "block_fingerprint": "d91a66b18b563d9c409ca3443aa42faa99b76a4e64efb0cecd63f3f8fd71a73a"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:021",
+      "title": "웬만한 유료 강의보다 AI를 더 잘 가르쳐주는 필수 저장 유튜브 채널 10",
+      "url": "https://kimminwook.notion.site/AI-10-3bc8c53193a780ce96b9dce916aed212",
+      "final_url": "https://kimminwook.notion.site/AI-10-3bc8c53193a780ce96b9dce916aed212",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_CURATED_CHANNEL_LIST__DISCOVERY_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "SOURCE_ACQUISITION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "LEARNING_RESOURCES"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Curated learning-source list. Keep as discovery material; individual channel claims and recommendations require separate evaluation.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "59f998a5961cdda6c7ba9c32209e3b0651f37d2ff196b377209f624d183fd44a",
+      "evidence": {
+        "text_chars": 2340,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_25.txt",
+        "capture_sha256": "267a67c03ab93be613a63220764d98a34f76220de55303f8022e502cb021deb8",
+        "block_fingerprint": "59f998a5961cdda6c7ba9c32209e3b0651f37d2ff196b377209f624d183fd44a"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:022",
+      "title": "Claude Academy",
+      "url": "https://academy.claude.com/ko",
+      "final_url": "https://academy.claude.com/ko",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PRIMARY_VENDOR_AUTHORITY_FOR_OWN_EDUCATION_FRAMEWORK",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "AI_FLUENCY",
+        "PRIMARY_VENDOR_EDUCATION"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Anthropic's own education material emphasizes delegation, description, discernment and responsibility, alongside accurate mental models of AI capabilities and limits.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+          "insight": "AI fluency is not only delegation; it also requires clear description, discernment of outputs/limits and human responsibility for the result."
+        },
+        {
+          "learning_id": "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+          "insight": "Teach and operate AI with an explicit mental model of capabilities and limits so routing, verification and human oversight match the task."
+        }
+      ],
+      "content_hash": "d0bc4bc5e6d9926caa3bfec7a3db2faf1ec0a48c7f6c43f76a80d4dd1f4a0031",
+      "evidence": {
+        "text_chars": 1332,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_26.txt",
+        "capture_sha256": "5e95bffb54533cd90666e3e0355af96d32059f9e202312ad209d0c772372540c",
+        "block_fingerprint": "d0bc4bc5e6d9926caa3bfec7a3db2faf1ec0a48c7f6c43f76a80d4dd1f4a0031"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:023",
+      "title": "SNS 콘텐츠 마케팅 AI | Mirr - 기획부터 발행·관리까지",
+      "url": "https://www.mirra.my/ko",
+      "final_url": "https://www.mirra.my/ko",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "PRIMARY_VENDOR_AUTHORITY_FOR_OWN_PRODUCT_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "MARKETING",
+        "VENDOR_PRODUCT"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Vendor product reference for an end-to-end content marketing workflow. Product claims are first-party and not independent evidence of effectiveness.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "c04e73d10986119da7a47c65187840226bdb9f7169db52c3aed2c896ba2fed16",
+      "evidence": {
+        "text_chars": 3511,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\44_SNS 콘텐츠 마케팅 AI _ Mirr - 기획부터 발행·관리까지.txt",
+        "capture_sha256": "c04e73d10986119da7a47c65187840226bdb9f7169db52c3aed2c896ba2fed16",
+        "block_fingerprint": null
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:P1:024",
+      "title": "코덱스 & 클로드 스킬 TOP 5 + 설치 방법 총정리 | Notion",
+      "url": "https://app.notion.com/p/TOP-5-3bb1061c8a6381dbbca6e198ed57c496",
+      "final_url": "https://app.notion.com/p/TOP-5-3bb1061c8a6381dbbca6e198ed57c496",
+      "source_family": "AI_P1_REMINED_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_SKILL_CATALOG__UPSTREAM_IDENTITY_AND_COMPATIBILITY_REQUIRED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "NEW_AI_PROJECTION_SOURCE",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "SKILL_CATALOG"
+      ],
+      "controlled_terms": [
+        "P1_REMINED",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product/tool facts against primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator performance claims, popularity counts, pricing, availability or compatibility without fresh verification."
+      ],
+      "value_statement": "Cross-tool skill catalog and installation summary. Preserve as discovery reference only until each skill's repository identity, compatibility, permissions and runtime behavior are verified.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "d701f895faefc695a7842482a6f6ef48f9d9c1fd16e8b40e09d7fdc5ebb5a734",
+      "evidence": {
+        "text_chars": 1967,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261005\\p1\\notion_29.txt",
+        "capture_sha256": "475fa02d553032350689d23e24ad25844ecaf5d956af8029ae8491f750f6d1c2",
+        "block_fingerprint": "d701f895faefc695a7842482a6f6ef48f9d9c1fd16e8b40e09d7fdc5ebb5a734"
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:001",
+      "title": "AI 둘을 붙여 한 팀으로 — 화면은 페이블, 생각은 아스트라",
+      "url": "https://wandering-mile-86e.notion.site/AI-3de98dec8eed819e914af3413a1dcb36",
+      "final_url": "https://wandering-mile-86e.notion.site/AI-3de98dec8eed819e914af3413a1dcb36",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_INTEGRATION_GUIDE__PRODUCT_CAPABILITIES_REQUIRE_PRIMARY_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "FRONTEND_BACKEND_SPLIT",
+        "MULTI_MODEL"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "A user-facing interaction surface and a reasoning/model backend can be separated and connected through an explicit bridge; product-specific claims remain unverified.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-INTERFACE-REASONING-SEPARATION",
+          "insight": "Separate the user interaction surface from the reasoning/model backend when that improves fit; define an explicit bridge rather than assuming two AI products integrate automatically."
+        }
+      ],
+      "content_hash": "08e665ae776f6f8ee00034da4e7b14f0a3ccb554fef3d3444bc0cfc3bd8085f2",
+      "evidence": {
+        "text_chars": 5744,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\02_3de98dec-8eed-819e-914a-f3413a1dcb36.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "08e665ae776f6f8ee00034da4e7b14f0a3ccb554fef3d3444bc0cfc3bd8085f2",
+        "block_count": 108,
+        "response_bytes": 121319
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:002",
+      "title": "[trenddalkak] 인간을 이긴 AI. Prime Agent 주요정리+사용법",
+      "url": "https://cactus-tank-78c.notion.site/trenddalkak-AI-Prime-Agent-3b9fc9a2be958002b0a5c0cbc6663673",
+      "final_url": "https://cactus-tank-78c.notion.site/trenddalkak-AI-Prime-Agent-3b9fc9a2be958002b0a5c0cbc6663673",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_AGENT_PRODUCT_SUMMARY__BENCHMARK_AND_COMPANY_CLAIMS_REQUIRE_PRIMARY_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "AGENT",
+        "MODEL",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "AGENT_PRODUCT",
+        "BENCHMARK_CLAIMS"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Agent/product overview with benchmark and infrastructure claims. Preserve as reference-only; performance and company facts require primary-source verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "2b44ec79ce9bf6b2f675f39aa7b3a2e089947755ce532eca7b711bc3a86bfd1e",
+      "evidence": {
+        "text_chars": 5752,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\03_3b9fc9a2-be95-8002-b0a5-c0cbc6663673.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "2b44ec79ce9bf6b2f675f39aa7b3a2e089947755ce532eca7b711bc3a86bfd1e",
+        "block_count": 108,
+        "response_bytes": 115707
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:003",
+      "title": "Notion | Where teams and agents work together",
+      "url": "https://yeongiu.notion.site/378fec6d90d28070a4cbf33bf8733f02?pvs=149",
+      "final_url": "https://yeongiu.notion.site/378fec6d90d28070a4cbf33bf8733f02?pvs=149",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_RESOURCE_COLLECTION__DISCOVERY_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "SOURCE_ACQUISITION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "CURATED_RESOURCE_COLLECTION"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Curated collection of AI prompts, guides, tools and creator resources. Use only for discovery and follow each child source separately.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "f9a7b89a367dc574973e8233c080333ae2566c1aaafbd4755b5e86487e04a97a",
+      "evidence": {
+        "text_chars": 2014,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\04_378fec6d-90d2-8070-a4cb-f33bf8733f02.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "f9a7b89a367dc574973e8233c080333ae2566c1aaafbd4755b5e86487e04a97a",
+        "block_count": 72,
+        "response_bytes": 308236
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:004",
+      "title": "바이브코딩 앱 UI 용어 정리본 | Notion",
+      "url": "https://app.notion.com/p/UI-3dd063ed09fd80a285b0f4d8e8f0d2ed",
+      "final_url": "https://app.notion.com/p/UI-3dd063ed09fd80a285b0f4d8e8f0d2ed",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_UI_REFERENCE_COLLECTION__PRIMARY_DESIGN_GUIDES_LINKED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "DESIGN",
+        "UI_GLOSSARY"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "UI terminology and reference collection that points to primary design systems and component libraries. Useful for vocabulary/discovery, not as implementation authority.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "9eea11c14df739f22a093a78d5d1db42ba0205e2c766f771e0bd8332e0d74c5c",
+      "evidence": {
+        "text_chars": 3187,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\06_3dd063ed-09fd-80a2-85b0-f4d8e8f0d2ed.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "9eea11c14df739f22a093a78d5d1db42ba0205e2c766f771e0bd8332e0d74c5c",
+        "block_count": 121,
+        "response_bytes": 130838
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:005",
+      "title": "클로드를 웹 외주팀으로 만드는 무료 스킬",
+      "url": "https://sparkly-balance-aea.notion.site/3dbe2f0323f580aa8d29fb86cd384205",
+      "final_url": "https://sparkly-balance-aea.notion.site/3dbe2f0323f580aa8d29fb86cd384205",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_SKILL_BUNDLE_GUIDE__UPSTREAM_IDENTITY_AND_COMPATIBILITY_REQUIRED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "DESIGN",
+        "SKILL_BUNDLE"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Design/frontend skill-bundle guide. Preserve as discovery evidence; each component's repository, permissions, compatibility and runtime behavior require upstream verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "fcafe8358f08c61c41701d4f3a158260b56d570eefc1701f18cd4fac66b6d167",
+      "evidence": {
+        "text_chars": 2006,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\07_3dbe2f03-23f5-80aa-8d29-fb86cd384205.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "fcafe8358f08c61c41701d4f3a158260b56d570eefc1701f18cd4fac66b6d167",
+        "block_count": 84,
+        "response_bytes": 70236
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:006",
+      "title": "내 정보 노출 점검 · 복붙 프롬프트 3",
+      "url": "https://nifty-licorice-663.notion.site/3-3d4fd99f0e5f81368ad2ecc0f8f8aac6",
+      "final_url": "https://nifty-licorice-663.notion.site/3-3d4fd99f0e5f81368ad2ecc0f8f8aac6",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PRIVACY_WORKFLOW_GUIDE__LEGAL_AND_PRODUCT_ACTION_CLAIMS_REQUIRE_PRIMARY_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "WORKFLOW",
+        "TOOL",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "PRIVACY",
+        "HIGH_STAKES"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Privacy-audit workflow example involving discovery, request drafting, user-selected action and later recheck. Legal bases, submission capability and current product behavior require primary verification.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "8797dd79343d8d24869ef56c0b76538ec41f6d5304ef182a383b716f261cd39b",
+      "evidence": {
+        "text_chars": 9705,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\08_3d4fd99f-0e5f-8136-8ad2-ecc0f8f8aac6.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "8797dd79343d8d24869ef56c0b76538ec41f6d5304ef182a383b716f261cd39b",
+        "block_count": 98,
+        "response_bytes": 313480
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:007",
+      "title": "SEO 대행사 없이 내 사이트 최적화 (무료 AI 스킬 설치 가이드)",
+      "url": "https://neat-product-c0f.notion.site/SEO-AI-3d019ffaaaf1814f9a1be8a800a6fe3a",
+      "final_url": "https://neat-product-c0f.notion.site/SEO-AI-3d019ffaaaf1814f9a1be8a800a6fe3a",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_SKILL_GUIDE__UPSTREAM_REPOSITORY_REQUIRED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "SEO",
+        "SKILL_GUIDE"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "SEO skill-installation guide. Keep as discovery/reference only until repository identity, permissions, outputs and compatibility are verified.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "41f739984f1d156426f590127074bdb01702280791f06d79c70a114312890bf1",
+      "evidence": {
+        "text_chars": 2517,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\12_3d019ffa-aaf1-814f-9a1b-e8a800a6fe3a.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "41f739984f1d156426f590127074bdb01702280791f06d79c70a114312890bf1",
+        "block_count": 72,
+        "response_bytes": 92173
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:008",
+      "title": "GPT6 활용가이드 및 비밀코드100개",
+      "url": "https://grand-count-2aa.notion.site/GPT6-100-3d250157ef13803c80faf9e73faa8880",
+      "final_url": "https://grand-count-2aa.notion.site/GPT6-100-3d250157ef13803c80faf9e73faa8880",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PRODUCT_GUIDE__MODEL_PLAN_BENCHMARK_AND_AVAILABILITY_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "MODEL",
+        "PROMPT",
+        "TOOL",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PRODUCT_GUIDE",
+        "PROMPT_MACROS"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Mixed current-product guide, model claims and prompt-code catalog. Keep as reference-only until official product documentation and benchmark sources are freshly verified.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "e97317daacd337f6e0c1a48e671d3ed9f712208d3e57ba507805d55ab5218551",
+      "evidence": {
+        "text_chars": 7196,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\13_3d250157-ef13-803c-80fa-f9e73faa8880.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "e97317daacd337f6e0c1a48e671d3ed9f712208d3e57ba507805d55ab5218551",
+        "block_count": 113,
+        "response_bytes": 123435
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:009",
+      "title": "이번 업데이트로 새로워진 챗GPT 활용법 (세팅 & 활용 가이드)",
+      "url": "https://zircon-yard-378.notion.site/GPT-3b4eaba9e47c8115a875e23ddcecf075",
+      "final_url": "https://zircon-yard-378.notion.site/GPT-3b4eaba9e47c8115a875e23ddcecf075",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_CHATGPT_UPDATE_GUIDE__ALL_PRODUCT_FACTS_REQUIRE_FRESH_OFFICIAL_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "MODEL",
+        "TOOL",
+        "WORKFLOW",
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "PRODUCT_GUIDE"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "ChatGPT update/setup guide. Product availability, dates, surfaces and capabilities are time-sensitive and require current official verification before use.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "136574ecb780507f62836a4487b7a981b884e8f3664dd404572f28f04e7cb97c",
+      "evidence": {
+        "text_chars": 4456,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\15_3b4eaba9-e47c-8115-a875-e23ddcecf075.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "136574ecb780507f62836a4487b7a981b884e8f3664dd404572f28f04e7cb97c",
+        "block_count": 106,
+        "response_bytes": 203450
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:010",
+      "title": "과잉 지정 체크리스트 — 클로드 제작자가 말한 지시 줄이는 법",
+      "url": "https://abounding-helmet-0e4.notion.site/3b073c7b15ad8164b547fb5c92521f44",
+      "final_url": "https://abounding-helmet-0e4.notion.site/3b073c7b15ad8164b547fb5c92521f44",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_INTERVIEW_DERIVED_GUIDE__QUOTED_PRODUCT_CLAIMS_REQUIRE_PRIMARY_SOURCE_CHECK",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "PROMPT_DESIGN",
+        "AGENT_INSTRUCTIONS"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Over-specifying implementation steps can constrain capable agents. Prefer intent, real constraints and success criteria, then allow the executor to choose lower-level steps where safe.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-INTENT-CONSTRAINTS-SUCCESS-OVER-UNNEEDED-STEPS",
+          "insight": "For capable AI executors, specify intent, real constraints and observable success criteria; avoid unnecessary step-by-step implementation instructions that remove useful solution space."
+        },
+        {
+          "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+          "insight": "Periodically review inherited AI instructions and remove scaffolding that no longer protects a real constraint or failure mode; old guidance can become counterproductive as capabilities change."
+        }
+      ],
+      "content_hash": "cbcc50a61e8290eabfd3db4ece8df1dd5aedf8c9eb23d7dd012f1bbd02861b67",
+      "evidence": {
+        "text_chars": 2849,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\16_3b073c7b-15ad-8164-b547-fb5c92521f44.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "cbcc50a61e8290eabfd3db4ece8df1dd5aedf8c9eb23d7dd012f1bbd02861b67",
+        "block_count": 100,
+        "response_bytes": 86797
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:011",
+      "title": "AI 팩폭 관상 리포트 받아보기",
+      "url": "https://neat-product-c0f.notion.site/AI-38219ffaaaf180fbb777ff70234330ed",
+      "final_url": "https://neat-product-c0f.notion.site/AI-38219ffaaaf180fbb777ff70234330ed",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_PROMPT_EXAMPLE__PSEUDOSCIENTIFIC_FACE_INFERENCE_NOT_ACCEPTABLE_AS_FACT",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "IMAGE_ANALYSIS",
+        "UNSUPPORTED_INFERENCE_RISK"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Image-prompt example that asks for physiognomic personality/fortune inference. Preserve only as a risk/reference example; do not treat face-based fortune, personality or aptitude inference as factual.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "3949aa6863e298e12713a2b39760df476894f97d6cb25c4bef32e525ad331140",
+      "evidence": {
+        "text_chars": 3075,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\17_38219ffa-aaf1-80fb-b777-ff70234330ed.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "3949aa6863e298e12713a2b39760df476894f97d6cb25c4bef32e525ad331140",
+        "block_count": 52,
+        "response_bytes": 67487
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:012",
+      "title": "4X4 AI 머리 스타일 제작",
+      "url": "https://neat-product-c0f.notion.site/4X4-AI-2ee19ffaaaf180ea9409cda71f1760df",
+      "final_url": "https://neat-product-c0f.notion.site/4X4-AI-2ee19ffaaaf180ea9409cda71f1760df",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_IMAGE_EDIT_PROMPT_EXAMPLE__MODEL_BEHAVIOR_NOT_GENERALIZED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "IMAGE_EDITING",
+        "IDENTITY_PRESERVATION"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Image-edit prompt example focused on identity preservation across hairstyle variants. Model-specific effectiveness is not generalized.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "e294d9219649f8c03aef0ba5e836c2416848ce1af0f6dbd221f941fc62baaeb1",
+      "evidence": {
+        "text_chars": 3561,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\18_2ee19ffa-aaf1-80ea-9409-cda71f1760df.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "e294d9219649f8c03aef0ba5e836c2416848ce1af0f6dbd221f941fc62baaeb1",
+        "block_count": 97,
+        "response_bytes": 117170
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:013",
+      "title": "클로드·ChatGPT 연동 앱 TOP5",
+      "url": "https://neat-product-c0f.notion.site/ChatGPT-TOP5-3b119ffaaaf1800fa0b2c36624edde88",
+      "final_url": "https://neat-product-c0f.notion.site/ChatGPT-TOP5-3b119ffaaaf1800fa0b2c36624edde88",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_CONNECTOR_GUIDE__PLAN_SUPPORT_AND_SECURITY_FACTS_TIME_SENSITIVE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "ORCHESTRATION",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "CONNECTORS",
+        "PRODUCT_GUIDE"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Connector/app integration guide. Current plan support and connection behavior require official verification; unknown connector endpoints require security review.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "b4d69a621b295509150f6de7968cf7edeb1b1a96163a45bbf6cbbbe524136a70",
+      "evidence": {
+        "text_chars": 3709,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\19_3b119ffa-aaf1-800f-a0b2-c36624edde88.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "b4d69a621b295509150f6de7968cf7edeb1b1a96163a45bbf6cbbbe524136a70",
+        "block_count": 115,
+        "response_bytes": 126706
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:014",
+      "title": "아기 사진 1장으로 만드는 프롬프트 7종",
+      "url": "https://neat-product-c0f.notion.site/1-7-3b019ffaaaf1818da0dfd2cee098b3c3",
+      "final_url": "https://neat-product-c0f.notion.site/1-7-3b019ffaaaf1818da0dfd2cee098b3c3",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_IMAGE_PROMPT_EXAMPLES__CONSENT_AND_MODEL_BEHAVIOR_NOT_GENERALIZED",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "PROMPT",
+        "TOOL"
+      ],
+      "domain_facets": [
+        "IMAGE_EDITING",
+        "CHILD_IMAGE_PRIVACY"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Child-image prompt examples. Preserve as reference only with consent/privacy constraints; model-specific identity preservation claims are not generalized.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "e28a88f316dce177788975d78af1dc3ac49291c7c992fb6905154472964d1d46",
+      "evidence": {
+        "text_chars": 14933,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\20_3b019ffa-aaf1-818d-a0df-d2cee098b3c3.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "e28a88f316dce177788975d78af1dc3ac49291c7c992fb6905154472964d1d46",
+        "block_count": 67,
+        "response_bytes": 116489
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:015",
+      "title": "모션그래픽 AI 무료 툴 시작 가이드",
+      "url": "https://neat-product-c0f.notion.site/AI-3c619ffaaaf181f58959e17128e30c75",
+      "final_url": "https://neat-product-c0f.notion.site/AI-3c619ffaaaf181f58959e17128e30c75",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_MOTION_TOOL_GUIDE__TOOL_CAPABILITY_AND_SUBSCRIPTION_FACTS_REQUIRE_VERIFICATION",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "TOOL",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "MOTION_DESIGN",
+        "ASSET_PIPELINE"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "For asset-driven motion workflows, the quality ceiling often comes from the supplied source assets; high-quality editable source materials should be prepared before orchestration.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "learning_candidates": [
+        {
+          "learning_id": "AI-LRN-SOURCE-ASSET-QUALITY-SETS-OUTPUT-CEILING",
+          "insight": "In asset-driven creative workflows, prepare high-quality source assets first; orchestration cannot reliably compensate for weak or incorrect originals."
+        }
+      ],
+      "content_hash": "9999de24e6639ae051f685c7a64a7e2318c7ed61c9c27ad8fdea1f5f5f83b326",
+      "evidence": {
+        "text_chars": 3419,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\21_3c619ffa-aaf1-81f5-8959-e17128e30c75.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "9999de24e6639ae051f685c7a64a7e2318c7ed61c9c27ad8fdea1f5f5f83b326",
+        "block_count": 76,
+        "response_bytes": 84849
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "AIREF:REC:016",
+      "title": "하루 10분 AI 감 안 죽게 해주는 곳 7",
+      "url": "https://closed-cup-d46.notion.site/10-AI-7-3c13c1398b0b814bbd2afa83021aa904",
+      "final_url": "https://closed-cup-d46.notion.site/10-AI-7-3c13c1398b0b814bbd2afa83021aa904",
+      "source_family": "AI_RECOVERED_HOLD_SOURCE",
+      "source_type": "REMINED_SOURCE_REFERENCE",
+      "authority_level": "SECONDARY_CURATED_SOURCE_LIST__DISCOVERY_ONLY",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "RECOVERED_FROM_NOTION_PUBLIC_API",
+      "duplicate_relation": null,
+      "applicability_scope": [
+        "SYSTEM_GROW"
+      ],
+      "ai_categories": [
+        "SOURCE_ACQUISITION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "LEARNING_RESOURCES",
+        "CURATED_FEEDS"
+      ],
+      "controlled_terms": [
+        "RECOVERED_HOLD",
+        "SOURCE_AUTHORITY_PRESERVED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Re-verify time-sensitive product, benchmark, plan, legal or compatibility claims at primary sources before operational use."
+      ],
+      "claims_to_exclude": [
+        "Do not promote creator claims, unsupported inference, popularity metrics, pricing, availability or compatibility without verification."
+      ],
+      "value_statement": "Curated AI-news and learning-source list. Treat as discovery only and verify important claims at the original source.",
+      "origin_file": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+      "record_kind": "REMINED_SOURCE_REFERENCE",
+      "learning_eligible": false,
+      "learning_candidates": [],
+      "content_hash": "65d4857de16ba963a5d95acda845b8d0dc53e55e26d723a6226a24b43d881811",
+      "evidence": {
+        "text_chars": 1807,
+        "text_file": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\pipeline_bridge\\ai_remining_20261006\\notion_public_recovery\\22_3c13c139-8b0b-814b-bd2a-fa83021aa904.txt",
+        "recovery": "NOTION_PUBLIC_API",
+        "recovery_sha256": "65d4857de16ba963a5d95acda845b8d0dc53e55e26d723a6226a24b43d881811",
+        "block_count": 52,
+        "response_bytes": 49887
+      },
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:DEEP-20261003-01",
+      "title": "Scrapling 설치 가이드",
+      "source_ref": "DEEP_MINING_20261003_0800:1",
+      "url": "https://sdk-kim-builds.com/guides/scrapling-cloudflare-scraper-claude-code-mcp/",
+      "source_family": "DEEP_MINING_DAILY",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "REFERENCE_ONLY__UPSTREAM_VERIFICATION_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "engineering",
+        "ENGINEERING_REFERENCE"
+      ],
+      "domain_facets": [
+        "engineering"
+      ],
+      "controlled_terms": [
+        "COMMUNITY_REFERENCE_ONLY",
+        "VERIFY_UPSTREAM_BEFORE_INSTALL",
+        "NO_PAID_API"
+      ],
+      "keywords": [
+        "ENGINEERING_REFERENCE"
+      ],
+      "verification_needed": [
+        "Verify upstream/project facts before adoption or execution."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "TAKY 수집기와 Claude/Codex MCP 운용 참고",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/DEEP_MINING_20261003_0800.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [
+        "MODEL"
+      ],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:DEEP-20261003-02",
+      "title": "GitHub 레포를 한눈에 읽는 치트키 사이트 2곳",
+      "source_ref": "DEEP_MINING_20261003_0800:2",
+      "url": "https://lazyowen.com/guides/github-repo-diagram-ingest-cheats",
+      "source_family": "DEEP_MINING_DAILY",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "REFERENCE_ONLY__UPSTREAM_VERIFICATION_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "engineering",
+        "CODE_REPOSITORY_REVIEW_REFERENCE"
+      ],
+      "domain_facets": [
+        "engineering"
+      ],
+      "controlled_terms": [
+        "REFERENCE_ONLY",
+        "PRIVATE_REPO_DATA_GUARD",
+        "VERIFY_ACTUAL_FILES"
+      ],
+      "keywords": [
+        "CODE_REPOSITORY_REVIEW_REFERENCE"
+      ],
+      "verification_needed": [
+        "Verify upstream/project facts before adoption or execution."
+      ],
+      "claims_to_exclude": [],
+      "value_statement": "레포 구조 파악과 텍스트화, TAKY 코드 검토 보조",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/DEEP_MINING_20261003_0800.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CHATGPT_METRICOOL_SOCIAL_MANAGER",
+      "title": "2주 만에 팔로워 7천 명, ChatGPT로 SNS 관리하는 법",
+      "source_ref": "WEB:LAZYOWEN:CHATGPT_METRICOOL_SOCIAL_MANAGER",
+      "url": "https://lazyowen.com/guides/chatgpt-metricool-social-manager",
+      "source_family": "WEB_NEW_REFERENCE_ROUTING",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "work_os",
+        "DOMAIN_ENGINE"
+      ],
+      "domain_facets": [
+        "work_os"
+      ],
+      "controlled_terms": [
+        "BODY_MINING_REQUIRED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Acquire and mine source body before learning."
+      ],
+      "claims_to_exclude": [
+        "Do not learn product/workflow claims from title or routing metadata alone."
+      ],
+      "value_statement": "",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/WEB_NEW_REFERENCE_ROUTING_20261002.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [
+        "MODEL"
+      ],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CHATGPT_MODIFY_PHOTO_PROMPT",
+      "title": "ChatGPT한테 '사진 고쳐줘' 대신 쓰는 프롬프트 10개",
+      "source_ref": "WEB:LAZYOWEN:CHATGPT_MODIFY_PHOTO_PROMPT",
+      "url": "https://lazyowen.com/guides/chatgpt-modify-photo-prompt",
+      "source_family": "WEB_NEW_REFERENCE_ROUTING",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "design",
+        "DOMAIN_ENGINE"
+      ],
+      "domain_facets": [
+        "design"
+      ],
+      "controlled_terms": [
+        "BODY_MINING_REQUIRED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Acquire and mine source body before learning."
+      ],
+      "claims_to_exclude": [
+        "Do not learn product/workflow claims from title or routing metadata alone."
+      ],
+      "value_statement": "",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/WEB_NEW_REFERENCE_ROUTING_20261002.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [
+        "MODEL"
+      ],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CLAUDE_PRIVATE_TUTOR_PROMPTS",
+      "title": "클로드를 개인 과외 선생님으로 바꾸는 프롬프트 6개",
+      "source_ref": "WEB:LAZYOWEN:CLAUDE_PRIVATE_TUTOR_PROMPTS",
+      "url": "https://lazyowen.com/guides/claude-private-tutor-prompts",
+      "source_family": "WEB_NEW_REFERENCE_ROUTING",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "learning",
+        "LEARNING_ENGINE"
+      ],
+      "domain_facets": [
+        "learning"
+      ],
+      "controlled_terms": [
+        "BODY_MINING_REQUIRED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Acquire and mine source body before learning."
+      ],
+      "claims_to_exclude": [
+        "Do not learn product/workflow claims from title or routing metadata alone."
+      ],
+      "value_statement": "",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/WEB_NEW_REFERENCE_ROUTING_20261002.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CLAUDE_SKILLS_TOP5",
+      "title": "Claude Code 스킬 TOP 5, 겹치지 않게 설치하는 가이드",
+      "source_ref": "WEB:LAZYOWEN:CLAUDE_SKILLS_TOP5",
+      "url": "https://lazyowen.com/guides/claude-skills-top5",
+      "source_family": "WEB_NEW_REFERENCE_ROUTING",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "engineering",
+        "DOMAIN_ENGINE"
+      ],
+      "domain_facets": [
+        "engineering"
+      ],
+      "controlled_terms": [
+        "BODY_MINING_REQUIRED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Acquire and mine source body before learning."
+      ],
+      "claims_to_exclude": [
+        "Do not learn product/workflow claims from title or routing metadata alone."
+      ],
+      "value_statement": "",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/WEB_NEW_REFERENCE_ROUTING_20261002.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [
+        "MODEL"
+      ],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:MANUS_HYPERFRAMES_SRT_MOTION",
+      "title": "마누스 AI로 모션 그래픽 누구나 만드는 법, 1분 세팅",
+      "source_ref": "WEB:LAZYOWEN:MANUS_HYPERFRAMES_SRT_MOTION",
+      "url": "https://lazyowen.com/guides/manus-hyperframes-srt-motion",
+      "source_family": "WEB_NEW_REFERENCE_ROUTING",
+      "source_type": "DISCOVERY_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY__BODY_MINING_REQUIRED",
+      "current_relation": "DISCOVERY_ONLY",
+      "duplicate_relation": null,
+      "version_relation": null,
+      "applicability_scope": [
+        "design",
+        "DOMAIN_ENGINE"
+      ],
+      "domain_facets": [
+        "design"
+      ],
+      "controlled_terms": [
+        "BODY_MINING_REQUIRED"
+      ],
+      "keywords": [],
+      "verification_needed": [
+        "Acquire and mine source body before learning."
+      ],
+      "claims_to_exclude": [
+        "Do not learn product/workflow claims from title or routing metadata alone."
+      ],
+      "value_statement": "",
+      "publisher_or_account": null,
+      "origin_file": "TAKY-SOURCE-VAULT/reports/WEB_NEW_REFERENCE_ROUTING_20261002.json",
+      "record_kind": "DISCOVERY_REFERENCE",
+      "learning_eligible": false,
+      "canonical_promotion": false,
+      "ai_categories": [
+        "TOOL"
+      ],
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-082",
+      "title": "AI PPT 압도적 1황이 클로드인 이유",
+      "source_ref": "INDEX:REF-082",
+      "url": "https://ppthunter.sos33377.workers.dev/tips/claude-ai-ppt-no1/",
+      "source_family": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "applicability_scope": [],
+      "ai_categories": [
+        "MODEL",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "work"
+      ],
+      "controlled_terms": [
+        "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+        "TOOL_COMPARISON",
+        "WORKFLOW_GUIDANCE",
+        "CLAUDE_ADVOCACY",
+        "PRODUCT_FACTS_TIME_SENSITIVE"
+      ],
+      "keywords": [
+        "WORK_OS_ARTIFACT_WORKFLOW_CANDIDATE",
+        "ARCHIGROW_PRESENTATION_PROCESS_CANDIDATE",
+        "ADJUST"
+      ],
+      "verification_needed": [],
+      "claims_to_exclude": [],
+      "value_statement": "Preserve content-first -> design rules -> sample slides -> full build as a workflow hypothesis; do not inherit vendor rankings/pricing as authority.",
+      "publisher_or_account": "PPT 사냥꾼",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-083",
+      "title": "클로드 코드를 쓰기 전에 깔아야 하는 플러그인 5개",
+      "source_ref": "INDEX:REF-083",
+      "url": "https://app.notion.com/p/5-3d0fa868dc2a81848a74d61f3d9a1706",
+      "source_family": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "applicability_scope": [],
+      "ai_categories": [
+        "MODEL",
+        "TOOL",
+        "ORCHESTRATION",
+        "COST",
+        "SECURITY",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "taky_ops"
+      ],
+      "controlled_terms": [
+        "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+        "HOW_TO",
+        "TOOL_RECOMMENDATION",
+        "COST_SAVING_CLAIM",
+        "COMMERCIAL_CHALLENGE_FUNNEL"
+      ],
+      "keywords": [
+        "TAKY_TOOL_DISCOVERY_ONLY",
+        "SAVEY_USAGE_OPTIMIZATION_HYPOTHESIS",
+        "SECURITY_REVIEW_QUEUE",
+        "HOLD",
+        "third party plugin",
+        "plugin security",
+        "supply chain",
+        "cost saving",
+        "Claude Code plugin",
+        "context memory",
+        "model routing"
+      ],
+      "verification_needed": [],
+      "claims_to_exclude": [],
+      "value_statement": "Do not auto-install the five recommended tools; compare each against existing TAKY capabilities, overlap policy, credential exposure, supply-chain risk, and measurable gap first.",
+      "publisher_or_account": "게으른 빌더 / Lazy Builder",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-086",
+      "title": "open-slide 2.0 시작 가이드, 설치부터 PPTX까지",
+      "source_ref": "INDEX:REF-086",
+      "url": "https://app.notion.com/p/open-slide-2-0-PPTX-3e9fd99f0e5f81f88bcde2b78c657980",
+      "source_family": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "applicability_scope": [],
+      "ai_categories": [
+        "TOOL",
+        "AGENT",
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "architecture"
+      ],
+      "controlled_terms": [
+        "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+        "EDITABLE_PPTX",
+        "VISUAL_EDITOR",
+        "AGENT_NATIVE",
+        "OPEN_SOURCE_MIT"
+      ],
+      "keywords": [
+        "WORK_OS_PRESENTATION_EXPERIMENT",
+        "ARCHIGROW_EDITABLE_PPTX_EXPERIMENT",
+        "ARTIFACT_PIPELINE_TOOL_EVALUATION",
+        "ADOPT_AS_EXPERIMENT_CANDIDATE"
+      ],
+      "verification_needed": [],
+      "claims_to_exclude": [],
+      "value_statement": "Strong complement to TAKY's editable PPTX goal: agent draft + human visual edit + native PPTX export; evaluate as optional implementation lane, not a replacement for existing verified PowerPoint pipeline.",
+      "publisher_or_account": "Secondary guide + open-slide project (Yiwei Ho and contributors)",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-087",
+      "title": "오빠두엑셀 - 엑셀 강의 대표 채널 | 무료 엑셀 강의",
+      "source_ref": "INDEX:REF-087",
+      "url": "https://www.oppadu.com/",
+      "source_family": "COMMERCIAL_EDUCATION_PUBLISHER",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "discovery_pointer_only",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "Same domain as REF-089 and REF-092 (oppadu family). Not a duplicate of any prior_ref. It is a time-sensitive snapshot (episodes 274–277, Aug–Sep 2026) and will go stale.",
+      "applicability_scope": [],
+      "ai_categories": [
+        "TOOL",
+        "AGENT",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "work"
+      ],
+      "controlled_terms": [
+        "Promotional catalog or discovery listing for paid and free Excel/Google Sheets/AI-automation live lectures. It drives funnel traffic to LIVE pages.",
+        "commercial promotion",
+        "tier gating (Plus/Premium labels)",
+        "titles use outcome claims such as '왕초보도 가능', '하나로 만드는', '완성'",
+        "tool-brand pull (젠스파크, 카카오톡 알림)",
+        "episode titles and week-numbered thumbnails appear misaligned (276 vs 3주차, 275 vs 2주차, 274 vs 1주차), so the parse may be garbled"
+      ],
+      "keywords": [
+        "PRESERVE",
+        "SPREADSHEET_AUTOMATION_DISCOVERY_POINTER"
+      ],
+      "verification_needed": [
+        "Re-fetch the /live/274–277 pages to confirm titles, dates and tiers.",
+        "Strip the S3 signed-URL fragments before indexing.",
+        "Confirm which episodes are free or paid."
+      ],
+      "claims_to_exclude": [
+        "Any implication that '왕초보도 가능' (beginner-friendly) or 'complete' outcomes are verified.",
+        "Genspark as the best AI tool ('AI 뭘 쓸지 고민이라면').",
+        "Episode date/number/title pairing, until re-fetched.",
+        "Signed S3 image URLs (token-bearing, ephemeral)."
+      ],
+      "value_statement": "Curricular pattern: a multi-week challenge arc moves from AI-assisted Sheets automation to Apps Script apps and then to agent teams. | Automation stack signal: Sheets + ARRAYFORMULA/QUERY + Apps Script + a messaging notification channel. | Cadence signal: a weekly live series with tier labels.",
+      "publisher_or_account": "오빠두엑셀 (oppadu.com), the operator of the site and its Saturday LIVE lecture series. The page is a homepage or lecture-home excerpt.",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V32_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-088",
+      "title": "PPT 사냥꾼 꿀팁 창고",
+      "source_ref": "INDEX:REF-088",
+      "url": "https://ppthunter.sos33377.workers.dev/tips/",
+      "source_family": "INDEPENDENT_PRESENTATION_TIPS_INDEX",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "discovery_index_only. Any single tip is at most a candidate heuristic, not canonical.",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "Overlaps REF-082 (claude-ai-ppt-no1, same URL is listed in the index as 2026-09-28). It is the parent index of REF-090 (ppt-color-swap-vba, 2026-09-22). It is thematically adjacent to REF-086 (open-slide, PPTX) and REF-083 (Claude plugins). Newer items dated 2026-10-03 are not yet in prior_refs.",
+      "applicability_scope": [],
+      "ai_categories": [
+        "MODEL",
+        "TOOL",
+        "ORCHESTRATION",
+        "PROMPT",
+        "COST",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "work"
+      ],
+      "controlled_terms": [
+        "Index of 13 how-to tip posts with copy-paste prompts and free files or tools. The tone is casual and persuasive ('그냥 복붙해서 쓰세요').",
+        "Pro-Claude framing ('압도적 1황이 클로드인 이유')",
+        "superlatives and ease claims ('딸깍 한 번', '끝', '100% 무료')",
+        "listicle/SEO titles",
+        "possible tool promotion (RECOLOR/RESIZE sites)",
+        "possible self-promotion of their own tools",
+        "this is an index only, so the summaries may overstate what the full posts deliver"
+      ],
+      "keywords": [
+        "ADJUST",
+        "PRESENTATION_WORKFLOW_DISCOVERY_INDEX"
+      ],
+      "verification_needed": [
+        "Fetch the individual posts that look valuable (ai-html-ppt-guide, design-md-guide, ai-ppt-token-saving-7steps, ai-ppt-image-slot-prompt).",
+        "Check the author's identity and whether the site is affiliated with the RECOLOR/RESIZE tools.",
+        "Verify the 컴활 reform against an official 대한상공회의소 notice.",
+        "Reconcile versions with REF-082."
+      ],
+      "claims_to_exclude": [
+        "Claude is the number-one AI PPT tool, and the 11-tool ranking.",
+        "'100% free' and 'fully editable' claims for Gemini/NotebookLM.",
+        "The 컴활 2027 reform details (the 2027-01 AI basics unit and Windows 11 switch) until the official source is verified.",
+        "RECOLOR/RESIZE tool safety and fidelity claims.",
+        "'Free VBA distribution' as a safety assurance."
+      ],
+      "value_statement": "Staged generation for token economy: plan → design MD → 1–2 sample slides → full output, instead of a one-shot 10-slide request. | Ask for HTML instead of a .pptx file when you want fast iteration and sharing, and compare trade-offs per item. | Add an image-slot placeholder block to prompts so photos can be swapped in later.",
+      "publisher_or_account": "PPT 사냥꾼 (ppthunter.sos33377.workers.dev), a tips index. The personal or small-operator author is unnamed. The host is a Cloudflare Workers subdomain under the account 'sos33377'.",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V32_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-092",
+      "title": "Design Systems Gallery",
+      "source_ref": "INDEX:REF-092",
+      "url": "https://www.oppadu.com/tools/design-systems-site/",
+      "source_family": "SECONDARY_DESIGN_REFERENCE_GALLERY",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "inspiration_reference_only. It is not an authoritative brand spec and not a canonical design token source.",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "Related to REF-088 (DESIGN.md guide, which cites reference sites) and REF-087/089 (same publisher). No prior_ref duplicate. The 284-system count is a point-in-time value.",
+      "applicability_scope": [],
+      "ai_categories": [
+        "TOOL",
+        "ORCHESTRATION",
+        "PROMPT",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "design",
+        "work"
+      ],
+      "controlled_terms": [
+        "A resource and discovery index. It supports the publisher's DESIGN.md and AI-design workflows (284 systems) and likely drives traffic and engagement.",
+        "secondary interpretation of third-party brand visuals",
+        "specific values (hex codes, px radii, degrees) are unverified and may be inferred or AI-generated",
+        "trademark and brand-asset sensitivity",
+        "the excerpt is truncated at 'Orion', so the full listing is not seen",
+        "no declared license",
+        "marketing function for the publisher's own AI design tooling"
+      ],
+      "keywords": [
+        "ADJUST",
+        "DESIGN_SYSTEM_INSPIRATION_INDEX"
+      ],
+      "verification_needed": [
+        "Spot-check several entries against the brands' official guidelines.",
+        "Determine whether the descriptions are AI-generated or hand-curated.",
+        "Check the terms of use and trademark constraints before reusing the values or imitating a brand.",
+        "Get the full listing, since the excerpt is truncated."
+      ],
+      "claims_to_exclude": [
+        "Exact hex, px and degree values as official brand tokens.",
+        "That any listed brand endorses or provides these descriptions.",
+        "That the gallery is complete or current.",
+        "The claim of 284 systems unless counted."
+      ],
+      "value_statement": "Describe a design system compactly as accent count, base surface, corner radius, button shape and signature layout. Single-accent-color systems appear repeatedly. | Restraint pattern: neutral base plus one accent color used only for the key actions. | Distinguishing descriptors (corner radius, angle, shape language) turn into prompt-ready constraints.",
+      "publisher_or_account": "오빠두엑셀 (oppadu.com) Design Systems Gallery tool. It is a curated, probably AI-assisted descriptive gallery of third-party brand UI styles.",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V32_2026-10-04.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-093",
+      "title": "신영선 챗GPT 아스트라 치트키 — Prompt Macro Pattern Catalog",
+      "source_ref": "INDEX:REF-093",
+      "url": "https://yeongseon.kr/archive/3d8d86104de2804d9aeee10695f613bb.html",
+      "source_family": "THIRD_PARTY_AI_PROMPT_PATTERN_CATALOG",
+      "source_type": "NOTION_MINED_REFERENCE",
+      "authority_level": "reference_only; prompt aliases are not verified native ChatGPT/Astra commands",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "No exact prior REF found; strong semantic overlap with existing TAKY governance patterns.",
+      "applicability_scope": [],
+      "ai_categories": [
+        "MODEL",
+        "ORCHESTRATION",
+        "PROMPT",
+        "COST"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "prompting",
+        "verification_ux"
+      ],
+      "controlled_terms": [
+        "THIRD_PARTY_PROMPT_MACRO",
+        "NOT_NATIVE_COMMAND",
+        "VERIFY",
+        "ADVERSARIAL_REVIEW",
+        "PREMORTEM",
+        "SOURCE_CHECK",
+        "SCOPE",
+        "COST"
+      ],
+      "keywords": [
+        "PROMPT_MACRO_PATTERN",
+        "TAKY_COMMAND_UX_REFERENCE"
+      ],
+      "verification_needed": [
+        "Do not present slash aliases as product-native commands.",
+        "Retain source/date provenance for prompt pattern reuse."
+      ],
+      "claims_to_exclude": [
+        "Any claim that these slash commands are built-in ChatGPT/Astra features."
+      ],
+      "value_statement": "Reusable macro patterns for adversarial review, premortem, evidence/source checks, scope and cost prompts. High semantic overlap with TAKY verification and necessity/cost gates; useful as UX/macro inspiration rather than new policy authority.",
+      "publisher_or_account": "신영선 / 신영선의 AI탐구",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-094",
+      "title": "Agent Reach upstream — External Source Acquisition Scaffold",
+      "source_ref": "INDEX:REF-094",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "source_family": "UPSTREAM_OPEN_SOURCE_TOOL_DOCS",
+      "source_type": "NOTION_MINED_REFERENCE_WITH_UPSTREAM_VERIFICATION",
+      "authority_level": "upstream project docs for Agent Reach behavior; secondary dated guide only for its own observed setup",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": null,
+      "version_relation": "No exact prior REF found in current TAKY C2S search.",
+      "applicability_scope": [],
+      "ai_categories": [
+        "TOOL",
+        "AGENT",
+        "ORCHESTRATION",
+        "SOURCE_ACQUISITION",
+        "SECURITY"
+      ],
+      "domain_facets": [
+        "source_acquisition",
+        "ai_orchestration",
+        "web_mining"
+      ],
+      "controlled_terms": [
+        "EXTERNAL_SOURCE_ACQUISITION",
+        "SAFE_DEFAULT_CHECK",
+        "PUBLIC_ZERO_LOGIN_FIRST",
+        "COOKIE_RISK",
+        "NOTION_PRIVATE_UNSUPPORTED"
+      ],
+      "keywords": [
+        "AGENT_REACH",
+        "SOURCE_ACQUISITION_ADAPTER"
+      ],
+      "verification_needed": [
+        "Re-check upstream docs/version before implementation.",
+        "Keep cookie/login channels disabled without explicit approval.",
+        "Do not substitute for private Notion collector/API."
+      ],
+      "claims_to_exclude": [
+        "Dated Reborn Labs channel counts as permanent upstream capability.",
+        "Private Notion workspace/database access without separate authorization."
+      ],
+      "value_statement": "Optional acquisition adapter for public web/social/video/repository sources. Use after Necessity Gate; prefer zero-login/public channels and explicit credential/cookie approval. Not a private Notion connector.",
+      "publisher_or_account": "Panniantong/Agent-Reach upstream; Reborn Labs secondary guide",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-095",
+      "title": "Humanize KR / AI 한글 티 분류 체계 — Korean AI Output Style QA Reference",
+      "source_ref": "INDEX:REF-095",
+      "url": "https://github.com/epoko77-ai/im-not-ai",
+      "source_family": "HUMANIZE_KR_KOREAN_AI_TELL_TAXONOMY",
+      "source_type": "DIRECT_NOTION_MINED_REFERENCE_WITH_UPSTREAM_PRIMARY_VERIFICATION",
+      "authority_level": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_TAXONOMY_AND_TOOL_BEHAVIOR__STYLE_QA_REFERENCE_ONLY__NOT_AUTHORSHIP_PROOF",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "NONE_EXACT_PRIOR_REF_FOUND",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "applicability_scope": [
+        "TAKY_KOREAN_OUTPUT_QA",
+        "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+        "LEARNING_CONTENT_COPY_STYLE_QA_NOT_LEARNER_MASTERY",
+        "PROMPT_OUTPUT_HUMANIZATION_EXPERIMENT"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "korean_writing_quality",
+        "output_style_qa"
+      ],
+      "controlled_terms": [
+        "KOREAN_WRITING_QA",
+        "AI_TELL_TAXONOMY",
+        "85_PATTERN_IDS",
+        "10_CATEGORIES",
+        "FALSE_POSITIVE_GUARD",
+        "STYLE_HUMANIZATION",
+        "NOT_AUTHORSHIP_DETECTOR"
+      ],
+      "keywords": [
+        "Humanize KR",
+        "im-not-ai",
+        "Korean AI tell",
+        "AI writing style",
+        "문체 QA",
+        "번역투",
+        "AI 티"
+      ],
+      "verification_needed": [
+        "Version-check upstream repository snapshot before future rule refresh.",
+        "Preserve per-pattern evidence strength, hold flags and genre/model caveats.",
+        "Keep README/taxonomy version-label divergence explicit rather than inventing a unified taxonomy version.",
+        "Do not promote semantic-watermark claims without independent primary verification."
+      ],
+      "claims_to_exclude": [
+        "A matched style pattern proves AI authorship.",
+        "All 85 patterns are universally undesirable in every genre.",
+        "The 70-pattern Notion summary is the complete upstream taxonomy.",
+        "TAKY may automatically rewrite user text without task-specific intent."
+      ],
+      "value_statement": "Korean AI-output style QA reference: preserve 85-pattern upstream taxonomy, severity/hold/genre caveats and false-positive controls; use to improve TAKY-generated Korean prose without treating style signals as proof of AI authorship.",
+      "publisher_or_account": "epoko77-ai / Humanize KR contributors",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V34_2026-10-08.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-096",
+      "title": "Humanize KR v2.3.2 Orchestrator Skill — Remote Drive Ingress / Implementation Reference",
+      "source_ref": "INDEX:REF-096",
+      "url": "https://github.com/epoko77-ai/im-not-ai/blob/main/skills/humanize-korean/SKILL.md",
+      "source_family": "HUMANIZE_KR_ORCHESTRATOR_SKILL_IMPLEMENTATION",
+      "source_type": "SIEZEALL_REMOTE_DRIVE_INBOX_WITH_UPSTREAM_BLOB_VERIFICATION",
+      "authority_level": "PRIMARY_REPO_IMPLEMENTATION_AUTHORITY_FOR_HUMANIZE_KR_SKILL__TAKY_REFERENCE_ONLY__NOT_AUTHORSHIP_PROOF",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "RELATED_TO_REF-095_DISTINCT_IMPLEMENTATION_FILE",
+      "version_relation": "IMPLEMENTATION_SUBSOURCE_OF_EXISTING_PROJECT_REFERENCE",
+      "applicability_scope": [
+        "TAKY_KOREAN_OUTPUT_QA",
+        "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+        "CONTENT_GENERATION_GUARDED_REWRITE_WORKFLOW"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_orchestration",
+        "korean_writing_quality",
+        "output_style_qa",
+        "workflow_efficiency"
+      ],
+      "controlled_terms": [
+        "HUMANIZE_KR",
+        "ROUTE_HINT",
+        "LIGHT_STANDARD_HEAVY",
+        "MEANING_ANCHOR",
+        "DETERMINISTIC_GATE",
+        "85_PATTERN_IDS",
+        "NOT_AUTHORSHIP_DETECTOR"
+      ],
+      "keywords": [
+        "Humanize KR",
+        "route_hint",
+        "light standard heavy",
+        "meaning preservation",
+        "verify_gates",
+        "AI 티",
+        "문체 QA"
+      ],
+      "verification_needed": [
+        "Refresh when upstream SKILL.md blob SHA changes.",
+        "Keep implementation guidance separate from taxonomy truth.",
+        "Do not copy tool-specific runtime assumptions blindly."
+      ],
+      "claims_to_exclude": [
+        "A matched style pattern proves AI authorship.",
+        "Humanize KR must be adopted wholesale as TAKY runtime.",
+        "The skill provides learner mastery or pedagogical authority."
+      ],
+      "value_statement": "Implementation reference for guarded Korean output humanization: route by severity, preserve meaning anchors, minimize calls, and enforce deterministic gates.",
+      "publisher_or_account": "epoko77-ai / Humanize KR contributors",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    },
+    {
+      "source_id": "REF-097",
+      "title": "Character Reference Sheet Workflow — Visual Consistency / Asset QA Reference",
+      "source_ref": "INDEX:REF-097",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=ai_newceo&logNo=224433971131",
+      "source_family": "CHARACTER_REFERENCE_SHEET_VISUAL_CONSISTENCY",
+      "source_type": "SIEZEALL_USER_INBOX_NEW_SOURCE_WITH_LOCAL_RAW_PRESERVATION",
+      "authority_level": "SECONDARY_PRACTITIONER_REFERENCE_ONLY__NOT_TAKY_VISUAL_AUTHORITY",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "NONE",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "applicability_scope": [
+        "EXPLORER_CREW_ASSET_QA",
+        "CHARACTER_DERIVATIVE_PACKAGE_VALIDATION",
+        "VISUAL_ID_PRODUCTION_SUPPORT"
+      ],
+      "ai_categories": [
+        "ORCHESTRATION",
+        "WORKFLOW"
+      ],
+      "domain_facets": [
+        "ai_image_workflow",
+        "character_asset_pipeline",
+        "visual_identity_qa",
+        "asset_preproduction"
+      ],
+      "controlled_terms": [
+        "CHARACTER_REFERENCE_SHEET",
+        "FOUR_VIEW_TURNAROUND",
+        "FACE_IDENTITY_DETAILS",
+        "EXPRESSION_SHEET",
+        "POSE_BODY_LANGUAGE",
+        "COSTUME_DETAILS",
+        "COLOR_MATERIAL_PALETTE",
+        "NO_IDENTITY_GUARANTEE"
+      ],
+      "keywords": [
+        "character sheet",
+        "turnaround",
+        "face identity",
+        "expression sheet",
+        "pose",
+        "costume details",
+        "color palette",
+        "AI image consistency"
+      ],
+      "verification_needed": [
+        "Use only as supplemental workflow evidence.",
+        "Keep all approved pixels and Visual ID authority in TAKY canonical sources.",
+        "Actual-image QA remains mandatory."
+      ],
+      "claims_to_exclude": [
+        "Do not infer canonical age, height, personality or role from generated profile text.",
+        "Do not use the external prompt as TAKY production authority.",
+        "Do not treat a generated reference sheet as Visual ID registration evidence.",
+        "Do not claim a character sheet guarantees identical identity across generations."
+      ],
+      "value_statement": "Useful secondary structure reference for character derivative QA: four-view turnaround, identity close-ups, expression/action coverage, costume detail and color/material consistency.",
+      "publisher_or_account": "AI 신사장(뉴피디) / Naver Blog",
+      "origin_file": "C2S/NOTION_REFERENCE_INDEX_DELTA_V36_2026-10-09.json",
+      "record_kind": "SOURCE_REFERENCE",
+      "learning_eligible": true,
+      "canonical_promotion": false,
+      "outcome_utility": {},
+      "outcome_evidence_state": "NO_VERIFIED_OUTCOME_YET"
+    }
+  ],
+  "guards": [
+    "PROJECTION != SOURCE_OF_TRUTH",
+    "INDEXING != CANONICAL_PROMOTION",
+    "MODEL_TOOL_FACTS_ARE_TIME_SENSITIVE",
+    "AUTHOR != AUTHORITY",
+    "DOMAIN_AUTHORITY_NOT_TRANSFERRED_TO_SYSTEM_GROW"
+  ]
+}

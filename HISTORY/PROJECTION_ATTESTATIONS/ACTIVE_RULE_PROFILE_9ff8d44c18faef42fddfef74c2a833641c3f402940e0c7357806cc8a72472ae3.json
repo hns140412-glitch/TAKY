@@ -1,0 +1,83 @@
+{
+  "attestation_hash": "sha256:9ff8d44c18faef42fddfef74c2a833641c3f402940e0c7357806cc8a72472ae3",
+  "attestation_version": "1.0",
+  "binding_role": "CANONICAL_REVIEW_ATTESTATION",
+  "owner_comparison": [
+    {
+      "current_sha256": "e2ee62cae4d31ccb7e093011181043bd4c5c835c07a77d954c4afd8fee23746e",
+      "path": "AGENTS.md",
+      "reviewed_basis_sha256": "e4705287263b01dc2591dfa884caf262b76ea06cec82093ccb120a44456119f9"
+    },
+    {
+      "current_sha256": "9c627cb270fb6d82189cfec41c593138ede60da4836ecd1631d76feee68d822b",
+      "path": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "reviewed_basis_sha256": "9c627cb270fb6d82189cfec41c593138ede60da4836ecd1631d76feee68d822b"
+    },
+    {
+      "current_sha256": "c701dbae2aaaf9512304913d6b8f37c70dd230828baebefde17d879969c139be",
+      "path": "MASTER/ENFORCEMENT_PROTOCOL.md",
+      "reviewed_basis_sha256": "c701dbae2aaaf9512304913d6b8f37c70dd230828baebefde17d879969c139be"
+    },
+    {
+      "current_sha256": "4216495dd896c1a6297c9c197e75da9db168bde662ced3b631d726ab6dd6e40b",
+      "path": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+      "reviewed_basis_sha256": "4216495dd896c1a6297c9c197e75da9db168bde662ced3b631d726ab6dd6e40b"
+    },
+    {
+      "current_sha256": "eb568c7c3f48ccb9070edf86758a529f6bb0ec64d0a30ebe5550a75798488547",
+      "path": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+      "reviewed_basis_sha256": "eb568c7c3f48ccb9070edf86758a529f6bb0ec64d0a30ebe5550a75798488547"
+    },
+    {
+      "current_sha256": "28b5e3f7be16a36c37cbf67e496f0cbb082d096755e70e7e48fc332118e49ee8",
+      "path": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "reviewed_basis_sha256": "28b5e3f7be16a36c37cbf67e496f0cbb082d096755e70e7e48fc332118e49ee8"
+    },
+    {
+      "current_sha256": "c25e0ec3e24761820f03e6e9832b6c2422e0c343aec6b99a39445872a551ac23",
+      "path": "MASTER/RULE_REGISTRY.json",
+      "reviewed_basis_sha256": "c25e0ec3e24761820f03e6e9832b6c2422e0c343aec6b99a39445872a551ac23"
+    },
+    {
+      "current_sha256": "613c278a3de1617d857995957f050b465458faaae2744fc9ad8da726009f8a85",
+      "path": "MASTER/VALIDATION_RULES.md",
+      "reviewed_basis_sha256": "613c278a3de1617d857995957f050b465458faaae2744fc9ad8da726009f8a85"
+    },
+    {
+      "current_sha256": "22433786e3709783e95ec2300f918708b8ecaba76fe73dd03c062484590f21c8",
+      "path": "OS/AI_CONNECTION_SECURITY.md",
+      "reviewed_basis_sha256": "22433786e3709783e95ec2300f918708b8ecaba76fe73dd03c062484590f21c8"
+    },
+    {
+      "current_sha256": "2a55155c54e50bec826521d308c57c50821612f9c2e2cf7b4ed1237d1254fd24",
+      "path": "OS/DEPLOYMENT_OPS.md",
+      "reviewed_basis_sha256": "2a55155c54e50bec826521d308c57c50821612f9c2e2cf7b4ed1237d1254fd24"
+    },
+    {
+      "current_sha256": "a7ba7eb5cfc3da7b5736abb1c9c26a35c5ef79f37e2d029d0613526b06157b64",
+      "path": "OS/SAVEY_AI_ECONOMY.md",
+      "reviewed_basis_sha256": "a7ba7eb5cfc3da7b5736abb1c9c26a35c5ef79f37e2d029d0613526b06157b64"
+    },
+    {
+      "current_sha256": "2d017049b539516063249924092a6e3460f0dd30e348abacd2430639050e2d39",
+      "path": "OS/WORKSTATION_CONTROL.md",
+      "reviewed_basis_sha256": "2d017049b539516063249924092a6e3460f0dd30e348abacd2430639050e2d39"
+    },
+    {
+      "current_sha256": "4d9fde0e851a870ec53670f55052bf6b83547b96b424c74af68b08dc443439ea",
+      "path": "TAKY.md",
+      "reviewed_basis_sha256": "249dac9f0e12521c62a426240e86989a09f40cde17c4ab9acdbe7132497de140"
+    }
+  ],
+  "previous_attestation_hash": "sha256:90ded3b6382bc5fc95ebf40e93fbc459848101610697439af057a17ab624542e",
+  "profile_path": "PROJECTIONS/ACTIVE_RULE_PROFILE.md",
+  "projection_body_hash": "sha256:09f5b45fd9793fcb22de0123f69042b4575856ac322aa4f96b8c266c99a70e81",
+  "review_basis": "OWNER_TO_PROJECTION_SEMANTIC_REVIEW",
+  "review_evidence_ref": "HISTORY/PROJECTION_ATTESTATIONS/RA_REWORK_2026-10-04_REVIEW.md",
+  "review_evidence_sha256": "sha256:4b4ec6139f26233a9952ae00eb9c1d75f418e2614ef8fe03ad531596b9bea2bd",
+  "review_result": "PASS",
+  "reviewed_at": "2026-10-04T13:05:29+09:00",
+  "reviewer_role": "TAKY_VALIDATOR",
+  "source_canonical_head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+  "source_owner_fingerprint": "sha256:72636514fd682bad39abaabaa1ae956cf821982e2a042b9f4b259722e97ff7b4"
+}

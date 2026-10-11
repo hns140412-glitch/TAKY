@@ -1,0 +1,806 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_Q1_RESULT_V1",
+  "generated_at": "2026-10-05T23:42:25.117740+00:00",
+  "status": "PASS_LOCAL",
+  "quest_id": "AI-Q1-DETERMINISTIC-GUARDS",
+  "source_learning_count": 56,
+  "adopted_tested_count": 16,
+  "new_guard_count": 14,
+  "existing_verified_count": 2,
+  "test_summary": "17/17 PASS",
+  "growth_lineage": [
+    {
+      "learning_id": "AI-LRN-NECESSITY-BEFORE-ADOPTION",
+      "status": "PASS",
+      "execution_event_id": "GLE-248ea0e7877dee1f19dfd179",
+      "outcome_event_id": "GLE-aa0dc5b23edd613f62ed0a2a",
+      "growth_event_id": "GLE-a7486b0a35cda3fe3261072c",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-248ea0e7877dee1f19dfd179",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-aa0dc5b23edd613f62ed0a2a",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-a7486b0a35cda3fe3261072c",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-SECURITY-BEFORE-CREDENTIAL",
+      "status": "PASS",
+      "execution_event_id": "GLE-dac8edd5378bc388eec816c5",
+      "outcome_event_id": "GLE-241dc6c356c1239d1d45b386",
+      "growth_event_id": "GLE-9be72d855e10434969cee587",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-dac8edd5378bc388eec816c5",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-241dc6c356c1239d1d45b386",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-9be72d855e10434969cee587",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-OBSERVABLE-SUCCESS-CRITERIA",
+      "status": "PASS",
+      "execution_event_id": "GLE-738647c9464b51e0522ea079",
+      "outcome_event_id": "GLE-f8f01c77b38d39997c5cb53f",
+      "growth_event_id": "GLE-bedae31c796802e72d3edee0",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-738647c9464b51e0522ea079",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-f8f01c77b38d39997c5cb53f",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-bedae31c796802e72d3edee0",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-SUPPLY-CHAIN-IDENTITY-CHECK",
+      "status": "PASS",
+      "execution_event_id": "GLE-4a7f21df81a848159bfaf71f",
+      "outcome_event_id": "GLE-5bab993513d113ec7927932b",
+      "growth_event_id": "GLE-130d9b6160601a615ec8cf90",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-4a7f21df81a848159bfaf71f",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-5bab993513d113ec7927932b",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-130d9b6160601a615ec8cf90",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-SELF-REPORT-NOT-RUNTIME-PROOF",
+      "status": "PASS",
+      "execution_event_id": "GLE-34d0aa68d55d9a7086c20b42",
+      "outcome_event_id": "GLE-d252dfdda60b0f74e164e5cd",
+      "growth_event_id": "GLE-6208bbd6153642112c8eca46",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-34d0aa68d55d9a7086c20b42",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-d252dfdda60b0f74e164e5cd",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-6208bbd6153642112c8eca46",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-UPSTREAM-TOOL-CLAIMS-VERIFY",
+      "status": "PASS",
+      "execution_event_id": "GLE-bfad9b018f99ac99b564fb9f",
+      "outcome_event_id": "GLE-864124b4a5b006abdfef3f87",
+      "growth_event_id": "GLE-a34fd33312c8dd1105806760",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-bfad9b018f99ac99b564fb9f",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-864124b4a5b006abdfef3f87",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-a34fd33312c8dd1105806760",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-DEVICE-OBSERVATION-BEFORE-CLOSE",
+      "status": "PASS",
+      "execution_event_id": "GLE-b2e1a43f850c6bd717bf52cc",
+      "outcome_event_id": "GLE-08738d43cc55abc4df7e8790",
+      "growth_event_id": "GLE-72e0927ac0b0a1a519b10328",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-b2e1a43f850c6bd717bf52cc",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-08738d43cc55abc4df7e8790",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-72e0927ac0b0a1a519b10328",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-APPROVAL-BOUND-TO-ARTIFACT",
+      "status": "PASS",
+      "execution_event_id": "GLE-11de91a3851412298a0c73cc",
+      "outcome_event_id": "GLE-076148d5250ec77ad7523d5e",
+      "growth_event_id": "GLE-e4a02f4452ece0dd82122c9e",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-11de91a3851412298a0c73cc",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-076148d5250ec77ad7523d5e",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-e4a02f4452ece0dd82122c9e",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-BOUNDED-GOAL-PLUS-SCOPE-FREEZE",
+      "status": "PASS",
+      "execution_event_id": "GLE-0a8c9827410d90ab94407ae7",
+      "outcome_event_id": "GLE-6f3f99278aa0b62d6cf2d5ec",
+      "growth_event_id": "GLE-78ae0a907898fed6fc6a3625",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-0a8c9827410d90ab94407ae7",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-6f3f99278aa0b62d6cf2d5ec",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-78ae0a907898fed6fc6a3625",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-CAPABILITY-GAP-BEFORE-TOOL",
+      "status": "PASS",
+      "execution_event_id": "GLE-d0b31e4092c3450c223856ad",
+      "outcome_event_id": "GLE-22dcc4e654667ab505b8b85c",
+      "growth_event_id": "GLE-90900f3df57ded3db71a0cc1",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-d0b31e4092c3450c223856ad",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-22dcc4e654667ab505b8b85c",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-90900f3df57ded3db71a0cc1",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-CONNECTOR-PERMISSION-BOUNDARY",
+      "status": "PASS",
+      "execution_event_id": "GLE-c51c4ca3e220617e1d348daf",
+      "outcome_event_id": "GLE-875ac3c1b1051b9570b26f5a",
+      "growth_event_id": "GLE-79540e4c5a2560f60915012c",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-c51c4ca3e220617e1d348daf",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-875ac3c1b1051b9570b26f5a",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-79540e4c5a2560f60915012c",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-COST-GUARD-AS-CODE",
+      "status": "PASS",
+      "execution_event_id": "GLE-0f85843be596a55698ba5d42",
+      "outcome_event_id": "GLE-a44e561668956375e45be948",
+      "growth_event_id": "GLE-873695938599194501d880aa",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-0f85843be596a55698ba5d42",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-a44e561668956375e45be948",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-873695938599194501d880aa",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-METADATA-FIRST-FILE-DIAGNOSIS",
+      "status": "PASS",
+      "execution_event_id": "GLE-9f879a283ca134cfaa6432ba",
+      "outcome_event_id": "GLE-8c18e017255f7230bb1810a9",
+      "growth_event_id": "GLE-913e2a2c82bde5c5949da798",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-9f879a283ca134cfaa6432ba",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-8c18e017255f7230bb1810a9",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-913e2a2c82bde5c5949da798",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-REVIEW-BUDGET-DOES-NOT-FORCE-PASS",
+      "status": "PASS",
+      "execution_event_id": "GLE-650b1b837d64e85ad8b482b6",
+      "outcome_event_id": "GLE-1ea143faae964d2096343aab",
+      "growth_event_id": "GLE-6a0ae29d58fc044e8d893039",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-650b1b837d64e85ad8b482b6",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-1ea143faae964d2096343aab",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-6a0ae29d58fc044e8d893039",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-SAFE-COMPUTER-USE-SEQUENCE",
+      "status": "PASS",
+      "execution_event_id": "GLE-87a71cf72166d3253b0a9db8",
+      "outcome_event_id": "GLE-22089a6ca356852a9383225d",
+      "growth_event_id": "GLE-1c3b461af56502db09357879",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-87a71cf72166d3253b0a9db8",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-22089a6ca356852a9383225d",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-1c3b461af56502db09357879",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "learning_id": "AI-LRN-SENSITIVE-AGENT-ISOLATION",
+      "status": "PASS",
+      "execution_event_id": "GLE-4bda0e99afeff2291c6bfa93",
+      "outcome_event_id": "GLE-e53f9410f01eb49b84b43a86",
+      "growth_event_id": "GLE-f34c604b3b7baff538f5aca1",
+      "receipts": {
+        "execution": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-4bda0e99afeff2291c6bfa93",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "outcome": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-e53f9410f01eb49b84b43a86",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        },
+        "growth": {
+          "ok": true,
+          "errors": [],
+          "appended": true,
+          "idempotent": false,
+          "event_id": "GLE-f34c604b3b7baff538f5aca1",
+          "utility_projection": {
+            "attempted": true,
+            "ok": true,
+            "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+            "source_count": 0
+          }
+        }
+      }
+    }
+  ],
+  "next_quests": [
+    {
+      "quest_id": "AI-Q2-BOUNDED-EXPERIMENTS",
+      "state": "OPEN",
+      "member_count": 17
+    },
+    {
+      "quest_id": "AI-Q3-DOMAIN-APPLICATION",
+      "state": "OPEN",
+      "member_count": 18
+    },
+    {
+      "quest_id": "AI-Q4-VERIFY-WHEN-NEEDED",
+      "state": "OPEN_ON_DEMAND",
+      "member_count": 5
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "hosted_chat_auto_invocation_claimed": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

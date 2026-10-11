@@ -1,0 +1,229 @@
+{
+  "assumption": "technical planning estimate only: ~1 credit/character observed in prior probe; actual ElevenLabs model/plan billing must be checked at execution",
+  "main_e56": {
+    "clips": 144,
+    "chars": 4852,
+    "credit_estimate": {
+      "linear": 4852,
+      "plus10": 5338,
+      "plus25": 6065
+    },
+    "families": {
+      "VF01_ADVENTURE": {
+        "members": [
+          {
+            "id": "dubi",
+            "name": "두비",
+            "clips": 6,
+            "chars": 192
+          },
+          {
+            "id": "guide-08",
+            "name": "벨로",
+            "clips": 6,
+            "chars": 192
+          },
+          {
+            "id": "guide-14",
+            "name": "토토",
+            "clips": 6,
+            "chars": 187
+          },
+          {
+            "id": "guide-21",
+            "name": "테스",
+            "clips": 6,
+            "chars": 196
+          }
+        ],
+        "clips": 24,
+        "chars": 767
+      },
+      "VF02_CARE": {
+        "members": [
+          {
+            "id": "lori",
+            "name": "로리",
+            "clips": 6,
+            "chars": 196
+          },
+          {
+            "id": "guide-12",
+            "name": "피치",
+            "clips": 6,
+            "chars": 205
+          },
+          {
+            "id": "guide-18",
+            "name": "보리",
+            "clips": 6,
+            "chars": 208
+          },
+          {
+            "id": "guide-22",
+            "name": "셀",
+            "clips": 6,
+            "chars": 224
+          }
+        ],
+        "clips": 24,
+        "chars": 833
+      },
+      "VF03_OBSERVE": {
+        "members": [
+          {
+            "id": "ink",
+            "name": "잉크",
+            "clips": 6,
+            "chars": 198
+          },
+          {
+            "id": "guide-09",
+            "name": "모카",
+            "clips": 6,
+            "chars": 206
+          },
+          {
+            "id": "guide-17",
+            "name": "마루",
+            "clips": 6,
+            "chars": 193
+          },
+          {
+            "id": "guide-20",
+            "name": "루미",
+            "clips": 6,
+            "chars": 207
+          }
+        ],
+        "clips": 24,
+        "chars": 804
+      },
+      "VF04_LEADER": {
+        "members": [
+          {
+            "id": "take",
+            "name": "테이크",
+            "clips": 6,
+            "chars": 207
+          },
+          {
+            "id": "guide-11",
+            "name": "키로",
+            "clips": 6,
+            "chars": 203
+          },
+          {
+            "id": "guide-19",
+            "name": "린",
+            "clips": 6,
+            "chars": 209
+          },
+          {
+            "id": "guide-23",
+            "name": "제이크",
+            "clips": 6,
+            "chars": 222
+          }
+        ],
+        "clips": 24,
+        "chars": 841
+      },
+      "VF05_CONNECT": {
+        "members": [
+          {
+            "id": "nova",
+            "name": "노바",
+            "clips": 6,
+            "chars": 209
+          },
+          {
+            "id": "guide-10",
+            "name": "니아",
+            "clips": 6,
+            "chars": 181
+          },
+          {
+            "id": "guide-16",
+            "name": "포포",
+            "clips": 6,
+            "chars": 187
+          },
+          {
+            "id": "guide-24",
+            "name": "비비",
+            "clips": 6,
+            "chars": 233
+          }
+        ],
+        "clips": 24,
+        "chars": 810
+      },
+      "VF06_CALM_DISCOVERY": {
+        "members": [
+          {
+            "id": "zero",
+            "name": "제로",
+            "clips": 6,
+            "chars": 204
+          },
+          {
+            "id": "guide-07",
+            "name": "솔라",
+            "clips": 6,
+            "chars": 188
+          },
+          {
+            "id": "guide-13",
+            "name": "민트",
+            "clips": 6,
+            "chars": 207
+          },
+          {
+            "id": "guide-15",
+            "name": "루네",
+            "clips": 6,
+            "chars": 198
+          }
+        ],
+        "clips": 24,
+        "chars": 797
+      }
+    }
+  },
+  "shared_signature": {
+    "clips": 24,
+    "chars": 411
+  },
+  "shared_memory": {
+    "clips": 30,
+    "chars": 988
+  },
+  "core6_sourced_scenes": {
+    "clips": 30,
+    "chars": 677
+  },
+  "envelopes": {
+    "main_only": {
+      "linear": 4852,
+      "plus10": 5338,
+      "plus25": 6065
+    },
+    "main_plus_signature": {
+      "linear": 5263,
+      "plus10": 5790,
+      "plus25": 6579
+    },
+    "main_plus_signature_memory": {
+      "linear": 6251,
+      "plus10": 6877,
+      "plus25": 7814
+    },
+    "everything_current_candidate": {
+      "linear": 6928,
+      "plus10": 7621,
+      "plus25": 8660
+    }
+  },
+  "production_note": "PLAY_CAMP lower-age Crew script register is not locked and is excluded from these totals; MIDDLE deferred."
+}

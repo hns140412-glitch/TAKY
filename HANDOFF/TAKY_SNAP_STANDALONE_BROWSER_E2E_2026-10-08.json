@@ -1,0 +1,40 @@
+{
+  "schema": "TAKY_SNAP_STANDALONE_BROWSER_E2E_EVIDENCE_V1",
+  "date": "2026-10-08",
+  "codex_receipt": "pf:snap-standalone-e2e-diagnosis-20261008:0da9e5fe8dd980cb",
+  "codex_verdict": "TEST_BUG",
+  "taky_crosscheck": "Codex correctly found harness bug, but local corrected rerun additionally exposed a real UI obstruction.",
+  "runtime_bug": {
+    "element": "#snapWordChip",
+    "blocked": "#startBtn",
+    "viewport": 390,
+    "before": {
+      "start_y": [
+        688,
+        735
+      ],
+      "chip_y": [
+        669,
+        712
+      ]
+    },
+    "fix": "left 140px; bounded max width; pointer-events none",
+    "layout_probe_widths": [
+      320,
+      375,
+      390,
+      430
+    ],
+    "chip_start_overlap_after": false,
+    "chip_radio_overlap_after": false
+  },
+  "browser_e2e_after_fix": {
+    "ok": true,
+    "view": "growth",
+    "records": 1,
+    "exp": 55,
+    "task_completed_events": 1,
+    "bridge_validate": true
+  },
+  "claim_boundary": "Browser-local standalone integration only. Does not claim real iPhone/device/deploy PASS."
+}

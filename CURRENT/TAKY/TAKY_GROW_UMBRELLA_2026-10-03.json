@@ -1,0 +1,30 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_UMBRELLA_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "owner": "TAKY_GROW_CORE",
+  "model": {
+    "GROW": "shared lineage, routing, promotion and regression core",
+    "ARCHI_GROW": "architecture/design/workflow/result growth",
+    "LEARNING_GROW": "learning-domain growth with learner/system growth separation"
+  },
+  "registry": "DOMAIN/GROW_DOMAIN_REGISTRY.json",
+  "shared_contract": "DOMAIN/TAKY_GROWTH_LINEAGE_CONTRACT.md",
+  "invariants": [
+    "GROW is the umbrella, not a competing domain owner",
+    "ArchiGrow and Learning Grow preserve separate domain authority",
+    "learner outcome never directly promotes learning-system policy",
+    "registered domain owner routes before generic mining/index-learning",
+    "CURRENT_BEST remains scope-specific and never auto-promotes"
+  ],
+  "verification": {
+    "grow_domain_router_test": "5/5 PASS",
+    "grow_umbrella_integration_test": "6/6 PASS",
+    "learning_growth_strategy_ledger": "PASS",
+    "learning_outcome_growth_feedback": "PASS",
+    "growth_lineage_engine_test": "4/4 PASS",
+    "growth_adversarial_test": "5/5 PASS",
+    "full_python_enforcement": "143/143 PASS"
+  },
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

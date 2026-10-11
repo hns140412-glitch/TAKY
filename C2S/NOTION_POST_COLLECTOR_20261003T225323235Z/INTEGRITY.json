@@ -1,0 +1,55 @@
+{
+  "checks": {
+    "queue_hash": true,
+    "manifest": true,
+    "timestamps": true,
+    "counts": true,
+    "errors": true,
+    "snapshots": true
+  },
+  "queue_sha256": "cf3b8cf0fe64796cbea1654a4d32e198a187d1308deeda411fe396f751ad4a42",
+  "snapshots": [
+    {
+      "id": "3eefa868-dc2a-811f-a306-f5eaf51a64db",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-811f-a306-f5eaf51a64db\\1d1283a4cdb8608356b20012b4543b8a1178cb9d6a085b9c689e674dcfaba150\\blocks.json",
+      "sha256": "6943dfe5956b820f049875766d64b186869cec791d8f5420921d9f00c08a46d3",
+      "fingerprint": "1d1283a4cdb8608356b20012b4543b8a1178cb9d6a085b9c689e674dcfaba150",
+      "valid": true
+    },
+    {
+      "id": "3eefa868-dc2a-812a-94a9-e6903289786b",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-812a-94a9-e6903289786b\\da81b6537a59146709c8e88f85ec4f4e825a26f465f7a24b82edb0cd00707401\\blocks.json",
+      "sha256": "8cffaa438f29698f810931a9755638cae862ec8776f9845d964d6ef43926b665",
+      "fingerprint": "da81b6537a59146709c8e88f85ec4f4e825a26f465f7a24b82edb0cd00707401",
+      "valid": true
+    },
+    {
+      "id": "3eefa868-dc2a-8148-adea-cbc52a94e35f",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-8148-adea-cbc52a94e35f\\2067c5515581b1124d3c93482c22fff7999565927eba3d59e5b11ac3794e9b3c\\blocks.json",
+      "sha256": "cc411002bbf6038851608d1075bcf67ca184688e92ccd96a1b2e1d09c3b1b403",
+      "fingerprint": "2067c5515581b1124d3c93482c22fff7999565927eba3d59e5b11ac3794e9b3c",
+      "valid": true
+    },
+    {
+      "id": "3eefa868-dc2a-8178-85f6-c4f777e347b0",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-8178-85f6-c4f777e347b0\\7dca6a05df7e6263ae91e59665c385f361e82beeb53149fdcca43e7eb40e65e6\\blocks.json",
+      "sha256": "e2f5f82949517f2e88acd289de109e332b988c03d303aaf463285c109e2512a0",
+      "fingerprint": "7dca6a05df7e6263ae91e59665c385f361e82beeb53149fdcca43e7eb40e65e6",
+      "valid": true
+    },
+    {
+      "id": "3eefa868-dc2a-81e2-8b6a-e252730faf9a",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-81e2-8b6a-e252730faf9a\\6bf0a16a2cca0c4f3505ed057a5d1857986693f8ab80d206b66982073de298b9\\blocks.json",
+      "sha256": "2b48ad1e90e93ad6c2166dce33fd21bd3e69973a0e44e2d655b985d2281ce17a",
+      "fingerprint": "6bf0a16a2cca0c4f3505ed057a5d1857986693f8ab80d206b66982073de298b9",
+      "valid": true
+    },
+    {
+      "id": "3eefa868-dc2a-81e4-aaa8-d2685b11d273",
+      "path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-81e4-aaa8-d2685b11d273\\c27c3f1fc5bef2dd886c6413bbbedf4e1f2c30400a01f873efe367e08499ffa4\\blocks.json",
+      "sha256": "5c85d089ffb4326c532701c41e9cb15dc53cc841249204dfe187d172beccb3a0",
+      "fingerprint": "c27c3f1fc5bef2dd886c6413bbbedf4e1f2c30400a01f873efe367e08499ffa4",
+      "valid": true
+    }
+  ]
+}

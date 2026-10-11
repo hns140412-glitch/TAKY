@@ -1,0 +1,10 @@
+D:\Git PWA\TAKY only. Preserve every pre-existing change. No commit/push/merge/deploy/API.
+Make the SMALLEST possible edit to .github/workflows/taky-enforcement.yml:
+- add py_compile lines for ENFORCEMENT/evidence_history_boundary_test.py and ENFORCEMENT/execution_checkpoint_identity_test.py near the related enforcement compile lines;
+- add two explicit replay steps running those two tests near the existing Atomic CURRENT checkpoint regression / evidence integrity checks.
+Do not alter any other workflow line or semantics.
+Then run:
+python -B ENFORCEMENT/evidence_history_boundary_test.py
+python -B ENFORCEMENT/execution_checkpoint_identity_test.py
+git diff --check
+Show a narrow diff of only your additions.

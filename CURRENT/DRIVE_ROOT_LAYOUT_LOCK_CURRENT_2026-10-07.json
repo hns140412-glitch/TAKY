@@ -1,0 +1,119 @@
+{
+  "schema": "TAKY_DRIVE_ROOT_LAYOUT_LOCK_RECEIPT_V2",
+  "updated_at": "2026-10-07",
+  "state": "LOCKED_AND_READBACK_VERIFIED",
+  "authority_ref": "PR210 final storage namespace + 2026-10-07 cloud/drive route delta + grouped physical presentation layout",
+  "principle": "NO_ROOT_DRIFT / CONTEXT_TOP_LEVEL / STABLE_LEAF_IDS",
+  "root_groups": [
+    "00_CONTEXT",
+    "10_DOMAINS",
+    "20_PLATFORM",
+    "90_MAINTENANCE"
+  ],
+  "hns": {
+    "root_id": "1WjH-Q2tWFvVNCiBy9r-D9U72Ac7DH61d",
+    "immediate_children": [
+      [
+        "00_CONTEXT",
+        "1Y3M3Zm4rrwUkloAiViHnWxDtsVN-gvMt"
+      ],
+      [
+        "10_DOMAINS",
+        "1lpdO7FvybmgySrow18kaO0TcUkcgXyYn"
+      ],
+      [
+        "20_PLATFORM",
+        "1UWklIxYYux6TgoLiD2xReNUz11o1Iz9o"
+      ],
+      [
+        "90_MAINTENANCE",
+        "1ViC-lolcTTl69ySyHJsZmEp5G-P2Qtdf"
+      ]
+    ],
+    "grouped_paths": {
+      "00_CONTEXT": "TAKY/00_CONTEXT",
+      "01_LEARNING": "TAKY/10_DOMAINS/01_LEARNING",
+      "02_ARCHIGROW": "TAKY/10_DOMAINS/02_ARCHIGROW",
+      "03_COMMON": "TAKY/20_PLATFORM/03_COMMON",
+      "UI_SOURCE_AUTHORITY": "TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+      "AUDIT": "TAKY/90_MAINTENANCE/AUDIT",
+      "20_REVIEWS_C2S": "TAKY/90_MAINTENANCE/20_REVIEWS_C2S",
+      "80_HANDOFF": "TAKY/90_MAINTENANCE/80_HANDOFF",
+      "90_ARCHIVE": "TAKY/90_MAINTENANCE/90_ARCHIVE",
+      "90_TEMP": "TAKY/90_MAINTENANCE/90_TEMP",
+      "99_DELETE_PENDING": "TAKY/90_MAINTENANCE/99_DELETE_PENDING"
+    },
+    "stable_leaf_ids": {
+      "01_LEARNING": "17_9ZFdN0vov8ZhC4g9cYnMakHC5u-OKr",
+      "02_ARCHIGROW": "1Ji_DA74nRjRwwy5vUJYrkMtl9y-at0zr",
+      "03_COMMON": "1UXAb5u1sraxvvIW0gHkPCS6Y-K3YMDnz",
+      "90_TEMP": "1qCLjK20Wenh7TLrYHTWJsojSEiDpXuzi",
+      "99_DELETE_PENDING": "1r9RmuhkJWL_mHcx-o3B17NnfKOgNgnXe"
+    }
+  },
+  "siezeall": {
+    "root_id": "1A9Mq171etYULKLgD4Wk1AHOFozW76Ulh",
+    "immediate_children": [
+      [
+        "00_CONTEXT",
+        "1RAVFjE6HBnQnY42x8EmlRXr3nHi7tGu9"
+      ],
+      [
+        "10_DOMAINS",
+        "1jXXTLynHb6-WtmaJy5j6-dD2JaXItWd-"
+      ],
+      [
+        "20_PLATFORM",
+        "1B5fQ1KF-iYoVWQHV41_gNiTXVAmQKuI2"
+      ],
+      [
+        "90_MAINTENANCE",
+        "1icDeX9cd17l5TcwXezy9wluIIBkBTUrW"
+      ]
+    ],
+    "grouped_paths": {
+      "00_CONTEXT": "TAKY/00_CONTEXT",
+      "01_LEARNING_SHARE": "TAKY/10_DOMAINS/01_LEARNING_SHARE",
+      "02_ARCHIGROW_SHARE": "TAKY/10_DOMAINS/02_ARCHIGROW_SHARE",
+      "03_UPDATES": "TAKY/20_PLATFORM/03_UPDATES",
+      "04_USER_DATA": "TAKY/20_PLATFORM/04_USER_DATA",
+      "90_TEMP": "TAKY/90_MAINTENANCE/90_TEMP"
+    },
+    "stable_leaf_ids": {
+      "01_LEARNING_SHARE": "1pgWTQS6Ondk6D3SYbJXGQ4y0COu0oleb",
+      "02_ARCHIGROW_SHARE": "1hSkV9J_ycMdZChU1a2YEsApiRP8Oi2wa",
+      "03_UPDATES": "111nmMqJvFfwKYoxaKBGmJWWMoqvCck0s",
+      "04_USER_DATA": "1basjn1lv8YTyo0MMMRHBKCmRv5jWyqUf",
+      "90_TEMP": "1xZ3a6bYt1uYyiUkctu_b8xrh2c6NFvtK"
+    }
+  },
+  "invariants": [
+    "TAKY root exposes exactly four groups: 00_CONTEXT, 10_DOMAINS, 20_PLATFORM, 90_MAINTENANCE.",
+    "00_CONTEXT remains directly under TAKY root.",
+    "Logical leaf folder IDs remain stable when moved under presentation groups.",
+    "All current path consumers must resolve physical paths through OS/DRIVE_STORAGE_MAP.json, not historical flat paths.",
+    "Unexpected root items go to 90_MAINTENANCE/90_TEMP HOLD.",
+    "SIEZEALL 00_INBOX_USER remains the single user reference intake surface outside the TAKY root.",
+    "HNS remains internal/admin master; SIEZEALL remains distribution/user sync.",
+    "Netlify is not asset-binding authority."
+  ],
+  "deleted_items": [],
+  "verification": [
+    "HNS Drive root readback: exact four-group set",
+    "SIEZEALL Drive root readback: exact four-group set",
+    "stable semantic leaf IDs preserved",
+    "ENFORCEMENT/drive_storage_map_validator.py: PASS",
+    "ENFORCEMENT/drive_route_resolver_test.py: PASS",
+    "ENFORCEMENT/drive_physical_layout_guard.py HNS local sync: PASS",
+    "ENFORCEMENT/drive_path_reference_guard.py: PASS",
+    "ENFORCEMENT/mobile_app_development_registry_validator.py: PASS"
+  ],
+  "enforcement": {
+    "map_validator": "ENFORCEMENT/drive_storage_map_validator.py",
+    "semantic_route_resolver": "ENFORCEMENT/drive_route_resolver.py",
+    "semantic_route_resolver_test": "ENFORCEMENT/drive_route_resolver_test.py",
+    "physical_layout_guard": "ENFORCEMENT/drive_physical_layout_guard.py",
+    "stale_reference_guard": "ENFORCEMENT/drive_path_reference_guard.py",
+    "mobile_registry_validator": "ENFORCEMENT/mobile_app_development_registry_validator.py"
+  }
+}

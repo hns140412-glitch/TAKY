@@ -1,0 +1,135 @@
+{
+  "schema": "TAKY_SYSTEMWIDE_VERIFICATION_MATRIX_V1_CANDIDATE",
+  "date": "2026-10-08",
+  "status": "STAGE_0_2_PASS__STAGE_3_PARTIAL_PASS__STAGE_4_IN_PROGRESS",
+  "authority_map": "HANDOFF/TAKY_SYSTEMWIDE_MASTER_MAP_CANDIDATE_2026-10-08.md",
+  "stages": [
+    {
+      "id": "S0",
+      "name": "SOURCE_AUTHORITY_COVERAGE",
+      "exit": "no material owner/current ambiguity",
+      "state": "PASS",
+      "checks": [
+        "master_file_registry_exists",
+        "system_layer_ownership_map_exists",
+        "master_logic_active_owner",
+        "taky2_resume_exists",
+        "ready_resume_exists",
+        "hide_resume_exists",
+        "snap_master_rev12_exists",
+        "savey_resume_exists",
+        "play_camp_resume_exists",
+        "crew_resume_exists",
+        "mining_resume_exists",
+        "repo_heads_readback",
+        "candidate_does_not_claim_canonical"
+      ]
+    },
+    {
+      "id": "S1",
+      "name": "OWNERSHIP_BOUNDARY_CONSISTENCY",
+      "exit": "no duplicate semantic owner",
+      "state": "PASS",
+      "checks": [
+        "taky_vs_taky2_separation",
+        "work_vs_learning_sibling",
+        "learning_engine_vs_planner_vs_app",
+        "savey_ai_vs_family_finance",
+        "play_camp_vs_explorer_crew",
+        "asset_vs_behavior",
+        "design_candidate_vs_golden",
+        "voice_generation_vs_runtime_playback"
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "CONTRACT_UNIT_VERIFICATION",
+      "state": "PASS_WITH_SCOPE_LIMIT"
+    },
+    {
+      "id": "S3",
+      "name": "INTEGRATION_E2E",
+      "state": "PARTIAL_PASS_EXTERNAL_REAL_FLOW_OPEN"
+    },
+    {
+      "id": "S4",
+      "name": "PRODUCTION_ARTIFACT_GATES",
+      "state": "IN_PROGRESS"
+    },
+    {
+      "id": "S5",
+      "name": "EXTERNAL_REAL_DEVICE",
+      "state": "NOT_STARTED"
+    },
+    {
+      "id": "S6",
+      "name": "PROMOTION_RELEASE",
+      "state": "NOT_STARTED"
+    }
+  ],
+  "subsystem_status": {
+    "TAKY_CORE": {
+      "state": "SEMANTIC_DESIGN_CLOSED",
+      "owner": "MASTER/MASTER_LOGIC.md"
+    },
+    "TAKY2": {
+      "state": "V3_HOLD_FINAL_MICRO_RECHECK_PENDING",
+      "latest_local": "205_passed_plus_54_subtests",
+      "runtime_version": 152,
+      "authority_digest": "e48ca039a387299fb3ea"
+    },
+    "WORK_OS": {
+      "state": "ACTIVE_CONTRACT_RUNTIME_PARTIAL"
+    },
+    "LEARNING_OS": {
+      "state": "ACTIVE_CONTRACT"
+    },
+    "LEARNING_ENGINE": {
+      "state": "ACTIVE_OWNER"
+    },
+    "READY": {
+      "state": "VS001_004_CLOSED_LOCAL"
+    },
+    "HIDE": {
+      "state": "TERM_DECODER_POSTFIX_REVIEW_PENDING"
+    },
+    "SNAP": {
+      "state": "REV12_ACTIVE__STANDALONE_BROWSER_E2E_PASS__REAL_DEVICE_OPEN"
+    },
+    "PLAY_CAMP": {
+      "state": "CLOSURE_IN_PROGRESS_3_TRACKS__CREW_CONTEXT_E2E_PASS__CORE6_TAKY_REVIEW_PASS"
+    },
+    "EXPLORER_CREW": {
+      "state": "R9_LOCAL_PASS__MAIN_LOCK_CANDIDATE__PLAY_CAMP_CORE6_TAKY_PASS__INDEPENDENT_RECHECK_OUTCOME_UNKNOWN"
+    },
+    "SAVEY_FAMILY": {
+      "state": "OPEN1_5_CLOSED_DEPLOY_HOLD"
+    },
+    "SAVEY_AI": {
+      "state": "ACTIVE_COST_ROUTER_ONLY"
+    },
+    "MINING_INDEXING": {
+      "state": "OPEN_REAL_EVIDENCE_AND_STORAGE_CLEANUP"
+    },
+    "DESIGN": {
+      "state": "CLAUDE_V1_PLUS_TAKY_LOCAL_V1_1_RENDER_30_OF_30__USER_VISUAL_APPROVAL_OPEN"
+    },
+    "VOICE": {
+      "state": "PRODUCTION_MASTER_READY__CORE_ROLE_PREFLIGHT_INCOMPLETE__CREW_LOCK_PENDING__NO_PAID_GENERATION"
+    },
+    "BADGE": {
+      "state": "IMPLEMENTATION_CLOSED_CONTENT_HOLD"
+    }
+  },
+  "evidence_refs": {
+    "S0_S1": "HANDOFF/TAKY_SYSTEMWIDE_STAGE01_VERIFICATION_2026-10-08.json",
+    "S2": "HANDOFF/TAKY_SYSTEMWIDE_STAGE2_VERIFICATION_2026-10-08.json",
+    "S3": "HANDOFF/TAKY_SYSTEMWIDE_STAGE3_VERIFICATION_2026-10-08.json",
+    "SNAP_STANDALONE_BROWSER": "HANDOFF/TAKY_SNAP_STANDALONE_BROWSER_E2E_2026-10-08.json",
+    "PLAY_CAMP_CREW_CONTEXT": "HANDOFF/TAKY_PLAY_CAMP_EXPLORER_CREW_CONTEXT_E2E_2026-10-08.json",
+    "EXPLORER_CREW_R9_RECHECK": "HANDOFF/TAKY_EXPLORER_CREW_R9_INDEPENDENT_RECHECK_RECEIPT_2026-10-08.json",
+    "VOICE_PRODUCTION_MASTER": "HANDOFF/TAKY_VOICE_PRODUCTION_MASTER_2026-10-08.json",
+    "PLAY_CAMP_TABLET_UI_LOCAL_V1_1": "D:\\Git PWA\\HANGUL-PLAY-20261007\\PLAY_CAMP_TABLET_UI_TAKY_LOCAL_DELTA_V1_1_2026-10-08.json"
+  },
+  "stage2_global_fix": "MASTER_FILE_REGISTRY updated to 2026-10-08.1; validator PASS covers 56 files"
+}

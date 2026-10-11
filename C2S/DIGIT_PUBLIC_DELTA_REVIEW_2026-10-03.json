@@ -1,0 +1,18 @@
+{
+  "schema":"TAKY_DIGIT_PUBLIC_DELTA_REVIEW_V1",
+  "date":"2026-10-03",
+  "source":"https://litt.ly/digit",
+  "scope":"PUBLIC_ONLY_NO_PAID_CONTENT_EXTRACTION",
+  "baseline":{"date":"2026-10-02","indexed_refs":["REF-077","REF-078","REF-079","REF-080"]},
+  "duplicate_policy":"EXISTING_REF_ROLE_AND_PUBLIC_PAGE_TOPIC_COMPARISON",
+  "delta_candidates":[
+    {"topic":"ARCHITECTURE_AI_NANOBANANA_2","state":"CHANGED_OR_NEW_EDITION","public_evidence":"12 styles x 8 building types; 6-section prompt decomposition; NanoBanana 2 / Gemini 3.1 Image","route":["ARCHITECTURE_DOMAIN_ENGINE","ASSET_ENGINE","PROMPT_WORKFLOW"]},
+    {"topic":"INTERIOR_AI_NANOBANANA_2","state":"NEW_PUBLIC_TOPIC","public_evidence":"Interior AI encyclopedia NanoBanana 2 listing","route":["ARCHITECTURE_DOMAIN_ENGINE","DESIGN_GATE","ASSET_ENGINE"]},
+    {"topic":"ARCHITECTURE_FACADE_100","state":"NEW_VS_BASELINE_REFS","public_evidence":"Architecture facade 100 public listing","route":["ARCHITECTURE_DOMAIN_ENGINE","DESIGN_GATE"]},
+    {"topic":"ARCHITECTURE_SEQUENCE_50","state":"NEW_VS_BASELINE_REFS","public_evidence":"Architecture sequence 50 public listing","route":["ARCHITECTURE_DOMAIN_ENGINE","DESIGN_GATE"]}
+  ],
+  "duplicates_or_already_indexed":["DIAGRAM_100=>REF-078","DESIGN_CONCEPT_100=>REF-079","ARCHI_TRACE=>REF-080","OLDER_ARCHITECTURE_AI_PROMPT_MATRIX=>REF-077"],
+  "learning_projection":"NOT_APPLICABLE_NON_LEARNING_DOMAIN",
+  "domain_handoff":"CANDIDATE_ONLY_PENDING_INDEX_OWNER_INCREMENTAL_REVISION",
+  "guards":["NO_PAID_CONTENT_BODY_CAPTURE","NO_CANONICAL_PROMOTION","NO_CURRENT_POINTER_CHANGE","NO_MASTER_CHANGE","NO_MAIN_MERGE","NO_REMOTE_PUSH","NO_DEPLOYMENT","NO_PAID_API"]
+}

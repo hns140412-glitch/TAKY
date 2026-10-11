@@ -1,0 +1,75 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_OPEN_VERIFICATION_V32_1",
+  "date": "2026-10-04",
+  "status": "PARTIAL_CLOSE__3_OPEN_REMAIN",
+  "verified": [
+    {
+      "source_id": "REF-087",
+      "state": "VERIFIED_EPISODE_TITLE_MAPPING",
+      "evidence": [
+        "Public live page confirms #277 Genspark agent team, #276 Apps Script reservation app, #275 ARRAYFORMULA/QUERY automation, #274 beginner Google Sheets AI automation."
+      ],
+      "disposition_change": false,
+      "authority_change": false,
+      "note": "Exact dates/tiers remain time-sensitive, but episode/title mapping no longer needs HOLD."
+    },
+    {
+      "source_id": "REF-090",
+      "state": "FULL_LOCAL_CAPTURE_STATIC_SECURITY_REVIEW_PASS_WITH_CAVEAT",
+      "local_review": {
+        "macro_chars": 21571,
+        "option_explicit": true,
+        "external_network_access": false,
+        "shell_execution": false,
+        "filesystem_access": false,
+        "registry_access": false,
+        "generic_createobject": false,
+        "on_error_resume_next_count": 10,
+        "preview_gate": true,
+        "undo_entry_attempt": true,
+        "theme_processing": true
+      },
+      "disposition": "ADOPT_AS_EXPERIMENT_CANDIDATE",
+      "authority_ceiling": "EXPERIMENT_ONLY",
+      "still_open": "Synthetic disposable-deck functional regression before any implementation."
+    },
+    {
+      "source_id": "REF-092",
+      "state": "OFFICIAL_SOURCE_SPOT_CHECK_COMPLETE",
+      "correction": {
+        "gallery_live_brand_count": 276,
+        "prior_claim_284": "STALE_OR_UNVERIFIED__DO_NOT_INDEX_AS_CURRENT_FACT"
+      },
+      "spot_checks": [
+        "Apple HIG: high-level content-first, restrained accent, familiar component principles align; gallery-specific numeric motion/token values remain secondary.",
+        "Fluent 2: official docs support neutral/shared/brand palettes and semantic token layers; exact gallery numeric palette values are not promoted without official token verification.",
+        "IBM Carbon: official docs confirm IBM Plex hierarchy and Blue 60 #0F62FE as key interactive/brand token.",
+        "KRDS: official repository confirms tokenized design system, reusable components, consistency/accessibility goals; inferred numeric shadow/motion values remain non-authoritative."
+      ],
+      "disposition": "ADJUST",
+      "authority_ceiling": "INSPIRATION_REFERENCE_ONLY"
+    }
+  ],
+  "hold": [
+    {
+      "source_id": "REF-091",
+      "state": "REACQUISITION_FAILED",
+      "evidence": "Headless Chrome returned only 'Notion JavaScript must be enabled in order to use Notion. Please enable JavaScript to continue.'",
+      "disposition": "HOLD",
+      "next": "Requires a genuinely accessible/public body capture; do not infer CARL from title."
+    }
+  ],
+  "remaining_open": [
+    "REF-091 accessible body reacquisition",
+    "REF-090 synthetic disposable-deck functional regression",
+    "REF-088 selected child-post primary review (HTML PPT / DESIGN.md / staged generation / image-slot prompting)"
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "deployment": false,
+    "paid_api_used": false
+  }
+}

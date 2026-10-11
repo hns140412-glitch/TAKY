@@ -1,0 +1,41 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R4_REOPEN_2026-10-04",
+  "status": "LOCAL_VERIFIED_AWAITING_R4_REAUDIT",
+  "source_audit": {
+    "round": 4,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R4_FINAL.log"
+  },
+  "required_findings": [
+    {
+      "id": "R4-1",
+      "issue": "Non-passing/unrecognized regression status must never be silently ignored",
+      "status": "CLOSED_LOCAL_VERIFIED",
+      "remediation": "growth_lineage_engine now fails closed for missing, known failure, and unrecognized regression statuses; adversarial tests cover GitHub FAILURE/ERROR/CANCELLED/TIMED_OUT plus unknown/missing status."
+    },
+    {
+      "id": "R4-2",
+      "issue": "Evidence approval hash must be portable across line-ending conversion",
+      "status": "CLOSED_LOCAL_VERIFIED",
+      "remediation": "Approval binding uses TAKY_CANONICAL_JSON_DIGEST_V1 over parsed canonical JSON; line endings and formatting no longer affect the approval digest; portability test passes."
+    }
+  ],
+  "current_best": {
+    "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "status": "REMAINS_CURRENT_BEST_SCOPE_LIMITED",
+    "automatic_promotion": false
+  },
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "focused_verification": "PASS",
+  "approval_reaffirmation_source": "CHAT_EXPLICIT_REAFFIRMATION_AFTER_EXACT_R2_EVIDENCE_REF_AND_SHA_DISCLOSURE",
+  "approval_token": "ㄱ",
+  "reaudit_required": true,
+  "superseded_by": "CURRENT/TAKY/TAKY_GROW_CLAUDE_R4_FIX_CLOSURE_2026-10-04.json"
+}

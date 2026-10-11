@@ -1,0 +1,138 @@
+{
+  "schema": "TAKY_AI_SINGLE_HOLD_RECOVERY_RECEIPT_V1",
+  "task_id": "AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06",
+  "status": "HOLD_BODY_NOT_ACQUIRED",
+  "contract": {
+    "repository": "D:/Git PWA/TAKY",
+    "target_branch": "character-asset-behavior-separation-2026-09-30",
+    "verified_base_head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+    "ref_basis": "Verified local HEAD; remote freshness not asserted",
+    "objective": "Retry exactly the BrandyAction active hold using ScraplingServer MCP; materialize only substantive body-supported evidence.",
+    "working_model": {
+      "primary_outcome": "Evidence-backed disposition of this one hold",
+      "priority_order": [
+        "Verify substantive body",
+        "Preserve hold without body",
+        "Maintain receipt consistency"
+      ],
+      "protected_state": [
+        "All other items and existing dirty work",
+        "Historical recovery successes and counts",
+        "Existing RAW/INDEX/LEARNING evidence"
+      ],
+      "rule_to_execution": [
+        {
+          "rule_ref": "MASTER/AI_COLLABORATION_PROTOCOL.md §4",
+          "effect": "CONSTRAINT",
+          "implication": "Use explicit user scope; no unrelated changes or semantic redefinition"
+        },
+        {
+          "rule_ref": "OS/SAVEY_AI_ECONOMY.md",
+          "effect": "CONSTRAINT",
+          "implication": "Use Scrapling MCP and local verification only; no paid APIs"
+        },
+        {
+          "rule_ref": "CURRENT/DATA/AI_REMINING_BACKLOG.json guards",
+          "effect": "HOLD",
+          "implication": "No learning or source promotion from title, shell, footer, or not-found content"
+        }
+      ],
+      "next_action": "Record acquired not-found evidence and retain this hold",
+      "stop_conditions": [
+        "Receipt and active-hold consistency validated",
+        "No push, merge, deployment or canonical promotion"
+      ]
+    },
+    "allowed_change_scope": [
+      "CURRENT/DATA/AI_REMINING_BACKLOG.json",
+      "C2S/AI_REMINING_FINAL_RECEIPT_2026-10-06.json",
+      "C2S/AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06.json"
+    ],
+    "forbidden": [
+      "Other hold processing",
+      "Code changes",
+      "RAW/INDEX/LEARNING promotion without substantive body",
+      "Push/merge/deploy",
+      "Paid APIs"
+    ],
+    "acceptance_tests": [
+      "Exactly one hold retried",
+      "Response and substantive-body character counts distinguished",
+      "Hold retained with evidence when no body",
+      "Other items and aggregate counts preserved",
+      "Changed JSON parses and git diff --check passes"
+    ],
+    "validation_commands": [
+      "Local Python JSON parsing and before/after scope assertions",
+      "git diff --check -- <changed existing paths>",
+      "git diff --no-index --check -- /dev/null <new receipt>"
+    ],
+    "human_approval": "Local receipt updates authorized by current user; merge/deploy forbidden",
+    "runtime_mobile": "Scrapling browser acquisition is runtime evidence; mobile/build/lint not applicable to JSON-only hold receipt maintenance",
+    "lifecycle": "No controlled execution lifecycle record supplied; no lifecycle transition asserted"
+  },
+  "checked_at": "2026-10-05T22:42:56.777Z",
+  "title": "AI 직원 생성하기 | BrandyAction EDU",
+  "url": "https://brandyaction-edu.com/classes/product-cf6fb7a4-6eb9-41ea-a27a-02201bf07d1b",
+  "acquisition": {
+    "tool": "ScraplingServer.fetch",
+    "http_status": 200,
+    "wait_ms": 5000,
+    "network_idle": true,
+    "extracted_text": "본문으로 이동\nEDU\n무료 클래스\n전체 클래스\n고객 이야기\n아티클\n로그인\n페이지를 찾을 수 없습니다.\n홈으로\n브랜디액션 에듀\n사람과 사업의 가능성을 실행으로 바꾸는 실전 교육 플랫폼\n이용약관\n개인정보처리방침\n환불규정\n문의하기\n이 사이트에서는 Meta가 쿠키로 방문 기록을 수집합니다(광고 측정·맞춤형 광고).\n맞춤형 광고 설정\n상호\n주식회사 브랜디액션\n대표자\n전태헌, 안정호\n사업자등록번호\n677-87-02769\n통신판매업 신고번호\n제2026-충남천안-1825호\n대표전화\n070-7736-3744\n주소\n충청남도 천안시 서북구 천안천4길 32 506호\n고객지원\nedu@brandyaction.co.kr\n© 2026 BrandyAction Co., Ltd. All rights reserved.\nBrandyAction EDU | 배운 것을, 내 일의 성과로.",
+    "text_chars": 422,
+    "substantive_body_chars": 0,
+    "body_acquired": false,
+    "reason": "HTTP 200 rendered an application-level not-found page ('페이지를 찾을 수 없습니다.'); remaining text is navigation, footer, cookie notice and company metadata. No substantive class content acquired."
+  },
+  "mining": {
+    "findings": [],
+    "status": "BLOCKED_NO_BODY_EVIDENCE",
+    "raw_source_materialized": false,
+    "index_entries_added": 0,
+    "learning_rules_added": 0,
+    "lineage_events_added": 0
+  },
+  "required_next": "REACQUIRE_BODY",
+  "recovery_context": {
+    "prior_index_owner_receipt": "C2S/AI_RECOVERED_HOLDS_INDEX_OWNER_RECEIPT_2026-10-06.json",
+    "prior_learning_absorption": "C2S/AI_RECOVERED_HOLDS_LEARNING_ABSORPTION_2026-10-06.json",
+    "effect": "Failed retry only; historical recovered counts and materializations unchanged"
+  },
+  "validation": {
+    "status": "LOCAL_CHECKS_PASSED",
+    "json_files_parsed": [
+      "CURRENT/DATA/AI_REMINING_BACKLOG.json",
+      "C2S/AI_REMINING_FINAL_RECEIPT_2026-10-06.json",
+      "C2S\\AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06.json"
+    ],
+    "scope_check": "Exact before/after JSON equality after removing target retry fields and restoring target reason; all other items/counts unchanged",
+    "commands": [
+      {
+        "command": "git diff --check -- CURRENT/DATA/AI_REMINING_BACKLOG.json C2S/AI_REMINING_FINAL_RECEIPT_2026-10-06.json C2S\\AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06.json",
+        "exit_code": 0,
+        "whitespace_errors": false
+      },
+      {
+        "command": "git -c core.autocrlf=false diff --no-index --check -- nul CURRENT/DATA/AI_REMINING_BACKLOG.json",
+        "exit_code": 1,
+        "whitespace_errors": false
+      },
+      {
+        "command": "git -c core.autocrlf=false diff --no-index --check -- nul C2S/AI_REMINING_FINAL_RECEIPT_2026-10-06.json",
+        "exit_code": 1,
+        "whitespace_errors": false
+      },
+      {
+        "command": "git -c core.autocrlf=false diff --no-index --check -- nul C2S\\AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06.json",
+        "exit_code": 1,
+        "whitespace_errors": false
+      }
+    ],
+    "note": "git diff --no-index may return 1 for file differences; no whitespace diagnostics",
+    "runtime": "ScraplingServer rendered HTTP 200 not-found page",
+    "mobile_build_lint_tests": "Not applicable to JSON-only receipt changes"
+  },
+  "requested_next_transition": "TAKY_REVIEW of retry evidence; retain HOLD_BODY_NOT_ACQUIRED",
+  "commit_produced": null
+}

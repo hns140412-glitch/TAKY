@@ -1,0 +1,42 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_LEARN_D1B_VERIFIER_PROGRESS_2026-10-04",
+  "status": "PARTIAL_VERIFIED__REAL_PROVIDER_BINDING_OPEN",
+  "domain_item": "LEARN-D1b",
+  "completed": [
+    "server-owned deterministic reference verifier for Hide/Ready",
+    "server-owned authorized HUMAN_RUBRIC_BINARY verifier for Snap",
+    "client verification claims remain non-authoritative",
+    "central /api/learning/evidence integration produces REAL_EVIDENCE_RECEIPT only after trusted server verification"
+  ],
+  "implementation": [
+    "LEARNING/verification/server-specialist-verifier.js",
+    "LEARNING/verification/server-specialist-verifier.test.js",
+    "LEARNING/verification/server-specialist-verifier.integration.test.js"
+  ],
+  "verification": [
+    "SERVER_SPECIALIST_EVIDENCE_VERIFIER_PASS",
+    "SERVER_SPECIALIST_VERIFIER_CENTRAL_E2E_PASS",
+    "CENTRAL_LEARNING_HTTP_ENDPOINT_PASS",
+    "AUTHENTICATED_EVIDENCE_TRANSPORT_PASS",
+    "REAL_OUTCOME_GROWTH_E2E_PASS",
+    "CANONICAL_LEARNING_EVIDENCE_ADAPTER_PASS",
+    "LEARNING_VERIFIER_POLICY_PASS",
+    "LEARNING_VERIFICATION_LAYER_PASS"
+  ],
+  "guards": {
+    "client_mints_verification_receipt": false,
+    "client_verified_outcome_authority": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "open_dependencies": [
+    "bind real server-owned Hide retrieval reference source",
+    "bind real Ready answer-key/reference source",
+    "bind real Snap parent/teacher/qualified-reviewer workflow and durable review source",
+    "bind production Google issuer/audience/membership and selected durable store in hosted runtime"
+  ]
+}

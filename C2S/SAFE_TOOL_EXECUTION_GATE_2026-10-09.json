@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_SAFE_TOOL_EXECUTION_GATE_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "PASS_ENFORCED",
+  "rule_id": "TKY-SAFEEXEC-001",
+  "owner": "MASTER/SAFE_TOOL_EXECUTION_PROTOCOL.md",
+  "enforcement": "ENFORCEMENT/safe_tool_action_gate.py",
+  "regression": "ENFORCEMENT/safe_tool_action_gate_test.py",
+  "verified": {
+    "exact_drive_connector_pass": true,
+    "drivefs_reverse_lookup_blocked_when_connector_exists": true,
+    "broad_env_dump_blocked": true,
+    "same_blocked_signature_retry_blocked": true,
+    "file_io_shell_route_blocked": true,
+    "tests": "5/5 PASS",
+    "drive_storage_map_validator": "PASS",
+    "git_diff_check": "NO_ERRORS_WARNINGS_ONLY"
+  },
+  "required_behavior": [
+    "exact target first",
+    "Google Drive connector/file-folder ID before local reverse-engineering",
+    "one call one primary purpose",
+    "no broad auth/account-adjacent enumeration without explicit necessity",
+    "no unchanged retry after safety block",
+    "file tools before shell for file-only I/O"
+  ],
+  "guards": {
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

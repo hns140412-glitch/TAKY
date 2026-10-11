@@ -1,0 +1,99 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V34",
+  "generated_at": "2026-10-08T14:38:12.247757+00:00",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+  "parent_sha256": "140a905048a22c71e6888d9da0bb69f3ac206beeff980005c484e106edc5a8d7",
+  "input_mining_receipt": "TAKY-SOURCE-VAULT/reports/DIRECT_NOTION_HUMANIZE_KR_MINING_20261008.json",
+  "input_mining_sha256": "96bd847569f4a5e6db07da9949dc4a9e4b5598bcc9904ab6a685ef683af4b3a9",
+  "items": [
+    {
+      "source_id": "REF-095",
+      "title": "Humanize KR / AI 한글 티 분류 체계 — Korean AI Output Style QA Reference",
+      "url": "https://github.com/epoko77-ai/im-not-ai",
+      "secondary_url": "https://d-day.notion.site/AI-5-70-3e3bbc58d57181ddb562e359a24727c8",
+      "source_family": "HUMANIZE_KR_KOREAN_AI_TELL_TAXONOMY",
+      "source_type": "DIRECT_NOTION_MINED_REFERENCE_WITH_UPSTREAM_PRIMARY_VERIFICATION",
+      "authority_level": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_TAXONOMY_AND_TOOL_BEHAVIOR__STYLE_QA_REFERENCE_ONLY__NOT_AUTHORSHIP_PROOF",
+      "domain_facets": [
+        "ai_orchestration",
+        "korean_writing_quality",
+        "output_style_qa"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE",
+        "AI_REFERENCE_PROJECTION"
+      ],
+      "origin_type": "USER_SHARED_PUBLIC_NOTION_PLUS_UPSTREAM_OPEN_SOURCE",
+      "publisher_or_account": "epoko77-ai / Humanize KR contributors",
+      "value_statement": "Korean AI-output style QA reference: preserve 85-pattern upstream taxonomy, severity/hold/genre caveats and false-positive controls; use to improve TAKY-generated Korean prose without treating style signals as proof of AI authorship.",
+      "controlled_terms": [
+        "KOREAN_WRITING_QA",
+        "AI_TELL_TAXONOMY",
+        "85_PATTERN_IDS",
+        "10_CATEGORIES",
+        "FALSE_POSITIVE_GUARD",
+        "STYLE_HUMANIZATION",
+        "NOT_AUTHORSHIP_DETECTOR"
+      ],
+      "keywords": [
+        "Humanize KR",
+        "im-not-ai",
+        "Korean AI tell",
+        "AI writing style",
+        "문체 QA",
+        "번역투",
+        "AI 티"
+      ],
+      "entities": [
+        "epoko77-ai/im-not-ai",
+        "Humanize KR"
+      ],
+      "source_review_state": "INDEX_OWNER_REVIEW_PENDING",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "NONE_EXACT_PRIOR_REF_FOUND",
+      "version_relation": "NEW_SOURCE_OR_REFERENCE",
+      "verification_needed": [
+        "Version-check upstream repository snapshot before future rule refresh.",
+        "Preserve per-pattern evidence strength, hold flags and genre/model caveats.",
+        "Keep README/taxonomy version-label divergence explicit rather than inventing a unified taxonomy version.",
+        "Do not promote semantic-watermark claims without independent primary verification."
+      ],
+      "claims_to_exclude": [
+        "A matched style pattern proves AI authorship.",
+        "All 85 patterns are universally undesirable in every genre.",
+        "The 70-pattern Notion summary is the complete upstream taxonomy.",
+        "TAKY may automatically rewrite user text without task-specific intent."
+      ],
+      "source_actor": "epoko77-ai / Humanize KR contributors; secondary Notion summary author",
+      "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_NOTION_SUMMARY",
+      "source_author_identity_state": "PRIMARY_REPOSITORY_AND_LICENSE_VERIFIED__INDIVIDUAL_REAL_ID_NOT_REQUIRED",
+      "source_direction": "KOREAN_AI_TEXT_STYLE_DETECTION_AND_HUMANIZATION_WORKFLOW",
+      "source_direction_signals": [
+        "KOREAN_WRITING_QA",
+        "AI_TELL_TAXONOMY",
+        "STYLE_REWRITE",
+        "OPEN_SOURCE_MIT",
+        "SECONDARY_SUMMARY_DRIFT",
+        "FALSE_POSITIVE_GUARDS"
+      ],
+      "applicability_scope": [
+        "TAKY_KOREAN_OUTPUT_QA",
+        "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+        "LEARNING_CONTENT_COPY_STYLE_QA_NOT_LEARNER_MASTERY",
+        "PROMPT_OUTPUT_HUMANIZATION_EXPERIMENT"
+      ],
+      "authority_ceiling": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_TAXONOMY_AND_TOOL_BEHAVIOR__STYLE_QA_REFERENCE_ONLY_FOR_TAKY__NOT_AI_AUTHORSHIP_PROOF",
+      "source_ref": "INDEX:REF-095",
+      "canonical_promotion": false
+    }
+  ],
+  "guards": [
+    "AUTHOR != AUTHORITY",
+    "REFERENCE_ONLY",
+    "STYLE_SIGNAL != AI_AUTHORSHIP_PROOF",
+    "LEARNING_COPY_QA != LEARNER_MASTERY",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DEPLOYMENT",
+    "NO_PAID_API"
+  ]
+}

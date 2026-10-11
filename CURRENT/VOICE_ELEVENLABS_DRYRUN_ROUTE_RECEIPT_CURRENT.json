@@ -1,0 +1,56 @@
+{
+  "schema_version": "TAKY_ELEVENLABS_DRYRUN_ROUTE_RECEIPT_V2",
+  "request_id": "VOICE-DRYRUN-20261008-002",
+  "hard_credit_cap": 500.0,
+  "paid_call_budget": 1,
+  "route_policy": "ROUTE_BEFORE_CREATE_WITH_TECHNICAL_ALLOWANCE",
+  "registry_asset_count": 0,
+  "steps": [
+    {
+      "id": "DR0",
+      "type": "READ_USAGE",
+      "paid_generation": false,
+      "required": false,
+      "failure_behavior": "CONTINUE_WITH_NOT_EXPOSED",
+      "route": "READ_ONLY_OPTIONAL"
+    },
+    {
+      "id": "DR1",
+      "type": "TECHNICAL_TTS",
+      "paid_generation": true,
+      "dryrun_exception": "EXPLICIT_DRYRUN_ALLOWANCE",
+      "max_calls": 1,
+      "text": "안녕! 짧게 소리만 확인할게.",
+      "role": "PLAY_CAMP_TEACHER_KO",
+      "locale": "ko-KR",
+      "generation_reason": "TECHNICAL_DRY_RUN",
+      "production_candidate": false,
+      "route_decision": {
+        "route": "DRYRUN_TECHNICAL_ALLOWED",
+        "reason": "Explicit user-authorized one-call connectivity probe",
+        "asset_id": null,
+        "next_action": "Run exactly one short TTS call, record the result/usage if exposed, then stop. Do not promote this clip as a production asset."
+      },
+      "semantic_asset_key": null
+    },
+    {
+      "id": "DR2",
+      "type": "READ_USAGE",
+      "paid_generation": false,
+      "required": false,
+      "failure_behavior": "RECORD_NOT_EXPOSED",
+      "route": "READ_ONLY_OPTIONAL"
+    }
+  ],
+  "preflight": {
+    "explicit_user_authorization": true,
+    "cap_le_500": true,
+    "paid_calls_exactly_1": true,
+    "technical_probe_exactly_1": true,
+    "usage_before_non_blocking": true,
+    "retries_allowed": 0,
+    "batch_generation": false,
+    "voice_design_in_same_run": false
+  },
+  "status": "READY_FOR_SINGLE_TECHNICAL_TTS"
+}

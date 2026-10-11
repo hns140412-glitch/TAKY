@@ -1,0 +1,41 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R5_FIX_CLOSURE_2026-10-04",
+  "status": "FULL_REGRESSION_PASS_AWAITING_CLAUDE_R6",
+  "source_audit": {
+    "round": 5,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R5_FINAL.log"
+  },
+  "closed_findings": [
+    {
+      "id": "R5-1",
+      "issue": "Conflicting duplicate regression statuses for same workflow_run must fail closed",
+      "status": "CLOSED_FULL_VERIFIED",
+      "implementation": "Regression workflow_run dedupe now records normalized PASS/FAIL state and emits CURRENT_BEST_REGRESSION_STATUS_CONFLICT when duplicate entries disagree.",
+      "tests": [
+        "growth_adversarial_test.test_conflicting_duplicate_regression_status_blocks"
+      ]
+    }
+  ],
+  "focused_verification": {
+    "growth_adversarial": "20/20 PASS",
+    "promotion": "3/3 PASS"
+  },
+  "active_open_after_focused_verification": [],
+  "next": "Run Claude R6 independent read-only audit; freeze active_open=[] only if no REQUIRED finding remains.",
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "full_verification": {
+    "python": "285/285 PASS",
+    "grow_node": "6/6 PASS",
+    "settings_json": "PASS",
+    "git_diff_check": "PASS",
+    "python_log": "ENFORCEMENT/grow_r5_full_python_latest.log"
+  }
+}

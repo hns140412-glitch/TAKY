@@ -1,0 +1,28 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_R9_INDEPENDENT_RECHECK_RECEIPT_V1",
+  "date": "2026-10-08",
+  "status": "OUTCOME_UNKNOWN",
+  "retry_policy": "DO_NOT_RETRY_BLINDLY",
+  "target": "EXPLORER_CREW_R9_FINAL_TARGETED_RECHECK_R2",
+  "action_id": "verify:codex-packet",
+  "execution_mode": "CODEX_VERIFY_ONLY",
+  "packet": "TAKY2/EXPLORER_CREW_R9_CODEX_FINAL_PACKET_20261008.txt",
+  "packet_stable_digest": "21973ba99a6c3d3cef23",
+  "receipt_id": "pf:explorer-crew-r9-final-targeted-recheck-r2-20261008:b055a92ef94f4a21",
+  "execution": {
+    "preflight_allowed": true,
+    "actual_calls": 1,
+    "provider": "openai",
+    "method_or_tool": "codex",
+    "model": "codex",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "",
+    "outcome_unknown": true
+  },
+  "verdict_received": false,
+  "main_crew_state": "LOCK_CANDIDATE_WITH_INDEPENDENT_RECHECK_DEBT",
+  "play_camp_core6_state": "TAKY_CONTENT_REVIEW_PASS_WITH_FIXES__INDEPENDENT_RECHECK_PENDING__NOT_SCRIPT_LOCKED",
+  "claude_additional_calls_allowed": false,
+  "paid_generation_authorized": false
+}

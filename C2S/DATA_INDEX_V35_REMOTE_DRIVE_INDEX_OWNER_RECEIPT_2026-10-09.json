@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_DETERMINISTIC_INDEXING_OWNER_REVIEW_V1",
+  "issuer": "INDEXING_OWNER",
+  "reviewed": true,
+  "decision": "INDEXED",
+  "index_version": "V35-NOTION-DELTA",
+  "delta_path": "C2S/NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+  "delta_sha256": "c96c6e1b1f7844e784b96af9348c634fd16df059e7b91bbd6114188c23c6b74c",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V34_2026-10-08.json",
+  "parent_sha256_verified": true,
+  "mining_receipt": "TAKY-SOURCE-VAULT/reports/SIEZEALL_DRIVE_REF096_HUMANIZE_KR_SKILL_MINING_20261009.json",
+  "mining_sha256_verified": true,
+  "items": [
+    {
+      "source_id": "REF-096",
+      "source_ref": "INDEX:REF-096",
+      "url": "https://github.com/epoko77-ai/im-not-ai/blob/main/skills/humanize-korean/SKILL.md",
+      "required_fields_pass": true,
+      "duplicate_source_id_origins": [],
+      "exact_url_matches": [],
+      "decision": "INDEXED",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "guards": {
+    "request_side_approval_ignored": true,
+    "prior_delta_and_ledger_duplicate_check": true,
+    "canonical_promotion": false,
+    "learning_use_authorized": false
+  }
+}

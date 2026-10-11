@@ -1,0 +1,184 @@
+{
+  "schema": "TAKY_AI_MINING_INDEX_OWNER_RECEIPT_V1",
+  "generated_at": "2026-10-05T14:46:11.613440+00:00",
+  "status": "PASS_LOCAL_INCREMENTAL",
+  "ai_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+  "source_reference_count": 8,
+  "validated_mining_atom_count": 15,
+  "discovery_reference_count": 7,
+  "learning_rule_count": 17,
+  "validated_atom_checks": [
+    {
+      "source_id": "AIATOM:VID-20261003-001",
+      "candidate_id": "VID-20261003-001",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-003",
+      "candidate_id": "VID-20261003-003",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-014",
+      "candidate_id": "VID-20261003-014",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-015",
+      "candidate_id": "VID-20261003-015",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-016",
+      "candidate_id": "VID-20261003-016",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-017",
+      "candidate_id": "VID-20261003-017",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-018",
+      "candidate_id": "VID-20261003-018",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-019",
+      "candidate_id": "VID-20261003-019",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-020",
+      "candidate_id": "VID-20261003-020",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-021",
+      "candidate_id": "VID-20261003-021",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-022",
+      "candidate_id": "VID-20261003-022",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-023",
+      "candidate_id": "VID-20261003-023",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-024",
+      "candidate_id": "VID-20261003-024",
+      "ok": true,
+      "validated_bucket": "reference_only",
+      "codex_status": "DOWNGRADE_REFERENCE_ONLY",
+      "promotion_ceiling": "REFERENCE_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-052",
+      "candidate_id": "VID-20261003-052",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    },
+    {
+      "source_id": "AIATOM:VID-20261003-053",
+      "candidate_id": "VID-20261003-053",
+      "ok": true,
+      "validated_bucket": "safe_to_index",
+      "codex_status": "CONFIRMED_AS_CANDIDATE",
+      "promotion_ceiling": "INDEX_ONLY"
+    }
+  ],
+  "discovery_checks": [
+    {
+      "source_id": "DISCOVERY:DEEP-20261003-01",
+      "url": "https://sdk-kim-builds.com/guides/scrapling-cloudflare-scraper-claude-code-mcp/",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:DEEP-20261003-02",
+      "url": "https://lazyowen.com/guides/github-repo-diagram-ingest-cheats",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CHATGPT_METRICOOL_SOCIAL_MANAGER",
+      "url": "https://lazyowen.com/guides/chatgpt-metricool-social-manager",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CHATGPT_MODIFY_PHOTO_PROMPT",
+      "url": "https://lazyowen.com/guides/chatgpt-modify-photo-prompt",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CLAUDE_PRIVATE_TUTOR_PROMPTS",
+      "url": "https://lazyowen.com/guides/claude-private-tutor-prompts",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:CLAUDE_SKILLS_TOP5",
+      "url": "https://lazyowen.com/guides/claude-skills-top5",
+      "ok": true,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "DISCOVERY:WEB:LAZYOWEN:MANUS_HYPERFRAMES_SRT_MOTION",
+      "url": "https://lazyowen.com/guides/manus-hyperframes-srt-motion",
+      "ok": true,
+      "learning_eligible": false
+    }
+  ],
+  "guards": {
+    "title_only_learning_forbidden": true,
+    "discovery_learning_eligible": false,
+    "canonical_promotion": false,
+    "authority_transfer": false,
+    "main_merge": false,
+    "deployment": false
+  }
+}

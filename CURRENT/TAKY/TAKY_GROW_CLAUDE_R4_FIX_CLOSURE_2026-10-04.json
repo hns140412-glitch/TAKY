@@ -1,0 +1,51 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R4_FIX_CLOSURE_2026-10-04",
+  "status": "FULL_REGRESSION_PASS_AWAITING_CLAUDE_R5",
+  "source_audit": {
+    "round": 4,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R4_FINAL.log"
+  },
+  "closed_findings": [
+    {
+      "id": "R4-1",
+      "issue": "Non-passing or unrecognized regression status must never be silently ignored",
+      "status": "CLOSED_FULL_VERIFIED",
+      "implementation": "Known non-passing GitHub conclusions become regression failures; missing/unrecognized statuses produce explicit CURRENT_BEST blockers.",
+      "tests": [
+        "growth_adversarial_test.test_github_failure_conclusion_blocks_promotion",
+        "growth_adversarial_test.test_unrecognized_regression_status_blocks",
+        "growth_adversarial_test.test_missing_regression_status_blocks"
+      ]
+    },
+    {
+      "id": "R4-2",
+      "issue": "Evidence approval hash must survive line-ending conversion",
+      "status": "CLOSED_FULL_VERIFIED",
+      "implementation": "Approval now carries TAKY_CANONICAL_JSON_DIGEST_V1 SHA-256; promotion test validates canonical JSON digest rather than raw bytes.",
+      "canonical_sha256": "19c9d846a3efa098ffc64200453898a8d3ed47d6f16514e3dbda56c205f3d255",
+      "tests": [
+        "evidence_digest_test.test_line_endings_and_whitespace_do_not_change_digest",
+        "grow_current_best_promotion_test.test_human_reviewed_promotion_matches_verified_evidence"
+      ]
+    }
+  ],
+  "focused_verification": "PASS",
+  "active_open_after_focused_verification": [],
+  "next": "Run Claude R5 independent read-only audit; freeze active_open=[] only if no REQUIRED finding remains.",
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "full_verification": {
+    "python": "284/284 PASS",
+    "grow_node": "6/6 PASS",
+    "settings_json": "PASS",
+    "git_diff_check": "PASS",
+    "python_log": "ENFORCEMENT/grow_r4_full_python_latest.log"
+  }
+}

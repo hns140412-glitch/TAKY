@@ -1,0 +1,26 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_ARCHI_D1A_SOURCE_PROGRESS_2026-10-04",
+  "status": "FOUNDATION_IMPLEMENTED_VERIFIED__LIVE_ADAPTER_BINDING_PARTIAL",
+  "domain_item": "ARCHI-D1a",
+  "completed": [
+    "source registry contract",
+    "no-secret registry guard",
+    "target project identity/evidence/effective-date/applicability qualification",
+    "non-authoritative spatial source hold"
+  ],
+  "verification": [
+    "ENFORCEMENT/architecture_source_registry_test.py 5/5 PASS"
+  ],
+  "remaining": [
+    "live provider adapters and external credential binding where required",
+    "provider-specific read-back and target-project evidence capture"
+  ],
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

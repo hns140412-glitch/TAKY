@@ -1,0 +1,54 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R3_REOPEN_2026-10-04",
+  "status": "SUPERSEDED_BY_R3_FIX_CLOSURE_AND_R4_REMEDIATION",
+  "claude_audit": {
+    "round": 3,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R3_FINAL.log"
+  },
+  "required_findings": [
+    {
+      "id": "R3-B1",
+      "issue": "CURRENT_BEST regression requires workflow_run and independence",
+      "implementation": "APPLIED",
+      "verification": "PENDING_FOCUSED_AND_FULL_REGRESSION"
+    },
+    {
+      "id": "R3-B2",
+      "issue": "review-gate authority violations must force HOLD",
+      "implementation": "APPLIED",
+      "verification": "PENDING_DEDICATED_TEST_AND_FULL_REGRESSION"
+    },
+    {
+      "id": "R3-B3",
+      "issue": "human approval must bind specifically to R2 evidence",
+      "implementation": "NOT_YET",
+      "verification": "HUMAN_REAFFIRMATION_REQUIRED",
+      "evidence_ref": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-04_R2.json",
+      "evidence_sha256": "12e76d63c93ace24f68da294b7eb4485295b262c990e9539410b33d2abd0b0bd"
+    }
+  ],
+  "current_best": {
+    "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "status": "REMAINS_CURRENT_BEST_SCOPE_LIMITED",
+    "claude_r3_position": "REMAIN_CURRENT_BEST",
+    "automatic_promotion": false
+  },
+  "next_order": [
+    "Add/confirm adversarial test for missing regression workflow_run.",
+    "Add/confirm review-gate tests that promotion_authorized=true, authority_transfer=true, or missing event_id force HOLD.",
+    "Run focused GROW regression then full Python + GROW Node + settings JSON + git diff check.",
+    "Present the exact R2 evidence ref/SHA to the user and obtain explicit reaffirmation for CURRENT_BEST promotion against that evidence.",
+    "Write a new evidence-bound human approval receipt and update CURRENT_BEST/index/handoff.",
+    "Run Claude independent re-audit; close active_open only on PASS or no required findings."
+  ],
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "superseded_by": "CURRENT/TAKY/TAKY_GROW_CLAUDE_R3_FIX_CLOSURE_2026-10-04.json"
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "TAKY_MINING_SITE_LEARNING_PATTERN_INTEGRATION_V2",
+  "date": "2026-10-07",
+  "trigger": "USER_REQUESTED_MINING_SITE_REFERENCES_BE_ORGANIZED_AND_IMPLEMENTED",
+  "state": "LOCAL_INTEGRATED_AND_REGRESSION_PASS_NOT_COMMITTED_NOT_DEPLOYED",
+  "principle": "MINING_SITES_SHAPE_LEARNING_PATTERN_NOT_CURRICULUM_AUTHORITY",
+  "adopted_sources": [
+    {
+      "ref": "chat://2026-10-07/edu_navi/term-decoder-intro",
+      "patterns": [
+        "morpheme clue",
+        "word family",
+        "whole-meaning inference"
+      ]
+    },
+    {
+      "ref": "chat://2026-10-07/edu_navi/science-term-decoder",
+      "patterns": [
+        "concept relation",
+        "context transfer",
+        "visual concept card"
+      ]
+    },
+    {
+      "ref": "chat://2026-10-07/kidbookqmom/science-literacy-term-decoder",
+      "patterns": [
+        "hierarchy",
+        "compare/contrast",
+        "visual concept card",
+        "context transfer"
+      ]
+    },
+    {
+      "ref": "INDEX:REF-081",
+      "patterns": [
+        "repeated-error concept-gap signal",
+        "targeted concept review",
+        "visual explanation card"
+      ],
+      "guard": "one mistake is not automatically a concept gap"
+    },
+    {
+      "ref": "INDEX:REF-085",
+      "patterns": [
+        "concept graph",
+        "blank recall",
+        "learning visualization"
+      ],
+      "guard": "teaching sequence/formula claims require curriculum/math verification"
+    }
+  ],
+  "runtime": {
+    "selector": "LEARNING/pedagogy/grade-aware-term-selector.js",
+    "router": "LEARNING/projection/mining-learning-pattern-router.js",
+    "registry": "LEARNING/data/mining-learning-pattern-registry-v1.json",
+    "hide_consumer": "Hide & Seek/hide-term-decoder-v1.js",
+    "dynamic_rule": "2+ wrong attempts -> P_ERROR_TO_CONCEPT_GAP -> TARGETED_CONCEPT_REVIEW",
+    "static_rules": [
+      "visual concept card",
+      "concept graph",
+      "blank recall",
+      "literal-to-subject meaning separation"
+    ]
+  },
+  "prelearned_population": {
+    "E1": {
+      "cards": 105,
+      "terms": 118
+    },
+    "E2": {
+      "cards": 105,
+      "terms": 118
+    },
+    "E3": {
+      "cards": 273,
+      "terms": 366
+    },
+    "E4": {
+      "cards": 273,
+      "terms": 366
+    },
+    "E5": {
+      "cards": 330,
+      "terms": 688
+    },
+    "E6": {
+      "cards": 330,
+      "terms": 674
+    }
+  },
+  "guards": [
+    "official curriculum retains grade/content authority",
+    "mining pattern cannot override official meaning",
+    "mining pattern cannot set schedule/date",
+    "missing morphology is not invented",
+    "source page layout/wording is not copied",
+    "cross-domain AI workflow sites do not become learning pedagogy evidence automatically"
+  ],
+  "verification": [
+    "MINING_LEARNING_PATTERN_ROUTER_TEST: PASS",
+    "GRADE_AWARE_TERM_SELECTOR_TEST: PASS",
+    "PRELEARNED_TERM_UNIVERSE_E2E_TEST: PASS",
+    "TERM_RECOMMENDATION_HTTP_ENDPOINT_TEST: PASS",
+    "HIDE_LEARNING_TERM_LOADER_V1_TEST: PASS",
+    "TERM_DECODER_V1_SMOKE: PASS"
+  ]
+}

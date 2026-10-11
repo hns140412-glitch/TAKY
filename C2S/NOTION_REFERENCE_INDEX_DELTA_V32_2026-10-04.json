@@ -1,0 +1,309 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V32",
+  "date": "2026-10-04",
+  "authoritative": false,
+  "parent_delta": "C2S/NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+  "source_mining": "SOURCE_VAULT/reports/CLAUDE_NOTION_MINING_RERUN_REF087_092_20261004.json",
+  "source_count": 6,
+  "indexed_count": 5,
+  "hold_count": 1,
+  "source_entries": [
+    {
+      "source_id": "REF-087",
+      "title": "오빠두엑셀 - 엑셀 강의 대표 채널 | 무료 엑셀 강의",
+      "url": "https://www.oppadu.com/",
+      "source_family": "COMMERCIAL_EDUCATION_PUBLISHER",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "discovery_pointer_only",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "오빠두엑셀 (oppadu.com), the operator of the site and its Saturday LIVE lecture series. The page is a homepage or lecture-home excerpt.",
+      "value_statement": "Curricular pattern: a multi-week challenge arc moves from AI-assisted Sheets automation to Apps Script apps and then to agent teams. | Automation stack signal: Sheets + ARRAYFORMULA/QUERY + Apps Script + a messaging notification channel. | Cadence signal: a weekly live series with tier labels.",
+      "controlled_terms": [
+        "Promotional catalog or discovery listing for paid and free Excel/Google Sheets/AI-automation live lectures. It drives funnel traffic to LIVE pages.",
+        "commercial promotion",
+        "tier gating (Plus/Premium labels)",
+        "titles use outcome claims such as '왕초보도 가능', '하나로 만드는', '완성'",
+        "tool-brand pull (젠스파크, 카카오톡 알림)",
+        "episode titles and week-numbered thumbnails appear misaligned (276 vs 3주차, 275 vs 2주차, 274 vs 1주차), so the parse may be garbled"
+      ],
+      "keywords": [
+        "PRESERVE",
+        "SPREADSHEET_AUTOMATION_DISCOVERY_POINTER"
+      ],
+      "entities": [
+        "오빠두엑셀 (oppadu.com), the operator of the site and its Saturday LIVE lecture series. The page is a homepage or lecture-home excerpt."
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "Same domain as REF-089 and REF-092 (oppadu family). Not a duplicate of any prior_ref. It is a time-sensitive snapshot (episodes 274–277, Aug–Sep 2026) and will go stale.",
+      "verification_needed": [
+        "Re-fetch the /live/274–277 pages to confirm titles, dates and tiers.",
+        "Strip the S3 signed-URL fragments before indexing.",
+        "Confirm which episodes are free or paid."
+      ],
+      "claims_to_exclude": [
+        "Any implication that '왕초보도 가능' (beginner-friendly) or 'complete' outcomes are verified.",
+        "Genspark as the best AI tool ('AI 뭘 쓸지 고민이라면').",
+        "Episode date/number/title pairing, until re-fetched.",
+        "Signed S3 image URLs (token-bearing, ephemeral)."
+      ],
+      "source_ref": "INDEX:REF-087",
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-088",
+      "title": "PPT 사냥꾼 꿀팁 창고",
+      "url": "https://ppthunter.sos33377.workers.dev/tips/",
+      "source_family": "INDEPENDENT_PRESENTATION_TIPS_INDEX",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "discovery_index_only. Any single tip is at most a candidate heuristic, not canonical.",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "PPT 사냥꾼 (ppthunter.sos33377.workers.dev), a tips index. The personal or small-operator author is unnamed. The host is a Cloudflare Workers subdomain under the account 'sos33377'.",
+      "value_statement": "Staged generation for token economy: plan → design MD → 1–2 sample slides → full output, instead of a one-shot 10-slide request. | Ask for HTML instead of a .pptx file when you want fast iteration and sharing, and compare trade-offs per item. | Add an image-slot placeholder block to prompts so photos can be swapped in later.",
+      "controlled_terms": [
+        "Index of 13 how-to tip posts with copy-paste prompts and free files or tools. The tone is casual and persuasive ('그냥 복붙해서 쓰세요').",
+        "Pro-Claude framing ('압도적 1황이 클로드인 이유')",
+        "superlatives and ease claims ('딸깍 한 번', '끝', '100% 무료')",
+        "listicle/SEO titles",
+        "possible tool promotion (RECOLOR/RESIZE sites)",
+        "possible self-promotion of their own tools",
+        "this is an index only, so the summaries may overstate what the full posts deliver"
+      ],
+      "keywords": [
+        "ADJUST",
+        "PRESENTATION_WORKFLOW_DISCOVERY_INDEX"
+      ],
+      "entities": [
+        "PPT 사냥꾼 (ppthunter.sos33377.workers.dev), a tips index. The personal or small-operator author is unnamed. The host is a Cloudflare Workers subdomain under the account 'sos33377'."
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "Overlaps REF-082 (claude-ai-ppt-no1, same URL is listed in the index as 2026-09-28). It is the parent index of REF-090 (ppt-color-swap-vba, 2026-09-22). It is thematically adjacent to REF-086 (open-slide, PPTX) and REF-083 (Claude plugins). Newer items dated 2026-10-03 are not yet in prior_refs.",
+      "verification_needed": [
+        "Fetch the individual posts that look valuable (ai-html-ppt-guide, design-md-guide, ai-ppt-token-saving-7steps, ai-ppt-image-slot-prompt).",
+        "Check the author's identity and whether the site is affiliated with the RECOLOR/RESIZE tools.",
+        "Verify the 컴활 reform against an official 대한상공회의소 notice.",
+        "Reconcile versions with REF-082."
+      ],
+      "claims_to_exclude": [
+        "Claude is the number-one AI PPT tool, and the 11-tool ranking.",
+        "'100% free' and 'fully editable' claims for Gemini/NotebookLM.",
+        "The 컴활 2027 reform details (the 2027-01 AI basics unit and Windows 11 switch) until the official source is verified.",
+        "RECOLOR/RESIZE tool safety and fidelity claims.",
+        "'Free VBA distribution' as a safety assurance."
+      ],
+      "source_ref": "INDEX:REF-088",
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-089",
+      "title": "오빠두엑셀 회원 자료실 페이지 - 오빠두엑셀",
+      "url": "https://www.oppadu.com/resources/",
+      "source_family": "COMMERCIAL_EDUCATION_PUBLISHER",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "observational_evidence_of_a_vendor_changelog_only. It is not a standard or canonical.",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "오빠두엑셀 (oppadu.com), the publisher's member resources page. It is a changelog and upload log for templates and add-ins.",
+      "value_statement": "UI-automation and scraping dependencies (messenger apps, shopping search pages, third-party auth) break on upstream changes. Plan for a maintenance cadence. | Guard formulas against edge cases such as 0% progress giving #DIV/0!, single-row array filters giving #VALUE!, and holiday dates breaking an FX lookup. | Version and changelog discipline: dated, semver-like entries per tool.",
+      "controlled_terms": [
+        "A release-note and upload log that signals ongoing product maintenance and member value. It is a self-reported maintenance record.",
+        "self-reported changelog, so the fixes are not independently validated",
+        "marketing function (shows an active library)",
+        "terse entries with no product names attached to version numbers",
+        "numbered versions cannot be mapped to specific tools from the excerpt alone"
+      ],
+      "keywords": [
+        "PRESERVE",
+        "AUTOMATION_DEFECT_PATTERN_EVIDENCE"
+      ],
+      "entities": [
+        "오빠두엑셀 (oppadu.com), the publisher's member resources page. It is a changelog and upload log for templates and add-ins."
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "Same publisher family as REF-087 and REF-092. No prior_ref duplicates it. It is a snapshot (latest entry 2026-08-04) and will be superseded as the log grows.",
+      "verification_needed": [
+        "Map version numbers to tool names from the live page.",
+        "Strip the S3 signed-URL fragments before indexing.",
+        "Confirm access gating and the redistribution/licensing status of the templates."
+      ],
+      "claims_to_exclude": [
+        "That the fixes work for any given user environment.",
+        "Tax-rule correctness (인적공제, 종합소득세율) as authoritative.",
+        "Financial templates (average-cost price, realized P&L) as validated.",
+        "Any inference of which tool a version number belongs to."
+      ],
+      "source_ref": "INDEX:REF-089",
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-090",
+      "title": "500페이지 PPT 색깔, 딸깍 한 방에 바꾸는 법 (VBA 매크로 무료 배포)",
+      "url": "https://ppthunter.sos33377.workers.dev/tips/ppt-color-swap-vba/",
+      "source_family": "INDEPENDENT_PRESENTATION_TUTORIAL",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "experiment_candidate_requiring_security_and_functional_review. It must not run on production decks and is not canonical.",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "PPT 사냥꾼 (same operator as REF-088). It is a tutorial post with an embedded VBA macro.",
+      "value_statement": "Processing order: theme → master → layouts → slides, recursing into groups, tables and SmartArt. | Safety UX: work on a copy, show a confirmation summary, offer a PREVIEW_ONLY dry run, and report a changed-count. | Hue-family mapping with tolerance, partial hue retention, and skipping low-saturation neutrals (MIN_SATURATION).",
+      "controlled_terms": [
+        "Instructional and promotional. It tells readers to paste a macro and run it to recolor a whole deck, and it advertises 'free distribution'. The tone leans on convenience.",
+        "convenience framing ('딸깍 한 방')",
+        "no license or provenance declared",
+        "the text is truncated at ProcessTable, so the full code is not seen",
+        "possible funnel to the author's RECOLOR web tool (REF-088 item)",
+        "error suppression ('On Error Resume Next') in the code"
+      ],
+      "keywords": [
+        "ADOPT_AS_EXPERIMENT_CANDIDATE",
+        "PRESENTATION_RECOLOR_EXPERIMENT_REFERENCE"
+      ],
+      "entities": [
+        "PPT 사냥꾼 (same operator as REF-088). It is a tutorial post with an embedded VBA macro."
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "Same post is listed in the REF-088 index (2026-09-22). It is conceptually the VBA counterpart of the RECOLOR web tool in REF-088. No prior_ref duplicate.",
+      "verification_needed": [
+        "Obtain the full macro text and review it, including a check for network, shell, file or registry access.",
+        "Review the implications of the global On Error Resume Next.",
+        "Test on a synthetic deck with a before/after diff, covering charts, gradients and theme colors.",
+        "Confirm license and provenance with the author.",
+        "Confirm that PREVIEW_ONLY is set at compile time and not exposed as an option."
+      ],
+      "claims_to_exclude": [
+        "'Everything changes' (all of background, shape, text, table and chart) without testing.",
+        "That undo works (the code itself warns undo may not work and calls StartNewUndoEntry under On Error Resume Next).",
+        "That the macro is safe because it is free.",
+        "Fidelity on charts, SmartArt and gradients."
+      ],
+      "source_ref": "INDEX:REF-090",
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-091",
+      "title": "몸값 2배 올리는 CARL 성과보고 치트키",
+      "url": "https://furtive-gong-fc3.notion.site/2-CARL-3eb1c380253680938f99d0ab88a5cf2f",
+      "source_family": "UNVERIFIED_NOTION_PUBLISHER",
+      "source_type": "NOTION_REVIEWED_HOLD_POINTER",
+      "authority_level": "title_only_pointer. No claims can be extracted.",
+      "domain_facets": [
+        "work"
+      ],
+      "consumers": [],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "Unknown. The Notion page was published under the workspace subdomain 'furtive-gong-fc3'.",
+      "value_statement": "",
+      "controlled_terms": [
+        "Indeterminate. The title ('몸값 2배 올리는 CARL 성과보고 치트키', roughly 'a cheat code for doubling your market value') suggests career or performance-report self-help, but there is no body content to confirm it.",
+        "clickbait-style title with an outcome promise ('몸값 2배')",
+        "no body text captured; only default Notion meta images and logo",
+        "content inaccessible or not captured"
+      ],
+      "keywords": [
+        "HOLD",
+        "REACQUISITION_HOLD_POINTER"
+      ],
+      "entities": [
+        "Unknown. The Notion page was published under the workspace subdomain 'furtive-gong-fc3'."
+      ],
+      "source_review_state": "HOLD_REACQUIRE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "No prior_ref duplicates it. The Notion publishing pattern resembles REF-083 and REF-086, but that is a host similarity and not a content relation.",
+      "verification_needed": [
+        "Re-fetch the page. It may be empty, still loading (JS-rendered), or permission-limited.",
+        "If content appears, run a fresh review including author identity and what CARL denotes."
+      ],
+      "claims_to_exclude": [
+        "The 2x market-value claim.",
+        "Any assumed expansion of CARL.",
+        "Any inference from the title alone."
+      ],
+      "source_ref": null,
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-092",
+      "title": "Design Systems Gallery",
+      "url": "https://www.oppadu.com/tools/design-systems-site/",
+      "source_family": "SECONDARY_DESIGN_REFERENCE_GALLERY",
+      "source_type": "NOTION_REVIEWED_REFERENCE",
+      "authority_level": "inspiration_reference_only. It is not an authoritative brand spec and not a canonical design token source.",
+      "domain_facets": [
+        "design",
+        "work"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "오빠두엑셀 (oppadu.com) Design Systems Gallery tool. It is a curated, probably AI-assisted descriptive gallery of third-party brand UI styles.",
+      "value_statement": "Describe a design system compactly as accent count, base surface, corner radius, button shape and signature layout. Single-accent-color systems appear repeatedly. | Restraint pattern: neutral base plus one accent color used only for the key actions. | Distinguishing descriptors (corner radius, angle, shape language) turn into prompt-ready constraints.",
+      "controlled_terms": [
+        "A resource and discovery index. It supports the publisher's DESIGN.md and AI-design workflows (284 systems) and likely drives traffic and engagement.",
+        "secondary interpretation of third-party brand visuals",
+        "specific values (hex codes, px radii, degrees) are unverified and may be inferred or AI-generated",
+        "trademark and brand-asset sensitivity",
+        "the excerpt is truncated at 'Orion', so the full listing is not seen",
+        "no declared license",
+        "marketing function for the publisher's own AI design tooling"
+      ],
+      "keywords": [
+        "ADJUST",
+        "DESIGN_SYSTEM_INSPIRATION_INDEX"
+      ],
+      "entities": [
+        "오빠두엑셀 (oppadu.com) Design Systems Gallery tool. It is a curated, probably AI-assisted descriptive gallery of third-party brand UI styles."
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "Related to REF-088 (DESIGN.md guide, which cites reference sites) and REF-087/089 (same publisher). No prior_ref duplicate. The 284-system count is a point-in-time value.",
+      "verification_needed": [
+        "Spot-check several entries against the brands' official guidelines.",
+        "Determine whether the descriptions are AI-generated or hand-curated.",
+        "Check the terms of use and trademark constraints before reusing the values or imitating a brand.",
+        "Get the full listing, since the excerpt is truncated."
+      ],
+      "claims_to_exclude": [
+        "Exact hex, px and degree values as official brand tokens.",
+        "That any listed brand endorses or provides these descriptions.",
+        "That the gallery is complete or current.",
+        "The claim of 284 systems unless counted."
+      ],
+      "source_ref": "INDEX:REF-092",
+      "canonical_promotion": false
+    }
+  ],
+  "guards": [
+    "AUTHOR != AUTHORITY",
+    "SOURCE_TRUST != CANONICAL_AUTHORITY",
+    "REFERENCE_ONLY",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DRIVE_SYNC",
+    "NO_DEPLOYMENT"
+  ]
+}

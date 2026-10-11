@@ -1,0 +1,154 @@
+{
+  "schema": "TAKY_AI_P0_REMINING_INDEX_OWNER_RECEIPT_V1",
+  "generated_at": "2026-10-05T14:59:05.163116+00:00",
+  "status": "PASS_LOCAL_INCREMENTAL",
+  "input": "TAKY-SOURCE-VAULT/reports/AI_P0_REMINING_RESULT_20261005.json",
+  "ai_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+  "indexed_ids": [
+    "AIREF:P0:001",
+    "AIREF:P0:002",
+    "AIREF:P0:003",
+    "AIREF:P0:004",
+    "AIREF:P0:005",
+    "AIREF:P0:006",
+    "AIREF:P0:007",
+    "AIREF:P0:008",
+    "AIREF:P0:009",
+    "AIREF:P0:010",
+    "AIREF:P0:011"
+  ],
+  "indexed_count": 11,
+  "learning_eligible_count": 9,
+  "merges": [
+    {
+      "title": "에이전트 리치 — 클로드에게 인터넷을 읽는 눈 달아주기",
+      "target": "REF-094",
+      "relation": "SAME_TOPIC_SECONDARY_POINTER"
+    },
+    {
+      "title": "클로드 코드 플러그인 5개 설치 가이드",
+      "target": "REF-083",
+      "relation": "SAME_GUIDE_FAMILY_DEEPER_BODY_EVIDENCE"
+    }
+  ],
+  "holds": [
+    {
+      "title": "엔비디아가 공짜로 푼 AI 모델 100개+ 완전 입문 가이드",
+      "url": "https://neat-product-c0f.notion.site/AI-100-38e19ffaaaf18046a8edc68c65684637",
+      "reason": "BODY_NOT_ACQUIRED",
+      "learning_eligible": false,
+      "external_text_chars": 6,
+      "notion_text_chars": 0
+    },
+    {
+      "title": "AI 둘을 붙여 한 팀으로 — 화면은 페이블, 생각은 아스트라",
+      "url": "https://wandering-mile-86e.notion.site/AI-3de98dec8eed819e914af3413a1dcb36",
+      "reason": "BODY_NOT_ACQUIRED",
+      "learning_eligible": false,
+      "external_text_chars": 6,
+      "notion_text_chars": 0
+    },
+    {
+      "title": "[trenddalkak] 인간을 이긴 AI. Prime Agent 주요정리+사용법",
+      "url": "https://cactus-tank-78c.notion.site/trenddalkak-AI-Prime-Agent-3b9fc9a2be958002b0a5c0cbc6663673",
+      "reason": "BODY_NOT_ACQUIRED",
+      "learning_eligible": false,
+      "external_text_chars": 6,
+      "notion_text_chars": 0
+    },
+    {
+      "title": "Notion | Where teams and agents work together",
+      "url": "https://yeongiu.notion.site/378fec6d90d28070a4cbf33bf8733f02?pvs=149",
+      "reason": "BODY_NOT_ACQUIRED",
+      "learning_eligible": false,
+      "external_text_chars": 6,
+      "notion_text_chars": 0
+    }
+  ],
+  "checks": [
+    {
+      "source_id": "AIREF:P0:001",
+      "ok": true,
+      "content_hash": "1f47567c72112bbb0bcaf25b709396e50e0b41d849f834227f3236a656718b15",
+      "text_chars": 6130,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:002",
+      "ok": true,
+      "content_hash": "9989e8a6ee9b01f51e9269e53ec2d363cf40cf778ed51f57bf40c7d6399aa958",
+      "text_chars": 10710,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:003",
+      "ok": true,
+      "content_hash": "f76d59583bbada82adfae31d487e878e11ab5bc5dc20f33dfe4cf24bc2cde1fd",
+      "text_chars": 772,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:004",
+      "ok": true,
+      "content_hash": "07f65240212296dda56fc14fb4b0500d8073fade389b5176206b861cb8a0cea1",
+      "text_chars": 7969,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:005",
+      "ok": true,
+      "content_hash": "7252911313517436863060702d6d534d7f41ecb30199da7ee39d0d3340558fe3",
+      "text_chars": 11585,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:006",
+      "ok": true,
+      "content_hash": "9a369f282bc383ea65def74e430839f00ce6cc4962a5f524b6dca3195211a484",
+      "text_chars": 14142,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:007",
+      "ok": true,
+      "content_hash": "25287d06fb32dd7f668e80f96ceed1e6d0cca43d3eb33c0c364d818e73158827",
+      "text_chars": 8944,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:008",
+      "ok": true,
+      "content_hash": "f62c43bb161d3c91993fe47e2d3c521f3361df4fdeeda2e584ef1237598d3367",
+      "text_chars": 715,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:P0:009",
+      "ok": true,
+      "content_hash": "df70e44b6fda97a2597df517d33e02aad4f1397fee733631f1d7abed4036e060",
+      "text_chars": 8457,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:P0:010",
+      "ok": true,
+      "content_hash": "0338748896947dee7f0ae3b8b0caeeb6616dd6a2b37ef77fa183b95de37efb12",
+      "text_chars": 9677,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:P0:011",
+      "ok": true,
+      "content_hash": "c6b1a41c2efff7d433229a6d0f36ffbc944cabf138fbee7a012966f104f157d8",
+      "text_chars": 2444,
+      "learning_eligible": true
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "global_ref_allocation": false,
+    "authority_transfer": false,
+    "main_merge": false,
+    "deployment": false
+  }
+}

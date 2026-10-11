@@ -1,0 +1,51 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_CURRENT_RESULT_R2",
+  "generated_at": "2026-10-06T12:06:00+09:00",
+  "status": "PASS_LOCAL",
+  "learning_total": 56,
+  "adopted_tested_total": 36,
+  "open_total": 20,
+  "breakdown": {
+    "q1_q2_adopted": 19,
+    "q3_pass_adopted": 7,
+    "q3_inconclusive": 1,
+    "q3_waiting_representative_task": 6,
+    "q4_domain_pass_adopted": 10,
+    "q4_domain_remaining": 8,
+    "q5_verify_on_need": 5
+  },
+  "newly_applied": [
+    "Claude subscription auth gate current first-party session support with fail-closed unknown/API-key modes",
+    "installation guide observability contract",
+    "existing design pipeline/reference-review validation promoted",
+    "existing Learning Engine adaptive/retrieval validation promoted",
+    "open-quest advisory router integrated into runtime orchestrator",
+    "runtime side-effect delegated-authority undefined-variable correction"
+  ],
+  "validation": {
+    "python_targeted_tests": "143/143 PASS",
+    "data_index_search": "PASS",
+    "learning_runtime_tests": "4/4 PASS",
+    "architecture_output_pipeline": "PASS",
+    "claude_subscription_auth": "6/6 + LIVE PASS",
+    "post_collector_prompt_contract": "PASS",
+    "post_collector_validate_only": "PASS",
+    "ai_quest_full_e2e": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "current_refs": [
+    "CURRENT/DATA/AI_OPEN_QUEST_CURRENT.json",
+    "CURRENT/DATA/AI_CURRENT_QUEST_RESUME.json",
+    "CURRENT/DATA/AI_Q3_CURRENT.json",
+    "CURRENT/DATA/AI_DOMAIN_APPLICATION_QUEUE.json",
+    "ENFORCEMENT/ai_open_quest_router.py",
+    "ENFORCEMENT/runtime_orchestrator.py"
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

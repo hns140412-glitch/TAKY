@@ -1,0 +1,34 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_LEARN_D4_COVERAGE_PROGRESS_2026-10-04",
+  "status": "COVERAGE_AUDITOR_VERIFIED__REAL_SUBJECT_STAGE_EVIDENCE_SPARSE",
+  "domain_item": "LEARN-D4",
+  "completed": [
+    "subject/stage coverage profile",
+    "real-vs-synthetic evidence separation",
+    "subject aliases for English/Korean/Hanja/Math/Science/Social",
+    "learner-stage coverage accounting",
+    "gap reporting without authority transfer",
+    "subject-agnostic core regression preserved"
+  ],
+  "verification": [
+    "ENFORCEMENT/learning-grow-coverage-auditor.test.js PASS",
+    "LEARNING/runtime/learner-state-core.test.js PASS",
+    "LEARNING/domain-model/concept-dependency-graph.test.js PASS"
+  ],
+  "observed_boundary": "Repository has strong English evidence paths and Math core/synthetic tests; Korean/Hanja/Science/Social and broad learner-stage real evidence are not yet systematically demonstrated.",
+  "remaining": [
+    "real verified evidence for Korean/Hanja/Math/Science/Social subject paths",
+    "real evidence across additional learner stages",
+    "subject-owner adapters where current product UI is English-specific"
+  ],
+  "guards": {
+    "synthetic_fixture_counts_as_real": false,
+    "authority_transfer": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

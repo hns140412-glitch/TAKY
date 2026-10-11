@@ -1,0 +1,30 @@
+{
+  "schema": "TAKY_SYSTEM_ALPHA_CURRENT_V2",
+  "date": "2026-10-04",
+  "status": "INTEGRATED_ALPHA_V1_AUTHORING_CANDIDATE",
+  "basis": "VALIDATED_BETA_AND_POST_BETA_RESULTS_CONSOLIDATED_NOT_REAUDITED_FROM_ZERO",
+  "master": "ALPHA/TAKY_ALPHA_MASTER_V1_INTEGRATED_DRAFT.md",
+  "master_sha256": "1adad63ebab044698f1735c9924dd6bb12fc5e0346a72b742664b949c247cf52",
+  "content_validation": "ALPHA_REVIEW/ALPHA_V1_INTEGRATED_CONTENT_VALIDATION_20261004.json",
+  "content_validation_status": "PASS",
+  "inherited_evidence": {
+    "frozen_beta_regression": "132/132 PASS",
+    "grow_system": "FINAL_PASS_FROZEN / python 285/285 / node 6/6",
+    "explorer_crew": "CENTRAL_CORRECTION_MERGED_AND_RUNTIME_INTEGRATION_EVIDENCE_INHERITED",
+    "badge": "LOGIC_CLOSED_VISUAL_CONTENT_RUNTIME_BINDING_SEPARATE"
+  },
+  "codex_policy": "MINIMUM_USE__NO_CODEX_FOR_ALPHA_COLLECTION_OR_SYNTHESIS",
+  "remaining_gate": "CHANGE_ONLY_INDEPENDENT_INTEGRATION_REVIEW_THEN_HUMAN_FINALIZATION",
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  },
+  "supersedes_premature_status": "SYSTEM_ALPHA_LOCAL_CANONICAL_ORCHESTRATION",
+  "note": "Previous local A10 promotion claim is superseded by rewrite correction; final Alpha promotion requires completed integrated V1 plus change-only review.",
+  "source_worktree": "D:\\Git PWA\\TAKY_ALPHA_20261003",
+  "source_current": "D:\\Git PWA\\TAKY_ALPHA_20261003\\ALPHA\\TAKY_ALPHA_CURRENT_V1.json",
+  "authority_role": "CURRENT_RESUME_POINTER_ONLY"
+}

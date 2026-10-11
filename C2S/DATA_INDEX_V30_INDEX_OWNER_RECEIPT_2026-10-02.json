@@ -1,0 +1,20 @@
+{
+  "schema":"TAKY_INDEX_OWNER_RECEIPT_V1",
+  "date":"2026-10-02",
+  "issuer":"INDEXING_OWNER",
+  "index_version":"V30",
+  "source_index":"DATA_SOURCE_INDEX_2026-10-02_V10.json",
+  "source_index_id":"1WYVMTtjFlNVnLn2P7IicIGq7srWvhUfG7U0H55GbCxg",
+  "utilization_index":"DATA_UTILIZATION_INDEX_2026-10-02_V30.json",
+  "utilization_index_id":"1pql5d8HgyyQ1ngGXlp_q52LU0nDx8h8bdFlunlX6_3A",
+  "reviewed":true,
+  "decision":"INDEXED",
+  "source_ids":["REF-077","REF-078","REF-079","REF-080"],
+  "duplicate_check":"EXACT_URL_AND_SOURCE_ID_NONE",
+  "version_relation":"NEW_SOURCE_OR_REFERENCE",
+  "review_evidence_refs":["TAKY-SOURCE-VAULT/reports/DIGIT_PUBLIC_MINING_20261002.json"],
+  "canonical_promotion":false,
+  "current_pointer_changed":false,
+  "main_merge":false,
+  "deployment":false
+}

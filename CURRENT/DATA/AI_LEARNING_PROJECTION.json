@@ -1,0 +1,652 @@
+{
+  "schema": "TAKY_AI_LEARNING_PROJECTION_V1",
+  "authoritative": false,
+  "owner": "SYSTEM_GROW",
+  "generated_at": "2026-10-08T15:31:32.350520+00:00",
+  "learning_count": 57,
+  "learnings": [
+    {
+      "learning_id": "AI-LRN-NECESSITY-BEFORE-ADOPTION",
+      "insight": "Evaluate need, overlap, cost, security and measurable gap before adopting another AI tool or agent.",
+      "evidence_refs": [
+        "INDEX:REF-083",
+        "INDEX:REF-086",
+        "INDEX:REF-093",
+        "INDEX:REF-094"
+      ],
+      "evidence_count": 4,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SECURITY-BEFORE-CREDENTIAL",
+      "insight": "Credential, cookie and supply-chain exposure require a security gate before enabling authenticated AI/tool channels.",
+      "evidence_refs": [
+        "INDEX:REF-083",
+        "INDEX:REF-094"
+      ],
+      "evidence_count": 2,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-STAGED-ARTIFACT-WORKFLOW",
+      "insight": "For large artifacts, prefer staged plan/design/sample/full-build workflows over one-shot generation when evidence supports lower cost or easier correction.",
+      "evidence_refs": [
+        "INDEX:REF-082",
+        "INDEX:REF-088"
+      ],
+      "evidence_count": 2,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-MACRO-NOT-NATIVE",
+      "insight": "Reusable prompt macros may improve interaction, but must remain user-defined patterns unless native product support is independently verified.",
+      "evidence_refs": [
+        "INDEX:REF-093"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SEPARATE-TOOLS-BEFORE-COMBINE",
+      "insight": "When multiple AI/tooling layers affect the same control path, validate each independently before combining them; a component check does not prove integrated behavior.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-TEMPLATE-STRUCTURE",
+      "insight": "Reusable AI task prompts benefit from explicit role, purpose, input, numbered work, constraints, output and verification fields; treat the exact field set as a template candidate, not universal law.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-003"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-INSTALL-DOC-OBSERVABILITY",
+      "insight": "AI/tool installation guidance should distinguish app commands from terminal commands and include command, fallback, observable verification, prohibited actions, provenance and license.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-020"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-OBSERVABLE-SUCCESS-CRITERIA",
+      "insight": "AI/tool setup success should be defined by observable checks, not by an assistant saying installation succeeded.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-021"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SUPPLY-CHAIN-IDENTITY-CHECK",
+      "insight": "Before installing AI tooling, verify the official project identity, canonical address and exact package name; similar names are not sufficient evidence.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-022"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SELF-REPORT-NOT-RUNTIME-PROOF",
+      "insight": "Agent/assistant self-reports and creator demonstrations must be separated from observed runtime evidence; hashes, URLs and success labels require an evidence binding.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-016",
+        "INDEX:AIATOM:VID-20261003-018",
+        "INDEX:AIATOM:VID-20261003-053"
+      ],
+      "evidence_count": 3,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-CONTEXT-CLAIM-NEEDS-MEASUREMENT",
+      "insight": "Context-compression or token-saving tool claims should remain reference-only until measured in the actual workload.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-014"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-NEED-DOES-NOT-VALIDATE-TOOL",
+      "insight": "A real need for session memory or repeated-task detection does not validate a specific memory/plugin implementation; evaluate the need separately from the tool.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-015"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-REFERENCE-SETS-MUST-NOT-MERGE",
+      "insight": "Different creator/tool bundles must remain separate source nodes unless identity/version evidence proves they are the same set.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-017"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-UPSTREAM-TOOL-CLAIMS-VERIFY",
+      "insight": "Platform support, install commands, licenses and package claims copied from secondary AI-tool guides remain research references until verified against upstream sources and an isolated runtime.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-019",
+        "INDEX:AIATOM:VID-20261003-023",
+        "INDEX:AIATOM:VID-20261003-024"
+      ],
+      "evidence_count": 3,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-DEVICE-OBSERVATION-BEFORE-CLOSE",
+      "insight": "When success depends on a user device or UI, close the task only after the required observable device evidence is bound; a terse chat reply is not a substitute for evidence.",
+      "evidence_refs": [
+        "INDEX:AIATOM:VID-20261003-052"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PUBLIC-ACQUISITION-SEPARATION",
+      "insight": "Public-source acquisition adapters are separate from private workspace connectors; authorization and provenance must stay explicit.",
+      "evidence_refs": [
+        "INDEX:REF-094"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-HUMAN-EDITABLE-OUTPUT",
+      "insight": "Prefer AI workflows that preserve editable artifacts and a human correction surface when the final deliverable requires visual or structural fidelity.",
+      "evidence_refs": [
+        "INDEX:REF-086"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-STYLE-SIGNAL-NOT-AUTHORSHIP-PROOF",
+      "insight": "Use AI-like writing-style taxonomies as output-QA signals, not proof of AI authorship; preserve genre/model evidence limits, hold flags and false-positive caveats before rewriting.",
+      "evidence_refs": [
+        "INDEX:REF-095",
+        "INDEX:REF-096"
+      ],
+      "evidence_count": 2,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REFERENCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-APPROVAL-BOUND-TO-ARTIFACT",
+      "insight": "Bind approval to the reviewed plan or artifact identity so later changes cannot silently inherit an earlier approval.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-BOUNDED-GOAL-PLUS-SCOPE-FREEZE",
+      "insight": "When delegating a broad repair, define the target outcome and explicitly freeze unrelated areas; inspect the rendered result rather than assuming one-pass success.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:013"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-BUDGET-AWARE-MODEL-TIERING",
+      "insight": "Use expensive models for judgment-heavy stages and cheaper paths for mechanical work only when quality gates allow it; approaching budget is a routing signal, not permission to skip verification.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:005"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-CAPABILITY-GAP-BEFORE-TOOL",
+      "insight": "Identify the missing capability—such as memory, source access, or action—before selecting an AI tool; do not adopt a bundle simply because it is recommended.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:004"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-CONNECTOR-PERMISSION-BOUNDARY",
+      "insight": "Connector capability must stay bound to explicit authentication, permissions and workspace policy; connection does not imply unrestricted authority.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:003"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-COST-BOTTLENECK-BEFORE-OPTIMIZATION",
+      "insight": "Measure whether cost is dominated by input size, output volume, broad retrieval or repeated context reconstruction before choosing an optimization tool.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:006"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-COST-GUARD-AS-CODE",
+      "insight": "For autonomous AI execution, encode cost limits, iteration limits and stop/approval conditions in enforceable state or code rather than relying on a vague prompt to spend less.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:005"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-CROSS-MODEL-REVIEW-INDEPENDENCE",
+      "insight": "The model that creates a plan should not be the only model that judges it; use an independent reviewer when the decision is material.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-PIPELINE-NOT-PROMPT-ONLY",
+      "insight": "High-fidelity UI generation should be treated as a pipeline of design intent/source → implementation → rendered inspection → correction, not as a one-prompt task.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:005"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-REFERENCE-PLUS-REVIEW",
+      "insight": "Design generation should pair an explicit reference/design source with visual inspection; a design skill alone is not final proof of fidelity.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:002"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-TASTE-AS-EXPLICIT-CONSTRAINT",
+      "insight": "For AI-generated UI, encode taste, references, forbidden clichés and design rules explicitly instead of relying on vague aesthetic adjectives.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:002"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-DURABLE-MANUAL-OVER-EPHEMERAL-AGENT",
+      "insight": "For recurring work, preserve process/tool/proof knowledge in a durable manual or repository rather than only inside an ephemeral agent session.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:002"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-FAILURE-UPDATES-OPERATING-MANUAL",
+      "insight": "When execution fails, update the reusable procedure, tool boundary or proof checklist so the same failure is less likely to recur.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:002"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+      "insight": "AI fluency is not only delegation; it also requires clear description, discernment of outputs/limits and human responsibility for the result.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:022"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-INTENT-CONSTRAINTS-SUCCESS-OVER-UNNEEDED-STEPS",
+      "insight": "For capable AI executors, specify intent, real constraints and observable success criteria; avoid unnecessary step-by-step implementation instructions that remove useful solution space.",
+      "evidence_refs": [
+        "INDEX:AIREF:REC:010"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-INTERFACE-REASONING-SEPARATION",
+      "insight": "Separate the user interaction surface from the reasoning/model backend when that improves fit; define an explicit bridge rather than assuming two AI products integrate automatically.",
+      "evidence_refs": [
+        "INDEX:AIREF:REC:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-LEVEL-ADAPTIVE-AI-LEARNING",
+      "insight": "AI learning sequences should adapt concepts, practice and tools to learner level rather than expose every learner to the same path.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+      "insight": "AI education should prioritize understanding, answer-checking and independent thought before speed with tools.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-LOCAL-EDIT-BEFORE-REGENERATION",
+      "insight": "For small artifact corrections, prefer a bounded local edit and undo layer over regenerating the whole artifact when fidelity and cost benefit; distinguish local overlay state from canonical source.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:011"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MCP-DOES-NOT-REPLACE-API",
+      "insight": "Treat MCP and connectors as an integration layer over capabilities and APIs, not as a replacement for the underlying API or authorization model.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:003"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-CAPTURE-STORE-RETRIEVE",
+      "insight": "Long-running AI work benefits from an explicit memory lifecycle: capture important state at a boundary, store it durably, and retrieve only relevant context later.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:003"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-TOOL-IS-SEPARATE-FROM-MEMORY-PATTERN",
+      "insight": "A useful memory pattern does not justify a specific memory product; tool adoption remains a separate necessity, privacy and overlap decision.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:003"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+      "insight": "Teach and operate AI with an explicit mental model of capabilities and limits so routing, verification and human oversight match the task.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:022"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-METADATA-FIRST-FILE-DIAGNOSIS",
+      "insight": "When diagnosing file or storage problems, use path, size, dates and hashes before opening private content unless content inspection is necessary.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:007"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING",
+      "insight": "Use complementary representations—summary, structure map, recall questions/cards and integrated overview—when they serve distinct learning functions, not as decorative duplication.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:017"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PERSONA-LIBRARY-IS-NOT-AUTONOMOUS-AGENT",
+      "insight": "A library of role/persona instruction files is not evidence of autonomous agents; distinguish prompt personas from tools, memory, planning, actions and runtime autonomy.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:020"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-AUDIENCE-AND-BOUNDS",
+      "insight": "Specify audience and bounded output constraints when they materially affect what should be preserved or prioritized.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:008"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-EVALUATION-DIMENSIONS",
+      "insight": "Replace vague requests such as 'improve this' with explicit evaluation dimensions and success criteria.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:008"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-ROLE-SHORT-CONTEXT-SPECIFIC",
+      "insight": "Keep reusable role descriptions compact and put specificity into task context, constraints and success criteria rather than verbose background.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:006"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+      "insight": "Periodically review inherited AI instructions and remove scaffolding that no longer protects a real constraint or failure mode; old guidance can become counterproductive as capabilities change.",
+      "evidence_refs": [
+        "INDEX:AIREF:REC:010"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-REVIEW-BUDGET-DOES-NOT-FORCE-PASS",
+      "insight": "A bounded review loop must end in HOLD/BLOCKED when unresolved; exhausting the review budget is not approval.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:001"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SAFE-COMPUTER-USE-SEQUENCE",
+      "insight": "For computer-use work, default to read-only diagnosis, proposed changes, explicit approval for sensitive actions, bounded execution, observable verification and rollback record.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:007"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SENSITIVE-AGENT-ISOLATION",
+      "insight": "High-risk autonomous agents and credential-bearing flows should be tested in isolated scope with irreversible actions excluded until explicitly approved.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:005"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SOURCE-ASSET-QUALITY-SETS-OUTPUT-CEILING",
+      "insight": "In asset-driven creative workflows, prepare high-quality source assets first; orchestration cannot reliably compensate for weak or incorrect originals.",
+      "evidence_refs": [
+        "INDEX:AIREF:REC:015"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SPECIFIC-TRIGGERS-OVER-BROAD-SKILLS",
+      "insight": "Reusable skills and prompt rules should have narrow, explicit trigger conditions; broad or overlapping triggers increase irrelevant tool/skill activation.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:006"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-STUDY-PASSIVE-TO-ACTIVE-RETRIEVAL",
+      "insight": "AI study support should not stop at explanation; add retrieval practice and learner response so understanding is tested rather than merely displayed.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:017"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-SURFACE-SELECTION-BY-JOB-DIMENSION",
+      "insight": "Route AI work by job dimension—immediacy, persistent context, future recurrence or monitoring, external capabilities, reusable role configuration and multi-step execution—instead of forcing every task through one surface.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:010"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-TOOL-OVERHEAD-CAN-NEGATE-SAVINGS",
+      "insight": "A cost-saving AI tool can add its own processing overhead; validate net savings on representative tasks before making it a default.",
+      "evidence_refs": [
+        "INDEX:AIREF:P0:006"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE",
+      "insight": "For artifact migration, prefer transforming approved existing content/assets into the target format before recreating them; preserve source fidelity unless change is requested.",
+      "evidence_refs": [
+        "INDEX:AIREF:P1:015"
+      ],
+      "evidence_count": 1,
+      "state": "EVIDENCE_CANDIDATE",
+      "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+      "canonical_promotion": false
+    }
+  ],
+  "guards": [
+    "AI_LEARNING != CANONICAL_POLICY",
+    "SOURCE_AUTHORITY_IS_PRESERVED",
+    "FAILURE_OR_CONTRADICTORY_EVIDENCE_MAY_REOPEN",
+    "CURRENT_PRODUCT_FACTS_REQUIRE_FRESH_VERIFICATION"
+  ]
+}

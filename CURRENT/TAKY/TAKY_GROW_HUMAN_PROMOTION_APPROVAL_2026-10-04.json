@@ -1,0 +1,21 @@
+{
+  "schema": "TAKY_GROW_HUMAN_PROMOTION_APPROVAL_V1",
+  "namespace": "TAKY_GROW",
+  "approval_id": "TAKY_GROW_PROMOTION_APPROVAL_LOCALIZED_FAILURE_BOUNDED_RECOVERY_2026-10-04",
+  "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+  "target_state": "CURRENT_BEST",
+  "approver_role": "USER",
+  "approval_source": "CHAT_EXPLICIT_APPROVAL",
+  "approval_token": "ㄱ",
+  "observed_at": "2026-10-04T00:07:00+09:00",
+  "gate_context": "Human promotion gate presented for LOCALIZED_FAILURE_BOUNDED_RECOVERY -> CURRENT_BEST; user explicitly instructed proceed.",
+  "automatic": false,
+  "scope": "GROW strategy promotion only",
+  "does_not_authorize": [
+    "git push",
+    "merge",
+    "deploy",
+    "Netlify",
+    "paid API"
+  ]
+}

@@ -1,0 +1,951 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INTAKE_EXECUTION_V1",
+  "date": "2026-10-04",
+  "results": [
+    {
+      "source_id": "REF-081",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "education",
+        "consumer": "LEARNING_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "LEARNING_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-8ed3fbef44581e37d2e0f759",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-a171cb01ed30e1c784aa64d5",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-f4dd5a743e574638d14e61b2",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-b1368267427283282708",
+            "source_key": "REF-081",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-081",
+              "source_url": "https://m.blog.naver.com/PostView.naver?blogId=happysong4u&logNo=224426880073",
+              "source_locator": null,
+              "domain": "education",
+              "consumer": "LEARNING_ENGINE",
+              "source_actor": "happysong4u (Naver blog handle; real-name identity not independently verified)",
+              "source_actor_class": "INDEPENDENT_EDUCATION_CREATOR",
+              "source_author_identity_state": "HANDLE_AND_SOURCE_CAPTURE_VERIFIED__REAL_ID_UNVERIFIED",
+              "source_direction": "EDUCATION_GUIDANCE_WITH_PRODUCT_PROMOTION",
+              "source_direction_signals": [
+                "STUDY_ADVICE",
+                "ERROR_TO_CONCEPT_GAP",
+                "VISUAL_CONCEPT_CARD",
+                "PRODUCT_PROMOTION"
+              ],
+              "applicability_scope": [
+                "LEARNING_METHOD_HYPOTHESIS",
+                "VISUAL_EXPLANATION_PATTERN",
+                "ERROR_TO_CONCEPT_GAP_CANDIDATE"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_UNTIL_CURRICULUM_AND_PEDAGOGY_VERIFIED"
+            }
+          },
+          {
+            "event_id": "ri-154a1a35fc5e21008a2e",
+            "source_key": "REF-081",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-081",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-081",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-61b40fce781412aa7f65",
+            "source_key": "REF-081",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "LEARNING_ENGINE",
+              "domain": "education",
+              "source_ref": "INDEX:REF-081",
+              "source_actor_class": "INDEPENDENT_EDUCATION_CREATOR",
+              "source_direction": "EDUCATION_GUIDANCE_WITH_PRODUCT_PROMOTION",
+              "applicability_scope": [
+                "LEARNING_METHOD_HYPOTHESIS",
+                "VISUAL_EXPLANATION_PATTERN",
+                "ERROR_TO_CONCEPT_GAP_CANDIDATE"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_UNTIL_CURRICULUM_AND_PEDAGOGY_VERIFIED"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-082",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "work",
+        "consumer": "DOMAIN_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "DOMAIN_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-2d92edcbdb36f9946e71ed07",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-91b0e2ad19248444d57c5572",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-0ecd350f6fc541134c92ea50",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-a08495ba842af00c843c",
+            "source_key": "REF-082",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-082",
+              "source_url": "https://ppthunter.sos33377.workers.dev/tips/claude-ai-ppt-no1/",
+              "source_locator": null,
+              "domain": "work",
+              "consumer": "DOMAIN_ENGINE",
+              "source_actor": "PPT 사냥꾼",
+              "source_actor_class": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+              "source_author_identity_state": "BRAND_SOURCE_VERIFIED__PERSON_ID_NOT_REQUIRED_FOR_SCOPE",
+              "source_direction": "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+              "source_direction_signals": [
+                "TOOL_COMPARISON",
+                "WORKFLOW_GUIDANCE",
+                "CLAUDE_ADVOCACY",
+                "PRODUCT_FACTS_TIME_SENSITIVE"
+              ],
+              "applicability_scope": [
+                "WORK_OS_ARTIFACT_WORKFLOW_CANDIDATE",
+                "ARCHIGROW_PRESENTATION_PROCESS_CANDIDATE"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS"
+            }
+          },
+          {
+            "event_id": "ri-8b622d26ab5023b7d993",
+            "source_key": "REF-082",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-082",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-082",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-b34d012366a24fa74410",
+            "source_key": "REF-082",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "DOMAIN_ENGINE",
+              "domain": "work",
+              "source_ref": "INDEX:REF-082",
+              "source_actor_class": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+              "source_direction": "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+              "applicability_scope": [
+                "WORK_OS_ARTIFACT_WORKFLOW_CANDIDATE",
+                "ARCHIGROW_PRESENTATION_PROCESS_CANDIDATE"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-083",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "taky_ops",
+        "consumer": "DOMAIN_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "DOMAIN_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-c35dec89fffa95ab60d95ce3",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-735f2c7ec7847ca56bccf8b1",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-c608e3cd6efbd6101b262fe3",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-02400a8782311919cf7c",
+            "source_key": "REF-083",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-083",
+              "source_url": "https://app.notion.com/p/5-3d0fa868dc2a81848a74d61f3d9a1706",
+              "source_locator": null,
+              "domain": "taky_ops",
+              "consumer": "DOMAIN_ENGINE",
+              "source_actor": "게으른 빌더 / Lazy Builder",
+              "source_actor_class": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+              "source_author_identity_state": "PUBLISHER_SITE_VERIFIED",
+              "source_direction": "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+              "source_direction_signals": [
+                "HOW_TO",
+                "TOOL_RECOMMENDATION",
+                "COST_SAVING_CLAIM",
+                "COMMERCIAL_CHALLENGE_FUNNEL"
+              ],
+              "applicability_scope": [
+                "TAKY_TOOL_DISCOVERY_ONLY",
+                "SAVEY_USAGE_OPTIMIZATION_HYPOTHESIS",
+                "SECURITY_REVIEW_QUEUE"
+              ],
+              "authority_ceiling": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED"
+            }
+          },
+          {
+            "event_id": "ri-fac6bfba4e4e3a7d69f7",
+            "source_key": "REF-083",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-083",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-083",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-bf30b2961108826e1698",
+            "source_key": "REF-083",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "DOMAIN_ENGINE",
+              "domain": "taky_ops",
+              "source_ref": "INDEX:REF-083",
+              "source_actor_class": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+              "source_direction": "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+              "applicability_scope": [
+                "TAKY_TOOL_DISCOVERY_ONLY",
+                "SAVEY_USAGE_OPTIMIZATION_HYPOTHESIS",
+                "SECURITY_REVIEW_QUEUE"
+              ],
+              "authority_ceiling": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-084",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "education",
+        "consumer": "LEARNING_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "LEARNING_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-693789cf07d1470ff1ad9456",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-4faccdfbf52568075dfd1411",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-be06ea1e895893f2ad5f2d47",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-b5a38c1b7539562a72de",
+            "source_key": "REF-084",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-084",
+              "source_url": "https://www.ebs.co.kr/",
+              "source_locator": null,
+              "domain": "education",
+              "consumer": "LEARNING_ENGINE",
+              "source_actor": "EBS / 한국교육방송공사",
+              "source_actor_class": "OFFICIAL_PUBLIC_EDUCATION_PROVIDER",
+              "source_author_identity_state": "ORGANIZATION_IDENTIFIED_FROM_OFFICIAL_CAPTURE",
+              "source_direction": "OFFICIAL_EDUCATION_PORTAL_AND_SOURCE_DIRECTORY",
+              "source_direction_signals": [
+                "OFFICIAL_PROVIDER",
+                "EDUCATION_SOURCE_DIRECTORY",
+                "AI_TRAINING_PROHIBITION_NOTICE"
+              ],
+              "applicability_scope": [
+                "OFFICIAL_SOURCE_DISCOVERY",
+                "LEARNING_REFERENCE_DISCOVERY"
+              ],
+              "authority_ceiling": "OFFICIAL_WITHIN_EBS_OWN_PUBLISHED_FACTS__NO_CROSS_DOMAIN_AUTHORITY"
+            }
+          },
+          {
+            "event_id": "ri-25dbaf2c3c995ac7da0e",
+            "source_key": "REF-084",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-084",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-084",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-c9cec68848935ebf03bd",
+            "source_key": "REF-084",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "LEARNING_ENGINE",
+              "domain": "education",
+              "source_ref": "INDEX:REF-084",
+              "source_actor_class": "OFFICIAL_PUBLIC_EDUCATION_PROVIDER",
+              "source_direction": "OFFICIAL_EDUCATION_PORTAL_AND_SOURCE_DIRECTORY",
+              "applicability_scope": [
+                "OFFICIAL_SOURCE_DISCOVERY",
+                "LEARNING_REFERENCE_DISCOVERY"
+              ],
+              "authority_ceiling": "OFFICIAL_WITHIN_EBS_OWN_PUBLISHED_FACTS__NO_CROSS_DOMAIN_AUTHORITY"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-085",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "education",
+        "consumer": "LEARNING_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "LEARNING_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-5a3f22fdebc8fff20a57ba21",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-9c2925fb078a9cb30824d0b1",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-9f4dfa70c583c0678d51fee1",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-147aee3404ee8e1bd546",
+            "source_key": "REF-085",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-085",
+              "source_url": "https://m.blog.naver.com/momtschool/224404546077",
+              "source_locator": null,
+              "domain": "education",
+              "consumer": "LEARNING_ENGINE",
+              "source_actor": "제이맘랩 / momtschool",
+              "source_actor_class": "INDEPENDENT_EDUCATION_CONTENT_CREATOR",
+              "source_author_identity_state": "BRAND_HANDLE_AND_SOURCE_CAPTURE_VERIFIED",
+              "source_direction": "MATH_CONCEPT_INTEGRATION_WITH_PRODUCT_PROMOTION",
+              "source_direction_signals": [
+                "CONCEPT_GRAPH",
+                "BLANK_RECALL_TEST",
+                "MATH_WORKSHEET",
+                "PRODUCT_PROMOTION"
+              ],
+              "applicability_scope": [
+                "MATH_CONCEPT_RELATION_HYPOTHESIS",
+                "BLANK_RECALL_WORKFLOW_CANDIDATE",
+                "LEARNING_VISUALIZATION_PATTERN"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_UNTIL_MATH_CURRICULUM_AND_CONTENT_ACCURACY_VERIFIED"
+            }
+          },
+          {
+            "event_id": "ri-571f692d9e6ee64408f7",
+            "source_key": "REF-085",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-085",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-085",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-140f68f0991a290f4778",
+            "source_key": "REF-085",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "LEARNING_ENGINE",
+              "domain": "education",
+              "source_ref": "INDEX:REF-085",
+              "source_actor_class": "INDEPENDENT_EDUCATION_CONTENT_CREATOR",
+              "source_direction": "MATH_CONCEPT_INTEGRATION_WITH_PRODUCT_PROMOTION",
+              "applicability_scope": [
+                "MATH_CONCEPT_RELATION_HYPOTHESIS",
+                "BLANK_RECALL_WORKFLOW_CANDIDATE",
+                "LEARNING_VISUALIZATION_PATTERN"
+              ],
+              "authority_ceiling": "REFERENCE_ONLY_UNTIL_MATH_CURRICULUM_AND_CONTENT_ACCURACY_VERIFIED"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-086",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "architecture",
+        "consumer": "DOMAIN_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "DOMAIN_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-b4737073fd2ff333733cb69a",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-57271957c34d8d332cdfa5a0",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-b900cce82bceea400ea7c0be",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-1f66778b0bdc471a738a",
+            "source_key": "REF-086",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "source_id": "REF-086",
+              "source_url": "https://app.notion.com/p/open-slide-2-0-PPTX-3e9fd99f0e5f81f88bcde2b78c657980",
+              "source_locator": null,
+              "domain": "architecture",
+              "consumer": "DOMAIN_ENGINE",
+              "source_actor": "Secondary guide + open-slide project (Yiwei Ho and contributors)",
+              "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+              "source_author_identity_state": "PRIMARY_REPO_AUTHORSHIP_VERIFIED_FOR_PROJECT_FACTS",
+              "source_direction": "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+              "source_direction_signals": [
+                "EDITABLE_PPTX",
+                "VISUAL_EDITOR",
+                "AGENT_NATIVE",
+                "OPEN_SOURCE_MIT"
+              ],
+              "applicability_scope": [
+                "WORK_OS_PRESENTATION_EXPERIMENT",
+                "ARCHIGROW_EDITABLE_PPTX_EXPERIMENT",
+                "ARTIFACT_PIPELINE_TOOL_EVALUATION"
+              ],
+              "authority_ceiling": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION"
+            }
+          },
+          {
+            "event_id": "ri-9d66689caa453065ff1e",
+            "source_key": "REF-086",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "index_source_id": "REF-086",
+              "index_version": "V31-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-086",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_REVIEW_E2E_2026-10-04.json",
+                "TAKY-SOURCE-VAULT/reports/generations/MINING_INBOX_HANDOFF.20261003T150201757Z.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-df2b72e12a24ed873626",
+            "source_key": "REF-086",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-04T00:20:00+09:00",
+            "details": {
+              "consumer": "DOMAIN_ENGINE",
+              "domain": "architecture",
+              "source_ref": "INDEX:REF-086",
+              "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+              "source_direction": "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+              "applicability_scope": [
+                "WORK_OS_PRESENTATION_EXPERIMENT",
+                "ARCHIGROW_EDITABLE_PPTX_EXPERIMENT",
+                "ARTIFACT_PIPELINE_TOOL_EVALUATION"
+              ],
+              "authority_ceiling": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    }
+  ],
+  "all_pass": true,
+  "all_persisted": true
+}

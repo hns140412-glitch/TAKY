@@ -1,0 +1,237 @@
+{
+  "schema": "TAKY_AI_DOMAIN_APPLICATION_QUEUE_V1",
+  "generated_at": "2026-10-06T03:48:20.298849+00:00",
+  "count": 18,
+  "items": [
+    {
+      "learning_id": "AI-LRN-PROMPT-TEMPLATE-STRUCTURE",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "implementation_refs": [
+        "ENFORCEMENT/ai_prompt_contract.py",
+        "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json"
+      ],
+      "tested_at": "2026-10-06T03:16:31.362812+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-INSTALL-DOC-OBSERVABILITY",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "ACTIVE_INSTALLATION_DOC_CONTRACT",
+      "implementation_refs": [
+        "ENFORCEMENT/installation_doc_contract.py",
+        "CURRENT/DATA/INSTALLATION_GUIDE_CONTRACT_TEMPLATE.json"
+      ],
+      "tested_at": "2026-10-06T03:24:16.315710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-HUMAN-EDITABLE-OUTPUT",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_EDITABLE_PPTX_OUTPUT",
+      "implementation_refs": [
+        "DOMAIN/ARCHITECTURE_COMPETITION_OUTPUT_PROFILE_REGISTRY.json"
+      ],
+      "tested_at": "2026-10-06T03:46:45.174710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-PIPELINE-NOT-PROMPT-ONLY",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_EXISTING_ARTIFACT_PIPELINE",
+      "implementation_refs": [
+        "ENFORCEMENT/producer_artifact_gate.py",
+        "ENFORCEMENT/result_preview_gate.py"
+      ],
+      "tested_at": "2026-10-06T03:24:16.315710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-REFERENCE-PLUS-REVIEW",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_SOURCE_BINDING_AND_INDEPENDENT_PREVIEW",
+      "implementation_refs": [
+        "ENFORCEMENT/producer_artifact_gate.py",
+        "ENFORCEMENT/result_preview_gate.py",
+        "CURRENT/DESIGN_UI_ASSET_SOURCE_DEFAULT_2026-09-29.json"
+      ],
+      "tested_at": "2026-10-06T03:24:16.315710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-DESIGN-TASTE-AS-EXPLICIT-CONSTRAINT",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_EXPLICIT_DESIGN_CONSTRAINT_REGISTRY",
+      "implementation_refs": [
+        "DOMAIN/ARCHITECTURE_COMPETITION_VISUAL_QUALITY_REGISTRY.json",
+        "TOOLS/ARCHIGROW_COMPETITION_BUILD.py"
+      ],
+      "tested_at": "2026-10-06T03:48:20.298849+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "READY_FOR_BOUNDED_DOMAIN_TEST",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-LEVEL-ADAPTIVE-AI-LEARNING",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_CORE_ADAPTIVE_PLAN",
+      "implementation_refs": [
+        "LEARNING/pedagogy/adaptive-plan-contract.js",
+        "LEARNING/runtime/learning-engine-runtime.js"
+      ],
+      "tested_at": "2026-10-06T03:24:16.315710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "READY_FOR_BOUNDED_DOMAIN_TEST",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "READY_FOR_BOUNDED_DOMAIN_TEST",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "READY_FOR_BOUNDED_DOMAIN_TEST",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-AUDIENCE-AND-BOUNDS",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "implementation_refs": [
+        "ENFORCEMENT/ai_prompt_contract.py",
+        "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json"
+      ],
+      "tested_at": "2026-10-06T03:16:31.362812+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-EVALUATION-DIMENSIONS",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "implementation_refs": [
+        "ENFORCEMENT/ai_prompt_contract.py",
+        "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json"
+      ],
+      "tested_at": "2026-10-06T03:16:31.362812+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-PROMPT-ROLE-SHORT-CONTEXT-SPECIFIC",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "implementation_refs": [
+        "ENFORCEMENT/ai_prompt_contract.py",
+        "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json"
+      ],
+      "tested_at": "2026-10-06T03:16:31.362812+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-SOURCE-ASSET-QUALITY-SETS-OUTPUT-CEILING",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_SOURCE_QUALITY_GATE",
+      "implementation_refs": [
+        "TOOLS/ARCHIGROW_COMPETITION_QUALITY.py",
+        "DOMAIN/ARCHITECTURE_COMPETITION_VISUAL_QUALITY_REGISTRY.json"
+      ],
+      "tested_at": "2026-10-06T03:48:20.298849+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-SPECIFIC-TRIGGERS-OVER-BROAD-SKILLS",
+      "owner": "SYSTEM_GROW:PROMPT_AND_TOOLING",
+      "acceptance": "Apply in prompt/tooling compiler or docs with explicit trigger, constraint and verification behavior.",
+      "state": "PASS_ADOPTED_BOUNDED_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "implementation_refs": [
+        "ENFORCEMENT/ai_prompt_contract.py",
+        "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json"
+      ],
+      "tested_at": "2026-10-06T03:16:31.362812+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-STUDY-PASSIVE-TO-ACTIVE-RETRIEVAL",
+      "owner": "LEARNING_GROW",
+      "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_RETRIEVAL_CHECKPOINT_POLICY",
+      "implementation_refs": [
+        "LEARNING/pedagogy/adaptive-plan-contract.js",
+        "LEARNING/pedagogy/feedback-intent.js"
+      ],
+      "tested_at": "2026-10-06T03:24:16.315710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE",
+      "owner": "SYSTEM_GROW:ARTIFACT_QUALITY",
+      "acceptance": "Apply on a real artifact/UI task; rendered fidelity and editability are required.",
+      "state": "PASS_ADOPTED_EXISTING_DOMAIN",
+      "canonical_promotion": false,
+      "outcome": "PASS",
+      "adoption_decision": "CONFIRMED_SOURCE_BOUND_VECTOR_TRANSFORM",
+      "implementation_refs": [
+        "DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md",
+        "DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md"
+      ],
+      "tested_at": "2026-10-06T03:46:45.174710+00:00"
+    }
+  ],
+  "guards": [
+    "BOUNDED_APPLICATION_FIRST",
+    "DOMAIN_OWNER_PRESERVED",
+    "OUTCOME_REQUIRED",
+    "NO_AUTO_PROMOTION"
+  ],
+  "q4_summary": {
+    "total": 18,
+    "pass_adopted_bounded_domain": 14,
+    "remaining_ready": 4
+  }
+}

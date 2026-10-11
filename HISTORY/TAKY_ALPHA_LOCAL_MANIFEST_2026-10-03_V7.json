@@ -1,0 +1,168 @@
+﻿{
+  "manifest_version": "2026-10-03.7",
+  "scope": "TAKY_ALPHA_RUNTIME_ARTIFACTS",
+  "note": "Alpha runtime manifest refreshed after post-Alpha capability-registry evidence update; prior v6 preserved in HISTORY. Mutable CURRENT/HANDOFF evidence remains excluded.",
+  "file_count": 32,
+  "files": [
+    {
+      "path": ".github/workflows/taky-enforcement.yml",
+      "sha256": "2bcae38a8f8b4fc9d8e5e0cf1bd4b6701c897d86032ae8eed7df73013dd4e89b",
+      "bytes": 45961
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "e4705287263b01dc2591dfa884caf262b76ea06cec82093ccb120a44456119f9",
+      "bytes": 4371
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "635a502f078db5f7c9e1fb5f7032862598809c3e2b4bffea276e95c123b3b224",
+      "bytes": 14295
+    },
+    {
+      "path": "TAKY.md",
+      "sha256": "249dac9f0e12521c62a426240e86989a09f40cde17c4ab9acdbe7132497de140",
+      "bytes": 23045
+    },
+    {
+      "path": ".mcp.json",
+      "sha256": "5b9d916b3c62c91117c89866260989e7bb3dd48f243408cd7b3bb7db79509b95",
+      "bytes": 603
+    },
+    {
+      "path": ".claude/settings.json",
+      "sha256": "ea4c4eaa380a91a55e486985102a442fdae1ac90e2f1e76025ce725b37743d13",
+      "bytes": 5549
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "sha256": "3be4d92d140cd16728e52b73eaed08c8ef4a2cdd334d6861e2da3fa85568dcac",
+      "bytes": 108
+    },
+    {
+      "path": ".claude/hooks/taky_hook.py",
+      "sha256": "ce671c30fe85be3c915827138327515a7f9dfd31192f7c4dc3b1c8c2e7393973",
+      "bytes": 7507
+    },
+    {
+      "path": ".claude/hooks/taky_outcome_hook.py",
+      "sha256": "9b8a02c132762c659be6ead3a416fd893a3eb45243d622afbcc39e9ec2417a4b",
+      "bytes": 17795
+    },
+    {
+      "path": "TOOLS/TAKY_CLAUDE_LAUNCH.ps1",
+      "sha256": "470cdb4c6322b54c001455233260864072c32152ce62847dd774bf64ab522e78",
+      "bytes": 1528
+    },
+    {
+      "path": "TOOLS/TAKY_SETUP_CHECK.ps1",
+      "sha256": "f5660d90a5103c2a6c5d33288a2b7f6759ebaac34702650b29ef360900dbc3ac",
+      "bytes": 3723
+    },
+    {
+      "path": "TOOLS/TAKY_STATUSLINE.ps1",
+      "sha256": "3a68977b8b6568ce8abe9fea1ba334372ca4544d04ee42d98365d9e2e588d40d",
+      "bytes": 1271
+    },
+    {
+      "path": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+      "sha256": "ab683a559bc3355f84d5787887a5d8d7a136e4a97f772f44eb4aeacb63c35797",
+      "bytes": 11063
+    },
+    {
+      "path": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+      "sha256": "da0426aa16fc4c444ea42f771dde2f221042412245060c2884ba7a0712fe6efd",
+      "bytes": 8285
+    },
+    {
+      "path": "DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md",
+      "sha256": "4a32d7c724cca39097cfc88c7ead28d92d820a5bdf743c944b4b996f18fe4cc4",
+      "bytes": 3908
+    },
+    {
+      "path": "DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md",
+      "sha256": "6c8c392c1f05abd840f0de795fe181b7069ef2e67f25ffcf3fe69de99348b495",
+      "bytes": 3501
+    },
+    {
+      "path": "ENFORCEMENT/execution_state_engine.py",
+      "sha256": "00296a4783d0068143804406f35362c3a4fbad55154a89be2d1b7220349ef8d1",
+      "bytes": 6974
+    },
+    {
+      "path": "ENFORCEMENT/execution_state_approval_binding_test.py",
+      "sha256": "d95ffc1bf6a8d8defaacfac8c78d57c5adfef66856c4a18b7beb71f9102f102a",
+      "bytes": 5188
+    },
+    {
+      "path": "ENFORCEMENT/reference_acquisition_runtime_binding_test.py",
+      "sha256": "f2a3c1b10e8ff4d32942dcee70aaa8178816c1cffa291b703591bce2995f9219",
+      "bytes": 946
+    },
+    {
+      "path": "ENFORCEMENT/claude_hook_regression.py",
+      "sha256": "1509a7654e668ea785b6e89c8e916780a3a270199ccf3801094ab3a11b260dd4",
+      "bytes": 2435
+    },
+    {
+      "path": "ENFORCEMENT/outcome_hook_regression.py",
+      "sha256": "e5d8065f137fae39476203a9e44d45fdbbc9d9b770f58115b90957f7ed4a22b8",
+      "bytes": 8287
+    },
+    {
+      "path": "ENFORCEMENT/alpha_manifest_validator.py",
+      "sha256": "b7b52067afcc179af318cbeaa4c41e2981583109319a98e4b1623572fd3e281b",
+      "bytes": 2131
+    },
+    {
+      "path": "MASTER/CODEX_TASK_CONTRACT.md",
+      "sha256": "5be07a39622ba1ed685dc61b9dea14df75b7e98cc9c3fe7df2b9880cb9b3b349",
+      "bytes": 7976
+    },
+    {
+      "path": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+      "sha256": "5be6706b1c274746fa4e0e27843585ffb916e3c495123fb540e16007c2a3d92e",
+      "bytes": 5035
+    },
+    {
+      "path": "MASTER/EXECUTION_CHECKPOINT_SCHEMA.json",
+      "sha256": "aece221e3dfbd46e093d88e92a6912e566c10533ecd40317da304abda29358ff",
+      "bytes": 1721
+    },
+    {
+      "path": "MASTER/RULE_REGISTRY.json",
+      "sha256": "315f254a7bf9489e7cfbb88a199b7fa7cbe92a096d37cf36506bd0619dc09ee9",
+      "bytes": 5756
+    },
+    {
+      "path": "PROJECTIONS/ACTIVE_RULE_PROFILE.md",
+      "sha256": "c26ec597058f8ed5f7b1550c25bd3ffd7ee41ac2751d62c5672fc3506270c8a2",
+      "bytes": 6183
+    },
+    {
+      "path": "OS/AI_CONNECTION_SECURITY.md",
+      "sha256": "5392dc1477f359a2365bcdda88a8faf6a27cfb17ee3e1c234df624eee934d17b",
+      "bytes": 4520
+    },
+    {
+      "path": "OS/AI_CONNECTION_AUDIT.json",
+      "sha256": "0326364a6446a3e3e31d8aca9be6b42b28f57e6c826b701528eacd6eb093eda8",
+      "bytes": 2141
+    },
+    {
+      "path": "OS/SAVEY_AI_ECONOMY.md",
+      "sha256": "a7ba7eb5cfc3da7b5736abb1c9c26a35c5ef79f37e2d029d0613526b06157b64",
+      "bytes": 2328
+    },
+    {
+      "path": "OS/WORKSTATION_CONTROL.md",
+      "sha256": "2d017049b539516063249924092a6e3460f0dd30e348abacd2430639050e2d39",
+      "bytes": 7882
+    },
+    {
+      "path": "OS/WORKSTATION_CAPABILITY_REGISTRY.md",
+      "sha256": "d58480cfda0aba19f199b5eef3c46ebc4a5c1d5650b7ff89c324520850d1c95c",
+      "bytes": 3173
+    }
+  ]
+}

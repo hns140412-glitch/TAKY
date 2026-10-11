@@ -1,0 +1,26 @@
+{
+  "schema": "TAKY_GROW_HUMAN_PROMOTION_APPROVAL_V1",
+  "namespace": "TAKY_GROW",
+  "approval_id": "TAKY_GROW_PROMOTION_APPROVAL_LOCALIZED_FAILURE_BOUNDED_RECOVERY_2026-10-04_R2",
+  "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+  "target_state": "CURRENT_BEST",
+  "approver_role": "USER",
+  "approval_source": "CHAT_EXPLICIT_REAFFIRMATION_AFTER_EXACT_R2_EVIDENCE_REF_AND_SHA_DISCLOSURE",
+  "approval_token": "ㄱ",
+  "observed_at": "2026-10-04T07:47:17+09:00",
+  "approved_evidence_ref": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-04_R2.json",
+  "approved_evidence_sha256": "12e76d63c93ace24f68da294b7eb4485295b262c990e9539410b33d2abd0b0bd",
+  "approved_evidence_hash_method": "TAKY_CANONICAL_JSON_DIGEST_V1",
+  "approved_evidence_canonical_sha256": "19c9d846a3efa098ffc64200453898a8d3ed47d6f16514e3dbda56c205f3d255",
+  "prior_approval_ref": "CURRENT/TAKY/TAKY_GROW_HUMAN_PROMOTION_APPROVAL_2026-10-04.json",
+  "reaffirmation_context": "User explicitly reaffirmed after being shown the exact R2 evidence ref and SHA-256; approval is limited to retaining LOCALIZED_FAILURE_BOUNDED_RECOVERY as CURRENT_BEST and does not authorize repository or deployment side effects.",
+  "automatic": false,
+  "scope": "Continue validation and retain the same GROW strategy as CURRENT_BEST only if the disclosed R2 evidence satisfies the hardened gate.",
+  "does_not_authorize": [
+    "git push",
+    "merge",
+    "deploy",
+    "Netlify",
+    "paid API"
+  ]
+}

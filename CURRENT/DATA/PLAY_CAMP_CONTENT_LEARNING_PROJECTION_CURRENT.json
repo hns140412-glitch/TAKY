@@ -1,0 +1,165 @@
+{
+  "schema": "TAKY_PLAY_CAMP_CONTENT_LEARNING_PROJECTION_V1",
+  "generated_at": "2026-10-10",
+  "state": "DERIVED_CURRENT_NOT_CANONICAL_SOURCE_TRUTH",
+  "purpose": "Play Camp functional content projection derived from indexed/mined sources. Does not overwrite source/index authority.",
+  "consumer": "PLAY_CAMP",
+  "scope_exclusions": [
+    "VOICE_RECORDING_PRODUCTION",
+    "EXPLORER_PROFILE_AVATAR",
+    "PHYSICAL_DEVICE_VERIFICATION",
+    "UI_ART_POLISH"
+  ],
+  "index_readback": {
+    "source_index": {
+      "name": "DATA_SOURCE_INDEX_2026-10-04_V12__WORKING.json",
+      "state": "WORKING_INDEX_READBACK"
+    },
+    "utilization_index": {
+      "name": "DATA_UTILIZATION_INDEX_2026-10-04_V32__WORKING.json",
+      "state": "WORKING_INDEX_READBACK"
+    },
+    "official_snapshot": "TAKY/LEARNING/data/official-snapshots/standard-object-2022-elementary-v1.json"
+  },
+  "sources": [
+    {
+      "source_id": "1Raxjkp_DurvFU2b2a6-e028s9xXM29f8",
+      "title": "서울 PHONICS 학생용",
+      "source_family": "SEOUL_PHONICS_STUDENT_BOOK",
+      "authority": "LOCAL_EDUCATION_AUTHORITY_PUBLISHED_MATERIAL",
+      "utilization": "REFERENCE_ONLY",
+      "review": "57 pages indexed; pages 8-15 and 25 visually mined for short-vowel word families",
+      "ceiling": "STRUCTURE_AND_WORD_FAMILY_REFERENCE_ONLY"
+    },
+    {
+      "source_id": "15-Qi_rYzA2TR_gBjGPL3i0hiRFqellFz",
+      "title": "1-4학년 단원평가 묶음",
+      "source_family": "UNIT_ASSESSMENT_1_4",
+      "authority": "PRACTICE_SOURCE_TO_VERIFY",
+      "utilization": "CONDITIONAL_USE",
+      "review": "1학년 수/덧뺄셈/모양/규칙, 2학년 길이 등 content text readback",
+      "ceiling": "ITEM_PATTERN_REFERENCE_NOT_MASTERY_OR_DIAGNOSIS_AUTHORITY"
+    },
+    {
+      "source_id": "TAKY:official-snapshots/standard-object-2022-elementary-v1.json",
+      "title": "2022 개정 초등 성취기준 표준 객체 스냅샷",
+      "source_family": "OFFICIAL_CURRICULUM_STANDARD_SNAPSHOT",
+      "authority": "OFFICIAL_CURRICULUM_ALIGNMENT",
+      "utilization": "ALIGNMENT_ONLY",
+      "review": "1-2학년 수학 합성·분해/도형/규칙 및 3-4학년 영어 소리-철자 관계 readback",
+      "ceiling": "CURRICULUM_ALIGNMENT_NOT_CHILD_OUTCOME_AUTHORITY"
+    }
+  ],
+  "learning_projection": {
+    "english": {
+      "activity_id": "en-cvc-blend",
+      "mined_bank_count": 36,
+      "stages": {
+        "SHORT_A": 16,
+        "SHORT_I": 16,
+        "SHORT_U": 4
+      },
+      "fixed_audio_runtime_words": [
+        "cat",
+        "map",
+        "sun"
+      ],
+      "functional_state": "BANK_READY_RUNTIME_ASSET_GATE_PRESERVED",
+      "implementation_ref": "src/data/playCampMinedContent.ts"
+    },
+    "math_number": {
+      "activities": [
+        "math-split-5",
+        "math-bond-10"
+      ],
+      "functional_state": "RUNTIME_WIRED",
+      "notes": [
+        "pack.total honored",
+        "activityId honored",
+        "presentationBand filtering active"
+      ]
+    },
+    "math_shape": {
+      "activity_id": "math-shape-features",
+      "logic": "corners/curved-edge deterministic classification",
+      "functional_state": "UI_ROUTED_RUNTIME_READY",
+      "implementation_ref": "src/data/playCampMinedContent.ts"
+    },
+    "math_pattern": {
+      "activity_id": "math-pattern-repeat",
+      "logic": "AB/AAB/ABC repeating pattern continuation evaluator",
+      "functional_state": "UI_ROUTED_RUNTIME_READY",
+      "implementation_ref": "src/data/playCampMinedContent.ts"
+    },
+    "paper_spatial": {
+      "existing": [
+        "paper-half-triangle",
+        "spatial-cube-net"
+      ],
+      "functional_state": "EXISTING_VERTICAL_SLICE_PLUS_MINED_CONCEPT_RUNTIME",
+      "recipe_expansion": "HOLD_SOURCE_GAP",
+      "rule": "DO_NOT_INVENT_ADDITIONAL_ORIGAMI_RECIPE_WITHOUT_MINED_SOURCE"
+    },
+    "functional_catalog": {
+      "runtime_state": "UI_ROUTED_RUNTIME_READY",
+      "total_functional_items": 118,
+      "activity_item_counts": {
+        "en-cvc-blend": 36,
+        "math-fraction-parts": 16,
+        "math-shape-features": 8,
+        "math-pattern-repeat": 7,
+        "math-number-compare": 18,
+        "math-add-sub-situation": 12,
+        "paper-fold-concepts": 12,
+        "spatial-transform-language": 9
+      },
+      "browser_verified_activity_groups": 7,
+      "browser_verification_result": "PASS_GAPS_0_ERRORS_0"
+    }
+  },
+  "learning_evidence_contract": {
+    "owner": "LEARNING_ENGINE",
+    "source_app": "play-camp",
+    "evidence_type": "PLAY_ACTIVITY_OBSERVATION",
+    "new_allowed_signals": [
+      "evidence_kind",
+      "observed_corners",
+      "observed_curved_edge",
+      "expected_class",
+      "response_class",
+      "response_correct",
+      "pattern_id",
+      "expected_next"
+    ],
+    "mastery_authority": false
+  },
+  "mining_gaps": [
+    {
+      "gap_id": "PLAY_CAMP_LOW_PRIMARY_PAPER_FOLD_RECIPE_SOURCE",
+      "priority": "P1_CONTENT",
+      "direction": "Find authoritative/public or openly reusable beginner paper-folding sequences that directly support half/symmetry/triangle/square/spatial transformation for early/lower primary.",
+      "required_evidence": [
+        "source URL",
+        "publisher/author",
+        "step sequence",
+        "age/difficulty applicability",
+        "rights/reuse note",
+        "math concept mapping"
+      ],
+      "reject": [
+        "random craft-only recipe without education mapping",
+        "UI inspiration presented as pedagogy authority",
+        "unverifiable copied step list"
+      ],
+      "status": "MINING_REQUEST_OPEN"
+    }
+  ],
+  "implementation_evidence": {
+    "targeted_test": "tests/playCampMinedContent.test.ts",
+    "targeted_result": "14/14 PASS",
+    "browser_e2e": "scripts/mined-content-browser-e2e.cjs",
+    "browser_result": "7/7 ACTIVITY_GROUPS PASS / EVIDENCE 7 / GAPS 0 / ERRORS 0",
+    "full_regression": "PASS_2026-10-10",
+    "build": "PASS_2026-10-10"
+  }
+}

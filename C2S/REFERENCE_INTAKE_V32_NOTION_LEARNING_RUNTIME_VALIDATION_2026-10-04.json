@@ -1,0 +1,22 @@
+{
+  "schema": "TAKY_REFERENCE_INTAKE_V32_NOTION_LEARNING_RUNTIME_VALIDATION_V1",
+  "date": "2026-10-04",
+  "status": "NOT_APPLICABLE__NO_LEARNING_DOMAIN_REFS",
+  "learning_refs": [],
+  "checked_refs": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-090",
+    "REF-091",
+    "REF-092"
+  ],
+  "reason": "REF-087..092 route to work/design/domain or reacquisition hold; none has learning-engine authority.",
+  "authority": {
+    "current_pointer_changed": false,
+    "canonical_promotion": false,
+    "drive_sync": false,
+    "main_merge": false,
+    "deployment": false
+  }
+}

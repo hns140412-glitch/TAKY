@@ -1,0 +1,57 @@
+{
+  "schema_version": "TAKY_ELEVENLABS_DRYRUN_REQUEST_V2",
+  "request_id": "VOICE-DRYRUN-20261008-002",
+  "explicit_user_authorization": true,
+  "hard_credit_cap": 500,
+  "route_policy": "ROUTE_BEFORE_CREATE",
+  "technical_probe_allowance": {
+    "enabled": true,
+    "max_generation_calls": 1,
+    "max_text_chars": 60,
+    "retries_allowed": 0,
+    "usage_before_required": false,
+    "usage_after_required_if_exposed": true,
+    "production_asset_registration": false,
+    "note": "Technical connectivity probe only. This allowance does not authorize Voice Design, batch production, or replacement of approved assets."
+  },
+  "steps": [
+    {
+      "id": "DR0",
+      "type": "READ_USAGE",
+      "paid_generation": false,
+      "required": false,
+      "failure_behavior": "CONTINUE_WITH_NOT_EXPOSED"
+    },
+    {
+      "id": "DR1",
+      "type": "TECHNICAL_TTS",
+      "paid_generation": true,
+      "dryrun_exception": "EXPLICIT_DRYRUN_ALLOWANCE",
+      "max_calls": 1,
+      "text": "안녕! 짧게 소리만 확인할게.",
+      "role": "PLAY_CAMP_TEACHER_KO",
+      "locale": "ko-KR",
+      "generation_reason": "TECHNICAL_DRY_RUN",
+      "production_candidate": false
+    },
+    {
+      "id": "DR2",
+      "type": "READ_USAGE",
+      "paid_generation": false,
+      "required": false,
+      "failure_behavior": "RECORD_NOT_EXPOSED"
+    }
+  ],
+  "stop_conditions": [
+    "credit_delta_total > 500",
+    "unexpected_overage_or_payg",
+    "retry_attempted",
+    "technical_probe_allowance_violation"
+  ],
+  "followup_not_authorized_in_same_run": [
+    "VOICE_DESIGN_PREVIEW",
+    "BATCH_TTS",
+    "CHARACTER_VOICE_PRODUCTION",
+    "PHONEME_PRODUCTION"
+  ]
+}

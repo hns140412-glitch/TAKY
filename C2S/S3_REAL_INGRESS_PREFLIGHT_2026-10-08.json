@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_S3_REAL_INGRESS_PREFLIGHT_V1",
+  "generated_at": "2026-10-08T15:06:26.325684+00:00",
+  "status": "SUPERSEDED_BY_REMOTE_DRIVE_E2E_PASS",
+  "stage": "MINING_REAL_NEW_ITEM_E2E",
+  "canonical_inbox": {
+    "owner": "SIEZEALL",
+    "drive_folder_id": "1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+    "remote_exists": true,
+    "remote_item_count": 0,
+    "local_expected_path": "Work/REFERENCE/00_INBOX_USER"
+  },
+  "windows_drivefs": {
+    "connected_profile_ids": [
+      "102814704779691664323"
+    ],
+    "siezeall_profile_present": false,
+    "hns_profile_present": true
+  },
+  "collector_preflight": {
+    "state": "HOLD_SYNC_ACCOUNT_NOT_MOUNTED",
+    "dispatched": 0,
+    "baseline_preserved": true
+  },
+  "repairs_completed": [
+    "LOCAL_DIRECTION_INTAKE source_file path no longer requires URL",
+    "file route policy returns SOURCE_FILE_RESOLVED",
+    "LOCAL_DIRECTION_INTAKE_TEST includes file-source regression case",
+    "TAKY_SOURCE_VAULT_LOCAL_REGRESSION_PASS"
+  ],
+  "guards": {
+    "no_hns_dual_inbox_created": true,
+    "no_fake_stage3_pass": true,
+    "no_bulk_remine": true,
+    "no_deploy": true,
+    "no_push": true,
+    "no_paid_api_call": true
+  },
+  "next_condition": "Mount/connect the canonical SIEZEALL Google Drive account in Windows Drive for desktop, bind SIEZEALL_REFERENCE_INBOX_PATH to the resolved local Work/REFERENCE/00_INBOX_USER path, then inject one NEW real item and run collector.",
+  "superseded_by": "C2S/REMOTE_DRIVE_REF096_E2E_2026-10-09.json"
+}

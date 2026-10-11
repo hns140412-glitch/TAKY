@@ -1,0 +1,54 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_ARCHI_D4_COMPANY_EVIDENCE_PROGRESS_2026-10-04",
+  "status": "FOUNDATION_IMPLEMENTED_VERIFIED__REAL_PROJECT_EVIDENCE_STARTED",
+  "domain_item": "ARCHI-D4",
+  "completed": [
+    "ARCHITECTURE_COMPANY_EVIDENCE_SCHEMA_V1",
+    "append-only project/public case intake",
+    "required result-to-implementation trace",
+    "evidence grading and confidentiality/anonymization guards",
+    "Golden Project candidate gate without automatic selection/promotion",
+    "RAW -> LEARNING shared GROW lineage materialization",
+    "CASE/STRATEGY/FRONTIER/FAILURE_LESSON validation",
+    "project_source_role validated against schema source_roles with fail-closed SOURCE_ROLE_INVALID",
+    "RAW + LEARNING lineage materializes before evidence ledger append; failed lineage cannot leave orphan evidence row and retry is idempotent"
+  ],
+  "evidence": [
+    "ENFORCEMENT/architecture_company_evidence_test.py 8/8 PASS",
+    "TOOLS/ARCHIGROW_PROJECT_LEARN.py summary PASS",
+    "ENFORCEMENT/grow_domain_post_claude_fix_failfast.log FINAL_FOCUSED_REGRESSION=PASS"
+  ],
+  "real_ledger": {
+    "path": "LEARNING/evidence/architecture-project-evidence.jsonl",
+    "record_count": 5,
+    "project_count": 3,
+    "golden_candidate_count": 0
+  },
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "open_dependencies": [
+    "ingest real company project cases with source/artifact references",
+    "capture reviewer/client/permit/cost/field outcomes",
+    "owner-approved Golden Project selection after sufficient verified evidence",
+    "promotion review remains shared GROW gated and human-reviewed"
+  ],
+  "followup_audit": {
+    "log": ".claude/TAKY_GROW_DOMAIN_FIX_CLOSURE_AUDIT_FINAL.log",
+    "verdict": "PASS_WITH_FIXES",
+    "required_source_role": "CLOSED",
+    "required_lineage_ordering": "CLOSED",
+    "new_required": "NONE"
+  },
+  "remaining": [
+    "expand to initial 20-30 real project/public cases",
+    "bind more reviewer/client/permit/cost/field outcomes",
+    "owner-approved Golden Project selection only after sufficient verified evidence",
+    "promotion review remains shared GROW gated and human-reviewed"
+  ]
+}

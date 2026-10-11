@@ -1,0 +1,38 @@
+{
+  "one_shot": {
+    "version": "ARCHCOMP_VISUAL_QUALITY_GATE_V1",
+    "delivery": "A3_REPORT",
+    "status": "QUALITY_GATE_PASS",
+    "hard_pass": true,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "source_count": 9,
+      "source_gap_count": 0,
+      "vector_count": 0,
+      "raster_count": 0,
+      "low_resolution_count": 0,
+      "overlong_claim_count": 0
+    },
+    "visual_review_required": true,
+    "rule": "Mechanical quality checks cannot replace final visual/source comparison of the rendered artifact."
+  },
+  "staged": {
+    "version": "ARCHCOMP_VISUAL_QUALITY_GATE_V1",
+    "delivery": "A3_REPORT",
+    "status": "QUALITY_GATE_PASS",
+    "hard_pass": true,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "source_count": 9,
+      "source_gap_count": 0,
+      "vector_count": 9,
+      "raster_count": 0,
+      "low_resolution_count": 0,
+      "overlong_claim_count": 0
+    },
+    "visual_review_required": true,
+    "rule": "Mechanical quality checks cannot replace final visual/source comparison of the rendered artifact."
+  }
+}

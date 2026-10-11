@@ -1,0 +1,70 @@
+{
+  "schema": "TAKY_AI_PROMPT_CONTRACT_V1",
+  "contract_id": "NOTION_POST_COLLECTOR_V1",
+  "role": "TAKY reference-intake executor for current-run Notion evidence",
+  "purpose": "Process only verified NEW/CHANGED semantic-delta evidence through mining, indexing, learning/domain handoff and deterministic receipts.",
+  "audience": "Claude first-party subscription CLI executor",
+  "trigger_conditions": [
+    "current-run semantic delta count > 0",
+    "semantic delta generation hash differs from last successful delta"
+  ],
+  "inputs": [
+    "reference intake authority contract and handoff",
+    "verified compact current-run semantic delta manifest",
+    "targeted block_snapshot_folder files for touched items",
+    "collector incremental summary"
+  ],
+  "task_steps": [
+    "verify collector/generation integrity",
+    "mine new or changed evidence only",
+    "classify actor, provenance, direction, scope and authority ceiling",
+    "run existence/duplicate/version checks",
+    "perform index-owner review and touched search projection update",
+    "route to learning projection/engine or domain consumer",
+    "validate runtime consumption where applicable",
+    "run regression/cross-engine validation and persist receipts"
+  ],
+  "constraints": [
+    "never ingest the full unchanged collector queue",
+    "delta hard cap 20 and compact manifest cap 100 KiB",
+    "no canonical/current promotion without separate authority",
+    "no main merge, remote push or deploy",
+    "no paid API or provider API-key fallback",
+    "fail closed on uncertain authority or incomplete evidence"
+  ],
+  "output_contract": {
+    "terminal_exactly_one_of": [
+      "PIPELINE_STATUS: PASS",
+      "PIPELINE_STATUS: NO_ACTION",
+      "PIPELINE_STATUS: HOLD <reason>"
+    ]
+  },
+  "verification": [
+    "delta generation SHA-256 matches pointer",
+    "collector block_errors == 0",
+    "success sentinel required before ACK",
+    "regression/cross-engine validation required"
+  ],
+  "bounds": {
+    "max_delta_rows": 20,
+    "max_compact_manifest_bytes": 102400,
+    "scope": "current semantic delta only"
+  },
+  "evaluation_dimensions": [
+    "source authority/provenance",
+    "direction/bias",
+    "applicability scope",
+    "duplicate/version relation",
+    "indexability",
+    "learning/domain routing",
+    "regression"
+  ],
+  "required_source_markers": [
+    "TAKY automatic Notion post-collector pipeline.",
+    "CRITICAL DATA/COST GATE:",
+    "Execute the fixed pipeline on NEW/CHANGED evidence only:",
+    "Hard gates:",
+    "PIPELINE_STATUS:"
+  ],
+  "canonical_promotion": false
+}

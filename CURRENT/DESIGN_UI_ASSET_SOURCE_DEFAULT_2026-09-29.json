@@ -1,22 +1,22 @@
 {
-  "schema_version": "TAKY_CURRENT_ASSET_SOURCE_V1",
-  "updated_at": "2026-09-29",
+  "schema_version": "TAKY_CURRENT_ASSET_SOURCE_V2",
+  "updated_at": "2026-10-07",
   "rule_id": "TKY-ASSET-001",
   "authority_owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
   "scope": "ALL_TAKY_GOVERNED_VISUAL_DESIGN_AND_UI_TASKS",
-  "decision": "User requires new and existing conversations to default to GitHub TAKY-ASSETS storage for approved/reusable original images, separate UI layers, original Visual ID derivatives and asset manifests.",
-  "canonical_asset_repo": "hns140412-glitch/TAKY-ASSETS",
-  "canonical_source_role": "approved/reusable original and separately addressable source layers",
+  "decision": "Original TKY-ASSET-001 asset-production rule retained; only the Google Cloud/Drive storage-distribution route is overridden by the 2026-10-07 current decision.",
+  "canonical_asset_repo": "HNS_DRIVE_APPROVED_ASSET_MASTER",
+  "canonical_source_role": "approved/reusable original and separately addressable source layers governed by current Drive route; historical GitHub TAKY-ASSETS remains migration/catalog evidence",
   "consumers": [
     "Ready-Set",
     "Hide-Seek",
     "Snap-Pop",
     "other TAKY visual UI consumers"
   ],
-  "consumer_role": "pinned source manifest + verified derived PWA build copies, not second source authority",
+  "consumer_role": "stable asset/slot manifest + verified distribution package/cache; app code references current manifest contract rather than becoming a second binary authority",
   "required_evidence": [
     "source pointer/approved reference",
-    "actual binary GitHub path and source revision",
+    "current HNS master path/folder ID + source revision/hash",
     "file integrity and asset/layer manifest",
     "Visual ID/consent check as applicable",
     "real UI asset binding",
@@ -31,6 +31,38 @@
     "no premature Netlify/main release"
   ],
   "hosted_cross_chat_automatic_loading": "UNVERIFIED",
-  "explicit_bootstrap": "Latest TAKY asset rule TKY-ASSET-001: assets original and separate layers to TAKY-ASSETS; UI binds revisioned source and verifies real render.",
-  "status": "USER_CONFIRMED_GOVERNANCE_DECISION"
+  "explicit_bootstrap": "Latest TAKY asset rule TKY-ASSET-001 + 2026-10-07 route: approved binary masters use HNS TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY; release-safe packages use SIEZEALL TAKY/20_PLATFORM/03_UPDATES; Netlify is not asset-binding authority; verify manifest/hash + real runtime render.",
+  "status": "USER_CONFIRMED_CURRENT_STORAGE_ROUTE_OVERRIDE_2026-10-07",
+  "storage_route_override": {
+    "scope": "CLOUD_ID_ONWARD_DECISIONS_ONLY",
+    "google_cloud_project_owner": "SIEZEALL",
+    "oauth_client_drive_api_owner": "SIEZEALL",
+    "user_direct_hns_access": false,
+    "user_input_surface": "SIEZEALL_SHARED_DRIVE_SURFACE",
+    "single_user_reference_inbox": "SIEZEALL_DRIVE_FOLDER_ID:1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+    "local_sync_state": "HOLD_SYNC_ACCOUNT_NOT_MOUNTED",
+    "local_synced_path": null,
+    "local_collector_watch": true,
+    "local_collector_boundary": "ACQUIRE_HASH_DIRECTION_PRESERVE_AND_MINING_DISPATCH_ONLY",
+    "hns_role": "INTERNAL_ADMIN_APPROVED_MASTER",
+    "siezeall_role": "APPROVED_DISTRIBUTION_AND_USER_SYNC",
+    "asset_delivery": "HNS_APPROVED_MASTER -> MANIFEST_HASH_GATE -> SIEZEALL_DISTRIBUTION -> DEVICE_VERIFIED_CACHE",
+    "github_role": "CODE_SCHEMA_CONTRACT_MANIFEST_AND_LEGACY_ASSET_CATALOG",
+    "netlify_role": "PWA_SHELL_RUNTIME_DELIVERY_ONLY_NOT_ASSET_BINDING_AUTHORITY",
+    "deploy_rule": "ASSET_OR_DATA_PACKAGE_REFRESH_DOES_NOT_REQUIRE_GITHUB_OR_NETLIFY_UNLESS_CODE_SCHEMA_SLOT_CONTRACT_CHANGES",
+    "hns_asset_master_path": "TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+    "hns_asset_master_folder_id": "10CJIHS_SEs_u79tj7z4FcZFPICfLuPVA",
+    "siezeall_distribution_path": "TAKY/20_PLATFORM/03_UPDATES",
+    "siezeall_distribution_folder_id": "111nmMqJvFfwKYoxaKBGmJWWMoqvCck0s",
+    "current_path_authority": "OS/DRIVE_STORAGE_MAP.json"
+  },
+  "canonical_asset_repo_state": "CURRENT_HNS_DRIVE_MASTER__GITHUB_TAKY_ASSETS_LEGACY_MIGRATION_CATALOG",
+  "current_routing_owners": [
+    "OS/DRIVE_STORAGE_MAP.json",
+    "CURRENT/DESIGN_UI_ASSET_SOURCE_DEFAULT_2026-09-29.json"
+  ],
+  "current_binary_master": "HNS_DRIVE_APPROVED_ASSET_MASTER",
+  "current_binary_master_path": "TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+  "current_binary_master_folder_id": "10CJIHS_SEs_u79tj7z4FcZFPICfLuPVA",
+  "historical_asset_repo": "hns140412-glitch/TAKY-ASSETS"
 }

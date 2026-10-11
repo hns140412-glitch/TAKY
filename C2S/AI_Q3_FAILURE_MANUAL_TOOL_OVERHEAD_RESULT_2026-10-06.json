@@ -1,0 +1,25 @@
+{
+  "schema": "TAKY_AI_Q3_FAILURE_MANUAL_TOOL_OVERHEAD_RESULT_V1",
+  "generated_at": "2026-10-06T00:15:47.246303+00:00",
+  "representative_case": "AI P1 public-source acquisition",
+  "runbook": "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+  "runbook_required_rules_present": true,
+  "bounded_replay": {
+    "sample_count": 8,
+    "sequential_ms": 3154.1,
+    "parallel_ms": 714.5,
+    "speedup_ratio": 4.414,
+    "same_terminal_count": true,
+    "success": 8
+  },
+  "learning_outcomes": {
+    "AI-LRN-FAILURE-UPDATES-OPERATING-MANUAL": "PASS_LOCAL_PROCEDURE_REPLAY",
+    "AI-LRN-TOOL-OVERHEAD-CAN-NEGATE-SAVINGS": "PASS_MEASURED_OVERHEAD_DIFFERENCE"
+  },
+  "claim_ceiling": "PUBLIC_SOURCE_ACQUISITION_WORKFLOW_ONLY",
+  "guards": {
+    "no_auth": true,
+    "no_paid_api": true,
+    "canonical_promotion": false
+  }
+}

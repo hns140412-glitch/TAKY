@@ -1,0 +1,82 @@
+{
+  "schema": "TAKY_AI_REMINING_FINAL_RECEIPT_V1",
+  "generated_at": "2026-10-05T22:39:07.554870+00:00",
+  "status": "PASS_LOCAL_WITH_2_BODY_HOLDS",
+  "scope": "AI-related mined/reference materials re-review -> body acquisition -> dedupe/merge -> index -> learning -> lineage",
+  "counts": {
+    "backlog_total": 63,
+    "closed": 61,
+    "active_hold": 2,
+    "indexed_backlog_items": 51,
+    "merged_backlog_items": 10,
+    "ai_index_sources": 81,
+    "ai_learning_rules": 56
+  },
+  "record_kind_counts": {
+    "source_reference": 8,
+    "validated_mining_atom": 15,
+    "discovery_reference": 7,
+    "remined_source_reference": 51
+  },
+  "p0": {
+    "total": 17,
+    "closed": 17,
+    "active_hold": 0,
+    "indexed": 14,
+    "merged": 3,
+    "holds": 0
+  },
+  "p1": {
+    "total": 46,
+    "closed": 44,
+    "active_hold": 2,
+    "indexed": 37,
+    "merged": 7,
+    "holds": 2
+  },
+  "active_holds": [
+    {
+      "title": "AI 직원 생성하기 | BrandyAction EDU",
+      "url": "https://brandyaction-edu.com/classes/product-cf6fb7a4-6eb9-41ea-a27a-02201bf07d1b",
+      "state": "HOLD_BODY_NOT_ACQUIRED",
+      "required_next": "REACQUIRE_BODY",
+      "recovery_receipt": "C2S/AI_BRANDYACTION_HOLD_RECOVERY_2026-10-06.json",
+      "hold_reason": "HTTP 200 rendered an application-level not-found page ('페이지를 찾을 수 없습니다.'); remaining text is navigation, footer, cookie notice and company metadata. No substantive class content acquired.",
+      "text_chars": 422,
+      "substantive_body_chars": 0
+    },
+    {
+      "title": "GPT프롬프트 - OneDrive",
+      "url": "https://onedrive.live.com/?id=8A91625842C934F8%21s74f3aa406e9e4592b93f4057b8737907&cid=8A91625842C934F8&spopath=%2Fpersonal%2F8a91625842c934f8%2FDocuments%2FDesktop%2FGPT%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%2F%5B4%2C900%EC%9B%90%5D+%EA%B3%A0%EC%86%8C%EC%9E%A5_%EC%B4%88%EC%95%88_%EC%9E%91%EC%84%B1_%28%EC%82%AC%EA%B8%B0_%EB%AA%85%EC%98%88%ED%9B%BC%EC%86%90_%EC%97%85%EB%AC%B4%EB%B0%A9%ED%95%B4_%EB%93%B1%29..txt&listurl=%2Fpersonal%2F8a91625842c934f8%2FDocuments&ithint=file%2Ctxt&e=oS2IUn&migratedtospo=true&parent=%2Fpersonal%2F8a91625842c934f8%2FDocuments%2FDesktop%2FGPT%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3QvYy84YTkxNjI1ODQyYzkzNGY4L0lRQkFxdk4wbm02U1Jia19RRmU0YzNrSEFTeklmdnAtZ2FtYm9SNGMzWEdaam8wP2U9b1MySVVuJmZiY2xpZD1QQVZFUkZXQVVQUTl4d1pHOW1BbVprYVdRV1VPSURGbjZOSVZJOFVKZVI3TE5ZRHl4eTdyWGo5V1Y0ZEc0RFlXVnRBakV3QUhOeWRHTUdZWEJ3WDJsa0R6RXlOREF5TkRVM05ESTROelF4TkFBQnAzeUJlR1VETjhRLVZlTmR5a1hxQjRmX3pXY3o0WmRYZ2RCU1RJR2dPUjlaaHpMSFg1dVIteTBPaTVCYV9hZW1fZTRfbS1CY0ZiYjBaaURGamJPRmo5UQ&ga=1",
+      "state": "HOLD_BODY_NOT_ACQUIRED",
+      "required_next": "REACQUIRE_BODY"
+    }
+  ],
+  "hold_reasons": {
+    "AI 직원 생성하기 | BrandyAction EDU": "HTTP 200 rendered an application-level not-found page ('페이지를 찾을 수 없습니다.'); remaining text is navigation, footer, cookie notice and company metadata. No substantive class content acquired.",
+    "GPT프롬프트 - OneDrive": "Public share returned OneDrive application shell; direct download and public share REST retrieval did not yield file content."
+  },
+  "safety_and_quality_guards": [
+    "TITLE_ONLY != LEARNING",
+    "DISCOVERY_REFERENCE != LEARNING",
+    "AUTHOR != AUTHORITY",
+    "PRODUCT_FACTS_TIME_SENSITIVE",
+    "HIGH_STAKES_CLAIMS_REQUIRE_PRIMARY_SOURCE",
+    "NO_GLOBAL_REF_NUMBER_ALLOCATION",
+    "NO_CANONICAL_PROMOTION",
+    "NO_PUSH_MERGE_DEPLOY"
+  ],
+  "artifacts": [
+    "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+    "CURRENT/DATA/AI_LEARNING_PROJECTION.json",
+    "CURRENT/DATA/AI_REMINING_BACKLOG.json",
+    "C2S/AI_MINING_INDEX_OWNER_RECEIPT_2026-10-05.json",
+    "C2S/AI_MINING_LEARNING_ABSORPTION_2026-10-05.json",
+    "C2S/AI_P0_REMINING_INDEX_OWNER_RECEIPT_2026-10-05.json",
+    "C2S/AI_P0_REMINING_LEARNING_ABSORPTION_2026-10-05.json",
+    "C2S/AI_P1_REMINING_INDEX_OWNER_RECEIPT_2026-10-06.json",
+    "C2S/AI_P1_REMINING_LEARNING_ABSORPTION_2026-10-06.json",
+    "C2S/AI_RECOVERED_HOLDS_INDEX_OWNER_RECEIPT_2026-10-06.json",
+    "C2S/AI_RECOVERED_HOLDS_LEARNING_ABSORPTION_2026-10-06.json"
+  ]
+}

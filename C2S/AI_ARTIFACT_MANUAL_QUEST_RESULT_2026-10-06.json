@@ -1,0 +1,56 @@
+{
+  "schema": "TAKY_AI_ARTIFACT_MANUAL_QUEST_RESULT_V1",
+  "generated_at": "2026-10-06T03:46:45.174710+00:00",
+  "status": "PASS_LOCAL",
+  "tested_count": 4,
+  "pass_count": 4,
+  "q3_summary": {
+    "total": 14,
+    "pass_adopted": 9,
+    "inconclusive": 0,
+    "ready_when_representative_task_exists": 5,
+    "security_review_required": 0
+  },
+  "q4_summary": {
+    "total": 18,
+    "pass_adopted_bounded_domain": 12,
+    "remaining_ready": 6
+  },
+  "cumulative_adopted_tested": 40,
+  "growth_lineage": [
+    {
+      "learning_id": "AI-LRN-STAGED-ARTIFACT-WORKFLOW",
+      "status": "PASS",
+      "execution_event_id": "GLE-769a3077955aa43a62ffc6f9",
+      "outcome_event_id": "GLE-484730675084dd7428131ba7",
+      "growth_event_id": "GLE-91175b650776ace534784c29"
+    },
+    {
+      "learning_id": "AI-LRN-DURABLE-MANUAL-OVER-EPHEMERAL-AGENT",
+      "status": "PASS",
+      "execution_event_id": "GLE-2d6b15081fb0a548f57e32c6",
+      "outcome_event_id": "GLE-f29893fd1f1eca67d1465d43",
+      "growth_event_id": "GLE-df21acf331a026d229017018"
+    },
+    {
+      "learning_id": "AI-LRN-HUMAN-EDITABLE-OUTPUT",
+      "status": "PASS",
+      "execution_event_id": "GLE-6db37a95747d0609e0d47af1",
+      "outcome_event_id": "GLE-3924c7496b182d0d0865e20a",
+      "growth_event_id": "GLE-ea1dcb6a0cfe26d11debe401"
+    },
+    {
+      "learning_id": "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE",
+      "status": "PASS",
+      "execution_event_id": "GLE-263aebda24aa0fd09f075880",
+      "outcome_event_id": "GLE-b6309030c026931dff6b08a5",
+      "growth_event_id": "GLE-36ab41c30a19cee4ad8b0cac"
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

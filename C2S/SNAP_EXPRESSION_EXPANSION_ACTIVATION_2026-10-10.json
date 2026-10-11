@@ -1,0 +1,22 @@
+{
+  "schema": "TAKY_SNAP_EXPRESSION_EXPANSION_ACTIVATION_V1",
+  "date": "2026-10-10",
+  "decision": "ENABLE_RUNTIME_CONSUMPTION_FOR_TWO_REVIEWED_USER_PRODUCT_SOURCES",
+  "source_projection": "CURRENT/DATA/SNAP_EXPRESSION_CONTENT_PROJECTION_CURRENT.json",
+  "reason": "Both sources are owned by SNAP_POP, classified CONTENT_REVIEWED and USER_PRODUCT_SOURCE, and were directly reread from the preserved originals on 2026-10-10. The previous lock only forbade claiming active behavior without review.",
+  "excluded_sources": [
+    {
+      "category": "NAVER_WRITING_REFERENCES_RECHECKED_2026-10-09",
+      "reason": "RAW verification incomplete; not used for this activation."
+    }
+  ],
+  "implementation": {
+    "repo": "D:/Git PWA/Snap & Pop",
+    "data": "data/landmarks.json",
+    "runtime": "app.js",
+    "offline_cache": "sw.js",
+    "behavior": "Two additional expansion landmarks reuse the existing 3-step exploration, record/gem/growth, Explorer Crew, and Ready return paths."
+  },
+  "master_logic_changed": false,
+  "push_merge_deploy": false
+}

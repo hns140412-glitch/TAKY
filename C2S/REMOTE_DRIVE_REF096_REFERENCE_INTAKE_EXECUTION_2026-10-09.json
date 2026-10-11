@@ -1,0 +1,167 @@
+{
+  "schema": "TAKY_REMOTE_DRIVE_REF096_REFERENCE_INTAKE_EXECUTION_V1",
+  "generated_at": "2026-10-08T15:26:21.916310+00:00",
+  "source_id": "REF-096",
+  "route": {
+    "pass": true,
+    "route_type": "REFERENCE_INTAKE_REVIEW",
+    "domain": "ai_orchestration",
+    "consumer": "DOMAIN_ENGINE",
+    "write_authorized": true,
+    "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+    "canonical_promotion_authorized": false,
+    "full_corpus_reindex": false,
+    "pipeline": [
+      "SOURCE_OR_LOCATOR",
+      "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+      "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+      "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+      "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+      "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+      "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+      "DOMAIN_ENGINE",
+      "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+      "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+      "REPORT"
+    ],
+    "guards": [
+      "MINING != INDEXING",
+      "INDEXING != LEARNING",
+      "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+      "INDEXED != APPROVED_POLICY",
+      "DUPLICATE != NEW_EVIDENCE",
+      "AUTHOR != AUTHORITY",
+      "DIRECTION != APPLICABILITY_SCOPE",
+      "SOURCE_TRUST != CANONICAL_AUTHORITY"
+    ]
+  },
+  "execution": {
+    "pass": true,
+    "execution_status": "PERSISTED",
+    "grow_lineage": [
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-2c9d0e6129df27024402a864",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-a6fe2a0659c4ebbf0fb8a8ad",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-0bdbdd69f8ed7ae7613b5811",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    ],
+    "emitted": [
+      {
+        "event_id": "ri-dc1e6916f4d529c81c07",
+        "source_key": "REF-096",
+        "state": "REGISTERED",
+        "previous_state": null,
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:26:21.852341+00:00",
+        "details": {
+          "source_id": "REF-096",
+          "source_url": "https://github.com/epoko77-ai/im-not-ai/blob/main/skills/humanize-korean/SKILL.md",
+          "source_locator": "https://docs.google.com/document/d/1hC9bqsBG-9kc8XpDafM6qgxmD26Vgj0gpn3mRslPgWY/edit",
+          "domain": "ai_orchestration",
+          "consumer": "DOMAIN_ENGINE",
+          "source_actor": "epoko77-ai / Humanize KR contributors",
+          "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_IMPLEMENTATION_FILE",
+          "source_author_identity_state": "PRIMARY_REPOSITORY_BLOB_VERIFIED__INDIVIDUAL_REAL_ID_NOT_REQUIRED",
+          "source_direction": "GUARDED_KOREAN_OUTPUT_HUMANIZATION_ORCHESTRATION",
+          "source_direction_signals": [
+            "ROUTE_HINT",
+            "CALL_MINIMIZATION",
+            "MEANING_PRESERVATION",
+            "DETERMINISTIC_GATES",
+            "FALSE_POSITIVE_GUARDS"
+          ],
+          "applicability_scope": [
+            "TAKY_KOREAN_OUTPUT_QA",
+            "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+            "CONTENT_GENERATION_GUARDED_REWRITE_WORKFLOW"
+          ],
+          "authority_ceiling": "PRIMARY_REPO_IMPLEMENTATION_AUTHORITY_FOR_HUMANIZE_KR_SKILL__REFERENCE_PATTERN_ONLY_FOR_TAKY__NOT_AI_AUTHORSHIP_PROOF"
+        }
+      },
+      {
+        "event_id": "ri-44b204258d019a2d0b99",
+        "source_key": "REF-096",
+        "state": "INDEXED",
+        "previous_state": "REGISTERED",
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:26:21.852341+00:00",
+        "details": {
+          "index_source_id": "REF-096",
+          "index_version": "V35-NOTION-DELTA",
+          "duplicate_relation": "NONE",
+          "version_relation": "NEW_SOURCE_OR_REFERENCE",
+          "source_ref": "INDEX:REF-096",
+          "index_review_issuer": "INDEXING_OWNER",
+          "index_review_evidence_refs": [
+            "C2S/NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+            "TAKY-SOURCE-VAULT/reports/SIEZEALL_DRIVE_REF096_HUMANIZE_KR_SKILL_MINING_20261009.json",
+            "CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json"
+          ]
+        }
+      },
+      {
+        "event_id": "ri-35acd5b7ca3d373ca928",
+        "source_key": "REF-096",
+        "state": "EVIDENCE_CANDIDATE",
+        "previous_state": "INDEXED",
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:26:21.852341+00:00",
+        "details": {
+          "consumer": "DOMAIN_ENGINE",
+          "domain": "ai_orchestration",
+          "source_ref": "INDEX:REF-096",
+          "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_IMPLEMENTATION_FILE",
+          "source_direction": "GUARDED_KOREAN_OUTPUT_HUMANIZATION_ORCHESTRATION",
+          "applicability_scope": [
+            "TAKY_KOREAN_OUTPUT_QA",
+            "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+            "CONTENT_GENERATION_GUARDED_REWRITE_WORKFLOW"
+          ],
+          "authority_ceiling": "PRIMARY_REPO_IMPLEMENTATION_AUTHORITY_FOR_HUMANIZE_KR_SKILL__REFERENCE_PATTERN_ONLY_FOR_TAKY__NOT_AI_AUTHORSHIP_PROOF"
+        }
+      }
+    ],
+    "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+    "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+    "canonical_promotion": false
+  },
+  "owner_receipt": "C2S/DATA_INDEX_V35_REMOTE_DRIVE_INDEX_OWNER_RECEIPT_2026-10-09.json",
+  "delta": "C2S/NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+  "ingress_authority": "SIEZEALL_GOOGLE_DRIVE_FOLDER_ID",
+  "canonical_promotion": false,
+  "paid_api_used": false
+}

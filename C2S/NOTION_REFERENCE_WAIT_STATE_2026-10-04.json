@@ -1,0 +1,30 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_WAIT_STATE_V1",
+  "date": "2026-10-04",
+  "authority_parent": "C2S/NOTION_REFERENCE_PIPELINE_VALIDATION_V32_3_2026-10-04.json",
+  "actionable_open_count": 0,
+  "wait": [
+    {
+      "source_id": "REF-090",
+      "state": "WAIT_RUNTIME_ENVIRONMENT",
+      "reentry_condition": "Run isolated functional test only when a permitted PowerPoint VBA test environment is available."
+    },
+    {
+      "source_id": "REF-091",
+      "state": "WAIT_SOURCE_AVAILABILITY",
+      "reentry_condition": "Resume only when accessible body content or an authoritative copy becomes available."
+    }
+  ],
+  "closed": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-092"
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "deployment": false
+  }
+}

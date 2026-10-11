@@ -1,0 +1,71 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_DOMAIN_HANDOFF_V1",
+  "date": "2026-10-04",
+  "status": "INDEXED_REFERENCE_AVAILABLE_TO_DOMAIN_ENGINE",
+  "index_version": "V31-NOTION-DELTA",
+  "refs": [
+    {
+      "source_id": "REF-082",
+      "source_ref": "INDEX:REF-082",
+      "source_actor_class": "SPECIALIST_PRESENTATION_TOOL_CREATOR",
+      "source_direction": "AI_PPT_TOOL_COMPARISON_AND_WORKFLOW_ADVOCACY",
+      "consumers": [
+        "WORK_OS_ARTIFACT_ENGINE",
+        "ARCHIGROW_PRESENTATION_REVIEW"
+      ],
+      "role": "PRESENTATION_WORKFLOW_COMPARISON_REFERENCE",
+      "scope": [
+        "content-first planning",
+        "design-rule extraction",
+        "sample-before-full-build"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_FOR_COMPARATIVE_CLAIMS__PRIMARY_SOURCE_REQUIRED_FOR_PRODUCT_FACTS"
+    },
+    {
+      "source_id": "REF-083",
+      "source_ref": "INDEX:REF-083",
+      "source_actor_class": "INDEPENDENT_AI_WORKFLOW_CREATOR",
+      "source_direction": "AI_PRODUCTIVITY_TOOL_ADVOCACY_WITH_COMMERCIAL_FUNNEL",
+      "consumers": [
+        "TAKY_TOOL_EVALUATION",
+        "SAVEY",
+        "AI_CONNECTION_SECURITY"
+      ],
+      "role": "THIRD_PARTY_TOOL_DISCOVERY_AND_SECURITY_REVIEW_REFERENCE",
+      "scope": [
+        "capability-gap comparison",
+        "usage/cost hypothesis",
+        "plugin supply-chain/security review"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY_UNTIL_OFFICIAL_REPO_SECURITY_AND_SUPPLY_CHAIN_VERIFIED"
+    },
+    {
+      "source_id": "REF-086",
+      "source_ref": "INDEX:REF-086",
+      "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_PLUS_SECONDARY_GUIDE",
+      "source_direction": "OPEN_SOURCE_AGENT_NATIVE_PRESENTATION_WORKFLOW",
+      "consumers": [
+        "ARCHITECTURE_DOMAIN_ENGINE",
+        "WORK_OS_ARTIFACT_ENGINE"
+      ],
+      "role": "EDITABLE_PPTX_TOOL_EVALUATION_REFERENCE",
+      "scope": [
+        "agent draft",
+        "human visual edit",
+        "native editable PPTX export"
+      ],
+      "authority_ceiling": "PRIMARY_REPO_AUTHORITY_FOR_PROJECT_FACTS__EXPERIMENT_ONLY_FOR_TAKY_ADOPTION"
+    }
+  ],
+  "guards": [
+    "REFERENCE_ONLY",
+    "NO_CANONICAL_PROMOTION",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_DEPLOYMENT",
+    "AUTHOR != AUTHORITY",
+    "DIRECTION != APPLICABILITY_SCOPE",
+    "COMMERCIAL_OR_TOOL_ADVOCACY_CLAIMS_REQUIRE_PRIMARY_VERIFICATION",
+    "THIRD_PARTY_PLUGIN_INSTALL_NOT_AUTHORIZED_BY_REFERENCE"
+  ]
+}

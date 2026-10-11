@@ -1,0 +1,28 @@
+{
+  "schema": "TAKY_LOCAL_EDIT_VS_REGEN_PACKAGE_DIFF_V2",
+  "results": {
+    "local": {
+      "changed_shared_entries": 17,
+      "semantic_slide_text_changed_count": 1,
+      "semantic_slide_text_changed": [
+        "ppt/slides/slide1.xml"
+      ],
+      "marker_slides": [
+        "ppt/slides/slide1.xml"
+      ],
+      "media_changed_count": 0
+    },
+    "regen": {
+      "changed_shared_entries": 24,
+      "semantic_slide_text_changed_count": 1,
+      "semantic_slide_text_changed": [
+        "ppt/slides/slide1.xml"
+      ],
+      "marker_slides": [
+        "ppt/slides/slide1.xml"
+      ],
+      "media_changed_count": 0
+    }
+  },
+  "same_target_change": true
+}

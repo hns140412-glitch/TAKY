@@ -1,0 +1,48 @@
+{
+  "namespace": "TAKY",
+  "state_id": "TAKY_GROWTH_LINEAGE_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "authority_boundary": "Does not override existing domain CURRENT facts; governs evidence-to-growth promotion behavior.",
+  "canonical_loop": ["RAW","INDEX","LEARNING","RELATION","EXECUTION","OUTCOME","GROWTH"],
+  "implemented": [
+    "typed provenance-bound relation contract",
+    "growth lineage validator",
+    "FRONTIER/CURRENT_BEST promotion gate",
+    "confirmed failure to regression-candidate bridge",
+    "handoff demoted to recovery/transport rather than semantic authority",
+    "hybrid retrieval priority: exact authority -> typed relation -> semantic discovery -> outcome utility",
+    "external deployment lineage: local -> preview/external verification -> human approval -> production"
+  ],
+  "defenses": [
+    "discovery cannot write directly to CURRENT",
+    "stored lesson is not learned until executable behavior + outcome evidence exist",
+    "CURRENT_BEST never auto-promotes",
+    "single success cannot become CURRENT_BEST",
+    "confirmed failure or regression failure blocks CURRENT_BEST",
+    "relation without evidence is invalid",
+    "stale handoff/memory cannot outrank CURRENT authority",
+    "push/merge/deploy/paid API remain approval-gated"
+  ],
+  "verification": {
+    "growth_lineage_engine_test": "4/4 PASS",
+    "failure_regression_bridge_test": "2/2 PASS",
+    "growth_adversarial_test": "5/5 PASS",
+    "full_enforcement_unittest_discovery": "132/132 PASS",
+    "existing_outcome_hook_regression": "PASS",
+    "rule_registry_lint": "PASS"
+  },
+  "external_evidence_classes": {
+    "official_or_project_docs": "EVIDENCE",
+    "github_public_issues": "FAILURE_CASE_EVIDENCE",
+    "community_comments": "FRONTIER_CANDIDATE_ONLY"
+  },
+  "open_status": "SUPERSEDED_BY_CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+  "open": [
+    "Bind lineage emission directly into every reference-intake and domain-learning producer rather than only enforcing the shared contract.",
+    "Add outcome-utility reranking to DATA INDEX search without weakening exact/CURRENT authority precedence.",
+    "Persist session anti-loop state outside OS temp while keeping it ephemeral and bounded.",
+    "Add compaction/resume receipt if Claude Code exposes a reliable supported lifecycle signal.",
+    "Mine real project outcomes/reviewer feedback to satisfy growth promotion evidence rather than synthetic tests."
+  ],
+  "approval_scope": "No push, merge, deploy, Netlify action, or paid API was performed."
+}

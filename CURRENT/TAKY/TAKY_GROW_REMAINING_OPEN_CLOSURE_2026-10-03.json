@@ -1,0 +1,73 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_REMAINING_OPEN_CLOSURE_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "closes_legacy_open_items": [
+    {
+      "item": "claude_compaction_resume_receipt",
+      "status": "CLOSED",
+      "implementation": "ENFORCEMENT/claude_lifecycle_receipt.py",
+      "hook": ".claude/hooks/taky_hook.py",
+      "settings": ".claude/settings.json",
+      "signals": [
+        "SessionStart:resume",
+        "SessionStart:compact",
+        "PreCompact:manual",
+        "PreCompact:auto"
+      ],
+      "privacy": {
+        "session_content_persisted": false,
+        "raw_identity_persisted": false,
+        "raw_path_persisted": false
+      },
+      "bounded": {
+        "ttl_days_default": 14,
+        "max_files_default": 200,
+        "atomic_write": true
+      },
+      "verification": "5/5 unit PASS + hook simulation PASS"
+    },
+    {
+      "item": "real_project_outcome_and_reviewer_feedback_evidence",
+      "status": "CLOSED",
+      "evidence": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-03.json",
+      "synthetic": false,
+      "verified_outcomes": 3,
+      "context_diversity": 3,
+      "regression_failures": 0,
+      "growth_decision": "PROMOTION_ELIGIBLE",
+      "auto_promote": false,
+      "human_review_required": true,
+      "review_failure_guard_preserved": true
+    }
+  ],
+  "legacy_open_reconciliation": {
+    "producer_lineage_binding": "CLOSED_BY_TAKY_GROW_PRODUCER_LINEAGE_2026-10-03",
+    "data_index_outcome_utility_rerank": "CLOSED_BY_TAKY_GROW_RERANK_ANTILOOP_2026-10-03",
+    "durable_anti_loop_state": "CLOSED_BY_TAKY_GROW_RERANK_ANTILOOP_2026-10-03",
+    "claude_compaction_resume_receipt": "CLOSED_HERE",
+    "real_project_outcome_reviewer_feedback": "CLOSED_HERE"
+  },
+  "verification": {
+    "full_python_enforcement": "165/165 PASS",
+    "grow_related_node_regressions": "6/6 PASS",
+    "settings_json": "PASS",
+    "hook_lifecycle_probe": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "next_gate_status": "SUPERSEDED_BY_CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+  "next_gate": {
+    "type": "HUMAN_PROMOTION_REVIEW",
+    "candidate": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "target": "CURRENT_BEST",
+    "automatic_action": false,
+    "approval_required": true
+  },
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

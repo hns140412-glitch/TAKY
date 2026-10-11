@@ -1,0 +1,10 @@
+TAKY Beta consolidation audit. Local-only, repository D:\Git PWA\TAKY.
+Do NOT commit, push, merge, deploy, call paid APIs, or modify remote services.
+This is BEFORE Beta consolidation and BEFORE any Alpha rewrite.
+Inspect actual repository status/diff and authority/evidence files. Do not trust HANDOFF claims over repository reality.
+Compare CURRENT, MASTER, STATE, ENFORCEMENT, HANDOFF, HISTORY, DOMAIN, OS, PROJECTS and available runtime/data/asset pointers.
+Classify each issue KEEP, FIX, STALE, CONFLICT, OPEN, UNVERIFIED, or REMOVE-FROM-AUTHORITY.
+Find source-of-truth conflicts, stale LATEST/current pointers, owner/path ambiguity, CLOSED-but-unverified claims, missing UI/runtime/data/asset linkages, external-boundary gaps, validation bypasses, cost/deploy risks, duplicated or contradictory rules.
+Perform aggressive validation conceptually and provide the defensive response/evidence needed to close each failure mode.
+Write only one candidate report under HANDOFF/CLAUDE_REVIEW_LOGS/BETA_CONSOLIDATION_AUDIT_2026-10-03.md. Do not edit canonical CURRENT/MASTER authority.
+End with: blockers before Beta, safe fixes, decisions needing human approval, and exact evidence/tests needed.

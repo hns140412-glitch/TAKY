@@ -1,0 +1,66 @@
+{
+  "schema": "TAKY_LOCAL_EDIT_VS_REGEN_PACKAGE_DIFF_V1",
+  "results": {
+    "local": {
+      "package_entry_count": 62,
+      "changed_shared_entries": 17,
+      "added_entries": 0,
+      "removed_entries": 0,
+      "semantic_slide_text_changed_count": 1,
+      "semantic_slide_text_changed": [
+        "ppt/slides/slide1.xml"
+      ],
+      "media_changed_count": 0,
+      "changed_entry_examples": [
+        "ppt/slideLayouts/slideLayout10.xml",
+        "ppt/slideLayouts/slideLayout3.xml",
+        "ppt/slideLayouts/slideLayout2.xml",
+        "ppt/presentation.xml",
+        "ppt/slideLayouts/slideLayout8.xml",
+        "ppt/slideLayouts/slideLayout5.xml",
+        "docProps/app.xml",
+        "ppt/slideLayouts/slideLayout11.xml",
+        "ppt/slides/slide1.xml",
+        "ppt/slideLayouts/slideLayout4.xml",
+        "ppt/slideLayouts/slideLayout7.xml",
+        "ppt/slideLayouts/slideLayout1.xml",
+        "ppt/slideLayouts/slideLayout9.xml",
+        "ppt/slideLayouts/slideLayout6.xml",
+        "docProps/thumbnail.jpeg",
+        "docProps/core.xml",
+        "ppt/slideMasters/slideMaster1.xml"
+      ]
+    },
+    "regen": {
+      "package_entry_count": 62,
+      "changed_shared_entries": 22,
+      "added_entries": 0,
+      "removed_entries": 0,
+      "semantic_slide_text_changed_count": 0,
+      "semantic_slide_text_changed": [],
+      "media_changed_count": 0,
+      "changed_entry_examples": [
+        "ppt/slideLayouts/slideLayout10.xml",
+        "ppt/slideLayouts/slideLayout3.xml",
+        "ppt/slideLayouts/slideLayout2.xml",
+        "ppt/slideLayouts/slideLayout8.xml",
+        "ppt/slides/slide4.xml",
+        "ppt/slideLayouts/slideLayout5.xml",
+        "ppt/slideLayouts/slideLayout11.xml",
+        "ppt/slides/slide1.xml",
+        "ppt/slideLayouts/slideLayout4.xml",
+        "ppt/slideLayouts/slideLayout7.xml",
+        "ppt/slideLayouts/slideLayout1.xml",
+        "ppt/slideLayouts/slideLayout9.xml",
+        "ppt/slideLayouts/slideLayout6.xml",
+        "ppt/slides/slide7.xml",
+        "ppt/slides/slide6.xml",
+        "ppt/slides/slide2.xml",
+        "ppt/slides/slide5.xml",
+        "ppt/slides/slide8.xml",
+        "docProps/core.xml",
+        "ppt/slides/slide3.xml"
+      ]
+    }
+  }
+}

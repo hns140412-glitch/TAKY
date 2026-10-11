@@ -1,0 +1,46 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_CURRENT_RESULT_V1",
+  "generated_at": "2026-10-06T12:06:00+09:00",
+  "status": "PASS_LOCAL",
+  "learning_total": 56,
+  "adopted_tested_total": 30,
+  "breakdown": {
+    "q1_q2_adopted": 19,
+    "q3_pass_adopted": 6,
+    "q3_security_review_required": 1,
+    "q3_inconclusive": 1,
+    "q3_waiting_representative_task": 6,
+    "q4_prompt_domain_pass_adopted": 5,
+    "q4_domain_remaining": 13,
+    "verify_on_operational_need": 5
+  },
+  "newly_applied": [
+    "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+    "ENFORCEMENT/reference_batch_acquisition.py",
+    "ENFORCEMENT/ai_prompt_contract.py",
+    "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json",
+    "post-collector prompt-contract fail-closed gate"
+  ],
+  "representative_benchmark": {
+    "sample": 8,
+    "sequential_ms": 3136.4,
+    "bounded_parallel_ms": 785.3,
+    "speedup_ratio": 3.994,
+    "success_parity": "8/8 == 8/8"
+  },
+  "validation": {
+    "targeted_tests": "63/63 PASS",
+    "data_index_search": "PASS",
+    "prompt_contract": "PASS",
+    "post_collect_validate_only": "PASS",
+    "current_quest_e2e": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

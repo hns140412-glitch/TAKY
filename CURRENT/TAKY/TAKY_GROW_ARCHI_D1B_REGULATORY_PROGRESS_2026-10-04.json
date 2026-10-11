@@ -1,0 +1,33 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_ARCHI_D1B_REGULATORY_PROGRESS_2026-10-04",
+  "status": "COMPILER_IMPLEMENTED_VERIFIED__LIVE_APPLICABILITY_PROVIDER_PARTIAL",
+  "domain_item": "ARCHI-D1b",
+  "completed": [
+    "project-specific regulatory rule compiler",
+    "evidence-bound applicability receipt",
+    "source fact qualification",
+    "absolute/conditional/opportunity classes",
+    "opportunity approval route guard",
+    "explicit-only opportunity/conflict/dependency relation graph",
+    "automatic FEASIBLE claim forbidden"
+  ],
+  "verification": [
+    "ENFORCEMENT/architecture_regulatory_compiler_test.py 12/12 PASS",
+    "ENFORCEMENT/architecture_source_registry_test.py 5/5 PASS"
+  ],
+  "remaining": [
+    "bind live official/effective-date applicability evidence or human regulatory review receipts",
+    "ingest real target-project law/plan rule sets",
+    "official-response/precedent evidence where material"
+  ],
+  "guards": {
+    "legal_authority_transfer": false,
+    "feasibility_claim_authorized": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-04_R2",
+  "status": "LOCAL_VERIFIED_FROM_GITHUB",
+  "candidate": {
+    "target_state": "CURRENT_BEST",
+    "strategy": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "evidence_refs": [
+      "READY_PR_143_RUN_36997249758",
+      "SNAP_PR_35_RUN_36960089271"
+    ],
+    "bounded_policy": {
+      "allowed_failure_signature": "EXPLICIT_LOCALIZED_REPRODUCIBLE_FAILURE_ONLY",
+      "max_recovery_attempts": 3,
+      "default_for_unmatched_failures": "FAIL_FAST",
+      "broad_exception_swallowing": false
+    }
+  },
+  "supporting_corrections": [
+    {
+      "repository": "Ready-Set",
+      "pull_request": 144,
+      "head_sha": "c96e67525f6aee0c155dc2cffc4dd6b1fcaafba3",
+      "role": "TEST_SYNTAX_CORRECTION_ONLY",
+      "failure_ref": "github-actions:Ready-Set:36963613431"
+    },
+    {
+      "repository": "Ready-Set",
+      "pull_request": 145,
+      "head_sha": "b322246517d07f5d2c4257c30aa133cad48fca5a",
+      "role": "RUNTIME_COMPLETION_PATH_CORRECTION_ONLY",
+      "failure_ref": "github-actions:Ready-Set:36985527224"
+    }
+  ],
+  "outcomes": [
+    {
+      "evidence_ref": "READY_PR_143_RUN_36997249758",
+      "verification_state": "VERIFIED",
+      "verification_authority": "GITHUB_ACTIONS",
+      "context_key": "READY_BADGE_RUNTIME_RECOVERY",
+      "repository": "Ready-Set",
+      "pull_request": 143,
+      "head_sha": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+      "workflow_run": 36997249758,
+      "run_url": "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36997249758",
+      "workflow_name": "Ready Runtime E2E",
+      "job_name": "chromium-runtime",
+      "relevant_steps": [
+        "Validate shared runtime contract",
+        "Run runtime flow"
+      ],
+      "failure_refs": [
+        "github-actions:Ready-Set:36963613431",
+        "github-actions:Ready-Set:36985527224"
+      ],
+      "correction_refs": [
+        "github:Ready-Set#144",
+        "github:Ready-Set#145"
+      ],
+      "synthetic": false
+    },
+    {
+      "evidence_ref": "SNAP_PR_35_RUN_36960089271",
+      "verification_state": "VERIFIED",
+      "verification_authority": "GITHUB_ACTIONS",
+      "context_key": "SNAP_TRANSIENT_CDP_RECOVERY",
+      "repository": "Snap-Pop",
+      "pull_request": 35,
+      "head_sha": "b9ad62d583e22398a3666336e4aaf2b263cc02a2",
+      "workflow_run": 36960089271,
+      "run_url": "https://github.com/hns140412-glitch/Snap-Pop/actions/runs/36960089271",
+      "workflow_name": "Snap Shared Runtime Reconciliation",
+      "job_name": "validate",
+      "relevant_steps": [
+        "Validate shared runtime reconciliation",
+        "Preserve existing Ready-Snap bridge contract"
+      ],
+      "failure_refs": [
+        "github:Snap-Pop#35:observed-transient-Runtime.evaluate-timeout"
+      ],
+      "correction_refs": [
+        "github:Snap-Pop#35"
+      ],
+      "synthetic": false
+    }
+  ],
+  "regressions": [
+    {
+      "status": "PASS",
+      "verification_authority": "GITHUB_ACTIONS",
+      "repository": "Ready-Set",
+      "head_sha": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+      "workflow_run": 36997249745,
+      "run_url": "https://github.com/hns140412-glitch/Ready-Set/actions/runs/36997249745",
+      "workflow_name": "Ready Integration CI",
+      "jobs": [
+        "semantic-contracts",
+        "learning-master-contract"
+      ],
+      "distinct_from_outcome_run": true
+    }
+  ],
+  "unresolved_confirmed_failures": [],
+  "review_feedback_guard": {
+    "repository": "Hide-Seek",
+    "pull_request": 22,
+    "feedback_ref": "issuecomment_5868496983",
+    "classification": "VISUAL_QA_FAIL_DESPITE_LOGIC_CI_PASS",
+    "effect": "BLOCK_DESIGN_PARITY_PROMOTION_UNTIL_USER_SIGNOFF",
+    "correction_ref": "issuecomment_5869206397",
+    "logic_correction_receipt_present": true,
+    "design_correction_verified": false
+  },
+  "source_boundary": {
+    "synthetic": false,
+    "remote_write": false,
+    "promotion_authorized": false,
+    "github_reverified_on": "2026-10-04"
+  }
+}

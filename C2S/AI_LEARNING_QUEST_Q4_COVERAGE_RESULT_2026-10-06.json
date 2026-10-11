@@ -1,0 +1,76 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_Q4_COVERAGE_RESULT_V1",
+  "generated_at": "2026-10-06T09:20:00+09:00",
+  "status": "PASS_LOCAL_COVERAGE_REVIEW",
+  "prompt_tooling": {
+    "verified_existing": [],
+    "partial": [
+      "AI-LRN-PROMPT-TEMPLATE-STRUCTURE",
+      "AI-LRN-PROMPT-AUDIENCE-AND-BOUNDS",
+      "AI-LRN-PROMPT-EVALUATION-DIMENSIONS",
+      "AI-LRN-PROMPT-ROLE-SHORT-CONTEXT-SPECIFIC",
+      "AI-LRN-SPECIFIC-TRIGGERS-OVER-BROAD-SKILLS"
+    ],
+    "open": [
+      "AI-LRN-INSTALL-DOC-OBSERVABILITY"
+    ],
+    "evidence": [
+      "ENFORCEMENT/codex_task_contract_builder.py",
+      "ENFORCEMENT/runtime_orchestrator.py"
+    ],
+    "note": "Existing contracts cover objective/role/scope/acceptance/validation substantially, but do not yet prove a general reusable prompt/skill contract."
+  },
+  "artifact_quality": {
+    "verified_existing": [
+      "AI-LRN-DESIGN-PIPELINE-NOT-PROMPT-ONLY",
+      "AI-LRN-DESIGN-REFERENCE-PLUS-REVIEW"
+    ],
+    "partial": [
+      "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE"
+    ],
+    "open": [
+      "AI-LRN-HUMAN-EDITABLE-OUTPUT",
+      "AI-LRN-DESIGN-TASTE-AS-EXPLICIT-CONSTRAINT",
+      "AI-LRN-SOURCE-ASSET-QUALITY-SETS-OUTPUT-CEILING"
+    ],
+    "evidence": [
+      "ENFORCEMENT/producer_artifact_gate.py",
+      "ENFORCEMENT/result_preview_gate.py"
+    ],
+    "note": "PRE/POST source binding, rendered visual witness and independent preview are implemented; editability/taste/source-quality are not yet explicit."
+  },
+  "learning_grow": {
+    "verified_existing": [
+      "AI-LRN-LEVEL-ADAPTIVE-AI-LEARNING",
+      "AI-LRN-STUDY-PASSIVE-TO-ACTIVE-RETRIEVAL"
+    ],
+    "partial": [
+      "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+      "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS"
+    ],
+    "open": [
+      "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+      "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING"
+    ],
+    "evidence": [
+      "LEARNING/pedagogy/adaptive-plan-contract.js",
+      "LEARNING/pedagogy/feedback-intent.js",
+      "LEARNING/runtime/learner-state-core.js",
+      "LEARNING/runtime/decision-contract.js",
+      "LEARNING/runtime/learning-engine-runtime.js"
+    ],
+    "note": "Adaptive sequencing and retrieval checkpoints are explicit; AI-literacy curriculum and multi-representation policy are not explicit runtime rules."
+  },
+  "totals": {
+    "verified_existing": 4,
+    "partial": 8,
+    "open": 6
+  },
+  "guards": {
+    "no_auto_promotion": true,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

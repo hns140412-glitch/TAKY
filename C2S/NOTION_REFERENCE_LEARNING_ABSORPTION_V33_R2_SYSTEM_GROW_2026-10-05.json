@@ -1,0 +1,156 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_LEARNING_ABSORPTION_V33_R2_SYSTEM_GROW",
+  "generated_at": "2026-10-05T14:09:46.500793+00:00",
+  "reason": "Close structural gap where system/tool references were persisted as UNROUTED because SYSTEM_GROW did not exist.",
+  "registry": "DOMAIN/GROW_DOMAIN_REGISTRY.json",
+  "items": [
+    {
+      "source_id": "REF-093",
+      "prior_unrouted_learning_event": "GLE-1255f86fc0ce58163ae440d4",
+      "relation_event": {
+        "schema": "GROW_LINEAGE_EVENT_V1",
+        "event_id": "GLE-ef88c69ea6da3ec42302f8c4",
+        "grow_domain": "SYSTEM_GROW",
+        "stage": "RELATION",
+        "producer": "system_grow_routing_correction",
+        "source_ref": "INDEX:REF-093",
+        "parent_refs": [
+          "GLE-1255f86fc0ce58163ae440d4"
+        ],
+        "authority": "ROUTING_CORRECTION_ONLY",
+        "promotion_authorized": false,
+        "authority_transfer": false,
+        "recorded_at": "2026-10-05T14:09:46.500793+00:00",
+        "payload": {
+          "relation": "ROUTING_CORRECTION",
+          "from": "UNROUTED",
+          "to": "SYSTEM_GROW",
+          "immutable_prior_preserved": true
+        }
+      },
+      "relation_receipt": {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-ef88c69ea6da3ec42302f8c4",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      "system_learning_event": {
+        "schema": "GROW_LINEAGE_EVENT_V1",
+        "event_id": "GLE-7015c544440d8b5990d4345d",
+        "grow_domain": "SYSTEM_GROW",
+        "stage": "LEARNING",
+        "producer": "system_grow_routing_correction",
+        "source_ref": "LEARNING:REF-093",
+        "parent_refs": [
+          "GLE-ef88c69ea6da3ec42302f8c4"
+        ],
+        "authority": "DOMAIN_EVIDENCE_CANDIDATE_ONLY",
+        "promotion_authorized": false,
+        "authority_transfer": false,
+        "recorded_at": "2026-10-05T14:09:46.500793+00:00",
+        "payload": {
+          "insight": "Slash-style prompt aliases are reusable TAKY command-UX patterns for adversarial review, source checking, scope and cost; they are not native product commands.",
+          "canonical_promotion": false
+        }
+      },
+      "learning_receipt": {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-7015c544440d8b5990d4345d",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    },
+    {
+      "source_id": "REF-094",
+      "prior_unrouted_learning_event": "GLE-1839629f27ab734b74daa552",
+      "relation_event": {
+        "schema": "GROW_LINEAGE_EVENT_V1",
+        "event_id": "GLE-438ce083a47337ed649d3d51",
+        "grow_domain": "SYSTEM_GROW",
+        "stage": "RELATION",
+        "producer": "system_grow_routing_correction",
+        "source_ref": "INDEX:REF-094",
+        "parent_refs": [
+          "GLE-1839629f27ab734b74daa552"
+        ],
+        "authority": "ROUTING_CORRECTION_ONLY",
+        "promotion_authorized": false,
+        "authority_transfer": false,
+        "recorded_at": "2026-10-05T14:09:46.500793+00:00",
+        "payload": {
+          "relation": "ROUTING_CORRECTION",
+          "from": "UNROUTED",
+          "to": "SYSTEM_GROW",
+          "immutable_prior_preserved": true
+        }
+      },
+      "relation_receipt": {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-438ce083a47337ed649d3d51",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      "system_learning_event": {
+        "schema": "GROW_LINEAGE_EVENT_V1",
+        "event_id": "GLE-2868cdef19ee9cee076b49f1",
+        "grow_domain": "SYSTEM_GROW",
+        "stage": "LEARNING",
+        "producer": "system_grow_routing_correction",
+        "source_ref": "LEARNING:REF-094",
+        "parent_refs": [
+          "GLE-438ce083a47337ed649d3d51"
+        ],
+        "authority": "DOMAIN_EVIDENCE_CANDIDATE_ONLY",
+        "promotion_authorized": false,
+        "authority_transfer": false,
+        "recorded_at": "2026-10-05T14:09:46.500793+00:00",
+        "payload": {
+          "insight": "Agent Reach is an optional external-source acquisition adapter behind Necessity Gate; private Notion remains on its dedicated collector/API path and cookie channels require explicit approval.",
+          "canonical_promotion": false
+        }
+      },
+      "learning_receipt": {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-2868cdef19ee9cee076b49f1",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    }
+  ],
+  "guards": {
+    "immutable_prior_events_preserved": true,
+    "canonical_promotion": false,
+    "current_pointer_changed": false,
+    "main_merge": false,
+    "deployment": false
+  },
+  "status": "PASS_LOCAL"
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_DOMAIN_HANDOFF_V32",
+  "date": "2026-10-04",
+  "status": "INDEXED_REFERENCE_AVAILABLE_TO_DOMAIN_ENGINE__LOCAL_ONLY",
+  "index_version": "V32-NOTION-DELTA",
+  "refs": [
+    {
+      "source_id": "REF-087",
+      "source_ref": "INDEX:REF-087",
+      "source_actor_class": "COMMERCIAL_EDUCATION_PUBLISHER",
+      "source_direction": "Promotional catalog or discovery listing for paid and free Excel/Google Sheets/AI-automation live lectures. It drives funnel traffic to LIVE pages.",
+      "consumers": [
+        "WORK_OS_SPREADSHEET_REFERENCE"
+      ],
+      "role": "SPREADSHEET_AUTOMATION_DISCOVERY_POINTER",
+      "scope": [
+        "Curricular pattern: a multi-week challenge arc moves from AI-assisted Sheets automation to Apps Script apps and then to agent teams.",
+        "Automation stack signal: Sheets + ARRAYFORMULA/QUERY + Apps Script + a messaging notification channel.",
+        "Cadence signal: a weekly live series with tier labels."
+      ],
+      "authority_ceiling": "discovery_pointer_only"
+    },
+    {
+      "source_id": "REF-088",
+      "source_ref": "INDEX:REF-088",
+      "source_actor_class": "INDEPENDENT_PRESENTATION_TIPS_INDEX",
+      "source_direction": "Index of 13 how-to tip posts with copy-paste prompts and free files or tools. The tone is casual and persuasive ('그냥 복붙해서 쓰세요').",
+      "consumers": [
+        "WORK_OS_ARTIFACT_ENGINE",
+        "ARCHIGROW_PRESENTATION_REVIEW"
+      ],
+      "role": "PRESENTATION_WORKFLOW_DISCOVERY_INDEX",
+      "scope": [
+        "Staged generation for token economy: plan → design MD → 1–2 sample slides → full output, instead of a one-shot 10-slide request.",
+        "Ask for HTML instead of a .pptx file when you want fast iteration and sharing, and compare trade-offs per item.",
+        "Add an image-slot placeholder block to prompts so photos can be swapped in later.",
+        "Use a DESIGN.md as a reusable design spec rather than a bare template."
+      ],
+      "authority_ceiling": "discovery_index_only. Any single tip is at most a candidate heuristic, not canonical."
+    },
+    {
+      "source_id": "REF-089",
+      "source_ref": "INDEX:REF-089",
+      "source_actor_class": "COMMERCIAL_EDUCATION_PUBLISHER",
+      "source_direction": "A release-note and upload log that signals ongoing product maintenance and member value. It is a self-reported maintenance record.",
+      "consumers": [
+        "WORK_OS_AUTOMATION_RELIABILITY",
+        "SAVEY"
+      ],
+      "role": "AUTOMATION_DEFECT_PATTERN_EVIDENCE",
+      "scope": [
+        "UI-automation and scraping dependencies (messenger apps, shopping search pages, third-party auth) break on upstream changes. Plan for a maintenance cadence.",
+        "Guard formulas against edge cases such as 0% progress giving #DIV/0!, single-row array filters giving #VALUE!, and holiday dates breaking an FX lookup.",
+        "Version and changelog discipline: dated, semver-like entries per tool.",
+        "Remove fragile features for compatibility, for example the pivot-table dashboard sheet was removed and conditional formatting was removed for readability."
+      ],
+      "authority_ceiling": "observational_evidence_of_a_vendor_changelog_only. It is not a standard or canonical."
+    },
+    {
+      "source_id": "REF-090",
+      "source_ref": "INDEX:REF-090",
+      "source_actor_class": "INDEPENDENT_PRESENTATION_TUTORIAL",
+      "source_direction": "Instructional and promotional. It tells readers to paste a macro and run it to recolor a whole deck, and it advertises 'free distribution'. The tone leans on convenience.",
+      "consumers": [
+        "WORK_OS_ARTIFACT_ENGINE",
+        "ARCHIGROW_PRESENTATION_REVIEW",
+        "SECURITY_REVIEW"
+      ],
+      "role": "PRESENTATION_RECOLOR_EXPERIMENT_REFERENCE",
+      "scope": [
+        "Processing order: theme → master → layouts → slides, recursing into groups, tables and SmartArt.",
+        "Safety UX: work on a copy, show a confirmation summary, offer a PREVIEW_ONLY dry run, and report a changed-count.",
+        "Hue-family mapping with tolerance, partial hue retention, and skipping low-saturation neutrals (MIN_SATURATION).",
+        "Fall back to exact-match mode when the source color is achromatic."
+      ],
+      "authority_ceiling": "experiment_candidate_requiring_security_and_functional_review. It must not run on production decks and is not canonical."
+    },
+    {
+      "source_id": "REF-092",
+      "source_ref": "INDEX:REF-092",
+      "source_actor_class": "SECONDARY_DESIGN_REFERENCE_GALLERY",
+      "source_direction": "A resource and discovery index. It supports the publisher's DESIGN.md and AI-design workflows (284 systems) and likely drives traffic and engagement.",
+      "consumers": [
+        "TAKY_DESIGN_STANDARD",
+        "WORK_OS_ARTIFACT_ENGINE"
+      ],
+      "role": "DESIGN_SYSTEM_INSPIRATION_INDEX",
+      "scope": [
+        "Describe a design system compactly as accent count, base surface, corner radius, button shape and signature layout. Single-accent-color systems appear repeatedly.",
+        "Restraint pattern: neutral base plus one accent color used only for the key actions.",
+        "Distinguishing descriptors (corner radius, angle, shape language) turn into prompt-ready constraints.",
+        "Organize references by industry and brand type."
+      ],
+      "authority_ceiling": "inspiration_reference_only. It is not an authoritative brand spec and not a canonical design token source."
+    }
+  ],
+  "hold": [
+    {
+      "source_id": "REF-091",
+      "reason": "NO_MINEABLE_BODY_TEXT__REACQUISITION_REQUIRED"
+    }
+  ],
+  "guards": [
+    "REFERENCE_ONLY",
+    "NO_CANONICAL_PROMOTION",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DRIVE_SYNC",
+    "NO_MAIN_MERGE",
+    "NO_DEPLOYMENT",
+    "AUTHOR != AUTHORITY"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "TAKY_AI_Q3_LOCAL_EDIT_INTERFACE_RESULT_V1",
+  "generated_at": "2026-10-06T03:53:52.241749+00:00",
+  "status": "PASS_LOCAL",
+  "pass_count": 2,
+  "q3_summary": {
+    "total": 14,
+    "pass_adopted": 11,
+    "inconclusive": 0,
+    "ready_when_representative_task_exists": 3,
+    "security_review_required": 0
+  },
+  "cumulative_adopted_tested": 44,
+  "growth_lineage": [
+    {
+      "learning_id": "AI-LRN-LOCAL-EDIT-BEFORE-REGENERATION",
+      "status": "PASS",
+      "execution_event_id": "GLE-001c33a28bfb5d7a69b6ae8e",
+      "outcome_event_id": "GLE-06d4bf584c92bd491ea05a4b",
+      "growth_event_id": "GLE-63f5cb3a185a91bc76234721"
+    },
+    {
+      "learning_id": "AI-LRN-INTERFACE-REASONING-SEPARATION",
+      "status": "PASS",
+      "execution_event_id": "GLE-dd01e0aa6bc86fde932d0447",
+      "outcome_event_id": "GLE-772ae788323bcfad936ecb04",
+      "growth_event_id": "GLE-6f0a9eb733b0e28f0aaf433f"
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

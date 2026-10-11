@@ -797,6 +797,141 @@
         "DEPENDENCY_CLOSED",
         "MANUAL_REVIEW"
       ]
+    },
+    {
+      "entry_id": "apply:grade-aware-term-decoder-routing-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_RULE",
+      "title": "Grade-aware cross-subject term recommendation for Hide & Seek",
+      "description": "Learning Engine selects grade-appropriate term-decoder targets by school stage, subject, unit context and learner evidence; emits DISCOVERY/RECOVERY/REINFORCE priorities and Hide cards without schedule authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+      "evidence_refs": [
+        "LEARNING/pedagogy/grade-aware-term-selector.js",
+        "LEARNING/runtime/term-recommendation-runtime.js",
+        "LEARNING/runtime/learning-engine-runtime.js",
+        "LEARNING/transport/term-recommendation-http-endpoint.js",
+        "LEARNING/projection/official-term-grade-aligner.js",
+        "Hide & Seek:hide-learning-term-loader-v1.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/pedagogy + LEARNING/runtime + HIDE_SEEK_TERM_DECODER",
+      "created_at": "2026-10-07T06:22:07.660Z",
+      "parent_entry_id": "hold:hosted-central-evidence-transport-v2",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": []
+    },
+    {
+      "entry_id": "hold:term-decoder-official-alignment-expansion-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "DATA_EVIDENCE_GAP",
+      "title": "Expand official grade alignment beyond exact verified term signals",
+      "description": "26 mined reference terms are engine-owned; 9 currently have exact official standard/unit evidence and 17 remain provisional. Provisional terms may be used only when explicitly allowed and must not be promoted as official curriculum truth.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "apply:grade-aware-term-decoder-routing-v1",
+      "evidence_refs": [
+        "LEARNING/data/term-decoder-reference-catalog-v1.json",
+        "LEARNING/data/official-snapshots/official-standard-registry-v0.3.0.json",
+        "LEARNING/data/official-snapshots/official-unit-map-v0.2.2.json",
+        "LEARNING/projection/term-decoder-mined-catalog-v1.json"
+      ],
+      "blockers": [
+        "OFFICIAL_TERM_LEVEL_EVIDENCE_MISSING_FOR_17_REFERENCE_TERMS",
+        "CENTRAL_LEARNER_PROFILE_RESOLVER_NOT_BOUND_IN_PRODUCTION",
+        "PRODUCTION_DEPLOYMENT_HOLD"
+      ],
+      "destination": "LEARNING/data + LEARNING/projection + LEARNING/transport",
+      "created_at": "2026-10-07T06:22:07.662Z",
+      "parent_entry_id": "apply:grade-aware-term-decoder-routing-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "DEPENDENCY_CLOSED",
+        "MANUAL_REVIEW"
+      ]
+    },
+    {
+      "entry_id": "apply:mining-site-learning-pattern-routing-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_PATTERN_ROUTING",
+      "title": "Mining-site learning patterns drive TERM DECODER activity routing",
+      "description": "Domain-relevant mined learning references are normalized into reusable activity patterns, attached to all prelearned E5/E6 subject terms, and consumed by Hide TRACE/LINK/CORE/RECALL. Pattern authority cannot set grade or overwrite official meaning.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "C2S/MINING_SITE_LEARNING_PATTERN_INTEGRATION_2026-10-07.json",
+      "evidence_refs": [
+        "MINING/evidence/reference-deep-mining-2026-10-07.jsonl",
+        "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+        "CURRENT/DATA/LEARNING_REFERENCE_PATTERN_INDEX.json",
+        "LEARNING/data/mining-learning-pattern-registry-v1.json",
+        "LEARNING/projection/mining-learning-pattern-router.js",
+        "Hide & Seek:hide-term-decoder-v1.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING/projection + HIDE_SEEK_TERM_DECODER",
+      "created_at": "2026-10-07T07:23:15.777Z",
+      "parent_entry_id": "hold:term-decoder-official-alignment-expansion-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_LEARNING_REFERENCE_PATTERN",
+        "NEW_MINING_EVIDENCE"
+      ]
+    },
+    {
+      "entry_id": "hold:hide-term-decoder-final-execution-v1",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "VALUE_DELIVERY_GATE",
+      "title": "Hide TERM DECODER final execution measurement waits for UI lock",
+      "description": "Logic/runtime/data paths are ready, but execution rate and value delivery must not be claimed until the final UI is locked and each promised function passes ENTRY/ACTION/RESULT/PERSIST/READBACK evidence in the intended mobile child journey.",
+      "state": "HOLD",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "CURRENT/DATA/HIDE_TERM_DECODER_EXECUTION_READINESS_CURRENT.json",
+      "evidence_refs": [
+        "CURRENT/DATA/HIDE_TERM_DECODER_EXECUTION_READINESS_CURRENT.json",
+        "LEARNING/verification/ui-lock-execution-rate-gate.js",
+        "LEARNING/verification/ui-lock-execution-rate-gate.test.js"
+      ],
+      "blockers": [
+        "FINAL_UI_NOT_LOCKED",
+        "FINAL_MOBILE_USER_JOURNEY_NOT_VERIFIED"
+      ],
+      "destination": "HIDE_SEEK_FINAL_UI + VALUE_DELIVERY_VERIFICATION",
+      "created_at": "2026-10-07T07:33:20.508Z",
+      "parent_entry_id": "apply:mining-site-learning-pattern-routing-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "UI_LOCKED",
+        "FINAL_UI_BINDING_READY",
+        "MANUAL_REVIEW"
+      ]
+    },
+    {
+      "entry_id": "apply:mining-site-learning-pattern-routing-v2",
+      "entry_type": "LEARNING_ENGINE_CHANGE",
+      "type": "PEDAGOGY_RUNTIME",
+      "title": "Mining-site learning patterns routed through Learning Engine",
+      "description": "Education mining references now shape visual concept organization, concept graphs, blank recall, and repeated-error concept-gap recovery while official curriculum retains grade/content authority.",
+      "state": "APPLIED",
+      "owner": "LEARNING_ENGINE_CORE",
+      "source_ref": "CURRENT/DATA/LEARNING_REFERENCE_PATTERN_INDEX.json",
+      "evidence_refs": [
+        "LEARNING/data/mining-learning-pattern-registry-v1.json",
+        "LEARNING/projection/mining-learning-pattern-router.js",
+        "LEARNING/pedagogy/grade-aware-term-selector.js",
+        "Hide & Seek/hide-term-decoder-v1.js"
+      ],
+      "blockers": [],
+      "destination": "LEARNING_ENGINE -> HIDE_SEEK_TERM_DECODER",
+      "created_at": "2026-10-07T08:34:12.645Z",
+      "parent_entry_id": "hold:hide-term-decoder-final-execution-v1",
+      "retention": "IMMUTABLE_HISTORY",
+      "reconsider_on": [
+        "NEW_EVIDENCE",
+        "PEDAGOGY_CONFLICT",
+        "CURRICULUM_CHANGE"
+      ]
     }
   ]
 }

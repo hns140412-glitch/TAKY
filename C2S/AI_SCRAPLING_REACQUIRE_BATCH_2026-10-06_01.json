@@ -1,0 +1,46 @@
+{
+  "schema": "TAKY_AI_SCRAPLING_REACQUIRE_BATCH_V1",
+  "generated_at": "2026-10-06T07:43:30+09:00",
+  "batch_id": "SCRAPLING_REACQUIRE_20261006_01",
+  "scope": "CURRENT/DATA/AI_REMINING_BACKLOG.json active HOLD_BODY_NOT_ACQUIRED + REACQUIRE_BODY only",
+  "batch_size": 2,
+  "acquisition_route": "Codex CLI -> ScraplingServer MCP",
+  "cost_route": "ChatGPT Plus included Codex usage; no paid API key",
+  "results": [
+    {
+      "title": "AI 직원 생성하기 | BrandyAction EDU",
+      "url": "https://brandyaction-edu.com/classes/product-cf6fb7a4-6eb9-41ea-a27a-02201bf07d1b",
+      "http_status": 200,
+      "body_acquired": false,
+      "evidence": "Rendered page returned '페이지를 찾을 수 없습니다' with site navigation/footer only; no substantive class body.",
+      "mining_state": "BLOCKED_NO_BODY_EVIDENCE",
+      "indexing_state": "NO_CHANGE",
+      "learning_state": "NO_CHANGE",
+      "required_next": "HOLD_BODY_NOT_ACQUIRED"
+    },
+    {
+      "title": "GPT프롬프트 - OneDrive",
+      "source": "existing backlog OneDrive public share URL",
+      "http_status": 200,
+      "body_acquired": false,
+      "evidence": "OneDrive rendered '알 수 없는 렌더링 오류' and '이 항목은 사용할 수 없습니다'; actual shared TXT body was not returned.",
+      "mining_state": "BLOCKED_NO_BODY_EVIDENCE",
+      "indexing_state": "NO_CHANGE",
+      "learning_state": "NO_CHANGE",
+      "required_next": "HOLD_BODY_NOT_ACQUIRED"
+    }
+  ],
+  "summary": {
+    "attempted": 2,
+    "recovered": 0,
+    "still_hold": 2,
+    "mined": 0,
+    "indexed": 0,
+    "learned": 0
+  },
+  "guards": [
+    "BODY_REQUIRED_BEFORE_MINING",
+    "TITLE_ONLY != LEARNING",
+    "NO_PUSH_MERGE_DEPLOY"
+  ]
+}

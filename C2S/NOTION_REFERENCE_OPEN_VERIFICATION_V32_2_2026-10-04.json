@@ -1,0 +1,58 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_OPEN_VERIFICATION_V32_2",
+  "date": "2026-10-04",
+  "status": "PARTIAL_CLOSE__2_OPEN_REMAIN",
+  "closed": [
+    {
+      "source_id": "REF-088",
+      "state": "PRIMARY_CHILD_SOURCE_REVIEW_COMPLETE",
+      "child_sources": [
+        "ai-html-ppt-guide",
+        "design-md-guide",
+        "ai-ppt-token-saving-7steps",
+        "ai-ppt-image-slot-prompt"
+      ],
+      "distilled_rules": [
+        "Use staged presentation workflow: planning -> design spec -> 1-2 sample slides -> full build.",
+        "Treat DESIGN.md as an AI-facing design contract containing tokens plus rationale; PPT use is an adaptation, not an official universal spec.",
+        "HTML can be an alternate rapid-generation/iteration lane, not a replacement for editable PPTX requirements.",
+        "Image-slot prompting is useful when placeholders include position, ratio, intended image description and later replacement metadata.",
+        "Author-specific quantitative claims, rankings, pricing and universal image-slot ratios are not promoted without primary verification."
+      ],
+      "disposition": "ADJUST",
+      "authority_ceiling": "REFERENCE_ONLY",
+      "result": "CLOSED"
+    }
+  ],
+  "remaining_open": [
+    {
+      "source_id": "REF-090",
+      "state": "ENVIRONMENT_GATE_HOLD",
+      "evidence": {
+        "full_macro_capture_chars": 19582,
+        "static_security": "NO_OBVIOUS_EXTERNAL_IO",
+        "synthetic_pptm_created": true,
+        "powerpoint_com": "PASS",
+        "presentation_vbproject_null": true,
+        "macro_executed": false
+      },
+      "reason": "Office Trust Center blocks programmatic VBA project access; security setting was not changed.",
+      "next": "Requires explicit authorization to change Office VBA project trust, or manual trusted-environment execution."
+    },
+    {
+      "source_id": "REF-091",
+      "state": "REACQUISITION_HOLD",
+      "evidence": "HTTP 200 and headless browser both returned only Notion JavaScript shell; no CARL body content recovered.",
+      "next": "Wait for genuinely accessible/public body source; do not infer content from title."
+    }
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "deployment": false,
+    "paid_api_used": false,
+    "office_security_setting_changed": false
+  }
+}

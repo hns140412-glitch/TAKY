@@ -1,0 +1,144 @@
+{
+  "schema": "TAKY_INBOX_REF097_REFERENCE_INTAKE_EXECUTION_V1",
+  "generated_at": "2026-10-08T15:31:32.323071+00:00",
+  "source_id": "REF-097",
+  "route": {
+    "pass": true,
+    "route_type": "REFERENCE_INTAKE_REVIEW",
+    "domain": "character_asset_pipeline",
+    "consumer": "ASSET_ENGINE"
+  },
+  "execution": {
+    "pass": true,
+    "execution_status": "PERSISTED",
+    "grow_lineage": [
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-9ea008f89b6e190048b62386",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-8d22219fb889fd7b3b7000f2",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-bdbf43535ca6c2eae2b96efd",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    ],
+    "emitted": [
+      {
+        "event_id": "ri-2bfc987aeba4df7eb123",
+        "source_key": "REF-097",
+        "state": "REGISTERED",
+        "previous_state": null,
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:31:32.255340+00:00",
+        "details": {
+          "source_id": "REF-097",
+          "source_url": null,
+          "source_locator": "00_INBOX_USER:notion:3f2fa868-dc2a-81e4-b1f6-d65dba4dc9da",
+          "domain": "character_asset_pipeline",
+          "consumer": "ASSET_ENGINE",
+          "source_actor": "AI 신사장(뉴피디) / Naver Blog",
+          "source_actor_class": "INDEPENDENT_AI_IMAGE_WORKFLOW_PRACTITIONER_BLOG",
+          "source_author_identity_state": "PUBLIC_ACCOUNT_ATTRIBUTION_ONLY__NO_INDEPENDENT_REAL_ID_VERIFICATION",
+          "source_direction": "CHARACTER_REFERENCE_SHEET_WORKFLOW_FOR_VISUAL_CONSISTENCY",
+          "source_direction_signals": [
+            "REFERENCE_SHEET_STRUCTURE",
+            "IDENTITY_CONSISTENCY",
+            "INPUT_IMAGE_QUALITY",
+            "TURNAROUND",
+            "FACE_DETAIL",
+            "EXPRESSION",
+            "POSE",
+            "COSTUME",
+            "COLOR_MATERIAL"
+          ],
+          "applicability_scope": [
+            "EXPLORER_CREW_ASSET_QA",
+            "CHARACTER_DERIVATIVE_PACKAGE_VALIDATION",
+            "VISUAL_ID_PRODUCTION_SUPPORT"
+          ],
+          "authority_ceiling": "REFERENCE_PATTERN_ONLY__MAY_INFORM_LAYOUT_AND_QA_FIELDS__NEVER_VISUAL_ID_OR_APPROVED_PIXEL_AUTHORITY"
+        }
+      },
+      {
+        "event_id": "ri-7dc412bb8310a6c0eccc",
+        "source_key": "REF-097",
+        "state": "INDEXED",
+        "previous_state": "REGISTERED",
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:31:32.255340+00:00",
+        "details": {
+          "index_source_id": "REF-097",
+          "index_version": "V36-NOTION-DELTA",
+          "duplicate_relation": "NONE",
+          "version_relation": "NEW_SOURCE_OR_REFERENCE",
+          "source_ref": "INDEX:REF-097",
+          "index_review_issuer": "INDEXING_OWNER",
+          "index_review_evidence_refs": [
+            "C2S/NOTION_REFERENCE_INDEX_DELTA_V36_2026-10-09.json",
+            "TAKY-SOURCE-VAULT/reports/INBOX_REF097_CHARACTER_SHEET_MINING_20261009.json",
+            "CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json"
+          ]
+        }
+      },
+      {
+        "event_id": "ri-b5590e63f64891c24d53",
+        "source_key": "REF-097",
+        "state": "EVIDENCE_CANDIDATE",
+        "previous_state": "INDEXED",
+        "acquisition_state": "ACQUIRED_AND_PRESERVED",
+        "recorded_at": "2026-10-08T15:31:32.255340+00:00",
+        "details": {
+          "consumer": "ASSET_ENGINE",
+          "domain": "character_asset_pipeline",
+          "source_ref": "INDEX:REF-097",
+          "source_actor_class": "INDEPENDENT_AI_IMAGE_WORKFLOW_PRACTITIONER_BLOG",
+          "source_direction": "CHARACTER_REFERENCE_SHEET_WORKFLOW_FOR_VISUAL_CONSISTENCY",
+          "applicability_scope": [
+            "EXPLORER_CREW_ASSET_QA",
+            "CHARACTER_DERIVATIVE_PACKAGE_VALIDATION",
+            "VISUAL_ID_PRODUCTION_SUPPORT"
+          ],
+          "authority_ceiling": "REFERENCE_PATTERN_ONLY__MAY_INFORM_LAYOUT_AND_QA_FIELDS__NEVER_VISUAL_ID_OR_APPROVED_PIXEL_AUTHORITY"
+        }
+      }
+    ],
+    "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+    "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+    "canonical_promotion": false
+  },
+  "owner_receipt": "C2S/DATA_INDEX_V36_INBOX_REF097_INDEX_OWNER_RECEIPT_2026-10-09.json",
+  "delta": "C2S/NOTION_REFERENCE_INDEX_DELTA_V36_2026-10-09.json",
+  "ingress_authority": "SIEZEALL_00_INBOX_USER_VIA_NOTION_COLLECTOR",
+  "canonical_promotion": false,
+  "paid_api_used": false
+}

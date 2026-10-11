@@ -1,0 +1,37 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_PIPELINE_VALIDATION_V32",
+  "date": "2026-10-04",
+  "status": "LOCAL_INCREMENTAL_E2E_PASS__NOT_CURRENT__NOT_DRIVE_SYNCED",
+  "refs": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-090",
+    "REF-091",
+    "REF-092"
+  ],
+  "tests": {
+    "claude_mining": "PASS_6_OF_6",
+    "index_owner": "PASS_6_OF_6",
+    "search_projection": "PASS_14_OF_14",
+    "domain_handoff": "PASS_5_OF_5_PLUS_1_HOLD",
+    "learning_runtime": "NOT_APPLICABLE_0_OF_6",
+    "hold_semantics": "PASS"
+  },
+  "guards": {
+    "canonical_promotion": false,
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false,
+    "paid_api_used": false
+  },
+  "open": [
+    "REF-091 reacquisition",
+    "REF-090 full macro reacquisition + security/functional sandbox test before any implementation",
+    "REF-092 official-brand spot checks before using any brand-specific tokens",
+    "REF-087 live episode re-fetch if exact episode/date claims become necessary",
+    "REF-088 child-post primary review for selected workflow hypotheses"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_PRODUCER_LINEAGE_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "umbrella": "TAKY_GROW_UMBRELLA_2026-10-03",
+  "contract": "DOMAIN/TAKY_GROWTH_LINEAGE_CONTRACT.md",
+  "event_schema": "DOMAIN/GROW_LINEAGE_EVENT_SCHEMA.json",
+  "producers": {
+    "REFERENCE_INTAKE": {
+      "grow_domain": "ROUTED_BY_DOMAIN",
+      "stages": [
+        "RAW",
+        "INDEX",
+        "LEARNING"
+      ],
+      "persistence": "append-only shared lineage JSONL under repo_root",
+      "promotion_authorized": false
+    },
+    "ARCHIGROW_COMPETITION_LEARN": {
+      "grow_domain": "ARCHI_GROW",
+      "stages": [
+        "RAW",
+        "LEARNING"
+      ],
+      "persistence": "append-only architecture/shared lineage JSONL",
+      "promotion_authorized": false
+    },
+    "LEARNING_GROWTH_STRATEGY_LEDGER": {
+      "grow_domain": "LEARNING_GROW",
+      "stages": [
+        "OUTCOME",
+        "GROWTH"
+      ],
+      "persistence": "existing family/member strong durable store",
+      "privacy_boundary": "learner-specific identity/history is not copied to global cross-domain lineage",
+      "promotion_authorized": false
+    }
+  },
+  "invariants": [
+    "all producers emit GROW_LINEAGE_EVENT_V1",
+    "event ids are stable and materialization is idempotent",
+    "promotion_authorized=false at producer emission",
+    "authority_transfer=false across GROW routing",
+    "learner-scoped raw identity/history stays in scoped durable store",
+    "ArchiGrow and Learning Grow keep domain ownership"
+  ],
+  "verification": {
+    "reference_intake_executor_test": "5/5 PASS",
+    "architecture_competition_learning_test": "PASS",
+    "growth_strategy_ledger_test": "PASS",
+    "durable_growth_strategy_store_adapter_test": "PASS",
+    "grow_producer_lineage_integration_test": "1/1 PASS",
+    "full_python_enforcement": "144/144 PASS"
+  },
+  "next_status": "SUPERSEDED_BY_CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+  "next": [
+    "Add outcome-utility reranking to DATA INDEX while exact/CURRENT authority remains first.",
+    "Persist anti-loop session state outside OS temp with bounded cleanup.",
+    "Emit sanitized aggregate LEARNING_SYSTEM_GROWTH candidates for cross-domain GROW review only after threshold/review readiness."
+  ],
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

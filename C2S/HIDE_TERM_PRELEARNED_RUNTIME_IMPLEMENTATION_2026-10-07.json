@@ -1,0 +1,91 @@
+{
+  "schema": "TAKY_HIDE_TERM_PRELEARNED_RUNTIME_IMPLEMENTATION_V1",
+  "date": "2026-10-07",
+  "authority": "TAKY_LEARNING_ENGINE_CORE",
+  "trigger": "USER_REQUESTED_CONTINUOUS_IMPLEMENTATION_AFTER_HANJA_TERM_DECODER_REVIEW",
+  "source_mining_ref": "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json",
+  "state": "LOCAL_IMPLEMENTED_AND_REGRESSION_PASS_NOT_COMMITTED_NOT_DEPLOYED",
+  "scope": {
+    "learner_band": ["E5", "E6"],
+    "subjects": ["KOREAN", "SOCIAL", "SCIENCE", "MATH"],
+    "consumer": "HIDE_SEEK",
+    "planner_authority": "UNCHANGED"
+  },
+  "prelearned_universe": {
+    "official_subject_terms_56": 436,
+    "by_subject": {
+      "KOREAN": 100,
+      "SOCIAL": 91,
+      "SCIENCE": 147,
+      "MATH": 98
+    },
+    "tool_language_total": 1364,
+    "tool_language_56": 880,
+    "general_vocab_56": 10000,
+    "general_vocab_total": 40000,
+    "academic_vocab_entries": 1387,
+    "academic_vocab_families": 1382,
+    "hanja_form_terms": 252,
+    "decoder_full_terms": 37,
+    "decoder_form_only_terms": 215
+  },
+  "implementation": [
+    {
+      "path": "LEARNING/projection/build-prelearned-term-universe.js",
+      "effect": "Builds the prelearned grade-aware subject/tool/general/hanja projections from official standards, NIKL vocabulary, verified learning-tool language, academic-vocabulary levels, and reference-mined Hanja glosses."
+    },
+    {
+      "path": "LEARNING/intake/term-catalog-source-resolver.js",
+      "effect": "Supports the prelearned universe and filters source terms by learner school stage before runtime selection."
+    },
+    {
+      "path": "LEARNING/pedagogy/grade-aware-term-selector.js",
+      "effect": "Uses unit mappings, learner evidence, decoder readiness, and grade alignment to rank terms while preserving provenance."
+    },
+    {
+      "path": "LEARNING/projection/build-hide-prelearned-term-packs.js",
+      "effect": "Produces Hide & Seek static fallback packs from the same Learning Engine source."
+    },
+    {
+      "path": "Hide & Seek/hide-learning-term-loader-v1.js",
+      "effect": "Binds E5/E6 grade-aware engine cards and fails closed to FORM_ONLY when component glosses are incomplete."
+    },
+    {
+      "path": "Hide & Seek/data/learning-term-recommendation-packs-v1.json",
+      "effect": "Static fallback pack now contains 36 grade-eligible cards per subject for E5 and E6, generated from the prelearned universe."
+    }
+  ],
+  "runtime_guards": [
+    "RUNTIME_SELECTS_FROM_PREBUILT_PROJECTION_ONLY",
+    "LEARNER_SCHOOL_STAGE_FILTER_REQUIRED",
+    "UNIT_CONTEXT_RANKS_WITHIN_GRADE_ELIGIBLE_TERMS",
+    "UNVERIFIED_COMPONENT_GLOSS_DOES_NOT_ENABLE_FULL_DECOMPOSITION",
+    "FORM_ONLY_HANJA_SUPPRESSES_COMPONENT_FAMILY_TRANSFER",
+    "AMBIGUOUS_SURFACE_LEXEME_REQUIRES_CONTEXTUAL_RESOLUTION",
+    "PLANNER_SCHEDULE_AUTHORITY_NOT_GRANTED"
+  ],
+  "e2e_examples_e5": {
+    "KOREAN/빗대어 표현해요": ["비유"],
+    "SOCIAL/법과 인권의 보장": ["인권", "헌법"],
+    "SCIENCE/날씨와 우리 생활": ["고기압", "저기압"],
+    "MATH/약분과 통분": ["약분", "통분"]
+  },
+  "verification": [
+    "TERM_CATALOG_SOURCE_RESOLVER_TEST: PASS",
+    "GRADE_AWARE_TERM_SELECTOR_TEST: PASS",
+    "academic-vocab-overlay.test.js: PASS",
+    "academic-vocab-unit-selector.test.js: PASS",
+    "TERM_RECOMMENDATION_HTTP_ENDPOINT_TEST: PASS",
+    "CENTRAL_PRODUCTION_HOST_PASS",
+    "PRELEARNED_TERM_UNIVERSE_E2E_TEST: PASS",
+    "HIDE_LEARNING_TERM_LOADER_V1_TEST: PASS",
+    "TERM_DECODER_V1_SMOKE: PASS",
+    "targeted git diff --check: PASS"
+  ],
+  "open": [
+    "Expand authoritative Hanja component-gloss coverage beyond 37 fully decodable official terms.",
+    "Resolve 39 ambiguous NIKL surface lexemes only with curriculum/learning context; do not globally auto-bind.",
+    "Keep 108 no-NIKL-surface-match subject terms on official-standard concept context until a trusted lexical source is available.",
+    "No push, merge, deploy, Netlify call, or paid API call performed."
+  ]
+}

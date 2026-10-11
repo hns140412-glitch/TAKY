@@ -1,0 +1,31 @@
+{
+  "schema": "TAKY_AI_Q3_PRUNE_STALE_SECURITY_REVIEW_RESULT_V1",
+  "generated_at": "2026-10-06T03:27:12.272455+00:00",
+  "status": "PASS_LOCAL",
+  "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+  "outcome_event_id": "GLE-5fe429b830525f4a0218c87c",
+  "growth_event_id": "GLE-b847e72886a3f7e3e6b459eb",
+  "evidence_refs": [
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\TAKY_CLAUDE_SUBSCRIPTION_AUTH.ps1",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\TEST_CLAUDE_SUBSCRIPTION_AUTH_20261006.ps1",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\RUN_TAKY_POST_COLLECT_PIPELINE.ps1",
+    "TEST:CLAUDE_SUBSCRIPTION_AUTH_6_OF_6_PLUS_LIVE_PASS",
+    "TEST:POST_COLLECT_VALIDATE_ONLY_PASS"
+  ],
+  "q3_summary": {
+    "total": 14,
+    "pass_adopted": 7,
+    "pass_security_review_required": 0,
+    "inconclusive": 1,
+    "ready_when_representative_task_exists": 6,
+    "strengthened_by_new_benchmark": 3
+  },
+  "guards": {
+    "api_key_fallback": false,
+    "unknown_auth_mode_allowed": false,
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

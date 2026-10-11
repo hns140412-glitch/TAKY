@@ -1,0 +1,48 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_LEARN_D1A_OWNER_BINDING_PROGRESS_2026-10-04",
+  "status": "MECHANICAL_BINDING_VERIFIED__REAL_RUNTIME_OUTCOME_OPEN",
+  "domain_item": "LEARN-D1a",
+  "completed": [
+    "single byte-identical client transport vendored to Ready/Hide/Snap",
+    "authenticated POST binding to /api/learning/evidence through TAKY_FAMILY_RUNTIME",
+    "client authority/proof fields recursively stripped before queue/send",
+    "missing member/subject/concept scope fails closed and remains pending",
+    "exact acknowledged packet only removed after durable central ACK",
+    "Ready propagates only explicit planner learning scope and specialist URL scope",
+    "Hide emits raw Code Red retrieval observation without verification authority",
+    "Snap existing bridge outbox is consumed without editing dirty snap-bridge/app files",
+    "PWA service-worker asset lists include evidence client; Hide includes retrieval source",
+    "scope-incomplete pending rows are skipped during flush and cannot head-of-line block later scoped events",
+    "pending queue cap refuses new transport rows with PENDING_QUEUE_FULL; unacked rows are never silently evicted",
+    "bounded ACK-key transport dedup suppresses re-enqueue/re-POST of already acknowledged packet/event ids",
+    "ambient URL/bridge scope is accepted only for live event capture; replay scan uses event-carried scope only"
+  ],
+  "evidence": [
+    "ENFORCEMENT/learning_owner_evidence_binding_test.py PASS",
+    "SHARED/runtime/taky-learning-evidence-client-v1.test.js PASS",
+    "owner/runtime JS syntax checks PASS",
+    "shared client SHA256 b13aa5e5c31edb29bc04edf0db2baf8a6f7fe9483e078cf662b8bc1c5ff574ad",
+    "ENFORCEMENT/grow_domain_post_claude_fix_failfast.log FINAL_FOCUSED_REGRESSION=PASS",
+    "ENFORCEMENT/grow_domain_owner_integrity_after_claude_fix.log owner copies byte-identical + diff-check PASS"
+  ],
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "open_dependencies": [
+    "Ready planner/source data does not always carry explicit concept_skill_target/learning_target_id; such events correctly remain pending rather than guessed",
+    "real installed-PWA authenticated send/ack proof belongs to LEARN-D2/D5",
+    "verified outcomes still depend on LEARN-D1b real reference/reviewer providers"
+  ],
+  "followup_audit": {
+    "log": ".claude/TAKY_GROW_DOMAIN_FIX_CLOSURE_AUDIT_FINAL.log",
+    "verdict": "PASS_WITH_FIXES",
+    "required_queue_lifecycle": "CLOSED",
+    "required_replay_scope": "CLOSED",
+    "new_required": "NONE"
+  }
+}

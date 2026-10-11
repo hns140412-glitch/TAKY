@@ -1,0 +1,39 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_AUTOMATED_DERIVATIVES_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "additions": {
+    "utility_autorefresh": {
+      "trigger": "shared grow-lineage.jsonl materialization",
+      "sidecar": "data-index-outcome-utility.json",
+      "mode": "BEST_EFFORT_NON_AUTHORITATIVE_DERIVATIVE",
+      "source_append_rollback_on_failure": false,
+      "idempotent_replay_refresh": true
+    },
+    "learning_system_growth_store": {
+      "aggregate": "LEARNING/lifecycle/learning-system-growth-aggregate.js",
+      "adapter": "LEARNING/transport/durable-learning-system-growth-store-adapter.js",
+      "scope": "FAMILY_SCOPED_STRONG_STORE",
+      "raw_member_rows_persisted": false,
+      "member_identifiers_persisted": false,
+      "auto_promotion": false,
+      "idempotent": true
+    }
+  },
+  "invariants": [
+    "Derived utility failure never invalidates original GROW evidence",
+    "Learning system growth candidates contain aggregate evidence only",
+    "Learner/member identifiers do not persist in system-growth state",
+    "System-growth candidates remain review-gated",
+    "EXACT and CURRENT authority still outrank outcome utility"
+  ],
+  "verification": {
+    "learning_system_growth_aggregate_test": "PASS",
+    "durable_learning_system_growth_store_test": "PASS",
+    "grow_lineage_utility_autorefresh_test": "PASS",
+    "data_index_outcome_utility_test": "PASS",
+    "outcome_hook_regression": "PASS",
+    "full_python_enforcement": "144/144 PASS"
+  },
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

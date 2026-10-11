@@ -1,0 +1,53 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_SYSTEM_AGGREGATE_UTILITY_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "includes": [
+    "ARCHI_GROW",
+    "LEARNING_GROW",
+    "DATA_INDEX_OUTCOME_UTILITY",
+    "DURABLE_ANTI_LOOP"
+  ],
+  "learning_system_growth": {
+    "implementation": "LEARNING/lifecycle/learning-system-growth-aggregate.js",
+    "min_members_default": 3,
+    "min_verified_outcomes_default": 6,
+    "privacy": "NO_MEMBER_IDENTIFIERS_IN_OUTPUT",
+    "output": "LEARNING_SYSTEM_GROWTH_CANDIDATE_ONLY",
+    "auto_promotion": false
+  },
+  "data_outcome_utility": {
+    "materializer": "ENFORCEMENT/data_index_outcome_utility.py",
+    "schema": "TAKY_DATA_INDEX_OUTCOME_UTILITY_V1",
+    "search_consumer": "ENFORCEMENT/data_index_search.py --outcome-utility",
+    "authoritative": false,
+    "precedence": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE",
+    "learner_private_receipts_projected": false
+  },
+  "anti_loop": {
+    "state_dir": "~/.claude/taky/outcome-gate-state",
+    "durable": true,
+    "bounded": true,
+    "ttl_days_default": 14,
+    "max_files_default": 120,
+    "atomic_write": true,
+    "prompt_excerpt_persisted": false
+  },
+  "verification": {
+    "learning_system_growth_aggregate_test": "PASS",
+    "growth_strategy_ledger_test": "PASS",
+    "durable_growth_strategy_store_adapter_test": "PASS",
+    "data_index_outcome_utility_test": "PASS",
+    "data_index_search_test": "PASS",
+    "outcome_hook_regression": "PASS",
+    "full_python_enforcement": "144/144 PASS"
+  },
+  "invariants": [
+    "Learner growth and learning-system growth remain separate",
+    "Cross-learner system candidates require privacy-safe aggregation thresholds",
+    "Outcome utility remains secondary and non-authoritative",
+    "Exact/CURRENT authority cannot be displaced by utility or semantic retrieval",
+    "Durable anti-loop state is execution continuity only, not semantic memory"
+  ],
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

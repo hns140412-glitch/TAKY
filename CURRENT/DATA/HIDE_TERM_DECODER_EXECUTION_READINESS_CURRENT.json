@@ -1,0 +1,112 @@
+{
+  "schema": "TAKY_HIDE_TERM_DECODER_EXECUTION_READINESS_V3",
+  "updated_at": "2026-10-07",
+  "owner": "LEARNING_ENGINE_CORE",
+  "consumer": "HIDE_SEEK",
+  "status": "PRE_UI_RUNTIME_EXECUTION_VERIFIED_FINAL_UI_OPEN",
+  "measurement_policy": {
+    "implementation_rate": "measurable before final UI lock from code/data/runtime-contract coverage",
+    "pre_ui_execution_rate": "measurable before final UI lock using headless/runtime/browser execution evidence",
+    "final_ui_execution_rate": "requires final UI lock and final viewport/touch/readability journey",
+    "value_delivery_rate": "requires final UI + real intended child journey",
+    "code_exists_is_not_execution": true,
+    "test_pass_without_action_result_persist_readback_is_not_execution": true
+  },
+  "current_audit": {
+    "ref": "C2S/HIDE_TERM_DECODER_PRE_UI_IMPLEMENTATION_EXECUTION_AUDIT_2026-10-07.json",
+    "functional_requirements_total": 25,
+    "implemented_complete": 24,
+    "implementation_rate_full_contract_pct": 96,
+    "pre_ui_testable_requirements": 24,
+    "pre_ui_executed_pass": 24,
+    "pre_ui_execution_rate_testable_scope_pct": 100,
+    "pre_ui_execution_coverage_full_contract_pct": 96,
+    "final_ui_execution_rate_pct": null
+  },
+  "browser_execution": {
+    "ref": "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json",
+    "state": "PASS",
+    "school_stage": "E5",
+    "subject": "SCIENCE",
+    "modes": [
+      "TRACE",
+      "LINK",
+      "CORE",
+      "RECALL"
+    ],
+    "persistence_reload_readback": "PASS",
+    "bridge_events": "PASS"
+  },
+  "content_coverage": {
+    "official_subject_terms_56": 436,
+    "full_term_decoder_components": 59,
+    "full_term_decoder_pct": 13.5,
+    "hanja_form_available": 252,
+    "hanja_form_pct": 57.8,
+    "explicit_compare_or_contrast_terms": 2,
+    "explicit_examples": 9,
+    "ambiguous_lexemes_held": 39,
+    "no_nikl_surface_match": 108,
+    "state": "INCOMPLETE"
+  },
+  "completed_pre_ui": [
+    "mining reference intake and pattern registry",
+    "prelearned grade-aware term universe",
+    "Learning Engine term recommendation runtime",
+    "live endpoint local execution",
+    "static fallback projection",
+    "Hide engine-card binding",
+    "TRACE/LINK/CORE/RECALL browser execution",
+    "learning evidence emission",
+    "localStorage persistence and reload readback",
+    "regression/headless E2E"
+  ],
+  "open_for_final_ui": [
+    "final component/layout binding",
+    "real final viewport interaction verification",
+    "touch target/scroll/readability verification",
+    "final child journey completion",
+    "final responsive-state regressions",
+    "final mobile evidence round-trip in intended deployment environment"
+  ],
+  "current_claims_allowed": [
+    "PRE_UI_RUNTIME_EXECUTION_PASS",
+    "LOGIC_RUNTIME_IMPLEMENTATION_HIGH_COVERAGE"
+  ],
+  "claims_forbidden_now": [
+    "FINAL_UI_EXECUTION_PASS",
+    "VALUE_DELIVERY_COMPLETE",
+    "CONTENT_COVERAGE_COMPLETE",
+    "MOBILE_E2E_COMPLETE"
+  ],
+  "deploy_state": "NOT_DEPLOYED",
+  "commit_state": "NOT_COMMITTED",
+  "age_grade_adaptation": {
+    "ref": "C2S/HIDE_TERM_AGE_GRADE_PRE_UI_EXECUTION_2026-10-07.json",
+    "state": "IMPLEMENTED_AND_PRE_UI_EXECUTION_VERIFIED",
+    "rules": [
+      "age-only may resolve expected school grade when explicit grade is absent",
+      "explicit school grade/stage controls curriculum eligibility when compatible",
+      "material age-grade conflict fails closed",
+      "developmental presentation bands: E1-2 / E3-4 / E5-6 / secondary",
+      "learner evidence may shift presentation by at most one band, never official grade eligibility"
+    ],
+    "current_content_population": "Prelearned official subject-term packs populated for E1-E6; subject availability follows the 2022 revised elementary curriculum structure. E5/E6 retain richer core-subject enrichment."
+  },
+  "mining_site_pattern_integration": {
+    "state": "IMPLEMENTED_AND_RUNTIME_VERIFIED",
+    "ref": "CURRENT/DATA/LEARNING_REFERENCE_PATTERN_INDEX.json",
+    "rules": [
+      "education mining-site patterns may shape learning activity structure",
+      "official curriculum retains grade/content authority",
+      "repeated error requires learner evidence before concept-gap routing",
+      "source layout/wording are not copied"
+    ],
+    "runtime": [
+      "P_ERROR_TO_CONCEPT_GAP",
+      "P_VISUAL_CONCEPT_CARD",
+      "P_CONCEPT_GRAPH",
+      "P_BLANK_RECALL"
+    ]
+  }
+}

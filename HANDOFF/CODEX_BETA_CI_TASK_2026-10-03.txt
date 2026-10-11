@@ -1,0 +1,10 @@
+TAKY Beta code-track follow-up. Work only in D:\Git PWA\TAKY.
+No commit/push/merge/deploy/paid API/remote mutation. Preserve all existing changes.
+Evidence already established: evidence_ref_validator.py and execution_checkpoint.py have new bypass fixes; standalone regression tests evidence_history_boundary_test.py (5 pass) and execution_checkpoint_identity_test.py (6 pass).
+Task:
+1) Inspect .github/workflows/taky-enforcement.yml.
+2) Wire these two new regression tests into the existing replay job in the smallest consistent location, and compile them if this workflow compiles test scripts by policy.
+3) Do not change unrelated workflow semantics.
+4) Validate YAML syntactically with available local tools without installing packages; run the two tests again and git diff --check.
+5) Investigate the 16 TemporaryDirectory access failures only diagnostically. Do not change ACLs, global TEMP, or weaken tests. Determine whether failure is environment/tool sandbox vs repository bug using a minimal local probe and record evidence.
+6) Do not modify authority docs. Write a concise non-authoritative report under ENFORCEMENT/beta_validation_2026_10_03/CI_WIRING_FOLLOWUP.md.

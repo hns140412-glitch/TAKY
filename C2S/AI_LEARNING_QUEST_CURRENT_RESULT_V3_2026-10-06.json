@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_CURRENT_RESULT_V3",
+  "generated_at": "2026-10-06T03:56:56.994978+00:00",
+  "status": "PASS_LOCAL_MAXIMIZED_WITH_CURRENT_EVIDENCE",
+  "learning_total": 56,
+  "adopted_tested": 44,
+  "open_total": 12,
+  "breakdown": {
+    "q3_pass": 11,
+    "q3_open": 3,
+    "q4_pass": 14,
+    "q4_open": 4,
+    "q5_verify_on_need": 5
+  },
+  "latest_adoptions": [
+    "STAGED_ARTIFACT_WORKFLOW",
+    "DURABLE_MANUAL_OVER_EPHEMERAL_AGENT",
+    "HUMAN_EDITABLE_OUTPUT",
+    "TRANSFORM_EXISTING_ASSET_BEFORE_RECREATE",
+    "DESIGN_TASTE_AS_EXPLICIT_CONSTRAINT",
+    "SOURCE_ASSET_QUALITY_SETS_OUTPUT_CEILING",
+    "LOCAL_EDIT_BEFORE_REGENERATION",
+    "INTERFACE_REASONING_SEPARATION"
+  ],
+  "validation": {
+    "python_targeted": "143/143 PASS",
+    "learning_runtime_checks": "7 PASS",
+    "claude_subscription_auth": "6/6 + LIVE PASS",
+    "prompt_contract": "PASS",
+    "post_collect_validate_only": "PASS / NO_ACTION",
+    "git_diff_check": "PASS",
+    "quest_router_probes": "PASS"
+  },
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

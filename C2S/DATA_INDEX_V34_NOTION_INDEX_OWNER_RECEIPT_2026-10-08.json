@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_DETERMINISTIC_INDEXING_OWNER_REVIEW_V1",
+  "issuer": "INDEXING_OWNER",
+  "reviewed": true,
+  "decision": "INDEXED",
+  "index_version": "V34-NOTION-DELTA",
+  "delta_path": "C2S/NOTION_REFERENCE_INDEX_DELTA_V34_2026-10-08.json",
+  "delta_sha256": "a68f850f12859029491269d18a4f70f00aa74610ba9e2a08eed3a70e56fe53d8",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+  "parent_sha256_verified": true,
+  "mining_receipt": "TAKY-SOURCE-VAULT/reports/DIRECT_NOTION_HUMANIZE_KR_MINING_20261008.json",
+  "mining_sha256_verified": true,
+  "items": [
+    {
+      "source_id": "REF-095",
+      "source_ref": "INDEX:REF-095",
+      "url": "https://github.com/epoko77-ai/im-not-ai",
+      "required_fields_pass": true,
+      "duplicate_source_id_origins": [],
+      "exact_url_matches": [],
+      "decision": "INDEXED",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "guards": {
+    "request_side_approval_ignored": true,
+    "prior_delta_and_ledger_duplicate_check": true,
+    "canonical_promotion": false,
+    "learning_use_authorized": false
+  }
+}

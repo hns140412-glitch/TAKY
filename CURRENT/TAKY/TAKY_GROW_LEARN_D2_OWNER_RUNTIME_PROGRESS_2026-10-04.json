@@ -1,0 +1,33 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_LEARN_D2_OWNER_RUNTIME_PROGRESS_2026-10-04",
+  "status": "PARTIAL_VERIFIED__READY_VERIFIABLE_PRACTICE_OPEN",
+  "domain_item": "LEARN-D2",
+  "completed": [
+    "Hide actual owner bridge -> client -> central trusted verifier -> REAL_EVIDENCE verified_outcome",
+    "Snap actual owner bridge/outbox -> client -> authorized human-rubric verifier -> REAL_EVIDENCE verified_outcome",
+    "Ready actual owner runtime -> client -> central observation ACK without unauthorized verified outcome",
+    "owner bridge scope persistence for subject/concept/learning_target in Hide/Snap"
+  ],
+  "verification": [
+    "ENFORCEMENT/learning_owner_runtime_verified_outcome_e2e.test.js PASS",
+    "ENFORCEMENT/learning_owner_evidence_binding_test.py PASS"
+  ],
+  "per_app": {
+    "HIDE_SEEK": "VERIFIED_OUTCOME_PASS",
+    "SNAP_POP": "VERIFIED_OUTCOME_PASS",
+    "READY_SET": "CENTRAL_OBSERVATION_PASS__VERIFIED_OUTCOME_NOT_AVAILABLE"
+  },
+  "remaining": [
+    "Ready needs a real verifiable structured-practice/answer producer before Ready-owned verified outcome can be claimed",
+    "installed-PWA/device proof remains LEARN-D5"
+  ],
+  "guards": {
+    "client_verification_authority": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

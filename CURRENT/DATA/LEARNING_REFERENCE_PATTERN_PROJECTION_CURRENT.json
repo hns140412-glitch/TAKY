@@ -1,0 +1,94 @@
+{
+  "schema": "TAKY_LEARNING_REFERENCE_PATTERN_PROJECTION_RECEIPT_V1",
+  "generated_at": "2026-10-11T14:26:28.848Z",
+  "projector_version": "TAKY_LEARNING_REFERENCE_PATTERN_PROJECTOR_V1",
+  "ledger_path": "CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+  "registry_path": "LEARNING/data/mining-learning-pattern-registry-v1.json",
+  "rules_path": "LEARNING/data/learning-reference-pattern-projection-rules-v1.json",
+  "summary": {
+    "indexed_learning_refs": 9,
+    "runtime_pattern_refs": 2,
+    "discovery_only_refs": 1,
+    "held_unmapped_refs": 6
+  },
+  "projected": [
+    {
+      "source_id": "REF-081",
+      "patterns": [
+        "P_ERROR_TO_CONCEPT_GAP",
+        "P_VISUAL_CONCEPT_CARD"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_UNTIL_CURRICULUM_AND_PEDAGOGY_VERIFIED"
+    },
+    {
+      "source_id": "REF-085",
+      "patterns": [
+        "P_CONCEPT_GRAPH",
+        "P_BLANK_RECALL",
+        "P_VISUAL_CONCEPT_CARD"
+      ],
+      "authority_ceiling": "REFERENCE_ONLY_UNTIL_MATH_CURRICULUM_AND_CONTENT_ACCURACY_VERIFIED"
+    }
+  ],
+  "discovery_only": [
+    {
+      "source_id": "REF-084",
+      "source_ref": "INDEX:REF-084",
+      "applicability_scope": [
+        "OFFICIAL_SOURCE_DISCOVERY",
+        "LEARNING_REFERENCE_DISCOVERY"
+      ],
+      "disposition": "DISCOVERY_ONLY_NO_RUNTIME_PATTERN"
+    }
+  ],
+  "held_unmapped": [
+    {
+      "source_id": "REF-068",
+      "source_ref": "INDEX:REF-068",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    },
+    {
+      "source_id": "REF-069",
+      "source_ref": "INDEX:REF-069",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    },
+    {
+      "source_id": "REF-070",
+      "source_ref": "INDEX:REF-070",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    },
+    {
+      "source_id": "REF-071",
+      "source_ref": "INDEX:REF-071",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    },
+    {
+      "source_id": "REF-074",
+      "source_ref": "INDEX:REF-074",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    },
+    {
+      "source_id": "REF-075",
+      "source_ref": "INDEX:REF-075",
+      "source_direction_signals": [],
+      "applicability_scope": [],
+      "disposition": "HELD_NO_EXPLICIT_PATTERN_RULE"
+    }
+  ],
+  "guards": [
+    "UNKNOWN_SIGNAL_DOES_NOT_PROJECT",
+    "DISCOVERY_ONLY_SOURCE_DOES_NOT_BECOME_PEDAGOGY",
+    "REFERENCE_AUTHORITY_CEILING_PRESERVED",
+    "NO_GRADE_AUTHORITY_FROM_REFERENCE_PATTERN"
+  ]
+}

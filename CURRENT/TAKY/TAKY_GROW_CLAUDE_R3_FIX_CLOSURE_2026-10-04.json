@@ -1,0 +1,62 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R3_FIX_CLOSURE_2026-10-04",
+  "status": "LOCAL_VERIFIED_AWAITING_CLAUDE_R4",
+  "source_audit": {
+    "round": 3,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R3_FINAL.log"
+  },
+  "closed_findings": [
+    {
+      "id": "R3-B1",
+      "issue": "Regression independence requires workflow_run",
+      "status": "CLOSED_LOCAL_VERIFIED",
+      "implementation": "CURRENT_BEST regression evidence now requires verification_authority + workflow_run; workflow runs are deduplicated and cannot overlap verified outcome runs.",
+      "tests": [
+        "growth_adversarial_test.test_regression_requires_workflow_run",
+        "growth_adversarial_test.test_regression_run_cannot_overlap_outcome_run",
+        "growth_adversarial_test.test_duplicate_regression_workflow_run_counts_once"
+      ]
+    },
+    {
+      "id": "R3-B2",
+      "issue": "Review-gate candidate authority violations must force HOLD",
+      "status": "CLOSED_LOCAL_VERIFIED",
+      "implementation": "promotion_authorized!=false, authority_transfer!=false, or missing event_id returns HOLD before experiment/promotion readiness.",
+      "tests": [
+        "grow_review_gate_test.test_candidate_contract_violations_force_hold"
+      ]
+    },
+    {
+      "id": "R3-B3",
+      "issue": "Human approval must bind specifically to R2 evidence",
+      "status": "CLOSED_LOCAL_VERIFIED",
+      "implementation": "R2 approval receipt binds strategy/target to exact R2 evidence path and SHA-256 after user continuation following R2 evidence disclosure.",
+      "approval_ref": "CURRENT/TAKY/TAKY_GROW_HUMAN_PROMOTION_APPROVAL_2026-10-04_R2.json",
+      "evidence_ref": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-04_R2.json",
+      "evidence_sha256": "12e76d63c93ace24f68da294b7eb4485295b262c990e9539410b33d2abd0b0bd",
+      "tests": [
+        "grow_current_best_promotion_test.test_human_reviewed_promotion_matches_verified_evidence"
+      ]
+    }
+  ],
+  "verification": {
+    "focused_grow": "PASS",
+    "full_python": "273/273 PASS",
+    "grow_node": "6/6 PASS",
+    "settings_json": "PASS",
+    "git_diff_check": "PASS",
+    "log": "ENFORCEMENT/grow_claude_hardened_full_regression_2026-10-04.log"
+  },
+  "active_open_after_local_verification": [],
+  "next": "Run Claude R4 independent read-only audit. Reopen only if R4 identifies a required correctness/authority/privacy/safety/reproducibility finding.",
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "next_status": "SUPERSEDED_BY_TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json_AND_CLAUDE_R3_REOPEN"
+}

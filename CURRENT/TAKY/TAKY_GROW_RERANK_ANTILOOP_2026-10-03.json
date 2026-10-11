@@ -1,0 +1,37 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_RERANK_ANTILOOP_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "retrieval": {
+    "implementation": "ENFORCEMENT/data_index_search.py",
+    "precedence": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE",
+    "outcome_utility": "BOUNDED_SECONDARY_SIGNAL",
+    "missing_utility": "NEUTRAL_ZERO",
+    "authority_override": false
+  },
+  "anti_loop": {
+    "implementation": ".claude/hooks/taky_outcome_hook.py",
+    "state_dir_default": "~/.claude/taky/outcome-gate-state",
+    "os_temp_dependency": false,
+    "atomic_write": true,
+    "prompt_excerpt_persisted": false,
+    "ttl_days_default": 14,
+    "max_files_default": 120,
+    "failure_ledger": "~/.claude/taky/failure-learning.jsonl",
+    "semantics": "execution continuity only; not semantic authority"
+  },
+  "verification": {
+    "data_index_search_test": "PASS",
+    "outcome_hook_regression": "PASS",
+    "full_python_enforcement": "144/144 PASS"
+  },
+  "invariants": [
+    "Outcome utility cannot outrank exact identifier matches",
+    "Outcome utility cannot outrank CURRENT_INDEX_ENTRY tier",
+    "Semantic/vector retrieval remains discovery-only below authority tiers",
+    "Anti-loop state survives reboot/cleanup but is bounded by TTL/max files",
+    "Durable anti-loop state excludes prompt excerpts",
+    "Unresolved repeated failures remain available for route-switch defense"
+  ],
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

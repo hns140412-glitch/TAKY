@@ -1,0 +1,33 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_LEARN_D5_CONTINUITY_PROGRESS_2026-10-04",
+  "status": "OWNER_RUNTIME_CROSS_APP_CONTINUITY_VERIFIED__REAL_INSTALLED_DEVICE_OPEN",
+  "domain_item": "LEARN-D5",
+  "completed": [
+    "Ready -> Hide -> Ready -> Snap -> Ready actual owner-code round trip",
+    "session_id and goal_id preserved",
+    "active Lap preserved across app switch",
+    "APP_SWITCH does not pause timer",
+    "PARTIAL specialist result keeps Lap open",
+    "COMPLETED specialist result closes Lap with SPECIALIST_RESULT",
+    "duplicate specialist event rejected",
+    "child/subject/concept/learning-target scope preserved across specialist launch"
+  ],
+  "verification": [
+    "ENFORCEMENT/learning_cross_app_continuity_owner_runtime.test.js PASS"
+  ],
+  "remaining": [
+    "real installed-PWA iPhone/Safari app-switch/background/resume proof",
+    "real hosted auth/session binding on installed runtime",
+    "real local-first conflict/reconciliation under offline/reconnect"
+  ],
+  "guards": {
+    "app_switch_is_pause": false,
+    "app_switch_is_lap_end": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

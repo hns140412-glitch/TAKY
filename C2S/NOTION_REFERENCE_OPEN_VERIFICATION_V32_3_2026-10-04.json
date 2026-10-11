@@ -1,0 +1,56 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_OPEN_VERIFICATION_V32_3",
+  "date": "2026-10-04",
+  "status": "2_OPEN_REMAIN__BOTH_EXTERNAL_ENVIRONMENT_GATED",
+  "ref090": {
+    "state": "HOLD_RUNTIME_ENVIRONMENT_GATE",
+    "evidence": {
+      "static_security": "PASS_WITH_CAVEAT__NO_OBVIOUS_EXTERNAL_IO",
+      "full_macro_capture_chars": 19582,
+      "synthetic_deck_created": true,
+      "ui_injection_attempted": true,
+      "macro_run_attempted": true,
+      "before_source_rgb": 11153503,
+      "after_shape_fill": 11153503,
+      "after_shape_line": 11153503,
+      "after_text": 11153503,
+      "after_table_fill": 11153503,
+      "expected_target_rgb": 13395456,
+      "neutral_after": 8421504,
+      "neutral_expected": 8421504,
+      "functional_pass": false
+    },
+    "conclusion": "VBA execution was not confirmed. The synthetic deck remained unchanged.",
+    "next_gate": "Explicit approval is required before temporarily enabling Office 'Trust access to the VBA project object model' (AccessVBOM). Any change must be restored immediately after the isolated synthetic test.",
+    "office_security_setting_changed": false
+  },
+  "ref091": {
+    "state": "HOLD_NO_ACCESSIBLE_PUBLIC_BODY",
+    "evidence": {
+      "public_page_http": "200_JS_SHELL_ONLY",
+      "headless_browser": "JS_SHELL_ONLY",
+      "public_search": "NO_RESULT",
+      "loadCachedPageChunk": "HTTP_400",
+      "loadPageChunk": "HTTP_400",
+      "recovered_body_chars": 0
+    },
+    "conclusion": "No mineable CARL body is publicly recoverable from the current source. Title-only inference remains prohibited.",
+    "next_gate": "Requires an actually accessible body/source revision or another authoritative copy."
+  },
+  "closed_in_prior_steps": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-092"
+  ],
+  "guards": {
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false,
+    "paid_api_used": false,
+    "office_security_setting_changed": false
+  }
+}

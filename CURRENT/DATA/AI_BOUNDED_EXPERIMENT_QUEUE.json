@@ -1,0 +1,434 @@
+{
+  "schema": "TAKY_AI_BOUNDED_EXPERIMENT_QUEUE_V1",
+  "generated_at": "2026-10-06T03:53:52.241749+00:00",
+  "count": 14,
+  "items": [
+    {
+      "learning_id": "AI-LRN-STAGED-ARTIFACT-WORKFLOW",
+      "experiment_type": "ARTIFACT_WORKFLOW",
+      "hypothesis": "Compare one-shot vs staged plan/sample/build on a representative artifact.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "rework_count, correction_cost, fidelity, editability",
+      "guardrail": "Require same brief/reference and no deployment.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "ADOPT_STAGED_ARTIFACT_QUALITY_CONTROL",
+      "remaining_reason": "No representative paired baseline yet.",
+      "experiment_outcome": "PASS",
+      "evidence_refs": [
+        "C2S/AI_STAGED_ARTIFACT_QUALITY_REEVAL_2026-10-06.json",
+        "REFERENCE/ARCHCOMP_OUTPUT_BUILD_TEST/ONE_SHOT_A3/validation.json",
+        "REFERENCE/ARCHCOMP_OUTPUT_BUILD_TEST/QUALITY_A3_REPORT/quality-report.json"
+      ],
+      "tested_at": "2026-10-06T03:46:45.174710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-CONTEXT-CLAIM-NEEDS-MEASUREMENT",
+      "experiment_type": "CONTEXT_EFFICIENCY",
+      "hypothesis": "Compare baseline context vs proposed compression on the same task.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "context_size, answer parity, omission rate, correction count",
+      "guardrail": "No adoption if quality/parity regresses.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_PRIOR_VALIDATION",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_CONTEXT_MEMORY_EXPERIMENT_2026-10-06.json"
+      ],
+      "claim_ceiling": "repository continuation context only",
+      "adoption": "Use targeted resume packet when required facts are parity-checked.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_FROM_PRIOR_Q3_VALIDATION",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-BUDGET-AWARE-MODEL-TIERING",
+      "experiment_type": "MODEL_ROUTING",
+      "hypothesis": "Compare all-premium routing vs judgment-premium/mechanical-cheaper routing.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "quality gate pass, usage, retries, latency",
+      "guardrail": "Quality gate cannot be relaxed for savings.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "READY_WHEN_REPRESENTATIVE_TASK_EXISTS",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "NOT_ADOPTED",
+      "remaining_reason": "No representative paired baseline yet."
+    },
+    {
+      "learning_id": "AI-LRN-COST-BOTTLENECK-BEFORE-OPTIMIZATION",
+      "experiment_type": "COST_TELEMETRY",
+      "hypothesis": "Instrument representative tasks before selecting an optimizer.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "input/output/retrieval/reconstruction share",
+      "guardrail": "No tool adoption before a dominant bottleneck is evidenced.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_COST_BOTTLENECK_TELEMETRY_2026-10-06.json"
+      ],
+      "claim_ceiling": "local context I/O, not model billing",
+      "adoption": "Measure representative task bottleneck before adding optimizer.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_WITH_STRENGTHENED_REPRESENTATIVE_EVIDENCE",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json",
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "ENFORCEMENT/reference_batch_acquisition.py",
+        "ENFORCEMENT/reference_batch_acquisition_test.py"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-CROSS-MODEL-REVIEW-INDEPENDENCE",
+      "experiment_type": "INDEPENDENT_REVIEW",
+      "hypothesis": "Compare self-review vs independent reviewer on material plans.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "material defects found, false blocks, correction rate",
+      "guardrail": "Use subscription/local path only when Necessary; no paid API.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_PRIOR_VALIDATION",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_INDEPENDENT_REVIEW_EXPERIMENT_2026-10-06.json"
+      ],
+      "claim_ceiling": "one historical material case",
+      "adoption": "Use independent review for material/high-risk decisions behind Necessity Gate.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_FROM_PRIOR_Q3_VALIDATION",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-DURABLE-MANUAL-OVER-EPHEMERAL-AGENT",
+      "experiment_type": "REPEATABILITY",
+      "hypothesis": "Repeat a task from durable manual vs session-only instructions.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "repeat success, missing context, correction count",
+      "guardrail": "Preserve same task and acceptance conditions.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md"
+      ],
+      "claim_ceiling": "durable manual exists; no controlled session-only baseline",
+      "adoption": "NONE",
+      "adoption_decision": "ADOPT_DURABLE_RUNBOOK_FOR_PUBLIC_SOURCE_ACQUISITION",
+      "remaining_reason": "durable manual exists; no controlled session-only baseline",
+      "experiment_outcome": "PASS",
+      "evidence_refs": [
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "D:/Git PWA/TAKY-SOURCE-VAULT/reports/AI_Q3_RUNBOOK_INDEPENDENT_REPLAY_20261006.json"
+      ],
+      "tested_at": "2026-10-06T03:46:45.174710+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-FAILURE-UPDATES-OPERATING-MANUAL",
+      "experiment_type": "FAILURE_LEARNING",
+      "hypothesis": "After a real failure, update manual/checklist then repeat comparable case.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "reoccurrence, recovery steps, new failure modes",
+      "guardrail": "Do not manufacture failures merely to test.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_FAILURE_MANUAL_TOOL_OVERHEAD_RESULT_2026-10-06.json",
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md"
+      ],
+      "claim_ceiling": "public source acquisition workflow",
+      "adoption": "Persist proven recovery procedure and require comparable replay.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_WITH_STRENGTHENED_REPRESENTATIVE_EVIDENCE",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json",
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "ENFORCEMENT/reference_batch_acquisition.py",
+        "ENFORCEMENT/reference_batch_acquisition_test.py"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-INTENT-CONSTRAINTS-SUCCESS-OVER-UNNEEDED-STEPS",
+      "experiment_type": "INSTRUCTION_ABLATION",
+      "hypothesis": "Compare intent+constraints+success criteria with overspecified procedure.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "goal pass, unintended restriction, correction count",
+      "guardrail": "Only on reversible representative task.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "READY_WHEN_REPRESENTATIVE_TASK_EXISTS",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "NOT_ADOPTED",
+      "remaining_reason": "No representative paired baseline yet."
+    },
+    {
+      "learning_id": "AI-LRN-INTERFACE-REASONING-SEPARATION",
+      "experiment_type": "ARCHITECTURE_SPLIT",
+      "hypothesis": "Compare coupled vs explicit UI/reasoning boundary for a suitable flow.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "interface clarity, replaceability, failure isolation",
+      "guardrail": "Only where two-layer architecture is actually justified.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "CONFIRMED_APP_SURFACE_CENTRAL_REASONING_BOUNDARY",
+      "remaining_reason": "No representative paired baseline yet.",
+      "experiment_outcome": "PASS",
+      "evidence_refs": [
+        "LEARNING/transport/node-http-learning-bridge.js",
+        "LEARNING/transport/three-app-character-runtime-integration.test.js",
+        "ENFORCEMENT/learning_cross_app_continuity_owner_runtime.test.js",
+        "TEST:THREE_APP_CHARACTER_RUNTIME_PASS",
+        "TEST:LEARNING_CROSS_APP_CONTINUITY_OWNER_RUNTIME_PASS",
+        "TEST:LEARNING_TRANSPORT_AUTH_POLICY_PASS"
+      ],
+      "tested_at": "2026-10-06T03:53:52.241749+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-LOCAL-EDIT-BEFORE-REGENERATION",
+      "experiment_type": "LOCAL_EDIT",
+      "hypothesis": "Compare small local edit/undo vs whole artifact regeneration.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "changed surface, fidelity retained, cost/rework",
+      "guardrail": "Only for small corrections.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "ADOPT_LOCAL_EDIT_FOR_SMALL_ARTIFACT_CORRECTIONS",
+      "remaining_reason": "No representative paired baseline yet.",
+      "experiment_outcome": "PASS",
+      "evidence_refs": [
+        "C2S/AI_LOCAL_EDIT_VS_REGEN_PACKAGE_DIFF_V2_2026-10-06.json",
+        "D:/Git PWA/TAKY-SOURCE-VAULT/reports/BENCHMARK_LOCAL_EDIT_VS_REGEN_V2_20261006.ps1"
+      ],
+      "tested_at": "2026-10-06T03:53:52.241749+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-MEMORY-CAPTURE-STORE-RETRIEVE",
+      "experiment_type": "MEMORY_LIFECYCLE",
+      "hypothesis": "Run a real continuation task with capture/store/retrieve boundaries.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "relevant recall, stale context, manual re-entry",
+      "guardrail": "Do not adopt a new memory product solely for experiment.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_PRIOR_VALIDATION",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_CONTEXT_MEMORY_EXPERIMENT_2026-10-06.json",
+        "CURRENT/DATA/AI_CURRENT_QUEST_RESUME.json"
+      ],
+      "claim_ceiling": "repository continuation state only",
+      "adoption": "Capture durable boundary state and retrieve only relevant resume facts.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_FROM_PRIOR_Q3_VALIDATION",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json"
+      ]
+    },
+    {
+      "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+      "experiment_type": "RULE_ABLATION",
+      "hypothesis": "Identify a candidate stale instruction and test with/without it.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "regression, conflict reduction, route clarity",
+      "guardrail": "Never remove safety/authority constraints without independent proof.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_SECURITY_REVIEWED",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_STALE_SCAFFOLD_DIAGNOSTIC_2026-10-06.json"
+      ],
+      "claim_ceiling": "stale condition diagnosed only",
+      "adoption": "HOLD_SECURITY_REVIEW; authentication gate not modified.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPT_SECURITY_REVIEWED",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\TAKY_CLAUDE_SUBSCRIPTION_AUTH.ps1",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\RUN_TAKY_POST_COLLECT_PIPELINE.ps1",
+        "C2S/AI_Q3_PRUNE_STALE_SECURITY_REVIEW_RESULT_2026-10-06.json"
+      ],
+      "tested_at": "2026-10-06T03:27:49.021317+00:00"
+    },
+    {
+      "learning_id": "AI-LRN-SURFACE-SELECTION-BY-JOB-DIMENSION",
+      "experiment_type": "SURFACE_ROUTING",
+      "hypothesis": "Route comparable tasks by immediacy/context/recurrence/external capability.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "completion quality, handoff loss, unnecessary surface hops",
+      "guardrail": "Respect existing product and permission constraints.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "READY_WHEN_REPRESENTATIVE_TASK_EXISTS",
+      "outcome": "INCONCLUSIVE",
+      "evidence": [],
+      "claim_ceiling": "No representative paired baseline yet.",
+      "adoption": "NONE",
+      "adoption_decision": "NOT_ADOPTED",
+      "remaining_reason": "No representative paired baseline yet."
+    },
+    {
+      "learning_id": "AI-LRN-TOOL-OVERHEAD-CAN-NEGATE-SAVINGS",
+      "experiment_type": "NET_UTILITY",
+      "hypothesis": "Measure optimizer/tool overhead against baseline.",
+      "baseline_required": true,
+      "representative_task_required": true,
+      "metrics": "net cost, latency, quality, retries",
+      "guardrail": "No default adoption on claimed savings alone.",
+      "execution_policy": "LOCAL_OR_EXISTING_SUBSCRIPTION_FIRST",
+      "outcome_required": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ],
+      "growth_rule": "Only PASS with no material regression may enter promotion review; never auto-promote.",
+      "state": "PASS_ADOPTED_VALIDATED",
+      "outcome": "PASS",
+      "evidence": [
+        "C2S/AI_Q3_FAILURE_MANUAL_TOOL_OVERHEAD_RESULT_2026-10-06.json"
+      ],
+      "claim_ceiling": "public source acquisition benchmark",
+      "adoption": "Measure net workflow overhead; bounded parallel replay showed equal 8/8 success with 4.414x lower elapsed time.",
+      "experiment_outcome": "PASS",
+      "adoption_decision": "ADOPTED_WITH_STRENGTHENED_REPRESENTATIVE_EVIDENCE",
+      "evidence_refs": [
+        "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json",
+        "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json",
+        "RUNBOOK/AI_SOURCE_ACQUISITION_RUNBOOK_V1.md",
+        "ENFORCEMENT/reference_batch_acquisition.py",
+        "ENFORCEMENT/reference_batch_acquisition_test.py"
+      ]
+    }
+  ],
+  "guards": [
+    "REPRESENTATIVE_TASK_REQUIRED",
+    "BASELINE_REQUIRED",
+    "REGRESSION_CHECK_REQUIRED",
+    "NO_AUTO_PROMOTION",
+    "PAID_API_REQUIRES_APPROVAL"
+  ],
+  "updated_at": "2026-10-06T00:16:49.970994+00:00",
+  "q3_summary": {
+    "total": 14,
+    "pass_adopted": 11,
+    "inconclusive": 0,
+    "ready_when_representative_task_exists": 3,
+    "security_review_required": 0
+  },
+  "authority": "CONSOLIDATED_Q3_CURRENT",
+  "authority_refs": [
+    "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json",
+    "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_PARTIAL_RESULT_2026-10-06.json",
+    "D:\\Git PWA\\TAKY\\C2S\\AI_LEARNING_QUEST_Q3_RESULT_R2_2026-10-06.json",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\AI_Q3_ACQUISITION_BENCHMARK_20261006.json"
+  ]
+}

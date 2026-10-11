@@ -1,0 +1,13 @@
+{
+  "attestation_hash": "sha256:90ded3b6382bc5fc95ebf40e93fbc459848101610697439af057a17ab624542e",
+  "attestation_version": "1.0",
+  "binding_role": "CANONICAL_REVIEW_ATTESTATION",
+  "profile_path": "PROJECTIONS/ACTIVE_RULE_PROFILE.md",
+  "projection_body_hash": "sha256:082603dd94a0c5cc0f881d0506f20a0ea9984a75dbfaeda1e371c74d497cf4e7",
+  "review_basis": "OWNER_TO_PROJECTION_SEMANTIC_REVIEW",
+  "review_result": "PASS",
+  "reviewed_at": "2026-10-04T10:14:34+09:00",
+  "reviewer_role": "TAKY_VALIDATOR",
+  "source_canonical_head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+  "source_owner_fingerprint": "sha256:6109116ae1e8f12664ed23d693ba2cdecf555dc5af0aa77291034b43e2379b2e"
+}

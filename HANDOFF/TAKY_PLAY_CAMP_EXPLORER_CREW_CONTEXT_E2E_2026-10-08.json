@@ -1,0 +1,55 @@
+{
+  "schema": "TAKY_PLAY_CAMP_EXPLORER_CREW_CONTEXT_E2E_V1",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "authority": {
+    "crew_resume": "HANDOFF/TAKY_EXPLORER_CREW_NEW_CHAT_START_2026-10-08_LATEST.md",
+    "crew_voice_current": "HANDOFF/TAKY_EXPLORER_CREW_VOICE_CURRENT_2026-10-08.md",
+    "play_camp_repo": "D:\\Git PWA\\HANGUL-PLAY-20261007"
+  },
+  "contract": {
+    "schemaVersion": "TAKY_PLAY_CAMP_EXPLORER_CREW_CONTEXT_V1",
+    "mapping": {
+      "EARLY_EXPLORER": "PLAY_CAMP",
+      "LOWER_PRIMARY": "PLAY_CAMP",
+      "UPPER_PRIMARY": "MAIN_CREW",
+      "SECONDARY": "MIDDLE"
+    },
+    "school_stage_invented": false,
+    "family_character_projection_modified": false,
+    "learning_packet_modified": false
+  },
+  "implementation": [
+    "src/lib/explorerCrewContext.ts",
+    "App publishes context whenever ExplorerProfile changes",
+    "Crew canonical runtime accepts presentation_band while preserving school_stage fallback compatibility"
+  ],
+  "verification": {
+    "play_camp_tests": "100/100 PASS",
+    "play_camp_build": "PASS",
+    "tablet_1024x768": "PASS",
+    "tablet_1180x820": "PASS",
+    "browser_context_assertions": [
+      "app_id=PLAY_CAMP",
+      "presentation_band=EARLY_EXPLORER",
+      "production_group=PLAY_CAMP",
+      "school_stage property absent"
+    ],
+    "crew_suite": "6/6 PASS",
+    "crew_source_lock": "EXPLORER_CREW_V2_SOURCE_LOCK_20261008_DIALOGUE_CANDIDATE_R9"
+  },
+  "production_boundary": {
+    "play_camp_core6_candidate_lines": 36,
+    "play_camp_core6_candidate_chars": 994,
+    "script_locked": false,
+    "runtime_enabled": false,
+    "elevenlabs_authorized": false,
+    "remaining": [
+      "independent targeted recheck",
+      "PLAY_CAMP Crew SCRIPT LOCK",
+      "ROUTE BEFORE CREATE / reuse-dedup",
+      "exact cost",
+      "explicit USER approval"
+    ]
+  }
+}

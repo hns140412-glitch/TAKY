@@ -1,0 +1,170 @@
+{
+  "schema": "TAKY_POST_MINING_LEARNING_REFRESH_RECEIPT_V1",
+  "generated_at": "2026-10-07T08:49:57.806Z",
+  "version": "TAKY_POST_MINING_LEARNING_REFRESH_V1",
+  "policy": {
+    "collector_boundary": "COLLECTOR_ONLY_ACQUIRES_AND_HANDS_OFF; THIS_REFRESH_RUNS_AFTER_MINING_INDEXING",
+    "runtime_rule": "PRELEARNED_PROJECTION_FIRST; RUNTIME_SELECTS_ONLY",
+    "cost_mode": "LOCAL_FREE_ONLY",
+    "paid_api_calls": false,
+    "network_calls": false
+  },
+  "pattern_projection": {
+    "indexed_learning_refs": 9,
+    "runtime_pattern_refs": 2,
+    "discovery_only_refs": 1,
+    "held_unmapped_refs": 6
+  },
+  "elementary_projection": {
+    "schema": "TAKY_SUBJECT_TERM_UNIVERSE_ELEMENTARY_V1",
+    "stages": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6"
+    ],
+    "stage_subject_counts": {
+      "E1": {
+        "JOYFUL_LIFE": 23,
+        "KOREAN": 23,
+        "MATH": 31,
+        "RIGHT_LIFE": 17,
+        "WISE_LIFE": 24
+      },
+      "E2": {
+        "JOYFUL_LIFE": 23,
+        "KOREAN": 23,
+        "MATH": 31,
+        "RIGHT_LIFE": 17,
+        "WISE_LIFE": 24
+      },
+      "E3": {
+        "ART": 24,
+        "ENGLISH": 34,
+        "KOREAN": 35,
+        "MATH": 51,
+        "MORAL": 45,
+        "MUSIC": 22,
+        "PE": 30,
+        "SCIENCE": 68,
+        "SOCIAL": 57
+      },
+      "E4": {
+        "ART": 24,
+        "ENGLISH": 34,
+        "KOREAN": 35,
+        "MATH": 51,
+        "MORAL": 45,
+        "MUSIC": 22,
+        "PE": 30,
+        "SCIENCE": 68,
+        "SOCIAL": 57
+      },
+      "E5": {
+        "ART": 29,
+        "ENGLISH": 34,
+        "KOREAN": 104,
+        "MATH": 86,
+        "MORAL": 51,
+        "MUSIC": 24,
+        "PE": 41,
+        "PRACTICAL": 117,
+        "SCIENCE": 115,
+        "SOCIAL": 87
+      },
+      "E6": {
+        "ART": 29,
+        "ENGLISH": 34,
+        "KOREAN": 105,
+        "MATH": 65,
+        "MORAL": 51,
+        "MUSIC": 24,
+        "PE": 41,
+        "PRACTICAL": 117,
+        "SCIENCE": 114,
+        "SOCIAL": 94
+      }
+    },
+    "counts": {
+      "terms": 1210,
+      "generated_from_all_elementary_standards": 1246,
+      "preserved_enriched_56": 436,
+      "decoder_full": 106,
+      "hanja_form": 813,
+      "lexical_ambiguous": 134,
+      "official_context_only": 95
+    }
+  },
+  "hide_projection": "BUILT",
+  "steps": [
+    {
+      "label": "PROJECT_INDEXED_MINING_PATTERNS",
+      "script": "LEARNING/projection/build-mining-learning-pattern-registry.js",
+      "exit_code": 0,
+      "duration_ms": 213
+    },
+    {
+      "label": "MINE_REFERENCE_HANJA",
+      "script": "LEARNING/projection/mine-hanja-reference-sources.js",
+      "exit_code": 0,
+      "duration_ms": 767
+    },
+    {
+      "label": "BUILD_PRELEARNED_56",
+      "script": "LEARNING/projection/build-prelearned-term-universe.js",
+      "exit_code": 0,
+      "duration_ms": 1006
+    },
+    {
+      "label": "BUILD_PRELEARNED_ELEMENTARY",
+      "script": "LEARNING/projection/build-elementary-profile-term-universe.js",
+      "exit_code": 0,
+      "duration_ms": 1389
+    },
+    {
+      "label": "BUILD_HIDE_PRELEARNED_PACKS",
+      "script": "LEARNING/projection/build-hide-prelearned-term-packs.js",
+      "exit_code": 0,
+      "duration_ms": 1360
+    },
+    {
+      "label": "TEST_MINING_PATTERN_ROUTER",
+      "script": "LEARNING/projection/mining-learning-pattern-router.test.js",
+      "exit_code": 0,
+      "duration_ms": 159
+    },
+    {
+      "label": "TEST_GRADE_AWARE_SELECTOR",
+      "script": "LEARNING/pedagogy/grade-aware-term-selector.test.js",
+      "exit_code": 0,
+      "duration_ms": 188
+    },
+    {
+      "label": "TEST_PRELEARNED_E2E",
+      "script": "LEARNING/verification/prelearned-term-universe.e2e.test.js",
+      "exit_code": 0,
+      "duration_ms": 279
+    },
+    {
+      "label": "TEST_TERM_ENDPOINT",
+      "script": "LEARNING/transport/term-recommendation-http-endpoint.test.js",
+      "exit_code": 0,
+      "duration_ms": 197
+    },
+    {
+      "label": "TEST_HIDE_TERM_LOADER",
+      "script": "../Hide & Seek/tools/test-learning-term-loader-v1.cjs",
+      "exit_code": 0,
+      "duration_ms": 240
+    },
+    {
+      "label": "TEST_HIDE_TERM_DECODER",
+      "script": "../Hide & Seek/tools/test-term-decoder-v1.cjs",
+      "exit_code": 0,
+      "duration_ms": 360
+    }
+  ],
+  "state": "PASS"
+}

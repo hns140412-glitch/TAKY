@@ -1,0 +1,108 @@
+{
+  "schema": "TAKY_AI_OPEN_QUEST_CURRENT_V1",
+  "generated_at": "2026-10-06T03:56:56.994978+00:00",
+  "status": "WAITING_FOR_REAL_EVIDENCE",
+  "learning_total": 56,
+  "adopted_tested": 44,
+  "open_total": 12,
+  "q3": {
+    "count": 3,
+    "items": [
+      {
+        "learning_id": "AI-LRN-BUDGET-AWARE-MODEL-TIERING",
+        "required_evidence": "representative task with baseline/metrics",
+        "hypothesis": "Compare all-premium routing vs judgment-premium/mechanical-cheaper routing."
+      },
+      {
+        "learning_id": "AI-LRN-INTENT-CONSTRAINTS-SUCCESS-OVER-UNNEEDED-STEPS",
+        "required_evidence": "representative task with baseline/metrics",
+        "hypothesis": "Compare intent+constraints+success criteria with overspecified procedure."
+      },
+      {
+        "learning_id": "AI-LRN-SURFACE-SELECTION-BY-JOB-DIMENSION",
+        "required_evidence": "representative task with baseline/metrics",
+        "hypothesis": "Route comparable tasks by immediacy/context/recurrence/external capability."
+      }
+    ]
+  },
+  "q4": {
+    "count": 4,
+    "items": [
+      {
+        "learning_id": "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+        "required_evidence": "observable learner response/retrieval outcome",
+        "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone."
+      },
+      {
+        "learning_id": "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+        "required_evidence": "observable learner response/retrieval outcome",
+        "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone."
+      },
+      {
+        "learning_id": "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+        "required_evidence": "observable learner response/retrieval outcome",
+        "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone."
+      },
+      {
+        "learning_id": "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING",
+        "required_evidence": "observable learner response/retrieval outcome",
+        "acceptance": "Apply in a bounded learning flow; measure learner response/retrieval, not presentation alone."
+      }
+    ]
+  },
+  "q5": {
+    "count": 5,
+    "items": [
+      {
+        "learning_id": "AI-LRN-PROMPT-MACRO-NOT-NATIVE",
+        "required_evidence": "current primary/upstream verification when a real decision depends on the claim"
+      },
+      {
+        "learning_id": "AI-LRN-MEMORY-NEED-DOES-NOT-VALIDATE-TOOL",
+        "required_evidence": "current primary/upstream verification when a real decision depends on the claim"
+      },
+      {
+        "learning_id": "AI-LRN-MCP-DOES-NOT-REPLACE-API",
+        "required_evidence": "current primary/upstream verification when a real decision depends on the claim"
+      },
+      {
+        "learning_id": "AI-LRN-MEMORY-TOOL-IS-SEPARATE-FROM-MEMORY-PATTERN",
+        "required_evidence": "current primary/upstream verification when a real decision depends on the claim"
+      },
+      {
+        "learning_id": "AI-LRN-PERSONA-LIBRARY-IS-NOT-AUTONOMOUS-AGENT",
+        "required_evidence": "current primary/upstream verification when a real decision depends on the claim"
+      }
+    ]
+  },
+  "router_probes": {
+    "model_cost": [
+      "AI-LRN-BUDGET-AWARE-MODEL-TIERING"
+    ],
+    "instruction_ablation": [
+      "AI-LRN-INTENT-CONSTRAINTS-SUCCESS-OVER-UNNEEDED-STEPS"
+    ],
+    "surface_routing": [
+      "AI-LRN-SURFACE-SELECTION-BY-JOB-DIMENSION"
+    ],
+    "learning_response": [
+      "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+      "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+      "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+      "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING"
+    ],
+    "verify_on_need": [
+      "AI-LRN-PROMPT-MACRO-NOT-NATIVE",
+      "AI-LRN-MEMORY-NEED-DOES-NOT-VALIDATE-TOOL",
+      "AI-LRN-MCP-DOES-NOT-REPLACE-API",
+      "AI-LRN-MEMORY-TOOL-IS-SEPARATE-FROM-MEMORY-PATTERN",
+      "AI-LRN-PERSONA-LIBRARY-IS-NOT-AUTONOMOUS-AGENT"
+    ]
+  },
+  "guards": [
+    "NO_SYNTHETIC_PASS_WITHOUT_REQUIRED_EVIDENCE",
+    "OPEN_QUEST_MATCHING_IS_NON_BLOCKING",
+    "NO_REMOTE_CALL_JUST_TO_CLOSE_A_QUEST",
+    "NO_AUTO_PROMOTION"
+  ]
+}

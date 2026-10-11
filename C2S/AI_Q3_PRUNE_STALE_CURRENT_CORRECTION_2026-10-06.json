@@ -1,0 +1,23 @@
+{
+  "schema": "TAKY_AI_Q3_PRUNE_STALE_CURRENT_CORRECTION_V1",
+  "generated_at": "2026-10-06T03:17:05.890389+00:00",
+  "status": "PASS",
+  "learning_id": "AI-LRN-PRUNE-STALE-SCAFFOLDING",
+  "prior_outcome_event_id": "GLE-8325698859c50ac0d8fdd205",
+  "current_outcome_event_id": "GLE-3b0664601300daa113c1d4bf",
+  "current_state": "PASS_SECURITY_REVIEW_REQUIRED",
+  "growth_created": false,
+  "receipt": {
+    "ok": true,
+    "errors": [],
+    "appended": true,
+    "idempotent": false,
+    "event_id": "GLE-3b0664601300daa113c1d4bf",
+    "utility_projection": {
+      "attempted": true,
+      "ok": true,
+      "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+      "source_count": 0
+    }
+  }
+}

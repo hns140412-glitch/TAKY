@@ -1,0 +1,67 @@
+{
+  "schema": "TAKY_AI_CURRENT_QUEST_RESUME_V1",
+  "generated_at": "2026-10-06T04:21:45.605728+00:00",
+  "authority_refs": [
+    "CURRENT/DATA/AI_LEARNING_PROJECTION.json",
+    "CURRENT/DATA/AI_LEARNING_QUEST_QUEUE.json",
+    "CURRENT/DATA/AI_BOUNDED_EXPERIMENT_QUEUE.json",
+    "CURRENT/DATA/AI_DOMAIN_APPLICATION_QUEUE.json",
+    "CURRENT/DATA/AI_VERIFY_ON_NEED_QUEUE.json",
+    "C2S/AI_LEARNING_VALIDATE_ADOPT_RESULT_2026-10-06.json",
+    "CURRENT/DATA/AI_Q3_CURRENT.json",
+    "C2S/AI_LEARNING_QUEST_Q3_RESULT_2026-10-06.json",
+    "C2S/AI_LEARNING_QUEST_Q3_RESULT_R2_2026-10-06.json",
+    "C2S/AI_LEARNING_QUEST_Q4_PROMPT_DOMAIN_RESULT_2026-10-06.json",
+    "CURRENT/DATA/NOTION_POST_COLLECT_PROMPT_CONTRACT.json",
+    "C2S/AI_LEARNING_QUEST_Q4_EXISTING_AND_INSTALL_RESULT_2026-10-06.json",
+    "C2S/AI_LEARNING_QUEST_Q4_COVERAGE_RESULT_2026-10-06.json",
+    "CURRENT/DATA/INSTALLATION_GUIDE_CONTRACT_TEMPLATE.json",
+    "C2S/AI_Q3_PRUNE_STALE_SECURITY_REVIEW_RESULT_2026-10-06.json",
+    "CURRENT/DATA/AI_OPEN_QUEST_CURRENT.json",
+    "ENFORCEMENT/ai_open_quest_router.py",
+    "ENFORCEMENT/runtime_orchestrator.py",
+    "C2S/AI_ARTIFACT_MANUAL_QUEST_RESULT_2026-10-06.json",
+    "C2S/AI_DESIGN_TASTE_SOURCE_QUALITY_RESULT_2026-10-06.json",
+    "C2S/AI_Q3_LOCAL_EDIT_INTERFACE_RESULT_2026-10-06.json",
+    "C2S/AI_Q3_CURRENT_RECONCILIATION_2026-10-06.json"
+  ],
+  "state": {
+    "learning_count": 56,
+    "all_classified": true,
+    "adopted_tested_total": 44,
+    "bounded_experiments": 14,
+    "domain_application_tests": 18,
+    "verify_on_need": 5,
+    "active_next": "AUTO_ROUTE_REAL_TASK -> OPEN_Q3/Q4/Q5 -> TEST -> OUTCOME -> GROWTH",
+    "applied_guards": [
+      "AI_ADOPTION_GATE",
+      "AI_SUCCESS_EVIDENCE_GATE",
+      "AI_COST_GUARD",
+      "AI_REVIEW_TERMINATION_GATE",
+      "AI_COMPUTER_USE_GATE"
+    ],
+    "q3_pass_adopted": 11,
+    "q3_security_review_required": 0,
+    "q3_inconclusive": 0,
+    "q3_waiting_representative_task": 3,
+    "q4_domain_pass_adopted": 14,
+    "q4_domain_remaining": 4,
+    "open_total": 12,
+    "quest_router_active": true,
+    "quest_router_mode": "NON_BLOCKING_ADVISORY",
+    "verify_on_operational_need": 5
+  },
+  "open_quest_refs": {
+    "bounded_experiments": "CURRENT/DATA/AI_BOUNDED_EXPERIMENT_QUEUE.json",
+    "domain_application": "CURRENT/DATA/AI_DOMAIN_APPLICATION_QUEUE.json",
+    "verify_on_need": "CURRENT/DATA/AI_VERIFY_ON_NEED_QUEUE.json",
+    "current": "CURRENT/DATA/AI_OPEN_QUEST_CURRENT.json"
+  },
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "retrieve_only_relevant_detail": true
+  }
+}

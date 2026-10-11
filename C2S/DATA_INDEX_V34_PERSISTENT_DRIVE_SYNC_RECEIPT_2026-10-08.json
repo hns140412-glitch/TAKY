@@ -1,0 +1,42 @@
+{
+  "schema": "TAKY_DATA_INDEX_V34_PERSISTENT_DRIVE_SYNC_RECEIPT_V1",
+  "generated_at": "2026-10-08T14:53:55.719753+00:00",
+  "status": "PASS",
+  "source_index": {
+    "filename": "DATA_SOURCE_INDEX_2026-10-08_V12.json",
+    "drive_file_id": "1hzDcCRViFeudApUpsOdhUDX5wRuSd3DW",
+    "sha256": "cda60e5a9221cbee6b129c5c91b47aaaebe33896d06ce70f0c18df289880dd85",
+    "source_count": 885,
+    "unique_source_ids": 885,
+    "connector_readback_verified": true
+  },
+  "utilization_index": {
+    "filename": "DATA_UTILIZATION_INDEX_2026-10-08_V34.json",
+    "drive_file_id": "12EZbqv7y7KJKqjE2ndlzuWH5PcgpRpC1",
+    "sha256": "b99aad0ca2934fe72789a2640bb4f6ba2689921c4259ea61cf70760cfecf3a9d",
+    "source_count": 885,
+    "unique_source_ids": 885,
+    "source_index_id_bound": "1hzDcCRViFeudApUpsOdhUDX5wRuSd3DW",
+    "connector_readback_verified": true
+  },
+  "folded_refs": [
+    "REF-087",
+    "REF-088",
+    "REF-089",
+    "REF-090",
+    "REF-092",
+    "REF-093",
+    "REF-094",
+    "REF-095"
+  ],
+  "hold_excluded": [
+    "REF-091"
+  ],
+  "guards": {
+    "old_v11_v31_overwritten": false,
+    "canonical_promotion": false,
+    "current_pointer_changed": false,
+    "deployment": false,
+    "paid_api_used": false
+  }
+}

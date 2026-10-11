@@ -1,0 +1,40 @@
+{
+  "schema": "TAKY_HIDE_TERM_AGE_GRADE_PRE_UI_EXECUTION_V1",
+  "date": "2026-10-07",
+  "scope": "PRE_UI_RUNTIME",
+  "result": "PASS",
+  "age_only_browser_case": {
+    "input": {"age": 11, "subject": "SCIENCE"},
+    "resolved": {
+      "resolution_source": "AGE",
+      "age": 11,
+      "grade": 5,
+      "school_stage": "E5",
+      "base_band": "UPPER_ELEMENTARY",
+      "effective_band": "UPPER_ELEMENTARY"
+    },
+    "browser_journey": ["TRACE","LINK","CORE","RECALL"],
+    "persistence_reload_readback": "PASS"
+  },
+  "runtime_cases": {
+    "age_grade_unknown": "FAIL_CLOSED",
+    "material_age_grade_conflict": "FAIL_CLOSED",
+    "age_11_without_grade": "E5",
+    "school_stage_E2": "LOWER_ELEMENTARY",
+    "school_stage_E4": "MIDDLE_ELEMENTARY",
+    "school_stage_E5": "UPPER_ELEMENTARY",
+    "E5_terms_to_E2": "REJECT_ABOVE_LEARNER_BAND",
+    "evidence_band_shift": "CLAMPED_TO_PLUS_MINUS_ONE_BAND",
+    "explicit_local_grade_vs_live_stage_conflict": "LIVE_REJECTED",
+    "age_only_live_stage_tolerance": "PLUS_MINUS_ONE_GRADE_WITHIN_SAME_BAND_ONLY"
+  },
+  "evidence": [
+    "Hide & Seek/tools/test-learning-term-loader-v1.cjs",
+    "Hide & Seek/tools/pre-ui-runtime-harness.html",
+    "Hide & Seek/hide-learning-term-loader-v1.js"
+  ],
+  "limitations": [
+    "Current prelearned official subject-term universe is populated for E5/E6; lower/secondary presentation rules are implemented and tested with synthetic/source-supported cards, but full official term packs for those stages are not yet populated.",
+    "Age is a grade anchor when explicit grade is absent; explicit grade/stage retains curriculum eligibility authority when compatible."
+  ]
+}

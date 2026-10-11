@@ -1,0 +1,155 @@
+{
+  "schema": "TAKY_AI_RECOVERED_HOLDS_INDEX_OWNER_RECEIPT_V1",
+  "generated_at": "2026-10-05T22:35:53.776023+00:00",
+  "status": "PASS_LOCAL_INCREMENTAL",
+  "input": "TAKY-SOURCE-VAULT/reports/AI_RECOVERED_HOLDS_RESULT_20261006.json",
+  "indexed_count": 16,
+  "learning_eligible_count": 3,
+  "merges": [
+    {
+      "title": "엔비디아가 공짜로 푼 AI 모델 100개+ 완전 입문 가이드",
+      "url": "https://neat-product-c0f.notion.site/AI-100-38e19ffaaaf18046a8edc68c65684637",
+      "target": "AIREF:P1:004",
+      "relation": "SAME_NVIDIA_MODEL_CATALOG_TOPIC"
+    },
+    {
+      "title": "ChatGPT 이미지 치트키 100개 총정리",
+      "url": "https://fieldby.notion.site/ChatGPT-100-3ced730b395381dda7b2c5a8d3516839",
+      "target": "REF-093",
+      "relation": "USER_DEFINED_PROMPT_MACRO_FAMILY"
+    },
+    {
+      "title": "[프롬프트는 꼭 길게 써야될까?]",
+      "url": "https://maize-lipstick-ed8.notion.site/5d5ff898004a82549333013ef7924f16",
+      "target": "REF-093",
+      "relation": "USER_DEFINED_PROMPT_MACRO_FAMILY"
+    },
+    {
+      "title": "The Agency — AI 직원 270명을 내 코딩 툴에 통째로 들여놓기",
+      "url": "https://wandering-mile-86e.notion.site/The-Agency-AI-270-3c998dec8eed81a48481f2e8a8ea7d87",
+      "target": "AIREF:P1:020",
+      "relation": "SAME_AGENCY_AGENTS_REPOSITORY_FAMILY"
+    }
+  ],
+  "checks": [
+    {
+      "source_id": "AIREF:REC:001",
+      "ok": true,
+      "content_hash": "08e665ae776f6f8ee00034da4e7b14f0a3ccb554fef3d3444bc0cfc3bd8085f2",
+      "text_chars": 5744,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:REC:002",
+      "ok": true,
+      "content_hash": "2b44ec79ce9bf6b2f675f39aa7b3a2e089947755ce532eca7b711bc3a86bfd1e",
+      "text_chars": 5752,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:003",
+      "ok": true,
+      "content_hash": "f9a7b89a367dc574973e8233c080333ae2566c1aaafbd4755b5e86487e04a97a",
+      "text_chars": 2014,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:004",
+      "ok": true,
+      "content_hash": "9eea11c14df739f22a093a78d5d1db42ba0205e2c766f771e0bd8332e0d74c5c",
+      "text_chars": 3187,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:005",
+      "ok": true,
+      "content_hash": "fcafe8358f08c61c41701d4f3a158260b56d570eefc1701f18cd4fac66b6d167",
+      "text_chars": 2006,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:006",
+      "ok": true,
+      "content_hash": "8797dd79343d8d24869ef56c0b76538ec41f6d5304ef182a383b716f261cd39b",
+      "text_chars": 9705,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:007",
+      "ok": true,
+      "content_hash": "41f739984f1d156426f590127074bdb01702280791f06d79c70a114312890bf1",
+      "text_chars": 2517,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:008",
+      "ok": true,
+      "content_hash": "e97317daacd337f6e0c1a48e671d3ed9f712208d3e57ba507805d55ab5218551",
+      "text_chars": 7196,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:009",
+      "ok": true,
+      "content_hash": "136574ecb780507f62836a4487b7a981b884e8f3664dd404572f28f04e7cb97c",
+      "text_chars": 4456,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:010",
+      "ok": true,
+      "content_hash": "cbcc50a61e8290eabfd3db4ece8df1dd5aedf8c9eb23d7dd012f1bbd02861b67",
+      "text_chars": 2849,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:REC:011",
+      "ok": true,
+      "content_hash": "3949aa6863e298e12713a2b39760df476894f97d6cb25c4bef32e525ad331140",
+      "text_chars": 3075,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:012",
+      "ok": true,
+      "content_hash": "e294d9219649f8c03aef0ba5e836c2416848ce1af0f6dbd221f941fc62baaeb1",
+      "text_chars": 3561,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:013",
+      "ok": true,
+      "content_hash": "b4d69a621b295509150f6de7968cf7edeb1b1a96163a45bbf6cbbbe524136a70",
+      "text_chars": 3709,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:014",
+      "ok": true,
+      "content_hash": "e28a88f316dce177788975d78af1dc3ac49291c7c992fb6905154472964d1d46",
+      "text_chars": 14933,
+      "learning_eligible": false
+    },
+    {
+      "source_id": "AIREF:REC:015",
+      "ok": true,
+      "content_hash": "9999de24e6639ae051f685c7a64a7e2318c7ed61c9c27ad8fdea1f5f5f83b326",
+      "text_chars": 3419,
+      "learning_eligible": true
+    },
+    {
+      "source_id": "AIREF:REC:016",
+      "ok": true,
+      "content_hash": "65d4857de16ba963a5d95acda845b8d0dc53e55e26d723a6226a24b43d881811",
+      "text_chars": 1807,
+      "learning_eligible": false
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "global_ref_allocation": false,
+    "authority_transfer": false,
+    "main_merge": false,
+    "deployment": false
+  }
+}

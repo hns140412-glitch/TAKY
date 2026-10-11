@@ -1,0 +1,40 @@
+{
+  "schema": "TAKY_ASSET_DISTRIBUTION_MANIFEST_V1",
+  "package_id": "READY_HOME_UI_E2E_20261007",
+  "package_version": "2026-10-07.1",
+  "generated_at": "2026-10-07T21:18:00+09:00",
+  "source_authority": "HNS_DRIVE_APPROVED_ASSET_MASTER",
+  "distribution_authority": "SIEZEALL_DRIVE_APPROVED_PACKAGE",
+  "runtime_consumer": "DEVICE_VERIFIED_CACHE",
+  "required_slots": [
+    "READY_HOME_MASTER"
+  ],
+  "assets": [
+    {
+      "slot_id": "READY_HOME_MASTER",
+      "asset_id": "READY_HOME_MASTER_APPROVED",
+      "master_ref": "gdrive:hns:18QuSt1V3wJd0bBwFm1PYDfGqmDVC3irI",
+      "master_revision": "modified:2026-10-06T09:54:10.703Z",
+      "source_sha256": "b76efe0d451aca6bdfaa870a76443d9d6fa536947c39a4b5e1424ebdfc693c76",
+      "distribution_ref": "gdrive:siezeall:1fODyURyG2NYEcCR07TF1nOL6vOGXQCSO",
+      "distribution_sha256": "b76efe0d451aca6bdfaa870a76443d9d6fa536947c39a4b5e1424ebdfc693c76",
+      "mime_type": "image/png",
+      "release_scope": "PUBLIC_RELEASE_SAFE",
+      "consumer_apps": [
+        "READY_SET"
+      ],
+      "status": "APPROVED_FOR_DISTRIBUTION",
+      "device_cache_ref": "%LOCALAPPDATA%/TAKY/asset-cache/READY_HOME/READY_HOME_MASTER_APPROVED.png",
+      "device_cache_sha256": "b76efe0d451aca6bdfaa870a76443d9d6fa536947c39a4b5e1424ebdfc693c76"
+    }
+  ],
+  "evidence": {
+    "source_file_size_bytes": 2387381,
+    "distribution_file_size_bytes": 2387381,
+    "source_distribution_hash_equal": true,
+    "device_cache_hash_equal": true,
+    "distribution_folder_id": "111nmMqJvFfwKYoxaKBGmJWWMoqvCck0s",
+    "distribution_visibility_observed": "ANYONE_WITH_LINK_WRITER",
+    "netlify_used": false
+  }
+}

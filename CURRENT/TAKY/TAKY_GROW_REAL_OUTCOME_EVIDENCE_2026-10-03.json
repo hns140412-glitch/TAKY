@@ -1,0 +1,65 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-03",
+  "status": "SUPERSEDED",
+  "superseded_by": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-04_R2.json",
+  "candidate": {
+    "target_state": "CURRENT_BEST",
+    "strategy": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "evidence_refs": [
+      "READY_PR_144_RUN_36963641613",
+      "READY_PR_145_RUN_36985826916",
+      "SNAP_PR_35_RUN_36960089271"
+    ]
+  },
+  "outcomes": [
+    {
+      "verification_state": "VERIFIED",
+      "verification_authority": "GITHUB_ACTIONS",
+      "context_key": "READY_TEST_SYNTAX",
+      "repository": "Ready-Set",
+      "pull_request": 144,
+      "workflow_run": 36963641613,
+      "workflow_conclusion": "success",
+      "scope": "minimal test syntax correction; no product logic change"
+    },
+    {
+      "verification_state": "VERIFIED",
+      "verification_authority": "GITHUB_ACTIONS",
+      "context_key": "READY_RUNTIME_COMPLETION",
+      "repository": "Ready-Set",
+      "pull_request": 145,
+      "workflow_run": 36985826916,
+      "workflow_conclusion": "success",
+      "scope": "localized runtime completion-path correction; no product logic change"
+    },
+    {
+      "verification_state": "VERIFIED",
+      "verification_authority": "GITHUB_ACTIONS",
+      "context_key": "SNAP_TRANSIENT_CDP_RECOVERY",
+      "repository": "Snap-Pop",
+      "pull_request": 35,
+      "workflow_run": 36960089271,
+      "workflow_conclusion": "success",
+      "scope": "bounded retry for observed transient failure; unrelated failures remain fail-fast"
+    }
+  ],
+  "regressions": [
+    {"status":"PASS","ref":"READY_PR_144"},
+    {"status":"PASS","ref":"READY_PR_145"},
+    {"status":"PASS","ref":"SNAP_PR_35"}
+  ],
+  "review_feedback_guard": {
+    "repository": "Hide-Seek",
+    "pull_request": 22,
+    "feedback_ref": "issuecomment_5868496983",
+    "classification": "VISUAL_QA_FAIL_DESPITE_LOGIC_CI_PASS",
+    "effect": "BLOCK_SCOPE_PROMOTION_UNTIL_CORRECTED",
+    "correction_ref": "issuecomment_5869206397"
+  },
+  "source_boundary": {
+    "synthetic": false,
+    "remote_write": false,
+    "promotion_authorized": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "TAKY_DATA_INDEX_V33_NOTION_INDEX_OWNER_RECEIPT_V1",
+  "date": "2026-10-05",
+  "status": "PASS_LOCAL_INCREMENTAL",
+  "input_mining_sha256": "d8414495ff1d3a3fc45d90a8e1141d00182f0cd4283c4505060ce83f6d786593",
+  "parent_index_sha256": "7a281b658167092b05728eb5c5e4e2f25a42676506710b0c2d206a95b6b7b10f",
+  "index_delta_sha256": "140a905048a22c71e6888d9da0bb69f3ac206beeff980005c484e106edc5a8d7",
+  "refs": [
+    "REF-093",
+    "REF-094"
+  ],
+  "indexed": [
+    "REF-093",
+    "REF-094"
+  ],
+  "merge_only": [
+    "DIGIT->REF-077..080"
+  ],
+  "required_fields_pass": true,
+  "duplicate_ids_with_parent": [],
+  "guards": {
+    "canonical_promotion": false,
+    "current_pointer_changed": false,
+    "drive_sync": false,
+    "main_merge": false,
+    "deployment": false,
+    "paid_api_used": false
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "TAKY_HIDE_TERM_PRE_UI_BROWSER_E2E_V1",
+  "date": "2026-10-07",
+  "environment": {
+    "browser": "Google Chrome headless",
+    "url": "http://127.0.0.1:8765/tools/pre-ui-runtime-harness.html?school_stage=E5&subject=과학",
+    "final_ui_locked": false,
+    "measurement_scope": "PRE_UI_RUNTIME"
+  },
+  "result": "PASS",
+  "phase": "READBACK_AFTER_RELOAD",
+  "learner_context": {
+    "school_stage": "E5",
+    "subject": "SCIENCE"
+  },
+  "executed_modes": ["TRACE", "LINK", "CORE", "RECALL"],
+  "phase1": {
+    "bridge_events": 5,
+    "exposure_events": 2,
+    "retrieval_events": 3,
+    "recall_context_source": "EXAMPLE"
+  },
+  "persistence": {
+    "reload_performed": true,
+    "evidence_count_after_reload": 5,
+    "local_storage_readback": true,
+    "engine_owned_cards_restored": true,
+    "engine_projection_school_stage_after_reload": "E5"
+  },
+  "assertions": [
+    "Learning projection bound before interaction",
+    "TRACE reveal and self-report executed",
+    "LINK correct selection executed",
+    "CORE correct inference selection executed",
+    "RECALL target was masked in context",
+    "RECALL correct selection executed",
+    "TERM_DECODER_EXPOSURE emitted",
+    "RETRIEVAL_ATTEMPT_RESULT emitted for scored modes",
+    "State/evidence persisted and survived browser reload"
+  ],
+  "limits": [
+    "This is pre-UI functional browser execution, not final visual/touch acceptance.",
+    "No final responsive-layout/readability/touch-target judgment is made.",
+    "No deployment or production mobile environment was used."
+  ]
+}

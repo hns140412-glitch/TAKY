@@ -1,0 +1,60 @@
+{
+  "schema": "TAKY_AI_LEARNING_QUEST_CURRENT_RESULT_V2",
+  "generated_at": "2026-10-06T03:35:49.930861+00:00",
+  "status": "PASS_LOCAL",
+  "learning_total": 56,
+  "adopted_tested_total": 36,
+  "current": {
+    "q3_pass_adopted": 7,
+    "q3_inconclusive": 1,
+    "q3_waiting_representative_task": 6,
+    "q3_security_review_required": 0,
+    "q4_pass_adopted": 10,
+    "q4_remaining_real_evidence_required": 8,
+    "verify_on_operational_need": 5
+  },
+  "quest_router": {
+    "active": true,
+    "mode": "NON_BLOCKING_ADVISORY",
+    "artifact_example_selected": [
+      "AI-LRN-LOCAL-EDIT-BEFORE-REGENERATION",
+      "AI-LRN-TRANSFORM-EXISTING-ASSET-BEFORE-RECREATE",
+      "AI-LRN-HUMAN-EDITABLE-OUTPUT",
+      "AI-LRN-DESIGN-TASTE-AS-EXPLICIT-CONSTRAINT",
+      "AI-LRN-SOURCE-ASSET-QUALITY-SETS-OUTPUT-CEILING"
+    ],
+    "learning_example_selected": [
+      "AI-LRN-FLUENCY-INCLUDES-DISCERNMENT-AND-RESPONSIBILITY",
+      "AI-LRN-LITERACY-BEFORE-TOOL-SPEED",
+      "AI-LRN-MENTAL-MODEL-OF-CAPABILITIES-AND-LIMITS",
+      "AI-LRN-MULTIPLE-REPRESENTATIONS-FOR-LEARNING"
+    ],
+    "auto_adoption": false
+  },
+  "newly_verified": [
+    "INSTALL-DOC-OBSERVABILITY",
+    "DESIGN-PIPELINE-NOT-PROMPT-ONLY",
+    "DESIGN-REFERENCE-PLUS-REVIEW",
+    "LEVEL-ADAPTIVE-AI-LEARNING",
+    "STUDY-PASSIVE-TO-ACTIVE-RETRIEVAL",
+    "PRUNE-STALE-SCAFFOLDING after security review"
+  ],
+  "validation": {
+    "python_targeted": "143/143 PASS",
+    "learning_js": "4/4 PASS",
+    "claude_subscription_auth": "6/6 + LIVE PASS",
+    "prompt_contract": "PASS",
+    "post_collect_validate_only": "PASS/NO_ACTION current delta empty",
+    "git_diff_check": "PASS",
+    "runtime_quest_advisory": "PASS"
+  },
+  "guards": {
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false,
+    "quest_router_nonblocking": true,
+    "real_outcome_required_before_growth": true
+  }
+}

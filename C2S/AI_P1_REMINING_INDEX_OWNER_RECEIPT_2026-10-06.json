@@ -1,0 +1,412 @@
+{
+  "schema": "TAKY_AI_P1_REMINING_INDEX_OWNER_RECEIPT_V1",
+  "generated_at": "2026-10-05T22:30:22.123057+00:00",
+  "status": "PASS_LOCAL_INCREMENTAL",
+  "input": "TAKY-SOURCE-VAULT/reports/AI_P1_REMINING_RESULT_20261006.json",
+  "ai_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json",
+  "indexed_count": 24,
+  "learning_eligible_count": 11,
+  "merges": [
+    {
+      "title": "답변 퀄리티 100배 달라지는 챗GPT 명령어 99개",
+      "url": "https://morning-yellowhorn-4d1.notion.site/100-GPT-99-3df0ad91d3c58061afaaec017329b0d4",
+      "target": "REF-093",
+      "relation": "PROMPT_MACRO_CATALOG_FAMILY"
+    },
+    {
+      "title": "클로드가 유튜브·레딧·깃허브를 무료로 긁어오게 만드는 도구 · 게으른 빌더",
+      "url": "https://lazyowen.com/guides/agent-reach",
+      "target": "REF-094",
+      "relation": "AGENT_REACH_SAME_TOOL_FAMILY"
+    },
+    {
+      "title": "힉스필드 프리셋 전체 62개 + 세팅법 (ChatGPT Plugin)",
+      "url": "https://abounding-helmet-0e4.notion.site/62-ChatGPT-Plugin-3d073c7b15ad81a591d6e82a340874be",
+      "target": "AIREF:P0:009",
+      "relation": "HIGGSFIELD_SAME_VENDOR_TOOL_FAMILY"
+    },
+    {
+      "title": "챗GPT 비밀 코드: 프롬프트 단축키 100가지 | Notion",
+      "url": "https://app.notion.com/p/GPT-100-3b71061c8a638186955cc61c6f9572d1",
+      "target": "REF-093",
+      "relation": "PROMPT_MACRO_CATALOG_FAMILY"
+    }
+  ],
+  "holds": [
+    {
+      "title": "바이브코딩 앱 UI 용어 정리본 | Notion",
+      "url": "https://app.notion.com/p/UI-3dd063ed09fd80a285b0f4d8e8f0d2ed",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "클로드를 웹 외주팀으로 만드는 무료 스킬",
+      "url": "https://sparkly-balance-aea.notion.site/3dbe2f0323f580aa8d29fb86cd384205",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "내 정보 노출 점검 · 복붙 프롬프트 3",
+      "url": "https://nifty-licorice-663.notion.site/3-3d4fd99f0e5f81368ad2ecc0f8f8aac6",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "GPT프롬프트 - OneDrive",
+      "url": "https://onedrive.live.com/?id=8A91625842C934F8%21s74f3aa406e9e4592b93f4057b8737907&cid=8A91625842C934F8&spopath=%2Fpersonal%2F8a91625842c934f8%2FDocuments%2FDesktop%2FGPT%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%2F%5B4%2C900%EC%9B%90%5D+%EA%B3%A0%EC%86%8C%EC%9E%A5_%EC%B4%88%EC%95%88_%EC%9E%91%EC%84%B1_%28%EC%82%AC%EA%B8%B0_%EB%AA%85%EC%98%88%ED%9B%BC%EC%86%90_%EC%97%85%EB%AC%B4%EB%B0%A9%ED%95%B4_%EB%93%B1%29..txt&listurl=%2Fpersonal%2F8a91625842c934f8%2FDocuments&ithint=file%2Ctxt&e=oS2IUn&migratedtospo=true&parent=%2Fpersonal%2F8a91625842c934f8%2FDocuments%2FDesktop%2FGPT%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3QvYy84YTkxNjI1ODQyYzkzNGY4L0lRQkFxdk4wbm02U1Jia19RRmU0YzNrSEFTeklmdnAtZ2FtYm9SNGMzWEdaam8wP2U9b1MySVVuJmZiY2xpZD1QQVZFUkZXQVVQUTl4d1pHOW1BbVprYVdRV1VPSURGbjZOSVZJOFVKZVI3TE5ZRHl4eTdyWGo5V1Y0ZEc0RFlXVnRBakV3QUhOeWRHTUdZWEJ3WDJsa0R6RXlOREF5TkRVM05ESTROelF4TkFBQnAzeUJlR1VETjhRLVZlTmR5a1hxQjRmX3pXY3o0WmRYZ2RCU1RJR2dPUjlaaHpMSFg1dVIteTBPaTVCYV9hZW1fZTRfbS1CY0ZiYjBaaURGamJPRmo5UQ&ga=1",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "ChatGPT 이미지 치트키 100개 총정리",
+      "url": "https://fieldby.notion.site/ChatGPT-100-3ced730b395381dda7b2c5a8d3516839",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "[프롬프트는 꼭 길게 써야될까?]",
+      "url": "https://maize-lipstick-ed8.notion.site/5d5ff898004a82549333013ef7924f16",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "SEO 대행사 없이 내 사이트 최적화 (무료 AI 스킬 설치 가이드)",
+      "url": "https://neat-product-c0f.notion.site/SEO-AI-3d019ffaaaf1814f9a1be8a800a6fe3a",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "GPT6 활용가이드 및 비밀코드100개",
+      "url": "https://grand-count-2aa.notion.site/GPT6-100-3d250157ef13803c80faf9e73faa8880",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "The Agency — AI 직원 270명을 내 코딩 툴에 통째로 들여놓기",
+      "url": "https://wandering-mile-86e.notion.site/The-Agency-AI-270-3c998dec8eed81a48481f2e8a8ea7d87",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "이번 업데이트로 새로워진 챗GPT 활용법 (세팅 & 활용 가이드)",
+      "url": "https://zircon-yard-378.notion.site/GPT-3b4eaba9e47c8115a875e23ddcecf075",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "과잉 지정 체크리스트 — 클로드 제작자가 말한 지시 줄이는 법",
+      "url": "https://abounding-helmet-0e4.notion.site/3b073c7b15ad8164b547fb5c92521f44",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "AI 팩폭 관상 리포트 받아보기",
+      "url": "https://neat-product-c0f.notion.site/AI-38219ffaaaf180fbb777ff70234330ed",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "4X4 AI 머리 스타일 제작",
+      "url": "https://neat-product-c0f.notion.site/4X4-AI-2ee19ffaaaf180ea9409cda71f1760df",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "클로드·ChatGPT 연동 앱 TOP5",
+      "url": "https://neat-product-c0f.notion.site/ChatGPT-TOP5-3b119ffaaaf1800fa0b2c36624edde88",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "아기 사진 1장으로 만드는 프롬프트 7종",
+      "url": "https://neat-product-c0f.notion.site/1-7-3b019ffaaaf1818da0dfd2cee098b3c3",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "모션그래픽 AI 무료 툴 시작 가이드",
+      "url": "https://neat-product-c0f.notion.site/AI-3c619ffaaaf181f58959e17128e30c75",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "하루 10분 AI 감 안 죽게 해주는 곳 7",
+      "url": "https://closed-cup-d46.notion.site/10-AI-7-3c13c1398b0b814bbd2afa83021aa904",
+      "existing": null,
+      "status": 200
+    },
+    {
+      "title": "AI 직원 생성하기 | BrandyAction EDU",
+      "url": "https://brandyaction-edu.com/classes/product-cf6fb7a4-6eb9-41ea-a27a-02201bf07d1b",
+      "reason": "BODY_SHELL_ONLY",
+      "text_chars": 434,
+      "learning_eligible": false
+    }
+  ],
+  "checks": [
+    {
+      "source_id": "AIREF:P1:001",
+      "ok": true,
+      "content_hash": "8645af57137f880b47e932101a503b424cc94adb44874391c44577483a722eba",
+      "text_chars": 2238,
+      "learning_eligible": true,
+      "domain_facets": [
+        "AI_EDUCATION",
+        "LEARNING"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:002",
+      "ok": true,
+      "content_hash": "dcac2703e893fe506ee2b657a8981c7f502a06fad8e18477dbb6a9be92336969",
+      "text_chars": 6313,
+      "learning_eligible": true,
+      "domain_facets": [
+        "DESIGN",
+        "DESIGN_GATE"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:003",
+      "ok": true,
+      "content_hash": "e1fe2e6612187fbd12c0dcf3365da6108b5f625d9e7ba4084f634b353f04e85c",
+      "text_chars": 8419,
+      "learning_eligible": true,
+      "domain_facets": [
+        "MEMORY",
+        "CONTEXT"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:004",
+      "ok": true,
+      "content_hash": "e4e17bbb936b19a62a26d41e5ce47d1e8d2b855ac62a5e179e43008ef5bd027a",
+      "text_chars": 4656,
+      "learning_eligible": false,
+      "domain_facets": [
+        "MODEL_CATALOG"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:005",
+      "ok": true,
+      "content_hash": "13e33893c443df57f6fee5221494477c127c3dbc777fdb3ab8888988310bbabc",
+      "text_chars": 10589,
+      "learning_eligible": true,
+      "domain_facets": [
+        "DESIGN",
+        "DESIGN_GATE"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:006",
+      "ok": true,
+      "content_hash": "86ca536a971851cedae554d45a75ff3fda3089a0f085a14cf177577f03196c8f",
+      "text_chars": 3308,
+      "learning_eligible": true,
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:007",
+      "ok": true,
+      "content_hash": "a4938c28da7bfa67b0f4c825eb06df1b2edb4172d8d6cb7627fb28314985b8d0",
+      "text_chars": 67869,
+      "learning_eligible": false,
+      "domain_facets": [
+        "GLOSSARY",
+        "VIBE_CODING"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:008",
+      "ok": true,
+      "content_hash": "9cf6a3091c8ccf049253bf2b5d190f68eac6d4f881d4ccc939aa7b9660f85629",
+      "text_chars": 2864,
+      "learning_eligible": true,
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:009",
+      "ok": true,
+      "content_hash": "84d3d7f6b98facaea38c81666d69e945b1a1bd04abb1fd77bf51390c74b2833c",
+      "text_chars": 2396,
+      "learning_eligible": false,
+      "domain_facets": [
+        "IMAGE_GENERATION"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:010",
+      "ok": true,
+      "content_hash": "edfbf86b46f8c53b02dabeb7d051224057bf3e0e0668ccebfa35af60fb6133ae",
+      "text_chars": 8533,
+      "learning_eligible": false,
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "EDUCATION"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:011",
+      "ok": true,
+      "content_hash": "634f9ae31d10c9e498019975bb23d4a195d76338f4b7f9e75691ca72b9c179df",
+      "text_chars": 14380,
+      "learning_eligible": false,
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "WORK"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:012",
+      "ok": true,
+      "content_hash": "387480382995e7660f71160a67e5e911bbbefdc5fa0ab019662964c53846b1d4",
+      "text_chars": 12325,
+      "learning_eligible": false,
+      "domain_facets": [
+        "USE_CASE_CATALOG",
+        "WORK"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:013",
+      "ok": true,
+      "content_hash": "1b03912f7465ea9ab7bae311435891a03e275eed6456f8d9cc8327bb3acd54d0",
+      "text_chars": 1104,
+      "learning_eligible": true,
+      "domain_facets": [
+        "VIBE_CODING",
+        "UI"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:014",
+      "ok": true,
+      "content_hash": "cdb86af2f1ea430c847dbd030d704c93e63b9113948d7d40760e6a3b9a328544",
+      "text_chars": 2280,
+      "learning_eligible": false,
+      "domain_facets": [
+        "DEPLOYMENT",
+        "VIBE_CODING"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:015",
+      "ok": true,
+      "content_hash": "bf8b2c24ced218db18e47e2d177ccacdf75998fc9510458db2e8c3fdbc400cfa",
+      "text_chars": 1821,
+      "learning_eligible": true,
+      "domain_facets": [
+        "ARTIFACT_TRANSFORMATION",
+        "EDUCATION"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:016",
+      "ok": true,
+      "content_hash": "438f265409d63d2b89d8cc05a8ca3dd8d26b929f0fed0c06a09cab2f1c569bb8",
+      "text_chars": 1368,
+      "learning_eligible": false,
+      "domain_facets": [
+        "PROMPT_DESIGN"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:017",
+      "ok": true,
+      "content_hash": "244ebff074445ca0a1237a044522fb6a3128c1da049ea0483e652a493a892aa8",
+      "text_chars": 8031,
+      "learning_eligible": true,
+      "domain_facets": [
+        "LEARNING",
+        "STUDY"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:018",
+      "ok": true,
+      "content_hash": "9dc63beb384c2594ed90289a99ace976f0624413d9e59b6da579323127f9dcf7",
+      "text_chars": 2108,
+      "learning_eligible": false,
+      "domain_facets": [
+        "VIBE_CODING",
+        "PERSONAL_PRODUCTIVITY"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:019",
+      "ok": true,
+      "content_hash": "814e0483e0ad6c7673ca4ac15f664d148b487fb8e7f8685e3431b54c2598fb61",
+      "text_chars": 7019,
+      "learning_eligible": false,
+      "domain_facets": [
+        "PRODUCT_DESIGN",
+        "PERSONAL_PRODUCTIVITY"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:020",
+      "ok": true,
+      "content_hash": "d91a66b18b563d9c409ca3443aa42faa99b76a4e64efb0cecd63f3f8fd71a73a",
+      "text_chars": 2756,
+      "learning_eligible": true,
+      "domain_facets": [
+        "PERSONA_LIBRARY",
+        "AGENT_CATALOG"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:021",
+      "ok": true,
+      "content_hash": "59f998a5961cdda6c7ba9c32209e3b0651f37d2ff196b377209f624d183fd44a",
+      "text_chars": 2340,
+      "learning_eligible": false,
+      "domain_facets": [
+        "LEARNING_RESOURCES"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:022",
+      "ok": true,
+      "content_hash": "d0bc4bc5e6d9926caa3bfec7a3db2faf1ec0a48c7f6c43f76a80d4dd1f4a0031",
+      "text_chars": 1332,
+      "learning_eligible": true,
+      "domain_facets": [
+        "AI_FLUENCY",
+        "PRIMARY_VENDOR_EDUCATION"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:023",
+      "ok": true,
+      "content_hash": "c04e73d10986119da7a47c65187840226bdb9f7169db52c3aed2c896ba2fed16",
+      "text_chars": 3511,
+      "learning_eligible": false,
+      "domain_facets": [
+        "MARKETING",
+        "VENDOR_PRODUCT"
+      ]
+    },
+    {
+      "source_id": "AIREF:P1:024",
+      "ok": true,
+      "content_hash": "d701f895faefc695a7842482a6f6ef48f9d9c1fd16e8b40e09d7fdc5ebb5a734",
+      "text_chars": 1967,
+      "learning_eligible": false,
+      "domain_facets": [
+        "SKILL_CATALOG"
+      ]
+    }
+  ],
+  "guards": {
+    "canonical_promotion": false,
+    "global_ref_allocation": false,
+    "authority_transfer": false,
+    "main_merge": false,
+    "deployment": false
+  }
+}

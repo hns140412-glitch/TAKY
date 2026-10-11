@@ -1,0 +1,28 @@
+{
+  "schema": "TAKY_AI_OPEN_QUEST_ROUTER_RESULT_V1",
+  "generated_at": "2026-10-06T03:31:51.146120+00:00",
+  "status": "PASS_LOCAL",
+  "adopted_tested_total": 36,
+  "open_total": 20,
+  "q3_open": 7,
+  "q4_open": 8,
+  "q5_open": 5,
+  "implementation_refs": [
+    "ENFORCEMENT/ai_open_quest_router.py",
+    "ENFORCEMENT/runtime_orchestrator.py"
+  ],
+  "validation_refs": [
+    "ENFORCEMENT/ai_open_quest_router_test.py",
+    "ENFORCEMENT/runtime_ai_quest_advisory_test.py",
+    "ENFORCEMENT/runtime_hardening_integration_test.py"
+  ],
+  "runtime_bug_fixed": "side-effect delegated-authority check now uses delegation_inheritance_result instead of undefined delegation variable",
+  "guards": {
+    "advisory_only": true,
+    "canonical_promotion": false,
+    "push": false,
+    "merge": false,
+    "deploy": false,
+    "paid_api_used": false
+  }
+}

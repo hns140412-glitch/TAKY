@@ -1,0 +1,32 @@
+{
+  "schema": "TAKY_DETERMINISTIC_INDEXING_OWNER_REVIEW_V1",
+  "issuer": "INDEXING_OWNER",
+  "reviewed": true,
+  "decision": "INDEXED",
+  "index_version": "V36-NOTION-DELTA",
+  "delta_path": "C2S/NOTION_REFERENCE_INDEX_DELTA_V36_2026-10-09.json",
+  "delta_sha256": "83f0a9e631d4129e6a36f8ddba2a7595e32bef7b9d886fd927c5b00a5af399c9",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+  "parent_sha256_verified": true,
+  "mining_receipt": "TAKY-SOURCE-VAULT/reports/INBOX_REF097_CHARACTER_SHEET_MINING_20261009.json",
+  "mining_sha256_verified": true,
+  "items": [
+    {
+      "source_id": "REF-097",
+      "source_ref": "INDEX:REF-097",
+      "url": "https://m.blog.naver.com/PostView.naver?blogId=ai_newceo&logNo=224433971131",
+      "required_fields_pass": true,
+      "duplicate_source_id_origins": [],
+      "exact_url_matches": [],
+      "decision": "INDEXED",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "guards": {
+    "request_side_approval_ignored": true,
+    "prior_delta_and_ledger_duplicate_check": true,
+    "canonical_promotion": false,
+    "learning_use_authorized": false
+  }
+}

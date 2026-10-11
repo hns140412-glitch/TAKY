@@ -1,0 +1,185 @@
+{
+  "schema": "TAKY_LEARNING_REFERENCE_PATTERN_INDEX_V2",
+  "updated_at": "2026-10-07",
+  "authority": "TAKY_LEARNING_ENGINE_CORE",
+  "policy": {
+    "mining_site_patterns_are_reference_only": true,
+    "official_curriculum_retains_grade_authority": true,
+    "source_layout_and_wording_not_copied": true,
+    "domain_relevance_gate": true,
+    "learner_evidence_required_for_recovery_patterns": true
+  },
+  "active_sources": [
+    {
+      "source": "edu_navi",
+      "refs": [
+        "chat://2026-10-07/edu_navi/term-decoder-intro",
+        "chat://2026-10-07/edu_navi/science-term-decoder"
+      ],
+      "adopted_patterns": [
+        "morpheme clue discovery",
+        "word-family expansion",
+        "whole-meaning inference",
+        "concept relation",
+        "context transfer",
+        "visual concept-card organization"
+      ],
+      "implementation_state": "RUNTIME_APPLIED"
+    },
+    {
+      "source": "kidbookqmom",
+      "refs": [
+        "chat://2026-10-07/kidbookqmom/science-literacy-term-decoder"
+      ],
+      "adopted_patterns": [
+        "concept hierarchy",
+        "comparison and contrast",
+        "content comprehension",
+        "sentence/context transfer",
+        "visual concept-card organization"
+      ],
+      "implementation_state": "RUNTIME_APPLIED"
+    },
+    {
+      "source": "REF-081 education mining source",
+      "refs": [
+        "INDEX:REF-081"
+      ],
+      "adopted_patterns": [
+        "repeated-error to concept-gap signal",
+        "targeted concept review",
+        "visual explanation card"
+      ],
+      "guards": [
+        "one mistake is not automatically a concept gap",
+        "product claims are not learning authority"
+      ],
+      "implementation_state": "EVIDENCE_GATED_RUNTIME_APPLIED"
+    },
+    {
+      "source": "REF-085 math mining source",
+      "refs": [
+        "INDEX:REF-085"
+      ],
+      "adopted_patterns": [
+        "concept graph",
+        "blank recall after concept linking",
+        "learning visualization pattern"
+      ],
+      "guards": [
+        "exact teaching sequence requires curriculum verification",
+        "exact formulas require math accuracy verification"
+      ],
+      "implementation_state": "RUNTIME_APPLIED"
+    },
+    {
+      "source": "Daegu Education Office subject Hanja references",
+      "refs": [
+        "LEARNING/data/sources/korean-hanja-vocab.drive-extracted.txt",
+        "LEARNING/data/sources/social-history-hanja-vocab.drive-extracted.txt",
+        "LEARNING/data/sources/science-math-hanja-vocab.drive-extracted.txt"
+      ],
+      "adopted_patterns": [
+        "literal Hanja meaning",
+        "subject-specific meaning",
+        "curriculum usage context"
+      ],
+      "implementation_state": "REFERENCE_ENRICHMENT_APPLIED"
+    },
+    {
+      "source": "KCI thinking-tool-word study + verified learning-tool vocabulary",
+      "refs": [
+        "LEARNING/projection/academic-vocab-1387-level-map-v1.json",
+        "LEARNING/data/sources/korean-tool-vocab-verified-token-2026-09-22.txt"
+      ],
+      "adopted_patterns": [
+        "grade-aware academic vocabulary overlay",
+        "tool-language prerequisite support"
+      ],
+      "implementation_state": "ENGINE_APPLIED"
+    }
+  ],
+  "excluded_by_domain_gate": [
+    {
+      "source_family": "AI productivity/workflow mining sites",
+      "examples": [
+        "sdk-kim-builds",
+        "lazyowen",
+        "rebornlabs"
+      ],
+      "reason": "Not learning-pedagogy evidence for term decoding; retained in AI/automation mining domains only."
+    }
+  ],
+  "runtime_mapping": {
+    "TRACE": [
+      "morpheme clue discovery",
+      "literal-to-subject meaning separation",
+      "visual concept card"
+    ],
+    "LINK": [
+      "word family",
+      "concept relation",
+      "comparison/contrast",
+      "concept graph",
+      "targeted concept review"
+    ],
+    "CORE": [
+      "whole meaning inference",
+      "subject concept verification",
+      "concept graph",
+      "targeted concept review"
+    ],
+    "RECALL": [
+      "curriculum context transfer",
+      "blank recall"
+    ]
+  },
+  "evidence_routing": {
+    "repeated_wrong_attempts_2_plus": "P_ERROR_TO_CONCEPT_GAP -> TARGETED_CONCEPT_REVIEW",
+    "single_wrong_attempt": "NORMAL_FLOW",
+    "correct_or_new": "NORMAL_FLOW"
+  },
+  "prelearned_population": {
+    "E1": {
+      "cards": 105,
+      "terms": 118
+    },
+    "E2": {
+      "cards": 105,
+      "terms": 118
+    },
+    "E3": {
+      "cards": 273,
+      "terms": 366
+    },
+    "E4": {
+      "cards": 273,
+      "terms": 366
+    },
+    "E5": {
+      "cards": 330,
+      "terms": 688
+    },
+    "E6": {
+      "cards": 330,
+      "terms": 674
+    }
+  },
+  "implemented_files": [
+    "LEARNING/data/mining-learning-pattern-registry-v1.json",
+    "LEARNING/projection/mining-learning-pattern-router.js",
+    "LEARNING/projection/build-prelearned-term-universe.js",
+    "LEARNING/pedagogy/grade-aware-term-selector.js",
+    "LEARNING/projection/build-hide-prelearned-term-packs.js",
+    "Hide & Seek/hide-term-decoder-v1.js",
+    "Hide & Seek/data/learning-term-recommendation-packs-v1.json"
+  ],
+  "verification": [
+    "MINING_LEARNING_PATTERN_ROUTER_TEST: PASS",
+    "GRADE_AWARE_TERM_SELECTOR_TEST: PASS",
+    "PRELEARNED_TERM_UNIVERSE_E2E_TEST: PASS",
+    "TERM_RECOMMENDATION_HTTP_ENDPOINT_TEST: PASS",
+    "HIDE_LEARNING_TERM_LOADER_V1_TEST: PASS",
+    "TERM_DECODER_V1_SMOKE: PASS"
+  ]
+}

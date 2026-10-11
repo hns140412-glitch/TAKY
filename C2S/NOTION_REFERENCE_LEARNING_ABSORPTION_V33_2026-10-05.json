@@ -1,0 +1,178 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_LEARNING_ABSORPTION_V33",
+  "generated_at": "2026-10-05T13:58:22.491108+00:00",
+  "new_refs": [
+    "REF-093",
+    "REF-094"
+  ],
+  "digit_existing_refs": [
+    "REF-077",
+    "REF-078",
+    "REF-079",
+    "REF-080"
+  ],
+  "reference_intake_execution": "D:\\Git PWA\\TAKY\\C2S\\NOTION_REFERENCE_INTAKE_EXECUTION_V33_2026-10-05.json",
+  "learning_lineage": {
+    "REF-093": [
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-bba29d5325280faa70b5b61b",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-baf4f75a91368c2a2bada6da",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-1255f86fc0ce58163ae440d4",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    ],
+    "REF-094": [
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-0833eecfafcd3c5d07614f82",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-1ac63b37155aeac0352963aa",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-1839629f27ab734b74daa552",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    ],
+    "DIGIT_RELATION": [
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-fe878f636c73f678f846b25f",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-2695024e58443db78cdb48ed",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-f29df41bdefdd5426d16897a",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      },
+      {
+        "ok": true,
+        "errors": [],
+        "appended": true,
+        "idempotent": false,
+        "event_id": "GLE-50cba27386c91e7820a0c075",
+        "utility_projection": {
+          "attempted": true,
+          "ok": true,
+          "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+          "source_count": 0
+        }
+      }
+    ]
+  },
+  "learned_insights": [
+    {
+      "source": "REF-093",
+      "target": "TAKY_AI_ORCHESTRATION",
+      "insight": "Slash-style prompt aliases are reusable command-UX patterns for adversarial review/source/scope/cost, but must not be represented as native product commands."
+    },
+    {
+      "source": "REF-094",
+      "target": "TAKY_SOURCE_ACQUISITION",
+      "insight": "Agent Reach is an optional public-source acquisition adapter behind Necessity Gate; private Notion remains on dedicated collector/API path; cookie channels require explicit approval."
+    },
+    {
+      "source": "REF-077..080",
+      "target": "ARCHI_GROW",
+      "insight": "Digit root landing page is a parent/version locator for existing architecture references; learn version changes without duplicate source creation."
+    }
+  ],
+  "structural_gap": {
+    "status": "OPEN",
+    "finding": "grow_lineage_packet VALID_DOMAINS lacks TAKY_GROW/SYSTEM_GROW; non-architecture/non-education system learnings are persisted as UNROUTED despite LEARNING stage.",
+    "recommended_fix": "Add governed SYSTEM_GROW or generic DOMAIN_GROW mapping with regression tests; do not change production taxonomy in this run."
+  },
+  "canonical_promotion": false,
+  "main_merge": false,
+  "deployment": false
+}

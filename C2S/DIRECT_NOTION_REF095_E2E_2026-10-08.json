@@ -1,0 +1,93 @@
+{
+  "schema": "TAKY_DIRECT_NOTION_REF095_E2E_V1",
+  "generated_at": "2026-10-08T14:53:55.730666+00:00",
+  "status": "PASS_DIRECT_SOURCE_E2E",
+  "source_id": "REF-095",
+  "scope": "USER_SHARED_PUBLIC_NOTION_DIRECT_SOURCE_TO_MINING_INDEXING_AI_REFERENCE_AND_LEARNING_PROJECTION",
+  "source_chain": {
+    "hub_url": "https://pineapple-pyroraptor-9c5.notion.site/AI-3e6728391558800cb917f4672d616d57",
+    "child_url": "https://d-day.notion.site/AI-5-70-3e3bbc58d57181ddb562e359a24727c8",
+    "upstream_repo": "https://github.com/epoko77-ai/im-not-ai",
+    "upstream_raw_complete": [
+      "README.md",
+      "ai-tell-taxonomy.md",
+      "LICENSE"
+    ],
+    "upstream_taxonomy_unique_pattern_ids": 85,
+    "upstream_taxonomy_categories": 10,
+    "notion_summary_general_patterns": 70,
+    "license_verified": "MIT License"
+  },
+  "mining": {
+    "receipt": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\DIRECT_NOTION_HUMANIZE_KR_MINING_20261008.json",
+    "sha256": "96bd847569f4a5e6db07da9949dc4a9e4b5598bcc9904ab6a685ef683af4b3a9",
+    "method": "DETERMINISTIC_RAW_PARSE_PLUS_PRIMARY_UPSTREAM_CROSSCHECK__NO_MODEL_CALL",
+    "paid_api_used": false,
+    "model_calls": 0
+  },
+  "indexing": {
+    "delta": "D:\\Git PWA\\TAKY\\C2S\\NOTION_REFERENCE_INDEX_DELTA_V34_2026-10-08.json",
+    "delta_sha256": "a68f850f12859029491269d18a4f70f00aa74610ba9e2a08eed3a70e56fe53d8",
+    "owner_receipt": "D:\\Git PWA\\TAKY\\C2S\\DATA_INDEX_V34_NOTION_INDEX_OWNER_RECEIPT_2026-10-08.json",
+    "owner_decision": "INDEXED",
+    "ledger_states": [
+      "REGISTERED",
+      "INDEXED",
+      "EVIDENCE_CANDIDATE"
+    ],
+    "execution_receipt": "D:\\Git PWA\\TAKY\\C2S\\DIRECT_NOTION_REF095_REFERENCE_INTAKE_EXECUTION_2026-10-08.json"
+  },
+  "projection": {
+    "ai_reference_index": "D:\\Git PWA\\TAKY\\CURRENT\\DATA\\AI_REFERENCE_INDEX.json",
+    "ai_reference_readback_count": 1,
+    "ai_learning_projection": "D:\\Git PWA\\TAKY\\CURRENT\\DATA\\AI_LEARNING_PROJECTION.json",
+    "learning_evidence_readback_count": 1,
+    "learning_id": "AI-LRN-STYLE-SIGNAL-NOT-AUTHORSHIP-PROOF",
+    "evidence_ref": "INDEX:REF-095",
+    "learning_total": 57,
+    "canonical_promotion": false
+  },
+  "duplicate_replay_guard": {
+    "verified": true,
+    "expected_hold_reasons": [
+      "SOURCE_ID_ALREADY_INDEXED",
+      "EXACT_PRIMARY_URL_ALREADY_INDEXED"
+    ]
+  },
+  "persistent_index": {
+    "drive_sync_receipt": "D:\\Git PWA\\TAKY\\C2S\\DATA_INDEX_V34_PERSISTENT_DRIVE_SYNC_RECEIPT_2026-10-08.json",
+    "source_index_count": 885,
+    "utilization_index_count": 885,
+    "ref095_present": true,
+    "ref091_hold_excluded": true
+  },
+  "integrity_repairs": {
+    "v32_ledger_migration_receipt": "D:\\Git PWA\\TAKY\\C2S\\V32_REFERENCE_LEDGER_MIGRATION_2026-10-08.json",
+    "migrated": [
+      "REF-087",
+      "REF-088",
+      "REF-089",
+      "REF-090",
+      "REF-092"
+    ],
+    "hold_preserved": [
+      "REF-091"
+    ]
+  },
+  "strict_systemwide_stage3": {
+    "stage": "MINING_REAL_NEW_ITEM_E2E",
+    "state": "OPEN_EXACT_INGRESS_NOT_EXERCISED",
+    "reason": "This PASS began from a directly supplied public Notion URL. The Stage 3 acceptance path explicitly requires one genuinely NEW/CHANGED item entering through SIEZEALL 00_INBOX_USER before collector -> Mining -> Indexing -> HNS CURRENT/projection. That exact ingress was not exercised in this run."
+  },
+  "guards": {
+    "user_not_debugger": true,
+    "paid_api_used": false,
+    "model_calls": 0,
+    "push": false,
+    "merge": false,
+    "deployment": false,
+    "netlify": false,
+    "canonical_promotion": false,
+    "stage3_not_falsely_closed": true
+  }
+}

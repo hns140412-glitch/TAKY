@@ -1,0 +1,99 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_V1",
+  "review_date_kst": "2026-10-09",
+  "authority": "NONCANONICAL_CANDIDATE_ONLY",
+  "scope": {
+    "registered_sites": 10,
+    "completed_full_registry_fresh_scan": false,
+    "reason": "existing WATCH staggered 180-240 minute global gate; avoid repeated collection",
+    "latest_watch_receipt": "D:/Git PWA/TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261008T202117079Z.json",
+    "next_global_due_utc": "2026-10-08T23:23:17.078Z",
+    "friday_deep_mining": "NOT_SCHEDULED"
+  },
+  "digit": {
+    "url": "https://litt.ly/digit",
+    "status": "NO_VERIFIED_NEW_DELTA",
+    "prior_baseline": "C2S/DIGIT_PUBLIC_DELTA_REVIEW_2026-10-05.json",
+    "notes": "Existing NanoBanana 2, interior, facade, sequence and AI visualization master-class listings are already in earlier candidate reviews. No new distinct public topic confirmed. Site-watch digittv.notion.site: 2026-10-08T20:21:17Z, 0 new URLs."
+  },
+  "site_watch": {
+    "discovered_new_to_watch_registry": 4,
+    "mining_dispatch_accepted": 3,
+    "mining_dispatch_hold": 1,
+    "candidates": [
+      {
+        "url": "https://lazyowen.com/guides/84skills",
+        "published": "2026-08-10",
+        "relation": "NEW_TO_WATCH_REGISTRY_NOT_NEW_PUBLICATION",
+        "raw_state": "RAW_CAPTURED",
+        "raw_sha256": "502b23b0f4dc19fe28d01bdcc185b021369e2c217e9c6c11739b6d7646a26102",
+        "mining_request": "MINING_REQUEST.3b67afaa1e8000df89d5.json",
+        "pipeline": "MINING_REQUEST_DISPATCHED__INDEX_OWNER_PENDING",
+        "route": [
+          "AI_ORCHESTRATION",
+          "TOOL_SECURITY_REVIEW"
+        ],
+        "learning": "NOT_LEARNER_PEDAGOGY",
+        "risk": "third-party plugins; no installation or credentials"
+      },
+      {
+        "url": "https://lazyowen.com/guides/9router",
+        "published": "2026-08-06 (updated)",
+        "relation": "NEW_TO_WATCH_REGISTRY_NOT_NEW_PUBLICATION",
+        "raw_state": "RAW_CAPTURED",
+        "raw_sha256": "d8c2558e37a7db94327da8ed8d6764ed52a3dc14a18b22c0d76150290a1448e1",
+        "mining_request": "MINING_REQUEST.673910cf76276528304b.json",
+        "pipeline": "MINING_REQUEST_DISPATCHED__INDEX_OWNER_PENDING",
+        "route": [
+          "TAKY_COST_GOVERNANCE",
+          "AI_ORCHESTRATION"
+        ],
+        "learning": "NOT_LEARNER_PEDAGOGY",
+        "risk": "router provider/key handling; no API connection"
+      },
+      {
+        "url": "https://sdk-kim-builds.com/guides/ruflo-claude-ai-team-setup",
+        "published": "2026-10-01",
+        "relation": "NEW_TO_WATCH_REGISTRY__SEMANTIC_DUPLICATE_REVIEW_PENDING",
+        "raw_state": "RAW_CAPTURED",
+        "raw_sha256": "66a859689be1ac6208edb783f7e538fc38102fe8fa4d74ea667eb8581e64e0fe",
+        "mining_request": "MINING_REQUEST.897eb4da2f2cc85a5ff8.json",
+        "pipeline": "MINING_REQUEST_DISPATCHED__INDEX_OWNER_PENDING",
+        "route": [
+          "TAKY_COLLABORATION",
+          "COST_BUDGET_GATES"
+        ],
+        "learning": "NOT_LEARNER_PEDAGOGY",
+        "risk": "TAKY2 role orchestration overlap; no install"
+      },
+      {
+        "url": "https://sdk-kim-builds.com/guides/remm-notion-meeting-notes-automation",
+        "published": "2026-10-08",
+        "relation": "NEW_PUBLICATION__NEW_TO_WATCH_REGISTRY",
+        "raw_state": "RAW_CAPTURED",
+        "raw_sha256": "c9fe54bf174f4aa34b76e55758b39d7e6b68f4f4a59d0f81ac32007c1bf1740f",
+        "mining_request": "MINING_REQUEST.95fe3f17829087c30676.json",
+        "pipeline": "MINING_DISPATCH_HOLD_EXIT_2__INDEXING_NOT_AUTHORIZED",
+        "route": [
+          "WORK_OS_MEETING_WORKFLOW_CANDIDATE"
+        ],
+        "learning": "NOT_LEARNER_PEDAGOGY",
+        "risk": "author promotes own product; paid Pro/Notion integration; no registration, consent, or paid usage"
+      }
+    ],
+    "duplicate_policy": "Canonicalized URL and local index search found no exact indexed URL for these 3 dispatched items; existing REF-094 agent-reach and other plugin/router topics must be semantically compared before any index insertion. No content-hash similarity corpus-wide attestation.",
+    "other_registered_hosts": "No independently verified fresh delta in this run; large public sites remain staged scope/provenance review and their due dates are respected."
+  },
+  "guards": [
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_CANONICAL_OR_MASTER_CHANGE",
+    "NO_CURRENT_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_REMOTE_PUSH",
+    "NO_DEPLOYMENT",
+    "NO_IMPLEMENTATION",
+    "NO_AUTO_INSTALL"
+  ],
+  "review_status": "PARTIAL_WATCH_RECEIPTS_VERIFIED__CANDIDATES_ONLY"
+}

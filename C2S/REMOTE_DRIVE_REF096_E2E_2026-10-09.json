@@ -1,0 +1,56 @@
+{
+  "schema": "TAKY_REMOTE_DRIVE_REF096_E2E_V1",
+  "generated_at": "2026-10-08T15:30:42.155350+00:00",
+  "status": "PASS_REMOTE_DRIVE_PRIMARY_INGRESS_E2E",
+  "source_id": "REF-096",
+  "ingress": {
+    "owner": "SIEZEALL",
+    "folder_id": "1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+    "drive_file_id": "1hC9bqsBG-9kc8XpDafM6qgxmD26Vgj0gpn3mRslPgWY",
+    "drive_revision_id": "2",
+    "local_mount_required": false
+  },
+  "raw": {
+    "sha256": "d83fb98b74d198f73a0ce0b2492e3fe52cc64f271ed3c366094a515dd2a56302",
+    "state": "RAW_CAPTURED",
+    "preservation": "COPIED_TO_SOURCE_BUNDLE"
+  },
+  "mining": {
+    "dispatcher_state": "MINING_ENGINE_CALLED",
+    "worker_state": "COMPLETED_PRIMARY_MATERIAL_PROVENANCE",
+    "semantic_receipt": "TAKY-SOURCE-VAULT/reports/SIEZEALL_DRIVE_REF096_HUMANIZE_KR_SKILL_MINING_20261009.json",
+    "model_calls": 0,
+    "paid_api_used": false
+  },
+  "indexing": {
+    "delta": "C2S/NOTION_REFERENCE_INDEX_DELTA_V35_2026-10-09.json",
+    "owner_receipt": "C2S/DATA_INDEX_V35_REMOTE_DRIVE_INDEX_OWNER_RECEIPT_2026-10-09.json",
+    "owner_decision": "INDEXED",
+    "ledger_states": [
+      "REGISTERED",
+      "INDEXED",
+      "EVIDENCE_CANDIDATE"
+    ]
+  },
+  "projection": {
+    "ai_reference_index_ref": "INDEX:REF-096",
+    "learning_id": "AI-LRN-STYLE-SIGNAL-NOT-AUTHORSHIP-PROOF",
+    "learning_evidence_refs": [
+      "INDEX:REF-095",
+      "INDEX:REF-096"
+    ],
+    "canonical_promotion": false
+  },
+  "authority": {
+    "ingress_mode": "GOOGLE_DRIVE_FOLDER_ID_PRIMARY",
+    "local_sync_role": "OPTIONAL_MIRROR_ONLY",
+    "adapter_contract": "D:/Git PWA/TAKY-SOURCE-VAULT/data/reference_inbox/REMOTE_DRIVE_ADAPTER_CONTRACT.json"
+  },
+  "verification": {
+    "drive_storage_map_validator": "PASS",
+    "projection_regression": "24/24 PASS",
+    "no_push": true,
+    "no_merge": true,
+    "no_deploy": true
+  }
+}

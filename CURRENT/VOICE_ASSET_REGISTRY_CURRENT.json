@@ -1,0 +1,7 @@
+{
+  "schema_version": "TAKY_VOICE_ASSET_REGISTRY_V1",
+  "updated_at": "2026-10-08T02:45:00+09:00",
+  "policy": "ROUTE_BEFORE_CREATE",
+  "assets": [],
+  "note": "Empty central registry bootstrap. Existing approved/locked assets must be migrated here before batch generation."
+}

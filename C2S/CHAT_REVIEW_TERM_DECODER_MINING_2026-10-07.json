@@ -1,0 +1,178 @@
+{
+  "schema": "TAKY_CHAT_REVIEW_MINING_V1",
+  "batch_id": "CHAT-REVIEW-TERM-DECODER-20261007",
+  "captured_on": "2026-10-07",
+  "trigger": "USER_REFERENCE_REVIEW_DEFAULTS_TO_MINING",
+  "raw_state": "PRESERVED_IN_LIBRARY",
+  "raw_library_path": "/TAKY/MINING/RAW/2026-10-07/TERM_DECODER_REFERENCE",
+  "authority_class": "REFERENCE_PATTERN_ONLY_NOT_CURRICULUM_AUTHORITY",
+  "source_batches": [
+    {
+      "source": "edu_navi / marketplace screenshot",
+      "files": [
+        "IMG_9655.jpeg",
+        "IMG_9656.jpeg"
+      ],
+      "focus": [
+        "elementary hanja vocabulary",
+        "word-family expansion",
+        "morpheme-to-word meaning"
+      ]
+    },
+    {
+      "source": "edu_navi",
+      "files": [
+        "IMG_9667.jpeg",
+        "IMG_9668.jpeg",
+        "IMG_9669.jpeg",
+        "IMG_9670.jpeg"
+      ],
+      "focus": [
+        "science concept context",
+        "hanja term decomposition",
+        "concept relation",
+        "context transfer"
+      ]
+    },
+    {
+      "source": "kidbookqmom",
+      "files": [
+        "IMG_9671.jpeg",
+        "IMG_9672.jpeg",
+        "IMG_9673.jpeg",
+        "IMG_9674.jpeg",
+        "IMG_9675.jpeg",
+        "IMG_9676.jpeg",
+        "IMG_9677.jpeg",
+        "IMG_9678.jpeg",
+        "IMG_9679.jpeg"
+      ],
+      "focus": [
+        "science terminology",
+        "comparison/contrast",
+        "hierarchy/concept map",
+        "content comprehension",
+        "sentence transfer"
+      ]
+    }
+  ],
+  "raw_files": [
+    {
+      "file": "IMG_9655.jpeg",
+      "sha256": "0583aa598885e595710c50e1ef823ed80dd652659678c62ede02fe1c28840712",
+      "bytes": 245837
+    },
+    {
+      "file": "IMG_9656.jpeg",
+      "sha256": "2d280d4247ab9bd1e73c584b186808659486d50a12414bd487df926eb05d807e",
+      "bytes": 188563
+    },
+    {
+      "file": "IMG_9667.jpeg",
+      "sha256": "25be225320daace9182a8dbc12e51b24010b2a2cbf0cecc37784b9b338350111",
+      "bytes": 248569
+    },
+    {
+      "file": "IMG_9668.jpeg",
+      "sha256": "5ff432a7249c743900b6dfdedf0e4e85d819873d0aa4b09adaac1421ab4b34ec",
+      "bytes": 246591
+    },
+    {
+      "file": "IMG_9669.jpeg",
+      "sha256": "3cca23c976f5dfa561ba5b2d1f181692623c30d3fce232e5452c355b80f9912b",
+      "bytes": 230426
+    },
+    {
+      "file": "IMG_9670.jpeg",
+      "sha256": "2cf395af3b16e2c941ae1b96dc480b4246358fc7731352ebb59d2f66f813cfbd",
+      "bytes": 233280
+    },
+    {
+      "file": "IMG_9671.jpeg",
+      "sha256": "f9f64a08b54bf54614f9fac34937d3f02daf3239970ae76cd0c9878dfbe9cdda",
+      "bytes": 305223
+    },
+    {
+      "file": "IMG_9672.jpeg",
+      "sha256": "a86052cfdd89027eeec962073dd6698fc4fe932c47a395c14d18f9dae86cdafe",
+      "bytes": 299331
+    },
+    {
+      "file": "IMG_9673.jpeg",
+      "sha256": "ab455f161b5610eae7115fe332eb25e10cf42a1d2678fc2a7f46ee24b856c902",
+      "bytes": 227361
+    },
+    {
+      "file": "IMG_9674.jpeg",
+      "sha256": "b81300f030d27ab94f0c6be6bec92c125ff52e0da979beade8110807ddf125d9",
+      "bytes": 242654
+    },
+    {
+      "file": "IMG_9675.jpeg",
+      "sha256": "d725584edefcd3950a8f19c40ea31f7bf4deda2c5afd266ea5a8429dfaca2f73",
+      "bytes": 235947
+    },
+    {
+      "file": "IMG_9676.jpeg",
+      "sha256": "33dd88b7ded89ec52af54c49a697bb9bf3d142fe64b6b3f06a0ae80629e90866",
+      "bytes": 236235
+    },
+    {
+      "file": "IMG_9677.jpeg",
+      "sha256": "48b8f96c6a7d7b9fd26a2229d82bdb18d6c821072f42e860eef1b102d5e4ad89",
+      "bytes": 250606
+    },
+    {
+      "file": "IMG_9678.jpeg",
+      "sha256": "557cf544c5b6963365348ce2c7e648c05dac85e270ca7595a31616c0ea2c54ef",
+      "bytes": 308501
+    },
+    {
+      "file": "IMG_9679.jpeg",
+      "sha256": "8987c22c88448fc4497f55ae441e6769fa96b6e09827f036d633363afd25f997",
+      "bytes": 302414
+    }
+  ],
+  "mining_findings": {
+    "reusable_learning_pattern": [
+      "TERM_OR_PHENOMENON_CONTEXT",
+      "FORM_OR_MORPHEME_DECODING",
+      "WORD_FAMILY_OR_RELATED_TERM_LINK",
+      "WHOLE_MEANING_INFERENCE",
+      "CONCEPT_HIERARCHY_RELATION_COMPARE_CONTRAST",
+      "CURRICULUM_CONTEXT_RECALL"
+    ],
+    "hide_seek_mapping": {
+      "TRACE": "form/morpheme clue discovery",
+      "LINK": "word family + concept relation/comparison",
+      "CORE": "whole-term and concept inference",
+      "RECALL": "context transfer with target masked"
+    },
+    "learning_engine_projection_fields": [
+      "grade_band",
+      "subject",
+      "unit_context",
+      "term",
+      "morphemes",
+      "concept_relations",
+      "concept_hierarchy",
+      "compare_contrast",
+      "context_sentence",
+      "source_ref",
+      "authority_class"
+    ],
+    "source_specific_not_to_copy": [
+      "page layout",
+      "illustrations",
+      "publisher wording",
+      "exercise sequence",
+      "branded presentation"
+    ]
+  },
+  "implementation_relation": {
+    "hide_seek_term_decoder": "PARTIALLY_IMPLEMENTED_AND_TESTED",
+    "learning_engine_grade_aware_selection": "IN_PROGRESS",
+    "mining_persistence": "RAW_AND_C2S_CAPTURED"
+  },
+  "completion_state": "MINED_CANDIDATE_PENDING_INDEX_OWNER_PROJECTION_VALIDATION"
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "TAKY_CLOUD_ID_DRIVE_ASSET_DELTA_CURRENT_V1",
+  "updated_at": "2026-10-09",
+  "scope": "ONLY_DECISIONS_FROM_GOOGLE_CLOUD_ID_DISCUSSION_FORWARD",
+  "state": "LOCAL_REFLECTED_GROUPED_ROOT_LAYOUT_LOCKED__REMOTE_DRIVE_INGRESS_VERIFIED__NOT_COMMITTED_NOT_DEPLOYED",
+  "decisions": [
+    "SIEZEALL account owns the active Google Cloud project, OAuth Client ID and Drive API configuration.",
+    "HNS is not a user-facing file-drop surface.",
+    "Users write/reference through the SIEZEALL shared Drive surface.",
+    "The single user reference inbox is SIEZEALL Drive folder 00_INBOX_USER (Drive ID 1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB); the former F: path was an HNS-side mount assumption and is not a valid SIEZEALL local-sync binding.",
+    "The single SIEZEALL user inbox is addressed primarily by Google Drive folder ID; Windows DriveFS/local sync is an optional mirror and must not be a prerequisite for ingestion.",
+    "HNS remains the internal/admin approved-master route.",
+    "SIEZEALL remains the approved distribution and user-sync route.",
+    "GitHub and Netlify usage stays minimal; asset/data package refresh alone does not require deploy unless code/schema/slot-contract changes.",
+    "Netlify cannot determine asset identity or slot binding from filenames or deployed paths.",
+    "Asset delivery uses pre-resolved manifest/hash binding before distribution, then device-side verification/cache activation.",
+    "During fragmentation cleanup, source deletion remains HOLD until extraction, indexing and readback receipts are verified."
+  ],
+  "implemented_surfaces": {
+    "storage_map": "OS/DRIVE_STORAGE_MAP.json",
+    "asset_current": "CURRENT/DESIGN_UI_ASSET_SOURCE_DEFAULT_2026-09-29.json",
+    "asset_protocol_delta": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md#2026-10-07 Cloud / Drive route delta",
+    "asset_manifest_schema": "MASTER/ASSET_DISTRIBUTION_MANIFEST_SCHEMA.json",
+    "asset_manifest_validator": "ENFORCEMENT/asset_distribution_manifest_validator.py",
+    "user_inbox_collector": "D:/Git PWA/TAKY-SOURCE-VAULT/REFERENCE_INBOX_INCREMENTAL.js",
+    "scheduled_runner": "D:/Git PWA/TAKY-SOURCE-VAULT/RUN_NOTION_INCREMENTAL_SCHEDULED.ps1",
+    "drive_route_resolver": "ENFORCEMENT/drive_route_resolver.py",
+    "drive_physical_layout_guard": "ENFORCEMENT/drive_physical_layout_guard.py",
+    "drive_path_reference_guard": "ENFORCEMENT/drive_path_reference_guard.py",
+    "grouped_drive_layout_current": "CURRENT/DRIVE_ROOT_LAYOUT_LOCK_CURRENT_2026-10-07.json"
+  },
+  "explicit_non_changes": [
+    "Do not redefine TAKY master logic from scratch.",
+    "Do not rewrite existing Visual ID, badge, character behavior or UI verification semantics except where the storage route needs a pointer.",
+    "Do not mass-migrate or delete historical TAKY-ASSETS binaries yet.",
+    "Do not create another user inbox."
+  ],
+  "inbox_baseline": {
+    "cloud_folder_id": "1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+    "cloud_folder_name": "00_INBOX_USER",
+    "local_sync_state": "OPTIONAL_MIRROR_UNBOUND",
+    "local_synced_path": null,
+    "legacy_local_binding_state": "INVALID_HNS_SIDE_F_DRIVE_ASSUMPTION",
+    "legacy_hns_baseline_folder_id": "1Ec-beojyLH9aIinnrQhw3zgPuHTznTQ2",
+    "files_seen": 58,
+    "existing_files_remined": false,
+    "baseline_state_sha256": "4F96D1E92592E3ECB6E8CAB647E6F15529C5452ABCA6F72AE6C3C771A6CCCBC1",
+    "policy": "preserve legacy 58-file baseline; primary remote Drive folder-ID intake tracks new/changed by Drive file ID/revision/hash; local mirror is optional",
+    "remote_ingress_state": "CONNECTED_VERIFIED",
+    "ingress_mode": "GOOGLE_DRIVE_FOLDER_ID_PRIMARY"
+  },
+  "drive_root_layout_lock": {
+    "state": "LOCKED_AND_READBACK_VERIFIED",
+    "ref": "CURRENT/DRIVE_ROOT_LAYOUT_LOCK_CURRENT_2026-10-07.json",
+    "hns_root": [
+      "00_CONTEXT",
+      "10_DOMAINS",
+      "20_PLATFORM",
+      "90_MAINTENANCE"
+    ],
+    "siezeall_root": [
+      "00_CONTEXT",
+      "10_DOMAINS",
+      "20_PLATFORM",
+      "90_MAINTENANCE"
+    ],
+    "context_top_level": true,
+    "stable_leaf_ids": true,
+    "current_paths": {
+      "hns_learning": "TAKY/10_DOMAINS/01_LEARNING",
+      "hns_archigrow": "TAKY/10_DOMAINS/02_ARCHIGROW",
+      "hns_common": "TAKY/20_PLATFORM/03_COMMON",
+      "hns_ui_source_authority": "TAKY/20_PLATFORM/UI_SOURCE_AUTHORITY",
+      "siezeall_learning_share": "TAKY/10_DOMAINS/01_LEARNING_SHARE",
+      "siezeall_archigrow_share": "TAKY/10_DOMAINS/02_ARCHIGROW_SHARE",
+      "siezeall_updates": "TAKY/20_PLATFORM/03_UPDATES",
+      "siezeall_user_data": "TAKY/20_PLATFORM/04_USER_DATA"
+    },
+    "temp_authority": false,
+    "unexpected_root_item": "MOVE_TO_90_MAINTENANCE_90_TEMP_HOLD",
+    "deletion_performed": false
+  },
+  "cleanup_run_2026_10_07": {
+    "open_1_source_vault": "CLOSED_CODE_ENCODING_AND_BASELINE_PRESERVATION__LOCAL_SIEZEALL_SYNC_BINDING_REMAINS_OPEN",
+    "open_2_maintenance_cleanup": "CLOSED_NON_DESTRUCTIVE",
+    "open_3_master_os_current_cleanup": "CLOSED_ACTIVE_ROUTE_RECONCILED",
+    "open_4_reference_e2e": "PASS_REMOTE_DRIVE_FOLDER_ID_TO_MINING_INDEXING_PROJECTION_REF096",
+    "open_5_asset_e2e": "PASS_HNS_TO_SIEZEALL_TO_DEVICE_HASH_VERIFIED",
+    "open_6_validation": "PASS_WITH_REMOTE_REFERENCE_E2E__SIEZEALL_03_UPDATES_ANYONE_WRITER_SECURITY_STILL_OPEN"
+  },
+  "resume_handoff": "HANDOFF/TAKY_DRIVE_MINING_STORAGE_CLEANUP_NEW_CHAT_START_2026-10-07_LATEST.md",
+  "next_open": "REMOTE_INGRESS_OPERATIONALIZE_SCHEDULED_WATCH_IF_NEEDED__NO_LOCAL_MOUNT_REQUIRED"
+}

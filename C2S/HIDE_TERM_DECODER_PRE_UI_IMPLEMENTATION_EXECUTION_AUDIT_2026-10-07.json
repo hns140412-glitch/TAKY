@@ -1,0 +1,313 @@
+{
+  "schema": "TAKY_HIDE_TERM_DECODER_PRE_UI_IMPLEMENTATION_EXECUTION_AUDIT_V2",
+  "date": "2026-10-07",
+  "scope": "TERM_DECODER_CONCEPT_TO_PRE_UI_RUNTIME",
+  "basis": [
+    "Hide_Seek_UI_MASTER_LOGIC_REV_04.md section 4.3",
+    "C2S/MINING_SITE_LEARNING_PATTERN_INTEGRATION_2026-10-07.json",
+    "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json",
+    "LEARNING/data/prelearned/prelearned-term-universe-manifest-v1.json",
+    "C2S/HIDE_TERM_AGE_GRADE_PRE_UI_EXECUTION_2026-10-07.json"
+  ],
+  "rates": {
+    "functional_requirements_total": 25,
+    "functional_requirements_implemented_complete": 24,
+    "implementation_rate_full_contract_pct": 96,
+    "pre_ui_testable_requirements": 24,
+    "pre_ui_executed_pass": 24,
+    "pre_ui_execution_rate_testable_scope_pct": 100,
+    "pre_ui_execution_coverage_full_contract_pct": 96,
+    "final_ui_execution_rate_pct": null
+  },
+  "requirements": [
+    {
+      "id": "R01",
+      "name": "review/mining RAW + provenance persistence",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "MASTER/REVIEW_DEFAULT_MINING_PROTOCOL.md",
+        "C2S/CHAT_REVIEW_TERM_DECODER_MINING_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R02",
+      "name": "mined learning-pattern registry/router",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/data/mining-learning-pattern-registry-v1.json",
+        "LEARNING/projection/mining-learning-pattern-router.test.js"
+      ]
+    },
+    {
+      "id": "R03",
+      "name": "prelearned E5/E6 cross-subject term universe",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/data/prelearned/subject-term-universe-56-v1.json",
+        "LEARNING/projection/build-prelearned-term-universe.js"
+      ]
+    },
+    {
+      "id": "R04",
+      "name": "official grade/curriculum authority separation",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/intake/term-catalog-source-resolver.test.js",
+        "LEARNING/verification/prelearned-term-universe.e2e.test.js"
+      ]
+    },
+    {
+      "id": "R05",
+      "name": "ambiguous lexeme/Hanja mismatch fail-closed",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/verification/science-math-hanja-reference.integration.test.js"
+      ]
+    },
+    {
+      "id": "R06",
+      "name": "grade + subject filtering",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/pedagogy/grade-aware-term-selector.test.js"
+      ]
+    },
+    {
+      "id": "R06D",
+      "name": "learner-evidence presentation shift limited to ±1 band without changing curriculum-grade eligibility",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "Hide & Seek/hide-learning-term-loader-v1.js",
+        "Hide & Seek/tools/test-learning-term-loader-v1.cjs"
+      ]
+    },
+    {
+      "id": "R06C",
+      "name": "developmental presentation band adaptation by grade (E1-2/E3-4/E5-6/secondary)",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "Hide & Seek/hide-learning-term-loader-v1.js",
+        "Hide & Seek/tools/test-learning-term-loader-v1.cjs"
+      ]
+    },
+    {
+      "id": "R06B",
+      "name": "age↔grade conflict fail-closed; no silent authoritative default",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_AGE_GRADE_PRE_UI_EXECUTION_2026-10-07.json",
+        "Hide & Seek/tools/test-learning-term-loader-v1.cjs"
+      ]
+    },
+    {
+      "id": "R06A",
+      "name": "user age + explicit school-grade/stage context resolution",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_AGE_GRADE_PRE_UI_EXECUTION_2026-10-07.json",
+        "Hide & Seek/tools/test-learning-term-loader-v1.cjs"
+      ]
+    },
+    {
+      "id": "R07",
+      "name": "unit/context-aware term ranking",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/verification/prelearned-term-universe.e2e.test.js"
+      ]
+    },
+    {
+      "id": "R08",
+      "name": "learner evidence drives DISCOVERY/RECOVERY/REINFORCE",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/pedagogy/grade-aware-term-selector.test.js"
+      ]
+    },
+    {
+      "id": "R09",
+      "name": "authenticated live term recommendation endpoint",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/transport/term-recommendation-http-endpoint.test.js",
+        "LEARNING/transport/central-learning-production-host.test.js"
+      ]
+    },
+    {
+      "id": "R10",
+      "name": "static prelearned fallback projection",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/projection/build-hide-prelearned-term-packs.js",
+        "Hide & Seek/tools/test-learning-term-loader-v1.cjs"
+      ]
+    },
+    {
+      "id": "R11",
+      "name": "Hide engine-card binding",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R12",
+      "name": "TRACE form/meaning clue execution",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R13",
+      "name": "LINK morpheme-family execution",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R14",
+      "name": "LINK curriculum-concept relation execution",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "Hide & Seek/tools/test-term-decoder-v1.cjs"
+      ]
+    },
+    {
+      "id": "R15",
+      "name": "CORE whole-meaning inference execution",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R16",
+      "name": "RECALL definition/curriculum-context retrieval + target masking",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json",
+        "Hide & Seek/hide-term-decoder-v1.js"
+      ]
+    },
+    {
+      "id": "R17",
+      "name": "exposure vs scored retrieval evidence + bridge emission",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R18",
+      "name": "state persistence + reload/readback",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/HIDE_TERM_PRE_UI_BROWSER_E2E_2026-10-07.json"
+      ]
+    },
+    {
+      "id": "R19",
+      "name": "Hide evidence does not gain Planner scheduling authority",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "LEARNING/pedagogy/grade-aware-term-selector.test.js",
+        "LEARNING/transport/term-recommendation-http-endpoint.test.js"
+      ]
+    },
+    {
+      "id": "R20",
+      "name": "mining-pattern lineage carried into term/evidence projection",
+      "implemented": "PASS",
+      "pre_ui_execution": "PASS",
+      "evidence": [
+        "C2S/MINING_SITE_LEARNING_PATTERN_INTEGRATION_2026-10-07.json",
+        "Hide & Seek/tools/test-term-decoder-v1.cjs"
+      ]
+    },
+    {
+      "id": "R21",
+      "name": "final locked UI/mobile visual-touch-readability journey",
+      "implemented": "OPEN",
+      "pre_ui_execution": "NOT_IN_PRE_UI_SCOPE",
+      "evidence": []
+    }
+  ],
+  "content_coverage": {
+    "official_subject_terms_56": 436,
+    "full_term_decoder_components": 59,
+    "full_term_decoder_pct": 13.5,
+    "hanja_form_available": 252,
+    "hanja_form_pct": 57.8,
+    "form_only_terms": 193,
+    "form_only_pct": 44.3,
+    "trace_mode_eligible": 252,
+    "trace_mode_eligible_pct": 57.8,
+    "link_mode_eligible": 436,
+    "core_mode_eligible": 436,
+    "recall_mode_eligible": 436,
+    "explicit_examples": 9,
+    "explicit_examples_pct": 2.1,
+    "explicit_concept_relations": 2,
+    "explicit_compare_or_contrast": 2,
+    "explicit_compare_or_contrast_pct": 0.5,
+    "ambiguous_lexemes_held": 39,
+    "no_nikl_surface_match": 108,
+    "grade_stage_population": {
+      "authoritative_subject_term_universe": [
+        "E5",
+        "E6"
+      ],
+      "lower_elementary_profile_logic": "IMPLEMENTED_AND_TESTED_WITH_SYNTHETIC_OR_SOURCE_SUPPORTED_CARDS",
+      "middle_elementary_profile_logic": "IMPLEMENTED_AND_TESTED_WITH_SYNTHETIC_OR_SOURCE_SUPPORTED_CARDS",
+      "upper_elementary_profile_logic": "IMPLEMENTED_AND_POPULATED_FOR_E5_E6",
+      "secondary_profile_logic": "IMPLEMENTED_AND_TESTED_WITH_SOURCE_SUPPORTED_CARDS",
+      "full_official_term_pack_population_beyond_E5_E6": "OPEN"
+    }
+  },
+  "assessment": {
+    "runtime_architecture": "HIGH_COVERAGE",
+    "pre_ui_functional_execution": "PASS",
+    "content_depth": "INCOMPLETE",
+    "largest_gap": "The runtime works, but rich morphology/comparison/explicit-context content is much less complete than the routing layer.",
+    "final_ui": "OPEN",
+    "age_grade_adaptation": "IMPLEMENTED_AND_PRE_UI_EXECUTION_VERIFIED",
+    "age_grade_remaining_gap": "Full authoritative curriculum term packs are currently populated for E5/E6 only; band logic exists beyond E5/E6 but full content population is open."
+  },
+  "claims": {
+    "allowed": [
+      "PRE_UI_RUNTIME_EXECUTION_PASS",
+      "LOGIC_RUNTIME_IMPLEMENTATION_HIGH_COVERAGE"
+    ],
+    "forbidden": [
+      "FINAL_UI_EXECUTION_PASS",
+      "VALUE_DELIVERY_COMPLETE",
+      "CONTENT_COVERAGE_COMPLETE",
+      "MOBILE_E2E_COMPLETE"
+    ]
+  }
+}

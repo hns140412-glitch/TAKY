@@ -1,0 +1,30 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CLAUDE_R5_REOPEN_2026-10-04",
+  "status": "SUPERSEDED_BY_R5_FIX_CLOSURE",
+  "source_audit": {
+    "round": 5,
+    "verdict": "PASS_WITH_FIXES",
+    "log": ".claude/TAKY_GROW_CLAUDE_INDEPENDENT_AUDIT_R5_FINAL.log"
+  },
+  "required_findings": [
+    {
+      "id": "R5-1",
+      "issue": "Conflicting duplicate regression statuses for the same workflow_run must fail closed",
+      "status": "OPEN"
+    }
+  ],
+  "current_best": {
+    "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+    "status": "REMAINS_CURRENT_BEST_SCOPE_LIMITED",
+    "automatic_promotion": false
+  },
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "superseded_by": "CURRENT/TAKY/TAKY_GROW_CLAUDE_R5_FIX_CLOSURE_2026-10-04.json"
+}

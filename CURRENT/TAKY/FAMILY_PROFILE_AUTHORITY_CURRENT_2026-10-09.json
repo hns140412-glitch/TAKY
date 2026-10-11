@@ -1,0 +1,125 @@
+{
+  "contract": "TAKY_FAMILY_PROFILE_AUTHORITY_V1",
+  "current_as_of": "2026-10-09",
+  "status": "CODED_LOCAL_REGRESSION_VERIFIED_NOT_DEPLOYED",
+  "stable_identity": {
+    "authority": "TAKY verified family session + membership resolver",
+    "keys": [
+      "family_id",
+      "member_id"
+    ],
+    "rule": "App-local user ids are never cross-app authority. Consumers bind to verified stable member_id."
+  },
+  "shared_basic_profile": {
+    "authority": "TAKY central family member profile",
+    "endpoint": "/api/family/member-profile",
+    "store_path": "families/{family_id}/members/{member_id}/profile/member-v1",
+    "fields": [
+      "member_id",
+      "profile_version",
+      "display_name",
+      "legal_name",
+      "nickname",
+      "family_role",
+      "birth_date",
+      "school_stage",
+      "share_name_mode",
+      "status",
+      "updated_at"
+    ],
+    "update_rule": "Monotonic profile_version with same-version collision rejection and strong-store conditional write.",
+    "privacy": [
+      "raw/source photos forbidden",
+      "access/refresh tokens forbidden",
+      "no application-domain permission fields"
+    ],
+    "semantic_boundary": "family_role is descriptive profile metadata only and MUST NOT grant authorization."
+  },
+  "separate_authorities": {
+    "character_profile": {
+      "endpoint": "/api/family/character-profile",
+      "authority": "TAKY character identity projection",
+      "rule": "Character Visual ID/assets remain separate from basic member profile."
+    },
+    "ready_set": {
+      "owns": [
+        "setupMode",
+        "operator",
+        "explorer/crew choice",
+        "journey theme",
+        "world place",
+        "onboarding state",
+        "local offline projection"
+      ],
+      "rule": "READY may publish shared basic fields but cannot redefine family membership."
+    },
+    "savey": {
+      "owns": [
+        "finance role",
+        "parentAccess",
+        "includeInFamily",
+        "biometric policy",
+        "PIN policy",
+        "financial ledger scope"
+      ],
+      "rule": "TAKY shared profile enriches identity/display only. SAVEY finance authority always overlays shared profile."
+    },
+    "learning_apps": {
+      "owns": [
+        "learning evidence",
+        "learner state",
+        "app-specific progression"
+      ],
+      "rule": "Basic member profile may provide member_id/school_stage context but does not become learning authority."
+    }
+  },
+  "migration": {
+    "ready_set": {
+      "state": "CONSUMER_WIRED_LOCAL_REGRESSION_VERIFIED",
+      "local_key": "readyset_identity_v1",
+      "stable_member_field": "memberId",
+      "legacy_user_id_rule": "Preserve local userId for compatibility; never promote it to cross-app authority unless already equal to an authorized member_id.",
+      "multi_member_rule": "Guardian flow with multiple eligible members must return MEMBER_SELECTION_REQUIRED; no arbitrary child selection."
+    },
+    "savey": {
+      "state": "CONSUMER_WIRED_LOCAL_REGRESSION_VERIFIED",
+      "projection_rule": "SAVEY profile_id is interpreted as TAKY member_id for shared identity projection.",
+      "combined_reads": [
+        "/api/family/member-profile",
+        "/api/family/character-profile"
+      ],
+      "auth_bridge": {
+        "state": "CODED_LOCAL_REGRESSION_VERIFIED",
+        "flow": "TAKY verified family session -> fixed SAVEY family_id -> SAVEY FAMILY_MEMBERS finance authority -> signed same-origin HttpOnly session",
+        "rule": "TAKY family authorization never supplies SAVEY finance role/parentAccess; SAVEY re-derives those fields from its own canonical FAMILY_MEMBERS.",
+        "live_e2e": "OPEN_UNTIL_DEPLOYED_TAKY_SHELL",
+        "system_surface": "S-LOGIN APPROVED + LOCAL REGRESSION VERIFIED; auto reconnect on taky-central-auth-ready + manual retry"
+      }
+    }
+  },
+  "verification": {
+    "taky": [
+      "family-member-profile-http-endpoint.test.js PASS",
+      "family-session-http-endpoint.test.js PASS",
+      "family-character-profile-http-endpoint.test.js PASS",
+      "family-member-identity-endpoint.test.js PASS",
+      "central-learning-production-host.test.js PASS",
+      "google-node-central-integration.test.js PASS"
+    ],
+    "ready_set": [
+      "ready-family-profile-sharing.test.js PASS (shared profile + local-to-central migration)",
+      "node --check touched profile/runtime files PASS"
+    ],
+    "savey": [
+      "155/155 PASS including TAKY->SAVEY auth exchange, shared profile projection, S-LOGIN retry, shared HTTP normalization, and shared queue compatibility regression",
+      "typecheck PASS",
+      "build PASS",
+      "git diff --check PASS"
+    ]
+  },
+  "gates": {
+    "deploy": "NOT_AUTHORIZED",
+    "push_merge": "NOT_PERFORMED",
+    "production_auth_transport": "TAKY-family-domain to SAVEY signed-session bridge is coded and regression-tested; deployed TAKY-shell E2E remains open; no synthetic login promoted to production"
+  }
+}

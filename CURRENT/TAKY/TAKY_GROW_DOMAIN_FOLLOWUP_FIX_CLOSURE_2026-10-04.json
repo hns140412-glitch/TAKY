@@ -1,0 +1,38 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_DOMAIN_FOLLOWUP_FIX_CLOSURE_2026-10-04",
+  "status": "REQUIRED_FIXES_CLOSED__DOMAIN_OPEN_REMAINS",
+  "audit_log": ".claude/TAKY_GROW_DOMAIN_FIX_CLOSURE_AUDIT_FINAL.log",
+  "audit_verdict": "PASS_WITH_FIXES",
+  "closed_required": [
+    "D1A_QUEUE_HOL_EVICTION_ACK_REPLAY",
+    "D1A_REPLAY_AMBIENT_SCOPE_MISATTRIBUTION",
+    "ARCHI_D4_SOURCE_ROLE_VALIDATION",
+    "ARCHI_D4_LINEAGE_BEFORE_EVIDENCE"
+  ],
+  "new_required": [],
+  "shared_core": "FINAL_PASS_FROZEN",
+  "domain_items_closed": false,
+  "domain_items_still_open": [
+    "LEARN-D1a real scope/runtime outcome proof",
+    "LEARN-D1b real reference/reviewer/provider + hosted auth/store binding",
+    "ARCHI-D4 real company/public project ingestion and verified outcomes"
+  ],
+  "verification": {
+    "client_queue_tests": "PASS",
+    "architecture_company_evidence": "8/8 PASS",
+    "server_specialist_verifier": "PASS",
+    "server_specialist_verifier_central_e2e": "PASS",
+    "grow_current_index": "7/7 PASS",
+    "ready_continuity": "PASS",
+    "owner_vendor_byte_identity": "PASS",
+    "owner_git_diff_check": "PASS"
+  },
+  "guards": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  }
+}

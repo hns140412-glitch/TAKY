@@ -1,0 +1,40 @@
+{
+  "source": "D:\\Git PWA\\TAKY\\REFERENCE\\ARCHCOMP_OUTPUT_BUILD_TEST\\FINAL_QUALITY_PPT\\competition-report.pptx",
+  "copy": "D:\\Git PWA\\TAKY\\REFERENCE\\ARCHCOMP_OUTPUT_BUILD_TEST\\EDITABILITY_TEST\\competition-report-edit-test.pptx",
+  "python_pptx_available": false,
+  "error": "ModuleNotFoundError:No module named 'pptx'",
+  "ooxml_slide_xml_count": 9,
+  "media_count": 9,
+  "media_extensions": [
+    ".svg"
+  ],
+  "slide_rel_count": 9,
+  "contains_editable_text_xml": true,
+  "mechanical_render_pass": true,
+  "quality_gate_pass": true,
+  "vector_count": 9,
+  "raster_count": 0,
+  "slide_sources_bound": true,
+  "source_binding_record_count": null,
+  "source_sha256": "4615a2a56f126f92ffcd084bba4788a6b87ae5d98fa355383776b08917cac329",
+  "copy_sha256": null,
+  "staged_comparison": {
+    "one_shot_final_status": "RENDERED_UNREVIEWED",
+    "one_shot_next_gate": "VISUAL_SOURCE_CROSS_CHECK",
+    "one_shot_quality_report_exists": false,
+    "staged_final_status": "RENDERED_UNREVIEWED",
+    "staged_quality_status": "QUALITY_GATE_PASS",
+    "staged_quality_hard_pass": true,
+    "staged_next_gate": "VISUAL_SOURCE_CROSS_CHECK",
+    "staged_quality_metrics": {
+      "source_count": 9,
+      "source_gap_count": 0,
+      "vector_count": 9,
+      "raster_count": 0,
+      "low_resolution_count": 0,
+      "overlong_claim_count": 0
+    },
+    "same_page_count": true,
+    "same_physical_size_pass": true
+  }
+}

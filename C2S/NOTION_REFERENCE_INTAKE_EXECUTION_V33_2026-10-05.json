@@ -1,0 +1,320 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INTAKE_EXECUTION_V33",
+  "generated_at": "2026-10-05T13:58:22.491108+00:00",
+  "items": [
+    {
+      "source_id": "REF-093",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "ai_orchestration",
+        "consumer": "DOMAIN_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "DOMAIN_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-bba29d5325280faa70b5b61b",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-baf4f75a91368c2a2bada6da",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-1255f86fc0ce58163ae440d4",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-b6fa6269fb056131f68a",
+            "source_key": "REF-093",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "source_id": "REF-093",
+              "source_url": "https://yeongseon.kr/archive/3d8d86104de2804d9aeee10695f613bb.html",
+              "source_locator": null,
+              "domain": "ai_orchestration",
+              "consumer": "DOMAIN_ENGINE",
+              "source_actor": "신영선 / 신영선의 AI탐구",
+              "source_actor_class": "INDEPENDENT_AI_CONTENT_CREATOR",
+              "source_author_identity_state": "PUBLISHER_PAGE_IDENTIFIED",
+              "source_direction": "AI_PROMPT_PATTERN_EDUCATION_AND_COMMUNITY_MARKETING",
+              "source_direction_signals": [
+                "PROMPT_CATALOG",
+                "COMMUNITY_PROMOTION"
+              ],
+              "applicability_scope": [
+                "TAKY_COMMAND_UX",
+                "ADVERSARIAL_REVIEW_PROMPT_PATTERNS"
+              ],
+              "authority_ceiling": "THIRD_PARTY_REFERENCE_ONLY__NOT_NATIVE_PRODUCT_COMMAND_AUTHORITY"
+            }
+          },
+          {
+            "event_id": "ri-cdc75151de0fa6856bc2",
+            "source_key": "REF-093",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "index_source_id": "REF-093",
+              "index_version": "V33-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-093",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+                "C2S/DATA_INDEX_V33_NOTION_INDEX_OWNER_RECEIPT_2026-10-05.json",
+                "TAKY-SOURCE-VAULT/reports/NOTION_EFFECTIVE_DELTA_MINING_20261005.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-c7fd3685fdb6e7a0208f",
+            "source_key": "REF-093",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "consumer": "DOMAIN_ENGINE",
+              "domain": "ai_orchestration",
+              "source_ref": "INDEX:REF-093",
+              "source_actor_class": "INDEPENDENT_AI_CONTENT_CREATOR",
+              "source_direction": "AI_PROMPT_PATTERN_EDUCATION_AND_COMMUNITY_MARKETING",
+              "applicability_scope": [
+                "TAKY_COMMAND_UX",
+                "ADVERSARIAL_REVIEW_PROMPT_PATTERNS"
+              ],
+              "authority_ceiling": "THIRD_PARTY_REFERENCE_ONLY__NOT_NATIVE_PRODUCT_COMMAND_AUTHORITY"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    },
+    {
+      "source_id": "REF-094",
+      "route": {
+        "pass": true,
+        "route_type": "REFERENCE_INTAKE_REVIEW",
+        "domain": "source_acquisition",
+        "consumer": "DOMAIN_ENGINE",
+        "write_authorized": true,
+        "write_scope": "REFERENCE_INDEX_STATE_ONLY",
+        "canonical_promotion_authorized": false,
+        "full_corpus_reindex": false,
+        "pipeline": [
+          "SOURCE_OR_LOCATOR",
+          "MINING_ACQUIRE_AND_DISCOVER_IF_NEEDED",
+          "SOURCE_ACTOR_AUTHOR_PROVENANCE_CLASSIFY",
+          "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY",
+          "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY",
+          "INDEX_EXISTENCE_DUPLICATE_VERSION_CHECK",
+          "INDEX_INCREMENTAL_CLASSIFY_RELATE_RETRIEVAL_METADATA",
+          "DOMAIN_ENGINE",
+          "EVIDENCE_GAP_TO_MINING_IF_NEEDED",
+          "REFERENCE_ONLY_OR_CANDIDATE_DISPOSITION",
+          "REPORT"
+        ],
+        "guards": [
+          "MINING != INDEXING",
+          "INDEXING != LEARNING",
+          "REFERENCE_INTAKE != CANONICAL_PROMOTION",
+          "INDEXED != APPROVED_POLICY",
+          "DUPLICATE != NEW_EVIDENCE",
+          "AUTHOR != AUTHORITY",
+          "DIRECTION != APPLICABILITY_SCOPE",
+          "SOURCE_TRUST != CANONICAL_AUTHORITY"
+        ]
+      },
+      "execution": {
+        "pass": true,
+        "execution_status": "PERSISTED",
+        "grow_lineage": [
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-0833eecfafcd3c5d07614f82",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-1ac63b37155aeac0352963aa",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          },
+          {
+            "ok": true,
+            "errors": [],
+            "appended": true,
+            "idempotent": false,
+            "event_id": "GLE-1839629f27ab734b74daa552",
+            "utility_projection": {
+              "attempted": true,
+              "ok": true,
+              "path": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\data-index-outcome-utility.json",
+              "source_count": 0
+            }
+          }
+        ],
+        "emitted": [
+          {
+            "event_id": "ri-3467ae0ff95438f440dd",
+            "source_key": "REF-094",
+            "state": "REGISTERED",
+            "previous_state": null,
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "source_id": "REF-094",
+              "source_url": "https://github.com/Panniantong/Agent-Reach",
+              "source_locator": null,
+              "domain": "source_acquisition",
+              "consumer": "DOMAIN_ENGINE",
+              "source_actor": "Panniantong/Agent-Reach upstream",
+              "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY",
+              "source_author_identity_state": "UPSTREAM_REPOSITORY_IDENTIFIED",
+              "source_direction": "MULTI_CHANNEL_AGENT_SOURCE_ACQUISITION",
+              "source_direction_signals": [
+                "OPEN_SOURCE",
+                "CLI",
+                "PUBLIC_WEB",
+                "COOKIE_CHANNEL_RISK"
+              ],
+              "applicability_scope": [
+                "TAKY_EXTERNAL_MINING_ADAPTER",
+                "SOURCE_ACQUISITION"
+              ],
+              "authority_ceiling": "UPSTREAM_PROJECT_AUTHORITY_FOR_TOOL_FACTS__TAKY_ADOPTION_EXPERIMENT_ONLY"
+            }
+          },
+          {
+            "event_id": "ri-91a22474bafab3edd71f",
+            "source_key": "REF-094",
+            "state": "INDEXED",
+            "previous_state": "REGISTERED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "index_source_id": "REF-094",
+              "index_version": "V33-NOTION-DELTA",
+              "duplicate_relation": "NONE",
+              "version_relation": "NEW_SOURCE_OR_REFERENCE",
+              "source_ref": "INDEX:REF-094",
+              "index_review_issuer": "INDEXING_OWNER",
+              "index_review_evidence_refs": [
+                "C2S/NOTION_REFERENCE_INDEX_DELTA_V33_2026-10-05.json",
+                "C2S/DATA_INDEX_V33_NOTION_INDEX_OWNER_RECEIPT_2026-10-05.json",
+                "TAKY-SOURCE-VAULT/reports/NOTION_EFFECTIVE_DELTA_MINING_20261005.json"
+              ]
+            }
+          },
+          {
+            "event_id": "ri-5757759f4b1cf3577013",
+            "source_key": "REF-094",
+            "state": "EVIDENCE_CANDIDATE",
+            "previous_state": "INDEXED",
+            "acquisition_state": "ACQUIRED_AND_PRESERVED",
+            "recorded_at": "2026-10-05T13:58:22.491108+00:00",
+            "details": {
+              "consumer": "DOMAIN_ENGINE",
+              "domain": "source_acquisition",
+              "source_ref": "INDEX:REF-094",
+              "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY",
+              "source_direction": "MULTI_CHANNEL_AGENT_SOURCE_ACQUISITION",
+              "applicability_scope": [
+                "TAKY_EXTERNAL_MINING_ADAPTER",
+                "SOURCE_ACQUISITION"
+              ],
+              "authority_ceiling": "UPSTREAM_PROJECT_AUTHORITY_FOR_TOOL_FACTS__TAKY_ADOPTION_EXPERIMENT_ONLY"
+            }
+          }
+        ],
+        "ledger_path": "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
+        "next_handoff": "DOMAIN_CONSUMER_REQUERY",
+        "canonical_promotion": false
+      }
+    }
+  ],
+  "all_pass": true,
+  "all_persisted": true
+}

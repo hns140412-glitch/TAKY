@@ -1,0 +1,128 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V33",
+  "generated_at": "2026-10-05T13:58:22.491108+00:00",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V32_2026-10-04.json",
+  "parent_sha256": "7a281b658167092b05728eb5c5e4e2f25a42676506710b0c2d206a95b6b7b10f",
+  "input_mining_receipt": "TAKY-SOURCE-VAULT/reports/NOTION_EFFECTIVE_DELTA_MINING_20261005.json",
+  "input_mining_sha256": "d8414495ff1d3a3fc45d90a8e1141d00182f0cd4283c4505060ce83f6d786593",
+  "items": [
+    {
+      "source_id": "REF-093",
+      "title": "신영선 챗GPT 아스트라 치트키 — Prompt Macro Pattern Catalog",
+      "url": "https://yeongseon.kr/archive/3d8d86104de2804d9aeee10695f613bb.html",
+      "source_family": "THIRD_PARTY_AI_PROMPT_PATTERN_CATALOG",
+      "source_type": "NOTION_MINED_REFERENCE",
+      "authority_level": "reference_only; prompt aliases are not verified native ChatGPT/Astra commands",
+      "domain_facets": [
+        "ai_orchestration",
+        "prompting",
+        "verification_ux"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "신영선 / 신영선의 AI탐구",
+      "value_statement": "Reusable macro patterns for adversarial review, premortem, evidence/source checks, scope and cost prompts. High semantic overlap with TAKY verification and necessity/cost gates; useful as UX/macro inspiration rather than new policy authority.",
+      "controlled_terms": [
+        "THIRD_PARTY_PROMPT_MACRO",
+        "NOT_NATIVE_COMMAND",
+        "VERIFY",
+        "ADVERSARIAL_REVIEW",
+        "PREMORTEM",
+        "SOURCE_CHECK",
+        "SCOPE",
+        "COST"
+      ],
+      "keywords": [
+        "PROMPT_MACRO_PATTERN",
+        "TAKY_COMMAND_UX_REFERENCE"
+      ],
+      "entities": [
+        "신영선의 AI탐구"
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "No exact prior REF found; strong semantic overlap with existing TAKY governance patterns.",
+      "verification_needed": [
+        "Do not present slash aliases as product-native commands.",
+        "Retain source/date provenance for prompt pattern reuse."
+      ],
+      "claims_to_exclude": [
+        "Any claim that these slash commands are built-in ChatGPT/Astra features."
+      ],
+      "source_ref": "INDEX:REF-093",
+      "canonical_promotion": false
+    },
+    {
+      "source_id": "REF-094",
+      "title": "Agent Reach upstream — External Source Acquisition Scaffold",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "secondary_url": "https://rebornlabs.kr/agentreach",
+      "source_family": "UPSTREAM_OPEN_SOURCE_TOOL_DOCS",
+      "source_type": "NOTION_MINED_REFERENCE_WITH_UPSTREAM_VERIFICATION",
+      "authority_level": "upstream project docs for Agent Reach behavior; secondary dated guide only for its own observed setup",
+      "domain_facets": [
+        "source_acquisition",
+        "ai_orchestration",
+        "web_mining"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE"
+      ],
+      "origin_type": "NOTION_REFERENCE_INTAKE",
+      "publisher_or_account": "Panniantong/Agent-Reach upstream; Reborn Labs secondary guide",
+      "value_statement": "Optional acquisition adapter for public web/social/video/repository sources. Use after Necessity Gate; prefer zero-login/public channels and explicit credential/cookie approval. Not a private Notion connector.",
+      "controlled_terms": [
+        "EXTERNAL_SOURCE_ACQUISITION",
+        "SAFE_DEFAULT_CHECK",
+        "PUBLIC_ZERO_LOGIN_FIRST",
+        "COOKIE_RISK",
+        "NOTION_PRIVATE_UNSUPPORTED"
+      ],
+      "keywords": [
+        "AGENT_REACH",
+        "SOURCE_ACQUISITION_ADAPTER"
+      ],
+      "entities": [
+        "Panniantong/Agent-Reach",
+        "REBORN LABS"
+      ],
+      "source_review_state": "INDEXED_CANDIDATE",
+      "current_relation": "REFERENCE_ONLY",
+      "version_relation": "No exact prior REF found in current TAKY C2S search.",
+      "verification_needed": [
+        "Re-check upstream docs/version before implementation.",
+        "Keep cookie/login channels disabled without explicit approval.",
+        "Do not substitute for private Notion collector/API."
+      ],
+      "claims_to_exclude": [
+        "Dated Reborn Labs channel counts as permanent upstream capability.",
+        "Private Notion workspace/database access without separate authorization."
+      ],
+      "source_ref": "INDEX:REF-094",
+      "canonical_promotion": false
+    }
+  ],
+  "relation_updates": [
+    {
+      "locator": "https://litt.ly/digit",
+      "relation": "PARENT_OR_VERSION_LOCATOR",
+      "existing_refs": [
+        "REF-077",
+        "REF-078",
+        "REF-079",
+        "REF-080"
+      ],
+      "new_source_id": false,
+      "consumer": "ARCHI_GROW"
+    }
+  ],
+  "guards": [
+    "AUTHOR != AUTHORITY",
+    "REFERENCE_ONLY",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DEPLOYMENT",
+    "NO_PAID_API"
+  ]
+}

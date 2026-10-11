@@ -1,0 +1,39 @@
+{
+  "schema":"TAKY_DIGIT_PUBLIC_DELTA_REVIEW_V1",
+  "date":"2026-10-05",
+  "source":"https://litt.ly/digit",
+  "scope":"PUBLIC_ONLY_NO_PAID_CONTENT_EXTRACTION",
+  "baseline":{"date":"2026-10-03","file":"C2S/DIGIT_PUBLIC_DELTA_REVIEW_2026-10-03.json","indexed_refs":["REF-077","REF-078","REF-079","REF-080"]},
+  "duplicate_policy":"EXISTING_REF_ROLE_PLUS_PRIOR_DELTA_TOPIC_PLUS_PUBLIC_PAGE_TOPIC_COMPARISON",
+  "new_candidates":[
+    {"topic":"AI_VISUALIZATION_MASTER_CLASS_NANOBANANA","state":"NEW_PUBLIC_LISTING_VS_LOCAL_BASELINE","public_evidence":"Public landing page lists [나노바나나] AI 시각화 마스터 클래스 with 본책 and 통합본(본책+비주얼 백과사전); no public textual curriculum was exposed in the inspected page, so metadata only.","route":["ARCHITECTURE_DOMAIN_ENGINE","ASSET_ENGINE","DESIGN_GATE"],"indexing":"CANDIDATE_ONLY"}
+  ],
+  "changed_candidates":[
+    {"topic":"ARCHITECTURE_AI_NANOBANANA_2","state":"PUBLIC_EVIDENCE_EXPANDED","public_evidence":"Public page now exposes 12 styles x 8 building types = 96 cells; 4 outputs per cell = 384 verified images; six-section decomposition [scene, light, material, building, color, frame]; element book 6 categories x 12 styles; context book 8 environments x 12 styles.","route":["ARCHITECTURE_DOMAIN_ENGINE","ASSET_ENGINE","PROMPT_WORKFLOW"],"indexing":"UPDATE_CANDIDATE_ONLY"}
+  ],
+  "unchanged_or_duplicate":[
+    "INTERIOR_AI_NANOBANANA_2=>2026-10-03_DELTA_CANDIDATE",
+    "ARCHITECTURE_FACADE_100=>2026-10-03_DELTA_CANDIDATE",
+    "ARCHITECTURE_SEQUENCE_50=>2026-10-03_DELTA_CANDIDATE",
+    "DIAGRAM_100=>REF-078",
+    "DESIGN_CONCEPT_100=>REF-079",
+    "ARCHI_TRACE=>REF-080",
+    "OLDER_ARCHITECTURE_AI_PROMPT_MATRIX=>REF-077"
+  ],
+  "learning_review":{
+    "status":"REVIEWED_NOT_PROMOTED",
+    "reusable_signals":[
+      "Matrix-based variation separates style and building-type dimensions instead of storing isolated prompts.",
+      "Prompt decomposition into scene/light/material/building/color/frame supports controlled single-variable variation.",
+      "Human output verification is a distinct quality gate and should not be inferred from generation success."
+    ],
+    "note":"Signals are abstractions from public marketing descriptions only; paid ebook contents/prompts/images were not captured."
+  },
+  "domain_handoff":{
+    "status":"CANDIDATE_ONLY_PENDING_INDEX_OWNER_INCREMENTAL_REVISION",
+    "new_topic_count":1,
+    "changed_topic_count":1,
+    "promotion":false
+  },
+  "guards":["NO_PAID_CONTENT_BODY_CAPTURE","NO_IMAGE_OCR_OF_PAID_MATERIAL","NO_CANONICAL_PROMOTION","NO_CURRENT_POINTER_CHANGE","NO_MASTER_CHANGE","NO_MAIN_MERGE","NO_REMOTE_PUSH","NO_DEPLOYMENT","NO_PAID_API"]
+}

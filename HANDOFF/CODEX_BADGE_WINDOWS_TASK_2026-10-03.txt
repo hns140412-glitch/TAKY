@@ -1,0 +1,10 @@
+In D:\Git PWA\TAKY, fix the BADGE Windows durability regression minimally.
+No commit/push/merge/deploy/API. Preserve unrelated changes.
+Evidence: badge-award-ledger-store.js, family-praise-gift-journal.js, parent-praise-gift-journal.js all fsync the durable temp file, rename, then fsync the parent directory. On Windows, directory fsync returns EPERM and currently causes otherwise valid writes to fail. This is a platform limitation; regular-file fsync must remain strict.
+Requirements:
+1) In those three production files only, tolerate EPERM from fs.fsyncSync ONLY when process.platform==='win32' AND the descriptor is the parent directory sync after rename. Re-throw all other directory sync errors. Never weaken regular-file fsync.
+2) Add one focused BADGE regression test that simulates directory-descriptor EPERM cross-platform and proves append/journal write succeeds, and separately simulates regular-file EPERM and proves it still fails. Reuse public APIs; restore monkeypatches in finally.
+3) Run the new test and the seven previously failing badge tests.
+4) Run git diff --check.
+5) Write a concise non-authoritative report at ENFORCEMENT/beta_validation_2026_10_03/BADGE_WINDOWS_DURABILITY_FIX.md.
+Do not change canonical authority docs.

@@ -1,0 +1,49 @@
+{
+  "schema": "TAKY_REFERENCE_INTAKE_V31_NOTION_LEARNING_RUNTIME_VALIDATION_V1",
+  "status": "BRANCH_SCOPED_CLOSED_PASS__NOT_CURRENT__NOT_CANONICAL",
+  "validated_at": "2026-10-04",
+  "branch_worktree": "D:/Git PWA/TAKY-REF-V29-WT",
+  "scope": {
+    "index_version": "V31-NOTION-DELTA",
+    "learning_refs": [
+      "REF-081",
+      "REF-084",
+      "REF-085"
+    ]
+  },
+  "validated_consumption": [
+    {
+      "source_id": "REF-081",
+      "consumer": "HIDE_SEEK",
+      "behavior": "CONCEPT_GAP_REFERENCE_SUPPORT"
+    },
+    {
+      "source_id": "REF-084",
+      "consumer": "READY_SET",
+      "behavior": "OFFICIAL_RESOURCE_DISCOVERY"
+    },
+    {
+      "source_id": "REF-085",
+      "consumer": "HIDE_SEEK",
+      "behavior": "MATH_CONCEPT_RELATION_REFERENCE"
+    }
+  ],
+  "verified_guards": [
+    "SOURCE_REF_SURVIVES_INDEX_TO_LEARNING_RUNTIME",
+    "INDEX_RETRIEVAL_METADATA_DOES_NOT_MUTATE_LEARNER_STATE",
+    "REFERENCE_DOES_NOT_GAIN_PLANNER_OR_SCHEDULE_AUTHORITY",
+    "PROHIBITED_CLAIM_FAILS_CLOSED",
+    "AUTHOR_DIRECTION_SCOPE_METADATA_REMAINS_CONTEXT_NOT_MASTERY"
+  ],
+  "tests": {
+    "reference_intake_v31_notion_learning_runtime_e2e": "PASS_3_OF_3"
+  },
+  "authority": {
+    "current_pointer_changed": false,
+    "master_policy_changed": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false
+  }
+}

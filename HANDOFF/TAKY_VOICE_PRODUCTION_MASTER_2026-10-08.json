@@ -1,0 +1,95 @@
+{
+  "schema": "TAKY_VOICE_PRODUCTION_MASTER_V1",
+  "date": "2026-10-08",
+  "status": "PLANNING_CURRENT__PAID_GENERATION_NOT_AUTHORIZED",
+  "observed_credit_assumption": "~1 credit per input character from prior technical probe; usage reconciliation required",
+  "authority": {
+    "play_camp_core_role_lock": "PLAY_CAMP_DIALOGUE_SCRIPT_LOCK_2026-10-08.json",
+    "explorer_crew_source_lock": "EXPLORER_CREW_V2_SOURCE_LOCK_20261008_DIALOGUE_CANDIDATE_R9",
+    "route_policy": "ROUTE_BEFORE_CREATE"
+  },
+  "stages": [
+    {
+      "id": "P1_CORE_ROLE",
+      "state": "PREFLIGHT_INCOMPLETE_NOT_AUTHORIZED",
+      "preview_calls": 18,
+      "preview_chars": 429,
+      "preview_hard_cap": 500,
+      "selected_assets": 6,
+      "production_reuse_clips": 5,
+      "production_reuse_chars": 124,
+      "residual_clips": 20,
+      "residual_chars": 607,
+      "expected_total_credits": 1036,
+      "bounded_cap": 1168
+    },
+    {
+      "id": "P2_CREW_VOICE_FAMILY_CASTING",
+      "state": "NOT_AUTHORIZED",
+      "families": 6,
+      "candidates_per_family": 3,
+      "calls": 18,
+      "unique_sample_chars": 75,
+      "expected_credits": 225,
+      "cap10": 248,
+      "selected_signature_assets_reusable": true
+    },
+    {
+      "id": "P3_PLAY_CAMP_CORE6",
+      "state": "TAKY_REVIEW_PASS_WITH_FIXES__INDEPENDENT_RECHECK_PENDING__NOT_SCRIPT_LOCKED",
+      "clips": 36,
+      "chars": 994,
+      "expected_credits": 994,
+      "cap10": 1094
+    },
+    {
+      "id": "P4_MAIN_CORE6",
+      "state": "LOCK_CANDIDATE__INDEPENDENT_RECHECK_DEBT",
+      "clips": 36,
+      "chars": 1222,
+      "expected_credits": 1222,
+      "cap10": 1345
+    },
+    {
+      "id": "P5_MAIN_LATER18",
+      "state": "DEFER_UNTIL_CORE6_QA",
+      "clips": 108,
+      "chars": 3800,
+      "expected_credits": 3800,
+      "cap10": 4180
+    }
+  ],
+  "main_current": {
+    "clips": 144,
+    "chars": 5022,
+    "cap10": 5525,
+    "stale_previous_chars": 4852
+  },
+  "optional_shared": {
+    "signatures": {
+      "clips": 24,
+      "chars": 411,
+      "remaining_after_casting_selected": 336
+    },
+    "memory_callbacks": {
+      "clips": 30,
+      "chars": 1001
+    },
+    "core6_main_scene_lines": {
+      "clips": 30,
+      "chars": 677
+    }
+  },
+  "combined_prioritized": {
+    "expected_credits": 7277,
+    "bounded_stage_caps": 8035
+  },
+  "excluded": [
+    "11 pronunciation assets",
+    "24 deferred Play Camp scripts",
+    "optional remaining signatures/memory/scene assets",
+    "unapproved retries"
+  ],
+  "paid_generation_authorized": false,
+  "push_merge_deploy_authorized": false
+}

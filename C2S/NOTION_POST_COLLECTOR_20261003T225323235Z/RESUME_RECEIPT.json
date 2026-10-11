@@ -1,0 +1,270 @@
+{
+  "schema": "TAKY_LOCAL_POST_COLLECTOR_RESUME_V1",
+  "task_id": "NOTION_POST_COLLECTOR_20261003T225323235Z",
+  "status": "HOLD",
+  "collector_exit": {
+    "code": 0,
+    "evidence": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\logs\\scheduled_notion\\20261004_075318_incremental.log",
+    "generation": "20261003T225323235Z"
+  },
+  "items": [
+    {
+      "notion_page_id": "3eefa868-dc2a-811f-a306-f5eaf51a64db",
+      "title": "오빠두엑셀 - 엑셀 강의 대표 채널 | 무료 엑셀 강의",
+      "normalized_url": "https://www.oppadu.com/",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-811f-a306-f5eaf51a64db\\1d1283a4cdb8608356b20012b4543b8a1178cb9d6a085b9c689e674dcfaba150",
+      "candidate_key": "NOTION:3eefa868-dc2a-811f-a306-f5eaf51a64db",
+      "source_actor": "Oppadu / oppadu.com",
+      "source_actor_class": "COMMERCIAL_TRAINING_PUBLISHER",
+      "source_author_identity_state": "ATTRIBUTED_FROM_LOCAL_CAPTURE_AND_LOCATOR__IDENTITY_NOT_INDEPENDENTLY_VERIFIED",
+      "source_direction": "TRAINING_DIRECTORY_AND_MEMBERSHIP_PROMOTION",
+      "source_direction_signals": [
+        "LIVE_COURSES",
+        "PREMIUM_PLUS_TIERS",
+        "AI_TOOL_ADVOCACY"
+      ],
+      "applicability_scope": [
+        "WORK_OS_SOURCE_DISCOVERY"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "Directory of spreadsheet and AI automation courses; course listings do not establish instructional efficacy or authorize tool adoption.",
+      "acquisition_state": "LOCAL_NOTION_TEXT_SNAPSHOT_ONLY",
+      "domain": "work",
+      "proposed_consumer": "WORK_OS_DOMAIN_ENGINE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    },
+    {
+      "notion_page_id": "3eefa868-dc2a-812a-94a9-e6903289786b",
+      "title": "PPT 사냥꾼 꿀팁 창고",
+      "normalized_url": "https://ppthunter.sos33377.workers.dev/tips/",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-812a-94a9-e6903289786b\\da81b6537a59146709c8e88f85ec4f4e825a26f465f7a24b82edb0cd00707401",
+      "candidate_key": "NOTION:3eefa868-dc2a-812a-94a9-e6903289786b",
+      "source_actor": "PPT Hunter / pp thunter publisher brand",
+      "source_actor_class": "PRESENTATION_WORKFLOW_CREATOR",
+      "source_author_identity_state": "ATTRIBUTED_FROM_LOCAL_CAPTURE_AND_LOCATOR__IDENTITY_NOT_INDEPENDENTLY_VERIFIED",
+      "source_direction": "TUTORIAL_DIRECTORY_AND_TOOL_ADVOCACY",
+      "source_direction_signals": [
+        "PROMPTS_AND_FILES",
+        "VENDOR_COMPARISON",
+        "FREE_TOOL_MARKETING"
+      ],
+      "applicability_scope": [
+        "WORK_OS_PRESENTATION_DISCOVERY"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "Directory of 13 tips; parent-directory relation to REF-082 and the new VBA article, not a duplicate of either article.",
+      "acquisition_state": "LOCAL_NOTION_TEXT_SNAPSHOT_ONLY",
+      "domain": "work",
+      "proposed_consumer": "WORK_OS_DOMAIN_ENGINE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    },
+    {
+      "notion_page_id": "3eefa868-dc2a-8148-adea-cbc52a94e35f",
+      "title": "오빠두엑셀 회원 자료실 페이지 - 오빠두엑셀",
+      "normalized_url": "https://www.oppadu.com/resources/",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-8148-adea-cbc52a94e35f\\2067c5515581b1124d3c93482c22fff7999565927eba3d59e5b11ac3794e9b3c",
+      "candidate_key": "NOTION:3eefa868-dc2a-8148-adea-cbc52a94e35f",
+      "source_actor": "Oppadu / oppadu.com",
+      "source_actor_class": "COMMERCIAL_TRAINING_PUBLISHER",
+      "source_author_identity_state": "ATTRIBUTED_FROM_LOCAL_CAPTURE_AND_LOCATOR__IDENTITY_NOT_INDEPENDENTLY_VERIFIED",
+      "source_direction": "RESOURCE_DIRECTORY_AND_PRODUCT_DISTRIBUTION",
+      "source_direction_signals": [
+        "ADD_INS",
+        "VERSION_CHANGELOG",
+        "TEMPLATES"
+      ],
+      "applicability_scope": [
+        "WORK_OS_RESOURCE_DISCOVERY"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "Resource catalog and version history are discovery evidence; linked binaries, credentials and API integrations remain unverified and unused.",
+      "acquisition_state": "LOCAL_NOTION_TEXT_SNAPSHOT_ONLY",
+      "domain": "work",
+      "proposed_consumer": "WORK_OS_DOMAIN_ENGINE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    },
+    {
+      "notion_page_id": "3eefa868-dc2a-8178-85f6-c4f777e347b0",
+      "title": "500페이지 PPT 색깔, 딸깍 한 방에 바꾸는 법 (VBA 매크로 무료 배포) · PPT 사냥꾼 꿀팁 창고",
+      "normalized_url": "https://ppthunter.sos33377.workers.dev/tips/ppt-color-swap-vba/",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-8178-85f6-c4f777e347b0\\7dca6a05df7e6263ae91e59665c385f361e82beeb53149fdcca43e7eb40e65e6",
+      "candidate_key": "NOTION:3eefa868-dc2a-8178-85f6-c4f777e347b0",
+      "source_actor": "PPT Hunter / pp thunter publisher brand",
+      "source_actor_class": "PRESENTATION_WORKFLOW_CREATOR",
+      "source_author_identity_state": "ATTRIBUTED_FROM_LOCAL_CAPTURE_AND_LOCATOR__IDENTITY_NOT_INDEPENDENTLY_VERIFIED",
+      "source_direction": "VBA_AUTOMATION_TUTORIAL_WITH_SPEED_CLAIMS",
+      "source_direction_signals": [
+        "BULK_COLOR_REPLACEMENT",
+        "FREE_MACRO",
+        "500_PAGE_SPEED_CLAIM"
+      ],
+      "applicability_scope": [
+        "WORK_OS_PRESENTATION_AUTOMATION_CANDIDATE"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "Captured text proposes HEX-based PowerPoint color replacement. Macro behavior and coverage require isolated code review and tests; no source macro executed.",
+      "acquisition_state": "LOCAL_NOTION_TEXT_SNAPSHOT_ONLY",
+      "domain": "work",
+      "proposed_consumer": "WORK_OS_DOMAIN_ENGINE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    },
+    {
+      "notion_page_id": "3eefa868-dc2a-81e2-8b6a-e252730faf9a",
+      "title": "몸값 2배 올리는 CARL 성과보고 치트키",
+      "normalized_url": "https://furtive-gong-fc3.notion.site/2-CARL-3eb1c380253680938f99d0ab88a5cf2f",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-81e2-8b6a-e252730faf9a\\6bf0a16a2cca0c4f3505ed057a5d1857986693f8ab80d206b66982073de298b9",
+      "candidate_key": "NOTION:3eefa868-dc2a-81e2-8b6a-e252730faf9a",
+      "source_actor": "UNKNOWN; Notion page creator is not verified source author",
+      "source_actor_class": "UNKNOWN",
+      "source_author_identity_state": "UNVERIFIED_NO_AUTHOR_OR_BODY",
+      "source_direction": "CAREER_OUTCOME_MARKETING_INFERRED_FROM_TITLE_ONLY",
+      "source_direction_signals": [
+        "TITLE_DOUBLE_VALUE_CLAIM",
+        "NO_BODY_TEXT",
+        "GENERIC_NOTION_IMAGES"
+      ],
+      "applicability_scope": [
+        "WORK_OS_REPORTING_DISCOVERY_PENDING_CONTENT"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "CARL article body and author are absent: two generic image blocks only. No CARL method definition or efficacy claim can be mined.",
+      "acquisition_state": "NEEDS_MORE_EVIDENCE",
+      "domain": "work",
+      "proposed_consumer": "WORK_OS_DOMAIN_ENGINE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    },
+    {
+      "notion_page_id": "3eefa868-dc2a-81e4-aaa8-d2685b11d273",
+      "title": "Design Systems Gallery",
+      "normalized_url": "https://www.oppadu.com/tools/design-systems-site/",
+      "block_snapshot_folder": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\notion_incremental\\snapshots\\3eefa868-dc2a-81e4-aaa8-d2685b11d273\\c27c3f1fc5bef2dd886c6413bbbedf4e1f2c30400a01f873efe367e08499ffa4",
+      "candidate_key": "NOTION:3eefa868-dc2a-81e4-aaa8-d2685b11d273",
+      "source_actor": "Oppadu-hosted Design Systems Gallery; individual curator unverified",
+      "source_actor_class": "THIRD_PARTY_DESIGN_AGGREGATOR",
+      "source_author_identity_state": "ATTRIBUTED_FROM_LOCAL_CAPTURE_AND_LOCATOR__IDENTITY_NOT_INDEPENDENTLY_VERIFIED",
+      "source_direction": "DESIGN_REFERENCE_CURATION",
+      "source_direction_signals": [
+        "BRAND_STYLE_SUMMARIES",
+        "THIRD_PARTY_GALLERY",
+        "DESIGN_TOKEN_DISCOVERY"
+      ],
+      "applicability_scope": [
+        "DESIGN_GATE_REFERENCE_DISCOVERY",
+        "WORK_OS_VISUAL_REFERENCE"
+      ],
+      "authority_ceiling": "DISCOVERY_ONLY__NO_POLICY_RUNTIME_INSTALL_OR_CANONICAL_AUTHORITY",
+      "mining_finding": "Gallery of brand design patterns is secondary discovery evidence, not official design-system specifications or permission to reuse assets.",
+      "acquisition_state": "LOCAL_NOTION_TEXT_SNAPSHOT_ONLY",
+      "domain": "work",
+      "proposed_consumer": "DESIGN_GATE",
+      "learning_engine": "NOT_APPLICABLE_WORK_REFERENCE_NOT_LEARNER_EVIDENCE",
+      "duplicate_exact_url_matches": [],
+      "queue_duplicate_ids": [],
+      "version_relation": "FIRST_OBSERVATION__NOT_GLOBAL_NOVELTY_PROOF",
+      "index_owner_review": "PENDING_INDEPENDENT_OWNER_VERIFIER",
+      "status": "OPEN_HOLD",
+      "source_ref": null
+    }
+  ],
+  "duplicate_check_scope": [
+    "C2S\\DATA_INDEX_V30_INDEX_OWNER_RECEIPT_2026-10-02.json",
+    "C2S\\DATA_INDEX_V31_NOTION_INDEX_OWNER_RECEIPT_2026-10-04.json",
+    "C2S\\NOTION_REFERENCE_DRIVE_INDEX_SYNC_2026-10-04.json",
+    "C2S\\NOTION_REFERENCE_INDEX_DELTA_V31_2026-10-04.json",
+    "CURRENT\\DATA\\REFERENCE_INTAKE_DISPOSITION_LEDGER.json"
+  ],
+  "duplicate_check_limit": "Local available index/ledger metadata only; authoritative V11/V31 full index not available in this workspace. No global absence claim.",
+  "stages": {
+    "1": "VERIFIED_EXIT_ZERO_GENERATION_AND_SIX_FINGERPRINTS",
+    "2": "FIVE_TEXT_SNAPSHOTS_MINED_ONE_INCOMPLETE",
+    "3_5": "SIX_CLASSIFIED_WITH_UNCERTAINTY_AND_CEILINGS",
+    "6": "LOCAL_EXISTENCE_CHECK_COMPLETE_GLOBAL_CHECK_PENDING",
+    "7": "HOLD_INDEPENDENT_INDEX_OWNER_VERIFIER_NOT_CONFIGURED",
+    "8": "BLOCKED_BY_7_NO_ACCEPTED_INDEX_DELTA",
+    "9": "DOMAIN_HANDOFF_CANDIDATES_PREPARED_NOT_ACCEPTED",
+    "10": "BLOCKED_BY_7_NO_RUNTIME_CONSUMPTION_AUTHORIZED",
+    "11": "SEE_VALIDATION_JSON",
+    "12": "PERSISTED_WITH_INPUT_DIGESTS"
+  },
+  "resume": {
+    "open_items_only": [
+      "NOTION:3eefa868-dc2a-811f-a306-f5eaf51a64db",
+      "NOTION:3eefa868-dc2a-812a-94a9-e6903289786b",
+      "NOTION:3eefa868-dc2a-8148-adea-cbc52a94e35f",
+      "NOTION:3eefa868-dc2a-8178-85f6-c4f777e347b0",
+      "NOTION:3eefa868-dc2a-81e2-8b6a-e252730faf9a",
+      "NOTION:3eefa868-dc2a-81e4-aaa8-d2685b11d273"
+    ],
+    "next_actions": [
+      "Recover CARL body and source author evidence through an authorized acquisition path",
+      "Obtain independently owner-provisioned review bound to six page IDs and snapshot fingerprints; verify authoritative index duplicate/version relations",
+      "Apply approved incremental index delta then touched search projection and domain handoffs; validate actual consumers before success ACK"
+    ],
+    "closed_refs_preserved": [
+      "REF-081",
+      "REF-082",
+      "REF-083",
+      "REF-084",
+      "REF-085",
+      "REF-086"
+    ],
+    "success_ack_written": false
+  },
+  "guards": {
+    "network_used": false,
+    "provider_keys_used": false,
+    "paid_api_used": false,
+    "notion_patched": false,
+    "full_corpus_mined": false,
+    "canonical_promoted": false,
+    "current_promoted": false,
+    "merged": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "completion_report": {
+    "rationale": "Fail closed: this generation differs from prior closed cycle and lacks independent indexing approval; CARL snapshot lacks body.",
+    "files_changed": "Only this C2S evidence directory",
+    "scope_deviations": [],
+    "runtime_validation": "Not authorized for held candidates",
+    "mobile_validation": "Not applicable",
+    "unresolved_risks": [
+      "incomplete CARL content",
+      "unverified source identities",
+      "owner boundary unavailable",
+      "global duplicate check incomplete"
+    ],
+    "commit_produced": null,
+    "requested_next_transition": "Remain OPEN/HOLD pending evidence and independent owner review; no lifecycle promotion"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "TAKY_AI_Q3_COST_BOTTLENECK_TELEMETRY_V1",
+  "generated_at": "2026-10-06T00:13:46.901110+00:00",
+  "representative_task": "resume current AI learning quest",
+  "measured": {
+    "baseline_context_read_bytes": 75104,
+    "targeted_context_read_bytes": 1305,
+    "required_state_output_bytes": 337,
+    "baseline_file_reads": 6,
+    "targeted_file_reads": 1
+  },
+  "diagnosis": "CONTEXT_INPUT_DOMINANT_LOCAL_IO",
+  "evidence": {
+    "context_byte_reduction_percent": 98.26,
+    "required_fact_omissions": 0
+  },
+  "outcome": "PASS_LOCAL_IO_ONLY",
+  "claim_ceiling": "LOCAL_CONTEXT_IO; NOT MODEL_TOKEN_OR_BILLING_TELEMETRY"
+}

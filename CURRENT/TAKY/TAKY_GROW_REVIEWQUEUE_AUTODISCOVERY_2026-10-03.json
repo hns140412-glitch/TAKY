@@ -1,0 +1,34 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_REVIEWQUEUE_AUTODISCOVERY_2026-10-03",
+  "status": "LOCAL_VERIFIED_ACTIVE",
+  "additions": {
+    "data_utility_autodiscovery": {
+      "default_path": "LEARNING/evidence/data-index-outcome-utility.json",
+      "override_env": "TAKY_DATA_INDEX_OUTCOME_UTILITY",
+      "explicit_flag": "--outcome-utility",
+      "authoritative": false,
+      "precedence": "EXACT -> CURRENT -> OUTCOME_UTILITY -> RETRIEVAL_SCORE"
+    },
+    "grow_review_queue": {
+      "adapter": "LEARNING/transport/grow-review-queue-adapter.js",
+      "durable_key": "taky/grow/review-queue-v1",
+      "source": "privacy-safe LEARNING_SYSTEM_GROWTH aggregate candidates only",
+      "promotion_authorized": false,
+      "authority_transfer": false,
+      "idempotent": true,
+      "member_identifiers_persisted": false
+    },
+    "privacy_hardening": {
+      "system_growth_parent_refs": "aggregate-only evidence ref",
+      "per_member_hashed_parent_refs_removed": true
+    }
+  },
+  "verification": {
+    "durable_learning_system_growth_store_test": "PASS",
+    "data_index_search_autodiscovery_test": "PASS",
+    "grow_lineage_utility_autorefresh_test": "PASS",
+    "full_python_enforcement": "144/144 PASS"
+  },
+  "side_effects": "No push, merge, deploy, Netlify action, or paid API."
+}

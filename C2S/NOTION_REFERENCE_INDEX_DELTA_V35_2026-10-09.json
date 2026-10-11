@@ -1,0 +1,96 @@
+{
+  "schema": "TAKY_NOTION_REFERENCE_INDEX_DELTA_V35",
+  "generated_at": "2026-10-08T15:26:00Z",
+  "parent": "NOTION_REFERENCE_INDEX_DELTA_V34_2026-10-08.json",
+  "parent_sha256": "a68f850f12859029491269d18a4f70f00aa74610ba9e2a08eed3a70e56fe53d8",
+  "input_mining_receipt": "TAKY-SOURCE-VAULT/reports/SIEZEALL_DRIVE_REF096_HUMANIZE_KR_SKILL_MINING_20261009.json",
+  "input_mining_sha256": "e6c208d76eff8069b2ea6615b26464376b15a8fd55559bab0457756e1c7eb28a",
+  "items": [
+    {
+      "source_id": "REF-096",
+      "title": "Humanize KR v2.3.2 Orchestrator Skill — Remote Drive Ingress / Implementation Reference",
+      "url": "https://github.com/epoko77-ai/im-not-ai/blob/main/skills/humanize-korean/SKILL.md",
+      "secondary_url": "https://docs.google.com/document/d/1hC9bqsBG-9kc8XpDafM6qgxmD26Vgj0gpn3mRslPgWY/edit",
+      "source_family": "HUMANIZE_KR_ORCHESTRATOR_SKILL_IMPLEMENTATION",
+      "source_type": "SIEZEALL_REMOTE_DRIVE_INBOX_WITH_UPSTREAM_BLOB_VERIFICATION",
+      "authority_level": "PRIMARY_REPO_IMPLEMENTATION_AUTHORITY_FOR_HUMANIZE_KR_SKILL__TAKY_REFERENCE_ONLY__NOT_AUTHORSHIP_PROOF",
+      "domain_facets": [
+        "ai_orchestration",
+        "korean_writing_quality",
+        "output_style_qa",
+        "workflow_efficiency"
+      ],
+      "consumers": [
+        "DOMAIN_ENGINE",
+        "AI_REFERENCE_PROJECTION"
+      ],
+      "origin_type": "SIEZEALL_GOOGLE_DRIVE_REMOTE_INBOX_PLUS_UPSTREAM_OPEN_SOURCE",
+      "publisher_or_account": "epoko77-ai / Humanize KR contributors",
+      "value_statement": "Implementation reference for guarded Korean output humanization: route by severity, preserve meaning anchors, minimize calls, and enforce deterministic gates.",
+      "controlled_terms": [
+        "HUMANIZE_KR",
+        "ROUTE_HINT",
+        "LIGHT_STANDARD_HEAVY",
+        "MEANING_ANCHOR",
+        "DETERMINISTIC_GATE",
+        "85_PATTERN_IDS",
+        "NOT_AUTHORSHIP_DETECTOR"
+      ],
+      "keywords": [
+        "Humanize KR",
+        "route_hint",
+        "light standard heavy",
+        "meaning preservation",
+        "verify_gates",
+        "AI 티",
+        "문체 QA"
+      ],
+      "entities": [
+        "epoko77-ai/im-not-ai",
+        "Humanize KR"
+      ],
+      "source_review_state": "INDEX_OWNER_REVIEW_PENDING",
+      "current_relation": "REFERENCE_ONLY",
+      "duplicate_relation": "RELATED_TO_REF-095_DISTINCT_IMPLEMENTATION_FILE",
+      "version_relation": "IMPLEMENTATION_SUBSOURCE_OF_EXISTING_PROJECT_REFERENCE",
+      "verification_needed": [
+        "Refresh when upstream SKILL.md blob SHA changes.",
+        "Keep implementation guidance separate from taxonomy truth.",
+        "Do not copy tool-specific runtime assumptions blindly."
+      ],
+      "claims_to_exclude": [
+        "A matched style pattern proves AI authorship.",
+        "Humanize KR must be adopted wholesale as TAKY runtime.",
+        "The skill provides learner mastery or pedagogical authority."
+      ],
+      "source_actor": "epoko77-ai / Humanize KR contributors",
+      "source_actor_class": "OPEN_SOURCE_PROJECT_PRIMARY_IMPLEMENTATION_FILE",
+      "source_author_identity_state": "PRIMARY_REPOSITORY_BLOB_VERIFIED__INDIVIDUAL_REAL_ID_NOT_REQUIRED",
+      "source_direction": "GUARDED_KOREAN_OUTPUT_HUMANIZATION_ORCHESTRATION",
+      "source_direction_signals": [
+        "ROUTE_HINT",
+        "CALL_MINIMIZATION",
+        "MEANING_PRESERVATION",
+        "DETERMINISTIC_GATES",
+        "FALSE_POSITIVE_GUARDS"
+      ],
+      "applicability_scope": [
+        "TAKY_KOREAN_OUTPUT_QA",
+        "WORK_OS_REPORT_AND_EXPLANATORY_TEXT_STYLE_QA",
+        "CONTENT_GENERATION_GUARDED_REWRITE_WORKFLOW"
+      ],
+      "authority_ceiling": "PRIMARY_REPO_IMPLEMENTATION_AUTHORITY_FOR_HUMANIZE_KR_SKILL__REFERENCE_PATTERN_ONLY_FOR_TAKY__NOT_AI_AUTHORSHIP_PROOF",
+      "source_ref": "INDEX:REF-096",
+      "canonical_promotion": false
+    }
+  ],
+  "guards": [
+    "AUTHOR != AUTHORITY",
+    "REFERENCE_ONLY",
+    "STYLE_SIGNAL != AI_AUTHORSHIP_PROOF",
+    "IMPLEMENTATION_REFERENCE != TAKY_RUNTIME_AUTHORITY",
+    "NO_CURRENT_POINTER_CHANGE",
+    "NO_DEPLOYMENT",
+    "NO_PAID_API"
+  ]
+}

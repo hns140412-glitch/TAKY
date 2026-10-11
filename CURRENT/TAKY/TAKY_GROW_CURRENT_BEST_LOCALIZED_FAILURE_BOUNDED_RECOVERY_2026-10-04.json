@@ -1,0 +1,56 @@
+{
+  "namespace": "TAKY_GROW",
+  "state_id": "TAKY_GROW_CURRENT_BEST_LOCALIZED_FAILURE_BOUNDED_RECOVERY_2026-10-04",
+  "status": "SUPERSEDED_CURRENT_BEST",
+  "superseded_by": "CURRENT/TAKY/TAKY_GROW_CURRENT_BEST_LOCALIZED_FAILURE_BOUNDED_RECOVERY_2026-10-04_R2.json",
+  "strategy_id": "LOCALIZED_FAILURE_BOUNDED_RECOVERY",
+  "strategy": "When a failure is localized and reproducible, change only the failing boundary with bounded recovery; preserve fail-fast behavior for unrelated failures.",
+  "promotion": {
+    "target_state": "CURRENT_BEST",
+    "promotion_method": "HUMAN_REVIEWED",
+    "human_approval_observed": true,
+    "automatic_promotion": false,
+    "approval_scope": "Promote this GROW execution strategy only; no repository push, merge, deploy, Netlify, paid API, or domain-authority transfer."
+  },
+  "evidence": {
+    "source": "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-03.json",
+    "synthetic": false,
+    "verified_outcomes": 3,
+    "context_diversity": 3,
+    "verification_authority": "GITHUB_ACTIONS",
+    "regression_failures": 0,
+    "growth_decision_before_human_review": "PROMOTION_ELIGIBLE"
+  },
+  "applicability": [
+    "A failure boundary is identified from concrete evidence.",
+    "The correction can be bounded to the observed failure mode.",
+    "Unrelated failure classes remain fail-fast rather than being broadly retried or suppressed.",
+    "Relevant regression evidence is clean after the correction."
+  ],
+  "non_applicability": [
+    "Unknown or unlocalized failures.",
+    "Design or UX acceptance where functional CI cannot prove parity.",
+    "Cases with unresolved confirmed failure or regression failure.",
+    "Situations requiring broad exception swallowing, silent fallback, or authority bypass."
+  ],
+  "guards": {
+    "hide_visual_qa_counterexample_preserved": true,
+    "functional_ci_does_not_certify_design_parity": true,
+    "unresolved_failure_blocks_repeat": true,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD_WITHOUT_EXPLICIT_USER_APPROVAL"
+  },
+  "supersedes_for_strategy_selection": [
+    "CURRENT/TAKY/TAKY_GROW_REMAINING_OPEN_CLOSURE_2026-10-03.json#next_gate"
+  ],
+  "preserves": [
+    "CURRENT/TAKY/TAKY_GROW_REVIEW_PIPELINE_2026-10-03.json",
+    "CURRENT/TAKY/TAKY_GROW_REAL_OUTCOME_EVIDENCE_2026-10-03.json",
+    "CURRENT/TAKY/TAKY_GROW_REMAINING_OPEN_CLOSURE_2026-10-03.json"
+  ],
+  "next_status": "SUPERSEDED_BY_CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json",
+  "next": "Use this as the preferred failure-recovery strategy when its applicability conditions match; keep collecting real outcomes and demote/review if contradictory evidence appears."
+}

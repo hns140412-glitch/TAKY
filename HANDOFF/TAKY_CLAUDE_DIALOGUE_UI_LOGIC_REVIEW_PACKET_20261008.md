@@ -1,0 +1,10 @@
+# CLAUDE READ-ONLY INDEPENDENT REVIEW: PLAY CAMP FIRST
+User specifically prioritizes PLAY CAMP. ONE targeted review; do not spend resources on full systemwide reassessment. No editing, no subagents, no tests, no ElevenLabs or external calls.
+Read actual local files, do not rely solely on handoff summaries:
+- D:\Git PWA\HANGUL-PLAY-20261007\TAKY_CURRENT.md
+- D:\Git PWA\HANGUL-PLAY-20261007\PLAY_CAMP_DIALOGUE_SCRIPT_LOCK_2026-10-08.json
+- D:\Git PWA\HANGUL-PLAY-20261007\GONGBANG_REVIEW_20261008_CODEX.md
+- D:\Git PWA\HANGUL-PLAY-20261007\PLAY_CAMP_CLOSURE_MASTER_2026-10-08.md
+- Any directly referenced actual Play Camp runtime/UI dialogue mapping file, ONLY if needed to verify screen and trigger
+- D:\Git PWA\TAKY\HANDOFF\TAKY_EXPLORER_CREW_VOICE_CURRENT_2026-10-08.md (just Play Camp Core6 scope)
+Task: verify Play Camp Core Role 49 SCRIPT_LOCK against actual child-facing UI screens/moments and runtime trigger/consumer, pedagogical interaction manipulate/discover/name/connect, learner early stage register, Teacher vs Coach vs Maker roles, Korean/English corresponding speaking intent, no misleading unimplemented action, voice playback context and collisions/repeats. Check 25 CREATE vs 24 DEFERRED and separate 11 pronunciation assets. Inspect script IDs and actual wiring; distinguish unmapped/unverified from genuinely invalid. Then briefly inspect Play Camp Crew Core6 36 candidate voice lines for boundary leaks/role takeover/age appropriateness; they are not SCRIPT_LOCKED and independent R9 recheck is OUTCOME_UNKNOWN. Do not mix Crew with Core Role. No broad audit. Output in Korean: by scope PASS/PASS_WITH_FIXES/HOLD/UNKNOWN, line-by-line source IDs only for exceptions, P0/P1/P2, exact evidence paths, gap to truly approve paid production; preserve existing immutable lock until authorized. No invented proof, no tests or file mutation.
