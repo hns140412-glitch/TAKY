@@ -15,6 +15,8 @@ from .enforcement import (
     ACCOUNT_IDENTITY_PROVIDER,
     BINDING_FIELDS,
     stable_hash,
+    validate_startup_readback_receipt_for_digest,
+    startup_readback_receipt_id,
 )
 
 
@@ -127,7 +129,30 @@ def _write_atomic_json(path: Path, value: Dict[str, Any]) -> None:
         f.write(payload)
         f.flush()
         os.fsync(f.fileno())
-    os.replace(tmp, path)
+    try:
+        os.replace(tmp, path)
+        return
+    except PermissionError:
+        # Windows readers can hold the destination without FILE_SHARE_DELETE,
+        # which blocks atomic replacement even when ordinary writes are allowed.
+        # Preserve the atomic path by default; use bounded in-place fallback only
+        # for that Windows sharing-lock case and verify exact readback.
+        if os.name != "nt" or not path.exists():
+            raise
+
+    try:
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(payload)
+            f.flush()
+            os.fsync(f.fileno())
+        readback = path.read_text(encoding="utf-8")
+        if readback != payload:
+            raise StateIntegrityError("Windows sharing-lock fallback readback mismatch")
+    except Exception:
+        # Keep the complete tmp payload as recovery evidence if fallback fails.
+        raise
+    else:
+        tmp.unlink(missing_ok=True)
 
 
 def _verify_anchor_pair(
@@ -169,12 +194,14 @@ def load_bundle(
         "route_ledgers": runtime.get("route_ledgers", {}),
         "preflight_receipts": runtime.get("preflight_receipts", {}),
         "evidence_registry": runtime.get("evidence_registry", {}),
+        "economy_evidence_registry": runtime.get("economy_evidence_registry", {}),
         "completion_registry": runtime.get("completion_registry", {}),
         "active_attempts": runtime.get("active_attempts", {}),
         "execution_outcomes": runtime.get("execution_outcomes", {}),
         "execution_calls": runtime.get("execution_calls", {}),
         "independent_review_registry": runtime.get("independent_review_registry", {}),
         "done_gate_receipts": runtime.get("done_gate_receipts", {}),
+        "control_incidents": runtime.get("control_incidents", {}),
         "consumed_approvals": runtime.get("consumed_approvals", {}),
         "user_events": runtime.get("user_events", {}),
         "authority_rebind_history": runtime.get("authority_rebind_history", []),
@@ -302,6 +329,79 @@ def _validate_account_binding_transition(
             raise StateIntegrityError(f"account binding immutable field changed: {field}")
 
 
+def _validate_startup_readback_transition(
+    current: Dict[str, Any],
+    candidate: Dict[str, Any],
+    authority_digest_value: str,
+) -> None:
+    current_context = current.get("context", {})
+    candidate_context = candidate.get("context", {})
+    if not isinstance(current_context, dict) or not isinstance(candidate_context, dict):
+        raise StateIntegrityError("runtime context must be an object")
+    existing = current_context.get("startup_readback_receipt")
+    proposed = candidate_context.get("startup_readback_receipt")
+    if existing is not None and proposed is None:
+        raise StateIntegrityError("startup readback receipt cannot be cleared")
+    if proposed is None:
+        return
+    ok, reason = validate_startup_readback_receipt_for_digest(
+        authority_digest_value,
+        proposed,
+    )
+    if not ok:
+        raise StateIntegrityError(reason)
+
+
+def _validate_economy_evidence_transition(
+    current: Dict[str, Any],
+    candidate: Dict[str, Any],
+    authority_digest_value: str,
+) -> None:
+    current_registry = current.get("economy_evidence_registry", {})
+    candidate_registry = candidate.get("economy_evidence_registry", {})
+    if not isinstance(current_registry, dict) or not isinstance(candidate_registry, dict):
+        raise StateIntegrityError("economy evidence registry must be an object")
+
+    for ref, existing in current_registry.items():
+        if ref not in candidate_registry:
+            raise StateIntegrityError("economy evidence cannot be removed")
+        if candidate_registry.get(ref) != existing:
+            raise StateIntegrityError("economy evidence is append-only")
+
+    allowed_kinds = {
+        "EXTERNAL_NOT_NECESSARY",
+        "REUSE_SUFFICIENT",
+        "LOCAL_SUFFICIENT",
+    }
+    for ref, item in candidate_registry.items():
+        if not isinstance(ref, str) or not ref.strip() or not isinstance(item, dict):
+            raise StateIntegrityError("economy evidence entry is malformed")
+        if item.get("decision_kind") not in allowed_kinds:
+            raise StateIntegrityError("economy evidence decision kind is invalid")
+        if item.get("verified") is not True:
+            raise StateIntegrityError("economy evidence must be verified")
+        if item.get("acceptance_state") != "ACCEPTED":
+            raise StateIntegrityError("economy evidence must be accepted")
+        if item.get("source_status") != "CURRENT":
+            raise StateIntegrityError("economy evidence must be current")
+        # Existing accepted evidence is immutable history and may belong to a
+        # prior authority digest after a legitimate authority rebind. Only
+        # newly appended evidence must bind to the current authority digest.
+        if ref not in current_registry and item.get("authority_digest") != authority_digest_value:
+            raise StateIntegrityError("economy evidence authority is stale")
+        for field in (
+            "action_digest",
+            "semantic_owner_ref",
+            "semantic_owner_scope",
+            "source_or_artifact_ref",
+            "verified_by",
+            "decision_digest",
+        ):
+            value = item.get(field)
+            if not isinstance(value, str) or not value.strip():
+                raise StateIntegrityError(f"economy evidence {field} missing")
+
+
 def save_runtime(
     runtime: Dict[str, Any],
     *,
@@ -322,6 +422,16 @@ def save_runtime(
             raise StateConflictError("runtime version changed")
 
         _validate_account_binding_transition(current, runtime)
+        _validate_startup_readback_transition(
+            current,
+            runtime,
+            authority_digest_value,
+        )
+        _validate_economy_evidence_transition(
+            current,
+            runtime,
+            authority_digest_value,
+        )
 
         updated = dict(runtime)
         updated["runtime_version"] = expected_version + 1
@@ -417,6 +527,35 @@ def _key_amend_diff(
     if diffs and user_event.get("key_amend") is not True:
         raise StateIntegrityError("explicit KEY_AMEND authorization required")
     return diffs
+
+
+
+def _release_stale_active_attempts(
+    runtime: Dict[str, Any],
+    new_authority_digest: str,
+) -> Dict[str, Any]:
+    """Release only route ownership whose bound receipt belongs to another authority."""
+    updated = dict(runtime)
+    active = dict(updated.get("active_attempts", {}))
+    receipts = dict(updated.get("preflight_receipts", {}))
+
+    for execution_key, item in list(active.items()):
+        if not isinstance(item, dict):
+            continue
+        receipt_id = item.get("receipt_id")
+        receipt = receipts.get(receipt_id)
+        if not isinstance(receipt, dict):
+            continue
+        old_digest = receipt.get("authority_digest")
+        if isinstance(old_digest, str) and old_digest and old_digest != new_authority_digest:
+            active.pop(execution_key, None)
+            marked = dict(receipt)
+            marked["active_attempt_released_on_authority_rebind"] = new_authority_digest
+            receipts[receipt_id] = marked
+
+    updated["active_attempts"] = active
+    updated["preflight_receipts"] = receipts
+    return updated
 
 
 def stage_authority_rebind(
@@ -515,6 +654,30 @@ def rebind_authority(
         "key_diff": list(request.get("key_diff", [])),
     })
     updated["authority_rebind_history"] = history
+    updated = _release_stale_active_attempts(updated, new_digest)
+
+    # The verified startup source set remains the same across an explicit USER-
+    # authorized local authority rebind. Rebind the receipt identity/digest to
+    # the new authority rather than clearing or accepting a stale receipt.
+    context = updated.get("context", {})
+    if isinstance(context, dict):
+        previous_receipt = context.get("startup_readback_receipt")
+        if isinstance(previous_receipt, dict):
+            sources = previous_receipt.get("sources")
+            rebound_receipt_id = startup_readback_receipt_id(new_digest, sources)
+            if not rebound_receipt_id:
+                raise StateIntegrityError(
+                    "startup readback receipt could not be rebound to new authority"
+                )
+            rebound = dict(previous_receipt)
+            rebound["receipt_id"] = rebound_receipt_id
+            rebound["authority_digest"] = new_digest
+            rebound["rebound_from_receipt"] = previous_receipt.get("receipt_id")
+            rebound["authority_rebind_event_ref"] = request.get("event_ref")
+            rebound["authority_rebound_by"] = request.get("verified_by")
+            new_context = dict(context)
+            new_context["startup_readback_receipt"] = rebound
+            updated["context"] = new_context
 
     return save_runtime(
         updated,

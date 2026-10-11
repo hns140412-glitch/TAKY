@@ -6,8 +6,12 @@ import unittest
 from TAKY2.bridges import (
     BridgeViolation,
     bind_account_attestation,
+    claim_execution_receipt,
+    _minimal_packet_env,
     execute_with_receipt,
+    reconcile_execution_claim,
     record_independent_review,
+    record_startup_readback,
     record_user_confirmation,
     record_user_stop,
     verify_execution,
@@ -22,7 +26,8 @@ from TAKY2.state_store import (
     save_runtime,
     stage_authority_rebind,
 )
-from TAKY2.test_enforcement import trusted
+from TAKY2.enforcement import stable_hash
+from TAKY2.test_enforcement import startup_receipt, trusted
 from TAKY2.test_orchestrator import runtime_state
 
 
@@ -43,6 +48,7 @@ def overlay_runtime(base, runtime):
         "completion_registry",
         "independent_review_registry",
         "done_gate_receipts",
+        "control_incidents",
         "consumed_approvals",
         "user_events",
     ):
@@ -349,6 +355,42 @@ class AccountAttestationBridgeTests(unittest.TestCase):
         )
 
 
+class StartupReadbackBridgeTests(unittest.TestCase):
+    def test_verified_startup_readback_is_recorded(self):
+        runtime = runtime_state()
+        receipt = {
+            "authority_digest": "auth1",
+            "sources": startup_receipt()["sources"],
+        }
+        updated = record_startup_readback(
+            runtime,
+            receipt,
+            verifier=lambda value: True,
+            verifier_id="startup-verifier",
+        )
+        stored = updated["context"]["startup_readback_receipt"]
+        self.assertTrue(stored["verified"])
+        self.assertEqual(stored["authority_digest"], "auth1")
+        self.assertEqual(
+            {item["kind"] for item in stored["sources"]},
+            {"START_HERE", "CANONICAL", "SYSTEMWIDE_V2", "CURRENT"},
+        )
+
+    def test_startup_readback_missing_current_is_rejected(self):
+        runtime = runtime_state()
+        receipt = {
+            "authority_digest": "auth1",
+            "sources": startup_receipt()["sources"][:-1],
+        }
+        with self.assertRaisesRegex(BridgeViolation, "CURRENT"):
+            record_startup_readback(
+                runtime,
+                receipt,
+                verifier=lambda value: True,
+                verifier_id="startup-verifier",
+            )
+
+
 class ExecutorVerifierUserBridgeTests(unittest.TestCase):
     def prepared(self):
         base = trusted()
@@ -439,7 +481,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:1",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CODEX",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
                     "key_match": True,
                     "required_verifications": ["technical"],
                     "passed_verifications": ["technical"],
@@ -464,7 +507,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "passed": False,
                 "evidence_ref": "ev:failed",
                 "evidence_type": "runtime_test",
-                "verifier_role": "CODEX",
+                "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
             },
             verifier_id="verifier-1",
         )
@@ -514,8 +558,10 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:string-only",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CODEX",
-                    "independent_reviewer": "CLAUDE",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
+                    "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+                    "independent_reviewer_actor": "CLAUDE",
                     "key_match": True,
                     "required_verifications": [
                         "structural", "technical", "intent", "independent"
@@ -539,7 +585,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
             executor_id="executor-1",
         )
         review = {
-            "reviewer_role": "CLAUDE",
+            "reviewer_role": "INDEPENDENT_REVIEWER",
+                "reviewer_actor": "CLAUDE",
             "receipt_id": rid,
             "evidence_ref": "review:unverified",
             "source_or_artifact_ref": "claude:review:unverified",
@@ -576,7 +623,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 runtime,
                 rid,
                 {
-                    "reviewer_role": "CLAUDE",
+                    "reviewer_role": "INDEPENDENT_REVIEWER",
+                "reviewer_actor": "CLAUDE",
                     "receipt_id": rid,
                     "evidence_ref": "review:wrong-digest",
                     "source_or_artifact_ref": "claude:review:wrong-digest",
@@ -604,7 +652,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
             runtime,
             rid,
             {
-                "reviewer_role": "CLAUDE",
+                "reviewer_role": "INDEPENDENT_REVIEWER",
+                "reviewer_actor": "CLAUDE",
                 "receipt_id": rid,
                 "evidence_ref": "review:same-verifier",
                 "source_or_artifact_ref": "claude:review:same-verifier",
@@ -628,8 +677,10 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:same-verifier",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CODEX",
-                    "independent_reviewer": "CLAUDE",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
+                    "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+                    "independent_reviewer_actor": "CLAUDE",
                     "independent_review_ref": "review:same-verifier",
                     "key_match": True,
                     "required_verifications": [
@@ -661,7 +712,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:laundered",
                     "evidence_type": "independent_review",
-                    "verifier_role": "CODEX",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
                     "key_match": True,
                     "required_verifications": ["technical", "intent"],
                     "passed_verifications": ["technical", "intent"],
@@ -691,7 +743,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
             runtime,
             rid,
             {
-                "reviewer_role": "CLAUDE",
+                "reviewer_role": "INDEPENDENT_REVIEWER",
+                "reviewer_actor": "CLAUDE",
                 "receipt_id": rid,
                 "evidence_ref": "review:e2e",
                 "source_or_artifact_ref": "claude:review:e2e",
@@ -712,8 +765,10 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                 "passed": call["result"]["returncode"] == 0,
                 "evidence_ref": "ev:e2e",
                 "evidence_type": "runtime_test",
-                "verifier_role": "CODEX",
-                "independent_reviewer": "CLAUDE",
+                "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
+                "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+                    "independent_reviewer_actor": "CLAUDE",
                 "independent_review_ref": "review:e2e",
                 "key_match": True,
                 "required_verifications": [
@@ -771,7 +826,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:wrong-role",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CLAUDE",
+                    "verifier_role": "INDEPENDENT_REVIEWER",
+                    "verifier_actor": "CLAUDE",
                     "key_match": True,
                     "required_verifications": [
                         "structural", "technical", "intent", "independent"
@@ -779,7 +835,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed_verifications": [
                         "structural", "technical", "intent", "independent"
                     ],
-                    "independent_reviewer": "CLAUDE",
+                    "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+                    "independent_reviewer_actor": "CLAUDE",
                     "critical_gaps": [],
                 },
                 verifier_id="verifier-1",
@@ -802,8 +859,10 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:wrong-reviewer",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CODEX",
-                    "independent_reviewer": "OTHER",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
+                    "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+                    "independent_reviewer_actor": "OTHER",
                     "key_match": True,
                     "required_verifications": [
                         "structural", "technical", "intent", "independent"
@@ -834,7 +893,8 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
                     "passed": True,
                     "evidence_ref": "ev:weak",
                     "evidence_type": "runtime_test",
-                    "verifier_role": "CODEX",
+                    "verifier_role": "VERIFIER",
+                    "verifier_actor": "CODEX",
                     "key_match": True,
                     "required_verifications": ["technical", "intent"],
                     "passed_verifications": ["technical", "intent"],
@@ -885,6 +945,7 @@ class AuthorityRebindTests(unittest.TestCase):
             "execution_calls": {},
             "evidence_registry": {},
             "completion_registry": {},
+            "control_incidents": {},
             "consumed_approvals": {},
             "user_events": {},
             "authority_rebind_history": [],
@@ -1136,5 +1197,870 @@ class AuthorityRebindTests(unittest.TestCase):
             tmp.cleanup()
 
 
+    def _prepared_external_review(self):
+        base = trusted()
+        runtime = runtime_state()
+        p = {
+            "task_id": "bridge-external-review",
+            "action_id": "review",
+            "context": {"mode": "delta"},
+            "attempt": {"target": "Q002", "method_or_tool": "claude"},
+            "call": {
+                "model": "sonnet",
+                "effort": "medium",
+                "context": "delta",
+                "expected_calls": 1,
+                "dry_run_plan": {
+                    "expected_calls": 1,
+                    "operations": ["single bounded external review"],
+                    "batch_strategy": "single-batch",
+                    "fallback": "HOLD",
+                    "paid_api": False,
+                },
+            },
+        }
+        out = preflight(p, overlay_runtime(base, runtime))
+        self.assertTrue(out["allowed"])
+        self.assertTrue(out["call_allowed"])
+        runtime = persist_preflight(runtime, out)
+        invocation = {
+            "provider": "anthropic",
+            "method_or_tool": "claude",
+            "call": dict(p["call"]),
+            "argv": [
+                "claude", "-p",
+                "--model", "sonnet",
+                "--effort", "medium",
+                "review",
+            ],
+        }
+        return runtime, out, invocation
+
+    def test_external_executor_rejects_receipt_without_persisted_dry_run(self):
+        runtime, out, invocation = self._prepared_external_review()
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["economy_evaluation"] = {"dry_run": None}
+        with self.assertRaisesRegex(BridgeViolation, "persisted DRY_RUN_OK"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_external_executor_rejects_multi_call_receipt(self):
+        runtime, out, invocation = self._prepared_external_review()
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        invocation["call"]["expected_calls"] = 2
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        with self.assertRaisesRegex(BridgeViolation, "exactly one external invocation"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_packet_only_claude_requires_bound_toolless_stdin_packet(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact independent review packet"
+        invocation["call"]["execution_mode"] = "PACKET_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["argv"] = [
+            str((Path.home() / ".local" / "bin" / "claude.exe").resolve()),
+            "-p",
+            "--input-format", "text",
+            "--output-format", "json",
+            "--model", "sonnet",
+            "--effort", "medium",
+            "--tools", "",
+            "--permission-prompts", "none",
+            "--no-session-persistence",
+            "--strict-mcp-config",
+            "--setting-sources", "",
+            "--settings", "{}",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        updated, result = execute_with_receipt(
+            runtime, out["receipt_id"], invocation,
+            executor_id="claude-test",
+            runner=lambda inv: {
+                "ok": inv["stdin_text"] == packet,
+                "cwd": inv.get("cwd"),
+                "minimal_env": inv.get("minimal_env"),
+            },
+        )
+        self.assertTrue(result["ok"])
+        self.assertTrue(result["minimal_env"])
+        self.assertTrue(result["cwd"])
+        self.assertFalse(Path(result["cwd"]).exists())
+        self.assertIn(out["receipt_id"], updated["execution_calls"])
+
+    def test_subscription_route_rejects_api_key_injection(self):
+        runtime, out, invocation = self._prepared_external_review()
+        invocation["env"] = {"ANTHROPIC_API_KEY": "should-not-run"}
+        with self.assertRaisesRegex(BridgeViolation, "does not allow env overrides"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_packet_only_rejects_non_hardened_executor(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact independent review packet"
+        invocation["call"]["execution_mode"] = "PACKET_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["provider"] = "openai"
+        invocation["method_or_tool"] = "codex"
+        invocation["argv"] = ["codex", "exec", "-"]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        active = runtime["active_attempts"][receipt["execution_key"]]
+        active["attempt"]["method_or_tool"] = "codex"
+        with self.assertRaisesRegex(BridgeViolation, "dedicated hardened verifier contract"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="codex-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_codex_verify_only_hardened_packet_executes(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact codex verifier packet"
+        invocation["call"]["model"] = "codex"
+        invocation["call"]["execution_mode"] = "CODEX_VERIFY_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["provider"] = "openai"
+        invocation["method_or_tool"] = "codex"
+        invocation["argv"] = [
+            str((Path.home() / "AppData" / "Roaming" / "npm" / "codex.cmd").resolve()),
+            "exec",
+            "--sandbox", "read-only",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--ignore-user-config",
+            "--ignore-rules",
+            "--strict-config",
+            "-c", "model_reasoning_effort=\"medium\"",
+            "-c", "web_search=\"disabled\"",
+            "--disable", "shell_tool",
+            "--disable", "unified_exec",
+            "--disable", "shell_snapshot",
+            "--disable", "multi_agent",
+            "--disable", "apps",
+            "--disable", "hooks",
+            "--disable", "remote_plugin",
+            "-",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        active = runtime["active_attempts"][receipt["execution_key"]]
+        active["attempt"]["method_or_tool"] = "codex"
+
+        updated, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            invocation,
+            executor_id="codex-test",
+            runner=lambda inv: {
+                "ok": True,
+                "argv": inv["argv"],
+                "cwd": inv.get("cwd"),
+                "minimal_env": inv.get("minimal_env"),
+                "last_message_path": inv.get("_bridge_last_message_path"),
+            },
+        )
+        self.assertTrue(result["ok"])
+        self.assertTrue(result["minimal_env"])
+        self.assertIn("-C", result["argv"])
+        self.assertIn("--output-last-message", result["argv"])
+        self.assertTrue(result["cwd"])
+        self.assertTrue(result["last_message_path"])
+        self.assertEqual(
+            Path(result["last_message_path"]).parent,
+            Path(result["cwd"]),
+        )
+        self.assertFalse(Path(result["cwd"]).exists())
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "RETURNED",
+        )
+
+    def test_codex_verify_only_rejects_argv_expansion(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact codex verifier packet"
+        invocation["call"]["model"] = "codex"
+        invocation["call"]["execution_mode"] = "CODEX_VERIFY_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["provider"] = "openai"
+        invocation["method_or_tool"] = "codex"
+        invocation["argv"] = [
+            str((Path.home() / "AppData" / "Roaming" / "npm" / "codex.cmd").resolve()),
+            "exec",
+            "--sandbox", "read-only",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--ignore-user-config",
+            "--ignore-rules",
+            "--strict-config",
+            "-c", "model_reasoning_effort=\"medium\"",
+            "-c", "web_search=\"disabled\"",
+            "--disable", "shell_tool",
+            "--disable", "unified_exec",
+            "--disable", "shell_snapshot",
+            "--disable", "multi_agent",
+            "--disable", "apps",
+            "--disable", "hooks",
+            "--disable", "remote_plugin",
+            "--add-dir", "C:\\",
+            "-",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        active = runtime["active_attempts"][receipt["execution_key"]]
+        active["attempt"]["method_or_tool"] = "codex"
+        with self.assertRaisesRegex(BridgeViolation, "exact hardened template"):
+            execute_with_receipt(
+                runtime,
+                out["receipt_id"],
+                invocation,
+                executor_id="codex-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_packet_only_claude_rejects_argv_model_mismatch(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact independent review packet"
+        invocation["call"]["execution_mode"] = "PACKET_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["argv"] = [
+            "claude", "-p",
+            "--model", "opus",
+            "--effort", "medium",
+            "--tools", "",
+            "--permission-prompts", "none",
+            "--no-session-persistence",
+            "--strict-mcp-config",
+            "--bare",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        with self.assertRaisesRegex(BridgeViolation, "argv model must match"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"ok": True},
+            )
+
+    def test_persisted_claim_blocks_second_claim_and_finalizes_returned(self):
+        runtime, out, invocation = self._prepared_external_review()
+        reserved, claim_token = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        self.assertEqual(
+            reserved["execution_calls"][out["receipt_id"]]["status"],
+            "CLAIMED",
+        )
+        execution_key = reserved["preflight_receipts"][out["receipt_id"]]["execution_key"]
+        self.assertEqual(reserved["active_attempts"][execution_key]["status"], "RESERVED")
+        with self.assertRaisesRegex(BridgeViolation, "receipt already has an executor call"):
+            claim_execution_receipt(
+                reserved,
+                out["receipt_id"],
+                executor_id="claude-test",
+            )
+
+        checkpoints = []
+
+        def checkpoint(candidate):
+            checkpoints.append(
+                (
+                    candidate["execution_calls"][out["receipt_id"]]["status"],
+                    candidate["active_attempts"][execution_key]["status"],
+                )
+            )
+            return candidate
+
+        updated, result = execute_with_receipt(
+            reserved,
+            out["receipt_id"],
+            invocation,
+            executor_id="claude-test",
+            preclaimed=True,
+            claim_token=claim_token,
+            pre_run_checkpoint=checkpoint,
+            runner=lambda _: {"returncode": 0, "stdout": "ok", "stderr": ""},
+        )
+        self.assertEqual(checkpoints, [("CALLING", "CALLING")])
+        self.assertEqual(result["returncode"], 0)
+        self.assertEqual(updated["execution_calls"][out["receipt_id"]]["status"], "RETURNED")
+        self.assertEqual(updated["active_attempts"][execution_key]["status"], "RETURNED")
+
+    def test_external_preclaimed_execution_requires_durable_checkpoint(self):
+        runtime, out, invocation = self._prepared_external_review()
+        reserved, claim_token = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        seen = []
+        with self.assertRaisesRegex(BridgeViolation, "durable pre-run checkpoint"):
+            execute_with_receipt(
+                reserved,
+                out["receipt_id"],
+                invocation,
+                executor_id="claude-test",
+                preclaimed=True,
+                claim_token=claim_token,
+                runner=lambda _: seen.append("called") or {"returncode": 0},
+            )
+        self.assertEqual(seen, [])
+
+    def test_persisted_claim_requires_matching_token(self):
+        runtime, out, invocation = self._prepared_external_review()
+        reserved, _ = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        with self.assertRaisesRegex(BridgeViolation, "claim token mismatch"):
+            execute_with_receipt(
+                reserved,
+                out["receipt_id"],
+                invocation,
+                executor_id="claude-test",
+                preclaimed=True,
+                claim_token="wrong-token",
+                runner=lambda _: {"returncode": 0},
+            )
+
+    def test_reconcile_persisted_claim_terminalizes_failed(self):
+        runtime, out, _ = self._prepared_external_review()
+        reserved, _ = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        reconciled = reconcile_execution_claim(
+            reserved,
+            out["receipt_id"],
+            reconciler_id="test-reconciler",
+            reason="simulated interrupted runner",
+        )
+        execution_key = reconciled["preflight_receipts"][out["receipt_id"]]["execution_key"]
+        self.assertEqual(
+            reconciled["execution_calls"][out["receipt_id"]]["status"],
+            "FAILED",
+        )
+        self.assertEqual(reconciled["active_attempts"][execution_key]["status"], "FAILED")
+
+    def test_calling_reconcile_preserves_unknown_outcome_and_blocks_retry(self):
+        runtime, out, invocation = self._prepared_external_review()
+        reserved, _ = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        execution_key = reserved["preflight_receipts"][out["receipt_id"]]["execution_key"]
+        reserved["execution_calls"][out["receipt_id"]].update({
+            "provider": "anthropic",
+            "model": "sonnet",
+            "actual_calls": 1,
+            "method_or_tool": "claude",
+            "status": "CALLING",
+        })
+        reserved["active_attempts"][execution_key]["status"] = "CALLING"
+
+        reconciled = reconcile_execution_claim(
+            reserved,
+            out["receipt_id"],
+            reconciler_id="test-reconciler",
+            reason="simulated process interruption after runner start",
+        )
+        self.assertEqual(
+            reconciled["execution_calls"][out["receipt_id"]]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+        self.assertEqual(
+            reconciled["active_attempts"][execution_key]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+        self.assertEqual(
+            reconciled["execution_calls"][out["receipt_id"]]["result"]["returncode"],
+            125,
+        )
+
+        trusted_runtime = overlay_runtime(trusted(), reconciled)
+        retry = preflight({
+            "task_id": "bridge-external-review-retry",
+            "action_id": "review",
+            "context": {"mode": "delta"},
+            "attempt": {"target": "Q002", "method_or_tool": "claude"},
+            "call": dict(invocation["call"]),
+        }, trusted_runtime)
+        self.assertFalse(retry["allowed"])
+        self.assertEqual(retry["blocked_by"], "ROUTE")
+        self.assertIn("unresolved attempt", retry["reason"])
+
+    def test_minimal_packet_env_excludes_provider_credentials(self):
+        env = _minimal_packet_env()
+        upper = {key.upper() for key in env}
+        self.assertFalse(any(key.startswith("ANTHROPIC_") for key in upper))
+        self.assertFalse(any(key.startswith("OPENAI_") for key in upper))
+        self.assertFalse(any(key.startswith("GEMINI_") for key in upper))
+        self.assertFalse(any(key.startswith("GOOGLE_") for key in upper))
+        self.assertNotIn("CLAUDE_CONFIG_DIR", upper)
+
+    def test_reconcile_calling_claim_preserves_unknown_outcome(self):
+        runtime, out, _ = self._prepared_external_review()
+        reserved, _ = claim_execution_receipt(
+            runtime,
+            out["receipt_id"],
+            executor_id="claude-test",
+        )
+        execution_key = reserved["preflight_receipts"][out["receipt_id"]]["execution_key"]
+        reserved["execution_calls"][out["receipt_id"]].update({
+            "actual_calls": 1,
+            "status": "CALLING",
+        })
+        reserved["active_attempts"][execution_key]["status"] = "CALLING"
+        reconciled = reconcile_execution_claim(
+            reserved,
+            out["receipt_id"],
+            reconciler_id="test-reconciler",
+            reason="simulated process interruption",
+        )
+        self.assertEqual(
+            reconciled["execution_calls"][out["receipt_id"]]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+        self.assertEqual(
+            reconciled["active_attempts"][execution_key]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+        self.assertEqual(
+            reconciled["execution_calls"][out["receipt_id"]]["result"]["returncode"],
+            125,
+        )
+
+    def test_executor_receipt_cannot_invoke_runner_twice(self):
+        runtime, out, invocation = self._prepared_external_review()
+        seen = []
+        updated, _ = execute_with_receipt(
+            runtime, out["receipt_id"], invocation,
+            executor_id="claude-test",
+            runner=lambda _: seen.append("called") or {"returncode": 0},
+        )
+        self.assertEqual(seen, ["called"])
+        with self.assertRaisesRegex(BridgeViolation, "receipt already has an executor call"):
+            execute_with_receipt(
+                updated, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: seen.append("called-again") or {"returncode": 0},
+            )
+        self.assertEqual(seen, ["called"])
+
+    def test_runner_exception_consumes_receipt_as_unknown_outcome(self):
+        runtime, out, invocation = self._prepared_external_review()
+
+        def broken_runner(_):
+            raise FileNotFoundError("simulated missing executor")
+
+        updated, result = execute_with_receipt(
+            runtime, out["receipt_id"], invocation,
+            executor_id="claude-test",
+            runner=broken_runner,
+        )
+        self.assertEqual(result["returncode"], 125)
+        self.assertTrue(result["outcome_unknown"])
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+        with self.assertRaisesRegex(BridgeViolation, "receipt already has an executor call"):
+            execute_with_receipt(
+                updated, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"returncode": 0},
+            )
+
+    def test_external_nonzero_exit_is_unknown_without_confirmed_no_provider_call(self):
+        runtime, out, invocation = self._prepared_external_review()
+        updated, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            invocation,
+            executor_id="claude-test",
+            runner=lambda _: {
+                "returncode": 1,
+                "stdout": "",
+                "stderr": "model cli exited nonzero",
+            },
+        )
+        self.assertTrue(result["outcome_unknown"])
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "OUTCOME_UNKNOWN",
+        )
+
+    def test_external_nonzero_can_be_failed_when_no_provider_call_is_attested(self):
+        runtime, out, invocation = self._prepared_external_review()
+        updated, result = execute_with_receipt(
+            runtime,
+            out["receipt_id"],
+            invocation,
+            executor_id="claude-test",
+            runner=lambda _: {
+                "returncode": 2,
+                "stdout": "",
+                "stderr": "local argument validation failed",
+                "provider_call_confirmed_absent": True,
+            },
+        )
+        self.assertNotIn("outcome_unknown", result)
+        self.assertEqual(
+            updated["execution_calls"][out["receipt_id"]]["status"],
+            "FAILED",
+        )
+
+    def test_packet_only_duplicate_flag_is_rejected(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact independent review packet"
+        invocation["call"]["execution_mode"] = "PACKET_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["argv"] = [
+            str((Path.home() / ".local" / "bin" / "claude.exe").resolve()),
+            "-p",
+            "--input-format", "text",
+            "--output-format", "json",
+            "--model", "sonnet",
+            "--effort", "medium",
+            "--tools", "",
+            "--permission-prompts", "none",
+            "--no-session-persistence",
+            "--strict-mcp-config",
+            "--setting-sources", "",
+            "--settings", "{}",
+            "--tools", "default",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        with self.assertRaisesRegex(BridgeViolation, "exact hardened template"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"returncode": 0},
+            )
+
+    def test_packet_only_claude_rejects_agentic_tool_access(self):
+        runtime, out, invocation = self._prepared_external_review()
+        packet = "compact independent review packet"
+        invocation["call"]["execution_mode"] = "PACKET_ONLY"
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["stdin_text"] = packet
+        invocation["argv"] = [
+            str((Path.home() / ".local" / "bin" / "claude.exe").resolve()),
+            "-p",
+            "--input-format", "text",
+            "--output-format", "json",
+            "--model", "sonnet",
+            "--effort", "medium",
+            "--tools", "Read",
+            "--permission-prompts", "none",
+            "--no-session-persistence",
+            "--strict-mcp-config",
+            "--setting-sources", "",
+            "--settings", "{}",
+        ]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        with self.assertRaisesRegex(BridgeViolation, "empty --tools"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test",
+                runner=lambda _: {"ok": True},
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
+class EconomyDecisionBridgeTests(unittest.TestCase):
+    def decision(self, ref="econ:bridge", kind="REUSE_SUFFICIENT"):
+        return {
+            "evidence_ref": ref,
+            "decision_kind": kind,
+            "acceptance_ref": "acceptance:test-quality",
+            "source_or_artifact_ref": "runtime:economy-assessment",
+            "revision_or_hash": "rev-1",
+        }
+
+    def test_quality_required_economy_decision_requires_acceptance_ref(self):
+        from TAKY2.bridges import record_economy_decision
+
+        base = trusted()
+        runtime = runtime_state()
+        action = base["action_registry"]["review"]
+        decision = self.decision(ref="econ:missing-acceptance")
+        decision.pop("acceptance_ref")
+        with self.assertRaisesRegex(BridgeViolation, "acceptance_ref"):
+            record_economy_decision(
+                runtime,
+                action,
+                decision,
+                verifier=lambda *_: True,
+                verifier_id="savey-economy-verifier",
+            )
+
+    def test_verified_economy_decision_is_recorded_and_consumed(self):
+        from TAKY2.bridges import record_economy_decision
+        from TAKY2.enforcement import cost_gate
+
+        base = trusted()
+        runtime = runtime_state()
+        action = base["action_registry"]["review"]
+        updated = record_economy_decision(
+            runtime,
+            action,
+            self.decision(),
+            verifier=lambda decision, bound_action, state: (
+                decision["decision_kind"] == "REUSE_SUFFICIENT"
+                and bound_action is action
+                and state["authority_digest"] == "auth1"
+            ),
+            verifier_id="savey-economy-verifier",
+        )
+        item = updated["economy_evidence_registry"]["econ:bridge"]
+        self.assertTrue(item["verified"])
+        self.assertEqual(item["acceptance_state"], "ACCEPTED")
+        self.assertEqual(item["authority_digest"], "auth1")
+        self.assertEqual(item["semantic_owner_ref"], action["semantic_owner_ref"])
+
+        scoped = dict(base)
+        scoped["economy_evidence_registry"] = updated["economy_evidence_registry"]
+        result = cost_gate(
+            scoped,
+            action,
+            {
+                "reuse_decision_ref": "econ:bridge",
+                "model": "sonnet",
+                "effort": "medium",
+                "expected_calls": 1,
+                "context": "delta",
+            },
+        )
+        self.assertTrue(result.allowed)
+        self.assertEqual(result.state, "SKIP_CALL")
+
+    def test_unverified_economy_decision_is_rejected(self):
+        from TAKY2.bridges import record_economy_decision
+
+        base = trusted()
+        with self.assertRaisesRegex(BridgeViolation, "verification failed"):
+            record_economy_decision(
+                runtime_state(),
+                base["action_registry"]["review"],
+                self.decision(),
+                verifier=lambda decision, action, state: False,
+                verifier_id="savey-economy-verifier",
+            )
+
+    def test_invalid_economy_decision_kind_is_rejected(self):
+        from TAKY2.bridges import record_economy_decision
+
+        base = trusted()
+        with self.assertRaisesRegex(BridgeViolation, "unsupported economy decision kind"):
+            record_economy_decision(
+                runtime_state(),
+                base["action_registry"]["review"],
+                self.decision(kind="FORCE_SKIP"),
+                verifier=lambda decision, action, state: True,
+                verifier_id="savey-economy-verifier",
+            )
+
+    def test_duplicate_economy_decision_ref_is_rejected(self):
+        from TAKY2.bridges import record_economy_decision
+
+        base = trusted()
+        action = base["action_registry"]["review"]
+        first = record_economy_decision(
+            runtime_state(),
+            action,
+            self.decision(),
+            verifier=lambda decision, bound_action, state: True,
+            verifier_id="savey-economy-verifier",
+        )
+        with self.assertRaisesRegex(BridgeViolation, "already exists"):
+            record_economy_decision(
+                first,
+                action,
+                self.decision(),
+                verifier=lambda decision, bound_action, state: True,
+                verifier_id="savey-economy-verifier",
+            )
+
+    def test_economy_decision_cannot_be_reused_for_wrong_action(self):
+        from TAKY2.bridges import record_economy_decision
+        from TAKY2.enforcement import cost_gate
+
+        base = trusted()
+        review = base["action_registry"]["review"]
+        other = base["action_registry"]["optional-review"]
+        updated = record_economy_decision(
+            runtime_state(),
+            review,
+            self.decision(),
+            verifier=lambda decision, action, state: True,
+            verifier_id="savey-economy-verifier",
+        )
+        scoped = dict(base)
+        scoped["economy_evidence_registry"] = updated["economy_evidence_registry"]
+        result = cost_gate(
+            scoped,
+            other,
+            {
+                "reuse_decision_ref": "econ:bridge",
+                "model": "sonnet",
+                "effort": "medium",
+                "expected_calls": 1,
+                "context": "delta",
+            },
+        )
+        self.assertFalse(result.allowed)
+        self.assertIn("action binding mismatch", result.reason)
+
+
+def test_subprocess_runner_closes_stdin_for_noninteractive_receipt_execution(monkeypatch):
+    import subprocess as _subprocess
+    from TAKY2.bridges import subprocess_runner
+
+    seen = {}
+    class Result:
+        returncode = 0
+        stdout = "ok"
+        stderr = ""
+
+    def fake_run(argv, **kwargs):
+        seen["argv"] = argv
+        seen.update(kwargs)
+        return Result()
+
+    monkeypatch.setattr(_subprocess, "run", fake_run)
+    result = subprocess_runner({"argv": ["dummy", "arg"]})
+    assert result["returncode"] == 0
+    assert seen["stdin"] is _subprocess.DEVNULL
+    assert seen["shell"] is False
+    assert seen["capture_output"] is True
+
+
+def test_subprocess_runner_real_stdin_reader_gets_eof_immediately():
+    import sys
+    from TAKY2.bridges import subprocess_runner
+
+    result = subprocess_runner({
+        "argv": [
+            sys.executable,
+            "-c",
+            "import sys; d=sys.stdin.read(); print('EOF' if d == '' else 'DATA')",
+        ],
+        "timeout_sec": 5,
+    })
+    assert result["returncode"] == 0
+    assert result["stdout"].strip() == "EOF"
+
+
+def test_subprocess_runner_decodes_utf8_output_independent_of_locale():
+    import sys
+    from TAKY2.bridges import subprocess_runner
+
+    # Model CLIs emit UTF-8 (e.g. em dash); a locale codec such as cp949 must
+    # not silently drop stdout/stderr evidence.
+    result = subprocess_runner({
+        "argv": [
+            sys.executable,
+            "-c",
+            (
+                "import sys; "
+                "sys.stdout.buffer.write('VERDICT: PASS \\u2014 ok\\n'.encode('utf-8')); "
+                "sys.stderr.buffer.write('banner \\u2014 \\u2713\\n'.encode('utf-8'))"
+            ),
+        ],
+        "timeout_sec": 5,
+    })
+    assert result["returncode"] == 0
+    assert result["stdout"] == "VERDICT: PASS — ok\n"
+    assert result["stderr"] == "banner — ✓\n"
+
+
+def test_subprocess_runner_recovers_bridge_owned_last_message_when_stdout_is_empty():
+    import sys
+    from TAKY2.bridges import subprocess_runner
+
+    with tempfile.TemporaryDirectory(prefix="TAKY2_LAST_MESSAGE_TEST_") as root:
+        final_path = Path(root) / "codex-last-message.txt"
+        result = subprocess_runner({
+            "argv": [
+                sys.executable,
+                "-c",
+                (
+                    "from pathlib import Path; import sys; "
+                    "Path(sys.argv[1]).write_text('VERDICT: PASS\\n', encoding='utf-8')"
+                ),
+                str(final_path),
+            ],
+            "cwd": root,
+            "_bridge_last_message_path": str(final_path),
+            "timeout_sec": 5,
+        })
+        assert result["returncode"] == 0
+        assert result["stdout"] == "VERDICT: PASS\n"
+
+
+def test_subprocess_runner_rejects_last_message_path_outside_bridge_cwd():
+    import pytest
+    import sys
+    from TAKY2.bridges import BridgeViolation, subprocess_runner
+
+    with tempfile.TemporaryDirectory(prefix="TAKY2_LAST_MESSAGE_ROOT_") as root:
+        outside = str(Path(root).parent / "outside-verdict.txt")
+        with pytest.raises(BridgeViolation, match="must stay inside cwd"):
+            subprocess_runner({
+                "argv": [sys.executable, "-c", "pass"],
+                "cwd": root,
+                "_bridge_last_message_path": outside,
+                "timeout_sec": 5,
+            })
+
+
+def test_subprocess_runner_times_out_noninteractive_hang_instead_of_waiting_forever():
+    import sys
+    from TAKY2.bridges import subprocess_runner
+
+    result = subprocess_runner({
+        "argv": [sys.executable, "-c", "import time; time.sleep(5)"],
+        "timeout_sec": 0.1,
+    })
+    assert result["returncode"] == 124
+    assert result["timed_out"] is True
+    assert result["outcome_unknown"] is True
+    assert result["timeout_sec"] == 0.1
+    assert "TAKY_NONINTERACTIVE_TIMEOUT" in result["stderr"]
+
+
+def test_subprocess_runner_rejects_invalid_noninteractive_timeout():
+    import pytest
+    from TAKY2.bridges import BridgeViolation, subprocess_runner
+
+    with pytest.raises(BridgeViolation, match="timeout_sec"):
+        subprocess_runner({"argv": ["dummy"], "timeout_sec": 0})
+    with pytest.raises(BridgeViolation, match="timeout_sec"):
+        subprocess_runner({"argv": ["dummy"], "timeout_sec": 301})

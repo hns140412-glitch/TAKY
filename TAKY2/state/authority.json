@@ -1,47 +1,415 @@
 {
+  "action_registry": {
+    "read:q002": {
+      "call_policy": {
+        "mode": "LOCAL_ONLY"
+      },
+      "execution_scope": "q002-read",
+      "kind": "READ",
+      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
+      "semantic_owner_scope": "TAKY2/Q002",
+      "worker_roles": [
+        "SCOPE_PLANNER",
+        "TEST_ENGINEER"
+      ]
+    },
+    "review:external-model": {
+      "call_policy": {
+        "allow_batch": true,
+        "allow_parallel": false,
+        "allow_subagents": false,
+        "allowed_efforts": [
+          "medium"
+        ],
+        "allowed_models": [
+          "sonnet"
+        ],
+        "batch_safe": true,
+        "execution_mode": "PACKET_ONLY",
+        "max_calls": 1,
+        "max_effort": "medium",
+        "max_retries": 0,
+        "minimum_quality": 2,
+        "mode": "EXTERNAL_REQUIRED",
+        "model_quality": {
+          "sonnet": 2
+        },
+        "model_billing": {
+          "sonnet": "SUBSCRIPTION_QUOTA"
+        },
+        "requirement_class": "QUALITY_REQUIRED"
+      },
+      "execution_scope": "external-model-review",
+      "kind": "READ",
+      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
+      "semantic_owner_scope": "TAKY2",
+      "worker_roles": [
+        "TEST_ENGINEER"
+      ]
+    },
+    "write:q002-doc": {
+      "action_class": "doc_write",
+      "call_policy": {
+        "mode": "LOCAL_ONLY"
+      },
+      "execution_scope": "q002-doc-write",
+      "kind": "EXTERNAL_WRITE",
+      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
+      "semantic_owner_scope": "TAKY2/Q002",
+      "target_account": "HNS",
+      "worker_roles": [
+        "BUILDER",
+        "TEST_ENGINEER",
+        "DOCUMENTATION_HANDOFF_WRITER"
+      ]
+    },
+    "verify:codex-packet": {
+      "call_policy": {
+        "allow_batch": true,
+        "allow_parallel": false,
+        "allow_subagents": false,
+        "allowed_efforts": [
+          "medium"
+        ],
+        "allowed_models": [
+          "codex"
+        ],
+        "batch_safe": true,
+        "execution_mode": "CODEX_VERIFY_ONLY",
+        "max_calls": 1,
+        "max_effort": "medium",
+        "max_retries": 0,
+        "minimum_quality": 2,
+        "mode": "EXTERNAL_REQUIRED",
+        "model_quality": {
+          "codex": 2
+        },
+        "model_billing": {
+          "codex": "SUBSCRIPTION_QUOTA"
+        },
+        "requirement_class": "QUALITY_REQUIRED"
+      },
+      "execution_scope": "codex-verifier-review",
+      "kind": "READ",
+      "semantic_owner_ref": "TAKY2_ORCHESTRATION_KERNEL",
+      "semantic_owner_scope": "TAKY2",
+      "worker_roles": [
+        "TEST_ENGINEER"
+      ]
+    }
+  },
+  "approvals": {},
+  "capabilities": [
+    "shell",
+    "local_python"
+  ],
+  "cost_policy": {
+    "high_cost_models": [
+      "opus",
+      "claude-opus-5-5"
+    ],
+    "max_calls_without_approval": 1
+  },
   "key": {
-    "USER_INTENT": {
-      "value": "TAKY 2.0 separate branch: simple, efficient, enforced rules",
-      "provenance": "USER_STATED",
-      "source_ref": "user:intent:taky2",
-      "scope": "branch",
-      "version": 1
-    },
-    "AUTHORIZED_TARGET": {
-      "value": "HNS",
-      "provenance": "USER_STATED",
-      "source_ref": "user:target:hns",
-      "scope": "branch",
-      "version": 1
-    },
     "AUTHORIZED_ACTION_CLASSES": {
+      "provenance": "USER_STATED",
+      "scope": "branch",
+      "source_ref": "user:action:doc_write",
       "value": [
         "doc_write"
       ],
+      "version": 1
+    },
+    "AUTHORIZED_TARGET": {
       "provenance": "USER_STATED",
-      "source_ref": "user:action:doc_write",
       "scope": "branch",
+      "source_ref": "user:target:hns",
+      "value": "HNS",
+      "version": 1
+    },
+    "USER_INTENT": {
+      "provenance": "USER_STATED",
+      "scope": "branch",
+      "source_ref": "user:intent:taky2",
+      "value": "TAKY 2.0 separate branch: simple, efficient, enforced rules",
       "version": 1
     }
   },
+  "local_capabilities": [
+    "local_validation"
+  ],
+  "orchestration_contract": {
+    "call_policy": {
+      "claude_codex_remote": "NECESSITY_CHECK_WITHIN_COST"
+    },
+    "canonical_source_ref": "user:systemwide-canonical-v2:2026-10-06",
+    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+    "control_roles": [
+      "NAVIGATOR",
+      "GUARDIAN",
+      "DRIVER",
+      "SCOUT"
+    ],
+    "default_actor_bindings": {
+      "final_authority": "USER",
+      "implementer": null,
+      "independent_reviewer": "CLAUDE",
+      "orchestrator": "CHATGPT",
+      "verifier": "CODEX"
+    },
+    "definition": "Subordinate TAKY role-based collaborative execution structure. Shepherding/Border Collie language is explanatory metaphor, not the formal structure name.",
+    "economy_policy": "SAVEY_AI_ECONOMY",
+    "execution_model": "ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE",
+    "gate_policy": {
+      "block_is_not_goal": true,
+      "default": "REDIRECT_BEFORE_ESCALATE",
+      "goal": "CORRECT_RESULT",
+      "terminal_block_only_for_explicit_user_stop_or_integrity_hard_stop": true,
+      "user_not_debugger": true
+    },
+    "guidance_loop": [
+      "OBSERVE",
+      "CLASSIFY",
+      "ASSIGN",
+      "EXECUTE",
+      "CROSS_CHECK",
+      "REDIRECT",
+      "VERIFY",
+      "DELIVER"
+    ],
+    "implementation_status": {
+      "control_role_schema": "IMPLEMENTED",
+      "delivery_confirmation_split": "IMPLEMENTED",
+      "owner_map_registry": "IMPLEMENTED",
+      "role_actor_binding": "IMPLEMENTED",
+      "semantic_owner_binding": "IMPLEMENTED",
+      "shared_savey_economy_policy": "IMPLEMENTED",
+      "startup_readback_receipt": "IMPLEMENTED",
+      "worker_role_contracts": "IMPLEMENTED"
+    },
+    "metaphor_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
+    "name": "TAKY_ROLE_BASED_COLLABORATIVE_EXECUTION",
+    "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
+    "purpose": "GUIDE_TO_RESULT",
+    "role_policy": {
+      "implementer_assignment": "TASK_FIT_NECESSITY",
+      "implementer_is_role_category_not_fixed_model": true,
+      "role_labels_do_not_authorize_calls": true,
+      "role_not_agent": true,
+      "routing_does_not_transfer_semantic_ownership": true,
+      "semantic_owner_remains_domain_owner": true
+    },
+    "role_registry": {
+      "final_authority": "FINAL_AUTHORITY",
+      "implementer": "CODE_WRITER",
+      "independent_reviewer": "INDEPENDENT_REVIEWER",
+      "orchestrator": "LEAD_ORCHESTRATOR",
+      "verifier": "VERIFIER"
+    },
+    "source_ref": "user:execution-structure:role-based-collaboration-v1",
+    "version": 5,
+    "economy_contract": {
+      "operating_mode": "CORRECTIVE_ROUTER_OPTIMIZER",
+      "priority": "ACCEPTANCE_BEFORE_COST",
+      "normal_flow": [
+        "ALLOW",
+        "CORRECT_AND_RUN",
+        "SHRINK_AND_RUN",
+        "REROUTE_AND_RUN",
+        "VERIFY"
+      ],
+      "requirement_classes": [
+        "CAPABILITY_REQUIRED",
+        "QUALITY_REQUIRED",
+        "OPTIONAL_CONVENIENCE"
+      ],
+      "resource_classes": {
+        "REMOTE_LOCAL": "UNMETERED",
+        "SUBSCRIPTION_MODELS": "SUBSCRIPTION_QUOTA",
+        "PAID_API": "PAID_API"
+      },
+      "capability_examples": [
+        "UI_IMAGE_GENERATION",
+        "TTS_AUDIO_GENERATION"
+      ],
+      "dry_run_policy": {
+        "mode": "AUTO_DERIVE_REDUNDANT_FIELDS",
+        "derive": [
+          "EXPECTED_CALLS",
+          "OPERATIONS_DEFAULT",
+          "BATCH_STRATEGY",
+          "FALLBACK",
+          "PAID_API_FROM_BILLING_CLASS"
+        ],
+        "explicit_conflict": "CORRECT_OR_REJECT",
+        "packet_only_requires": [
+          "PACKET_ONLY_BINDING",
+          "PACKET_DIGEST"
+        ]
+      },
+      "same_failure_repeat_forbidden": true,
+      "user_decision_reserved_for": [
+        "REAL_INCREMENTAL_PAID_SPEND",
+        "PROTECTED_AUTHORITY_OR_SCOPE_CHANGE",
+        "IRREVERSIBLE_ACTION",
+        "EXPLICIT_USER_STOP"
+      ]
+    }
+  },
+  "semantic_owner_registry": {
+    "ARCHITECTURE_ARCHIGROW": {
+      "can_own_semantics": true,
+      "owner_type": "DOMAIN",
+      "scopes": [
+        "ARCHITECTURE"
+      ],
+      "status": "RESOLVED"
+    },
+    "BADGE_REWARD": {
+      "can_own_semantics": false,
+      "owner_type": "UNRESOLVED",
+      "scopes": [
+        "BADGE_REWARD"
+      ],
+      "status": "OWNER_GAP"
+    },
+    "EUNHA_FARM": {
+      "can_own_semantics": false,
+      "owner_type": "UNRESOLVED",
+      "scopes": [
+        "EUNHA_FARM"
+      ],
+      "status": "OWNER_GAP"
+    },
+    "EXPLORER_CREW": {
+      "can_own_semantics": false,
+      "owner_type": "UNRESOLVED",
+      "scopes": [
+        "EXPLORER_CREW"
+      ],
+      "status": "OWNER_GAP"
+    },
+    "GROW": {
+      "can_own_semantics": true,
+      "owner_type": "GROWTH",
+      "scopes": [
+        "GROW"
+      ],
+      "status": "RESOLVED"
+    },
+    "HIDE_SEEK": {
+      "can_own_semantics": true,
+      "owner_type": "APP",
+      "scopes": [
+        "HIDE"
+      ],
+      "status": "RESOLVED"
+    },
+    "LEARNING_ENGINE_CORE": {
+      "can_own_semantics": true,
+      "owner_type": "ENGINE",
+      "scopes": [
+        "LEARNING_ENGINE"
+      ],
+      "status": "RESOLVED"
+    },
+    "LEARNING_OS": {
+      "can_own_semantics": true,
+      "owner_type": "OS",
+      "scopes": [
+        "LEARNING_OS"
+      ],
+      "status": "RESOLVED"
+    },
+    "PIANO_PRACTICE": {
+      "can_own_semantics": true,
+      "owner_type": "PROJECT",
+      "scopes": [
+        "PIANO"
+      ],
+      "status": "RESOLVED"
+    },
+    "PLANNER": {
+      "can_own_semantics": true,
+      "owner_type": "ENGINE",
+      "scopes": [
+        "PLANNER"
+      ],
+      "status": "RESOLVED"
+    },
+    "READY_SET": {
+      "can_own_semantics": true,
+      "owner_type": "APP",
+      "scopes": [
+        "READY"
+      ],
+      "status": "RESOLVED"
+    },
+    "SAVEY_FAMILY_FINANCE": {
+      "can_own_semantics": true,
+      "owner_type": "APP",
+      "scopes": [
+        "SAVEY_FAMILY_FINANCE"
+      ],
+      "status": "RESOLVED"
+    },
+    "SNAP_POP": {
+      "can_own_semantics": true,
+      "owner_type": "APP",
+      "scopes": [
+        "SNAP"
+      ],
+      "status": "RESOLVED"
+    },
+    "TAKY2_ORCHESTRATION_KERNEL": {
+      "can_own_semantics": true,
+      "owner_type": "KERNEL",
+      "scopes": [
+        "TAKY2"
+      ],
+      "status": "RESOLVED"
+    },
+    "TAKY_GRAND_MASTER": {
+      "can_own_semantics": true,
+      "owner_type": "MASTER",
+      "scopes": [
+        "GLOBAL"
+      ],
+      "status": "RESOLVED"
+    },
+    "TAKY_MOBILE": {
+      "can_own_semantics": false,
+      "owner_type": "PROJECTION",
+      "scopes": [
+        "TAKY_MOBILE"
+      ],
+      "status": "RESOLVED"
+    },
+    "WORK_OS": {
+      "can_own_semantics": true,
+      "owner_type": "OS",
+      "scopes": [
+        "WORK_OS"
+      ],
+      "status": "RESOLVED"
+    }
+  },
   "source_registry": {
-    "user:intent:taky2": {
-      "actor": "USER",
-      "kind": "statement"
-    },
-    "user:target:hns": {
-      "actor": "USER",
-      "kind": "statement"
-    },
     "user:action:doc_write": {
       "actor": "USER",
       "kind": "authorization"
     },
-    "user:taky:identity-slogans-v1": {
-      "actor": "USER",
-      "kind": "statement"
-    },
     "user:execution-model:shepherding-cooperative-v1": {
+      "actor": "USER",
+      "kind": "statement",
+      "status": "REFERENCE_METAPHOR"
+    },
+    "user:execution-structure:role-based-collaboration-v1": {
+      "actor": "USER",
+      "kind": "statement",
+      "status": "CANONICAL"
+    },
+    "user:intent:taky2": {
       "actor": "USER",
       "kind": "statement"
     },
@@ -55,113 +423,29 @@
       "actor": "USER",
       "kind": "statement",
       "status": "CANONICAL"
+    },
+    "user:taky:identity-slogans-v1": {
+      "actor": "USER",
+      "kind": "statement"
+    },
+    "user:target:hns": {
+      "actor": "USER",
+      "kind": "statement"
     }
   },
   "system_identity": {
-    "name": "TAKY",
+    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
+    "execution_duty": "AI_COLLABORATION_GROUP",
+    "final_authority": "USER",
     "identity_name": "TAKY_SYSTEM_IDENTITY",
-    "version": 1,
-    "source_ref": "user:taky:identity-slogans-v1",
+    "key_owner": "USER",
+    "name": "TAKY",
     "slogans": [
       "Think Again, Keep Your Key.",
       "Think Again, You're The Key."
     ],
-    "key_owner": "USER",
-    "final_authority": "USER",
+    "source_ref": "user:taky:identity-slogans-v1",
     "user_not_debugger": true,
-    "execution_duty": "AI_COLLABORATION_GROUP",
-    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06"
-  },
-  "approvals": {},
-  "action_registry": {
-    "read:q002": {
-      "kind": "READ",
-      "execution_scope": "q002-read",
-      "call_policy": {
-        "mode": "LOCAL_ONLY"
-      }
-    },
-    "write:q002-doc": {
-      "kind": "EXTERNAL_WRITE",
-      "target_account": "HNS",
-      "action_class": "doc_write",
-      "execution_scope": "q002-doc-write",
-      "call_policy": {
-        "mode": "LOCAL_ONLY"
-      }
-    }
-  },
-  "capabilities": [
-    "shell",
-    "local_python"
-  ],
-  "local_capabilities": [
-    "local_validation"
-  ],
-  "cost_policy": {
-    "high_cost_models": [
-      "opus",
-      "claude-opus-5-5"
-    ],
-    "max_calls_without_approval": 1
-  },
-  "orchestration_contract": {
-    "name": "TAKY_SHEPHERDING_COOPERATIVE_EXECUTION",
-    "version": 3,
-    "source_ref": "user:execution-model:shepherding-cooperative-v1",
-    "parent_system_ref": "TAKY_SYSTEM_IDENTITY@1",
-    "execution_model": "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
-    "definition": "Subordinate TAKY execution model for specialized role assignment, collaboration, rerouting, verification, and delivery toward the USER-intended result.",
-    "purpose": "GUIDE_TO_RESULT",
-    "roles": {
-      "orchestrator": "CHATGPT_LEAD_ORCHESTRATOR",
-      "implementer": "CODE_WRITER",
-      "verifier": "CODEX",
-      "independent_reviewer": "CLAUDE",
-      "final_authority": "USER"
-    },
-    "role_policy": {
-      "implementer_assignment": "TASK_FIT_NECESSITY",
-      "role_labels_do_not_authorize_calls": true,
-      "implementer_is_role_category_not_fixed_model": true,
-      "role_not_agent": true,
-      "routing_does_not_transfer_semantic_ownership": true,
-      "semantic_owner_remains_domain_owner": true
-    },
-    "guidance_loop": [
-      "OBSERVE",
-      "CLASSIFY",
-      "ASSIGN",
-      "EXECUTE",
-      "CROSS_CHECK",
-      "REDIRECT",
-      "VERIFY",
-      "DELIVER"
-    ],
-    "gate_policy": {
-      "default": "REDIRECT_BEFORE_ESCALATE",
-      "user_not_debugger": true,
-      "block_is_not_goal": true,
-      "goal": "CORRECT_RESULT",
-      "terminal_block_only_for_explicit_user_stop_or_integrity_hard_stop": true
-    },
-    "call_policy": {
-      "claude_codex_remote": "NECESSITY_GATE_ONLY"
-    },
-    "canonical_systemwide_ref": "TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V2_CANONICAL@2026-10-06",
-    "canonical_source_ref": "user:systemwide-canonical-v2:2026-10-06",
-    "control_roles": [
-      "NAVIGATOR",
-      "GUARDIAN",
-      "DRIVER",
-      "SCOUT"
-    ],
-    "economy_policy": "SAVEY_AI_ECONOMY",
-    "implementation_status": {
-      "control_role_schema": "OPEN",
-      "semantic_owner_binding": "OPEN",
-      "worker_role_contracts": "OPEN",
-      "shared_savey_economy_policy": "OPEN"
-    }
+    "version": 1
   }
 }

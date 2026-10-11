@@ -5,12 +5,14 @@ from TAKY2.orchestration import guidance_for_failure, role_assignment
 from TAKY2.orchestrator import (
     consume_receipt,
     finalize,
+    persist_control_incident,
+    persist_done_control_incident,
     persist_done_gate_receipt,
     persist_preflight,
     preflight,
     record_outcome,
 )
-from TAKY2.test_enforcement import trusted
+from TAKY2.test_enforcement import startup_receipt, trusted
 
 
 def runtime_state():
@@ -38,6 +40,7 @@ def runtime_state():
             "premise_loaded": True,
             "snapshot_verified": True,
             "full_reread_authorized": False,
+            "startup_readback_receipt": startup_receipt(),
         },
         "route_ledgers": {},
         "preflight_receipts": {},
@@ -47,6 +50,7 @@ def runtime_state():
         "completion_registry": {},
         "independent_review_registry": {},
         "done_gate_receipts": {},
+        "control_incidents": {},
         "consumed_approvals": {},
         "user_events": {},
     }
@@ -66,6 +70,13 @@ def plan(method="python", task_id="task-q002", action_id="read"):
             "effort": "low",
             "context": "delta",
             "expected_calls": 1,
+            "dry_run_plan": {
+                "expected_calls": 1,
+                "operations": ["single bounded external call"],
+                "batch_strategy": "single-batch",
+                "fallback": "HOLD",
+                "paid_api": False,
+            },
         },
     }
 
@@ -73,11 +84,23 @@ def plan(method="python", task_id="task-q002", action_id="read"):
 class OrchestratorTests(unittest.TestCase):
     def test_role_category_is_stable_but_implementer_actor_is_task_assigned(self):
         claude = role_assignment(
-            {"kind": "LOCAL_WRITE", "assigned_implementer": "CLAUDE_CODE"},
+            {
+                "kind": "LOCAL_WRITE",
+                "assigned_implementer": "CLAUDE_CODE",
+                "semantic_owner_ref": "TEST_DOMAIN_OWNER",
+                "semantic_owner_scope": "TEST_DOMAIN",
+                "worker_roles": ["SCOPE_PLANNER", "TEST_ENGINEER"],
+            },
             verification_tier="STANDARD",
         )
         local = role_assignment(
-            {"kind": "LOCAL_WRITE", "assigned_implementer": "LOCAL_CODE_WRITER"},
+            {
+                "kind": "LOCAL_WRITE",
+                "assigned_implementer": "LOCAL_CODE_WRITER",
+                "semantic_owner_ref": "TEST_DOMAIN_OWNER",
+                "semantic_owner_scope": "TEST_DOMAIN",
+                "worker_roles": ["SCOPE_PLANNER", "TEST_ENGINEER"],
+            },
             verification_tier="STANDARD",
         )
         self.assertEqual(claude["implementer_role"], "CODE_WRITER")
@@ -92,6 +115,39 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(
             claude["available_control_roles"],
             ["NAVIGATOR", "GUARDIAN", "DRIVER", "SCOUT"],
+        )
+        self.assertEqual(
+            claude["execution_model"],
+            "ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE",
+        )
+        self.assertEqual(
+            claude["metaphor_model"],
+            "SHEPHERDING_COOPERATIVE_EXECUTION_MODEL",
+        )
+        self.assertEqual(claude["role_registry"]["verifier"], "VERIFIER")
+        self.assertEqual(claude["default_actor_bindings"]["verifier"], "CODEX")
+        self.assertIsNone(claude["default_actor_bindings"]["implementer"])
+        self.assertEqual(claude["actor_bindings"]["implementer"], "CLAUDE_CODE")
+        self.assertEqual(claude["implementer"], "CLAUDE_CODE")
+        self.assertEqual(local["implementer"], "LOCAL_CODE_WRITER")
+        self.assertNotEqual(claude["implementer"], claude["implementer_role"])
+        self.assertEqual(claude["orchestrator_role"], "LEAD_ORCHESTRATOR")
+        self.assertEqual(claude["orchestrator_actor"], "CHATGPT")
+        self.assertEqual(claude["verifier_role"], "VERIFIER")
+        self.assertEqual(claude["verifier_actor"], "CODEX")
+        self.assertEqual(
+            claude["external_ai_calls"],
+            "NECESSITY_CHECK_WITHIN_COST",
+        )
+        self.assertEqual(
+            [item["role"] for item in claude["worker_roles"]],
+            ["SCOPE_PLANNER", "TEST_ENGINEER"],
+        )
+        self.assertTrue(
+            all(
+                item["semantic_owner_ref"] == "TEST_DOMAIN_OWNER"
+                for item in claude["worker_roles"]
+            )
         )
         self.assertEqual(claude["economy_policy"], "SAVEY_AI_ECONOMY")
         self.assertEqual(
@@ -109,6 +165,38 @@ class OrchestratorTests(unittest.TestCase):
         self.assertFalse(guidance["terminal"])
         self.assertIn("trusted USER intent", guidance["next_action"])
 
+    def test_safe_cost_misroute_is_auto_corrected(self):
+        tr = trusted()
+        p = plan(action_id="review")
+        p["call"]["model"] = "unknown-model"
+        out = preflight(p, tr)
+        self.assertTrue(out["allowed"])
+        self.assertEqual(out["mode"], "CORRECTED_CALL_ALLOWED")
+        self.assertEqual(out["correction"]["status"], "CORRECTED")
+        self.assertEqual(out["correction"]["gate"], "COST")
+        corrected_model = out["correction"]["after"]["call"]["model"]
+        self.assertIn(
+            corrected_model,
+            tr["action_registry"]["review"]["call_policy"]["allowed_models"],
+        )
+
+    def test_safe_call_count_overage_is_reduced_and_rechecked(self):
+        tr = trusted()
+        p = plan(action_id="review")
+        p["call"]["model"] = "sonnet"
+        p["call"]["effort"] = "medium"
+        p["call"]["expected_calls"] = 3
+        p["call"]["dry_run_plan"]["expected_calls"] = 3
+        out = preflight(p, tr)
+        self.assertTrue(out["allowed"])
+        self.assertEqual(out["mode"], "CORRECTED_CALL_ALLOWED")
+        max_calls = tr["action_registry"]["review"]["call_policy"]["max_calls"]
+        self.assertEqual(out["correction"]["after"]["call"]["expected_calls"], max_calls)
+        self.assertEqual(
+            out["correction"]["after"]["call"]["dry_run_plan"]["expected_calls"],
+            max_calls,
+        )
+
     def test_explicit_user_stop_is_terminal(self):
         guidance = guidance_for_failure(
             "DONE",
@@ -118,6 +206,42 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(guidance["mode"], "BLOCKED")
         self.assertTrue(guidance["terminal"])
         self.assertIn("USER stop", guidance["next_action"])
+
+    def test_preflight_safe_tool_blocks_drivefs_reverse_lookup(self):
+        p = plan()
+        p["tool_action"] = {
+            "operation": "google_drive",
+            "purpose": "find canonical inbox",
+            "target": r"C:\Users\x\AppData\Local\Google\DriveFS",
+            "transport": "drivefs_reverse_lookup",
+            "connector_available": True,
+            "drive_folder_id": "1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+            "action_signature": "drivefs-profile-enum",
+        }
+        out = preflight(p, trusted())
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "SAFE_TOOL")
+        self.assertIn("DRIVE_CONNECTOR_ID_ROUTE_REQUIRED", out["reason"])
+
+    def test_preflight_safe_tool_allows_exact_drive_connector_route(self):
+        p = plan()
+        p["tool_action"] = {
+            "operation": "google_drive",
+            "purpose": "read canonical inbox",
+            "target": "folder_id:1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+            "transport": "connector",
+            "connector_available": True,
+            "drive_folder_id": "1upSxxdECT5MCC1fvPJFOi24kk7K0LoOB",
+            "action_signature": "drive-folder-read-v1",
+        }
+        out = preflight(p, trusted())
+        self.assertTrue(out["allowed"])
+        self.assertEqual(out["safe_tool_evaluation"]["gate"], "SAFE_TOOL")
+        self.assertEqual(out["safe_tool_evaluation"]["state"], "SAFE_TOOL_OK")
+        self.assertEqual(
+            [item["gate"] for item in out["results"]],
+            ["KEY", "CONTEXT", "ROUTE", "COST"],
+        )
 
     def test_preflight_key_not_locked_returns_redirect_guidance(self):
         t = trusted()
@@ -137,11 +261,92 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(a["mode"], "LOCAL_ONLY")
         self.assertEqual(
             a["orchestration"]["orchestrator"],
-            "CHATGPT_LEAD_ORCHESTRATOR",
+            "CHATGPT",
         )
         self.assertEqual(a["orchestration"]["verifier"], "CODEX")
         self.assertEqual(a["orchestration"]["independent_reviewer"], "CLAUDE")
         self.assertNotEqual(a["receipt_id"], b["receipt_id"])
+
+    def test_blocked_preflight_persists_structured_control_incident(self):
+        p = plan()
+        p["action_id"] = "missing"
+        t = trusted()
+        out = preflight(p, t)
+        runtime = persist_control_incident(runtime_state(), out, p, t)
+        self.assertEqual(len(runtime["control_incidents"]), 1)
+        incident = next(iter(runtime["control_incidents"].values()))
+        self.assertEqual(incident["gate"], "KEY")
+        self.assertEqual(incident["control_role"], "GUARDIAN")
+        self.assertEqual(incident["result"], "CONTROL_INTERVENTION")
+        self.assertIn("reason", incident["cause"])
+        self.assertIn("route_chosen", incident)
+        self.assertEqual(incident["occurrence_count"], 1)
+
+        runtime = persist_control_incident(runtime, out, p, t)
+        self.assertEqual(len(runtime["control_incidents"]), 1)
+        self.assertEqual(
+            next(iter(runtime["control_incidents"].values()))["occurrence_count"],
+            2,
+        )
+
+    def test_done_failure_persists_guardian_control_incident(self):
+        runtime = runtime_state()
+        runtime["preflight_receipts"]["pf:test"] = {
+            "task_id": "task-q002",
+            "action_id": "read",
+            "authority_digest": "auth1",
+            "semantic_owner_ref": "TEST_DOMAIN_OWNER",
+            "semantic_owner_scope": "TEST_DOMAIN",
+        }
+        report = {"preflight_receipt": "pf:test", "evidence_refs": ["ev1"]}
+        out = {
+            "allowed": False,
+            "state": "REWORK",
+            "reason": "trusted critical gaps remain",
+            "evidence": ["ev1"],
+        }
+        runtime = persist_done_control_incident(runtime, report, out)
+        self.assertEqual(len(runtime["control_incidents"]), 1)
+        incident = next(iter(runtime["control_incidents"].values()))
+        self.assertEqual(incident["gate"], "DONE")
+        self.assertEqual(incident["control_role"], "GUARDIAN")
+        self.assertEqual(incident["decision"], "REWORK")
+        self.assertEqual(incident["occurrence_count"], 1)
+
+        runtime = persist_done_control_incident(runtime, report, out)
+        self.assertEqual(
+            next(iter(runtime["control_incidents"].values()))["occurrence_count"],
+            2,
+        )
+
+    def test_delivered_unconfirmed_is_not_a_control_incident(self):
+        runtime = runtime_state()
+        runtime["preflight_receipts"]["pf:test"] = {
+            "task_id": "task-q002",
+            "action_id": "read",
+            "authority_digest": "auth1",
+            "semantic_owner_ref": "TEST_DOMAIN_OWNER",
+            "semantic_owner_scope": "TEST_DOMAIN",
+        }
+        report = {"preflight_receipt": "pf:test", "evidence_refs": ["ev1"]}
+        out = {
+            "allowed": False,
+            "state": "DELIVERED_UNCONFIRMED",
+            "reason": "verified result awaits explicit USER confirmation",
+            "evidence": ["ev1"],
+        }
+        runtime = persist_done_control_incident(runtime, report, out)
+        self.assertEqual(runtime["control_incidents"], {})
+
+    def test_unknown_worker_role_blocks_without_crashing_preflight(self):
+        t = trusted()
+        t["action_registry"]["read"]["worker_roles"] = ["UNKNOWN_ROLE"]
+        out = preflight(plan(), t)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "KEY")
+        self.assertIn("unknown worker role", out["reason"])
+        self.assertEqual(out["orchestration"]["worker_roles"], [])
+        self.assertIn("UNKNOWN_ROLE", out["orchestration"]["worker_role_error"])
 
     def test_task_id_change_cannot_bypass_same_route_lock(self):
         t = trusted()
@@ -168,14 +373,12 @@ class OrchestratorTests(unittest.TestCase):
         t["route_ledgers"] = runtime["route_ledgers"]
         t["active_attempts"] = runtime["active_attempts"]
         fourth = preflight(plan(method="d", task_id="t-d"), t)
-        self.assertFalse(fourth["allowed"])
-        self.assertEqual(fourth["blocked_by"], "ROUTE")
-        packet = fourth["escalation_packet"]
-        self.assertIn("cause", packet)
-        self.assertIn("attempts", packet)
-        self.assertIn("remaining_options", packet)
-        self.assertIn("recommendation", packet)
-        self.assertIn("user_decision_or_info", packet)
+        self.assertTrue(fourth["allowed"])
+        route = next(item for item in fourth["results"] if item["gate"] == "ROUTE")
+        self.assertEqual(route["state"], "ROUTE_SOFT_BUDGET_EXCEEDED")
+        self.assertTrue(
+            any(ev.startswith("route-budget-soft-exceeded:") for ev in route["evidence"])
+        )
 
     def test_route_budget_is_scoped_by_action_execution_scope(self):
         t = trusted()
@@ -197,11 +400,46 @@ class OrchestratorTests(unittest.TestCase):
                 "effort": "medium",
                 "context": "delta",
                 "expected_calls": 1,
+                "dry_run_plan": {
+                    "expected_calls": 1,
+                    "operations": ["single bounded external call"],
+                    "batch_strategy": "single-batch",
+                    "fallback": "HOLD",
+                    "paid_api": False,
+                },
             },
         }
         out = preflight(review_plan, t)
         self.assertTrue(out["allowed"])
         self.assertTrue(out["call_allowed"])
+
+
+    def test_external_call_auto_derives_dry_run_when_omitted(self):
+        p = plan()
+        p["action_id"] = "review"
+        p["attempt"]["method_or_tool"] = "claude"
+        p["call"]["model"] = "sonnet"
+        p["call"]["effort"] = "medium"
+        p["call"].pop("dry_run_plan", None)
+        out = preflight(p, trusted())
+        self.assertTrue(out["allowed"])
+        self.assertTrue(out["call_allowed"])
+        dry = out["economy_evaluation"]["dry_run"]
+        self.assertEqual(dry["state"], "DRY_RUN_OK")
+        self.assertIn("dry-run-source:AUTO_DERIVED", dry["evidence"])
+
+    def test_external_call_dry_run_receipt_evidence_is_bound(self):
+        p = plan()
+        p["action_id"] = "review"
+        p["attempt"]["method_or_tool"] = "claude"
+        p["call"]["model"] = "sonnet"
+        p["call"]["effort"] = "medium"
+        out = preflight(p, trusted())
+        self.assertTrue(out["allowed"])
+        cost = [x for x in out["results"] if x["gate"] == "COST"][0]
+        self.assertTrue(any(x.startswith("dry-run:") for x in cost["evidence"]))
+        self.assertIn("DRY_RUN_PLAN", out["economy_evaluation"]["decision_sequence"])
+
 
     def test_plan_cannot_supply_fake_action(self):
         p = plan()
@@ -213,7 +451,7 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(out["mode"], "REDIRECT")
         self.assertEqual(
             out["guidance"]["owner"],
-            "CHATGPT_LEAD_ORCHESTRATOR",
+            "CHATGPT",
         )
         self.assertIn("registered action", out["guidance"]["next_action"])
 
@@ -225,10 +463,12 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(receipt["plan_digest"], out["plan_digest"])
         self.assertEqual(receipt["call_digest"], out["call_digest"])
         self.assertEqual(receipt["action_id"], "read")
+        self.assertEqual(receipt["semantic_owner_ref"], "TEST_DOMAIN_OWNER")
+        self.assertEqual(receipt["semantic_owner_scope"], "TEST_DOMAIN")
         self.assertEqual(receipt["execution_key"], out["execution_key"])
         self.assertEqual(
             receipt["orchestration"]["orchestrator"],
-            "CHATGPT_LEAD_ORCHESTRATOR",
+            "CHATGPT",
         )
         self.assertEqual(receipt["orchestration"]["verifier"], "CODEX")
         self.assertEqual(
@@ -291,6 +531,14 @@ class OrchestratorTests(unittest.TestCase):
             updated["route_ledgers"][scope]["failed_signatures"]
         )
 
+    def test_unknown_execution_outcome_cannot_be_downgraded_to_failure(self):
+        t = trusted()
+        out = preflight(plan(), t)
+        runtime = persist_preflight(runtime_state(), out)
+        runtime["active_attempts"][out["execution_key"]]["status"] = "OUTCOME_UNKNOWN"
+        with self.assertRaisesRegex(ValueError, "evidence-bound resolution"):
+            record_outcome(runtime, out["receipt_id"], "ENVIRONMENT")
+
     def test_success_outcome_is_required_for_done(self):
         t = trusted()
         out = preflight(plan(), t)
@@ -306,6 +554,8 @@ class OrchestratorTests(unittest.TestCase):
             "action_digest": receipt["action_digest"],
             "call_digest": receipt["call_digest"],
             "authority_digest": receipt["authority_digest"],
+            "semantic_owner_ref": receipt["semantic_owner_ref"],
+            "semantic_owner_scope": receipt["semantic_owner_scope"],
             "verification_tier": receipt["verification_tier"],
             "key_match": True,
             "critical_gaps": [],
@@ -329,6 +579,8 @@ class OrchestratorTests(unittest.TestCase):
             "validator": "verifier-1",
             "source_or_artifact_ref": "ev",
             "authority_digest_or_key_version": receipt["authority_digest"],
+            "semantic_owner_ref": receipt["semantic_owner_ref"],
+            "semantic_owner_scope": receipt["semantic_owner_scope"],
             "verification_tier": receipt["verification_tier"],
             "source_status": "CURRENT",
             "receipt_id": rid,
