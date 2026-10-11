@@ -11,18 +11,18 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow: visible;
 }
 .takyBadgeInsignia::before {
   content: "";
   position: absolute;
   z-index: 3;
-  inset: 0;
+  inset: -5%;
   border-radius: 50%;
   pointer-events: none;
   background: conic-gradient(from 20deg,var(--badge-fade-a),var(--badge-fade-b),var(--badge-fade-c),var(--badge-fade-a));
-  -webkit-mask: radial-gradient(circle, transparent 58%, #000 76%, transparent 99%);
-  mask: radial-gradient(circle, transparent 58%, #000 76%, transparent 99%);
+  -webkit-mask: radial-gradient(circle, transparent 55%, #000 75%, transparent 100%);
+  mask: radial-gradient(circle, transparent 55%, #000 75%, transparent 100%);
   filter: blur(3px);
   opacity: .88;
 }
@@ -45,14 +45,30 @@
 .takyBadgeInsignia .takyBadgeReawardStars {
   position: absolute;
   z-index: 4;
-  top: 3%;
+  top: -7%;
   left: 15%;
   width: 70%;
+  height: 30%;
   display: flex;
-  justify-content: space-evenly;
-  font-size: clamp(12px, 4vw, 22px);
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3%;
+  pointer-events: none;
 }
-.takyBadgeInsignia .takyBadgeReawardStars .is-empty {opacity: .26;}
+.takyBadgeInsignia .takyBadgeReawardStar {
+  display: block;
+  flex: 0 0 15%;
+  aspect-ratio: 1;
+  background: linear-gradient(145deg,#fff6d5 5%,#f6c66c 44%,#b87c36 92%);
+  clip-path: polygon(50% 0%,62% 34%,98% 35%,70% 57%,80% 92%,50% 72%,20% 92%,30% 57%,2% 35%,38% 34%);
+  filter: drop-shadow(0 1px 1px rgba(72,48,35,.28));
+}
+.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(2),
+.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(3),
+.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(4),
+.takyBadgeInsignia .takyBadgeReawardStar:nth-child(1):nth-last-child(5) {transform: translateY(25%);}
+.takyBadgeInsignia .takyBadgeReawardStar:last-child:not(:first-child) {transform: translateY(25%);}
+.takyBadgeInsignia .takyBadgeReawardStar:nth-child(3):nth-last-child(3) {transform: translateY(-8%);}
 .takyBadgeInsignia figcaption {
   position: absolute;
   z-index: 4;
@@ -71,3 +87,14 @@
 @media (prefers-reduced-motion: reduce) {
   .takyBadgeInsignia {animation: none !important; transition: none !important;}
 }
+
+/* Independent approved asset layers; never crop a composite concept sheet. */
+.takyBadgeInsignia .takyBadgeLayer{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.takyBadgeLayer--background{z-index:0}.takyBadgeLayer--shadow{z-index:0}.takyBadgeLayer--interior{z-index:1}.takyBadgeLayer--crew{z-index:2}.takyBadgeLayer--foreground{z-index:2}.takyBadgeLayer--frame{z-index:3}.takyBadgeLayer--effect{z-index:3}
+.takyBadgeInsignia{--star-fill:linear-gradient(145deg,#e6ffc4,#65ad64 65%,#407b50)}
+.takyBadgeInsignia[data-badge-tier="BLUE"]{--star-fill:linear-gradient(145deg,#e2f7ff,#5d9ad9 65%,#4569a6)}
+.takyBadgeInsignia[data-badge-tier="RED"]{--star-fill:linear-gradient(145deg,#ffe6df,#d76b6a 65%,#aa4b54)}
+.takyBadgeInsignia[data-badge-tier="GOLD"]{--star-fill:linear-gradient(145deg,#fff7c9,#e7b45a 65%,#b78032)}
+.takyBadgeInsignia[data-badge-tier="PLATINUM"]{--star-fill:linear-gradient(120deg,#f6b4d3,#e6e0ff 28%,#a9d8f5 52%,#c3e8c5 75%,#fff2b7)}
+.takyBadgeInsignia .takyBadgeReawardStar{background:var(--star-fill)}
+.takyBadgeInsignia[data-badge-state="LOCKED"] .takyBadgeLayer{filter:grayscale(1);opacity:.5}

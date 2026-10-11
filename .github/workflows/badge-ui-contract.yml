@@ -1,0 +1,27 @@
+name: Badge UI contract checks
+on:
+  pull_request:
+    paths:
+      - 'BADGE/ui/**'
+      - 'BADGE/badge-visual-renderer.js'
+      - 'BADGE/badge-visual-renderer.test.js'
+  workflow_dispatch:
+jobs:
+  badge-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check BADGE/ui/badge-atlas.test.cjs
+          node --check BADGE/badge-visual-renderer.js
+          node --check BADGE/badge-visual-renderer.test.js
+      - name: Badge UI contract
+        run: node BADGE/ui/badge-atlas.test.cjs
+      - name: Badge renderer regression
+        run: node BADGE/badge-visual-renderer.test.js
