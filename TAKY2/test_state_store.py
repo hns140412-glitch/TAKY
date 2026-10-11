@@ -4,7 +4,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from TAKY2.enforcement import STARTUP_READBACK_SOURCE_REFS, startup_readback_receipt_id
 from TAKY2.state_store import (
+    _release_stale_active_attempts,
+    _write_atomic_json,
     StateConflictError,
     StateIntegrityError,
     authority_digest,
@@ -16,6 +19,30 @@ from TAKY2.state_store import (
 
 
 KEY = b"k" * 32
+
+
+def startup_receipt(authority_digest_value):
+    revisions = {
+        "START_HERE": "r1",
+        "CANONICAL": "r2",
+        "SYSTEMWIDE_V2": "r3",
+        "CURRENT": "r4",
+    }
+    sources = [
+        {
+            "kind": kind,
+            "ref": STARTUP_READBACK_SOURCE_REFS[kind],
+            "revision": revisions[kind],
+        }
+        for kind in ("START_HERE", "CANONICAL", "SYSTEMWIDE_V2", "CURRENT")
+    ]
+    return {
+        "receipt_id": startup_readback_receipt_id(authority_digest_value, sources),
+        "authority_digest": authority_digest_value,
+        "verified": True,
+        "verified_by": "startup-verifier",
+        "sources": sources,
+    }
 
 
 def account_binding():
@@ -36,7 +63,59 @@ def account_binding():
     }
 
 
+def economy_entry(digest):
+    return {
+        "decision_kind": "REUSE_SUFFICIENT",
+        "verified": True,
+        "acceptance_state": "ACCEPTED",
+        "source_status": "CURRENT",
+        "authority_digest": digest,
+        "action_digest": "action:abc",
+        "semantic_owner_ref": "TEST_OWNER",
+        "semantic_owner_scope": "TEST/SCOPE",
+        "source_or_artifact_ref": "runtime:economy-assessment",
+        "revision_or_hash": "rev-1",
+        "verified_by": "savey-economy-verifier",
+        "decision_digest": "decision:abc",
+    }
+
+
 class StateStoreTests(unittest.TestCase):
+    def test_authority_rebind_releases_only_stale_active_route_ownership(self):
+        runtime = {
+            "preflight_receipts": {
+                "old": {"authority_digest": "old-auth"},
+                "current": {"authority_digest": "new-auth"},
+            },
+            "active_attempts": {
+                "exec-old": {"receipt_id": "old", "status": "PENDING"},
+                "exec-current": {"receipt_id": "current", "status": "PENDING"},
+            },
+        }
+        updated = _release_stale_active_attempts(runtime, "new-auth")
+        self.assertNotIn("exec-old", updated["active_attempts"])
+        self.assertIn("exec-current", updated["active_attempts"])
+        self.assertEqual(
+            updated["preflight_receipts"]["old"]["active_attempt_released_on_authority_rebind"],
+            "new-auth",
+        )
+        self.assertNotIn(
+            "active_attempt_released_on_authority_rebind",
+            updated["preflight_receipts"]["current"],
+        )
+
+    def test_windows_sharing_lock_fallback_preserves_exact_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "runtime.json"
+            path.write_text('{"old": true}', encoding="utf-8")
+            with patch("TAKY2.state_store.os.replace", side_effect=PermissionError("sharing lock")):
+                _write_atomic_json(path, {"new": "값", "n": 2})
+            self.assertEqual(
+                json.loads(path.read_text(encoding="utf-8")),
+                {"new": "값", "n": 2},
+            )
+            self.assertEqual(list(path.parent.glob("runtime.json.*.tmp")), [])
+
     def test_runtime_key_is_written_byte_exact_on_windows(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "runtime.key"
@@ -61,9 +140,11 @@ class StateStoreTests(unittest.TestCase):
             "active_attempts": {},
             "execution_outcomes": {},
             "evidence_registry": {},
+            "economy_evidence_registry": {},
             "completion_registry": {},
             "independent_review_registry": {},
             "done_gate_receipts": {},
+            "control_incidents": {},
             "consumed_approvals": {},
             "user_events": {},
         }
@@ -139,6 +220,146 @@ class StateStoreTests(unittest.TestCase):
                 ap, rp, runtime_key=KEY, anchor_path=anchor
             )
             self.assertEqual(loaded["runtime_version"], 2)
+        finally:
+            tmp.cleanup()
+
+    def test_save_runtime_rejects_forged_startup_readback_receipt(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["context"]["startup_readback_receipt"] = startup_receipt(digest)
+            runtime["context"]["startup_readback_receipt"]["receipt_id"] = "startup:forged"
+            with self.assertRaisesRegex(StateIntegrityError, "receipt_id mismatch"):
+                save_runtime(
+                    runtime,
+                    expected_version=1,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_valid_startup_readback_receipt_persists_and_cannot_be_cleared(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(
+                ap, rp, runtime_key=KEY, anchor_path=anchor
+            )
+            runtime["context"]["startup_readback_receipt"] = startup_receipt(digest)
+            saved = save_runtime(
+                runtime,
+                expected_version=1,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            self.assertEqual(
+                saved["context"]["startup_readback_receipt"]["receipt_id"],
+                startup_receipt(digest)["receipt_id"],
+            )
+            candidate = json.loads(json.dumps(saved))
+            candidate["context"]["startup_readback_receipt"] = None
+            with self.assertRaisesRegex(StateIntegrityError, "cannot be cleared"):
+                save_runtime(
+                    candidate,
+                    expected_version=2,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_economy_evidence_persists_and_is_append_only(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+            runtime["economy_evidence_registry"]["econ:1"] = economy_entry(digest)
+            saved = save_runtime(
+                runtime,
+                expected_version=1,
+                authority_digest_value=digest,
+                runtime_path=rp,
+                lock_path=lock,
+                runtime_key=KEY,
+                anchor_path=anchor,
+            )
+            self.assertIn("econ:1", saved["economy_evidence_registry"])
+
+            removed = json.loads(json.dumps(saved))
+            removed["economy_evidence_registry"].pop("econ:1")
+            with self.assertRaisesRegex(StateIntegrityError, "cannot be removed"):
+                save_runtime(
+                    removed,
+                    expected_version=2,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+
+            mutated = json.loads(json.dumps(saved))
+            mutated["economy_evidence_registry"]["econ:1"]["decision_kind"] = "LOCAL_SUFFICIENT"
+            with self.assertRaisesRegex(StateIntegrityError, "append-only"):
+                save_runtime(
+                    mutated,
+                    expected_version=2,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_economy_evidence_rejects_stale_authority(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+            item = economy_entry(digest)
+            item["authority_digest"] = "stale"
+            runtime["economy_evidence_registry"]["econ:stale"] = item
+            with self.assertRaisesRegex(StateIntegrityError, "authority is stale"):
+                save_runtime(
+                    runtime,
+                    expected_version=1,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
+        finally:
+            tmp.cleanup()
+
+    def test_economy_evidence_rejects_direct_malformed_entry(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, runtime, _ = load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+            item = economy_entry(digest)
+            item["verified"] = False
+            runtime["economy_evidence_registry"]["econ:bad"] = item
+            with self.assertRaisesRegex(StateIntegrityError, "must be verified"):
+                save_runtime(
+                    runtime,
+                    expected_version=1,
+                    authority_digest_value=digest,
+                    runtime_path=rp,
+                    lock_path=lock,
+                    runtime_key=KEY,
+                    anchor_path=anchor,
+                )
         finally:
             tmp.cleanup()
 

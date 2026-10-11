@@ -1,11 +1,14 @@
 {
   "runtime_version": 1,
   "authority_digest": "",
-  "runtime": {"account_attestation": null},
+  "runtime": {
+    "account_attestation": null
+  },
   "context": {
     "premise_loaded": true,
     "snapshot_verified": true,
-    "full_reread_authorized": false
+    "full_reread_authorized": false,
+    "startup_readback_receipt": null
   },
   "route_ledgers": {},
   "preflight_receipts": {},
@@ -13,9 +16,11 @@
   "execution_outcomes": {},
   "execution_calls": {},
   "evidence_registry": {},
+  "economy_evidence_registry": {},
   "completion_registry": {},
   "independent_review_registry": {},
   "done_gate_receipts": {},
+  "control_incidents": {},
   "consumed_approvals": {},
   "user_events": {},
   "authority_rebind_history": []

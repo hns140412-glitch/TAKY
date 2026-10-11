@@ -242,6 +242,42 @@ class ExecutionOutcomeStateTest(unittest.TestCase):
         self.assertFalse(result["pass"])
         self.assertIn("RETRY_REQUEST_FINGERPRINT_MISMATCH", result["detected"])
 
+    def test_same_failure_signature_without_new_evidence_is_blocked(self):
+        env = mutation_envelope()
+        previous = receipt(env, "COMPLETED", failure_signature="POWERSHELL_QUOTE_PARSE")
+        retry = {
+            "operation_key": env["operation_key"],
+            "request_fingerprint": env["effect_policy"]["request_fingerprint"],
+            "retry_attempt": 1,
+            "failure_signature": "POWERSHELL_QUOTE_PARSE",
+            "reconciliation": {
+                "performed": True,
+                "effect_state": "NOT_APPLIED",
+                "request_fingerprint": env["effect_policy"]["request_fingerprint"],
+            },
+        }
+        result = validate_retry(env, previous, retry)
+        self.assertFalse(result["pass"])
+        self.assertIn("RETRY_BLOCKED_SAME_FAILURE_NO_NEW_EVIDENCE", result["detected"])
+
+    def test_same_failure_signature_with_strategy_change_can_retry(self):
+        env = mutation_envelope()
+        previous = receipt(env, "COMPLETED", failure_signature="POWERSHELL_QUOTE_PARSE")
+        retry = {
+            "operation_key": env["operation_key"],
+            "request_fingerprint": env["effect_policy"]["request_fingerprint"],
+            "retry_attempt": 1,
+            "failure_signature": "POWERSHELL_QUOTE_PARSE",
+            "strategy_changed": True,
+            "reconciliation": {
+                "performed": True,
+                "effect_state": "NOT_APPLIED",
+                "request_fingerprint": env["effect_policy"]["request_fingerprint"],
+            },
+        }
+        result = validate_retry(env, previous, retry)
+        self.assertTrue(result["pass"], result)
+
 
 if __name__ == "__main__":
     unittest.main()

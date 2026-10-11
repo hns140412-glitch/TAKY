@@ -1008,15 +1008,18 @@ Register or explicitly gap:
 ### P1-4 Beta/Alpha lineage manifest
 Do not guess equivalence among historical refs/snapshots.
 
-### P1-5 startup readback receipt
-Drive Premise/Canonical/CURRENT check remains operationally required; machine mutation-block receipt is still open.
+### P1-5 startup readback receipt — LOCALLY IMPLEMENTED
+Context Gate now requires a machine-readable startup readback receipt bound to the current authority digest and the required START_HERE / CANONICAL / SYSTEMWIDE_V2 / CURRENT source set.
+Missing/stale receipt => READ_ONLY.
 
-### P1-6 control incident evidence
-For material redirects record:
-cause / evidence / role decision / route / result / remaining unknown.
+### P1-6 control incident evidence — LOCALLY IMPLEMENTED
+Material redirects persist a structured Control Incident Trace:
+cause / observed evidence / control role / decision / route chosen / result / remaining unknown.
+Repeated identical incidents increment occurrence_count instead of generating unbounded duplicate records.
 
-### P1-7 completion-state reconciliation
-Technical delivery vs USER-confirmed state needs explicit policy.
+### P1-7 completion-state reconciliation — LOCALLY IMPLEMENTED
+Technical delivery is DELIVERED_UNCONFIRMED until an explicit, receipt-bound, verified USER confirmation event exists.
+USER_CONFIRMED is not inferred from silence or technical success.
 
 
 ## 20. Minimal implementation order
@@ -1090,11 +1093,13 @@ Beta preserves trust.
 Alpha preserves meaning and ownership.
 TAKY2 enforces cross-cutting invariants.
 
-The Shepherding Control Plane continuously manages:
+The formal Role-Based Collaborative Control Plane continuously manages:
 - Navigator = direction
 - Guardian = integrity
 - Driver + SAVEY_AI_ECONOMY = momentum and total-cost efficiency
 - Scout = relevant unknowns and evidence
+
+Shepherding / Border Collie remains an explanatory metaphor for coordinated observation, guidance and redirection; it is not the formal structure name.
 
 The Work Role Plane structures execution without hard-coding models.
 
@@ -1105,3 +1110,38 @@ AI Mining -> Index -> Learning contributes evidence and validated operating impr
 The system should choose the minimum-sufficient role, actor, tool and evidence path, redirect recoverable drift before escalation, and accept completion only when evidence, semantic-owner boundaries and applicable USER authority align.
 
 END
+
+## 24. Local implementation evidence — 2026-10-07
+
+Runtime contract:
+- formal name: TAKY_ROLE_BASED_COLLABORATIVE_EXECUTION
+- execution model: ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE
+- metaphor compatibility: SHEPHERDING_COOPERATIVE_EXECUTION_MODEL
+
+Implemented deltas:
+1. role_registry separated from default_actor_bindings; implementer default remains null/task-fit.
+2. semantic_owner_ref + semantic_owner_scope required on trusted actions and propagated through preflight, active attempt, evidence, completion and DONE.
+3. semantic_owner_registry resolves known owners and preserves unresolved authorities as OWNER_GAP; tools/routers/projections cannot silently become semantic owners.
+4. shared evaluate_savey_ai_economy() is consumed once by Driver trace and COST Gate; Necessity stays within COST/Driver.
+5. Control Incident Trace persists control interventions with deduplicated occurrence_count.
+6. eight reusable Worker Role profiles are selected per action; no mandatory eight-stage pipeline.
+7. startup readback receipt requires START_HERE / CANONICAL / SYSTEMWIDE_V2 / CURRENT with revision bindings and current authority digest.
+8. verifier/reviewer role IDs are distinct from default CODEX/CLAUDE actor bindings.
+9. DONE preserves DELIVERED_UNCONFIRMED vs explicit USER_CONFIRMED.
+
+Runtime authority rebind:
+- e92831fc4e23ff21c979 -> 85474e09166708960f60
+- signed runtime v9 -> v10 staged -> v11 rebound
+- KEY_AMEND=false
+- explicit USER event: chat:user:continue:2026-10-07
+
+Verification:
+- TAKY2 full regression: 127 passed + 51 subtests
+- py_compile: PASS
+- git diff --check: PASS
+- state/bridge post-rebind: 53 passed + 34 subtests
+- post-reattack Worker Role blocked-path test: targeted PASS
+
+Promotion remains separate:
+IMPLEMENTED != CANONICAL.
+Independent reattack / verification and final TAKY disposition are still required before V3 promotion.

@@ -423,7 +423,23 @@
           "responsive_states_defined": true,
           "accessibility_check_defined": true,
           "external_style_as_project_authority": true,
-          "remaining_unknowns": []
+          "remaining_unknowns": [],
+          "browser_render_check_defined": true,
+          "reference_visual_compare_defined": true,
+          "responsive_visual_matrix_defined": true,
+          "core_flow_e2e_defined": true,
+          "console_error_check_defined": true,
+          "predeploy_visual_gate_defined": true,
+          "deployed_url_revalidation_defined": true,
+          "device_final_gate_defined": true,
+          "browser_validation_tool": "Playwright MCP",
+          "visual_evidence_refs": [
+            "artifacts/ui-home-mobile.png",
+            "artifacts/ui-settings-desktop.png"
+          ],
+          "deployment_performed": false,
+          "claims_deploy_pass": false,
+          "claims_device_verified": false
         }
       }
     },
@@ -458,7 +474,23 @@
           "responsive_states_defined": true,
           "accessibility_check_defined": true,
           "external_style_as_project_authority": false,
-          "remaining_unknowns": []
+          "remaining_unknowns": [],
+          "browser_render_check_defined": true,
+          "reference_visual_compare_defined": true,
+          "responsive_visual_matrix_defined": true,
+          "core_flow_e2e_defined": true,
+          "console_error_check_defined": true,
+          "predeploy_visual_gate_defined": true,
+          "deployed_url_revalidation_defined": true,
+          "device_final_gate_defined": true,
+          "browser_validation_tool": "Playwright MCP",
+          "visual_evidence_refs": [
+            "artifacts/ui-home-mobile.png",
+            "artifacts/ui-settings-desktop.png"
+          ],
+          "deployment_performed": false,
+          "claims_deploy_pass": false,
+          "claims_device_verified": false
         }
       }
     },
@@ -773,6 +805,123 @@
           "cross_domain_authority_shared_by_default": false,
           "shared_semantic_or_authority_without_explicit_federation": false,
           "forced_fragmentation_without_benefit": false
+        }
+      }
+    },
+    {
+      "id": "ENG-UI-DEPLOY-02",
+      "phase": "historical_failure",
+      "expectation": "contains",
+      "expected_detected": [
+        "RULE_NOT_APPLIED",
+        "HUMAN_APPROVAL_MISSING"
+      ],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "UI_IMPLEMENTATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "golden-ui.png"
+          ],
+          "protected_state": [
+            "exploration identity"
+          ],
+          "target_delta": "implement verified UI",
+          "acceptance_conditions": [
+            "matches project reference"
+          ],
+          "validation_steps": [
+            "Playwright render compare",
+            "core flow E2E"
+          ],
+          "regression_scope": [
+            "navigation",
+            "responsive UI"
+          ],
+          "report_mode": "normal",
+          "project_reference_checked": true,
+          "design_contract_ref": "PROJECT/UI_MASTER.md",
+          "responsive_states_defined": true,
+          "accessibility_check_defined": true,
+          "browser_render_check_defined": true,
+          "reference_visual_compare_defined": true,
+          "responsive_visual_matrix_defined": true,
+          "core_flow_e2e_defined": true,
+          "console_error_check_defined": true,
+          "predeploy_visual_gate_defined": true,
+          "deployed_url_revalidation_defined": true,
+          "device_final_gate_defined": true,
+          "browser_validation_tool": "Playwright MCP",
+          "visual_evidence_refs": [
+            "artifacts/ui-home-mobile.png"
+          ],
+          "external_style_as_project_authority": false,
+          "remaining_unknowns": [],
+          "deployment_performed": true,
+          "predeploy_visual_gate_passed": false,
+          "deployment_human_approval_present": false
+        }
+      }
+    },
+    {
+      "id": "ENG-UI-DEPLOY-02",
+      "phase": "post_fix_compliant",
+      "expectation": "clean",
+      "expected_detected": [],
+      "record": {
+        "engineering_execution_profile_required": true,
+        "engineering_profile": "UI_IMPLEMENTATION",
+        "engineering_contract": {
+          "baseline_evidence_refs": [
+            "golden-ui.png"
+          ],
+          "protected_state": [
+            "exploration identity"
+          ],
+          "target_delta": "implement verified UI",
+          "acceptance_conditions": [
+            "matches project reference"
+          ],
+          "validation_steps": [
+            "Playwright render compare",
+            "core flow E2E"
+          ],
+          "regression_scope": [
+            "navigation",
+            "responsive UI"
+          ],
+          "report_mode": "normal",
+          "project_reference_checked": true,
+          "design_contract_ref": "PROJECT/UI_MASTER.md",
+          "responsive_states_defined": true,
+          "accessibility_check_defined": true,
+          "browser_render_check_defined": true,
+          "reference_visual_compare_defined": true,
+          "responsive_visual_matrix_defined": true,
+          "core_flow_e2e_defined": true,
+          "console_error_check_defined": true,
+          "predeploy_visual_gate_defined": true,
+          "deployed_url_revalidation_defined": true,
+          "device_final_gate_defined": true,
+          "browser_validation_tool": "Playwright MCP",
+          "visual_evidence_refs": [
+            "artifacts/ui-home-mobile.png"
+          ],
+          "external_style_as_project_authority": false,
+          "remaining_unknowns": [],
+          "deployment_performed": true,
+          "predeploy_visual_gate_passed": true,
+          "deployment_human_approval_present": true,
+          "claims_deploy_pass": true,
+          "deployed_url_revalidation_passed": true,
+          "deploy_evidence_refs": [
+            "artifacts/deployed-url-playwright-report.json"
+          ],
+          "claims_device_verified": true,
+          "device_final_gate_passed": true,
+          "device_evidence_refs": [
+            "artifacts/iphone-device-check.md"
+          ]
         }
       }
     }
