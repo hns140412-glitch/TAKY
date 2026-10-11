@@ -148,3 +148,8 @@ Supersedes the digest/runtime figures above (85474…/v11 are historical).
   receipt pf:taky2-v3-utf8-capture-codex-20261011:f3c55cb07097b782
   result TAKY2/TAKY2_V3_UTF8_CAPTURE_CODEX_RESULT_20261011.json (full stderr captured post-fix)
 - all V3 implementation deltas now have independent PASS; promotion still awaits explicit USER decision
+- V3 PROMOTED by explicit USER decision 2026-10-11 (Drive CURRENT §23; V3 doc PROMOTION RECEIPT header)
+  CUR-001/002/003/004/008/009 = PROMOTED, pending HISTORY receipt transfer before Active removal
+- ENFORCEMENT authorized-development budget now bound to trusted USER authorization
+  (scope=external_development_calls in signed TAKY2 authority); none registered => OFF (commit 956e8f10)
+- pushed: origin/taky-2.0-orchestrator-2026-10-05 = 968a9940; later local commits not pushed
