@@ -15,7 +15,7 @@ Updated: 2026-10-06 final integration reconciliation
    - document_id: 1Cb_nJ55KyKui1sAoc_yOgkTsQ-7vVNqM6Hr19LoNd1c
 
 Implementation-reconciliation candidate:
-5. [CANDIDATE] TAKY_2.0_SYSTEMWIDE_LOGIC_RECONCILIATION_V3_FINAL_INTEGRATED_20261006
+5. [CANONICAL] TAKY_2.0_SYSTEMWIDE_LOGIC_RECONCILIATION_V3_FINAL_INTEGRATED_20261006
    - document_id: 1FJkxaNOn_i9hEnS2UQzPFjbA7983ieXpdE7kPiMLj5U
 
 AI/mining/index/learning only:
@@ -157,3 +157,4 @@ Supersedes the digest/runtime figures above (85474…/v11 are historical).
   CUR-001/002/003/004/008/009 removed from Drive Active CURRENT
 - Active CURRENT now: CUR-005 / CUR-006 / CUR-007 / CUR-010 / CUR-011
 - pending: V3 Drive title rename [CANDIDATE] -> [CANONICAL]; fresh startup readback receipt next session
+- V3 Drive title renamed [CANDIDATE] -> [CANONICAL] (START HERE / CURRENT references updated); Drive readback verified
