@@ -1,0 +1,90 @@
+{
+  "schema": "TAKY_REFERENCE_INTAKE_V29_LEARNING_RUNTIME_VALIDATION_V1",
+  "status": "BRANCH_SCOPED_CLOSED_PASS__NOT_CURRENT__NOT_CANONICAL",
+  "validated_at": "2026-10-02",
+  "branch": "taky/reference-intake-v29-20261002",
+  "base_head": "8a6806b",
+  "scope": {
+    "source_index": "DATA_SOURCE_INDEX_2026-10-02_V9.json",
+    "utilization_index": "DATA_UTILIZATION_INDEX_2026-10-02_V29.json",
+    "learning_refs": [
+      "REF-068",
+      "REF-069",
+      "REF-070",
+      "REF-071",
+      "REF-074",
+      "REF-075"
+    ]
+  },
+  "problem_found": {
+    "description": "Learning Projection/Engine documents existed, but the active default runtime policy registry still referenced V6/V26 and had no policy rows for the V29-only reference capabilities.",
+    "impact": "Without an explicit trusted V29 policy registry, actual Learning Runtime consumption failed closed with DENY_UNKNOWN_POLICY.",
+    "correction": "Add a branch-scoped V29 policy overlay and allow Learning Runtime to receive a trusted policy registry only as a third function argument, never from request/input payload."
+  },
+  "implementation": {
+    "runtime_change": "LEARNING/runtime/learning-engine-runtime.js",
+    "policy_overlay": "LEARNING/policy/reference-intake-v29-policy.js",
+    "e2e_test": "LEARNING/runtime/reference-intake-v29-runtime.test.js",
+    "trust_boundary": "CALLER_INPUT_CANNOT_SUPPLY_POLICY_REGISTRY"
+  },
+  "validated_consumption": [
+    {
+      "source_id": "REF-068",
+      "consumer": "HIDE_SEEK",
+      "behavior": "HISTORY_CONCEPT_LINK_REFERENCE"
+    },
+    {
+      "source_id": "REF-069",
+      "consumer": "READY_SET",
+      "behavior": "REMEDIATION_RESOURCE_REFERENCE"
+    },
+    {
+      "source_id": "REF-070",
+      "consumer": "HIDE_SEEK",
+      "behavior": "CONCEPT_CONFUSION_REFERENCE"
+    },
+    {
+      "source_id": "REF-071",
+      "consumer": "READY_SET",
+      "behavior": "SUPPLEMENTAL_RESOURCE_DISCOVERY"
+    },
+    {
+      "source_id": "REF-074",
+      "consumer": "SNAP_POP",
+      "behavior": "WRITING_PROCESS_SCAFFOLD"
+    },
+    {
+      "source_id": "REF-075",
+      "consumer": "SNAP_POP",
+      "behavior": "OPEN_ENDED_READING_DIALOGUE"
+    }
+  ],
+  "verified_guards": [
+    "SOURCE_REF_SURVIVES_INDEX_TO_LEARNING_RUNTIME",
+    "INDEX_RETRIEVAL_METADATA_DOES_NOT_MUTATE_LEARNER_STATE",
+    "REFERENCE_EXPOSURE_DOES_NOT_INCREASE_MASTERY",
+    "REFERENCE_DOES_NOT_GAIN_PLANNER_OR_SCHEDULE_AUTHORITY",
+    "PROHIBITED_CLAIM_FAILS_CLOSED",
+    "UNTRUSTED_INPUT_POLICY_REGISTRY_IS_IGNORED",
+    "DEFAULT_CURRENT_POLICY_STILL_FAILS_CLOSED_FOR_V29_ONLY_FUNCTIONS"
+  ],
+  "tests": {
+    "reference_intake_v29_learning_runtime_e2e": "PASS_6_OF_6",
+    "learning_runtime_policy_integration": "PASS",
+    "indexed_evidence_handoff": "PASS",
+    "learning_evidence_policy_bridge": "PASS"
+  },
+  "authority": {
+    "current_pointer_changed": false,
+    "master_policy_changed": false,
+    "canonical_promotion": false,
+    "main_merge": false,
+    "remote_push": false,
+    "deployment": false
+  },
+  "next": [
+    "PRESERVE_BRANCH_SCOPED_RECEIPT",
+    "DO_NOT_MARK_CURRENT_RUNTIME_POLICY_AS_V29_READY_UNTIL_EXPLICIT_PROMOTION",
+    "KEEP_CURRENT_CANONICAL_MAIN_DEPLOYMENT_HOLD"
+  ]
+}
