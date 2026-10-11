@@ -116,10 +116,13 @@ class SemanticCurrentTests(unittest.TestCase):
         })
         scopes = {row['id']: row for row in current['scopes']}
         self.assertEqual(scopes['badge_central']['producer_snapshot'],
-                         {'source_producers': 15, 'active_producers': 0, 'total': 60})
-        self.assertEqual(scopes['badge_central']['live_hosted_e2e'], 'OPEN')
+                         {'source_producers': 44, 'open_producers': 16, 'active_producers': 0, 'total': 60})
+        self.assertEqual(scopes['badge_central']['live_hosted_e2e'],
+                         'REPOSITORY_RUNTIME_E2E_PASS__PRODUCTION_HOST_STILL_HOLD')
         self.assertEqual(scopes['badge_central']['head_ref'],
-                         'de9ca733168bdace6b114b147ffc95ec7c09f064')
+                         '4f6a8cd0899cf9536d58e4ae459915bce20f9f67')
+        self.assertEqual(scopes['badge_central']['candidate_refs']['Ready-Set']['head'],
+                         '5203baf88c239de4c468785881245c8f0e6db522')
         self.assertEqual(scopes['badge_central']['candidate_refs']['TAKY-MOBILE']['head'],
                          'b42f7e2d0fdf220e552817c41629c5384034888b')
         self.assertEqual(scopes['exploration_crew_ready_consumer_v2']['state'], 'MAIN/CLOSED')
