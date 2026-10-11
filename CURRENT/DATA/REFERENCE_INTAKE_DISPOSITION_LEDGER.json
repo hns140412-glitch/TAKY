@@ -405,6 +405,104 @@
         "evidence": "DELTA_MINING_CLASSIFICATION_20261002 + snapshot ad5ce21133a10219debca49ca4cdebf8d58c4a979b2e24f8ae237522fb1db472",
         "active_reference": false
       }
+    },
+    {
+      "event_id": "ri-31b509a9e80b9342c5a5",
+      "source_key": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.607097+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+        "source_url": "https://juniper-clef-bf9.notion.site/AI-15-3e4fa2be260d81c594e0ee4eecd9bbae",
+        "source_locator": "https://juniper-clef-bf9.notion.site/AI-15-3e4fa2be260d81c594e0ee4eecd9bbae",
+        "domain": "reference",
+        "consumer": "REFERENCE_DISCOVERY"
+      }
+    },
+    {
+      "event_id": "ri-52bd3baf69a4390770f4",
+      "source_key": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.607097+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+        "index_version": "V6+DELTA_20261002_R3",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "DRIVE_V6_ID:13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+          "V6_TERM_CHECK:SOURCE_URL_TITLE_CORE_SERVICE_NAMES_NOT_FOUND",
+          "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-d23777486e9b428f15a4",
+      "source_key": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.607097+00:00",
+      "details": {
+        "consumer": "REFERENCE_DISCOVERY",
+        "domain": "reference",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd"
+      }
+    },
+    {
+      "event_id": "ri-31c5fa6f95ae98c1655e",
+      "source_key": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "state": "REGISTERED",
+      "previous_state": null,
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.609666+00:00",
+      "details": {
+        "source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+        "source_url": "https://navig.notion.site/TOP-5-3d86d83666b3805194a9fc37c42e5283",
+        "source_locator": "https://navig.notion.site/TOP-5-3d86d83666b3805194a9fc37c42e5283",
+        "domain": "reference",
+        "consumer": "DEV_INFRA_REFERENCE"
+      }
+    },
+    {
+      "event_id": "ri-e2d660e1a9cebb92cefd",
+      "source_key": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "state": "INDEXED",
+      "previous_state": "REGISTERED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.609666+00:00",
+      "details": {
+        "index_source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+        "index_version": "V6+DELTA_20261002_R3",
+        "duplicate_relation": null,
+        "version_relation": null,
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+        "index_review_issuer": "INDEXING_OWNER",
+        "index_review_evidence_refs": [
+          "DRIVE_V6_ID:13tmAJVLn9jZRn8NUOfBtOhnEuCqCyS7ZY8iXLDKHtdc",
+          "V6_TERM_CHECK:SOURCE_URL_TITLE_PROVIDER_NAMES_NOT_FOUND",
+          "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json"
+        ]
+      }
+    },
+    {
+      "event_id": "ri-067ff538cacaf7198990",
+      "source_key": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+      "state": "EVIDENCE_CANDIDATE",
+      "previous_state": "INDEXED",
+      "acquisition_state": "ACQUIRED_AND_PRESERVED",
+      "recorded_at": "2026-10-02T06:35:16.609666+00:00",
+      "details": {
+        "consumer": "DEV_INFRA_REFERENCE",
+        "domain": "reference",
+        "source_ref": "INDEX:NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282"
+      }
     }
   ]
 }

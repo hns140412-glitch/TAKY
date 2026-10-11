@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_NOTION_INCREMENTAL_PIPELINE_CURRENT_V1",
-  "updated_at": "2026-10-02T13:39:00+09:00",
+  "updated_at": "2026-10-02T15:38:00+09:00",
   "authority_role": "namespace logical CURRENT for Notion incremental source intake",
   "source_generation": "INCREMENTAL_QUEUE.20261002T040003612Z.json",
   "source_rows": 161,
@@ -69,14 +69,19 @@
       "spectrumhub": "INDEXED_SECONDARY_RESOURCE_HUB__OFFICIAL_QABA_LINKS_EXTERNALLY_VALIDATED"
     },
     "remaining_hold": {
-      "media_reacquisition_required": 2,
-      "out_of_scope": 1
+      "media_reacquisition_required": 0,
+      "out_of_scope": 1,
+      "r3_review_pending_dedup": 0
     },
     "evidence_files": [
       "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_DOMAIN_REQUERY_HANDOFF_20261002.json",
       "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_LEARNING_POLICY_CHECK_20261002.json",
       "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_HOLD_REVIEW_20261002.json"
-    ]
+    ],
+    "r3_reference_candidates": {
+      "ai15": "INDEXED_REFERENCE_ONLY__TIME_SENSITIVE_COMMUNITY_CURATED",
+      "free_domains": "INDEXED_REFERENCE_ONLY__DEV_INFRA"
+    }
   },
   "guards": [
     "INDEXED != LEARNING_AUTHORIZED",
@@ -92,10 +97,49 @@
   "deployment": "HOLD",
   "netlify": "HOLD",
   "next": [
-    "Reacquire media for 2 HOLD_REACQUISITION_REQUIRED sources before mining/indexing.",
-    "Keep out-of-scope vehicle source on HOLD; do not drop raw provenance.",
+    "Keep the vehicle-maintenance source as out-of-scope HOLD.",
     "Keep writing/reading learning candidates fail-closed until independent provenance satisfies policy.",
-    "Treat 0wonloop as NEEDS_MORE_EVIDENCE until actual body content is acquired.",
+    "At use time, reverify time-sensitive AI tool status and free-domain provider terms against first-party sources.",
+    "Continue scheduled 08:00 KST deep mining only for new/materially changed reference-site content.",
     "Full canonical Source Index promotion remains separate; no silent overwrite of V6."
-  ]
+  ],
+  "r3_browser_recovery": {
+    "review_version": "V6+DELTA_20261002_R3",
+    "former_media_hold_recovered_to_review": 2,
+    "items": [
+      {
+        "source_id": "NOTION:3edfa868-dc2a-81f8-ad40-fba1f5ba6ddd",
+        "status": "REVIEW",
+        "domain": "REFERENCE_TOOL_DISCOVERY",
+        "authority_class": "COMMUNITY_CURATED_TIME_SENSITIVE_REFERENCE",
+        "learning_use_authorized": false,
+        "blockers": [
+          "V6_EXACT_DUPLICATE_VERSION_RECHECK_REQUIRED",
+          "BROWSER_RECOVERY_NOT_STABLY_REPRODUCIBLE"
+        ]
+      },
+      {
+        "source_id": "NOTION:3edfa868-dc2a-81e8-978e-f03ff34f9282",
+        "status": "REVIEW",
+        "domain": "DEV_INFRA_REFERENCE",
+        "authority_class": "COMMUNITY_CURATED_REFERENCE",
+        "learning_use_authorized": false,
+        "blockers": [
+          "V6_EXACT_DUPLICATE_VERSION_RECHECK_REQUIRED"
+        ]
+      }
+    ],
+    "evidence_file": "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_R3_BROWSER_RECOVERY_REVIEW_20261002.json",
+    "canonical_index_mutated": false,
+    "learning_applied": false,
+    "index_promoted_reference_only": 2,
+    "review_pending": 0,
+    "v6_exact_duplicate_result": "NO_EXACT_DUPLICATE_EVIDENCE",
+    "v6_check_basis": [
+      "source_url",
+      "title",
+      "core_service_or_provider_names"
+    ],
+    "owner_receipt": "HISTORY/NOTION_INCREMENTAL_2026-10-02/DELTA_INDEX_OWNER_RECEIPTS_R3_20261002.json"
+  }
 }
