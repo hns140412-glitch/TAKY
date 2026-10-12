@@ -2,8 +2,8 @@
   "schema": "TAKY_AI_LEARNING_QUEST_QUEUE_V1",
   "authoritative": false,
   "owner": "SYSTEM_GROW",
-  "generated_at": "2026-10-05T23:43:40.970480+00:00",
-  "source_learning_count": 56,
+  "generated_at": "2026-10-11T23:42:01.925506+00:00",
+  "source_learning_count": 57,
   "quest_cycle": [
     "LEARNING",
     "TEST",
@@ -14,7 +14,7 @@
   "states": {
     "ADOPTED_TESTED_NEW_GUARD": 14,
     "EXPERIMENT_READY": 14,
-    "REFERENCE_ONLY_VERIFY": 5,
+    "REFERENCE_ONLY_VERIFY": 6,
     "ADOPTED_TESTED_Q2": 3,
     "DOMAIN_HANDOFF_READY": 18,
     "ADOPTED_TESTED_EXISTING": 2
@@ -45,7 +45,7 @@
     {
       "quest_id": "AI-Q5-VERIFY-WHEN-NEEDED",
       "state": "OPEN_ON_DEMAND",
-      "member_count": 5
+      "member_count": 6
     }
   ],
   "items": [
@@ -227,6 +227,16 @@
       ],
       "state": "DOMAIN_HANDOFF_READY",
       "next_required": "BOUNDED_DOMAIN_APPLICATION_TEST"
+    },
+    {
+      "learning_id": "AI-LRN-STYLE-SIGNAL-NOT-AUTHORSHIP-PROOF",
+      "insight": "Use AI-like writing-style taxonomies as output-QA signals, not proof of AI authorship; preserve genre/model evidence limits, hold flags and false-positive caveats before rewriting.",
+      "evidence_refs": [
+        "INDEX:REF-095",
+        "INDEX:REF-096"
+      ],
+      "state": "REFERENCE_ONLY_VERIFY",
+      "next_required": "VERIFY_WHEN_OPERATIONALLY_NEEDED"
     },
     {
       "learning_id": "AI-LRN-APPROVAL-BOUND-TO-ARTIFACT",

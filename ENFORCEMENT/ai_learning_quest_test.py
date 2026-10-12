@@ -10,8 +10,8 @@ class AILearningQuestTest(unittest.TestCase):
         cls.p=json.loads((root/"CURRENT/DATA/AI_LEARNING_PROJECTION.json").read_text(encoding="utf-8"))
         cls.q=build(cls.p)
 
-    def test_all_56_classified(self):
-        self.assertEqual(self.q["source_learning_count"],56)
+    def test_all_57_classified(self):
+        self.assertEqual(self.q["source_learning_count"],57)
         self.assertTrue(self.q["all_classified"])
         self.assertNotIn("UNCLASSIFIED",self.q["states"])
 
@@ -26,7 +26,7 @@ class AILearningQuestTest(unittest.TestCase):
         self.assertEqual(self.q["states"]["ADOPTED_TESTED_Q2"],3)
         self.assertEqual(self.q["states"]["EXPERIMENT_READY"],14)
         self.assertEqual(self.q["states"]["DOMAIN_HANDOFF_READY"],18)
-        self.assertEqual(self.q["states"]["REFERENCE_ONLY_VERIFY"],5)
+        self.assertEqual(self.q["states"]["REFERENCE_ONLY_VERIFY"],6)
 
 if __name__=="__main__":
     unittest.main()
