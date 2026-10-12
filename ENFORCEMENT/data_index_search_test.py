@@ -221,6 +221,8 @@ with tempfile.TemporaryDirectory() as tmp:
         ],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        env=dict(os.environ, PYTHONIOENCODING="utf-8"),
     )
     assert cli.returncode == 0, (cli.stdout, cli.stderr)
     data = json.loads(cli.stdout)
@@ -245,9 +247,11 @@ with tempfile.TemporaryDirectory() as tmp:
     }, ensure_ascii=False), encoding="utf-8")
     env = os.environ.copy()
     env["TAKY_DATA_INDEX_OUTCOME_UTILITY"] = str(u)
+    # Pin the child stdout codec; the parent decodes UTF-8 regardless of locale.
+    env["PYTHONIOENCODING"] = "utf-8"
     cli = subprocess.run(
         [sys.executable, str(SCRIPT), "--index", str(p), "--query", "동일 제목", "--relation-depth", "0"],
-        capture_output=True, text=True, env=env
+        capture_output=True, text=True, encoding="utf-8", env=env
     )
     assert cli.returncode == 0, (cli.stdout, cli.stderr)
     data = json.loads(cli.stdout)

@@ -252,13 +252,14 @@ def _acquire_effect_lock(current: Path) -> tuple[Path | None, str | None]:
     return lock_path, None
 
 
-def _latest_history_record(
+def _history_records(
     state_root: Path,
     *,
     namespace: str,
     task_id: str,
     effect_id: str,
-) -> dict[str, Any] | None:
+) -> list[tuple[datetime, dict[str, Any]]]:
+    """Integrity-valid HISTORY records for one effect, oldest first."""
     history_dir = _history_dir(
         state_root,
         namespace=namespace,
@@ -266,74 +267,76 @@ def _latest_history_record(
         effect_id=effect_id,
     )
     if not history_dir.exists():
-        return None
-    latest: tuple[datetime, dict[str, Any]] | None = None
+        return []
+    records: list[tuple[datetime, dict[str, Any]]] = []
     for path in history_dir.glob("*.json"):
         try:
             item = json.loads(path.read_text(encoding="utf-8"))
-            failures = _validate_existing_integrity(item)
-            if failures:
+            if _validate_existing_integrity(item):
                 continue
             stamp = datetime.fromisoformat(str(item.get("updated_at")).replace("Z", "+00:00"))
         except Exception:
             continue
-        if latest is None or stamp > latest[0]:
-            latest = (stamp, item)
-    return latest[1] if latest else None
+        records.append((stamp, item))
+    records.sort(key=lambda entry: entry[0])
+    return records
+
+
+def _latest_history_record(
+    state_root: Path,
+    *,
+    namespace: str,
+    task_id: str,
+    effect_id: str,
+) -> dict[str, Any] | None:
+    records = _history_records(
+        state_root,
+        namespace=namespace,
+        task_id=task_id,
+        effect_id=effect_id,
+    )
+    return records[-1][1] if records else None
 
 
 def _validate_history_consistency(
     state_root: Path,
     current_record: dict[str, Any],
 ) -> list[str]:
-    history_dir = _history_dir(
+    records = _history_records(
         state_root,
         namespace=str(current_record.get("namespace", "")),
         task_id=str(current_record.get("task_id", "")),
         effect_id=str(current_record.get("effect_id", "")),
     )
-    current_hash = current_record.get("record_hash")
-    if history_dir.exists():
-        for history_path in history_dir.glob("*.json"):
-            try:
-                history_record = json.loads(history_path.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            if _validate_existing_integrity(history_record):
-                continue
-            if history_record.get("record_hash") == current_hash:
-                continue
-            forward_failures = _validate_transition(current_record, history_record)
-            reverse_failures = _validate_transition(history_record, current_record)
-            if not forward_failures and reverse_failures:
-                return ["SIDE_EFFECT_HISTORY_FORWARD_DESCENDANT"]
-            if forward_failures and reverse_failures:
-                return ["SIDE_EFFECT_CURRENT_HISTORY_DIVERGENCE"]
+    if not records:
+        return []
 
-    latest_history = _latest_history_record(
-        state_root,
-        namespace=str(current_record.get("namespace", "")),
-        task_id=str(current_record.get("task_id", "")),
-        effect_id=str(current_record.get("effect_id", "")),
-    )
-    if latest_history is None:
-        return []
-    latest_hash = latest_history.get("record_hash")
+    # CURRENT must be the newest HISTORY record.
+    latest_history = records[-1][1]
     current_hash = current_record.get("record_hash")
-    if latest_hash == current_hash:
-        return []
-    try:
-        latest_time = datetime.fromisoformat(
-            str(latest_history.get("updated_at")).replace("Z", "+00:00")
-        )
-        current_time = datetime.fromisoformat(
-            str(current_record.get("updated_at")).replace("Z", "+00:00")
-        )
-    except Exception:
-        return ["SIDE_EFFECT_HISTORY_TIME_INVALID"]
-    if latest_time > current_time:
-        return ["SIDE_EFFECT_CURRENT_STALE_VS_HISTORY"]
-    return ["SIDE_EFFECT_CURRENT_HISTORY_DIVERGENCE"]
+    if latest_history.get("record_hash") != current_hash:
+        try:
+            current_time = datetime.fromisoformat(
+                str(current_record.get("updated_at")).replace("Z", "+00:00")
+            )
+        except Exception:
+            return ["SIDE_EFFECT_HISTORY_TIME_INVALID"]
+        if records[-1][0] > current_time:
+            return ["SIDE_EFFECT_CURRENT_STALE_VS_HISTORY"]
+        return ["SIDE_EFFECT_CURRENT_HISTORY_DIVERGENCE"]
+
+    # The time-ordered HISTORY must form a valid transition chain. Reachability
+    # alone cannot order records because the status graph has cycles
+    # (COMPENSATED -> APPLYING -> APPLIED -> COMPENSATED).
+    for (_, previous), (_, following) in zip(records, records[1:]):
+        if not _validate_transition(previous, following):
+            continue
+        if previous.get("record_hash") != current_hash and not _validate_transition(
+            current_record, previous
+        ):
+            return ["SIDE_EFFECT_HISTORY_FORWARD_DESCENDANT"]
+        return ["SIDE_EFFECT_CURRENT_HISTORY_DIVERGENCE"]
+    return []
 
 
 def _claim_execution(
