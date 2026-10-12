@@ -1,13 +1,13 @@
 # TAKY ACTIVE RULE PROFILE
 
 [TAKY_ACTIVE_RULE_PROFILE]
-PROFILE_VERSION: 2026-10-04.8
+PROFILE_VERSION: 2026-10-12.1
 SOURCE_REPOSITORY: hns140412-glitch/TAKY
-SOURCE_CANONICAL_HEAD: fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e
-SOURCE_STATE: WORKTREE_DERIVED
-SOURCE_OWNER_PATHS: TAKY.md;AGENTS.md;MASTER/ENFORCEMENT_PROTOCOL.md;MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md;MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md;MASTER/VALIDATION_RULES.md;MASTER/RULE_REGISTRY.json;MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md;MASTER/INTENT_EXECUTION_PROTOCOL.md;OS/AI_CONNECTION_SECURITY.md;OS/DEPLOYMENT_OPS.md;OS/SAVEY_AI_ECONOMY.md;OS/WORKSTATION_CONTROL.md;MASTER/AI_COLLABORATION_PROTOCOL.md
-SOURCE_OWNER_FINGERPRINT: sha256:09ab81823c2307958549b938a8901ec13f4d483645e828a1643aa3a3f06fcfa6
-GENERATED_AT: 2026-10-04T16:16:23+09:00
+SOURCE_CANONICAL_HEAD: 6a25b468b2d8b8b058fe6f3ec0a2c925dc679ad8
+SOURCE_STATE: COMMITTED_SNAPSHOT
+SOURCE_OWNER_PATHS: TAKY.md;AGENTS.md;MASTER/ENFORCEMENT_PROTOCOL.md;MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md;MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md;MASTER/VALIDATION_RULES.md;MASTER/RULE_REGISTRY.json;MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md;MASTER/INTENT_EXECUTION_PROTOCOL.md;OS/AI_CONNECTION_SECURITY.md;OS/DEPLOYMENT_OPS.md;OS/SAVEY_AI_ECONOMY.md;OS/WORKSTATION_CONTROL.md;MASTER/AI_COLLABORATION_PROTOCOL.md;MASTER/SAFE_TOOL_EXECUTION_PROTOCOL.md
+SOURCE_OWNER_FINGERPRINT: sha256:d30d638da4cebd74cd54bf16b4ec1c06179819efaee261eaace9ea154c4ee099
+GENERATED_AT: 2026-10-12T08:30:00+09:00
 STATUS: DERIVED_EXECUTION_PROJECTION / NON_SEMANTIC_OWNER
 
 Purpose: compact always-on execution guidance for delegated agents such as Codex. This file does not own rule semantics. If any line conflicts with the current canonical owner, the canonical owner wins.
@@ -46,7 +46,7 @@ Do not switch branches, write to main/production, deploy/release, read/expose se
 Distinguish `DECIDED / IMPLEMENTED / VERIFIED / DEVICE_UNVERIFIED / BLOCKED`. Do not claim runtime, device, deployment, Notion automation, or external-system verification without evidence.
 
 11. AI COLLABORATION / DELEGATED EXECUTION — DERIVED, NON-OWNER
-Activate MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001) for AI roles, executor routing, shared-context resume, and delegated-agent discipline. Activate OS/SAVEY_AI_ECONOMY.md (TKY-SAVEY-001) for cost tiers and paid-API approval. This projection does not own or redefine those semantics; canonical owners win on conflict.
+Activate MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001) for AI roles, executor routing, shared-context resume, and delegated-agent discipline. Activate OS/SAVEY_AI_ECONOMY.md (TKY-SAVEY-001) for cost tiers and paid-API approval. Activate MASTER/SAFE_TOOL_EXECUTION_PROTOCOL.md (TKY-SAFEEXEC-001) before tool execution. This projection does not own or redefine those semantics; canonical owners win on conflict.
 
 12. CONDUCTOR RESPONSIBILITY / USER-NOT-DEBUGGING
 When TAKY is acting as conductor/orchestrator, TAKY owns routing, troubleshooting, deployment-path recovery, tool/agent budget, evidence collection, and next-action selection within the authorized scope. Do not ask the user to perform routine debugging, hunt through settings, compare speculative infrastructure links, collect logs, or act as DevOps/QA while a materially available system-side path remains. Resolve technical ambiguity first; ask the user only for a genuine human-only/authority gate, and then ask for the smallest single action. `CONDUCTOR ≠ TASK COMMENTATOR`; `USER ≠ DEFAULT QA / DEVOPS / LOG COLLECTOR`.

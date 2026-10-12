@@ -187,6 +187,9 @@
     "MASTER/REVIEW_DEFAULT_MINING_PROTOCOL.md": {
       "class": "ACTIVE_OWNER"
     },
+    "MASTER/SAFE_TOOL_EXECUTION_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
     "MASTER/TAKY_MOBILE_DESIGN_AUTHORITY_CANDIDATE_2026-10-07.md": {
       "class": "CANDIDATE",
       "canonical": false
