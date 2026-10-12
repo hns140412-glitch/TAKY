@@ -158,3 +158,15 @@ Supersedes the digest/runtime figures above (85474…/v11 are historical).
 - Active CURRENT now: CUR-005 / CUR-006 / CUR-007 / CUR-010 / CUR-011
 - pending: V3 Drive title rename [CANDIDATE] -> [CANONICAL]; fresh startup readback receipt next session
 - V3 Drive title renamed [CANDIDATE] -> [CANONICAL] (START HERE / CURRENT references updated); Drive readback verified
+
+## Startup readback + push — 2026-10-12
+
+- PUSH (USER-approved, work branches only, no force): ORCH `968a9940..534d72aa`; TAKY `8a6806b3..130e20d9`. Merge / deploy: NOT DONE.
+- Drive consistency: CURRENT header refreshed + §24 added; START HERE gained a V3 PROMOTION NOTICE superseding stale "V3 remains Candidate" lines (§13/§14/§17); Canonical §13 operational pointer now names V3 as [CANONICAL] (pointer only, V2 design meaning unchanged).
+- Startup readback receipt `startup:63e2b948f8040e8845df` recorded in the signed runtime (v182 -> v183, authority digest e48ca039a387299fb3ea, verified_by CLAUDE_CODE_DRIVE_READBACK_20261012). All four documents were read in full via the Drive connector. Revision = Drive modifiedTime:
+  - START_HERE `modified:2026-10-12T05:40:01.674Z`
+  - CANONICAL `modified:2026-10-12T05:40:21.655Z`
+  - SYSTEMWIDE_V2 `modified:2026-10-06T03:30:08.078Z`
+  - CURRENT `modified:2026-10-12T05:39:06.015Z`
+  Any later edit to these documents makes this receipt stale; record a fresh one then.
+- ORCH index: four archived leftovers unstaged from a parallel session's staging set (files kept on disk).
