@@ -1,0 +1,67 @@
+{
+  "schema": "TAKY_DESIGN_UI_ADAPTER_APPLICABILITY_V1",
+  "as_of": "2026-10-01",
+  "rule": "Do not activate an app adapter by translating an existing successful CI suite into full manifest coverage unless the suite actually exercises every declared coverage key.",
+  "central_pipeline": {
+    "stages": [
+      "APPROVAL_LOCK",
+      "UI_CONTRACT",
+      "IMPLEMENT",
+      "VERIFY_CORRECT",
+      "DESIGN_PASS"
+    ],
+    "adapter_model": "APP_COMMANDS_ONLY_CENTRAL_EVIDENCE_OWNERSHIP",
+    "coverage_rule": "DECLARED_COVERAGE_MUST_EXACTLY_MATCH_MANIFEST_APPLICABILITY",
+    "state_policies": [
+      "visual_policy",
+      "interaction_policy",
+      "responsive_policy"
+    ]
+  },
+  "apps": [
+    {
+      "app": "Ready-Set",
+      "status": "PARTIAL_ADAPTER_READY",
+      "reusable": {
+        "capture": "tests/ui-visual-audit.spec.js already uses Playwright 390x844 and captures Planner Week/Day, Mission and Focus surfaces.",
+        "interaction": "tests/runtime-flow.spec.js provides real Mission->Focus->Wrap-up->Result interaction flow.",
+        "asset_integrity": "approved-asset-resolver and companion SHA/runtime tests exist."
+      },
+      "gaps": [
+        "Current manifest contains multiple state fixtures whose interaction/responsive coverage is not demonstrated by the existing single suites.",
+        "Capture filenames/state setup need explicit adapter artifact mapping; central runner must build render-manifest."
+      ],
+      "action": "Before activation, mark truly non-interactive states NOT_APPLICABLE and add/identify tests only for remaining REQUIRED coverage. Do not create manual PASS evidence."
+    },
+    {
+      "app": "Hide-Seek",
+      "status": "PARTIAL_ADAPTER_READY",
+      "reusable": {
+        "capture": "tests/ui-visual-audit.spec.js already captures HOME at 390x844.",
+        "interaction": "Playwright/browser runtime infrastructure already exists.",
+        "asset_integrity": "approved-asset-resolver test exists."
+      },
+      "gaps": [
+        "Current HOME manifest has BASE_REVIEW, EMPTY_CASE, PARTNER_ACTIVE and OFFLINE; existing visual audit only demonstrates the base HOME render/overflow.",
+        "shared-runtime.spec.js validates shared runtime/PWA contracts, not all HOME state interactions/responsive states."
+      ],
+      "action": "Use state applicability policies to separate REQUIRED vs NOT_APPLICABLE, then add only missing state tests. No new test framework needed."
+    },
+    {
+      "app": "Snap-Pop",
+      "status": "PARTIAL_ADAPTER_READY",
+      "reusable": {
+        "capture": "tests/ui-visual-audit.spec.js already captures HOME at 390x844.",
+        "interaction": "tests/shared-runtime.spec.js includes a real landmark/exploration flow.",
+        "asset_integrity": "approved-asset-resolver test exists."
+      },
+      "gaps": [
+        "Current HOME manifest has BASE_REVIEW, LANDMARK_SELECTED, EMPTY_PROGRESS and OFFLINE; existing suites do not prove all state coverage.",
+        "Current visual audit only demonstrates base HOME render/overflow."
+      ],
+      "action": "Map existing landmark flow only to coverage it actually proves; classify or add remaining state checks before adapter activation."
+    }
+  ],
+  "conclusion": "All three apps can adopt the central adapter without a new browser-test framework. The required work is coverage mapping and small missing-state tests, not new pipeline architecture.",
+  "app_repositories_modified_by_this_audit": false
+}
