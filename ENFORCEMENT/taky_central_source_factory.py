@@ -602,7 +602,7 @@ def rehome_local_source_archive():
             os.rename(target,old)
         raise
 
-def web_capture_verified_excerpt(folder,revision,max_chars=560):
+def web_capture_verified_text(folder,revision):
     """Bounded extractive preview from the actual SHA-attested captured bytes."""
     method=revision.get("review_extract_method")
     if method not in ("ORIGINAL_RENDERED_TEXT","ORIGINAL_NOTION_BLOCKS"):
@@ -623,7 +623,20 @@ def web_capture_verified_excerpt(folder,revision,max_chars=560):
           y.get("plain_text","")
           for x in blocks for y in x.get(x.get("type",""),{}).get("rich_text",[])
           if isinstance(y,dict))
-    return " ".join(body.split())[:max_chars] or None
+    return " ".join(body.split()) or None
+
+def web_capture_verified_excerpt(folder,revision,max_chars=560):
+    body=web_capture_verified_text(folder,revision)
+    return body[:max_chars] if body else None
+
+def web_capture_safe_url(url):
+    from urllib.parse import urlsplit,urlunsplit,parse_qsl,urlencode
+    u=urlsplit(url)
+    # Never expose OAuth/session/MCP tokens carried in a source URL.
+    qs=[(k,v) for k,v in parse_qsl(u.query,keep_blank_values=True)
+      if not (k.casefold().startswith("utm_") or k.casefold() in
+        ("fbclid","gclid","mcp_token","source","notrackingcode","trackingcode","session_sync_attempted"))]
+    return urlunsplit((u.scheme,u.netloc,u.path,urlencode(qs),""))
 
 def lookup_web_capture_sources(keyword,limit=20):
     """One logical result per user-reviewed reference source, not per crawl.
@@ -643,33 +656,67 @@ def lookup_web_capture_sources(keyword,limit=20):
         or len(data["source_groups"])!=proof.get("source_group_count")
         or len(data.get("records",[]))!=data.get("total_capture_dirs")):
         raise ValueError("WEB_CAPTURE_INDEX_NOT_CURRENT")
+    # Search the actually captured, SHA-verified source text, not only the
+    # user-submitted title. Preserve Notion ID history, but return one result
+    # per evidence-backed canonical public URL family.
+    family_proof=data.get("source_family_proof",{})
+    if (family_proof.get("unique_notion_source_ids")!=len(data["source_groups"])
+        or not isinstance(family_proof.get("canonical_url_families"),int)
+        or not 1<=family_proof["canonical_url_families"]<=len(data["source_groups"])):
+        raise ValueError("WEB_CAPTURE_SOURCE_FAMILY_NOT_RECONCILED")
+    family_members={}
+    for src in data["source_groups"]:
+        key=src.get("source_family_primary_id")
+        if not key:raise ValueError("WEB_CAPTURE_FAMILY_ID_MISSING")
+        family_members.setdefault(key,[]).append(src)
+    if len(family_members)!=family_proof["canonical_url_families"]:
+        raise ValueError("WEB_CAPTURE_FAMILY_COUNT_DRIFT")
     needle=keyword.strip().casefold()
-    matches=[]
+    best={}
     for src in data["source_groups"]:
         title=str(src.get("notion_title") or "")
-        url=str(src.get("normalized_url") or "")
-        if needle not in (title+" "+url+" "+src["source_key"]).casefold():
+        url=web_capture_safe_url(str(src.get("normalized_url") or ""))
+        in_title=needle in (title+" "+url+" "+src["source_key"]).casefold()
+        state=src.get("source_quality_evidence",{}).get("state")
+        if not in_title and state in ("NO_ACCESSIBLE_TEXT","ACCESS_CHALLENGE_OR_LOGIN_SHELL"):
             continue
         preferred=src["preferred_review_snapshot"]
         folder=Path(preferred)
-        if not (folder.is_dir() and folder.resolve().is_relative_to(WAREHOUSE.resolve())):
+        if source_path_is_held(folder) or not (folder.is_dir()
+          and folder.resolve().is_relative_to(WAREHOUSE.resolve())):
             raise ValueError("WEB_CAPTURE_SOURCE_PATH_UNRESOLVED")
-        revision=next((x for x in src["revisions"] if x["snapshot_dir"]==preferred),None)
-        if revision is None:raise ValueError("WEB_CAPTURE_PREFERRED_REVISION_NOT_FOUND")
-        matches.append({
-            "source_id":src["source_key"],"title":title,"source_url":url,
+        rev=next((x for x in src["revisions"] if x["snapshot_dir"]==preferred),None)
+        if rev is None:raise ValueError("WEB_CAPTURE_PREFERRED_REVISION_NOT_FOUND")
+        body=web_capture_verified_text(folder,rev)
+        pos=body.casefold().find(needle) if body else -1
+        if not in_title and pos<0:continue
+        snippet=(body[max(0,pos-125):pos+len(needle)+250] if pos>=0
+                 else body[:560] if body else None)
+        family=src["source_family_primary_id"]
+        members=family_members[family]
+        result={
+            "source_id":family,"matched_notion_source_id":src["source_key"],
+            "notion_source_ids":sorted(v["source_key"] for v in members),
+            "title":title,"source_url":url,
             "category_candidate":src["classification_candidate"],
-            "capture_revisions":src["revision_count"],
+            "capture_revisions":sum(v["revision_count"] for v in members),
             "preferred_review_snapshot":preferred,
-            "preferred_extract_method":revision.get("review_extract_method","UNINSPECTED"),
-            "preferred_extract_chars":revision.get("review_extract_chars",0),
-            "original_extract_excerpt":web_capture_verified_excerpt(folder,revision),
-            "original_evidence_sha256":revision.get("review_evidence_sha256"),
+            "preferred_extract_method":rev.get("review_extract_method","UNINSPECTED"),
+            "preferred_extract_chars":rev.get("review_extract_chars",0),
+            "original_extract_excerpt":snippet,
+            "original_evidence_sha256":rev.get("review_evidence_sha256"),
+            "literal_match":"TITLE_ID_OR_URL" if in_title else "HASH_VERIFIED_ORIGINAL_BODY",
+            "source_quality_state":state,
             "latest_snapshot":src["latest_snapshot"],
             "source_authority":"INDEX_ONLY_NOT_CURRENT_OR_CONTENT_APPROVED",
             "forming_learning_applied":False
-        })
-    return sorted(matches,key=lambda x:(x["title"].casefold(),x["source_id"]))[:limit]
+        }
+        score=(int(in_title),int(state=="TEXT_AVAILABLE_NOT_SEMANTICALLY_REVIEWED"),
+               len(body or ""),int(src["source_key"]==family))
+        if family not in best or score>best[family][0]:
+            best[family]=(score,result)
+    return sorted((v[1] for v in best.values()),
+        key=lambda x:(x["title"].casefold(),x["source_id"]))[:limit]
 
 def lookup_hns_video_raw_status(keyword,limit=20):
     """Expose the existing 626-capture unresolved videos without hiding 404s.
