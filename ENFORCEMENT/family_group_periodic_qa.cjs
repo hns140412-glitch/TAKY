@@ -33,6 +33,7 @@ const checks=[
  item('hide-subject-grade-routing-browser','Hide & Seek','tools/hide-subject-routing.e2e.cjs'),
  item('hide-subject-home-learning-browser','Hide & Seek','tools/approved-home-learning-behavior.e2e.cjs',[],'deep'),
  item('snap-syntax','Snap & Pop','app.js',['--check']),
+ item('snap-expression-input-quality-browser','Snap & Pop','tools/test-snap-expression-expansion-browser.cjs'),
  item('mobile-console-browser','TAKY-MOBILE','tests/admin-console-browser-e2e.mjs',[],'deep'),
  item('independent-savey-admin-browser-bots','TAKY','ENFORCEMENT/family_group_browser_guard.cjs',[],'deep'),
  item('independent-learning-specialist-browser-bots','TAKY','ENFORCEMENT/family_group_browser_guard.cjs',['--specialists'],'deep'),
@@ -46,7 +47,7 @@ const checks=[
 const gaps=[
  {id:'hide-hanja-canonical-learning-link',priority:'P0',area:'HIDE',why:'한자 전용 훈·음·뜻 Language Memory 실행 경로 미연결. 원천 자료만 확인됐고 다른 과목으로 대체 금지'},
  {id:'hide-six-subject-real-device-and-learning',priority:'P0',area:'HIDE/READY',why:'6과목 홈/학년별 정적 프로젝션만 국지 검증. 실제 Ready 지정 범위, 영어 12+24, 한자, 모바일 실기기, 중앙 결과 왕복은 미검증'},
- {id:'snap-expression-validity',priority:'P0',area:'SNAP',why:'실제 Chrome에서 qzxqzx를 3회 입력해도 탐험 완료 및 EXP 55 지급 확인. 참여 완료와 표현 내용의 유효성 검증을 분리해야 함'},
+ {id:'snap-expression-validity',priority:'P0',area:'SNAP',why:'2026-10-17 이전 Chrome에서는 qzxqzx 3회로 EXP 55가 잘못 지급됨. 현재 반복 문자열/동일 답변 재사용은 실제 브라우저 부정 테스트로 차단하나, 문장의 의미와 확장 논리·독립 성취는 확인되지 않음. 구조 검사 통과를 Learning Engine 성취로 승격하지 말 것'},
  {id:'cross-app-learning-achievement-evidence',priority:'P0',area:'HIDE/SNAP/PLAY',why:'기존 5앱 완료 영수증은 버튼·청취·자기보고 중심. 독립 회상·오답·도움 수준·성취 검증의 부정 테스트와 사실 판단 미확보'},
  {id:'visual-family-role-e2e',priority:'P0',area:'ALL',why:'부모/학습자 실제 화면을 가족 단위로 연속 조작하는 UI E2E 미검증'},
  {id:'ready-pointer-navigation-timeout',priority:'P0',area:'READY',why:'부모 가상 세션 READY 진입 성공 후 실제 홈/설정 포인터 클릭 완료되지 않음; 16초 watchdog으로 차단 · 초기 입력/화면 차폐/동기 렌더링 원인 미확정'},
