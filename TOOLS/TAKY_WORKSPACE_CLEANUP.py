@@ -241,6 +241,8 @@ def audit():
     report={"schema":"TAKY_WORKSPACE_CLEANUP_RELOCATION_V1",
             "at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "root":str(ROOT),"mode":"READONLY","git_stale":{},
+            "completion_scope":"HISTORICAL_RELOCATION_CHECKS_ONLY",
+            "global_cleanup_complete":False,
             "audio":None,"empty_candidates":[],"protected_roots":len(ACTIVE_ROOTS)}
     for name in REPOS:
         repo=ROOT/name
@@ -399,6 +401,8 @@ def main():
         and result["audio"]["status"]=="ALREADY_MOVED"
         and all(not x["present"] for x in result["empty_candidates"])):
         print(json.dumps({"status":"ALREADY_CONVERGED_NO_MUTATION",
+          "completion_scope":result["completion_scope"],
+          "global_cleanup_complete":False,
           "global_custody_gates":result["global_custody_gates"],
           "git_worktree_metadata_pruned":0,
           "original_user_files_deleted":0,
