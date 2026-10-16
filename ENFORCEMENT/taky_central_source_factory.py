@@ -634,6 +634,38 @@ def lookup_web_capture_sources(keyword,limit=20):
         })
     return sorted(matches,key=lambda x:(x["title"].casefold(),x["source_id"]))[:limit]
 
+def lookup_hns_video_raw_status(keyword,limit=20):
+    """Expose the existing 626-capture unresolved videos without hiding 404s.
+
+    Provider availability is the recorded Oct 16 verification, not a live
+    request; a 404 is never silently interpreted as deleted source material.
+    """
+    manifest=WAREHOUSE/"99_CONTROL"/"HNS_CAPTURE_626_SCOPE_COVERAGE_20261014.json"
+    if not manifest.is_file():return []
+    x=json.loads(manifest.read_text(encoding="utf-8-sig"))
+    proof=x.get("live_reconciliation_20261016",{})
+    details=x.get("remaining_details",[])
+    if (len(details)!=22 or proof.get("hns_present_ids")!=6
+        or proof.get("hns_404_ids")!=16 or proof.get("other_account_404_crosschecked")!=16):
+        raise ValueError("VIDEO_SOURCE_AVAILABILITY_NOT_ATTESTED")
+    query=keyword.strip().casefold()
+    matches=[]
+    for row in details:
+        title=row.get("title","")
+        id=row.get("id","")
+        if query not in (title+" "+id).casefold():continue
+        verified=bool(row.get("live_20261016_raw_provenance"))
+        matches.append({
+            "source_id":id,"title":title,"mime_type":row.get("mime"),
+            "provider_availability":row["live_20261016_status"],
+            "prior_raw_sha256_attested":verified,
+            "source_state":"RAW_VERIFIED_IN_EARLIER_CENTRAL_DB" if verified
+                           else "RAW_UNRESOLVED_FILE_ID_404_BOTH_LINKED_ACCOUNTS",
+            "provider_check_date":"2026-10-16",
+            "cannot_infer_deletion_from_404":True,
+            "forming_learning_applied":False})
+    return matches[:limit]
+
 def cli():
     p=argparse.ArgumentParser()
     p.add_argument("--db",type=Path,default=DB)
@@ -663,6 +695,7 @@ def cli():
               ("%"+a.keyword.replace("%","\\%")+"%",min(max(a.limit,1),100))).fetchall()
             data={"matches":[dict(x) for x in rows],
                   "web_capture_sources":lookup_web_capture_sources(a.keyword,min(max(a.limit,1),100)),
+                  "hns_video_originals":lookup_hns_video_raw_status(a.keyword,min(max(a.limit,1),100)),
                   "web_capture_identity":"ONE_NOTION_PAGE_ID_PER_LOGICAL_SOURCE_ACROSS_REVISIONS",
                   "web_capture_approval":"INDEX_ONLY_NOT_CURRENT_OR_FORMING_APPROVED"}
         elif a.cmd=="search-evidence":
