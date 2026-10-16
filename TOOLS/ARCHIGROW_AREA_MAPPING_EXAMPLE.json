@@ -1,0 +1,1 @@
+{"schema":"ARCHIGROW_AREA_MAPPING_V1","project_id":"EXAMPLE_ONLY","layers":{"A-AREA-GFA":{"level":"1F","scope":"GROSS_FLOOR","operation":"ADD"},"A-AREA-VOID":{"level":"1F","scope":"GROSS_FLOOR","operation":"SUBTRACT","optional":true}},"meters_per_unit":0.001}

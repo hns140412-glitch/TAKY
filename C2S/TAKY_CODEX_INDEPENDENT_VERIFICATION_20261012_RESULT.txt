@@ -1,0 +1,26 @@
+**FAIL — 증거 진위 검증 요건 미충족. 실행 테스트·회귀 판정은 HOLD입니다.** TAKY가 최종 판정 권한을 가집니다.
+
+정적 검토에서 확인한 결함과 최소 수정안:
+
+- **자체 작성한 증거로 PASS 가능:** [gongbang_scope_gate_candidate.py:12](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:12>)는 파일 존재·내용의 해시 일치만 검사합니다. 작성자 신뢰성, 승인자 신원, task/commit 귀속을 확인하지 않습니다. 제출자가 임의 파일과 그 해시를 함께 제공할 수 있습니다. 신뢰된 발급 기록과 task/commit/category 결합을 검증해야 합니다.
+- **형식만으로 PASS:** [동일 파일:37](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:37>)에서 `root=None`이면 가짜 참조만으로 PASS입니다. `SHAPE_VALID` 등 별도 결과로 구분하거나 검증 루트를 필수화해야 합니다. 다만 `executor_review_loop.py:142`는 루트를 전달합니다.
+- **읽기 실패가 구조화된 HOLD로 처리되지 않음:** [동일 파일:23](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:23>)의 resolve/read 예외가 전파됩니다. 권한 오류·파일 삭제·일부 링크 오류를 잡아 명시적인 검증 실패로 반환해야 합니다.
+- **TOCTOU:** [동일 파일:24](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:24>)의 경로 해석·경계 검사·파일 읽기가 분리되어 있습니다. 검사 후 파일이나 상위 경로가 교체될 수 있습니다. 안전하게 연 파일 핸들 기준으로 경계·정체성을 검증하고, 검증된 바이트를 이후 사용과 결합해야 합니다.
+
+확인된 방어와 한계:
+
+- 절대경로·`..`·정적인 외부 symlink 탈출을 거부하는 코드가 있습니다. 실행 검증은 하지 못했습니다.
+- SHA-256은 실제 읽은 바이트와 비교합니다. 길이만 선검사하지만 비16진수 값은 해시 비교에서 거부됩니다. **해시 일치는 진위 증명이 아닙니다.**
+- 두 테스트 파일의 긍정 사례는 `real evidence`/`evidence`라는 합성 파일을 모든 항목에 재사용합니다. 실제 독립 리뷰·E2E·승인 증거를 검증한 사례가 아닙니다.
+- `runtime_orchestrator.py:913–918`은 해당 CODEX 계약에 두 필수 플래그를 설정합니다. 기존 비표시 작업 테스트만으로 이 경로의 회귀 부재는 입증되지 않습니다.
+- 런타임 승인 경로에는 task·checkpoint·action 결합 검사가 있습니다. 승인자 신원 인증의 전체 경로는 **HOLD**이며, 승인 우회를 입증했다고 주장하지 않습니다.
+
+검증 상태:
+
+- 브랜치: `character-asset-behavior-separation-2026-09-30`
+- 로컬 HEAD: `130e20d9f37449f5fb1ea081bf7c48a46ec866a4`
+- Git 인덱스 직접 확인: candidate와 두 테스트는 미등록, review loop와 orchestrator는 인덱스 대비 변경됨. 전체 diff·원격 기준은 미확인입니다.
+- 시도 명령: `Get-Content …`, `git status --short`, `git branch --show-current`, `git rev-parse HEAD`. 두 번 모두 프로세스 생성 단계에서 `CreateProcessAsUserW failed: 5`로 실패했습니다.
+- **테스트 실행 0건.** 기존 테스트가 임시 파일을 작성하므로 무쓰기 실행 가능성도 확보되지 않았습니다.
+
+파일·MASTER/CURRENT 수정, 커밋, 푸시, 배포, 설치, 유료 API 호출은 하지 않았습니다.

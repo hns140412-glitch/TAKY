@@ -1,0 +1,117 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_V2",
+  "review_date_kst": "2026-10-13",
+  "day": "TUESDAY",
+  "authority": "NONCANONICAL_CANDIDATE_ONLY",
+  "status": "PARTIAL_VERIFIED_DELTA_WITH_PUBLIC_RAW_SNAPSHOTS__NO_PROMOTION",
+  "scope": "DAILY_ONLY__MONDAY_WEDNESDAY_DEEP_TRACKS_INHERITED_NOT_RERUN",
+  "baseline": {
+    "previous": "C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-12_CANDIDATE.json",
+    "watch_registry": "D:/Git PWA/TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "last_state_generation": "data/site_watch/state_generations/SITE_WATCH_STATE.20261012T191912411864Z.json",
+    "registered_sites": 10,
+    "ai_reference_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json (84 records)",
+    "digit_prior_refs": [
+      "REF-077",
+      "REF-078",
+      "REF-079",
+      "REF-080"
+    ]
+  },
+  "coverage": {
+    "fresh_full_ten_site_scan": false,
+    "site_watch_latest_state_utc": "2026-10-12T19:06:18.989Z",
+    "last_digit_check_utc": "2026-10-11T20:21:17.376Z",
+    "digit_result": "NO_VERIFIED_NEW_OR_SUBSTANTIVE_CHANGED; public litt.ly/digit page re-viewed, previous matrix/product evidence inherited; no authoritative before/after page hash diff",
+    "other_sites": "Kim and Lazy guide listings inspected; remaining 7 registered sites inherited from latest watch state, not freshly scanned this turn",
+    "archi_grow_mokdong": "NOT_DUE_TUESDAY__MONDAY_BASELINE_INHERITED"
+  },
+  "public_evidence_candidate": {
+    "classification": "MISSED_PRIOR_REPORT__PUBLIC_POLICY_ARTICLE_AND_OFFICIAL_SOURCE_CONFIRMED",
+    "kim_article": {
+      "title": "클로드 이용 약관 2026 개정 핵심 정리",
+      "published": "2026-10-12",
+      "url": "https://sdk-kim-builds.com/guides/claude-usage-policy-2026/",
+      "raw_path": "C2S/PUBLIC_RAW_CANDIDATE_KIM_USAGE_POLICY_2026-10-13.html",
+      "retrieved_html_utf8_sha256": "5b19b150a53f981c8f0e794e8400529c64bac350de81e72e603fb8ee7de77c59",
+      "retrieved_html_utf8_bytes": 33233,
+      "readback_exact": true
+    },
+    "official_primary": {
+      "title": "2026 Usage Policy update",
+      "published": "2026-10-08",
+      "effective": "2026-11-12",
+      "url": "https://www.anthropic.com/news/2026-usage-policy-update",
+      "raw_path": "C2S/PUBLIC_RAW_CANDIDATE_ANTHROPIC_USAGE_POLICY_2026-10-13.html",
+      "retrieved_html_utf8_sha256": "fc262dd8d201d18ecfdcffbf16d10abff22210206a8b632206878676433072d4",
+      "retrieved_html_utf8_bytes": 119893,
+      "readback_exact": true
+    },
+    "evidence": "Anthropic states that high-risk recommendations require qualified human review and disclosure; adds explicit autonomous physical-hardware safeguards. Existing surveillance/other restrictions are clarified; publication is not a new rule made on Oct 13.",
+    "relation": "Kim article already linked on Oct12 captured homepage, omitted from Oct12 C2S report; treat as missed-backlog evidence, not new publication on Oct13.",
+    "mining": "PUBLIC_ORIGINAL_HTML_CAPTURED_AND_READBACK_VERIFIED__OFFICIAL_SOURCE_CHECKED",
+    "indexing": "CANDIDATE_ONLY__NO_INDEX_WRITE",
+    "learning": "NO_PROJECTION_WRITE__POLICY_CONCEPT_REVIEW_ONLY",
+    "domain": [
+      "TAKY_AI_USAGE_POLICY_REVIEW",
+      "ARCHI_GROW_HIGH_RISK_RECOMMENDATION_REVIEW",
+      "LEARNING_EDUCATION_HIGH_RISK_DISTINCTION"
+    ],
+    "applicability": "Distinguish general education or architectural information from individualized high-risk recommendations. Existing HUMAN authority already applies; no master-rule change.",
+    "duplicate_attestation": {
+      "prior_daily_report_exact_url": "NOT_LISTED",
+      "ai_reference_index_84_exact_url": "NOT_FOUND",
+      "previous_homepage_capture": "LINK_PRESENT_ON_2026-10-12__MISSED_IN_REPORT",
+      "semantic_overlap": "EXISTING_HUMAN_REVIEW_AND_VERIFICATION_PRINCIPLES; OFFICIAL_POLICY_TEXT_DISTINCT",
+      "drive_source_index_877": "NOT_FULLY_CHECKED",
+      "full_corpus_body_similarity": "OPEN__NO_PROMOTION"
+    }
+  },
+  "excluded_or_hold": [
+    {
+      "source": "김스듴",
+      "url": "https://sdk-kim-builds.com/guides/arena-claude-code-subagents-compete/",
+      "page_date": "2026-10-13",
+      "status": "ALREADY_LINKED_IN_OCT12_CAPTURE__SEMANTIC_OVERLAP__HOLD",
+      "reason": "Multiple Claude subagents + judge repeats existing TAKY independent review/orchestration patterns, with nonzero subscription usage; no independent practical improvement demonstrated."
+    },
+    {
+      "source": "김스듴",
+      "page_dates": [
+        "2026-10-14",
+        "2026-10-15",
+        "2026-10-16"
+      ],
+      "status": "FUTURE_DATED_PUBLIC_LINKS_EXCLUDED"
+    },
+    {
+      "source": "게으른 빌더",
+      "status": "NO_VERIFIED_SUBSTANTIVE_NEW_IN_SELECTED_PUBLIC_GUIDES; Oct08 truth prompt overlaps existing verification; Oct11 influencer guide low relevance and email-gated steps not accessed."
+    }
+  ],
+  "duplicate_policy": {
+    "exact_canonical_url": "CHECKED_PRIOR_DAILY_AND_AI_INDEX_FOR_POLICY",
+    "content_hash": "SHA256_UTF8_OF_RETRIEVED_PUBLIC_HTML__NOT_HTTP_WIRE_BYTES",
+    "title_body_similarity": "QUALITATIVE_ONLY; FULL_CORPUS_NUMERIC_COMPARISON_OPEN",
+    "no_duplicate_refs_created": true
+  },
+  "pipeline": {
+    "raw": "2_PUBLIC_HTML_CANDIDATE_FILES_SAVED_AND_READBACK_EXACT",
+    "evidence": "PRIMARY_OFFICIAL_SOURCE_VERIFIED",
+    "indexing": "CANDIDATE_ONLY",
+    "learning": "REVIEW_ONLY",
+    "domain": "ROUTING_PROPOSALS_ONLY",
+    "central_promotion": false
+  },
+  "guards": [
+    "NO_PAID_API",
+    "NO_PAID_CONTENT",
+    "NO_AUTH_BYPASS",
+    "NO_UNAUTHORIZED_SCRAPING",
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_MASTER_CANONICAL_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_REMOTE_PUSH",
+    "NO_DEPLOY"
+  ]
+}

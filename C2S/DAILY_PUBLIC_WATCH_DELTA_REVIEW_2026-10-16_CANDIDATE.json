@@ -1,0 +1,105 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-16",
+  "day": "FRIDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_DELTA_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-15_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/data/site_watch/state_generations/SITE_WATCH_STATE.20261015T181501370Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261015T061504479Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261015T101502872Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261015T141501854Z.json"
+  ],
+  "coverage": {
+    "registered_enabled_sites": 11,
+    "prior_report_claimed": 10,
+    "reason": "registry includes www.skax.co.kr PROBATION as 11th",
+    "latest_collector_receipt_utc": "2026-10-15T18:15:01.370Z",
+    "latest_collector_sites_due": 0,
+    "next_global_run_utc": "2026-10-15T22:03:01.369Z",
+    "full_fresh_scan": false,
+    "action": "reuse due-gated receipts; no forced recrawl"
+  },
+  "digit": {
+    "status": "UNVERIFIED_NO_NEW",
+    "last_checked_utc": "2026-10-15T10:15:02.872Z",
+    "discovered_new": 0,
+    "selected": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "reason": "public Notion article body not accessible; sitemap/root snapshot alone insufficient to attest substantive content delta"
+  },
+  "candidates": [
+    {
+      "title": "어도비·오피스 구독 대신 시험해볼 무료 오픈소스 앱 13개",
+      "publisher": "낭만빌더 김스듴",
+      "published": "2026-10-15",
+      "url": "https://sdk-kim-builds.com/guides/free-adobe-office-alternatives-craft-apps/",
+      "source_id": "SITE_WATCH:0c30f1e8f39406b61d41cc5c",
+      "raw_sha256": "7162f53e71a43bc8c653a858b697d32ae2de16de31bfdbd8a72819945519195a",
+      "normalized_text_sha256": "ea4cd0ee984c7e07bf1eee39d3e9863afea19b453bc17e0fdb85f17dcb480141",
+      "raw_state": "LOCAL_CAPTURED_2026-10-15_15:15_KST",
+      "mining_state": "TEXT_EXTRACTED_NOT_SEMANTICALLY_APPROVED",
+      "dedup": "DISTINCT_SUBJECT_FROM_REPLICA_SKILL_BUT_CORPUS_WIDE_ATTESTATION_OPEN",
+      "indexing": "EXISTING_NONCANONICAL_CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain_candidates": [
+        "ARCHI GROW CAD/PDF production QC",
+        "TAKY document/PDF workflow cost review"
+      ],
+      "primary_sources": [
+        "https://github.com/storytold/cadcraft",
+        "https://github.com/storytold/pdfcraft"
+      ],
+      "analysis": "13 early-stage Rust open-source app replicas; CADCraft reports DXF/DWG read-write and PDF plotting but warns unsupported entities not preserved on save. PdfCraft is alpha with limited Acrobat parity; no production adoption. Useful as separate read-only compatibility/QC benchmark candidate, not AutoCAD/Acrobat replacement or design-gate change.",
+      "status": "NEW_EVIDENCE_CANDIDATE_HOLD"
+    }
+  ],
+  "excluded": [
+    {
+      "url": "https://lazyowen.com/guides/chatgpt-face-rating-prompts",
+      "published": "2026-10-14",
+      "raw_sha256": "b8b59805c545a54a03b630e45552a4ce7ebeb3b0a5a239a3dc30ae7e3ca33373",
+      "reason": "late captured prior-date publication, low TAKY domain relevance; no REF"
+    },
+    {
+      "url": "https://lazyowen.com/guides/claude-designer-kill",
+      "published": "2026-09-19",
+      "raw_sha256": "bbdf2174b1444ad346269b84f9cb6a291b1107f4734a0ee92752908d105a222c",
+      "reason": "old guide; design skill approach overlaps prior TAKY design-gate references; no new REF"
+    },
+    {
+      "url": "https://buseo.sen.go.kr/buseo/bu12/user/bbs/BD_selectBbs.do?q_bbsSn=1265&q_bbsDocNo=20260311092536676",
+      "reason": "old official education item, newly discovered URL not proof of new publication"
+    },
+    {
+      "url": "https://www.gwe.go.kr/main/bbs/view.do?bbsSn=51254&key=bTIzMDcyMTExOTkyNzQ%3D&referer=&pageIndex=4&bbsCtgrySn=&sc=&sw=",
+      "reason": "official existing seed captured during source-scope review; not verified as substantive 2026-10-16 change"
+    }
+  ],
+  "dedup_gate": {
+    "checked": "canonical URL, raw SHA-256, normalized text SHA-256 from existing capture, published date, 39 local candidate titles/URLs, prior 2026-10-09..15 C2S delta, source-topic relationship",
+    "unverified": "full central 877-source numeric title/body similarity and all RAW/INDEX/DETAIL lineage not fully attested",
+    "policy": "no new REF on URL/hash novelty alone"
+  },
+  "pipeline": {
+    "raw": "REUSED",
+    "evidence": "PUBLIC_HTML_AND_OFFICIAL_REPO_REVIEWED",
+    "indexing": "CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_MASTER_CANONICAL_CHANGE",
+    "NO_CENTRAL_PROMOTION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING"
+  ]
+}

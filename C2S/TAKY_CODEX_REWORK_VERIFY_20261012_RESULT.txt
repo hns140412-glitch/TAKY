@@ -1,0 +1,16 @@
+**Overall: FAIL — binding remains bypassable; race remediation is incomplete.** These are static-review findings, not executed test results.
+
+| Criterion | Result | Evidence |
+|---|---|---|
+| `root=None` shape-only PASS | **PASS** | Explicit `ROOT_REQUIRED` forces HOLD. [Gate L86–106](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:86>); regression assertion at [test L27](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate_test.py:27>). |
+| Filesystem exception propagation | **PASS** | Reference reads catch `OSError`, `ValueError`, and `RuntimeError`; root resolution additionally catches `TypeError`. [Gate L64](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:64>), [L93](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:93>). Permission/resolve failure tests exist at [L113](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate_test.py:113>). |
+| Task/revision binding | **FAIL** | Binding uses substring membership. Evidence containing `TASK-10` and `abc12345` satisfies requested `TASK-1` and `abc1234`, with a matching digest. Require exact structured field equality. [Gate L74–76](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:74>). Existing tests cover unrelated values, not prefix collisions. |
+| File-swap race | **FAIL** for complete closure | Symlink checks precede `resolve()`/`open()`. A component replaced with an **in-root symlink after the check but before resolution** can pass containment and subsequent identity checks. `O_NOFOLLOW` applies to the resolved final path. [Gate L25–46](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:25>). The [swap test L133](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate_test.py:133>) only mocks `samestat=False`. Post-return races are honestly documented. |
+| False issuer-authentication claim | **PASS** for honest reporting; **HOLD** for authentication | Gate always returns `issuer: UNVERIFIED`; integration preserves it. [Gate L105](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:105>), [review L149](</D:/Git PWA/TAKY/ENFORCEMENT/executor_review_loop.py:149>). **Trusted issuer identity remains unverified.** |
+| Integration/regression verification | **HOLD** | Failure maps to REWORK; optional/legacy behavior has assertions. [Review L140–156](</D:/Git PWA/TAKY/ENFORCEMENT/executor_review_loop.py:140>), [integration tests L83](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_review_integration_test.py:83>). Runtime execution was not independently verified. |
+
+Additional static concern: on POSIX, opening a FIFO can block **before** the regular-file check runs, preventing a HOLD response. [Gate L34–42](</D:/Git PWA/TAKY/ENFORCEMENT/gongbang_scope_gate_candidate.py:34>). No corresponding test exists in the reviewed suites.
+
+I read all four files through Node’s read-only filesystem API after one shell access-denied failure; no shell retries, edits, or paid external calls. The files were unchanged on reread. Local HEAD: `130e20d9f37449f5fb1ea081bf7c48a46ec866a4`; working-tree equivalence to that commit was not established.
+
+The suites contain **30 test methods**. “30 tests OK, skipped 1” remains **TAKY-reported**, not my test run. Recommended next transition: **REWORK**, with exact-binding collision tests and actual race scenarios.

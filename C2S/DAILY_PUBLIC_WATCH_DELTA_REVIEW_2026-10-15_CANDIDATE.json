@@ -1,0 +1,76 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-15",
+  "day": "THURSDAY",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_DELTA_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-14_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/data/site_watch/indexing_review/INDEX_OWNER_REVIEW_QUEUE_CURRENT.json",
+    "TAKY-SOURCE-VAULT/data/site_watch/indexing_review/INDEX_OWNER_EVIDENCE_BUNDLE_CURRENT.json"
+  ],
+  "coverage": "Pinned Kim/Lazy/Digit web checks; existing 10-site watch evidence inherited; full 10-site fresh scan not attested",
+  "digit": {
+    "status": "UNVERIFIED_NO_NEW",
+    "reason": "Public Notion archidiagram could not be opened; no substantive normalized-content diff established"
+  },
+  "candidates": [
+    {
+      "title": "클로드 코드 한도가 차도 작업을 이어가는 법",
+      "published": "2026-10-14",
+      "url": "https://sdk-kim-builds.com/guides/claude-code-free-model-failover",
+      "source_id": "SITE_WATCH:e3b3ddde036ae4c9beb216ff",
+      "raw_sha256": "1d336bdd8c22065882a0fa57a3ba58441c5f433ccfea2af4c029ed5953a76b00",
+      "normalized_text_sha256": "af8a20d384c97020410bf7de7a28cc13e8acd8b2661ecbbdc85a3b795b6775ce",
+      "raw_state": "LOCAL_CAPTURED_2026-10-14",
+      "mining_state": "SOURCE_ANCHORED_EXTRACTED_NOT_SEMANTICALLY_APPROVED",
+      "dedup": "DISTINCT_FROM_JEV_COST_FILTERING__CORPUS_WIDE_ATTESTATION_PENDING",
+      "indexing": "EXISTING_INDEX_OWNER_QUEUE__PENDING_INDEPENDENT_REVIEW",
+      "learning": "NONE",
+      "domain_candidate": "TAKY AI inference routing and free-tier failover",
+      "analysis": "FreeLLMAPI proxy aggregates self-obtained provider keys; no free unrestricted inference; security, TOS, model-quality fallback and credentials require preflight; do not install or connect."
+    },
+    {
+      "title": "책 한 권을 마인드맵·만화로 바꾸는 챗GPT 명령어 100개",
+      "published": "2026-10-14",
+      "url": "https://lazyowen.com/guides/chatgpt-book-mindmap-codes",
+      "source_id": "SITE_WATCH:0c5c529b9bd97a4ce46289fd",
+      "raw_sha256": "b2f89ab55f5e29f4948ff61c6323449939f9027c6cbc6b9d74272aac1fe1e7a8",
+      "normalized_text_sha256": "2bab42e484cfc3120f3189c32dfea62a07968aa18b825f169424ac7ec2a8a095",
+      "related_format": {
+        "url": "https://lazyowen.com/guide-pdf/chatgpt-book-mindmap-codes.pdf",
+        "source_id": "SITE_RESCUE:e241af041818a757cbb93876",
+        "raw_sha256": "5468facd5ae46b7f1f87b16a6ec9b29200a86bcac598ad1cd98980599fceedd6",
+        "normalized_text_sha256": "2bf4a06186ba37f54cb1c3874798d164062de820bbba9fc85997f8aaf974c2f9",
+        "disposition": "SAME_GUIDE_ALTERNATE_FORMAT__NO_SECOND_LOGICAL_REF"
+      },
+      "raw_state": "HTML_AND_11_PAGE_PDF_ALREADY_CAPTURED_2026-10-14",
+      "mining_state": "PDF_11_OF_11_PAGES_EXTRACTED__SEMANTIC_REVIEW_PENDING",
+      "dedup": "DISTINCT_STUDY_VISUALIZATION_FROM_GENERIC_100_PROMPTS__CORPUS_WIDE_ATTESTATION_PENDING",
+      "indexing": "EXISTING_INDEX_OWNER_QUEUE__PENDING_INDEPENDENT_REVIEW",
+      "learning": "NONE",
+      "domain_candidate": "Play Camp/Hide & Seek learning presentation patterns",
+      "analysis": "Four visual representations and study prompts can inform content presentation; do not add card UI or new engine; preserve source and copyright limits."
+    }
+  ],
+  "excluded": [
+    {
+      "title": "앤트로픽 AI 코딩 플레이북 템플릿 모음",
+      "url": "https://sdk-kim-builds.com/guides/ai-native-sdlc-templates/",
+      "reason": "Site publication date 2026-10-17 is future relative to 2026-10-15; exclude from current new publication"
+    }
+  ],
+  "existing_watch_note": "2026-10-14 08:00 local watch report had 15 RAW versions / 11 text candidates, including older source publications; acquisition != new publication.",
+  "dedup_gate": "Canonical URL, raw and normalized SHA read from existing capture; title/source-family/manual semantic comparisons only; full corpus numeric similarity OPEN",
+  "pipeline": "Reuse existing local RAW -> source evidence review -> existing index-owner candidate -> Learning/Domain candidate only",
+  "hold": [
+    "NO_NEW_IMPLEMENTATION",
+    "NO_CURRENT_OR_MASTER_OR_CANONICAL_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING"
+  ]
+}

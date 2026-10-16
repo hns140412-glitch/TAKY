@@ -1,0 +1,145 @@
+{
+  "schema": "TAKY_INTEGRATED_DAILY_AND_MONDAY_DELTA_REVIEW_V1",
+  "review_date_kst": "2026-10-12",
+  "day": "MONDAY",
+  "authority": "NONCANONICAL_CANDIDATE_ONLY",
+  "scope": "DAILY_PLUS_MONDAY_EDU_AI_ARCHI_GROW",
+  "status": "PARTIAL_VERIFIED_EVIDENCE_REVIEW__NO_PROMOTION",
+  "baseline": {
+    "previous": "C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-11_CANDIDATE.json",
+    "registered_watch_sites": 10,
+    "registry": "D:/Git PWA/TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "last_receipt": "SITE_WATCH_RUN.20261011T202117378Z.json",
+    "last_receipt_utc": "2026-10-11T20:21:17.378Z",
+    "next_global_due_utc": "2026-10-12T00:16:17.376Z",
+    "latest_digit_sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "source_index": "Drive DATA_SOURCE_INDEX_2026-10-04_V11.json (877 entries)",
+    "ai_index": "CURRENT/DATA/AI_REFERENCE_INDEX.json (84 records)",
+    "grow_current": "CURRENT/TAKY/TAKY_GROW_CURRENT_INDEX_2026-10-04_R2.json"
+  },
+  "coverage": {
+    "full_fresh_registry_scan": false,
+    "reason": "Registered site-watch 180-240 min global cadence, one-site/run, per-site revisit and backoff preserved; latest run covered Digit only",
+    "web_manual_scope": "Selected public articles and official architecture sources only; not equivalent to ten-site fresh crawl",
+    "education_public_official_delta": "NO_VERIFIED_NEW",
+    "digit_public_delta": "NO_VERIFIED_NEW",
+    "mokdong_october_official_delta": "NO_VERIFIED_NEW"
+  },
+  "candidates": [
+    {
+      "source": "김스듴",
+      "title": "Jev로 블로그 내부 링크 자동화: 비싼 모델은 후보만 읽게 하는 클로드 코드 프롬프트",
+      "url": "https://sdk-kim-builds.com/guides/jev-seo-internal-links-claude-code/",
+      "publication_date": "2026-10-12",
+      "status": "NEW_PUBLIC_ARTICLE_CANDIDATE__NOT_INDEXED",
+      "raw_state": "PUBLIC_HTML_VIEWED_NOT_PERSISTED__RAW_HASH_PENDING",
+      "raw_sha256": null,
+      "exact_url_prior_receipts": "NOT_FOUND",
+      "exact_url_drive_v11": "NOT_FOUND",
+      "exact_url_ai_reference_index": "NOT_FOUND",
+      "semantic_relation": "OVERLAPS_EXISTING_JEV_DECISION_MODEL_AND_COST_FILTERING; DISTINCT_INTERNAL_LINKING_EXAMPLE",
+      "evidence": "Pre-filter title/summary pairs; expensive model reads only shortlisted full bodies; author reports 47-guide local test but external Jev comparison is promotional and not independent",
+      "cost": "Jev flow requires OpenRouter API key; NOT USED",
+      "mining": "EVIDENCE_REVIEW_ONLY__NO_DISPATCH",
+      "indexing": "CANDIDATE_HOLD_PENDING_RAW_HASH_AND_FULL_CORPUS_SEMANTIC_ATTESTATION",
+      "learning": "NONE",
+      "domain": [
+        "AI_ORCHESTRATION_COST_FILTERING_CONCEPT_ONLY",
+        "TAKY_MINING_INDEXING_PREFILTER_CANDIDATE"
+      ],
+      "applicability": "Reuse two-stage candidate selection principle with existing local no-cost filters; do not install Jev or call OpenRouter"
+    },
+    {
+      "source": "McNeel Forum (official hosted developer discussion)",
+      "title": "Rhino 8 SR35 AWSSDK.Core.dll conflict and planned SR36 fix",
+      "url": "https://discourse.mcneel.com/t/dll-compatibility-issues-because-rhino-8-sr-35-ships-awssdk-core-dll/223243",
+      "published": "2026-10-04",
+      "official_reply": "2026-10-06",
+      "status": "RECENT_ARCHI_TECHNICAL_ISSUE__NOT_NEW_TODAY",
+      "raw_state": "PUBLIC_ORIGINAL_READ_NOT_PERSISTED",
+      "raw_sha256": null,
+      "evidence": "Rhino developer reported net45 AWSSDK.Core.dll 3.3.0.0 collision with net8 S3; McNeel responder says fix in 8.36 expected Oct 13 (future as of review)",
+      "indexing": "DOMAIN_CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": [
+        "ARCHI_GROW_RHINO_GRASSHOPPER_PLUGIN_COMPATIBILITY"
+      ],
+      "applicability": "Only if office Rhino/Grasshopper plugins use AWS SDK; avoid premature upgrade/fix-completed claim"
+    },
+    {
+      "source": "Autodesk official support",
+      "title": "Revit 2027.3 update",
+      "url": "https://www.autodesk.com/support/technical/article/caas/tsarticles/ts/6W4pz5Mds7QTzYKVVTO6r.html",
+      "published": "2026-09-15",
+      "status": "PRIOR_RELEASE_CONTEXT__NOT_OCT12_DELTA",
+      "raw_state": "OFFICIAL_PUBLIC_RELEASE_TABLE_READ",
+      "raw_sha256": null,
+      "evidence": "Revit 2027.3 build 27.3.0.28 dated September 15; install requires subscription, not performed",
+      "indexing": "OPTIONAL_ARCHI_DOMAIN_REFERENCE_HOLD",
+      "learning": "NONE",
+      "domain": [
+        "ARCHI_GROW_BIM_VERSION_MATRIX"
+      ]
+    },
+    {
+      "source": "buildingSMART International official",
+      "title": "IFC 4.4 ISO integration project plan approved",
+      "url": "https://www.buildingsmart.org/standards/domains/product/",
+      "published": "2026-09-04",
+      "status": "PRIOR_APPROVAL_CONTEXT__NOT_OCT12_DELTA",
+      "raw_state": "OFFICIAL_PUBLIC_SUMMARY_READ",
+      "raw_sha256": null,
+      "evidence": "IFC 4.4 integration plan approved by vote 50 yes/4 no; this is not a published ISO 4.4 standard",
+      "indexing": "OPTIONAL_ARCHI_STANDARD_WATCH_HOLD",
+      "learning": "NONE",
+      "domain": [
+        "ARCHI_GROW_OPENBIM_STANDARD_WATCH"
+      ]
+    }
+  ],
+  "duplicate_and_missed_detection": {
+    "prior_closed_reopened": false,
+    "new_refs_created": 0,
+    "canonical_url": "CHECKED_FOR_SELECTED_PUBLIC_ARTICLES",
+    "content_hash": "EXISTING_SITE_WATCH_DIGIT_SHA_VERIFIED_FROM_RECEIPT; NEW_ARTICLE_RAW_HASH_PENDING",
+    "title_body_similarity": "QUALITATIVE_ONLY__NOT_NUMERIC_CORPUS_WIDE",
+    "source_index_v11_exact_url_check": "Jev and architecture candidate strings not found in V11 text; does not prove semantic uniqueness",
+    "watch_false_positive": "Kim Oct11 receipt selected 2026-10-15-dated AI assistant article and Oct11 AI hedge article; future-dated 10/13 arena, 10/14 replica, 10/15 AI assistant must not be promoted as current publications",
+    "watch_backlog": "Lazy Oct11 receipt discovered_new=49, selected two; one HOLD; raw new URL count is not verified substantive delta count",
+    "remediation_candidate": "Date gate before prioritization; exact URL + content hash + title/body semantic check against V11, AI_REFERENCE_INDEX and previous C2S; rank TAKY value before max-two selection; no automatic registry mutation"
+  },
+  "archi_grow_mokdong": {
+    "official_source": "https://cleanup.seoul.go.kr/cleanup/view/publicIntgrPlanSttn2.do",
+    "prior_context": "2026-09-21 integrated review conditional approval of Mokdong 9 and 13 is preexisting, not new Oct12 DELTA",
+    "october_new_official_decision": "NONE_VERIFIED",
+    "coverage_limit": "No complete per-complex 1-14 official-file diff this run; no claims of all-complex verification",
+    "tracking_fields": [
+      "정비계획",
+      "용적률",
+      "공공기여",
+      "기부채납",
+      "통합심의",
+      "사업시행인가"
+    ]
+  },
+  "pipeline": {
+    "raw": "EXISTING_LOCAL_SNAPSHOTS_REUSED; NEW_SELECTED_PUBLIC_ARTICLE_RAW_PERSISTENCE_NOT_COMPLETED",
+    "evidence": "PUBLIC_TEXT_AND_OFFICIAL_SOURCE_REVIEW_COMPLETED_FOR_LISTED_ITEMS",
+    "indexing": "CANDIDATES_ONLY__NO_INDEX_WRITE",
+    "learning": "NO_LEARNING_PROJECTION_WRITE",
+    "domain": "ROUTING_CANDIDATES_ONLY",
+    "central_promotion": false
+  },
+  "guards": [
+    "NO_PAID_API",
+    "NO_PAID_CONTENT",
+    "NO_AUTH_BYPASS",
+    "NO_UNAUTHORIZED_SCRAPING",
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_OR_MASTER_OR_CANONICAL_CHANGE",
+    "NO_MAIN_MERGE",
+    "NO_REMOTE_PUSH",
+    "NO_NETLIFY_DEPLOY"
+  ],
+  "outcome": "One same-day publicly visible Kim guide candidate (Jev) with API-cost gate; one relevant recent Rhino compatibility issue; Revit and IFC prior September reference-only; no confirmed Digit or October Mokdong official delta; no new canonical REF."
+}

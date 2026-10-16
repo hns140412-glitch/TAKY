@@ -1,0 +1,41 @@
+{
+  "schema": "TAKY_GLOBAL_PRIVATE_REFERENCE_USE_POLICY_V1",
+  "date": "2026-10-15",
+  "scope": "ALL_TAKY_PROJECTS",
+  "authority": "TAKY_AI_CURRENT",
+  "mode": "PERSONAL_FAMILY_NONCOMMERCIAL",
+  "default_action": "ALLOW_INTERNAL_REVIEW_MINING_FORMING_AND_OWN_IMPLEMENTATION",
+  "external_distribution_notice_is_internal_blocker": false,
+  "review_on_noncommercial_source_material": "PROCEED",
+  "allowed_internal": [
+    "read_or_analyze_lawfully_accessed_reference",
+    "store_source_provenance_and_hash_when_available",
+    "compare_learning_design_content_and_logic",
+    "form_internal_knowledge_or_design_contract",
+    "build_original_UI_and_code_based_on_method",
+    "perform_local_noncommercial_mock_and_verification"
+  ],
+  "not_same_as_distribution_permission": [
+    "reposting_original_pdf",
+    "publishing_unchanged_images_or_pages",
+    "sharing_modified_source_material",
+    "bundling_copyrighted_assets_for_distribution"
+  ],
+  "permission_review_trigger": "PUBLIC_OR_EXTERNAL_SHARING_OF_COPIED_SOURCE_CONTENT",
+  "guard_unchanged": [
+    "USER_APPROVAL_BEFORE_PAID_API",
+    "USER_APPROVAL_BEFORE_GIT_PUSH_MERGE",
+    "USER_APPROVAL_BEFORE_DEPLOYMENT",
+    "USER_APPROVAL_BEFORE_EXTERNAL_SHARING"
+  ],
+  "stages_separate": [
+    "REVIEWED",
+    "RAW_CAPTURED",
+    "MINED",
+    "FORMED",
+    "IMPLEMENTED",
+    "VERIFIED"
+  ],
+  "note": "Noncommercial internal research is allowed by default as TAKY operating policy; noncommercial status does not on its own negate intellectual-property rights.",
+  "current_doc": "https://docs.google.com/document/d/13sqSChdA6ZTyaIbkM6gVDK6ajKpnI_cJ9lWa_OAmIO4/edit"
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-14",
+  "day": "WEDNESDAY",
+  "authority": "NONCANONICAL",
+  "baseline": "Oct13 C2S + SITE_WATCH registry 10 sites + TAKY CURRENT + source universe",
+  "coverage": "Partial; 3 selected AI sites and official architecture/Seoul public sources; other 7 inherited",
+  "digit": "No verified new; Notion source fetch failed; no hash diff",
+  "new": [
+    {
+      "name": "Kim Replica 11 skills",
+      "published": "Oct14",
+      "status": "Previously captured Oct13 as future-dated; do not duplicate RAW",
+      "sha256": "119aab49b4c6c0a3d43ab40baed9d53046d96adfd3e90f3cf635d1e42f4b0c22",
+      "mining": "Existing public RAW verified",
+      "indexing": "candidate",
+      "domain": "TAKY UI design comparison; no new engine"
+    }
+  ],
+  "archi": [
+    {
+      "name": "Rhino 8.36 Mac GHPython import regression",
+      "date": "Oct13",
+      "status": "Developer forum report; hotfix release not independently verified",
+      "domain": "ARCHI GROW Rhino compatibility",
+      "raw": "public read only"
+    },
+    {
+      "name": "VisualARQ 3.12 area/volume API and DWG/IFC fixes",
+      "date": "Oct7",
+      "status": "missed prior release, not Oct14 publication",
+      "domain": "ARCHI GROW BIM quantity/output QC",
+      "raw": "public read only"
+    }
+  ],
+  "excluded": [
+    "Kim Oct13 design repos already captured; overlaps existing design references",
+    "LazyOwen Oct8 court skill already watched; independent review overlap"
+  ],
+  "education": "No verified new official change",
+  "mokdong": "No new official plan/approval confirmed; Oct17 meeting is unverified media-only watch, not approval",
+  "dedup": "URL/Oct13 RAW hash checked; semantic comparison qualitative; full corpus numeric similarity OPEN",
+  "pipeline": "RAW reuse -> evidence review -> INDEX candidate -> Learning none -> Domain proposal",
+  "hold": "No implementation, CURRENT/Master/Canonical/main changes, push, deploy, paid API or unauthorized access"
+}

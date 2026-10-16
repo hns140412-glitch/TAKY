@@ -1,0 +1,15 @@
+{
+  "attestation_hash": "sha256:07944a443f3f2061babe5098ed003a91e564f9c33a221db90587690c048feed2",
+  "attestation_version": "1.0",
+  "binding_role": "CANONICAL_REVIEW_ATTESTATION",
+  "profile_path": "PROJECTIONS/ACTIVE_RULE_PROFILE.md",
+  "projection_body_hash": "sha256:c112172ee9482db51ca71b68aac3a98642b10890c771f1df7e2872309fa25641",
+  "review_basis": "OWNER_TO_PROJECTION_SEMANTIC_REVIEW",
+  "review_note": "Reviewed owner role matrix/routing and projection section 11. Projection delegates role semantics to TKY-AICOLLAB-001 and has no contradictory role assignment. Independent Codex model review HOLD due to Windows shell access denial; this receipt is a scoped TAKY owner-to-projection review, NOT Codex independent approval.",
+  "review_result": "PASS",
+  "review_scope": "TAKY_ROLE_OWNER_TO_EXISTING_SECTION_11_ACTIVATION",
+  "reviewed_at": "2026-10-15T09:01:05+09:00",
+  "reviewer_role": "TAKY_VALIDATOR",
+  "source_canonical_head": "6a25b468b2d8b8b058fe6f3ec0a2c925dc679ad8",
+  "source_owner_fingerprint": "sha256:eed29fb77d95a679a78f6b88e85702328b850561b239c80fc67a4e274c4fc71e"
+}

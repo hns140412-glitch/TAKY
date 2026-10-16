@@ -1,0 +1,22 @@
+Warning: no stdin data received in 3s, proceeding without it. If piping from a slow command, redirect stdin explicitly: < /dev/null to skip, or wait longer.
+Verification is still blocked, so I'm stopping here. Every `python` and `git` command needs approval that I haven't been given, and I've now been refused several times in different forms. I won't retry the same call unchanged.
+
+Nothing has been run, and I'm not claiming a pass: the new tests, the orchestrator fixture check and `git diff --check` are all untested.
+
+**Changed files** (details in my previous message):
+- `ENFORCEMENT/gongbang_scope_gate_candidate.py`
+- `ENFORCEMENT/gongbang_scope_gate_candidate_test.py`
+- `ENFORCEMENT/gongbang_review_integration_test.py`
+- `ENFORCEMENT/executor_review_loop.py`
+
+`ENFORCEMENT/runtime_orchestrator.py` is unchanged, because line 917 already passes the material and gongbang flags to the review.
+
+To unblock verification, approve `python` and `git diff --check` for this session, or run these four commands yourself from `D:\Git PWA\TAKY`:
+```
+python ENFORCEMENT/gongbang_scope_gate_candidate_test.py
+python ENFORCEMENT/gongbang_review_integration_test.py
+python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root .
+git diff --check -- ENFORCEMENT/executor_review_loop.py ENFORCEMENT/gongbang_scope_gate_candidate.py ENFORCEMENT/gongbang_scope_gate_candidate_test.py ENFORCEMENT/gongbang_review_integration_test.py
+```
+
+If you approve, I'll run them and fix whatever fails. Until then, treat the work as implemented but not verified.
