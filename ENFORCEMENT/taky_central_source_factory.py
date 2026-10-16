@@ -655,6 +655,12 @@ def lookup_hns_video_raw_status(keyword,limit=20):
         id=row.get("id","")
         if query not in (title+" "+id).casefold():continue
         verified=bool(row.get("live_20261016_raw_provenance"))
+        variant=row.get("chatgpt_library_variant")
+        if variant and verified:raise ValueError("LIBRARY_VARIANT_INVALID_SOURCE_SCOPE")
+        if variant and (variant.get("original_drive_hash_attested") is not False
+              or variant.get("container_sha256_verified") is not True
+              or len(variant.get("content_sha256",""))!=64):
+            raise ValueError("CHATGPT_LIBRARY_VARIANT_PROVENANCE_DRIFT")
         matches.append({
             "source_id":id,"title":title,"mime_type":row.get("mime"),
             "provider_availability":row["live_20261016_status"],
@@ -662,6 +668,14 @@ def lookup_hns_video_raw_status(keyword,limit=20):
             "source_state":"RAW_VERIFIED_IN_EARLIER_CENTRAL_DB" if verified
                            else "RAW_UNRESOLVED_FILE_ID_404_BOTH_LINKED_ACCOUNTS",
             "provider_check_date":"2026-10-16",
+            "chatgpt_library_review_copy":{
+               "library_file_id":variant["file_id"],
+               "copy_sha256":variant["content_sha256"],
+               "copy_bytes":variant["size_bytes"],
+               "codec":variant["codec_verified"],
+               "original_equivalence":"NOT_ESTABLISHED",
+               "windows_workbench_binary_ingested":False
+            } if variant else None,
             "cannot_infer_deletion_from_404":True,
             "forming_learning_applied":False})
     return matches[:limit]
