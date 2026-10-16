@@ -69,7 +69,7 @@ def audio_preflight():
         return {"status":"ALREADY_MOVED_NO_COMPAT_ALIAS","source":str(SOURCE_AUDIO),"target":str(TARGET_AUDIO)}
     if not SOURCE_AUDIO.is_dir():
         raise RuntimeError("AUDIO_SOURCE_MISSING:"+str(SOURCE_AUDIO))
-    if TARGET_AUDIO.exists():
+    if os.path.lexists(TARGET_AUDIO):
         raise RuntimeError("AUDIO_DEST_COLLISION")
     files=members_hash(SOURCE_AUDIO)
     if len(files)!=13 or any(Path(n).suffix not in {".mp3",".md"} for n in files):
@@ -77,8 +77,71 @@ def audio_preflight():
     if git(TAKY,"ls-files","--","staging/crew_voice_20261010").strip():
         raise RuntimeError("AUDIO_SOURCE_GIT_TRACKED")
     # Compatibility junction preserves old immutable handoff references.
-    if SOURCE_AUDIO.is_symlink():raise RuntimeError("AUDIO_SOURCE_ALREADY_LINK")
+    if SOURCE_AUDIO.is_symlink() or SOURCE_AUDIO.is_junction():raise RuntimeError("AUDIO_SOURCE_ALREADY_LINK")
+    audio_consumer_gate()
     return {"status":"MOVE_CANDIDATE","source":str(SOURCE_AUDIO),"target":str(TARGET_AUDIO),"sha256":files}
+
+def audio_consumer_gate():
+    """Fail closed on live executable references until paired code rebind is proven.
+
+    Check Git-known executable code in the nine actual app/control repositories
+    plus the source-vault worker entrypoints. Do not crawl the huge RAW warehouse,
+    user backups, content vault junctions, .git objects or node_modules.
+    A compatibility junction does not substitute for a required code edit.
+    """
+    suffixes={".py",".pyw",".js",".cjs",".mjs",".ts",".tsx",".jsx",
+              ".ps1",".psm1",".cmd",".bat",".sh",".html",".json",
+              ".yaml",".yml",".toml",".ini",".cfg",".xml"}
+    excluded={Path(__file__).absolute(),REGISTRY.absolute(),TASKS.absolute(),RECEIPT.absolute()}
+    needle=SOURCE_AUDIO.name.casefold()
+    reviewed=0
+
+    def inspect(root,p):
+        nonlocal reviewed
+        if p.absolute() in excluded or p.suffix.casefold() not in suffixes:
+            return
+        if p.is_symlink() or p.is_junction():
+            raise RuntimeError("HOLD_AUDIO_CONSUMER_LINK_UNREVIEWED:"+str(p))
+        if not p.is_file() or not p.resolve().is_relative_to(root.resolve()):
+            raise RuntimeError("HOLD_AUDIO_CONSUMER_PATH_UNREVIEWED:"+str(p))
+        if p.stat().st_size>2_000_000:
+            raise RuntimeError("HOLD_AUDIO_CONSUMER_FILE_TOO_LARGE:"+str(p))
+        try:
+            raw=p.read_bytes()
+            body=raw.decode("utf-16" if raw.startswith((b"\xff\xfe",b"\xfe\xff")) else "utf-8-sig")
+        except (OSError,UnicodeError) as exc:
+            raise RuntimeError("HOLD_AUDIO_CONSUMER_REVIEW_INCOMPLETE:"+str(p)) from exc
+        reviewed+=1
+        if needle in body.casefold():
+            raise RuntimeError("HOLD_AUDIO_CODE_REBIND_REQUIRED:"+str(p))
+
+    for name in REPOS:
+        root=ROOT/name
+        if not root.is_dir() or root.is_symlink() or root.is_junction():
+            raise RuntimeError("HOLD_AUDIO_CONSUMER_ROOT_UNREVIEWED:"+str(root))
+        known=git(root,"ls-files","--cached","--others","--exclude-standard","-z")
+        for rel in set(x for x in known.split("\0") if x):
+            bits=Path(rel.replace("\\","/")).parts
+            if not bits or ".." in bits or Path(rel).is_absolute():
+                raise RuntimeError("HOLD_AUDIO_CONSUMER_RELATIVE_PATH_INVALID:"+rel)
+            if any(bit.casefold() in {".git","node_modules","reference","90_archive","backup"} for bit in bits):
+                continue
+            inspect(root,root/rel)
+
+    # SOURCE-VAULT hosts the currently active acquisition worker. Keep this
+    # deliberate shallow entrypoint scan independent of its large captured RAW.
+    worker=ROOT/"TAKY-SOURCE-VAULT"
+    if not worker.is_dir() or worker.is_symlink() or worker.is_junction():
+        raise RuntimeError("HOLD_AUDIO_COLLECTOR_ROOT_UNREVIEWED")
+    for folder in (worker,worker/"scripts",worker/"patch"):
+        if not folder.is_dir():continue
+        if folder.is_junction() or folder.is_symlink():
+            raise RuntimeError("HOLD_AUDIO_COLLECTOR_LINK_UNREVIEWED:"+str(folder))
+        for path in folder.iterdir():
+            if path.is_file() and path.suffix.casefold() in suffixes:
+                inspect(worker,path)
+    return {"static_consumer_check":"NO_LITERAL_REFERENCE_FOUND",
+            "reviewed_executable_files":reviewed,"code_references_updated":False}
 
 def runtime_code_consumer_gates():
     """Check that index-loaded executable files exist AND are versioned.
@@ -211,24 +274,67 @@ def backup_and_prune(report):
         pruned[name]=len(stale)
     return saved,pruned
 
-def move_audio(entry):
+def rollback_audio(transaction):
+    """Compensate only this invocation, never overwrite an occupied old path."""
+    if not transaction:return {"status":"NO_AUDIO_MUTATION"}
+    old=SOURCE_AUDIO;new=TARGET_AUDIO
+    try:
+        if not transaction.get("moved"):
+            if (old.exists() and old.stat().st_ino==transaction["inode"]
+                and not os.path.lexists(new)):
+                return {"status":"NO_AUDIO_MUTATION"}
+            raise RuntimeError("MOVE_OUTCOME_UNCERTAIN")
+        if (new.is_symlink() or new.is_junction() or not new.is_dir()
+            or new.stat().st_ino!=transaction["inode"]
+            or members_hash(new)!=transaction["sha256"]):
+            raise RuntimeError("MOVED_DATA_CHANGED_OR_UNVERIFIABLE")
+        if os.path.lexists(old):
+            if (not transaction.get("junction_inode") or not old.is_junction()
+                or old.lstat().st_ino!=transaction["junction_inode"]
+                or not os.path.samefile(old,new)):
+                raise RuntimeError("OLD_PATH_OCCUPIED_OR_ALIAS_NOT_OWNED")
+            old.rmdir()  # unlink only the verified junction, never its contents
+        os.rename(new,old)
+        transaction.clear()
+        return {"status":"AUDIO_MOVE_ROLLED_BACK"}
+    except Exception as exc:
+        return {"status":"HOLD_AUDIO_ROLLBACK_UNSAFE","reason":str(exc)}
+
+def move_audio(entry,transaction=None):
     if entry["status"]=="ALREADY_MOVED":return entry
     if entry["status"]=="ALREADY_MOVED_NO_COMPAT_ALIAS":raise RuntimeError('AUDIO_COMPAT_PATH_MISSING')
+    # Recheck immediately before mutation; an audit result is not authorization
+    # to relocate data after consumers or content have changed.
+    fresh=audio_preflight()
+    if fresh["status"]!="MOVE_CANDIDATE" or fresh["sha256"]!=entry["sha256"]:
+        raise RuntimeError("HOLD_AUDIO_PREFLIGHT_CHANGED")
+    update_refs()
+    if transaction is None:transaction={}
     old=SOURCE_AUDIO;new=TARGET_AUDIO
     new.parent.mkdir(parents=True,exist_ok=True)
-    os.rename(old,new) # same disk D:, atomic, no copy/partial transfer.
-    # Legacy handoff paths continue to resolve, preserving historical docs.
-    p=subprocess.run(["cmd.exe","/c","mklink","/J",str(old),str(new)],
-                     capture_output=True,text=True,errors="replace")
-    if p.returncode or not old.exists() or not os.path.samefile(old,new):
-        if old.exists():
-            raise RuntimeError("AUDIO_COMPAT_JUNCTION_FAILED_AND_OLD_PATH_OCCUPIED")
-        os.rename(new,old)
-        raise RuntimeError("AUDIO_JUNCTION_FAILED_MOVE_ROLLED_BACK:"+p.stderr[-250:])
-    if entry["sha256"]!=members_hash(new):
-        raise RuntimeError("AUDIO_AFTER_MOVE_HASH_MISMATCH")
+    transaction.update(inode=old.stat().st_ino,sha256=entry["sha256"],moved=False)
+    try:
+        os.rename(old,new) # same disk D:, atomic, no copy/partial transfer.
+        transaction["moved"]=True
+        # Use literal PowerShell paths, avoiding cmd.exe path interpolation.
+        quote=lambda p: "'"+str(p).replace("'","''")+"'"
+        p=subprocess.run(["powershell.exe","-NoProfile","-NonInteractive","-Command",
+            "$ErrorActionPreference='Stop'; New-Item -ItemType Junction -Path "
+            +quote(old)+" -Target "+quote(new)+" | Out-Null"],
+            capture_output=True,text=True,errors="replace",timeout=20)
+        if old.is_junction() and os.path.samefile(old,new):
+            transaction["junction_inode"]=old.lstat().st_ino
+        if p.returncode or not transaction.get("junction_inode"):
+            raise RuntimeError("AUDIO_COMPAT_JUNCTION_FAILED")
+        if entry["sha256"]!=members_hash(new):
+            raise RuntimeError("AUDIO_AFTER_MOVE_HASH_MISMATCH")
+        update_refs()
+    except Exception as exc:
+        compensation=rollback_audio(transaction)
+        raise RuntimeError(str(exc)+":"+json.dumps(compensation)) from exc
     return {"status":"MOVED_WITH_COMPAT_JUNCTION","source":str(old),"target":str(new),
             "files":len(entry["sha256"]),"old_path_resolves":True,
+            "code_references_updated":False,
             "sha256":entry["sha256"]}
 
 def remove_empty():
@@ -246,16 +352,19 @@ def update_refs():
     # A rerun must NEVER overwrite CURRENT, task decisions, or later C2S
     # progress with stale migration-stage defaults.
     data=json.loads(REGISTRY.read_text(encoding="utf-8-sig"))
-    assert Path(data["cleanup_controller"])==ROOT/"TAKY"/"TOOLS"/"TAKY_WORKSPACE_CLEANUP.py"
-    assert Path(data["archived_crew_audio_20261010"])==TARGET_AUDIO
-    assert Path(data["crew_audio_legacy_compatible_path"])==SOURCE_AUDIO
-    assert Path(data["global_reference_physical_root"])==WB/"REFERENCE"
+    expected={"cleanup_controller":ROOT/"TAKY"/"TOOLS"/"TAKY_WORKSPACE_CLEANUP.py",
+              "archived_crew_audio_20261010":TARGET_AUDIO,
+              "crew_audio_legacy_compatible_path":SOURCE_AUDIO,
+              "global_reference_physical_root":WB/"REFERENCE"}
+    for key,value in expected.items():
+        if Path(data[key])!=value:raise RuntimeError("REGISTRY_PATH_MISMATCH:"+key)
     tasks=json.loads(TASKS.read_text(encoding="utf-8-sig"))
-    assert {"CLN-001","CLN-002","CLN-003","CLN-005"}.issubset(
-        {t["id"] for t in tasks["tasks"]})
+    if not {"CLN-001","CLN-002","CLN-003","CLN-005"}.issubset(
+        {t["id"] for t in tasks["tasks"]}):raise RuntimeError("TASK_REGISTRY_MISMATCH")
     # The immutable operation receipt records this run. User intent or
     # separately verified task evidence controls later CURRENT changes.
     return {"registry_checked":True,"task_registry_checked":True,
+            "code_references_updated":False,
             "authorities_rewritten":False,"task_statuses_rewritten":False}
 
 def main():
@@ -281,24 +390,29 @@ def main():
     result["mode"]="APPLY_SAFE"
     # Preserve record even if later operation is stopped.
     RECEIPT.parent.mkdir(parents=True,exist_ok=True)
+    transaction={}
     try:
         saved,pruned=backup_and_prune(result)
         result["worktree_metadata_backups"]=saved
         result["worktrees_pruned"]=pruned
-        result["audio_result"]=move_audio(result["audio"])
+        result["audio_result"]=move_audio(result["audio"],transaction)
         result["empty_dirs_removed"]=remove_empty()
-        update_refs()
-        result["status"]="APPLIED_AND_REFERENCES_UPDATED"
+        result["reference_checks"]=update_refs()
+        result["status"]="APPLIED_WITH_COMPATIBILITY_REFERENCES_CHECKED"
         result["root_source_vault_moved"]=False
         result["git_branch_deleted"]=False
         result["cloud_modified"]=False
+        RECEIPT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     except Exception as exc:
         result["status"]="PARTIAL_HOLD"
         result["error"]=str(exc)
-        RECEIPT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        result["audio_compensation"]=rollback_audio(transaction)
+        try:
+            RECEIPT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        except Exception as receipt_exc:
+            result["receipt_error"]=str(receipt_exc)
         print(json.dumps({"status":result["status"],"reason":result["error"],"receipt":str(RECEIPT)},ensure_ascii=False))
         raise
-    RECEIPT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps({"status":result["status"],
         "worktrees_pruned":result["worktrees_pruned"],
         "audio":result["audio_result"]["status"],
