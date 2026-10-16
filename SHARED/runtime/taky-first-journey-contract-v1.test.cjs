@@ -1,0 +1,78 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {build,STEPS,CORE6}=require('./taky-first-journey-contract-v1.js');
+(async()=>{
+let checks=0,transitions=[];
+function ok(a,b){assert.deepEqual(a,b);checks++;}
+async function rejects(fn,code){await assert.rejects(fn,new RegExp('TAKY_JOURNEY_'+code));checks++;}
+const session={family_id:'FAMILY_A',self_member_id:'PARENT_A',
+ authorized_member_ids:['CHILD_A','CHILD_B']};
+const getVerifiedSession=async()=>session;
+const app=build({getVerifiedSession,onTransition:x=>transitions.push(x)});
+ok(STEPS.length,12);
+ok(app.snapshot().step,'FAMILY_CONNECT');
+await rejects(()=>app.finishFirstMeet(),'WRONG_STEP');
+await rejects(()=>app.connectFamily('CHILD_OTHER'),'MEMBER_NOT_AUTHORIZED');
+await app.connectFamily('CHILD_A');ok(app.snapshot().step,'CREW_FIRST_MEET');
+await rejects(()=>app.chooseCrew(CORE6.slice(0,5),'dubi'),'WRONG_STEP');
+await app.seeFirstMeet('dubi');await app.seeFirstMeet('dubi');ok(app.snapshot().seenCrew.length,1);
+await rejects(()=>app.finishFirstMeet(),'CORE6_INTRO_INCOMPLETE');
+await rejects(()=>app.seeFirstMeet('fake-crew'),'CORE6_ONLY_IN_FIRST_MEET');
+for(const id of CORE6.slice(1))await app.seeFirstMeet(id);
+ok(app.snapshot().seenCrew.length,6);
+await app.finishFirstMeet();ok(app.snapshot().step,'CREW_SELECT');
+await rejects(()=>app.chooseCrew(['dubi'],'dubi'),'CREW_SELECTION_5_TO_6_REQUIRED');
+await rejects(()=>app.chooseCrew(['dubi','lori','ink','nova','zero'],'take'),'PREFERRED_CREW_NOT_SELECTED');
+await app.chooseCrew(CORE6.slice(0,5),'dubi');
+ok(app.snapshot().selectedCrew.length,5);
+ok(app.snapshot().introPreferredCrewId,'dubi');
+ok('main_character_id' in app.snapshot(),false);
+await rejects(()=>app.mayEnterHome(),'JOURNEY_NOT_COMPLETE');
+await rejects(()=>app.packBag(['map']),'WRONG_STEP');
+await app.userVisualId({state:'DEFERRED_NO_COST'});
+ok(app.snapshot().userVisualIdState,'DEFERRED_NO_COST');
+ok('visualId' in app.snapshot(),false);
+await rejects(()=>app.packBag([]),'EQUIPMENT_NOT_SELECTED');
+await app.packBag(['map','lantern','compass']);ok(app.snapshot().step,'DEPARTURE');
+await rejects(()=>app.depart('FLY',{kind:'DEPARTURE_RENDERED',sceneEventId:'e1'}),'DEPARTURE_ROUTE_REQUIRED');
+await rejects(()=>app.depart('SAIL',{kind:'WRONG',sceneEventId:'e1'}),'SCENE_EVIDENCE_REQUIRED');
+await app.depart('SAIL',{kind:'DEPARTURE_RENDERED',sceneEventId:'e1'});
+ok(app.snapshot().travelMode,'SAIL');
+await rejects(()=>app.nameIsland('x'),'WRONG_STEP');
+await rejects(()=>app.discoverIsland({kind:'ISLAND_SIGHT_RENDERED',sceneEventId:'e1'}),'SCENE_EVENT_REPLAY');
+await app.discoverIsland({kind:'ISLAND_SIGHT_RENDERED',sceneEventId:'e2'});
+await rejects(()=>app.nameIsland('  '),'INVALID_NAME');
+await app.nameIsland('반짝이는 섬');ok(app.snapshot().islandName,'반짝이는 섬');
+await app.discoverBasecamp({kind:'BASECAMP_DISCOVERED_RENDERED',sceneEventId:'e3'});
+await app.nameBasecamp('나무 캠프');ok(app.snapshot().basecampName,'나무 캠프');
+await rejects(()=>app.mayEnterHome(),'JOURNEY_NOT_COMPLETE');
+await app.arriveBasecamp({kind:'BASECAMP_ARRIVED_RENDERED',sceneEventId:'e4'});
+ok(app.snapshot().step,'LEARNING_HOME');
+ok(app.snapshot().complete,true);
+const decision=await app.mayEnterHome();
+ok(decision.home,'TAKY_INTEGRATED_LEARNING_HOME');
+ok(decision.member_id,'CHILD_A');
+ok(decision.family_id,'FAMILY_A');
+ok(transitions.length,11);
+await rejects(()=>app.arriveBasecamp({kind:'BASECAMP_ARRIVED_RENDERED',sceneEventId:'e5'}),'WRONG_STEP');
+// Snapshot mutation cannot change the engine.
+let s=app.snapshot();s.selectedCrew.splice(0);s.packedItems.splice(0);s.acceptedSceneEvents.splice(0);
+ok(app.snapshot().selectedCrew.length,5);
+ok(app.snapshot().packedItems.length,3);
+ok(app.snapshot().acceptedSceneEvents.length,4);
+// Prevent cross-family/cross-member access on every step, not just at login.
+const changed={family_id:'FAMILY_OTHER',self_member_id:'PARENT_OTHER',authorized_member_ids:['CHILD_OTHER']};
+const guarded=build({getVerifiedSession:async()=>session});await guarded.connectFamily('CHILD_A');
+const sessionGuard=build({getVerifiedSession:async()=>changed});await sessionGuard.connectFamily('CHILD_OTHER');
+ok(sessionGuard.snapshot().verifiedFamilyId,'FAMILY_OTHER');
+let dynamic={...session};
+const swapped=build({getVerifiedSession:async()=>dynamic});await swapped.connectFamily('CHILD_A');
+dynamic=changed;
+await rejects(()=>swapped.seeFirstMeet('dubi'),'FAMILY_CHANGED_REAUTH_REQUIRED');
+const rev=build({getVerifiedSession:async()=>dynamic});
+await rev.connectFamily('CHILD_OTHER');
+dynamic={family_id:'FAMILY_OTHER',self_member_id:'PARENT_OTHER',authorized_member_ids:[]};
+await rejects(()=>rev.seeFirstMeet('dubi'),'MEMBER_REVOKED');
+assert.throws(()=>build({getVerifiedSession:null}),/TAKY_JOURNEY_SERVER_SESSION_PROVIDER_REQUIRED/);checks++;
+console.log(JSON.stringify({status:'PASS',assertions:checks,verified_transitions:transitions.map(x=>x.to),pay_calls:0,auth_source:'injected central-session stub not live account',ui_verified:false}));
+})().catch(e=>{console.error(e.stack||String(e));process.exitCode=1});

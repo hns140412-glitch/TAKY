@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10151d">
+<title>TAKY · AI 사용량</title>
+<style>
+:root{color-scheme:dark;--bg:#10151d;--panel:#1b222c;--line:#353d48;--text:#f1f4f8;--muted:#abb4bf;--accent:#7bdfc0;--danger:#f38c86;--warn:#e9bc76;font:15px/1.45 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}button,input{font:inherit}
+button{cursor:pointer}button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+main{max-width:1480px;margin:auto;padding:20px 22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #293540;padding-bottom:14px;margin-bottom:14px}
+.identity{display:flex;align-items:center;gap:12px}.brand{font-weight:900;letter-spacing:.13em;color:#96efda;font-size:19px}
+.separator{border-left:1px solid #415062;height:24px}.headline{font-size:18px;font-weight:740}
+.subline{font-size:13px;color:var(--muted);margin:5px 0 0}
+.actions{display:flex;align-items:center;gap:8px}.time{font-size:12px;color:#9eabb9;margin-right:5px;white-space:nowrap}
+button{border-radius:9px;border:1px solid #495766;background:#263140;color:#ecf2f8;padding:9px 13px}
+button:hover{background:#344456}button.emphasis{background:#bbf4e1;border-color:#bbf4e1;color:#142820;font-weight:750}
+.action-short{display:none}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;min-height:0}
+.card{min-width:0;border:1px solid #3c424b;background:radial-gradient(circle at 55% 0,#2b2927 0,transparent 50%),#1c2026;border-radius:18px;padding:18px 17px 13px;display:flex;flex-direction:column;min-height:0}
+.card[data-provider="Codex CLI"]{background:radial-gradient(circle at 55% 0,#24243c 0,transparent 52%),#1b2028}
+.card[data-provider="ElevenLabs"]{background:radial-gradient(circle at 55% 0,#1b3230 0,transparent 50%),#1b2328}
+.card[data-provider="Netlify"]{background:radial-gradient(circle at 55% 0,#17343a 0,transparent 48%),#19252b}
+.card-header{display:flex;justify-content:space-between;align-items:center;gap:7px}
+.product{display:flex;align-items:center;gap:9px;min-width:0}.logo{height:32px;width:32px;flex:0 0 32px;border:1px solid #704739;border-radius:9px;display:grid;place-items:center;background:#74442f;color:#ffdcc6;font-size:11px;font-weight:850}
+.card[data-provider="Codex CLI"] .logo{background:#383267;border-color:#675ca7;color:#e4dfff}
+.card[data-provider="ElevenLabs"] .logo{background:#eee;color:#17191e;border-color:#eee}
+.card[data-provider="Netlify"] .logo{background:#14555b;border-color:#35848b;color:#c4fff3}
+.product h2{font-size:16px;letter-spacing:-.035em;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status{display:flex;align-items:center;white-space:nowrap;gap:6px;background:#2c3038;border:1px solid #464c53;border-radius:999px;padding:5px 8px;font-size:11px;color:#d4dbe2}
+.status .dot{width:6px;height:6px;border-radius:50%;background:#89939f}
+.status.good .dot{background:#6adab3}.status.good{color:#c0efdc}
+.status.stale .dot{background:#f0ba6d}.status.stale{color:#f2d4a6}
+.donut{height:150px;width:150px;border-radius:50%;margin:18px auto 10px;display:grid;place-items:center;position:relative;background:conic-gradient(var(--ring,#74cbb8) calc(var(--ratio,0)*1%),#353739 0)}
+.donut:after{content:"";position:absolute;inset:10px;border-radius:50%;background:#1d2026}
+.donutInside{position:relative;z-index:1;text-align:center;max-width:125px}
+.donutInside strong{display:block;font-size:38px;font-weight:790;letter-spacing:-.065em;line-height:1.05;font-variant-numeric:tabular-nums}
+.donutInside span{font-size:11px;letter-spacing:.12em;font-weight:700;color:#bec2c8;text-transform:uppercase}
+.card[data-provider="ElevenLabs"] .donut:after{background:#1c2428}
+.card[data-provider="Netlify"] .donut:after{background:#1a262b}
+.main-number{min-height:50px;text-align:center;margin-bottom:13px}
+.main-number strong{display:block;font-weight:760;font-size:24px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1.2}
+.main-number small{display:block;color:#c0c9d2;font-size:12px;margin-top:3px}
+.week{margin:0 0 13px}
+.line-title{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:13px;font-weight:630}
+.line-title strong{font-variant-numeric:tabular-nums;font-size:14px}
+.track{height:7px;border-radius:9px;background:#393b41;overflow:hidden;margin-top:8px}
+.fill{height:100%;background:#7ddab9;border-radius:9px;width:0}
+.reset{font-size:12px;color:#aeb9c5;margin:8px 0 11px;min-height:18px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:0;margin-bottom:10px}
+.pill{border:1px solid #454d57;background:#272b31;padding:6px 9px;border-radius:8px;color:#d6dbe0;font-size:12px}
+.pill.good{border-color:#34705f;background:#214137;color:#b9f4dc}
+footer{border-top:1px solid #353a42;padding-top:9px;margin-top:auto}
+.card details{width:100%}.card summary{list-style:none;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:680;color:#b6c3ce;cursor:pointer;min-height:28px}
+.card summary::-webkit-details-marker{display:none}
+.card summary .chevron{transition:transform .15s}.card details[open] summary .chevron{transform:rotate(90deg)}
+.details-content{border-top:1px solid #3a444d;margin-top:8px;padding-top:6px;max-height:170px;overflow-y:auto;scrollbar-width:thin}
+.detail-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:5px 0;font-size:12px;color:#bfc8d2}
+.detail-row strong{font-size:13px;color:#edf4f9;font-weight:690;text-align:right;font-variant-numeric:tabular-nums}
+.note{font-size:11px;color:#98a9b6;line-height:1.35;margin:7px 0 4px}
+.links{display:flex;gap:8px;margin-top:8px}.links button{flex:1;padding:7px;font-size:12px}
+.pager{display:none;justify-content:center;gap:12px;align-items:center;margin:13px 0}.pager button{min-width:42px;min-height:39px;padding:5px;font-size:20px}
+.pager span{font-size:13px;color:#cbd6df;min-width:130px;text-align:center}
+.bottom{display:flex;justify-content:space-between;color:#8396a5;font-size:11px;margin-top:14px;gap:12px}
+.auth{display:none;margin:12px 0;padding:12px;background:#293743;border:1px solid #4e6976;border-radius:11px}
+.auth p{margin:0 0 8px;font-size:13px}.auth form{display:flex;gap:6px}
+.auth input{min-width:0;flex:1;border:1px solid #566d7a;border-radius:7px;background:#13212c;color:#eff4fa;padding:10px}
+dialog{background:#1a2532;color:#eef3f8;border:1px solid #476075;border-radius:16px;width:min(475px,calc(100vw - 24px));max-height:calc(100dvh - 45px);overflow:auto;padding:23px;box-shadow:0 28px 70px #0009}
+dialog::backdrop{background:#000a}
+dialog h3{margin:0 0 10px;font-size:20px}.explain{font-size:13px;color:#b7c6d3;line-height:1.5}
+.dialog-input{display:block;width:100%;border:1px solid #567188;border-radius:8px;background:#0e1b27;padding:11px;color:#fff}
+.dialog-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.dialog-actions button{font-size:13px}
+.credential{font:12px/1.5 ui-monospace,Consolas,monospace;overflow-wrap:anywhere;background:#101c28;border:1px solid #334b60;border-radius:8px;padding:10px}
+.mini-label{font-size:11px;letter-spacing:.1em;color:#9bb1c5;margin:13px 0 6px}
+.notice{font-size:12px;color:#b6cddc;margin-top:10px}
+@media(min-width:1000px) and (min-height:560px){
+ html,body{height:100%;overflow:hidden}
+ main{height:100dvh;display:flex;flex-direction:column;padding-top:14px;padding-bottom:12px}
+ .cards{flex:1 1 auto;min-height:0;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start}
+ .card{height:min(470px,calc(100dvh - 120px));overflow-y:auto;scrollbar-width:thin}
+ .bottom{flex:none;margin-top:auto}
+}
+@media(min-width:1000px) and (max-height:730px){
+ .top{margin-bottom:8px;padding-bottom:7px}
+ .card{padding:12px 14px 9px}
+ .donut{width:118px;height:118px;margin:9px auto 6px}
+ .donut:after{inset:9px}
+ .donutInside strong{font-size:32px}
+ .main-number{min-height:44px;margin-bottom:5px}.main-number strong{font-size:21px}
+ .week{margin-bottom:6px}.reset{margin:5px 0}
+ .pills{margin-bottom:6px}.pill{padding:4px 7px}
+}
+@media(min-width:769px) and (max-width:999px){
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .card{min-height:330px}
+ .donut{width:115px;height:115px;margin:8px auto 5px}
+ .donut:after{inset:9px}
+ .donutInside strong{font-size:28px}
+ .main-number{margin-bottom:5px;min-height:39px}
+ .main-number strong{font-size:20px}
+ .week{margin-bottom:6px}.reset{margin:4px 0 8px}
+}
+@media(max-width:768px){
+ html,body{height:100%;overflow:hidden}
+ main{height:100dvh;max-height:100dvh;overflow:hidden;display:flex;flex-direction:column;padding:12px 12px 10px}
+ .top{flex:none;margin-bottom:10px;padding-bottom:10px}
+ .headline{font-size:16px}.brand{font-size:17px}.subline,.time{display:none}
+ .actions{gap:5px}.actions button{padding:8px 10px}
+ .action-full{display:none}.action-short{display:inline}
+ .pager{display:flex;flex:none}
+ .cards{display:block;flex:0 0 auto;min-height:0}
+ .card{display:none;height:min(462px,calc(100dvh - 145px));min-height:0;overflow-y:auto;scrollbar-width:thin}
+ .card.active{display:flex}
+ .donut{height:132px;width:132px;margin:9px auto 6px}
+ .donut:after{inset:9px}
+ .donutInside strong{font-size:34px}
+ .main-number{margin-bottom:6px}
+ .week{margin-bottom:7px}
+ .reset{margin:6px 0 8px}
+ .pills{margin-bottom:5px}
+ .donut{margin:14px auto 8px}
+ .bottom{display:none}
+ .auth{flex:none}
+ .main-number{margin-bottom:8px}
+}
+@media(max-width:768px) and (max-height:680px){
+ .top{padding-bottom:7px;margin-bottom:4px}
+ .pager{margin:5px 0}
+ .card{padding:11px 15px;height:min(455px,calc(100dvh - 125px))}
+ .donut{width:115px;height:115px;margin:6px auto 5px}
+ .donut:after{inset:9px}
+ .donutInside strong{font-size:30px}
+ .main-number{min-height:38px;margin-bottom:4px}
+ .main-number strong{font-size:21px}
+ .week{margin-bottom:7px}.reset{margin:5px 0}
+ .pills{margin-bottom:5px}
+ .card details .details-content{max-height:105px}
+}
+
+/* Five services, four large desktop cards per view; responsive pager. */
+.card[data-provider="Antigravity"]{background:radial-gradient(circle at 55% 0,#28323e 0,transparent 52%),#1b242c}
+.card[data-provider="Antigravity"] .logo{background:#296d71;border-color:#529296;color:#e1fff9}
+.card[data-provider="Antigravity"] .donut:after{background:#1b242c}
+.pager{display:flex;flex:none;gap:10px;align-items:center;margin:2px 0 10px}
+.pager button{min-width:39px;min-height:32px;padding:3px 10px;font-size:20px}
+.pager span{font-size:13px;min-width:122px;color:#d5dfe8}
+.cards>.card:not(.active){display:none}
+@media(min-width:1000px) and (min-height:560px){
+ .pager{margin:0 0 8px}
+ .card{height:min(450px,calc(100dvh - 162px))}
+}
+@media(min-width:769px) and (max-width:999px){
+ .card{min-height:320px}
+}
+@media(max-width:768px){
+ .pager{margin:8px 0}
+}
+@media(max-width:768px) and (max-height:680px){
+ .pager{margin:5px 0}
+}
+
+
+/* Expand details OUTWARD rather than creating nested scrollbars. */
+.card{min-width:0}
+.details-content{max-height:none!important;overflow:visible!important}
+.card details[open] .details-content{padding-bottom:8px}
+@media(min-width:1000px){
+ .cards{align-items:start}
+ .card:has(details[open]){height:auto!important;max-height:none!important;overflow:visible!important}
+ html:has(.card details[open]),body:has(.card details[open]){height:auto!important;overflow:visible!important}
+ main:has(.card details[open]){height:auto!important;min-height:100dvh;overflow:visible!important}
+ .cards:has(.card details[open]){flex:0 0 auto;min-height:0}
+}
+@media(min-width:769px) and (max-width:999px){
+ .cards{align-items:start}
+ .card:has(details[open]){height:auto!important;overflow:visible!important}
+}
+@media(max-width:768px){
+ .card:has(details[open]){height:auto!important;max-height:none!important;overflow:visible!important}
+ html:has(.card details[open]),body:has(.card details[open]){height:auto!important;overflow:visible!important}
+ main:has(.card details[open]){height:auto!important;max-height:none!important;min-height:100dvh;overflow:visible!important}
+ .cards:has(.card details[open]){flex:0 0 auto!important}
+}
+.resetTimes{display:grid;gap:5px;margin:8px 0 10px}
+.resetTime{display:flex;align-items:baseline;justify-content:space-between;gap:10px;color:#b8c7d5;font-size:12px;line-height:1.45}
+.resetTime .resetTitle{flex:none;font-weight:670;color:#cbd8e5}
+.resetTime .resetValue{text-align:right;color:#f0f5fa;font-weight:660;font-variant-numeric:tabular-nums}
+.resetTime .resetClock{font-size:11px;color:#b1bac4;font-weight:450}
+
+
+/* Prevent flexbox from compressing circular gauges into ovals.
+   Card contents, not the ring, determine the required collapsed height. */
+.donut{
+  flex:0 0 auto!important;
+  aspect-ratio:1 / 1;
+  height:auto!important;
+  align-self:center;
+}
+@media(min-width:1000px){
+  .card{height:auto!important;min-height:min(450px,calc(100dvh - 162px));overflow:visible!important}
+  .cards{align-items:start}
+  html:has(.cards>.card.active),body:has(.cards>.card.active){overflow-y:auto}
+  main{height:auto!important;min-height:100dvh;overflow:visible!important}
+  .cards{flex:0 0 auto}
+}
+@media(max-width:768px){
+  .card.active{height:auto!important;min-height:min(462px,calc(100dvh - 145px));overflow:visible!important}
+  html,body{overflow-y:auto!important;height:auto!important}
+  main{height:auto!important;min-height:100dvh;max-height:none!important;overflow:visible!important}
+}
+
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+  <div class="identity"><span class="brand">TAKY</span><span class="separator"></span><div><div class="headline">AI 사용량</div><p class="subline">5개 서비스의 남은 한도 · 초기화 시각</p></div></div>
+  <div class="actions">
+    <span class="time" id="updated">조회 중</span>
+    <button id="mobileConnect" type="button"><span class="action-full">모바일 연결</span><span class="action-short">모바일</span></button>
+    <button id="settings" type="button" title="경고 기준">⚙</button>
+    <button id="refresh" class="emphasis" type="button"><span class="action-full">새로고침</span><span class="action-short">↻</span></button>
+  </div>
+</header>
+<section class="auth" id="auth"><p>접속키가 필요합니다. PC의 ‘모바일 연결’에서 복사한 키를 입력하세요.</p>
+<form id="authForm"><input id="accessToken" aria-label="모바일 접속키" type="password" autocomplete="off" required><button type="submit">연결</button></form><p id="authError"></p></section>
+<nav class="pager" aria-label="서비스 카드 전환"><button id="previous" type="button" aria-label="이전 카드">‹</button><span id="position">1–4 / 5</span><button id="next" type="button" aria-label="다음 카드">›</button></nav>
+<section id="cards" class="cards" aria-label="서비스 사용량"></section>
+<div class="bottom"><span id="footerStatus">연동 정보를 읽는 중</span><span>과거 기록과 미확인 값은 실시간 잔여량으로 취급하지 않습니다.</span></div>
+</main>
+<dialog id="mobileDialog" aria-label="모바일 연결"><h3>모바일 연결</h3><p class="explain">PC와 휴대폰이 같은 신뢰할 수 있는 Wi-Fi에 있어야 합니다. 모바일에서 접속키를 입력하세요.</p>
+<p class="mini-label">접속 주소</p><div id="mobileUrl" class="credential">조회 중</div><p class="mini-label">접속키</p><div id="mobileKey" class="credential">••••••••••••••••</div><div class="dialog-actions"><button id="copyUrl" type="button">주소 복사</button><button id="showKey" type="button">키 보기</button><button id="copyKey" type="button">키 복사</button><button id="closeMobile" type="button">닫기</button></div><p id="mobileNotice" class="notice">로컬 HTTP 연결은 암호화되지 않습니다. 신뢰하는 네트워크에서만 사용하세요.</p></dialog>
+<dialog id="settingsDialog" aria-label="알림 설정"><h3>표시 설정</h3><p class="explain">남은 한도가 낮을 때 색상 경고를 적용합니다. 실제 알림이나 추가 API 호출은 하지 않습니다.</p>
+<label>주의 기준 (남은 비율) <input class="dialog-input" id="warning" type="number" min="1" max="90" value="20"></label>
+<div class="dialog-actions"><button id="saveSettings" type="button">저장</button><button id="cancelSettings" type="button">취소</button></div></dialog>
+<dialog id="elevenDialog" aria-label="ElevenLabs API 연결"><h3>ElevenLabs API 연결</h3><p class="explain">PC에서만 키를 입력할 수 있습니다. 공식 구독 조회로 검증한 뒤 Windows 사용자 계정에 암호화 저장합니다.</p>
+<form id="elevenForm"><label class="mini-label" for="elevenKey">ElevenLabs API 키</label><input id="elevenKey" class="dialog-input" type="password" autocomplete="off" spellcheck="false" maxlength="512" minlength="16" placeholder="API 키 입력" required>
+<p id="elevenState" class="notice">연결 상태를 확인하고 있습니다.</p><div class="dialog-actions"><button id="elevenSave" class="emphasis" type="submit">연결 및 사용량 조회</button><button id="elevenRemove" type="button">연결 해제</button><button id="closeEleven" type="button">닫기</button></div></form>
+<p id="elevenLocal" class="explain" hidden>설정 변경은 PC에서 <a style="color:#a7ead8" href="http://127.0.0.1:8765/?elevenlabs=1">로컬 주소</a>로 열어주세요.</p></dialog>
+<dialog id="netlifyDialog" aria-label="Netlify 팀별 사용량 연결">
+ <h3>Netlify · 팀별 사용량 연결</h3>
+ <p class="explain">PC에서만 연결합니다. 계정 API를 읽기 전용으로 조회하며, 토큰은 Windows 사용자 암호화 저장소에 보관합니다. 배포·결제·설정 변경은 하지 않습니다.</p>
+ <form id="netlifyForm">
+  <label for="netlifyTeam" class="mini-label">연결할 팀</label>
+  <select id="netlifyTeam" class="dialog-input">
+   <option value="hns140412">hns140412 · Personal</option>
+   <option value="siezeall-w0pgkzo">SNAP&POP · Free</option>
+  </select>
+  <label for="netlifyKey" class="mini-label">Netlify 개인 액세스 토큰 (PAT)</label>
+  <input id="netlifyKey" class="dialog-input" type="password" autocomplete="off" spellcheck="false" minlength="16" maxlength="512" placeholder="PAT 입력" required>
+  <p id="netlifyState" class="notice">연결 상태 확인 중</p>
+  <div class="dialog-actions">
+   <button id="netlifySave" type="submit" class="emphasis">읽기 전용 연결</button>
+   <button id="netlifyRemove" type="button">이 팀 연결 해제</button>
+   <button id="netlifyClose" type="button">닫기</button>
+  </div>
+ </form>
+ <p id="netlifyLocal" class="explain" hidden>API 연결은 PC의 <a href="http://127.0.0.1:8765/?netlify=1" style="color:#a7ead8">로컬 TAKY 화면</a>에서만 가능합니다.</p>
+ <p class="explain">현재 API가 제공하는 월간 기본 포함분은 전체 Credit balance와 다를 수 있습니다. <a href="https://app.netlify.com/user/applications" target="_blank" rel="noopener noreferrer" style="color:#b5eee0">토큰 관리</a></p>
+</dialog>
+<script>
+(function(){
+"use strict";
+var names=["Claude Code","Codex CLI","ElevenLabs","Antigravity","Netlify"],current=0,data=[],warning=Number(localStorage.getItem("taky_usage_warn_remaining")||20),mobileAccess=null;
+if(!(warning>=1&&warning<=90))warning=20;
+var $=id=>document.getElementById(id);
+var isPhone=()=>matchMedia("(max-width:768px)").matches;
+var known=n=>typeof n==="number"&&Number.isFinite(n);
+var metric=(p,k)=>p&&p[k]&&typeof p[k]==="object"?p[k]:{};
+var formatNum=n=>known(n)?Math.round(n).toLocaleString("ko-KR"):"—";
+var formatPct=n=>known(n)?(Math.round(n*10)/10).toLocaleString("ko-KR",{maximumFractionDigits:1})+"%":"—";
+var stamp=x=>{if(!x)return "미확인";var d=new Date(x);return isNaN(+d)?"미확인":d.toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"numeric",minute:"2-digit"})};
+var todayTime=x=>{if(!x)return "—";var d=new Date(x);return isNaN(+d)?"—":d.toLocaleTimeString("ko-KR",{hour:"numeric",minute:"2-digit"})};
+function resetRemaining(raw){
+ if(!raw)return "시각 미확인";
+ var d=new Date(raw),left=d.getTime()-Date.now();
+ if(!Number.isFinite(left))return "시각 미확인";
+ if(left<=0)return "초기화 시각 경과 · 재조회 대기";
+ var total=Math.ceil(left/60000),days=Math.floor(total/1440),hours=Math.floor(total%1440/60),minutes=total%60;
+ return (days?days+"일 ":"")+(hours?hours+"시간 ":"")+(minutes||(!days&&!hours)?minutes+"분":"")+" 남음";
+}
+function resetLine(parent,label,raw){
+ var line=node(parent,"div",undefined,"resetTime");
+ node(line,"span",label,"resetTitle");
+ var value=node(line,"span",undefined,"resetValue");
+ var remain=node(value,"span",resetRemaining(raw),"resetCountdown");
+ if(raw&&Number.isFinite(new Date(raw).getTime())){
+   remain.dataset.reset=raw;
+   node(value,"span",stamp(raw),"resetClock");
+ }
+}
+function tickCountdown(){
+ document.querySelectorAll(".resetCountdown[data-reset]").forEach(x=>{
+   x.textContent=resetRemaining(x.dataset.reset);
+ });
+}
+function node(parent,tag,content,css){var e=document.createElement(tag);if(css)e.className=css;if(content!==undefined)e.textContent=content;parent.append(e);return e}
+function state(p){
+ if(p.name==="Antigravity"){
+   var q=p.geminiPool||{},rem=q.remainingPercent;
+   return {value:known(rem)?rem:null,status:known(rem)?(p.fresh?"최근 기록":"과거 기록"):"미확인",
+           tone:known(rem)?(p.fresh?"good":"stale"):"",used:known(rem)?100-rem:null,key:"pool"};
+ }
+ var key=p.name==="ElevenLabs"?"month":p.name==="Netlify"?"month":"week";
+ var m=metric(p,key),used=m.usedPercent,knownValue=known(used),record=p.fresh?"최근 기록":"과거 기록";
+ if(!knownValue)return {value:null,status:p.authConnected?"한도 미확인":p.plan?"계정만 확인":"미확인",tone:"",used:null,key:key};
+ return {value:100-used,status:record,tone:p.fresh?"good":"stale",used:used,key:key};
+}
+function numberTitle(p,s){
+ if(p.name==="ElevenLabs"){
+   var m=metric(p,"month");
+   return known(m.remaining)?[formatNum(m.remaining),"남은 문자 크레딧"]:[s.value===null?"미확인":"잔여 "+formatPct(s.value),"월간 잔여 한도"];
+ }
+ if(p.name==="Antigravity")return s.value===null?["한도 미확인","Antigravity 로그인 및 사용량 조회 확인 필요"]:["Gemini "+formatPct(s.value)+" 남음","모델 풀 잔여율 · 별도 요청 수 한도 아님"];
+ if(p.name==="Netlify")return ["잔여량 미확인","공식 크레딧 데이터 미확보"];
+ if(s.value===null)return ["한도 미확인",p.name==="Claude Code"?"Pro 로그인 상태만 확인됨":"사용량 미확인"];
+ return ["주간 "+formatPct(s.value)+" 남음",p.fresh?"최근 수집 자료":(p.rateSource==="claude_usage_cache"?"마지막 /usage 조회 "+stamp(p.observedAt):"과거 사용 기록")];
+}
+function quotaReasonLabel(code){return ({WINDOW_NOT_REPORTED:"최근 수집 원본에 해당 구간 없음",USAGE_VALUE_MISSING_OR_INVALID:"수집된 사용량 값 누락·형식 오류",RESET_TIME_ALREADY_PASSED:"기존 초기화 시각 경과 · 현재 값 미확인",OBSERVATION_STALE:"관측 기록 만료 · 재조회 필요",NO_USABLE_OBSERVATION:"유효한 계정 사용량 기록 없음"})[code]||"원인 확인 필요";}
+function addDetail(parent,label,value){var row=node(parent,"div",undefined,"detail-row");node(row,"span",label);node(row,"strong",value)}
+function renderCard(p){
+ var s=state(p),card=document.createElement("article");card.className="card";card.dataset.provider=p.name;
+ var header=node(card,"div",undefined,"card-header"),pr=node(header,"div",undefined,"product"),abbr={"Claude Code":"CL","Codex CLI":"CX","ElevenLabs":"XI","Netlify":"NF","Antigravity":"AG"}[p.name];
+ node(pr,"div",abbr,"logo");node(pr,"h2",p.name);
+ var badge=node(header,"span",undefined,"status "+s.tone);node(badge,"span",undefined,"dot");node(badge,"span",s.status);
+ var circle=node(card,"div",undefined,"donut"),visual=s.value===null?0:Math.max(0,Math.min(100,s.value));
+ circle.style.setProperty("--ratio",String(visual));
+ circle.style.setProperty("--ring",!p.fresh&&s.value!==null?"#989ca6":s.value!==null&&s.value<=10?"#ed827b":s.value!==null&&s.value<=warning?"#e9b46e":"#7dd6b8");
+ var inside=node(circle,"div",undefined,"donutInside");
+ node(inside,"strong",s.value===null?"—":formatPct(s.value));
+ node(inside,"span",s.value===null?"미확인":p.fresh?"REMAINING":"과거 기록");
+ var number=node(card,"div",undefined,"main-number"),primary=numberTitle(p,s);
+ node(number,"strong",primary[0]);node(number,"small",primary[1]);
+ var row=node(card,"div",undefined,"week");
+ var lt=node(row,"div",undefined,"line-title");
+ var key=s.key,m=key==="pool"?{usedPercent:s.used,resetAt:(p.geminiPool||{}).resetAt}:metric(p,key);
+ node(lt,"span",key==="pool"?"Gemini 모델 풀 사용":key==="month"?"월간 사용률":"주간 사용률");
+ node(lt,"strong",known(m.usedPercent)?formatPct(m.usedPercent):"미확인");
+ var track=node(row,"div",undefined,"track");var fill=node(track,"div",undefined,"fill");
+ fill.style.width=(known(m.usedPercent)?Math.max(0,Math.min(100,m.usedPercent)):0)+"%";
+ if(p.name==="Claude Code"||p.name==="Codex CLI"){
+   var timers=node(card,"div",undefined,"resetTimes");
+   resetLine(timers,"5시간 초기화",metric(p,"fiveHour").resetAt);
+   resetLine(timers,"주간 초기화",metric(p,"week").resetAt);
+ }else{
+   node(card,"div",m.resetAt?(p.name==="Antigravity"?"Gemini 풀 초기화 ":"초기화 ")+stamp(m.resetAt):"초기화 시각 미확인","reset");
+ }
+ var pills=node(card,"div",undefined,"pills");
+ if(p.plan)node(pills,"span",p.plan+" 요금제","pill");
+ if(p.name==="ElevenLabs"){
+   var em=metric(p,"month");
+   if(known(em.used)&&known(em.limit)){node(pills,"span","사용 "+formatNum(em.used),"pill");node(pills,"span","총 "+formatNum(em.limit),"pill");}
+ }else if(p.name==="Codex CLI"){
+   var five=metric(p,"fiveHour");
+   node(pills,"span","5시간 "+(known(five.usedPercent)?formatPct(five.usedPercent)+" 사용":"미확인"),"pill");
+ }else if(p.name==="Antigravity"){
+   var other=p.thirdPartyPool||{};
+   node(pills,"span","Gemini "+(known((p.geminiPool||{}).remainingPercent)?formatPct(p.geminiPool.remainingPercent)+" 남음":"미확인"),"pill");
+   node(pills,"span","Claude/GPT "+(known(other.remainingPercent)?formatPct(other.remainingPercent)+" 남음":"미확인"),"pill good");
+ }else if(p.name==="Claude Code"){
+   var cf=metric(p,"fiveHour");
+   if(known(cf.usedPercent))node(pills,"span","5시간 "+formatPct(cf.usedPercent)+" 사용","pill");
+   else node(pills,"span","5시간 미확인 · "+quotaReasonLabel((p.quotaWindowStatus||{}).fiveHour),"pill");
+   if(p.authConnected)node(pills,"span","Pro 인증 확인","pill good");
+ }else if(p.name==="Netlify"){
+   node(pills,"span",(p.teams||[]).filter(x=>x.apiConnected).length+"개 팀 API 연결","pill");
+ }
+ var foot=node(card,"footer");
+ var details=node(foot,"details"),summ=node(details,"summary");
+ node(summ,"span","›  자세히 보기");node(summ,"span","›","chevron");
+ var content=node(details,"div",undefined,"details-content");
+ (p.name==="Netlify"||p.name==="Antigravity"?[]:p.name==="ElevenLabs"?[["월간","month"]]:[["5시간","fiveHour"],["주간","week"],["컨텍스트","context"]]).forEach(function(row){
+   var v=metric(p,row[1]);addDetail(content,row[0]+" 사용",known(v.usedPercent)?(v.estimated?"약 ":"")+formatPct(v.usedPercent):"미확인");
+ });
+ if(p.name==="ElevenLabs"){
+   var ec=metric(p,"month");
+   addDetail(content,"사용 / 총한도",formatNum(ec.used)+" / "+formatNum(ec.limit));
+   addDetail(content,"남은 문자",formatNum(ec.remaining));
+ }else if(p.name==="Codex CLI"){
+   var c=metric(p,"context");if(c.estimated)addDetail(content,"컨텍스트 기준","마지막 턴 토큰 추정");
+ }else if(p.name==="Antigravity"){
+   var g=p.geminiPool||{},v=p.thirdPartyPool||{};
+   addDetail(content,"Gemini 모델 풀 잔여",formatPct(g.remainingPercent));
+   addDetail(content,"Claude/GPT 공유 풀 잔여",formatPct(v.remainingPercent));
+   addDetail(content,"Gemini 풀 초기화",stamp(g.resetAt));
+   addDetail(content,"Claude/GPT 풀 초기화",stamp(v.resetAt));
+   addDetail(content,"별도 요청 수 한도","미확인 · 모델 풀과 다른 지표");
+ }else if(p.name==="Netlify"){
+   addDetail(content,"전체 사용 가능 잔액","미확인 · 팀별 공식 Credit balance");
+   addDetail(content,"연결된 팀",String((p.teams||[]).length||p.teamCount||0)+"개");
+   node(content,"div","월간 기본 포함분과 실제 Credit balance는 다릅니다.","note");
+   (p.teams||[]).forEach(function(team){
+     addDetail(content,team.name+" ("+team.plan+")",team.apiConnected?"계정 API 연결됨":"계정 API 미연결");
+     if(known(team.monthlyIncludedRemaining))addDetail(content,"월간 기본 제공분 잔여",formatNum(team.monthlyIncludedRemaining)+" / "+formatNum(team.monthlyIncluded));
+     if(known(team.monthlyUsed))addDetail(content,"월간 사용",formatNum(team.monthlyUsed));
+     if(team.creditObservedAt)addDetail(content,"마지막 팀 API 조회",stamp(team.creditObservedAt));
+     if(!team.dashboardUrl||!team.dashboardUrl.startsWith("https://app.netlify.com/teams/"))return;
+     var links=node(content,"div",undefined,"links");
+     var link=node(links,"a",team.name+" · "+team.plan+" ↗");
+     link.href=team.dashboardUrl;link.target="_blank";link.rel="noopener noreferrer";
+     link.style.cssText="color:#b8f0e0;text-decoration:underline;font-size:13px;padding:7px 0";
+   });
+   var connectNet=node(content,"button","팀별 API 연결 · 관리");
+   connectNet.type="button";connectNet.onclick=openNetlify;
+ }
+ if(p.name==="Claude Code"||p.name==="Codex CLI"){
+   addDetail(content,"5시간 초기화 시각",stamp(metric(p,"fiveHour").resetAt));
+   addDetail(content,"주간 초기화 시각",stamp(metric(p,"week").resetAt));
+ }else if(m.resetAt)addDetail(content,"초기화",stamp(m.resetAt));
+ if(p.name==="Claude Code"){
+   var qc=p.quotaWindowStatus||{};
+   if(!known(metric(p,"fiveHour").usedPercent))addDetail(content,"5시간 미확인 사유",quotaReasonLabel(qc.fiveHour));
+   if(!known(metric(p,"week").usedPercent))addDetail(content,"주간 미확인 사유",quotaReasonLabel(qc.week));
+ }
+ if(p.name==="Claude Code"&&p.rateSource==="claude_usage_cache")addDetail(content,"한도 데이터 출처","Claude Code /usage 저장 기록");
+ addDetail(content,"마지막 기록",stamp(p.observedAt));
+ if(p.note)node(content,"div",p.note,"note");
+ if(p.name==="ElevenLabs"){
+   var actions=node(content,"div",undefined,"links"),btn=node(actions,"button","API 연결 · 관리");
+   btn.type="button";btn.onclick=openEleven;
+ }
+ details.addEventListener("toggle",function(){
+  summ.firstElementChild.textContent=details.open?"⌄  상세 접기":"›  자세히 보기";
+  // Do not force page jumps when expanding or when an automatic refresh redraws this card.
+ });
+ return card;
+}
+function refreshCards(){
+ var cards=$("cards");
+ var opened=new Set(Array.from(cards.querySelectorAll(".card")).filter(c=>c.querySelector("details")?.open).map(c=>c.dataset.provider));
+ cards.replaceChildren();
+ names.forEach(function(name){
+   var p=data.find(x=>x.name===name)||{name:name},card=renderCard(p);
+   if(opened.has(name))card.querySelector("details").open=true;
+   cards.append(card);
+ });
+ current=Math.max(0,Math.min(names.length-1,current));position();
+}
+function countVisible(){return isPhone()?1:matchMedia("(max-width:999px)").matches?2:4}
+function position(){
+ var width=countVisible(),maximum=Math.max(0,names.length-width);
+ current=Math.min(current,maximum);
+ Array.from($("cards").children).forEach((x,i)=>x.classList.toggle("active",i>=current&&i<current+width));
+ $("position").textContent=(current+1)+(width>1?"–"+Math.min(current+width,names.length):"")+" / "+names.length;
+}
+function advance(n){
+ var maximum=Math.max(0,names.length-countVisible());
+ current=(current+n+maximum+1)%(maximum+1);
+ position()
+}
+window.addEventListener("resize",position);
+async function refresh(){
+ $("refresh").disabled=true;
+ try{
+  var token=sessionStorage.getItem("taky_usage_key");
+  var r=await fetch("/api/usage",{cache:"no-store",headers:token?{"X-TAKY-Token":token}:{}});
+  if(r.status===401){$("auth").style.display="block";$("footerStatus").textContent="인증 필요";return}
+  if(!r.ok)throw Error("HTTP "+r.status);
+  $("auth").style.display="none";
+  var result=await r.json();data=Array.isArray(result.providers)?result.providers:[];
+  $("updated").textContent="확인 "+todayTime(result.checkedAt);
+  $("footerStatus").textContent="데이터 확인 "+stamp(result.checkedAt)+" · 실시간 미제공 항목은 추정하지 않습니다.";
+  refreshCards();
+ }catch(e){$("footerStatus").textContent="데이터 조회 실패: "+e.message}
+ finally{$("refresh").disabled=false}
+}
+$("refresh").onclick=refresh;
+$("previous").onclick=()=>advance(-1);$("next").onclick=()=>advance(1);
+$("authForm").onsubmit=function(e){e.preventDefault();sessionStorage.setItem("taky_usage_key",$("accessToken").value);$("accessToken").value="";refresh()};
+var touchX=null;
+$("cards").addEventListener("touchstart",e=>{if(e.touches.length===1)touchX=e.touches[0].clientX},{passive:true});
+$("cards").addEventListener("touchend",e=>{if(touchX===null||!isPhone())return;var dist=e.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(dist)>45)advance(dist<0?1:-1)},{passive:true});
+var keyData=null;
+$("mobileConnect").onclick=async function(){
+ keyData=null;$("mobileUrl").textContent="조회 중";$("mobileKey").textContent="••••••••••••••••";$("mobileDialog").showModal();
+ try{
+  var r=await fetch("/api/local-access",{cache:"no-store"});
+  if(!r.ok)throw Error("접속 정보는 PC에서만 확인할 수 있습니다");
+  keyData=await r.json();$("mobileUrl").textContent=keyData.mobileUrl||"주소 미확인";
+ }catch(e){$("mobileUrl").textContent="PC 로컬 화면에서 열어주세요";$("mobileNotice").textContent=e.message}
+};
+$("closeMobile").onclick=()=>{$("mobileDialog").close();keyData=null};
+$("mobileDialog").addEventListener("close",()=>{$("mobileKey").textContent="••••••••••••••••";keyData=null});
+$("showKey").onclick=()=>{$("mobileKey").textContent=keyData?keyData.accessKey:"PC에서만 확인 가능"};
+async function copy(v){try{if(!v)throw Error("값 없음");await navigator.clipboard.writeText(v);$("mobileNotice").textContent="복사했습니다."}catch(e){$("mobileNotice").textContent="복사 불가. PC에서 직접 확인하세요."}}
+$("copyKey").onclick=()=>copy(keyData&&keyData.accessKey);$("copyUrl").onclick=()=>copy(keyData&&keyData.mobileUrl);
+$("settings").onclick=()=>{$("warning").value=warning;$("settingsDialog").showModal()};
+$("cancelSettings").onclick=()=>$("settingsDialog").close();
+$("saveSettings").onclick=()=>{var x=Number($("warning").value);if(x>=1&&x<=90){warning=x;localStorage.setItem("taky_usage_warn_remaining",x);$("settingsDialog").close();refreshCards()}};
+async function openEleven(){
+ $("elevenKey").value="";
+ var local=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+ $("elevenLocal").hidden=local;$("elevenKey").disabled=!local;$("elevenSave").disabled=!local;$("elevenRemove").disabled=!local;
+ $("elevenState").textContent=local?"확인 중":"PC 로컬 주소에서만 키를 변경할 수 있습니다.";
+ $("elevenDialog").showModal();
+ if(local)try{var r=await fetch("/api/elevenlabs/status",{cache:"no-store"});if(!r.ok)throw Error("상태 확인 실패");var j=await r.json();$("elevenState").textContent=j.connected?"키 연결됨 · 구독 조회 가능":"미연결 · API 키를 입력하세요"}catch(e){$("elevenState").textContent=e.message}
+}
+$("elevenForm").onsubmit=async function(e){
+ e.preventDefault();var key=$("elevenKey").value;$("elevenSave").disabled=true;$("elevenState").textContent="구독 조회 중…";
+ try{var r=await fetch("/api/elevenlabs/connect",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({apiKey:key})});var j=await r.json();if(!r.ok)throw Error(j.status||"조회 실패");$("elevenState").textContent="연결 및 사용량 확인 성공";await refresh()}
+ catch(e){$("elevenState").textContent="연결 실패: "+e.message}
+ finally{$("elevenKey").value="";$("elevenSave").disabled=false}
+};
+$("elevenRemove").onclick=async function(){try{var r=await fetch("/api/elevenlabs/disconnect",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});if(!r.ok)throw Error("해제 실패");$("elevenState").textContent="연결 해제 완료";await refresh()}catch(e){$("elevenState").textContent=e.message}};
+$("closeEleven").onclick=()=>{$("elevenKey").value="";$("elevenDialog").close()};
+$("elevenDialog").addEventListener("close",()=>{$("elevenKey").value=""});
+async function openNetlify(){
+ var local=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+ $("netlifyLocal").hidden=local;
+ $("netlifyKey").value="";
+ $("netlifyKey").disabled=!local;$("netlifySave").disabled=!local;
+ $("netlifyRemove").disabled=!local;
+ $("netlifyDialog").showModal();
+ await netlifyStatus();
+}
+async function netlifyStatus(){
+ var local=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+ if(!local){$("netlifyState").textContent="PC 로컬 주소에서만 설정할 수 있습니다.";return}
+ try{
+  var r=await fetch("/api/netlify/status",{cache:"no-store"});
+  if(!r.ok)throw Error("인증 상태 확인 실패");
+  var data=await r.json(),selected=$("netlifyTeam").value;
+  var team=(data.teams||[]).find(x=>x.slug===selected);
+  $("netlifyState").textContent=team&&team.connected?"이 팀 API 연결됨 · 자동 조회 중":"미연결 · 이 팀의 PAT를 입력하세요";
+ }catch(e){$("netlifyState").textContent=e.message}
+}
+$("netlifyTeam").onchange=netlifyStatus;
+$("netlifyClose").onclick=function(){$("netlifyKey").value="";$("netlifyDialog").close()};
+$("netlifyDialog").addEventListener("close",function(){$("netlifyKey").value=""});
+$("netlifyForm").onsubmit=async function(event){
+ event.preventDefault();
+ var slug=$("netlifyTeam").value,key=$("netlifyKey").value;
+ $("netlifySave").disabled=true;$("netlifyState").textContent="Netlify 계정 조회 중…";
+ try{
+  var r=await fetch("/api/netlify/connect",{method:"POST",
+     headers:{"Content-Type":"application/json"},body:JSON.stringify({slug:slug,apiKey:key})});
+  var reply=await r.json();
+  if(!r.ok)throw Error(reply.status||"API 연결 실패");
+  $("netlifyState").textContent=reply.balanceSource==="MONTHLY_CAPABILITY_ONLY"?
+    "연결 성공 · 월간 기본 포함분 조회됨 (전체 잔액은 별도)":
+    "연결 성공 · 공식 계정 API에 잔여 크레딧 수치 없음";
+  await refresh();
+ }catch(e){$("netlifyState").textContent="연결 실패: "+e.message}
+ finally{$("netlifyKey").value="";$("netlifySave").disabled=false}
+};
+$("netlifyRemove").onclick=async function(){
+ var slug=$("netlifyTeam").value;
+ try{
+  var r=await fetch("/api/netlify/disconnect",{method:"POST",
+     headers:{"Content-Type":"application/json"},body:JSON.stringify({slug:slug})});
+  if(!r.ok)throw Error("연결 해제 실패");
+  $("netlifyKey").value="";
+  $("netlifyState").textContent="이 팀 연결 해제 완료";
+  await refresh();
+ }catch(e){$("netlifyState").textContent=e.message}
+};
+refresh();setInterval(refresh,60000);setInterval(tickCountdown,15000);
+if(new URLSearchParams(location.search).get("elevenlabs")==="1")openEleven();
+if(new URLSearchParams(location.search).get("netlify")==="1")openNetlify();
+})();
+</script>
+</body>
+</html>

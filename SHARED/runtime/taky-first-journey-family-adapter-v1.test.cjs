@@ -1,0 +1,46 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const path=require('node:path');
+(async()=>{
+const world={document:{documentElement:{dataset:{takyCentralAuth:'UNBOUND'}}}};
+world.globalThis=world;
+world.TakyFirstJourneyContractV1=require('./taky-first-journey-contract-v1.js');
+vm.runInNewContext(fs.readFileSync(path.join(__dirname,'taky-first-journey-family-adapter-v1.js'),'utf8'),world,{filename:'taky-first-journey-family-adapter-v1.js'});
+const app=world.TakyFirstJourneyFamilyAdapterV1;
+let n=0;
+async function deny(p,r){await assert.rejects(p,new RegExp(r));n++}
+async function same(a,b){assert.equal(a,b);n++}
+await deny(app.connectVerifiedMember('CHILD_A'),'CENTRAL_AUTH_NOT_BOUND');
+await same(app.state().homeAccess,false);
+world.document.documentElement.dataset.takyCentralAuth='BOUND';
+let session={family_id:'family-alpha',self_member_id:'parent-alpha',authorized_member_ids:['child-alpha']};
+let called=0;
+world.TAKY_FAMILY_RUNTIME={currentSession:async()=>{called++;return session}};
+await deny(app.connectVerifiedMember('child-wrong'),'MEMBER_NOT_AUTHORIZED');
+await app.connectVerifiedMember('child-alpha');
+await same(app.state().step,'CREW_FIRST_MEET');
+await deny(app.homeDecision(),'JOURNEY_NOT_COMPLETE');
+await deny(app.transition('notAllowed'),'METHOD_NOT_ALLOWED');
+await deny(app.transition('nameIsland','wrong step'),'WRONG_STEP');
+for(const id of ['dubi','lori','ink','nova','take','zero'])await app.transition('seeFirstMeet',id);
+await app.transition('finishFirstMeet');
+await app.transition('chooseCrew',['dubi','lori','ink','nova','zero'],'dubi');
+await same(app.state().step,'USER_VISUAL_ID');
+await app.transition('userVisualId',{state:'DEFERRED_NO_COST'});
+await app.transition('packBag',['map']);
+await app.transition('depart','SAIL',{kind:'DEPARTURE_RENDERED',sceneEventId:'test1'});
+await app.transition('discoverIsland',{kind:'ISLAND_SIGHT_RENDERED',sceneEventId:'test2'});
+await app.transition('nameIsland','반짝이는 섬');
+await app.transition('discoverBasecamp',{kind:'BASECAMP_DISCOVERED_RENDERED',sceneEventId:'test3'});
+await app.transition('nameBasecamp','우리 캠프');
+await app.transition('arriveBasecamp',{kind:'BASECAMP_ARRIVED_RENDERED',sceneEventId:'test4'});
+const decision=await app.homeDecision();await same(decision.home,'TAKY_INTEGRATED_LEARNING_HOME');
+await same(app.state().complete,true);
+session={family_id:'family-other',self_member_id:'parent-other',authorized_member_ids:['child-other']};
+await deny(app.homeDecision(),'FAMILY_CHANGED_REAUTH_REQUIRED');
+world.document.documentElement.dataset.takyCentralAuth='UNBOUND';
+await same(app.state().homeAccess,false);
+await deny(app.transition('seeFirstMeet','dubi'),'NOT_BOUND');
+await same(called>10,true);
+console.log(JSON.stringify({pass:true,adapter_assertions:n,live_central_server_calls:0,stub_session_rechecked:called,production_UI_connected:false}));
+})().catch(e=>{console.error(e.stack||e);process.exitCode=1});
