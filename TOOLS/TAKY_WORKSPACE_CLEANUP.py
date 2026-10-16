@@ -215,9 +215,26 @@ def global_custody_gates():
         capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=25)
     if cmd.returncode:
         raise RuntimeError("CURRENT_HISTORY_SOURCE_RECORD_DRIFT:"+cmd.stdout[-250:])
+    dependency_guard=TAKY/"ENFORCEMENT"/"taky_live_app_dependency_guard.py"
+    static=subprocess.run([sys.executable,str(dependency_guard),"--check"],
+        capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=75)
+    if static.returncode:
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_FAILED:"+static.stdout[-1000:]+static.stderr[-250:])
+    source_proof=json.loads(static.stdout)
+    if (source_proof.get("status")!="PASS_STATIC_ONLY"
+        or source_proof.get("apps_checked")!=6
+        or source_proof.get("git_unversioned_count")!=0
+        or source_proof.get("missing_file_count")!=0):
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT")
     return {"canonical_reference_junctions":evidence,
             "source_record_index":"PASS",
             "runtime_code_consumers":runtime_code_consumer_gates(),
+            "runtime_static_dependency_proof":{
+                "status":source_proof["status"],
+                "apps_checked":source_proof["apps_checked"],
+                "source_files_checked":source_proof["source_files_checked"],
+                "binary_assets_or_browser_E2E_approved":False
+            },
             "held_backup_roots_intentionally_not_scanned":True}
 
 def audit():
