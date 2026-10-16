@@ -1,0 +1,426 @@
+{
+  "schema_version": "TAKY_CREW_SCRIPT_TO_VOICE_FAMILY_MAPPING_V1",
+  "status": "SCRIPT_CHARACTER_FAMILY_VOICE_IDS_VERIFIED_AUDIO_NOT_GENERATED",
+  "source": "EXPLORER_CREW_V2_SOURCE_LOCK_20261009_SCRIPT_LOCK_R10",
+  "scopes": {
+    "MAIN_CREW": {
+      "characters": 24,
+      "intents": [
+        "ASK",
+        "HINT",
+        "ACKNOWLEDGE"
+      ],
+      "variants": 2,
+      "expected_count": 144
+    },
+    "PLAY_CAMP": {
+      "characters": 6,
+      "intents": [
+        "ASK",
+        "HINT",
+        "ACKNOWLEDGE"
+      ],
+      "variants": 2,
+      "expected_count": 36,
+      "allowed_character_ids": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ]
+    }
+  },
+  "voice_families": [
+    {
+      "family": "VF01",
+      "characters": [
+        "두비",
+        "벨로",
+        "토토"
+      ],
+      "elevenlabs_voice_id": "bd8mtSEzfm8QW9qAjzUn",
+      "voice_id_verified": true,
+      "provider_display_name": "모험형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "VF02",
+      "characters": [
+        "로리",
+        "피치",
+        "보리"
+      ],
+      "elevenlabs_voice_id": "hijQsYN2uKKuz1VH7GyM",
+      "voice_id_verified": true,
+      "provider_display_name": "다정형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "VF03",
+      "characters": [
+        "잉크",
+        "모카",
+        "마루"
+      ],
+      "elevenlabs_voice_id": "J0K0Val3FwoH2hRaMNTL",
+      "voice_id_verified": true,
+      "provider_display_name": "관찰형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "VF04",
+      "characters": [
+        "테이크",
+        "키로"
+      ],
+      "elevenlabs_voice_id": "fIdibfMomuOQGmNNUHGI",
+      "voice_id_verified": true,
+      "provider_display_name": "리더형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "VF05",
+      "characters": [
+        "노바",
+        "니아",
+        "포포"
+      ],
+      "elevenlabs_voice_id": "r6rEmloF6CPiEqghfppG",
+      "voice_id_verified": true,
+      "provider_display_name": "친화형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "VF06",
+      "characters": [
+        "제로",
+        "솔라",
+        "민트",
+        "루네"
+      ],
+      "elevenlabs_voice_id": "uGheb59by6URhoYnEq6z",
+      "voice_id_verified": true,
+      "provider_display_name": "감성 발견형 탐험대원",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "SP01",
+      "characters": [
+        "린",
+        "제이크"
+      ],
+      "elevenlabs_voice_id": "PjqCMdzjnE1M9F7ncslG",
+      "voice_id_verified": true,
+      "provider_display_name": "리더 전략형 탐험대원(린.제이크)",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "SP02",
+      "characters": [
+        "루미",
+        "셀"
+      ],
+      "elevenlabs_voice_id": "SunYgslLQqu5Rm0LD4CZ",
+      "voice_id_verified": true,
+      "provider_display_name": "지성 감성형 탐험대원(루미.셀)",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    },
+    {
+      "family": "SP03",
+      "characters": [
+        "테스",
+        "비비"
+      ],
+      "elevenlabs_voice_id": "fKpYfpC9nY3nxVmBAtrs",
+      "voice_id_verified": true,
+      "provider_display_name": "활력 창의형 탐험대원(테스.비비)",
+      "verification_evidence": {
+        "provider": "ELEVENLABS",
+        "source_file": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+        "method": "mcp__elevenlabs__creative_list_voices",
+        "category": "generated",
+        "language": "ko",
+        "is_library_voice": false,
+        "retrieved_on": "2026-10-13"
+      }
+    }
+  ],
+  "character_routes": [
+    {
+      "character_id": "01",
+      "character": "두비",
+      "family": "VF01",
+      "elevenlabs_voice_id": "bd8mtSEzfm8QW9qAjzUn",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "02",
+      "character": "로리",
+      "family": "VF02",
+      "elevenlabs_voice_id": "hijQsYN2uKKuz1VH7GyM",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "03",
+      "character": "잉크",
+      "family": "VF03",
+      "elevenlabs_voice_id": "J0K0Val3FwoH2hRaMNTL",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "04",
+      "character": "노바",
+      "family": "VF05",
+      "elevenlabs_voice_id": "r6rEmloF6CPiEqghfppG",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "05",
+      "character": "테이크",
+      "family": "VF04",
+      "elevenlabs_voice_id": "fIdibfMomuOQGmNNUHGI",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "06",
+      "character": "제로",
+      "family": "VF06",
+      "elevenlabs_voice_id": "uGheb59by6URhoYnEq6z",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 6
+    },
+    {
+      "character_id": "07",
+      "character": "솔라",
+      "family": "VF06",
+      "elevenlabs_voice_id": "uGheb59by6URhoYnEq6z",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "08",
+      "character": "벨로",
+      "family": "VF01",
+      "elevenlabs_voice_id": "bd8mtSEzfm8QW9qAjzUn",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "09",
+      "character": "모카",
+      "family": "VF03",
+      "elevenlabs_voice_id": "J0K0Val3FwoH2hRaMNTL",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "10",
+      "character": "니아",
+      "family": "VF05",
+      "elevenlabs_voice_id": "r6rEmloF6CPiEqghfppG",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "11",
+      "character": "키로",
+      "family": "VF04",
+      "elevenlabs_voice_id": "fIdibfMomuOQGmNNUHGI",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "12",
+      "character": "피치",
+      "family": "VF02",
+      "elevenlabs_voice_id": "hijQsYN2uKKuz1VH7GyM",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "13",
+      "character": "민트",
+      "family": "VF06",
+      "elevenlabs_voice_id": "uGheb59by6URhoYnEq6z",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "14",
+      "character": "토토",
+      "family": "VF01",
+      "elevenlabs_voice_id": "bd8mtSEzfm8QW9qAjzUn",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "15",
+      "character": "루네",
+      "family": "VF06",
+      "elevenlabs_voice_id": "uGheb59by6URhoYnEq6z",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "16",
+      "character": "포포",
+      "family": "VF05",
+      "elevenlabs_voice_id": "r6rEmloF6CPiEqghfppG",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "17",
+      "character": "마루",
+      "family": "VF03",
+      "elevenlabs_voice_id": "J0K0Val3FwoH2hRaMNTL",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "18",
+      "character": "보리",
+      "family": "VF02",
+      "elevenlabs_voice_id": "hijQsYN2uKKuz1VH7GyM",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "19",
+      "character": "린",
+      "family": "SP01",
+      "elevenlabs_voice_id": "PjqCMdzjnE1M9F7ncslG",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "20",
+      "character": "루미",
+      "family": "SP02",
+      "elevenlabs_voice_id": "SunYgslLQqu5Rm0LD4CZ",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "21",
+      "character": "테스",
+      "family": "SP03",
+      "elevenlabs_voice_id": "fKpYfpC9nY3nxVmBAtrs",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "22",
+      "character": "셀",
+      "family": "SP02",
+      "elevenlabs_voice_id": "SunYgslLQqu5Rm0LD4CZ",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "23",
+      "character": "제이크",
+      "family": "SP01",
+      "elevenlabs_voice_id": "PjqCMdzjnE1M9F7ncslG",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    },
+    {
+      "character_id": "24",
+      "character": "비비",
+      "family": "SP03",
+      "elevenlabs_voice_id": "fKpYfpC9nY3nxVmBAtrs",
+      "main_script_slots": 6,
+      "playcamp_script_slots": 0
+    }
+  ],
+  "guard": "NO_VOICE_ID_INFERENCE_FROM_OLD_VOICE_BATCHES; NO_GENERATION; SCRIPT_LOCK_UNCHANGED",
+  "provider_voice_evidence": "staging/crew_voice_20261012/PROVIDER_VOICE_LIST_20261013.json",
+  "audio_consumer": {
+    "mode": "PREFER_VERIFIED_APPROVED_MP3_OTHERWISE_OFFLINE_TTS_MOCK_WAV",
+    "script_authority": "staging/crew_voice_20261012/EXPLORER_CREW_PRERECORDING_ROUTING_264.json",
+    "mock_manifest": "staging/crew_voice_20261012/mock_tts/EXPLORER_CREW_TTS_MOCK_MANIFEST_264.json",
+    "mock_preview": "staging/crew_voice_20261012/mock_tts/index.html",
+    "recorded_manifest": "staging/crew_voice_20261012/EXPLORER_CREW_PLAYBACK_MANIFEST.json",
+    "update_script": "SHARED/runtime/update-explorer-crew-voice-assets.cjs",
+    "mock_engine": "Windows SAPI Microsoft Heami Desktop",
+    "mock_files": 264,
+    "provider_approved_recordings": 0,
+    "recording_priority": "EXACT_CHARACTER_ID + EXACT_TEXT_SHA256 + EXACT_VERIFIED_VOICE_ID + APPROVED_AUDIO_SHA256",
+    "group_voice_profiles": "9 speed/pitch profiles on one installed Korean voice, not nine timbres",
+    "production_complete": false,
+    "app_event_consumption_complete": false,
+    "note": "Mock is for direct local preview and future app packaging. Child apps have not yet wired real events."
+  }
+}
