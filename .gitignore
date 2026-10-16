@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 
+# Generated browser-tool snapshots (keep actual tests and source visible)
+/.playwright-mcp/
+
 # Local CLI/test logs and captured stderr
 *.log
 *.err

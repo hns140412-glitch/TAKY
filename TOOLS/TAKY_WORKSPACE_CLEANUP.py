@@ -2,6 +2,7 @@
 
 Run:
  python TAKY_WORKSPACE_CLEANUP.py --audit
+ python TAKY_WORKSPACE_CLEANUP.py --inventory
  python TAKY_WORKSPACE_CLEANUP.py --apply-safe
 
 Apply-safe performs only: backup+prune non-existent Git worktree registrations,
@@ -11,6 +12,7 @@ No Git branches, cloud folders, active collector scripts or live assets removed.
 """
 from __future__ import annotations
 import argparse, datetime, hashlib, json, os, re, shutil, subprocess, sys
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT=Path(r"D:\Git PWA")
@@ -26,6 +28,88 @@ REGISTRY=WB/"00_CONTROL"/"PATH_REGISTRY.json"
 TASKS=WB/"01_BACKLOG_AND_ADOPTION"/"70_EXECUTION_QUEUE"/"TASK_REGISTER.json"
 RECEIPT=WB/"01_BACKLOG_AND_ADOPTION"/"80_EVIDENCE"/"TAKY_CLEANUP_RELOCATION_RECEIPT_20261013.json"
 SNAPSHOT=WB/"90_ARCHIVE"/"GIT_WORKTREE_ADMIN_SNAPSHOTS"/"20261013"
+
+def workspace_inventory():
+    """Git-bounded custody census; equal bytes never authorize removal.
+
+    No recursive filesystem scan, link traversal, external source or Git writes.
+    Include ignored generated outputs separately so ignore rules cannot make
+    them appear physically deleted. Hash only regular Git-visible WIP files.
+    """
+    report={"repositories":{},"duplicate_content_groups":[],
+            "source_owner":str(WB/"REFERENCE"),"deletion_authorized":False}
+    hashes=defaultdict(list)
+    for name in REPOS:
+        repo=ROOT/name
+        if repo.is_symlink() or repo.is_junction() or not repo.is_dir():
+            raise RuntimeError("INVENTORY_ROOT_UNSAFE:"+name)
+        unknown=sorted(set(filter(None,git(repo,"ls-files","--others",
+            "--exclude-standard","-z").split("\0"))))
+        changed=list(filter(None,git(repo,"diff","--name-only","-z","HEAD").split("\0")))
+        # Existing HTML-loaded mock manifest supplies consumer and source-hash
+        # evidence for the largest duplicate group; parse JSON, never execute JS.
+        bindings={}
+        manifest_rel="explorer-crew-voice/data-mock.js"
+        manifest=repo/manifest_rel
+        if name in {"Ready & Set","Hide & Seek","Snap & Pop"}:
+            for candidate in (repo/"index.html",manifest.parent,manifest):
+                if candidate.is_symlink() or candidate.is_junction():
+                    raise RuntimeError("INVENTORY_CONSUMER_LINK_HOLD:"+str(candidate))
+            if manifest_rel in (repo/"index.html").read_text(encoding="utf-8-sig"):
+                body=manifest.read_text(encoding="utf-8-sig")
+                payload=json.loads(body.split("=",1)[1].strip().rstrip(";"))
+                bindings={clip["relative_path"]:clip["wav_sha256"]
+                    for clip in payload["clips"] if clip.get("scope")=="MAIN_CREW"}
+        rows=[]
+        for rel in unknown:
+            parts=Path(rel).parts
+            if Path(rel).is_absolute() or ".." in parts:
+                raise RuntimeError("INVENTORY_INVALID_RELATIVE_PATH:"+rel)
+            path=repo
+            safe=True
+            for part in parts:
+                path=path/part
+                if path.is_symlink() or path.is_junction():
+                    safe=False;break
+            row={"path":rel,"category":"UNKNOWN_HOLD"}
+            if not safe:
+                row["category"]="LINK_HOLD_NOT_READ"
+            elif path.is_file():
+                low=rel.lower()
+                if low.startswith(("audio/","characters/","public/audio/",
+                    "public/characters/","badges/","data/","registry/")):
+                    row["category"]="PROTECTED_ASSET_OR_DATA"
+                elif path.suffix.lower() in {".py",".js",".cjs",".mjs",".ts",
+                    ".tsx",".css",".ps1",".html",".yml",".yaml"}:
+                    row["category"]="SOURCE_OR_TOOL_WIP"
+                elif low.startswith(("artifacts/","c2s/","handoff/","history/")):
+                    row["category"]="PRESERVED_EVIDENCE"
+                row.update(bytes=path.stat().st_size,sha256=sha_file(path))
+                if rel in bindings:
+                    row["consumer"]="index.html -> "+manifest_rel
+                    row["manifest_sha256_matches"]=bindings[rel]==row["sha256"]
+                    if not row["manifest_sha256_matches"]:
+                        row["category"]="LIVE_CONSUMER_HASH_MISMATCH_HOLD"
+                hashes[row["sha256"]].append(name+"/"+rel)
+            else:
+                row["category"]="MISSING_OR_SPECIAL_HOLD"
+            rows.append(row)
+        ignored=list(filter(None,git(repo,"ls-files","--others","--ignored",
+            "--exclude-standard","-z","--","artifacts/",".netlify/",
+            ".playwright-mcp/").split("\0")))
+        report["repositories"][name]={
+            "branch":git(repo,"branch","--show-current").strip(),
+            "head":git(repo,"rev-parse","HEAD").strip(),
+            "remote_refs":git(repo,"for-each-ref","--format=%(refname):%(objectname)",
+                              "refs/remotes").splitlines(),
+            "remote_refs_are_local_cache":True,
+            "modified_paths":changed,"untracked_count":len(rows),
+            "categories":dict(Counter(r["category"] for r in rows)),
+            "preserved_ignored_output_paths":ignored,"files":rows}
+    report["duplicate_content_groups"]=[{"sha256":h,"paths":paths,
+        "disposition":"KEEP_CONSUMER_COPIES_PENDING_OWNER_REBIND"}
+        for h,paths in hashes.items() if len(paths)>1]
+    return report
 
 def git(repo,*args):
     p=subprocess.run(["git","-C",str(repo),*args],capture_output=True,
@@ -391,7 +475,11 @@ def main():
     g=ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--audit",action="store_true")
     g.add_argument("--apply-safe",action="store_true")
+    g.add_argument("--inventory",action="store_true",
+                   help="Read-only nine-repository WIP custody and duplicate census")
     a=ap.parse_args()
+    if a.inventory:
+        print(json.dumps(workspace_inventory(),ensure_ascii=False,indent=2));return 0
     result=audit()
     if a.audit:
         print(json.dumps(result,ensure_ascii=False,indent=2));return 0
