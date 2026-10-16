@@ -38,7 +38,19 @@ def utc():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 def hashbytes(data):
     return hashlib.sha256(data).hexdigest()
+def source_path_is_held(p):
+    """Never open user-held drives or backup trees, including junction targets."""
+    def held(v):
+        s=str(v).replace("/","\\").upper()
+        if s.startswith("\\\\?\\"):s=s[4:]
+        return (s=="G:" or s.startswith("G:\\")
+           or s=="D:\\#. BACKUP" or s.startswith("D:\\#. BACKUP\\"))
+    if held(p):return True
+    try:return held(os.path.realpath(str(p)))
+    except (OSError,ValueError):return True
+
 def file_hash(p):
+    if source_path_is_held(p):raise ValueError("SOURCE_PATH_USER_HOLD_NO_READ")
     h=hashlib.sha256()
     with p.open("rb") as f:
         for b in iter(lambda:f.read(262144),b""):h.update(b)
@@ -314,7 +326,10 @@ def ingest_references(c,doc):
     touched=0;unique=set()
     for x in doc.get("items",[]):
         fp=Path(x["physical_path"] if "physical_path" in x else x["canonical_path"])
-        root=Path(doc["single_physical_root"]).resolve()
+        if source_path_is_held(fp):raise ValueError("REFERENCE_SOURCE_USER_HOLD_NO_READ")
+        root=Path(doc["single_physical_root"])
+        if source_path_is_held(root):raise ValueError("REFERENCE_ROOT_USER_HOLD_NO_READ")
+        root=root.resolve()
         if not fp.resolve().is_relative_to(root):raise ValueError("REFERENCE_OUTSIDE_ROOT")
         if not fp.is_file() or file_hash(fp)!=x["sha256"]:
             raise ValueError("REFERENCE_HASH_MISMATCH:"+x["relative_path"])
@@ -328,6 +343,7 @@ def ingest_references(c,doc):
     return {"file_paths":touched,"unique_sources":len(unique)}
 
 def discover_archive(c,path,limit=15000,allowed_root=ROOT):
+    if source_path_is_held(path):raise ValueError("ARCHIVE_SOURCE_USER_HOLD_NO_READ")
     path=Path(path).resolve()
     if not path.is_dir():return {"state":"NOT_PRESENT","files":0}
     if not path.is_relative_to(Path(allowed_root).resolve()):
@@ -392,6 +408,8 @@ def run_bounded(c,max_items=30,max_hash_bytes=20_000_000):
       JOIN source s ON s.id=l.source_id
       WHERE l.provider='LOCAL_FILE' AND s.original_sha256 IS NULL
       AND s.status!='EXCLUDED_OPERATIONAL'
+      AND UPPER(l.locator) NOT LIKE 'G:%'
+      AND UPPER(l.locator) NOT LIKE 'D:%#. BACKUP%'
       ORDER BY l.size_bytes ASC,l.locator LIMIT ?""",(max_items,)).fetchall()
     hashed=0;spent=0;changed=0;read_error=0
     for row in rows:
@@ -402,6 +420,7 @@ def run_bounded(c,max_items=30,max_hash_bytes=20_000_000):
             continue
         if size>max_hash_bytes-spent:continue
         path=Path(row["locator"])
+        if source_path_is_held(path):continue
         if not path.is_file():read_error+=1;continue
         try:
             before=path.stat()
@@ -420,10 +439,13 @@ def run_bounded(c,max_items=30,max_hash_bytes=20_000_000):
       FROM source s JOIN location l ON s.id=l.source_id
       JOIN stage st ON st.source_id=s.id AND st.stage='EXTRACT'
       WHERE st.state='PENDING' AND l.provider='LOCAL_FILE' AND s.original_sha256 IS NOT NULL
+      AND UPPER(l.locator) NOT LIKE 'G:%'
+      AND UPPER(l.locator) NOT LIKE 'D:%#. BACKUP%'
       GROUP BY s.id ORDER BY l.size_bytes ASC LIMIT ?""",(max_items,)).fetchall()
     indexed=0;await_review=0
     for rec in candidates:
         fp=Path(rec["locator"])
+        if source_path_is_held(fp):continue
         if not fp.is_file():continue
         try:
             if file_hash(fp)!=rec["original_sha256"]:
@@ -483,10 +505,25 @@ def report(c):
         "SELECT stage,state,COUNT(*) AS n FROM stage GROUP BY stage,state")}
     by_origin={r["provider"]:r["n"] for r in c.execute(
         "SELECT provider,COUNT(*) AS n FROM location GROUP BY provider")}
+    held_pending=c.execute("""SELECT COUNT(*) FROM location l
+      JOIN stage st ON st.source_id=l.source_id AND st.stage='EXTRACT'
+      WHERE st.state='PENDING' AND l.provider='LOCAL_FILE'
+      AND (UPPER(l.locator) LIKE 'G:%'
+        OR UPPER(l.locator) LIKE 'D:%#. BACKUP%')""").fetchone()[0]
+    nonheld_pending=c.execute("""SELECT COUNT(DISTINCT s.id) FROM source s
+      JOIN location l ON s.id=l.source_id
+      JOIN stage st ON st.source_id=s.id AND st.stage='EXTRACT'
+      WHERE st.state='PENDING' AND l.provider='LOCAL_FILE'
+        AND s.original_sha256 IS NOT NULL
+        AND UPPER(l.locator) NOT LIKE 'G:%'
+        AND UPPER(l.locator) NOT LIKE 'D:%#. BACKUP%'""").fetchone()[0]
     return {"schema":"TAKY_CENTRAL_SOURCE_FACTORY_STATUS_V1",
       "single_state_db":str(DB),"source_records":source_count,"source_locations":loc_count,
       "origin_locations":by_origin,"source_statuses":stats,"source_roles":roles,
       "stage_states":pending,"authority":"TAKY_CONTROL_PLANE_ONLY",
+      "local_extraction_held_origin_locations":held_pending,
+      "local_extraction_nonheld_pending_sources":nonheld_pending,
+      "user_G_and_D_backup_no_read_enforced":True,
       "stages":["ACQUIRE","VERIFY","EXTRACT","ANALYZE","REVIEW","INDEX","FORMING","LEARNING","CONSUME"],
       "local_model_or_paid_api_calls":0,"hosted_runtime_wired":False,
       "not_ready_claims":["DRIVE_RAW_NOT_DOWNLOADED","FORMING_NOT_AUTO_APPROVED",
