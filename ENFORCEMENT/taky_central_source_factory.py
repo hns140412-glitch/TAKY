@@ -638,6 +638,25 @@ def web_capture_safe_url(url):
         ("fbclid","gclid","mcp_token","source","notrackingcode","trackingcode","session_sync_attempted"))]
     return urlunsplit((u.scheme,u.netloc,u.path,urlencode(qs),""))
 
+def web_capture_verified_partial_recovery(src):
+    """Read a new, independently SHA-verified, *incomplete* public HTML text."""
+    rec=src.get("public_recovery")
+    if not rec:return None
+    if (rec.get("state")!="PARTIAL_PUBLIC_SOURCE_ORIGINAL_TEXT_ACQUIRED_IMAGES_NOT_VERIFIED"
+      or rec.get("verified_images")!=0
+      or rec.get("full_original_visual_completeness") is not False
+      or rec.get("forming_learning_applied") is not False):
+        raise ValueError("WEB_CAPTURE_PARTIAL_RECOVERY_PROVENANCE_DRIFT")
+    proof=rec.get("canonical_hardlinked_files",{}).get("rendered_text",{})
+    fp=Path(proof.get("file_path",""))
+    if (source_path_is_held(fp) or not fp.is_file()
+      or not fp.resolve().is_relative_to(WAREHOUSE.resolve())
+      or not 0<fp.stat().st_size<=MAX_EXTRACT_BYTES):
+        raise ValueError("WEB_CAPTURE_RECOVERED_TEXT_PATH_INVALID")
+    if file_hash(fp)!=proof.get("sha256"):
+        raise ValueError("WEB_CAPTURE_RECOVERED_TEXT_SHA256_MISMATCH")
+    return " ".join(fp.read_text(encoding="utf-8-sig",errors="replace").split())
+
 def lookup_web_capture_sources(keyword,limit=20):
     """One logical result per user-reviewed reference source, not per crawl.
 
@@ -678,7 +697,7 @@ def lookup_web_capture_sources(keyword,limit=20):
         url=web_capture_safe_url(str(src.get("normalized_url") or ""))
         in_title=needle in (title+" "+url+" "+src["source_key"]).casefold()
         state=src.get("source_quality_evidence",{}).get("state")
-        if not in_title and state in ("NO_ACCESSIBLE_TEXT","ACCESS_CHALLENGE_OR_LOGIN_SHELL"):
+        if not in_title and state in ("NO_ACCESSIBLE_TEXT","ACCESS_CHALLENGE_OR_LOGIN_SHELL") and not src.get("public_recovery"):
             continue
         preferred=src["preferred_review_snapshot"]
         folder=Path(preferred)
@@ -687,7 +706,13 @@ def lookup_web_capture_sources(keyword,limit=20):
             raise ValueError("WEB_CAPTURE_SOURCE_PATH_UNRESOLVED")
         rev=next((x for x in src["revisions"] if x["snapshot_dir"]==preferred),None)
         if rev is None:raise ValueError("WEB_CAPTURE_PREFERRED_REVISION_NOT_FOUND")
-        body=web_capture_verified_text(folder,rev)
+        recovered=web_capture_verified_partial_recovery(src)
+        body=recovered or web_capture_verified_text(folder,rev)
+        effective_state=("PARTIAL_PUBLIC_HTML_TEXT_IMAGES_UNVERIFIED" if recovered else state)
+        effective_method=("PUBLIC_20261016_BROWSER_TEXT_SHA256" if recovered
+            else rev.get("review_extract_method","UNINSPECTED"))
+        effective_sha=(src["public_recovery"]["canonical_hardlinked_files"]["rendered_text"]["sha256"]
+            if recovered else rev.get("review_evidence_sha256"))
         pos=body.casefold().find(needle) if body else -1
         if not in_title and pos<0:continue
         snippet=(body[max(0,pos-125):pos+len(needle)+250] if pos>=0
@@ -701,12 +726,20 @@ def lookup_web_capture_sources(keyword,limit=20):
             "category_candidate":src["classification_candidate"],
             "capture_revisions":sum(v["revision_count"] for v in members),
             "preferred_review_snapshot":preferred,
-            "preferred_extract_method":rev.get("review_extract_method","UNINSPECTED"),
-            "preferred_extract_chars":rev.get("review_extract_chars",0),
+            "preferred_extract_method":effective_method,
+            "preferred_extract_chars":len(body or ""),
             "original_extract_excerpt":snippet,
-            "original_evidence_sha256":rev.get("review_evidence_sha256"),
-            "literal_match":"TITLE_ID_OR_URL" if in_title else "HASH_VERIFIED_ORIGINAL_BODY",
-            "source_quality_state":state,
+            "original_evidence_sha256":effective_sha,
+            "literal_match":"TITLE_ID_OR_URL" if in_title else (
+                "HASH_VERIFIED_PARTIAL_PUBLIC_HTML_TEXT" if recovered
+                else "HASH_VERIFIED_ORIGINAL_BODY"),
+            "source_quality_state":effective_state,
+            "historic_capture_quality_state":state,
+            "public_recovery_text_path":(
+                src["public_recovery"]["canonical_hardlinked_files"]["rendered_text"]["file_path"]
+                if recovered else None),
+            "public_recovery_visual_images_unverified":bool(recovered),
+            "supplemental_public_partial_capture_count":int(bool(recovered)),
             "latest_snapshot":src["latest_snapshot"],
             "source_authority":"INDEX_ONLY_NOT_CURRENT_OR_CONTENT_APPROVED",
             "forming_learning_applied":False
