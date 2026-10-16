@@ -74,3 +74,10 @@ Original local TAKY-WORK-OS folder was physically renamed to TAKY_ARCHI GROW on 
 - Google Docs text export snapshots are DERIVED bytes, not complete native originals. Original native Drive file remains accessible by file ID; export snapshot is never promoted to raw-native proof.
 - One catalog: REFERENCE/99_CONTROL/SOURCE_UNIVERSE/TAKY_CENTRAL_SOURCE_FACTORY.sqlite3. Content validation, classification, FORMING/LEARNING, and duplicate/deletion review happen after gathering; none are automatic upon hash match.
 - SOURCE-VAULT continues as active collection/mining executor. It must not grow another physical reference warehouse. No Git push, Netlify deploy, paid API, cloud ACL or file deletion used in this intake.
+
+## 2026-10-16 later HOLD supersession — G: and protected D: backup
+
+- This section supersedes the October 14 historical line that mentioned gathering G: historical reference sources. G:\ is now a user HOLD: do not enumerate, scan, open, read, hash, copy, move, deduplicate, or delete any G: source in current workflows. Previously preserved proofs remain historical records, NOT authorization to resume G: access.
+- D:\#. BACKUP is a separate protected backup source: do not inspect, reclassify, relocate, dedup, or delete its user originals. Do not silently treat this backup as the active WORKBENCH or a cleanup destination.
+- Machine-readable HOLD provenance is the existing WORKBENCH/REFERENCE/99_CONTROL/OLD_LOCATION_CLEANUP_SCOPE_CURRENT.json. No second physical source master is introduced. The existing TAKY central source factory and cleanup execution gates must enforce these holds before source reads.
+- Even on allowed paths, an old-file relocation requires original RAW SHA proof, stable source ID/lineage, real consumer and CURRENT bind checks, and rollback evidence; Git push/merge, Netlify deploy, paid APIs and production content activation remain separately approval-gated.
