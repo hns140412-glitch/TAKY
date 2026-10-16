@@ -80,6 +80,52 @@ def audio_preflight():
     if SOURCE_AUDIO.is_symlink():raise RuntimeError("AUDIO_SOURCE_ALREADY_LINK")
     return {"status":"MOVE_CANDIDATE","source":str(SOURCE_AUDIO),"target":str(TARGET_AUDIO),"sha256":files}
 
+def runtime_code_consumer_gates():
+    """Check that index-loaded executable files exist AND are versioned.
+
+    Approved audio, user content, design images and generated binary packs are
+    deliberately excluded: their release authority is not the Git code tree.
+    """
+    import html
+    result={}
+    for name in ("Ready & Set","Hide & Seek","Snap & Pop",
+                 "Play Camp","SAVEY","TAKY-MOBILE"):
+        repo=ROOT/name
+        index=repo/"index.html"
+        if not index.is_file():raise RuntimeError("APP_INDEX_MISSING:"+name)
+        tracked=set(git(repo,"ls-files","-z").split("\0"))
+        found=set()
+        for hit in re.finditer(
+            r'<(?:script|link)\b[^>]*?\b(?:src|href)\s*=\s*(["\'])(.*?)\1',
+            index.read_text(encoding="utf-8-sig",errors="replace"),
+            re.IGNORECASE|re.DOTALL):
+            url=html.unescape(hit.group(2)).split("?")[0].split("#")[0]
+            if not url or url.startswith(("https:","http:","//","data:","blob:","javascript:","mailto:")):
+                continue
+            if Path(url).suffix.casefold() not in {".js",".mjs",".css",".ts",".tsx"}:
+                continue
+            candidates=(
+                (repo/"public"/url.lstrip("/"),repo/url.lstrip("/"))
+                if url.startswith("/") else
+                (repo/"public"/url,repo/url)
+            )
+            existing=next((x for x in candidates if x.is_file()),None)
+            if existing is None:
+                raise RuntimeError("APP_RUNTIME_CODE_NOT_PRESENT:"+name+":"+url)
+            if existing.resolve().is_relative_to(repo.resolve()) is False:
+                raise RuntimeError("APP_RUNTIME_CODE_ESCAPE:"+name+":"+url)
+            relative=existing.relative_to(repo).as_posix()
+            if relative not in tracked:
+                raise RuntimeError("APP_RUNTIME_CODE_UNVERSIONED:"+name+":"+relative)
+            found.add(relative)
+        dirty=subprocess.run(["git","-C",str(repo),"diff","--quiet","--","index.html"],
+                            timeout=12).returncode!=0
+        result[name]={"direct_runtime_code_files":len(found),
+                      "all_direct_code_git_versioned":True,
+                      "index_html_worktree_modified":dirty,
+                      "runtime_and_binary_release_verified":False}
+    return result
+
 def global_custody_gates():
     """One cross-repository audit of actual consumer authorities, not a test counter."""
     arch=ROOT/"TAKY_ARCHI GROW"
@@ -108,6 +154,7 @@ def global_custody_gates():
         raise RuntimeError("CURRENT_HISTORY_SOURCE_RECORD_DRIFT:"+cmd.stdout[-250:])
     return {"canonical_reference_junctions":evidence,
             "source_record_index":"PASS",
+            "runtime_code_consumers":runtime_code_consumer_gates(),
             "held_backup_roots_intentionally_not_scanned":True}
 
 def audit():
