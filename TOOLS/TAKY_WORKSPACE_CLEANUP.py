@@ -299,27 +299,62 @@ def global_custody_gates():
         capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=25)
     if cmd.returncode:
         raise RuntimeError("CURRENT_HISTORY_SOURCE_RECORD_DRIFT:"+cmd.stdout[-250:])
-    dependency_guard=TAKY/"ENFORCEMENT"/"taky_live_app_dependency_guard.py"
-    static=subprocess.run([sys.executable,str(dependency_guard),"--check"],
-        capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=75)
-    if static.returncode:
-        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_FAILED:"+static.stdout[-1000:]+static.stderr[-250:])
-    source_proof=json.loads(static.stdout)
-    if (source_proof.get("status")!="PASS_STATIC_ONLY"
-        or source_proof.get("apps_checked")!=6
-        or source_proof.get("git_unversioned_count")!=0
-        or source_proof.get("missing_file_count")!=0):
-        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT")
+    proof=static_source_gate()
     return {"canonical_reference_junctions":evidence,
             "source_record_index":"PASS",
             "runtime_code_consumers":runtime_code_consumer_gates(),
-            "runtime_static_dependency_proof":{
-                "status":source_proof["status"],
-                "apps_checked":source_proof["apps_checked"],
-                "source_files_checked":source_proof["source_files_checked"],
-                "binary_assets_or_browser_E2E_approved":False
-            },
+            "runtime_static_dependency_proof":proof,
             "held_backup_roots_intentionally_not_scanned":True}
+
+def run_static_scanner():
+    guard=TAKY/"ENFORCEMENT"/"taky_live_app_dependency_guard.py"
+    p=subprocess.run([sys.executable,str(guard),"--check"],
+        capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=75)
+    return p.returncode,p.stdout,p.stderr
+
+def static_source_gate(runner=None):
+    """Classify the six-app static scanner without hiding its exit-code contract.
+
+    exit 0 + PASS_STATIC_ONLY*            -> static custody pass, HEAD parity seen.
+    exit 3 + WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD with 0 missing/unversioned
+                                          -> dependencies preserved, HEAD replay
+                                             NOT proven (returned as a HOLD).
+    anything else (exit 2, BLOCK, bad JSON, missing/unversioned, app drift)
+                                          -> RuntimeError (ERROR/HOLD, never PASS).
+    """
+    code,out,err=(runner or run_static_scanner)()
+    try:
+        proof=json.loads(out)
+    except (TypeError,ValueError):
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_FAILED:exit="+str(code)
+            +":"+str(out)[-500:]+str(err)[-250:])
+    if not isinstance(proof,dict):
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_FAILED:exit="+str(code)+":NOT_OBJECT")
+    status=proof.get("status")
+    drift=proof.get("head_worktree_source_drift_count") or 0
+    if (proof.get("apps_checked")!=6
+        or proof.get("git_unversioned_count")!=0
+        or proof.get("missing_file_count")!=0):
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT:exit="+str(code)
+            +":status="+str(status))
+    if code==0 and isinstance(status,str) and status.startswith("PASS_STATIC_ONLY") and not drift:
+        replay="PARTIAL_NOT_BROWSER_PROVEN"
+        hold=False
+    elif code==3 and status=="WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD" and drift:
+        replay="HEAD_REPLAY_NOT_PROVEN"
+        hold=True
+    else:
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT:exit="+str(code)
+            +":status="+str(status))
+    return {"scanner_exit_code":code,"status":status,
+            "apps_checked":proof["apps_checked"],
+            "source_files_checked":proof.get("source_files_checked"),
+            "missing_file_count":0,"git_unversioned_count":0,
+            "head_worktree_source_drift_count":drift,
+            "static_dependencies":"STATIC_DEPENDENCIES_PRESERVED",
+            "head_replay":replay,"head_replay_hold":hold,
+            "binary_runtime_ui_verified":False,
+            "binary_assets_or_browser_E2E_approved":False}
 
 def audit():
     report={"schema":"TAKY_WORKSPACE_CLEANUP_RELOCATION_V1",
@@ -334,6 +369,12 @@ def audit():
         report["git_stale"][name]={"registered":len(all_w),"dangling":stale}
     report["audio"]=audio_preflight()
     report["global_custody_gates"]=global_custody_gates()
+    hold=report["global_custody_gates"]["runtime_static_dependency_proof"]["head_replay_hold"]
+    report["custody_status"]=("PARTIAL_CUSTODY_HOLD" if hold
+                              else "STATIC_CUSTODY_PASS_NOT_COMPLETE")
+    report["source_gate_hold"]=hold
+    report["production_ready"]=False
+    report["deployment_allowed"]=False
     for p in EMPTY:
         report["empty_candidates"].append({"path":str(p),"present":p.is_dir(),
               "empty":p.is_dir() and not any(p.iterdir())})
@@ -480,14 +521,34 @@ def main():
     a=ap.parse_args()
     if a.inventory:
         print(json.dumps(workspace_inventory(),ensure_ascii=False,indent=2));return 0
-    result=audit()
+    try:
+        result=audit()
+    except RuntimeError as exc:
+        # Fatal custody breakage is a structured ERROR/HOLD, never PASS; no mutation yet.
+        print(json.dumps({"status":"ERROR_HOLD","reason":str(exc),
+            "global_cleanup_complete":False,"production_ready":False,
+            "deployment_allowed":False,"mutation_performed":False},ensure_ascii=False))
+        return 2
     if a.audit:
         print(json.dumps(result,ensure_ascii=False,indent=2));return 0
+    converged=(all(not x["dangling"] for x in result["git_stale"].values())
+        and result["audio"]["status"]=="ALREADY_MOVED"
+        and all(not x["present"] for x in result["empty_candidates"]))
+    if result["source_gate_hold"]:
+        # Fail closed before any mutation; a converged no-op is reported
+        # separately and never implies global completion.
+        print(json.dumps({"status":"HOLD_SOURCE_GATE_NO_MUTATION",
+          "custody_status":result["custody_status"],
+          "historical_convergence_noop":converged,
+          "global_cleanup_complete":False,"production_ready":False,
+          "deployment_allowed":False,
+          "global_custody_gates":result["global_custody_gates"],
+          "paths_moved":0,"git_worktree_metadata_pruned":0,
+          "existing_registry_rewritten":False,"receipt_written":False},ensure_ascii=False))
+        return 3
     # Idempotent: converged workspaces must not re-run historical migrations or
     # overwrite up-to-date CURRENT registries with retired stage-1 defaults.
-    if (all(not x["dangling"] for x in result["git_stale"].values())
-        and result["audio"]["status"]=="ALREADY_MOVED"
-        and all(not x["present"] for x in result["empty_candidates"])):
+    if converged:
         print(json.dumps({"status":"ALREADY_CONVERGED_NO_MUTATION",
           "completion_scope":result["completion_scope"],
           "global_cleanup_complete":False,
