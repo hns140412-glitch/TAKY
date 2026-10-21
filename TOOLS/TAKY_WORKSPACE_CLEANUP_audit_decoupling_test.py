@@ -11,10 +11,13 @@ spec = importlib.util.spec_from_file_location(
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
 
-def scan(status, missing=0, unver=0, drift=0, apps=6):
+def scan(status, missing=0, unver=0, drift=0, apps=6, amiss=0, aunver=0, achecked=289):
     return json.dumps({"status": status, "apps_checked": apps, "source_files_checked": 320,
                        "missing_file_count": missing, "git_unversioned_count": unver,
-                       "head_worktree_source_drift_count": drift})
+                       "head_worktree_source_drift_count": drift,
+                       "runtime_asset_files_checked": achecked,
+                       "runtime_asset_missing_count": amiss,
+                       "runtime_asset_git_unversioned_count": aunver})
 
 def gate(code, out, err=""):
     return m.static_source_gate(lambda: (code, out, err))
@@ -37,6 +40,15 @@ assert g["head_replay_hold"] is True and g["head_replay"] == "HEAD_REPLAY_NOT_PR
 assert g["static_dependencies"] == "STATIC_DEPENDENCIES_PRESERVED"
 assert g["head_worktree_source_drift_count"] == 62 and g["source_files_checked"] == 320
 
+# 2b. exit 2 BLOCK solely from unversioned runtime assets -> structured ASSET hold,
+# source drift (68) and asset unversioned (66) stay separate counters.
+g = gate(2, scan("BLOCK", drift=68, aunver=66))
+assert g["runtime_asset_gate_hold"] is True and g["head_replay_hold"] is True, g
+assert g["head_worktree_source_drift_count"] == 68 and g["runtime_asset_git_unversioned_count"] == 66
+assert g["runtime_asset_missing_count"] == 0 and g["binary_runtime_ui_verified"] is False
+g = gate(2, scan("BLOCK", aunver=66))  # asset-only, no source drift
+assert g["runtime_asset_gate_hold"] is True and g["head_replay_hold"] is False, g
+
 # 3. fatal data stays ERROR, never PASS/HOLD.
 bad = [
     (2, scan("BLOCK", missing=1)),
@@ -48,14 +60,39 @@ bad = [
     (0, scan("WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD", drift=62)),  # exit/status mismatch
     (0, scan("PASS_STATIC_ONLY", drift=3)),                        # pass but drift
     (2, "not json"), (3, ""), (0, "[]"),
+    (2, scan("BLOCK", aunver=66, amiss=1)),                        # missing asset + unversioned
+    (2, scan("BLOCK", amiss=1)),                                   # runtime asset missing
+    (2, scan("BLOCK", drift=68, aunver=66, unver=1)),              # code dependency untracked
+    (2, scan("BLOCK", drift=68, aunver=66, missing=1)),            # code dependency missing
+    (2, scan("BLOCK", drift=68)),                                  # BLOCK with no asset cause
+    (2, scan("BLOCK", drift=68, aunver=66, apps=5)),
+    (2, scan("PASS_STATIC_ONLY", aunver=66)),                      # status/exit mismatch
+    (3, scan("WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD", drift=62, aunver=1)),
+    (0, scan("PASS_STATIC_ONLY", aunver=1)),
+    (2, json.dumps({"status": "BLOCK", "apps_checked": 6, "missing_file_count": 0,
+                    "git_unversioned_count": 0, "head_worktree_source_drift_count": 68})),  # no asset proof
+    (2, json.dumps({"status": "BLOCK", "apps_checked": 6, "missing_file_count": 0,
+                    "git_unversioned_count": 0, "head_worktree_source_drift_count": 68,
+                    "runtime_asset_files_checked": 289, "runtime_asset_missing_count": 0,
+                    "runtime_asset_git_unversioned_count": "66"})),                         # malformed
 ]
 for code, out in bad:
     assert raises(lambda: gate(code, out)).startswith("APP_STATIC_TRANSITIVE_SOURCE_GATE"), (code, out)
 
 # 4. main(): --audit / --apply-safe contract with mocked audit and mutators.
-def fake_audit(hold, converged=True):
-    proof = gate(3, scan("WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD", drift=62)) if hold \
+def fake_audit(hold, converged=True, asset=False):
+    if asset:
+        hold = True
+        proof = gate(2, scan("BLOCK", drift=68, aunver=66))
+    else:
+        proof = _fake_proof(hold)
+    return _fake_report(hold, converged, proof)
+
+def _fake_proof(hold):
+    return gate(3, scan("WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD", drift=62)) if hold \
         else gate(0, scan("PASS_STATIC_ONLY"))
+
+def _fake_report(hold, converged, proof):
     return {"mode": "READONLY", "global_cleanup_complete": False,
             "completion_scope": "HISTORICAL_RELOCATION_CHECKS_ONLY",
             "git_stale": {"X": {"registered": 1, "dangling": [] if converged else [{"path": "p"}]}},
@@ -63,6 +100,12 @@ def fake_audit(hold, converged=True):
             "empty_candidates": [{"present": False}],
             "global_custody_gates": {"runtime_static_dependency_proof": proof},
             "custody_status": "PARTIAL_CUSTODY_HOLD" if hold else "STATIC_CUSTODY_PASS_NOT_COMPLETE",
+            "custody_hold_classes": {
+                "source_head_drift": {"hold": proof["head_replay_hold"],
+                                      "count": proof["head_worktree_source_drift_count"]},
+                "runtime_asset_git_unversioned": {
+                    "hold": proof["runtime_asset_gate_hold"],
+                    "count": proof["runtime_asset_git_unversioned_count"]}},
             "source_gate_hold": hold}
 
 mutations = []
@@ -100,6 +143,19 @@ for conv in (True, False):
 # apply-safe on clean converged gate -> idempotent no-op, still not global completion.
 rc, out = run("--apply-safe", lambda: fake_audit(False))
 assert rc == 0 and out["status"] == "ALREADY_CONVERGED_NO_MUTATION" and out["global_cleanup_complete"] is False
+
+# asset-gate hold: --audit exit 0 with distinct classes; --apply-safe fail-closed.
+rc, out = run("--audit", lambda: fake_audit(True, asset=True))
+c = out["custody_hold_classes"]
+assert rc == 0 and out["custody_status"] == "PARTIAL_CUSTODY_HOLD" and out["global_cleanup_complete"] is False
+assert c["source_head_drift"]["count"] == 68 and c["runtime_asset_git_unversioned"]["count"] == 66
+assert c["runtime_asset_git_unversioned"]["hold"] is True
+for conv in (True, False):
+    rc, out = run("--apply-safe", lambda c=conv: fake_audit(True, c, asset=True))
+    assert rc == 3 and out["status"] == "HOLD_SOURCE_GATE_NO_MUTATION", out
+    assert out["custody_hold_classes"]["runtime_asset_git_unversioned"]["count"] == 66
+    assert out["paths_moved"] == 0 and out["receipt_written"] is False
+    assert out["global_cleanup_complete"] is False and out["deployment_allowed"] is False
 
 # fatal audit failure -> structured ERROR_HOLD in both modes, exit non-zero, no mutation.
 def fatal():

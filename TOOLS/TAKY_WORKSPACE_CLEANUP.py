@@ -319,7 +319,11 @@ def static_source_gate(runner=None):
     exit 3 + WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD with 0 missing/unversioned
                                           -> dependencies preserved, HEAD replay
                                              NOT proven (returned as a HOLD).
-    anything else (exit 2, BLOCK, bad JSON, missing/unversioned, app drift)
+    exit 2 + BLOCK caused ONLY by Git-unversioned runtime assets (source missing=0,
+    source unversioned=0, runtime asset missing=0, unversioned>0)
+                                          -> READONLY ASSET_GATE_HOLD (structured, kept
+                                             distinct from source HEAD drift; no PASS).
+    anything else (missing source/asset, unversioned code, bad JSON, missing counters)
                                           -> RuntimeError (ERROR/HOLD, never PASS).
     """
     code,out,err=(runner or run_static_scanner)()
@@ -332,12 +336,29 @@ def static_source_gate(runner=None):
         raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_FAILED:exit="+str(code)+":NOT_OBJECT")
     status=proof.get("status")
     drift=proof.get("head_worktree_source_drift_count") or 0
+    asset_checked=proof.get("runtime_asset_files_checked")
+    asset_missing=proof.get("runtime_asset_missing_count")
+    asset_unver=proof.get("runtime_asset_git_unversioned_count")
+    for n in (asset_checked,asset_missing,asset_unver,drift):
+        if not isinstance(n,int) or isinstance(n,bool) or n<0:
+            raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT:exit="+str(code)
+                +":status="+str(status)+":RUNTIME_ASSET_PROOF_MALFORMED")
     if (proof.get("apps_checked")!=6
         or proof.get("git_unversioned_count")!=0
         or proof.get("missing_file_count")!=0):
         raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT:exit="+str(code)
             +":status="+str(status))
-    if code==0 and isinstance(status,str) and status.startswith("PASS_STATIC_ONLY") and not drift:
+    asset_hold=False
+    if code==2 and status=="BLOCK" and asset_missing==0 and asset_unver>0:
+        # Only Git custody of runtime assets blocks; source HEAD drift (if any) is
+        # reported independently and neither condition is promoted to PASS.
+        replay="HEAD_REPLAY_NOT_PROVEN" if drift else "PARTIAL_NOT_BROWSER_PROVEN"
+        hold=bool(drift)
+        asset_hold=True
+    elif asset_missing or asset_unver:
+        raise RuntimeError("APP_STATIC_TRANSITIVE_SOURCE_GATE_DRIFT:exit="+str(code)
+            +":status="+str(status)+":RUNTIME_ASSET_CUSTODY")
+    elif code==0 and isinstance(status,str) and status.startswith("PASS_STATIC_ONLY") and not drift:
         replay="PARTIAL_NOT_BROWSER_PROVEN"
         hold=False
     elif code==3 and status=="WORKTREE_STATIC_PASS_HEAD_REPLAY_HOLD" and drift:
@@ -351,6 +372,10 @@ def static_source_gate(runner=None):
             "source_files_checked":proof.get("source_files_checked"),
             "missing_file_count":0,"git_unversioned_count":0,
             "head_worktree_source_drift_count":drift,
+            "runtime_asset_files_checked":asset_checked,
+            "runtime_asset_missing_count":0,
+            "runtime_asset_git_unversioned_count":asset_unver,
+            "runtime_asset_gate_hold":asset_hold,
             "static_dependencies":"STATIC_DEPENDENCIES_PRESERVED",
             "head_replay":replay,"head_replay_hold":hold,
             "binary_runtime_ui_verified":False,
@@ -369,10 +394,21 @@ def audit():
         report["git_stale"][name]={"registered":len(all_w),"dangling":stale}
     report["audio"]=audio_preflight()
     report["global_custody_gates"]=global_custody_gates()
-    hold=report["global_custody_gates"]["runtime_static_dependency_proof"]["head_replay_hold"]
+    proof=report["global_custody_gates"]["runtime_static_dependency_proof"]
+    head_hold=proof["head_replay_hold"]
+    asset_hold=proof["runtime_asset_gate_hold"]
+    hold=head_hold or asset_hold
     report["custody_status"]=("PARTIAL_CUSTODY_HOLD" if hold
                               else "STATIC_CUSTODY_PASS_NOT_COMPLETE")
     report["source_gate_hold"]=hold
+    report["custody_hold_classes"]={
+        "source_head_drift":{"hold":head_hold,
+            "count":proof["head_worktree_source_drift_count"]},
+        "runtime_asset_git_unversioned":{"hold":asset_hold,
+            "status":"ASSET_GATE_HOLD" if asset_hold else "CLEAR",
+            "count":proof["runtime_asset_git_unversioned_count"],
+            "missing_count":proof["runtime_asset_missing_count"]},
+        "essential_assets_must_not_be_deleted":True}
     report["production_ready"]=False
     report["deployment_allowed"]=False
     for p in EMPTY:
@@ -540,6 +576,7 @@ def main():
         print(json.dumps({"status":"HOLD_SOURCE_GATE_NO_MUTATION",
           "custody_status":result["custody_status"],
           "historical_convergence_noop":converged,
+          "custody_hold_classes":result["custody_hold_classes"],
           "global_cleanup_complete":False,"production_ready":False,
           "deployment_allowed":False,
           "global_custody_gates":result["global_custody_gates"],
