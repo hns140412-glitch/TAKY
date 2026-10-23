@@ -6,6 +6,11 @@ from pathlib import Path
 import re
 import sys
 
+# Claude Code reads hook stdout as UTF-8. Windows redirected Python stdout
+# otherwise inherits a legacy code page and corrupts Korean user corrections.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 raw_stdin = sys.stdin.buffer.read()
 data = json.loads(raw_stdin.decode("utf-8-sig", errors="replace")) if raw_stdin else {}
 event = data.get("hook_event_name", "")
@@ -179,6 +184,34 @@ if event == "SessionStart":
     skill_dir = root / ".claude" / "skills"
     if skill_dir.exists() and len(list(skill_dir.glob("netlify-*"))) > 1:
         msg += " REGRESSION WARNING: multiple Netlify auto-skills reappeared; route through netlify-router and archive extras."
+    # Cross-session, project-scoped failure fingerprints; data only, never CURRENT authority.
+    try:
+        origin_cwd = str(data.get("cwd") or "")
+        if origin_cwd:
+            from failure_regression_bridge import recall_project_failures, format_project_failure_recall
+            project_hash = hashlib.sha256(
+                origin_cwd.replace("\\", "/").lower().encode("utf-8", "ignore")
+            ).hexdigest()[:16]
+            ledger = Path(os.environ.get("TAKY_FAILURE_LEDGER") or
+                          (Path.home() / ".claude" / "taky" / "failure-learning.jsonl"))
+            lessons = format_project_failure_recall(recall_project_failures(ledger, project_hash))
+            if lessons:
+                msg += "\n" + lessons
+            # Reuse existing C2S event journals; records are candidate data, not owner rules.
+            repo_root = Path(__file__).resolve().parents[2]
+            if Path(origin_cwd).resolve().is_relative_to(repo_root):
+                from failure_regression_bridge import (
+                    recall_user_corrections, format_user_correction_recall
+                )
+                history_dir = Path(os.environ.get("TAKY_CONVERSATION_HISTORY_DIR") or
+                                   r"F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\04_HISTORY")
+                corrections = format_user_correction_recall(
+                    recall_user_corrections(history_dir, "TAKY_SYSTEMWIDE")
+                )
+                if corrections:
+                    msg += "\n" + corrections
+    except Exception:
+        pass
     print(msg)
     sys.exit(0)
 
@@ -266,7 +299,18 @@ except Exception:
 
 protected_authority_paths = ["/taky.md", "/master/", "/.claude/settings", "/.mcp.json", "/.claude/hooks/", "/agents.md", "/claude.md"]
 
-if tool in {"Edit", "Write", "MultiEdit", "NotebookEdit"}:
+# Claude MCP calls are also tool invocations, not automatically trusted.
+# Treat a connected Desktop Commander file edit like a native Edit/Write;
+# otherwise protected authority files can be changed by changing tool names.
+remote_desktop_tool = tool.lower().startswith("mcp__remote_desktop_commander__")
+remote_mutation = remote_desktop_tool and any(
+    tool.lower().endswith("__" + operation)
+    for operation in ("write_file", "edit_block", "move_file", "delete_file")
+)
+remote_read = remote_desktop_tool and tool.lower().endswith("__read_file")
+remote_shell = remote_desktop_tool and tool.lower().endswith("__start_process")
+
+if tool in {"Edit", "Write", "MultiEdit", "NotebookEdit"} or remote_mutation:
     if "/.git/" in path or path.endswith("/.git"):
         decide("deny", "TAKY hard gate: direct edits inside .git are prohibited.")
     if any(x in path for x in ["/.env", "credentials", "secret", "token.json"]):
@@ -274,7 +318,7 @@ if tool in {"Edit", "Write", "MultiEdit", "NotebookEdit"}:
     if any(x in path for x in protected_authority_paths):
         decide("ask", "TAKY authority/config change: user approval is required before modifying this file.")
 
-if tool in {"Read", "Grep"} and any(x in path for x in ["/.env", "credentials", "secret", "token.json", "/.ssh/", "/.aws/"]):
+if (tool in {"Read", "Grep"} or remote_read) and any(x in path for x in ["/.env", "credentials", "secret", "token.json", "/.ssh/", "/.aws/"]):
     decide("ask", "TAKY secret-read gate: explicit user approval is required before reading credential or secret material.")
 
 command = str(tool_input.get("command") or tool_input.get("cmd") or "")
@@ -282,7 +326,7 @@ haystack = (tool + " " + command + " " + json.dumps(tool_input, ensure_ascii=Fal
 command_lower = command.lower()
 command_path_text = command_lower.replace("\\", "/")
 
-if tool in {"Bash", "PowerShell"}:
+if tool in {"Bash", "PowerShell"} or remote_shell:
     protected_shell_markers = [
         "taky.md", "agents.md", "claude.md", ".mcp.json",
         ".claude/settings", ".claude/hooks/", "master/",
@@ -309,9 +353,20 @@ if tool in {"Bash", "PowerShell"}:
         if shell_compound_or_expansion or not recognized_single_read:
             decide("ask", "TAKY authority/config shell gate: protected governance/config reads must be a single read-only command with no chaining, redirection, pipeline, or command substitution; explicit user approval is required otherwise.")
 
+# Guard the real Git subcommand even when -C/-c/global options precede it.
+# Pull/rebase/cherry-pick can merge or rewrite local history without saying "merge".
+sensitive_git_command = (
+    r"\bgit(?:\.exe)?(?:\s+(?:-C|-c|--git-dir|--work-tree)\s+"
+    r"(?:'[^']+'|\"[^\"]+\"|\S+)|\s+--no-pager)*"
+    r"\s+(?:push|pull|merge|rebase|cherry-pick)\b"
+)
+if (tool in {"Bash", "PowerShell"} or remote_shell) and re.search(sensitive_git_command, command, re.I | re.S):
+    decide("ask", "TAKY Git operation approval gate: push, pull/merge, rebase and cherry-pick require explicit user approval.")
+
 ask_patterns = [
     r"\bgit\s+push\b", r"\bgh\s+pr\s+merge\b", r"\bgh\s+release\s+create\b",
-    r"\bnetlify\s+deploy\b.*--prod", r"\bnetlify\s+deploy\b.*\bprod\b",
+    r"\bnetlify\s+deploy\b",
+    r"\bnetlify\s+(?:sites?:create|sites?:delete|env:set|env:unset)\b",
     r"\bnpm\s+publish\b", r"\bgit\s+reset\s+--hard\b", r"\bgit\s+clean\s+-[^\s]*f",
     r"\bgit\s+branch\s+-d\b", r"\brm\s+-rf\b", r"\bremove-item\b.*-recurse.*-force",
     r"\bopenai\s+", r"api\.openai\.com", r"api\.anthropic\.com",
@@ -326,8 +381,8 @@ if any(re.search(p, haystack, re.I | re.S) for p in ask_patterns):
 if "netlify" in tool.lower() and any(x in haystack for x in ["deploy", "publish", "production", "prod"]):
     decide("ask", "TAKY deploy gate: Netlify production/publish actions require explicit user approval.")
 
-if "github" in tool.lower() and any(x in haystack for x in ["merge", "delete", "release", "force"]):
-    decide("ask", "TAKY GitHub gate: merge/delete/release/force actions require explicit user approval.")
+if "github" in tool.lower() and any(x in haystack for x in ["push", "merge", "delete", "release", "force"]):
+    decide("ask", "TAKY GitHub gate: push/merge/delete/release/force actions require explicit user approval.")
 
 if tool.lower() in {"mcp__scenario__model_run", "mcp__scenario__workflow_run",
                     "mcp__scenario__scenario_tool_execute_write", "mcp__scenario__scenario_tool_execute_delete"}:
@@ -340,7 +395,7 @@ if tool.lower().startswith("mcp__"):
     mcp_control_text = (tool + " " + " ".join(control_values)).lower()
     high_impact_terms = [
         "delete", "trash", "purge", "remove_member", "revoke", "share", "permission",
-        "invite", "publish", "deploy", "release", "merge", "force", "send_email",
+        "invite", "publish", "deploy", "release", "push", "merge", "force", "send_email",
         "send_message", "post_message", "account", "credential", "secret", "billing", "payment"
     ]
     if any(term in mcp_control_text for term in high_impact_terms):
