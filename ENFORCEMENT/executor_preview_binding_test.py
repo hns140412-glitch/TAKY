@@ -126,6 +126,27 @@ class PreviewBindingTests(unittest.TestCase):
         self.assertEqual(outcome["next_action"], "AWAIT_HUMAN_APPROVAL")
         self.assertFalse(outcome["external_executor_invocation_verified"])
 
+    def test_independent_evidence_hold_is_not_misreported_as_rework(self):
+        from unittest.mock import patch
+        from executor_cycle import run
+        envelope, reply = self.make_executor_return()
+        pending = {
+            "pass": False, "review_decision": "HOLD",
+            "state_transition": {"current_state": "TAKY_REVIEW", "requested_state": "TAKY_REVIEW"},
+            "defects": [], "holds": [{"code": "REVIEWER_IDENTITY_UNAUTHENTICATED"}],
+            "acceptance_delta": [], "evidence": []
+        }
+        with patch("executor_cycle.review", return_value=pending), \
+             patch("executor_cycle.transition") as transition_mock:
+            outcome = run(envelope, reply, self.root)
+            transition_mock.assert_not_called()
+        self.assertFalse(outcome["pass"])
+        self.assertEqual(outcome["stage"], "REVIEW_HOLD")
+        self.assertIsNone(outcome["transition"])
+        self.assertEqual(outcome["next_action"], "RECOVER_INDEPENDENT_EVIDENCE")
+        self.assertFalse(outcome["recovery_plan"]["stop_entire_task"])
+        self.assertEqual(outcome["recovery_plan"]["next_owner"], "ORCHESTRATOR")
+
     def test_tamper_flows_to_rework_in_full_executor_cycle(self):
         from executor_cycle import run
         envelope, reply = self.make_executor_return()
@@ -187,6 +208,37 @@ class PreviewBindingTests(unittest.TestCase):
         self.assertIn("LOCAL_RESULT_INSPECTION", out["comment"])
         self.assertIn('"goal_complete": false', out["comment"])
         self.assertIn('"validated_result_pass": false', out["comment"])
+
+    def test_queue_distinguishes_review_hold_from_rework_or_success(self):
+        import json
+        from unittest.mock import patch
+        from executor_transport import build_envelope
+        from github_issue_executor_queue import issue_payload, BEGIN_RESULT, END_RESULT
+        from github_queue_consumer import consume
+        env = build_envelope(self.task, transport="GITHUB_ISSUE_QUEUE")["dispatch_envelope"]
+        result = {
+            "task_id": self.task["task_id"],
+            "provider": "CODEX",
+            "task_contract_sha256": env["task_contract_sha256"],
+            "completion_report": self.report,
+        }
+        event = {
+            "_event_name": "issue_comment",
+            "issue": issue_payload(env)["issue"],
+            "comment": {"body": BEGIN_RESULT + "\n" + json.dumps(result) + "\n" + END_RESULT,
+                        "author": {"login": "github-actions[bot]"}},
+        }
+        hold = {"pass": False, "review": {"review_decision": "HOLD"},
+                "next_action": "RECOVER_INDEPENDENT_EVIDENCE",
+                "detected": [{"code": "REVIEWER_IDENTITY_UNAUTHENTICATED"}],
+                "transition": None, "recovery_plan": {"stop_entire_task": False}}
+        with patch("github_queue_consumer.run_executor_cycle", return_value=hold):
+            out = consume(event)
+        self.assertEqual(out["action"], "RESULT_REVIEW_HOLD")
+        self.assertTrue(out["pass"])  # The queue message is routed, not the task approved.
+        self.assertIn('"validated_result_pass": false', out["comment"])
+        self.assertIn('"goal_complete": false', out["comment"])
+        self.assertIn("RECOVER_INDEPENDENT_EVIDENCE", out["comment"])
 
     def test_cli_returns_failure_when_report_needs_rework(self):
         import contextlib

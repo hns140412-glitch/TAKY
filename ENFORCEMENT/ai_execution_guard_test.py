@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 import unittest
+import hashlib
+import tempfile
+from pathlib import Path
 from ai_execution_guard import validate_ai_execution
+from taky_gate import validate_record
 
 class AILearningExecutionGuardTest(unittest.TestCase):
     def test_adoption_requires_capability_and_checks(self):
@@ -57,6 +61,59 @@ class AILearningExecutionGuardTest(unittest.TestCase):
         self.assertEqual(validate_ai_execution(good),[])
         good["ai_computer_use_guard"]["metadata_first_used"]=False
         self.assertIn("AI_COMPUTER_USE_GUARD_MISSING",validate_ai_execution(good))
+
+    def test_ui_done_rejects_fake_image_and_untrusted_reports(self):
+        with tempfile.TemporaryDirectory(prefix="taky-ui-completion-") as root:
+            directory = Path(root)
+            def artifact(name):
+                path = directory / name
+                path.write_bytes(("proof:" + name).encode("utf-8"))
+                return {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+            evidence = {
+                "viewport": {"width": 390, "height": 844},
+                "reference": {
+                    "approved_id": "approved-sample",
+                    "reference_file": artifact("approved.png"),
+                    "approval_record": artifact("approval.json"),
+                },
+                "visual": {
+                    "rendered_screenshot": artifact("rendered.png"),
+                    "comparison_report": artifact("visual-diff.json"),
+                    "passed": True,
+                    "layout_compared": True,
+                    "color_compared": True,
+                    "approved_assets_compared": True,
+                },
+                "interaction_report": artifact("interaction.json"),
+                "data_binding_report": artifact("data-binding.json"),
+                "regression_report": artifact("regression.json"),
+                "intent_acceptance_report": artifact("acceptance.json"),
+                "interaction_passed": True,
+                "data_binding_passed": True,
+                "regression_passed": True,
+                "intent_acceptance_passed": True,
+            }
+            claim = {"ui_implementation_done_claimed": True, "ui_completion_evidence": evidence}
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_ai_execution(claim))
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(claim))
+            inferred = {"deliverable_type": "UI_SCREEN", "status": "DONE"}
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(inferred))
+            inferred["ui_completion_evidence"] = evidence
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(inferred))
+            evidence["visual"]["color_compared"] = False
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(claim))
+            evidence["visual"]["color_compared"] = True
+            path = Path(evidence["visual"]["rendered_screenshot"]["path"])
+            path.write_bytes(b"changed after evidence receipt")
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(claim))
+            path.write_bytes(b"proof:rendered.png")
+            evidence["regression_report"] = evidence["interaction_report"]
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(claim))
+            evidence["regression_report"] = artifact("regression.json")
+            evidence["data_binding_passed"] = False
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_record(claim))
+            evidence["data_binding_passed"] = True
+            self.assertIn("AI_UI_COMPLETION_EVIDENCE_MISSING", validate_ai_execution(claim))
 
 if __name__=="__main__":
     unittest.main()

@@ -137,7 +137,9 @@ def consume(event: dict) -> dict:
         cycle = run_executor_cycle(envelope, result)
         decision = ((cycle.get("review") or {}).get("review_decision"))
         kind = "RESULT_TO_HUMAN_APPROVAL" if decision == "HUMAN_APPROVAL" else (
-            "RESULT_TO_REWORK" if decision == "REWORK" else "RESULT_REJECTED"
+            "RESULT_TO_REWORK" if decision == "REWORK" else (
+                "RESULT_REVIEW_HOLD" if decision == "HOLD" else "RESULT_REJECTED"
+            )
         )
         data = {
             "task_id": envelope.get("task_id"),
@@ -145,8 +147,13 @@ def consume(event: dict) -> dict:
             "next_action": cycle.get("next_action"),
             "detected": cycle.get("detected", []),
             "transition": cycle.get("transition"),
+            "validated_result_pass": cycle.get("pass") is True,
+            "goal_complete": False,
+            "recovery_plan": cycle.get("recovery_plan"),
         }
         return {
+            # The comment can be accepted for routing while the task remains
+            # REWORK. Queue processing PASS is not product completion.
             "pass": kind != "RESULT_REJECTED",
             "action": kind,
             "comment": _comment(kind, data, source_comment_id=source_comment_id),

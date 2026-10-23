@@ -60,6 +60,38 @@ def _effect_policy(record: dict) -> dict | None:
         "compensation_ref": record.get("compensation_ref"),
     }
 
+def _user_intent(record: dict) -> tuple[dict | None, list[str]]:
+    """Carry the user's literal request and latest correction into the task contract.
+
+    Returns (fields, errors). No intent_contract -> nothing is invented (a material review
+    then fails closed on ORIGINAL_USER_INTENT_MISSING). A present but untraceable one is an
+    error so the user's words are never silently dropped or replaced by an assistant restatement.
+    """
+    contract = record.get("intent_contract")
+    if contract is None:
+        return None, []
+    if not isinstance(contract, dict):
+        return None, ["TASK_INTENT_CONTRACT_INVALID"]
+    literal = contract.get("literal_user_request")
+    correction = contract.get("latest_user_correction", "")
+    source_id = contract.get("user_source_id")
+    errors = []
+    if not isinstance(literal, str) or not literal.strip():
+        errors.append("TASK_INTENT_LITERAL_MISSING")
+    if not isinstance(correction, str):
+        errors.append("TASK_INTENT_CORRECTION_INVALID")
+    refs = record.get("context_evidence_refs")
+    known = {v.get("source_id") for v in refs if isinstance(v, dict)} if isinstance(refs, list) else set()
+    if not isinstance(source_id, str) or source_id not in known:
+        errors.append("TASK_INTENT_SOURCE_UNBOUND")
+    if errors:
+        return None, errors
+    fields = {"original_user_intent": {"source": "user", "source_id": source_id, "text": literal}}
+    if correction.strip():
+        fields["latest_user_correction"] = {"source": "user", "source_id": source_id, "text": correction}
+    return fields, []
+
+
 def build(record: dict) -> dict:
     missing = [k for k in REQUIRED_CONTEXT if not record.get(k)]
     wm = record.get("working_model")
@@ -67,6 +99,9 @@ def build(record: dict) -> dict:
         missing.append("working_model")
     if missing:
         return {"pass": False, "detected": [f"TASK_CONTEXT_MISSING:{x}" for x in missing]}
+    intent_fields, intent_errors = _user_intent(record)
+    if intent_errors:
+        return {"pass": False, "detected": intent_errors, "task_contract": None}
 
     task = {
         "task_id": record.get("task_id"),
@@ -105,6 +140,13 @@ def build(record: dict) -> dict:
             ]),
             "profile": record.get("validation_profile", "GENERIC_EVIDENCE_V1"),
             "mobile_runtime_required": bool(record.get("mobile_runtime_required", False)),
+            "artifact_kind": str(record.get("artifact_kind") or "").lower(),
+            "result_preview_required": bool(
+                record.get("result_preview_required", False)
+                or record.get("mobile_runtime_required", False)
+                or str(record.get("artifact_kind") or "").lower()
+                in {"ui", "pwa", "image", "asset", "document", "pdf", "presentation", "spreadsheet"}
+            ),
         },
         "executor_automation": {
             "profile": record.get("executor_profile", "GENERIC_CODEX_V1"),
@@ -127,6 +169,8 @@ def build(record: dict) -> dict:
         "requested_transition": "CODEX_DONE",
         "claims_taky_pass": False,
     }
+    if intent_fields:
+        task.update(intent_fields)
     effect_policy = _effect_policy(record)
     if effect_policy is not None:
         task["effect_policy"] = effect_policy

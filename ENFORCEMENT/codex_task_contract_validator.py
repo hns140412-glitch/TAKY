@@ -132,6 +132,12 @@ def validate(record):
         fail(errors, "TASK_CONTRACT_INCOMPLETE:validation.profile")
     if "commands" in validation or "command" in validation:
         fail(errors, "UNTRUSTED_TASK_COMMAND:validation")
+    # Visual tasks require independently revalidated, revision-bound evidence.
+    visual_kind = str(validation.get("artifact_kind") or "").lower() in {
+        "ui", "pwa", "image", "asset", "document", "pdf", "presentation", "spreadsheet"
+    }
+    if (validation.get("mobile_runtime_required") is True or visual_kind) and validation.get("result_preview_required") is not True:
+        fail(errors, "RESULT_PREVIEW_GATE_REQUIRED")
 
     automation = record.get("executor_automation", {})
     if automation:
