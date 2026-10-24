@@ -19,6 +19,8 @@ from pathlib import Path
 
 from TAKY_ORCHESTRATION_RECONCILE import DEFAULT_BOARD, read_json
 from TAKY_ORCHESTRATION_LOCAL_WORKERS import WORKERS as LOCAL_READONLY_WORKERS
+from TAKY_ORCHESTRATION_OUTCOME_WORKERS import OUTCOME_READONLY_WORKERS
+ALL_READONLY_WORKERS = {**LOCAL_READONLY_WORKERS, **OUTCOME_READONLY_WORKERS}
 
 TAKY = Path(r"D:\Git PWA\TAKY")
 GUARDS = TAKY / "ENFORCEMENT"
@@ -27,14 +29,22 @@ EXCLUDED_WORDS = ("ARCHIGROW", "ARCHI GROW", "VOICE", "AUDIO", "SPEECH", "PRONUN
                   "UI", "VISUAL", "DESIGN", "GALLERY", "ASSET", "CREW", "FAMILY", "APPROVED SCREEN")
 NON_FINAL = {"NOT_STARTED","DISCOVERY","EVALUATION","READY","IMPLEMENTING"}
 PRIORITIES = {"P0":0,"P1":1,"P2":2}
-LOCAL_EXECUTORS = {"CLN-009":"LOCAL_TOOLCHAIN_AND_PATH_AUDIT",
+LOCAL_EXECUTORS = {"CLN-002":"LOCAL_CANONICAL_CURRENT_READBACK",
+                   "INT-001":"LOCAL_SIGNED_WORK_HANDOFF_READBACK",
+                   "CLN-009":"LOCAL_TOOLCHAIN_AND_PATH_AUDIT",
                    "MCP-002":"LOCAL_MCP_LAUNCHER_PREFLIGHT",
                    "CLN-001":"LOCAL_WORKTREE_READONLY_INVENTORY",
                    "MCP-001":"LOCAL_MCP_CONFIG_READONLY_INVENTORY",
-                   "SKL-001":"LOCAL_SKILL_READONLY_CATALOG"}
+                   "SKL-001":"LOCAL_SKILL_READONLY_CATALOG",
+                   "FAMILY-DURABLE-001":"LOCAL_PRODUCT_OUTCOME_EVIDENCE_READBACK",
+                   "OPS-001":"LOCAL_SOURCE_ADOPTION_EVIDENCE_READBACK"}
 # Pure read-only diagnostics may proceed while a parent inventory is underway.
 # Incomplete dependencies remain visible and forbid completion or promotion.
-SAFE_PRECHECK_WITH_PENDING_DEPS = {"MCP-002","CLN-001","MCP-001","SKL-001"}
+SAFE_PRECHECK_WITH_PENDING_DEPS = {"CLN-002","INT-001","MCP-002","CLN-001","MCP-001","SKL-001",
+                                   "FAMILY-DURABLE-001","OPS-001"}
+# Explicit read-only worker IDs may inspect existing evidence; this grants no
+# permission to edit a family product, audio, source or project CURRENT.
+READ_ONLY_OUTCOME_OBSERVERS = {"CLN-002","INT-001","FAMILY-DURABLE-001","OPS-001"}
 
 def decision(task: dict, states: dict[str,str]) -> tuple[str,list[str]]:
     tid = str(task.get("id",""))
@@ -42,7 +52,10 @@ def decision(task: dict, states: dict[str,str]) -> tuple[str,list[str]]:
     if state not in NON_FINAL: return "NOT_ACTIVE", []
     if task.get("approval_required") is True: return "REQUIRES_APPROVAL", []
     descriptor = " ".join(str(task.get(k,"")) for k in ("title","category","id")).upper()
-    if any(re.search(r"(?<![A-Z0-9])"+re.escape(word)+r"(?![A-Z0-9])",descriptor) for word in EXCLUDED_WORDS):
+    if tid not in READ_ONLY_OUTCOME_OBSERVERS and any(
+        re.search(r"(?<![A-Z0-9])"+re.escape(word)+r"(?![A-Z0-9])",descriptor)
+        for word in EXCLUDED_WORDS
+    ):
         return "USER_HOLD_UI_AUDIO_ARCHI_FAMILY", []
     deps = [str(x) for x in task.get("dependencies",[]) or []]
     unresolved = [x for x in deps if states.get(x)!="VERIFIED" and states.get(x)!="ADOPTED"]
@@ -50,6 +63,82 @@ def decision(task: dict, states: dict[str,str]) -> tuple[str,list[str]]:
         return "NEEDS_DEPENDENCY_EVIDENCE", unresolved
     if tid not in LOCAL_EXECUTORS: return "LOCAL_EXECUTOR_NOT_BOUND", unresolved
     return "READY_FOR_LOCAL_EXECUTION", unresolved
+
+def live_outcome_provenance_fingerprint(work_id: str, workbench: Path) -> str:
+    """Invalidate a cached read-only PASS if an actual observed input changes.
+
+    The receipt itself is hashed separately. Never trust a source path for
+    arbitrary filesystem read: all paths are confined to exact existing local
+    source/evidence trees. This fingerprint is NOT a semantic review or DONE.
+    """
+    evidence_root = workbench / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE"
+    receipt = read_json(evidence_root / "PRODUCT_AND_SOURCE_OUTCOME_LOCAL_20261023.json")
+    targets: dict[str, Path] = {}
+    if work_id == "FAMILY-DURABLE-001":
+        base = TAKY.parent
+        entrypoints = (
+            "TAKY-MOBILE/index.html", "Ready & Set/index.html",
+            "Hide & Seek/index.html", "Snap & Pop/index.html",
+            "Play Camp/src/App.tsx", "Play Camp/src/main.tsx",
+            "Play Camp/src/lib/readyBridge.ts",
+        )
+        observed = receipt.get("browser_journey") or {}
+        for name in entrypoints:
+            targets[name] = base / name
+        pins = {
+            "result_ref": base / "TAKY-MOBILE/artifacts/learning-loop-multi-specialist-roundtrip-20261010/approval-hold-result.json",
+            "screenshot_ref": base / "TAKY-MOBILE/artifacts/learning-loop-multi-specialist-roundtrip-20261010/05-play-camp.png",
+            "ready_partial_screenshot_ref": base / "TAKY-MOBILE/artifacts/learning-loop-multi-specialist-roundtrip-20261010/06-ready-approval-hold-result.png",
+            "mobile_partial_screenshot_ref": base / "TAKY-MOBILE/artifacts/learning-loop-multi-specialist-roundtrip-20261010/07-mobile-approval-hold-return.png",
+            "test_source_ref": base / "TAKY-MOBILE/tests/learning-loop-multi-specialist-roundtrip-e2e.cjs",
+            "audio_authority_ref": base / "Play Camp/src/data/playCampPronunciationAssets.ts",
+        }
+        for key, target in pins.items():
+            if Path(str((observed.get(key) or {}).get("path") or "")).resolve() != target.resolve():
+                raise ValueError("PRODUCT_PROVENANCE_PATH_NOT_PINNED:" + key)
+            targets[key] = target
+        manifest = observed.get("pinned_entrypoint_sources_at_local_observation")
+        if (not isinstance(manifest, list)
+                or [str((entry or {}).get("path")) for entry in manifest]
+                != [str(base / name).replace("\\", "/") for name in entrypoints]):
+            raise ValueError("PRODUCT_ENTRYPOINT_PROVENANCE_MISMATCH")
+    elif work_id == "OPS-001":
+        source_root = TAKY.parent / "TAKY-SOURCE-VAULT"
+        original = read_json(evidence_root / "SOURCE_FIRST_FROZEN_UNITS_V2_20261023.json")
+        safe_roots = (
+            source_root / "reports/site_watch/mining_generations",
+            source_root / "data/site_watch/snapshots",
+            source_root / "data/site_watch/local_content_candidates",
+        )
+        nodes = [original.get("mining_generation_ref")]
+        for entry in original.get("items") or []:
+            if not isinstance(entry, dict):
+                raise ValueError("SOURCE_PROVENANCE_MANIFEST_INVALID")
+            nodes.extend({"path": entry.get(key)}
+                         for key in ("raw_path", "text_path"))
+        for node in nodes:
+            if not isinstance(node, dict) or not isinstance(node.get("path"), str):
+                raise ValueError("SOURCE_PROVENANCE_ENTRY_INVALID")
+            file = Path(node["path"]).resolve(strict=True)
+            if (not file.is_file()
+                    or not any(file.is_relative_to(root.resolve(strict=True)) for root in safe_roots)
+                    or file.stat().st_size > 24 * 1024 * 1024):
+                raise ValueError("SOURCE_PROVENANCE_TARGET_UNSAFE")
+            targets[str(file)] = file
+    else:
+        raise ValueError("NOT_AN_OUTCOME_PROVENANCE_WORKER")
+    entries = [(name, sha(target)) for name, target in sorted(targets.items())]
+    return hashlib.sha256(json.dumps(entries, ensure_ascii=False,
+                                     sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def telemetry_hour_bucket(at: datetime | None=None) -> str:
+    """Bound freshness of live process observations to one UTC hour."""
+    value=at or datetime.now(timezone.utc)
+    if value.tzinfo is None:
+        raise ValueError("TELEMETRY_OBSERVATION_TIME_MUST_BE_AWARE")
+    return value.astimezone(timezone.utc).strftime("%Y-%m-%dT%H")
+
 
 def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
     task=next((t for t in board["tasks"] if t.get("id")==work_id),None)
@@ -67,6 +156,10 @@ def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
         inputs["executor_source_sha256"]=sha(Path(__file__))
         inputs["mcp_launcher_guard"]=sha(GUARDS/"taky_mcp_executable_preflight.py")
         inputs["process_telemetry_probe"]="MCP_PROCESS_TELEMETRY_V1"
+        # A live CPU/process observation is not a timeless PASS. Retire the
+        # existing local receipt at each UTC hour boundary, without rerunning
+        # model calls or rewriting any earlier immutable evidence.
+        inputs["telemetry_observation_utc_hour"]=telemetry_hour_bucket()
     elif work_id in LOCAL_READONLY_WORKERS:
         worker=Path(__file__).with_name("TAKY_ORCHESTRATION_LOCAL_WORKERS.py")
         inputs["worker_sha256"]=sha(worker)
@@ -84,6 +177,44 @@ def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
                 metadata.append((repo_name,hashlib.sha256(data).hexdigest()))
             inputs["git_metadata_digest"]=hashlib.sha256(
                 json.dumps(metadata,sort_keys=True).encode()).hexdigest()
+    elif work_id in READ_ONLY_OUTCOME_OBSERVERS:
+        observer = Path(__file__).with_name("TAKY_ORCHESTRATION_OUTCOME_WORKERS.py")
+        inputs["worker_sha256"] = sha(observer)
+        workbench = Path(r"D:\Git PWA\TAKY_AI_WORKBENCH")
+        inputs["outcome_reader_sha256"] = sha(
+            workbench / "00_CONTROL" / "RECONCILE_EXECUTION_REALITY.py")
+        inputs["outcome_receipt_sha256"] = sha(
+            workbench / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE"
+            / "PRODUCT_AND_SOURCE_OUTCOME_LOCAL_20261023.json")
+        if work_id in ("FAMILY-DURABLE-001", "OPS-001"):
+            inputs["live_observed_inputs_sha256"] = live_outcome_provenance_fingerprint(
+                work_id, workbench)
+        if work_id in ("CLN-002","INT-001"):
+            inputs["project_registry_sha256"] = sha(workbench / "00_CONTROL" / "PROJECT_REGISTRY.json")
+            inputs["assignments_sha256"] = sha(workbench / "00_CONTROL" / "AI_WORK_ASSIGNMENTS.json")
+            inputs["orchestration_reconciler_sha256"] = sha(Path(__file__).with_name("TAKY_ORCHESTRATION_RECONCILE.py"))
+            inputs["project_current_shas"] = {
+                project: sha(workbench / config["workbench_path"] / "PROJECT_CURRENT.json")
+                for project, config in sorted(
+                    read_json(workbench / "00_CONTROL" / "PROJECT_REGISTRY.json")["projects"].items())
+            }
+        if work_id == "OPS-001":
+            inputs["frozen_source_sha256"] = sha(
+                workbench / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE"
+                / "SOURCE_FIRST_FROZEN_UNITS_V2_20261023.json")
+            source_vault = TAKY.parent / "TAKY-SOURCE-VAULT"
+            inputs["source_owner_reader_sha256"] = sha(
+                source_vault / "BUILD_SITE_INDEX_OWNER_EVIDENCE_BUNDLE.py")
+            inputs["source_owner_queue_sha256"] = sha(
+                source_vault / "data/site_watch/indexing_review"
+                / "INDEX_OWNER_EVIDENCE_BUNDLE_CURRENT.json")
+            for label, filename in (
+                ("source_first_gpt_review", "SITE_2E081_SOURCE_FIRST_GPT_INDEPENDENT_20261024.json"),
+                ("source_first_codex_review", "SITE_2E081_SOURCE_FIRST_CODEX_INDEPENDENT_20261024.json"),
+                ("source_first_comparison", "SITE_2E081_PRELIMINARY_SOURCE_COMPARISON_20261024.json"),
+            ):
+                inputs[label + "_sha256"] = sha(
+                    workbench / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE" / filename)
     else:
         raise ValueError("LOCAL_EXECUTOR_NOT_BOUND")
     digest=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()[:20]
@@ -103,23 +234,44 @@ def choose(board: dict, evidence: Path | None=None) -> dict:
     if evidence is not None:
         for row in considered:
             if row["route"]!="READY_FOR_LOCAL_EXECUTION":continue
-            inputs,digest=evidence_signature(board,row["task_id"])
+            try:
+                inputs,digest=evidence_signature(board,row["task_id"])
+            except (OSError,ValueError,KeyError,TypeError) as exc:
+                # One stale source must not halt every independent local task.
+                # It never becomes eligible on missing/unsafe provenance.
+                row["route"]="LOCAL_INPUT_PROVENANCE_HOLD"
+                row["next_action"]="RECHECK_THIS_TASK_INPUTS_WITH_CANONICAL_SOURCE"
+                row["input_error_type"]=type(exc).__name__
+                continue
             receipt=evidence/("TAKY_LOCAL_WORK_"+row["task_id"]+"_"+digest+".json")
-            if receipt.is_file():
-                proof=read_json(receipt)
-                if proof.get("schema")!="TAKY_LOCAL_WORK_SLICE_V1" or proof.get("task_id")!=row["task_id"] or proof.get("inputs")!=inputs:
-                    raise ValueError("EXISTING_EVIDENCE_ID_CONFLICT")
-                row["existing_evidence"]=str(receipt)
-                row["historical_only"]=True
-                row["live_runtime_state"]="NOT_RECHECKED"
-                if proof.get("state")=="LOCAL_SLICE_FINDINGS_NEED_ACTION":
-                    row["route"]="LOCAL_SLICE_NEEDS_CORRECTION"
-                    row["next_action"]="INSPECT_LOCAL_FINDINGS_THEN_RERUN_CHANGED_SCOPE"
-                elif proof.get("state")=="LOCAL_SLICE_VERIFIED_NOT_PORTFOLIO_DONE":
-                    row["route"]="LOCAL_SLICE_ALREADY_EVIDENCED"
-                    row["next_action"]="INDEPENDENT_SCOPE_REVIEW_OR_NEXT_TASK"
-                else:
-                    raise ValueError("UNRECOGNIZED_LOCAL_EVIDENCE_STATE")
+            if receipt.is_file() or receipt.is_symlink() or getattr(
+                    receipt,"is_junction",lambda:False)():
+                # Corrupt/stale evidence cannot strand every independent
+                # registered task: hold ONLY the affected work ID.
+                try:
+                    if receipt.is_symlink() or getattr(
+                            receipt,"is_junction",lambda:False)():
+                        raise ValueError("LOCAL_EVIDENCE_REPARSE")
+                    proof=read_json(receipt)
+                    if (proof.get("schema")!="TAKY_LOCAL_WORK_SLICE_V1"
+                            or proof.get("task_id")!=row["task_id"]
+                            or proof.get("inputs")!=inputs):
+                        raise ValueError("EXISTING_EVIDENCE_ID_CONFLICT")
+                    row["existing_evidence"]=str(receipt)
+                    row["historical_only"]=True
+                    row["live_runtime_state"]="NOT_RECHECKED"
+                    if proof.get("state")=="LOCAL_SLICE_FINDINGS_NEED_ACTION":
+                        row["route"]="LOCAL_SLICE_NEEDS_CORRECTION"
+                        row["next_action"]="INSPECT_LOCAL_FINDINGS_THEN_RERUN_CHANGED_SCOPE"
+                    elif proof.get("state")=="LOCAL_SLICE_VERIFIED_NOT_PORTFOLIO_DONE":
+                        row["route"]="LOCAL_SLICE_ALREADY_EVIDENCED"
+                        row["next_action"]="INDEPENDENT_SCOPE_REVIEW_OR_NEXT_TASK"
+                    else:
+                        raise ValueError("UNRECOGNIZED_LOCAL_EVIDENCE_STATE")
+                except (OSError, ValueError, KeyError, TypeError) as exc:
+                    row["route"]="LOCAL_EVIDENCE_INTEGRITY_HOLD"
+                    row["input_error_type"]=type(exc).__name__
+                    row["next_action"]="RECONCILE_EXISTING_UNTRUSTED_RECEIPT_NO_OVERWRITE"
     ready=[r for r in considered if r["route"]=="READY_FOR_LOCAL_EXECUTION"]
     ready.sort(key=lambda x:(PRIORITIES.get(x["priority"],9),
                              0 if x["status"]=="IMPLEMENTING" else 1,x["task_id"]))
@@ -130,17 +282,44 @@ def choose(board: dict, evidence: Path | None=None) -> dict:
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85) -> dict:
+def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
+               *, dependency_revision: str | None=None) -> dict:
     if work_id not in LOCAL_EXECUTORS: raise ValueError("UNSUPPORTED_LOCAL_EXECUTOR")
-    preflight=choose(read_json(board))
+    # Admission and signed input identity MUST come from one same snapshot.
+    # Previously a second board read could silently adopt a newly changed
+    # approval flag after a successful eligibility check (TOCTOU).
+    original_board=read_json(board)
+    preflight=choose(original_board)
     row=next((r for r in preflight["considered"] if r["task_id"]==work_id),None)
     if row is None or row["route"]!="READY_FOR_LOCAL_EXECUTION":
         raise ValueError("TASK_NOT_DEPENDENCY_READY_OR_HELD")
-    # Stable proof identity: exact board and exact scripts. No modeled completion.
     guard1=GUARDS/"workspace_cleanup_path_guard.py"
     guard2=GUARDS/"taky_toolchain_paths_guard.py"
-    original_board=read_json(board)
     inputs,digest=evidence_signature(original_board,work_id)
+    if dependency_revision is not None:
+        # A caller-supplied digest is only a proposed revision. The canonical
+        # local worker independently re-reads the source proof before executing.
+        dep_module=str(Path(__file__).resolve().parents[1]/"ENFORCEMENT")
+        if dep_module not in sys.path:
+            sys.path.insert(0,dep_module)
+        from taky_registered_goal_queue import registered_dependency_revision
+        original_index={t.get("id"):t for t in original_board["tasks"]
+                        if isinstance(t,dict)}
+        observed=registered_dependency_revision(
+            original_index[work_id].get("dependencies",[]),
+            original_index,evidence)
+        if observed!=dependency_revision:
+            raise ValueError("REGISTERED_DEPENDENCY_SOURCE_NOT_PINNED")
+        # A dependency-triggered diagnostic is a *different evidence scope*
+        # from a previously cached precheck. Pin the canonical source revision
+        # without changing the ordinary worker receipt format/identity.
+        if (not isinstance(dependency_revision,str) or
+                re.fullmatch(r"[0-9a-f]{64}",dependency_revision) is None
+                or not row.get("unresolved")==[]):
+            raise ValueError("DEPENDENCY_READONLY_PROBE_NOT_BOUND")
+        inputs={**inputs,"registered_dependency_revision":dependency_revision}
+        digest=hashlib.sha256(json.dumps(
+            inputs,sort_keys=True,ensure_ascii=False).encode()).hexdigest()[:20]
     output=evidence/("TAKY_LOCAL_WORK_"+work_id+"_"+digest+".json")
     if output.is_file():
         existing=read_json(output)
@@ -150,32 +329,106 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85) -> di
                     "result":existing.get("state"),"evidence":str(output),
                     "no_model_calls":True}
         raise ValueError("EXISTING_EVIDENCE_ID_CONFLICT")
+    # ONE durable dispatch claim for ALL callers: original CLI, scheduler,
+    # registered V2 and dependency wake. A missing receipt after an attempted
+    # worker is OUTCOME_UNKNOWN, never permission to execute it again.
+    trust_dir=str(Path(__file__).resolve().parents[1]/"ENFORCEMENT")
+    if trust_dir not in sys.path:
+        sys.path.insert(0,trust_dir)
+    from taky_registered_goal_queue import registered_dependency_revision
+    task_index={t.get("id"):t for t in original_board["tasks"] if isinstance(t,dict)}
+    deps=task_index[work_id].get("dependencies",[]) or []
+    observed_revision=registered_dependency_revision(deps,task_index,evidence)
+    if dependency_revision is not None and observed_revision!=dependency_revision:
+        raise ValueError("DEPENDENCY_CLAIM_REVISION_DRIFT")
+    # Pending prechecks deliberately use a different version key, preserving
+    # limited inventory work without elevating it to a verified dependency.
+    revision_key=("VERIFIED:"+observed_revision if observed_revision
+                  else "PENDING_PRECHECK:"+digest)
+    _canonical=(board.resolve()==DEFAULT_BOARD.resolve() and
+                evidence.resolve()==EVIDENCE.resolve())
+    expected_parent=TAKY if _canonical else board.parent.resolve()
+    claims=(expected_parent/".local")
+    if not claims.exists() and not _canonical:
+        claims.mkdir()
+    if (not claims.is_dir() or claims.is_symlink()
+            or getattr(claims,"is_junction",lambda:False)()
+            or claims.resolve().parent!=expected_parent.resolve()):
+        raise ValueError("CANONICAL_DURABLE_CLAIM_SCOPE_UNAVAILABLE")
+    import uuid
+    token=hashlib.sha256((work_id+"|"+revision_key).encode()).hexdigest()[:24]
+    claim=claims/("taky-canonical-worker-"+work_id+"-"+token+".json")
+    claimed={"schema":"TAKY_CANONICAL_WORK_CLAIM_V1","work_id":work_id,
+             "revision":revision_key,"input_digest":digest,
+             "state":"CLAIMED_OUTCOME_UNKNOWN"}
+    try:
+        with claim.open("x",encoding="utf-8") as saved:
+            json.dump(claimed,saved,ensure_ascii=False)
+    except FileExistsError:
+        raise ValueError("CANONICAL_WORK_ALREADY_CLAIMED_NO_RETRY")
     # Subprocess arguments are constants, no shell, no provider, bounded runtime.
     results=[]
     if work_id=="MCP-002":
         results=run_mcp_launcher_preflight(timeout)
-    elif work_id in LOCAL_READONLY_WORKERS:
-        results=LOCAL_READONLY_WORKERS[work_id](timeout)
+    elif work_id in ALL_READONLY_WORKERS:
+        results=ALL_READONLY_WORKERS[work_id](timeout)
     else:
         results=run_path_and_toolchain_checks(guard1,guard2,timeout)
-    if inputs!=evidence_signature(read_json(board),work_id)[0]:
+    final_board=read_json(board)
+    final_plan=choose(final_board)
+    final_row=next((r for r in final_plan["considered"]
+                    if r["task_id"]==work_id),None)
+    if final_row is None or final_row["route"]!="READY_FOR_LOCAL_EXECUTION":
+        raise ValueError("TASK_ADMISSION_REVOKED_DURING_AUDIT")
+    final_inputs=evidence_signature(final_board,work_id)[0]
+    if dependency_revision is not None:
+        final_inputs={**final_inputs,
+                      "registered_dependency_revision":dependency_revision}
+    if inputs!=final_inputs:
         raise ValueError("INPUT_CHANGED_DURING_AUDIT")
+    if dependency_revision is not None:
+        # No current-local evidence may be published for a stale parent proof.
+        final_index={t.get("id"):t for t in final_board["tasks"]
+                     if isinstance(t,dict)}
+        observed=registered_dependency_revision(
+            final_index[work_id].get("dependencies",[]),
+            final_index,evidence)
+        if observed!=dependency_revision:
+            raise ValueError("REGISTERED_DEPENDENCY_CHANGED_DURING_AUDIT")
     all_ok=all(r["status"]=="PASS" for r in results)
     payload={"schema":"TAKY_LOCAL_WORK_SLICE_V1","task_id":work_id,
         "state":"LOCAL_SLICE_VERIFIED_NOT_PORTFOLIO_DONE" if all_ok else "LOCAL_SLICE_FINDINGS_NEED_ACTION",
         "executed_at":datetime.now(timezone.utc).isoformat(),
         "source_work_status_unchanged":True,"inputs":inputs,"checks":results,
+        "pending_dependencies_at_execution":row.get("unresolved",[]),
+        "work_owner_claimed_by_this_receipt":False,
         "no_model_calls":True,"no_external_provider_calls":True,
         "no_push_merge_deploy":True,"portfolio_done":False,
-        "remaining_work":("MCP protocol handshakes and live CPU rate limits remain unverified" if work_id=="MCP-002" else
-                          "Local file/skill/connector inventory is not independent portfolio completion" if work_id in LOCAL_READONLY_WORKERS else
-                          "Independent scope review and remaining CLN-009 consumers still unverified")}
+        "remaining_work":(
+            "MCP protocol handshakes and live CPU rate limits remain unverified" if work_id=="MCP-002" else
+            "Local file/skill/connector inventory is not independent portfolio completion" if work_id in LOCAL_READONLY_WORKERS else
+            " ; ".join(str(c.get("next_action")) for c in results if c.get("next_action"))
+            if work_id in READ_ONLY_OUTCOME_OBSERVERS else
+            "Independent scope review and remaining CLN-009 consumers still unverified")}
     evidence.mkdir(parents=True,exist_ok=True)
     try:
         with output.open("x",encoding="utf-8") as stream:
             json.dump(payload,stream,ensure_ascii=False,indent=2)
     except FileExistsError:
         raise ValueError("CONCURRENT_EVIDENCE_WRITER")
+    # Completion here proves only a durable LOCAL precheck, never portfolio
+    # DONE. Keep the claim if any persistence/verification is ambiguous.
+    claimed["state"]="LOCAL_PROBE_EVIDENCED_NOT_PORTFOLIO_DONE"
+    claimed["evidence_sha256"]=hashlib.sha256(output.read_bytes()).hexdigest()
+    temp_claim=claims/("taky-canonical-worker-update-"+uuid.uuid4().hex+".tmp")
+    try:
+        with temp_claim.open("x",encoding="utf-8") as out:
+            json.dump(claimed,out,ensure_ascii=False)
+        if claim.is_symlink() or getattr(claim,"is_junction",lambda:False)():
+            raise ValueError("CANONICAL_CLAIM_REPARSE")
+        os.replace(temp_claim,claim)
+    finally:
+        temp_claim.unlink(missing_ok=True)
     return {"status":payload["state"],"task_id":work_id,"evidence":str(output),
             "checks":results,"no_model_calls":True}
 
@@ -328,15 +581,21 @@ def run_process_telemetry(timeout: int, interval: float=1.0) -> dict:
                      "cpu_unavailable":cpu_missing},
             "note":"One short observation. CPU rates are estimates based on subprocess midpoints; no CPU limit or MCP owner is verified."}
 
-def continue_local(board_path: Path=DEFAULT_BOARD, evidence: Path=EVIDENCE) -> dict:
+def continue_local(board_path: Path=DEFAULT_BOARD, evidence: Path=EVIDENCE,
+                   *, max_actions: int | None=None) -> dict:
     """Work until no new safe local task remains, not until a user says 'go'.
 
     Failures are reported and the next independent task is tried. Every task
     identity is attempted once per invocation; repeated model calls are absent.
     """
+    if max_actions is not None and (type(max_actions) is not int or
+                                     not 1<=max_actions<=8):
+        raise ValueError("BOUNDED_CONTINUATION_LIMIT_INVALID")
     attempted=set()
     actions=[]
     while True:
+        if max_actions is not None and len(attempted)>=max_actions:
+            break
         board=read_json(board_path)
         plan=choose(board,evidence)
         candidates=[r for r in plan["considered"] if r["route"]=="READY_FOR_LOCAL_EXECUTION"
@@ -363,6 +622,7 @@ def continue_local(board_path: Path=DEFAULT_BOARD, evidence: Path=EVIDENCE) -> d
             "status":"BOUNDED_LOCAL_CONTINUATION_FINISHED",
             "actions":actions,
             "remaining_ready":current["eligible_count"],
+            "max_actions":max_actions,
             "remaining_unbound":sum(x["route"]=="LOCAL_EXECUTOR_NOT_BOUND"
                                     for x in current["considered"]),
             "remaining_dep_wait":sum(x["route"]=="NEEDS_DEPENDENCY_EVIDENCE"
