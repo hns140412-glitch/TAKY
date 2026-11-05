@@ -1,0 +1,267 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_CONTRACT_REGISTRY_V1",
+  "contracts": [
+    {
+      "id": "TAKY_RELATION_AFFINITY_EVIDENCE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Relation/Affinity Engine",
+      "consumers": [
+        "Character Behavior Engine"
+      ]
+    },
+    {
+      "id": "TAKY_CHARACTER_BEHAVIOR_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Character Behavior Engine",
+      "consumers": [
+        "Scene Orchestrator",
+        "Asset Composition"
+      ]
+    },
+    {
+      "id": "TAKY_SCENE_POLICY_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "App Scene Policy Adapter",
+      "consumers": [
+        "Scene Orchestrator"
+      ]
+    },
+    {
+      "id": "TAKY_APP_SCENE_POLICY_ADAPTER_V1",
+      "version": 1,
+      "owner": "APP_REPO",
+      "producer": "Ready/Hide/Snap",
+      "consumers": [
+        "TAKY Scene Policy Contract"
+      ]
+    },
+    {
+      "id": "TAKY_CHARACTER_RUNTIME_COORDINATOR_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Runtime Coordinator",
+      "consumers": [
+        "App Runtime Adapter",
+        "Runtime Receipt"
+      ]
+    },
+    {
+      "id": "TAKY_CHARACTER_RUNTIME_RECEIPT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Runtime Receipt",
+      "consumers": [
+        "Runtime Log"
+      ]
+    },
+    {
+      "id": "TAKY_UI_BINDING_CONTRACT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "UI Binding Contract",
+      "consumers": [
+        "App Binding Registry/Planner"
+      ]
+    },
+    {
+      "id": "TAKY_UI_BINDING_RECEIPT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "UI Binding Receipt",
+      "consumers": [
+        "Runtime Log"
+      ]
+    },
+    {
+      "id": "TAKY_APPROVED_ASSET_REGISTRY_V1",
+      "version": 1,
+      "owner": "TAKY-ASSETS",
+      "producer": "Approved Asset Registry",
+      "consumers": [
+        "Approved Asset Export",
+        "App Resolver"
+      ]
+    },
+    {
+      "id": "TAKY_APPROVED_ASSET_EXPORT_V1",
+      "version": 1,
+      "owner": "TAKY-ASSETS",
+      "producer": "Approved Asset Export",
+      "consumers": [
+        "App Approved Asset Resolver"
+      ]
+    },
+    {
+      "id": "TAKY_SPECIALIST_PIPELINE_RESUME_V1",
+      "version": 1,
+      "owner": "SPECIALIST_PIPELINE",
+      "producer": "Pipeline Resume Adapter",
+      "consumers": [
+        "TAKY Recovery Decision"
+      ]
+    },
+    {
+      "id": "TAKY_SPECIALIST_STAGE_RECEIPT_V1",
+      "version": 1,
+      "owner": "SPECIALIST_PIPELINE",
+      "producer": "Stage Receipt Issuer",
+      "consumers": [
+        "Stage Chain",
+        "Recovery Decision"
+      ]
+    },
+    {
+      "id": "TAKY_SPECIALIST_TO_ASSET_REGISTRY_HANDOFF_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Specialist Pipeline",
+      "consumers": [
+        "TAKY-ASSETS Handoff Accept"
+      ]
+    },
+    {
+      "id": "TAKY_DESIGN_GATE_RECEIPT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Design Gate",
+      "consumers": [
+        "DOM Binder",
+        "Runtime Log",
+        "Release Gate"
+      ]
+    },
+    {
+      "id": "TAKY_CHARACTER_RUNTIME_LOG_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Runtime Log Composer",
+      "consumers": [
+        "Audit/Recovery"
+      ]
+    },
+    {
+      "id": "TAKY_EXPLORER_CREW_RELEASE_GATE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Release Aggregation Gate",
+      "consumers": [
+        "Release Governance"
+      ]
+    },
+    {
+      "id": "TAKY_SURFACE_SCENE_POLICY_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Binding Registry-derived Surface Policy",
+      "consumers": [
+        "App UI Binding Planner",
+        "Scene Orchestrator"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_EVENT_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Ready/Hide/Snap evidence runtimes",
+      "consumers": [
+        "Relation/Affinity Engine",
+        "Shared Memory"
+      ]
+    },
+    {
+      "id": "TAKY_EXPLORER_CREW_BROWSER_BEHAVIOR_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Shared Browser Explorer Crew Behavior Runtime",
+      "consumers": [
+        "Ready live Crew runtime",
+        "Hide live Crew runtime",
+        "Snap live Crew runtime"
+      ]
+    },
+    {
+      "id": "TAKY_EXPLORER_CREW_BROWSER_RELATION_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Shared Browser Explorer Crew Relation Projection Runtime",
+      "consumers": [
+        "Ready Crew Evidence Runtime",
+        "Hide Crew Evidence Runtime",
+        "Snap Crew Evidence Runtime"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_HANDOFF_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "App Crew Evidence Runtime",
+      "consumers": [
+        "Central Crew Evidence Hub",
+        "Ready/Hide/Snap import bridges"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_IDENTITY_CHANGE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Identity Change Guard",
+      "consumers": [
+        "Ready Guide settings",
+        "Hide onboarding/settings",
+        "Snap future Guide settings"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_TRANSPORT_AUTH_POLICY_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Transport Auth Policy",
+      "consumers": [
+        "Authenticated Crew Evidence Transport"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_DURABLE_EVIDENCE_STORE_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Durable Store Adapter",
+      "consumers": [
+        "Authenticated Crew Evidence Transport",
+        "Crew Evidence Hub"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_NETLIFY_BLOBS_TRANSPORT_ADAPTER_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Netlify Blobs Transport Adapter",
+      "consumers": [
+        "Crew Evidence Hub"
+      ]
+    },
+    {
+      "id": "TAKY_CENTRAL_CREW_EVIDENCE_HTTP_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Central Crew Evidence HTTP Boundary",
+      "consumers": [
+        "Crew Evidence Browser Provider",
+        "Server Runtime"
+      ]
+    },
+    {
+      "id": "TAKY_CREW_EVIDENCE_BROWSER_PROVIDER_V1",
+      "version": 1,
+      "owner": "TAKY",
+      "producer": "Crew Evidence Browser Provider",
+      "consumers": [
+        "Ready Browser Runtime",
+        "Hide Browser Runtime",
+        "Snap Browser Runtime"
+      ]
+    }
+  ]
+}
