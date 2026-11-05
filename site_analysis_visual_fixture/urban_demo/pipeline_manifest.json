@@ -1,0 +1,18 @@
+{
+  "schema": "ARCHIGROW_PIPELINE_MANIFEST_V1",
+  "project_id": "SYNTHETIC_URBAN_BLOCK_01",
+  "route": "SITE_ANALYSIS_REPORT",
+  "stages": [
+    "SITE_ANALYSIS"
+  ],
+  "inputs": {
+    "site_analysis": {
+      "site_source_receipt": "site_source_receipt.json",
+      "context": "context_obstacles.json",
+      "solar": "solar_study_report.json",
+      "massing": "massing_result.json"
+    }
+  },
+  "binding_status": "SYNTHETIC_FIXTURE_ONLY",
+  "rule": "No real-project source or legal approval"
+}

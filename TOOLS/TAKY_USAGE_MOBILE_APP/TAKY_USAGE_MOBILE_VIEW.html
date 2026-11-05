@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"><head><base target="_top">
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#202834;background:#f4f5f7;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:18px;max-width:900px;margin-inline:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}
+#status{font-size:12px;color:#626b76;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.card{background:white;border:1px solid #e2e5e9;border-radius:13px;padding:16px;min-height:135px}
+.meta{font-size:12px;color:#687484}.line{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
+.label{font-size:13px}.value{font-size:13px;font-weight:700}
+.track{height:6px;border-radius:6px;background:#edf0f3;overflow:hidden;margin-top:5px}
+.fill{height:100%;background:#3c668b;border-radius:6px}
+button{background:white;border:1px solid #ccd2dc;padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:600}
+.warn{color:#a05f11!important}.error{color:#a12f30!important}footer{padding-top:14px;font-size:12px;color:#626b76}
+</style></head><body>
+<header><h1>TAKY AI 사용량</h1><button onclick="load()">새로고침</button></header>
+<div id="status">사용량 확인 중…</div><main class="grid" id="list"></main>
+<footer>사용률과 잔여율을 구분합니다. 미관측 값은 0%가 아닌 '미확인'으로 표시합니다.</footer>
+<script>
+const $=id=>document.getElementById(id);
+const time=s=>{if(!s)return ''; const d=new Date(s);return Number.isNaN(d.getTime())?'':d.toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});};
+const pct=x=>typeof x==='number'&&x>=0&&x<=100?x.toFixed(1)+'%':'미확인';
+function el(tag,cls,text){const e=document.createElement(tag); if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
+function meter(card,label,v,kind){
+  const isRemain=kind==='remaining';const num=v&&(isRemain?v.remainingPercent:v.usedPercent);
+  const row=el('div','line');row.append(el('span','label',label),el('span','value',pct(num)));card.append(row);
+  if(typeof num==='number'&&num>=0&&num<=100){const bar=el('div','track'),fill=el('div','fill');fill.style.width=num+'%';bar.append(fill);card.append(bar);}
+  if(v&&v.resetAt)card.append(el('div','meta','초기화: '+time(v.resetAt)));
+}
+function render(answer){
+  const list=$('list');list.replaceChildren();
+  if(!answer||!answer.ok){$('status').className='error';$('status').textContent='Drive 연동 미완료 또는 스냅샷 읽기 실패';return;}
+  const d=answer.data,okay=answer.synchronized;
+  const monitored=(d.providers||[]).filter(p=>['Claude Code','Codex CLI','Antigravity','ElevenLabs'].includes(p.name));
+  const stale=monitored.filter(p=>p.fresh!==true).map(p=>p.name);
+  $('status').className=(okay&&stale.length===0)?'':'warn';
+  $('status').textContent=(okay?'파일 전송 정상':'파일 전송 지연')+
+    (stale.length?' · 실제 사용량 지연/미확인: '+stale.join(', '):' · 최근 사용량 관측')+
+    ' | 마지막 전송: '+time(d.exportedAt);
+  d.providers.forEach(p=>{
+    const card=el('section','card'); card.append(el('h2','',p.name));
+    if(p.name==='Antigravity'){
+      meter(card,'Gemini 모델 풀 잔여율',p.geminiPool,'remaining');
+      meter(card,'외부 모델 풀 잔여율',p.thirdPartyPool,'remaining');
+    }else{
+      if(p.name==='Claude Code'||p.name==='Codex CLI'){
+        meter(card,'5시간 사용률',p.fiveHour);
+        meter(card,'주간 사용률',p.week);
+      }else if(p.month&&p.month.usedPercent!=null){
+        meter(card,'월간 사용률',p.month);
+      }
+      if(p.name==='Netlify'&&Array.isArray(p.teams))p.teams.forEach(t=>{
+        card.append(el('div','meta',(t.name||'팀')+' 월간 기본량: '+
+          (t.monthlyUsed==null?'미확인':t.monthlyUsed)+' / '+(t.monthlyIncluded==null?'미확인':t.monthlyIncluded)));
+      });
+    }
+    const detail=p.observedAt?'관측: '+time(p.observedAt):'공식 사용량 미관측';
+    const state=el('div','meta',detail+(p.fresh===false?' · 이전 기록':''));
+    card.append(state);list.append(card);
+  });
+}
+function load(){
+  $('status').textContent='사용량 확인 중…';
+  google.script.run.withSuccessHandler(render).withFailureHandler(()=>{
+    $('status').className='error';$('status').textContent='데이터 조회 실패';})
+    .loadUsage();
+}
+load();setInterval(load,60000);
+</script></body></html>

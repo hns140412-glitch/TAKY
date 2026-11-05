@@ -1,0 +1,56 @@
+{
+  "schema": "ARCHIGROW_PARCEL_SOURCE_RECEIPT_V1",
+  "project_id": "SYNTHETIC_URBAN_BLOCK_01",
+  "pnu": "9999999999999999999",
+  "status": "HOLD",
+  "failure_class": "DESIGN_PARAMETERS_MISSING",
+  "fixture_class": "SYNTHETIC_NOT_REAL",
+  "eum": {
+    "pnu": "9999999999999999999",
+    "area_m2": 13525.2,
+    "address": "[가상 주소] 서울시 가상구 모의동 000-0",
+    "document_status": "SYNTHETIC_FIXTURE_NOT_OFFICIAL",
+    "parcel_identity_status": "VISIBLE_ADDRESS_MATCHES_PNU_BOUND_CADASTRAL",
+    "evidence_sha256": "43afab6a9700961b6893c79246fde927be215959a3b98d64b07daf33d77bbd22"
+  },
+  "parcel": {
+    "pnu": "9999999999999999999",
+    "projected_crs": "EPSG:5186",
+    "projected_origin_m": [
+      200000,
+      500000
+    ],
+    "polygon_local_m": [
+      [
+        0,
+        0
+      ],
+      [
+        110,
+        0
+      ],
+      [
+        138,
+        34
+      ],
+      [
+        126,
+        87
+      ],
+      [
+        91,
+        115
+      ],
+      [
+        0,
+        99
+      ]
+    ],
+    "polygon_area_m2": 13522.0,
+    "source": "SYNTHETIC_CADASTRAL_GEOMETRY_NOT_VWORLD",
+    "evidence_sha256": "d42624d3e001f5df6d7d0e6d08a96edf141e54629309defad042985227f662cb"
+  },
+  "comparison": {
+    "result": "MATCH_WITHIN_SCREENING_TOLERANCE"
+  }
+}

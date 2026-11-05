@@ -1,0 +1,11 @@
+﻿{
+    "schema":  "CLAUDE_INDEPENDENCE_ATTEMPT_VALIDATION_V1",
+    "status":  "INVALID_NO_PRIMARY_SOURCE_ANALYSIS",
+    "source_input":  "User quotes plus repo/root paths were present in prompt file",
+    "model_output":  "Incorrectly claimed user quotes and root paths were absent",
+    "claude_exit_code":  0,
+    "independent_audit_completed":  false,
+    "comparison_authorized":  false,
+    "output_path":  "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\INVALID_CLAUDE_BLIND_AUDIT_ATTEMPT_20261017.txt",
+    "previous_audit_not_valid_independent_baseline":  true
+}

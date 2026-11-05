@@ -1,0 +1,26 @@
+{
+  "schema": "ARCHIGROW_SOLAR_STUDY_REPORT_V1",
+  "project_id": "SYNTHETIC_URBAN_BLOCK_01",
+  "result_status": "SYNTHETIC_SCENARIO_NOT_CALCULATED",
+  "dates": [
+    {
+      "id": "S-WINTER",
+      "date": "2026-12-22"
+    },
+    {
+      "id": "S-SUMMER",
+      "date": "2026-06-21"
+    }
+  ],
+  "claims": {
+    "metric_kind": "SYNTHETIC_EXAMPLE_ONLY_NOT_NUMERIC_SIMULATION",
+    "legal_sunlight_compliance": "NOT_EVALUATED"
+  },
+  "context": {
+    "unknown_height_affected_receiver_count": 3
+  },
+  "input_hashes": {
+    "context_obstacles": "2e3b3300a7c30220994c4a3bdde46b5d25ab0d18988f023d613e80b7e16deecb",
+    "massing_result": "1313b93472326a8a9a96feae47deb06d8ebb6a319270ac631cad8cf4bcc15e9a"
+  }
+}

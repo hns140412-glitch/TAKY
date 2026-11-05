@@ -1,0 +1,132 @@
+{
+  "schema": "ARCHIGROW_SOLAR_STUDY_INPUT_V1",
+  "project_id": "SOLAR_VWORLD_SHAPED_FIXTURE_20261018",
+  "time": {
+    "tz": "Asia/Seoul",
+    "basis": "CIVIL_KST",
+    "dates": [
+      {
+        "id": "WINTER_SOLSTICE",
+        "date": "2026-12-22"
+      }
+    ],
+    "step_minutes": 20,
+    "min_sun_elevation_deg": 3.0,
+    "max_reach_m": 400,
+    "windows": [
+      {
+        "id": "W0900_1500",
+        "start": "09:00",
+        "end": "15:00"
+      },
+      {
+        "id": "W0900_1700",
+        "start": "09:00",
+        "end": "17:00"
+      }
+    ]
+  },
+  "receivers": {
+    "facade_sets": [
+      {
+        "id": "N1_SOUTH",
+        "building_id": "BLD-lt_c_bldginfo.1",
+        "spacing_m": 6,
+        "heights_above_ground_m": [
+          1.5,
+          4.8,
+          8.1,
+          11.4,
+          14.7,
+          18.0,
+          21.3
+        ],
+        "facing_filter": {
+          "azimuth_deg": 180,
+          "tolerance_deg": 60
+        }
+      },
+      {
+        "id": "NW_SOUTH",
+        "building_id": "BLD-lt_c_bldginfo.2",
+        "spacing_m": 7,
+        "heights_above_ground_m": [
+          1.5,
+          4.8,
+          8.1
+        ],
+        "facing_filter": {
+          "azimuth_deg": 180,
+          "tolerance_deg": 60
+        }
+      },
+      {
+        "id": "W_EAST",
+        "building_id": "BLD-lt_c_bldginfo.6",
+        "spacing_m": 7,
+        "heights_above_ground_m": [
+          1.5,
+          4.8,
+          8.1
+        ],
+        "facing_filter": {
+          "azimuth_deg": 90,
+          "tolerance_deg": 50
+        }
+      },
+      {
+        "id": "NE_WEST",
+        "building_id": "BLD-lt_c_bldginfo.3",
+        "spacing_m": 7,
+        "heights_above_ground_m": [
+          1.5,
+          4.8,
+          8.1
+        ],
+        "facing_filter": {
+          "azimuth_deg": 270,
+          "tolerance_deg": 50
+        }
+      }
+    ],
+    "points": [
+      {
+        "id": "YARD_PT",
+        "x": 20,
+        "y": 40,
+        "z_above_ground_m": 1.5,
+        "label": "north yard ground point"
+      }
+    ],
+    "grids": [
+      {
+        "id": "NORTH_YARD",
+        "polygon_m": [
+          [
+            8,
+            34
+          ],
+          [
+            32,
+            34
+          ],
+          [
+            32,
+            48
+          ],
+          [
+            8,
+            48
+          ]
+        ],
+        "spacing_m": 6,
+        "z_above_ground_m": 0.0
+      }
+    ]
+  },
+  "ground_grid": {
+    "spacing_m": 3,
+    "margin_m": 12,
+    "window_id": "W0900_1500"
+  }
+}

@@ -1,0 +1,33 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArchiGrow 소스 준비 상태 — GB7</title><style>
+:root{--ink:#1d2430;--mut:#667085;--line:#d9dee7;--bg:#f4f6f9;--bad:#b42318;--warn:#b54708;--ok:#067647}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Malgun Gothic",system-ui,sans-serif}
+header{background:#111827;color:#fff;padding:22px 48px}header small{color:#9aa4b2;letter-spacing:.08em}
+header h1{margin:4px 0 0;font-size:24px}main{max-width:1180px;margin:28px auto;padding:0 32px;display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 24px}section.wide{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:16px}.hold{border-left:6px solid var(--bad)}.hold b{color:var(--bad)}
+table{width:100%;border-collapse:collapse}td{padding:8px 6px;border-top:1px solid var(--line)}.st{font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+dl{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:0}dt{color:var(--mut)}dd{margin:0;word-break:break-all}
+ol,ul{margin:0;padding-left:20px}li{margin:6px 0}.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font:inherit}
+.btn[aria-disabled=true]{color:#98a2b3;background:#f2f4f7;cursor:not-allowed}
+</style></head><body>
+<header><small>ARCHIGROW SITE STUDIO · 소스 준비 상태(읽기 전용)</small><h1>프로젝트 GB7</h1></header>
+<main>
+<section class="wide hold" id="hold"><h2>상태: <b>HOLD · SITE_SOURCE_NOT_BOUND</b></h2>
+<p>이 프로젝트에는 검증된 현장 소스 영수증(SITE_ANALYSIS)이 연결되어 있지 않습니다. 지적·필지·법규·일조·매스 결과를 만들거나 PPT/내보내기를 제공하지 않습니다. 자동 수집도 하지 않습니다.</p></section>
+<section><h2>프로젝트 / 워크북</h2><dl>
+<dt>프로젝트 ID</dt><dd id="pid">GB7</dd>
+<dt>경로(route)</dt><dd>PRODUCTION</dd>
+<dt>매니페스트 등록 단계(완료 증거 아님)</dt><dd>WORKBOOK_AUDIT</dd>
+<dt>워크북 역할</dt><dd id="wb-role">PROVISIONAL_DERIVED — 공식 인증 아님 — 파생/임시 자료</dd>
+<dt>워크북 파일</dt><dd>강북7구역_도시정비사업_설계개요_심층분석_A3.xlsx</dd>
+<dt>PNU</dt><dd id="pnu">미제공 — 추정하지 않음</dd></dl></section>
+<section><h2>소스 계층</h2><table id="layers"><tr><td>현장 소스 영수증(site_source_receipt)</td><td>필수</td><td class="st bad">없음 — HOLD</td></tr><tr><td>주변 컨텍스트(context)</td><td>선택</td><td class="st warn">없음(선택)</td></tr><tr><td>일조 분석(solar)</td><td>선택</td><td class="st warn">없음(선택)</td></tr><tr><td>매스 옵션(massing)</td><td>선택</td><td class="st warn">없음(선택)</td></tr></table></section>
+<section class="wide"><h2>원천 잠금 메모(매니페스트 기록)</h2><ul id="notes"><li><b>original_input</b> — 20260903 미아-1+2획지 950%(도시보완)-2(1).xlsx = ORIGINAL_BYTES_PENDING (not found on local D:, Drive F:)</li><li><b>same_rev_dwg</b> — NOT_FOUND (2024-1002_미아동 복합개발.dwg exists but REV/date differs from 2026-09-03 basis; not used)</li><li><b>scenario_source</b> — 260624-1획지ALT1-976%.xlsx kept as separate SCENARIO_ALT role; not merged</li></ul></section>
+<section class="wide"><h2>확보해야 할 것</h2><ol id="steps"><li>이 프로젝트 ID와 정확히 일치하는 19자리 PNU를 사용자/원본 자료에서 확인합니다(추정 금지).</li><li>ARCHIGROW_SITE_SOURCE_INPUT_V1 입력(project_id + pnu, 또는 주소 + 무료 VWorld 키)을 만들고 ARCHIGROW_PARCEL_SOURCE.py로 출처 영수증을 생성합니다.</li><li>무료 VWorld 키는 기존 로컬 비밀 환경변수(VWORLD_KEY)로만 설정합니다. 값은 화면·로그에 표시하지 않습니다.</li><li>생성된 site_source_receipt.json을 pipeline manifest의 inputs.site_analysis.site_source_receipt에 연결한 뒤 스튜디오를 다시 실행합니다.</li></ol></section>
+<section class="wide"><h2>동작</h2><div class="actions">
+<a class="btn" href="/api/readiness" id="json-link">준비 상태 JSON 열기</a>
+<button class="btn" aria-disabled="true" disabled>PPT 내보내기 — HOLD</button>
+<button class="btn" aria-disabled="true" disabled>지도·일조·매스 — HOLD</button></div></section>
+</main></body></html>

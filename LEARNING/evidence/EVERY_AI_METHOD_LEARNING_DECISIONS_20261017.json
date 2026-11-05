@@ -1,0 +1,235 @@
+{
+  "schema": "TAKY_EVERY_AI_LOCAL_LEARNING_EVIDENCE_ADJUDICATION_V1",
+  "created_at": "2026-10-17T04:41:23.753082+00:00",
+  "original_source_count": 118,
+  "learning_items_evaluated": 12,
+  "browser_positive_and_negative_valid": true,
+  "existing_quick_qa_consumes_negative_control": true,
+  "official_upstream_docs_hash_verified": 4,
+  "tested_local_method_claims": 2,
+  "external_tools_installed_or_executed": 0,
+  "canonical_learning_promoted": 0,
+  "paid_api_calls": 0,
+  "model_calls": 0,
+  "summary": {
+    "HOLD_BASE_DATA_MISSING": 1,
+    "HOLD_EXECUTION_TRACE_MISSING": 1,
+    "HOLD_SKILL_EXECUTION_TRACE_MISSING": 1,
+    "LEARNING_CLAIM_LIMITED_BY_OFFICIAL_ALPHA": 1,
+    "PREREQUISITES_MATCHED_REPRODUCTION_UNTESTED": 1,
+    "HOLD_PLAYABLE_ARTIFACTS_MISSING": 1,
+    "LOCAL_METHOD_REUSED_IN_QUICK_QA": 2,
+    "HOLD_DESIGN_BEHAVIOR_BASELINE_MISSING": 1,
+    "HOLD_CONTROLLED_UI_COMPARISON_MISSING": 1,
+    "HOLD_PAIRED_TEXT_VALIDATION_MISSING": 1,
+    "HOLD_USAGE_QUALITY_BASELINE_MISSING": 1
+  },
+  "decisions": [
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DATA_METRIC_RECALC",
+      "learning_hypothesis": "Data-based content recommendations should preserve original rows, recomputable measures, and separation of correlation from causal explanation.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-insta-analysis",
+      "original_raw_sha256": "ab55f1c9d9ba79d55c23af42b17dbbcfe664dd9ba4d412e350d66369f076e8ff",
+      "original_unit_sha256": "3f46b357fe0471bd1f3211441cd98fde345b2fd30ab9f1af101ea4085afe0e97",
+      "status": "HOLD_BASE_DATA_MISSING",
+      "decision_reason": "Reported 49-post correlations lack a verified input data file for independent recalculation.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "RUN_SOURCE_DATA_RECALCULATION",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-ROLE_PROMPT_NOT_AGENT",
+      "learning_hypothesis": "A list of role prompts connected to apps should not be equated with independently running scheduled agents; verify actual actions and state.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-secretary-30",
+      "original_raw_sha256": "b15b989304fa8278e07db337b7398dbdf76b8d0b57cf673c4eef9c68eaf40eed",
+      "original_unit_sha256": "7403875bced1ace9ee9617660f5a65cab36720704915b94e561e30d563569ad4",
+      "status": "HOLD_EXECUTION_TRACE_MISSING",
+      "decision_reason": "Thirty suggested workflows are not verified as thirty continuously acting processes.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "COMPLETE_ACTUAL_ACTION_AND_SCHEDULE_TEST",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MANUAL_TO_ACTUAL_ENFORCEMENT",
+      "learning_hypothesis": "A persistent task manual and verification checklist create reusable procedure but do not demonstrate that an executor consumed rules in a real task.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-ai-delegation-loop-4",
+      "original_raw_sha256": "44f31d6404c83fb935b07dd5ffca4e0124df1aaaa474175f28d5647eb55e5b66",
+      "original_unit_sha256": "3b9dc415745cd5cb14b9e6acd19845a3b8c1fca744542427bbfb7a51392da8d6",
+      "status": "HOLD_SKILL_EXECUTION_TRACE_MISSING",
+      "decision_reason": "A proposed SKILL.md procedure has no controlled proof of use by an executor.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "TRACE_READ_EXECUTE_FAIL_RETRY",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-OFFICE_READ_WRITE_ROUNDTRIP",
+      "learning_hypothesis": "Compatibility of document, spreadsheet and slide tools must be tested separately with editable files and round-trip changes.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/ms-office-free-wordcraft",
+      "original_raw_sha256": "90818382e193da48dcf6b2d3778a251209cf526dbfa99f18097ea8c6b655451e",
+      "original_unit_sha256": "0b8f49109a2c117b6c1fd896229ab4285cc363c26e83daa68997b5eacb01445b",
+      "status": "LEARNING_CLAIM_LIMITED_BY_OFFICIAL_ALPHA",
+      "decision_reason": "Official projects are alpha: maintain per-file fidelity tests, do not infer complete MS Office replacement (estimates ~60% Word, ~50% Excel, ~55% PowerPoint).",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false,
+        "upstream_readme_sha256": {
+          "wordcraft": "090e788809ad4249a53e2a7585ee2e202a86916ce0f5733bdb2b567b7fce30d6",
+          "gridcraft": "a5a5c13aa963fe48621e06e37a9d07da57455703052aaa44b2a0ab1c80981201",
+          "deckcraft": "d4b1570c432c77d254d456c22e5657420ace2cf8f1770d36f844f5ff61ab38c0"
+        }
+      },
+      "required_next_test": "THREE_FORMAT_ROUNDTRIP_TEST",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-REA_SOURCE_BOUND_DIFFERENTIAL",
+      "learning_hypothesis": "Reverse engineering that infers a feature should preserve observed inputs, outputs and traces, followed by differential tests against a separate implementation.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/rea-reverse-engineer-anything",
+      "original_raw_sha256": "57e8ad66ad1c224e64795036eceba546c5913675dd6a3a41f50cb3f59644abf8",
+      "original_unit_sha256": "ad67e2cc78fa2d26ac869868d2ef7f170f1915f812215a26e4034ed9b10555dd",
+      "status": "PREREQUISITES_MATCHED_REPRODUCTION_UNTESTED",
+      "decision_reason": "Original Node requirements match official upstream; local Node version qualifies, but REA is not installed or run.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false,
+        "upstream_readme_sha256": "6856a965e4b6cc3ca7b4211c7cfa63fc59e6aa638b30bdb38c46a5eb3e4cfdb2",
+        "local_node_version": "v26.8.1",
+        "rea_cli_installed": false
+      },
+      "required_next_test": "ORIGINAL_VS_REIMPLEMENTATION_TEST",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MOTION_PLAYBACK_EVIDENCE",
+      "learning_hypothesis": "Lists of motion prompts and still examples should be evaluated separately from playable final clips and render reproducibility.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-motion-100",
+      "original_raw_sha256": "8deafb311ad4f20a695ac35ec28ad8b2def5d276073579ba080066340528a141",
+      "original_unit_sha256": "5a1bb0439bc1be4d6aff06907dcc3eb0befcb12115cc4a47e55ec84704932d4b",
+      "status": "HOLD_PLAYABLE_ARTIFACTS_MISSING",
+      "decision_reason": "Still sample images do not demonstrate 100 playable or reproducible animations.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "RENDER_SAMPLE_AND_INSPECT_PLAYBACK",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-BROWSER_OBSERVED_END_STATE",
+      "learning_hypothesis": "Browser tools can observe elements and console errors, but verification of business behavior requires checking state transitions and persisted results.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/chrome-devtools-mcp",
+      "original_raw_sha256": "a90bc15140c5d7f09ed37d6c1e959579c8fdea9e515d52f77cc745163d4eb317",
+      "original_unit_sha256": "11b902b93d6094d54a53409f66559022dc57130bedd6620750ac1a1933de8374",
+      "status": "LOCAL_METHOD_REUSED_IN_QUICK_QA",
+      "decision_reason": "Real local Chrome hint behavior passed; intentional answer leakage detected. NOT an upstream MCP capability test.",
+      "tested_evidence": {
+        "local_method_executed": true,
+        "upstream_tool_executed": false,
+        "browser_run_sha256": "2952d008479a43f75c51e6cc202a246a3421b90913aa5273c6ea90e62f02db8b",
+        "quick_negative_control_included": true,
+        "qa_sha256": "f53bfe3198fca07f293fe36a19764626a12bfe76fe0cf963899846890ceadaff"
+      },
+      "required_next_test": "INJECT_LOGIC_DEFECT_AND_VERIFY_DETECTION",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DESIGN_TOKEN_VS_BEHAVIOR",
+      "learning_hypothesis": "Extracted visual tokens are not a substitute for observed interactions, responsive transitions and underlying data behavior.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/designlang",
+      "original_raw_sha256": "0c56fdd3e9aa0fc31d020032dada53cbbc9ae12d3f1ce09179d053d5faedb996",
+      "original_unit_sha256": "02cef669d65d5d3af6c77f43481a92f7b75fabdfa7092fdd9b653aadabdc4a30",
+      "status": "HOLD_DESIGN_BEHAVIOR_BASELINE_MISSING",
+      "decision_reason": "No matching original/candidate runtime and state transitions are supplied.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "COMPARE_VISUAL_AND_FUNCTIONAL_OUTPUTS",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DESIGN_SKILL_ROLES_SEPARATE",
+      "learning_hypothesis": "Aesthetic drafting, component knowledge, motion refinement and accessibility checks target different kinds of quality; compare each against the same output.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-design-skills-5",
+      "original_raw_sha256": "6200487d8964549d615270c4a0496dc14ea5dd9060c1b860199f34bc7ccd94a6",
+      "original_unit_sha256": "5571eb2e59d007525eff08e5bbdd791a81983deaed7f7aa3864b792d59b43aa0",
+      "status": "HOLD_CONTROLLED_UI_COMPARISON_MISSING",
+      "decision_reason": "Five tools are described, not compared with identical UI tasks and success criteria.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "FAIR_BASELINE_UI_EVALUATION",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-KOREAN_STYLE_MEANING_DIFF",
+      "learning_hypothesis": "Korean style edits should be evaluated for readability and exact preservation of facts, numbers, entities and citations.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/ai-writing-humanizer-skills",
+      "original_raw_sha256": "9c908a8fb7be4d0ca13d68ed1ae9461b9d979164e2ba424c4faade6475d8e9aa",
+      "original_unit_sha256": "07e7faee7cdb46b334ea53108080a325fa641133b8d6177be2803b22aa11c31d",
+      "status": "HOLD_PAIRED_TEXT_VALIDATION_MISSING",
+      "decision_reason": "No before/after text with fact preservation and reader ratings has been tested.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "BEFORE_AFTER_FACT_DIFF_AND_READER_TEST",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MODEL_ROUTING_SUCCESS_ADJUSTED_COST",
+      "learning_hypothesis": "Claims of model-routing efficiency require measuring correct results, retries, time and total consumption on comparable tasks.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/model-routing",
+      "original_raw_sha256": "ee229057ca605714e486cb48eb143da52eae19b8270c23cf8632d2135c531637",
+      "original_unit_sha256": "b24fee2e24dd4ef43e50cb724862043f56a8d12966a4dbe8918a3173f78b7663",
+      "status": "HOLD_USAGE_QUALITY_BASELINE_MISSING",
+      "decision_reason": "No task-matched billing, retries, elapsed time, and correctness comparison is verified.",
+      "tested_evidence": {
+        "local_method_executed": false,
+        "upstream_tool_executed": false
+      },
+      "required_next_test": "RUN_BASELINE_WITH_RETRY_COST",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-QUALITY_SKILL_TOOL_FAIL_SENSITIVITY",
+      "learning_hypothesis": "Different verification tools target different observable failure classes; tool presence and PASS reports should be tested against injected defects.",
+      "original_url": "https://every-ai-guides.vercel.app/posts/claude-verify-skills-5",
+      "original_raw_sha256": "384d58af7a3fe5f01e97da6b146b0f7a45446207403bfb21896241006c7ba4ea",
+      "original_unit_sha256": "111444f080d08a4f9dd3337dac3b7036d4976c04113d8aea8858745031f0f8e3",
+      "status": "LOCAL_METHOD_REUSED_IN_QUICK_QA",
+      "decision_reason": "Real local Chrome hint behavior passed; intentional answer leakage detected. NOT an upstream MCP capability test.",
+      "tested_evidence": {
+        "local_method_executed": true,
+        "upstream_tool_executed": false,
+        "browser_run_sha256": "2952d008479a43f75c51e6cc202a246a3421b90913aa5273c6ea90e62f02db8b",
+        "quick_negative_control_included": true,
+        "qa_sha256": "f53bfe3198fca07f293fe36a19764626a12bfe76fe0cf963899846890ceadaff"
+      },
+      "required_next_test": "DEFECT_SEEDED_INDEPENDENT_BENCHMARK",
+      "canonical_learning_promoted": false,
+      "external_tool_installed": false
+    }
+  ]
+}

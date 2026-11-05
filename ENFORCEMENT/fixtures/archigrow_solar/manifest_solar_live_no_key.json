@@ -1,0 +1,22 @@
+{
+  "schema": "ARCHIGROW_PIPELINE_MANIFEST_V1",
+  "project_id": "SOLAR_VWORLD_SHAPED_FIXTURE_20261018",
+  "route": "SOLAR_CONTEXT_STUDY_LIVE_NO_KEY",
+  "stages": [
+    "MASSING",
+    "SITE_CONTEXT",
+    "SOLAR_STUDY"
+  ],
+  "inputs": {
+    "massing": {
+      "input": "massing_site_input_vworld_frame.json"
+    },
+    "site_context": {
+      "input": "site_context_input_live.json"
+    },
+    "solar_study": {
+      "input": "solar_study_input_vworld_frame.json",
+      "context_stage": "SITE_CONTEXT"
+    }
+  }
+}

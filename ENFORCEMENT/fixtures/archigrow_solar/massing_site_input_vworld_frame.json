@@ -1,0 +1,45 @@
+{
+  "schema": "ARCHIGROW_MASSING_INPUT_V1",
+  "project_id": "SOLAR_VWORLD_SHAPED_FIXTURE_20261018",
+  "source_role": "SYNTHETIC_NON_LEGAL_SOLAR_FIXTURE_VWORLD_SHAPED",
+  "rule_source_status": "UNVERIFIED_DEMO",
+  "coordinate_units": "m",
+  "projected_crs": "EPSG:5186",
+  "coordinate_frame": {
+    "projected_crs": "EPSG:5186",
+    "projected_origin_m": [
+      198056.367,
+      551885.031
+    ]
+  },
+  "site_polygon": [
+    [
+      0,
+      0
+    ],
+    [
+      40,
+      0
+    ],
+    [
+      40,
+      31
+    ],
+    [
+      0,
+      31
+    ]
+  ],
+  "constraints": {
+    "max_coverage_pct": 60,
+    "max_far_pct": 800,
+    "target_far_counted_area_m2": 4200,
+    "floor_count": 12,
+    "floor_to_floor_m": 3.3,
+    "demo_clearance_m": 0.5
+  },
+  "strategies": [
+    "BALANCED",
+    "SCULPTURAL"
+  ]
+}

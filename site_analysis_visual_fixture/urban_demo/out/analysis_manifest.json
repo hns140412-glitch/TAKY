@@ -1,0 +1,70 @@
+{
+  "schema": "ARCHIGROW_SITE_ANALYSIS_MANIFEST_V1",
+  "generator": "ARCHIGROW_SITE_ANALYSIS_REPORT/2026-10-19.2",
+  "project_id": "SYNTHETIC_URBAN_BLOCK_01",
+  "pnu": "9999999999999999999",
+  "source_status": "PASS",
+  "design_status": "PRESENT_UNVERIFIED",
+  "area": {
+    "eum_area_m2": 13525.2,
+    "polygon_area_m2": 13522.0,
+    "delta_m2": -3.2000000000007276,
+    "tolerance_m2": 67.626,
+    "result": "MATCH_WITHIN_SCREENING_TOLERANCE"
+  },
+  "sections": {
+    "site_source": {
+      "status": "PASS",
+      "source": {
+        "path": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\site_source_receipt.json",
+        "sha256": "d59062989a23012e4ce9ca44172d2b7951252d1a5c23ec9d2b938f804e0aaac2"
+      },
+      "collector_status": "HOLD",
+      "failure_class": "DESIGN_PARAMETERS_MISSING"
+    },
+    "context": {
+      "status": "PRESENT",
+      "source": {
+        "path": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\context_obstacles.json",
+        "sha256": "2e3b3300a7c30220994c4a3bdde46b5d25ab0d18988f023d613e80b7e16deecb"
+      }
+    },
+    "solar": {
+      "status": "PRESENT",
+      "source": {
+        "path": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\solar_study_report.json",
+        "sha256": "f00ff2cd53a0384e3957cfd0579f3e30234f34a3f31b15ca746062ddc7385c6c"
+      }
+    },
+    "massing": {
+      "status": "PRESENT",
+      "source": {
+        "path": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\massing_result.json",
+        "sha256": "1313b93472326a8a9a96feae47deb06d8ebb6a319270ac631cad8cf4bcc15e9a"
+      }
+    }
+  },
+  "available_section_count": 6,
+  "page_count": 7,
+  "page_count_kind": "DESIGNED_SECTIONS_PRINT_PAGINATION_UNVERIFIED",
+  "pages": [
+    "Identity",
+    "Parcel geometry",
+    "Source quality",
+    "Building context",
+    "Solar evidence",
+    "Design evidence",
+    "Verification agenda"
+  ],
+  "capabilities": {
+    "html": "AVAILABLE",
+    "svg": "AVAILABLE",
+    "pptx": "AVAILABLE",
+    "pdf": "NOT_GENERATED"
+  },
+  "claims": {
+    "legal_parcel_certificate": false,
+    "legal_feasibility": false,
+    "source_independent_of_design_constraints": true
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "schema": "TAKY_SOURCE_BOUND_LEARNING_METHOD_CANDIDATES_V1",
+  "source_registry": "SITE_MINING_EVIDENCE_ACTIVE",
+  "learning_owner": "SYSTEM_GROW_REFERENCE_LEARNING_CANDIDATE",
+  "source_review_stage": "SOURCE_ANCHORED_UNREVIEWED",
+  "independent_method_reproduction_verified": false,
+  "machine_generated_utility_decision_authoritative": false,
+  "source_count_considered": 118,
+  "learning_candidate_count": 12,
+  "canonical_learning_unchanged": true,
+  "model_calls": 0,
+  "paid_api_calls": 0,
+  "candidates": [
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DATA_METRIC_RECALC",
+      "learning_hypothesis": "Data-based content recommendations should preserve original rows, recomputable measures, and separation of correlation from causal explanation.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-insta-analysis",
+        "source_sha256": "ab55f1c9d9ba79d55c23af42b17dbbcfe664dd9ba4d412e350d66369f076e8ff",
+        "source_id": "SITE_WATCH:9c974e7be4c57ae6f316a23b",
+        "unit_id": "HTML_SEGMENT:005",
+        "unit_sha256": "3f46b357fe0471bd1f3211441cd98fde345b2fd30ab9f1af101ea4085afe0e97",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 12,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "실제 결과: 클로드가 표를 직접 계산해 「상위 2개가 전체 조회의 37%」, 「조회와의 상관은 공유 +0.57 · 저장 +0.53 · 댓글 −0.11」을 짚고, 「팔로우하고 댓글에 ○○」로 시작하는 첫 줄이 가장 약한 패턴이라고 결론을 냈습니다. 49는 내 게시물 수로 바꿔 쓰세요.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "RUN_SOURCE_DATA_RECALCULATION",
+      "evidence_limitation": "No input dataset or independent numeric rerun in the source collection",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-ROLE_PROMPT_NOT_AGENT",
+      "learning_hypothesis": "A list of role prompts connected to apps should not be equated with independently running scheduled agents; verify actual actions and state.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-secretary-30",
+        "source_sha256": "b15b989304fa8278e07db337b7398dbdf76b8d0b57cf673c4eef9c68eaf40eed",
+        "source_id": "SITE_WATCH:192d64646588ba26557b0f88",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "7403875bced1ace9ee9617660f5a65cab36720704915b94e561e30d563569ad4",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 3,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "클로드는 claude.ai 의 「설정 → 커넥터」에서 Gmail·구글 캘린더·구글 드라이브·Notion·Slack·Canva·Figma·GitHub 같은 앱을 연결하면, 대화 안에서 그 앱의 내용을 읽고 정리할 수 있습니다. 아래 30개 조합은 연결할 앱과 첫 프롬프트만 바꿔 끼",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "COMPLETE_ACTUAL_ACTION_AND_SCHEDULE_TEST",
+      "evidence_limitation": "No independent 24-hour agent log in captured source",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MANUAL_TO_ACTUAL_ENFORCEMENT",
+      "learning_hypothesis": "A persistent task manual and verification checklist create reusable procedure but do not demonstrate that an executor consumed rules in a real task.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-ai-delegation-loop-4",
+        "source_sha256": "44f31d6404c83fb935b07dd5ffca4e0124df1aaaa474175f28d5647eb55e5b66",
+        "source_id": "SITE_WATCH:357f995340827d4600b26254",
+        "unit_id": "HTML_SEGMENT:002",
+        "unit_sha256": "3b9dc415745cd5cb14b9e6acd19845a3b8c1fca744542427bbfb7a51392da8d6",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "li",
+          "ordinal": 4,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "STEP 1에서 AI가 나를 인터뷰해 머릿속 업무 순서를 SKILL.md 매뉴얼로 뽑습니다.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "TRACE_READ_EXECUTE_FAIL_RETRY",
+      "evidence_limitation": "No externally captured rule-read or failure injection trace",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-OFFICE_READ_WRITE_ROUNDTRIP",
+      "learning_hypothesis": "Compatibility of document, spreadsheet and slide tools must be tested separately with editable files and round-trip changes.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/ms-office-free-wordcraft",
+        "source_sha256": "90818382e193da48dcf6b2d3778a251209cf526dbfa99f18097ea8c6b655451e",
+        "source_id": "SITE_WATCH:396d163f99ec6ff29ce59b70",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "0b8f49109a2c117b6c1fd896229ab4285cc363c26e83daa68997b5eacb01445b",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "h1",
+          "ordinal": 1,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "월 구독료 없이 워드·엑셀·파워포인트를 공짜로 쓰는 WordCraft·GridCraft·DeckCraft 설치 가이드",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "THREE_FORMAT_ROUNDTRIP_TEST",
+      "evidence_limitation": "Published availability does not prove formula, font or shape fidelity",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-REA_SOURCE_BOUND_DIFFERENTIAL",
+      "learning_hypothesis": "Reverse engineering that infers a feature should preserve observed inputs, outputs and traces, followed by differential tests against a separate implementation.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/rea-reverse-engineer-anything",
+        "source_sha256": "57e8ad66ad1c224e64795036eceba546c5913675dd6a3a41f50cb3f59644abf8",
+        "source_id": "SITE_WATCH:f83cb1d72eb6f4fda8a7ec08",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "ad67e2cc78fa2d26ac869868d2ef7f170f1915f812215a26e4034ed9b10555dd",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 3,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "REA(Reverse Engineer Anything)는 코딩 에이전트가 소스 코드 없이 앱을 뜯어보게 해 주는 무료 도구입니다. 마음에 드는 기능이 어떻게 돌아가는지 근거와 함께 설명하고, 내 프로젝트에 비슷한 기능까지 만들어 줍니다. ",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "ORIGINAL_VS_REIMPLEMENTATION_TEST",
+      "evidence_limitation": "Installation guide is not a proven functional replica",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MOTION_PLAYBACK_EVIDENCE",
+      "learning_hypothesis": "Lists of motion prompts and still examples should be evaluated separately from playable final clips and render reproducibility.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-motion-100",
+        "source_sha256": "8deafb311ad4f20a695ac35ec28ad8b2def5d276073579ba080066340528a141",
+        "source_id": "SITE_WATCH:892b992e785d30ed652e7183",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "5a1bb0439bc1be4d6aff06907dcc3eb0befcb12115cc4a47e55ec84704932d4b",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "li",
+          "ordinal": 4,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "스킬 설치는 모션그래픽 스킬 5개 가이드 에 정리해 뒀어요. 이 글의 100개는 HyperFrames 와 Remotion 두 개만 있으면 됩니다.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "RENDER_SAMPLE_AND_INSPECT_PLAYBACK",
+      "evidence_limitation": "Still images do not prove all animations ran",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-BROWSER_OBSERVED_END_STATE",
+      "learning_hypothesis": "Browser tools can observe elements and console errors, but verification of business behavior requires checking state transitions and persisted results.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/chrome-devtools-mcp",
+        "source_sha256": "a90bc15140c5d7f09ed37d6c1e959579c8fdea9e515d52f77cc745163d4eb317",
+        "source_id": "SITE_WATCH:599fdd81cfdc4056b893a659",
+        "unit_id": "HTML_SEGMENT:003",
+        "unit_sha256": "11b902b93d6094d54a53409f66559022dc57130bedd6620750ac1a1933de8374",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 5,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "chrome-devtools-mcp 는 그 눈을 붙입니다. 크롬을 만든 팀이 직접 내놓았고, 붙이고 나면 AI가 지금 켜져 있는 페이지를 스스로 엽니다.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "INJECT_LOGIC_DEFECT_AND_VERIFY_DETECTION",
+      "evidence_limitation": "Tool setup article is not an observed detection benchmark",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DESIGN_TOKEN_VS_BEHAVIOR",
+      "learning_hypothesis": "Extracted visual tokens are not a substitute for observed interactions, responsive transitions and underlying data behavior.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/designlang",
+        "source_sha256": "0c56fdd3e9aa0fc31d020032dada53cbbc9ae12d3f1ce09179d053d5faedb996",
+        "source_id": "SITE_WATCH:789b5229ad97188ff077ea2c",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "02cef669d65d5d3af6c77f43481a92f7b75fabdfa7092fdd9b653aadabdc4a30",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 3,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "designlang 은 헤드리스 브라우저로 실제 페이지를 열어 DOM 에서 디자인 값을 읽어 내는 CLI 입니다. 색·글꼴·간격·그림자·모션을 DTCG 토큰, Tailwind 설정, DESIGN.md 같은 파일로 한 번에 씁니다. Node 20 이상이",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "COMPARE_VISUAL_AND_FUNCTIONAL_OUTPUTS",
+      "evidence_limitation": "Static token extraction alone cannot prove experience equivalence",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-DESIGN_SKILL_ROLES_SEPARATE",
+      "learning_hypothesis": "Aesthetic drafting, component knowledge, motion refinement and accessibility checks target different kinds of quality; compare each against the same output.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-design-skills-5",
+        "source_sha256": "6200487d8964549d615270c4a0496dc14ea5dd9060c1b860199f34bc7ccd94a6",
+        "source_id": "SITE_WATCH:28a98a99c038cb9518611155",
+        "unit_id": "HTML_SEGMENT:002",
+        "unit_sha256": "5571eb2e59d007525eff08e5bbdd791a81983deaed7f7aa3864b792d59b43aa0",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "li",
+          "ordinal": 4,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "처음이라면 앤트로픽 공식인 STEP 1(frontend-design)부터 설치합니다.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "FAIR_BASELINE_UI_EVALUATION",
+      "evidence_limitation": "Installation of multiple skills is not evidence of improved task success",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-KOREAN_STYLE_MEANING_DIFF",
+      "learning_hypothesis": "Korean style edits should be evaluated for readability and exact preservation of facts, numbers, entities and citations.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/ai-writing-humanizer-skills",
+        "source_sha256": "9c908a8fb7be4d0ca13d68ed1ae9461b9d979164e2ba424c4faade6475d8e9aa",
+        "source_id": "SITE_WATCH:4428b8d470bee444e2d7e95e",
+        "unit_id": "HTML_SEGMENT:001",
+        "unit_sha256": "07e7faee7cdb46b334ea53108080a325fa641133b8d6177be2803b22aa11c31d",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "h1",
+          "ordinal": 1,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "AI 글의 번역투와 반복을 줄이는 Humanize Korean·Humanizer 설치 가이드",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "BEFORE_AFTER_FACT_DIFF_AND_READER_TEST",
+      "evidence_limitation": "Natural style alone is not accuracy evidence",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-MODEL_ROUTING_SUCCESS_ADJUSTED_COST",
+      "learning_hypothesis": "Claims of model-routing efficiency require measuring correct results, retries, time and total consumption on comparable tasks.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/model-routing",
+        "source_sha256": "ee229057ca605714e486cb48eb143da52eae19b8270c23cf8632d2135c531637",
+        "source_id": "SITE_WATCH:2896b3d9ecec084ea47d39e7",
+        "unit_id": "HTML_SEGMENT:005",
+        "unit_sha256": "b24fee2e24dd4ef43e50cb724862043f56a8d12966a4dbe8918a3173f78b7663",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "p",
+          "ordinal": 8,
+          "id": null,
+          "class": null
+        },
+        "exact_quote": "모델은 값이 다릅니다. 아래는 2026년 8월 30일에 앤트로픽 공식 모델 비교표 에서 직접 읽은 값입니다. 백만 토큰마다 매기는 값이고, 앞이 읽는 값·뒤가 말하는 값입니다.",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "RUN_BASELINE_WITH_RETRY_COST",
+      "evidence_limitation": "No independent task-level cost experiment in this capture",
+      "canonical_promotion": false
+    },
+    {
+      "learning_id": "AI-LRN-EVERY-20261017-QUALITY_SKILL_TOOL_FAIL_SENSITIVITY",
+      "learning_hypothesis": "Different verification tools target different observable failure classes; tool presence and PASS reports should be tested against injected defects.",
+      "source_grounding": {
+        "source_url": "https://every-ai-guides.vercel.app/posts/claude-verify-skills-5",
+        "source_sha256": "384d58af7a3fe5f01e97da6b146b0f7a45446207403bfb21896241006c7ba4ea",
+        "source_id": "SITE_WATCH:a53bcbcff5d5ac63956ccc6a",
+        "unit_id": "HTML_SEGMENT:004",
+        "unit_sha256": "111444f080d08a4f9dd3337dac3b7036d4976c04113d8aea8858745031f0f8e3",
+        "anchor": {
+          "kind": "HTML_BLOCK_ORDINAL",
+          "element": "h2",
+          "ordinal": 10,
+          "id": "step-2",
+          "class": null
+        },
+        "exact_quote": "STEP 2 · 2분 Playwright MCP 로 만든 화면을 직접 눌러 보게 한다",
+        "source_technical_success_not_verified": true
+      },
+      "comparative_disposition": "EVALUATE_IN_LEARNING_NOT_AUTO_ADOPT",
+      "next_experiment": "DEFECT_SEEDED_INDEPENDENT_BENCHMARK",
+      "evidence_limitation": "Listing testing tools is not measured bug-finding accuracy",
+      "canonical_promotion": false
+    }
+  ],
+  "existing_projection_compat": {
+    "schema": "TAKY_AI_LEARNING_PROJECTION_V1",
+    "authoritative": false,
+    "owner": "SYSTEM_GROW",
+    "generated_at": "2026-10-17T00:56:27.324225+00:00",
+    "learning_count": 12,
+    "learnings": [
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-BROWSER_OBSERVED_END_STATE",
+        "insight": "Browser tools can observe elements and console errors, but verification of business behavior requires checking state transitions and persisted results.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:599fdd81cfdc4056b893a659"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-DATA_METRIC_RECALC",
+        "insight": "Data-based content recommendations should preserve original rows, recomputable measures, and separation of correlation from causal explanation.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:9c974e7be4c57ae6f316a23b"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-DESIGN_SKILL_ROLES_SEPARATE",
+        "insight": "Aesthetic drafting, component knowledge, motion refinement and accessibility checks target different kinds of quality; compare each against the same output.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:28a98a99c038cb9518611155"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-DESIGN_TOKEN_VS_BEHAVIOR",
+        "insight": "Extracted visual tokens are not a substitute for observed interactions, responsive transitions and underlying data behavior.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:789b5229ad97188ff077ea2c"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-KOREAN_STYLE_MEANING_DIFF",
+        "insight": "Korean style edits should be evaluated for readability and exact preservation of facts, numbers, entities and citations.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:4428b8d470bee444e2d7e95e"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-MANUAL_TO_ACTUAL_ENFORCEMENT",
+        "insight": "A persistent task manual and verification checklist create reusable procedure but do not demonstrate that an executor consumed rules in a real task.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:357f995340827d4600b26254"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-MODEL_ROUTING_SUCCESS_ADJUSTED_COST",
+        "insight": "Claims of model-routing efficiency require measuring correct results, retries, time and total consumption on comparable tasks.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:2896b3d9ecec084ea47d39e7"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-MOTION_PLAYBACK_EVIDENCE",
+        "insight": "Lists of motion prompts and still examples should be evaluated separately from playable final clips and render reproducibility.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:892b992e785d30ed652e7183"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-OFFICE_READ_WRITE_ROUNDTRIP",
+        "insight": "Compatibility of document, spreadsheet and slide tools must be tested separately with editable files and round-trip changes.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:396d163f99ec6ff29ce59b70"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-QUALITY_SKILL_TOOL_FAIL_SENSITIVITY",
+        "insight": "Different verification tools target different observable failure classes; tool presence and PASS reports should be tested against injected defects.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:a53bcbcff5d5ac63956ccc6a"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-REA_SOURCE_BOUND_DIFFERENTIAL",
+        "insight": "Reverse engineering that infers a feature should preserve observed inputs, outputs and traces, followed by differential tests against a separate implementation.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:f83cb1d72eb6f4fda8a7ec08"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      },
+      {
+        "learning_id": "AI-LRN-EVERY-20261017-ROLE_PROMPT_NOT_AGENT",
+        "insight": "A list of role prompts connected to apps should not be equated with independently running scheduled agents; verify actual actions and state.",
+        "evidence_refs": [
+          "INDEX:SITE_WATCH:192d64646588ba26557b0f88"
+        ],
+        "evidence_count": 1,
+        "state": "EVIDENCE_CANDIDATE",
+        "authority": "SYSTEM_GROW_REMINED_SOURCE_LEARNING_ONLY",
+        "canonical_promotion": false
+      }
+    ],
+    "guards": [
+      "AI_LEARNING != CANONICAL_POLICY",
+      "SOURCE_AUTHORITY_IS_PRESERVED",
+      "FAILURE_OR_CONTRADICTORY_EVIDENCE_MAY_REOPEN",
+      "CURRENT_PRODUCT_FACTS_REQUIRE_FRESH_VERIFICATION"
+    ]
+  }
+}

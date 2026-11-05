@@ -1,0 +1,38 @@
+{
+  "schema": "ARCHIGROW_MASSING_INPUT_V1",
+  "project_id": "SOLAR_SYNTH_FIXTURE_20261018",
+  "source_role": "SYNTHETIC_NON_LEGAL_SOLAR_FIXTURE",
+  "rule_source_status": "UNVERIFIED_DEMO",
+  "coordinate_units": "m",
+  "site_polygon": [
+    [
+      0,
+      0
+    ],
+    [
+      40,
+      0
+    ],
+    [
+      40,
+      31
+    ],
+    [
+      0,
+      31
+    ]
+  ],
+  "constraints": {
+    "max_coverage_pct": 60,
+    "max_far_pct": 800,
+    "target_far_counted_area_m2": 4200,
+    "floor_count": 12,
+    "floor_to_floor_m": 3.3,
+    "demo_clearance_m": 0.5
+  },
+  "strategies": [
+    "BALANCED",
+    "SCULPTURAL"
+  ],
+  "notes": "Synthetic 40x31 m site; not a cadastral parcel; not a legal study."
+}

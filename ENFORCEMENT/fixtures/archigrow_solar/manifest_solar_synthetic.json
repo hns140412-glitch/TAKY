@@ -1,0 +1,18 @@
+{
+  "schema": "ARCHIGROW_PIPELINE_MANIFEST_V1",
+  "project_id": "SOLAR_SYNTH_FIXTURE_20261018",
+  "route": "SOLAR_CONTEXT_STUDY",
+  "stages": [
+    "MASSING",
+    "SOLAR_STUDY"
+  ],
+  "inputs": {
+    "massing": {
+      "input": "massing_site_input.json"
+    },
+    "solar_study": {
+      "input": "solar_study_input.json",
+      "context_file": "context_obstacles_synthetic.json"
+    }
+  }
+}

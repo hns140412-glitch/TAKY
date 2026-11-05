@@ -1,0 +1,40 @@
+{
+  "schema": "ARCHIGROW_PIPELINE_SUMMARY_V1",
+  "project_id": "SYNTHETIC_URBAN_BLOCK_01",
+  "manifest": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_manifest.json",
+  "manifest_sha256": "268ff6f1b4438f10654d559730cca380f39483f75f3aa9946321c7975f6a02da",
+  "runtime": "ARCHIGROW_PIPELINE_RUN/2026-10-12.1",
+  "out_dir": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_run",
+  "status": "PASS",
+  "stages": [
+    {
+      "stage": "SITE_ANALYSIS",
+      "status": "PASS",
+      "failure_class": null
+    }
+  ],
+  "next_route": "HUMAN_VISUAL_SOURCE_REVIEW",
+  "evidence_ladder": {
+    "MASSING_GEOMETRY_KPI": false,
+    "EUM_AREA_OBSERVED": false,
+    "CADASTRAL_API_BOUNDARY_OBSERVED": false,
+    "SITE_SOURCE_AREA_AND_IDENTITY_CROSSCHECKED": false,
+    "SOLAR_DIRECT_SUN_STUDY_COMPUTED": false,
+    "LEGAL_SUNLIGHT_VERIFIED": false,
+    "RAW_CALC_MATCH": false,
+    "GEOMETRY_AGREES": false,
+    "SOURCE_VERIFIED": false,
+    "APPLICABLE_RULE_VERIFIED": false,
+    "DRAWING_REV_REFLECTED": false,
+    "OUTPUT_PRINT_QA": false,
+    "HUMAN_REVIEW": false,
+    "OFFICIAL_ACCEPTANCE": false
+  },
+  "learned_gates_triggered": [],
+  "release_status": "MECHANICAL_CLEAR__HUMAN_REVIEW_PENDING",
+  "approval_inferred": false,
+  "claim_level": "MECHANICAL_ONLY",
+  "legal_feasibility_authorized": false,
+  "promotion_authorized": false,
+  "ledger_write": "NOT_PERFORMED"
+}

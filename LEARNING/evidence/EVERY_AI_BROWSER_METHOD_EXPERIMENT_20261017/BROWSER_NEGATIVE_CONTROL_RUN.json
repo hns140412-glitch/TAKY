@@ -1,0 +1,58 @@
+{
+  "schema": "TAKY_EVERY_AI_BROWSER_LEARNING_METHOD_RUN_V1",
+  "run_at": "2026-10-17T04:39:18.520400+00:00",
+  "source_articles": [
+    "https://every-ai-guides.vercel.app/posts/chrome-devtools-mcp",
+    "https://every-ai-guides.vercel.app/posts/claude-verify-skills-5"
+  ],
+  "evaluation": "LOCAL_CHROME_BEHAVIOR_AND_DEFECT_DETECTION",
+  "the_article_specific_mcp_not_used": true,
+  "not_app_wide_qa": true,
+  "cases": [
+    {
+      "test": "positive",
+      "command": [
+        "node",
+        "D:\\Git PWA\\Hide & Seek\\tools\\code-red-hint-behavior.e2e.cjs"
+      ],
+      "source_test_sha256": "92ecba16e31f112e552c9713291a78b082d2d96230cfe1f515404f1f7b1d0c30",
+      "runtime_seconds": 8.44,
+      "exit_code": 0,
+      "stdout": "CODE_RED_HINT_BEHAVIOR PASS: 3 hints, no key highlighted, no slot filled, answers untouched\n",
+      "stderr": "",
+      "expected_signal": "CODE_RED_HINT_BEHAVIOR PASS: 3 hints",
+      "signal_seen": true,
+      "actual_app_under_test": "D:\\Git PWA\\Hide & Seek\\index.html",
+      "actual_app_hash": "ade38be5121e766f1f1bdc40df7d04f4a3ea0dbdabb28db84f7d2e7a128e28d9",
+      "browser": "headless Google Chrome via installed playwright-core",
+      "test_scope": "LOCAL_REAL_APP_SYNTHETIC_SHEET_NOT_PRODUCTION_DATA",
+      "upstream_chrome_devtools_mcp_invoked": false,
+      "run_state": "PASS"
+    },
+    {
+      "test": "defect_negative",
+      "command": [
+        "node",
+        "D:\\Git PWA\\Hide & Seek\\tools\\code-red-hint-negative-control.e2e.cjs"
+      ],
+      "source_test_sha256": "b646aff347425540d0839b78c52901ded08902cea2f5493777f3e450d2cfef8f",
+      "runtime_seconds": 6.05,
+      "exit_code": 0,
+      "stdout": "HINT_NEGATIVE_CONTROL_DETECTED: intentionally answer-leaking hint failed behavioral QA\n",
+      "stderr": "",
+      "expected_signal": "HINT_NEGATIVE_CONTROL_DETECTED",
+      "signal_seen": true,
+      "actual_app_under_test": "D:\\Git PWA\\Hide & Seek\\index.html",
+      "actual_app_hash": "ade38be5121e766f1f1bdc40df7d04f4a3ea0dbdabb28db84f7d2e7a128e28d9",
+      "browser": "headless Google Chrome via installed playwright-core",
+      "test_scope": "LOCAL_REAL_APP_SYNTHETIC_SHEET_NOT_PRODUCTION_DATA",
+      "upstream_chrome_devtools_mcp_invoked": false,
+      "run_state": "PASS"
+    }
+  ],
+  "positive_pass": true,
+  "negative_control_detected": true,
+  "independent_task_validation_scope": "HINT_NO_ANSWER_LEAK_AND_RETRIEVAL_OUTCOME",
+  "no_paid_api": true,
+  "no_deploy": true
+}

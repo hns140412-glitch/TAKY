@@ -1,0 +1,29 @@
+{
+  "schema": "TAKY_EVERY_AI_SOURCE_MINING_INDEX_LEARNING_LOCAL_QA_RECEIPT_V1",
+  "scope": "LOCAL_SOURCE_AND_METHOD_EXPERIMENT_NOT_ALL_118_EXTERNAL_EXECUTION",
+  "raw_118_hash_verified": true,
+  "mine_118_articles": true,
+  "mined_evidence_units": 2333,
+  "index_118_articles": true,
+  "owner_review_118_articles": true,
+  "learning_evaluation_118_articles": true,
+  "learning_method_dispositions": 12,
+  "official_readme_hash_verified": 4,
+  "real_browser_positive_control": true,
+  "real_browser_negative_control": true,
+  "qa_quick_checks_passed": 18,
+  "qa_quick_failed": 0,
+  "qa_unresolved_critical_gaps": 12,
+  "qa_verdict": "TESTS_PASS_WITH_CRITICAL_GAPS",
+  "qa_run_started_at": "2026-10-17T04:41:36.180Z",
+  "qa_full_report_sha256": "eb34e01421333ea56b6cef6e5860def149b08bd5ed7baf145bb4d1fb6783cfd6",
+  "qa_relevant_cases": {
+    "hide-hint-no-answer-browser": "PASS",
+    "hide-hint-negative-control-detection": "PASS"
+  },
+  "learning_decision_sha256": "15479d576c841a8fcb7352501616486da2b47f3cc42af5e780eeb9a5dde8b29c",
+  "canonical_learning_promotion": false,
+  "external_tools_validated": false,
+  "api_paid_calls": 0,
+  "push_merge_deploy": false
+}

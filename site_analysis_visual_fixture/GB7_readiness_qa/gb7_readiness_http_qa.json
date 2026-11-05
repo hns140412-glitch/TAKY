@@ -1,0 +1,38 @@
+{
+  "/": {
+    "status": 200,
+    "bytes": 4577,
+    "sample": "html-or-hold"
+  },
+  "/api/readiness": {
+    "status": 200,
+    "bytes": 1743,
+    "sample": "{\"status\": \"HOLD\", \"failure_class\": \"SITE_SOURCE_NOT_BOUND\", \"project_id\": \"GB7\", \"route\": \"PRODUCTION\", \"stages\": [\"WORKBOOK_AUDIT\"], \"workbook\": {\"source_role\": \"PROVISIONAL_DERIVED\", \"cer"
+  },
+  "/api/health": {
+    "status": 200,
+    "bytes": 131,
+    "sample": "{\"studio\": \"ARCHIGROW_SITE_STUDIO\", \"loopback_only\": true, \"formats\": [\"html\", \"manifest\", \"pptx\", \"svg\"], \"snapshot\": \"NOT_BOUND\"}"
+  },
+  "/api/export?format=pptx": {
+    "status": 409,
+    "bytes": 60,
+    "sample": "{\"status\": \"HOLD\", \"failure_class\": \"SITE_SOURCE_NOT_BOUND\"}"
+  },
+  "/api/recalc?option=O3": {
+    "status": 409,
+    "bytes": 60,
+    "sample": "{\"status\": \"HOLD\", \"failure_class\": \"SITE_SOURCE_NOT_BOUND\"}"
+  },
+  "html_assertions": {
+    "GB7": true,
+    "HOLD": true,
+    "PROVISIONAL_DERIVED": true,
+    "no_drive_path": true
+  },
+  "chrome": {
+    "exit": 0,
+    "screenshot": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\GB7_readiness_qa\\gb7_readiness_1440.png",
+    "size": 90354
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "TAKY_UPSTREAM_PUBLIC_README_EVIDENCE_V1",
+  "captured_at": "2026-10-17T04:38:25.579498+00:00",
+  "sources": [
+    {
+      "name": "deckcraft",
+      "url": "https://raw.githubusercontent.com/storytold/deckcraft/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/storytold/deckcraft/main/README.md",
+      "sha256": "d4b1570c432c77d254d456c22e5657420ace2cf8f1770d36f844f5ff61ab38c0",
+      "bytes": 17853,
+      "local_snapshot": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\EVERY_AI_OFFICIAL_SOURCE_CHECK_20261017\\deckcraft_README_d4b1570c432c77d2.md",
+      "signals": {
+        "alpha": true,
+        "features_estimated": true,
+        "node_support_22_19": false,
+        "mentions_mcp": true
+      },
+      "literal_matches": [
+        {
+          "line": 61,
+          "quote": "DeckCraft is in alpha, heading for beta (see the [roadmap](ROADMAP.md))."
+        },
+        {
+          "line": 80,
+          "quote": "MCP server for AI agents."
+        },
+        {
+          "line": 154,
+          "quote": "deckcraft-cli mcp                       # MCP server over stdio (headless)"
+        },
+        {
+          "line": 162,
+          "quote": "ones, measured) and is about **55% of the way to replacing PowerPoint for real work** (estimated)."
+        }
+      ],
+      "kind": "OFFICIAL_UPSTREAM_README_NOT_EXECUTED"
+    },
+    {
+      "name": "gridcraft",
+      "url": "https://raw.githubusercontent.com/storytold/gridcraft/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/storytold/gridcraft/main/README.md",
+      "sha256": "a5a5c13aa963fe48621e06e37a9d07da57455703052aaa44b2a0ab1c80981201",
+      "bytes": 22970,
+      "local_snapshot": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\EVERY_AI_OFFICIAL_SOURCE_CHECK_20261017\\gridcraft_README_a5a5c13aa963fe48.md",
+      "signals": {
+        "alpha": true,
+        "features_estimated": true,
+        "node_support_22_19": false,
+        "mentions_mcp": true
+      },
+      "literal_matches": [
+        {
+          "line": 98,
+          "quote": "command that agents can run over a JSON control channel, an **MCP server**, or the CLI."
+        },
+        {
+          "line": 164,
+          "quote": "claude mcp add gridcraft -- gridcraft-cli mcp                 # headless MCP server"
+        },
+        {
+          "line": 172,
+          "quote": "The MCP server offers tools such as `read_range`, `write_range`, `set_cell`, `evaluate_formula`,"
+        },
+        {
+          "line": 190,
+          "quote": "| L6 | `ui-egui` (Excel-style UI, control channel) · `mcp` (MCP server) |"
+        },
+        {
+          "line": 203,
+          "quote": "estimate it is about 50% ready for real work. Next up: XLSX fidelity on real-world files, very large"
+        }
+      ],
+      "kind": "OFFICIAL_UPSTREAM_README_NOT_EXECUTED"
+    },
+    {
+      "name": "rea",
+      "url": "https://raw.githubusercontent.com/morluto/rea/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/morluto/rea/main/README.md",
+      "sha256": "6856a965e4b6cc3ca7b4211c7cfa63fc59e6aa638b30bdb38c46a5eb3e4cfdb2",
+      "bytes": 22177,
+      "local_snapshot": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\EVERY_AI_OFFICIAL_SOURCE_CHECK_20261017\\rea_README_6856a965e4b6cc3c.md",
+      "signals": {
+        "alpha": false,
+        "features_estimated": true,
+        "node_support_22_19": true,
+        "mentions_mcp": true
+      },
+      "literal_matches": [
+        {
+          "line": 85,
+          "quote": "REA's MCP server and matching workflow instructions, with backups of existing"
+        },
+        {
+          "line": 166,
+          "quote": "REA requires Node.js 22.x (>=22.19), 24.x (>=24.11), or 26+, plus npm."
+        },
+        {
+          "line": 257,
+          "quote": "Any agent that supports local MCP servers. Setup configures the"
+        },
+        {
+          "line": 287,
+          "quote": "to register REA's MCP server and install the matching instructions, then restart"
+        }
+      ],
+      "kind": "OFFICIAL_UPSTREAM_README_NOT_EXECUTED"
+    },
+    {
+      "name": "wordcraft",
+      "url": "https://raw.githubusercontent.com/storytold/wordcraft/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/storytold/wordcraft/main/README.md",
+      "sha256": "090e788809ad4249a53e2a7585ee2e202a86916ce0f5733bdb2b567b7fce30d6",
+      "bytes": 26313,
+      "local_snapshot": "D:\\Git PWA\\TAKY\\LEARNING\\evidence\\EVERY_AI_OFFICIAL_SOURCE_CHECK_20261017\\wordcraft_README_090e788809ad4249.md",
+      "signals": {
+        "alpha": true,
+        "features_estimated": true,
+        "node_support_22_19": false,
+        "mentions_mcp": true
+      },
+      "literal_matches": [
+        {
+          "line": 100,
+          "quote": "an MCP server."
+        },
+        {
+          "line": 193,
+          "quote": "| L5 | `wordcraft-mcp` | MCP server |"
+        }
+      ],
+      "kind": "OFFICIAL_UPSTREAM_README_NOT_EXECUTED"
+    }
+  ],
+  "errors": [],
+  "verified_readme_count": 4,
+  "no_cli_setup_or_package_install": true,
+  "tool_execution_verified": false,
+  "paid_api_calls": 0,
+  "model_calls": 0
+}

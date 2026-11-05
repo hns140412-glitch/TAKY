@@ -1,0 +1,42 @@
+{
+  "schema": "ARCHIGROW_STAGE_RECEIPT_V1",
+  "rule": "TKY-ARCHIPIPE-001",
+  "pipeline_id": "ARCHIGROW:SYNTHETIC_URBAN_BLOCK_01",
+  "stage_id": "SITE_ANALYSIS",
+  "runtime": "ARCHIGROW_PIPELINE_RUN/2026-10-12.1",
+  "tool": "ARCHIGROW_SITE_ANALYSIS_REPORT.py",
+  "claim_level": "MECHANICAL_ONLY",
+  "fingerprint": "d5188ef278794bea3378cc853c85141e08d44fead24ee1020c67a945cdb0c338",
+  "status": "PASS",
+  "summary": {
+    "source_status": "PASS",
+    "report_status": null,
+    "pptx_status": "AVAILABLE",
+    "failure_class": null,
+    "legal_feasibility_authorized": false
+  },
+  "failure_class": null,
+  "outputs": [
+    {
+      "ref": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\site_source_receipt.json",
+      "sha256": "d59062989a23012e4ce9ca44172d2b7951252d1a5c23ec9d2b938f804e0aaac2"
+    },
+    {
+      "ref": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_run\\stages\\SITE_ANALYSIS\\analysis_manifest.json",
+      "sha256": "b8897d5d07fb0b6ca1b970f2bdff43e10858deb08035d1e7efe4bf068c3bf0bb"
+    },
+    {
+      "ref": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_run\\stages\\SITE_ANALYSIS\\site_analysis.html",
+      "sha256": "7f13dcdee071a3d6f81742c18247d2cd5c8e9fd60f2f3814de1db2383d875a9c"
+    },
+    {
+      "ref": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_run\\stages\\SITE_ANALYSIS\\site_map.svg",
+      "sha256": "70e7d57ec2e399518bc614cbab41674499af9a48e70b0161daba890fe9ecfd69"
+    },
+    {
+      "ref": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\urban_demo\\pipeline_run\\stages\\SITE_ANALYSIS\\site_analysis.pptx",
+      "sha256": "147a64dca6fdfaae0a9b009a3edcd79f70b504b08c3b0d35d0a92f2c2eca4798"
+    }
+  ],
+  "next_route": "NEXT_STAGE"
+}

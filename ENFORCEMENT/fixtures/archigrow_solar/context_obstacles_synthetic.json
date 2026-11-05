@@ -1,0 +1,180 @@
+{
+  "schema": "ARCHIGROW_CONTEXT_OBSTACLES_V1",
+  "project_id": "SOLAR_SYNTH_FIXTURE_20261018",
+  "source_class": "SYNTHETIC_FIXTURE",
+  "source_status": "FIXTURE_NOT_PUBLIC_DATA",
+  "scene": {
+    "kind": "LOCAL_M"
+  },
+  "legal_use": "NOT_A_LEGAL_RECORD",
+  "completeness": {
+    "status": "COMPLETE_HEIGHTS",
+    "obstacle_count": 6
+  },
+  "obstacles": [
+    {
+      "id": "CTX-N1",
+      "footprint_m": [
+        [
+          5,
+          50
+        ],
+        [
+          35,
+          50
+        ],
+        [
+          35,
+          62
+        ],
+        [
+          5,
+          62
+        ]
+      ],
+      "name": "CTX-N1",
+      "height_m": 30,
+      "height_min_m": 30,
+      "height_max_m": 30,
+      "height_source": "SYNTHETIC_FIXTURE_DECLARED_HEIGHT",
+      "confidence": "SYNTHETIC"
+    },
+    {
+      "id": "CTX-NW",
+      "footprint_m": [
+        [
+          -30,
+          40
+        ],
+        [
+          -10,
+          40
+        ],
+        [
+          -10,
+          55
+        ],
+        [
+          -30,
+          55
+        ]
+      ],
+      "name": "CTX-NW",
+      "height_m": 16.0,
+      "height_min_m": 14.0,
+      "height_max_m": 18.0,
+      "height_source": "FLOORS_X_ASSUMED_FLOOR_TO_FLOOR",
+      "confidence": "LOW",
+      "floors_ground": 5
+    },
+    {
+      "id": "CTX-NE",
+      "footprint_m": [
+        [
+          45,
+          38
+        ],
+        [
+          65,
+          38
+        ],
+        [
+          65,
+          52
+        ],
+        [
+          45,
+          52
+        ]
+      ],
+      "name": "CTX-NE",
+      "height_m": 12,
+      "height_min_m": 12,
+      "height_max_m": 12,
+      "height_source": "SYNTHETIC_FIXTURE_DECLARED_HEIGHT",
+      "confidence": "SYNTHETIC"
+    },
+    {
+      "id": "CTX-E",
+      "footprint_m": [
+        [
+          50,
+          0
+        ],
+        [
+          70,
+          0
+        ],
+        [
+          70,
+          25
+        ],
+        [
+          50,
+          25
+        ]
+      ],
+      "name": "CTX-E",
+      "height_m": 24,
+      "height_min_m": 24,
+      "height_max_m": 24,
+      "height_source": "SYNTHETIC_FIXTURE_DECLARED_HEIGHT",
+      "confidence": "SYNTHETIC"
+    },
+    {
+      "id": "CTX-S",
+      "footprint_m": [
+        [
+          0,
+          -25
+        ],
+        [
+          40,
+          -25
+        ],
+        [
+          40,
+          -12
+        ],
+        [
+          0,
+          -12
+        ]
+      ],
+      "name": "CTX-S",
+      "height_m": 15,
+      "height_min_m": 15,
+      "height_max_m": 15,
+      "height_source": "SYNTHETIC_FIXTURE_DECLARED_HEIGHT",
+      "confidence": "SYNTHETIC"
+    },
+    {
+      "id": "CTX-W",
+      "footprint_m": [
+        [
+          -25,
+          0
+        ],
+        [
+          -10,
+          0
+        ],
+        [
+          -10,
+          28
+        ],
+        [
+          -25,
+          28
+        ]
+      ],
+      "name": "CTX-W",
+      "height_m": 12.8,
+      "height_min_m": 11.2,
+      "height_max_m": 14.4,
+      "height_source": "FLOORS_X_ASSUMED_FLOOR_TO_FLOOR",
+      "confidence": "LOW",
+      "floors_ground": 4
+    }
+  ]
+}

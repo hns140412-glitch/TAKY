@@ -1,0 +1,208 @@
+{
+  "contract": "TAKY_FAMILY_PERIODIC_QA_V1",
+  "mode": "quick",
+  "startedAt": "2026-10-17T04:41:36.180Z",
+  "finishedAt": "2026-10-17T04:42:34.235Z",
+  "scope": "LOCAL_SYNTHETIC_AND_EXISTING_AUTOMATED_TESTS",
+  "productionVerified": false,
+  "statuses": {
+    "passed": 18,
+    "failed": 0,
+    "blocked": 0,
+    "openGaps": 12
+  },
+  "results": [
+    {
+      "id": "family-3-mode",
+      "repo": "TAKY",
+      "state": "PASS",
+      "durationMs": 556
+    },
+    {
+      "id": "family-independent-bots",
+      "repo": "TAKY",
+      "state": "PASS",
+      "durationMs": 570
+    },
+    {
+      "id": "family-member-evidence",
+      "repo": "TAKY",
+      "state": "PASS",
+      "durationMs": 478
+    },
+    {
+      "id": "family-app-continuity",
+      "repo": "TAKY",
+      "state": "PASS",
+      "durationMs": 193
+    },
+    {
+      "id": "ready-parent-learner-planner",
+      "repo": "Ready & Set",
+      "state": "PASS",
+      "durationMs": 393
+    },
+    {
+      "id": "mobile-owner-console",
+      "repo": "TAKY-MOBILE",
+      "state": "PASS",
+      "durationMs": 191
+    },
+    {
+      "id": "mobile-learning-receipt",
+      "repo": "TAKY-MOBILE",
+      "state": "PASS",
+      "durationMs": 173
+    },
+    {
+      "id": "mobile-two-family-evidence",
+      "repo": "TAKY-MOBILE",
+      "state": "PASS",
+      "durationMs": 167
+    },
+    {
+      "id": "mobile-two-family-learning",
+      "repo": "TAKY-MOBILE",
+      "state": "PASS",
+      "durationMs": 413
+    },
+    {
+      "id": "savey-finance-full-local-suite",
+      "repo": "SAVEY",
+      "state": "PASS",
+      "durationMs": 4968
+    },
+    {
+      "id": "play-camp-learning",
+      "repo": "Play Camp",
+      "state": "PASS",
+      "durationMs": 520
+    },
+    {
+      "id": "hide-syntax",
+      "repo": "Hide & Seek",
+      "state": "PASS",
+      "durationMs": 116
+    },
+    {
+      "id": "hide-hint-no-answer-browser",
+      "repo": "Hide & Seek",
+      "state": "PASS",
+      "durationMs": 8561
+    },
+    {
+      "id": "hide-hint-negative-control-detection",
+      "repo": "Hide & Seek",
+      "state": "PASS",
+      "durationMs": 5945
+    },
+    {
+      "id": "hide-english-12-24-hanja-reference-browser",
+      "repo": "Hide & Seek",
+      "state": "PASS",
+      "durationMs": 12583
+    },
+    {
+      "id": "hide-subject-grade-routing-browser",
+      "repo": "Hide & Seek",
+      "state": "PASS",
+      "durationMs": 13575
+    },
+    {
+      "id": "snap-syntax",
+      "repo": "Snap & Pop",
+      "state": "PASS",
+      "durationMs": 169
+    },
+    {
+      "id": "snap-expression-input-quality-browser",
+      "repo": "Snap & Pop",
+      "state": "PASS",
+      "durationMs": 8245
+    }
+  ],
+  "newFailures": [],
+  "recovered": [],
+  "gaps": [
+    {
+      "id": "hide-hanja-canonical-learning-link",
+      "priority": "P0",
+      "area": "HIDE",
+      "why": "한자 참고 훈음 48자와 네 모드 실제 조작은 로컬 구현·테스트했으나 공식 학년별 HANJA Learning Engine 배정·장기복습·정식 성취 반영은 미검증. 참고 학습은 점수 승격 금지"
+    },
+    {
+      "id": "hide-six-subject-real-device-and-learning",
+      "priority": "P0",
+      "area": "HIDE/READY",
+      "why": "영어 기본/6과목 전환과 합성 시험지 신규12+지난24 원문 출처 조합은 로컬 Chrome 검증. 운영 OCR·부모 권한 확인·Learning Engine 복습 우선순위·Ready 실제 배정·가족별 기록 격리·iPhone 실기기·중앙 성취왕복 미검증"
+    },
+    {
+      "id": "snap-expression-validity",
+      "priority": "P0",
+      "area": "SNAP",
+      "why": "2026-10-17 이전 Chrome에서는 qzxqzx 3회로 EXP 55가 잘못 지급됨. 현재 반복 문자열/동일 답변 재사용은 실제 브라우저 부정 테스트로 차단하나, 문장의 의미와 확장 논리·독립 성취는 확인되지 않음. 구조 검사 통과를 Learning Engine 성취로 승격하지 말 것"
+    },
+    {
+      "id": "cross-app-learning-achievement-evidence",
+      "priority": "P0",
+      "area": "HIDE/SNAP/PLAY",
+      "why": "기존 5앱 완료 영수증은 버튼·청취·자기보고 중심. 독립 회상·오답·도움 수준·성취 검증의 부정 테스트와 사실 판단 미확보"
+    },
+    {
+      "id": "visual-family-role-e2e",
+      "priority": "P0",
+      "area": "ALL",
+      "why": "부모/학습자 실제 화면을 가족 단위로 연속 조작하는 UI E2E 미검증"
+    },
+    {
+      "id": "ready-pointer-navigation-timeout",
+      "priority": "P0",
+      "area": "READY",
+      "why": "부모 가상 세션 READY 진입 성공 후 실제 홈/설정 포인터 클릭 완료되지 않음; 16초 watchdog으로 차단 · 초기 입력/화면 차폐/동기 렌더링 원인 미확정"
+    },
+    {
+      "id": "savey-cross-app-family-e2e",
+      "priority": "P0",
+      "area": "SAVEY",
+      "why": "같은 가족의 학습/미션/금융 데이터 앱 간 통합 시나리오 미검증"
+    },
+    {
+      "id": "administrator-qa-consumption",
+      "priority": "P0",
+      "area": "TAKY-MOBILE",
+      "why": "QA 보고서가 관리자 화면에서 읽혀 조치되는 소비 경로 미검증"
+    },
+    {
+      "id": "hide-snap-browser-e2e",
+      "priority": "P1",
+      "area": "HIDE/SNAP",
+      "why": "5앱 로컬 Chrome 결과 영수증 왕복은 재현 PASS, 운영 중앙 학습 데이터 영속 기록 및 실기기 복귀는 아직 미검증"
+    },
+    {
+      "id": "tablet-fold-audio-usability",
+      "priority": "P1",
+      "area": "PLAY-CAMP",
+      "why": "종이 넘김/접기/음성 안내의 실기기 시각 및 접근성 검증 필요"
+    },
+    {
+      "id": "production-device-session",
+      "priority": "P1",
+      "area": "ALL",
+      "why": "운영 배포의 실기기 iOS/Android 세션·복구·동기화 검증 없음"
+    },
+    {
+      "id": "multi-specialist-browser-stability",
+      "priority": "P0",
+      "area": "TAKY-MOBILE/READY",
+      "why": "정기 deep QA에서 5앱 실브라우저 왕복(학습/공유/복귀)을 검증해야 함; quick 모드에서는 미실행"
+    }
+  ],
+  "verdict": "TESTS_PASS_WITH_CRITICAL_GAPS",
+  "restrictions": [
+    "NO_PAID_API",
+    "NO_PUSH",
+    "NO_MERGE",
+    "NO_DEPLOY",
+    "NO_PRODUCTION_WRITES"
+  ]
+}
