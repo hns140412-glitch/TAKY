@@ -121,6 +121,11 @@
       "rule_id": "TKY-C2S-ROUNDTRIP-001",
       "owner": "MASTER/NOTEBOOKLM_C2S_ROUNDTRIP_PROTOCOL.md",
       "scope": "Drive/NotebookLM input-output roundtrip, raw recheck, semantic integrity, output intake and recovery completion gate"
+    },
+    {
+      "rule_id": "TKY-PRODUCT-001",
+      "owner": "MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md",
+      "scope": "interactive-product implementation integrity, structural health, completion-claim ceilings, representative-input/runtime/device separation, and repair/refactor/rewrite disposition"
     }
   ]
 }

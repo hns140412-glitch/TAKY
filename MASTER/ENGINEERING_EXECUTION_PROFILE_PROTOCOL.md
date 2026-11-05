@@ -102,6 +102,23 @@ Required behavior:
 
 `EXISTING PATTERN != IMMUTABLE PATTERN`; demonstrated defects may justify an authorized structural change.
 
+### 4.0A Architecture health / rewrite disposition — HARD LOCK
+
+Before continuing material feature growth when the current architecture shows repeated regression, broad change amplification, mixed UI/domain/state ownership, non-isolated global mutable state, stale integration paths, or validation/product-completion divergence:
+
+1. perform an architecture-health audit;
+2. identify whether the boundary itself is causal;
+3. explicitly compare REPAIR / REFACTOR / REWRITE-REBUILD;
+4. if REWRITE-REBUILD is selected, preserve validated domain contracts, evidence semantics, fixtures and canonical decisions while replacing the defective execution architecture;
+5. define migration/cutover/rollback boundaries before declaring the new architecture ready.
+
+File size or module count alone is not the decision. Evidence of coupling, responsibility collision and unsafe growth is.
+
+`ARCHITECTURE PRESERVATION != PRESERVE A DEFECTIVE BOUNDARY`.
+`REWRITE != DISCARD VALIDATED DOMAIN KNOWLEDGE`.
+
+See `MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md`.
+
 ### 4.1 Architecture boundary compilation — HARD LOCK
 
 Before proposing or implementing a material shared-core, cross-domain, OS split/merge, ownership move, or common-capability extraction, compile the architecture boundary before selecting the structure.
