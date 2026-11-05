@@ -1,0 +1,55 @@
+{
+  "namespace": "TAKY_LOSSLESS_RESUME",
+  "date": "2026-09-27",
+  "status": "ACTIVE_DRAFT_NOT_CANONICAL",
+  "authority": {
+    "canonical_repo": "hns140412-glitch/TAKY",
+    "main_sha_verified": "8e78af8b77d1f3e132f05c99cd6b69a7f258a23e",
+    "draft_pr": 161,
+    "working_branch": "fix/source-inventory-omission-gate-20260927",
+    "tested_code_head": "fdfcfb64e75e8bec2c7f7cf793d5cc36580c7296",
+    "note": "Stored SHA is evidence, not a permanent current pointer; recheck GitHub live main and branch HEAD."
+  },
+  "source_evidence": {
+    "drive_operational_reference": "https://drive.google.com/file/d/1uL4d2vv6O3x97BKhdR1L2zXGZfQ_E5hd/view",
+    "storage_note": "Google Drive copy verified by fetch; earlier Library fallback-only note is stale. Drive reference is not independently canonical.",
+    "real_scope": "checked-out OS/COMMAND_INTERACTION.md section 0.3 only; 13 nonblank unique source lines",
+    "real_scope_test": "ENFORCEMENT/raw_source_resume_audit_test.py::test_real_repo_command_contract_scope_detects_three_handoff_omissions",
+    "claim_boundary": "Not full original conversation scope or semantic completeness; section fixture is not production bundle/readback acceptance."
+  },
+  "implemented_in_draft": [
+    "Fail-closed independently frozen inventory to handoff gate",
+    "Raw SHA/quote/correction/lineage audit, fail-closed acceptance script",
+    "Character-span raw accounting repairs same-line omission bypass",
+    "Same-line omission and exclusion-laundering regressions",
+    "Real checked-out repository command-contract section 0.3 source-scope regression with three simulated handoff omissions"
+  ],
+  "validation": {
+    "at_tested_code_head": "fdfcfb64e75e8bec2c7f7cf793d5cc36580c7296",
+    "source_inventory_job": "https://github.com/hns140412-glitch/TAKY/actions/runs/36279012291/job/108507158297",
+    "source_inventory_result": "SUCCESS: 15 raw + 6 inventory + 3 acceptance tests",
+    "enforcement_replay_job": "https://github.com/hns140412-glitch/TAKY/actions/runs/36279015379/job/108507166614",
+    "enforcement_replay_result": "SUCCESS",
+    "full_original_conversation_lossless": "UNVERIFIED",
+    "real_end_to_end_bundle": "UNVERIFIED",
+    "hosted_chatgpt_automatic_invocation": "NOT IMPLEMENTED"
+  },
+  "closed": [
+    "Original branch omission gate and fixture regressions",
+    "Same-line source-text omission bypass corrected and regressed",
+    "Actual checked-out section 0.3 scoped omission tests successful"
+  ],
+  "open": [
+    "Independently establish real original conversation/raw-file source universe with scope receipt and inaccessible-source accounting",
+    "Separate material extraction and second-pass comparison for actual raw conversations, correction targets and appended overrides",
+    "Run real source manifest -> frozen inventory -> coverage -> self-contained bundle -> resume_preparation_acceptance.py with readback",
+    "Remove a real decision, correction and latest override from an actual handoff and verify complete fail-closed path",
+    "Fresh-session reverse reconstruction and original-source comparison",
+    "Wire controlled actual resume-preparation entrypoint; hosted ChatGPT auto-invocation remains unproved"
+  ],
+  "hold": [
+    "No main merge",
+    "No deployment/Netlify calls",
+    "No full-lossless/100% claim"
+  ]
+}
