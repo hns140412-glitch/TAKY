@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import sys
 from pathlib import Path
 from architecture_growth_cycle import FROZEN_TAGS, PRIORITY, VERSION
 
@@ -48,6 +49,9 @@ def run(backlog: dict, index_file: Path, index_module: Path, *, limit: int = 5) 
     if not spec or not spec.loader:
         raise ValueError('INDEX_ENGINE_LOAD_FAILED')
     module = importlib.util.module_from_spec(spec)
+    engine_dir = str(expected_engine.parent)
+    if engine_dir not in sys.path:
+        sys.path.insert(0, engine_dir)  # data_index_search imports sibling ENFORCEMENT modules
     spec.loader.exec_module(module)
     records = module.load_index(index_file)
     if not records:
