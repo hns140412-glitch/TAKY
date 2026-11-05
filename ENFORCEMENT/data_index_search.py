@@ -18,9 +18,12 @@ import argparse
 import json
 import math
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
+
+from data_index_relation_context import relation_has_recorded_evidence
 
 TOKEN_RE = re.compile(r"[0-9A-Za-z_\-\.]+|[가-힣]+")
 RRF_K = 60.0
@@ -108,8 +111,9 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any]:
         "origin_type": origin_type,
         "origin_locator": provenance.get("origin_locator") or record.get("origin_locator") or record.get("url"),
         "publisher_or_account": provenance.get("publisher_or_account") or record.get("publisher_or_account"),
-        "short_summary": discovery.get("short_summary")
-        or (record.get("value_statement") if isinstance(record.get("value_statement"), str) else None),
+        # Utilization value_statement is a consuming-domain decision, not a
+        # discovery summary. Never copy it into the shared search projection.
+        "short_summary": discovery.get("short_summary") or record.get("short_summary"),
         "controlled_terms": discovery.get("controlled_terms") or record.get("controlled_terms") or [],
         "keywords": discovery.get("keywords") or record.get("keywords") or [],
         "entities": discovery.get("entities") or record.get("entities") or [],
@@ -134,10 +138,9 @@ def materialize_legacy_relations(records: list[dict[str, Any]]) -> list[dict[str
     """Derive source-to-source compatibility relations without rereading RAW.
 
     Temporal groups remain candidate-only and are intentionally excluded.
-    Duplicate groups are mapped conservatively: binary/SHA groups become exact,
-    other duplicate groups become near-duplicate relations. Fragment groups are
-    linked as RELATED_TO siblings with an explicit qualifier so they can support
-    reconstruction without claiming identity or hierarchy.
+    Legacy duplicate-group strings (including strings containing SHA256 or
+    BINARY_EXACT) are not digest evidence. Keep such links candidate-only;
+    fragment group siblings are likewise hints, not authoritative relationships.
     """
     duplicate_groups: defaultdict[str, list[str]] = defaultdict(list)
     fragment_groups: defaultdict[str, list[str]] = defaultdict(list)
@@ -157,18 +160,13 @@ def materialize_legacy_relations(records: list[dict[str, Any]]) -> list[dict[str
 
         dup_group = record.get("legacy_duplicate_group")
         if dup_group:
-            relation_type = (
-                "EXACT_DUPLICATE_OF"
-                if ("BINARY_EXACT" in str(dup_group).upper() or "SHA256" in str(dup_group).upper())
-                else "NEAR_DUPLICATE_OF"
-            )
             for target in duplicate_groups.get(str(dup_group), []):
-                key = (relation_type, target, "LEGACY_DUPLICATE_GROUP_COMPAT")
+                key = ("RELATED_TO", target, "LEGACY_DUPLICATE_GROUP_UNVERIFIED")
                 if target != source_id and key not in seen:
                     relations.append({
-                        "type": relation_type,
+                        "type": "RELATED_TO",
                         "target": target,
-                        "qualifier": "LEGACY_DUPLICATE_GROUP_COMPAT",
+                        "qualifier": "LEGACY_DUPLICATE_GROUP_UNVERIFIED",
                     })
                     seen.add(key)
 
@@ -210,7 +208,7 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 
 
 def load_index(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
     records = [normalize_record(x) for x in _extract_records(payload)]
     records = [x for x in records if x.get("source_id")]
     return materialize_legacy_relations(records)
@@ -263,6 +261,31 @@ def exact_scores(records: list[dict[str, Any]], query: str) -> dict[str, float]:
             score = 0.7
         if score:
             scores[r["source_id"]] = score
+    return scores
+
+
+def strong_exact_scores(records: list[dict[str, Any]], query: str) -> dict[str, float]:
+    """Source ID/title/controlled-term equality, independent of fuzzy token scoring."""
+    def canon(value: Any) -> str:
+        return unicodedata.normalize("NFKC", str(value or "")).casefold().strip()
+
+    q = canon(query)
+    if not q:
+        return {}
+    scores: dict[str, float] = {}
+    for record in records:
+        sid = record.get("source_id")
+        if not sid:
+            continue
+        terms = record.get("controlled_terms") or []
+        if not isinstance(terms, list):
+            terms = [terms]
+        if q == canon(sid):
+            scores[sid] = 1.0
+        elif q == canon(record.get("canonical_title")):
+            scores[sid] = 0.95
+        elif q in {canon(term) for term in terms if term is not None}:
+            scores[sid] = 0.92
     return scores
 
 
@@ -341,8 +364,11 @@ def relation_expand(
     by_id: dict[str, dict[str, Any]],
     fused: dict[str, float],
     depth: int = 1,
+    trusted_relation_keys: frozenset[tuple[str, str, str]] | None = None,
 ) -> dict[str, float]:
-    if depth <= 0:
+    # Relation record fields can be provider-supplied or forged. Recorded evidence
+    # is not an independently provisioned Indexing-owner receipt. Fail closed.
+    if depth <= 0 or not trusted_relation_keys:
         return fused
     out = dict(fused)
     frontier = ranked_ids[:10]
@@ -354,8 +380,12 @@ def relation_expand(
                 continue
             base = out.get(sid, 0.0)
             for rel in record.get("relations", []):
+                # Recorded relation evidence is necessary to expand ranking;
+                # an unverified label or relation alone is not proof of relevance.
                 target = rel.get("target")
-                if target in by_id and target not in out:
+                if (target in by_id and target not in out
+                        and (sid, rel.get("type"), target) in trusted_relation_keys
+                        and relation_has_recorded_evidence(record, rel, by_id[target])):
                     out[target] = base * 0.35
                     next_frontier.append(target)
         frontier = next_frontier
@@ -403,25 +433,52 @@ def search(
     relation_depth: int = 1,
     semantic_vector_scores: dict[str, float] | None = None,
     semantic_metadata: dict[str, Any] | None = None,
+    trusted_relation_keys: frozenset[tuple[str, str, str]] | None = None,
 ) -> dict[str, Any]:
     filters = filters or {}
     candidates = apply_filters(records, filters)
     by_id = {r["source_id"]: r for r in candidates}
 
+    # A raw score dict is not proof of neural embeddings. Require the
+    # validated channel metadata before it can carry that label or influence rank.
+    if semantic_vector_scores:
+        meta = semantic_metadata if isinstance(semantic_metadata, dict) else {}
+        if not (meta.get("semantic_mode") == "NEURAL_EMBEDDING_VECTOR_VERIFIED"
+                and meta.get("neural_embedding_verified") is True
+                and isinstance(meta.get("model_id"), str) and meta["model_id"].strip()
+                and isinstance(meta.get("dimension"), int) and meta["dimension"] >= 2):
+            raise ValueError("VECTOR_METADATA_NOT_VERIFIED")
+        if any(not isinstance(x, (int, float)) or isinstance(x, bool)
+               or not math.isfinite(x) or x <= 0 or x > 1
+               for x in semantic_vector_scores.values()):
+            raise ValueError("VECTOR_SCORE_INVALID")
+
     exact = exact_scores(candidates, query)
-    lexical = lexical_scores(candidates, query)
-    token_cosine = token_cosine_scores(candidates, query)
-    vector_scores_verified = {
-        sid: score
-        for sid, score in (semantic_vector_scores or {}).items()
-        if sid in by_id and isinstance(score, (int, float)) and score > 0
-    }
-    channels_for_fusion = [exact, lexical, token_cosine]
-    if vector_scores_verified:
-        channels_for_fusion.append(vector_scores_verified)
-    fused = rrf_fuse(channels_for_fusion)
+    strong_exact = strong_exact_scores(candidates, query)
+    exact.update(strong_exact)
+    # Strong ID/title/controlled-term matches stay exact. In particular an
+    # achievement code must not lose to incidental partial Korean tokens.
+    if strong_exact:
+        lexical: dict[str, float] = {}
+        token_cosine: dict[str, float] = {}
+        vector_scores_verified: dict[str, float] = {}
+        fused = dict(strong_exact)
+    else:
+        lexical = lexical_scores(candidates, query)
+        token_cosine = token_cosine_scores(candidates, query)
+        vector_scores_verified = {
+            sid: float(score)
+            for sid, score in (semantic_vector_scores or {}).items()
+            if sid in by_id and isinstance(score, (int, float)) and not isinstance(score, bool)
+            and math.isfinite(score) and 0 < score <= 1
+        }
+        channels_for_fusion = [exact, lexical, token_cosine]
+        if vector_scores_verified:
+            channels_for_fusion.append(vector_scores_verified)
+        fused = rrf_fuse(channels_for_fusion)
     pre_relation = _rank(fused)
-    fused = relation_expand(pre_relation, by_id, fused, relation_depth)
+    fused = relation_expand(pre_relation, by_id, fused, relation_depth,
+                            trusted_relation_keys=trusted_relation_keys)
     ranked = sorted(fused.items(), key=lambda kv: (-kv[1], kv[0]))
 
     results = []
@@ -433,6 +490,13 @@ def search(
                 "title": r.get("canonical_title"),
                 "source_family": r.get("source_family"),
                 "source_type": r.get("source_type"),
+                "classification_provenance": {
+                    "source_family": (r.get("field_lineage") or {}).get("source_family")
+                        or "NOT_ATTESTED_IN_SEARCH_VIEW",
+                    "short_summary": (r.get("field_lineage") or {}).get("short_summary")
+                        or "NOT_ATTESTED_IN_SEARCH_VIEW",
+                    "source_review_state": r.get("source_review_state") or r.get("review_state"),
+                },
                 "authority_class": r.get("authority_class"),
                 "current_relation": r.get("current_relation"),
                 "detail_available": r.get("detail_available"),
@@ -459,15 +523,14 @@ def search(
         )
 
     vector_enabled = bool(vector_scores_verified)
-    pipeline = [
-        "STRUCTURED_FILTER",
-        "EXACT_RETRIEVAL",
-        "LEXICAL_RETRIEVAL",
-        "TOKEN_COSINE_FALLBACK",
-    ]
-    if vector_enabled:
-        pipeline.append("VERIFIED_NEURAL_VECTOR")
-    pipeline.extend(["RRF", "RELATION_EXPANSION"])
+    pipeline = ["STRUCTURED_FILTER", "EXACT_RETRIEVAL"]
+    if strong_exact:
+        pipeline.extend(["EXACT_SHORT_CIRCUIT", "RELATION_EXPANSION"])
+    else:
+        pipeline.extend(["LEXICAL_RETRIEVAL", "TOKEN_COSINE_FALLBACK"])
+        if vector_enabled:
+            pipeline.append("VERIFIED_NEURAL_VECTOR")
+        pipeline.extend(["RRF", "RELATION_EXPANSION"])
 
     return {
         "projection_authoritative": False,
@@ -481,6 +544,8 @@ def search(
         "query": query,
         "filters": filters,
         "candidate_count": len(candidates),
+        "relation_rank_gate": ("CALLER_SUPPLIED_VALIDATED_KEYS_NOT_CANONICAL"
+                               if trusted_relation_keys else "NO_INDEPENDENT_VALIDATED_RELATION_KEYS"),
         "result_count": len(results),
         "results": results,
     }
