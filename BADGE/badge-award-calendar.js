@@ -32,7 +32,7 @@ function projectBadgeCalendar({family_id,child_id,month,history,labels={}}={}){
        !Number.isInteger(event.star_count_after)||event.star_count_after<0||event.star_count_after>5)
       return fail('INVALID_DUPLICATE_OR_CROSS_CHILD_AWARD_HISTORY');
     if(event.event_type==='FIRST_ACQUISITION'&&
-       (event.award_kind!=='INITIAL_AWARD'||event.ledger_sequence!==0||event.star_count_after!==0))
+       (event.award_kind!=='INITIAL_AWARD'||event.ledger_sequence!==0||event.star_count_after!==1))
       return fail('FIRST_AWARD_HISTORY_INCONSISTENT');
     if(event.event_type!=='FIRST_ACQUISITION'&&event.award_kind!=='REAWARD')
       return fail('REAWARD_HISTORY_INCONSISTENT');

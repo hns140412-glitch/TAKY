@@ -1,0 +1,126 @@
+{
+  "schema": "TAKY_BADGE_REMAINING_6_OWNER_EVIDENCE_CONTRACT_V1",
+  "version": "2026-10-02.8",
+  "status": "AUDITED_4_FEATURE_BLOCKED_1_AUTHORITY_GATE_1_TRANSPORT_HOLD",
+  "authority_inputs": [
+    "BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_6_V1.json",
+    "BADGE/runtime/TAKY_BADGE_ACQUISITION_DIFFICULTY_POLICY_V1.json",
+    "BADGE/runtime/TAKY_BADGE_SOURCE_PRODUCER_GAP_AUDIT_2026-10-02.md"
+  ],
+  "counts": {
+    "total": 6,
+    "implementation_owner_assigned": 5,
+    "source_scope_gate": 1,
+    "qa_pass": 54,
+    "active": 0
+  },
+  "invariants": [
+    "FIRST_ACQUISITION_USES_MINIMUM_DIRECT_EVIDENCE",
+    "NO_WEAK_PROXY",
+    "NO_SOURCE_APP_SCOPE_CHANGE_WITHOUT_EXPLICIT_AUTHORITY",
+    "NO_BADGE_ACTIVATION",
+    "NO_NETLIFY_OR_DEPLOYMENT"
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "behavior": "EARLY_START",
+      "owner": "READY_EXECUTION_START_BOUNDARY",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_EARLY_START_BOUNDARY_V1",
+      "minimum_evidence": [
+        "trusted start/wake boundary known by feature",
+        "explicit child start action"
+      ],
+      "implementation_prerequisite": "Ready start boundary feature binds authoritative boundary to actual start",
+      "ui_delta": "MINIMAL_OR_NONE_IF_BOUNDARY_ALREADY_AVAILABLE",
+      "status": "BLOCKED_FEATURE_ABSENT",
+      "note": "Ready has no authoritative wake/start boundary feature; clock/schedule inference forbidden."
+    },
+    {
+      "badge_id": "BDG-DRAFT-002",
+      "behavior": "ALARM_RESPONSE",
+      "owner": "READY_ALARM_EVENT",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_ALARM_RESPONSE_V1",
+      "minimum_evidence": [
+        "authoritative alarm-fired or before-alarm event",
+        "explicit child response/start action"
+      ],
+      "implementation_prerequisite": "alarm event identity must be authoritative, not inferred from clock",
+      "ui_delta": "NONE_IF_ALARM_EVENT_ALREADY_FEATURE_OWNED",
+      "status": "BLOCKED_FEATURE_ABSENT",
+      "note": "Ready has no authoritative alarm-fired event or alarm identity source."
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "behavior": "TIME_CREATION_EXTRA",
+      "owner": "READY_PLANNER_EXTRA_TIME",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_EXTRA_TIME_EXECUTION_V1",
+      "minimum_evidence": [
+        "child creates/selects extra-time slot outside current plan",
+        "executes task in that exact slot"
+      ],
+      "implementation_prerequisite": "Planner marks slot as child-created extra time distinct from free-window 006",
+      "ui_delta": "REUSE_PARENT_CHILD_PLANNER_TIME_SELECTION_WHERE_POSSIBLE",
+      "status": "BLOCKED_FEATURE_ABSENT",
+      "note": "Current Planner availability is parent-owned and existing free-window start belongs to badge 006; child-authored extra-time slot evidence is absent."
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "behavior": "BEFORE_PROMPT",
+      "owner": "READY_PROMPT_LEDGER",
+      "preferred_source_app": "READY_SET",
+      "proposed_source_contract_id": "READY_CHILD_BEFORE_PROMPT_V1",
+      "minimum_evidence": [
+        "authoritative prompt/request cycle boundary",
+        "explicit child initiation before first prompt in same cycle"
+      ],
+      "implementation_prerequisite": "prompt ledger must record actual prompts; absence of logs never qualifies",
+      "ui_delta": "NO_NEW_CHILD_UI_IF_PROMPT_LEDGER_EXISTS",
+      "status": "BLOCKED_FEATURE_ABSENT",
+      "note": "Current mission briefing is created on task selection; no authoritative prompt/request ledger exists to prove initiation before first prompt."
+    },
+    {
+      "badge_id": "BDG-DRAFT-035",
+      "behavior": "CALCULATION_CHECK",
+      "owner": "UNRESOLVED_SOURCE_SCOPE",
+      "preferred_source_app": null,
+      "proposed_source_contract_id": null,
+      "minimum_evidence": [
+        "calculation-domain before artifact",
+        "explicit child check/correction action",
+        "verified after artifact"
+      ],
+      "implementation_prerequisite": "current allowed sources SNAP_POP/HIDE_SEEK do not own calculation semantics",
+      "ui_delta": "UNKNOWN_UNTIL_SOURCE_OWNER_DECIDED",
+      "status": "HUMAN_AUTHORITY_GATE_SOURCE_SCOPE",
+      "note": "Allowed sources SNAP_POP/HIDE_SEEK do not own calculation-domain semantics; source owner must be explicitly authorized."
+    },
+    {
+      "badge_id": "BDG-DRAFT-054",
+      "behavior": "IMPROVEMENT",
+      "owner": "LEARNING_ENGINE_COMPARATOR_PLUS_HIDE_ADAPTER",
+      "preferred_source_app": "HIDE_SEEK",
+      "proposed_source_contract_id": "HIDE_VERIFIED_SAME_TARGET_IMPROVEMENT_V1",
+      "minimum_evidence": [
+        "prior same-target verified failure evidence",
+        "current same-target verified success evidence",
+        "Learning Engine comparison/recovery receipt referencing both"
+      ],
+      "implementation_prerequisite": "Learning Engine recovery-profile/comparator output must be bridged to Hide as observation-only source; single score delta forbidden",
+      "ui_delta": "NONE",
+      "status": "BLOCKED_TRUSTED_TRANSPORT_HOLD",
+      "implementation_evidence_ref": "BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json",
+      "note": "Comparator and Hide bridge pass code/CI, but trusted live transport is not deployed/bound; deployment remains HOLD."
+    }
+  ],
+  "audit_summary": {
+    "feature_absent": 4,
+    "human_authority_gate": 1,
+    "trusted_transport_hold": 1,
+    "qa_pass": 54,
+    "active": 0
+  }
+}

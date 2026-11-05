@@ -22,6 +22,8 @@ async function resolveBadgeDisplay({source,child_id,badge_id,tier_order,visualRe
     ownership_source:earned?'AWARD_LEDGER':null,
     award_status:earned?'AWARDED':null,
     tier:earned?projected.state.tier:null,
+    // Ledger projection already includes the initial acquisition as one star.
+    // Visual presentation must not add a second star.
     star_count:earned?projected.state.star_count:0
   };
   const result=buildRenderModel(visualRecord,award,profile);

@@ -46,7 +46,7 @@ const give=(id,receiver,kind,extra)=>journal.appendGiftRecord({
    badge_id:'ACHIEVEMENT_001',award_id:'award-signed-fixture-001',
    ledger_sequence:0,award_kind:'INITIAL_AWARD',event_type:'FIRST_ACQUISITION',
    awarded_at:'2026-09-26T15:00:00.000Z',date_status:'VERIFIED_AWARD_TIME',
-   star_count_after:0
+   star_count_after:1
   }]});
   assert.equal(award.ok,true);
   const combined=composeChildCalendar({achievementCalendar:award,familyGiftCalendar:result});

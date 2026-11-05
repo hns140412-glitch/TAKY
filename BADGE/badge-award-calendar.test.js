@@ -80,14 +80,17 @@ function reader(list=()=>catalog){
   assert.equal(progress.ok,true);
   assert.equal(progress.history.length,6);
   assert.equal(progress.history[0].event_type,'FIRST_ACQUISITION');
-  assert.equal(progress.history[0].star_count_after,0);
+  assert.equal(progress.history[0].star_count_after,1);
   assert.equal(progress.history[0].decision_approved_at,'2026-09-25T10:00:00Z');
   assert.equal(progress.history[0].awarded_at,dates[0]);
-  assert.equal(progress.history[5].event_type,'TIER_PROMOTION');
-  assert.equal(progress.history[5].award_kind,'REAWARD');
-  assert.equal(progress.history[5].star_count_before,4);
-  assert.equal(progress.history[5].star_count_after,0);
-  assert.equal(progress.history[5].to_tier,'BLUE');
+  assert.equal(progress.history[4].event_type,'TIER_PROMOTION');
+  assert.equal(progress.history[4].award_kind,'REAWARD');
+  assert.equal(progress.history[4].star_count_before,4);
+  assert.equal(progress.history[4].star_count_after,0);
+  assert.equal(progress.history[4].to_tier,'BLUE');
+  assert.equal(progress.history[5].event_type,'REACQUISITION');
+  assert.equal(progress.history[5].star_count_before,0);
+  assert.equal(progress.history[5].star_count_after,1);
   const regressedClock=createLedger({
     directory,family_id,signingKey,now:()=>dates[0],
     verifyDecision:x=>x?.testTrusted===true?{ok:true,receipt:x.receipt}:{ok:false},
@@ -114,7 +117,7 @@ function reader(list=()=>catalog){
   assert.equal(detail.ok,true);
   assert.equal(detail.history.length,6);
   assert.equal(detail.current_state.tier,'BLUE');
-  assert.equal(detail.current_state.star_count,0);
+  assert.equal(detail.current_state.star_count,1);
   const month=await r.getMonth(req,{child_id,month:'2026-09',tier_order:tiers});
   assert.equal(month.ok,true);
   assert.equal(month.time_zone,'Asia/Seoul');
