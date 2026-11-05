@@ -93,12 +93,58 @@
   }
 
   function validateEvidence(result,knownSourceIds=[]){
-    const known=new Set((knownSourceIds||[]).map(clean).filter(Boolean));
-    const unknown=[];
-    for(const item of result?.items||[]){
-      for(const id of item.evidence_source_ids||[]) if(!known.has(id)) unknown.push({result_id:item.result_id,source_id:id});
+    const empty={unknown:Object.freeze([]),missing:Object.freeze([]),invalid_confidence:Object.freeze([])};
+    if(!result||result.ingest_version!==1||!clean(result.request_id)||!Array.isArray(result.items)){
+      return {ok:false,reason:'INVALID_VISION_RESULT',...empty};
     }
-    return {ok:unknown.length===0,unknown:Object.freeze(unknown)};
+    if(!Array.isArray(knownSourceIds)){
+      return {ok:false,reason:'INVALID_KNOWN_SOURCE_IDS',...empty};
+    }
+    const known=new Set(knownSourceIds.map(clean).filter(Boolean));
+    const unknown=[];
+    const missing=[];
+    const invalid_confidence=[];
+    const duplicate_result_ids=[];
+    const seen=new Set();
+    for(const [index,item] of result.items.entries()){
+      const result_id=clean(item?.result_id)||('item_'+index);
+      if(seen.has(result_id)) duplicate_result_ids.push({result_id,reason:'DUPLICATE_RESULT_ID'});
+      seen.add(result_id);
+      const ids=Array.isArray(item?.evidence_source_ids)?item.evidence_source_ids:[];
+      if(!ids.length) missing.push({result_id,reason:'EVIDENCE_SOURCE_REQUIRED'});
+      for(const id of ids){
+        const source_id=clean(id);
+        if(!known.has(source_id)) unknown.push({result_id,source_id});
+      }
+      if(item?.confidence!=null&&!Number.isFinite(item.confidence)){
+        invalid_confidence.push({result_id,reason:'NONFINITE_CONFIDENCE'});
+      }
+    }
+    return {
+      ok:unknown.length===0&&missing.length===0&&invalid_confidence.length===0&&duplicate_result_ids.length===0,
+      unknown:Object.freeze(unknown),
+      missing:Object.freeze(missing),
+      invalid_confidence:Object.freeze(invalid_confidence),
+      duplicate_result_ids:Object.freeze(duplicate_result_ids)
+    };
+  }
+
+  function validateForRequest(result,request){
+    const request_id=clean(request?.request_id);
+    const ids=request?.analyzable_source_ids;
+    const manifest=request?.manifest;
+    if(request?.ingest_version!==1||!request_id||!Array.isArray(ids)||!Array.isArray(manifest)||!ids.length){
+      return {ok:false,reason:'INVALID_VISION_REQUEST'};
+    }
+    if(clean(result?.request_id)!==request_id){
+      return {ok:false,reason:'VISION_REQUEST_ID_MISMATCH'};
+    }
+    const allowed=new Set(ids.map(clean).filter(Boolean));
+    const fromManifest=new Set(manifest.filter(x=>x?.analyzable===true).map(x=>clean(x.source_id)).filter(Boolean));
+    if(!allowed.size||allowed.size!==ids.length||allowed.size!==fromManifest.size||[...allowed].some(id=>!fromManifest.has(id))){
+      return {ok:false,reason:'VISION_REQUEST_MANIFEST_MISMATCH'};
+    }
+    return validateEvidence(result,[...allowed]);
   }
 
   return Object.freeze({
@@ -106,6 +152,7 @@
     normalizeManifest,
     buildRequest,
     normalizeResult,
-    validateEvidence
+    validateEvidence,
+    validateForRequest
   });
 });
