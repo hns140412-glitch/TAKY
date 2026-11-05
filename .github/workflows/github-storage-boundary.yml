@@ -1,0 +1,32 @@
+name: Git Source/Data Storage Boundary
+on:
+  pull_request:
+  push:
+    branches:
+      - 'feat/source-vault-handoff-bridge-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  protected-data-is-not-git:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate tracked path roles with reusable PWA-safe guard
+        uses: ./.github/actions/git-data-boundary
+      - name: Synthetic regression and legitimate asset/code allowlist
+        run: python -m unittest discover -s ENFORCEMENT -p 'github_storage_boundary_test.py' -v
+      - name: Check root/nested ignore and do not blanket-exclude app assets
+        shell: bash
+        run: |
+          for path in SOURCE_ARCHIVE/probe.raw nested/SOURCE_ARCHIVE/probe.raw captures_v04/probe.raw project/data/notion_incremental/probe.json SOURCE_REFERENCE/runtime/private.json project/.env.local; do
+            git check-ignore -q --no-index "$path"
+          done
+          if git check-ignore -q --no-index product/public/assets/approved-scene.png; then
+            echo "FAIL: PWA approved asset path was excluded" >&2
+            exit 1
+          fi

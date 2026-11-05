@@ -1,0 +1,10 @@
+name: TAKY Source/Data Git Boundary
+description: Read Git tracked-path metadata and reject private/raw data anywhere in the repository; never uploads file bytes or logs paths.
+runs:
+  using: composite
+  steps:
+    - name: Check tracked-path storage roles
+      shell: bash
+      run: |
+        set -euo pipefail
+        python "$GITHUB_ACTION_PATH/../../../ENFORCEMENT/github_storage_boundary.py"
