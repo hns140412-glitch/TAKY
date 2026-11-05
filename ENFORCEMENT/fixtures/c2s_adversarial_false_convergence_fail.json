@@ -1,0 +1,96 @@
+{
+  "ledger_id": "FAIL_FALSE_CONVERGENCE",
+  "source_scope": {
+    "description": "fixture with partial source coverage",
+    "coverage_status": "PARTIAL",
+    "inaccessible_or_unverified": [
+      "source-X"
+    ]
+  },
+  "atoms": [
+    {
+      "atom_id": "A1",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "raw:1",
+      "source_authority": "RAW",
+      "content": "Old decision",
+      "why": "initial state",
+      "disposition": "SUPERSEDED",
+      "destination": "TEST"
+    },
+    {
+      "atom_id": "A2",
+      "type": "CORRECTION",
+      "material": true,
+      "source_pointer": "raw:2",
+      "source_authority": "RAW",
+      "content": "User corrected old decision",
+      "why": "latest correction",
+      "disposition": "ADOPT",
+      "destination": "TEST",
+      "supersedes": [
+        "A1"
+      ],
+      "affects": [
+        "TEST"
+      ]
+    },
+    {
+      "atom_id": "A3",
+      "type": "OPEN",
+      "material": true,
+      "source_pointer": "raw:3",
+      "source_authority": "RAW",
+      "content": "Unresolved option",
+      "why": "needs evidence",
+      "disposition": "OPEN",
+      "destination": "TEST"
+    },
+    {
+      "atom_id": "A4",
+      "type": "CONFLICT",
+      "material": true,
+      "source_pointer": "raw:4",
+      "source_authority": "RAW",
+      "content": "Two sources disagree",
+      "why": "conflict preserved",
+      "disposition": "CONFLICT",
+      "destination": "TEST"
+    },
+    {
+      "atom_id": "A5",
+      "type": "DECISION",
+      "material": true,
+      "source_pointer": "raw:5",
+      "source_authority": "RAW",
+      "content": "Merged without proof",
+      "why": "bad merge",
+      "disposition": "ADOPT",
+      "destination": "TEST",
+      "merged_from": [
+        "A1",
+        "A3"
+      ]
+    }
+  ],
+  "correction_lineage": [
+    {
+      "superseded_atom": "A1",
+      "correction_atom": "A2"
+    }
+  ],
+  "coverage_summary": {
+    "material_atoms": 4,
+    "mapped_material": 4,
+    "unmapped_material": 0,
+    "silent_loss_count": 0,
+    "false_convergence_count": 0
+  },
+  "reverse_reconstruction": {
+    "intent_reconstructable": true,
+    "latest_corrections_reconstructable": true,
+    "open_items_reconstructable": true,
+    "why_preserved": true
+  }
+}
