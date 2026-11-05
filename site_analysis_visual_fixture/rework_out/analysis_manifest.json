@@ -1,0 +1,61 @@
+{
+  "schema": "ARCHIGROW_SITE_ANALYSIS_MANIFEST_V1",
+  "generator": "ARCHIGROW_SITE_ANALYSIS_REPORT/2026-10-19.2",
+  "project_id": "SYNTHETIC_FIXTURE",
+  "pnu": "1154510300108280004",
+  "source_status": "PASS",
+  "design_status": "NOT_REQUIRED_NOT_PROVIDED",
+  "area": {
+    "eum_area_m2": 1200,
+    "polygon_area_m2": 1200.0,
+    "delta_m2": 0.0,
+    "tolerance_m2": 6.0,
+    "result": "MATCH_WITHIN_SCREENING_TOLERANCE"
+  },
+  "sections": {
+    "site_source": {
+      "status": "PASS",
+      "source": {
+        "path": "D:\\Git PWA\\TAKY\\site_analysis_visual_fixture\\site.json",
+        "sha256": "a83bbf96f595ec5fc082d777374147f9b24c2a24a4ec19189b57302bb4da93de"
+      },
+      "collector_status": "HOLD",
+      "failure_class": "DESIGN_PARAMETERS_MISSING"
+    },
+    "context": {
+      "status": "NOT_PROVIDED",
+      "source": null
+    },
+    "solar": {
+      "status": "NOT_PROVIDED",
+      "source": null
+    },
+    "massing": {
+      "status": "NOT_PROVIDED",
+      "source": null
+    }
+  },
+  "available_section_count": 3,
+  "page_count": 7,
+  "page_count_kind": "DESIGNED_SECTIONS_PRINT_PAGINATION_UNVERIFIED",
+  "pages": [
+    "Identity",
+    "Parcel geometry",
+    "Source quality",
+    "Building context",
+    "Solar evidence",
+    "Design evidence",
+    "Verification agenda"
+  ],
+  "capabilities": {
+    "html": "AVAILABLE",
+    "svg": "AVAILABLE",
+    "pptx": "AVAILABLE",
+    "pdf": "NOT_GENERATED"
+  },
+  "claims": {
+    "legal_parcel_certificate": false,
+    "legal_feasibility": false,
+    "source_independent_of_design_constraints": true
+  }
+}
