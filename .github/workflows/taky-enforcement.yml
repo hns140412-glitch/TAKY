@@ -218,6 +218,8 @@ jobs:
         run: |
           python ENFORCEMENT/master_logic_basis_validator.py
           python ENFORCEMENT/master_logic_basis_validator_test.py
+      - name: Validate Planner semantic owner negative regression
+        run: python ENFORCEMENT/system_layer_ownership_regression_test.py
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
