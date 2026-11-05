@@ -14,9 +14,9 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 | ID | Actor | Role | Default? |
 |----|-------|------|----------|
 | T | TAKY / ChatGPT | Top-level orchestrator: intent, authority boundary, task contract, integration, final review. | Always |
-| X | Codex CLI | Default executor for code implementation, modification, tests, and regression when coding is required. | Default coder |
+| X | Codex CLI | Independent implementation-level verification when materially needed; conditional fallback code executor when Claude capacity is insufficient and TAKY approves the route. Never independently certify its own changes. | Review / fallback by need |
 | C | Claude general chat | Large-structure review, long reasoning, adversarial review, independent audit, design/architecture critique. | On review need |
-| K | Claude CLI / Claude Code | Selective executor for difficult refactors, debugging, implementation, or review. Used only when materially justified (§3.3). | NOT default |
+| K | Claude CLI / Claude Code | Primary code implementation, modification and focused implementation testing within TAKY-approved task scope, when authenticated subscription capacity is available. | Primary code executor |
 | L | Local collectors / CLI tools | Collection, indexing, deterministic verification. | Preferred first |
 | S | GitHub / Drive / Notion | Source, evidence, and state surfaces. Not actors. Not authority by themselves. | n/a |
 | E | SAVEY | Economic routing only (TKY-SAVEY-001). | Always (cost) |
@@ -24,14 +24,10 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 
 ## 3. Routing
 3.1 TAKY issues the task contract: objective, acceptance criteria, boundaries, executor.
-3.2 Use deterministic local tooling whenever it can produce the result. When coding is required, route to Codex CLI.
-3.3 Claude CLI / Claude Code is justified only when at least one of these holds, and the justification is recorded in the task contract or receipt:
-- Codex produced a failed or insufficient run, with specific evidence;
-- the change is a cross-cutting refactor or debugging task whose difficulty materially exceeds the default path;
-- an independent implementation-level review of a material change is needed;
-- TAKY explicitly routes the task to Claude CLI / Claude Code.
+3.2 Use deterministic local tooling when sufficient. For implementation needing an AI code executor, Claude Code is the primary subscription route when available and justified by the task contract; TAKY determines actual call necessity before dispatch. Availability is verified, never inferred from a prior session or model name.
+3.3 When Claude capacity is limited, blocked, or demonstrably uneconomical for the accepted task, TAKY may route bounded implementation to Codex using the usage monitor and an explicit dry-run estimate (context, calls, tests, retries). Codex may also perform independent verification when it adds material confidence relative to local deterministic checks. Record the reason and actual executor in the task contract/receipt. No always-call rule, unapproved metered fallback, or lowering of acceptance criteria.
 3.4 Claude general chat is used for structural, adversarial, architecture, or long-form review. It does not modify files.
-3.5 Delegated-agent runs are a limited resource, not a default validation mechanism. Do not launch parallel or sequential duplicate agents for the same objective by default. After one delegated run, TAKY inspects the result, diff, receipt, and relevant validation evidence. Another run requires a specific, evidence-backed purpose.
+3.5 Delegated-agent runs are scarce. Do not launch duplicate or parallel agents for the same objective by default. After each delegated run, TAKY inspects the actual diff, receipt and evidence; further runs need an evidence-backed reason. A code author cannot be the sole independent verifier of its own material change.
 3.6 Cost-tier, paid/metered API approval, and provider-key fallback semantics are owned by TKY-SAVEY-001. This protocol does not redefine them.
 
 ## 4. Executor guardrails
@@ -58,18 +54,22 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 7.1 This protocol does not own the global TAKY authority order. Follow the authority hierarchy declared by TAKY.md and the registered canonical owners in MASTER/RULE_REGISTRY.json.
 7.2 Shared logs, relays, HANDOFF, and HISTORY remain evidence/recovery only under §6.3 and must never override current user instruction or registered canonical authority.
 
-## 8. Codex minimum-use gate
-8.1 Codex is not used for collection, file discovery, status reconciliation, long-form review, planning, document synthesis, or deterministic validation when TAKY/local tools can do them directly.
-8.2 Before any Codex call, TAKY must complete: authority lock -> exact objective -> allowed files -> forbidden actions -> acceptance criteria -> required tests -> expected output. Codex never receives an exploratory "figure it out" task by default.
-8.3 Default execution order:
-1) TAKY/ChatGPT: recover context, collect evidence, resolve authority, integrate decisions.
-2) Local collectors/CLI: search, indexing, diff, parsing, deterministic checks, regression already available locally.
-3) Claude general chat: one targeted structural/adversarial/long-context review when independent reasoning materially helps.
-4) Codex CLI: one bounded implementation run only if code or test files actually need modification.
-5) TAKY/local tools: inspect diff and run deterministic verification.
-6) A second Codex run is allowed only for a concrete failed acceptance criterion that cannot be corrected safely without code editing.
-8.4 Do not use Codex merely to re-run tests, summarize files, inspect status, review prose, search repositories, or repeat a review already completed by another actor.
-8.5 When multiple code changes are independent but share one authority/task boundary, batch them into one prepared Codex task instead of one call per file or issue.
-8.6 Codex output is never trusted as completion by itself. TAKY validates the resulting diff/evidence locally and only re-calls Codex if a specific code defect remains.
-8.7 For Alpha/Beta consolidation, Codex is normally excluded from collection and synthesis. Use it only when consolidation reveals an actual implementation defect or a validator/test that must be changed.
-8.8 Usage rule: MINIMUM CALLS, MAXIMUM PREPARATION. One well-scoped implementation call is preferred over exploratory multi-agent iteration.
+## 8. Delegated execution / Codex minimum-use gate
+8.1 Do not use Codex for collection, file discovery, status reconciliation, routine planning, document synthesis or deterministic checks that TAKY/local tools can do directly. Route complex code changes to Claude Code by default when the authenticated subscription has capacity; use Codex independently or as a justified fallback, not automatically.
+8.2 Before any delegated model call, TAKY must lock authority, objective, allowed and forbidden files, acceptance criteria, relevant tests, expected evidence, necessity and usage-risk estimate. If observable subscription quota is unknown, state UNKNOWN; never claim sufficient capacity or invent a model allowance.
+8.3 Default execution sequence:
+1) TAKY/ChatGPT: recover CURRENT, scope, authority, requirements and evidence.
+2) Local collectors/CLI: perform bounded discovery, parsing, diffing, and deterministic checks.
+3) TAKY: assess call necessity, current usage evidence and dry-run estimated cost/effort; route a bounded task to Claude Code primary executor, or Codex fallback when justified.
+4) Selected executor: implement actual code and focused tests within the approved boundary; preserve existing dirty state.
+5) TAKY/local tools: inspect diff, verify acceptance and run proportional deterministic regression.
+6) Codex independent review, or another suitably independent review route, only when material risk warrants it and the reviewer did not author the same change; concrete defects may be routed back to the appropriate executor.
+8.4 Do not use Codex merely to rerun tests, summarize files, search repositories, or repeat equivalent review. Its independent review must cite concrete changed files and revision/evidence.
+8.5 Batch related implementation edits under one authorized boundary where this reduces unnecessary model calls and keeps verifiable scope.
+8.6 Neither Claude nor Codex completion is TAKY PASS by itself. Distinguish IMPLEMENTED, FOCUSED_TEST_PASS, RUNTIME_VERIFIED, and remaining unverified states.
+8.7 Alpha/Beta collection and synthesis use local tools first; code executors are selected only for actual implementation, validator changes, or justified independent review.
+8.8 Usage rule: MINIMUM NECESSARY CALLS, MAXIMUM PREPARATION, NO SILENT PAID FALLBACK. Implementation ownership is not reassigned to TAKY merely because a model has insufficient quota.
+
+8.9 Independent-review acceptance: a review counts as `INDEPENDENT_SOURCE_REVIEW` only if its actual source paths/versions or verified source packet are recorded, distinct from the implementation author's summary. `INDEPENDENT_EXECUTION_VERIFIED` additionally requires a separately run, attributable command/test with exit status and matching input revision. A model's exit code 0, review text, PASS assertion, or login status alone is never execution verification. If tools are refused, record `PARTIAL_SOURCE_REVIEW_TOOL_BLOCKED`, preserve concrete source findings, and reroute only the blocked verification step.
+8.10 Review economy and correction loop: assign Codex only one bounded, materially different critical review after local deterministic checks and implementation, or when independent source analysis will change scope decisions. Repeated calls require a new code delta, material failure, or untested hypothesis. Set a limited scope and tool/time budget up front, record consumption when observable, and do not silently switch to paid API. A valid defect routes to the primary executor for correction, followed by local regression and an independent recheck only of the changed risk. Model-reported findings stay `FINDING_OPEN` until verified; unsupported assertions are `HOLD`.
+8.11 Working-tree safety: prior dirty files and untracked assets are user work, not disposable temporary state. Before any local commit/checkpoint, bind exact paths to one work intent, inspect the staged patch separately from unstaged changes, run relevant regression, and verify receipt/readback. Never stage all 9 repos or infer completion from reducing `git status` counts. A scoped local commit is permitted only when included content is understood and does not silently include unrelated WIP; push/merge/deploy remain separately approved actions.
