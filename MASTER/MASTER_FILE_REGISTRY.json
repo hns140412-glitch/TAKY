@@ -10,6 +10,9 @@
     "CANDIDATE": "Non-canonical proposal/draft. Never load as current authority."
   },
   "files": {
+    "MASTER/AI_COLLABORATION_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
     "MASTER/CODEX_TASK_CONTRACT.md": {
       "class": "ACTIVE_OWNER"
     },

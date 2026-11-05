@@ -106,6 +106,11 @@
       "rule_id": "TKY-CHECKPOINT-001",
       "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
       "scope": "atomic CURRENT checkpoint persistence, lightweight resume, CURRENT/HISTORY separation and checkpoint-before-next-unit execution"
+    },
+    {
+      "rule_id": "TKY-AICOLLAB-001",
+      "owner": "MASTER/AI_COLLABORATION_PROTOCOL.md",
+      "scope": "AI role assignment, executor routing, delegated-agent discipline, shared-context resume and shared-log policy for the TAKY workspace"
     }
   ]
 }
