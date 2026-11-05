@@ -31,6 +31,7 @@ on:
       - '.github/workflows/taky-executor-queue-consumer.yml'
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md'
       - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
@@ -94,6 +95,7 @@ on:
       - '.github/workflows/taky-executor-queue-consumer.yml'
       - '.github/workflows/taky-executor-queue-poller.yml'
       - 'MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md'
+      - 'MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md'
       - 'PROJECTIONS/ACTIVE_RULE_PROFILE.md'
       - 'MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md'
       - 'MASTER/CONVERSATION_CONTINUITY_SCHEMA.json'
@@ -164,6 +166,15 @@ jobs:
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
+          python -m py_compile ENFORCEMENT/data_index_bridge.py
+          python -m py_compile ENFORCEMENT/data_index_relation_context.py
+          python -m py_compile ENFORCEMENT/data_index_lifecycle_assurance.py
+          python -m py_compile ENFORCEMENT/data_index_asset_binding.py
+          python -m py_compile ENFORCEMENT/data_index_source_composer.py
+          python -m py_compile ENFORCEMENT/data_index_gap_router.py
+          python -m py_compile ENFORCEMENT/data_index_detail_contract.py
+          python -m py_compile ENFORCEMENT/data_index_external_intake.py
+          python -m py_compile ENFORCEMENT/data_index_evidence_overlay.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
           python -m py_compile ENFORCEMENT/execution_state_engine.py
           python -m py_compile ENFORCEMENT/executor_review_loop.py
@@ -194,6 +205,11 @@ jobs:
           python ENFORCEMENT/semantic_current_resolver_test.py
       - name: Validate MASTER file authority registry
         run: python ENFORCEMENT/master_file_registry_validator.py
+      - name: Validate owner-scoped growth observation outcomes
+        run: |
+          python -m py_compile ENFORCEMENT/growth_outcome_observation.py
+          python ENFORCEMENT/growth_outcome_observation.py --self-test ENFORCEMENT/fixtures/growth_outcome_observation_cases.json
+          python ENFORCEMENT/growth_outcome_observation.py --replay-snapshot HISTORY/2026-09-28_GROWTH_OUTCOME_OWNER_OBSERVATION.json
       - name: Validate shared technical capability foundation
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
@@ -423,6 +439,24 @@ jobs:
         run: python ENFORCEMENT/local_drive_workspace_test.py
       - name: Data index search projection regression
         run: python ENFORCEMENT/data_index_search_test.py
+      - name: Staged external source bridge regression
+        run: python ENFORCEMENT/data_index_bridge_test.py
+      - name: Evidence-labelled relation context and filtering regression
+        run: python ENFORCEMENT/data_index_relation_context_test.py
+      - name: Source conservation, graph integrity and delta impact regression
+        run: python ENFORCEMENT/data_index_lifecycle_assurance_test.py
+      - name: Approved asset source-to-binding evidence regression
+        run: python ENFORCEMENT/data_index_asset_binding_test.py
+      - name: Source-grounded V6/V26 composer regression
+        run: python ENFORCEMENT/data_index_source_composer_test.py
+      - name: Index evidence-gap reverse handoff regression
+        run: python ENFORCEMENT/data_index_gap_router_test.py
+      - name: Multimodal DETAIL coordinate regression
+        run: python ENFORCEMENT/data_index_detail_contract_test.py
+      - name: Multi-provider link-only intake regression
+        run: python ENFORCEMENT/data_index_external_intake_test.py
+      - name: Staged selected-source evidence provenance regression
+        run: python ENFORCEMENT/data_index_evidence_overlay_test.py
       - name: Validate generated Codex task contract
         run: |
           python ENFORCEMENT/runtime_orchestrator.py --record ENFORCEMENT/fixtures/runtime_orchestrator_pass.json --repo-root . > /tmp/runtime.json

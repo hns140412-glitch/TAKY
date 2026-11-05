@@ -76,6 +76,25 @@ for x in ("organization identity","family/child identity","roles/permissions","c
     if x not in (auth.get("semantic_exclusions") or []):
         fail.append("AUTH_SEMANTIC_EXCLUSION_MISSING:"+x)
 
+
+# External model/provider research may be connected to existing generic primitives
+# without silently claiming live API calls, semantic authority or production.
+ocr_review=(ocr.get("external_provider_evaluation") or {})
+http_review=(http.get("external_provider_evaluation") or {})
+if ocr_review.get("status")!="RESEARCH_CANDIDATE_NOT_RUNTIME_APPLIED":
+    fail.append("OCR_PROVIDER_RESEARCH_MUST_REMAIN_UNAPPLIED")
+provider_states={x.get("provider"):x.get("state") for x in ocr_review.get("candidate_providers",[]) if isinstance(x,dict)}
+if provider_states.get("GOOGLE_CLOUD_VISION_OCR")!="REVIEWED_ONLY_LIVE_API_CALL_NOT_VERIFIED":
+    fail.append("GOOGLE_OCR_UNVERIFIED_STATUS_MISSING")
+if not any("FACT" in x for x in ocr_review.get("pilot_exit",[])):
+    fail.append("OCR_REVIEW_BEFORE_FACT_GATE_MISSING")
+if http_review.get("status")!="REFERENCE_ONLY__NO_LIVE_PROVIDER_ROUTING_OR_KEY":
+    fail.append("EXTERNAL_PROVIDER_ROUTER_RESEARCH_MUST_REMAIN_REFERENCE_ONLY")
+if not any("no model auto-promotion" in x.lower() for x in [http_review.get("promotion_gate","")]):
+    fail.append("EXTERNAL_PROVIDER_NO_AUTO_PROMOTION_GATE_MISSING")
+if "SHARED/runtime/http-json.js" not in http_review.get("existing_implementation",""):
+    fail.append("EXTERNAL_PROVIDER_EXISTING_TRANSPORT_REUSE_MISSING")
+
 if fail:
     print("FAIL: shared technical capability registry")
     for x in fail: print(x)

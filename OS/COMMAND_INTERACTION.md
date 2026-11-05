@@ -14,6 +14,35 @@ When the current conversation/project clearly belongs to TAKY, Work OS, Learning
 
 Apply only the rules/owners relevant to the task. Default activation SHALL NOT turn ordinary low-risk conversation into maximum-process execution.
 
+## 0.2 Global TAKY answer and slogan inheritance — HARD LOCK
+
+For every response within an active TAKY-governed conversation/workflow, apply the latest recoverable TAKY canonical rules and BOTH slogans by default; the user need not repeat a prefix. This applies to ordinary answers, tool choices, handoffs, status claims, implementation and validation. Preserve their original meanings; NEVER redefine the slogans as approval, control or validation alone.
+
+- **Think Again, Keep Your Key.** 한 번 더 생각하고, 핵심은 놓치지 마. 답을 풀 열쇠는 이미 가지고 있다.
+- **Think Again, You're The Key.** 방법을 찾고 해결하라. 결국 답을 만들어내는 핵심 주체는 인간이다.
+- Cycle: HUMAN INTENT / DESIRED OUTCOME -> THINK AGAIN -> KEEP YOUR KEY -> FIND A WAY / SOLVE -> YOU'RE THE KEY -> VERIFY / CORRECT / CONTINUE.
+- USER != DEBUGGER. Recover settled decisions and latest corrections system-side; never silently replace actual execution with a summary, a plan or repeated validation.
+- Respect explicit current user intent, task scope, existing authority hierarchy and actual tool/runtime capabilities. Do not assert that repository rules automatically intercept hosted ChatGPT messages.
+- If live canonical sources are unavailable, identify the exact freshness boundary and use recoverable approved state without pretending it is freshly verified.
+
+## 0.3 Natural `재개` / `재개준비` command — HARD LOCK
+
+A standalone `재개`, `/재개`, `최신 타키 기준으로 재개`, or equivalent in an active TAKY context means EXECUTE RESUME, not describe a resume plan and not ask the user to paste the same handoff again while recoverable paths exist.
+
+`재개` execution:
+1. Inherit approved/protected state; read `STATE.md` and applicable namespace CURRENT; verify live main HEAD and active work-branch HEAD when accessible.
+2. Read the ENTIRE latest relevant HANDOFF including appended LATEST OVERRIDE, original owner/source pointers and corrections; compare with current authority. Historical handoff never silently overrides current canonical.
+3. Inherit CLOSED unless new regression evidence; identify HOLD/CONFLICT/OPEN/NEXT and last verified execution point.
+4. Verify available resume evidence, source coverage, correction lineage and applicable bundle/source-inventory acceptance. A self-reported PASS is not proof.
+5. Execute the next authorized OPEN action in the same turn when tools permit; report concrete delta, evidence, blocker and durable checkpoint. Do not stop at a status recital.
+6. When sources/tools cannot be accessed, preserve an explicit BLOCKED/UNVERIFIED boundary and pursue authorized alternate recovery; do not fabricate a successful resume.
+
+`재개준비` means produce/persist a recoverable handoff and CURRENT checkpoint, with independent source inventory, forward/reverse coverage, latest corrections/overrides, actual readback, and evidence-bound resume test for the declared recovered scope. Where the raw manifest, inventory, handoff coverage and bundle are available in a controlled repository runtime, run:
+`python ENFORCEMENT/resume_preparation_acceptance.py <source-root> <raw-manifest> <inventory> <handoff-coverage> <bundle>`.
+A failed or unrun material gate is FAIL/UNVERIFIED, never a lossless PASS. This command does not prove inaccessible account history or hosted ChatGPT auto-invocation.
+
+`재개` != `재개준비`: the former restores and continues; the latter prepares, saves and verifies transfer. Both retain all approved decisions without re-opening CLOSED on narrative preference alone.
+
 ## 1. COMMAND DISCOVERY
 
 The user SHALL NOT be required to memorize every TAKY command.

@@ -1,0 +1,41 @@
+{
+  "schema": "ARCHIGROW_GROWTH_CYCLE_V1",
+  "authority": "DOMAIN_SUPPORT_BACKLOG_NOT_CANONICAL",
+  "source_owner": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+  "inherited_growth_rule": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md#TKY-GROWTH-001",
+  "gaps": [
+    {
+      "gap_id": "AG-GAP-001", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P0", "status": "OPEN",
+      "tags": ["SITE", "PUBLIC_DATA"], "target_capability": "verified-source-to-site-intake",
+      "question": "What exact official source receipts, dates and applicability are missing for one real project site-intake workflow?",
+      "proof": {"baseline": "Offline adapter/source catalog only; no authenticated real parcel join verified.", "acceptance": "One actual site/source manifest with dates, original refs and explicit unknowns.", "metric": "Verified source claims traceable to original receipts; no inferred survey boundary."},
+      "source_refs": [{"id": "ARCH-MAP-20260929", "location": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md", "revision": "8158100f106c69d0515337f16c66a86055791fd5", "role": "DOMAIN_GAP_CONTEXT"}]
+    },
+    {
+      "gap_id": "AG-GAP-002", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P0", "status": "OPEN",
+      "tags": ["ALT", "SOURCE_CONTINUITY"], "target_capability": "architectural-method-to-work-os-trial",
+      "question": "How should two evidence-backed design alternatives be compared across geometry, program, area, assumptions and project/revision identity?",
+      "proof": {"baseline": "Individual offline modules and partial-source outputs; end-to-end real project journey unproven.", "acceptance": "One source-backed comparison contract handed to Work OS and returned with traceable outcomes/HOLDs.", "metric": "Two ALT identities and quantities remain consistent across drawing/table/report evidence."},
+      "source_refs": [{"id": "ARCH-WORK-20260929", "location": "DOMAIN/ARCHITECTURE_WORK_OS.md", "revision": "8158100f106c69d0515337f16c66a86055791fd5", "role": "DOMAIN_AUTHORITY_BOUNDARY"}]
+    },
+    {
+      "gap_id": "AG-GAP-003", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P1", "status": "OPEN",
+      "tags": ["METHOD", "OUTCOME"], "target_capability": "repeatable-architecture-strategy-extraction",
+      "question": "Which architecturally useful method survives a real nonresidential project trial rather than fixture-only tests?",
+      "proof": {"baseline": "Method references exist but second-typology end-to-end outcome is unverified.", "acceptance": "One localized strategy, verified limitations, real nonresidential result and independent review.", "metric": "Reusable method has a real outcome receipt and a documented failed/alternative route."},
+      "source_refs": [{"id": "ARCH-GROWTH-20260929", "location": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md", "revision": "8158100f106c69d0515337f16c66a86055791fd5", "role": "DOMAIN_GROWTH_CONTEXT"}]
+    },
+    {
+      "gap_id": "AG-HOLD-CTB", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P0", "status": "HOLD", "tags": ["CTB"], "target_capability": "plot-style-standard",
+      "question": "CTB work explicitly paused by user.", "proof": {"baseline": "Existing packaged outputs preserved.", "acceptance": "Resume only on explicit instruction.", "metric": "No execution while held."}
+    },
+    {
+      "gap_id": "AG-HOLD-LISP", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P0", "status": "HOLD", "tags": ["LISP"], "target_capability": "cad-lisp-suite",
+      "question": "LISP work explicitly paused by user.", "proof": {"baseline": "Existing integrated test candidate preserved.", "acceptance": "Resume only on explicit instruction.", "metric": "No execution while held."}
+    },
+    {
+      "gap_id": "AG-HOLD-HANNAM", "domain": "ARCHITECTURE", "owner": "ARCHI_GROW", "priority": "P0", "status": "HOLD", "tags": ["HANNAM"], "target_capability": "held-case",
+      "question": "Hannam case explicitly paused by user.", "proof": {"baseline": "Existing case results preserved.", "acceptance": "Resume only on explicit instruction.", "metric": "No execution while held."}
+    }
+  ]
+}
