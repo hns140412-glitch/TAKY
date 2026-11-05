@@ -1,0 +1,46 @@
+{
+  "schema": "TAKY_GOLDEN_CROP_REPRO_AUDIT_V1",
+  "as_of": "2026-10-01",
+  "source": {
+    "library_file_id": "file_0000000040788206873bb1bf11068818",
+    "sha256_expected": "143f5bb698fd1b7c38bc069bab8c24c4efb9303bb55c1d22496caf6c6327c145",
+    "sha256_materialized": "143f5bb698fd1b7c38bc069bab8c24c4efb9303bb55c1d22496caf6c6327c145",
+    "source_bytes_match": true
+  },
+  "attempts": [
+    {
+      "app": "Snap-Pop",
+      "crop_ltrb": [
+        268,
+        15,
+        551,
+        488
+      ],
+      "expected_crop_sha256": "30e037c896cb4eaa85a2291d89ee847dfc774d510e2eae4f0713020a2afb7d2b",
+      "reproduced_png_sha256": "721c84c947255ca93d83bd5a2dc633ed19c7fe79c5e2e9d9efefc2017871088a",
+      "reproduced_size_px": [
+        283,
+        473
+      ],
+      "status": "FAIL_CLOSED_SHA_MISMATCH"
+    },
+    {
+      "app": "Hide-Seek",
+      "crop_ltrb": [
+        261,
+        512,
+        555,
+        979
+      ],
+      "expected_crop_sha256": "6b3f0fac9b5ac098d05d40b9b2cd0a2f38a22ad139b629210d4a697b9cfc5b4a",
+      "reproduced_png_sha256": "06966705636015c4ffd3fa6fd463a876c5314be672d0447a9a29b630638ab3f3",
+      "reproduced_size_px": [
+        294,
+        467
+      ],
+      "status": "FAIL_CLOSED_SHA_MISMATCH"
+    }
+  ],
+  "conclusion": "Do not import regenerated crop bytes. Locate the originally verified crop binary or exact derivation recipe; do not weaken the pinned SHA.",
+  "image_generation_used": false
+}
