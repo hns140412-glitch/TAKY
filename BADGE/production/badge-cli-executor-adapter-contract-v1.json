@@ -1,0 +1,48 @@
+{
+  "schema": "TAKY_BADGE_CLI_EXECUTOR_ADAPTER_CONTRACT_V1",
+  "status": "CONTRACT_ONLY_NO_PROVIDER_BOUND",
+  "provider": null,
+  "generation_enabled": false,
+  "resource_policy": {
+    "max_badges_per_batch": 5,
+    "max_generation_attempts_per_badge": 2,
+    "sequential_batches": true,
+    "no_parallel_batch_fanout": true,
+    "checkpoint_after_each_badge": true,
+    "checkpoint_after_each_batch": true,
+    "stop_on_quota_or_rate_limit": true,
+    "stop_on_subscription_window_warning": true,
+    "resume_without_regenerating_passed": true,
+    "keep_track_generation_default": false,
+    "rework_track_generation_eligible": true
+  },
+  "image_policy": {
+    "one_badge_is_independent_job": true,
+    "contact_sheet_generation": false,
+    "preserve_source_semantics": true,
+    "required_layers": [
+      "base",
+      "bg",
+      "subject",
+      "fx"
+    ],
+    "required_composite": true,
+    "required_previews": [
+      64,
+      120,
+      200,
+      320
+    ],
+    "generator_must_return_receipt": true,
+    "provider_limit_is_external_and_not_assumed": true
+  },
+  "fail_closed": [
+    "NO_PROVIDER_BOUND",
+    "NO_QUOTA_STATUS_SIGNAL",
+    "NO_OUTPUT_RECEIPT",
+    "OUTPUT_CONTRACT_FAIL",
+    "SOURCE_SHA_DRIFT",
+    "CHECKPOINT_HASH_DRIFT"
+  ],
+  "note": "This contract minimizes avoidable generation calls. It does not claim or guarantee a specific Plus/Codex/image quota because provider limits are external and can vary."
+}
