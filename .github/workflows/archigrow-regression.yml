@@ -1,0 +1,47 @@
+name: ArchiGrow Regression
+
+on:
+  push:
+    paths:
+      - 'TOOLS/ARCHIGROW_*.py'
+      - 'ENFORCEMENT/architecture_*_test.py'
+      - 'ENFORCEMENT/grow_domain_router_test.py'
+      - 'ENFORCEMENT/grow_lineage_packet.py'
+      - 'DOMAIN/ARCHITECTURE_*.json'
+      - 'DOMAIN/ARCHIGROW_*.md'
+      - 'REFERENCE/ARCHIGROW_*'
+      - '.github/workflows/archigrow-regression.yml'
+  pull_request:
+    paths:
+      - 'TOOLS/ARCHIGROW_*.py'
+      - 'ENFORCEMENT/architecture_*_test.py'
+      - 'DOMAIN/ARCHITECTURE_*.json'
+      - '.github/workflows/archigrow-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archigrow:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional raster inspector
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Compile ArchiGrow tools
+        run: python -m py_compile TOOLS/ARCHIGROW_*.py
+      - name: Run ArchiGrow regression suites
+        # Render steps need PowerPoint/Chrome and are not exercised here; tests use --no-render paths.
+        run: |
+          set -e
+          for t in ENFORCEMENT/architecture_*_test.py ENFORCEMENT/grow_domain_router_test.py ENFORCEMENT/grow_producer_lineage_integration_test.py; do
+            echo "::group::$t"
+            python "$t"
+            echo "::endgroup::"
+          done

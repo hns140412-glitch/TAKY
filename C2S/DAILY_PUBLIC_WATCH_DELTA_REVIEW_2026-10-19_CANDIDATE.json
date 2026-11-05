@@ -1,0 +1,159 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-19",
+  "day": "MONDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_AND_MON_WED_DELTA_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-18_CANDIDATE.json",
+    "TAKY/CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261018T171504049Z.json",
+    "TAKY_AI_WORKBENCH/REFERENCE/99_CONTROL/SOURCE_UNIVERSE/TAKY_CENTRAL_SOURCE_FACTORY.sqlite3"
+  ],
+  "coverage": {
+    "registered_enabled": 11,
+    "observed_distinct_hosts_in_2026_10_18_utc_runs": 5,
+    "full_same_day_scan": false,
+    "central_db_last_modified_local": "2026-10-16",
+    "central_url_slug_lookup": "0 matching locations or work_ref_row for three new guide slugs and old Excel URL encoded fragment",
+    "central_full_corpus_numeric_similarity": "NOT_PERFORMED",
+    "sitewatch_collector_caps": {
+      "max_sites_per_run": 2,
+      "max_new_urls_per_run": 2
+    },
+    "newly_discovered_count_is_not_new_publication_count": true
+  },
+  "digit": {
+    "last_local_scan_utc": "2026-10-18T17:15:04.048Z",
+    "new_urls": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "notion_body_change": "UNVERIFIED"
+  },
+  "original_analysis_then_taky_comparison": [
+    {
+      "source_id": "SITE_WATCH:9c7f1bbc400117ade4234483",
+      "title": "클로드·버지로 시네마틱 광고 5개 만드는 법",
+      "publisher": "게으른 빌더",
+      "published": "2026-10-18",
+      "url": "https://lazyowen.com/guides/claude-buzzy-product-video-ads",
+      "raw_sha256": "d69c5dbfb1e2f761d3512e149e91821e46cb59a3510c21ab24236a681eb69707",
+      "raw_integrity": "SHA256_RECALCULATED_MATCH",
+      "original_analysis": "Claude Code MCP to Buzzy; product photo to 15-second video, controlled variant generation and comparison. Service charges credits; claims of stable object identity and quality are not independently demonstrated by the guide. Permission and rights for source media required.",
+      "taky_comparison": "Media/design reference candidate only; overlap with existing media-generation review, no MCP install or paid generation.",
+      "pipeline": {
+        "raw": "REUSED_LOCAL",
+        "evidence": "PUBLISHER_AND_SERVICE_SITE_REVIEWED",
+        "indexing": "CANDIDATE_ONLY",
+        "learning": "NONE",
+        "domain": "MEDIA_DESIGN_CANDIDATE"
+      }
+    },
+    {
+      "source_id": "SITE_WATCH:4c69bc1725d7278e3a6ab38a",
+      "title": "클로드로 이력서를 탈락시키려는 채용 심사단 만드는 법",
+      "publisher": "게으른 빌더",
+      "published": "2026-10-18",
+      "url": "https://lazyowen.com/guides/claude-resume-hiring-panel",
+      "raw_sha256": "8aea48b74fb529d7ea230c8701403ef5d4388bf1286efe996584044ee8223414",
+      "raw_integrity": "SHA256_RECALCULATED_MATCH",
+      "original_analysis": "Open-source hiring-panel skill describes ATS, hiring manager, five isolated reviewers, aggregation and before-after; repository discloses eight sub-agent calls, MIT license and no employment guarantee. Simulated role independence is not external independent verification.",
+      "taky_comparison": "Useful pattern for review role isolation, but overlaps with existing TAKY independent review and evidence-gate logic; do not install or equate simulated votes with evidence.",
+      "pipeline": {
+        "raw": "REUSED_LOCAL",
+        "evidence": "PUBLISHER_AND_AUTHOR_REPOSITORY_REVIEWED",
+        "indexing": "CANDIDATE_ONLY",
+        "learning": "NONE",
+        "domain": "AI_REVIEW_METHOD_CANDIDATE"
+      }
+    },
+    {
+      "source_id": "SITE_WATCH:6cb5195731bc232ab7b47abe",
+      "title": "인스타 자동화 무료 프롬프트 11개",
+      "publisher": "every._ai",
+      "published": "2026-10-18",
+      "url": "https://every-ai-guides.vercel.app/posts/insta-automation-free-prompts.html",
+      "raw_sha256": "68822472af5220d071fd8d06f927d4b01017aacefcdc50f93efe00c2267ec4d6",
+      "raw_integrity": "SHA256_RECALCULATED_MATCH",
+      "original_analysis": "11 prompts cover reference discovery, performance filtering, opening hook, script structure, caption and narration. Primarily manual prompt workflow, not demonstrated end-to-end automation. Direct reuse of reference sentence structures risks excessive copying; engagement claims not independently verified.",
+      "taky_comparison": "Writing/media candidate; substantial semantic overlap with prior SNS automation reference, retain specific reference only, no new engine.",
+      "pipeline": {
+        "raw": "REUSED_LOCAL",
+        "evidence": "LOCAL_ORIGINAL_HTML_REVIEWED",
+        "indexing": "CANDIDATE_ONLY",
+        "learning": "NONE",
+        "domain": "WRITING_MEDIA_CANDIDATE"
+      }
+    },
+    {
+      "title": "엑셀 달력 자동화 양식",
+      "publisher": "오빠두엑셀",
+      "url": "https://www.oppadu.com/resources/%EC%97%91%EC%85%80-%EC%9E%90%EB%8F%99%ED%99%94-%EB%8B%AC%EB%A0%A5/",
+      "raw_sha256": "09c3f2e0d0663276e1fb769cc20318c3bda1e7bee95ecebeac0ea42171abfb72",
+      "raw_integrity": "SHA256_RECALCULATED_MATCH",
+      "last_version_update": "2025-12-14",
+      "original_analysis": "Calendar template v1.7; no 2026-10 substantive update evidenced.",
+      "taky_comparison": "EXCLUDE_OLD_BASELINE_NO_NEW_DELTA",
+      "pipeline": {
+        "raw": "REUSED_LOCAL",
+        "evidence": "PUBLISHER_VERSION_HISTORY_REVIEWED",
+        "indexing": "NO_NEW",
+        "learning": "NONE",
+        "domain": "NONE"
+      }
+    }
+  ],
+  "architecture_official_brief": [
+    {
+      "source": "buildingSMART International",
+      "published": "2026-10-12",
+      "url": "https://www.buildingsmart.org/the-buildingsmart-openbim-awards-2026-winners-announced/",
+      "item": "TAKENAKA openBIM design workflow award",
+      "original_analysis": "Official award announcement confirms winning category and title, but not detailed project specification or quantitative production evidence.",
+      "taky_comparison": "ARCHI GROW standards and BIM data QC research candidate; case implementation claims unverified."
+    },
+    {
+      "source": "buildingSMART International",
+      "published": "2026-10-12",
+      "url": "https://www.buildingsmart.org/the-buildingsmart-openbim-awards-2026-winners-announced/",
+      "item": "University of Hong Kong evidence-gated LLM IFC information repair award",
+      "original_analysis": "Official award announcement confirms recognition for research about evidence-gated IFC information repair; no independent reproducibility or performance metrics in announcement.",
+      "taky_comparison": "ARCHI GROW BIM rule graph and IFC QC reference candidate; requires original research and independent validation before adoption."
+    }
+  ],
+  "mokdong_1_to_14": {
+    "status": "NO_NEW_OFFICIAL_DELTA_CONFIRMED_IN_SCOPED_PUBLIC_SEARCH",
+    "caveat": "No exhaustive per-complex official publication and hash comparison; do not claim all 14 unchanged.",
+    "topics": [
+      "maintenance plan",
+      "FAR",
+      "public contribution",
+      "donation",
+      "integrated review",
+      "project approval"
+    ]
+  },
+  "education": {
+    "status": "NO_ACTIONABLE_NEW_OFFICIAL_DELTA_CONFIRMED_IN_SCOPED_SEARCH",
+    "caveat": "Not an exhaustive official-source crawl."
+  },
+  "pipeline_summary": {
+    "raw": "EXISTING_4_LOCAL_RAW_REUSED; OFFICIAL_AWARD_PUBLIC_WEB_READ_ONLY",
+    "evidence": "4_RAW_SHA256_RECALCULATED_MATCH; ORIGINAL_FIRST; OFFICIAL_CROSS_CHECK_WHERE_AVAILABLE",
+    "indexing": "CANDIDATE_ONLY_NO_CENTRAL_INDEX",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_G_DRIVE_OR_PROTECTED_D_BACKUP_ACCESS"
+  ]
+}

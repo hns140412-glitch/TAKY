@@ -1,0 +1,118 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-25",
+  "day": "SUNDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_ONLY",
+  "baseline": [
+    "TAKY/CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-24_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261024T181505892Z.json",
+    "TAKY_AI_WORKBENCH/REFERENCE/99_CONTROL/SOURCE_UNIVERSE/TAKY_CENTRAL_SOURCE_FACTORY.sqlite3"
+  ],
+  "coverage": {
+    "registered_enabled": 13,
+    "observed_hosts_in_2026_10_23_24_runs": 9,
+    "full_same_day_13_site_scan": false,
+    "latest_run_utc": "2026-10-24T18:15:05Z",
+    "latest_run_kst": "2026-10-25 03:15:05",
+    "next_due_utc": "2026-10-24T21:41:05Z",
+    "next_due_kst": "2026-10-25 06:41:05",
+    "forced_crawl": false,
+    "central_factory_read_only": true,
+    "central_source_count_observed": 21534,
+    "existing_watch_candidate_titles_compared": 122,
+    "corpus_wide_body_similarity_attestation": "NOT_COMPLETED",
+    "note": "Newly captured URL is not proof of new upstream tool or nonduplicate topic."
+  },
+  "digit": {
+    "last_observed_run_utc": "2026-10-24T06:15:05Z",
+    "discovered_new": 0,
+    "notion_body_delta": "UNVERIFIED",
+    "disposition": "NO_VERIFIED_SUBSTANTIVE_DELTA"
+  },
+  "sk_ax": {
+    "last_observed_run_utc": "2026-10-23T02:15:59Z",
+    "discovered_new": 0,
+    "seed_hash_changed": true,
+    "actionable_change": false,
+    "newsletter_body_delta": "UNVERIFIED",
+    "registry_min_revisit_hours": 72,
+    "forced_recheck": false
+  },
+  "candidates": [
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/opencut-capcut-free.html",
+      "published": "2026-10-24",
+      "raw_sha256": "c23a0f5f558e07035f7a31746f249559ab7079cbdb7ccb5473a3b3db55c55d9c",
+      "local_normalized_article_text_sha256": "ac1863f1135e7803b53ac2c8233cd56e39be80a6a35e8b99169dc88ceb8cd2fc",
+      "central_exact_url_present": false,
+      "central_exact_raw_sha_present": false,
+      "prior_daily_candidate_exact_url": false,
+      "local_watch_max_title_similarity": 0.382,
+      "original": "OpenCut browser-based classic video editing guide: import, trim, add text/stickers and export. Guide claims no signup/watermark and a successful 37-second export; actual export not reproduced.",
+      "official_crosscheck": "OpenCut-app/OpenCut README confirms current site still uses classic version; MCP/headless/editor API are roadmap, not current production functions. Classic repository archived and no longer maintained.",
+      "limitation": "Article is newly published but OpenCut upstream project is older. Subscription price and device/privacy claims not independently tested; full corpus semantic match incomplete.",
+      "domain": "MEDIA_VIDEO_EDITING_RESEARCH",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "disposition": "NEW_GUIDE_OLD_UPSTREAM_UNVERIFIED_SEMANTIC_HOLD"
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/cardnews-prompt-free.html",
+      "published": "2026-10-24",
+      "raw_sha256": "06455722130ba878b3378b2bf91eea06f62a5d18996246b71a5294668b317ea7",
+      "local_normalized_article_text_sha256": "c81b4cf143c19a05476e4283b15025000fb7ef099cc04b89ab19453aa6abfc07",
+      "central_exact_url_present": false,
+      "central_exact_raw_sha_present": false,
+      "prior_daily_candidate_exact_url": false,
+      "local_watch_max_title_similarity": 0.349,
+      "original": "Two card-news prompt templates: list-style and screenshot-style, 1080x1350 PNG export via generated HTML artifact and html2canvas, with layout dimensions, typographic rules and revision prompts.",
+      "independent_limit": "Author-provided examples and free-Claude success claims not reproduced; output rendering, layout overflow, screenshot licensing, actual export button reliability and fact accuracy require verification.",
+      "taky_comparison": "Only after independent analysis, compare with existing design/media template and evidence gates. No new engine, no source promotion.",
+      "domain": "DESIGN_MEDIA_TEMPLATE_RESEARCH",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "disposition": "NEW_GUIDE_UNVERIFIED_SEMANTIC_HOLD"
+    }
+  ],
+  "excluded": [
+    {
+      "url": "https://lazyowen.com/guides/tokensave",
+      "published": "2026-07-30",
+      "modified": "2026-08-06",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://lazyowen.com/guides/storyscope-ai-fiction",
+      "published": "2026-08-18",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://lazyowen.com/guides/vibecoding3",
+      "published": "2026-08-28",
+      "disposition": "OLD_BASELINE_REUSED"
+    }
+  ],
+  "pipeline": {
+    "raw": "REUSED_EXISTING_SITE_WATCH_LOCAL_SNAPSHOTS",
+    "evidence": "LOCAL_SHA256_VERIFIED_AND_OFFICIAL_UPSTREAM_CROSSCHECK",
+    "indexing": "NONCANONICAL_CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "ROUTING_CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_G_DRIVE_OR_PROTECTED_BACKUP_ACCESS"
+  ]
+}

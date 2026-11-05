@@ -1,0 +1,133 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-21",
+  "day": "WEDNESDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_AND_MON_WED",
+  "baseline": [
+    "C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-20_CANDIDATE.json",
+    "CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261020T171503607Z.json"
+  ],
+  "coverage": {
+    "registered_enabled": 12,
+    "last_run_utc": "2026-10-20T17:15:03Z",
+    "last_run_hosts": [
+      "sdk-kim-builds.com",
+      "digittv.notion.site"
+    ],
+    "full_same_day_scan": false,
+    "collector_site_cap": 2,
+    "central_corpus_semantic_similarity": "NOT_VERIFIED",
+    "digit": {
+      "new_urls_last_run": 0,
+      "notion_body_change": "UNVERIFIED"
+    },
+    "sk_ax": {
+      "last_observed_run_utc": "2026-10-19T21:15:02Z",
+      "discovered_new": 0,
+      "substantive_change": "UNVERIFIED"
+    },
+    "selection_backlog": {
+      "lazyowen_discovered_urls_20261020T0915Z": 38,
+      "selected": 2,
+      "note": "discovered count is not published-new count; cap prevents full semantic review"
+    }
+  },
+  "source_first_candidates": [
+    {
+      "source_id": "SITE_WATCH:e19b7ec6059a61cbf25c4a5c",
+      "url": "https://every-ai-guides.vercel.app/posts/claude-code-mods-prompts.html",
+      "published": "2026-10-20",
+      "raw_sha256": "46824123119cc2d2954b0238a4380b1e94a9149db78056667e9bad86da4bef40",
+      "normalized_content_sha256": "cf133a2014013ec9471e348a83fe72212cd17ff27dfd27c24a9c0483fc075310",
+      "raw": "EXISTING_LOCAL_RAW_REUSED",
+      "independent_analysis": "Guide explains Claude Code mods, session messaging, small-model calls, timer and sample mod workflows. Anthropic playground independently corroborates sample mods blast-radius/token-weather/replay-theater. Claims of unattended robust execution are not independently tested; third-party mods can access session content and tools.",
+      "taky_comparison": "AI orchestration/handoff QA candidate; compare existing gates, not a new engine; no installation.",
+      "disposition": "UNVERIFIED_CANDIDATE",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_ORCHESTRATION_QA"
+    },
+    {
+      "source_id": "SITE_WATCH:15795572810b8172a916bcad",
+      "url": "https://every-ai-guides.vercel.app/posts/claude-council-prompt.html",
+      "published": "2026-10-20",
+      "raw_sha256": "cd1f3111a8d696b481765e793f55e542876335d00e173cd7e6d62a9f24ecc597",
+      "normalized_content_sha256": "a3bbe42fa58417d8cc4dbdf7e77a059f53d464cd7edf74e0cebe9cef6c8dc1c6",
+      "raw": "EXISTING_LOCAL_RAW_REUSED",
+      "independent_analysis": "Single-Claude-chat simulation of five advisers, anonymized ranking and chair decision; these are role prompts within one model, not independent model execution. Source's quantitative Stanford claim not separately verified.",
+      "taky_comparison": "Strong semantic overlap with existing multi-perspective review; cannot replace independent GPT/Claude/Codex evidence.",
+      "disposition": "SEMANTIC_OVERLAP_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_REVIEW_METHOD"
+    },
+    {
+      "source_id": "SITE_WATCH:49b2f306596b0016f47a9138",
+      "url": "https://every-ai-guides.vercel.app/posts/claude-max-open-source-free.html",
+      "published": "2026-10-20",
+      "raw_sha256": "c7e415b89657f658b81a73de5ee5fe2a7852d180ad81956562096780d9e17d52",
+      "normalized_content_sha256": "090154d8c682b4ebeba1b9078a2526b27d909026930986b4902e3b2844e942bd",
+      "raw": "EXISTING_LOCAL_RAW_REUSED",
+      "independent_analysis": "Guide describes 6 months of Claude Max 20x for qualifying open-source contributors. Official Claude for OSS page corroborates offer and eligibility. Program creation date and user eligibility not verified; no application or auth performed.",
+      "taky_comparison": "AI cost optimization opportunity conditional on genuine public OSS eligibility; no automatic entitlement.",
+      "disposition": "OFFICIAL_CONFIRMED_GUIDE_NEW_PROGRAM_DATE_UNKNOWN",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_COST_OPERATIONS"
+    },
+    {
+      "source_id": "SITE_WATCH:fe4dac2ee10ccb3cc508001c",
+      "url": "https://sdk-kim-builds.com/guides/voicestudio-free-voice-cloning",
+      "published": "2026-10-20",
+      "raw_sha256": "c60ea0f1a357f72a4b17aafc154d7e24218668fdc310a10823bad0d18e195d57",
+      "normalized_content_sha256": "c644f501ba62a43f7f8728e704cfcaece2f2d601f058bfaa20a902c244b0c91c",
+      "raw": "EXISTING_LOCAL_RAW_REUSED",
+      "independent_analysis": "VoiceStudio local-first speech generation/cloning, dubbing, transcription and local MCP. Official repository corroborates capabilities; AGPL application license distinct from CC-BY-NC pretrained weights and tokenizer terms. Performance, Korean quality and hardware fit not tested.",
+      "taky_comparison": "Play Camp voice/audio cost research candidate; existing mock/TTS production and consent requirements remain; no install or recording.",
+      "disposition": "NEW_GUIDE_EXISTING_PROJECT_CANDIDATE",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AUDIO_TTS"
+    }
+  ],
+  "architecture_practice": [
+    {
+      "title": "NodePen MCP for web-driven Grasshopper",
+      "source": "https://discourse.mcneel.com/t/nodepen-mcp-drive-grasshopper-from-the-web-in-your-ai-workflows/223736",
+      "published": "2026-10-19",
+      "original_analysis": "Author announces MCP endpoint for browser-collaborative Grasshopper; forum announcement only, no verified production interoperability, data protection, reproducibility or output quality.",
+      "taky_comparison": "ARCHI GROW Rhino/Grasshopper integration exploration candidate, no adoption.",
+      "status": "PUBLIC_AUTHOR_ANNOUNCEMENT_UNVERIFIED"
+    }
+  ],
+  "education": {
+    "status": "NO_VERIFIED_NEW_OFFICIAL_DELTA_IN_LIMITED_REVIEW"
+  },
+  "mokdong_1_14": {
+    "status": "NO_NEW_OFFICIAL_DELTA_VERIFIED_IN_LIMITED_SEARCH",
+    "all_14_official_documents_hash_compared": false,
+    "warning": "News of project plan vote or builder selection is not project implementation permit or government notice"
+  },
+  "pipeline": {
+    "raw": "EXISTING_SNAPSHOTS_REUSED",
+    "evidence": "LOCAL_RECEIPT_SHA256_AND_PUBLIC_OFFICIAL_CROSS_CHECK",
+    "indexing": "NONCANONICAL_CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_PROTECTED_BACKUP_OR_G_DRIVE_ACCESS"
+  ]
+}

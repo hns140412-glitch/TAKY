@@ -1,0 +1,108 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_CANDIDATE_V1",
+  "date_local": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "weekday": "TUESDAY",
+  "authority": {
+    "current": "D:\\Git PWA\\TAKY\\CURRENT\\TAKY_PATH_AUTHORITY.md",
+    "mining_standard": "D:\\Git PWA\\TAKY_AI_WORKBENCH\\00_CONTROL\\MINING_AND_REVIEW_STANDARD_CURRENT.json",
+    "watch_registry": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\site_watch\\SITE_WATCH_REGISTRY.json",
+    "closed_baseline": "INHERITED_NOT_RECOLLECTED"
+  },
+  "coverage": {
+    "registered_enabled_sites": 13,
+    "latest_local_watch_run_utc": "2026-10-26T18:15:04.436Z",
+    "latest_local_watch_sites": [
+      "lazyowen.com",
+      "sdk-kim-builds.com",
+      "every-ai-guides.vercel.app"
+    ],
+    "latest_local_watch_new_selected": 0,
+    "digitt_last_checked_utc": "2026-10-26T06:15:02.867Z",
+    "digitt_new_urls": 0,
+    "digitt_notion_body_delta": "UNVERIFIED",
+    "skax_last_checked_utc": "2026-10-26T06:15:03.129Z",
+    "skax_new_urls": 0,
+    "all_13_checked_same_day": false,
+    "collector_global_gate_respected": true,
+    "central_source_rows_readonly": 21545
+  },
+  "source_evidence": [
+    {
+      "title": "Voicebox local voice studio guide",
+      "published": "2026-10-26",
+      "url": "https://every-ai-guides.vercel.app/posts/voicebox-voice-clone-free",
+      "raw_path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\site_watch\\snapshots\\2026-10-26\\every-ai-guides.vercel.app\\69115b2278d9_ce2a64b808efc365.bin",
+      "raw_sha256": "ce2a64b808efc365a55919895297e43e43ac9c38a342dfb215c3a232ec6f351d",
+      "normalized_text_sha256": "cb85b394a98e16bc1f372dae7ac6ffae5f13b36ea454b8f49e64e3b15725c252",
+      "central_exact_url_matches": 0,
+      "central_exact_raw_hash_matches": 0,
+      "watch_exact_url_matches": 0,
+      "watch_max_bounded_text_token_jaccard": 0.113,
+      "upstream": "https://github.com/jamiepine/voicebox",
+      "upstream_model": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+      "facts": "Local-first voice cloning/TTS and MCP integration are described by upstream. Voicebox app MIT; Qwen3-TTS 1.7B Base weights Apache-2.0. Korean is supported.",
+      "limits": "No local execution, Korean quality, GPU/RAM adequacy or all-engine licenses validated; source is a new guide, not proof of a newly released technology.",
+      "disposition": "NEW_EVIDENCE_CANDIDATE_NOT_PROMOTED",
+      "domain": "PLAY_CAMP_AUDIO_AND_AI_VOICE",
+      "decision": "Prefer bounded comparative evaluation versus existing VoiceStudio/ElevenLabs route; no installation or inference run."
+    },
+    {
+      "title": "OpenDesign guide #057",
+      "published": "2026-10-26",
+      "url": "https://www.trendcore.co.kr/guide/057",
+      "raw_path": "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\site_watch\\snapshots\\2026-10-26\\www.trendcore.co.kr\\7c06340726b2_4607c1bc74f456a4.bin",
+      "raw_sha256": "4607c1bc74f456a4ec0b68eaf337707b4e7bae623ec6ba5c1f137f61096e7c0d",
+      "normalized_text_sha256": "3f0a6c2fb6470791aaa450629a4c05bb711db3a90ac2bd73013c6b0eb6c2be51",
+      "central_exact_url_matches": 0,
+      "central_exact_raw_hash_matches": 0,
+      "watch_exact_url_matches": 1,
+      "watch_max_other_bounded_text_token_jaccard": 0.258,
+      "upstream": "https://github.com/nexu-io/open-design",
+      "facts": "Apache-2.0 open source; Claude Code/Codex MCP; HTML and PDF outputs; upstream PPTX is agent-driven, with screenshot-backed export listed in roadmap.",
+      "limits": "PPTX editable shapes and CAD/BIM outputs not demonstrated. No installation or design quality reproduction.",
+      "disposition": "EXISTING_WATCH_CANDIDATE_NEW_DAILY_DELTA_NOT_NEW_REF",
+      "domain": "DESIGN_MEDIA_AND_ARCHI_GROW_OUTPUT",
+      "decision": "Do not adopt as editable-PPT replacement without element editability test."
+    }
+  ],
+  "excluded_or_linked": [
+    {
+      "url": "https://lazyowen.com/guides/higgsfield-content-factory-claude",
+      "published": "2026-10-25",
+      "reason": "Related Higgsfield upstream; credit-consuming service, overlaps prior media automation guides; hold without separate technical novelty or cost reproduction."
+    },
+    {
+      "url": "https://lazyowen.com/guides/84skills",
+      "published": "2026-08-10",
+      "reason": "Older publication rediscovered in Oct 26 RAW report; not new."
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/chatgpt-ideal-type-prompts-3.html",
+      "reason": "HTTP 404 on Oct 26 collector; not acquired evidence."
+    },
+    {
+      "url": "https://www.trendcore.co.kr/guide/001",
+      "reason": "Older guide rediscovered by section traversal; not classified new."
+    }
+  ],
+  "validation": {
+    "raw_sha256": "PASS_2",
+    "normalized_text_sha256": "PASS_2",
+    "central_exact_url_and_raw_hash": "NO_MATCH_2",
+    "watch_body_similarity": "BOUNDED_247_CANDIDATES_NOT_FULL_CENTRAL_SEMANTIC_CORPUS",
+    "official_upstream_check": "PASS_FUNCTIONS_AND_LICENSES",
+    "gpt_independent_analysis": "PRELIMINARY_NOT_FROZEN",
+    "claude_independent_review": "NOT_RUN",
+    "codex_synthesis": "NOT_RUN",
+    "full_mining_standard_complete": false,
+    "central_indexing": false,
+    "learning_consumed": false,
+    "current_modified": false,
+    "main_merged": false,
+    "push": false,
+    "netlify_deployed": false,
+    "paid_api": false,
+    "unauthorized_auth_or_scraping": false
+  }
+}

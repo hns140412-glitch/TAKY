@@ -1,0 +1,115 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-18",
+  "day": "SUNDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_DELTA_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-17_CANDIDATE.json",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261017T171503223Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261017T091503530Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261017T051506461Z.json"
+  ],
+  "coverage": {
+    "registered_enabled": 11,
+    "latest_local_collector_utc": "2026-10-17T17:15:03.222Z",
+    "full_same_day_scan": false,
+    "known_unchecked_recent_site": "www.ebs.co.kr",
+    "numeric_full_corpus_similarity": "NOT_PERFORMED",
+    "read_only_external_discovery": true
+  },
+  "digit": {
+    "state": "UNVERIFIED_NO_NEW",
+    "last_local_scan_utc": "2026-10-17T09:15:03.529Z",
+    "new_urls": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "notion_article_body": "NOT_ACCESSIBLE",
+    "meaningful_body_change": "NOT_ATTESTED"
+  },
+  "candidates": [
+    {
+      "title": "클로드 대화를 처음부터 다시 하지 않아도 되는 세션 명령어 5개",
+      "publisher": "게으른 빌더",
+      "published": "2026-10-17",
+      "url": "https://lazyowen.com/guides/claude-code-session-commands-5",
+      "canonical_url": "https://lazyowen.com/guides/claude-code-session-commands-5",
+      "raw_state": "PUBLIC_WEB_ORIGINAL_READ_ONLY; LOCAL_RAW_NOT_CAPTURED; SHA256_NOT_ATTESTED",
+      "original_analysis": {
+        "scope": "Claude Code CLI session UX and state recovery",
+        "features": [
+          "/btw side question",
+          "/recap one-line summary",
+          "/rewind or double-Esc conversation/code checkpoint",
+          "/branch conversation branching",
+          "Ctrl+S draft prompt stash"
+        ],
+        "strength": "Clear distinction between session conversation, code checkpoint, and Git recovery; scenario-based instructions",
+        "limitations": [
+          "Checkpoint rewind does not reliably undo terminal-command and background-agent filesystem changes",
+          "Broad git add . or treating clean working tree as universal success can include unrelated or secret files",
+          "Features require supported CLI versions; cannot assume web/app parity"
+        ]
+      },
+      "official_sources": [
+        "https://code.claude.com/docs/en/commands",
+        "https://code.claude.com/docs/en/interactive-mode",
+        "https://code.claude.com/docs/en/sessions"
+      ],
+      "dedup": {
+        "local_candidate_exact_url_matches": 0,
+        "search_scope": [
+          "TAKY/C2S candidate JSON",
+          "TAKY-SOURCE-VAULT/data/site_watch/local_content_candidates",
+          "TAKY-SOURCE-VAULT/data/site_watch/indexing_review",
+          "TAKY-SOURCE-VAULT/data/site_watch/mining_raw_inbox",
+          "latest state generation"
+        ],
+        "semantic_overlap": "Existing TAKY handoff/checkpoint and prior Claude guides; original article's specific CLI commands are a distinct practical reference",
+        "full_corpus_similarity": "NOT_ATTESTED"
+      },
+      "mining": "ORIGINAL_SEMANTIC_ANALYSIS_COMPLETED_EXTERNAL_ONLY",
+      "indexing": "CANDIDATE_ONLY_NO_CENTRAL_INDEX",
+      "forming": "NONE",
+      "learning": "NONE",
+      "domain_candidates": [
+        "TAKY orchestrator session recovery and evidence gate"
+      ],
+      "taky_integration": "Reuse existing session/recovery structures; do not substitute /recap for CURRENT or /rewind for filesystem/Git verification; no new engine.",
+      "status": "NEW_PUBLIC_ARTICLE_FOUND_AFTER_PREVIOUS_DAILY_REPORT; RAW_CAPTURE_PENDING"
+    }
+  ],
+  "omissions": {
+    "site_watch_discovered_new_on_2026_10_17_0515": {
+      "lazyowen": 42,
+      "selected": 2,
+      "selected_urls": [
+        "https://lazyowen.com/guides/claude-skills-top5",
+        "https://lazyowen.com/guides/claude-youtube-skill"
+      ],
+      "observation": "Selection cap can defer relevant newly published URLs; discovery counts are not confirmed new publications."
+    },
+    "guard_observed": {
+      "global_new_url_cap": 2,
+      "max_sites_per_run": 2
+    },
+    "action": "Flag coverage gap; do not alter collector or registry in this review"
+  },
+  "pipeline": {
+    "raw": "EXTERNAL_PUBLIC_ORIGINAL_READ_ONLY; NO_LOCAL_NEW_RAW",
+    "evidence": "PUBLISHER_ARTICLE_AND_ANTHROPIC_OFFICIAL_DOCS_REVIEWED",
+    "indexing": "NONCANONICAL_CANDIDATE_ONLY",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_MASTER_CANONICAL_CHANGE",
+    "NO_CENTRAL_PROMOTION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING"
+  ]
+}

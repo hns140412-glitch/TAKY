@@ -1,0 +1,139 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-17",
+  "day": "SATURDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_DELTA_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-16_CANDIDATE.json",
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-15_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261016T181502668Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261016T141504889Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_TAKY_DATA_REVIEW_CANDIDATES_CURRENT.json"
+  ],
+  "coverage": {
+    "enabled_registered_sites": 11,
+    "latest_local_collector_utc": "2026-10-16T18:15:02.667Z",
+    "next_due_utc": "2026-10-16T21:26:02.666Z",
+    "full_fresh_scan": false,
+    "mode": "REUSE_DUE_GATED_LOCAL_RECEIPTS_PLUS_PUBLIC_READ_ONLY_RESEARCH",
+    "corpus_wide_numeric_similarity": "NOT_ATTESTED"
+  },
+  "digit": {
+    "state": "UNVERIFIED_NO_NEW",
+    "last_local_checked_utc": "2026-10-16T18:15:02.667Z",
+    "discovered_new": 0,
+    "selected": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "root_html_sha256": "2ce0c7da244ce1a13eccc9a16bb0218d2750c9a8d2fce1b487d5931793552be4",
+    "root_changed_since_2026_10_16_0215": true,
+    "reason": "Notion article body unavailable; root HTML hash churn is not proof of substantive delta"
+  },
+  "candidates": [
+    {
+      "title": "앤트로픽 AI 코딩 플레이북 템플릿 모음: intent부터 review까지",
+      "publisher": "낭만빌더 김스듴",
+      "published": "2026-10-17",
+      "url": "https://sdk-kim-builds.com/guides/ai-native-sdlc-templates/",
+      "canonical_url": "https://sdk-kim-builds.com/guides/ai-native-sdlc-templates",
+      "source_id": "SITE_WATCH:2e081987263ff2f5d200da75",
+      "raw_sha256": "0ce19b16bf0caa02bc4292c1412cb22763d9a7606aa63b2be9618d355c88a770",
+      "normalized_text_sha256": "ac95681cefc083867450c5677b8f87dd6005d718a40dddf6d2b6072451b6e653",
+      "raw_state": "REUSED_LOCAL_CAPTURED_2026-10-14_SHA256_VERIFIED_2026-10-17",
+      "mining_state": "ORIGINAL_AND_OFFICIAL_PARENT_READ_SEMANTIC_APPROVAL_PENDING",
+      "relation": "DERIVATIVE_OF_ANTHROPIC_2026-08-21_OFFICIAL_PLAYBOOK_WITH_PRACTICAL_TEMPLATES",
+      "primary_source": "https://claude.com/resources/articles/the-ai-native-sdlc-playbook",
+      "dedup": "ALREADY_IN_LOCAL_CANDIDATE_CORPUS; NO_NEW_REF; OFFICIAL_SOURCE_OLDER_AND_CONCEPT_OVERLAP_WITH_TAKY_HARNESS",
+      "indexing": "EXISTING_NONCANONICAL_CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain_candidates": [
+        "TAKY orchestrator execution evidence and human-intent handoff",
+        "READY/Play Camp end-to-end QA gate"
+      ],
+      "analysis": "Concrete intent/spec/plan/review templates and test-skipped false-pass/deep-page QA warnings are practically useful. Principles and stages already overlap TAKY authority/QA; use as evidence comparison, not a new engine or mandatory document proliferation.",
+      "status": "PUBLISHED_TODAY_PRECAPTURED_CANDIDATE_HOLD"
+    },
+    {
+      "title": "엔비디아가 열어둔 AI 모델 100개, 무료로 어디까지 쓸 수 있나",
+      "publisher": "낭만빌더 김스듴",
+      "published_or_updated": "2026-10-16",
+      "first_published_claim": "2026-09-17",
+      "url": "https://sdk-kim-builds.com/guides/nvidia-free-ai-models-100/",
+      "raw_state": "PUBLIC_WEB_READ_ONLY_NO_LOCAL_RAW_ATTESTATION",
+      "primary_sources": [
+        "https://docs.api.nvidia.com/nim/docs/product",
+        "https://build.nvidia.com/nvidia/nemotron-3.5-content-safety"
+      ],
+      "mining_state": "PUBLIC_EVIDENCE_REVIEWED_NOT_LOCALLY_CAPTURED",
+      "dedup": "VERSION_UPDATE_OF_EXISTING_PUBLISHER_ARTICLE; TOPIC_OVERLAPS_FREE_LLM_ROUTING_AND_TRIAL_ENDPOINTS",
+      "indexing": "NOT_REQUESTED",
+      "learning": "NONE",
+      "domain_candidates": [
+        "TAKY AI cost route evidence-only"
+      ],
+      "analysis": "Updated free-trial model inventory and endpoint constraints. NVIDIA official FAQ restricts free developer NIM access to prototype/research/development/testing and production requires license; not a free production Claude replacement. No key issuance or API calls.",
+      "status": "VERSION_UPDATE_EXTERNAL_ONLY_HOLD"
+    }
+  ],
+  "excluded": [
+    {
+      "url": "https://sdk-kim-builds.com/guides/ai-hedge-fund-virattt-install-guide/",
+      "published": "2026-10-16",
+      "reason": "new publisher article but investing simulation and paid financial-data API have low current TAKY domain relevance; no RAW/REF"
+    },
+    {
+      "url": "https://lazyowen.com/guides/claude-opus-motion-design-prompts",
+      "published": "2026-09-28",
+      "modified": "2026-10-05",
+      "raw_sha256": "00fe98cfc12c41e06d136672729f366564d3f575c4d237eb5258f56a169b4c99",
+      "reason": "late URL discovery, old material; not October 17 delta"
+    },
+    {
+      "url": "https://lazyowen.com/guides/claude-private-tutor-prompts",
+      "published": "2026-09-30",
+      "modified": "2026-09-30",
+      "raw_sha256": "e69d2f1f4504b9e5361fc1e2c51af3441df7ce3620ea3361454ab8a5a030bbe4",
+      "reason": "late URL discovery, old publication and generic tutor-prompt overlap"
+    },
+    {
+      "url": "https://www.oppadu.com/lesson/ai-automation-3-steps",
+      "raw_sha256": "5f0a0d924d5b56c9228222edfb4a5f4f95944879f0cff80766594901ea2b1123",
+      "reason": "newly captured URL, not proven newly published or substantively changed"
+    },
+    {
+      "url": "https://rebornlabs.kr/business",
+      "raw_sha256": "ba1b9db030b58d257aa763216e87c385efb50b5cb0d037d21f6da4b23da5cc03",
+      "reason": "business overview/marketing, not evidence of new technical change"
+    },
+    {
+      "url": "http://www.history.go.kr/",
+      "raw_sha256": "8207fc9b4cbe40a200c3ff85411d10cac2235b66139ec4aefa241d6876f9af51",
+      "reason": "historical institution root/redirect; no material delta"
+    }
+  ],
+  "dedup_gate": {
+    "performed": "canonical URL, captured SHA256, published/modified dates, 21 local site-watch candidates, 2026-10-09..16 daily report comparisons, official parent-source and topical overlap",
+    "not_performed": "877-source central corpus numeric title/body similarity; all 11 sites same-day full recheck",
+    "policy": "no new REF for URL discovery, old publication, or derivative templates"
+  },
+  "pipeline": {
+    "raw": "ONE_LOCAL_RAW_REUSED_AND_SHA256_VERIFIED; ONE_EXTERNAL_WEB_READ_ONLY",
+    "evidence": "PUBLIC_PUBLISHER_AND_ANTHROPIC_AND_NVIDIA_OFFICIAL_EVIDENCE_REVIEWED",
+    "indexing": "EXISTING_CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CURRENT_MASTER_CANONICAL_CHANGE",
+    "NO_CENTRAL_PROMOTION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING"
+  ]
+}

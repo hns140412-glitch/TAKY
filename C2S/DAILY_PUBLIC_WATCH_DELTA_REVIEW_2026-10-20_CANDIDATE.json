@@ -1,0 +1,137 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-20",
+  "day": "TUESDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_ONLY",
+  "baseline": [
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-19_CANDIDATE.json",
+    "TAKY/CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261019T171503890Z.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_TAKY_DATA_REVIEW_CANDIDATES_CURRENT.json"
+  ],
+  "coverage": {
+    "registered_enabled": 12,
+    "prior_reports_count_11": "OUTDATED_REGISTRY_COUNT",
+    "site_watch_runs_reviewed_utc": [
+      "2026-10-19T01:15Z",
+      "2026-10-19T05:15Z",
+      "2026-10-19T09:15Z",
+      "2026-10-19T13:15Z",
+      "2026-10-19T17:15Z"
+    ],
+    "observed_hosts": [
+      "lazyowen.com",
+      "every-ai-guides.vercel.app",
+      "rebornlabs.kr",
+      "digittv.notion.site",
+      "sdk-kim-builds.com"
+    ],
+    "full_12_site_same_day_scan": false,
+    "collector_max_sites_per_run": 2,
+    "collector_max_new_urls_per_run": 2,
+    "local_sitewatch_index_records": 44,
+    "central_corpus_numeric_similarity": "NOT_PERFORMED",
+    "note": "Collector discovered URL counts do not represent new publication counts; source-family and whole-corpus comparison remain open."
+  },
+  "digit": {
+    "last_observed_scan_utc": "2026-10-19T09:15Z",
+    "discovered_new_urls": 0,
+    "notion_body_change": "UNVERIFIED"
+  },
+  "original_first_candidates": [
+    {
+      "title": "챗GPT 대화, 구글에 새고 있는지 30초 만에 확인하는 법 3가지",
+      "url": "https://every-ai-guides.vercel.app/posts/ai-chat-share-link-check.html",
+      "published": "2026-10-19",
+      "raw_sha256": "fcf6c7ed0850239f95f5b29fd3b7bdb9cd170ecdf6ed6a1e9a9f8af0fb17844d",
+      "raw": "LOCAL_EXISTING_SNAPSHOT_REUSED",
+      "original_analysis": "Guide proposes sensitive-data avoidance, shared-link management, and web search checks. Official OpenAI help confirms anyone with personal shared link may view, and Settings > Data controls > Shared links > Manage. Official help states shared pages are NOT intended for search-engine indexing; a Google result/no-result is not proof of exposure or safety. No user account audit performed.",
+      "taky_comparison": "Security/privacy education reference only; no actual share-link enumeration or deletion. Compare against existing security controls before promotion.",
+      "indexing": "UNVERIFIED_CANDIDATE",
+      "learning": "NONE",
+      "domain": "AI_SECURITY_PRIVACY_CANDIDATE"
+    },
+    {
+      "title": "PPT 이제 안녕? 발표 자료 통째로 뽑는 클로드 프롬프트 6개",
+      "url": "https://lazyowen.com/guides/claude-presentation-prompts-6",
+      "published": "2026-10-19",
+      "raw_sha256": "ce2da88f209e82cb1fcfb43e83c8d460b32135a541dd4e11c2f6d24f55e97d5e",
+      "raw": "LOCAL_EXISTING_SNAPSHOT_REUSED",
+      "original_analysis": "Public introduction and step headings describe a staged outline/slide structure/story/design/content/editing/PPT export workflow. Some detailed steps are email-gated, so full prompt sequence and output quality were not verified. No actual editable PPT reproduction evidence.",
+      "taky_comparison": "Compare with existing ARCHI GROW sample-first editable PPT and source-data binding work; method reference only, not a new engine.",
+      "indexing": "UNVERIFIED_CANDIDATE",
+      "learning": "NONE",
+      "domain": "ARCHI_GROW_PRESENTATION_METHOD_CANDIDATE"
+    },
+    {
+      "title": "사진 한 장으로 클로드 상세페이지 3분 만에 만드는 프롬프트 3개",
+      "url": "https://every-ai-guides.vercel.app/posts/claude-detail-page-3prompts.html",
+      "published": "2026-10-19",
+      "raw_sha256": "ff5ea1802cab5939a5de869df912ccc093cdfc43b8ff29809ab49fa52b4a0eed",
+      "raw": "LOCAL_EXISTING_SNAPSHOT_REUSED",
+      "original_analysis": "Three-step workflow derives buyer objections from photo, builds a mobile sales page, then fills unspecified product fields with plausible values. The reported 3m16s result is author-provided and not independently reproduced; plausible invented specifications/reviews can mislead.",
+      "taky_comparison": "Writing/marketing reference only. Do not transfer invented values into ARCHI GROW architecture, compliance, or client deliverables.",
+      "indexing": "UNVERIFIED_CANDIDATE",
+      "learning": "NONE",
+      "domain": "WRITING_MEDIA_CANDIDATE"
+    }
+  ],
+  "duplicate_or_old": [
+    {
+      "url": "https://sdk-kim-builds.com/guides/rea-reverse-engineer-anything",
+      "published": "2026-10-19",
+      "raw_sha256": "89bc70b85f3c0cc3e13c8e9155b0e82a324e2b91fe5b5bb38a9580dcf74810d3",
+      "status": "EXISTING_SITEWATCH_CANDIDATE",
+      "evidence": "Existing SITE_WATCH_TAKY_DATA_REVIEW_CANDIDATES_CURRENT.json has same URL and source_id SITE_WATCH:bcae8ca6a3e48dd68846f092; user had previously discussed REA. Official repository corroborates MCP analysis role. No new REF."
+    },
+    {
+      "url": "https://lazyowen.com/guides/designskill",
+      "published": "2026-07-28",
+      "status": "OLD_BASELINE_NO_DELTA"
+    },
+    {
+      "url": "https://lazyowen.com/guides/ecc-claude-code-agent-team",
+      "published": "2026-09-28",
+      "status": "OLD_BASELINE_NO_DELTA"
+    },
+    {
+      "url": "https://lazyowen.com/guides/fable5-website",
+      "published": "2026-08-30",
+      "status": "OLD_BASELINE_NO_DELTA"
+    },
+    {
+      "url": "https://rebornlabs.kr/en",
+      "status": "LANGUAGE_LANDING_PAGE_NOT_NEW_ARTICLE"
+    }
+  ],
+  "sk_ax": {
+    "registered_host": "www.skax.co.kr",
+    "watch_scope": "/insight/trends and /insight/newsletters",
+    "public_site_checked": "2026-10-20",
+    "status": "NO_NEW_VERIFIED_SUBSTANTIVE_DELTA",
+    "latest_observed_official_news": "2026-10-01 Boot Camp Vibe",
+    "newsletter_body_or_hash_change": "UNVERIFIED",
+    "note": "Official pages public read-only; do not equate absent visible listing with no changes."
+  },
+  "pipeline": {
+    "raw": "EXISTING_SNAPSHOTS_REUSED; NO_NEW_FETCH_BY_THIS_REVIEW",
+    "evidence": "LOCAL_SNAPSHOT_READ_AND_OFFICIAL_WEB_CROSS_CHECK; NO_REHASH_ATTESTATION",
+    "indexing": "CANDIDATE_ONLY_NO_CENTRAL_INDEX",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_G_DRIVE_OR_PROTECTED_D_BACKUP_ACCESS"
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schema": "TAKY_DAILY_PUBLIC_WATCH_DELTA_REVIEW_CANDIDATE_V1",
+  "date_kst": "2026-10-28",
+  "weekday_kst": "WEDNESDAY",
+  "authority_read": [
+    "D:\\Git PWA\\TAKY\\CURRENT\\TAKY_PATH_AUTHORITY.md",
+    "D:\\Git PWA\\TAKY_AI_WORKBENCH\\00_CONTROL\\MINING_AND_REVIEW_STANDARD_CURRENT.json",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\data\\site_watch\\SITE_WATCH_REGISTRY.json",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\site_watch\\SITE_WATCH_RUN.20261027T181502224Z.json",
+    "D:\\Git PWA\\TAKY-SOURCE-VAULT\\reports\\site_watch\\CONTENT_INDEX_LEDGER.www.trendcore.co.kr.CURRENT.json"
+  ],
+  "scope": "NON_AUTHORITATIVE_CANDIDATE_ONLY",
+  "site_watch": {
+    "registered": 13,
+    "most_recent_run_utc": "2026-10-27T18:15:02.223Z",
+    "recent_3day_processed_hosts": 8,
+    "digitt_last_checked_utc": "2026-10-27T14:15:08.721Z",
+    "digitt_new_url_count": 0,
+    "digitt_notion_body_change_unverified": true,
+    "skax_last_checked_utc": "2026-10-26T06:15:03.160Z",
+    "skax_new_url_count": 0,
+    "overdue_weekly_sites": [
+      "primary.ebs.co.kr",
+      "contents.history.go.kr",
+      "www.ebs.co.kr"
+    ],
+    "not_due_weekly_sites": [
+      "buseo.sen.go.kr",
+      "www.gwe.go.kr"
+    ],
+    "all_sites_same_day_checked": false
+  },
+  "trendcore": {
+    "date": "2026-10-27",
+    "items_verified_sha256": [
+      "058",
+      "059",
+      "060",
+      "061",
+      "062",
+      "063",
+      "064",
+      "065"
+    ],
+    "new_item_ids": [
+      "059",
+      "060",
+      "061",
+      "062",
+      "063",
+      "064",
+      "065"
+    ],
+    "changed_item_ids": [
+      "058"
+    ],
+    "central_exact_raw_hash_matches": 0,
+    "central_exact_url_matches": {
+      "058": 1,
+      "059": 0,
+      "060": 0,
+      "061": 0,
+      "062": 0,
+      "063": 0,
+      "064": 0,
+      "065": 0
+    },
+    "bounded_same_site_body_similarity_top_jaccard": {
+      "058": 0.149,
+      "059": 0.113,
+      "060": 0.215,
+      "061": 0.104,
+      "062": 0.184,
+      "063": 0.126,
+      "064": 0.138,
+      "065": 0.167
+    },
+    "method": "SHA256 readback on 8 local HTML snapshots; central SQLite read-only exact URL/raw; token Jaccard against other existing Trendcore item snapshots; NOT central corpus-wide semantic dedup",
+    "changed_058_summary": "substantive rewritten motion/video guide, old/new extracted word ratio approximately 0.62; media domain only"
+  },
+  "review_candidates": [
+    {
+      "source": "https://www.trendcore.co.kr/guide/060",
+      "original": "https://github.com/akitaonrails/ai-memory",
+      "published_kst": "2026-10-27",
+      "domain": "AI_ORCHESTRATION",
+      "stage": "ORIGINAL_AND_UPSTREAM_REVIEWED_CANDIDATE",
+      "finding": "MIT; git-backed markdown wiki and local SQLite index; Claude/Codex cross-agent handoff; zero-LLM default; native Windows experimental; no encryption at rest; opt-in cloud embedding/LLM can send page content externally; compare with existing TAKY CURRENT/HANDOFF, do not install or create duplicate authority",
+      "confidence": "OFFICIAL_UPSTREAM_DOCS_NO_REPRODUCTION",
+      "disposition": "REVIEW_ONLY_NOT_ADOPTED"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/063",
+      "published_kst": "2026-10-27",
+      "domain": "SAVEY",
+      "stage": "LOW_PRIORITY_GUIDE",
+      "finding": "five general usage-saving tips; 98.5 percent claim unverified; no demonstrated measured cost reduction",
+      "disposition": "RELATED_EXISTING_COST_MANAGEMENT_NO_PROMOTION"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/058",
+      "published_kst": "2026-10-27 update",
+      "domain": "MEDIA",
+      "stage": "CONTENT_VERSION_CHANGED",
+      "finding": "reworked short-form video workflow; no validated automatic video generation or million-view claim",
+      "disposition": "VERSION_LINK_ONLY"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/059",
+      "domain": "AI_PROMPT",
+      "disposition": "LOW_PRIORITY"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/061",
+      "domain": "MEDIA_IMAGE",
+      "disposition": "LOW_PRIORITY"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/062",
+      "domain": "DESIGN_UI",
+      "disposition": "RELATED_TO_EXISTING_SKILLS_REVIEW_ONLY"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/064",
+      "domain": "MEDIA_VIDEO",
+      "disposition": "LOW_PRIORITY"
+    },
+    {
+      "source": "https://www.trendcore.co.kr/guide/065",
+      "domain": "AI_OPEN_SOURCE",
+      "disposition": "RELATED_REPO_LIST_REVIEW_ONLY"
+    }
+  ],
+  "archi_grow": [
+    {
+      "source": "https://discourse.mcneel.com/t/visualarq-3-version-3-13-rc2-released/223796",
+      "published_kst": "2026-10-21",
+      "stage": "OFFICIAL_RELEASE_CANDIDATE_NOT_STABLE",
+      "domain": "ARCHI_GROW_DWG_BIM",
+      "finding": "VisualARQ 3.13 RC2 documents DWG export fixes for model-space dimensions, rotated/upside-down text, linetype door openings, stair detail, incomplete layouts, hidden intermediate levels. These are directly relevant to drawing/PDF QA; RC not a production upgrade.",
+      "disposition": "HIGH_VALUE_QA_TEST_CASE_CANDIDATE"
+    },
+    {
+      "source": "https://discourse.mcneel.com/t/visualarq-3-version-3-12-1-released/223789",
+      "published_kst": "2026-10-21",
+      "stage": "OFFICIAL_STABLE_MAINTENANCE",
+      "finding": "3.12.1 fixes 8 issues mostly Rhino 9 and display; no evidence that RC2 DWG fixes are included.",
+      "disposition": "CONTEXT_ONLY"
+    }
+  ],
+  "mokdong": [
+    {
+      "source": "https://cleanup.seoul.go.kr/assc/bidpblanc/vscr.do?cafeId=470900001352q09&cpage=1&othbcListSn=1086340&searchCode=&searchValue=&signguCd=",
+      "published_kst": "2026-10-14",
+      "site": "Mokdong 5",
+      "stage": "OFFICIAL_BID_NOTICE_RECOVERED_FROM_PRIOR_MISSED_SCAN",
+      "domain": "ARCHI_GROW_PUBLIC_CONTRIBUTION",
+      "finding": "Donation-related pedestrian overpass cooperation vendor bid; deadline 2026-10-30 15:00; general competitive bid qualification review; NOT an approved design, exact contribution value, or completed donation.",
+      "disposition": "NEW_TO_REVIEW_LOG_NOT_NEW_TODAY"
+    },
+    {
+      "source": "https://cleanup.seoul.go.kr/assc/scrin-bbs/execute.do?cafeId=470900001352q09",
+      "published_kst": "2026-10-23",
+      "site": "Mokdong 5",
+      "finding": "Sixth committee meeting notice; not evidence of permit/plan change.",
+      "disposition": "CONTEXT_ONLY"
+    }
+  ],
+  "other_public_changes": "No confirmed new approved redevelopment plan/FAR/permit DELTA from limited official-source search; 14-complex per-document baseline hash comparison not performed.",
+  "review_standard_status": {
+    "raw_verified": true,
+    "gpt_independent_analysis_partial": true,
+    "claude_frozen_review": false,
+    "codex_synthesis": false,
+    "central_indexing": false,
+    "learning_consumed": false,
+    "authoritative_current_changed": false
+  },
+  "prohibited_actions_not_done": [
+    "implementation",
+    "central_promotion",
+    "CURRENT_edit",
+    "main_merge",
+    "push",
+    "Netlify_deploy",
+    "paid_API",
+    "unauthorized_auth_or_scraping"
+  ],
+  "overall": "One concrete cross-agent handoff research candidate; one VisualARQ DWG QA release candidate; one previously missed official Mokdong 5 donation-related vendor bid. No adoption or final review gate claimed."
+}

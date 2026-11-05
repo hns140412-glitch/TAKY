@@ -1,0 +1,110 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-24",
+  "day": "SATURDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_ONLY",
+  "baseline": [
+    "TAKY/CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-23_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261023T181510173Z.json"
+  ],
+  "coverage": {
+    "registered_enabled": 13,
+    "latest_local_receipt_utc": "2026-10-23T18:15:10Z",
+    "latest_local_receipt_kst": "2026-10-24 03:15:10",
+    "full_same_day_13_site_scan": false,
+    "collector_forced": false,
+    "central_factory_read_only": true,
+    "corpus_wide_semantic_attestation": "NOT_COMPLETED"
+  },
+  "digit": {
+    "last_observed_utc": "2026-10-23T14:15:03Z",
+    "new_urls": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "notion_body_change": "UNVERIFIED",
+    "disposition": "NO_VERIFIED_DELTA"
+  },
+  "sk_ax": {
+    "last_observed_utc": "2026-10-23T02:15:59Z",
+    "new_urls": 0,
+    "seed_html_hash_changed": true,
+    "actionable_change": false,
+    "newsletter_body_change": "UNVERIFIED",
+    "next_due_utc": "2026-10-26T02:15:59Z"
+  },
+  "candidates": [
+    {
+      "url": "https://lazyowen.com/guides/claude-harvey-sales-agent",
+      "published": "2026-10-23",
+      "raw_sha256": "e31792a12c31f8773bc9935d7d2a3867cf956dcf317081272438a2bfc0c8263b",
+      "local_normalized_markup_stripped_text_sha256": "18906869720acbd94fffc87c9221b1b75ba80ab48021b8acae1c8f8184870b36",
+      "local_central_exact_url_present": true,
+      "previous_daily_candidate_exact_url": false,
+      "original": "Harvey autonomous sales agent: deterministic 15-minute loop, budget check, prospect signals, isolated Claude/Codex subscription-backed calls, approval-gated email outbox; repo demo data are invented.",
+      "independent_limit": "No reproduction; subscription quota and terms, email compliance, mail costs and prospecting permissions unverified.",
+      "taky_comparison": "Compare only deterministic routing, budget headroom and evidence-backed human approval with existing orchestration; not a new engine.",
+      "disposition": "NEWLY_REVIEWED_EXISTING_RAW_CANDIDATE_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_AGENT_ORCHESTRATION_METHOD"
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/chatgpt-plugins-5.html",
+      "published": "2026-10-22",
+      "raw_sha256": "174bcf6880c1d09b09918766ed582e0ed9cf798f3e63b359a1508fa9997af1d9",
+      "local_normalized_markup_stripped_text_sha256": "9e8a06aa3c8239ddca54099852152cb88d49e45d9d82c628add94596afdc3931",
+      "local_central_exact_url_present": false,
+      "previous_daily_candidate_exact_url": false,
+      "original": "Five plugin workflows: Computer Use, Record & Replay, Canva, Higgsfield, HyperFrames. Actual service/account availability and credit use vary.",
+      "independent_limit": "Official OpenAI docs show Record & Replay requires eligible macOS and Computer Use. HyperFrames existing central reference overlaps one part; no installation or rendering tested.",
+      "taky_comparison": "Tool-routing and reusable-workflow documentation candidate; reuse existing HyperFrames source, avoid duplicate engine.",
+      "disposition": "NEWLY_REVIEWED_EXISTING_RAW_CANDIDATE_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_TOOL_CONNECTIONS_AND_MEDIA"
+    }
+  ],
+  "excluded": [
+    {
+      "url": "https://lazyowen.com/guides/markitdown-pdf-token-saver",
+      "published": "2026-09-28",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://lazyowen.com/guides/inbox-zero-claude-email-setup",
+      "modified": "2026-10-08",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://rebornlabs.kr/th",
+      "related": "https://rebornlabs.kr/kit",
+      "disposition": "EXACT_CONTENT_DUPLICATE"
+    },
+    {
+      "url": "https://rebornlabs.kr/th-th",
+      "disposition": "LANGUAGE_VARIANT_NOT_NEW_EVIDENCE"
+    }
+  ],
+  "pipeline": {
+    "raw": "REUSED_EXISTING_LOCAL_SNAPSHOTS",
+    "evidence": "LOCAL_RAW_AND_OFFICIAL_UPSTREAM_CROSSCHECK",
+    "indexing": "NONCANONICAL_CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "ROUTING_CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_PROTECTED_BACKUP_ACCESS"
+  ]
+}

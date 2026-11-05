@@ -1,0 +1,169 @@
+{
+  "schema": "TAKY_INTEGRATED_DELTA_CANDIDATE_V1",
+  "date": "2026-10-23",
+  "day": "FRIDAY",
+  "timezone": "Asia/Seoul",
+  "authority": "NONCANONICAL",
+  "scope": "DAILY_ONLY",
+  "baseline": [
+    "TAKY/CURRENT/TAKY_PATH_AUTHORITY.md",
+    "TAKY/C2S/DAILY_PUBLIC_WATCH_DELTA_REVIEW_2026-10-21_CANDIDATE.json",
+    "TAKY/C2S/TAKY_UNIFIED_PUBLIC_WATCH_NEW_CHAT_START_2026-10-10_LATEST.md",
+    "TAKY-SOURCE-VAULT/data/site_watch/SITE_WATCH_REGISTRY.json",
+    "TAKY-SOURCE-VAULT/reports/site_watch/SITE_WATCH_RUN.20261022T181503267Z.json",
+    "TAKY_AI_WORKBENCH/REFERENCE/99_CONTROL/SOURCE_UNIVERSE/TAKY_CENTRAL_SOURCE_FACTORY.sqlite3"
+  ],
+  "coverage": {
+    "enabled_registered": 13,
+    "registry_hosts": [
+      "digittv.notion.site",
+      "every-ai-guides.vercel.app",
+      "lazyowen.com",
+      "sdk-kim-builds.com",
+      "buseo.sen.go.kr",
+      "contents.history.go.kr",
+      "primary.ebs.co.kr",
+      "rebornlabs.kr",
+      "www.ebs.co.kr",
+      "www.gwe.go.kr",
+      "www.oppadu.com",
+      "www.skax.co.kr",
+      "www.trendcore.co.kr"
+    ],
+    "latest_sitewatch_run_utc": "2026-10-22T18:15:03Z",
+    "full_same_day_13_site_scan": false,
+    "observed_recent_hosts_20261020_22": 8,
+    "collector_max_sites_per_run": 2,
+    "central_factory_source_count": 21449,
+    "central_factory_location_count": 21992,
+    "corpus_wide_semantic_attestation": "NOT_COMPLETED",
+    "note": "Site-watch discoveries and URL novelty are not equivalent to publication-new evidence. No forced recrawl or override of revisit intervals."
+  },
+  "digit": {
+    "last_scan_utc": "2026-10-22T06:15:02Z",
+    "new_urls": 0,
+    "sitemap_sha256": "ff2b781ecb76cf3cab09dc40e068b25e0df506a825f6ec4e221b6d1f668397f2",
+    "prior_sitemap_same": true,
+    "root_raw_hash_changed": true,
+    "root_bytes_unchanged": true,
+    "classification": "SHELL_CHANGE_ONLY_PROVISIONAL",
+    "notion_body_change": "UNVERIFIED"
+  },
+  "sk_ax": {
+    "last_observed_utc": "2026-10-19T21:15:02Z",
+    "next_due_utc": "2026-10-22T21:15:02Z",
+    "last_discovered_new": 0,
+    "newsletter_body_delta": "UNVERIFIED",
+    "due_at_review_time": false,
+    "official_public_search": "NO_VERIFIED_RECENT_SUBSTANTIVE_DELTA",
+    "note": "Due time is 2026-10-23 06:15 KST; latest local receipt at 03:15 KST precedes due time."
+  },
+  "candidates": [
+    {
+      "url": "https://sdk-kim-builds.com/guides/text-to-cad-design-by-talking",
+      "canonical_url": "https://sdk-kim-builds.com/guides/text-to-cad-design-by-talking/",
+      "published": "2026-10-22",
+      "raw_sha256": "6ebe01ce261c34229cf19f5e104edb0c814a22d6c34d6981f02a87c73962a1f8",
+      "local_normalized_html_text_sha256": "c02cc28aeeda9ebfa0de126ec390d1e9ff50c484a6f00e22829335c943c6e21b",
+      "existing_watch_source_id": "SITE_WATCH:a88c44ad7ca126b750044b6d",
+      "original_evidence": "Existing RAW, local excerpt, official earthtojake/text-to-cad repository and CAD skill. Natural-language parametric mechanical CAD; STEP/STL/3MF/GLB, DXF, engineering drawings, geometric checks. Claims are not a validated building BIM workflow.",
+      "original_limit": "No reproduction of building geometry, BIM semantics, drawings, units, regulations or production tolerances.",
+      "taky_comparison": "ARCHI GROW Rhino/Grasshopper and drawing-automation research candidate, not replacement for CAD/BIM.",
+      "disposition": "NEW_GUIDE_EXISTING_WATCH_CANDIDATE_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "ARCHI_GROW_CAD_RESEARCH"
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/claude-tutor-ai-course-542.html",
+      "published": "2026-10-22",
+      "raw_sha256": "bd0a6ed946c65f563453fcf9b64e12aa810566749cc7fad0c147c8ba4f994b96",
+      "local_normalized_html_text_sha256": "ac18c9b1d0a7fc8bdeac034e5ca7f86f2c07464f2b168806a081925aa02266be",
+      "original_evidence": "Guide to rohitg00/ai-engineering-from-scratch; official repository currently describes 542 lessons/20 phases, tutor skills and Korean README.",
+      "related_existing": "SITE_RESCUE:379a70fc69c1ab5356049371, https://sdk-kim-builds.com/guides/ai-engineering-from-scratch-claude-tutor/ (523 lessons)",
+      "taky_comparison": "Existing topic and same upstream project; treat lesson count as version/update relationship, not new independent domain.",
+      "disposition": "SEMANTIC_DUPLICATE_WITH_VERSION_UPDATE_CANDIDATE",
+      "indexing": "RELATED_TO_EXISTING_ONLY",
+      "learning": "NONE",
+      "domain": "AI_EDUCATION_METHOD"
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/k-skill-131-korea.html",
+      "published": "2026-10-21",
+      "raw_sha256": "85a4dd41ebf1da722447eb3407af1928175b177bbc1f7012107543187a973f8e",
+      "local_normalized_html_text_sha256": "41b230105edd196acda11ac987b125b6ab052635b43e7efde719c5f92554b061",
+      "original_evidence": "Guide claims 131 Korean-oriented agent skills; official NomaDamas/k-skill README currently describes 125, with external hosted proxy, telemetry controls, and mixed license boundaries.",
+      "original_limit": "Counts differ, official API provenance, privacy, rate limits and terms not tested.",
+      "taky_comparison": "Public data/legal/real estate tool-source comparison only. Existing official source and access policy take precedence.",
+      "disposition": "NEW_GUIDE_UNVERIFIED_VERSION_DRIFT_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "KOREAN_PUBLIC_DATA_ACCESS"
+    },
+    {
+      "url": "https://www.trendcore.co.kr/guide/055-assets/claude-token-tools-guide.pdf",
+      "published_label": "2026-10-21",
+      "raw_sha256": "cc17579a375e2c4c688961393dea44e6f462c29cc3f76ca2ebc90fd5922ac984",
+      "existing_watch_source_id": "SITE_WATCH:662efcd5406ec04c8542a36b",
+      "original_evidence": "Six-page PDF first successfully RAW-captured 2026-10-22. Compares Headroom local context compression and Task Observer skill-improvement observations; official headroomlabs-ai/headroom and rebelytics/one-skill-to-rule-them-all corroborate mechanisms.",
+      "original_limit": "Compression savings and observation outcomes are upstream claims, not independently reproduced. Headroom has optional telemetry beacon on by default; Task Observer activation requires explicit environment binding and human review.",
+      "taky_comparison": "TAKY token/cost and feedback-to-skill quality-gate comparison candidate. No installation or changes to CLAUDE.md.",
+      "disposition": "NEW_ATTACHMENT_RAW_EXISTING_WATCH_CANDIDATE_HOLD",
+      "indexing": "CANDIDATE_ONLY",
+      "learning": "NONE",
+      "domain": "AI_COST_AND_SKILL_QA"
+    }
+  ],
+  "duplicate_or_excluded": [
+    {
+      "url": "https://lazyowen.com/guides/graphify",
+      "published": "2026-07-17",
+      "modified": "2026-08-06",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://lazyowen.com/guides/hani-prompt",
+      "published": "2026-09-20",
+      "disposition": "OLD_BASELINE_REUSED"
+    },
+    {
+      "url": "https://every-ai-guides.vercel.app/posts/claude-court-skill.html",
+      "published": "2026-10-20",
+      "related": "https://lazyowen.com/guides/claude-court-jury-skill",
+      "disposition": "SEMANTIC_DUPLICATE_CANDIDATE"
+    },
+    {
+      "url": "https://sdk-kim-builds.com/guides/ai-quote-rules-not-calculation",
+      "published": "2026-10-26",
+      "disposition": "FUTURE_DATED_EXCLUDE_FROM_TODAY"
+    },
+    {
+      "url": "https://sdk-kim-builds.com/guides/mcp-vs-api-docs-claude-code",
+      "published": "2026-10-27",
+      "disposition": "FUTURE_DATED_EXCLUDE_FROM_TODAY"
+    },
+    {
+      "url": "https://sdk-kim-builds.com/guides/ai-autopilot-services-autohunt",
+      "published": "2026-10-29",
+      "disposition": "FUTURE_DATED_EXCLUDE_FROM_TODAY"
+    }
+  ],
+  "pipeline": {
+    "raw": "REUSED_EXISTING_LOCAL_SNAPSHOTS",
+    "evidence": "LOCAL_RECEIPTS_AND_PUBLIC_UPSTREAM_CROSSCHECK",
+    "indexing": "NONCANONICAL_CANDIDATE_ONLY",
+    "forming": "NONE",
+    "learning": "NONE",
+    "domain": "ROUTING_CANDIDATE_ONLY"
+  },
+  "holds": [
+    "NO_IMPLEMENTATION",
+    "NO_CENTRAL_PROMOTION",
+    "NO_CURRENT_MODIFICATION",
+    "NO_MAIN_MERGE_OR_PUSH",
+    "NO_NETLIFY_DEPLOY",
+    "NO_PAID_API",
+    "NO_UNAUTHORIZED_AUTH_OR_SCRAPING",
+    "NO_G_DRIVE_OR_PROTECTED_BACKUP_ACCESS"
+  ]
+}
