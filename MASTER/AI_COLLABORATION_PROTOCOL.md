@@ -49,6 +49,7 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 6.1 Log automatically only reusable decisions, user corrections or reversals, OPEN/CLOSED changes, authority changes, and material implementation/test/review results.
 6.2 Do not log routine chatter, intermediate reasoning, repeated context, or duplicates of content already represented in CURRENT/canonical owners.
 6.3 Shared logs and relays are transport/evidence. They are not canonical authority.
+6.4 CURRENT delta on major completion (USER 2026-11-05): when a major task ends (OPEN/CLOSED change, authority change, deploy/push/merge, or user decision), the session that did it appends a dated DELTA to the end of Drive TAKY_AI_CURRENT and confirms it by re-reading. Recording only in the PC checkpoint or project memory does not complete the task.
 
 ## 7. Authority boundary
 7.1 This protocol does not own the global TAKY authority order. Follow the authority hierarchy declared by TAKY.md and the registered canonical owners in MASTER/RULE_REGISTRY.json.
