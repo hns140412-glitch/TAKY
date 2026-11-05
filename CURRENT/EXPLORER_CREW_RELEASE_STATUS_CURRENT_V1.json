@@ -1,0 +1,43 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RELEASE_GATE_V1",
+  "gates": {
+    "asset_registry_gate": {
+      "state": "PASS"
+    },
+    "runtime_contract_gate": {
+      "state": "PASS"
+    },
+    "relation_behavior_gate": {
+      "state": "PASS"
+    },
+    "scene_orchestration_gate": {
+      "state": "PASS"
+    },
+    "ui_binding_gate": {
+      "state": "PASS"
+    },
+    "design_gate": {
+      "state": "BLOCKED",
+      "reason": "APPROVED_GOLDEN_BINARY_NOT_IMPORTED"
+    },
+    "interaction_gate": {
+      "state": "OPEN",
+      "reason": "FINAL_RUNTIME_VISUAL_FLOW_NOT_ACTIVATED"
+    },
+    "responsive_gate": {
+      "state": "OPEN",
+      "reason": "FINAL_RUNTIME_VISUAL_FLOW_NOT_ACTIVATED"
+    },
+    "device_gate": {
+      "state": "OPEN",
+      "reason": "PHYSICAL_DEVICE_QA_NOT_RUN"
+    },
+    "recovery_gate": {
+      "state": "PASS"
+    }
+  },
+  "image_generation_hold": true,
+  "main_merge_authorized": false,
+  "release_approval_authorized": false,
+  "expected_claim_ceiling": "IMPLEMENTATION_VALIDATED_NOT_RELEASE_READY"
+}

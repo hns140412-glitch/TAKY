@@ -1,0 +1,44 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RUNTIME_LEDGER_POLICY_V1",
+  "version": 1,
+  "owner": "TAKY_EXPLORER_CREW_RUNTIME",
+  "purpose": "Append-only retention, checkpoint and recovery rules for Explorer Crew runtime receipts.",
+  "rules": {
+    "append_only": true,
+    "overwrite_existing_entry": false,
+    "delete_historical_entry": false,
+    "reorder_existing_entry": false,
+    "duplicate_receipt_sha_forbidden": true,
+    "previous_entry_hash_required_after_first": true,
+    "checkpoint": {
+      "enabled": true,
+      "interval_entries": 100,
+      "checkpoint_contains": [
+        "sequence",
+        "last_entry_sha256",
+        "ledger_sha256",
+        "entry_count"
+      ],
+      "checkpoint_is_not_compaction": true
+    },
+    "retention": {
+      "mode": "DEEP_MEMORY_LIGHT_EXECUTION",
+      "immutable_receipts": "KEEP",
+      "current_projection": "DERIVED",
+      "historical_entries": "KEEP",
+      "compaction_allowed": false
+    },
+    "recovery": {
+      "verify_full_chain_before_activation": true,
+      "first_invalid_entry_stops_replay": true,
+      "rollback_to_last_verified_checkpoint": true,
+      "production_state_mutation_from_runtime_log": false
+    },
+    "storage_boundary": {
+      "taky": "contract_and_validation",
+      "runtime_store": "append_only_receipts_and_checkpoints",
+      "taky_assets": "no_runtime_ledger_ownership",
+      "app_runtime": "may_emit_receipts_but_not_rewrite_history"
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schema": "TAKY_BADGE_REWORK_BATCH_01_V1",
+  "source": "BADGE/badge-60-story-20-history-working.json",
+  "direction": "BADGE/assets/individual-art-direction-60.json",
+  "qa": "BADGE/assets/BADGE_60_PAINTERLY_VISUAL_QA_2026-09-27.md",
+  "batch": "FIRST_TEN_OF_31_CORRECTIONS",
+  "generation_allowed_only_with_exact_reference": true,
+  "shared_layers_not_baked": [
+    "rim",
+    "shadow",
+    "star",
+    "tier",
+    "lock",
+    "typography",
+    "character"
+  ],
+  "check_sizes": [
+    64,
+    120,
+    200,
+    320
+  ],
+  "items": [
+    {
+      "badge_id": "BDG-DRAFT-001",
+      "canonical_source_title": "해뜰락말락",
+      "proposed_display_title": "이불 왕국 탈출기",
+      "source_motif": "이불에서 삐져나온 작은 태양",
+      "source_storyline": "이불 왕국과 협상 끝. 아직 해가 덜 떴지만 탐험은 시작됐다.",
+      "fix": "Restore the original peeking sun from the blanket kingdom; retain the pillow-fort and ladder direction; remove unsourced flags.",
+      "small_size_witness": "sun visibly emerges FROM the blanket, not generic landscape",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "침대와 평화 협상에 성공한 작은 탐험가.",
+      "unlock_toast_proposal": "해가 뜨기 전에 내가 먼저 떴다!",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-004",
+      "canonical_source_title": "밥먹고 한번더",
+      "proposed_display_title": "밥심으로 2라운드",
+      "source_motif": "주먹밥과 돌아오는 부메랑",
+      "source_storyline": "배도 채우고 머리도 한 번 더!",
+      "fix": "Rice ball and returning boomerang must form one unmistakable second-round action; remove interchangeable mountain/sunrise.",
+      "small_size_witness": "rice ball plus clear return trajectory",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "잠깐 쉬고 다시 시작한 둘째 출발.",
+      "unlock_toast_proposal": "밥 먹었으니 연필도 한 번 더!",
+      "wordplay_device": "CALLBACK",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-005",
+      "canonical_source_title": "출발 준비 끝",
+      "proposed_display_title": "신발끈은 이미 출발했다",
+      "source_motif": "묶인 신발끈과 작은 나침반",
+      "source_storyline": "신발끈부터 마음까지 출발 준비 완료.",
+      "fix": "Show tied lace whose loose end has already leapt ahead, with secondary small compass; do not turn into generic boots.",
+      "small_size_witness": "moving lace and tied knot distinct",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "준비를 마치고 내 속도로 출발.",
+      "unlock_toast_proposal": "마음은 뒤따라오면 돼!",
+      "wordplay_device": "TALKING_OBJECT",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-006",
+      "canonical_source_title": "시간 발견자",
+      "proposed_display_title": "잃어버린 분을 찾습니다",
+      "source_motif": "시계 틈에서 솟는 새싹",
+      "source_storyline": "아무도 못 본 틈새 시간을 찾아냈다.",
+      "fix": "Single sprout visibly grows FROM a clock-number gap; minute hand points to discovery; no mountain replacement.",
+      "small_size_witness": "clock-gap sprout",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "빈틈을 찾아 나만의 작전을 끼워 넣었다.",
+      "unlock_toast_proposal": "시계 구석에 시간이 숨어 있었네?",
+      "wordplay_device": "PUN_WORDPLAY",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-007",
+      "canonical_source_title": "없던시간 뿅",
+      "proposed_display_title": "시계의 비밀 주머니",
+      "source_motif": "시계 모자를 쓴 마술 토끼",
+      "source_storyline": "어디 있었지? 주머니 속 5분 발견!",
+      "fix": "Clock-hat magical rabbit, five small time dots; no unrelated landscape.",
+      "small_size_witness": "clock and rabbit ears",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "숨은 여유를 발견한 시간 탐험가.",
+      "unlock_toast_proposal": "없던 시간 같은데, 진짜 있었어!",
+      "wordplay_device": "MYSTERY_REVEAL",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-008",
+      "canonical_source_title": "하나 더!",
+      "proposed_display_title": "한 개는 덤입니다",
+      "source_motif": "한 장 더 펼쳐지는 지도",
+      "source_storyline": "하나 끝냈는데, 작은 용기가 하나 더 나왔다.",
+      "fix": "Make the ADDITIONAL unfolding map segment clearly visible beyond first finished fold; no unsourced Crew flag.",
+      "small_size_witness": "two visibly distinct accordion map layers",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "마음이 남은 날의 작은 추가 작전.",
+      "unlock_toast_proposal": "용기가 한 개 더 나왔습니다.",
+      "wordplay_device": "SITUATIONAL_TWIST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-009",
+      "canonical_source_title": "몰래 시작",
+      "proposed_display_title": "아무도 안 시켰는데요?",
+      "source_motif": "발자국 뒤에 숨은 작은 깃발",
+      "source_storyline": "누가 시키기도 전에 슬쩍 출발했다.",
+      "fix": "Flag visibly hiding behind source footprints; plain expedition pennant without invented approved Crew emblem.",
+      "small_size_witness": "footprints preceding hidden flag",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "부탁받기 전에 스스로 선택한 첫걸음.",
+      "unlock_toast_proposal": "범인은 스스로 시작한 나였습니다.",
+      "wordplay_device": "SELF_AWARE",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-010",
+      "canonical_source_title": "말하기 전에 GO",
+      "proposed_display_title": "말보다 빠른 발자국",
+      "source_motif": "출발선 위의 가벼운 운동화",
+      "source_storyline": "말하기 전에 손이 먼저 움직인 날.",
+      "fix": "Sneaker visibly past start line and motion before speech; no generic sunrise mountain.",
+      "small_size_witness": "shoe beyond line",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "생각을 시작으로 이어 붙인 순간.",
+      "unlock_toast_proposal": "출발 신호보다 발이 먼저 움직였다.",
+      "wordplay_device": "CONTRAST",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-011",
+      "canonical_source_title": "내가 고를래",
+      "proposed_display_title": "내 작전, 내가 결재",
+      "source_motif": "고르는 손과 세 갈래 오솔길",
+      "source_storyline": "오늘의 첫 선택은 바로 내 손으로.",
+      "fix": "Choosing hand and exactly three paths, one illuminated by own choice; no imposed Crew character.",
+      "small_size_witness": "hand and 3-way choice",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "REWORK_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "스스로 고른 계획을 자기 언어로 정했다.",
+      "unlock_toast_proposal": "오늘의 작전 승인자: 나!",
+      "wordplay_device": "SELF_AWARE",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    },
+    {
+      "badge_id": "BDG-DRAFT-012",
+      "canonical_source_title": "작전 짜기",
+      "proposed_display_title": "연필 참모총장",
+      "source_motif": "접이식 작전지도와 연필",
+      "source_storyline": "작전이 생기면 미로도 지도가 된다.",
+      "fix": "PRESERVE user-selected exact rendition for comparison, do not regenerate indiscriminately. Verify source file identity; make ordered pencil/map sequence legible at 64px.",
+      "small_size_witness": "ordered map and pencil; selected candidate remains QA_OPEN",
+      "required_layers": [
+        "background",
+        "interior"
+      ],
+      "status": "USER_SELECTED_CANDIDATE_QA_OPEN",
+      "source_file_verified": false,
+      "final_approved": false,
+      "core_detail_proposal": "하고 싶은 순서를 직접 짜 본 날.",
+      "unlock_toast_proposal": "작전지도는 이제 연필에게 맡겨라.",
+      "wordplay_device": "TALKING_OBJECT",
+      "artwork_text_policy": "NO_TEXT_BAKED_IN_SCENE; DISPLAY_TITLE_AND_CORE_DETAIL_ARE_SEPARATE_UI_TEXT"
+    }
+  ],
+  "copy_authority": "BADGE/badge-wow-inspired-copyworking.json",
+  "copy_status": "COPY_PROPOSAL_NOT_RUNTIME_APPROVED"
+}

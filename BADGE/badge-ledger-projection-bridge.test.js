@@ -35,14 +35,15 @@ function source(rows=raws,opts={}){
   assert.equal(none.state,null);
   const first=await deriveFromLedger({...args,source:source(raws.slice(0,1))});
   assert.equal(first.ok,true);
-  assert.equal(first.state.star_count,0);
-  const four=await deriveFromLedger({...args,source:source(raws.slice(0,5))});
-  assert.equal(four.state.star_count,4);
+  assert.equal(first.state.star_count,1);
+  const fiveTotal=await deriveFromLedger({...args,source:source(raws.slice(0,5))});
+  assert.equal(fiveTotal.state.tier,'BLUE');
+  assert.equal(fiveTotal.state.star_count,0);
   const five=await deriveFromLedger({...args,source:source(raws)});
   assert.equal(five.ok,true);
   assert.equal(five.verified_awards,6);
   assert.equal(five.state.tier,'BLUE');
-  assert.equal(five.state.star_count,0); // Provisional post-promotion reset.
+  assert.equal(five.state.star_count,1); // One additional reaward after promotion.
   assert.equal((await deriveFromLedger({...args,source:source(raws,{complete:false})})).ok,false);
   assert.equal((await deriveFromLedger({...args,source:source(raws,{row_count:5})})).ok,false);
   assert.equal((await deriveFromLedger({...args,source:source(raws,{receiptChild:'CHILD_B'})})).ok,false);
@@ -52,5 +53,5 @@ function source(rows=raws,opts={}){
   assert.equal((await deriveFromLedger({...args,source:source(raws.slice(1))})).ok,false);
   const incomplete={contract:SOURCE_CONTRACT,async loadCompleteHistory(){throw Error('offline')},async verifyAwardRow(){return {ok:true}}};
   assert.equal((await deriveFromLedger({...args,source:incomplete})).reason,'AWARD_LEDGER_READ_FAILED');
-  console.log('badge ledger bridge: PASS (complete-history, 0+5 stars, dedupe, scope, failure gates)');
+  console.log('badge ledger bridge: PASS (complete-history, initial 1-star, reaward progression, dedupe, scope, failure gates)');
 })().catch(e=>{console.error(e);process.exitCode=1;});

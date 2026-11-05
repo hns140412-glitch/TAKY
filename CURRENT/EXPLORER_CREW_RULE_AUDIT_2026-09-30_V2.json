@@ -1,0 +1,173 @@
+{
+  "schema": "TAKY_EXPLORER_CREW_RULE_AUDIT_V2",
+  "audited_at": "2026-09-30",
+  "inherits_closed_from": "CURRENT/EXPLORER_CREW_RULE_AUDIT_2026-09-30_V1.json",
+  "source_heads": {
+    "TAKY": "b0153987676c8bdc7fea6f9918b66e883ab7e98d",
+    "READY_SET": "9ee93f7bba0edd99de4fa947d9690f7e78cf7f5c",
+    "HIDE_SEEK": "28d861b17bdf8b3345358d7ee869f8e461a703bf",
+    "SNAP_POP": "56eb0e8470ec0a869f0189ff56ffc84215d5bd8f"
+  },
+  "ci": {
+    "TAKY": "PASS",
+    "READY_SET_PRE_DESIGN_GATE": "PASS",
+    "HIDE_SEEK_PRE_DESIGN_GATE": "PASS",
+    "SNAP_POP_PRE_DESIGN_GATE": "PASS",
+    "APP_FULL_WORKFLOWS": "EXPECTED_BLOCK_AT_APPROVED_GOLDEN_DESIGN_GATE"
+  },
+  "summary": {
+    "closed_after_revalidation": 10,
+    "open_or_partial": 6,
+    "authority_or_visual_hold": 3,
+    "browser_provider": "PASS_CODE_AND_PRE_DESIGN_CI",
+    "production_central_transport": "BLOCKED_UNTIL_EXPLICIT_HTTPS_ENDPOINT_AND_AUTH_HOST",
+    "overall": "SEMANTIC_RUNTIME_CONNECTED__CENTRAL_BROWSER_PROVIDER_CONNECTED__CROSS_APP_IDENTITY_RELATION_AND_FINAL_VISUAL_ACTIVATION_OPEN"
+  },
+  "revalidated_findings": [
+    {
+      "id": "CREW-AUDIT-P0-001",
+      "status": "CLOSED",
+      "result": "Ready/Hide/Snap live roots produce TAKY semantic scene plans and live event-chain tests pass."
+    },
+    {
+      "id": "CREW-AUDIT-P0-002",
+      "status": "HOLD_DESIGN_GATE",
+      "result": "Semantic consumer is live. Visual binding intentionally skips semantic-only plans and DOM binder remains automaticActivation=false until approved Golden/assets."
+    },
+    {
+      "id": "CREW-AUDIT-P0-003",
+      "status": "CLOSED_SEMANTIC_ROUTING",
+      "result": "Ready Guide intervention is routed through shared TAKY browser behavior runtime; local roster/identity remains tracked separately under P1-005."
+    },
+    {
+      "id": "CREW-AUDIT-P0-004",
+      "status": "CLOSED_SEMANTIC_ROUTING",
+      "result": "Hide setPartner routes semantic action/dialogue through shared TAKY behavior runtime; local visual mood selection remains P2-005."
+    },
+    {
+      "id": "CREW-AUDIT-P0-005",
+      "status": "CLOSED_SEMANTIC_ROUTING",
+      "result": "Snap root exploration Guide emits through shared Crew runtime."
+    },
+    {
+      "id": "CREW-AUDIT-P0-006",
+      "status": "PARTIAL_OPEN",
+      "result": "Verified evidence runtime, handoff and authenticated Browser Provider export are connected; central relationship projection/return into all app runtimes is not operational."
+    },
+    {
+      "id": "CREW-AUDIT-P1-001",
+      "status": "PARTIAL",
+      "result": "Ready Smart Random prevents immediate repeat and balances historical counts, but canonical contextual controlled-flex weighting is not implemented."
+    },
+    {
+      "id": "CREW-AUDIT-P1-002",
+      "status": "PARTIAL_PROVIDER_REQUIRED",
+      "result": "Verified recording-analysis adapter and no-guess fallback are wired; no production ReadyRecordingAnalysisProvider exists."
+    },
+    {
+      "id": "CREW-AUDIT-P1-003",
+      "status": "CLOSED",
+      "result": "One Good Reflection is emitted in Ready result flow through Crew semantic runtime."
+    },
+    {
+      "id": "CREW-AUDIT-P1-004",
+      "status": "CLOSED",
+      "result": "Shared browser behavior enforces Silence by Default and app regressions verify text-only non-voice delivery."
+    },
+    {
+      "id": "CREW-AUDIT-P1-005",
+      "status": "OPEN_CANONICAL_IDENTITY_MAP",
+      "result": "Identity bridges are fail-closed compatibility bridges, but no approved TAKY_CREW_IDENTITY_MAP is present in Ready/Hide/Snap."
+    },
+    {
+      "id": "CREW-AUDIT-P1-006",
+      "status": "OPEN_CROSS_APP_CONTINUITY",
+      "result": "Evidence export seam exists, but canonical identity mapping plus central relation state return/import is still required for continuing companion continuity."
+    },
+    {
+      "id": "CREW-AUDIT-P1-007",
+      "status": "PARTIAL_AUTHORITY_REQUIRED",
+      "result": "Snap badge lock runtime is wired and unapproved-rule fail-open was removed; actual TAKY_BLESSING_RULES approved authority data is not present."
+    },
+    {
+      "id": "CREW-AUDIT-P2-001",
+      "status": "HOLD_BY_AUTHORITY",
+      "result": "Special Friend remains distinct from Random Guest; detailed runtime contract must not be inferred."
+    },
+    {
+      "id": "CREW-AUDIT-P2-002",
+      "status": "CLOSED",
+      "result": "Ready Duo arrival has multiple non-child-targeting variants instead of one fixed intro."
+    },
+    {
+      "id": "CREW-AUDIT-P2-003",
+      "status": "CLOSED",
+      "result": "Shared browser behavior and central engine include CHECK_COMPASS, ORGANIZE_BAG, USE_MAGNIFIER and REST."
+    },
+    {
+      "id": "CREW-AUDIT-P2-004",
+      "status": "CLOSED",
+      "result": "Chapter owner only displaces MAIN when owner_required or owner_turn is explicit."
+    },
+    {
+      "id": "CREW-AUDIT-P2-005",
+      "status": "HOLD_VISUAL_COMPOSITION",
+      "result": "Hide still selects local mood images; final semantic-action-to-approved-composition binding waits for approved assets and Design Gate."
+    },
+    {
+      "id": "CREW-AUDIT-P2-006",
+      "status": "CLOSED",
+      "result": "Ready recording kind and filename are derived from recording context rather than fixed grammar semantics."
+    }
+  ],
+  "browser_provider": {
+    "central_contract": "TAKY_CENTRAL_CREW_EVIDENCE_HTTP_V1",
+    "provider_contract": "TAKY_CREW_EVIDENCE_BROWSER_PROVIDER_V1",
+    "properties": [
+      "EXPLICIT_HTTPS_ONLY",
+      "BEARER_REQUIRED",
+      "FAMILY_MEMBER_SCOPE_REQUIRED",
+      "FAIL_CLOSED",
+      "NO_COOKIE_CREDENTIALS",
+      "NO_REDIRECT",
+      "SERVER_RECEIPT_SCOPE_VERIFIED",
+      "NO_RELATION_AUTO_COMMIT",
+      "NO_LEARNING_STATE_MUTATION"
+    ],
+    "app_tests": {
+      "READY_SET": "PASS",
+      "HIDE_SEEK": "PASS",
+      "SNAP_POP": "PASS"
+    },
+    "live_activation": {
+      "READY_SET": "DISABLED_UNTIL_CENTRAL_CREW_EVIDENCE_ENDPOINT_AND_CENTRAL_AUTH_HOST",
+      "HIDE_SEEK": "DISABLED_UNTIL_TAKY_CREW_CONFIG_AND_TAKY_CENTRAL_CREW_AUTH_HOST",
+      "SNAP_POP": "DISABLED_UNTIL_TAKY_CREW_CONFIG_AND_TAKY_CENTRAL_CREW_AUTH_HOST"
+    }
+  },
+  "snap_blessing_correction": {
+    "status": "CLOSED_FAIL_OPEN_BUG",
+    "rule": "Unapproved/missing blessing authority cannot unlock or use a blessing.",
+    "remaining": "Approved TAKY_BLESSING_RULES data must be supplied before use."
+  },
+  "next_open_order": [
+    "Central relationship projection/return contract and app consumer without automatic promotion",
+    "Approved canonical TAKY_CREW_IDENTITY_MAP population for Ready/Hide/Snap with history preservation",
+    "Explicit production HTTPS Crew endpoint and central auth-host provisioning",
+    "Ready verified recording-analysis provider hookup",
+    "Ready contextual controlled-flex Smart Random policy",
+    "Approved TAKY_BLESSING_RULES registry/injection"
+  ],
+  "hold": [
+    "Approved Golden import and real visual DOM activation",
+    "GUIDE 07-24 production art/motion work",
+    "Special Friend detailed runtime until explicit authority"
+  ],
+  "constraints": [
+    "NO_MAIN_MERGE",
+    "NO_NETLIFY_RELEASE",
+    "NO_IMAGE_GENERATION",
+    "NO_ARBITRARY_IDENTITY_MAPPING",
+    "NO_AUTO_RELATION_PROMOTION"
+  ]
+}
