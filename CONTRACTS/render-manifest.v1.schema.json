@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"TAKY_RENDER_MANIFEST_V1",
+  "type":"object",
+  "required":["schema","project","manifest_sha256","source_commit","entries"],
+  "properties":{
+    "schema":{"const":"TAKY_RENDER_MANIFEST_V1"},
+    "project":{"type":"string","minLength":1},
+    "manifest_sha256":{"type":"string","pattern":"^[0-9a-fA-F]{64}$"},
+    "source_commit":{"type":"string","pattern":"^[0-9a-fA-F]{40}$"},
+    "entries":{"type":"array","items":{"type":"object","required":["screen_id","state_id","viewport_id","actual_path","actual_sha256"],"properties":{
+      "screen_id":{"type":"string","minLength":1},
+      "state_id":{"type":"string","minLength":1},
+      "viewport_id":{"type":"string","minLength":1},
+      "actual_path":{"type":"string","minLength":1},
+      "actual_sha256":{"type":"string","pattern":"^[0-9a-fA-F]{64}$"}
+    }}}
+  }
+}
