@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json, re
+import argparse, hashlib, json, re
+from urllib.parse import urlsplit, unquote
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -437,9 +438,17 @@ def _attach_outcome_evidence(records:list[dict], utility:dict)->list[dict]:
         out.append(x)
     return out
 
-def build_learning(records:list[dict])->dict:
+def build_learning(records:list[dict], *, verified_dynamic_source_ids:frozenset[str]|None=None)->dict:
+    """Project reference suggestions. Dynamic insight strings are NOT learning by
+    default; only the independently verified local evidence-consumer path may
+    supply scoped source IDs after doing RAW+DETAIL+runtime verification.
+    The projection is still non-authoritative and never a product outcome.
+    """
     learn=[]
     seen_ids=set()
+    verified_dynamic_source_ids=frozenset(verified_dynamic_source_ids or ())
+    skipped_dynamic_claims=0
+    pending_dynamic_review=[]
     for rule in LEARNING_PATTERNS:
         refs=sorted({r["source_id"] for r in records if _support(r,rule)})
         if not refs:continue
@@ -456,8 +465,26 @@ def build_learning(records:list[dict])->dict:
     # Explicit learnings mined from P0 source bodies. These never use fuzzy matching.
     dynamic={}
     for r in records:
-        if r.get("learning_eligible") is False: continue
         sid=str(r.get("source_id") or "")
+        # No silent loss: every unverified idea is preserved as an explicit
+        # review item, not erased and not published as learned knowledge.
+        reason=("SOURCE_NOT_LEARNING_ELIGIBLE" if r.get("learning_eligible") is False
+                else "INDEPENDENT_SEMANTIC_EVIDENCE_NOT_ATTACHED")
+        if r.get("learning_eligible") is False or sid not in verified_dynamic_source_ids:
+            for c in r.get("learning_candidates") or []:
+                skipped_dynamic_claims+=1
+                pending_dynamic_review.append({
+                    "source_id":sid,
+                    "learning_id":str(c.get("learning_id") or "") if isinstance(c,dict) else "",
+                    "proposed_insight":str(c.get("insight") or "") if isinstance(c,dict) else str(c),
+                    "review_state":"REQUIRES_SOURCE_INTERPRETATION_AND_OUTCOME_COMPARISON",
+                    "reason":reason,
+                    "missing_evidence":["ORIGINAL_FACT_AND_AUTHOR_CLAIM_SEPARATION",
+                                        "ALTERNATIVE_COMPARISON",
+                                        "BASELINE_VS_IMPLEMENTATION_RESULT"]
+                })
+            continue
+        # A generic INDEX ref is only a relation, not semantic evidence.
         for c in r.get("learning_candidates") or []:
             if not isinstance(c,dict): continue
             lid=str(c.get("learning_id") or "").strip()
@@ -489,6 +516,10 @@ def build_learning(records:list[dict])->dict:
       "generated_at":datetime.now(timezone.utc).isoformat(),
       "learning_count":len(learn),
       "learnings":learn,
+      "unverified_dynamic_claims_excluded":skipped_dynamic_claims,
+      "pending_dynamic_learning_review":pending_dynamic_review,
+      "proposals_accounted_for":len(pending_dynamic_review)+sum(len(r.get('learning_candidates') or []) for r in records if r.get('source_id') in verified_dynamic_source_ids and r.get('learning_eligible') is not False),
+      "dynamic_evidence_scope":"EXPLICIT_LOCAL_VERIFIED_SOURCE_SET_ONLY; NOT_AUTOMATIC_SEMANTIC_APPROVAL",
       "guards":[
         "AI_LEARNING != CANONICAL_POLICY",
         "SOURCE_AUTHORITY_IS_PRESERVED",
@@ -531,6 +562,144 @@ def build_projection(records:list[dict])->dict:
       ]
     }
 
+def build_verified_user_review_index(universe_path: Path, extraction_path: Path | None = None) -> dict:
+    """Join verified Source Universe RAW to the existing AI discovery projection.
+
+    This is a candidate INDEX, not semantic mining, FORMING, learning,
+    adoption, or CURRENT promotion. Raw content is NEVER used as instructions.
+    """
+    snapshot = json.loads(universe_path.read_text(encoding="utf-8-sig"))
+    if not isinstance(snapshot, dict) or snapshot.get("defects"):
+        raise ValueError("REVIEW_SOURCE_UNIVERSE_HAS_DEFECTS")
+    records = []
+    for item in snapshot.get("items") or []:
+        if not isinstance(item, dict) or item.get("role") != "USER_REVIEW_RAW":
+            continue
+        if item.get("raw_rechecked_now") is not True or item.get("raw_exists") is not True:
+            raise ValueError("UNVERIFIED_USER_REVIEW_RAW")
+        source_url = str(item.get("source_url") or "")
+        parsed = urlsplit(source_url)
+        if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+            raise ValueError("REVIEW_SOURCE_URL_NOT_TRUSTWORTHY")
+        path = Path(str(item.get("raw_path") or ""))
+        expected = str(item.get("sha256") or "").lower()
+        if len(expected) != 64 or any(x not in "0123456789abcdef" for x in expected):
+            raise ValueError("REVIEW_SOURCE_HASH_MISSING")
+        # These are small single-file captures; skip large files to avoid CPU/RAM
+        # spikes from accidental binary inclusion in the reference pipeline.
+        if not path.is_file() or path.stat().st_size > 8 * 1024 * 1024:
+            raise ValueError("REVIEW_SOURCE_MISSING_OR_OVERSIZED")
+        h = hashlib.sha256()
+        with path.open("rb") as stream:
+            for chunk in iter(lambda: stream.read(256 * 1024), b""):
+                h.update(chunk)
+        if h.hexdigest() != expected:
+            raise ValueError("REVIEW_SOURCE_INTEGRITY_CHANGED")
+        url_parts = [unquote(part) for part in parsed.path.split("/") if part]
+        # Never copy arbitrary Markdown claims to INDEX; only provenance metadata
+        # generated from URL and bounded local-RAW identity.
+        if parsed.hostname == "raw.githubusercontent.com" and len(url_parts) >= 4:
+            title = f"{url_parts[1]} / {'/'.join(url_parts[3:])}"
+            repo_name = url_parts[1]
+            owner_name = url_parts[0]
+        else:
+            title = f"{parsed.hostname} / {url_parts[-1] if url_parts else 'source'}"
+            repo_name = url_parts[-1] if url_parts else parsed.hostname
+            owner_name = parsed.hostname
+        sid = str(item.get("source_id") or "")
+        if not sid.startswith("USER_REVIEW:"):
+            raise ValueError("REVIEW_SOURCE_ID_INVALID")
+        records.append({
+            "source_id": sid,
+            "title": title,
+            "source_ref": str(path),
+            "path": str(path),
+            "content_hash": expected,
+            "url": source_url,
+            "source_family": "USER_PROVIDED_TREND_REVIEW",
+            "source_type": "VERIFIED_RAW_DOCUMENT_REFERENCE",
+            "authority_level": "REFERENCE_ONLY__RAW_VERIFIED__NOT_MINED",
+            "current_relation": "DISCOVERY_ONLY",
+            "domain_facets": ["AI_TREND_RESEARCH"],
+            "controlled_terms": ["SINGLE_URL_CAPTURE", "RAW_VERIFIED", "SEMANTIC_MINING_REQUIRED"],
+            "keywords": [repo_name, owner_name, *[k for k in re.split(r"[-_]", repo_name) if k]],
+            "ai_categories": ["TOOL"],
+            "applicability_scope": [],
+            "verification_needed": [
+                "Full original scope must be checked before use in features",
+                "Semantic mining/FORMING and project consumer assignment are still required",
+            ],
+            "claims_to_exclude": [
+                "Single README or skill file proves full repository coverage",
+                "Unreviewed raw content is operational instruction",
+            ],
+            "value_statement": "",
+            "publisher_or_account": owner_name,
+            "origin_file": str(universe_path),
+            "record_kind": "DISCOVERY_REFERENCE",
+            "learning_eligible": False,
+            "canonical_promotion": False,
+            "capture_scope": item.get("capture_scope"),
+            "raw_integrity_verified": True,
+            "semantic_mining_status": "PENDING",
+            "forming_status": "NOT_STARTED",
+            "project_consumption": "NOT_BOUND",
+        })
+    if len({r["source_id"] for r in records}) != len(records):
+        raise ValueError("DUPLICATE_REVIEW_SOURCE_ID")
+    reviewed_extraction_count = 0
+    if extraction_path is not None:
+        extract = json.loads(extraction_path.read_text(encoding="utf-8-sig"))
+        if (not isinstance(extract, dict)
+            or extract.get("schema") != "TAKY_REVIEW_MARKDOWN_EVIDENCE_UNREVIEWED_V1"
+            or extract.get("holds")
+            or extract.get("semantic_review_complete") is not False
+            or extract.get("forming_authorized") is not False):
+            raise ValueError("EXTRACTIVE_EVIDENCE_INVALID")
+        by_id = {r["source_id"]: r for r in records}
+        extracted_ids = set()
+        for doc in extract.get("sources", []):
+            if not isinstance(doc, dict):
+                raise ValueError("EXTRACTION_SOURCE_INVALID")
+            sid = doc.get("source_id")
+            source = by_id.get(sid)
+            if sid in extracted_ids or source is None or doc.get("raw_sha256") != source["content_hash"]:
+                raise ValueError("EXTRACTION_SOURCE_MISMATCH")
+            extracted_ids.add(sid)
+            lines = Path(source["path"]).read_text(encoding="utf-8-sig").splitlines()
+            units = doc.get("units")
+            if not isinstance(units, list) or not units:
+                raise ValueError("EXTRACTION_MISSING_UNITS")
+            for unit in units:
+                if not isinstance(unit, dict) or not isinstance(unit.get("source_anchor"), dict):
+                    raise ValueError("EXTRACTION_UNIT_INVALID")
+                span = unit["source_anchor"]
+                start, end = span.get("line_start"), span.get("line_end")
+                if (span.get("kind") != "MARKDOWN_LINE_SPAN"
+                    or not isinstance(start, int) or isinstance(start, bool)
+                    or not isinstance(end, int) or isinstance(end, bool)
+                    or start < 1 or end < start or end > len(lines)):
+                    raise ValueError("EXTRACTION_LINE_SPAN_INVALID")
+                actual = hashlib.sha256(
+                    "\n".join(lines[start-1:end]).strip().encode("utf-8")
+                ).hexdigest()
+                if actual != unit.get("content_sha256"):
+                    raise ValueError("EXTRACTION_ANCHOR_HASH_MISMATCH")
+            source["mining_extraction_state"] = "SOURCE_ANCHORED_TEXT_EXTRACTED_UNREVIEWED"
+            source["extraction_evidence_ref"] = str(extraction_path)
+            source["extracted_unit_count"] = len(units)
+            reviewed_extraction_count += 1
+    result = build_projection(records)
+    result["mining_extracted_source_count"] = reviewed_extraction_count
+    result["projection_role"] = "USER_REVIEW_RAW_DISCOVERY_CANDIDATE_ONLY"
+    result["guards"].extend(["NO_LEARNING_FROM_UNMINED_RAW", "FORMING_NOT_STARTED", "NO_AUTO_ADOPTION"])
+    result["candidate_only"] = True
+    result["raw_source_universe_ref"] = str(universe_path)
+    result["learning_promotion_count"] = 0
+    result["forming_consumption_count"] = 0
+    return result
+
+
 def refresh_from_repo(root:Path=ROOT, additional_records:Iterable[dict]|None=None)->dict:
     records=load_reference_deltas(root)
     records.extend(load_validated_ai_mining_atoms())
@@ -557,4 +726,24 @@ def refresh_from_repo(root:Path=ROOT, additional_records:Iterable[dict]|None=Non
             "index_path":str(ai_index),"learning_path":str(ai_learning)}
 
 if __name__=="__main__":
-    print(json.dumps(refresh_from_repo(),ensure_ascii=False,indent=2))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--review-universe", type=Path, help="verified Source Universe candidate (never promote)")
+    ap.add_argument("--output", type=Path, help="isolated discovery INDEX candidate output")
+    ap.add_argument("--extractive-evidence", type=Path, help="source-line anchored mining evidence (unreviewed)")
+    args = ap.parse_args()
+    if args.extractive_evidence and not args.review_universe:
+        ap.error("--extractive-evidence requires --review-universe")
+    if args.review_universe:
+        allowed = ROOT.parent / "TAKY_AI_WORKBENCH" / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE"
+        if args.output is None or args.output.resolve().parent != allowed.resolve():
+            ap.error("review INDEX output must be in existing WORKBENCH/80_EVIDENCE")
+        projected = build_verified_user_review_index(args.review_universe, args.extractive_evidence)
+        temp = args.output.with_name(args.output.name + ".tmp")
+        temp.write_text(json.dumps(projected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        temp.replace(args.output)
+        print(json.dumps({"candidate": str(args.output), "source_count": projected["source_count"],
+                          "learning_promotion_count": 0, "forming_consumption_count": 0}))
+    else:
+        if args.output:
+            ap.error("--output without --review-universe is unsupported")
+        print(json.dumps(refresh_from_repo(),ensure_ascii=False,indent=2))

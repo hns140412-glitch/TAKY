@@ -65,9 +65,11 @@ def domain_hint(name,context=""):
     s=(name+" "+context).casefold()
     # Untrusted heuristic for routing only. It is not an approved semantic claim.
     # "archive" contains the letters "archi" but is not an architecture term.
-    architecture_words=("건축","cad","architecture","도면","오토캐드","심의","공모")
+    architecture_words=("건축","architecture","도면","오토캐드","캐드","심의","공모")
+    # CAD must be a standalone term, not three letters within a saved SHA suffix.
+    cad_token=re.search(r"(?<![a-z0-9])(?:cad|dwg|dxf)(?![a-z0-9])",s)
     architecture_prefix=re.search(r"(?<![a-z])archi(?:tect|grow|comp|cad|[\W_]|$)",s)
-    if any(x in s for x in architecture_words) or architecture_prefix:
+    if any(x in s for x in architecture_words) or cad_token or architecture_prefix:
         return "ARCHITECTURE"
     if any(x in s for x in ("교육","영어","한자","한글","school","learning","vocab","학습","수학","과학","교과")):
         return "LEARNING"

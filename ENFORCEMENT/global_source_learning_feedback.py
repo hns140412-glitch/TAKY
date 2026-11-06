@@ -466,7 +466,8 @@ def technical_method_decision(c, *, trusted_policy=None, outcome_verifier=None):
     projection = build_learning([{"source_id": binding["source_id"], "ai_categories": [],
         "learning_eligible": True, "learning_candidates": [{
             "learning_id": "AI-LRN-ACCESSIBILITY-LOCAL-REVIEW-CANDIDATE",
-            "insight": binding["semantic_decision"]}]}])
+            "insight": binding["semantic_decision"]}]}],
+            verified_dynamic_source_ids=frozenset({binding["source_id"]}))
     learned = projection.get("learnings", [])
     if (projection.get("owner") != "SYSTEM_GROW" or projection.get("authoritative") is not False
         or len(learned) != 1 or learned[0].get("state") != "EVIDENCE_CANDIDATE"

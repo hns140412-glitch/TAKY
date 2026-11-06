@@ -530,7 +530,10 @@ def learn_from_observed_local_method(c):
       "learning_eligible":True,
       "learning_candidates":[{"learning_id":learning_id,"insight":insight}]
     }
-    projection=build_learning([input_record])
+    # This opt-in is restricted to the already verified Central DETAIL and
+    # four real local-runtime receipts read back above. Generic callers of
+    # build_learning cannot inject arbitrary insight strings as learnings.
+    projection=build_learning([input_record],verified_dynamic_source_ids=frozenset({sid}))
     learned=[x for x in projection["learnings"] if x["learning_id"]==learning_id]
     if (len(learned)!=1 or len(projection["learnings"])!=1
         or learned[0]["evidence_refs"]!=["INDEX:"+sid]

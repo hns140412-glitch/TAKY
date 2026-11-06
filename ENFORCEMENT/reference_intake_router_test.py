@@ -12,8 +12,16 @@ def check(name, record, expected_type, expected_consumer=None, expected_write=No
 
 def main():
     check("plain slash review", {"intent_text": "/검토"}, "PLAIN_REVIEW", expected_write=False)
-    check("source read only", {"intent_text": "이거 검토해", "source_url": "https://example.com/a"},
-          "PLAIN_SOURCE_REVIEW", expected_write=False)
+    check("source defaults to intake", {"intent_text": "이거 검토해", "source_url": "https://example.com/a"},
+          "REFERENCE_INTAKE_REVIEW", expected_write=True)
+    check("slash with source is intake", {"intent_text": "/검토", "source_url": "https://example.com/a"},
+          "REFERENCE_INTAKE_REVIEW", expected_write=True)
+    check("check this URL defaults to intake", {"intent_text": "확인해", "source_url": "https://example.com/b"},
+          "REFERENCE_INTAKE_REVIEW", expected_write=True)
+    check("explicit no storage stays read only", {"intent_text": "이 자료 저장하지 마 검토해",
+          "source_url": "https://example.com/c"}, "PLAIN_REVIEW", expected_write=False)
+    check("explicit no mining stays read only", {"intent_text": "마이닝하지 마, 보기만 해",
+          "source_id": "source-2"}, "PLAIN_REVIEW", expected_write=False)
     check("learning reference intake",
           {"intent_text": "이 자료 학습에 참고하게 하고 싶은데 검토해", "source_url": "https://example.com/a"},
           "REFERENCE_INTAKE_REVIEW", expected_consumer="LEARNING_ENGINE", expected_write=True)
@@ -32,7 +40,7 @@ def main():
     assert "SOURCE_DIRECTION_INTENT_BIAS_CLASSIFY" in out["pipeline"]
     assert "APPLICABILITY_SCOPE_AND_AUTHORITY_CEILING_CLASSIFY" in out["pipeline"]
     assert "AUTHOR != AUTHORITY" in out["guards"]
-    print("6/6 PASS")
+    print("10/10 PASS")
 
 if __name__ == "__main__":
     main()

@@ -12,8 +12,8 @@ import json
 from pathlib import Path
 
 PLAIN_REVIEW_EXACT = {"/검토", "타키 검토", "타키 기준으로 검토"}
-REVIEW_TERMS = ("검토", "참고", "자료로", "분석")
-INTAKE_TERMS = ("참고하게", "참고해", "참고자료", "자료로 써", "자료로 사용", "활용해", "반영 후보")
+NO_MINING_TERMS = ("보기만 해", "마이닝하지 마", "저장하지 마", "일회성으로만 검토해")
+REVIEW_TERMS = ("검토", "참고", "자료로", "분석", "봐봐", "확인해", "살펴봐")
 LEARNING_TERMS = ("학습", "러닝", "learning", "복습", "서술형", "글쓰기", "교육")
 
 def _norm(value: object) -> str:
@@ -27,20 +27,18 @@ def route(record: dict) -> dict:
         or record.get("source_id")
         or record.get("source_locator")
     )
-    if text in PLAIN_REVIEW_EXACT and not record.get("reference_intake_intent"):
+    # A user-supplied external reference is mined by default under MASTER.
+    # Only an explicit no-storage instruction may bypass source intake.
+    if any(term in text for term in NO_MINING_TERMS) or (
+        text in PLAIN_REVIEW_EXACT and not has_source
+    ):
         return {"pass": True, "route_type": "PLAIN_REVIEW", "write_authorized": False,
                 "canonical_promotion_authorized": False,
                 "pipeline": ["READ", "ANALYZE", "COMPARE", "REPORT"]}
 
     review_signal = any(term in text for term in REVIEW_TERMS)
-    intake_signal = bool(record.get("reference_intake_intent")) or any(term in text for term in INTAKE_TERMS)
     if not has_source or not review_signal:
         return {"pass": False, "detected": ["REFERENCE_INTAKE_NOT_ESTABLISHED"]}
-
-    if not intake_signal and not bool(record.get("use_as_reference")):
-        return {"pass": True, "route_type": "PLAIN_SOURCE_REVIEW", "write_authorized": False,
-                "canonical_promotion_authorized": False,
-                "pipeline": ["SOURCE_READ", "ANALYZE", "COMPARE", "REPORT"]}
 
     domain = _norm(record.get("domain"))
     if not domain:
