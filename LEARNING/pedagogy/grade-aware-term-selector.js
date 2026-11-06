@@ -171,7 +171,12 @@ function toCard(term,patternPlan=null){
   };
 }
 
-function select(input={}){
+function select(input={},options={}){
+  const preview=options?.mode==='BOUND_FORMING_PREVIEW_ONLY'
+    && options.registry?.projection_scope?.mode==='BOUND_FORMING_PREVIEW_ONLY'
+    && options.registry?.projection_scope?.operational===false;
+  if(options?.mode && !preview)return {ok:false,reason:'INVALID_FORMING_PREVIEW_SCOPE',
+                                  selector_version:VERSION};
   const profile=input.learner_profile||{};
   const stage=parseSchoolStage(profile.school_stage||profile.schoolStage);
   if(!stage.ok)return {ok:false,reason:stage.reason,selector_version:VERSION};
@@ -189,7 +194,9 @@ function select(input={}){
     if(!ae.ok){rejected.alignment++;continue;}
     const evidence=evidenceSummary(input.term_evidence||[],term.term_id);
     const ranked=scoreTerm(term,evidence,input);
-    const patternPlan=PatternRouter.derive(term,{evidence_summary:evidence});
+    const patternPlan=preview
+      ?PatternRouter.derive(term,{evidence_summary:evidence},options.registry)
+      :PatternRouter.derive(term,{evidence_summary:evidence});
     if(patternPlan.recovery?.concept_gap===true&&!ranked.reasons.includes('MINING_PATTERN_CONCEPT_GAP')){
       ranked.reasons.push('MINING_PATTERN_CONCEPT_GAP');
     }
@@ -214,7 +221,8 @@ function select(input={}){
   return {
     ok:true,
     selector_version:VERSION,
-    authority:'TAKY_LEARNING_ENGINE_CORE',
+    authority:preview?'TAKY_LEARNING_PREVIEW_NOT_OPERATIONAL':'TAKY_LEARNING_ENGINE_CORE',
+    ...(preview?{preview_only:true,release_approved:false,learning_consumed:false}:{}),
     consumer_app:upper(input.consumer_app||'HIDE_SEEK'),
     learner_context:{school_stage:stage.school_stage,school_level:stage.school_level,grade:stage.grade},
     scope:{subject,semester:clean(input.semester)||null,unit_context:Array.isArray(input.unit_context)?input.unit_context:[]},

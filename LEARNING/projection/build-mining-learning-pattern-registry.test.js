@@ -5,7 +5,9 @@ const fs=require('node:fs');
 const path=require('node:path');
 const Projector=require('./build-mining-learning-pattern-registry.js');
 
-const result=Projector.build();
+const result=Projector.build({dry_run:true});
+assert.equal(result.write_performed,false);
+assert.throws(()=>Projector.build(),/FORMING_APPROVAL_REQUIRED_FOR_LEARNING_REGISTRY_WRITE/);
 const projected=new Map(result.receipt.projected.map(x=>[x.source_id,x]));
 assert.equal(result.registry.schema,'TAKY_LEARNING_REFERENCE_PATTERN_REGISTRY_V2');
 assert.equal(result.receipt.summary.indexed_learning_refs,9);

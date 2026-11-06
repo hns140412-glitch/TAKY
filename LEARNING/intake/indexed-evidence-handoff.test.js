@@ -82,4 +82,44 @@ const exception=Handoff.prepare(rawInput,()=>{throw Error('secret token')});
 assert.equal(exception.ok,false);
 assert.equal(JSON.stringify(exception).includes('secret token'),false);
 
-console.log('INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS');
+// Relations must match independent INDEX owner; caller cannot introduce facts.
+const relation={type:'SUPPORTS',target:'concept:water',anchor:'DETAIL:SRC-01#standard'};
+const ownerWithRelation=(sid,ref)=>({...trustedOwner(sid,ref),relations:[relation]});
+const authorizedCandidate={...rawInput.candidates[0],relations:[relation]};
+const relationGood=Handoff.prepare({...rawInput,candidates:[authorizedCandidate]},ownerWithRelation);
+assert.equal(relationGood.ok,true);
+assert.deepEqual(relationGood.candidates[0].relations,[relation]);
+assert.equal(relationGood.candidates[0].index_version,'TEST_ONLY_1');
+const fakeRelation=Handoff.prepare(
+  {...rawInput,candidates:[{...authorizedCandidate,relations:[{...relation,target:'INJECTED'}]}]},
+  ownerWithRelation);
+assert.equal(fakeRelation.ok,false);
+assert.ok(fakeRelation.issues.includes('INDEPENDENT_INDEX_OWNER_BINDING_INVALID:0'));
+const omittedOwnerRelation=Handoff.prepare(
+  {...rawInput,candidates:[authorizedCandidate]},trustedOwner);
+assert.equal(omittedOwnerRelation.ok,false);
+console.log('INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS: owner-bound relations and spoof rejection');
+
+// Candidate identity must be unique before any policy request is emitted.
+const identityCases=[
+  {row:{...rawInput.candidates[0]},issues:['SOURCE_ID_DUPLICATE:1','SOURCE_REF_DUPLICATE:1']},
+  {row:{...rawInput.candidates[0],source_ref:'INDEX:OTHER'},issues:['SOURCE_ID_DUPLICATE:1']},
+  {row:{...rawInput.candidates[0],source_id:'OTHER'},issues:['SOURCE_REF_DUPLICATE:1']}
+];
+for(const {row,issues} of identityCases){
+  const result=Handoff.prepare({...rawInput,candidates:[rawInput.candidates[0],row]},trustedOwner);
+  assert.equal(result.ok,false,'duplicate candidate identity must fail closed');
+  assert.deepEqual(result.issues,issues);
+  assert.deepEqual(result.policy_requests,[]);
+}
+const distinctRows=[rawInput.candidates[0],{...rawInput.candidates[0],source_id:'SRC-02',source_ref:'INDEX:SRC-02'}];
+const distinct=Handoff.prepare({...rawInput,candidates:distinctRows},trustedOwner);
+assert.equal(distinct.ok,true);
+assert.deepEqual(distinct.source_refs,distinctRows.map(row=>row.source_ref));
+assert.deepEqual(distinct.policy_requests.map(row=>row.source_id),['SRC-01','SRC-02']);
+assert.deepEqual(distinct.candidates.map(row=>row.source_id),['SRC-01','SRC-02']);
+const duplicateSpoof=Handoff.prepare({...rawInput,candidates:[rawInput.candidates[0],{...rawInput.candidates[0],provenance:['FORGED'],relations:[relation]}]},trustedOwner);
+assert.equal(duplicateSpoof.ok,false);
+assert.deepEqual(duplicateSpoof.issues,['SOURCE_ID_DUPLICATE:1','SOURCE_REF_DUPLICATE:1','INDEPENDENT_INDEX_OWNER_BINDING_INVALID:1','PROVENANCE_MISSING:1']);
+assert.deepEqual(duplicateSpoof.policy_requests,[]);
+console.log('INDEX_IDENTITY_UNIQUENESS: fail-closed duplicates and ordered distinct candidates PASS');

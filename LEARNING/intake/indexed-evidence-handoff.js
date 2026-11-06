@@ -20,6 +20,8 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
   if(typeof independentIndexOwnerVerifier!=='function')issues.push('INDEX_OWNER_VERIFIER_NOT_CONFIGURED');
 
   const normalized=[];
+  const sourceIds=new Set();
+  const sourceRefs=new Set();
   for(const [index,row] of candidates.entries()){
     if(!row||typeof row!=='object'){
       issues.push(`CANDIDATE_INVALID:${index}`);
@@ -27,6 +29,10 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
     }
     const sourceId=clean(row.source_id);
     const sourceRef=clean(row.source_ref);
+    if(sourceId && sourceIds.has(sourceId))issues.push('SOURCE_ID_DUPLICATE:'+index);
+    if(sourceRef && sourceRefs.has(sourceRef))issues.push('SOURCE_REF_DUPLICATE:'+index);
+    if(sourceId)sourceIds.add(sourceId);
+    if(sourceRef)sourceRefs.add(sourceRef);
     // Input source and provenance are proposals, never independent approval.
     // The caller cannot supply or select the owner verifier through input.
     let owner=null;
@@ -35,6 +41,11 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       catch (_) { issues.push('INDEX_OWNER_REVIEW_UNAVAILABLE:'+index); }
     }
     const sourceFields=['source_family','source_type','authority_class','detail_anchor'];
+    // Relations and their source authority belong to INDEXING_OWNER. An
+    // unreviewed retrieval-row relation must not become a forming fact.
+    const rowRelations=Array.isArray(row.relations)?row.relations:[];
+    const ownerRelations=Array.isArray(owner?.relations)?owner.relations:[];
+    const relationsBound=JSON.stringify(rowRelations)===JSON.stringify(ownerRelations);
     const proposedProvenance=Array.isArray(row.provenance)?row.provenance.filter(Boolean):[];
     const ownerProvenance=Array.isArray(owner?.provenance)?owner.provenance.filter(Boolean):[];
     const ownerEvidence=owner?.review_evidence_refs;
@@ -46,6 +57,7 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       && Array.isArray(ownerEvidence) && !!ownerEvidence.length
       && ownerEvidence.every(v=>typeof v==='string' && !!v.trim())
       && sourceFields.every(field=>(row[field]??null)===(owner[field]??null))
+      && relationsBound
       && proposedProvenance.length===ownerProvenance.length
       && proposedProvenance.every((v,i)=>v===ownerProvenance[i]);
     if(!ownerValid)issues.push('INDEPENDENT_INDEX_OWNER_BINDING_INVALID:'+index);
@@ -60,7 +72,9 @@ function prepare(input={}, independentIndexOwnerVerifier=null){
       source_type:row.source_type||null,
       authority_class:row.authority_class||null,
       detail_anchor:row.detail_anchor||null,
-      relations:Array.isArray(row.relations)?row.relations:[],
+      relations:ownerValid?JSON.parse(JSON.stringify(ownerRelations)):[],
+      index_version:ownerValid?owner.index_version:null,
+      review_evidence_refs:ownerValid?[...ownerEvidence]:[],
       provenance,
       retrieval_rank:Number.isFinite(row.retrieval_rank)?row.retrieval_rank:null,
       retrieval_score:Number.isFinite(row.retrieval_score)?row.retrieval_score:null
