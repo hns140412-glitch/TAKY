@@ -370,6 +370,17 @@ The mechanical parts of DGC-01/02/16/18/19 and A11Y basics are executable:
 - Not added to CI on purpose (DGC-12: automate last). Promote to CI after manual replay on real project screens passes.
 - No third-party design skill is installed (Notion review RVR-121 disposition: hold).
 
+### 20.1d Replica-level study, quality-bar result — USER decision 2026-11-06
+
+USER clarified: TAKY rules are the **quality bar for the finished result**. They do not restrict the intermediate study.
+
+- `REPLICA (EXPERIMENT) != RESULT`. In EXPLORE, a reference product may be cloned at replica level (screens, flows, components, data model, behaviour), then taken apart and analysed. The replica is `PILOT_FIXTURE_ONLY`: it is never shipped, never promoted and never counted as DG-07/08 evidence.
+- The result must clear the TAKY quality bar (§0, §3, §7, DG-00..10, DGC-01..21) **and** be measurably better than the replica on the chosen axes (task completion, clicks, a11y, the reference users' recurring complaints). A straight copy has no reason to exist.
+- Two different compare uses:
+  - replica stage: `VISUAL_COMPARE` layout mode against the reference shows how faithfully the structure was understood (target ≥ 90);
+  - result stage: compare against the **approved TAKY reference**, not the third-party original. The original's look (trade dress), brand, copy and assets do not pass into the result.
+- Tooling: `replica-*` skills vendored from Jakeschincariol/replica-skill (MIT, `.claude/skills/REPLICA_SKILL_LICENSE.txt`). `replica-diff/imgdiff.py` feeds the harness `VISUAL_COMPARE` sub-receipt (`--reference`).
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |

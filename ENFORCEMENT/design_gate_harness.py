@@ -26,9 +26,11 @@ import yaml
 SCHEMA = "TAKY_DESIGN_GATE_HARNESS_RECEIPT_V1"
 HERE = Path(__file__).resolve().parent
 RENDER = HERE / "design_gate_render.mjs"
+# Vendored from Jakeschincariol/replica-skill (MIT, see .claude/skills/REPLICA_SKILL_LICENSE.txt).
+IMGDIFF = HERE.parent / ".claude" / "skills" / "replica-diff" / "imgdiff.py"
 SUB_ORDER = ("HARNESS_HEALTH", "SPEC_LINT", "TARGET_RENDER", "TOKEN_FIDELITY",
-             "FONT_PRINT_PDF", "A11Y_BASIC", "GENERIC_TELLS")
-DEFAULTS = {"min_font_px": 12, "max_allcaps_labels": 2, "color_tolerance": 6,
+             "FONT_PRINT_PDF", "A11Y_BASIC", "GENERIC_TELLS", "VISUAL_COMPARE")
+DEFAULTS = {"min_layout_score": 90, "min_font_px": 12, "max_allcaps_labels": 2, "color_tolerance": 6,
             "max_off_token_colors": 0}
 
 
@@ -191,8 +193,33 @@ def judge(spec: dict, render: dict) -> dict:
     return subs
 
 
+def visual_compare(reference: Path | None, render: dict, threshold: float, mode: str = "layout") -> dict:
+    """DGC-07 / prior C-12: compare the render with the approved (or replica) reference.
+
+    layout mode = structure only, colour ignored (replica-diff semantics).
+    The reference screenshot must match the viewport it is compared with.
+    """
+    if reference is None:
+        return {"status": "NOT_APPLICABLE", "findings": ["no --reference given"]}
+    shot = next((v for v in render.get("viewports", []) if v.get("id") == reference.stem), None)
+    shot = shot or (render.get("viewports") or [None])[0]
+    if not shot:
+        return {"status": "UNKNOWN", "findings": ["no render to compare"]}
+    try:
+        p = subprocess.run([sys.executable, str(IMGDIFF), str(reference), shot["screenshot"],
+                            "--mode", mode, "--json"], capture_output=True, text=True, timeout=300)
+        rep = json.loads(p.stdout)
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError) as e:
+        return {"status": "HOLD", "cause_class": "HARNESS", "findings": [f"imgdiff failed: {e!r}"]}
+    ok = rep["score"] >= threshold
+    return {"status": "PASS" if ok else "FAIL", "mode": mode, "score": rep["score"],
+            "threshold": threshold, "against_viewport": shot["id"],
+            "reference_sha256": sha256_bytes(reference.read_bytes()),
+            "findings": [] if ok else [f"layout score {rep['score']} < {threshold} ({rep.get('verdict')})"]}
+
+
 def verdict(subs: dict) -> str:
-    st = [s["status"] for s in subs.values()]
+    st = [s["status"] for s in subs.values() if s["status"] != "NOT_APPLICABLE"]
     if "FAIL" in st:
         return "FAIL"
     if "HOLD" in st or "UNKNOWN" in st:
@@ -200,7 +227,8 @@ def verdict(subs: dict) -> str:
     return "PASS"
 
 
-def run(design: Path, target: str, out: Path, viewports: str | None = None) -> dict:
+def run(design: Path, target: str, out: Path, viewports: str | None = None,
+        reference: Path | None = None, compare_mode: str = "layout") -> dict:
     spec_bytes = design.read_bytes()
     spec = lint_spec(spec_bytes.decode("utf-8"))
     cmd = ["node", str(RENDER), target, str(out)] + ([viewports] if viewports else [])
@@ -211,6 +239,9 @@ def run(design: Path, target: str, out: Path, viewports: str | None = None) -> d
     except (subprocess.TimeoutExpired, FileNotFoundError, json.JSONDecodeError) as e:
         render = {"harness": {"ok": False, "error": repr(e)}}
     subs = judge(spec, render)
+    subs["VISUAL_COMPARE"] = (visual_compare(reference, render, spec["thresholds"]["min_layout_score"], compare_mode)
+                              if render.get("harness", {}).get("ok") else
+                              {"status": "UNKNOWN", "findings": ["not evaluated: harness HOLD"]})
     v = verdict(subs)
     receipt = {
         "schema": SCHEMA,
@@ -227,6 +258,11 @@ def run(design: Path, target: str, out: Path, viewports: str | None = None) -> d
         "design_gate_receipt_evidence": {
             "runtime_render_sha256": next((s for s in subs["TARGET_RENDER"].get("screenshots", {}).values()), None),
             "responsive_gate_pass": subs["TARGET_RENDER"]["status"] == "PASS",
+            "approved_reference_sha256": subs["VISUAL_COMPARE"].get("reference_sha256"),
+            "comparison_method": "replica-diff/imgdiff " + subs["VISUAL_COMPARE"].get("mode", "layout"),
+            "comparison_score": subs["VISUAL_COMPARE"].get("score"),
+            "threshold": subs["VISUAL_COMPARE"].get("threshold"),
+            "comparison_pass": subs["VISUAL_COMPARE"]["status"] == "PASS",
         },
     }
     receipt["receipt_sha256"] = sha256_bytes(json.dumps(receipt, sort_keys=True, ensure_ascii=False).encode())
@@ -240,9 +276,11 @@ def main() -> int:
     ap.add_argument("--design", required=True, type=Path, help="DESIGN.md path")
     ap.add_argument("--target", required=True, help="HTML file or http(s) URL")
     ap.add_argument("--out", required=True, type=Path, help="output dir for screenshots, PDF, receipt")
+    ap.add_argument("--reference", type=Path, help="approved or replica reference screenshot (PNG); name it <viewport-id>.png")
+    ap.add_argument("--compare-mode", choices=("layout", "pixel"), default="layout")
     ap.add_argument("--viewports", help='JSON list, e.g. [{"id":"slide","width":1920,"height":1080}]')
     a = ap.parse_args()
-    r = run(a.design, a.target, a.out, a.viewports)
+    r = run(a.design, a.target, a.out, a.viewports, a.reference, a.compare_mode)
     print(json.dumps({"verdict": r["verdict"], "mode": r["mode"], "claim_ceiling": r["claim_ceiling"],
                       "failed": {k: s["findings"] for k, s in r["sub_receipts"].items()
                                  if s["status"] in ("FAIL", "HOLD", "ADVISORY")},

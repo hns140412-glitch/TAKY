@@ -1,3 +1,8 @@
+## 2026-11-06 — Replica-level study + VISUAL_COMPARE
+- USER decision: TAKY rules are the quality bar for the result; replica-level cloning and teardown are allowed in EXPLORE (§20.1d).
+- Vendored replica-skill (11 skills, MIT) into `.claude/skills/`. Harness gains a `VISUAL_COMPARE` sub-receipt via `replica-diff/imgdiff.py` (`--reference`).
+- Not run here: the session's permission policy blocks executing the vendored code, so the VISUAL_COMPARE path is untested in this session. The existing 8 tests pass.
+
 ## 2026-11-06 — Design-gate harness (skill + agent + MCP + render check)
 - Added `ENFORCEMENT/design_gate_harness.py` + `design_gate_render.mjs`: DESIGN.md lint plus real-Chromium render per viewport, token/font/print/a11y sub-receipts, hash-bound receipt. 8 tests pass locally.
 - Added `.claude/skills/taky-design-gate`, `.claude/agents/design-gate-reviewer`, `.mcp.json` (Playwright MCP 0.0.83).

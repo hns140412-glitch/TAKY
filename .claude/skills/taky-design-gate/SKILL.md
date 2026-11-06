@@ -15,6 +15,10 @@ Core: **criteria + context + feedback**. Rules alone don't fix design; looking a
 - Otherwise → `EXPLORE`. Output is `PILOT_FIXTURE_ONLY` and never ships until the user picks a direction.
 - Write the mode into DESIGN.md `taky.mode`.
 
+## 0b. Replica study (EXPLORE)
+To learn from a reference product, run the replica skills: `replica-recon` (screens, flows, components, data model) → `replica-design` (measured tokens) → build a replica → `replica-diff` (layout score ≥ 90 shows the structure was understood). Then take it apart: what works, what users complain about (`replica-entrepreneur`), and what TAKY's bar requires.
+The replica is PILOT_FIXTURE_ONLY. The result is a new design that clears the TAKY bar and beats the replica on named axes. Rule: §20.1d.
+
 ## 1. Spec: DESIGN.md (DGC-02, DGC-18)
 Use the google-labs-code/design.md format (YAML tokens + prose). It must contain:
 - `colors` and `typography` tokens (fontFamily named explicitly; Korean text names Pretendard / Noto Sans KR or the project font, DGC-19).
@@ -43,6 +47,7 @@ python3 ENFORCEMENT/design_gate_harness.py --design DESIGN.md --target <file-or-
 
 Slides: add `--viewports '[{"id":"slide","width":1920,"height":1080}]'`. Native app or other form factors: declare their own viewports (DGC-16).
 Read the screenshots in `<dir>` yourself. Fix the most severe issue first, then rerun.
+Compare with a reference screenshot: `--reference <dir>/desktop.png` (file name = viewport id). Replica stage uses the original; result stage uses the approved TAKY reference.
 Exit 0 PASS / 1 FAIL / 3 HOLD. HOLD = harness or environment problem, so fix the harness, do not call the product failed.
 For interactive checks (click, input, state), use the Playwright MCP from `.mcp.json` if it is connected.
 
@@ -55,4 +60,4 @@ Report verdict, mode/claim ceiling, failed sub-receipts, DELETION_PASS and recei
 ## Limits
 - GENERIC_TELLS is advisory. Taste is judged by a reviewer, not by a regex (DGC-12).
 - The harness checks the mechanical parts only: overflow per viewport, off-token colors, font actually rendered, print-unsafe CSS, PDF produced, minimum text size and target size.
-- No third-party design skills are installed by this skill (Notion review RVR-121: hold).
+- Third-party: only replica-skill is vendored (MIT, USER-approved 2026-11-06 for replica study). Others stay on hold (RVR-121).
