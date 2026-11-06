@@ -17,5 +17,11 @@ const req=body=>({method:'POST',path:A.ENDPOINT,headers:{'content-type':'applica
  r=await ep.handle(req({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:b.asset_ref,upload_id:'U1',sha256:'a'.repeat(64)}));assert.equal(r.status,200);
  r=await ep.handle(req({action:'RESOLVE_READ',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:b.asset_ref}));b=JSON.parse(r.body);assert.equal(r.status,200);assert.ok(b.read_url.startsWith('https://read.example.test/'));
  r=await ep.handle(req({...meta,member_id:'OTHER'}));assert.equal(r.status,403);
- console.log('FAMILY_CHARACTER_ASSET_HTTP_PASS: authenticated scope, bounded image upload, commit verification, signed read');
+ // An authorized scope must not be usable to read/commit an asset_ref of ANOTHER family/member/character.
+ const victim='taky-character:F2:M9:C1:v1';uploads.set('U9',{asset_ref:victim,committed:true});
+ r=await ep.handle(req({action:'RESOLVE_READ',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:victim}));assert.equal(r.status,403);assert.equal(JSON.parse(r.body).reason,'ASSET_REF_SCOPE_MISMATCH');
+ r=await ep.handle(req({action:'COMMIT_UPLOAD',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:victim,upload_id:'U9',sha256:'a'.repeat(64)}));assert.equal(r.status,403);
+ r=await ep.handle(req({action:'RESOLVE_READ',family_id:'F1',member_id:'M1',character_id:'C2',asset_ref:'taky-character:F1:M1:C1:v1'}));assert.equal(r.status,403);
+ r=await ep.handle(req({action:'RESOLVE_READ',family_id:'F1',member_id:'M1',character_id:'C1',asset_ref:'taky-character:F1:M10:C1:v1'}));assert.equal(r.status,403);
+ console.log('FAMILY_CHARACTER_ASSET_HTTP_PASS: authenticated scope, bounded image upload, commit verification, signed read, asset_ref bound to scope');
 })().catch(e=>{console.error(e);process.exit(1)});
