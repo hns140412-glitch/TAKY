@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 $sourceRoot='D:\Git PWA\TAKY'
-$destRoot='F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\WORK_OS\SOURCE_ARCHIVE\TAKY_CHAT_ORCHESTRATION'
+$destRoot='F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\SHARED_REFERENCE\WORK_OS\SOURCE_ARCHIVE\TAKY_CHAT_ORCHESTRATION'
 $files=@('TOOLS\taky_chat_orchestrator.ps1','TOOLS\taky_bridge_worker.ps1','TOOLS\taky_headless_mailbox.ps1','TOOLS\taky_chat_mirror_checkpoint.ps1')
 [IO.Directory]::CreateDirectory($destRoot)|Out-Null
 $entries=@()

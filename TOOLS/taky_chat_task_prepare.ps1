@@ -12,6 +12,14 @@
  [switch]$DryRun
 )
 $ErrorActionPreference='Stop'
+# Load the trusted Windows PowerShell module explicitly on hosts without
+# module autoloading; Get-FileHash is exported as a Function on PowerShell 5.1.
+$utilityModule='C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1'
+Import-Module -Name $utilityModule -ErrorAction Stop
+$hashCommand=Get-Command Get-FileHash -ErrorAction SilentlyContinue
+if (-not $hashCommand -or $hashCommand.Source -cne 'Microsoft.PowerShell.Utility') {
+ throw 'POWERSHELL_SHA256_COMMAND_UNTRUSTED_OR_UNAVAILABLE'
+}
 $allowed=@('D:\Git PWA\TAKY','D:\Git PWA\TAKY\.local\TAKY-2.0-ORCH','D:\Git PWA\Play Camp','D:\Git PWA\Ready & Set','D:\Git PWA\Hide & Seek','D:\Git PWA\Snap & Pop','D:\Git PWA\TAKY-MOBILE','D:\Git PWA\SAVEY')
 if($Repo -notin $allowed -or !(Test-Path -LiteralPath $Repo)){throw 'UNAPPROVED_REPO'}
 if([string]::IsNullOrWhiteSpace($Task) -or $Task.Length -gt 2500){throw 'INVALID_TASK'}
@@ -41,10 +49,32 @@ if($PortfolioTaskId){
  # active concurrently. They need explicit, registered, in-repo evidence.
  $primary=([string]$current.current_work_id -ceq $PortfolioTaskId)
  $repoPrefix=[IO.Path]::GetFullPath($Repo).TrimEnd('\')+'\'
+ # Work IDs exist at INTAKE. A distinct, explicitly registered source
+ # binding can authorize later review/edit without becoming implementation
+ # completion evidence or borrowing a different CURRENT's source references.
+ $plannedRefs=@()
+ $plannedBindings=@($matching[0].planned_source_bindings|Where-Object {$null -ne $_})
+ if($plannedBindings.Count -gt 0){
+  if([string]$matching[0].intake.project -cne [string]$projects[0].Name){throw 'PORTFOLIO_PLANNED_SOURCE_PROJECT_MISMATCH'}
+  foreach($binding in $plannedBindings){
+   $source=if($binding){[string]$binding.path}else{''}
+   if(!$source -or $source -match '\.\.' -or $source -notmatch '^\S' -or
+      !([IO.Path]::GetFullPath($source).StartsWith($repoPrefix,[StringComparison]::OrdinalIgnoreCase))){
+    throw 'PORTFOLIO_PLANNED_SOURCE_PATH_INVALID'
+   }
+   if(!(Test-Path -LiteralPath $source -PathType Leaf)){throw 'PORTFOLIO_PLANNED_SOURCE_MISSING'}
+   $digest=[Security.Cryptography.SHA256]::Create()
+   try{$sourceHash=[BitConverter]::ToString($digest.ComputeHash([IO.File]::ReadAllBytes($source))).Replace('-','').ToLowerInvariant()}
+   finally{$digest.Dispose()}
+   if($sourceHash -cne [string]$binding.sha256){throw 'PORTFOLIO_PLANNED_SOURCE_CHANGED_REBIND_REQUIRED'}
+   $plannedRefs+= $source
+  }
+ }
  $workRefs=@($matching[0].evidence|Where-Object {$_ -is [string] -and $_.StartsWith($repoPrefix,[StringComparison]::OrdinalIgnoreCase)})
+ $workRefs+=@($plannedRefs)
  if(!$primary -and $workRefs.Count -eq 0){throw 'PORTFOLIO_WORK_ID_REPO_SCOPE_MISMATCH'}
- # Do not borrow CURRENT's sources when using a different active WORK_ID.
- $refs=if($primary){@($matching[0].evidence)+@($current.source_refs)+@($current.output_refs)}else{@($workRefs)}
+ # Task-specific planned refs do not count as user approval or DONE.
+ $refs=if($primary){@($matching[0].evidence)+@($current.source_refs)+@($current.output_refs)+@($plannedRefs)}else{@($workRefs)}
  $pattern='(?<![A-Za-z0-9_.-])((?:TAKY2|TOOLS|ENFORCEMENT|DOMAIN|LEARNING|src|app|lib|pages|components|tests)/[A-Za-z0-9_./-]+\.(?:ps1|py|js|cjs|mjs|ts|tsx|jsx|json|css|html|md))\b'
  $named=@([regex]::Matches($Task,$pattern,[Text.RegularExpressions.RegexOptions]::IgnoreCase)|ForEach-Object {$_.Groups[1].Value}|Sort-Object -Unique)
  if($named.Count -eq 0 -and $TaskKind -ne 'implementation'){throw 'PORTFOLIO_TASK_SOURCE_REF_REQUIRED'}

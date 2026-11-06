@@ -8,7 +8,7 @@ import subprocess
 import sys
 import tempfile
 
-ORCH = Path(r"D:\Git PWA\TAKY-2.0-ORCH")
+ORCH = Path(r"D:\Git PWA\TAKY\.local\TAKY-2.0-ORCH")
 
 
 def _load(path: str) -> dict:

@@ -172,20 +172,31 @@ def existing_signed_handoff_precheck(_: int = 75) -> list[dict]:
           and signed.get("model_jobs")==signed.get("linked",0)+signed.get("unbound",0)
           and signed.get("independent_done")==0
           and signed.get("model_calls_by_observer")==0)
+    # Legacy jobs without an explicit portfolio WORK_ID are quarantined, not
+    # permanently fatal to the transport readback. A successful check proves
+    # only that the register partitions linked/unbound jobs consistently.
+    # It neither assigns anonymous reviews nor approves any result as DONE.
+    unbound=signed.get("unbound")
+    reviewer_gaps=signed.get("reviewers_unassigned")
+    history_held=bool(unbound or reviewer_gaps)
     return [{
         "name":"INT001_SIGNED_PORTFOLIO_WORK_ID_HANDOFF",
-        "status":"PASS" if ok and signed.get("unbound")==0 and signed.get("reviewers_unassigned")==0 else "HOLD",
+        "status":"PASS" if ok else "HOLD",
         "transport_valid":ok,
         "model_jobs":signed.get("model_jobs"),
         "portfolio_linked":signed.get("linked"),
-        "historical_unbound":signed.get("unbound"),
+        "historical_unbound":unbound,
+        "historical_provenance_state":(
+            "QUARANTINED_NO_AUTO_ASSIGNMENT" if history_held
+            else "ALL_RECORDED_TASK_OWNERS_KNOWN"),
+        "historical_provenance_verified":not history_held,
         "signed_cli_returned_without_content_completion":signed.get("signed_cli_transport_only"),
-        "unassigned_reviewers":signed.get("reviewers_unassigned"),
+        "unassigned_reviewers":reviewer_gaps,
         "independent_completion":0,
         "historical_jobs_auto_assigned":0,
         "model_calls":0,
-        "next_action":"RECONCILE_HISTORICAL_UNBOUND_WITH_EXACT_PREPARATION_AND_SIGNED_EXECUTION;KEEP_UNKNOWN_UNBOUND",
-        "done_claim":"INT001_READ_ONLY_PROVENANCE_NOT_PORTFOLIO_DONE",
+        "next_action":"VERIFY_NEW_REGISTERED_SOURCE_BOUND_EXECUTION_OUTCOME;LEGACY_UNBOUND_REMAINS_QUARANTINED",
+        "done_claim":"INT001_SIGNED_TRANSPORT_RECONCILED_ONLY_NOT_SEMANTIC_OR_PORTFOLIO_DONE",
     }]
 
 

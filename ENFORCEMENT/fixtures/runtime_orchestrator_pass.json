@@ -7,6 +7,15 @@
   "claims_product_progress_advance": false,
   "claims_runtime_enforced": false,
   "live_runtime_auto_invocation_verified": false,
+  "intent_contract": {
+    "literal_user_request": "Create an implementation-ready Codex instruction for the active TAKY rules.",
+    "latest_user_correction": "",
+    "user_source_id": "current-conversation-readyset-role-correction",
+    "requested_result": "Create an implementation-ready Codex instruction that reflects the active TAKY rules.",
+    "planned_result": "Create an implementation-ready Codex instruction that reflects the active TAKY rules.",
+    "requested_kind": "TASK_CONTRACT",
+    "planned_kind": "TASK_CONTRACT"
+  },
   "resumed_or_context_compacted": false,
   "applicable_rule_refs": [
     {
@@ -36,6 +45,15 @@
   ],
   "working_model": {
     "primary_outcome": "Create an implementation-ready Codex instruction that reflects the active TAKY rules.",
+    "intent_contract": {
+    "literal_user_request": "Create an implementation-ready Codex instruction for the active TAKY rules.",
+    "latest_user_correction": "",
+    "user_source_id": "current-conversation-readyset-role-correction",
+    "requested_result": "Create an implementation-ready Codex instruction that reflects the active TAKY rules.",
+    "planned_result": "Create an implementation-ready Codex instruction that reflects the active TAKY rules.",
+    "requested_kind": "TASK_CONTRACT",
+    "planned_kind": "TASK_CONTRACT"
+  },
     "priority_order": [
       "productive result",
       "preserve user-confirmed state",

@@ -126,6 +126,16 @@ class BoundedRunnerTests(unittest.TestCase):
                 {"name": "authority-check", "sha256": "c" * 64},
                 {"name": "cross-model-review", "sha256": "d" * 64}],
         }
+        marker["call_manifest"] = {
+            "packet_digest": marker["packet_digest"],
+            "source_manifest": marker["source_manifest"],
+            "skill_manifest": marker["skill_manifest"],
+            "council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1",
+                                "work_id": "INT-001",
+                                "stage": "ADVISOR_CONTRARIAN",
+                                "source_sha256": "b" * 64,
+                                "target_sha256": None},
+        }
         program = ("import sys,pathlib;pathlib.Path(sys.argv[-1]).write_text("
                    + repr(json.dumps(marker)) + ");print('LOCAL_ONLY')")
         result = run_bounded([sys.executable, "-c", program],
@@ -136,6 +146,35 @@ class BoundedRunnerTests(unittest.TestCase):
         self.assertEqual(result["governedReceipt"]["packet_digest"], "a" * 20)
         self.assertEqual(result["governedReceipt"]["skill_manifest"],
                          marker["skill_manifest"])
+        self.assertEqual(result["governedReceipt"]["call_manifest"],
+                         marker["call_manifest"])
+
+    def test_chair_six_full_inputs_survive_bounded_receipt(self):
+        sources = [{"path": "ENFORCEMENT/peer" + str(i) + ".json",
+                    "sha256": ("%x" % (i + 1)) * 64,
+                    "includedLines": 3, "totalLines": 3,
+                    "complete": True}
+                   for i in range(6)]
+        skills = [{"name": "authority-check", "sha256": "c" * 64},
+                  {"name": "cross-model-review", "sha256": "d" * 64}]
+        call = {"packet_digest": "a" * 20,
+                "source_manifest": sources, "skill_manifest": skills,
+                "council_binding": {
+                    "schema": "TAKY_COUNCIL_BINDING_V1", "work_id": "INT-001",
+                    "stage": "CHAIR", "source_sha256": sources[0]["sha256"],
+                    "target_sha256": "e" * 64}}
+        marker = {"task_id": "f" * 32,
+                  "receipt_id": "pf:external-review-" + "f" * 32 + ":aaaabbbbccccdddd",
+                  "provider": "claude", "executor_state": "RETURNED",
+                  "packet_digest": "a" * 20, "source_manifest": sources,
+                  "skill_manifest": skills, "call_manifest": call}
+        program = ("import sys,pathlib;pathlib.Path(sys.argv[-1]).write_text("
+                   + repr(json.dumps(marker)) + ");print('LOCAL_ONLY')")
+        result = run_bounded([sys.executable, "-c", program],
+                             timeout=3, capture_receipt=True)
+        self.assertEqual(result["status"], "RETURNED_UNVERIFIED")
+        self.assertEqual(len(result["governedReceipt"]["source_manifest"]), 6)
+        self.assertEqual(result["governedReceipt"]["call_manifest"], call)
 
     def test_local_timeout_preserves_preflight_correlation(self):
         script = (
@@ -163,6 +202,74 @@ class BoundedRunnerTests(unittest.TestCase):
         self.assertEqual(argv[argv.index("-TaskId") + 1], request["task_id"])
         self.assertTrue(stub.call_args.kwargs["capture_receipt"])
         self.assertEqual(outcome["task_id"], request["task_id"])
+
+    def test_council_binding_passed_into_governed_signed_call(self):
+        request = {"provider": "codex", "repo": r"D:\Git PWA\TAKY",
+                   "prompt": "Review a bounded fixture", "task_id": "c" * 32,
+                   "councilBinding": {
+                       "schema": "TAKY_COUNCIL_BINDING_V1",
+                       "work_id": "INT-001", "stage": "ADVISOR_CONTRARIAN",
+                       "source_sha256": "a" * 64, "target_sha256": None}}
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded",
+                       return_value={"status": "FAILED_OR_BLOCKED"}) as runner:
+                execute_request(request)
+        argv = runner.call_args.args[0]
+        self.assertIn("-CouncilBindingJson", argv)
+        binding = json.loads(argv[argv.index("-CouncilBindingJson") + 1])
+        self.assertEqual(binding, request["councilBinding"])
+        self.assertTrue(runner.call_args.kwargs["capture_receipt"])
+
+
+    def test_target_receipt_is_forwarded_only_on_governed_envelope(self):
+        request = {"provider": "codex", "repo": r"D:\Git PWA\TAKY",
+                   "prompt": "Review an existing execution result", "task_id": "d" * 32,
+                   "targetReceiptId": "pf:task:abcdef0123456789"}
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded",
+                       return_value={"status": "FAILED_OR_BLOCKED"}) as runner:
+                execute_request(request)
+        argv = runner.call_args.args[0]
+        self.assertEqual(argv[argv.index("-TargetReceiptId") + 1],
+                         request["targetReceiptId"])
+        request["outputMode"] = "Raw"
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded") as runner:
+                with self.assertRaisesRegex(ValueError, "TARGET_REVIEW_RECEIPT_INVALID"):
+                    execute_request(request)
+                runner.assert_not_called()
+
+
+    def test_implementation_task_hash_is_forwarded_or_rejected_before_model(self):
+        request = {"provider": "codex", "repo": r"D:\Git PWA\TAKY",
+                   "prompt": "Implement only an approved bounded change",
+                   "task_id": "d" * 32, "outputMode": "Raw",
+                   "scopedEditTaskSha256": "a" * 64}
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded",
+                       return_value={"status": "FAILED_OR_BLOCKED"}) as runner:
+                execute_request(request)
+        argv = runner.call_args.args[0]
+        self.assertEqual(argv[argv.index("-ScopedEditTaskSha256") + 1], "a" * 64)
+        request["outputMode"] = "Envelope"
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded") as runner:
+                with self.assertRaisesRegex(ValueError, "SCOPED_EDIT_CALL_BINDING_INVALID"):
+                    execute_request(request)
+                runner.assert_not_called()
+
+    def test_invalid_council_binding_does_not_start_runner(self):
+        request = {"provider": "codex", "repo": r"D:\Git PWA\TAKY",
+                   "prompt": "Review bounded fixture", "task_id": "d" * 32,
+                   "councilBinding": {
+                       "schema": "TAKY_COUNCIL_BINDING_V1",
+                       "work_id": "INT-001", "stage": "CHAIR",
+                       "source_sha256": "invalid", "target_sha256": None}}
+        with patch.dict("os.environ", {"TAKY_USER_EXPLICIT_AUTHORIZATION": "1"}):
+            with patch("TAKY_REVIEW_BOUNDED_RUNNER.run_bounded") as runner:
+                with self.assertRaisesRegex(ValueError, "COUNCIL_BINDING_INVALID"):
+                    execute_request(request)
+                runner.assert_not_called()
 
     def test_small_review_has_short_outer_timeout(self):
         request = {"provider": "codex", "repo": r"D:\Git PWA\TAKY",

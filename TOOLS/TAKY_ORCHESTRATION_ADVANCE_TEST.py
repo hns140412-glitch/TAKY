@@ -22,6 +22,114 @@ def sample_board(**overrides):
 
 class LocalAdvanceTests(unittest.TestCase):
 
+    def test_windows_cp949_stdout_switches_to_utf8_for_readonly_json(self):
+        # A real Windows PowerShell launch previously failed with
+        # UnicodeEncodeError: cp949 cannot encode U+2014 in task labels.
+        import subprocess
+        import sys
+        script = (
+            "import sys; sys.stdout.reconfigure(encoding='cp949'); "
+            "import TAKY_ORCHESTRATION_ADVANCE; print('\\u2014')"
+        )
+        run = subprocess.run(
+            [sys.executable, "-c", script],
+            cwd=Path(a.__file__).parent, capture_output=True,
+            text=True, encoding="utf-8", errors="replace", timeout=20,
+        )
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertEqual(run.stdout.strip(), "\u2014")
+
+    def test_parent_a_to_b_rejected_then_a_restored_runs_once(self):
+        from taky_registered_goal_queue import registered_dependency_revision
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            parent=root/"parent.json"
+            parent.write_text('{"revision":"A"}',encoding="utf-8")
+            rows=[
+                {"id":"CLN-003","status":"VERIFIED","evidence":[str(parent)]},
+                {"id":"CLN-009","status":"IMPLEMENTING","title":"Read-only audit",
+                 "approval_required":False,"dependencies":["CLN-003"]},
+            ]
+            src=root/"board.json"
+            src.write_text(json.dumps({"tasks":rows}),encoding="utf-8")
+            expected=registered_dependency_revision(
+                ["CLN-003"],{x["id"]:x for x in rows},root)
+            parent.write_text('{"revision":"B"}',encoding="utf-8")
+            actual_b=registered_dependency_revision(
+                ["CLN-003"],{x["id"]:x for x in rows},root)
+            calls=[]
+            def worker(*_args):
+                calls.append(1)
+                return [{"name":"READ_ONLY_CHECK","status":"PASS"}]
+            with patch.object(a,"run_path_and_toolchain_checks",side_effect=worker):
+                with self.assertRaises(
+                    a.CanonicalPreclaimDependencyHold) as failed:
+                    a.run_checks("CLN-009",src,root,
+                                 dependency_revision=expected)
+                self.assertEqual(failed.exception.observed_revision,actual_b)
+                self.assertFalse((root/".local").exists())
+                parent.write_text('{"revision":"A"}',encoding="utf-8")
+                result=a.run_checks("CLN-009",src,root,
+                                    dependency_revision=expected)
+                reused=a.run_checks("CLN-009",src,root,
+                                    dependency_revision=expected)
+            self.assertEqual(calls,[1])
+            self.assertEqual(reused["status"],"REUSED_EXISTING_EVIDENCE")
+            self.assertFalse(json.loads(Path(result["evidence"]).read_text())[
+                "portfolio_done"])
+
+    def test_proven_preclaim_source_failure_never_starts_local_worker(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            board=root/"board.json"
+            board.write_text(json.dumps({"tasks":[
+                {"id":"CLN-009","status":"IMPLEMENTING",
+                 "title":"Local path checks","approval_required":False,
+                 "dependencies":[]},
+            ]}),encoding="utf-8")
+            with patch.object(a,"evidence_signature",
+                side_effect=OSError("TEST_ONLY_INPUT_UNAVAILABLE")),patch.object(
+                a,"run_path_and_toolchain_checks",
+                side_effect=AssertionError("worker must not run")):
+                with self.assertRaises(a.CanonicalPreclaimSourceHold) as seen:
+                    a.run_checks("CLN-009",board,root)
+            self.assertEqual(seen.exception.source_error_type,"OSError")
+            self.assertFalse((root/".local").exists())
+
+    def test_two_prior_claims_cannot_starve_unrelated_ready_work(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            evidence=root/"evidence"
+            evidence.mkdir()
+            local=root/".local"
+            local.mkdir()
+            data={"tasks":[
+                {"id":"CLN-009","status":"IMPLEMENTING","title":"Path inventory",
+                 "priority":"P0","dependencies":[]},
+                {"id":"MCP-002","status":"IMPLEMENTING","title":"MCP local preflight",
+                 "priority":"P0","dependencies":[]},
+                {"id":"SKL-001","status":"IMPLEMENTING","title":"Skill catalog",
+                 "priority":"P1","dependencies":[]},
+            ]}
+            signature=lambda board,work:({"task":work},"sample-"+work)
+            with patch.object(a,"EVIDENCE",evidence),patch.object(
+                 a,"TAKY",root),patch.object(
+                 a,"evidence_signature",side_effect=signature):
+                for tid in ("CLN-009","MCP-002"):
+                    _,token=a.canonical_local_claim_key(
+                        data,tid,"sample-"+tid,evidence)
+                    (local/("taky-canonical-worker-"+tid+"-"+token+".json")
+                    ).write_text('{"state":"CLAIMED_OUTCOME_UNKNOWN"}',
+                                 encoding="utf-8")
+                outcome=a.choose(data,evidence)
+            by_id={item["task_id"]:item for item in outcome["considered"]}
+            self.assertEqual(outcome["selected"]["task_id"],"SKL-001")
+            self.assertEqual(outcome["eligible_count"],1)
+            self.assertEqual(by_id["CLN-009"]["route"],
+                             "LOCAL_WORK_DISPATCH_ALREADY_CLAIMED")
+            self.assertEqual(by_id["MCP-002"]["route"],
+                             "LOCAL_WORK_DISPATCH_ALREADY_CLAIMED")
+
     def test_dependency_wake_and_plain_continuation_share_claim(self):
         from taky_registered_goal_queue import registered_dependency_revision
         with tempfile.TemporaryDirectory() as tmp:
@@ -66,17 +174,19 @@ class LocalAdvanceTests(unittest.TestCase):
                  "title":"Local MCP inventory"},
             ]}
             bad=evidence/"TAKY_LOCAL_WORK_CLN-009_fixed.json"
-            bad.write_text("{broken-json",encoding="utf-8")
-            with patch.object(a,"evidence_signature",
-                     side_effect=lambda _board,work:(
-                         {"work_id":work},"fixed" if work=="CLN-009" else "other")):
-                decided=a.choose(rows,evidence)
-            index={x["task_id"]:x for x in decided["considered"]}
-            self.assertEqual(index["CLN-009"]["route"],
-                             "LOCAL_EVIDENCE_INTEGRITY_HOLD")
-            self.assertEqual(index["MCP-001"]["route"],
-                             "READY_FOR_LOCAL_EXECUTION")
-            self.assertEqual(decided["selected"]["task_id"],"MCP-001")
+            for corrupted in ("{broken-json","[]","null"):
+                with self.subTest(corrupted=corrupted):
+                    bad.write_text(corrupted,encoding="utf-8")
+                    with patch.object(a,"evidence_signature",
+                             side_effect=lambda _board,work:(
+                                 {"work_id":work},"fixed" if work=="CLN-009" else "other")):
+                        decided=a.choose(rows,evidence)
+                    index={x["task_id"]:x for x in decided["considered"]}
+                    self.assertEqual(index["CLN-009"]["route"],
+                                     "LOCAL_EVIDENCE_INTEGRITY_HOLD")
+                    self.assertEqual(index["MCP-001"]["route"],
+                                     "READY_FOR_LOCAL_EXECUTION")
+                    self.assertEqual(decided["selected"]["task_id"],"MCP-001")
 
     def test_registered_worker_does_not_rerun_after_missing_receipt(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -467,6 +577,91 @@ class LocalAdvanceTests(unittest.TestCase):
                 target["approval_required"]=True
                 self.assertNotEqual(a.evidence_signature(board,"CLN-009"),(inputs,digest))
                 self.assertEqual(a.choose(board,receipt_dir)["considered"][1]["route"],"REQUIRES_APPROVAL")
+
+class SignedHandoffTransportTests(unittest.TestCase):
+    """A quarantined historical receipt is not a failed *current* transport."""
+
+    def _run_observer(self, signed):
+        import TAKY_ORCHESTRATION_OUTCOME_WORKERS as workers
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            wb=root/"TAKY_AI_WORKBENCH"
+            board=wb/"01_BACKLOG_AND_ADOPTION/70_EXECUTION_QUEUE/TASK_REGISTER.json"
+            assignments=wb/"00_CONTROL/AI_WORK_ASSIGNMENTS.json"
+            board.parent.mkdir(parents=True)
+            assignments.parent.mkdir(parents=True)
+            board.write_text('{"tasks":[]}',encoding="utf-8")
+            assignments.write_text('{"jobs":[]}',encoding="utf-8")
+            fake=SimpleNamespace(
+                inspect_exact_signed_model_handoffs=lambda *_:signed,
+                default_cfg=lambda:object())
+            with patch.object(workers,"ROOT",root),patch.object(
+                    workers,"_reader",return_value=fake):
+                return workers.existing_signed_handoff_precheck()[0]
+
+    def test_historical_unowned_review_does_not_block_proven_transport(self):
+        result=self._run_observer({
+            "state":"EXACT_SIGNED_HANDOFFS_RECONCILED_NOT_COMPLETION",
+            "model_jobs":9,"linked":4,"unbound":5,"reviewers_unassigned":8,
+            "signed_cli_transport_only":6,"independent_done":0,
+            "model_calls_by_observer":0})
+        self.assertEqual(result["status"],"PASS")
+        self.assertEqual(result["historical_provenance_state"],
+                         "QUARANTINED_NO_AUTO_ASSIGNMENT")
+        self.assertFalse(result["historical_provenance_verified"])
+        self.assertEqual(result["historical_jobs_auto_assigned"],0)
+        self.assertEqual(result["independent_completion"],0)
+        self.assertIn("NOT_SEMANTIC_OR_PORTFOLIO_DONE",result["done_claim"])
+
+    def test_inconsistent_signed_model_partition_remains_hold(self):
+        for invalid in (
+            {"state":"EXACT_SIGNED_HANDOFFS_RECONCILED_NOT_COMPLETION",
+             "model_jobs":9,"linked":4,"unbound":3,"independent_done":0,
+             "model_calls_by_observer":0},
+            {"state":"EXACT_SIGNED_HANDOFFS_RECONCILED_NOT_COMPLETION",
+             "model_jobs":9,"linked":4,"unbound":5,"independent_done":1,
+             "model_calls_by_observer":0},
+            {"state":"STALE_OR_INCONSISTENT","model_jobs":9,
+             "linked":4,"unbound":5,"independent_done":0,
+             "model_calls_by_observer":0}
+        ):
+            with self.subTest(invalid=invalid):
+                result=self._run_observer(invalid)
+                self.assertEqual(result["status"],"HOLD")
+                self.assertFalse(result["transport_valid"])
+
+
+class ProjectAuthorityFingerprintTests(unittest.TestCase):
+    def test_evidence_reference_append_does_not_restart_all_local_work(self):
+        with tempfile.TemporaryDirectory() as td:
+            path=Path(td)/"PROJECT_CURRENT.json"
+            current={"project":"TAKY","current_work_id":"INT-001",
+                     "status":"EVALUATION","approval":"NONE",
+                     "source_refs":["src/executor.py"],
+                     "pending_gates":["INDEPENDENT_REVIEW"],
+                     "output_refs":["old-proof.json"]}
+            path.write_text(json.dumps(current),encoding="utf-8")
+            before=a.project_current_authority_sha(path)
+            current["output_refs"].extend(["new-evidence.json","new-independent-qa.json"])
+            path.write_text(json.dumps(current),encoding="utf-8")
+            self.assertEqual(a.project_current_authority_sha(path),before)
+            current["source_refs"].append("src/reviewer.py")
+            path.write_text(json.dumps(current),encoding="utf-8")
+            self.assertNotEqual(a.project_current_authority_sha(path),before)
+            current["source_refs"].pop()
+            current["status"]="VERIFIED"
+            path.write_text(json.dumps(current),encoding="utf-8")
+            self.assertNotEqual(a.project_current_authority_sha(path),before)
+            current["status"]="EVALUATION"
+            current["approval"]="APPROVED"
+            path.write_text(json.dumps(current),encoding="utf-8")
+            self.assertNotEqual(a.project_current_authority_sha(path),before)
+            del current["output_refs"]
+            path.write_text(json.dumps(current),encoding="utf-8")
+            with self.assertRaisesRegex(ValueError,"PROJECT_CURRENT_AUTHORITY_INVALID"):
+                a.project_current_authority_sha(path)
+
 
 if __name__=="__main__":
     unittest.main()

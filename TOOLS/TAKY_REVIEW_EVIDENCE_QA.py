@@ -17,6 +17,9 @@ from TAKY_TRUSTED_KERNEL_IMPORT import ensure_trusted_taky2
 SKILL_CANONICAL_ROOT = Path(r"D:\Git PWA\TAKY\.claude\skills")
 BOUND_SKILLS = frozenset(("authority-check", "cross-model-review", "outcome-quality",
                           "archi-grow", "learning-grow", "mobile-webapp-build"))
+# Must be identical to the signed dry_run_plan in TAKY_MODEL_REVIEW.ps1.
+# The regression test reads the signer source and fails on future drift.
+SIGNED_REVIEW_OPERATION = "one bounded packet-only review (not an independent repository investigation)"
 APPROVED_REPOS = frozenset((
     r"D:\Git PWA\TAKY",
     r"D:\Git PWA\TAKY\.local\TAKY-2.0-ORCH",
@@ -143,14 +146,25 @@ def verify_signed_source_manifest(
         return {"status": "UNSUPPORTED_SIGNED_MODEL_HOLD"}
     ensure_trusted_taky2()
     from TAKY2.enforcement import stable_hash
+    # The original bounded packet signer includes these *deterministic*
+    # provenance fields in the sealed source_manifest. The routed readback
+    # sidecar carries only four core fields; reconstructing those alone
+    # falsely rejects valid signed calls. Derive all omitted fields from the
+    # frozen line counts and the packet builder's fixed LIMITED policy.
+    signed_manifest = [
+        {**entry, "evidenceClass": "LIMITED",
+         "complete": entry["includedLines"] == entry["totalLines"],
+         "independentReview": False}
+        for entry in manifest
+    ]
     call = {
         "model": model, "effort": "medium", "context": "delta",
         "expected_calls": 1,
         "execution_mode": "CODEX_VERIFY_ONLY" if model == "codex" else "PACKET_ONLY",
-        "packet_digest": packet_digest, "source_manifest": manifest,
+        "packet_digest": packet_digest, "source_manifest": signed_manifest,
         "dry_run_plan": {
             "expected_calls": 1,
-            "operations": ["one bounded independent review invocation"],
+            "operations": [SIGNED_REVIEW_OPERATION],
             "batch_strategy": "single-review-batch",
             "fallback": "HOLD",
             "paid_api": False,
@@ -159,8 +173,14 @@ def verify_signed_source_manifest(
     if skill_manifest is not None:
         call["skill_manifest"] = skill_manifest
     if stable_hash(call) != receipt.get("call_digest"):
-        return {"status": "SIGNED_CALL_DIGEST_MISMATCH_HOLD",
-                "historicalSourceHashBound": False}
+        # Backward compatibility: historical calls before the expanded packet
+        # source manifest used the four-field form. Both forms are accepted
+        # ONLY when their exact full-call hash matches the sealed preflight.
+        # This never trusts a sidecar, source hash, or claimed review result.
+        call["source_manifest"] = manifest
+        if stable_hash(call) != receipt.get("call_digest"):
+            return {"status": "SIGNED_CALL_DIGEST_MISMATCH_HOLD",
+                    "historicalSourceHashBound": False}
     if skill_manifest is not None:
         for item in skill_manifest:
             canonical = SKILL_CANONICAL_ROOT / item["name"] / "SKILL.md"
@@ -190,6 +210,12 @@ def verify_signed_source_manifest(
 def inspect_signed(task_id: str, repo: str, sources: list[str],
                    runtime: dict, source_binding: dict | None = None) -> dict:
     summary = correlate(task_id, runtime)
+    if summary.get("state") == "SIGNED_RETURN_DIGEST_MISMATCH_HOLD":
+        # Preserve the signed readback failure reason. A corrupted execution
+        # result is never interpreted as a successful independent review.
+        return {"state": "SIGNED_RESULT_DIGEST_MISMATCH",
+                "readbackState": summary.get("state"), "qualityVerified": False,
+                "readOnly": True, "modelCalls": 0}
     if summary.get("state") != "CLI_RETURNED_UNVERIFIED":
         return {"state": "SIGNED_EXECUTION_NOT_RETURNED", "readbackState": summary.get("state"),
                 "qualityVerified": False, "readOnly": True, "modelCalls": 0}

@@ -6,7 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from TAKY2.enforcement import stable_hash
-from TAKY_MODEL_REVIEW_PACKET import make_packet, MAX_SOURCE_FILES
+from TAKY_MODEL_REVIEW_PACKET import make_packet
 
 
 class BoundedPacketTests(unittest.TestCase):
@@ -34,10 +34,29 @@ class BoundedPacketTests(unittest.TestCase):
         packet, sources = make_packet(self.repo, "TOOLS/first.ps1 TOOLS/first.ps1")
         self.assertEqual(len(sources), 1)
 
-    def test_more_than_two_named_sources_fail_closed(self):
+    def test_three_valid_sources_fit_in_packet_without_arbitrary_count_hold(self):
         (self.repo / "TOOLS" / "third.ps1").write_text("c")
-        with self.assertRaisesRegex(ValueError, "TOO_MANY"):
-            make_packet(self.repo, "TOOLS/first.ps1 ENFORCEMENT/second.py TOOLS/third.ps1")
+        packet, sources = make_packet(self.repo, "TOOLS/first.ps1 ENFORCEMENT/second.py TOOLS/third.ps1")
+        self.assertEqual(len(sources), 3)
+        self.assertEqual(sources[2]["path"], "TOOLS/third.ps1")
+        self.assertIn("SOURCE_FILE TOOLS/third.ps1", packet)
+
+    def test_three_implementation_sources_when_complete_fit_in_packet(self):
+        (self.repo / "TOOLS" / "third.ps1").write_text("new code\n")
+        packet, sources = make_packet(self.repo, "Update TOOLS/first.ps1 ENFORCEMENT/second.py TOOLS/third.ps1", mode="implementation")
+        self.assertEqual(len(sources), 3)
+        self.assertIn("as many replacements as are genuinely necessary", packet)
+
+    def test_real_node_test_and_module_files_are_bound(self):
+        (self.repo / "ENFORCEMENT" / "decision.cjs").write_text("module.exports={safe:true};\\n", encoding="utf-8")
+        (self.repo / "TOOLS" / "ui.mjs").write_text("export const ready=true;\\n", encoding="utf-8")
+        packet, sources = make_packet(
+            self.repo, "Review ENFORCEMENT/decision.cjs and TOOLS/ui.mjs")
+        self.assertEqual([s["path"] for s in sources],
+                         ["ENFORCEMENT/decision.cjs", "TOOLS/ui.mjs"])
+        self.assertTrue(all(s["complete"] for s in sources))
+        self.assertIn("module.exports", packet)
+        self.assertIn("export const ready", packet)
 
     def test_missing_file_fails_closed(self):
         with self.assertRaisesRegex(ValueError, "UNAVAILABLE"):
@@ -148,14 +167,44 @@ class BoundedPacketTests(unittest.TestCase):
         self.assertNotIn("PINNED_TAKY_SKILL archi-grow", packet)
         self.assertNotIn("PINNED_TAKY_SKILL learning-grow", packet)
 
-    def test_incomplete_implementation_source_holds_before_any_model_call(self):
+    def test_implementation_source_within_total_budget_is_complete(self):
         source = self.repo / "ENFORCEMENT" / "second.py"
-        source.write_text("value = 100\n" * 2300, encoding="utf-8")
+        source.write_text("value = 100\n" * 1600, encoding="utf-8")
+        packet, files = make_packet(
+            self.repo, "Edit ENFORCEMENT/second.py", mode="implementation")
+        self.assertEqual(files[0]["includedLines"], 1600)
+        self.assertEqual(files[0]["totalLines"], 1600)
+        self.assertTrue(files[0]["complete"])
+        self.assertIn("1600| value = 100", packet)
+        self.assertLessEqual(len(packet), 41000)
+        self.assertGreater(len(packet), 18000)
+        self.assertIn("PINNED_TAKY_SKILL outcome-quality", packet)
+
+    def test_actual_495_line_writing_source_no_longer_blocked(self):
+        from TAKY_MODEL_REVIEW_PACKET import TAKY_ROOT, MAX_SOURCE_CHARS, MAX_PACKET_CHARS
+        source = TAKY_ROOT / "TOOLS" / "TAKY_WRITING_FLOW.py"
+        self.assertTrue(source.is_file())
+        packet, files = make_packet(
+            TAKY_ROOT, "Implement TOOLS/TAKY_WRITING_FLOW.py", mode="implementation")
+        self.assertEqual(files[0]["includedLines"], files[0]["totalLines"])
+        framed = "".join(f"{i:04d}| {line}\n"
+                         for i, line in enumerate(source.read_text(encoding="utf-8-sig").splitlines(), 1))
+        self.assertGreater(len(framed), MAX_SOURCE_CHARS)
+        self.assertIn(framed, packet)
+        self.assertLessEqual(len(packet), MAX_PACKET_CHARS)
+        self.assertIn(f'included_lines={files[0]["totalLines"]}/{files[0]["totalLines"]}', packet)
+        self.assertIn("PINNED_TAKY_SKILL authority-check", packet)
+        self.assertIn("PINNED_TAKY_SKILL outcome-quality", packet)
+
+    def test_oversized_implementation_source_holds_without_truncation(self):
+        source = self.repo / "ENFORCEMENT" / "second.py"
+        source.write_text("value = 100\n" * 3500, encoding="utf-8")
         packet, sources = make_packet(
             self.repo, "Review ENFORCEMENT/second.py", mode="review")
         self.assertLess(sources[0]["includedLines"], sources[0]["totalLines"])
         self.assertIn("SOURCE_FILE ENFORCEMENT/second.py", packet)
-        with self.assertRaisesRegex(ValueError, "IMPLEMENTATION_SOURCE_EXCERPT_INCOMPLETE"):
+        with self.assertRaisesRegex(
+                ValueError, "IMPLEMENTATION_COMPLETE_SOURCE_EXCEEDS_PACKET_BUDGET"):
             make_packet(self.repo, "Edit ENFORCEMENT/second.py", mode="implementation")
 
     def test_signed_skill_manifest_reconstructs_exact_stdin_markers(self):
@@ -198,6 +247,29 @@ class BoundedPacketTests(unittest.TestCase):
                 "TAKY_MODEL_REVIEW_PACKET.SKILL_MANIFEST", manifest):
             with self.assertRaisesRegex(ValueError, "REQUIRED_SKILL_HASH_DRIFT"):
                 make_packet(self.repo, "Review TOOLS/first.ps1")
+
+    def test_packet_is_labelled_limited_not_independent(self):
+        packet, sources = make_packet(self.repo, "Review TOOLS/first.ps1")
+        self.assertIn("EVIDENCE_CLASS: LIMITED (NOT INDEPENDENT)", packet)
+        self.assertIn("not an independent review of the original sources", packet)
+        self.assertEqual(sources[0]["evidenceClass"], "LIMITED")
+        self.assertTrue(sources[0]["complete"])
+        self.assertIs(sources[0]["independentReview"], False)
+
+    def test_no_sources_forbids_original_source_claim(self):
+        packet, sources = make_packet(self.repo, "Is this plan sound?")
+        self.assertEqual(sources, [])
+        self.assertIn("NO_ORIGINAL_SOURCE_ATTACHED", packet)
+        self.assertIn("do not claim original-source review", packet)
+        self.assertNotIn("complete bounded snippets", packet)
+
+    def test_truncated_excerpt_is_flagged_and_not_complete(self):
+        (self.repo / "ENFORCEMENT" / "second.py").write_text("value = 100\n" * 2300, encoding="utf-8")
+        packet, sources = make_packet(self.repo, "Review ENFORCEMENT/second.py")
+        self.assertFalse(sources[0]["complete"])
+        self.assertIs(sources[0]["independentReview"], False)
+        self.assertIn("TRUNCATED_EXCERPTS: ENFORCEMENT/second.py", packet)
+        self.assertNotIn("complete bounded snippets", packet)
 
     def test_long_prompt_fails_closed(self):
         with self.assertRaises(ValueError):

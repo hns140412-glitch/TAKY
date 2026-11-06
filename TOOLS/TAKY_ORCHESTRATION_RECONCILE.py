@@ -168,6 +168,96 @@ def inspect_scoped_edit_claims(runtime: dict) -> dict:
     }
 
 
+
+LOCAL_EVIDENCE_ROOT = Path(r"D:\Git PWA\TAKY_AI_WORKBENCH\01_BACKLOG_AND_ADOPTION\80_EVIDENCE")
+LOCAL_REPO_ROOT = Path(r"D:\Git PWA\TAKY")
+
+
+def local_implementation_observation(row: dict, original_input: Path | None) -> dict:
+    """Recognize a tested local output without changing the blocked model route.
+
+    A one-off historical implementation witness is NOT a model call, reviewer
+    verdict, task owner, approved release, or proof of live user acceptance.
+    """
+    import hashlib
+    absent = {"state":"NO_REGISTERED_LOCAL_IMPLEMENTATION_EVIDENCE",
+              "current_source_bytes_verified":False,"model_success_implied":False,
+              "portfolio_done":False}
+    task_id=row.get("task_id")
+    if not isinstance(task_id,str) or len(task_id)!=32 or original_input is None:
+        return absent
+    root=LOCAL_EVIDENCE_ROOT.resolve()
+    expected_name="TAKY_CHAT_"+task_id[:5]+"_WRITING_USER_RESULT_20261024.json"
+    references=[str(x) for x in (row.get("evidence_refs") or [])]
+    relevant=[r for r in references if Path(r).name == expected_name]
+    if not relevant:
+        return absent
+    stale={"state":"REGISTERED_LOCAL_IMPLEMENTATION_STALE_HOLD",
+           "current_source_bytes_verified":False,"model_success_implied":False,
+           "portfolio_done":False}
+    try:
+        # Filename is an existing, bounded evidence format, not any user
+        # supplied JSON from an unrelated path or unregistered work ID.
+        expected=(root/expected_name)
+        if (len(relevant)!=1
+            or Path(relevant[0]).resolve()!=expected
+            or not expected.is_file() or expected.is_symlink()
+            or expected.stat().st_size>18000):
+            return stale
+        proof=read_json(expected)
+        if (proof.get("schema")!="TAKY_REGISTERED_MODEL_TASK_LOCAL_IMPLEMENTATION_EVIDENCE_V1"
+            or proof.get("original_work_id")!=row["work_id"]
+            or proof.get("portfolio_task_id") != row.get("portfolio_task_id")
+            or proof.get("status")!="LOCAL_IMPLEMENTATION_VERIFIED_NOT_MODEL_REVIEW_OR_USER_DONE"
+            or proof.get("existing_model_job_status_preserved")!=row.get("status")
+            or proof.get("portfolio_completion_verified") is not False
+            or proof.get("independent_review_completed") is not False
+            or proof.get("current_changed") is not False
+            or proof.get("git_push_or_deploy") is not False):
+            return stale
+        source=original_input.resolve(strict=True)
+        if (not source.is_file()
+            or Path(str(proof.get("original_task_path") or "")).resolve()!=source
+            or hashlib.sha256(source.read_bytes()).hexdigest()!=proof.get("original_task_sha256")):
+            return stale
+        verification=proof.get("verification") or {}
+        if (type(verification.get("existing_and_new_regression_tests_passed")) is not int
+            or verification["existing_and_new_regression_tests_passed"]<1
+            or verification.get("actual_loopback_frontend_and_http_composition_passed") is not True
+            or verification.get("external_publish") is not False
+            or verification.get("model_calls_in_this_task")!=0
+            or verification.get("paid_api_calls")!=0):
+            return stale
+        outputs=proof.get("output_refs")
+        if not isinstance(outputs,list) or len(outputs)!=2:
+            return stale
+        repo=LOCAL_REPO_ROOT.resolve(strict=True)
+        names={"TOOLS/TAKY_WRITING_FLOW.py",
+               "ENFORCEMENT/taky_writing_flow_test.py"}
+        actual=set()
+        for info in outputs:
+            if not isinstance(info,dict):
+                return stale
+            target=Path(str(info.get("path") or "")).resolve(strict=True)
+            if (not target.is_relative_to(repo) or not target.is_file()
+                or target.is_symlink() or target.stat().st_size>120000
+                or hashlib.sha256(target.read_bytes()).hexdigest()!=info.get("sha256")):
+                return stale
+            actual.add(target.relative_to(repo).as_posix())
+        if actual!=names:
+            return stale
+    except (OSError,ValueError,TypeError,KeyError):
+        return stale
+    return {"state":"REGISTERED_LOCAL_IMPLEMENTATION_BYTES_MATCH_NOT_USER_DONE",
+            "current_source_bytes_verified":True,
+            "tests_recorded":verification["existing_and_new_regression_tests_passed"],
+            "real_local_http_test_recorded":True,
+            "model_success_implied":False,"portfolio_done":False,
+            "independent_review_verified":False,
+            "original_model_job_still_blocked":row.get("status")=="BLOCKED",
+            "next_action":"INDEPENDENT_CODE_REVIEW_AND_REAL_USER_ACCEPTANCE_REQUIRED"}
+
+
 def reconcile(board: dict, assignments: dict, history: Path, signed_readback=None) -> dict:
     if not isinstance(board.get("tasks"), list) or not isinstance(assignments.get("tasks"), list):
         raise ValueError("REGISTRY_LIST_SCHEMA_MISSING")
@@ -209,6 +299,7 @@ def reconcile(board: dict, assignments: dict, history: Path, signed_readback=Non
         portfolio_id = row.get("portfolio_task_id") or None
         if portfolio_id is not None and portfolio_id not in board_ids:
             raise ValueError("PORTFOLIO_TASK_BINDING_LOST")
+        local_impl = local_implementation_observation(row, source)
         # Bind a registered work item to the existing sealed TAKY2 call ledger.
         # This is a read-only transport witness, NEVER an implementation DONE.
         signed_state = "NOT_CHECKED_BY_THIS_RECONCILER"
@@ -276,6 +367,7 @@ def reconcile(board: dict, assignments: dict, history: Path, signed_readback=Non
             "model_called_reported": run.get("model_called") if run else None,
             "signed_model_call_verification": signed_state,
             "signed_execution_evidenced": execution_evidence_bound,
+            "local_implementation_evidence": local_impl,
             "evidence_count": len(row.get("evidence_refs", [])),
             "next_action": recovery_for(run_state, run.get("proposal_error") if run else None),
         })
@@ -346,6 +438,13 @@ def reconcile(board: dict, assignments: dict, history: Path, signed_readback=Non
                                for o in observations),
                        "reviewers_unassigned": sum(o["reviewer"] == "UNASSIGNED" for o in observations),
                        "linked_to_portfolio": sum(o["portfolio_task_id"] is not None for o in observations),
+                       "local_implementation_source_verified_not_done":
+                           sum(o["local_implementation_evidence"]["current_source_bytes_verified"]
+                               for o in observations),
+                       "local_implementation_evidence_stale":
+                           sum(o["local_implementation_evidence"]["state"]
+                               == "REGISTERED_LOCAL_IMPLEMENTATION_STALE_HOLD"
+                               for o in observations),
                        "exact_source_sha_bound_independent_handoffs":
                            sum(h["source_sha_independent_review_bound"] for h in handoffs),
                        "registry_receipt_mismatches": sum(not o["registry_consistent"] for o in observations),

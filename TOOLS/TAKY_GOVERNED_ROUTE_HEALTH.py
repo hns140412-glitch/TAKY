@@ -23,6 +23,7 @@ ALLOWED_REPOS = frozenset((
     r"D:\Git PWA\Ready & Set",
     r"D:\Git PWA\Hide & Seek",
     r"D:\Git PWA\Snap & Pop",
+    r"D:\Git PWA\TAKY-MOBILE",
     r"D:\Git PWA\SAVEY",
 ))
 

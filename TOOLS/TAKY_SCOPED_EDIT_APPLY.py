@@ -8,17 +8,18 @@ from __future__ import annotations
 
 import argparse
 import ast
+import copy
 import difflib
 import hashlib
 import json
 import os
+import re
 from pathlib import Path, PurePosixPath
 import stat
 import tempfile
 
 EXTENSIONS = {".py", ".ps1", ".js", ".ts", ".tsx", ".jsx", ".json", ".css", ".html"}
 MAX_BYTES = 100_000
-MAX_FILES = 2
 
 class EditRejected(ValueError):
     pass
@@ -58,7 +59,7 @@ def plan_edits(task: dict, proposal: dict) -> list[dict]:
     repo = Path(task["repo"]).resolve(strict=True)
     approved = task.get("allowed_files")
     edits = proposal.get("edits")
-    if not isinstance(approved, list) or not 1 <= len(approved) <= MAX_FILES:
+    if not isinstance(approved, list) or not approved:
         raise EditRejected("ALLOWED_FILES_MISSING")
     if not isinstance(edits, list) or not 1 <= len(edits) <= len(approved):
         raise EditRejected("INVALID_EDIT_COUNT")
@@ -89,7 +90,7 @@ def plan_edits(task: dict, proposal: dict) -> list[dict]:
         except UnicodeDecodeError as exc:
             raise EditRejected("NON_UTF8_FILE") from exc
         replacements = edit["replacements"]
-        if not isinstance(replacements, list) or not 1 <= len(replacements) <= 12:
+        if not isinstance(replacements, list) or not replacements:
             raise EditRejected("INVALID_REPLACEMENTS")
         updated = old
         for item in replacements:
@@ -154,12 +155,217 @@ def apply(prepared: list[dict]) -> None:
         for tmp in staged:
             tmp.unlink(missing_ok=True)
 
-def run(task: dict, proposal: dict, *, execute=False) -> dict:
+def signed_model_proposal_bound(task: dict, proposal: dict, receipt_id: str,
+                                *, execution_evidence: dict | None = None,
+                                task_file_sha256: str | None = None,
+                                trusted_runtime: dict | None = None) -> None:
+    """Require a sealed model call carrying these exact proposed edits.
+
+    No signature key or synthetic receipt can be supplied through CLI args.
+    Testing may supply a fixture; real calls always load TAKY2's sealed ledger.
+    """
+    task_id = task.get("id")
+    if (not isinstance(task_id, str) or re.fullmatch(r"[a-f0-9]{32}", task_id) is None
+            or not isinstance(receipt_id, str) or
+            re.fullmatch(r"pf:external-review-" + task_id + r":[a-f0-9]{16,32}", receipt_id) is None):
+        raise EditRejected("SCOPED_EDIT_SIGNED_RECEIPT_REQUIRED")
+    if trusted_runtime is None:
+        from TAKY_TRUSTED_KERNEL_IMPORT import ensure_trusted_taky2
+        ensure_trusted_taky2()
+        from TAKY2.state_store import load_bundle
+        try:
+            _, trusted_runtime, _ = load_bundle()
+        except Exception as exc:
+            raise EditRejected("SCOPED_EDIT_SIGNED_LEDGER_UNAVAILABLE") from exc
+    if not isinstance(trusted_runtime, dict):
+        raise EditRejected("SCOPED_EDIT_LEDGER_INVALID")
+    from TAKY2.enforcement import stable_hash
+    if (not isinstance(execution_evidence, dict)
+            or execution_evidence.get("task_id") != task_id
+            or execution_evidence.get("taky2_signed_receipt_id") != receipt_id):
+        raise EditRejected("SCOPED_EDIT_EXECUTION_RECORD_NOT_BOUND")
+    receipt = trusted_runtime.get("preflight_receipts", {}).get(receipt_id)
+    call = trusted_runtime.get("execution_calls", {}).get(receipt_id)
+    if not isinstance(receipt, dict) or not isinstance(call, dict):
+        raise EditRejected("SCOPED_EDIT_SIGNED_CALL_MISSING")
+    if (receipt.get("allowed") is not True or receipt.get("call_allowed") is not True
+            or receipt.get("authority_digest") != trusted_runtime.get("authority_digest")
+            or not isinstance(receipt.get("call_digest"), str)
+            or not receipt.get("call_digest")):
+        raise EditRejected("SCOPED_EDIT_CALL_NOT_AUTHORIZED")
+    actors = {
+        ("openai", "codex", "TAKY_MODEL_REVIEW_CODEX"): "verify:codex-packet",
+        ("anthropic", "sonnet", "TAKY_MODEL_REVIEW_CLAUDE"): "review:external-model",
+    }
+    actual = (call.get("provider"), call.get("model"), call.get("executor_id"))
+    if receipt.get("action_id") != actors.get(actual):
+        raise EditRejected("SCOPED_EDIT_SIGNED_PROVIDER_OR_ACTION_MISMATCH")
+    # Reconstruct the exact preflight call from the original governed wrapper's
+    # output. This untrusted disk copy has no authority unless its canonical
+    # digest equals the HMAC-verified TAKY2 preflight receipt.
+    signed_call = execution_evidence.get("governed_call_manifest")
+    if (not isinstance(signed_call, dict)
+            or stable_hash(signed_call) != receipt.get("call_digest")
+            or signed_call.get("model") != call.get("model")
+            or signed_call.get("execution_mode") not in {"PACKET_ONLY", "CODEX_VERIFY_ONLY"}
+            or signed_call.get("expected_calls") != 1
+            or not isinstance(signed_call.get("source_manifest"), list)):
+        raise EditRejected("SCOPED_EDIT_SIGNED_INPUT_MANIFEST_MISMATCH")
+    contract = signed_call.get("scoped_edit_contract")
+    if (not isinstance(contract, dict)
+            or set(contract) != {"schema", "task_id", "task_sha256", "repo"}
+            or contract.get("schema") != "TAKY_SCOPED_EDIT_CALL_V1"
+            or contract.get("task_id") != task_id
+            or contract.get("task_sha256") != task_file_sha256
+            or not isinstance(task_file_sha256, str)
+            or re.fullmatch(r"[a-f0-9]{64}", task_file_sha256) is None
+            or contract.get("repo") != task.get("repo")):
+        raise EditRejected("SCOPED_EDIT_ORIGINAL_TASK_CONTRACT_NOT_SIGNED")
+    originals = signed_call["source_manifest"]
+    for approved in task.get("allowed_files", []):
+        if (not isinstance(approved, dict) or
+                not any(isinstance(src, dict)
+                        and src.get("path") == approved.get("path")
+                        and src.get("sha256") == approved.get("sha256")
+                        and src.get("complete") is True
+                        and type(src.get("includedLines")) is int
+                        and src.get("includedLines") == src.get("totalLines")
+                        for src in originals)):
+            raise EditRejected("SCOPED_EDIT_FILE_NOT_IN_SIGNED_COMPLETE_PACKET")
+    result = call.get("result")
+    if (call.get("status") != "RETURNED" or call.get("actual_calls") != 1
+            or not isinstance(result, dict) or result.get("returncode") != 0
+            or stable_hash(result) != call.get("result_digest")):
+        raise EditRejected("SCOPED_EDIT_SIGNED_MODEL_RETURN_INVALID")
+    active = trusted_runtime.get("active_attempts", {}).get(receipt.get("execution_key"))
+    if not isinstance(active, dict) or not isinstance(active.get("attempt"), dict):
+        raise EditRejected("SCOPED_EDIT_SIGNED_TARGET_MISSING")
+    try:
+        root = Path(task["repo"]).resolve(strict=True)
+        signed_root = Path(active["attempt"]["target"]).resolve(strict=True)
+    except (OSError, KeyError, ValueError, TypeError) as exc:
+        raise EditRejected("SCOPED_EDIT_SIGNED_TARGET_INVALID") from exc
+    if root != signed_root:
+        raise EditRejected("SCOPED_EDIT_REPOSITORY_ROUTE_MISMATCH")
+    # Parse exactly the model's sealed stdout; do not trust arbitrary sidecar
+    # candidates or a pasted proposal that did not come from this invocation.
+    try:
+        original = extract_proposal(task, result.get("stdout", ""))
+    except (EditRejected, ValueError, TypeError) as exc:
+        raise EditRejected("SCOPED_EDIT_MODEL_OUTPUT_NOT_VALID_PROPOSAL") from exc
+    if original != proposal:
+        raise EditRejected("SCOPED_EDIT_PROPOSAL_NOT_SIGNED_MODEL_OUTPUT")
+
+
+
+def _scoped_edit_identity(task: dict, proposal: dict, prepared: list[dict],
+                          receipt_id: str, task_file_sha256: str) -> dict:
+    from TAKY2.enforcement import stable_hash
+    return {
+        "schema": "TAKY_SCOPED_EDIT_CLAIM_V1",
+        "receipt_id": receipt_id,
+        "task_id": task["id"],
+        "task_file_sha256": task_file_sha256,
+        "proposal_digest": stable_hash(proposal),
+        "files": [{
+            "path": item["relative"],
+            "before_sha256": item["before_sha256"],
+            "after_sha256": item["after_sha256"],
+        } for item in prepared],
+    }
+
+
+def claim_scoped_edit_once(task: dict, proposal: dict, prepared: list[dict],
+                           receipt_id: str, task_file_sha256: str,
+                           execution_evidence: dict) -> dict:
+    """Atomic signed-ledger reservation BEFORE changing any files.
+
+    A conflict, replay, crash or unknown result stays HOLD. This uses the
+    existing TAKY2 HMAC/anchor state and optimistic versioned store, not a
+    second approval or execution registry. The claim itself is NOT user consent.
+    """
+    from TAKY_TRUSTED_KERNEL_IMPORT import ensure_trusted_taky2
+    ensure_trusted_taky2()
+    from TAKY2.state_store import load_bundle, save_runtime
+    from TAKY2.enforcement import stable_hash
+    try:
+        _, current, authority = load_bundle()
+        # Re-check exactly the version that will be atomically saved. The prior
+        # admission check cannot be reused across a conflicting state update.
+        signed_model_proposal_bound(
+            task, proposal, receipt_id, execution_evidence=execution_evidence,
+            task_file_sha256=task_file_sha256, trusted_runtime=current)
+        if receipt_id in current.get("scoped_edit_claims", {}):
+            raise EditRejected("SCOPED_EDIT_RECEIPT_ALREADY_CLAIMED")
+        expected = _scoped_edit_identity(
+            task, proposal, prepared, receipt_id, task_file_sha256)
+        updated = copy.deepcopy(current)
+        updated.setdefault("scoped_edit_claims", {})[receipt_id] = {
+            **expected,
+            "status": "CLAIMED_PENDING_FILE_APPLY",
+            "authority_digest": authority,
+        }
+        save_runtime(updated, expected_version=current["runtime_version"],
+                     authority_digest_value=authority)
+        return expected
+    except EditRejected:
+        raise
+    except Exception as exc:
+        raise EditRejected("SCOPED_EDIT_CLAIM_NOT_CONFIRMED_HOLD") from exc
+
+
+def finalize_scoped_edit_claim(task: dict, prepared: list[dict],
+                                identity: dict) -> None:
+    """Confirm the output bytes, then mark the existing receipt applied.
+
+    Never retry an uncertain claim; only a distinct authorized task can start
+    again. If the state commit fails, files may have been applied and the claim
+    deliberately stays PENDING for inspection rather than claiming success.
+    """
+    from TAKY_TRUSTED_KERNEL_IMPORT import ensure_trusted_taky2
+    ensure_trusted_taky2()
+    from TAKY2.state_store import load_bundle, save_runtime
+    try:
+        _, current, authority = load_bundle()
+        receipt_id = identity["receipt_id"]
+        recorded = current.get("scoped_edit_claims", {}).get(receipt_id)
+        if (not isinstance(recorded, dict)
+                or recorded.get("status") != "CLAIMED_PENDING_FILE_APPLY"
+                or recorded.get("authority_digest") != authority
+                or {k: recorded.get(k) for k in identity} != identity):
+            raise EditRejected("SCOPED_EDIT_CLAIM_MISSING_OR_CHANGED")
+        repo = Path(task["repo"]).resolve(strict=True)
+        for item in prepared:
+            output_file = file_path(repo, item["relative"])
+            if sha(output_file.read_bytes()) != item["after_sha256"]:
+                raise EditRejected("SCOPED_EDIT_OUTPUT_NOT_ATTESTED")
+        updated = copy.deepcopy(current)
+        updated["scoped_edit_claims"][receipt_id]["status"] = "APPLIED_UNVERIFIED"
+        save_runtime(updated, expected_version=current["runtime_version"],
+                     authority_digest_value=authority)
+    except EditRejected:
+        raise
+    except Exception as exc:
+        raise EditRejected("SCOPED_EDIT_FINALIZATION_UNCERTAIN_HOLD") from exc
+
+
+def run(task: dict, proposal: dict, *, execute=False,
+        signed_receipt_id: str | None = None,
+        execution_evidence: dict | None = None,
+        task_file_sha256: str | None = None) -> dict:
     prepared = plan_edits(task, proposal)
     if execute:
         if os.getenv("TAKY_USER_EXPLICIT_AUTHORIZATION") != "1" or os.getenv("TAKY_ALLOW_SCOPED_FILE_EDIT") != "1":
             raise EditRejected("SCOPED_EDIT_AUTHORIZATION_REQUIRED")
+        if not isinstance(execution_evidence, dict):
+            raise EditRejected("SCOPED_EDIT_EXECUTION_RECORD_NOT_BOUND")
+        # Persist a single-use claim in the existing HMAC/anchor-verified runtime
+        # before touching a source file. Unknown outcomes remain claimed/HOLD.
+        claim = claim_scoped_edit_once(
+            task, proposal, prepared, signed_receipt_id, task_file_sha256,
+            execution_evidence)
         apply(prepared)
+        finalize_scoped_edit_claim(task, prepared, claim)
     return {"status": "APPLIED_UNVERIFIED" if execute else "DRY_RUN_VALID",
             "task_id": task["id"], "files": [{"path": x["relative"],
             "before_sha256": x["before_sha256"], "after_sha256": x["after_sha256"],
@@ -196,9 +402,12 @@ def main() -> int:
     parser.add_argument("--extract-output-file")
     parser.add_argument("--candidate-file")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--signed-receipt")
+    parser.add_argument("--execution-record")
     args = parser.parse_args()
     try:
-        task = json.loads(Path(args.task_file).read_text(encoding="utf-8-sig"))
+        task_bytes = Path(args.task_file).read_bytes()
+        task = json.loads(task_bytes.decode("utf-8-sig"))
         if args.extract_output_file:
             if args.apply or not args.candidate_file or args.proposal_file:
                 raise EditRejected("EXTRACTION_ARGUMENTS_INVALID")
@@ -215,7 +424,12 @@ def main() -> int:
             if not args.proposal_file:
                 raise EditRejected("PROPOSAL_FILE_REQUIRED")
             proposal = json.loads(Path(args.proposal_file).read_text(encoding="utf-8-sig"))
-            result = run(task, proposal, execute=args.apply)
+            proof = (json.loads(Path(args.execution_record).read_text(encoding="utf-8-sig"))
+                     if args.apply and args.execution_record else None)
+            result = run(task, proposal, execute=args.apply,
+                         signed_receipt_id=args.signed_receipt,
+                         execution_evidence=proof,
+                         task_file_sha256=sha(task_bytes))
         print(json.dumps(result, ensure_ascii=False))
         return 0
     except (EditRejected, OSError, KeyError, TypeError, json.JSONDecodeError, SyntaxError) as exc:

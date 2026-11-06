@@ -55,6 +55,62 @@ def _commit_exists(root: Path, ref: str) -> bool:
     return proc.returncode == 0
 
 
+def _source_commit_binding_defects(doc: dict, report: dict, base: Path) -> list[str]:
+    """Require source hashes for EVERY changed file, bound to the committed blobs.
+
+    The provider receipt signs the assertions, while Git independently proves
+    the precise source content. Neither proves semantic review correctness.
+    Historical single-file receipts retain their exact single-source form;
+    multi-file changes need a MAC-bound reviewed_sources manifest.
+    """
+    def safe_source(path: object) -> bool:
+        return (isinstance(path, str) and bool(path) and
+                re.fullmatch(r"[A-Za-z0-9_./-]+", path) is not None and
+                not path.startswith("/") and "//" not in path and
+                all(part not in ("", ".", "..") for part in path.split("/")))
+
+    primary = doc.get("source_path")
+    if not safe_source(primary):
+        return ["REVIEW_SOURCE_PATH_MISSING_OR_INVALID"]
+    changed = report.get("changed_files")
+    if (not isinstance(changed, list) or not changed or
+            any(not safe_source(path) for path in changed) or
+            len(changed) != len(set(changed)) or primary not in changed):
+        return ["REVIEW_SOURCE_NOT_IN_CHANGED_FILES"]
+    provided = doc.get("reviewed_sources")
+    manifest = provided if provided is not None else [
+        {"path": primary, "sha256": doc.get("source_sha256")}]
+    if (not isinstance(manifest, list) or not manifest or
+            any(not isinstance(entry, dict) or
+                    set(entry) != {"path", "sha256"} or
+                    not safe_source(entry.get("path")) or
+                    not isinstance(entry.get("sha256"), str) or
+                    _HEX64.fullmatch(entry["sha256"]) is None
+                    for entry in manifest)):
+        return ["REVIEW_SOURCE_MANIFEST_INVALID"]
+    sources = {entry["path"]: entry["sha256"] for entry in manifest}
+    if len(sources) != len(manifest) or set(sources) != set(changed):
+        return ["REVIEW_SOURCE_COVERAGE_INCOMPLETE"]
+    if sources.get(primary) != doc.get("source_sha256"):
+        return ["REVIEW_SOURCE_PRIMARY_MANIFEST_MISMATCH"]
+
+    ref = str(report.get("commit_ref") or "").strip()
+    if not _commit_exists(base, ref):
+        return ["REVIEW_SOURCE_COMMIT_UNVERIFIED"]
+    for source in changed:
+        try:
+            proc = subprocess.run(
+                ["git", "-C", str(base), "show", f"{ref}:{source}"],
+                capture_output=True, timeout=20, check=False)
+        except (OSError, subprocess.SubprocessError):
+            return ["REVIEW_SOURCE_COMMIT_READ_FAILED"]
+        if proc.returncode or len(proc.stdout) > 100_000:
+            return ["REVIEW_SOURCE_NOT_FOUND_AT_COMMIT"]
+        if hashlib.sha256(proc.stdout).hexdigest() != sources[source]:
+            return ["REVIEW_SOURCE_HASH_NOT_BOUND_TO_COMMIT"]
+    return []
+
+
 def _load_bound_doc(entry: object, base: Path) -> dict | None:
     """Read an evidence file named by ``entry`` only if its bytes match evidence_sha256."""
     from gongbang_scope_gate_candidate import _read_best_effort, _read_fd_relative, _safe_open_supported
@@ -202,6 +258,12 @@ def _material_review_defects(task: dict, report: dict, root: Path, defects: list
         problems.append("REVIEW_SCOPE_NOT_ORIGINAL_SOURCE")
     if doc.get("verdict") != "PASS":
         problems.append("REVIEW_VERDICT_NOT_PASS")
+    # Check the actual source bytes at the claimed Git revision rather than
+    # treating a correctly MAC-signed, self-asserted SHA as verified source.
+    if base is None:
+        problems.append("REVIEW_SOURCE_REPOSITORY_UNAVAILABLE")
+    else:
+        problems.extend(_source_commit_binding_defects(doc, report, base))
     if problems:
         defects.append({"code": "INDEPENDENT_REVIEW_PROVENANCE_UNVERIFIED", "reason": problems})
     elif holds is not None:

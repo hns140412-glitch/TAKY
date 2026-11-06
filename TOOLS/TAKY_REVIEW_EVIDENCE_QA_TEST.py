@@ -2,12 +2,14 @@
 """Offline QA tests. No model CLI, network, signed-runtime writes, or retry."""
 import json
 import hashlib
+import re
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from TAKY_REVIEW_EVIDENCE_QA import _screen_reply, inspect_signed, verify_signed_source_manifest
+from TAKY_REVIEW_EVIDENCE_QA import (_screen_reply, inspect_signed,
+                                     verify_signed_source_manifest, SIGNED_REVIEW_OPERATION)
 from TAKY_TRUSTED_KERNEL_IMPORT import ensure_trusted_taky2
 
 ensure_trusted_taky2()
@@ -63,11 +65,79 @@ class ReceiptQATests(unittest.TestCase):
                 "source_manifest": manifest,
                 "dry_run_plan": {
                     "expected_calls": 1,
-                    "operations": ["one bounded independent review invocation"],
+                    "operations": ["one bounded packet-only review (not an independent repository investigation)"],
                     "batch_strategy": "single-review-batch",
                     "fallback": "HOLD", "paid_api": False}}
         item["preflight_receipts"][RID]["call_digest"] = stable_hash(call)
         return item, binding
+
+    def test_signed_plan_matches_actual_powershell_signer(self):
+        """Guard against a valid signed call being falsely rejected by QA drift."""
+        signer = (Path(__file__).resolve().parent / "TAKY_MODEL_REVIEW.ps1").read_text(
+            encoding="utf-8-sig")
+        plan = re.search(r"operations=@\('([^']+)'\)", signer)
+        self.assertIsNotNone(plan, "Cannot locate original signed review plan")
+        self.assertEqual(plan.group(1), SIGNED_REVIEW_OPERATION)
+
+    def test_signed_plan_tamper_still_fails_closed(self):
+        item, binding = self.signed_codex_fixture()
+        original = item["preflight_receipts"][RID]["call_digest"]
+        self.assertEqual(
+            inspect_signed(TASK, self.repo, self.sources, item, binding)["state"],
+            "CITATIONS_SCREENED_SEMANTIC_CONTENT_UNVERIFIED")
+        item["preflight_receipts"][RID]["call_digest"] = "0" * len(original)
+        report = inspect_signed(TASK, self.repo, self.sources, item, binding)
+        self.assertEqual(report["state"], "SIGNED_CALL_DIGEST_MISMATCH_HOLD")
+        self.assertFalse(report["qualityVerified"])
+
+    def test_expanded_limited_source_manifest_matches_sealed_preflight(self):
+        """The current signer adds three metadata fields omitted by routing."""
+        item, binding = self.signed_codex_fixture()
+        manifest = binding["source_manifest"]
+        complete = manifest[0]["includedLines"] == manifest[0]["totalLines"]
+        self.assertTrue(complete)
+        expanded = [{**manifest[0], "evidenceClass": "LIMITED",
+                     "complete": complete, "independentReview": False}]
+        call = {
+            "model": "codex", "effort": "medium", "context": "delta",
+            "expected_calls": 1, "execution_mode": "CODEX_VERIFY_ONLY",
+            "packet_digest": binding["packet_digest"], "source_manifest": expanded,
+            "dry_run_plan": {
+                "expected_calls": 1, "operations": [SIGNED_REVIEW_OPERATION],
+                "batch_strategy": "single-review-batch", "fallback": "HOLD",
+                "paid_api": False},
+        }
+        item["preflight_receipts"][RID]["call_digest"] = stable_hash(call)
+        valid = inspect_signed(TASK, self.repo, self.sources, item, binding)
+        self.assertEqual(valid["state"], "CITATIONS_SCREENED_SEMANTIC_CONTENT_UNVERIFIED")
+        self.assertEqual(valid["sourceBindingState"], "SIGNED_SOURCE_HASHES_MATCH_CURRENT_FILES")
+        self.assertFalse(valid["qualityVerified"])
+        # A sidecar alteration must never be blessed by the extra metadata.
+        binding["source_manifest"][0]["includedLines"] -= 1
+        modified = inspect_signed(TASK, self.repo, self.sources, item, binding)
+        self.assertEqual(modified["state"], "SIGNED_CALL_DIGEST_MISMATCH_HOLD")
+        self.assertFalse(modified["qualityVerified"])
+
+    def test_current_signer_truncated_packet_is_limited_not_independent(self):
+        item, binding = self.signed_codex_fixture()
+        binding["source_manifest"][0]["includedLines"] = 2
+        expanded = [{**binding["source_manifest"][0], "evidenceClass": "LIMITED",
+                     "complete": False, "independentReview": False}]
+        call = {
+            "model": "codex", "effort": "medium", "context": "delta",
+            "expected_calls": 1, "execution_mode": "CODEX_VERIFY_ONLY",
+            "packet_digest": binding["packet_digest"], "source_manifest": expanded,
+            "dry_run_plan": {
+                "expected_calls": 1, "operations": [SIGNED_REVIEW_OPERATION],
+                "batch_strategy": "single-review-batch", "fallback": "HOLD",
+                "paid_api": False},
+        }
+        item["preflight_receipts"][RID]["call_digest"] = stable_hash(call)
+        result = inspect_signed(TASK, self.repo, self.sources, item, binding)
+        self.assertEqual(result["state"], "REVIEW_HAS_SOURCE_CITATION_ERRORS")
+        self.assertEqual(result["invalidCitations"][0]["reason"],
+                         "CITATION_OUTSIDE_SUPPLIED_PACKET_EXCERPT")
+        self.assertFalse(result["qualityVerified"])
 
     def test_enforcement_source_packet_to_qa_real_path(self):
         """Same ENFORCEMENT source must survive packet capture and review QA."""
@@ -201,7 +271,7 @@ class ReceiptQATests(unittest.TestCase):
                 "source_manifest": binding["source_manifest"],
                 "dry_run_plan": {
                     "expected_calls": 1,
-                    "operations": ["one bounded independent review invocation"],
+                    "operations": ["one bounded packet-only review (not an independent repository investigation)"],
                     "batch_strategy": "single-review-batch",
                     "fallback": "HOLD", "paid_api": False}}
         runtime["preflight_receipts"][RID]["call_digest"] = stable_hash(call)
@@ -245,7 +315,7 @@ class ReceiptQATests(unittest.TestCase):
                 "source_manifest": binding["source_manifest"],
                 "skill_manifest": rows,
                 "dry_run_plan": {"expected_calls": 1,
-                                 "operations": ["one bounded independent review invocation"],
+                                 "operations": ["one bounded packet-only review (not an independent repository investigation)"],
                                  "batch_strategy": "single-review-batch",
                                  "fallback": "HOLD", "paid_api": False}}
         runtime["preflight_receipts"][RID]["call_digest"] = stable_hash(call)

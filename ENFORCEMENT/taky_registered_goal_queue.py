@@ -74,7 +74,8 @@ def execute_registered_queue(document: dict, repo: Path, local: Path,
     try:
         from TAKY_ORCHESTRATION_ADVANCE import (
             DEFAULT_BOARD, EVIDENCE, LOCAL_EXECUTORS, choose, read_json,
-            run_checks)
+            run_checks, CanonicalPreclaimSourceHold,
+            CanonicalPreclaimDependencyHold)
         root = EVIDENCE.resolve(strict=True)
         board_path = DEFAULT_BOARD.resolve(strict=True)
         if board_path.stat().st_size > 4 * 1024 * 1024:
@@ -140,13 +141,16 @@ def execute_registered_queue(document: dict, repo: Path, local: Path,
                                 "pending_dependency_ids":waiting,
                                 "attempted":False})
                 continue
-            if (expected_dependencies is not None
-                    and expected_dependencies.get(work_id) !=
-                        registered_dependency_revision(deps,latest_index,root)):
-                results.append({"work_id":work_id,
-                                "status":"DEPENDENCY_REVISION_CHANGED_RECHECK_REQUIRED",
-                                "attempted":False})
-                continue
+            if expected_dependencies is not None:
+                observed_dependency=registered_dependency_revision(
+                    deps,latest_index,root)
+                if expected_dependencies.get(work_id)!=observed_dependency:
+                    results.append({"work_id":work_id,
+                                    "status":"DEPENDENCY_REVISION_CHANGED_RECHECK_REQUIRED",
+                                    "gate_observed_dependency_revision":(
+                                        observed_dependency or "UNAVAILABLE"),
+                                    "attempted":False})
+                    continue
             plan=choose(latest,root)
             row=next((x for x in plan["considered"]
                       if x["task_id"]==work_id),None)
@@ -174,57 +178,71 @@ def execute_registered_queue(document: dict, repo: Path, local: Path,
             if route!="READY_FOR_LOCAL_EXECUTION":
                 results.append({"work_id":work_id,
                                 "status":"EXISTING_CANONICAL_GATE_HOLD",
-                                "gate_route":route,"attempted":False})
+                                "gate_route":route,
+                                "gate_input_error_type":(
+                                    row.get("input_error_type") if isinstance(row,dict)
+                                    else None),
+                                "attempted":False})
                 continue
             # The existing signed-input worker rechecks the board after its
             # local diagnosis. No new executor or authority bypass.
             if expected_dependencies is not None:
                 before=read_json(board_path)
                 recent={r.get("id"):r for r in before["tasks"] if isinstance(r,dict)}
-                if (registered_dependency_revision(deps,recent,root)!=
-                        expected_dependencies.get(work_id)
+                near_dispatch=registered_dependency_revision(
+                    deps,recent,root)
+                if (near_dispatch!=expected_dependencies.get(work_id)
                         or recent.get(work_id,{}).get("approval_required") is not False):
                     results.append({"work_id":work_id,
                                     "status":"DEPENDENCY_REVISION_CHANGED_RECHECK_REQUIRED",
+                                    "gate_observed_dependency_revision":(
+                                        near_dispatch or "UNAVAILABLE"),
                                     "attempted":False})
                     continue
-            # One registered work revision must not launch two concurrent
-            # read-only workers through separate Reason messages or queues.
-            from TAKY_ORCHESTRATION_ADVANCE import evidence_signature
-            import os
-            from uuid import uuid4
-            _,source_version=evidence_signature(before if expected_dependencies
-                                                is not None else latest,work_id)
-            # One work+canonical-parent revision across *all* Reason messages,
-            # the normal V2 queue and its dependency wake path. Child metadata
-            # and execution message IDs do not change dispatch identity.
-            proof_revision=(registered_dependency_revision(
-                deps,recent if expected_dependencies is not None
-                else latest_index,root) if deps else
-                hashlib.sha256(b"NO_REGISTERED_DEPENDENCIES").hexdigest())
-            if proof_revision is None:
-                proof_revision="UNVERIFIED_REGISTERED_UPSTREAM"
-            key=hashlib.sha256((work_id+"|"+proof_revision).encode()).hexdigest()[:24]
-            claim=local/("taky-registered-worker-"+work_id+"-"+key+".json")
-            claimed={"schema":"TAKY_REGISTERED_WORKER_CLAIM_V1",
-                     "work_id":work_id, "source_version":source_version,
-                     "dependency_revision":proof_revision,
-                     "state":"OUTCOME_UNKNOWN_NO_BLIND_RETRY"}
-            try:
-                with claim.open("x",encoding="utf-8") as out:
-                    json.dump(claimed,out,ensure_ascii=False)
-            except FileExistsError:
-                results.append({"work_id":work_id,
-                                "status":"REGISTERED_WORKER_ALREADY_CLAIMED",
-                                "attempted":False})
-                continue
-            executor = registered_executor or run_checks
-            worker_launched=True
-            if expected_dependencies is not None and registered_executor is None:
-                result=executor(work_id,board_path,root,
-                                dependency_revision=expected_dependencies[work_id])
+            # Production has ONE durable work-claim owner: run_checks().
+            # The older outer claim caused a proven predispatch failure to be
+            # mislabeled attempted/irreversible. Retain the injected fake-runner
+            # guard only for isolated tests; no external provider may use it.
+            synthetic_claim=None
+            if registered_executor is not None:
+                from TAKY_ORCHESTRATION_ADVANCE import evidence_signature
+                import os
+                from uuid import uuid4
+                _,source_version=evidence_signature(
+                    before if expected_dependencies is not None else latest,work_id)
+                proof_revision=(registered_dependency_revision(
+                    deps,recent if expected_dependencies is not None
+                    else latest_index,root) if deps else
+                    hashlib.sha256(b"NO_REGISTERED_DEPENDENCIES").hexdigest())
+                key=hashlib.sha256((work_id+"|"+str(proof_revision)).encode()).hexdigest()[:24]
+                synthetic_claim=local/("taky-registered-worker-"+work_id+"-"+key+".json")
+                claimed={"schema":"TAKY_REGISTERED_WORKER_CLAIM_V1",
+                         "work_id":work_id,"source_version":source_version,
+                         "dependency_revision":proof_revision,
+                         "state":"OUTCOME_UNKNOWN_NO_BLIND_RETRY"}
+                try:
+                    with synthetic_claim.open("x",encoding="utf-8") as out:
+                        json.dump(claimed,out,ensure_ascii=False)
+                except FileExistsError:
+                    results.append({"work_id":work_id,
+                                    "status":"REGISTERED_WORKER_ALREADY_CLAIMED",
+                                    "attempted":False})
+                    continue
+                worker_launched=True
+                result=registered_executor(work_id,board_path,root)
             else:
-                result=executor(work_id,board_path,root)
+                def _claimed_by_canonical_worker(_work_id):
+                    nonlocal worker_launched
+                    worker_launched=True
+                if expected_dependencies is not None:
+                    result=run_checks(
+                        work_id,board_path,root,
+                        dependency_revision=expected_dependencies[work_id],
+                        on_worker_claimed=_claimed_by_canonical_worker)
+                else:
+                    result=run_checks(
+                        work_id,board_path,root,
+                        on_worker_claimed=_claimed_by_canonical_worker)
             if (not isinstance(result,dict)
                     or result.get("task_id")!=work_id
                     or result.get("no_model_calls") is not True):
@@ -250,23 +268,37 @@ def execute_registered_queue(document: dict, repo: Path, local: Path,
                      proof["inputs"].get("registered_dependency_revision") !=
                         expected_dependencies.get(work_id))):
                 raise ValueError("LOCAL_PROOF_DEPENDENCY_NOT_BOUND")
-            claimed["state"]="LOCAL_PROBE_EVIDENCED_NOT_PORTFOLIO_DONE"
-            claimed["evidence_sha256"]=hashlib.sha256(evidence.read_bytes()).hexdigest()
-            tmp=local/("taky-registered-claim-update-"+uuid4().hex+".tmp")
-            try:
-                with tmp.open("x",encoding="utf-8") as out:
-                    json.dump(claimed,out,ensure_ascii=False)
-                if (claim.is_symlink() or getattr(claim,"is_junction",lambda:False)()):
-                    raise ValueError("REGISTERED_CLAIM_REPARSE")
-                os.replace(tmp,claim)
-            finally:
-                tmp.unlink(missing_ok=True)
+            if synthetic_claim is not None:
+                claimed["state"]="LOCAL_PROBE_EVIDENCED_NOT_PORTFOLIO_DONE"
+                claimed["evidence_sha256"]=hashlib.sha256(evidence.read_bytes()).hexdigest()
+                tmp=local/("taky-registered-claim-update-"+uuid4().hex+".tmp")
+                try:
+                    with tmp.open("x",encoding="utf-8") as out:
+                        json.dump(claimed,out,ensure_ascii=False)
+                    if (synthetic_claim.is_symlink() or getattr(
+                            synthetic_claim,"is_junction",lambda:False)()):
+                        raise ValueError("REGISTERED_CLAIM_REPARSE")
+                    os.replace(tmp,synthetic_claim)
+                finally:
+                    tmp.unlink(missing_ok=True)
             results.append({"work_id":work_id,
                             "status":"LOCAL_DIAGNOSIS_EVIDENCED_NOT_DONE",
                             "local_result_state":proof.get("state"),
                             "evidence_sha256":hashlib.sha256(
                                 evidence.read_bytes()).hexdigest(),
-                            "attempted":True})
+                            "attempted":worker_launched})
+        except CanonicalPreclaimDependencyHold as error:
+            results.append({"work_id":work_id,
+                            "status":"DEPENDENCY_REVISION_CHANGED_RECHECK_REQUIRED",
+                            "gate_observed_dependency_revision":(
+                                error.observed_revision or "UNAVAILABLE"),
+                            "attempted":False})
+        except CanonicalPreclaimSourceHold as error:
+            results.append({"work_id":work_id,
+                            "status":"EXISTING_CANONICAL_GATE_HOLD",
+                            "gate_route":"LOCAL_INPUT_PROVENANCE_HOLD",
+                            "gate_input_error_type":error.source_error_type,
+                            "attempted":False})
         except (OSError,ValueError,KeyError,TypeError,RuntimeError) as error:
             results.append({"work_id":work_id,
                             "status":"SAFE_LOCAL_RECOVERY_REQUIRED",

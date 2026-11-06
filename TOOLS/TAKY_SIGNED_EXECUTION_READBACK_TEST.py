@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from TAKY_SIGNED_EXECUTION_READBACK import correlate
+from TAKY_SIGNED_EXECUTION_READBACK import correlate, _digest
 
 IDENT = "a" * 32
 RID = "pf:external-review-" + IDENT + ":abcd1234"
@@ -14,10 +14,11 @@ def state(returncode=0, status="RETURNED", with_result=True):
         "execution_calls": {},
     }
     if with_result:
+        result = {"returncode": returncode,
+                  "stdout": "Do not expose confidential output", "stderr": ""}
         sample["execution_calls"][RID] = {
             "model": "codex", "provider": "openai", "status": status,
-            "result": {"returncode": returncode, "stdout": "Do not expose confidential output",
-                       "stderr": ""}, "result_digest": "fixed-digest",
+            "result": result, "result_digest": _digest(result),
         }
     return sample
 
@@ -30,6 +31,114 @@ class SignedReceiptCorrelationTests(unittest.TestCase):
         self.assertFalse(data["creditSavingsMeasured"])
         self.assertEqual(data["cliExitCode"], 0)
         self.assertNotIn("confidential", str(data))
+
+    def test_signed_call_manifest_and_result_digest_are_bound(self):
+        inp = {"model": "codex", "packet_digest": "a" * 20}
+        sample = state()
+        sample["preflight_receipts"][RID]["call_digest"] = _digest(inp)
+        yes = correlate(IDENT, sample, RID, inp)
+        self.assertTrue(yes["signedCallManifestBound"])
+        self.assertEqual(yes["state"], "CLI_RETURNED_UNVERIFIED")
+        bad = correlate(IDENT, sample, RID, {"model": "fake"})
+        self.assertEqual(bad["state"], "SIGNED_CALL_MANIFEST_MISMATCH_HOLD")
+        corrupted = state()
+        corrupted["execution_calls"][RID]["result"]["stdout"] = "tampered"
+        result = correlate(IDENT, corrupted, RID)
+        self.assertEqual(result["state"], "SIGNED_RETURN_DIGEST_MISMATCH_HOLD")
+        self.assertFalse(result["modelSuccessVerified"])
+
+
+    def test_sealed_verified_execution_is_distinct_from_user_done(self):
+        signed = state()
+        pf = signed["preflight_receipts"][RID]
+        pf.update(plan_digest="p", action_digest="a", call_digest="c", authority_digest="auth")
+        call = signed["execution_calls"][RID]
+        call["executor_id"] = "CLAUDE_EXECUTOR"
+        evidence_ref = "verified:target:receipt"
+        signed["execution_outcomes"] = {RID: "SUCCESS"}
+        signed["completion_registry"] = {RID: {
+            "plan_digest": "p", "action_digest": "a", "call_digest": "c",
+            "authority_digest": "auth", "key_match": True, "critical_gaps": [],
+            "verified_by": "CODEX_REVIEWER",
+            "required_verifications": ["technical", "intent"],
+            "passed_verifications": ["technical", "intent"],
+            "evidence_refs": [evidence_ref],
+        }}
+        signed["evidence_registry"] = {evidence_ref: {
+            "verified": True, "acceptance_state": "ACCEPTED", "receipt_id": RID,
+            "revision_or_hash": call["result_digest"],
+            "authority_digest_or_key_version": "auth",
+            "validator": "CODEX_REVIEWER",
+        }}
+        result = correlate(IDENT, signed, RID)
+        self.assertEqual(result["state"], "CLI_RETURNED_UNVERIFIED")
+        self.assertTrue(result["executionEvidenceVerified"])
+        self.assertEqual(result["executionVerificationState"],
+                         "SIGNED_EXECUTION_EVIDENCED_NOT_USER_DONE")
+        self.assertFalse(result["modelSuccessVerified"])
+        self.assertNotIn("CODEX_REVIEWER", str(result))
+        signed["evidence_registry"][evidence_ref]["revision_or_hash"] = "forged"
+        altered = correlate(IDENT, signed, RID)
+        self.assertFalse(altered["executionEvidenceVerified"])
+        signed["evidence_registry"][evidence_ref]["revision_or_hash"] = call["result_digest"]
+        signed["completion_registry"][RID]["call_digest"] = "wrong"
+        self.assertFalse(correlate(IDENT, signed, RID)["executionEvidenceVerified"])
+        signed["completion_registry"][RID]["call_digest"] = "c"
+        signed["execution_outcomes"][RID] = "UNKNOWN"
+        self.assertFalse(correlate(IDENT, signed, RID)["executionEvidenceVerified"])
+
+
+    def test_strong_independent_review_evidence_uses_review_digest_not_target_digest(self):
+        signed = state()
+        pf = signed["preflight_receipts"][RID]
+        pf.update(plan_digest="p", action_digest="a", call_digest="c", authority_digest="auth")
+        call = signed["execution_calls"][RID]
+        call["executor_id"] = "CLAUDE_EXECUTOR"
+        signed["execution_outcomes"] = {RID: "SUCCESS"}
+        signed["completion_registry"] = {RID: {
+            "plan_digest": "p", "action_digest": "a", "call_digest": "c",
+            "authority_digest": "auth", "key_match": True, "critical_gaps": [],
+            "verified_by": "CODEX_VERIFIER",
+            "required_verifications": ["technical", "intent", "independent"],
+            "passed_verifications": ["technical", "intent", "independent"],
+            "independent_reviewer_role": "INDEPENDENT_REVIEWER",
+            "independent_reviewer_actor": "CLAUDE",
+            "independent_review_ref": "review:1",
+            "evidence_refs": ["verify:1", "review:1"],
+        }}
+        common = {"verified": True, "acceptance_state": "ACCEPTED",
+                  "receipt_id": RID, "authority_digest_or_key_version": "auth"}
+        signed["evidence_registry"] = {
+            "verify:1": {**common, "revision_or_hash": call["result_digest"],
+                         "validator": "CODEX_VERIFIER"},
+            "review:1": {**common, "revision_or_hash": "review-content-digest",
+                         "result_digest": call["result_digest"],
+                         "validator": "INDEPENDENT_REVIEW_BRIDGE"},
+        }
+        signed["independent_review_registry"] = {"review:1": {
+            "receipt_id": RID, "acceptance_state": "ACCEPTED",
+            "target_result_digest": call["result_digest"], "authority_digest": "auth",
+            "review_digest": "review-content-digest",
+            "bridge_id": "INDEPENDENT_REVIEW_BRIDGE",
+            "reviewer_role": "INDEPENDENT_REVIEWER",
+            "reviewer_actor": "CLAUDE", "reviewer_id": "CLAUDE_REVIEWER_DIFFERENT",
+        }}
+        valid = correlate(IDENT, signed, RID)
+        self.assertTrue(valid["executionEvidenceVerified"])
+        signed["independent_review_registry"]["review:1"]["review_digest"] = "tampered"
+        self.assertFalse(correlate(IDENT, signed, RID)["executionEvidenceVerified"])
+        signed["independent_review_registry"]["review:1"]["review_digest"] = "review-content-digest"
+        signed["independent_review_registry"]["review:1"]["reviewer_id"] = "CLAUDE_EXECUTOR"
+        self.assertFalse(correlate(IDENT, signed, RID)["executionEvidenceVerified"])
+
+    def test_claimed_completion_without_signed_evidence_does_not_verify(self):
+        signed = state()
+        signed["execution_outcomes"] = {RID: "SUCCESS"}
+        signed["completion_registry"] = {RID: {"verified_by": "MODEL_OUTPUT",
+                                                  "key_match": True}}
+        result = correlate(IDENT, signed, RID)
+        self.assertFalse(result["executionEvidenceVerified"])
+        self.assertEqual(result["executionVerificationState"], "NO_BOUND_COMPLETION_EVIDENCE")
 
     def test_preinvoke_release_not_treated_as_model_success(self):
         example = state(with_result=False)

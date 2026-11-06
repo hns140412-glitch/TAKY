@@ -6,6 +6,78 @@ from unittest import TestCase, main
 from TAKY_ORCHESTRATION_RECONCILE import reconcile, recovery_for
 
 class OrchestrationReconcileTests(TestCase):
+
+    def test_registered_local_writing_source_is_evidenced_without_model_success(self):
+        import hashlib
+        import json
+        from unittest.mock import patch
+        import TAKY_ORCHESTRATION_RECONCILE as module
+        with TemporaryDirectory() as d:
+            root=Path(d)
+            repo=root/"TAKY"
+            evidence=root/"EVIDENCE"
+            history=root/"HISTORY"
+            repo.mkdir(); evidence.mkdir(); history.mkdir()
+            tid="d"*32
+            original=root/(tid+".json")
+            original.write_text(json.dumps({"id":tid,"state":"PREPARED_NOT_EXECUTED",
+                "task_kind":"implementation","approval":"REQUIRED_BEFORE_MODEL_CALL"}))
+            targets=[]
+            for rel in ("TOOLS/TAKY_WRITING_FLOW.py",
+                        "ENFORCEMENT/taky_writing_flow_test.py"):
+                target=repo/rel
+                target.parent.mkdir(parents=True,exist_ok=True)
+                target.write_bytes(("valid local source "+rel).encode())
+                targets.append({"path":str(target),
+                  "sha256":hashlib.sha256(target.read_bytes()).hexdigest()})
+            proof={"schema":"TAKY_REGISTERED_MODEL_TASK_LOCAL_IMPLEMENTATION_EVIDENCE_V1",
+                "original_work_id":"TAKY-CHAT-"+tid,
+                "original_task_sha256":hashlib.sha256(original.read_bytes()).hexdigest(),
+                "original_task_path":str(original),"portfolio_task_id":None,
+                "status":"LOCAL_IMPLEMENTATION_VERIFIED_NOT_MODEL_REVIEW_OR_USER_DONE",
+                "existing_model_job_status_preserved":"BLOCKED",
+                "portfolio_completion_verified":False,"independent_review_completed":False,
+                "current_changed":False,"git_push_or_deploy":False,
+                "output_refs":targets,
+                "verification":{"existing_and_new_regression_tests_passed":20,
+                    "actual_loopback_frontend_and_http_composition_passed":True,
+                    "external_publish":False,"model_calls_in_this_task":0,
+                    "paid_api_calls":0}}
+            path=evidence/("TAKY_CHAT_"+tid[:5]+"_WRITING_USER_RESULT_20261024.json")
+            path.write_text(json.dumps(proof))
+            job={"work_id":"TAKY-CHAT-"+tid,"task_id":tid,"status":"BLOCKED",
+                 "portfolio_task_id":None,"input_refs":[str(original)],
+                 "evidence_refs":[str(path)],"reviewer":"UNASSIGNED",
+                 "execution_verified":False}
+            board={"tasks":[]}
+            with (patch.object(module,"LOCAL_EVIDENCE_ROOT",evidence),
+                  patch.object(module,"LOCAL_REPO_ROOT",repo)):
+                result=module.reconcile(board,{"tasks":[job]},history)
+                self.assertEqual(result["model_jobs"][
+                    "local_implementation_source_verified_not_done"],1)
+                self.assertEqual(result["model_jobs"]["verified_by_registry"],0)
+                row=result["observations"][0]
+                self.assertEqual(row["registry_state"],"BLOCKED")
+                self.assertTrue(row["local_implementation_evidence"]["current_source_bytes_verified"])
+                self.assertFalse(row["local_implementation_evidence"]["model_success_implied"])
+                self.assertFalse(row["local_implementation_evidence"]["portfolio_done"])
+                # A source byte drift invalidates the claim without touching
+                # the existing blocked model assignment.
+                (repo/"TOOLS/TAKY_WRITING_FLOW.py").write_bytes(b"changed later")
+                drift=module.reconcile(board,{"tasks":[job]},history)
+                self.assertEqual(drift["model_jobs"][
+                    "local_implementation_source_verified_not_done"],0)
+                self.assertEqual(drift["observations"][0][
+                    "local_implementation_evidence"]["state"],
+                    "REGISTERED_LOCAL_IMPLEMENTATION_STALE_HOLD")
+                (repo/"TOOLS/TAKY_WRITING_FLOW.py").write_bytes(
+                    ("valid local source "+"TOOLS/TAKY_WRITING_FLOW.py").encode())
+                proof["portfolio_completion_verified"]=True
+                path.write_text(json.dumps(proof))
+                impossible=module.reconcile(board,{"tasks":[job]},history)
+                self.assertEqual(impossible["model_jobs"][
+                    "local_implementation_source_verified_not_done"],0)
+
     def test_preparation_never_promoted_to_completion(self):
         with TemporaryDirectory() as d:
             root=Path(d)

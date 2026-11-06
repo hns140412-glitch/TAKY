@@ -7,7 +7,7 @@ param(
  [string]$Root='F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\01_INBOX\TAKY_BRIDGE'
 )
 $ErrorActionPreference='Stop'
-$allowedRepos=@('D:\Git PWA\TAKY','D:\Git PWA\TAKY-2.0-ORCH','D:\Git PWA\Play Camp','D:\Git PWA\Ready-Set','D:\Git PWA\Hide-Seek','D:\Git PWA\Snap-Pop','D:\Git PWA\SAVEY')
+$allowedRepos=@('D:\Git PWA\TAKY','D:\Git PWA\TAKY\.local\TAKY-2.0-ORCH','D:\Git PWA\Play Camp','D:\Git PWA\Ready & Set','D:\Git PWA\Hide & Seek','D:\Git PWA\Snap & Pop','D:\Git PWA\TAKY-MOBILE','D:\Git PWA\SAVEY')
 function SaveJson($path,$obj){
  $temp="$path.tmp.$PID"
  [IO.File]::WriteAllText($temp,($obj|ConvertTo-Json -Depth 8),[Text.UTF8Encoding]::new($false))

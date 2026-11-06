@@ -17,10 +17,33 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Windows redirected PowerShell stdout can default to CP949. This command
+# emits machine-readable UTF-8 JSON and must not fail on Unicode task labels.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="strict")
+
 from TAKY_ORCHESTRATION_RECONCILE import DEFAULT_BOARD, read_json
 from TAKY_ORCHESTRATION_LOCAL_WORKERS import WORKERS as LOCAL_READONLY_WORKERS
 from TAKY_ORCHESTRATION_OUTCOME_WORKERS import OUTCOME_READONLY_WORKERS
-ALL_READONLY_WORKERS = {**LOCAL_READONLY_WORKERS, **OUTCOME_READONLY_WORKERS}
+from TAKY_PR_WORK_SLICE import WORKERS as PR_WORK_READONLY_WORKERS
+ALL_READONLY_WORKERS = {**LOCAL_READONLY_WORKERS, **OUTCOME_READONLY_WORKERS,
+                        **PR_WORK_READONLY_WORKERS}
+
+class CanonicalPreclaimSourceHold(ValueError):
+    """Proven pre-dispatch failure: no durable claim or worker call was made."""
+
+    def __init__(self, source_error_type: str):
+        self.source_error_type=source_error_type
+        super().__init__("PREDISPATCH_INPUT_PROVENANCE_"+source_error_type)
+
+
+class CanonicalPreclaimDependencyHold(ValueError):
+    """Reject changed upstream proof before any worker claim is created."""
+
+    def __init__(self, observed_revision: str | None):
+        self.observed_revision=observed_revision
+        super().__init__("PREDISPATCH_DEPENDENCY_REVISION_CHANGED")
+
 
 TAKY = Path(r"D:\Git PWA\TAKY")
 GUARDS = TAKY / "ENFORCEMENT"
@@ -37,7 +60,8 @@ LOCAL_EXECUTORS = {"CLN-002":"LOCAL_CANONICAL_CURRENT_READBACK",
                    "MCP-001":"LOCAL_MCP_CONFIG_READONLY_INVENTORY",
                    "SKL-001":"LOCAL_SKILL_READONLY_CATALOG",
                    "FAMILY-DURABLE-001":"LOCAL_PRODUCT_OUTCOME_EVIDENCE_READBACK",
-                   "OPS-001":"LOCAL_SOURCE_ADOPTION_EVIDENCE_READBACK"}
+                   "OPS-001":"LOCAL_SOURCE_ADOPTION_EVIDENCE_READBACK",
+                   "TAKY-001":"LOCAL_PR_WATCH_SOURCE_RECEIPT_READBACK"}
 # Pure read-only diagnostics may proceed while a parent inventory is underway.
 # Incomplete dependencies remain visible and forbid completion or promotion.
 SAFE_PRECHECK_WITH_PENDING_DEPS = {"CLN-002","INT-001","MCP-002","CLN-001","MCP-001","SKL-001",
@@ -140,6 +164,22 @@ def telemetry_hour_bucket(at: datetime | None=None) -> str:
     return value.astimezone(timezone.utc).strftime("%Y-%m-%dT%H")
 
 
+def project_current_authority_sha(path: Path) -> str:
+    """Hash the live CURRENT contract, not its accumulating evidence index.
+
+    Registering a freshly verified local receipt appends output_refs. That is
+    provenance bookkeeping, not a new implementation input. Including it in
+    the worker fingerprint made an endless output->signature->rerun loop.
+    Status, approval, gates, work ID and source references remain signed.
+    """
+    current=read_json(path)
+    if not isinstance(current,dict) or not isinstance(current.get("output_refs"),list):
+        raise ValueError("PROJECT_CURRENT_AUTHORITY_INVALID")
+    authority={k:v for k,v in current.items() if k!="output_refs"}
+    return hashlib.sha256(json.dumps(authority,sort_keys=True,
+                          ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
+
+
 def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
     task=next((t for t in board["tasks"] if t.get("id")==work_id),None)
     if not task: raise ValueError("SOURCE_TASK_NOT_FOUND")
@@ -194,7 +234,8 @@ def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
             inputs["assignments_sha256"] = sha(workbench / "00_CONTROL" / "AI_WORK_ASSIGNMENTS.json")
             inputs["orchestration_reconciler_sha256"] = sha(Path(__file__).with_name("TAKY_ORCHESTRATION_RECONCILE.py"))
             inputs["project_current_shas"] = {
-                project: sha(workbench / config["workbench_path"] / "PROJECT_CURRENT.json")
+                project: project_current_authority_sha(
+                    workbench / config["workbench_path"] / "PROJECT_CURRENT.json")
                 for project, config in sorted(
                     read_json(workbench / "00_CONTROL" / "PROJECT_REGISTRY.json")["projects"].items())
             }
@@ -215,10 +256,43 @@ def evidence_signature(board: dict, work_id: str) -> tuple[dict,str]:
             ):
                 inputs[label + "_sha256"] = sha(
                     workbench / "01_BACKLOG_AND_ADOPTION" / "80_EVIDENCE" / filename)
+    elif work_id in PR_WORK_READONLY_WORKERS:
+        # Worker code and the pinned watch sources are the observed inputs;
+        # receipt/review identity is re-verified live by the worker itself.
+        inputs["worker_sha256"]=sha(Path(__file__).with_name("TAKY_PR_WORK_SLICE.py"))
+        from TAKY_PR_WORK_SLICE import SOURCE_PATHS, RECEIPT_PATH, REVIEW_PATH
+        for src in SOURCE_PATHS:
+            inputs["source_sha256:"+Path(src).name]=sha(Path(src))
+        # A genuinely changed official receipt or independent-review record
+        # must re-open this bounded precheck rather than reuse stale PASS/HOLD.
+        inputs["official_implementation_receipt_sha256"]=sha(Path(RECEIPT_PATH))
+        inputs["signed_review_receipt_sha256"]=sha(Path(REVIEW_PATH))
     else:
         raise ValueError("LOCAL_EXECUTOR_NOT_BOUND")
     digest=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()[:20]
     return inputs,digest
+
+def canonical_local_claim_key(board: dict, work_id: str,
+                              digest: str, evidence: Path) -> tuple[str,str]:
+    """Single immutable worker identity for all TAKY local execution routes."""
+    trust_dir=str(Path(__file__).resolve().parents[1]/"ENFORCEMENT")
+    if trust_dir not in sys.path:
+        sys.path.insert(0,trust_dir)
+    from taky_registered_goal_queue import registered_dependency_revision
+    index={t.get("id"):t for t in board["tasks"] if isinstance(t,dict)}
+    deps=index[work_id].get("dependencies",[]) or []
+    upstream=registered_dependency_revision(deps,index,evidence)
+    revision_key=("VERIFIED:"+upstream if upstream
+                  else "PENDING_PRECHECK:"+digest)
+    # TAKY-001 is a bounded, read-only provenance observer. A *changed*
+    # source digest may safely get one new precheck without reusing a prior
+    # proven local receipt. Other executors retain their original single
+    # dependency-revision claim identity (no broad replay permission).
+    claim_material=(work_id+"|"+revision_key+
+                    ("|SOURCE:"+digest if work_id=="TAKY-001" else ""))
+    token=hashlib.sha256(claim_material.encode()).hexdigest()[:24]
+    return revision_key,token
+
 
 def choose(board: dict, evidence: Path | None=None) -> dict:
     rows=board.get("tasks")
@@ -253,6 +327,8 @@ def choose(board: dict, evidence: Path | None=None) -> dict:
                             receipt,"is_junction",lambda:False)():
                         raise ValueError("LOCAL_EVIDENCE_REPARSE")
                     proof=read_json(receipt)
+                    if not isinstance(proof,dict):
+                        raise ValueError("LOCAL_EVIDENCE_INVALID_SHAPE")
                     if (proof.get("schema")!="TAKY_LOCAL_WORK_SLICE_V1"
                             or proof.get("task_id")!=row["task_id"]
                             or proof.get("inputs")!=inputs):
@@ -272,6 +348,24 @@ def choose(board: dict, evidence: Path | None=None) -> dict:
                     row["route"]="LOCAL_EVIDENCE_INTEGRITY_HOLD"
                     row["input_error_type"]=type(exc).__name__
                     row["next_action"]="RECONCILE_EXISTING_UNTRUSTED_RECEIPT_NO_OVERWRITE"
+            if (row["route"]=="READY_FOR_LOCAL_EXECUTION" and
+                    evidence.resolve()==EVIDENCE.resolve()):
+                # Canonical scheduler sees claims BEFORE deciding what to run.
+                # Exclude unknown/evidenced cross-route work from each tick so
+                # two held P0 tasks cannot starve unrelated P1/P2 work.
+                try:
+                    _,claim_token=canonical_local_claim_key(
+                        board,row["task_id"],digest,evidence)
+                    claim=TAKY/".local"/("taky-canonical-worker-"+
+                                        row["task_id"]+"-"+claim_token+".json")
+                    if (claim.exists() or claim.is_symlink() or getattr(
+                            claim,"is_junction",lambda:False)()):
+                        row["route"]="LOCAL_WORK_DISPATCH_ALREADY_CLAIMED"
+                        row["next_action"]="RECONCILE_DURABLE_WORKER_CLAIM_NO_REPLAY"
+                except (OSError,ValueError,KeyError,TypeError) as exc:
+                    row["route"]="LOCAL_CLAIM_READBACK_HOLD"
+                    row["input_error_type"]=type(exc).__name__
+                    row["next_action"]="CHECK_CANONICAL_WORKER_CLAIM"
     ready=[r for r in considered if r["route"]=="READY_FOR_LOCAL_EXECUTION"]
     ready.sort(key=lambda x:(PRIORITIES.get(x["priority"],9),
                              0 if x["status"]=="IMPLEMENTING" else 1,x["task_id"]))
@@ -283,7 +377,8 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
-               *, dependency_revision: str | None=None) -> dict:
+               *, dependency_revision: str | None=None,
+               on_worker_claimed=None) -> dict:
     if work_id not in LOCAL_EXECUTORS: raise ValueError("UNSUPPORTED_LOCAL_EXECUTOR")
     # Admission and signed input identity MUST come from one same snapshot.
     # Previously a second board read could silently adopt a newly changed
@@ -295,7 +390,13 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
         raise ValueError("TASK_NOT_DEPENDENCY_READY_OR_HELD")
     guard1=GUARDS/"workspace_cleanup_path_guard.py"
     guard2=GUARDS/"taky_toolchain_paths_guard.py"
-    inputs,digest=evidence_signature(original_board,work_id)
+    try:
+        inputs,digest=evidence_signature(original_board,work_id)
+    except (OSError,ValueError,KeyError,TypeError) as source_error:
+        # This branch precedes durable claim creation; a repair may retry
+        # exactly once without treating an executor outcome as unknown.
+        raise CanonicalPreclaimSourceHold(
+            type(source_error).__name__) from source_error
     if dependency_revision is not None:
         # A caller-supplied digest is only a proposed revision. The canonical
         # local worker independently re-reads the source proof before executing.
@@ -309,7 +410,7 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
             original_index[work_id].get("dependencies",[]),
             original_index,evidence)
         if observed!=dependency_revision:
-            raise ValueError("REGISTERED_DEPENDENCY_SOURCE_NOT_PINNED")
+            raise CanonicalPreclaimDependencyHold(observed)
         # A dependency-triggered diagnostic is a *different evidence scope*
         # from a previously cached precheck. Pin the canonical source revision
         # without changing the ordinary worker receipt format/identity.
@@ -321,8 +422,12 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
         digest=hashlib.sha256(json.dumps(
             inputs,sort_keys=True,ensure_ascii=False).encode()).hexdigest()[:20]
     output=evidence/("TAKY_LOCAL_WORK_"+work_id+"_"+digest+".json")
+    if output.is_symlink() or getattr(output,"is_junction",lambda:False)():
+        raise ValueError("CANONICAL_EVIDENCE_REPARSE")
     if output.is_file():
         existing=read_json(output)
+        if not isinstance(existing,dict):
+            raise ValueError("LOCAL_EVIDENCE_INVALID_SHAPE")
         if (existing.get("task_id")==work_id and existing.get("inputs")==inputs
             and existing.get("schema")=="TAKY_LOCAL_WORK_SLICE_V1"):
             return {"status":"REUSED_EXISTING_EVIDENCE","task_id":work_id,
@@ -332,19 +437,15 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
     # ONE durable dispatch claim for ALL callers: original CLI, scheduler,
     # registered V2 and dependency wake. A missing receipt after an attempted
     # worker is OUTCOME_UNKNOWN, never permission to execute it again.
-    trust_dir=str(Path(__file__).resolve().parents[1]/"ENFORCEMENT")
-    if trust_dir not in sys.path:
-        sys.path.insert(0,trust_dir)
-    from taky_registered_goal_queue import registered_dependency_revision
-    task_index={t.get("id"):t for t in original_board["tasks"] if isinstance(t,dict)}
-    deps=task_index[work_id].get("dependencies",[]) or []
-    observed_revision=registered_dependency_revision(deps,task_index,evidence)
-    if dependency_revision is not None and observed_revision!=dependency_revision:
-        raise ValueError("DEPENDENCY_CLAIM_REVISION_DRIFT")
-    # Pending prechecks deliberately use a different version key, preserving
-    # limited inventory work without elevating it to a verified dependency.
-    revision_key=("VERIFIED:"+observed_revision if observed_revision
-                  else "PENDING_PRECHECK:"+digest)
+    revision_key,token=canonical_local_claim_key(
+        original_board,work_id,digest,evidence)
+    if (dependency_revision is not None and
+            revision_key!="VERIFIED:"+dependency_revision):
+        raise CanonicalPreclaimDependencyHold(
+            revision_key[len("VERIFIED:"):] if revision_key.startswith("VERIFIED:")
+            else None)
+    # Pending prechecks use their own version key; verified parents are
+    # claim-equivalent across all entrypoints and message deliveries.
     _canonical=(board.resolve()==DEFAULT_BOARD.resolve() and
                 evidence.resolve()==EVIDENCE.resolve())
     expected_parent=TAKY if _canonical else board.parent.resolve()
@@ -356,7 +457,6 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
             or claims.resolve().parent!=expected_parent.resolve()):
         raise ValueError("CANONICAL_DURABLE_CLAIM_SCOPE_UNAVAILABLE")
     import uuid
-    token=hashlib.sha256((work_id+"|"+revision_key).encode()).hexdigest()[:24]
     claim=claims/("taky-canonical-worker-"+work_id+"-"+token+".json")
     claimed={"schema":"TAKY_CANONICAL_WORK_CLAIM_V1","work_id":work_id,
              "revision":revision_key,"input_digest":digest,
@@ -366,6 +466,10 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
             json.dump(claimed,saved,ensure_ascii=False)
     except FileExistsError:
         raise ValueError("CANONICAL_WORK_ALREADY_CLAIMED_NO_RETRY")
+    # Signal the original controller ONLY after durable claim creation.
+    # A preflight/provenance failure before this point is proven predispatch.
+    if on_worker_claimed is not None:
+        on_worker_claimed(work_id)
     # Subprocess arguments are constants, no shell, no provider, bounded runtime.
     results=[]
     if work_id=="MCP-002":
@@ -408,7 +512,7 @@ def run_checks(work_id: str, board: Path, evidence: Path, timeout: int=85,
             "MCP protocol handshakes and live CPU rate limits remain unverified" if work_id=="MCP-002" else
             "Local file/skill/connector inventory is not independent portfolio completion" if work_id in LOCAL_READONLY_WORKERS else
             " ; ".join(str(c.get("next_action")) for c in results if c.get("next_action"))
-            if work_id in READ_ONLY_OUTCOME_OBSERVERS else
+            if work_id in READ_ONLY_OUTCOME_OBSERVERS or work_id in PR_WORK_READONLY_WORKERS else
             "Independent scope review and remaining CLN-009 consumers still unverified")}
     evidence.mkdir(parents=True,exist_ok=True)
     try:

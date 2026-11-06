@@ -26,6 +26,7 @@ REPO_ALLOWLIST = {
     r"D:\Git PWA\Ready & Set",
     r"D:\Git PWA\Hide & Seek",
     r"D:\Git PWA\Snap & Pop",
+    r"D:\Git PWA\TAKY-MOBILE",
     r"D:\Git PWA\SAVEY",
 }
 TIMEOUT_SEC = 225
@@ -154,7 +155,7 @@ def run_bounded(argv: list[str], *, timeout: float, cwd: Path | None = None,
         out = stdout_path.read_bytes()[:OUTPUT_LIMIT].decode("utf-8", errors="replace")
         err = stderr_path.read_bytes()[:OUTPUT_LIMIT].decode("utf-8", errors="replace")
         bridge_receipt = None
-        if capture_receipt and bridge_receipt_path.is_file() and bridge_receipt_path.stat().st_size <= 2400:
+        if capture_receipt and bridge_receipt_path.is_file() and bridge_receipt_path.stat().st_size <= 8192:
             try:
                 marker = json.loads(bridge_receipt_path.read_text(encoding="utf-8-sig"))
                 if (isinstance(marker, dict) and
@@ -164,7 +165,7 @@ def run_bounded(argv: list[str], *, timeout: float, cwd: Path | None = None,
                                       ("task_id", "receipt_id", "provider", "executor_state")}
                     raw_manifest = marker.get("source_manifest")
                     digest = marker.get("packet_digest")
-                    if (isinstance(raw_manifest, list) and len(raw_manifest) <= 2 and
+                    if (isinstance(raw_manifest, list) and len(raw_manifest) <= 8 and
                             re.fullmatch(r"[0-9a-f]{20}", str(digest or ""))):
                         valid = []
                         for source in raw_manifest:
@@ -200,6 +201,16 @@ def run_bounded(argv: list[str], *, timeout: float, cwd: Path | None = None,
                                 else:
                                     if len({row["name"] for row in checked}) == len(checked):
                                         bridge_receipt["skill_manifest"] = checked
+                            # Keep the original governed call manifest for
+                            # later comparison with the signed TAKY2 call_digest.
+                            # This is evidence of claimed input only, NOT authorization.
+                            candidate_call = marker.get("call_manifest")
+                            if (isinstance(candidate_call, dict)
+                                    and candidate_call.get("packet_digest") == digest
+                                    and candidate_call.get("source_manifest") == raw_manifest
+                                    and candidate_call.get("skill_manifest") == skill_entries
+                                    and len(json.dumps(candidate_call)) <= 6000):
+                                bridge_receipt["call_manifest"] = candidate_call
             except (OSError, ValueError, UnicodeError):
                 pass
         return {
@@ -307,6 +318,41 @@ def execute_request(request: dict) -> dict:
         "-Prompt", prompt, "-TaskId", task_id, "-Repo", repo, "-ClaudeMaxTurns", "1",
         "-OutputMode", output_mode,
     ]
+    # Council evidence is opt-in. Bind the stage/source/target inside the
+    # existing signed TAKY2 call; this supervisor never bypasses that gate.
+    council_binding = request.get("councilBinding")
+    if council_binding is not None:
+        if not isinstance(council_binding, dict):
+            raise ValueError("COUNCIL_BINDING_INVALID")
+        import re as _re
+        required = {"schema", "work_id", "stage", "source_sha256", "target_sha256"}
+        if (set(council_binding) != required
+                or council_binding["schema"] != "TAKY_COUNCIL_BINDING_V1"
+                or not isinstance(council_binding["work_id"], str)
+                or not council_binding["work_id"].strip()
+                or not isinstance(council_binding["stage"], str)
+                or _re.fullmatch(r"(?:ADVISOR_|PEER_)(?:CONTRARIAN|FIRST_PRINCIPLES|EXPANSIONIST|OUTSIDER|EXECUTOR)|CHAIR",
+                                  council_binding["stage"]) is None
+                or not isinstance(council_binding["source_sha256"], str)
+                or _re.fullmatch(r"[a-f0-9]{64}", council_binding["source_sha256"]) is None
+                or (council_binding["target_sha256"] is not None
+                    and (not isinstance(council_binding["target_sha256"], str)
+                         or _re.fullmatch(r"[a-f0-9]{20,64}", council_binding["target_sha256"]) is None))):
+            raise ValueError("COUNCIL_BINDING_INVALID")
+        child.extend(["-CouncilBindingJson", json.dumps(council_binding, separators=(",", ":"))])
+    scoped_digest = request.get("scopedEditTaskSha256")
+    if scoped_digest is not None:
+        if (output_mode != "Raw" or not isinstance(scoped_digest, str)
+                or re.fullmatch(r"[a-f0-9]{64}", scoped_digest) is None):
+            raise ValueError("SCOPED_EDIT_CALL_BINDING_INVALID")
+        child.extend(["-ScopedEditTaskSha256", scoped_digest])
+    target_receipt = request.get("targetReceiptId")
+    if target_receipt is not None:
+        if (not isinstance(target_receipt, str) or
+                re.fullmatch(r"pf:[A-Za-z0-9:_-]{8,150}", target_receipt) is None
+                or output_mode != "Envelope"):
+            raise ValueError("TARGET_REVIEW_RECEIPT_INVALID")
+        child.extend(["-TargetReceiptId", target_receipt])
     env = dict(os.environ)
     for secret in ("OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY"):
         env.pop(secret, None)
@@ -318,10 +364,11 @@ def execute_request(request: dict) -> dict:
     from TAKY_SIGNED_EXECUTION_READBACK import read_signed
     marker = outcome.get("governedReceipt")
     bound_receipt = marker.get("receipt_id") if isinstance(marker, dict) else None
-    outcome["signedReadback"] = read_signed(task_id, bound_receipt)
+    claimed_input = marker.get("call_manifest") if isinstance(marker, dict) else None
+    outcome["signedReadback"] = read_signed(task_id, bound_receipt, claimed_input)
     outcome["preinvokeRelease"] = release_if_proven_preinvoke(outcome, outcome["signedReadback"])
     if outcome["preinvokeRelease"]["state"] == "PREINVOKE_RELEASED":
-        outcome["signedReadback"] = read_signed(task_id, bound_receipt)
+        outcome["signedReadback"] = read_signed(task_id, bound_receipt, claimed_input)
     return outcome
 
 

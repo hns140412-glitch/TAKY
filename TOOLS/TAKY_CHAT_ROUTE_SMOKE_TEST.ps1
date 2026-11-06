@@ -52,9 +52,12 @@ try {
   Write-Output 'PASS_LOCAL_MISSING_SOURCE_FAIL_CLOSED=true'
   $first=(& $orchestrator -Action Dispatch -Repo $repo -Executor Auto -TaskKind review -TaskSize small -Task $intent | Out-String | ConvertFrom-Json)
   $results+= $first
-  if($first.status -eq 'HOLD' -and $first.output -match 'TAKY_GOVERNANCE_ROUTE_HOLD'){
-    Write-Output 'PASS_SIGNED_GOVERNANCE_ROUTE_HOLD_NO_MODEL=true'
+  if($first.status -eq 'HOLD' -and $first.output -match 'PORTFOLIO_WORK_ID_REQUIRED_FOR_MODEL_TASK'){
+    Write-Output 'PASS_UNBOUND_FUTURE_MODEL_TASK_HELD_NO_MODEL=true'
     return
+  }
+  if($first.status -eq 'HOLD' -and $first.output -match 'TAKY_GOVERNANCE_ROUTE_HOLD'){
+    throw 'MISSING_PORTFOLIO_ID_WAS_NOT_CHECKED_BEFORE_ROUTE'
   }
   if($first.status -ne 'PREPARED_NOT_EXECUTED' -or $first.preparation_reused -ne $false -or !$first.task_file){throw ('FIRST_DISPATCH_FAILED: '+$first.status+' '+$first.output)}
   $taskFile=[string]$first.task_file

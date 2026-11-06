@@ -4,7 +4,7 @@ Reason is transport only, never approval. Only CLN-002 and INT-001 read-only
 diagnostics from the canonical registered portfolio are executable.
 """
 from __future__ import annotations
-import argparse,hashlib,json,re,subprocess,sys
+import argparse,hashlib,json,ntpath,re,subprocess,sys
 from datetime import datetime,timezone
 from pathlib import Path
 
@@ -38,14 +38,130 @@ def classify_team_output(output):
         "schema":"TAKY_REASON_EXECUTOR_CAPABILITY_V1",
         "reason_team_observed":output.startswith("team "),
         "session_types":found,
-        "claude_code_live_session":found["claude"]>0,
-        "codex_live_session":found["codex"]>0,
-        "claude_codex_bilateral_route_ready":found["claude"]>0 and found["codex"]>0,
+        # Legacy text output has no identity, repo or tier scoping, so it can
+        # only be observational and must never claim a live/ready executor.
+        "claude_agent_visible_anywhere":found["claude"]>0,
+        "codex_agent_visible_anywhere":found["codex"]>0,
+        "claude_code_live_session":False,
+        "codex_live_session":False,
+        "claude_codex_bilateral_route_ready":False,
+        "legacy_observational_only":True,
         "cli_queues_are_not_model_executors":True,
         "provider_call_performed":False,
         "model_execution_authorized":False,
         "approval_granted":False,
-        "scope":"LIVE_SESSION_OBSERVATION_ONLY_NOT_FULL_ORCHESTRATION"}
+        "scope":"LEGACY_UNSCOPED_TEXT_OBSERVATION_ONLY_NOT_EXECUTION_READINESS"}
+
+def _norm_win_path(value):
+    """Windows-semantics absolute path normalization; None means unsafe/invalid."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    if value.startswith(("\\\\?\\", "\\\\.\\")) or "\x00" in value:
+        return None
+    text = value.replace("/", "\\")
+    drive, rest = ntpath.splitdrive(text)
+    if not drive or not rest.startswith("\\"):
+        return None
+    if len(drive) != 2 or drive[1] != ":":
+        return None
+    for part in rest.split("\\"):
+        # Trailing dot/space and 8.3 aliases are rewritten by Windows; fail closed.
+        if part and (part[-1] in ". " or "~" in part) and part not in ("", ):
+            return None
+    return ntpath.normcase(ntpath.normpath(text)).rstrip("\\")
+
+def _inside(candidate, root):
+    return candidate is not None and (candidate == root or candidate.startswith(root + "\\"))
+
+def _send_flags(returncode, stdout):
+    """Delivery flags from the CLI response; negated phrases never count."""
+    low = stdout.lower() if isinstance(stdout, str) else ""
+    negated = any(x in low for x in ("not delivered", "not queued", "undelivered", "not sent", "failed"))
+    ok = returncode == 0 and not negated
+    return (ok and ("delivered" in low or "queued" in low),
+            ok and "delivered" in low)
+
+def classify_team_json(payload, repo=TAKY, trusted_identity=None):
+    """Count actual local agent types; bind readiness to the TAKY worktree.
+
+    A Claude Code session in an observer directory is visible but is NOT a
+    ready TAKY executor. A queue named "claude" is likewise never an agent.
+    Identity inside the same untrusted JSON proves nothing: without an
+    independent trusted_identity ({"person","machine"}) the local claim is
+    UNVERIFIED and no actionable readiness is promoted. Malformed entries
+    fail closed (skipped) instead of raising.
+    """
+    if not isinstance(payload, dict) or not isinstance(payload.get("sessions"), list):
+        raise ValueError("REASON_SESSION_JSON_NOT_VALID")
+    person = payload.get("person")
+    machine = payload.get("machine")
+    if not isinstance(person, str) or not person or not isinstance(machine, str) or not machine:
+        raise ValueError("REASON_LOCAL_IDENTITY_MISSING")
+    verified = False
+    if isinstance(trusted_identity, dict):
+        tp, tm = trusted_identity.get("person"), trusted_identity.get("machine")
+        if isinstance(tp, str) and tp and isinstance(tm, str) and tm:
+            person, machine = tp, tm  # trusted values, not the payload's claim
+            verified = True
+    root = _norm_win_path(str(repo))
+    if root is None:
+        raise ValueError("REASON_REPO_ROOT_INVALID")
+    types = {"claude": 0, "codex": 0, "gemini": 0, "cli": 0}
+    scoped = {"claude": 0, "codex": 0}
+    for item in payload["sessions"]:
+        if not isinstance(item, dict):
+            continue
+        if item.get("person") != person or item.get("machine") != machine:
+            continue
+        status, tier, actor = item.get("status"), item.get("tier"), item.get("agent")
+        if not (isinstance(status, str) and isinstance(tier, str) and isinstance(actor, str)):
+            continue
+        if status not in {"idle", "busy", "live"}:
+            continue
+        if tier != "push":
+            # A pull/turn session cannot receive a model task immediately.
+            if actor == "cli":
+                types["cli"] += 1
+            continue
+        role = ("claude" if actor in {"claude-code", "claude"}
+                else "codex" if actor in {"codex", "codex-cli"}
+                else "gemini" if actor == "gemini"
+                else "cli" if actor == "cli" else None)
+        if role is None:
+            continue
+        types[role] += 1
+        if role not in scoped:
+            continue
+        raw_repo, raw_cwd = item.get("repo"), item.get("cwd")
+        has_repo = raw_repo not in (None, "")
+        has_cwd = raw_cwd not in (None, "")
+        if not (has_repo or has_cwd):
+            continue
+        n_repo = _norm_win_path(raw_repo) if has_repo else None
+        n_cwd = _norm_win_path(raw_cwd) if has_cwd else None
+        if has_repo and n_repo != root:
+            continue  # explicit repo identity must be the exact repo
+        if has_cwd and not _inside(n_cwd, root):
+            continue  # repo-vs-cwd conflict or unsafe/outside cwd
+        scoped[role] += 1
+    return {
+        "schema": "TAKY_REASON_EXECUTOR_CAPABILITY_V1",
+        "reason_team_observed": bool(payload.get("team")),
+        "session_types": types,
+        "scoped_live_sessions": scoped,
+        "local_identity_verified": verified,
+        "claude_agent_visible_anywhere": types["claude"] > 0,
+        "codex_agent_visible_anywhere": types["codex"] > 0,
+        "claude_code_live_session": verified and scoped["claude"] > 0,
+        "codex_live_session": verified and scoped["codex"] > 0,
+        "claude_codex_bilateral_route_ready": verified and scoped["claude"] > 0 and scoped["codex"] > 0,
+        "cli_queues_are_not_model_executors": True,
+        "provider_call_performed": False,
+        "model_execution_authorized": False,
+        "approval_granted": False,
+        "scope": "SIGNED_WORKTREE_SESSION_OBSERVATION_ONLY_NOT_EXECUTION_AUTHORITY",
+    }
+
 
 def reason_capability():
     """Bounded local who-readback; no login, setup, network join, or APIs."""
@@ -54,17 +170,25 @@ def reason_capability():
                 "state":"HOLD_REASON_EXECUTABLE_MISSING",
                 "model_execution_authorized":False}
     try:
-        done=subprocess.run([str(REASON),"who"],
+        done=subprocess.run([str(REASON),"who","--json"],
             cwd=Path.home(),capture_output=True,text=True,encoding="utf-8",
             errors="replace",timeout=10,check=False)
-        if done.returncode!=0 or len(done.stdout)>16000:
+        if done.returncode!=0 or len(done.stdout)>24000:
             raise RuntimeError("REASON_WHO_NOT_VALID")
-        value=classify_team_output(done.stdout)
-        value["state"]=("LIVE_DUAL_AGENT_SESSIONS_VISIBLE_NOT_OWNERSHIP_VERIFIED"
+        value=classify_team_json(json.loads(done.stdout))
+        value["state"]=(
+            "LIVE_DUAL_TAKY_WORKTREE_AGENTS_VISIBLE_NOT_EXECUTION_AUTHORIZED"
             if value["claude_codex_bilateral_route_ready"]
-            else "HOLD_LIVE_EXECUTOR_SESSIONS_NOT_VISIBLE")
+            else "HOLD_LOCAL_IDENTITY_UNVERIFIED_NOT_ACTIONABLE"
+            if (not value["local_identity_verified"]
+                and value["scoped_live_sessions"]["claude"] > 0
+                and value["scoped_live_sessions"]["codex"] > 0)
+            else "HOLD_LIVE_AGENT_VISIBLE_BUT_NOT_TAKY_WORKTREE_BOUND"
+            if value["claude_agent_visible_anywhere"] or value["codex_agent_visible_anywhere"]
+            else "HOLD_LIVE_EXECUTOR_SESSIONS_NOT_VISIBLE"
+        )
         return value
-    except (OSError,RuntimeError,subprocess.TimeoutExpired):
+    except (OSError,ValueError,RuntimeError,TypeError,AttributeError,KeyError,subprocess.TimeoutExpired):
         return {"schema":"TAKY_REASON_EXECUTOR_CAPABILITY_V1",
                 "state":"HOLD_REASON_WHO_UNAVAILABLE",
                 "model_execution_authorized":False}
@@ -178,9 +302,8 @@ def main():
     sent=subprocess.run([str(REASON),"send","taky-local/takyinbox",outgoing],
          cwd=Path.home(),capture_output=True,text=True,encoding="utf-8",
          errors="replace",timeout=15,check=False)
-    result["reason_return_message_accepted"]=sent.returncode==0 and (
-       "delivered" in sent.stdout.lower() or "queued" in sent.stdout.lower())
-    result["reason_return_message_live_received"]=sent.returncode==0 and "delivered" in sent.stdout.lower()
+    result["reason_return_message_accepted"],result["reason_return_message_live_received"]=(
+        _send_flags(sent.returncode,sent.stdout))
     print(json.dumps(result,ensure_ascii=False))
 
 if __name__=="__main__":main()
