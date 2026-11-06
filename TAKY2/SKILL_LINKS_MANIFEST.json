@@ -1,0 +1,25 @@
+{
+  "schema": "TAKY2_SKILL_LINK_MANIFEST_V1",
+  "source_repo": "TAKY",
+  "source_rel_to_target": "../TAKY/.claude/skills",
+  "target_repo": "TAKY-2.0-ORCH",
+  "consumer_dirs": [
+    ".agents/skills",
+    ".claude/skills"
+  ],
+  "skills": {
+    "archi-grow": "84e1db55b198c9a314f3f238f69f6362a676e8b741db7f3052c4a1698df9f34d",
+    "authority-check": "e6da3354a96cbe2a6c5ecff7d3674705a45ed20287f815a2034aaca7c686d4a5",
+    "browser-verify": "3542a628f29bba91abe0c3407dd55981a4ee6d354c1d7881d1c63428f1cfeb2f",
+    "cross-model-review": "b6229dbfc8c63f52983242292b891676043f5f721e9fbaffa20da611920dc520",
+    "handoff": "fba81e5706a633641a28f94c3416669fdd0ef48cd176a3fa80b2157549bbdc71",
+    "intent-router": "3e5ad7e750d1b904bcc24abd2b2ae849f8fa94fea6ddbdb5e19f67db3cb26f4b",
+    "learning-grow": "1140d4b03e334a94fc2b334fc3a2162d8b8bd34902921cc40652d2eb4a05f3e5",
+    "mining-index-learning": "8f2dd6f3f8be634f8eff9817be729c18f403aa23ba038d5910b02bb2f3abad23",
+    "mobile-webapp-build": "8886d14bab83d3392b8ce338d6b463bf5376d625ff0ecc78f99252173ea859ab",
+    "outcome-quality": "4f84f4400b5df773ad1e359781cce948112557395c65206f58688c709c50c3e5",
+    "runtime-e2e": "baf207add9fffc6e8b00a272d76e6d8bfdc037a644ffc6afe8dc68f7b634c2cb"
+  },
+  "source_authority": "TAKY Git-tracked source SKILL.md; hashes pinned",
+  "not_proof_of_runtime_skill_activation": true
+}

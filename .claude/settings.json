@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 \"D:\\Git PWA\\TAKY\\TOOLS\\TAKY_NATIVE_AGENT_HOOK_RECEIPT_CANDIDATE.py\" --provider CLAUDE",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -164,6 +164,70 @@ class StateStoreTests(unittest.TestCase):
         )
         return tmp, ap, rp, ep, anchor, lock, authority_digest(authority)
 
+
+    def test_scoped_edit_receipt_is_signed_append_only_and_single_use(self):
+        tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
+        try:
+            _, existing, _ = load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+            receipt_id = "pf:external-review-" + "a" * 32 + ":0123456789abcdef"
+            claim = {
+                "schema": "TAKY_SCOPED_EDIT_CLAIM_V1",
+                "receipt_id": receipt_id,
+                "task_id": "a" * 32,
+                "task_file_sha256": "b" * 64,
+                "proposal_digest": "c" * 20,
+                "files": [{"path": "TOOLS/example.py", "before_sha256": "1" * 64,
+                           "after_sha256": "2" * 64}],
+                "authority_digest": digest,
+                "status": "CLAIMED_PENDING_FILE_APPLY",
+            }
+            existing["scoped_edit_claims"] = {receipt_id: claim}
+            signed = save_runtime(
+                existing, expected_version=1, authority_digest_value=digest,
+                runtime_path=rp, lock_path=lock, runtime_key=KEY,
+                anchor_path=anchor)
+            self.assertEqual(signed["runtime_version"], 2)
+            _, latest, _ = load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+            self.assertEqual(latest["scoped_edit_claims"][receipt_id], claim)
+            altered = json.loads(json.dumps(latest))
+            altered["scoped_edit_claims"].pop(receipt_id)
+            with self.assertRaisesRegex(StateIntegrityError, "cannot be removed"):
+                save_runtime(altered, expected_version=2,
+                             authority_digest_value=digest, runtime_path=rp,
+                             lock_path=lock, runtime_key=KEY, anchor_path=anchor)
+            altered = json.loads(json.dumps(latest))
+            altered["scoped_edit_claims"][receipt_id]["proposal_digest"] = "d" * 20
+            with self.assertRaisesRegex(StateIntegrityError, "immutable"):
+                save_runtime(altered, expected_version=2,
+                             authority_digest_value=digest, runtime_path=rp,
+                             lock_path=lock, runtime_key=KEY, anchor_path=anchor)
+            marked = json.loads(json.dumps(latest))
+            marked["scoped_edit_claims"][receipt_id]["status"] = "APPLIED_UNVERIFIED"
+            applied = save_runtime(
+                marked, expected_version=2, authority_digest_value=digest,
+                runtime_path=rp, lock_path=lock, runtime_key=KEY,
+                anchor_path=anchor)
+            self.assertEqual(applied["runtime_version"], 3)
+            with self.assertRaisesRegex(StateConflictError, "version changed"):
+                save_runtime(marked, expected_version=2, authority_digest_value=digest,
+                             runtime_path=rp, lock_path=lock,
+                             runtime_key=KEY, anchor_path=anchor)
+            rollback = json.loads(json.dumps(applied))
+            rollback["scoped_edit_claims"][receipt_id]["status"] = (
+                "CLAIMED_PENDING_FILE_APPLY")
+            with self.assertRaisesRegex(StateIntegrityError, "immutable"):
+                save_runtime(rollback, expected_version=3,
+                             authority_digest_value=digest, runtime_path=rp,
+                             lock_path=lock, runtime_key=KEY, anchor_path=anchor)
+            # A direct change to disk is not a valid signed/anchored claim.
+            forged = json.loads(rp.read_text(encoding="utf-8"))
+            forged["scoped_edit_claims"][receipt_id]["status"] = "CLAIMED_PENDING_FILE_APPLY"
+            rp.write_text(json.dumps(forged), encoding="utf-8")
+            with self.assertRaises(StateIntegrityError):
+                load_bundle(ap, rp, runtime_key=KEY, anchor_path=anchor)
+        finally:
+            tmp.cleanup()
+
     def test_runtime_hmac_tamper_fails_closed(self):
         tmp, ap, rp, ep, anchor, lock, digest = self.make_files()
         try:

@@ -9,9 +9,13 @@ This is evidence-gating, not semantic proof that the implementation is correct.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 from pathlib import Path
 from fnmatch import fnmatch
+from trace_to_regression import build_case as build_regression_case
+from codex_task_contract_validator import validate as validate_task_contract
 
 PASS_STATES = {"PASS", "NOT_APPLICABLE"}
 FAIL_STATES = {"FAIL", "UNVERIFIED", "NOT_RUN", "MISSING"}
@@ -31,6 +35,74 @@ def _path_allowed(path: str, allowed: list[str]) -> bool:
         if path == rule or path.startswith(rule.rstrip("/") + "/") or fnmatch(path, rule):
             return True
     return False
+
+def _rework_actions(defects: list[dict]) -> list[dict]:
+    """Route confirmed defects to the right repair surface; never auto-edit a manual."""
+    routes = {
+        "WORK_MANUAL": "RECHECK_MANUAL_BINDING",
+        "DIFF_SCOPE": "RECONCILE_TASK_SCOPE",
+        "CHANGED_FILES": "RECOVER_DIFF_EVIDENCE",
+        "ACCEPTANCE_NOT_PASS": "FIX_IMPLEMENTATION_AND_REGRESSION",
+        "VALIDATION_NOT_PASS": "FIX_IMPLEMENTATION_AND_REGRESSION",
+        "MOBILE_RUNTIME_NOT_PASS": "FIX_IMPLEMENTATION_AND_REGRESSION",
+        "BLOCKING_UNRESOLVED_RISK": "RESOLVE_BLOCKING_RISK",
+    }
+    actions = []
+    seen = set()
+    for defect in defects:
+        code = str(defect.get("code", ""))
+        route = next((value for prefix, value in routes.items() if code.startswith(prefix)),
+                     "RECOVER_VERIFIABLE_EVIDENCE")
+        if route not in seen:
+            actions.append({"route": route, "trigger": code,
+                            "manual_auto_edit": False, "blind_retry_allowed": False})
+            seen.add(route)
+    return actions
+
+
+def _readback_manual_artifact(target: dict) -> tuple[str, str]:
+    """Read a single size-bounded, pinned intake artifact from a fixed local anchor.
+
+    The report cannot choose a path, network URL, command, or alternate anchor.
+    Returns (failure_code, observed_sha256). This checks bytes and declared
+    postconditions, not independent semantic correctness of model work.
+    """
+    if not isinstance(target, dict) or target.get("anchor") != "SOURCE_VAULT_REVIEW_EVENTS":
+        return "WORK_MANUAL_ARTIFACT_ANCHOR_FORBIDDEN", ""
+    name = target.get("name")
+    if not isinstance(name, str) or not re.fullmatch(r"REV-[a-f0-9]{24}[.]json", name):
+        return "WORK_MANUAL_ARTIFACT_NAME_INVALID", ""
+    expected_hash = target.get("sha256")
+    if not isinstance(expected_hash, str) or not re.fullmatch(r"[a-f0-9]{64}", expected_hash):
+        return "WORK_MANUAL_ARTIFACT_HASH_INVALID", ""
+    source_vault = Path(__file__).resolve().parents[3].parent / "TAKY-SOURCE-VAULT"
+    root = source_vault / "data" / "direction_intake" / "review_events"
+    path = root / name
+    try:
+        if path.is_symlink() or path.resolve(strict=True).parent != root.resolve(strict=True):
+            return "WORK_MANUAL_ARTIFACT_PATH_UNSAFE", ""
+        if not path.is_file() or path.stat().st_size > 1024 * 1024:
+            return "WORK_MANUAL_ARTIFACT_SIZE_OR_TYPE_INVALID", ""
+        raw = path.read_bytes()
+        actual_hash = hashlib.sha256(raw).hexdigest()
+        if actual_hash != expected_hash:
+            return "WORK_MANUAL_ARTIFACT_SHA256_MISMATCH", actual_hash
+        doc = json.loads(raw.decode("utf-8-sig"))
+        if not isinstance(doc, dict) or doc.get("event_id", "") + ".json" != name:
+            return "WORK_MANUAL_ARTIFACT_EVENT_ID_INVALID", actual_hash
+        expected = target.get("expected_fields")
+        if not isinstance(expected, dict) or not expected:
+            return "WORK_MANUAL_ARTIFACT_FIELDS_INVALID", actual_hash
+        for key, value in expected.items():
+            if key not in {"schema", "event_id", "review_stage", "index_state",
+                           "forming_state", "canonical_promotion", "source_type"}:
+                return "WORK_MANUAL_ARTIFACT_FIELDS_INVALID", actual_hash
+            if doc.get(key) != value:
+                return "WORK_MANUAL_ARTIFACT_POSTCONDITION_MISMATCH", actual_hash
+        return "", actual_hash
+    except (OSError, ValueError, TypeError, UnicodeError):
+        return "WORK_MANUAL_ARTIFACT_READBACK_FAILED", ""
+
 
 def review(task: dict, report: dict) -> dict:
     defects: list[dict] = []
@@ -112,6 +184,48 @@ def review(task: dict, report: dict) -> dict:
             else:
                 evidence.append({"kind": "mobile_runtime", "evidence": ev})
 
+    # The executor must explicitly state how the selected, SHA-pinned manual
+    # affected the task. This is an evidence claim, NOT independent proof of use.
+    manual = task.get("work_manual_binding")
+    if manual is not None:
+        # A transport checksum alone is not approval of a forged manual binding.
+        for err in validate_task_contract(task):
+            if err.startswith("WORK_MANUAL_"):
+                defects.append({"code": err})
+        applied = report.get("work_manual_evidence")
+        if not isinstance(manual, dict):
+            pass  # Already reported by the validator; never dereference it.
+        elif not isinstance(applied, dict):
+            defects.append({"code": "WORK_MANUAL_EVIDENCE_MISSING"})
+        elif (applied.get("skill_id") != manual.get("skill_id")
+              or applied.get("version_sha256") != manual.get("version_sha256")):
+            defects.append({"code": "WORK_MANUAL_VERSION_MISMATCH"})
+        elif not str(applied.get("execution_implication") or "").strip() or not str(
+                applied.get("evidence_ref") or "").strip():
+            defects.append({"code": "WORK_MANUAL_APPLICATION_EVIDENCE_MISSING"})
+        else:
+            target = manual.get("artifact_evidence")
+            artifact_status = "EXECUTOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED"
+            observed_sha = None
+            if target is not None:
+                if not isinstance(target, dict):
+                    defects.append({"code": "WORK_MANUAL_ARTIFACT_TARGET_INVALID"})
+                elif applied.get("evidence_ref") != (
+                    str(target.get("anchor", "")) + ":" + str(target.get("name", ""))
+                ):
+                    defects.append({"code": "WORK_MANUAL_ARTIFACT_REPORT_REF_MISMATCH"})
+                else:
+                    failure, observed_sha = _readback_manual_artifact(target)
+                    if failure:
+                        defects.append({"code": failure})
+                    else:
+                        artifact_status = "LOCAL_ARTIFACT_READBACK_VERIFIED"
+            evidence.append({"kind": "work_manual", "skill_id": manual["skill_id"],
+                             "version_sha256": manual["version_sha256"],
+                             "status": artifact_status,
+                             "observed_sha256": observed_sha,
+                             "evidence_ref": applied["evidence_ref"]})
+
     if report.get("scope_deviations"):
         defects.append({
             "code": "SCOPE_DEVIATION_REQUIRES_REVIEW",
@@ -134,9 +248,17 @@ def review(task: dict, report: dict) -> dict:
         })
 
     if defects:
+        candidate = None
+        failure_event = report.get("confirmed_failure_event")
+        if isinstance(failure_event, dict):
+            candidate_result = build_regression_case(failure_event)
+            if candidate_result["pass"]:
+                candidate = candidate_result["regression_case"]
         return {
             "pass": False,
             "review_decision": "REWORK",
+            "rework_actions": _rework_actions(defects),
+            "regression_case_candidate": candidate,
             "state_transition": {"current_state": "TAKY_REVIEW", "requested_state": "REWORK"},
             "defects": defects,
             "acceptance_delta": [

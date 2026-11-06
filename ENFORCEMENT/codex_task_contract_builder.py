@@ -131,6 +131,25 @@ def build(record: dict) -> dict:
     if effect_policy is not None:
         task["effect_policy"] = effect_policy
 
+    # Optional, owner-selected existing TAKY skill. Never accept arbitrary
+    # manual paths or executable commands from a task record.
+    if "work_manual_skill_id" in record:
+        skill_id = record["work_manual_skill_id"]
+        manifest_file = Path(__file__).resolve().parents[1] / "TAKY2" / "SKILL_LINKS_MANIFEST.json"
+        manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+        pinned = manifest.get("skills", {}).get(skill_id) if isinstance(skill_id, str) else None
+        task["work_manual_binding"] = {
+            "source": "TAKY_SKILL_MANIFEST",
+            "skill_id": skill_id,
+            "version_sha256": pinned,
+        }
+        if "work_manual_evidence_target" in record:
+            # The caller must provide a specific readback target, not a shell
+            # command or an unbounded filesystem path.
+            task["work_manual_binding"]["artifact_evidence"] = record[
+                "work_manual_evidence_target"
+            ]
+
     errors = validate(task)
     return {
         "pass": not errors,

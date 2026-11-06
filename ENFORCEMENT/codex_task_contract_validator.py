@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -173,6 +174,59 @@ def validate(record):
                 not isinstance(compensation_ref, str) or not compensation_ref.strip()
             ):
                 fail(errors, "EFFECT_COMPENSATION_REF_INVALID")
+
+    # Validate optional TAKY-owned work manual by the checked-in skill manifest
+    # AND the local file bytes. This is binding validation, not runtime execution.
+    if "work_manual_binding" in record:
+        binding = record["work_manual_binding"]
+        if not isinstance(binding, dict) or not {
+            "source", "skill_id", "version_sha256"
+        } <= set(binding) or set(binding) - {
+            "source", "skill_id", "version_sha256", "artifact_evidence"
+        }:
+            fail(errors, "WORK_MANUAL_BINDING_INVALID")
+        elif binding["source"] != "TAKY_SKILL_MANIFEST":
+            fail(errors, "WORK_MANUAL_SOURCE_NOT_APPROVED")
+        else:
+            skill_id = binding["skill_id"]
+            version = binding["version_sha256"]
+            if not isinstance(skill_id, str) or not re.fullmatch(r"[a-z][a-z0-9-]*", skill_id):
+                fail(errors, "WORK_MANUAL_SKILL_ID_INVALID")
+            elif not isinstance(version, str) or not SHA256_HEX.fullmatch(version):
+                fail(errors, "WORK_MANUAL_HASH_INVALID")
+            else:
+                root = Path(__file__).resolve().parents[1]
+                try:
+                    manifest = json.loads(
+                        (root / "TAKY2" / "SKILL_LINKS_MANIFEST.json").read_text(encoding="utf-8")
+                    )
+                    pinned = manifest.get("skills", {}).get(skill_id)
+                    manual_path = root / ".claude" / "skills" / skill_id / "SKILL.md"
+                    actual = hashlib.sha256(manual_path.read_bytes()).hexdigest()
+                    if pinned != version or actual != pinned:
+                        fail(errors, "WORK_MANUAL_VERSION_DRIFT")
+                except (OSError, ValueError, TypeError, KeyError):
+                    fail(errors, "WORK_MANUAL_NOT_READABLE")
+
+    if isinstance(record.get("work_manual_binding"), dict) and "artifact_evidence" in record["work_manual_binding"]:
+        target = record["work_manual_binding"]["artifact_evidence"]
+        valid_keys = {"anchor", "name", "sha256", "expected_fields"}
+        if not isinstance(target, dict) or set(target) != valid_keys:
+            fail(errors, "WORK_MANUAL_ARTIFACT_TARGET_INVALID")
+        else:
+            permitted_fields = {"schema", "event_id", "review_stage", "index_state",
+                                "forming_state", "canonical_promotion", "source_type"}
+            fields = target.get("expected_fields")
+            if target.get("anchor") != "SOURCE_VAULT_REVIEW_EVENTS":
+                fail(errors, "WORK_MANUAL_ARTIFACT_ANCHOR_FORBIDDEN")
+            if not isinstance(target.get("name"), str) or not re.fullmatch(
+                    r"REV-[0-9a-f]{24}[.]json", target["name"]):
+                fail(errors, "WORK_MANUAL_ARTIFACT_NAME_INVALID")
+            if not isinstance(target.get("sha256"), str) or not SHA256_HEX.fullmatch(target["sha256"]):
+                fail(errors, "WORK_MANUAL_ARTIFACT_HASH_INVALID")
+            if (not isinstance(fields, dict) or not fields or set(fields) - permitted_fields
+                    or any(not isinstance(v, (str, bool)) for v in fields.values())):
+                fail(errors, "WORK_MANUAL_ARTIFACT_FIELDS_INVALID")
 
     requested = record.get("requested_transition")
     if requested not in {"CODEX_DONE", "REWORK", "TAKY_REVIEW", "HUMAN_APPROVAL", "MERGED", "DEPLOYED"}:

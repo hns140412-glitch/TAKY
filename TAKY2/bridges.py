@@ -3,6 +3,9 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 import os
+import hashlib
+import json
+import re
 import secrets
 import shutil
 import subprocess
@@ -28,6 +31,187 @@ class BridgeViolation(RuntimeError):
 EXECUTION_EVIDENCE_TYPES = {
     "tool_output", "artifact", "diff", "runtime_test", "state_snapshot",
 }
+
+
+def _check_bound_skill_packet(packet: str, call: Mapping[str, Any]) -> None:
+    """Require the exact model-input skill bytes to match receipt-bound IDs and pins.
+
+    Legacy receipts without a skill_manifest retain the previous packet-digest
+    gate. New receipts cannot self-assert skills different from their stdin.
+    """
+    if "skill_manifest" not in call:
+        return
+    claimed = call["skill_manifest"]
+    if not isinstance(claimed, list) or not 2 <= len(claimed) <= 4:
+        raise BridgeViolation("packet-bound skill manifest invalid")
+    marker = re.compile(
+        r"^PINNED_TAKY_SKILL ([a-z][a-z0-9-]*) sha256=([a-f0-9]{64})\n"
+        r"(.*?)\nEND_PINNED_TAKY_SKILL$", re.MULTILINE | re.DOTALL,
+    )
+    actual = []
+    for match in marker.finditer(packet):
+        name, digest, body = match.groups()
+        raw = body.encode("utf-8")
+        if digest not in (hashlib.sha256(raw).hexdigest(),
+                          hashlib.sha256(b"\xef\xbb\xbf" + raw).hexdigest()):
+            raise BridgeViolation("packet skill bytes differ from pinned hash")
+        actual.append({"name": name, "sha256": digest})
+    if (actual != claimed or len({row["name"] for row in actual}) != len(actual)
+            or not actual or actual[0]["name"] != "authority-check"):
+        raise BridgeViolation("packet skill IDs/hashes differ from signed manifest")
+
+
+
+def _check_bound_council_sources(
+    packet: str, call: Mapping[str, Any], repo_target: object,
+) -> None:
+    """Require exact source bytes in the model stdin for EVERY signed source list.
+
+    Council additionally requires full, non-truncated originals. Ordinary
+    bounded review may show a declared partial excerpt, which is never
+    confused with complete-source evidence or accepted for scoped edits.
+    Legacy calls without any source_manifest are unchanged.
+    """
+    binding = call.get("council_binding")
+    manifest = call.get("source_manifest")
+    if binding is None and manifest is None:
+        return
+    if binding is not None and (not isinstance(binding, Mapping)
+            or binding.get("schema") != "TAKY_COUNCIL_BINDING_V1"):
+        raise BridgeViolation("council source binding invalid")
+    if (not isinstance(manifest, list) or len(manifest) > 8
+            or (binding is not None and not manifest)):
+        raise BridgeViolation(
+            "council source manifest required" if binding is not None
+            else "signed source manifest invalid")
+    if not manifest:
+        if re.search(r"^SOURCE_FILE ", packet, flags=re.MULTILINE):
+            raise BridgeViolation("source blocks cannot be omitted from manifest")
+        return
+    if not isinstance(repo_target, str) or not Path(repo_target).is_absolute():
+        raise BridgeViolation("council source root required")
+    try:
+        root = Path(repo_target).resolve(strict=True)
+    except (OSError, RuntimeError) as exc:
+        raise BridgeViolation("council source root unavailable") from exc
+    if not root.is_dir():
+        raise BridgeViolation("council source root invalid")
+    headers = re.findall(
+        r"^SOURCE_FILE ([^\r\n]+) sha256=([a-f0-9]{64}) "
+        r"included_lines=(\d+)/(\d+)$", packet, flags=re.MULTILINE,
+    )
+    if len(headers) != len(manifest):
+        raise BridgeViolation("council stdin source count differs from manifest")
+    seen: set[str] = set()
+    for item, (header_path, header_sha, inc, total) in zip(manifest, headers):
+        if not isinstance(item, Mapping):
+            raise BridgeViolation("council source manifest entry invalid")
+        rel = item.get("path")
+        sha = item.get("sha256")
+        if (not isinstance(rel, str) or not rel or "\\" in rel
+                or rel.startswith("/") or ":" in rel
+                or any(part in {"", ".", ".."} for part in rel.split("/"))):
+            raise BridgeViolation("council source path invalid")
+        if rel.casefold() in seen:
+            raise BridgeViolation("council source duplicated")
+        seen.add(rel.casefold())
+        if (rel != header_path or sha != header_sha
+                or type(item.get("includedLines")) is not int
+                or type(item.get("totalLines")) is not int
+                or not 0 <= item["includedLines"] <= item["totalLines"]
+                or item["includedLines"] != int(inc)
+                or item["totalLines"] != int(total)
+                or item.get("complete") is not (
+                    item["includedLines"] == item["totalLines"])
+                or (binding is not None
+                    and item["includedLines"] != item["totalLines"])):
+            raise BridgeViolation("council signed source metadata differs from stdin")
+        candidate = root.joinpath(*rel.split("/"))
+        try:
+            if candidate.is_symlink() or not candidate.is_file():
+                raise BridgeViolation("council original source file missing")
+            resolved = candidate.resolve(strict=True)
+            resolved.relative_to(root)
+            if resolved != candidate or candidate.stat().st_size > 1024 * 1024:
+                raise BridgeViolation("council source path unsafe or oversized")
+            raw = candidate.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != sha:
+                raise BridgeViolation("council original source SHA mismatch")
+            body = raw.decode("utf-8-sig")
+        except (OSError, UnicodeError, ValueError) as exc:
+            raise BridgeViolation("council source bytes unreadable or outside root") from exc
+        original_lines = body.splitlines()
+        if len(original_lines) != item["totalLines"]:
+            raise BridgeViolation("source line count changed since signed manifest")
+        numbered = "".join(f"{index:04d}| {line}\n"
+                           for index, line in enumerate(
+                               original_lines[:item["includedLines"]], start=1))
+        expected = (f"\nSOURCE_FILE {rel} sha256={sha} "
+                    f"included_lines={item['includedLines']}/{item['totalLines']}\n"
+                    + numbered + "END_SOURCE_FILE\n")
+        if packet.count(expected) != 1:
+            raise BridgeViolation("council signed source bytes not present in actual stdin")
+
+
+
+
+def target_review_block(target_receipt_id: str, result: Mapping[str, Any],
+                        result_digest: str) -> str:
+    """One exact, bounded result block; this is payload, not a reviewer verdict."""
+    raw = json.dumps(dict(result), ensure_ascii=False, sort_keys=True,
+                     separators=(",", ":"), allow_nan=False)
+    if not 0 < len(raw) <= 16000 or not isinstance(result_digest, str):
+        raise BridgeViolation("target result too large for bounded reviewer")
+    return (f"\nTARGET_REVIEW_EVIDENCE {target_receipt_id} "
+            f"result_digest={result_digest}\n"
+            + raw + "\nEND_TARGET_REVIEW_EVIDENCE\n")
+
+
+def _check_bound_target_review(
+    packet: str, call: Mapping[str, Any], runtime: Mapping[str, Any],
+    review_receipt: Mapping[str, Any],
+) -> dict[str, str] | None:
+    """Prove actual stdin contains the sealed, exact target result bytes."""
+    binding = call.get("target_review_binding")
+    if binding is None:
+        return None
+    if not isinstance(binding, Mapping) or set(binding) != {
+            "schema", "target_receipt_id", "target_result_digest"} or (
+            binding.get("schema") != "TAKY_TARGET_REVIEW_V1"):
+        raise BridgeViolation("TARGET_REVIEW_BINDING_INVALID")
+    if review_receipt.get("action_id") not in {
+            "verify:codex-packet", "review:external-model"}:
+        raise BridgeViolation("TARGET_REVIEW_ACTION_UNAUTHORIZED")
+    target_id = binding.get("target_receipt_id")
+    if (not isinstance(target_id, str)
+            or re.fullmatch(r"pf:[A-Za-z0-9:_-]{8,150}", target_id) is None):
+        raise BridgeViolation("TARGET_REVIEW_RECEIPT_INVALID")
+    target_receipt = runtime.get("preflight_receipts", {}).get(target_id)
+    target_call = runtime.get("execution_calls", {}).get(target_id)
+    if not isinstance(target_receipt, Mapping) or not isinstance(target_call, Mapping):
+        raise BridgeViolation("TARGET_REVIEW_SOURCE_RECEIPT_NOT_FOUND")
+    if target_receipt.get("allowed") is not True:
+        raise BridgeViolation("TARGET_REVIEW_TARGET_PREFLIGHT_UNAUTHORIZED")
+    if target_receipt.get("authority_digest") != review_receipt.get("authority_digest"):
+        raise BridgeViolation("TARGET_REVIEW_AUTHORITY_DRIFT")
+    result = target_call.get("result")
+    if (target_call.get("status") != "RETURNED" or not isinstance(result, Mapping)
+            or result.get("returncode") != 0):
+        raise BridgeViolation("TARGET_REVIEW_TARGET_EXECUTION_NOT_VALID")
+    digest = stable_hash(dict(result))
+    if (digest != target_call.get("result_digest")
+            or digest != binding.get("target_result_digest")):
+        raise BridgeViolation("TARGET_REVIEW_RESULT_DIGEST_MISMATCH")
+    block = target_review_block(target_id, result, digest)
+    if packet.count(block) != 1:
+        raise BridgeViolation("TARGET_REVIEW_RESULT_BYTES_NOT_IN_STDIN")
+    return {
+        "schema": "TAKY_TARGET_REVIEW_RECEIPT_V1",
+        "target_receipt_id": target_id,
+        "target_result_digest": digest,
+        "packet_digest": call["packet_digest"],
+        "review_call_digest": stable_hash(dict(call)),
+    }
 
 
 def _empty_ledger() -> dict[str, Any]:
@@ -773,12 +957,16 @@ def execute_with_receipt(
             raise BridgeViolation("Codex verifier route requires OpenAI provider")
 
     packet_temp_dir = None
+    target_review_proof = None
     if execution_mode == "PACKET_ONLY":
         packet = invocation.get("stdin_text")
         if not isinstance(packet, str) or not packet:
             raise BridgeViolation("PACKET_ONLY execution requires stdin_text packet")
         if stable_hash(packet) != call.get("packet_digest"):
             raise BridgeViolation("PACKET_ONLY stdin packet digest mismatch")
+        _check_bound_skill_packet(packet, call)
+        _check_bound_council_sources(packet, call, active.get("attempt", {}).get("target"))
+        target_review_proof = _check_bound_target_review(packet, call, runtime, receipt)
 
         argv = invocation.get("argv")
         if not isinstance(argv, list) or not argv:
@@ -882,6 +1070,9 @@ def execute_with_receipt(
             raise BridgeViolation("CODEX_VERIFY_ONLY requires stdin_text packet")
         if stable_hash(packet) != call.get("packet_digest"):
             raise BridgeViolation("CODEX_VERIFY_ONLY stdin packet digest mismatch")
+        _check_bound_skill_packet(packet, call)
+        _check_bound_council_sources(packet, call, active.get("attempt", {}).get("target"))
+        target_review_proof = _check_bound_target_review(packet, call, runtime, receipt)
 
         argv = invocation.get("argv")
         if not isinstance(argv, list) or not argv:
@@ -980,6 +1171,8 @@ def execute_with_receipt(
         "method_or_tool": actual_tool,
         "status": "CALLING",
     })
+    if target_review_proof is not None:
+        calls[receipt_id]["target_review_evidence"] = target_review_proof
     updated_active = updated.setdefault("active_attempts", {}).get(execution_key)
     if not isinstance(updated_active, dict):
         raise BridgeViolation("active attempt state is not mutable")
@@ -1034,6 +1227,8 @@ def execute_with_receipt(
         "result": result,
         "status": status,
     })
+    if target_review_proof is not None:
+        calls[receipt_id]["target_review_evidence"]["review_result_digest"] = result_digest
     updated_active["status"] = status
     # Executor is intentionally forbidden from writing SUCCESS/completion/evidence.
     return updated, result

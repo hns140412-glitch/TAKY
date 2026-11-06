@@ -1,5 +1,6 @@
 import unittest
 
+from TAKY2.bridges import BridgeViolation, execute_with_receipt
 from TAKY2.enforcement import action_digest, route_fingerprint, stable_hash
 from TAKY2.orchestration import guidance_for_failure, role_assignment
 from TAKY2.orchestrator import (
@@ -11,6 +12,7 @@ from TAKY2.orchestrator import (
     persist_preflight,
     preflight,
     record_outcome,
+    release_uninvoked_preflight,
 )
 from TAKY2.test_enforcement import startup_receipt, trusted
 
@@ -82,6 +84,18 @@ def plan(method="python", task_id="task-q002", action_id="read"):
 
 
 class OrchestratorTests(unittest.TestCase):
+    def test_executor_result_json_avoids_cp949_serialization_failure(self):
+        import json
+        from pathlib import Path
+
+        # Codex can return em-dashes and Hangul in signed stdout. The execute
+        # command must emit ASCII-safe JSON to Windows PowerShell/CP949 pipes.
+        source = Path(__file__).with_name("orchestrator.py").read_text(encoding="utf-8")
+        self.assertIn('"result": result,\n        }, ensure_ascii=True, indent=2))', source)
+        payload = {"result": {"stdout": "검토 — ACCEPT"}}
+        encoded = json.dumps(payload, ensure_ascii=True).encode("cp949")
+        self.assertEqual(json.loads(encoded.decode("cp949")), payload)
+
     def test_role_category_is_stable_but_implementer_actor_is_task_assigned(self):
         claude = role_assignment(
             {
@@ -164,6 +178,136 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(guidance["mode"], "REDIRECT")
         self.assertFalse(guidance["terminal"])
         self.assertIn("trusted USER intent", guidance["next_action"])
+
+    def test_failed_local_route_is_rebound_to_trusted_alternative(self):
+        t = trusted()
+        t["action_registry"]["read"]["recovery_routes"] = [
+            {"method_or_tool": "local-alt", "target": "Q002"}
+        ]
+        original = plan()
+        first = preflight(original, t)
+        runtime = persist_preflight(runtime_state(), first)
+        runtime = record_outcome(runtime, first["receipt_id"], "VALIDATION")
+        t["route_ledgers"] = runtime["route_ledgers"]
+        t["active_attempts"] = runtime["active_attempts"]
+        rerouted = preflight(plan(task_id="second"), t)
+        self.assertTrue(rerouted["allowed"])
+        self.assertFalse(rerouted["call_allowed"])
+        self.assertEqual(rerouted["mode"], "CORRECTED_LOCAL_ONLY")
+        self.assertEqual(rerouted["correction"]["gate"], "ROUTE")
+        self.assertEqual(rerouted["attempt"]["target"], "Q002")
+        self.assertEqual(rerouted["attempt"]["method_or_tool"], "local-alt")
+        self.assertEqual(rerouted["correction"]["before"]["attempt"], original["attempt"])
+        self.assertEqual(rerouted["plan_digest"], rerouted["corrected_plan_digest"])
+        self.assertNotEqual(rerouted["plan_digest"], rerouted["original_plan_digest"])
+        saved = persist_preflight(runtime, rerouted)
+        active = saved["active_attempts"][rerouted["execution_key"]]
+        self.assertEqual(active["attempt"]["method_or_tool"], "local-alt")
+        self.assertEqual(active["route_fp"], route_fingerprint(rerouted["attempt"]))
+        self.assertEqual(saved["preflight_receipts"][rerouted["receipt_id"]]["call_allowed"], False)
+
+    def test_recovered_route_runs_through_existing_receipt_executor(self):
+        t = trusted()
+        t["action_registry"]["read"]["recovery_routes"] = [
+            {"method_or_tool": "python3"}
+        ]
+        first = preflight(plan(), t)
+        runtime = record_outcome(
+            persist_preflight(runtime_state(), first), first["receipt_id"], "VALIDATION"
+        )
+        t["route_ledgers"] = runtime["route_ledgers"]
+        out = preflight(plan(task_id="recovered"), t)
+        self.assertTrue(out["allowed"])
+        saved = persist_preflight(runtime, out)
+        provenance = saved["preflight_receipts"][out["receipt_id"]]["correction_provenance"]
+        self.assertEqual(provenance["gate"], "ROUTE")
+        self.assertEqual(provenance["original_plan_digest"], out["original_plan_digest"])
+        invocation = {
+            "call": plan()["call"], "provider": "local",
+            "method_or_tool": "python3", "argv": ["python", "-c", "print('local')"],
+        }
+        attempted = []
+        runner = lambda item: (attempted.append(item) or {"returncode": 0, "stdout": "local"})
+        with self.assertRaisesRegex(BridgeViolation, "route does not match"):
+            execute_with_receipt(
+                saved, out["receipt_id"], {**invocation, "method_or_tool": "python"},
+                runner=runner, executor_id="TEST_LOCAL",
+            )
+        self.assertEqual(attempted, [])  # old route never invokes
+        executed, result = execute_with_receipt(
+            saved, out["receipt_id"], invocation,
+            runner=runner, executor_id="TEST_LOCAL",
+        )
+        self.assertEqual(result["returncode"], 0)
+        self.assertEqual(len(attempted), 1)
+        self.assertEqual(
+            executed["execution_calls"][out["receipt_id"]]["method_or_tool"], "python3"
+        )
+        self.assertEqual(
+            executed["execution_calls"][out["receipt_id"]]["status"], "RETURNED"
+        )
+        self.assertFalse(executed.get("completion_registry"))  # execution != DONE
+
+    def test_route_recovery_is_never_defined_by_untrusted_request(self):
+        t = trusted()
+        first = preflight(plan(), t)
+        runtime = persist_preflight(runtime_state(), first)
+        runtime = record_outcome(runtime, first["receipt_id"], "VALIDATION")
+        t["route_ledgers"] = runtime["route_ledgers"]
+        p = plan(task_id="second")
+        p["recovery_routes"] = [{"method_or_tool": "client-supplied-alt"}]
+        out = preflight(p, t)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "ROUTE")
+
+    def test_route_recovery_rejects_target_capability_or_tool_contract_changes(self):
+        t = trusted()
+        t["action_registry"]["read"]["recovery_routes"] = [
+            {"method_or_tool": "other-target", "target": "NOT_Q002"},
+            {"method_or_tool": "other-capability", "needed_capability": "REMOTE_WRITE"},
+            {"method_or_tool": "local-alt"},
+        ]
+        p = plan()
+        p["attempt"]["needed_capability"] = "READ_SOURCE"
+        first = preflight(p, t)
+        runtime = record_outcome(
+            persist_preflight(runtime_state(), first), first["receipt_id"], "VALIDATION"
+        )
+        t["route_ledgers"] = runtime["route_ledgers"]
+        second = plan(task_id="second")
+        second["attempt"]["needed_capability"] = "READ_SOURCE"
+        second["tool_action"] = {
+            "purpose": "read local data", "operation": "read", "target": "Q002",
+            "transport": "connector",
+        }
+        blocked = preflight(second, t)
+        self.assertFalse(blocked["allowed"])
+        self.assertEqual(blocked["blocked_by"], "ROUTE")
+        second.pop("tool_action")
+        out = preflight(second, t)
+        self.assertTrue(out["allowed"])
+        self.assertEqual(out["attempt"]["method_or_tool"], "local-alt")
+        self.assertEqual(out["attempt"]["needed_capability"], "READ_SOURCE")
+
+    def test_exhausted_registered_alternatives_leave_route_blocked(self):
+        t = trusted()
+        t["action_registry"]["read"]["recovery_routes"] = [
+            {"method_or_tool": "also-failed"}
+        ]
+        p1 = preflight(plan(method="python"), t)
+        runtime = record_outcome(
+            persist_preflight(runtime_state(), p1), p1["receipt_id"], "VALIDATION"
+        )
+        t["route_ledgers"] = runtime["route_ledgers"]
+        p2 = preflight(plan(method="also-failed", task_id="failed-alt"), t)
+        runtime = record_outcome(
+            persist_preflight(runtime, p2), p2["receipt_id"], "VALIDATION"
+        )
+        t["route_ledgers"] = runtime["route_ledgers"]
+        out = preflight(plan(task_id="third"), t)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["blocked_by"], "ROUTE")
+        self.assertIsNone(out["receipt_id"])
 
     def test_safe_cost_misroute_is_auto_corrected(self):
         tr = trusted()

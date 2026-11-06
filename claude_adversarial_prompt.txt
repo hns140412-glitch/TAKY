@@ -1,0 +1,35 @@
+Independent adversarial review for TAKY2. READ ONLY. Do not edit files, create commits, push, merge, or deploy.
+
+Repository: D:\Git PWA\TAKY-2.0-ORCH
+Branch: taky-2.0-orchestrator-2026-10-05
+Review the CURRENT UNCOMMITTED DIFF only, excluding the pre-existing user-owned dirty file TAKY2/COMPARISON_BETA_ALPHA_TAKY2_20261005.md.
+
+Authority/context to read only as needed:
+- TAKY2/NEW_CHAT_START_20261006_LATEST.md
+- TAKY2/CURRENT_CANDIDATE_PROGRESS_POINTER_20261006.md
+- TAKY2/TAKY_SYSTEMWIDE_LOGIC_RECONCILIATION_V3_CANDIDATE_20261006.md
+- TAKY2/GONGBANG_REVIEW_PROTOCOL_V1.md
+- TAKY2/state/authority.json
+
+Attack P0/P1 runtime correctness only. Verify these invariants:
+1) formal structure is ROLE_BASED_COLLABORATIVE_EXECUTION_STRUCTURE; Shepherding/Border Collie is metaphor only.
+2) ROLE != AGENT: role_registry separate from default_actor_bindings; verifier/reviewer roles separate from CODEX/CLAUDE actors.
+3) semantic_owner_ref/scope is first-class from action -> preflight -> evidence/completion -> DONE; tool/router/projection cannot seize ownership.
+4) owner registry preserves OWNER_GAP instead of guessing.
+5) Driver and COST consume one shared SAVEY_AI_ECONOMY evaluation; Necessity is not a sixth Gate.
+6) Control Incident Trace is structured and recoverable paths do not crash.
+7) Worker Roles are task-fit reusable profiles, not a mandatory 8-stage pipeline.
+8) startup readback receipt blocks mutation when missing/stale and is authority/source bound.
+9) technical delivery != USER confirmation; explicit receipt-bound USER event required.
+10) signed authority rebind path remains fail-closed and KEY_AMEND is not faked.
+
+You may run read-only git diff/status/grep and tests if needed. Do not write.
+Return concise structured findings only:
+- FINDING ID
+- severity P0/P1/P2
+- exact file:line evidence
+- attack scenario
+- whether existing defense survives
+- recommended minimal fix
+Then verdict: CLOSE / CLOSE_WITH_NOTE / HOLD.
+If there are no P0/P1 findings, state that explicitly.

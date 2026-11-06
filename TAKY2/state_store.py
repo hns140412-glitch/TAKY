@@ -402,6 +402,79 @@ def _validate_economy_evidence_transition(
                 raise StateIntegrityError(f"economy evidence {field} missing")
 
 
+
+
+def _validate_scoped_edit_claim_transition(
+    current: Dict[str, Any], candidate: Dict[str, Any],
+    authority_digest_value: str,
+) -> None:
+    """Append-only, one-way local edit claims in the existing signed runtime."""
+    previous = current.get("scoped_edit_claims", {})
+    incoming = candidate.get("scoped_edit_claims", {})
+    if not isinstance(previous, dict) or not isinstance(incoming, dict):
+        raise StateIntegrityError("scoped edit claims must be an object")
+    if any(ref not in incoming for ref in previous):
+        raise StateIntegrityError("scoped edit claim cannot be removed")
+    for ref, item in incoming.items():
+        if not isinstance(ref, str) or not isinstance(item, dict):
+            raise StateIntegrityError("scoped edit claim malformed")
+        if set(item) != {
+            "schema", "receipt_id", "task_id", "task_file_sha256",
+            "proposal_digest", "files", "status", "authority_digest",
+        }:
+            raise StateIntegrityError("scoped edit claim fields invalid")
+        if (item.get("schema") != "TAKY_SCOPED_EDIT_CLAIM_V1"
+                or item.get("receipt_id") != ref
+                or not ref.startswith("pf:external-review-")
+                or not isinstance(item.get("task_id"), str)
+                or len(item["task_id"]) != 32
+                or not all(x in "0123456789abcdef" for x in item["task_id"])
+                or not ref.startswith("pf:external-review-" + item["task_id"] + ":")
+                or not isinstance(item.get("task_file_sha256"), str)
+                or len(item["task_file_sha256"]) != 64
+                or not all(x in "0123456789abcdef" for x in item["task_file_sha256"])
+                or not isinstance(item.get("proposal_digest"), str)
+                or len(item["proposal_digest"]) != 20
+                or not all(x in "0123456789abcdef" for x in item["proposal_digest"])
+                or not isinstance(item.get("authority_digest"), str)):
+            raise StateIntegrityError("scoped edit claim identity invalid")
+        files = item.get("files")
+        if not isinstance(files, list) or not 1 <= len(files) <= 25:
+            raise StateIntegrityError("scoped edit claim file list invalid")
+        names = set()
+        for entry in files:
+            if not isinstance(entry, dict) or set(entry) != {
+                    "path", "before_sha256", "after_sha256"}:
+                raise StateIntegrityError("scoped edit claim file malformed")
+            path = entry["path"]
+            if (not isinstance(path, str) or not path or "\\" in path
+                    or any(part in {"", ".", ".."} for part in path.split("/"))
+                    or path in names):
+                raise StateIntegrityError("scoped edit claim file path invalid")
+            names.add(path)
+            for field in ("before_sha256", "after_sha256"):
+                value = entry[field]
+                if (not isinstance(value, str) or len(value) != 64
+                        or not all(x in "0123456789abcdef" for x in value)):
+                    raise StateIntegrityError("scoped edit claim file digest invalid")
+            if entry["before_sha256"] == entry["after_sha256"]:
+                raise StateIntegrityError("scoped edit claim unchanged file")
+        old = previous.get(ref)
+        if old is None:
+            if (item.get("status") != "CLAIMED_PENDING_FILE_APPLY"
+                    or item["authority_digest"] != authority_digest_value):
+                raise StateIntegrityError("scoped edit claim must start pending")
+            continue
+        if old == item:
+            continue
+        if (old.get("status") != "CLAIMED_PENDING_FILE_APPLY"
+                or item.get("status") != "APPLIED_UNVERIFIED"
+                or old.get("authority_digest") != authority_digest_value
+                or {k: v for k, v in old.items() if k != "status"}
+                  != {k: v for k, v in item.items() if k != "status"}):
+            raise StateIntegrityError("scoped edit claim immutable or invalid transition")
+
+
 def save_runtime(
     runtime: Dict[str, Any],
     *,
@@ -431,6 +504,9 @@ def save_runtime(
             current,
             runtime,
             authority_digest_value,
+        )
+        _validate_scoped_edit_claim_transition(
+            current, runtime, authority_digest_value,
         )
 
         updated = dict(runtime)

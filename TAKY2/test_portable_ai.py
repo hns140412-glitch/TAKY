@@ -78,13 +78,40 @@ class PortableAITests(unittest.TestCase):
         item = self.new()
         plan = self.sources / 'plan.json'
         inv = self.sources / 'invoke.json'
-        plan.write_text(json.dumps({'call': {'model': 'codex'}}), encoding='utf-8')
+        plan.write_text(json.dumps({'task_id': item['task_id'], 'call': {'model': 'codex'}}), encoding='utf-8')
         inv.write_text(json.dumps({'call': {'model': 'codex'}}), encoding='utf-8')
         with patch('TAKY2.portable_ai.__main__._validate_local_json', side_effect=[plan, inv]):
             with patch('TAKY2.portable_ai.__main__.subprocess.run', side_effect=subprocess.TimeoutExpired('preflight', 1)):
                 with self.assertRaises(subprocess.TimeoutExpired):
                     execute_gated(self.root, item['task_id'], str(plan), str(inv))
         self.assertEqual(show(self.root, item['task_id'])['execution']['state'], 'PREFLIGHT_ATTEMPTED_OUTCOME_UNKNOWN')
+
+    def test_cross_task_contract_cannot_claim_another_task(self):
+        task = self.new()
+        different = self.new()
+        plan = self.sources / 'plan_cross_task.json'
+        inv = self.sources / 'invoke_cross_task.json'
+        call = {'model': 'codex'}
+        plan.write_text(json.dumps({'task_id': different['task_id'], 'call': call}), encoding='utf-8')
+        inv.write_text(json.dumps({'task_id': task['task_id'], 'call': call}), encoding='utf-8')
+        with patch('TAKY2.portable_ai.__main__._validate_local_json', side_effect=[plan, inv]):
+            with patch('TAKY2.portable_ai.__main__.subprocess.run') as provider:
+                with self.assertRaisesRegex(PortableError, 'plan task_id does not match'):
+                    execute_gated(self.root, task['task_id'], str(plan), str(inv))
+                provider.assert_not_called()
+        self.assertEqual(show(self.root, task['task_id'])['status'], 'SUBMITTED')
+        self.assertIsNone(show(self.root, task['task_id'])['execution'])
+
+        # A separately forged invocation identity is rejected as well.
+        plan.write_text(json.dumps({'task_id': task['task_id'], 'call': call}), encoding='utf-8')
+        inv.write_text(json.dumps({'task_id': different['task_id'], 'call': call}), encoding='utf-8')
+        with patch('TAKY2.portable_ai.__main__._validate_local_json', side_effect=[plan, inv]):
+            with patch('TAKY2.portable_ai.__main__.subprocess.run') as provider:
+                with self.assertRaisesRegex(PortableError, 'invocation task_id does not match'):
+                    execute_gated(self.root, task['task_id'], str(plan), str(inv))
+                provider.assert_not_called()
+        self.assertEqual(show(self.root, task['task_id'])['status'], 'SUBMITTED')
+        self.assertIsNone(show(self.root, task['task_id'])['execution'])
 
     def test_dashboard_is_escaped_and_read_only(self):
         self.new()

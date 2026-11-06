@@ -929,6 +929,28 @@ class ExecutorVerifierUserBridgeTests(unittest.TestCase):
 
 
 class AuthorityRebindTests(unittest.TestCase):
+    def test_receipt_bound_skill_bytes_are_verified_before_model_invocation(self):
+        import hashlib
+        from TAKY2.bridges import _check_bound_skill_packet
+
+        blocks = []
+        manifest = []
+        for name in ("authority-check", "cross-model-review"):
+            body = "---\nname: " + name + "\n---\nDo not overclaim.\n"
+            sha = hashlib.sha256(body.encode("utf-8")).hexdigest()
+            blocks.append(f"\nPINNED_TAKY_SKILL {name} sha256={sha}\n{body}\nEND_PINNED_TAKY_SKILL\n")
+            manifest.append({"name": name, "sha256": sha})
+        packet = "BASE INPUT\n" + "".join(blocks) + "TASK:\nReview code\n"
+        _check_bound_skill_packet(packet, {"skill_manifest": manifest})
+        with self.assertRaisesRegex(BridgeViolation, "bytes differ"):
+            _check_bound_skill_packet(packet.replace("Do not overclaim", "Claim success"),
+                                      {"skill_manifest": manifest})
+        with self.assertRaisesRegex(BridgeViolation, "IDs/hashes differ"):
+            swapped = list(reversed(manifest))
+            _check_bound_skill_packet(packet, {"skill_manifest": swapped})
+        _check_bound_skill_packet(packet, {})  # Legacy signed receipts remain supported.
+
+
     def make_state(self, old_authority=None):
         tmp = tempfile.TemporaryDirectory()
         root = Path(tmp.name)
@@ -1295,6 +1317,168 @@ class AuthorityRebindTests(unittest.TestCase):
         self.assertTrue(result["cwd"])
         self.assertFalse(Path(result["cwd"]).exists())
         self.assertIn(out["receipt_id"], updated["execution_calls"])
+
+
+    def test_packet_only_guard_checks_actual_council_stdin_before_runner(self):
+        import hashlib
+        from unittest.mock import Mock
+        runtime, out, invocation = self._prepared_external_review()
+        with tempfile.TemporaryDirectory(prefix="TAKY2_COUNCIL_BRIDGE_") as root:
+            source = Path(root) / "ENFORCEMENT" / "input.py"
+            source.parent.mkdir(parents=True)
+            source.write_bytes(b"answer = 42\n")
+            sha = hashlib.sha256(source.read_bytes()).hexdigest()
+            packet = (
+                f"REVIEW INPUT\n\nSOURCE_FILE ENFORCEMENT/input.py sha256={sha} "
+                "included_lines=1/1\n0001| answer = 42\nEND_SOURCE_FILE\n"
+            )
+            invocation["call"].update({
+                "execution_mode": "PACKET_ONLY",
+                "packet_digest": stable_hash(packet),
+                "council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1"},
+                "source_manifest": [{
+                    "path": "ENFORCEMENT/input.py",
+                    "sha256": sha, "includedLines": 1, "totalLines": 1,
+                    "complete": True,
+                }],
+            })
+            invocation["stdin_text"] = packet
+            invocation["argv"] = [
+                str((Path.home() / ".local" / "bin" / "claude.exe").resolve()),
+                "-p", "--input-format", "text", "--output-format", "json",
+                "--model", "sonnet", "--effort", "medium",
+                "--tools", "", "--permission-prompts", "none",
+                "--no-session-persistence", "--strict-mcp-config",
+                "--setting-sources", "", "--settings", "{}",
+            ]
+            receipt = runtime["preflight_receipts"][out["receipt_id"]]
+            runtime["active_attempts"][receipt["execution_key"]]["attempt"]["target"] = root
+            receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+            executed = Mock(return_value={"ok": True})
+            updated, result = execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="claude-test", runner=executed,
+            )
+            self.assertTrue(result["ok"])
+            executed.assert_called_once()
+            tampered = dict(invocation)
+            tampered["stdin_text"] = packet.replace("answer = 42", "answer = 0")
+            tampered["call"] = {**invocation["call"],
+                                "packet_digest": stable_hash(tampered["stdin_text"])}
+            receipt["call_digest"] = stable_hash(dict(tampered["call"]))
+            blocked = Mock(return_value={"ok": True})
+            with self.assertRaisesRegex(BridgeViolation, "source bytes not present"):
+                execute_with_receipt(
+                    runtime, out["receipt_id"], tampered,
+                    executor_id="claude-test", runner=blocked,
+                )
+            blocked.assert_not_called()
+
+
+    def test_codex_verify_route_holds_council_without_source_in_stdin(self):
+        from unittest.mock import Mock
+        runtime, out, invocation = self._prepared_external_review()
+        invocation["call"].update({
+            "model": "codex",
+            "execution_mode": "CODEX_VERIFY_ONLY",
+            "council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1"},
+            "source_manifest": [{
+                "path": "ENFORCEMENT/missing.py", "sha256": "a" * 64,
+                "includedLines": 1, "totalLines": 1, "complete": True,
+            }],
+        })
+        packet = "This model packet has no real source attached"
+        invocation["stdin_text"] = packet
+        invocation["call"]["packet_digest"] = stable_hash(packet)
+        invocation["provider"] = "openai"
+        invocation["method_or_tool"] = "codex"
+        invocation["argv"] = [str((Path.home() / "AppData" / "Roaming"
+                                   / "npm" / "codex.cmd").resolve()), "exec", "-"]
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        active = runtime["active_attempts"][receipt["execution_key"]]["attempt"]
+        active["method_or_tool"] = "codex"
+        active["target"] = str(Path(tempfile.gettempdir()).resolve())
+        blocked = Mock(return_value={"ok": True})
+        with self.assertRaisesRegex(BridgeViolation, "source count differs"):
+            execute_with_receipt(
+                runtime, out["receipt_id"], invocation,
+                executor_id="codex-test", runner=blocked,
+            )
+        blocked.assert_not_called()
+
+
+    def test_target_result_attachment_validation(self):
+        from TAKY2.bridges import _check_bound_target_review, target_review_block
+        tid = "pf:target:1111111111111111"
+        data = {"returncode": 0, "stdout": "review full content", "stderr": ""}
+        digest = stable_hash(data)
+        scope = {"preflight_receipts": {tid: {"authority_digest": "a", "allowed": True}},
+                 "execution_calls": {tid: {
+                     "status": "RETURNED", "result": data, "result_digest": digest}}}
+        binding = {"schema": "TAKY_TARGET_REVIEW_V1",
+                   "target_receipt_id": tid, "target_result_digest": digest}
+        packet = "TASK review\n" + target_review_block(tid, data, digest)
+        call = {"target_review_binding": binding, "packet_digest": stable_hash(packet)}
+        review = {"authority_digest": "a", "action_id": "review:external-model"}
+        result = _check_bound_target_review(packet, call, scope, review)
+        self.assertEqual(result["target_result_digest"], digest)
+        with self.assertRaisesRegex(BridgeViolation, "NOT_IN_STDIN"):
+            _check_bound_target_review("TASK only", call, scope, review)
+        scope["execution_calls"][tid]["result"]["stdout"] = "changed"
+        with self.assertRaisesRegex(BridgeViolation, "DIGEST_MISMATCH"):
+            _check_bound_target_review(packet, call, scope, review)
+
+
+    def test_model_runner_receives_bound_target_before_receipt_proof(self):
+        from unittest.mock import Mock
+        from TAKY2.bridges import target_review_block
+        runtime, out, invocation = self._prepared_external_review()
+        target_id = "pf:target:feedcafe12345678"
+        content = {"returncode": 0, "stdout": "review subject", "stderr": ""}
+        digest = stable_hash(content)
+        receipt = runtime["preflight_receipts"][out["receipt_id"]]
+        receipt["action_id"] = "review:external-model"
+        runtime["preflight_receipts"][target_id] = {
+            "allowed": True,
+            "authority_digest": receipt["authority_digest"]}
+        runtime.setdefault("execution_calls", {})[target_id] = {
+            "status": "RETURNED", "result": content, "result_digest": digest}
+        packet = "TASK\n" + target_review_block(target_id, content, digest)
+        invocation["stdin_text"] = packet
+        invocation["call"].update({
+            "execution_mode": "PACKET_ONLY", "packet_digest": stable_hash(packet),
+            "target_review_binding": {"schema": "TAKY_TARGET_REVIEW_V1",
+                "target_receipt_id": target_id, "target_result_digest": digest}})
+        invocation["argv"] = [
+            str((Path.home() / ".local" / "bin" / "claude.exe").resolve()),
+            "-p", "--input-format", "text", "--output-format", "json",
+            "--model", "sonnet", "--effort", "medium", "--tools", "",
+            "--permission-prompts", "none", "--no-session-persistence",
+            "--strict-mcp-config", "--setting-sources", "", "--settings", "{}"]
+        receipt["call_digest"] = stable_hash(dict(invocation["call"]))
+        runner = Mock(return_value={"returncode": 0, "stdout": "{}", "stderr": ""})
+        updated, _ = execute_with_receipt(
+            runtime, out["receipt_id"], invocation,
+            executor_id="TAKY_MODEL_REVIEW_CLAUDE", runner=runner)
+        runner.assert_called_once()
+        proof = updated["execution_calls"][out["receipt_id"]]["target_review_evidence"]
+        self.assertEqual(proof["target_receipt_id"], target_id)
+        self.assertEqual(proof["review_call_digest"], receipt["call_digest"])
+        self.assertEqual(proof["review_result_digest"],
+                         updated["execution_calls"][out["receipt_id"]]["result_digest"])
+        tampered = dict(invocation)
+        tampered["stdin_text"] = "TASK only"
+        tampered["call"] = {**invocation["call"],
+                            "packet_digest": stable_hash("TASK only")}
+        runtime["preflight_receipts"][out["receipt_id"]]["call_digest"] = (
+            stable_hash(dict(tampered["call"])))
+        rejected = Mock(return_value={"returncode": 0})
+        with self.assertRaisesRegex(BridgeViolation, "NOT_IN_STDIN"):
+            execute_with_receipt(runtime, out["receipt_id"], tampered,
+                                 executor_id="TAKY_MODEL_REVIEW_CLAUDE",
+                                 runner=rejected)
+        rejected.assert_not_called()
 
     def test_subscription_route_rejects_api_key_injection(self):
         runtime, out, invocation = self._prepared_external_review()
@@ -2054,6 +2238,109 @@ def test_subprocess_runner_times_out_noninteractive_hang_instead_of_waiting_fore
     assert result["outcome_unknown"] is True
     assert result["timeout_sec"] == 0.1
     assert "TAKY_NONINTERACTIVE_TIMEOUT" in result["stderr"]
+
+
+
+class CouncilStdinSourceBindingTests(unittest.TestCase):
+    """Attacker-controlled metadata cannot masquerade as actual model stdin."""
+
+    def setUp(self):
+        import hashlib
+        self.temp = tempfile.TemporaryDirectory(prefix="TAKY2_COUNCIL_SOURCE_")
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        relative = "ENFORCEMENT/decision.py"
+        source = self.root / relative
+        source.parent.mkdir(parents=True)
+        body = "def choose():\n    return 'existing'\n"
+        source.write_bytes(body.encode("utf-8"))
+        self.relative = relative
+        self.original = body
+        self.sha = hashlib.sha256(source.read_bytes()).hexdigest()
+        self.row = {"path": relative, "sha256": self.sha,
+                    "includedLines": 2, "totalLines": 2, "complete": True}
+        self.packet = (
+            f"REVIEW INPUT\n\nSOURCE_FILE {relative} sha256={self.sha} included_lines=2/2\n"
+            + "0001| def choose():\n0002|     return 'existing'\nEND_SOURCE_FILE\n"
+        )
+        self.call = {
+            "council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1"},
+            "source_manifest": [dict(self.row)],
+        }
+
+    def check(self, packet=None, call=None, root=None):
+        from TAKY2.bridges import _check_bound_council_sources
+        _check_bound_council_sources(
+            self.packet if packet is None else packet,
+            self.call if call is None else call,
+            str(self.root if root is None else root),
+        )
+
+
+    def test_non_council_signed_complete_source_also_bound_to_actual_stdin(self):
+        ordinary = {"source_manifest": [dict(self.row)]}
+        self.check(call=ordinary)
+        with self.assertRaisesRegex(BridgeViolation, "not present in actual stdin"):
+            self.check(packet=self.packet.replace("existing", "different"),
+                       call=ordinary)
+
+    def test_read_only_partial_source_must_match_declared_original_excerpt(self):
+        partial = {"source_manifest": [{
+            **self.row, "includedLines": 1, "complete": False}]}
+        packet = (f"REVIEW INPUT\n\nSOURCE_FILE {self.relative} sha256={self.sha} "
+                  "included_lines=1/2\n0001| def choose():\nEND_SOURCE_FILE\n")
+        self.check(packet=packet, call=partial)
+        with self.assertRaisesRegex(BridgeViolation, "not present in actual stdin"):
+            self.check(packet=packet.replace("def choose()", "def fake()"),
+                       call=partial)
+        with self.assertRaisesRegex(BridgeViolation, "metadata differs"):
+            self.check(packet=packet, call={
+                "council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1"},
+                "source_manifest": partial["source_manifest"]})
+
+    def test_good_exact_model_stdin_matches_original_bytes(self):
+        self.check()
+
+    def test_model_stdin_omits_or_modifies_source(self):
+        for text in ("REVIEW INPUT\n", self.packet.replace("return 'existing'", "return 'unsafe'")):
+            with self.subTest(text=text[:20]):
+                with self.assertRaises(BridgeViolation):
+                    self.check(packet=text)
+
+    def test_signed_manifest_hash_does_not_prove_unseen_file_content(self):
+        source = self.root / self.relative
+        source.write_text("def choose():\n    return 'changed'\n", encoding="utf-8")
+        with self.assertRaisesRegex(BridgeViolation, "SHA mismatch"):
+            self.check()
+
+    def test_truncated_or_mismatched_manifest_rejected(self):
+        for mutate in (
+            {"complete": False},
+            {"includedLines": 1},
+            {"sha256": "e" * 64},
+            {"path": "ENFORCEMENT/other.py"},
+        ):
+            call = {"council_binding": self.call["council_binding"],
+                    "source_manifest": [{**self.row, **mutate}]}
+            with self.subTest(mutate=mutate):
+                with self.assertRaises(BridgeViolation):
+                    self.check(call=call)
+
+    def test_path_traversal_and_duplicate_source_block(self):
+        call = {"council_binding": self.call["council_binding"],
+                "source_manifest": [{**self.row, "path": "../decision.py"}]}
+        with self.assertRaises(BridgeViolation):
+            self.check(call=call)
+        with self.assertRaisesRegex(BridgeViolation, "count differs"):
+            self.check(packet=self.packet + self.packet[self.packet.index("\nSOURCE_FILE"):])
+
+    def test_council_without_signed_manifest_fails_closed(self):
+        with self.assertRaisesRegex(BridgeViolation, "manifest required"):
+            self.check(call={"council_binding": {"schema": "TAKY_COUNCIL_BINDING_V1"}})
+
+    def test_missing_signed_source_root_raises_controlled_hold(self):
+        with self.assertRaisesRegex(BridgeViolation, "source root unavailable"):
+            self.check(root=self.root / "definitely-missing")
 
 
 def test_subprocess_runner_rejects_invalid_noninteractive_timeout():

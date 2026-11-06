@@ -34,6 +34,7 @@ from .bridges import (
 from .orchestration import guidance_for_failure, role_assignment, validator_profile
 from .state_store import (
     StateConflictError,
+    StateIntegrityError,
     initialize_runtime,
     load_bundle,
     save_runtime,
@@ -271,6 +272,74 @@ def _safe_correction_for_failure(
     return corrected, correction
 
 
+def _trusted_local_route_recovery(
+    plan: Mapping[str, Any],
+    trusted: Mapping[str, Any],
+    action: Mapping[str, Any],
+    *,
+    gate: str,
+    correction_depth: int,
+) -> Dict[str, Any] | None:
+    """Actually re-preflight trusted alternative LOCAL methods; never alter intent or authority.
+
+    Alternatives belong to the registered action (not the untrusted request).
+    A method-only correction cannot rewrite tool_action/transport, change target,
+    elevate action kind or cost, or turn a failed route into a successful claim.
+    The caller must persist the returned signed preflight receipt before execution.
+    """
+    if gate != "ROUTE" or correction_depth >= 1:
+        return None
+    if action.get("kind") not in {"READ", "LOCAL_WRITE"}:
+        return None
+    policy = action.get("call_policy")
+    if not isinstance(policy, Mapping) or policy.get("mode") != "LOCAL_ONLY":
+        return None
+    if plan.get("tool_action") is not None:
+        return None  # Tool execution contract must be rebound by its authority owner.
+    candidates = action.get("recovery_routes")
+    attempt = plan.get("attempt")
+    if not isinstance(candidates, list) or not isinstance(attempt, Mapping):
+        return None
+    original_method = attempt.get("method_or_tool")
+    original_target = attempt.get("target")
+    original_capability = attempt.get("needed_capability")
+    if not isinstance(original_target, str) or not original_target:
+        return None
+    seen = {original_method}
+    for route in candidates:
+        if not isinstance(route, Mapping) or set(route) - {"method_or_tool", "target", "needed_capability"}:
+            continue
+        method = route.get("method_or_tool")
+        if not isinstance(method, str) or not method.strip() or method in seen:
+            continue
+        seen.add(method)
+        if route.get("target", original_target) != original_target:
+            continue
+        if route.get("needed_capability", original_capability) != original_capability:
+            continue
+        corrected = deepcopy(dict(plan))
+        corrected["attempt"]["method_or_tool"] = method
+        retry = preflight(corrected, trusted, _correction_depth=correction_depth + 1)
+        if retry.get("allowed") is not True or retry.get("call_allowed") is True:
+            continue
+        retry = dict(retry)
+        retry["correction"] = {
+            "status": "CORRECTED",
+            "terminal": False,
+            "gate": "ROUTE",
+            "state": "TRUSTED_LOCAL_ROUTE_RECOVERY",
+            "before": {"attempt": deepcopy(dict(attempt))},
+            "after": {"attempt": deepcopy(dict(corrected["attempt"]))},
+            "source": "REGISTERED_ACTION_RECOVERY_ROUTES",
+            "principle": "preserve USER intent, target, capability, action and cost",
+        }
+        retry["original_plan_digest"] = stable_hash(dict(plan))
+        retry["corrected_plan_digest"] = stable_hash(dict(corrected))
+        retry["mode"] = "CORRECTED_LOCAL_ONLY"
+        return retry
+    return None
+
+
 def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any], *, _correction_depth: int = 0) -> Dict[str, Any]:
     if not isinstance(plan, Mapping):
         return {
@@ -481,6 +550,16 @@ def preflight(plan: Mapping[str, Any], trusted: Mapping[str, Any], *, _correctio
                             else "CORRECTED_LOCAL_ONLY"
                         )
                     return redirected
+
+                # Guidance alone cannot recover a failed route. Try only
+                # explicitly registered, same-target local alternatives, each
+                # through the full preflight. Never bypass protected actions.
+                recovered = _trusted_local_route_recovery(
+                    plan, trusted, action, gate=name,
+                    correction_depth=_correction_depth,
+                )
+                if recovered is not None:
+                    return recovered
 
             blocked = {
                 "allowed": False,
@@ -757,6 +836,18 @@ def persist_preflight(runtime: Mapping[str, Any], out: Mapping[str, Any]) -> Dic
         "gate_receipts": deepcopy(list(out.get("results", []))),
         "consumed": False,
     }
+    # Preserve why a corrected route was authorized. The receipt already binds
+    # the corrected action, plan and route; these digests retain the original
+    # request lineage without copying source text or changing CURRENT.
+    correction = out.get("correction")
+    if isinstance(correction, Mapping):
+        receipt["correction_provenance"] = {
+            "gate": correction.get("gate"),
+            "state": correction.get("state"),
+            "source": correction.get("source"),
+            "original_plan_digest": out.get("original_plan_digest"),
+            "corrected_plan_digest": out.get("corrected_plan_digest"),
+        }
     updated.setdefault("preflight_receipts", {})[receipt_id] = receipt
 
     consumed = updated.setdefault("consumed_approvals", {})
@@ -822,6 +913,62 @@ def record_outcome(
     ledgers[scope] = record_failure(ledger, attempt, outcome)
     outcomes[receipt_id] = outcome
     active.pop(match_key, None)
+    return updated
+
+
+def release_uninvoked_preflight(
+    runtime: Mapping[str, Any],
+    receipt_id: str,
+    *,
+    reason: str,
+) -> Dict[str, Any]:
+    """Release only an unused, never-claimed preflight without forging a route failure.
+
+    A signed execution claim, known outcome, or non-PENDING owner is never
+    automatically recoverable. Retain the original receipt and route ledger;
+    never clear or amend historical failed signatures.
+    """
+    allowed_reasons = {"WRAPPER_INTERRUPTED_BEFORE_CLAIM",
+                       "LOCAL_RESOURCE_GUARD_BEFORE_CLAIM",
+                       "ABANDONED_PRECHECK_BEFORE_CLAIM"}
+    if reason not in allowed_reasons:
+        raise ValueError("unapproved pre-invocation release reason")
+    receipt = runtime.get("preflight_receipts", {}).get(receipt_id)
+    if not isinstance(receipt, Mapping):
+        raise ValueError("signed preflight receipt missing")
+    if receipt.get("allowed") is not True or receipt.get("consumed") is not False:
+        raise ValueError("preflight not authorized or already consumed")
+    execution_key = receipt.get("execution_key")
+    active = runtime.get("active_attempts", {}).get(execution_key)
+    if not isinstance(active, Mapping) or active.get("receipt_id") != receipt_id:
+        raise ValueError("preflight ownership mismatch")
+    if active.get("status") != "PENDING":
+        raise ValueError("preflight already claimed or execution status uncertain")
+    if active.get("task_id") != receipt.get("task_id"):
+        raise ValueError("preflight task binding mismatch")
+    if active.get("execution_scope") != receipt.get("execution_scope"):
+        raise ValueError("preflight scope binding mismatch")
+    if active.get("route_fp") != receipt.get("route_fp"):
+        raise ValueError("preflight route binding mismatch")
+    if receipt_id in runtime.get("execution_calls", {}):
+        raise ValueError("execution call exists; unknown result must be preserved")
+    if receipt_id in runtime.get("execution_outcomes", {}):
+        raise ValueError("execution outcome already recorded")
+    if receipt_id in runtime.get("completion_registry", {}):
+        raise ValueError("completion already recorded")
+    updated = deepcopy(dict(runtime))
+    updated["active_attempts"].pop(execution_key)
+    stored = updated["preflight_receipts"][receipt_id]
+    stored["consumed"] = True
+    stored["preinvoke_release_reason"] = reason
+    updated.setdefault("execution_outcomes", {})[receipt_id] = "PREINVOKE_RELEASED"
+    updated.setdefault("preinvoke_releases", {})[receipt_id] = {
+        "reason": reason,
+        "task_id": receipt.get("task_id"),
+        "execution_scope": receipt.get("execution_scope"),
+        "route_fp": receipt.get("route_fp"),
+        "no_execution_claim_at_release": True,
+    }
     return updated
 
 
@@ -903,6 +1050,12 @@ def main() -> int:
     p_fail = sub.add_parser("record-failure")
     p_fail.add_argument("receipt_id")
     p_fail.add_argument("failure_class")
+
+    p_release = sub.add_parser("release-uninvoked")
+    p_release.add_argument("receipt_id")
+    p_release.add_argument("reason", choices=("WRAPPER_INTERRUPTED_BEFORE_CLAIM",
+                       "LOCAL_RESOURCE_GUARD_BEFORE_CLAIM",
+                       "ABANDONED_PRECHECK_BEFORE_CLAIM"))
 
     p_verify = sub.add_parser("verify-review")
     p_verify.add_argument("target_receipt")
@@ -1030,7 +1183,7 @@ def main() -> int:
             "state": "EXECUTOR_RETURNED_UNVERIFIED" if execution_ok else "EXECUTOR_FAILED",
             "receipt_id": args.receipt_id,
             "result": result,
-        }, ensure_ascii=False, indent=2))
+        }, ensure_ascii=True, indent=2))  # ASCII-safe even in CP949 Windows shells
         return 0 if execution_ok else 2
 
     if args.cmd == "verify-review":
@@ -1060,6 +1213,30 @@ def main() -> int:
             "review_receipt": args.review_receipt,
             "evidence_refs": completion.get("evidence_refs", []),
         }, ensure_ascii=False, indent=2))
+        return 0
+
+    if args.cmd == "release-uninvoked":
+        # Signed, version-checked state transition; no route failure added.
+        try:
+            updated = release_uninvoked_preflight(
+                runtime, args.receipt_id, reason=args.reason
+            )
+            save_runtime(
+                updated, expected_version=runtime["runtime_version"],
+                authority_digest_value=auth_digest,
+            )
+        except (ValueError, StateIntegrityError) as exc:
+            print(json.dumps({
+                "allowed": False, "state": "RELEASE_BLOCKED",
+                "reason": str(exc),
+            }, ensure_ascii=False))
+            return 2
+        print(json.dumps({
+            "allowed": True, "state": "PREINVOKE_RELEASED",
+            "receipt_id": args.receipt_id,
+            "route_failure_recorded": False,
+            "model_call_registered": False,
+        }, ensure_ascii=False))
         return 0
 
     if args.cmd == "record-failure":

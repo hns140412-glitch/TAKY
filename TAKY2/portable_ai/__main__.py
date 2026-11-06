@@ -270,6 +270,14 @@ def execute_gated(root: Path, task_id: str, plan_json: str, invocation_json: str
             raise PortableError("task already attempted; no automatic retry")
         if current["status"] == "BLOCKED":
             raise PortableError("blocked task")
+        # The local work item and receipt-kernel plan MUST be the same task.
+        # Reject mismatched identity BEFORE recording an attempt or running preflight.
+        # Without this gate an unrelated authorized plan could be attributed to
+        # another portable task and produce a misleading evidence/receipt chain.
+        if plan.get("task_id") != task_id:
+            raise PortableError("execution plan task_id does not match portable task")
+        if "task_id" in invocation and invocation["task_id"] != task_id:
+            raise PortableError("invocation task_id does not match portable task")
         # Persist an unknown attempt BEFORE contacting the receipt kernel.
         # A crash/timeout cannot turn an uncertain paid call into a free retry.
         current["execution"] = {"state": "PREFLIGHT_ATTEMPTED_OUTCOME_UNKNOWN", "recorded_at": stamp()}

@@ -1,6 +1,6 @@
 # TAKY Agent Execution Contract
 
-This repository is governed by TAKY. Coding agents, including Codex, are implementation executors unless an explicit task contract grants a narrower or broader role.
+This repository is governed by TAKY. Claude Code is the primary implementation executor when a delegated coding task is authorized; Codex is an independent reviewer or a usage-justified fallback executor under the canonical role owner. Neither agent gains authority from this activation document.
 
 ## Authority order
 1. Explicit current user instruction
@@ -11,10 +11,14 @@ This repository is governed by TAKY. Coding agents, including Codex, are impleme
 
 Handoff SHA, prior completion claims, and narrative summaries are evidence, not automatic authority. Verify current repository state before implementation.
 
+## Shared Claude/Codex execution context (noncanonical)
+Claude and Codex can reference the same source-verified candidate at `F:\내 드라이브\TAKY\20_PLATFORM\03_COMMON\03_HANDOFF\TAKY_ANTIGRAVITY_SHARED_AGENT_CONTEXT_CANDIDATE_20261012.json`; file existence and Drive sync do NOT prove either model actually received or read it. Before a material task, check it using `python "D:\Git PWA\TAKY\TOOLS\TAKY_SHARED_AGENT_CONTEXT_PROJECTION_CANDIDATE.py" --check`. Refresh if stale; canonical TAKY master/CURRENT rules outrank this view. Pending deliveries and cursor 0 are NOT model-received ACKs. No new Codex model call or native-panel takeover is authorized by this pointer.
+
 ## Role lock
+Activation only: canonical semantic owner is `D:\Git PWA\TAKY\MASTER\AI_COLLABORATION_PROTOCOL.md` (TKY-AICOLLAB-001). Do not redefine role routing here.
 - TAKY/ChatGPT acts as ORCHESTRATOR and REVIEWER.
-- Codex acts as IMPLEMENTATION EXECUTOR.
-- Codex MUST NOT silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
+- Claude Code is the primary code executor when a model is needed and subscription capacity is available; Codex is a conditional fallback executor or independent reviewer under TAKY's necessity/usage gates.
+- No executor may silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
 - If implementation discovers a requirement conflict, stop the conflicting change and report the conflict; do not invent a product decision.
 
 ## Mandatory preflight before implementation
@@ -55,8 +59,9 @@ A Codex self-report is evidence only. `CODEX_DONE` is not `TAKY_PASS`.
 ## State machine
 In a TAKY-controlled repository runtime, lifecycle transitions SHOULD be executed/checked through `ENFORCEMENT/execution_state_engine.py` rather than inferred from narration.
 
-Allowed lifecycle:
-`READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`
+Allowed lifecycle (runtime compatibility names):
+`READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`.
+The `ASSIGNED_TO_CODEX` / `CODEX_DONE` tokens are legacy runtime aliases for neutral `ASSIGNED_TO_EXECUTOR` / `EXECUTOR_DONE`; actual Claude/Codex identity is recorded separately and these aliases do not select an executor.
 
 Rules:
 - `CODEX_DONE -> MERGED` is forbidden.
