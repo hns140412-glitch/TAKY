@@ -25,6 +25,8 @@ function derive({learner_state={},feedback_intent={},prerequisite_readiness=null
   const state=learner_state.inferred||{};
   const suff=state.evidence_sufficiency||'NONE';
 
+  // A scoped unverified observation can request another check. It cannot
+  // satisfy the evidence threshold or unlock unrelated pedagogical actions.
   const reviewOnly=observation_review_actionable===true&&
     (feedback_intent.intents||[]).some(x=>x.intent==='RETRIEVAL_CHECKPOINT'&&
       (Array.isArray(x.bases)?x.bases:[x.basis]).includes('HIDE_MEMORY_ADVISORY_ONLY'));
