@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import re
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,6 +11,25 @@ MEASURED_MODES={"PLAN","SECTION","ELEVATION","TECHNICAL"}
 
 def load(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+HTML_NAMES={"A1_BOARD":"board.html","A3_REPORT":"report.html","PDF_DRAWING_BOOK":"drawing-book.html"}
+def html_min_font_pt(html):
+    """Smallest absolute text size in generated print HTML (em resolved against the html/body base size)."""
+    base=re.search(r"html,body\{[^}]*font-size:([\d.]+)pt",html)
+    base_pt=float(base.group(1)) if base else 12.0
+    unit={"pt":1.0,"px":0.75,"mm":72/25.4}
+    sizes=[]
+    for v,u in re.findall(r"font-size:\s*([\d.]+)(em|pt|px|mm)",html):
+        sizes.append(float(v)*base_pt if u=="em" else float(v)*unit[u])
+    return min(sizes) if sizes else None
+
+def legibility(build_dir,delivery,spec):
+    """Learned gate PRINT_LEGIBILITY_FAIL (ArchiGrow review mining 2026-09-30 M13/AC-05): ~5pt A3 text failed real review."""
+    name=HTML_NAMES.get(delivery)
+    mins=[v*72/25.4 for v in (spec.get("type_mm") or {}).values()]+[float(v) for v in (spec.get("type_pt") or {}).values()]
+    if not name or not mins or not (Path(build_dir)/name).exists():
+        return None,None
+    return html_min_font_pt((Path(build_dir)/name).read_text(encoding="utf-8")),min(mins)
 
 def evaluate(build_dir):
     build_dir=Path(build_dir)
@@ -82,8 +102,15 @@ def evaluate(build_dir):
 
         if delivery=="PDF_DRAWING_BOOK" and item.get("mode") in MEASURED_MODES and kind=="RASTER":
             warnings.append(f"MEASURED_DRAWING_RASTER:{item['id']}")
+        if kind=="RASTER_UNINSPECTED":
+            errors.append(f"RASTER_UNVERIFIABLE:{item['id']}:{meta.get('reason')}")
         if kind in {"NONE","OTHER"} and item.get("source_exists"):
             warnings.append(f"SOURCE_KIND_UNVERIFIED:{item['id']}")
+
+    min_pt,floor_pt=legibility(build_dir,delivery,spec)
+    metrics["min_font_pt"]=round(min_pt,2) if min_pt else None
+    if min_pt is not None and min_pt+0.05<floor_pt:
+        errors.append(f"PRINT_LEGIBILITY_FAIL:min_font_{min_pt:.2f}pt<{floor_pt:.2f}pt")
 
     if delivery=="A1_BOARD":
         primary=sum(1 for x in manifest.get("items",[]) if x.get("layout_role") in {"HERO","TECHNICAL_LARGE","HERO_SECONDARY","WIDE"})

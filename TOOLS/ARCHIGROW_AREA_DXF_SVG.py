@@ -9,7 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-TOOL_VERSION="ARCHIGROW_AREA_DXF_SVG/2026-10-12.2"
+TOOL_VERSION="ARCHIGROW_AREA_DXF_SVG/2026-10-21.1"
 _spec=importlib.util.spec_from_file_location("archigrow_layout_kpi",Path(__file__).resolve().parent/"ARCHIGROW_LAYOUT_KPI.py")
 K=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(K)
 # $INSUNITS -> meters. 0 (unitless) and unlisted codes require an explicit meters_per_unit.
@@ -200,6 +200,10 @@ def export(dxf,mapping,destination,reader="auto"):
     for r in rows:totals[(r["level"],r["scope"])]+=r["area_m2"]*(1 if r["operation"]=="ADD" else -1)
     for (level,scope),v in totals.items():
         if v<0:issues.append(dict(issue="NEGATIVE_TOTAL",level=level,scope=scope))
+    # Distinguish expected revision metadata changes from changes in area classification logic.
+    # A revision number/date must never by itself invalidate a unchanged layer/area policy.
+    mapping_logic={"project_id":config["project_id"],"layers":config["layers"],"meters_per_unit":scale}
+    mapping_logic_sha256=hashlib.sha256(json.dumps(mapping_logic,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")).hexdigest()
     identity={k:config.get(k) for k in ("source_project_label","source_revision","source_issue_date") if config.get(k)}
     if not identity.get("source_revision"):notices.append(dict(notice="SOURCE_REVISION_NOT_DECLARED"))
     # ---------- outputs ----------
@@ -223,7 +227,7 @@ def export(dxf,mapping,destination,reader="auto"):
         wr=csv.DictWriter(f,fieldnames=columns);wr.writeheader()
         for r in rows:wr.writerow({k:round(r[k],4) if k=="area_m2" else r[k] for k in columns})
     status="HOLD" if issues else "CALCULATED_REVIEW_REQUIRED"
-    overview={"schema":"ARCHIGROW_AREA_OVERVIEW_V1","project_id":config["project_id"],"source_dxf":str(dxf),"source_sha256":digest(dxf),"mapping_sha256":digest(mapping),
+    overview={"schema":"ARCHIGROW_AREA_OVERVIEW_V1","project_id":config["project_id"],"source_dxf":str(dxf),"source_sha256":digest(dxf),"mapping_sha256":digest(mapping),"mapping_logic_sha256":mapping_logic_sha256,
               "reader":reader_used,"tool_version":TOOL_VERSION,"source_encoding":meta.get("encoding"),"source_acadver":meta.get("acadver"),"meters_per_unit":scale,"drawing_insunits":unit,"source_identity":identity,
               "target_identity_status":"DECLARED_BY_MAPPING" if identity.get("source_revision") else "UNVERIFIED",
               "totals":[{"level":k[0],"scope":k[1],"area_m2":round(v,4)} for k,v in sorted(totals.items())],"issues":issues,"notices":notices,

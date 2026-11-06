@@ -20,7 +20,25 @@ ALLOWED_OUTCOMES = {"SUCCESS", "PARTIAL", "FAILURE", "OBSERVATION_ONLY"}
 def fingerprint(value):
     return hashlib.sha256(value.encode("utf-8", "ignore")).hexdigest()
 
+def ledger_rows(ledger):
+    """Read an append-only ledger; a corrupt line fails closed instead of being silently skipped."""
+    rows = []
+    if not ledger.exists():
+        return rows
+    for no, line in enumerate(ledger.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            raise ValueError(f"LEDGER_CORRUPT_LINE:{ledger}:{no}")
+    return rows
+
 def append_record(args):
+    record, ledger, _ = append_record_ex(args)
+    return record, ledger
+
+def append_record_ex(args):
     ledger = Path(args.ledger) if args.ledger else DEFAULT_LEDGER
     if not ledger.is_absolute():
         ledger = (Path.cwd() / ledger).resolve()
@@ -58,6 +76,9 @@ def append_record(args):
         "source_refs": source_refs,
     }
     evidence_fp = fingerprint(json.dumps(core, ensure_ascii=False, sort_keys=True))
+    existing = next((r for r in ledger_rows(ledger) if r.get("evidence_fingerprint_sha256") == evidence_fp), None)
+    if existing:
+        return existing, ledger, True
     recorded_at = datetime.now(timezone.utc).isoformat()
     lineage_arg = str(getattr(args, "lineage_ledger", "") or "").strip()
     if lineage_arg:
@@ -101,26 +122,19 @@ def append_record(args):
         "grow_lineage_event_id": learning_event["event_id"],
     }
 
-    with ledger.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    # Lineage first: a failed lineage write must not leave an orphan evidence row (same order as PROJECT_LEARN).
     raw_receipt = materialize(raw_event, lineage_ledger)
     learning_receipt = materialize(learning_event, lineage_ledger)
     if not raw_receipt.get("ok") or not learning_receipt.get("ok"):
         raise RuntimeError("GROW_LINEAGE_MATERIALIZATION_FAILED")
-    return record, ledger
+    with ledger.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    return record, ledger, False
 def summarize(ledger_path):
     ledger = Path(ledger_path) if ledger_path else DEFAULT_LEDGER
     if not ledger.is_absolute():
         ledger = (Path.cwd() / ledger).resolve()
-    rows = []
-    if ledger.exists():
-        for line in ledger.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            try:
-                rows.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
+    rows = ledger_rows(ledger)
     by_mode = {}
     by_competition = {}
     for row in rows:
@@ -196,11 +210,12 @@ def main():
     if not args.project_id or not args.entry_id or not args.artifact_id or not args.mode or not args.technique:
         raise SystemExit("--project-id, --entry-id, --artifact-id, --mode, --technique are required unless --summary is used")
 
-    record, ledger = append_record(args)
+    record, ledger, duplicate = append_record_ex(args)
     print(json.dumps({
         "ok": True,
         "ledger": str(ledger),
         "record_id": record["evidence_fingerprint_sha256"][:24],
+        "duplicate": duplicate,
         "state": record["state"],
         "promotion_authorized": False
     }, ensure_ascii=False, indent=2))

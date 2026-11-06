@@ -130,13 +130,14 @@ def _ledger_rows(path):
     if not path.exists():
         return []
     rows = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for no, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
         try:
             rows.append(json.loads(line))
         except json.JSONDecodeError:
-            continue
+            # Fail closed: a skipped corrupt row would break idempotency and under-count evidence.
+            raise ValueError(f"LEDGER_CORRUPT_LINE:{path}:{no}")
     return rows
 
 def append_record(args):

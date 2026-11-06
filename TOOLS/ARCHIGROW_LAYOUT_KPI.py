@@ -57,7 +57,53 @@ def polygons_overlap(a,b):
     for i in range(len(a)):
         for j in range(len(b)):
             if segments_intersect(a[i],a[(i+1)%len(a)],b[j],b[(j+1)%len(b)],allow_touch=False): return True
-    return point_in_polygon_strict(a[0],b) or point_in_polygon_strict(b[0],a)
+    if point_in_polygon_strict(a[0],b) or point_in_polygon_strict(b[0],a): return True
+    # Collinear/coincident overlaps have no proper crossing and no strictly interior vertex.
+    return intersection_area(a,b)>1e-9
+def _ccw(poly):
+    pts=[(float(x),float(y)) for x,y in poly]
+    pts=[p for i,p in enumerate(pts) if p!=pts[i-1]] or pts
+    if sum(pts[i][0]*pts[(i+1)%len(pts)][1]-pts[(i+1)%len(pts)][0]*pts[i][1] for i in range(len(pts)))<0: pts.reverse()
+    out=[p for i,p in enumerate(pts) if orient(pts[i-1],p,pts[(i+1)%len(pts)])!=0]
+    return out if len(out)>=3 else pts
+def triangulate(poly):
+    """Ear clipping for a valid simple polygon -> CCW triangles."""
+    pts=_ccw(poly); tris=[]
+    def inside_tri(p,a,b,c,strict):
+        o=(orient(a,b,p),orient(b,c,p),orient(c,a,p))
+        return all(x>0 for x in o) if strict else all(x>=0 for x in o)
+    for strict in (False,True):
+        work=list(pts); tris=[]
+        while len(work)>3:
+            for i in range(len(work)):
+                a,b,c=work[i-1],work[i],work[(i+1)%len(work)]
+                if orient(a,b,c)<=0: continue
+                if any(inside_tri(p,a,b,c,strict) for p in work if p not in (a,b,c)): continue
+                tris.append((a,b,c)); del work[i]; break
+            else: break
+        if len(work)==3: return tris+[tuple(work)]
+    raise ValueError("TRIANGULATION_FAILED")
+def _clip_convex(subject,clip):
+    out=list(subject)
+    for i in range(len(clip)):
+        a,b=clip[i],clip[(i+1)%len(clip)]
+        if not out: break
+        inp,out=out,[]
+        side=lambda p:(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0])
+        for j in range(len(inp)):
+            p,q=inp[j],inp[(j+1)%len(inp)]; sp,sq=side(p),side(q)
+            if sp>=0: out.append(p)
+            if (sp>=0)!=(sq>=0):
+                t=sp/(sp-sq); out.append((p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])))
+    return out
+def intersection_area(a,b):
+    """Exact overlap area of two valid simple polygons (triangle-pair convex clipping)."""
+    tb=triangulate(b); total=0.0
+    for ta in triangulate(a):
+        for t in tb:
+            c=_clip_convex(list(ta),list(t))
+            if len(c)>=3: total+=area([list(p) for p in c])
+    return total
 def validate_object(o):
     issues=[]
     for k in SCHEMA["required"]:
@@ -79,7 +125,8 @@ def evaluate(model):
         if not c["ok"]:
             issues.extend(f'{clean(o.get("object_id")) or "UNKNOWN"}:{x}' for x in c["issues"]); continue
         row={**o,"computed_area":area(o["polygon"])}
-        if any(not point_in_polygon(p,site) for p in o["polygon"]):
+        # Vertex containment alone misses objects spanning a concave site notch; require full area coverage.
+        if any(not point_in_polygon(p,site) for p in o["polygon"]) or abs(intersection_area(o["polygon"],site)-row["computed_area"])>1e-6:
             issues.append(f'{o["object_id"]}:OUTSIDE_SITE_BOUNDARY')
         rows.append(row)
     ids=[r["object_id"] for r in rows]
@@ -105,5 +152,16 @@ def evaluate(model):
       "rule":"DETERMINISTIC GEOMETRY/KPI PASS != LEGAL/ADMINISTRATIVE FEASIBILITY"
     }
 
+def _cli(run):
+    """--input JSON [--output JSON]: execute on project data; no arguments keeps the schema probe."""
+    import argparse,sys
+    if len(sys.argv)==1:
+        print(json.dumps({"schema":SCHEMA["schema"],"ok":True},ensure_ascii=False)); return 0
+    p=argparse.ArgumentParser(); p.add_argument("--input",required=True); p.add_argument("--output",default="")
+    a=p.parse_args(); result=run(json.loads(Path(a.input).read_text(encoding="utf-8")))
+    text=json.dumps(result,ensure_ascii=False,indent=2)
+    if a.output: Path(a.output).parent.mkdir(parents=True,exist_ok=True); Path(a.output).write_text(text,encoding="utf-8")
+    print(text); return 0 if result.get("ok") else 2
+
 if __name__=="__main__":
-    print(json.dumps({"schema":SCHEMA["schema"],"ok":True},ensure_ascii=False))
+    raise SystemExit(_cli(evaluate))

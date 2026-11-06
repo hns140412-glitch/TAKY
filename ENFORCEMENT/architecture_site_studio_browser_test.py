@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
 import unittest
 import urllib.error
 import urllib.request
@@ -77,6 +78,38 @@ def chrome(*args, url, width=1440, height=1000):
         return sink.read_bytes()
 
 
+class FixtureLeakError(RuntimeError):
+    pass
+
+
+def make_fixture_dir(prefix):
+    """Isolated fixture directory in the OS temp (never the repository root)."""
+    return Path(tempfile.mkdtemp(prefix=prefix))
+
+
+def remove_fixture_dir(path, attempts=8, delay=0.25):
+    """Remove exactly this directory with bounded retry; residue raises FixtureLeakError (HOLD)."""
+    path, last = Path(path), ""
+    for _ in range(attempts):
+        if not path.exists():
+            return
+        try:
+            shutil.rmtree(path)
+        except OSError as exc:
+            last = type(exc).__name__
+        if path.exists():
+            time.sleep(delay)
+    if path.exists():
+        raise FixtureLeakError(f"FIXTURE_LEAK HOLD: {path.name} still present after {attempts} attempts ({last or 'unknown'})")
+
+
+def own_fixture_dir(testcase_cls, prefix):
+    """Create the dir and register its removal as a class cleanup, which also runs when setUpClass fails."""
+    path = make_fixture_dir(prefix)
+    testcase_cls.addClassCleanup(remove_fixture_dir, path)
+    return path
+
+
 def selftest_result(dom):
     found = re.search(r'<pre id="selftest-result">(.*?)</pre>', dom, re.S)
     assert found, "selftest did not complete"
@@ -86,15 +119,11 @@ def selftest_result(dom):
 class Base(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp = Path(tempfile.mkdtemp(prefix="site_studio_test_", dir=ROOT))
+        cls.tmp = own_fixture_dir(cls, "site_studio_test_")
         cls.studio = STUDIO.Studio(INPUTS["project_id"], INPUTS["receipt"], cls.tmp / "out",
                                    INPUTS["context"], INPUTS["solar"], INPUTS["massing"])
         cls.studio.publish()
         cls.page = (cls.tmp / "out" / "site_analysis.html").resolve()
-
-    @classmethod
-    def tearDownClass(cls):
-        shutil.rmtree(cls.tmp, ignore_errors=True)
 
 
 @unittest.skipUnless(CHROME, "headless Chrome unavailable")
@@ -351,13 +380,9 @@ class BridgeExports(Base):
         cls.server = STUDIO.serve(cls.studio, 0)
         cls.thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
         cls.thread.start()
+        # LIFO: the server stops before the fixture directory is removed.
+        cls.addClassCleanup(lambda: (cls.server.shutdown(), cls.server.server_close()))
         cls.base = f"http://127.0.0.1:{cls.server.server_address[1]}"
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.server.shutdown()
-        cls.server.server_close()
-        super().tearDownClass()
 
     def get(self, path):
         try:
@@ -522,7 +547,7 @@ class SourceReadiness(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.tmp = Path(tempfile.mkdtemp(prefix="site_studio_ready_", dir=ROOT))
+        cls.tmp = own_fixture_dir(cls, "site_studio_ready_")
         cls.gb7 = cls.write("gb7", GB7_LIKE)
         evil = json.loads(json.dumps(GB7_LIKE))
         evil["project_id"] = "<script>alert(1)</script>\"'&"
@@ -536,10 +561,6 @@ class SourceReadiness(unittest.TestCase):
         folder.mkdir()
         (folder / "manifest.json").write_text(json.dumps(doc, ensure_ascii=False), encoding="utf-8")
         return STUDIO.Studio.from_pipeline_manifest(folder / "manifest.json", folder / "out")
-
-    @classmethod
-    def tearDownClass(cls):
-        shutil.rmtree(cls.tmp, ignore_errors=True)
 
     def serve(self, studio):
         server = STUDIO.serve(studio, 0)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -12,8 +13,11 @@ BUILD=ROOT/"TOOLS"/"ARCHIGROW_COMPETITION_BUILD.py"
 RENDER=ROOT/"TOOLS"/"ARCHIGROW_COMPETITION_RENDER.py"
 QUALITY=ROOT/"TOOLS"/"ARCHIGROW_COMPETITION_QUALITY.py"
 
+# Child Python tools print UTF-8 JSON with Korean text; a cp949/cp1252 console default would crash the pipe reader.
+CHILD_ENV={**os.environ,"PYTHONIOENCODING":"utf-8","PYTHONUTF8":"1"}
+
 def run(cmd):
-    proc=subprocess.run(cmd,capture_output=True,text=True)
+    proc=subprocess.run(cmd,capture_output=True,text=True,encoding="utf-8",errors="replace",env=CHILD_ENV)
     if proc.returncode!=0:
         raise RuntimeError((proc.stderr or proc.stdout)[-3000:])
     return proc.stdout.strip()
@@ -21,7 +25,7 @@ def run(cmd):
 def main():
     p=argparse.ArgumentParser(description="One-shot architecture competition representation/output pipeline.")
     p.add_argument("--project-type",default="default")
-    p.add_argument("--delivery",default="A3_REPORT",choices=["A1_BOARD","A3_REPORT","PPT","PDF_DRAWING_BOOK"])
+    p.add_argument("--delivery",default=None,choices=["A1_BOARD","A3_REPORT","PPT","PDF_DRAWING_BOOK"])
     p.add_argument("--focus",default="")
     p.add_argument("--brief-file",default="")
     p.add_argument("--brief-verified",action="store_true")
@@ -38,10 +42,11 @@ def main():
     report_cmd=[
         sys.executable,str(REPORT),
         "--project-type",args.project_type,
-        "--delivery",args.delivery,
         "--focus",args.focus,
         "--json","--output",str(package)
     ]
+    if args.delivery:
+        report_cmd += ["--delivery",args.delivery]
     if args.brief_file:
         report_cmd += ["--brief-file",str(Path(args.brief_file).resolve())]
     if args.brief_verified:
@@ -72,7 +77,7 @@ def main():
         render_result=json.loads(render_text)
         quality_proc=subprocess.run(
             [sys.executable,str(QUALITY),"--build-dir",str(out)],
-            capture_output=True,text=True
+            capture_output=True,text=True,encoding="utf-8",errors="replace",env=CHILD_ENV
         )
         quality_text=(quality_proc.stdout or "").strip()
         if quality_text:

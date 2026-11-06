@@ -140,5 +140,24 @@ def build_relation_graph(compilation):
       "rule":"NO RELATION EDGE MAY BE INFERRED FROM SHARED VARIABLES OR OPTIMISTIC INTERPRETATION"
     }
 
+def _cli(run):
+    """--input JSON [--output JSON]: execute on project data; no arguments keeps the schema probe."""
+    import argparse,sys
+    if len(sys.argv)==1:
+        print(json.dumps({"schema":SCHEMA["schema"],"ok":True},ensure_ascii=False)); return 0
+    p=argparse.ArgumentParser(); p.add_argument("--input",required=True); p.add_argument("--output",default="")
+    a=p.parse_args(); result=run(json.loads(Path(a.input).read_text(encoding="utf-8")))
+    text=json.dumps(result,ensure_ascii=False,indent=2)
+    if a.output: Path(a.output).parent.mkdir(parents=True,exist_ok=True); Path(a.output).write_text(text,encoding="utf-8")
+    print(text); return 0 if result.get("ok") else 2
+
+def run_input(data):
+    """{"project":{...},"rules":[...]} -> compilation + explicit relation graph."""
+    compilation=compile_rules(data.get("project") or {},data.get("rules") or [])
+    if "compiled_rules" in compilation:
+        compilation["relation_graph"]=build_relation_graph(compilation)
+        compilation["ok"]=compilation["ok"] and compilation["relation_graph"]["ok"]
+    return compilation
+
 if __name__=="__main__":
-    print(json.dumps({"schema":SCHEMA["schema"],"ok":True},ensure_ascii=False))
+    raise SystemExit(_cli(run_input))

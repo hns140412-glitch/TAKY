@@ -106,7 +106,13 @@ def build_package(args, registry):
     inferred = infer_modes(args.focus)
 
     brief_delivery = brief.get("delivery") if brief else None
-    delivery_key = brief_delivery or args.delivery
+    requested_delivery = getattr(args, "delivery", None)
+    # The brief owns the delivery format; an explicit different request is a conflict, never a silent substitution.
+    if brief_delivery and requested_delivery and brief_delivery != requested_delivery:
+        raise ValueError(f"DELIVERY_CONFLICT: brief={brief_delivery} requested={requested_delivery}")
+    delivery_key = brief_delivery or requested_delivery or "A3_REPORT"
+    if delivery_key not in registry["delivery_profiles"]:
+        raise ValueError(f"UNKNOWN_DELIVERY: {delivery_key}")
 
     if inferred:
         prioritized = [m for m in inferred if m in registry["representation_modes"]]
@@ -127,7 +133,7 @@ def build_package(args, registry):
 
     brief_verified = bool(brief.get("verified")) if brief is not None else bool(args.brief_verified)
     content_frozen = bool(args.content_frozen or (brief and brief.get("content_frozen")) or (brief and brief.get("no_post_submission_enhancement")))
-    delivery = registry["delivery_profiles"].get(delivery_key, registry["delivery_profiles"]["A3_REPORT"])
+    delivery = registry["delivery_profiles"][delivery_key]
     package = {
         "status": "CANDIDATE" if brief_verified else "BRIEF_UNVERIFIED",
         "project_type": sequence_key,
@@ -230,8 +236,9 @@ def as_markdown(package):
 def parse_args():
     parser = argparse.ArgumentParser(description="Deterministic architecture-competition report representation recommender.")
     parser.add_argument("--project-type", default="default")
-    parser.add_argument("--delivery", default="A3_REPORT",
-                        choices=["A1_BOARD", "A3_REPORT", "PPT", "PDF_DRAWING_BOOK"])
+    parser.add_argument("--delivery", default=None,
+                        choices=["A1_BOARD", "A3_REPORT", "PPT", "PDF_DRAWING_BOOK"],
+                        help="Default A3_REPORT; a brief delivery wins, and an explicit different value fails as DELIVERY_CONFLICT.")
     parser.add_argument("--focus", default="")
     parser.add_argument("--required-modes", default="")
     parser.add_argument("--brief-verified", action="store_true")

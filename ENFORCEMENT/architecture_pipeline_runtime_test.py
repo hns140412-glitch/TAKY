@@ -42,7 +42,7 @@ class PipelineRuntime(unittest.TestCase):
     def test_full_project_passes_every_stage_with_receipts(self):
         man,_=project(self.d); s=P.run(man)
         self.assertEqual(s["status"],"PASS",s["stages"])
-        self.assertEqual(set(st(s)),set(P.ORDER)-{"COMPETITION","WORKBOOK_AUDIT"})  # those two have their own suites
+        self.assertEqual(set(st(s)),set(P.ORDER)-{"COMPETITION","WORKBOOK_AUDIT","SITE_SOURCE","MASSING","SITE_CONTEXT","SOLAR_STUDY","DESIGN_RULE_REVIEW","AREA_CHANGESET"})  # optional stages have no inputs in this legacy fixture
         cc=json.loads((Path(s["out_dir"])/"stages"/"AREA_KPI_CROSS_CHECK"/"area_kpi_cross_check.json").read_text(encoding="utf-8"))
         self.assertEqual((cc["checks"][0]["cad_area_m2"],cc["checks"][0]["model_value"]),(150.0,150.0))
         case=json.loads((Path(s["out_dir"])/"stages"/"CASE_CANDIDATE"/"case_candidate.json").read_text(encoding="utf-8"))

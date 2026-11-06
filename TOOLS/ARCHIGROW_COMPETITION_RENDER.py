@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -33,7 +34,7 @@ def find_browser():
     for p in candidates:
         if p.exists():
             return p
-    for name in ("chrome","msedge"):
+    for name in ("chrome","msedge","google-chrome","google-chrome-stable","chromium","chromium-browser"):
         found=shutil.which(name)
         if found:
             return Path(found)
@@ -59,6 +60,15 @@ def size_match(actual,expected,tol=4.0):
         return False
     return abs(actual[0]-expected[0])<=tol and abs(actual[1]-expected[1])<=tol
 
+def korean_font_available():
+    """Linux/macOS headless Chrome prints Korean as tofu boxes when no CJK font is installed; mechanical checks cannot see that."""
+    if sys.platform.startswith("win"):
+        return True
+    if not shutil.which("fc-list"):
+        return None
+    out=subprocess.run(["fc-list",":lang=ko","family"],capture_output=True,text=True).stdout
+    return bool(out.strip())
+
 def render_html(build_dir,delivery):
     names={"A1_BOARD":"board.html","A3_REPORT":"report.html","PDF_DRAWING_BOOK":"drawing-book.html"}
     html_path=build_dir/names[delivery]
@@ -67,44 +77,74 @@ def render_html(build_dir,delivery):
     browser=find_browser()
     if not browser:
         raise RuntimeError("HEADLESS_BROWSER_NOT_FOUND")
+    if korean_font_available() is False:
+        raise RuntimeError("KOREAN_FONT_MISSING: install a CJK font (e.g. fonts-noto-cjk) before rendering Korean boards")
     pdf_path=html_path.with_suffix(".pdf")
-    profile=Path(tempfile.mkdtemp(prefix="taky-archcomp-chrome-"))
-    try:
-        cmd=[
-            str(browser),"--headless=new","--disable-gpu","--no-sandbox",
-            f"--user-data-dir={profile}",f"--print-to-pdf={pdf_path}",
-            html_path.resolve().as_uri()
-        ]
-        proc=subprocess.run(cmd,capture_output=True,text=True,timeout=120)
-        if proc.returncode!=0 or not pdf_path.exists():
-            raise RuntimeError("HTML_PDF_RENDER_FAILED:"+((proc.stderr or proc.stdout)[-1000:]))
-    finally:
-        shutil.rmtree(profile,ignore_errors=True)
-    return pdf_path
+    # A stale PDF from an earlier run must never satisfy the existence check.
+    pdf_path.unlink(missing_ok=True)
+    errors=[]
+    # Some Chrome releases write nothing with --headless=new yet exit 0; retry with the old headless mode.
+    for mode in ("--headless=new","--headless=old"):
+        profile=Path(tempfile.mkdtemp(prefix="taky-archcomp-chrome-"))
+        try:
+            cmd=[
+                str(browser),mode,"--disable-gpu","--no-sandbox",
+                "--no-pdf-header-footer","--print-to-pdf-no-header",
+                "--virtual-time-budget=15000","--run-all-compositor-stages-before-draw",
+                f"--user-data-dir={profile}",f"--print-to-pdf={pdf_path}",
+                html_path.resolve().as_uri()
+            ]
+            proc=subprocess.run(cmd,capture_output=True,text=True,timeout=120)
+            if proc.returncode==0 and pdf_path.exists() and pdf_path.stat().st_size>0:
+                return pdf_path
+            errors.append(f"{mode}:{proc.returncode}:{(proc.stderr or proc.stdout)[-400:]}")
+        except subprocess.TimeoutExpired:
+            errors.append(f"{mode}:TIMEOUT")
+        finally:
+            shutil.rmtree(profile,ignore_errors=True)
+    raise RuntimeError("HTML_PDF_RENDER_FAILED:"+" | ".join(errors)[-1200:])
+def powerpoint_in_use():
+    """COM automation attaches to an already running PowerPoint; never automate inside a user's live session by default."""
+    if not sys.platform.startswith("win") or os.environ.get("ARCHIGROW_ALLOW_SHARED_POWERPOINT")=="1":
+        return False
+    out=subprocess.run(["tasklist","/FI","IMAGENAME eq POWERPNT.EXE","/NH"],capture_output=True,text=True,errors="replace").stdout
+    return "POWERPNT.EXE" in out.upper()
+
 def render_ppt(build_dir):
+    if powerpoint_in_use():
+        raise RuntimeError("POWERPOINT_IN_USE: close PowerPoint or set ARCHIGROW_ALLOW_SHARED_POWERPOINT=1 to accept shared-instance risk")
     build_ps=build_dir/"BUILD_PPTX.ps1"
     if not build_ps.exists():
         raise RuntimeError("BUILD_PPTX_SCRIPT_NOT_FOUND")
+    pptx=build_dir/"competition-report.pptx"
+    pdf=build_dir/"competition-report.pdf"
+    for stale in (pptx,pdf):
+        stale.unlink(missing_ok=True)
     proc=subprocess.run(
         ["powershell","-NoProfile","-ExecutionPolicy","Bypass","-File",str(build_ps)],
         capture_output=True,text=True,timeout=180
     )
-    pptx=build_dir/"competition-report.pptx"
     if proc.returncode!=0 or not pptx.exists():
         raise RuntimeError("PPTX_BUILD_FAILED:"+((proc.stderr or proc.stdout)[-1000:]))
 
-    pdf=build_dir/"competition-report.pdf"
     fd,ps_name=tempfile.mkstemp(prefix="taky-ppt-render-",suffix=".ps1")
     os.close(fd)
     ps=Path(ps_name)
     script=f"""$ErrorActionPreference='Stop'
 $ppt=New-Object -ComObject PowerPoint.Application
-$pres=$ppt.Presentations.Open('{str(pptx).replace("'","''")}',$true,$false,$false)
-$slides=$pres.Slides.Count
-$pres.SaveAs('{str(pdf).replace("'","''")}',32)
-$pres.Close()
-$ppt.Quit()
-Write-Output ('SLIDES='+$slides)
+$pres=$null
+try {{
+  $pres=$ppt.Presentations.Open('{str(pptx).replace("'","''")}',$true,$false,$false)
+  $slides=$pres.Slides.Count
+  $pres.SaveAs('{str(pdf).replace("'","''")}',32)
+  Write-Output ('SLIDES='+$slides)
+}} finally {{
+  # Close only our deck; never quit a PowerPoint the user already has open.
+  if($pres) {{ try {{ $pres.Close() }} catch {{}} ; [void][Runtime.InteropServices.Marshal]::ReleaseComObject($pres) }}
+  if($ppt.Presentations.Count -eq 0) {{ $ppt.Quit() }}
+  [void][Runtime.InteropServices.Marshal]::ReleaseComObject($ppt)
+  [GC]::Collect(); [GC]::WaitForPendingFinalizers()
+}}
 """
     try:
         ps.write_text(script,encoding="utf-8-sig")

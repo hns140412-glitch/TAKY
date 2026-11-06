@@ -8,9 +8,14 @@ ROOT=Path(__file__).resolve().parents[1]
 MODULES={
 "REFERENCE_EVIDENCE":{"script":"ARCHIGROW_REFERENCE_FORMING.py","stage":"REFERENCE_FORMING"},
 "SOURCE":{"script":"ARCHIGROW_SOURCE_REGISTRY.py","stage":"SOURCE_LOCK"},
+"SITE_SOURCE":{"script":"ARCHIGROW_PARCEL_SOURCE.py","stage":"SITE_SOURCE"},
+"SITE_ANALYSIS":{"script":"ARCHIGROW_SITE_ANALYSIS_REPORT.py","stage":"SITE_ANALYSIS"},
 "SITE_LAW":{"script":"ARCHIGROW_REGULATORY_COMPILER.py","stage":"REGULATORY_CANDIDATE"},
 "LAYOUT_KPI":{"script":"ARCHIGROW_LAYOUT_KPI.py","stage":"DESIGN_KPI"},
+"MASSING":{"script":"ARCHIGROW_MASSING.py","stage":"MASSING_CANDIDATE"},
 "CAD_AREA_SVG":{"script":"ARCHIGROW_AREA_DXF_SVG.py","stage":"AREA_EVIDENCE"},
+"AREA_CHANGESET":{"script":"ARCHIGROW_AREA_CHANGESET.py","stage":"AREA_CHANGESET"},
+"DESIGN_RULE_REVIEW":{"script":"ARCHIGROW_DESIGN_RULE_REVIEW.py","stage":"DESIGN_RULE_REVIEW"},
 "OVERVIEW_BIND":{"script":"ARCHIGROW_DESIGN_OVERVIEW_BIND.py","stage":"OVERVIEW_CANDIDATE"},
 "USE_GROUP":{"script":"ARCHIGROW_USE_GROUP_CLASSIFIER.py","stage":"USE_GROUP_CANDIDATE"},
 "PRODUCTION":{"script":"ARCHIGROW_PRODUCTION_TRACE.py","stage":"PRODUCTION_TRACE"},
@@ -20,21 +25,28 @@ MODULES={
 }
 ROUTES={
 "REFERENCE_REVIEW":["REFERENCE_EVIDENCE"],
+"MASSING_STUDY":["MASSING"],
+"SITE_MASSING":["SITE_SOURCE","MASSING"],
+"SITE_ANALYSIS_REPORT":["SITE_ANALYSIS"],
 "PURSUIT":["SOURCE","SITE_LAW","LAYOUT_KPI","GEOMETRY_GUARD","COMPETITION","CASE_LEARNING"],
 "PRODUCTION":["SOURCE","CAD_AREA_SVG","OVERVIEW_BIND","USE_GROUP","SITE_LAW","PRODUCTION","CASE_LEARNING"],
+"DRAWING_REVISION":["CAD_AREA_SVG","AREA_CHANGESET"],
+"PLAN_MANUAL_REVIEW":["DESIGN_RULE_REVIEW"],
 "REPORT":["SOURCE","GEOMETRY_GUARD","COMPETITION","CASE_LEARNING"],
 "FULL":["SOURCE","SITE_LAW","LAYOUT_KPI","CAD_AREA_SVG","OVERVIEW_BIND","USE_GROUP","GEOMETRY_GUARD","PRODUCTION","COMPETITION","CASE_LEARNING"]
 }
 # Router capability -> executable stage(s) of ARCHIGROW_PIPELINE_RUN.py (SOURCE is a registry gate, not a project stage).
-PIPELINE_STAGES={"REFERENCE_EVIDENCE":["REFERENCE_FORMING"],"SITE_LAW":["REGULATORY"],"LAYOUT_KPI":["LAYOUT_KPI"],"CAD_AREA_SVG":["AREA_EVIDENCE"],"OVERVIEW_BIND":["OVERVIEW_BIND"],
+PIPELINE_STAGES={"SITE_SOURCE":["SITE_SOURCE"],"SITE_ANALYSIS":["SITE_ANALYSIS"],"MASSING":["MASSING"],"REFERENCE_EVIDENCE":["REFERENCE_FORMING"],"SITE_LAW":["REGULATORY"],"LAYOUT_KPI":["LAYOUT_KPI"],"CAD_AREA_SVG":["AREA_EVIDENCE"],"AREA_CHANGESET":["AREA_CHANGESET"],"DESIGN_RULE_REVIEW":["DESIGN_RULE_REVIEW"],"OVERVIEW_BIND":["OVERVIEW_BIND"],
  "USE_GROUP":["USE_GROUP"],"PRODUCTION":["PRODUCTION_TRACE"],"GEOMETRY_GUARD":["GEOMETRY_GUARD"],"COMPETITION":["COMPETITION"],"CASE_LEARNING":["CASE_CANDIDATE"]}
-INPUT_TEMPLATES={"REFERENCE_FORMING":("reference_forming",{"evidence_manifest":None,"collector_candidate_pointer":None}),"REGULATORY":("regulatory",{"input":None}),"LAYOUT_KPI":("layout",{"model":None}),"AREA_EVIDENCE":("area",{"dxf":None,"mapping":None}),
+INPUT_TEMPLATES={"SITE_SOURCE":("site_source",{"input":None}),"SITE_ANALYSIS":("site_analysis",{"site_source_receipt":None}),"MASSING":("massing",{"input":None}),"REFERENCE_FORMING":("reference_forming",{"evidence_manifest":None,"collector_candidate_pointer":None}),"REGULATORY":("regulatory",{"input":None}),"LAYOUT_KPI":("layout",{"model":None}),"AREA_EVIDENCE":("area",{"dxf":None,"mapping":None}),"AREA_CHANGESET":("area_changeset",{"previous_stage_dir":None}),"DESIGN_RULE_REVIEW":("design_review",{"plan_json":None,"manual_rulepack_json":None}),
  "OVERVIEW_BIND":("overview",{"approved_overview":None}),"USE_GROUP":("use_group",{"input":None}),"PRODUCTION_TRACE":("production",{"trace":None}),
  "GEOMETRY_GUARD":("geometry_guard",{"input":None}),"COMPETITION":("competition",{"delivery":None,"brief_file":None,"source_dir":None,"render":False})}
 def manifest_template(project_id,route):
     """Executable skeleton for ARCHIGROW_PIPELINE_RUN.py; null inputs must be bound to verified project sources before running."""
     stages=[s for name in plan(project_id,route)["steps"] for s in name["pipeline_stages"]]
     inputs={INPUT_TEMPLATES[s][0]:dict(INPUT_TEMPLATES[s][1]) for s in stages if s in INPUT_TEMPLATES}
+    if route=="SITE_MASSING":
+        inputs["massing"]={"source_stage":"SITE_SOURCE"}
     if "AREA_EVIDENCE" in stages and "LAYOUT_KPI" in stages:
         stages.insert(stages.index("LAYOUT_KPI")+1,"AREA_KPI_CROSS_CHECK")
         inputs["cross_check"]=[{"area_scope":None,"area_level":None,"kpi":"gfa_area","tolerance_m2":None}]

@@ -62,13 +62,21 @@ def inspect_source(path):
         return {"kind":"VECTOR","width_px":None,"height_px":None,"aspect":None}
     if suffix==".pdf":
         return {"kind":"PDF","width_px":None,"height_px":None,"aspect":None}
-    if suffix in {".png",".jpg",".jpeg",".webp",".gif"} and Image is not None and p.exists():
+    if suffix in {".png",".jpg",".jpeg",".webp",".gif"}:
+        # A raster whose pixels cannot be read must not slip past the resolution gate as "OTHER".
+        if Image is None:
+            return {"kind":"RASTER_UNINSPECTED","width_px":None,"height_px":None,"aspect":None,"reason":"PIL_UNAVAILABLE"}
+        saved_limit=Image.MAX_IMAGE_PIXELS
         try:
+            # Only the header is read (no pixel decode), so large competition renders (>179 MP) are inspected, not rejected.
+            Image.MAX_IMAGE_PIXELS=None
             with Image.open(p) as im:
                 w,h=im.size
             return {"kind":"RASTER","width_px":w,"height_px":h,"aspect":round(w/h,4) if h else None}
-        except Exception:
-            pass
+        except Exception as exc:
+            return {"kind":"RASTER_UNINSPECTED","width_px":None,"height_px":None,"aspect":None,"reason":type(exc).__name__}
+        finally:
+            Image.MAX_IMAGE_PIXELS=saved_limit
     return {"kind":"OTHER","width_px":None,"height_px":None,"aspect":None}
 
 def layout_role(mode, index):
@@ -161,28 +169,28 @@ html,body{{margin:0;padding:0;font-family:'Noto Sans KR','Malgun Gothic',Arial,s
 .page:last-child{{page-break-after:auto}}
 .header{{grid-column:1/-1;min-height:28mm;border-top:1.1mm solid #151515;border-bottom:.25mm solid #b6b1a6;padding:4mm 0 4.5mm;display:flex;justify-content:space-between;align-items:end}}
 .header-left{{max-width:80%}}
-.kicker{{font-size:.70em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#c86435}}
+.kicker{{font-size:.75em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#c86435}}
 .title{{font-size:2.15em;font-weight:700;letter-spacing:-.035em;line-height:1.15;margin:1.3mm 0 0;max-width:100%}}
 .subtitle{{font-size:.9em;color:#555;margin-top:1.2mm}}
-.meta{{font-size:.70em;line-height:1.45;text-align:right;color:#777;white-space:nowrap}}
-.mode-chip{{display:inline-block;background:#151515;color:#fff;padding:1.2mm 2.2mm;font-size:.66em;font-weight:700;letter-spacing:.10em}}
-.argument-line{{grid-column:1/-1;margin-top:1.5mm;font-size:.72em;color:#555;letter-spacing:.01em}}
+.meta{{font-size:.75em;line-height:1.45;text-align:right;color:#777;white-space:nowrap}}
+.mode-chip{{display:inline-block;background:#151515;color:#fff;padding:1.2mm 2.2mm;font-size:.75em;font-weight:700;letter-spacing:.10em}}
+.argument-line{{grid-column:1/-1;margin-top:1.5mm;font-size:.75em;color:#555;letter-spacing:.01em}}
 .primary{{grid-column:1/10;min-height:255mm}}
 .support{{grid-column:10/-1;display:flex;flex-direction:column;gap:5mm;padding-top:1mm}}
 .card{{border-top:.35mm solid #151515;padding-top:3mm}}
 .card.soft{{border-top:.25mm solid #b6b1a6}}
-.card-label{{font-size:.66em;font-weight:700;letter-spacing:.10em;color:#c86435;margin-bottom:1.2mm}}
+.card-label{{font-size:.75em;font-weight:700;letter-spacing:.10em;color:#c86435;margin-bottom:1.2mm}}
 .card-body{{font-size:.82em;line-height:1.55;color:#444}}
 .source-frame{{width:100%;height:100%;min-height:120mm;background:#fff;border:.22mm solid #d7d4cb;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}}
 .source-frame::after{{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 .15mm rgba(21,21,21,.025)}}
 .source-img{{width:100%;height:100%;object-fit:contain;display:block}}
 .missing{{width:100%;height:100%;min-height:80mm;background:#f4e8e4;border:.45mm dashed #9b4b42;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3mm;color:#7d4d48;text-align:center;padding:8mm}}
 .missing strong{{font-size:.9em;letter-spacing:.10em;color:#9b4b42}}
-.missing span{{font-size:.72em;line-height:1.45;max-width:70%}}
+.missing span{{font-size:.75em;line-height:1.45;max-width:70%}}
 .bound-file{{padding:10mm;text-align:center;font-size:.78em;color:#555}}
 .question{{font-size:1.15em;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0 0 2mm}}
-.tech{{font-size:.70em;line-height:1.45;color:#666;margin-top:1.5mm}}
-.footer{{position:absolute;bottom:6mm;left:{footer_lr};right:{footer_lr};border-top:.2mm solid #b6b1a6;padding-top:2mm;font-size:.60em;color:#777;display:flex;justify-content:space-between}}
+.tech{{font-size:.75em;line-height:1.45;color:#666;margin-top:1.5mm}}
+.footer{{position:absolute;bottom:6mm;left:{footer_lr};right:{footer_lr};border-top:.2mm solid #b6b1a6;padding-top:2mm;font-size:.75em;color:#777;display:flex;justify-content:space-between}}
 .page-no{{font-weight:700;color:#151515}}
 .a3-body{{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:5mm;margin-top:7mm}}
 .a3-body.layout-hero .visual{{grid-column:1/-1;min-height:270mm}}
@@ -210,14 +218,14 @@ html,body{{margin:0;padding:0;font-family:'Noto Sans KR','Malgun Gothic',Arial,s
 .board-item .source-frame{{flex:1;min-height:0}}
 .board-item.slot-1 .source-frame{{min-height:135mm}}
 .board-caption{{display:flex;justify-content:space-between;gap:4mm;align-items:flex-start;margin-top:2mm}}
-.board-caption .mode{{font-size:.65em;font-weight:700;letter-spacing:.08em;color:#c86435}}
+.board-caption .mode{{font-size:.75em;font-weight:700;letter-spacing:.08em;color:#c86435}}
 .board-caption .claim{{font-size:.78em;font-weight:600;line-height:1.35;max-width:76%}}
 .sheet-index{{grid-column:1/-1;margin-top:10mm}}
 .sheet-titlebar{{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:.35mm solid #151515;padding-bottom:3mm;margin-bottom:5mm}}
 .sheet-title{{font-size:1.55em;font-weight:700;letter-spacing:-.03em}}
-.sheet-meta{{font-size:.68em;color:#666;text-align:right}}
+.sheet-meta{{font-size:.75em;color:#666;text-align:right}}
 table{{border-collapse:collapse;width:100%;font-size:.78em;background:#fff}}
-th{{font-size:.72em;letter-spacing:.08em;text-transform:uppercase;color:#666}}
+th{{font-size:.75em;letter-spacing:.08em;text-transform:uppercase;color:#666}}
 th,td{{border-bottom:.2mm solid #d7d4cb;padding:3mm 2mm;text-align:left;vertical-align:top}}
 tr:first-child th{{border-top:.35mm solid #151515}}
 """
@@ -363,7 +371,12 @@ $slides = @'
 {data}
 '@ | ConvertFrom-Json
 function RGBi([int]$r,[int]$g,[int]$b) {{ return $r + (256*$g) + (65536*$b) }}
-function AddText($slide,$x,$y,$w,$h,$text,$size,$bold,$color,$font='Noto Sans KR') {{
+Add-Type -AssemblyName System.Drawing
+$installed=(New-Object System.Drawing.Text.InstalledFontCollection).Families | ForEach-Object {{ $_.Name }}
+$script:FontName=@('Noto Sans KR','Malgun Gothic','맑은 고딕') | Where-Object {{ $installed -contains $_ }} | Select-Object -First 1
+if(-not $script:FontName) {{ $script:FontName='Arial'; Write-Output 'FONT_WARNING=NO_KOREAN_FONT' }}
+Write-Output ('FONT='+$script:FontName)
+function AddText($slide,$x,$y,$w,$h,$text,$size,$bold,$color,$font=$script:FontName) {{
   $tb=$slide.Shapes.AddTextbox(1,$x,$y,$w,$h)
   $tb.TextFrame.MarginLeft=0; $tb.TextFrame.MarginRight=0; $tb.TextFrame.MarginTop=0; $tb.TextFrame.MarginBottom=0
   $tb.TextFrame.TextRange.Text=[string]$text
@@ -375,6 +388,8 @@ function AddText($slide,$x,$y,$w,$h,$text,$size,$bold,$color,$font='Noto Sans KR
 }}
 $ppt = New-Object -ComObject PowerPoint.Application
 $ppt.Visible = [Microsoft.Office.Core.MsoTriState]::msoTrue
+$pres = $null
+try {{
 $pres = $ppt.Presentations.Add()
 $pres.PageSetup.SlideWidth = 960
 $pres.PageSetup.SlideHeight = 540
@@ -438,8 +453,13 @@ foreach($s in $slides) {{
   AddText $slide 866 503 46 18 (([string]$s.slide_no).PadLeft(2,'0')+'/'+([string]$total).PadLeft(2,'0')) 10 $true (RGBi 21 21 21) | Out-Null
 }}
 $pres.SaveAs('{target}')
-$pres.Close()
-$ppt.Quit()
+}} finally {{
+  # COM attaches to an already running PowerPoint: close only our deck, quit only if nothing else is open.
+  if($pres) {{ try {{ $pres.Close() }} catch {{}} ; [void][Runtime.InteropServices.Marshal]::ReleaseComObject($pres) }}
+  if($ppt.Presentations.Count -eq 0) {{ $ppt.Quit() }}
+  [void][Runtime.InteropServices.Marshal]::ReleaseComObject($ppt)
+  [GC]::Collect(); [GC]::WaitForPendingFinalizers()
+}}
 """
 def write_html(path, package, body, delivery):
     title=esc((package.get("brief") or {}).get("competition_name") or "ArchiGrow Competition Output")

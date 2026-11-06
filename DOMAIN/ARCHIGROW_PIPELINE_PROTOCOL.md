@@ -29,6 +29,8 @@ Every material stage SHOULD emit a compact receipt:
 `PIPELINE_ID / STAGE_ID / INPUT_REF+HASH / TOOL+VERSION / OUTPUT_REF+HASH / CHECKS / STATUS / FAILURE_CLASS / NEXT_ROUTE`.
 
 Allowed status: `PASS / HOLD / FAIL / BLOCKED / NEEDS_HUMAN`.
+
+Reference runtime: `TOOLS/ARCHIGROW_PIPELINE_RUN.py <manifest>` executes an `ARCHIGROW_PIPELINE_MANIFEST_V1` (skeleton: `TOOLS/ARCHIGROW_WORKFLOW_ROUTER.py <project> --route <R> --manifest-template`). It writes one receipt per stage, reuses an unchanged last PASS (`REUSED_LAST_PASS`), blocks only dependents of a HOLD/FAIL, blocks unbound template inputs (`INPUT_NOT_BOUND`), enforces target-project identity on every input and never writes the learning ledger. Regression: `ENFORCEMENT/architecture_pipeline_runtime_test.py`.
 `BLOCKED != FAILED` and `TOOL FAILURE != RESULT IMPOSSIBLE`.
 
 ## 4. Recovery logic

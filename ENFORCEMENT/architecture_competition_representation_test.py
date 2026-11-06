@@ -55,6 +55,13 @@ def main():
     Args.brief_file = str(brief_path)
     Args.brief_verified = False
     Args.content_frozen = False
+    Args.delivery = "PPT"  # explicit request that contradicts the brief must not be silently replaced
+    try:
+        mod.build_package(Args(), reg)
+        raise AssertionError("DELIVERY_CONFLICT not raised")
+    except ValueError as exc:
+        assert "DELIVERY_CONFLICT" in str(exc)
+    Args.delivery = None
     package3 = mod.build_package(Args(), reg)
     modes3 = [item["mode"] for item in package3["items"]]
     assert package3["status"] == "CANDIDATE"

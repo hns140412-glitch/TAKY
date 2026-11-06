@@ -15,7 +15,7 @@ def load_rows(path):
         try:
             rows.append(json.loads(line))
         except json.JSONDecodeError:
-            pass
+            raise ValueError(f"LEDGER_CORRUPT_LINE:{p}")
     return rows
 
 def compare(rows, agency, competition):
