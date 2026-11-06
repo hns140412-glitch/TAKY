@@ -60,7 +60,8 @@ Contains only the state needed to continue safely:
 - material corrections;
 - source/evidence pointers;
 - update timestamp;
-- optional parent checkpoint hash/reference.
+- optional parent checkpoint hash/reference;
+- for material pipeline stages: input/output revision or hash, applied contract/version, checks/evidence, dependency/failure class, next route, side effects/rollback and approval scope when relevant.
 
 ### HISTORY
 Immutable minimal checkpoint evidence.

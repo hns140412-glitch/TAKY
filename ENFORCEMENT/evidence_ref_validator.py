@@ -78,6 +78,13 @@ def validate_history_relevance(ref: Dict[str, Any], repo_root: Path) -> Tuple[bo
         rel = str(ref.get("path", "")).strip()
         if not rel.startswith("HISTORY/"):
             return False, "HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY"
+        # A textual prefix does not establish provenance: traversal and links
+        # can point at an unrelated, correctly hashed repository file.
+        history_root = repo_root.resolve() / "HISTORY"
+        try:
+            (repo_root / rel).resolve().relative_to(history_root)
+        except (ValueError, OSError, RuntimeError):
+            return False, "HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY"
         return True, "VERIFIED_HISTORY_FILE"
 
     if kind == "repo_commit":
@@ -87,7 +94,7 @@ def validate_history_relevance(ref: Dict[str, Any], repo_root: Path) -> Tuple[bo
             return False, "HISTORY_EVIDENCE_PATHS_MISSING"
         for raw in paths:
             rel = str(raw).strip()
-            if not rel.startswith("HISTORY/"):
+            if not rel.startswith("HISTORY/") or ".." in rel.replace("\\", "/").split("/"):
                 return False, "HISTORY_PATH_OUTSIDE_CANONICAL_HISTORY"
             if not git_ok(repo_root, "cat-file", "-e", f"{commit}:{rel}"):
                 return False, "HISTORY_EVIDENCE_PATH_NOT_IN_COMMIT"

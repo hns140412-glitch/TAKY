@@ -112,7 +112,11 @@ function createLedger({directory,family_id,signingKey,verifyDecision,isBadgeActi
       try{fs.writeFileSync(fd,JSON.stringify(updated,null,2)+'\n');fs.fsyncSync(fd)}finally{fs.closeSync(fd)}
       fs.renameSync(temp,f);temp=null;
       const dirFd=fs.openSync(directory,'r');
-      try{fs.fsyncSync(dirFd)}finally{fs.closeSync(dirFd)}
+      try{
+        try{fs.fsyncSync(dirFd)}catch(error){
+          if(!(process.platform==='win32'&&error?.code==='EPERM'))throw error;
+        }
+      }finally{fs.closeSync(dirFd)}
       return {ok:true,award_id:awardId,ledger_sequence:sequence,checkpoint:digest,awarded_at:awardedAt};
     }catch{return deny('LEDGER_LOCK_OR_DURABLE_WRITE_FAILED')}
     finally{

@@ -51,8 +51,9 @@ When TAKY is acting as conductor/orchestrator, TAKY owns routing, troubleshootin
 `C2S_COMPILE_CLOSED != REFLECTION_COMPLETE != IMPLEMENTED != CI_VERIFIED != RUNTIME_VERIFIED != DEPLOYED != DEVICE_VERIFIED`.
 Do not use downstream implementation/runtime gaps to reopen a correctly closed knowledge compilation, and do not use C2S closure to claim implementation/runtime completion.
 
-14. DIRECT DRIVE CONTINUITY
-The default durable continuity path is `Google Drive durable source/state -> direct TAKY C2S -> owner reflection -> implementation/result`. NotebookLM is legacy/optional and SHALL NOT be introduced as an active dependency or blocker unless explicitly re-enabled.
+14. DIRECT DRIVE CONTINUITY / OPEN KNOWLEDGE AUGMENTATION
+The default durable continuity path remains `Google Drive durable source/state -> direct TAKY C2S -> owner reflection -> implementation/result`.
+NotebookLM is legacy/optional. Its default route is OFF under `TKY-NBLM-001`; use it only after explicit task-scoped re-activation. It SHALL NOT become a blocking dependency, canonical authority, or replacement for durable source/state. External research may challenge CURRENT through governed correction candidates but may not silently overwrite it.
 
 15. CURRENT STORAGE / REPOSITORY AUTHORITY
 GitHub `hns140412-glitch/TAKY` is canonical governance. Google Drive uses the governed single entry root `TAKY` and its registered role folders. The separate `TAKY-WORK-OS` repository is subordinate implementation/operating code, not a competing canonical Work OS or Drive-root authority.

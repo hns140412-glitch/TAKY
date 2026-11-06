@@ -11,6 +11,11 @@ import hashlib
 import json
 from pathlib import Path
 
+STATE_ALIASES = {
+    "ASSIGNED_TO_EXECUTOR": "ASSIGNED_TO_CODEX",
+    "EXECUTOR_DONE": "CODEX_DONE",
+}
+
 ALLOWED_TRANSITIONS = {
     "READY": {"ASSIGNED_TO_CODEX"},
     "ASSIGNED_TO_CODEX": {"IN_PROGRESS"},
@@ -146,14 +151,18 @@ def validate_transition_approval(
         "approval_id": approval_id.strip() if isinstance(approval_id, str) else None,
         "approver_ref": approver_ref.strip() if isinstance(approver_ref, str) else None,
         "decision": decision,
+        "evidence_level": "BOUND_RECORD_ONLY",
+        "identity_authenticated": False,
         **context,
     }
     return normalized, context, failures
 
 
 def transition(record: dict) -> dict:
-    current = str(record.get("current_state", "")).strip().upper()
-    requested = str(record.get("requested_state", "")).strip().upper()
+    current_raw = str(record.get("current_state", "")).strip().upper()
+    requested_raw = str(record.get("requested_state", "")).strip().upper()
+    current = STATE_ALIASES.get(current_raw, current_raw)
+    requested = STATE_ALIASES.get(requested_raw, requested_raw)
     if not current or not requested:
         return {"pass": False, "detected": ["STATE_TRANSITION_INCOMPLETE"]}
 

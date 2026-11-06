@@ -125,6 +125,12 @@ The current architecture skeleton-to-flesh status, maturity gaps and build prior
 The conversation-derived source ledger for the 2026-09-19 architecture-system design episode is:
 - `HISTORY/2026-09-19_ARCHITECTURE_C2S_LEDGER.json`.
 
+Subordinate execution routes (load when architecture production is material; they do not own domain semantics):
+- `DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md` — result -> toolchain -> quality-gate routes;
+- `DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md` — stage contract / receipt / restart-from-last-PASS;
+- `DOMAIN/ARCHITECTURE_COMPETITION_REPORT_PLAYBOOK.md` + `DOMAIN/ARCHITECTURE_COMPETITION_REPRESENTATION_REGISTRY.json` + `DOMAIN/ARCHITECTURE_COMPETITION_ARTIFACT_SCHEMA.json` — competition report/panel drawing representation execution knowledge and artifact-granularity learning contract;
+- `OS/WORKSTATION_CONTROL.md` + `OS/WORKSTATION_CAPABILITY_REGISTRY.md` — PC/CAD/Excel/HWP action authority and verified tools.
+
 These files do not override this domain owner. The Growth Map directs unfinished capability development; the C2S ledger preserves requirement/correction/frontier lineage and coverage evidence.
 
 `GROWTH MAP != CANONICAL SEMANTIC OWNER`

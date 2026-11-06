@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Architecture Competition Brief Normalized Input",
+  "type": "object",
+  "required": ["competition_name", "verified"],
+  "properties": {
+    "competition_name": {"type": "string"},
+    "phase": {"type": "string"},
+    "verified": {"type": "boolean"},
+    "delivery": {"enum": ["A1_BOARD", "A3_REPORT", "PPT", "PDF_DRAWING_BOOK"]},
+    "panel_size": {"type": ["string", "null"]},
+    "panel_count": {"type": ["integer", "null"], "minimum": 1},
+    "page_size": {"type": ["string", "null"]},
+    "page_count": {"type": ["integer", "null"], "minimum": 1},
+    "mandatory_modes": {
+      "type": "array",
+      "items": {"enum": ["CONTEXT", "CONCEPT", "PROGRAM", "CIRCULATION", "PLAN", "SECTION", "ELEVATION", "AXONOMETRIC", "PERFORMANCE", "EXPERIENCE", "TECHNICAL"]}
+    },
+    "mandatory_drawings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "mode": {"type": ["string", "null"]},
+          "scale": {"type": ["string", "null"]},
+          "notes": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "anonymity": {"type": ["boolean", "null"]},
+    "color_constraints": {"type": ["string", "null"]},
+    "file_constraints": {"type": ["string", "null"]},
+    "content_frozen": {"type": "boolean", "default": false},
+    "no_post_submission_enhancement": {"type": "boolean", "default": false},
+    "presentation_minutes": {"type": ["number", "null"]},
+    "notes": {"type": ["string", "null"]}
+  }
+}

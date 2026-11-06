@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-10-02.beta-hardening-candidate",
+  "registry_version": "2026-10-03.beta-consolidation-candidate",
   "purpose": "Machine-readable single-owner registry. Rule semantics live only in the declared owner; other documents may activate or reference them but must not redefine them.",
   "rules": [
     {
@@ -101,6 +101,26 @@
       "rule_id": "TKY-ASSET-001",
       "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
       "scope": "global default for approved/reusable visual asset originals and separate layers in TAKY-ASSETS, exact-revision app pointers and verified PWA build copies, design-to-UI source/visual/runtime delivery gate across chats"
+    },
+    {
+      "rule_id": "TKY-CONNECTION-001",
+      "owner": "OS/AI_CONNECTION_SECURITY.md",
+      "scope": "AI/connector/plugin/MCP trust, prompt-injection, least-privilege and external-action security boundary"
+    },
+    {
+      "rule_id": "TKY-SAVEY-001",
+      "owner": "OS/SAVEY_AI_ECONOMY.md",
+      "scope": "subscription/local-first AI execution routing and cost-aware provider selection without lowering acceptance criteria"
+    },
+    {
+      "rule_id": "TKY-WORKSTATION-001",
+      "owner": "OS/WORKSTATION_CONTROL.md",
+      "scope": "controlled PC-side project execution, workspace/action boundaries, source preservation and application/result verification"
+    },
+    {
+      "rule_id": "TKY-ARCHIPIPE-001",
+      "owner": "DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md",
+      "scope": "architecture strong-pipeline stage contracts, receipts, recovery, cross-format integrity and delivery-surface validation"
     },
     {
       "rule_id": "TKY-CHECKPOINT-001",

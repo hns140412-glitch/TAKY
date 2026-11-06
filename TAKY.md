@@ -71,6 +71,15 @@ TAKY ≠ chatbot persona only.
 TAKY ≠ a new authority layer above GRAND MASTER.
 GRAND MASTER LOGIC = TAKY's highest internal governance logic.
 
+## AI connection / security boundary
+External AI, MCP, plugin, connector and knowledge-source connectivity is governed by `OS/AI_CONNECTION_SECURITY.md`.
+TAKY remains open to new knowledge/tools while preserving least privilege, provenance, prompt-injection boundaries, human approval for high-impact/cost actions, and portable authority.
+
+## Economic operation boundary — SAVEY
+AI usage/cost routing is owned by `OS/SAVEY_AI_ECONOMY.md` under TAKY governance.
+SAVEY manages subscription utilization, model-call economy, and paid-API avoidance; it is not product or authority ownership.
+`TAKY AUTHORITY > SAVEY ECONOMY` and cost optimization SHALL NOT lower acceptance criteria, validation quality, or human approval boundaries.
+
 ## Primary execution priority — HARD LOCK
 
 For material result-producing work:
@@ -119,6 +128,7 @@ Additional routing:
 - For shared learning-app/session contracts, load applicable GUIDE OS rules first, then `MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md` (historical filename; official REV_00), then project master/inherited detailed baseline. Historical Handoff provides recovery pointers, not authority or proof of current implementation.
 - For Ready & Set product/design/runtime work, load `PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md` after shared GUIDE/Family layers. Actual GitHub branch/runtime evidence outranks stale implementation snapshots.
 - For GUIDE character identity/relationship/lifecycle/personality/Special Friend/shared Guide presence, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` after `OS/GUIDE_FAMILY_LEARNING_OS.md` and before project-specific Guide rules.
+- For character creation, Character Master, Visual ID derivatives, asset generation, character behavior, pose/expression/prop runtime selection, or cross-app character binding, also load `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`; preserve the hard boundary `ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
 - For learning-session wrap-up/reflection where One Good Reflection is applicable, load `OS/GUIDE_CHARACTER_RELATIONSHIP.md` without requiring a separate character request.
 - For command-discovery, Handoff/compact/resume interaction, archive/close commands, `/저장반영`, or Voice→Text routing, load `OS/COMMAND_INTERACTION.md`. For `/저장반영` also load `OS/DRIVE_C2S_DIRECT.md`.
 - For Notion reference/link review, load `OS/COMMAND_INTERACTION.md` and `OS/NOTION_OPS.md` plus the relevant unresolved Review Pending Register after canonical owners. `노션검토` / `노션 검토` / `/노션검토` defaults to the governed `📚 나의 링크` content/link-intelligence review unless the user explicitly names another Notion content collection; `/노션링크검토` is the explicit alias for the same workflow; `/노션구조검토` alone targets database/schema/view/automation structure. Generic `노션검토` SHALL NOT be reinterpreted as schema cleanup.

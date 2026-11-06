@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+ENFORCEMENT/fixtures/evidence_seed.bin -text
+ENFORCEMENT/fixtures/handoff_bundle_pass/** -text

@@ -12,9 +12,12 @@ This repository is governed by TAKY. Coding agents, including Codex, are impleme
 Handoff SHA, prior completion claims, and narrative summaries are evidence, not automatic authority. Verify current repository state before implementation.
 
 ## Role lock
-- TAKY/ChatGPT acts as ORCHESTRATOR and REVIEWER.
-- Codex acts as IMPLEMENTATION EXECUTOR.
-- Codex MUST NOT silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
+- TAKY acts as the top-level ORCHESTRATOR / AUTHORITY boundary.
+- Claude Code is the default primary IMPLEMENTATION EXECUTOR for the local TAKY workspace.
+- ChatGPT/Codex is the independent code-review / secondary implementation path when TAKY routes a material task to it.
+- Gemini is the long-context / research / alternative-review path when TAKY routes a material task to it.
+- SAVEY governs economic routing only: subscription/OAuth first, paid API only after explicit user approval.
+- No executor may silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
 - If implementation discovers a requirement conflict, stop the conflicting change and report the conflict; do not invent a product decision.
 
 ## Mandatory preflight before implementation
@@ -55,8 +58,10 @@ A Codex self-report is evidence only. `CODEX_DONE` is not `TAKY_PASS`.
 ## State machine
 In a TAKY-controlled repository runtime, lifecycle transitions SHOULD be executed/checked through `ENFORCEMENT/execution_state_engine.py` rather than inferred from narration.
 
-Allowed lifecycle:
-`READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`
+Canonical lifecycle semantics are executor-neutral:
+`READY -> ASSIGNED_TO_EXECUTOR -> IN_PROGRESS -> EXECUTOR_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`.
+
+For backward compatibility, controlled runtime currently accepts `ASSIGNED_TO_CODEX` as the internal alias of `ASSIGNED_TO_EXECUTOR` and `CODEX_DONE` as the internal alias of `EXECUTOR_DONE`. Executor identity (Claude/Codex/etc.) is recorded separately and must not redefine lifecycle semantics.
 
 Rules:
 - `CODEX_DONE -> MERGED` is forbidden.

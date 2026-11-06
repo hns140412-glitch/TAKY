@@ -4,7 +4,27 @@ on:
   push:
     paths:
       - 'AGENTS.md'
+      - 'CLAUDE.md'
       - 'TAKY.md'
+      - '.gitattributes'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'TOOLS/TAKY_MODEL_REVIEW.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'DOMAIN/ARCHITECTURE_COMPETITION_*'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'skills-lock.json'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/LEARNING_ENGINE_CORE.md'
@@ -66,7 +86,27 @@ on:
   pull_request:
     paths:
       - 'AGENTS.md'
+      - 'CLAUDE.md'
       - 'TAKY.md'
+      - '.gitattributes'
+      - '.mcp.json'
+      - '.claude/settings.json'
+      - '.claude/hooks/**'
+      - 'TOOLS/TAKY_CLAUDE_LAUNCH.ps1'
+      - 'TOOLS/TAKY_SETUP_CHECK.ps1'
+      - 'TOOLS/TAKY_STATUSLINE.ps1'
+      - 'TOOLS/TAKY_MODEL_REVIEW.ps1'
+      - 'OS/AI_CONNECTION_SECURITY.md'
+      - 'OS/AI_CONNECTION_AUDIT.json'
+      - 'OS/SAVEY_AI_ECONOMY.md'
+      - 'OS/WORKSTATION_CONTROL.md'
+      - 'OS/WORKSTATION_CAPABILITY_REGISTRY.md'
+      - 'DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md'
+      - 'DOMAIN/ARCHIGROW_PIPELINE_PROTOCOL.md'
+      - 'DOMAIN/ARCHITECTURE_COMPETITION_*'
+      - 'MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md'
+      - 'MASTER/EXECUTION_CHECKPOINT_SCHEMA.json'
+      - 'skills-lock.json'
       - 'MASTER/MASTER_FILE_REGISTRY.json'
       - 'MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json'
       - 'OS/LEARNING_ENGINE_CORE.md'
@@ -144,6 +184,7 @@ jobs:
           python -m py_compile ENFORCEMENT/evidence_ref_validator.py
           python -m py_compile ENFORCEMENT/preflight_bridge.py
           python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
+          python -m py_compile ENFORCEMENT/evidence_history_boundary_test.py
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
@@ -159,6 +200,7 @@ jobs:
           python -m py_compile ENFORCEMENT/behavioral_eval.py
           python -m py_compile ENFORCEMENT/trace_to_regression.py
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint_identity_test.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
@@ -179,6 +221,19 @@ jobs:
           python -m py_compile ENFORCEMENT/work_os_productive_router.py
           python -m py_compile ENFORCEMENT/review_result_c2s_validator.py
           python -m py_compile ENFORCEMENT/work_os_registry_validator.py
+          python -m py_compile .claude/hooks/taky_hook.py
+          python -m py_compile .claude/hooks/taky_outcome_hook.py
+          python -m py_compile ENFORCEMENT/claude_hook_regression.py
+          python -m py_compile ENFORCEMENT/outcome_hook_regression.py
+          python -m py_compile ENFORCEMENT/architecture_competition_compare_test.py
+          python -m py_compile ENFORCEMENT/architecture_competition_learning_test.py
+          python -m py_compile ENFORCEMENT/architecture_competition_output_pipeline_test.py
+          python -m py_compile ENFORCEMENT/architecture_competition_representation_test.py
+          python -m py_compile ENFORCEMENT/architecture_competition_visual_quality_test.py
+      - name: Replay Claude hook security regression
+        run: python ENFORCEMENT/claude_hook_regression.py
+      - name: Replay TAKY outcome hook regression
+        run: python ENFORCEMENT/outcome_hook_regression.py
       - name: Lint rule ownership registry
         run: |
           python ENFORCEMENT/rule_registry_lint.py
@@ -195,6 +250,13 @@ jobs:
         run: python ENFORCEMENT/shared_technical_capability_validator.py
       - name: Validate system layer ownership map
         run: python ENFORCEMENT/system_layer_ownership_validator.py
+      - name: Validate architecture competition production pipeline
+        run: |
+          python ENFORCEMENT/architecture_competition_compare_test.py
+          python ENFORCEMENT/architecture_competition_learning_test.py
+          python ENFORCEMENT/architecture_competition_output_pipeline_test.py
+          python ENFORCEMENT/architecture_competition_representation_test.py
+          python ENFORCEMENT/architecture_competition_visual_quality_test.py
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
@@ -409,6 +471,8 @@ jobs:
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
+      - name: Checkpoint identity binding regression
+        run: python ENFORCEMENT/execution_checkpoint_identity_test.py
 
       - name: Local Google Drive workspace regression
         run: python ENFORCEMENT/local_drive_workspace_test.py
@@ -673,6 +737,8 @@ jobs:
           echo "Expected runtime working-model failure observed"
       - name: Replay evidence integrity failures
         run: python ENFORCEMENT/evidence_bridge_regression.py
+      - name: Replay canonical history boundary regression
+        run: python ENFORCEMENT/evidence_history_boundary_test.py
       - name: Validate Codex task contract fixture
         run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
       - name: Validate self-contained handoff fixture

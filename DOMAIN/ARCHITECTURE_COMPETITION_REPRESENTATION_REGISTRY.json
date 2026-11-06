@@ -1,0 +1,151 @@
+{
+  "registry_id": "ARCHCOMP-REP-V1",
+  "status": "ACTIVE_IMPLEMENTATION_KNOWLEDGE",
+  "owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+  "evidence_ref": "REFERENCE/ARCHITECTURE_COMPETITION_REPRESENTATION_EVIDENCE_2026-10-03.json",
+  "purpose": "Recommend and validate competition-report drawing representation methods from design intent, source geometry and delivery constraints.",
+  "hard_rules": [
+    "PROJECT_BRIEF_OVERRIDES_GENERIC_PATTERN",
+    "SOURCE_GEOMETRY_AND_NUMBERS_MUST_NOT_DRIFT",
+    "REPRESENTATION_SERVES_DESIGN_ARGUMENT_NOT_DECORATION",
+    "QUALITY_OVER_DRAWING_COUNT",
+    "FINAL_OUTPUT_MUST_BE_CHECKED_AT_ACTUAL_DELIVERY_SCALE",
+    "POST_SUBMISSION_FREEZE_OR_NO_ENHANCEMENT_RULES_MUST_BE_RESPECTED_WHEN_PRESENT"
+  ],
+  "representation_modes": {
+    "CONTEXT": {
+      "goal": "Explain why the proposal belongs on this site.",
+      "techniques": ["figure_ground", "context_axo", "access_network", "green_blue_network", "urban_section", "photo_map_overlay"],
+      "best_for": ["site_relationship", "urban_logic", "arrival", "landscape_structure"],
+      "avoid": ["generic_aerial_without_argument", "too_many_base_map_layers"]
+    },
+    "CONCEPT": {
+      "goal": "Make the central architectural idea understandable in seconds.",
+      "techniques": ["parti", "massing_sequence", "transformation_diagram", "exploded_axon", "before_after", "rule_to_form_diagram"],
+      "best_for": ["design_narrative", "mass_logic", "competition_first_read"],
+      "avoid": ["decorative_icons_without_spatial_consequence", "too_many_parallel_concepts"]
+    },
+    "PROGRAM": {
+      "goal": "Show program distribution and relationships.",
+      "techniques": ["color_zoned_plan", "program_stack", "axonometric_zoning", "section_program_overlay", "adjacency_diagram"],
+      "best_for": ["mixed_program", "public_private_gradient", "vertical_program"],
+      "avoid": ["rainbow_palette_without_hierarchy", "legend_heavier_than_drawing"]
+    },
+    "CIRCULATION": {
+      "goal": "Explain movement, access and sequence.",
+      "techniques": ["route_overlay", "entry_hierarchy", "vertical_circulation_section", "public_service_split", "pedestrian_vehicle_map"],
+      "best_for": ["arrival", "wayfinding", "public_flow", "service_flow"],
+      "avoid": ["arrows_covering_geometry", "same_weight_for_primary_and_secondary_routes"]
+    },
+    "PLAN": {
+      "goal": "Communicate organization, use, scale and spatial character while preserving measured geometry.",
+      "techniques": ["clean_vector_plan", "rendered_plan", "program_overlay_plan", "key_plan_plus_detail", "furniture_human_scale_plan"],
+      "best_for": ["functional_resolution", "spatial_sequence", "area_logic"],
+      "avoid": ["texture_obscuring_walls", "illegible_room_labels", "presentation_effects_that_change_geometry"]
+    },
+    "SECTION": {
+      "goal": "Reveal vertical relationships, section-driven design and human experience.",
+      "techniques": ["clean_vector_section", "rendered_section", "sectional_perspective", "environmental_section", "program_section", "deep_context_section"],
+      "best_for": ["level_relationship", "topography", "atrium", "daylight", "publicness", "human_scale"],
+      "avoid": ["flat_cut_without_depth_hierarchy", "heavy_background_competing_with_cut_line"]
+    },
+    "ELEVATION": {
+      "goal": "Explain facade order, context relation, material rhythm and silhouette.",
+      "techniques": ["vector_elevation", "context_elevation", "material_band_elevation", "shadow_depth_elevation", "street_elevation"],
+      "best_for": ["facade_logic", "urban_frontage", "material_system"],
+      "avoid": ["photoreal_texture_hiding_module", "unverified_shadow_or_opening_changes"]
+    },
+    "AXONOMETRIC": {
+      "goal": "Combine spatial, programmatic and construction information in one readable object.",
+      "techniques": ["exploded_axon", "cutaway_axon", "program_axon", "assembly_axon", "landscape_axon"],
+      "best_for": ["complex_spatial_system", "layering", "construction_logic", "program_relationship"],
+      "avoid": ["explosion_without_sequence", "too_many_equal_weight_labels"]
+    },
+    "PERFORMANCE": {
+      "goal": "Make environmental and technical reasoning visible.",
+      "techniques": ["sun_daylight_diagram", "wind_section", "passive_strategy_section", "water_cycle", "structure_diagram", "energy_flow"],
+      "best_for": ["sustainability", "climate_response", "technical_feasibility"],
+      "avoid": ["unverified_simulation_numbers", "generic_green_arrows"]
+    },
+    "EXPERIENCE": {
+      "goal": "Show the intended human experience without replacing architectural proof.",
+      "techniques": ["hero_perspective", "eye_level_sequence", "interior_perspective", "section_perspective", "collage"],
+      "best_for": ["atmosphere", "public_life", "material_character", "key_space"],
+      "avoid": ["render_only_story", "geometry_drift", "people_or_landscape_masking_unresolved_architecture"]
+    },
+    "TECHNICAL": {
+      "goal": "Demonstrate feasibility and project control.",
+      "techniques": ["structure_grid", "core_egress", "parking_circulation", "area_kpi_diagram", "envelope_detail_logic", "phasing"],
+      "best_for": ["public_competition", "feasibility", "large_scale", "reviewer_confidence"],
+      "avoid": ["detail_without_relevance", "numbers_without_source_trace"]
+    }
+  },
+  "story_sequences": {
+    "DEFAULT_COMPETITION": ["CONTEXT", "CONCEPT", "PROGRAM", "CIRCULATION", "PLAN", "SECTION", "ELEVATION", "PERFORMANCE", "EXPERIENCE"],
+    "URBAN_CIVIC": ["CONTEXT", "CONCEPT", "CIRCULATION", "PROGRAM", "PLAN", "SECTION", "EXPERIENCE", "TECHNICAL"],
+    "HOUSING": ["CONTEXT", "CONCEPT", "PROGRAM", "PLAN", "SECTION", "ELEVATION", "TECHNICAL", "EXPERIENCE"],
+    "LANDSCAPE": ["CONTEXT", "CONCEPT", "CIRCULATION", "AXONOMETRIC", "SECTION", "PERFORMANCE", "EXPERIENCE"],
+    "TECHNICAL_FEASIBILITY": ["CONTEXT", "PLAN", "SECTION", "TECHNICAL", "PERFORMANCE", "ELEVATION", "EXPERIENCE"]
+  },
+  "delivery_profiles": {
+    "A1_BOARD": {"reading": "distance_first_then_close", "priority": ["hero", "core_argument", "major_drawings", "supporting_diagrams"], "text_density": "low"},
+    "A3_REPORT": {"reading": "page_sequence", "priority": ["chapter_question", "drawing_answer", "short_caption", "evidence"], "text_density": "medium"},
+    "PPT": {"reading": "one_claim_per_slide", "priority": ["claim", "single_primary_visual", "minimal_support"], "text_density": "low"},
+    "PDF_DRAWING_BOOK": {"reading": "technical_reference", "priority": ["scale", "consistency", "drawing_legibility", "cross_reference"], "text_density": "low"}
+  },
+  "visual_styles": {
+    "MONO_ACCENT": {
+      "goal": "Technical clarity with one semantic accent.",
+      "best_for": ["public_competition", "A3_REPORT", "plans_sections_diagrams"],
+      "base": "white_or_warm_neutral + grayscale geometry",
+      "accent": "one project-semantic accent family; reserve for argument, not decoration",
+      "line_roles": ["CUT_HEAVY", "PRIMARY_GEOMETRY", "SECONDARY_CONTEXT", "TERTIARY_DETAIL", "ANNOTATION"],
+      "depth": "lineweight + poche + restrained shadow",
+      "entourage": "low-contrast, scale-proving",
+      "avoid": ["multiple_competing_accents", "gray_values_too_close_at_print_scale"]
+    },
+    "SOFT_RENDERED": {
+      "goal": "Humanized plans/sections while retaining architectural legibility.",
+      "best_for": ["rendered_plan", "rendered_section", "public_space", "landscape"],
+      "base": "light neutral drawing with muted material/landscape fills",
+      "accent": "program or landscape color, low saturation",
+      "line_roles": ["CUT_HEAVY", "PRIMARY_GEOMETRY", "BACKGROUND_LIGHT", "ANNOTATION"],
+      "depth": "poche + transparent texture + controlled entourage",
+      "entourage": "human/furniture/vegetation used to explain occupation",
+      "avoid": ["texture_over_walls", "photoreal_noise", "loss_of_scale_labels"]
+    },
+    "DIAGRAM_SYSTEM": {
+      "goal": "Fast comparison and narrative continuity across concept/program/circulation/performance.",
+      "best_for": ["concept", "program", "circulation", "performance"],
+      "base": "neutral simplified geometry",
+      "accent": "3-5 fixed semantic tokens reused across all diagrams",
+      "line_roles": ["BASE_LIGHT", "ACTIVE_MEDIUM", "FOCUS_HEAVY", "LABEL"],
+      "depth": "flat by default; depth only when it encodes meaning",
+      "entourage": "icons only when they reduce explanation time",
+      "avoid": ["rainbow_palette", "icon_decoration", "changing_color_meaning_between_pages"]
+    },
+    "CONCEPT_COLLAGE": {
+      "goal": "Express atmosphere/idea where literal realism would weaken the design argument.",
+      "best_for": ["early_concept", "experience", "cultural_narrative"],
+      "base": "project-specific collage or hybrid linework",
+      "accent": "narrative-led, subordinate to geometry",
+      "line_roles": ["ANCHOR_GEOMETRY", "COLLAGE_FIELD", "FOCUS", "CAPTION"],
+      "depth": "layering and masking with preserved spatial anchors",
+      "entourage": "selective and narrative-specific",
+      "avoid": ["collage_replacing_resolved_drawings", "geometry_drift", "style_without_argument"]
+    }
+  },
+  "quality_gates": {
+    "FIRST_READ_5S": "Can a reviewer identify the core idea and visual entry point within seconds?",
+    "STORY": "Does every major drawing answer a design question rather than merely fill space?",
+    "HIERARCHY": "Are primary/secondary/tertiary information weights distinct?",
+    "GEOMETRY": "Do plan/section/elevation/render preserve the same verified geometry and level logic?",
+    "SCALE": "Are lineweight, text, annotation and detail readable at final printed/exported size?",
+    "COLOR": "Is color limited to semantic emphasis and consistent across drawings?",
+    "LABEL": "Are legends, north, scale, levels, rooms and callouts sufficient but not dominant?",
+    "DENSITY": "Is each drawing's allocated area proportional to its information/argument value?",
+    "CONSISTENCY": "Do fonts, lineweight families, colors, entourage and diagram language form one system?",
+    "BRIEF": "Are required drawings, scales, panel/page counts, anonymity and file constraints satisfied exactly?",
+    "FREEZE": "If submission rules freeze content, has post-submission enhancement been prevented?"
+  }
+}

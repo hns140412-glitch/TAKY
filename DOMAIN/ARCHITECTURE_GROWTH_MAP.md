@@ -168,7 +168,51 @@ Frontier:
 - Twinmotion/D5/Enscape/other render;
 - AI enhancement with geometry-drift detection.
 
-## 8. Evidence and benchmarking
+## 8. Result-to-Implementation Growth Loop
+
+ArchiGrow must learn not only from completed outputs, but from how the governing criteria, constraints and rules were interpreted and transformed into the implemented result.
+
+Primary loop:
+`DESIRED RESULT -> QUALITY CRITERIA -> RULE/CONSTRAINT INTERPRETATION -> DESIGN MOVES -> IMPLEMENTATION PATH -> ACTUAL RESULT -> GAP ANALYSIS -> WHY IT WORKED/FAILED -> STRATEGY/RULE UPDATE -> NEXT RESULT`.
+
+Required review dimensions when materially relevant:
+- target/result fit;
+- design logic and narrative coherence;
+- rule/law/constraint resolution method;
+- area/FAR/parking/KPI consequences;
+- spatial/form quality;
+- buildability / structure / material implications;
+- environmental/passive-performance implications;
+- visual communication and diagram quality;
+- implementation efficiency / rework avoided;
+- client/user/reviewer response;
+- failure cause and missed assumptions.
+
+The system should preserve the relationship:
+`RULE/CRITERION -> INTERPRETATION -> DESIGN DECISION -> IMPLEMENTATION MOVE -> RESULT EVIDENCE`.
+
+This trace is a growth asset. Do not store only the final image, drawing, model or report.
+
+Promotion vocabulary and semantic meaning are owned by `DOMAIN/ARCHITECTURE_WORK_OS.md` §7. This growth map only tracks maturity/evidence and candidate routing:
+- repeated evidence-backed success -> `CURRENT_BEST` candidate, still requiring the owner-defined approval path;
+- promising but insufficiently validated method -> `FRONTIER` candidate;
+- reusable reasoning method with context/trade-offs -> `STRATEGY` candidate;
+- failed or degraded result with diagnosed cause -> `FAILURE/LESSON`;
+- one-off project observation -> `CASE`.
+
+Quality improvement behavior:
+- compare the actual output against the intended result, not merely against checklist completion;
+- identify the highest-value gap first;
+- record which rule interpretation or design move caused the gain/loss;
+- update the smallest reusable strategy or skill that would improve the next project;
+- preserve counterexamples and failure conditions so CURRENT_BEST does not become dogma;
+- favor measurable/reviewable evidence over aesthetic assertion alone.
+
+For diagrams/UI/visual deliverables, use:
+`DESIGN INTENT -> VISUAL/INTERACTION CRITERIA -> IMPLEMENT -> SEE ACTUAL RESULT -> COMPARE -> FIX -> PROVE -> LEARN`.
+The visual layer should make `WHY THIS DESIGN?` and `HOW THIS RESULT WAS ACHIEVED?` legible, not merely decorative.
+
+## 9. Evidence and benchmarking
 
 Use:
 - company projects;
@@ -219,10 +263,17 @@ This boundary must remain explicit.
 5. KPI comparison.
 
 ### P1 — Pursuit output
-1. context 3D;
-2. visual pipeline;
-3. A3/PPT/web option comparison;
-4. client-change iteration loop.
+1. sketch/reference image -> 2D drawing/CAD reconstruction pipeline;
+2. 2D drawing -> 3D mass/model pipeline;
+3. verified model -> exterior CG/render pipeline with geometry-drift guard;
+4. plan/model -> interior perspective pipeline;
+5. CAD/DXF/DWG -> canonical SVG -> A3/PPT/web vector-delivery pipeline;
+6. architecture-competition brief -> design argument -> drawing representation -> report/panel package pipeline;
+7. context 3D and visual pipeline;
+8. A3/PPT/web option comparison;
+9. client-change iteration loop.
+
+Competition-representation capability now has an ACTIVE registry/playbook/recommender plus result-specific A1/A3/PPT/PDF builder, source binder, renderer, visual-quality registry/gate, mechanical page/size/hash validation, Korean presentation typography/copy hierarchy, and one-shot runner. These execution paths are mechanically verified with test fixtures, but project-specific visual/source fidelity remains evidence-bound and must be reviewed on each real project. Next maturity step is to ingest real company/public competition outcomes and reviewer feedback as artifact-granular CASE/STRATEGY/FAILURE evidence before any technique is promoted to CURRENT_BEST.
 
 ### P1 — Learning loop
 1. project outcome capture;

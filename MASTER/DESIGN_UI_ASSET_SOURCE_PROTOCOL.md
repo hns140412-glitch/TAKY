@@ -30,14 +30,22 @@ This obligation applies to new chat conversations, old chat continuations, imple
 5. If any upload/credential/tool barrier remains, pursue another authorized route and explicitly report `ASSET_UPLOAD_OPEN`, with exact files, verified staging result and next viable step. Never report `UI_DONE`, `ASSET_REGISTERED` or `PWA_READY` because a ZIP or illustration was generated alone.
 6. Do not require the user to be the routine debugger/uploader unless a genuine user credential/permission or local-system boundary cannot be crossed by available authorized tools. `USER != DEBUGGER`.
 
-## 3. Scope, conflicts and exclusion boundaries
+## 3. Asset-generation / runtime-behavior boundary — HARD LOCK
+
+`ASSET GENERATION ENGINE != CHARACTER BEHAVIOR ENGINE`.
+
+Canonical visual creation, derivative production, checksum/versioning and registry promotion belong to the asset-production side. Runtime character state, relationship, dialogue intent, pose/expression/prop selection and animation cues belong to the behavior side. Runtime behavior SHALL reference approved registry assets and SHALL NOT silently invoke image generation to satisfy ordinary scene changes.
+
+The detailed shared contract is `OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md`.
+
+## 4. Scope, conflicts and exclusion boundaries
 - This is an **asset management and design-to-code delivery standard**, not a universal demand that every text document or planning answer create visual files. It does not collapse document/A3 print output rules, browser business UI rules or mobile-app UI visual contracts into one layout rule.
 - Existing approved visual sources and their Visual IDs are preserved; centralization does not authorize redrawing, forced migration, overwriting, flattening, re-licensing, public release or choosing new characters.
 - Read-only/library/connected-app access limitations do not prove an original is absent. Record source pointers and recover it when possible.
 - Explicit owner-approved exceptions (licensed resources that prohibit redistribution, private/child photo sources, temporary diagnostics, third-party-hosted assets) must be classified; store permission-safe derivatives or a metadata pointer only when appropriate. `CENTRAL DEFAULT != PUBLIC RAW UPLOAD`.
 - No Netlify deployment, main merge of app runtime, public exposure, or asset promotion solely due to this governance decision. Honor project-specific gates and human approval.
 
-## 4. Status reporting and handoff — HARD LOCK
+## 5. Status reporting and handoff — HARD LOCK
 Every material image/UI task reports these separately:
 `DESIGN_REFERENCE_CONFIRMED | SOURCE_LAYER_READY | CENTRAL_ASSET_COMMITTED | ASSET_HASH_VERIFIED | RUNTIME_BOUND | UI_VISUAL_MATCH_VERIFIED | INTERACTION_VERIFIED | DEVICE_VERIFIED | RELEASED`.
 Never convert a prior PASS in one dimension into another.

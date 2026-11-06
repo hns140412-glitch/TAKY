@@ -32,6 +32,11 @@ class ExecutionStateApprovalBindingTest(unittest.TestCase):
             result["approval_verified"]["target_ref"],
             "commit:abc123",
         )
+        self.assertEqual(
+            result["approval_verified"]["evidence_level"],
+            "BOUND_RECORD_ONLY",
+        )
+        self.assertFalse(result["approval_verified"]["identity_authenticated"])
 
     def test_stale_merge_approval_cannot_authorize_new_target(self):
         record = {
@@ -118,6 +123,16 @@ class ExecutionStateApprovalBindingTest(unittest.TestCase):
         result = transition(record)
         self.assertFalse(result["pass"])
         self.assertIn("MERGE_APPROVAL_BYPASS_FORBIDDEN", result["detected"])
+
+    def test_executor_neutral_assignment_alias_is_accepted(self):
+        result = transition({
+            "task_id": "TASK-7",
+            "current_state": "READY",
+            "requested_state": "ASSIGNED_TO_EXECUTOR",
+            "transition_target_ref": "local-only",
+        })
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(result["current_state"], "ASSIGNED_TO_CODEX")
 
     def test_canonical_promotion_cannot_request_approval_before_prerequisites_pass(self):
         record = {

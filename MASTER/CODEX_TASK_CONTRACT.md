@@ -115,7 +115,10 @@ Task lifecycle transitions are owned by `ENFORCEMENT/execution_state_engine.py`.
 
 ## Required lifecycle
 
-`READY -> ASSIGNED_TO_CODEX -> IN_PROGRESS -> CODEX_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`
+Canonical lifecycle semantics are executor-neutral:
+`READY -> ASSIGNED_TO_EXECUTOR -> IN_PROGRESS -> EXECUTOR_DONE -> TAKY_REVIEW -> REWORK | HUMAN_APPROVAL -> MERGED -> DEPLOYED`.
+
+The current controlled runtime preserves `ASSIGNED_TO_CODEX` / `CODEX_DONE` as compatibility aliases. The selected executor/provider is a separate task/transport field, not part of lifecycle authority.
 
 Forbidden shortcuts include:
 - `READY -> MERGED`
