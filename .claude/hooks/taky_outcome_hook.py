@@ -9,6 +9,12 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")  # Windows cp949 console would garble Korean hook text
+    except Exception:
+        pass
+
 raw_stdin = sys.stdin.buffer.read()
 data = json.loads(raw_stdin.decode("utf-8-sig", errors="replace")) if raw_stdin else {}
 event = data.get("hook_event_name", "")
@@ -125,7 +131,7 @@ def emit_context(hook_event, text):
             "hookEventName": hook_event,
             "additionalContext": text,
         }
-    }, ensure_ascii=False))
+    }, ensure_ascii=True))
 
 def action_signature(tool, tool_input):
     raw = json.dumps({"tool": tool, "input": tool_input}, ensure_ascii=False, sort_keys=True)
@@ -188,6 +194,47 @@ def classify_failure(text):
         return "RUNTIME"
     return "UNKNOWN"
 
+# Safe, bounded route advice. This hook NEVER executes arbitrary recovery commands,
+# invokes a model, or bypasses the owner/approval/signed-route gate.
+RECOVERY_GUIDANCE = {
+    "ACCESS": "Check the existing permission/credential boundary; use only an already-authorized local route. Do not retry the same denied request.",
+    "AUTHORITY": "Preserve the approval gate; continue with read-only evidence and a narrow approval-ready task contract.",
+    "COST": "Do not re-invoke the paid/restricted model; reuse available evidence, run focused local deterministic checks, and retain the unfinished task.",
+    "DEPENDENCY": "Inspect the precise missing dependency and existing lockfile locally; apply only an authorized, minimal fix before rechecking.",
+    "INPUT": "Verify the referenced path/input from the canonical project workspace; fix the specific input rather than repeating the same call.",
+    "ENVIRONMENT": "Check current local process/port/tool state; choose a safe alternate local path and retry only after the condition changes.",
+    "RUNTIME": "Inspect the smallest failing traceback/test, change the relevant code/config, then rerun the ORIGINAL failing check once.",
+    "UNKNOWN": "Gather focused local error evidence, identify the failing step and choose a materially different authorized route."
+}
+
+def relevant_corrective_change(tool, tool_input, suffix):
+    """A successful local project code edit earns ONE recheck, not a PASS."""
+    if tool not in {"Edit", "Write", "MultiEdit", "NotebookEdit",
+                    "mcp__Remote_Desktop_Commander__edit_block",
+                    "mcp__Remote_Desktop_Commander__write_file"}:
+        return False
+    if suffix not in CODE_EXTS:
+        return False
+    raw = tool_path(tool_input)
+    if not raw:
+        return False
+    try:
+        root = Path(data.get("cwd") or ".").resolve()
+        file = Path(raw)
+        if not file.is_absolute():
+            file = root / file
+        return file.resolve().is_relative_to(root)
+    except (ValueError, OSError):
+        return False
+
+def original_check_passed(response):
+    """A missing/ambiguous output must not close a repeated failure."""
+    return bool(response and re.search(
+        r"\b(?:exit\s*code\s*0|exit_code[\"']?\s*[:=]\s*0|"
+        r"tests?\s+passed|\bpassed\s+in\b|\bpass:)\b",
+        response, re.I
+    ))
+
 def action_label(tool, tool_input):
     if not isinstance(tool_input, dict):
         return tool
@@ -214,6 +261,10 @@ def append_failure_event(kind, state, tool="", tool_input=None, cause="", failed
         "action": action_label(tool, tool_input or {}),
         "error_fingerprint": hashlib.sha256(str(state.get("last_failure") or "").encode("utf-8", "ignore")).hexdigest()[:16],
     }
+    if kind == "RECOVERY_ROUTE":
+        # Only the guarded ORIGINAL_CHECK re-pass branch emits this event.
+        # Legacy RECOVERY_ROUTE events without this proof must not close failures.
+        record["recovery_evidence"] = "ORIGINAL_CHECK_REPASS_AFTER_CORRECTION"
     with failure_ledger.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
@@ -232,19 +283,26 @@ def recent_unresolved_failures():
             continue
         if rec.get("project") == project_key():
             events.append(rec)
-    resolved = {rec.get("failed_sig") for rec in events if rec.get("kind") == "RECOVERY_ROUTE"}
-    seen = set()
-    result = []
-    for rec in reversed(events):
-        if rec.get("kind") != "REPEATED_FAILURE":
-            continue
+    # Session-scoped, order-aware ledger. Old unverified RECOVERY_ROUTE events
+    # (including a different session's unrelated success) cannot clear a failure.
+    active = {}
+    for i, rec in enumerate(events):
         sig = rec.get("failed_sig")
-        if not sig or sig in resolved or sig in seen:
+        raw_session = rec.get("session")
+        sess = raw_session if isinstance(raw_session, str) else None
+        if not isinstance(sig, str) or not sig:
             continue
-        seen.add(sig)
-        result.append({"cause": rec.get("cause", "UNKNOWN"), "action": rec.get("action", ""), "sig": sig})
-        if len(result) >= 3:
-            break
+        key = (sess, sig)
+        if rec.get("kind") == "REPEATED_FAILURE":
+            active[key] = (i, rec)
+        elif (rec.get("kind") == "RECOVERY_ROUTE"
+              and rec.get("recovery_evidence") == "ORIGINAL_CHECK_REPASS_AFTER_CORRECTION"
+              and isinstance(sess, str) and sess):
+            active.pop(key, None)
+    result = []
+    for _, rec in sorted(active.values(), key=lambda entry: entry[0], reverse=True)[:3]:
+        result.append({"cause": rec.get("cause", "UNKNOWN"),
+                       "action": rec.get("action", ""), "sig": rec["failed_sig"]})
     return result
 
 def deny_repeat(reason):
@@ -254,7 +312,7 @@ def deny_repeat(reason):
             "permissionDecision": "deny",
             "permissionDecisionReason": reason,
         }
-    }, ensure_ascii=False))
+    }, ensure_ascii=True))
 
 def block_stop(reason):
     sys.stderr.write(reason)
@@ -263,11 +321,29 @@ def block_stop(reason):
         "decision": "block",
         "reason": reason,
         "rewakeSummary": "TAKY 결과 검증 게이트",
-    }, ensure_ascii=False))
+    }, ensure_ascii=True))
+
+def is_explicit_continuation(prompt):
+    """Resume a same-session task; never infer that a different task shares authority."""
+    value = str(prompt or "").strip().lower()
+    if not value or len(value) > 180:
+        return False
+    if any(x in value for x in ("새로운 작업", "다른 작업", "new task", "switch project")):
+        return False
+    return bool(
+        re.search(r"계속|이어서|쭉\s*진행|재검증|계속해|이어\s*진행", value)
+        or re.fullmatch(r"(?:ㄱ|ㅇㅇ|계속|진행|go|continue|resume)[.! ]*", value)
+    )
+
 
 if event == "UserPromptSubmit":
     prompt = prompt_value()
     lower = prompt.lower()
+    prior = load_state()
+    continue_pending = (
+        is_explicit_continuation(prompt)
+        and bool(prior.get("route_switch_required") or prior.get("revalidation_pending"))
+    )
     design = any(word in lower for word in DESIGN_WORDS)
     material = design or any(word in lower for word in MATERIAL_WORDS)
     interaction_expected = any(word in lower for word in INTERACTION_WORDS)
@@ -291,24 +367,67 @@ if event == "UserPromptSubmit":
         "last_failure": "",
         "last_failed_sig": "",
         "last_failure_cause": "",
+        "blocked_route_sig": "",
+        "last_route_attempt_sig": "",
+        "revalidation_pending": False,
+        "revalidation_target_sig": "",
         "route_switch_required": False,
     }
+    if continue_pending:
+        # Keep the exact failed route and its unfinished verification across
+        # "continue" prompts in the SAME Claude session. A new task resets it.
+        for key in (
+            "touched_ui", "touched_asset", "touched_artifact", "touched_code",
+            "browser_verified", "browser_render_verified",
+            "browser_interaction_verified", "code_verified",
+            "asset_verified", "artifact_observed", "failure_counts",
+            "stop_failure_counts", "last_failure", "last_failed_sig",
+            "last_failure_cause", "blocked_route_sig", "last_route_attempt_sig",
+            "revalidation_pending", "revalidation_target_sig",
+            "route_switch_required",
+        ):
+            if key in prior:
+                state[key] = prior[key]
+        state["material_intent"] = bool(state["material_intent"] or prior.get("material_intent"))
+        state["design_intent"] = bool(state["design_intent"] or prior.get("design_intent"))
+        state["interaction_expected"] = bool(
+            state["interaction_expected"] or prior.get("interaction_expected")
+        )
+    # --- TAKY Purpose Anchor (2026-11-06): keep the session's original goal across prompts ---
+    body = re.sub(r"<(system-note|system-reminder|note|cited)\b.*?</\1>", " ", prompt, flags=re.S | re.I)
+    clean = " ".join(re.sub(r"<[^>]+>", " ", body).split())
+    m = re.match(r"^(목적|purpose)\s*[:：]\s*(.+)", clean, re.I)
+    purpose = m.group(2) if m else prior.get("purpose", "")
+    if not purpose and len(clean) >= 8:
+        purpose = clean[:200]
+    state["purpose"] = purpose[:240]
+    state["turn"] = int(prior.get("turn", 0)) + 1
+    state["rework"] = prior.get("rework", {})
+    state["purpose_warned"] = prior.get("purpose_warned", [])
     save_state(state)
-    if material:
+    parts = []
+    if state["purpose"]:
+        parts.append(
+            "TAKY Purpose Anchor: 원래 목적 = '" + state["purpose"][:160] + "'. "
+            "보고 첫 줄에 '목적: … / 이번 일의 효과: …'를 밝힌다. 이번 요청이 원래 목적에 기여하지 않거나 "
+            "같은 산출물을 다시 다듬는 일이면 실행 전에 한 줄로 확인한다. 새 목적은 '목적: …'으로 시작하는 요청으로 바꾼다."
+        )
+    if state["material_intent"]:
         prior = recent_unresolved_failures()
         prior_text = ""
         if prior:
             prior_text = " Recent unresolved repeated-failure routes: " + "; ".join(
                 f"{item['cause']}:{item['action']}[{item['sig']}]" for item in prior
             ) + ". Do not repeat them unchanged."
-        emit_context(
-            "UserPromptSubmit",
+        parts.append(
             "TAKY Outcome Gate active. Execute HUMAN INTENT -> THINK AGAIN -> KEEP YOUR KEY -> "
             "FIND A WAY/SOLVE -> YOU'RE THE KEY -> VERIFY/CORRECT/CONTINUE. "
             "Recover approved/current context before redesigning; produce the actual result, inspect the integrated "
             "output, correct material deltas, and do not make the user the debugger. "
             "Memory may recover context but is not authority." + prior_text
         )
+    if parts:
+        emit_context("UserPromptSubmit", "\n".join(parts))
     sys.exit(0)
 
 if event == "PreToolUse":
@@ -320,10 +439,12 @@ if event == "PreToolUse":
     sig = action_signature(tool, tool_input)
     failures = state.get("failure_counts") or {}
     if int(failures.get(sig, 0)) >= 2:
+        cause = state.get("last_failure_cause", "UNKNOWN")
         deny_repeat(
-            "TAKY Anti-Loop Gate: the same action has already failed twice. "
-            "Do not repeat it unchanged. Classify the failure cause, change the execution path/tool/input, "
-            "or gather new evidence first. USER != DEBUGGER."
+            "TAKY SHEPHERD REROUTE_REQUIRED: unchanged failing action remains blocked "
+            "until a relevant corrective change is observed. "
+            + RECOVERY_GUIDANCE.get(cause, RECOVERY_GUIDANCE["UNKNOWN"])
+            + " Preserve the original task and revalidate after correction. USER != DEBUGGER."
         )
     sys.exit(0)
 
@@ -336,6 +457,29 @@ if event in {"PostToolUse", "PostToolUseFailure"}:
     suffix = Path(path).suffix.lower() if path else ""
     result_text = response_text()
     failed = event == "PostToolUseFailure" or response_failed(result_text)
+
+    # --- TAKY Purpose Gate: count deliverables (re)produced per user turn ---
+    if not failed:
+        produced = set()
+        if tool in {"Write", "Edit", "MultiEdit"} and (suffix in ARTIFACT_EXTS or suffix == ".md"):
+            produced.add(Path(path).name)
+        if tool in {"Bash", "PowerShell"}:
+            cmd_text = str(tool_input.get("command") or "")
+            for mm in re.finditer(r"([A-Za-z]:[\\/][^\"'\n]*?\.(?:xlsx|xlsm|pptx|docx|pdf))", cmd_text, re.I):
+                cand = mm.group(1)
+                try:
+                    if os.path.exists(cand) and time.time() - os.path.getmtime(cand) < 180:
+                        produced.add(Path(cand).name)  # freshly written by this command
+                except Exception:
+                    pass
+        if produced:
+            turn = int(state.get("turn", 0))
+            rework = state.setdefault("rework", {})
+            for name in produced:
+                turns = rework.setdefault(name, [])
+                if turn not in turns:
+                    turns.append(turn)
+                    del turns[:-10]
 
     if tool in {"Edit", "Write", "MultiEdit", "NotebookEdit"}:
         if suffix in UI_EXTS:
@@ -383,6 +527,10 @@ if event in {"PostToolUse", "PostToolUseFailure"}:
         state["last_failure_cause"] = classify_failure(result_text)
         if failures[sig] >= 2:
             state["route_switch_required"] = True
+            state["blocked_route_sig"] = sig
+            state["last_route_attempt_sig"] = ""
+            state["revalidation_pending"] = False
+            state["revalidation_target_sig"] = ""
             append_failure_event(
                 "REPEATED_FAILURE", state, tool, tool_input,
                 cause=state["last_failure_cause"], failed_sig=sig
@@ -390,20 +538,62 @@ if event in {"PostToolUse", "PostToolUseFailure"}:
             save_state(state)
             emit_context(
                 event,
-                "TAKY Anti-Loop Gate: this exact action has failed repeatedly. "
-                f"Classified cause: {state['last_failure_cause']}. "
-                "STOP repeating the same path. Switch to a materially different route/tool/input, or isolate the root "
-                "cause with new evidence. Ask the user only if a genuine human-only decision or permission is required."
+                "TAKY SHEPHERD: repeated failure; preserve original work and switch routes. "
+                f"Cause={state['last_failure_cause']}. "
+                + RECOVERY_GUIDANCE.get(state["last_failure_cause"], RECOVERY_GUIDANCE["UNKNOWN"])
+                + " After a relevant corrective change, re-run the ORIGINAL failing check once; "
+                "do not request user debugging or override safety/approval gates."
             )
             sys.exit(0)
     else:
-        if state.get("route_switch_required") and sig != state.get("last_failed_sig"):
+        target = state.get("revalidation_target_sig")
+        if (state.get("revalidation_pending") and sig == target
+                and original_check_passed(result_text)):
+            # A real re-pass of the ORIGINAL check after corrective evidence is
+            # stronger than 'some other command succeeded'. It is not user acceptance.
             append_failure_event(
                 "RECOVERY_ROUTE", state, tool, tool_input,
                 cause=state.get("last_failure_cause", "UNKNOWN"),
-                failed_sig=state.get("last_failed_sig", ""), new_sig=sig
+                failed_sig=target, new_sig=sig
             )
+            state["revalidation_pending"] = False
+            state["revalidation_target_sig"] = ""
+            state["blocked_route_sig"] = ""
             state["route_switch_required"] = False
+            state["last_route_attempt_sig"] = ""
+        elif state.get("route_switch_required") and sig != state.get("blocked_route_sig"):
+            # Switching methods is a candidate, not verified recovery.
+            blocked = state.get("blocked_route_sig") or state.get("last_failed_sig", "")
+            if sig != state.get("last_route_attempt_sig"):
+                append_failure_event(
+                    "ROUTE_SWITCH_ATTEMPT", state, tool, tool_input,
+                    cause=state.get("last_failure_cause", "UNKNOWN"),
+                    failed_sig=blocked, new_sig=sig
+                )
+                state["last_route_attempt_sig"] = sig
+            if (state.get("blocked_route_sig") and state.get("last_failure_cause") not in
+                    {"ACCESS", "AUTHORITY", "COST"}
+                    and relevant_corrective_change(tool, tool_input, suffix)):
+                # Allow exactly a new bounded attempt of the original check.
+                # The existing security and usage hooks still apply to this call.
+                failures.pop(blocked, None)
+                state["route_switch_required"] = False
+                state["revalidation_pending"] = True
+                state["revalidation_target_sig"] = blocked
+                append_failure_event(
+                    "CORRECTIVE_CHANGE_RECHECK_REQUIRED", state, tool, tool_input,
+                    cause=state.get("last_failure_cause", "UNKNOWN"),
+                    failed_sig=blocked, new_sig=sig
+                )
+                save_state(state)
+                emit_context(
+                    event,
+                    "TAKY SHEPHERD: corrective project edit observed. The prior exact "
+                    "failing check is unlocked for one bounded revalidation attempt. "
+                    "Run that original check; do not mark the goal PASS until its "
+                    "result and task acceptance are independently verified."
+                )
+                sys.exit(0)
         failures.pop(sig, None)
 
     save_state(state)
@@ -424,6 +614,11 @@ if event == "StopFailure":
     state["last_failure_cause"] = cause
     if failures[sig] >= 2:
         state["route_switch_required"] = True
+        # A session/model failure has no safely replayable original tool call.
+        # Never unlock an earlier blocked command due to an unrelated edit.
+        state["blocked_route_sig"] = ""
+        state["revalidation_pending"] = False
+        state["revalidation_target_sig"] = ""
         append_failure_event(
             "REPEATED_FAILURE", state, "StopFailure", {"error": error_type},
             cause=cause, failed_sig=sig
@@ -436,10 +631,28 @@ if event == "Stop":
         sys.exit(0)
 
     state = load_state()
+    # --- TAKY Purpose Gate: same deliverable reworked across 3+ user turns -> re-anchor once ---
+    if state:
+        warned = state.setdefault("purpose_warned", [])
+        for name, turns in (state.get("rework") or {}).items():
+            if len(set(turns)) >= 3 and name not in warned:
+                warned.append(name)
+                save_state(state)
+                block_stop(
+                    f"TAKY Purpose Gate: '{name}'을(를) {len(set(turns))}개 요청에 걸쳐 다시 만들었다. "
+                    f"원래 목적: '{(state.get('purpose') or '미기록')[:120]}'. "
+                    "더 다듬기 전에 (1) 이 재작업이 원래 목적에 주는 효과를 한 줄로 밝히고, "
+                    "(2) 효과가 불분명하면 사용자에게 계속할지 확인하라. 같은 산출물 반복 다듬기는 매몰 신호다."
+                )
+                sys.exit(0)
     if not state or not state.get("material_intent"):
         sys.exit(0)
 
     missing = []
+    if state.get("revalidation_pending"):
+        missing.append("original failed check must be rerun after the corrective edit (not merely a different passing check)")
+    elif state.get("route_switch_required"):
+        missing.append("failing route still needs root-cause evidence and an authorized alternative execution path")
     if state.get("touched_ui") and not state.get("browser_render_verified"):
         missing.append("actual UI/browser render evidence (screenshot/snapshot/DOM observation)")
     if state.get("touched_ui") and state.get("interaction_expected") and not state.get("browser_interaction_verified"):

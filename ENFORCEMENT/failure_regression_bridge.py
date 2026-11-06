@@ -13,13 +13,34 @@ def load_jsonl(path:Path):
         except Exception: continue
     return rows
 
+_VERIFIED_REPASS = "ORIGINAL_CHECK_REPASS_AFTER_CORRECTION"
+
+def _verified_recovery(row):
+    return (row.get("kind") == "RECOVERY_ROUTE"
+            and row.get("recovery_evidence") == _VERIFIED_REPASS
+            and isinstance(row.get("session"), str) and bool(row["session"]))
+
 def unresolved_repeated_failures(rows):
-    recovered={r.get("failed_sig") for r in rows if r.get("kind")=="RECOVERY_ROUTE"}
-    latest={}
-    for r in rows:
-        if r.get("kind")=="REPEATED_FAILURE" and r.get("failed_sig"):
-            latest[r["failed_sig"]]=r
-    return [r for sig,r in latest.items() if sig not in recovered]
+    """Fail closed on legacy unverified recoveries; resolve only same-session re-pass."""
+    active={}
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            continue
+        sig=row.get("failed_sig")
+        if not isinstance(sig, str) or not sig:
+            continue
+        project=row.get("project")
+        session=row.get("session")
+        if not isinstance(project, str):
+            project=None
+        if not isinstance(session, str):
+            session=None
+        key=(project,session,sig)
+        if row.get("kind")=="REPEATED_FAILURE":
+            active[key]=(index,row)
+        elif _verified_recovery(row):
+            active.pop(key,None)
+    return [row for _,row in sorted(active.values(),key=lambda item:item[0])]
 
 _PROJECT_RX = re.compile(r"^[0-9a-f]{16}$")
 _FAILURE_RX = re.compile(r"^[0-9a-f]{24}$")
@@ -52,19 +73,18 @@ def recall_project_failures(path: Path, project_hash: str, limit: int = 3):
             continue
         if isinstance(record, dict) and record.get("project") == project_hash:
             records.append(record)
-    recovered = {
-        rec["failed_sig"] for rec in records
-        if rec.get("kind") == "RECOVERY_ROUTE"
-        and isinstance(rec.get("failed_sig"), str)
-        and _FAILURE_RX.fullmatch(rec["failed_sig"])
-    }
     latest = {}
     for idx, rec in enumerate(records):
         sig = rec.get("failed_sig")
-        if (rec.get("kind") == "REPEATED_FAILURE"
-                and isinstance(sig, str) and _FAILURE_RX.fullmatch(sig)
-                and sig not in recovered):
-            latest[sig] = (idx, rec)
+        if not isinstance(sig, str) or not _FAILURE_RX.fullmatch(sig):
+            continue
+        raw_session = rec.get("session")
+        session = raw_session if isinstance(raw_session, str) else None
+        key = (session, sig)
+        if rec.get("kind") == "REPEATED_FAILURE":
+            latest[key] = (idx, rec)
+        elif _verified_recovery(rec):
+            latest.pop(key, None)
     items = []
     for _, rec in sorted(latest.values(), key=lambda pair: pair[0], reverse=True)[:min(limit, 3)]:
         cause = rec.get("cause")

@@ -31,6 +31,7 @@ For every implementation task, record or verify:
 - human approval requirements
 
 If any material field is missing, status is `TASK_CONTRACT_INCOMPLETE`; implementation completion MUST NOT be claimed.
+Reuse an already verified task-bound contract/receipt: carry forward unchanged facts from CURRENT and live HEAD, and record only material deltas. Do not recreate identical preflight checklists, demand user-provided discoverable metadata, or re-request approval for the same authorized reversible scope. Read-only inspection may proceed without a complete implementation contract. Genuine paid API, safety, push, merge, release and destructive-action gates remain unchanged.
 
 Reading or citing TAKY/project files is not sufficient preflight. The applicable rules must be translated into concrete task effects before implementation begins.
 
@@ -82,3 +83,8 @@ Do not claim `PASS`, `MERGED`, `DEPLOYED`, or `recurrence prevented` without evi
 
 ## Shared-log shortcut
 Activation only: follow MASTER/AI_COLLABORATION_PROTOCOL.md §5–§6 (TKY-AICOLLAB-001). Do not redefine resume/log semantics here.
+
+## CLI 실행 장치 (2026-11-06 사용자 지정)
+- Claude Code CLI 및 Codex CLI 신규 실행은 Desktop Commander의 온라인 `YKH-RENDER` (deviceId `b33ddd20-100f-4d27-a658-ffaee81746de`)를 사용한다. 기존 메인 PC에서 새 CLI 실행 금지; 렌더 오프라인 시 임의 대체 실행 금지.
+- 현재 렌더 PC에는 `D:\Git PWA\TAKY`와 동일한 검증된 소스/REV가 없다. Git HEAD 또는 파일 실물을 대조하기 전 코드 수정·테스트 완료 보고 금지. 원본 접근이 없으면 `BLOCKED_SOURCE_UNAVAILABLE`로 처리한다.
+- 권한·과금·push/merge/배포 규칙은 기존 STATE/MASTER 그대로 유지한다. 장치 선택 지침은 호스팅 런타임 전체의 기술적 자동 라우팅 강제를 뜻하지 않는다.

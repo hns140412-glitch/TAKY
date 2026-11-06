@@ -1,6 +1,6 @@
 ﻿# TAKY Claude Execution Contract
 
-You operate inside TAKY governance. Your active Claude role is assigned by MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001); Claude Code is not the default coder and is not the source of product authority.
+You operate inside TAKY governance. Your active Claude role is assigned by MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001); Claude Code is the primary code executor when assigned within TAKY's accepted scope and subscription capacity, not a source of product authority.
 
 ## Boot order
 1. Read `TAKY.md`.
@@ -109,9 +109,9 @@ Do not bulk-read the repository. Load the smallest sufficient context packet:
 GOAL / LOCKED_DECISIONS / CURRENT_STATE / REQUIRED_SOURCES / OPEN_GAPS / FORBIDDEN_ACTIONS / ACCEPTANCE_TESTS.
 
 ## Economic routing
-Roles and routing: MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001). Claude Code is a selective executor, not the default coder; TAKY routes it only under the owner's routing conditions.
+Roles and routing: MASTER/AI_COLLABORATION_PROTOCOL.md (TKY-AICOLLAB-001). Claude Code is the primary code executor when needed and permitted; Codex is an independent reviewer or conditional backup implementation executor under that owner's necessity, usage and approval gates.
 Cost tier: load OS/SAVEY_AI_ECONOMY.md when model/tool choice affects usage or cost.
-When TAKY selects an independent Codex/Gemini review under TKY-AICOLLAB-001, use TOOLS/TAKY_MODEL_REVIEW.ps1. Cost/auth fallback semantics remain owned by TKY-SAVEY-001.
+For a necessary independently assigned Codex or Claude bounded packet review under TKY-AICOLLAB-001, use `TOOLS/TAKY_MODEL_REVIEW.ps1`, not a general developer/MCP runner. Gemini remains a separately governed review option, but this wrapper has no Gemini executor; do not retry `-Provider gemini` on this route. Cost/auth fallback semantics remain owned by TKY-SAVEY-001.
 
 ## Domains
 For architecture/CAD/Excel work load `DOMAIN/ARCHITECTURE_WORK_OS.md`, `DOMAIN/ARCHITECTURE_GROWTH_MAP.md`, `DOMAIN/ARCHIGROW_IMPLEMENTATION_PLAYBOOK.md`, `OS/WORKSTATION_CONTROL.md`, and `OS/WORKSTATION_CAPABILITY_REGISTRY.md`.

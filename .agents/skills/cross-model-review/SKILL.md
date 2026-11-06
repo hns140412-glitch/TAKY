@@ -4,8 +4,8 @@ description: Use Codex or Gemini as an independent reviewer only when a material
 ---
 Use this only for a specific material delta, not as a default duplicate-agent loop.
 Default reviewer: Codex for code/diff/implementation attack review.
-Use Gemini for materially useful long-context/research/alternative synthesis review.
-Route both through `TOOLS/TAKY_MODEL_REVIEW.ps1` so provider API-key fallbacks are disabled.
+Consider Gemini only for justified long-context/research/alternative review when a separately governed Gemini executor route has been verified.
+Use `TOOLS/TAKY_MODEL_REVIEW.ps1` for bounded Codex or separately independent Claude packet review only; its Gemini route is unsupported. Check route availability before a model call and HOLD with a concrete reason rather than retrying.
 Give the reviewer a compact task contract, changed files/diff, acceptance criteria, and known risks.
 Ask it to attack assumptions, scope drift, regressions, and missing tests.
 The builder must classify each finding as ACCEPT / REJECT / HOLD with evidence.

@@ -24,6 +24,18 @@ def test_codex_shim_reroutes_execution_but_preserves_metadata_commands():
     assert "AppData\\Roaming\\npm\\codex.cmd" in text
 
 
+def test_codex_shim_cli_exit_is_not_model_success_and_windows_alias_fix_is_scoped():
+    text = (TOOLS / "TAKY_CODEX_SHIM.ps1").read_text(encoding="utf-8-sig")
+    assert "CLI_EXITED_RESULT_UNVERIFIED" in text
+    assert "task_verified = $false" in text
+    assert "provider_ack_attested = $false" in text
+    assert "status = 'COMPLETED'" not in text
+    assert "PROCESS_LOCAL_ALIAS_EXCLUSION" in text
+    assert "Get-Command pwsh.exe" in text
+    assert "$env:PATH = $oldPath" in text
+    assert "--sandbox" not in text  # policy/sandbox selection remains Codex-owned
+
+
 def test_model_review_bypasses_user_shim_only_inside_canonical_wrapper():
     text = (TOOLS / "TAKY_MODEL_REVIEW.ps1").read_text(encoding="utf-8-sig")
     assert "$realCodex=" in text

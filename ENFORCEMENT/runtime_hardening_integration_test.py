@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 import copy
+import hashlib
 import json
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
 
+import codex_task_contract_builder as builder
+import preflight_bridge as preflight
 import runtime_orchestrator as ro
 from runtime_orchestrator import run
 
@@ -65,6 +69,208 @@ def approval_binding_for(record, action_kind, action_payload, delegation=None):
 
 
 class RuntimeHardeningIntegrationTest(unittest.TestCase):
+    def test_intent_fidelity_baseline_contract_allows_original_task(self):
+        record = base_record()
+        self.assertEqual(preflight.validate_intent_fidelity(record, ROOT), [])
+        self.assertEqual(
+            [x for x in preflight.run(record, ROOT)["detected"] if x.startswith("INTENT_")],
+            [],
+        )
+
+    def test_intent_fidelity_does_not_accept_unbound_assistant_contract(self):
+        record = base_record()
+        record.pop("intent_contract")
+        self.assertIn("INTENT_CONTRACT_MISSING",
+                      preflight.validate_intent_fidelity(record, ROOT))
+        record = base_record()
+        record["intent_contract"]["user_source_id"] = "fabricated-source"
+        self.assertIn("INTENT_SOURCE_REFERENCE_UNBOUND",
+                      preflight.validate_intent_fidelity(record, ROOT))
+        record = base_record()
+        record["working_model"]["primary_outcome"] = "Build a convenient website instead."
+        self.assertIn("INTENT_WORKING_MODEL_OUTCOME_DIVERGED",
+                      preflight.validate_intent_fidelity(record, ROOT))
+
+    def test_intent_fidelity_replays_photo_pipeline_to_webapp_drift(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = (
+            "사진 편집 파이프라인을 분석 검토해서 사례적 검토 후 구현해"
+        )
+        intent["requested_result"] = "인물의 특징을 지키는 사진 편집 처리 파이프라인"
+        intent["requested_kind"] = "PIPELINE"
+        intent["planned_kind"] = "APPLICATION"
+        intent["planned_result"] = "사진 필터 웹앱"
+        record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+        record["working_model"]["primary_outcome"] = intent["planned_result"]
+        record["artifact_kind"] = "ui"
+        detected = preflight.validate_intent_fidelity(record, ROOT)
+        self.assertIn("INTENT_DELIVERABLE_KIND_DRIFT", detected)
+        self.assertIn("SUBSTITUTE_RESULT_PIPELINE_TO_UI", detected)
+        self.assertIn("INTENT_SOURCE_ANALYSIS_EVIDENCE_MISSING", detected)
+        self.assertFalse(preflight.run(record, ROOT)["pass"])
+        actual_route = run(record, ROOT, None)
+        self.assertFalse(actual_route["pass"])
+        self.assertIsNone(actual_route["route"])
+        self.assertIn("INTENT_DELIVERABLE_KIND_DRIFT", actual_route["detected"])
+
+    def test_literal_intent_prevents_both_sides_mislabeling_pipeline_as_app(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = (
+            "인물 사진 가공 파이프라인을 세밀히 분석해 구현하라."
+        )
+        intent["requested_kind"] = "APPLICATION"  # assistant's faulty restatement
+        intent["planned_kind"] = "APPLICATION"
+        intent["requested_result"] = "사진 필터 웹앱"
+        intent["planned_result"] = "사진 필터 웹앱"
+        record["working_model"]["primary_outcome"] = intent["planned_result"]
+        record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+        self.assertIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                      preflight.validate_intent_fidelity(record, ROOT))
+
+    def test_latest_correction_can_explicitly_replace_pipeline_with_app(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = "파이프라인을 분석한 후 구현해"
+        intent["latest_user_correction"] = "파이프라인 말고 웹앱으로 구현해"
+        intent["requested_kind"] = "APPLICATION"
+        intent["planned_kind"] = "APPLICATION"
+        intent["requested_result"] = "웹앱"
+        intent["planned_result"] = "웹앱"
+        record["working_model"]["primary_outcome"] = "웹앱"
+        record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+        errors = preflight.validate_intent_fidelity(record, ROOT)
+        self.assertNotIn("INTENT_LITERAL_PIPELINE_RELABELED", errors)
+
+    def test_intent_fidelity_requires_actual_source_analysis_before_spec(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = "원문을 분석하고 사례 검토한 후 기능 구현"
+        intent["requested_result"] = "사진 처리 파이프라인"
+        intent["requested_kind"] = "PIPELINE"
+        intent["planned_kind"] = "PIPELINE"
+        intent["planned_result"] = "사진 처리 파이프라인"
+        intent["analysis_before_implementation"] = True
+        record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+        record["working_model"]["primary_outcome"] = intent["planned_result"]
+        self.assertIn("INTENT_SOURCE_ANALYSIS_EVIDENCE_MISSING",
+                      preflight.validate_intent_fidelity(record, ROOT))
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary)
+            (path / "original.txt").write_text("actual source input", encoding="utf-8")
+            src_hash = hashlib.sha256((path / "original.txt").read_bytes()).hexdigest()
+            (path / "review.txt").write_text(f"comparison of source {src_hash}", encoding="utf-8")
+            intent["source_analysis_evidence"] = [{
+                "source_path": "original.txt", "analysis_path": "review.txt",
+                "source_sha256": src_hash,
+                "analysis_sha256": hashlib.sha256((path / "review.txt").read_bytes()).hexdigest(),
+            }]
+            record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+            self.assertEqual(preflight.validate_intent_fidelity(record, path), [])
+            self.assertIs(preflight.run(record, path)["semantic_analysis_verified"], False)
+            (path / "review.txt").write_text("changed without re-review", encoding="utf-8")
+            self.assertIn("INTENT_ANALYSIS_PROOF_HASH_MISMATCH",
+                          preflight.validate_intent_fidelity(record, path))
+
+    def test_irrelevant_file_hash_is_not_accepted_as_source_analysis(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = "원문을 분석하고 사례 검토한 후 기능 구현"
+        intent["requested_kind"] = intent["planned_kind"] = "PIPELINE"
+        intent["requested_result"] = intent["planned_result"] = "사진 처리 파이프라인"
+        intent["analysis_before_implementation"] = True
+        record["working_model"]["primary_outcome"] = intent["planned_result"]
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary)
+            (path / "original.txt").write_text("actual source input", encoding="utf-8")
+            (path / "unrelated.txt").write_text("a changelog nobody compared", encoding="utf-8")
+            src_hash = hashlib.sha256((path / "original.txt").read_bytes()).hexdigest()
+            evidence = {
+                "source_path": "original.txt", "analysis_path": "unrelated.txt",
+                "source_sha256": src_hash,
+                "analysis_sha256": hashlib.sha256((path / "unrelated.txt").read_bytes()).hexdigest(),
+            }
+            for label, ev, expected in (
+                ("uncited", evidence, "INTENT_ANALYSIS_DOES_NOT_CITE_SOURCE"),
+                ("no source hash", {k: v for k, v in evidence.items() if k != "source_sha256"},
+                 "INTENT_ANALYSIS_SOURCE_BINDING_INVALID"),
+                ("same file", {**evidence, "analysis_path": "original.txt",
+                               "analysis_sha256": src_hash},
+                 "INTENT_ANALYSIS_SOURCE_BINDING_INVALID"),
+            ):
+                intent["source_analysis_evidence"] = [ev]
+                record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+                self.assertIn(expected, preflight.validate_intent_fidelity(record, path), label)
+
+    def _pipeline_record(self, original, correction="", kind="APPLICATION", planned_kind=None):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = original
+        intent["latest_user_correction"] = correction
+        intent["requested_kind"] = kind
+        intent["planned_kind"] = planned_kind or kind
+        intent["requested_result"] = intent["planned_result"] = "결과"
+        record["working_model"]["primary_outcome"] = "결과"
+        record["working_model"]["intent_contract"] = copy.deepcopy(intent)
+        return record
+
+    def test_non_overriding_correction_keeps_original_pipeline_constraint(self):
+        original = "photo processing 파이프 라인 사례를 분석한 뒤 구현해"
+        for correction in ("분석한 내용 반영해", "더 세밀하게", ""):
+            record = self._pipeline_record(original, correction)
+            self.assertIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                          preflight.validate_intent_fidelity(record, ROOT), correction)
+
+    def test_spaced_korean_pipeline_spelling_is_recognised(self):
+        record = self._pipeline_record("사진 파이프 라인을 구현해")
+        self.assertIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                      preflight.validate_intent_fidelity(record, ROOT))
+
+    def test_pipeline_relabel_caught_when_only_planned_kind_drifts(self):
+        record = self._pipeline_record("파이프라인을 구현해", kind="PIPELINE", planned_kind="APPLICATION")
+        self.assertIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                      preflight.validate_intent_fidelity(record, ROOT))
+
+    def test_genuine_user_override_and_true_pipeline_are_not_blocked(self):
+        override = self._pipeline_record("파이프 라인을 분석한 후 구현해", "파이프 라인 말고 웹앱으로 구현해")
+        self.assertNotIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                         preflight.validate_intent_fidelity(override, ROOT))
+        honest = self._pipeline_record("파이프 라인을 구현해", "분석한 내용 반영해", kind="PIPELINE")
+        self.assertNotIn("INTENT_LITERAL_PIPELINE_RELABELED",
+                         preflight.validate_intent_fidelity(honest, ROOT))
+
+    def test_task_contract_carries_original_intent_and_latest_correction(self):
+        record = base_record()
+        intent = record["intent_contract"]
+        intent["literal_user_request"] = "photo processing 파이프 라인을 구현해"
+        intent["latest_user_correction"] = "분석한 내용 반영해"
+        result = builder.build(record)
+        self.assertTrue(result["pass"], result["detected"])
+        task = result["task_contract"]
+        self.assertEqual(task["original_user_intent"]["text"], intent["literal_user_request"])
+        self.assertEqual(task["original_user_intent"]["source"], "user")
+        self.assertEqual(task["latest_user_correction"]["text"], "분석한 내용 반영해")
+
+    def test_task_contract_without_correction_still_carries_original_intent(self):
+        result = builder.build(base_record())
+        self.assertTrue(result["pass"], result["detected"])
+        self.assertIn("original_user_intent", result["task_contract"])
+        self.assertNotIn("latest_user_correction", result["task_contract"])
+
+    def test_task_contract_rejects_untraceable_user_intent(self):
+        record = base_record()
+        record["intent_contract"]["user_source_id"] = "fabricated-source"
+        result = builder.build(record)
+        self.assertFalse(result["pass"])
+        self.assertIn("TASK_INTENT_SOURCE_UNBOUND", result["detected"])
+        record = base_record()
+        record["intent_contract"]["literal_user_request"] = "  "
+        self.assertIn("TASK_INTENT_LITERAL_MISSING", builder.build(record)["detected"])
+        record = base_record()
+        record["intent_contract"]["latest_user_correction"] = 5
+        self.assertIn("TASK_INTENT_CORRECTION_INVALID", builder.build(record)["detected"])
+
     def test_context_firewall_blocks_bulk_parent_context(self):
         record = attach_delegated_worker(base_record(), return_fields=["finding"])
         record["worker_context"]["full_chat_history"] = ["do not forward"]

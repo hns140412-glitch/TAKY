@@ -508,8 +508,13 @@ jobs:
           PY
       - name: Validate REWORK state transition
         run: python ENFORCEMENT/execution_state_engine.py ENFORCEMENT/fixtures/execution_state_rework_pass.json
-      - name: Validate successful executor review
-        run: python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json
+      - name: Reject unbound legacy mobile PASS and validate revision-bound executor review
+        run: |
+          if python ENFORCEMENT/executor_review_loop.py --task ENFORCEMENT/fixtures/executor_review_task.json --report ENFORCEMENT/fixtures/executor_review_pass.json; then
+            echo "Legacy PASS text without verified result preview must be REWORK"
+            exit 1
+          fi
+          python ENFORCEMENT/executor_preview_binding_test.py
       - name: Validate GitHub Issue queue formatter/parser
         run: |
           python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --transport GITHUB_ISSUE_QUEUE --output /tmp/github-envelope.json
@@ -583,7 +588,7 @@ jobs:
           from pathlib import Path
           assert json.loads(Path('/tmp/queue-open-plan.json').read_text())['action']=='QUEUE_READY'
           assert json.loads(Path('/tmp/queue-receipt-plan.json').read_text())['action']=='RECEIPT_ACCEPTED'
-          assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_HUMAN_APPROVAL'
+          assert json.loads(Path('/tmp/queue-result-plan.json').read_text())['action']=='RESULT_TO_REWORK'
           forged=json.loads(Path('/tmp/queue-forged-result-plan.json').read_text())
           assert forged['action']=='REJECT_UNTRUSTED_MACHINE_COMMENT', forged
           assert forged['pass'] is False, forged
@@ -640,7 +645,7 @@ jobs:
           assert plan['comments_to_publish'] == [], plan
           assert plan['processed'][0]['action'] == 'REJECT_UNTRUSTED_QUEUE_ISSUE', plan
           PY
-      - name: Validate executor transport and closed review cycle
+      - name: Validate executor transport rejects unbound legacy completion
         run: |
           python ENFORCEMENT/executor_transport.py build --task ENFORCEMENT/fixtures/executor_review_task.json --output /tmp/envelope.json
           python - <<'PY'
@@ -660,7 +665,17 @@ jobs:
           Path('/tmp/executor_result_bad.json').write_text(json.dumps(bad, ensure_ascii=False, indent=2)+'\n')
           PY
           python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
-          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope.json --result /tmp/executor_result.json
+          if python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope.json --result /tmp/executor_result.json > /tmp/cycle-unverified.json; then
+            echo "Expected legacy report without revision-bound preview to fail"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/cycle-unverified.json').read_text())
+          assert data['review']['review_decision']=='REWORK', data
+          assert any(d['code']=='RESULT_PREVIEW_EVIDENCE_MISSING' for d in data['detected']), data
+          PY
           if python ENFORCEMENT/executor_result_ingest.py --envelope /tmp/envelope.json --result /tmp/executor_result_bad.json; then
             echo "Expected mismatched executor result hash to be rejected"
             exit 1
@@ -682,7 +697,10 @@ jobs:
           }
           Path('/tmp/executor_result_fail.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
           PY
-          python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope-fail.json --result /tmp/executor_result_fail.json > /tmp/cycle-fail.json
+          if python ENFORCEMENT/executor_cycle.py --envelope /tmp/envelope-fail.json --result /tmp/executor_result_fail.json > /tmp/cycle-fail.json; then
+            echo "REWORK must not return successful exit status"
+            exit 1
+          fi
           python - <<'PY'
           import json
           from pathlib import Path
@@ -735,8 +753,12 @@ jobs:
         run: python ENFORCEMENT/evidence_bridge_regression.py
       - name: Replay canonical history boundary regression
         run: python ENFORCEMENT/evidence_history_boundary_test.py
-      - name: Validate Codex task contract fixture
-        run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
+      - name: Reject legacy mobile contract missing preview requirement
+        run: |
+          if python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json; then
+            echo "Legacy mobile contract without preview enforcement must be rejected"
+            exit 1
+          fi
       - name: Validate self-contained handoff fixture
         run: python ENFORCEMENT/handoff_bundle_validator.py ENFORCEMENT/fixtures/handoff_bundle_pass
       - name: Validate conversation-to-system coverage fixture

@@ -226,8 +226,190 @@ def test_non_material(failures):
     passed = call(sid, "Stop")
     expect(passed is None, "Non-material task was incorrectly blocked", failures)
 
+def test_route_switch_is_not_misreported_as_recovery(failures):
+    """Alternate tool success must not erase the original unresolved failure."""
+    sid = "route-evidence-" + uuid.uuid4().hex
+    call(sid, "UserPromptSubmit", prompt="기존 실패를 복구하고 목표를 계속 진행해")
+    failed_action = {"command": "npm run build"}
+    for _ in range(2):
+        call(sid, "PostToolUse", tool_name="PowerShell", tool_input=failed_action,
+             tool_response="Process completed with exit code 1: build failed")
+    import hashlib
+    session_hash = hashlib.sha256(sid.encode()).hexdigest()[:20]
+    rows_before = [json.loads(x) for x in TEST_LEDGER.read_text(encoding="utf-8").splitlines()]
+    failure_sig = [r["failed_sig"] for r in rows_before
+                   if r.get("kind") == "REPEATED_FAILURE"
+                   and r.get("session") == session_hash][-1]
+    # An unrelated successful command demonstrates a different route, not fixed build.
+    call(sid, "PostToolUse", tool_name="PowerShell",
+         tool_input={"command": "python --version"},
+         tool_response="Python 3.14.0")
+    rows_after = [json.loads(x) for x in TEST_LEDGER.read_text(encoding="utf-8").splitlines()]
+    related = [r.get("kind") for r in rows_after
+               if r.get("failed_sig") == failure_sig
+               and r.get("session") == session_hash]
+    expect("ROUTE_SWITCH_ATTEMPT" in related,
+           "Alternate route attempt was not recorded", failures)
+    expect("RECOVERY_ROUTE" not in related,
+           "Unrelated tool success falsely marked original failure recovered", failures)
+
+
+def test_recovery_requires_corrective_change_and_original_repass(failures):
+    """Shepherd allows one same-check retry only after a real scoped edit."""
+    import hashlib
+    sid = "shepherd-retry-" + uuid.uuid4().hex
+    original = {"command": "npm run build"}
+    call(sid, "UserPromptSubmit", prompt="코드 수정과 검증까지 진행해")
+    for _ in range(2):
+        call(sid, "PostToolUse", tool_name="PowerShell", tool_input=original,
+             tool_response="Process completed with exit code 1: build failed")
+    denied = call(sid, "PreToolUse", tool_name="PowerShell", tool_input=original)
+    expect((denied or {}).get("hookSpecificOutput", {}).get("permissionDecision") == "deny",
+           "Blind third identical attempt was permitted", failures)
+
+    call(sid, "PostToolUse", tool_name="PowerShell",
+         tool_input={"command": "python --version"}, tool_response="Python 3.14.0")
+    again = call(sid, "PreToolUse", tool_name="PowerShell", tool_input=original)
+    expect((again or {}).get("hookSpecificOutput", {}).get("permissionDecision") == "deny",
+           "Unrelated success unlocked original failed command", failures)
+
+    # A scoped, successful source edit is corrective evidence, NOT verified recovery.
+    call(sid, "PostToolUse", tool_name="Edit",
+         tool_input={"file_path": "src/engine.py"}, tool_response="Edit applied")
+    state_file = TEST_STATE_DIR / (hashlib.sha256(sid.encode()).hexdigest()[:20] + ".json")
+    state = json.loads(state_file.read_text(encoding="utf-8"))
+    expect(state.get("revalidation_pending") is True,
+           "Correction did not require revalidation", failures)
+    allowed = call(sid, "PreToolUse", tool_name="PowerShell", tool_input=original)
+    expect(allowed is None,
+           "Corrected build path remained permanently denied", failures)
+    call(sid, "PostToolUse", tool_name="PowerShell",
+         tool_input={"command": "npm run lint"},
+         tool_response="Process completed with exit code 0")
+    blocked = call(sid, "Stop")
+    expect(blocked and blocked.get("decision") == "block",
+           "Unrelated passing check cleared original revalidation gate", failures)
+    call(sid, "PostToolUse", tool_name="PowerShell", tool_input=original,
+         tool_response="Process completed with exit code 0")
+    state = json.loads(state_file.read_text(encoding="utf-8"))
+    expect(state.get("revalidation_pending") is False,
+           "Original passing recheck failed to clear revalidation gate", failures)
+    rows = [json.loads(row) for row in TEST_LEDGER.read_text(encoding="utf-8").splitlines()]
+    expect(any(row.get("kind") == "RECOVERY_ROUTE" and row.get("session") == state_file.stem
+               and row.get("recovery_evidence") == "ORIGINAL_CHECK_REPASS_AFTER_CORRECTION"
+               for row in rows), "Evidence-bound original recheck not recorded", failures)
+
+
+def test_stop_failure_does_not_unlock_prior_route(failures):
+    import hashlib
+    sid = "stop-protected-" + uuid.uuid4().hex
+    call(sid, "UserPromptSubmit", prompt="실행 실패 복구와 검증해")
+    for _ in range(2):
+        call(sid, "StopFailure", error="rate_limit",
+             error_details="429 Too Many Requests",
+             last_assistant_message="Usage limit reached")
+    call(sid, "PostToolUse", tool_name="Edit",
+         tool_input={"file_path": "src/engine.py"}, tool_response="Edit applied")
+    path = TEST_STATE_DIR / (hashlib.sha256(sid.encode()).hexdigest()[:20] + ".json")
+    state = json.loads(path.read_text(encoding="utf-8"))
+    expect(state.get("route_switch_required") is True
+           and state.get("revalidation_pending") is False
+           and not state.get("blocked_route_sig"),
+           "Protected model/session stop was incorrectly reopened by a code edit", failures)
+    call(sid, "UserPromptSubmit", prompt="ㄱ")
+    continued = json.loads(path.read_text(encoding="utf-8"))
+    expect(continued.get("route_switch_required") is True
+           and continued.get("last_failure_cause") == "COST"
+           and not continued.get("revalidation_pending"),
+           "Continue prompt incorrectly discarded a signed cost/session HOLD", failures)
+
+
+def test_same_session_continuation_retains_unfinished_route(failures):
+    import hashlib
+    sid = "follow-up-" + uuid.uuid4().hex
+    original = {"command": "npm run build"}
+    call(sid, "UserPromptSubmit", prompt="기존 코드 구현 후 빌드 검증해")
+    for _ in range(2):
+        call(sid, "PostToolUse", tool_name="PowerShell",
+             tool_input=original, tool_response="Process completed with exit code 1")
+    call(sid, "UserPromptSubmit", prompt="ㄱ")
+    denied = call(sid, "PreToolUse", tool_name="PowerShell", tool_input=original)
+    expect((denied or {}).get("hookSpecificOutput", {}).get("permissionDecision") == "deny",
+           "Continue prompt erased anti-loop state", failures)
+    call(sid, "PostToolUse", tool_name="Edit",
+         tool_input={"file_path": "src/main.py"}, tool_response="Edit applied")
+    call(sid, "UserPromptSubmit", prompt="이어서 진행")
+    p = TEST_STATE_DIR / (hashlib.sha256(sid.encode()).hexdigest()[:20] + ".json")
+    state = json.loads(p.read_text(encoding="utf-8"))
+    expect(state.get("revalidation_pending") is True and state.get("material_intent") is True,
+           "Continue prompt erased required original recheck", failures)
+    blocked = call(sid, "Stop")
+    expect(blocked and blocked.get("decision") == "block",
+           "Resumed turn was allowed to finish without original recheck", failures)
+    call(sid, "UserPromptSubmit", prompt="새로운 작업 시작")
+    state = json.loads(p.read_text(encoding="utf-8"))
+    expect(not state.get("revalidation_pending") and not state.get("route_switch_required"),
+           "Unrelated new task inherited an old route", failures)
+
+
+def test_real_local_failed_check_to_corrected_repass(failures):
+    """Real pytest failure -> shepherd gate -> real file correction -> real re-pass."""
+    import hashlib
+    sid = "real-local-" + uuid.uuid4().hex
+    with tempfile.TemporaryDirectory(prefix="TAKY_REAL_SHEPHERD_") as sandbox:
+        fixture = Path(sandbox) / "test_shepherd.py"
+        fixture.write_text("def test_result():\n    assert 2 + 2 == 5\n", encoding="utf-8")
+        original = {"command": "python -m pytest -q test_shepherd.py"}
+
+        def run_real_test():
+            p = subprocess.run([sys.executable, "-m", "pytest", "-q",
+                                "test_shepherd.py"], cwd=sandbox,
+                               capture_output=True, text=True, timeout=35)
+            return p.returncode, "Process completed with exit code " + str(p.returncode) + "\n" + p.stdout + p.stderr
+
+        call(sid, "UserPromptSubmit", cwd=sandbox,
+             prompt="기존 로컬 코드를 수정하고 동일 검사로 검증해")
+        for _ in range(2):
+            rc, result = run_real_test()
+            expect(rc != 0, "Real fixture unexpectedly passed before correction", failures)
+            call(sid, "PostToolUse", cwd=sandbox, tool_name="PowerShell",
+                 tool_input=original, tool_response=result)
+        call(sid, "UserPromptSubmit", cwd=sandbox, prompt="ㄱ")
+        denied = call(sid, "PreToolUse", cwd=sandbox,
+                      tool_name="PowerShell", tool_input=original)
+        expect((denied or {}).get("hookSpecificOutput", {}).get("permissionDecision") == "deny",
+               "Real unchanged third test run was not blocked", failures)
+
+        fixture.write_text("def test_result():\n    assert 2 + 2 == 4\n", encoding="utf-8")
+        call(sid, "PostToolUse", cwd=sandbox, tool_name="Edit",
+             tool_input={"file_path": "test_shepherd.py"},
+             tool_response="Edit applied")
+        call(sid, "UserPromptSubmit", cwd=sandbox, prompt="계속 진행해")
+        p = TEST_STATE_DIR / (hashlib.sha256(sid.encode()).hexdigest()[:20] + ".json")
+        pending = json.loads(p.read_text(encoding="utf-8"))
+        expect(pending.get("revalidation_pending") is True,
+               "Real corrected fixture lost its pending verification", failures)
+        allowed = call(sid, "PreToolUse", cwd=sandbox,
+                       tool_name="PowerShell", tool_input=original)
+        expect(allowed is None, "Real corrected fixture was not allowed to revalidate", failures)
+        rc, result = run_real_test()
+        expect(rc == 0, "Corrected real pytest run failed: " + result[-300:], failures)
+        call(sid, "PostToolUse", cwd=sandbox, tool_name="PowerShell",
+             tool_input=original, tool_response=result)
+        expect(call(sid, "Stop", cwd=sandbox) is None,
+               "Successful real original recheck failed to clear Stop", failures)
+        current = json.loads(p.read_text(encoding="utf-8"))
+        expect(not current.get("revalidation_pending") and current.get("code_verified"),
+               "Real original recheck did not produce verified local evidence", failures)
+
+
 def main():
     failures = []
+    test_real_local_failed_check_to_corrected_repass(failures)
+    test_same_session_continuation_retains_unfinished_route(failures)
+    test_stop_failure_does_not_unlock_prior_route(failures)
+    test_recovery_requires_corrective_change_and_original_repass(failures)
+    test_route_switch_is_not_misreported_as_recovery(failures)
     test_ui_gate(failures)
     test_interaction_gate(failures)
     test_revision_bound_verification(failures)

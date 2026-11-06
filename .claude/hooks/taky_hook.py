@@ -108,22 +108,71 @@ def _emit_prompt_context(text):
         }
     }, ensure_ascii=False))
 
+def _codex_plugin_operation(input_data):
+    command = str(input_data.get("command") or input_data.get("cmd") or "")
+    match = re.search(
+        r"codex-companion\.mjs[\"']?\s+(review|adversarial-review|task|transfer)\b",
+        command, re.I,
+    )
+    return match.group(1).lower() if match else ""
+
+
+def _codex_plugin_model_call(input_data):
+    return bool(_codex_plugin_operation(input_data))
+
+
+def _signed_codex_verifier_health(cwd):
+    """Read signed existing TAKY authority; never issue a model call or receipt."""
+    try:
+        root = Path(__file__).resolve().parents[2]
+        tool_dir = root / "TOOLS"
+        if str(tool_dir) not in sys.path:
+            sys.path.insert(0, str(tool_dir))
+        from TAKY_GOVERNED_ROUTE_HEALTH import signed_health
+        return signed_health("Codex", str(Path(cwd or ".").resolve()))
+    except Exception as exc:
+        return {"status": "HOLD", "reason": "SIGNED_VERIFIER_PREFLIGHT_UNAVAILABLE",
+                "reasonClass": type(exc).__name__}
+
+
+def _is_explicit_task_continuation(prompt):
+    value = str(prompt or "").strip().lower()
+    if not value or len(value) > 180:
+        return False
+    if any(x in value for x in ("새로운 작업", "다른 작업", "new task", "switch project")):
+        return False
+    return bool(
+        re.search(r"계속|이어서|쭉\s*진행|재검증|이어\s*진행", value)
+        or re.fullmatch(r"(?:ㄱ|ㅇㅇ|계속|진행|go|continue|resume)[.! ]*", value)
+    )
+
+
 def _cost_class(tool_name, input_data):
     command = str(input_data.get("command") or input_data.get("cmd") or "")
     hay = (tool_name + " " + command).lower()
-    if "remote_desktop_commander" in tool_name.lower():
-        return "REMOTE"
-    if re.search(r"(^|\s)(codex)(\.exe)?\s+exec\b", command, re.I):
+    if _codex_plugin_model_call(input_data):
         return "EXTERNAL_MODEL"
-    if re.search(r"(^|\s)(gemini)(\.exe)?\b", command, re.I):
+    # Count direct CLI/model-server launches before the generic remote-shell
+    # accounting. Read-only codex login/status/version are excluded.
+    if re.search(
+        r"(?<![\w])codex(?:\.(?:exe|cmd|ps1))?[\"']?\s+(?:exec|app-server)\b",
+        command, re.I,
+    ):
         return "EXTERNAL_MODEL"
-    if re.search(r"(^|\s)(claude)(\.exe)?\s+(-p|--print)\b", command, re.I):
+    if re.search(r"(?<![\w])gemini(?:\.(?:exe|cmd))?[\"']?\s+", command, re.I):
+        return "EXTERNAL_MODEL"
+    if re.search(
+        r"(?<![\w])claude(?:\.(?:exe|cmd))?[\"']?\s+(?:-p|--print)\b",
+        command, re.I,
+    ):
         return "EXTERNAL_MODEL"
     if tool_name.lower() in {
         "mcp__scenario__model_run",
         "mcp__scenario__workflow_run",
     }:
         return "EXTERNAL_MODEL"
+    if "remote_desktop_commander" in tool_name.lower():
+        return "REMOTE"
     return ""
 
 # Minimal lifecycle continuity receipt. This never stores session content, raw IDs, or paths,
@@ -140,6 +189,12 @@ if event in {"SessionStart", "PreCompact"}:
         pass
 
 if event == "UserPromptSubmit":
+    prior_cost = _load_cost_state()
+    raw_prompt = data.get("prompt") or data.get("user_prompt") or data.get("message")
+    continue_budget = (
+        _is_explicit_task_continuation(raw_prompt)
+        and prior_cost.get("schema") == "TAKY_COST_DRY_RUN_V1"
+    )
     state = {
         "schema": "TAKY_COST_DRY_RUN_V1",
         "external_model_calls": 0,
@@ -158,12 +213,28 @@ if event == "UserPromptSubmit":
     remote_limit, remote_pct = _cached_remote_limit(COST_MAX_REMOTE_CALLS)
     state["max_remote_calls"] = remote_limit
     state["remote_remaining_pct"] = remote_pct
+    if continue_budget:
+        # Reuse the existing bounded model/remote allocation on an explicit
+        # same-session follow-up. A short "go" must not buy another model call.
+        state["external_model_calls"] = max(0, int(prior_cost.get("external_model_calls", 0)))
+        state["remote_calls"] = max(0, int(prior_cost.get("remote_calls", 0)))
+        state["max_external_model_calls"] = min(
+            COST_MAX_EXTERNAL_MODEL_CALLS,
+            max(0, int(prior_cost.get("max_external_model_calls", COST_MAX_EXTERNAL_MODEL_CALLS)))
+        )
+        if prior_cost.get("remote_soft_notice_sent"):
+            state["remote_soft_notice_sent"] = True
+        if prior_cost.get("bootstrap"):
+            state["bootstrap"] = prior_cost["bootstrap"]
     _save_cost_state(state)
     pressure = _context_pressure_guidance()
     context_text = (
         "TAKY DRY_RUN_PLAN active: NECESSITY -> REUSE -> LOCAL -> LOWEST SUFFICIENT -> "
-        f"BATCH. Additional external-model calls budget={COST_MAX_EXTERNAL_MODEL_CALLS}; "
-        f"Remote MCP budget={COST_MAX_REMOTE_CALLS}. Batch related reads/actions before executing. "
+        f"BATCH. Remaining external-model call allowance="
+        f"{max(0, state['max_external_model_calls'] - state['external_model_calls'])}"
+        f"/{state['max_external_model_calls']} for this bounded task; "
+        f"Remote MCP batching preference={state['max_remote_calls']}. "
+        "Batch related reads/actions before executing. "
         "If the bounded budget is insufficient, reroute/reuse or report HOLD instead of silently multiplying calls."
     )
     if pressure:
@@ -220,6 +291,40 @@ tool_input = data.get("tool_input") or {}
 
 cost_state = _load_cost_state()
 cost_class = _cost_class(tool, tool_input)
+remote_soft_guidance = ""
+
+# Independent signed-route preflight for official Codex-for-Claude model calls.
+# The existing Codex action is verifier-only; task/transfer cannot inherit its
+# authority. This hook is one enforcement layer, not hosted ChatGPT interception.
+if event == "PreToolUse":
+    plugin_op = _codex_plugin_operation(tool_input)
+    if plugin_op:
+        reason = None
+        if plugin_op not in {"review", "adversarial-review"}:
+            reason = (
+                "TAKY SHEPHERD: this plugin action is not an authorized "
+                "verifier-only review. Keep Claude as implementation owner; "
+                "use a scoped Codex review or obtain a distinct trusted "
+                "Codex implementation/transfer authorization."
+            )
+        else:
+            health = _signed_codex_verifier_health(data.get("cwd"))
+            if health.get("status") != "READY_FOR_EXISTING_COST_AND_APPROVAL_GATES":
+                reason = (
+                    "TAKY SHEPHERD: signed Codex verifier route is HOLD ("
+                    + str(health.get("reason") or "SIGNED_PREFLIGHT_NOT_READY")[:100]
+                    + "). Preserve work/context, use local deterministic checks "
+                    "and recheck existing signed authority; never bypass the route gate."
+                )
+        if reason:
+            print(json.dumps({
+                "hookSpecificOutput": {
+                    "hookEventName": "PreToolUse",
+                    "permissionDecision": "deny",
+                    "permissionDecisionReason": reason,
+                }
+            }, ensure_ascii=False))
+            sys.exit(0)
 if event == "PreToolUse" and cost_class and not cost_state:
     # Existing Claude sessions may have loaded hook registrations before the
     # UserPromptSubmit cost hook was added. Fail-safe by creating the bounded
@@ -260,21 +365,21 @@ if event == "PreToolUse" and cost_class and cost_state:
         cost_state["external_model_calls"] = used + 1
         _save_cost_state(cost_state)
     elif cost_class == "REMOTE":
+        # Desktop Commander access is an already-connected local execution path,
+        # not a new paid provider call. Its count is an efficiency hint, not an
+        # authorization gate. Never short-circuit the security checks below.
         used = int(cost_state.get("remote_calls", 0))
         limit = int(cost_state.get("max_remote_calls", COST_MAX_REMOTE_CALLS))
-        if used >= limit:
-            print(json.dumps({
-                "hookSpecificOutput": {
-                    "hookEventName": "PreToolUse",
-                    "permissionDecision": "deny",
-                    "permissionDecisionReason":
-                        "TAKY REROUTE_REQUIRED (non-terminal): Remote MCP DRY_RUN_PLAN budget exhausted for the current route. "
-                        "Batch related reads/commands into one remote process, reuse collected evidence, "
-                        "or HOLD/REROUTE instead of issuing another fragmented remote call."
-                }
-            }, ensure_ascii=False))
-            sys.exit(0)
         cost_state["remote_calls"] = used + 1
+        if used >= limit and not cost_state.get("remote_soft_notice_sent"):
+            remote_soft_guidance = (
+                "TAKY SOFT ROUTE GUIDANCE: Desktop Commander call count exceeded "
+                "the batching preference. Reuse/batch when practical, but continue "
+                "the authorized task; the count itself is not a reason to stop. "
+                "Credential, external publication, Git and protected-file gates "
+                "still apply independently."
+            )
+            cost_state["remote_soft_notice_sent"] = True
         _save_cost_state(cost_state)
 
 def decide(kind, reason):
@@ -378,15 +483,107 @@ ask_patterns = [
 if any(re.search(p, haystack, re.I | re.S) for p in ask_patterns):
     decide("ask", "TAKY/SAVEY gate: this action can publish, destroy, spend API money, or change remote state. Explicit user approval is required.")
 
-if "netlify" in tool.lower() and any(x in haystack for x in ["deploy", "publish", "production", "prod"]):
+# A provider's read API can contain words like "release", "permission" or
+# "deploy" in its noun. Distinguish the actual tool verb from those nouns.
+# Only explicit, read-only endpoint names qualify. Mutating control fields
+# invalidate the read classification even when the endpoint starts with get_.
+def _mcp_read_only_operation(tool_name, arguments):
+    parts = tool_name.lower().split("__")
+    if len(parts) < 3 or parts[0] != "mcp":
+        return False
+    endpoint = parts[-1]
+    if not re.match(
+        r"^(get|list|search|find|read|fetch|inspect|describe|check|"
+        r"retrieve|query|preview|lookup|view)_", endpoint
+    ):
+        return False
+    if not isinstance(arguments, dict):
+        return False
+    change_words = re.compile(
+        r"(?:^|[^a-z0-9])(delete|trash|remove|revoke|share|publish|"
+        r"deploy|push|merge|create|update|write|send|post|approve|"
+        r"invite|grant|execute|run|pay|charge)(?:$|[^a-z0-9])"
+    )
+    for key in ("action", "operation", "mode", "method"):
+        value = arguments.get(key)
+        if value is not None and change_words.search(str(value).lower()):
+            return False
+    return True
+
+mcp_read_only = _mcp_read_only_operation(tool, tool_input)
+
+if ("netlify" in tool.lower() and not mcp_read_only
+        and any(x in haystack for x in ["deploy", "publish", "production", "prod"])):
     decide("ask", "TAKY deploy gate: Netlify production/publish actions require explicit user approval.")
 
-if "github" in tool.lower() and any(x in haystack for x in ["push", "merge", "delete", "release", "force"]):
+if ("github" in tool.lower() and not mcp_read_only
+        and any(x in haystack for x in ["push", "merge", "delete", "release", "force"])):
     decide("ask", "TAKY GitHub gate: push/merge/delete/release/force actions require explicit user approval.")
 
 if tool.lower() in {"mcp__scenario__model_run", "mcp__scenario__workflow_run",
                     "mcp__scenario__scenario_tool_execute_write", "mcp__scenario__scenario_tool_execute_delete"}:
     decide("ask", "TAKY/SAVEY cost gate: Scenario generation/workflow/write actions require explicit user approval.")
+
+# Shepherding: verify a truly local Reason handoff instead of treating every
+# send_message as an external publication. This grants no generic MCP privilege:
+# ordinary Claude permissions still apply and all nonlocal/uncertain routes ask.
+def _reason_local_same_machine_route(tool_name, arguments):
+    if tool_name.lower() != "mcp__reason-network__send_message":
+        return False
+    if not isinstance(arguments, dict) or set(arguments) != {"to", "message"}:
+        return False  # no files, broadcasts, notifications, or impersonation
+    target, message = arguments.get("to"), arguments.get("message")
+    if not isinstance(target, str) or not isinstance(message, str):
+        return False
+    if not message.strip() or len(message.encode("utf-8")) > 4096:
+        return False
+    if target.count("/") != 1:
+        return False
+    person, session = target.split("/", 1)
+    if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}", person):
+        return False
+    if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}", session):
+        return False
+    try:
+        import subprocess
+        import tomllib
+        config_file = Path.home() / ".reason" / "network" / "config.toml"
+        config = tomllib.loads(config_file.read_text(encoding="utf-8"))
+        if config.get("person") != person:
+            return False
+        exe = (Path(os.environ.get("LOCALAPPDATA", ""))
+               / "TAKY" / "reason_network_evaluation" / "bin" / "reason-network.exe")
+        if not exe.is_file():
+            return False
+        result = subprocess.run(
+            [str(exe), "team", "--json"], stdin=subprocess.DEVNULL,
+            capture_output=True, text=True, timeout=8, check=False,
+        )
+        if result.returncode != 0:
+            return False
+        team = json.loads(result.stdout)
+        members = team.get("members")
+        return bool(
+            team.get("person") == person
+            and isinstance(team.get("team_name"), str) and bool(team["team_name"])
+            and isinstance(members, list) and len(members) == 1
+            and members[0].get("person") == person
+            and members[0].get("machine") == team.get("machine")
+        )
+    except (OSError, ValueError, TypeError, KeyError, AttributeError,
+            subprocess.SubprocessError):
+        return False
+
+if event == "PreToolUse" and tool.lower() == "mcp__reason-network__send_message":
+    if _reason_local_same_machine_route(tool, tool_input):
+        # Defer to Claude Code's regular tool permissions; no extra TAKY prompt.
+        sys.exit(0)
+    decide("ask",
+           "TAKY GUIDED ROUTE: this recipient is not verified as a same-PC, "
+           "single-member Reason session (or the call includes attachments, "
+           "broadcasts, or unsupported fields). Use a verified local session "
+           "with text-only send_message, or obtain user approval for an "
+           "external/uncertain destination. Do not repeat the same blocked call.")
 
 # Generic MCP high-impact gate. Inspect control/action fields and tool identity, not arbitrary page/document text.
 if tool.lower().startswith("mcp__"):
@@ -398,7 +595,17 @@ if tool.lower().startswith("mcp__"):
         "invite", "publish", "deploy", "release", "push", "merge", "force", "send_email",
         "send_message", "post_message", "account", "credential", "secret", "billing", "payment"
     ]
-    if any(term in mcp_control_text for term in high_impact_terms):
-        decide("ask", "TAKY connection-security gate: this MCP action may delete, publish/share, change access/account state, communicate externally, or create financial impact. Explicit user approval is required.")
+    if not mcp_read_only and any(term in mcp_control_text for term in high_impact_terms):
+        decide("ask",
+               "TAKY connection-security gate: action may change external state, "
+               "access, messages or cost. Use a read-only endpoint where sufficient; "
+               "otherwise obtain user approval for the specific external change.")
 
+if remote_soft_guidance:
+    print(json.dumps({
+        "hookSpecificOutput": {
+            "hookEventName": "PreToolUse",
+            "additionalContext": remote_soft_guidance,
+        }
+    }, ensure_ascii=False))
 sys.exit(0)
