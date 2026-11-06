@@ -361,6 +361,15 @@ Scope: these are criteria, not new gates. DG IDs and order stay unchanged and ap
 | DGC-20 | DG-04 / DG-09 | Treat design-system sync as a snapshot. A design-system change requires re-sync and marks earlier synced outputs stale (extends DGC-02). | `/design-sync` pulls the design system into the repo or pushes back to Claude Design (official @ClaudeDevs post and help center, seen as snippets). |
 | DGC-21 | DG-05 | The pilot declares a cost budget per iteration so the pilot does not end before the candidates (DGC-05) are produced. COST-internal; not a new gate. | A tester used about 80% of a weekly Pro allowance in about 25 minutes at launch; a later update reduced per-turn usage (REPUTABLE_SECONDARY: PCWorld, VentureBeat). |
 
+### 20.1c Harness binding — 2026-11-06
+
+The mechanical parts of DGC-01/02/16/18/19 and A11Y basics are executable:
+- `ENFORCEMENT/design_gate_harness.py` (judge, receipt) + `ENFORCEMENT/design_gate_render.mjs` (Playwright/Chromium render probe). Sub-receipts in fixed order: HARNESS_HEALTH, SPEC_LINT, TARGET_RENDER, TOKEN_FIDELITY, FONT_PRINT_PDF, A11Y_BASIC, GENERIC_TELLS (advisory only). A harness failure is HOLD, not FAIL. Receipts carry `spec_sha256`, `artifact_sha256` and `design_system_id@version`.
+- Procedure: `.claude/skills/taky-design-gate/SKILL.md`. Independent review: `.claude/agents/design-gate-reviewer.md`. Browser eye for interaction: `.mcp.json` Playwright MCP (pinned).
+- Tests: `ENFORCEMENT/design_gate_harness_test.py` with fixtures in `ENFORCEMENT/fixtures/design_gate/`.
+- Not added to CI on purpose (DGC-12: automate last). Promote to CI after manual replay on real project screens passes.
+- No third-party design skill is installed (Notion review RVR-121 disposition: hold).
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |

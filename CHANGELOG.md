@@ -1,3 +1,8 @@
+## 2026-11-06 — Design-gate harness (skill + agent + MCP + render check)
+- Added `ENFORCEMENT/design_gate_harness.py` + `design_gate_render.mjs`: DESIGN.md lint plus real-Chromium render per viewport, token/font/print/a11y sub-receipts, hash-bound receipt. 8 tests pass locally.
+- Added `.claude/skills/taky-design-gate`, `.claude/agents/design-gate-reviewer`, `.mcp.json` (Playwright MCP 0.0.83).
+- Not in CI yet (DGC-12). Fixed during build: Chromium `document.fonts.check` reports missing fonts as available, so font presence is measured by text width.
+
 ## 2026-11-06 — Case-derived design-gate criteria (TKY-UIREF-001 §20)
 - Added DGC-01..12 to `MASTER/UI_REFERENCE_PROTOCOL.md` §20 from a Claude case review (Claude Design, Apple, Tesla) of the DG-00..10 design-gate contract.
 - No new gates; DG IDs/order unchanged. Adds EXPLORE/EXECUTE mode, derived design-system binding, DELETION_PASS, candidate minimum N, handoff spec hash, export≠editable, automate-last.
