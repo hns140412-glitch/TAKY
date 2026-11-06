@@ -1,0 +1,481 @@
+{
+  "schema": "TAKY_ALPHA_MIGRATION_DECISION_COVERAGE_V0_1",
+  "status": "DRAFT_COVERAGE_MATRIX",
+  "date": "2026-10-04",
+  "purpose": "Required old→new coverage evidence before any canonical replacement. This matrix does not authorize replacement.",
+  "revised": "2026-10-04.system-wide-remediation",
+  "canonical_rule_registry": {
+    "authority": "GITHUB_MAIN",
+    "git_blob_sha1": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+    "rule_count": 21
+  },
+  "status_vocabulary": {
+    "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE": "semantic-owner pointer preserved; never counts as structural coverage of dimensions A-F",
+    "COVERED_A2A__A2B_MAPPED": "rule owner reference compiled and mapped in ALPHA/TAKY_ALPHA_GATE_MAP_V0_1.json",
+    "ROUTED": "system layer has a routing node in ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json (see layer_node_alias)",
+    "STRUCTURALLY_MAPPED_PENDING_VALIDATION": "dimension has contract/pipeline/coverage artifacts; deterministic validation not yet bound",
+    "CANDIDATE_NOT_CANONICAL": "post-freeze candidate preserved without authority",
+    "COVERED": "lossless frozen-input preservation"
+  },
+  "forbidden_statuses": ["COVERED_OR_EXPLICITLY_NON_ROUTING"],
+  "layer_node_alias": {
+    "TAKY_CORE": "TAKY",
+    "EXPLORATION_CREW": "EXPLORER_CREW",
+    "LEARNING_ENGINE_CORE": "LEARNING_ENGINE"
+  },
+  "rows": [
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "MASTER/MASTER_LOGIC.md",
+      "identity": "system",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "OS/LEARNING_ENGINE_CORE.md",
+      "identity": "learning_engine",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "identity": "learning_family",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "identity": "explorer_crew",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+      "identity": "ready_set",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json",
+      "identity": "mobile_registry",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "identity": "design_ui_assets",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "SEMANTIC_OWNER",
+      "source": "OS/LEARNING_ENGINE_CORE.md",
+      "identity": "learning_data",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "mode": "POINTER_ONLY",
+      "authority_transfer": false,
+      "status": "OWNER_POINTER_COVERED__NOT_DIMENSION_COVERAGE"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-GUIDING-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-INTENT-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-OUTCOME-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-RECOVERY-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-HANDOFF-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-TAXONOMY-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-ENFORCEMENT-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-WORKSPACE-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-NOTION-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-COMMAND-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-VALIDATION-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-C2S-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-NBLM-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-CONTINUITY-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-UIREF-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-CODEX-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-DRIVEC2S-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-ENGEXEC-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-GROWTH-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-ASSET-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "RULE_ID",
+      "source": "MASTER/RULE_REGISTRY.json",
+      "identity": "TKY-CHECKPOINT-001",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json",
+      "mode": "REGISTRY_HASHED_REFERENCE",
+      "authority_transfer": false,
+      "status": "COVERED_A2A__A2B_MAPPED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "TAKY_CORE",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "SHARED_TECHNICAL_CAPABILITY",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "WORK_OS",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "LEARNING_OS",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "LEARNING_APP_FAMILY",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "EXPLORATION_CREW",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "READY_SET",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "HIDE_SEEK",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "SNAP_POP",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "WORK_DOMAIN_PROJECT",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "PLATFORM_ADAPTER",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "SYSTEM_LAYER",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+      "identity": "LEARNING_ENGINE_CORE",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "mode": "ROUTING_REFERENCE",
+      "authority_transfer": false,
+      "status": "ROUTED"
+    },
+    {
+      "source_type": "FROZEN_OPEN_SET",
+      "source": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json",
+      "identity": "carry_over_open + contained_open",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_CARRYOVER_OPEN_V0_1.json",
+      "mode": "LOSSLESS_COPY_PLUS_SOURCE_MAPPING",
+      "authority_transfer": false,
+      "status": "COVERED"
+    },
+    {
+      "source_type": "FROZEN_LOCAL_CANDIDATE",
+      "source": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json#local_snapshot",
+      "identity": "staged + unstaged + source_untracked",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_FROZEN_LOCAL_CANDIDATE_BOUNDARY_V0_1.json",
+      "mode": "FROZEN_INPUT_BOUNDARY",
+      "authority_transfer": false,
+      "status": "COVERED"
+    },
+    {
+      "source_type": "ALPHA_DEPTH_LAYER",
+      "source": "Frozen Beta + bounded post-freeze evidence",
+      "identity": "WHOLE_SYSTEM_APP_ENGINE_DEPTH",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json",
+      "mode": "DEPTH_EVIDENCE",
+      "authority_transfer": false,
+      "status": "COVERED_BY_EXPLICIT_ARTIFACT"
+    },
+    {
+      "source_type": "ALPHA_DEPTH_LAYER",
+      "source": "Frozen Beta + bounded post-freeze evidence",
+      "identity": "WHOLE_SYSTEM_PIPELINES",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_PIPELINE_MAP_V0_1.json",
+      "mode": "DEPTH_EVIDENCE",
+      "authority_transfer": false,
+      "status": "COVERED_BY_EXPLICIT_ARTIFACT"
+    },
+    {
+      "source_type": "ALPHA_DEPTH_LAYER",
+      "source": "Frozen Beta + bounded post-freeze evidence",
+      "identity": "WHOLE_SYSTEM_RUNTIME_CONTRACTS",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_RUNTIME_CONTRACTS_V0_1.json",
+      "mode": "DEPTH_EVIDENCE",
+      "authority_transfer": false,
+      "status": "COVERED_BY_EXPLICIT_ARTIFACT"
+    },
+    {
+      "source_type": "ALPHA_DEPTH_LAYER",
+      "source": "Frozen Beta + bounded post-freeze evidence",
+      "identity": "LOCAL_INFRA_LANE",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json",
+      "mode": "DEPTH_EVIDENCE",
+      "authority_transfer": false,
+      "status": "COVERED_BY_EXPLICIT_ARTIFACT"
+    },
+    {
+      "source_type": "ALPHA_DEPTH_LAYER",
+      "source": "Frozen Beta + bounded post-freeze evidence",
+      "identity": "POST_FREEZE_DELTA",
+      "alpha_representation": "ALPHA/TAKY_ALPHA_POST_FREEZE_DELTA_V0_1.json",
+      "mode": "DEPTH_EVIDENCE",
+      "authority_transfer": false,
+      "status": "COVERED_BY_EXPLICIT_ARTIFACT"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    },
+    {
+      "path": "MASTER/REVISION_GOVERNANCE.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    },
+    {
+      "path": "MASTER/TRACEABILITY_PROTOCOL.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    }
+  ],
+  "canonical_replacement": "NOT_AUTHORIZED"
+}

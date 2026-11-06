@@ -1,0 +1,65 @@
+{
+  "schema": "TAKY_ALPHA_POST_FREEZE_DELTA_V0_1",
+  "status": "VOLATILE_CANDIDATE_SNAPSHOT",
+  "date": "2026-10-04",
+  "authority_transfer": false,
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "rule": "POST_FREEZE_WORKING_STATE_NE_CANONICAL_MAIN; this layer never mutates Frozen Beta.",
+  "repos": [
+    {
+      "id": "TAKY",
+      "head": "fee09fa8cdd0b863fc08d4fa6d84d72a182cbc0e",
+      "branch": "character-asset-behavior-separation-2026-09-30",
+      "dirty_count": 242,
+      "frozen_head": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2"
+    },
+    {
+      "id": "Ready-Set",
+      "head": "16026f41149dae5faed1c4ca2d1f2933a40ced7a",
+      "branch": "user-character-generator-adapter-2026-09-30",
+      "dirty_count": 6,
+      "frozen_head": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915"
+    },
+    {
+      "id": "Hide-Seek",
+      "head": "5b29db8299237d41f9ce6d054256dda765f9cd09",
+      "branch": "family-character-profile-consumer-2026-09-30",
+      "dirty_count": 5,
+      "frozen_head": "5da6594510cc89341054aafef66d5f4ea47a0210"
+    },
+    {
+      "id": "Snap-Pop",
+      "head": "94d548545b3c4bd04008d767a27c9cc9e0bcf28c",
+      "branch": "family-character-profile-consumer-2026-09-30",
+      "dirty_count": 5,
+      "frozen_head": "a77e65b383df170e1124d3b9e01ca37eef334d6c"
+    },
+    {
+      "id": "TAKY-MOBILE",
+      "head": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+      "branch": "main",
+      "dirty_count": 2,
+      "frozen_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e"
+    },
+    {
+      "id": "SAVEY",
+      "head": "939b229e2b55bd4bf92b33bc0884872015b145bc",
+      "branch": "main",
+      "dirty_count": 0,
+      "frozen_head": "5a196080b8f8ce50d188b0181d9bec5e5477a265"
+    },
+    {
+      "id": "TAKY-WORK-OS",
+      "head": "74f47452d6bfd2d7b68f568c2f9d147040cefd10",
+      "branch": "runtime-hub-unification-2026-09-11",
+      "dirty_count": 0,
+      "frozen_head": "c82a99bd7fbd7ab979907d038e8f948d3792de90"
+    }
+  ],
+  "claim_boundary": [
+    "LOCAL_HEAD_NE_GITHUB_MAIN",
+    "DIRTY_WORKTREE_NE_VALIDATED_CANDIDATE",
+    "POST_FREEZE_DELTA_NE_FROZEN_INPUT",
+    "NO_SILENT_PROMOTION"
+  ]
+}

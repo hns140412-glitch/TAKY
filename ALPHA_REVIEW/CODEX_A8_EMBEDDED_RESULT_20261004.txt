@@ -1,0 +1,5 @@
+- **P0:** None identified in the embedded snapshot.
+- **P1:** None identified. App/engine coverage, five staged pipelines, and six runtime contract areas establish structural coverage. LOCAL_INFRA remains isolated; candidate rules transfer no authority.
+- **P2:** Planner, Badge, and SAVEY owner gaps remain explicit. Product/runtime gaps remain OPEN; runtime, device, and production claims remain UNVERIFIED; deployment remains HOLD. No stale alias nodes are listed. Evidence counts and validation results are snapshot assertions, not independently verified artifacts. A10 human promotion remains pending.
+
+A8_PASS_SYSTEM_ALPHA_STRUCTURALLY_READY_FOR_A9

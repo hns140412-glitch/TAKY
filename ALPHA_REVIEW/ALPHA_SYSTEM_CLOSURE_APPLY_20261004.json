@@ -1,0 +1,8 @@
+{
+  "schema": "TAKY_ALPHA_SYSTEM_CLOSURE_APPLY_20261004",
+  "status": "APPLIED_AWAITING_VALIDATION",
+  "date": "2026-10-04",
+  "canonical_rule_registry_blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "next": "RUN_DETERMINISTIC_VALIDATION"
+}

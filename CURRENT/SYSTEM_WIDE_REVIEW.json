@@ -4,17 +4,17 @@
   "role": "SEMANTIC_RESUME_POINTER",
   "authority_transfer": false,
   "audit_date": "2026-10-02",
-  "base_ref": "ccfb372ed10110121cec5be615c3e3e0c59f3601",
+  "base_ref": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
   "source_heads": {
-    "TAKY": "ccfb372ed10110121cec5be615c3e3e0c59f3601",
-    "Ready-Set": "daed2ebd072061b870bfd0d2f2472dd344661bad",
-    "Hide-Seek": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
-    "Snap-Pop": "2b9c6941792269244f847b1b978125996a49b5f8",
-    "TAKY-MOBILE": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+    "TAKY": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "Ready-Set": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
+    "Hide-Seek": "5da6594510cc89341054aafef66d5f4ea47a0210",
+    "Snap-Pop": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
+    "TAKY-MOBILE": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
     "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
   },
-  "evidence_basis": "Read-only GitHub main/PR verification at the 2026-10-02 audit plus exact local TAKY base; refs are dated snapshots, not perpetual live proof.",
-  "live_head_comparison": "AUDITED_MATCH_2026-10-02__REQUERY_BEFORE_LATER_CURRENT_CLAIM",
+  "evidence_basis": "2026-10-02 scope audit preserved as dated snapshots; GitHub default-branch source heads re-queried read-only on 2026-10-03 for TAKY/Ready-Set/Hide-Seek/Snap-Pop/TAKY-MOBILE/TAKY-ASSETS. Source-head refresh does not revalidate PR, runtime, device or deployment state.",
+  "live_head_comparison": "SOURCE_HEADS_LIVE_MATCH_2026-10-03__REQUERY_BEFORE_LATER_CURRENT_CLAIM__NON_HEAD_SCOPES_RETAIN_PRIOR_EVIDENCE_DATES",
   "owner_registry": "MASTER/MASTER_FILE_REGISTRY.json",
   "resolution_rule": "Explicit semantic_owners namespace + exact role/path only; DATA/Index CURRENT and Learning Engine CURRENT remain separate; never largest REV/V, newest filename or timestamp.",
   "resume": {
@@ -99,8 +99,14 @@
       "pr": 191,
       "pr_state": "DRAFT/OPEN",
       "head_ref": "d2eecf35ebb1f46de7b18589442b07d3e11919c6",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
-      "main_authority": false
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 154,
+        "behind": 96,
+        "status": "diverged"
+      }
     },
     {
       "id": "exploration_crew_ready_consumer_v2",
@@ -121,7 +127,13 @@
       "next": "Promotion/reapplication remains OPEN.",
       "pr": 28,
       "head_ref": "c876a8167be28a2f30a69fd0a0f38f74987abb3c",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02"
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 1,
+        "behind": 2,
+        "status": "diverged"
+      }
     },
     {
       "id": "exploration_crew_snap_consumer_v2",
@@ -133,7 +145,13 @@
       "next": "Promotion/reapplication remains OPEN.",
       "pr": 18,
       "head_ref": "bceb6cc9b336447002a4c189fa1560efc3c4ae5e",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02"
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 1,
+        "behind": 2,
+        "status": "diverged"
+      }
     },
     {
       "id": "badge_central",
@@ -141,8 +159,8 @@
       "source_repo": "TAKY",
       "pr": 196,
       "pr_state": "DRAFT/OPEN",
-      "head_ref": "de9ca733168bdace6b114b147ffc95ec7c09f064",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "head_ref": "52498dbc09a8db1f50cd7d5d3fe437c5e0c34a69",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
       "main_authority": false,
       "producer_snapshot": {
         "source_producers": 15,
@@ -157,20 +175,52 @@
       "candidate_refs": {
         "TAKY-MOBILE": {
           "pr": 2,
-          "head": "b42f7e2d0fdf220e552817c41629c5384034888b"
+          "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+          "state": "MERGED/CLOSED",
+          "merged": true,
+          "main_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+          "note": "Central badge transport PR merged; later main commits extend badge/auth transport."
         },
         "Ready-Set": {
           "pr": 143,
-          "head": "2ec87788eeb4874b9ab8e2e24b2a46ee7b26cae4"
+          "head": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 142,
+            "behind": 1,
+            "status": "diverged"
+          }
         },
         "Hide-Seek": {
           "pr": 29,
-          "head": "fca0a39cf27f75d141139e6e33b4be7f77fa799e"
+          "head": "0d8af51e8b47f561659135a18ed5c4a0e1304419",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 32,
+            "behind": 1,
+            "status": "diverged"
+          }
         },
         "Snap-Pop": {
           "pr": 20,
-          "head": "023b1cf2890ab2268dcfe6739e31001a26950606"
+          "head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 1237,
+            "behind": 18,
+            "status": "diverged"
+          },
+          "note": "Very large divergence; do not promote directly."
         }
+      },
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 186,
+        "behind": 84,
+        "status": "diverged"
       }
     },
     {
@@ -183,9 +233,15 @@
       "pr": 194,
       "pr_state": "DRAFT/OPEN",
       "head_ref": "9ab5fc579ada0547d5bb7cc066a157c4912bc0f1",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
       "main_authority": false,
-      "boundary": "Contract code may remain candidate; PR #194 is not main canonical."
+      "boundary": "Contract code may remain candidate; PR #194 is not main canonical.",
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 83,
+        "behind": 94,
+        "status": "diverged"
+      }
     },
     {
       "id": "assets_approved_results_pointer_contract",
@@ -194,8 +250,14 @@
       "pr": 4,
       "pr_state": "DRAFT/OPEN",
       "head_ref": "319968689148ad898932ecd97b4f509bb30fd977",
-      "head_verification": "AUDITED_SNAPSHOT_2026-10-02",
-      "main_authority": false
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "promotion_state": "FAST_FORWARD_CAPABLE_BUT_HOLD_NO_MERGE",
+      "main_compare": {
+        "ahead": 21,
+        "behind": 0,
+        "status": "ahead"
+      }
     },
     {
       "id": "snap_legacy_browser_closure",

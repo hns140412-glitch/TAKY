@@ -1,0 +1,722 @@
+{
+  "schema": "TAKY_ALPHA_ROUTING_GRAPH_V0_1",
+  "schema_revision": "2026-10-04.system-wide-remediation",
+  "status": "DRAFT_STRUCTURE_PENDING_DETERMINISTIC_VALIDATION",
+  "date": "2026-10-04",
+  "owner_value_rule": "A node owner is a canonical owner path, an external pinned owner_ref, IMPLEMENTATION_OWNED, DOMAIN/PROJECT_OWNED, or OPEN_OWNER_GAP. CURRENT/HISTORY/HANDOFF paths are evidence_refs only and are never owners.",
+  "nodes": [
+    {
+      "id": "TAKY",
+      "class": "GLOBAL_GOVERNANCE",
+      "owner": "MASTER/MASTER_LOGIC.md"
+    },
+    {
+      "id": "SHARED_TECHNICAL_CAPABILITY",
+      "class": "SEMANTIC_LIGHT_SHARED_MECHANISM",
+      "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json"
+    },
+    {
+      "id": "PLATFORM_ADAPTER",
+      "class": "IMPLEMENTATION_ADAPTER",
+      "owner": "IMPLEMENTATION_OWNED"
+    },
+    {
+      "id": "WORK_OS",
+      "class": "OPERATING_SYSTEM",
+      "owner": "OS/WORK_OS.md"
+    },
+    {
+      "id": "WORK_DOMAIN_PROJECT",
+      "class": "PROJECT_OR_DOMAIN",
+      "owner": "DOMAIN/PROJECT_OWNED",
+      "layer_ref": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#layers.WORK_DOMAIN_PROJECT"
+    },
+    {
+      "id": "TAKY_WORK_OS_REPO",
+      "class": "IMPLEMENTATION_REPOSITORY",
+      "owner": "IMPLEMENTATION_OWNED",
+      "semantic_governance": "OS/WORK_OS.md",
+      "repo": "hns140412-glitch/TAKY-WORK-OS",
+      "frozen_head": "c82a99bd7fbd7ab979907d038e8f948d3792de90"
+    },
+    {
+      "id": "LEARNING_OS",
+      "class": "OPERATING_SYSTEM",
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md"
+    },
+    {
+      "id": "LEARNING_APP_FAMILY",
+      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
+      "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+    },
+    {
+      "id": "LEARNING_ENGINE",
+      "class": "DOMAIN_INTELLIGENCE_ENGINE",
+      "owner": "OS/LEARNING_ENGINE_CORE.md"
+    },
+    {
+      "id": "PLANNER",
+      "class": "LEARNING_DOMAIN_FUNCTION",
+      "owner_anchor": "OS/GUIDE_FAMILY_LEARNING_OS.md: `MAIN / PLANNER = whole-life allocation + dated placement`",
+      "semantic_authority": "LEARNING_OS",
+      "function_contract_ref": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN",
+      "function_contract_role": "DETAILED_FUNCTION_CONTRACT_NOT_OWNER_TRANSFER",
+      "dedicated_owner_document": "OPEN_OWNER_GAP",
+      "owns": "dated task creation, allocation, carry-over, schedule/deadline/load balancing",
+      "does_not_mean": "READY_SET_OWNS_PLANNER",
+      "owner_state": "OPEN_OWNER_GAP",
+      "implementation_ref": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN"
+    },
+    {
+      "id": "READY_SET",
+      "class": "PROJECT_APP",
+      "owner_ref": "hns140412-glitch/Ready-Set:READY_SET_CANONICAL_PRODUCT_CONTRACT.md",
+      "local_support_ref": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+      "frozen_head": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915"
+    },
+    {
+      "id": "HIDE_SEEK",
+      "class": "PROJECT_APP",
+      "owner_ref": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "frozen_head": "5da6594510cc89341054aafef66d5f4ea47a0210"
+    },
+    {
+      "id": "SNAP_POP",
+      "class": "PROJECT_APP",
+      "owner_ref": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "frozen_head": "a77e65b383df170e1124d3b9e01ca37eef334d6c"
+    },
+    {
+      "id": "TAKY_MOBILE",
+      "class": "MOBILE_ROUTING_APP",
+      "owner_state": "OPEN_OWNER_GAP",
+      "registry_ref": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+    },
+    {
+      "id": "EXPLORER_CREW",
+      "class": "DOMAIN_SHARED_RUNTIME_CONTRACT",
+      "owner": "OS/EXPLORATION_CREW_CANONICAL.md"
+    },
+    {
+      "id": "CHARACTER_ASSET_PIPELINE",
+      "class": "SHARED_PIPELINE_CONTRACT",
+      "owner": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "frozen_state": "STAGED_IN_FROZEN_LOCAL_SNAPSHOT"
+    },
+    {
+      "id": "CHARACTER_BEHAVIOR_RUNTIME",
+      "class": "SHARED_RUNTIME_CONTRACT",
+      "owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "relationship_owner": "OS/GUIDE_CHARACTER_RELATIONSHIP.md",
+      "first_encounter_owner": "PROJECTS/GUIDE_CORE6_CHARACTER.md"
+    },
+    {
+      "id": "DESIGN_UI_ASSETS",
+      "class": "SHARED_DESIGN_CONTRACT",
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+    },
+    {
+      "id": "TAKY_ASSETS_REPO",
+      "class": "SHARED_ASSET_REPOSITORY",
+      "owner": "IMPLEMENTATION_OWNED",
+      "semantic_governance": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "governing_rule": "TKY-ASSET-001",
+      "repo": "hns140412-glitch/TAKY-ASSETS",
+      "frozen_head": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
+    },
+    {
+      "id": "BADGE",
+      "class": "EVIDENCE_TO_REWARD_PIPELINE",
+      "owner_gap_reason": "No canonical Badge owner is registered in MASTER/MASTER_FILE_REGISTRY.json or MASTER/RULE_REGISTRY.json at the frozen baseline.",
+      "evidence_refs": [
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
+        "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md"
+      ],
+      "evidence_ref_role": "EVIDENCE_ONLY_NOT_OWNER",
+      "owner_state": "OPEN_OWNER_GAP"
+    },
+    {
+      "id": "SAVEY",
+      "class": "ECONOMIC_OPERATING_MODULE",
+      "owner_gap_reason": "No SAVEY owner exists in the canonical 21-rule registry; TKY-SAVEY-001 exists only in the post-freeze LOCAL candidate registry.",
+      "candidate_owner_ref": "D:/Git PWA/TAKY:MASTER/RULE_REGISTRY.json#TKY-SAVEY-001",
+      "candidate_owner_ref_role": "POST_FREEZE_CANDIDATE_NOT_AUTHORITY",
+      "repo": "hns140412-glitch/SAVEY",
+      "repo_head": "5a196080b8f8ce50d188b0181d9bec5e5477a265",
+      "owner_state": "OPEN_OWNER_GAP",
+      "implementation_repo": "SAVEY"
+    },
+    {
+      "id": "ARCHIGROW",
+      "class": "WORK_DOMAIN_GROWTH",
+      "owner": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md"
+    },
+    {
+      "id": "LEARNINGGROW",
+      "class": "LEARNING_DOMAIN_GROWTH",
+      "owner": "OS/LEARNING_ENGINE_CORE.md"
+    },
+    {
+      "id": "MOBILE_REGISTRY",
+      "class": "OPERATIONAL_SOURCE_REGISTRY",
+      "owner": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+    },
+    {
+      "id": "SYNC_CONTRACT",
+      "class": "SHARED_PERSISTENCE_CONTRACT",
+      "owner": "TAKY_SYNC_CONTRACT_V1.md",
+      "note": "Commit e7ca5c7 'shared sync conflict contract v1' is this file; no separate conflict-contract owner exists."
+    },
+    {
+      "id": "OFFLINE_QUEUE",
+      "class": "SHARED_MECHANISM",
+      "owner": "TAKY_SYNC_CONTRACT_V1.md",
+      "owner_anchor": "TAKY_SYNC_CONTRACT_V1.md#Offline mutation",
+      "mechanism_ref": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json#CAP-LOCAL-QUEUE-001"
+    },
+    {
+      "id": "AUTH_SESSION",
+      "class": "SHARED_MECHANISM_HOLD",
+      "owner": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "state": "HOLD_BEFORE_EXTRACTION",
+      "hold_ref": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#capability_classification[0]"
+    },
+    {
+      "id": "FAMILY_PRIVATE_BOUNDARY",
+      "class": "PROTECTED_DOMAIN_SEMANTICS",
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "owner_anchor": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#layers.LEARNING_OS.protected_nonshared_semantics"
+    },
+    {
+      "id": "DRIVE_GOOGLE_CANONICAL",
+      "class": "CANONICAL_DATA_STORAGE_BOUNDARY",
+      "owner": "OS/DRIVE_C2S_DIRECT.md",
+      "storage_map": "OS/DRIVE_STORAGE_MAP.json",
+      "canonical_edit_rule_ref": "TAKY_SYNC_CONTRACT_V1.md#User edits"
+    },
+    {
+      "id": "LOCAL_HTTP_BRIDGE",
+      "class": "RUNTIME_TRANSPORT_ADAPTER",
+      "owner": "IMPLEMENTATION_OWNED",
+      "implementation_refs": [
+        "LEARNING/transport/node-http-learning-bridge.js",
+        "LEARNING/transport/central-learning-production-host.js"
+      ],
+      "frozen_state": "STAGED_IN_FROZEN_LOCAL_SNAPSHOT"
+    },
+    {
+      "id": "ENFORCEMENT_ENGINE",
+      "class": "GOVERNANCE_ENFORCEMENT",
+      "owner": "MASTER/ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "id": "EXECUTOR_LIFECYCLE",
+      "class": "EXECUTION_MATERIALIZATION",
+      "owner": "MASTER/CODEX_TASK_CONTRACT.md"
+    },
+    {
+      "id": "C2S_COMPILER",
+      "class": "CONVERSATION_TO_SYSTEM",
+      "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+    },
+    {
+      "id": "OPERATIONAL_WORKSPACE",
+      "class": "WORKSPACE_BOUNDARY",
+      "owner": "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md"
+    },
+    {
+      "id": "NOTION_OPS",
+      "class": "WORK_OS_PLATFORM_SPECIALIZATION",
+      "owner": "OS/NOTION_OPS.md"
+    },
+    {
+      "id": "DRIVE_C2S",
+      "class": "DURABLE_C2S_INTAKE",
+      "owner": "OS/DRIVE_C2S_DIRECT.md"
+    },
+    {
+      "id": "HANDOFF",
+      "class": "RECOVERY_AND_RESUME_PROTOCOL",
+      "owner": "MASTER/HANDOFF_PROTOCOL.md"
+    },
+    {
+      "id": "CHECKPOINT",
+      "class": "CURRENT_CHECKPOINT_PROTOCOL",
+      "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md"
+    },
+    {
+      "id": "CONTEXT_LEDGER",
+      "class": "ACTIVE_OWNER_WITHOUT_RULE_ID",
+      "owner": "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP"
+    },
+    {
+      "id": "LOCAL_INFRA_ALPHA_LANE",
+      "class": "BOUNDED_IMPORTED_LANE",
+      "owner": "IMPLEMENTATION_OWNED",
+      "lane_import": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json",
+      "scope": "LOCAL_INFRA_ONLY",
+      "implies_system_alpha_complete": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "TAKY",
+      "to": "SHARED_TECHNICAL_CAPABILITY",
+      "relation": "GOVERN_SHARED_MECHANISMS"
+    },
+    {
+      "from": "TAKY",
+      "to": "WORK_OS",
+      "relation": "ROUTE_PRODUCTIVE_WORK"
+    },
+    {
+      "from": "TAKY",
+      "to": "LEARNING_OS",
+      "relation": "ROUTE_LEARNING_FAMILY"
+    },
+    {
+      "from": "TAKY",
+      "to": "SAVEY",
+      "relation": "ROUTE_ECONOMIC_OPERATION"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "PLATFORM_ADAPTER",
+      "relation": "MECHANISM_TO_PLATFORM_ONLY"
+    },
+    {
+      "from": "WORK_OS",
+      "to": "ARCHIGROW",
+      "relation": "DOMAIN_GROWTH"
+    },
+    {
+      "from": "LEARNING_OS",
+      "to": "LEARNING_APP_FAMILY",
+      "relation": "DOMAIN_PARENT"
+    },
+    {
+      "from": "LEARNING_OS",
+      "to": "LEARNING_ENGINE",
+      "relation": "DOMAIN_INTELLIGENCE"
+    },
+    {
+      "from": "LEARNING_ENGINE",
+      "to": "LEARNINGGROW",
+      "relation": "DOMAIN_GROWTH"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "READY_SET",
+      "relation": "FAMILY_CONTRACT_INHERITANCE"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "HIDE_SEEK",
+      "relation": "FAMILY_CONTRACT_INHERITANCE"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "SNAP_POP",
+      "relation": "FAMILY_CONTRACT_INHERITANCE"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "EXPLORER_CREW",
+      "relation": "DOMAIN_SHARED_RUNTIME_PARENT"
+    },
+    {
+      "from": "HIDE_SEEK",
+      "to": "LEARNING_ENGINE",
+      "relation": "MEMORY_EVIDENCE_SIGNALS_ONLY"
+    },
+    {
+      "from": "READY_SET",
+      "to": "LEARNING_ENGINE",
+      "relation": "TASK_RESULT_EVIDENCE_SIGNALS_ONLY"
+    },
+    {
+      "from": "SNAP_POP",
+      "to": "LEARNING_ENGINE",
+      "relation": "EXPRESSION_EVIDENCE_SIGNALS_ONLY"
+    },
+    {
+      "from": "LEARNING_ENGINE",
+      "to": "PLANNER",
+      "relation": "REVIEW_PRIORITY_AND_PEDAGOGICAL_INTENT__NO_DATE_AUTHORITY"
+    },
+    {
+      "from": "LEARNING_OS",
+      "to": "PLANNER",
+      "relation": "DATED_ALLOCATION_AUTHORITY"
+    },
+    {
+      "from": "PLANNER",
+      "to": "READY_SET",
+      "relation": "DATED_EXECUTION_PROJECTION"
+    },
+    {
+      "from": "EXPLORER_CREW",
+      "to": "READY_SET",
+      "relation": "SHARED_CHARACTER_RUNTIME_CONTRACT"
+    },
+    {
+      "from": "EXPLORER_CREW",
+      "to": "HIDE_SEEK",
+      "relation": "SHARED_CHARACTER_RUNTIME_CONTRACT"
+    },
+    {
+      "from": "EXPLORER_CREW",
+      "to": "SNAP_POP",
+      "relation": "SHARED_CHARACTER_RUNTIME_CONTRACT"
+    },
+    {
+      "from": "EXPLORER_CREW",
+      "to": "CHARACTER_BEHAVIOR_RUNTIME",
+      "relation": "BEHAVIOR_RUNTIME_CONTRACT"
+    },
+    {
+      "from": "CHARACTER_ASSET_PIPELINE",
+      "to": "CHARACTER_BEHAVIOR_RUNTIME",
+      "relation": "ASSET_SEPARATED_FROM_BEHAVIOR"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "CHARACTER_ASSET_PIPELINE",
+      "relation": "APPROVED_SOURCE_LOCK"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "TAKY_ASSETS_REPO",
+      "relation": "APPROVED_ORIGINALS_STORAGE"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "READY_SET",
+      "relation": "APPROVED_SOURCE_TO_UI"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "HIDE_SEEK",
+      "relation": "APPROVED_SOURCE_TO_UI"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "SNAP_POP",
+      "relation": "APPROVED_SOURCE_TO_UI"
+    },
+    {
+      "from": "READY_SET",
+      "to": "BADGE",
+      "relation": "EXPLICIT_EVIDENCE_PRODUCER"
+    },
+    {
+      "from": "HIDE_SEEK",
+      "to": "BADGE",
+      "relation": "EXPLICIT_EVIDENCE_PRODUCER"
+    },
+    {
+      "from": "SNAP_POP",
+      "to": "BADGE",
+      "relation": "EXPLICIT_EVIDENCE_PRODUCER"
+    },
+    {
+      "from": "BADGE",
+      "to": "READY_SET",
+      "relation": "REWARD_HISTORY_PROJECTION__NO_ACTIVATION_WITHOUT_LEDGER"
+    },
+    {
+      "from": "BADGE",
+      "to": "EXPLORER_CREW",
+      "relation": "WISH_BLESSING_UNLOCK_BY_EXPLICIT_EVIDENCE"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "TAKY_MOBILE",
+      "relation": "CATALOG_AND_SHARED_MOBILE_INFRA_ONLY"
+    },
+    {
+      "from": "TAKY_MOBILE",
+      "to": "READY_SET",
+      "relation": "LAUNCH_ROUTE_ONLY__NO_PRODUCT_AUTHORITY"
+    },
+    {
+      "from": "TAKY_MOBILE",
+      "to": "HIDE_SEEK",
+      "relation": "LAUNCH_ROUTE_ONLY__NO_PRODUCT_AUTHORITY"
+    },
+    {
+      "from": "TAKY_MOBILE",
+      "to": "SNAP_POP",
+      "relation": "LAUNCH_ROUTE_ONLY__NO_PRODUCT_AUTHORITY"
+    },
+    {
+      "from": "MOBILE_REGISTRY",
+      "to": "TAKY_MOBILE",
+      "relation": "VOLATILE_SOURCE_REGISTRATION"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "SYNC_CONTRACT",
+      "relation": "SHARED_PERSISTENCE_BOUNDARY"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "OFFLINE_QUEUE",
+      "relation": "IDEMPOTENT_SERIALIZED_QUEUE_RULE"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "READY_SET",
+      "relation": "CACHE_QUEUE_NOT_AUTHORITY"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "HIDE_SEEK",
+      "relation": "CACHE_QUEUE_NOT_AUTHORITY"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "SNAP_POP",
+      "relation": "CACHE_QUEUE_NOT_AUTHORITY"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "SAVEY",
+      "relation": "CACHE_QUEUE_NOT_AUTHORITY"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "DRIVE_GOOGLE_CANONICAL",
+      "relation": "REMOTE_CANONICAL_PULL_PUSH"
+    },
+    {
+      "from": "SAVEY",
+      "to": "DRIVE_GOOGLE_CANONICAL",
+      "relation": "GOOGLE_CANONICAL_BINDING__LIVE_BINDING_OPEN"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "AUTH_SESSION",
+      "relation": "MECHANISM_HELD_BEFORE_EXTRACTION"
+    },
+    {
+      "from": "LEARNING_OS",
+      "to": "FAMILY_PRIVATE_BOUNDARY",
+      "relation": "PROTECTED_FAMILY_SEMANTICS"
+    },
+    {
+      "from": "FAMILY_PRIVATE_BOUNDARY",
+      "to": "CHARACTER_BEHAVIOR_RUNTIME",
+      "relation": "FAMILY_SCOPED_PRIVATE_TRANSPORT_REQUIRED"
+    },
+    {
+      "from": "AUTH_SESSION",
+      "to": "FAMILY_PRIVATE_BOUNDARY",
+      "relation": "AUTHENTICATED_TRANSPORT_ONLY__NO_IDENTITY_AUTHORITY"
+    },
+    {
+      "from": "PLATFORM_ADAPTER",
+      "to": "LOCAL_HTTP_BRIDGE",
+      "relation": "RUNTIME_TRANSPORT_IMPLEMENTATION"
+    },
+    {
+      "from": "LOCAL_HTTP_BRIDGE",
+      "to": "LEARNING_ENGINE",
+      "relation": "EVIDENCE_TRANSPORT_ONLY"
+    },
+    {
+      "from": "WORK_OS",
+      "to": "TAKY_WORK_OS_REPO",
+      "relation": "IMPLEMENTATION_REPOSITORY"
+    },
+    {
+      "from": "WORK_OS",
+      "to": "WORK_DOMAIN_PROJECT",
+      "relation": "DOMAIN_PARENT"
+    },
+    {
+      "from": "WORK_DOMAIN_PROJECT",
+      "to": "ARCHIGROW",
+      "relation": "ARCHITECTURE_DOMAIN_GROWTH"
+    },
+    {
+      "from": "TAKY",
+      "to": "MOBILE_REGISTRY",
+      "relation": "GOVERN_VOLATILE_SOURCE_REGISTRY"
+    },
+    {
+      "from": "TAKY",
+      "to": "ENFORCEMENT_ENGINE",
+      "relation": "APPLY_GOVERNANCE_GATES"
+    },
+    {
+      "from": "TAKY",
+      "to": "EXECUTOR_LIFECYCLE",
+      "relation": "MATERIALIZE_BOUNDED_EXECUTION"
+    },
+    {
+      "from": "EXECUTOR_LIFECYCLE",
+      "to": "ENFORCEMENT_ENGINE",
+      "relation": "STATE_TRANSITIONS_CHECKED_BY_EXECUTION_STATE_ENGINE"
+    },
+    {
+      "from": "TAKY",
+      "to": "C2S_COMPILER",
+      "relation": "COMPILE_CONVERSATION_TO_SYSTEM"
+    },
+    {
+      "from": "C2S_COMPILER",
+      "to": "LEARNING_ENGINE",
+      "relation": "ATOMIZED_LEARNING_SOURCE_INTAKE"
+    },
+    {
+      "from": "TAKY",
+      "to": "HANDOFF",
+      "relation": "RECOVERY_AND_RESUME"
+    },
+    {
+      "from": "TAKY",
+      "to": "CHECKPOINT",
+      "relation": "PERSIST_LIGHTWEIGHT_CURRENT"
+    },
+    {
+      "from": "TAKY",
+      "to": "CONTEXT_LEDGER",
+      "relation": "PRESERVE_CONTEXT_LEDGER_OWNER_GAP"
+    },
+    {
+      "from": "TAKY",
+      "to": "LOCAL_INFRA_ALPHA_LANE",
+      "relation": "IMPORT_BOUNDED_LANE__NO_SYSTEM_COMPLETION_TRANSFER"
+    },
+    {
+      "from": "WORK_OS",
+      "to": "OPERATIONAL_WORKSPACE",
+      "relation": "OPERATE_WORKSPACE_BOUNDARY"
+    },
+    {
+      "from": "OPERATIONAL_WORKSPACE",
+      "to": "NOTION_OPS",
+      "relation": "PLATFORM_SPECIALIZATION"
+    },
+    {
+      "from": "OPERATIONAL_WORKSPACE",
+      "to": "DRIVE_C2S",
+      "relation": "DURABLE_C2S_INTAKE"
+    },
+    {
+      "from": "C2S_COMPILER",
+      "to": "DRIVE_C2S",
+      "relation": "DURABLE_SOURCE_ROUTE"
+    },
+    {
+      "from": "EXECUTOR_LIFECYCLE",
+      "to": "CHECKPOINT",
+      "relation": "CHECKPOINT_BEFORE_NEXT_UNIT"
+    },
+    {
+      "from": "HANDOFF",
+      "to": "CHECKPOINT",
+      "relation": "RESUME_FROM_CURRENT_POINTER"
+    },
+    {
+      "from": "TAKY",
+      "to": "TAKY_MOBILE",
+      "relation": "ROUTE_MOBILE_INSTALL_AND_SHARED_ENTRY"
+    },
+    {
+      "from": "DESIGN_UI_ASSETS",
+      "to": "TAKY_ASSETS_REPO",
+      "relation": "GOVERN_APPROVED_ASSET_SOURCE"
+    },
+    {
+      "from": "WORK_OS",
+      "to": "TAKY_WORK_OS_REPO",
+      "relation": "IMPLEMENT_WORK_OS_RUNTIME"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "AUTH_SESSION",
+      "relation": "IMPLEMENT_AUTH_MECHANISM"
+    },
+    {
+      "from": "SHARED_TECHNICAL_CAPABILITY",
+      "to": "CHARACTER_ASSET_PIPELINE",
+      "relation": "IMPLEMENT_PRIVATE_FAMILY_MECHANISM"
+    },
+    {
+      "from": "LEARNING_APP_FAMILY",
+      "to": "SYNC_CONTRACT",
+      "relation": "CONSUME_SHARED_SYNC_CONTRACT"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "READY_SET",
+      "relation": "SYNC_CONSUMER"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "HIDE_SEEK",
+      "relation": "SYNC_CONSUMER"
+    },
+    {
+      "from": "SYNC_CONTRACT",
+      "to": "SNAP_POP",
+      "relation": "SYNC_CONSUMER"
+    },
+    {
+      "from": "AUTH_SESSION",
+      "to": "READY_SET",
+      "relation": "AUTH_CONSUMER"
+    },
+    {
+      "from": "AUTH_SESSION",
+      "to": "HIDE_SEEK",
+      "relation": "AUTH_CONSUMER"
+    },
+    {
+      "from": "AUTH_SESSION",
+      "to": "SNAP_POP",
+      "relation": "AUTH_CONSUMER"
+    },
+    {
+      "from": "READY_SET",
+      "to": "LEARNING_ENGINE",
+      "relation": "SESSION_RESULT_EVIDENCE"
+    },
+    {
+      "from": "SNAP_POP",
+      "to": "LEARNING_ENGINE",
+      "relation": "EXPRESSION_EVIDENCE_SIGNALS"
+    }
+  ],
+  "invariants": [
+    "ROUTING_EDGE_DOES_NOT_TRANSFER_OWNER_AUTHORITY",
+    "WORK_OS_AND_LEARNING_OS_ARE_SIBLINGS",
+    "LEARNING_APP_FAMILY_IS_SUBORDINATE_TO_LEARNING_OS",
+    "SHARED_TECHNICAL_CAPABILITY_IS_SEMANTIC_LIGHT",
+    "PLATFORM_ADAPTER_DOES_NOT_OWN_DOMAIN_SEMANTICS",
+    "PLANNER_OWNS_DATED_ALLOCATION_WITHIN_LEARNING_DOMAIN",
+    "READY_SET_CONSUMES_PLANNER_PROJECTION_AND_DOES_NOT_ABSORB_PLANNER_AUTHORITY",
+    "HIDE_DOES_NOT_OWN_LONG_TERM_SCHEDULING",
+    "APP_EVIDENCE_EDGES_TO_LEARNING_ENGINE_CARRY_SIGNALS_ONLY",
+    "BADGE_PRODUCER_QA_PASS_DOES_NOT_ACTIVATE_BADGE",
+    "MOBILE_REGISTRY_IS_VOLATILE_OPERATIONAL_REGISTRY_NOT_PRODUCT_AUTHORITY",
+    "TAKY_MOBILE_IS_CATALOG_AND_SHARED_INFRA_NOT_SPECIALIST_LEARNING_OWNER",
+    "ENFORCEMENT_AND_EXECUTOR_LIFECYCLE_DO_NOT_TRANSFER_DOMAIN_AUTHORITY",
+    "OPERATIONAL_WORKSPACE_AND_PLATFORM_SPECIALIZATIONS_DO_NOT_OVERRIDE_WORK_OS",
+    "HANDOFF_IS_RECOVERY_POINTER_PROTOCOL_NOT_CANONICAL_OWNER",
+    "CHECKPOINT_CURRENT_IS_LIGHTWEIGHT_RESUME_STATE_NOT_GLOBAL_AUTHORITY",
+    "CURRENT_OR_HISTORY_PATH_IS_NEVER_A_NODE_OWNER",
+    "ACTIVE_OWNER_WITHOUT_RULE_ID_REMAINS_EXPLICIT_OPEN_NOT_SILENTLY_ASSIGNED",
+    "OPEN_OWNER_GAP_IS_EXPLICIT_AND_NOT_SILENTLY_FILLED",
+    "LOCAL_PWA_STATE_IS_CACHE_QUEUE_NOT_CANONICAL_AUTHORITY",
+    "AUTH_TRANSPORT_DOES_NOT_OWN_FAMILY_OR_ORGANIZATION_IDENTITY",
+    "LOCAL_INFRA_LANE_COMPLETE_DOES_NOT_IMPLY_SYSTEM_ALPHA_COMPLETE",
+    "POINTER_ONLY_NE_STRUCTURAL_COVERAGE",
+    "LOCAL_INFRA_COMPLETE_NE_SYSTEM_ALPHA_COMPLETE",
+    "POST_FREEZE_DELTA_NE_CANONICAL_AUTHORITY",
+    "READY_SET_PROJECTION_NE_PLANNER_AUTHORITY"
+  ]
+}

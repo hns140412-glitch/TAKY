@@ -1,0 +1,5 @@
+READ-ONLY REVIEW. Do not edit any file. Do not use network. Do not run git write actions. No push, merge, deploy, or API calls.
+Audit TAKY Alpha V0.1 derived from Frozen Beta.
+Read: ALPHA/TAKY_ALPHA_MASTER_V0_1.md; ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json; ALPHA/TAKY_ALPHA_CARRYOVER_OPEN_V0_1.json; ALPHA/TAKY_ALPHA_VALIDATION_CONTRACT_V0_1.json; ALPHA/TAKY_ALPHA_RULE_COMPILE_V0_1.json; ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json; ALPHA_REVIEW/ALPHA_INPUT_LOCK_20261003.json; ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json; MASTER/MASTER_FILE_REGISTRY.json; MASTER/RULE_REGISTRY.json; MASTER/MASTER_LOGIC.md; CURRENT/SYSTEM_WIDE_REVIEW.json.
+Determine whether Alpha is a correct new orchestration/authority structure derived only from Frozen Beta, with no authority duplication, no silent OPEN loss, no claim inflation, and no missing major Beta system domain.
+Return concise structured findings: BLOCKER, P1, P2, PASS items, exact file/section references, and minimal corrections. Do not rewrite the whole system.

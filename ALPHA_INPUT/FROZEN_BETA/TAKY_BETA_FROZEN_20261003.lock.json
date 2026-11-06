@@ -1,0 +1,20 @@
+{
+  "schema": "TAKY_BETA_FROZEN_LOCK_V1",
+  "date": "2026-10-03",
+  "status": "FROZEN",
+  "snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "canonical_main_baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "artifacts": {
+    "BETA_FREEZE_MANIFEST_20261003.json": "9ec9f1260f04423b5cc4c591e97e00ea0e17ed1c9872cc6c875b4728b05c6e79",
+    "BETA_FREEZE_READINESS_20261003.json": "cb19bfaea349b10b92837ce24878266aef2c1c39a99750cd9aad5021b97eaad8",
+    "BETA_FINAL_ADVERSARIAL_CLOSURE_20261003.json": "bf28eaa6eaec902ad9f0633472c2e11e5689e055685ef9cd249d24e7fc35d978"
+  },
+  "constraints": [
+    "NO_BETA_CONTENT_MUTATION",
+    "NO_PUSH",
+    "NO_MERGE",
+    "NO_DEPLOY",
+    "NO_PAID_API"
+  ],
+  "alpha_input_rule": "ONLY_THIS_FROZEN_BETA_SNAPSHOT_MAY_SEED_TAKY_ALPHA_20261003"
+}

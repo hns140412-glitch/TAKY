@@ -1,0 +1,45 @@
+{
+  "schema": "TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1",
+  "status": "BOUNDED_LANE_IMPORTED",
+  "date": "2026-10-04",
+  "scope": "LOCAL_INFRA_ONLY",
+  "implies_system_alpha": false,
+  "source": {
+    "handoff": "D:\\Git PWA\\TAKY\\HANDOFF\\TAKY_ALPHA_FINAL_2026-10-03.md",
+    "current": "D:\\Git PWA\\TAKY\\CURRENT\\TAKY\\TAKY_ALPHA_2026-10-03.json",
+    "checkpoint_hash": "sha256:1d556eecafcec340c0a7fd1d9237e529717a9e30478b6cc0bf7b69d60d6542f4",
+    "source_status": "LOCAL_ALPHA_COMPLETE"
+  },
+  "canonical_rule_registry": {
+    "source": "GitHub main MASTER/RULE_REGISTRY.json",
+    "blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+    "rule_count": 21,
+    "includes": "TKY-CHECKPOINT-001",
+    "normalization": "CRLF_TO_LF_BEFORE_GIT_BLOB_HASH",
+    "expected_blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56"
+  },
+  "local_candidate_registry_diff": {
+    "candidate_rule_count": 25,
+    "candidate_only": [
+      "TKY-CONNECTION-001",
+      "TKY-SAVEY-001",
+      "TKY-WORKSTATION-001",
+      "TKY-ARCHIPIPE-001",
+      "TKY-AICOLLAB-001"
+    ],
+    "canonical_only": [
+      "TKY-CHECKPOINT-001"
+    ],
+    "disposition": "POST_FREEZE_CANDIDATE_ONLY__NO_AUTHORITY_TRANSFER"
+  },
+  "open": [
+    "HOST_PROVIDER_AUTHENTICATED_HUMAN_IDENTITY",
+    "HOSTED_CHATGPT_CLAUDE_AUTOMATIC_INTERCEPTION",
+    "CAD_EXCEL_HWP_REPRESENTATIVE_TASK_VERIFICATION"
+  ],
+  "invariants": [
+    "LANE_COMPLETE_NE_SYSTEM_COMPLETE",
+    "LOCAL_REGISTRY_NE_CANONICAL_REGISTRY",
+    "NO_PUSH_MERGE_DEPLOY_PAID_API"
+  ]
+}

@@ -1,0 +1,485 @@
+{
+  "schema": "TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1",
+  "status": "DRAFT_STRUCTURE_PENDING_DETERMINISTIC_VALIDATION",
+  "date": "2026-10-04",
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "rows": [
+    {
+      "id": "READY_SET",
+      "kind": "APP",
+      "source_repo": "Ready-Set",
+      "frozen_sha": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
+      "semantic_owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+      "owner_state": "RESOLVED",
+      "inherited_contracts": [
+        "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+        "TAKY_SYNC_CONTRACT_V1.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "ready-runtime-v07.js",
+        "app.js"
+      ],
+      "open_refs": [
+        "BADGE_CENTRAL"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md",
+            "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+            "TAKY_SYNC_CONTRACT_V1.md"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "ready-runtime-v07.js",
+            "app.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "HIDE_SEEK",
+      "kind": "APP",
+      "source_repo": "Hide-Seek",
+      "frozen_sha": "5da6594510cc89341054aafef66d5f4ea47a0210",
+      "semantic_owner": "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+      "owner_state": "RESOLVED",
+      "inherited_contracts": [
+        "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+        "OS/LEARNING_ENGINE_CORE.md",
+        "TAKY_SYNC_CONTRACT_V1.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "hide-bridge.js"
+      ],
+      "open_refs": [
+        "HIDE_CREW_V2",
+        "BADGE_CENTRAL"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "hns140412-glitch/Hide-Seek:Hide_Seek_UI_MASTER_LOGIC_REV_04.md",
+            "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+            "OS/LEARNING_ENGINE_CORE.md",
+            "TAKY_SYNC_CONTRACT_V1.md"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "hide-bridge.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      },
+      "post_freeze_crew_state": "LOCAL_IMPLEMENTATION_VERIFIED_MAIN_PROMOTION_HOLD",
+      "post_freeze_crew_evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json"
+    },
+    {
+      "id": "SNAP_POP",
+      "kind": "APP",
+      "source_repo": "Snap-Pop",
+      "frozen_sha": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
+      "semantic_owner": "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+      "owner_state": "RESOLVED",
+      "inherited_contracts": [
+        "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+        "TAKY_SYNC_CONTRACT_V1.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "snap-bridge.js",
+        "app.js"
+      ],
+      "open_refs": [
+        "SNAP_CREW_V2",
+        "BADGE_CENTRAL"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "hns140412-glitch/Snap-Pop:Snap_Pop_UI_MASTER_LOGIC_REV_12.md",
+            "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+            "TAKY_SYNC_CONTRACT_V1.md"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "snap-bridge.js",
+            "app.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      },
+      "post_freeze_crew_state": "LOCAL_IMPLEMENTATION_VERIFIED_MAIN_PROMOTION_HOLD",
+      "post_freeze_crew_evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json"
+    },
+    {
+      "id": "TAKY_MOBILE",
+      "kind": "APP",
+      "source_repo": "TAKY-MOBILE",
+      "frozen_sha": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+      "semantic_owner": null,
+      "owner_state": "OPEN_OWNER_GAP",
+      "inherited_contracts": [
+        "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+      ],
+      "implementation_or_evidence_refs": [],
+      "open_refs": [],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "LEARNING_ENGINE",
+      "kind": "ENGINE",
+      "source_repo": "TAKY",
+      "frozen_sha": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+      "semantic_owner": "OS/LEARNING_ENGINE_CORE.md",
+      "owner_state": "RESOLVED",
+      "inherited_contracts": [],
+      "implementation_or_evidence_refs": [
+        "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json"
+      ],
+      "open_refs": [],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/LEARNING_ENGINE_CORE.md"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "PLANNER",
+      "kind": "ENGINE",
+      "source_repo": "TAKY",
+      "frozen_sha": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+      "semantic_owner": null,
+      "owner_state": "OPEN_OWNER_GAP",
+      "inherited_contracts": [
+        "OS/GUIDE_FAMILY_LEARNING_OS.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN"
+      ],
+      "open_refs": [
+        "PLANNER_OWNER_GAP"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/GUIDE_FAMILY_LEARNING_OS.md"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "EXPLORER_CREW",
+      "kind": "ENGINE",
+      "source_repo": "TAKY",
+      "frozen_sha": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+      "semantic_owner": "OS/EXPLORATION_CREW_CANONICAL.md",
+      "owner_state": "RESOLVED",
+      "inherited_contracts": [
+        "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "LEARNING/transport/central-learning-production-host.js"
+      ],
+      "open_refs": [
+        "HIDE_CREW_V2",
+        "SNAP_CREW_V2"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/EXPLORATION_CREW_CANONICAL.md",
+            "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "LEARNING/transport/central-learning-production-host.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      },
+      "post_freeze_runtime_evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json"
+    },
+    {
+      "id": "BADGE",
+      "kind": "ENGINE",
+      "source_repo": "TAKY",
+      "frozen_sha": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+      "semantic_owner": null,
+      "owner_state": "OPEN_OWNER_GAP",
+      "inherited_contracts": [
+        "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+      ],
+      "implementation_or_evidence_refs": [
+        "BADGE/badge-award-ledger-store.js"
+      ],
+      "open_refs": [
+        "BADGE_CENTRAL",
+        "BADGE_OWNER_GAP"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "BADGE/badge-award-ledger-store.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      },
+      "post_freeze_runtime_state": "59_OF_60_PRODUCER_QA_PASS__054_LIVE_TRANSPORT_HOLD__ACTIVE0",
+      "post_freeze_runtime_evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json"
+    },
+    {
+      "id": "SAVEY",
+      "kind": "ENGINE",
+      "source_repo": "SAVEY",
+      "frozen_sha": "5a196080b8f8ce50d188b0181d9bec5e5477a265",
+      "semantic_owner": null,
+      "owner_state": "OPEN_OWNER_GAP",
+      "inherited_contracts": [],
+      "implementation_or_evidence_refs": [],
+      "open_refs": [
+        "SAVEY_LIVE_GOOGLE_BINDING_AND_DATA_POPULATION",
+        "SAVEY_OWNER_GAP"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json#savey"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    }
+  ],
+  "claim_dimensions": [
+    "DOCUMENTED",
+    "CODED",
+    "CI_VERIFIED",
+    "RUNTIME_VERIFIED",
+    "DEVICE_VERIFIED",
+    "DEPLOYED",
+    "PRODUCTION_VERIFIED"
+  ],
+  "rule": "POINTER_ONLY_NE_STRUCTURAL_COVERAGE"
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "TAKY_SYSTEM_ALPHA_REMEDIATION_STATUS_V1",
+  "task_id": "CODEX_SYSTEM_ALPHA_REMEDIATION_20261004",
+  "date": "2026-10-04",
+  "status": "SYSTEM_ALPHA_REWORK_REQUIRED",
+  "execution_status": "BLOCKED_EXECUTION_ENVIRONMENT",
+  "preflight_status": "TASK_CONTRACT_INCOMPLETE",
+  "repository": "D:/Git PWA/TAKY_ALPHA_20261003",
+  "target_branch": null,
+  "verified_current_ref": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "ref_verification": "Read worktree .git pointer and gitdir/HEAD; detached HEAD. Git commands could not execute; dirty/index/remote state unverified.",
+  "objective": "System-wide Alpha structural closure in existing V0_1 artifacts with deterministic validation.",
+  "operational_working_model": {
+    "primary_outcome": "Evidence-backed Alpha structural closure",
+    "priority_order": [
+      "Verify live repository and named inputs",
+      "Repair only authorized Alpha and enforcement files",
+      "Run focused validators, Alpha read-only validator, Frozen Beta suite once, git diff --check",
+      "Report independent audit and promotion pending"
+    ],
+    "protected_state": [
+      "Frozen Beta snapshot ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+      "Canonical 21-rule registry; user-provided blob b4ca9b367f08be37f358bad339900b5ea005fb56",
+      "Valid CLOSED items",
+      "Sibling product code"
+    ],
+    "rule_to_execution_implications": [
+      "No authority substitution from local candidate registry",
+      "No LOCAL_INFRA completion inference for whole-system Alpha",
+      "Independent evidence for all claim dimensions",
+      "No push, merge, deploy, Netlify or paid APIs",
+      "No browser/device validation"
+    ],
+    "next_action": "Restore authorized local process execution, finish preflight, then perform requested implementation and validation.",
+    "stop_conditions": [
+      "Unable to verify required repository state or execute required validation",
+      "Requirement or authority conflict"
+    ]
+  },
+  "implementation": {
+    "completed": false,
+    "files_changed": [],
+    "files_added": [
+      "ALPHA_REVIEW/CODEX_SYSTEM_ALPHA_REMEDIATION_20261004.md",
+      "ALPHA_REVIEW/ALPHA_SYSTEM_WIDE_STATUS_20261004.json"
+    ],
+    "scope_deviations": [
+      "Only failure reports added; requested Alpha remediation and validators not implemented because execution preflight is blocked."
+    ]
+  },
+  "blocker": {
+    "reason": "Local command execution unavailable",
+    "evidence": [
+      "exec_command: CreateProcessAsUserW failed: 5 (Access denied), before any command executed",
+      "exec_command with explicit Windows PowerShell and login false: same process creation failure",
+      "Node child_process git status/branch/rev-parse: spawnSync git EPERM"
+    ],
+    "file_access": "Targeted file reads succeeded; report writes performed through filesystem API."
+  },
+  "validation": {
+    "commands_actually_executed": [],
+    "command_launches_attempted": [
+      "git status --short",
+      "git branch --show-current",
+      "git rev-parse HEAD",
+      "rg --files ALPHA ENFORCEMENT ALPHA_REVIEW MASTER"
+    ],
+    "focused_validators": "NOT_RUN",
+    "alpha_readonly": "NOT_RUN",
+    "frozen_beta": {
+      "status": "NOT_RUN",
+      "tests_executed": 0,
+      "baseline_user_reported": "132/132 PASS; not reproduced in this execution"
+    },
+    "git_diff_check": "NOT_RUN",
+    "runtime": "NOT_RUN_AS_INSTRUCTED",
+    "mobile_device": "NOT_RUN_AS_INSTRUCTED",
+    "independent_audit_A8": "PENDING",
+    "human_promotion_A10": "PENDING"
+  },
+  "remaining_open_hold": [
+    "Requested structural remediation and executable validators",
+    "Explorer Crew PR191 / Hide / Snap promotion",
+    "Badge central and 13 producer-QA OPEN / 0 active",
+    "Design-to-UI/assets candidates",
+    "Family profile/radio UX and tap-vs-hold",
+    "Snap legacy browser UNVERIFIED",
+    "SAVEY live Google binding/data population if still unverified",
+    "Shared auth extraction/identity federation HOLD",
+    "Hosted interception UNVERIFIED",
+    "Deployment HOLD",
+    "LOCAL lane identity and CAD/Excel/HWP representative tasks"
+  ],
+  "unresolved_risks": [
+    "No structural completion or regression assurance established in this execution",
+    "Current worktree changes and canonical registry bytes not verified",
+    "User-provided historical results and authority resolution are not newly executed validation"
+  ],
+  "commit_produced": null,
+  "requested_next_transition": "Resume preflight and implementation after process execution is restored; no lifecycle transition executed.",
+  "canonical_promotion": false,
+  "deployed": false,
+  "product_gaps_closed": false
+}

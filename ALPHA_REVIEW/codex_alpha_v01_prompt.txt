@@ -1,0 +1,6 @@
+INDEPENDENT READ-ONLY ADVERSARIAL AUDIT. Do not edit files. Do not use network. No push, merge, deploy, or API calls.
+Do not inspect any Claude review output.
+Audit TAKY Alpha V0.1 against repository inputs and Frozen Beta evidence.
+Focus on authority duplication, stale/current confusion, lost Frozen Beta OPEN items, inconsistent claim ladder, routing ownership violations, source-head/cross-repo evidence errors, Alpha rules that exceed Beta evidence, and missing major system domains.
+Compare ALPHA/TAKY_ALPHA_MASTER_V0_1.md, authority/carryover/validation/rule/routing JSONs, ALPHA_REVIEW/ALPHA_INPUT_LOCK_20261003.json, ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json, MASTER registries, MASTER/MASTER_LOGIC.md, and CURRENT/SYSTEM_WIDE_REVIEW.json.
+Output BLOCKER/P1/P2/PASS with exact paths and minimal remediation.

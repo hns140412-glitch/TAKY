@@ -1,0 +1,111 @@
+{
+  "schema": "TAKY_ALPHA_SOURCE_TRACE_V0_1",
+  "status": "DRAFT_TRACE",
+  "date": "2026-10-04",
+  "items": [
+    {
+      "alpha_concept": "Human Key / Global Cycle",
+      "classification": "VERBATIM_DISPLAY_REFERENCE__NO_REDEFINITION",
+      "sources": [
+        "MASTER/MASTER_LOGIC.md",
+        "TAKY.md",
+        "MASTER/RULE_REGISTRY.json#TKY-GUIDING-001"
+      ]
+    },
+    {
+      "alpha_concept": "DEEP MEMORY — LIGHT EXECUTION",
+      "classification": "EXISTING_FROZEN_PRINCIPLE",
+      "sources": [
+        "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md"
+      ]
+    },
+    {
+      "alpha_concept": "RAW / INDEX / DETAIL / CURRENT",
+      "classification": "ALPHA_DRAFT_SYNTHESIS_FROM_FROZEN_STORAGE_AND_CURRENT_BOUNDARIES",
+      "sources": [
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+        "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+        "CURRENT/SYSTEM_WIDE_REVIEW.json"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "LearningGrow",
+      "classification": "ALPHA_DRAFT_UMBRELLA_LABEL",
+      "sources": [
+        "OS/LEARNING_ENGINE_CORE.md",
+        "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "ArchiGrow",
+      "classification": "ALPHA_DRAFT_UMBRELLA_LABEL",
+      "sources": [
+        "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+        "DOMAIN/ARCHITECTURE_WORK_OS.md",
+        "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "Independent evidence claim dimensions",
+      "classification": "NORMALIZATION_OF_EXISTING_NON_EQUIVALENCE_BOUNDARY",
+      "sources": [
+        "MASTER/MASTER_LOGIC.md",
+        "CURRENT/SYSTEM_WIDE_REVIEW.json"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "Whole-system app/engine depth",
+      "classification": "STRUCTURAL_COVERAGE_LAYER",
+      "sources": [
+        "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+        "OS/LEARNING_ENGINE_CORE.md",
+        "OS/EXPLORATION_CREW_CANONICAL.md",
+        "TAKY_SYNC_CONTRACT_V1.md"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "Whole-system pipeline map",
+      "classification": "ALPHA_ROUTING_SYNTHESIS",
+      "sources": [
+        "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+        "OS/LEARNING_ENGINE_CORE.md",
+        "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
+        "OS/WORK_OS.md",
+        "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "LOCAL infrastructure Alpha lane",
+      "classification": "BOUNDED_IMPORTED_LANE",
+      "sources": [
+        "D:\\Git PWA\\TAKY\\HANDOFF\\TAKY_ALPHA_FINAL_2026-10-03.md"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "Post-freeze working deltas",
+      "classification": "VOLATILE_CANDIDATE_EVIDENCE",
+      "sources": [
+        "ALPHA/TAKY_ALPHA_POST_FREEZE_DELTA_V0_1.json"
+      ],
+      "authority_transfer": false
+    },
+    {
+      "alpha_concept": "A10 local canonical orchestration promotion",
+      "classification": "HUMAN_APPROVED_LOCAL_PROMOTION",
+      "sources": [
+        "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json",
+        "ALPHA_REVIEW/ALPHA_MAIN_REFRESH_EVIDENCE_20261004.json"
+      ],
+      "authority_transfer": false,
+      "semantic_owner_transfer": false
+    }
+  ],
+  "rule": "Alpha orchestration is locally canonical after A10; domain semantic ownership remains with declared owners and GitHub main is unchanged."
+}

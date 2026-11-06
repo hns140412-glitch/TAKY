@@ -1,0 +1,13 @@
+{
+  "schema": "TAKY_ALPHA_MAIN_REFRESH_EVIDENCE_V1",
+  "date": "2026-10-04",
+  "repository": "hns140412-glitch/TAKY",
+  "baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "compared_head": "main",
+  "compare_status": "identical",
+  "ahead_by": 0,
+  "behind_by": 0,
+  "merge_base": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "conclusion": "LATEST_GITHUB_MAIN_EQUALS_FROZEN_BASELINE__NO_REBASE_REQUIRED_FOR_LOCAL_A10_REVIEW",
+  "mutation": false
+}

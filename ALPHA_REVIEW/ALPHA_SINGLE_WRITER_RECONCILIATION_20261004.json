@@ -1,0 +1,20 @@
+{
+  "schema": "TAKY_ALPHA_SINGLE_WRITER_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "APPLIED_AWAITING_VALIDATION",
+  "reconciled_alias_nodes": {
+    "TAKY_ASSETS": "TAKY_ASSETS_REPO",
+    "TAKY_WORK_OS": "TAKY_WORK_OS_REPO",
+    "SYNC_RUNTIME": "SYNC_CONTRACT",
+    "AUTH_RUNTIME": "AUTH_SESSION",
+    "PRIVATE_FAMILY_RUNTIME": "CHARACTER_ASSET_PIPELINE"
+  },
+  "added_pipeline": "GOVERNANCE_EXECUTION_CONTINUITY",
+  "validator_set": [
+    "ENFORCEMENT/alpha_readonly_validator_v03.py",
+    "ENFORCEMENT/alpha_coverage_depth_validator.py",
+    "ENFORCEMENT/alpha_pipeline_validator.py",
+    "ENFORCEMENT/alpha_lane_boundary_validator.py"
+  ],
+  "claim_boundary": "STRUCTURAL_RECONCILIATION_NE_ALPHA_PASS"
+}

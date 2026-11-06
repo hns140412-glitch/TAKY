@@ -1,0 +1,27 @@
+{
+  "schema": "TAKY_ALPHA_PHASE0_STATE_V0_1",
+  "date": "2026-10-03",
+  "status": "ALPHA_DRAFT_STARTED",
+  "canonical_authority": false,
+  "input_lock": "ALPHA_REVIEW/ALPHA_INPUT_LOCK_20261003.json",
+  "master": "ALPHA/TAKY_ALPHA_MASTER_V0_1.md",
+  "authority_map": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+  "carry_over_open": "ALPHA/TAKY_ALPHA_CARRYOVER_OPEN_V0_1.json",
+  "validation_contract": "ALPHA/TAKY_ALPHA_VALIDATION_CONTRACT_V0_1.json",
+  "completed": [
+    "A0_INPUT_LOCK",
+    "A1_INITIAL_AUTHORITY_MAP",
+    "A6_INITIAL_CARRYOVER_IMPORT"
+  ],
+  "next": [
+    "A1_AUTHORITY_COMPILE_VALIDATE",
+    "A2_RULE_COMPILE",
+    "A3_CROSS_DOMAIN_ROUTING"
+  ],
+  "constraints": [
+    "NO_PUSH",
+    "NO_MERGE",
+    "NO_DEPLOY",
+    "NO_PAID_API"
+  ]
+}

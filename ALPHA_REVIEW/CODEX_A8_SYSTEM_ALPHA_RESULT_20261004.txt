@@ -1,0 +1,7 @@
+- **P1 — Conflicting Ready & Set ownership.** [Coverage:12](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json:12>) marks the local implementation contract as its resolved semantic owner. [Routing:71](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json:71>) instead names the external canonical product contract and labels the local document as support. Reconcile the authority distinction.
+
+- **P1 — Lower-app depth remains incomplete.** [TAKY_MOBILE:179](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json:179>) has empty implementation/evidence and OPEN references; its documentation evidence is only the registry pointer. SAVEY also has empty implementation/evidence references. This does not substantiate the universal depth requirement in [V12:68](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA/TAKY_ALPHA_VALIDATION_CONTRACT_V0_1.json:68>), despite the recorded validator PASS.
+
+- **P2 — Owner gaps lack closure-plan entries.** Coverage references `PLANNER_OWNER_GAP`, `BADGE_OWNER_GAP`, and `SAVEY_OWNER_GAP`, but none appears in the [OPEN closure plan](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA/TAKY_ALPHA_OPEN_CLOSURE_PLAN_V0_1.json>). The gaps remain explicit, but their closure classification and structural-blocking disposition are missing.
+
+**A8_REWORK_REQUIRED**

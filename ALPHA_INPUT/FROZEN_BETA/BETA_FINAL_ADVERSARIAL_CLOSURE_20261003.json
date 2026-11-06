@@ -1,0 +1,57 @@
+{
+  "schema": "TAKY_BETA_FINAL_ADVERSARIAL_CLOSURE_V1",
+  "date": "2026-10-03",
+  "status": "PASS_WITH_CONTAINED_OPEN",
+  "attacks": [
+    {
+      "id": "FINAL-ADV-001",
+      "attack": "STALE_SOURCE_HEAD_ACCEPTED_AS_LIVE",
+      "defense": "read-only live requery + CURRENT/registry source-head-only refresh + semantic/mobile regression",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-002",
+      "attack": "STALE_PR_POINTER_OR_OLD_CI_PROMOTED",
+      "defense": "exact PR head requery + main divergence classification; candidate remains non-authority",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-003",
+      "attack": "DIVERGED_CANDIDATE_DIRECT_PROMOTION",
+      "defense": "PR191/194/196, Ready143, Hide28/29, Snap18/20 marked reapply/rebase; no merge",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-004",
+      "attack": "FAST_FORWARD_ASSET_PR_MISTAKEN_FOR_APPROVAL",
+      "defense": "TAKY-ASSETS PR4 remains HOLD despite ahead-only topology",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-005",
+      "attack": "CONCURRENT_SAVEY_WORKTREE_MIXED_WITH_MAIN_EVIDENCE",
+      "defense": "exact main detached worktree validation; concurrent OAuth edit preserved untouched",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-006",
+      "attack": "DIRTY_LOCAL_BETA_CANNOT_BE_IDENTIFIED_IMMUTABLY",
+      "defense": "HEAD + index tree + tracked binary patch hash + untracked source hashes + source heads -> snapshot identity",
+      "result": "PASS"
+    },
+    {
+      "id": "FINAL-ADV-007",
+      "attack": "HOSTED_CONNECTOR_ENFORCEMENT_INFERRED_FROM_REPOSITORY_GATES",
+      "defense": "UNVERIFIED_CONTAINED claim boundary retained",
+      "result": "PASS_CONTAINED"
+    },
+    {
+      "id": "FINAL-ADV-008",
+      "attack": "BETA_FREEZE_USED_AS_DEPLOY_AUTHORIZATION",
+      "defense": "NO_PUSH/NO_MERGE/NO_DEPLOY and deployment HOLD remain explicit",
+      "result": "PASS"
+    }
+  ],
+  "uncontained_p0_p1": [],
+  "snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57"
+}

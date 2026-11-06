@@ -1,0 +1,38 @@
+{
+  "schema": "TAKY_ALPHA_ADVERSARIAL_VALIDATION_V1",
+  "date": "2026-10-04",
+  "status": "PASS",
+  "baseline_pass": true,
+  "case_count": 7,
+  "cases": [
+    {
+      "id": "STALE_ALIAS_INJECTION",
+      "detected": true
+    },
+    {
+      "id": "SILENT_OWNER_PROMOTION",
+      "detected": true
+    },
+    {
+      "id": "RUNTIME_OVERCLAIM_EMPTY_EVIDENCE",
+      "detected": true
+    },
+    {
+      "id": "PIPELINE_STAGE_LOSS",
+      "detected": true
+    },
+    {
+      "id": "PRODUCTION_OVERCLAIM",
+      "detected": true
+    },
+    {
+      "id": "LANE_TO_SYSTEM_ESCALATION",
+      "detected": true
+    },
+    {
+      "id": "CANONICAL_REGISTRY_DRIFT",
+      "detected": true
+    }
+  ],
+  "failed_cases": []
+}

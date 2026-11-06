@@ -1,0 +1,12 @@
+**SYSTEM_ALPHA_REWORK_REQUIRED**
+
+Execution blocked: command launches fail with Windows Access Denied / `EPERM`. Requested implementation remains undone; no validators or regression tests ran.
+
+Created and read back:
+
+- [Remediation report](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA_REVIEW/CODEX_SYSTEM_ALPHA_REMEDIATION_20261004.md>)
+- [Machine-readable status](</D:/Git PWA/TAKY_ALPHA_20261003/ALPHA_REVIEW/ALPHA_SYSTEM_WIDE_STATUS_20261004.json>)
+
+Only these reports changed. All OPEN/HOLD items remain; independent audit and human promotion remain pending. No commit, push, merge, or deployment occurred.
+
+Authorized local process execution must be restored to continue.

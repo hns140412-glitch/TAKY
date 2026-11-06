@@ -1,0 +1,1072 @@
+{
+  "routing": {
+    "node_count": 40,
+    "edge_count": 86,
+    "nodes": [
+      "TAKY",
+      "SHARED_TECHNICAL_CAPABILITY",
+      "PLATFORM_ADAPTER",
+      "WORK_OS",
+      "WORK_DOMAIN_PROJECT",
+      "TAKY_WORK_OS_REPO",
+      "LEARNING_OS",
+      "LEARNING_APP_FAMILY",
+      "LEARNING_ENGINE",
+      "PLANNER",
+      "READY_SET",
+      "HIDE_SEEK",
+      "SNAP_POP",
+      "TAKY_MOBILE",
+      "EXPLORER_CREW",
+      "CHARACTER_ASSET_PIPELINE",
+      "CHARACTER_BEHAVIOR_RUNTIME",
+      "DESIGN_UI_ASSETS",
+      "TAKY_ASSETS_REPO",
+      "BADGE",
+      "SAVEY",
+      "ARCHIGROW",
+      "LEARNINGGROW",
+      "MOBILE_REGISTRY",
+      "SYNC_CONTRACT",
+      "OFFLINE_QUEUE",
+      "AUTH_SESSION",
+      "FAMILY_PRIVATE_BOUNDARY",
+      "DRIVE_GOOGLE_CANONICAL",
+      "LOCAL_HTTP_BRIDGE",
+      "ENFORCEMENT_ENGINE",
+      "EXECUTOR_LIFECYCLE",
+      "C2S_COMPILER",
+      "OPERATIONAL_WORKSPACE",
+      "NOTION_OPS",
+      "DRIVE_C2S",
+      "HANDOFF",
+      "CHECKPOINT",
+      "CONTEXT_LEDGER",
+      "LOCAL_INFRA_ALPHA_LANE"
+    ],
+    "owner_gaps": {
+      "PLANNER": "OPEN_OWNER_GAP",
+      "BADGE": "OPEN_OWNER_GAP",
+      "SAVEY": "OPEN_OWNER_GAP"
+    },
+    "stale_aliases": [],
+    "invariants": [
+      "ROUTING_EDGE_DOES_NOT_TRANSFER_OWNER_AUTHORITY",
+      "WORK_OS_AND_LEARNING_OS_ARE_SIBLINGS",
+      "LEARNING_APP_FAMILY_IS_SUBORDINATE_TO_LEARNING_OS",
+      "SHARED_TECHNICAL_CAPABILITY_IS_SEMANTIC_LIGHT",
+      "PLATFORM_ADAPTER_DOES_NOT_OWN_DOMAIN_SEMANTICS",
+      "PLANNER_OWNS_DATED_ALLOCATION_WITHIN_LEARNING_DOMAIN",
+      "READY_SET_CONSUMES_PLANNER_PROJECTION_AND_DOES_NOT_ABSORB_PLANNER_AUTHORITY",
+      "HIDE_DOES_NOT_OWN_LONG_TERM_SCHEDULING",
+      "APP_EVIDENCE_EDGES_TO_LEARNING_ENGINE_CARRY_SIGNALS_ONLY",
+      "BADGE_PRODUCER_QA_PASS_DOES_NOT_ACTIVATE_BADGE",
+      "MOBILE_REGISTRY_IS_VOLATILE_OPERATIONAL_REGISTRY_NOT_PRODUCT_AUTHORITY",
+      "TAKY_MOBILE_IS_CATALOG_AND_SHARED_INFRA_NOT_SPECIALIST_LEARNING_OWNER",
+      "ENFORCEMENT_AND_EXECUTOR_LIFECYCLE_DO_NOT_TRANSFER_DOMAIN_AUTHORITY",
+      "OPERATIONAL_WORKSPACE_AND_PLATFORM_SPECIALIZATIONS_DO_NOT_OVERRIDE_WORK_OS",
+      "HANDOFF_IS_RECOVERY_POINTER_PROTOCOL_NOT_CANONICAL_OWNER",
+      "CHECKPOINT_CURRENT_IS_LIGHTWEIGHT_RESUME_STATE_NOT_GLOBAL_AUTHORITY",
+      "CURRENT_OR_HISTORY_PATH_IS_NEVER_A_NODE_OWNER",
+      "ACTIVE_OWNER_WITHOUT_RULE_ID_REMAINS_EXPLICIT_OPEN_NOT_SILENTLY_ASSIGNED",
+      "OPEN_OWNER_GAP_IS_EXPLICIT_AND_NOT_SILENTLY_FILLED",
+      "LOCAL_PWA_STATE_IS_CACHE_QUEUE_NOT_CANONICAL_AUTHORITY",
+      "AUTH_TRANSPORT_DOES_NOT_OWN_FAMILY_OR_ORGANIZATION_IDENTITY",
+      "LOCAL_INFRA_LANE_COMPLETE_DOES_NOT_IMPLY_SYSTEM_ALPHA_COMPLETE",
+      "POINTER_ONLY_NE_STRUCTURAL_COVERAGE",
+      "LOCAL_INFRA_COMPLETE_NE_SYSTEM_ALPHA_COMPLETE",
+      "POST_FREEZE_DELTA_NE_CANONICAL_AUTHORITY",
+      "READY_SET_PROJECTION_NE_PLANNER_AUTHORITY"
+    ]
+  },
+  "coverage": [
+    {
+      "id": "READY_SET",
+      "owner_state": "RESOLVED",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "HIDE_SEEK",
+      "owner_state": "RESOLVED",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 4,
+        "CODED": 1,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "SNAP_POP",
+      "owner_state": "RESOLVED",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "TAKY_MOBILE",
+      "owner_state": "OPEN_OWNER_GAP",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "LEARNING_ENGINE",
+      "owner_state": "RESOLVED",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "PLANNER",
+      "owner_state": "OPEN_OWNER_GAP",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "EXPLORER_CREW",
+      "owner_state": "RESOLVED",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 2,
+        "CODED": 1,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "BADGE",
+      "owner_state": "OPEN_OWNER_GAP",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 1,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "SAVEY",
+      "owner_state": "OPEN_OWNER_GAP",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    }
+  ],
+  "pipelines": [
+    {
+      "id": "LEARNING_DATA_TO_EXECUTION",
+      "stages": [
+        {
+          "id": "SOURCE_CAPTURE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "MINING",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "ATOMIZE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "INDEX_SEARCH",
+          "owner_state": "MAPPED",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "RELATE",
+          "owner_state": "MAPPED",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "LEARNING",
+          "owner_state": "MAPPED",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "GROW",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "PLANNER",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "APP_EXECUTION",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "RESULT_EVIDENCE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "CARRYOVER_CURRENT",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "WORK_OS_ARCHIGROW",
+      "stages": [
+        {
+          "id": "SOURCE_INTAKE",
+          "owner_state": "MAPPED",
+          "owner": "OS/WORK_OS.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "ANALYSIS",
+          "owner_state": "MAPPED",
+          "owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "ARTIFACT_OUTPUT",
+          "owner_state": "MAPPED",
+          "owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "VALIDATION",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/VALIDATION_RULES.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "LEARNING_GROWTH",
+          "owner_state": "MAPPED",
+          "owner": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DESIGN_UI_ASSET",
+      "stages": [
+        {
+          "id": "APPROVED_SOURCE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "SCREEN_CONTRACT",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "ASSET_LAYERS_BINDING",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "UI_RUNTIME",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "VISUAL_REGRESSION",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/VALIDATION_RULES.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BADGE_REWARD",
+      "stages": [
+        {
+          "id": "EVIDENCE_PRODUCER",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "VERIFIED_OBSERVATION",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "AWARD_POLICY",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "DURABLE_LEDGER",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "EVIDENCED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "VISUAL_BINDING",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "REWARD_USE",
+          "owner_state": "OPEN_OWNER_GAP",
+          "owner": null,
+          "claims": {
+            "DOCUMENTED": "UNVERIFIED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GOVERNANCE_EXECUTION_CONTINUITY",
+      "stages": [
+        {
+          "id": "C2S_COMPILE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "ENFORCEMENT_GATE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/ENFORCEMENT_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "EVIDENCED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "EXECUTOR_LIFECYCLE",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/CODEX_TASK_CONTRACT.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "CHECKPOINT_CURRENT",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "EVIDENCED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "HANDOFF_RESUME",
+          "owner_state": "MAPPED",
+          "owner": "MASTER/HANDOFF_PROTOCOL.md",
+          "claims": {
+            "DOCUMENTED": "EVIDENCED",
+            "CODED": "UNVERIFIED",
+            "CI_VERIFIED": "UNVERIFIED",
+            "RUNTIME_VERIFIED": "UNVERIFIED",
+            "DEVICE_VERIFIED": "UNVERIFIED",
+            "DEPLOYED": "HOLD",
+            "PRODUCTION_VERIFIED": "UNVERIFIED"
+          }
+        }
+      ]
+    }
+  ],
+  "runtime": [
+    {
+      "id": "SYNC_OFFLINE",
+      "authority": "TAKY_SYNC_CONTRACT_V1.md",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "ACCOUNT_AUTH",
+      "authority": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "FAMILY_SESSION",
+      "authority": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "PRIVATE_CHARACTER_BINARY",
+      "authority": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "DRIVE_GOOGLE_CANONICAL_DATA",
+      "authority": "TAKY_SYNC_CONTRACT_V1.md",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "UNVERIFIED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 1,
+        "CODED": 0,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    },
+    {
+      "id": "LOCAL_HTTP_BRIDGE",
+      "authority": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "claim_states": {
+        "DOCUMENTED": "EVIDENCED",
+        "CODED": "EVIDENCED",
+        "CI_VERIFIED": "UNVERIFIED",
+        "RUNTIME_VERIFIED": "UNVERIFIED",
+        "DEVICE_VERIFIED": "UNVERIFIED",
+        "DEPLOYED": "HOLD",
+        "PRODUCTION_VERIFIED": "UNVERIFIED"
+      },
+      "evidence_counts": {
+        "DOCUMENTED": 3,
+        "CODED": 2,
+        "CI_VERIFIED": 0,
+        "RUNTIME_VERIFIED": 0,
+        "DEVICE_VERIFIED": 0,
+        "DEPLOYED": 0,
+        "PRODUCTION_VERIFIED": 0
+      }
+    }
+  ],
+  "lane": {
+    "scope": "LOCAL_INFRA_ONLY",
+    "implies_system_alpha": false,
+    "registry": {
+      "source": "GitHub main MASTER/RULE_REGISTRY.json",
+      "blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+      "rule_count": 21,
+      "includes": "TKY-CHECKPOINT-001",
+      "normalization": "CRLF_TO_LF_BEFORE_GIT_BLOB_HASH",
+      "expected_blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56"
+    },
+    "candidate_diff": {
+      "candidate_rule_count": 25,
+      "candidate_only": [
+        "TKY-CONNECTION-001",
+        "TKY-SAVEY-001",
+        "TKY-WORKSTATION-001",
+        "TKY-ARCHIPIPE-001",
+        "TKY-AICOLLAB-001"
+      ],
+      "canonical_only": [
+        "TKY-CHECKPOINT-001"
+      ],
+      "disposition": "POST_FREEZE_CANDIDATE_ONLY__NO_AUTHORITY_TRANSFER"
+    },
+    "open": [
+      "HOST_PROVIDER_AUTHENTICATED_HUMAN_IDENTITY",
+      "HOSTED_CHATGPT_CLAUDE_AUTOMATIC_INTERCEPTION",
+      "CAD_EXCEL_HWP_REPRESENTATIVE_TASK_VERIFICATION"
+    ]
+  },
+  "open": [
+    {
+      "id": "EXPLORER_CREW_CENTRAL_RUNTIME",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "HIDE_CREW_V2",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "SNAP_CREW_V2",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "BADGE_CENTRAL",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "DESIGN_TO_UI",
+      "class": "CANDIDATE",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "ASSET_POINTER_CONTRACT",
+      "class": "CANDIDATE_HOLD",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "FAMILY_PROFILE_RADIO_UX",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "SNAP_LEGACY_BROWSER_CLOSURE",
+      "class": "UNVERIFIED_CONTAINED",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "SAVEY_LIVE_GOOGLE_BINDING_AND_DATA_POPULATION",
+      "class": "RUNTIME_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "SHARED_AUTH_IDENTITY_FEDERATION",
+      "class": "HOLD",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "HOSTED_RUNTIME_INTERCEPTION",
+      "class": "UNVERIFIED_CONTAINED",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "DEPLOYMENT",
+      "class": "HOLD",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "LOCAL_INFRA_HOST_IDENTITY",
+      "class": "EXTERNAL_BOUNDARY",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "LOCAL_INFRA_CAD_EXCEL_HWP_TASKS",
+      "class": "FUTURE_LANE",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "A8_INDEPENDENT_CROSS_VALIDATION",
+      "class": "ALPHA_GATE",
+      "blocks_structural_alpha": true
+    },
+    {
+      "id": "A10_HUMAN_PROMOTION",
+      "class": "HUMAN_GATE",
+      "blocks_structural_alpha": true
+    }
+  ],
+  "migration_depth": [
+    "WHOLE_SYSTEM_APP_ENGINE_DEPTH",
+    "WHOLE_SYSTEM_PIPELINES",
+    "WHOLE_SYSTEM_RUNTIME_CONTRACTS",
+    "LOCAL_INFRA_LANE",
+    "POST_FREEZE_DELTA"
+  ],
+  "gates": [
+    "V0_INPUT",
+    "V1_AUTHORITY",
+    "V2_OWNER_REFERENCE",
+    "V3_CURRENT_BOUNDARY",
+    "V4_LIVE_EVIDENCE",
+    "V5_CROSS_REPO",
+    "V6_CARRYOVER",
+    "V7_TRACE",
+    "V8_REGRESSION",
+    "V9_ADVERSARIAL",
+    "V10_HUMAN_GATE",
+    "V11_PIPELINE_COMPLETENESS",
+    "V12_APP_COVERAGE_DEPTH",
+    "V13_LANE_BOUNDARY"
+  ],
+  "validations": {
+    "readonly": {
+      "schema": "TAKY_ALPHA_READONLY_VALIDATION_V0_3",
+      "date": "2026-10-04",
+      "status": "PASS",
+      "failure_count": 0,
+      "failures": []
+    },
+    "coverage": {
+      "schema": "TAKY_ALPHA_COVERAGE_DEPTH_VALIDATION_V1",
+      "date": "2026-10-04",
+      "status": "PASS",
+      "failure_count": 0,
+      "failures": []
+    },
+    "pipeline": {
+      "schema": "TAKY_ALPHA_PIPELINE_VALIDATION_V1",
+      "date": "2026-10-04",
+      "status": "PASS",
+      "failure_count": 0,
+      "failures": []
+    },
+    "lane": {
+      "schema": "TAKY_ALPHA_LANE_BOUNDARY_VALIDATION_V1",
+      "date": "2026-10-04",
+      "status": "PASS",
+      "failure_count": 0,
+      "failures": [],
+      "normalized_canonical_rule_blob": "b4ca9b367f08be37f358bad339900b5ea005fb56"
+    },
+    "beta_suite": {
+      "total": 132,
+      "failures": 0,
+      "seconds": 48.795,
+      "failed": []
+    },
+    "git_diff_check_exit": 0
+  },
+  "boundaries": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "paid_api": "HOLD",
+    "human_promotion": "PENDING"
+  }
+}

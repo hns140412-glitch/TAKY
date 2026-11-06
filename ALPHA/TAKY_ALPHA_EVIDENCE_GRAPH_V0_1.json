@@ -1,0 +1,85 @@
+{
+  "schema": "TAKY_ALPHA_EVIDENCE_GRAPH_V0_1",
+  "status": "A4_STRUCTURAL_GRAPH",
+  "date": "2026-10-04",
+  "nodes": [
+    {
+      "id": "FROZEN_BETA",
+      "ref": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json",
+      "class": "IMMUTABLE_INPUT"
+    },
+    {
+      "id": "AUTHORITY",
+      "ref": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json",
+      "class": "AUTHORITY_MAP"
+    },
+    {
+      "id": "ROUTING",
+      "ref": "ALPHA/TAKY_ALPHA_ROUTING_GRAPH_V0_1.json",
+      "class": "ROUTING"
+    },
+    {
+      "id": "APP_ENGINE",
+      "ref": "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json",
+      "class": "DEPTH_COVERAGE"
+    },
+    {
+      "id": "PIPELINES",
+      "ref": "ALPHA/TAKY_ALPHA_PIPELINE_MAP_V0_1.json",
+      "class": "PIPELINE"
+    },
+    {
+      "id": "RUNTIME",
+      "ref": "ALPHA/TAKY_ALPHA_RUNTIME_CONTRACTS_V0_1.json",
+      "class": "RUNTIME_CONTRACT"
+    },
+    {
+      "id": "OPEN",
+      "ref": "ALPHA/TAKY_ALPHA_OPEN_CLOSURE_PLAN_V0_1.json",
+      "class": "OPEN_DISPOSITION"
+    },
+    {
+      "id": "POST_FREEZE",
+      "ref": "ALPHA/TAKY_ALPHA_POST_FREEZE_DELTA_V0_1.json",
+      "class": "VOLATILE_CANDIDATE"
+    }
+  ],
+  "edges": [
+    {
+      "from": "FROZEN_BETA",
+      "to": "AUTHORITY",
+      "relation": "SEEDS"
+    },
+    {
+      "from": "AUTHORITY",
+      "to": "ROUTING",
+      "relation": "BOUNDS"
+    },
+    {
+      "from": "ROUTING",
+      "to": "APP_ENGINE",
+      "relation": "ROUTES"
+    },
+    {
+      "from": "APP_ENGINE",
+      "to": "PIPELINES",
+      "relation": "PARTICIPATES_IN"
+    },
+    {
+      "from": "PIPELINES",
+      "to": "RUNTIME",
+      "relation": "USES"
+    },
+    {
+      "from": "APP_ENGINE",
+      "to": "OPEN",
+      "relation": "PRESERVES_GAPS"
+    },
+    {
+      "from": "POST_FREEZE",
+      "to": "OPEN",
+      "relation": "CANDIDATE_DELTA_ONLY"
+    }
+  ],
+  "rule": "TRACEABLE_STRUCTURE_NE_RUNTIME_PROOF"
+}

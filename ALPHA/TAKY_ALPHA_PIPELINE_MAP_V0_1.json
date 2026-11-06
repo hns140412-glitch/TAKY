@@ -1,0 +1,1301 @@
+{
+  "schema": "TAKY_ALPHA_PIPELINE_MAP_V0_1",
+  "status": "DRAFT_STRUCTURE_PENDING_DETERMINISTIC_VALIDATION",
+  "date": "2026-10-04",
+  "pipelines": [
+    {
+      "id": "LEARNING_DATA_TO_EXECUTION",
+      "stages": [
+        {
+          "id": "SOURCE_CAPTURE",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "OS/DRIVE_C2S_DIRECT.md"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+                "OS/DRIVE_C2S_DIRECT.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "MINING",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [
+            "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "ATOMIZE",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "INDEX_SEARCH",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "OS/LEARNING_ENGINE_CORE.md",
+                "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "RELATE",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "OS/LEARNING_ENGINE_CORE.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "LEARNING",
+          "owner": "OS/LEARNING_ENGINE_CORE.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "OS/LEARNING_ENGINE_CORE.md",
+                "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "GROW",
+          "owner": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "PLANNER",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [
+            "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "APP_EXECUTION",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+                "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "RESULT_EVIDENCE",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "CARRYOVER_CURRENT",
+          "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "WORK_OS_ARCHIGROW",
+      "stages": [
+        {
+          "id": "SOURCE_INTAKE",
+          "owner": "OS/WORK_OS.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "OS/WORK_OS.md",
+                "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "ANALYSIS",
+          "owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "DOMAIN/ARCHITECTURE_WORK_OS.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "ARTIFACT_OUTPUT",
+          "owner": "DOMAIN/ARCHITECTURE_WORK_OS.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "DOMAIN/ARCHITECTURE_WORK_OS.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "VALIDATION",
+          "owner": "MASTER/VALIDATION_RULES.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/VALIDATION_RULES.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "LEARNING_GROWTH",
+          "owner": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "DOMAIN/ARCHITECTURE_GROWTH_MAP.md",
+                "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "DESIGN_UI_ASSET",
+      "stages": [
+        {
+          "id": "APPROVED_SOURCE",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "SCREEN_CONTRACT",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "ASSET_LAYERS_BINDING",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "TAKY-ASSETS"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+                "TAKY-ASSETS"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "UI_RUNTIME",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+                "ALPHA/TAKY_ALPHA_APP_ENGINE_COVERAGE_V0_1.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "VISUAL_REGRESSION",
+          "owner": "MASTER/VALIDATION_RULES.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/VALIDATION_RULES.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BADGE_REWARD",
+      "stages": [
+        {
+          "id": "EVIDENCE_PRODUCER",
+          "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "VERIFIED_OBSERVATION",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [
+            "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "AWARD_POLICY",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [
+            "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "DURABLE_LEDGER",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [
+            "BADGE/badge-award-ledger-store.js"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "BADGE/badge-award-ledger-store.js"
+              ]
+            },
+            "CODED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "BADGE/badge-award-ledger-store.js"
+              ]
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "VISUAL_BINDING",
+          "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "REWARD_USE",
+          "owner": null,
+          "owner_state": "OPEN_OWNER_GAP",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "GOVERNANCE_EXECUTION_CONTINUITY",
+      "stages": [
+        {
+          "id": "C2S_COMPILE",
+          "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "ENFORCEMENT_GATE",
+          "owner": "MASTER/ENFORCEMENT_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "ENFORCEMENT/taky_gate.py"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/ENFORCEMENT_PROTOCOL.md",
+                "ENFORCEMENT/taky_gate.py"
+              ]
+            },
+            "CODED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "ENFORCEMENT/taky_gate.py"
+              ]
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "EXECUTOR_LIFECYCLE",
+          "owner": "MASTER/CODEX_TASK_CONTRACT.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/CODEX_TASK_CONTRACT.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "CHECKPOINT_CURRENT",
+          "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [
+            "ENFORCEMENT/execution_checkpoint.py"
+          ],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+                "ENFORCEMENT/execution_checkpoint.py"
+              ]
+            },
+            "CODED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "ENFORCEMENT/execution_checkpoint.py"
+              ]
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        },
+        {
+          "id": "HANDOFF_RESUME",
+          "owner": "MASTER/HANDOFF_PROTOCOL.md",
+          "owner_state": "MAPPED",
+          "implementation_or_evidence_refs": [],
+          "claims": {
+            "DOCUMENTED": {
+              "state": "EVIDENCED",
+              "evidence": [
+                "MASTER/HANDOFF_PROTOCOL.md"
+              ]
+            },
+            "CODED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "CI_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "RUNTIME_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEVICE_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            },
+            "DEPLOYED": {
+              "state": "HOLD",
+              "evidence": []
+            },
+            "PRODUCTION_VERIFIED": {
+              "state": "UNVERIFIED",
+              "evidence": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "claim_dimensions": [
+    "DOCUMENTED",
+    "CODED",
+    "CI_VERIFIED",
+    "RUNTIME_VERIFIED",
+    "DEVICE_VERIFIED",
+    "DEPLOYED",
+    "PRODUCTION_VERIFIED"
+  ]
+}

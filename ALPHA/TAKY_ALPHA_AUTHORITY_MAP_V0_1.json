@@ -1,0 +1,218 @@
+{
+  "schema": "TAKY_ALPHA_AUTHORITY_MAP_V0_1",
+  "status": "LOCAL_CANONICAL_ORCHESTRATION",
+  "date": "2026-10-04",
+  "revised": "2026-10-04.system-wide-remediation",
+  "canonical_rule_registry": {
+    "authority": "GITHUB_MAIN",
+    "path": "MASTER/RULE_REGISTRY.json",
+    "git_blob_sha1": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+    "rule_count": 21,
+    "includes": [
+      "TKY-CHECKPOINT-001"
+    ],
+    "resolution_source": "TAKY authority resolution recorded in ALPHA_REVIEW/CODEX_SYSTEM_ALPHA_REMEDIATION_TASK_20261004.md",
+    "worktree_equivalence": "PENDING_DETERMINISTIC_VALIDATION__alpha_lane_boundary_validator computes git blob sha1 of worktree MASTER/RULE_REGISTRY.json",
+    "post_freeze_candidate_registry": {
+      "path": "D:/Git PWA/TAKY/MASTER/RULE_REGISTRY.json",
+      "rule_count_observed_2026_10_04": 25,
+      "adds": [
+        "TKY-CONNECTION-001",
+        "TKY-SAVEY-001",
+        "TKY-WORKSTATION-001",
+        "TKY-ARCHIPIPE-001",
+        "TKY-AICOLLAB-001"
+      ],
+      "missing_vs_canonical": [
+        "TKY-CHECKPOINT-001"
+      ],
+      "role": "POST_FREEZE_CANDIDATE_LANE_EVIDENCE_ONLY",
+      "may_replace_canonical": false
+    }
+  },
+  "input": {
+    "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+    "canonical_main_baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "source_heads": {
+      "TAKY": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+      "Ready-Set": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
+      "Hide-Seek": "5da6594510cc89341054aafef66d5f4ea47a0210",
+      "Snap-Pop": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
+      "TAKY-MOBILE": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+      "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
+    },
+    "related_repo_heads": {
+      "TAKY-WORK-OS": "c82a99bd7fbd7ab979907d038e8f948d3792de90",
+      "SAVEY": "5a196080b8f8ce50d188b0181d9bec5e5477a265"
+    }
+  },
+  "semantic_owners": [
+    {
+      "namespace": "system",
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "namespace": "learning_engine",
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "current": "CURRENT/LEARNING_ENGINE_DATA_READINESS_CURRENT.json",
+      "change_ledger": "CURRENT/LEARNING_ENGINE_CHANGE_LEDGER_CURRENT.json",
+      "verification_checkpoint": "CURRENT/LEARNING_ENGINE_VERIFICATION_CURRENT_2026-09-25.md"
+    },
+    {
+      "namespace": "learning_family",
+      "owner": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+    },
+    {
+      "namespace": "explorer_crew",
+      "owner": "OS/EXPLORATION_CREW_CANONICAL.md"
+    },
+    {
+      "namespace": "ready_set",
+      "owner": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md"
+    },
+    {
+      "namespace": "mobile_registry",
+      "owner": "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+    },
+    {
+      "namespace": "design_ui_assets",
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md"
+    },
+    {
+      "namespace": "learning_data",
+      "owner": "OS/LEARNING_ENGINE_CORE.md",
+      "current": "CURRENT/DATA/DATA_INDEX_SEARCH_PROJECTION.json"
+    }
+  ],
+  "shared_contracts": [
+    {
+      "id": "sync",
+      "path": "TAKY_SYNC_CONTRACT_V1.md"
+    },
+    {
+      "id": "growth_intelligence",
+      "path": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md"
+    },
+    {
+      "id": "work_os",
+      "path": "OS/WORK_OS.md"
+    },
+    {
+      "id": "architecture_work_os",
+      "path": "DOMAIN/ARCHITECTURE_WORK_OS.md"
+    },
+    {
+      "id": "architecture_growth",
+      "path": "DOMAIN/ARCHITECTURE_GROWTH_MAP.md"
+    },
+    {
+      "id": "character_asset_behavior",
+      "path": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md"
+    },
+    {
+      "id": "shared_technical_capability",
+      "path": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json"
+    },
+    {
+      "id": "drive_c2s_canonical_storage",
+      "path": "OS/DRIVE_C2S_DIRECT.md"
+    },
+    {
+      "id": "drive_storage_map",
+      "path": "OS/DRIVE_STORAGE_MAP.json"
+    },
+    {
+      "id": "character_relationship",
+      "path": "OS/GUIDE_CHARACTER_RELATIONSHIP.md"
+    },
+    {
+      "id": "core6_first_encounter",
+      "path": "PROJECTS/GUIDE_CORE6_CHARACTER.md"
+    },
+    {
+      "id": "family_learning",
+      "path": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md"
+    },
+    {
+      "id": "family_private_character",
+      "path": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md"
+    },
+    {
+      "id": "auth_runtime_candidate",
+      "path": "SHARED/runtime/taky-google-account-auth-v1.js",
+      "authority_class": "IMPLEMENTATION_EVIDENCE_ONLY"
+    },
+    {
+      "id": "family_session_runtime_candidate",
+      "path": "LEARNING/transport/family-session-http-endpoint.js",
+      "authority_class": "IMPLEMENTATION_EVIDENCE_ONLY"
+    }
+  ],
+  "shared_contract_notes": [
+    "sync: commit e7ca5c7 'shared sync conflict contract v1' is TAKY_SYNC_CONTRACT_V1.md; there is no separate conflict-contract owner.",
+    "shared_contracts are referenced contracts, not additional semantic_owners namespaces; semantic_owners must equal MASTER/MASTER_FILE_REGISTRY.json exactly (V1)."
+  ],
+  "engine_owner_status": [
+    {
+      "node": "PLANNER",
+      "status": "OWNER_RESOLVED_VIA_PARENT_OS",
+      "owner": "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "function_contract_ref": "PROJECTS/READY_WHOLE_IMPLEMENTATION_CONTRACT.md#Planner / MAIN",
+      "dedicated_owner_document": "OPEN_OWNER_GAP"
+    },
+    {
+      "node": "BADGE",
+      "status": "OPEN_OWNER_GAP",
+      "owner": null,
+      "evidence_refs_not_owner": [
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json",
+        "BADGE/BADGE_60_PLUS_HISTORY_20_STORY_SYSTEM_2026-09-26.md"
+      ],
+      "resolution": "Human must approve a canonical Badge owner; Alpha does not invent one."
+    },
+    {
+      "node": "SAVEY",
+      "status": "OPEN_OWNER_GAP",
+      "owner": null,
+      "candidate_owner_ref": "D:/Git PWA/TAKY:MASTER/RULE_REGISTRY.json#TKY-SAVEY-001",
+      "candidate_role": "POST_FREEZE_CANDIDATE_NOT_AUTHORITY",
+      "resolution": "Canonical registration requires promotion of the candidate rule to GitHub main plus human approval."
+    }
+  ],
+  "lanes": [
+    {
+      "id": "LOCAL_INFRA_ALPHA",
+      "path": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json",
+      "authority_transfer": false
+    }
+  ],
+  "post_freeze_delta": "ALPHA/TAKY_ALPHA_POST_FREEZE_DELTA_V0_1.json",
+  "authority_rules": [
+    "CURRENT_IS_RESUME_POINTER_NOT_OWNER",
+    "HANDOFF_IS_RECOVERY_POINTER_NOT_AUTHORITY",
+    "LATEST_FILENAME_DOES_NOT_CREATE_AUTHORITY",
+    "CANDIDATE_OR_PR_DOES_NOT_TRANSFER_AUTHORITY",
+    "LIVE_HEAD_CLAIMS_REQUIRE_REQUERY",
+    "CODED_NE_CI_VERIFIED_NE_RUNTIME_VERIFIED_NE_DEVICE_VERIFIED_NE_DEPLOYED",
+    "CURRENT_OR_HISTORY_PATH_IS_NEVER_A_SEMANTIC_OWNER",
+    "OPEN_OWNER_GAP_IS_EXPLICIT_AND_NOT_SILENTLY_FILLED",
+    "CANONICAL_RULE_REGISTRY_IS_GITHUB_MAIN_NOT_LOCAL_CANDIDATE",
+    "LANE_COMPLETION_DOES_NOT_IMPLY_SYSTEM_COMPLETION",
+    "POST_FREEZE_DELTA_DOES_NOT_OVERRIDE_FROZEN_INPUT",
+    "LOCAL_CANONICAL_ALPHA_ORCHESTRATION_DOES_NOT_OVERRIDE_DOMAIN_SEMANTIC_OWNERS",
+    "A10_LOCAL_PROMOTION_APPROVED__MERGE_AND_DEPLOYMENT_REMAIN_SEPARATE_HUMAN_GATES"
+  ],
+  "canonical_rule_registry_live_read": {
+    "blob_sha": "b4ca9b367f08be37f358bad339900b5ea005fb56",
+    "rule_count": 21,
+    "includes_checkpoint_rule": true
+  },
+  "promotion": {
+    "state": "A10_PASS_LOCAL_CANONICAL",
+    "receipt": "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json",
+    "semantic_owner_transfer": false,
+    "github_main_mutated": false,
+    "main_refresh_evidence": "ALPHA_REVIEW/ALPHA_MAIN_REFRESH_EVIDENCE_20261004.json"
+  }
+}

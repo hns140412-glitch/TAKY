@@ -1,0 +1,36 @@
+{
+  "schema": "TAKY_ALPHA_INPUT_LOCK_V1",
+  "date": "2026-10-03",
+  "status": "LOCKED_TO_FROZEN_BETA",
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "frozen_beta_lock_sha256": "c1a7fce55036381c83ed74bd98a3d7576c9287a04432711f879e2d0f40fdfba6",
+  "canonical_main_baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "seed_verification": {
+    "tracked_patch_sha256": "f805178b8a10cf0ab2f979417faf5a3ee26d6dcf734fac302af2e0a305d04421",
+    "index_tree": "4f1d432aa91f7272b12f1e2bb51fc95b0dbfc377",
+    "source_untracked_sha256": {
+      "BADGE/windows-directory-fsync-regression.test.js": "5425b430190339cd70db8be3ae18fc5935dedc9ba4f72e3a6eb110c9d64b4173",
+      "ENFORCEMENT/evidence_history_boundary_test.py": "129065b9f5e0046f721130867eff8293be6fab073756c30ffd2b8c09ad7da060",
+      "ENFORCEMENT/execution_checkpoint_identity_test.py": "f94078c5674f898645e56f9ee2a23397e2908efeac8d2f9604133e3ee159b0f1",
+      "ENFORCEMENT/fixtures/evidence_seed.bin": "d8e0e35dd505bed4ff6cc4fdfe04ba698b840ce2c39aa9c0d75ccad18d11f5c1"
+    },
+    "checks": {
+      "tracked_patch_match": true,
+      "index_tree_match": true,
+      "untracked_hashes_match": true,
+      "head_match": true
+    }
+  },
+  "rule": "Alpha may transform/restructure only from this Frozen Beta seed; later Beta mutation is forbidden.",
+  "freeze_approval_evidence": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_APPROVAL_20261003.json",
+  "freeze_approval_sha256": "ad3534562286e59ef082c7bbd9e38a48065dda681d2ba9fc08eca907ec614b6e",
+  "freeze_approval_status": "APPROVED",
+  "frozen_path_remap": {
+    "BETA_REVIEW/BETA_FREEZE_MANIFEST_20261003.json": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json",
+    "BETA_REVIEW/BETA_FREEZE_READINESS_20261003.json": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_READINESS_20261003.json",
+    "BETA_REVIEW/BETA_FINAL_ADVERSARIAL_CLOSURE_20261003.json": "ALPHA_INPUT/FROZEN_BETA/BETA_FINAL_ADVERSARIAL_CLOSURE_20261003.json",
+    "TAKY_BETA_FROZEN_20261003.lock.json": "ALPHA_INPUT/FROZEN_BETA/TAKY_BETA_FROZEN_20261003.lock.json",
+    "TAKY_BETA_FREEZE_APPROVAL_20261003.json": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_APPROVAL_20261003.json"
+  },
+  "path_remap_rule": "Frozen artifact contents remain immutable; Alpha resolves their original Beta-local pointers only through this explicit remap."
+}

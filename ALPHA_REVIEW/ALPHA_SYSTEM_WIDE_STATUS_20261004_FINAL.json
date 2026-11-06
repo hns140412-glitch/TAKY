@@ -1,0 +1,54 @@
+{
+  "schema": "TAKY_SYSTEM_ALPHA_CURRENT_V1",
+  "date": "2026-10-04",
+  "status": "SYSTEM_ALPHA_LOCAL_CANONICAL_ORCHESTRATION",
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "a0_a7": "PASS",
+  "a8": "PASS_CODEX_EMBEDDED_AUDIT",
+  "a9": "PASS_7_OF_7_ADVERSARIAL_PROBES",
+  "a10": "PASS_LOCAL_CANONICAL_HUMAN_APPROVED",
+  "focused_validation_refs": [
+    "ALPHA_REVIEW/ALPHA_READONLY_VALIDATION_20261004.json",
+    "ALPHA_REVIEW/ALPHA_COVERAGE_DEPTH_VALIDATION_20261004.json",
+    "ALPHA_REVIEW/ALPHA_PIPELINE_VALIDATION_20261004.json",
+    "ALPHA_REVIEW/ALPHA_LANE_BOUNDARY_VALIDATION_20261004.json"
+  ],
+  "regression": {
+    "frozen_beta": "132/132 PASS",
+    "git_diff_check": "PASS"
+  },
+  "independent_audit": "ALPHA_REVIEW/CODEX_A8_EMBEDDED_RESULT_20261004.txt",
+  "adversarial": "ALPHA_REVIEW/ALPHA_ADVERSARIAL_VALIDATION_20261004.json",
+  "open_plan": "ALPHA/TAKY_ALPHA_OPEN_CLOSURE_PLAN_V0_1.json",
+  "explicit_owner_gaps": [
+    "PLANNER",
+    "BADGE",
+    "SAVEY"
+  ],
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  },
+  "claim_boundary": "LOCAL_CANONICAL_ORCHESTRATION_NE_GITHUB_MAIN_PROMOTED_NE_PRODUCT_RUNTIME_COMPLETE_NE_DEPLOYED",
+  "next": "DESIGN_TO_UI_APP_APPLICATION__THEN_DUBI_ASSET_CONSUMPTION_GATE",
+  "promotion_receipt": "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json",
+  "github_main_refresh": "IDENTICAL_TO_FROZEN_BASELINE_E7CA5C7",
+  "semantic_owner_transfer": false,
+  "github_main_mutated": false,
+  "product_open_reconciliation": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+  "closed_post_freeze_inherited": [
+    "EXPLORER_CREW_CENTRAL_RUNTIME",
+    "SNAP_LEGACY_BROWSER_CLOSURE"
+  ],
+  "verified_hold_no_reimplementation": [
+    "HIDE_CREW_V2",
+    "SNAP_CREW_V2"
+  ],
+  "badge_runtime": "59/60 PASS__BDG-DRAFT-054_LIVE_TRANSPORT_HOLD__ACTIVE0",
+  "design_to_ui": "PIPELINE_CONTRACT_PASS_DRAFT__APP_APPLICATION_OPEN__MAIN_HOLD",
+  "asset_pointer": "CONTRACT_PASS_DRAFT__DUBI_RUNTIME_CONSUMPTION_OPEN__MAIN_HOLD",
+  "family_profile_radio_ux": "HUMAN_DECISION_OPEN_TAP_VS_HOLD_TO_TALK"
+}

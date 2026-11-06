@@ -1,0 +1,443 @@
+{
+  "schema": "TAKY_ALPHA_CARRYOVER_OPEN_V0_1",
+  "status": "DRAFT_TRACKING_ONLY",
+  "date": "2026-10-04",
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "source_manifest": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json",
+  "classes": [
+    {
+      "id": "EXPLORER_CREW_CENTRAL_RUNTIME",
+      "state": "DRAFT_CANDIDATE",
+      "promotion": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "source_scope_id": "exploration_crew_central_runtime",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "HIDE_CREW_V2",
+      "state": "OPEN",
+      "promotion": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+      "source_scope_id": "exploration_crew_hide_consumer_v2",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "SNAP_CREW_V2",
+      "state": "OPEN",
+      "promotion": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+      "source_scope_id": "exploration_crew_snap_consumer_v2",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "BADGE_CENTRAL",
+      "state": "DRAFT_CANDIDATE",
+      "producer_qa": "47 PASS / 13 OPEN / 0 active",
+      "promotion": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "source_scope_id": "badge_central",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "DESIGN_TO_UI",
+      "state": "DRAFT_CANDIDATE",
+      "promotion": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "source_scope_id": "design_to_ui",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "ASSET_POINTER_CONTRACT",
+      "state": "DRAFT_CANDIDATE",
+      "promotion": "FAST_FORWARD_CAPABLE_BUT_HOLD_NO_MERGE",
+      "source_scope_id": "assets_approved_results_pointer_contract",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "FAMILY_PROFILE_RADIO_UX",
+      "state": "OPEN",
+      "source_scope_id": "recent_family_profile_radio_ux",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "SNAP_LEGACY_BROWSER_CLOSURE",
+      "state": "UNVERIFIED",
+      "source_scope_id": "snap_legacy_browser_closure",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "HOSTED_RUNTIME_INTERCEPTION",
+      "state": "UNVERIFIED_CONTAINED",
+      "source_scope_id": "hosted_runtime_interception",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json",
+      "also_reported_by": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json#lane_open_imported[LOCAL_LANE_HOSTED_INTERCEPTION]"
+    },
+    {
+      "id": "DEPLOYMENT",
+      "state": "HOLD",
+      "source_scope_id": "deployment_netlify",
+      "source_current": "CURRENT/SYSTEM_WIDE_REVIEW.json"
+    },
+    {
+      "id": "SAVEY_LIVE_GOOGLE_BINDING_AND_DATA_POPULATION",
+      "state": "OPEN_SEPARATE_FROM_CODE_VALIDATION",
+      "source_scope_id": null,
+      "source": "ALPHA_INPUT/FROZEN_BETA/BETA_FREEZE_MANIFEST_20261003.json#carry_over_open.savey"
+    },
+    {
+      "id": "SHARED_AUTH_EXTRACTION_HOLD",
+      "state": "HOLD",
+      "origin": "REPOSITORY_HOLD",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#capability_classification[0]"
+    },
+    {
+      "id": "WORK_LEARNING_IDENTITY_FEDERATION_HOLD",
+      "state": "HOLD",
+      "origin": "REPOSITORY_HOLD",
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#review_findings[5] (LAYER-GAP-006)"
+    },
+    {
+      "id": "BADGE_OWNER_GAP",
+      "state": "OPEN_OWNER_GAP",
+      "origin": "ALPHA_A1_AUTHORITY_COMPILE",
+      "source": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json#engine_owner_status[BADGE]"
+    },
+    {
+      "id": "SAVEY_OWNER_GAP",
+      "state": "OPEN_OWNER_GAP",
+      "origin": "ALPHA_A1_AUTHORITY_COMPILE",
+      "source": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json#engine_owner_status[SAVEY]"
+    },
+    {
+      "id": "PLANNER_DEDICATED_OWNER_DOCUMENT_GAP",
+      "state": "OPEN_OWNER_GAP",
+      "origin": "ALPHA_A1_AUTHORITY_COMPILE",
+      "source": "ALPHA/TAKY_ALPHA_AUTHORITY_MAP_V0_1.json#engine_owner_status[PLANNER]",
+      "note": "Semantic owner resolves to OS/GUIDE_FAMILY_LEARNING_OS.md; only a dedicated Planner owner document is missing."
+    },
+    {
+      "id": "RULE_REGISTRY_COVERAGE_GAPS",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "origin": "FROZEN_BETA_OWNER_SET",
+      "source": "ALPHA/TAKY_ALPHA_CARRYOVER_OPEN_V0_1.json#active_owner_rule_registry_coverage"
+    },
+    {
+      "id": "POST_FREEZE_CANDIDATE_RULES",
+      "state": "CANDIDATE_NOT_CANONICAL",
+      "origin": "LOCAL_INFRA_LANE",
+      "source": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json#rule_registry_relation",
+      "rules": [
+        "TKY-CONNECTION-001",
+        "TKY-SAVEY-001",
+        "TKY-WORKSTATION-001",
+        "TKY-ARCHIPIPE-001",
+        "TKY-AICOLLAB-001"
+      ]
+    },
+    {
+      "id": "LOCAL_LANE_HOST_AUTHENTICATED_IDENTITY",
+      "state": "OPEN_EXTERNAL_CAPABILITY_BOUNDARY",
+      "origin": "LOCAL_INFRA_LANE",
+      "source": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json#lane_open_imported"
+    },
+    {
+      "id": "LOCAL_LANE_REPRESENTATIVE_TASKS",
+      "state": "OPEN_OPTIONAL_FUTURE",
+      "origin": "LOCAL_INFRA_LANE",
+      "source": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json#lane_open_imported",
+      "note": "CAD / Excel / HWP representative-task verification"
+    },
+    {
+      "id": "LOCAL_INFRA_HOST_IDENTITY",
+      "state": "OPEN_EXTERNAL_BOUNDARY",
+      "source": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json"
+    },
+    {
+      "id": "LOCAL_INFRA_CAD_EXCEL_HWP_TASKS",
+      "state": "OPEN_OPTIONAL_REPRESENTATIVE_TASK",
+      "source": "ALPHA/TAKY_ALPHA_LANE_IMPORT_LOCAL_INFRA_V0_1.json"
+    },
+    {
+      "id": "ALPHA_INDEPENDENT_CROSS_VALIDATION",
+      "state": "OPEN_A8",
+      "source": "ALPHA/TAKY_ALPHA_VALIDATION_CONTRACT_V0_1.json"
+    },
+    {
+      "id": "ALPHA_HUMAN_PROMOTION",
+      "state": "CLOSED_A10_LOCAL_CANONICAL_PASS",
+      "source": "ALPHA/TAKY_ALPHA_VALIDATION_CONTRACT_V0_1.json",
+      "evidence": "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json"
+    }
+  ],
+  "classes_origin_rule": "Classes without an 'origin' field come from the Frozen Beta manifest; classes with an 'origin' field were added on 2026-10-04 and do not alter exact_carry_over_open or exact_contained_open.",
+  "policy": [
+    "OPEN_IS_PRESERVED_NOT_SILENTLY_CLOSED",
+    "PRODUCT_GAP_DOES_NOT_EQUAL_ALPHA_GOVERNANCE_BLOCKER",
+    "PROMOTION_REQUIRES_LATEST_MAIN_REAPPLICATION_WHEN_DIVERGED",
+    "DEPLOYMENT_REMAINS_HOLD_UNLESS_SEPARATELY_AUTHORIZED"
+  ],
+  "exact_carry_over_open": {
+    "explorer_crew": {
+      "central_runtime": {
+        "id": "exploration_crew_central_runtime",
+        "state": "DRAFT_CANDIDATE",
+        "source_repo": "TAKY",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "pr": 191,
+        "pr_state": "DRAFT/OPEN",
+        "head_ref": "d2eecf35ebb1f46de7b18589442b07d3e11919c6",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "main_authority": false,
+        "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 154,
+          "behind": 96,
+          "status": "diverged"
+        }
+      },
+      "hide_consumer": {
+        "id": "exploration_crew_hide_consumer_v2",
+        "state": "OPEN",
+        "source_repo": "Hide-Seek",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "next": "Promotion/reapplication remains OPEN.",
+        "pr": 28,
+        "head_ref": "c876a8167be28a2f30a69fd0a0f38f74987abb3c",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 1,
+          "behind": 2,
+          "status": "diverged"
+        }
+      },
+      "snap_consumer": {
+        "id": "exploration_crew_snap_consumer_v2",
+        "state": "OPEN",
+        "source_repo": "Snap-Pop",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "next": "Promotion/reapplication remains OPEN.",
+        "pr": 18,
+        "head_ref": "bceb6cc9b336447002a4c189fa1560efc3c4ae5e",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 1,
+          "behind": 2,
+          "status": "diverged"
+        }
+      }
+    },
+    "badges": {
+      "id": "badge_central",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "pr": 196,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "52498dbc09a8db1f50cd7d5d3fe437c5e0c34a69",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "producer_snapshot": {
+        "source_producers": 15,
+        "active_producers": 0,
+        "total": 60
+      },
+      "live_hosted_e2e": "OPEN",
+      "evidence_paths": [
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
+      ],
+      "evidence_boundary": "Historical recovery evidence does not override the supplied audit or promote PR #196.",
+      "candidate_refs": {
+        "TAKY-MOBILE": {
+          "pr": 2,
+          "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+          "state": "MERGED/CLOSED",
+          "merged": true,
+          "main_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+          "note": "Central badge transport PR merged; later main commits extend badge/auth transport."
+        },
+        "Ready-Set": {
+          "pr": 143,
+          "head": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 142,
+            "behind": 1,
+            "status": "diverged"
+          }
+        },
+        "Hide-Seek": {
+          "pr": 29,
+          "head": "0d8af51e8b47f561659135a18ed5c4a0e1304419",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 32,
+            "behind": 1,
+            "status": "diverged"
+          }
+        },
+        "Snap-Pop": {
+          "pr": 20,
+          "head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 1237,
+            "behind": 18,
+            "status": "diverged"
+          },
+          "note": "Very large divergence; do not promote directly."
+        }
+      },
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 186,
+        "behind": 84,
+        "status": "diverged"
+      },
+      "producer_qa_latest": {
+        "catalog": 60,
+        "pass": 47,
+        "open": 13,
+        "active": 0
+      }
+    },
+    "design_to_ui": {
+      "id": "design_to_ui",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "design_ui_assets"
+      ],
+      "pr": 194,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "9ab5fc579ada0547d5bb7cc066a157c4912bc0f1",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "boundary": "Contract code may remain candidate; PR #194 is not main canonical.",
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 83,
+        "behind": 94,
+        "status": "diverged"
+      }
+    },
+    "asset_pointer_contract": {
+      "id": "assets_approved_results_pointer_contract",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY-ASSETS",
+      "pr": 4,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "319968689148ad898932ecd97b4f509bb30fd977",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "promotion_state": "FAST_FORWARD_CAPABLE_BUT_HOLD_NO_MERGE",
+      "main_compare": {
+        "ahead": 21,
+        "behind": 0,
+        "status": "ahead"
+      }
+    },
+    "family_profile_radio_ux": {
+      "id": "recent_family_profile_radio_ux",
+      "state": "OPEN",
+      "requirements": [
+        "family profile / family expansion",
+        "control-room character",
+        "radio / walkie-talkie input",
+        "letter / note",
+        "sealing wax",
+        "handwritten-photo correction",
+        "voice input"
+      ],
+      "canonical_reflection": "OPEN",
+      "implementation_claim": false,
+      "exact_radio_gesture": "OPEN__TAP_VS_HOLD_TO_TALK_UNRESOLVED",
+      "boundary": "Requirement decisions are preserved as OPEN; existing family auth/session or existing radio assets do not prove this newer UX expansion is canonically reflected or implemented."
+    },
+    "snap_legacy_browser_closure": {
+      "id": "snap_legacy_browser_closure",
+      "state": "UNVERIFIED",
+      "source_repo": "Snap-Pop",
+      "evidence": "Unresolved at audit cutoff; no PASS is inferred."
+    },
+    "savey": {
+      "main": "5a196080b8f8ce50d188b0181d9bec5e5477a265",
+      "tests": "104/104 PASS",
+      "typecheck": "PASS",
+      "build": "PASS",
+      "live_google_binding": "OPEN/SEPARATE_FROM_EXACT_MAIN_CODE_VALIDATION"
+    }
+  },
+  "exact_contained_open": [
+    {
+      "id": "HOSTED_RUNTIME_INTERCEPTION",
+      "state": "UNVERIFIED_CONTAINED"
+    },
+    {
+      "id": "DEPLOYMENT",
+      "state": "HOLD"
+    }
+  ],
+  "repository_constraints_source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json",
+  "repository_hold_constraints": [
+    {
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#layers.SHARED_TECHNICAL_CAPABILITY",
+      "state": "REFERENCE_IMPLEMENTATIONS_ACTIVE__SELECTIVE_CONSUMER_MIGRATION_VERIFIED__AUTH_HOLD",
+      "finding": "shared technical capability auth extraction remains held; mechanism sharing does not transfer domain identity/authority"
+    },
+    {
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#capability_classification[0]",
+      "item": "authentication/session transport",
+      "state": "HOLD_BEFORE_EXTRACTION",
+      "boundary": "Mechanism sharing remains deferred until a real multi-consumer case proves reuse without Work/Learning identity or authority leakage.",
+      "owner": null
+    },
+    {
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#capability_classification[3]",
+      "item": "same-human link across Work and Learning",
+      "state": "HOLD_UNTIL_REAL_USE_CASE",
+      "boundary": "must be scoped, consent/authority aware, revocable where applicable; never implicit",
+      "owner": "NO_ACTIVE_CONTRACT"
+    },
+    {
+      "source": "MASTER/SYSTEM_LAYER_OWNERSHIP_MAP.json#review_findings[5]",
+      "gap_id": "LAYER-GAP-006",
+      "priority": "P1",
+      "state": "HOLD",
+      "finding": "No active cross-domain Work↔Learning identity federation contract exists.",
+      "direction": "remain unimplemented until a real use case requires cross-domain linkage; default is isolation"
+    }
+  ],
+  "coverage_claim": "FROZEN_MANIFEST_OPEN_FULLY_PRESERVED__REPOSITORY_HOLD_IMPORTED_SEPARATELY__LANE_AND_OWNER_GAPS_ADDED_2026_10_04",
+  "closure_plan": "ALPHA/TAKY_ALPHA_OPEN_CLOSURE_PLAN_V0_1.json",
+  "active_owner_rule_registry_coverage": [
+    {
+      "path": "MASTER/CONVERSATION_CONTEXT_LEDGER_PROTOCOL.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    },
+    {
+      "path": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "state": "COVERED_BY_SEMANTIC_OWNER_REGISTRY",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_OWNER_POINTER__NO_RULE_ID_INVENTED"
+    },
+    {
+      "path": "MASTER/REVISION_GOVERNANCE.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    },
+    {
+      "path": "MASTER/TRACEABILITY_PROTOCOL.md",
+      "state": "OPEN_RULE_REGISTRY_COVERAGE_GAP",
+      "rule_id": null,
+      "alpha_disposition": "PRESERVE_AS_OPEN__DO_NOT_INVENT_RULE_ID"
+    }
+  ]
+}

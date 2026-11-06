@@ -1,0 +1,72 @@
+{
+  "schema": "TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_V1",
+  "date": "2026-10-04",
+  "promoted_at_local": "2026-10-04T19:49:22.951199+09:00",
+  "status": "LOCAL_CANONICAL_ORCHESTRATION_PROMOTED",
+  "human_approval": {
+    "approved": true,
+    "approval_scope": "LOCAL_CANONICAL_ALPHA_ORCHESTRATION_ONLY",
+    "source": "CURRENT_CHAT_EXPLICIT_GO_A10",
+    "does_not_authorize": [
+      "PUSH",
+      "MERGE",
+      "DEPLOY",
+      "NETLIFY",
+      "PAID_API"
+    ]
+  },
+  "main_refresh": {
+    "schema": "TAKY_ALPHA_MAIN_REFRESH_EVIDENCE_V1",
+    "date": "2026-10-04",
+    "repository": "hns140412-glitch/TAKY",
+    "baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "compared_head": "main",
+    "compare_status": "identical",
+    "ahead_by": 0,
+    "behind_by": 0,
+    "merge_base": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "conclusion": "LATEST_GITHUB_MAIN_EQUALS_FROZEN_BASELINE__NO_REBASE_REQUIRED_FOR_LOCAL_A10_REVIEW",
+    "mutation": false
+  },
+  "frozen_beta_snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "evidence_sha256": {
+    "ALPHA_REVIEW/ALPHA_READONLY_VALIDATION_20261004.json": "ebb143fb2a37d18e8180ddababc86fb5025f9517b163f7c469c6d2ba01102c45",
+    "ALPHA_REVIEW/ALPHA_COVERAGE_DEPTH_VALIDATION_20261004.json": "736adf085d9a9193127f45cb5f77b4a042110247e74dce107b50eb7a883d6a05",
+    "ALPHA_REVIEW/ALPHA_PIPELINE_VALIDATION_20261004.json": "d16da672c6d3cafff2c0c4b63c47073d687037618141f219d0bc52de3bb30efa",
+    "ALPHA_REVIEW/ALPHA_LANE_BOUNDARY_VALIDATION_20261004.json": "85eaddf1b5aab4102f0666a5c29716b87889b6e3c64d15abf7c4687caed48b24",
+    "ALPHA_REVIEW/ALPHA_ADVERSARIAL_VALIDATION_20261004.json": "2f70f3c1fec81a82c88e551d554595c60b49a115c5c2122fc131e5a82066ef54",
+    "ALPHA_REVIEW/CODEX_A8_EMBEDDED_RESULT_20261004.txt": "47ea09b290764b403835ba858c0b4b3342cd30e3ba357d8d34a0502d01577d3d",
+    "ALPHA_REVIEW/ALPHA_MAIN_REFRESH_EVIDENCE_20261004.json": "0508cfa4a178619cbadbcca1b66333a2994ba496ecae7a88baac3f36cbc99f9c",
+    "ENFORCEMENT/alpha_validation_2026_10_03/beta_full_suite_v2.summary.json": "e5b55331351e7fdf25fd2b4cadfabbc84739c0ccfaf00090d764f4a387e65a1c"
+  },
+  "scope": {
+    "canonicalized": [
+      "Alpha orchestration graph",
+      "app/engine structural coverage model",
+      "pipeline structural coverage model",
+      "runtime contract structural model",
+      "claim-dimension boundaries",
+      "OPEN/HOLD classification and routing"
+    ],
+    "not_canonicalized_or_not_closed": [
+      "Planner dedicated owner document",
+      "Badge canonical owner",
+      "SAVEY canonical owner",
+      "product runtime gaps",
+      "device verification",
+      "deployment",
+      "production verification",
+      "post-freeze local candidate registry rules"
+    ],
+    "semantic_owner_transfer": false,
+    "existing_domain_semantic_owners_preserved": true
+  },
+  "claim_boundary": "LOCAL_CANONICAL_ORCHESTRATION_NE_GITHUB_MAIN_MUTATION_NE_PRODUCT_RUNTIME_COMPLETE_NE_DEPLOYED",
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  }
+}

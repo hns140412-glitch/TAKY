@@ -1,0 +1,38 @@
+{
+  "schema": "TAKY_ALPHA_REWRITE_CORRECTION_V1",
+  "date": "2026-10-04",
+  "status": "ALPHA_REWRITE_REQUIRED_IN_PROGRESS",
+  "correction": "Previous A10 local-canonical promotion was premature because V0.1 remained a structural draft/coverage shell rather than the required newly rewritten whole-system Alpha.",
+  "supersedes_claims": [
+    "SYSTEM_ALPHA_LOCAL_CANONICAL_ORCHESTRATION",
+    "A10_PASS_LOCAL_CANONICAL_HUMAN_APPROVED"
+  ],
+  "preserved_evidence": [
+    "Frozen Beta 132/132 regression PASS",
+    "A7 focused validators PASS",
+    "A8 independent audit PASS as structural evidence only",
+    "A9 adversarial probes 7/7 PASS as structural evidence only"
+  ],
+  "rewrite_basis": [
+    "Frozen Beta exact evidence",
+    "account-wide relevant conversation decisions/corrections",
+    "current GitHub main and validated candidate evidence",
+    "Drive/Library canonical and CURRENT evidence",
+    "Ready & Set / Hide & Seek / Snap & Pop / TAKY-MOBILE",
+    "Learning Engine / Planner / Explorer Crew / Badge / SAVEY",
+    "data-mining-index-learning-grow-planner-execution-evidence-carryover pipeline",
+    "Work OS / ArchiGrow",
+    "Design→UI→Asset execution pipeline",
+    "auth/sync/offline/private-family/runtime boundaries",
+    "C2S/CURRENT/HANDOFF/enforcement/executor lifecycle",
+    "development failures, conflict causes, attack findings and defensive rules"
+  ],
+  "required_output": "NEW WHOLE-SYSTEM ALPHA MASTER WRITTEN FROM FROZEN BETA, NOT POINTER/COVERAGE-ONLY AND NOT STATUS-PROMOTED V0.1",
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  }
+}

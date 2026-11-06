@@ -1,0 +1,271 @@
+{
+  "schema": "TAKY_ALPHA_RUNTIME_CONTRACTS_V0_1",
+  "status": "DRAFT_STRUCTURE_PENDING_DETERMINISTIC_VALIDATION",
+  "date": "2026-10-04",
+  "contracts": [
+    {
+      "id": "SYNC_OFFLINE",
+      "authority": "TAKY_SYNC_CONTRACT_V1.md",
+      "implementation_refs": [],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "TAKY_SYNC_CONTRACT_V1.md"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "ACCOUNT_AUTH",
+      "authority": "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+      "implementation_refs": [
+        "SHARED/runtime/taky-account-auth-public-config-v1.js",
+        "SHARED/runtime/taky-google-account-auth-v1.js"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "MASTER/SHARED_TECHNICAL_CAPABILITY_REGISTRY.json",
+            "SHARED/runtime/taky-account-auth-public-config-v1.js",
+            "SHARED/runtime/taky-google-account-auth-v1.js"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "SHARED/runtime/taky-account-auth-public-config-v1.js",
+            "SHARED/runtime/taky-google-account-auth-v1.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "FAMILY_SESSION",
+      "authority": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "implementation_refs": [
+        "LEARNING/transport/family-session-http-endpoint.js",
+        "LEARNING/transport/family-character-profile-http-endpoint.js"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+            "LEARNING/transport/family-session-http-endpoint.js",
+            "LEARNING/transport/family-character-profile-http-endpoint.js"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "LEARNING/transport/family-session-http-endpoint.js",
+            "LEARNING/transport/family-character-profile-http-endpoint.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "PRIVATE_CHARACTER_BINARY",
+      "authority": "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "implementation_refs": [
+        "LEARNING/transport/private-character-object-store-adapter.js",
+        "LEARNING/transport/local-character-object-store.js"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+            "LEARNING/transport/private-character-object-store-adapter.js",
+            "LEARNING/transport/local-character-object-store.js"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "LEARNING/transport/private-character-object-store-adapter.js",
+            "LEARNING/transport/local-character-object-store.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "DRIVE_GOOGLE_CANONICAL_DATA",
+      "authority": "TAKY_SYNC_CONTRACT_V1.md",
+      "implementation_refs": [],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "TAKY_SYNC_CONTRACT_V1.md"
+          ]
+        },
+        "CODED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "LOCAL_HTTP_BRIDGE",
+      "authority": "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+      "implementation_refs": [
+        "LEARNING/transport/node-http-learning-bridge.js",
+        "LEARNING/transport/central-learning-production-host.js"
+      ],
+      "claims": {
+        "DOCUMENTED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "MASTER/LEARNING_APP_FAMILY_MASTER_REV_01.md",
+            "LEARNING/transport/node-http-learning-bridge.js",
+            "LEARNING/transport/central-learning-production-host.js"
+          ]
+        },
+        "CODED": {
+          "state": "EVIDENCED",
+          "evidence": [
+            "LEARNING/transport/node-http-learning-bridge.js",
+            "LEARNING/transport/central-learning-production-host.js"
+          ]
+        },
+        "CI_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "RUNTIME_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEVICE_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        },
+        "DEPLOYED": {
+          "state": "HOLD",
+          "evidence": []
+        },
+        "PRODUCTION_VERIFIED": {
+          "state": "UNVERIFIED",
+          "evidence": []
+        }
+      }
+    }
+  ],
+  "claim_rule": "CODE_EXISTS_NE_RUNTIME_VERIFIED_NE_DEVICE_VERIFIED_NE_PRODUCTION_VERIFIED",
+  "claim_dimensions": [
+    "DOCUMENTED",
+    "CODED",
+    "CI_VERIFIED",
+    "RUNTIME_VERIFIED",
+    "DEVICE_VERIFIED",
+    "DEPLOYED",
+    "PRODUCTION_VERIFIED"
+  ]
+}

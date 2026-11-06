@@ -1,0 +1,10 @@
+{
+  "schema": "TAKY_ALPHA_V1_INTEGRATED_CONTENT_VALIDATION_V1",
+  "date": "2026-10-04",
+  "status": "PASS",
+  "line_count": 781,
+  "section_count": 28,
+  "pointer_line_ratio": 0.0026,
+  "failure_count": 0,
+  "failures": []
+}

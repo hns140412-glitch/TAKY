@@ -144,6 +144,7 @@ jobs:
           python -m py_compile ENFORCEMENT/evidence_ref_validator.py
           python -m py_compile ENFORCEMENT/preflight_bridge.py
           python -m py_compile ENFORCEMENT/evidence_bridge_regression.py
+          python -m py_compile ENFORCEMENT/evidence_history_boundary_test.py
           python -m py_compile ENFORCEMENT/codex_task_contract_validator.py
           python -m py_compile ENFORCEMENT/conversation_coverage_validator.py
           python -m py_compile ENFORCEMENT/c2s_preflight_bridge.py
@@ -159,6 +160,7 @@ jobs:
           python -m py_compile ENFORCEMENT/behavioral_eval.py
           python -m py_compile ENFORCEMENT/trace_to_regression.py
           python -m py_compile ENFORCEMENT/execution_checkpoint.py
+          python -m py_compile ENFORCEMENT/execution_checkpoint_identity_test.py
           python -m py_compile ENFORCEMENT/local_drive_workspace.py
           python -m py_compile ENFORCEMENT/data_index_search.py
           python -m py_compile ENFORCEMENT/codex_task_contract_builder.py
@@ -409,6 +411,8 @@ jobs:
 
       - name: Atomic CURRENT checkpoint regression
         run: python ENFORCEMENT/execution_checkpoint_test.py
+      - name: Checkpoint identity binding regression
+        run: python ENFORCEMENT/execution_checkpoint_identity_test.py
 
       - name: Local Google Drive workspace regression
         run: python ENFORCEMENT/local_drive_workspace_test.py
@@ -673,6 +677,8 @@ jobs:
           echo "Expected runtime working-model failure observed"
       - name: Replay evidence integrity failures
         run: python ENFORCEMENT/evidence_bridge_regression.py
+      - name: Replay canonical history boundary regression
+        run: python ENFORCEMENT/evidence_history_boundary_test.py
       - name: Validate Codex task contract fixture
         run: python ENFORCEMENT/codex_task_contract_validator.py ENFORCEMENT/fixtures/codex_task_contract_pass.json
       - name: Validate self-contained handoff fixture

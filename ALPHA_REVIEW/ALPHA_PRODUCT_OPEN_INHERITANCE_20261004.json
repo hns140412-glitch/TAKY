@@ -1,0 +1,123 @@
+{
+  "schema": "TAKY_ALPHA_PRODUCT_OPEN_INHERITANCE_V1",
+  "date": "2026-10-04",
+  "status": "LATEST_POST_FREEZE_EVIDENCE_RECONCILED",
+  "explorer_crew": {
+    "central_runtime": {
+      "state": "CLOSED_PASS",
+      "evidence": [
+        "Library:TAKY_EXPLORER_CREW_INTEGRATED_RUNTIME_LATEST.md",
+        "Library:TAKY_EXPLORER_CREW_NEW_CHAT_START_LATEST.md",
+        "GitHub:TAKY PR#193 merged"
+      ],
+      "regression": [
+        "EXPLORER_CREW_INTEGRATED_RUNTIME_REGRESSION=PASS",
+        "CREW_INTEGRATED_COMMON_SHA=PASS",
+        "CANONICAL_RENDER_PLAN_DOM_CONSUMER_V1=PASS",
+        "ACTUAL_BROWSER_DOM_REGRESSION=5/5 PASS",
+        "LATEST_CANONICAL_CJS=28/28 PASS"
+      ],
+      "main_status": "TAKY PR#193 MERGED"
+    },
+    "hide_crew_v2": {
+      "implementation": "CLOSED_LOCAL_VERIFIED",
+      "browser_integration": "PASS",
+      "main_promotion": "HOLD",
+      "github_pr": "#28 OPEN DRAFT",
+      "rule": "DO_NOT_REIMPLEMENT_WHILE_MAIN_PROMOTION_HOLD"
+    },
+    "snap_crew_v2": {
+      "implementation": "CLOSED_LOCAL_VERIFIED",
+      "browser_integration": "PASS",
+      "main_promotion": "HOLD",
+      "github_pr": "#18 OPEN DRAFT",
+      "rule": "DO_NOT_REIMPLEMENT_WHILE_MAIN_PROMOTION_HOLD"
+    },
+    "asset_motion_hold": [
+      "composable production",
+      "motion release",
+      "ROOT",
+      "Netlify",
+      "image generation"
+    ]
+  },
+  "badge": {
+    "latest_pr196_head": "52498dbc09a8db1f50cd7d5d3fe437c5e0c34a69",
+    "source_producer_qa": "59/60 PASS",
+    "open_ids": [
+      "BDG-DRAFT-054"
+    ],
+    "active": "0/60",
+    "final_open_state": "PREDEPLOY_BINDING_PASS_TRUSTED_LIVE_E2E_OPEN",
+    "remaining": {
+      "deploy_central_badge_endpoint": false,
+      "real_hide_installation_public_key_registered": false,
+      "signed_live_e2e_to_matcher": false
+    },
+    "code_ci": "PASS_PREDEPLOY",
+    "activation": "HOLD",
+    "deployment": "HOLD_REQUIRES_USER_APPROVAL",
+    "evidence": [
+      "GitHub TAKY PR#196 CURRENT/BADGE_SYSTEM_CURRENT_2026-10-02.json",
+      "GitHub TAKY PR#196 BADGE/runtime/TAKY_BADGE_REMAINING_PRODUCER_OPEN_1_V1.json",
+      "GitHub TAKY PR#196 BADGE/runtime/TAKY_BADGE_REMAINING_1_OWNER_EVIDENCE_CONTRACT_V1.json",
+      "GitHub TAKY PR#196 BADGE/runtime/TAKY_BADGE_054_IMPROVEMENT_BRIDGE_CURRENT_2026-10-02.json"
+    ]
+  },
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  },
+  "snap_legacy_browser_closure": {
+    "state": "CLOSED_PASS",
+    "evidence": [
+      "Snap-Pop PR#25 merged: Bound Snap browser closure workflow runtime",
+      "PR#25 workflow Snap Shared Runtime Reconciliation=SUCCESS",
+      "Snap-Pop PR#35 merged: Bound transient recovery Runtime.evaluate retries",
+      "PR#35 workflow Snap Shared Runtime Reconciliation=SUCCESS"
+    ],
+    "reimplementation_required": false
+  },
+  "design_to_ui": {
+    "state": "PIPELINE_CONTRACT_VERIFIED_DRAFT__APP_APPLICATION_OPEN__MAIN_PROMOTION_HOLD",
+    "taky_pr": 194,
+    "head": "9ab5fc579ada0547d5bb7cc066a157c4912bc0f1",
+    "workflow": {
+      "Design-to-UI Pipeline Contract": "SUCCESS",
+      "TAKY Enforcement Replay": "SUCCESS"
+    },
+    "no_app_implementation_in_pr": true,
+    "main_merge": "HOLD",
+    "deployment": "HOLD"
+  },
+  "asset_pointer_contract": {
+    "state": "POINTER_CONTRACT_VERIFIED_DRAFT__RUNTIME_CONSUMPTION_OPEN__MAIN_PROMOTION_HOLD",
+    "repo": "TAKY-ASSETS",
+    "pr": 4,
+    "head": "319968689148ad898932ecd97b4f509bb30fd977",
+    "workflow": {
+      "TAKY Approved Asset Registry Contract": "SUCCESS"
+    },
+    "runtime_consumption_gate": {
+      "status": "FAIL_CLOSED_BATCH_HOLD",
+      "prototype": "01-DUBI",
+      "required_chain": "APPROVED_ORIGINAL_SHA -> FINAL_ASSET_SHA -> APP_REPO_RUNTIME_PATH -> APP_MANIFEST_ROW -> RESOLVER_OUTPUT -> BUILD_ARTIFACT_FILE -> BUILD_ARTIFACT_SHA -> DOM_RUNTIME_SRC -> DOM_RUNTIME_SHA_EVIDENCE",
+      "three_app_status": {
+        "Ready-Set": "PARTIAL",
+        "Hide-Seek": "NOT_PROVEN",
+        "Snap-Pop": "HOLD"
+      }
+    },
+    "main_merge": "HOLD",
+    "deployment": "HOLD"
+  },
+  "family_profile_radio_ux": {
+    "state": "OPEN_HUMAN_GESTURE_DECISION",
+    "unresolved": "tap vs hold-to-talk",
+    "source": "TAKY_AUTHORITY_READY_RUNTIME_NEW_CHAT_START_2026-10-02_LATEST.md",
+    "implementation_after_decision": "OPEN"
+  }
+}

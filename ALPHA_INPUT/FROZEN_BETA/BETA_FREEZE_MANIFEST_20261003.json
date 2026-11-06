@@ -1,0 +1,343 @@
+{
+  "schema": "TAKY_BETA_FREEZE_MANIFEST_V2",
+  "date": "2026-10-03",
+  "status": "FREEZE_READY_LOCAL_CANDIDATE",
+  "canonical_main_baseline": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+  "source_heads": {
+    "TAKY": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "Ready-Set": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
+    "Hide-Seek": "5da6594510cc89341054aafef66d5f4ea47a0210",
+    "Snap-Pop": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
+    "TAKY-MOBILE": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+    "TAKY-ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
+  },
+  "related_repo_heads": {
+    "TAKY-WORK-OS": "c82a99bd7fbd7ab979907d038e8f948d3792de90",
+    "SAVEY": "5a196080b8f8ce50d188b0181d9bec5e5477a265"
+  },
+  "local_snapshot": {
+    "head": "e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2",
+    "index_tree": "4f1d432aa91f7272b12f1e2bb51fc95b0dbfc377",
+    "tracked_patch_sha256": "f805178b8a10cf0ab2f979417faf5a3ee26d6dcf734fac302af2e0a305d04421",
+    "source_untracked_sha256": {
+      "BADGE/windows-directory-fsync-regression.test.js": "5425b430190339cd70db8be3ae18fc5935dedc9ba4f72e3a6eb110c9d64b4173",
+      "ENFORCEMENT/evidence_history_boundary_test.py": "129065b9f5e0046f721130867eff8293be6fab073756c30ffd2b8c09ad7da060",
+      "ENFORCEMENT/execution_checkpoint_identity_test.py": "f94078c5674f898645e56f9ee2a23397e2908efeac8d2f9604133e3ee159b0f1",
+      "ENFORCEMENT/fixtures/evidence_seed.bin": "d8e0e35dd505bed4ff6cc4fdfe04ba698b840ce2c39aa9c0d75ccad18d11f5c1"
+    },
+    "snapshot_identity_sha256": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+    "staged_files": [
+      "LEARNING/transport/CENTRAL_PRODUCTION_HOST_WIRING_2026-09-30.md",
+      "LEARNING/transport/central-character-local-pilot.test.js",
+      "LEARNING/transport/central-learning-production-host.js",
+      "LEARNING/transport/central-learning-production-host.test.js",
+      "LEARNING/transport/family-character-asset-http-endpoint.js",
+      "LEARNING/transport/family-character-asset-http-endpoint.test.js",
+      "LEARNING/transport/family-character-profile-http-endpoint.js",
+      "LEARNING/transport/family-character-profile-http-endpoint.test.js",
+      "LEARNING/transport/family-session-http-endpoint.js",
+      "LEARNING/transport/family-session-http-endpoint.test.js",
+      "LEARNING/transport/local-character-object-store.js",
+      "LEARNING/transport/local-character-object-store.test.js",
+      "LEARNING/transport/node-http-learning-bridge.js",
+      "LEARNING/transport/private-character-object-store-adapter.js",
+      "LEARNING/transport/three-app-character-runtime-integration.test.js",
+      "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "OS/CHARACTER_ASSET_BEHAVIOR_PIPELINE.md",
+      "OS/GUIDE_CHARACTER_RELATIONSHIP.md",
+      "OS/GUIDE_FAMILY_LEARNING_OS.md",
+      "PROJECTS/GUIDE_CORE6_CHARACTER.md",
+      "SHARED/runtime/taky-account-auth-public-config-v1.js",
+      "SHARED/runtime/taky-google-account-auth-v1.js",
+      "SHARED/runtime/taky-google-account-auth-v1.test.js",
+      "TAKY.md"
+    ],
+    "unstaged_files": [
+      ".gitattributes",
+      ".github/workflows/badge-visual-registry.yml",
+      ".github/workflows/taky-enforcement.yml",
+      "BADGE/badge-award-ledger-store.js",
+      "BADGE/family-praise-gift-journal.js",
+      "BADGE/parent-praise-gift-journal.js",
+      "CURRENT/SYSTEM_WIDE_REVIEW.json",
+      "ENFORCEMENT/evidence_ref_validator.py",
+      "ENFORCEMENT/execution_checkpoint.py",
+      "ENFORCEMENT/fixtures/c2s_runtime_preflight_pass.json",
+      "ENFORCEMENT/fixtures/preflight_evidence_pass.json",
+      "ENFORCEMENT/fixtures/runtime_orchestrator_fail.json",
+      "ENFORCEMENT/fixtures/runtime_orchestrator_pass.json",
+      "ENFORCEMENT/semantic_current_resolver_test.py",
+      "OS/MOBILE_APP_DEVELOPMENT_REGISTRY.json"
+    ],
+    "evidence_directory": "ENFORCEMENT/beta_validation_2026_10_03"
+  },
+  "validation": {
+    "beta_suite": {
+      "total": 132,
+      "failures": 0
+    },
+    "semantic_current": "PASS",
+    "mobile_registry_structure": "PASS",
+    "claim_boundary": "PASS",
+    "savey_exact_main": {
+      "repo": "hns140412-glitch/SAVEY",
+      "exact_main": "5a196080b8f8ce50d188b0181d9bec5e5477a265",
+      "test": {
+        "total": 104,
+        "exit": 0,
+        "result": "PASS"
+      },
+      "typecheck": {
+        "exit": 0,
+        "result": "PASS"
+      },
+      "build": {
+        "exit": 0,
+        "result": "PASS"
+      },
+      "isolation": "DETACHED_EXACT_MAIN_WORKTREE_WITH_NODE_MODULES_JUNCTION",
+      "concurrent_worktree_preserved": "D:/Git PWA/SAVEY scripts/bootstrap-google-oauth.mjs remained untouched"
+    },
+    "badge_producer_qa": {
+      "catalog": 60,
+      "pass": 47,
+      "open": 13,
+      "active": 0
+    },
+    "hardening_pr209": {
+      "state": "MERGED/CLOSED",
+      "merge_commit": "64ba56274d2f12f6745db4fa77eac792f4c41ab4",
+      "validated_head": "4e13ae332acd1b8735e02e369f455ec2b0b3151d",
+      "checks": [
+        "TAKY Enforcement Replay PASS",
+        "TAKY Engineering Profile Gate PASS",
+        "TAKY Artifact Exposure Gate PASS"
+      ]
+    }
+  },
+  "freeze_gate": {
+    "technical_beta_blockers": [],
+    "uncontained_p0_p1": [],
+    "contained_open": [
+      {
+        "id": "HOSTED_RUNTIME_INTERCEPTION",
+        "state": "UNVERIFIED_CONTAINED"
+      },
+      {
+        "id": "DEPLOYMENT",
+        "state": "HOLD"
+      }
+    ],
+    "human_gate": "EXPLICIT_BETA_FREEZE_APPROVAL_REQUIRED",
+    "alpha_entry": "BLOCKED_UNTIL_HUMAN_FREEZE_APPROVAL"
+  },
+  "carry_over_open": {
+    "explorer_crew": {
+      "central_runtime": {
+        "id": "exploration_crew_central_runtime",
+        "state": "DRAFT_CANDIDATE",
+        "source_repo": "TAKY",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "pr": 191,
+        "pr_state": "DRAFT/OPEN",
+        "head_ref": "d2eecf35ebb1f46de7b18589442b07d3e11919c6",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "main_authority": false,
+        "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 154,
+          "behind": 96,
+          "status": "diverged"
+        }
+      },
+      "hide_consumer": {
+        "id": "exploration_crew_hide_consumer_v2",
+        "state": "OPEN",
+        "source_repo": "Hide-Seek",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "next": "Promotion/reapplication remains OPEN.",
+        "pr": 28,
+        "head_ref": "c876a8167be28a2f30a69fd0a0f38f74987abb3c",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 1,
+          "behind": 2,
+          "status": "diverged"
+        }
+      },
+      "snap_consumer": {
+        "id": "exploration_crew_snap_consumer_v2",
+        "state": "OPEN",
+        "source_repo": "Snap-Pop",
+        "owner_aliases": [
+          "explorer_crew"
+        ],
+        "next": "Promotion/reapplication remains OPEN.",
+        "pr": 18,
+        "head_ref": "bceb6cc9b336447002a4c189fa1560efc3c4ae5e",
+        "head_verification": "LIVE_VERIFIED_2026-10-03",
+        "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+        "main_compare": {
+          "ahead": 1,
+          "behind": 2,
+          "status": "diverged"
+        }
+      }
+    },
+    "badges": {
+      "id": "badge_central",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "pr": 196,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "52498dbc09a8db1f50cd7d5d3fe437c5e0c34a69",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "producer_snapshot": {
+        "source_producers": 15,
+        "active_producers": 0,
+        "total": 60
+      },
+      "live_hosted_e2e": "OPEN",
+      "evidence_paths": [
+        "CURRENT/BADGE_SYSTEM_RECOVERY_CURRENT_2026-09-26.json"
+      ],
+      "evidence_boundary": "Historical recovery evidence does not override the supplied audit or promote PR #196.",
+      "candidate_refs": {
+        "TAKY-MOBILE": {
+          "pr": 2,
+          "head": "02bb7fae93dcc5c15b2e7384875075a83e7451c1",
+          "state": "MERGED/CLOSED",
+          "merged": true,
+          "main_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+          "note": "Central badge transport PR merged; later main commits extend badge/auth transport."
+        },
+        "Ready-Set": {
+          "pr": 143,
+          "head": "5c1a1fba5c9fe3945957a2c6ab6ac0eb57b86b93",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 142,
+            "behind": 1,
+            "status": "diverged"
+          }
+        },
+        "Hide-Seek": {
+          "pr": 29,
+          "head": "0d8af51e8b47f561659135a18ed5c4a0e1304419",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 32,
+            "behind": 1,
+            "status": "diverged"
+          }
+        },
+        "Snap-Pop": {
+          "pr": 20,
+          "head": "fac7cc264a9d003c4576612ebdd53f55e4bf90e9",
+          "state": "DRAFT/OPEN",
+          "promotion_state": "REAPPLY_ON_LATEST_MAIN_REQUIRED",
+          "main_compare": {
+            "ahead": 1237,
+            "behind": 18,
+            "status": "diverged"
+          },
+          "note": "Very large divergence; do not promote directly."
+        }
+      },
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 186,
+        "behind": 84,
+        "status": "diverged"
+      },
+      "producer_qa_latest": {
+        "catalog": 60,
+        "pass": 47,
+        "open": 13,
+        "active": 0
+      }
+    },
+    "design_to_ui": {
+      "id": "design_to_ui",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY",
+      "owner_aliases": [
+        "design_ui_assets"
+      ],
+      "pr": 194,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "9ab5fc579ada0547d5bb7cc066a157c4912bc0f1",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "boundary": "Contract code may remain candidate; PR #194 is not main canonical.",
+      "promotion_state": "REAPPLY_OR_REBASE_ON_LATEST_MAIN_REQUIRED",
+      "main_compare": {
+        "ahead": 83,
+        "behind": 94,
+        "status": "diverged"
+      }
+    },
+    "asset_pointer_contract": {
+      "id": "assets_approved_results_pointer_contract",
+      "state": "DRAFT_CANDIDATE",
+      "source_repo": "TAKY-ASSETS",
+      "pr": 4,
+      "pr_state": "DRAFT/OPEN",
+      "head_ref": "319968689148ad898932ecd97b4f509bb30fd977",
+      "head_verification": "LIVE_VERIFIED_2026-10-03",
+      "main_authority": false,
+      "promotion_state": "FAST_FORWARD_CAPABLE_BUT_HOLD_NO_MERGE",
+      "main_compare": {
+        "ahead": 21,
+        "behind": 0,
+        "status": "ahead"
+      }
+    },
+    "family_profile_radio_ux": {
+      "id": "recent_family_profile_radio_ux",
+      "state": "OPEN",
+      "requirements": [
+        "family profile / family expansion",
+        "control-room character",
+        "radio / walkie-talkie input",
+        "letter / note",
+        "sealing wax",
+        "handwritten-photo correction",
+        "voice input"
+      ],
+      "canonical_reflection": "OPEN",
+      "implementation_claim": false,
+      "exact_radio_gesture": "OPEN__TAP_VS_HOLD_TO_TALK_UNRESOLVED",
+      "boundary": "Requirement decisions are preserved as OPEN; existing family auth/session or existing radio assets do not prove this newer UX expansion is canonically reflected or implemented."
+    },
+    "snap_legacy_browser_closure": {
+      "id": "snap_legacy_browser_closure",
+      "state": "UNVERIFIED",
+      "source_repo": "Snap-Pop",
+      "evidence": "Unresolved at audit cutoff; no PASS is inferred."
+    },
+    "savey": {
+      "main": "5a196080b8f8ce50d188b0181d9bec5e5477a265",
+      "tests": "104/104 PASS",
+      "typecheck": "PASS",
+      "build": "PASS",
+      "live_google_binding": "OPEN/SEPARATE_FROM_EXACT_MAIN_CODE_VALIDATION"
+    }
+  },
+  "constraints": [
+    "NO_PUSH",
+    "NO_MERGE",
+    "NO_DEPLOY",
+    "NO_PAID_API",
+    "CANDIDATE_DOES_NOT_TRANSFER_CANONICAL_AUTHORITY"
+  ],
+  "adversarial_closure": "BETA_REVIEW/BETA_FINAL_ADVERSARIAL_CLOSURE_20261003.json"
+}

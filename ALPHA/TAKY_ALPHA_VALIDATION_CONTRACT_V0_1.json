@@ -1,0 +1,136 @@
+{
+  "schema": "TAKY_ALPHA_VALIDATION_CONTRACT_V0_1",
+  "status": "LOCAL_CANONICAL_PROMOTION_PASS",
+  "date": "2026-10-04",
+  "input_lock": "ed761ad71074001d967d044368f4e07cacefbc457e7b9e5cbb00f8e655a65f57",
+  "validation_gates": [
+    {
+      "id": "V0_INPUT",
+      "rule": "Alpha input must match Frozen Beta exact snapshot identity and linked human freeze approval evidence",
+      "required": "PASS"
+    },
+    {
+      "id": "V1_AUTHORITY",
+      "rule": "Every Alpha semantic namespace resolves to exactly one canonical owner; duplicate namespace rows fail before indexing",
+      "required": "PASS"
+    },
+    {
+      "id": "V2_OWNER_REFERENCE",
+      "rule": "Compiled Rule IDs must match RULE_REGISTRY and reference existing owners without semantic redefinition",
+      "required": "PASS"
+    },
+    {
+      "id": "V3_CURRENT_BOUNDARY",
+      "rule": "CURRENT/HANDOFF/LATEST may not self-promote to authority",
+      "required": "PASS"
+    },
+    {
+      "id": "V4_LIVE_EVIDENCE",
+      "rule": "Volatile repo/runtime/deploy claims require dated live evidence",
+      "required": "PASS"
+    },
+    {
+      "id": "V5_CROSS_REPO",
+      "rule": "Cross-repo refs must pin exact SHA and relation to main when making current-state claims",
+      "required": "PASS"
+    },
+    {
+      "id": "V6_CARRYOVER",
+      "rule": "Frozen manifest OPEN plus repository HOLD constraints must survive Alpha unless explicitly evidence-resolved",
+      "required": "PASS"
+    },
+    {
+      "id": "V7_TRACE",
+      "rule": "Requirement -> owner -> implementation/evidence -> validation -> status trace must be reconstructable",
+      "required": "PASS"
+    },
+    {
+      "id": "V8_REGRESSION",
+      "rule": "Frozen Beta invariants and tests may not regress",
+      "required": "PASS"
+    },
+    {
+      "id": "V9_ADVERSARIAL",
+      "rule": "Attack stale authority, silent promotion, bypass, evidence drift, routing ownership leakage and hosted-claim inflation",
+      "required": "PASS"
+    },
+    {
+      "id": "V10_HUMAN_GATE",
+      "rule": "Canonical Alpha promotion, merge and deployment remain explicit human gates",
+      "required": "PASS"
+    },
+    {
+      "id": "V11_PIPELINE_COMPLETENESS",
+      "rule": "Required whole-system pipelines have contiguous owner-bounded stage maps; POINTER_ONLY cannot satisfy areas A-F",
+      "required": "PASS"
+    },
+    {
+      "id": "V12_APP_COVERAGE_DEPTH",
+      "rule": "Every app/engine row has owner or explicit owner gap, source, implementation/evidence refs, OPEN refs and independent claim dimensions",
+      "required": "PASS"
+    },
+    {
+      "id": "V13_LANE_BOUNDARY",
+      "rule": "LOCAL infrastructure lane and post-freeze working deltas cannot imply whole-system or canonical completion",
+      "required": "PASS"
+    }
+  ],
+  "build_stage_mapping": {
+    "A0": "Input Lock",
+    "A1": "Authority Compile",
+    "A2a": "Rule Owner Reference Compile",
+    "A2b": "Rule Activation / Executable Gate Map",
+    "A3": "Cross-domain Routing",
+    "A4": "Evidence Graph",
+    "A5": "Runtime Contracts",
+    "A6": "Open Closure Plan",
+    "A7": "Self-validation",
+    "A8": "Independent Cross-validation",
+    "A9": "Regression + Adversarial Validation",
+    "A10": "Human Promotion Gate"
+  },
+  "claim_dimensions": [
+    "DOCUMENTED",
+    "CODED",
+    "CI_VERIFIED",
+    "RUNTIME_VERIFIED",
+    "DEVICE_VERIFIED",
+    "DEPLOYED",
+    "PRODUCTION_VERIFIED"
+  ],
+  "claim_rule": "Claim dimensions are independently evidenced. No universal linear promotion order is inferred; each higher claim requires its own explicit evidence and prerequisites.",
+  "release_boundary": {
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "paid_api": "HOLD"
+  },
+  "current_validators": [
+    "ENFORCEMENT/alpha_readonly_validator_v03.py",
+    "ENFORCEMENT/alpha_coverage_depth_validator.py",
+    "ENFORCEMENT/alpha_pipeline_validator.py",
+    "ENFORCEMENT/alpha_lane_boundary_validator.py"
+  ],
+  "latest_structural_evidence": {
+    "A7": [
+      "ALPHA_REVIEW/ALPHA_READONLY_VALIDATION_20261004.json",
+      "ALPHA_REVIEW/ALPHA_COVERAGE_DEPTH_VALIDATION_20261004.json",
+      "ALPHA_REVIEW/ALPHA_PIPELINE_VALIDATION_20261004.json",
+      "ALPHA_REVIEW/ALPHA_LANE_BOUNDARY_VALIDATION_20261004.json",
+      "ENFORCEMENT/alpha_validation_2026_10_03/beta_full_suite_v2.summary.json"
+    ],
+    "A8": "ALPHA_REVIEW/CODEX_A8_EMBEDDED_RESULT_20261004.txt",
+    "A9": "ALPHA_REVIEW/ALPHA_ADVERSARIAL_VALIDATION_20261004.json",
+    "A10": "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json"
+  },
+  "promotion_boundary": {
+    "local_canonical_orchestration": "PASS",
+    "github_main_promotion": "NOT_PERFORMED",
+    "semantic_owner_transfer": false,
+    "push": "HOLD",
+    "merge": "HOLD",
+    "deploy": "HOLD",
+    "netlify": "HOLD",
+    "paid_api": "HOLD"
+  }
+}

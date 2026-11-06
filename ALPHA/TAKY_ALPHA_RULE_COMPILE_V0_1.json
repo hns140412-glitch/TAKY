@@ -1,0 +1,144 @@
+{
+  "schema": "TAKY_ALPHA_RULE_OWNER_REFERENCE_COMPILE_V0_2",
+  "status": "OWNER_REFERENCE_COMPILE_PASS",
+  "date": "2026-10-03",
+  "source_registry": "MASTER/RULE_REGISTRY.json",
+  "source_registry_version": "2026-10-02.beta-hardening-candidate",
+  "source_registry_sha256": "1093e54f34125361167a20f7eb34b9e5e244f1fa06e50b8b4140b6f503db81e1",
+  "rule_count": 21,
+  "rules": [
+    {
+      "rule_id": "TKY-GUIDING-001",
+      "owner": "MASTER/MASTER_LOGIC.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-INTENT-001",
+      "owner": "MASTER/INTENT_EXECUTION_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-OUTCOME-001",
+      "owner": "MASTER/OUTCOME_OPTIMIZATION_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-RECOVERY-001",
+      "owner": "MASTER/RECOVERY_FORENSICS_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-HANDOFF-001",
+      "owner": "MASTER/HANDOFF_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-TAXONOMY-001",
+      "owner": "MASTER/FAILURE_TAXONOMY.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-ENFORCEMENT-001",
+      "owner": "MASTER/ENFORCEMENT_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-WORKSPACE-001",
+      "owner": "MASTER/OPERATIONAL_WORKSPACE_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-NOTION-001",
+      "owner": "OS/NOTION_OPS.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-COMMAND-001",
+      "owner": "OS/COMMAND_INTERACTION.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-VALIDATION-001",
+      "owner": "MASTER/VALIDATION_RULES.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-C2S-001",
+      "owner": "MASTER/CONVERSATION_TO_SYSTEM_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-NBLM-001",
+      "owner": "MASTER/NOTEBOOKLM_RECOVERY_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-CONTINUITY-001",
+      "owner": "MASTER/CONVERSATION_CONTINUITY_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-UIREF-001",
+      "owner": "MASTER/UI_REFERENCE_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-CODEX-001",
+      "owner": "MASTER/CODEX_TASK_CONTRACT.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-DRIVEC2S-001",
+      "owner": "OS/DRIVE_C2S_DIRECT.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-ENGEXEC-001",
+      "owner": "MASTER/ENGINEERING_EXECUTION_PROFILE_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-GROWTH-001",
+      "owner": "MASTER/GROWTH_INTELLIGENCE_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-ASSET-001",
+      "owner": "MASTER/DESIGN_UI_ASSET_SOURCE_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    },
+    {
+      "rule_id": "TKY-CHECKPOINT-001",
+      "owner": "MASTER/EXECUTION_CHECKPOINT_PROTOCOL.md",
+      "owner_exists": true,
+      "semantics": "RESOLVE_FROM_SOURCE_REGISTRY_AND_OWNER_AT_USE_TIME"
+    }
+  ],
+  "activation_gate_mapping": "NOT_RUN__A2B_PENDING",
+  "invariants": [
+    "ONE_RULE_ID_ONE_DECLARED_OWNER",
+    "ALPHA_DOES_NOT_COPY_RULE_SCOPE_TEXT",
+    "ALPHA_DOES_NOT_REDEFINE_RULE_SEMANTICS",
+    "EXECUTABLE_GATE_MAPPING_REQUIRES_SEPARATE_A2B_VALIDATION"
+  ]
+}

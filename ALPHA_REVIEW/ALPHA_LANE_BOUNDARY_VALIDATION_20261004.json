@@ -1,0 +1,8 @@
+{
+  "schema": "TAKY_ALPHA_LANE_BOUNDARY_VALIDATION_V1",
+  "date": "2026-10-04",
+  "status": "PASS",
+  "failure_count": 0,
+  "failures": [],
+  "normalized_canonical_rule_blob": "b4ca9b367f08be37f358bad339900b5ea005fb56"
+}

@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-10-02.1",
+  "registry_version": "2026-10-03.1-source-head-refresh",
   "purpose": "Single registry for TAKY mobile web app development surfaces across GitHub, Google Drive and Netlify. Prevent source, validation, deploy and legacy artifacts from being mistaken for each other.",
   "state_model": [
     "SOURCE_CURRENT",
@@ -28,11 +28,11 @@
       "github": {
         "repo": "hns140412-glitch/Ready-Set",
         "default_branch": "main",
-        "main_head": "daed2ebd072061b870bfd0d2f2472dd344661bad",
+        "main_head": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
         "state": "SOURCE_CURRENT",
-        "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
-        "head_change_note": "Audited 2026-10-02 source head only; no runtime/device/deployment promotion.",
-        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
+        "head_evidence_state": "LIVE_REFRESHED_2026-10-03",
+        "head_change_note": "Default-branch source head re-queried 2026-10-03 only; no PR/runtime/device/deployment promotion is implied.",
+        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-03"
       },
       "drive": {
         "id": "1cEbMu3R-qaGFRRWrmvqO5XGLIstXAK1j",
@@ -286,11 +286,11 @@
       "github": {
         "repo": "hns140412-glitch/Snap-Pop",
         "default_branch": "main",
-        "main_head": "2b9c6941792269244f847b1b978125996a49b5f8",
+        "main_head": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
         "state": "SOURCE_CURRENT",
-        "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
-        "head_change_note": "Audited 2026-10-02 source head only; no runtime/device/deployment promotion.",
-        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
+        "head_evidence_state": "LIVE_REFRESHED_2026-10-03",
+        "head_change_note": "Default-branch source head re-queried 2026-10-03 only; no PR/runtime/device/deployment promotion is implied.",
+        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-03"
       },
       "drive": {
         "id": "1OXBhWkrKshm5dq0OhFdIFrhImvyb9py4",
@@ -335,10 +335,11 @@
       "github": {
         "repo": "hns140412-glitch/Hide-Seek",
         "default_branch": "main",
-        "main_head": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
+        "main_head": "5da6594510cc89341054aafef66d5f4ea47a0210",
         "state": "SOURCE_CURRENT",
-        "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
-        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
+        "head_evidence_state": "LIVE_REFRESHED_2026-10-03",
+        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-03",
+        "head_change_note": "Default-branch source head re-queried 2026-10-03 only; no PR/runtime/device/deployment promotion is implied."
       },
       "drive": {
         "id": "1toeyqRKLVkKR8C-nGzzrZSWo557HVCId",
@@ -395,8 +396,9 @@
         "default_branch": "main",
         "main_head": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
         "state": "CATALOG_OR_SHARED_INFRA",
-        "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
-        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
+        "head_evidence_state": "LIVE_REFRESHED_2026-10-03",
+        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-03",
+        "head_change_note": "Default-branch source head re-queried 2026-10-03 only; no PR/runtime/device/deployment promotion is implied."
       },
       "drive": {
         "id": "1AybZa2Q3ISkIxMzfA9koMzfaVOwRqSBd",
@@ -410,10 +412,11 @@
       "github": {
         "repo": "hns140412-glitch/TAKY-MOBILE",
         "default_branch": "main",
-        "main_head": "9bcb7d9660834818457704db2c0a5b16c9964c95",
+        "main_head": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
         "state": "CATALOG_OR_SHARED_INFRA",
-        "head_evidence_state": "AUDITED_SNAPSHOT_2026-10-02",
-        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-02"
+        "head_evidence_state": "LIVE_REFRESHED_2026-10-03",
+        "live_refresh_source": "GITHUB_READ_ONLY_HEAD_QUERY_2026-10-03",
+        "head_change_note": "Default-branch source head re-queried 2026-10-03 only; no PR/runtime/device/deployment promotion is implied."
       },
       "drive": {
         "id": "1ZrA0uOOvtA6rohLDiFK4WZEycHbeto0m",
@@ -470,16 +473,16 @@
       "deploy_check": "NOT_INCLUDED_WITHOUT_EXPLICIT_DEPLOY_PROVIDER_EVIDENCE"
     },
     "source_head_audit": {
-      "at": "2026-10-02",
-      "source": "GitHub read-only default-branch head verification at the 2026-10-02 audit; requery before later live-current claims.",
+      "at": "2026-10-03",
+      "source": "GitHub read-only default-branch head verification on 2026-10-03; this refresh covers source heads only and preserves historical PR/work/deploy evidence dates.",
       "apps": {
-        "READY_SET": "daed2ebd072061b870bfd0d2f2472dd344661bad",
-        "SNAP_POP": "2b9c6941792269244f847b1b978125996a49b5f8",
-        "HIDE_SEEK": "f1c4bd7a61edcfab3c9bb0836db162e38ca2311f",
-        "SHARED_ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa",
-        "MOBILE_CATALOG": "9bcb7d9660834818457704db2c0a5b16c9964c95"
+        "READY_SET": "0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915",
+        "HIDE_SEEK": "5da6594510cc89341054aafef66d5f4ea47a0210",
+        "SNAP_POP": "a77e65b383df170e1124d3b9e01ca37eef334d6c",
+        "MOBILE_CATALOG": "6c90045d1bc1f957325b7daef0c6079b29338f1e",
+        "SHARED_ASSETS": "8d902a93dbb7cde3f38580c4f4d0653a4f1314aa"
       }
     },
-    "preserved_evidence_boundary": "last_manual_live_refresh, open_prs, work and deploy details retain their original historical evidence dates; this source-head-only refresh does not reverify those surfaces."
+    "preserved_evidence_boundary": "open_prs, work, runtime, device and deploy details retain their original evidence dates; the 2026-10-03 refresh updates source heads only."
   }
 }

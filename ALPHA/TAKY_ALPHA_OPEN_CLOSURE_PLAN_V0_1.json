@@ -1,0 +1,134 @@
+{
+  "schema": "TAKY_ALPHA_OPEN_CLOSURE_PLAN_V0_1",
+  "status": "LOCAL_CANONICAL_ORCHESTRATION_WITH_EXPLICIT_OPEN",
+  "date": "2026-10-04",
+  "items": [
+    {
+      "id": "EXPLORER_CREW_CENTRAL_RUNTIME",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false,
+      "state": "CLOSED_PASS_POST_FREEZE_INHERITED",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "blocks_product_runtime": false
+    },
+    {
+      "id": "HIDE_CREW_V2",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false,
+      "state": "LOCAL_IMPLEMENTATION_VERIFIED_MAIN_PROMOTION_HOLD",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "blocks_product_runtime": true,
+      "reimplementation_required": false
+    },
+    {
+      "id": "SNAP_CREW_V2",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false,
+      "state": "LOCAL_IMPLEMENTATION_VERIFIED_MAIN_PROMOTION_HOLD",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "blocks_product_runtime": true,
+      "reimplementation_required": false
+    },
+    {
+      "id": "BADGE_CENTRAL",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false,
+      "detail": "59 producer-QA PASS / 1 OPEN (BDG-DRAFT-054) / active 0/60; remaining blocker requires deployment + real Hide key registration + signed live E2E",
+      "state": "PREDEPLOY_59_OF_60_PASS__054_LIVE_TRANSPORT_HOLD",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "reimplementation_required": false,
+      "blocks_local_work": false,
+      "blocks_live_runtime": true
+    },
+    {
+      "id": "DESIGN_TO_UI",
+      "class": "CANDIDATE",
+      "blocks_structural_alpha": false,
+      "state": "PIPELINE_CONTRACT_VERIFIED_DRAFT__APP_APPLICATION_OPEN__MAIN_PROMOTION_HOLD",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "reimplementation_of_gate_required": false,
+      "actual_app_application_required": true
+    },
+    {
+      "id": "ASSET_POINTER_CONTRACT",
+      "class": "CANDIDATE_HOLD",
+      "blocks_structural_alpha": false,
+      "state": "POINTER_CONTRACT_VERIFIED_DRAFT__DUBI_RUNTIME_CONSUMPTION_OPEN__MAIN_PROMOTION_HOLD",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "pointer_contract_reimplementation_required": false,
+      "runtime_consumption_proof_required": true
+    },
+    {
+      "id": "FAMILY_PROFILE_RADIO_UX",
+      "class": "PRODUCT_GAP",
+      "blocks_structural_alpha": false,
+      "detail": "tap-vs-hold remains unresolved",
+      "state": "OPEN_HUMAN_GESTURE_DECISION_TAP_VS_HOLD_TO_TALK",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "requires_human_decision": true
+    },
+    {
+      "id": "SNAP_LEGACY_BROWSER_CLOSURE",
+      "class": "UNVERIFIED_CONTAINED",
+      "blocks_structural_alpha": false,
+      "state": "CLOSED_PASS_POST_FREEZE_INHERITED",
+      "evidence": "ALPHA_REVIEW/ALPHA_PRODUCT_OPEN_INHERITANCE_20261004.json",
+      "reimplementation_required": false
+    },
+    {
+      "id": "SAVEY_LIVE_GOOGLE_BINDING_AND_DATA_POPULATION",
+      "class": "RUNTIME_GAP",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "SHARED_AUTH_IDENTITY_FEDERATION",
+      "class": "HOLD",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "HOSTED_RUNTIME_INTERCEPTION",
+      "class": "UNVERIFIED_CONTAINED",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "DEPLOYMENT",
+      "class": "HOLD",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "LOCAL_INFRA_HOST_IDENTITY",
+      "class": "EXTERNAL_BOUNDARY",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "LOCAL_INFRA_CAD_EXCEL_HWP_TASKS",
+      "class": "FUTURE_LANE",
+      "blocks_structural_alpha": false
+    },
+    {
+      "id": "A8_INDEPENDENT_CROSS_VALIDATION",
+      "class": "ALPHA_GATE",
+      "blocks_structural_alpha": false,
+      "state": "CLOSED_PASS",
+      "evidence": "ALPHA_REVIEW/CODEX_A8_EMBEDDED_RESULT_20261004.txt"
+    },
+    {
+      "id": "A10_HUMAN_PROMOTION",
+      "class": "HUMAN_GATE",
+      "blocks_structural_alpha": false,
+      "state": "CLOSED_PASS_LOCAL_CANONICAL",
+      "blocks_canonical_promotion": false,
+      "evidence": "ALPHA/TAKY_ALPHA_LOCAL_CANONICAL_PROMOTION_20261004.json"
+    },
+    {
+      "id": "A9_ADVERSARIAL_VALIDATION",
+      "class": "ALPHA_GATE",
+      "state": "CLOSED_PASS",
+      "blocks_structural_alpha": false,
+      "evidence": "ALPHA_REVIEW/ALPHA_ADVERSARIAL_VALIDATION_20261004.json"
+    }
+  ],
+  "rule": "CLOSED_POST_FREEZE_EVIDENCE_MUST_BE_INHERITED__NO_REIMPLEMENTATION",
+  "next_active_open": "DESIGN_TO_UI_APP_APPLICATION",
+  "next_human_gate": "FAMILY_PROFILE_RADIO_UX_TAP_VS_HOLD_TO_TALK"
+}

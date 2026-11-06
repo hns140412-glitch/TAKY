@@ -1,0 +1,31 @@
+{
+  "schema": "TAKY_ALPHA_A1_A3_VALIDATION_V0_1",
+  "authority": {
+    "status": "PASS",
+    "failures": []
+  },
+  "rules": {
+    "status": "PASS",
+    "rule_count": 21,
+    "failures": []
+  },
+  "carryover": {
+    "status": "PASS",
+    "exact_top_level_keys": [
+      "asset_pointer_contract",
+      "badges",
+      "design_to_ui",
+      "explorer_crew",
+      "family_profile_radio_ux",
+      "savey",
+      "snap_legacy_browser_closure"
+    ],
+    "contained_count": 2
+  },
+  "routing": {
+    "status": "PASS",
+    "node_count": 13,
+    "edge_count": 17
+  },
+  "status": "PASS"
+}
