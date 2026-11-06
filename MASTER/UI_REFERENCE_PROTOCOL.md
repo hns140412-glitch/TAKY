@@ -322,5 +322,87 @@ Default selection examples:
 
 Machine-readable comparison profile: `MASTER/UI_REFERENCE_COMPARISON_MATRIX.json`.
 
+## 20. Case-derived design-gate criteria — 2026-11-06
+
+Status: ACTIVE criteria under TKY-UIREF-001. Origin: Claude independent case review of the DG-00..10 / PS-00..23 design-gate contract (`TAKY_DESIGN_GATE_MINING_SNAPSHOT_20261004.json`) against external cases, building on the prior review `TAKY_DESIGN_GATE_CLAUDE_REVIEW_20261004.json` (C-01..C-14). USER approved reflection 2026-11-06.
+
+Scope: these are criteria, not new gates. DG IDs and order stay unchanged and append-only. Until the DG contract itself is promoted into a MASTER owner, each criterion binds through the gate ID named here and through `ENFORCEMENT/design_gate_receipt.py` only where a field already exists. No enforcement is claimed for fields the receipt code does not check.
+
+`CASE EVIDENCE != PROJECT AUTHORITY` — §0 and §3 still govern. The cases explain why a criterion exists. They do not transfer any brand, composition or product decision.
+
+### 20.1 Criteria
+
+| ID | Gate | Criterion | Case basis (evidence grade) |
+|---|---|---|---|
+| DGC-01 | DG-00 | Every design run declares `mode: EXPLORE \| EXECUTE`. With no approved direction or no token manifest, the run is EXPLORE. EXPLORE output is `PILOT_FIXTURE_ONLY` and cannot enter DG-07 until approval is bound at DG-05. | Claude Design: without tokens or readable components, Claude makes its own visual choices (secondary). Prior C-07. |
+| DGC-02 | DG-00 / DG-04 | An imported or generated design system is `DERIVED`, not authority. Record `design_system_source = {repo, commit, token_file}` and `design_system_id@version`. A source commit change marks dependent receipts stale. One active design system per project. | Claude Design builds a team design system from codebase and design files during onboarding, and supports several systems (official announcement and help center). `/design-sync` converts a repo's React design system and uploads it (official Claude Code commands page). |
+| DGC-03 | every receipt | Each receipt names one owner ROLE (DRI), not a joint owner. ROLE != AGENT. | Apple directly-responsible-individual practice (secondary: Lashinsky, *Inside Apple*). |
+| DGC-04 | DG-02 | Each conditional PS row and each material UI element carries a `requirement_owner`. An unowned requirement becomes an N_A candidate and DG-06 audits it. Forced-applicable rules from prior C-10 still apply. | Tesla/SpaceX "question every requirement; a named person defends it or it goes" (secondary: Isaacson biography, McNeill *The Algorithm*). |
+| DGC-05 | DG-05 | In EXPLORE, show at least N materially different candidates before the user picks. Default N=3. COST may lower it and must record why. "Materially different" means a change in IA, hierarchy, palette role, type scale, component set or density class (prior C-14). Pixel deltas inside the same tokens do not count. | Apple "10 → 3 → 1" concept narrowing (secondary: 2008 SXSW talk summary). |
+| DGC-06 | DG-06 | Add a `DELETION_PASS {removed[], reason, re-added[]}` before freeze. If nothing was removed, a reason is required. Re-added items go into the pilot delta list (prior C-01). Safety and accessibility affordances are protected and cannot be deleted for minimalism. | Tesla "delete before you optimize" (secondary). Tesla removed the Model 3 turn-signal stalk and in Aug 2025 made it standard again in China, with a paid retrofit (reputable secondary: Carscoops, InsideEVs, Electrek, Drive Tesla Canada). |
+| DGC-07 | DG-06 / PS-20 | The freeze reference is a render-level mockup with a hash, not a wireframe. `visual_compare` binds to that hash (reference hash, renderer, viewport/page, tolerance). This matches the existing `approved_reference_sha256` receipt field. | Apple polished, unambiguous mockups (secondary). Prior C-12. |
+| DGC-08 | DG-06 → DG-07 | A tool handoff (for example Claude Design → Claude Code, local or web) carries the frozen `spec_version/spec_hash`. A handoff without one cannot enter DG-07. | Claude Design packages a handoff bundle for Claude Code with "Send to local coding agent" and "Send to Claude Code Web" (official). Bundle contents are not documented, so TAKY must add the hash itself. |
+| DGC-09 | DG-08 | `EXPORT SUCCESS != EDITABLE PASS`. Exported PPTX/PDF/HTML/Google Slides/ZIP output still runs FONT_PRINT_PDF and INTERACTION_EDITABILITY against TARGET_ENVIRONMENT (prior C-03). | Claude Design exports .zip, PDF, PPTX, Google Slides and standalone HTML, and sends to Canva and others (official help center). Figma export is not in any official list. |
+| DGC-10 | DG-03 / DG-08 | Apple-targeted work checks against the current HIG direction: hierarchy (content first, controls don't compete), harmony with system materials and colors, and consistency with platform patterns. Count the screen's competing focal points and keep them at or below K, declared at DG-02. | Apple's Liquid Glass overview: establish hierarchy, create harmony, maintain consistency (official snippet; full HIG body text not machine-readable in this review). |
+| DGC-11 | DG-09 | In continuous release (OTA-style), a receipt is invalid when the spec, artifact or `design_system_id@version` differs from what it recorded. | Tesla single-screen UI with OTA updates (general knowledge). Prior C-02. |
+| DGC-12 | DG-10 / ENFORCEMENT | Automate last. A new automated gate check is added only after the same check passes manual replay at a threshold declared at DG-02. `RULE WRITTEN != RULE ENFORCED`. | Tesla "automate last; early factory automation was the mistake" (secondary: Isaacson). Prior C-09. |
+
+### 20.1a Lessons from the 2026-11-06 Play Camp run (TWEB-20261106-0002)
+
+| ID | Gate | Criterion | Case basis |
+|---|---|---|---|
+| DGC-22 | DG-00 | Before any redesign, read the project's own screen contract and design-gate review (for Play Camp: `PLAY_CAMP_TABLET_SCREEN_CONTRACT_*`, `PLAY_CAMP_TABLET_DESIGN_GATE_REVIEW_*`). A candidate that drops a required element of that contract is not a candidate; it is a contract change and needs USER approval first. | A hub redesign removed four PC-TAB-HUB-01 requirements (one Crew main slot, centre orientation, Hangul quick-play, paper-island diorama) and was reverted. |
+| DGC-23 | DG-02 / DG-08 | A gate that waits on a capability that is not approved yet must still offer a forward path that does not fake the gated state (`USER != DEBUGGER`). Smoke tests must exercise the real child path, not inject the gated state. | Explorer Visual ID LOCK waited on an unapproved conversion route; every family stopped at intro step 4 in production while smoke passed by injecting a LOCKED profile. Fixed with a defer path that never creates a LOCK. |
+
+### 20.1b Criteria from Instagram and Claude Design practitioner cases
+
+| ID | Gate | Criterion | Case basis (evidence grade) |
+|---|---|---|---|
+| DGC-13 | DG-00 / DG-05 | Changes to primary navigation, feed or other core surfaces list the affected stakeholder groups in the scope lock and require a staged pilot (limited group or region, opt-in where possible) before broad release. | Instagram's full-screen feed test (2022) was rolled back after creator backlash; Mosseri said the design was "not yet good" (REPUTABLE_SECONDARY: Platformer, Engadget, NBC). The Reels/DM navigation (Oct 2025) went to a regional test and then opt-in (REPUTABLE_SECONDARY: Engadget). |
+| DGC-14 | DG-02 / DG-08 | The output contract carries at least one user-experience criterion that can outrank an engagement metric. Default: content does not change under the user's eye. | Instagram removed "rug-pull" feed refresh in Nov 2024 and accepted some engagement loss (REPUTABLE_SECONDARY; reports differ on whether it applied to Reels or the main feed). |
+| DGC-15 | DG-09 | A change to an output contract (aspect ratio, grid, size class) ships in the same release as a migration path for assets made under the old contract. Otherwise those assets are marked broken. | Instagram changed the profile grid from 1:1 to a taller ratio in Jan 2025, and "Adjust Preview" followed (REPUTABLE_SECONDARY; 4:5 vs 3:4 is unresolved, so no number is cited). |
+| DGC-16 | DG-02 / DG-08 | Each form factor gets its own output contract and render check. A scaled-up build from another form factor fails TARGET_RENDER. | Instagram served iPad a scaled-up iPhone app until the native iPad app in Sep 2025 (REPUTABLE_SECONDARY: Bloomberg). |
+| DGC-17 | DG-01 | For a brand or identity change, separate recognised core elements from decoration before freeze (for example a recall test). | The 2016 Instagram icon redesign used a draw-from-memory step (REPUTABLE_SECONDARY). |
+| DGC-18 | DG-06 | The frozen spec is a file (DESIGN.md or equivalent) that holds tokens plus composition and layout rules **and a prohibition list** (banned generic defaults). `TOKEN MATCH != DESIGN PASS`. | Practitioners report correct token extraction with poor composition, and generic "AI look" defaults when no system or prohibitions are supplied (SNIPPET_ONLY: blogs, skill mirrors). |
+| DGC-19 | DG-08 FONT_PRINT_PDF | Check that the loaded fonts match the spec. CJK text names an explicit font (for example Pretendard or Noto Sans KR). Each export target is rendered, and the output contract declares print-safe CSS (no gradient-clipped text or mask-image for PDF). | Reports of silent font fallback and of PDF exports covering text with colour blocks (SNIPPET_ONLY, including a Korean blog). |
+| DGC-20 | DG-04 / DG-09 | Treat design-system sync as a snapshot. A design-system change requires re-sync and marks earlier synced outputs stale (extends DGC-02). | `/design-sync` pulls the design system into the repo or pushes back to Claude Design (official @ClaudeDevs post and help center, seen as snippets). |
+| DGC-21 | DG-05 | The pilot declares a cost budget per iteration so the pilot does not end before the candidates (DGC-05) are produced. COST-internal; not a new gate. | A tester used about 80% of a weekly Pro allowance in about 25 minutes at launch; a later update reduced per-turn usage (REPUTABLE_SECONDARY: PCWorld, VentureBeat). |
+
+### 20.1c Harness binding — 2026-11-06
+
+The mechanical parts of DGC-01/02/16/18/19 and A11Y basics are executable:
+- `ENFORCEMENT/design_gate_harness.py` (judge, receipt) + `ENFORCEMENT/design_gate_render.mjs` (Playwright/Chromium render probe). Sub-receipts in fixed order: HARNESS_HEALTH, SPEC_LINT, TARGET_RENDER, TOKEN_FIDELITY, FONT_PRINT_PDF, A11Y_BASIC, GENERIC_TELLS (advisory only). A harness failure is HOLD, not FAIL. Receipts carry `spec_sha256`, `artifact_sha256` and `design_system_id@version`.
+- Procedure: `.claude/skills/taky-design-gate/SKILL.md`. Independent review: `.claude/agents/design-gate-reviewer.md`. Browser eye for interaction: `.mcp.json` Playwright MCP (pinned).
+- Tests: `ENFORCEMENT/design_gate_harness_test.py` with fixtures in `ENFORCEMENT/fixtures/design_gate/`.
+- Not added to CI on purpose (DGC-12: automate last). Promote to CI after manual replay on real project screens passes.
+- No third-party design skill is installed (Notion review RVR-121 disposition: hold).
+
+### 20.1d Replica-level study, quality-bar result — USER decision 2026-11-06
+
+USER clarified: TAKY rules are the **quality bar for the finished result**. They do not restrict the intermediate study.
+
+- `REPLICA (EXPERIMENT) != RESULT`. In EXPLORE, a reference product may be cloned at replica level (screens, flows, components, data model, behaviour), then taken apart and analysed. The replica is `PILOT_FIXTURE_ONLY`: it is never shipped, never promoted and never counted as DG-07/08 evidence.
+- The result must clear the TAKY quality bar (§0, §3, §7, DG-00..10, DGC-01..21) **and** be measurably better than the replica on the chosen axes (task completion, clicks, a11y, the reference users' recurring complaints). A straight copy has no reason to exist.
+- Two different compare uses:
+  - replica stage: `VISUAL_COMPARE` layout mode against the reference shows how faithfully the structure was understood (target ≥ 90);
+  - result stage: compare against the **approved TAKY reference**, not the third-party original. The original's look (trade dress), brand, copy and assets do not pass into the result.
+- Tooling: `replica-*` skills vendored from Jakeschincariol/replica-skill (MIT, `.claude/skills/REPLICA_SKILL_LICENSE.txt`). `replica-diff/imgdiff.py` feeds the harness `VISUAL_COMPARE` sub-receipt (`--reference`).
+
+### 20.2 Apple vs Tesla conflict resolution
+
+| Stage | Dominant principle |
+|---|---|
+| DG-00..02 scope and contract | Tesla: question requirements, require owners |
+| DG-05 pilot | Apple: wide, materially different candidates |
+| DG-06 freeze | Both: delete first (Tesla), then freeze at render level (Apple) |
+| DG-07..08 implementation and QA | Tesla: simplify, then speed up |
+| Gate automation | Tesla: automate last |
+
+N (candidate count) and deletion intensity are COST-internal Necessity judgments. They do not create a sixth hard gate.
+
+### 20.3 Claim ceiling
+
+`DESIGN_CONTRACT_CASE_REVIEWED`. Most case facts come from secondary sources. The official sources are Anthropic's announcement, help center and Claude Code commands page, and Apple's Liquid Glass overview snippet. Note: the standalone claude.ai/design site closes by 2026-12-14 (official), so DGC-08/09 must be rechecked against the successor surface. Instagram and practitioner cases (DGC-13..21) come from search-result text; no Instagram or Threads post was readable, and DGC-18/19 rest on SNIPPET_ONLY evidence and should be re-verified before any numeric rule is derived from them. No runtime, receipt-code or CI binding is claimed for DGC-01..21 beyond the existing `design_gate_receipt.py` fields.
+
 
 END
