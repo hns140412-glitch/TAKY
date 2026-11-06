@@ -1,6 +1,7 @@
 ## 2026-11-06 — Case-derived design-gate criteria (TKY-UIREF-001 §20)
 - Added DGC-01..12 to `MASTER/UI_REFERENCE_PROTOCOL.md` §20 from a Claude case review (Claude Design, Apple, Tesla) of the DG-00..10 design-gate contract.
 - No new gates; DG IDs/order unchanged. Adds EXPLORE/EXECUTE mode, derived design-system binding, DELETION_PASS, candidate minimum N, handoff spec hash, export≠editable, automate-last.
+- Added DGC-13..21 from Instagram (2016 icon, 2022 feed rollback, 2024 rug-pull, 2025 grid/iPad/nav) and Claude Design practitioner cases.
 - Claim ceiling: DESIGN_CONTRACT_CASE_REVIEWED; no receipt-code/CI binding beyond existing fields.
 
 ## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 04b

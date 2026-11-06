@@ -347,6 +347,20 @@ Scope: these are criteria, not new gates. DG IDs and order stay unchanged and ap
 | DGC-11 | DG-09 | In continuous release (OTA-style), a receipt is invalid when the spec, artifact or `design_system_id@version` differs from what it recorded. | Tesla single-screen UI with OTA updates (general knowledge). Prior C-02. |
 | DGC-12 | DG-10 / ENFORCEMENT | Automate last. A new automated gate check is added only after the same check passes manual replay at a threshold declared at DG-02. `RULE WRITTEN != RULE ENFORCED`. | Tesla "automate last; early factory automation was the mistake" (secondary: Isaacson). Prior C-09. |
 
+### 20.1b Criteria from Instagram and Claude Design practitioner cases
+
+| ID | Gate | Criterion | Case basis (evidence grade) |
+|---|---|---|---|
+| DGC-13 | DG-00 / DG-05 | Changes to primary navigation, feed or other core surfaces list the affected stakeholder groups in the scope lock and require a staged pilot (limited group or region, opt-in where possible) before broad release. | Instagram's full-screen feed test (2022) was rolled back after creator backlash; Mosseri said the design was "not yet good" (REPUTABLE_SECONDARY: Platformer, Engadget, NBC). The Reels/DM navigation (Oct 2025) went to a regional test and then opt-in (REPUTABLE_SECONDARY: Engadget). |
+| DGC-14 | DG-02 / DG-08 | The output contract carries at least one user-experience criterion that can outrank an engagement metric. Default: content does not change under the user's eye. | Instagram removed "rug-pull" feed refresh in Nov 2024 and accepted some engagement loss (REPUTABLE_SECONDARY; reports differ on whether it applied to Reels or the main feed). |
+| DGC-15 | DG-09 | A change to an output contract (aspect ratio, grid, size class) ships in the same release as a migration path for assets made under the old contract. Otherwise those assets are marked broken. | Instagram changed the profile grid from 1:1 to a taller ratio in Jan 2025, and "Adjust Preview" followed (REPUTABLE_SECONDARY; 4:5 vs 3:4 is unresolved, so no number is cited). |
+| DGC-16 | DG-02 / DG-08 | Each form factor gets its own output contract and render check. A scaled-up build from another form factor fails TARGET_RENDER. | Instagram served iPad a scaled-up iPhone app until the native iPad app in Sep 2025 (REPUTABLE_SECONDARY: Bloomberg). |
+| DGC-17 | DG-01 | For a brand or identity change, separate recognised core elements from decoration before freeze (for example a recall test). | The 2016 Instagram icon redesign used a draw-from-memory step (REPUTABLE_SECONDARY). |
+| DGC-18 | DG-06 | The frozen spec is a file (DESIGN.md or equivalent) that holds tokens plus composition and layout rules **and a prohibition list** (banned generic defaults). `TOKEN MATCH != DESIGN PASS`. | Practitioners report correct token extraction with poor composition, and generic "AI look" defaults when no system or prohibitions are supplied (SNIPPET_ONLY: blogs, skill mirrors). |
+| DGC-19 | DG-08 FONT_PRINT_PDF | Check that the loaded fonts match the spec. CJK text names an explicit font (for example Pretendard or Noto Sans KR). Each export target is rendered, and the output contract declares print-safe CSS (no gradient-clipped text or mask-image for PDF). | Reports of silent font fallback and of PDF exports covering text with colour blocks (SNIPPET_ONLY, including a Korean blog). |
+| DGC-20 | DG-04 / DG-09 | Treat design-system sync as a snapshot. A design-system change requires re-sync and marks earlier synced outputs stale (extends DGC-02). | `/design-sync` pulls the design system into the repo or pushes back to Claude Design (official @ClaudeDevs post and help center, seen as snippets). |
+| DGC-21 | DG-05 | The pilot declares a cost budget per iteration so the pilot does not end before the candidates (DGC-05) are produced. COST-internal; not a new gate. | A tester used about 80% of a weekly Pro allowance in about 25 minutes at launch; a later update reduced per-turn usage (REPUTABLE_SECONDARY: PCWorld, VentureBeat). |
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |
@@ -361,7 +375,7 @@ N (candidate count) and deletion intensity are COST-internal Necessity judgments
 
 ### 20.3 Claim ceiling
 
-`DESIGN_CONTRACT_CASE_REVIEWED`. Most case facts come from secondary sources. The official sources are Anthropic's announcement, help center and Claude Code commands page, and Apple's Liquid Glass overview snippet. Note: the standalone claude.ai/design site closes by 2026-12-14 (official), so DGC-08/09 must be rechecked against the successor surface. No runtime, receipt-code or CI binding is claimed for DGC-01..12 beyond the existing `design_gate_receipt.py` fields.
+`DESIGN_CONTRACT_CASE_REVIEWED`. Most case facts come from secondary sources. The official sources are Anthropic's announcement, help center and Claude Code commands page, and Apple's Liquid Glass overview snippet. Note: the standalone claude.ai/design site closes by 2026-12-14 (official), so DGC-08/09 must be rechecked against the successor surface. Instagram and practitioner cases (DGC-13..21) come from search-result text; no Instagram or Threads post was readable, and DGC-18/19 rest on SNIPPET_ONLY evidence and should be re-verified before any numeric rule is derived from them. No runtime, receipt-code or CI binding is claimed for DGC-01..21 beyond the existing `design_gate_receipt.py` fields.
 
 
 END
