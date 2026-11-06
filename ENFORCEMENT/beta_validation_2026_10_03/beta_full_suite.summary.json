@@ -1,0 +1,31 @@
+{
+  "total": 134,
+  "failures": 3,
+  "seconds": 40.165,
+  "failed": [
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT\\reference_acquisition_runtime_binding_test.py"
+      ],
+      "exit": 1
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/claude_hook_regression.py"
+      ],
+      "exit": 2
+    },
+    {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "ENFORCEMENT/outcome_hook_regression.py"
+      ],
+      "exit": 2
+    }
+  ]
+}

@@ -156,6 +156,13 @@ def guard(
 
     failures = validate(record)
 
+    # The filename and content hash do not bind the record to the caller's
+    # requested identity (including distinct identities with the same slug).
+    if record.get("task_id") != task_id:
+        failures.append("CURRENT_CHECKPOINT_TASK_ID_MISMATCH")
+    if record.get("namespace") != namespace:
+        failures.append("CURRENT_CHECKPOINT_NAMESPACE_MISMATCH")
+
     stored_hash = record.get("checkpoint_hash")
     unhashed = dict(record)
     unhashed.pop("checkpoint_hash", None)

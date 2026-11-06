@@ -107,11 +107,11 @@ class SemanticCurrentTests(unittest.TestCase):
     def test_exact_audited_heads_and_preserved_boundaries(self):
         current = resolver.load_json(resolver.ROOT / resolver.CURRENT)
         self.assertEqual(current['source_heads'], {
-            'TAKY': 'ccfb372ed10110121cec5be615c3e3e0c59f3601',
-            'Ready-Set': 'daed2ebd072061b870bfd0d2f2472dd344661bad',
-            'Hide-Seek': 'f1c4bd7a61edcfab3c9bb0836db162e38ca2311f',
-            'Snap-Pop': '2b9c6941792269244f847b1b978125996a49b5f8',
-            'TAKY-MOBILE': '9bcb7d9660834818457704db2c0a5b16c9964c95',
+            'TAKY': 'e7ca5c7f94f6721a8f399d8deb49f7f01d73f6a2',
+            'Ready-Set': '0c49a2d607c7c26f3ad6ea4ca6fcee4c5b2ad915',
+            'Hide-Seek': '5da6594510cc89341054aafef66d5f4ea47a0210',
+            'Snap-Pop': 'a77e65b383df170e1124d3b9e01ca37eef334d6c',
+            'TAKY-MOBILE': '6c90045d1bc1f957325b7daef0c6079b29338f1e',
             'TAKY-ASSETS': '8d902a93dbb7cde3f38580c4f4d0653a4f1314aa',
         })
         scopes = {row['id']: row for row in current['scopes']}
@@ -119,9 +119,9 @@ class SemanticCurrentTests(unittest.TestCase):
                          {'source_producers': 15, 'active_producers': 0, 'total': 60})
         self.assertEqual(scopes['badge_central']['live_hosted_e2e'], 'OPEN')
         self.assertEqual(scopes['badge_central']['head_ref'],
-                         'de9ca733168bdace6b114b147ffc95ec7c09f064')
+                         '52498dbc09a8db1f50cd7d5d3fe437c5e0c34a69')
         self.assertEqual(scopes['badge_central']['candidate_refs']['TAKY-MOBILE']['head'],
-                         'b42f7e2d0fdf220e552817c41629c5384034888b')
+                         '02bb7fae93dcc5c15b2e7384875075a83e7451c1')
         self.assertEqual(scopes['exploration_crew_ready_consumer_v2']['state'], 'MAIN/CLOSED')
         state = (resolver.ROOT / 'STATE.md').read_text(encoding='utf-8')
         active_state = state.split('Historical quotation of the superseded Ready state')[0]
