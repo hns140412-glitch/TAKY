@@ -72,7 +72,18 @@ function isDiscoveryOnly(ref,rules){
   return known.some(x=>scopes.has(x)) && patternsFor(ref,rules).length===0;
 }
 
-function build(){
+function build(options={}){
+  // An indexed Ledger is not independently approved FORMING. The only
+  // supported invocation is an in-memory preview until the publishing owner
+  // supplies an independently verified approval + atomic publish protocol.
+  if(options.dry_run!==true){
+    const error=new Error('FORMING_APPROVAL_REQUIRED_FOR_LEARNING_REGISTRY_WRITE');
+    error.code='FORMING_APPROVAL_REQUIRED';
+    throw error;
+  }
+  const formingGate=options.forming_gate||null;
+  if(formingGate && (formingGate.ok!==true || formingGate.stage!=='LEARNING_PATTERN_PROJECTION_CANDIDATE' || formingGate.write_performed!==false))
+    throw new Error('FORMING_PROJECTION_GATE_INVALID');
   const template=read(templatePath);
   const rules=read(rulesPath);
   const ledger=read(ledgerPath);
@@ -82,11 +93,15 @@ function build(){
 
   const merged=mergeLedger(ledger.entries);
   const eligible=merged.filter(x=>isEligible(x,rules));
+  // A forming-gated projection is limited to entries independently eligible in the ledger.
+  // Caller-supplied gates are candidates, not an independent approval authority.
+  const formingAllowed=formingGate?new Set((formingGate.candidates||[]).map(x=>clean(x.source_id)+'|'+clean(x.source_ref))):null;
+  const scopedEligible=formingAllowed?eligible.filter(x=>formingAllowed.has(x.source_id+'|'+(clean(x.details?.source_ref)||('INDEX:'+x.source_id)))):eligible;
   const dynamic=[];
   const discoveryOnly=[];
   const heldUnmapped=[];
 
-  for(const ref of eligible){
+  for(const ref of scopedEligible){
     const patterns=patternsFor(ref,rules);
     if(patterns.length){
       dynamic.push({
@@ -132,7 +147,7 @@ function build(){
     patterns:template.patterns,
     canonical_sequence:template.canonical_sequence,
     projection_summary:{
-      indexed_learning_refs:eligible.length,
+      indexed_learning_refs:scopedEligible.length,
       runtime_pattern_refs:dynamic.length,
       discovery_only_refs:discoveryOnly.length,
       held_unmapped_refs:heldUnmapped.length
@@ -153,21 +168,25 @@ function build(){
     guards:rules.guards||[]
   };
 
-  fs.writeFileSync(outPath,JSON.stringify(registry,null,2)+'\n','utf8');
-  fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n','utf8');
-  return {registry,receipt};
+  // No file writes from a candidate build. A real approval must be checked
+  // at a separate trusted publication boundary, not a self-reported gate.
+  return {registry,receipt,write_performed:false,
+    state:'PREVIEW_ONLY_INDEPENDENT_FORMING_APPROVAL_NOT_PUBLISHED'};
 }
 
 if(require.main===module){
-  const {registry,receipt}=build();
-  console.log(JSON.stringify({
-    ok:true,
-    projector:VERSION,
+  // Fail closed for legacy CLI refresh jobs. Do not emit a successful but
+  // stale receipt that downstream stages could misinterpret as updated.
+  const {registry,receipt}=build({dry_run:true});
+  console.error(JSON.stringify({
+    ok:false,state:'HOLD',reason:'FORMING_APPROVAL_REQUIRED_FOR_LEARNING_REGISTRY_WRITE',
+    projector:VERSION,write_performed:false,
     summary:registry.projection_summary,
     projected:receipt.projected,
     discovery_only:receipt.discovery_only,
     held_unmapped_count:receipt.held_unmapped.length
   },null,2));
+  process.exitCode=2;
 }
 
 module.exports=Object.freeze({VERSION,mergeLedger,patternsFor,isEligible,isDiscoveryOnly,build});

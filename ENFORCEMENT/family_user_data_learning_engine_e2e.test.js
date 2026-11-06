@@ -94,6 +94,24 @@ const assignment=(member,id,status,title)=>({
     const ca2=await Context.read(store,'F1','A');
     assert.equal(ca2.data.records['HW-A1'].status,'COMPLETED');
 
+    // A failure AFTER the central commit must return a durable receipt rather
+    // than a generic 503 that could cause accidental duplicate client edits.
+    const archiveUnavailable={
+      getWithMetadata:(...args)=>store.getWithMetadata(...args),
+      setJSON:(key,value,opts)=>key.endsWith('/archive-outbox-v1')
+        ? Promise.reject(new Error('DRIVE_BACKUP_QUEUE_DOWN'))
+        : store.setJSON(key,value,opts)
+    };
+    const partialEp=Endpoint.create({store:archiveUnavailable,verifyBearerToken:async()=>parent});
+    const partial=await partialEp.handle(post(assignment('A','HW-BACKUP-DEFERRED','DRAFT','Stored even without archive queue')));
+    assert.equal(partial.status,202,partial.body);
+    const partialBody=JSON.parse(partial.body);
+    assert.equal(partialBody.storage_confirmed,true);
+    assert.equal(partialBody.backup_outbox_retry_required,true);
+    const durable=await UserData.read(store,{family_id:'F1',member_id:'A',record_type:'ASSIGNMENT',record_id:'HW-BACKUP-DEFERRED'},{authenticated:true,family_id:'F1',authorized_member_ids:['A']});
+    assert.equal(durable.ok,true);
+    assert.equal(durable.record.payload.title,'Stored even without archive queue');
+
     console.log('FAMILY_USER_DATA_LEARNING_ENGINE_E2E_PASS');
     console.log(JSON.stringify({
       parent_assignment_write:true,

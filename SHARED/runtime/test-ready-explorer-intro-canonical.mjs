@@ -91,12 +91,30 @@ try{
  record(await page.evaluate(()=>({phase:'LORI_AUDIO',actor:document.querySelector('[data-rc-who]')?.textContent,
   bubble:document.querySelector('[data-rc-quote]')?.textContent,
   key:window.ReadyExplorerIntroEvidence.last_key})));
+ if(!(await page.locator('#rcConfirmEncounter').isDisabled()))throw Error('CORE6_FIRST_MEET_GATE_NOT_ENFORCED');
+ for(const id of ['ink','nova','take','zero'])await touch('[data-rc-crew="'+id+'"]');
+ await touch('[data-rc-crew="lori"]');
+ await page.waitForFunction(()=>!document.querySelector('#rcConfirmEncounter')?.disabled,null,{timeout:9000});
  await touch('#rcConfirmEncounter');
+ await page.waitForFunction(()=>['THEME','CREW_SELECT'].includes(window.ReadyIdentityV1?.get?.().onboardingStep),null,{timeout:7000});
+ if((await page.evaluate(()=>window.ReadyIdentityV1.get().onboardingStep))==='CREW_SELECT'){
+   for(const id of ['dubi','ink','nova','take'])await page.locator('[data-rfj-crew="'+id+'"]').click();
+   await page.locator('#rfjNext').click();
+ }
  await page.waitForFunction(()=>document.querySelector('[data-rc-screen="THEME"]'),null,{timeout:7000});
  record(await page.evaluate(()=>({phase:'THEME',identity:window.ReadyIdentityV1.get(),
   previous_main:JSON.parse(localStorage.getItem('taky_explorer_crew_canonical_v1')).state.relation.main_character_id})));
  await touch('[data-rc-theme="TODAYS_ISLAND"]');
  await touch('#rcFinish');
+ if((await page.evaluate(()=>window.ReadyIdentityV1.get().onboardingStep))==='PACK_BAG'){
+   await page.locator('[data-rfj-gear="map"]').click();await page.locator('#rfjNext').click();
+   await page.locator('[data-rfj-route="SAIL"]').click();await page.locator('#rfjNext').click();
+   await page.locator('[data-rfj-step="ISLAND_FIRST_SIGHT"] #rfjNext').click();
+   await page.locator('#rfjIslandName').fill('브라우저섬');await page.locator('#rfjNext').click();
+   await page.locator('[data-rfj-step="BASECAMP_DISCOVERY"] #rfjNext').click();
+   await page.locator('#rfjBasecampName').fill('브라우저캠프');await page.locator('#rfjNext').click();
+   await page.locator('[data-rfj-step="BASECAMP_ARRIVAL"] #rfjNext').click();
+ }
  await page.waitForFunction(()=>window.ReadyIdentityV1?.isReady?.(),null,{timeout:9000});
  record(await page.evaluate(()=>({phase:'COMPLETED',profile:window.ReadyIdentityV1.get(),
   main:JSON.parse(localStorage.getItem('taky_explorer_crew_canonical_v1')).state.relation.main_character_id})));
@@ -113,7 +131,7 @@ try{
   e?.profile?.journeyTheme==='TODAYS_ISLAND'&&e?.main===null?'PASS_FIRST_ENCOUNTER_TO_READY':'FAIL_ASSERTIONS';
 }catch(error){report.error=String(error);report.status='OPEN_BROWSER_ERROR'}
 finally{
- writeFileSync('D:/Git PWA/TAKY/staging/crew_voice_20261012/READY_INTRO_CANONICAL_CORE6_BROWSER_QA_20261013.json',
+ writeFileSync('D:/Git PWA/TAKY/staging/crew_voice_20261012/READY_INTRO_CANONICAL_CORE6_BROWSER_QA_20261017.json',
   JSON.stringify(report,null,2));
  console.log('QA',report.status,report.error||'');
  if(context)await Promise.race([context.close().catch(()=>{}),new Promise(r=>setTimeout(r,1500))]);

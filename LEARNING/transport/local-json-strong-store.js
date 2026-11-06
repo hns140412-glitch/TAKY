@@ -57,7 +57,19 @@ class LocalJsonStrongStore{
       const payload=JSON.stringify({store_version:VERSION,key,data:value});
       const tmp=p.data+'.tmp.'+process.pid+'.'+Date.now();
       await fsp.writeFile(tmp,payload,'utf8');
-      await fsp.rename(tmp,p.data);
+      // Windows Defender/indexers can momentarily hold the destination handle.
+      // Never unlink the previous committed file; bounded rename retries preserve
+      // its atomic replacement semantics and keep the per-key lock held.
+      let renamed=false;
+      try{
+        for(let attempt=0;attempt<7;attempt++){
+          try{await fsp.rename(tmp,p.data);renamed=true;break;}
+          catch(error){
+            if(!['EPERM','EACCES','EBUSY','EEXIST'].includes(error?.code)||attempt===6)throw error;
+            await sleep(15*(attempt+1));
+          }
+        }
+      }finally{if(!renamed)await fsp.unlink(tmp).catch(()=>{});}
       return {modified:true,etag:digest(payload)};
     }finally{
       await lock.close().catch(()=>{});

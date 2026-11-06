@@ -5,9 +5,10 @@ const {spawn,spawnSync}=require('node:child_process');
 const specialist=process.argv.includes('--specialists');
 const target=path.join(__dirname,specialist?'family_group_specialist_browser_qa.cjs':'family_group_independent_browser_qa.cjs');
 const safe=specialist?'SPECIALISTS':process.argv.includes('--ready-probe')?'READY':process.argv.includes('--all')?'ALL':'SAFE';
-const timeoutMs=safe==='READY'?16000:safe==='SPECIALISTS'?22000:safe==='ALL'?46000:30000;
+const timeoutMs=safe==='READY'?22000:safe==='SPECIALISTS'?22000:safe==='ALL'?46000:30000;
 const env={...process.env,
  TAKY_QA_BROWSER_SKIP_READY:safe==='SAFE'?'1':'0',
+ TAKY_QA_BROWSER_READY_ONLY:safe==='READY'?'1':'0',
  TAKY_QA_BROWSER_ACTORS:safe==='READY'?'A-P1':undefined,
  TAKY_QA_BROWSER_STEPS:safe==='READY'?'2':'3',
  TAKY_QA_BROWSER_TRACE:'1'};

@@ -13,7 +13,7 @@ const clientSrc=fs.readFileSync(ROOT+'/TAKY/SHARED/runtime/taky-learning-evidenc
 const hideBridgeSrc=fs.readFileSync(ROOT+'/Hide & Seek/hide-bridge.js','utf8');
 const snapBridgeSrc=fs.readFileSync(ROOT+'/Snap & Pop/snap-bridge.js','utf8');
 const readySrc=fs.readFileSync(ROOT+'/Ready & Set/ready-runtime-v07.js','utf8');
-const readyPracticeSrc=fs.readFileSync(ROOT+'/READY-WEBAPP-20261006/ready-verifiable-practice-evidence-v1.js','utf8');
+const readyPracticeSrc=fs.readFileSync(ROOT+'/Ready & Set/ready-verifiable-practice-evidence-v1.js','utf8');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function drain(client){
   let last=null;
@@ -159,5 +159,5 @@ async function receiptKinds(store){
     assert.equal(JSON.stringify(r.practice.event).includes('expected_values'),false,'trusted answer reference must stay server-side');
     console.log('LEARNING_OWNER_RUNTIME_E2E_PASS');
     console.log(JSON.stringify({hide_verified:true,snap_verified:true,ready_central_observation:true,ready_verified_practice:true,ready_self_report_not_promoted:true}));
-  }finally{await fsp.rm(dir,{recursive:true,force:true})}
+  }finally{await sleep(350);await fsp.rm(dir,{recursive:true,force:true,maxRetries:8,retryDelay:40})}
 })().catch(e=>{console.error(e);process.exit(1)});

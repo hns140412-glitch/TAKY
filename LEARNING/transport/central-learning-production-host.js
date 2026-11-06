@@ -60,8 +60,13 @@ function create({
   const characterAssetEndpoint=characterAssetObjectStore?CharacterAsset.create({verifyBearerToken,objectStore:characterAssetObjectStore}):null;
   const familySessionEndpoint=FamilySession.create({verifyBearerToken});
   const familyMemberProfileEndpoint=FamilyMemberProfile.create({verifyBearerToken,store});
+  // For a production host with term resolvers, use the SAME authenticated,
+  // strong durable evidence store as /api/learning/evidence by default.
+  // An explicitly supplied trusted resolver remains a legacy override.
   const termRecommendationEndpoint=(resolveLearnerProfile||resolveCurriculumTerms||resolveTermEvidence)
-    ?TermRecommendation.create({verifyBearerToken,resolveLearnerProfile,resolveCurriculumTerms,resolveTermEvidence})
+    ?TermRecommendation.create({verifyBearerToken,resolveLearnerProfile,
+        resolveCurriculumTerms,...(resolveTermEvidence
+          ?{resolveTermEvidence}:{durableTermStore:store})})
     :null;
   const userDataEndpoint=FamilyUserData.create({verifyBearerToken,store});
   const apiHandler=NodeBridge.createHandler({

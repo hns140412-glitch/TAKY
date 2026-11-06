@@ -164,6 +164,106 @@ class PersonalWriterTests(unittest.TestCase):
         self.assertIn("F01",prompt)
         self.assertIn("독자의 질문에 바로 답하는",prompt)
 
+
+    def test_16_photo_lead_preserves_user_objective_in_visible_opening(self):
+        source=personal()
+        for kind in ("PHOTOLOG","TRAVEL_JOURNAL","SOCIAL_POST","BLOG","NEWSLETTER","REVIEW","ESSAY"):
+            with self.subTest(kind=kind):
+                row=writer.compose({**source,"kind":kind})
+                self.assertIn(source["goal"],row["draft_markdown"][:400])
+                self.assertEqual(row["editorial_review"]["purpose_literal_in_draft"],True)
+                self.assertEqual(row["editorial_review"]["purpose_in_first_400_characters"],True)
+                self.assertEqual(row["fact_ids_covered"],len(source["facts"]))
+                self.assertFalse(row["editorial_review"]["factual_truth_verified"])
+                self.assertEqual(row["publication_status"],"LOCAL_DRAFT_NOT_PUBLISHED")
+
+    def test_18_single_photo_is_not_misrepresented_as_a_sequence(self):
+        source=personal()
+        one=writer.compose({**source,"kind":"SOCIAL_POST"})["draft_markdown"]
+        self.assertNotIn("사진 순서대로",one)
+        self.assertIn("기록된 내용을 살펴봅니다",one)
+        two=writer.compose({**source,"kind":"PHOTOLOG",
+                            "photos":source["photos"]+[
+                                {"caption":"입구에서 본 안내판","source":"MY_CAPTION"}]})
+        self.assertIn("사진 순서대로",two["draft_markdown"])
+
+    def test_17_parallel_blocks_objective_or_fact_drift(self):
+        from unittest.mock import patch
+        real=writer.compose
+        def corrupted_fact(payload):
+            answer=real(payload)
+            if payload["kind"]=="SOCIAL_POST":
+                answer["fact_ids_covered"]-=1
+                answer["editorial_review"]["facts_missing"]=["F02"]
+            return answer
+        with patch.object(writer,"compose",side_effect=corrupted_fact):
+            with self.assertRaisesRegex(ValueError,"PARALLEL_FACT_COVERAGE_FAILED"):
+                writer.compose_parallel(personal(),["BLOG","SOCIAL_POST"])
+        def corrupted_purpose(payload):
+            answer=real(payload)
+            if payload["kind"]=="SOCIAL_POST":
+                answer["editorial_review"]["purpose_in_first_400_characters"]=False
+            return answer
+        with patch.object(writer,"compose",side_effect=corrupted_purpose):
+            with self.assertRaisesRegex(ValueError,"PARALLEL_PURPOSE_COVERAGE_FAILED"):
+                writer.compose_parallel(personal(),["BLOG","SOCIAL_POST"])
+
+
+    def test_19_real_loopback_ui_and_multi_genre_user_result(self):
+        """Start the real app server in an isolated child, not a mocked route."""
+        import socket
+        import time
+        import urllib.request
+        from urllib.error import URLError
+        with socket.socket() as socket_probe:
+            socket_probe.bind(("127.0.0.1",0))
+            port=socket_probe.getsockname()[1]
+        command=[sys.executable,"-X","utf8",
+                 str(TOOLS/"TAKY_WRITING_FLOW.py"),"--serve","--port",str(port)]
+        proc=subprocess.Popen(command,stdin=subprocess.DEVNULL,
+                              stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,
+                              env={**os.environ,"PYTHONIOENCODING":"utf-8"})
+        try:
+            base=f"http://127.0.0.1:{port}"
+            for _ in range(60):
+                if proc.poll() is not None:
+                    self.fail("LOCAL_WRITING_UI_SERVER_TERMINATED")
+                try:
+                    with urllib.request.urlopen(base+"/health",timeout=.6) as response:
+                        health=json.load(response)
+                    break
+                except (OSError,URLError):
+                    time.sleep(.1)
+            else:
+                self.fail("LOCAL_WRITING_UI_SERVER_UNAVAILABLE")
+            self.assertEqual(health["status"],"LOCAL_PREVIEW_CANDIDATE")
+            with urllib.request.urlopen(base+"/",timeout=3) as response:
+                self.assertEqual(response.status,200)
+                self.assertIn(b"<!",response.read(4000))
+            doc={"input":personal(),
+                 "genres":["PHOTOLOG","TRAVEL_JOURNAL","SOCIAL_POST"]}
+            request=urllib.request.Request(
+                base+"/compose",
+                json.dumps(doc,ensure_ascii=False).encode("utf-8"),
+                {"Content-Type":"application/json; charset=utf-8",
+                 "Origin":base},method="POST")
+            with urllib.request.urlopen(request,timeout=5) as response:
+                output=json.load(response)
+            self.assertIs(output["published"],False)
+            self.assertEqual(output["paid_api_calls"],0)
+            for kind,result in output["results"].items():
+                self.assertIn(doc["input"]["goal"],result["draft"][:400])
+                self.assertEqual(result["fact_ids_covered"],2)
+                self.assertIs(result["editorial_review"]["purpose_in_first_400_characters"],True)
+                self.assertEqual(result["status"],"EVIDENCE_COVERED_DRAFT_CANDIDATE")
+        finally:
+            proc.terminate()
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait(timeout=3)
+
     def test_11_repeat_protection(self):
         with self.assertRaisesRegex(ValueError,"DUPLICATE_PARALLEL_KIND"):
             writer.compose_parallel(personal(),["블로그","BLOG"])

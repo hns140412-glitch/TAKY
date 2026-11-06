@@ -212,23 +212,31 @@ async function actorBot(actor,n){
    if(reopened.member!==actor.id)issues.push({app:'Ready & Set',action:'reconnect',error:'MEMBER_MISMATCH'});
    trace.push({app:'Ready & Set',action:'reload',status:'PASS',memberStable:reopened.member===actor.id});
   }else if(actor.role==='ADMIN'){
-   progress(actor.id,'MOBILE_NAV');
+   // An unauthenticated synthetic browser must not become an admin just
+   // because its local test actor is named SYS-ADMIN. Authorized admin
+   // interactions belong to the real signed-session E2E separately.
+   progress(actor.id,'MOBILE_PUBLIC_AUTH_BOUNDARY');
    await page.goto('http://127.0.0.1:4431/',{waitUntil:'domcontentloaded',timeout:6500});
-   await page.waitForSelector('#operationsList .ops-strip-counts',{timeout:5000});
-   const tabs=shuffle(['ops','work','trace','lab','taky'],random).slice(0,steps);
-   for(const target of tabs){
-    try{
-     await page.locator('.nav-btn[data-target="'+target+'"]').click({timeout:2200});
-     const visible=await page.locator('.screen[data-screen="'+target+'"]').isVisible();
-     if(!visible)throw Error('ADMIN_PANEL_NOT_VISIBLE');
-     trace.push({app:'TAKY Mobile',action:'nav-'+target,status:'PASS'});
-    }catch(e){issues.push({app:'TAKY Mobile',action:'nav-'+target,error:String(e.message).slice(0,220)});}
-   }
-   const badge=await page.locator('[data-check="family-backup"]').getAttribute('data-state');
-   if(badge==='VERIFIED')issues.push({app:'TAKY Mobile',action:'no-false-green',error:'FAMILY_BACKUP_FALSE_VERIFIED'});
-   trace.push({app:'TAKY Mobile',action:'verify-unconnected-backup',status:'PASS',state:badge});
+   await page.locator('#appGrid .app-card').first().waitFor({state:'attached',timeout:6000});
+   const privateOps=await page.locator('.nav-btn[data-target="ops"]').isVisible();
+   const privateAdmin=await page.locator('.nav-btn[data-target="admin"]').isVisible();
+   const visibleOps=await page.locator('#operationsPanel').isVisible();
+   if(privateOps||privateAdmin||visibleOps)
+    issues.push({app:'TAKY Mobile',action:'guest-auth-boundary',error:'PRIVATE_ADMIN_EXPOSED_BEFORE_AUTH'});
+   // WORK/LAB/TRACE/OPS and ADMIN are private routes in current HTML.
+   // Public app shortcuts remain usable without exposing management data.
+   const forbiddenTabs=['work','trace','lab','ops','admin'];
+   const publicLeak=await page.evaluate(keys=>keys.filter(key=>{
+    const b=document.querySelector('.nav-btn[data-target="'+key+'"]');
+    return b&&getComputedStyle(b).display!=='none'&&!!b.getClientRects().length;
+   }),forbiddenTabs);
+   if(publicLeak.length)issues.push({app:'TAKY Mobile',action:'private-guest-navigation',error:'ADMIN_NAV_VISIBLE:'+publicLeak.join(',')});
+   const publicApps=await page.locator('#appGrid .app-card').count();
+   if(publicApps!==5)issues.push({app:'TAKY Mobile',action:'public-apps',error:'PUBLIC_APP_COUNT:'+publicApps});
+   trace.push({app:'TAKY Mobile',action:'private-ops-denied-until-login',status:'PASS',
+    authorizedAdminSessionTested:false,publicApps,privateNavigationVisible:publicLeak.length});
   }
-  if(actor.role!=='ADMIN'){
+  if(actor.role!=='ADMIN'&&process.env.TAKY_QA_BROWSER_READY_ONLY!=='1'){
    const preview=actor.role==='PARENT'?'parent':'child';
    progress(actor.id,'SAVEY_NAV');
    await page.goto('http://127.0.0.1:4432/?preview='+preview,{waitUntil:'domcontentloaded',timeout:7500});
@@ -262,8 +270,12 @@ async function actorBot(actor,n){
 }
 (async()=>{
  try{
-  for(const cfg of roots){const srv=staticServer(cfg.root,cfg.port);await new Promise((resolve,reject)=>{srv.once('listening',resolve);srv.once('error',reject)});servers.push(srv);}
-  viteChild=await vite();
+  const readyOnly=process.env.TAKY_QA_BROWSER_READY_ONLY==='1';
+  for(const cfg of (readyOnly?roots.filter(x=>x.port===4430):roots)){
+   const srv=staticServer(cfg.root,cfg.port);
+   await new Promise((resolve,reject)=>{srv.once('listening',resolve);srv.once('error',reject)});servers.push(srv);
+  }
+  if(!readyOnly)viteChild=await vite();
   browser=await chromium.launch({headless:true,channel:'chrome',timeout:15000});
   const pool=[...runRoles],active=[];
   // Up to three real contexts at once. Each bot picks its own action order.

@@ -63,8 +63,15 @@ function resolveArgs(contextOrRegistry={},maybeRegistry=null){
 function derive(term={},contextOrRegistry={},maybeRegistry=null){
   const {context,registry}=resolveArgs(contextOrRegistry,maybeRegistry);
   const sig=signals(term,context);
+  // Only an explicit, non-operational FORMING preview scopes pattern decisions
+  // to the source(s) approved in that preview. Production registry semantics
+  // and default Learning Engine behavior remain unchanged.
+  const preview=registry.projection_scope?.mode==='BOUND_FORMING_PREVIEW_ONLY'
+    && registry.projection_scope?.operational===false;
+  const allowed=preview?new Set((registry.sources||[])
+    .flatMap(s=>Array.isArray(s.patterns)?s.patterns:[])):null;
   const patternIds=Object.entries(registry.patterns||{})
-    .filter(([,p])=>matches(p,sig))
+    .filter(([id,p])=>(!preview||allowed.has(id))&&matches(p,sig))
     .map(([id])=>id);
   const sourceRefs=uniq((registry.sources||[])
     .filter(s=>(s.patterns||[]).some(id=>patternIds.includes(id)))

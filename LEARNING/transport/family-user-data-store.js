@@ -3,7 +3,7 @@
 const VERSION='TAKY_FAMILY_USER_DATA_STORE_V1';
 const TYPES=new Set([
   'ASSIGNMENT','LEARNING_ARTIFACT','SELF_REPORT','HELP_EVENT','CHECK_EVENT',
-  'CURIOSITY_RECORD','SUBJECT_OBSERVATION'
+  'CURIOSITY_RECORD','SUBJECT_OBSERVATION','PLANNER_SNAPSHOT','SCHEDULE_SNAPSHOT','EXECUTION_EVENT','MATERIAL_REFERENCE'
 ]);
 const STATUSES=new Set(['DRAFT','CONFIRMED','COMPLETED','ARCHIVED']);
 const ID=/^[A-Za-z0-9._:-]{1,128}$/;
@@ -51,6 +51,8 @@ function normalize(record={},previous=null,now=new Date().toISOString()){
   if(record.due_at!=null&&!dueAt)issues.push('DUE_AT_INVALID');
   if(type==='ASSIGNMENT'&&status!=='DRAFT'&&!clean(record.payload?.title))
     issues.push('CONFIRMED_ASSIGNMENT_TITLE_REQUIRED');
+  if(type==='PLANNER_SNAPSHOT'&&(!object(record.payload?.planner)||!object(record.payload?.foundation)))
+    issues.push('PLANNER_SNAPSHOT_SHAPE_INVALID');
   if(previous){
     if(previous.family_id!==scope.family_id||previous.member_id!==scope.member_id||
        previous.record_type!==type||previous.record_id!==recordId)
@@ -72,8 +74,8 @@ function normalize(record={},previous=null,now=new Date().toISOString()){
     due_at:dueAt,
     created_at:previous?.created_at||iso(record.created_at)||now,
     updated_at:now,
-    learning_review_status:['CONFIRMED','COMPLETED'].includes(status)
-      ? 'PENDING_LEARNING_REVIEW':'NOT_READY',
+    learning_review_status:['PLANNER_SNAPSHOT','SCHEDULE_SNAPSHOT','MATERIAL_REFERENCE'].includes(type)
+      ? 'NOT_APPLICABLE':(['CONFIRMED','COMPLETED'].includes(status)?'PENDING_LEARNING_REVIEW':'NOT_READY'),
     backup_status:'PENDING_VERIFIED_ARCHIVE'
   };
   return {ok:true,record:out};
@@ -101,8 +103,12 @@ async function commit(store,input={},identity={},options={}){
   const normalized=normalize(input,current?.data||null,options.now||new Date().toISOString());
   if(!normalized.ok)return {ok:false,reason:'USER_DATA_RECORD_INVALID',issues:normalized.issues};
   const write=await store.setJSON(key,normalized.record,current?{onlyIfMatch:current.etag}:{onlyIfNew:true});
+  // Conditional-write rejection with an observed ETag is a version conflict,
+  // not a provider outage. Return 409 so clients do not retry stale edits blindly.
+  if(write?.modified===false&&clean(write.etag))
+    return {ok:false,reason:'USER_DATA_ETAG_MISMATCH',conflict:true};
   if(write?.modified!==true||!clean(write.etag))
-    return {ok:false,reason:'USER_DATA_DURABLE_WRITE_UNCONFIRMED',retryable:write?.modified===false};
+    return {ok:false,reason:'USER_DATA_DURABLE_WRITE_UNCONFIRMED',retryable:true};
   return {ok:true,record:normalized.record,etag:write.etag,created:!current,key};
 }
 

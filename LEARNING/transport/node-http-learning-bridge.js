@@ -2,6 +2,7 @@
 
 const {URL}=require('node:url');
 const {MAX_BODY_BYTES,ENDPOINT}=require('./central-learning-http-endpoint.js');
+const HTTP_MAX_BODY_BYTES=Math.max(MAX_BODY_BYTES,require('./family-user-data-http-endpoint.js').MAX_BODY_BYTES);
 const Decision=require('./central-learning-decision-http-endpoint.js');
 const CharacterProfile=require('./family-character-profile-http-endpoint.js');
 const CharacterAsset=require('./family-character-asset-http-endpoint.js');
@@ -29,7 +30,7 @@ const clean=v=>typeof v==='string'?v.trim():'';
  * Only the explicit Origin allowlist receives CORS approval. A cross-origin
  * browser needs Authorization: Bearer and application/json, never wildcard.
  */
-function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,characterAssetEndpoint=null,familySessionEndpoint=null,familyMemberProfileEndpoint=null,termRecommendationEndpoint=null,userDataEndpoint=null,allowedOrigins=[],maxBodyBytes=MAX_BODY_BYTES}={}){
+function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=null,characterAssetEndpoint=null,familySessionEndpoint=null,familyMemberProfileEndpoint=null,termRecommendationEndpoint=null,userDataEndpoint=null,allowedOrigins=[],maxBodyBytes=HTTP_MAX_BODY_BYTES}={}){
  if(typeof endpoint?.handle!=='function')throw Error('CENTRAL_LEARNING_ENDPOINT_REQUIRED');
  if(decisionEndpoint!==null&&typeof decisionEndpoint?.handle!=='function')
    throw Error('CENTRAL_DECISION_ENDPOINT_INVALID');
@@ -48,7 +49,7 @@ function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=
  if(!Array.isArray(allowedOrigins)||new Set(allowedOrigins).size!==allowedOrigins.length||
     allowedOrigins.some(s=>!clean(s)||!/^https:\/\/[^/]+$/.test(s)))
    throw Error('EXPLICIT_HTTPS_ORIGIN_ALLOWLIST_REQUIRED');
- if(!Number.isInteger(maxBodyBytes)||maxBodyBytes<1024||maxBodyBytes>MAX_BODY_BYTES)
+ if(!Number.isInteger(maxBodyBytes)||maxBodyBytes<1024||maxBodyBytes>HTTP_MAX_BODY_BYTES)
    throw Error('HTTP_BODY_BOUND_REQUIRED');
  const allowed=new Set(allowedOrigins);
  return async function handler(req,res){
@@ -73,14 +74,17 @@ function createHandler({endpoint,decisionEndpoint=null,characterProfileEndpoint=
      return fail(res,404,'CENTRAL_LEARNING_ENDPOINT_NOT_FOUND',cors);
    const userDataGet=userDataEndpoint&&path===FamilyUserData.ENDPOINT&&req.method==='GET';
    if(req.method!=='POST'&&!userDataGet)return fail(res,405,'POST_REQUIRED',cors);
+   const perRouteBodyLimit=path===FamilyUserData.ENDPOINT
+     ? Math.min(maxBodyBytes,FamilyUserData.MAX_BODY_BYTES)
+     : Math.min(maxBodyBytes,MAX_BODY_BYTES);
    const length=Number(req.headers?.['content-length']);
-   if(Number.isFinite(length)&&length>maxBodyBytes)
+   if(Number.isFinite(length)&&length>perRouteBodyLimit)
      return fail(res,413,'BOUNDED_JSON_BODY_REQUIRED',cors);
    const chunks=[];let size=0;
    try{
      for await(const chunk of req){
        size+=chunk.length;
-       if(size>maxBodyBytes)
+       if(size>perRouteBodyLimit)
          return fail(res,413,'BOUNDED_JSON_BODY_REQUIRED',cors);
        chunks.push(chunk);
      }

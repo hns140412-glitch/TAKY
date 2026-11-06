@@ -160,6 +160,28 @@ function deriveTermRecommendations(input={}){
   return checked.ok?result:{ok:false,reason:'TERM_RECOMMENDATION_INVALID',issues:checked.issues,detail:result};
 }
 
+// The existing Learning Engine exposes an explicit, non-operational route to
+// observe how a verified FORMING source *would* alter term activity selection.
+function previewBoundFormingTermRecommendations(input={}) {
+  const {previewBoundSelector}=require('../projection/forming-approved-input');
+  const result=previewBoundSelector(
+    input.prepared,input.approval_record_path,input.authority_options||{},
+    input.term_input||{}
+  );
+  if(!result.ok)return {ok:false,engine_runtime:VERSION,stage:result.stage,
+    issues:result.issues||[],learning_consumed:false,write_performed:false};
+  return {
+    ok:true,engine_runtime:VERSION,stage:'LEARNING_ENGINE_SCOPED_PREVIEW',
+    authority:'TAKY_LEARNING_PREVIEW_NOT_OPERATIONAL',
+    artifact_id:result.artifact_id,artifact_revision:result.artifact_revision,
+    source_ids:result.source_ids,
+    selector_decision:result.decision,
+    app_consumer_notified:false,learning_consumed:false,
+    feedback_persisted:false,write_performed:false,
+    release_approved:false,
+  };
+}
+
 function deriveAcademicVocabularyTargets(input={}){
   const result=AcademicVocabUnit.select(input);
   if(!result.ok)return result;
@@ -193,4 +215,4 @@ function validate(result={}){
   return {ok:issues.length===0,issues};
 }
 
-module.exports=Object.freeze({VERSION,derive,deriveTermRecommendations,deriveAcademicVocabularyTargets,applyOutcome,validate});
+module.exports=Object.freeze({VERSION,derive,deriveTermRecommendations,previewBoundFormingTermRecommendations,deriveAcademicVocabularyTargets,applyOutcome,validate});

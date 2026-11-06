@@ -112,6 +112,17 @@ function main(){
 
 try{main()}
 catch(err){
+  // The legacy projector must never turn an expected FORMING-approval HOLD
+  // into a freshly written CURRENT failure receipt. The first step is the
+  // only one attempted; old CURRENT, registry and application data stay intact.
+  if(err.step?.label==='PROJECT_INDEXED_MINING_PATTERNS'
+    && err.step.stderr?.includes('FORMING_APPROVAL_REQUIRED_FOR_LEARNING_REGISTRY_WRITE')){
+    console.error(JSON.stringify({ok:false,state:'HOLD',
+      reason:'FORMING_APPROVAL_REQUIRED_FOR_LEARNING_REGISTRY_WRITE',
+      version:VERSION,write_performed:false,
+      current_receipt_updated:false,registry_updated:false},null,2));
+    process.exitCode=2;
+  }else{
   const failure={
     schema:'TAKY_POST_MINING_LEARNING_REFRESH_RECEIPT_V1',
     generated_at:new Date().toISOString(),
@@ -124,4 +135,5 @@ catch(err){
   fs.writeFileSync(receiptPath,JSON.stringify(failure,null,2)+'\n','utf8');
   console.error(JSON.stringify(failure,null,2));
   process.exit(1);
+  }
 }

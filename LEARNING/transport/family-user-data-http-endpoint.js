@@ -3,6 +3,7 @@
 const Identity=require('./family-member-identity-resolver.js');
 const UserData=require('./family-user-data-store.js');
 const LearningContext=require('./member-learning-context-store.js');
+const ArchiveOutbox=require('./family-user-data-archive-outbox.js');
 
 const VERSION='TAKY_FAMILY_USER_DATA_HTTP_V1';
 const ENDPOINT='/api/family/user-data';
@@ -59,9 +60,23 @@ function create({verifyBearerToken,store,maxBodyBytes=MAX_BODY_BYTES}={}){
           committed.retryable?503:422;
         return bad(status,committed.reason,{issues:committed.issues});
       }
+      // Commit to the existing central store first. The private SIEZEALL Drive
+      // archive is an independently retryable durable outbox, never an implicit
+      // direct client write or a reason to discard confirmed learner work.
+      let archive;
+      try{archive=await ArchiveOutbox.queue(store,committed.record,committed.etag)}
+      catch{archive={ok:false,reason:'ARCHIVE_OUTBOX_TEMPORARILY_UNAVAILABLE'}}
+      if(!archive.ok)return response(202,{
+        ok:true,record_id:committed.record.record_id,record_type:committed.record.record_type,
+        storage_confirmed:true,etag:committed.etag,backup_status:'PENDING_VERIFIED_ARCHIVE',
+        backup_outbox_retry_required:true,archive_issue:archive.reason
+      });
       let learning={ok:true,queued:false,reason:'RECORD_NOT_READY_FOR_LEARNING_REVIEW'};
-      if(['CONFIRMED','COMPLETED'].includes(committed.record.status)){
-        learning=await LearningContext.queue(store,committed.record,committed.etag);
+      // Planner snapshots are state projections, not verified learning evidence.
+      if(['CONFIRMED','COMPLETED'].includes(committed.record.status)&&
+          !['PLANNER_SNAPSHOT','SCHEDULE_SNAPSHOT','MATERIAL_REFERENCE'].includes(committed.record.record_type)){
+        try{learning=await LearningContext.queue(store,committed.record,committed.etag)}
+        catch{learning={ok:false,reason:'LEARNING_CONTEXT_QUEUE_TEMPORARILY_UNAVAILABLE'}}
         if(!learning.ok)return response(202,{
           ok:true,record_id:committed.record.record_id,record_type:committed.record.record_type,
           record_status:committed.record.status,storage_confirmed:true,etag:committed.etag,
@@ -75,6 +90,7 @@ function create({verifyBearerToken,store,maxBodyBytes=MAX_BODY_BYTES}={}){
         learning_context_queued:learning.queued===true,
         learning_review_status:committed.record.learning_review_status,
         backup_status:committed.record.backup_status,
+        backup_outbox_queued:true,
         drive_is_runtime_authority:false
       });
     }

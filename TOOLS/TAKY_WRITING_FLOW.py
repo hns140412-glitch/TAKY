@@ -162,6 +162,10 @@ def _editorial_review(kind, draft, payload, facts, photos, profile):
         "evaluation_kind":"STRUCTURAL_AND_LITERAL_ONLY_NOT_SEMANTIC_JUDGEMENT",
         "audience_supplied":bool(payload.get("audience")),
         "purpose_supplied":bool(payload.get("goal")),
+        "purpose_literal_in_draft":(
+            payload["goal"] in draft if payload.get("goal") else None),
+        "purpose_in_first_400_characters":(
+            0<=draft.find(payload["goal"])<400 if payload.get("goal") else None),
         "first_fact_in_first_400_characters":-1<first_fact_position<400 if facts else None,
         "facts_literal_coverage":len(coverage),
         "facts_missing":missing,
@@ -208,7 +212,9 @@ def compose(payload):
     lines=["# "+title,""]
     if kind in {"BLOG","PHOTOLOG","TRAVEL_JOURNAL","SOCIAL_POST","REVIEW","NEWSLETTER","ESSAY"}:
         if kind in {"BLOG","SOCIAL_POST","TRAVEL_JOURNAL","PHOTOLOG"} and photos and photos[0]["caption"]:
-            lead="첫 장면은 "+photos[0]["caption"]+"입니다. 사진 순서대로 확인된 내용을 살펴봅니다."
+            lead="첫 장면은 "+photos[0]["caption"]+"입니다."
+            lead+=(" 사진 순서대로 확인된 내용을 살펴봅니다." if len(photos)>1
+                   else " 기록된 내용을 살펴봅니다.")
             if profile["tone"]=="CONVERSATIONAL":
                 lead+="\n\n메모도 함께 하나씩 적어볼게요."
             follow_facts=facts
@@ -299,6 +305,16 @@ def compose(payload):
         else:
             lines += ["","기록을 보고 덧붙일 생각:",""]
             lines += [item["text"] for item in insights]
+    # A photo-led draft used to silently drop the user's objective in some
+    # genres. Put it in the actual user-visible opening, not only an AI prompt.
+    # This is user-supplied intention, not a generated or sourced factual claim.
+    if goal and goal not in "\n".join(lines):
+        purpose_line = (
+            "이 기록의 목적: " + goal if kind in {"PHOTOLOG","TRAVEL_JOURNAL"}
+            else "이 글을 남기는 이유: " + goal if kind in {"BLOG","ESSAY"}
+            else "이번 글의 목적: " + goal
+        )
+        lines[2:2] = [purpose_line, ""]
     draft="\n".join(lines).strip()+"\n"
     editorial=_editorial_review(kind,draft,payload,facts,photos,profile)
     missing=[f["id"] for f in facts if f["text"] not in draft]
@@ -348,6 +364,17 @@ def compose_parallel(payload,kinds):
     results={k:compose({**payload,"kind":k}) for k in normalized}
     if len({r["fact_count"] for r in results.values()})!=1:
         raise ValueError("PARALLEL_FACT_COUNT_INCONSISTENT")
+    # Equal input counts alone do not prove that every genre kept the facts
+    # or honored the reader-facing purpose. Fail before any CLI file writes.
+    for result in results.values():
+        review = result["editorial_review"]
+        if (result["fact_ids_covered"]!=result["fact_count"]
+            or review["facts_missing"]):
+            raise ValueError("PARALLEL_FACT_COVERAGE_FAILED")
+        if (payload.get("goal")
+            and (not review["purpose_literal_in_draft"]
+                 or not review["purpose_in_first_400_characters"])):
+            raise ValueError("PARALLEL_PURPOSE_COVERAGE_FAILED")
     return results
 
 def _write_once(path,content):

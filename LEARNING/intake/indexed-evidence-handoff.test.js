@@ -82,4 +82,20 @@ const exception=Handoff.prepare(rawInput,()=>{throw Error('secret token')});
 assert.equal(exception.ok,false);
 assert.equal(JSON.stringify(exception).includes('secret token'),false);
 
-console.log('INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS');
+// Relations must match independent INDEX owner; caller cannot introduce facts.
+const relation={type:'SUPPORTS',target:'concept:water',anchor:'DETAIL:SRC-01#standard'};
+const ownerWithRelation=(sid,ref)=>({...trustedOwner(sid,ref),relations:[relation]});
+const authorizedCandidate={...rawInput.candidates[0],relations:[relation]};
+const relationGood=Handoff.prepare({...rawInput,candidates:[authorizedCandidate]},ownerWithRelation);
+assert.equal(relationGood.ok,true);
+assert.deepEqual(relationGood.candidates[0].relations,[relation]);
+assert.equal(relationGood.candidates[0].index_version,'TEST_ONLY_1');
+const fakeRelation=Handoff.prepare(
+  {...rawInput,candidates:[{...authorizedCandidate,relations:[{...relation,target:'INJECTED'}]}]},
+  ownerWithRelation);
+assert.equal(fakeRelation.ok,false);
+assert.ok(fakeRelation.issues.includes('INDEPENDENT_INDEX_OWNER_BINDING_INVALID:0'));
+const omittedOwnerRelation=Handoff.prepare(
+  {...rawInput,candidates:[authorizedCandidate]},trustedOwner);
+assert.equal(omittedOwnerRelation.ok,false);
+console.log('INDEX_TO_LEARNING_EVIDENCE_HANDOFF_PASS: owner-bound relations and spoof rejection');
