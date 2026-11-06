@@ -1,22 +1,17 @@
-{
-  "schema_version": "TAKY_USER_EXPLICIT_EXECUTION_RECEIPT_V1",
-  "executor": "CODEX",
-  "authorization": "USER_EXPLICIT",
-  "route": "DIRECT_CODEX_CLI",
-  "user_intent": "User authorized portable TAKY AI implementation",
-  "arguments": [
-    "exec",
-    "-C",
-    "D:\\Git PWA\\TAKY-2.0-ORCH",
-    "--sandbox",
-    "workspace-write",
-    "--ephemeral",
-    "-c",
-    "model_reasoning_effort=\"medium\"",
-    "-"
-  ],
-  "started_at": "2026-10-11T23:30:53.1759866+09:00",
-  "status": "FAILED",
-  "exit_code": -1,
-  "finished_at": "2026-10-11T23:36:13.7623243+09:00"
+﻿{
+    "schema_version":  "TAKY_USER_EXPLICIT_EXECUTION_RECEIPT_V1",
+    "executor":  "CODEX",
+    "authorization":  "USER_EXPLICIT",
+    "route":  "DIRECT_CODEX_CLI",
+    "user_intent":  "TAKY read-only Codex quota monitoring: no inference or mutations",
+    "arguments":  [
+                      "app-server"
+                  ],
+    "started_at":  "2026-11-06T19:25:52.9442327+09:00",
+    "status":  "CLI_EXITED_RESULT_UNVERIFIED",
+    "task_verified":  false,
+    "provider_ack_attested":  false,
+    "shell_alias_workaround":  "PROCESS_LOCAL_ALIAS_EXCLUSION",
+    "exit_code":  0,
+    "finished_at":  "2026-11-06T19:25:54.7738134+09:00"
 }

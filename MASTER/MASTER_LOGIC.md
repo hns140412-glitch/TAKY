@@ -667,4 +667,9 @@ Activation principles:
 
 This rule owns compilation/coverage semantics only; source authority, intent, outcome, recovery, traceability and domain-specific semantics remain with their declared owners.
 
+## Shared Evidence-to-Consumption FORMING Contract — TKY-FORMING-001 / ADOPT
+Cross-system processing follows `MINING -> INDEXING -> FORMING -> {LEARNING PROJECTION | APPLICATION CONSUMPTION | BOTH} -> EXECUTION -> FEEDBACK` where applicable. FORMING transforms indexed, provenance-linked evidence into authorized knowledge, content, and application-consumption structures. It does not create a fifth canonical storage tier, new semantic authority, or duplicate the Learning Engine. Learning is conditional for learning-domain consumers, not mandatory for ordinary Work OS processing.
+
+The normative shared transformation details, required provenance/revision/consumer contracts, approval states, failure handling, and acceptance criteria are delegated to `MASTER/FORMING_PROTOCOL.md` (`TKY-FORMING-001`). Preserve RAW / INDEX / DETAIL / CURRENT roles, owner/tenant separation, immutable prior revisions, and existing human approval gates. A protocol file being present does not demonstrate runtime enforcement or integration verification.
+
 END

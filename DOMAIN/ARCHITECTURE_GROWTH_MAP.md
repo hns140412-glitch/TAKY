@@ -67,7 +67,9 @@ Implemented foundation:
 - cost/QTO source requirements;
 - permit authority-evidence requirements;
 - RFI/field-change evidence capture contract;
-- completed trace -> CASE-only learning candidate.
+- completed trace -> CASE-only learning candidate;
+- CAD layer-area evidence MVP (2026-10-12): DXF boundary -> SVG/CSV/area overview with exact overlap/containment, unit-conflict, hidden-block and stale-source HOLD gates; mechanically verified on fixtures only;
+- connected pipeline runtime (2026-10-12): manifest-driven stage execution with receipts/resume, CAD-area vs model-KPI reverse cross-check and router->manifest binding; real project manifest not yet run.
 
 Remaining:
 - live pursuit-to-CAD/BIM object continuity;

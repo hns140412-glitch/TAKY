@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_LEARNING_REFERENCE_PATTERN_PROJECTION_RECEIPT_V1",
-  "generated_at": "2026-10-11T14:26:28.848Z",
+  "generated_at": "2026-10-12T03:41:00.794Z",
   "projector_version": "TAKY_LEARNING_REFERENCE_PATTERN_PROJECTOR_V1",
   "ledger_path": "CURRENT/DATA/REFERENCE_INTAKE_DISPOSITION_LEDGER.json",
   "registry_path": "LEARNING/data/mining-learning-pattern-registry-v1.json",

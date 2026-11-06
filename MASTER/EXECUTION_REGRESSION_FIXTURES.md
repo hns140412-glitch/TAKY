@@ -130,6 +130,30 @@ Validation must test the actual output/action against the rule, not merely verif
 
 `RULE CITED + RESULT VIOLATES RULE = FAIL`.
 
+## F-07 — REVIEW-ORDER INVERSION / POST-HOC RATIONALIZATION (2026-11-06)
+
+**Actual failure witness (not a hypothetical case):**
+1. User's literal sequence: "마이닝과 기존 자료를 종합적으로 검토 분석하고 사례적 검토 분석해서 / 최적안 도출 후에 / 타키와 비교 검토해".
+2. Assistant instead began with "TAKY에 필요한 것은 ..." and "TAKY와 최적안의 차이", judged external examples against pre-existing TAKY rules, and called the TAKY-compatible proposal the optimal option.
+3. User corrected: "검토결과 먼저 분석하고 타키와 비교검토하라니까 반대로 하네", then "자의적 해석으로 합리화 하지마 / 규칙으로 등재해" and "실패 사례로 ... 박제".
+4. The earlier answer did not preserve an independent option, source-grounded comparison rubric, or a recoverable conclusion **before** TAKY comparison. This is a **confirmed execution failure**, not merely a documentation gap.
+
+Classification under existing `MASTER/FAILURE_TAXONOMY.md`: `INTENT_DRIFT` + `RULE_NOT_APPLIED`; existing result is `FAIL / REWORK_REQUIRED`. No new failure token or duplicate authority.
+
+**Replay input:** "외부 자료와 실제 사례를 종합 분석해 독립 최적안을 먼저 정하고, 마지막에 TAKY와 비교해 개선점을 내라."
+
+**PASS only if all independently inspectable stages occur in this order:**
+1. A: source inventory/provenance and independent assessment (strength/failure/limits/unknowns) with **no incumbent/Taky-fit scoring or early conclusion**.
+2. B: cross-case comparison under source/evidence-grounded decision criteria, including contrary and failed approaches.
+3. C: `INDEPENDENT_OPTIMAL_OPTION` is explicitly written and frozen with rationale/tradeoffs **before** the TAKY comparison.
+4. D: applicable TAKY authority/current is then compared against the independent option, preserving externally superior evidence and reporting concrete TAKY gaps.
+5. E: recommendation is based on the delta, not a defense of the old design; realization still requires separate implementation evidence.
+6. A safety-only canonical preflight may occur earlier, but its content must not determine A–C.
+
+**FAIL if:** the answer begins with what TAKY already has/needs and filters cases to justify it; skips stage C; treats a predetermined TAKY-compatible structure as the independent optimum; after user correction explains away reversed order without marking prior work FAIL; or labels this fixture closed merely because the rule and incident file were written.
+
+**Current replay state:** `FIXTURE_REGISTERED / REPLAY_NOT_PERFORMED`. The prior 2026-11-06 comparative report is historical evidence of the failure and is not an independently derived optimal proposal. Owner: existing `TKY-INTENT-001`; review-stage application: `MASTER/REVIEW_DEFAULT_MINING_PROTOCOL.md`.
+
 ## Regression Replay Contract
 
 When a change claims to correct one of these failure classes:

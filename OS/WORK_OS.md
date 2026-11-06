@@ -17,6 +17,7 @@ Normative operational-workspace governance:
 
 Central `TAKY/OS/WORK_OS.md` is the normative cross-project Work OS semantic contract.
 The `TAKY-WORK-OS` repository is a subordinate implementation / operating repository for reusable workflows, automation, schemas, scripts and integrations.
+Local repository path is now D:/Git PWA/TAKY_ARCHI GROW (verified physical rename, 2026-10-13). Existing GitHub origin remains named TAKY-WORK-OS, and legacy Work OS content is not proof that ARCHI GROW application features are implemented. The local path authority is CURRENT/TAKY_PATH_AUTHORITY.md.
 When an external Work OS rule conflicts with this central contract, central TAKY authority governs unless an approved ownership change explicitly says otherwise.
 The implementation repository SHOULD record the inherited central Work OS contract/version where useful for drift control.
 
@@ -50,6 +51,29 @@ Meaning:
 
 `VERIFY != CENTER OF WORK`.
 `NO BUILD DELTA + MORE CHECKS AVAILABLE != PRODUCTIVE PROGRESS`.
+
+### 1.1A WORK_ID at request intake — HARD LOCK
+
+After GOAL and before DISCOVER/BUILD, every material user request must be
+classified into the canonical Workbench TASK_REGISTER: resolve an existing
+WORK_ID by explicit authority or register a new one immediately as DISCOVERY.
+Related work gets a distinct WORK_ID with `parent_work_id`; grouping never
+implies a completion dependency. Similarity alone does not authorize merging
+unrelated requests or claiming another project's ownership.
+
+`WORK_ID ASSIGNED != SOURCE BOUND != IMPLEMENTED != VERIFIED != DONE`.
+An absent source file, unfinished design, blocked approval, failed test or
+unassigned executor must not prevent initial WORK_ID assignment.
+Assign the triage owner before execution; bind exact repository/source identity
+as source becomes available, under the SAME WORK_ID. Only later execute with
+the existing cost, user-approval, independent-review and DONE gates.
+Never issue a second WORK_ID to mask a failed execution or source revision.
+
+Existing implementation entrypoints:
+`TOOLS/taky_chat_orchestrator.ps1 -Action Intake`
+and `TOOLS/setup_workbench_backlog.py --intake`.
+Both write only the existing canonical Workbench TASK_REGISTER; intake is not
+a model call, project release or completion receipt.
 
 Machine routing baseline:
 `OS/ACTION_SKILL_REGISTRY.json`

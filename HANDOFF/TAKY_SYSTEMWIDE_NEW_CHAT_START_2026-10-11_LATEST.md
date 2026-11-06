@@ -1,5 +1,11 @@
 # TAKY SYSTEMWIDE NEW CHAT START — 2026-10-11 LATEST
 
+> **2026-10-15 전역 비상업 참고 활용 규칙:** TAKY 전체는 개인·가족 비상업적 연구·학습·마이닝·FORMING·로컬 목업·자체 기능 구현을 우선 진행한다. 원본의 '배포금지' 문구만으로 내부 연구나 방법 차용을 HOLD하지 않는다. 원본 공개 재배포·소스 파일 외부 공유는 별도 권한 확인, push/merge/deploy/유료 API는 기존 사전 승인 게이트 유지. 상세: `C2S/TAKY_GLOBAL_PRIVATE_REFERENCE_USE_POLICY_20261015.json` 및 `TAKY_AI_CURRENT`. 실제 제품 기능 완료와 운영 규칙 기록을 혼동하지 않는다.
+
+> **2026-10-15 상시 검토자료 규칙 (CUR-007):** 어떤 대화에서든 사용자가 자료(링크·이미지·영상·첨부·Drive)를 검토/참고/비교/반영하라고 하면 공식 `TAKY_AI_CURRENT`의 `TAKY ALWAYS-ON USER REFERENCE REVIEW CONTRACT`를 따라 기존 TAKY_SOURCE_VAULT `REVIEW_EVENT_INTAKE.py`와 인덱스에 기록하고, 접수 영수증·원문 무결성·처리 단계의 재조회가 확인된 범위만 완료로 보고한다. 자동 대화창 전체 수신은 미입증(OPEN)으로 표시하며, 다른 과제에 매몰되어 자료 접수를 누락하지 않는다. 현재 Google CURRENT 링크: https://docs.google.com/document/d/13sqSChdA6ZTyaIbkM6gVDK6ajKpnI_cJ9lWa_OAmIO4/edit
+
+> 2026-10-15 사용자 교정 및 최신 전역 감사 재개 포인터: `HANDOFF/TAKY_GLOBAL_REAL_PROGRESS_RECOVERY_20261015.md`를 **우선 읽는다**. 이 문서는 검토·테스트 진척 과대평가를 명시적으로 거부하며 P0 실제 구현 경로를 제시한다. 과거 CLOSED/LOCKED 또는 CURRENT를 대체하지 않는다.
+
 ## RESUME
 최신 TAKY 기준으로 재개한다.
 기존 CLOSED / LOCKED / VERIFIED는 그대로 상속하고 OPEN만 진행한다.
@@ -315,3 +321,7 @@ Report only:
 
 ## RESUME SENTENCE
 최신 TAKY 기준으로 재개. 먼저 D:\Git PWA\TAKY\HANDOFF\TAKY_SYSTEMWIDE_NEW_CHAT_START_2026-10-11_LATEST.md 를 전체 읽고, SAVEY의 현재 HEAD/status를 확인한다. Learning Family / TAKY Mobile 통합 E2E는 CLOSED로 상속하고 재검증에 매몰되지 않는다. SAVEY OPEN A(child live period projection)부터 사용자 체감 기준으로 진행한다. dirty worktree 보존, reset/checkout/clean/stash 금지, push/merge/deploy/paid API 금지.
+
+## 2026-10-15 FIRST JOURNEY RESUME POINTER — IMPORTANT
+- User explicitly demands RECOVER APPROVED MOCKUPS / existing implementations; NO restart, NO old Ready five-step onboarding substituted for TAKY family-authenticated 12-scene expedition. Preserve original Core6 and all dirty worktrees.
+- Read `D:\Git PWA\TAKY_AI_WORKBENCH\REFERENCE\99_CONTROL\TAKY_FIRST_JOURNEY_RESUME_20261015.md` FIRST for evidence, exact paths, admitted gaps, and bounded next slice. New `TAKY/SHARED/runtime/taky-first-journey-contract-v1.js` is **CANDIDATE NOT CONNECTED** (mock-only 19/19 PASS). Unified account/family auth, UI wiring and real end-to-end validation OPEN. Existing Ready wrong button edit REVERTED; no deploy/push/merge/paid API.

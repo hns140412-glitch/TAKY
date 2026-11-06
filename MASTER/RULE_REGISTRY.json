@@ -135,11 +135,11 @@
   ],
   "projection_bindings": {
     "PROJECTIONS/ACTIVE_RULE_PROFILE.md": {
-      "source_owner_fingerprint": "sha256:d30d638da4cebd74cd54bf16b4ec1c06179819efaee261eaace9ea154c4ee099",
+      "source_owner_fingerprint": "sha256:eed29fb77d95a679a78f6b88e85702328b850561b239c80fc67a4e274c4fc71e",
       "projection_body_hash": "sha256:c112172ee9482db51ca71b68aac3a98642b10890c771f1df7e2872309fa25641",
       "binding_role": "CANONICAL_REVIEW_ATTESTATION",
-      "review_attestation_ref": "HISTORY/PROJECTION_ATTESTATIONS/ACTIVE_RULE_PROFILE_1b9896e9633965a88c8ebe3c4f77e25d591e26a2c66ffad0a60498ca2d523b21.json",
-      "review_attestation_sha256": "sha256:9ff446dae1297b2dc56f5129d0831fbb96be73df1c5f8d6581c896e2e3df06a7"
+      "review_attestation_ref": "HISTORY/PROJECTION_ATTESTATIONS/ACTIVE_RULE_PROFILE_07944a443f3f2061babe5098ed003a91e564f9c33a221db90587690c048feed2.json",
+      "review_attestation_sha256": "sha256:9a82a68b9b5f318991430e8130b5481ff83d0795a805ef4938aba16ef640044c"
     }
   }
 }

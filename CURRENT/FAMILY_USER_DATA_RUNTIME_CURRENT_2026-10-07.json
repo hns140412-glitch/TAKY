@@ -1,6 +1,6 @@
 {
   "schema": "TAKY_FAMILY_USER_DATA_RUNTIME_CURRENT_V1",
-  "updated_at": "2026-10-07T22:00:00+09:00",
+  "updated_at": "2026-10-13T17:27:20+09:00",
   "scope": "FAMILY_LEARNING_USER_DATA",
   "principle": "USER_WRITABLE_VIA_AUTHENTICATED_APP_BOUNDARY__NOT_PUBLIC_MULTI_WRITER_DRIVE",
   "runtime": {
@@ -13,12 +13,37 @@
       "HELP_EVENT",
       "CHECK_EVENT",
       "CURIOSITY_RECORD",
-      "SUBJECT_OBSERVATION"
+      "SUBJECT_OBSERVATION",
+      "PLANNER_SNAPSHOT",
+      "SCHEDULE_SNAPSHOT",
+      "EXECUTION_EVENT",
+      "MATERIAL_REFERENCE"
     ],
     "optimistic_concurrency": true,
     "cross_member_denial": true,
     "confirmed_record_learning_context_queue": true,
-    "drive_is_live_runtime_authority": false
+    "drive_is_live_runtime_authority": false,
+    "planner_sync": {
+      "server_endpoint": "/api/family/user-data",
+      "central_owner": "LEARNING_OS_FAMILY_USER_DATA__NOT_LEARNING_ENGINE",
+      "client_adapter": "D:/Git PWA/Ready & Set/ready-family-planner-sync-v1.js",
+      "record_type": "PLANNER_SNAPSHOT",
+      "record_id": "ready-planner-current-v1",
+      "member_scope": "family_id/member_id",
+      "version_conflict_guard": "ETAG_FAIL_CLOSED",
+      "local_cache_role": "OFFLINE_PENDING_NOT_MASTER",
+      "local_two_device_e2e": "PASS",
+      "live_production_endpoint_binding": "UNVERIFIED",
+      "production_multi_device_test": "NOT_YET",
+      "conflict_resolution": "EXPLICIT_SERVER_OR_LOCAL_WITH_ETAG_AND_LOCAL_PRESERVATION",
+      "lost_ack_recovery": "SERVER_PAYLOAD_HASH_MATCH_AUTOMATIC"
+    },
+    "central_http_route_size_contract": {
+      "evidence_max_bytes": 65536,
+      "family_user_data_max_bytes": 262144,
+      "bridge": "D:/Git PWA/TAKY/LEARNING/transport/node-http-learning-bridge.js",
+      "route_specific_limit_mock_http_test": "PASS"
+    }
   },
   "backup": {
     "target_role": "TAKY/20_PLATFORM/04_USER_DATA",
@@ -27,7 +52,16 @@
     "versioned_archive_manifest": true,
     "completion_rule": "UPLOAD_PLUS_HASH_READBACK_PLUS_RECEIPT",
     "live_upload": "HOLD",
-    "hold_reason": "04_USER_DATA_CURRENTLY_HAS_ANYONE_WRITER_PERMISSION"
+    "hold_reason": "SIEZEALL_ROOT_20_PLATFORM_04_USER_DATA_ANYONE_WRITER_AND_PROVIDER_NOT_BOUND",
+    "encrypted_outbox": "D:/Git PWA/TAKY/LEARNING/transport/family-user-data-archive-outbox.js",
+    "safe_publisher": "D:/Git PWA/TAKY/LEARNING/transport/family-user-data-siezeall-archive-publisher.js",
+    "mock_drive_publish_readback_e2e": "PASS",
+    "storage_role": "SIEZEALL_USER_RECORD_VERSIONED_ENCRYPTED_STORAGE__NOT_TRANSACTION_PROCESSOR",
+    "authenticated_transport": "D:/Git PWA/TAKY/LEARNING/transport/siezeall-drive-rest-transport.js",
+    "server_worker": "D:/Git PWA/TAKY/LEARNING/transport/family-user-data-archive-service.js",
+    "outbox_missing_after_central_commit": "RECONSTRUCT_FROM_STRONG_STORE_ETAG",
+    "rest_transport_local_e2e": "PASS",
+    "production_token_provider": "NOT_WIRED"
   },
   "ux_dependent": {
     "assignment_camera_ocr": "STATE_MACHINE_PASS__REAL_DEVICE_UX_EVIDENCE_PENDING",
@@ -41,6 +75,12 @@
     "assignment_intake_state_machine": "PASS",
     "ready_verifiable_practice_central_e2e": "PASS",
     "three_app_verified_learning_owner_e2e": "PASS",
-    "learning_evidence_concurrent_flush_queue_loss": "CLOSED"
-  }
+    "learning_evidence_concurrent_flush_queue_loss": "CLOSED",
+    "ready_planner_central_sync_mock_e2e": "PASS",
+    "ready_hide_snap_learning_owner_runtime_e2e": "PASS",
+    "siezeall_archive_worker_mock_e2e": "PASS",
+    "complete_family_http_to_siezeall_local_loopback": "PASS",
+    "complete_family_http_to_siezeall_test_path": "D:/Git PWA/TAKY/ENFORCEMENT/family_planner_http_to_siezeall_complete_loopback_e2e.test.js"
+  },
+  "claim_boundary": "LOCAL REAL HTTP LOOPBACK + MOCK SIEZEALL API PASS; production HNS login, real Drive ACL and actual uploaded/hosted multi-device state NOT YET VERIFIED"
 }

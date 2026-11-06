@@ -21,6 +21,36 @@
     "actual rendered-output geometry read-back/cross-check",
     "AI enhancement geometry-drift comparison on real project outputs"
   ],
+  "aerial_raster_candidate_2026_10_31": {
+    "owner": "ARCHI-D5",
+    "stage": "LOCAL_MASK_ONLY_CANDIDATE_NOT_RUNTIME",
+    "source_case": "architect.apollo Google Maps to realistic aerial photo (user-supplied screenshots)",
+    "module": "TOOLS/ARCHIGROW_AERIAL_RASTER_QA.py",
+    "tests": "ENFORCEMENT/architecture_aerial_raster_qa_test.py",
+    "evidence": "13/13 local synthetic-mask focused tests PASS; existing visual geometry guard 6/6 PASS",
+    "outputs": "SHA-bound per-object overlap/centroid/bbox receipt, HOLD on input/provenance/threshold drift",
+    "limits": "MASK_COMPARISON_ONLY; no image generator, no independent real photo mask extraction, no site accuracy certification",
+    "promotion": "HOLD_PENDING_REAL_PROJECT_AND_INDEPENDENT_OUTPUT_GEOMETRY_TEST",
+    "authorization": "NO_PAID_API_NO_PUSH_NO_MERGE_NO_DEPLOY"
+  },
+  "aerial_source_locked_visual_candidate_2026_10_31": {
+    "owner": "ARCHI-D5",
+    "stage": "LOCAL_DEMO_OUTPUT_VERIFIED_CANDIDATE_NOT_AI_GENERATIVE_RUNTIME",
+    "code": "TOOLS/ARCHIGROW_AERIAL_STYLE_PREVIEW.py",
+    "focused_tests": "ENFORCEMENT/architecture_aerial_style_preview_test.py",
+    "synthetic_vector_case": "SYNTHETIC_URBAN_BLOCK_01: 18 buildings; independently extracted styled RGB mask; min IoU 0.984646; max centroid 0.443 px; PROVISIONAL",
+    "real_photo_case": "USGS NAIP Plus 1024x1024 public-domain orthoimage, research example only, not Korean site",
+    "real_photo_source_sha256": "0e7a3fd16ba90cbf9ca21169bfb5aa83e6fd189e421e48f9777da98406709470",
+    "photo_pipeline": "PHOTO_PIXELWISE_TONE_ONLY: pixelwise contrast/saturation, zero warp/inpaint/resample; saved output independently re-read and exact scalar LUT checked",
+    "photo_receipt": ".local/archi_d5_naip_20261031/enhanced_preview/photo_receipt.json",
+    "photo_output": ".local/archi_d5_naip_20261031/enhanced_preview/photo_comparison.png",
+    "photo_enhanced": ".local/archi_d5_naip_20261031/enhanced_preview/photo_enhanced.png",
+    "photo_enhanced_sha256": "bd05220e024d8ef66f71e3c14b820d85ceeeb716a9055192553f73b9b03e21ae",
+    "photo_verification": "PROVISIONAL: max pixel residual 0; source SHA matched; not a generative photo",
+    "limitations": "NO real satellite/map screenshot to generated photoreal aerial transformation; no learned generative model, no independently certified geometry from photo; no site-specific production acceptance",
+    "promotion": "HOLD_PENDING_ACTUAL_GENERATIVE_OUTPUT_REAL_PROJECT_AND_GEOMETRY_CONTROL",
+    "guards": "NO_PAID_API_NO_PUSH_NO_MERGE_NO_DEPLOY"
+  },
   "guards": {
     "geometry_change_authorized": false,
     "push": "HOLD",
