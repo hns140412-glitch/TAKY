@@ -11,6 +11,35 @@ spec = importlib.util.spec_from_file_location(
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
 
+# Synthetic source manifest proof, with no production audio touched.
+from tempfile import TemporaryDirectory
+from hashlib import sha256
+with TemporaryDirectory(prefix="TAKY_PLAYCAMP_PROOF_") as tmp:
+    root=Path(tmp)
+    en="public/audio/play_camp/en/coach-en-start.mp3"
+    ko="public/audio/play_camp/ko/coach-ko-start.mp3"
+    added="public/audio/play_camp/ko/maker-ko-test.mp3"
+    for rel in (en,ko,added):
+        path=root/rel
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_bytes(rel.encode("utf-8"))
+    for name,rel in (("PLAY_CAMP_EN_VOICE_CLIP_MANIFEST_20261012.json",en),
+                     ("PLAY_CAMP_KO_VOICE_CLIP_MANIFEST_20261012.json",ko)):
+        (root/name).write_text(json.dumps({"rows":[
+            {"path":rel,"sha256":sha256((root/rel).read_bytes()).hexdigest()}]}))
+    script=root/"PLAY_CAMP_DIALOGUE_SCRIPT_LOCK_ADDITIVE_R1_20261012.json"
+    script.write_text(json.dumps({"scripts":[{"relative_output":added}]}))
+    pinned,script_only=m.playcamp_audio_provenance(root)
+    assert len(pinned)==2 and script_only=={added}
+    assert pinned[en]==sha256((root/en).read_bytes()).hexdigest()
+    assert added not in pinned
+    script.write_text(json.dumps({"scripts":[{"relative_output":en}]}))
+    try:m.playcamp_audio_provenance(root)
+    except RuntimeError as exc:assert "DUPLICATE" in str(exc)
+    else:raise AssertionError("overlapping script and clip manifest accepted")
+    script.write_text(json.dumps({"scripts":[{"relative_output":added}]}))
+    assert m.playcamp_audio_provenance(root)[1]=={added}
+
 def scan(status, missing=0, unver=0, drift=0, apps=6, amiss=0, aunver=0, achecked=289):
     return json.dumps({"status": status, "apps_checked": apps, "source_files_checked": 320,
                        "missing_file_count": missing, "git_unversioned_count": unver,

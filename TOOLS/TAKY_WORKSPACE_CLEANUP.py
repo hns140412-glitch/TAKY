@@ -23,6 +23,54 @@ REPOS=("TAKY","Ready & Set","Hide & Seek","Snap & Pop","Play Camp",
 ACTIVE_ROOTS={p.resolve() for p in [TAKY,*[ROOT/n for n in REPOS],ROOT/"TAKY-SOURCE-VAULT",WB]}
 SOURCE_AUDIO=TAKY/"staging"/"crew_voice_20261010"
 TARGET_AUDIO=WB/"30_AUDIO_STUDIO"/"RECORDING"/"ARCHIVED_CANDIDATES"/"crew_voice_20261010"
+
+def playcamp_audio_provenance(repo):
+    """Exact source custody, not product approval or playback verification.
+
+    Two existing audio clip manifests pin bytes; the additive script lock
+    proves 26 additional filenames were specified, but NOT their audio SHAs.
+    Unknown/mismatched audio stays HOLD. Never delete or rewrite assets.
+    """
+    pinned={}
+    scripts=set()
+    origin=["PLAY_CAMP_EN_VOICE_CLIP_MANIFEST_20261012.json",
+            "PLAY_CAMP_KO_VOICE_CLIP_MANIFEST_20261012.json"]
+    source="PLAY_CAMP_DIALOGUE_SCRIPT_LOCK_ADDITIVE_R1_20261012.json"
+    for name in [*origin,source]:
+        f=repo/name
+        if not f.is_file() or f.is_symlink() or f.is_junction():
+            raise RuntimeError("PLAY_CAMP_VOICE_AUTHORITY_UNAVAILABLE_HOLD:"+name)
+    def valid(rel):
+        if not isinstance(rel,str) or not rel.startswith("public/audio/play_camp/"):
+            raise RuntimeError("PLAY_CAMP_AUDIO_SOURCE_PATH_INVALID")
+        parts=Path(rel).parts
+        if Path(rel).is_absolute() or ".." in parts or Path(rel).suffix.lower()!=".mp3":
+            raise RuntimeError("PLAY_CAMP_AUDIO_SOURCE_PATH_UNSAFE")
+        return rel
+    for name in origin:
+        doc=json.loads((repo/name).read_text(encoding="utf-8-sig"))
+        if not isinstance(doc.get("rows"),list):
+            raise RuntimeError("PLAY_CAMP_VOICE_MANIFEST_ROWS_MISSING:"+name)
+        for record in doc["rows"]:
+            if not isinstance(record,dict) or not record.get("path"):
+                continue # documented blocked/deferred non-file rows
+            rel=valid(record["path"])
+            expected=record.get("sha256")
+            if not isinstance(expected,str) or re.fullmatch("[0-9a-f]{64}",expected) is None:
+                raise RuntimeError("PLAY_CAMP_AUDIO_MANIFEST_SHA_UNAVAILABLE:"+rel)
+            if rel in pinned:
+                raise RuntimeError("PLAY_CAMP_AUDIO_MANIFEST_DUPLICATE:"+rel)
+            pinned[rel]=expected
+    doc=json.loads((repo/source).read_text(encoding="utf-8-sig"))
+    if not isinstance(doc.get("scripts"),list):
+        raise RuntimeError("PLAY_CAMP_ADDITIVE_SCRIPTS_UNAVAILABLE")
+    for record in doc["scripts"]:
+        rel=valid(record["relative_output"])
+        if rel in scripts or rel in pinned:
+            raise RuntimeError("PLAY_CAMP_AUDIO_SCRIPT_SOURCE_DUPLICATE:"+rel)
+        scripts.add(rel)
+    return pinned,scripts
+
 EMPTY=(TAKY/"backup_phase1_20261007_165930", TAKY/"reports")
 REGISTRY=WB/"00_CONTROL"/"PATH_REGISTRY.json"
 TASKS=WB/"01_BACKLOG_AND_ADOPTION"/"70_EXECUTION_QUEUE"/"TASK_REGISTER.json"
@@ -60,6 +108,12 @@ def workspace_inventory():
                 payload=json.loads(body.split("=",1)[1].strip().rstrip(";"))
                 bindings={clip["relative_path"]:clip["wav_sha256"]
                     for clip in payload["clips"] if clip.get("scope")=="MAIN_CREW"}
+        # Play Camp audio has two different provenance strengths:
+        # 25 SHA-pinned candidate clips vs 26 script-only references.
+        # Neither means user listening approval or runtime playback.
+        playcamp_pinned,playcamp_scripts=(playcamp_audio_provenance(repo)
+            if name=="Play Camp" else ({},set()))
+        playcamp_proof=Counter()
         rows=[]
         for rel in unknown:
             parts=Path(rel).parts
@@ -90,6 +144,21 @@ def workspace_inventory():
                     row["manifest_sha256_matches"]=bindings[rel]==row["sha256"]
                     if not row["manifest_sha256_matches"]:
                         row["category"]="LIVE_CONSUMER_HASH_MISMATCH_HOLD"
+                if name=="Play Camp" and rel.startswith("public/audio/play_camp/"):
+                    if rel in playcamp_pinned:
+                        ok=playcamp_pinned[rel]==row["sha256"]
+                        row["playcamp_provenance"]=("SHA_PINNED_CANDIDATE_BYTES_PASS_NOT_APPROVED" if ok
+                            else "SHA_PINNED_CANDIDATE_BYTES_DRIFT_HOLD")
+                        row["manifest_sha256_matches"]=ok
+                        row["category"]=("PROTECTED_ASSET_OR_DATA" if ok
+                            else "PLAY_CAMP_AUDIO_MANIFEST_SHA_DRIFT_HOLD")
+                    elif rel in playcamp_scripts:
+                        row["playcamp_provenance"]="ADDITIVE_SCRIPT_PATH_MATCH_AUDIO_SHA_UNVERIFIED_HOLD"
+                        row["category"]="PROTECTED_ASSET_OR_DATA"
+                    else:
+                        row["playcamp_provenance"]="NO_PROVENANCE_HOLD_NOT_DELETION_AUTHORIZED"
+                        row["category"]="PLAY_CAMP_AUDIO_UNREFERENCED_HOLD"
+                    playcamp_proof[row["playcamp_provenance"]]+=1
                 hashes[row["sha256"]].append(name+"/"+rel)
             else:
                 row["category"]="MISSING_OR_SPECIAL_HOLD"
@@ -105,7 +174,12 @@ def workspace_inventory():
             "remote_refs_are_local_cache":True,
             "modified_paths":changed,"untracked_count":len(rows),
             "categories":dict(Counter(r["category"] for r in rows)),
-            "preserved_ignored_output_paths":ignored,"files":rows}
+            "preserved_ignored_output_paths":ignored,
+            "playcamp_audio_provenance_counts":dict(sorted(playcamp_proof.items())),
+            "playcamp_known_sha_pins":len(playcamp_pinned),
+            "playcamp_additive_script_only_paths":len(playcamp_scripts),
+            "playcamp_audio_playback_or_approval_verified":False,
+            "files":rows}
     report["duplicate_content_groups"]=[{"sha256":h,"paths":paths,
         "disposition":"KEEP_CONSUMER_COPIES_PENDING_OWNER_REBIND"}
         for h,paths in hashes.items() if len(paths)>1]
