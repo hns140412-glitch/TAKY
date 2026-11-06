@@ -10,6 +10,9 @@ Core: **criteria + context + feedback**. Rules alone don't fix design; looking a
 
 `REFERENCE != AUTHORITY` · `TOKEN MATCH != DESIGN PASS` · `EXPORT SUCCESS != EDITABLE PASS` · `CODE DONE != VALUE DELIVERED`
 
+## 00. Read the project's contract first (DGC-22)
+Find and read the project's screen contract, design-gate review and approved visual direction before proposing anything. List each required element; every candidate must keep all of them unless the USER approved a contract change.
+
 ## 0. Mode (DGC-01)
 - Approved direction + token manifest exist → `EXECUTE`.
 - Otherwise → `EXPLORE`. Output is `PILOT_FIXTURE_ONLY` and never ships until the user picks a direction.

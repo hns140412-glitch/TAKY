@@ -1,3 +1,7 @@
+## 2026-11-06 — DGC-22/23 from the Play Camp run
+- DGC-22: read the project screen contract before redesigning (a hub redesign broke PC-TAB-HUB-01 and was reverted).
+- DGC-23: gates waiting on unapproved capabilities need a non-faking forward path; smoke must walk the real child path (intro step 4 dead-end in production).
+
 ## 2026-11-06 — Replica-level study + VISUAL_COMPARE
 - USER decision: TAKY rules are the quality bar for the result; replica-level cloning and teardown are allowed in EXPLORE (§20.1d).
 - Vendored replica-skill (11 skills, MIT) into `.claude/skills/`. Harness gains a `VISUAL_COMPARE` sub-receipt via `replica-diff/imgdiff.py` (`--reference`).

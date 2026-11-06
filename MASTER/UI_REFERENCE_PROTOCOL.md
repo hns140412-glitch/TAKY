@@ -347,6 +347,13 @@ Scope: these are criteria, not new gates. DG IDs and order stay unchanged and ap
 | DGC-11 | DG-09 | In continuous release (OTA-style), a receipt is invalid when the spec, artifact or `design_system_id@version` differs from what it recorded. | Tesla single-screen UI with OTA updates (general knowledge). Prior C-02. |
 | DGC-12 | DG-10 / ENFORCEMENT | Automate last. A new automated gate check is added only after the same check passes manual replay at a threshold declared at DG-02. `RULE WRITTEN != RULE ENFORCED`. | Tesla "automate last; early factory automation was the mistake" (secondary: Isaacson). Prior C-09. |
 
+### 20.1a Lessons from the 2026-11-06 Play Camp run (TWEB-20261106-0002)
+
+| ID | Gate | Criterion | Case basis |
+|---|---|---|---|
+| DGC-22 | DG-00 | Before any redesign, read the project's own screen contract and design-gate review (for Play Camp: `PLAY_CAMP_TABLET_SCREEN_CONTRACT_*`, `PLAY_CAMP_TABLET_DESIGN_GATE_REVIEW_*`). A candidate that drops a required element of that contract is not a candidate; it is a contract change and needs USER approval first. | A hub redesign removed four PC-TAB-HUB-01 requirements (one Crew main slot, centre orientation, Hangul quick-play, paper-island diorama) and was reverted. |
+| DGC-23 | DG-02 / DG-08 | A gate that waits on a capability that is not approved yet must still offer a forward path that does not fake the gated state (`USER != DEBUGGER`). Smoke tests must exercise the real child path, not inject the gated state. | Explorer Visual ID LOCK waited on an unapproved conversion route; every family stopped at intro step 4 in production while smoke passed by injecting a LOCKED profile. Fixed with a defer path that never creates a LOCK. |
+
 ### 20.1b Criteria from Instagram and Claude Design practitioner cases
 
 | ID | Gate | Criterion | Case basis (evidence grade) |
