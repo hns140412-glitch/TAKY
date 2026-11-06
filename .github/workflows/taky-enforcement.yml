@@ -218,6 +218,8 @@ jobs:
         run: |
           python ENFORCEMENT/master_logic_basis_validator.py
           python ENFORCEMENT/master_logic_basis_validator_test.py
+      - name: Validate Planner semantic owner negative regression
+        run: python ENFORCEMENT/system_layer_ownership_regression_test.py
       - name: Validate independent Learning Engine Core V2
         run: node LEARNING/runtime/learner-state-core.test.js
       - name: Validate retention state baseline candidate
@@ -279,11 +281,53 @@ jobs:
           node --check LEARNING/transport/central-learning-http-endpoint.js
           node LEARNING/transport/central-learning-http-endpoint.test.js
           node LEARNING/transport/durable-evidence-commit-ack.test.js
+          node --check LEARNING/transport/central-learning-decision-http-endpoint.js
+          node LEARNING/transport/central-learning-decision-http-endpoint.test.js
+          node LEARNING/runtime/observation-review-intent.test.js
+          node LEARNING/transport/ready-hide-observation-roundtrip.test.js
       - name: Validate Google subject and server membership + real Node central learning HTTP bridge
         run: |
           node --check LEARNING/transport/google-learning-principal.js
           node --check LEARNING/transport/node-http-learning-bridge.js
           node LEARNING/transport/google-node-central-integration.test.js
+          node --check LEARNING/transport/server-family-registry-provider.js
+          node --check LEARNING/transport/server-family-registry-provider.test.js
+          node LEARNING/transport/server-family-registry-provider.test.js
+          node --check LEARNING/transport/central-google-node-host.js
+          node --check LEARNING/transport/central-google-node-host.test.js
+          node LEARNING/transport/central-google-node-host.test.js
+          node --check LEARNING/transport/server-specialist-verifier.js
+          node --check LEARNING/transport/server-specialist-verifier.test.js
+          node LEARNING/transport/server-specialist-verifier.test.js
+          node --check LEARNING/transport/server-specialist-reference-store.js
+          node --check LEARNING/transport/server-specialist-reference-store.test.js
+          node LEARNING/transport/server-specialist-reference-store.test.js
+          node --check LEARNING/transport/central-store-conformance.js
+          node --check LEARNING/transport/central-store-conformance.test.js
+          node LEARNING/transport/central-store-conformance.test.js
+          node --check LEARNING/transport/pwa-central-evidence-ack-client.js
+          node --check LEARNING/transport/pwa-central-evidence-ack-client.test.js
+          node LEARNING/transport/pwa-central-evidence-ack-client.test.js
+          node --check LEARNING/transport/scoped-evidence-outbox.js
+          node --check LEARNING/transport/scoped-evidence-outbox.test.js
+          node LEARNING/transport/scoped-evidence-outbox.test.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.js
+          node --check LEARNING/transport/indexeddb-evidence-outbox-store.test.js
+          node LEARNING/transport/indexeddb-evidence-outbox-store.test.js
+          node --check LEARNING/transport/pwa-scoped-evidence-pipeline.js
+          node --check LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
+          node LEARNING/transport/pwa-scoped-evidence-pipeline.test.js
+          node --check LEARNING/transport/pwa-central-durable-e2e.test.js
+          node LEARNING/transport/pwa-central-durable-e2e.test.js
+          node --check LEARNING/transport/specialist-observation-packet-mapper.js
+          node LEARNING/transport/specialist-observation-packet-mapper.test.js
+          node --check LEARNING/transport/build-browser-evidence-bundle.js
+          node LEARNING/transport/build-browser-evidence-bundle.test.js
+          node --check LEARNING/transport/specialist-bridge-event-adapter.js
+          node LEARNING/transport/specialist-bridge-event-adapter.test.js
+          node --check LEARNING/transport/encrypted-drive-archive-export.js
+          node --check LEARNING/transport/encrypted-drive-archive-export.test.js
+          node LEARNING/transport/encrypted-drive-archive-export.test.js
       - name: Validate learning transport auth policy
         run: node LEARNING/transport/transport-auth-policy.test.js
       - name: Validate authenticated evidence transport
@@ -404,6 +448,8 @@ jobs:
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v5.json
       - name: Replay production authority and no-pass-no-show fixtures
         run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_cases_v6.json
+      - name: Replay product implementation integrity
+        run: python ENFORCEMENT/taky_gate.py --replay ENFORCEMENT/replay_product_integrity_v1.json
       - name: Validate fresh-context Notion review routing
         run: python ENFORCEMENT/notion_review_fresh_context_validator.py ENFORCEMENT/fixtures/notion_review_fresh_context_pass.json --repo-root .
       - name: Reject fresh-context Notion structure-substitution regression

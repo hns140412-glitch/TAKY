@@ -111,6 +111,21 @@
       "rule_id": "TKY-AICOLLAB-001",
       "owner": "MASTER/AI_COLLABORATION_PROTOCOL.md",
       "scope": "AI role assignment, executor routing, delegated-agent discipline, shared-context resume and shared-log policy for the TAKY workspace"
+    },
+    {
+      "rule_id": "TKY-CONTEXT-001",
+      "owner": "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md",
+      "scope": "project context manifest, required-context loading, NotebookLM/Drive escalation and fail-closed execution gate"
+    },
+    {
+      "rule_id": "TKY-C2S-ROUNDTRIP-001",
+      "owner": "MASTER/NOTEBOOKLM_C2S_ROUNDTRIP_PROTOCOL.md",
+      "scope": "Drive/NotebookLM input-output roundtrip, raw recheck, semantic integrity, output intake and recovery completion gate"
+    },
+    {
+      "rule_id": "TKY-PRODUCT-001",
+      "owner": "MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md",
+      "scope": "interactive-product implementation integrity, structural health, completion-claim ceilings, representative-input/runtime/device separation, and repair/refactor/rewrite disposition"
     }
   ]
 }

@@ -224,6 +224,26 @@ Release/result uncertainty SHALL NOT PASS; classify according to applicable gate
 
 `EVIDENCE AMBIGUITY ≠ RELEASE PASS`.
 
+## Product-implementation integrity gate — HARD LOCK
+
+For interactive product implementation/progress claims, apply `MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md`.
+
+The validation system SHALL NOT infer product completion from:
+- CI/gate count;
+- code volume/file count;
+- documentation/C2S/handoff closure;
+- fixture-only browser success;
+- isolated adapters/contracts not connected to the active user path.
+
+Material product claims SHALL separate at least:
+`CODED / CI_VERIFIED / RUNTIME_VERIFIED / DEVICE_VERIFIED / RELEASE_VERIFIED`
+and maintain a product-completion matrix grounded in the actual requirement inventory.
+
+When architecture itself is a material cause of regression, unsafe feature growth, change amplification, or misleading validation confidence, structural integrity SHALL be marked FAIL/REWRITE_REQUIRED as applicable. Continued feature growth is not a valid substitute for resolving the architecture decision.
+
+`VALIDATION PASS != PRODUCT COMPLETION PASS`.
+`STRUCTURAL INTEGRITY FAIL + MORE FEATURES != PRODUCT PROGRESS`.
+
 ## Structural-integrity gate
 
 When an active normative document uses an END/terminal marker, exactly one authoritative terminal boundary is allowed and normative content after it = FAIL. Validate unique/ordered sections, cross-references, canonical/status/revision metadata, and distinguish historical lineage labels from current governance.

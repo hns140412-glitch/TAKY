@@ -81,7 +81,19 @@ function fromSnap(event={},context={}){
 function fromReady(event={},context={}){
   const out=baseFromEvent(event,{...context,source_app:'ready-set'});
   const p=event.payload||event;
+  const hideSummary=p.observation_only===true&&p.forwarded_source_app==='hide-seek'&&
+    p.memorySummary?.authority==='SPECIALIST_MEMORY_ADVISORY_ONLY'
+      ?p.memorySummary:null;
   if(clean(context.evidence_type||p.evidence_type))out.evidence_type=clean(context.evidence_type||p.evidence_type);
+  if(hideSummary){
+    out.evidence_type='MEMORY_RETRIEVAL_EVIDENCE';
+    out.memory={
+      average_strength:finite(hideSummary.averageMemoryStrength),
+      review_advisories:Array.isArray(hideSummary.reviewAdvisories)
+        ?hideSummary.reviewAdvisories.slice(0,24):[],
+      next_review_semantics:clean(hideSummary.prioritySemantics)||'ADVISORY_SIGNAL_NOT_DATE'
+    };
+  }
   if(clean(out.evidence_type)==='CHILD_SELF_REPORT')out.verified_outcome=null;
   else if(context.verification_receipt){
     const applied=Verification.applyReceipt(out,context.verification_receipt);
@@ -95,7 +107,8 @@ function fromReady(event={},context={}){
   out.raw_app_signals={
     ready_state:clean(p.ready_state||p.task_state||p.state)||null,
     actual_minutes:finite(p.actual_minutes),
-    self_report:p.self_report||null
+    self_report:p.self_report||null,
+    forwarded_hide_observation:!!hideSummary
   };
   return out;
 }

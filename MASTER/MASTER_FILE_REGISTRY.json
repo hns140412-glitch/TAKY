@@ -165,6 +165,18 @@
       "class": "ACTIVE_SUPPORT",
       "authority_owner": "TAKY_EXPLORER_CREW_RUNTIME",
       "runtime_role": "APPEND_ONLY_RUNTIME_LEDGER_POLICY"
+    },
+    "MASTER/PROJECT_CONTEXT_MANIFEST_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
+    "MASTER/NOTEBOOKLM_C2S_ROUNDTRIP_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
+    },
+    "MASTER/READY_SET_EXPLORATION_CONTRACT.md": {
+      "class": "ACTIVE_SUPPORT"
+    },
+    "MASTER/PRODUCT_IMPLEMENTATION_INTEGRITY_PROTOCOL.md": {
+      "class": "ACTIVE_OWNER"
     }
   },
   "semantic_owners": [

@@ -45,6 +45,8 @@ function derive(input={}, independentIndexOwnerVerifier=null, evidencePolicyRegi
     };
   }
 
+  // Observation-only review signals inform an explicit pedagogical intent,
+  // never learner performance counts, strength trends or estimator inputs.
   const learnerState=Core.deriveSkillState(evidence,scope,input.state_options||{});
   if(!learnerState.ok)return {ok:false,reason:'LEARNER_STATE_FAILED',detail:learnerState};
 
