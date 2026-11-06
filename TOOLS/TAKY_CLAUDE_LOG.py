@@ -1,20 +1,32 @@
-import json, os, shutil, time
+import json, os, re, shutil, time
 from pathlib import Path
 from datetime import datetime
 from collections import deque
 
-CLAUDE_ROOT = Path.home()/".claude"/"projects"/"D--Git-PWA-TAKY"
+CLAUDE_PROJECTS = Path.home()/".claude"/"projects"
 CODEX_ROOT = Path.home()/".codex"
 STATUS_FILE = Path(os.environ.get("TEMP","."))/"TAKY_STATUSLINE_LAST.json"
 events = deque(maxlen=80)
 
 def short(s,n=110):
     s=" ".join(str(s).split())
+    s=re.sub(r"(?i)(?:bearer\s+\S+|sk-[A-Za-z0-9_-]{8,}|(?:api[_-]?key|token|secret|password)\s*[=:]\s*\S+)","[REDACTED]",s)
     return s if len(s)<=n else s[:n-1]+"…"
 
 def latest_claude():
-    files=list(CLAUDE_ROOT.glob("*.jsonl"))
-    return max(files,key=lambda p:p.stat().st_mtime) if files else None
+    """Follow the newest real Claude CLI session across workspaces, not just TAKY."""
+    try:
+        candidates = (
+            p for folder in CLAUDE_PROJECTS.iterdir()
+            if folder.is_dir()
+            and "claude-mem-observer" not in folder.name.lower()
+            and "desktop-commander" not in folder.name.lower()
+            for p in folder.glob("*.jsonl")
+            if p.stat().st_size > 0
+        )
+        return max(candidates, key=lambda p: p.stat().st_mtime, default=None)
+    except OSError:
+        return None
 
 def add_event(obj):
     typ=obj.get("type","")
@@ -40,62 +52,72 @@ def add_event(obj):
 
 def pct_left(used):
     try:
-        return f"{max(0, round(100-float(used)))}%"
-    except Exception:
+        value=float(used)
+        return f"{round(100-value)}%" if 0<=value<=100 else "N/A"
+    except (TypeError,ValueError,OverflowError):
         return "N/A"
+
+def claude_remaining(row, observed_at, now):
+    """Return remaining quota only for fresh, unexpired Claude observations."""
+    if now-observed_at < 0 or now-observed_at > 2700 or not isinstance(row,dict):
+        return "N/A"
+    reset=row.get("resets_at")
+    if reset is not None:
+        try:
+            expiry=(float(reset)/1000 if float(reset)>1e12 else float(reset)) if isinstance(reset,(int,float)) else datetime.fromisoformat(str(reset).replace("Z","+00:00")).timestamp()
+            if expiry<=now:return "N/A"
+        except (ValueError,TypeError,OverflowError):
+            return "N/A"
+    val=row.get("used_percentage")
+    return pct_left(val) if val is not None else "N/A"
+
 
 def claude_usage():
     try:
         d=json.loads(STATUS_FILE.read_text(encoding="utf-8"))
         rl=d.get("rate_limits") or {}
-        five=((rl.get("five_hour") or {}).get("used_percentage"))
-        week=((rl.get("seven_day") or {}).get("used_percentage"))
+        now=time.time()
+        captured=STATUS_FILE.stat().st_mtime
+        five=claude_remaining(rl.get("five_hour"),captured,now)
+        week=claude_remaining(rl.get("seven_day"),captured,now)
         ctx=((d.get("context_window") or {}).get("used_percentage"))
-        return pct_left(five), pct_left(week), ("N/A" if ctx is None else f"{round(float(ctx))}%")
+        context=(f"{round(float(ctx))}%" if ctx is not None and 0<=now-captured<=2700 else "N/A")
+        return five,week,context
     except Exception:
         return "N/A","N/A","N/A"
 
 _codex_cache=(0,None)
-def codex_usage():
+def codex_usage(cache_path=None, now=None):
+    """Reuse bounded official app-server quota snapshots; never scan session logs.
+
+    Only the existing read-only usage board polls the provider. A missing, stale,
+    or expired quota is unknown, not 100% remaining.
+    """
     global _codex_cache
-    now=time.time()
-    if now-_codex_cache[0] < 5 and _codex_cache[1] is not None:
+    current=time.time() if now is None else now
+    if cache_path is None and now is None and current-_codex_cache[0] < 60 and _codex_cache[1] is not None:
         return _codex_cache[1]
-    candidates=[]
-    for sub in ("sessions","archived_sessions"):
-        root=CODEX_ROOT/sub
-        if root.exists():
-            try:
-                candidates.extend(root.rglob("*.jsonl"))
-            except Exception:
-                pass
-    candidates=sorted(candidates,key=lambda p:p.stat().st_mtime,reverse=True)[:30]
-    best=None
-    for p in candidates:
-        try:
-            lines=p.read_text(encoding="utf-8",errors="ignore").splitlines()
-        except Exception:
-            continue
-        for line in reversed(lines[-400:]):
-            try:
-                o=json.loads(line)
-                payload=o.get("payload") or {}
-                rl=payload.get("rate_limits")
-                if not rl:
-                    continue
-                pri=rl.get("primary") or {}
-                sec=rl.get("secondary") or {}
-                if pri.get("window_minutes")==300 and sec.get("window_minutes")==10080:
-                    best=(pct_left(pri.get("used_percent")),pct_left(sec.get("used_percent")))
-                    break
-            except Exception:
-                pass
-        if best:
-            break
-    if best is None:
-        best=("N/A","N/A")
-    _codex_cache=(now,best)
-    return best
+    path=Path(cache_path) if cache_path is not None else Path(os.environ.get("LOCALAPPDATA", os.environ.get("TEMP",".")))/"TAKY"/"USAGE_BOARD"/"codex_account_usage.json"
+    result=("N/A","N/A")
+    try:
+        d=json.loads(path.read_text(encoding="utf-8-sig"))
+        t=datetime.fromisoformat(str(d.get("capturedAt","")).replace("Z","+00:00")).timestamp()
+        if d.get("source")=="codex_appserver_rate_limits" and 0 <= current-t <= 2700:
+            def remaining(key):
+                row=(d.get("windows") or {}).get(key) or {}
+                reset=row.get("resets_at")
+                if not isinstance(reset,(int,float)) or reset <= current:
+                    return "N/A"
+                val=row.get("used_percent")
+                if not isinstance(val,(int,float)) or not 0 <= val <= 100:
+                    return "N/A"
+                return pct_left(val)
+            result=(remaining("fiveHour"),remaining("week"))
+    except (OSError,ValueError,TypeError,KeyError,AttributeError,OverflowError):
+        pass
+    if cache_path is None and now is None:
+        _codex_cache=(current,result)
+    return result
 
 def render(session_name="waiting"):
     cols,rows=shutil.get_terminal_size((120,30))
@@ -104,52 +126,302 @@ def render(session_name="waiting"):
     claude5,claude7,ctx=claude_usage()
     chat5,chat7=codex_usage()
     out=[]
-    out.append("TAKY | REMOTE + CLAUDE LIVE")
-    out.append(f"[REMOTE] Desktop Commander connected  |  [SESSION] {session_name}")
+    out.append("CLAUDE CLI | LIVE ACTIVITY")
+    out.append(f"[SOURCE] Local Claude CLI sessions  |  [SESSION] {session_name}")
     out.append("-"*min(cols,110))
     out.extend(visible)
     while len(out)<rows-4:
         out.append("")
     out.append("-"*min(cols,110))
-    out.append(f"[CLAUDE REMOTE] context {ctx} | 5h left {claude5} | week left {claude7}")
-    out.append(f"[CHATGPT/CODEX] 5h left {chat5} | week left {chat7}")
-    out.append("usage refresh: 5 sec | values are remaining % | Ctrl+C: stop")
+    out.append(f"[CLAUDE CLI] context {ctx} | 5h left {claude5} | week left {claude7}")
+    out.append(f"[CODEX CLI] 5h left {chat5} | week left {chat7} | cached account quota")
+    out.append("ChatGPT app quota: unavailable separately | Codex cache: 60 sec read | Ctrl+C: stop")
     print("\x1b[2J\x1b[H"+"\n".join(out),end="",flush=True)
 
-current=None
-pos=0
-last_render=0
-session_name="waiting"
-events.append("[LOG] Waiting for Claude activity...")
+def review_last_24h(root=None, now=None):
+    """Read bounded local evidence. Output is constructed only from safe constants.
 
-while True:
-    f=latest_claude()
-    if f and f!=current:
-        current=f
-        session_name=f.stem
-        events.append(f"[SESSION] {session_name}")
+    State counters are lifetime snapshots, never attributed to the 24h window.
+    Naive recorded timestamps use the local timezone, matching local writers.
+    No transcript, identity, free text, filename or exception is exported.
+    """
+    import hashlib
+    import math
+    from datetime import timezone
+
+    root = Path(root) if root is not None else Path.home()/".claude"/"taky"
+    now = time.time() if now is None else now
+    start = now - 86400
+    limits = {"entries_per_source": 1024, "json_bytes": 65536,
+              "ledger_tail_bytes": 1048576, "total_bytes": 8388608,
+              "records": 4096, "evidence_refs_per_candidate": 3}
+    used = 0
+    scanned = 0
+    seen = set()
+    sessions = set()
+    sources = {}
+    signals = {key: [] for key in ("repeated_failure", "route_switch_required",
+                                   "revalidation_pending", "verification_gap")}
+    counts = {key: 0 for key in ("lifecycle_observations", "outcome_snapshots",
+              "repeated_failure_events", "recovery_route_events", "route_switch_attempt_events",
+              "snapshots_with_verification", "verified_recovery_events")}
+
+    def timestamp(value):
+        if not isinstance(value, str) or len(value) > 64:
+            return None
         try:
-            lines=current.read_text(encoding="utf-8",errors="ignore").splitlines()[-12:]
-            for line in lines:
-                try: add_event(json.loads(line))
-                except Exception: pass
-            pos=f.stat().st_size
-        except Exception:
-            pass
-    if current and current.exists():
+            result = datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
+            return result if math.isfinite(result) else None
+        except (ValueError, OverflowError, OSError):
+            return None
+
+    def iso(value):
+        return datetime.fromtimestamp(value, timezone.utc).isoformat()
+
+    def consume(raw, source, identity=None):
+        nonlocal scanned
+        stats = sources[source]
+        if scanned >= limits["records"]:
+            stats["bounded"] = True
+            return
+        scanned += 1
         try:
-            with current.open("r",encoding="utf-8",errors="ignore") as h:
-                h.seek(pos)
-                while True:
-                    line=h.readline()
-                    if not line: break
-                    pos=h.tell()
-                    try: add_event(json.loads(line))
-                    except Exception: pass
-        except Exception:
-            pass
-    now=time.time()
-    if now-last_render>=1:
-        render(session_name)
-        last_render=now
-    time.sleep(0.5)
+            row = json.loads(raw)
+        except (ValueError, UnicodeError, RecursionError):
+            stats["invalid"] += 1
+            return
+        if not isinstance(row, dict):
+            stats["invalid"] += 1
+            return
+        key = {"lifecycle": "captured_at", "outcome": "updated_at", "failure": "ts"}[source]
+        t = timestamp(row.get(key))
+        if t is None:
+            stats["unknown_timestamp"] += 1
+            return
+        if not start <= t <= now:
+            stats["outside_window"] += 1
+            return
+        # Canonical content hashes deduplicate copied receipts and ledger rows.
+        digest = hashlib.sha256(json.dumps(row, sort_keys=True, separators=(",", ":"),
+                                         ensure_ascii=True).encode()).hexdigest()
+        dedup_key = (source, identity if source == "outcome" else digest)
+        if dedup_key in seen:
+            stats["duplicates"] += 1
+            return
+        seen.add(dedup_key)
+        stats["observed"] += 1
+        stats["first_recorded_at"] = min(stats["first_recorded_at"] or iso(t), iso(t))
+        stats["last_recorded_at"] = max(stats["last_recorded_at"] or iso(t), iso(t))
+        ref = {"source": source, "sha256": digest, "recorded_at": iso(t)}
+
+        def signal(name):
+            signals[name].append(ref)
+
+        if source == "lifecycle":
+            counts["lifecycle_observations"] += 1
+        elif source == "outcome":
+            # One current state per session file; names never leave this function.
+            if identity in sessions:
+                return
+            sessions.add(identity)
+            counts["outcome_snapshots"] += 1
+            if row.get("route_switch_required") is True:
+                signal("route_switch_required")
+            if row.get("revalidation_pending") is True:
+                signal("revalidation_pending")
+            pairs = (("touched_code", "code_verified"),
+                     ("touched_asset", "asset_verified"),
+                     ("touched_artifact", "artifact_observed"),
+                     ("touched_ui", "browser_verified"))
+            if any((row.get(a) is True or (isinstance(row.get(a), list) and bool(row.get(a))))
+                   and row.get(b) is False for a, b in pairs):
+                signal("verification_gap")
+            if any(row.get(b) is True for _, b in pairs):
+                counts["snapshots_with_verification"] += 1
+        else:
+            if row.get("kind") == "REPEATED_FAILURE":
+                counts["repeated_failure_events"] += 1
+                signal("repeated_failure")
+            elif row.get("kind") == "RECOVERY_ROUTE":
+                counts["recovery_route_events"] += 1
+                if row.get("recovery_evidence") == "ORIGINAL_CHECK_REPASS_AFTER_CORRECTION":
+                    counts["verified_recovery_events"] += 1
+            elif row.get("kind") == "ROUTE_SWITCH_ATTEMPT":
+                counts["route_switch_attempt_events"] += 1
+            else:
+                stats["unknown_kind"] += 1
+
+    def read_file(path, source, ledger=False):
+        nonlocal used
+        stats = sources[source]
+        try:
+            if root.is_symlink() or (hasattr(root, "is_junction") and root.is_junction()) or path.is_symlink() or (hasattr(path, "is_junction") and path.is_junction()):
+                stats["unreadable"] += 1
+                return
+            with path.open("rb") as handle:
+                size = os.fstat(handle.fileno()).st_size
+                cap = limits["ledger_tail_bytes"] if ledger else limits["json_bytes"]
+                if not ledger and size > cap:
+                    stats["oversized"] += 1
+                    return
+                amount = min(cap, limits["total_bytes"] - used)
+                if amount <= 0:
+                    stats["bounded"] = True
+                    return
+                offset = max(0, size - amount) if ledger else 0
+                handle.seek(offset)
+                raw = handle.read(amount)
+                used += len(raw)
+                if size > amount:
+                    stats["bounded"] = True
+                if ledger:
+                    if offset:
+                        raw = raw.partition(b"\n")[2]  # discard partial first row
+                    for line in raw.splitlines():
+                        if len(line) > limits["json_bytes"]:
+                            stats["oversized"] += 1
+                        elif line.strip():
+                            consume(line, source)
+                elif size <= amount:
+                    consume(raw, source, path.stem)
+        except (OSError, ValueError):
+            stats["unreadable"] += 1
+
+    for source, name in (("lifecycle", "lifecycle-receipts-v1"),
+                         ("outcome", "outcome-gate-state"),
+                         ("failure", "failure-learning.jsonl")):
+        stats = sources[source] = dict(observed=0, duplicates=0, invalid=0,
+            unknown_timestamp=0, outside_window=0, unreadable=0, oversized=0,
+            unknown_kind=0, bounded=False, first_recorded_at=None, last_recorded_at=None)
+        path = root/name
+        if source == "failure":
+            read_file(path, source, ledger=True)
+            continue
+        try:
+            if root.is_symlink() or path.is_symlink() or (hasattr(path, "is_junction") and path.is_junction()):
+                stats["unreadable"] += 1
+                continue
+            with os.scandir(path) as entries:
+                for index, entry in enumerate(entries):
+                    if index >= limits["entries_per_source"]:
+                        stats["bounded"] = True
+                        break
+                    if entry.name.endswith(".json") and entry.is_file(follow_symlinks=False):
+                        read_file(Path(entry.path), source)
+        except OSError:
+            stats["unreadable"] += 1
+
+    candidates = []
+    # Fixed impact ordering: repeated failed execution, required route change,
+    # then missing verification. These are proposals, never promotion decisions.
+    for key, action in (("repeated_failure", "Investigate repeated execution failures before retrying."),
+                        ("route_switch_required", "Choose a safe alternative route; do not repeat unchanged failure."),
+                        ("revalidation_pending", "Rerun the original failed check after the corrective change."),
+                        ("verification_gap", "Complete missing verification for touched outputs.")):
+        refs = signals[key]
+        if refs:
+            candidates.append({"rank": len(candidates)+1, "signal": key,
+                "action": action, "evidence_count": len(refs),
+                "evidence": sorted(refs, key=lambda r: (r["recorded_at"], r["sha256"]), reverse=True)[:3],
+                "impact": "potential; unmeasured", "unknowns": ["causality", "current resolution", "measured outcome benefit"]})
+    return {"schema": "taky-local-review-v1", "window": {"start": iso(start), "end": iso(now)},
+        "read_only": True, "limits": limits, "bytes_read": used, "records_scanned": scanned,
+        "sources": sources, "counts": counts, "candidates": candidates,
+        "ranking_basis": "qualitative outcome impact: repeated failure, required route change, verification gap",
+        "overall_success": "unknown", "verified_recovery": "unknown",
+        "unknowns": ["user friction and satisfaction", "cross-source session linkage",
+                     "lifecycle unique sessions (receipts omit identity)",
+                     "session count beyond observed current outcome snapshots",
+                     "recovery routes do not establish verified recovery",
+                     "snapshot flags and counters may predate the window",
+                     "missing, invalid or bounded evidence is not success",
+                     "naive timestamps interpreted in local timezone; original offset not exported"]}
+
+
+def live_log():
+    """Display local Claude Code activity across simultaneous CLI and desktop bridge sessions."""
+    positions={}
+    watched=[]
+    last_render=0
+    last_scan=0
+    last_display_signature=None
+    session_name="waiting"
+    events.append("[LOG] Monitoring local Claude Code session records (read-only).")
+
+    while True:
+        now=time.time()
+        if not watched or now-last_scan>=10:
+            last_scan=now
+            try:
+                candidates=(
+                    p for folder in CLAUDE_PROJECTS.iterdir()
+                    if folder.is_dir()
+                    and "claude-mem-observer" not in folder.name.lower()
+                    and "desktop-commander" not in folder.name.lower()
+                    for p in folder.glob("*.jsonl")
+                    if p.stat().st_size > 0
+                )
+                watched=sorted(candidates, key=lambda p:p.stat().st_mtime, reverse=True)[:8]
+            except OSError:
+                watched=[]
+            session_name=f"{len(watched)} recent sessions"
+            for f in watched:
+                if f in positions:
+                    continue
+                try:
+                    with f.open("rb") as h:
+                        size=h.seek(0,2)
+                        h.seek(max(0,size-16384))
+                        excerpt=h.read().decode("utf-8",errors="ignore").splitlines()[-6:]
+                    positions[f]=size
+                    events.append(f"[ATTACH] {short(f.parent.name,32)} / {f.stem[:8]}")
+                    for line in excerpt:
+                        try: add_event(json.loads(line))
+                        except (ValueError, TypeError, AttributeError): pass
+                except OSError:
+                    positions[f]=0
+            if len(positions)>32:
+                positions={f:positions.get(f,0) for f in watched}
+
+        for f in watched:
+            try:
+                size=f.stat().st_size
+                pos=positions.get(f,0)
+                if size < pos:
+                    pos=0
+                if size > pos:
+                    with f.open("r",encoding="utf-8",errors="ignore") as h:
+                        h.seek(pos)
+                        events.append(f"[SOURCE] {short(f.parent.name,32)} / {f.stem[:8]}")
+                        for _ in range(200):
+                            start=h.tell()
+                            line=h.readline()
+                            if not line:
+                                break
+                            if not line.endswith("\n"):
+                                h.seek(start)
+                                break
+                            pos=h.tell()
+                            try: add_event(json.loads(line))
+                            except (ValueError, TypeError, AttributeError): pass
+                    positions[f]=pos
+            except OSError:
+                continue
+        now=time.time()
+        signature=(session_name,len(events),events[-1] if events else None)
+        if (signature!=last_display_signature and now-last_render>=1) or now-last_render>=5:
+            render(session_name)
+            last_render=now
+            last_display_signature=signature
+        time.sleep(1)
+
+
+if __name__ == "__main__":
+    import sys
+    if sys.argv[1:] == ["--review-last-24h"]:
+        print(json.dumps(review_last_24h(), ensure_ascii=True, sort_keys=True))
+    elif "--review-last-24h" in sys.argv[1:]:
+        print("Review mode accepts no additional arguments.", file=sys.stderr)
+        sys.exit(2)
+    else:
+        live_log()

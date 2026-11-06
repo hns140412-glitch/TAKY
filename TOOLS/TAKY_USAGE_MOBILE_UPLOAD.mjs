@@ -15,6 +15,22 @@ if(Buffer.byteLength(content)>100000)throw new Error('SNAPSHOT_TOO_LARGE');
 const payload=JSON.parse(content);
 if(payload.schema!=='TAKY_USAGE_MOBILE_PROJECTION_V1'||!Array.isArray(payload.providers))
   throw new Error('NOT_ALLOWLISTED_PROJECTION');
+// Owner-only Drive file doubles as a small on-demand endpoint directory.
+// The bridge key stays out of the browser response, local usage projections, and logs.
+const central='C:\\TAKY_CENTRAL_LOCAL';
+const endpointFile=path.join(central,'current-url.txt');
+const keyFile=path.join(central,'usage-bridge.secret');
+if(fs.existsSync(endpointFile)&&fs.existsSync(keyFile)){
+  const url=fs.readFileSync(endpointFile,'utf8').trim();
+  const key=fs.readFileSync(keyFile,'utf8').trim();
+  const target=new URL(url);
+  if(target.protocol==='https:' && /^[a-z0-9-]+[.]trycloudflare[.]com$/.test(target.hostname) &&
+     target.pathname==='/' && /^[a-f0-9]{64}$/.test(key)){
+    payload.bridge={baseUrl:url,accessKey:key};
+  }
+}
+const cloudContent=JSON.stringify(payload);
+if(Buffer.byteLength(cloudContent)>100000)throw new Error('SNAPSHOT_TOO_LARGE');
 const current=fs.existsSync(stateFile)?JSON.parse(fs.readFileSync(stateFile,'utf8')):{};
 if(dry){
   process.stdout.write(JSON.stringify({status:'DRY_RUN',bytes:Buffer.byteLength(content),
@@ -32,7 +48,7 @@ if(!credentials || !credentials.refresh_token)throw new Error('GOOGLE_OAUTH_NOT_
 const client=new google.auth.OAuth2(credentials.client_id,credentials.client_secret);
 client.setCredentials(credentials);
 const drive=google.drive({version:'v3',auth:client});
-const media=()=>({mimeType:'application/json',body:Readable.from([content])});
+const media=()=>({mimeType:'application/json',body:Readable.from([cloudContent])});
 let id=current.driveFileId;
 if(id){
   await drive.files.update({fileId:id,media:media(),fields:'id',supportsAllDrives:true});

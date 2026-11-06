@@ -414,8 +414,29 @@ def refresh_codex_account(now=None,snapshot_path=None,state_path=None,fetcher=No
     state_path=state_path or default_state
     try:prior=json.loads(state_path.read_text(encoding="utf-8-sig"))
     except (OSError,TypeError,ValueError,UnicodeError):prior={}
+    # The official 5h window can reset before the next 30-minute poll.
+    # Permit one additional read after that *observed* reset. This is quota
+    # observation, not a model call, and it never infers zero or waives limits.
+    reset_recheck_at = None
     if now < float(prior.get("nextAttempt",0) or 0):
-        return "COOLDOWN"
+        try:
+            old=json.loads(snapshot_path.read_text(encoding="utf-8-sig"))
+            old_window=(old.get("windows") or {}).get("fiveHour") or {}
+            reset=event_epoch(old_window.get("resets_at"))
+            observed=event_epoch(old.get("capturedAt"))
+            attempted=event_epoch(prior.get("lastResetRecoveryAttemptAt")) or 0
+            if (old.get("source")=="codex_appserver_rate_limits"
+                    and reset and observed and observed < reset <= now
+                    and attempted < reset):
+                reset_recheck_at=now
+            else:
+                return "COOLDOWN"
+        except (OSError,ValueError,TypeError,AttributeError,UnicodeError):
+            return "COOLDOWN"
+    def next_state(data):
+        if reset_recheck_at is not None:
+            data["lastResetRecoveryAttemptAt"]=dt.datetime.fromtimestamp(reset_recheck_at,dt.timezone.utc).isoformat(timespec="milliseconds")
+        return data
     try:
         data=(fetcher or codex_app_server_read)()
         limits=data.get("rateLimitsByLimitId") or {}
@@ -437,19 +458,19 @@ def refresh_codex_account(now=None,snapshot_path=None,state_path=None,fetcher=No
                 windows[label]={"used_percent":n,
                                 "resets_at":reset if event_epoch(reset) else None}
         if not windows:
-            save_small_json(state_path,{"nextAttempt":now+CODEX_POLL_MIN_SECONDS,
-                                        "lastStatus":"NO_RATE_LIMIT_WINDOWS"})
+            save_small_json(state_path,next_state({"nextAttempt":now+CODEX_POLL_MIN_SECONDS,
+                                        "lastStatus":"NO_RATE_LIMIT_WINDOWS"}))
             return "NO_RATE_LIMIT_WINDOWS"
         clean={"source":"codex_appserver_rate_limits",
                "capturedAt":iso(now),"windows":windows,
                "planType":str(rate.get("planType",""))[:24]}
         save_small_json(snapshot_path,clean)
-        save_small_json(state_path,{"nextAttempt":now+CODEX_POLL_MIN_SECONDS,
-                                    "lastStatus":"OK","lastSuccessAt":iso(now)})
+        save_small_json(state_path,next_state({"nextAttempt":now+CODEX_POLL_MIN_SECONDS,
+                                    "lastStatus":"OK","lastSuccessAt":iso(now)}))
         return "OK"
     except (OSError,ValueError,TypeError,TimeoutError):
-        save_small_json(state_path,{"nextAttempt":now+3600,
-                                    "lastStatus":"RPC_UNAVAILABLE"})
+        save_small_json(state_path,next_state({"nextAttempt":now+3600,
+                                    "lastStatus":"RPC_UNAVAILABLE"}))
         return "RPC_UNAVAILABLE"
 
 
@@ -1487,6 +1508,50 @@ def selftest():
                 self.assertEqual(merged["week"]["usedPercent"],24)
                 self.assertTrue(merged["fresh"])
                 self.assertEqual(merged["rateSource"],"codex_appserver_rate_limits")
+        def test_codex_reset_recheck_updates_expired_window_once(self):
+            with tempfile.TemporaryDirectory() as tmp:
+                root=Path(tmp); snap=root/"usage.json"; state=root/"state.json"
+                now=time.time(); calls=[]
+                def read():
+                    calls.append(1)
+                    return {"rateLimits":{"planType":"plus",
+                        "primary":{"usedPercent":27 if len(calls)==1 else 1,
+                                   "windowDurationMins":300,
+                                   "resetsAt":now+100 if len(calls)==1 else now+18000},
+                        "secondary":{"usedPercent":6,"windowDurationMins":10080,
+                                     "resetsAt":now+7*86400}}}
+                self.assertEqual(refresh_codex_account(now=now,snapshot_path=snap,
+                    state_path=state,fetcher=read),"OK")
+                self.assertEqual(refresh_codex_account(now=now+50,snapshot_path=snap,
+                    state_path=state,fetcher=read),"COOLDOWN")
+                self.assertEqual(refresh_codex_account(now=now+105,snapshot_path=snap,
+                    state_path=state,fetcher=read),"OK")
+                self.assertEqual(len(calls),2)
+                result=codex(root=root,now=now+106,usage_snapshot=snap)
+                self.assertEqual(result["fiveHour"]["usedPercent"],1)
+                self.assertEqual(result["week"]["usedPercent"],6)
+                self.assertEqual(refresh_codex_account(now=now+107,snapshot_path=snap,
+                    state_path=state,fetcher=read),"COOLDOWN")
+                self.assertEqual(len(calls),2)
+        def test_codex_reset_recheck_failure_not_repeated(self):
+            with tempfile.TemporaryDirectory() as tmp:
+                root=Path(tmp); snap=root/"usage.json"; state=root/"state.json"
+                now=time.time()
+                def original():
+                    return {"rateLimits":{"planType":"plus",
+                        "primary":{"usedPercent":31,"windowDurationMins":300,
+                                   "resetsAt":now+60}}}
+                self.assertEqual(refresh_codex_account(now=now,snapshot_path=snap,
+                    state_path=state,fetcher=original),"OK")
+                attempts=[]
+                def unavailable():
+                    attempts.append(1)
+                    raise OSError("fixture")
+                self.assertEqual(refresh_codex_account(now=now+65,snapshot_path=snap,
+                    state_path=state,fetcher=unavailable),"RPC_UNAVAILABLE")
+                self.assertEqual(refresh_codex_account(now=now+66,snapshot_path=snap,
+                    state_path=state,fetcher=unavailable),"COOLDOWN")
+                self.assertEqual(len(attempts),1)
         def test_codex_official_appserver_week_only(self):
             with tempfile.TemporaryDirectory() as tmp:
                 root=Path(tmp)

@@ -68,11 +68,18 @@ def atomic_write(path, data):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, help="Existing local staging or Google Drive synced file")
+    parser.add_argument("--refresh-claude", action="store_true",
+                        help="Attempt rate-gated read-only Claude account observation before exporting")
     a = parser.parse_args()
+    claude_refresh = "NOT_REQUESTED"
+    if a.refresh_claude:
+        from TAKY_USAGE_BOARD import refresh_claude_usage
+        claude_refresh = refresh_claude_usage()  # Authenticated GET; persisted 30-minute/429 cooldown.
     data = projection(snapshot())
     size = atomic_write(a.output, data)
     print(json.dumps({"status":"EXPORTED_LOCAL_FILE","file":str(a.output),
-        "bytes":size,"providers":len(data["providers"])}, ensure_ascii=False))
+        "bytes":size,"providers":len(data["providers"]),
+        "claudeRefresh":claude_refresh}, ensure_ascii=False))
 
 if __name__ == "__main__":
     main()
