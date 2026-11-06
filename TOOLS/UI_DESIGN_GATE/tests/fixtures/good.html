@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;padding:16px;font-family:system-ui,sans-serif;color:#202834;background:#f4f5f7}
+.tabs{display:flex;gap:6px}.tab{flex:1;min-height:44px;border:1px solid #ccd2dc;border-radius:9px;background:#fff;color:#202834;font-weight:700}
+.tab[aria-selected=true]{background:#3c668b;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:12px;margin-top:12px}
+.card{background:#fff;border:1px solid #e2e5e9;border-radius:12px;padding:14px;overflow-wrap:anywhere}
+.meta{color:#5f6b7a;font-size:13px}
+</style></head><body>
+<h1>정상 화면</h1>
+<div class="tabs" role="tablist" aria-label="보기"><button class="tab" id="tA" role="tab" aria-controls="pA" aria-selected="true">첫째</button>
+<button class="tab" id="tB" role="tab" aria-controls="pB" aria-selected="false">둘째</button></div>
+<main class="grid" id="pA" role="tabpanel" aria-labelledby="tA"><section class="card"><h2>카드 하나</h2><p class="meta">설명 문구입니다.</p></section></main>
+<main class="grid" id="pB" role="tabpanel" aria-labelledby="tB" hidden><section class="card"><h2>둘째 패널</h2></section></main>
+<script>
+for(const b of document.querySelectorAll('[role=tab]'))b.addEventListener('click',()=>{for(const x of document.querySelectorAll('[role=tab]')){const on=x===b;x.setAttribute('aria-selected',String(on));document.getElementById(x.getAttribute('aria-controls')).hidden=!on;}});
+document.documentElement.dataset.ready='1';
+</script></body></html>
