@@ -1,0 +1,5 @@
+{
+  "name": "taky-local",
+  "owner": { "name": "Taky" },
+  "plugins": [ { "name": "taky-gate", "source": "./", "description": "TAKY 2.0 hard gates as hooks" } ]
+}
