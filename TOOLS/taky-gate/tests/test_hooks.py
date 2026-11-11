@@ -112,6 +112,33 @@ def main():
         trashed = any("x.js" in fs for _r, _d, fs in os.walk(os.path.join(root, ".taky", "trash")))
         check("실행 검증: build는 사라졌고 휴지통에 x.js가 있다", not os.path.exists(os.path.join(repo, "build")) and trashed)
 
+        print("-- 3b. 여러 단계 명령 안의 rm -r (RENDER observe 2026-11-11: 9건 중 7건이 이 형태)")
+        os.makedirs(os.path.join(repo, "runs", "b8", "base", "old"))
+        open(os.path.join(repo, "runs", "b8", "base", "old", "o.txt"), "w").write("o")
+        os.makedirs(os.path.join(repo, "target", "app"))
+        open(os.path.join(repo, "target", "app", "m.py"), "w").write("m")
+        chain = ("T=.; B=$T/runs/b8/base; rm -rf $B; mkdir -p $B; cp -r $T/target/app $B/; "
+                 "rm -rf $B/app/__pycache__ && echo ok > $B/done.txt")
+        d, h = gate(chain, repo, root)
+        new = h.get("updatedInput", {}).get("command", "")
+        check("chain rm -r -> 거부 대신 휴지통 이동으로 고쳐 실행", d == "allow" and "rm -rf" not in new and "mkdir -p $B" in new, new[:160])
+        run_shell(new, repo)
+        base = os.path.join(repo, "runs", "b8", "base")
+        trashed = any("o.txt" in fs for _r, _d, fs in os.walk(os.path.join(root, ".taky", "trash")))
+        check("실행 검증: $B 변수 그대로 확장, 옛 내용은 휴지통, 나머지 단계도 실행",
+              trashed and not os.path.exists(os.path.join(base, "old")) and os.path.exists(os.path.join(base, "app", "m.py"))
+              and os.path.exists(os.path.join(base, "done.txt")))
+        os.makedirs(os.path.join(repo, "x", "build")); os.makedirs(os.path.join(repo, "y", "build"))
+        open(os.path.join(repo, "x", "build", "1"), "w").write("1"); open(os.path.join(repo, "y", "build", "2"), "w").write("2")
+        d, h = gate("rm -rf x/build y/build", repo, root)
+        run_shell(h.get("updatedInput", {}).get("command", ""), repo)
+        names = {f for _r, _d, fs in os.walk(os.path.join(root, ".taky", "trash")) for f in fs}
+        check("같은 이름 두 폴더도 덮어쓰지 않고 둘 다 보관", d == "allow" and {"1", "2"} <= names, names)
+        d, h = gate("rm -rf build && git push origin main", repo, root)
+        check("chain에 main push가 같이 있으면 여전히 안내(거부)", d == "deny" and "main" in h.get("permissionDecisionReason", ""))
+        d, _ = gate("cd /tmp && rm -rf ..", repo, root)
+        check("chain 안의 광범위 rm(..)은 여전히 고정 거부", d == "deny")
+
         os.makedirs(os.path.join(root, ".taky"), exist_ok=True)
         json.dump({"netlify": {"repo": "a92a3444"}}, open(os.path.join(root, ".taky", "routes.json"), "w"))
         d, h = gate("netlify deploy --dir dist", repo, root)

@@ -117,6 +117,8 @@ def guide_count(root, command):
 
 
 def segments(command):
+    """(words, cd-target, raw text) per simple command. raw is kept so a rewrite can replace
+    exactly that piece of a chained command and leave the rest (and shell variables) untouched."""
     out, move = [], None
     for raw in re.split(r"&&|\|\||;|\||\n", command):
         try:
@@ -132,7 +134,7 @@ def segments(command):
         if words[0] in ("cd", "pushd") and len(words) > 1:
             move = words[1]
             continue
-        out.append((words, move))
+        out.append((words, move, raw.strip()))
     return out
 
 
@@ -236,8 +238,7 @@ def analyse(words, cwd, root):
             return {"kind": "destroy", "label": "rm -r (프로젝트 밖 또는 광범위)", "action": "guide", "hard": True,
                     "route": "프로젝트 폴더 안의 구체적인 경로만 지운다. 넓은 삭제는 USER가 직접 한다."}
         trash = os.path.join(taky_home(), "trash", now().strftime("%Y%m%dT%H%M%SZ"))
-        return {"kind": "destroy", "label": "rm -r", "action": "rewrite",
-                "replace": ["mkdir", "-p", trash, "&&", "mv", *targets, trash + "/"],
+        return {"kind": "destroy", "label": "rm -r", "action": "rewrite", "trash": trash,
                 "why": f"삭제 대신 {trash} 로 옮겼다. 확인 후 비우는 것은 USER 몫이다."}
     joined = " ".join(words)
     if head in ("curl", "wget", "http", "https", "xh") and any(h in joined for h in PAID_HOSTS):
@@ -247,6 +248,21 @@ def analyse(words, cwd, root):
     if (head == "claude" and ("-p" in words or "--print" in words)) or (head == "codex" and args[:1] == ["exec"]):
         return {"kind": "paid", "label": f"{head} 사용량 호출", "action": "guide", "route": "사용량 소모는 승인 범위 'paid'다."}
     return None
+
+
+RM_RAW = re.compile(r"^(?:(?:sudo|command|exec|env|nohup|time)\s+)*(?:[A-Za-z_][A-Za-z0-9_]*=\S*\s+)*\S*rm((?:\s+-\S*)+)\s+(.+)$", re.S)
+
+
+def trash_form(raw, trash):
+    """Same targets, moved instead of deleted. Targets stay unquoted so $VAR and globs expand exactly
+    as they would have for rm. Missing targets are skipped (rm -f semantics), one numbered folder per
+    target avoids name clashes, and the block always succeeds like rm -rf does."""
+    m = RM_RAW.match(raw)
+    targets = m.group(2) if m else ""
+    t = shlex.quote(trash)
+    return (f"{{ _taky_i=0; for _taky_p in {targets}; do "
+            f"if [ -e \"$_taky_p\" ] || [ -L \"$_taky_p\" ]; then _taky_i=$((_taky_i+1)); "
+            f"mkdir -p {t}/$_taky_i && mv -- \"$_taky_p\" {t}/$_taky_i/; fi; done; true; }}")
 
 
 def respond(decision=None, reason=None, updated=None, context=None):
@@ -286,12 +302,35 @@ def decide(event):
     if "grants.json" in cmd and re.search(r">|\btee\b|\bmv\b|\bcp\b|\bsed\s+-i|\bpython|\bnode", cmd):
         return respond("deny", "[TAKY KEY] 승인 기록(~/.taky/grants.json)은 USER의 '승인 ...' 입력으로만 바뀐다.")
     segs = segments(cmd)
-    findings = [(f, w, m) for w, m in segs if (f := analyse(w, resolve(cwd, m), root))]
+    findings = [(f, w, m, raw) for w, m, raw in segs if (f := analyse(w, resolve(cwd, m), root))]
     if not findings:
         return None
+    # rm -r inside a chained command: replace only that piece with the trash form, keep the rest.
+    # (Before: the whole chain was refused with "run it separately", 7 of 9 RENDER observe events, 2026-11-11.)
+    moved, pos, new_cmd = [], 0, cmd
+    for f, words, move, raw in findings:
+        if f["action"] == "rewrite" and "trash" in f:
+            at = new_cmd.find(raw, pos)
+            if at < 0 or not RM_RAW.match(raw):
+                continue
+            rep = trash_form(raw, f["trash"])
+            new_cmd = new_cmd[:at] + rep + new_cmd[at + len(raw):]
+            pos = at + len(rep)
+            moved.append(f)
+    findings = [x for x in findings if x[0] not in moved]
+    if moved and not any(f["action"] != "note" for f, *_ in findings):
+        notes = []
+        for f, *_ in findings:
+            log(root, {"kind": "note", "command": cmd[:200]})
+            notes.append(f["note"])
+        log(root, {"kind": "rewrite", "from": cmd[:200], "to": new_cmd[:300]})
+        return respond("allow", f"[TAKY 유도] rm -r {len(moved)}곳 → 휴지통 이동으로 바꿔 실행", {**ti, "command": new_cmd},
+                       "\n".join([f"[TAKY] {moved[0]['why']}"] + notes))
+    if moved:
+        cmd = new_cmd
     contexts, guides = [], []
     single = len(segs) == 1
-    for f, words, move in findings:
+    for f, words, move, _raw in findings:
         if f["action"] == "note":
             log(root, {"kind": "note", "command": cmd[:200], **({"backup": f["backup"]} if "backup" in f else {})})
             contexts.append(f["note"])
@@ -304,12 +343,8 @@ def decide(event):
         if f["action"] == "rewrite" and single:
             if "prefix" in f:
                 new = " ".join(shlex.quote(x) for x in f["prefix"]) + " && " + cmd
-            elif "add" in f:
-                new = cmd + " " + " ".join(shlex.quote(x) for x in f["add"])
             else:
-                rep = f["replace"]
-                cut = rep.index("&&")
-                new = " ".join(shlex.quote(x) for x in rep[:cut]) + " && " + " ".join(shlex.quote(x) for x in rep[cut + 1:])
+                new = cmd + " " + " ".join(shlex.quote(x) for x in f["add"])
             if f["kind"] in ("deploy", "prod") and not granted(root, f["kind"]):
                 guides.append((f, f"{f['why']} 고친 명령: {new} · 배포 자체는 승인 범위 '{f['kind']}'가 필요하다."))
                 continue
@@ -317,10 +352,14 @@ def decide(event):
             return respond("allow", f"[TAKY 유도] {f['label']} → 안전한 형태로 바꿔 실행", {**ti, "command": new},
                            f"[TAKY] {f['why']}")
         if f["action"] == "rewrite":
-            guides.append((f, f"{f['why']} 이 명령은 여러 단계라 자동으로 고치지 않았다. 해당 단계만 따로 실행하면 자동으로 안전한 형태가 된다."))
+            guides.append((f, "여러 단계 명령이라 아직 실행하지 않았다. 이 단계만 따로 실행하면 TAKY가 안전한 형태로 바꿔 실행한다."))
             continue
         guides.append((f, f["route"]))
     if not guides:
+        if moved:
+            log(root, {"kind": "rewrite", "from": ti.get("command", "")[:200], "to": cmd[:300]})
+            return respond("allow", f"[TAKY 유도] rm -r {len(moved)}곳 → 휴지통 이동으로 바꿔 실행", {**ti, "command": cmd},
+                           "\n".join([f"[TAKY] {moved[0]['why']}"] + contexts))
         return respond(context="\n".join(contexts)) if contexts else None
     n = guide_count(root, cmd)
     lines = [f"[TAKY {GATE[f['kind']]} 안내 · {f['kind']}] {f['label']}: {r}" for f, r in guides]
