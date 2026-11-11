@@ -116,6 +116,26 @@ def guide_count(root, command):
     return data[key]
 
 
+HEREDOC = re.compile(r"<<-?\s*(['\"]?)([A-Za-z_][A-Za-z0-9_]*)\1")
+
+
+def mask_heredocs(command):
+    """Heredoc bodies are file content, not commands: blank them out (same length, newlines kept) so
+    'cat > run.sh <<EOF ... rm -rf x ... EOF' is neither refused nor rewritten. Offsets stay valid."""
+    out, i = command, 0
+    while True:
+        m = HEREDOC.search(out, i)
+        if not m:
+            return out
+        start = out.find("\n", m.end())
+        if start < 0:
+            return out
+        end = re.compile(r"^\t*" + re.escape(m.group(2)) + r"[ \t]*$", re.M).search(out, start + 1)
+        stop = end.start() if end else len(out)
+        out = out[:start] + re.sub(r"[^\n]", " ", out[start:stop]) + out[stop:]
+        i = (end.end() if end else len(out))
+
+
 def segments(command):
     """(words, cd-target, raw text) per simple command. raw is kept so a rewrite can replace
     exactly that piece of a chained command and leave the rest (and shell variables) untouched."""
@@ -255,13 +275,14 @@ RM_RAW = re.compile(r"^(?:(?:sudo|command|exec|env|nohup|time)\s+)*(?:[A-Za-z_][
 
 def trash_form(raw, trash):
     """Same targets, moved instead of deleted. Targets stay unquoted so $VAR and globs expand exactly
-    as they would have for rm. Missing targets are skipped (rm -f semantics), one numbered folder per
-    target avoids name clashes, and the block always succeeds like rm -rf does."""
+    as they would have for rm. Missing targets are skipped (rm -f semantics), one fresh numbered folder per
+    target avoids name clashes (also with an earlier move in the same second), and the block always succeeds like rm -rf does."""
     m = RM_RAW.match(raw)
     targets = m.group(2) if m else ""
     t = shlex.quote(trash)
     return (f"{{ _taky_i=0; for _taky_p in {targets}; do "
             f"if [ -e \"$_taky_p\" ] || [ -L \"$_taky_p\" ]; then _taky_i=$((_taky_i+1)); "
+            f"while [ -e {t}/$_taky_i ]; do _taky_i=$((_taky_i+1)); done; "
             f"mkdir -p {t}/$_taky_i && mv -- \"$_taky_p\" {t}/$_taky_i/; fi; done; true; }}")
 
 
@@ -301,22 +322,25 @@ def decide(event):
     cmd = str(ti.get("command", ""))
     if "grants.json" in cmd and re.search(r">|\btee\b|\bmv\b|\bcp\b|\bsed\s+-i|\bpython|\bnode", cmd):
         return respond("deny", "[TAKY KEY] 승인 기록(~/.taky/grants.json)은 USER의 '승인 ...' 입력으로만 바뀐다.")
-    segs = segments(cmd)
+    masked = mask_heredocs(cmd)
+    segs = segments(masked)
     findings = [(f, w, m, raw) for w, m, raw in segs if (f := analyse(w, resolve(cwd, m), root))]
     if not findings:
         return None
     # rm -r inside a chained command: replace only that piece with the trash form, keep the rest.
     # (Before: the whole chain was refused with "run it separately", 7 of 9 RENDER observe events, 2026-11-11.)
-    moved, pos, new_cmd = [], 0, cmd
+    moved, spots, pos = [], [], 0
     for f, words, move, raw in findings:
-        if f["action"] == "rewrite" and "trash" in f:
-            at = new_cmd.find(raw, pos)
-            if at < 0 or not RM_RAW.match(raw):
-                continue
-            rep = trash_form(raw, f["trash"])
-            new_cmd = new_cmd[:at] + rep + new_cmd[at + len(raw):]
-            pos = at + len(rep)
+        at = masked.find(raw, pos)
+        if at < 0:
+            continue
+        pos = at + len(raw)
+        if f["action"] == "rewrite" and "trash" in f and RM_RAW.match(raw):
+            spots.append((at, raw, trash_form(raw, f["trash"])))
             moved.append(f)
+    new_cmd = cmd
+    for at, raw, rep in reversed(spots):
+        new_cmd = new_cmd[:at] + rep + new_cmd[at + len(raw):]
     findings = [x for x in findings if x[0] not in moved]
     if moved and not any(f["action"] != "note" for f, *_ in findings):
         notes = []

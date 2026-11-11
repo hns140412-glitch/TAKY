@@ -138,6 +138,12 @@ def main():
         check("chain에 main push가 같이 있으면 여전히 안내(거부)", d == "deny" and "main" in h.get("permissionDecisionReason", ""))
         d, _ = gate("cd /tmp && rm -rf ..", repo, root)
         check("chain 안의 광범위 rm(..)은 여전히 고정 거부", d == "deny")
+        script = "mkdir -p tools && cat > tools/run.sh <<'EOF'\nRUN=out/x; rm -rf \"$RUN\"; git push origin main\nEOF\nchmod +x tools/run.sh"
+        d, h = gate(script, repo, root)
+        check("heredoc 본문(파일 내용)의 rm/push는 실행이 아니라서 거부도 수정도 안 함", d == "pass", (d, h))
+        d, h = gate("cat > a.sh <<EOF\nrm -rf q\nEOF\nrm -rf build3", repo, root)
+        new = h.get("updatedInput", {}).get("command", "")
+        check("heredoc 뒤의 진짜 rm만 고치고 본문은 그대로", d == "allow" and "\nrm -rf q\n" in new and "rm -rf build3" not in new, new[:200])
 
         os.makedirs(os.path.join(root, ".taky"), exist_ok=True)
         json.dump({"netlify": {"repo": "a92a3444"}}, open(os.path.join(root, ".taky", "routes.json"), "w"))
