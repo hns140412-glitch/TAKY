@@ -2,18 +2,18 @@
   "description": "TAKY 2.0 guide: steer to the right path, one USER approval per work unit",
   "hooks": {
     "UserPromptSubmit": [
-      { "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_grant.py\"", "timeout": 5 } ] }
+      { "hooks": [ { "type": "command", "command": "python3 -X utf8 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_grant.py\"", "timeout": 5 } ] }
     ],
     "PreToolUse": [
       { "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit|mcp__github__.*|mcp__ElevenLabs__.*",
-        "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_gate.py\"", "timeout": 15 } ] }
+        "hooks": [ { "type": "command", "command": "python3 -X utf8 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_gate.py\"", "timeout": 15 } ] }
     ],
     "PostToolUse": [
       { "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
-        "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_delta.py\"", "timeout": 5 } ] }
+        "hooks": [ { "type": "command", "command": "python3 -X utf8 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_delta.py\"", "timeout": 5 } ] }
     ],
     "Stop": [
-      { "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_ledger.py\" --stop-hook", "timeout": 10 } ] }
+      { "hooks": [ { "type": "command", "command": "python3 -X utf8 \"${CLAUDE_PLUGIN_ROOT}/hooks/taky_ledger.py\" --stop-hook", "timeout": 10 } ] }
     ]
   }
 }

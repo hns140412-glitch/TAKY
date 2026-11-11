@@ -133,7 +133,7 @@ def main():
         check("grant push여도 main 직접 push는 'prod' 범위라 안내", d == "deny")
         d, _ = gate("netlify deploy --dir dist --site a92a3444", repo, root)
         check("grant(deploy) 범위 draft 배포 -> 통과", d == "pass")
-        log = "".join(open(os.path.join(root, ".taky", "delta", f)).read() for f in os.listdir(os.path.join(root, ".taky", "delta")))
+        log = "".join(open(os.path.join(root, ".taky", "delta", f), encoding="utf-8").read() for f in os.listdir(os.path.join(root, ".taky", "delta")))
         check("승인 사용 내역이 delta에 남는다", log.count("grant_use") >= 1)
 
         print("-- 5. 승인으로도 못 여는 고정 규칙")
@@ -191,7 +191,7 @@ def main():
         outs = [hook(GATE, {"tool_name": "Bash", "tool_input": {"command": c}, "cwd": repo}, root)
                 for c in ("gh pr merge 5", "rm -rf build2", "netlify deploy")]
         check("observe: 출력 0건 (세션에 영향 없음)", all(o is None for o in outs), outs)
-        log = "".join(open(os.path.join(root, ".taky", "delta", f)).read() for f in os.listdir(os.path.join(root, ".taky", "delta")))
+        log = "".join(open(os.path.join(root, ".taky", "delta", f), encoding="utf-8").read() for f in os.listdir(os.path.join(root, ".taky", "delta")))
         check("observe: 했을 판단 3건이 delta에 기록", log.count('"observe"') >= 3)
         MODE = "guide"
 
