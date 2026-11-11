@@ -153,6 +153,17 @@ def main():
         r = h.get("permissionDecisionReason", "")
         check("netlify: 등록된 사이트를 찾아 고친 명령을 안내 (배포 승인 전)", d == "deny" and "--site a92a3444" in r, r[:140])
 
+        print("-- 3c. Codex 검증 호출 (USER 카드 2026-11-11: 읽기 전용은 상시 허용)")
+        for c in ("codex exec 'review the diff'", "LAW_OC=x codex exec --skip-git-repo-check -s read-only 'verify'"):
+            d, h = gate(c, repo, root)
+            check(f"verify 통과+기록: {c[:40]}", d == "pass" and "상시 허용" in h.get("additionalContext", ""), (d, h))
+        for c in ("codex exec --full-auto 'implement'", "codex exec -s workspace-write 'fix'",
+                  "codex exec --sandbox=danger-full-access 'x'"):
+            d, _ = gate(c, repo, root)
+            check(f"쓰기 가능 codex는 안내: {c[:40]}", d == "deny")
+        d, _ = gate("claude -p 'summarize'", repo, root)
+        check("claude -p는 여전히 'paid' 안내", d == "deny")
+
         print("-- 4. USER 한 줄 승인 = 작업 단위 전체")
         out = grant("이 작업 진행해\n승인 push,deploy 1h", root)
         ctx = out["hookSpecificOutput"]["additionalContext"]

@@ -265,7 +265,19 @@ def analyse(words, cwd, root):
         host = next(h for h in PAID_HOSTS if h in joined)
         return {"kind": "paid", "label": f"유료 API ({host})", "action": "guide",
                 "route": "무료·로컬 경로가 있으면 그것을 쓴다. 없으면 예상 비용과 함께 승인 범위 'paid'로 묶는다."}
-    if (head == "claude" and ("-p" in words or "--print" in words)) or (head == "codex" and args[:1] == ["exec"]):
+    if head == "codex" and args[:1] == ["exec"]:
+        # USER card 2026-11-11: Codex verification calls are standing-approved. codex exec defaults to a
+        # read-only sandbox; a write-capable run is implementation work and stays in the 'paid' scope.
+        flat = " ".join(args)
+        writes = ("--full-auto" in args or "--dangerously-bypass-approvals-and-sandbox" in args or
+                  re.search(r"(?:-s|--sandbox)[ =](?:workspace-write|danger-full-access)", flat) or
+                  re.search(r"sandbox_mode\s*=\s*['\"]?(?:workspace-write|danger-full-access)", flat))
+        if not writes:
+            return {"kind": "verify", "label": "codex exec (읽기 전용 검증)", "action": "note",
+                    "note": "[TAKY] Codex 검증 호출(읽기 전용): USER 상시 허용(2026-11-11). 사용 기록만 남긴다."}
+        return {"kind": "paid", "label": "codex exec (쓰기 가능 실행)", "action": "guide",
+                "route": "쓰기 가능한 Codex 실행은 구현 작업이라 승인 범위 'paid'다. 검증만이면 읽기 전용(-s read-only)으로 돌린다."}
+    if head == "claude" and ("-p" in words or "--print" in words):
         return {"kind": "paid", "label": f"{head} 사용량 호출", "action": "guide", "route": "사용량 소모는 승인 범위 'paid'다."}
     return None
 

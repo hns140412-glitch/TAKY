@@ -14,7 +14,7 @@ TAKY 2.0 guide-type hooks for Claude Code. The plugin steers risky commands onto
 ## Install
 
 ```
-python -X utf8 tests/test_hooks.py   # expect 47/47 PASS
+python -X utf8 tests/test_hooks.py   # expect 53/53 PASS
 claude plugin marketplace add "<absolute path to this folder>"
 claude plugin install taky-gate@taky-local --scope user
 ```
