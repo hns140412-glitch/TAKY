@@ -27,7 +27,9 @@ def sh(args, cwd):
 
 
 def hook(script, event, root, args=()):
-    p = subprocess.run([sys.executable, script, *args], input=json.dumps(event), capture_output=True, text=True,
+    # same flags as hooks/hooks.json (-X utf8), so Korean output decodes the same way on cp949 Windows
+    p = subprocess.run([sys.executable, "-X", "utf8", script, *args], input=json.dumps(event), capture_output=True,
+                       text=True, encoding="utf-8",
                        env={**os.environ, "CLAUDE_PROJECT_DIR": root, "TAKY_GUIDE_MODE": MODE, "TAKY_HOME": os.path.join(root, ".taky")})
     return json.loads(p.stdout) if p.stdout.strip() else None
 
