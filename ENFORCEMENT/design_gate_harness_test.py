@@ -114,6 +114,9 @@ class ReviewFixes20261111(unittest.TestCase):
             vps = [{"id": "phone", "screenshot": str(shot)}, {"id": "desk", "screenshot": str(shot)}]
             r = h.visual_compare(ref, {"viewports": vps}, 90)
             self.assertEqual(r["status"], "HOLD", r)
+            # a single viewport with a different name is not a match either (recheck 2026-11-11)
+            r = h.visual_compare(ref, {"viewports": vps[:1]}, 90)
+            self.assertEqual(r["status"], "HOLD", r)
 
     def test_malformed_yaml_spec_still_judges(self):
         spec = h.lint_spec("```yaml\ncolors: [unclosed\n```\n")

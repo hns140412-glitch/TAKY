@@ -207,8 +207,6 @@ def visual_compare(reference: Path | None, render: dict, threshold: float, mode:
         return {"status": "NOT_APPLICABLE", "findings": ["no --reference given"]}
     vps = render.get("viewports") or []
     shot = next((v for v in vps if v.get("id") == reference.stem), None)
-    if shot is None and len(vps) == 1:
-        shot = vps[0]
     if shot is None:
         if not vps:
             return {"status": "UNKNOWN", "findings": ["no render to compare"]}
