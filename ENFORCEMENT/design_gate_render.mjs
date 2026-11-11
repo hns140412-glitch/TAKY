@@ -101,7 +101,8 @@ try {
     facts.loaded_font_faces = await page.evaluate(() =>
       [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family.replace(/["']/g, "")));
     const png = await page.screenshot({ fullPage: true });
-    const file = resolve(outDir, `${vp.id}.png`);
+    const safeId = String(vp.id).replace(/[^A-Za-z0-9._-]/g, "_").replace(/^\.+/, "_");
+    const file = resolve(outDir, `${safeId}.png`);
     writeFileSync(file, png);
     result.viewports.push({ ...vp, screenshot: file, screenshot_sha256: sha(png), ...facts });
     await page.close();

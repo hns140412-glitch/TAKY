@@ -23,6 +23,8 @@ from pathlib import Path
 
 import yaml
 
+SIZE_TOLERANCE_PCT = 2.0  # max height difference between render and reference, after width scaling
+
 SCHEMA = "TAKY_DESIGN_GATE_HARNESS_RECEIPT_V1"
 HERE = Path(__file__).resolve().parent
 RENDER = HERE / "design_gate_render.mjs"
@@ -87,7 +89,9 @@ def lint_spec(text: str) -> dict:
     try:
         tokens, headings = parse_design_md(text)
     except (yaml.YAMLError, ValueError) as e:
-        return {"status": "FAIL", "findings": [f"SPEC_UNPARSEABLE: {e}"], "tokens": {}}
+        return {"status": "FAIL", "findings": [f"SPEC_UNPARSEABLE: {e}"], "tokens": {},
+                "palette": [], "font_families": [], "mode": "EXPLORE",
+                "design_system": "UNKNOWN@UNKNOWN", "thresholds": dict(DEFAULTS)}
     palette = _hexes(tokens.get("colors"))
     fams = _families(tokens.get("typography"))
     if not palette:
@@ -201,10 +205,17 @@ def visual_compare(reference: Path | None, render: dict, threshold: float, mode:
     """
     if reference is None:
         return {"status": "NOT_APPLICABLE", "findings": ["no --reference given"]}
-    shot = next((v for v in render.get("viewports", []) if v.get("id") == reference.stem), None)
-    shot = shot or (render.get("viewports") or [None])[0]
-    if not shot:
-        return {"status": "UNKNOWN", "findings": ["no render to compare"]}
+    vps = render.get("viewports") or []
+    shot = next((v for v in vps if v.get("id") == reference.stem), None)
+    if shot is None and len(vps) == 1:
+        shot = vps[0]
+    if shot is None:
+        if not vps:
+            return {"status": "UNKNOWN", "findings": ["no render to compare"]}
+        # Never silently compare against a different screen size (review 2026-11-11 MEDIUM).
+        return {"status": "HOLD", "cause_class": "HARNESS",
+                "findings": [f"REFERENCE_VIEWPORT_UNMATCHED: name the reference <viewport-id>.png "
+                             f"(one of {[v.get('id') for v in vps]})"]}
     try:
         p = subprocess.run([sys.executable, str(IMGDIFF), str(reference), shot["screenshot"],
                             "--mode", mode, "--json"], capture_output=True, text=True, timeout=300)
@@ -212,10 +223,24 @@ def visual_compare(reference: Path | None, render: dict, threshold: float, mode:
     except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError) as e:
         return {"status": "HOLD", "cause_class": "HARNESS", "findings": [f"imgdiff failed: {e!r}"]}
     ok = rep["score"] >= threshold
+    findings = [] if ok else [f"layout score {rep['score']} < {threshold} ({rep.get('verdict')})"]
+    # imgdiff compares only the overlapping height; a missing half-page can still score 100
+    # (review 2026-11-11 HIGH). Size mismatch beyond tolerance is a FAIL on its own.
+    o, c = rep.get("original") or {}, rep.get("clone") or {}
+    if o.get("width") and o.get("height") and c.get("width") and c.get("height"):
+        ref_h = o["height"] * (c["width"] / float(o["width"]))
+        delta = abs(c["height"] - ref_h) / ref_h * 100.0 if ref_h else 100.0
+        if delta > SIZE_TOLERANCE_PCT:
+            ok = False
+            findings.append(f"SIZE_MISMATCH: render height {c['height']}px vs reference "
+                            f"{round(ref_h)}px at render width ({delta:.1f}% > {SIZE_TOLERANCE_PCT}%)")
+    else:
+        ok = False
+        findings.append("SIZE_UNKNOWN: imgdiff report lacks image sizes")
     return {"status": "PASS" if ok else "FAIL", "mode": mode, "score": rep["score"],
             "threshold": threshold, "against_viewport": shot["id"],
             "reference_sha256": sha256_bytes(reference.read_bytes()),
-            "findings": [] if ok else [f"layout score {rep['score']} < {threshold} ({rep.get('verdict')})"]}
+            "findings": findings}
 
 
 def verdict(subs: dict) -> str:

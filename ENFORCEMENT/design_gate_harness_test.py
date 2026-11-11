@@ -76,5 +76,50 @@ class Render(unittest.TestCase):
         self.assertEqual(r["sub_receipts"]["FONT_PRINT_PDF"]["status"], "FAIL", r["sub_receipts"]["FONT_PRINT_PDF"])
 
 
+
+class ReviewFixes20261111(unittest.TestCase):
+    """Codex independent review 2026-11-11 (PR #219): HIGH size mismatch, MEDIUM malformed spec / viewport match."""
+
+    def _png(self, d, name, w, hgt, split=None):
+        from PIL import Image
+        im = Image.new("RGB", (w, hgt), "white")
+        for y in range(0, hgt, 40):  # same stripes in both so overlapping area matches
+            for x in range(w):
+                for k in range(8):
+                    if y + k < hgt:
+                        im.putpixel((x, y + k), (0, 0, 0))
+        f = Path(d) / name
+        im.save(f)
+        return f
+
+    def test_half_page_missing_is_fail(self):
+        with tempfile.TemporaryDirectory() as d:
+            ref = self._png(d, "phone.png", 120, 400)
+            shot = self._png(d, "shot.png", 120, 200)
+            r = h.visual_compare(ref, {"viewports": [{"id": "phone", "screenshot": str(shot)}]}, 90)
+            self.assertEqual(r["status"], "FAIL", r)
+            self.assertTrue(any("SIZE_MISMATCH" in f for f in r["findings"]), r["findings"])
+
+    def test_same_size_same_image_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            ref = self._png(d, "phone.png", 120, 400)
+            shot = self._png(d, "shot.png", 120, 400)
+            r = h.visual_compare(ref, {"viewports": [{"id": "phone", "screenshot": str(shot)}]}, 90)
+            self.assertEqual(r["status"], "PASS", r)
+
+    def test_unmatched_reference_name_is_hold(self):
+        with tempfile.TemporaryDirectory() as d:
+            ref = self._png(d, "tablet.png", 120, 400)
+            shot = self._png(d, "shot.png", 120, 400)
+            vps = [{"id": "phone", "screenshot": str(shot)}, {"id": "desk", "screenshot": str(shot)}]
+            r = h.visual_compare(ref, {"viewports": vps}, 90)
+            self.assertEqual(r["status"], "HOLD", r)
+
+    def test_malformed_yaml_spec_still_judges(self):
+        spec = h.lint_spec("```yaml\ncolors: [unclosed\n```\n")
+        self.assertEqual(spec["status"], "FAIL")
+        subs = h.judge(spec, {"harness": {"ok": False, "error": "x"}})
+        self.assertEqual(subs["HARNESS_HEALTH"]["status"], "HOLD")
+
 if __name__ == "__main__":
     unittest.main()

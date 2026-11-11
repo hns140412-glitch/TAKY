@@ -1,3 +1,9 @@
+## 2026-11-11 — Fixes from Codex independent review (PR #219)
+- HIGH: VISUAL_COMPARE now FAILs on render/reference height mismatch > 2% after width scaling (imgdiff compares only the overlap; half a page missing scored 100).
+- MEDIUM: unparseable spec still returns thresholds so `judge()` yields a receipt; a reference whose name matches no viewport is HOLD instead of silently using the first viewport.
+- MEDIUM/LOW: §7 names the §20.1d replica-study exception; §20 tooling note lists the vendored replica pack and says its npm/npx/deploy steps follow MASTER approval gates; render output file names are sanitized (no path traversal).
+- Tests 12/12 (4 new, each fails on the old code). VISUAL_COMPARE path now executed in tests.
+
 ## 2026-11-06 — DGC-22/23 from the Play Camp run
 - DGC-22: read the project screen contract before redesigning (a hub redesign broke PC-TAB-HUB-01 and was reverted).
 - DGC-23: gates waiting on unapproved capabilities need a non-faking forward path; smoke must walk the real child path (intro step 4 dead-end in production).

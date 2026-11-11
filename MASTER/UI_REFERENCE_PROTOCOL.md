@@ -116,7 +116,7 @@ Production UI libraries may be used to inspect:
 
 Use them as comparative evidence, not as proof that a pattern is correct for the current user/project.
 
-Do not copy a third-party product's branded composition wholesale.
+Do not copy a third-party product's branded composition wholesale into a result. Exception: a §20.1d replica-level study in EXPLORE, which stays `PILOT_FIXTURE_ONLY` and never ships.
 
 ## 8. UI vocabulary normalization
 
@@ -375,7 +375,7 @@ The mechanical parts of DGC-01/02/16/18/19 and A11Y basics are executable:
 - Procedure: `.claude/skills/taky-design-gate/SKILL.md`. Independent review: `.claude/agents/design-gate-reviewer.md`. Browser eye for interaction: `.mcp.json` Playwright MCP (pinned).
 - Tests: `ENFORCEMENT/design_gate_harness_test.py` with fixtures in `ENFORCEMENT/fixtures/design_gate/`.
 - Not added to CI on purpose (DGC-12: automate last). Promote to CI after manual replay on real project screens passes.
-- No third-party design skill is installed (Notion review RVR-121 disposition: hold).
+- No third-party design skill is installed except the MIT `replica-*` pack declared in §20.1d (Notion review RVR-121 disposition for other skills: hold). Its npm/npx and deploy instructions are not TAKY procedure: dependency installs and deploys follow MASTER/AI_COLLABORATION_PROTOCOL.md approval gates.
 
 ### 20.1d Replica-level study, quality-bar result — USER decision 2026-11-06
 
