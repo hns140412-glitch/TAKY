@@ -21,3 +21,4 @@
 *.key
 
 # Do not blanket-ignore app source/assets or PWA runtime configurations.
+__pycache__/

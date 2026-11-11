@@ -1,3 +1,29 @@
+## 2026-11-11 — Fixes from Codex independent review (PR #219)
+- HIGH: VISUAL_COMPARE now FAILs on render/reference height mismatch > 2% after width scaling (imgdiff compares only the overlap; half a page missing scored 100).
+- MEDIUM: unparseable spec still returns thresholds so `judge()` yields a receipt; a reference whose name matches no viewport is HOLD instead of silently using the first viewport.
+- MEDIUM/LOW: §7 names the §20.1d replica-study exception; §20 tooling note lists the vendored replica pack and says its npm/npx/deploy steps follow MASTER approval gates; render output file names are sanitized (no path traversal).
+- Tests 12/12 (4 new, each fails on the old code). Recheck: a single viewport with a different name is HOLD too (no fallback). VISUAL_COMPARE path now executed in tests.
+
+## 2026-11-06 — DGC-22/23 from the Play Camp run
+- DGC-22: read the project screen contract before redesigning (a hub redesign broke PC-TAB-HUB-01 and was reverted).
+- DGC-23: gates waiting on unapproved capabilities need a non-faking forward path; smoke must walk the real child path (intro step 4 dead-end in production).
+
+## 2026-11-06 — Replica-level study + VISUAL_COMPARE
+- USER decision: TAKY rules are the quality bar for the result; replica-level cloning and teardown are allowed in EXPLORE (§20.1d).
+- Vendored replica-skill (11 skills, MIT) into `.claude/skills/`. Harness gains a `VISUAL_COMPARE` sub-receipt via `replica-diff/imgdiff.py` (`--reference`).
+- Not run here: the session's permission policy blocks executing the vendored code, so the VISUAL_COMPARE path is untested in this session. The existing 8 tests pass.
+
+## 2026-11-06 — Design-gate harness (skill + agent + MCP + render check)
+- Added `ENFORCEMENT/design_gate_harness.py` + `design_gate_render.mjs`: DESIGN.md lint plus real-Chromium render per viewport, token/font/print/a11y sub-receipts, hash-bound receipt. 8 tests pass locally.
+- Added `.claude/skills/taky-design-gate`, `.claude/agents/design-gate-reviewer`, `.mcp.json` (Playwright MCP 0.0.83).
+- Not in CI yet (DGC-12). Fixed during build: Chromium `document.fonts.check` reports missing fonts as available, so font presence is measured by text width.
+
+## 2026-11-06 — Case-derived design-gate criteria (TKY-UIREF-001 §20)
+- Added DGC-01..12 to `MASTER/UI_REFERENCE_PROTOCOL.md` §20 from a Claude case review (Claude Design, Apple, Tesla) of the DG-00..10 design-gate contract.
+- No new gates; DG IDs/order unchanged. Adds EXPLORE/EXECUTE mode, derived design-system binding, DELETION_PASS, candidate minimum N, handoff spec hash, export≠editable, automate-last.
+- Added DGC-13..21 from Instagram (2016 icon, 2022 feed rollback, 2024 rug-pull, 2025 grid/iPad/nav) and Claude Design practitioner cases.
+- Claim ceiling: DESIGN_CONTRACT_CASE_REVIEWED; no receipt-code/CI binding beyond existing fields.
+
 ## 2026-09-19 — NotebookLM Pilot 01 sanitized coverage batch 04b
 - Added verified sanitized TAKY Core source `타키 기준 불러오기`.
 - Switched recovery discovery to one-file queue processing with canonical-registry duplicate checks.
