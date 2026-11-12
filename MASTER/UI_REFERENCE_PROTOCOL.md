@@ -371,7 +371,7 @@ Scope: these are criteria, not new gates. DG IDs and order stay unchanged and ap
 ### 20.1c Harness binding — 2026-11-06
 
 The mechanical parts of DGC-01/02/16/18/19 and A11Y basics are executable:
-- `ENFORCEMENT/design_gate_harness.py` (judge, receipt) + `ENFORCEMENT/design_gate_render.mjs` (Playwright/Chromium render probe). Sub-receipts in fixed order: HARNESS_HEALTH, SPEC_LINT, TARGET_RENDER, TOKEN_FIDELITY, FONT_PRINT_PDF, A11Y_BASIC, GENERIC_TELLS (advisory only). A harness failure is HOLD, not FAIL. Receipts carry `spec_sha256`, `artifact_sha256` and `design_system_id@version`.
+- `ENFORCEMENT/design_gate_harness.py` (judge, receipt) + `ENFORCEMENT/design_gate_render.mjs` (Playwright/Chromium render probe). Sub-receipts in fixed order: HARNESS_HEALTH, SPEC_LINT, TARGET_RENDER, TOKEN_FIDELITY, FONT_PRINT_PDF, A11Y_BASIC, GENERIC_TELLS (advisory only), FIRST_VIEWPORT and PREMIUM (advisory, §20.1e), VISUAL_COMPARE. A harness failure is HOLD, not FAIL. Receipts carry `spec_sha256`, `artifact_sha256` and `design_system_id@version`.
 - Procedure: `.claude/skills/taky-design-gate/SKILL.md`. Independent review: `.claude/agents/design-gate-reviewer.md`. Browser eye for interaction: `.mcp.json` Playwright MCP (pinned).
 - Tests: `ENFORCEMENT/design_gate_harness_test.py` with fixtures in `ENFORCEMENT/fixtures/design_gate/`.
 - Not added to CI on purpose (DGC-12: automate last). Promote to CI after manual replay on real project screens passes.
@@ -388,6 +388,30 @@ USER clarified: TAKY rules are the **quality bar for the finished result**. They
   - result stage: compare against the **approved TAKY reference**, not the third-party original. The original's look (trade dress), brand, copy and assets do not pass into the result.
 - Tooling: `replica-*` skills vendored from Jakeschincariol/replica-skill (MIT, `.claude/skills/REPLICA_SKILL_LICENSE.txt`). `replica-diff/imgdiff.py` feeds the harness `VISUAL_COMPARE` sub-receipt (`--reference`).
 
+### 20.1e Dashboard criteria — 2026-11-12
+
+Origin: Claude case review in the 그로우 project (thread "디자인 게이트 사례 기반 재설계"). The TAKY harness was run on a real screen (SAVEY parent home, branch `savey/premium-pass-20261107` 8cd4450, 390×844) and on three dashboard templates. USER "ㄱ" 2026-11-12 approved reflecting the proposal on a work branch; promotion to main follows the usual merge approval.
+
+What the replay showed: the harness catches mechanical defects (SAVEY: 8 off-token text colours; `styles.css` has 134 distinct raw hex values) but not the defects that cost most on a dashboard. A template passed all 8 sub-receipts while its headline said "on plan" and the bar beneath it said 62% spent at 40% of the month. The full-page screenshot also paints fixed bars mid-page, which misled the first manual read of SAVEY into reporting an overlap that the scroll-end check later showed was not there.
+
+| ID | Gate | Criterion | Check | Case basis (evidence grade) |
+|---|---|---|---|---|
+| DGC-24 | DG-02 | A dashboard screen declares one question in DESIGN.md `dashboard.question` and answers it in a sentence at the top of the first viewport. | SPEC_LINT (block present → question required) | Few, *Information Dashboard Design* (classic text, general knowledge); template T1 |
+| DGC-25 | DG-03 / DG-04 | The decision metric (what the viewer acts on: money left, next task) is the largest number. Cumulative totals and vanity metrics sit below it. | Reviewer | ScreensDesign budget-app screen recordings, 14 screens (first-hand screens); SAVEY category tiles show spend share, not budget left |
+| DGC-26 | DG-08 | Statement, state chip and numbers on the same screen agree. Missing data is explained, never shown as 0. Forecasts are marked apart from recorded values. | Reviewer checklist (`FIRST_VIEWPORT.reviewer_checks`); automate only after manual replay (DGC-12) | Template T1 first draft (internal case); ScreensDesign |
+| DGC-27 | DG-08 | First-viewport budget declared per project in `dashboard.*`: focal points (`max_focal_points`), KPIs (`max_kpis_first_viewport`), filled CTAs (`max_filled_cta`). | FIRST_VIEWPORT: filled CTAs measured; focal points and KPIs by reviewer | SAVEY first viewport: 5 focal points; Orbix bento guidance (max 2 hero tiles, practitioner rule of thumb); Setproduct 3–7 KPIs (self-declared rule of thumb) |
+| DGC-28 | DG-08 | At the end of the scroll, no readable content sits under a fixed or sticky element. Review the first-viewport screenshot, not only the full-page one. | FIRST_VIEWPORT: scroll-end overlap + `<id>.first.png` | Fixture `fixed_overlap.html`; SAVEY replay (no overlap at scroll end) |
+| DGC-29 | DG-04 | One symbol, one meaning: different categories do not share an icon or colour unless the shared parent is labelled. | Reviewer (asset list) | SAVEY: 카페, 배달 음식, 마트 장보기 share one bowl icon |
+| DGC-30 | DG-02 / DG-03 | Pick the dashboard form by audience: `T1_DECISION` (parent / household money), `T2_WORLD_HUB` (child progress, WORLD FIRST), `T3_OPS_BOARD` (operations, Taky). A card grid is a reasoned exception, not the default. | SPEC_LINT (`dashboard.template` must be one of these or `CUSTOM`) | TAKY MOBILE DESIGN AUTHORITY v1 §7 (no admin-dashboard convergence), Play Camp tablet review; Pinterest sample 2026-11-12 (below) |
+
+PREMIUM sub-receipt: SAVEY `premium-gate.mjs` PG01–PG12 is ported into the harness render probe (first viewport). Limits default to the SAVEY values and are overridden per project with `taky.thresholds.premium`. PG05 (accent hues) stays with the reviewer because charts need hues. Replay check: SAVEY home scores 10/11 in the harness, failing PG08 radii (5 > 3), matching the SAVEY gate's own after-pass result for the same screen.
+
+FIRST_VIEWPORT and PREMIUM are `ADVISORY` and never change the verdict until the same checks pass manual replay on real project screens at a declared threshold (DGC-12).
+
+Templates: `.claude/skills/taky-design-gate/templates/dashboard/` (T1–T3 HTML + DESIGN.md). They are `PILOT_FIXTURE_ONLY` and take the app's approved tokens and assets before any use.
+
+Pinterest sample (USER's signed-in Chrome, 2026-11-12, 3 searches; `INSPIRATION_ONLY`, mostly unshipped concept shots): finance dashboards cluster on one large balance, a row of 4 KPI tiles, donut charts and 3D characters, all in one view. That is the overload DGC-27 limits and the direction SAVEY home drifted toward. Children's learning apps cluster on a winding path with nodes on one trail, which supports T2 (show the next node on the trail). Project dashboards cluster on sidebar + KPI row + donut + bar + kanban together, and the useful parts are timeline rows and dense tables (T3). No pin is used as authority, and no composition is copied (§7).
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |
@@ -402,7 +426,7 @@ N (candidate count) and deletion intensity are COST-internal Necessity judgments
 
 ### 20.3 Claim ceiling
 
-`DESIGN_CONTRACT_CASE_REVIEWED`. Most case facts come from secondary sources. The official sources are Anthropic's announcement, help center and Claude Code commands page, and Apple's Liquid Glass overview snippet. Note: the standalone claude.ai/design site closes by 2026-12-14 (official), so DGC-08/09 must be rechecked against the successor surface. Instagram and practitioner cases (DGC-13..21) come from search-result text; no Instagram or Threads post was readable, and DGC-18/19 rest on SNIPPET_ONLY evidence and should be re-verified before any numeric rule is derived from them. No runtime, receipt-code or CI binding is claimed for DGC-01..21 beyond the existing `design_gate_receipt.py` fields.
+`DESIGN_CONTRACT_CASE_REVIEWED`. §20.1e adds `HARNESS_REPLAYED_ON_ONE_REAL_SCREEN` (SAVEY parent home, local preview, no device). Most case facts come from secondary sources. The official sources are Anthropic's announcement, help center and Claude Code commands page, and Apple's Liquid Glass overview snippet. Note: the standalone claude.ai/design site closes by 2026-12-14 (official), so DGC-08/09 must be rechecked against the successor surface. Instagram and practitioner cases (DGC-13..21) come from search-result text; no Instagram or Threads post was readable, and DGC-18/19 rest on SNIPPET_ONLY evidence and should be re-verified before any numeric rule is derived from them. No runtime, receipt-code or CI binding is claimed for DGC-01..21 beyond the existing `design_gate_receipt.py` fields.
 
 
 END

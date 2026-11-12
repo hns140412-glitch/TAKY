@@ -124,5 +124,89 @@ class ReviewFixes20261111(unittest.TestCase):
         subs = h.judge(spec, {"harness": {"ok": False, "error": "x"}})
         self.assertEqual(subs["HARNESS_HEALTH"]["status"], "HOLD")
 
+
+class DashboardCriteria20261112(unittest.TestCase):
+    """§20.1e DGC-24..30 and the PREMIUM port of SAVEY PG01-PG12 (2026-11-12)."""
+
+    DASH = '\ndashboard:\n  template: T1_DECISION\n  question: "이번 달 계획 안에 있나?"\n  max_filled_cta: 1\n'
+
+    def _spec(self, extra):
+        txt = (FX / "DESIGN.md").read_text()
+        return txt.replace("\n---\n", extra + "---\n", 1) if txt.startswith("---") else txt
+
+    def test_dashboard_needs_question(self):
+        r = h.lint_spec(self._spec("\ndashboard:\n  template: T1_DECISION\n"))
+        self.assertIn("DASHBOARD_WITHOUT_QUESTION (DGC-24)", r["findings"])
+        self.assertEqual(r["status"], "FAIL")
+
+    def test_dashboard_unknown_template_fails(self):
+        r = h.lint_spec(self._spec('\ndashboard:\n  template: BENTO\n  question: "q"\n'))
+        self.assertTrue(any("DASHBOARD_TEMPLATE_UNKNOWN" in f for f in r["findings"]), r["findings"])
+
+    def test_complete_dashboard_block_passes(self):
+        r = h.lint_spec(self._spec(self.DASH))
+        self.assertEqual(r["status"], "PASS", r["findings"])
+        self.assertEqual(r["dashboard"]["max_filled_cta"], 1)
+
+    def test_no_dashboard_block_is_unchanged(self):
+        self.assertIsNone(h.lint_spec((FX / "DESIGN.md").read_text())["dashboard"])
+
+    def _vp(self, **fv):
+        base = {"id": "phone", "horizontal_overflow_px": 0, "text_colors": [], "primary_font_families": [],
+                "font_check": {}, "gradient_text_count": 0, "mask_image_count": 0, "min_font_px": 16,
+                "small_target_count": 0, "allcaps_label_count": 0, "screenshot_sha256": "x"}
+        base["first_viewport"] = {"typeface_count": 1, "font_size_count": 4, "heavy_weight_pct": 0,
+                                  "light_weight_count": 0, "big_shadow_count": 0, "text_shadow_count": 0,
+                                  "radius_count": 1, "gradient_count": 0, "interactive_count": 3,
+                                  "filled_cta_count": 1, "chars": 120, **fv}
+        base["fixed_overlap_at_end"] = []
+        return base
+
+    def test_premium_is_advisory_and_never_fails_the_verdict(self):
+        spec = h.lint_spec(self._spec(self.DASH))
+        subs = h.judge(spec, {"harness": {"ok": True}, "print": {"bytes": 1},
+                              "viewports": [self._vp(text_shadow_count=3, radius_count=6)]})
+        self.assertEqual(subs["PREMIUM"]["status"], "ADVISORY")
+        self.assertEqual(subs["PREMIUM"]["score"]["phone"], 9)
+        subs["VISUAL_COMPARE"] = {"status": "NOT_APPLICABLE", "findings": []}
+        self.assertEqual(h.verdict(subs), "PASS")
+
+    def test_filled_cta_cap_comes_from_dashboard_block(self):
+        spec = h.lint_spec(self._spec(self.DASH))
+        subs = h.judge(spec, {"harness": {"ok": True}, "print": {"bytes": 1},
+                              "viewports": [self._vp(filled_cta_count=3)]})
+        self.assertEqual(subs["FIRST_VIEWPORT"]["status"], "ADVISORY")
+        self.assertIn("DGC-27", " ".join(subs["FIRST_VIEWPORT"]["findings"]))
+
+    def test_premium_threshold_override(self):
+        txt = self._spec(self.DASH).replace("  source_commit: fixture\n",
+                                            "  source_commit: fixture\n  thresholds:\n    premium:\n      chars: 600\n")
+        self.assertEqual(h.lint_spec(txt)["premium"]["chars"], 600)
+
+
+@unittest.skipUnless(browser_available(), "node+playwright not available")
+class FixedOverlapRender(unittest.TestCase):
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_text_under_fixed_bar_at_scroll_end_is_flagged(self):
+        r = h.run(FX / "DESIGN.md", str(FX / "fixed_overlap.html"), self.tmp / "o",
+                  '[{"id":"phone","width":390,"height":640}]')
+        fv = r["sub_receipts"]["FIRST_VIEWPORT"]
+        self.assertEqual(fv["status"], "ADVISORY", fv)
+        self.assertIn("마지막 기록", " ".join(fv["findings"]))
+        self.assertTrue((self.tmp / "o" / "phone.first.png").exists())
+
+    def test_padded_page_with_fixed_bar_passes(self):
+        page = (FX / "fixed_overlap.html").read_text().replace("main{max-width:640px;padding:24px 16px}",
+                                                                "main{max-width:640px;padding:24px 16px 120px}")
+        (self.tmp / "p.html").write_text(page)
+        r = h.run(FX / "DESIGN.md", str(self.tmp / "p.html"), self.tmp / "p",
+                  '[{"id":"phone","width":390,"height":640}]')
+        self.assertEqual(r["sub_receipts"]["FIRST_VIEWPORT"]["status"], "PASS", r["sub_receipts"]["FIRST_VIEWPORT"])
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>T2 월드 허브</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: WORLD FIRST. 진행 상황은 카드가 아니라 장소(섬의 구역)에 표시. 주 행동 1개. 카드 그리드 금지 */
+:root{
+  --sky:#e3f5fc; --sea:#1d87a8; --sand:#fff8ec; --land:#cfe8c4;
+  --ink:#0f2e36; --sub:#4a6066; --lit:#e8743b; --white:#ffffff;
+  --font:"Noto Sans KR",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sky);color:var(--ink);font:500 17px/1.45 var(--font);word-break:keep-all}
+.stage{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;gap:12px;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));max-width:1180px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center}
+.who{font-size:20px;font-weight:700}
+.lanterns{font-size:15px;color:var(--sub);font-variant-numeric:tabular-nums}
+.map{width:100%;height:auto;max-height:68vh}
+.zone text{font:700 20px var(--font);fill:var(--ink)}
+.zone .n{font:500 15px var(--font);fill:var(--sub)}
+.zone:focus-visible circle.ring{stroke:var(--ink);stroke-width:4}
+.go{justify-self:center;min-height:64px;min-width:260px;padding:0 32px;border:0;border-radius:32px;background:var(--lit);color:var(--white);font:700 20px var(--font)}
+.go:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.note{font-size:13px;color:var(--sub);text-align:center;margin:0}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="top"><span class="who">하늘 탐험대</span><span class="lanterns">등불 7 / 12</span></div>
+  <svg class="map" viewBox="0 0 800 520" role="group" aria-label="탐험 섬 지도">
+    <rect width="800" height="520" fill="#1d87a8" rx="24"/>
+    <path d="M120 300 C 90 180 230 90 380 110 C 540 80 700 170 680 300 C 670 420 520 470 390 450 C 240 470 140 410 120 300 Z" fill="#fff8ec"/>
+    <path d="M170 300 C 160 210 260 150 380 160 C 520 145 630 210 620 300 C 610 390 500 420 390 410 C 270 420 180 380 170 300 Z" fill="#cfe8c4"/>
+    <path d="M250 330 Q 330 260 400 300 T 560 250" stroke="#0f2e36" stroke-width="3" stroke-dasharray="6 8" fill="none"/>
+    <g class="zone" tabindex="0" role="button" aria-label="소리 숲, 등불 3개 중 3개">
+      <circle class="ring" cx="250" cy="330" r="44" fill="#e8743b"/><text x="250" y="400" text-anchor="middle">소리 숲</text><text class="n" x="250" y="424" text-anchor="middle">3 / 3</text></g>
+    <g class="zone" tabindex="0" role="button" aria-label="한글 언덕, 등불 3개 중 2개">
+      <circle class="ring" cx="400" cy="300" r="44" fill="#e8743b" fill-opacity=".7"/><text x="400" y="370" text-anchor="middle">한글 언덕</text><text class="n" x="400" y="394" text-anchor="middle">2 / 3</text></g>
+    <g class="zone" tabindex="0" role="button" aria-label="종이 공방, 등불 3개 중 2개">
+      <circle class="ring" cx="560" cy="250" r="44" fill="#e8743b" fill-opacity=".7"/><text x="560" y="320" text-anchor="middle">종이 공방</text><text class="n" x="560" y="344" text-anchor="middle">2 / 3</text></g>
+    <g class="zone" tabindex="0" role="button" aria-label="별빛 등대, 아직 안 가 봤어요">
+      <circle class="ring" cx="470" cy="440" r="34" fill="#ffffff" stroke="#0f2e36" stroke-width="2" stroke-dasharray="4 6"/><text x="580" y="440" text-anchor="start">별빛 등대</text><text class="n" x="580" y="464" text-anchor="start">새 장소</text></g>
+  </svg>
+  <button class="go" type="button">오늘 탐험 시작</button>
+  <p class="note">템플릿 예시 · 그림 자리는 승인된 월드 일러스트로 교체</p>
+</div>
+</body>
+</html>
