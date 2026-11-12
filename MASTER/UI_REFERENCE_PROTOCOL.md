@@ -412,6 +412,20 @@ Templates: `.claude/skills/taky-design-gate/templates/dashboard/` (T1–T3 HTML 
 
 Pinterest sample (USER's signed-in Chrome, 2026-11-12, 3 searches; `INSPIRATION_ONLY`, mostly unshipped concept shots): finance dashboards cluster on one large balance, a row of 4 KPI tiles, donut charts and 3D characters, all in one view. That is the overload DGC-27 limits and the direction SAVEY home drifted toward. Children's learning apps cluster on a winding path with nodes on one trail, which supports T2 (show the next node on the trail). Project dashboards cluster on sidebar + KPI row + donut + bar + kanban together, and the useful parts are timeline rows and dense tables (T3). No pin is used as authority, and no composition is copied (§7).
 
+### 20.1f One owner for design gates — USER "ㄱ" 2026-11-12
+
+Design gates had grown in five places. This section is the single owner; the others are inputs or app-local profiles that point here. A new gate rule is added here (as a DGC) or it is not a gate.
+
+| Former location | Disposition |
+|---|---|
+| Drive REFERENCE_MINING_INDEX DG-00..10 / PS-00..23 (UI/PPTX/XLSX) | UI parts are covered by DGC-01..30. PPTX/XLSX parts (and Claude review C-04/05/06/11/13) stay there as the document-output gate until migrated; they are not UI gates. |
+| §20 DGC-01..30 + `ENFORCEMENT/design_gate_harness.py` | OWNER. Mechanical checks run in the harness; the rest are reviewer checks (design-gate-reviewer). |
+| SAVEY PREMIUM PG01–12 (`HANDOFF/SAVEY_PREMIUM_PASS_2026-11-07/premium-gate.mjs`) | Absorbed as the harness `PREMIUM` sub-receipt (§20.1e, `PREMIUM_DEFAULTS`, same thresholds; app override via `taky.thresholds.premium`). The SAVEY script stays as an app-local replay, not a second authority. |
+| TAKY MOBILE DESIGN AUTHORITY v1 §11 (PRESERVED / IMPROVED / CHANGED / REGRESSED) | App-local change ledger. Used as the DELTA format for a redesign against an approved baseline; it does not define gate criteria. |
+| CURRENT DELTA 2026-11-08 common design gate proposal | Superseded by this section once recorded in CURRENT. |
+
+Enforcement note: RULE WRITTEN != RULE ENFORCED. Each app is under this owner only when its repo has a `DESIGN.md` and a harness receipt exists for at least one real screen.
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |
