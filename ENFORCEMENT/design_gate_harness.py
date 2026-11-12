@@ -31,7 +31,14 @@ RENDER = HERE / "design_gate_render.mjs"
 # Vendored from Jakeschincariol/replica-skill (MIT, see .claude/skills/REPLICA_SKILL_LICENSE.txt).
 IMGDIFF = HERE.parent / ".claude" / "skills" / "replica-diff" / "imgdiff.py"
 SUB_ORDER = ("HARNESS_HEALTH", "SPEC_LINT", "TARGET_RENDER", "TOKEN_FIDELITY",
-             "FONT_PRINT_PDF", "A11Y_BASIC", "GENERIC_TELLS", "VISUAL_COMPARE")
+             "FONT_PRINT_PDF", "A11Y_BASIC", "GENERIC_TELLS", "FIRST_VIEWPORT", "PREMIUM", "VISUAL_COMPARE")
+# DGC-30 dashboard templates (MASTER/UI_REFERENCE_PROTOCOL.md §20.1e).
+DASHBOARD_TEMPLATES = ("T1_DECISION", "T2_WORLD_HUB", "T3_OPS_BOARD", "CUSTOM")
+# PREMIUM restraint limits, ported from SAVEY premium-gate.mjs PG01-PG12 (2026-11-07). Override per
+# project with taky.thresholds.premium. PG05 (accent hues) is left to the reviewer: charts legitimately need hues.
+PREMIUM_DEFAULTS = {"typefaces": 2, "font_sizes": 7, "heavy_weight_pct": 15, "light_weights": 0,
+                    "big_shadows": 2, "text_shadows": 0, "radii": 3, "gradients": 1,
+                    "interactive": 14, "filled_cta": 2, "chars": 320}
 DEFAULTS = {"min_layout_score": 90, "min_font_px": 12, "max_allcaps_labels": 2, "color_tolerance": 6,
             "max_off_token_colors": 0}
 
@@ -91,7 +98,8 @@ def lint_spec(text: str) -> dict:
     except (yaml.YAMLError, ValueError) as e:
         return {"status": "FAIL", "findings": [f"SPEC_UNPARSEABLE: {e}"], "tokens": {},
                 "palette": [], "font_families": [], "mode": "EXPLORE",
-                "design_system": "UNKNOWN@UNKNOWN", "thresholds": dict(DEFAULTS)}
+                "design_system": "UNKNOWN@UNKNOWN", "thresholds": dict(DEFAULTS),
+                "premium": dict(PREMIUM_DEFAULTS), "dashboard": None}
     palette = _hexes(tokens.get("colors"))
     fams = _families(tokens.get("typography"))
     if not palette:
@@ -113,10 +121,23 @@ def lint_spec(text: str) -> dict:
             findings.append(f"TAKY_{k.upper()}_MISSING (DGC-02/DGC-20)")
     if mode == "EXECUTE" and not taky.get("source_commit"):
         fails.append("EXECUTE_WITHOUT_SOURCE_COMMIT (DGC-02)")
+    dash = tokens.get("dashboard")
+    if dash is not None:
+        if not isinstance(dash, dict):
+            fails.append("DASHBOARD_BLOCK_NOT_A_MAPPING (DGC-24)")
+            dash = {}
+        if not str(dash.get("question") or "").strip():
+            fails.append("DASHBOARD_WITHOUT_QUESTION (DGC-24)")
+        if dash.get("template") and dash.get("template") not in DASHBOARD_TEMPLATES:
+            fails.append(f"DASHBOARD_TEMPLATE_UNKNOWN:{dash.get('template')} (DGC-30)")
+        if not dash.get("template"):
+            findings.append("DASHBOARD_TEMPLATE_UNDECLARED (DGC-30)")
     return {"status": "FAIL" if fails else "PASS", "findings": fails + findings,
             "palette": palette, "font_families": sorted(fams), "mode": mode,
             "design_system": f"{taky.get('design_system_id','UNKNOWN')}@{taky.get('version','UNKNOWN')}",
-            "thresholds": {**DEFAULTS, **(taky.get("thresholds") or {})}}
+            "thresholds": {**DEFAULTS, **(taky.get("thresholds") or {})},
+            "premium": {**PREMIUM_DEFAULTS, **(((taky.get("thresholds") or {}).get("premium")) or {})},
+            "dashboard": tokens.get("dashboard") if isinstance(tokens.get("dashboard"), dict) else None}
 
 
 # ---------- judging render facts ----------
@@ -194,6 +215,39 @@ def judge(spec: dict, render: dict) -> dict:
              for v in vps if v["allcaps_label_count"] > t["max_allcaps_labels"]]
     # Advisory only: generic-look heuristics are reviewer input, never an automatic FAIL (DGC-12).
     subs["GENERIC_TELLS"] = {"status": "ADVISORY" if tells else "PASS", "findings": tells}
+
+    # DGC-27/28 (§20.1e). ADVISORY until manual replay on real project screens passes (DGC-12).
+    dash = spec.get("dashboard") or {}
+    fv = []
+    for v in vps:
+        f = v.get("first_viewport") or {}
+        for hit in v.get("fixed_overlap_at_end") or []:
+            fv.append(f"{v['id']}: at scroll end, text under a fixed/sticky element: {hit} (DGC-28)")
+        cap = dash.get("max_filled_cta")
+        if cap is not None and f.get("filled_cta_count", 0) > cap:
+            fv.append(f"{v['id']}: {f['filled_cta_count']} filled CTAs in first viewport > {cap} (DGC-27)")
+    subs["FIRST_VIEWPORT"] = {"status": "ADVISORY" if fv else "PASS", "findings": fv,
+                              "screenshots": {v["id"]: v.get("first_viewport_sha256") for v in vps},
+                              "reviewer_checks": ["focal points <= dashboard.max_focal_points",
+                                                  "decision metric is the largest number (DGC-25)",
+                                                  "statement, state chip and numbers agree (DGC-26)"]}
+
+    pm, pr = spec.get("premium") or PREMIUM_DEFAULTS, []
+    checks = (("typeface_count", "typefaces", "PG01 typefaces"), ("font_size_count", "font_sizes", "PG02 font sizes"),
+              ("heavy_weight_pct", "heavy_weight_pct", "PG03 weight>=800 %"), ("light_weight_count", "light_weights", "PG04 weights<400"),
+              ("big_shadow_count", "big_shadows", "PG06 shadows blur>16"), ("text_shadow_count", "text_shadows", "PG07 text-shadow"),
+              ("radius_count", "radii", "PG08 radii"), ("gradient_count", "gradients", "PG09 gradients"),
+              ("interactive_count", "interactive", "PG10 interactive"), ("filled_cta_count", "filled_cta", "PG11 filled CTA"),
+              ("chars", "chars", "PG12 characters"))
+    for v in vps:
+        f = v.get("first_viewport") or {}
+        for fact, lim, label in checks:
+            if fact in f and f[fact] > pm[lim]:
+                pr.append(f"{v['id']}: {label} {f[fact]} > {pm[lim]}")
+    subs["PREMIUM"] = {"status": "ADVISORY" if pr else "PASS", "findings": pr,
+                       "score": {v["id"]: sum(1 for fact, lim, _ in checks
+                                              if (v.get("first_viewport") or {}).get(fact, 0) <= pm[lim]) for v in vps},
+                       "out_of": len(checks)}
     return subs
 
 

@@ -79,6 +79,65 @@ function probe() {
   };
 }
 
+
+// First-viewport facts (DGC-27) and PREMIUM restraint facts (SAVEY PG01-PG12, ported 2026-11-12).
+// Runs inside the page at scroll position 0.
+function probeFirstViewport() {
+  const vh = window.innerHeight;
+  const vis = [...document.querySelectorAll("body *")].filter((e) => {
+    const r = e.getBoundingClientRect();
+    const cs = getComputedStyle(e);
+    return r.width > 0 && r.height > 0 && r.top < vh && r.bottom > 0 && cs.visibility !== "hidden" && cs.display !== "none";
+  });
+  const cs = (e) => getComputedStyle(e);
+  const text = vis.filter((e) => [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()));
+  const sat = (c) => {
+    const m = (c || "").match(/[\d.]+/g); if (!m) return false;
+    let [r, g, b, a = 1] = m.map(Number); if (a < 0.3) return false;
+    r /= 255; g /= 255; b /= 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn, l = (mx + mn) / 2;
+    const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+    return s >= 0.3 && l >= 0.12 && l <= 0.93;
+  };
+  const weights = text.map((e) => +cs(e).fontWeight);
+  const blurOver = (sh) => (sh.match(/(-?[\d.]+)px\s+(-?[\d.]+)px\s+([\d.]+)px/g) || []).some((m) => parseFloat(m.split("px")[2]) > 16);
+  return {
+    filled_cta_count: vis.filter((e) => e.matches("button,a,[role=button]") && sat(cs(e).backgroundColor)).length,
+    interactive_count: vis.filter((e) => e.matches("button,a,[role=button],input,select,textarea")).length,
+    typeface_count: new Set(text.map((e) => cs(e).fontFamily.split(",")[0].replace(/["']/g, "").trim())).size,
+    font_size_count: new Set(text.map((e) => Math.round(parseFloat(cs(e).fontSize)))).size,
+    heavy_weight_pct: Math.round(100 * weights.filter((w) => w >= 800).length / Math.max(1, weights.length)),
+    light_weight_count: weights.filter((w) => w < 400).length,
+    text_shadow_count: text.filter((e) => cs(e).textShadow !== "none").length,
+    big_shadow_count: vis.filter((e) => cs(e).boxShadow !== "none" && blurOver(cs(e).boxShadow)).length,
+    radius_count: new Set(vis.map((e) => cs(e).borderTopLeftRadius).filter((r) => r !== "0px" && !r.includes("%") && parseFloat(r) < 400)).size,
+    gradient_count: vis.filter((e) => cs(e).backgroundImage.includes("gradient")).length,
+    chars: text.reduce((n, e) => n + [...e.childNodes].filter((x) => x.nodeType === 3).map((x) => x.textContent.trim()).join("").length, 0),
+  };
+}
+
+// DGC-28: at the end of the scroll, nothing readable may sit under a fixed/sticky element.
+function probeFixedOverlap() {
+  const all = [...document.querySelectorAll("body *")];
+  const isPinned = (e) => { const p = getComputedStyle(e).position; return p === "fixed" || p === "sticky"; };
+  const pinned = all.filter((e) => isPinned(e)).map((e) => ({ e, r: e.getBoundingClientRect() }))
+    .filter(({ r }) => r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight);
+  const inside = (e) => { for (let a = e; a && a !== document.body; a = a.parentElement) if (isPinned(a)) return true; return false; };
+  const hits = [];
+  for (const e of all) {
+    if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && !inside(e)) {
+      const r = e.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0 || r.bottom <= 0 || r.top >= window.innerHeight) continue;
+      for (const { e: p, r: q } of pinned) {
+        const ox = Math.min(r.right, q.right) - Math.max(r.left, q.left);
+        const oy = Math.min(r.bottom, q.bottom) - Math.max(r.top, q.top);
+        if (ox > 4 && oy > 4) { hits.push(`${e.tagName.toLowerCase()}:"${e.textContent.trim().slice(0, 24)}" under ${p.tagName.toLowerCase()}${p.className ? "." + String(p.className).split(" ")[0] : ""}`); break; }
+      }
+    }
+  }
+  return hits.slice(0, 10);
+}
+
 const result = { schema: "TAKY_DESIGN_GATE_RENDER_V1", target: url, viewports: [], harness: { ok: true } };
 let browser;
 try {
@@ -100,11 +159,20 @@ try {
     }, facts.primary_font_families);
     facts.loaded_font_faces = await page.evaluate(() =>
       [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family.replace(/["']/g, "")));
+    facts.first_viewport = await page.evaluate(probeFirstViewport);
+    const first = await page.screenshot({ fullPage: false });
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await page.waitForTimeout(150);
+    facts.fixed_overlap_at_end = await page.evaluate(probeFixedOverlap);
+    await page.evaluate(() => window.scrollTo(0, 0));
     const png = await page.screenshot({ fullPage: true });
     const safeId = String(vp.id).replace(/[^A-Za-z0-9._-]/g, "_").replace(/^\.+/, "_");
     const file = resolve(outDir, `${safeId}.png`);
     writeFileSync(file, png);
-    result.viewports.push({ ...vp, screenshot: file, screenshot_sha256: sha(png), ...facts });
+    const firstFile = resolve(outDir, `${safeId}.first.png`);
+    writeFileSync(firstFile, first);
+    result.viewports.push({ ...vp, screenshot: file, screenshot_sha256: sha(png),
+      first_viewport_screenshot: firstFile, first_viewport_sha256: sha(first), ...facts });
     await page.close();
   }
   // Print/PDF output (DGC-19: export targets are rendered, not assumed).

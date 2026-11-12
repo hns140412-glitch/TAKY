@@ -1,6 +1,6 @@
 ---
 name: taky-design-gate
-description: TAKY design gate for UI, web pages and HTML slides. Use when building or revising a screen, landing page, app UI or HTML/PPT deck in a TAKY project, or when asked to review design quality, remove the "AI look", or check a design before handoff. Runs DESIGN.md spec → 2-sample pilot → freeze → real-browser render loop → receipt, per MASTER/UI_REFERENCE_PROTOCOL.md §20 (DGC-01..21).
+description: TAKY design gate for UI, web pages and HTML slides. Use when building or revising a screen, landing page, app UI or HTML/PPT deck in a TAKY project, or when asked to review design quality, remove the "AI look", or check a design before handoff. Runs DESIGN.md spec → 2-sample pilot → freeze → real-browser render loop → receipt, per MASTER/UI_REFERENCE_PROTOCOL.md §20 (DGC-01..30).
 ---
 
 # TAKY Design Gate
@@ -29,6 +29,11 @@ Use the google-labs-code/design.md format (YAML tokens + prose). It must contain
 - `## Do's and Don'ts` with real prohibitions: colors/gradients/shadows/icons not in the spec, generic defaults (see the frontend-design tells), gradient-clipped text and mask-image (print-unsafe).
 - `taky:` block: `mode`, `design_system_id`, `version`, `source_commit` (required in EXECUTE). Brand DESIGN.md files copied from galleries are `REFERENCE`, never authority; strip brand identity before use (§0, §6).
 
+## 1b. Dashboards (DGC-24..30, §20.1e)
+- Start from a template in `templates/dashboard/` chosen by audience: T1 decision (parent money), T2 world hub (child), T3 ops board (Taky). A card grid needs a written reason.
+- Add a `dashboard:` block to DESIGN.md: `template`, `question`, `decision_metric`, `max_focal_points`, `max_kpis_first_viewport`, `max_filled_cta`.
+- Before calling it done, check by eye: the answer sentence, the state chip and the numbers agree (DGC-26); the decision metric is the biggest number (DGC-25); no two categories share an icon (DGC-29).
+
 ## 2. Requirements and deletion (DGC-04, DGC-06)
 - Every element needs an owner reason. No owner → candidate for removal.
 - Before freeze, record `DELETION_PASS {removed[], reason, re-added[]}`. Zero removed needs a reason. Never delete safety or accessibility affordances.
@@ -49,7 +54,7 @@ python3 ENFORCEMENT/design_gate_harness.py --design DESIGN.md --target <file-or-
 ```
 
 Slides: add `--viewports '[{"id":"slide","width":1920,"height":1080}]'`. Native app or other form factors: declare their own viewports (DGC-16).
-Read the screenshots in `<dir>` yourself. Fix the most severe issue first, then rerun.
+Read the screenshots in `<dir>` yourself, including `<viewport>.first.png` (what the user actually sees first; the full-page shot paints fixed bars mid-page). Fix the most severe issue first, then rerun.
 Compare with a reference screenshot: `--reference <dir>/desktop.png` (file name = viewport id). Replica stage uses the original; result stage uses the approved TAKY reference.
 Exit 0 PASS / 1 FAIL / 3 HOLD. HOLD = harness or environment problem, so fix the harness, do not call the product failed.
 For interactive checks (click, input, state), use the Playwright MCP from `.mcp.json` if it is connected.
@@ -62,5 +67,5 @@ Report verdict, mode/claim ceiling, failed sub-receipts, DELETION_PASS and recei
 
 ## Limits
 - GENERIC_TELLS is advisory. Taste is judged by a reviewer, not by a regex (DGC-12).
-- The harness checks the mechanical parts only: overflow per viewport, off-token colors, font actually rendered, print-unsafe CSS, PDF produced, minimum text size and target size.
+- The harness checks the mechanical parts only: overflow per viewport, off-token colors, font actually rendered, print-unsafe CSS, PDF produced, minimum text size and target size. FIRST_VIEWPORT (filled CTAs, text under fixed bars at scroll end) and PREMIUM (SAVEY PG01–PG12 port) are ADVISORY.
 - Third-party: only replica-skill is vendored (MIT, USER-approved 2026-11-06 for replica study). Others stay on hold (RVR-121).

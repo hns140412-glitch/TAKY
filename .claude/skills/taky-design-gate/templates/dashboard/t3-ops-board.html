@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>T3 운영 현황판</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: 병목 먼저. ① 결정 대기(USER만 할 수 있는 일) ② 앱별 한 줄(상태 사다리 분리) ③ 나머지는 접힘 */
+:root{
+  --bg:#f6f7f8; --surface:#ffffff; --line:#dde1e4;
+  --ink:#16191c; --sub:#596168;
+  --accent:#2f5bd3; --done:#1f7a4d; --open:#9a5b00; --none:#8a9298;
+  --font:"Noto Sans KR",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.5 var(--font);word-break:keep-all}
+main{max-width:1240px;margin:0 auto;padding:24px 16px 48px;display:grid;gap:24px}
+h1{font-size:22px;margin:0;font-weight:700}
+.meta{color:var(--sub);font-size:13px;margin:4px 0 0}
+.queue{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;display:grid;gap:10px}
+.queue h2{font-size:17px;margin:0}
+.queue ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.queue small{color:var(--sub);font-size:13px}
+.wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:880px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--sub);font-weight:500}
+tr:last-child td{border-bottom:0}
+.app{font-weight:700}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.st::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--none)}
+.st.y{color:var(--done)} .st.y::before{background:var(--done)}
+.st.o{color:var(--open)} .st.o::before{background:var(--open);border-radius:2px}
+.st.n{color:var(--sub)}
+.next{color:var(--ink)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--sub);font-size:13px}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>학습 웹앱 운영 현황</h1>
+    <p class="meta">기준: TAKY_AI_CURRENT DELTA 2026-11-11 · 템플릿 예시 (실제 상태는 재조회 필요)</p>
+  </header>
+
+  <section class="queue" aria-labelledby="q">
+    <h2 id="q">Taky 결정 대기 3건</h2>
+    <ol>
+      <li>HIDE-SEEK PR #33 병합·배포 <small>CI 통과, 초안</small></li>
+      <li>SAVEY 프리미엄 패스 운영 반영 <small>테스트 주소에만 있음</small></li>
+      <li>taky-gate guide 모드 전환 <small>11/14 기록 점검 후</small></li>
+    </ol>
+  </section>
+
+  <div class="legend"><span class="st y">확인됨</span><span class="st o">진행·대기</span><span class="st n">안 함</span></div>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>앱 (WORK ID)</th><th>구현</th><th>실행 확인</th><th>기기 확인</th><th>운영 반영</th><th>바로 다음</th></tr></thead>
+      <tbody>
+        <tr><td class="app">SAVEY</td><td><span class="st y">예</span></td><td><span class="st y">예</span></td><td><span class="st o">폰 미확인</span></td><td><span class="st o">그림체 B만</span></td><td class="next">프리미엄 패스 병합 결정</td></tr>
+        <tr><td class="app">HIDE-SEEK</td><td><span class="st y">예</span></td><td><span class="st y">CI</span></td><td><span class="st n">안 함</span></td><td><span class="st o">PR #33 대기</span></td><td class="next">병합·배포 승인</td></tr>
+        <tr><td class="app">PLAY-CAMP</td><td><span class="st y">예</span></td><td><span class="st y">빌드·스모크</span></td><td><span class="st n">안 함</span></td><td><span class="st o">main 병합, 배포 없음</span></td><td class="next">큐브 후속 PR</td></tr>
+        <tr><td class="app">READY-SET</td><td><span class="st y">예</span></td><td><span class="st o">음성 확인 중</span></td><td><span class="st n">안 함</span></td><td><span class="st o">PR #147</span></td><td class="next">기준 브랜치 결정</td></tr>
+        <tr><td class="app">TAKY-MOBILE</td><td><span class="st y">예</span></td><td><span class="st y">로그인 E2E</span></td><td><span class="st o">폰 미확인</span></td><td><span class="st y">운영</span></td><td class="next">a94922d6 병합</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>
