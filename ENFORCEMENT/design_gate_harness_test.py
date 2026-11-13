@@ -208,5 +208,40 @@ class FixedOverlapRender(unittest.TestCase):
                   '[{"id":"phone","width":390,"height":640}]')
         self.assertEqual(r["sub_receipts"]["FIRST_VIEWPORT"]["status"], "PASS", r["sub_receipts"]["FIRST_VIEWPORT"])
 
+class DashboardSemantics20261113(unittest.TestCase):
+    """§20.1g: DGC-25 decision metric size, DGC-26 status vs burn pace, same-shape card row."""
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _run(self, html):
+        (self.tmp / "d.html").write_text(html)
+        return h.run(FX / "DESIGN_dashboard.md", str(self.tmp / "d.html"), self.tmp / "o",
+                     '[{"id":"phone","width":390,"height":844}]')
+
+    def test_bad_dashboard_is_flagged_on_all_three(self):
+        r = self._run((FX / "dashboard_semantics.html").read_text())
+        fv = " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"])
+        self.assertIn("(DGC-25)", fv)
+        self.assertIn("62% used at 23%", fv)
+        self.assertIn("same-shape card row 4x", " ".join(r["sub_receipts"]["GENERIC_TELLS"]["findings"]))
+        self.assertNotEqual(r["verdict"], "FAIL")  # advisory only (DGC-12)
+
+    def test_fixed_dashboard_passes(self):
+        html = ((FX / "dashboard_semantics.html").read_text()
+                .replace("계획대로 잘 가고 있어요!", "쓰는 속도가 빨라요.")
+                .replace(".spent{font-size:34px", ".spent{font-size:16px").replace(".left{font-size:16px", ".left{font-size:34px")
+                .replace("grid-template-columns:repeat(4,1fr)", "grid-template-columns:1fr"))
+        r = self._run(html)
+        self.assertEqual(r["sub_receipts"]["FIRST_VIEWPORT"]["status"], "PASS", r["sub_receipts"]["FIRST_VIEWPORT"])
+        self.assertEqual(r["sub_receipts"]["GENERIC_TELLS"]["status"], "PASS", r["sub_receipts"]["GENERIC_TELLS"])
+
+    def test_missing_selector_is_reported_not_silent(self):
+        r = self._run((FX / "dashboard_semantics.html").read_text().replace('class="left"', 'class="other"'))
+        self.assertIn("decision_metric_selector not found", " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"]))
+
+
 if __name__ == "__main__":
     unittest.main()
