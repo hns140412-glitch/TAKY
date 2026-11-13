@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>dashboard semantics fixture</title>
+<style>
+body{margin:0;font:16px/1.5 "DejaVu Sans",sans-serif;color:#1A1C1E;background:#FFFFFF}
+main{max-width:640px;padding:24px 16px}
+h1{font-size:22px;margin:0 0 12px}
+.spent{font-size:34px;font-weight:700}
+.left{font-size:16px}
+.bar{position:relative;height:8px;border:1px solid #1A1C1E}
+.bar i{position:absolute;top:-4px;width:2px;height:16px;background:#1A1C1E}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.row>div{border:1px solid #1A1C1E;border-radius:16px;padding:12px;text-align:center}
+</style></head><body><main>
+<h1 class="status">이번 달은 계획대로 잘 가고 있어요!</h1>
+<div class="spent">1,245,000원</div>
+<div class="left">남은 755,000원</div>
+<div class="bar" role="progressbar" aria-valuenow="62"><i class="pace" style="left:23%"></i></div>
+<div class="row"><div>주거 42%</div><div>교육 33%</div><div>식비 16%</div><div>교통 7%</div></div>
+</main></body></html>

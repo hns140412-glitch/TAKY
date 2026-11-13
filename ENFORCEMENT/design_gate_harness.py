@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TAKY design-gate harness (TKY-UIREF-001 §20, DGC-01..21).
+"""TAKY design-gate harness (TKY-UIREF-001 §20, DGC-01..30).
 
 Turns a DESIGN.md plus a real browser render into a receipt with named
 sub-receipts. Facts come from design_gate_render.mjs (Playwright/Chromium);
@@ -17,6 +17,7 @@ import argparse
 import hashlib
 import json
 import re
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -214,6 +215,9 @@ def judge(spec: dict, render: dict) -> dict:
     tells = [f"{v['id']}: {v['allcaps_label_count']} small ALL-CAPS labels"
              for v in vps if v["allcaps_label_count"] > t["max_allcaps_labels"]]
     # Advisory only: generic-look heuristics are reviewer input, never an automatic FAIL (DGC-12).
+    for v in vps:
+        for row in (v.get("dashboard_probe") or {}).get("same_shape_rows") or []:
+            tells.append(f"{v['id']}: same-shape card row {row} — rank as a list or vary weight (§20.1g)")
     subs["GENERIC_TELLS"] = {"status": "ADVISORY" if tells else "PASS", "findings": tells}
 
     # DGC-27/28 (§20.1e). ADVISORY until manual replay on real project screens passes (DGC-12).
@@ -226,6 +230,25 @@ def judge(spec: dict, render: dict) -> dict:
         cap = dash.get("max_filled_cta")
         if cap is not None and f.get("filled_cta_count", 0) > cap:
             fv.append(f"{v['id']}: {f['filled_cta_count']} filled CTAs in first viewport > {cap} (DGC-27)")
+        dp = v.get("dashboard_probe") or {}
+        dm = dp.get("decision_metric")
+        if dm and dm.get("missing"):
+            fv.append(f"{v['id']}: decision_metric_selector not found: {dm['missing']} (DGC-25)")
+        elif dm and dm.get("max_number_px", 0) > dm.get("metric_px", 0) + 0.5:
+            fv.append(f"{v['id']}: decision metric {dm['metric_px']}px is smaller than '{dm['max_number_text']}' "
+                      f"{dm['max_number_px']}px (DGC-25)")
+        sc = dp.get("status_check")
+        if sc:
+            cfg = dash.get("status_check") or {}
+            positive = cfg.get("positive") or ["계획대로", "잘 가고", "순조", "on track", "on plan"]
+            tol = float(cfg.get("tolerance_pct", 10))
+            if sc.get("missing"):
+                fv.append(f"{v['id']}: status_check selector(s) not found: {sc['missing']} (DGC-26)")
+            elif (sc.get("burn_pct") is not None and sc.get("elapsed_pct") is not None
+                  and any(w.lower() in str(sc.get("status") or "").lower() for w in positive)
+                  and sc["burn_pct"] > sc["elapsed_pct"] + tol):
+                fv.append(f"{v['id']}: status '{sc['status']}' says on plan but {sc['burn_pct']:g}% used at "
+                          f"{sc['elapsed_pct']:g}% of the period (DGC-26)")
     subs["FIRST_VIEWPORT"] = {"status": "ADVISORY" if fv else "PASS", "findings": fv,
                               "screenshots": {v["id"]: v.get("first_viewport_sha256") for v in vps},
                               "reviewer_checks": ["focal points <= dashboard.max_focal_points",
@@ -310,7 +333,8 @@ def run(design: Path, target: str, out: Path, viewports: str | None = None,
     spec = lint_spec(spec_bytes.decode("utf-8"))
     cmd = ["node", str(RENDER), target, str(out)] + ([viewports] if viewports else [])
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        env = {**os.environ, "DGATE_DASHBOARD": json.dumps(spec.get("dashboard") or {}, ensure_ascii=False)}
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=300, env=env)
         render = json.loads(proc.stdout) if proc.stdout.strip() else {
             "harness": {"ok": False, "error": proc.stderr.strip()[-500:] or "no output"}}
     except (subprocess.TimeoutExpired, FileNotFoundError, json.JSONDecodeError) as e:
