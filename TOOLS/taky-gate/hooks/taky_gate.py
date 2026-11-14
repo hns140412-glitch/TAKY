@@ -158,6 +158,32 @@ def segments(command):
     return out
 
 
+SYSTEM_TOP = {"windows", "program files", "program files (x86)", "programdata", "system volume information",
+              "$recycle.bin", "recovery", "boot", "bin", "sbin", "etc", "usr", "lib", "lib32", "lib64", "libx32",
+              "var", "opt", "dev", "proc", "sys", "run", "snap", "srv", "root"}
+
+
+def broad_target(p, root):
+    """True when deleting p would be broad or touch the system: a drive or filesystem root, a top-level system
+    folder or anything under it, the home folder or any folder that contains home or the project."""
+    p = os.path.normpath(os.path.abspath(p))
+    drive, rest = os.path.splitdrive(p)
+    parts = [x for x in rest.replace("\\", "/").split("/") if x]
+    if os.name != "nt" and len(parts) >= 1 and len(parts[0]) == 1 and parts[0].isalpha():
+        parts = parts[1:]  # Git Bash style /c/... : the letter is the drive
+    if not parts:
+        return True
+    if parts[0].lower() in SYSTEM_TOP:
+        return True
+    home = os.path.normpath(os.path.expanduser("~"))
+    for keep in (home, os.path.normpath(root)):
+        if keep == p or keep.startswith(p.rstrip(os.sep) + os.sep):
+            return True
+    if len(parts) == 1 and parts[0].lower() in ("users", "home", "mnt", "media", "tmp", "volumes"):
+        return True
+    return False
+
+
 def resolve(cwd, move):
     if not move:
         return cwd
@@ -254,7 +280,12 @@ def analyse(words, cwd, root):
         targets = [a for a in args if not a.startswith("-")]
         paths = [resolve(cwd, t) for t in targets]
         inside = all(p.startswith(os.path.normpath(root) + os.sep) for p in paths) and paths
-        if not inside or any(t in ("*", ".", "..") for t in targets):
+        # Outside the project: a specific, named folder (e.g. a scratch dir like C:\\AG_R7TEST) is moved to the
+        # trash like an inside one, because the move is reversible. Only broad or system targets stay with USER.
+        specific_outside = (not inside and paths and not any(t in ("*", ".", "..") for t in targets)
+                            and not any(re.search(r"[*?\[]", t) for t in targets)
+                            and not any(broad_target(p, root) for p in paths))
+        if (not inside and not specific_outside) or any(t in ("*", ".", "..") for t in targets):
             return {"kind": "destroy", "label": "rm -r (프로젝트 밖 또는 광범위)", "action": "guide", "hard": True,
                     "route": "프로젝트 폴더 안의 구체적인 경로만 지운다. 넓은 삭제는 USER가 직접 한다."}
         trash = os.path.join(taky_home(), "trash", now().strftime("%Y%m%dT%H%M%SZ"))

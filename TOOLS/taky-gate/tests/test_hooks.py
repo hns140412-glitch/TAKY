@@ -184,9 +184,18 @@ def main():
 
         print("-- 5. 승인으로도 못 여는 고정 규칙")
         grant("승인 전부 1h", root)
-        for cmd in ("rm -rf /", "rm -rf ..", ):
+        for cmd in ("rm -rf /", "rm -rf ..", "rm -rf ~", "rm -rf /usr/lib", "rm -rf /c", "rm -rf /tmp", "rm -rf /tmp/*"):
             d, _ = gate(cmd, repo, root)
             check(f"hard: {cmd}", d == "deny")
+        outside = tempfile.mkdtemp(prefix="taky-outside-")
+        open(os.path.join(outside, "keep.txt"), "w").write("k")
+        d, h = gate(f"rm -rf {outside}", repo, root)
+        run_shell(h.get("updatedInput", {}).get("command", ""), repo)
+        kept = {f for _r, _d, fs in os.walk(os.path.join(root, ".taky", "trash")) for f in fs}
+        check("프로젝트 밖 구체적 임시 폴더 rm -r -> 휴지통 이동(USER에게 넘기지 않음)",
+              d == "allow" and not os.path.exists(outside) and "keep.txt" in kept, (d, h.get("permissionDecisionReason")))
+        d, h = gate("rm -rf /c/AG_R7TEST", repo, root)
+        check("Git Bash /c/폴더 (11-12 실제 기록) -> 휴지통 이동", d == "allow" and " mv " in h.get("updatedInput", {}).get("command", ""), d)
         os.remove(os.path.join(root, ".taky", "routes.json"))
         d, h = gate("netlify deploy --prod --dir dist", repo, root)
         check("hard: 사이트를 모르는 netlify deploy", d == "deny" and "routes.json" in h.get("permissionDecisionReason", ""))
