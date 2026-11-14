@@ -447,10 +447,11 @@ def mode():
     m = os.environ.get("TAKY_GUIDE_MODE", "")
     if not m:
         try:
-            m = open(os.path.join(taky_home(), "guide-mode"), encoding="utf-8").read()
+            m = open(os.path.join(taky_home(), "guide-mode"), encoding="utf-8-sig").read()
         except Exception:
             m = ""
-    return "guide" if m.strip().lower() == "guide" else "observe"
+    words = m.split()  # first word only, BOM-safe: Windows editors add a BOM or a note line
+    return "guide" if words and words[0].lower() == "guide" else "observe"
 
 
 def main():

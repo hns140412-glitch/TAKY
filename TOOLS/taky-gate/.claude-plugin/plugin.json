@@ -1,6 +1,6 @@
 {
   "name": "taky-gate",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "TAKY 2.0 guide hooks: steer risky calls onto the right path (safe rewrite or route guidance to Claude), one USER approval line per work unit, DELTA collection, evidence-backed DONE.",
   "author": {
     "name": "Taky"

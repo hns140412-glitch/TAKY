@@ -248,6 +248,15 @@ def main():
         check("observe: 출력 0건 (세션에 영향 없음)", all(o is None for o in outs), outs)
         log = "".join(open(os.path.join(root, ".taky", "delta", f), encoding="utf-8").read() for f in os.listdir(os.path.join(root, ".taky", "delta")))
         check("observe: 했을 판단 3건이 delta에 기록", log.count('"observe"') >= 3)
+        gm = os.path.join(root, ".taky", "guide-mode")
+        saved = os.environ.pop("TAKY_GUIDE_MODE", None)
+        open(gm, "w", encoding="utf-8-sig").write("guide  # USER 2026-11-14\n")
+        r = subprocess.run([sys.executable, "-X", "utf8", "-c", "import sys; sys.path.insert(0, sys.argv[1]); import taky_gate; print(taky_gate.mode())",
+                            os.path.join(HERE, "..", "hooks")], capture_output=True, text=True, env={**os.environ, "TAKY_HOME": os.path.join(root, ".taky")})
+        check("guide-mode 파일: BOM·메모가 붙어도 첫 단어 guide면 유도 모드", r.stdout.strip() == "guide", r.stdout + r.stderr)
+        os.remove(gm)
+        if saved is not None:
+            os.environ["TAKY_GUIDE_MODE"] = saved
         MODE = "guide"
 
     fails = results.count(False)
