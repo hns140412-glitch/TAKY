@@ -189,7 +189,7 @@ def main():
             check(f"hard: {cmd}", d == "deny")
         outside = tempfile.mkdtemp(prefix="taky-outside-")
         open(os.path.join(outside, "keep.txt"), "w").write("k")
-        d, h = gate(f"rm -rf {outside}", repo, root)
+        d, h = gate(f"rm -rf {outside.replace(os.sep, '/')}", repo, root)
         run_shell(h.get("updatedInput", {}).get("command", ""), repo)
         kept = {f for _r, _d, fs in os.walk(os.path.join(root, ".taky", "trash")) for f in fs}
         check("프로젝트 밖 구체적 임시 폴더 rm -r -> 휴지통 이동(USER에게 넘기지 않음)",

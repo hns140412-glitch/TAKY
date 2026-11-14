@@ -188,7 +188,11 @@ def resolve(cwd, move):
     if not move:
         return cwd
     p = os.path.expanduser(move)
-    return p if os.path.isabs(p) else os.path.normpath(os.path.join(cwd, p))
+    if os.name == "nt":
+        m = re.match(r"^/([A-Za-z])(?:/(.*))?$", p)  # Git Bash /c/x -> C:\\x
+        if m:
+            p = m.group(1).upper() + ":\\" + (m.group(2) or "").replace("/", "\\")
+    return os.path.normpath(p) if os.path.isabs(p) else os.path.normpath(os.path.join(cwd, p))
 
 
 def dirty(cwd):
