@@ -30,13 +30,13 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 3.5 Delegated-agent runs are scarce. Do not launch duplicate or parallel agents for the same objective by default. After each delegated run, TAKY inspects the actual diff, receipt and evidence; further runs need an evidence-backed reason. A code author cannot be the sole independent verifier of its own material change.
 3.6 Cost-tier, paid/metered API approval, and provider-key fallback semantics are owned by TKY-SAVEY-001. This protocol does not redefine them.
 3.7 Learning web app execution place (USER 2026-11-05). A WORK ID whose project is READY-SET, SNAP-POP, HIDE-SEEK, PLAY-CAMP, SAVEY or TAKY-MOBILE (WORKBENCH keys in TAKY_AI_WORKBENCH/10_PROJECTS), and TAKY-ASSETS work that serves those apps, is executed in the Claude project "TAKY Web": one thread per WORK ID, Claude Code as primary implementer, Codex as independent verifier under section 8. TAKY (ChatGPT) still issues the task contract and judges DONE. Approval gates are unchanged: feature-branch push allowed; main push, force push, Netlify-triggering push, merge, deploy and paid API need USER approval. A request without a WORK ID is taken in as provisional `TWEB-YYYYMMDD-NNNN` and linked as an alias once TAKY assigns the official ID.
-3.7a Execution place per app (USER decisions 2026-11-11 19:05 KST and 2026-11-13 18:28 KST, recorded in Drive TAKY_AI_CURRENT STANDING PERMISSIONS; table PROPOSED 2026-11-16, pending USER confirmation of the SAVEY row). This table replaces the single-project wording of 3.7 where they differ:
+3.7a Execution place per app (USER decisions 2026-11-11 19:05 KST and 2026-11-13 18:28 KST, recorded in Drive TAKY_AI_CURRENT STANDING PERMISSIONS; SAVEY row USER decision card 2026-11-16 04:39 KST). This table replaces the single-project wording of 3.7 where they differ:
 
 | App WORK ID | Claude project | Owner thread |
 |---|---|---|
 | READY-SET | TAKY Web | one owner thread per app |
 | TAKY-MOBILE (+ TAKY-ASSETS for it) | TAKY Web | one owner thread per app |
-| SAVEY | TAKY Web (PROPOSED; USER decision open since 2026-11-13) | one owner thread per app |
+| SAVEY | TAKY Web | one owner thread per app |
 | PLAY-CAMP | 모바일웹앱 개발 | one owner thread per app |
 | HIDE-SEEK | 모바일웹앱 개발 | one owner thread per app |
 | SNAP-POP | 모바일웹앱 개발 | one owner thread per app |
