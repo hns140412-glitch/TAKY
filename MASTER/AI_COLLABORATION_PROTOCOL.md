@@ -30,7 +30,20 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 3.5 Delegated-agent runs are scarce. Do not launch duplicate or parallel agents for the same objective by default. After each delegated run, TAKY inspects the actual diff, receipt and evidence; further runs need an evidence-backed reason. A code author cannot be the sole independent verifier of its own material change.
 3.6 Cost-tier, paid/metered API approval, and provider-key fallback semantics are owned by TKY-SAVEY-001. This protocol does not redefine them.
 3.7 Learning web app execution place (USER 2026-11-05). A WORK ID whose project is READY-SET, SNAP-POP, HIDE-SEEK, PLAY-CAMP, SAVEY or TAKY-MOBILE (WORKBENCH keys in TAKY_AI_WORKBENCH/10_PROJECTS), and TAKY-ASSETS work that serves those apps, is executed in the Claude project "TAKY Web": one thread per WORK ID, Claude Code as primary implementer, Codex as independent verifier under section 8. TAKY (ChatGPT) still issues the task contract and judges DONE. Approval gates are unchanged: feature-branch push allowed; main push, force push, Netlify-triggering push, merge, deploy and paid API need USER approval. A request without a WORK ID is taken in as provisional `TWEB-YYYYMMDD-NNNN` and linked as an alias once TAKY assigns the official ID.
+3.7a Execution place per app (USER decisions 2026-11-11 19:05 KST and 2026-11-13 18:28 KST, recorded in Drive TAKY_AI_CURRENT STANDING PERMISSIONS; SAVEY row USER decision card 2026-11-16 04:39 KST). This table replaces the single-project wording of 3.7 where they differ:
+
+| App WORK ID | Claude project | Owner thread |
+|---|---|---|
+| READY-SET | TAKY Web | one owner thread per app |
+| TAKY-MOBILE (+ TAKY-ASSETS for it) | TAKY Web | one owner thread per app |
+| SAVEY | TAKY Web | one owner thread per app |
+| PLAY-CAMP | 모바일웹앱 개발 | one owner thread per app |
+| HIDE-SEEK | 모바일웹앱 개발 | one owner thread per app |
+| SNAP-POP | 모바일웹앱 개발 | one owner thread per app |
+
+A project that is not the app's execution place does not start new work on that app; it hands over through Drive TAKY_WEB_QUEUE section B. Status write-back (3.8) applies to every project in the table, not only TAKY Web.
 3.8 WORK ID status write-back (USER 2026-11-05). At each milestone (start, branch/PR up, user approval needed, merged/deployed, blocked, done) a TAKY Web thread writes one status line per WORK ID to (a) Drive doc TAKY_WEB_WORK_STATUS (detail, append-only) and (b) `D:\YKH Dropbox\YKH_PERSONAL\YKH_1본부\Archi Grow\WORKBENCH\TAKY_WEB\WORK_STATUS_INDEX.md` (WORK ID, app, state, updated only; no family or child data), and appends a one-line DELTA to Drive TAKY_AI_CURRENT when section 6.4 applies. Line format: `[WORK <id>] <app> | state <OPEN|IN_PROGRESS|REVIEW|USER_APPROVAL_REQUIRED|APPROVED|PROMOTED|BLOCKED> | branch/PR | done | next | approval wait | evidence | <YYYY-MM-DD HH:MM KST> TAKY Web`. States reuse TAKY_AI_WORK_ASSIGNMENTS_V1. A thread-only or chat-only report is not a write-back.
+3.8a Push at every milestone (clarifies 3.7). Feature-branch push needs no USER approval. A commit that exists only in a local or cloud working copy is at risk (cloud sessions are reclaimed) and is not a milestone. At each milestone the thread pushes its feature branch and records branch and commit in the write-back line. "Push waiting for USER approval" is only valid for main, force push, or a Netlify-triggering push.
 
 ## 4. Executor guardrails
 4.1 No executor may silently redefine product requirements, acceptance criteria, architecture boundaries, release policy, or human-approval requirements.
@@ -38,8 +51,8 @@ Scope: AI role assignment, executor routing, delegated-agent discipline, shared-
 
 ## 5. Shared-context resume: literal "로그"
 5.1 When the user's input is literally "로그", resume from shared context. Do not ask the user to restate known context.
-5.2 Read TAKY_WORKSPACE/CURRENT/AI_SHARED_CONTEXT_CURRENT.md first.
-5.3 Then, only if more detail is needed, read TAKY_WORKSPACE/C2S_WORK/AI_SESSION_POINTERS.md to find the caller's last-read sequence and consume only the unread delta from TAKY_WORKSPACE/HISTORY/AI_SHARED_CHAT_LOG_YYYY-MM.md.
+5.2 Read Drive TAKY_AI_CURRENT first (the operational CURRENT surface). Read the namespace CURRENT / NEW_CHAT_START it points to only when needed, and Drive TAKY_AI_PROTOCOL only on a role or authority conflict. (Aligned 2026-11-16 with USER standing instruction and the Claude project instructions; previously this step named TAKY_WORKSPACE/CURRENT/AI_SHARED_CONTEXT_CURRENT.md.)
+5.3 Only if information is actually missing, read TAKY_WORKSPACE/CURRENT/AI_SHARED_CONTEXT_CURRENT.md, then TAKY_WORKSPACE/C2S_WORK/AI_SESSION_POINTERS.md to find the caller's last-read sequence and consume only the unread delta from TAKY_WORKSPACE/HISTORY/AI_SHARED_CHAT_LOG_YYYY-MM.md.
 5.4 Do not re-read history that has already been consumed.
 5.5 If CURRENT is stale, missing, or conflicts with a newer unread delta, recover from the available delta/evidence and ask only for the smallest unresolved human-only gap; never ask for a full context restatement.
 5.6 Delivery is not complete by file creation alone. For callable clients, the bridge must send CURRENT plus recipient-targeted unread delta and receive a validated ACK.
