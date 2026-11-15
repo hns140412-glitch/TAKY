@@ -99,10 +99,13 @@ function probeFirstViewport() {
     const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
     return s >= 0.3 && l >= 0.12 && l <= 0.93;
   };
+  // A tappable summary tile/card (label + value, card height) is navigation, not a call to action (SAVEY clay 2026-11-15).
+  const textNodes = (e) => [e, ...e.querySelectorAll("*")].filter((x) => [...x.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).length;
+  const isTile = (e) => e.getBoundingClientRect().height >= 72 && textNodes(e) >= 2;
   const weights = text.map((e) => +cs(e).fontWeight);
   const blurOver = (sh) => (sh.match(/(-?[\d.]+)px\s+(-?[\d.]+)px\s+([\d.]+)px/g) || []).some((m) => parseFloat(m.split("px")[2]) > 16);
   return {
-    filled_cta_count: vis.filter((e) => e.matches("button,a,[role=button]") && sat(cs(e).backgroundColor)).length,
+    filled_cta_count: vis.filter((e) => e.matches("button,a,[role=button]") && sat(cs(e).backgroundColor) && !isTile(e)).length,
     interactive_count: vis.filter((e) => e.matches("button,a,[role=button],input,select,textarea")).length,
     typeface_count: new Set(text.map((e) => cs(e).fontFamily.split(",")[0].replace(/["']/g, "").trim())).size,
     font_size_count: new Set(text.map((e) => Math.round(parseFloat(cs(e).fontSize)))).size,
