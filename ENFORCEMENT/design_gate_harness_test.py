@@ -244,31 +244,41 @@ class DashboardSemantics20261113(unittest.TestCase):
 
 @unittest.skipUnless(browser_available(), "node+playwright not available")
 class FilledCtaTiles20261115(unittest.TestCase):
-    """DGC-27: a tappable summary tile (label + value, card height) is not a filled CTA; real CTAs still count."""
+    """DGC-27: only a DESIGN.md-declared summary tile with tile shape is not a filled CTA; real CTAs still count."""
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
-        (self.tmp / "D.md").write_text((FX / "DESIGN_dashboard.md").read_text()
-                                       .replace("dashboard:\n", "dashboard:\n  max_filled_cta: 1\n", 1))
 
     def tearDown(self):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
-    def _fv(self, body):
+    def _fv(self, body, declare=True):
+        extra = '  max_filled_cta: 1\n' + ('  summary_tile_selector: ".tile"\n' if declare else '')
+        (self.tmp / "D.md").write_text((FX / "DESIGN_dashboard.md").read_text().replace("dashboard:\n", "dashboard:\n" + extra, 1))
         (self.tmp / "p.html").write_text('<!doctype html><html><head><style>body{margin:0;font-family:"DejaVu Sans";color:#1A1C1E;background:#FFFFFF}'
                                          'button{border:0;margin:8px;padding:0 16px;height:44px;background:#B8422E;color:#FFFFFF}'
-                                         '.tile{height:140px;width:160px;display:inline-block}</style></head><body><main>' + body + '</main></body></html>')
+                                         '.tile,.big{height:140px;width:160px;display:inline-block}.sr{position:absolute;opacity:0}</style></head><body><main>' + body + '</main></body></html>')
         r = h.run(self.tmp / "D.md", str(self.tmp / "p.html"), self.tmp / "o", '[{"id":"phone","width":390,"height":844}]')
         return " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"])
 
-    def test_saturated_summary_tiles_are_not_ctas(self):
-        tiles = '<button class="tile"><span>이번 달 지출</span><strong>1,240</strong></button>' * 2
-        self.assertNotIn("(DGC-27)", self._fv(tiles + "<button>기록하기</button>"))
+    TILES = '<button class="tile"><span>이번 달 지출</span><strong>1,240</strong></button>' * 2
+
+    def test_declared_summary_tiles_are_not_ctas(self):
+        self.assertNotIn("(DGC-27)", self._fv(self.TILES + "<button>기록하기</button>"))
+
+    def test_undeclared_tiles_still_count(self):
+        self.assertIn("3 filled CTAs", self._fv(self.TILES + "<button>기록하기</button>", declare=False))
 
     def test_two_real_filled_ctas_still_flagged(self):
         self.assertIn("2 filled CTAs", self._fv("<button>기록하기</button><button>저장</button>"))
 
-    def test_tall_single_label_button_still_counts(self):
-        self.assertIn("2 filled CTAs", self._fv('<button class="tile">시작하기</button><button>저장</button>'))
+    def test_big_label_plus_price_cta_still_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="big"><span>구매</span><strong>9,900원</strong></button><button>저장</button>'))
+
+    def test_declared_tile_with_only_hidden_second_text_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="tile">시작하기<span class="sr">설명</span></button><button>저장</button>'))
+
+    def test_declared_tile_below_72px_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="tile" style="height:71px"><span>a</span><strong>1</strong></button><button>저장</button>'))
 
 
 if __name__ == "__main__":

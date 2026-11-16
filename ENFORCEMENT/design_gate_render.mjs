@@ -82,7 +82,7 @@ function probe() {
 
 // First-viewport facts (DGC-27) and PREMIUM restraint facts (SAVEY PG01-PG12, ported 2026-11-12).
 // Runs inside the page at scroll position 0.
-function probeFirstViewport() {
+function probeFirstViewport(tileSel) {
   const vh = window.innerHeight;
   const vis = [...document.querySelectorAll("body *")].filter((e) => {
     const r = e.getBoundingClientRect();
@@ -99,9 +99,12 @@ function probeFirstViewport() {
     const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
     return s >= 0.3 && l >= 0.12 && l <= 0.93;
   };
-  // A tappable summary tile/card (label + value, card height) is navigation, not a call to action (SAVEY clay 2026-11-15).
-  const textNodes = (e) => [e, ...e.querySelectorAll("*")].filter((x) => [...x.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).length;
-  const isTile = (e) => e.getBoundingClientRect().height >= 72 && textNodes(e) >= 2;
+  // DGC-27: a summary tile is excluded only when DESIGN.md declares it (dashboard.summary_tile_selector)
+  // AND it has tile shape: >= 72px tall with >= 2 visible text parts (label + value). Undeclared or
+  // CTA-shaped elements still count, so a big "구매 + 가격" button is never silently dropped.
+  const shown = (x) => { const r = x.getBoundingClientRect(), c = getComputedStyle(x); return r.width > 0 && r.height > 0 && c.visibility !== "hidden" && c.display !== "none" && +c.opacity > 0; };
+  const textParts = (e) => [e, ...e.querySelectorAll("*")].filter((x) => shown(x) && [...x.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).length;
+  const isTile = (e) => !!tileSel && e.matches(tileSel) && e.getBoundingClientRect().height >= 72 && textParts(e) >= 2;
   const weights = text.map((e) => +cs(e).fontWeight);
   const blurOver = (sh) => (sh.match(/(-?[\d.]+)px\s+(-?[\d.]+)px\s+([\d.]+)px/g) || []).some((m) => parseFloat(m.split("px")[2]) > 16);
   return {
@@ -208,7 +211,7 @@ try {
     }, facts.primary_font_families);
     facts.loaded_font_faces = await page.evaluate(() =>
       [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family.replace(/["']/g, "")));
-    facts.first_viewport = await page.evaluate(probeFirstViewport);
+    facts.first_viewport = await page.evaluate(probeFirstViewport, (DASH && DASH.summary_tile_selector) || "");
     facts.dashboard_probe = await page.evaluate(probeDashboard, DASH);
     const first = await page.screenshot({ fullPage: false });
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
