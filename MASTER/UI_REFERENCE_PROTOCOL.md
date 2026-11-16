@@ -426,6 +426,18 @@ Design gates had grown in five places. This section is the single owner; the oth
 
 Enforcement note: RULE WRITTEN != RULE ENFORCED. Each app is under this owner only when its repo has a `DESIGN.md` and a harness receipt exists for at least one real screen.
 
+### 20.1g Dashboard semantics automated — 2026-11-13
+
+Replay of the unified gate on SAVEY home (2026-11-13) showed the three costliest dashboard defects passed every automated check. They are now measured (ADVISORY, DGC-12), driven by the DESIGN.md `dashboard:` block:
+
+| Check | Spec keys | Finding |
+|---|---|---|
+| DGC-25 decision metric is the largest number | `decision_metric_selector` | the metric's font size is smaller than another number in the first viewport |
+| DGC-26 status agrees with the numbers | `status_check: {status, burn_pct, elapsed_pct, positive?, tolerance_pct?}` (`selector` or `selector@attr`; first number is read) | status text says "on plan" while burn % > elapsed % + tolerance (default 10) |
+| Same-shape card row (generic tell) | none | ≥4 visible siblings on one row, equal size, each a rounded card |
+
+`applies_when` (selector) limits the DGC-25/26 checks to the screen the block describes. A configured selector that is not found is reported, never skipped silently. Fixture: `ENFORCEMENT/fixtures/design_gate/dashboard_semantics.html` + `DESIGN_dashboard.md`. Replay: SAVEY main f804145 parent home flags all three; the fix branch passes.
+
 ### 20.2 Apple vs Tesla conflict resolution
 
 | Stage | Dominant principle |

@@ -82,7 +82,7 @@ function probe() {
 
 // First-viewport facts (DGC-27) and PREMIUM restraint facts (SAVEY PG01-PG12, ported 2026-11-12).
 // Runs inside the page at scroll position 0.
-function probeFirstViewport() {
+function probeFirstViewport(tileSel) {
   const vh = window.innerHeight;
   const vis = [...document.querySelectorAll("body *")].filter((e) => {
     const r = e.getBoundingClientRect();
@@ -99,10 +99,16 @@ function probeFirstViewport() {
     const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
     return s >= 0.3 && l >= 0.12 && l <= 0.93;
   };
+  // DGC-27: a summary tile is excluded only when DESIGN.md declares it (dashboard.summary_tile_selector)
+  // AND it has tile shape: >= 72px tall with >= 2 visible text parts (label + value). Undeclared or
+  // CTA-shaped elements still count, so a big "구매 + 가격" button is never silently dropped.
+  const shown = (x) => { const r = x.getBoundingClientRect(), c = getComputedStyle(x); return r.width > 0 && r.height > 0 && c.visibility !== "hidden" && c.display !== "none" && +c.opacity > 0; };
+  const textParts = (e) => [e, ...e.querySelectorAll("*")].filter((x) => shown(x) && [...x.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).length;
+  const isTile = (e) => !!tileSel && e.matches(tileSel) && e.getBoundingClientRect().height >= 72 && textParts(e) >= 2;
   const weights = text.map((e) => +cs(e).fontWeight);
   const blurOver = (sh) => (sh.match(/(-?[\d.]+)px\s+(-?[\d.]+)px\s+([\d.]+)px/g) || []).some((m) => parseFloat(m.split("px")[2]) > 16);
   return {
-    filled_cta_count: vis.filter((e) => e.matches("button,a,[role=button]") && sat(cs(e).backgroundColor)).length,
+    filled_cta_count: vis.filter((e) => e.matches("button,a,[role=button]") && sat(cs(e).backgroundColor) && !isTile(e)).length,
     interactive_count: vis.filter((e) => e.matches("button,a,[role=button],input,select,textarea")).length,
     typeface_count: new Set(text.map((e) => cs(e).fontFamily.split(",")[0].replace(/["']/g, "").trim())).size,
     font_size_count: new Set(text.map((e) => Math.round(parseFloat(cs(e).fontSize)))).size,
@@ -138,6 +144,52 @@ function probeFixedOverlap() {
   return hits.slice(0, 10);
 }
 
+// DGC-25 / DGC-26 / same-shape card row (§20.1g). Config comes from the DESIGN.md dashboard block via DGATE_DASHBOARD.
+const DASH = (() => { try { return JSON.parse(process.env.DGATE_DASHBOARD || "{}") || {}; } catch { return {}; } })();
+function probeDashboard(dash) {
+  const vh = window.innerHeight;
+  const shown = (e) => { const r = e.getBoundingClientRect(), c = getComputedStyle(e);
+    return r.width > 0 && r.height > 0 && r.top < vh && r.bottom > 0 && c.visibility !== "hidden" && c.display !== "none"; };
+  const ownText = (e) => [...e.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join("").trim();
+  const out = { same_shape_rows: [], decision_metric: null, status_check: null };
+  const applies = !dash.applies_when || !!document.querySelector(dash.applies_when);
+  // Same-shape card row: >=4 visible siblings of equal size, each a rounded "card" (border, shadow or own background).
+  const isCard = (e) => { const c = getComputedStyle(e);
+    return parseFloat(c.borderTopLeftRadius) >= 8 && (parseFloat(c.borderTopWidth) > 0 || c.boxShadow !== "none" ||
+      !/rgba\(0, 0, 0, 0\)|transparent/.test(c.backgroundColor)); };
+  for (const p of document.querySelectorAll("body *")) {
+    const kids = [...p.children].filter(shown);
+    if (kids.length < 4) continue;
+    const rs = kids.map((k) => k.getBoundingClientRect());
+    const sameRow = rs.every((r) => Math.abs(r.top - rs[0].top) <= 2);
+    const sameSize = rs.every((r) => Math.abs(r.width - rs[0].width) <= 2 && Math.abs(r.height - rs[0].height) <= 2);
+    if (sameRow && sameSize && kids.every(isCard))
+      out.same_shape_rows.push(`${kids.length}x ${kids[0].tagName.toLowerCase()}${kids[0].className ? "." + String(kids[0].className).split(" ")[0] : ""} ${Math.round(rs[0].width)}x${Math.round(rs[0].height)}`);
+  }
+  out.same_shape_rows = out.same_shape_rows.slice(0, 5);
+  const pick = (spec) => { if (!spec) return null; const [sel, attr] = String(spec).split("@");
+    const e = document.querySelector(sel); if (!e) return { missing: sel };
+    const raw = attr === "style" ? e.getAttribute("style") || "" : attr ? e.getAttribute(attr) || "" : e.textContent || "";
+    const m = raw.replace(/,/g, "").match(/-?\d+(\.\d+)?/); return { raw: raw.trim().slice(0, 80), num: m ? Number(m[0]) : null, el: e }; };
+  if (applies && dash.decision_metric_selector) {
+    const m = pick(dash.decision_metric_selector);
+    if (m && m.el) {
+      const px = (e) => parseFloat(getComputedStyle(e).fontSize);
+      const nums = [...document.querySelectorAll("body *")].filter((e) => shown(e) && /\d/.test(ownText(e)));
+      const top = nums.reduce((a, e) => (px(e) > (a ? px(a) : 0) ? e : a), null);
+      const metricPx = Math.max(px(m.el), ...[...m.el.querySelectorAll("*")].map(px));
+      out.decision_metric = { metric_px: metricPx, max_number_px: top ? px(top) : 0, max_number_text: top ? ownText(top).slice(0, 30) : "" };
+    } else out.decision_metric = m;
+  }
+  const sc = dash.status_check;
+  if (applies && sc && sc.status) {
+    const st = pick(sc.status), burn = pick(sc.burn_pct), el = pick(sc.elapsed_pct);
+    out.status_check = { status: st && st.raw, burn_pct: burn && burn.num, elapsed_pct: el && el.num,
+      missing: [st, burn, el].filter((x) => x && x.missing).map((x) => x.missing) };
+  }
+  return out;
+}
+
 const result = { schema: "TAKY_DESIGN_GATE_RENDER_V1", target: url, viewports: [], harness: { ok: true } };
 let browser;
 try {
@@ -159,7 +211,8 @@ try {
     }, facts.primary_font_families);
     facts.loaded_font_faces = await page.evaluate(() =>
       [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family.replace(/["']/g, "")));
-    facts.first_viewport = await page.evaluate(probeFirstViewport);
+    facts.first_viewport = await page.evaluate(probeFirstViewport, (DASH && DASH.summary_tile_selector) || "");
+    facts.dashboard_probe = await page.evaluate(probeDashboard, DASH);
     const first = await page.screenshot({ fullPage: false });
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await page.waitForTimeout(150);

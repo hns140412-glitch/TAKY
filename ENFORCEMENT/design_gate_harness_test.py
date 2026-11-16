@@ -208,5 +208,78 @@ class FixedOverlapRender(unittest.TestCase):
                   '[{"id":"phone","width":390,"height":640}]')
         self.assertEqual(r["sub_receipts"]["FIRST_VIEWPORT"]["status"], "PASS", r["sub_receipts"]["FIRST_VIEWPORT"])
 
+class DashboardSemantics20261113(unittest.TestCase):
+    """§20.1g: DGC-25 decision metric size, DGC-26 status vs burn pace, same-shape card row."""
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _run(self, html):
+        (self.tmp / "d.html").write_text(html)
+        return h.run(FX / "DESIGN_dashboard.md", str(self.tmp / "d.html"), self.tmp / "o",
+                     '[{"id":"phone","width":390,"height":844}]')
+
+    def test_bad_dashboard_is_flagged_on_all_three(self):
+        r = self._run((FX / "dashboard_semantics.html").read_text())
+        fv = " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"])
+        self.assertIn("(DGC-25)", fv)
+        self.assertIn("62% used at 23%", fv)
+        self.assertIn("same-shape card row 4x", " ".join(r["sub_receipts"]["GENERIC_TELLS"]["findings"]))
+        self.assertNotEqual(r["verdict"], "FAIL")  # advisory only (DGC-12)
+
+    def test_fixed_dashboard_passes(self):
+        html = ((FX / "dashboard_semantics.html").read_text()
+                .replace("계획대로 잘 가고 있어요!", "쓰는 속도가 빨라요.")
+                .replace(".spent{font-size:34px", ".spent{font-size:16px").replace(".left{font-size:16px", ".left{font-size:34px")
+                .replace("grid-template-columns:repeat(4,1fr)", "grid-template-columns:1fr"))
+        r = self._run(html)
+        self.assertEqual(r["sub_receipts"]["FIRST_VIEWPORT"]["status"], "PASS", r["sub_receipts"]["FIRST_VIEWPORT"])
+        self.assertEqual(r["sub_receipts"]["GENERIC_TELLS"]["status"], "PASS", r["sub_receipts"]["GENERIC_TELLS"])
+
+    def test_missing_selector_is_reported_not_silent(self):
+        r = self._run((FX / "dashboard_semantics.html").read_text().replace('class="left"', 'class="other"'))
+        self.assertIn("decision_metric_selector not found", " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"]))
+
+@unittest.skipUnless(browser_available(), "node+playwright not available")
+class FilledCtaTiles20261115(unittest.TestCase):
+    """DGC-27: only a DESIGN.md-declared summary tile with tile shape is not a filled CTA; real CTAs still count."""
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _fv(self, body, declare=True):
+        extra = '  max_filled_cta: 1\n' + ('  summary_tile_selector: ".tile"\n' if declare else '')
+        (self.tmp / "D.md").write_text((FX / "DESIGN_dashboard.md").read_text().replace("dashboard:\n", "dashboard:\n" + extra, 1))
+        (self.tmp / "p.html").write_text('<!doctype html><html><head><style>body{margin:0;font-family:"DejaVu Sans";color:#1A1C1E;background:#FFFFFF}'
+                                         'button{border:0;margin:8px;padding:0 16px;height:44px;background:#B8422E;color:#FFFFFF}'
+                                         '.tile,.big{height:140px;width:160px;display:inline-block}.sr{position:absolute;opacity:0}</style></head><body><main>' + body + '</main></body></html>')
+        r = h.run(self.tmp / "D.md", str(self.tmp / "p.html"), self.tmp / "o", '[{"id":"phone","width":390,"height":844}]')
+        return " ".join(r["sub_receipts"]["FIRST_VIEWPORT"]["findings"])
+
+    TILES = '<button class="tile"><span>이번 달 지출</span><strong>1,240</strong></button>' * 2
+
+    def test_declared_summary_tiles_are_not_ctas(self):
+        self.assertNotIn("(DGC-27)", self._fv(self.TILES + "<button>기록하기</button>"))
+
+    def test_undeclared_tiles_still_count(self):
+        self.assertIn("3 filled CTAs", self._fv(self.TILES + "<button>기록하기</button>", declare=False))
+
+    def test_two_real_filled_ctas_still_flagged(self):
+        self.assertIn("2 filled CTAs", self._fv("<button>기록하기</button><button>저장</button>"))
+
+    def test_big_label_plus_price_cta_still_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="big"><span>구매</span><strong>9,900원</strong></button><button>저장</button>'))
+
+    def test_declared_tile_with_only_hidden_second_text_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="tile">시작하기<span class="sr">설명</span></button><button>저장</button>'))
+
+    def test_declared_tile_below_72px_counts(self):
+        self.assertIn("2 filled CTAs", self._fv('<button class="tile" style="height:71px"><span>a</span><strong>1</strong></button><button>저장</button>'))
+
+
 if __name__ == "__main__":
     unittest.main()
