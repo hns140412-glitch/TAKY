@@ -60,9 +60,11 @@ function probe() {
     if (cs.textTransform === "uppercase" && t.length < 40 && fs <= 14) allCapsLabels++;
   }
   const doc = document.documentElement;
-  const interactive = [...document.querySelectorAll("a,button,input,select,textarea,[role=button]")]
-    .map((e) => e.getBoundingClientRect())
-    .filter((r) => r.width > 0 && r.height > 0);
+  // A visually hidden input (<= 1px) inside a <label> is not the touch target; the label is.
+  const interactive = [...document.querySelectorAll("a,button,input,select,textarea,[role=button],label:has(> input)")]
+    .map((e) => [e, e.getBoundingClientRect()])
+    .filter(([e, r]) => r.width > 0 && r.height > 0 && !(r.width <= 1 && r.height <= 1 && e.closest("label")))
+    .map(([, r]) => r);
   const smallTargets = interactive.filter((r) => r.width < 24 || r.height < 24).length;
   const declaredFamilies = new Set();
   for (const e of textEls) declaredFamilies.add(getComputedStyle(e).fontFamily.split(",")[0].replace(/["']/g, "").trim());

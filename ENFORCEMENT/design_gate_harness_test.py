@@ -21,6 +21,11 @@ class SpecLint(unittest.TestCase):
         self.assertEqual(r["mode"], "EXECUTE")
         self.assertEqual(r["design_system"], "GATE_FIXTURE@1.0.0")
 
+    def test_crlf_spec_parses_like_lf(self):
+        text = (FX / "DESIGN.md").read_text().replace(chr(10), chr(13) + chr(10))
+        r = h.lint_spec(text)
+        self.assertEqual(r["status"], "PASS", r["findings"])
+
     def test_tokens_only_spec_fails_dgc18(self):
         r = h.lint_spec((FX / "DESIGN_weak.md").read_text())
         self.assertEqual(r["status"], "FAIL")
