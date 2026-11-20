@@ -418,13 +418,26 @@ Design gates had grown in five places. This section is the single owner; the oth
 
 | Former location | Disposition |
 |---|---|
-| Drive REFERENCE_MINING_INDEX DG-00..10 / PS-00..23 (UI/PPTX/XLSX) | UI parts are covered by DGC-01..30. PPTX/XLSX parts (and Claude review C-04/05/06/11/13) stay there as the document-output gate until migrated; they are not UI gates. |
-| §20 DGC-01..30 + `ENFORCEMENT/design_gate_harness.py` | OWNER. Mechanical checks run in the harness; the rest are reviewer checks (design-gate-reviewer). |
+| Drive REFERENCE_MINING_INDEX DG-00..10 / PS-00..23 (UI/PPTX/XLSX) | UI parts are covered by DGC-01..34. PPTX/XLSX parts (and Claude review C-04/05/06/11/13) stay there as the document-output gate until migrated; they are not UI gates. |
+| §20 DGC-01..34 + `ENFORCEMENT/design_gate_harness.py` | OWNER. Mechanical checks run in the harness; the rest are reviewer checks (design-gate-reviewer). |
 | SAVEY PREMIUM PG01–12 (`HANDOFF/SAVEY_PREMIUM_PASS_2026-11-07/premium-gate.mjs`) | Absorbed as the harness `PREMIUM` sub-receipt (§20.1e, `PREMIUM_DEFAULTS`, same thresholds; app override via `taky.thresholds.premium`). The SAVEY script stays as an app-local replay, not a second authority. |
 | TAKY MOBILE DESIGN AUTHORITY v1 §11 (PRESERVED / IMPROVED / CHANGED / REGRESSED) | App-local change ledger. Used as the DELTA format for a redesign against an approved baseline; it does not define gate criteria. |
 | CURRENT DELTA 2026-11-08 common design gate proposal | Superseded by this section once recorded in CURRENT. |
 
 Enforcement note: RULE WRITTEN != RULE ENFORCED. Each app is under this owner only when its repo has a `DESIGN.md` and a harness receipt exists for at least one real screen.
+
+### 20.1g Evidence, case selection, flow and character density — 2026-11-19
+
+Origin: re-review of the Play Camp hub v5 run (TWEB-20261106-0002). The hub was called "case-based" while the cases were partly store marketing composites, the cases did not share the screen's age group or voice use, one screen was checked while the screens it opens were not, and the Crew character appeared on many buttons. The hub v5 run also had no harness receipt (DG-08), no independent review, no DELETION_PASS (DGC-06) and no frozen reference hash (DGC-07). These criteria close those gaps. Proposed numbers DGC-24..27 in the handoff were renumbered because §20.1e already uses them.
+
+| ID | Gate | Criterion | Check | Case basis |
+|---|---|---|---|---|
+| DGC-31 | DG-01 / DG-03 | Evidence grade for design cases. Only these count as evidence: `APP_CAPTURE` (real app, captured by us), `OFFICIAL_SCREENSHOT` (unedited screenshot published by the maker), `OFFICIAL_GUIDE` (maker's help or guideline text). Store listing art, ad creatives and composited device mock-ups are `MARKETING` and are not evidence. Every case line in a report separates **observed** (what the image shows) from **interpreted** (what we infer). "Case-based" may be claimed only when at least one non-MARKETING case supports the decision. | Reviewer (case list with grade per item) | Hub v5: store screenshots with added slogans and device frames were read as app screens. |
+| DGC-32 | DG-01 | Case selection. Cases must match the target screen on structure (hub, list, play screen …), age band and input mode (touch, voice, keyboard). At least one Korean case is required. For a learning product, include public education material (교육부, 한국교육과정평가원, 누리과정, EBS) for the learning content and sequence. A case that matches none of the three axes is `INSPIRATION_ONLY`. | Reviewer (match table: structure / age / input / country) | Hub v5: adult or non-voice apps were used to justify a child voice-play hub. |
+| DGC-33 | DG-08 | Flow check. A changed control passes only when every screen reachable from it in one tap is rendered and reviewed at each declared viewport. A single-screen render cannot pass a change that alters navigation or entry points. The receipt lists the rendered screens. | Harness run per reachable screen (or Playwright click-through); reviewer confirms the list is complete | Hub v5: hub fixed while the speaking screen and the screen after it still used the old look. |
+| DGC-34 | DG-02 / DG-08 | Character density. DESIGN.md declares per screen how many characters appear and what each one does (`characters.per_screen: [{screen, max, roles[]}]`). A character used as decoration on every button fails. | Reviewer against DESIGN.md (no SPEC_LINT until manual replay passes, DGC-12) | Hub v5 earlier draft: Crew character repeated on each entry button; v5 reduced to one. |
+
+Route note (not a design gate; recorded here so design runs see it): image generation goes to Codex; ElevenLabs is used for voice only. Paid or metered calls still need per-run USER approval (cost-tier owner TKY-SAVEY-001; AI_COLLABORATION_PROTOCOL 3.6).
 
 ### 20.2 Apple vs Tesla conflict resolution
 

@@ -1,6 +1,6 @@
 ---
 name: taky-design-gate
-description: TAKY design gate for UI, web pages and HTML slides. Use when building or revising a screen, landing page, app UI or HTML/PPT deck in a TAKY project, or when asked to review design quality, remove the "AI look", or check a design before handoff. Runs DESIGN.md spec → 2-sample pilot → freeze → real-browser render loop → receipt, per MASTER/UI_REFERENCE_PROTOCOL.md §20 (DGC-01..30).
+description: TAKY design gate for UI, web pages and HTML slides. Use when building or revising a screen, landing page, app UI or HTML/PPT deck in a TAKY project, or when asked to review design quality, remove the "AI look", or check a design before handoff. Runs DESIGN.md spec → 2-sample pilot → freeze → real-browser render loop → receipt, per MASTER/UI_REFERENCE_PROTOCOL.md §20 (DGC-01..34).
 ---
 
 # TAKY Design Gate
@@ -12,6 +12,11 @@ Core: **criteria + context + feedback**. Rules alone don't fix design; looking a
 
 ## 00. Read the project's contract first (DGC-22)
 Find and read the project's screen contract, design-gate review and approved visual direction before proposing anything. List each required element; every candidate must keep all of them unless the USER approved a contract change.
+
+## 0a. Cases (DGC-31, DGC-32)
+- Grade every case: `APP_CAPTURE` / `OFFICIAL_SCREENSHOT` / `OFFICIAL_GUIDE` count; store art, ads and device mock-ups are `MARKETING` and do not count.
+- Pick cases that match the screen's structure, age band and input mode (touch / voice). Include at least one Korean case. Learning products also cite public education material (교육부, 평가원, 누리과정, EBS).
+- Write each case as **observed** vs **interpreted**. Do not say "case-based" unless a non-MARKETING case supports the decision.
 
 ## 0. Mode (DGC-01)
 - Approved direction + token manifest exist → `EXECUTE`.
@@ -27,6 +32,7 @@ Use the google-labs-code/design.md format (YAML tokens + prose). It must contain
 - `colors` and `typography` tokens (fontFamily named explicitly; Korean text names Pretendard / Noto Sans KR or the project font, DGC-19).
 - `## Layout` (composition rules, not just values).
 - `## Do's and Don'ts` with real prohibitions: colors/gradients/shadows/icons not in the spec, generic defaults (see the frontend-design tells), gradient-clipped text and mask-image (print-unsafe).
+- `characters.per_screen: [{screen, max, roles[]}]` when the app has characters (DGC-34). A character is not button decoration.
 - `taky:` block: `mode`, `design_system_id`, `version`, `source_commit` (required in EXECUTE). Brand DESIGN.md files copied from galleries are `REFERENCE`, never authority; strip brand identity before use (§0, §6).
 
 ## 1b. Dashboards (DGC-24..30, §20.1e)
@@ -58,12 +64,14 @@ Read the screenshots in `<dir>` yourself, including `<viewport>.first.png` (what
 Compare with a reference screenshot: `--reference <dir>/desktop.png` (file name = viewport id). Replica stage uses the original; result stage uses the approved TAKY reference.
 Exit 0 PASS / 1 FAIL / 3 HOLD. HOLD = harness or environment problem, so fix the harness, do not call the product failed.
 For interactive checks (click, input, state), use the Playwright MCP from `.mcp.json` if it is connected.
+Flow (DGC-33): when a control or entry point changed, render every screen one tap away from it at each viewport and list them in the report. One screen alone never passes.
 
 ## 6. Independent review
 Hand the receipt plus screenshots to the `design-gate-reviewer` agent. It never sees your reasoning, only the artifacts.
 
 ## 7. Report
-Report verdict, mode/claim ceiling, failed sub-receipts, DELETION_PASS and receipt path. Keep these separate: harness PASS ≠ approved-reference visual compare (`ENFORCEMENT/design_gate_receipt.py`) ≠ user approval ≠ released.
+Report verdict, mode/claim ceiling, failed sub-receipts, rendered screen list (DGC-33), case grades (DGC-31), DELETION_PASS, frozen reference hash and receipt path. A run missing any of these is not done.
+Route: image generation → Codex; ElevenLabs → voice only. Paid calls need USER approval each time. Keep these separate: harness PASS ≠ approved-reference visual compare (`ENFORCEMENT/design_gate_receipt.py`) ≠ user approval ≠ released.
 
 ## Limits
 - GENERIC_TELLS is advisory. Taste is judged by a reviewer, not by a regex (DGC-12).

@@ -53,6 +53,7 @@ def parse_design_md(text: str) -> tuple[dict, list[str]]:
     """Return (merged token tree, markdown section headings)."""
     tokens: dict = {}
     blocks = []
+    text = text.replace(chr(13) + chr(10), chr(10))  # Windows checkouts (core.autocrlf) must parse the same.
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if m:
         blocks.append(m.group(1))
